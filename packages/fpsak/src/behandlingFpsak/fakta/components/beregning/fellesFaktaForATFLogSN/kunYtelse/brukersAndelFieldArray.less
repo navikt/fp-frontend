@@ -3,9 +3,9 @@
 @removeBtnSize: 17px;
 
 .buttonRemove {
-  background: #ffffff url('../../../../../../../assets/images/remove.svg') no-repeat;
+  background: #ffffff url('../../../../../../../../assets/images/remove.svg') no-repeat;
   background-size: 100% 100%;
-  border: 0; // lesshint zeroUnit: false
+  border: 0px;
   cursor: pointer;
   display: inline-block;
   height: @removeBtnSize;
@@ -15,22 +15,8 @@
   width: @removeBtnSize;
 }
 
-.row {
-  display: flex;
-  flex-flow: row nowrap;
-
-  > .col {
-    flex: 0 0 auto; // lesshint zeroUnit: false
-    margin-right: 15px;
-  }
-
-  .inlineLabel {
-    margin-top: 4px;
-  }
-}
-
-.paddingRundtTabell {
-  padding: 8px 16px 8px 8px;
+.rightAlign {
+  text-align: right;
 }
 
 .rightAlignInput > div > input {
@@ -38,37 +24,19 @@
   text-align: right;
 }
 
-.rightAlignText {
-  text-align: right;
-}
-
-.adjustedSummaryReadOnly {
-  margin-right: 35px;
-  text-align: right;
-}
-
-.summaryEdit {
-  margin-right: 20px;
-}
-
-.adjustedFieldInput {
-  text-align: left;
-}
-
-.adjustedFieldInput > div > p {
-  margin-bottom: 0px;
-  padding-bottom: 0px;
-  padding-top: 9px;
-}
-
 .inntektTable {
   border-bottom: 0px;
   margin-bottom: 8px;
-  max-width: 950px;
+  max-width: 700px;
 }
 
 .inntektTable > thead > tr > td:first-child {
   padding-left: 0px;
+  text-align: left;
+}
+
+.inntektTable > tbody > tr > td:nth-child(2) {
+  max-width: 50px;
 }
 
 .inntektTable > thead > tr > td:last-child {
@@ -80,8 +48,8 @@
 }
 
 .inntektTable > tbody > tr > td:first-child {
-  max-width: 400px;
   padding-left: 0px;
+  text-align: left;
 }
 
 .inntektTable > tbody > tr > td:last-child {
