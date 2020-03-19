@@ -5,10 +5,9 @@ import React, {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { BehandlingErPaVentModal } from '@fpsak-frontend/fp-felles';
 import { Behandling, Aksjonspunkt, Kodeverk } from '@fpsak-frontend/types';
-
-import SettPaVentParams from '../types/settPaVentParamsTsType';
+import BehandlingPaVentModal from './BehandlingPaVentModal';
+import SettPaVentParams from '../../types/settPaVentParamsTsType';
 
 interface BehandlingPaVentProps {
   behandling: Behandling;
@@ -44,13 +43,11 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   }
 
   return (
-    <BehandlingErPaVentModal
-      showModal
-      closeEvent={skjulModal}
-      behandlingId={behandling.id}
-      fristBehandlingPaaVent={behandling.fristBehandlingPaaVent}
-      venteArsakKode={behandling.venteArsakKode}
-      handleOnHoldSubmit={oppdaterPaVentData}
+    <BehandlingPaVentModal
+      onSubmit={oppdaterPaVentData}
+      cancelEvent={skjulModal}
+      frist={behandling.fristBehandlingPaaVent}
+      ventearsak={behandling.venteArsakKode}
       hasManualPaVent={erManueltSattPaVent}
       ventearsaker={kodeverk[kodeverkTyper.VENT_AARSAK]}
     />
