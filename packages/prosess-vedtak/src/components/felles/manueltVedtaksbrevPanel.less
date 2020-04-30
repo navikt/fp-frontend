@@ -1,34 +1,9 @@
 @import '@{coreModulePath}nav-frontend-core/less/_variabler';
 
-.inline {
-  display: inline;
-}
-
-.margin {
-  margin-bottom: 16px;
-}
-
-.mainButton {
-  margin: 12px 16px 12px 0;
-}
-
-.buttonLink {
-  background: none;
+.line {
   border: 0;
-  color: @navBla;
-  cursor: pointer;
-  font: inherit;
-  padding: 0;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  border-top: 1px solid @navGra20;
+  height: 1px;
 }
 
 .smallTextArea {
@@ -48,10 +23,10 @@
   width: 100%;
 }
 
-.automatiskBrev {
-  margin: 20px 0;
+.bigTextArea {
+  height: 150px !important; // stylelint-disable-line declaration-no-important
 }
 
-.alignRight {
-  text-align: right;
+.pil {
+  margin-left: 5px;
 }
