@@ -15,7 +15,7 @@ env:
   APIKEY: ${{ secrets.DEPLOY_KEY }}
   CLUSTER: dev-fss
   NAMESPACE: t4
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fp-sak-frontend
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fp-frontend
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
           echo "::set-output name=dir::$(yarn cache dir)"
           
       - name: Cache node modules
-        uses: actions/cache@v1.1.0
+        uses: actions/cache@v2.1.0
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
