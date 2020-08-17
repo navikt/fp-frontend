@@ -4,7 +4,7 @@ on:
     types: [promote-command]
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fpsak-frontend
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fp-frontend
 
 jobs:
   promote:
@@ -29,7 +29,7 @@ jobs:
         uses: nais/deploy/actions/deploy@v1
         env:
           PRINT_PAYLOAD: true
-          APIKEY: ${{ secrets.DEPLOY_KEY }}
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: nais/naiserator.yaml
           VARS: nais/${{ env.CLUSTER }}-${{ env.NAMESPACE }}.json
