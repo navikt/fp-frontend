@@ -1,0 +1,13 @@
+{
+  "namespace": "q1",
+  "minReplicas": "1",
+  "maxReplicas": "2",
+  "ingresses": [
+    "https://app-q0.adeo.no/fpsak"
+  ],
+  "env": {
+    "REDIS_HOST": "fpsak-redis.default.svc.nais.local",
+    "REDIS_PORT": "80",
+    "APP_URL_FPSAK": "http://fpsak"
+  }
+}

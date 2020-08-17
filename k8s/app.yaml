@@ -6,7 +6,7 @@ metadata:
   name: fpsak-frontend
   namespace: {{namespace}}
 spec:
-  image: navikt/fp-frontend:{{version}} # Required. Docker image.
+  image: navikt/fpsak-frontend:{{version}} # Required. Docker image.
   port: 443 # Required. The port number which is exposed by the container and should receive HTTP traffic.
   sessionAffinity: ClientIP # Sticky Session for ingress contloller to prevent 404 on rollout
   team: teamforeldrepenger # Required. Set to the team that owns this application.

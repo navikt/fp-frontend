@@ -1,0 +1,56 @@
+kind: Application
+apiVersion: nais.io/v1alpha1
+metadata:
+  name: fpsak-frontend
+  namespace: {{namespace}}
+  labels:
+    team: teamforeldrepenger
+spec:
+  image:  {{image}}
+  port: 443
+#  sessionAffinity: ClientIP # Sticky Session for ingress contloller to prevent 404 on rollout
+  ingresses:
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}
+  liveness:
+    path: /fpsak/health/is-alive
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    path: /fpsak/health/is-ready
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  prometheus:
+    enabled: false
+    path: /fpsak/prometheus
+  replicas:
+    min: {{minReplicas}}
+    max: {{maxReplicas}}
+    cpuThresholdPercentage: 50
+#  leaderElection: false # Optional. If true, a http endpoint will be available at $ELECTOR_PATH that return the current leader
+#  # Compare this value with the $HOSTNAME to see if the current instance is the leader
+#  preStopHookPath: "" # Optional. A HTTP GET will be issued to this endpoint at least once before the pod is terminated.
+#  istio: # Optional.
+#    enabled: false # Optional. When true, envoy-proxy sidecar will be injected into pod and https urls envvars will be rewritten
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "64Mi"
+    requests:
+      cpu: "200m"
+      memory: "32Mi"
+#  logformat: accesslog # Optional. The format of the logs from the container if the logs should be handled differently than plain text or json
+#  logtransform: dns_loglevel # Optional. The transformation of the logs, if they should be handled differently than plain text or json
+#  webproxy: false # Optional. Expose web proxy configuration to the application using the HTTP_PROXY, HTTPS_PROXY and NO_PROXY environment variables.
+  vault:
+    enabled: true
+  env:
+  {{#each env}}
+     - name: {{@key}}
+  value: "{{this}}"
+  {{/each}}
