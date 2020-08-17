@@ -9,7 +9,7 @@ on:
     branches:
       - master
 env:
-  
+
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_USERNAME: x-access-token
   APIKEY: ${{ secrets.DEPLOY_KEY }}
@@ -31,12 +31,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-          
+
       - name: Get yarn cache
         id: yarn-cache
         run: |
           echo "::set-output name=dir::$(yarn cache dir)"
-          
+
       - name: Cache node modules
         uses: actions/cache@v2.1.0
         with:
@@ -78,28 +78,18 @@ jobs:
             <tr><td>prod-fss</td><td>default</td></tr>
             </table>
 
-      - name: Trigg deploy til dev-fss t4
-        if: success()
-        uses: actions/github-script@0.3.0
+      - name: Trigger deploy til t4
+        if: steps.success.outcome == 'success'
+        uses: peter-evans/create-or-update-comment@v1
         with:
-          github-token: ${{secrets.GH_P_TOKEN}}
-          script: |
-            const issue = { owner: context.issue.owner,
-                            repo: context.issue.repo,
-                            issue_number: ${{ steps.createdeployissue.outputs.number }} }
-            github.issues.createComment({...issue,
-                                    title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote dev-fss t4'})
+          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          issue-number: ${{ github.event.client_payload.issue-number }}
+          body: /promote dev-fss t4
 
-      - name: Trigg deploy til dev-fss q1
-        if: success()
-        uses: actions/github-script@0.3.0
+      - name: Trigger deploy til q1
+        if: steps.success.outcome == 'success'
+        uses: peter-evans/create-or-update-comment@v1
         with:
-          github-token: ${{secrets.GH_P_TOKEN}}
-          script: |
-            const issue = { owner: context.issue.owner,
-                            repo: context.issue.repo,
-                            issue_number: ${{ steps.createdeployissue.outputs.number }} }
-            github.issues.createComment({...issue,
-                                    title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote dev-fss q1'})
+          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          issue-number: ${{ github.event.client_payload.issue-number }}
+          body: /promote dev-fss q1
