@@ -1,5 +1,5 @@
 {
-  "namespace": "q1",
+  "namespace": "q0",
   "minReplicas": "1",
   "maxReplicas": "2",
   "ingresses": [
