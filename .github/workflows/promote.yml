@@ -19,6 +19,11 @@ jobs:
           echo "::set-env name=IMAGE::$IMAGE_BASE:$(echo ${{ github.event.client_payload.github.payload.issue.title }} | awk '{print $NF}')"
           echo "::set-env name=CLUSTER::${{ github.event.client_payload.slash_command.arg1 }}"
           echo "::set-env name=NAMESPACE::${{ github.event.client_payload.slash_command.arg2 }}"
+          
+      - name: Sjekk ut kode
+        uses: actions/checkout@v1
+        with:
+          ref: ${{ env.TAG }}
 
       - name: Promoter til cluster og namespace
         uses: nais/deploy/actions/deploy@v1
