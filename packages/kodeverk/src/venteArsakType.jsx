@@ -16,5 +16,4 @@ const venteArsakType = {
   VENT_OPPTJENING_OPPLYSNINGER: 'VENT_OPPTJENING_OPPLYSNINGER',
 };
 
-
 export default venteArsakType;
