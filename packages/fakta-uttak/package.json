@@ -11,7 +11,7 @@
     "@fpsak-frontend/utils": "1.0.0",
     "classnames": "^2.2.6",
     "moment": "^2.27.0",
-    "nav-frontend-alertstriper": "3.0.18",
+    "nav-frontend-alertstriper": "3.0.23",
     "nav-frontend-alertstriper-style": "2.0.16",
     "nav-frontend-core": "5.0.1",
     "nav-frontend-grid": "1.0.29",
