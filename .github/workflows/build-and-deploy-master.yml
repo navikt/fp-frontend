@@ -60,33 +60,25 @@ jobs:
           echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_USERNAME} --password-stdin
           docker push ${IMAGE_BASE}
 
-      - name: Opprett deployment issue
+      - name: Opprett issue, trigg deploy til dev-fss t4 og q1
         if: success()
-        uses: maxkomarychev/oction-create-issue@v0.7.1
-        id: createdeployissue
+        uses: actions/github-script@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: Deploy av ${{ env.TAG }}
-          body: |
-            Kommenter med <b>/promote cluster namespace</b>, hvor <b>cluster</b> er et gyldig clusternavn og <b>namespace</b> et eksisterende namespace i det clusteret.
-            <table>
-            <tr><th>Cluster</th><th>Namespace</th></tr>
-            <tr><td>dev-fss</td><td>t4, q1</td></tr>
-            <tr><td>prod-fss</td><td>default</td></tr>
-            </table>
-
-      - name: Trigg deploy til dev-fss t4
-        if: success()
-        uses: actions/github-script@0.3.0
-        with:
-          github-token: ${{secrets.GH_P_TOKEN}}
+          github-token: ${{secrets.NOTIFICATION}}
           script: |
-            const issue = { owner: context.issue.owner,
-                            repo: context.issue.repo,
-                            issue_number: ${{ steps.createdeployissue.outputs.number }} }
-            github.issues.createComment({...issue,
-                                    title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote dev-fss t4'})
-            github.issues.createComment({...issue,
-                                    title: 'Deploy av ${{ env.TAG }}',
-                                    body: '/promote dev-fss q1'})
+              github.issues.create( {
+                owner: context.issue.owner,
+                repo: context.issue.repo,
+                labels: ['bygg'],
+                title: 'Deploy av ${{ env.TAG }}'})
+              .then(response => {
+                      const issue = { owner: context.issue.owner,
+                      repo: context.issue.repo,
+                      issue_number: response.data.number }
+                     github.issues.createComment({...issue,
+                            title: 'Deploy av ${{ env.TAG }}',
+                            body: '/promote dev-fss q1'})
+                     github.issues.createComment({...issue,
+                            title: 'Deploy av ${{ env.TAG }}',
+                            body: '/promote dev-fss t4'})  
+               });
