@@ -9,32 +9,53 @@ on:
     branches:
       - master
 env:
-  
+
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_USERNAME: x-access-token
-  CLUSTER: dev-fss
   IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fp-frontend
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Lukk deployment-issues
+        uses: actions/github-script@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['bygg']
+            }).then(response => {
+              response.data.forEach(issue => {
+                github.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+              });
+            });
+
       - name: Sjekk ut kode
         uses: actions/checkout@v2
       - run:  git fetch --prune --unshallow
 
       - name: Hent tag
         run: echo "::set-env name=TAG::1.1_$(git log -1 --pretty='%ad' --date=format:'%Y.%m.%d.%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)"
+
       - name: Sette opp Node
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-          
+
       - name: Get yarn cache
         id: yarn-cache
         run: |
           echo "::set-output name=dir::$(yarn cache dir)"
-          
+
       - name: Cache node modules
         uses: actions/cache@v2.1.0
         with:
@@ -80,5 +101,5 @@ jobs:
                             body: '/promote dev-fss q1'})
                      github.issues.createComment({...issue,
                             title: 'Deploy av ${{ env.TAG }}',
-                            body: '/promote dev-fss t4'})  
+                            body: '/promote dev-fss t4'})
                });
