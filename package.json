@@ -1,5 +1,5 @@
 {
-  "name": "fpsak-frontend",
+  "name": "fp-frontend",
   "description": "Klient for FPSAK",
   "main": "./dist/index.js",
   "author": "NAV",
@@ -7,7 +7,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/fpsak-frontend.git"
+    "url": "git+https://github.com/navikt/fp-frontend.git"
   },
   "scripts": {
     "test": "cross-env NODE_ICU_DATA=./node_modules/full-icu mochapack --colors --webpack-config webpack/webpack.test.js \"packages/**/*.spec.*\"",
