@@ -125,20 +125,20 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     behandling?.type,
   ), [behandlingId, behandlingVersion]);
 
-  const behandlendeEnheter = useGlobalStateRestApiData<BehandlendeEnheter>(FpsakApiKeys.BEHANDLENDE_ENHETER);
+  const behandlendeEnheter = restApiHooks.useGlobalStateRestApiData<BehandlendeEnheter>(FpsakApiKeys.BEHANDLENDE_ENHETER);
 
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext()[ApplicationContextPath.FPTILBAKE];
 
-  const alleFpSakKodeverk = useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.KODEVERK);
+  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.KODEVERK_FPTILBAKE);
   const menyKodeverk = new MenyKodeverk(behandling?.type)
     .medFpSakKodeverk(alleFpSakKodeverk)
     .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
 
   const gaaTilSokeside = useCallback(() => pushLocation('/'), [pushLocation]);
 
-  const { startRequest: lagNyBehandlingFpSak } = useRestApiRunner<boolean>(FpsakApiKeys.NEW_BEHANDLING_FPSAK);
-  const { startRequest: lagNyBehandlingFpTilbake } = useRestApiRunner<boolean>(FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE);
+  const { startRequest: lagNyBehandlingFpSak } = restApiHooks.useRestApiRunner<boolean>(FpsakApiKeys.NEW_BEHANDLING_FPSAK);
+  const { startRequest: lagNyBehandlingFpTilbake } = restApiHooks.useRestApiRunner<boolean>(FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE);
   const lagNyBehandling = useCallback((isTilbakekreving, params) => {
     const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
     lagNy(params).then(() => oppfriskBehandlinger());

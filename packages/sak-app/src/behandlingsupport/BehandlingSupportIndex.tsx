@@ -101,8 +101,6 @@ export const getEnabledSupportPanels = (accessibleSupportPanels, sendMessageIsRe
     }
   });
 
-// fpsakApi.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY.getRestApiData()
-
 /**
  * BehandlingSupportIndex
  *

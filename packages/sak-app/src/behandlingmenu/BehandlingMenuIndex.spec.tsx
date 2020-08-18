@@ -4,83 +4,89 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import MenySakIndex from '@fpsak-frontend/sak-meny';
 
+import { Fagsak } from '@fpsak-frontend/types';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
-import MenyKodeverk from './MenyKodeverk';
+import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 
-const rettigheter = {
-  settBehandlingPaVentAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  henleggBehandlingAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  byttBehandlendeEnhetAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  opprettRevurderingAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  opprettNyForstegangsBehandlingAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  gjenopptaBehandlingAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  opneBehandlingForEndringerAccess: {
-    employeeHasAccess: true,
-    isEnabled: true,
-  },
-  ikkeVisOpprettNyBehandling: {
-    employeeHasAccess: false,
-    isEnabled: false,
-  },
+const location = {
+  pathname: '', search: '', state: {}, hash: '',
 };
+
+const navAnsatt = {
+  brukernavn: 'Test',
+  kanBehandleKode6: false,
+  kanBehandleKode7: false,
+  kanBehandleKodeEgenAnsatt: false,
+  kanBeslutte: true,
+  kanOverstyre: false,
+  kanSaksbehandle: true,
+  kanVeilede: false,
+  navn: 'Test',
+};
+
+const fagsak = {
+  saksnummer: 123,
+  sakstype: {
+    kode: fagsakYtelseType.FORELDREPENGER,
+    kodeverk: 'BEHANDLING_TYPE',
+  },
+  status: {
+    kode: fagsakStatus.UNDER_BEHANDLING,
+    kodeverk: '',
+  },
+  skalBehandlesAvInfotrygd: false,
+};
+
+const alleBehandlinger = [{
+  id: 1,
+  versjon: 2,
+  uuid: '423223',
+  behandlingKoet: false,
+  behandlingPaaVent: false,
+  kanHenleggeBehandling: true,
+  type: {
+    kode: behandlingType.REVURDERING,
+    kodeverk: 'BEHANDLING_TYPE',
+  },
+  status: {
+    kode: behandlingStatus.BEHANDLING_UTREDES,
+    kodeverk: 'BEHANDLING_STATUS',
+  },
+  behandlendeEnhetId: '2323',
+  behandlendeEnhetNavn: 'NAV Viken',
+  erAktivPapirsoknad: false,
+}];
 
 describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
+    requestApi.mock(FpsakApiKeys.BEHANDLENDE_ENHETER, []);
+    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
+    requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES, false);
+    requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, false);
+
     const wrapper = shallow(<BehandlingMenuIndex
+      fagsak={fagsak as Fagsak}
+      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       saksnummer={123}
       behandlingId={1}
       behandlingVersion={2}
-      uuid="423223"
-      erKoet={false}
-      erPaVent={false}
-      behandlingType={{
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: 'BEHANDLING_TYPE',
-      }}
-      kanHenlegge
-      kanVeilede={false}
-      ytelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'BEHANDLING_TYPE',
-      }}
       opprettVerge={sinon.spy()}
       fjernVerge={sinon.spy()}
-      behandlendeEnheter={[]}
-      behandlendeEnhetId="2323"
-      behandlendeEnhetNavn="NAV Viken"
-      menyKodeverk={new MenyKodeverk(behandlingType.FORSTEGANGSSOKNAD)}
-      previewHenleggBehandling={sinon.spy()}
-      lagNyBehandling={sinon.spy()}
-      kanTilbakekrevingOpprettes={{
-        kanBehandlingOpprettes: false,
-        kanRevurderingOpprettes: false,
-      }}
-      erTilbakekrevingAktivert={false}
-      sjekkTilbakeKanOpprettes={sinon.spy()}
-      sjekkTilbakeRevurdKanOpprettes={sinon.spy()}
       pushLocation={sinon.spy()}
-      rettigheter={rettigheter}
+      location={location}
+      oppfriskBehandlinger={sinon.spy()}
+      menyhandlingRettigheter={{
+        harSoknad: true,
+      }}
     />);
 
     const meny = wrapper.find(MenySakIndex);

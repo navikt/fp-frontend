@@ -134,7 +134,6 @@ export const FagsakIndex: FunctionComponent<OwnProps> = ({
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const harVerge = behandling ? behandling.harVerge : false;
-
   return (
     <>
       <FagsakGrid
