@@ -12,9 +12,7 @@ env:
   
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_USERNAME: x-access-token
-  APIKEY: ${{ secrets.DEPLOY_KEY }}
   CLUSTER: dev-fss
-  NAMESPACE: t4
   IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fp-frontend
 
 jobs:
@@ -60,8 +58,7 @@ jobs:
           ## docker pull nginx:1.17.8-alpine
           docker build --pull --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
           echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_USERNAME} --password-stdin
-          docker push ${IMAGE_BASE}:latest
-          docker push $IMAGE
+          docker push ${IMAGE_BASE}
 
       - name: Opprett deployment issue
         if: success()
@@ -90,16 +87,6 @@ jobs:
             github.issues.createComment({...issue,
                                     title: 'Deploy av ${{ env.TAG }}',
                                     body: '/promote dev-fss t4'})
-
-      - name: Trigg deploy til dev-fss q1
-        if: success()
-        uses: actions/github-script@0.3.0
-        with:
-          github-token: ${{secrets.GH_P_TOKEN}}
-          script: |
-            const issue = { owner: context.issue.owner,
-                            repo: context.issue.repo,
-                            issue_number: ${{ steps.createdeployissue.outputs.number }} }
             github.issues.createComment({...issue,
                                     title: 'Deploy av ${{ env.TAG }}',
                                     body: '/promote dev-fss q1'})
