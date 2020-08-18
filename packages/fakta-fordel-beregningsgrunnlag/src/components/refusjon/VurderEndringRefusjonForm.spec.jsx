@@ -38,7 +38,7 @@ describe('<VurderEndringRefusjonForm>', () => {
           arbeidsgiverOrgnr: '999999999',
           arbeidsgiverAktoerId: undefined,
           internArbeidsforholdRef: undefined,
-          fastsattRefusjonFra: '01.10.2018',
+          fastsattRefusjonFom: '01.10.2018',
         },
       ],
     };
@@ -61,13 +61,13 @@ describe('<VurderEndringRefusjonForm>', () => {
           arbeidsgiverOrgnr: '999999999',
           arbeidsgiverAktoerId: undefined,
           internArbeidsforholdRef: 'REF-1',
-          fastsattRefusjonFra: '01.10.2018',
+          fastsattRefusjonFom: '01.10.2018',
         },
         {
           arbeidsgiverOrgnr: '999999999',
           arbeidsgiverAktoerId: undefined,
           internArbeidsforholdRef: 'REF-2',
-          fastsattRefusjonFra: '01.11.2018',
+          fastsattRefusjonFom: '01.11.2018',
         },
       ],
     };
@@ -89,13 +89,13 @@ describe('<VurderEndringRefusjonForm>', () => {
           arbeidsgiverOrgnr: '999999999',
           arbeidsgiverAktoerId: undefined,
           internArbeidsforholdRef: 'REF-1',
-          fastsattRefusjonFra: '01.10.2018',
+          fastsattRefusjonFom: '01.10.2018',
         },
         {
           arbeidsgiverOrgnr: '999999998',
           arbeidsgiverAktoerId: undefined,
           internArbeidsforholdRef: 'REF-1',
-          fastsattRefusjonFra: '01.11.2018',
+          fastsattRefusjonFom: '01.11.2018',
         },
       ],
     };
