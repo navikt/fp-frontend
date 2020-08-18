@@ -22,6 +22,8 @@ abstract class AbstractRequestApi {
 
   public abstract getRequestMockData(endpointName: string): { params: any }[];
 
+  public abstract setMissingPath(endpointName: string): void;
+
   public abstract clearAllMockData(): void;
 }
 

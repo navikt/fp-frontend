@@ -22,9 +22,9 @@ interface OwnProps {
   erGodkjenningFerdig?: boolean;
   selectedBehandlingVersjon?: number;
   fagsakYtelseType: Kodeverk;
-  behandlingsresultat?: any;
-  behandlingId?: number;
-  behandlingTypeKode?: string;
+  behandlingsresultat: any;
+  behandlingId: number;
+  behandlingTypeKode: string;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
   behandlingStatus: Kodeverk;
@@ -69,7 +69,7 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
       behandlingId={behandlingId}
       behandlingStatusKode={behandlingStatus.kode}
       behandlingTypeKode={behandlingTypeKode}
-      harSammeResultatSomOriginalBehandling={data.harRevurderingSammeResultat}
+      harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />
   );
 };

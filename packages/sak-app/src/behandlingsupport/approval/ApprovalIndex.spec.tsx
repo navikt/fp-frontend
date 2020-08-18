@@ -3,23 +3,34 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
+import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { FatterVedtakApprovalModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { DataFetcher } from '@fpsak-frontend/rest-api-redux';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { Fagsak } from '@fpsak-frontend/types';
 
-import ApprovalIndex from './ApprovalIndex';
+import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
+import { ApprovalIndex } from './ApprovalIndex';
+import BeslutterModalIndex from './BeslutterModalIndex';
 
 describe('<ApprovalIndex>', () => {
-  const getBehandling = () => ({
+  const fagsak = {
+    saksnummer: 1,
+    sakstype: {
+      kode: fagsakYtelseType.FORELDREPENGER,
+      kodeverk: '',
+    },
+  };
+
+  const alleBehandlinger = [{
     id: 1234,
     versjon: 123,
     type: {
-      kode: 'BT-001',
-      navn: 'Endringssøknad',
+      kode: behandlingType.FORSTEGANGSSOKNAD,
+      kodeverk: '',
     },
-    fagsakId: 2,
     opprettet: '‎29.08.‎2017‎ ‎09‎:‎54‎:‎22',
     status: {
       kode: 'FVED',
@@ -27,7 +38,8 @@ describe('<ApprovalIndex>', () => {
     },
     toTrinnsBehandling: true,
     ansvarligSaksbehandler: 'Espen Utvikler',
-  });
+    behandlingArsaker: [],
+  }];
 
   const locationMock = {
     pathname: 'test',
@@ -36,10 +48,9 @@ describe('<ApprovalIndex>', () => {
     hash: 'test',
   };
 
-  const getKodeverkSkjemalenkeTyper = (aksjonspunkter) => aksjonspunkter.map((ap) => ({
-    kode: ap.skjermlenkeType,
-    navn: 'Dummy Tekst',
-  }));
+  const kodeverk = {
+    [kodeverkTyper.SKJERMLENKE_TYPE]: [],
+  };
 
   const createAksjonspunkt = (aksjonspunktKode) => (
     {
@@ -85,8 +96,13 @@ describe('<ApprovalIndex>', () => {
     ],
   });
 
-  it('skal vise lightboks når approvalReceived', () => {
-    const behandling = getBehandling();
+  it('skal vise modal når beslutter godkjenner', () => {
+    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, kodeverk);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
+    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
+    requestApi.mock(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, {});
+    requestApi.mock(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
     const totrinnskontrollAksjonspunkter = [
       getTotrinnsaksjonspunkterFoedsel(),
@@ -95,68 +111,39 @@ describe('<ApprovalIndex>', () => {
     ];
 
     const wrapper = shallow(<ApprovalIndex
-      behandlingId={behandling.id}
-      approve={sinon.spy()}
-      selectedBehandlingVersjon={behandling.versjon}
-      ansvarligSaksbehandler={behandling.ansvarligSaksbehandler}
-      behandlingStatus={behandling.status}
-      toTrinnsBehandling={behandling.toTrinnsBehandling}
-      push={sinon.spy()}
-      resetApproval={sinon.spy()}
-      location={locationMock}
-      navAnsatt={navAnsatt}
+      fagsak={fagsak as Fagsak}
+      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
+      behandlingId={alleBehandlinger[0].id}
+      selectedBehandlingVersjon={alleBehandlinger[0].versjon}
       totrinnskontrollSkjermlenkeContext={totrinnskontrollAksjonspunkter}
-      skjemalenkeTyper={getKodeverkSkjemalenkeTyper(totrinnskontrollAksjonspunkter)}
-      erTilbakekreving={false}
-      behandlingUuid="1"
-      previewMessage={sinon.spy()}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE_TYPE',
-      }}
-      alleKodeverk={{}}
-      isForeldrepenger
-      disableGodkjennKnapp={false}
-      behandlingsresultat={{}}
-      behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
-    />);
-
-    wrapper.setState({ showBeslutterModal: true, allAksjonspunktApproved: true });
-
-    const dataFetcher = wrapper.find(DataFetcher);
-    const innerDataFetcher = dataFetcher.renderProp('render')({ }, true).find(DataFetcher);
-    const vedtakStatusModal = innerDataFetcher.renderProp('render')({ }, true).find(FatterVedtakApprovalModalSakIndex);
-    expect(vedtakStatusModal).to.have.length(1);
-  });
-
-  it('skal kalle resetApproval når unmount', () => {
-    const resetApprovalFunction = sinon.spy();
-    const behandling = getBehandling();
-    const wrapper = shallow(<ApprovalIndex
-      approve={sinon.spy()}
-      selectedBehandlingVersjon={behandling.versjon}
-      ansvarligSaksbehandler={behandling.ansvarligSaksbehandler}
-      behandlingStatus={behandling.status}
-      toTrinnsBehandling={behandling.toTrinnsBehandling}
       push={sinon.spy()}
-      resetApproval={resetApprovalFunction}
       location={locationMock}
-      navAnsatt={navAnsatt}
-      totrinnskontrollSkjermlenkeContext={undefined}
-      skjemalenkeTyper={[]}
-      erTilbakekreving={false}
-      behandlingUuid="1"
-      previewMessage={sinon.spy()}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE_TYPE',
-      }}
-      alleKodeverk={{}}
-      isForeldrepenger
-      disableGodkjennKnapp={false}
     />);
 
-    wrapper.unmount();
-    expect(resetApprovalFunction).to.have.property('callCount', 1);
+    const index = wrapper.find(TotrinnskontrollSakIndex);
+
+    expect(wrapper.find(BeslutterModalIndex)).to.have.length(0);
+
+    const submit = index.prop('onSubmit') as (params: any) => void;
+    submit({
+      approvals: [{
+        aksjonspunkter: [],
+      }],
+    });
+
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
+    expect(reqData).to.have.length(1);
+    expect(reqData[0].params).is.eql({
+      behandlingId: 1234,
+      saksnummer: 1,
+      behandlingVersjon: 123,
+      bekreftedeAksjonspunktDtoer: [{
+        '@type': '5016',
+        aksjonspunktGodkjenningDtos: [],
+        begrunnelse: null,
+      }],
+    });
+
+    expect(wrapper.find(BeslutterModalIndex)).to.have.length(1);
   });
 });

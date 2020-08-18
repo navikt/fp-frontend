@@ -12,6 +12,8 @@ class RequestApiMock extends AbstractRequestApi {
 
   execData: { endpointName: string; params: any }[] = [];
 
+  missingPaths: string[] = [];
+
   public startRequest = (endpointName: string, params: any) => {
     const data = this.mockdata[endpointName];
     if (!data) {
@@ -26,7 +28,7 @@ class RequestApiMock extends AbstractRequestApi {
 
   public cancelRequest = () => undefined;
 
-  public hasPath = () => true;
+  public hasPath = (endpointName: string) => !this.missingPaths.some((p) => p === endpointName);
 
   public injectPaths = () => {}
 
@@ -49,7 +51,15 @@ class RequestApiMock extends AbstractRequestApi {
       params: d.params,
     }));
 
-  public clearAllMockData = () => { this.mockdata = {}; this.execData = []; };
+  public setMissingPath = (endpointName: string) => {
+    this.missingPaths.push(endpointName);
+  }
+
+  public clearAllMockData = () => {
+    this.mockdata = {};
+    this.execData = [];
+    this.missingPaths = [];
+  };
 }
 
 export default RequestApiMock;

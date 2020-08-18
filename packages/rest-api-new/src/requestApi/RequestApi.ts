@@ -44,13 +44,16 @@ class RequestApi extends AbstractRequestApi {
     });
   }
 
-  public isMock = () => false;
+  // Kun for test
+  public isMock = () => { throw new Error('Not Implemented'); };
 
-  public mock = () => undefined;
+  public mock = () => { throw new Error('Not Implemented'); };
 
-  public getRequestMockData = () => undefined;
+  public setMissingPath = () => { throw new Error('Not Implemented'); };
 
-  public clearAllMockData = () => undefined;
+  public getRequestMockData = () => { throw new Error('Not Implemented'); };
+
+  public clearAllMockData = () => { throw new Error('Not Implemented'); };
 }
 
 export default RequestApi;

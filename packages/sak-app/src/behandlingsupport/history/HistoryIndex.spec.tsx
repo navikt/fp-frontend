@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
+import { featureToggle } from '@fpsak-frontend/konstanter';
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
@@ -26,7 +27,13 @@ describe('<HistoryIndex>', () => {
         kode: 'Test',
       },
     }]);
-    requestApi.mock(FpsakApiKeys.HISTORY_FPTILBAKE, []);
+    requestApi.mock(FpsakApiKeys.HISTORY_FPTILBAKE, [{
+      opprettetTidspunkt: '2019-01-04',
+      historikkinnslagDeler: [],
+      type: {
+        kode: 'Test fptilbake',
+      },
+    }]);
 
     const wrapper = shallow(<HistoryIndex
       saksnummer={12345}
@@ -42,7 +49,9 @@ describe('<HistoryIndex>', () => {
   it('skal slå sammen og sortere historikk for fpsak og fptilbake', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
+    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {
+      [featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING]: true,
+    });
     requestApi.mock(FpsakApiKeys.HISTORY_FPSAK, [{
       opprettetTidspunkt: '2019-01-01',
       historikkinnslagDeler: [],

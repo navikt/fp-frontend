@@ -29,12 +29,12 @@ const defaultOptions = {
  * For mocking i unit-test
  */
 export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function useRestApi<T>(
-  key: string, params: any = {},
+  key: string, params: any = {}, options: Options = defaultOptions,
 ):RestApiData<T> {
   return {
-    state: RestApiState.SUCCESS,
+    state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
     error: undefined,
-    data: requestApi.startRequest(key, params),
+    data: options.suspendRequest ? undefined : requestApi.startRequest(key, params),
   };
 };
 

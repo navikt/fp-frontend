@@ -93,12 +93,12 @@ interface TotrinnsKlageVurdering {
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
+  behandlingId?: number;
+  selectedBehandlingVersjon?: number;
   totrinnskontrollSkjermlenkeContext?: any[];
   totrinnskontrollReadOnlySkjermlenkeContext?: any[];
-  selectedBehandlingVersjon?: number;
   push: (location: string) => void;
   location: Location;
-  behandlingId?: number;
 }
 
 /**
@@ -106,15 +106,15 @@ interface OwnProps {
  *
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
-const ApprovalIndex: FunctionComponent<OwnProps> = ({
+export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
+  behandlingId,
+  selectedBehandlingVersjon,
   totrinnskontrollSkjermlenkeContext,
   totrinnskontrollReadOnlySkjermlenkeContext,
-  selectedBehandlingVersjon,
   push: pushLocation,
   location,
-  behandlingId,
 }) => {
   const [showBeslutterModal, setShowBeslutterModal] = useState(false);
   const [allAksjonspunktApproved, setAllAksjonspunktApproved] = useState(false);
