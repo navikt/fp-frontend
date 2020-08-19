@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
-import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -12,6 +11,7 @@ import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Fagsak } from '@fpsak-frontend/types';
 
+import useHistory from '../../app/useHistory';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
@@ -80,7 +80,6 @@ interface StateProps {
 
 interface DispatchProps {
   setBehandlingOnHold: (params: any) => void;
-  push: (param: string) => void;
 }
 
 interface Brevmal {
@@ -102,7 +101,6 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
   alleBehandlinger,
   selectedBehandlingId,
   selectedBehandlingVersjon,
-  push: pushLocation,
   setBehandlingOnHold: setOnHold,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
@@ -111,6 +109,8 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
 
   const behandling = alleBehandlinger.find((b) => b.id === selectedBehandlingId);
   const behandlingId = behandling.id;
+
+  const history = useHistory();
 
   const ventearsaker = useFpSakKodeverk(kodeverkTyper.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(kodeverkTyper.REVURDERING_VARSLING_ÅRSAK);
@@ -139,7 +139,7 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
     };
     setOnHold(values);
     hideSettPaVentModal();
-    pushLocation('/');
+    history.push('/');
   }, [behandlingId, selectedBehandlingVersjon]);
 
   const fetchPreview = useVisForhandsvisningAvMelding();
@@ -206,7 +206,6 @@ const mapStateToProps = (state: any): StateProps => ({
 // @ts-ignore (Korleis fikse denne?)
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
-    push,
     setBehandlingOnHold,
   }, dispatch),
 });

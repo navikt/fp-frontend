@@ -3,15 +3,16 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { push } from 'connected-react-router';
+import { useHistory } from 'react-router-dom';
 import { Location } from 'history';
+import { useLocation } from 'react-router';
 
 import { featureToggle } from '@fpsak-frontend/konstanter';
 import { Link } from '@fpsak-frontend/rest-api/src/requestApi/LinkTsType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import errorHandler from '@fpsak-frontend/error-api-redux';
-import { replaceNorwegianCharacters } from '@fpsak-frontend/utils';
+import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/utils';
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
@@ -45,7 +46,7 @@ const erTilbakekreving = (behandlingTypeKode) => behandlingTypeKode === Behandli
   || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
 const formatName = (bpName = '') => replaceNorwegianCharacters(bpName.toLowerCase());
 
-const getOppdaterProsessStegOgFaktaPanelIUrl = (pushLocation, location) => (prosessStegId, faktaPanelId) => {
+const getOppdaterProsessStegOgFaktaPanelIUrl = (history, location) => (prosessStegId, faktaPanelId) => {
   let newLocation;
   if (prosessStegId === 'default') {
     newLocation = getLocationWithDefaultProsessStegAndFakta(location);
@@ -63,7 +64,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (pushLocation, location) => (pros
     newLocation = getFaktaLocation(newLocation)(null);
   }
 
-  pushLocation(newLocation);
+  history.push(newLocation);
 };
 
 interface FagsakInfo {
@@ -86,7 +87,6 @@ interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingLinks: Link[];
-  push: (location: Location | string) => void;
   visFeilmelding: (data: any) => void;
   rettigheter: {
     writeAccess: {
@@ -113,8 +113,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   erAktivPapirsoknad = false,
   setBehandlingIdOgVersjon,
   behandlingLinks,
-  push: pushLocation,
-  location,
   behandlingType,
   behandlingStatus,
   oppdaterBehandlingVersjon,
@@ -129,6 +127,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     requestApi.injectPaths(behandlingLinks);
     setBehandlingIdOgVersjon(behandlingVersjon);
   }, [behandlingId]);
+
+  const location = useLocation<Location>();
 
   const fagsakInfo = {
     saksnummer: fagsak.saksnummer,
@@ -147,8 +147,11 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
     [fagsak.status, behandlingId, behandlingStatus, behandlingType]);
 
-  const opneSokeside = useCallback(() => { pushLocation('/'); }, []);
-  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(pushLocation, location), [location]);
+  const history = useHistory();
+  const opneSokeside = useCallback(() => { history.push('/'); }, []);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(history, location), [location]);
+
+  const query = parseQueryString(location.search);
 
   const defaultProps = {
     behandlingId,
@@ -158,7 +161,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     fagsak: fagsakInfo,
     rettigheter,
     opneSokeside,
-    valgtProsessSteg: location.query.punkt,
+    valgtProsessSteg: query.punkt,
   };
   const behandlingTypeKode = behandlingType ? behandlingType.kode : undefined;
 
@@ -235,7 +238,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             harApenRevurdering={fagsakBehandlingerInfo
               .some((b) => b.type.kode === BehandlingType.REVURDERING && b.status.kode !== BehandlingStatus.AVSLUTTET)}
-            valgtFaktaSteg={location.query.fakta}
+            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -250,7 +253,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingEngangsstonadIndex
             featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            valgtFaktaSteg={location.query.fakta}
+            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -265,7 +268,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingForeldrepengerIndex
             featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            valgtFaktaSteg={location.query.fakta}
+            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -280,7 +283,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingSvangerskapspengerIndex
             featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            valgtFaktaSteg={location.query.fakta}
+            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -300,7 +303,6 @@ const mapStateToProps = (state, ownProps) => {
     behandlingId,
     behandlingType: behandling?.type,
     behandlingStatus: behandling?.status,
-    location: state.router.location,
     erAktivPapirsoknad: behandling?.erAktivPapirsoknad,
     behandlingLinks: behandling?.links,
   };
@@ -311,7 +313,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   resetBehandlingContext: resetBehandlingContextActionCreator,
   setBehandlingIdOgVersjon: setSelectedBehandlingIdOgVersjon,
   visFeilmelding: errorHandler.getErrorActionCreator(),
-  push,
 }, dispatch);
 
 export default trackRouteParam({

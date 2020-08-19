@@ -1,6 +1,6 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { render } from 'react-dom';
 import { init, Integrations } from '@sentry/browser';
@@ -51,7 +51,7 @@ init({
 const history = createBrowserHistory({
   basename: '/fpsak/',
 });
-const store = configureStore(history);
+const store = configureStore();
 
 reducerRegistry.register(errorHandler.getErrorReducerName(), errorHandler.getErrorReducer());
 
@@ -62,13 +62,13 @@ const renderFunc = (Component) => {
   }
   render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <Router history={history}>
         <RestApiProvider>
           <RestApiErrorProvider>
             <Component />
           </RestApiErrorProvider>
         </RestApiProvider>
-      </ConnectedRouter>
+      </Router>
     </Provider>,
     app,
   );

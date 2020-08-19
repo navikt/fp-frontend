@@ -6,6 +6,7 @@ import { shallow } from 'enzyme';
 import { Fagsak } from '@fpsak-frontend/types';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
+import * as useHistory from '../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakSearchIndex from './FagsakSearchIndex';
 
@@ -42,13 +43,23 @@ describe('<FagsakSearchIndex>', () => {
   };
   const fagsaker = [fagsak, fagsak2];
 
+  const push = sinon.spy();
+  let contextStub;
+  beforeEach(() => {
+    // @ts-ignore
+    contextStub = sinon.stub(useHistory, 'default').callsFake(() => ({ push }));
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+    push.resetHistory();
+  });
+
   it('skal søke opp fagsaker', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK, fagsaker);
 
-    const wrapper = shallow(<FagsakSearchIndex.WrappedComponent
-      push={sinon.spy()}
-    />);
+    const wrapper = shallow(<FagsakSearchIndex />);
 
     const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
     expect(fagsakSearchIndex).to.have.length(1);
@@ -65,17 +76,14 @@ describe('<FagsakSearchIndex>', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK, fagsaker);
 
-    const pushCallback = sinon.spy();
-    const wrapper = shallow(<FagsakSearchIndex.WrappedComponent
-      push={pushCallback}
-    />);
+    const wrapper = shallow(<FagsakSearchIndex />);
 
     const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
     const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: number) => undefined;
     velgFagsak('', fagsak.saksnummer);
 
-    expect(pushCallback.calledOnce).to.be.true;
-    const { args } = pushCallback.getCalls()[0];
+    expect(push.calledOnce).to.be.true;
+    const { args } = push.getCalls()[0];
     expect(args).to.have.length(1);
     expect(args[0]).to.eql(`/fagsak/${fagsak.saksnummer}/`);
   });

@@ -1,8 +1,6 @@
 import React, {
   FunctionComponent, useCallback, useMemo,
 } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Location } from 'history';
 import moment from 'moment';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -10,6 +8,7 @@ import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
 
+import useLocation from '../../app/useLocation';
 import useBehandlingEndret from '../../behandling/useBehandligEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths';
@@ -34,7 +33,6 @@ interface OwnProps {
   saksnummer: number;
   behandlingId?: number;
   behandlingVersjon?: number;
-  location: Location;
 }
 
 /**
@@ -43,17 +41,17 @@ interface OwnProps {
  * Container komponent. Har ansvar for å hente historiken for en fagsak fra state og vise den
  */
 // @ts-ignore
-export const HistoryIndex: FunctionComponent<OwnProps> = ({
+const HistoryIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingId,
   behandlingVersjon,
-  location,
 }) => {
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
 
   const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
+  const location = useLocation();
   const getBehandlingLocation = useCallback((bId) => ({
     ...location,
     pathname: pathToBehandling(saksnummer, bId),
@@ -91,4 +89,4 @@ export const HistoryIndex: FunctionComponent<OwnProps> = ({
   ));
 };
 
-export default withRouter<any, FunctionComponent<OwnProps>>(HistoryIndex);
+export default HistoryIndex;

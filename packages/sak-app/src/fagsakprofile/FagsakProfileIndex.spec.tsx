@@ -10,6 +10,8 @@ import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import { Fagsak } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
+import * as useLocation from '../app/useLocation';
+import * as useRouteMatch from '../app/useRouteMatch';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
@@ -51,6 +53,19 @@ describe('<FagsakProfileIndex>', () => {
     id: 1,
   };
 
+  let contextStubLocation;
+  let contextStubMatch;
+  beforeEach(() => {
+    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
+    // @ts-ignore
+    contextStubMatch = sinon.stub(useRouteMatch, 'default').callsFake(() => ({ isExact: false }));
+  });
+
+  afterEach(() => {
+    contextStubLocation.restore();
+    contextStubMatch.restore();
+  });
+
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, alleKodeverk);
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
@@ -61,8 +76,6 @@ describe('<FagsakProfileIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
       harHentetBehandlinger
-      shouldRedirectToBehandlinger={false}
-      location={locationMock}
       oppfriskBehandlinger={sinon.spy()}
     />);
 
@@ -84,8 +97,6 @@ describe('<FagsakProfileIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
       harHentetBehandlinger
-      shouldRedirectToBehandlinger={false}
-      location={locationMock}
       oppfriskBehandlinger={sinon.spy()}
       selectedBehandlingId={1}
     />);

@@ -7,6 +7,8 @@ import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifiseri
 import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
 import { Fagsak, Behandling } from '@fpsak-frontend/types';
 
+import * as useHistory from '../../app/useHistory';
+import * as useLocation from '../../app/useLocation';
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import { RisikoklassifiseringIndexImpl } from './RisikoklassifiseringIndex';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
@@ -19,13 +21,6 @@ const lagRisikoklassifisering = (kode) => ({
   medlFaresignaler: undefined,
   iayFaresignaler: undefined,
 });
-
-const locationMock = {
-  pathname: 'test',
-  search: 'test',
-  state: {},
-  hash: 'test',
-};
 
 const fagsak = {
   saksnummer: 123456,
@@ -46,15 +41,23 @@ const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
 
 describe('<RisikoklassifiseringIndex>', () => {
   let contextStub;
+  let contextStubHistory;
+  let contextStubLocation;
+
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: true,
       location,
     }));
+    // @ts-ignore
+    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push: sinon.spy() }));
+    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => location);
   });
 
   afterEach(() => {
     contextStub.restore();
+    contextStubHistory.restore();
+    contextStubLocation.restore();
   });
 
   it('skal rendere komponent', () => {
@@ -64,8 +67,6 @@ describe('<RisikoklassifiseringIndex>', () => {
       alleBehandlinger={[behandling] as Behandling[]}
       kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
       behandlingVersjon={1}
-      push={sinon.spy()}
-      location={locationMock}
       behandlingId={1}
     />);
     expect(wrapper.find(RisikoklassifiseringSakIndex)).has.length(1);

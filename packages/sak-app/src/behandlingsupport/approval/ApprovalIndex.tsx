@@ -1,11 +1,7 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
-import { withRouter } from 'react-router-dom';
-import { push } from 'connected-react-router';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Location } from 'history';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -21,6 +17,8 @@ import { requireProps, LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 
+import useHistory from '../../app/useHistory';
+import useLocation from '../../app/useLocation';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -97,8 +95,6 @@ interface OwnProps {
   selectedBehandlingVersjon?: number;
   totrinnskontrollSkjermlenkeContext?: any[];
   totrinnskontrollReadOnlySkjermlenkeContext?: any[];
-  push: (location: string) => void;
-  location: Location;
 }
 
 /**
@@ -113,11 +109,12 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   selectedBehandlingVersjon,
   totrinnskontrollSkjermlenkeContext,
   totrinnskontrollReadOnlySkjermlenkeContext,
-  push: pushLocation,
-  location,
 }) => {
   const [showBeslutterModal, setShowBeslutterModal] = useState(false);
   const [allAksjonspunktApproved, setAllAksjonspunktApproved] = useState(false);
+
+  const location = useLocation();
+  const history = useHistory();
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
@@ -204,7 +201,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
           behandlingsresultat={behandling?.behandlingsresultat}
           behandlingId={behandlingId}
           behandlingTypeKode={behandlingTypeKode}
-          pushLocation={pushLocation}
+          pushLocation={history.push}
           allAksjonspunktApproved={allAksjonspunktApproved}
           behandlingStatus={behandling?.status}
           totrinnsKlageVurdering={totrinnsKlageVurdering}
@@ -216,15 +213,8 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
 
 const mapStateToPropsFactory = () => (state) => ({
   selectedBehandlingVersjon: getBehandlingVersjon(state),
-  location: state.router.location,
   behandlingId: getSelectedBehandlingId(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    push,
-  }, dispatch),
-});
-
 const comp = requireProps(['behandlingId', 'selectedBehandlingVersjon'])(ApprovalIndex);
-export default withRouter<any, FunctionComponent<OwnProps>>(connect(mapStateToPropsFactory, mapDispatchToProps)(comp));
+export default connect(mapStateToPropsFactory)(comp);

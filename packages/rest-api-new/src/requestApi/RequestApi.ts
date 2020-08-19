@@ -44,9 +44,9 @@ class RequestApi extends AbstractRequestApi {
     });
   }
 
-  // Kun for test
-  public isMock = () => { throw new Error('Not Implemented'); };
+  public isMock = () => false;
 
+  // Kun for test
   public mock = () => { throw new Error('Not Implemented'); };
 
   public setMissingPath = () => { throw new Error('Not Implemented'); };

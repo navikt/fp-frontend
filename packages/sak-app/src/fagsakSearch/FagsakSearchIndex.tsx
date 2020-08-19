@@ -1,7 +1,4 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
-import { push } from 'connected-react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import {
   errorOfType, ErrorTypes, getErrorResponseData,
@@ -11,11 +8,8 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
 import { pathToFagsak } from '../app/paths';
+import useHistory from '../app/useHistory';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
-
-interface OwnProps {
-  push: (string) => void;
-}
 
 const EMPTY_ARRAY = [];
 
@@ -25,13 +19,12 @@ const EMPTY_ARRAY = [];
  * Container komponent. Har ansvar for å vise søkeskjermbildet og å håndtere fagsaksøket
  * mot server og lagringen av resultatet i klientens state.
  */
-const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
-  push: pushLocation,
-}) => {
+const FagsakSearchIndex: FunctionComponent = () => {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
+  const history = useHistory();
   const goToFagsak = (saksnummer) => {
-    pushLocation(pathToFagsak(saksnummer));
+    history.push(pathToFagsak(saksnummer));
   };
 
   const {
@@ -63,13 +56,4 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = () => ({
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    push,
-  }, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FagsakSearchIndex);
+export default FagsakSearchIndex;

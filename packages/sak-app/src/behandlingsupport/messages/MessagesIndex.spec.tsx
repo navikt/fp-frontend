@@ -8,6 +8,7 @@ import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-me
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Fagsak } from '@fpsak-frontend/types';
 
+import * as useHistory from '../../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
@@ -39,6 +40,18 @@ describe('<MessagesIndex>', () => {
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
   ];
 
+  const push = sinon.spy();
+  let contextStubHistory;
+  beforeEach(() => {
+    // @ts-ignore
+    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push }));
+  });
+
+  afterEach(() => {
+    contextStubHistory.restore();
+    push.resetHistory();
+  });
+
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
@@ -48,7 +61,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -68,7 +80,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -92,7 +103,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -130,7 +140,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -167,7 +176,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -211,7 +219,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -255,7 +262,6 @@ describe('<MessagesIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={sinon.spy()}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={sinon.spy()}
     />);
@@ -296,12 +302,10 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
     const setBehandlingOnHoldCallback = sinon.spy();
-    const pushCallback = sinon.spy();
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       selectedBehandlingId={1}
-      push={pushCallback}
       selectedBehandlingVersjon={123}
       setBehandlingOnHold={setBehandlingOnHoldCallback}
     />);
@@ -336,9 +340,9 @@ describe('<MessagesIndex>', () => {
       ventearsak: formValues.ventearsak,
     });
 
-    expect(pushCallback).to.have.property('callCount', 1);
-    expect(pushCallback.getCalls()[0].args).to.have.length(1);
-    expect(pushCallback.getCalls()[0].args[0]).to.eql('/');
+    expect(push).to.have.property('callCount', 1);
+    expect(push.getCalls()[0].args).to.have.length(1);
+    expect(push.getCalls()[0].args[0]).to.eql('/');
 
     expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
   });

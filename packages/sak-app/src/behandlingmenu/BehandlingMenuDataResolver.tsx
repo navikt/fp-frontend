@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { bindActionCreators, Dispatch } from 'redux';
-import { push } from 'connected-react-router';
-import { Location } from 'history';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Fagsak } from '@fpsak-frontend/types';
@@ -30,7 +27,6 @@ interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   oppfriskBehandlinger: () => void;
-  location: Location;
 }
 
 interface StateProps {
@@ -38,18 +34,12 @@ interface StateProps {
   behandlingVersion?: number;
 }
 
-interface DispatchProps {
-  pushLocation: (location: string) => void;
-}
-
-const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps & DispatchProps> = ({
+const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps> = ({
   fagsak,
   alleBehandlinger,
   oppfriskBehandlinger,
-  location,
   behandlingId,
   behandlingVersion,
-  pushLocation,
 }) => {
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const skalHenteVergeMenyvalg = behandling && YTELSE_BEHANDLINGTYPER.includes(behandling.type.kode);
@@ -72,11 +62,14 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps & Disp
     return <LoadingPanel />;
   }
 
+  const history = useHistory();
+  const location = useLocation();
+
   const vergeMenyvalg = vergeMenyvalgData?.vergeBehandlingsmeny;
   const fjernVergeFn = vergeMenyvalg === VERGE_MENYVALG.FJERN
-    ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+    ? fjernVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
   const opprettVergeFn = vergeMenyvalg === VERGE_MENYVALG.OPPRETT
-    ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+    ? opprettVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
 
   return (
     <BehandlingMenuIndex
@@ -87,7 +80,7 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps & Disp
       behandlingVersion={behandlingVersion}
       fjernVerge={fjernVergeFn}
       opprettVerge={opprettVergeFn}
-      pushLocation={pushLocation}
+      pushLocation={history.push}
       location={location}
       menyhandlingRettigheter={menyhandlingRettigheter}
       oppfriskBehandlinger={oppfriskBehandlinger}
@@ -100,10 +93,4 @@ const mapStateToProps = (state): StateProps => ({
   behandlingVersion: getBehandlingVersjon(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => bindActionCreators({
-  pushLocation: push,
-}, dispatch);
-
-export default withRouter<any, FunctionComponent<OwnProps & StateProps & DispatchProps>>(connect(
-  mapStateToProps, mapDispatchToProps,
-)(BehandlingMenuDataResolver));
+export default connect(mapStateToProps)(BehandlingMenuDataResolver);

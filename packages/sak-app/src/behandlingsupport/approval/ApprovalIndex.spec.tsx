@@ -10,6 +10,8 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { Fagsak } from '@fpsak-frontend/types';
 
+import * as useHistory from '../../app/useHistory';
+import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import { ApprovalIndex } from './ApprovalIndex';
@@ -47,6 +49,19 @@ describe('<ApprovalIndex>', () => {
     state: {},
     hash: 'test',
   };
+
+  let contextStubHistory;
+  let contextStubLocation;
+  beforeEach(() => {
+    // @ts-ignore
+    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push: sinon.spy() }));
+    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
+  });
+
+  afterEach(() => {
+    contextStubHistory.restore();
+    contextStubLocation.restore();
+  });
 
   const kodeverk = {
     [kodeverkTyper.SKJERMLENKE_TYPE]: [],
@@ -116,8 +131,6 @@ describe('<ApprovalIndex>', () => {
       behandlingId={alleBehandlinger[0].id}
       selectedBehandlingVersjon={alleBehandlinger[0].versjon}
       totrinnskontrollSkjermlenkeContext={totrinnskontrollAksjonspunkter}
-      push={sinon.spy()}
-      location={locationMock}
     />);
 
     const index = wrapper.find(TotrinnskontrollSakIndex);

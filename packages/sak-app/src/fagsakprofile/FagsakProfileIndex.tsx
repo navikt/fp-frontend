@@ -2,8 +2,7 @@ import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
 import { connect } from 'react-redux';
-import { Location } from 'history';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
@@ -13,6 +12,8 @@ import {
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
+import useLocation from '../app/useLocation';
+import useRouteMatch from '../app/useRouteMatch';
 import {
   getLocationWithDefaultProsessStegAndFakta,
   pathToBehandling,
@@ -44,8 +45,6 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
   selectedBehandlingId?: number;
   behandlingVersjon?: number;
-  shouldRedirectToBehandlinger: boolean;
-  location: Location;
   harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
 }
@@ -56,8 +55,6 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   harHentetBehandlinger,
   selectedBehandlingId,
   behandlingVersjon,
-  location,
-  shouldRedirectToBehandlinger,
   oppfriskBehandlinger,
 }) => {
   const [showAll, setShowAll] = useState(!selectedBehandlingId);
@@ -81,6 +78,10 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
     setShowAll(!selectedBehandlingId);
   }, [selectedBehandlingId]);
 
+  const match = useRouteMatch();
+  const shouldRedirectToBehandlinger = match.isExact;
+
+  const location = useLocation();
   const getBehandlingLocation = useCallback((behandlingId) => getLocationWithDefaultProsessStegAndFakta({
     ...location,
     pathname: pathToBehandling(fagsak.saksnummer, behandlingId),
@@ -135,14 +136,11 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   selectedBehandlingId: getSelectedBehandlingId(state),
   behandlingVersjon: getBehandlingVersjon(state),
-  shouldRedirectToBehandlinger: ownProps.match.isExact,
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-  )(requireProps(['fagsak'], <LoadingPanel />)(FagsakProfileIndex)),
-);
+export default connect(
+  mapStateToProps,
+)(requireProps(['fagsak'], <LoadingPanel />)(FagsakProfileIndex));

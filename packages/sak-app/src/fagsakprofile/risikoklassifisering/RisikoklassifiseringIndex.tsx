@@ -1,10 +1,8 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
-import { Location } from 'history';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { setSubmitFailed as dispatchSubmitFailed } from 'redux-form';
 
 import {
@@ -13,6 +11,8 @@ import {
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
 
+import useHistory from '../../app/useHistory';
+import useLocation from '../../app/useLocation';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
@@ -34,8 +34,6 @@ const getReadOnly = (navAnsatt: NavAnsatt, rettigheter, erPaaVent: boolean) => {
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  push: (location: Location) => void;
-  location: Location;
   behandlingVersjon?: number;
   kontrollresultat?: Risikoklassifisering;
   risikoAksjonspunkt?: Aksjonspunkt;
@@ -55,8 +53,6 @@ export const RisikoklassifiseringIndexImpl: FunctionComponent<OwnProps> = ({
   risikoAksjonspunkt,
   kontrollresultat,
   behandlingVersjon,
-  push: pushLocation,
-  location,
   behandlingId,
 }) => {
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
@@ -70,6 +66,9 @@ export const RisikoklassifiseringIndexImpl: FunctionComponent<OwnProps> = ({
     isQueryParam: true,
   });
 
+  const history = useHistory();
+  const location = useLocation();
+
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
     [fagsak.status, behandlingStatus, behandlingType]);
@@ -77,7 +76,7 @@ export const RisikoklassifiseringIndexImpl: FunctionComponent<OwnProps> = ({
     [rettigheter, erPaaVent]);
 
   const toggleRiskPanel = useCallback(() => {
-    pushLocation(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
+    history.push(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
   }, [location, isRiskPanelOpen]);
 
   const harRisikoAksjonspunkt = !!risikoAksjonspunkt;
@@ -116,14 +115,12 @@ export const RisikoklassifiseringIndexImpl: FunctionComponent<OwnProps> = ({
 };
 
 const mapStateToProps = (state) => ({
-  location: state.router.location,
   behandlingVersjon: getBehandlingVersjon(state),
   behandlingId: getSelectedBehandlingId(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators({
-    push,
     dispatchSubmitFailed,
   }, dispatch),
 });

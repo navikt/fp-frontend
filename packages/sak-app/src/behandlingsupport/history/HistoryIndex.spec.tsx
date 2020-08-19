@@ -1,12 +1,14 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 
 import { featureToggle } from '@fpsak-frontend/konstanter';
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 
+import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import { HistoryIndex } from './HistoryIndex';
+import HistoryIndex from './HistoryIndex';
 
 describe('<HistoryIndex>', () => {
   const locationMock = {
@@ -15,6 +17,16 @@ describe('<HistoryIndex>', () => {
     state: {},
     hash: 'test',
   };
+
+  let contextStubLocation;
+
+  beforeEach(() => {
+    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
+  });
+
+  afterEach(() => {
+    contextStubLocation.restore();
+  });
 
   it('skal vise historikk for kun fpsak', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
@@ -39,7 +51,6 @@ describe('<HistoryIndex>', () => {
       saksnummer={12345}
       behandlingId={1}
       behandlingVersjon={2}
-      location={locationMock}
     />);
 
     const index = wrapper.find(HistorikkSakIndex);
@@ -77,7 +88,6 @@ describe('<HistoryIndex>', () => {
       saksnummer={12345}
       behandlingId={1}
       behandlingVersjon={2}
-      location={locationMock}
     />);
 
     const index = wrapper.find(HistorikkSakIndex);
