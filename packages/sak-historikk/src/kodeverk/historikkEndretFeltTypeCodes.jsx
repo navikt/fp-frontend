@@ -461,6 +461,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'NY_REFUSJONSFRIST',
     feltId: 'HistorikkEndretFelt.NyRefusjonsfrist',
   },
+  NY_STARTDATO_REFUSJON: {
+    kode: 'NY_STARTDATO_REFUSJON',
+    feltId: 'HistorikkEndretFelt.NyStartdatoRefusjon',
+  },
 };
 
 export default historikkEndretFeltTypeCodes;
