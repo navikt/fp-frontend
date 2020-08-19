@@ -8,7 +8,6 @@ import { Location } from 'history';
 import { useLocation } from 'react-router';
 
 import { featureToggle } from '@fpsak-frontend/konstanter';
-import { Link } from '@fpsak-frontend/rest-api/src/requestApi/LinkTsType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import errorHandler from '@fpsak-frontend/error-api-redux';
@@ -16,7 +15,7 @@ import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/ut
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  FagsakPerson, KodeverkMedNavn, Kodeverk, NavAnsatt, Fagsak,
+  KodeverkMedNavn, NavAnsatt, Fagsak,
 } from '@fpsak-frontend/types';
 
 import BehandlingAppKontekst from './behandlingAppKontekstTsType';
@@ -27,7 +26,7 @@ import {
 import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
 import {
   setUrlBehandlingId, setSelectedBehandlingIdOgVersjon, getUrlBehandlingId,
-  oppdaterBehandlingVersjon as oppdaterVersjon, resetBehandlingContext as resetBehandlingContextActionCreator,
+  oppdaterBehandlingVersjon as oppdaterVersjon,
 } from './duck';
 import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from './ErrorBoundary';
@@ -67,37 +66,13 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history, location) => (prosessSt
   history.push(newLocation);
 };
 
-interface FagsakInfo {
-  saksnummer: number;
-  fagsakYtelseType: Kodeverk;
-  fagsakPerson: FagsakPerson;
-  fagsakStatus: Kodeverk;
-}
-
 interface OwnProps {
   behandlingId: number;
-  behandlingVersjon: number;
-  behandlingType: Kodeverk;
-  behandlingStatus: Kodeverk;
-  location: Location & { query: { punkt?: string; fakta?: string } };
-  oppdaterBehandlingVersjon: (behandlingVersjon: number) => void;
-  erAktivPapirsoknad?: boolean;
-  resetBehandlingContext: () => void;
   setBehandlingIdOgVersjon: (behandlingVersjon: number) => void;
+  oppdaterBehandlingVersjon: (behandlingVersjon: number) => void;
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  behandlingLinks: Link[];
   visFeilmelding: (data: any) => void;
-  rettigheter: {
-    writeAccess: {
-      employeeHasAccess: boolean;
-      isEnabled: boolean;
-    };
-    kanOverstyreAccess: {
-      employeeHasAccess: boolean;
-      isEnabled: boolean;
-    };
-  };
 }
 
 /**
@@ -110,11 +85,7 @@ interface OwnProps {
  */
 const BehandlingIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
-  erAktivPapirsoknad = false,
   setBehandlingIdOgVersjon,
-  behandlingLinks,
-  behandlingType,
-  behandlingStatus,
   oppdaterBehandlingVersjon,
   fagsak,
   alleBehandlinger,
@@ -123,8 +94,10 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const behandlingVersjon = alleBehandlinger.some((b) => b.id === behandlingId)
     ? alleBehandlinger.find((b) => b.id === behandlingId).versjon : undefined;
 
+  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+
   useEffect(() => {
-    requestApi.injectPaths(behandlingLinks);
+    requestApi.injectPaths(behandling.links);
     setBehandlingIdOgVersjon(behandlingVersjon);
   }, [behandlingId]);
 
@@ -144,8 +117,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const featureToggles = restApiHooks.useGlobalStateRestApiData<{[key: string]: boolean}>(FpsakApiKeys.FEATURE_TOGGLE);
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
-  const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
-    [fagsak.status, behandlingId, behandlingStatus, behandlingType]);
+  const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
+    [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
 
   const history = useHistory();
   const opneSokeside = useCallback(() => { history.push('/'); }, []);
@@ -163,9 +136,9 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     opneSokeside,
     valgtProsessSteg: query.punkt,
   };
-  const behandlingTypeKode = behandlingType ? behandlingType.kode : undefined;
+  const behandlingTypeKode = behandling?.type ? behandling.type.kode : undefined;
 
-  if (erAktivPapirsoknad) {
+  if (behandling?.erAktivPapirsoknad) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={visFeilmelding}>
@@ -192,13 +165,13 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   }
 
   const fagsakBehandlingerInfo = alleBehandlinger
-    .map((behandling) => ({
-      id: behandling.id,
-      uuid: behandling.uuid,
-      type: behandling.type,
-      status: behandling.status,
-      opprettet: behandling.opprettet,
-      avsluttet: behandling.avsluttet,
+    .map((b) => ({
+      id: b.id,
+      uuid: b.uuid,
+      type: b.type,
+      status: b.status,
+      opprettet: b.opprettet,
+      avsluttet: b.avsluttet,
     }));
 
   if (behandlingTypeKode === BehandlingType.KLAGE) {
@@ -295,22 +268,12 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   return null;
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const { alleBehandlinger } = ownProps;
-  const behandlingId = getUrlBehandlingId(state);
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
-  return {
-    behandlingId,
-    behandlingType: behandling?.type,
-    behandlingStatus: behandling?.status,
-    erAktivPapirsoknad: behandling?.erAktivPapirsoknad,
-    behandlingLinks: behandling?.links,
-  };
-};
+const mapStateToProps = (state) => ({
+  behandlingId: getUrlBehandlingId(state),
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   oppdaterBehandlingVersjon: oppdaterVersjon,
-  resetBehandlingContext: resetBehandlingContextActionCreator,
   setBehandlingIdOgVersjon: setSelectedBehandlingIdOgVersjon,
   visFeilmelding: errorHandler.getErrorActionCreator(),
 }, dispatch);
@@ -320,4 +283,4 @@ export default trackRouteParam({
   parse: (behandlingFromUrl) => Number.parseInt(behandlingFromUrl, 10),
   storeParam: setUrlBehandlingId,
   getParamFromStore: getUrlBehandlingId,
-})(connect(mapStateToProps, mapDispatchToProps)(requireProps(['behandlingId', 'behandlingType'])(BehandlingIndex)));
+})(connect(mapStateToProps, mapDispatchToProps)(requireProps(['behandlingId'])(BehandlingIndex)));

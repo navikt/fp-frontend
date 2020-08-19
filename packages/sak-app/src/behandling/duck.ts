@@ -9,7 +9,6 @@ const actionType = (name) => `${reducerName}/${name}`;
 const SET_URL_BEHANDLING_ID = actionType('SET_URL_BEHANDLING_ID');
 const SET_BEHANDLING_ID_OG_VERSJON = actionType('SET_BEHANDLING_ID_OG_VERSJON');
 const OPPDATER_BEHANDLING_VERSJON = actionType('OPPDATER_BEHANDLING_VERSJON');
-const RESET_BEHANDLING_CONTEXT = actionType('RESET_BEHANDLING_CONTEXT');
 
 export const setUrlBehandlingId = (behandlingId) => ({
   type: SET_URL_BEHANDLING_ID,
@@ -24,10 +23,6 @@ export const setSelectedBehandlingIdOgVersjon = (versjon) => ({
 export const oppdaterBehandlingVersjon = (behandlingVersjon) => ({
   type: OPPDATER_BEHANDLING_VERSJON,
   data: behandlingVersjon,
-});
-
-export const resetBehandlingContext = () => ({
-  type: RESET_BEHANDLING_CONTEXT,
 });
 
 /* Reducer */
@@ -60,8 +55,6 @@ export const behandlingReducer = (state = initialState, action: Action = { type:
         ...state,
         behandlingVersjon: action.data,
       };
-    case RESET_BEHANDLING_CONTEXT:
-      return initialState;
     default:
       return state;
   }
