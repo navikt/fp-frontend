@@ -29,6 +29,9 @@ const manuelleVenteArsaker = [
   venteArsakType.ANKE_OVERSENDT_TIL_TRYGDERETTEN,
   venteArsakType.VENT_OPDT_INNTEKTSMELDING,
   venteArsakType.VENT_OPPTJENING_OPPLYSNINGER,
+  venteArsakType.UTVIDET_TILSVAR_FRIST,
+  venteArsakType.ENDRE_TILKJENT_YTELSE,
+  venteArsakType.VENT_PÅ_MULIG_MOTREGNING,
 ];
 
 /**
