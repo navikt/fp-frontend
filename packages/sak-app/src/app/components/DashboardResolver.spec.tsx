@@ -11,7 +11,6 @@ describe('<DashboardResolver>', () => {
   it('skal vise fremsiden til fpsak når miljø er lik development', () => {
     const wrapper = shallowWithIntl(<DashboardResolver
       intl={intlMock}
-      addErrorMessage={() => undefined}
     />);
 
     expect(wrapper.find(Dashboard)).to.have.length(1);

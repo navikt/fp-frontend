@@ -70,12 +70,6 @@
             "type": "GET"
         },
         {
-            "href": "/fpsak/api/behandling/vilkar-v2?uuid=55013b8a-ee7c-4fe7-8673-273af29c1bbb",
-            "rel": "vilkar",
-            "requestPayload": null,
-            "type": "GET"
-        },
-        {
             "href": "/fpsak/api/behandling/soknad?uuid=55013b8a-ee7c-4fe7-8673-273af29c1bbb",
             "rel": "soknad",
             "requestPayload": null,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import { Fagsak } from '@fpsak-frontend/types';
 
@@ -20,6 +21,8 @@ describe('BehandlingerIndex', () => {
     const wrapper = shallow(<BehandlingerIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
+      setBehandlingIdOgVersjon={sinon.spy()}
+      setRequestPendingMessage={sinon.spy()}
     />);
 
     const noBehandling = wrapper.find(NoSelectedBehandling);

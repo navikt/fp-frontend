@@ -130,6 +130,8 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           alleBehandlinger={alleBehandlinger}
           risikoAksjonspunkt={risikoAksjonspunkt}
           kontrollresultat={kontrollresultat}
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
         />
       )}
     </div>
