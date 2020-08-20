@@ -1,7 +1,6 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
-import { connect } from 'react-redux';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -22,10 +21,6 @@ import useLocation from '../../app/useLocation';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
-import {
-  getBehandlingVersjon,
-  getSelectedBehandlingId,
-} from '../../behandling/duck';
 import {
   FpsakApiKeys, requestApi, restApiHooks,
 } from '../../data/fpsakApi';
@@ -92,7 +87,7 @@ interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingId?: number;
-  selectedBehandlingVersjon?: number;
+  behandlingVersjon?: number;
   totrinnskontrollSkjermlenkeContext?: any[];
   totrinnskontrollReadOnlySkjermlenkeContext?: any[];
 }
@@ -106,7 +101,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   behandlingId,
-  selectedBehandlingVersjon,
+  behandlingVersjon,
   totrinnskontrollSkjermlenkeContext,
   totrinnskontrollReadOnlySkjermlenkeContext,
 }) => {
@@ -142,7 +137,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<TotrinnsKlageVurdering>(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, NO_PARAM, {
       keepData: true,
-      updateTriggers: [behandlingId, selectedBehandlingVersjon],
+      updateTriggers: [behandlingId, behandlingVersjon],
       suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING),
     },
   );
@@ -158,9 +153,9 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getOnSubmit(erTilbakekreving, behandlingId, fagsak.saksnummer, selectedBehandlingVersjon,
+  const onSubmit = useCallback(getOnSubmit(erTilbakekreving, behandlingId, fagsak.saksnummer, behandlingVersjon,
     setAllAksjonspunktApproved, setShowBeslutterModal, godkjennBehandling),
-  [behandlingId, selectedBehandlingVersjon]);
+  [behandlingId, behandlingVersjon]);
 
   if (!totrinnskontrollSkjermlenkeContext && !totrinnskontrollReadOnlySkjermlenkeContext) {
     return null;
@@ -174,7 +169,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
     <>
       <TotrinnskontrollSakIndex
         behandlingId={behandlingId}
-        behandlingVersjon={selectedBehandlingVersjon}
+        behandlingVersjon={behandlingVersjon}
         behandlingsresultat={behandling?.behandlingsresultat}
         behandlingStatus={behandling?.status}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
@@ -196,7 +191,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
       {showBeslutterModal && (
         <BeslutterModalIndex
           erGodkjenningFerdig={stateGodkjennBehandling === RestApiState.SUCCESS}
-          selectedBehandlingVersjon={selectedBehandlingVersjon}
+          selectedBehandlingVersjon={behandlingVersjon}
           fagsakYtelseType={fagsak.sakstype}
           behandlingsresultat={behandling?.behandlingsresultat}
           behandlingId={behandlingId}
@@ -211,10 +206,4 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToPropsFactory = () => (state) => ({
-  selectedBehandlingVersjon: getBehandlingVersjon(state),
-  behandlingId: getSelectedBehandlingId(state),
-});
-
-const comp = requireProps(['behandlingId', 'selectedBehandlingVersjon'])(ApprovalIndex);
-export default connect(mapStateToPropsFactory)(comp);
+export default requireProps(['behandlingId', 'behandlingVersjon'])(ApprovalIndex);

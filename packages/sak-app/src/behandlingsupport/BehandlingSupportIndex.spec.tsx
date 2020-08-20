@@ -9,7 +9,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import SupportMenySakIndex from '@fpsak-frontend/sak-support-meny';
 
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
-import { BehandlingSupportIndex, getAccessibleSupportPanels, getEnabledSupportPanels } from './BehandlingSupportIndex';
+import BehandlingSupportIndex, { getAccessibleSupportPanels, getEnabledSupportPanels } from './BehandlingSupportIndex';
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 

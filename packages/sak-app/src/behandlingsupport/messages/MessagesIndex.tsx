@@ -1,6 +1,4 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
@@ -16,10 +14,6 @@ import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType'
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
-import {
-  getBehandlingVersjon,
-  getSelectedBehandlingId,
-} from '../../behandling/duck';
 import { setBehandlingOnHold } from '../../behandlingmenu/behandlingMenuOperations';
 import {
   FpsakApiKeys, restApiHooks, requestApi,
@@ -71,15 +65,8 @@ const getPreviewCallback = (behandlingTypeKode, behandlingId, behandlingUuid, fa
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-}
-
-interface StateProps {
-  selectedBehandlingId: number;
-  selectedBehandlingVersjon?: number;
-}
-
-interface DispatchProps {
-  setBehandlingOnHold: (params: any) => void;
+  behandlingId: number;
+  behandlingVersjon?: number;
 }
 
 interface Brevmal {
@@ -96,19 +83,17 @@ const RECIPIENTS = ['Søker'];
  *
  * Container komponent. Har ansvar for å hente mottakere og brevmaler fra serveren.
  */
-export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchProps> = ({
+const MessagesIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
-  selectedBehandlingId,
-  selectedBehandlingVersjon,
-  setBehandlingOnHold: setOnHold,
+  behandlingId,
+  behandlingVersjon,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
   const [submitCounter, setSubmitCounter] = useState(0);
 
-  const behandling = alleBehandlinger.find((b) => b.id === selectedBehandlingId);
-  const behandlingId = behandling.id;
+  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
   const history = useHistory();
 
@@ -124,7 +109,7 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
 
   const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, behandlingId, submitMessage,
     resetMessage, setShowSettPaVentModal, setSubmitCounter),
-  [behandlingId, selectedBehandlingVersjon]);
+  [behandlingId, behandlingVersjon]);
 
   const hideSettPaVentModal = useCallback(() => {
     setShowSettPaVentModal(false);
@@ -133,19 +118,19 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
   const handleSubmitFromModal = useCallback((formValues) => {
     const values = {
       behandlingId,
-      behandlingVersjon: selectedBehandlingVersjon,
+      behandlingVersjon,
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
     };
-    setOnHold(values);
+    setBehandlingOnHold(values);
     hideSettPaVentModal();
     history.push('/');
-  }, [behandlingId, selectedBehandlingVersjon]);
+  }, [behandlingId, behandlingVersjon]);
 
   const fetchPreview = useVisForhandsvisningAvMelding();
 
   const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandlingId, behandling.uuid, fagsak.sakstype, fetchPreview),
-    [behandlingId, selectedBehandlingVersjon]);
+    [behandlingId, behandlingVersjon]);
 
   const afterSubmit = useCallback(() => {
     setShowMessageModal(false);
@@ -154,12 +139,12 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
 
   const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP);
   const { data: harApentKontrollerRevAp, state: stateRevAp } = restApiHooks.useRestApi<boolean>(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, NO_PARAM, {
-    updateTriggers: [behandlingId, selectedBehandlingVersjon, submitCounter],
+    updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
     suspendRequest: !skalHenteRevAp,
   });
 
   const { data: brevmaler, state: stateBrevmaler } = restApiHooks.useRestApi<Brevmal[]>(FpsakApiKeys.BREVMALER, NO_PARAM, {
-    updateTriggers: [behandlingId, selectedBehandlingVersjon, submitCounter],
+    updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
   });
 
   if (stateBrevmaler === RestApiState.LOADING || (skalHenteRevAp && stateRevAp === RestApiState.LOADING)) {
@@ -179,7 +164,7 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
         sprakKode={behandling?.sprakkode}
         previewCallback={previewCallback}
         behandlingId={behandlingId}
-        behandlingVersjon={selectedBehandlingVersjon}
+        behandlingVersjon={behandlingVersjon}
         revurderingVarslingArsak={revurderingVarslingArsak}
         templates={brevmaler}
         isKontrollerRevurderingApOpen={harApentKontrollerRevAp}
@@ -198,16 +183,4 @@ export const MessagesIndex: FunctionComponent<OwnProps & StateProps & DispatchPr
   );
 };
 
-const mapStateToProps = (state: any): StateProps => ({
-  selectedBehandlingId: getSelectedBehandlingId(state),
-  selectedBehandlingVersjon: getBehandlingVersjon(state),
-});
-
-// @ts-ignore (Korleis fikse denne?)
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  ...bindActionCreators({
-    setBehandlingOnHold,
-  }, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessagesIndex);
+export default MessagesIndex;

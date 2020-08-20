@@ -129,7 +129,7 @@ describe('<ApprovalIndex>', () => {
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={alleBehandlinger[0].id}
-      selectedBehandlingVersjon={alleBehandlinger[0].versjon}
+      behandlingVersjon={alleBehandlinger[0].versjon}
       totrinnskontrollSkjermlenkeContext={totrinnskontrollAksjonspunkter}
     />);
 

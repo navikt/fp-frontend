@@ -10,7 +10,7 @@ import { Fagsak, Behandling } from '@fpsak-frontend/types';
 import * as useHistory from '../../app/useHistory';
 import * as useLocation from '../../app/useLocation';
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
-import { RisikoklassifiseringIndexImpl } from './RisikoklassifiseringIndex';
+import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 
 const lagRisikoklassifisering = (kode) => ({
@@ -62,7 +62,7 @@ describe('<RisikoklassifiseringIndex>', () => {
 
   it('skal rendere komponent', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
-    const wrapper = shallow(<RisikoklassifiseringIndexImpl
+    const wrapper = shallow(<RisikoklassifiseringIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={[behandling] as Behandling[]}
       kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}

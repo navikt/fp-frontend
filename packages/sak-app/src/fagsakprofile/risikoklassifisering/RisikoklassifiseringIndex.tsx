@@ -1,9 +1,6 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { setSubmitFailed as dispatchSubmitFailed } from 'redux-form';
 
 import {
   Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak,
@@ -19,9 +16,6 @@ import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
-import {
-  getBehandlingVersjon, getSelectedBehandlingId,
-} from '../../behandling/duck';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {
@@ -47,7 +41,7 @@ interface OwnProps {
  * Viser en av tre komponenter avhengig av: Om ingen klassifisering er utført,
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
-export const RisikoklassifiseringIndexImpl: FunctionComponent<OwnProps> = ({
+const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   risikoAksjonspunkt,
@@ -114,15 +108,4 @@ export const RisikoklassifiseringIndexImpl: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  behandlingVersjon: getBehandlingVersjon(state),
-  behandlingId: getSelectedBehandlingId(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    dispatchSubmitFailed,
-  }, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RisikoklassifiseringIndexImpl);
+export default RisikoklassifiseringIndex;

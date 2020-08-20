@@ -1,9 +1,7 @@
 import React, {
   FunctionComponent, useMemo, useState, useCallback,
 } from 'react';
-import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { Location } from 'history';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
@@ -12,12 +10,12 @@ import {
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
-import { getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
 import useBehandlingEndret from '../behandling/useBehandligEndret';
 import useTrackRouteParam from '../app/useTrackRouteParam';
+import useLocation from '../app/useLocation';
 import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
 import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';
 import ApplicationContextPath from '../app/ApplicationContextPath';
@@ -27,10 +25,6 @@ import {
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
-import {
-  getSelectedBehandlingId,
-  getBehandlingVersjon,
-} from '../behandling/duck';
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling) => pathToAnnenPart(annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId);
@@ -39,13 +33,6 @@ const erTilbakekreving = (behandlingType) => behandlingType && (BehandlingType.T
   || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
 const NO_PARAMS = undefined;
-
-interface OwnProps {
-  behandlingId?: number;
-  behandlingVersjon?: number;
-  requestPendingMessage?: string;
-  location: Location;
-}
 
 interface AnnenPartBehandling {
   saksnr: {
@@ -59,13 +46,14 @@ interface AnnenPartBehandling {
  *
  * Container komponent. Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
-export const FagsakIndex: FunctionComponent<OwnProps> = ({
-  requestPendingMessage,
-  behandlingId,
-  behandlingVersjon,
-  location,
-}) => {
+const FagsakIndex: FunctionComponent = () => {
   const [behandlingerTeller, setBehandlingTeller] = useState(0);
+  const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
+
+  const [behandlingIdOgVersjon, setIdOgVersjon] = useState({ behandlingId: undefined, behandlingVersjon: undefined });
+  const setBehandlingIdOgVersjon = useCallback((behandlingId, behandlingVersjon) => setIdOgVersjon({ behandlingId, behandlingVersjon }), []);
+  const { behandlingId, behandlingVersjon } = behandlingIdOgVersjon;
+
   const oppfriskBehandlinger = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
 
   const { selected: selectedSaksnummer } = useTrackRouteParam<number>({
@@ -104,6 +92,7 @@ export const FagsakIndex: FunctionComponent<OwnProps> = ({
   const alleBehandlinger = useMemo(() => [...(behandlingerFpSak || []), ...(behandlingerFpTilbake || [])],
     [behandlingerFpSak, behandlingerFpTilbake]);
 
+  const location = useLocation();
   const skalIkkeHenteData = !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingId);
 
   const options = {
@@ -137,18 +126,39 @@ export const FagsakIndex: FunctionComponent<OwnProps> = ({
   return (
     <>
       <FagsakGrid
-        behandlingContent={
-          <Route strict path={behandlingerPath} render={(props) => <BehandlingerIndex {...props} fagsak={fagsak} alleBehandlinger={alleBehandlinger} />} />
-        }
+        behandlingContent={(
+          <Route
+            strict
+            path={behandlingerPath}
+            render={(props) => (
+              <BehandlingerIndex
+                {...props}
+                fagsak={fagsak}
+                alleBehandlinger={alleBehandlinger}
+                setBehandlingIdOgVersjon={setBehandlingIdOgVersjon}
+                setRequestPendingMessage={setRequestPendingMessage}
+              />
+            )}
+          />
+        )}
         profileAndNavigationContent={(
           <FagsakProfileIndex
             fagsak={fagsak}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
             alleBehandlinger={alleBehandlinger}
             harHentetBehandlinger={!!behandlingerFpSak || behandlingerFpSakState === RestApiState.SUCCESS}
             oppfriskBehandlinger={oppfriskBehandlinger}
           />
         )}
-        supportContent={<BehandlingSupportIndex fagsak={fagsak} alleBehandlinger={alleBehandlinger} />}
+        supportContent={(
+          <BehandlingSupportIndex
+            fagsak={fagsak}
+            alleBehandlinger={alleBehandlinger}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+          />
+        )}
         visittkortContent={() => {
           if (skalIkkeHenteData) {
             return null;
@@ -176,10 +186,4 @@ export const FagsakIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  behandlingId: getSelectedBehandlingId(state),
-  behandlingVersjon: getBehandlingVersjon(state),
-  requestPendingMessage: getRequestPollingMessage(state),
-});
-
-export default connect(mapStateToProps)(FagsakIndex);
+export default FagsakIndex;

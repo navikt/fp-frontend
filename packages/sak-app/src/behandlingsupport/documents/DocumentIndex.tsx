@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { connect } from 'react-redux';
 
 import { LoadingPanel, requireProps, usePrevious } from '@fpsak-frontend/shared-components';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
@@ -7,7 +6,6 @@ import { Dokument } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import useBehandlingEndret from '../../behandling/useBehandligEndret';
-import { getSelectedBehandlingId, getBehandlingVersjon } from '../../behandling/duck';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
 // TODO (hb) lag linker, ikke callback
@@ -67,9 +65,4 @@ export const DocumentIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  behandlingId: getSelectedBehandlingId(state),
-  behandlingVersjon: getBehandlingVersjon(state),
-});
-
-export default connect(mapStateToProps)(requireProps(['saksnummer'], <LoadingPanel />)(DocumentIndex));
+export default requireProps(['saksnummer'], <LoadingPanel />)(DocumentIndex);

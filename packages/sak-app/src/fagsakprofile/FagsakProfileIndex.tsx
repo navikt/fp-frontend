@@ -1,7 +1,6 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
@@ -20,7 +19,6 @@ import {
   pathToBehandlinger,
 } from '../app/paths';
 import BehandlingMenuDataResolver from '../behandlingmenu/BehandlingMenuDataResolver';
-import { getSelectedBehandlingId, getBehandlingVersjon } from '../behandling/duck';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
@@ -43,7 +41,7 @@ const NO_PARAMS = {};
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  selectedBehandlingId?: number;
+  behandlingId?: number;
   behandlingVersjon?: number;
   harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
@@ -53,11 +51,11 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   harHentetBehandlinger,
-  selectedBehandlingId,
+  behandlingId,
   behandlingVersjon,
   oppfriskBehandlinger,
 }) => {
-  const [showAll, setShowAll] = useState(!selectedBehandlingId);
+  const [showAll, setShowAll] = useState(!behandlingId);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
 
   const getKodeverkFn = useGetKodeverkFn();
@@ -66,25 +64,25 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.sakstype);
 
   const { data: risikoAksjonspunkt, state: risikoAksjonspunktState } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, NO_PARAMS, {
-    updateTriggers: [selectedBehandlingId, behandlingVersjon],
+    updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT),
   });
   const { data: kontrollresultat, state: kontrollresultatState } = restApiHooks.useRestApi<Risikoklassifisering>(FpsakApiKeys.KONTROLLRESULTAT, NO_PARAMS, {
-    updateTriggers: [selectedBehandlingId, behandlingVersjon],
+    updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT),
   });
 
   useEffect(() => {
-    setShowAll(!selectedBehandlingId);
-  }, [selectedBehandlingId]);
+    setShowAll(!behandlingId);
+  }, [behandlingId]);
 
   const match = useRouteMatch();
   const shouldRedirectToBehandlinger = match.isExact;
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((behandlingId) => getLocationWithDefaultProsessStegAndFakta({
+  const getBehandlingLocation = useCallback((valgtBehandlingId) => getLocationWithDefaultProsessStegAndFakta({
     ...location,
-    pathname: pathToBehandling(fagsak.saksnummer, behandlingId),
+    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingId),
   }), [fagsak.saksnummer]);
 
   return (
@@ -105,6 +103,8 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
             <BehandlingMenuDataResolver
               fagsak={fagsak}
               alleBehandlinger={alleBehandlinger}
+              behandlingId={behandlingId}
+              behandlingVersjon={behandlingVersjon}
               oppfriskBehandlinger={oppfriskBehandlinger}
             />
           )}
@@ -113,7 +113,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
               behandlinger={alleBehandlinger}
               getBehandlingLocation={getBehandlingLocation}
               noExistingBehandlinger={alleBehandlinger.length === 0}
-              behandlingId={selectedBehandlingId}
+              behandlingId={behandlingId}
               showAll={showAll}
               toggleShowAll={toggleShowAll}
               getKodeverkFn={getKodeverkFn}
@@ -136,11 +136,4 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  selectedBehandlingId: getSelectedBehandlingId(state),
-  behandlingVersjon: getBehandlingVersjon(state),
-});
-
-export default connect(
-  mapStateToProps,
-)(requireProps(['fagsak'], <LoadingPanel />)(FagsakProfileIndex));
+export default requireProps(['fagsak'], <LoadingPanel />)(FagsakProfileIndex);

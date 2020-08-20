@@ -8,11 +8,12 @@ import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-me
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Fagsak } from '@fpsak-frontend/types';
 
+import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import * as useHistory from '../../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
-import { MessagesIndex } from './MessagesIndex';
+import MessagesIndex from './MessagesIndex';
 
 describe('<MessagesIndex>', () => {
   const recipients = ['Søker'];
@@ -60,9 +61,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
@@ -79,9 +79,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
@@ -102,9 +101,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const message = {
@@ -139,9 +137,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const message = {
@@ -175,9 +172,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const message = {
@@ -218,9 +214,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const message = {
@@ -261,9 +256,8 @@ describe('<MessagesIndex>', () => {
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const message = {
@@ -302,12 +296,15 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
     const setBehandlingOnHoldCallback = sinon.spy();
+    behandlingEventHandler.setHandler({
+      settBehandlingPaVent: setBehandlingOnHoldCallback,
+    });
+
     const wrapper = shallow(<MessagesIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      selectedBehandlingId={1}
-      selectedBehandlingVersjon={123}
-      setBehandlingOnHold={setBehandlingOnHoldCallback}
+      behandlingId={1}
+      behandlingVersjon={123}
     />);
 
     const message = {
@@ -345,5 +342,7 @@ describe('<MessagesIndex>', () => {
     expect(push.getCalls()[0].args[0]).to.eql('/');
 
     expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+
+    behandlingEventHandler.clear();
   });
 });

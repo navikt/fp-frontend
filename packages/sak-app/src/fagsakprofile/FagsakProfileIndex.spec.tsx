@@ -98,7 +98,7 @@ describe('<FagsakProfileIndex>', () => {
       alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
       harHentetBehandlinger
       oppfriskBehandlinger={sinon.spy()}
-      selectedBehandlingId={1}
+      behandlingId={1}
     />);
 
     const fagsakProfile = wrapper.find(FagsakProfilSakIndex);

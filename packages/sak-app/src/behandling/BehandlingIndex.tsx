@@ -1,36 +1,29 @@
 import React, {
   Suspense, FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
-import { Location } from 'history';
 import { useLocation } from 'react-router';
 
+import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { featureToggle } from '@fpsak-frontend/konstanter';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import errorHandler from '@fpsak-frontend/error-api-redux';
 import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/utils';
-import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
   KodeverkMedNavn, NavAnsatt, Fagsak,
 } from '@fpsak-frontend/types';
 
+import useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingAppKontekst from './behandlingAppKontekstTsType';
 import getAccessRights from '../app/util/access';
 import {
   getProsessStegLocation, getFaktaLocation, getLocationWithDefaultProsessStegAndFakta,
 } from '../app/paths';
 import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
-import {
-  setUrlBehandlingId, setSelectedBehandlingIdOgVersjon, getUrlBehandlingId,
-  oppdaterBehandlingVersjon as oppdaterVersjon,
-} from './duck';
 import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from './ErrorBoundary';
-import trackRouteParam from '../app/trackRouteParam';
 
 const BehandlingEngangsstonadIndex = React.lazy(() => import('@fpsak-frontend/behandling-es'));
 const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-fp'));
@@ -67,12 +60,10 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history, location) => (prosessSt
 };
 
 interface OwnProps {
-  behandlingId: number;
-  setBehandlingIdOgVersjon: (behandlingVersjon: number) => void;
-  oppdaterBehandlingVersjon: (behandlingVersjon: number) => void;
+  setBehandlingIdOgVersjon: (behandlingId: number, behandlingVersjon: number) => void;
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  visFeilmelding: (data: any) => void;
+  setRequestPendingMessage: (message: string) => void;
 }
 
 /**
@@ -84,24 +75,32 @@ interface OwnProps {
  * Komponenten har ansvar å legge valgt behandlingId fra URL-en i staten.
  */
 const BehandlingIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
   setBehandlingIdOgVersjon,
-  oppdaterBehandlingVersjon,
   fagsak,
   alleBehandlinger,
-  visFeilmelding,
+  setRequestPendingMessage,
 }) => {
+  const { selected: behandlingId } = useTrackRouteParam<number>({
+    paramName: 'behandlingId',
+    parse: (behandlingFromUrl) => Number.parseInt(behandlingFromUrl, 10),
+  });
+
   const behandlingVersjon = alleBehandlinger.some((b) => b.id === behandlingId)
     ? alleBehandlinger.find((b) => b.id === behandlingId).versjon : undefined;
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
   useEffect(() => {
-    requestApi.injectPaths(behandling.links);
-    setBehandlingIdOgVersjon(behandlingVersjon);
+    if (behandling) {
+      requestApi.injectPaths(behandling?.links);
+      setBehandlingIdOgVersjon(behandlingId, behandlingVersjon);
+    }
   }, [behandlingId]);
 
-  const location = useLocation<Location>();
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  const location = useLocation();
+  const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
 
   const fagsakInfo = {
     saksnummer: fagsak.saksnummer,
@@ -134,14 +133,19 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     fagsak: fagsakInfo,
     rettigheter,
     opneSokeside,
+    setRequestPendingMessage,
     valgtProsessSteg: query.punkt,
   };
   const behandlingTypeKode = behandling?.type ? behandling.type.kode : undefined;
 
+  if (!behandlingId) {
+    return <LoadingPanel />;
+  }
+
   if (behandling?.erAktivPapirsoknad) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingPapirsoknadIndex
             {...defaultProps}
           />
@@ -153,7 +157,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandlingTypeKode === BehandlingType.DOKUMENTINNSYN) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingInnsynIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
@@ -177,7 +181,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingKlageIndex
             skalBenytteFritekstBrevmal={featureToggles[featureToggle.BENYTT_FRITEKST_BREVMAL_FOR_KLAGE]}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -192,7 +196,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandlingTypeKode === BehandlingType.ANKE) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingAnkeIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
@@ -206,7 +210,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (erTilbakekreving(behandlingTypeKode)) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingTilbakekrevingIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             harApenRevurdering={fagsakBehandlingerInfo
@@ -222,7 +226,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (fagsak.sakstype.kode === FagsakYtelseType.ENGANGSSTONAD) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingEngangsstonadIndex
             featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -237,7 +241,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (fagsak.sakstype.kode === FagsakYtelseType.FORELDREPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingForeldrepengerIndex
             featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -252,7 +256,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (fagsak.sakstype.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={visFeilmelding}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingSvangerskapspengerIndex
             featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -268,19 +272,4 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   return null;
 };
 
-const mapStateToProps = (state) => ({
-  behandlingId: getUrlBehandlingId(state),
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  oppdaterBehandlingVersjon: oppdaterVersjon,
-  setBehandlingIdOgVersjon: setSelectedBehandlingIdOgVersjon,
-  visFeilmelding: errorHandler.getErrorActionCreator(),
-}, dispatch);
-
-export default trackRouteParam({
-  paramName: 'behandlingId',
-  parse: (behandlingFromUrl) => Number.parseInt(behandlingFromUrl, 10),
-  storeParam: setUrlBehandlingId,
-  getParamFromStore: getUrlBehandlingId,
-})(connect(mapStateToProps, mapDispatchToProps)(requireProps(['behandlingId'])(BehandlingIndex)));
+export default BehandlingIndex;

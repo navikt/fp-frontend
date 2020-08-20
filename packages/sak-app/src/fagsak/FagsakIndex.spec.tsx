@@ -4,13 +4,13 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { featureToggle } from '@fpsak-frontend/konstanter';
-import { DataFetchPendingModal } from '@fpsak-frontend/shared-components';
 
+import * as useLocation from '../app/useLocation';
 import FagsakGrid from './components/FagsakGrid';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
-import { FagsakIndex } from './FagsakIndex';
+import FagsakIndex from './FagsakIndex';
 
 describe('<FagsakIndex>', () => {
   const location = {
@@ -28,8 +28,10 @@ describe('<FagsakIndex>', () => {
     id: 2,
   };
 
+  let contextStubLocation;
   let contextStub;
   beforeEach(() => {
+    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => location);
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: 123456,
       location,
@@ -37,6 +39,7 @@ describe('<FagsakIndex>', () => {
   });
 
   afterEach(() => {
+    contextStubLocation.restore();
     contextStub.restore();
   });
 
@@ -48,9 +51,7 @@ describe('<FagsakIndex>', () => {
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);
 
-    const wrapper = shallow(<FagsakIndex
-      location={location}
-    />);
+    const wrapper = shallow(<FagsakIndex />);
 
     const grid = wrapper.find(FagsakGrid);
     expect(grid).to.have.length(1);
@@ -71,9 +72,7 @@ describe('<FagsakIndex>', () => {
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);
 
-    const wrapper = shallow(<FagsakIndex
-      location={location}
-    />);
+    const wrapper = shallow(<FagsakIndex />);
 
     const grid = wrapper.find(FagsakGrid);
     expect(grid).to.have.length(1);
@@ -82,20 +81,5 @@ describe('<FagsakIndex>', () => {
 
     // @ts-ignore
     expect(fagsakProfileIndex.props.alleBehandlinger).to.eql([behandling, behandling2]);
-  });
-
-  it('skal rendre modal som viser at henting av behandling pågår', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK, {});
-    requestApi.mock(FpsakApiKeys.FETCH_FAGSAK, fagsak);
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
-    requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, []);
-
-    const wrapper = shallow(<FagsakIndex
-      location={location}
-      requestPendingMessage="feilmelding"
-    />);
-
-    expect(wrapper.find(DataFetchPendingModal)).to.have.length(1);
   });
 });

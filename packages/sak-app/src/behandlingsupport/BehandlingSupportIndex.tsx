@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import SupportMenySakIndex, { supportTabs } from '@fpsak-frontend/sak-support-meny';
@@ -8,9 +7,6 @@ import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
-import {
-  getSelectedBehandlingId, getBehandlingVersjon,
-} from '../behandling/duck';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistoryIndex from './history/HistoryIndex';
 import MessagesIndex from './messages/MessagesIndex';
@@ -31,6 +27,8 @@ const renderSupportPanel = (
         <ApprovalIndex
           fagsak={fagsak}
           alleBehandlinger={alleBehandlinger}
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
           totrinnskontrollSkjermlenkeContext={totrinnArsaker}
           totrinnskontrollReadOnlySkjermlenkeContext={totrinnArsakerReadOnly}
         />
@@ -45,9 +43,21 @@ const renderSupportPanel = (
       );
     case supportTabs.MESSAGES:
       return (
-        <MessagesIndex fagsak={fagsak} alleBehandlinger={alleBehandlinger} />);
+        <MessagesIndex
+          fagsak={fagsak}
+          alleBehandlinger={alleBehandlinger}
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
+        />
+      );
     case supportTabs.DOCUMENTS:
-      return (<DocumentIndex saksnummer={fagsak.saksnummer} />);
+      return (
+        <DocumentIndex
+          saksnummer={fagsak.saksnummer}
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
+        />
+      );
     default:
       return null;
   }
@@ -108,7 +118,7 @@ export const getEnabledSupportPanels = (accessibleSupportPanels, sendMessageIsRe
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
+const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   behandlingId,
@@ -180,9 +190,4 @@ export const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  behandlingId: getSelectedBehandlingId(state),
-  behandlingVersjon: getBehandlingVersjon(state),
-});
-
-export default connect(mapStateToProps)(BehandlingSupportIndex);
+export default BehandlingSupportIndex;

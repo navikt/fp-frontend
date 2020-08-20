@@ -10,7 +10,7 @@ import {
   FagsakInfo, Rettigheter, SettPaVentParams, ReduxFormStateCleaner,
 } from '@fpsak-frontend/behandling-felles';
 import { Behandling, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
+import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import FetchedData from './types/fetchedDataTsType';
@@ -40,11 +40,13 @@ interface OwnProps {
     opprettet: string;
     avsluttet?: string;
   }[];
+  setRequestPendingMessage: (message: string) => void;
 }
 
 interface StateProps {
   behandling?: Behandling;
   forrigeBehandling?: Behandling;
+  requestPollingMessage?: string;
 }
 
 interface DispatchProps {
@@ -81,6 +83,9 @@ const BehandlingKlageIndex: FunctionComponent<Props> = ({
   opneSokeside,
   forrigeBehandling,
   alleBehandlinger,
+  skalBenytteFritekstBrevmal,
+  requestPollingMessage,
+  setRequestPendingMessage,
 }) => {
   const forrigeVersjon = useRef<number>();
 
@@ -104,6 +109,10 @@ const BehandlingKlageIndex: FunctionComponent<Props> = ({
       }, 1000);
     };
   }, [behandlingId]);
+
+  useEffect(() => {
+    setRequestPendingMessage(requestPollingMessage);
+  }, [requestPollingMessage]);
 
   if (!behandling) {
     return <LoadingPanel />;
@@ -145,6 +154,7 @@ const BehandlingKlageIndex: FunctionComponent<Props> = ({
 const mapStateToProps = (state) => ({
   behandling: klageApi.BEHANDLING_KLAGE.getRestApiData()(state),
   forrigeBehandling: klageApi.BEHANDLING_KLAGE.getRestApiPreviousData()(state),
+  requestPollingMessage: getRequestPollingMessage(state),
 });
 
 const getResetRestApiContext = () => (dispatch) => {

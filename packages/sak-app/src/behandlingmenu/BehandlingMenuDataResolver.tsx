@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -7,7 +6,6 @@ import { Fagsak } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import { getBehandlingVersjon, getSelectedBehandlingId } from '../behandling/duck';
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { fjernVerge, opprettVerge } from './behandlingMenuOperations';
 import BehandlingMenuIndex from './BehandlingMenuIndex';
@@ -27,32 +25,29 @@ interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   oppfriskBehandlinger: () => void;
-}
-
-interface StateProps {
   behandlingId?: number;
-  behandlingVersion?: number;
+  behandlingVersjon?: number;
 }
 
-const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps> = ({
+const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   oppfriskBehandlinger,
   behandlingId,
-  behandlingVersion,
+  behandlingVersjon,
 }) => {
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const skalHenteVergeMenyvalg = behandling && YTELSE_BEHANDLINGTYPER.includes(behandling.type.kode);
   const { data: vergeMenyvalgData, state: stateVerge } = restApiHooks.useRestApi<{ vergeBehandlingsmeny: string }>(
     FpsakApiKeys.VERGE_MENYVALG, { saksnummer: fagsak.saksnummer, behandlingId }, {
-      updateTriggers: [behandlingId, behandlingVersion],
+      updateTriggers: [behandlingId, behandlingVersjon],
       suspendRequest: !skalHenteVergeMenyvalg,
     },
   );
 
   const { data: menyhandlingRettigheter, state } = restApiHooks.useRestApi<{ harSoknad: boolean }>(
     FpsakApiKeys.MENYHANDLING_RETTIGHETER, NO_PARAMS, {
-      updateTriggers: [behandlingId, behandlingVersion],
+      updateTriggers: [behandlingId, behandlingVersjon],
       suspendRequest: !behandlingId,
       keepData: true,
     },
@@ -67,9 +62,9 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps> = ({
 
   const vergeMenyvalg = vergeMenyvalgData?.vergeBehandlingsmeny;
   const fjernVergeFn = vergeMenyvalg === VERGE_MENYVALG.FJERN
-    ? fjernVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+    ? fjernVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
   const opprettVergeFn = vergeMenyvalg === VERGE_MENYVALG.OPPRETT
-    ? opprettVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+    ? opprettVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
 
   return (
     <BehandlingMenuIndex
@@ -77,7 +72,7 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps> = ({
       alleBehandlinger={alleBehandlinger}
       saksnummer={fagsak.saksnummer}
       behandlingId={behandlingId}
-      behandlingVersion={behandlingVersion}
+      behandlingVersion={behandlingVersjon}
       fjernVerge={fjernVergeFn}
       opprettVerge={opprettVergeFn}
       pushLocation={history.push}
@@ -88,9 +83,4 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps & StateProps> = ({
   );
 };
 
-const mapStateToProps = (state): StateProps => ({
-  behandlingId: getSelectedBehandlingId(state),
-  behandlingVersion: getBehandlingVersjon(state),
-});
-
-export default connect(mapStateToProps)(BehandlingMenuDataResolver);
+export default BehandlingMenuDataResolver;
