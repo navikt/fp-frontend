@@ -29,6 +29,7 @@ interface OwnProps {
   }) => void;
   ventearsaker: KodeverkMedNavn[];
   lukkModal: () => void;
+  erTilbakekreving: boolean;
 }
 
 const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
@@ -37,6 +38,7 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
   settBehandlingPaVent,
   ventearsaker,
   lukkModal,
+  erTilbakekreving,
 }) => {
   const submit = useCallback((formValues) => {
     const values = {
@@ -57,6 +59,7 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
         onSubmit={submit}
         cancelEvent={lukkModal}
         ventearsaker={ventearsaker}
+        erTilbakekreving={erTilbakekreving}
       />
     </RawIntlProvider>
   );

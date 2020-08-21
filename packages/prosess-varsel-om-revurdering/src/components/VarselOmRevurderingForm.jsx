@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
@@ -196,6 +197,7 @@ export class VarselOmRevurderingFormImpl extends React.Component {
           handleSubmit={this.handleSubmitFromModal}
           ventearsaker={ventearsaker}
           visBrevErBestilt
+          erTilbakekreving={behandlingTypeKode === behandlingType.TILBAKEKREVING || behandlingTypeKode === behandlingType.TILBAKEKREVING_REVURDERING}
         />
       </form>
     );

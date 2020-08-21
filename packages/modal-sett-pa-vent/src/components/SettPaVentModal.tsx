@@ -57,13 +57,13 @@ interface OwnProps {
   handleSubmit: () => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
+  erTilbakekreving: boolean;
   frist?: string;
   originalFrist?: string;
   ventearsak?: string;
   originalVentearsak?: string;
   visBrevErBestilt?: boolean;
   hasManualPaVent?: boolean;
-  erTilbakekreving?: boolean;
 }
 
 const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -72,13 +72,13 @@ const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   cancelEvent,
   showModal,
   ventearsaker,
+  erTilbakekreving,
   frist,
   originalFrist,
   ventearsak,
   originalVentearsak,
   visBrevErBestilt = false,
   hasManualPaVent = false,
-  erTilbakekreving = false,
 }) => {
   const venteArsakHasChanged = !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
   const fristHasChanged = !(originalFrist === frist || (!frist && !originalFrist));
@@ -131,7 +131,7 @@ const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                 label={intl.formatMessage({ id: 'SettPaVentModal.Arsak' })}
                 placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
-                selectValues={ventearsaker.filter((va) => manuelleVenteArsaker.indexOf(va.kode) > -1)
+                selectValues={ventearsaker.filter((va) => (erTilbakekreving ? true : manuelleVenteArsaker.includes(va.kode)))
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
                 bredde="xxl"

@@ -182,6 +182,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
       behandlingIdentifier,
       selectedBehandlingVersjon,
       revurderingVarslingArsak,
+      behandlingTypeKode,
     } = this.props;
     const { showMessagesModal, showSettPaVentModal, submitCounter } = this.state;
 
@@ -222,6 +223,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
             onSubmit={this.handleSubmitFromModal}
             ventearsak={venteArsakType.AVV_DOK}
             ventearsaker={ventearsaker}
+            erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
           />
         )}
       </>
