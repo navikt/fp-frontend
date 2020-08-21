@@ -19,7 +19,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
-  return alleKodeverk[kodeverkType];
+  return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 
 /**

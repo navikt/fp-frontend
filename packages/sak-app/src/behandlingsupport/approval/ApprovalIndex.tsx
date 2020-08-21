@@ -181,7 +181,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
         toTrinnsBehandling={behandling ? behandling.toTrinnsBehandling : false}
         skjemalenkeTyper={skjemalenkeTyper}
         isForeldrepengerFagsak={fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER}
-        alleKodeverk={erTilbakekreving ? alleFpSakKodeverk : alleFpTilbakeKodeverk}
+        alleKodeverk={erTilbakekreving ? alleFpTilbakeKodeverk : alleFpSakKodeverk}
         behandlingKlageVurdering={totrinnsKlageVurdering}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         disableGodkjennKnapp={disableGodkjennKnapp}

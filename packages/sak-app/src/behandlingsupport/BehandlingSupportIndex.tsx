@@ -5,6 +5,8 @@ import SupportMenySakIndex, { supportTabs } from '@fpsak-frontend/sak-support-me
 import { NavAnsatt, Fagsak } from '@fpsak-frontend/types';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { getSupportPanelLocationCreator } from '../app/paths';
@@ -138,25 +140,30 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const getSupportPanelLocation = getSupportPanelLocationCreator(location);
 
   const behandlingStatusKode = behandling ? behandling.status.kode : undefined;
-  const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, NO_PARAMS, {
-    updateTriggers: [behandlingId, behandlingStatusKode],
-    suspendRequest: isInnsynBehandling || behandlingStatusKode !== BehandlingStatus.FATTER_VEDTAK,
-  });
+  const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(
+    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, NO_PARAMS, {
+      updateTriggers: [behandlingId, behandlingStatusKode],
+      suspendRequest: !!isInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK),
+    },
+  );
   const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, NO_PARAMS, {
       updateTriggers: [behandlingId, behandlingStatusKode],
-      suspendRequest: isInnsynBehandling || behandlingStatusKode !== BehandlingStatus.BEHANDLING_UTREDES,
+      suspendRequest: !!isInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.BEHANDLING_UTREDES),
     },
   );
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => allSupportPanelAccessRights(navAnsatt, fagsak.status, behandling?.status,
-    behandling?.type, behandling?.ansvarligSaksbehandler), []);
-  const returnedIsRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status), []);
-  const approvalIsRelevant = useMemo(() => !erPaVent && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK, []);
-  const acccessibleSupportPanels = useMemo(() => getAccessibleSupportPanels(returnedIsRelevant, approvalIsRelevant, rettigheter), []);
-  const sendMessageIsRelevant = useMemo(() => (fagsak && !erPaVent), []);
-  const enabledSupportPanels = useMemo(() => getEnabledSupportPanels(acccessibleSupportPanels, sendMessageIsRelevant, rettigheter), []);
+    behandling?.type, behandling?.ansvarligSaksbehandler), [fagsak.status, behandling?.id, behandling?.versjon]);
+  const returnedIsRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status),
+    [behandling?.id, behandling?.versjon, totrinnArsakerReadOnly]);
+  const approvalIsRelevant = useMemo(() => !erPaVent && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK, [behandling?.id, behandling?.versjon]);
+  const acccessibleSupportPanels = useMemo(() => getAccessibleSupportPanels(returnedIsRelevant, approvalIsRelevant, rettigheter),
+    [returnedIsRelevant, approvalIsRelevant, rettigheter]);
+  const sendMessageIsRelevant = useMemo(() => (fagsak && !erPaVent), [fagsak, erPaVent]);
+  const enabledSupportPanels = useMemo(() => getEnabledSupportPanels(acccessibleSupportPanels, sendMessageIsRelevant, rettigheter),
+    [acccessibleSupportPanels, sendMessageIsRelevant, rettigheter]);
   const defaultSupportPanel = enabledSupportPanels.find(() => true) || supportTabs.HISTORY;
   const activeSupportPanel = enabledSupportPanels.includes(selectedSupportPanel) ? selectedSupportPanel : defaultSupportPanel;
 
