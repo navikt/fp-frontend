@@ -5,8 +5,6 @@ import SupportMenySakIndex, { supportTabs } from '@fpsak-frontend/sak-support-me
 import { NavAnsatt, Fagsak } from '@fpsak-frontend/types';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { getSupportPanelLocationCreator } from '../app/paths';
