@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { Behandling, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import BehandlingPickerItemContent from './BehandlingPickerItemContent';
 
@@ -16,7 +17,7 @@ const getContentProps = (behandling, getKodeverkFn) => ({
   behandlendeEnhetNavn: behandling.behandlendeEnhetNavn,
   opprettetDato: behandling.opprettet,
   avsluttetDato: behandling.avsluttet,
-  behandlingsstatus: getKodeverkFn(behandling.status, behandling.type).navn,
+  behandlingsstatus: getKodeverkFn(behandling.status, { kode: behandlingType.FORSTEGANGSSOKNAD }).navn,
   erGjeldendeVedtak: behandling.gjeldendeVedtak,
   behandlingsresultatTypeNavn: behandling.behandlingsresultat ? getKodeverkFn(behandling.behandlingsresultat.type, behandling.type).navn : undefined,
   behandlingsresultatTypeKode: behandling.behandlingsresultat ? behandling.behandlingsresultat.type.kode : undefined,
