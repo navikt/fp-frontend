@@ -178,12 +178,14 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       avsluttet: b.avsluttet,
     }));
 
+  const allFeatureToggles = featureToggles.featureToggles;
+
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingKlageIndex
-            skalBenytteFritekstBrevmal={featureToggles[featureToggle.BENYTT_FRITEKST_BREVMAL_FOR_KLAGE]}
+            skalBenytteFritekstBrevmal={allFeatureToggles[featureToggle.BENYTT_FRITEKST_BREVMAL_FOR_KLAGE]}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
             {...defaultProps}
@@ -228,7 +230,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingEngangsstonadIndex
-            featureToggles={featureToggles}
+            featureToggles={allFeatureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
@@ -243,7 +245,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingForeldrepengerIndex
-            featureToggles={featureToggles}
+            featureToggles={allFeatureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
@@ -258,7 +260,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingSvangerskapspengerIndex
-            featureToggles={featureToggles}
+            featureToggles={allFeatureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}

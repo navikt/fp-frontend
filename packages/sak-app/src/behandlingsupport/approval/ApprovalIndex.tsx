@@ -132,7 +132,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   const featureToggles = restApiHooks.useGlobalStateRestApiData<{[key: string]: boolean}>(FpsakApiKeys.FEATURE_TOGGLE);
-  const disableGodkjennKnapp = erTilbakekreving ? !featureToggles[featureToggle.BESLUTT_TILBAKEKREVING] : false;
+  const disableGodkjennKnapp = erTilbakekreving ? !featureToggles.featureToggles[featureToggle.BESLUTT_TILBAKEKREVING] : false;
 
   const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<TotrinnsKlageVurdering>(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, NO_PARAM, {

@@ -9,7 +9,7 @@ const useGetEnabledApplikasjonContext = (): ApplicationContextPath[] => {
   const featureToggles = restApiHooks.useGlobalStateRestApiData<{[key: string]: boolean}>(FpsakApiKeys.FEATURE_TOGGLE);
   const kodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
-  if (featureToggles[featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING] && !!kodeverkFpTilbake) {
+  if (featureToggles.featureToggles[featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING] && !!kodeverkFpTilbake) {
     enabledApplicationContexts.push(ApplicationContextPath.FPTILBAKE);
   }
 
