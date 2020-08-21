@@ -28,7 +28,7 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   const { state: kodeverkFpSakStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK, NO_PARAMS, {
     suspendRequest: featureToggleState !== RestApiState.SUCCESS, updateTriggers: [!!featureToggles],
   });
-  const skalHenteFpTilbakeKodeverk = featureToggles && featureToggles[featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING];
+  const skalHenteFpTilbakeKodeverk = featureToggles ? featureToggles[featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING] : false;
   const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK_FPTILBAKE, NO_PARAMS, {
     suspendRequest: !skalHenteFpTilbakeKodeverk, updateTriggers: [!!featureToggles],
   });
