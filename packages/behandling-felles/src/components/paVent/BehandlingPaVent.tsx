@@ -2,11 +2,12 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
+import SettPaVentModal from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Behandling, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
-import BehandlingPaVentModal from './BehandlingPaVentModal';
+
 import SettPaVentParams from '../../types/settPaVentParamsTsType';
 
 interface BehandlingPaVentProps {
@@ -45,7 +46,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   }
 
   return (
-    <BehandlingPaVentModal
+    <SettPaVentModal
       onSubmit={oppdaterPaVentData}
       cancelEvent={skjulModal}
       frist={behandling.fristBehandlingPaaVent}

@@ -1,23 +1,23 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
-import { formValueSelector, reduxForm, InjectedFormProps } from 'redux-form';
 import moment from 'moment';
-import Modal from 'nav-frontend-modal';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { formValueSelector, reduxForm } from 'redux-form';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Normaltekst } from 'nav-frontend-typografi';
+import Modal from 'nav-frontend-modal';
 
-import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import {
-  ariaCheck, dateAfterOrEqualToToday, dateBeforeToday, hasValidDate, required,
-} from '@fpsak-frontend/utils';
-import { DatepickerField, SelectField } from '@fpsak-frontend/form';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
-
+import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
+import { DatepickerField, SelectField } from '@fpsak-frontend/form';
+import {
+  ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
+} from '@fpsak-frontend/utils';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
-import styles from './behandlingPaVentModal.less';
+
+import styles from './settPaVentModal.less';
 
 const initFrist = () => {
   const date = moment().toDate();
@@ -26,7 +26,7 @@ const initFrist = () => {
 };
 
 const isButtonDisabled = (frist, showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent) => {
-  const dateNotValid = hasValidDate(frist) !== null || dateAfterOrEqualToToday(frist) !== null;
+  const dateNotValid = !!hasValidDate(frist) || !!dateAfterOrEqualToToday(frist);
   const defaultOptions = (!hasManualPaVent || showAvbryt) && (!venteArsakHasChanged && !fristHasChanged);
   return defaultOptions || dateNotValid;
 };
@@ -34,7 +34,7 @@ const isButtonDisabled = (frist, showAvbryt, venteArsakHasChanged, fristHasChang
 const hovedKnappenType = (venteArsakHasChanged, fristHasChanged) => venteArsakHasChanged || fristHasChanged;
 
 const getPaVentText = (hasManualPaVent, frist) => (hasManualPaVent || frist
-  ? 'SettBehandlingPaVentModal.ErPaVent' : 'SettBehandlingPaVentModal.ErPaVentUtenFrist');
+  ? 'SettPaVentModal.SettesPaVent' : 'SettPaVentModal.ErPaVentUtenFrist');
 
 const manuelleVenteArsaker = [
   venteArsakType.AVV_DOK,
@@ -53,36 +53,36 @@ const manuelleVenteArsaker = [
 ];
 
 interface OwnProps {
-  cancelEvent: () => undefined;
+  cancelEvent: () => void;
+  handleSubmit: () => void;
+  showModal: boolean;
+  ventearsaker: KodeverkMedNavn[];
   frist?: string;
   originalFrist?: string;
   ventearsak?: string;
   originalVentearsak?: string;
-  hasManualPaVent: boolean;
-  ventearsaker: KodeverkMedNavn[];
-  erTilbakekreving: boolean;
+  visBrevErBestilt?: boolean;
+  hasManualPaVent?: boolean;
+  erTilbakekreving?: boolean;
 }
 
-/**
- * BehandlingPaVentModal
- *
- * Presentasjonskomponent. Denne formen gjenbruker settBehandlingPaVentModal. Bruk denne komponenten som en wrapper for
- * settBehandlingPaVentModal hvis du ikke har noen ytre form.
- */
-export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   handleSubmit,
   cancelEvent,
+  showModal,
+  ventearsaker,
   frist,
   originalFrist,
   ventearsak,
   originalVentearsak,
-  hasManualPaVent,
-  ventearsaker,
-  erTilbakekreving,
+  visBrevErBestilt = false,
+  hasManualPaVent = false,
+  erTilbakekreving = false,
 }) => {
   const venteArsakHasChanged = !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
   const fristHasChanged = !(originalFrist === frist || (!frist && !originalFrist));
+
   const showAvbryt = !(originalFrist === frist && !venteArsakHasChanged);
   const erFristenUtløpt = erTilbakekreving && ((frist !== undefined && dateBeforeToday(frist) === null)
     || (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
@@ -92,9 +92,9 @@ export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponen
   return (
     <Modal
       className={styles.modal}
-      isOpen
+      isOpen={showModal}
       closeButton={false}
-      contentLabel={intl.formatMessage({ id: 'SettBehandlingPaVentModal.ModalDescription' })}
+      contentLabel={intl.formatMessage({ id: 'SettPaVentModal.ModalDescription' })}
       onRequestClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
@@ -102,7 +102,7 @@ export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponen
         <form onSubmit={handleSubmit} name="ventModalForm">
           <Row>
             <Column xs="1">
-              <Image className={styles.image} alt={intl.formatMessage({ id: 'SettBehandlingPaVentModal.PaVent' })} src={innvilgetImageUrl} />
+              <Image className={styles.image} alt={intl.formatMessage({ id: 'SettPaVentModal.PaVent' })} src={innvilgetImageUrl} />
               <div className={styles.divider} />
             </Column>
             <Column xs="7">
@@ -117,7 +117,7 @@ export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponen
                 <div className={styles.datePicker}>
                   <DatepickerField
                     name="frist"
-                    validate={[required, hasValidDate]}
+                    validate={[required, hasValidDate, dateAfterOrEqualToToday]}
                   />
                 </div>
               </Column>
@@ -128,17 +128,26 @@ export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponen
             <Column xs="11">
               <SelectField
                 name="ventearsak"
-                label={intl.formatMessage({ id: 'SettBehandlingPaVentModal.Arsak' })}
-                placeholder={intl.formatMessage({ id: 'SettBehandlingPaVentModal.SelectPlaceholder' })}
+                label={intl.formatMessage({ id: 'SettPaVentModal.Arsak' })}
+                placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
                 selectValues={ventearsaker.filter((va) => manuelleVenteArsaker.indexOf(va.kode) > -1)
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
                 bredde="xxl"
-                readOnly={!hasManualPaVent}
               />
             </Column>
           </Row>
+          {visBrevErBestilt && (
+            <Row>
+              <Column xs="1" />
+              <Column xs="11">
+                <Normaltekst>
+                  <FormattedMessage id="SettPaVentModal.BrevBlirBestilt" />
+                </Normaltekst>
+              </Column>
+            </Row>
+          )}
           <Row>
             <Column xs="1" />
             <Column xs="11">
@@ -165,16 +174,16 @@ export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponen
                 onClick={showAvbryt ? ariaCheck : cancelEvent}
                 disabled={isButtonDisabled(frist, showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent)}
               >
-                {intl.formatMessage({ id: 'SettBehandlingPaVentModal.Ok' })}
+                <FormattedMessage id="SettPaVentModal.Ok" />
               </Hovedknapp>
-              {(!hasManualPaVent || showAvbryt) && (
+              {(!hasManualPaVent || showAvbryt || !visBrevErBestilt) && (
                 <Knapp
                   htmlType="button"
                   mini
                   onClick={cancelEvent}
                   className={styles.cancelButton}
                 >
-                  {intl.formatMessage({ id: hasManualPaVent ? 'SettBehandlingPaVentModal.Avbryt' : 'SettBehandlingPaVentModal.Lukk' })}
+                  <FormattedMessage id={hasManualPaVent ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'} />
                 </Knapp>
               )}
             </Column>
@@ -187,18 +196,18 @@ export const BehandlingPaVentModal: FunctionComponent<OwnProps & WrappedComponen
 
 const buildInitialValues = (initialProps) => ({
   ventearsak: initialProps.ventearsak,
-  frist: initialProps.frist || !initialProps.hasManualPaVent ? initialProps.frist : initFrist(),
+  frist: initialProps.frist || initialProps.hasManualPaVent === false ? initialProps.frist : initFrist(),
 });
 
-const mapStateToProps = (state, initialProps) => ({
-  frist: formValueSelector('settBehandlingModalForm')(state, 'frist'),
-  originalFrist: initialProps.frist,
-  originalVentearsak: initialProps.ventearsak,
+const mapStateToProps = (state, initialOwnProps) => ({
+  initialValues: buildInitialValues(initialOwnProps),
+  frist: formValueSelector('settPaVentModalForm')(state, 'frist'),
   ventearsak: formValueSelector('settBehandlingModalForm')(state, 'ventearsak'),
-  initialValues: buildInitialValues(initialProps),
+  originalFrist: initialOwnProps.frist,
+  originalVentearsak: initialOwnProps.ventearsak,
 });
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'settBehandlingModalForm',
+  form: 'settPaVentModalForm',
   enableReinitialize: true,
-})(injectIntl(BehandlingPaVentModal)));
+})(injectIntl(SettPaVentModal)));

@@ -10,9 +10,9 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
-
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
+import SettPaVentModal from '@fpsak-frontend/modal-sett-pa-vent';
+
 import { getFagsakYtelseType } from '../../fagsak/fagsakSelectors';
 import { getBehandlingerUuidsMappedById, getBehandlingerTypesMappedById } from '../../behandling/selectors/behandlingerSelectors';
 import { getKodeverk } from '../../kodeverk/duck';
@@ -216,7 +216,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
         />
 
         {submitFinished && showSettPaVentModal && (
-          <MessageBehandlingPaVentModal
+          <SettPaVentModal
             showModal={submitFinished && showSettPaVentModal}
             cancelEvent={this.hideSettPaVentModal}
             onSubmit={this.handleSubmitFromModal}

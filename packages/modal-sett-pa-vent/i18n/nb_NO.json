@@ -1,5 +1,14 @@
 {
-  "MenySettPaVentIndex.BehandlingOnHold": "Sett behandlingen på vent",
+  "SettPaVentModal.ModalDescription": "Behandlingen settes på vent med frist",
+  "SettPaVentModal.PaVent": "På vent",
+  "SettPaVentModal.SettesPaVent": "Behandlingen settes på vent med frist",
+  "SettPaVentModal.ErPaVentUtenFrist": "Behandlingen er satt på vent",
+  "SettPaVentModal.Ok": "OK",
+  "SettPaVentModal.SelectPlaceholder": "Velg årsak",
+  "SettPaVentModal.Avbryt": "Avbryt",
+  "SettPaVentModal.Lukk": "Lukk",
+  "SettPaVentModal.BrevBlirBestilt": "Brevet blir bestilt",
+  "SettPaVentModal.Arsak": "Årsak",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

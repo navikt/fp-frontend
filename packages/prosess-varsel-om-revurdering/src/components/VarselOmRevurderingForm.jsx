@@ -21,10 +21,10 @@ import {
   hasValidText, ISO_DATE_FORMAT, minLength, required, getLanguageCodeFromSprakkode,
 } from '@fpsak-frontend/utils';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
+import SettPaVentModal from '@fpsak-frontend/modal-sett-pa-vent';
 
 import revurderingFamilieHendelsePropType from '../propTypes/revurderingFamilieHendelsePropType';
 import revurderingSoknadPropType from '../propTypes/revurderingSoknadPropType';
-import VarselOmRevurderingPaVentModal from './VarselOmRevurderingPaVentModal';
 
 import styles from './varselOmRevurderingForm.less';
 
@@ -99,7 +99,6 @@ export class VarselOmRevurderingFormImpl extends React.Component {
       languageCode,
       readOnly,
       sendVarsel,
-      frist,
       aksjonspunktStatus,
       begrunnelse,
       ventearsaker,
@@ -190,12 +189,13 @@ export class VarselOmRevurderingFormImpl extends React.Component {
             <Normaltekst>{begrunnelse}</Normaltekst>
           </div>
         )}
-        <VarselOmRevurderingPaVentModal
+        <SettPaVentModal
           showModal={showSettPaVentModal}
-          frist={frist}
+          frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
           cancelEvent={this.hideSettPaVentModal}
           handleSubmit={this.handleSubmitFromModal}
           ventearsaker={ventearsaker}
+          visBrevErBestilt
         />
       </form>
     );
@@ -214,7 +214,6 @@ VarselOmRevurderingFormImpl.propTypes = {
   sendVarsel: PropTypes.bool,
   fritekst: PropTypes.string,
   begrunnelse: PropTypes.string,
-  frist: PropTypes.string,
   ventearsaker: PropTypes.arrayOf(PropTypes.shape({
     kode: PropTypes.string,
     navn: PropTypes.string,
@@ -231,7 +230,6 @@ VarselOmRevurderingFormImpl.propTypes = {
 VarselOmRevurderingFormImpl.defaultProps = {
   sendVarsel: false,
   fritekst: null,
-  frist: moment().add(28, 'days').format(ISO_DATE_FORMAT),
   begrunnelse: null,
   languageCode: null,
   erAutomatiskRevurdering: false,
@@ -242,8 +240,6 @@ VarselOmRevurderingFormImpl.defaultProps = {
 
 export const buildInitialValues = createSelector([(state, ownProps) => ownProps.aksjonspunkter], (aksjonspunkter) => ({
   kode: aksjonspunkter[0].definisjon.kode,
-  frist: moment().add(28, 'days').format(ISO_DATE_FORMAT),
-  ventearsak: null,
 }));
 
 const formName = 'VarselOmRevurderingForm';
@@ -264,7 +260,7 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
     initialValues: buildInitialValues(state, ownProps),
     aksjonspunktStatus: aksjonspunkt.status.kode,
     begrunnelse: aksjonspunkt.begrunnelse,
-    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'frist', 'ventearsak'),
+    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst'),
     avklartBarn: nullSafe(familiehendelse.register).avklartBarn,
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
