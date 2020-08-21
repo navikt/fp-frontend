@@ -23,12 +23,12 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER);
   const { state: visDetaljerteFeilmeldingerState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES);
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
-  const { data: featureToggles, state: featureToggleState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams);
+  const { data: featureToggles, state: featureToggleState } = restApiHooks.useGlobalStateRestApi<{ featureToggles: any }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams);
 
   const { state: kodeverkFpSakStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK, NO_PARAMS, {
     suspendRequest: featureToggleState !== RestApiState.SUCCESS, updateTriggers: [!!featureToggles],
   });
-  const skalHenteFpTilbakeKodeverk = featureToggles ? featureToggles[featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING] : false;
+  const skalHenteFpTilbakeKodeverk = featureToggles ? featureToggles.featureToggles[featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING] : false;
   const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK_FPTILBAKE, NO_PARAMS, {
     suspendRequest: !skalHenteFpTilbakeKodeverk, updateTriggers: [!!featureToggles],
   });
