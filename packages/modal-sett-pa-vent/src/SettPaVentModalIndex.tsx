@@ -15,7 +15,7 @@ const intl = createIntl({
 
 interface OwnProps {
   cancelEvent: () => void;
-  handleSubmit: (formData: any) => Promise<any>;
+  handleSubmit: (formData: any) => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   frist?: string;

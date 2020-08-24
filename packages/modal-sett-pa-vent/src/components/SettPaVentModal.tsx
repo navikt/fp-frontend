@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { formValueSelector, reduxForm } from 'redux-form';
+import { formValueSelector, reduxForm, InjectedFormProps } from 'redux-form';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -62,15 +62,19 @@ interface OwnProps {
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   erTilbakekreving: boolean;
-  frist?: string;
-  originalFrist?: string;
-  ventearsak?: string;
-  originalVentearsak?: string;
   visBrevErBestilt?: boolean;
   hasManualPaVent?: boolean;
 }
 
-const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+interface StateProps {
+  ventearsak?: string;
+  frist?: string;
+  originalFrist?: string;
+  originalVentearsak?: string;
+  initialValues: InjectedFormProps['initialValues'],
+}
+
+export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   handleSubmit,
   cancelEvent,
@@ -139,6 +143,7 @@ const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
                 bredde="xxl"
+                readOnly={!hasManualPaVent}
               />
             </Column>
           </Row>
@@ -203,7 +208,7 @@ const buildInitialValues = (initialProps) => ({
   frist: initialProps.frist || initialProps.hasManualPaVent === false ? initialProps.frist : initFrist(),
 });
 
-const mapStateToProps = (state, initialOwnProps) => ({
+const mapStateToProps = (state, initialOwnProps): StateProps => ({
   initialValues: buildInitialValues(initialOwnProps),
   frist: formValueSelector('settPaVentModalForm')(state, 'frist'),
   ventearsak: formValueSelector('settBehandlingModalForm')(state, 'ventearsak'),

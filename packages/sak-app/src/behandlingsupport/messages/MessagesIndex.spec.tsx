@@ -7,8 +7,8 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import Messages, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import { DataFetcher } from '@fpsak-frontend/rest-api-redux';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
-import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
 import BehandlingIdentifier from '../../behandling/BehandlingIdentifier';
 import { MessagesIndex } from './MessagesIndex';
 
@@ -408,7 +408,7 @@ describe('<MessagesIndex>', () => {
       frist: '2017-10-10',
       ventearsak: 'TEST',
     };
-    wrapper.find(MessageBehandlingPaVentModal).prop('onSubmit')(formValues);
+    wrapper.find(SettPaVentModalIndex).prop('handleSubmit')(formValues);
 
     expect(setBehandlingOnHoldCallback).to.have.property('callCount', 1);
     const { args } = setBehandlingOnHoldCallback.getCalls()[0];

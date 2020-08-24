@@ -40,7 +40,7 @@ interface OwnProps {
   selectedBehandlingVersjon?: number;
   selectedBehandlingSprak?: Kodeverk;
   recipients?: string[];
-  ventearsaker?: Kodeverk[];
+  ventearsaker?: KodeverkMedNavn[];
   behandlingTypeKode: string;
   revurderingVarslingArsak: KodeverkMedNavn[];
 }
@@ -220,7 +220,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
           <SettPaVentModalIndex
             showModal={submitFinished && showSettPaVentModal}
             cancelEvent={this.hideSettPaVentModal}
-            onSubmit={this.handleSubmitFromModal}
+            handleSubmit={this.handleSubmitFromModal}
             ventearsak={venteArsakType.AVV_DOK}
             ventearsaker={ventearsaker}
             erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
