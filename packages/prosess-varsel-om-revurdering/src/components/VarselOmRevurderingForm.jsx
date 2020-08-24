@@ -80,9 +80,17 @@ export class VarselOmRevurderingFormImpl extends React.Component {
     }
   }
 
-  handleSubmitFromModal() {
-    const { valid, handleSubmit } = this.props;
-    handleSubmit();
+  handleSubmitFromModal(values) {
+    const {
+      valid, submitCallback, begrunnelse, kode, fritekst, sendVarsel,
+    } = this.props;
+    submitCallback([{
+      kode,
+      begrunnelse,
+      fritekst,
+      sendVarsel,
+      ...values,
+    }]);
     if (valid) {
       this.hideSettPaVentModal();
     }
@@ -243,6 +251,7 @@ VarselOmRevurderingFormImpl.defaultProps = {
 
 export const buildInitialValues = createSelector([(state, ownProps) => ownProps.aksjonspunkter], (aksjonspunkter) => ({
   kode: aksjonspunkter[0].definisjon.kode,
+  begrunnelse: aksjonspunkter[0].begrunnelse,
 }));
 
 const formName = 'VarselOmRevurderingForm';
@@ -262,8 +271,7 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
   return (state) => ({
     initialValues: buildInitialValues(state, ownProps),
     aksjonspunktStatus: aksjonspunkt.status.kode,
-    begrunnelse: aksjonspunkt.begrunnelse,
-    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst'),
+    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'begrunnelse', 'kode'),
     avklartBarn: nullSafe(familiehendelse.register).avklartBarn,
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
