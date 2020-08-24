@@ -211,7 +211,7 @@ const buildInitialValues = (initialProps) => ({
 const mapStateToProps = (state, initialOwnProps): StateProps => ({
   initialValues: buildInitialValues(initialOwnProps),
   frist: formValueSelector('settPaVentModalForm')(state, 'frist'),
-  ventearsak: formValueSelector('settBehandlingModalForm')(state, 'ventearsak'),
+  ventearsak: formValueSelector('settPaVentModalForm')(state, 'ventearsak'),
   originalFrist: initialOwnProps.frist,
   originalVentearsak: initialOwnProps.ventearsak,
 });
