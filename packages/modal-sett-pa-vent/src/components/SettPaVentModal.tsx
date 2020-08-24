@@ -62,7 +62,7 @@ const automatiskeVentearsakerForTilbakekreving = [
 ];
 
 const filtrerVentearsakerForTilbakekreving = (ventearsaker, hasManualPaVent) => (hasManualPaVent ? ventearsaker
-  .filter((va) => !automatiskeVentearsakerForTilbakekreving.includes(va)) : ventearsaker);
+  .filter((va) => !automatiskeVentearsakerForTilbakekreving.includes(va.kode)) : ventearsaker);
 
 interface OwnProps {
   cancelEvent: () => void;
