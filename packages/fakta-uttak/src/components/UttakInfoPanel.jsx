@@ -77,7 +77,7 @@ const UttakInfoPanel = ({
       && (
       <UttakFaktaForm
         hasOpenAksjonspunkter={uttakApOpen}
-        readOnly={overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)}
+        readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}
         aksjonspunkter={uttakAp}
         submitCallback={submitCallback}
         behandlingId={behandlingId}
@@ -86,7 +86,7 @@ const UttakInfoPanel = ({
         ytelsefordeling={ytelsefordeling}
         uttakPerioder={sortedUttakPerioder}
         alleKodeverk={alleKodeverk}
-        kanOverstyre={kanOverstyre}
+        kanOverstyre={kanOverstyre && ytelsefordeling.endringsdato !== null}
         faktaArbeidsforhold={faktaArbeidsforhold}
         personopplysninger={personopplysninger}
         familiehendelse={familiehendelse}
