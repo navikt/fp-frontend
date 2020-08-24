@@ -341,7 +341,7 @@ export const BeregningFormImpl = ({
               aktivitetStatusList={aktivitetStatusList}
               grunnbelop={beregningsgrunnlag.grunnbeløp}
               halvGVerdi={beregningsgrunnlag.halvG}
-              harAksjonspunkter={harAksjonspunkter}
+              ytelseGrunnlag={beregningsgrunnlag.ytelsesspesifiktGrunnlag}
             />
           </>
 
