@@ -33,8 +33,12 @@ const isButtonDisabled = (frist, showAvbryt, venteArsakHasChanged, fristHasChang
 
 const hovedKnappenType = (venteArsakHasChanged, fristHasChanged) => venteArsakHasChanged || fristHasChanged;
 
-const getPaVentText = (hasManualPaVent, frist) => (hasManualPaVent || frist
-  ? 'SettPaVentModal.SettesPaVent' : 'SettPaVentModal.ErPaVentUtenFrist');
+const getPaVentText = (originalVentearsak, hasManualPaVent, frist) => {
+  if (originalVentearsak) {
+    return (hasManualPaVent || frist ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.ErPaVentUtenFrist');
+  }
+  return hasManualPaVent || frist ? 'SettPaVentModal.SettesPaVent' : 'SettPaVentModal.SettesPaVentUtenFrist';
+};
 
 const manuelleVenteArsaker = [
   venteArsakType.AVV_DOK,
@@ -94,7 +98,7 @@ const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       className={styles.modal}
       isOpen={showModal}
       closeButton={false}
-      contentLabel={intl.formatMessage({ id: 'SettPaVentModal.ModalDescription' })}
+      contentLabel={intl.formatMessage({ id: originalVentearsak ? 'SettPaVentModal.ModalDescriptionErPaVent' : 'SettPaVentModal.ModalDescription' })}
       onRequestClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
@@ -108,7 +112,7 @@ const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             <Column xs="7">
               <div className={styles.label}>
                 <Normaltekst className={styles.label}>
-                  <FormattedMessage id={getPaVentText(hasManualPaVent, frist)} />
+                  <FormattedMessage id={getPaVentText(originalVentearsak, hasManualPaVent, frist)} />
                 </Normaltekst>
               </div>
             </Column>
@@ -152,7 +156,7 @@ const SettPaVentModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             <Column xs="1" />
             <Column xs="11">
               {hasManualPaVent && (
-                <Normaltekst>{intl.formatMessage({ id: 'BehandlingErPaVentModal.EndreFrist' })}</Normaltekst>
+                <Normaltekst>{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</Normaltekst>
               )}
               {!hasManualPaVent && showFristenTekst && (
                 <Normaltekst>

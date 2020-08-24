@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
@@ -22,7 +22,7 @@ import {
   hasValidText, ISO_DATE_FORMAT, minLength, required, getLanguageCodeFromSprakkode,
 } from '@fpsak-frontend/utils';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import SettPaVentModal from '@fpsak-frontend/modal-sett-pa-vent';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import revurderingFamilieHendelsePropType from '../propTypes/revurderingFamilieHendelsePropType';
 import revurderingSoknadPropType from '../propTypes/revurderingSoknadPropType';
@@ -190,14 +190,14 @@ export class VarselOmRevurderingFormImpl extends React.Component {
             <Normaltekst>{begrunnelse}</Normaltekst>
           </div>
         )}
-        <SettPaVentModal
+        <SettPaVentModalIndex
           showModal={showSettPaVentModal}
           frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
           cancelEvent={this.hideSettPaVentModal}
           handleSubmit={this.handleSubmitFromModal}
           ventearsaker={ventearsaker}
           visBrevErBestilt
-          erTilbakekreving={behandlingTypeKode === behandlingType.TILBAKEKREVING || behandlingTypeKode === behandlingType.TILBAKEKREVING_REVURDERING}
+          erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       </form>
     );

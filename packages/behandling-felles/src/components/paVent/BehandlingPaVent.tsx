@@ -2,7 +2,7 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
-import SettPaVentModal from '@fpsak-frontend/modal-sett-pa-vent';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -46,14 +46,15 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   }
 
   return (
-    <SettPaVentModal
-      onSubmit={oppdaterPaVentData}
+    <SettPaVentModalIndex
+      handleSubmit={oppdaterPaVentData}
       cancelEvent={skjulModal}
       frist={behandling.fristBehandlingPaaVent}
       ventearsak={behandling.venteArsakKode}
       hasManualPaVent={erManueltSattPaVent}
       ventearsaker={kodeverk[kodeverkTyper.VENT_AARSAK]}
       erTilbakekreving={erTilbakekreving}
+      showModal
     />
   );
 };

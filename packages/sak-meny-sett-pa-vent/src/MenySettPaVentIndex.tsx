@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
-import SettPaVentModal from '@fpsak-frontend/modal-sett-pa-vent';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -54,9 +54,9 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <SettPaVentModal
+      <SettPaVentModalIndex
         showModal
-        onSubmit={submit}
+        handleSubmit={submit}
         cancelEvent={lukkModal}
         ventearsaker={ventearsaker}
         erTilbakekreving={erTilbakekreving}
