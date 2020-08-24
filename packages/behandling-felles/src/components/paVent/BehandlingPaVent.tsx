@@ -47,7 +47,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
 
   return (
     <SettPaVentModalIndex
-      handleSubmit={oppdaterPaVentData}
+      submitCallback={oppdaterPaVentData}
       cancelEvent={skjulModal}
       frist={behandling.fristBehandlingPaaVent}
       ventearsak={behandling.venteArsakKode}

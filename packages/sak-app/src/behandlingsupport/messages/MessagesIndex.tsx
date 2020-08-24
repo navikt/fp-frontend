@@ -220,7 +220,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
           <SettPaVentModalIndex
             showModal={submitFinished && showSettPaVentModal}
             cancelEvent={this.hideSettPaVentModal}
-            handleSubmit={this.handleSubmitFromModal}
+            submitCallback={this.handleSubmitFromModal}
             ventearsak={venteArsakType.AVV_DOK}
             ventearsaker={ventearsaker}
             hasManualPaVent={false}

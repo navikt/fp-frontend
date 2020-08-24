@@ -61,8 +61,7 @@ const automatiskeVentearsakerForTilbakekreving = [
   venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
-const filtrerVentearsakerForTilbakekreving = (ventearsaker, hasManualPaVent) => (hasManualPaVent ? ventearsaker
-  .filter((va) => !automatiskeVentearsakerForTilbakekreving.includes(va.kode)) : ventearsaker);
+const inkluderVentearsak = (ventearsak, hasManualPaVent) => (hasManualPaVent ? !automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode) : true);
 
 interface OwnProps {
   cancelEvent: () => void;
@@ -147,8 +146,8 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
                 label={intl.formatMessage({ id: 'SettPaVentModal.Arsak' })}
                 placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
-                selectValues={ventearsaker.filter((va) => (erTilbakekreving
-                  ? filtrerVentearsakerForTilbakekreving(ventearsaker, hasManualPaVent) : manuelleVenteArsaker.includes(va.kode)))
+                selectValues={ventearsaker.filter((va) => (!erTilbakekreving
+                  ? inkluderVentearsak(va, hasManualPaVent) : manuelleVenteArsaker.includes(va.kode)))
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
                 bredde="xxl"

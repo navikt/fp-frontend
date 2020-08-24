@@ -24,7 +24,7 @@ describe('<MenySettPaVentIndex>', () => {
     const modal = wrapper.find(SettPaVentModalIndex);
     expect(modal).to.have.length(1);
 
-    modal.prop('handleSubmit')({
+    modal.prop('submitCallback')({
       frist: '20-12-2020',
       ventearsak: 'test',
     });

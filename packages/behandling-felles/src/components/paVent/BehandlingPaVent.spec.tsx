@@ -126,7 +126,7 @@ describe('<BehandlingPaVent>', () => {
 
     const modal = wrapper.find(SettPaVentModalIndex);
 
-    await modal.prop('handleSubmit')({ dato: '10.10.2019' });
+    await modal.prop('submitCallback')({ dato: '10.10.2019' });
 
     const calls = settPaVentCallback.getCalls();
     expect(calls).to.have.length(1);

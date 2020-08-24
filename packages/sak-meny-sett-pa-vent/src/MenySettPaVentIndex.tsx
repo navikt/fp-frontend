@@ -56,7 +56,7 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
     <RawIntlProvider value={intl}>
       <SettPaVentModalIndex
         showModal
-        handleSubmit={submit}
+        submitCallback={submit}
         cancelEvent={lukkModal}
         ventearsaker={ventearsaker}
         erTilbakekreving={erTilbakekreving}

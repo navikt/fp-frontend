@@ -194,7 +194,7 @@ export class VarselOmRevurderingFormImpl extends React.Component {
           showModal={showSettPaVentModal}
           frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
           cancelEvent={this.hideSettPaVentModal}
-          handleSubmit={this.handleSubmitFromModal}
+          submitCallback={this.handleSubmitFromModal}
           ventearsaker={ventearsaker}
           visBrevErBestilt
           hasManualPaVent
@@ -253,10 +253,7 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
   const {
     behandlingId, behandlingVersjon, behandlingType, behandlingArsaker, aksjonspunkter, submitCallback, sprakkode, familiehendelse,
   } = ownProps;
-  const onSubmit = (values) => {
-    const test = submitCallback([values]);
-    return test;
-  };
+  const onSubmit = (values) => submitCallback([values]);
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
   const aksjonspunkt = aksjonspunkter[0];
   const ventearsaker = ownProps.alleKodeverk[kodeverkTyper.VENT_AARSAK];

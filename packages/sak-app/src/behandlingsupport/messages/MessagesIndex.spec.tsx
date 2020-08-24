@@ -408,7 +408,7 @@ describe('<MessagesIndex>', () => {
       frist: '2017-10-10',
       ventearsak: 'TEST',
     };
-    wrapper.find(SettPaVentModalIndex).prop('handleSubmit')(formValues);
+    wrapper.find(SettPaVentModalIndex).prop('submitCallback')(formValues);
 
     expect(setBehandlingOnHoldCallback).to.have.property('callCount', 1);
     const { args } = setBehandlingOnHoldCallback.getCalls()[0];

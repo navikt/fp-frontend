@@ -15,7 +15,7 @@ const intl = createIntl({
 
 interface OwnProps {
   cancelEvent: () => void;
-  handleSubmit: (formData: any) => void;
+  submitCallback: (formData: any) => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   frist?: string;
@@ -29,7 +29,7 @@ interface OwnProps {
 
 const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
   cancelEvent,
-  handleSubmit,
+  submitCallback,
   showModal,
   ventearsaker,
   frist,
@@ -43,7 +43,7 @@ const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
   <RawIntlProvider value={intl}>
     <SettPaVentModal
       cancelEvent={cancelEvent}
-      onSubmit={handleSubmit}
+      onSubmit={submitCallback}
       showModal={showModal}
       ventearsaker={ventearsaker}
       frist={frist}
