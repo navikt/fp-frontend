@@ -63,7 +63,7 @@ interface OwnProps {
   ventearsaker: KodeverkMedNavn[];
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
-  hasManualPaVent?: boolean;
+  hasManualPaVent: boolean;
 }
 
 interface StateProps {
@@ -86,7 +86,7 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
   ventearsak,
   originalVentearsak,
   visBrevErBestilt = false,
-  hasManualPaVent = false,
+  hasManualPaVent,
 }) => {
   const venteArsakHasChanged = !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
   const fristHasChanged = !(originalFrist === frist || (!frist && !originalFrist));
@@ -165,9 +165,9 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
               )}
               {!hasManualPaVent && showFristenTekst && (
                 <Normaltekst>
-                  <FormattedMessage id="BehandlingErPaVentModal.UtløptFrist" />
+                  <FormattedMessage id="SettPaVentModal.UtløptFrist" />
                   <VerticalSpacer eightPx />
-                  <FormattedMessage id="BehandlingErPaVentModal.HenleggeSaken" />
+                  <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
                 </Normaltekst>
               )}
             </Column>

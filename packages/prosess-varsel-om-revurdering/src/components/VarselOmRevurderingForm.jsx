@@ -197,6 +197,7 @@ export class VarselOmRevurderingFormImpl extends React.Component {
           handleSubmit={this.handleSubmitFromModal}
           ventearsaker={ventearsaker}
           visBrevErBestilt
+          hasManualPaVent
           erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       </form>

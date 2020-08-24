@@ -60,6 +60,7 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
         cancelEvent={lukkModal}
         ventearsaker={ventearsaker}
         erTilbakekreving={erTilbakekreving}
+        hasManualPaVent
       />
     </RawIntlProvider>
   );

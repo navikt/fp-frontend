@@ -13,6 +13,9 @@
   "SettPaVentModal.BrevBlirBestilt": "Brevet blir bestilt",
   "SettPaVentModal.Arsak": "Årsak",
   "SettPaVentModal.EndreFrist": "Du kan endre frist eller årsak før du fortsetter",
+  "SettPaVentModal.UtløptFrist": "OBS! Fristen på denne behandlingen er utløpt!",
+  "SettPaVentModal.HenleggeSaken": "Kontroller hvorfor Økonomi ikke har dannet et kravgrunnlag.\n Dersom det feilutbetalte beløpet er bortfalt skal saken henlegges.\nFor mer informasjon, se rutine under tilbakekreving.",
+  
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

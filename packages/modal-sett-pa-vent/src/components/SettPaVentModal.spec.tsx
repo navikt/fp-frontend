@@ -187,8 +187,8 @@ describe('<SettPaVentModal>', () => {
     expect(wrapper.find(SelectField).prop('readOnly')).is.true;
     const label = wrapper.find(Normaltekst);
     expect(label).to.have.length(2);
-    expect(label.first().childAt(0).prop('id')).is.eql('SettBehandlingPaVentModal.ErPaVent');
-    expect(label.at(1).childAt(0).prop('id')).is.eql('BehandlingErPaVentModal.UtløptFrist');
-    expect(label.at(1).childAt(2).prop('id')).is.eql('BehandlingErPaVentModal.HenleggeSaken');
+    expect(label.first().childAt(0).prop('id')).is.eql('SettPaVentModal.SettesPaVent');
+    expect(label.at(1).childAt(0).prop('id')).is.eql('SettPaVentModal.UtløptFrist');
+    expect(label.at(1).childAt(2).prop('id')).is.eql('SettPaVentModal.HenleggeSaken');
   });
 });

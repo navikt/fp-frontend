@@ -23,7 +23,7 @@ interface OwnProps {
   ventearsak?: string;
   originalVentearsak?: string;
   visBrevErBestilt?: boolean;
-  hasManualPaVent?: boolean;
+  hasManualPaVent: boolean;
   erTilbakekreving?: boolean;
 }
 
