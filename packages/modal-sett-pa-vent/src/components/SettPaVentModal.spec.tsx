@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -150,22 +150,6 @@ describe('<SettPaVentModal>', () => {
     />);
 
     expect(wrapper.find(SelectField).prop('readOnly')).is.true;
-  });
-
-  it('skal alltid vise lukk-knapp når behandling automatisk er satt på vent', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      cancelEvent={sinon.spy()}
-      frist="2015-10-10"
-      ventearsaker={[]}
-      hasManualPaVent={false}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />);
-
-    const button = wrapper.find(Knapp);
-    expect(button).to.have.length(1);
-    expect(button.childAt(0).text()).to.eql('Lukk');
   });
 
   it('skal vise fristen tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', () => {

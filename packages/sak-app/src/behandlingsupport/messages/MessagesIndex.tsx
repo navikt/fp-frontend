@@ -223,6 +223,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
             handleSubmit={this.handleSubmitFromModal}
             ventearsak={venteArsakType.AVV_DOK}
             ventearsaker={ventearsaker}
+            hasManualPaVent={false}
             erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
           />
         )}
