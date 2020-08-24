@@ -146,7 +146,7 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
                 label={intl.formatMessage({ id: 'SettPaVentModal.Arsak' })}
                 placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
-                selectValues={ventearsaker.filter((va) => (!erTilbakekreving
+                selectValues={ventearsaker.filter((va) => (erTilbakekreving
                   ? inkluderVentearsak(va, hasManualPaVent) : manuelleVenteArsaker.includes(va.kode)))
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
