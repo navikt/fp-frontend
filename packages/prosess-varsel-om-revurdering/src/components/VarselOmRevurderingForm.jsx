@@ -253,7 +253,10 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
   const {
     behandlingId, behandlingVersjon, behandlingType, behandlingArsaker, aksjonspunkter, submitCallback, sprakkode, familiehendelse,
   } = ownProps;
-  const onSubmit = (values) => submitCallback([values]);
+  const onSubmit = (values) => {
+    const test = submitCallback([values]);
+    return test;
+  };
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
   const aksjonspunkt = aksjonspunkter[0];
   const ventearsaker = ownProps.alleKodeverk[kodeverkTyper.VENT_AARSAK];
