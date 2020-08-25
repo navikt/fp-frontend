@@ -61,7 +61,6 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
         ventearsaker={ventearsaker}
         erTilbakekreving={erTilbakekreving}
         hasManualPaVent
-        visAlleVentearsaker={false}
       />
     </RawIntlProvider>
   );
