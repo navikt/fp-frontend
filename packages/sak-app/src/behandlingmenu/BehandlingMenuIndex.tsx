@@ -248,7 +248,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(!!opprettVerge || !!fjernVerge, getVergeMenytekst(!!opprettVerge))
+        new MenyData(!erPaVent && (!!opprettVerge || !!fjernVerge), getVergeMenytekst(!!opprettVerge))
           .medModal((lukkModal) => (
             <MenyVergeIndex
               fjernVerge={fjernVerge}
