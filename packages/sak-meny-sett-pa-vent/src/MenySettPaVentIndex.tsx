@@ -2,8 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
-
-import SettBehandlingPaVentModal from './components/SettBehandlingPaVentModal';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -30,6 +29,7 @@ interface OwnProps {
   }) => void;
   ventearsaker: KodeverkMedNavn[];
   lukkModal: () => void;
+  erTilbakekreving: boolean;
 }
 
 const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
@@ -38,6 +38,7 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
   settBehandlingPaVent,
   ventearsaker,
   lukkModal,
+  erTilbakekreving,
 }) => {
   const submit = useCallback((formValues) => {
     const values = {
@@ -53,11 +54,13 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <SettBehandlingPaVentModal
+      <SettPaVentModalIndex
         showModal
-        onSubmit={submit}
+        submitCallback={submit}
         cancelEvent={lukkModal}
         ventearsaker={ventearsaker}
+        erTilbakekreving={erTilbakekreving}
+        hasManualPaVent
       />
     </RawIntlProvider>
   );
