@@ -9,8 +9,6 @@ import { FatterVedtakApprovalModalSakIndex } from '@fpsak-frontend/sak-totrinnsk
 
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
-const NO_PARAM = {};
-
 interface TotrinnsKlageVurdering {
   klageVurdering?: string;
   klageVurderingOmgjoer?: string;
@@ -43,7 +41,7 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   behandlingStatus,
   totrinnsKlageVurdering,
 }) => {
-  const { data, state } = restApiHooks.useRestApi<{ harRevurderingSammeResultat: boolean }>(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, NO_PARAM, {
+  const { data, state } = restApiHooks.useRestApi<{ harRevurderingSammeResultat: boolean }>(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, undefined, {
     updateTriggers: [behandlingId, selectedBehandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT),
     keepData: true,

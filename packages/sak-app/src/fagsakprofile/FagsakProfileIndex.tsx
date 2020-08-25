@@ -36,8 +36,6 @@ const findPathToBehandling = (saksnummer, location, alleBehandlinger) => {
   return pathToBehandlinger(saksnummer);
 };
 
-const NO_PARAMS = {};
-
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
@@ -63,11 +61,11 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.status);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.sakstype);
 
-  const { data: risikoAksjonspunkt, state: risikoAksjonspunktState } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, NO_PARAMS, {
+  const { data: risikoAksjonspunkt, state: risikoAksjonspunktState } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT),
   });
-  const { data: kontrollresultat, state: kontrollresultatState } = restApiHooks.useRestApi<Risikoklassifisering>(FpsakApiKeys.KONTROLLRESULTAT, NO_PARAMS, {
+  const { data: kontrollresultat, state: kontrollresultatState } = restApiHooks.useRestApi<Risikoklassifisering>(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT),
   });

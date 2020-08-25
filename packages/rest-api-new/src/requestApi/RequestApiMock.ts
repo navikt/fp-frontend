@@ -14,7 +14,7 @@ class RequestApiMock extends AbstractRequestApi {
 
   missingPaths: string[] = [];
 
-  public startRequest = (endpointName: string, params: any) => {
+  public startRequest = (endpointName: string, params?: any) => {
     const data = this.mockdata[endpointName];
     if (!data) {
       throw new Error(`Det er ikke satt opp mock-data for endepunkt ${endpointName}`);

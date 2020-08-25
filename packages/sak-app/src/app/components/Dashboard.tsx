@@ -13,7 +13,6 @@ interface IntegrationStatus {
 }
 
 const EMPTY_ARRAY = [];
-const NO_PARAMS = {};
 
 /**
  * Dashboard
@@ -23,7 +22,7 @@ const NO_PARAMS = {};
 const Dashboard: FunctionComponent = () => {
   const showIntegrationStatus = restApiHooks.useGlobalStateRestApiData<boolean>(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES);
 
-  const { data: integrationStatusList = EMPTY_ARRAY } = restApiHooks.useRestApi<IntegrationStatus[]>(FpsakApiKeys.INTEGRATION_STATUS, NO_PARAMS, {
+  const { data: integrationStatusList = EMPTY_ARRAY } = restApiHooks.useRestApi<IntegrationStatus[]>(FpsakApiKeys.INTEGRATION_STATUS, undefined, {
     suspendRequest: !showIntegrationStatus,
     updateTriggers: [showIntegrationStatus],
   });

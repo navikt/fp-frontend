@@ -14,8 +14,6 @@ import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 const YTELSE_BEHANDLINGTYPER = [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING,
   BehandlingType.TILBAKEKREVING, BehandlingType.TILBAKEKREVING_REVURDERING];
 
-const NO_PARAMS = {};
-
 const VERGE_MENYVALG = {
   FJERN: 'FJERN',
   OPPRETT: 'OPPRETT',
@@ -46,7 +44,7 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   );
 
   const { data: menyhandlingRettigheter, state } = restApiHooks.useRestApi<{ harSoknad: boolean }>(
-    FpsakApiKeys.MENYHANDLING_RETTIGHETER, NO_PARAMS, {
+    FpsakApiKeys.MENYHANDLING_RETTIGHETER, undefined, {
       updateTriggers: [behandlingId, behandlingVersjon],
       suspendRequest: !behandlingId,
       keepData: true,

@@ -29,7 +29,7 @@ const defaultOptions = {
  * For mocking i unit-test
  */
 export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function useRestApi<T>(
-  key: string, params: any = {}, options: Options = defaultOptions,
+  key: string, params?: any, options: Options = defaultOptions,
 ):RestApiData<T> {
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
@@ -43,7 +43,7 @@ export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function us
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
 const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>(
-  key: string, params: any = {}, options: Options = defaultOptions,
+  key: string, params?: any, options: Options = defaultOptions,
 ):RestApiData<T> {
   const [data, setData] = useState({
     state: RestApiState.NOT_STARTED,

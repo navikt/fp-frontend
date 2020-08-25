@@ -77,8 +77,6 @@ interface OwnProps {
   behandlingVersjon?: number;
 }
 
-const NO_PARAMS = {};
-
 const getReturnedIsRelevant = (isOnHold, toTrinnsAksjonspunkter: TotrinnskontrollAksjonspunkt[] = [], status) => !isOnHold && toTrinnsAksjonspunkter
   .reduce((a, b) => a.concat(b.totrinnskontrollAksjonspunkter), [])
   .some((ap) => ap.totrinnskontrollGodkjent === false) && status && status.kode === BehandlingStatus.BEHANDLING_UTREDES;
@@ -139,13 +137,13 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
 
   const behandlingStatusKode = behandling ? behandling.status.kode : undefined;
   const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(
-    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, NO_PARAMS, {
+    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
       updateTriggers: [behandlingId, behandlingStatusKode],
       suspendRequest: !!isInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK),
     },
   );
   const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(
-    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, NO_PARAMS, {
+    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
       updateTriggers: [behandlingId, behandlingStatusKode],
       suspendRequest: !!isInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.BEHANDLING_UTREDES),
     },

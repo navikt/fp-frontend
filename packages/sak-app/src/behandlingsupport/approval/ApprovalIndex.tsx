@@ -74,8 +74,6 @@ const getOnSubmit = (erTilbakekreving, behandlingId, saksnummer, selectedBehandl
   return approveAp(params);
 };
 
-const NO_PARAM = {};
-
 interface TotrinnsKlageVurdering {
   klageVurdering?: string;
   klageVurderingOmgjoer?: string;
@@ -135,7 +133,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   const disableGodkjennKnapp = erTilbakekreving ? !featureToggles[featureToggle.BESLUTT_TILBAKEKREVING] : false;
 
   const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<TotrinnsKlageVurdering>(
-    FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, NO_PARAM, {
+    FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
       updateTriggers: [behandlingId, behandlingVersjon],
       suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING),

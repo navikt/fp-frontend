@@ -25,7 +25,7 @@ export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => funct
     error: undefined,
   });
 
-  const startRequest = (params: any = {}):Promise<T> => {
+  const startRequest = (params?: any):Promise<T> => {
     const response = requestApi.startRequest(key, params);
     setData({
       state: RestApiState.SUCCESS,
@@ -59,7 +59,7 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
     addErrorMessage({ ...errorData, type });
   });
 
-  const startRequest = useCallback((params: any = {}, keepData = false):Promise<T> => {
+  const startRequest = useCallback((params?: any, keepData = false):Promise<T> => {
     if (requestApi.hasPath(key)) {
       setData((oldState) => ({
         state: RestApiState.LOADING,

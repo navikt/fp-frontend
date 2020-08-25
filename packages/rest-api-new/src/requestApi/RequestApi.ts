@@ -23,7 +23,7 @@ class RequestApi extends AbstractRequestApi {
     }), {});
   }
 
-  public startRequest = (endpointName: string, params: any, notificationMapper?: NotificationMapper) => this.requestRunnersMappedByName[endpointName]
+  public startRequest = (endpointName: string, params?: any, notificationMapper?: NotificationMapper) => this.requestRunnersMappedByName[endpointName]
     .startProcess(params, notificationMapper);
 
   public cancelRequest = (endpointName: string) => this.requestRunnersMappedByName[endpointName].cancelRequest();

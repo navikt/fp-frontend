@@ -32,8 +32,6 @@ const finnLenkeTilAnnenPart = (annenPartBehandling) => pathToAnnenPart(annenPart
 const erTilbakekreving = (behandlingType) => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
   || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
-const NO_PARAMS = undefined;
-
 interface AnnenPartBehandling {
   saksnr: {
     verdi: string;
@@ -103,10 +101,10 @@ const FagsakIndex: FunctionComponent = () => {
 
   const {
     data: behandlingPersonopplysninger, state: personopplysningerState,
-  } = restApiHooks.useRestApi<Personopplysninger>(FpsakApiKeys.BEHANDLING_PERSONOPPLYSNINGER, NO_PARAMS, options);
+  } = restApiHooks.useRestApi<Personopplysninger>(FpsakApiKeys.BEHANDLING_PERSONOPPLYSNINGER, undefined, options);
   const {
     data: behandlingFamilieHendelse, state: familieHendelseState,
-  } = restApiHooks.useRestApi<FamilieHendelseSamling>(FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE, NO_PARAMS, options);
+  } = restApiHooks.useRestApi<FamilieHendelseSamling>(FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE, undefined, options);
   const {
     data: annenPartBehandling, state: annenPartState,
   } = restApiHooks.useRestApi<AnnenPartBehandling>(FpsakApiKeys.ANNEN_PART_BEHANDLING, { saksnummer: selectedSaksnummer }, options);

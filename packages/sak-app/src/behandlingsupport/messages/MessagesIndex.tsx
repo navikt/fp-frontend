@@ -138,12 +138,12 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP);
-  const { data: harApentKontrollerRevAp, state: stateRevAp } = restApiHooks.useRestApi<boolean>(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, NO_PARAM, {
+  const { data: harApentKontrollerRevAp, state: stateRevAp } = restApiHooks.useRestApi<boolean>(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
     suspendRequest: !skalHenteRevAp,
   });
 
-  const { data: brevmaler, state: stateBrevmaler } = restApiHooks.useRestApi<Brevmal[]>(FpsakApiKeys.BREVMALER, NO_PARAM, {
+  const { data: brevmaler, state: stateBrevmaler } = restApiHooks.useRestApi<Brevmal[]>(FpsakApiKeys.BREVMALER, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
   });
 
