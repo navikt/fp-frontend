@@ -71,6 +71,7 @@ interface OwnProps {
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
+  visAlleVentearsaker: boolean;
 }
 
 interface StateProps {
@@ -94,6 +95,7 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
   originalVentearsak,
   visBrevErBestilt = false,
   hasManualPaVent,
+  visAlleVentearsaker,
 }) => {
   const venteArsakHasChanged = !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
   const fristHasChanged = !(originalFrist === frist || (!frist && !originalFrist));
@@ -147,7 +149,7 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
                 placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
                 selectValues={ventearsaker.filter((va) => (erTilbakekreving
-                  ? inkluderVentearsak(va, hasManualPaVent) : manuelleVenteArsaker.includes(va.kode)))
+                  ? inkluderVentearsak(va, visAlleVentearsaker) : manuelleVenteArsaker.includes(va.kode)))
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
                 bredde="xxl"

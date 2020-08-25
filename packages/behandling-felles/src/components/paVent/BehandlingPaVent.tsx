@@ -55,6 +55,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
       ventearsaker={kodeverk[kodeverkTyper.VENT_AARSAK]}
       erTilbakekreving={erTilbakekreving}
       showModal
+      visAlleVentearsaker
     />
   );
 };

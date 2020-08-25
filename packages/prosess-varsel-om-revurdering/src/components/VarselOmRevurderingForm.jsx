@@ -206,6 +206,7 @@ export class VarselOmRevurderingFormImpl extends React.Component {
           ventearsaker={ventearsaker}
           visBrevErBestilt
           hasManualPaVent
+          visAlleVentearsaker={false}
           erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       </form>
