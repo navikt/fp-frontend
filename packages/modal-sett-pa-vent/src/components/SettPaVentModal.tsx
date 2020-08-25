@@ -61,7 +61,8 @@ const automatiskeVentearsakerForTilbakekreving = [
   venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
-const inkluderVentearsak = (ventearsak, hasManualPaVent) => (hasManualPaVent ? !automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode) : true);
+const inkluderVentearsak = (ventearsak, visAlleVentearsaker) => (visAlleVentearsaker 
+  ? true : !automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode));
 
 interface OwnProps {
   cancelEvent: () => void;
@@ -103,7 +104,7 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
   const showAvbryt = !(originalFrist === frist && !venteArsakHasChanged);
   const erFristenUtløpt = erTilbakekreving && ((frist !== undefined && dateBeforeToday(frist) === null)
     || (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
-  const erVenterPaKravgrunnlag = ventearsak && automatiskeVentearsakerForTilbakekreving.includes(ventearsak);
+  const erVenterPaKravgrunnlag = ventearsak === venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
   const showFristenTekst = erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 
   return (
