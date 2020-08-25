@@ -101,7 +101,7 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
   const showAvbryt = !(originalFrist === frist && !venteArsakHasChanged);
   const erFristenUtløpt = erTilbakekreving && ((frist !== undefined && dateBeforeToday(frist) === null)
     || (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
-  const erVenterPaKravgrunnlag = ventearsak === venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
+  const erVenterPaKravgrunnlag = ventearsak && automatiskeVentearsakerForTilbakekreving.includes(ventearsak);
   const showFristenTekst = erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 
   return (
