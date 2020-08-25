@@ -31,7 +31,7 @@ describe('<HistoryIndex>', () => {
   it('skal vise historikk for kun fpsak', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
+    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, { featureToggles: {} });
     requestApi.mock(FpsakApiKeys.HISTORY_FPSAK, [{
       opprettetTidspunkt: '2019-01-01',
       historikkinnslagDeler: [],
@@ -61,7 +61,9 @@ describe('<HistoryIndex>', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {
-      [featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING]: true,
+      featureToggles: {
+        [featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING]: true,
+      },
     });
     requestApi.mock(FpsakApiKeys.HISTORY_FPSAK, [{
       opprettetTidspunkt: '2019-01-01',

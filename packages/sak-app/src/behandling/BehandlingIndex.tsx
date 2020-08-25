@@ -69,10 +69,8 @@ interface OwnProps {
 /**
  * BehandlingIndex
  *
- * Container-komponent. Er rot for for den delen av hovedvinduet som har innhold for en valgt behandling, og styrer livssyklusen til de mekanismene som er
+ * Er rot for for den delen av hovedvinduet som har innhold for en valgt behandling, og styrer livssyklusen til de mekanismene som er
  * relatert til den valgte behandlingen.
- *
- * Komponenten har ansvar å legge valgt behandlingId fra URL-en i staten.
  */
 const BehandlingIndex: FunctionComponent<OwnProps> = ({
   setBehandlingIdOgVersjon,
@@ -95,7 +93,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       requestApi.injectPaths(behandling?.links);
       setBehandlingIdOgVersjon(behandlingId, behandlingVersjon);
     }
-  }, [behandlingId]);
+  }, [behandling]);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -114,7 +112,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
-  const featureToggles = restApiHooks.useGlobalStateRestApiData<{[key: string]: boolean}>(FpsakApiKeys.FEATURE_TOGGLE);
+  const { featureToggles } = restApiHooks.useGlobalStateRestApiData<{ featureToggles: {[key: string]: boolean}}>(FpsakApiKeys.FEATURE_TOGGLE);
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
@@ -178,14 +176,12 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       avsluttet: b.avsluttet,
     }));
 
-  const allFeatureToggles = featureToggles.featureToggles;
-
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingKlageIndex
-            skalBenytteFritekstBrevmal={allFeatureToggles[featureToggle.BENYTT_FRITEKST_BREVMAL_FOR_KLAGE]}
+            skalBenytteFritekstBrevmal={featureToggles[featureToggle.BENYTT_FRITEKST_BREVMAL_FOR_KLAGE]}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
             {...defaultProps}
@@ -230,7 +226,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingEngangsstonadIndex
-            featureToggles={allFeatureToggles}
+            featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
@@ -245,7 +241,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingForeldrepengerIndex
-            featureToggles={allFeatureToggles}
+            featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
@@ -260,7 +256,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingSvangerskapspengerIndex
-            featureToggles={allFeatureToggles}
+            featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}

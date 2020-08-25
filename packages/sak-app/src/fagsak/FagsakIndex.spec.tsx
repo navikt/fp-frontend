@@ -47,7 +47,7 @@ describe('<FagsakIndex>', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.FETCH_FAGSAK, fagsak);
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
+    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, { featureToggles: {} });
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);
 
@@ -67,7 +67,9 @@ describe('<FagsakIndex>', () => {
     requestApi.mock(FpsakApiKeys.FETCH_FAGSAK, fagsak);
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {
-      [featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING]: true,
+      featureToggles: {
+        [featureToggle.AKTIVER_TILBAKEKREVINGBEHANDLING]: true,
+      },
     });
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);

@@ -115,7 +115,7 @@ describe('<ApprovalIndex>', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, kodeverk);
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
-    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, {});
+    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, { featureToggles: {} });
     requestApi.mock(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, {});
     requestApi.mock(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 

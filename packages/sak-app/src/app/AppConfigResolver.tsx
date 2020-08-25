@@ -23,7 +23,8 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER);
   const { state: visDetaljerteFeilmeldingerState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES);
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
-  const { data: featureToggles, state: featureToggleState } = restApiHooks.useGlobalStateRestApi<{ featureToggles: any }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams);
+  const { data: featureToggles, state: featureToggleState } = restApiHooks
+    .useGlobalStateRestApi<{ featureToggles: {[key: string]: boolean} }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams);
 
   const { state: kodeverkFpSakStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK, NO_PARAMS, {
     suspendRequest: featureToggleState !== RestApiState.SUCCESS, updateTriggers: [!!featureToggles],
