@@ -35,7 +35,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@sentry/browser": "^5.21.4",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "connected-react-router": "6.6.1",
     "history": "^4.9.0",
