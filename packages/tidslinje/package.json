@@ -7,9 +7,9 @@
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
     "moment": "^2.27.0",
-    "nav-frontend-grid": "1.0.29",
+    "nav-frontend-grid": "1.0.32",
     "nav-frontend-grid-style": "0.2.20",
-    "nav-frontend-typografi": "2.0.21",
+    "nav-frontend-typografi": "2.0.26",
     "nav-frontend-typografi-style": "1.0.22",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
