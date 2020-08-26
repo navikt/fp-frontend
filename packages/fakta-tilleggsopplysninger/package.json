@@ -10,7 +10,7 @@
     "@fpsak-frontend/utils": "1.0.0",
     "nav-frontend-core": "5.0.1",
     "nav-frontend-knapper": "2.0.9",
-    "nav-frontend-knapper-style": "0.3.38",
+    "nav-frontend-knapper-style": "1.0.1",
     "nav-frontend-typografi": "2.0.26",
     "nav-frontend-typografi-style": "1.0.22",
     "prop-types": "^15.7.2",
