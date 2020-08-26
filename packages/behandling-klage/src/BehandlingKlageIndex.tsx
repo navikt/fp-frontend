@@ -32,7 +32,6 @@ interface OwnProps {
     clear: () => void;
   };
   opneSokeside: () => void;
-  skalBenytteFritekstBrevmal: boolean;
   alleBehandlinger: {
     id: number;
     uuid: string;
@@ -82,7 +81,6 @@ const BehandlingKlageIndex: FunctionComponent<Props> = ({
   opneSokeside,
   forrigeBehandling,
   alleBehandlinger,
-  skalBenytteFritekstBrevmal,
 }) => {
   const forrigeVersjon = useRef<number>();
 
@@ -137,7 +135,6 @@ const BehandlingKlageIndex: FunctionComponent<Props> = ({
             hentBehandling={hentBehandling}
             opneSokeside={opneSokeside}
             alleBehandlinger={alleBehandlinger}
-            skalBenytteFritekstBrevmal={skalBenytteFritekstBrevmal}
           />
         </>
       )}
