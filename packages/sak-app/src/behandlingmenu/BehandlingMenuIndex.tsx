@@ -116,7 +116,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const rettigheter = useMemo<Rettigheter>(() => allMenuAccessRights(
     navAnsatt,
     fagsak.status,
-    kanRevurderingOpprettes,
+    fagsak.kanRevurderingOpprettes,
     fagsak.skalBehandlesAvInfotrygd,
     fagsak.sakstype,
     behandling?.status,

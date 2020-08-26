@@ -19,8 +19,6 @@ import {
   FpsakApiKeys, restApiHooks, requestApi,
 } from '../../data/fpsakApi';
 
-const NO_PARAM = {};
-
 const getSubmitCallback = (setShowMessageModal, behandlingId, submitMessage, resetMessage, setShowSettPaVentModal, setSubmitCounter) => (values) => {
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_DOK
