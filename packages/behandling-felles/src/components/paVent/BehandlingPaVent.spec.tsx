@@ -8,8 +8,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Behandling } from '@fpsak-frontend/types';
-
-import BehandlingPaVentModal from './BehandlingPaVentModal';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import BehandlingPaVent from './BehandlingPaVent';
 
@@ -41,7 +40,7 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={sinon.spy()}
     />);
 
-    expect(wrapper.find(BehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
   });
 
   it('skal vise modal når behandling er på vent', () => {
@@ -56,7 +55,7 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={sinon.spy()}
     />);
 
-    const modal = wrapper.find(BehandlingPaVentModal);
+    const modal = wrapper.find(SettPaVentModalIndex);
     expect(modal).to.have.length(1);
     expect(modal.prop('hasManualPaVent')).to.false;
   });
@@ -73,12 +72,12 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={sinon.spy()}
     />);
 
-    const modal = wrapper.find(BehandlingPaVentModal);
+    const modal = wrapper.find(SettPaVentModalIndex);
     expect(modal).to.have.length(1);
 
     modal.prop('cancelEvent')();
 
-    expect(wrapper.find(BehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
   });
 
   it('skal markeres som automatisk satt på vent når en har åpent aksjonspunkt for auto-manuelt satt på vent', () => {
@@ -104,7 +103,7 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={sinon.spy()}
     />);
 
-    const modal = wrapper.find(BehandlingPaVentModal);
+    const modal = wrapper.find(SettPaVentModalIndex);
     expect(modal).to.have.length(1);
     expect(modal.prop('hasManualPaVent')).to.true;
   });
@@ -125,9 +124,9 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={hentBehandlingCallback}
     />);
 
-    const modal = wrapper.find(BehandlingPaVentModal);
+    const modal = wrapper.find(SettPaVentModalIndex);
 
-    await modal.prop('onSubmit')({ dato: '10.10.2019' });
+    await modal.prop('submitCallback')({ dato: '10.10.2019' });
 
     const calls = settPaVentCallback.getCalls();
     expect(calls).to.have.length(1);

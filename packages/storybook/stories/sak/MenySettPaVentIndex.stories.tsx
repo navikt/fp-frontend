@@ -28,5 +28,6 @@ export const visMenyForÅSetteBehandlingPåVent = () => (
       navn: 'Avvent fødsel',
     }]}
     lukkModal={action('button-click')}
+    erTilbakekreving={false}
   />
 );

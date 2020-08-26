@@ -2,7 +2,8 @@ import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
-import SettBehandlingPaVentModal from './components/SettBehandlingPaVentModal';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+
 import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenySettPaVentIndex from './MenySettPaVentIndex';
 
@@ -17,12 +18,13 @@ describe('<MenySettPaVentIndex>', () => {
       settBehandlingPaVent={setBehandlingOnHoldCallback}
       ventearsaker={[]}
       lukkModal={lukkModalCallback}
+      erTilbakekreving={false}
     />);
 
-    const modal = wrapper.find(SettBehandlingPaVentModal);
+    const modal = wrapper.find(SettPaVentModalIndex);
     expect(modal).to.have.length(1);
 
-    modal.prop('onSubmit')({
+    modal.prop('submitCallback')({
       frist: '20-12-2020',
       ventearsak: 'test',
     });

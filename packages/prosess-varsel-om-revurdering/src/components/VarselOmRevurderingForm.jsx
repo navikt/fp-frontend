@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
@@ -21,10 +22,10 @@ import {
   hasValidText, ISO_DATE_FORMAT, minLength, required, getLanguageCodeFromSprakkode,
 } from '@fpsak-frontend/utils';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import revurderingFamilieHendelsePropType from '../propTypes/revurderingFamilieHendelsePropType';
 import revurderingSoknadPropType from '../propTypes/revurderingSoknadPropType';
-import VarselOmRevurderingPaVentModal from './VarselOmRevurderingPaVentModal';
 
 import styles from './varselOmRevurderingForm.less';
 
@@ -79,9 +80,17 @@ export class VarselOmRevurderingFormImpl extends React.Component {
     }
   }
 
-  handleSubmitFromModal() {
-    const { valid, handleSubmit } = this.props;
-    handleSubmit();
+  handleSubmitFromModal(values) {
+    const {
+      valid, submitCallback, begrunnelse, kode, fritekst, sendVarsel,
+    } = this.props;
+    submitCallback([{
+      kode,
+      begrunnelse,
+      fritekst,
+      sendVarsel,
+      ...values,
+    }]);
     if (valid) {
       this.hideSettPaVentModal();
     }
@@ -99,7 +108,6 @@ export class VarselOmRevurderingFormImpl extends React.Component {
       languageCode,
       readOnly,
       sendVarsel,
-      frist,
       aksjonspunktStatus,
       begrunnelse,
       ventearsaker,
@@ -190,12 +198,15 @@ export class VarselOmRevurderingFormImpl extends React.Component {
             <Normaltekst>{begrunnelse}</Normaltekst>
           </div>
         )}
-        <VarselOmRevurderingPaVentModal
+        <SettPaVentModalIndex
           showModal={showSettPaVentModal}
-          frist={frist}
+          frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
           cancelEvent={this.hideSettPaVentModal}
-          handleSubmit={this.handleSubmitFromModal}
+          submitCallback={this.handleSubmitFromModal}
           ventearsaker={ventearsaker}
+          visBrevErBestilt
+          hasManualPaVent
+          erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       </form>
     );
@@ -214,7 +225,6 @@ VarselOmRevurderingFormImpl.propTypes = {
   sendVarsel: PropTypes.bool,
   fritekst: PropTypes.string,
   begrunnelse: PropTypes.string,
-  frist: PropTypes.string,
   ventearsaker: PropTypes.arrayOf(PropTypes.shape({
     kode: PropTypes.string,
     navn: PropTypes.string,
@@ -231,7 +241,6 @@ VarselOmRevurderingFormImpl.propTypes = {
 VarselOmRevurderingFormImpl.defaultProps = {
   sendVarsel: false,
   fritekst: null,
-  frist: moment().add(28, 'days').format(ISO_DATE_FORMAT),
   begrunnelse: null,
   languageCode: null,
   erAutomatiskRevurdering: false,
@@ -242,8 +251,7 @@ VarselOmRevurderingFormImpl.defaultProps = {
 
 export const buildInitialValues = createSelector([(state, ownProps) => ownProps.aksjonspunkter], (aksjonspunkter) => ({
   kode: aksjonspunkter[0].definisjon.kode,
-  frist: moment().add(28, 'days').format(ISO_DATE_FORMAT),
-  ventearsak: null,
+  begrunnelse: aksjonspunkter[0].begrunnelse,
 }));
 
 const formName = 'VarselOmRevurderingForm';
@@ -263,8 +271,7 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
   return (state) => ({
     initialValues: buildInitialValues(state, ownProps),
     aksjonspunktStatus: aksjonspunkt.status.kode,
-    begrunnelse: aksjonspunkt.begrunnelse,
-    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'frist', 'ventearsak'),
+    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'begrunnelse', 'kode'),
     avklartBarn: nullSafe(familiehendelse.register).avklartBarn,
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,

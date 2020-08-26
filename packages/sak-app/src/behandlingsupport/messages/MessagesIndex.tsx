@@ -10,9 +10,9 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
-
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+
 import { getFagsakYtelseType } from '../../fagsak/fagsakSelectors';
 import { getBehandlingerUuidsMappedById, getBehandlingerTypesMappedById } from '../../behandling/selectors/behandlingerSelectors';
 import { getKodeverk } from '../../kodeverk/duck';
@@ -40,7 +40,7 @@ interface OwnProps {
   selectedBehandlingVersjon?: number;
   selectedBehandlingSprak?: Kodeverk;
   recipients?: string[];
-  ventearsaker?: Kodeverk[];
+  ventearsaker?: KodeverkMedNavn[];
   behandlingTypeKode: string;
   revurderingVarslingArsak: KodeverkMedNavn[];
 }
@@ -182,6 +182,7 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
       behandlingIdentifier,
       selectedBehandlingVersjon,
       revurderingVarslingArsak,
+      behandlingTypeKode,
     } = this.props;
     const { showMessagesModal, showSettPaVentModal, submitCounter } = this.state;
 
@@ -216,12 +217,14 @@ export class MessagesIndex extends Component<OwnProps & DispatchProps, StateProp
         />
 
         {submitFinished && showSettPaVentModal && (
-          <MessageBehandlingPaVentModal
+          <SettPaVentModalIndex
             showModal={submitFinished && showSettPaVentModal}
             cancelEvent={this.hideSettPaVentModal}
-            onSubmit={this.handleSubmitFromModal}
+            submitCallback={this.handleSubmitFromModal}
             ventearsak={venteArsakType.AVV_DOK}
             ventearsaker={ventearsaker}
+            hasManualPaVent={false}
+            erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
           />
         )}
       </>

@@ -1,11 +1,11 @@
 {
   "SokersOpplysningspliktForm.SokersOpplysningsplikt": "Søkers opplysningsplikt",
-  "SokersOpplysningspliktForm.UtfyllendeOpplysninger": "Vurder om søker har oppfylt opplysningsplikten etter § 21-3 og § 21-7",
+  "SokersOpplysningspliktForm.UtfyllendeOpplysninger": "Vurder om søker har oppfylt opplysningsplikten etter § 21-3",
   "SokersOpplysningspliktForm.VilkarOppfylt": "Vilkåret er oppfylt",
   "SokersOpplysningspliktForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
   "SokersOpplysningspliktForm.VilkarIkkeOppfyltMerInfo": "Manglende opplysninger, foreslå avslag",
   "SokersOpplysningspliktForm.ManglendeDokumentasjon": "Manglende dokumentasjon",
-  
+
   "VilkarresultatMedOverstyringForm.ErOppfylt": "Vilkåret er oppfylt",
   "VilkarresultatMedOverstyringForm.ErIkkeOppfylt": "Vilkåret er avslått",
   "VilkarresultatMedOverstyringForm.IkkeBehandlet": "Ikke behandlet",
