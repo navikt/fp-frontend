@@ -10,15 +10,12 @@ import styles from './historikkMalType.less';
 
 const HistorikkMalType6 = ({
   historikkinnslagDeler,
-  intl,
   getKodeverknavn,
 }) => {
-  const { formatMessage } = intl;
-
   const formaterOpplysning = (opplysning, index) => (
     <div key={`opplysning${index}`}>
       <Normaltekst className={styles.keyValuePair}>
-        {formatMessage({ id: getKodeverknavn(opplysning.opplysningType) })}
+        {getKodeverknavn(opplysning.opplysningType)}
         :
       </Normaltekst>
       &ensp;
@@ -30,7 +27,7 @@ const HistorikkMalType6 = ({
     <div>
       {
         historikkinnslagDeler.map((del) => (
-          <div>
+          <div key={del.hendelse}>
             <Element className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</Element>
             {del.opplysninger.map(formaterOpplysning)}
           </div>
@@ -42,7 +39,6 @@ const HistorikkMalType6 = ({
 
 HistorikkMalType6.propTypes = {
   historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  intl: PropTypes.shape().isRequired,
   getKodeverknavn: PropTypes.func.isRequired,
 };
 

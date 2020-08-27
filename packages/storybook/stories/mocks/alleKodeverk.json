@@ -2826,6 +2826,16 @@
         "kodeverk": "BEHANDLING_RESULTAT_TYPE"
       },
       {
+        "kode": "HENLAGT_FEILOPPRETTET_MED_BREV",
+        "navn": "Feilaktig opprettet - med henleggelsesbrev",
+        "kodeverk": "BEHANDLING_RESULTAT_TYPE"
+      },
+      {
+        "kode": "HENLAGT_FEILOPPRETTET_UTEN_BREV",
+        "navn": "Feilaktig opprettet - uten henleggelsesbrev",
+        "kodeverk": "BEHANDLING_RESULTAT_TYPE"
+      },
+      {
         "kode": "INNVILGET",
         "navn": "Innvilget",
         "kodeverk": "BEHANDLING_RESULTAT_TYPE"
