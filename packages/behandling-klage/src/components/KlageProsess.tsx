@@ -29,7 +29,6 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
   dispatch: Dispatch;
-  skalBenytteFritekstBrevmal: boolean;
   alleBehandlinger: {
     id: number;
     type: Kodeverk;
@@ -99,13 +98,11 @@ const KlageProsess: FunctionComponent<OwnProps> = ({
   opneSokeside,
   alleBehandlinger,
   dispatch,
-  skalBenytteFritekstBrevmal,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
   const dataTilUtledingAvFpPaneler = {
     alleBehandlinger,
-    skalBenytteFritekstBrevmal,
     klageVurdering: data.klageVurdering,
     saveKlageText: useCallback(saveKlageText(dispatch, behandling, data.aksjonspunkter), [behandling.versjon]),
     previewCallback: useCallback(previewCallback(dispatch, fagsak, behandling), [behandling.versjon]),
