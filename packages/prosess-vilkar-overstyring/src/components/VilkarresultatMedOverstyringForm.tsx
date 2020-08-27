@@ -201,7 +201,7 @@ const getCustomVilkarText = (medlemskapFom, behandlingType, erOppfylt) => {
   if (isBehandlingRevurderingFortsattMedlemskap) {
     return {
       id: erOppfylt ? 'VilkarResultPicker.VilkarOppfyltRevurderingFom' : 'VilkarResultPicker.VilkarIkkeOppfyltRevurderingFom',
-      values: { fom: moment(medlemskapFom).format(DDMMYYYY_DATE_FORMAT), b: (...chunks) => <b>{chunks}</b> },
+      values: { fom: moment(medlemskapFom).format(DDMMYYYY_DATE_FORMAT), b: (chunks) => <b>{chunks}</b> },
     };
   }
   return undefined;

@@ -69,7 +69,7 @@ const VilkarResultPickerImpl: FunctionComponent<OwnProps & WrappedComponentProps
               <FormattedMessage
                 id={findRadioButtonTextCode(customVilkarIkkeOppfyltText, false)}
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
             </Normaltekst>
@@ -92,9 +92,9 @@ const VilkarResultPickerImpl: FunctionComponent<OwnProps & WrappedComponentProps
             <FormattedMessage
               id={findRadioButtonTextCode(customVilkarOppfyltText, true)}
               values={customVilkarOppfyltText ? {
-                b: (...chunks) => <b>{chunks}</b>,
+                b: (chunks) => <b>{chunks}</b>,
                 ...customVilkarIkkeOppfyltText.values,
-              } : { b: (...chunks) => <b>{chunks}</b> }}
+              } : { b: (chunks) => <b>{chunks}</b> }}
             />
           )}
           value
@@ -104,9 +104,9 @@ const VilkarResultPickerImpl: FunctionComponent<OwnProps & WrappedComponentProps
             <FormattedMessage
               id={findRadioButtonTextCode(customVilkarIkkeOppfyltText, false)}
               values={customVilkarIkkeOppfyltText ? {
-                b: (...chunks) => <b>{chunks}</b>,
+                b: (chunks) => <b>{chunks}</b>,
                 ...customVilkarIkkeOppfyltText.values,
-              } : { b: (...chunks) => <b>{chunks}</b> }}
+              } : { b: (chunks) => <b>{chunks}</b> }}
             />
           )}
           value={false}
