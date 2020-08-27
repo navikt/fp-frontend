@@ -32,7 +32,6 @@ describe('<BehandleKlageFormNfpImpl>', () => {
       formProps={{}}
       sprakkode={sprakkode}
       alleKodeverk={{}}
-      skalBenytteFritekstBrevmal={false}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find('PreviewKlageLink')).to.have.length(1);
@@ -53,7 +52,6 @@ describe('<BehandleKlageFormNfpImpl>', () => {
       formProps={{}}
       sprakkode={sprakkode}
       alleKodeverk={{}}
-      skalBenytteFritekstBrevmal={false}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(PreviewKlageLink)).to.have.length(0);
@@ -74,7 +72,6 @@ describe('<BehandleKlageFormNfpImpl>', () => {
       formProps={{}}
       sprakkode={sprakkode}
       alleKodeverk={{}}
-      skalBenytteFritekstBrevmal={false}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(PreviewKlageLink)).to.have.length(0);
