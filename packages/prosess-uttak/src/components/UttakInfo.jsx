@@ -87,14 +87,14 @@ const isInnvilgetText = (selectedItemData, getKodeverknavn) => {
     returnText = (
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
-        values={{ innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (...chunks) => <b>{chunks}</b> }}
+        values={{ innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks) => <b>{chunks}</b> }}
       />
     );
   } else {
     returnText = (
       <FormattedMessage
         id="UttakActivity.IkkeOppfyltAarsak"
-        values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (...chunks) => <b>{chunks}</b> }}
+        values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks) => <b>{chunks}</b> }}
       />
     );
   }

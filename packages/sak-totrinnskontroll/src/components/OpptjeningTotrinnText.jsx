@@ -33,7 +33,7 @@ const mapAktivitetTextUnderkjenning = (arbeidsgiverNavn, orgnr, aktivitetType) =
       <FormattedMessage
         id="ToTrinnsForm.Opptjening.UnderkjenningArbeidMedNavn"
         values={{
-          a: aktivitetType, bb: arbeidsgiverNavn, c: orgnr, b: (...chunks) => <b>{chunks}</b>,
+          a: aktivitetType, bb: arbeidsgiverNavn, c: orgnr, b: (chunks) => <b>{chunks}</b>,
         }}
       />
     );
@@ -42,14 +42,14 @@ const mapAktivitetTextUnderkjenning = (arbeidsgiverNavn, orgnr, aktivitetType) =
     return (
       <FormattedMessage
         id="ToTrinnsForm.Opptjening.UnderkjenningArbeidUtenNavn"
-        values={{ a: aktivitetType, bb: orgnr, b: (...chunks) => <b>{chunks}</b> }}
+        values={{ a: aktivitetType, bb: orgnr, b: (chunks) => <b>{chunks}</b> }}
       />
     );
   }
   return (
     <FormattedMessage
       id="ToTrinnsForm.Opptjening.UnderkjenningAktivitet"
-      values={{ a: aktivitetType, b: (...chunks) => <b>{chunks}</b> }}
+      values={{ a: aktivitetType, b: (chunks) => <b>{chunks}</b> }}
     />
   );
 };

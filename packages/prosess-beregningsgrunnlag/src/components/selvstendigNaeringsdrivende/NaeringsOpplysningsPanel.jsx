@@ -59,7 +59,7 @@ const lagIntroTilEndringspanel = (naring) => {
   }
   return (
     <span>
-      <FormattedMessage id={hendelseTekst} values={{ dato: dateFormat(hendelseDato), b: (...chunks) => <b>{chunks}</b> }} />
+      <FormattedMessage id={hendelseTekst} values={{ dato: dateFormat(hendelseDato), b: (chunks) => <b>{chunks}</b> }} />
     </span>
   );
 };

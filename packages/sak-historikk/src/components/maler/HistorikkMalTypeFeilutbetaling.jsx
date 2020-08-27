@@ -38,10 +38,10 @@ const buildEndretFeltText = (endredeFelter, getKodeverknavn) => {
     const årsakVerdi = årsakFelt.fraVerdi ? årsakFelt.fraVerdi : årsakFelt.tilVerdi;
     const fraVerdi = `${getKodeverknavn({ kode: årsakVerdi, kodeverk: årsakFelt.klFraVerdi })} ${underÅrsakFraVerdi ? `(${underÅrsakFraVerdi})` : ''}`;
     const tilVerdi = `${tilVerdiNavn} ${underÅrsakTilVerdi ? `(${underÅrsakTilVerdi})` : ''}`;
-    return <FormattedMessage id="Historikk.Template.Feilutbetaling.endretFelt" values={{ fraVerdi, tilVerdi, b: (...chunks) => <b>{chunks}</b> }} />;
+    return <FormattedMessage id="Historikk.Template.Feilutbetaling.endretFelt" values={{ fraVerdi, tilVerdi, b: (chunks) => <b>{chunks}</b> }} />;
   }
   const feltVerdi = `${tilVerdiNavn} ${underÅrsakTilVerdi ? `(${underÅrsakTilVerdi})` : ''}`;
-  return <FormattedMessage id="Historikk.Template.Feilutbetaling.sattFelt" values={{ feltVerdi, b: (...chunks) => <b>{chunks}</b> }} />;
+  return <FormattedMessage id="Historikk.Template.Feilutbetaling.sattFelt" values={{ feltVerdi, b: (chunks) => <b>{chunks}</b> }} />;
 };
 
 const HistorikkMalTypeFeilutbetaling = ({
@@ -66,7 +66,7 @@ const HistorikkMalTypeFeilutbetaling = ({
           values={{
             periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
             periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-            b: (...chunks) => <b>{chunks}</b>,
+            b: (chunks) => <b>{chunks}</b>,
           }}
         />
         <Normaltekst>

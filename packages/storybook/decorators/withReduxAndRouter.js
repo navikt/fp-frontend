@@ -9,13 +9,13 @@ const history = createBrowserHistory({
   basename: '/fpsak/',
 });
 
-const withReduxAndRouterProvider = (story) => {
+const withReduxAndRouterProvider = (Story) => {
   const store = configureStore(history);
 
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        { story() }
+        <Story />
       </ConnectedRouter>
     </Provider>
   );

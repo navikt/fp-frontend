@@ -148,7 +148,7 @@ class TimeLineInfo extends Component {
                   <Normaltekst>
                     <FormattedMessage
                       id="TimeLineInfo.Stonadinfo.Total"
-                      values={{ ukerVerdi: findTilgjengeligeUker(stonadskonto), b: (...chunks) => <b>{chunks}</b> }}
+                      values={{ ukerVerdi: findTilgjengeligeUker(stonadskonto), b: (chunks) => <b>{chunks}</b> }}
                     />
                   </Normaltekst>
                 </Column>
@@ -158,7 +158,7 @@ class TimeLineInfo extends Component {
                     <Normaltekst>
                       <FormattedMessage
                         id="TimeLineInfo.Stonadinfo.MaksDato"
-                        values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (...chunks) => <b>{chunks}</b> }}
+                        values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (chunks) => <b>{chunks}</b> }}
                       />
                     </Normaltekst>
                   </Column>
@@ -196,7 +196,7 @@ class TimeLineInfo extends Component {
                                   dagerVerdi: findAntallUkerOgDager(
                                     arbforhold.saldo,
                                   ).dager,
-                                  b: (...chunks) => <b>{chunks}</b>,
+                                  b: (chunks) => <b>{chunks}</b>,
                                 }}
                               />
                               )}

@@ -43,7 +43,7 @@ export const SykdomPanel = ({
           <FormattedMessage
             id="SykdomPanel.AnnenForelderIkkeForSyk"
             values={{
-              b: (...chunks) => <b>{chunks}</b>,
+              b: (chunks) => <b>{chunks}</b>,
             }}
           />
       )}

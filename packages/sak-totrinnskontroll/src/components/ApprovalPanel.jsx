@@ -161,7 +161,7 @@ export class ApprovalPanel extends Component {
                       <FormattedMessage
                         id="ToTrinnsForm.LøstAksjonspunkt"
                         values={{
-                          b: (...chunks) => <b>{chunks}</b>,
+                          b: (chunks) => <b>{chunks}</b>,
                         }}
                       />
                     </div>

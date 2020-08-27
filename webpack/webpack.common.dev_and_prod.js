@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const PACKAGE = require('./../package.json');
 const VERSION = PACKAGE.version;
@@ -67,8 +67,9 @@ const config = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
-              localIdentName: '[name]_[local]_[contenthash:base64:5]',
+              modules: {
+                localIdentName: '[name]_[local]_[contenthash:base64:5]',
+              },
             },
           }, {
             loader: 'less-loader',

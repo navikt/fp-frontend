@@ -31,7 +31,7 @@ const HistorikkMalType7 = ({
               sub2,
               fromValue,
               toValue,
-              b: (...chunks) => <b>{chunks}</b>,
+              b: (chunks) => <b>{chunks}</b>,
             }}
           />
         </div>
@@ -75,7 +75,7 @@ const HistorikkMalType7 = ({
                   id={findIdForOpplysningCode(opplysning)}
                   values={{
                     antallBarn: opplysning.tilVerdi,
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               ))}

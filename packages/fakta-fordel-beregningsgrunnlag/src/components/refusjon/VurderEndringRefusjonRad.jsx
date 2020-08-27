@@ -45,7 +45,7 @@ export const VurderEndringRefusjonRad = ({
             values={{
               ag: navn,
               dato: dateFormat(refusjonAndel.nyttRefusjonskravFom),
-              b: (...chunks) => <b>{chunks}</b>,
+              b: (chunks) => <b>{chunks}</b>,
             }}
           />
         </Column>
