@@ -101,7 +101,7 @@ const lagAksjonspunktViser = (gjeldendeAksjonspunkter, avvikProsent, alleAndeler
               <FormattedMessage
                 key={ap.definisjon.kode}
                 id={findAksjonspunktHelpTekst(ap, erVarigEndring, erNyArbLivet, erNyoppstartet)}
-                values={{ verdi: avvikProsent, b: (...chunks) => <b>{chunks}</b>, br: <br /> }}
+                values={{ verdi: avvikProsent, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
               />
             ))}
           </AksjonspunktHelpTextHTML>
@@ -341,7 +341,7 @@ export const BeregningFormImpl = ({
               aktivitetStatusList={aktivitetStatusList}
               grunnbelop={beregningsgrunnlag.grunnbeløp}
               halvGVerdi={beregningsgrunnlag.halvG}
-              harAksjonspunkter={harAksjonspunkter}
+              ytelseGrunnlag={beregningsgrunnlag.ytelsesspesifiktGrunnlag}
             />
           </>
 

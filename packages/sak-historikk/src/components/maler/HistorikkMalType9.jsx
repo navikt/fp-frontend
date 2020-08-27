@@ -55,7 +55,7 @@ export const HistorikkMalType9 = ({
                   opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
                   numberOfPeriods: historikkinnslagDel.endredeFelter.length,
                   splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                   br: <br />,
                 }}
               />
@@ -69,7 +69,7 @@ export const HistorikkMalType9 = ({
                   opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
                   numberOfPeriods: historikkinnslagDel.endredeFelter.length,
                   splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                   br: <br />,
                 }}
               />
@@ -85,7 +85,7 @@ export const HistorikkMalType9 = ({
                       values={{
                         felt: getKodeverknavn(endretFelt.endretFeltNavn),
                         verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
-                        b: (...chunks) => <b>{chunks}</b>,
+                        b: (chunks) => <b>{chunks}</b>,
                       }}
                     />
                   </div>

@@ -10,11 +10,13 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import dekningsgradKode from '@fpsak-frontend/kodeverk/src/dekningsgrad';
-
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import beregningsgrunnlagVilkarPropType from '../../propTypes/beregningsgrunnlagVilkarPropType';
 import { andelErIkkeTilkommetEllerLagtTilAvSBH } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import BeregningsresutatPanel from './BeregningsResultatPanel';
+
+const VIRKEDAGER_PR_AAR = 260;
 
 const periodeHarAarsakSomTilsierVisning = (aarsaker) => {
   if (aarsaker.length < 1) {
@@ -346,6 +348,13 @@ const finnDagsatsGrunnlag = (bruttoRad, avkortetRad, redusertRad) => {
   if (bruttoRad.verdi && bruttoRad.display !== false) return bruttoRad.verdi;
   return null;
 };
+const harSVPGrunnlag = (ytelseGrunnlag) => ytelseGrunnlag && ytelseGrunnlag.ytelsetype === fagsakYtelseType.SVANGERSKAPSPENGER;
+const finnDagsats = (periode, ytelseGrunnlag) => {
+  if (harSVPGrunnlag(ytelseGrunnlag) && periode.avkortetPrAar) {
+    return Math.round(periode.avkortetPrAar / VIRKEDAGER_PR_AAR);
+  }
+  return periode.dagsats;
+};
 const sjekkharBortfaltNaturalYtelse = (periode) => {
   if (!periode) {
     return false;
@@ -360,9 +369,9 @@ export const createBeregningTableData = createSelector(
     (state, ownProps) => ownProps.aktivitetStatusList,
     (state, ownProps) => ownProps.dekningsgrad,
     (state, ownProps) => ownProps.grunnbelop,
-    (state, ownProps) => ownProps.harAksjonspunkter,
-    (state, ownProps) => ownProps.vilkaarBG.vilkarStatus],
-  (allePerioder, aktivitetStatusList, dekningsgrad, grunnbelop, harAksjonspunkter, vilkarStatus) => {
+    (state, ownProps) => ownProps.vilkaarBG.vilkarStatus,
+    (state, ownProps) => ownProps.ytelseGrunnlag],
+  (allePerioder, aktivitetStatusList, dekningsgrad, grunnbelop, vilkarStatus, ytelseGrunnlag) => {
     const perioderSomSkalVises = allePerioder.filter((periode) => periodeHarAarsakSomTilsierVisning(periode.periodeAarsaker));
     if (perioderSomSkalVises.length < 1) {
       // Alle perioder har periodeårsak som egentlig ikke trengs vises, velger første periode som den eneste som blir vist.
@@ -383,7 +392,7 @@ export const createBeregningTableData = createSelector(
       if (dekningsgrad !== dekningsgradKode.HUNDRE) {
         redusertRad.verdi = formatCurrencyNoKr(periode.redusertPrAar);
       }
-      dagsatserRad.verdi = formatCurrencyNoKr(periode.dagsats);
+      dagsatserRad.verdi = formatCurrencyNoKr(finnDagsats(periode, ytelseGrunnlag));
       const rows = [];
       const rowsAndeler = [];
       const rowsForklaringer = [];

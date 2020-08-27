@@ -1,14 +1,6 @@
 {
   "MenySettPaVentIndex.BehandlingOnHold": "Sett behandlingen på vent",
 
-  "SettBehandlingPaVentModal.ModalDescription": "Behandlingen settes på vent med frist",
-  "SettBehandlingPaVentModal.PaVent": "På vent",
-  "SettBehandlingPaVentModal.SettesPaVent": "Behandlingen settes på vent med frist",
-  "SettBehandlingPaVentModal.Ok": "OK",
-  "SettBehandlingPaVentModal.Arsak": "Årsak",
-  "SettBehandlingPaVentModal.SelectPlaceholder": "Velg årsak",
-  "SettBehandlingPaVentModal.Avbryt": "Avbryt",
-
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
   "ValidationMessage.MaxLength": "Du kan skrive maksimalt {length} tegn",

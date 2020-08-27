@@ -39,7 +39,7 @@ export const findResultatText = (resultat, intl) => {
     return (`ResultatTypeCode ${resultat} finnes ikke-LEGG DET INN`);
   }
   const fieldId = resultatCode.feltId;
-  return intl.formatMessage({ id: fieldId }, { b: (...chunks) => <b>{chunks}</b>, br: <br /> });
+  return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> });
 };
 
 export const findHendelseText = (hendelse, getKodeverknavn) => {
@@ -66,7 +66,7 @@ export const findEndretFeltVerdi = (endretFelt, verdi, intl) => {
     if (!verdiCode) {
       return (`EndretFeltVerdiTypeCode ${verdi} finnes ikke-LEGG DET INN`);
     }
-    return intl.formatMessage({ id: verdiCode.verdiId }, { b: (...chunks) => <b>{chunks}</b>, br: <br /> });
+    return intl.formatMessage({ id: verdiCode.verdiId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> });
   }
   return verdi;
 };
@@ -81,10 +81,10 @@ export const findEndretFeltNavn = (endretFelt, intl) => {
   const fieldId = endretFeltNavnType.feltId;
   return endretFelt.navnVerdi !== null ? formatMessage({ id: fieldId }, {
     value: endretFelt.navnVerdi,
-    b: (...chunks) => <b>{chunks}</b>,
+    b: (chunks) => <b>{chunks}</b>,
     br: <br />,
   }) : formatMessage({ id: fieldId }, {
-    b: (...chunks) => <b>{chunks}</b>,
+    b: (chunks) => <b>{chunks}</b>,
     br: <br />,
   });
 };

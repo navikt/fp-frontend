@@ -217,7 +217,7 @@ export class OpptjeningFaktaFormImpl extends Component {
               <FormattedMessage
                 id={dokStatus === DOKUMENTASJON_VIL_BLI_INNHENTET ? 'OpptjeningFaktaForm.DetErInnhentetDok' : 'OpptjeningFaktaForm.DetErIkkeInnhentetDok'}
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
             </AlertStripeInfo>

@@ -8,11 +8,11 @@ const history = createBrowserHistory({
   basename: '/fpsak/',
 });
 
-const withReduxProvider = (story) => {
+const withReduxProvider = (Story) => {
   const store = configureStore(history);
   return (
     <Provider store={store}>
-      { story() }
+      <Story />
     </Provider>
   );
 };

@@ -35,10 +35,9 @@ class PanelDef extends ProsessStegPanelDef {
     aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL,
   ]
 
-  getData = ({ previewCallback, klageVurdering, skalBenytteFritekstBrevmal }) => ({
+  getData = ({ previewCallback, klageVurdering }) => ({
     previewVedtakCallback: previewCallback,
     klageVurdering,
-    skalBenytteFritekstBrevmal,
   })
 }
 

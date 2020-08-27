@@ -171,7 +171,7 @@ const TilkjentYtelseTimeLineData = ({
           <Column xs="12">
             <FormattedMessage
               id="TilkjentYtelse.PeriodeData.Dagsats"
-              values={{ dagsatsVerdi: selectedItemData.dagsats, b: (...chunks) => <b>{chunks}</b> }}
+              values={{ dagsatsVerdi: selectedItemData.dagsats, b: (chunks) => <b>{chunks}</b> }}
             />
           </Column>
         </Row>

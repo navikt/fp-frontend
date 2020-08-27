@@ -48,7 +48,7 @@ const OmsorgFaktaForm = ({
               <FormattedMessage
                 id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
             )}
@@ -60,7 +60,7 @@ const OmsorgFaktaForm = ({
               <FormattedMessage
                 id="OmsorgFaktaForm.HarIkkeAleneomsorg"
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
             )}
@@ -84,7 +84,7 @@ const OmsorgFaktaForm = ({
               <FormattedMessage
                 id="OmsorgFaktaForm.OppgittIkkeOmsorg"
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
             )}
@@ -96,7 +96,7 @@ const OmsorgFaktaForm = ({
               <FormattedMessage
                 id="OmsorgFaktaForm.HarIkkeOmsorg"
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
             )}

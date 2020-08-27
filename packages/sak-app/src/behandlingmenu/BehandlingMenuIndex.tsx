@@ -160,6 +160,7 @@ export const BehandlingMenuIndex: FunctionComponent<Props> = ({
               settBehandlingPaVent={setBehandlingOnHold}
               ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.VENT_AARSAK)}
               lukkModal={lukkModal}
+              erTilbakekreving={behandlingType.kode === bType.TILBAKEKREVING || behandlingType.kode === bType.TILBAKEKREVING_REVURDERING}
             />
           )),
         new MenyData(skalViseHenleggIMeny(behandlingId, behandlingType, kanHenlegge, rettigheter.henleggBehandlingAccess), getHenleggMenytekst())

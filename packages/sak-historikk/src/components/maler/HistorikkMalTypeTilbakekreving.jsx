@@ -50,7 +50,7 @@ export const HistorikkMalTypeTilbakekreving = ({
             <Normaltekst>
               <FormattedMessage
                 id="Historikk.Template.Tilbakekreving.VurderingAvPerioden"
-                values={{ periodeFom, periodeTom, b: (...chunks) => <b>{chunks}</b> }}
+                values={{ periodeFom, periodeTom, b: (chunks) => <b>{chunks}</b> }}
               />
             </Normaltekst>
             <VerticalSpacer eightPx />
@@ -80,7 +80,7 @@ export const HistorikkMalTypeTilbakekreving = ({
                     <FormattedMessage
                       id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
                       values={{
-                        navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (...chunks) => <b>{chunks}</b>,
+                        navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (chunks) => <b>{chunks}</b>,
                       }}
                     />
                   </Normaltekst>

@@ -41,7 +41,7 @@ export const HistorikkMalTypeForeldelse = ({
         return (
           <div key={periodeFom + periodeTom}>
             <Normaltekst>
-              <FormattedMessage id="Historikk.Template.Foreldelse.VurderingAvPerioden" values={{ periodeFom, periodeTom, b: (...chunks) => <b>{chunks}</b> }} />
+              <FormattedMessage id="Historikk.Template.Foreldelse.VurderingAvPerioden" values={{ periodeFom, periodeTom, b: (chunks) => <b>{chunks}</b> }} />
             </Normaltekst>
             {endredeFelter && endredeFelter.map((felt) => {
               const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
@@ -55,7 +55,7 @@ export const HistorikkMalTypeForeldelse = ({
                         navn: getKodeverknavn(endretFeltNavn),
                         fraVerdi,
                         tilVerdi,
-                        b: (...chunks) => <b>{chunks}</b>,
+                        b: (chunks) => <b>{chunks}</b>,
                       }}
                     />
                   </Normaltekst>

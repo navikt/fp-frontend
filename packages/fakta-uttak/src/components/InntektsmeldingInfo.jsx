@@ -55,7 +55,7 @@ const renderAvvikContentUtsettelseFraSøknad = (utsettelseArsak, getKodeverknavn
             <FormattedMessage
               id="UttakInfoPanel.IkkeOppgittUtsettelse"
               values={{
-                b: (...chunks) => <b>{chunks}</b>,
+                b: (chunks) => <b>{chunks}</b>,
                 årsak: getKodeverknavn(utsettelseArsak),
                 årsakLowerCase: getKodeverknavn(utsettelseArsak).toLowerCase(),
               }}

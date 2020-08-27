@@ -27,7 +27,6 @@ const KlagevurderingProsessIndex = ({
   previewCallback,
   readOnlySubmitButton,
   aksjonspunkter,
-  skalBenytteFritekstBrevmal,
 }) => (
   <RawIntlProvider value={intl}>
     {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NK) && (
@@ -42,7 +41,6 @@ const KlagevurderingProsessIndex = ({
         previewCallback={previewCallback}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
-        skalBenytteFritekstBrevmal={skalBenytteFritekstBrevmal}
       />
     )}
     {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP) && (
@@ -57,7 +55,6 @@ const KlagevurderingProsessIndex = ({
         previewCallback={previewCallback}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
-        skalBenytteFritekstBrevmal={skalBenytteFritekstBrevmal}
       />
     )}
   </RawIntlProvider>
@@ -72,7 +69,6 @@ KlagevurderingProsessIndex.propTypes = {
   isReadOnly: PropTypes.bool.isRequired,
   previewCallback: PropTypes.func.isRequired,
   readOnlySubmitButton: PropTypes.bool.isRequired,
-  skalBenytteFritekstBrevmal: PropTypes.bool.isRequired,
   aksjonspunkter: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 

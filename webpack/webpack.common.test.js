@@ -1,5 +1,5 @@
 'use strict';
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');

@@ -180,7 +180,7 @@ export const ActivityPanel = ({
                 <FormattedMessage
                   id="ActivityPanel.IkkeGodkjent"
                   values={{
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               )}
