@@ -8,12 +8,12 @@ import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-me
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Fagsak } from '@fpsak-frontend/types';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import useHistory from '../../app/useHistory';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
-import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
 import { setBehandlingOnHold } from '../../behandlingmenu/behandlingMenuOperations';
 import {
   FpsakApiKeys, restApiHooks, requestApi,
@@ -169,12 +169,14 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
       />
 
       {submitFinished && showSettPaVentModal && (
-        <MessageBehandlingPaVentModal
+        <SettPaVentModalIndex
           showModal={submitFinished && showSettPaVentModal}
           cancelEvent={hideSettPaVentModal}
-          onSubmit={handleSubmitFromModal}
+          submitCallback={handleSubmitFromModal}
           ventearsak={venteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
+          hasManualPaVent={false}
+          erTilbakekreving={behandling.type.kode === BehandlingType.TILBAKEKREVING || behandling.type.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       )}
     </>

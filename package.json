@@ -10,9 +10,9 @@
     "url": "git+https://github.com/navikt/fp-frontend.git"
   },
   "scripts": {
-    "test": "cross-env NODE_ICU_DATA=./node_modules/full-icu mochapack --opts mochapack.opts --include ./packages/utils-test/src/setup-enzyme.jsx --colors --webpack-config webpack/webpack.test.js \"packages/**/*.spec.*\"",
-    "test:watch": "cross-env NODE_ICU_DATA=./node_modules/full-icu mochapack --opts mochapack.opts --include ./packages/utils-test/src/setup-enzyme.jsx  --watch --webpack-config webpack/webpack.test.watch.js \"packages/**/*.spec.*\"",
-    "test:coverage": "cross-env NODE_ICU_DATA=./node_modules/full-icu nyc mochapack --opts mochapack.opts --include ./packages/utils-test/src/setup-enzyme.jsx  --webpack-config webpack/webpack.test.coverage.js \"packages/**/*.spec.*\"",
+    "test": "cross-env NODE_ICU_DATA=./node_modules/full-icu mochapack --opts mochapack.opts --include ./packages/utils-test/src/setup-mocha.jsx --include ./packages/utils-test/src/setup-mocha-hook.jsx --colors --webpack-config webpack/webpack.test.js \"packages/**/*.spec.*\"",
+    "test:watch": "cross-env NODE_ICU_DATA=./node_modules/full-icu mochapack --opts mochapack.opts --include ./packages/utils-test/src/setup-mocha.jsx --include ./packages/utils-test/src/setup-mocha-hook.jsx  --watch --webpack-config webpack/webpack.test.watch.js \"packages/**/*.spec.*\"",
+    "test:coverage": "cross-env NODE_ICU_DATA=./node_modules/full-icu nyc mochapack --opts mochapack.opts --include ./packages/utils-test/src/setup-mocha.jsx --include ./packages/utils-test/src/setup-mocha-hook.jsx  --webpack-config webpack/webpack.test.coverage.js \"packages/**/*.spec.*\"",
     "dev": "cross-env NODE_ENV=development NODE_ICU_DATA=./node_modules/full-icu node webpack/webpack.dev.server.js --config webpack/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --no-progress --colors --config webpack/webpack.prod.js",
     "lerna": "lerna",

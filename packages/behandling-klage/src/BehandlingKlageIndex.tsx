@@ -83,7 +83,6 @@ const BehandlingKlageIndex: FunctionComponent<Props> = ({
   opneSokeside,
   forrigeBehandling,
   alleBehandlinger,
-  skalBenytteFritekstBrevmal,
   requestPollingMessage,
   setRequestPendingMessage,
 }) => {

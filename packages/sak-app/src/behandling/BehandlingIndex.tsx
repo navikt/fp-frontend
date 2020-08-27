@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { featureToggle } from '@fpsak-frontend/konstanter';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/utils';
@@ -158,7 +157,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingInnsynIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            alleBehandlinger={fagsakBehandlingerInfo}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -181,7 +179,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingKlageIndex
-            skalBenytteFritekstBrevmal={featureToggles[featureToggle.BENYTT_FRITEKST_BREVMAL_FOR_KLAGE]}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
             {...defaultProps}

@@ -7,12 +7,12 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Fagsak } from '@fpsak-frontend/types';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import * as useHistory from '../../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
-import MessageBehandlingPaVentModal from './MessageBehandlingPaVentModal';
 import MessagesIndex from './MessagesIndex';
 
 describe('<MessagesIndex>', () => {
@@ -187,12 +187,12 @@ describe('<MessagesIndex>', () => {
     const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
 
     await submitCallback(message);
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(1);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
     expect(reqData).to.have.length(1);
@@ -229,12 +229,12 @@ describe('<MessagesIndex>', () => {
     const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
 
     await submitCallback(message);
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(1);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(1);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
     expect(reqData).to.have.length(1);
@@ -271,12 +271,12 @@ describe('<MessagesIndex>', () => {
     const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
 
     await submitCallback(message);
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(1);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(1);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
     expect(reqData).to.have.length(1);
@@ -317,9 +317,9 @@ describe('<MessagesIndex>', () => {
     const index = wrapper.find(MeldingerSakIndex);
     const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
 
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
     await submitCallback(message);
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(1);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(1);
 
     const formValues = {
       frist: '2017-10-10',
@@ -341,7 +341,7 @@ describe('<MessagesIndex>', () => {
     expect(push.getCalls()[0].args).to.have.length(1);
     expect(push.getCalls()[0].args[0]).to.eql('/');
 
-    expect(wrapper.find(MessageBehandlingPaVentModal)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
 
     behandlingEventHandler.clear();
   });

@@ -159,6 +159,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const kanHenlegge = behandling ? behandling.kanHenleggeBehandling : false;
   const erKoet = behandling ? behandling.behandlingKoet : false;
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
+  const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
 
   return (
     <MenySakIndex
@@ -180,7 +181,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               settBehandlingPaVent={setBehandlingOnHold}
               ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.VENT_AARSAK)}
               lukkModal={lukkModal}
-              erTilbakekreving={behandlingType.kode === bType.TILBAKEKREVING || behandlingType.kode === bType.TILBAKEKREVING_REVURDERING}
+              erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
             />
           )),
         new MenyData(skalViseHenleggIMeny(behandlingId, behandling?.type, kanHenlegge, rettigheter.henleggBehandlingAccess), getHenleggMenytekst())
