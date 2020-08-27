@@ -134,7 +134,7 @@ const OppholdINorgeOgAdresserFaktaPanelImpl = ({
                     <FormattedMessage
                       id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway"
                       values={{
-                        b: (...chunks) => <b>{chunks}</b>,
+                        b: (chunks) => <b>{chunks}</b>,
                       }}
                     />
                   )}

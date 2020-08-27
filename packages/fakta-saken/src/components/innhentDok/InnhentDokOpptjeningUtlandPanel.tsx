@@ -62,7 +62,7 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps & Wrapp
             <FormattedMessage
               id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
               values={{
-                b: (...chunks) => <b>{chunks}</b>,
+                b: (chunks) => <b>{chunks}</b>,
               }}
             />
           )}

@@ -69,7 +69,7 @@ const TimeLineTab = ({
                   values={{
                     ukerVerdi: fordelteDager.uker,
                     dagerVerdi: fordelteDager.dager,
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               </Normaltekst>

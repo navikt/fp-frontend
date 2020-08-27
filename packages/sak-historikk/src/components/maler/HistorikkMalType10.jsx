@@ -49,7 +49,7 @@ const HistorikkMalType10 = ({
             fieldName,
             fromValue,
             toValue,
-            b: (...chunks) => <b>{chunks}</b>,
+            b: (chunks) => <b>{chunks}</b>,
           }}
         />
       </div>
@@ -74,7 +74,7 @@ const HistorikkMalType10 = ({
               fromValueDays,
               toValueWeeks,
               toValueDays,
-              b: (...chunks) => <b>{chunks}</b>,
+              b: (chunks) => <b>{chunks}</b>,
             }}
           />
         </div>
@@ -129,7 +129,7 @@ const HistorikkMalType10 = ({
           values={{
             periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
             periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-            b: (...chunks) => <b>{chunks}</b>,
+            b: (chunks) => <b>{chunks}</b>,
           }}
         />
         )}
@@ -141,7 +141,7 @@ const HistorikkMalType10 = ({
           values={{
             periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
             periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-            b: (...chunks) => <b>{chunks}</b>,
+            b: (chunks) => <b>{chunks}</b>,
           }}
         />
         )}

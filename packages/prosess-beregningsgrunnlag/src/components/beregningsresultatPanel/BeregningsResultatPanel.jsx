@@ -46,7 +46,7 @@ const lagDagsatsRad = (dagsatsRad, ikkeVurdert) => {
               { !ikkeVurdert && (
                 <FormattedMessage
                   id="Beregningsgrunnlag.BeregningTable.DagsatsNy"
-                  values={{ dagSats: dagsatsRad.grunnlag, b: (...chunks) => <b>{chunks}</b> }}
+                  values={{ dagSats: dagsatsRad.grunnlag, b: (chunks) => <b>{chunks}</b> }}
                 />
               )}
               { ikkeVurdert && (
@@ -144,12 +144,12 @@ const lagTabellRaderIkkeOppfylt = (listofAndeler, intl, halvGVerdi, key) => (
     <Normaltekst className={beregningStyles.redError}>
       <Image
         className={styles.avslaat_icon}
-        alt={intl.formatMessage({ id: 'Beregningsgrunnlag.BeregningTable.VilkarIkkeOppfylt2' }, { b: (...chunks) => <b>{chunks}</b> })}
+        alt={intl.formatMessage({ id: 'Beregningsgrunnlag.BeregningTable.VilkarIkkeOppfylt2' }, { b: (chunks) => <b>{chunks}</b> })}
         src={avslaatIkonUrl}
       />
       <FormattedMessage
         id="Beregningsgrunnlag.BeregningTable.VilkarIkkeOppfylt2"
-        values={{ halvG: formatCurrencyNoKr(halvGVerdi), b: (...chunks) => <b>{chunks}</b> }}
+        values={{ halvG: formatCurrencyNoKr(halvGVerdi), b: (chunks) => <b>{chunks}</b> }}
       />
     </Normaltekst>
   </React.Fragment>

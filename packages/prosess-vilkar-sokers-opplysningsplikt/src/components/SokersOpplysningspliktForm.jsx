@@ -38,7 +38,7 @@ const getLabel = (intl) => (
       <FormattedMessage
         id={findRadioButtonTextCode(false)}
         values={{
-          b: (...chunks) => <b>{chunks}</b>,
+          b: (chunks) => <b>{chunks}</b>,
         }}
       />
     </div>
