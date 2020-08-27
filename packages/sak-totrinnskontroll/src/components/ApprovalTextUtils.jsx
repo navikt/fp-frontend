@@ -34,7 +34,7 @@ export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto, arbeidsforhol
     formattedMessages.push(<FormattedMessage
       id="ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon"
       values={{
-        b: (...chunks) => <b>{chunks}</b>,
+        b: (chunks) => <b>{chunks}</b>,
       }}
     />);
     return formattedMessages;
@@ -43,7 +43,7 @@ export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto, arbeidsforhol
     formattedMessages.push(<FormattedMessage
       id="ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon"
       values={{
-        b: (...chunks) => <b>{chunks}</b>,
+        b: (chunks) => <b>{chunks}</b>,
       }}
     />);
     if (kode === arbeidsforholdHandlingType.BRUK) {
@@ -52,7 +52,7 @@ export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto, arbeidsforhol
   }
   const type = arbeidsforholdHandlingTyper.find((t) => t.kode === kode);
   const melding = type !== undefined && type !== null ? type.navn : '';
-  formattedMessages.push(<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.Melding" values={{ melding, b: (...chunks) => <b>{chunks}</b> }} />);
+  formattedMessages.push(<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.Melding" values={{ melding, b: (chunks) => <b>{chunks}</b> }} />);
   return formattedMessages;
 };
 
@@ -66,7 +66,7 @@ const buildArbeidsforholdText = (aksjonspunkt, arbeidsforholdHandlingTyper) => a
           orgnavn: arbeidforholdDto.navn,
           orgnummer: arbeidforholdDto.organisasjonsnummer,
           arbeidsforholdId: arbeidforholdDto.arbeidsforholdId ? `...${arbeidforholdDto.arbeidsforholdId.slice(-4)}` : '',
-          b: (...chunks) => <b>{chunks}</b>,
+          b: (chunks) => <b>{chunks}</b>,
         }}
       />
       { formattedMessages.map((formattedMessage) => (

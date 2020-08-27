@@ -122,7 +122,7 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl = ({
                 <FormattedMessage
                   id={findRadioButtonTextCode(true)}
                   values={{
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               )}
@@ -133,7 +133,7 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl = ({
                 <FormattedMessage
                   id={findRadioButtonTextCode(false)}
                   values={{
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               )}
@@ -152,7 +152,7 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl = ({
               <FormattedMessage
                 id={findRadioButtonTextCode(erVilkarOk)}
                 values={{
-                  b: (...chunks) => <b>{chunks}</b>,
+                  b: (chunks) => <b>{chunks}</b>,
                 }}
               />
                   )}

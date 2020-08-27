@@ -28,7 +28,7 @@ const HistorikkMalType8 = ({
               fieldName,
               fromValue,
               toValue,
-              b: (...chunks) => <b>{chunks}</b>,
+              b: (chunks) => <b>{chunks}</b>,
             }}
           />
         </div>
@@ -41,7 +41,7 @@ const HistorikkMalType8 = ({
           values={{
             fieldName,
             value: toValue,
-            b: (...chunks) => <b>{chunks}</b>,
+            b: (chunks) => <b>{chunks}</b>,
           }}
         />
       </div>
@@ -80,7 +80,7 @@ const HistorikkMalType8 = ({
           {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger.map((opplysning) => (
             <FormattedMessage
               id={findIdForOpplysningCode(opplysning)}
-              values={{ antallBarn: opplysning.tilVerdi, b: (...chunks) => <b>{chunks}</b> }}
+              values={{ antallBarn: opplysning.tilVerdi, b: (chunks) => <b>{chunks}</b> }}
             />
           ))}
 

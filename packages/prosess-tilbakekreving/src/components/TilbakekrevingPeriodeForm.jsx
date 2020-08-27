@@ -179,7 +179,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component {
             <Normaltekst>
               <FormattedMessage
                 id={belop.erTrekk ? 'TilbakekrevingPeriodeForm.FeilutbetaltBelopTrekk' : 'TilbakekrevingPeriodeForm.FeilutbetaltBelopEtterbetaling'}
-                values={{ belop: formatCurrencyNoKr(belop.belop), b: (...chunks) => <b>{chunks}</b> }}
+                values={{ belop: formatCurrencyNoKr(belop.belop), b: (chunks) => <b>{chunks}</b> }}
               />
             </Normaltekst>
             <VerticalSpacer eigthPx />

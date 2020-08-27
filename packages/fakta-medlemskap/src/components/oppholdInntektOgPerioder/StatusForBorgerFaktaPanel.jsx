@@ -51,7 +51,7 @@ const StatusForBorgerFaktaPanelImpl = ({
                 <FormattedMessage
                   id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
                   values={{
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               )}
@@ -80,7 +80,7 @@ const StatusForBorgerFaktaPanelImpl = ({
                 <FormattedMessage
                   id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
                   values={{
-                    b: (...chunks) => <b>{chunks}</b>,
+                    b: (chunks) => <b>{chunks}</b>,
                   }}
                 />
               )}
