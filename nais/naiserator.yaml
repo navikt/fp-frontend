@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: fpsak-frontend
+  name: fp-frontend
   namespace: {{namespace}}
   labels:
     team: teamforeldrepenger
@@ -41,10 +41,8 @@ spec:
   vault:
     enabled: true
   env:
-    - name: APP_VERSION
-      value: "{{version}}"
     - name: APP_NAME
-      value: fpsak-frontend
+      value: fp-frontend
     - name: REDIS_HOST
       value: "fpsak-redis.default.svc.nais.local"
     - name: REDIS_PORT
