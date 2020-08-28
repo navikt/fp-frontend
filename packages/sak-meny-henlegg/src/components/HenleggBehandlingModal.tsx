@@ -125,7 +125,7 @@ export const HenleggBehandlingModalImpl: FunctionComponent<OwnProps & StateProps
                     name="fritekst"
                     label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
                     validate={[required, hasValidText]}
-                    maxLength={100000}
+                    maxLength={2000}
                   />
                 </div>
               </Column>
