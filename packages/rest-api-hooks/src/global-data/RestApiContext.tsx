@@ -19,8 +19,6 @@ interface OwnProps {
 /**
  * Håndterer state for data som skal hentes fra backend kun en gang og som en trenger aksess til
  * mange steder i applikasjonen.
- *
- * Tilbyr i tillegg et requestApi for hooks som henter data fra backend
  */
 export const RestApiProvider: FunctionComponent<OwnProps> = ({
   children,

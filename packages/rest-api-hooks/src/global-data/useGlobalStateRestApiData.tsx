@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
 
-import { RestApiStateContext } from '../RestApiContext';
+import { RestApiStateContext } from './RestApiContext';
 
 /**
  * For mocking i unit-test

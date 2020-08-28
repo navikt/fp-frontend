@@ -5,7 +5,7 @@ import {
 import { NotificationMapper, AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
 
 import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
-import { RestApiDispatchContext } from '../RestApiContext';
+import { RestApiDispatchContext } from './RestApiContext';
 import RestApiState from '../RestApiState';
 
 interface RestApiData<T> {
@@ -38,7 +38,7 @@ export const getUseGlobalStateRestApiMock = (requestApi: AbstractRequestApi) => 
 };
 
 /**
- * Hook som henter data fra backend (ved mount) og deretter lagrer i @see RestApiContext
+ * Hook som henter data fra backend og deretter lagrer i @see RestApiContext
  */
 const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T>(
   key: string, params?: any, options: Options = defaultOptions,

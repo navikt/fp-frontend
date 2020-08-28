@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 import {
   REQUEST_POLLING_CANCELLED, NotificationMapper, ErrorType, AbstractRequestApi,
 } from '@fpsak-frontend/rest-api-new';
+
 import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
 import RestApiState from '../RestApiState';
 
