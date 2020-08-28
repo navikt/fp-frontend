@@ -40,7 +40,6 @@ interface OwnProps {
  *
  * Container komponent. Har ansvar for å hente historiken for en fagsak fra state og vise den
  */
-// @ts-ignore
 const HistoryIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingId,
@@ -77,16 +76,20 @@ const HistoryIndex: FunctionComponent<OwnProps> = ({
     return <LoadingPanel />;
   }
 
-  return historikkInnslag.map((innslag) => (
-    <HistorikkSakIndex
-      key={innslag.opprettetTidspunkt + innslag.type.kode}
-      historieInnslag={innslag}
-      saksnummer={saksnummer}
-      alleKodeverk={innslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak}
-      getBehandlingLocation={getBehandlingLocation}
-      createLocationForSkjermlenke={createLocationForSkjermlenke}
-    />
-  ));
+  return (
+    <>
+      {historikkInnslag.map((innslag) => (
+        <HistorikkSakIndex
+          key={innslag.opprettetTidspunkt + innslag.type.kode}
+          historieInnslag={innslag}
+          saksnummer={saksnummer}
+          alleKodeverk={innslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak}
+          getBehandlingLocation={getBehandlingLocation}
+          createLocationForSkjermlenke={createLocationForSkjermlenke}
+        />
+      ))}
+    </>
+  );
 };
 
 export default HistoryIndex;

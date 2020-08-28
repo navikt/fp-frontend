@@ -19,7 +19,7 @@ interface OwnProps {
 }
 
 /**
- * State for å lagre feil oppstår ved rest-kall
+ * Tilbyr kontekst for lagring av feilmeldinger.
  */
 export const RestApiErrorProvider: FunctionComponent<OwnProps> = ({
   children,
