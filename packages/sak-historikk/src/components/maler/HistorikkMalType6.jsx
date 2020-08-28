@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { findHendelseText } from './felles/historikkUtils';
@@ -42,4 +41,4 @@ HistorikkMalType6.propTypes = {
   getKodeverknavn: PropTypes.func.isRequired,
 };
 
-export default injectIntl(HistorikkMalType6);
+export default HistorikkMalType6;
