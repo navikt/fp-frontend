@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
 
@@ -9,64 +10,63 @@ import { RestApiProvider } from './RestApiContext';
 import getUseGlobalStateRestApi from './useGlobalStateRestApi';
 import useGlobalStateRestApiData from './useGlobalStateRestApiData';
 
-class RequestApiMock extends AbstractRequestApi {
-  mockdata: {[key: string]: RequestRunner} = {};
+class RequestApiTestMock extends AbstractRequestApi {
+  data: any;
 
-  execData: { endpointName: string; params: any }[] = [];
-
-  missingPaths: string[] = [];
-
-  public startRequest = (endpointName: string, params?: any) => {
-    const data = this.mockdata[endpointName];
-    if (!data) {
-      throw new Error(`Det er ikke satt opp mock-data for endepunkt ${endpointName}`);
-    }
-    this.execData.push({
-      endpointName,
-      params,
-    });
-    return data;
+  constructor(data) {
+    super();
+    this.data = data;
   }
+
+  public startRequest = () => Promise.resolve({ payload: this.data })
 
   public cancelRequest = () => undefined;
 
-  public hasPath = (endpointName: string) => !this.missingPaths.some((p) => p === endpointName);
+  public hasPath = () => true;
 
   public injectPaths = () => {}
 
   public isMock = () => false;
 
-  public mock = () => { };
+  public mock = () => { throw new Error('Not Implemented'); };
 
-  public getRequestMockData = () => {}
+  public setMissingPath = () => { throw new Error('Not Implemented'); };
 
-  public setMissingPath = () => { }
+  public getRequestMockData = () => { throw new Error('Not Implemented'); };
 
-  public clearAllMockData = () => { };
+  public clearAllMockData = () => { throw new Error('Not Implemented'); };
 }
 
-const useGlobalStateRestApi = getUseGlobalStateRestApi(new RequestApiMock());
+const dataHentetFraBackend = { id: 1 };
 
-const TestGlobalData = () => {
-  useGlobalStateRestApi('NAV_ANSATT');
+const useGlobalStateRestApi = getUseGlobalStateRestApi(new RequestApiTestMock(dataHentetFraBackend));
 
-  const feilmeldinger = useGlobalStateRestApiData('NAV_ANSATT');
-  return <>{feilmeldinger.map((feil) => <span key={feil}>{feil}</span>)}</>;
+const TestGlobalData = ({ setValue }) => {
+  useGlobalStateRestApi('BEHANDLING');
+
+  const data = useGlobalStateRestApiData('BEHANDLING');
+  useEffect(() => {
+    setValue(data);
+  }, [data]);
+  return null;
 };
 
 describe('<RestApiContext>', () => {
-  it('skal legge til feilmelding og så hente alle i kontekst', () => {
-    const wrapper = mount(
+  it('skal utføre restkall og så hente data inn i komponent', async () => {
+    const setValue = sinon.spy();
+
+    await mount(
       <RestApiProvider>
         <RestApiErrorProvider>
-          <TestGlobalData />
+          <TestGlobalData setValue={setValue} />
         </RestApiErrorProvider>
       </RestApiProvider>,
     );
 
-    const spans = wrapper.find('span');
-    expect(spans).to.have.length(2);
-    expect(spans.first().text()).to.eql('Feilmeldingstest 1');
-    expect(spans.last().text()).to.eql('Feilmeldingstest 2');
+    // Må sjekke resultatet via funksjon fordi per i dag blir ikke output fra TestGlobalData korrekt oppdatert
+    expect(setValue.calledTwice).to.true;
+    const { args } = setValue.getCalls()[1];
+    expect(args).has.length(1);
+    expect(args[0]).is.eql(dataHentetFraBackend);
   });
 });
