@@ -69,6 +69,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
       behandlingId,
       årsakKode: formValues.årsakKode,
       begrunnelse: formValues.begrunnelse,
+      fritekst: formValues.fritekst,
     };
     henleggBehandling(henleggBehandlingDto).then(() => {
       setHenlagt(true);

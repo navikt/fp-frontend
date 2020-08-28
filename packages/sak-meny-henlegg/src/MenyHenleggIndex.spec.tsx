@@ -40,6 +40,7 @@ describe('<MenyHenleggIndex>', () => {
     modal.prop('onSubmit')({
       årsakKode: 'test',
       begrunnelse: 'Dette er en begrunnelse',
+      fritekst: 'Dette er en fritekst',
     });
 
     const kall = henleggBehandlingCallback.getCalls();
@@ -50,6 +51,7 @@ describe('<MenyHenleggIndex>', () => {
       behandlingVersjon: 1,
       årsakKode: 'test',
       begrunnelse: 'Dette er en begrunnelse',
+      fritekst: 'Dette er en fritekst',
     });
   });
 });
