@@ -21,13 +21,13 @@ const maxLength1500 = maxLength(1500);
 
 // TODO (TOR) Skal bruka navn fra kodeverk i staden for oppslag klientside for "henleggArsaker"
 
-const previewHenleggBehandlingDoc = (behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, behandlingId) => (e) => {
+const previewHenleggBehandlingDoc = (behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, fritekst, behandlingId) => (e) => {
   // TODO Hardkoda verdiar. Er dette eit kodeverk?
   const data = {
     behandlingUuid,
     ytelseType,
     dokumentMal: 'HENLEG',
-    fritekst: ' ',
+    fritekst,
     mottaker: 'Søker',
     behandlingId,
   };
@@ -47,10 +47,21 @@ interface OwnProps {
 interface StateProps {
   årsakKode?: string;
   begrunnelse?: string;
+  fritekst?: string;
   henleggArsaker: Kodeverk[];
   showLink: boolean;
   behandlingTypeKode: string;
 }
+
+const showHenleggelseFritekst = (behandlingTypeKode, årsakKode) => behandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode
+  && behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
+
+const disableHovedKnapp = (behandlingTypeKode, årsakKode, begrunnelse, fritekst) => {
+  if (showHenleggelseFritekst(behandlingTypeKode, årsakKode)) {
+    return !(årsakKode && begrunnelse && fritekst);
+  }
+  return !(årsakKode && begrunnelse);
+};
 
 /**
  * HenleggBehandlingModal
@@ -68,6 +79,7 @@ export const HenleggBehandlingModalImpl: FunctionComponent<OwnProps & StateProps
   intl,
   årsakKode,
   begrunnelse,
+  fritekst,
   showLink,
   behandlingTypeKode,
   behandlingId,
@@ -104,13 +116,28 @@ export const HenleggBehandlingModalImpl: FunctionComponent<OwnProps & StateProps
               />
             </Column>
           </Row>
+          {showHenleggelseFritekst(behandlingTypeKode, årsakKode)
+          && (
+            <Row>
+              <Column xs="8">
+                <div className={styles.fritekstTilBrevTextArea}>
+                  <TextAreaField
+                    name="fritekst"
+                    label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
+                    validate={[required, hasValidText]}
+                    maxLength={2000}
+                  />
+                </div>
+              </Column>
+            </Row>
+          )}
           <Row>
             <Column xs="6">
               <div>
                 <Hovedknapp
                   mini
                   className={styles.button}
-                  disabled={!(årsakKode && begrunnelse)}
+                  disabled={disableHovedKnapp(behandlingTypeKode, årsakKode, begrunnelse, fritekst)}
                 >
                   {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
                 </Hovedknapp>
@@ -129,8 +156,8 @@ export const HenleggBehandlingModalImpl: FunctionComponent<OwnProps & StateProps
                   <Undertekst>{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Undertekst>
                   <a
                     href=""
-                    onClick={previewHenleggBehandlingDoc(behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, behandlingId)}
-                    onKeyDown={previewHenleggBehandlingDoc(behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, behandlingId)}
+                    onClick={previewHenleggBehandlingDoc(behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, fritekst, behandlingId)}
+                    onKeyDown={previewHenleggBehandlingDoc(behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, fritekst, behandlingId)}
                     className="lenke lenke--frittstaende"
                   >
                     {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
@@ -149,7 +176,7 @@ const henleggArsakerPerBehandlingType = {
   [behandlingType.KLAGE]: [behandlingResultatType.HENLAGT_KLAGE_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
   [behandlingType.DOKUMENTINNSYN]: [behandlingResultatType.HENLAGT_INNSYN_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
   [behandlingType.TILBAKEKREVING]: [behandlingResultatType.HENLAGT_FEILOPPRETTET],
-  [behandlingType.TILBAKEKREVING_REVURDERING]: [behandlingResultatType.HENLAGT_FEILOPPRETTET],
+  [behandlingType.TILBAKEKREVING_REVURDERING]: [behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV, behandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV],
   [behandlingType.REVURDERING]: [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
     behandlingResultatType.HENLAGT_SOKNAD_MANGLER],
   OTHER: [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
@@ -172,10 +199,13 @@ export const getHenleggArsaker = createSelector([
 
 const getShowLink = createSelector([
   (state) => formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
+  (state) => formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),
   (state, ownProps) => ownProps.behandlingType],
-(arsakKode, type) => {
-  if (type.kode === behandlingType.TILBAKEKREVING || type.kode === behandlingType.TILBAKEKREVING_REVURDERING) {
+(arsakKode, fritekst, type) => {
+  if (type.kode === behandlingType.TILBAKEKREVING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
+  } if (type.kode === behandlingType.TILBAKEKREVING_REVURDERING) {
+    return behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && fritekst;
   }
   return [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
     behandlingResultatType.HENLAGT_INNSYN_TRUKKET].includes(arsakKode);
@@ -184,6 +214,7 @@ const getShowLink = createSelector([
 const mapStateToProps = (state, ownProps): StateProps => ({
   årsakKode: formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
   begrunnelse: formValueSelector('HenleggBehandlingModal')(state, 'begrunnelse'),
+  fritekst: formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),
   henleggArsaker: getHenleggArsaker(ownProps),
   showLink: getShowLink(state, ownProps),
   behandlingTypeKode: ownProps.behandlingType.kode,
