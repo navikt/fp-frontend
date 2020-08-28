@@ -116,21 +116,21 @@ export const HenleggBehandlingModalImpl: FunctionComponent<OwnProps & StateProps
               />
             </Column>
           </Row>
-          <Row>
-            <Column xs="8">
-              {showHenleggelseFritekst(behandlingTypeKode, årsakKode)
-              && (
-              <div className={styles.fritekstTilBrevTextArea}>
-                <TextAreaField
-                  name="fritekst"
-                  label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
-                  validate={[required, hasValidText]}
-                  maxLength={100000}
-                />
-              </div>
-              )}
-            </Column>
-          </Row>
+          {showHenleggelseFritekst(behandlingTypeKode, årsakKode)
+          && (
+            <Row>
+              <Column xs="8">
+                <div className={styles.fritekstTilBrevTextArea}>
+                  <TextAreaField
+                    name="fritekst"
+                    label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
+                    validate={[required, hasValidText]}
+                    maxLength={100000}
+                  />
+                </div>
+              </Column>
+            </Row>
+          )}
           <Row>
             <Column xs="6">
               <div>
