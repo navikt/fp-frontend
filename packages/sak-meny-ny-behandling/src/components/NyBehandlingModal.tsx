@@ -17,7 +17,6 @@ import bType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 
-import { getBehandlingerUuidsMappedById } from '@fpsak-frontend/sak-app/src/behandling/selectors/behandlingerSelectors';
 import styles from './nyBehandlingModal.less';
 
 const createOptions = (bt, enabledBehandlingstyper, intl) => {
@@ -248,9 +247,6 @@ export const getEnabledBehandlingstyper = createSelector([
   .filter((b) => (b.kode === bType.FORSTEGANGSSOKNAD ? hasEnabledCreateNewBehandling : true))
   .filter((b) => (b.kode === bType.REVURDERING ? hasEnabledCreateRevurdering : true)));
 
-const isTilbakekrevingEllerTilbakekrevingRevurdering = createSelector([(ownProps: Props) => ownProps.behandlingType],
-  (behandlingType) => behandlingType && (behandlingType.kode === bType.TILBAKEKREVING || behandlingType.kode === bType.TILBAKEKREVING_REVURDERING));
-
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const onSubmit = (values) => initialOwnProps.submitCallback({
     ...values,
@@ -262,7 +258,6 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
     behandlingTyper: getBehandlingTyper(ownProps),
     enabledBehandlingstyper: getEnabledBehandlingstyper(ownProps),
     uuid: ownProps.uuidForSistLukkede,
-    behandlingUuid: isTilbakekrevingEllerTilbakekrevingRevurdering(ownProps) ? getBehandlingerUuidsMappedById(initialState)[ownProps.behandlingId] : undefined,
     behandlingArsakTyper: getBehandlingAarsaker(state, ownProps),
     behandlingType: formValueSelector(formName)(state, 'behandlingType'),
   });

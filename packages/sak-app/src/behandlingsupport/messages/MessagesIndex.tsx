@@ -47,7 +47,7 @@ const getSubmitCallback = (setShowMessageModal, behandlingTypeKode, behandlingId
     });
 };
 
-const getPreviewCallback = (behandlingTypeKode, behandlingId, behandlingUuid, fagsakYtelseType, fetchPreview) => (
+const getPreviewCallback = (behandlingTypeKode, behandlingUuid, fagsakYtelseType, fetchPreview) => (
   mottaker, dokumentMal, fritekst, aarsakskode,
 ) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
@@ -133,7 +133,7 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
 
   const fetchPreview = useVisForhandsvisningAvMelding();
 
-  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandlingId, behandling.uuid, fagsak.sakstype, fetchPreview),
+  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandling.uuid, fagsak.sakstype, fetchPreview),
     [behandlingId, behandlingVersjon]);
 
   const afterSubmit = useCallback(() => {
