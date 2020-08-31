@@ -10,7 +10,7 @@ import {
   FagsakInfo, Rettigheter, SettPaVentParams, ReduxFormStateCleaner,
 } from '@fpsak-frontend/behandling-felles';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
+import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import innsynApi, { reduxRestApi, InnsynBehandlingApiKeys } from './data/innsynBehandlingApi';
@@ -32,11 +32,13 @@ interface OwnProps {
     clear: () => void;
   };
   opneSokeside: () => void;
+  setRequestPendingMessage: (message: string) => void;
 }
 
 interface StateProps {
   behandling?: Behandling;
   forrigeBehandling?: Behandling;
+  requestPollingMessage?: string;
 }
 
 interface DispatchProps {
@@ -72,6 +74,8 @@ const BehandlingInnsynIndex: FunctionComponent<Props> = ({
   settPaVent,
   opneSokeside,
   forrigeBehandling,
+  setRequestPendingMessage,
+  requestPollingMessage,
 }) => {
   const forrigeVersjon = useRef<number>();
 
@@ -95,6 +99,10 @@ const BehandlingInnsynIndex: FunctionComponent<Props> = ({
       }, 1000);
     };
   }, [behandlingId]);
+
+  useEffect(() => {
+    setRequestPendingMessage(requestPollingMessage);
+  }, [requestPollingMessage]);
 
   if (!behandling) {
     return <LoadingPanel />;
@@ -136,6 +144,7 @@ const BehandlingInnsynIndex: FunctionComponent<Props> = ({
 const mapStateToProps = (state) => ({
   behandling: innsynApi.BEHANDLING_INNSYN.getRestApiData()(state),
   forrigeBehandling: innsynApi.BEHANDLING_INNSYN.getRestApiPreviousData()(state),
+  requestPollingMessage: getRequestPollingMessage(state),
 });
 
 const getResetRestApiContext = () => (dispatch) => {

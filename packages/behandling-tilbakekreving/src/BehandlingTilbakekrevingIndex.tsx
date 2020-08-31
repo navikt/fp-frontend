@@ -10,7 +10,7 @@ import {
   FagsakInfo, SettPaVentParams, ReduxFormStateCleaner, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
+import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import tilbakekrevingApi, { reduxRestApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
@@ -35,6 +35,7 @@ interface OwnProps {
   opneSokeside: () => void;
   harApenRevurdering: boolean;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
+  setRequestPendingMessage: (message: string) => void;
 }
 
 interface StateProps {
@@ -42,6 +43,7 @@ interface StateProps {
   forrigeBehandling?: Behandling;
   tilbakekrevingKodeverk?: {[key: string]: KodeverkMedNavn[]};
   hasFetchError: boolean;
+  requestPollingMessage?: string;
 }
 
 interface DispatchProps {
@@ -87,6 +89,8 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<Props> = ({
   valgtFaktaSteg,
   harApenRevurdering,
   hasFetchError,
+  requestPollingMessage,
+  setRequestPendingMessage,
 }) => {
   const forrigeVersjon = useRef<number>();
 
@@ -113,6 +117,10 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<Props> = ({
       }, 1000);
     };
   }, [behandlingId]);
+
+  useEffect(() => {
+    setRequestPendingMessage(requestPollingMessage);
+  }, [requestPollingMessage]);
 
   if (!behandling || !tilbakekrevingKodeverk) {
     return <LoadingPanel />;
@@ -159,6 +167,7 @@ const mapStateToProps = (state): StateProps => ({
   forrigeBehandling: tilbakekrevingApi.BEHANDLING_TILBAKE.getRestApiPreviousData()(state),
   tilbakekrevingKodeverk: tilbakekrevingApi.TILBAKE_KODEVERK.getRestApiData()(state),
   hasFetchError: !!tilbakekrevingApi.BEHANDLING_TILBAKE.getRestApiError()(state),
+  requestPollingMessage: getRequestPollingMessage(state),
 });
 
 const getResetRestApiContext = () => (dispatch: Dispatch) => {

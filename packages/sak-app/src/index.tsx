@@ -1,13 +1,13 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { render } from 'react-dom';
 import { init, Integrations } from '@sentry/browser';
 
 import { reducerRegistry } from '@fpsak-frontend/rest-api-redux';
 import errorHandler from '@fpsak-frontend/error-api-redux';
-import { RestApiErrorProvider } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiErrorProvider, RestApiProvider } from '@fpsak-frontend/rest-api-hooks';
 
 import AppIndex from './app/AppIndex';
 import configureStore from './configureStore';
@@ -51,7 +51,7 @@ init({
 const history = createBrowserHistory({
   basename: '/fpsak/',
 });
-const store = configureStore(history);
+const store = configureStore();
 
 reducerRegistry.register(errorHandler.getErrorReducerName(), errorHandler.getErrorReducer());
 
@@ -62,11 +62,13 @@ const renderFunc = (Component) => {
   }
   render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <RestApiErrorProvider>
-          <Component />
-        </RestApiErrorProvider>
-      </ConnectedRouter>
+      <Router history={history}>
+        <RestApiProvider>
+          <RestApiErrorProvider>
+            <Component />
+          </RestApiErrorProvider>
+        </RestApiProvider>
+      </Router>
     </Provider>,
     app,
   );

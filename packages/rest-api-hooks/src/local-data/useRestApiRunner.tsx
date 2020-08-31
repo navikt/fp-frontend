@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react';
 
 import {
-  REQUEST_POLLING_CANCELLED, NotificationMapper, ErrorType, RequestApi,
+  REQUEST_POLLING_CANCELLED, NotificationMapper, ErrorType, AbstractRequestApi,
 } from '@fpsak-frontend/rest-api-new';
+
 import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
 import RestApiState from '../RestApiState';
 
@@ -16,9 +17,37 @@ interface RestApiData<T> {
 }
 
 /**
+ * For mocking i unit-test
+ */
+export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
+  const [data, setData] = useState({
+    state: RestApiState.NOT_STARTED,
+    data: undefined,
+    error: undefined,
+  });
+
+  const startRequest = (params?: any):Promise<T> => {
+    const response = requestApi.startRequest(key, params);
+    setData({
+      state: RestApiState.SUCCESS,
+      data: response,
+      error: undefined,
+    });
+    return Promise.resolve(response);
+  };
+
+  return {
+    startRequest,
+    resetRequestData: () => undefined,
+    cancelRequest: () => undefined,
+    ...data,
+  };
+};
+
+/**
  * Hook som gir deg ein funksjon til å starte restkall, i tillegg til kallets status/resultat/feil
  */
-const getUseRestApiRunner = (requestApi: RequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
+const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
   const [data, setData] = useState({
     state: RestApiState.NOT_STARTED,
     data: undefined,
@@ -31,7 +60,7 @@ const getUseRestApiRunner = (requestApi: RequestApi) => function useRestApiRunne
     addErrorMessage({ ...errorData, type });
   });
 
-  const startRequest = useCallback((params: any = {}, keepData = false):Promise<T> => {
+  const startRequest = useCallback((params?: any, keepData = false):Promise<T> => {
     if (requestApi.hasPath(key)) {
       setData((oldState) => ({
         state: RestApiState.LOADING,

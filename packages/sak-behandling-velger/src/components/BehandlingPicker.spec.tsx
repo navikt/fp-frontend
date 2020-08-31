@@ -39,7 +39,7 @@ describe('<BehandlingPicker>', () => {
       getBehandlingLocation={() => 'url'}
       showAll={false}
       toggleShowAll={sinon.spy()}
-      alleKodeverk={{}}
+      getKodeverkFn={sinon.spy()}
     />);
 
     const message = wrapper.find(FormattedMessage);
@@ -67,7 +67,7 @@ describe('<BehandlingPicker>', () => {
       getBehandlingLocation={() => 'url'}
       showAll
       toggleShowAll={sinon.spy()}
-      alleKodeverk={{}}
+      getKodeverkFn={sinon.spy()}
     />);
 
     const item = wrapper.find(BehandlingPickerItem);
@@ -98,7 +98,7 @@ describe('<BehandlingPicker>', () => {
       getBehandlingLocation={() => 'url'}
       showAll
       toggleShowAll={sinon.spy()}
-      alleKodeverk={{}}
+      getKodeverkFn={sinon.spy()}
     />);
 
     const item = wrapper.find(BehandlingPickerItem);

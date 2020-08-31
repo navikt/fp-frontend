@@ -21,10 +21,7 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string) => {
   if (restMethod === RequestType.PUT) {
     return httpClientApi.put;
   }
-  if (restMethod === RequestType.PUT_ASYNC) {
-    return httpClientApi.putAsync;
-  }
-  return httpClientApi.postAndOpenBlob;
+  return httpClientApi.putAsync;
 };
 
 /**
@@ -62,7 +59,7 @@ class RequestRunner {
     }
   }
 
-  public startProcess = (params: any, notificationMapper?: NotificationMapper) => {
+  public startProcess = (params?: any, notificationMapper?: NotificationMapper) => {
     this.cancelRequest();
 
     this.process = new RequestProcess(this.httpClientApi, this.getRestMethod(), this.getPath(), this.getConfig().config);
