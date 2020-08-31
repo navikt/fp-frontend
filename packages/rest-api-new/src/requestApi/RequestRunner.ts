@@ -5,14 +5,14 @@ import RequestConfig, { RequestType } from '../RequestConfig';
 import HttpClientApi from '../HttpClientApiTsType';
 import Link from './LinkTsType';
 
-const getMethod = (httpClientApi: HttpClientApi, restMethod: string) => {
+const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseBlob: boolean) => {
   if (restMethod === RequestType.GET) {
     return httpClientApi.get;
   }
   if (restMethod === RequestType.GET_ASYNC) {
     return httpClientApi.getAsync;
   }
-  if (restMethod === RequestType.POST) {
+  if (restMethod === RequestType.POST && !isResponseBlob) {
     return httpClientApi.post;
   }
   if (restMethod === RequestType.POST_ASYNC) {
@@ -21,7 +21,10 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string) => {
   if (restMethod === RequestType.PUT) {
     return httpClientApi.put;
   }
-  return httpClientApi.putAsync;
+  if (restMethod === RequestType.PUT_ASYNC) {
+    return httpClientApi.putAsync;
+  }
+  return httpClientApi.postBlob;
 };
 
 /**
@@ -46,7 +49,7 @@ class RequestRunner {
 
   public getConfig = () => this.context.getConfig();
 
-  private getRestMethod = () => getMethod(this.httpClientApi, this.getConfig().restMethod)
+  private getRestMethod = () => getMethod(this.httpClientApi, this.getConfig().restMethod, this.getConfig().config.isResponseBlob)
 
   private getPath = (): string => {
     const contextPath = this.getConfig().contextPath ? `/${this.getConfig().contextPath}` : '';
