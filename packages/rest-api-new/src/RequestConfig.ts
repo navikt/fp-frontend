@@ -16,6 +16,7 @@ export const RequestType = {
 const defaultConfig = {
   maxPollingLimit: undefined,
   saveResponseIn: undefined,
+  isResponseBlob: false,
 };
 const formatConfig = (config = {}) => ({
   ...defaultConfig,
