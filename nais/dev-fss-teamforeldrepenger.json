@@ -1,0 +1,8 @@
+{
+  "namespace": "teamforeldrepenger",
+  "minReplicas": "1",
+  "maxReplicas": "2",
+  "ingresses": [
+    "https://app-q1.adeo.no/fpsak"
+  ]
+}
