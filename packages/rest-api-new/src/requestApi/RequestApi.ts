@@ -4,6 +4,7 @@ import HttpClientApi from '../HttpClientApiTsType';
 import RequestConfig from '../RequestConfig';
 import NotificationMapper from './NotificationMapper';
 import Link from './LinkTsType';
+import AbstractRequestApi from './AbstractRequestApi';
 
 /**
  * RequestApi
@@ -11,17 +12,18 @@ import Link from './LinkTsType';
  * Denne klassen opprettes med en referanse til et HttpClientApi (for eksempel Axios), context-path og konfig for
  * de enkelte endepunktene. Det blir så satt opp RequestRunner's for endepunktene. Desse kan hentes via metoden @see getRequestRunner.
  */
-class RequestApi {
+class RequestApi extends AbstractRequestApi {
   requestRunnersMappedByName: {[key: string]: RequestRunner};
 
   constructor(httpClientApi: HttpClientApi, configs: RequestConfig[]) {
+    super();
     this.requestRunnersMappedByName = configs.reduce((acc, config) => ({
       ...acc,
       [config.name]: new RequestRunner(httpClientApi, new RestApiRequestContext(config)),
     }), {});
   }
 
-  public startRequest = (endpointName: string, params: any, notificationMapper?: NotificationMapper) => this.requestRunnersMappedByName[endpointName]
+  public startRequest = (endpointName: string, params?: any, notificationMapper?: NotificationMapper) => this.requestRunnersMappedByName[endpointName]
     .startProcess(params, notificationMapper);
 
   public cancelRequest = (endpointName: string) => this.requestRunnersMappedByName[endpointName].cancelRequest();
@@ -41,6 +43,17 @@ class RequestApi {
       }
     });
   }
+
+  public isMock = () => false;
+
+  // Kun for test
+  public mock = () => { throw new Error('Not Implemented'); };
+
+  public setMissingPath = () => { throw new Error('Not Implemented'); };
+
+  public getRequestMockData = () => { throw new Error('Not Implemented'); };
+
+  public clearAllMockData = () => { throw new Error('Not Implemented'); };
 }
 
 export default RequestApi;

@@ -13,7 +13,7 @@ import {
 import {
   KodeverkMedNavn, Aksjonspunkt, Behandling,
 } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
+import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import papirsoknadApi, { reduxRestApi, PapirsoknadApiKeys } from './data/papirsoknadApi';
@@ -35,12 +35,14 @@ interface OwnProps {
     setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;
     clear: () => void;
   };
+  setRequestPendingMessage: (message: string) => void;
 }
 
 interface StateProps {
   behandling?: Behandling;
   forrigeBehandling?: Behandling;
   erAksjonspunktLagret: boolean;
+  requestPollingMessage?: string;
 }
 
 interface DispatchProps {
@@ -75,6 +77,8 @@ const BehandlingPapirsoknadIndex: FunctionComponent<Props> = ({
   forrigeBehandling,
   lagreAksjonspunkt,
   erAksjonspunktLagret,
+  requestPollingMessage,
+  setRequestPendingMessage,
 }) => {
   const forrigeVersjon = useRef<number>();
 
@@ -98,6 +102,10 @@ const BehandlingPapirsoknadIndex: FunctionComponent<Props> = ({
       }, 1000);
     };
   }, [behandlingId]);
+
+  useEffect(() => {
+    setRequestPendingMessage(requestPollingMessage);
+  }, [requestPollingMessage]);
 
   if (!behandling) {
     return <LoadingPanel />;
@@ -140,6 +148,7 @@ const mapStateToProps = (state) => ({
   forrigeBehandling: papirsoknadApi.BEHANDLING_PAPIRSOKNAD.getRestApiPreviousData()(state),
   erAksjonspunktLagret: papirsoknadApi.SAVE_AKSJONSPUNKT.getRestApiFinished()(state)
   || hasAccessError(papirsoknadApi.SAVE_AKSJONSPUNKT.getRestApiError()(state)),
+  requestPollingMessage: getRequestPollingMessage(state),
 });
 
 const getResetRestApiContext = () => (dispatch) => {

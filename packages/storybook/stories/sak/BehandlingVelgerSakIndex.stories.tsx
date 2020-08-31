@@ -3,10 +3,11 @@ import {
   withKnobs, object, number, boolean,
 } from '@storybook/addon-knobs';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 
 import withReduxAndRouterProvider from '../../decorators/withReduxAndRouter';
 
@@ -149,6 +150,12 @@ const behandlinger = [{
   },
 }];
 
+const getKodeverkFn = (kodeverk: Kodeverk) => {
+  const kodeverkType = kodeverkTyper[kodeverk.kodeverk];
+  const kodeverkForType = alleKodeverk[kodeverkType];
+  return kodeverkForType.find((k) => k.kode === kodeverk.kode);
+};
+
 export default {
   title: 'sak/sak-behandling-velger',
   component: BehandlingVelgerSakIndex,
@@ -166,7 +173,7 @@ export const visPanelForValgAvBehandlinger = () => {
         behandlingId={number('behandlingId', 1)}
         showAll={visAlle}
         toggleShowAll={() => toggleVisAlle(!visAlle)}
-        alleKodeverk={alleKodeverk as any}
+        getKodeverkFn={getKodeverkFn}
       />
     </div>
   );

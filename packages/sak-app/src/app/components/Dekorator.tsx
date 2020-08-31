@@ -9,6 +9,8 @@ import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg'
 import systemrutineIkonUrl from '@fpsak-frontend/assets/images/rutine.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 
+import { NavAnsatt } from '@fpsak-frontend/types';
+import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import ErrorFormatter from '../feilhandtering/ErrorFormatter';
 
 const lagFeilmeldinger = (intl, errorMessages, queryStrings) => {
@@ -40,9 +42,7 @@ interface OwnProps {
     errorcode?: string;
     errormessage?: string;
   };
-  navAnsattName: string;
   removeErrorMessage: () => void;
-  showDetailedErrorMessages?: boolean;
   hideErrorMessages?: boolean;
   errorMessages?: {
     type: EventType;
@@ -58,13 +58,14 @@ interface OwnProps {
 const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   errorMessages = [],
-  navAnsattName,
   queryStrings,
   setSiteHeight,
   removeErrorMessage: removeErrorMsg,
-  showDetailedErrorMessages = false,
   hideErrorMessages = false,
 }) => {
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const showDetailedErrorMessages = restApiHooks.useGlobalStateRestApiData<boolean>(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES);
+
   const errorMessagesNew = useRestApiError() || [];
   const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessagesNew, undefined), [errorMessagesNew]);
 
@@ -93,7 +94,7 @@ const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       systemTittel={intl.formatMessage({ id: 'Header.Foreldrepenger' })}
       iconLinks={iconLinks}
       queryStrings={queryStrings}
-      navAnsattName={navAnsattName}
+      navAnsattName={navAnsatt.navn}
       removeErrorMessage={removeErrorAllErrorMsg}
       showDetailedErrorMessages={showDetailedErrorMessages}
       errorMessages={hideErrorMessages ? [] : resolvedErrorMessages}

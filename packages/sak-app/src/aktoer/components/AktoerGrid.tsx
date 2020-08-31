@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Lenkepanel from 'nav-frontend-lenkepanel';
 
@@ -8,13 +7,12 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  Kodeverk, KodeverkMedNavn, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Fagsak, FagsakPerson,
 } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
-import { getAlleFpSakKodeverk } from '../../kodeverk/duck';
+import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { pathToFagsak } from '../../app/paths';
-import { getBehandlingSprak } from '../../behandling/duck';
 
 import styles from './aktoerGrid.less';
 
@@ -23,15 +21,12 @@ interface OwnProps {
     fagsaker: Fagsak[];
     person: FagsakPerson;
   };
-  alleKodeverk: {[key: string]: [KodeverkMedNavn]};
-  sprakkode?: Kodeverk;
 }
 
 export const AktoerGrid: FunctionComponent<OwnProps> = ({
   data,
-  alleKodeverk,
-  sprakkode,
 }) => {
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   const vFagsak = data.fagsaker.length > 0 ? data.fagsaker[0] : { relasjonsRolleType: { kode: relasjonsRolleType.MOR } };
 
@@ -39,7 +34,6 @@ export const AktoerGrid: FunctionComponent<OwnProps> = ({
     <>
       <VisittkortSakIndex
         alleKodeverk={alleKodeverk}
-        sprakkode={sprakkode}
         fagsak={{
           ...vFagsak,
           person: data.person,
@@ -67,9 +61,4 @@ export const AktoerGrid: FunctionComponent<OwnProps> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  alleKodeverk: getAlleFpSakKodeverk(state),
-  sprakkode: getBehandlingSprak(state),
-});
-
-export default connect(mapStateToProps)(AktoerGrid);
+export default AktoerGrid;

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation, useRouteMatch } from 'react-router-dom';
+import { Location } from 'history';
 
 import { parseQueryString } from '@fpsak-frontend/utils';
 
@@ -10,13 +11,20 @@ const defaultConfig = {
   paramsAreEqual: (paramFromUrl, paramFromStore) => paramFromUrl === paramFromStore,
 };
 
+interface Config {
+  paramName?: string,
+  parse?: (a: any) => any,
+  isQueryParam?: boolean,
+  paramsAreEqual?: (paramFromUrl: string, paramFromStore: string) => boolean,
+}
+
 const mapMatchToParam = (match, location, trackingConfig) => {
   const params = trackingConfig.isQueryParam ? parseQueryString(location.search) : match.params;
   return trackingConfig.parse(params[trackingConfig.paramName]);
 };
 
-function useTrackRouteParam(config) {
-  const [selected, setSelected] = useState<string>();
+function useTrackRouteParam<T>(config: Config): { location: Location; selected: T } {
+  const [selected, setSelected] = useState<T>();
 
   const trackingConfig = { ...defaultConfig, ...config };
 

@@ -10,7 +10,7 @@ import {
   FagsakInfo, Rettigheter, SettPaVentParams, ReduxFormStateCleaner,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
+import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import svpBehandlingApi, { reduxRestApi, SvpBehandlingApiKeys } from './data/svpBehandlingApi';
@@ -34,7 +34,8 @@ interface OwnProps {
     clear: () => void;
   };
   opneSokeside: () => void;
-  featureToggles: any;
+  featureToggles: {[key: string]: boolean};
+  setRequestPendingMessage: (message: string) => void;
 }
 
 interface StateProps {
@@ -42,6 +43,7 @@ interface StateProps {
   forrigeBehandling?: Behandling;
   kodeverk?: {[key: string]: KodeverkMedNavn[]};
   hasFetchError: boolean;
+  requestPollingMessage?: string;
 }
 
 interface DispatchProps {
@@ -88,6 +90,8 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<Props> = ({
   forrigeBehandling,
   hasFetchError,
   featureToggles,
+  requestPollingMessage,
+  setRequestPendingMessage,
 }) => {
   const forrigeVersjon = useRef<number>();
 
@@ -115,6 +119,10 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<Props> = ({
       }, 1000);
     };
   }, [behandlingId]);
+
+  useEffect(() => {
+    setRequestPendingMessage(requestPollingMessage);
+  }, [requestPollingMessage]);
 
   if (!behandling) {
     return <LoadingPanel />;
@@ -159,6 +167,7 @@ const mapStateToProps = (state): StateProps => ({
   behandling: svpBehandlingApi.BEHANDLING_SVP.getRestApiData()(state),
   forrigeBehandling: svpBehandlingApi.BEHANDLING_SVP.getRestApiPreviousData()(state),
   hasFetchError: !!svpBehandlingApi.BEHANDLING_SVP.getRestApiError()(state),
+  requestPollingMessage: getRequestPollingMessage(state),
 });
 
 const getResetRestApiContext = () => (dispatch: Dispatch) => {
