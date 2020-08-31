@@ -227,7 +227,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersion}
-              behandlingType={behandling?.ype}
+              behandlingType={behandling?.type}
               uuidForSistLukkede={uuidForSistLukkede}
               opprettNyForstegangsBehandlingEnabled={rettigheter.opprettNyForstegangsBehandlingAccess.employeeHasAccess
                   && !!rettigheter.opprettNyForstegangsBehandlingAccess.isEnabled}
