@@ -16,6 +16,7 @@ describe('RestApiConfigBuilder', () => {
     expect(endpoints[0].config).is.eql({
       maxPollingLimit: undefined,
       saveResponseIn: undefined,
+      isResponseBlob: false,
     });
 
     expect(endpoints[1].name).is.eql('ESPENUTVIKLER');
@@ -24,6 +25,7 @@ describe('RestApiConfigBuilder', () => {
     expect(endpoints[1].config).is.eql({
       maxPollingLimit: undefined,
       saveResponseIn: undefined,
+      isResponseBlob: false,
     });
   });
 });
