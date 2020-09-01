@@ -22,6 +22,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
 import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
+import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForDelvisTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
 import Arbeidsforhold from '../types/arbeidsforholdTsType';
 
@@ -254,6 +255,10 @@ const transformValues = (values, iayArbeidsforhold, arbeidsforhold) => ([{
         overstyrtUtbetalingsgrad: finnOverstyrtUtbetalingsgrad(t.type, t.stillingsprosent, stillingsprosentArbeidsforhold,
           t.overstyrtUtbetalingsgrad, t.oldOverstyrtUtbetalingsgrad),
       })),
+      velferdspermisjoner: a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p)).map((p) => ({
+        ...p,
+        erGyldig: value[finnPermisjonFieldName(p)],
+      })),
     };
   }),
 }]);
@@ -363,6 +368,9 @@ const getInitialArbeidsforholdValues = createSelector([
         overstyrtUtbetalingsgrad: utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold),
       })),
     };
+    a.velferdspermisjoner.forEach((p) => {
+      arbeidsforholdValues[utledFormSectionName(a)][finnPermisjonFieldName(p)] = p.erGyldig;
+    });
   });
   return arbeidsforholdValues;
 });
