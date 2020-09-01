@@ -1,6 +1,6 @@
 name: "CodeQL config"
 
-languages: java
+languages: javascript
 
 queries:
   - name: Extended Security
