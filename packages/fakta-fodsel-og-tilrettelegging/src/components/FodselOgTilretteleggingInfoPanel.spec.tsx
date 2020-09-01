@@ -23,6 +23,7 @@ const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
     }],
     arbeidsgiverNavn: 'Frilanser, samlet aktivitet',
     skalBrukes: true,
+    velferdspermisjoner: [],
   }],
 };
 
