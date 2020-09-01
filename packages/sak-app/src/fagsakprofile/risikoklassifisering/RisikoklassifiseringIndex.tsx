@@ -76,7 +76,10 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const harRisikoAksjonspunkt = !!risikoAksjonspunkt;
   useEffect(() => {
     if (harRisikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
-      toggleRiskPanel();
+      history.push(getRiskPanelLocationCreator(location)(true));
+    }
+    if (harRisikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.UTFORT) {
+      history.push(getRiskPanelLocationCreator(location)(false));
     }
   }, [harRisikoAksjonspunkt, behandlingId, behandlingVersjon]);
 
