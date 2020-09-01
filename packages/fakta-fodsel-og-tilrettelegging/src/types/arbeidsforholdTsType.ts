@@ -1,4 +1,5 @@
 import { Kodeverk } from '@fpsak-frontend/types';
+import Permisjon from './permisjonTsType';
 
 type FodselOgTilrettelegging = Readonly<{
   tilretteleggingId: number;
@@ -18,6 +19,7 @@ type FodselOgTilrettelegging = Readonly<{
   eksternArbeidsforholdReferanse?: string;
   skalBrukes: boolean;
   begrunnelse?: string;
+  velferdspermisjoner: Permisjon[];
 }>
 
 export default FodselOgTilrettelegging;
