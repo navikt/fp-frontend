@@ -21,12 +21,12 @@ const AktoerIndex: FunctionComponent = () => {
   const { selected: selectedAktoerId } = useTrackRouteParam<string>({
     paramName: 'aktoerId',
     parse: (aktoerIdFromUrl) => Number.parseInt(aktoerIdFromUrl, 10),
-    isQueryParam: true,
   });
 
-  const { data, state } = restApiHooks.useRestApi<Aktoer>(FpsakApiKeys.AKTOER_INFO, { aktoerId: selectedAktoerId }, { keepData: true });
+  const { data, state } = restApiHooks.useRestApi<Aktoer>(FpsakApiKeys.AKTOER_INFO, { aktoerId: selectedAktoerId },
+    { keepData: true, suspendRequest: !selectedAktoerId, updateTriggers: [selectedAktoerId] });
 
-  if (state === RestApiState.LOADING) {
+  if (state === RestApiState.NOT_STARTED || state === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
 
