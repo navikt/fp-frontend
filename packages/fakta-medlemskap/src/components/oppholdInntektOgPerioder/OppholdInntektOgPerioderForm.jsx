@@ -296,5 +296,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
   form: 'OppholdInntektOgPerioderForm',
-  enableReinitialize: true,
 })(injectIntl(OppholdInntektOgPerioderForm)));
