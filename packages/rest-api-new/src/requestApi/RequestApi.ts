@@ -44,6 +44,10 @@ class RequestApi extends AbstractRequestApi {
     });
   }
 
+  public setRequestPendingHandler = (fn) => {
+
+  }
+
   public isMock = () => false;
 
   // Kun for test

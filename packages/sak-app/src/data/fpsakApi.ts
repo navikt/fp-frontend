@@ -43,9 +43,7 @@ export enum FpsakApiKeys {
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE = 'PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE',
 }
 
-const CONTEXT_PATH = '';
-
-const endpoints = new RestApiConfigBuilder(CONTEXT_PATH)
+const endpoints = new RestApiConfigBuilder()
   .withPost('/fpsak/api/fagsak/sok', FpsakApiKeys.SEARCH_FAGSAK)
   .withPost('/fpsak/api/feature-toggle', FpsakApiKeys.FEATURE_TOGGLE)
   .withPost('/fpformidling/api/brev/forhaandsvis', FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })

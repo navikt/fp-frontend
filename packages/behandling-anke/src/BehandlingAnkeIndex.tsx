@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useRef,
+  FunctionComponent, useEffect, useRef, useState,
 } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -7,17 +7,15 @@ import { destroy } from 'redux-form';
 
 import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import {
-  FagsakInfo, Rettigheter, SettPaVentParams, ReduxFormStateCleaner,
-} from '@fpsak-frontend/behandling-felles';
-import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
+import { FagsakInfo, Rettigheter, ReduxFormStateCleaner } from '@fpsak-frontend/behandling-felles';
 import { Behandling, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import ankeApi, { reduxRestApi, AnkeBehandlingApiKeys } from './data/ankeBehandlingApi';
 import AnkePaneler from './components/AnkePaneler';
 import FetchedData from './types/fetchedDataTsType';
+import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys as AnkeBehandlingApiKeysNew } from './data/ankeBehandlingApi';
 
-const ankeData = [ankeApi.AKSJONSPUNKTER, ankeApi.VILKAR, ankeApi.ANKE_VURDERING];
+const ankeData = [{ key: AnkeBehandlingApiKeysNew.AKSJONSPUNKTER }, { key: AnkeBehandlingApiKeysNew.VILKAR }, { key: AnkeBehandlingApiKeysNew.ANKE_VURDERING }];
 
 interface OwnProps {
   behandlingId: number;
@@ -40,137 +38,111 @@ interface OwnProps {
   setRequestPendingMessage: (message: string) => void;
 }
 
-interface StateProps {
-  behandling?: Behandling;
-  forrigeBehandling?: Behandling;
-  requestPollingMessage?: string;
-}
-
 interface DispatchProps {
-  nyBehandlendeEnhet: (params: any) => Promise<void>;
-  settBehandlingPaVent: (params: any) => Promise<void>;
-  taBehandlingAvVent: (params: any, { keepData: boolean }) => Promise<void>;
-  henleggBehandling: (params: any) => Promise<void>;
-  settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, { keepData: boolean }) => Promise<any>;
-  resetRestApiContext: () => (dspatch: any) => void;
   destroyReduxForm: (form: string) => void;
 }
 
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = OwnProps & DispatchProps;
 
 const BehandlingAnkeIndex: FunctionComponent<Props> = ({
   behandlingEventHandler,
-  nyBehandlendeEnhet,
-  settBehandlingPaVent,
-  taBehandlingAvVent,
-  henleggBehandling,
-  hentBehandling,
   behandlingId,
-  resetRestApiContext,
-  destroyReduxForm,
-  behandling,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
-  settPaVent,
   opneSokeside,
-  forrigeBehandling,
   alleBehandlinger,
-  requestPollingMessage,
   setRequestPendingMessage,
+  destroyReduxForm,
 }) => {
-  const forrigeVersjon = useRef<number>();
+  const forrigeBehandling = useRef<Behandling>();
+
+  const [behandling, setBehandling] = useState<Behandling>();
+
+  const { startRequest: hentBehandling, data: behandlingRes } = restApiAnkeHooks
+    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.BEHANDLING_ANKE);
+  useEffect(() => {
+    setBehandling(behandlingRes);
+  }, [behandlingRes]);
+
+  const { startRequest: nyBehandlendeEnhet } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.BEHANDLING_NY_BEHANDLENDE_ENHET);
+  const { startRequest: settBehandlingPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.BEHANDLING_ON_HOLD);
+  const { startRequest: taBehandlingAvVent } = restApiAnkeHooks.useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.RESUME_BEHANDLING);
+  const { startRequest: henleggBehandling } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.HENLEGG_BEHANDLING);
+  const { startRequest: settPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.UPDATE_ON_HOLD);
 
   useEffect(() => {
     behandlingEventHandler.setHandler({
       endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, { keepData: true })),
+        .then(() => hentBehandling({ behandlingId }, true)),
       settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, { keepData: true })),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params, { keepData: true }),
+        .then(() => hentBehandling({ behandlingId }, true)),
+      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
+        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
       henleggBehandling: (params) => henleggBehandling(params),
     });
 
-    hentBehandling({ behandlingId }, { keepData: false });
+    hentBehandling({ behandlingId }, false);
 
     return () => {
       behandlingEventHandler.clear();
-      resetRestApiContext();
       setTimeout(() => {
-        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeVersjon.current));
+        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.current.versjon));
       }, 1000);
     };
   }, [behandlingId]);
 
-  useEffect(() => {
-    setRequestPendingMessage(requestPollingMessage);
-  }, [requestPollingMessage]);
+  if (behandling) {
+    requestAnkeApi.injectPaths(behandling.links);
+    requestAnkeApi.setRequestPendingHandler(setRequestPendingMessage);
+  }
+
+  const { data, state } = restApiAnkeHooks.useMultipleRestApi<FetchedData>(ankeData,
+    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
   if (!behandling) {
     return <LoadingPanel />;
   }
 
-  forrigeVersjon.current = behandling.versjon;
+  forrigeBehandling.current = behandling;
 
-  reduxRestApi.injectPaths(behandling.links);
+  if ((state === RestApiState.LOADING || state === RestApiState.NOT_STARTED) && data === undefined) {
+    return <LoadingPanel />;
+  }
 
   return (
-    <DataFetcher
-      fetchingTriggers={new DataFetcherTriggers({ behandlingVersion: behandling.versjon }, true)}
-      endpoints={ankeData}
-      showOldDataWhenRefetching
-      loadingPanel={<LoadingPanel />}
-      render={(dataProps: FetchedData, isFinished) => (
-        <>
-          <ReduxFormStateCleaner behandlingId={behandling.id} behandlingVersjon={isFinished ? behandling.versjon : forrigeBehandling.versjon} />
-          <AnkePaneler
-            behandling={isFinished ? behandling : forrigeBehandling}
-            fetchedData={dataProps}
-            fagsak={fagsak}
-            rettigheter={rettigheter}
-            alleKodeverk={kodeverk}
-            valgtProsessSteg={valgtProsessSteg}
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-            settPaVent={settPaVent}
-            hentBehandling={hentBehandling}
-            opneSokeside={opneSokeside}
-            alleBehandlinger={alleBehandlinger}
-          />
-        </>
-      )}
-    />
+    <>
+      <ReduxFormStateCleaner
+        behandlingId={behandling.id}
+        behandlingVersjon={state === RestApiState.LOADING
+          ? forrigeBehandling.current.versjon : behandling.versjon}
+      />
+      <AnkePaneler
+        behandling={state === RestApiState.LOADING ? forrigeBehandling.current : behandling}
+        fetchedData={data}
+        fagsak={fagsak}
+        rettigheter={rettigheter}
+        alleKodeverk={kodeverk}
+        valgtProsessSteg={valgtProsessSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+        settPaVent={settPaVent}
+        hentBehandling={hentBehandling}
+        setBehandling={setBehandling}
+        opneSokeside={opneSokeside}
+        alleBehandlinger={alleBehandlinger}
+      />
+    </>
   );
-};
-
-const mapStateToProps = (state) => ({
-  behandling: ankeApi.BEHANDLING_ANKE.getRestApiData()(state),
-  forrigeBehandling: ankeApi.BEHANDLING_ANKE.getRestApiPreviousData()(state),
-  requestPollingMessage: getRequestPollingMessage(state),
-});
-
-const getResetRestApiContext = () => (dispatch) => {
-  Object.values(AnkeBehandlingApiKeys)
-    .forEach((value) => {
-      dispatch(ankeApi[value].resetRestApi()());
-    });
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
-    nyBehandlendeEnhet: ankeApi.BEHANDLING_NY_BEHANDLENDE_ENHET.makeRestApiRequest(),
-    settBehandlingPaVent: ankeApi.BEHANDLING_ON_HOLD.makeRestApiRequest(),
-    taBehandlingAvVent: ankeApi.RESUME_BEHANDLING.makeRestApiRequest(),
-    henleggBehandling: ankeApi.HENLEGG_BEHANDLING.makeRestApiRequest(),
-    settPaVent: ankeApi.UPDATE_ON_HOLD.makeRestApiRequest(),
-    hentBehandling: ankeApi.BEHANDLING_ANKE.makeRestApiRequest(),
-    resetRestApiContext: getResetRestApiContext,
     destroyReduxForm: destroy,
   }, dispatch),
 });
 
-export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(BehandlingAnkeIndex);
+export default connect<any, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingAnkeIndex);

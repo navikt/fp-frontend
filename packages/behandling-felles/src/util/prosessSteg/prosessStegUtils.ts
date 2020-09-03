@@ -1,8 +1,6 @@
 import { SetStateAction } from 'react';
-import { Dispatch } from 'redux';
 import { StepType } from '@navikt/nap-process-menu/dist/Step';
 
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
 import { Behandling, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
@@ -98,12 +96,12 @@ export const formaterPanelerForProsessmeny = (
 });
 
 export const getBekreftAksjonspunktCallback = (
-  dispatch: Dispatch,
   lagringSideEffectsCallback: (aksjonspunktModeller: any) => () => void,
   fagsak: FagsakInfo,
   behandling: Behandling,
   aksjonspunkter: Aksjonspunkt[],
-  api: {[name: string]: EndpointOperations},
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
 ) => (aksjonspunktModels) => {
   const models = aksjonspunktModels.map((ap) => ({
     '@type': ap.kode,
@@ -118,21 +116,21 @@ export const getBekreftAksjonspunktCallback = (
 
   const etterLagringCallback = lagringSideEffectsCallback(aksjonspunktModels);
 
-  if (api.SAVE_OVERSTYRT_AKSJONSPUNKT) {
+  if (lagreOverstyrteAksjonspunkter) {
     const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => aksjonspunktModels.some((apModel) => apModel.kode === ap.definisjon.kode));
     const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring
       .some((ap) => ap.aksjonspunktType.kode === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType.kode === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
 
     if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
-      return dispatch(api.SAVE_OVERSTYRT_AKSJONSPUNKT.makeRestApiRequest()({
+      return lagreOverstyrteAksjonspunkter({
         ...params,
         overstyrteAksjonspunktDtoer: models,
-      }, { keepData: true })).then(etterLagringCallback);
+      }, true).then(etterLagringCallback);
     }
   }
 
-  return dispatch(api.SAVE_AKSJONSPUNKT.makeRestApiRequest()({
+  return lagreAksjonspunkter({
     ...params,
     bekreftedeAksjonspunktDtoer: models,
-  }, { keepData: true })).then(etterLagringCallback);
+  }, true).then(etterLagringCallback);
 };
