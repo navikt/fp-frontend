@@ -15,6 +15,8 @@ import AbstractRequestApi from './AbstractRequestApi';
 class RequestApi extends AbstractRequestApi {
   requestRunnersMappedByName: {[key: string]: RequestRunner};
 
+  notificationMapper: NotificationMapper = new NotificationMapper();
+
   constructor(httpClientApi: HttpClientApi, configs: RequestConfig[]) {
     super();
     this.requestRunnersMappedByName = configs.reduce((acc, config) => ({
@@ -23,8 +25,8 @@ class RequestApi extends AbstractRequestApi {
     }), {});
   }
 
-  public startRequest = (endpointName: string, params?: any, notificationMapper?: NotificationMapper) => this.requestRunnersMappedByName[endpointName]
-    .startProcess(params, notificationMapper);
+  public startRequest = (endpointName: string, params?: any) => this.requestRunnersMappedByName[endpointName]
+    .startProcess(params, this.notificationMapper);
 
   public cancelRequest = (endpointName: string) => this.requestRunnersMappedByName[endpointName].cancelRequest();
 
@@ -44,9 +46,17 @@ class RequestApi extends AbstractRequestApi {
     });
   }
 
-  public setRequestPendingHandler = (fn) => {
-
+  public setRequestPendingHandler = (requestPendingHandler) => {
+    this.notificationMapper.addUpdatePollingMessageEventHandler((errorData, type) => {
+      requestPendingHandler({ ...errorData, type });
+    });
   }
+
+  public setAddErrorMessage = (addErrorMessage) => {
+    this.notificationMapper.addRequestErrorEventHandlers((errorData, type) => {
+      addErrorMessage({ ...errorData, type });
+    });
+  };
 
   public isMock = () => false;
 

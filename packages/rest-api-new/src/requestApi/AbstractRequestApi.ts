@@ -16,7 +16,9 @@ abstract class AbstractRequestApi {
 
   public abstract injectPaths(links: Link[]);
 
-  public abstract setRequestPendingHandler(fn)
+  public abstract setRequestPendingHandler(requestPendingHandler): void;
+
+  public abstract setAddErrorMessage(addErrorMessage): void;
 
   public abstract isMock(): boolean;
 

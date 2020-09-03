@@ -9,7 +9,7 @@ import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { FagsakInfo, Rettigheter, ReduxFormStateCleaner } from '@fpsak-frontend/behandling-felles';
 import { Behandling, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import AnkePaneler from './components/AnkePaneler';
 import FetchedData from './types/fetchedDataTsType';
@@ -68,6 +68,8 @@ const BehandlingAnkeIndex: FunctionComponent<Props> = ({
     setBehandling(behandlingRes);
   }, [behandlingRes]);
 
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
   const { startRequest: nyBehandlendeEnhet } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.BEHANDLING_NY_BEHANDLENDE_ENHET);
   const { startRequest: settBehandlingPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.BEHANDLING_ON_HOLD);
   const { startRequest: taBehandlingAvVent } = restApiAnkeHooks.useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.RESUME_BEHANDLING);
@@ -85,6 +87,9 @@ const BehandlingAnkeIndex: FunctionComponent<Props> = ({
       henleggBehandling: (params) => henleggBehandling(params),
     });
 
+    requestAnkeApi.setRequestPendingHandler(setRequestPendingMessage);
+    requestAnkeApi.setAddErrorMessage(addErrorMessage);
+
     hentBehandling({ behandlingId }, false);
 
     return () => {
@@ -97,7 +102,6 @@ const BehandlingAnkeIndex: FunctionComponent<Props> = ({
 
   if (behandling) {
     requestAnkeApi.injectPaths(behandling.links);
-    requestAnkeApi.setRequestPendingHandler(setRequestPendingMessage);
   }
 
   const { data, state } = restApiAnkeHooks.useMultipleRestApi<FetchedData>(ankeData,

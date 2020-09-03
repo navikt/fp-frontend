@@ -2,9 +2,8 @@ import {
   useState, useEffect, DependencyList,
 } from 'react';
 
-import { NotificationMapper, AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
 
-import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
 import RestApiState from '../RestApiState';
 
 const format = (name) => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
@@ -53,12 +52,6 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
     data: undefined,
   });
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  const notif = new NotificationMapper();
-  notif.addRequestErrorEventHandlers((errorData, type) => {
-    addErrorMessage({ ...errorData, type });
-  });
-
   useEffect(() => {
     if (endpoints.every((e) => requestApi.hasPath(e.key)) && !options.suspendRequest) {
       setData((oldState) => ({
@@ -67,7 +60,7 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
         data: options.keepData ? oldState.data : undefined,
       }));
 
-      Promise.all(endpoints.map((e) => requestApi.startRequest(e.key, e.params, notif)))
+      Promise.all(endpoints.map((e) => requestApi.startRequest(e.key, e.params)))
         .then((dataRes) => {
           setData({
             state: RestApiState.SUCCESS,
