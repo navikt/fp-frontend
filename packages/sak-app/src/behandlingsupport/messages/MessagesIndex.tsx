@@ -19,14 +19,20 @@ import {
   FpsakApiKeys, restApiHooks, requestApi,
 } from '../../data/fpsakApi';
 
-const getSubmitCallback = (setShowMessageModal, behandlingId, submitMessage, resetMessage, setShowSettPaVentModal, setSubmitCounter) => (values) => {
+const getSubmitCallback = (setShowMessageModal, behandlingTypeKode, behandlingId, behandlingUuid, submitMessage, resetMessage, setShowSettPaVentModal,
+  setSubmitCounter) => (values) => {
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_MEDL_DOK;
+  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
 
   setShowMessageModal(!isInnhentEllerForlenget);
 
-  const data = {
+  const data = erTilbakekreving ? {
+    behandlingUuid,
+    fritekst: values.fritekst,
+    brevmalkode: values.brevmalkode,
+  } : {
     behandlingId,
     mottaker: values.mottaker,
     brevmalkode: values.brevmalkode,
@@ -41,12 +47,12 @@ const getSubmitCallback = (setShowMessageModal, behandlingId, submitMessage, res
     });
 };
 
-const getPreviewCallback = (behandlingTypeKode, behandlingId, behandlingUuid, fagsakYtelseType, fetchPreview) => (
+const getPreviewCallback = (behandlingTypeKode, behandlingUuid, fagsakYtelseType, fetchPreview) => (
   mottaker, dokumentMal, fritekst, aarsakskode,
 ) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
   const data = erTilbakekreving ? {
-    behandlingId,
+    behandlingUuid,
     fritekst: fritekst || ' ',
     brevmalkode: dokumentMal,
   } : {
@@ -105,7 +111,7 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
     window.location.reload();
   };
 
-  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, behandlingId, submitMessage,
+  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, behandling.type.kode, behandlingId, behandling.uuid, submitMessage,
     resetMessage, setShowSettPaVentModal, setSubmitCounter),
   [behandlingId, behandlingVersjon]);
 
@@ -127,7 +133,7 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
 
   const fetchPreview = useVisForhandsvisningAvMelding();
 
-  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandlingId, behandling.uuid, fagsak.sakstype, fetchPreview),
+  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandling.uuid, fagsak.sakstype, fetchPreview),
     [behandlingId, behandlingVersjon]);
 
   const afterSubmit = useCallback(() => {
