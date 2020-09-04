@@ -36,12 +36,13 @@ interface OwnProps {
   behandlingArsakTyper: KodeverkMedNavn[];
   enabledBehandlingstyper: KodeverkMedNavn[];
   behandlingId?: number;
+  behandlingUuid?: string;
   sjekkOmTilbakekrevingKanOpprettes: (params: {
     saksnummer: number;
     uuid: string;
   }) => void;
   sjekkOmTilbakekrevingRevurderingKanOpprettes: (params: {
-    behandlingId: number;
+    uuid: string;
   }) => void;
   uuid?: string;
   saksnummer: number;
@@ -62,7 +63,7 @@ export const NyBehandlingModal: FunctionComponent<OwnProps & WrappedComponentPro
   behandlingType,
   behandlingArsakTyper,
   enabledBehandlingstyper,
-  behandlingId,
+  behandlingUuid,
   sjekkOmTilbakekrevingKanOpprettes,
   sjekkOmTilbakekrevingRevurderingKanOpprettes,
   uuid,
@@ -74,8 +75,8 @@ export const NyBehandlingModal: FunctionComponent<OwnProps & WrappedComponentPro
       if (uuid !== undefined) {
         sjekkOmTilbakekrevingKanOpprettes({ saksnummer, uuid });
       }
-      if (behandlingId !== undefined) {
-        sjekkOmTilbakekrevingRevurderingKanOpprettes({ behandlingId });
+      if (behandlingUuid !== undefined) {
+        sjekkOmTilbakekrevingRevurderingKanOpprettes({ uuid: behandlingUuid });
       }
     }
   }, []);
@@ -246,9 +247,6 @@ export const getEnabledBehandlingstyper = createSelector([
   .filter((b) => (b.kode === bType.FORSTEGANGSSOKNAD ? hasEnabledCreateNewBehandling : true))
   .filter((b) => (b.kode === bType.REVURDERING ? hasEnabledCreateRevurdering : true)));
 
-const isTilbakekrevingEllerTilbakekrevingRevurdering = createSelector([(ownProps: Props) => ownProps.behandlingType],
-  (behandlingType) => behandlingType && (behandlingType.kode === bType.TILBAKEKREVING || behandlingType.kode === bType.TILBAKEKREVING_REVURDERING));
-
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const onSubmit = (values) => initialOwnProps.submitCallback({
     ...values,
@@ -260,7 +258,6 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
     behandlingTyper: getBehandlingTyper(ownProps),
     enabledBehandlingstyper: getEnabledBehandlingstyper(ownProps),
     uuid: ownProps.uuidForSistLukkede,
-    behandlingId: isTilbakekrevingEllerTilbakekrevingRevurdering(ownProps) ? ownProps.behandlingId : undefined,
     behandlingArsakTyper: getBehandlingAarsaker(state, ownProps),
     behandlingType: formValueSelector(formName)(state, 'behandlingType'),
   });
