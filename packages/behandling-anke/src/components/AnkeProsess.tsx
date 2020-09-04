@@ -123,12 +123,12 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
     }
   }, [apBehandlingRes]);
   useEffect(() => {
-    if (apBehandlingRes) {
+    if (apOverstyrtBehandlingRes) {
       setBehandling(apOverstyrtBehandlingRes);
     }
   }, [apOverstyrtBehandlingRes]);
   useEffect(() => {
-    if (apBehandlingRes) {
+    if (behandlingRes) {
       setBehandling(behandlingRes);
     }
   }, [behandlingRes]);

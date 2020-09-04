@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useRef, useState,
+  FunctionComponent, useEffect, useState, useCallback,
 } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -15,7 +15,13 @@ import AnkePaneler from './components/AnkePaneler';
 import FetchedData from './types/fetchedDataTsType';
 import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys as AnkeBehandlingApiKeysNew } from './data/ankeBehandlingApi';
 
-const ankeData = [{ key: AnkeBehandlingApiKeysNew.AKSJONSPUNKTER }, { key: AnkeBehandlingApiKeysNew.VILKAR }, { key: AnkeBehandlingApiKeysNew.ANKE_VURDERING }];
+const ankeData = [{
+  key: AnkeBehandlingApiKeysNew.AKSJONSPUNKTER,
+}, {
+  key: AnkeBehandlingApiKeysNew.VILKAR,
+}, {
+  key: AnkeBehandlingApiKeysNew.ANKE_VURDERING,
+}];
 
 interface OwnProps {
   behandlingId: number;
@@ -42,9 +48,7 @@ interface DispatchProps {
   destroyReduxForm: (form: string) => void;
 }
 
-type Props = OwnProps & DispatchProps;
-
-const BehandlingAnkeIndex: FunctionComponent<Props> = ({
+const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
   behandlingEventHandler,
   behandlingId,
   oppdaterBehandlingVersjon,
@@ -58,14 +62,19 @@ const BehandlingAnkeIndex: FunctionComponent<Props> = ({
   setRequestPendingMessage,
   destroyReduxForm,
 }) => {
-  const forrigeBehandling = useRef<Behandling>();
-
-  const [behandling, setBehandling] = useState<Behandling>();
+  const [behandling, setBehandlingState] = useState<Behandling>();
+  const [forrigeBehandling, setForrigeBehandling] = useState<Behandling>();
+  const setBehandling = useCallback((nyBehandling) => {
+    setForrigeBehandling(behandling);
+    setBehandlingState(nyBehandling);
+  }, [behandling]);
 
   const { startRequest: hentBehandling, data: behandlingRes } = restApiAnkeHooks
     .useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.BEHANDLING_ANKE);
   useEffect(() => {
-    setBehandling(behandlingRes);
+    if (behandlingRes) {
+      setBehandling(behandlingRes);
+    }
   }, [behandlingRes]);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -95,23 +104,22 @@ const BehandlingAnkeIndex: FunctionComponent<Props> = ({
     return () => {
       behandlingEventHandler.clear();
       setTimeout(() => {
-        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.current.versjon));
+        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.versjon));
       }, 1000);
     };
   }, [behandlingId]);
 
-  if (behandling) {
+  if (behandling !== forrigeBehandling) {
     requestAnkeApi.injectPaths(behandling.links);
   }
 
+  const behandlingVersjon = behandling?.versjon;
   const { data, state } = restApiAnkeHooks.useMultipleRestApi<FetchedData>(ankeData,
-    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
+    { keepData: true, updateTriggers: [behandlingVersjon], suspendRequest: !behandling });
 
   if (!behandling) {
     return <LoadingPanel />;
   }
-
-  forrigeBehandling.current = behandling;
 
   if ((state === RestApiState.LOADING || state === RestApiState.NOT_STARTED) && data === undefined) {
     return <LoadingPanel />;
@@ -122,10 +130,10 @@ const BehandlingAnkeIndex: FunctionComponent<Props> = ({
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
         behandlingVersjon={state === RestApiState.LOADING
-          ? forrigeBehandling.current.versjon : behandling.versjon}
+          ? forrigeBehandling.versjon : behandling.versjon}
       />
       <AnkePaneler
-        behandling={state === RestApiState.LOADING ? forrigeBehandling.current : behandling}
+        behandling={state === RestApiState.LOADING ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
         rettigheter={rettigheter}

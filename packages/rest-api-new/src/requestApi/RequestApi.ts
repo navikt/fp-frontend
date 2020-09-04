@@ -47,8 +47,14 @@ class RequestApi extends AbstractRequestApi {
   }
 
   public setRequestPendingHandler = (requestPendingHandler) => {
-    this.notificationMapper.addUpdatePollingMessageEventHandler((errorData, type) => {
-      requestPendingHandler({ ...errorData, type });
+    this.notificationMapper.addUpdatePollingMessageEventHandler((data) => {
+      requestPendingHandler(data);
+    });
+    this.notificationMapper.addRequestFinishedEventHandler(() => {
+      requestPendingHandler();
+    });
+    this.notificationMapper.addRequestErrorEventHandlers(() => {
+      requestPendingHandler();
     });
   }
 
