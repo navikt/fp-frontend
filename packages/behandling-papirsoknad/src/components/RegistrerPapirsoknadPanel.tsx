@@ -21,7 +21,7 @@ interface OwnProps {
   fagsak: FagsakInfo;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
-  setSoknadData: (SoknadData) => void;
+  setSoknadData: (soknadData: SoknadData) => void;
   soknadData: SoknadData;
   lagreUfullstendig: () => Promise<any>;
   lagreFullstendig: (_formValues, _dispatch, values: any) => Promise<any>;

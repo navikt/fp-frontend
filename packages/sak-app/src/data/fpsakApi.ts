@@ -1,6 +1,7 @@
 import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api-new';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
+// eslint-disable-next-line no-shadow
 export enum FpsakApiKeys {
   KODEVERK = 'KODEVERK',
   KODEVERK_FPTILBAKE = 'KODEVERK_FPTILBAKE',
