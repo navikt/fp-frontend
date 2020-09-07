@@ -28,6 +28,11 @@
   "TilretteleggingFieldArray.Dato": "Dato",
   "TilretteleggingFieldArray.Tilretteleggingsbehov": "Tilretteleggingsbehov",
 
+  "VelferdspermisjonSection.PermisjonDetaljer": "Det er registrert {prosent}% velferdspermisjon i perioden {fom} - {tom}. Kontroller om dette er riktig.",
+  "VelferdspermisjonSection.PermisjonDetaljerUendeligPeriode": "Det er registrert {prosent}% velferdspermisjon fra og med {fom}. Kontroller om dette er riktig.",
+  "VelferdspermisjonSection.ErGyldig": "Permisjonen er gyldig og skal tas hensyn til i utregning av utbetalingsgrad",
+  "VelferdspermisjonSection.ErIkkeGyldig": "Permisjonen er ikke gyldig og skal ikke tas hensyn til i utregning av utbetalingsgrad",
+
   "OverstyringKnapp.Overstyring": "Overstyr",
   "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
   "HelpText.Aksjonspunkt": "Aksjonspunkt",

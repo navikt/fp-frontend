@@ -43,8 +43,10 @@ export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function us
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
 const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>(
-  key: string, params?: any, options: Options = defaultOptions,
+  key: string, params?: any, options?: Options,
 ):RestApiData<T> {
+  const allOptions = { ...defaultOptions, ...options };
+
   const [data, setData] = useState({
     state: RestApiState.NOT_STARTED,
     error: undefined,
@@ -58,11 +60,11 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
   });
 
   useEffect(() => {
-    if (requestApi.hasPath(key) && !options.suspendRequest) {
+    if (requestApi.hasPath(key) && !allOptions.suspendRequest) {
       setData((oldState) => ({
         state: RestApiState.LOADING,
         error: undefined,
-        data: options.keepData ? oldState.data : undefined,
+        data: allOptions.keepData ? oldState.data : undefined,
       }));
 
       requestApi.startRequest(key, params, notif)
@@ -89,7 +91,7 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
         data: undefined,
       });
     }
-  }, [...options.updateTriggers]);
+  }, [...allOptions.updateTriggers]);
 
   return data;
 };

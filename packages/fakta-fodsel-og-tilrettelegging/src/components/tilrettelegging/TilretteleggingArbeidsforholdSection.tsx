@@ -14,6 +14,7 @@ import Arbeidsforhold from '../../types/arbeidsforholdTsType';
 import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
+import VelferdspermisjonSection from './VelferdspermisjonSection';
 
 const utledArbeidsforholdTittel = (arbeidsforhold: Arbeidsforhold) => {
   let tittel = arbeidsforhold.arbeidsgiverNavn;
@@ -110,6 +111,16 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> =
         </FlexRow>
       </FlexContainer>
     )}
+    {arbeidsforhold.velferdspermisjoner.map((permisjon) => (
+      <VelferdspermisjonSection
+        permisjon={permisjon}
+        readOnly={readOnly}
+        behandlingId={behandlingId}
+        behandlingVersjon={behandlingVersjon}
+        formSectionName={formSectionName}
+      />
+
+    ))}
   </FormSection>
 );
 
