@@ -18,13 +18,6 @@ const hasLocationAndStatusDelayedOrHalted = (responseData) => responseData.locat
 type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void
 type NotificationEmitter = (eventType: keyof typeof EventType, data?: any) => void
 
-interface ResponseDataLink {
-  href: string;
-  type: string;
-  requestPayload: any;
-  rel: string;
-}
-
 /**
  * RequestProcess
  *
@@ -90,7 +83,7 @@ class RequestProcess {
     return statusOrResultResponse;
   };
 
-  execute = async (path: string, restMethod: (path: string, params?: any) => Promise<Response>, params: any): Promise<Response> => {
+  execute = async (path: string, restMethod: (pathArg: string, params?: any) => Promise<Response>, params: any): Promise<Response> => {
     let response = await restMethod(path, params);
     if ('status' in response && response.status === HTTP_ACCEPTED) {
       this.isPollingRequest = true;
