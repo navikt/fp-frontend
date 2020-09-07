@@ -32,7 +32,7 @@ const createOptions = (bt, enabledBehandlingstyper, intl) => {
 interface OwnProps {
   cancelEvent: () => void;
   behandlingTyper: KodeverkMedNavn[];
-  behandlingType?: string;
+  valgtBehandlingTypeKode?: string;
   behandlingArsakTyper: KodeverkMedNavn[];
   enabledBehandlingstyper: KodeverkMedNavn[];
   behandlingId?: number;
@@ -47,6 +47,7 @@ interface OwnProps {
   uuid?: string;
   saksnummer: number;
   erTilbakekrevingAktivert: boolean;
+  erTilbakekreving: boolean;
 }
 
 /**
@@ -60,7 +61,6 @@ export const NyBehandlingModal: FunctionComponent<OwnProps & WrappedComponentPro
   cancelEvent,
   intl,
   behandlingTyper,
-  behandlingType,
   behandlingArsakTyper,
   enabledBehandlingstyper,
   behandlingUuid,
@@ -69,13 +69,15 @@ export const NyBehandlingModal: FunctionComponent<OwnProps & WrappedComponentPro
   uuid,
   saksnummer,
   erTilbakekrevingAktivert,
+  valgtBehandlingTypeKode,
+  erTilbakekreving,
 }) => {
   useEffect(() => {
     if (erTilbakekrevingAktivert) {
       if (uuid !== undefined) {
         sjekkOmTilbakekrevingKanOpprettes({ saksnummer, uuid });
       }
-      if (behandlingUuid !== undefined) {
+      if (erTilbakekreving) {
         sjekkOmTilbakekrevingRevurderingKanOpprettes({ uuid: behandlingUuid });
       }
     }
@@ -112,7 +114,7 @@ export const NyBehandlingModal: FunctionComponent<OwnProps & WrappedComponentPro
               bredde="l"
             />
             <VerticalSpacer eightPx />
-            { behandlingType === bType.FORSTEGANGSSOKNAD && (
+            { valgtBehandlingTypeKode === bType.FORSTEGANGSSOKNAD && (
               <CheckboxField
                 name="nyBehandlingEtterKlage"
                 label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
@@ -259,7 +261,8 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
     enabledBehandlingstyper: getEnabledBehandlingstyper(ownProps),
     uuid: ownProps.uuidForSistLukkede,
     behandlingArsakTyper: getBehandlingAarsaker(state, ownProps),
-    behandlingType: formValueSelector(formName)(state, 'behandlingType'),
+    valgtBehandlingTypeKode: formValueSelector(formName)(state, 'behandlingType'),
+    erTilbakekreving: ownProps.behandlingType.kode === bType.TILBAKEKREVING || ownProps.behandlingType.kode === bType.TILBAKEKREVING_REVURDERING,
   });
 };
 
