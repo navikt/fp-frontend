@@ -4,6 +4,7 @@
  * Interne hendelser i en request-prosess. Kan kobles til eksterne hendelser
  * via @see NotificationMapper.
  */
+// eslint-disable-next-line no-shadow
 enum EventType {
   POLLING_HALTED_OR_DELAYED = 'POLLING_HALTED_OR_DELAYED',
   POLLING_TIMEOUT = 'POLLING_TIMEOUT',
