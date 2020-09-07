@@ -30,7 +30,7 @@ interface OwnProps {
   risikoklassifisering?: Risikoklassifisering;
   isPanelOpen: boolean;
   readOnly: boolean;
-  submitAksjonspunkt: (aksjonspunkt: Aksjonspunkt) => void;
+  submitAksjonspunkt: (aksjonspunkt: Aksjonspunkt) => Promise<any>;
   toggleRiskPanel: () => void;
 }
 

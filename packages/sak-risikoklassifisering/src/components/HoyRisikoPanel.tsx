@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-
+import { FormattedMessage } from 'react-intl';
 import Panel from 'nav-frontend-paneler';
-import oransjeTrekant from '@fpsak-frontend/assets/images/advarsel.svg';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Risikoklassifisering, Aksjonspunkt } from '@fpsak-frontend/types';
 
-import TittelMedDivider from './TittelMedDivider';
 import Faresignaler from './Faresignaler';
 import AvklarFaresignalerForm from './AvklarFaresignalerForm';
 
@@ -15,7 +15,7 @@ interface OwnProps {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback: (aksjonspunkt: Aksjonspunkt) => void;
+  submitCallback: (aksjonspunkt: Aksjonspunkt) => Promise<any>;
 }
 
 /**
@@ -32,11 +32,14 @@ const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
   submitCallback,
 }) => (
   <Panel>
-    <TittelMedDivider
-      imageSrc={oransjeTrekant}
-      tittel="Risikopanel.Panel.Tittel"
-    />
-    <VerticalSpacer sixteenPx />
+    {aksjonspunkt && aksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && (
+      <>
+        <AksjonspunktHelpTextHTML>
+          <FormattedMessage id="Risikopanel.Panel.Tittel" />
+        </AksjonspunktHelpTextHTML>
+        <VerticalSpacer sixteenPx />
+      </>
+    )}
     <Faresignaler risikoklassifisering={risikoklassifisering} />
     {!!aksjonspunkt
       && (
