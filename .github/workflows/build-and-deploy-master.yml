@@ -81,7 +81,7 @@ jobs:
           echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_USERNAME} --password-stdin
           docker push ${IMAGE_BASE}
 
-      - name: Opprett issue, trigg deploy til dev-fss q1
+      - name: Opprett issue, trigg deploy til dev-fss teamforeldrepenger
         if: success()
         uses: actions/github-script@v3
         with:
@@ -98,5 +98,5 @@ jobs:
                       issue_number: response.data.number }
                      github.issues.createComment({...issue,
                             title: 'Deploy av ${{ env.TAG }}',
-                            body: '/promote dev-fss q1'})
+                            body: '/promote dev-fss teamforeldrepenger'})
                });
