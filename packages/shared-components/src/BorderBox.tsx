@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FunctionComponent } from 'react';
 import classnames from 'classnames/bind';
 import Panel from 'nav-frontend-paneler';
 
@@ -17,7 +17,7 @@ interface OwnProps {
  *
  * Valideringskomponent. Visar en box kring noe som skall fikses.
  */
-const BorderBox = ({
+const BorderBox: FunctionComponent<OwnProps> = ({
   error = false,
   className,
   children,
