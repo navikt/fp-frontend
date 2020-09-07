@@ -113,7 +113,7 @@ describe('<MessagesIndex>', () => {
     };
 
     const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
+    const submitCallback = index.prop('submitCallback') as (message: any) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
 
@@ -184,7 +184,7 @@ describe('<MessagesIndex>', () => {
     };
 
     const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
+    const submitCallback = index.prop('submitCallback') as (message: any) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
     expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
@@ -226,7 +226,7 @@ describe('<MessagesIndex>', () => {
     };
 
     const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
+    const submitCallback = index.prop('submitCallback') as (message: any) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
     expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
@@ -268,7 +268,7 @@ describe('<MessagesIndex>', () => {
     };
 
     const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
+    const submitCallback = index.prop('submitCallback') as (message: any) => Promise<any>;
 
     expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
     expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
@@ -315,7 +315,7 @@ describe('<MessagesIndex>', () => {
     };
 
     const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (message) => Promise<any>;
+    const submitCallback = index.prop('submitCallback') as (message: any) => Promise<any>;
 
     expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
     await submitCallback(message);
