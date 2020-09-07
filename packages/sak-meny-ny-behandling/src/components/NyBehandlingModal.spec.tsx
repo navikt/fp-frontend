@@ -97,7 +97,7 @@ describe('<CreateNewBehandlingModal>', () => {
       cancelEvent={cancelEventCallback}
       intl={intlMock}
       behandlingTyper={behandlingstyper}
-      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
+      valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       behandlingArsakTyper={[{ kode: behandlingArsakType.FEIL_I_LOVANDVENDELSE, navn: 'FEIL_I_LOVANDVENDELSE', kodeverk: 'ARSAK' }]}
       enabledBehandlingstyper={behandlingstyper}
       kanTilbakekrevingOpprettes={sinon.spy()}
@@ -106,6 +106,7 @@ describe('<CreateNewBehandlingModal>', () => {
       erTilbakekrevingAktivert={false}
       saksnummer={123}
       menyKodeverk={{}}
+      erTilbakekreving={false}
     />);
 
     expect(wrapper.find(CheckboxField)).to.have.length(1);
