@@ -53,20 +53,22 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
   });
 
   useEffect(() => {
-    if (endpoints.every((e) => requestApi.hasPath(e.key)) && !options.suspendRequest) {
+    if (!options.suspendRequest) {
       setData((oldState) => ({
         state: RestApiState.LOADING,
         error: undefined,
         data: options.keepData ? oldState.data : undefined,
       }));
 
-      Promise.all(endpoints.map((e) => requestApi.startRequest(e.key, e.params)))
+      const filteredEndpoints = endpoints.filter((e) => requestApi.hasPath(e.key));
+
+      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest(e.key, e.params)))
         .then((dataRes) => {
           setData({
             state: RestApiState.SUCCESS,
             data: dataRes.reduce((acc, result, index) => ({
               ...acc,
-              [format(endpoints[index].key)]: result.payload,
+              [format(filteredEndpoints[index].key)]: result.payload,
             }), {}),
             error: undefined,
           });
@@ -78,7 +80,7 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
             error,
           });
         });
-    } else if (endpoints.some((e) => !requestApi.hasPath(e.key))) {
+    } else {
       setData({
         state: RestApiState.NOT_STARTED,
         error: undefined,

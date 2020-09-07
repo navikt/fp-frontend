@@ -12,7 +12,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import AnkeBehandlingModal from './AnkeBehandlingModal';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegAnkePanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
-import { restApiAnkeHooks, AnkeBehandlingApiKeys as AnkeBehandlingApiKeysNew } from '../data/ankeBehandlingApi';
+import { restApiAnkeHooks, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
@@ -109,24 +109,17 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiAnkeHooks
-    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.SAVE_AKSJONSPUNKT);
-  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiAnkeHooks
-    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.SAVE_AKSJONSPUNKT);
-  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.PREVIEW_MESSAGE);
+    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
   const { startRequest: lagreOgReapneAnkeVurdering, data: behandlingRes } = restApiAnkeHooks
-    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.SAVE_REOPEN_ANKE_VURDERING);
-  const { startRequest: lagreAnkeVurdering } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.SAVE_ANKE_VURDERING);
+    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.SAVE_REOPEN_ANKE_VURDERING);
+  const { startRequest: lagreAnkeVurdering } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING);
 
   useEffect(() => {
     if (apBehandlingRes) {
       setBehandling(apBehandlingRes);
     }
   }, [apBehandlingRes]);
-  useEffect(() => {
-    if (apOverstyrtBehandlingRes) {
-      setBehandling(apOverstyrtBehandlingRes);
-    }
-  }, [apOverstyrtBehandlingRes]);
   useEffect(() => {
     if (behandlingRes) {
       setBehandling(behandlingRes);
@@ -178,7 +171,6 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           lagringSideeffekterCallback={lagringSideeffekterCallback}
           lagreAksjonspunkter={lagreAksjonspunkter}
-          lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
           useMultipleRestApi={restApiAnkeHooks.useMultipleRestApi}
         />
       </ProsessStegContainer>

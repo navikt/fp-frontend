@@ -13,15 +13,13 @@ import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-ap
 
 import AnkePaneler from './components/AnkePaneler';
 import FetchedData from './types/fetchedDataTsType';
-import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys as AnkeBehandlingApiKeysNew } from './data/ankeBehandlingApi';
+import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from './data/ankeBehandlingApi';
 
-const ankeData = [{
-  key: AnkeBehandlingApiKeysNew.AKSJONSPUNKTER,
-}, {
-  key: AnkeBehandlingApiKeysNew.VILKAR,
-}, {
-  key: AnkeBehandlingApiKeysNew.ANKE_VURDERING,
-}];
+const ankeData = [
+  { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER },
+  { key: AnkeBehandlingApiKeys.VILKAR },
+  { key: AnkeBehandlingApiKeys.ANKE_VURDERING },
+];
 
 interface OwnProps {
   behandlingId: number;
@@ -70,7 +68,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
   }, [behandling]);
 
   const { startRequest: hentBehandling, data: behandlingRes } = restApiAnkeHooks
-    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.BEHANDLING_ANKE);
+    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.BEHANDLING_ANKE);
   useEffect(() => {
     if (behandlingRes) {
       setBehandling(behandlingRes);
@@ -79,11 +77,11 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
-  const { startRequest: nyBehandlendeEnhet } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = restApiAnkeHooks.useRestApiRunner<Behandling>(AnkeBehandlingApiKeysNew.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.HENLEGG_BEHANDLING);
-  const { startRequest: settPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeysNew.UPDATE_ON_HOLD);
+  const { startRequest: nyBehandlendeEnhet } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
+  const { startRequest: settBehandlingPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.BEHANDLING_ON_HOLD);
+  const { startRequest: taBehandlingAvVent } = restApiAnkeHooks.useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.RESUME_BEHANDLING);
+  const { startRequest: henleggBehandling } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.HENLEGG_BEHANDLING);
+  const { startRequest: settPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.UPDATE_ON_HOLD);
 
   useEffect(() => {
     behandlingEventHandler.setHandler({

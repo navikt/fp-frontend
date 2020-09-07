@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import fpBehandlingApi from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 class OpptjeningsvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.OPPTJENINGSVILKARET
@@ -16,7 +16,7 @@ class OpptjeningsvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getAksjonspunktKoder = () => [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING];
 
-  getEndepunkter = () => [fpBehandlingApi.OPPTJENING, fpBehandlingApi.UTLAND_DOK_STATUS]
+  getEndepunkter = () => [FpBehandlingApiKeys.OPPTJENING, FpBehandlingApiKeys.UTLAND_DOK_STATUS]
 
   getKomponent = (props) => <OpptjeningFaktaIndex {...props} />
 

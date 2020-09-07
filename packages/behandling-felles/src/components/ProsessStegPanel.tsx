@@ -102,6 +102,7 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
               submitCallback={bekreftAksjonspunktCallback}
               apentFaktaPanelInfo={apentFaktaPanelInfo}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+              useMultipleRestApi={useMultipleRestApi}
             />
           )}
         </MargMarkering>

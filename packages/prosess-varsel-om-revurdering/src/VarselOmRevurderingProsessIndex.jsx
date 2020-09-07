@@ -25,7 +25,6 @@ const VarselOmRevurderingProsessIndex = ({
   aksjonspunkter,
   submitCallback,
   previewCallback,
-  dispatchSubmitFailed,
   isReadOnly,
   alleKodeverk,
 }) => (
@@ -43,7 +42,6 @@ const VarselOmRevurderingProsessIndex = ({
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
       previewCallback={previewCallback}
-      dispatchSubmitFailed={dispatchSubmitFailed}
       readOnly={isReadOnly}
       alleKodeverk={alleKodeverk}
     />
@@ -59,7 +57,6 @@ VarselOmRevurderingProsessIndex.propTypes = {
   aksjonspunkter: PropTypes.arrayOf(revurderingAksjonspunkterPropType).isRequired,
   submitCallback: PropTypes.func.isRequired,
   previewCallback: PropTypes.func.isRequired,
-  dispatchSubmitFailed: PropTypes.func.isRequired,
   isReadOnly: PropTypes.bool.isRequired,
   alleKodeverk: PropTypes.shape().isRequired,
 };

@@ -6,7 +6,7 @@ import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 
-import fpBehandlingApi from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 class AdopsjonsvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.ADOPSJONSVILKARET
@@ -19,7 +19,7 @@ class AdopsjonsvilkaretFaktaPanelDef extends FaktaPanelDef {
     aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
   ]
 
-  getEndepunkter = () => [fpBehandlingApi.FAMILIEHENDELSE]
+  getEndepunkter = () => [FpBehandlingApiKeys.FAMILIEHENDELSE]
 
   getKomponent = (props) => <AdopsjonFaktaIndex {...props} />
 

@@ -21,9 +21,8 @@ class PanelDef extends ProsessStegPanelDef {
     esBehandlingApi.SOKNAD_ORIGINAL_BEHANDLING,
   ]
 
-  getData = ({ previewCallback, dispatchSubmitFailed, soknad }) => ({
+  getData = ({ previewCallback, soknad }) => ({
     previewCallback,
-    dispatchSubmitFailed,
     soknad,
   })
 }

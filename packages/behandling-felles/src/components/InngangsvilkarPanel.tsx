@@ -2,10 +2,12 @@ import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { FadingPanel, VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
+import {
+  FadingPanel, VerticalSpacer, AksjonspunktHelpTextHTML, LoadingPanel,
+} from '@fpsak-frontend/shared-components';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { ProsessStegPanelUtledet } from '../util/prosessSteg/ProsessStegUtledet';
 
@@ -27,23 +29,21 @@ const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
   submitCallback,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
+  useMultipleRestApi,
 }) => {
   const filteredPanels = prosessStegData.filter((stegData) => stegData.getKomponentData);
-  const panels = filteredPanels.map((stegData) => (
-    <DataFetcher
-      key={stegData.getId()}
-      fetchingTriggers={new DataFetcherTriggers({ behandlingVersion: behandling.versjon }, true)}
-      endpoints={stegData.getProsessStegDelPanelDef().getEndepunkter()}
-      loadingPanel={<div>test</div>}
-      render={(dataProps) => stegData.getProsessStegDelPanelDef().getKomponent({
-        ...dataProps,
-        behandling,
-        alleKodeverk,
-        submitCallback,
-        ...stegData.getKomponentData(),
-      })}
-    />
-  ));
+
+  const endepunkter = filteredPanels.flatMap((stegData) => stegData.getProsessStegDelPanelDef().getEndepunkter().map((e) => ({ key: e })));
+
+  const { data, state } = useMultipleRestApi(endepunkter, { updateTriggers: [behandling.versjon] });
+
+  const panels = filteredPanels.map((stegData) => stegData.getProsessStegDelPanelDef().getKomponent({
+    ...data,
+    behandling,
+    alleKodeverk,
+    submitCallback,
+    ...stegData.getKomponentData(),
+  }));
 
   const aksjonspunktTekstKoder = useMemo(() => filteredPanels
     .filter((p) => p.getErAksjonspunktOpen() && p.getAksjonspunktHjelpetekster().length > 0)
@@ -56,6 +56,10 @@ const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
   }, [apentFaktaPanelInfo]);
 
   const erIkkeFerdigbehandlet = useMemo(() => filteredPanels.some((p) => p.getStatus() === vilkarUtfallType.IKKE_VURDERT), [behandling.versjon]);
+
+  if (state === RestApiState.NOT_STARTED || state === RestApiState.LOADING) {
+    return <LoadingPanel />;
+  }
 
   return (
     <FadingPanel>

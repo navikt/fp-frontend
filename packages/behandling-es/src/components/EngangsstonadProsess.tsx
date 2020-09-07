@@ -1,7 +1,6 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
-import { setSubmitFailed } from 'redux-form';
 import { Dispatch } from 'redux';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -102,7 +101,6 @@ const EngangsstonadProsess: FunctionComponent<OwnProps> = ({
   const dataTilUtledingAvEsPaneler = {
     previewCallback: useCallback(getForhandsvisCallback(dispatch, fagsak, behandling), [behandling.versjon]),
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(dispatch, fagsak, behandling), [behandling.versjon]),
-    dispatchSubmitFailed: useCallback((formName) => dispatch(setSubmitFailed(formName)), []),
     alleKodeverk,
     ...data,
   };

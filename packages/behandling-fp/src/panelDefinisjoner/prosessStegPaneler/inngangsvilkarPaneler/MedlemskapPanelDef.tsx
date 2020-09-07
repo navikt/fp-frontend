@@ -2,7 +2,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegPanelDef, ProsessStegOverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import fpBehandlingApi from '../../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../../data/fpBehandlingApi';
 
 class MedlemskapPanelDef extends ProsessStegPanelDef {
   overstyringDef = new ProsessStegOverstyringPanelDef(this);
@@ -22,7 +22,7 @@ class MedlemskapPanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    fpBehandlingApi.MEDLEMSKAP,
+    FpBehandlingApiKeys.MEDLEMSKAP,
   ]
 
   getOverstyrVisningAvKomponent = (data) => this.overstyringDef.getOverstyrVisningAvKomponent(data)
