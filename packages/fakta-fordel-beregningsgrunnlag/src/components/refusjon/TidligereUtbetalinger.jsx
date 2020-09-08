@@ -15,7 +15,8 @@ export const TidligereUtbetalinger = ({
       <Row>
         <Column xs="8">
           <Table
-            headerTextCodes={['BeregningInfoPanel.RefusjonBG.Aktivitet', 'BeregningInfoPanel.RefusjonBG.TidligereUtb']}
+            headerTextCodes={['BeregningInfoPanel.RefusjonBG.Aktivitet', 'BeregningInfoPanel.RefusjonBG.TidligereUtb',
+              'BeregningInfoPanel.RefusjonBG.GjeldendeFra']}
             noHover
             classNameTable={styles.tabell}
           >

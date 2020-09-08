@@ -33,7 +33,7 @@
   "BeregningInfoPanel.FordelingBG.BruttoBeregningsgrunnlagSum": "Sum (brutto beregningsgrunnlag)",
   "BeregningInfoPanel.FordelingBG.RedusertBeregningsgrunnlagSum": "Sum (redusert beregningsgrunnlag)",
   "BeregningInfoPanel.FordelingBG.Ytelse": "Ytelse",
-  
+
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
   "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: ",
   "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
@@ -65,11 +65,12 @@
   "BeregningInfoPanel.FordelBG.Validation.TotalFordelingForAAPOgArbeidsforholdIkkeHøyereEnnBeregningsgrunnlag": "Totalbeløp for Arbeidsavklaringspenger og {arbeidsgiver} kan ikke være høyere enn inntekt ({inntekt}).",
   "BeregningInfoPanel.FordelBG.Inntekt": "Inntekt",
   "BeregningInfoPanel.FordelBG.Beregningsgrunnlag": "Grunnlag",
-  
+
   "BeregningInfoPanel.RefusjonBG.Tittel": "Endring i refusjon",
   "BeregningInfoPanel.RefusjonBG.Aktivitet": "Aktivitet",
   "BeregningInfoPanel.RefusjonBG.TidligereUtb": "Tidligere utbetalinger",
-  "BeregningInfoPanel.RefusjonBG.Direkteutbetaling": "Direkteutbetaling",
+  "BeregningInfoPanel.RefusjonBG.GjeldendeFra": "Gjelder fra",
+  "BeregningInfoPanel.RefusjonBG.Direkteutbetaling": "Direkte utbetaling",
   "BeregningInfoPanel.RefusjonBG.Periode": "{fom} - {tom}",
   "BeregningInfoPanel.RefusjonBG.Arbeidsgiver": "<b>{ag}</b> krever refusjon fra og med {dato}",
   "BeregningInfoPanel.RefusjonBG.RefusjonFra": "Endringen i refusjon skal tre i kraft fra og med",
