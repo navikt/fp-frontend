@@ -6,6 +6,7 @@ import { dateFormat, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { refusjonAndelTilVurderingPropType } from '../../propTypes/beregningsgrunnlagPropType';
+import styles from './tidligereUtbetalinger.less';
 
 const visningsnavn = (andel) => {
   if (andel.arbeidsgiverNavn) {
@@ -19,7 +20,7 @@ const visningsnavn = (andel) => {
 };
 
 const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling) => (
-  <Row>
+  <Row className={styles.correctPadding}>
     <Column>
       {utbetaling && utbetaling.erTildeltRefusjon
         ? <Normaltekst>{andelsnavn}</Normaltekst>
@@ -42,7 +43,7 @@ const lagPeriode = (utbetaling) => {
 };
 
 const perioder = (utbetalinger) => utbetalinger.map((utbetaling) => (
-  <Row>
+  <Row className={styles.correctPadding}>
     <Column>
       {lagPeriode(utbetaling)}
     </Column>
