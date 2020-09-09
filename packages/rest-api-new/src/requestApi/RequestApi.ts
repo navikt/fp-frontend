@@ -1,10 +1,40 @@
-import RequestRunner from './RequestRunner';
-import RestApiRequestContext from './RestApiRequestContext';
 import HttpClientApi from '../HttpClientApiTsType';
-import RequestConfig from '../RequestConfig';
 import NotificationMapper from './NotificationMapper';
 import Link from './LinkTsType';
 import AbstractRequestApi from './AbstractRequestApi';
+import RequestRunner from './RequestRunner';
+import ResponseCache from './ResponseCache';
+import RequestConfig, { RequestType } from '../RequestConfig';
+
+const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseBlob: boolean) => {
+  if (restMethod === RequestType.GET) {
+    return httpClientApi.get;
+  }
+  if (restMethod === RequestType.GET_ASYNC) {
+    return httpClientApi.getAsync;
+  }
+  if (restMethod === RequestType.POST && !isResponseBlob) {
+    return httpClientApi.post;
+  }
+  if (restMethod === RequestType.POST_ASYNC) {
+    return httpClientApi.postAsync;
+  }
+  if (restMethod === RequestType.PUT) {
+    return httpClientApi.put;
+  }
+  if (restMethod === RequestType.PUT_ASYNC) {
+    return httpClientApi.putAsync;
+  }
+  return httpClientApi.postBlob;
+};
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const waitUntilFinished = async (cache, endpointName) => {
+  if (cache.isFetching(endpointName)) {
+    await wait(50);
+    waitUntilFinished(cache, endpointName);
+  }
+};
 
 /**
  * RequestApi
@@ -13,37 +43,62 @@ import AbstractRequestApi from './AbstractRequestApi';
  * de enkelte endepunktene. Det blir så satt opp RequestRunner's for endepunktene. Desse kan hentes via metoden @see getRequestRunner.
  */
 class RequestApi extends AbstractRequestApi {
-  requestRunnersMappedByName: {[key: string]: RequestRunner};
+  httpClientApi: HttpClientApi;
+
+  endpointConfigList: RequestConfig[];
+
+  links: Link[];
 
   notificationMapper: NotificationMapper = new NotificationMapper();
 
-  constructor(httpClientApi: HttpClientApi, configs: RequestConfig[]) {
+  cache: ResponseCache = new ResponseCache();
+
+  constructor(httpClientApi: HttpClientApi, endpointConfigList: RequestConfig[]) {
     super();
-    this.requestRunnersMappedByName = configs.reduce((acc, config) => ({
-      ...acc,
-      [config.name]: new RequestRunner(httpClientApi, new RestApiRequestContext(config)),
-    }), {});
+    this.httpClientApi = httpClientApi;
+    this.endpointConfigList = endpointConfigList;
   }
 
-  public startRequest = (endpointName: string, params?: any) => this.requestRunnersMappedByName[endpointName]
-    .startProcess(params, this.notificationMapper);
+  public startRequest = async (endpointName: string, params?: any) => {
+    if (this.cache.hasFetched(endpointName)) {
+      return this.cache.getData(endpointName);
+    } if (this.cache.isFetching(endpointName)) {
+      await waitUntilFinished(this.cache, endpointName);
+      return this.cache.getData(endpointName);
+    }
 
-  public cancelRequest = (endpointName: string) => this.requestRunnersMappedByName[endpointName].cancelRequest();
+    this.cache.setToFetching(endpointName);
 
-  public hasPath = (endpointName: string) => !!this.requestRunnersMappedByName[endpointName].getConfig().path;
+    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    if (!endpointConfig) {
+      throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
+    }
+    const link = this.links ? this.links.find((l) => l.rel === endpointConfig.rel) : undefined;
+    const restMethod = link ? link.type : endpointConfig.restMethod;
+    const href = link ? link.href : endpointConfig.path;
 
-  public injectPaths = (links: Link[]) => {
-    Object.values(this.requestRunnersMappedByName).forEach((runner) => {
-      const { rel } = runner.getConfig();
-      if (rel) {
-        const link = links.find((l) => l.rel === rel);
-        if (link) {
-          runner.injectLink(link);
-        } else {
-          runner.resetLink(rel);
-        }
-      }
-    });
+    const apiRestMethod = getMethod(this.httpClientApi, restMethod, endpointConfig.config.isResponseBlob);
+    const runner = new RequestRunner(this.httpClientApi, apiRestMethod, href, endpointConfig.config);
+    if (this.notificationMapper) {
+      runner.setNotificationEmitter(this.notificationMapper.getNotificationEmitter());
+    }
+
+    const result = await runner.start(params || link?.requestPayload);
+    this.cache.addData(endpointName, result);
+    return result;
+  }
+
+  public hasPath = (endpointName: string) => {
+    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    if (!endpointConfig) {
+      throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
+    }
+    const link = this.links ? this.links.find((l) => l.rel === endpointConfig.rel) : undefined;
+    return !!link?.href || !!endpointConfig?.path;
+  };
+
+  public setLinks = (links: Link[]) => {
+    this.links = links;
   }
 
   public setRequestPendingHandler = (requestPendingHandler) => {
@@ -58,11 +113,15 @@ class RequestApi extends AbstractRequestApi {
     });
   }
 
-  public setAddErrorMessage = (addErrorMessage) => {
+  public setAddErrorMessageHandler = (addErrorMessage) => {
     this.notificationMapper.addRequestErrorEventHandlers((errorData, type) => {
       addErrorMessage({ ...errorData, type });
     });
   };
+
+  public resetCache = () => {
+    this.cache = new ResponseCache();
+  }
 
   public isMock = () => false;
 

@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useMemo, useCallback } from 'react';
+import React, {
+  FunctionComponent, useMemo, useCallback, DependencyList,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -20,6 +22,7 @@ interface OwnProps {
   submitCallback: (data: any) => Promise<any>;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  useMultipleRestApi: (endpoints: { key: string, params?: any }[], options: { updateTriggers: DependencyList }) => { data: any, state: RestApiState};
 }
 
 const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
@@ -34,16 +37,7 @@ const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
   const filteredPanels = prosessStegData.filter((stegData) => stegData.getKomponentData);
 
   const endepunkter = filteredPanels.flatMap((stegData) => stegData.getProsessStegDelPanelDef().getEndepunkter().map((e) => ({ key: e })));
-
   const { data, state } = useMultipleRestApi(endepunkter, { updateTriggers: [behandling.versjon] });
-
-  const panels = filteredPanels.map((stegData) => stegData.getProsessStegDelPanelDef().getKomponent({
-    ...data,
-    behandling,
-    alleKodeverk,
-    submitCallback,
-    ...stegData.getKomponentData(),
-  }));
 
   const aksjonspunktTekstKoder = useMemo(() => filteredPanels
     .filter((p) => p.getErAksjonspunktOpen() && p.getAksjonspunktHjelpetekster().length > 0)
@@ -80,18 +74,30 @@ const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
       )}
       <Row className="">
         <Column xs="6">
-          {panels.filter((_panel, index) => index < 2)
-            .map((panel, index) => (
-              <div key={panel.key} className={index === 0 ? styles.panelLeftTop : styles.panelLeftBottom}>
-                {panel}
+          {filteredPanels.filter((_panel, index) => index < 2)
+            .map((stegData, index) => (
+              <div key={stegData.getId()} className={index === 0 ? styles.panelLeftTop : styles.panelLeftBottom}>
+                {stegData.getProsessStegDelPanelDef().getKomponent({
+                  ...data,
+                  behandling,
+                  alleKodeverk,
+                  submitCallback,
+                  ...stegData.getKomponentData(),
+                })}
               </div>
             ))}
         </Column>
         <Column xs="6">
-          {panels.filter((_panel, index) => index > 1)
-            .map((panel, index) => (
-              <div key={panel.key} className={index === 0 ? styles.panelRightTop : styles.panelRightBottom}>
-                {panel}
+          {filteredPanels.filter((_panel, index) => index > 1)
+            .map((stegData, index) => (
+              <div key={stegData.getId()} className={index === 0 ? styles.panelRightTop : styles.panelRightBottom}>
+                {stegData.getProsessStegDelPanelDef().getKomponent({
+                  ...data,
+                  behandling,
+                  alleKodeverk,
+                  submitCallback,
+                  ...stegData.getKomponentData(),
+                })}
               </div>
             ))}
         </Column>

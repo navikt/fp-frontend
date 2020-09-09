@@ -10,15 +10,15 @@ import Link from './LinkTsType';
 abstract class AbstractRequestApi {
   public abstract startRequest(endpointName: string, params?: any, notificationMapper?: NotificationMapper);
 
-  public abstract cancelRequest(endpointName: string);
-
   public abstract hasPath(endpointName: string);
 
-  public abstract injectPaths(links: Link[]);
+  public abstract setLinks(links: Link[]);
 
   public abstract setRequestPendingHandler(requestPendingHandler): void;
 
-  public abstract setAddErrorMessage(addErrorMessage): void;
+  public abstract setAddErrorMessageHandler(addErrorMessage): void;
+
+  public abstract resetCache(): void;
 
   public abstract isMock(): boolean;
 

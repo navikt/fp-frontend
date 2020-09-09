@@ -12,7 +12,6 @@ interface RestApiData<T> {
   state: RestApiState;
   error?: ErrorType;
   data?: T;
-  cancelRequest: () => void;
 }
 
 /**
@@ -38,7 +37,6 @@ export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => funct
   return {
     startRequest,
     resetRequestData: () => undefined,
-    cancelRequest: () => undefined,
     ...data,
   };
 };
@@ -100,7 +98,6 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
   return {
     startRequest,
     resetRequestData,
-    cancelRequest: () => requestApi.cancelRequest(key),
     ...data,
   };
 };

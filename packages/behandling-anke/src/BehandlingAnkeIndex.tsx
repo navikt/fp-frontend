@@ -95,7 +95,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
     });
 
     requestAnkeApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestAnkeApi.setAddErrorMessage(addErrorMessage);
+    requestAnkeApi.setAddErrorMessageHandler(addErrorMessage);
 
     hentBehandling({ behandlingId }, false);
 
@@ -108,7 +108,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
   }, [behandlingId]);
 
   if (behandling !== forrigeBehandling) {
-    requestAnkeApi.injectPaths(behandling.links);
+    requestAnkeApi.setLinks(behandling.links);
   }
 
   const behandlingVersjon = behandling?.versjon;

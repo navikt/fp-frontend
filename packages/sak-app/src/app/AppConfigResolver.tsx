@@ -20,7 +20,7 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   children,
 }) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-  requestApi.setAddErrorMessage(addErrorMessage);
+  requestApi.setAddErrorMessageHandler(addErrorMessage);
 
   const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT);
   const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE);

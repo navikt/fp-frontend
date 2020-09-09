@@ -33,18 +33,15 @@ class RequestConfig {
 
     path?: string;
 
-    contextPath?: string;
-
     restMethod?: string = RequestType.GET;
 
     rel?: string;
 
     requestPayload?: any;
 
-    constructor(name: string, path?: string, contextPath?: string, config?: RequestAdditionalConfig) {
+    constructor(name: string, path?: string, config?: RequestAdditionalConfig) {
       this.name = name;
       this.path = path;
-      this.contextPath = contextPath;
       this.config = formatConfig(config);
     }
 
@@ -92,8 +89,6 @@ class RequestConfig {
       this.requestPayload = requestPayload;
       return this;
     }
-
-    getContextPath = () => this.contextPath
 }
 
 export default RequestConfig;

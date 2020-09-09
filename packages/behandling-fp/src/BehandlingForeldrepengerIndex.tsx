@@ -112,7 +112,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps & DispatchProps>
     });
 
     requestFpApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestFpApi.setAddErrorMessage(addErrorMessage);
+    requestFpApi.setAddErrorMessageHandler(addErrorMessage);
 
     hentBehandling({ behandlingId }, false);
 
@@ -124,9 +124,12 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps & DispatchProps>
     };
   }, [behandlingId]);
 
-  if (behandling !== forrigeBehandling) {
-    requestFpApi.injectPaths(behandling.links);
-  }
+  useEffect(() => {
+    if (behandling) {
+      requestFpApi.resetCache();
+      requestFpApi.setLinks(behandling.links);
+    }
+  }, [behandling]);
 
   const behandlingVersjon = behandling?.versjon;
   const { data, state } = restApiFpHooks.useMultipleRestApi<FetchedData>(foreldrepengerData,

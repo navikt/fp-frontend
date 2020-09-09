@@ -20,8 +20,6 @@ class RequestApiTestMock extends AbstractRequestApi {
 
   public startRequest = () => Promise.resolve({ payload: this.data })
 
-  public cancelRequest = () => undefined;
-
   public hasPath = () => true;
 
   public injectPaths = () => {}
