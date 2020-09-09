@@ -75,6 +75,7 @@
   "BeregningInfoPanel.RefusjonBG.Arbeidsgiver": "<b>{ag}</b> krever refusjon fra og med {dato}",
   "BeregningInfoPanel.RefusjonBG.RefusjonFra": "Endringen i refusjon skal tre i kraft fra og med",
   "BeregningInfoPanel.RefusjonBG.Begrunnelse": "Begrunnelse",
+  "BeregningInfoPanel.RefusjonBG.Aksjonspunkt": "Nytt refusjonskrav overlapper tidligere utbetalinger. Sett endringsdato for ny refusjon.",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

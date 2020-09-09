@@ -30,7 +30,6 @@ ${andel.arbeidsgiverId.arbeidsgiverOrgnr}${andel.arbeidsgiverId.arbeidsgiverAkt�
 export const VurderEndringRefusjonRad = ({
   refusjonAndel,
   readOnly,
-  skjæringstidspunkt,
 }) => {
   if (!refusjonAndel) {
     return null;
@@ -62,7 +61,7 @@ export const VurderEndringRefusjonRad = ({
           <DatepickerField
             name={lagNøkkel(refusjonAndel)}
             readOnly={readOnly}
-            validate={[required, hasValidDate, dateAfterOrEqual(skjæringstidspunkt)]}
+            validate={[required, hasValidDate, dateAfterOrEqual(refusjonAndel.tidligsteMuligeRefusjonsdato)]}
             isEdited={!!refusjonAndel.fastsattNyttRefusjonskravFom}
           />
         </Column>
@@ -87,7 +86,6 @@ VurderEndringRefusjonRad.transformValues = (values, andel) => {
 VurderEndringRefusjonRad.propTypes = {
   refusjonAndel: refusjonAndelTilVurderingPropType,
   readOnly: PropTypes.bool.isRequired,
-  skjæringstidspunkt: PropTypes.string.isRequired,
 };
 
 export default VurderEndringRefusjonRad;
