@@ -1,6 +1,7 @@
 import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api-new';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
+// eslint-disable-next-line no-shadow
 export enum FpBehandlingApiKeys {
   BEHANDLING_FP = 'BEHANDLING_FP',
   UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',

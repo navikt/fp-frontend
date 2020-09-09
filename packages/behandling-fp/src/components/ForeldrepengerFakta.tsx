@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import {
-  FagsakInfo, Rettigheter, SideMenuWrapper, faktaHooks,
+  FagsakInfo, Rettigheter, SideMenuWrapper, faktaHooks, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
@@ -48,21 +48,12 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
     aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, ytelsefordeling, beregningsgrunnlag,
   } = data;
 
-  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks
-    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+
   const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiFpHooks
     .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
-
-  useEffect(() => {
-    if (apBehandlingRes) {
-      setBehandling(apBehandlingRes);
-    }
-  }, [apBehandlingRes]);
-  useEffect(() => {
-    if (apOverstyrtBehandlingRes) {
-      setBehandling(apOverstyrtBehandlingRes);
-    }
-  }, [apOverstyrtBehandlingRes]);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     fagsak, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, ytelsefordeling, beregningsgrunnlag, hasFetchError,
@@ -77,7 +68,7 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
     .useCallbacks(faktaPaneler, fagsak, behandling, oppdaterProsessStegOgFaktaPanelIUrl, valgtProsessSteg, overstyringApCodes,
       lagreAksjonspunkter, lagreOverstyrteAksjonspunkter);
 
-  const endepunkter = valgtPanel.getPanelDef().getEndepunkter().map((e) => ({ key: e }));
+  const endepunkter = valgtPanel ? valgtPanel.getPanelDef().getEndepunkter().map((e) => ({ key: e })) : [];
   const { data: faktaData, state } = restApiFpHooks.useMultipleRestApi<FetchedData>(endepunkter,
     { updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel], suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel });
 

@@ -2,10 +2,12 @@ import {
   useState, useEffect, DependencyList,
 } from 'react';
 
+import { usePrevious } from '@fpsak-frontend/shared-components';
 import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
 
 import RestApiState from '../RestApiState';
 
+const notEqual = (array1, array2) => !(array1.length === array2.length && array1.every((value, index) => value === array2[index]));
 const format = (name) => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
 
 interface RestApiData<T> {
@@ -39,6 +41,12 @@ export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => fun
   };
 };
 
+const DEFAULT_STATE = {
+  state: RestApiState.NOT_STARTED,
+  error: undefined,
+  data: undefined,
+};
+
 /**
   * Hook som utfører et restkall ved mount. En kan i tillegg legge ved en dependencies-liste som kan trigge ny henting når data
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
@@ -46,11 +54,9 @@ export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => fun
 const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
   endpoints: { key: string, params?: any }[], options: Options = defaultOptions,
 ):RestApiData<T> {
-  const [data, setData] = useState({
-    state: RestApiState.NOT_STARTED,
-    error: undefined,
-    data: undefined,
-  });
+  const [data, setData] = useState(DEFAULT_STATE);
+
+  const previousTriggers = usePrevious(options.updateTriggers);
 
   useEffect(() => {
     if (!options.suspendRequest) {
@@ -81,15 +87,11 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
           });
         });
     } else {
-      setData({
-        state: RestApiState.NOT_STARTED,
-        error: undefined,
-        data: undefined,
-      });
+      setData(DEFAULT_STATE);
     }
   }, [...options.updateTriggers]);
 
-  return data;
+  return previousTriggers && notEqual(previousTriggers, options.updateTriggers) ? DEFAULT_STATE : data;
 };
 
 export default getUseMultipleRestApi;
