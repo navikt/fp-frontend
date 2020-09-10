@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useMemo, useCallback, DependencyList,
+  FunctionComponent, useMemo, useCallback,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -9,7 +9,9 @@ import {
 } from '@fpsak-frontend/shared-components';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import {
+  RestApiState, Options, EndpointData, RestApiData,
+} from '@fpsak-frontend/rest-api-hooks';
 
 import { ProsessStegPanelUtledet } from '../util/prosessSteg/ProsessStegUtledet';
 
@@ -22,7 +24,7 @@ interface OwnProps {
   submitCallback: (data: any) => Promise<any>;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  useMultipleRestApi: (endpoints: { key: string, params?: any }[], options: { updateTriggers: DependencyList }) => { data: any, state: RestApiState};
+  useMultipleRestApi: (endpoints: EndpointData[], options: Options) => RestApiData<any>;
 }
 
 const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({

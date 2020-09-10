@@ -15,7 +15,6 @@ describe('RestApiConfigBuilder', () => {
     expect(endpoints[0].restMethod).is.eql('GET');
     expect(endpoints[0].config).is.eql({
       maxPollingLimit: undefined,
-      saveResponseIn: undefined,
       isResponseBlob: false,
     });
 
@@ -24,7 +23,6 @@ describe('RestApiConfigBuilder', () => {
     expect(endpoints[1].restMethod).is.eql('POST');
     expect(endpoints[1].config).is.eql({
       maxPollingLimit: undefined,
-      saveResponseIn: undefined,
       isResponseBlob: false,
     });
   });

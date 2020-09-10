@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer,
+  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { Kodeverk, KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -115,16 +115,8 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
     .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.SAVE_REOPEN_ANKE_VURDERING);
   const { startRequest: lagreAnkeVurdering } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING);
 
-  useEffect(() => {
-    if (apBehandlingRes) {
-      setBehandling(apBehandlingRes);
-    }
-  }, [apBehandlingRes]);
-  useEffect(() => {
-    if (behandlingRes) {
-      setBehandling(behandlingRes);
-    }
-  }, [behandlingRes]);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     alleBehandlinger,

@@ -11,11 +11,9 @@ export const RequestType = {
 
 /**
  * maxPollingLimit: Maksimum antall ganger en skal forsøke å polle når en venter på ressurs (long polling). Kun aktuell ved metodene som inkluderer "Async".
- * saveResponseIn: Bruk denne når en utfører long-polling og resultatet skal lagres på en annen nøkkel en den som initierer kallet.
  */
 const defaultConfig = {
   maxPollingLimit: undefined,
-  saveResponseIn: undefined,
   isResponseBlob: false,
 };
 const formatConfig = (config = {}) => ({

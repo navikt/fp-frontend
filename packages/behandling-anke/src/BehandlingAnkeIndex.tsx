@@ -7,7 +7,9 @@ import { destroy } from 'redux-form';
 
 import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { FagsakInfo, Rettigheter, ReduxFormStateCleaner } from '@fpsak-frontend/behandling-felles';
+import {
+  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
+} from '@fpsak-frontend/behandling-felles';
 import { Behandling, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
@@ -69,11 +71,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
 
   const { startRequest: hentBehandling, data: behandlingRes } = restApiAnkeHooks
     .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.BEHANDLING_ANKE);
-  useEffect(() => {
-    if (behandlingRes) {
-      setBehandling(behandlingRes);
-    }
-  }, [behandlingRes]);
+  useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -107,9 +105,12 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
     };
   }, [behandlingId]);
 
-  if (behandling !== forrigeBehandling) {
-    requestAnkeApi.setLinks(behandling.links);
-  }
+  useEffect(() => {
+    if (behandling) {
+      requestAnkeApi.resetCache();
+      requestAnkeApi.setLinks(behandling.links);
+    }
+  }, [behandling]);
 
   const behandlingVersjon = behandling?.versjon;
   const { data, state } = restApiAnkeHooks.useMultipleRestApi<FetchedData>(ankeData,
@@ -141,9 +142,9 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
         oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
         settPaVent={settPaVent}
         hentBehandling={hentBehandling}
-        setBehandling={setBehandling}
         opneSokeside={opneSokeside}
         alleBehandlinger={alleBehandlinger}
+        setBehandling={setBehandling}
       />
     </>
   );

@@ -4,11 +4,13 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import {
+  RestApiState, Options, EndpointData, RestApiData,
+} from '@fpsak-frontend/rest-api-hooks';
+
 import FagsakInfo from '../types/fagsakInfoTsType';
 import MargMarkering from './MargMarkering';
 import InngangsvilkarPanel from './InngangsvilkarPanel';
-
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessStegIkkeBehandletPanel from './ProsessStegIkkeBehandletPanel';
 import prosessStegHooks from '../util/prosessSteg/prosessStegHooks';
@@ -24,6 +26,7 @@ interface OwnProps {
   lagringSideeffekterCallback: (aksjonspunktModeller: [{ kode: string; isVedtakSubmission?: boolean; sendVarsel?: boolean }]) => any;
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
   lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
+  useMultipleRestApi: (endpoints: EndpointData[], options: Options) => RestApiData<any>;
 }
 
 const ProsessStegPanel: FunctionComponent<OwnProps> = ({
@@ -43,8 +46,8 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
   const delPaneler = valgtProsessSteg.getDelPaneler();
   const panelKeys = delPaneler[0].getProsessStegDelPanelDef().getEndepunkter().map((e) => ({ key: e }));
 
-  const suspendRequest = panelKeys.length === 0 || erHenlagtOgVedtakStegValgt || !valgtProsessSteg
-    || (!valgtProsessSteg.getErStegBehandlet() && valgtProsessSteg.getUrlKode());
+  const suspendRequest = !!(panelKeys.length === 0 || erHenlagtOgVedtakStegValgt || !valgtProsessSteg
+    || (!valgtProsessSteg.getErStegBehandlet() && valgtProsessSteg.getUrlKode()));
 
   const { data, state: hentDataState } = useMultipleRestApi(panelKeys, {
     keepData: true,

@@ -7,7 +7,7 @@ import { destroy } from 'redux-form';
 
 import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import {
-  FagsakInfo, Rettigheter, ReduxFormStateCleaner,
+  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -75,11 +75,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps & DispatchProps>
 
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiFpHooks
     .useRestApiRunner<Behandling>(FpBehandlingApiKeys.BEHANDLING_FP);
-  useEffect(() => {
-    if (behandlingRes) {
-      setBehandling(behandlingRes);
-    }
-  }, [behandlingRes]);
+  useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 

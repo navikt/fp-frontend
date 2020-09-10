@@ -69,8 +69,10 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
       lagreAksjonspunkter, lagreOverstyrteAksjonspunkter);
 
   const endepunkter = valgtPanel ? valgtPanel.getPanelDef().getEndepunkter().map((e) => ({ key: e })) : [];
-  const { data: faktaData, state } = restApiFpHooks.useMultipleRestApi<FetchedData>(endepunkter,
-    { updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel], suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel });
+  const { data: faktaData, state } = restApiFpHooks.useMultipleRestApi<FetchedData>(endepunkter, {
+    updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel],
+    suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel,
+  });
 
   if (sidemenyPaneler.length > 0) {
     const isLoading = state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;

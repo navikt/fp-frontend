@@ -10,13 +10,18 @@ import RestApiState from '../RestApiState';
 const notEqual = (array1, array2) => !(array1.length === array2.length && array1.every((value, index) => value === array2[index]));
 const format = (name) => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
 
-interface RestApiData<T> {
+export interface RestApiData<T> {
   state: RestApiState;
   error?: Error;
   data?: T;
 }
 
-interface Options {
+export interface EndpointData {
+  key: string,
+  params?: any
+}
+
+export interface Options {
   updateTriggers?: DependencyList;
   keepData?: boolean;
   suspendRequest?: boolean;
@@ -32,7 +37,7 @@ const defaultOptions = {
  * For mocking i unit-test
  */
 export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
-  endpoints: { key: string, params?: any }[], options: Options = defaultOptions,
+  endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
@@ -52,7 +57,7 @@ const DEFAULT_STATE = {
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
 const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
-  endpoints: { key: string, params?: any }[], options: Options = defaultOptions,
+  endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
   const [data, setData] = useState(DEFAULT_STATE);
 

@@ -1,12 +1,13 @@
 import React, {
-  FunctionComponent, useState, useCallback, useMemo, useEffect,
+  FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer,
+  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal,
+  FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 
@@ -113,23 +114,15 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
   const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
   const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks
     .useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
-  const { startRequest: hentStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
+  const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
 
-  useEffect(() => {
-    if (apBehandlingRes) {
-      setBehandling(apBehandlingRes);
-    }
-  }, [apBehandlingRes]);
-  useEffect(() => {
-    if (apOverstyrtBehandlingRes) {
-      setBehandling(apOverstyrtBehandlingRes);
-    }
-  }, [apOverstyrtBehandlingRes]);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     previewCallback: useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
-    tempUpdateStonadskontoer: useCallback((params) => hentStonadskontoer(params), [behandling.versjon]),
+    tempUpdateStonadskontoer,
     alleKodeverk,
     ...data,
   };
