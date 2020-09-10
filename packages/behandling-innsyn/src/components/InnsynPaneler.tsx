@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import {
   FagsakInfo, Rettigheter, BehandlingPaVent, SettPaVentParams,
@@ -19,8 +18,9 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, { keepData: boolean }) => Promise<any>;
+  hentBehandling: (params: { behandlingId: number }, keepData: boolean) => Promise<any>;
   opneSokeside: () => void;
+  setBehandling: (behandling: Behandling) => void;
 }
 
 const InnsynPaneler: FunctionComponent<OwnProps> = ({
@@ -35,33 +35,29 @@ const InnsynPaneler: FunctionComponent<OwnProps> = ({
   settPaVent,
   hentBehandling,
   opneSokeside,
-}) => {
-  // TODO (TOR) Har trekt denne ut hit grunna redux test-oppsett. Fiks
-  const dispatch = useDispatch();
-
-  return (
-    <>
-      <BehandlingPaVent
-        behandling={behandling}
-        aksjonspunkter={fetchedData.aksjonspunkter}
-        kodeverk={kodeverk}
-        settPaVent={settPaVent}
-        hentBehandling={hentBehandling}
-      />
-      <InnsynProsess
-        fagsak={fagsak}
-        behandling={behandling}
-        data={fetchedData}
-        alleKodeverk={kodeverk}
-        rettigheter={rettigheter}
-        valgtProsessSteg={valgtProsessSteg}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-        opneSokeside={opneSokeside}
-        dispatch={dispatch}
-      />
-    </>
-  );
-};
+  setBehandling,
+}) => (
+  <>
+    <BehandlingPaVent
+      behandling={behandling}
+      aksjonspunkter={fetchedData.aksjonspunkter}
+      kodeverk={kodeverk}
+      settPaVent={settPaVent}
+      hentBehandling={hentBehandling}
+    />
+    <InnsynProsess
+      fagsak={fagsak}
+      behandling={behandling}
+      data={fetchedData}
+      alleKodeverk={kodeverk}
+      rettigheter={rettigheter}
+      valgtProsessSteg={valgtProsessSteg}
+      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+      opneSokeside={opneSokeside}
+      setBehandling={setBehandling}
+    />
+  </>
+);
 
 export default InnsynPaneler;

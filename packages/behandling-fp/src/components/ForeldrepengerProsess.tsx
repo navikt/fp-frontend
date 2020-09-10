@@ -60,7 +60,7 @@ const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsa
     brevmalkode,
     saksnummer,
   };
-  return forhandsvisTilbakekrevingMelding(data);
+  return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
 };
 
 const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleFatterVedtakModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl,

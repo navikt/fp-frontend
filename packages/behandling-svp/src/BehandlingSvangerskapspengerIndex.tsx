@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useRef,
+  FunctionComponent, useEffect, useState, useCallback,
 } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -7,19 +7,25 @@ import { destroy } from 'redux-form';
 
 import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import {
-  FagsakInfo, Rettigheter, SettPaVentParams, ReduxFormStateCleaner,
+  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers, getRequestPollingMessage } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
-import svpBehandlingApi, { reduxRestApi, SvpBehandlingApiKeys } from './data/svpBehandlingApi';
 import SvangerskapspengerPaneler from './components/SvangerskapspengerPaneler';
 import FetchedData from './types/fetchedDataTsType';
+import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from './data/svpBehandlingApi';
 
-const svangerskapspengerData = [svpBehandlingApi.AKSJONSPUNKTER, svpBehandlingApi.VILKAR, svpBehandlingApi.PERSONOPPLYSNINGER,
-  svpBehandlingApi.SOKNAD, svpBehandlingApi.INNTEKT_ARBEID_YTELSE, svpBehandlingApi.BEREGNINGSGRUNNLAG,
-  svpBehandlingApi.SIMULERING_RESULTAT, svpBehandlingApi.BEREGNINGRESULTAT_FORELDREPENGER];
+const svangerskapspengerData = [
+  { key: SvpBehandlingApiKeys.AKSJONSPUNKTER },
+  { key: SvpBehandlingApiKeys.VILKAR },
+  { key: SvpBehandlingApiKeys.PERSONOPPLYSNINGER },
+  { key: SvpBehandlingApiKeys.SOKNAD },
+  { key: SvpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
+  { key: SvpBehandlingApiKeys.BEREGNINGSGRUNNLAG },
+  { key: SvpBehandlingApiKeys.SIMULERING_RESULTAT },
+  { key: SvpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER }];
 
 interface OwnProps {
   behandlingId: number;
@@ -35,48 +41,17 @@ interface OwnProps {
   };
   opneSokeside: () => void;
   setRequestPendingMessage: (message: string) => void;
-}
-
-interface StateProps {
-  behandling?: Behandling;
-  forrigeBehandling?: Behandling;
   kodeverk?: {[key: string]: KodeverkMedNavn[]};
-  hasFetchError: boolean;
-  requestPollingMessage?: string;
 }
 
 interface DispatchProps {
-  nyBehandlendeEnhet: (params: any) => Promise<void>;
-  settBehandlingPaVent: (params: any) => Promise<void>;
-  taBehandlingAvVent: (params: any, { keepData: boolean }) => Promise<void>;
-  henleggBehandling: (params: any) => Promise<void>;
-  opneBehandlingForEndringer: (params: any) => Promise<any>;
-  opprettVerge: (params: any) => Promise<any>;
-  fjernVerge: (params: any) => Promise<any>;
-  lagreRisikoklassifiseringAksjonspunkt: (params: any) => Promise<any>;
-  settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, { keepData: boolean }) => Promise<any>;
-  resetRestApiContext: () => (dspatch: any) => void;
   destroyReduxForm: (form: string) => void;
 }
 
-type Props = OwnProps & StateProps & DispatchProps;
-
-const BehandlingSvangerskapspengerIndex: FunctionComponent<Props> = ({
-  opneBehandlingForEndringer,
-  opprettVerge,
-  fjernVerge,
-  lagreRisikoklassifiseringAksjonspunkt,
+const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps & DispatchProps> = ({
   behandlingEventHandler,
-  nyBehandlendeEnhet,
-  settBehandlingPaVent,
-  taBehandlingAvVent,
-  henleggBehandling,
-  hentBehandling,
   behandlingId,
-  resetRestApiContext,
   destroyReduxForm,
-  behandling,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -84,111 +59,113 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<Props> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
   valgtFaktaSteg,
-  settPaVent,
   opneSokeside,
-  forrigeBehandling,
-  hasFetchError,
-  requestPollingMessage,
   setRequestPendingMessage,
 }) => {
-  const forrigeVersjon = useRef<number>();
+  const [behandling, setBehandlingState] = useState<Behandling>();
+  const [forrigeBehandling, setForrigeBehandling] = useState<Behandling>();
+  const setBehandling = useCallback((nyBehandling) => {
+    setForrigeBehandling(behandling);
+    setBehandlingState(nyBehandling);
+  }, [behandling]);
+
+  const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiSvpHooks
+    .useRestApiRunner<Behandling>(SvpBehandlingApiKeys.BEHANDLING_SVP);
+  useSetBehandlingVedEndring(behandlingRes, setBehandling);
+
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  const { startRequest: nyBehandlendeEnhet } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
+  const { startRequest: settBehandlingPaVent } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.BEHANDLING_ON_HOLD);
+  const { startRequest: taBehandlingAvVent } = restApiSvpHooks.useRestApiRunner<Behandling>(SvpBehandlingApiKeys.RESUME_BEHANDLING);
+  const { startRequest: henleggBehandling } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.HENLEGG_BEHANDLING);
+  const { startRequest: settPaVent } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.UPDATE_ON_HOLD);
+  const { startRequest: opneBehandlingForEndringer } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES);
+  const { startRequest: opprettVerge } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.VERGE_OPPRETT);
+  const { startRequest: fjernVerge } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.VERGE_FJERN);
+  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
 
   useEffect(() => {
     behandlingEventHandler.setHandler({
       endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, { keepData: true })),
+        .then(() => hentBehandling({ behandlingId }, true)),
       settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, { keepData: true })),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params, { keepData: true }),
+        .then(() => hentBehandling({ behandlingId }, true)),
+      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
+        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
       henleggBehandling: (params) => henleggBehandling(params),
-      opneBehandlingForEndringer: (params) => opneBehandlingForEndringer(params),
-      opprettVerge: (params) => opprettVerge(params),
-      fjernVerge: (params) => fjernVerge(params),
+      opneBehandlingForEndringer: (params) => opneBehandlingForEndringer(params)
+        .then((behandlingResOpneForEndring) => setBehandling(behandlingResOpneForEndring)),
+      opprettVerge: (params) => opprettVerge(params)
+        .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
+      fjernVerge: (params) => fjernVerge(params)
+        .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
       lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params),
     });
 
-    hentBehandling({ behandlingId }, { keepData: false });
+    requestSvpApi.setRequestPendingHandler(setRequestPendingMessage);
+    requestSvpApi.setAddErrorMessageHandler(addErrorMessage);
+
+    hentBehandling({ behandlingId }, false);
 
     return () => {
       behandlingEventHandler.clear();
-      resetRestApiContext();
       setTimeout(() => {
-        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeVersjon.current));
+        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.versjon));
       }, 1000);
     };
   }, [behandlingId]);
 
   useEffect(() => {
-    setRequestPendingMessage(requestPollingMessage);
-  }, [requestPollingMessage]);
+    if (behandling) {
+      requestSvpApi.resetCache();
+      requestSvpApi.setLinks(behandling.links);
+    }
+  }, [behandling]);
+
+  const behandlingVersjon = behandling?.versjon;
+  const { data, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(svangerskapspengerData,
+    { keepData: true, updateTriggers: [behandlingVersjon], suspendRequest: !behandling });
 
   if (!behandling) {
     return <LoadingPanel />;
   }
 
-  forrigeVersjon.current = behandling.versjon;
-
-  reduxRestApi.injectPaths(behandling.links);
+  if ((state === RestApiState.LOADING || state === RestApiState.NOT_STARTED) && data === undefined) {
+    return <LoadingPanel />;
+  }
 
   return (
-    <DataFetcher
-      fetchingTriggers={new DataFetcherTriggers({ behandlingVersion: behandling.versjon }, true)}
-      endpoints={svangerskapspengerData}
-      showOldDataWhenRefetching
-      loadingPanel={<LoadingPanel />}
-      render={(dataProps: FetchedData, isFinished) => (
-        <>
-          <ReduxFormStateCleaner behandlingId={behandling.id} behandlingVersjon={isFinished ? behandling.versjon : forrigeBehandling.versjon} />
-          <SvangerskapspengerPaneler
-            behandling={isFinished ? behandling : forrigeBehandling}
-            fetchedData={dataProps}
-            fagsak={fagsak}
-            alleKodeverk={kodeverk}
-            rettigheter={rettigheter}
-            valgtProsessSteg={valgtProsessSteg}
-            valgtFaktaSteg={valgtFaktaSteg}
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-            settPaVent={settPaVent}
-            hentBehandling={hentBehandling}
-            opneSokeside={opneSokeside}
-            hasFetchError={hasFetchError}
-          />
-        </>
-      )}
-    />
+    <>
+      <ReduxFormStateCleaner
+        behandlingId={behandling.id}
+        behandlingVersjon={state === RestApiState.LOADING
+          ? forrigeBehandling.versjon : behandling.versjon}
+      />
+      <SvangerskapspengerPaneler
+        behandling={state === RestApiState.LOADING ? forrigeBehandling : behandling}
+        fetchedData={data}
+        fagsak={fagsak}
+        alleKodeverk={kodeverk}
+        rettigheter={rettigheter}
+        valgtProsessSteg={valgtProsessSteg}
+        valgtFaktaSteg={valgtFaktaSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+        settPaVent={settPaVent}
+        hentBehandling={hentBehandling}
+        opneSokeside={opneSokeside}
+        hasFetchError={behandlingState === RestApiState.ERROR}
+        setBehandling={setBehandling}
+      />
+    </>
   );
-};
-
-const mapStateToProps = (state): StateProps => ({
-  behandling: svpBehandlingApi.BEHANDLING_SVP.getRestApiData()(state),
-  forrigeBehandling: svpBehandlingApi.BEHANDLING_SVP.getRestApiPreviousData()(state),
-  hasFetchError: !!svpBehandlingApi.BEHANDLING_SVP.getRestApiError()(state),
-  requestPollingMessage: getRequestPollingMessage(state),
-});
-
-const getResetRestApiContext = () => (dispatch: Dispatch) => {
-  Object.values(SvpBehandlingApiKeys)
-    .forEach((value) => {
-      dispatch(svpBehandlingApi[value].resetRestApi()());
-    });
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
-    nyBehandlendeEnhet: svpBehandlingApi.BEHANDLING_NY_BEHANDLENDE_ENHET.makeRestApiRequest(),
-    settBehandlingPaVent: svpBehandlingApi.BEHANDLING_ON_HOLD.makeRestApiRequest(),
-    taBehandlingAvVent: svpBehandlingApi.RESUME_BEHANDLING.makeRestApiRequest(),
-    henleggBehandling: svpBehandlingApi.HENLEGG_BEHANDLING.makeRestApiRequest(),
-    settPaVent: svpBehandlingApi.UPDATE_ON_HOLD.makeRestApiRequest(),
-    opneBehandlingForEndringer: svpBehandlingApi.OPEN_BEHANDLING_FOR_CHANGES.makeRestApiRequest(),
-    opprettVerge: svpBehandlingApi.VERGE_OPPRETT.makeRestApiRequest(),
-    fjernVerge: svpBehandlingApi.VERGE_FJERN.makeRestApiRequest(),
-    hentBehandling: svpBehandlingApi.BEHANDLING_SVP.makeRestApiRequest(),
-    lagreRisikoklassifiseringAksjonspunkt: svpBehandlingApi.SAVE_AKSJONSPUNKT.makeRestApiRequest(),
-    resetRestApiContext: getResetRestApiContext,
     destroyReduxForm: destroy,
   }, dispatch),
 });
 
-export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(BehandlingSvangerskapspengerIndex);
+export default connect<any, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingSvangerskapspengerIndex);

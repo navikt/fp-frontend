@@ -1,18 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import { Dispatch } from 'redux';
 
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import {
-  FagsakInfo, SideMenuWrapper, faktaHooks, Rettigheter,
+  FagsakInfo, SideMenuWrapper, faktaHooks, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers } from '@fpsak-frontend/rest-api-redux';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import svpBehandlingApi from '../data/svpBehandlingApi';
 import faktaPanelDefinisjoner from '../panelDefinisjoner/faktaSvpPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
+import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
 const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STARTDAT,
   ac.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, ac.OVERSTYRING_AV_BEREGNINGSGRUNNLAG, ac.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE];
@@ -28,7 +27,7 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   valgtProsessSteg?: string;
   setApentFaktaPanel: (faktaPanelInfo: { urlCode: string; textCode: string}) => void;
-  dispatch: Dispatch;
+  setBehandling: (behandling: Behandling) => void;
 }
 
 const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -43,11 +42,18 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   valgtProsessSteg,
   hasFetchError,
   setApentFaktaPanel,
-  dispatch,
+  setBehandling,
 }) => {
   const {
     aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag,
   } = data;
+
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiSvpHooks.useRestApiRunner<Behandling>(SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiSvpHooks
+    .useRestApiRunner<Behandling>(SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvSvpPaneler = {
     fagsak, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError,
@@ -59,26 +65,29 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   faktaHooks.useFaktaAksjonspunktNotifikator(faktaPaneler, setApentFaktaPanel, behandling.versjon);
 
   const [velgFaktaPanelCallback, bekreftAksjonspunktCallback] = faktaHooks
-    .useCallbacks(faktaPaneler, fagsak, behandling, oppdaterProsessStegOgFaktaPanelIUrl, valgtProsessSteg, overstyringApCodes, svpBehandlingApi, dispatch);
+    .useCallbacks(faktaPaneler, fagsak, behandling, oppdaterProsessStegOgFaktaPanelIUrl, valgtProsessSteg, overstyringApCodes,
+      lagreAksjonspunkter, lagreOverstyrteAksjonspunkter);
+
+  const endepunkter = valgtPanel ? valgtPanel.getPanelDef().getEndepunkter().map((e) => ({ key: e })) : [];
+  const { data: faktaData, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(endepunkter, {
+    updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel],
+    suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel,
+  });
 
   if (sidemenyPaneler.length > 0) {
+    const isLoading = state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
     return (
       <SideMenuWrapper paneler={sidemenyPaneler} onClick={velgFaktaPanelCallback}>
-        {valgtPanel && (
-          <DataFetcher
-            key={valgtPanel.getUrlKode()}
-            fetchingTriggers={new DataFetcherTriggers({ behandlingVersion: behandling.versjon }, true)}
-            endpoints={valgtPanel.getPanelDef().getEndepunkter()}
-            loadingPanel={<LoadingPanel />}
-            render={(dataProps) => valgtPanel.getPanelDef().getKomponent({
-              ...dataProps,
-              behandling,
-              alleKodeverk,
-              submitCallback: bekreftAksjonspunktCallback,
-              ...valgtPanel.getKomponentData(rettigheter, dataTilUtledingAvSvpPaneler, hasFetchError),
-            })}
-          />
+        {valgtPanel && isLoading && (
+          <LoadingPanel />
         )}
+        {valgtPanel && !isLoading && valgtPanel.getPanelDef().getKomponent({
+          ...faktaData,
+          behandling,
+          alleKodeverk,
+          submitCallback: bekreftAksjonspunktCallback,
+          ...valgtPanel.getKomponentData(rettigheter, dataTilUtledingAvSvpPaneler, hasFetchError),
+        })}
       </SideMenuWrapper>
     );
   }
