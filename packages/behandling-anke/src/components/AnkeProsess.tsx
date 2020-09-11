@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useCallback, useMemo, useEffect,
+  FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
