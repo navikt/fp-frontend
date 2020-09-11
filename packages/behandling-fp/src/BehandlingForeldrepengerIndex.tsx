@@ -172,4 +172,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect<any, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingForeldrepengerIndex);
+export default connect<unknown, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingForeldrepengerIndex);

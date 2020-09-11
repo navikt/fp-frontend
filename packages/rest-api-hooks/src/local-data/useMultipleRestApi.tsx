@@ -3,7 +3,7 @@ import {
 } from 'react';
 
 import { usePrevious } from '@fpsak-frontend/shared-components';
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
 

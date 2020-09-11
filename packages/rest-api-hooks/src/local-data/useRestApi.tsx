@@ -2,7 +2,7 @@ import {
   useState, useEffect, DependencyList,
 } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { REQUEST_POLLING_CANCELLED, AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
 

@@ -1,4 +1,4 @@
-import { RequestAdditionalConfig } from './RequestAdditionalConfigTsType';
+import RequestAdditionalConfig from './RequestAdditionalConfigTsType';
 
 export const RequestType = {
   GET: 'GET',
@@ -7,16 +7,14 @@ export const RequestType = {
   POST_ASYNC: 'POST_ASYNC',
   PUT: 'PUT',
   PUT_ASYNC: 'PUT_ASYNC',
-  POST_AND_OPEN_BLOB: 'POST_AND_OPEN_BLOB',
 };
 
 /**
  * maxPollingLimit: Maksimum antall ganger en skal forsøke å polle når en venter på ressurs (long polling). Kun aktuell ved metodene som inkluderer "Async".
- * saveResponseIn: Bruk denne når en utfører long-polling og resultatet skal lagres på en annen nøkkel en den som initierer kallet.
  */
 const defaultConfig = {
   maxPollingLimit: undefined,
-  saveResponseIn: undefined,
+  isResponseBlob: false,
 };
 const formatConfig = (config = {}) => ({
   ...defaultConfig,
@@ -27,73 +25,68 @@ const formatConfig = (config = {}) => ({
  * RequestConfig
  */
 class RequestConfig {
-  name: string;
+    name: string;
 
-  config?: RequestAdditionalConfig;
+    config?: RequestAdditionalConfig;
 
-  path?: string;
+    path?: string;
 
-  restMethod?: string = RequestType.GET;
+    restMethod?: string = RequestType.GET;
 
-  rel?: string;
+    rel?: string;
 
-  requestPayload?: any;
+    requestPayload?: any;
 
-  constructor(name: string, path?: string, config?: RequestAdditionalConfig) {
-    this.name = name;
-    this.path = path;
-    this.config = formatConfig(config);
-  }
+    constructor(name: string, path?: string, config?: RequestAdditionalConfig) {
+      this.name = name;
+      this.path = path;
+      this.config = formatConfig(config);
+    }
 
-  withGetMethod = () => {
-    this.restMethod = RequestType.GET;
-    return this;
-  };
+    withGetMethod = () => {
+      this.restMethod = RequestType.GET;
+      return this;
+    }
 
-  withGetAsyncMethod = () => {
-    this.restMethod = RequestType.GET_ASYNC;
-    return this;
-  };
+    withGetAsyncMethod = () => {
+      this.restMethod = RequestType.GET_ASYNC;
+      return this;
+    }
 
-  withPostMethod = () => {
-    this.restMethod = RequestType.POST;
-    return this;
-  }
+    withPostMethod = () => {
+      this.restMethod = RequestType.POST;
+      return this;
+    }
 
-  withPostAsyncMethod = () => {
-    this.restMethod = RequestType.POST_ASYNC;
-    return this;
-  };
+    withPostAsyncMethod = () => {
+      this.restMethod = RequestType.POST_ASYNC;
+      return this;
+    }
 
-  withPutMethod = () => {
-    this.restMethod = RequestType.PUT;
-    return this;
-  };
+    withPutMethod = () => {
+      this.restMethod = RequestType.PUT;
+      return this;
+    }
 
-  withPutAsyncMethod = () => {
-    this.restMethod = RequestType.PUT_ASYNC;
-    return this;
-  };
+    withPutAsyncMethod = () => {
+      this.restMethod = RequestType.PUT_ASYNC;
+      return this;
+    }
 
-  withPostAndOpenBlob = () => {
-    this.restMethod = RequestType.POST_AND_OPEN_BLOB;
-    return this;
-  };
+    withRel = (rel: string) => {
+      this.rel = rel;
+      return this;
+    }
 
-  withRel = (rel: string) => {
-    this.rel = rel;
-    return this;
-  };
+    withRestMethod = (restMethod: string) => {
+      this.restMethod = restMethod.toUpperCase();
+      return this;
+    }
 
-  withRestMethod = (restMethod: string) => {
-    this.restMethod = restMethod.toUpperCase();
-    return this;
-  };
-
-  withRequestPayload = (requestPayload?: any) => {
-    this.requestPayload = requestPayload;
-    return this;
-  };
+    withRequestPayload = (requestPayload?: any) => {
+      this.requestPayload = requestPayload;
+      return this;
+    }
 }
 
 export default RequestConfig;

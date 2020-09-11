@@ -22,7 +22,7 @@ import {
 } from '../app/paths';
 import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
 import behandlingEventHandler from './BehandlingEventHandler';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../app/ErrorBoundary';
 
 const BehandlingEngangsstonadIndex = React.lazy(() => import('@fpsak-frontend/behandling-es'));
 const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-fp'));

@@ -167,4 +167,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect<any, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingEngangsstonadIndex);
+export default connect<unknown, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingEngangsstonadIndex);

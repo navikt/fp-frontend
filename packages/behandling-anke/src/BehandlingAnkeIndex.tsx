@@ -156,4 +156,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect<any, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingAnkeIndex);
+export default connect<unknown, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingAnkeIndex);

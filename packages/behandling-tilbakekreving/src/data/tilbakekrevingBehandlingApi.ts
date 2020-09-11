@@ -1,4 +1,4 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api-new';
+import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
 // eslint-disable-next-line no-shadow

@@ -1,4 +1,4 @@
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
 import getUseRestApi, { getUseRestApiMock } from './local-data/useRestApi';
 import getUseMultipleRestApi, { getUseMultipleRestApiMock } from './local-data/useMultipleRestApi';
