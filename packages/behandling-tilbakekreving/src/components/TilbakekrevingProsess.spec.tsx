@@ -117,7 +117,7 @@ describe('<TilbakekrevingProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         harApenRevurdering={false}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -160,7 +160,7 @@ describe('<TilbakekrevingProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
         harApenRevurdering={false}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 

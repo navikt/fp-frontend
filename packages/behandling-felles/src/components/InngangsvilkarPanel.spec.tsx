@@ -11,8 +11,8 @@ import { Behandling } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import { DataFetcher } from '@fpsak-frontend/rest-api-redux';
 
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { ProsessStegDef, ProsessStegPanelDef } from '../util/prosessSteg/ProsessStegDef';
 import { ProsessStegPanelUtledet } from '../util/prosessSteg/ProsessStegUtledet';
 import InngangsvilkarPanel from './InngangsvilkarPanel';
@@ -45,7 +45,7 @@ describe('<InngangsvilkarPanel>', () => {
 
   const lagPanelDef = (id, aksjonspunktKoder, aksjonspunktTekstKoder) => {
     class PanelDef extends ProsessStegPanelDef {
-      getId = () => ''
+      getId = () => id
 
       getKomponent = (props) => <div {...props} />
 
@@ -95,6 +95,7 @@ describe('<InngangsvilkarPanel>', () => {
         prosessStegData={prosessStegData}
         submitCallback={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 
@@ -106,10 +107,10 @@ describe('<InngangsvilkarPanel>', () => {
 
     const columns = wrapper.find(Column);
     expect(columns).to.have.length(2);
-    const column1 = columns.first().find(DataFetcher);
-    expect(column1).to.have.length(2);
-    const column2 = columns.last().find(DataFetcher);
-    expect(column2).to.have.length(1);
+    const column1children = columns.first().children();
+    expect(column1children).to.have.length(2);
+    const column2children = columns.last().children();
+    expect(column2children).to.have.length(1);
   });
 
   it('skal vise aksjonspunkt-hjelpetekst med lenke for avventing av fakta-aksjonspunkt', () => {
@@ -134,6 +135,7 @@ describe('<InngangsvilkarPanel>', () => {
           urlCode: 'MEDLEMSKAP',
           textCode: 'FAKTA_APENT',
         }}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 

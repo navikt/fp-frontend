@@ -100,7 +100,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -165,7 +165,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -194,7 +194,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -241,7 +241,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -291,7 +291,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -341,7 +341,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -367,7 +367,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -396,7 +396,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={dispatch}
+        setBehandling={dispatch}
       />,
     );
 
@@ -425,7 +425,7 @@ describe('<ForeldrepengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={dispatch}
+        setBehandling={dispatch}
       />,
     );
 

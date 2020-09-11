@@ -99,7 +99,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -158,7 +158,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -187,7 +187,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -232,7 +232,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -280,7 +280,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -328,7 +328,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -354,7 +354,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -383,7 +383,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={dispatch}
+        setBehandling={dispatch}
       />,
     );
 
@@ -412,7 +412,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        dispatch={dispatch}
+        setBehandling={dispatch}
       />,
     );
 

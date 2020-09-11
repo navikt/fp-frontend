@@ -115,7 +115,7 @@ describe('<TilbakekrevingFakta>', () => {
         fpsakKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         hasFetchError={false}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -142,7 +142,7 @@ describe('<TilbakekrevingFakta>', () => {
         fpsakKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         hasFetchError={false}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 

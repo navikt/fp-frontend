@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
-import { DataFetcher } from '@fpsak-frontend/rest-api-redux';
 import { Behandling } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -85,7 +84,7 @@ describe('<EngangsstonadFakta>', () => {
         valgtProsessSteg="default"
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -116,7 +115,7 @@ describe('<EngangsstonadFakta>', () => {
         valgtProsessSteg="default"
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -152,11 +151,11 @@ describe('<EngangsstonadFakta>', () => {
         valgtProsessSteg="default"
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
-    const dataFetcher = wrapper.find(DataFetcher);
+    const dataFetcher = wrapper.find('DataFetcher');
     expect(dataFetcher.prop('fetchingTriggers').triggers.behandlingVersion).is.eql(behandling.versjon);
     expect(dataFetcher.prop('endpoints')).is.eql([]);
 
