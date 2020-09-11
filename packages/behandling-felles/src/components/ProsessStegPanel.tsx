@@ -43,17 +43,21 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const erHenlagtOgVedtakStegValgt = behandling.behandlingHenlagt && valgtProsessSteg && valgtProsessSteg.getUrlKode() === prosessStegCodes.VEDTAK;
 
-  const delPaneler = valgtProsessSteg.getDelPaneler();
-  const panelKeys = delPaneler[0].getProsessStegDelPanelDef().getEndepunkter().map((e) => ({ key: e }));
+  const panelKeys = valgtProsessSteg ? valgtProsessSteg.getDelPaneler()[0].getProsessStegDelPanelDef().getEndepunkter()
+    .map((e) => ({ key: e })) : [];
 
   const suspendRequest = !!(panelKeys.length === 0 || erHenlagtOgVedtakStegValgt || !valgtProsessSteg
     || (!valgtProsessSteg.getErStegBehandlet() && valgtProsessSteg.getUrlKode()));
 
   const { data, state: hentDataState } = useMultipleRestApi(panelKeys, {
     keepData: true,
+    isCachingOn: true,
     suspendRequest,
     updateTriggers: [behandling?.versjon, suspendRequest],
   });
+
+  const bekreftAksjonspunktCallback = prosessStegHooks.useBekreftAksjonspunkt(fagsak, behandling,
+    lagringSideeffekterCallback, lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, valgtProsessSteg);
 
   if (erHenlagtOgVedtakStegValgt) {
     return <BehandlingHenlagtPanel />;
@@ -65,10 +69,8 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
     return <ProsessStegIkkeBehandletPanel />;
   }
 
-  const bekreftAksjonspunktCallback = prosessStegHooks.useBekreftAksjonspunkt(fagsak, behandling,
-    lagringSideeffekterCallback, lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, valgtProsessSteg);
-
   const harHentetData = panelKeys.length === 0 || hentDataState === RestApiState.SUCCESS;
+  const delPaneler = valgtProsessSteg.getDelPaneler();
 
   return (
     <>

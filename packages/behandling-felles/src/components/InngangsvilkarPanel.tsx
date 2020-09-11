@@ -39,7 +39,7 @@ const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
   const filteredPanels = prosessStegData.filter((stegData) => stegData.getKomponentData);
 
   const endepunkter = filteredPanels.flatMap((stegData) => stegData.getProsessStegDelPanelDef().getEndepunkter().map((e) => ({ key: e })));
-  const { data, state } = useMultipleRestApi(endepunkter, { updateTriggers: [behandling.versjon] });
+  const { data, state } = useMultipleRestApi(endepunkter, { updateTriggers: [behandling.versjon], isCachingOn: true });
 
   const aksjonspunktTekstKoder = useMemo(() => filteredPanels
     .filter((p) => p.getErAksjonspunktOpen() && p.getAksjonspunktHjelpetekster().length > 0)

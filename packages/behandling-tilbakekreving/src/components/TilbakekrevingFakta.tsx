@@ -62,6 +62,7 @@ const TilbakekrevingFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
   const { data: faktaData, state } = restApiTilbakekrevingHooks.useMultipleRestApi<FetchedData>(endepunkter, {
     updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel],
     suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel,
+    isCachingOn: true,
   });
 
   if (sidemenyPaneler.length > 0) {

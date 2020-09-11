@@ -28,13 +28,11 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseB
   return httpClientApi.postBlob;
 };
 
-const isGetRequest = (restMethod) => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
-
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const waitUntilFinished = async (cache, endpointName) => {
   if (cache.isFetching(endpointName)) {
     await wait(50);
-    return waitUntilFinished(cache, endpointName);
+    waitUntilFinished(cache, endpointName);
   }
 };
 
@@ -61,14 +59,20 @@ class RequestApi extends AbstractRequestApi {
     this.endpointConfigList = endpointConfigList;
   }
 
-  private doCaching = async (endpointName) => {
-    if (this.cache.hasFetched(endpointName)) {
-      return this.cache.getData(endpointName);
-    } if (this.cache.isFetching(endpointName)) {
-      await waitUntilFinished(this.cache, endpointName);
-      return this.cache.getData(endpointName);
+  private shouldUseCache = (restMethod) => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC
+
+  private checkCache = async (restMethod, isCachingOn, endpointName) => {
+    if (isCachingOn && this.shouldUseCache(restMethod)) {
+      if (this.cache.hasFetched(endpointName)) {
+        return this.cache.getData(endpointName);
+      } if (this.cache.isFetching(endpointName)) {
+        await waitUntilFinished(this.cache, endpointName);
+        return this.cache.getData(endpointName);
+      }
+
+      this.cache.setToFetching(endpointName);
     }
-    this.cache.setToFetching(endpointName);
+
     return undefined;
   }
 
@@ -81,12 +85,9 @@ class RequestApi extends AbstractRequestApi {
     const restMethod = link ? link.type : endpointConfig.restMethod;
     const href = link ? link.href : endpointConfig.path;
 
-    const useCaching = isCachingOn && isGetRequest(restMethod);
-    if (useCaching) {
-      const cachedResult = await this.doCaching(endpointName);
-      if (cachedResult) {
-        return cachedResult;
-      }
+    const cachedResult = this.checkCache(restMethod, isCachingOn, endpointName);
+    if (cachedResult) {
+      return cachedResult;
     }
 
     const apiRestMethod = getMethod(this.httpClientApi, restMethod, endpointConfig.config.isResponseBlob);
@@ -95,7 +96,7 @@ class RequestApi extends AbstractRequestApi {
       runner.setNotificationEmitter(this.notificationMapper.getNotificationEmitter());
     }
 
-    if (!useCaching) {
+    if (!isCachingOn || !this.shouldUseCache(restMethod)) {
       return runner.start(params || link?.requestPayload);
     }
 

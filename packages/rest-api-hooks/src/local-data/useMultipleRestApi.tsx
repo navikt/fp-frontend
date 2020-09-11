@@ -25,12 +25,14 @@ export interface Options {
   updateTriggers?: DependencyList;
   keepData?: boolean;
   suspendRequest?: boolean;
+  isCachingOn?: boolean;
 }
 
 const defaultOptions = {
   updateTriggers: [],
   keepData: false,
   suspendRequest: false,
+  isCachingOn: false,
 };
 
 /**
@@ -73,7 +75,7 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
 
       const filteredEndpoints = endpoints.filter((e) => requestApi.hasPath(e.key));
 
-      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest(e.key, e.params)))
+      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest(e.key, e.params, options.isCachingOn)))
         .then((dataRes) => {
           setData({
             state: RestApiState.SUCCESS,

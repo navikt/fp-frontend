@@ -1,4 +1,3 @@
-import NotificationMapper from './NotificationMapper';
 import Link from './LinkTsType';
 
 /**
@@ -8,7 +7,7 @@ import Link from './LinkTsType';
  * de enkelte endepunktene. Det blir så satt opp RequestRunner's for endepunktene. Desse kan hentes via metoden @see getRequestRunner.
  */
 abstract class AbstractRequestApi {
-  public abstract startRequest(endpointName: string, params?: any, notificationMapper?: NotificationMapper);
+  public abstract startRequest(endpointName: string, params?: any, isCachingOn?: boolean);
 
   public abstract hasPath(endpointName: string);
 

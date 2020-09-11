@@ -72,6 +72,7 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
   const { data: faktaData, state } = restApiFpHooks.useMultipleRestApi<FetchedData>(endepunkter, {
     updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel],
     suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel,
+    isCachingOn: true,
   });
 
   if (sidemenyPaneler.length > 0) {

@@ -72,6 +72,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   const { data: faktaData, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(endepunkter, {
     updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel],
     suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel,
+    isCachingOn: true,
   });
 
   if (sidemenyPaneler.length > 0) {
