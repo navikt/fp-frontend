@@ -53,7 +53,7 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
     keepData: true,
     isCachingOn: true,
     suspendRequest,
-    updateTriggers: [behandling?.versjon, suspendRequest],
+    updateTriggers: [behandling?.versjon, suspendRequest, valgtProsessSteg],
   });
 
   const bekreftAksjonspunktCallback = prosessStegHooks.useBekreftAksjonspunkt(fagsak, behandling,

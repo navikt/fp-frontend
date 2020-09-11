@@ -36,6 +36,7 @@ const waitUntilFinished = async (cache, endpointName) => {
     await wait(50);
     return waitUntilFinished(cache, endpointName);
   }
+  return undefined;
 };
 
 /**
