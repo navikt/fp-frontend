@@ -46,7 +46,7 @@ const saveAnkeText = (dispatch, behandling, aksjonspunkter) => (aksjonspunktMode
     .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK);
 
   if (getForeslaVedtakAp.length === 1) {
-    dispatch(ankeBehandlingApi.SAVE_REOPEN_ANKE_VURDERING.makeRestApiRequest()(data));
+    dispatch(ankeBehandlingApi.SAVE_ANKE_VURDERING.makeRestApiRequest()(data));
   } else {
     dispatch(ankeBehandlingApi.SAVE_ANKE_VURDERING.makeRestApiRequest()(data));
   }

@@ -16,7 +16,6 @@ export const AnkeBehandlingApiKeys = {
   SAVE_AKSJONSPUNKT: 'SAVE_AKSJONSPUNKT',
   PREVIEW_MESSAGE: 'PREVIEW_MESSAGE',
   SAVE_ANKE_VURDERING: 'SAVE_ANKE_VURDERING',
-  SAVE_REOPEN_ANKE_VURDERING: 'SAVE_REOPEN_ANKE_VURDERING',
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -35,7 +34,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('endre-pa-vent', AnkeBehandlingApiKeys.UPDATE_ON_HOLD)
   .withRel('lagre-aksjonspunkter', AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT, { saveResponseIn: AnkeBehandlingApiKeys.BEHANDLING_ANKE })
   .withRel('mellomlagre-anke', AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING)
-  .withRel('mellomlagre-gjennapne-anke', AnkeBehandlingApiKeys.SAVE_REOPEN_ANKE_VURDERING, { saveResponseIn: AnkeBehandlingApiKeys.BEHANDLING_ANKE })
 
   /* FPFORMIDLING */
   .withPostAndOpenBlob('/fpformidling/api/brev/forhaandsvis', AnkeBehandlingApiKeys.PREVIEW_MESSAGE)
