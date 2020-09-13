@@ -113,6 +113,9 @@ const buildInitialValues = createSelector([(ownProps) => ownProps.ankeVurderingR
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
   fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
+  merknadKommentar: resultat ? resultat.merknadKommentar : null,
+  // eslint-disable-next-line no-nested-ternary
+  erMerknaderMottatt: resultat && resultat.merknadKommentar !== null ? (resultat.erMerknaderMottatt ? 'ja' : 'nei') : null,
 }));
 
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
