@@ -16,7 +16,6 @@ export const KlageBehandlingApiKeys = {
   SAVE_AKSJONSPUNKT: 'SAVE_AKSJONSPUNKT',
   PREVIEW_MESSAGE: 'PREVIEW_MESSAGE',
   SAVE_KLAGE_VURDERING: 'SAVE_KLAGE_VURDERING',
-  SAVE_REOPEN_KLAGE_VURDERING: 'SAVE_REOPEN_KLAGE_VURDERING',
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -35,7 +34,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('endre-pa-vent', KlageBehandlingApiKeys.UPDATE_ON_HOLD)
   .withRel('lagre-aksjonspunkter', KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT, { saveResponseIn: KlageBehandlingApiKeys.BEHANDLING_KLAGE })
   .withRel('mellomlagre-klage', KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING)
-  .withRel('mellomlagre-gjennapne-klage', KlageBehandlingApiKeys.SAVE_REOPEN_KLAGE_VURDERING, { saveResponseIn: KlageBehandlingApiKeys.BEHANDLING_KLAGE })
 
   /* FPFORMIDLING */
   .withPostAndOpenBlob('/fpformidling/api/brev/forhaandsvis', KlageBehandlingApiKeys.PREVIEW_MESSAGE)

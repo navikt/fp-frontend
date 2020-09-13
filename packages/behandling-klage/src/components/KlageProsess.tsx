@@ -47,7 +47,7 @@ const saveKlageText = (dispatch, behandling, aksjonspunkter) => (aksjonspunktMod
     .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK);
 
   if (getForeslaVedtakAp.length === 1) {
-    dispatch(klageBehandlingApi.SAVE_REOPEN_KLAGE_VURDERING.makeRestApiRequest()(data));
+    dispatch(klageBehandlingApi.SAVE_KLAGE_VURDERING.makeRestApiRequest()(data));
   } else {
     dispatch(klageBehandlingApi.SAVE_KLAGE_VURDERING.makeRestApiRequest()(data));
   }
