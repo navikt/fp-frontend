@@ -95,9 +95,12 @@ describe('<TilbakekrevingProsess>', () => {
         },
         konsekvenserForYtelsen: [],
       },
-      behandlingÅrsaker: {
-        behandlingArsakType: [],
-      },
+      behandlingÅrsaker: [{
+        behandlingArsakType: {
+          kode: '',
+          kodeverk: '',
+        },
+      }],
     },
   };
 

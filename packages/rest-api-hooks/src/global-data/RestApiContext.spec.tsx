@@ -24,7 +24,15 @@ class RequestApiTestMock extends AbstractRequestApi {
 
   public injectPaths = () => {}
 
+  public resetCache = () => {}
+
   public isMock = () => false;
+
+  public setAddErrorMessageHandler = () => {}
+
+  public setRequestPendingHandler = () => {}
+
+  public setLinks = () => {}
 
   public mock = () => { throw new Error('Not Implemented'); };
 

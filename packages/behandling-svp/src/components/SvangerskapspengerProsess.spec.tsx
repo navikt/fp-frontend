@@ -18,6 +18,7 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import FetchedData from '../types/fetchedDataTsType';
+import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
 import SvangerskapspengerProsess from './SvangerskapspengerProsess';
 
@@ -37,6 +38,7 @@ describe('<SvangerskapspengerProsess>', () => {
   };
   const behandling = {
     id: 1,
+    uuid: 'uuid-test',
     versjon: 2,
     status: { kode: behandlingStatus.BEHANDLING_UTREDES, kodeverk: 'test' },
     type: { kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: 'test' },
@@ -369,7 +371,7 @@ describe('<SvangerskapspengerProsess>', () => {
   });
 
   it('skal legge til forhåndsvisningsfunksjon i prosess-steget til vedtak', () => {
-    const dispatch = sinon.spy();
+    requestSvpApi.mock(SvpBehandlingApiKeys.PREVIEW_MESSAGE, undefined);
     const wrapper = shallow(
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
@@ -383,7 +385,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        setBehandling={dispatch}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -394,11 +396,17 @@ describe('<SvangerskapspengerProsess>', () => {
 
     forhandsvisCallback({ param: 'test' });
 
-    expect(dispatch.getCalls()).to.have.length(1);
+    const requestData = requestSvpApi.getRequestMockData(SvpBehandlingApiKeys.PREVIEW_MESSAGE);
+    expect(requestData).to.have.length(1);
+    expect(requestData[0].params).to.eql({
+      param: 'test',
+      behandlingUuid: 'uuid-test',
+      ytelseType: fagsak.fagsakYtelseType,
+    });
   });
 
   it('skal legge til forhåndsvisningsfunksjon i prosess-steget til simulering', () => {
-    const dispatch = sinon.spy();
+    requestSvpApi.mock(SvpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE, undefined);
     const wrapper = shallow(
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
@@ -412,7 +420,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
-        setBehandling={dispatch}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -423,6 +431,17 @@ describe('<SvangerskapspengerProsess>', () => {
 
     forhandsvisCallback({ param: 'test' });
 
-    expect(dispatch.getCalls()).to.have.length(1);
+    const requestData = requestSvpApi.getRequestMockData(SvpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+    expect(requestData).to.have.length(1);
+    expect(requestData[0].params).to.eql({
+      behandlingUuid: 'uuid-test',
+      brevmalkode: undefined,
+      fagsakYtelseType: fagsak.fagsakYtelseType,
+      mottaker: {
+        param: 'test',
+      },
+      saksnummer: undefined,
+      varseltekst: '',
+    });
   });
 });

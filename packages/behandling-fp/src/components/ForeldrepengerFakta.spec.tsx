@@ -68,6 +68,7 @@ describe('<ForeldrepengerFakta>', () => {
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
+    inntektArbeidYtelse,
   };
 
   it('skal rendre faktapaneler og sidemeny korrekt', () => {
@@ -132,16 +133,10 @@ describe('<ForeldrepengerFakta>', () => {
   });
 
   it('skal rendre faktapanel korrekt', () => {
-    const fetchedDataLocal: Partial<FetchedData> = {
-      aksjonspunkter,
-      vilkar,
-      inntektArbeidYtelse,
-    };
-
     const wrapper = shallowWithIntl(
       <ForeldrepengerFakta.WrappedComponent
         intl={intlMock}
-        data={fetchedDataLocal as FetchedData}
+        data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
         rettigheter={rettigheter}
@@ -155,11 +150,7 @@ describe('<ForeldrepengerFakta>', () => {
       />,
     );
 
-    const dataFetcher = wrapper.find('DataFetcher');
-    expect(dataFetcher.prop('fetchingTriggers').triggers.behandlingVersion).is.eql(behandling.versjon);
-    expect(dataFetcher.prop('endpoints')).is.eql([]);
-
-    const arbeidsforholdPanel = dataFetcher.renderProp('render')({}).find(ArbeidsforholdFaktaIndex);
+    const arbeidsforholdPanel = wrapper.find(ArbeidsforholdFaktaIndex);
     expect(arbeidsforholdPanel.prop('readOnly')).is.false;
     expect(arbeidsforholdPanel.prop('submittable')).is.true;
     expect(arbeidsforholdPanel.prop('harApneAksjonspunkter')).is.true;

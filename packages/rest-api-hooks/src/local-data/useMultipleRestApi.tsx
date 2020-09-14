@@ -41,10 +41,15 @@ const defaultOptions = {
 export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
   endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
+  const endpointData = endpoints.reduce((acc, endpoint) => ({
+    ...acc,
+    [format(endpoint.key)]: requestApi.startRequest(endpoint.key, endpoint.params),
+  }), {});
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
     error: undefined,
-    data: options.suspendRequest ? undefined : requestApi.startRequest(key, params),
+    // @ts-ignore
+    data: options.suspendRequest ? undefined : endpointData,
   };
 };
 

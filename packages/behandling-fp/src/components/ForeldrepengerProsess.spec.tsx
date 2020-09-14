@@ -19,6 +19,7 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import FetchedData from '../types/fetchedDataTsType';
+import { requestFpApi, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 import ForeldrepengerProsess from './ForeldrepengerProsess';
 
@@ -38,6 +39,7 @@ describe('<ForeldrepengerProsess>', () => {
   };
   const behandling = {
     id: 1,
+    uuid: 'uuid-test',
     versjon: 2,
     status: { kode: behandlingStatus.BEHANDLING_UTREDES, kodeverk: 'test' },
     type: { kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: 'test' },
@@ -382,6 +384,7 @@ describe('<ForeldrepengerProsess>', () => {
   });
 
   it('skal legge til forhåndsvisningsfunksjon i prosess-steget til vedtak', () => {
+    requestFpApi.mock(FpBehandlingApiKeys.PREVIEW_MESSAGE, undefined);
     const dispatch = sinon.spy();
     const wrapper = shallow(
       <ForeldrepengerProsess
@@ -407,10 +410,17 @@ describe('<ForeldrepengerProsess>', () => {
 
     forhandsvisCallback({ param: 'test' });
 
-    expect(dispatch.getCalls()).to.have.length(1);
+    const requestData = requestFpApi.getRequestMockData(FpBehandlingApiKeys.PREVIEW_MESSAGE);
+    expect(requestData).to.have.length(1);
+    expect(requestData[0].params).to.eql({
+      param: 'test',
+      behandlingUuid: 'uuid-test',
+      ytelseType: fagsak.fagsakYtelseType,
+    });
   });
 
   it('skal legge til forhåndsvisningsfunksjon i prosess-steget til simulering', () => {
+    requestFpApi.mock(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE, undefined);
     const dispatch = sinon.spy();
     const wrapper = shallow(
       <ForeldrepengerProsess
@@ -436,6 +446,17 @@ describe('<ForeldrepengerProsess>', () => {
 
     forhandsvisCallback({ param: 'test' });
 
-    expect(dispatch.getCalls()).to.have.length(1);
+    const requestData = requestFpApi.getRequestMockData(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+    expect(requestData).to.have.length(1);
+    expect(requestData[0].params).to.eql({
+      behandlingUuid: 'uuid-test',
+      brevmalkode: undefined,
+      fagsakYtelseType: fagsak.fagsakYtelseType,
+      mottaker: {
+        param: 'test',
+      },
+      saksnummer: undefined,
+      varseltekst: '',
+    });
   });
 });

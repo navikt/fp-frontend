@@ -72,7 +72,7 @@ describe('RequestRunner', () => {
       behandlingId: 1,
     };
 
-    const result = await process.run(params);
+    const result = await process.start(params);
 
     expect(result).to.eql({ payload: 'data' });
     // eslint-disable-next-line no-unused-expressions
@@ -135,7 +135,7 @@ describe('RequestRunner', () => {
     process.setNotificationEmitter(notificationHelper.mapper.getNotificationEmitter());
 
     try {
-      await process.run(params);
+      await process.start(params);
     } catch (error) {
       expect(error.message).to.eql('Maximum polling attempts exceeded');
       // eslint-disable-next-line no-unused-expressions
@@ -188,7 +188,7 @@ describe('RequestRunner', () => {
     mapper.addUpdatePollingMessageEventHandler(() => { process.cancel(); return Promise.resolve(''); });
     process.setNotificationEmitter(mapper.getNotificationEmitter());
 
-    const resResponse = await process.run(params);
+    const resResponse = await process.start(params);
 
     expect(resResponse).to.eql({ payload: REQUEST_POLLING_CANCELLED });
   });
@@ -214,7 +214,7 @@ describe('RequestRunner', () => {
       behandlingId: 1,
     };
 
-    const result = await process.run(params);
+    const result = await process.start(params);
 
     expect(result).is.eql({ payload: undefined });
     // eslint-disable-next-line no-unused-expressions

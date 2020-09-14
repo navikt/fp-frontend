@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
-import * as all from '@fpsak-frontend/rest-api-hooks';
+import * as useRestApiError from '@fpsak-frontend/rest-api-hooks/src/error/useRestApiError';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import Dekorator from './Dekorator';
@@ -66,9 +66,9 @@ describe('<Dekorator>', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
     requestApi.mock(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES, false);
 
-    contextStubHistory = sinon.stub(all, 'useRestApiError').returns([{
+    contextStubHistory = sinon.stub(useRestApiError, 'default').returns([{
       type: EventType.REQUEST_ERROR,
-      text: 'Dette er en feilmelding',
+      feilmelding: 'Dette er en feilmelding',
     }]);
 
     const wrapper = shallowWithIntl(<Dekorator.WrappedComponent

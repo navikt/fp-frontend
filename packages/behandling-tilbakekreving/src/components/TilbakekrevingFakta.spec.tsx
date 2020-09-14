@@ -14,6 +14,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 
+import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import TilbakekrevingFakta from './TilbakekrevingFakta';
 import vedtakResultatType from '../kodeverk/vedtakResultatType';
 
@@ -95,13 +96,17 @@ describe('<TilbakekrevingFakta>', () => {
         },
         konsekvenserForYtelsen: [],
       },
-      behandlingÅrsaker: {
-        behandlingArsakType: [],
-      },
+      behandlingÅrsaker: [{
+        behandlingArsakType: {
+          kode: 'test',
+          kodeverk: 'test',
+        },
+      }],
     },
   };
 
   it('skal rendre faktapaneler og sidemeny korrekt', () => {
+    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK, []);
     const wrapper = shallowWithIntl(
       <TilbakekrevingFakta.WrappedComponent
         intl={intlMock}
@@ -128,6 +133,7 @@ describe('<TilbakekrevingFakta>', () => {
   });
 
   it('skal oppdatere url ved valg av faktapanel', () => {
+    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK, []);
     const oppdaterProsessStegOgFaktaPanelIUrl = sinon.spy();
     const wrapper = shallowWithIntl(
       <TilbakekrevingFakta.WrappedComponent

@@ -34,6 +34,8 @@ class RequestApiMock extends AbstractRequestApi {
 
   public setAddErrorMessageHandler = () => {};
 
+  public resetCache = () => {}
+
   public isMock = () => true;
 
   public mock = (endpointName: string, data?: any): void => {
