@@ -111,7 +111,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
-  const { featureToggles } = restApiHooks.useGlobalStateRestApiData<{ featureToggles: {[key: string]: boolean}}>(FpsakApiKeys.FEATURE_TOGGLE);
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
@@ -223,7 +222,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingEngangsstonadIndex
-            featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
@@ -238,7 +236,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingForeldrepengerIndex
-            featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
@@ -253,7 +250,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingSvangerskapspengerIndex
-            featureToggles={featureToggles}
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}

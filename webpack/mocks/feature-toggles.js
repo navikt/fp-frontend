@@ -3,9 +3,6 @@ require('dotenv')
 
 const toggles = {
   'featureToggles': {
-    'fpsak.simuler-oppdrag-varseltekst': false,
-    'fpsak.aktiver-tilbakekrevingbehandling': false,
-    'fpsak.beslutt-tilbakekreving': false,
   },
 };
 if (process.env.FEATURE_TOGGLES) {

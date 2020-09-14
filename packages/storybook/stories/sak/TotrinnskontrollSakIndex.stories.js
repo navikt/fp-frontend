@@ -93,7 +93,6 @@ export const visTotrinnskontrollForBeslutter = () => (
       }}
       alleKodeverk={alleKodeverk}
       erBehandlingEtterKlage
-      disableGodkjennKnapp={boolean('disableGodkjennKnapp', false)}
       createLocationForSkjermlenke={() => 'url'}
     />
   </div>
@@ -126,7 +125,6 @@ export const visTotrinnskontrollForSaksbehandler = () => (
       }}
       alleKodeverk={alleKodeverk}
       erBehandlingEtterKlage
-      disableGodkjennKnapp={boolean('disableGodkjennKnapp', false)}
       createLocationForSkjermlenke={() => 'url'}
     />
   </div>

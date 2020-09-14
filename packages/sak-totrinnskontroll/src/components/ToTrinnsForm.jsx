@@ -50,7 +50,6 @@ export const ToTrinnsFormImpl = ({
   behandlingStatus,
   isForeldrepengerFagsak,
   alleKodeverk,
-  disableGodkjennKnapp,
   erTilbakekreving,
   behandlingsresultat,
   ...formProps
@@ -100,7 +99,7 @@ export const ToTrinnsFormImpl = ({
       <div className={styles.buttonRow}>
         <Hovedknapp
           mini
-          disabled={disableGodkjennKnapp || !allApproved(formState) || !allSelected(formState) || formProps.submitting}
+          disabled={!allApproved(formState) || !allSelected(formState) || formProps.submitting}
           spinner={formProps.submitting}
         >
           <FormattedMessage id="ToTrinnsForm.Godkjenn" />
@@ -141,7 +140,6 @@ ToTrinnsFormImpl.propTypes = {
   behandlingsresultat: PropTypes.shape(),
   erBehandlingEtterKlage: PropTypes.bool,
   readOnly: PropTypes.bool.isRequired,
-  disableGodkjennKnapp: PropTypes.bool.isRequired,
   erTilbakekreving: PropTypes.bool,
 };
 

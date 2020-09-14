@@ -29,7 +29,6 @@ interface OwnProps {
   hasFetchError: boolean;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  featureToggles: {[key: string]: boolean};
   opneSokeside: () => void;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
   dispatch: Dispatch;
@@ -95,7 +94,6 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
   hasFetchError,
   oppdaterBehandlingVersjon,
   oppdaterProsessStegOgFaktaPanelIUrl,
-  featureToggles,
   opneSokeside,
   apentFaktaPanelInfo,
   dispatch,
@@ -109,7 +107,6 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
     tempUpdateStonadskontoer: useCallback((params) => dispatch(fpBehandlingApi.STONADSKONTOER_GITT_UTTAKSPERIODER.makeRestApiRequest()(params)),
       [behandling.versjon]),
     alleKodeverk,
-    featureToggles,
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,

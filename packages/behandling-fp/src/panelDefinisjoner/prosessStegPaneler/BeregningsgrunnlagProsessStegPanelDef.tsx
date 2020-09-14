@@ -25,9 +25,8 @@ class PanelDef extends ProsessStegPanelDef {
 
   getOverstyrVisningAvKomponent = () => true
 
-  getData = ({ fagsak, featureToggles, beregningsgrunnlag }) => ({
+  getData = ({ fagsak, beregningsgrunnlag }) => ({
     fagsak,
-    featureToggles,
     beregningsgrunnlag,
   })
 }
