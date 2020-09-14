@@ -29,7 +29,6 @@ const TotrinnskontrollSakIndex = ({
   behandlingKlageVurdering,
   alleKodeverk,
   erBehandlingEtterKlage,
-  disableGodkjennKnapp,
   erTilbakekreving,
   createLocationForSkjermlenke,
 }) => (
@@ -51,7 +50,6 @@ const TotrinnskontrollSakIndex = ({
       behandlingKlageVurdering={behandlingKlageVurdering}
       alleKodeverk={alleKodeverk}
       erBehandlingEtterKlage={erBehandlingEtterKlage}
-      disableGodkjennKnapp={disableGodkjennKnapp}
       erTilbakekreving={erTilbakekreving}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
     />
@@ -81,7 +79,6 @@ TotrinnskontrollSakIndex.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   forhandsvisVedtaksbrev: PropTypes.func.isRequired,
   createLocationForSkjermlenke: PropTypes.func.isRequired,
-  disableGodkjennKnapp: PropTypes.bool.isRequired,
   erTilbakekreving: PropTypes.bool,
 };
 
