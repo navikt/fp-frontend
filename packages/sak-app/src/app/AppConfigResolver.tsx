@@ -34,8 +34,9 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
 
   const erFerdig = navAnsattState === RestApiState.SUCCESS && sprakFilState === RestApiState.SUCCESS
     && behandlendeEnheterState === RestApiState.SUCCESS && visDetaljerteFeilmeldingerState === RestApiState.SUCCESS
-    && kodeverkFpSakStatus === RestApiState.SUCCESS && kodeverkFpTilbakeStatus === RestApiState.SUCCESS
-    && featureToggleState === RestApiState.SUCCESS;
+    && kodeverkFpSakStatus === RestApiState.SUCCESS
+    && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS)
+    && (kodeverkFpTilbakeStatus === RestApiState.SUCCESS || kodeverkFpTilbakeStatus === RestApiState.ERROR);
 
   return erFerdig ? children : <LoadingPanel />;
 };
