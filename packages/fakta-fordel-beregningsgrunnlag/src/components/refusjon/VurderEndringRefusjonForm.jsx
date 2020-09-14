@@ -4,7 +4,7 @@ import { formPropTypes } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
@@ -34,11 +34,14 @@ export const VurderEndringRefusjonFormImpl = ({
   ...formProps
 }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
-  const { skjæringstidspunkt } = beregningsgrunnlag;
   const ap = finnAksjonspunkt(aksjonspunkter);
-  const isAksjonspunktClosed = ap ? isAksjonspunktOpen(ap.status.kode) : false;
+  const erAksjonspunktApent = ap ? isAksjonspunktOpen(ap.status.kode) : false;
   return (
     <>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktApent}>
+        <FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" />
+      </AksjonspunktHelpTextTemp>
+      <VerticalSpacer sixteenPx />
       <form onSubmit={formProps.handleSubmit}>
         <Undertittel><FormattedMessage id="BeregningInfoPanel.RefusjonBG.Tittel" /></Undertittel>
         <VerticalSpacer sixteenPx />
@@ -48,7 +51,6 @@ export const VurderEndringRefusjonFormImpl = ({
             refusjonAndel={andel}
             readOnly={readOnly}
             key={andel.arbeidsgiverNavn}
-            skjæringstidspunkt={skjæringstidspunkt}
           />
         ))}
         <>
@@ -66,7 +68,7 @@ export const VurderEndringRefusjonFormImpl = ({
             formName={formProps.form}
             isSubmittable={submittable && submitEnabled}
             isReadOnly={readOnly}
-            hasOpenAksjonspunkter={!isAksjonspunktClosed}
+            hasOpenAksjonspunkter={erAksjonspunktApent}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
           />
