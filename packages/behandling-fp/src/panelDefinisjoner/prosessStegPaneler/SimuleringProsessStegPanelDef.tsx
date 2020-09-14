@@ -24,10 +24,9 @@ class PanelDef extends ProsessStegPanelDef {
   getOverstyrtStatus = ({ simuleringResultat }) => (simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)
 
   getData = ({
-    fagsak, featureToggles, previewFptilbakeCallback, simuleringResultat,
+    fagsak, previewFptilbakeCallback, simuleringResultat,
   }) => ({
     fagsak,
-    featureToggles,
     previewFptilbakeCallback,
     simuleringResultat,
   })

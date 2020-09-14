@@ -104,10 +104,6 @@ const simuleringResultat = {
   slåttAvInntrekk: false,
 };
 
-const toggles = {
-  'fpsak.simuler-oppdrag-varseltekst': true,
-};
-
 export default {
   title: 'prosess/prosess-avregning',
   component: AvregningProsessIndex,
@@ -130,7 +126,6 @@ export const visAksjonspunktVurderFeilutbetaling = () => (
     isReadOnly={boolean('isReadOnly', false)}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    featureToggles={toggles}
   />
 );
 
@@ -152,6 +147,5 @@ export const visSimuleringspanelUtenAksjonspunkt = () => (
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
     apCodes={array('apCodes', [])}
-    featureToggles={toggles}
   />
 );

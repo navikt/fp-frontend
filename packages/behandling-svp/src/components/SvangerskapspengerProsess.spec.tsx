@@ -100,7 +100,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -160,7 +159,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -190,7 +188,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -236,7 +233,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -285,7 +281,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -334,7 +329,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -361,7 +355,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
-        featureToggles={{}}
       />,
     );
 
@@ -391,7 +384,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         dispatch={dispatch}
-        featureToggles={{}}
       />,
     );
 
@@ -421,7 +413,6 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         dispatch={dispatch}
-        featureToggles={{}}
       />,
     );
 

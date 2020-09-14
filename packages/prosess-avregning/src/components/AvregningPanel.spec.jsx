@@ -79,10 +79,12 @@ describe('<AvregningPanelImpl>', () => {
     expect(radioGroupField).has.length(1);
     expect(radioGroupField.at(0).prop('name')).is.eql('videreBehandling');
     const radioOption = wrapper.find(RadioOption);
-    expect(radioOption).has.length(2);
+    expect(radioOption).has.length(3);
     const radioOptionGjennomfør = radioOption.at(0);
-    expect(radioOptionGjennomfør.prop('label')).is.eql(<FormattedMessage id="Avregning.Opprett" />);
-    const radioOptionAvvent = radioOption.at(1);
+    expect(radioOptionGjennomfør.prop('label')).is.eql(<FormattedMessage id="Avregning.gjennomfør" />);
+    const radioOptionOpprett = radioOption.at(1);
+    expect(radioOptionOpprett.prop('label')).is.eql(<FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />);
+    const radioOptionAvvent = radioOption.at(2);
     expect(radioOptionAvvent.prop('label')).is.eql(<FormattedMessage id="Avregning.avvent" />);
   });
 
