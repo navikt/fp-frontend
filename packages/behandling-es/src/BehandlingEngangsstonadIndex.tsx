@@ -34,7 +34,6 @@ interface OwnProps {
     clear: () => void;
   };
   opneSokeside: () => void;
-  featureToggles: {[key: string]: boolean};
   setRequestPendingMessage: (message: string) => void;
 }
 
@@ -89,7 +88,6 @@ const BehandlingEngangsstonadIndex: FunctionComponent<Props> = ({
   lagreRisikoklassifiseringAksjonspunkt,
   valgtFaktaSteg,
   hasFetchError,
-  featureToggles,
   requestPollingMessage,
   setRequestPendingMessage,
 }) => {
@@ -155,7 +153,6 @@ const BehandlingEngangsstonadIndex: FunctionComponent<Props> = ({
             hentBehandling={hentBehandling}
             opneSokeside={opneSokeside}
             hasFetchError={hasFetchError}
-            featureToggles={featureToggles}
           />
         </>
       )}

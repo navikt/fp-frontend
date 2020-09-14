@@ -8,7 +8,6 @@ import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { featureToggle } from '@fpsak-frontend/konstanter';
 import {
   NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak,
 } from '@fpsak-frontend/types';
@@ -129,9 +128,6 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK);
   const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
-  const { featureToggles } = restApiHooks.useGlobalStateRestApiData<{featureToggles: {[key: string]: boolean}}>(FpsakApiKeys.FEATURE_TOGGLE);
-  const disableGodkjennKnapp = erTilbakekreving ? !featureToggles[featureToggle.BESLUTT_TILBAKEKREVING] : false;
-
   const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<TotrinnsKlageVurdering>(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
@@ -182,7 +178,6 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
         alleKodeverk={erTilbakekreving ? alleFpTilbakeKodeverk : alleFpSakKodeverk}
         behandlingKlageVurdering={totrinnsKlageVurdering}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
-        disableGodkjennKnapp={disableGodkjennKnapp}
         erTilbakekreving={erTilbakekreving}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />

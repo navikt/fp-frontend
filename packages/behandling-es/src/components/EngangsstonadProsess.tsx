@@ -29,7 +29,6 @@ interface OwnProps {
   hasFetchError: boolean;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  featureToggles: {[key: string]: boolean};
   opneSokeside: () => void;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string };
   dispatch: Dispatch;
@@ -94,7 +93,6 @@ const EngangsstonadProsess: FunctionComponent<OwnProps> = ({
   hasFetchError,
   oppdaterBehandlingVersjon,
   oppdaterProsessStegOgFaktaPanelIUrl,
-  featureToggles,
   opneSokeside,
   apentFaktaPanelInfo,
   dispatch,
@@ -106,7 +104,6 @@ const EngangsstonadProsess: FunctionComponent<OwnProps> = ({
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(dispatch, fagsak, behandling), [behandling.versjon]),
     dispatchSubmitFailed: useCallback((formName) => dispatch(setSubmitFailed(formName)), []),
     alleKodeverk,
-    featureToggles,
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,

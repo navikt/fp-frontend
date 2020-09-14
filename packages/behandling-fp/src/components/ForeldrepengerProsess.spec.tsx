@@ -99,7 +99,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
       />,
@@ -165,7 +164,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        featureToggles={{}}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
       />,
@@ -195,7 +193,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
       />,
@@ -243,7 +240,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={opneSokeside}
         dispatch={sinon.spy()}
       />,
@@ -294,7 +290,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={opneSokeside}
         dispatch={sinon.spy()}
       />,
@@ -345,7 +340,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={opneSokeside}
         dispatch={sinon.spy()}
       />,
@@ -372,7 +366,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        featureToggles={{}}
         opneSokeside={sinon.spy()}
         dispatch={sinon.spy()}
       />,
@@ -402,7 +395,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={sinon.spy()}
         dispatch={dispatch}
       />,
@@ -432,7 +424,6 @@ describe('<ForeldrepengerProsess>', () => {
         hasFetchError={false}
         oppdaterBehandlingVersjon={sinon.spy()}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
-        featureToggles={{}}
         opneSokeside={sinon.spy()}
         dispatch={dispatch}
       />,

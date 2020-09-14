@@ -67,7 +67,6 @@ describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
     requestApi.mock(FpsakApiKeys.BEHANDLENDE_ENHETER, []);
-    requestApi.mock(FpsakApiKeys.FEATURE_TOGGLE, { featureToggles: {} });
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES, false);
