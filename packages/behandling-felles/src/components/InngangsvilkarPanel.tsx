@@ -9,9 +9,8 @@ import {
 } from '@fpsak-frontend/shared-components';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import {
-  RestApiState, Options, EndpointData, RestApiData,
-} from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Options, EndpointData, RestApiData } from '@fpsak-frontend/rest-api-hooks/src/local-data/useMultipleRestApi';
 
 import { ProsessStegPanelUtledet } from '../util/prosessSteg/ProsessStegUtledet';
 

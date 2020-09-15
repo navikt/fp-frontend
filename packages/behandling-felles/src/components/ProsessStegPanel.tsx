@@ -4,9 +4,8 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import {
-  RestApiState, Options, EndpointData, RestApiData,
-} from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Options, EndpointData, RestApiData } from '@fpsak-frontend/rest-api-hooks/src/local-data/useMultipleRestApi';
 
 import FagsakInfo from '../types/fagsakInfoTsType';
 import MargMarkering from './MargMarkering';

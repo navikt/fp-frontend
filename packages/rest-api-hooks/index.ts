@@ -5,6 +5,5 @@ export { RestApiStateContext, RestApiProvider } from './src/global-data/RestApiC
 export { RestApiErrorProvider } from './src/error/RestApiErrorContext';
 export { default as useRestApiError } from './src/error/useRestApiError';
 export { default as useRestApiErrorDispatcher } from './src/error/useRestApiErrorDispatcher';
-export { Options, EndpointData, RestApiData } from './src/local-data/useMultipleRestApi';
 
 export { default as RestApiHooks } from './src/RestApiHooks';
