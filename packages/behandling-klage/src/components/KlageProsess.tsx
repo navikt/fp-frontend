@@ -7,7 +7,6 @@ import {
   FagsakInfo, Rettigheter, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { Kodeverk, KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 
 import KlageBehandlingModal from './KlageBehandlingModal';
