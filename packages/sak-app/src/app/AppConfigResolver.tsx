@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 
 import { featureToggle } from '@fpsak-frontend/konstanter';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -20,7 +20,9 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   children,
 }) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-  requestApi.setAddErrorMessageHandler(addErrorMessage);
+  useEffect(() => {
+    requestApi.setAddErrorMessageHandler(addErrorMessage);
+  }, []);
 
   const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT);
   const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE);

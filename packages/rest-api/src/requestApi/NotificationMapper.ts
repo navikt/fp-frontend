@@ -2,6 +2,8 @@ import EventType from './eventType';
 
 type EventCallback = (data?: any, type?: string, isAsync?: boolean) => void
 
+// TODO (TOR) Refaktorer denne
+
 /**
  * NotificationMapper
  *
@@ -26,7 +28,7 @@ class NotificationMapper {
   private addEventHandler = (eventType: string, callback: EventCallback) => {
     this.eventTypes = {
       ...this.eventTypes,
-      [eventType]: this.eventTypes[eventType].concat(callback),
+      [eventType]: [callback],
     };
   }
 
