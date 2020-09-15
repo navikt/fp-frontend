@@ -42,6 +42,7 @@ interface OwnProps {
   changeField: () => void;
   stillingsprosentArbeidsforhold?: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
+  formName: string;
 }
 
 export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
@@ -55,6 +56,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> =
   changeField,
   stillingsprosentArbeidsforhold,
   setOverstyrtUtbetalingsgrad,
+  formName,
 }) => (
   <FormSection name={formSectionName}>
     <Normaltekst className={styles.arbeidsforholdTittel}>
@@ -104,8 +106,10 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> =
               behandlingVersjon={behandlingVersjon}
               erOverstyrer={erOverstyrer}
               changeField={changeField}
+              velferdspermisjoner={arbeidsforhold.velferdspermisjoner}
               stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
               setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+              formName={formName}
             />
           </FlexColumn>
         </FlexRow>
@@ -118,6 +122,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> =
         behandlingId={behandlingId}
         behandlingVersjon={behandlingVersjon}
         formSectionName={formSectionName}
+        formName={formName}
       />
 
     ))}
@@ -129,7 +134,7 @@ TilretteleggingArbeidsforholdSection.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  visTilrettelegginger: behandlingFormValueSelector('FodselOgTilretteleggingForm',
+  visTilrettelegginger: behandlingFormValueSelector(ownProps.formName,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, `${ownProps.formSectionName}.skalBrukes`),
 });
 

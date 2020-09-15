@@ -17,6 +17,7 @@ interface OwnProps {
   permisjon: Permisjon;
   formSectionName: string;
   skalTaHensynTilPermisjon: boolean;
+  tilretteleggingBehovFom: string;
 }
 
 export const finnPermisjonFieldName = (permisjon) => `permisjon${permisjon.permisjonFom}`;
@@ -55,7 +56,12 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
         )}
       </Normaltekst>
       <VerticalSpacer sixteenPx />
-      <RadioGroupField name={finnPermisjonFieldName(permisjon)} validate={[required]} bredde="XL" readOnly={readOnly}>
+      <RadioGroupField
+        name={finnPermisjonFieldName(permisjon)}
+        validate={[required]}
+        bredde="XL"
+        readOnly={readOnly}
+      >
         <RadioOption value label={{ id: 'VelferdspermisjonSection.ErGyldig' }} />
         <RadioOption value={false} label={{ id: 'VelferdspermisjonSection.ErIkkeGyldig' }} />
       </RadioGroupField>
@@ -67,7 +73,7 @@ export const skalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permis
   .isAfter(tilretteleggingBehovFom) && (permisjon.permisjonTom == null || !moment(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom));
 
 const mapStateToProps = (state, ownProps) => ({
-  skalTaHensynTilPermisjon: skalTaHensynTilPermisjon(behandlingFormValueSelector('FodselOgTilretteleggingForm',
+  skalTaHensynTilPermisjon: skalTaHensynTilPermisjon(behandlingFormValueSelector(ownProps.formName,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, `${ownProps.formSectionName}.tilretteleggingBehovFom`), ownProps.permisjon),
 });
 
