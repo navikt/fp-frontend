@@ -43,21 +43,13 @@ const forhandsvis = (data) => {
   }
 };
 
-const saveKlageText = (lagreOgReapneKlageVurdering, lagreKlageVurdering, behandling, aksjonspunkter) => (aksjonspunktModel) => {
+const saveKlageText = (lagreKlageVurdering, behandling) => (aksjonspunktModel) => {
   const data = {
     behandlingId: behandling.id,
     ...aksjonspunktModel,
   };
 
-  const getForeslaVedtakAp = aksjonspunkter
-    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
-    .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK);
-
-  if (getForeslaVedtakAp.length === 1) {
-    lagreOgReapneKlageVurdering(data);
-  } else {
-    lagreKlageVurdering(data);
-  }
+  lagreKlageVurdering(data);
 };
 
 const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
@@ -111,17 +103,14 @@ const KlageProsess: FunctionComponent<OwnProps> = ({
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiKlageHooks
     .useRestApiRunner<Behandling>(KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT);
   const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(KlageBehandlingApiKeys.PREVIEW_MESSAGE);
-  const { startRequest: lagreOgReapneKlageVurdering, data: behandlingRes } = restApiKlageHooks
-    .useRestApiRunner<Behandling>(KlageBehandlingApiKeys.SAVE_REOPEN_KLAGE_VURDERING);
   const { startRequest: lagreKlageVurdering } = restApiKlageHooks.useRestApiRunner(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING);
 
   useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     alleBehandlinger,
     klageVurdering: data.klageVurdering,
-    saveKlageText: useCallback(saveKlageText(lagreOgReapneKlageVurdering, lagreKlageVurdering, behandling, data.aksjonspunkter), [behandling.versjon]),
+    saveKlageText: useCallback(saveKlageText(lagreKlageVurdering, behandling), [behandling.versjon]),
     previewCallback: useCallback(previewCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     ...data,
   };

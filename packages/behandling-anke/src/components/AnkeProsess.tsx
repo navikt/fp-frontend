@@ -42,21 +42,13 @@ const forhandsvis = (data) => {
   }
 };
 
-const saveAnkeText = (lagreOgReapneAnkeVurdering, lagreAnkeVurdering, behandling, aksjonspunkter) => (aksjonspunktModel) => {
+const saveAnkeText = (lagreAnkeVurdering, behandling) => (aksjonspunktModel) => {
   const data = {
     behandlingId: behandling.id,
     ...aksjonspunktModel,
   };
 
-  const getForeslaVedtakAp = aksjonspunkter
-    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
-    .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK);
-
-  if (getForeslaVedtakAp.length === 1) {
-    lagreOgReapneAnkeVurdering(data);
-  } else {
-    lagreAnkeVurdering(data);
-  }
+  lagreAnkeVurdering(data);
 };
 
 const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
@@ -111,17 +103,14 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiAnkeHooks
     .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT);
   const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
-  const { startRequest: lagreOgReapneAnkeVurdering, data: behandlingRes } = restApiAnkeHooks
-    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.SAVE_REOPEN_ANKE_VURDERING);
   const { startRequest: lagreAnkeVurdering } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING);
 
   useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     alleBehandlinger,
     ankeVurdering: data.ankeVurdering,
-    saveAnke: useCallback(saveAnkeText(lagreOgReapneAnkeVurdering, lagreAnkeVurdering, behandling, data.aksjonspunkter), [behandling.versjon]),
+    saveAnke: useCallback(saveAnkeText(lagreAnkeVurdering, behandling), [behandling.versjon]),
     previewCallback: useCallback(previewCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     ...data,
   };
