@@ -87,7 +87,7 @@ export class PeriodeController extends Component {
     };
 
     callBeregnBelop(params).then((response) => {
-      const { perioder } = response.payload;
+      const { perioder } = response;
       const harPeriodeMedBelop0 = perioder.some((p) => p.belop === 0);
       if (harPeriodeMedBelop0) {
         this.setState((state) => ({
