@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import {
   decodeHtmlEntity, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form';
 
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 import styles from './faktaBegrunnelseTextField.less';
 import messages from '../../i18n/nb_NO.json';
 
@@ -18,7 +19,7 @@ const intl = createIntl({
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-type OwnFaktaBegrunnelseTextFieldProps = {
+type OwnProps = {
     isReadOnly: boolean;
     isSubmittable: boolean;
     hasBegrunnelse: boolean;
@@ -27,14 +28,19 @@ type OwnFaktaBegrunnelseTextFieldProps = {
     name?: string;
 };
 
-type FaktaBegrunnelseTextFieldProps = OwnFaktaBegrunnelseTextFieldProps & typeof FaktaBegrunnelseTextField.defaultProps;
+interface StaticFunctions {
+  buildInitialValues: (aksjonspunkt: Aksjonspunkt, begrunnelseFieldName?: string) => any
+  transformValues: (values: any, name?: string) => {
+    begrunnelse: string;
+  }
+}
 
 /**
  * FaktaBegrunnelseTextField
  */
-const FaktaBegrunnelseTextField = ({
+const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions = ({
   isReadOnly, isSubmittable, hasBegrunnelse, label, hasVurderingText, name,
-}: FaktaBegrunnelseTextFieldProps) => {
+}) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
   const textAreaLabel = label || { id: code };
   return (
@@ -68,7 +74,7 @@ const getBegrunnelse = (aksjonspunkt: any) => {
   return aksjonspunkt ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: any, begrunnelseFieldName = 'begrunnelse') => ({
+FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: Aksjonspunkt, begrunnelseFieldName = 'begrunnelse') => ({
   [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt)),
 });
 

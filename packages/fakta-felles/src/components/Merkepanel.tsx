@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   createIntl, createIntlCache, RawIntlProvider, FormattedMessage,
 } from 'react-intl';
@@ -19,15 +19,13 @@ const intl = createIntl({
   messages,
 }, cache);
 
-type OwnProps = {
-    erDod?: boolean;
-    erDodFodt?: boolean;
-    erNAVAnsatt?: boolean;
-    erVerge?: boolean;
-    diskresjonskode?: string;
-};
-
-type Props = OwnProps & typeof MerkePanel.defaultProps;
+interface OwnProps {
+  erDod?: boolean;
+  erDodFodt?: boolean;
+  erNAVAnsatt?: boolean;
+  erVerge?: boolean;
+  diskresjonskode?: string;
+}
 
 /**
  * MerkePanel
@@ -39,9 +37,9 @@ type Props = OwnProps & typeof MerkePanel.defaultProps;
  *  <MerkePanel erDod={false} diskresjonskode="SPSF" erVerge erNAVANsatt />
  * ```
  */
-const MerkePanel = ({
+const MerkePanel: FunctionComponent<OwnProps> = ({
   erDod, erDodFodt, erNAVAnsatt, erVerge, diskresjonskode,
-}: Props) => {
+}) => {
   const { formatMessage } = intl;
 
   return (

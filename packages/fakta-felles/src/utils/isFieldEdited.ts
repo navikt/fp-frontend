@@ -14,15 +14,18 @@ const getIsAntallBarnEdited = (soknad: Soknad, familiehendelse: FamilieHendelse)
 
 const getIsVilkarTypeEdited = (familiehendelse: FamilieHendelse) => hasValue(familiehendelse.vilkarType);
 
-const getIsAdopsjonFodelsedatoerEdited = (soknad: Soknad, familiehendelse: FamilieHendelse) => diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
+const getIsAdopsjonFodelsedatoerEdited = (soknad: Soknad, familiehendelse: FamilieHendelse) => diff(soknad.adopsjonFodelsedatoer,
+  familiehendelse.adopsjonFodelsedatoer);
 
-const getIsOmsorgsovertakelseDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse) => isNotEqual(soknad.omsorgsovertakelseDato, familiehendelse.omsorgsovertakelseDato);
+const getIsOmsorgsovertakelseDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse) => isNotEqual(soknad.omsorgsovertakelseDato,
+  familiehendelse.omsorgsovertakelseDato);
 
 const getIsBarnetsAnkomstTilNorgeDatoEdited = (
   soknad: any, familiehendelse: any,
 ) => isNotEqual(soknad.barnetsAnkomstTilNorgeDato, familiehendelse.barnetsAnkomstTilNorgeDato);
 
-const getIsAntallBarnOmsorgOgForeldreansvarEdited = (soknad: Soknad, familiehendelse: FamilieHendelse) => isNotEqual(soknad.antallBarn, familiehendelse.antallBarnTilBeregning);
+const getIsAntallBarnOmsorgOgForeldreansvarEdited = (soknad: Soknad, familiehendelse: FamilieHendelse) => isNotEqual(soknad.antallBarn,
+  familiehendelse.antallBarnTilBeregning);
 
 const getIsFodselsdatoerEdited = (soknad: Soknad, personopplysning: Personopplysninger) => {
   const soknadFodselsdatoer = soknad.soknadType.kode === soknadType.FODSEL
@@ -32,9 +35,10 @@ const getIsFodselsdatoerEdited = (soknad: Soknad, personopplysning: Personopplys
   const barn = personopplysning.barnSoktFor;
 
   const fodselsdatoerEdited = Object.keys(soknadFodselsdatoer)
-    .filter((nummer) => barn.some((b: any) => `${b.nummer}` === nummer))
-    .map((nummer) => [nummer, barn.find((b: any) => `${b.nummer}` === nummer)])
-    .map(([nummer, funnetBarn]) => ({ [nummer]: funnetBarn.fodselsdato !== soknadFodselsdatoer[nummer] }))
+    .filter((barnNummer) => barn.some((b: Personopplysninger) => `${b.nummer}` === barnNummer))
+    .map((barnNummer) => ({
+      [barnNummer]: barn.find((b: any) => `${b.nummer}` === barnNummer).fodselsdato !== soknadFodselsdatoer[barnNummer],
+    }))
     .reduce((a, b) => ({ ...a, ...b }), {});
 
   return fodselsdatoerEdited;
@@ -46,7 +50,11 @@ const getIsMannAdoptererAleneEdited = (familiehendelse: FamilieHendelse) => hasV
 
 const getIsDokumentasjonForeliggerEdited = (familiehendelse: FamilieHendelse) => hasValue(familiehendelse.dokumentasjonForeligger);
 
-const isFieldEdited = (soknad: Soknad = {}, familiehendelse: FamilieHendelse = {}, personopplysning: Personopplysninger = {}) => ({
+const isFieldEdited = (
+  soknad: Soknad = {} as Soknad,
+  familiehendelse: FamilieHendelse = {} as FamilieHendelse,
+  personopplysning: Personopplysninger = {} as Personopplysninger,
+) => ({
   termindato: getIsTerminDatoEdited(soknad, familiehendelse),
   antallBarn: getIsAntallBarnEdited(soknad, familiehendelse),
   utstedtdato: getIsUtstedtDatoEdited(soknad, familiehendelse),

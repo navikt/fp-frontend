@@ -11,7 +11,6 @@ describe('<FaktaBegrunnelseTextField>', () => {
     const wrapper = shallowWithIntl(<FaktaBegrunnelseTextField
       isReadOnly={false}
       isSubmittable={false}
-      isDirty
       hasBegrunnelse={false}
     />);
 
@@ -22,7 +21,6 @@ describe('<FaktaBegrunnelseTextField>', () => {
     const wrapper = shallowWithIntl(<FaktaBegrunnelseTextField
       isReadOnly={false}
       isSubmittable
-      isDirty
       hasBegrunnelse={false}
     />);
 
@@ -33,7 +31,6 @@ describe('<FaktaBegrunnelseTextField>', () => {
     const wrapper = shallowWithIntl(<FaktaBegrunnelseTextField
       isReadOnly
       isSubmittable
-      isDirty
       hasBegrunnelse={false}
     />);
 
@@ -46,7 +43,6 @@ describe('<FaktaBegrunnelseTextField>', () => {
     const wrapper = shallowWithIntl(<FaktaBegrunnelseTextField
       isReadOnly={false}
       isSubmittable
-      isDirty
       hasBegrunnelse={false}
     />);
 
@@ -59,7 +55,6 @@ describe('<FaktaBegrunnelseTextField>', () => {
     const wrapper = shallowWithIntl(<FaktaBegrunnelseTextField
       isReadOnly={false}
       isSubmittable
-      isDirty
       hasBegrunnelse={false}
       hasVurderingText
     />);
@@ -73,7 +68,6 @@ describe('<FaktaBegrunnelseTextField>', () => {
     const wrapper = shallowWithIntl(<FaktaBegrunnelseTextField
       isReadOnly={false}
       isSubmittable
-      isDirty
       hasBegrunnelse={false}
       label="Test"
     />);

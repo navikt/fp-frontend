@@ -199,7 +199,10 @@ describe('isFieldEdited', () => {
   describe('vilkarType', () => {
     it('skal vise endret vilkarType', () => {
       const familiehendelse = {
-        vilkarType: 'some value',
+        vilkarType: {
+          kode: 'Test',
+          kodeverk: '',
+        },
       };
 
       const isVilkarTypeEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse, personopplysning).vilkarType;
@@ -275,22 +278,8 @@ describe('isFieldEdited', () => {
   });
 
   describe('barnetsAnkomstTilNorgeDato', () => {
-    it('skal vise endret barnetsAnkomstTilNorgeDato', () => {
-      const familiehendelse = {
-        barnetsAnkomstTilNorgeDato: '2018-01-01',
-      };
-
-      const ankomstSoknad = { ...soknad, barnetsAnkomstTilNorgeDato: '2018-01-10' };
-
-      const isBarnetsAnkomstTilNorgeDatoEdited = isFieldEdited(ankomstSoknad, familiehendelse as FamilieHendelse, personopplysning)
-        .barnetsAnkomstTilNorgeDato;
-
-      expect(isBarnetsAnkomstTilNorgeDatoEdited).to.be.true;
-    });
-
     it('skal ikke vise uendret barnetsAnkomstTilNorgeDato', () => {
       const familiehendelse = {
-        barnetsAnkomstTilNorgeDato: '2018-01-01',
       };
 
       const ankomstSoknad = { ...soknad, barnetsAnkomstTilNorgeDato: '2018-01-01' };
@@ -351,7 +340,7 @@ describe('isFieldEdited', () => {
   describe('ektefellesBarn', () => {
     it('skal vise endret ektefellesBarn', () => {
       const familiehendelse = {
-        ektefellesBarn: 'some value',
+        ektefellesBarn: true,
       };
 
       const isEktefellesBarnEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse, personopplysning).ektefellesBarn;
@@ -371,7 +360,7 @@ describe('isFieldEdited', () => {
   describe('mannAdoptererAlene', () => {
     it('skal vise endret mannAdoptererAlene', () => {
       const familiehendelse = {
-        mannAdoptererAlene: 'some value',
+        mannAdoptererAlene: true,
       };
 
       const isMannAdoptererAleneEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse, personopplysning)
@@ -393,7 +382,7 @@ describe('isFieldEdited', () => {
   describe('dokumentasjonForeligger', () => {
     it('skal vise endret dokumentasjonForeligger', () => {
       const familiehendelse = {
-        dokumentasjonForeligger: 'some value',
+        dokumentasjonForeligger: true,
       };
 
       const isDokumentasjonForeliggerEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse, personopplysning)

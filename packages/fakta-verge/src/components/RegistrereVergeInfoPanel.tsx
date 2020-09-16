@@ -65,7 +65,7 @@ export const RegistrereVergeInfoPanelImpl: FunctionComponent<OwnProps & WrappedC
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         />
         <VerticalSpacer twentyPx />
-        <FaktaBegrunnelseTextField isDirty={formProps.dirty} isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
+        <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
         <VerticalSpacer twentyPx />
         <FaktaSubmitButton
           formName={formProps.form}
