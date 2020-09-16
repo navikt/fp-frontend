@@ -70,8 +70,8 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
 
   const endepunkter = valgtPanel ? valgtPanel.getPanelDef().getEndepunkter().map((e) => ({ key: e })) : [];
   const { data: faktaData, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(endepunkter, {
-    updateTriggers: [behandling.versjon, sidemenyPaneler.length, valgtPanel],
-    suspendRequest: sidemenyPaneler.length === 0 || !valgtPanel,
+    updateTriggers: [behandling.versjon, valgtPanel],
+    suspendRequest: !valgtPanel,
     isCachingOn: true,
   });
 

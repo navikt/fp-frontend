@@ -1,8 +1,7 @@
 import {
-  useState, useEffect, DependencyList,
+  useState, useEffect, DependencyList, useRef,
 } from 'react';
 
-import { usePrevious } from '@fpsak-frontend/shared-components';
 import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
@@ -68,7 +67,11 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
 ):RestApiData<T> {
   const [data, setData] = useState(DEFAULT_STATE);
 
-  const previousTriggers = usePrevious(options.updateTriggers);
+  const ref = useRef<DependencyList>();
+  useEffect(() => {
+    ref.current = options.updateTriggers;
+  }, [options.updateTriggers]);
+  const previousTriggers = ref.current;
 
   useEffect(() => {
     if (!options.suspendRequest) {
@@ -103,7 +106,8 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
     }
   }, [...options.updateTriggers]);
 
-  return previousTriggers && notEqual(previousTriggers, options.updateTriggers) ? DEFAULT_STATE : data;
+  return previousTriggers && notEqual(previousTriggers, options.updateTriggers)
+    ? { ...DEFAULT_STATE, data: options.keepData ? data.data : undefined } : data;
 };
 
 export default getUseMultipleRestApi;

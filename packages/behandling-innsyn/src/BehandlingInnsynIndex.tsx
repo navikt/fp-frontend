@@ -94,7 +94,9 @@ const BehandlingInnsynIndex: FunctionComponent<OwnProps & DispatchProps> = ({
     return () => {
       behandlingEventHandler.clear();
       setTimeout(() => {
-        destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.versjon));
+        if (forrigeBehandling) {
+          destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.versjon));
+        }
       }, 1000);
     };
   }, [behandlingId]);
