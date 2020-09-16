@@ -137,7 +137,8 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps & DispatchProps>
     return <LoadingPanel />;
   }
 
-  if ((state === RestApiState.LOADING || state === RestApiState.NOT_STARTED) && data === undefined) {
+  const isNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
+  if (isNotFinished && data === undefined) {
     return <LoadingPanel />;
   }
 
@@ -145,11 +146,11 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps & DispatchProps>
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={state === RestApiState.LOADING
+        behandlingVersjon={isNotFinished
           ? forrigeBehandling.versjon : behandling.versjon}
       />
       <ForeldrepengerPaneler
-        behandling={state === RestApiState.LOADING ? forrigeBehandling : behandling}
+        behandling={isNotFinished ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
         alleKodeverk={kodeverk}

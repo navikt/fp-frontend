@@ -129,7 +129,8 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & DispatchProps>
     return <LoadingPanel />;
   }
 
-  if ((state === RestApiState.LOADING || state === RestApiState.NOT_STARTED) && data === undefined) {
+  const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
+  if (hasNotFinished && data === undefined) {
     return <LoadingPanel />;
   }
 
@@ -137,11 +138,10 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & DispatchProps>
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={state === RestApiState.LOADING
-          ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={hasNotFinished ? forrigeBehandling.versjon : behandling.versjon}
       />
       <TilbakekrevingPaneler
-        behandling={state === RestApiState.LOADING ? forrigeBehandling : behandling}
+        behandling={hasNotFinished ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
         kodeverk={tilbakekrevingKodeverk}
