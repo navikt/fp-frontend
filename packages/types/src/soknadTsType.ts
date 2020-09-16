@@ -6,6 +6,7 @@ type Soknad = Readonly<{
   antallBarn: number;
   utstedtdato?: string;
   soknadType: Kodeverk;
+  tilleggsopplysninger?: string;
 }>
 
 export default Soknad;

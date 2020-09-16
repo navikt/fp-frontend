@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -9,12 +8,18 @@ import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 
 import styles from './tilleggsopplysningerFaktaForm.less';
 
+interface OwnProps {
+  readOnly: boolean;
+  submitting: boolean;
+  tilleggsopplysninger: string;
+}
+
 /**
  * TilleggsopplysningerFaktaForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av tilleggsopplysninger i søknad.
  */
-const TilleggsopplysningerFaktaForm = ({
+const TilleggsopplysningerFaktaForm: FunctionComponent<OwnProps> = ({
   readOnly,
   submitting,
   tilleggsopplysninger,
@@ -31,11 +36,5 @@ const TilleggsopplysningerFaktaForm = ({
     )}
   </>
 );
-
-TilleggsopplysningerFaktaForm.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  tilleggsopplysninger: PropTypes.string.isRequired,
-};
 
 export default TilleggsopplysningerFaktaForm;

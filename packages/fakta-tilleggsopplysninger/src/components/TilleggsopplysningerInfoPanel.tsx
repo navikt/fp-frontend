@@ -1,13 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent } from 'react';
+import { InjectedFormProps } from 'redux-form';
 import { connect } from 'react-redux';
 
 import { behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import TilleggsopplysningerFaktaForm from './TilleggsopplysningerFaktaForm';
+
+interface OwnProps {
+  hasOpenAksjonspunkter: boolean;
+  readOnly: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  tilleggsopplysninger?: string;
+}
 
 // TODO (TOR) Fjern redux-form => ingen behov for det her
 
@@ -16,7 +22,7 @@ import TilleggsopplysningerFaktaForm from './TilleggsopplysningerFaktaForm';
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for Tilleggsopplysninger.
  */
-export const TilleggsopplysningerInfoPanel = ({
+export const TilleggsopplysningerInfoPanel: FunctionComponent<OwnProps & InjectedFormProps> = ({
   hasOpenAksjonspunkter,
   readOnly,
   tilleggsopplysninger,
@@ -31,25 +37,16 @@ export const TilleggsopplysningerInfoPanel = ({
   </form>
 );
 
-TilleggsopplysningerInfoPanel.propTypes = {
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  tilleggsopplysninger: PropTypes.string,
-  ...formPropTypes,
-};
-
 TilleggsopplysningerInfoPanel.defaultProps = {
   tilleggsopplysninger: '',
 };
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   const onSubmit = () => initialOwnProps.submitCallback([{
     kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER,
   }]);
 
-  return (state, ownProps) => ({
+  return (_state: any, ownProps: any) => ({
     onSubmit,
     dirty: !ownProps.notSubmittable && ownProps.dirty,
   });
@@ -57,4 +54,4 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: 'TilleggsopplysningerInfoPanel',
-})(injectIntl(TilleggsopplysningerInfoPanel)));
+})(TilleggsopplysningerInfoPanel));
