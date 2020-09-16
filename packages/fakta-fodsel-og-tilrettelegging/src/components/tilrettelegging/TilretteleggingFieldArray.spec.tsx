@@ -7,7 +7,7 @@ import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
 
-import { TilretteleggingFieldArray, finnUtbetalingsgradForDelvisTilrettelegging } from './TilretteleggingFieldArray';
+import { TilretteleggingFieldArray, finnUtbetalingsgradForTilrettelegging } from './TilretteleggingFieldArray';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 
 const getRemoveButton = () => <button id="avslutt" type="button" />;
@@ -25,6 +25,10 @@ describe('<TilretteleggingFieldArray>', () => {
       tilretteleggingDatoer={[]}
       stillingsprosentArbeidsforhold={50}
       setOverstyrtUtbetalingsgrad={() => undefined}
+      velferdspermisjonprosent={0}
+      behandlingId={1}
+      behandlingVersjon={1}
+      formName="FORM_NAME"
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).has.length(1);
@@ -59,6 +63,10 @@ describe('<TilretteleggingFieldArray>', () => {
       tilretteleggingDatoer={[]}
       stillingsprosentArbeidsforhold={50}
       setOverstyrtUtbetalingsgrad={() => undefined}
+      velferdspermisjonprosent={0}
+      behandlingId={1}
+      behandlingVersjon={1}
+      formName="FORM_NAME"
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).has.length(1);
@@ -96,6 +104,10 @@ describe('<TilretteleggingFieldArray>', () => {
       tilretteleggingDatoer={[]}
       stillingsprosentArbeidsforhold={50}
       setOverstyrtUtbetalingsgrad={() => undefined}
+      velferdspermisjonprosent={0}
+      behandlingId={1}
+      behandlingVersjon={1}
+      formName="FORM_NAME"
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).has.length(1);
@@ -125,7 +137,7 @@ describe('<TilretteleggingFieldArray>', () => {
     const stillingsprosent = 70;
     const stillingsprosentArbeidsgiver = 70;
 
-    const utbetalingsgrad = finnUtbetalingsgradForDelvisTilrettelegging(stillingsprosentArbeidsgiver, stillingsprosent);
+    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsgiver, stillingsprosent);
 
     expect(utbetalingsgrad).is.eql('0');
   });
@@ -134,7 +146,7 @@ describe('<TilretteleggingFieldArray>', () => {
     const stillingsprosent = 70;
     const stillingsprosentArbeidsgiver = 30;
 
-    const utbetalingsgrad = finnUtbetalingsgradForDelvisTilrettelegging(stillingsprosentArbeidsgiver, stillingsprosent);
+    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsgiver, stillingsprosent);
 
     expect(utbetalingsgrad).is.eql('0');
   });

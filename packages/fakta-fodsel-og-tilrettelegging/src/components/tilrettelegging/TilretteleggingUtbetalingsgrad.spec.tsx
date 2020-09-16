@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { DecimalField } from '@fpsak-frontend/form';
 import { Image } from '@fpsak-frontend/shared-components';
 
@@ -11,12 +10,16 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-
 describe('<TilretteleggingUtbetalingsgrad>', () => {
   it('skal vise inputfelt som kan editeres når overstyrer velger å overstyre', () => {
     const wrapper = shallowWithIntl(<TilretteleggingUtbetalingsgrad.WrappedComponent
-      intl={intlMock}
       tilretteleggingKode="TEST"
       readOnly={false}
       erOverstyrer
       fieldId="1"
       setOverstyrtUtbetalingsgrad={() => undefined}
+      utbetalingsgrad="0"
+      formSectionName=""
+      changeField={() => undefined}
+      index={0}
+      overstyrtUtbetalingsgrad="0"
     />);
 
     expect(wrapper.find(DecimalField).prop('readOnly')).is.true;

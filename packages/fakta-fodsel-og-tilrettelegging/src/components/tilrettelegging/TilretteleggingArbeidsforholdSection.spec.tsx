@@ -28,6 +28,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       changeField={() => undefined}
       stillingsprosentArbeidsforhold={40}
       setOverstyrtUtbetalingsgrad={() => undefined}
+      formName="FORM_NAME"
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(2);
@@ -56,6 +57,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       changeField={() => undefined}
       stillingsprosentArbeidsforhold={40}
       setOverstyrtUtbetalingsgrad={() => undefined}
+      formName="FORM_NAME"
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(1);

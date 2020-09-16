@@ -22,11 +22,21 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
     tilretteleggingDatoer: [{
       fom: '2019-09-16',
       type: {
-        kode: tilretteleggingType.INGEN_TILRETTELEGGING,
+        kode: tilretteleggingType.DELVIS_TILRETTELEGGING,
       },
+      stillingsprosent: 30,
     }],
+    velferdspermisjoner: [
+      {
+        permisjonFom: '2019-09-10',
+        permisjonTom: null,
+        permisjonsprosent: 50,
+        type: { kode: 'VELFERDSPERMISJON', kodeverk: 'PERMISJONSBESKRIVELSE_TYPE' },
+      },
+    ],
     arbeidsgiverNavn: 'WWW.EIENDOMSDRIFT.CC SA',
     arbeidsgiverIdent: '555864629',
+    arbeidsgiverIdentVisning: '555864629',
     kopiertFraTidligereBehandling: false,
     mottattTidspunkt: '2019-09-12T18:15:52.655168',
     internArbeidsforholdReferanse: 'c5534-6e55-4112-9645-fe52ee4950c2',
@@ -41,8 +51,10 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
         kode: tilretteleggingType.INGEN_TILRETTELEGGING,
       },
     }],
+    velferdspermisjoner: [],
     arbeidsgiverNavn: 'WWW.EIENDOMSDRIFT.CC SA',
     arbeidsgiverIdent: '555864629',
+    arbeidsgiverIdentVisning: '555864629',
     kopiertFraTidligereBehandling: false,
     mottattTidspunkt: '2019-09-12T18:15:52.655168',
     internArbeidsforholdReferanse: '5gb912b7-4187-45a0-8c44-02322887d0ad',
