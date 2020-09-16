@@ -1,25 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
+import { InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import vergeAksjonspunkterPropType from '../propTypes/vergeAksjonspunkterPropType';
 import RegistrereVergeFaktaForm from './RegistrereVergeFaktaForm';
+import Verge from '../types/VergeTsType';
+
+type OwnProps = {
+    hasOpenAksjonspunkter: boolean;
+    submittable?: boolean;
+    readOnly: boolean;
+    aksjonspunkt: Aksjonspunkt;
+    vergetyper: KodeverkMedNavn[];
+    initialValues?: {
+      begrunnelse?: string,
+    };
+    alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+    behandlingId: number;
+    behandlingVersjon: number;
+    valgtVergeType?: string;
+};
 
 /**
  * RegistrereVergeInfoPanel
  *
  * Presentasjonskomponent. Har ansvar for å sette opp formen for att registrere verge.
  */
-export const RegistrereVergeInfoPanelImpl = ({
+export const RegistrereVergeInfoPanelImpl: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   hasOpenAksjonspunkter,
   submittable,
@@ -66,49 +81,39 @@ export const RegistrereVergeInfoPanelImpl = ({
   );
 };
 
-RegistrereVergeInfoPanelImpl.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  aksjonspunkt: vergeAksjonspunkterPropType.isRequired,
-  vergetyper: PropTypes.arrayOf(PropTypes.shape({
-    kode: PropTypes.string,
-    name: PropTypes.string,
-  })).isRequired,
-  initialValues: PropTypes.shape(),
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  valgtVergeType: PropTypes.string,
-};
-
 RegistrereVergeInfoPanelImpl.defaultProps = {
   initialValues: {},
   submittable: true,
   valgtVergeType: undefined,
 };
 
+interface PureOwnProps {
+  submitCallback: (...args: any[]) => any;
+  behandlingId: number;
+  behandlingVersjon: number;
+  aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  verge: Verge;
+}
+
 const buildInitialValues = createSelector([
-  (ownProps) => ownProps.verge,
-  (ownProps) => ownProps.aksjonspunkter], (verge, aksjonspunkter) => ({
+  (ownProps: PureOwnProps) => ownProps.verge,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter], (verge, aksjonspunkter) => ({
   begrunnelse: verge && verge.begrunnelse ? decodeHtmlEntity(verge.begrunnelse) : FaktaBegrunnelseTextField
-    .buildInitialValues(aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VERGE)[0]).begrunnelse,
+    .buildInitialValues(aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VERGE)[0]).begrunnelse,
   ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
 }));
 
-const transformValues = (values) => ({
+const transformValues = (values: { begrunnelse: string }) => ({
   ...RegistrereVergeFaktaForm.transformValues(values),
   ...{ begrunnelse: values.begrunnelse },
 });
 
 const FORM_NAVN = 'RegistrereVergeInfoPanel';
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values)]);
+  return (state: any, ownProps: PureOwnProps) => ({
     valgtVergeType: behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vergeType'),
     aksjonspunkt: ownProps.aksjonspunkter[0],
     initialValues: buildInitialValues(ownProps),

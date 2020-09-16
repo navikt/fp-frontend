@@ -11,9 +11,11 @@ import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-verge';
 const vergetyper = [{
   kode: vergeType.BARN,
   navn: 'Barn',
+  kodeverk: '',
 }, {
   kode: vergeType.ANNEN_F,
   navn: 'Annen foreldre',
+  kodeverk: '',
 }];
 
 describe('<RegistrereVergeFaktaForm>', () => {

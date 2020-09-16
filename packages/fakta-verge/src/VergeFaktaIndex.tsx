@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';
-import vergeAksjonspunkterPropType from './propTypes/vergeAksjonspunkterPropType';
-import vergeVergePropType from './propTypes/vergeVergePropType';
-import vergeBehandlingPropType from './propTypes/vergeBehandlingPropType';
+import Verge from './types/VergeTsType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -15,7 +14,19 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const VergeFaktaIndex = ({
+type OwnProps = {
+  behandling: Behandling;
+  verge?: Verge;
+  aksjonspunkter: Aksjonspunkt[];
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  harApneAksjonspunkter: boolean;
+  submittable: boolean;
+};
+
+const VergeFaktaIndex: FunctionComponent<OwnProps> = ({
   behandling,
   verge,
   aksjonspunkter,
@@ -41,18 +52,6 @@ const VergeFaktaIndex = ({
     />
   </RawIntlProvider>
 );
-
-VergeFaktaIndex.propTypes = {
-  behandling: vergeBehandlingPropType.isRequired,
-  verge: vergeVergePropType,
-  aksjonspunkter: PropTypes.arrayOf(vergeAksjonspunkterPropType).isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  harApneAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-};
 
 VergeFaktaIndex.defaultProps = {
   verge: {},
