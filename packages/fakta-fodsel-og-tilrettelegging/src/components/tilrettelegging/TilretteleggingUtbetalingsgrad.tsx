@@ -1,7 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { connect } from 'react-redux';
 
-import { DecimalField } from '@fpsak-frontend/form';
+import { DecimalField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+
 import {
   FlexColumn, Image,
 } from '@fpsak-frontend/shared-components';
@@ -10,11 +12,12 @@ import {
 } from '@fpsak-frontend/utils';
 import endreImage from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletImage from '@fpsak-frontend/assets/images/endre_disablet.svg';
-
 import styles from './tilretteleggingFieldArray.less';
 
 const maxValue100 = maxValue(100);
 const minValue1 = minValue(1);
+
+export const OVERSTYRT_UTBETALINGSGRAD_FIELDNAME = 'overstyrtUtbetalingsgrad';
 
 interface OwnProps {
   readOnly: boolean;
@@ -22,6 +25,11 @@ interface OwnProps {
   fieldId: string;
   tilretteleggingKode: string;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
+  utbetalingsgrad: string;
+  formSectionName: string;
+  changeField: (field: string, value: string) => void;
+  index: number;
+  overstyrtUtbetalingsgrad: string;
 }
 
 const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -31,9 +39,17 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps & WrappedCompon
   erOverstyrer,
   fieldId,
   setOverstyrtUtbetalingsgrad,
+  changeField,
+  formSectionName,
+  index,
+  utbetalingsgrad,
+  overstyrtUtbetalingsgrad,
 }) => {
   const [erIEditeringsmodus, setEditeres] = useState(false);
 
+  if (!erIEditeringsmodus && overstyrtUtbetalingsgrad !== utbetalingsgrad) {
+    changeField(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+  }
   useEffect(() => {
     setEditeres(false);
   }, [tilretteleggingKode]);
@@ -44,7 +60,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps & WrappedCompon
       <FlexColumn>
         <DecimalField
           className={styles.textField}
-          name={`${fieldId}.overstyrtUtbetalingsgrad`}
+          name={`${fieldId}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
           label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Utbetalingsgrad' })}
           readOnly={erReadOnly}
           validate={[required, minValue1, maxValue100, hasValidDecimal]}
@@ -57,19 +73,25 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps & WrappedCompon
         %
       </FlexColumn>
       {erOverstyrer && (
-      <FlexColumn>
-        <Image
-          onClick={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
-          onKeyDown={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
-          className={erIEditeringsmodus ? styles.buttonMargin : styles.enabletImage}
-          src={erIEditeringsmodus ? endreDisabletImage : endreImage}
-          tabIndex={0}
-          tooltip={intl.formatMessage({ id: 'TilretteleggingFieldArray.EndreUtbetalingsgrad' })}
-        />
-      </FlexColumn>
+        <FlexColumn>
+          <Image
+            onClick={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
+            onKeyDown={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
+            className={erIEditeringsmodus ? styles.buttonMargin : styles.enabletImage}
+            src={erIEditeringsmodus ? endreDisabletImage : endreImage}
+            tabIndex={0}
+            tooltip={intl.formatMessage({ id: 'TilretteleggingFieldArray.EndreUtbetalingsgrad' })}
+          />
+        </FlexColumn>
       )}
     </>
   );
 };
 
-export default injectIntl(TilretteleggingUtbetalingsgrad);
+const mapStateToProps = (state, ownProps) => ({
+  overstyrtUtbetalingsgrad: behandlingFormValueSelector(ownProps.formName,
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state,
+    `${ownProps.formSectionName}.${ownProps.fieldId}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`),
+});
+
+export default connect(mapStateToProps)(injectIntl(TilretteleggingUtbetalingsgrad));
