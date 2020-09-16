@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   createIntl, createIntlCache, RawIntlProvider, FormattedMessage,
 } from 'react-intl';
@@ -18,7 +17,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const isDisabled = (isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields, hasOpenAksjonspunkter) => {
+const isDisabled = (isDirty: any, isSubmitting: any, isSubmittable: any, hasEmptyRequiredFields: any, hasOpenAksjonspunkter: any) => {
   if (!isSubmittable || isSubmitting) {
     return true;
   }
@@ -29,19 +28,25 @@ const isDisabled = (isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields
   return !isDirty;
 };
 
+type OwnFaktaSubmitButtonProps = {
+    buttonText?: string;
+    isReadOnly: boolean;
+    isSubmittable: boolean;
+    isSubmitting: boolean;
+    isDirty: boolean;
+    hasEmptyRequiredFields: boolean;
+    hasOpenAksjonspunkter: boolean;
+    onClick?: (...args: any[]) => any;
+};
+
+type FaktaSubmitButtonProps = OwnFaktaSubmitButtonProps & typeof FaktaSubmitButton.defaultProps;
+
 /**
  * FaktaSubmitButton
  */
 export const FaktaSubmitButton = ({
-  isReadOnly,
-  isSubmittable,
-  isSubmitting,
-  isDirty,
-  hasEmptyRequiredFields,
-  hasOpenAksjonspunkter,
-  buttonText,
-  onClick,
-}) => (
+  isReadOnly, isSubmittable, isSubmitting, isDirty, hasEmptyRequiredFields, hasOpenAksjonspunkter, buttonText, onClick,
+}: FaktaSubmitButtonProps) => (
   <RawIntlProvider value={intl}>
     {!isReadOnly
       && (
@@ -59,31 +64,20 @@ export const FaktaSubmitButton = ({
   </RawIntlProvider>
 );
 
-FaktaSubmitButton.propTypes = {
-  buttonText: PropTypes.string,
-  isReadOnly: PropTypes.bool.isRequired,
-  isSubmittable: PropTypes.bool.isRequired,
-  isSubmitting: PropTypes.bool.isRequired,
-  isDirty: PropTypes.bool.isRequired,
-  hasEmptyRequiredFields: PropTypes.bool.isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  onClick: PropTypes.func,
-};
-
 FaktaSubmitButton.defaultProps = {
   buttonText: undefined,
   onClick: undefined,
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: any, ownProps: any) => {
   const { behandlingId, behandlingVersjon } = ownProps;
   const fNames = ownProps.formNames ? ownProps.formNames : [ownProps.formName];
-  const formNames = fNames.map((f) => (f.includes('.') ? f.substr(f.lastIndexOf('.') + 1) : f));
+  const formNames = fNames.map((f: any) => (f.includes('.') ? f.substr(f.lastIndexOf('.') + 1) : f));
   return {
-    isSubmitting: formNames.some((formName) => isBehandlingFormSubmitting(formName, behandlingId, behandlingVersjon)(state)),
-    isDirty: formNames.some((formName) => isBehandlingFormDirty(formName, behandlingId, behandlingVersjon)(state)),
+    isSubmitting: formNames.some((formName: any) => isBehandlingFormSubmitting(formName, behandlingId, behandlingVersjon)(state)),
+    isDirty: formNames.some((formName: any) => isBehandlingFormDirty(formName, behandlingId, behandlingVersjon)(state)),
     hasEmptyRequiredFields: ownProps.doNotCheckForRequiredFields
-      ? false : formNames.some((formName) => hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())(state)),
+      ? false : formNames.some((formName: any) => hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())(state)),
   };
 };
 

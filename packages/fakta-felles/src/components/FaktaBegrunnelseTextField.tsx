@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import {
   decodeHtmlEntity, hasValidText, maxLength, minLength, required,
@@ -19,17 +18,23 @@ const intl = createIntl({
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
+type OwnFaktaBegrunnelseTextFieldProps = {
+    isReadOnly: boolean;
+    isSubmittable: boolean;
+    hasBegrunnelse: boolean;
+    label?: string;
+    hasVurderingText?: boolean;
+    name?: string;
+};
+
+type FaktaBegrunnelseTextFieldProps = OwnFaktaBegrunnelseTextFieldProps & typeof FaktaBegrunnelseTextField.defaultProps;
+
 /**
  * FaktaBegrunnelseTextField
  */
 const FaktaBegrunnelseTextField = ({
-  isReadOnly,
-  isSubmittable,
-  hasBegrunnelse,
-  label,
-  hasVurderingText,
-  name,
-}) => {
+  isReadOnly, isSubmittable, hasBegrunnelse, label, hasVurderingText, name,
+}: FaktaBegrunnelseTextFieldProps) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
   const textAreaLabel = label || { id: code };
   return (
@@ -50,33 +55,24 @@ const FaktaBegrunnelseTextField = ({
   );
 };
 
-FaktaBegrunnelseTextField.propTypes = {
-  isReadOnly: PropTypes.bool.isRequired,
-  isSubmittable: PropTypes.bool.isRequired,
-  hasBegrunnelse: PropTypes.bool.isRequired,
-  label: PropTypes.string,
-  hasVurderingText: PropTypes.bool,
-  name: PropTypes.string,
-};
-
 FaktaBegrunnelseTextField.defaultProps = {
   name: 'begrunnelse',
   label: undefined,
   hasVurderingText: false,
 };
 
-const getBegrunnelse = (aksjonspunkt) => {
+const getBegrunnelse = (aksjonspunkt: any) => {
   if (aksjonspunkt && aksjonspunkt.length > 0) {
     return aksjonspunkt[0].begrunnelse;
   }
   return aksjonspunkt ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt, begrunnelseFieldName = 'begrunnelse') => ({
+FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: any, begrunnelseFieldName = 'begrunnelse') => ({
   [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt)),
 });
 
-FaktaBegrunnelseTextField.transformValues = (values, name = 'begrunnelse') => ({
+FaktaBegrunnelseTextField.transformValues = (values: any, name = 'begrunnelse') => ({
   begrunnelse: values[name],
 });
 

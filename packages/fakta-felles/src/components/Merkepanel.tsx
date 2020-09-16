@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   createIntl, createIntlCache, RawIntlProvider, FormattedMessage,
 } from 'react-intl';
@@ -20,6 +19,16 @@ const intl = createIntl({
   messages,
 }, cache);
 
+type OwnProps = {
+    erDod?: boolean;
+    erDodFodt?: boolean;
+    erNAVAnsatt?: boolean;
+    erVerge?: boolean;
+    diskresjonskode?: string;
+};
+
+type Props = OwnProps & typeof MerkePanel.defaultProps;
+
 /**
  * MerkePanel
  *
@@ -31,12 +40,8 @@ const intl = createIntl({
  * ```
  */
 const MerkePanel = ({
-  erDod,
-  erDodFodt,
-  erNAVAnsatt,
-  erVerge,
-  diskresjonskode,
-}) => {
+  erDod, erDodFodt, erNAVAnsatt, erVerge, diskresjonskode,
+}: Props) => {
   const { formatMessage } = intl;
 
   return (
@@ -88,14 +93,6 @@ const MerkePanel = ({
       </div>
     </RawIntlProvider>
   );
-};
-
-MerkePanel.propTypes = {
-  erDod: PropTypes.bool,
-  erDodFodt: PropTypes.bool,
-  erNAVAnsatt: PropTypes.bool,
-  erVerge: PropTypes.bool,
-  diskresjonskode: PropTypes.string,
 };
 
 MerkePanel.defaultProps = {

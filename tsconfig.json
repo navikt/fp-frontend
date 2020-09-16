@@ -29,6 +29,7 @@
 		"packages/behandling-fp",
 		"packages/behandling-svp",
 		"packages/behandling-es",
+		"packages/fakta-felles",
 		"packages/fakta-fodsel-og-tilrettelegging",
 		"packages/fakta-tilleggsopplysninger",
 		"packages/fakta-saken",
