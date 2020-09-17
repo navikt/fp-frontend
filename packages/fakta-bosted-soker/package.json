@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/kodeverk": "1.0.0",
+    "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "nav-frontend-core": "5.0.1",
     "nav-frontend-etiketter": "2.0.8",
@@ -14,7 +15,6 @@
     "nav-frontend-grid-style": "0.2.20",
     "nav-frontend-typografi": "2.0.26",
     "nav-frontend-typografi-style": "1.0.22",
-    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-intl": "^5.8.2"
   },

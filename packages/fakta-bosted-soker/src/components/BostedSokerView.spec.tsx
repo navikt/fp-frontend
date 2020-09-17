@@ -1,13 +1,15 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { Normaltekst } from 'nav-frontend-typografi';
+import EtikettBase from 'nav-frontend-etiketter';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { Normaltekst } from 'nav-frontend-typografi';
-import EtikettBase from 'nav-frontend-etiketter';
+import { Personopplysninger } from '@fpsak-frontend/types';
+
 import { BostedSokerView } from './BostedSokerView';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-bosted-soker';
 
@@ -17,37 +19,37 @@ describe('<BostedsokerView>', () => {
     aktoerId: '1',
     personstatus: {
       kode: 'BOSA',
-      navn: 'Bosatt',
+      kodeverk: '',
     },
     avklartPersonstatus: {
       overstyrtPersonstatus: {
         kode: personstatusType.BOSATT,
-        navn: 'Bosatt',
+        kodeverk: '',
       },
       orginalPersonstatus: {
         kode: personstatusType.DOD,
-        navn: 'Bosatt',
+        kodeverk: '',
       },
     },
     navBrukerKjonn: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     statsborgerskap: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     diskresjonskode: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     sivilstand: {
       kode: sivilstandType.UGIFT,
-      navn: 'Ugift',
+      kodeverk: '',
     },
     region: {
       kode: 'NORDEN',
-      navn: 'Norden',
+      kodeverk: '',
     },
     adresser: [{
       adresselinje1: 'Vei 1',
@@ -55,7 +57,7 @@ describe('<BostedsokerView>', () => {
       poststed: 'Oslo',
       adresseType: {
         kode: opplysningAdresseType.POSTADRESSE,
-        navn: 'Bostedsadresse',
+        kodeverk: '',
       },
     }],
   };
@@ -63,23 +65,27 @@ describe('<BostedsokerView>', () => {
   const regionTypes = [{
     kode: 'NORDEN',
     navn: 'Norden',
+    kodeverk: '',
   }];
   const sivilstandTypes = [{
     kode: sivilstandType.UGIFT,
     navn: 'Ugift',
+    kodeverk: '',
   }];
   const personstatusTypes = [{
     kode: personstatusType.BOSATT,
     navn: 'Bosatt',
+    kodeverk: '',
   }, {
     kode: personstatusType.DOD,
     navn: 'Bosatt',
+    kodeverk: '',
   }];
 
   it('vise navn', () => {
     const wrapper = shallowWithIntl(<BostedSokerView
       intl={intlMock}
-      personopplysninger={soker}
+      personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
@@ -92,7 +98,7 @@ describe('<BostedsokerView>', () => {
   it('skal vise  adresse informasjon', () => {
     const wrapper = shallowWithIntl(<BostedSokerView
       intl={intlMock}
-      personopplysninger={soker}
+      personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
@@ -107,7 +113,7 @@ describe('<BostedsokerView>', () => {
   it('skal vise etiketter', () => {
     const wrapper = shallowWithIntl(<BostedSokerView
       intl={intlMock}
-      personopplysninger={soker}
+      personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
@@ -130,11 +136,12 @@ describe('<BostedsokerView>', () => {
     soker.avklartPersonstatus = null;
     soker.personstatus = {
       kode: '-',
+      kodeverk: '',
     };
 
     const wrapper = shallowWithIntl(<BostedSokerView
       intl={intlMock}
-      personopplysninger={soker}
+      personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}

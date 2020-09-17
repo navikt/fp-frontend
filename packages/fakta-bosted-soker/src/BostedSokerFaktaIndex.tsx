@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { KodeverkMedNavn, Personopplysninger } from '@fpsak-frontend/types';
 
 import BostedSokerView from './components/BostedSokerView';
-import bostedSokerPersonopplysningerPropType from './propTypes/bostedSokerPersonopplysningerPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -15,7 +14,13 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const BostedSokerFaktaIndex = ({
+interface OwnProps {
+  personopplysninger: Personopplysninger;
+  sokerTypeTextId?: string;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+const BostedSokerFaktaIndex: FunctionComponent<OwnProps> = ({
   personopplysninger,
   sokerTypeTextId,
   alleKodeverk,
@@ -30,12 +35,6 @@ const BostedSokerFaktaIndex = ({
     />
   </RawIntlProvider>
 );
-
-BostedSokerFaktaIndex.propTypes = {
-  personopplysninger: bostedSokerPersonopplysningerPropType.isRequired,
-  sokerTypeTextId: PropTypes.string,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 BostedSokerFaktaIndex.defaultProps = {
   sokerTypeTextId: 'BostedSokerFaktaIndex.Soker',
