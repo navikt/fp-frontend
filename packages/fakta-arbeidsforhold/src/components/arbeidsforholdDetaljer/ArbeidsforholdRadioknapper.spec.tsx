@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 
 import { RadioOption } from '@fpsak-frontend/form';
+
 import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
 import arbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
@@ -15,7 +16,6 @@ const arbeidsforhold = {
   fomDato: '2012-01-01',
   tomDato: '2025-01-01',
   kilde: {
-    kode: 'INNTEKT',
     navn: 'aa-registeret',
   },
   mottattDatoInntektsmelding: undefined,
@@ -26,6 +26,7 @@ const arbeidsforhold = {
   skjaeringstidspunkt: '2019-01-01',
   lagtTilAvSaksbehandler: false,
   permisjoner: undefined,
+  kanOppretteNyttArbforFraIM: false,
 };
 
 describe('<ArbeidsforholdRadioknapper>', () => {
@@ -209,7 +210,6 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforhold={{
         ...arbeidsforhold,
         kilde: {
-          kode: 'INNTEKT',
           navn: 'noen-annet',
         },
       }}
@@ -267,7 +267,6 @@ describe('<ArbeidsforholdRadioknapper>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
       }}
@@ -301,7 +300,6 @@ describe('<ArbeidsforholdRadioknapper>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
       }}
@@ -329,7 +327,6 @@ describe('<ArbeidsforholdRadioknapper>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: '2025-10-10',
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
       }}
@@ -363,7 +360,6 @@ describe('<ArbeidsforholdRadioknapper>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: '2025-10-10',
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
       }}
@@ -392,13 +388,11 @@ describe('<ArbeidsforholdRadioknapper>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
           {
             permisjonFom: '2018-10-10',
             permisjonTom: '2025-10-10',
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
       }}
@@ -433,13 +427,11 @@ describe('<ArbeidsforholdRadioknapper>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
           {
             permisjonFom: '2018-10-10',
             permisjonTom: '2025-10-10',
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
       }}

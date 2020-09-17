@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer, PeriodLabel } from '@fpsak-frontend/shared-components';
+import { Arbeidsforhold } from '@fpsak-frontend/types';
 
-import { arbeidsforholdPropType } from '../../propTypes/arbeidsforholdPropType';
-
-const utledPermisjonLabelID = (arbeidsforhold) => {
+const utledPermisjonLabelID = (arbeidsforhold: any) => {
   if (arbeidsforhold.permisjoner.length > 1) {
     return 'PersonArbeidsforholdDetailForm.Permisjoner';
   }
   return 'PersonArbeidsforholdDetailForm.Permisjon';
 };
 
-const utledPeriodeLabelKey = (id, index) => id + index;
+const utledPeriodeLabelKey = (id: any, index: any) => id + index;
 
-const PermisjonPeriode = ({
+interface OwnProps {
+  arbeidsforhold: Arbeidsforhold;
+}
+
+const PermisjonPeriode: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
 }) => (
   <>
@@ -38,9 +41,5 @@ const PermisjonPeriode = ({
     )}
   </>
 );
-
-PermisjonPeriode.propTypes = {
-  arbeidsforhold: arbeidsforholdPropType.isRequired,
-};
 
 export default PermisjonPeriode;

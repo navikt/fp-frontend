@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AksjonspunktHelpText from '@fpsak-frontend/shared-components/src/AksjonspunktHelpText';
+import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import { ArbeidsforholdInfoPanelImpl, fjernIdFraArbeidsforholdLagtTilAvSaksbehandler } from './ArbeidsforholdInfoPanel';
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
@@ -86,18 +87,18 @@ describe('<ArbeidsforholdInfoPanel>', () => {
   it('skal fjerne ID fra arbeidsforhold som er lagt til av saksbehandler, men ikke fra andre', () => {
     const arbeidsforhold = [
       {
-        id: 1,
+        id: '1',
         lagtTilAvSaksbehandler: true,
       },
       {
-        id: 2,
+        id: '2',
         lagtTilAvSaksbehandler: false,
       },
     ];
-    const result = fjernIdFraArbeidsforholdLagtTilAvSaksbehandler(arbeidsforhold);
+    const result = fjernIdFraArbeidsforholdLagtTilAvSaksbehandler(arbeidsforhold as Arbeidsforhold[]);
     expect(result[0].id).to.eql(null);
     expect(result[0].lagtTilAvSaksbehandler).to.eql(true);
-    expect(result[1].id).to.eql(2);
+    expect(result[1].id).to.eql('2');
     expect(result[1].lagtTilAvSaksbehandler).to.eql(false);
   });
 });

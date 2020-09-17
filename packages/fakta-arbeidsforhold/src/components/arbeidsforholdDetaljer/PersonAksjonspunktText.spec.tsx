@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import { PersonAksjonspunktTextImpl } from './PersonAksjonspunktText';
 
@@ -19,11 +20,13 @@ describe('<PersonAksjonspunktText>', () => {
     tilVurdering: true,
     lagtTilAvSaksbehandler: false,
     permisjoner: [],
+    kanOppretteNyttArbforFraIM: false,
   };
 
   const alleKodeverk = {
     [kodeverkTyper.PERMISJONSBESKRIVELSE_TYPE]: [{
       kode: 'PERMISJON',
+      kodeverk: '',
       navn: 'Permisjon',
     }],
   };
@@ -41,7 +44,7 @@ describe('<PersonAksjonspunktText>', () => {
       arbeidsforhold={{
         ...arbeidsforholdTemplate,
         tilVurdering: false,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     expect(wrapper.find('FormattedMessage')).to.have.length(0);
@@ -52,7 +55,7 @@ describe('<PersonAksjonspunktText>', () => {
       arbeidsforhold={{
         ...arbeidsforholdTemplate,
         mottattDatoInntektsmelding: undefined,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
@@ -68,7 +71,7 @@ describe('<PersonAksjonspunktText>', () => {
         ...arbeidsforholdTemplate,
         mottattDatoInntektsmelding: '2018-01-01',
         replaceOptions: gamleArbeidsforhold,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
@@ -82,7 +85,7 @@ describe('<PersonAksjonspunktText>', () => {
         mottattDatoInntektsmelding: '2018-01-01',
         replaceOptions: [],
         harErstattetEttEllerFlere: true,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
@@ -98,7 +101,7 @@ describe('<PersonAksjonspunktText>', () => {
         replaceOptions: { gamleArbeidsforhold },
         harErstattetEttEllerFlere: false,
         ikkeRegistrertIAaRegister: true,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
@@ -114,7 +117,7 @@ describe('<PersonAksjonspunktText>', () => {
         replaceOptions: { gamleArbeidsforhold },
         harErstattetEttEllerFlere: false,
         ikkeRegistrertIAaRegister: false,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
@@ -131,7 +134,7 @@ describe('<PersonAksjonspunktText>', () => {
         replaceOptions: { gamleArbeidsforhold },
         harErstattetEttEllerFlere: false,
         ikkeRegistrertIAaRegister: true,
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
@@ -147,19 +150,21 @@ describe('<PersonAksjonspunktText>', () => {
           {
             type: {
               kode: 'PERMISJON',
+              kodeverk: '',
             },
             permisjonFom: '2018-10-01',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
     expect(component.props().id).to.eql('PersonAksjonspunktText.SokerHarPermisjonOgIkkeMottattIM');
+    // @ts-ignore
     expect(component.props().values.permisjonFom).to.eql('01.10.2018');
+    // @ts-ignore
     expect(component.props().values.permisjonTom).to.eql('');
   });
 
@@ -172,19 +177,21 @@ describe('<PersonAksjonspunktText>', () => {
           {
             type: {
               kode: 'PERMISJON',
+              kodeverk: '',
             },
             permisjonFom: '2018-10-01',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
     expect(component.props().id).to.eql('PersonAksjonspunktText.SokerHarPermisjonOgMottattIM');
+    // @ts-ignore
     expect(component.props().values.permisjonFom).to.eql('01.10.2018');
+    // @ts-ignore
     expect(component.props().values.permisjonTom).to.eql('');
   });
 
@@ -197,15 +204,16 @@ describe('<PersonAksjonspunktText>', () => {
           {
             type: {
               kode: 'PERMISJON',
+              kodeverk: '',
             },
             permisjonFom: '2015-01-01',
             permisjonTom: '2016-01-01',
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
           {
             type: {
               kode: 'PERMISJON',
+              kodeverk: '',
             },
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
@@ -213,7 +221,7 @@ describe('<PersonAksjonspunktText>', () => {
             permisjonsÅrsak: 'aarsak',
           },
         ],
-      }}
+      } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');

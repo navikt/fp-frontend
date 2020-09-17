@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { PropTypes } from 'prop-types';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import Table from '@fpsak-frontend/shared-components/src/table/Table';
 import TableRow from '@fpsak-frontend/shared-components/src/table/TableRow';
 import TableColumn from '@fpsak-frontend/shared-components/src/table/TableColumn';
 
-const IngenArbeidsforholdRegistrert = ({
+interface OwnProps {
+  headerColumnContent: React.ReactElement[];
+}
+
+const IngenArbeidsforholdRegistrert: FunctionComponent<OwnProps> = ({
   headerColumnContent,
 }) => (
   <Table headerColumnContent={headerColumnContent} noHover>
@@ -25,9 +28,5 @@ const IngenArbeidsforholdRegistrert = ({
     </TableRow>
   </Table>
 );
-
-IngenArbeidsforholdRegistrert.propTypes = {
-  headerColumnContent: PropTypes.arrayOf(PropTypes.node).isRequired,
-};
 
 export default IngenArbeidsforholdRegistrert;

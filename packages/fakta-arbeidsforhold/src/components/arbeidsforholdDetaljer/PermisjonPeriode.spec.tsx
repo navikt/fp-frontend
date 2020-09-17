@@ -2,6 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
+import { Arbeidsforhold } from '@fpsak-frontend/types';
+
 import PermisjonPeriode from './PermisjonPeriode';
 
 describe('<PermisjonPeriode>', () => {
@@ -9,7 +11,7 @@ describe('<PermisjonPeriode>', () => {
     const wrapper = shallow(<PermisjonPeriode
       arbeidsforhold={{
         permisjoner: undefined,
-      }}
+      } as Arbeidsforhold}
     />);
     expect(wrapper.find('FormattedMessage')).to.have.length(0);
     expect(wrapper.find('PeriodLabel')).to.have.length(0);
@@ -18,7 +20,7 @@ describe('<PermisjonPeriode>', () => {
     const wrapper = shallow(<PermisjonPeriode
       arbeidsforhold={{
         permisjoner: [],
-      }}
+      } as Arbeidsforhold}
     />);
     expect(wrapper.find('FormattedMessage')).to.have.length(0);
     expect(wrapper.find('PeriodLabel')).to.have.length(0);
@@ -31,17 +33,18 @@ describe('<PermisjonPeriode>', () => {
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
-      }}
+      } as Arbeidsforhold}
     />);
     const msg = wrapper.find('FormattedMessage');
     expect(msg).to.have.length(1);
     expect(msg.props().id).to.eql('PersonArbeidsforholdDetailForm.Permisjon');
     const periode = wrapper.find('PeriodLabel');
     expect(periode).to.have.length(1);
+    // @ts-ignore
     expect(periode.props().dateStringFom).to.eql('2018-10-10');
+    // @ts-ignore
     expect(periode.props().dateStringTom).to.eql('');
   });
   it('skal vise permisjoner når arbeidsforholdet har flere permisjoner', () => {
@@ -52,16 +55,14 @@ describe('<PermisjonPeriode>', () => {
             permisjonFom: '2015-01-01',
             permisjonTom: undefined,
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
           {
             permisjonFom: '2017-01-01',
             permisjonTom: '2019-01-01',
             permisjonsprosent: 100,
-            permisjonsÅrsak: 'aarsak',
           },
         ],
-      }}
+      } as Arbeidsforhold}
     />);
     const msg = wrapper.find('FormattedMessage');
     expect(msg).to.have.length(1);

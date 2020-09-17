@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,7 +6,7 @@ import { change as reduxChange } from 'redux-form';
 
 import { getBehandlingFormName } from '@fpsak-frontend/form';
 
-const findAllNames = (children) => (children ? React.Children
+const findAllNames = (children: any) => (children ? React.Children
   .map(children, (child) => {
     let all = [];
     if (child && child.props && child.props.children) {
@@ -19,7 +18,12 @@ const findAllNames = (children) => (children ? React.Children
     return all;
   }) : []);
 
-// TODO (TOR) Flytt til fp-behandling-felles
+interface OwnProps {
+  behandlingFormName: string;
+  fieldNames: string[];
+  reduxChange: (...args: any[]) => any;
+  children: ReactNode;
+}
 
 /**
  * BehandlingFormFieldCleaner
@@ -32,14 +36,18 @@ const findAllNames = (children) => (children ? React.Children
  * <BehandlingFormFieldCleaner formName={TEST_FORM} fieldNames={['fomDato']}>{children}</BehandlingFormFieldCleaner>
  * ```
  */
-export class BehandlingFormFieldCleaner extends Component {
-  shouldComponentUpdate(nextProps) {
+export class BehandlingFormFieldCleaner extends Component<OwnProps> {
+  static defaultProps = {
+    children: [],
+  };
+
+  shouldComponentUpdate(nextProps: OwnProps) {
     const { children } = this.props;
     const oldNames = findAllNames(children);
     const newNames = findAllNames(nextProps.children);
 
-    const diff1 = oldNames.every((k) => newNames.includes(k));
-    const diff2 = newNames.every((k) => oldNames.includes(k));
+    const diff1 = oldNames.every((k: any) => newNames.includes(k));
+    const diff2 = newNames.every((k: any) => oldNames.includes(k));
     return !diff1 || !diff2;
   }
 
@@ -66,29 +74,24 @@ export class BehandlingFormFieldCleaner extends Component {
   }
 }
 
-BehandlingFormFieldCleaner.propTypes = {
-  behandlingFormName: PropTypes.string.isRequired,
-  fieldNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  reduxChange: PropTypes.func.isRequired,
-};
-
-BehandlingFormFieldCleaner.defaultProps = {
-  children: [],
-};
+interface PureOwnProps {
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
 
 const getCompleteFormName = createSelector(
-  [(ownProps) => ownProps.formName,
-    (ownProps) => ownProps.behandlingId,
-    (ownProps) => ownProps.behandlingVersjon],
+  [(ownProps: PureOwnProps) => ownProps.formName,
+    (ownProps: PureOwnProps) => ownProps.behandlingId,
+    (ownProps: PureOwnProps) => ownProps.behandlingVersjon],
   (formName, behandlingId, versjon) => getBehandlingFormName(behandlingId, versjon, formName),
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (_state: any, ownProps: PureOwnProps) => ({
   behandlingFormName: getCompleteFormName(ownProps),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   ...bindActionCreators({
     reduxChange,
   }, dispatch),

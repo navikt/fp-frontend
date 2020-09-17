@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { formPropTypes } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -11,6 +10,7 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
+import { Arbeidsforhold, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import PersonAksjonspunktText from './PersonAksjonspunktText';
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
@@ -19,7 +19,6 @@ import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
 import ArbeidsforholdBegrunnelse from './ArbeidsforholdBegrunnelse';
 import PermisjonPeriode from './PermisjonPeriode';
 import arbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
-import arbeidsforholdPropType from '../../propTypes/arbeidsforholdPropType';
 
 // ----------------------------------------------------------------------------------
 // VARIABLES
@@ -31,18 +30,36 @@ export const PERSON_ARBEIDSFORHOLD_DETAIL_FORM = 'PersonArbeidsforholdDetailForm
 // METHODS
 // ----------------------------------------------------------------------------------
 const showNyttOrErstattPanel = (
-  arbeidsforholdHandlingVerdi, vurderOmSkalErstattes, harErstattetEttEllerFlere,
+  arbeidsforholdHandlingVerdi: any, vurderOmSkalErstattes: any, harErstattetEttEllerFlere: any,
 ) => arbeidsforholdHandlingVerdi === arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD
   && vurderOmSkalErstattes
   && !harErstattetEttEllerFlere;
 
+interface OwnProps {
+  cancelArbeidsforhold: (...args: any[]) => any;
+  isErstattArbeidsforhold: boolean;
+  hasReceivedInntektsmelding: boolean;
+  vurderOmSkalErstattes: boolean;
+  harErstattetEttEllerFlere?: boolean;
+  readOnly: boolean;
+  aktivtArbeidsforholdTillatUtenIM: boolean;
+  arbeidsforhold: Arbeidsforhold;
+  arbeidsforholdHandlingVerdi?: string;
+  skalKunneLeggeTilNyeArbeidsforhold: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  initialValues: {
+    erEndret: boolean;
+    tilVurdering: boolean;
+    replaceOptions: Arbeidsforhold[];
+  }
+}
+
 // ----------------------------------------------------------------------------------
 // Component: PersonArbeidsforholdDetailForm
 // ----------------------------------------------------------------------------------
-/**
- * PersonArbeidsforholdDetailForm
- */
-export const PersonArbeidsforholdDetailForm = ({
+export const PersonArbeidsforholdDetailForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   cancelArbeidsforhold,
   isErstattArbeidsforhold,
   hasReceivedInntektsmelding,
@@ -87,7 +104,6 @@ export const PersonArbeidsforholdDetailForm = ({
           formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
           hasReceivedInntektsmelding={hasReceivedInntektsmelding}
           arbeidsforhold={arbeidsforhold}
-          skalKunneLeggeTilNyeArbeidsforhold={skalKunneLeggeTilNyeArbeidsforhold}
           aktivtArbeidsforholdTillatUtenIM={aktivtArbeidsforholdTillatUtenIM}
           arbeidsforholdHandlingVerdi={arbeidsforholdHandlingVerdi}
           behandlingId={behandlingId}
@@ -102,7 +118,7 @@ export const PersonArbeidsforholdDetailForm = ({
         />
         <VerticalSpacer sixteenPx />
         { (formProps.initialValues.tilVurdering || formProps.initialValues.erEndret) && (
-          <FlexContainer fluid>
+          <FlexContainer>
             <FlexRow>
               <FlexColumn>
                 <Hovedknapp mini spinner={false} onClick={formProps.handleSubmit} disabled={formProps.pristine || readOnly}>
@@ -140,30 +156,17 @@ export const PersonArbeidsforholdDetailForm = ({
   </>
 );
 
-PersonArbeidsforholdDetailForm.propTypes = {
-  cancelArbeidsforhold: PropTypes.func.isRequired,
-  isErstattArbeidsforhold: PropTypes.bool.isRequired,
-  hasReceivedInntektsmelding: PropTypes.bool.isRequired,
-  vurderOmSkalErstattes: PropTypes.bool.isRequired,
-  harErstattetEttEllerFlere: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  aktivtArbeidsforholdTillatUtenIM: PropTypes.bool.isRequired,
-  arbeidsforhold: arbeidsforholdPropType.isRequired,
-  arbeidsforholdHandlingVerdi: PropTypes.string,
-  skalKunneLeggeTilNyeArbeidsforhold: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  ...formPropTypes,
-};
-
 PersonArbeidsforholdDetailForm.defaultProps = {
   harErstattetEttEllerFlere: false,
-  arbeidsforholdHandlingVerdi: undefined,
 };
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.updateArbeidsforhold(values);
-  return (state, ownProps) => {
+interface PureOwnProps {
+  updateArbeidsforhold: (values: any) => void;
+}
+
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.updateArbeidsforhold(values);
+  return (state: any, ownProps: any) => {
     const {
       arbeidsforhold, readOnly, behandlingId, behandlingVersjon,
     } = ownProps;
@@ -190,7 +193,7 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   };
 };
 
-const validateForm = (values) => ({
+const validateForm = (values: any) => ({
   ...LeggTilArbeidsforholdFelter.validate(values),
 });
 

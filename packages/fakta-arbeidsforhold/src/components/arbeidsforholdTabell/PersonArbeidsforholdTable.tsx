@@ -1,5 +1,4 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -23,9 +22,9 @@ const headerColumnContent = [
   <></>,
 ];
 
-const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledNavn = (arbeidsforhold) => {
+const utledNavn = (arbeidsforhold: any) => {
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return arbeidsforhold.navn;
   }
@@ -34,14 +33,20 @@ const utledNavn = (arbeidsforhold) => {
     : `${arbeidsforhold.navn}(${arbeidsforhold.arbeidsgiverIdentifiktorGUI})`;
 };
 
-export const utledNøkkel = (arbeidsforhold) => {
+export const utledNøkkel = (arbeidsforhold: any) => {
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return arbeidsforhold.navn;
   }
   return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsforholdId}${arbeidsforhold.arbeidsgiverIdentifiktorGUI}`;
 };
 
-const PersonArbeidsforholdTable = ({
+interface OwnProps {
+  alleArbeidsforhold: arbeidsforholdPropType[];
+  selectedId?: string;
+  selectArbeidsforholdCallback: (...args: any[]) => any;
+}
+
+const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
   alleArbeidsforhold,
   selectedId,
   selectArbeidsforholdCallback,
@@ -56,7 +61,7 @@ const PersonArbeidsforholdTable = ({
   const intl = useIntl();
   return (
     <Table headerColumnContent={headerColumnContent}>
-      {alleArbeidsforhold && alleArbeidsforhold.map((a) => {
+      {alleArbeidsforhold && alleArbeidsforhold.map((a: any) => {
         const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${parseFloat(a.stillingsprosent).toFixed(2)} %` : '';
         const navn = utledNavn(a);
         return (
@@ -88,7 +93,7 @@ const PersonArbeidsforholdTable = ({
               src={erIBrukImageUrl}
               alt={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
               tooltip={<FormattedMessage id="PersonArbeidsforholdTable.ErIBruk" />}
-              tabIndex="0"
+              tabIndex={0}
               alignTooltipLeft
             />
             )}
@@ -98,12 +103,6 @@ const PersonArbeidsforholdTable = ({
       })}
     </Table>
   );
-};
-
-PersonArbeidsforholdTable.propTypes = {
-  alleArbeidsforhold: PropTypes.arrayOf(arbeidsforholdPropType).isRequired,
-  selectedId: PropTypes.string,
-  selectArbeidsforholdCallback: PropTypes.func.isRequired,
 };
 
 PersonArbeidsforholdTable.defaultProps = {

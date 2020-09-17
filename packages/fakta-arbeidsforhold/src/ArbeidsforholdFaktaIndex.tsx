@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import {
+  Aksjonspunkt, Behandling, InntektArbeidYtelse, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
+
 import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
-import arbeidsforholdAksjonspunkterPropType from './propTypes/arbeidsforholdAksjonspunkterPropType';
-import arbeidsforholdBehandlingPropType from './propTypes/arbeidsforholdBehandlingPropType';
-import arbeidsforholdInntektArbeidYtelsePropType from './propTypes/arbeidsforholdInntektArbeidYtelsePropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -15,7 +15,18 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const ArbeidsforholdFaktaIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  harApneAksjonspunkter: boolean;
+}
+
+const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps> = ({
   behandling,
   inntektArbeidYtelse,
   alleKodeverk,
@@ -40,18 +51,5 @@ const ArbeidsforholdFaktaIndex = ({
     />
   </RawIntlProvider>
 );
-
-ArbeidsforholdFaktaIndex.propTypes = {
-  behandling: arbeidsforholdBehandlingPropType.isRequired,
-  inntektArbeidYtelse: arbeidsforholdInntektArbeidYtelsePropType.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  aksjonspunkter: PropTypes.arrayOf(arbeidsforholdAksjonspunkterPropType).isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  harApneAksjonspunkter: PropTypes.bool.isRequired,
-};
 
 export default ArbeidsforholdFaktaIndex;

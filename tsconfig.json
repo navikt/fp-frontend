@@ -31,6 +31,7 @@
 		"packages/behandling-svp",
 		"packages/behandling-es",
 		"packages/fakta-adopsjon",
+		"packages/fakta-arbeidsforhold",
 		"packages/fakta-felles",
 		"packages/fakta-fodsel-og-tilrettelegging",
 		"packages/fakta-tilleggsopplysninger",

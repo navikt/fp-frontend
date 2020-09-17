@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
 import {
@@ -15,19 +14,28 @@ import styles from './leggTilArbeidsforholdFelter.less';
 // ----------------------------------------------------------------------------------
 // Methods
 // ----------------------------------------------------------------------------------
-const sluttdatoErrorMsg = (dato) => ([{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }]);
-const startdatoErrorMsg = (dato) => ([{ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeOrEqual' }, { dato }]);
-const formatDate = (dato) => moment(dato)
-  .format(DDMMYYYY_DATE_FORMAT);
+const sluttdatoErrorMsg = (dato: string) => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
+const startdatoErrorMsg = (dato: string) => [{ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeOrEqual' }, { dato }];
+const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
+
+interface OwnProps {
+  readOnly: boolean;
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+interface StaticFunctions {
+  validate?: (values: { fomDato: string, tomDato: string }) => {
+    tomDato: ({ id: string; dato?: string } | { dato: string; id?: string })[]
+    fomDato: ({ id: string; dato?: string } | { dato: string; id?: string })[]
+  } | null,
+}
 
 // ----------------------------------------------------------------------------------
 // Component : LeggTilArbeidsforholdFelter
 // ----------------------------------------------------------------------------------
-
-/**
- * Component: LeggTilArbeidsforholdFelter
- */
-const LeggTilArbeidsforholdFelter = ({
+const LeggTilArbeidsforholdFelter: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   formName,
   behandlingId,
@@ -85,14 +93,7 @@ const LeggTilArbeidsforholdFelter = ({
   </BehandlingFormFieldCleaner>
 );
 
-LeggTilArbeidsforholdFelter.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  formName: PropTypes.string.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
-
-LeggTilArbeidsforholdFelter.validate = (values) => {
+LeggTilArbeidsforholdFelter.validate = (values: { fomDato: string, tomDato: string }) => {
   if (values === undefined || values === null) {
     return null;
   }

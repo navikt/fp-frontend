@@ -30,14 +30,6 @@ describe('<PersonArbeidsforholdTable>', () => {
     lagtTilAvSaksbehandler: false,
   };
 
-  const fagsystemer = [{
-    kode: 'AA',
-    navn: 'aa',
-  }, {
-    kode: 'INNTEKT',
-    navn: 'inntekt',
-  }];
-
   it('skal vise tabell med to arbeidsforhold der den ene raden er markert som valgt', () => {
     const arbeidsforhold2 = {
       id: '2',
@@ -62,7 +54,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[arbeidsforhold, arbeidsforhold2]}
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
 
     const table = wrapper.find(Table);
@@ -89,7 +80,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[arbeidsforhold]}
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -108,7 +98,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[newArbeidsforhold]}
       selectedId={newArbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -121,7 +110,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[arbeidsforhold]}
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -139,7 +127,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[newArbeidsforhold]}
       selectedId={newArbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -152,7 +139,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
     const element = wrapper.find(IngenArbeidsforholdRegistrert);
     expect(element).has.length(1);
@@ -167,7 +153,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
     const tableRow = wrapper.find(TableRow).at(1);
     expect(tableRow.props().model.stillingsprosent).to.eql(0);
@@ -182,7 +167,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
     const tableRow = wrapper.find(TableRow).at(1);
     expect(tableRow.props().model.navn).to.eql('Svendsen Eksos');
@@ -196,7 +180,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
     const periodeLabel = wrapper.find(PeriodLabel);
     expect(periodeLabel.props().dateStringTom).to.eql('2025-01-01');
@@ -209,7 +192,6 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
-      fagsystemer={fagsystemer}
     />);
     const periodeLabel = wrapper.find(PeriodLabel);
     expect(periodeLabel.props().dateStringTom).to.eql('2018-10-10');
