@@ -23,7 +23,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
-import { finnUtbetalingsgradForDelvisTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
+import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
 import Arbeidsforhold from '../types/arbeidsforholdTsType';
 
 import styles from './fodselOgTilretteleggingFaktaForm.less';
@@ -71,6 +71,7 @@ interface FodselOgTilretteleggingFaktaFormProps {
   arbeidsforhold: Arbeidsforhold[];
   iayArbeidsforhold: IayArbeidsforhold[];
   erOverstyrer: boolean;
+  formName: string;
 }
 
 /**
@@ -165,6 +166,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<FodselOgTilrett
                     changeField={formProps.change}
                     stillingsprosentArbeidsforhold={af ? af.stillingsprosent : 100}
                     setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+                    formName={FODSEL_TILRETTELEGGING_FORM}
                   />
                   {index === arbeidsforhold.length - 1 && (
                     <AvsnittSkiller />
@@ -220,15 +222,20 @@ FodselOgTilretteleggingFaktaForm.defaultProps = {
   fødselsdato: '',
 };
 
-const finnOverstyrtUtbetalingsgrad = (type, stillingsprosent, stillingsprosentArbeidsforhold, overstyrtUtbetalingsgrad, oldOverstyrtUtbetalingsgrad) => {
+const finnOverstyrtUtbetalingsgrad = (type,
+  stillingsprosent,
+  stillingsprosentArbeidsforhold,
+  overstyrtUtbetalingsgrad,
+  oldOverstyrtUtbetalingsgrad,
+  velferdspermisjonprosent) => {
   if (oldOverstyrtUtbetalingsgrad || type.kode === tilretteleggingType.HEL_TILRETTELEGGING) {
     return overstyrtUtbetalingsgrad;
   }
 
   let erLikOverstyrtVerdi = type.kode === tilretteleggingType.INGEN_TILRETTELEGGING && parseFloat(overstyrtUtbetalingsgrad) === 100;
   if (type.kode === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-    erLikOverstyrtVerdi = parseFloat(overstyrtUtbetalingsgrad) === parseFloat(finnUtbetalingsgradForDelvisTilrettelegging(
-      stillingsprosentArbeidsforhold, stillingsprosent,
+    erLikOverstyrtVerdi = parseFloat(overstyrtUtbetalingsgrad) === parseFloat(finnUtbetalingsgradForTilrettelegging(
+      stillingsprosentArbeidsforhold, velferdspermisjonprosent, stillingsprosent,
     ));
   }
 
@@ -246,6 +253,10 @@ const transformValues = (values, iayArbeidsforhold, arbeidsforhold) => ([{
     const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverIdent);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
+    const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
+      .filter((p) => value[finnPermisjonFieldName(p)])
+      .map((p) => p.permisjonsprosent)
+      .reduce((sum, prosent) => sum + prosent, 0);
     return {
       ...value,
       tilretteleggingDatoer: value.tilretteleggingDatoer.map((t) => ({
@@ -253,7 +264,7 @@ const transformValues = (values, iayArbeidsforhold, arbeidsforhold) => ([{
         type: t.type,
         stillingsprosent: t.stillingsprosent,
         overstyrtUtbetalingsgrad: finnOverstyrtUtbetalingsgrad(t.type, t.stillingsprosent, stillingsprosentArbeidsforhold,
-          t.overstyrtUtbetalingsgrad, t.oldOverstyrtUtbetalingsgrad),
+          t.overstyrtUtbetalingsgrad, t.oldOverstyrtUtbetalingsgrad, velferdspermisjonprosent),
       })),
       velferdspermisjoner: a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p)).map((p) => ({
         ...p,
@@ -335,7 +346,7 @@ const getArbeidsforhold = createSelector([
   return arbeidsforhold;
 });
 
-const utledUtbetalingsgrad = (tilretteleggingsdato, stillingsprosentArbeidsforhold) => {
+const utledUtbetalingsgrad = (tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent) => {
   if (tilretteleggingsdato.type.kode === tilretteleggingType.HEL_TILRETTELEGGING) {
     return null;
   }
@@ -343,7 +354,7 @@ const utledUtbetalingsgrad = (tilretteleggingsdato, stillingsprosentArbeidsforho
     return tilretteleggingsdato.overstyrtUtbetalingsgrad;
   }
   return tilretteleggingsdato.type.kode === tilretteleggingType.INGEN_TILRETTELEGGING ? 100
-    : finnUtbetalingsgradForDelvisTilrettelegging(stillingsprosentArbeidsforhold, tilretteleggingsdato.stillingsprosent);
+    : finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, tilretteleggingsdato.stillingsprosent);
 };
 
 const getInitialArbeidsforholdValues = createSelector([
@@ -359,13 +370,16 @@ const getInitialArbeidsforholdValues = createSelector([
     const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverIdent);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
+    const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => p.erGyldig)
+      .map((p) => p.permisjonsprosent)
+      .reduce((sum, prosent) => sum + prosent, 0);
     arbeidsforholdValues[utledFormSectionName(a)] = {
       ...a,
       tilretteleggingDatoer: a.tilretteleggingDatoer.map((tilretteleggingsdato) => ({
         ...tilretteleggingsdato,
         stillingsprosent: tilrettelegging.saksbehandlet || alleIafAf.length === 1 ? tilretteleggingsdato.stillingsprosent : undefined,
         oldOverstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad,
-        overstyrtUtbetalingsgrad: utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold),
+        overstyrtUtbetalingsgrad: utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
       })),
     };
     a.velferdspermisjoner.forEach((p) => {

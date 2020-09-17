@@ -17,15 +17,18 @@ import {
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import { Kodeverk } from '@fpsak-frontend/types';
 
-import TilretteleggingUtbetalingsgrad from './TilretteleggingUtbetalingsgrad';
+import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
+import { skalTaHensynTilPermisjon, finnPermisjonFieldName } from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingFieldArray.less';
 
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
-export const finnUtbetalingsgradForDelvisTilrettelegging = (stillingsprosentArbeidsforhold: number, stillingsprosent?: number): string => {
-  const defaultUtbetalingsgrad = 100 * (1 - (stillingsprosent / stillingsprosentArbeidsforhold));
+export const finnUtbetalingsgradForTilrettelegging = (stillingsprosentArbeidsforhold: number,
+  velferdspermisjonprosent: number, stillingsprosent?: number): string => {
+  const effektivStillingsprosent = stillingsprosentArbeidsforhold - velferdspermisjonprosent;
+  const defaultUtbetalingsgrad = effektivStillingsprosent <= 0 ? 0 : 100 * (1 - (stillingsprosent / effektivStillingsprosent));
   return defaultUtbetalingsgrad > 0 ? defaultUtbetalingsgrad.toFixed(2) : '0';
 };
 
@@ -51,6 +54,10 @@ interface OwnProps {
   tilretteleggingDatoer: TilretteleggingDato[];
   stillingsprosentArbeidsforhold: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
+  velferdspermisjonprosent: number;
+  behandlingId: number;
+  behandlingVersjon: number;
+  formName: string;
 }
 
 /**
@@ -69,6 +76,10 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
   tilretteleggingDatoer,
   stillingsprosentArbeidsforhold,
   setOverstyrtUtbetalingsgrad,
+  velferdspermisjonprosent,
+  behandlingId,
+  behandlingVersjon,
+  formName,
 }) => (
   <PeriodFieldArray
     fields={fields}
@@ -104,11 +115,15 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
                     ]}
                     onChange={(_elmt, value) => {
                       if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
-                        changeField(`${formSectionName}.tilretteleggingDatoer[${index}].overstyrtUtbetalingsgrad`, '100');
+                        changeField(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
+                          finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold,
+                            velferdspermisjonprosent, 100));
                       }
                       if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-                        const utbetalingsgrad = finnUtbetalingsgradForDelvisTilrettelegging(stillingsprosentArbeidsforhold, data.stillingsprosent);
-                        changeField(`${formSectionName}.tilretteleggingDatoer[${index}].overstyrtUtbetalingsgrad`, utbetalingsgrad);
+                        const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold,
+                          velferdspermisjonprosent, data.stillingsprosent);
+                        changeField(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
+                          utbetalingsgrad);
                       }
                     }}
                   />
@@ -154,8 +169,9 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
                         // @ts-ignore TODO Fiks denne!
                         normalizeOnBlur={(value) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
                         onChange={(_elmt, value) => {
-                          const utbetalingsgrad = finnUtbetalingsgradForDelvisTilrettelegging(stillingsprosentArbeidsforhold, value);
-                          changeField(`${formSectionName}.tilretteleggingDatoer[${index}].overstyrtUtbetalingsgrad`, utbetalingsgrad);
+                          const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
+                          changeField(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
+                            utbetalingsgrad);
                         }}
                       />
                     </FlexColumn>
@@ -167,11 +183,19 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
                 {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
                     || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
                     <TilretteleggingUtbetalingsgrad
+                      behandlingId={behandlingId}
+                      behandlingVersjon={behandlingVersjon}
                       fieldId={fieldId}
                       erOverstyrer={erOverstyrer}
                       tilretteleggingKode={tilretteleggingKode}
                       readOnly={readOnly}
+                      formSectionName={formSectionName}
+                      changeField={changeField}
+                      index={index}
+                      utbetalingsgrad={finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent,
+                        tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING ? 0 : data.stillingsprosent)}
                       setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+                      formName={formName}
                     />
                 )}
               </FlexRow>
@@ -186,10 +210,20 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    behandlingId, behandlingVersjon, formSectionName,
+    behandlingId, behandlingVersjon, formSectionName, velferdspermisjoner, formName,
   } = ownProps;
+  const velferdspermisjonprosent = velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(
+    behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, `${formSectionName}.tilretteleggingBehovFom`),
+    p,
+  ))
+    .filter((p) => behandlingFormValueSelector(formName,
+      behandlingId,
+      behandlingVersjon)(state, `${formSectionName}.${finnPermisjonFieldName(p)}`))
+    .map((p) => p.permisjonsprosent)
+    .reduce((sum, prosent) => sum + prosent, 0);
   return {
-    tilretteleggingDatoer: behandlingFormValueSelector('FodselOgTilretteleggingForm', behandlingId, behandlingVersjon)(state,
+    velferdspermisjonprosent,
+    tilretteleggingDatoer: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state,
       `${formSectionName}.tilretteleggingDatoer`),
   };
 };
