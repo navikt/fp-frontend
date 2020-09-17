@@ -1,24 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { FamilieHendelse, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './mannAdoptererAleneFaktaForm.less';
+
+interface OwnProps {
+  readOnly: boolean;
+  farSokerType?: Kodeverk;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  mannAdoptererAlene: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface StaticFunctions {
+  buildInitialValues: (familiehendelse: FamilieHendelse) => {
+    mannAdoptererAlene: boolean,
+  },
+  transformValues: (mannAdoptererAlene: boolean) => {
+    kode: string,
+    mannAdoptererAlene: boolean,
+  },
+}
 
 /**
  * MannAdoptererAleneFaktaForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for vurdering av om mann adopterer alene.
  */
-export const MannAdoptererAleneFaktaForm = ({
+const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   farSokerType,
   readOnly,
   mannAdoptererAlene,
@@ -26,7 +43,6 @@ export const MannAdoptererAleneFaktaForm = ({
   alleMerknaderFraBeslutter,
 }) => (
   <FaktaGruppe
-    aksjonspunktCode={aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE}
     titleCode="MannAdoptererAleneFaktaForm.ApplicationInformation"
     merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
   >
@@ -45,27 +61,17 @@ export const MannAdoptererAleneFaktaForm = ({
   </FaktaGruppe>
 );
 
-MannAdoptererAleneFaktaForm.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  farSokerType: kodeverkObjektPropType,
-  alleKodeverk: PropTypes.shape().isRequired,
-  mannAdoptererAlene: PropTypes.bool.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-};
-
 MannAdoptererAleneFaktaForm.defaultProps = {
   farSokerType: undefined,
 };
 
-MannAdoptererAleneFaktaForm.buildInitialValues = (soknad, familiehendelse) => ({
+MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse) => ({
   mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,
 });
 
-MannAdoptererAleneFaktaForm.transformValues = (values) => ({
+MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean) => ({
   kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  mannAdoptererAlene: values.mannAdoptererAlene,
+  mannAdoptererAlene,
 });
 
 export default MannAdoptererAleneFaktaForm;

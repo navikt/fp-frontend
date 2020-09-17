@@ -1,21 +1,32 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import * as useIntl from '../useIntl';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
 
 describe('<DokumentasjonFaktaForm>', () => {
   const editedStatus = {
-    adopsjonFodelsedatoer: { 1: false },
+    adopsjonFodelsedatoer: { 1: '20.01.2017' },
     omsorgsovertakelseDato: false,
     barnetsAnkomstTilNorgeDato: false,
   };
 
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise alle fodselsdatoer i datepickers', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15', 2: '2014-10-15' }}
       omsorgsovertakelseDato="2017-10-15"
       readOnly={false}
@@ -43,7 +54,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal ikke vise verdi for antall_barn_som_fyller_vilkåret når omsorgsovertakelseDato er tom', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15' }}
       omsorgsovertakelseDato={null}
       readOnly={false}
@@ -60,7 +70,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal ikke vise verdi for antall_barn_som_fyller_vilkåret når alle fødselsdatoer er tomme', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: null, 2: null }}
       omsorgsovertakelseDato="2016-10-15"
       readOnly={false}
@@ -77,7 +86,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal vise verdi for antall_barn_som_fyller_vilkåret når minst en fødselsdato ikke er tomme', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: null, 2: '2016-10-15' }}
       omsorgsovertakelseDato="2016-10-15"
       readOnly={false}
@@ -95,21 +103,20 @@ describe('<DokumentasjonFaktaForm>', () => {
   it('skal sette opp initielle verdier fra søknad når det ikke finnes avklarte data', () => {
     const soknad = {
       omsorgsovertakelseDato: '2016-10-15',
-      adopsjonFodelsedatoer: '2016-03-15',
+      adopsjonFodelsedatoer: { 1: '2016-03-15' } as {[ key: number]: string},
     };
 
-    const initialValues = DokumentasjonFaktaForm.buildInitialValues({}, soknad);
+    const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad as Soknad, {} as FamilieHendelse);
 
     expect(initialValues).to.eql({
       barnetsAnkomstTilNorgeDato: undefined,
       omsorgsovertakelseDato: '2016-10-15',
-      fodselsdatoer: '2016-03-15',
+      fodselsdatoer: { 1: '2016-03-15' },
     });
   });
 
   it('skal ikke vise datofelt for barnets ankomst til norge når engangsstønad', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15' }}
       omsorgsovertakelseDato={null}
       readOnly={false}
@@ -125,7 +132,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal ikke vise datofelt for barnets ankomst til norge når foreldrepenger hvis ikke oppgitt i søknad', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15' }}
       omsorgsovertakelseDato={null}
       readOnly={false}
@@ -141,7 +147,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal vise tekst stebarnsadopsjon når det er en foreldrepengersak og en har aksjonspunkt for ektefelles/samboers barn', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15' }}
       omsorgsovertakelseDato={null}
       readOnly={false}
@@ -157,7 +162,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal vise tekst omsorgsovertakelse når det ikke er en foreldrepengersak og en har aksjonspunkt for ektefelles/samboers barn', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15' }}
       omsorgsovertakelseDato={null}
       readOnly={false}
@@ -173,7 +177,6 @@ describe('<DokumentasjonFaktaForm>', () => {
 
   it('skal vise tekst omsorgsovertakelse når det en foreldrepengersak og en ikke har aksjonspunkt for ektefelles/samboers barn', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
-      intl={intlMock}
       fodselsdatoer={{ 1: '2016-10-15' }}
       omsorgsovertakelseDato={null}
       readOnly={false}
@@ -197,6 +200,7 @@ describe('<DokumentasjonFaktaForm>', () => {
       adopsjonFodelsedatoer: '2015-03-15',
     };
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse);
 
     expect(initialValues).to.eql({

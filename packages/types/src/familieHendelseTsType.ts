@@ -20,6 +20,7 @@ export type FamilieHendelse = Readonly<{
   ektefellesBarn?: boolean;
   mannAdoptererAlene?: boolean;
   vilkarType?: Kodeverk;
+  ankomstNorge?: string;
 }>
 
 export type FamilieHendelseSamling = Readonly<{
