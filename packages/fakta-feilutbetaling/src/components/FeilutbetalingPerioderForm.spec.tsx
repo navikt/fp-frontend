@@ -1,8 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
-import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
+
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+
 import { FeilutbetalingPerioderFormImpl } from './FeilutbetalingPerioderForm';
 
 const periode = {

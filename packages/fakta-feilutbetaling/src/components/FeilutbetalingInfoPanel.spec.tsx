@@ -11,6 +11,7 @@ import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResul
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 
 import { FeilutbetalingInfoPanelImpl } from './FeilutbetalingInfoPanel';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-feilutbetaling';
@@ -25,47 +26,43 @@ const feilutbetalingFakta = {
     perioder: [{
       fom: '2018-01-01',
       tom: '2019-01-01',
+      belop: 1000,
     }],
-  },
-  antallBarn: 1,
-  soknadType: {
-    kode: soknadType.FODSEL,
-  },
-  totalPeriodeFom: '2019-01-01',
-  totalPeriodeTom: '2019-01-02',
-  aktuellFeilUtbetaltBeløp: 10000,
-  tidligereVarseltBeløp: 5000,
-  perioder: [{
-    fom: '2018-01-01',
-    tom: '2019-01-01',
-    belop: 1000,
-  }],
-  behandlingÅrsaker: [{
-    behandlingArsakType: {
-      kode: behandlingArsakType.FEIL_I_LOVANDVENDELSE,
-      kodeverk: BEHANDLING_AARSAK_KODEVERK,
+    antallBarn: 1,
+    soknadType: {
+      kode: soknadType.FODSEL,
     },
-  }],
-  behandlingsresultat: {
-    type: {
-      kode: behandlingResultatType.INNVILGET,
-      kodeverk: BEHANDLING_RESULTAT_TYPE_KODEVERK,
-    },
-    konsekvenserForYtelsen: [{
-      kode: konsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
-      kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
-    }, {
-      kode: konsekvensForYtelsen.ENDRING_I_BEREGNING,
-      kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
+    totalPeriodeFom: '2019-01-01',
+    totalPeriodeTom: '2019-01-02',
+    aktuellFeilUtbetaltBeløp: 10000,
+    tidligereVarseltBeløp: 5000,
+    behandlingÅrsaker: [{
+      behandlingArsakType: {
+        kode: behandlingArsakType.FEIL_I_LOVANDVENDELSE,
+        kodeverk: BEHANDLING_AARSAK_KODEVERK,
+      },
     }],
-  },
-  tilbakekrevingValg: {
-    videreBehandling: {
-      kode: tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK,
-      kodeverk: TILBAKEKR_VIDERE_BEH_KODEVERK,
+    behandlingsresultat: {
+      type: {
+        kode: behandlingResultatType.INNVILGET,
+        kodeverk: BEHANDLING_RESULTAT_TYPE_KODEVERK,
+      },
+      konsekvenserForYtelsen: [{
+        kode: konsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
+        kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
+      }, {
+        kode: konsekvensForYtelsen.ENDRING_I_BEREGNING,
+        kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
+      }],
     },
+    tilbakekrevingValg: {
+      videreBehandling: {
+        kode: tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK,
+        kodeverk: TILBAKEKR_VIDERE_BEH_KODEVERK,
+      },
+    },
+    datoForRevurderingsvedtak: '2019-01-01',
   },
-  datoForRevurderingsvedtak: '2019-01-01',
 };
 
 const alleKodeverk = {
@@ -101,20 +98,22 @@ const fpsakKodeverk = {
 describe('<FeilutbetalingInfoPanel>', () => {
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallowWithIntl(<FeilutbetalingInfoPanelImpl
-      {...reduxFormPropsMock}
-      feilutbetaling={feilutbetalingFakta}
+      feilutbetalingFakta={feilutbetalingFakta}
       intl={intlMock}
       hasOpenAksjonspunkter
       readOnly={false}
       submitCallback={sinon.spy()}
       årsaker={[]}
-      merknaderFraBeslutter={{
-        notAccepted: false,
+      alleMerknaderFraBeslutter={{
+        [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: {
+          notAccepted: false,
+        },
       }}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={alleKodeverk}
       fpsakKodeverk={fpsakKodeverk}
+      {...reduxFormPropsMock}
     />);
 
     const normaltekstfelter = wrapper.find(Normaltekst);

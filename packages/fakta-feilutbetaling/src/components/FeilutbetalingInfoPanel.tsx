@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  clearFields, change, formPropTypes, getFormValues,
+  clearFields, change, getFormValues, InjectedFormProps,
 } from 'redux-form';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
@@ -23,10 +22,13 @@ import { VerticalSpacer, AksjonspunktHelpTextTemp, FaktaGruppe } from '@fpsak-fr
 import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required, getKodeverknavnFn, decodeHtmlEntity,
 } from '@fpsak-frontend/utils';
+import { Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import FeilutbetalingPerioderTable from './FeilutbetalingPerioderTable';
 
 import styles from './feilutbetalingInfoPanel.less';
+import FeilutbetalingFakta from '../types/feilutbetalingFaktaTsType';
+import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const formName = 'FaktaFeilutbetalingForm';
 const minLength3 = minLength(3);
@@ -35,14 +37,35 @@ const feilutbetalingAksjonspunkter = [
   aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
 ];
 
-export class FeilutbetalingInfoPanelImpl extends Component {
-  constructor(props) {
+interface OwnProps {
+  hasOpenAksjonspunkter: boolean;
+  readOnly: boolean;
+  feilutbetalingFakta: FeilutbetalingFakta;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+  årsaker: FeilutbetalingAarsak['hendelseTyper'];
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingFormPrefix: string;
+  formValues: {
+    perioder: {
+      årsak: any;
+    }[];
+  }
+  behandlePerioderSamlet: boolean;
+  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, fields?: string) => void;
+}
+
+export class FeilutbetalingInfoPanelImpl extends Component<OwnProps & InjectedFormProps> {
+  constructor(props: OwnProps & InjectedFormProps) {
     super(props);
     this.onChangeÅrsak = this.onChangeÅrsak.bind(this);
     this.onChangeUnderÅrsak = this.onChangeUnderÅrsak.bind(this);
   }
 
-  onChangeÅrsak(event, elementId, årsak) {
+  onChangeÅrsak(event: any, elementId: any, årsak: any) {
     const {
       behandlingFormPrefix, clearFields: clearFormFields, change: changeValue, formValues, behandlePerioderSamlet,
     } = this.props;
@@ -56,7 +79,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
           const { årsak: periodeÅrsak } = perioder[i];
           const fields = [`perioder.${i}.${periodeÅrsak}`];
           clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
-          changeValue(`perioder.${i}.årsak`, nyÅrsak, true, false);
+          changeValue(`perioder.${i}.årsak`, nyÅrsak);
         }
       }
     }
@@ -65,7 +88,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
     clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
   }
 
-  onChangeUnderÅrsak(event, elementId, årsak) {
+  onChangeUnderÅrsak(event: any, elementId: any, årsak: any) {
     const {
       change: changeValue, formValues, behandlePerioderSamlet,
     } = this.props;
@@ -81,7 +104,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
           Just in case noen har klikket av behandlePerioderSamlet, endret årsak og underÅrsak på element, og så klikket på behandlePerioderSamlet igjen.
         */
         if (i !== elementId && elementÅrsak === årsak) {
-          changeValue(`perioder.${i}.${årsak}.underÅrsak`, nyUnderÅrsak, true, false);
+          changeValue(`perioder.${i}.${årsak}.underÅrsak`, nyUnderÅrsak);
         }
       }
     }
@@ -90,10 +113,10 @@ export class FeilutbetalingInfoPanelImpl extends Component {
   render() {
     const {
       hasOpenAksjonspunkter,
-      feilutbetaling,
+      feilutbetalingFakta,
       årsaker,
       readOnly,
-      merknaderFraBeslutter,
+      alleMerknaderFraBeslutter,
       behandlingId,
       behandlingVersjon,
       alleKodeverk,
@@ -103,6 +126,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
 
     const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
     const getFpsakKodeverknavn = getKodeverknavnFn(fpsakKodeverk, kodeverkTyper);
+    const feilutbetaling = feilutbetalingFakta.behandlingFakta;
 
     return (
       <>
@@ -174,8 +198,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
               <Row className={styles.smallMarginTop}>
                 <Column xs="11">
                   <FaktaGruppe
-                    aksjonspunktCode={aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING}
-                    merknaderFraBeslutter={merknaderFraBeslutter}
+                    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]}
                     withoutBorder
                   >
                     <FeilutbetalingPerioderTable
@@ -207,7 +230,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
                   </Undertekst>
                   { feilutbetaling.behandlingÅrsaker && (
                     <Normaltekst className={styles.smallPaddingRight}>
-                      {feilutbetaling.behandlingÅrsaker.map((ba) => getFpsakKodeverknavn(ba.behandlingArsakType)).join(', ')}
+                      {feilutbetaling.behandlingÅrsaker.map((ba: any) => getFpsakKodeverknavn(ba.behandlingArsakType)).join(', ')}
                     </Normaltekst>
                   )}
                 </Column>
@@ -240,7 +263,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
                   </Undertekst>
                   {feilutbetaling.behandlingsresultat && (
                     <Normaltekst className={styles.smallPaddingRight}>
-                      {feilutbetaling.behandlingsresultat.konsekvenserForYtelsen.map((ba) => getFpsakKodeverknavn(ba)).join(', ')}
+                      {feilutbetaling.behandlingsresultat.konsekvenserForYtelsen.map((ba: any) => getFpsakKodeverknavn(ba)).join(', ')}
                     </Normaltekst>
                   )}
                 </Column>
@@ -267,7 +290,6 @@ export class FeilutbetalingInfoPanelImpl extends Component {
                 validate={[required, minLength3, maxLength1500, hasValidText]}
                 maxLength={1500}
                 readOnly={readOnly}
-                id="begrunnelse"
               />
             </Column>
           </Row>
@@ -278,8 +300,7 @@ export class FeilutbetalingInfoPanelImpl extends Component {
                 mini
                 htmlType="button"
                 onClick={formProps.handleSubmit}
-                disabled={formProps.pristine || formProps.submitting}
-                readOnly={readOnly}
+                disabled={readOnly || formProps.pristine || formProps.submitting}
                 spinner={formProps.submitting}
               >
                 <FormattedMessage id="FeilutbetalingInfoPanel.Confirm" />
@@ -292,28 +313,21 @@ export class FeilutbetalingInfoPanelImpl extends Component {
   }
 }
 
-FeilutbetalingInfoPanelImpl.propTypes = {
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  feilutbetaling: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  fpsakKodeverk: PropTypes.shape().isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  årsaker: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  merknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }),
-  ...formPropTypes,
-};
+interface PureOwnProps {
+  feilutbetalingFakta: FeilutbetalingFakta;
+  feilutbetalingAarsak: FeilutbetalingAarsak;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
+}
 
 const buildInitialValues = createSelector([
-  (ownProps) => ownProps.feilutbetalingFakta], (feilutbetalingFakta) => {
-  const { perioder, begrunnelse } = feilutbetalingFakta;
+  (ownProps: PureOwnProps) => ownProps.feilutbetalingFakta], (feilutbetalingFakta) => {
+  const { behandlingFakta } = feilutbetalingFakta;
+  const { perioder, begrunnelse } = behandlingFakta;
   return {
     begrunnelse: decodeHtmlEntity(begrunnelse),
-    // behandlePerioderSamlet: false,
-    perioder: perioder.sort((a, b) => moment(a.fom) - moment(b.fom))
-      .map((p) => {
+    perioder: perioder.sort((a: any, b: any) => moment(a.fom).diff(moment(b.fom)))
+      .map((p: any) => {
         const {
           fom, tom, feilutbetalingÅrsakDto,
         } = p;
@@ -341,9 +355,9 @@ const buildInitialValues = createSelector([
 });
 
 const getSortedFeilutbetalingArsaker = createSelector([
-  (ownProps) => ownProps.feilutbetalingAarsak], (feilutbetalingArsaker) => {
+  (ownProps: PureOwnProps) => ownProps.feilutbetalingAarsak], (feilutbetalingArsaker) => {
   const { hendelseTyper } = feilutbetalingArsaker;
-  return hendelseTyper.sort((ht1, ht2) => {
+  return hendelseTyper.sort((ht1: any, ht2: any) => {
     const hendelseType1 = ht1.hendelseType.navn;
     const hendelseType2 = ht2.hendelseType.navn;
     const hendelseType1ErParagraf = hendelseType1.startsWith('§');
@@ -354,12 +368,12 @@ const getSortedFeilutbetalingArsaker = createSelector([
   });
 });
 
-const transformValues = (values, aksjonspunkter, årsaker) => {
-  const apCode = aksjonspunkter.find((ap) => ap.definisjon.kode === feilutbetalingAksjonspunkter[0]);
+const transformValues = (values: any, aksjonspunkter: Aksjonspunkt[], årsaker: any) => {
+  const apCode = aksjonspunkter.find((ap: any) => ap.definisjon.kode === feilutbetalingAksjonspunkter[0]);
 
-  const feilutbetalingFakta = values.perioder.map((periode) => {
-    const feilutbetalingÅrsak = årsaker.find((el) => el.hendelseType.kode === periode.årsak);
-    const findUnderÅrsakObjekt = (underÅrsak) => feilutbetalingÅrsak.hendelseUndertyper.find((el) => el.kode === underÅrsak);
+  const feilutbetalingFakta = values.perioder.map((periode: any) => {
+    const feilutbetalingÅrsak = årsaker.find((el: any) => el.hendelseType.kode === periode.årsak);
+    const findUnderÅrsakObjekt = (underÅrsak: any) => feilutbetalingÅrsak.hendelseUndertyper.find((el: any) => el.kode === underÅrsak);
     const feilutbetalingUnderÅrsak = periode[periode.årsak] ? findUnderÅrsakObjekt(periode[periode.årsak].underÅrsak) : false;
 
     return {
@@ -378,22 +392,20 @@ const transformValues = (values, aksjonspunkter, årsaker) => {
     feilutbetalingFakta,
   }];
 };
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const årsaker = getSortedFeilutbetalingArsaker(initialOwnProps);
-  const submitCallback = (values) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter, årsaker));
-  return (state, ownProps) => ({
+  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter, årsaker));
+  return (state: any, ownProps: any) => ({
     årsaker,
-    feilutbetaling: initialOwnProps.feilutbetalingFakta,
     initialValues: buildInitialValues(ownProps),
     behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-    merknaderFraBeslutter: ownProps.alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING],
     behandlePerioderSamlet: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'behandlePerioderSamlet'),
     formValues: getFormValues(getBehandlingFormName(ownProps.behandlingId, ownProps.behandlingVersjon, formName))(state) || {},
     onSubmit: submitCallback,
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   ...bindActionCreators({
     clearFields,
     change,

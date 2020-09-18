@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
 import { Table } from '@fpsak-frontend/shared-components';
@@ -7,6 +6,7 @@ import { Table } from '@fpsak-frontend/shared-components';
 import FeilutbetalingPerioderForm from './FeilutbetalingPerioderForm';
 
 import styles from './feilutbetalingPerioderTable.less';
+import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const headerTextCodes = [
   'FeilutbetalingInfoPanel.Period',
@@ -14,7 +14,22 @@ const headerTextCodes = [
   'FeilutbetalingInfoPanel.Beløp',
 ];
 
-const FeilutbetalingPerioderTable = ({
+type OwnProps = {
+  perioder: {
+    fom: string;
+    tom: string;
+    belop: number;
+  }[];
+  formName: string;
+  årsaker: FeilutbetalingAarsak['hendelseTyper'];
+  readOnly: boolean;
+  onChangeÅrsak: (...args: any[]) => any;
+  onChangeUnderÅrsak: (...args: any[]) => any;
+  behandlingId: number;
+  behandlingVersjon: number;
+};
+
+const FeilutbetalingPerioderTable: FunctionComponent<OwnProps> = ({
   perioder,
   formName,
   årsaker,
@@ -29,7 +44,7 @@ const FeilutbetalingPerioderTable = ({
       headerTextCodes={headerTextCodes}
       noHover
     >
-      { perioder.sort((a, b) => moment(a.fom) - moment(b.fom)).map((periode, index) => (
+      { perioder.sort((a, b) => moment(a.fom).diff(moment(b.fom))).map((periode, index) => (
         <FeilutbetalingPerioderForm
           behandlingId={behandlingId}
           behandlingVersjon={behandlingVersjon}
@@ -46,16 +61,5 @@ const FeilutbetalingPerioderTable = ({
     </Table>
   </div>
 );
-
-FeilutbetalingPerioderTable.propTypes = {
-  perioder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  formName: PropTypes.string.isRequired,
-  årsaker: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  onChangeÅrsak: PropTypes.func.isRequired,
-  onChangeUnderÅrsak: PropTypes.func.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
 
 export default FeilutbetalingPerioderTable;

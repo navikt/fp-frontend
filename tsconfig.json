@@ -33,6 +33,7 @@
 		"packages/fakta-adopsjon",
 		"packages/fakta-arbeidsforhold",
 		"packages/fakta-bosted-soker",
+		"packages/fakta-feilutbetaling",
 		"packages/fakta-felles",
 		"packages/fakta-fodsel-og-tilrettelegging",
 		"packages/fakta-tilleggsopplysninger",
