@@ -9,6 +9,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {
   behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
@@ -233,7 +234,10 @@ const buildInitialValues = createSelector([(ownProps) => ownProps.ankeVurderingR
 const formName = 'ankeResultatForm';
 
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const aksjonspunktCode = initialOwnProps.aksjonspunkter[0].definisjon.kode;
+  const vedtaksaksjonspunkt = initialOwnProps.aksjonspunkter
+    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
+    .filter((ap) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
+  const aksjonspunktCode = vedtaksaksjonspunkt[0].definisjon.kode;
   const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
   return (state, ownProps) => ({
     aksjonspunktCode,
