@@ -14,10 +14,10 @@ import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import styles from './tilbakekrevingVedtakUtdypendeTekstPanel.less';
 
 const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
+const maxLength4000 = maxLength(4000);
 
-const valideringsregler = [minLength3, maxLength1500, hasValidText];
-const valideringsreglerPakrevet = [required, minLength3, maxLength1500, hasValidText];
+const valideringsregler = [minLength3, maxLength4000, hasValidText];
+const valideringsreglerPakrevet = [required, minLength3, maxLength4000, hasValidText];
 
 export const TilbakekrevingVedtakUtdypendeTekstPanel = ({
   intl,
@@ -58,7 +58,7 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel = ({
               name={type}
               label={intl.formatMessage({ id: 'TilbakekrevingVedtakUtdypendeTekstPanel.UtdypendeTekst' })}
               validate={fritekstPakrevet ? valideringsreglerPakrevet : valideringsregler}
-              maxLength={1500}
+              maxLength={4000}
               readOnly={readOnly}
             />
           </>
