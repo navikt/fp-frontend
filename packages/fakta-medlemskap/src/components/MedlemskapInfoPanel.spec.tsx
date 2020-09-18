@@ -2,10 +2,12 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import {
+  FagsakPerson, InntektArbeidYtelse, Medlemskap, Soknad,
+} from '@fpsak-frontend/types';
 
 import MedlemskapInfoPanel from './MedlemskapInfoPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
@@ -18,11 +20,11 @@ describe('<MedlemskapInfoPanel>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -31,9 +33,7 @@ describe('<MedlemskapInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel
-      intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
-      aksjonspunkterMinusAvklarStartDato={[]}
       hasOpenAksjonspunkter={false}
       submittable
       readOnly
@@ -43,15 +43,17 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
+        kodeverk: '',
       }}
       behandlingStatus={{
         kode: behandlingStatus.BEHANDLING_UTREDES,
+        kodeverk: '',
       }}
-      soknad={{}}
-      inntektArbeidYtelse={{}}
+      soknad={{} as Soknad}
+      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
-      medlemskap={{}}
-      fagsakPerson={{}}
+      medlemskap={{} as Medlemskap}
+      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
     />);
@@ -65,11 +67,11 @@ describe('<MedlemskapInfoPanel>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -78,9 +80,7 @@ describe('<MedlemskapInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel
-      intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
-      aksjonspunkterMinusAvklarStartDato={[]}
       hasOpenAksjonspunkter={false}
       submittable
       readOnly
@@ -90,15 +90,17 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
+        kodeverk: '',
       }}
       behandlingStatus={{
         kode: behandlingStatus.BEHANDLING_UTREDES,
+        kodeverk: '',
       }}
-      soknad={{}}
-      inntektArbeidYtelse={{}}
+      soknad={{} as Soknad}
+      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
-      medlemskap={{}}
-      fagsakPerson={{}}
+      medlemskap={{} as Medlemskap}
+      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
     />);
@@ -112,11 +114,11 @@ describe('<MedlemskapInfoPanel>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.UTFORT,
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -125,9 +127,7 @@ describe('<MedlemskapInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel
-      intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
-      aksjonspunkterMinusAvklarStartDato={[]}
       hasOpenAksjonspunkter={false}
       submittable
       readOnly
@@ -137,15 +137,17 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
+        kodeverk: '',
       }}
       behandlingStatus={{
         kode: behandlingStatus.BEHANDLING_UTREDES,
+        kodeverk: '',
       }}
-      soknad={{}}
-      inntektArbeidYtelse={{}}
+      soknad={{} as Soknad}
+      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
-      medlemskap={{}}
-      fagsakPerson={{}}
+      medlemskap={{} as Medlemskap}
+      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
     />);
@@ -156,9 +158,7 @@ describe('<MedlemskapInfoPanel>', () => {
 
   it('skal vise panel for avklaring av startdato for foreldrepengerperioden, for å tilate manuell korrigering selvom aksjonspunktet ikke finnes', () => {
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel
-      intl={intlMock}
       aksjonspunkter={[]}
-      aksjonspunkterMinusAvklarStartDato={[]}
       hasOpenAksjonspunkter={false}
       submittable
       readOnly
@@ -168,15 +168,17 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
+        kodeverk: '',
       }}
       behandlingStatus={{
         kode: behandlingStatus.BEHANDLING_UTREDES,
+        kodeverk: '',
       }}
-      soknad={{}}
-      inntektArbeidYtelse={{}}
+      soknad={{} as Soknad}
+      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
-      medlemskap={{}}
-      fagsakPerson={{}}
+      medlemskap={{} as Medlemskap}
+      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
     />);

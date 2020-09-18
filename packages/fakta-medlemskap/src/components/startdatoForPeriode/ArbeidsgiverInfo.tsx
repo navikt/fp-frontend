@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column } from 'nav-frontend-grid';
 
 import { DatepickerField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
+import { FieldArrayFieldsProps } from 'redux-form';
 
-const truncateEmployerName = (empName) => {
+const truncateEmployerName = (empName: string) => {
   const cutOffLength = 20;
 
   if (empName.length > cutOffLength) {
@@ -14,9 +14,15 @@ const truncateEmployerName = (empName) => {
   return empName;
 };
 
-export const ArbeidsgiverInfo = ({ fields }) => (
+interface OwnProps {
+  fields: FieldArrayFieldsProps<{ arbeidsgiver: string }>;
+}
+
+export const ArbeidsgiverInfo: FunctionComponent<OwnProps> = ({
+  fields,
+}) => (
   <div>
-    {fields.map((arbeidsgiverId, index) => {
+    {fields.map((arbeidsgiverId: any, index: number) => {
       const arbeidsgiverNavn = fields.get(index).arbeidsgiver;
 
       return (
@@ -32,9 +38,5 @@ export const ArbeidsgiverInfo = ({ fields }) => (
     })}
   </div>
 );
-
-ArbeidsgiverInfo.propTypes = {
-  fields: PropTypes.shape().isRequired,
-};
 
 export default ArbeidsgiverInfo;

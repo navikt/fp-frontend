@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
+import { FieldArrayFieldsProps } from 'redux-form';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
 import {
@@ -17,7 +18,7 @@ export const defaultAntallBarn = {
 };
 
 interface OwnProps {
-  fields: any[];
+  fields: FieldArrayFieldsProps<{ arbeidsgiver: string }>;
   meta?: {
     error?: {
       id: string;

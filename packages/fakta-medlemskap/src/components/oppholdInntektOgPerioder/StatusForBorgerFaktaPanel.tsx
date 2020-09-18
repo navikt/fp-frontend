@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -9,13 +8,34 @@ import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-co
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
+import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
+
+export type PeriodeMedId = MedlemPeriode & { id: number; }
+
+interface OwnProps {
+  readOnly: boolean;
+  erEosBorger?: boolean;
+  isBorgerAksjonspunktClosed: boolean;
+  apKode: string;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface StaticFunctions {
+  buildInitialValues?: (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => any,
+  transformValues?: (values: any, aksjonspunkter: Aksjonspunkt[]) => {
+    kode: string;
+    oppholdsrettVurdering: string;
+    lovligOppholdVurdering: boolean;
+    erEosBorger: boolean;
+  }
+}
 
 /**
  * StatusForBorgerFaktaPanel
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av borgerstatus (Medlemskapsvilkåret).
  */
-const StatusForBorgerFaktaPanelImpl = ({
+const StatusForBorgerFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   erEosBorger,
   isBorgerAksjonspunktClosed,
@@ -23,7 +43,6 @@ const StatusForBorgerFaktaPanelImpl = ({
   alleMerknaderFraBeslutter,
 }) => (
   <FaktaGruppe
-    aksjonspunktCode={apKode}
     titleCode="StatusForBorgerFaktaPanel.ApplicationInformation"
     merknaderFraBeslutter={alleMerknaderFraBeslutter[apKode]}
   >
@@ -51,7 +70,7 @@ const StatusForBorgerFaktaPanelImpl = ({
                 <FormattedMessage
                   id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
                   values={{
-                    b: (chunks) => <b>{chunks}</b>,
+                    b: (chunks: any) => <b>{chunks}</b>,
                   }}
                 />
               )}
@@ -80,7 +99,7 @@ const StatusForBorgerFaktaPanelImpl = ({
                 <FormattedMessage
                   id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
                   values={{
-                    b: (chunks) => <b>{chunks}</b>,
+                    b: (chunks: any) => <b>{chunks}</b>,
                   }}
                 />
               )}
@@ -93,51 +112,43 @@ const StatusForBorgerFaktaPanelImpl = ({
   </FaktaGruppe>
 );
 
-StatusForBorgerFaktaPanelImpl.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  erEosBorger: PropTypes.bool,
-  isBorgerAksjonspunktClosed: PropTypes.bool.isRequired,
-  apKode: PropTypes.string.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-};
+interface PureOwnProps {
+  id: number;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
 
-StatusForBorgerFaktaPanelImpl.defaultProps = {
-  erEosBorger: undefined,
-};
-
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   ...behandlingFormValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
     'erEosBorger', 'isBorgerAksjonspunktClosed', 'apKode'),
 });
 
 const StatusForBorgerFaktaPanel = connect(mapStateToProps)(StatusForBorgerFaktaPanelImpl);
 
-const getApKode = (aksjonspunkter) => aksjonspunkter
-  .map((ap) => ap.definisjon.kode)
-  .filter((kode) => kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || kode === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)[0];
+const getApKode = (aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter
+  .map((ap: Aksjonspunkt) => ap.definisjon.kode)
+  .filter((kode: string) => kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || kode === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)[0];
 
-const getEosBorger = (periode, aksjonspunkter) => (periode.erEosBorger || periode.erEosBorger === false
+const getEosBorger = (periode: any, aksjonspunkter: Aksjonspunkt[]) => (periode.erEosBorger || periode.erEosBorger === false
   ? periode.erEosBorger
-  : aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
+  : aksjonspunkter.some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
 
-const getOppholdsrettVurdering = (periode) => (periode.oppholdsrettVurdering
+const getOppholdsrettVurdering = (periode: PeriodeMedId) => (periode.oppholdsrettVurdering
 || periode.oppholdsrettVurdering === false ? periode.oppholdsrettVurdering : undefined);
 
-const getLovligOppholdVurdering = (periode) => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
+const getLovligOppholdVurdering = (periode: PeriodeMedId) => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
   ? periode.lovligOppholdVurdering : undefined);
 
-StatusForBorgerFaktaPanel.buildInitialValues = (periode, aksjonspunkter) => {
+StatusForBorgerFaktaPanel.buildInitialValues = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => {
   const erEosBorger = getEosBorger(periode, aksjonspunkter);
 
   const closedAp = aksjonspunkter
-    .filter((ap) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+    .filter((ap: Aksjonspunkt) => periode.aksjonspunkter.includes(ap.definisjon.kode)
       || (periode.aksjonspunkter.length > 0
-        && periode.aksjonspunkter.some((pap) => pap === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT
+        && periode.aksjonspunkter.some((pap: any) => pap === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT
           || pap === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)
         && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP))
-    .filter((ap) => !isAksjonspunktOpen(ap.status.kode));
+    .filter((ap: Aksjonspunkt) => !isAksjonspunktOpen(ap.status.kode));
 
   return {
     erEosBorger,
@@ -148,7 +159,7 @@ StatusForBorgerFaktaPanel.buildInitialValues = (periode, aksjonspunkter) => {
   };
 };
 
-StatusForBorgerFaktaPanel.transformValues = (values, aksjonspunkter) => ({
+StatusForBorgerFaktaPanel.transformValues = (values: any, aksjonspunkter: Aksjonspunkt[]) => ({
   kode: getApKode(aksjonspunkter),
   oppholdsrettVurdering: values.oppholdsrettVurdering,
   lovligOppholdVurdering: values.lovligOppholdVurdering,

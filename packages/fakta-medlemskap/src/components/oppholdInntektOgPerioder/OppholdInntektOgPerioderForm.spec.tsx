@@ -1,14 +1,16 @@
 import React from 'react';
 import { expect } from 'chai';
+
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+
 import { OppholdInntektOgPerioderForm, transformValues } from './OppholdInntektOgPerioderForm';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
-const perioder = [];
+const perioder: any = [];
 
 describe('<OppholdInntektOgPerioderForm>', () => {
   it('skal vise informasjon uten editeringsmuligheter når det ikke finnes aksjonspunkter', () => {
@@ -35,11 +37,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -72,11 +74,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -106,11 +108,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -140,11 +142,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -174,11 +176,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -208,11 +210,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -224,11 +226,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,

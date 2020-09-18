@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { change as reduxFormChange, formPropTypes, reset as reduxFormReset } from 'redux-form';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import {
+  change as reduxFormChange, FormAction, InjectedFormProps, reset as reduxFormReset,
+} from 'redux-form';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { bindActionCreators } from 'redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { aksjonspunktPropType } from '@fpsak-frontend/prop-types';
 import { guid } from '@fpsak-frontend/utils';
 import { getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import {
+  Aksjonspunkt, FagsakPerson, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad,
+} from '@fpsak-frontend/types';
 
 import OppholdInntektOgPeriodeForm from './OppholdInntektOgPeriodeForm';
 import MedlemskapEndringerTabell from './MedlemskapEndringerTabell';
@@ -23,7 +25,7 @@ const {
   AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE, AVKLAR_OPPHOLDSRETT, AVKLAR_LOVLIG_OPPHOLD, AVKLAR_FORTSATT_MEDLEMSKAP,
 } = aksjonspunktCodes;
 
-const getHelpTexts = (aksjonspunkter) => {
+const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
   const helpTexts = [];
   if (hasAksjonspunkt(AVKLAR_FORTSATT_MEDLEMSKAP, aksjonspunkter)) {
     helpTexts.push(<FormattedMessage key="HarFortsattMedlemskap" id="MedlemskapInfoPanel.HarFortsattMedlemskap" />);
@@ -43,9 +45,11 @@ const getHelpTexts = (aksjonspunkter) => {
   return helpTexts;
 };
 
-const createNewPerioder = (perioder, id, values) => {
-  const updatedIndex = perioder.findIndex((p) => p.id === id);
-  const updatedPeriode = perioder.find((p) => p.id === id);
+type PeriodeMedId = MedlemPeriode & { id: number; }
+
+const createNewPerioder = (perioder: PeriodeMedId[], id: number, values: any) => {
+  const updatedIndex = perioder.findIndex((p: PeriodeMedId) => p.id === id);
+  const updatedPeriode = perioder.find((p: PeriodeMedId) => p.id === id);
 
   return [
     ...perioder.slice(0, updatedIndex),
@@ -57,13 +61,41 @@ const createNewPerioder = (perioder, id, values) => {
   ];
 };
 
+interface OwnProps {
+  hasOpenAksjonspunkter: boolean;
+  submittable: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  submitting: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingId: number;
+  behandlingVersjon: number;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  initialValues: {
+    perioder: PeriodeMedId[];
+  }
+  perioder: PeriodeMedId[];
+  behandlingFormPrefix: string;
+}
+
+interface OwnState {
+  valgtPeriode?: PeriodeMedId;
+}
+
+interface DispatchProps {
+  reduxFormReset: (form: string) => FormAction;
+  reduxFormChange: (form: string, field: string, value: any, touch?: boolean, persistentSubmitErrors?: boolean) => FormAction;
+}
+
+type Props = OwnProps & DispatchProps & WrappedComponentProps & InjectedFormProps
+
 /**
  * OppholdInntektOgPerioderForm
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Medlemskapsvilkåret.
  */
-export class OppholdInntektOgPerioderForm extends Component {
-  constructor(props) {
+export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -79,14 +111,14 @@ export class OppholdInntektOgPerioderForm extends Component {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     const { initialValues } = this.props;
-    const defaultPeriode = initialValues.perioder ? initialValues.perioder[0] : {};
+    const defaultPeriode = initialValues.perioder ? initialValues.perioder[0] : undefined;
     this.setValgtPeriode(defaultPeriode);
   }
 
-  setValgtPeriode(valgtPeriode) {
+  setValgtPeriode(valgtPeriode: PeriodeMedId) {
     if (!valgtPeriode) {
       const { initialValues } = this.props;
-      const defaultPeriode = initialValues.perioder ? initialValues.perioder[0] : {};
+      const defaultPeriode = initialValues.perioder ? initialValues.perioder[0] : undefined;
       this.setState({ valgtPeriode: defaultPeriode });
     }
     this.setState({ valgtPeriode });
@@ -100,7 +132,7 @@ export class OppholdInntektOgPerioderForm extends Component {
     }
   }
 
-  velgPeriodeCallback(p, id, periode) {
+  velgPeriodeCallback(_p, id: number, periode: MedlemPeriode) {
     const valgtPeriode = {
       id,
       ...periode,
@@ -108,12 +140,12 @@ export class OppholdInntektOgPerioderForm extends Component {
     this.setState({ valgtPeriode });
   }
 
-  updateOppholdInntektPeriode(values) {
+  updateOppholdInntektPeriode(values: any) {
     const {
       behandlingFormPrefix, perioder, reduxFormChange: formChange,
     } = this.props;
 
-    const updatedPeriode = perioder.find((p) => p.id === values.id);
+    const updatedPeriode = perioder.find((p: PeriodeMedId) => p.id === values.id);
 
     const newPeriodeObject = {
       ...updatedPeriode,
@@ -135,7 +167,7 @@ export class OppholdInntektOgPerioderForm extends Component {
     }
 
     if (perioder && perioder.length > 0) {
-      const ubekreftPerioder = perioder.filter((periode) => periode.aksjonspunkter.length > 0 && periode.begrunnelse === null);
+      const ubekreftPerioder = perioder.filter((periode: PeriodeMedId) => periode.aksjonspunkter.length > 0 && periode.begrunnelse === null);
 
       if (ubekreftPerioder.length > 0) {
         return true;
@@ -152,7 +184,6 @@ export class OppholdInntektOgPerioderForm extends Component {
       aksjonspunkter,
       readOnly,
       submitting,
-      isRevurdering,
       behandlingId,
       behandlingVersjon,
       alleKodeverk,
@@ -179,7 +210,6 @@ export class OppholdInntektOgPerioderForm extends Component {
 
         {valgtPeriode && (
         <OppholdInntektOgPeriodeForm
-          isRevurdering={isRevurdering}
           readOnly={readOnly}
           valgtPeriode={valgtPeriode}
           aksjonspunkter={aksjonspunkter}
@@ -206,33 +236,21 @@ export class OppholdInntektOgPerioderForm extends Component {
   }
 }
 
-OppholdInntektOgPerioderForm.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(aksjonspunktPropType.isRequired).isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  isRevurdering: PropTypes.bool.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  ...formPropTypes,
-};
-
 const medlemAksjonspunkter = [AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, AVKLAR_OM_BRUKER_ER_BOSATT, AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
   AVKLAR_OPPHOLDSRETT, AVKLAR_LOVLIG_OPPHOLD, AVKLAR_FORTSATT_MEDLEMSKAP];
 
-export const transformValues = (values, aksjonspunkter) => {
+export const transformValues = (values: any, aksjonspunkter: Aksjonspunkt[]) => {
   const aktiveMedlemAksjonspunkter = aksjonspunkter
-    .filter((ap) => medlemAksjonspunkter.includes(ap.definisjon.kode))
-    .filter((ap) => ap.erAktivt)
-    .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+    .filter((ap: Aksjonspunkt) => medlemAksjonspunkter.includes(ap.definisjon.kode))
+    .filter((ap: Aksjonspunkt) => ap.erAktivt)
+    .filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
 
-  return aktiveMedlemAksjonspunkter.map((ap) => ({
+  return aktiveMedlemAksjonspunkter.map((ap: Aksjonspunkt) => ({
     kode: ap.definisjon.kode,
     begrunnelse: '',
-    bekreftedePerioder: values.perioder.map((periode) => {
+
+    // TODO Kva ligg i periode eigentleg? Dette er mykje meir enn i PeriodeMedId iallfall
+    bekreftedePerioder: values.perioder.map((periode: any) => {
       // TODO Kor mange felt er det i bekreftetPeriode? Kan ein heller laga nytt objekt med det ein treng?
       const {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -242,38 +260,45 @@ export const transformValues = (values, aksjonspunkter) => {
         ...bekreftetPeriode
       } = periode;
       return bekreftetPeriode;
-    }).filter((periode) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+    }).filter((periode: PeriodeMedId) => periode.aksjonspunkter.includes(ap.definisjon.kode)
       || (periode.aksjonspunkter.length > 0 && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)),
   }));
 };
 
+interface PureOwnProps {
+  soknad: Soknad;
+  fagsakPerson: FagsakPerson;
+  medlemskap: Medlemskap;
+  aksjonspunkter: Aksjonspunkt[];
+  behandlingType: Kodeverk;
+  behandlingId: number;
+  behandlingVersjon: number;
+  submitCallback: (...args: any[]) => any;
+}
+
 const buildInitalValues = createSelector([
-  (ownProps) => ownProps.soknad,
-  (ownProps) => ownProps.fagsakPerson,
-  (ownProps) => ownProps.medlemskap],
-(soknad, person, medlem = {}) => ({
+  (ownProps: PureOwnProps) => ownProps.soknad,
+  (ownProps: PureOwnProps) => ownProps.fagsakPerson,
+  (ownProps: PureOwnProps) => ownProps.medlemskap],
+(soknad, person, medlem = {} as Medlemskap) => ({
   soknad,
   person,
   gjeldendeFom: medlem.fom,
   medlemskapPerioder: medlem.medlemskapPerioder || [],
   inntekter: medlem.inntekt,
-  perioder: (medlem.perioder || []).map((periode) => ({
+  perioder: (medlem.perioder || []).map((periode: MedlemPeriode) => ({
     ...periode,
     id: guid(),
   })),
 }));
 
-export const isBehandlingRevurderingFortsattMedlemskap = createSelector(
-  [(ownProps) => ownProps.behandlingType, (ownProps) => ownProps.medlemskap],
-  (type, medlem = {}) => type.kode === behandlingType.REVURDERING && !!medlem.fom,
-);
+const EMPTY_ARRAY = [];
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter));
-  const hasOpenAksjonspunkter = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
-  const perioder = [];
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter));
+  const hasOpenAksjonspunkter = initialOwnProps.aksjonspunkter.some((ap: Aksjonspunkt) => isAksjonspunktOpen(ap.status.kode));
 
-  return (state, ownProps) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const { behandlingId, behandlingVersjon } = ownProps;
     const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
     return {
@@ -281,13 +306,12 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
       onSubmit,
       hasOpenAksjonspunkter,
       initialValues: buildInitalValues(ownProps),
-      perioder: behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(state, 'perioder') || perioder,
-      isRevurdering: isBehandlingRevurderingFortsattMedlemskap(ownProps),
+      perioder: behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(state, 'perioder') || EMPTY_ARRAY,
     };
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormReset,

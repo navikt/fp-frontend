@@ -1,6 +1,5 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
@@ -22,7 +21,6 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<InntektOgYtelserFaktaPanel.WrappedComponent
-      intl={intlMock}
       inntekter={inntekter}
     />);
 
@@ -32,10 +30,9 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
   });
 
   it('skal ikke vise tabell når det ikke finnes inntekter', () => {
-    const inntekter = [];
+    const inntekter: any = [];
 
     const wrapper = shallowWithIntl(<InntektOgYtelserFaktaPanel.WrappedComponent
-      intl={intlMock}
       inntekter={inntekter}
     />);
 
@@ -53,18 +50,21 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
         utbetaler: 'Steria',
         fom: '2017-07-20',
         tom: '2017-07-31',
+        ytelse: true,
         belop: 4,
       }, {
         navn: 'Frida',
         utbetaler: 'Nav',
         fom: '2017-08-10',
         tom: '2017-08-20',
+        ytelse: true,
         belop: 2,
       }, {
         navn: 'Espen Utvikler',
         utbetaler: 'Steria',
         fom: '2017-08-20',
         tom: '2017-08-31',
+        ytelse: true,
         belop: 1,
       },
     ];

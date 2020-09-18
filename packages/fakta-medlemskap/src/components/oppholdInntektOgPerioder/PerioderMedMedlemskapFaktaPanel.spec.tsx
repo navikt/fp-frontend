@@ -1,9 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm } from './PerioderMedMedlemskapFaktaPanel';
+import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
+
+import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<PerioderMedMedlemskapFaktaPanel>', () => {
@@ -18,13 +20,14 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     const manuelleVurderingstyper = [{
       kode: 'test1',
       navn: 'navn1',
+      kodeverk: '',
     }, {
       kode: 'test2',
       navn: 'navn2',
+      kodeverk: '',
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
-      intl={intlMock}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -60,7 +63,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
-      intl={intlMock}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -86,7 +88,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
-      intl={intlMock}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -112,7 +113,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
-      intl={intlMock}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -138,7 +138,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
-      intl={intlMock}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       readOnly={false}
@@ -153,10 +152,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
   });
 
   it('skal ikke vise tabell når det ikke finnes medlemskapsperioder', () => {
-    const medlemskapPerioder = [];
+    const medlemskapPerioder: any = [];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
-      intl={intlMock}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={medlemskapPerioder}
@@ -172,28 +170,10 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
   it('skal sette opp initielle verdier og sorterte perioder etter periodestart', () => {
     const periode = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
-      medlemskapManuellVurderingType: 'manuellType',
-      medlemskapPerioder: [{
-        fom: '2016-01-15',
-        tom: '2016-10-15',
-        dekningType: {
-          navn: 'testdekning',
-        },
-        medlemskapType: {
-          navn: 'testStatus',
-        },
-        beslutningsdato: '2016-10-16',
-      }, {
-        fom: '2017-01-15',
-        tom: '2017-10-15',
-        dekningType: {
-          navn: 'testdekning2017',
-        },
-        medlemskapType: {
-          navn: 'testStatus2017',
-        },
-        beslutningsdato: '2017-10-16',
-      }],
+      medlemskapManuellVurderingType: {
+        kode: 'manuellType',
+        kodeverk: '',
+      },
     };
     const medlemskapPerioder = [
       {
@@ -201,9 +181,11 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
         tom: '2016-10-15',
         dekningType: {
           kode: 'DEK_TYPE',
+          kodeverk: '',
         },
         medlemskapType: {
           kode: 'M_STATUS',
+          kodeverk: '',
         },
         beslutningsdato: '2016-10-16',
       }, {
@@ -211,9 +193,11 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
         tom: '2017-10-15',
         dekningType: {
           kode: 'DEK_TYPE2',
+          kodeverk: '',
         },
         medlemskapType: {
           kode: 'M_STATUS2',
+          kodeverk: '',
         },
         beslutningsdato: '2017-10-16',
       },
@@ -225,15 +209,17 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       },
     };
 
-    const aksjonspunkter = [{
+    const aksjonspunkt = {
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
-    }];
-    const getKodeverknavn = (kodeverk) => {
+    } as Aksjonspunkt;
+    const getKodeverknavn = (kodeverk: any) => {
       if (kodeverk.kode === 'DEK_TYPE') {
         return 'testdekning';
       }
@@ -248,7 +234,14 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       }
       return '';
     };
-    const initialValues = PerioderMedMedlemskapFaktaPanel.buildInitialValues(periode, medlemskapPerioder, soknad, aksjonspunkter, getKodeverknavn);
+    const initialValues = PerioderMedMedlemskapFaktaPanel.buildInitialValues(
+      periode as PeriodeMedId,
+      medlemskapPerioder as Medlemskap['medlemskapPerioder'],
+      // @ts-ignore
+      soknad as Soknad,
+      [aksjonspunkt],
+      getKodeverknavn,
+    );
 
     expect(initialValues).to.eql({
       fixedMedlemskapPerioder: [{

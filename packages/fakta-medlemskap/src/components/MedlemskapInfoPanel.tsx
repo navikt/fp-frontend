@@ -1,15 +1,12 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, useMemo } from 'react';
 
-import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, FagsakPerson, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
+} from '@fpsak-frontend/types';
 
-import medlemskapAksjonspunkterPropType from '../propTypes/medlemskapAksjonspunkterPropType';
-import medlemskapMedlemskaPropType from '../propTypes/medlemskapMedlemskapPropType';
-import medlemskapSoknadPropType from '../propTypes/medlemskapSoknadPropType';
-import medlemskapInntektArbeidYtelsePropType from '../propTypes/medlemskapInntektArbeidYtelsePropType';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
 import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
 
@@ -19,29 +16,51 @@ const {
 
 const avklarStartdatoAp = [AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, OVERSTYR_AVKLAR_STARTDATO];
 
-const hasOpen = (aksjonspunkt) => (aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode));
+const hasOpen = (aksjonspunkt: any) => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
 
-const skalKunneLoseUtenAksjonpunkter = (isForeldrepenger, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter) => (isForeldrepenger
+const skalKunneLoseUtenAksjonpunkter = (aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
+  hasOpenAksjonspunkter: boolean, isForeldrepenger?: boolean) => (isForeldrepenger
   && (aksjonspunkterMinusAvklarStartDato.length === 0 || !hasOpenAksjonspunkter));
 
-const harAksjonspunkterForAvklarStartdato = (aksjonspunkter) => aksjonspunkter
-  .find((ap) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN)
-|| aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
+const harAksjonspunkterForAvklarStartdato = (aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter
+  .find((ap: Aksjonspunkt) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN)
+|| aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
 
 const skalViseAvklarStartdatoPanel = (
-  aksjonspunkter,
-  isForeldrepenger,
-  aksjonspunkterMinusAvklarStartDato,
-  hasOpenAksjonspunkter,
+  aksjonspunkter: Aksjonspunkt[],
+  aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
+  hasOpenAksjonspunkter: boolean,
+  isForeldrepenger?: boolean,
 ) => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
-  || skalKunneLoseUtenAksjonpunkter(isForeldrepenger, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter));
+  || skalKunneLoseUtenAksjonpunkter(aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger));
+
+interface OwnProps {
+  hasOpenAksjonspunkter: boolean;
+  submittable: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  submitCallback: (...args: any[]) => any;
+  isForeldrepenger?: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingId: number;
+  behandlingVersjon: number;
+  fagsakPerson: FagsakPerson;
+  behandlingType: Kodeverk;
+  behandlingStatus: Kodeverk;
+  soknad: Soknad;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  medlemskap: Medlemskap;
+  behandlingPaaVent: boolean;
+  readOnlyForStartdatoForForeldrepenger: boolean;
+}
 
 /**
  * MedlemskapInfoPanel
  *
  * Presentasjonskomponent. Har ansvar for å vise faktapanelene for medlemskap.
  */
-const MedlemskapInfoPanel = ({
+const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
   hasOpenAksjonspunkter,
   submittable,
   aksjonspunkter,
@@ -61,14 +80,14 @@ const MedlemskapInfoPanel = ({
   behandlingPaaVent,
   readOnlyForStartdatoForForeldrepenger,
 }) => {
-  const avklarStartdatoAksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
-  const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
+  const avklarStartdatoAksjonspunkt = aksjonspunkter.find((ap: any) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+  const avklarStartdatoOverstyring = aksjonspunkter.find((ap: any) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
-    .filter((ap) => !avklarStartdatoAp.includes(ap.definisjon.kode)), [aksjonspunkter]);
+    .filter((ap: any) => !avklarStartdatoAp.includes(ap.definisjon.kode)), [aksjonspunkter]);
 
   return (
     <>
-      {skalViseAvklarStartdatoPanel(aksjonspunkter, isForeldrepenger, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter)
+      {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger)
         && (
           <>
             <StartdatoForForeldrepengerperiodenForm
@@ -109,29 +128,6 @@ const MedlemskapInfoPanel = ({
         )}
     </>
   );
-};
-
-MedlemskapInfoPanel.propTypes = {
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(medlemskapAksjonspunkterPropType.isRequired).isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isForeldrepenger: PropTypes.bool,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  fagsakPerson: PropTypes.shape().isRequired,
-  behandlingType: kodeverkObjektPropType.isRequired,
-  behandlingStatus: kodeverkObjektPropType.isRequired,
-  soknad: medlemskapSoknadPropType.isRequired,
-  inntektArbeidYtelse: medlemskapInntektArbeidYtelsePropType.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  medlemskap: medlemskapMedlemskaPropType.isRequired,
-  behandlingPaaVent: PropTypes.bool.isRequired,
-  readOnlyForStartdatoForForeldrepenger: PropTypes.bool.isRequired,
 };
 
 MedlemskapInfoPanel.defaultProps = {

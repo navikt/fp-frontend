@@ -11,6 +11,9 @@ type Soknad = Readonly<{
   omsorgsovertakelseDato?: string;
   farSokerType?: Kodeverk;
   barnetsAnkomstTilNorgeDato?: string;
+  oppgittFordeling: {
+    startDatoForPermisjon?: string;
+  };
 }>
 
 export default Soknad;

@@ -1,6 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -11,6 +10,7 @@ import {
   PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import { behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { FagsakPerson, Medlemskap } from '@fpsak-frontend/types';
 
 const headerTextCodes = [
   'InntektOgYtelserFaktaPanel.Person',
@@ -19,18 +19,38 @@ const headerTextCodes = [
   'InntektOgYtelserFaktaPanel.Amount',
 ];
 
+type CustomInntekt = {
+  person: string;
+  employer: string;
+  fom: string;
+  tom: string;
+  amount: number;
+}
+
+interface OwnProps {
+  inntekter?: CustomInntekt[];
+}
+
+interface StaticFunctions {
+  buildInitialValues?: (person: any, inntekt: Medlemskap['inntekt']) => {
+    inntekter: CustomInntekt[];
+  },
+}
+
 /**
  * InntektOgYtelserFaktaPanel
  *
  * Presentasjonskomponent. Er tilknyttet faktapanelet for medlemskap.
  * Viser inntektene relevante for søker. ReadOnly.
  */
-const InntektOgYtelserFaktaPanelImpl = ({ inntekter, intl }) => {
+const InntektOgYtelserFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+  inntekter,
+}) => {
+  const intl = useIntl();
   if (!inntekter || inntekter.length === 0) {
     return (
       <Ekspanderbartpanel
         tittel={intl.formatMessage({ id: 'InntektOgYtelserFaktaPanel.ApplicationInformation' })}
-        tittelprops="element"
         border
       >
         <Normaltekst>
@@ -43,11 +63,10 @@ const InntektOgYtelserFaktaPanelImpl = ({ inntekter, intl }) => {
   return (
     <Ekspanderbartpanel
       tittel={intl.formatMessage({ id: 'InntektOgYtelserFaktaPanel.ApplicationInformation' })}
-      tittelprops="element"
       border
     >
       <Table headerTextCodes={headerTextCodes}>
-        {inntekter.map((inntekt) => {
+        {inntekter.map((inntekt: any) => {
           const key = inntekt.person + inntekt.employer + inntekt.fom + inntekt.tom + inntekt.amount;
           return (
             <TableRow key={key} id={key}>
@@ -71,29 +90,30 @@ const InntektOgYtelserFaktaPanelImpl = ({ inntekter, intl }) => {
   );
 };
 
-InntektOgYtelserFaktaPanelImpl.propTypes = {
-  inntekter: PropTypes.arrayOf(PropTypes.shape()),
-  intl: PropTypes.shape().isRequired,
-};
-
 InntektOgYtelserFaktaPanelImpl.defaultProps = {
   inntekter: [],
 };
 
-const mapStateToProps = (state, ownProps) => ({
+interface PureOwnProps {
+  id: number;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   inntekter: behandlingFormValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'inntekter'),
 });
 
-const InntektOgYtelserFaktaPanel = connect(mapStateToProps)(injectIntl(InntektOgYtelserFaktaPanelImpl));
+const InntektOgYtelserFaktaPanel = connect(mapStateToProps)(InntektOgYtelserFaktaPanelImpl);
 
-const sortInntekter = (inntekt1, inntekt2) => {
+const sortInntekter = (inntekt1: CustomInntekt, inntekt2: CustomInntekt) => {
   const nameDiff = inntekt1.person.localeCompare(inntekt2.person);
   return nameDiff === 0 ? moment(inntekt2.fom, ISO_DATE_FORMAT).diff(moment(inntekt1.fom, ISO_DATE_FORMAT)) : nameDiff;
 };
 
-InntektOgYtelserFaktaPanel.buildInitialValues = (person, inntekt) => {
+InntektOgYtelserFaktaPanel.buildInitialValues = (person: FagsakPerson, inntekt: Medlemskap['inntekt']): { inntekter: CustomInntekt[] } => {
   if (inntekt === null) {
-    return [];
+    return {} as { inntekter: CustomInntekt[] };
   }
   const inntekter = inntekt
     .map((i) => ({
@@ -103,8 +123,8 @@ InntektOgYtelserFaktaPanel.buildInitialValues = (person, inntekt) => {
       tom: i.tom,
       amount: i.belop,
     }));
-  const inntekterSoker = inntekter.filter((i) => i.person === person.navn).sort(sortInntekter);
-  const inntekterOther = inntekter.filter((i) => i.person !== person.navn).sort(sortInntekter);
+  const inntekterSoker = inntekter.filter((i: CustomInntekt) => i.person === person.navn).sort(sortInntekter);
+  const inntekterOther = inntekter.filter((i: CustomInntekt) => i.person !== person.navn).sort(sortInntekter);
 
   return {
     inntekter: inntekterSoker.concat(inntekterOther),

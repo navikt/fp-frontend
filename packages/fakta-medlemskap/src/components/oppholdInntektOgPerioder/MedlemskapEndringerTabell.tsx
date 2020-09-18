@@ -1,25 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
 
 import {
   DateLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import { behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { MedlemPeriode } from '@fpsak-frontend/types';
 
 const headerTextCodes = [
   'MedlemskapEndringerTabell.GjeldeneFom',
   'MedlemskapEndringerTabell.Opplysning',
 ];
 
-const MedlemskapEndringerTabellImpl = ({
+type PeriodeMedId = MedlemPeriode & { id: number; }
+
+interface OwnProps {
+  selectedId?: number;
+  velgPeriodeCallback: (_p, id: number, periode: MedlemPeriode) => void;
+  perioder?: PeriodeMedId[];
+}
+
+const MedlemskapEndringerTabell: FunctionComponent<OwnProps> = ({
   perioder,
   velgPeriodeCallback,
   selectedId,
 }) => (
   <Table headerTextCodes={headerTextCodes}>
-    {perioder.map((periode) => (
+    {perioder.map((periode: PeriodeMedId) => (
       <TableRow
         key={periode.id}
         id={periode.id}
@@ -40,26 +47,22 @@ const MedlemskapEndringerTabellImpl = ({
   </Table>
 );
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+MedlemskapEndringerTabell.defaultProps = {
+  perioder: [],
+};
+
+interface PureOwnProps {
+  behandlingId: number,
+  behandlingVersjon: number,
+}
+
+const mapStateToPropsFactory = (initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const perioder = (behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(initialState, 'perioder') || [])
-    .sort((a, b) => a.vurderingsdato.localeCompare(b.vurderingsdato));
+    .sort((a: PeriodeMedId, b: PeriodeMedId) => a.vurderingsdato.localeCompare(b.vurderingsdato));
   return () => ({
     perioder,
   });
 };
 
-const MedlemskapEndringerTabell = connect(mapStateToPropsFactory)(injectIntl(MedlemskapEndringerTabellImpl));
-
-MedlemskapEndringerTabellImpl.propTypes = {
-  selectedId: PropTypes.string,
-  velgPeriodeCallback: PropTypes.func.isRequired,
-  perioder: PropTypes.arrayOf(PropTypes.shape()),
-};
-
-MedlemskapEndringerTabellImpl.defaultProps = {
-  perioder: [],
-  selectedId: undefined,
-};
-
-export default MedlemskapEndringerTabell;
+export default connect(mapStateToPropsFactory)(MedlemskapEndringerTabell);

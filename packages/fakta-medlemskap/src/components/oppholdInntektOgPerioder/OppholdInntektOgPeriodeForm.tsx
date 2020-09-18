@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
@@ -13,20 +13,39 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
+import { Aksjonspunkt, KodeverkMedNavn, MedlemPeriode } from '@fpsak-frontend/types';
 
 import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import PerioderMedMedlemskapFaktaPanel from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel from './StatusForBorgerFaktaPanel';
-import FortsattMedlemskapFaktaPanel from './FortsattMedlemskapFaktaPanel';
 
 const {
   AVKLAR_OPPHOLDSRETT, AVKLAR_LOVLIG_OPPHOLD,
 } = aksjonspunktCodes;
 
-const hasAksjonspunkt = (aksjonspunktCode, aksjonspunkter) => aksjonspunkter.some((ap) => ap === aksjonspunktCode);
+const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: string[]) => aksjonspunkter
+  .some((ap: string) => ap === aksjonspunktCode);
 
-export const OppholdInntektOgPeriodeForm = ({
+type PeriodeMedId = MedlemPeriode & { id: number; }
+
+interface OwnProps {
+  selectedId?: string;
+  readOnly: boolean;
+  updateOppholdInntektPeriode: (...args: any[]) => any;
+  submittable: boolean;
+  valgtPeriode: PeriodeMedId;
+  initialValues: {
+    begrunnelse?: string;
+  };
+  periodeResetCallback: (...args: any[]) => any;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+export const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   valgtPeriode,
   readOnly,
   initialValues,
@@ -73,8 +92,6 @@ export const OppholdInntektOgPeriodeForm = ({
     <VerticalSpacer twentyPx />
     { valgtPeriode.aksjonspunkter && valgtPeriode.aksjonspunkter.length > 0 && (
       <FaktaBegrunnelseTextField
-        id={valgtPeriode.id}
-        isDirty={formProps.dirty}
         isReadOnly={readOnly}
         isSubmittable={submittable}
         hasBegrunnelse={!!initialValues.begrunnelse}
@@ -82,7 +99,7 @@ export const OppholdInntektOgPeriodeForm = ({
     )}
 
     <VerticalSpacer twentyPx />
-    <FlexContainer fluid>
+    <FlexContainer>
       <FlexRow>
         <FlexColumn>
           <Hovedknapp
@@ -108,46 +125,44 @@ export const OppholdInntektOgPeriodeForm = ({
   </BorderBox>
 );
 
-OppholdInntektOgPeriodeForm.propTypes = {
-  selectedId: PropTypes.string,
-  readOnly: PropTypes.bool.isRequired,
-  updateOppholdInntektPeriode: PropTypes.func.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  valgtPeriode: PropTypes.shape().isRequired,
-  initialValues: PropTypes.shape().isRequired,
-  periodeResetCallback: PropTypes.func.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
-
 OppholdInntektOgPeriodeForm.defaultProps = {
   selectedId: undefined,
 };
 
-const transformValues = (values) => ({
+const transformValues = (values: any) => ({
   begrunnelse: values.begrunnelse,
   ...values,
 });
 
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  valgtPeriode: PeriodeMedId;
+  aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submittable: boolean;
+}
+
 const buildInitialValues = createSelector([
-  (state, ownProps) => ownProps.valgtPeriode,
-  (state, ownProps) => ownProps.aksjonspunkter,
-  (state, ownProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'soknad'),
-  (state, ownProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'person'),
-  (state, ownProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'inntekter'),
-  (state, ownProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm', ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-    'medlemskapPerioder'),
-  (state, ownProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'gjeldendeFom'),
-  (state, ownProps) => ownProps.alleKodeverk,
+  (_state, ownProps: PureOwnProps) => ownProps.valgtPeriode,
+  (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'soknad'),
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'person'),
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'inntekter'),
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'medlemskapPerioder'),
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'gjeldendeFom'),
+  (_state, ownProps: PureOwnProps) => ownProps.alleKodeverk,
 ],
 (valgtPeriode, alleAksjonspunkter, soknad, person, inntekter, medlemskapPerioder, gjeldendeFom, alleKodeverk) => {
   const aksjonspunkter = alleAksjonspunkter
-    .filter((ap) => valgtPeriode.aksjonspunkter.includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)
-    .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+    .filter((ap: Aksjonspunkt) => valgtPeriode.aksjonspunkter
+      .includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)
+    .filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
   let oppholdValues = {};
   let confirmValues = {};
   if (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) {
@@ -162,15 +177,14 @@ const buildInitialValues = createSelector([
     ...InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekter),
     ...OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, valgtPeriode, aksjonspunkter),
     ...PerioderMedMedlemskapFaktaPanel.buildInitialValues(valgtPeriode, medlemskapPerioder, soknad, aksjonspunkter, kodeverkFn),
-    ...FortsattMedlemskapFaktaPanel.buildInitialValues(gjeldendeFom),
     ...oppholdValues,
     ...confirmValues,
   };
 });
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.updateOppholdInntektPeriode(transformValues(values));
-  return (state, ownProps) => {
+const mapStateToPropsFactory = (initialState: any, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.updateOppholdInntektPeriode(transformValues(values));
+  return (state: any, ownProps: PureOwnProps) => {
     const { valgtPeriode, submittable } = ownProps;
     const formName = `OppholdInntektOgPeriodeForm-${valgtPeriode.id}`;
     return {
@@ -182,6 +196,7 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   };
 };
 
-export default connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+// @ts-ignore Dynamisk form-navn
+export default connect(mapStateToPropsFactory)(behandlingForm({
   enableReinitialize: true,
-})(OppholdInntektOgPeriodeForm)));
+})(OppholdInntektOgPeriodeForm));

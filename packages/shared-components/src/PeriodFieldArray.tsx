@@ -1,9 +1,12 @@
+import { FieldArrayFieldsProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
+
 import Image from './Image';
 import VerticalSpacer from './VerticalSpacer';
 
@@ -38,7 +41,7 @@ const showErrorMessage = (meta) => meta && meta.error && (meta.dirty || meta.sub
 
 interface OwnProps {
   children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
-  fields: any[];
+  fields: FieldArrayFieldsProps<any>;
   meta?: {
     error?: {
       id: string;

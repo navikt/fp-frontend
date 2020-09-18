@@ -1,13 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import {
+  Aksjonspunkt, Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, FagsakPerson,
+} from '@fpsak-frontend/types';
+
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
-import medlemskapAksjonspunkterPropType from './propTypes/medlemskapAksjonspunkterPropType';
-import medlemskapMedlemskapPropType from './propTypes/medlemskapMedlemskapPropType';
-import medlemskapBehandlingPropType from './propTypes/medlemskapBehandlingPropType';
-import medlemskapSoknadPropType from './propTypes/medlemskapSoknadPropType';
-import medlemskapInntektArbeidYtelsePropType from './propTypes/medlemskapInntektArbeidYtelsePropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -17,7 +15,24 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const MedlemskapFaktaIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  medlemskap: Medlemskap;
+  soknad: Soknad;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  aksjonspunkter: Aksjonspunkt[];
+  fagsakPerson: FagsakPerson;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+  isForeldrepengerFagsak: boolean;
+  readOnly: boolean;
+  readOnlyForStartdatoForForeldrepenger: boolean;
+  harApneAksjonspunkter: boolean;
+  submittable: boolean;
+}
+
+const MedlemskapFaktaIndex: FunctionComponent<OwnProps> = ({
   behandling,
   soknad,
   inntektArbeidYtelse,
@@ -56,24 +71,5 @@ const MedlemskapFaktaIndex = ({
     />
   </RawIntlProvider>
 );
-
-MedlemskapFaktaIndex.propTypes = {
-  behandling: medlemskapBehandlingPropType.isRequired,
-  medlemskap: medlemskapMedlemskapPropType.isRequired,
-  soknad: medlemskapSoknadPropType.isRequired,
-  inntektArbeidYtelse: medlemskapInntektArbeidYtelsePropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(medlemskapAksjonspunkterPropType).isRequired,
-  fagsakPerson: PropTypes.shape().isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isForeldrepengerFagsak: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  readOnlyForStartdatoForForeldrepenger: PropTypes.bool.isRequired,
-  harApneAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-};
 
 export default MedlemskapFaktaIndex;
