@@ -7,6 +7,7 @@ import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-samme
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
+import { FamilieHendelseSamling, Personopplysninger, Soknad } from '@fpsak-frontend/types';
 
 import { FodselInfoPanelImpl } from './FodselInfoPanel';
 import SjekkFodselDokForm from './SjekkFodselDokForm';
@@ -18,6 +19,7 @@ const soknad = {
   antallBarn: 1,
   soknadType: {
     kode: soknadType.FODSEL,
+    kodeverk: '',
   },
 };
 const alleMerknaderFraBeslutter = {};
@@ -32,11 +34,11 @@ describe('<FodselInfoPanel>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -55,13 +57,13 @@ describe('<FodselInfoPanel>', () => {
       isFormSubmitting={false}
       isDirty={false}
       dispatch={sinon.spy}
-      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD }}
-      soknad={soknad}
+      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
+      soknad={soknad as Soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      familiehendelse={familiehendelse}
+      familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-      personopplysninger={personopplysninger}
+      personopplysninger={personopplysninger as Personopplysninger}
     />);
 
     expect(wrapper.find(SjekkFodselDokForm)).has.length(1);
@@ -72,11 +74,11 @@ describe('<FodselInfoPanel>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.TERMINBEKREFTELSE,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -95,13 +97,13 @@ describe('<FodselInfoPanel>', () => {
       isFormSubmitting={false}
       isDirty={false}
       dispatch={sinon.spy}
-      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD }}
-      soknad={soknad}
+      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
+      soknad={soknad as Soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      familiehendelse={familiehendelse}
+      familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-      personopplysninger={personopplysninger}
+      personopplysninger={personopplysninger as Personopplysninger}
     />);
 
     expect(wrapper.find(TermindatoFaktaForm)).has.length(1);
@@ -119,13 +121,13 @@ describe('<FodselInfoPanel>', () => {
       isFormSubmitting={false}
       isDirty={false}
       dispatch={sinon.spy}
-      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD }}
-      soknad={soknad}
+      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
+      soknad={soknad as Soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      familiehendelse={familiehendelse}
+      familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-      personopplysninger={personopplysninger}
+      personopplysninger={personopplysninger as Personopplysninger}
     />);
 
     expect(wrapper.find(FodselSammenligningIndex)).has.length(1);

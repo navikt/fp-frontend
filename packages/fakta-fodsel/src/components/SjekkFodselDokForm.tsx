@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray, formPropTypes } from 'redux-form';
+import { FieldArray, InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Column } from 'nav-frontend-grid';
 
@@ -16,6 +15,9 @@ import {
 } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Kodeverk, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import avklartBarnFieldArray from './AvklartBarnFieldArray';
 
@@ -25,7 +27,7 @@ export const AVKLARTE_BARN_FORM_NAME_PREFIX = 'avklartBarn';
 
 export const avklarteBarnFieldArrayName = 'avklartBarn';
 
-const createNewChildren = (antallBarnFraSoknad) => {
+const createNewChildren = (antallBarnFraSoknad: number) => {
   let antallBarn = antallBarnFraSoknad;
   if (antallBarn === 0 || !antallBarn) {
     antallBarn = 1;
@@ -38,20 +40,37 @@ const createNewChildren = (antallBarnFraSoknad) => {
   return childrenArray;
 };
 
+interface OwnProps {
+  readOnly: boolean;
+  dokumentasjonForeligger?: boolean;
+  avklartBarn?: FamilieHendelse['avklartBarn'];
+  dokumentasjonForeliggerIsEdited?: boolean;
+  submittable: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingType: Kodeverk;
+  termindato?: string;
+  vedtaksDatoSomSvangerskapsuke?: string;
+  soknad: Soknad;
+  soknadOriginalBehandling: Soknad;
+  familiehendelseOriginalBehandling: FamilieHendelseSamling;
+  initialValues: {
+    begrunnelse: string;
+  };
+}
+
 /**
  * FodselInfoPanel
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
-export const SjekkFodselDokForm = ({
+export const SjekkFodselDokForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly,
   dokumentasjonForeliggerIsEdited,
   dokumentasjonForeligger,
-  dirty,
   initialValues,
   submittable,
   avklartBarn,
-  behandlingTypeKode,
+  behandlingType,
   termindato,
   vedtaksDatoSomSvangerskapsuke,
   soknad,
@@ -61,7 +80,7 @@ export const SjekkFodselDokForm = ({
 }) => (
   <>
     <FodselSammenligningIndex
-      behandlingsTypeKode={behandlingTypeKode}
+      behandlingsTypeKode={behandlingType.kode}
       avklartBarn={avklartBarn}
       termindato={termindato}
       vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
@@ -70,7 +89,6 @@ export const SjekkFodselDokForm = ({
       familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     />
     <FaktaGruppe
-      aksjonspunktCode={aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL}
       titleCode="SjekkFodselDokForm.DokumentasjonAvFodsel"
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]}
     >
@@ -87,7 +105,7 @@ export const SjekkFodselDokForm = ({
           <Column xs="12">
             <ArrowBox>
               <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
-              <FieldArray
+              <FieldArray<any>
                 name={avklarteBarnFieldArrayName}
                 component={avklartBarnFieldArray}
                 readOnly={readOnly}
@@ -99,31 +117,18 @@ export const SjekkFodselDokForm = ({
       )}
     </FaktaGruppe>
     <VerticalSpacer sixteenPx />
-    <FaktaBegrunnelseTextField isDirty={dirty} isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
+    <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
   </>
 );
 
-SjekkFodselDokForm.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  dokumentasjonForeligger: PropTypes.bool,
-  avklartBarn: PropTypes.arrayOf(PropTypes.shape()),
-  dokumentasjonForeliggerIsEdited: PropTypes.bool,
-  submittable: PropTypes.bool.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  ...formPropTypes,
-};
-
 SjekkFodselDokForm.defaultProps = {
-  dokumentasjonForeligger: undefined,
   dokumentasjonForeliggerIsEdited: false,
   avklartBarn: [],
 };
 
-const addIsBarnDodt = (avklarteBarn) => {
-  const avklarteBarnMedDodFlagg = [];
-  avklarteBarn.forEach((barn, index) => {
+const addIsBarnDodt = (avklarteBarn: FamilieHendelse['avklartBarn']) => {
+  const avklarteBarnMedDodFlagg: any = [];
+  avklarteBarn.forEach((barn: any, index: any) => {
     avklarteBarnMedDodFlagg.push(barn);
     if (barn.dodsdato) {
       avklarteBarnMedDodFlagg[index].isBarnDodt = true;
@@ -132,9 +137,9 @@ const addIsBarnDodt = (avklarteBarn) => {
   return avklarteBarnMedDodFlagg;
 };
 
-const allaBarn = (avklarteBarn) => {
-  const komplettBarn = [];
-  avklarteBarn.forEach((barn, index) => {
+const allaBarn = (avklarteBarn: FamilieHendelse['avklartBarn']) => {
+  const komplettBarn: any = [];
+  avklarteBarn.forEach((barn: any, index: any) => {
     komplettBarn.push(barn);
     if (!barn.isBarnDodt) {
       komplettBarn[index].dodsdato = null;
@@ -143,10 +148,21 @@ const allaBarn = (avklarteBarn) => {
   return komplettBarn;
 };
 
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  aksjonspunkt: Aksjonspunkt;
+  soknad: Soknad;
+  personopplysninger: Personopplysninger;
+  avklartBarn: FamilieHendelse['avklartBarn'];
+  submitHandler: (values: any) => any;
+}
+
 export const buildInitialValues = createSelector([
-  (state, ownProps) => ownProps.gjeldendeFamiliehendelse,
-  (state, ownProps) => ownProps.aksjonspunkt,
-  (state, ownProps) => ownProps.soknad.antallBarn],
+  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkt,
+  (ownProps: PureOwnProps) => ownProps.soknad.antallBarn],
 (familiehendelse, aksjonspunkt, soknadAntallBarn) => ({
   dokumentasjonForeligger: familiehendelse.dokumentasjonForeligger !== null
     ? familiehendelse.dokumentasjonForeligger : undefined,
@@ -158,22 +174,22 @@ export const buildInitialValues = createSelector([
 }));
 
 const getEditedStatus = createSelector(
-  [(state, ownProps) => ownProps.soknad,
-    (state, ownProps) => ownProps.gjeldendeFamiliehendelse,
-    (state, ownProps) => ownProps.personopplysninger],
+  [(ownProps: PureOwnProps) => ownProps.soknad,
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
+    (ownProps: PureOwnProps) => ownProps.personopplysninger],
   (soknad, familiehendelse, personopplysning) => (
-    isFieldEdited(soknad || {}, familiehendelse || {}, personopplysning || {})
+    isFieldEdited(soknad, familiehendelse, personopplysning)
   ),
 );
 
-const getAntallBarn = (brukAntallBarnITps, antallBarnLagret, antallBarnFraSoknad, antallBarnFraTps) => {
+const getAntallBarn = (brukAntallBarnITps: boolean, antallBarnLagret: number, antallBarnFraSoknad: number, antallBarnFraTps: number) => {
   if (antallBarnFraTps === 0) {
     return antallBarnLagret;
   }
   return brukAntallBarnITps ? antallBarnFraTps : antallBarnFraSoknad;
 };
 
-const transformValues = (values, antallBarnFraSoknad, antallBarnFraTps, fodselInfo) => ({
+const transformValues = (values: any, antallBarnFraSoknad: number, antallBarnFraTps: number, fodselInfo: FamilieHendelse['avklartBarn']) => ({
   kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
   fodselsdato: values.fodselsdato,
   antallBarnFodt: values.dokumentasjonForeligger
@@ -186,22 +202,21 @@ const transformValues = (values, antallBarnFraSoknad, antallBarnFraTps, fodselIn
 
 export const sjekkFodselDokForm = 'SjekkFodselDokForm';
 
-const mapStateToPropsFactory = (initialState, staticOwnProps) => {
+const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => {
   const fodselInfo = staticOwnProps.gjeldendeFamiliehendelse.avklartBarn;
-  const onSubmit = (values) => staticOwnProps.submitHandler(transformValues(values,
+  const onSubmit = (values: any) => staticOwnProps.submitHandler(transformValues(values,
     staticOwnProps.soknad.antallBarn, staticOwnProps.avklartBarn.length, fodselInfo));
-  return (state, ownProps) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const {
-      behandlingId, behandlingVersjon, behandlingType, gjeldendeFamiliehendelse,
+      behandlingId, behandlingVersjon, gjeldendeFamiliehendelse,
     } = ownProps;
     return {
       onSubmit,
-      initialValues: buildInitialValues(state, ownProps),
+      initialValues: buildInitialValues(ownProps),
       fodselInfo,
       avklartBarn: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'avklartBarn'),
-      dokumentasjonForeliggerIsEdited: getEditedStatus(state, ownProps).dokumentasjonForeligger,
+      dokumentasjonForeliggerIsEdited: getEditedStatus(ownProps).dokumentasjonForeligger,
       dokumentasjonForeligger: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'dokumentasjonForeligger'),
-      behandlingTypeKode: behandlingType.kode,
       termindato: gjeldendeFamiliehendelse.termindato,
       vedtaksDatoSomSvangerskapsuke: gjeldendeFamiliehendelse.vedtaksDatoSomSvangerskapsuke,
     };

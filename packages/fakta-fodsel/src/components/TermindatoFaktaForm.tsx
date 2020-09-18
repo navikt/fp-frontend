@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { formPropTypes } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { InjectedFormProps } from 'redux-form';
 
 import {
   DateLabel, VerticalSpacer, FaktaGruppe,
@@ -20,24 +19,42 @@ import {
 } from '@fpsak-frontend/utils';
 import { FaktaBegrunnelseTextField, isFieldEdited } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import styles from './termindatoFaktaForm.less';
 
 const minValue1 = minValue(1);
 const maxValue9 = maxValue(9);
 
+interface OwnProps {
+  readOnly: boolean;
+  isTerminDatoEdited?: boolean;
+  isUtstedtDatoEdited?: boolean;
+  isForTidligTerminbekreftelse: boolean;
+  isAntallBarnEdited?: boolean;
+  fodselsdatoTps?: string;
+  antallBarnTps?: number;
+  isOverridden?: boolean;
+  submittable: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  initialValues: {
+    begrunnelse?: string;
+  };
+}
+
 /**
  * TermindatoFaktaForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
  */
-export const TermindatoFaktaForm = ({
+export const TermindatoFaktaForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly,
   isTerminDatoEdited,
   isUtstedtDatoEdited,
   isForTidligTerminbekreftelse,
   isAntallBarnEdited,
-  dirty,
   initialValues,
   fodselsdatoTps,
   antallBarnTps,
@@ -47,7 +64,6 @@ export const TermindatoFaktaForm = ({
 }) => (
   <>
     <FaktaGruppe
-      aksjonspunktCode={aksjonspunktCodes.TERMINBEKREFTELSE}
       titleCode="TermindatoFaktaForm.ApplicationInformation"
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.TERMINBEKREFTELSE]}
     >
@@ -94,17 +110,17 @@ export const TermindatoFaktaForm = ({
           <Column xs="6"><Normaltekst><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Normaltekst></Column>
         </Row>
         <Row>
-          <Column xs="6" name="tpsFodseldato">
+          <Column xs="6">
             <Normaltekst><DateLabel dateString={fodselsdatoTps} /></Normaltekst>
           </Column>
-          <Column xs="6" name="tpsAntallBarn">
+          <Column xs="6">
             <Normaltekst>{antallBarnTps}</Normaltekst>
           </Column>
         </Row>
       </FaktaGruppe>
       )}
     <VerticalSpacer sixteenPx />
-    <FaktaBegrunnelseTextField isDirty={dirty} isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
+    <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
     {isForTidligTerminbekreftelse && (
       <>
         <VerticalSpacer sixteenPx />
@@ -118,32 +134,28 @@ export const TermindatoFaktaForm = ({
   </>
 );
 
-TermindatoFaktaForm.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  isTerminDatoEdited: PropTypes.bool,
-  isUtstedtDatoEdited: PropTypes.bool,
-  isForTidligTerminbekreftelse: PropTypes.bool.isRequired,
-  isAntallBarnEdited: PropTypes.bool,
-  fodselsdatoTps: PropTypes.string,
-  antallBarnTps: PropTypes.number,
-  isOverridden: PropTypes.bool,
-  submittable: PropTypes.bool.isRequired,
-  ...formPropTypes,
-};
-
 TermindatoFaktaForm.defaultProps = {
   isTerminDatoEdited: false,
   isUtstedtDatoEdited: false,
   isAntallBarnEdited: false,
-  fodselsdatoTps: undefined,
   antallBarnTps: 0,
   isOverridden: false,
 };
 
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  soknad: Soknad;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  aksjonspunkt: Aksjonspunkt;
+  personopplysninger: Personopplysninger;
+  submitHandler: (values: any) => any;
+}
+
 export const buildInitialValues = createSelector([
-  (state, ownProps) => ownProps.soknad,
-  (state, ownProps) => ownProps.gjeldendeFamiliehendelse,
-  (state, ownProps) => ownProps.aksjonspunkt], (
+  (ownProps: PureOwnProps) => ownProps.soknad,
+  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkt], (
   soknad, familiehendelse, aksjonspunkt,
 ) => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
@@ -155,10 +167,10 @@ export const buildInitialValues = createSelector([
   };
 });
 
-const erTerminbekreftelseUtstedtForTidlig = (utstedtdato, termindato) => utstedtdato !== undefined && termindato !== undefined
+const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string) => utstedtdato !== undefined && termindato !== undefined
 && !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(3, 'days'));
 
-const transformValues = (values) => ({
+const transformValues = (values: any) => ({
   kode: aksjonspunktCodes.TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato,
   termindato: values.termindato,
@@ -169,30 +181,30 @@ const transformValues = (values) => ({
 export const termindatoFaktaFormName = 'TermindatoFaktaForm';
 
 const getEditedStatus = createSelector(
-  [(state, ownProps) => ownProps.soknad,
-    (state, ownProps) => ownProps.gjeldendeFamiliehendelse,
-    (state, ownProps) => ownProps.personopplysninger],
+  [(ownProps: PureOwnProps) => ownProps.soknad,
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
+    (ownProps: PureOwnProps) => ownProps.personopplysninger],
   (soknad, familiehendelse, personopplysning) => (
-    isFieldEdited(soknad || {}, familiehendelse || {}, personopplysning || {})
+    isFieldEdited(soknad, familiehendelse, personopplysning)
   ),
 );
 
-const mapStateToPropsFactory = (initialState, staticOwnProps) => {
+const mapStateToPropsFactory = (_initialState, staticOwnProps:PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = staticOwnProps;
-  const onSubmit = (values) => staticOwnProps.submitHandler(transformValues(values));
-  return (state, ownProps) => {
+  const onSubmit = (values: any) => staticOwnProps.submitHandler(transformValues(values));
+  return (state: any, ownProps: PureOwnProps) => {
     const termindato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'termindato');
     const utstedtdato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'utstedtdato');
-    const editedStatus = getEditedStatus(state, ownProps);
+    const editedStatus = getEditedStatus(ownProps);
     return {
       onSubmit,
-      initialValues: buildInitialValues(state, ownProps),
+      initialValues: buildInitialValues(ownProps),
       isTerminDatoEdited: editedStatus.termindato,
       isUtstedtDatoEdited: editedStatus.utstedtdato,
       isForTidligTerminbekreftelse: erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato),
       isAntallBarnEdited: editedStatus.antallBarn,
-      fodselsdatoTps: ownProps.gjeldendeFamiliehendelse.fodselsdato,
-      antallBarnTps: ownProps.gjeldendeFamiliehendelse.antallBarnFodsel,
+      fodselsdatoTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length > 0 ? ownProps.gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined,
+      antallBarnTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length,
       isOverridden: ownProps.gjeldendeFamiliehendelse.erOverstyrt,
     };
   };

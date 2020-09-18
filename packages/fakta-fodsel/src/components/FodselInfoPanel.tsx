@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { submit as reduxSubmit } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { aksjonspunktPropType, kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
+import {
+  Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Kodeverk, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
-import fodselPersonopplysningerPropType from '../propTypes/fodselPersonopplysningerPropType';
-import fodselFamilieHendelsePropType from '../propTypes/fodselFamilieHendelsePropType';
-import fodselSoknadPropType from '../propTypes/fodselSoknadPropType';
 import TermindatoFaktaForm, { termindatoFaktaFormName } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { sjekkFodselDokForm } from './SjekkFodselDokForm';
 import SykdomPanel, { sykdomPanelName } from './SykdomPanel';
@@ -22,7 +20,7 @@ const {
   TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
 } = aksjonspunktCodes;
 
-const getHelpTexts = (aksjonspunkter) => {
+const getHelpTexts = (aksjonspunkter: any) => {
   const helpTexts = [];
   if (hasAksjonspunkt(VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT, aksjonspunkter)) {
     helpTexts.push(<FormattedMessage key="VurderVilkarForSykdom" id="FodselInfoPanel.VurderVilkarForSykdom" />);
@@ -38,14 +36,40 @@ const getHelpTexts = (aksjonspunkter) => {
 
 const formNames = [sykdomPanelName, termindatoFaktaFormName, sjekkFodselDokForm];
 
+interface OwnProps {
+  aksjonspunkter: Aksjonspunkt[];
+  hasOpenAksjonspunkter: boolean;
+  submittable: boolean;
+  readOnly: boolean;
+  formPrefix: string;
+  dispatch: (...args: any[]) => any;
+  submitCallback: (...args: any[]) => any;
+  avklartBarn?: FamilieHendelse['avklartBarn'];
+  termindato?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  soknad: Soknad;
+  soknadOriginalBehandling?: Soknad;
+  familiehendelseOriginalBehandling?: FamilieHendelseSamling;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  familiehendelse: FamilieHendelseSamling;
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingType: Kodeverk;
+  personopplysninger: Personopplysninger;
+}
+
 /**
  * FodselInfoPanel
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Fødselsvilkåret.
  */
-export class FodselInfoPanelImpl extends Component {
-  constructor() {
-    super();
+export class FodselInfoPanelImpl extends Component<OwnProps> {
+  static defaultProps: any;
+
+  submittedAksjonspunkter?: any;
+
+  constructor(props) {
+    super(props);
 
     this.submittedAksjonspunkter = {};
 
@@ -53,22 +77,22 @@ export class FodselInfoPanelImpl extends Component {
     this.getSubmitFunction = this.getSubmitFunction.bind(this);
   }
 
-  getSubmitFunction(dispatch, formPrefix) {
-    return (e) => {
+  getSubmitFunction(dispatch: any, formPrefix: any) {
+    return (e: any) => {
       this.submittedAksjonspunkter = {};
       formNames.forEach((formName) => dispatch(reduxSubmit(`${formPrefix}.${formName}`)));
       e.preventDefault();
     };
   }
 
-  submitHandler(values) {
+  submitHandler(values: any) {
     this.submittedAksjonspunkter = {
       ...this.submittedAksjonspunkter,
       [values.kode]: values,
     };
     const { aksjonspunkter, submitCallback } = this.props;
 
-    return aksjonspunkter.every((ap) => this.submittedAksjonspunkter[ap.definisjon.kode])
+    return aksjonspunkter.every((ap: any) => this.submittedAksjonspunkter[ap.definisjon.kode])
       ? submitCallback(Object.values(this.submittedAksjonspunkter))
       : undefined;
   }
@@ -103,7 +127,7 @@ export class FodselInfoPanelImpl extends Component {
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}
               readOnly={readOnly}
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT)}
+              aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT)}
               submitHandler={this.submitHandler}
               morForSykVedFodsel={familiehendelse.gjeldende.morForSykVedFodsel}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -113,7 +137,7 @@ export class FodselInfoPanelImpl extends Component {
             <TermindatoFaktaForm
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === TERMINBEKREFTELSE)}
+              aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === TERMINBEKREFTELSE)}
               readOnly={readOnly}
               submittable={submittable}
               isAksjonspunktOpen={hasOpenAksjonspunkter}
@@ -129,7 +153,7 @@ export class FodselInfoPanelImpl extends Component {
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}
               behandlingType={behandlingType}
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL)}
+              aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL)}
               readOnly={readOnly}
               submittable={submittable}
               isAksjonspunktOpen={hasOpenAksjonspunkter}
@@ -174,38 +198,19 @@ export class FodselInfoPanelImpl extends Component {
   }
 }
 
-FodselInfoPanelImpl.propTypes = {
-  aksjonspunkter: PropTypes.arrayOf(aksjonspunktPropType.isRequired).isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  formPrefix: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  avklartBarn: PropTypes.arrayOf(PropTypes.shape()),
-  termindato: PropTypes.string,
-  vedtaksDatoSomSvangerskapsuke: PropTypes.number,
-  soknad: fodselSoknadPropType.isRequired,
-  soknadOriginalBehandling: fodselSoknadPropType,
-  familiehendelseOriginalBehandling: fodselFamilieHendelsePropType,
-  alleMerknaderFraBeslutter: PropTypes.shape().isRequired,
-  familiehendelse: fodselFamilieHendelsePropType.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  behandlingType: kodeverkObjektPropType.isRequired,
-  personopplysninger: fodselPersonopplysningerPropType.isRequired,
-};
-
 FodselInfoPanelImpl.defaultProps = {
-  soknadOriginalBehandling: undefined,
-  familiehendelseOriginalBehandling: undefined,
   avklartBarn: [],
-  termindato: undefined,
 };
 
-const nullSafe = (value) => (value || {});
+const nullSafe = (value: any) => value || {};
 
-const mapStateToProps = (state, ownProps) => ({
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  familiehendelse: FamilieHendelseSamling;
+}
+
+const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   formPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
   avklartBarn: nullSafe(ownProps.familiehendelse.register).avklartBarn,
   termindato: nullSafe(ownProps.familiehendelse.gjeldende).termindato,

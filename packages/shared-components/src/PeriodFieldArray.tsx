@@ -19,7 +19,7 @@ const onKeyDown = (fields, emptyPeriodTemplate) => ({ keyCode }) => {
   }
 };
 
-const getRemoveButton = (index: number, fields) => (className) => {
+const getRemoveButton = (index: number, fields) => (className?: string): ReactNode | undefined => {
   if (index > 0) {
     return (
       <button
@@ -37,7 +37,7 @@ const getRemoveButton = (index: number, fields) => (className) => {
 const showErrorMessage = (meta) => meta && meta.error && (meta.dirty || meta.submitFailed);
 
 interface OwnProps {
-  children: (id: any, index: number, removeButtonElmt?: ReactNode) => ReactNode;
+  children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
   fields: any[];
   meta?: {
     error?: {

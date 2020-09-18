@@ -35,6 +35,7 @@
 		"packages/fakta-bosted-soker",
 		"packages/fakta-feilutbetaling",
 		"packages/fakta-felles",
+		"packages/fakta-fodsel",
 		"packages/fakta-fodsel-og-tilrettelegging",
 		"packages/fakta-tilleggsopplysninger",
 		"packages/fakta-saken",

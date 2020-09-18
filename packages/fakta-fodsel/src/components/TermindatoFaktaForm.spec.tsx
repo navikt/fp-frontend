@@ -7,6 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DateLabel, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import { buildInitialValues, TermindatoFaktaForm } from './TermindatoFaktaForm';
 
@@ -56,13 +57,14 @@ describe('<TermindatoFaktaForm>', () => {
       utstedtdato: '2016-01-15',
       termindato: '2016-09-15',
     };
-    const aksjonspunkter = [{
+    const aksjonspunkt = {
       definisjon: {
         kode: aksjonspunktCodes.TERMINBEKREFTELSE,
+        kodeverk: '',
       },
-    }];
+    } as Aksjonspunkt;
 
-    const initialValues = buildInitialValues.resultFunc(soknad, familiehendelse, aksjonspunkter);
+    const initialValues = buildInitialValues.resultFunc(soknad as Soknad, familiehendelse as FamilieHendelse, aksjonspunkt);
 
     expect(initialValues).to.eql({
       utstedtdato: '2016-01-15',
@@ -83,14 +85,15 @@ describe('<TermindatoFaktaForm>', () => {
       utstedtdato: '2016-01-15',
       termindato: '2016-09-15',
     };
-    const aksjonspunkter = [{
+    const aksjonspunkt = {
       definisjon: {
         kode: aksjonspunktCodes.TERMINBEKREFTELSE,
+        kodeverk: '',
       },
       begrunnelse: 'test',
-    }];
+    } as Aksjonspunkt;
 
-    const initialValues = buildInitialValues.resultFunc(soknad, familiehendelse, aksjonspunkter);
+    const initialValues = buildInitialValues.resultFunc(soknad as Soknad, familiehendelse as FamilieHendelse, aksjonspunkt);
 
     expect(initialValues).to.eql({
       utstedtdato: '2015-01-15',

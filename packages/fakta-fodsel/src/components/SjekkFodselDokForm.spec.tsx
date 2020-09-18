@@ -7,6 +7,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, FamilieHendelse } from '@fpsak-frontend/types';
 
 import { buildInitialValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
 
@@ -15,6 +16,7 @@ const soknad = {
   antallBarn: 1,
   soknadType: {
     kode: soknadType.FODSEL,
+    kodeverk: '',
   },
 };
 const alleMerknaderFraBeslutter = {
@@ -28,7 +30,7 @@ describe('<SjekkFodselDokForm>', () => {
       readOnly={false}
       initialValues={{ begrunnelse: 'test' }}
       submittable
-      behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
+      behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     />);
@@ -41,9 +43,15 @@ describe('<SjekkFodselDokForm>', () => {
       dokumentasjonForeligger: true,
       brukAntallBarnFraTps: false,
     };
-    const aksjonspunkter = [{ definisjon: { kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL }, begrunnelse: 'test' }];
+    const aksjonspunkter = {
+      definisjon: {
+        kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
+        kodeverk: '',
+      },
+      begrunnelse: 'test',
+    } as Aksjonspunkt;
 
-    const initialValues = buildInitialValues.resultFunc(familiehendelse, aksjonspunkter);
+    const initialValues = buildInitialValues.resultFunc(familiehendelse as FamilieHendelse, aksjonspunkter, 1);
 
     expect(initialValues).to.eql({
       avklartBarn: [{
@@ -60,8 +68,14 @@ describe('<SjekkFodselDokForm>', () => {
 
   it('skal sette korrekte initielle verdier når vi ikke har avklarte data', () => {
     const familiehendelse = {};
-    const aksjonspunkter = [{ definisjon: { kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL }, begrunnelse: 'test' }];
-    const initialValues = buildInitialValues.resultFunc(familiehendelse, aksjonspunkter);
+    const aksjonspunkter = {
+      definisjon: {
+        kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
+        kodeverk: '',
+      },
+      begrunnelse: 'test',
+    } as Aksjonspunkt;
+    const initialValues = buildInitialValues.resultFunc(familiehendelse as FamilieHendelse, aksjonspunkter, 1);
 
     expect(initialValues).to.eql({
       avklartBarn: [{

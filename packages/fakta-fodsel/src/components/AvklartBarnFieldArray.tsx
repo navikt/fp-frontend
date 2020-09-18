@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
@@ -7,6 +6,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
 } from '@fpsak-frontend/shared-components';
 import { CheckboxField, DatepickerField } from '@fpsak-frontend/form';
+import { FamilieHendelse } from '@fpsak-frontend/types';
 
 import styles from './avklartBarnFieldArray.less';
 
@@ -16,7 +16,21 @@ export const defaultAntallBarn = {
   dodsDato: '',
 };
 
-export const AvklartBarnFieldArray = ({
+interface OwnProps {
+  fields: any[];
+  meta?: {
+    error?: {
+      id: string;
+      values?: {[key: string]: string};
+    };
+    dirty: boolean;
+    submitFailed: boolean;
+  };
+  readOnly: boolean;
+  avklartBarn?: FamilieHendelse['avklartBarn'];
+}
+
+export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
   fields,
   meta,
   readOnly,
@@ -38,7 +52,6 @@ export const AvklartBarnFieldArray = ({
               <FlexColumn>
                 <DatepickerField
                   name={`${periodeElementFieldId}.fodselsdato`}
-                  defaultValue={null}
                   label={{ id: 'AvklartBarnFieldArray.Title' }}
                   validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
                   readOnly={readOnly}
@@ -52,13 +65,12 @@ export const AvklartBarnFieldArray = ({
                   disabled={readOnly}
                 />
               </FlexColumn>
-              {avklartBarn[index].isBarnDodt
+              {avklartBarn[index].dodsdato
               && (
               <FlexColumn>
                 <span>{periodeElementFieldId.dod}</span>
                 <DatepickerField
                   name={`${periodeElementFieldId}.dodsdato`}
-                  defaultValue={null}
                   label={{ id: 'AvklartBarnFieldArray.Dodsdato' }}
                   validate={[hasValidDate, dateBeforeOrEqualToToday]}
                   readOnly={readOnly}
@@ -75,12 +87,5 @@ export const AvklartBarnFieldArray = ({
     )}
   </PeriodFieldArray>
 );
-
-AvklartBarnFieldArray.propTypes = {
-  fields: PropTypes.shape().isRequired,
-  meta: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  avklartBarn: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
 
 export default AvklartBarnFieldArray;

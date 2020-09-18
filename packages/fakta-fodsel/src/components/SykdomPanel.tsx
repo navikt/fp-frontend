@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
@@ -11,19 +10,25 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { InjectedFormProps } from 'redux-form';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
+interface OwnProps {
+  readOnly: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
 /**
  * SykdomPanel
  */
-export const SykdomPanel = ({
+export const SykdomPanel: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly,
   alleMerknaderFraBeslutter,
 }) => (
   <FaktaGruppe
-    aksjonspunktCode={aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT}
     titleCode="SykdomPanel.ApplicationInformation"
     merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]}
   >
@@ -43,7 +48,7 @@ export const SykdomPanel = ({
           <FormattedMessage
             id="SykdomPanel.AnnenForelderIkkeForSyk"
             values={{
-              b: (chunks) => <b>{chunks}</b>,
+              b: (chunks: any) => <b>{chunks}</b>,
             }}
           />
       )}
@@ -52,27 +57,26 @@ export const SykdomPanel = ({
   </FaktaGruppe>
 );
 
-SykdomPanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-};
-
-const buildInitialValues = (aksjonspunkt, morForSykVedFodsel) => ({
+const buildInitialValues = (aksjonspunkt: Aksjonspunkt, morForSykVedFodsel: boolean) => ({
   begrunnelseSykdom: aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : '',
   erMorForSykVedFodsel: morForSykVedFodsel,
 });
 
-const transformValues = (values) => ({
+const transformValues = (values: any) => ({
   kode: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
   begrunnelse: values.begrunnelseSykdom,
   erMorForSykVedFodsel: values.erMorForSykVedFodsel,
 });
 
-const mapStateToPropsFactory = (initialState, staticOwnProps) => {
-  const onSubmit = (values) => staticOwnProps.submitHandler(transformValues(values));
-  return (state, ownProps) => ({
+interface PureOwnProps {
+  aksjonspunkt: Aksjonspunkt;
+  morForSykVedFodsel: boolean;
+  submitHandler: (values: any) => any;
+}
+
+const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => staticOwnProps.submitHandler(transformValues(values));
+  return (_state, ownProps: PureOwnProps) => ({
     initialValues: buildInitialValues(ownProps.aksjonspunkt, ownProps.morForSykVedFodsel),
     onSubmit,
   });

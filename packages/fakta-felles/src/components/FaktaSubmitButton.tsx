@@ -73,7 +73,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   formNames?: string[];
-  formName: string;
+  formName?: string;
   doNotCheckForRequiredFields?: boolean;
 }
 
