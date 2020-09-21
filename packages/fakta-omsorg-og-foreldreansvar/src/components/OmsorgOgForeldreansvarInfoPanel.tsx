@@ -1,26 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
-import { formPropTypes } from 'redux-form';
 import { connect } from 'react-redux';
 
+import { InjectedFormProps } from 'redux-form';
 import { behandlingForm } from '@fpsak-frontend/form';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import {
+  Aksjonspunkt,
+  FamilieHendelse, InntektArbeidYtelse, KodeverkMedNavn, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
+
+import useIntl from '../useIntl';
 
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
+
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  erAksjonspunktForeldreansvar: boolean;
+  hasOpenAksjonspunkter: boolean;
+  submittable: boolean;
+  readOnly: boolean;
+  vilkarTypes: KodeverkMedNavn[];
+  relatertYtelseTypes: KodeverkMedNavn[];
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  soknad: Soknad;
+  personopplysninger: Personopplysninger;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  initialValues: {
+    begrunnelse?: string;
+  };
+}
 
 /**
  * OmsorgOgForeldreansvarInfoPanel
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Omsorgsvilkåret.
  */
-export const OmsorgOgForeldreansvarInfoPanelImpl = ({
-  intl,
+export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   erAksjonspunktForeldreansvar,
@@ -35,10 +56,13 @@ export const OmsorgOgForeldreansvarInfoPanelImpl = ({
   gjeldendeFamiliehendelse,
   personopplysninger,
   ...formProps
-}) => (
-  <>
+}) => {
+  const intl = useIntl();
+  return (
     <form onSubmit={formProps.handleSubmit}>
+      {/* @ts-ignore Fiks denne */}
       <OmsorgOgForeldreansvarFaktaForm
+        intl={intl}
         erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
         readOnly={readOnly}
         vilkarTypes={vilkarTypes}
@@ -53,7 +77,6 @@ export const OmsorgOgForeldreansvarInfoPanelImpl = ({
       />
       <VerticalSpacer twentyPx />
       <FaktaBegrunnelseTextField
-        isDirty={formProps.dirty}
         isSubmittable={submittable}
         isReadOnly={readOnly}
         hasBegrunnelse={!!initialValues.begrunnelse}
@@ -72,34 +95,28 @@ export const OmsorgOgForeldreansvarInfoPanelImpl = ({
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
       />
     </form>
-  </>
-);
-
-OmsorgOgForeldreansvarInfoPanelImpl.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  erAksjonspunktForeldreansvar: PropTypes.bool.isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  vilkarTypes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  relatertYtelseTypes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  ...formPropTypes,
+  );
 };
 
+interface PureOwnProps {
+  soknad: Soknad;
+  personopplysninger: Personopplysninger;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'];
+  aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+}
+
 const buildInitialValues = createSelector(
-  [(ownProps) => ownProps.soknad,
-    (ownProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps) => ownProps.personopplysninger,
-    (ownProps) => ownProps.innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-    (ownProps) => ownProps.aksjonspunkter,
-    (ownProps) => ownProps.alleKodeverk],
+  [(ownProps: PureOwnProps) => ownProps.soknad,
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
+    (ownProps: PureOwnProps) => ownProps.personopplysninger,
+    (ownProps: PureOwnProps) => ownProps.innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.alleKodeverk],
   (soknad, familiehendelse, personopplysning, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk) => {
-    const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
+    const aksjonspunkt = aksjonspunkter.find((ap: any) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
       || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
     return {
       ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning,
@@ -109,19 +126,19 @@ const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values, aksjonspunkt) => ({
+const transformValues = (values: any, aksjonspunkt: Aksjonspunkt) => ({
   ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
   ...{ begrunnelse: values.begrunnelse },
 });
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { submitCallback, aksjonspunkter, alleKodeverk } = initialOwnProps;
-  const onSubmit = (values) => submitCallback([transformValues(values, aksjonspunkter[0])]);
+  const onSubmit = (values: any) => submitCallback([transformValues(values, aksjonspunkter[0])]);
   const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
   const vilkarTypes = alleKodeverk[kodeverkTyper.OMSORGSOVERTAKELSE_VILKAR_TYPE];
   const relatertYtelseTypes = alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE];
 
-  return (state, ownProps) => ({
+  return (_state: any, ownProps: PureOwnProps) => ({
     initialValues: buildInitialValues(ownProps),
     vilkarTypes,
     relatertYtelseTypes,
@@ -133,4 +150,4 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: 'OmsorgOgForeldreansvarInfoPanel',
   validate: OmsorgOgForeldreansvarFaktaForm.validate,
-})(injectIntl(OmsorgOgForeldreansvarInfoPanelImpl)));
+})(OmsorgOgForeldreansvarInfoPanelImpl));

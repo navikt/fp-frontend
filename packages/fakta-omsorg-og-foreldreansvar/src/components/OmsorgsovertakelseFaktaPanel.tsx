@@ -1,23 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+
+interface OwnProps {
+  readOnly: boolean;
+  erAksjonspunktForeldreansvar: boolean;
+  editedStatus: {
+    omsorgsovertakelseDato: boolean;
+    antallBarnOmsorgOgForeldreansvar: boolean;
+  };
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface StaticFunctions {
+  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => {
+    omsorgsovertakelseDato: string;
+    foreldreansvarDato: string;
+    antallBarn: number;
+  },
+}
 
 /**
  * OmsorgsovertakelseFaktaPanel
  */
-const OmsorgsovertakelseFaktaPanel = ({
+const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   erAksjonspunktForeldreansvar,
   editedStatus,
   alleMerknaderFraBeslutter,
 }) => (
   <FaktaGruppe
-    aksjonspunktCode={aksjonspunktCodes.OMSORGSOVERTAKELSE}
     titleCode={erAksjonspunktForeldreansvar ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo' : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo'}
     merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
   >
@@ -59,24 +76,12 @@ const OmsorgsovertakelseFaktaPanel = ({
   </FaktaGruppe>
 );
 
-OmsorgsovertakelseFaktaPanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  erAksjonspunktForeldreansvar: PropTypes.bool.isRequired,
-  editedStatus: PropTypes.shape({
-    omsorgsovertakelseDato: PropTypes.bool.isRequired,
-    antallBarnOmsorgOgForeldreansvar: PropTypes.bool.isRequired,
-  }).isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-};
-
-const getAntallBarn = (soknad, familiehendelse) => {
+const getAntallBarn = (soknad: any, familiehendelse: any) => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
   return familiehendelse.antallBarnTilBeregning ? familiehendelse.antallBarnTilBeregning : antallBarn;
 };
 
-OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad, familiehendelse) => ({
+OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse) => ({
   omsorgsovertakelseDato: familiehendelse && familiehendelse.omsorgsovertakelseDato ? familiehendelse.omsorgsovertakelseDato : soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
   antallBarn: getAntallBarn(soknad, familiehendelse),

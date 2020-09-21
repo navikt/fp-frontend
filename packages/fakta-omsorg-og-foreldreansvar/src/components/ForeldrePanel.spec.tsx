@@ -1,17 +1,19 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { FieldArrayFieldsProps } from 'redux-form';
 
 import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
+
 import ForeldrePanel from './ForeldrePanel';
 
-const getMockedFields = (fieldNames, children) => {
+const getMockedFields = (fieldNames: any, children: any) => {
   const field = {
-    get: (idx) => children[idx],
+    get: (idx: any) => children[idx],
   };
   return {
-    map: (callback) => fieldNames.map((fieldname, idx) => callback(fieldname, idx, field)),
-  };
+    map: (callback: any) => fieldNames.map((fieldname: any, idx: any) => callback(fieldname, idx, field)),
+  } as FieldArrayFieldsProps<any>;
 };
 
 describe('<ForeldrePanel>', () => {
@@ -34,7 +36,6 @@ describe('<ForeldrePanel>', () => {
     }];
 
     const wrapper = shallow(<ForeldrePanel
-      readOnly
       fields={getMockedFields(fieldNames, parents)}
       alleMerknaderFraBeslutter={{}}
     />);
@@ -66,7 +67,6 @@ describe('<ForeldrePanel>', () => {
     }];
 
     const wrapper = shallow(<ForeldrePanel
-      readOnly
       fields={getMockedFields(fieldNames, parents)}
       alleMerknaderFraBeslutter={{}}
     />);
@@ -98,7 +98,6 @@ describe('<ForeldrePanel>', () => {
     }];
 
     const wrapper = shallow(<ForeldrePanel
-      readOnly
       fields={getMockedFields(fieldNames, parents)}
       alleMerknaderFraBeslutter={{}}
     />);

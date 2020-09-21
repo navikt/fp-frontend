@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
@@ -11,24 +10,36 @@ import { dateBeforeOrEqualToToday, getAddresses, hasValidDate } from '@fpsak-fro
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
+import { FieldArrayFieldsProps } from 'redux-form';
+import { Personopplysninger } from '@fpsak-frontend/types';
 
-const getParentHeader = (erMor) => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
+const getParentHeader = (erMor: boolean) => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
+
+interface OwnProps {
+  fields: FieldArrayFieldsProps<any>;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface StaticFunctions {
+  buildInitialValues?: (sokerPersonopplysninger: Personopplysninger) => {
+    foreldre: Personopplysninger[],
+  },
+}
 
 /**
  * ForeldrePanel
  *
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  */
-export const ForeldrePanel = ({
+export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   fields,
   alleMerknaderFraBeslutter,
 }) => (
   <FaktaGruppe
-    aksjonspunktCode={aksjonspunktCodes.OMSORGSOVERTAKELSE}
     titleCode="ForeldrePanel.Foreldre"
     merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
   >
-    {fields.map((foreldre, index, field) => {
+    {fields.map((foreldre: any, index: any, field: any) => {
       const f = field.get(index);
       const shouldShowAdress = f.adresse && !f.erDod;
 
@@ -70,14 +81,7 @@ export const ForeldrePanel = ({
   </FaktaGruppe>
 );
 
-ForeldrePanel.propTypes = {
-  fields: PropTypes.shape().isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-};
-
-const buildSokerPersonopplysning = (sokerPersonopplysninger) => {
+const buildSokerPersonopplysning = (sokerPersonopplysninger: any) => {
   const addresses = getAddresses(sokerPersonopplysninger.adresser);
   const { avklartPersonstatus } = sokerPersonopplysninger;
   const isAvklartPersonstatusDod = avklartPersonstatus
@@ -95,7 +99,7 @@ const buildSokerPersonopplysning = (sokerPersonopplysninger) => {
   };
 };
 
-const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger) => {
+const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: any) => {
   const secondaryParentAddresses = getAddresses(annenPartPersonopplysninger.adresser);
   const { avklartPersonstatus } = annenPartPersonopplysninger;
   const isAvklartPersonstatusDod = avklartPersonstatus
@@ -113,7 +117,7 @@ const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger) => {
   };
 };
 
-ForeldrePanel.buildInitialValues = (sokerPersonopplysninger) => {
+ForeldrePanel.buildInitialValues = (sokerPersonopplysninger: Personopplysninger) => {
   const parents = [];
 
   const sokerOppl = buildSokerPersonopplysning(sokerPersonopplysninger);

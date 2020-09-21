@@ -22,6 +22,7 @@ export type FamilieHendelse = Readonly<{
   vilkarType?: Kodeverk;
   ankomstNorge?: string;
   erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
 }>
 
 export type FamilieHendelseSamling = Readonly<{

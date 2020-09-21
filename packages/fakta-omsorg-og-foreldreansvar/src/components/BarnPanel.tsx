@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { FieldArrayFieldsProps } from 'redux-form';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import moment from 'moment';
 
@@ -11,12 +11,13 @@ import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { MerkePanel } from '@fpsak-frontend/fakta-felles';
+import { Personopplysninger, Soknad } from '@fpsak-frontend/types';
 
 import styles from './barnPanel.less';
 
-const calculateAgeFromDate = (fodselsdato) => moment().startOf('day').diff(moment(fodselsdato).startOf('day'), 'years');
+const calculateAgeFromDate = (fodselsdato: any) => moment().startOf('day').diff(moment(fodselsdato).startOf('day'), 'years');
 
-const adjustNumberOfFields = (fields, originalFields, antallBarn) => {
+const adjustNumberOfFields = (fields: FieldArrayFieldsProps<any>, originalFields: FieldArrayFieldsProps<any>, antallBarn: number) => {
   if (fields.length < antallBarn) {
     const diff = antallBarn - fields.length;
     for (let i = fields.length; i <= diff || i < originalFields.length; i += 1) {
@@ -32,13 +33,29 @@ const adjustNumberOfFields = (fields, originalFields, antallBarn) => {
   }
 };
 
+interface OwnProps {
+  readOnly: boolean;
+  antallBarn: number;
+  fields: FieldArrayFieldsProps<any>;
+  isFodselsdatoerEdited?: { [key: number]: boolean};
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
 /**
  * BarnPanel
  *
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  * Viser barn som er bekreftet av TPS som readonly, mens en kan endre fødselsdato for de som ikke er det
  */
-export class BarnPanel extends Component {
+export class BarnPanel extends Component<OwnProps> {
+  static defaultProps = {
+    isFodselsdatoerEdited: {},
+  };
+
+  static buildInitialValues: any
+
+  originalFields: any
+
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     const { fields, antallBarn } = this.props;
@@ -47,11 +64,11 @@ export class BarnPanel extends Component {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: any) {
     adjustNumberOfFields(nextProps.fields, this.originalFields, nextProps.antallBarn);
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: OwnProps) {
     if (Number.isNaN(nextProps.antallBarn)) {
       return true;
     }
@@ -65,11 +82,10 @@ export class BarnPanel extends Component {
 
     return (
       <FaktaGruppe
-        aksjonspunktCode={aksjonspunktCodes.OMSORGSOVERTAKELSE}
         titleCode="BarnPanel.BarnDetSøkesOm"
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
       >
-        {fields.map((barn, index, field) => {
+        {fields.map((barn: any, index: any, field: any) => {
           const b = field.get(index);
           if (b.opplysningsKilde === opplysningsKilde.TPS) {
             return (
@@ -123,28 +139,13 @@ export class BarnPanel extends Component {
   }
 }
 
-BarnPanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  antallBarn: PropTypes.number,
-  fields: PropTypes.shape().isRequired,
-  isFodselsdatoerEdited: PropTypes.shape(),
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-};
-
-BarnPanel.defaultProps = {
-  antallBarn: '',
-  isFodselsdatoerEdited: {},
-};
-
-const prepChildObj = (child) => ({
+const prepChildObj = (child: any) => ({
   isTps: child.opplysningsKilde && child.opplysningsKilde === opplysningsKilde.TPS,
   navn: child.navn,
   fdato: new Date(child.fodselsdato),
 });
 
-const sortChildren = (children) => children.sort((child1, child2) => {
+const sortChildren = (children: any) => children.sort((child1: any, child2: any) => {
   const a = prepChildObj(child1);
   const b = prepChildObj(child2);
   if (a.isTps && !b.isTps) { return -1; }
@@ -156,7 +157,7 @@ const sortChildren = (children) => children.sort((child1, child2) => {
   return 0;
 });
 
-BarnPanel.buildInitialValues = (personopplysning, soknad) => {
+BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: Soknad) => {
   const confirmedChildren = personopplysning.barnSoktFor
     ? personopplysning.barnSoktFor.map((b) => ({
       aktorId: b.aktoerId,

@@ -39,6 +39,7 @@
 		"packages/fakta-fodsel-og-tilrettelegging",
 		"packages/fakta-medlemskap",
 		"packages/fakta-omsorg",
+		"packages/fakta-omsorg-og-foreldreansvar",
 		"packages/fakta-tilleggsopplysninger",
 		"packages/fakta-saken",
 		"packages/fakta-verge",

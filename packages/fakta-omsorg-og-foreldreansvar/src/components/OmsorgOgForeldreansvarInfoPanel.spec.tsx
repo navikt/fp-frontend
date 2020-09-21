@@ -1,12 +1,15 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import sinon from 'sinon';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import { OmsorgOgForeldreansvarInfoPanelImpl } from './OmsorgOgForeldreansvarInfoPanel';
+import * as useIntl from '../useIntl';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
@@ -23,6 +26,15 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
     kanLoses: true,
     erAktivt: true,
   };
+
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
 
   it('skal vise faktapanel og form for omsorgsvilkåret', () => {
     const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarInfoPanelImpl
@@ -41,7 +53,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleMerknaderFraBeslutter={{}}
     />);
 
-    const form = wrapper.find('Connect(injectIntl(OmsorgOgForeldreansvarFaktaFormImpl))');
+    const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(form).to.have.length(1);
     expect(form.prop('readOnly')).is.false;
 
@@ -67,7 +79,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleMerknaderFraBeslutter={{}}
     />);
 
-    const form = wrapper.find('Connect(injectIntl(OmsorgOgForeldreansvarFaktaFormImpl))');
+    const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(form.prop('readOnly')).is.true;
   });
 

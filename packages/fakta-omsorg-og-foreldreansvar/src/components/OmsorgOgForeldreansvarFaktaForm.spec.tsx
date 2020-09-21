@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
@@ -9,11 +9,13 @@ import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { SelectField } from '@fpsak-frontend/form';
+import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
-  const getKodeverknavn = (kodeverk) => {
+  const getKodeverknavn = (kodeverk: any) => {
     if (kodeverk.kode === opplysningsKilde.SAKSBEHANDLER) {
       return 'test';
     }
@@ -31,8 +33,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
       antallBarn={1}
-      farSokerType="test"
-      ytelser={[]}
       vilkarType="test"
       relatertYtelseTypes={[relatertYtelseType]}
       editedStatus={{
@@ -57,12 +57,10 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarFaktaForm.WrappedComponent
       intl={intlMock}
       readOnly={false}
-      vilkarTypes={[{ kode: 'kode1', navn: 'navn1' }]}
+      vilkarTypes={[{ kode: 'kode1', navn: 'navn1', kodeverk: '' }]}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
       antallBarn={1}
-      farSokerType="test"
-      ytelser={[]}
       vilkarType="test"
       relatertYtelseTypes={[relatertYtelseType]}
       editedStatus={{
@@ -87,12 +85,10 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarFaktaForm.WrappedComponent
       intl={intlMock}
       readOnly
-      vilkarTypes={[{ kode: 'kode1', navn: 'navn1' }]}
+      vilkarTypes={[{ kode: 'kode1', navn: 'navn1', kodeverk: '' }]}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
       antallBarn={1}
-      farSokerType="test"
-      ytelser={[]}
       vilkarType="kode1"
       relatertYtelseTypes={[relatertYtelseType]}
       editedStatus={{
@@ -121,8 +117,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       erAksjonspunktForeldreansvar
       hasOpenAksjonspunkter
       antallBarn={1}
-      farSokerType="test"
-      ytelser={[]}
       vilkarType="test"
       relatertYtelseTypes={[relatertYtelseType]}
       editedStatus={{
@@ -202,40 +196,40 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       omsorgsovertakelseDato: '10-10-2017',
       farSokerType: {
         kode: 'FAR_SOKER_TYPE',
+        kodeverk: '',
       },
       antallBarn: 2,
       fodselsdatoer: {
         1: '10-10-2017',
         2: '10-10-2017',
-      },
+      } as { [key: number]: string },
       soknadType: {
         kode: soknadType.FODSEL,
+        kodeverk: '',
       },
-    };
-    const familiehendelse = {};
+    } as Soknad;
+    const familiehendelse = {} as FamilieHendelse;
     const personopplysning = {
       aktoerId: '1',
       navn: 'Petra Tester',
-      dodsdato: undefined,
       adresser: [{
         adresselinje1: 'Vei 1',
         postNummer: '1000',
         poststed: 'Oslo',
         adresseType: {
           kode: opplysningAdresseType.POSTADRESSE,
-          navn: 'Bostedsadresse',
+          kodeverk: '',
         },
       }],
-      opplysningsKilde: {
-        kode: opplysningsKilde.SAKSBEHANDLER,
-      },
       navBrukerKjonn: {
         kode: navBrukerKjonn.KVINNE,
+        kodeverk: '',
       },
       personstatus: {
         kode: 'DØD',
+        kodeverk: '',
       },
-    };
+    } as Personopplysninger;
 
     const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
     expect(initialValues).is.eql({
@@ -282,21 +276,19 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       fodselsdatoer: {
         1: '10-10-2017',
         3: '10-10-2017',
-      },
-    };
-    const familiehendelse = {};
+      } as { [key: number]: string },
+    } as Soknad;
+    const familiehendelse = {} as FamilieHendelse;
     const personopplysning = {
       aktoerId: '1',
       navn: 'Petra Tester',
-      dodsdato: undefined,
       navBrukerKjonn: {
         kode: navBrukerKjonn.KVINNE,
-      },
-      opplysningsKilde: {
-        kode: opplysningsKilde.SAKSBEHANDLER,
+        kodeverk: '',
       },
       personstatus: {
         kode: 'DØD',
+        kodeverk: '',
       },
       barnSoktFor: [{
         aktoerId: '1',
@@ -304,9 +296,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         navn: 'Barn nr 1',
         fodselsdato: '10-10-2017',
         dodsdato: undefined,
-        opplysningsKilde: {
-          kode: opplysningsKilde.TPS,
-        },
       }, {
         aktoerId: '2',
         nummer: 2,
@@ -315,9 +304,10 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         dodsdato: undefined,
         opplysningsKilde: {
           kode: opplysningsKilde.TPS,
+          kodeverk: '',
         },
       }],
-    };
+    } as Personopplysninger;
 
     const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
 
