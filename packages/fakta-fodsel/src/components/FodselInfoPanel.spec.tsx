@@ -15,7 +15,7 @@ import TermindatoFaktaForm from './TermindatoFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-01' },
+  fodselsdatoer: { 1: '2019-01-01' } as { [key: number]: string },
   antallBarn: 1,
   soknadType: {
     kode: soknadType.FODSEL,

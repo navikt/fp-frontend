@@ -1,10 +1,23 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
+
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import * as useIntl from '../../useIntl';
 
 describe('<InntektOgYtelserFaktaPanel>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise tabell med inntekter', () => {
     const inntekter = [{
       person: 'Espen Utvikler',

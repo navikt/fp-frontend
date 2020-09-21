@@ -258,7 +258,10 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
         beslutningsdato: '2017-10-16',
       }],
       isPeriodAksjonspunktClosed: false,
-      medlemskapManuellVurderingType: 'manuellType',
+      medlemskapManuellVurderingType: {
+        kode: 'manuellType',
+        kodeverk: '',
+      },
       fodselsdato: '2017-10-15',
       termindato: undefined,
       omsorgsovertakelseDato: undefined,

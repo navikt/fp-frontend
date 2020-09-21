@@ -1,14 +1,18 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { FormattedMessage } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { FormattedMessage } from 'react-intl';
-import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
+import { Aksjonspunkt, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+
+import OppholdINorgeOgAdresserFaktaPanel, { PeriodeMedId } from './OppholdINorgeOgAdresserFaktaPanel';
+import * as useIntl from '../../useIntl';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
@@ -31,9 +35,9 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       adresser: [],
       personstatus: {
         kode: 'UTVANDRET',
-        navn: 'Utvandret',
+        kodeverk: '',
       },
-    },
+    } as Personopplysninger,
   }, {
     isApplicant: false,
     personopplysning: {
@@ -41,14 +45,22 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       adresser: [],
       personstatus: {
         kode: 'UTVANDRET',
-        navn: 'Utvandret',
+        kodeverk: 'Utvandret',
       },
-    },
+    } as Personopplysninger,
   }];
+
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
 
   it('skal vise info om opphold', () => {
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
-      intl={intlMock}
       readOnly={false}
       hasBosattAksjonspunkt={false}
       isBosattAksjonspunktClosed={false}
@@ -67,7 +79,6 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
 
   it('skal rendre form som viser bosatt informasjon', () => {
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
-      intl={intlMock}
       readOnly={false}
       hasBosattAksjonspunkt={false}
       isBosattAksjonspunktClosed={false}
@@ -88,9 +99,9 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
         adresser: [],
         personstatus: {
           kode: 'UTVANDRET',
-          navn: 'Utvandret',
+          kodeverk: '',
         },
-      },
+      } as Personopplysninger,
     }, {
       isApplicant: false,
       personopplysning: {
@@ -98,13 +109,12 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
         adresser: [],
         personstatus: {
           kode: 'UTVANDRET',
-          navn: 'Utvandret',
+          kodeverk: '',
         },
-      },
+      } as Personopplysninger,
     }];
 
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
-      intl={intlMock}
       readOnly={false}
       hasBosattAksjonspunkt
       isBosattAksjonspunktClosed={false}
@@ -120,108 +130,111 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
   });
 
   it('skal sette initielle verdier', () => {
+    const personopplysninger = {
+      navn: 'Espen Utvikler',
+      personstatus: {
+        kode: 'UTVANDRET',
+        kodeverk: '',
+      },
+      avklartPersonstatus: {
+        overstyrtPersonstatus: {
+          kode: personstatusType.BOSATT,
+          kodeverk: '',
+        },
+        orginalPersonstatus: {
+          kode: personstatusType.BOSATT,
+          kodeverk: '',
+        },
+      },
+      adresser: [{
+        adresselinje1: 'Vei 1',
+        postNummer: '1000',
+        poststed: 'Oslo',
+        adresseType: {
+          kode: opplysningAdresseType.POSTADRESSE,
+          kodeverk: '',
+        },
+      }],
+      annenPart: {
+        navn: 'Petra Tester',
+        personstatus: {
+          kode: 'UTVANDRET',
+          kodeverk: '',
+        },
+        adresser: [{
+          adresselinje1: 'Vei 2',
+          postNummer: '2000',
+          poststed: 'Stockholm',
+          adresseType: {
+            kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
+            kodeverk: '',
+          },
+        }],
+      },
+    } as Personopplysninger;
+
     const periode = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT],
       bosattVurdering: true,
-      personopplysninger: {
-        navn: 'Espen Utvikler',
-        personstatus: {
-          personstatus: {
-            kode: 'UTVANDRET',
-            navn: 'Utvandret',
-          },
-        },
-        avklartPersonstatus: {
-          overstyrtPersonstatus: {
-            kode: personstatusType.BOSATT,
-            navn: 'Bosatt',
-          },
-        },
-        adresser: [{
-          adresselinje1: 'Vei 1',
-          postNummer: '1000',
-          poststed: 'Oslo',
-          opplysningAdresseType: {
-            kode: opplysningAdresseType.POSTADRESSE,
-            navn: 'Bostedsadresse',
-          },
-        }],
-        annenPart: {
-          navn: 'Petra Tester',
-          personstatus: {
-            personstatus: {
-              kode: 'UTVANDRET',
-              navn: 'Utvandret',
-            },
-          },
-          adresser: [{
-            adresselinje1: 'Vei 2',
-            postNummer: '2000',
-            poststed: 'Stockholm',
-            opplysningAdresseType: {
-              kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-              navn: 'Bostedsadresse',
-            },
-          }],
-        },
-      },
-    };
+      personopplysninger,
+    } as PeriodeMedId;
 
-    const aksjonspunkter = [{
+    const aksjonspunkt = {
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
-    }];
+    } as Aksjonspunkt;
     const soknad = {
       oppgittTilknytning: opphold,
-    };
+    } as Soknad;
 
-    const initialValues = OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, periode, aksjonspunkter);
-
+    const initialValues = OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, periode, [aksjonspunkt]);
     expect(initialValues).to.eql({
       foreldre: [{
         isApplicant: true,
         personopplysning: {
           navn: 'Espen Utvikler',
           personstatus: {
-            personstatus: {
-              kode: 'UTVANDRET',
-              navn: 'Utvandret',
-            },
+            kode: 'UTVANDRET',
+            kodeverk: '',
           },
           avklartPersonstatus: {
             overstyrtPersonstatus: {
               kode: personstatusType.BOSATT,
-              navn: 'Bosatt',
+              kodeverk: '',
+            },
+            orginalPersonstatus: {
+              kode: personstatusType.BOSATT,
+              kodeverk: '',
             },
           },
           adresser: [{
             adresselinje1: 'Vei 1',
             postNummer: '1000',
             poststed: 'Oslo',
-            opplysningAdresseType: {
+            adresseType: {
               kode: opplysningAdresseType.POSTADRESSE,
-              navn: 'Bostedsadresse',
+              kodeverk: '',
             },
           }],
           annenPart: {
             navn: 'Petra Tester',
             personstatus: {
-              personstatus: {
-                kode: 'UTVANDRET',
-                navn: 'Utvandret',
-              },
+              kode: 'UTVANDRET',
+              kodeverk: '',
             },
             adresser: [{
               adresselinje1: 'Vei 2',
               postNummer: '2000',
               poststed: 'Stockholm',
-              opplysningAdresseType: {
+              adresseType: {
                 kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-                navn: 'Bostedsadresse',
+                kodeverk: '',
               },
             }],
           },
@@ -231,18 +244,16 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
         personopplysning: {
           navn: 'Petra Tester',
           personstatus: {
-            personstatus: {
-              kode: 'UTVANDRET',
-              navn: 'Utvandret',
-            },
+            kode: 'UTVANDRET',
+            kodeverk: '',
           },
           adresser: [{
             adresselinje1: 'Vei 2',
             postNummer: '2000',
             poststed: 'Stockholm',
-            opplysningAdresseType: {
+            adresseType: {
               kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-              navn: 'Bostedsadresse',
+              kodeverk: '',
             },
           }],
         },

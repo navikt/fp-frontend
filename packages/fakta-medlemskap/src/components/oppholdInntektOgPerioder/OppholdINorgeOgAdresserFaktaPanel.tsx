@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -12,21 +12,19 @@ import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
 import {
   Image, PeriodLabel, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
-import { Aksjonspunkt, KodeverkMedNavn, Soknad } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Soknad,
+} from '@fpsak-frontend/types';
 import checkImage from '@fpsak-frontend/assets/images/check.svg';
 import avslaattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 
+import useIntl from '../../useIntl';
+
 import styles from './oppholdINorgeOgAdresserFaktaPanel.less';
 
-type Opphold = {
-  oppholdNorgeNa: boolean;
-  oppholdNestePeriode: boolean;
-  oppholdSistePeriode: boolean;
-  utlandsoppholdFor: boolean;
-  utlandsoppholdEtter: boolean;
-};
+export type PeriodeMedId = MedlemPeriode & { id: number; }
 
-const capitalizeFirstLetter = (landNavn: any) => {
+const capitalizeFirstLetter = (landNavn: string) => {
   const string = landNavn.toLowerCase();
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -71,14 +69,17 @@ interface OwnProps {
   readOnly: boolean;
   hasBosattAksjonspunkt: boolean;
   isBosattAksjonspunktClosed: boolean;
-  opphold?: Opphold;
-  foreldre?: {}[];
+  opphold?: Soknad['oppgittTilknytning'];
+  foreldre?: {
+    isApplicant: boolean;
+    personopplysning: MedlemPeriode['personopplysninger'];
+  }[];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, periode: any, aksjonspunkter: Aksjonspunkt[]) => any,
+  buildInitialValues?: (soknad: Soknad, periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => any,
   transformValues?: (values: { bosattVurdering: boolean }) => {
     kode: string;
     bosattVurdering: boolean;
@@ -95,8 +96,8 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<OwnProps> & Stati
   readOnly,
   hasBosattAksjonspunkt,
   isBosattAksjonspunktClosed,
-  opphold,
-  foreldre,
+  opphold = {},
+  foreldre = [],
   alleKodeverk,
   alleMerknaderFraBeslutter,
 }) => {
@@ -173,11 +174,6 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<OwnProps> & Stati
   );
 };
 
-OppholdINorgeOgAdresserFaktaPanelImpl.defaultProps = {
-  opphold: {},
-  foreldre: [],
-};
-
 interface PureOwnProps {
   id: number;
   behandlingId: number;
@@ -197,12 +193,12 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
 
 const OppholdINorgeOgAdresserFaktaPanel = connect(mapStateToProps)(OppholdINorgeOgAdresserFaktaPanelImpl);
 
-const createParent = (isApplicant: any, personopplysning: any) => ({
+const createParent = (isApplicant: boolean, personopplysning: MedlemPeriode['personopplysninger']) => ({
   isApplicant,
   personopplysning,
 });
 
-OppholdINorgeOgAdresserFaktaPanel.buildInitialValues = (soknad: Soknad, periode: any, aksjonspunkter: Aksjonspunkt[]) => {
+OppholdINorgeOgAdresserFaktaPanel.buildInitialValues = (soknad: Soknad, periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => {
   let opphold = {};
 
   if (soknad !== null && soknad.oppgittTilknytning !== null) {

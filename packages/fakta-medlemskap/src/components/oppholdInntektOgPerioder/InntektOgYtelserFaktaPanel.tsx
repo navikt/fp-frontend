@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -11,6 +11,8 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { FagsakPerson, Medlemskap } from '@fpsak-frontend/types';
+
+import useIntl from '../../useIntl';
 
 const headerTextCodes = [
   'InntektOgYtelserFaktaPanel.Person',

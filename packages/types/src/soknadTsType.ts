@@ -14,6 +14,21 @@ type Soknad = Readonly<{
   oppgittFordeling: {
     startDatoForPermisjon?: string;
   };
+  oppgittTilknytning: {
+    oppholdNorgeNa: boolean;
+    oppholdSistePeriode: boolean;
+    oppholdNestePeriode: boolean;
+    utlandsoppholdFor: {
+      landNavn: string;
+      fom: string;
+      tom: string;
+    }[];
+    utlandsoppholdEtter: {
+      landNavn: string;
+      fom: string;
+      tom: string;
+    }[];
+  }
 }>
 
 export default Soknad;

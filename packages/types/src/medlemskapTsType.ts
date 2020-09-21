@@ -1,7 +1,9 @@
 import Kodeverk from './kodeverkTsType';
+import Personopplysninger from './personopplysningerTsType';
 
 export type MedlemPeriode = Readonly<{
   vurderingsdato: string;
+  personopplysninger: Personopplysninger;
   aksjonspunkter: string[];
   årsaker: string[];
   oppholdsrettVurdering: boolean;

@@ -72,6 +72,7 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps & InjectedF
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
     />
+    { /* @ts-ignore Fiks denne */}
     <PerioderMedMedlemskapFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
@@ -81,13 +82,16 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps & InjectedF
       alleKodeverk={alleKodeverk}
     />
     { (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) && (
-      <StatusForBorgerFaktaPanel
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
-        readOnly={readOnly}
-        id={valgtPeriode.id}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      />
+      <>
+        { /* @ts-ignore Fiks denne */}
+        <StatusForBorgerFaktaPanel
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
+          readOnly={readOnly}
+          id={valgtPeriode.id}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        />
+      </>
     )}
     <VerticalSpacer twentyPx />
     { valgtPeriode.aksjonspunkter && valgtPeriode.aksjonspunkter.length > 0 && (
@@ -141,6 +145,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   submittable: boolean;
+  updateOppholdInntektPeriode: (values: any) => void;
 }
 
 const buildInitialValues = createSelector([
@@ -169,7 +174,8 @@ const buildInitialValues = createSelector([
     oppholdValues = StatusForBorgerFaktaPanel.buildInitialValues(valgtPeriode, aksjonspunkter);
   }
   if (valgtPeriode.aksjonspunkter.length > 0) {
-    confirmValues = FaktaBegrunnelseTextField.buildInitialValues([valgtPeriode]);
+    const valgtPeriodeAps = aksjonspunkter.filter((ap) => valgtPeriode.aksjonspunkter.some((vpap) => vpap === ap.definisjon.kode));
+    confirmValues = FaktaBegrunnelseTextField.buildInitialValues(valgtPeriodeAps);
   }
   const kodeverkFn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   return {
@@ -182,7 +188,7 @@ const buildInitialValues = createSelector([
   };
 });
 
-const mapStateToPropsFactory = (initialState: any, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: any) => initialOwnProps.updateOppholdInntektPeriode(transformValues(values));
   return (state: any, ownProps: PureOwnProps) => {
     const { valgtPeriode, submittable } = ownProps;

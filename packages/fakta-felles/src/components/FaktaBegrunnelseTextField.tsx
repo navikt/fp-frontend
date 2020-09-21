@@ -29,7 +29,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (aksjonspunkt: Aksjonspunkt, begrunnelseFieldName?: string) => any
+  buildInitialValues: (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName?: string) => any
   transformValues: (values: any, name?: string) => {
     begrunnelse: string;
   }
@@ -67,14 +67,14 @@ FaktaBegrunnelseTextField.defaultProps = {
   hasVurderingText: false,
 };
 
-const getBegrunnelse = (aksjonspunkt: any) => {
-  if (aksjonspunkt && aksjonspunkt.length > 0) {
-    return aksjonspunkt[0].begrunnelse;
+const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt) => {
+  if (aksjonspunkt && Array.isArray(aksjonspunkt)) {
+    return aksjonspunkt.length > 0 ? aksjonspunkt[0].begrunnelse : '';
   }
-  return aksjonspunkt ? aksjonspunkt.begrunnelse : '';
+  return aksjonspunkt && !Array.isArray(aksjonspunkt) ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: Aksjonspunkt, begrunnelseFieldName = 'begrunnelse') => ({
+FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName = 'begrunnelse') => ({
   [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt)),
 });
 
