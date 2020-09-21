@@ -40,6 +40,7 @@
 		"packages/fakta-medlemskap",
 		"packages/fakta-omsorg",
 		"packages/fakta-omsorg-og-foreldreansvar",
+		"packages/fakta-opptjening",
 		"packages/fakta-tilleggsopplysninger",
 		"packages/fakta-saken",
 		"packages/fakta-verge",

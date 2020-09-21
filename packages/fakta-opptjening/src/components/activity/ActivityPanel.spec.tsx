@@ -184,7 +184,7 @@ describe('<ActivityPanel>', () => {
 
     const select = wrapper.find(SelectField);
     expect(select).to.have.length(1);
-    expect(select.prop('selectValues').map((sv) => sv.key)).is.eql([OAType.ARBEID, OAType.NARING]);
+    expect(select.prop('selectValues').map((sv: any) => sv.key)).is.eql([OAType.ARBEID, OAType.NARING]);
     expect(select.prop('readOnly')).is.false;
   });
 

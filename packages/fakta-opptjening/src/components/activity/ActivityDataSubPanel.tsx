@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -11,22 +10,26 @@ import {
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { DatepickerField, DecimalField, InputField } from '@fpsak-frontend/form';
+import { Kodeverk } from '@fpsak-frontend/types';
+
+import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../../CustomOpptjeningAktivitet';
 
 import styles from './activityDataSubPanel.less';
 
 const ytelseTypes = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
 
-const isOfType = (selectedActivityType, ...opptjeningAktivitetType) => selectedActivityType && opptjeningAktivitetType.includes(selectedActivityType.kode);
+const isOfType = (selectedActivityType: Kodeverk, ...opptjeningAktivitetType) => selectedActivityType
+  && opptjeningAktivitetType.includes(selectedActivityType.kode);
 
-const formatDate = (date) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const minValue0 = minValue(0);
 const maxValue200 = maxValue(200);
 
-const getOppdragsgiverMessageId = (selectedActivityType) => (isOfType(selectedActivityType, OAType.FRILANS)
+const getOppdragsgiverMessageId = (selectedActivityType: Kodeverk) => (isOfType(selectedActivityType, OAType.FRILANS)
   ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver');
 
-const getArbeidsgiverText = (initialValues) => {
+const getArbeidsgiverText = (initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet) => {
   if (initialValues.privatpersonNavn && initialValues.privatpersonFødselsdato) {
     const fodselsdato = formatDate(initialValues.privatpersonFødselsdato);
     return `${initialValues.privatpersonNavn} (${fodselsdato})`;
@@ -38,22 +41,29 @@ const getArbeidsgiverText = (initialValues) => {
 };
 
 const isManuallyAddedAndNotUtenlandskArbeidsforhold = (
-  isManuallyAdded, selectedActivityType,
+  isManuallyAdded: boolean, selectedActivityType: Kodeverk,
 ) => isManuallyAdded && !isOfType(selectedActivityType, OAType.UTENLANDSK_ARBEIDSFORHOLD);
 const isManuallyAddedAndUtenlandskArbeidsforhold = (
-  isManuallyAdded, selectedActivityType,
+  isManuallyAdded: boolean, selectedActivityType: Kodeverk,
 ) => isManuallyAdded && isOfType(selectedActivityType, OAType.UTENLANDSK_ARBEIDSFORHOLD);
+
+interface OwnProps {
+  initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
+  readOnly: boolean;
+  isManuallyAdded: boolean;
+  selectedActivityType?: Kodeverk;
+}
 
 /**
  * ActivityDataSubPanel
  *
  * Presentasjonskomponent. Viser informasjon om valgt aktivitet
  */
-const ActivityDataSubPanel = ({
+const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
   initialValues,
   readOnly,
   isManuallyAdded,
-  selectedActivityType,
+  selectedActivityType = { kode: '', kodeverk: '' },
 }) => (
   <>
     {isOfType(selectedActivityType, ...[OAType.ARBEID, OAType.NARING, ...ytelseTypes]) && (
@@ -97,7 +107,8 @@ const ActivityDataSubPanel = ({
               validate={[required, minValue0, maxValue200, hasValidDecimal]}
               readOnly={readOnly || !isManuallyAdded}
               bredde="S"
-              format={(value) => (readOnly || !isManuallyAdded ? `${value} %` : value)}
+              format={(value: any) => (readOnly || !isManuallyAdded ? `${value} %` : value)}
+              // @ts-ignore Fiks
               normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
             />
           </Column>
@@ -118,16 +129,5 @@ const ActivityDataSubPanel = ({
     )}
   </>
 );
-
-ActivityDataSubPanel.propTypes = {
-  initialValues: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  isManuallyAdded: PropTypes.bool.isRequired,
-  selectedActivityType: PropTypes.shape(),
-};
-
-ActivityDataSubPanel.defaultProps = {
-  selectedActivityType: {},
-};
 
 export default ActivityDataSubPanel;

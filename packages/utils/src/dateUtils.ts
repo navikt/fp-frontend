@@ -108,7 +108,7 @@ export const dateFormat = (date) => moment(date).format(DDMMYYYY_DATE_FORMAT);
 export const timeFormat = (date) => moment(date).format(HHMM_TIME_FORMAT);
 
 // Skal ikke legge til dag når dato er tidenes ende
-export const addDaysToDate = (dateString, nrOfDays) => (dateString === TIDENES_ENDE
+export const addDaysToDate = (dateString: string, nrOfDays: number) => (dateString === TIDENES_ENDE
   ? dateString
   : moment(dateString, ISO_DATE_FORMAT).add(nrOfDays, 'days').format(ISO_DATE_FORMAT));
 

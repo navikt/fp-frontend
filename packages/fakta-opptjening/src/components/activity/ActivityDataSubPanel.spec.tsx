@@ -6,24 +6,26 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { DatepickerField, DecimalField, InputField } from '@fpsak-frontend/form';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
+
+import CustomOpptjeningAktivitet from '../../CustomOpptjeningAktivitet';
 import ActivityDataSubPanel from './ActivityDataSubPanel';
 
 describe('<ActivityDataSubPanel>', () => {
   const activity1 = {
     arbeidsgiver: 'Svensen Eksos',
     oppdragsgiverOrg: '123456789',
-  };
+  } as CustomOpptjeningAktivitet;
   const activity2 = {
     privatpersonNavn: 'Tom Hansen',
     privatpersonFødselsdato: '1992-11-10',
-  };
+  } as CustomOpptjeningAktivitet;
 
   it('skal vise arbeidsgiver, org-nr og stillingsandel for type Arbeid', () => {
     const wrapper = shallow(<ActivityDataSubPanel
       initialValues={activity1}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'arbeid' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -44,10 +46,10 @@ describe('<ActivityDataSubPanel>', () => {
 
   it('skal vise "-" når arbeidsgiver ikke er oppgitt', () => {
     const wrapper = shallow(<ActivityDataSubPanel
-      initialValues={{}}
+      initialValues={{} as CustomOpptjeningAktivitet}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'arbeid' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -71,7 +73,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity1}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.FRILANS, navn: 'FRILANS' }}
+      selectedActivityType={{ kode: OAType.FRILANS, kodeverk: '' }}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -86,7 +88,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity1}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.NARING, navn: 'NARING' }}
+      selectedActivityType={{ kode: OAType.NARING, kodeverk: '' }}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -102,7 +104,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity1}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.VARTPENGER, navn: 'VARTPENGER' }}
+      selectedActivityType={{ kode: OAType.VARTPENGER, kodeverk: '' }}
     />);
 
     expect(wrapper.find(FormattedMessage)).to.have.length(0);
@@ -115,7 +117,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity1}
       readOnly={false}
       isManuallyAdded
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
 
     expect(wrapper.find(FormattedMessage)).to.have.length(0);
@@ -134,7 +136,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity1}
       readOnly
       isManuallyAdded
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
 
     expect(wrapper.find(FormattedMessage)).to.have.length(0);
@@ -151,7 +153,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity2}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
     const tekst = wrapper.find(Normaltekst);
     expect(tekst).to.have.length(1);
@@ -162,7 +164,7 @@ describe('<ActivityDataSubPanel>', () => {
       initialValues={activity1}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
     const tekst = wrapper.find(Normaltekst);
     expect(tekst).to.have.length(1);
@@ -170,10 +172,10 @@ describe('<ActivityDataSubPanel>', () => {
   });
   it('skal vise - som arbeidsgiver når ikke arbeidsgiver eller privatperson', () => {
     const wrapper = shallow(<ActivityDataSubPanel
-      initialValues={{}}
+      initialValues={{} as CustomOpptjeningAktivitet}
       readOnly={false}
       isManuallyAdded={false}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
     />);
     const tekst = wrapper.find(Normaltekst);
     expect(tekst).to.have.length(1);

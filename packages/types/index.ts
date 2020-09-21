@@ -25,3 +25,4 @@ export { default as Risikoklassifisering } from './src/risikoklassifiseringTsTyp
 export { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export { default as KlageVurdering } from './src/klageVurderingTsType';
 export { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
+export { default as Opptjening, OpptjeningAktivitet } from './src/opptjeningTsType';

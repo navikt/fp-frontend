@@ -3,6 +3,8 @@ import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { Aksjonspunkt, OpptjeningAktivitet } from '@fpsak-frontend/types';
+
 import { buildInitialValues, OpptjeningInfoPanel } from './OpptjeningInfoPanel';
 import OpptjeningFaktaForm from './OpptjeningFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-opptjening';
@@ -48,14 +50,14 @@ describe('<OpptjeningInfoPanel>', () => {
       opptjeningFom: '2018-10-01',
       opptjeningTom: '2018-12-01',
       begrunnelse: 'test5',
-    }];
+    }] as OpptjeningAktivitet[];
     const fastsattOpptjening = {
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-10-01',
     };
-    const aksjonspunkter = [{ definisjon: { kode: '5058' }, erAktivt: true, toTrinnsBehandling: false }];
+    const aksjonspunkter = { definisjon: { kode: '5058' }, erAktivt: true, toTrinnsBehandling: false } as Aksjonspunkt;
 
-    const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, aksjonspunkter);
+    const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, [aksjonspunkter]);
     expect(initialValues).is.eql({
       aksjonspunkt: [],
       fastsattOpptjening: {
@@ -107,7 +109,7 @@ describe('<OpptjeningInfoPanel>', () => {
       opptjeningFom: '2018-10-01',
       opptjeningTom: '2018-12-01',
       begrunnelse: 'test5',
-    }];
+    }] as OpptjeningAktivitet[];
     const fastsattOpptjening = {
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-10-01',
@@ -115,7 +117,7 @@ describe('<OpptjeningInfoPanel>', () => {
     const aksjonspunkter = [{ definisjon: { kode: '5051' }, erAktivt: true, toTrinnsBehandling: false },
       { definisjon: { kode: '5080' }, erAktivt: true, toTrinnsBehandling: false }];
 
-    const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, aksjonspunkter);
+    const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, aksjonspunkter as Aksjonspunkt[]);
     expect(initialValues).is.eql({
       aksjonspunkt: [{
         definisjon: {

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import {
+  Aksjonspunkt, Behandling, KodeverkMedNavn, Opptjening,
+} from '@fpsak-frontend/types';
+
 import OpptjeningInfoPanel from './components/OpptjeningInfoPanel';
-import opptjeningAksjonspunkterPropType from './propTypes/opptjeningAksjonspunkterPropType';
-import opptjeningPropType from './propTypes/opptjeningPropType';
-import opptjeningBehandlingPropType from './propTypes/opptjeningBehandlingPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -15,7 +15,22 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const OpptjeningFaktaIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  opptjening?: Opptjening;
+  aksjonspunkter: Aksjonspunkt[];
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  utlandDokStatus?: {
+    dokStatus: string;
+  };
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  harApneAksjonspunkter: boolean;
+  submittable: boolean;
+}
+
+const OpptjeningFaktaIndex: FunctionComponent<OwnProps> = ({
   behandling,
   opptjening,
   aksjonspunkter,
@@ -44,25 +59,5 @@ const OpptjeningFaktaIndex = ({
     />
   </RawIntlProvider>
 );
-
-OpptjeningFaktaIndex.propTypes = {
-  behandling: opptjeningBehandlingPropType.isRequired,
-  opptjening: opptjeningPropType,
-  aksjonspunkter: PropTypes.arrayOf(opptjeningAksjonspunkterPropType).isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape().isRequired,
-  utlandDokStatus: PropTypes.shape({
-    dokStatus: PropTypes.string.isRequired,
-  }),
-  alleKodeverk: PropTypes.shape().isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  harApneAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-};
-
-OpptjeningFaktaIndex.defaultProps = {
-  opptjening: undefined,
-  utlandDokStatus: undefined,
-};
 
 export default OpptjeningFaktaIndex;
