@@ -235,9 +235,9 @@ const formName = 'ankeResultatForm';
 
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const vedtaksaksjonspunkt = initialOwnProps.aksjonspunkter
-    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
+    .filter((ap) => initialOwnProps.readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
     .filter((ap) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
-  const aksjonspunktCode = vedtaksaksjonspunkt[0].definisjon.kode;
+  const aksjonspunktCode = !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? aksjonspunktCodes.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
   const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
   return (state, ownProps) => ({
     aksjonspunktCode,
