@@ -1,4 +1,4 @@
-import { FieldArrayFieldsProps } from 'redux-form';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -42,14 +42,7 @@ const showErrorMessage = (meta) => meta && meta.error && (meta.dirty || meta.sub
 interface OwnProps {
   children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
   fields: FieldArrayFieldsProps<any>;
-  meta?: {
-    error?: {
-      id: string;
-      values?: {[key: string]: string};
-    };
-    dirty: boolean;
-    submitFailed: boolean;
-  };
+  meta?: FieldArrayMetaProps;
   readOnly?: boolean;
   titleTextCode?: string;
   textCode?: string;

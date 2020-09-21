@@ -1,16 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
 import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
+import { KodeverkMedNavn, Personopplysninger } from '@fpsak-frontend/types';
 
-import omsorgPersonopplysningerPropType from '../propTypes/omsorgPersonopplysningerPropType';
 import BostedBarnView from './BostedBarnView';
 
 import styles from './bostedFaktaView.less';
 
-const BostedFaktaView = ({
+interface OwnProps {
+  personopplysning: Personopplysninger;
+  ektefellePersonopplysning?: Personopplysninger;
+  className?: string;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+const BostedFaktaView: FunctionComponent<OwnProps> = ({
   personopplysning,
   ektefellePersonopplysning,
   className,
@@ -20,7 +26,7 @@ const BostedFaktaView = ({
     <FaktaGruppe titleCode="BostedFaktaView.BosattAdresser">
       <Row>
         <Column xs="6">
-          {personopplysning.barn.map((b, index) => (
+          {personopplysning.barn.map((b: any, index: any) => (
             <BostedBarnView key={b.navn} barn={b} barnNr={index + 1} />
           ))}
         </Column>
@@ -35,15 +41,7 @@ const BostedFaktaView = ({
   </div>
 );
 
-BostedFaktaView.propTypes = {
-  personopplysning: omsorgPersonopplysningerPropType.isRequired,
-  ektefellePersonopplysning: omsorgPersonopplysningerPropType,
-  className: PropTypes.string,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
-
 BostedFaktaView.defaultProps = {
-  ektefellePersonopplysning: undefined,
   className: styles.defaultBostedFakta,
 };
 

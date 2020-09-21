@@ -1,5 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
+import { FieldArrayMetaProps } from 'redux-form';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField } from '@fpsak-frontend/form';
@@ -17,7 +18,7 @@ describe('<IkkeOmsorgPeriodeField>', () => {
     const wrapper = shallowWithIntl(<IkkeOmsorgPeriodeField
       readOnly={false}
       fields={fields}
-      meta={{}}
+      meta={{} as FieldArrayMetaProps}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);

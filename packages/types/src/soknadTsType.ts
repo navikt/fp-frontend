@@ -29,6 +29,10 @@ type Soknad = Readonly<{
       tom: string;
     }[];
   }
+  oppgittRettighet: {
+    omsorgForBarnet: boolean;
+    aleneomsorgForBarnet: boolean;
+  };
 }>
 
 export default Soknad;

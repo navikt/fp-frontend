@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
@@ -15,15 +14,26 @@ import {
   isObjectEmpty,
   required,
 } from '@fpsak-frontend/utils';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
-const showAddButton = (fields) => {
+const showAddButton = (fields: FieldArrayFieldsProps<any>) => {
   if (fields.length > 0) {
     return (fields.get(fields.length - 1).periodeFom !== undefined && fields.get(fields.length - 1).periodeTom !== undefined);
   }
   return false;
 };
 
-const IkkeOmsorgPeriodeField = ({
+interface OwnProps {
+  readOnly: boolean;
+  meta: FieldArrayMetaProps;
+  fields: FieldArrayFieldsProps<any>;
+}
+
+interface StaticFunctions {
+  validate?: (values: { omsorg: any, ikkeOmsorgPerioder: any }) => any,
+}
+
+const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> & StaticFunctions = ({
   fields,
   meta,
   readOnly,
@@ -42,7 +52,6 @@ const IkkeOmsorgPeriodeField = ({
         <Row key={ikkeOmsorgElementFieldId}>
           <Column xs="5">
             <DatepickerField
-              defaultValue={null}
               name={`${ikkeOmsorgElementFieldId}.periodeFom`}
               validate={[required, hasValidDate]}
               readOnly={readOnly}
@@ -50,7 +59,6 @@ const IkkeOmsorgPeriodeField = ({
           </Column>
           <Column xs="5">
             <DatepickerField
-              defaultValue={null}
               name={`${ikkeOmsorgElementFieldId}.periodeTom`}
               validate={[hasValidDate]}
               readOnly={readOnly}
@@ -67,15 +75,17 @@ const IkkeOmsorgPeriodeField = ({
   </div>
 );
 
-IkkeOmsorgPeriodeField.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  meta: PropTypes.shape().isRequired,
-  fields: PropTypes.shape().isRequired,
-};
+interface FormValues {
+  periodeFom: string;
+  periodeTom: string;
+}
 
-const hasValue = (values) => (values && values.length && values.length < 2 && !values[0].periodeTom);
+const hasValue = (values: FormValues[]) => values && values.length && values.length < 2 && !values[0].periodeTom;
 
-const checkArrayErrors = (values) => values.map(({ periodeFom, periodeTom }, index) => {
+const checkArrayErrors = (values: FormValues[]) => values.map(({
+  periodeFom,
+  periodeTom,
+}: any, index: any) => {
   if (isObjectEmpty(periodeFom) && isObjectEmpty(periodeTom)) {
     return null;
   }
@@ -96,21 +106,21 @@ const checkArrayErrors = (values) => values.map(({ periodeFom, periodeTom }, ind
   return null;
 });
 
-const checkOverlapError = (values) => dateRangesNotOverlapping(values.reduce((result, current) => {
+const checkOverlapError = (values: any) => dateRangesNotOverlapping(values.reduce((result: any, current: any) => {
   if (current.periodeTom && current.periodeFom) {
     result.push([current.periodeFom, current.periodeTom]);
   }
   return result;
 }, []));
 
-const hasValidPeriodOrOnlyStartDate = (values) => {
+const hasValidPeriodOrOnlyStartDate = (values: FormValues[]) => {
   if (hasValue(values)) {
     return null;
   }
 
   const arrayErrors = checkArrayErrors(values);
 
-  if (arrayErrors.some((errors) => errors !== null)) {
+  if (arrayErrors.some((errors: any) => errors !== null)) {
     return arrayErrors;
   }
   if (values.length > 1) {
@@ -119,7 +129,7 @@ const hasValidPeriodOrOnlyStartDate = (values) => {
     const lastEntry = values[values.length - 1];
     if (!overlapError && lastEntry.periodeFom && !lastEntry.periodeTom) {
       const arrayWithoutLast = values.slice(0, values.length - 1);
-      overlapError = arrayWithoutLast.some((date) => dateIsAfter(date.periodeFom, lastEntry.periodeFom)
+      overlapError = arrayWithoutLast.some((date: any) => dateIsAfter(date.periodeFom, lastEntry.periodeFom)
         || dateIsAfter(date.periodeTom, lastEntry.periodeFom))
         ? dateRangesOverlappingMessage() : null;
     }
@@ -130,14 +140,16 @@ const hasValidPeriodOrOnlyStartDate = (values) => {
   return null;
 };
 
-IkkeOmsorgPeriodeField.validate = (values) => {
+IkkeOmsorgPeriodeField.validate = (values: { omsorg: any, ikkeOmsorgPerioder: any }) => {
   const errors = {};
   if (!values) {
     return errors;
   }
   const { omsorg, ikkeOmsorgPerioder } = values;
   if (omsorg === false) {
-    errors.ikkeOmsorgPerioder = hasValidPeriodOrOnlyStartDate(ikkeOmsorgPerioder);
+    return {
+      ikkeOmsorgPerioder: hasValidPeriodOrOnlyStartDate(ikkeOmsorgPerioder),
+    };
   }
   return errors;
 };

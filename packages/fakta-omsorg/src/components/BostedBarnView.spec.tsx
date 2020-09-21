@@ -2,8 +2,10 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
+import { Personopplysninger } from '@fpsak-frontend/types';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
+
 import BostedBarnView from './BostedBarnView';
 
 describe('<BostedBarnView>', () => {
@@ -13,37 +15,37 @@ describe('<BostedBarnView>', () => {
     fodselsdato: '2016-02-03',
     personstatus: {
       kode: 'BOSA',
-      navn: 'Bosatt',
+      kodeverk: '',
     },
     avklartPersonstatus: {
       overstyrtPersonstatus: {
         kode: personstatusType.BOSATT,
-        navn: 'Bosatt',
+        kodeverk: '',
       },
       orginalPersonstatus: {
         kode: personstatusType.DOD,
-        navn: 'Bosatt',
+        kodeverk: '',
       },
     },
     navBrukerKjonn: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     statsborgerskap: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     diskresjonskode: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     sivilstand: {
       kode: 'UGIF',
-      navn: 'Ugift',
+      kodeverk: '',
     },
     region: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     adresser: [{
       adresselinje1: 'Ringeriksveien 182',
@@ -51,7 +53,7 @@ describe('<BostedBarnView>', () => {
       poststed: 'Vøyenenga',
       adresseType: {
         kode: opplysningAdresseType.POSTADRESSE,
-        navn: 'Bostedsadresse',
+        kodeverk: '',
       },
     }],
   };
@@ -64,12 +66,13 @@ describe('<BostedBarnView>', () => {
     const undertekst = wrapper.find('Undertekst');
     const barnNr = undertekst.first();
     expect(barnNr.find('FormattedMessage').prop('id')).to.equal('BostedBarnView.Barn');
+    // @ts-ignore Fiks
     expect(barnNr.find('FormattedMessage').prop('values').barnNr).to.equal(3);
   });
 
   it('skal vise navn', () => {
     const wrapper = shallow(<BostedBarnView
-      barn={barn}
+      barn={barn as Personopplysninger}
       barnNr={3}
     />);
     expect(wrapper.find('Element').childAt(0).text()).to.eql('Espen Barn');
@@ -77,19 +80,20 @@ describe('<BostedBarnView>', () => {
 
   it('skal vise fodselsdato', () => {
     const wrapper = shallow(<BostedBarnView
-      barn={barn}
+      barn={barn as Personopplysninger}
       barnNr={3}
     />);
     const normalTekst = wrapper.find('Normaltekst');
     expect(normalTekst).to.have.length(2);
     const fodselsWrapper = normalTekst.first();
     expect(fodselsWrapper.find('FormattedMessage').prop('id')).to.eql('BostedBarnView.Age');
+    // @ts-ignore Fiks
     expect(fodselsWrapper.find('FormattedMessage').prop('values').fodselsdato).to.eql('03.02.2016');
   });
 
   it('skal vise adresse', () => {
     const wrapper = shallow(<BostedBarnView
-      barn={barn}
+      barn={barn as Personopplysninger}
       barnNr={3}
     />);
     const normalTekst = wrapper.find('Normaltekst');

@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
-import { FieldArrayFieldsProps } from 'redux-form';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
 
@@ -40,14 +40,7 @@ interface TilretteleggingDato {
 
 interface OwnProps {
   fields: FieldArrayFieldsProps<any>;
-  meta?: {
-    error?: {
-      id: string;
-      values?: {[key: string]: string};
-    };
-    dirty: boolean;
-    submitFailed: boolean;
-  };
+  meta?: FieldArrayMetaProps;
   readOnly: boolean;
   formSectionName: string;
   erOverstyrer: boolean;

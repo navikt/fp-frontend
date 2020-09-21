@@ -1,27 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { formPropTypes } from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps, WrappedReduxFormContext } from 'redux-form';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import {
+  Aksjonspunkt, KodeverkMedNavn, Personopplysninger, Soknad, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
-import omsorgAksjonspunkterPropType from '../propTypes/omsorgAksjonspunkterPropType';
-import omsorgPersonopplysningerPropType from '../propTypes/omsorgPersonopplysningerPropType';
 import OmsorgFaktaForm from './OmsorgFaktaForm';
 import BostedFaktaView from './BostedFaktaView';
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
-const getHelpTexts = (aksjonspunkter) => {
+const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
   const helpTexts = [];
-  const harAleneomsorgAp = aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
-  const harOmsorgAp = aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
+  const harAleneomsorgAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
+  const harOmsorgAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   if (harAleneomsorgAp.length > 0) {
     helpTexts.push(<FormattedMessage key="VurderAleneomsorg" id="OmsorgInfoPanel.VurderAleneomsorg" />);
   }
@@ -31,7 +31,22 @@ const getHelpTexts = (aksjonspunkter) => {
   return helpTexts;
 };
 
-export const OmsorgInfoPanel = ({
+interface OwnProps {
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  hasOpenAksjonspunkter: boolean;
+  submittable: boolean;
+  omsorg?: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingId: number;
+  behandlingVersjon: number;
+  personopplysninger: Personopplysninger;
+  ytelsefordeling: Ytelsefordeling;
+  soknad: Soknad;
+}
+
+export const OmsorgInfoPanel: FunctionComponent<OwnProps & WrappedReduxFormContext & InjectedFormProps> = ({
   personopplysninger,
   readOnly,
   hasOpenAksjonspunkter,
@@ -54,7 +69,7 @@ export const OmsorgInfoPanel = ({
     )}
     <BostedFaktaView personopplysning={personopplysninger} ektefellePersonopplysning={personopplysninger.ektefelle} alleKodeverk={alleKodeverk} />
     <form onSubmit={formProps.handleSubmit}>
-      <FaktaBegrunnelseTextField isDirty={formProps.dirty} isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
+      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
       <OmsorgFaktaForm
         readOnly={readOnly}
         omsorg={omsorg}
@@ -76,30 +91,19 @@ export const OmsorgInfoPanel = ({
   </>
 );
 
-OmsorgInfoPanel.propTypes = {
-  aksjonspunkter: PropTypes.arrayOf(omsorgAksjonspunkterPropType.isRequired).isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  omsorg: PropTypes.bool,
-  intl: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool,
-  }).isRequired,
-  personopplysninger: omsorgPersonopplysningerPropType.isRequired,
-  ...formPropTypes,
-};
-
-OmsorgInfoPanel.defaultProps = {
-  omsorg: undefined,
-};
+interface PureOwnProps {
+  ytelsefordeling: Ytelsefordeling;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
 
 const buildInitialValues = createSelector([
-  (ownProps) => ownProps.ytelsefordeling, (ownProps) => ownProps.aksjonspunkter], (ytelsefordeling, aksjonspunkter) => {
-  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
+  (ownProps: PureOwnProps) => ownProps.ytelsefordeling,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(ytelsefordeling, aksjonspunkter) => {
+  const omsorgAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
     || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   return {
     ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
@@ -107,7 +111,7 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values, submitCallback, aksjonspunkter) => {
+const transformValues = (values: any, submitCallback: (...args: any[]) => any, aksjonspunkter: Aksjonspunkt[]) => {
   const aksjonspunkterArray = [];
   if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)) {
     aksjonspunkterArray.push(OmsorgFaktaForm.transformAleneomsorgValues(values));
@@ -123,9 +127,9 @@ const transformValues = (values, submitCallback, aksjonspunkter) => {
   return submitCallback(aksjonspunkterMedBegrunnelse);
 };
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => transformValues(values, initialOwnProps.submitCallback, initialOwnProps.aksjonspunkter);
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => transformValues(values, initialOwnProps.submitCallback, initialOwnProps.aksjonspunkter);
+  return (state: any, ownProps: PureOwnProps) => ({
     initialValues: buildInitialValues(ownProps),
     omsorg: behandlingFormValueSelector('OmsorgInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'omsorg'),
     onSubmit,

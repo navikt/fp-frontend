@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
+import { Personopplysninger } from '@fpsak-frontend/types';
 
 import BostedFaktaView from './BostedFaktaView';
 
@@ -12,27 +13,27 @@ describe('<BostedFaktaView>', () => {
     aktoerId: '1',
     personstatus: {
       kode: 'BOSA',
-      navn: 'Bosatt',
+      kodeverk: '',
     },
     navBrukerKjonn: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     statsborgerskap: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     diskresjonskode: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     sivilstand: {
       kode: 'UGIF',
-      navn: 'Ugift',
+      kodeverk: '',
     },
     region: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     adresser: [],
   };
@@ -46,34 +47,34 @@ describe('<BostedFaktaView>', () => {
     ],
     personstatus: {
       kode: 'BOSA',
-      navn: 'Bosatt',
+      kodeverk: 'Bosatt',
     },
     navBrukerKjonn: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     statsborgerskap: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     diskresjonskode: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     sivilstand: {
       kode: 'UGIF',
-      navn: 'Ugift',
+      kodeverk: 'Ugift',
     },
     region: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     adresser: [],
   };
 
   it('vise bostedBarn for hvert barn', () => {
     const wrapper = shallow(<BostedFaktaView
-      personopplysning={soker}
+      personopplysning={soker as Personopplysninger}
       alleKodeverk={{}}
     />);
     const bostedBarnView = wrapper.find('BostedBarnView');
@@ -85,7 +86,7 @@ describe('<BostedFaktaView>', () => {
 
   it('vise bostedSoker for søker', () => {
     const wrapper = shallow(<BostedFaktaView
-      personopplysning={soker}
+      personopplysning={soker as Personopplysninger}
       alleKodeverk={{}}
     />);
     const bostedSokerView = wrapper.find(BostedSokerFaktaIndex);
@@ -99,33 +100,33 @@ describe('<BostedFaktaView>', () => {
       aktoerId: '1',
       personstatus: {
         kode: 'BOSA',
-        navn: 'Bosatt',
+        kodeverk: '',
       },
       navBrukerKjonn: {
         kode: '',
-        navn: '',
+        kodeverk: '',
       },
       statsborgerskap: {
         kode: '',
-        navn: '',
+        kodeverk: '',
       },
       diskresjonskode: {
         kode: '',
-        navn: '',
+        kodeverk: '',
       },
       sivilstand: {
         kode: 'UGIF',
-        navn: 'Ugift',
+        kodeverk: '',
       },
       region: {
         kode: '',
-        navn: '',
+        kodeverk: '',
       },
       adresser: [],
     };
     const wrapper = shallow(<BostedFaktaView
-      personopplysning={soker}
-      ektefellePersonopplysning={ektefelle}
+      personopplysning={soker as Personopplysninger}
+      ektefellePersonopplysning={ektefelle as Personopplysninger}
       alleKodeverk={{}}
     />);
     const bostedSokerView = wrapper.find(BostedSokerFaktaIndex);
