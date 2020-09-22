@@ -157,7 +157,6 @@ export const ActivityPanel: FunctionComponent<PureOwnProps & OwnProps & WrappedC
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              { /* @ts-ignore Fiks */}
               <PeriodpickerField
                 key={activityId}
                 names={['opptjeningFom', 'opptjeningTom']}

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { Fields } from 'redux-form';
 import moment from 'moment';
 import { injectIntl, IntlShape } from 'react-intl';
@@ -111,7 +111,7 @@ const acceptedFormatToIso = (value: string, name: string, names: string[]): stri
 const formatValue = (format: (value: string) => string) => (value: string) => isoToDdMmYyyy(format(value));
 const parseValue = (parse: (value: string) => string, names: string[]) => (value: string, name: string) => parse(acceptedFormatToIso(value, name, names));
 
-const PeriodpickerField = ({
+const PeriodpickerField: FunctionComponent<PeriodpickerFieldProps> = ({
   names, label, readOnly, format, parse, isEdited, hideLabel, ...otherProps
 }) => {
   const memoReadOnly = useMemo(() => renderReadOnly(), []);
