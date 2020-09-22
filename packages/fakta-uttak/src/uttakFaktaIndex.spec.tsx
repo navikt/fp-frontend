@@ -4,6 +4,9 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, Behandling, FamilieHendelseSamling, Personopplysninger, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UttakInfoPanel from './components/UttakInfoPanel';
@@ -14,13 +17,11 @@ describe('<UttakFaktaIndex>', () => {
     versjon: 1,
     sprakkode: {
       kode: 'NO',
+      kodeverk: '',
     },
     type: {
       kode: '1',
       kodeverk: '1',
-    },
-    behandlingsresultat: {
-      skjaeringstidspunktForeldrepenger: '2019-01-01',
     },
     status: {
       kode: '1',
@@ -32,6 +33,7 @@ describe('<UttakFaktaIndex>', () => {
   const aksjonspunkter = [{
     definisjon: {
       kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
+      kodeverk: '',
     },
     status: {
       kode: '1',
@@ -43,21 +45,19 @@ describe('<UttakFaktaIndex>', () => {
 
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<UttakFaktaIndex
-      behandling={behandling}
-      aksjonspunkter={aksjonspunkter}
+      behandling={behandling as Behandling}
+      aksjonspunkter={aksjonspunkter as Aksjonspunkt[]}
       submitCallback={sinon.spy()}
       readOnly={false}
       uttakKontrollerFaktaPerioder={{
         perioder: [],
       }}
-      shouldOpenDefaultInfoPanels
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
-      personopplysninger={{}}
-      familiehendelse={{}}
+      personopplysninger={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
       alleKodeverk={{}}
-      ytelsefordeling={{}}
-      submittable
+      ytelsefordeling={{} as Ytelsefordeling}
     />);
     expect(wrapper.find(UttakInfoPanel)).has.length(1);
   });

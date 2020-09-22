@@ -1,10 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import {
+  Aksjonspunkt, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling,
+  KodeverkMedNavn, Personopplysninger, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+
 import UttakInfoPanel from './components/UttakInfoPanel';
-import uttakAksjonspunkterPropType from './propTypes/uttakAksjonspunkterPropType';
-import uttakBehandlingPropType from './propTypes/uttakBehandlingPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -14,7 +16,21 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const UttakFaktaIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  aksjonspunkter: Aksjonspunkt[];
+  ytelsefordeling: Ytelsefordeling;
+  personopplysninger: Personopplysninger;
+  familiehendelse: FamilieHendelseSamling;
+  uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  kanOverstyre: boolean;
+}
+
+const UttakFaktaIndex: FunctionComponent<OwnProps> = ({
   behandling,
   aksjonspunkter,
   submitCallback,
@@ -25,7 +41,6 @@ const UttakFaktaIndex = ({
   personopplysninger,
   familiehendelse,
   readOnly,
-  submittable,
   kanOverstyre,
 }) => (
   <RawIntlProvider value={intl}>
@@ -46,24 +61,8 @@ const UttakFaktaIndex = ({
       kanOverstyre={kanOverstyre}
       personopplysninger={personopplysninger}
       familiehendelse={familiehendelse}
-      submittable={submittable}
     />
   </RawIntlProvider>
 );
-
-UttakFaktaIndex.propTypes = {
-  behandling: uttakBehandlingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(uttakAksjonspunkterPropType).isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  ytelsefordeling: PropTypes.shape().isRequired,
-  uttakKontrollerFaktaPerioder: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  familiehendelse: PropTypes.shape().isRequired,
-  kanOverstyre: PropTypes.bool.isRequired,
-  faktaArbeidsforhold: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  personopplysninger: PropTypes.shape().isRequired,
-  submittable: PropTypes.bool.isRequired,
-};
 
 export default UttakFaktaIndex;

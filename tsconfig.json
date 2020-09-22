@@ -43,6 +43,7 @@
 		"packages/fakta-opptjening",
 		"packages/fakta-tilleggsopplysninger",
 		"packages/fakta-saken",
+		"packages/fakta-uttak",
 		"packages/fakta-verge",
 		"packages/fakta-ytelser",
 		"packages/form",

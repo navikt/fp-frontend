@@ -7,12 +7,12 @@ import UttakPeriodeType from './UttakPeriodeType';
 import UttakPeriodeInnhold from './UttakPeriodeInnhold';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
-const getMockedFields = (fieldNames, perioder) => {
+const getMockedFields = (fieldNames: any, perioder: any) => {
   const field = {
-    get: (idx) => perioder[idx],
+    get: (idx: any) => perioder[idx],
   };
   return {
-    map: (callback) => fieldNames.map((fieldname, idx) => callback(fieldname, idx, field)),
+    map: (callback: any) => fieldNames.map((fieldname: any, idx: any) => callback(fieldname, idx, field)),
   };
 };
 

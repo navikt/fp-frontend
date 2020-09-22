@@ -205,7 +205,6 @@ describe('<OpptjeningFaktaForm>', () => {
       alleKodeverk={{}}
     />);
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOpptjeningActivity' does not exi... Remove this comment to see the full error message
     expect(wrapper.state().selectedOpptjeningActivity).to.eql(opptjeningActivities[1]);
 
     expect(formInitCallback.getCalls()).to.have.length(0);
@@ -253,7 +252,6 @@ describe('<OpptjeningFaktaForm>', () => {
     expect(args[1]).to.eql('opptjeningActivities');
     expect(args[2]).to.eql([opptjeningActivities[0], editedActivity]);
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOpptjeningActivity' does not exi... Remove this comment to see the full error message
     expect(wrapper.state().selectedOpptjeningActivity).is.undefined;
 
     expect(formInitCallback.getCalls()).to.have.length(1);
@@ -284,7 +282,6 @@ describe('<OpptjeningFaktaForm>', () => {
 
     wrapper.find(Knapp).simulate('click');
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOpptjeningActivity' does not exi... Remove this comment to see the full error message
     expect(wrapper.state().selectedOpptjeningActivity).is.eql({
       id: 3,
       erGodkjent: true,
@@ -325,7 +322,6 @@ describe('<OpptjeningFaktaForm>', () => {
     expect(initCalls[0].args[0]).to.eql('Behandling_123.ActivityPanel');
     expect(initCalls[0].args[1]).to.eql({});
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'selectedOpptjeningActivity' does not exi... Remove this comment to see the full error message
     expect(wrapper.state().selectedOpptjeningActivity).is.undefined;
   });
 });

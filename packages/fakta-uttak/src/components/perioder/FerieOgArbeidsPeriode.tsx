@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
+import { InjectedFormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -17,17 +17,37 @@ import {
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
+import { Kodeverk } from '@fpsak-frontend/types';
 
-import InntektsmeldingInfo from '../InntektsmeldingInfo';
 import EndreSoknadsperiode from '../EndreSoknadsperiode';
 import PerioderKnapper from './PerioderKnapper';
+import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFaktaPerioderTsType';
 
 import styles from './periodeTyper.less';
 
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-export const FerieOgArbeidsPeriode = ({
+interface OwnProps {
+  resultat?: string;
+  updatePeriode: (...args: any[]) => any;
+  cancelEditPeriode: (...args: any[]) => any;
+  id: string;
+  updated: boolean;
+  bekreftet: boolean;
+  readOnly: boolean;
+  arbeidstidprosent?: number;
+  uttakPeriodeType: Kodeverk;
+  arbeidsgiver?: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'];
+  skalViseResultat: boolean;
+  oppholdArsak?: Kodeverk;
+  behandlingStatusKode?: string;
+  førsteUttaksdato?: string;
+  originalResultat: {};
+  getKodeverknavn: (...args: any[]) => any;
+}
+
+export const FerieOgArbeidsPeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
   resultat,
   id,
   cancelEditPeriode,
@@ -35,17 +55,15 @@ export const FerieOgArbeidsPeriode = ({
   bekreftet,
   arbeidstidprosent,
   readOnly,
-  inntektsmeldingInfo,
   arbeidsgiver,
   uttakPeriodeType,
   behandlingStatusKode,
   skalViseResultat,
   førsteUttaksdato,
   originalResultat,
-  skalViseInntektmeldingInfo,
   oppholdArsak,
   getKodeverknavn,
-  ...formProps
+  ...formProps 
 }) => {
   const isEdited = resultat === uttakPeriodeVurdering.PERIODE_OK_ENDRET
   && readOnly && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
@@ -114,16 +132,6 @@ export const FerieOgArbeidsPeriode = ({
                 />
               </div>
             </FlexColumn>
-            {skalViseInntektmeldingInfo && (
-            <FlexColumn className={styles.fieldColumn}>
-              <InntektsmeldingInfo
-                inntektsmeldingInfo={inntektsmeldingInfo}
-                uttakPeriodeType={uttakPeriodeType}
-                arbeidsgiver={arbeidsgiver}
-                getKodeverknavn={getKodeverknavn}
-              />
-            </FlexColumn>
-            )}
           </FlexRow>
         </FlexContainer>
         <PerioderKnapper
@@ -142,29 +150,7 @@ export const FerieOgArbeidsPeriode = ({
   );
 };
 
-FerieOgArbeidsPeriode.propTypes = {
-  resultat: PropTypes.string,
-  updatePeriode: PropTypes.func.isRequired,
-  cancelEditPeriode: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  updated: PropTypes.bool.isRequired,
-  bekreftet: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  arbeidstidprosent: PropTypes.number,
-  inntektsmeldingInfo: PropTypes.arrayOf(PropTypes.shape()),
-  uttakPeriodeType: PropTypes.shape().isRequired,
-  arbeidsgiver: PropTypes.shape(),
-  skalViseResultat: PropTypes.bool.isRequired,
-  oppholdArsak: PropTypes.shape(),
-  behandlingStatusKode: PropTypes.string,
-  førsteUttaksdato: PropTypes.string,
-  originalResultat: PropTypes.shape().isRequired,
-  skalViseInntektmeldingInfo: PropTypes.bool.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-};
-
 FerieOgArbeidsPeriode.defaultProps = {
-  inntektsmeldingInfo: [],
   arbeidstidprosent: null,
   resultat: undefined,
   arbeidsgiver: {},
@@ -173,7 +159,7 @@ FerieOgArbeidsPeriode.defaultProps = {
   førsteUttaksdato: undefined,
 };
 
-const validateForm = (values) => {
+const validateForm = (values: any) => {
   const errors = {};
   if (!values) {
     return errors;
@@ -190,27 +176,27 @@ const validateForm = (values) => {
 };
 
 const buildInitialValues = createSelector([
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.saksebehandlersBegrunnelse`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.oppholdÅrsak`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
-  (_state, ownProps) => ownProps],
+  (_state: any, ownProps: any) => ownProps],
 (begrunnelse, saksebehandlersBegrunnelse, oppholdArsak, initialResultat, ownProps) => {
   let initialResultatValue = initialResultat ? initialResultat.kode : undefined;
   if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse) {
@@ -228,12 +214,12 @@ const buildInitialValues = createSelector([
   };
 });
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `arbeidOgFerieForm-${initialOwnProps.id}`;
-  const onSubmit = (values) => initialOwnProps.updatePeriode(values);
+  const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
 
-  return (state, ownProps) => {
+  return (state: any, ownProps: any) => {
     const resultat = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat');
     const førsteUttaksdato = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, 'førsteUttaksdato');
     const originalResultat = behandlingFormValueSelector(
@@ -243,9 +229,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
     )(state, `${ownProps.fieldId}.originalResultat`) || {};
     const begrunnelse = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.begrunnelse`);
     const oppholdArsak = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.oppholdÅrsak`);
-
-    // skal vise inntektsmeldinginfo for søknader mottatt før 4.juni og hvis 5070. https://jira.adeo.no/browse/PFP-7559
-    const skalViseInntektmeldingInfo = false; // moment(getSoknad(state).mottattDato).isBefore('2019-06-04');
 
     const skalViseResultat = !(ownProps.readOnly && oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse);
     const { bekreftet } = ownProps;
@@ -258,7 +241,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
       oppholdArsak,
       førsteUttaksdato,
       originalResultat,
-      skalViseInntektmeldingInfo,
       initialValues: buildInitialValues(state, ownProps),
       updated: behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.updated`),
       form: formName,

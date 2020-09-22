@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
+import { FamilieHendelse, FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
@@ -11,30 +11,30 @@ import InnleggelsePeriode from './perioder/InnleggelsePeriode';
 import ForeldreAnsvarPeriode from './perioder/ForeldreAnsvarPeriode';
 
 import styles from './uttakPeriodeInnhold.less';
+import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
 export const renderPeriode = (
-  fieldId,
-  id,
-  updatePeriode,
-  cancelEditPeriode,
-  arbeidstidprosent,
-  readOnly,
-  fraDato,
-  tilDato,
-  utsettelseArsak,
-  overforingArsak,
-  inntektsmeldingInfo,
-  bekreftet,
-  uttakPeriodeType,
-  arbeidsgiver,
-  behandlingStatusKode,
-  farSøkerFør6Uker,
-  behandlingId,
-  behandlingVersjon,
-  gjeldendeFamiliehendelse,
-  vilkarForSykdomExists,
-  getKodeverknavn,
-  sisteUttakdatoFørsteSeksUker,
+  fieldId: string,
+  id: string,
+  updatePeriode: (...args: any[]) => any,
+  cancelEditPeriode: (...args: any[]) => any,
+  arbeidstidprosent: number,
+  readOnly: boolean,
+  fraDato: string,
+  tilDato: string,
+  utsettelseArsak: Kodeverk,
+  overforingArsak: Kodeverk,
+  bekreftet: boolean,
+  uttakPeriodeType: Kodeverk,
+  arbeidsgiver: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'],
+  behandlingStatusKode: string,
+  farSøkerFør6Uker: boolean,
+  behandlingId: number,
+  behandlingVersjon: number,
+  gjeldendeFamiliehendelse: FamilieHendelse,
+  vilkarForSykdomExists: boolean,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  sisteUttakdatoFørsteSeksUker: moment.Moment,
 ) => {
   const utsettelseSwitch = utsettelseArsak ? utsettelseArsak.kode : utsettelseArsakCodes.UDEFINERT;
   const overforingSwitch = overforingArsak ? overforingArsak.kode : overforingArsakCodes.UDEFINERT;
@@ -53,7 +53,6 @@ export const renderPeriode = (
           arbeidstidprosent={arbeidstidprosent}
           fraDato={fraDato}
           tilDato={tilDato}
-          inntektsmeldingInfo={inntektsmeldingInfo}
           bekreftet={bekreftet}
           uttakPeriodeType={uttakPeriodeType}
           arbeidsgiver={arbeidsgiver}
@@ -192,7 +191,32 @@ export const renderPeriode = (
   }
 };
 
-export const UttakPeriodeInnhold = ({
+interface OwnProps {
+  fieldId: string;
+  utsettelseArsak?: Kodeverk;
+  overforingArsak?: Kodeverk;
+  updatePeriode: (...args: any[]) => any;
+  id: string;
+  cancelEditPeriode: (...args: any[]) => any;
+  readOnly: boolean;
+  fraDato: string;
+  tilDato: string;
+  bekreftet: boolean;
+  openForm: boolean;
+  uttakPeriodeType: Kodeverk;
+  behandlingStatusKode: string;
+  farSøkerFør6Uker: boolean;
+  familiehendelse: FamilieHendelseSamling;
+  vilkarForSykdomExists: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  arbeidstidprosent?: number;
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  sisteUttakdatoFørsteSeksUker: moment.Moment;
+  arbeidsgiver?: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'];
+}
+
+export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
   fieldId,
   utsettelseArsak,
   overforingArsak,
@@ -203,7 +227,6 @@ export const UttakPeriodeInnhold = ({
   arbeidstidprosent,
   fraDato,
   tilDato,
-  inntektsmeldingInfo,
   bekreftet,
   openForm,
   uttakPeriodeType,
@@ -233,7 +256,6 @@ export const UttakPeriodeInnhold = ({
         tilDato,
         utsettelseArsak,
         overforingArsak,
-        inntektsmeldingInfo,
         bekreftet,
         uttakPeriodeType,
         arbeidsgiver,
@@ -250,38 +272,8 @@ export const UttakPeriodeInnhold = ({
   );
 };
 
-UttakPeriodeInnhold.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  utsettelseArsak: PropTypes.shape(),
-  overforingArsak: PropTypes.shape(),
-  updatePeriode: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  cancelEditPeriode: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  fraDato: PropTypes.string.isRequired,
-  tilDato: PropTypes.string.isRequired,
-  bekreftet: PropTypes.bool.isRequired,
-  openForm: PropTypes.bool.isRequired,
-  uttakPeriodeType: PropTypes.shape().isRequired,
-  behandlingStatusKode: PropTypes.string.isRequired,
-  farSøkerFør6Uker: PropTypes.bool.isRequired,
-  familiehendelse: PropTypes.shape().isRequired,
-  vilkarForSykdomExists: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  arbeidstidprosent: PropTypes.number,
-  inntektsmeldingInfo: PropTypes.arrayOf(PropTypes.shape()),
-  getKodeverknavn: PropTypes.func.isRequired,
-  sisteUttakdatoFørsteSeksUker: PropTypes.shape().isRequired,
-  arbeidsgiver: PropTypes.shape(),
-};
-
 UttakPeriodeInnhold.defaultProps = {
-  arbeidstidprosent: null,
   inntektsmeldingInfo: [],
-  arbeidsgiver: {},
-  utsettelseArsak: undefined,
-  overforingArsak: undefined,
 };
 
 export default UttakPeriodeInnhold;

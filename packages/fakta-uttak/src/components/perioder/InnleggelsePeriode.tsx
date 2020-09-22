@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FieldArray } from 'redux-form';
+import { FieldArray, InjectedFormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
@@ -26,9 +25,25 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
+interface OwnProps {
+  fieldId: string;
+  resultat?: string;
+  updatePeriode: (...args: any[]) => any;
+  id: string;
+  updated: boolean;
+  bekreftet: boolean;
+  cancelEditPeriode: (...args: any[]) => any;
+  readOnly: boolean;
+  dokumentertePerioder?: {}[];
+  fraDato: string;
+  tilDato: string;
+  formSyncErrors?: {};
+  behandlingStatusKode?: string;
+}
+
 // TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
 
-export const InnleggelsePeriode = ({
+export const InnleggelsePeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
   fraDato,
   tilDato,
   resultat,
@@ -49,7 +64,7 @@ export const InnleggelsePeriode = ({
     && formProps.submitFailed
     && formSyncErrors.dokumentertePerioder.length - 1 > 0
   ) {
-    formSyncErrors.dokumentertePerioder.forEach((error) => {
+    formSyncErrors.dokumentertePerioder.forEach((error: any) => {
       errorHeight
         += error !== undefined && error.fom[0].id === 'ValidationMessage.NotEmpty'
           ? 30
@@ -146,22 +161,6 @@ export const InnleggelsePeriode = ({
   );
 };
 
-InnleggelsePeriode.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  resultat: PropTypes.string,
-  updatePeriode: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  updated: PropTypes.bool.isRequired,
-  bekreftet: PropTypes.bool.isRequired,
-  cancelEditPeriode: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  dokumentertePerioder: PropTypes.arrayOf(PropTypes.shape()),
-  fraDato: PropTypes.string.isRequired,
-  tilDato: PropTypes.string.isRequired,
-  formSyncErrors: PropTypes.shape(),
-  behandlingStatusKode: PropTypes.string,
-};
-
 InnleggelsePeriode.defaultProps = {
   dokumentertePerioder: [{}],
   formSyncErrors: {},
@@ -169,11 +168,11 @@ InnleggelsePeriode.defaultProps = {
   behandlingStatusKode: undefined,
 };
 
-const validateInnleggelseForm = (values) => {
+const validateInnleggelseForm = (values: any) => {
   const errors = {};
   errors.dokumentertePerioder = [];
   if (values && values.dokumentertePerioder) {
-    values.dokumentertePerioder.forEach((periode, index) => {
+    values.dokumentertePerioder.forEach((periode: any, index: any) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
       if (invalid) {
         errors.dokumentertePerioder[index] = {
@@ -186,22 +185,22 @@ const validateInnleggelseForm = (values) => {
 };
 
 const buildInitialValues = createSelector([
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
-  (_state, ownProps) => ownProps.id],
+  (_state: any, ownProps: any) => ownProps.id],
 (begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
   begrunnelse,
   id,
@@ -212,12 +211,12 @@ const buildInitialValues = createSelector([
           : [],
 }));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `innleggelseForm-${initialOwnProps.id}`;
-  const onSubmit = (values) => initialOwnProps.updatePeriode(values);
+  const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
 
-  return (state, ownProps) => ({
+  return (state: any, ownProps: any) => ({
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
     dokumentertePerioder: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'dokumentertePerioder'),
     resultat: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat'),

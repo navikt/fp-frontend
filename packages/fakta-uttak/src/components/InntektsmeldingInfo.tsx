@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classnames from 'classnames/bind';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -11,8 +10,10 @@ import {
   FlexColumn, FlexRow, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './uttakPeriode.less';
+import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
 const classNames = classnames.bind(styles);
 /**
@@ -41,7 +42,7 @@ const renderAvvikContentGraderingFraSøknad = () => {
   );
 };
 
-const renderAvvikContentUtsettelseFraSøknad = (utsettelseArsak, getKodeverknavn) => {
+const renderAvvikContentUtsettelseFraSøknad = (utsettelseArsak: any, getKodeverknavn: any) => {
   const intl = useIntl();
   return (
     <React.Fragment key={guid()}>
@@ -55,7 +56,7 @@ const renderAvvikContentUtsettelseFraSøknad = (utsettelseArsak, getKodeverknavn
             <FormattedMessage
               id="UttakInfoPanel.IkkeOppgittUtsettelse"
               values={{
-                b: (chunks) => <b>{chunks}</b>,
+                b: (chunks: any) => <b>{chunks}</b>,
                 årsak: getKodeverknavn(utsettelseArsak),
                 årsakLowerCase: getKodeverknavn(utsettelseArsak).toLowerCase(),
               }}
@@ -67,12 +68,12 @@ const renderAvvikContentUtsettelseFraSøknad = (utsettelseArsak, getKodeverknavn
   );
 };
 
-const renderAvvikContent = (periode, avvik, getKodeverknavn) => {
+const renderAvvikContent = (periode: any, avvik: any, getKodeverknavn: any) => {
   const {
     fom, tom, arbeidsprosent,
   } = periode;
   const { isAvvikPeriode, isAvvikArbeidsprosent, isAvvikUtsettelse } = avvik;
-  const numberOfDaysAndWeeks = calcDaysAndWeeks(fom, tom, 'YYYY-MM-DD');
+  const numberOfDaysAndWeeks = calcDaysAndWeeks(fom, tom);
   const isGradering = arbeidsprosent !== undefined && arbeidsprosent !== null;
   const tidenesEnde = tom === TIDENES_ENDE;
   const intl = useIntl();
@@ -125,7 +126,7 @@ const renderAvvikContent = (periode, avvik, getKodeverknavn) => {
   );
 };
 
-const renderAvvik = (innmldInfo, getKodeverknavn) => {
+const renderAvvik = (innmldInfo: any, getKodeverknavn: any) => {
   const {
     isManglendeInntektsmelding, avvik, graderingPerioder, utsettelsePerioder,
   } = innmldInfo;
@@ -138,32 +139,36 @@ const renderAvvik = (innmldInfo, getKodeverknavn) => {
     return [renderAvvikContentGraderingFraSøknad()];
   }
 
-  return inntektsmeldingInfoPerioder.map((periode) => renderAvvikContent(periode, avvik, getKodeverknavn));
+  return inntektsmeldingInfoPerioder.map((periode: any) => renderAvvikContent(periode, avvik, getKodeverknavn));
 };
 
-const shouldRender = (inntektsmeldingInfo, getKodeverknavn) => {
-  const avvik = flatten(inntektsmeldingInfo.map((innmldInfo) => (
-    renderAvvik(innmldInfo, getKodeverknavn)
-  )));
-  const filteredAvvik = avvik.filter((av) => av);
+const shouldRender = (inntektsmeldingInfo: any, getKodeverknavn: any) => {
+  const avvik = flatten(inntektsmeldingInfo.map((innmldInfo: any) => renderAvvik(innmldInfo, getKodeverknavn)));
+  const filteredAvvik = avvik.filter((av: any) => av);
 
   return filteredAvvik.length > 0;
 };
 
-export const InntektsmeldingInfo = ({
+interface OwnProps {
+  inntektsmeldingInfo: {}[];
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  arbeidsgiver?: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'];
+}
+
+export const InntektsmeldingInfo: FunctionComponent<OwnProps> = ({
   inntektsmeldingInfo,
   arbeidsgiver,
   getKodeverknavn,
 }) => {
-  const shouldRenderAvvik = shouldRender(inntektsmeldingInfo, getKodeverkNavn);
+  const shouldRenderAvvik = shouldRender(inntektsmeldingInfo, getKodeverknavn);
   return (
     <>
       {shouldRenderAvvik && (
         <>
           <Undertekst><FormattedMessage id="UttakInfoPanel.AvvikiInntektsmelding" /></Undertekst>
           <VerticalSpacer eightPx />
-          {inntektsmeldingInfo.map((innmldInfo) => {
-            const renderContent = renderAvvik(innmldInfo, getKodeverknavn).filter((rc) => rc);
+          {inntektsmeldingInfo.map((innmldInfo: any) => {
+            const renderContent = renderAvvik(innmldInfo, getKodeverknavn).filter((rc: any) => rc);
             const avvikArbeidforhold = innmldInfo.arbeidsgiver !== arbeidsgiver || {}.navn || innmldInfo.arbeidsgiverOrgnr !== arbeidsgiver || {}.identifikator;
             return (
               renderContent.length > 0 && (
@@ -180,12 +185,6 @@ export const InntektsmeldingInfo = ({
       )}
     </>
   );
-};
-
-InntektsmeldingInfo.propTypes = {
-  inntektsmeldingInfo: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  arbeidsgiver: PropTypes.shape(),
 };
 
 InntektsmeldingInfo.defaultProps = {

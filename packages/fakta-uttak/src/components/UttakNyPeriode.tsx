@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
@@ -41,6 +40,7 @@ import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from './utils/uttakVisningsnavnHelper';
 
@@ -65,29 +65,41 @@ const gyldigeOverføringÅrsaker = [
   overforingArsak.ALENEOMSORG,
 ];
 
-const mapPeriodeTyper = (typer) => typer
-  .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
-  .map(({ kode, navn }) => (
+const mapPeriodeTyper = (typer: any) => typer.filter(({
+  kode,
+}: any) => gyldigeUttakperioder.includes(kode))
+  .map(({
+    kode,
+    navn,
+  }: any) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
   ));
 
-const mapOverføringÅrsaker = (typer) => typer
-  .filter(({ kode }) => gyldigeOverføringÅrsaker.includes(kode))
-  .map(({ kode, navn }) => (
+const mapOverføringÅrsaker = (typer: any) => typer
+  .filter(({
+    kode,
+  }: any) => gyldigeOverføringÅrsaker.includes(kode))
+  .map(({
+    kode,
+    navn,
+  }: any) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
   ));
 
-const mapUtsettelseÅrsaker = (typer) => typer.map(({ kode, navn }) => (
+const mapUtsettelseÅrsaker = (typer: any) => typer.map(({
+  kode,
+  navn
+}: any) => (
   <option value={kode} key={kode}>
     {navn}
   </option>
 ));
 
-const mapArbeidsforhold = (andeler, getKodeverknavn) => andeler.map((andel) => {
+const mapArbeidsforhold = (andeler: any, getKodeverknavn: any) => andeler.map((andel: any) => {
   const { arbeidType, arbeidsgiver } = andel;
 
   let periodeArbeidsforhold = '';
@@ -109,10 +121,23 @@ const mapArbeidsforhold = (andeler, getKodeverknavn) => andeler.map((andel) => {
   );
 });
 
-const periodeTypeTrengerArsak = (sokerKjonn, periodeType) => (sokerKjonn === navBrukerKjonn.MANN && periodeType === uttakPeriodeType.MODREKVOTE)
+const periodeTypeTrengerArsak = (sokerKjonn: any, periodeType: any) => (sokerKjonn === navBrukerKjonn.MANN && periodeType === uttakPeriodeType.MODREKVOTE)
   || (sokerKjonn === navBrukerKjonn.KVINNE && periodeType === uttakPeriodeType.FEDREKVOTE);
 
-export const UttakNyPeriode = ({
+interface OwnProps {
+  newPeriodeResetCallback: (...args: any[]) => any;
+  utsettelseÅrsaker: {}[];
+  overføringÅrsaker: {}[];
+  andeler: {}[];
+  nyPeriode: {};
+  sokerKjonn: string;
+  nyPeriodeDisabledDaysFom: string;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  getKodeverknavn: (...args: any[]) => any;
+  periodeTyper?: {}[];
+}
+
+export const UttakNyPeriode: FunctionComponent<OwnProps> = ({
   newPeriodeResetCallback,
   periodeTyper,
   utsettelseÅrsaker,
@@ -124,7 +149,7 @@ export const UttakNyPeriode = ({
   andeler,
   ...formProps
 }) => {
-  const numberOfDaysAndWeeks = calcDaysAndWeeks(nyPeriode.fom, nyPeriode.tom, ISO_DATE_FORMAT);
+  const numberOfDaysAndWeeks = calcDaysAndWeeks(nyPeriode.fom, nyPeriode.tom);
 
   return (
     <div className={styles.periodeContainer}>
@@ -137,7 +162,7 @@ export const UttakNyPeriode = ({
       </div>
       <div className={styles.periodeInnhold}>
         <VerticalSpacer eightPx />
-        <FlexContainer fluid wrap>
+        <FlexContainer wrap>
           <FlexRow wrap>
             <FlexColumn>
               <FlexRow>
@@ -316,32 +341,21 @@ export const UttakNyPeriode = ({
   );
 };
 
-UttakNyPeriode.propTypes = {
-  newPeriodeResetCallback: PropTypes.func.isRequired,
-  utsettelseÅrsaker: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  overføringÅrsaker: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  andeler: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  nyPeriode: PropTypes.shape().isRequired,
-  sokerKjonn: PropTypes.string.isRequired,
-  nyPeriodeDisabledDaysFom: PropTypes.string.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  periodeTyper: PropTypes.arrayOf(PropTypes.shape()),
-};
-
 UttakNyPeriode.defaultProps = {
   periodeTyper: null,
 };
 
-const getPeriodeData = (periode, periodeArray) => periodeArray.filter(({ kode }) => kode === periode);
+const getPeriodeData = (periode: any, periodeArray: any) => periodeArray.filter(({
+  kode
+}: any) => kode === periode);
 
 const transformValues = (
-  values,
-  periodeTyper,
-  utsettelseÅrsaker,
-  overføringÅrsaker,
-  uttakPeriodeVurderingTyper,
-  getKodeverknavn,
+  values: any,
+  periodeTyper: any,
+  utsettelseÅrsaker: any,
+  overføringÅrsaker: any,
+  uttakPeriodeVurderingTyper: any,
+  getKodeverknavn: any,
 ) => {
   const periodeObjekt = getPeriodeData(values.periodeType, periodeTyper)[0] || null;
   const utsettelseÅrsakObjekt = getPeriodeData(values.periodeArsak, utsettelseÅrsaker)[0];
@@ -362,7 +376,7 @@ const transformValues = (
     }
     : undefined;
 
-  const resultat = uttakPeriodeVurderingTyper.find((type) => type.kode === uttakPeriodeVurdering.PERIODE_OK);
+  const resultat = uttakPeriodeVurderingTyper.find((type: any) => type.kode === uttakPeriodeVurdering.PERIODE_OK);
   const arbeidsForhold = values.arbeidsForhold ? values.arbeidsForhold.split('|') : null;
 
   const arbeidsgiver = arbeidsForhold && (arbeidsForhold[0] !== '-' || arbeidsForhold[2] !== '-')
@@ -415,7 +429,7 @@ const transformValues = (
   };
 };
 
-const validateNyPeriodeForm = (values) => {
+const validateNyPeriodeForm = (values: any) => {
   const errors = {};
   if (!values) {
     return errors;
@@ -430,9 +444,9 @@ const validateNyPeriodeForm = (values) => {
   return errors;
 };
 
-const emptyAndelerArray = [];
+const emptyAndelerArray: any = [];
 
-const mapStateToPropsFactory = (_initialState, ownProps) => {
+const mapStateToPropsFactory = (_initialState: any, ownProps: any) => {
   const {
     newPeriodeCallback,
     uttakPeriodeVurderingTyper,
@@ -447,7 +461,7 @@ const mapStateToPropsFactory = (_initialState, ownProps) => {
   const periodeTyper = alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE] || null;
   const utsettelseÅrsaker = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
   const overføringÅrsaker = alleKodeverk[kodeverkTyper.OVERFOERING_AARSAK_TYPE];
-  const onSubmit = (values) => newPeriodeCallback(
+  const onSubmit = (values: any) => newPeriodeCallback(
     transformValues(
       values,
       periodeTyper,
@@ -458,7 +472,7 @@ const mapStateToPropsFactory = (_initialState, ownProps) => {
     ),
   );
 
-  return (state) => {
+  return (state: any) => {
     const andeler = faktaArbeidsforhold || emptyAndelerArray;
 
     return {

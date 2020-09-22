@@ -1,17 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
+
 import aksjonspunktCodes, { isVilkarForSykdomOppfylt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import {
+  Aksjonspunkt, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
+  UttakKontrollerFaktaPerioder, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+
 import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
 import UttakFaktaForm from './UttakFaktaForm';
 
-const getBehandlingArsakTyper = (behandlingArsaker) => {
+const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingArsaker']) => {
   if (behandlingArsaker) {
-    return behandlingArsaker.map(({ behandlingArsakType }) => behandlingArsakType);
+    return behandlingArsaker.map(({
+      behandlingArsakType,
+    }: any) => behandlingArsakType);
   }
 
   return undefined;
@@ -21,9 +28,28 @@ const getErManueltOpprettet = (behandlingArsaker = []) => behandlingArsaker.some
 
 const getErArsakTypeHendelseFodsel = (behandlingArsakTyper = []) => behandlingArsakTyper.some((bt) => bt.kode === 'RE-HENDELSE-FØDSEL');
 
-const sortUttaksperioder = (p1, p2) => moment(p1.tom).diff(moment(p2.tom));
+const sortUttaksperioder = (p1: UttakKontrollerFaktaPerioder, p2: UttakKontrollerFaktaPerioder) => moment(p1.tom).diff(moment(p2.tom));
 
-const UttakInfoPanel = ({
+interface OwnProps {
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  behandlingType: Kodeverk;
+  behandlingArsaker: Behandling['behandlingArsaker'];
+  behandlingStatus: Kodeverk;
+  behandlingId: number;
+  behandlingVersjon: number;
+  ytelsefordeling: Ytelsefordeling;
+  uttakPerioder: UttakKontrollerFaktaPerioder[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  kanOverstyre: boolean;
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  personopplysninger: Personopplysninger;
+  familiehendelse: FamilieHendelseSamling;
+  behandlingPaaVent?: boolean;
+}
+
+const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   aksjonspunkter,
   behandlingPaaVent,
@@ -41,11 +67,11 @@ const UttakInfoPanel = ({
   kanOverstyre,
   submitCallback,
 }) => {
-  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const uttakAp = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const vilkarForSykdomExists = aksjonspunkter.filter((ap) => isVilkarForSykdomOppfylt(ap)).length > 0;
-  const uttakApOpen = uttakAp.some((ap) => isAksjonspunktOpen(ap.status.kode));
-  const overrideReadOnly = readOnly || (!uttakAp.length && !uttakAp.some((ap) => ap.kanLoses));
+  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
+  const uttakAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
+  const vilkarForSykdomExists = aksjonspunkter.filter((ap: Aksjonspunkt) => isVilkarForSykdomOppfylt(ap)).length > 0;
+  const uttakApOpen = uttakAp.some((ap: Aksjonspunkt) => isAksjonspunktOpen(ap.status.kode));
+  const overrideReadOnly = readOnly || (!uttakAp.length && !uttakAp.some((ap: Aksjonspunkt) => ap.kanLoses));
   const behandlingArsakTyper = getBehandlingArsakTyper(behandlingArsaker);
   const behandlingIsRevurdering = behandlingType.kode === behandlingTyper.REVURDERING;
   const erManueltOpprettet = getErManueltOpprettet(behandlingArsaker);
@@ -96,25 +122,6 @@ const UttakInfoPanel = ({
 
     </>
   );
-};
-
-UttakInfoPanel.propTypes = {
-  submitCallback: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  behandlingType: PropTypes.shape().isRequired,
-  behandlingArsaker: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  behandlingStatus: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  ytelsefordeling: PropTypes.shape().isRequired,
-  uttakPerioder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  kanOverstyre: PropTypes.bool.isRequired,
-  faktaArbeidsforhold: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  personopplysninger: PropTypes.shape().isRequired,
-  familiehendelse: PropTypes.shape().isRequired,
-  behandlingPaaVent: PropTypes.bool,
 };
 
 UttakInfoPanel.defaultProps = {

@@ -8,28 +8,24 @@ import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { UttakSlettPeriodeModalImpl } from './UttakSlettPeriodeModal';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
 const periode = {
-  arbeidstidsprosent: null,
-  begrunnelse: null,
   bekreftet: true,
-  dokumentertePerioder: [],
   fom: '2018-03-01',
   id: '2018-03-01|2018-04-28',
   openForm: false,
-  resultat: null,
   tom: '2018-04-28',
   updated: false,
   utsettelseÅrsak: {
     kode: '-',
-    navn: 'Ikke satt eller valgt kode',
     kodeverk: 'AARSAK_TYPE',
   },
   uttakPeriodeType: {
     kode: 'FORELDREPENGER',
-    navn: 'Foreldrepenger',
     kodeverk: 'UTTAK_PERIODE_TYPE',
   },
+  isFromSøknad: true,
 };
 
 const closeEvent = sinon.spy();
@@ -40,12 +36,12 @@ const getKodeverknavn = () => undefined;
 describe('<UttakSlettPeriodeModal>', () => {
   it('skal vise åpen modal', () => {
     const wrapper = shallowWithIntl(<UttakSlettPeriodeModalImpl
-      formProps={reduxFormPropsMock}
+      {...reduxFormPropsMock}
       showModal
       intl={intlMock}
       closeEvent={closeEvent}
       cancelEvent={cancelEvent}
-      periode={periode}
+      periode={periode as CustomUttakKontrollerFaktaPerioder}
       getKodeverknavn={getKodeverknavn}
     />);
     const modal = wrapper.find(Modal);
@@ -69,7 +65,7 @@ describe('<UttakSlettPeriodeModal>', () => {
   });
   it('skal rendre lukket modal', () => {
     const wrapper = shallowWithIntl(<UttakSlettPeriodeModalImpl
-      formProps={reduxFormPropsMock}
+      {...reduxFormPropsMock}
       showModal={false}
       intl={intlMock}
       closeEvent={closeEvent}

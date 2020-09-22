@@ -200,7 +200,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       adopsjonFodelsedatoer: '2015-03-15',
     };
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse);
 
     expect(initialValues).to.eql({

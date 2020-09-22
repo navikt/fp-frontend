@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
@@ -8,8 +7,26 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import styles from './periodeTyper.less';
 
-export const PerioderKnapper = ({
-  resultat, updatePeriode, updated, resetPeriode, id, cancelEditPeriode, bekreftet, readOnly,
+interface OwnProps {
+  resultat?: string;
+  updatePeriode: (...args: any[]) => any;
+  updated: boolean;
+  bekreftet: boolean;
+  resetPeriode: (...args: any[]) => any;
+  cancelEditPeriode: (...args: any[]) => any;
+  id: string;
+  readOnly: boolean;
+}
+
+export const PerioderKnapper: FunctionComponent<OwnProps> = ({
+  resultat,
+  updatePeriode,
+  updated,
+  resetPeriode,
+  id,
+  cancelEditPeriode,
+  bekreftet,
+  readOnly,
 }) => (
   !readOnly && (
   <div>
@@ -51,17 +68,6 @@ export const PerioderKnapper = ({
   </div>
   )
 );
-
-PerioderKnapper.propTypes = {
-  resultat: PropTypes.string,
-  updatePeriode: PropTypes.func.isRequired,
-  updated: PropTypes.bool.isRequired,
-  bekreftet: PropTypes.bool.isRequired,
-  resetPeriode: PropTypes.func.isRequired,
-  cancelEditPeriode: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-};
 
 PerioderKnapper.defaultProps = {
   resultat: undefined,

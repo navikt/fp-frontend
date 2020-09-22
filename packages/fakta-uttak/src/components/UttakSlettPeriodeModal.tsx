@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
+import { InjectedFormProps } from 'redux-form';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
@@ -17,11 +17,20 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import styles from './uttakSlettPeriodeModal.less';
+import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
 
-export const UttakSlettPeriodeModalImpl = ({
+interface OwnProps {
+  showModal?: boolean;
+  closeEvent: (...args: any[]) => any;
+  cancelEvent: (...args: any[]) => any;
+  periode: CustomUttakKontrollerFaktaPerioder;
+  getKodeverknavn: (...args: any[]) => any;
+}
+
+export const UttakSlettPeriodeModalImpl: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
   showModal,
   closeEvent,
   cancelEvent,
@@ -41,7 +50,6 @@ export const UttakSlettPeriodeModalImpl = ({
       onRequestClose={closeEvent}
       closeButton={false}
       shouldCloseOnOverlayClick={false}
-      ariaHideApp={false}
     >
       <FlexContainer wrap>
         <FlexRow>
@@ -98,21 +106,17 @@ export const UttakSlettPeriodeModalImpl = ({
   );
 };
 
-UttakSlettPeriodeModalImpl.propTypes = {
-  showModal: PropTypes.bool,
-  closeEvent: PropTypes.func.isRequired,
-  cancelEvent: PropTypes.func.isRequired,
-  intl: PropTypes.shape().isRequired,
-  periode: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-};
-
 UttakSlettPeriodeModalImpl.defaultProps = {
   showModal: false,
 };
 
-const mapStateToPropsFactory = (_initialState, ownProps) => {
-  const onSubmit = (values) => ownProps.closeEvent(values);
+interface PureOwnProps {
+  closeEvent: (...args: any[]) => any;
+  periode: CustomUttakKontrollerFaktaPerioder;
+}
+
+const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
+  const onSubmit = (values: any) => ownProps.closeEvent(values);
 
   return () => {
     const formName = `slettPeriodeForm-${ownProps.periode.id}`;
@@ -123,6 +127,7 @@ const mapStateToPropsFactory = (_initialState, ownProps) => {
   };
 };
 
+// @ts-ignore Dynamisk navn på form
 const UttakSlettPeriodeModal = connect(mapStateToPropsFactory)(behandlingForm({
   enableReinitialize: true,
 })(injectIntl(UttakSlettPeriodeModalImpl)));

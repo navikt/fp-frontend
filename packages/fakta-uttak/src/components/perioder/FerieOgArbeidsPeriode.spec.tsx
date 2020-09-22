@@ -22,7 +22,6 @@ describe('<FerieOgArbeidsPeriode>', () => {
       tilDato="2018-06-25"
       uttakPeriodeType={{}}
       originalResultat={{}}
-      skalViseInntektmeldingInfo={false}
       updated
       bekreftet
       readOnly={false}
@@ -75,7 +74,6 @@ describe('<FerieOgArbeidsPeriode>', () => {
       readOnly={false}
       behandlingStatusKode={behandlingStatusKode}
       arbeidsgiver={arbeidsgiver}
-      skalViseInntektmeldingInfo
       skalViseResultat
       oppholdArsak={{}}
       inntektsmeldinger={[{

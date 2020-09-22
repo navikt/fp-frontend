@@ -1,12 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import moment from 'moment';
 import classnames from 'classnames/bind';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import { calcDays, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { calcDays } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
@@ -16,28 +19,29 @@ import UttakPeriodeType from './UttakPeriodeType';
 import UttakPeriodeInnhold from './UttakPeriodeInnhold';
 
 import styles from './uttakPeriode.less';
+import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
 const classNames = classnames.bind(styles);
 
-const renderTomPeriode = (intl) => (
+const renderTomPeriode = (intl: IntlShape) => (
   <div className={styles.periodeIconWrapper}>
     <Image src={tomPeriode} alt={intl.formatMessage({ id: 'UttakInfoPanel.PeriodenharTommeDagerFremTilNestePeriode' })} />
     <Normaltekst><FormattedMessage id="UttakInfoPanel.TomPeriode" /></Normaltekst>
   </div>
 );
 
-const renderOverlappendePeriode = (intl) => (
+const renderOverlappendePeriode = (intl: IntlShape) => (
   <div className={styles.periodeIconWrapper}>
     <Image src={overlapp} alt={intl.formatMessage({ id: 'UttakInfoPanel.PeriodenErOverlappende' })} />
     <Normaltekst><FormattedMessage id="UttakInfoPanel.OverlappendePeriode" /></Normaltekst>
   </div>
 );
 
-const renderValidationGraphic = (perioder, index, isLastIndex, intl) => {
+const renderValidationGraphic = (perioder: CustomUttakKontrollerFaktaPerioder[], index: number, isLastIndex: boolean, intl: IntlShape) => {
   if (!isLastIndex) {
     const periode = perioder[index];
     const nextPeriode = perioder[index + 1];
-    const diff = calcDays(periode.tom, nextPeriode.fom, ISO_DATE_FORMAT);
+    const diff = calcDays(periode.tom, nextPeriode.fom);
 
     if (moment(periode.tom) >= moment(nextPeriode.fom)) {
       return renderOverlappendePeriode(intl);
@@ -51,21 +55,42 @@ const renderValidationGraphic = (perioder, index, isLastIndex, intl) => {
   return null;
 };
 
-const getClassName = (periode, readOnly) => {
+const getClassName = (periode: CustomUttakKontrollerFaktaPerioder, readOnly: boolean) => {
   if (periode.oppholdÅrsak && periode.oppholdÅrsak.kode !== '-') {
     return classNames('oppholdPeriodeContainer', { active: !periode.bekreftet && !readOnly });
   }
   return classNames('periodeContainer', { active: !periode.bekreftet && !readOnly });
 };
 
-const UttakPeriode = ({
+interface OwnProps {
+  fields: FieldArrayFieldsProps<CustomUttakKontrollerFaktaPerioder>;
+  meta: FieldArrayMetaProps;
+  openSlettPeriodeModalCallback: (...args: any[]) => any;
+  updatePeriode: (...args: any[]) => any;
+  editPeriode: (...args: any[]) => any;
+  cancelEditPeriode: (...args: any[]) => any;
+  isAnyFormOpen: (...args: any[]) => any;
+  readOnly: boolean;
+  perioder: CustomUttakKontrollerFaktaPerioder[];
+  isNyPeriodeFormOpen: boolean;
+  vilkarForSykdomExists: boolean;
+  getKodeverknavn: (...args: any[]) => any;
+  behandlingVersjon: number;
+  behandlingId: number;
+  behandlingStatus: Kodeverk;
+  familiehendelse: FamilieHendelseSamling;
+  sisteUttakdatoFørsteSeksUker: moment.Moment;
+  endringsdato?: string;
+  farSøkerFør6Uker?: boolean;
+}
+
+const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   cancelEditPeriode,
   editPeriode,
   endringsdato,
   farSøkerFør6Uker,
   sisteUttakdatoFørsteSeksUker,
   fields,
-  inntektsmeldingInfo,
   intl,
   isAnyFormOpen,
   isNyPeriodeFormOpen,
@@ -85,8 +110,8 @@ const UttakPeriode = ({
     {meta.error && <AlertStripe className={styles.fullWidth} type="feil">{meta.error}</AlertStripe>}
     {meta.warning && <AlertStripe className={styles.fullWidth} type="info">{meta.warning}</AlertStripe>}
 
-    <FlexContainer fluid wrap>
-      {fields.map((fieldId, index, field) => {
+    <FlexContainer wrap>
+      {fields.map((fieldId: string, index: number, field: FieldArrayFieldsProps<CustomUttakKontrollerFaktaPerioder>) => {
         const periode = field.get(index);
         const harEndringsdatoSomErFørFørsteUttaksperiode = endringsdato ? moment(periode.fom).isAfter(endringsdato) : false;
         return (
@@ -96,10 +121,8 @@ const UttakPeriode = ({
                 {index === 0 && harEndringsdatoSomErFørFørsteUttaksperiode && renderTomPeriode(intl)}
                 <div className={getClassName(periode, readOnly)}>
                   <UttakPeriodeType
-                    bekreftet={periode.bekreftet}
                     tilDato={periode.tom}
                     fraDato={periode.fom}
-                    openForm={periode.openForm}
                     uttakPeriodeType={periode.uttakPeriodeType}
                     id={periode.id}
                     arbeidstidprosent={periode.arbeidstidsprosent}
@@ -129,7 +152,6 @@ const UttakPeriode = ({
                     id={periode.id}
                     tilDato={periode.tom}
                     fraDato={periode.fom}
-                    begrunnelse={periode.begrunnelse}
                     uttakPeriodeType={periode.uttakPeriodeType}
                     overforingArsak={periode.overføringÅrsak}
                     arbeidsgiver={periode.arbeidsgiver}
@@ -139,7 +161,6 @@ const UttakPeriode = ({
                     behandlingId={behandlingId}
                     behandlingVersjon={behandlingVersjon}
                     behandlingStatusKode={behandlingStatus.kode}
-                    inntektsmeldingInfo={inntektsmeldingInfo[index]}
                     farSøkerFør6Uker={farSøkerFør6Uker}
                     sisteUttakdatoFørsteSeksUker={sisteUttakdatoFørsteSeksUker}
                     familiehendelse={familiehendelse}
@@ -158,32 +179,7 @@ const UttakPeriode = ({
   </div>
 );
 
-UttakPeriode.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  fields: PropTypes.shape().isRequired,
-  meta: PropTypes.shape().isRequired,
-  openSlettPeriodeModalCallback: PropTypes.func.isRequired,
-  updatePeriode: PropTypes.func.isRequired,
-  editPeriode: PropTypes.func.isRequired,
-  cancelEditPeriode: PropTypes.func.isRequired,
-  isAnyFormOpen: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  perioder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  isNyPeriodeFormOpen: PropTypes.bool.isRequired,
-  inntektsmeldingInfo: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape())).isRequired,
-  vilkarForSykdomExists: PropTypes.bool.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingStatus: PropTypes.shape().isRequired,
-  familiehendelse: PropTypes.shape().isRequired,
-  sisteUttakdatoFørsteSeksUker: PropTypes.shape().isRequired,
-  endringsdato: PropTypes.string,
-  farSøkerFør6Uker: PropTypes.bool,
-};
-
 UttakPeriode.defaultProps = {
-  endringsdato: undefined,
   farSøkerFør6Uker: false,
 };
 

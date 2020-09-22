@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Column, Row } from 'nav-frontend-grid';
+import { FieldArrayFieldsProps } from 'redux-form';
 
 import { PeriodpickerField } from '@fpsak-frontend/form';
 import { FlexColumn, FlexRow, PeriodFieldArray } from '@fpsak-frontend/shared-components';
@@ -15,7 +15,14 @@ const periode = {
   tom: '',
 };
 
-class DokumentertePerioderPeriodePicker extends PureComponent {
+interface OwnProps {
+  fields: FieldArrayFieldsProps<{ fom: string; tom: string }>;
+  fraDato: string;
+  tilDato: string;
+  readOnly: boolean;
+}
+
+class DokumentertePerioderPeriodePicker extends PureComponent<OwnProps> {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     const { fields, fraDato, tilDato } = this.props;
@@ -54,12 +61,5 @@ class DokumentertePerioderPeriodePicker extends PureComponent {
     );
   }
 }
-
-DokumentertePerioderPeriodePicker.propTypes = {
-  fields: PropTypes.shape().isRequired,
-  fraDato: PropTypes.string.isRequired,
-  tilDato: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-};
 
 export default DokumentertePerioderPeriodePicker;

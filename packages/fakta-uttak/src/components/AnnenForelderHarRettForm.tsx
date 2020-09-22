@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
+import { InjectedFormProps } from 'redux-form';
 
 import {
   hasValidText, maxLength, minLength, required,
@@ -11,15 +11,24 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared
 import {
   RadioGroupField, RadioOption, TextAreaField, behandlingForm,
 } from '@fpsak-frontend/form';
-import { aksjonspunktPropType } from '@fpsak-frontend/prop-types';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import styles from './annenForelderHarRettForm.less';
 
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-export const AnnenForelderHarRettForm = ({
+interface OwnProps {
+  readOnly: boolean;
+  hasOpenAksjonspunkter: boolean;
+  hasOpenUttakAksjonspunkter: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  behandlingVersjon: number;
+  behandlingId: number;
+}
+
+export const AnnenForelderHarRettForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   hasOpenAksjonspunkter,
   hasOpenUttakAksjonspunkter,
   aksjonspunkter,
@@ -76,13 +85,19 @@ export const AnnenForelderHarRettForm = ({
   </div>
 );
 
-const transformValues = (values, aksjonspunkter) => aksjonspunkter.map((ap) => ({
+const transformValues = (values: any, aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter.map((ap: Aksjonspunkt) => ({
   kode: ap.definisjon.kode,
   begrunnelse: values.begrunnelse,
   annenforelderHarRett: values.annenForelderHarRett,
 }));
 
-const buildInitialValues = createSelector([(props) => props.ytelsefordeling], (ytelseFordeling) => {
+interface PureOwnProps {
+  ytelsefordeling: Ytelsefordeling;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
+}
+
+const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling) => {
   const annenForelderHarRett = ytelseFordeling && ytelseFordeling.annenforelderHarRettDto;
   if (ytelseFordeling) {
     return ({
@@ -94,22 +109,13 @@ const buildInitialValues = createSelector([(props) => props.ytelsefordeling], (y
   return undefined;
 });
 
-const mapStateToPropsFactory = (_initialState, initialProps) => {
-  const onSubmit = (values) => initialProps.submitCallback(transformValues(values, initialProps.aksjonspunkter));
+const mapStateToPropsFactory = (_initialState: any, initialProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialProps.submitCallback(transformValues(values, initialProps.aksjonspunkter));
 
-  return (_state, props) => ({
+  return (_state: any, props: PureOwnProps) => ({
     initialValues: buildInitialValues(props),
     onSubmit,
   });
-};
-
-AnnenForelderHarRettForm.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  hasOpenAksjonspunkter: PropTypes.bool.isRequired,
-  hasOpenUttakAksjonspunkter: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(aksjonspunktPropType.isRequired).isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  behandlingId: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToPropsFactory)(behandlingForm({

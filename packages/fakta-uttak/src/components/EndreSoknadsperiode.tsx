@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { ArrowBox, FlexColumn, FlexRow } from '@fpsak-frontend/shared-components';
 import { DecimalField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
@@ -8,6 +7,7 @@ import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './perioder/periodeTyper.less';
 
@@ -27,7 +27,17 @@ const mapPeriodeTyper = () => Object.keys(oppholdArsakType)
   .filter((key) => gyldigeÅrsaker.includes(key))
   .map((key) => (<option key={key} value={key}>{oppholdArsakKontoNavn[key]}</option>));
 
-export const EndreSoknadsperiode = ({ withGradering, oppholdArsak, førsteUttaksdato }) => (
+interface OwnProps {
+  withGradering?: boolean;
+  oppholdArsak?: Kodeverk;
+  førsteUttaksdato?: string;
+}
+
+export const EndreSoknadsperiode: FunctionComponent<OwnProps> = ({
+  withGradering,
+  oppholdArsak,
+  førsteUttaksdato,
+}) => (
   <ArrowBox marginTop={10}>
     <FlexRow>
       <FlexColumn>
@@ -77,16 +87,8 @@ export const EndreSoknadsperiode = ({ withGradering, oppholdArsak, førsteUttaks
   </ArrowBox>
 );
 
-EndreSoknadsperiode.propTypes = {
-  withGradering: PropTypes.bool,
-  oppholdArsak: PropTypes.shape(),
-  førsteUttaksdato: PropTypes.string,
-};
-
 EndreSoknadsperiode.defaultProps = {
   withGradering: false,
-  oppholdArsak: undefined,
-  førsteUttaksdato: undefined,
 };
 
 export default EndreSoknadsperiode;

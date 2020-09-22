@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -27,23 +26,42 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-const finnTextTilRadio1 = (erHeimevern, erNavTiltak) => {
+const finnTextTilRadio1 = (erHeimevern: any, erNavTiltak: any) => {
   if (erHeimevern) {
     return 'SykdomOgSkadePeriode.HeimevernetErDok';
   }
   return erNavTiltak ? 'SykdomOgSkadePeriode.TiltakIRegiNavErDok' : 'UttakInfoPanel.SykdomSkadenDokumentertAngiAvklartPeriode';
 };
 
-const finnTextTilRadio2 = (erHeimevern, erNavTiltak) => {
+const finnTextTilRadio2 = (erHeimevern: any, erNavTiltak: any) => {
   if (erHeimevern) {
     return 'SykdomOgSkadePeriode.HeimevernetErIkkeDok';
   }
   return erNavTiltak ? 'SykdomOgSkadePeriode.TiltakIRegiNavErIkkeDok' : 'UttakInfoPanel.SykdomSkadenIkkeDokumentert';
 };
 
+interface OwnProps {
+  resultat?: string;
+  updatePeriode: (...args: any[]) => any;
+  cancelEditPeriode: (...args: any[]) => any;
+  id: string;
+  updated: boolean;
+  bekreftet: boolean;
+  readOnly: boolean;
+  dokumentertePerioder?: {}[];
+  fraDato: string;
+  tilDato: string;
+  utsettelseArsak?: {};
+  overforingArsak?: {};
+  formSyncErrors?: {};
+  behandlingStatusKode?: string;
+  erHeimevern?: boolean;
+  erNavTiltak?: boolean;
+}
+
 // TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
 
-export const SykdomOgSkadePeriode = ({
+export const SykdomOgSkadePeriode: FunctionComponent<OwnProps> = ({
   resultat,
   fraDato,
   tilDato,
@@ -65,7 +83,7 @@ export const SykdomOgSkadePeriode = ({
     Object.keys(formSyncErrors).length !== 0
     && formProps.submitFailed
     && (formSyncErrors.dokumentertePerioder.length - 1) > 0) {
-    formSyncErrors.dokumentertePerioder.forEach((error) => {
+    formSyncErrors.dokumentertePerioder.forEach((error: any) => {
       errorHeight += error !== undefined && error.fom[0].id === 'ValidationMessage.NotEmpty' ? 30 : 52;
     });
   }
@@ -155,25 +173,6 @@ export const SykdomOgSkadePeriode = ({
   );
 };
 
-SykdomOgSkadePeriode.propTypes = {
-  resultat: PropTypes.string,
-  updatePeriode: PropTypes.func.isRequired,
-  cancelEditPeriode: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  updated: PropTypes.bool.isRequired,
-  bekreftet: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  dokumentertePerioder: PropTypes.arrayOf(PropTypes.shape()),
-  fraDato: PropTypes.string.isRequired,
-  tilDato: PropTypes.string.isRequired,
-  utsettelseArsak: PropTypes.shape(),
-  overforingArsak: PropTypes.shape(),
-  formSyncErrors: PropTypes.shape(),
-  behandlingStatusKode: PropTypes.string,
-  erHeimevern: PropTypes.bool,
-  erNavTiltak: PropTypes.bool,
-};
-
 SykdomOgSkadePeriode.defaultProps = {
   dokumentertePerioder: [{}],
   formSyncErrors: {},
@@ -186,11 +185,11 @@ SykdomOgSkadePeriode.defaultProps = {
 };
 
 const validateSykdomOgSkadeForm = (
-  values,
-  familieHendelse,
-  utsettelseArsak,
-  overforingArsak,
-  vilkarForSykdomOppfyltExists,
+  values: any,
+  familieHendelse: any,
+  utsettelseArsak: any,
+  overforingArsak: any,
+  vilkarForSykdomOppfyltExists: any,
 ) => {
   const errors = {};
   const morForSykVedFodsel = familieHendelse.morForSykVedFodsel
@@ -205,7 +204,7 @@ const validateSykdomOgSkadeForm = (
 
   errors.dokumentertePerioder = [];
   if (values.dokumentertePerioder) {
-    values.dokumentertePerioder.forEach((periode, index) => {
+    values.dokumentertePerioder.forEach((periode: any, index: any) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
       if (invalid) {
         errors.dokumentertePerioder[index] = {
@@ -218,22 +217,22 @@ const validateSykdomOgSkadeForm = (
 };
 
 const buildInitialValues = createSelector([
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
-  (state, ownProps) => behandlingFormValueSelector(
+  (state: any, ownProps: any) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
-  (_state, ownProps) => ownProps.id],
+  (_state: any, ownProps: any) => ownProps.id],
 (begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
   begrunnelse,
   id,
@@ -241,7 +240,7 @@ const buildInitialValues = createSelector([
   dokumentertePerioder: initialDokumentertePerioder !== undefined ? initialDokumentertePerioder : [],
 }));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   const {
     behandlingId,
     behandlingVersjon,
@@ -250,11 +249,11 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
   } = initialOwnProps;
   const formName = `sykdomOgSkadeForm-${initialOwnProps.id}`;
   const familiehendelse = gjeldendeFamiliehendelse;
-  const validate = (values) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.utsettelseArsak,
+  const validate = (values: any) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.utsettelseArsak,
     initialOwnProps.overforingArsak, vilkarForSykdomExists);
-  const onSubmit = (values) => initialOwnProps.updatePeriode((values));
+  const onSubmit = (values: any) => initialOwnProps.updatePeriode((values));
 
-  return (state, ownProps) => ({
+  return (state: any, ownProps: any) => ({
     onSubmit,
     validate,
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
