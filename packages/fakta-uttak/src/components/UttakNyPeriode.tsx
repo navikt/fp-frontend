@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
@@ -23,7 +24,6 @@ import {
   hasValidDecimal,
   hasValidPeriod,
   hasValidText,
-  ISO_DATE_FORMAT,
   maxLength,
   maxValue,
   minLength,
@@ -40,7 +40,9 @@ import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personopplysninger,
+} from '@fpsak-frontend/types';
 
 import lagVisningsNavn from './utils/uttakVisningsnavnHelper';
 
@@ -92,7 +94,7 @@ const mapOverføringÅrsaker = (typer: any) => typer
 
 const mapUtsettelseÅrsaker = (typer: any) => typer.map(({
   kode,
-  navn
+  navn,
 }: any) => (
   <option value={kode} key={kode}>
     {navn}
@@ -121,23 +123,35 @@ const mapArbeidsforhold = (andeler: any, getKodeverknavn: any) => andeler.map((a
   );
 });
 
-const periodeTypeTrengerArsak = (sokerKjonn: any, periodeType: any) => (sokerKjonn === navBrukerKjonn.MANN && periodeType === uttakPeriodeType.MODREKVOTE)
+const periodeTypeTrengerArsak = (sokerKjonn: string, periodeType: string) => (sokerKjonn === navBrukerKjonn.MANN && periodeType === uttakPeriodeType.MODREKVOTE)
   || (sokerKjonn === navBrukerKjonn.KVINNE && periodeType === uttakPeriodeType.FEDREKVOTE);
+
+interface NyPeriode {
+  fom: string;
+  tom: string;
+  periodeType: string;
+  periodeOverforingArsak: Kodeverk;
+  periodeArsak: Kodeverk;
+  samtidigUttakNyPeriode: boolean;
+  arbeidsForhold: any;
+  arbeidstidprosent: number;
+  typeUttak: string;
+}
 
 interface OwnProps {
   newPeriodeResetCallback: (...args: any[]) => any;
-  utsettelseÅrsaker: {}[];
-  overføringÅrsaker: {}[];
-  andeler: {}[];
-  nyPeriode: {};
+  utsettelseÅrsaker: KodeverkMedNavn[];
+  overføringÅrsaker: KodeverkMedNavn[];
+  andeler: FaktaArbeidsforhold[];
+  nyPeriode: NyPeriode;
   sokerKjonn: string;
   nyPeriodeDisabledDaysFom: string;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  getKodeverknavn: (...args: any[]) => any;
-  periodeTyper?: {}[];
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  periodeTyper?: KodeverkMedNavn[];
 }
 
-export const UttakNyPeriode: FunctionComponent<OwnProps> = ({
+export const UttakNyPeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
   newPeriodeResetCallback,
   periodeTyper,
   utsettelseÅrsaker,
@@ -207,7 +221,6 @@ export const UttakNyPeriode: FunctionComponent<OwnProps> = ({
                       label={<FormattedMessage id="UttakInfoPanel.Flerbarnsdager" />}
                     />
                     <CheckboxField
-                      id="samtidigUttak_nyperiode"
                       name="samtidigUttakNyPeriode"
                       label={<FormattedMessage id="UttakInfoPanel.SamtidigUttak" />}
                     />
@@ -221,6 +234,7 @@ export const UttakNyPeriode: FunctionComponent<OwnProps> = ({
                               bredde="XS"
                               label={{ id: 'UttakInfoPanel.SamtidigUttakProsentandel' }}
                               validate={[required, maxValue100, hasValidDecimal]}
+                              // @ts-ignore Fiks
                               normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                               inputClassName={styles.textAlignRight}
                             />
@@ -288,6 +302,7 @@ export const UttakNyPeriode: FunctionComponent<OwnProps> = ({
                             label={{ id: 'UttakInfoPanel.AndelIArbeid' }}
                             bredde="XS"
                             validate={[required, maxValue100, hasValidDecimal]}
+                            // @ts-ignore Fiks
                             normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                             inputClassName={styles.textAlignRight}
                           />
@@ -341,21 +356,17 @@ export const UttakNyPeriode: FunctionComponent<OwnProps> = ({
   );
 };
 
-UttakNyPeriode.defaultProps = {
-  periodeTyper: null,
-};
-
-const getPeriodeData = (periode: any, periodeArray: any) => periodeArray.filter(({
-  kode
+const getPeriodeData = (periode: string, periodeArray: KodeverkMedNavn[]) => periodeArray.filter(({
+  kode,
 }: any) => kode === periode);
 
 const transformValues = (
   values: any,
-  periodeTyper: any,
-  utsettelseÅrsaker: any,
-  overføringÅrsaker: any,
-  uttakPeriodeVurderingTyper: any,
-  getKodeverknavn: any,
+  utsettelseÅrsaker: KodeverkMedNavn[],
+  overføringÅrsaker: KodeverkMedNavn[],
+  uttakPeriodeVurderingTyper: KodeverkMedNavn[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  periodeTyper?: KodeverkMedNavn[],
 ) => {
   const periodeObjekt = getPeriodeData(values.periodeType, periodeTyper)[0] || null;
   const utsettelseÅrsakObjekt = getPeriodeData(values.periodeArsak, utsettelseÅrsaker)[0];
@@ -438,15 +449,28 @@ const validateNyPeriodeForm = (values: any) => {
   const invalid = required(values.fom) || hasValidPeriod(values.fom, values.tom);
 
   if (invalid) {
-    errors.fom = invalid;
+    return {
+      fom: invalid,
+    };
   }
 
   return errors;
 };
 
-const emptyAndelerArray: any = [];
+const EMPTY_ARRAY = [];
 
-const mapStateToPropsFactory = (_initialState: any, ownProps: any) => {
+interface PureOwnProps {
+  newPeriodeCallback: (values: any) => void;
+  uttakPeriodeVurderingTyper: KodeverkMedNavn[];
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  behandlingId: number;
+  behandlingVersjon: number;
+  personopplysninger: Personopplysninger;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const {
     newPeriodeCallback,
     uttakPeriodeVurderingTyper,
@@ -464,51 +488,47 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: any) => {
   const onSubmit = (values: any) => newPeriodeCallback(
     transformValues(
       values,
-      periodeTyper,
       utsettelseÅrsaker,
       overføringÅrsaker,
       uttakPeriodeVurderingTyper,
       getKodeverknavn,
+      periodeTyper,
     ),
   );
 
-  return (state: any) => {
-    const andeler = faktaArbeidsforhold || emptyAndelerArray;
-
-    return {
-      periodeTyper,
-      utsettelseÅrsaker,
-      overføringÅrsaker,
-      andeler,
-      sokerKjonn: personopplysninger.navBrukerKjonn.kode,
-      initialValues: {
-        fom: null,
-        tom: null,
-        periodeType: null,
-        periodeOverforingArsak: null,
-        periodeArsak: null,
-        arbeidsForhold: null,
-        arbeidstidprosent: null,
-        typeUttak: null,
-        flerbarnsdager: false,
-        samtidigUttakNyPeriode: false,
-        samtidigUttaksprosentNyPeriode: null,
-      },
-      nyPeriode: behandlingFormValueSelector('nyPeriodeForm', behandlingId, behandlingVersjon)(
-        state,
-        'fom',
-        'tom',
-        'periodeType',
-        'periodeOverforingArsak',
-        'periodeArsak',
-        'samtidigUttakNyPeriode',
-        'arbeidsForhold',
-        'arbeidstidprosent',
-        'typeUttak',
-      ),
-      onSubmit,
-    };
-  };
+  return (state: any) => ({
+    periodeTyper,
+    utsettelseÅrsaker,
+    overføringÅrsaker,
+    andeler: faktaArbeidsforhold || EMPTY_ARRAY,
+    sokerKjonn: personopplysninger.navBrukerKjonn.kode,
+    initialValues: {
+      fom: null,
+      tom: null,
+      periodeType: null,
+      periodeOverforingArsak: null,
+      periodeArsak: null,
+      arbeidsForhold: null,
+      arbeidstidprosent: null,
+      typeUttak: null,
+      flerbarnsdager: false,
+      samtidigUttakNyPeriode: false,
+      samtidigUttaksprosentNyPeriode: null,
+    },
+    nyPeriode: behandlingFormValueSelector('nyPeriodeForm', behandlingId, behandlingVersjon)(
+      state,
+      'fom',
+      'tom',
+      'periodeType',
+      'periodeOverforingArsak',
+      'periodeArsak',
+      'samtidigUttakNyPeriode',
+      'arbeidsForhold',
+      'arbeidstidprosent',
+      'typeUttak',
+    ),
+    onSubmit,
+  });
 };
 
 export default connect(mapStateToPropsFactory)(

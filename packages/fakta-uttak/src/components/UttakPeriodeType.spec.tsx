@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Image } from '@fpsak-frontend/shared-components';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { Kodeverk } from '@fpsak-frontend/types';
+
 import { UttakPeriodeType } from './UttakPeriodeType';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
@@ -11,21 +13,16 @@ describe('<UttakPeriodeType>', () => {
   const fraDato = '2018-02-31';
   const id = '7845345-34324-324234-342';
   const arbeidstidprosent = 50;
-  const uttakPeriodeType = {};
-  const utsettelseArsak = {};
+  const uttakPeriodeType = {} as Kodeverk;
+  const utsettelseArsak = {} as Kodeverk;
   const openSlettPeriodeModalCallback = sinon.spy();
   const editPeriode = sinon.spy();
   const isAnyFormOpen = sinon.spy();
   const flerbarnsdager = false;
   const samtidigUttak = false;
-  const arbeidsgiver = {
-    identifikator: '1234567890',
-    navn: 'Statoil',
-    virksomhet: true,
-  };
   const oppholdArsak = {
     kode: '-',
-  };
+  } as Kodeverk;
   const getKodeverknavn = () => undefined;
 
   it('skal vise redigere og slett periode hvis manuellOverstyring er true og readOnly er false', () => {
@@ -39,10 +36,9 @@ describe('<UttakPeriodeType>', () => {
       isAnyFormOpen={isAnyFormOpen}
       isFromSøknad
       isNyPeriodeFormOpen={false}
-      manuellOverstyring
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       oppholdArsak={oppholdArsak}
-      overforingArsak={{}}
+      overforingArsak={{} as Kodeverk}
       readOnly={false}
       samtidigUttak={samtidigUttak}
       tilDato={tilDato}
@@ -65,10 +61,9 @@ describe('<UttakPeriodeType>', () => {
       isAnyFormOpen={isAnyFormOpen}
       isFromSøknad
       isNyPeriodeFormOpen={false}
-      manuellOverstyring={false}
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       oppholdArsak={oppholdArsak}
-      overforingArsak={{}}
+      overforingArsak={{} as Kodeverk}
       readOnly
       samtidigUttak={samtidigUttak}
       tilDato={tilDato}
@@ -94,10 +89,9 @@ describe('<UttakPeriodeType>', () => {
       isAnyFormOpen={isAnyFormOpen}
       isFromSøknad
       isNyPeriodeFormOpen={false}
-      manuellOverstyring={false}
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       oppholdArsak={oppholdArsak}
-      overforingArsak={{}}
+      overforingArsak={{} as Kodeverk}
       readOnly
       samtidigUttak={samtidigUttak}
       tilDato={tilDato}
@@ -106,32 +100,5 @@ describe('<UttakPeriodeType>', () => {
     />);
 
     expect(wrapper.find('FormattedMessage').last().prop('id')).to.eql('UttakInfoPanel.Frilans');
-  });
-
-  it('skal vise arbeidsgiver og arbeidsgiverIdentifikator hvis erArbeidstaker', () => {
-    const wrapper = shallowWithIntl(<UttakPeriodeType
-      arbeidsgiver={arbeidsgiver}
-      arbeidstidprosent={arbeidstidprosent}
-      editPeriode={editPeriode}
-      flerbarnsdager={flerbarnsdager}
-      fraDato={fraDato}
-      getKodeverknavn={getKodeverknavn}
-      id={id}
-      intl={intlMock}
-      isAnyFormOpen={isAnyFormOpen}
-      isFromSøknad
-      isNyPeriodeFormOpen={false}
-      manuellOverstyring={false}
-      openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
-      oppholdArsak={oppholdArsak}
-      overforingArsak={{}}
-      readOnly
-      samtidigUttak={samtidigUttak}
-      tilDato={tilDato}
-      utsettelseArsak={utsettelseArsak}
-      uttakPeriodeType={uttakPeriodeType}
-    />);
-
-    expect(wrapper.find('Element').last().childAt(0).text()).to.eql(`${arbeidsgiver.navn} (${arbeidsgiver.identifikator})`);
   });
 });

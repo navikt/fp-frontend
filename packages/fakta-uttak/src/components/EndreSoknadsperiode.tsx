@@ -77,6 +77,7 @@ export const EndreSoknadsperiode: FunctionComponent<OwnProps> = ({
                 label={{ id: 'UttakInfoPanel.AndelIArbeid' }}
                 bredde="XS"
                 validate={[required, maxValue100, minValue1, hasValidDecimal]}
+                // @ts-ignore Fiks
                 normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
               />
             </FlexColumn>

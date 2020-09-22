@@ -1,10 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon';
+
 import { RadioGroupField } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import sinon from 'sinon';
+
 import { FerieOgArbeidsPeriode } from './FerieOgArbeidsPeriode';
-import InntektsmeldingInfo from '../InntektsmeldingInfo';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
 const arbeidsgiver = {};
@@ -56,44 +57,5 @@ describe('<FerieOgArbeidsPeriode>', () => {
     expect(undertekst).to.have.length(1);
     expect(radioGroupField).to.have.length(1);
     expect(inntektsmeldinginfo).to.have.length(0);
-  });
-
-  it('skal vise inntektsmeldinginfo hvis søknad mottatt før 4. juni 2019', () => {
-    const wrapper = shallowWithIntl(<FerieOgArbeidsPeriode
-      fieldId="periode[0]"
-      resultat={undefined}
-      updatePeriode={sinon.spy()}
-      cancelEditPeriode={sinon.spy()}
-      id="2018-06-02|2018-06-25"
-      fraDato="2018-06-02"
-      tilDato="2018-06-25"
-      uttakPeriodeType={{}}
-      originalResultat={{}}
-      updated
-      bekreftet
-      readOnly={false}
-      behandlingStatusKode={behandlingStatusKode}
-      arbeidsgiver={arbeidsgiver}
-      skalViseResultat
-      oppholdArsak={{}}
-      inntektsmeldinger={[{
-        arbeidsgiver: 'test',
-        arbeidsgiverStartdato: '2000-01-01',
-        utsettelsePerioder: [{
-          fom: '2000-01-01',
-          tom: '2000-01-10',
-          utsettelseArsak: {
-            kode: 'ARBEID',
-            kodeverk: 'UTSETTELSE_AARSAK_TYPE',
-            navn: 'Arbeid',
-          },
-        }],
-      }]}
-      getKodeverknavn={sinon.spy()}
-      {...reduxFormPropsMock}
-    />);
-
-    const inntektsmeldinginfo = wrapper.find(InntektsmeldingInfo);
-    expect(inntektsmeldinginfo).to.have.length(1);
   });
 });

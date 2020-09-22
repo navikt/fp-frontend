@@ -1,7 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import sinon from 'sinon';
+
+import {
+  FamilieHendelseSamling, Kodeverk, Personopplysninger, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import UttakFaktaForm from './UttakFaktaForm';
 import UttakInfoPanel from './UttakInfoPanel';
@@ -11,7 +14,6 @@ import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 const avklarAnnenforelderHarRettAp = [{
   aksjonspunktType: {
     kode: 'MANU',
-    navn: 'Manuell',
     kodeverk: 'AKSJONSPUNKT_TYPE',
   },
   kode: 'MANU',
@@ -21,13 +23,12 @@ const avklarAnnenforelderHarRettAp = [{
   besluttersBegrunnelse: null,
   definisjon: {
     kode: '5086',
-    navn: 'Avklar annen forelder har ikke rett',
+    kodeverk: '',
   },
   erAktivt: true,
   kanLoses: true,
   status: {
     kode: 'UTFO',
-    navn: 'Utført',
     kodeverk: 'AKSJONSPUNKT_STATUS',
   },
   toTrinnsBehandling: true,
@@ -39,23 +40,21 @@ const avklarAnnenforelderHarRettAp = [{
 describe('<UttakInfoPanel>', () => {
   it('skal vise UttakInfoPanel', () => {
     const wrapper = shallowWithIntl(<UttakInfoPanel
-      intl={intlMock}
       submitCallback={sinon.spy()}
       readOnly
-      hasOpenAksjonspunkter
       aksjonspunkter={[]}
-      behandlingType={{}}
+      behandlingType={{} as Kodeverk}
       behandlingArsaker={[]}
-      behandlingStatus={{}}
+      behandlingStatus={{} as Kodeverk}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
       uttakPerioder={[]}
       alleKodeverk={{}}
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
-      personopplysninger={{}}
-      familiehendelse={{}}
+      personopplysninger={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
     />);
 
     const uttakFaktaForm = wrapper.find(UttakFaktaForm);
@@ -64,23 +63,21 @@ describe('<UttakInfoPanel>', () => {
 
   it('skal vise Avklar annen forelder har rett ', () => {
     const wrapper = shallowWithIntl(<UttakInfoPanel
-      intl={intlMock}
       submitCallback={sinon.spy()}
       readOnly
-      hasOpenAksjonspunkter
       aksjonspunkter={avklarAnnenforelderHarRettAp}
-      behandlingType={{}}
+      behandlingType={{} as Kodeverk}
       behandlingArsaker={[]}
-      behandlingStatus={{}}
+      behandlingStatus={{} as Kodeverk}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
       uttakPerioder={[]}
       alleKodeverk={{}}
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
-      personopplysninger={{}}
-      familiehendelse={{}}
+      personopplysninger={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
     />);
 
     const annenForelderHarRettForm = wrapper.find(AnnenForelderHarRettForm);

@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+
 import { UttakPeriodeInnhold } from './UttakPeriodeInnhold';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
@@ -23,8 +25,8 @@ describe('<UttakPeriodeInnhold>', () => {
   it('skal vise UttakPeriodeInnhold', () => {
     const wrapper = shallowWithIntl(<UttakPeriodeInnhold
       fieldId={fieldId}
-      utsettelseArsak={utsettelseArsak}
-      overforingArsak={{}}
+      utsettelseArsak={utsettelseArsak as Kodeverk}
+      overforingArsak={{} as Kodeverk}
       updatePeriode={updatePeriode}
       id={id}
       cancelEditPeriode={cancelEditPeriode}
@@ -33,15 +35,15 @@ describe('<UttakPeriodeInnhold>', () => {
       tilDato={periode.tom}
       bekreftet
       openForm
-      uttakPeriodeType={{}}
+      uttakPeriodeType={{} as Kodeverk}
       behandlingStatusKode={behandlingStatusKode}
       farSøkerFør6Uker={false}
-      familiehendelse={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
       vilkarForSykdomExists={false}
       behandlingId={1}
       behandlingVersjon={1}
       getKodeverknavn={sinon.spy()}
-      sisteUttakdatoFørsteSeksUker={{}}
+      sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
     />);
 
     const verticalSpacer = wrapper.find(VerticalSpacer);

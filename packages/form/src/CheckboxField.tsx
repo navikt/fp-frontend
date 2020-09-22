@@ -13,6 +13,7 @@ interface CheckboxFieldProps {
   readOnly?: boolean;
   className?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 interface RenderCheckboxFieldProps {

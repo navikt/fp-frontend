@@ -21,7 +21,6 @@ import { Kodeverk } from '@fpsak-frontend/types';
 
 import EndreSoknadsperiode from '../EndreSoknadsperiode';
 import PerioderKnapper from './PerioderKnapper';
-import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFaktaPerioderTsType';
 
 import styles from './periodeTyper.less';
 
@@ -37,14 +36,11 @@ interface OwnProps {
   bekreftet: boolean;
   readOnly: boolean;
   arbeidstidprosent?: number;
-  uttakPeriodeType: Kodeverk;
-  arbeidsgiver?: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'];
   skalViseResultat: boolean;
   oppholdArsak?: Kodeverk;
   behandlingStatusKode?: string;
   førsteUttaksdato?: string;
-  originalResultat: {};
-  getKodeverknavn: (...args: any[]) => any;
+  originalResultat: Kodeverk;
 }
 
 export const FerieOgArbeidsPeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
@@ -55,15 +51,12 @@ export const FerieOgArbeidsPeriode: FunctionComponent<OwnProps & InjectedFormPro
   bekreftet,
   arbeidstidprosent,
   readOnly,
-  arbeidsgiver,
-  uttakPeriodeType,
   behandlingStatusKode,
   skalViseResultat,
   førsteUttaksdato,
   originalResultat,
   oppholdArsak,
-  getKodeverknavn,
-  ...formProps 
+  ...formProps
 }) => {
   const isEdited = resultat === uttakPeriodeVurdering.PERIODE_OK_ENDRET
   && readOnly && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
@@ -150,15 +143,6 @@ export const FerieOgArbeidsPeriode: FunctionComponent<OwnProps & InjectedFormPro
   );
 };
 
-FerieOgArbeidsPeriode.defaultProps = {
-  arbeidstidprosent: null,
-  resultat: undefined,
-  arbeidsgiver: {},
-  oppholdArsak: undefined,
-  behandlingStatusKode: undefined,
-  førsteUttaksdato: undefined,
-};
-
 const validateForm = (values: any) => {
   const errors = {};
   if (!values) {
@@ -169,34 +153,50 @@ const validateForm = (values: any) => {
   const invalid = required(nyFom) || hasValidPeriod(nyFom, nyTom);
 
   if (invalid) {
-    errors.nyFom = invalid;
+    return {
+      nyFom: invalid,
+    };
   }
 
   return errors;
 };
 
+interface PureOwnProps {
+  id: string,
+  behandlingId: number;
+  behandlingVersjon: number;
+  fieldId: string;
+  tilDato: string;
+  fraDato: string;
+  arbeidstidprosent: number;
+  uttakPeriodeType: Kodeverk;
+  updatePeriode: (...args: any[]) => any;
+  readOnly: boolean;
+  bekreftet: boolean;
+}
+
 const buildInitialValues = createSelector([
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.saksebehandlersBegrunnelse`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.oppholdÅrsak`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
-  (_state: any, ownProps: any) => ownProps],
+  (_state: any, ownProps: PureOwnProps) => ownProps],
 (begrunnelse, saksebehandlersBegrunnelse, oppholdArsak, initialResultat, ownProps) => {
   let initialResultatValue = initialResultat ? initialResultat.kode : undefined;
   if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse) {
@@ -214,12 +214,12 @@ const buildInitialValues = createSelector([
   };
 });
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `arbeidOgFerieForm-${initialOwnProps.id}`;
   const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
 
-  return (state: any, ownProps: any) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const resultat = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat');
     const førsteUttaksdato = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, 'førsteUttaksdato');
     const originalResultat = behandlingFormValueSelector(
@@ -248,6 +248,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   };
 };
 
+// @ts-ignore Dynamisk navn på form
 export default connect(mapStateToPropsFactory)(behandlingForm({
   enableReinitialize: true,
   validate: validateForm,

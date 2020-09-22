@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FieldArray } from 'redux-form';
+import { FieldArray, InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -17,6 +17,7 @@ import {
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
+import { FamilieHendelse, Kodeverk } from '@fpsak-frontend/types';
 
 import PerioderKnapper from './PerioderKnapper';
 import DokumentertePerioderPeriodePicker from './DokumentertePerioderPeriodePicker';
@@ -48,12 +49,12 @@ interface OwnProps {
   updated: boolean;
   bekreftet: boolean;
   readOnly: boolean;
-  dokumentertePerioder?: {}[];
+  dokumentertePerioder?: { fom: string; tom: string }[];
   fraDato: string;
   tilDato: string;
-  utsettelseArsak?: {};
-  overforingArsak?: {};
-  formSyncErrors?: {};
+  utsettelseArsak?: Kodeverk;
+  overforingArsak?: Kodeverk;
+  formSyncErrors?: { dokumentertePerioder: any[] };
   behandlingStatusKode?: string;
   erHeimevern?: boolean;
   erNavTiltak?: boolean;
@@ -61,7 +62,7 @@ interface OwnProps {
 
 // TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
 
-export const SykdomOgSkadePeriode: FunctionComponent<OwnProps> = ({
+export const SykdomOgSkadePeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
   resultat,
   fraDato,
   tilDato,
@@ -174,24 +175,21 @@ export const SykdomOgSkadePeriode: FunctionComponent<OwnProps> = ({
 };
 
 SykdomOgSkadePeriode.defaultProps = {
-  dokumentertePerioder: [{}],
-  formSyncErrors: {},
-  resultat: undefined,
-  behandlingStatusKode: undefined,
-  utsettelseArsak: undefined,
-  overforingArsak: undefined,
+  dokumentertePerioder: [],
+  formSyncErrors: { dokumentertePerioder: [] },
   erHeimevern: false,
   erNavTiltak: false,
 };
 
 const validateSykdomOgSkadeForm = (
   values: any,
-  familieHendelse: any,
-  utsettelseArsak: any,
-  overforingArsak: any,
-  vilkarForSykdomOppfyltExists: any,
+  familieHendelse: FamilieHendelse,
+  overforingArsak: Kodeverk,
+  vilkarForSykdomOppfyltExists: boolean,
 ) => {
-  const errors = {};
+  const errors = {
+    dokumentertePerioder: [],
+  };
   const morForSykVedFodsel = familieHendelse.morForSykVedFodsel
     ? [uttakPeriodeVurdering.PERIODE_OK, uttakPeriodeVurdering.PERIODE_OK_ENDRET]
     : [uttakPeriodeVurdering.PERIODE_KAN_IKKE_AVKLARES];
@@ -199,10 +197,11 @@ const validateSykdomOgSkadeForm = (
   if (overforingArsak && overforingArsak.kode === overforingArsakCodes.SYKDOM_ANNEN_FORELDER
     && !morForSykVedFodsel.includes(values.resultat)
     && vilkarForSykdomOppfyltExists) {
-    errors.resultat = values.resultat ? [{ id: 'UttakInfoPanel.IkkeDokumentertSykdom' }] : [{ id: 'UttakInfoPanel.DokumentertSykdom' }];
+    return {
+      resultat: values.resultat ? [{ id: 'UttakInfoPanel.IkkeDokumentertSykdom' }] : [{ id: 'UttakInfoPanel.DokumentertSykdom' }],
+    };
   }
 
-  errors.dokumentertePerioder = [];
   if (values.dokumentertePerioder) {
     values.dokumentertePerioder.forEach((periode: any, index: any) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
@@ -216,23 +215,35 @@ const validateSykdomOgSkadeForm = (
   return errors;
 };
 
+interface PureOwnProps {
+  id: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+  fieldId: string;
+  utsettelseArsak: Kodeverk;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  vilkarForSykdomExists: boolean;
+  overforingArsak: Kodeverk;
+  updatePeriode: (...args: any[]) => any;
+}
+
 const buildInitialValues = createSelector([
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
-  (_state: any, ownProps: any) => ownProps.id],
+  (_state: any, ownProps: PureOwnProps) => ownProps.id],
 (begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
   begrunnelse,
   id,
@@ -240,7 +251,7 @@ const buildInitialValues = createSelector([
   dokumentertePerioder: initialDokumentertePerioder !== undefined ? initialDokumentertePerioder : [],
 }));
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const {
     behandlingId,
     behandlingVersjon,
@@ -249,11 +260,10 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   } = initialOwnProps;
   const formName = `sykdomOgSkadeForm-${initialOwnProps.id}`;
   const familiehendelse = gjeldendeFamiliehendelse;
-  const validate = (values: any) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.utsettelseArsak,
-    initialOwnProps.overforingArsak, vilkarForSykdomExists);
+  const validate = (values: any) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.overforingArsak, vilkarForSykdomExists);
   const onSubmit = (values: any) => initialOwnProps.updatePeriode((values));
 
-  return (state: any, ownProps: any) => ({
+  return (state: any, ownProps: PureOwnProps) => ({
     onSubmit,
     validate,
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
@@ -266,6 +276,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   });
 };
 
+// @ts-ignore Dynamisk navn på form
 export default connect(mapStateToPropsFactory)(behandlingForm({
   enableReinitialize: true,
 })(SykdomOgSkadePeriode));

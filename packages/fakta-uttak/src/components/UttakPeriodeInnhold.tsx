@@ -176,7 +176,6 @@ export const renderPeriode = (
           arbeidstidprosent={arbeidstidprosent}
           fraDato={fraDato}
           tilDato={tilDato}
-          inntektsmeldingInfo={inntektsmeldingInfo}
           bekreftet={bekreftet}
           uttakPeriodeType={uttakPeriodeType}
           arbeidsgiver={arbeidsgiver}
@@ -270,10 +269,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
       )}
     </div>
   );
-};
-
-UttakPeriodeInnhold.defaultProps = {
-  inntektsmeldingInfo: [],
 };
 
 export default UttakPeriodeInnhold;

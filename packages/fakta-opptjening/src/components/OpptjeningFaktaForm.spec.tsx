@@ -205,6 +205,7 @@ describe('<OpptjeningFaktaForm>', () => {
       alleKodeverk={{}}
     />);
 
+    // @ts-ignore Fiks
     expect(wrapper.state().selectedOpptjeningActivity).to.eql(opptjeningActivities[1]);
 
     expect(formInitCallback.getCalls()).to.have.length(0);
@@ -252,6 +253,7 @@ describe('<OpptjeningFaktaForm>', () => {
     expect(args[1]).to.eql('opptjeningActivities');
     expect(args[2]).to.eql([opptjeningActivities[0], editedActivity]);
 
+    // @ts-ignore Fiks
     expect(wrapper.state().selectedOpptjeningActivity).is.undefined;
 
     expect(formInitCallback.getCalls()).to.have.length(1);
@@ -282,6 +284,7 @@ describe('<OpptjeningFaktaForm>', () => {
 
     wrapper.find(Knapp).simulate('click');
 
+    // @ts-ignore Fiks
     expect(wrapper.state().selectedOpptjeningActivity).is.eql({
       id: 3,
       erGodkjent: true,
@@ -322,6 +325,7 @@ describe('<OpptjeningFaktaForm>', () => {
     expect(initCalls[0].args[0]).to.eql('Behandling_123.ActivityPanel');
     expect(initCalls[0].args[1]).to.eql({});
 
+    // @ts-ignore Fiks
     expect(wrapper.state().selectedOpptjeningActivity).is.undefined;
   });
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { FieldArrayMetaProps } from 'redux-form';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -20,6 +21,7 @@ describe('<DokumentertePerioderPeriodePicker>', () => {
   it('skal vise DokumentertePerioderPeriodePicker', () => {
     const wrapper = shallow(<DokumentertePerioderPeriodePicker
       fields={fields}
+      meta={{} as FieldArrayMetaProps}
       fraDato={periode.fom}
       tilDato={periode.tom}
       readOnly={false}
@@ -30,6 +32,7 @@ describe('<DokumentertePerioderPeriodePicker>', () => {
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
+    // @ts-ignore fiks
     const innerWrapper = shallow(comp);
 
     expect(innerWrapper.find(PeriodpickerField)).to.have.length(1);

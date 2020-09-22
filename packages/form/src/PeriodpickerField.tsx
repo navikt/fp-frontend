@@ -19,13 +19,18 @@ interface PeriodpickerFieldProps {
   parse?: (value: string) => string;
   isEdited?: boolean;
   renderIfMissingDateOnReadOnly?: boolean;
-  validate?: ((value: string) => boolean | undefined)[] | ((value: string) => boolean | undefined);
+  validate?: (((text: any) => ({ id: string; length?: undefined }
+    | { length: any; id?: undefined })[])
+    | ((value: any) => { id: string }[])
+    | ((text: any) => ({ id: string; limit?: undefined; } | { limit: any; id?: undefined; })[])
+    | ((text: any) => ({ id: string; text?: undefined; length?: undefined }
+    | { text: any; id?: undefined })[]))[]
   dataId?: string;
   renderUpwards?: boolean;
   ariaLabel?: string;
   disabledDays?: {
     before: Date;
-    after: Date;
+    after?: Date;
   };
 }
 

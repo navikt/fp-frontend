@@ -1,13 +1,15 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+
 import { AnnenForelderHarRettForm } from './AnnenForelderHarRettForm';
 
 const avklarAnnenforelderHarRettAp = [{
   aksjonspunktType: {
     kode: 'MANU',
-    navn: 'Manuell',
     kodeverk: 'AKSJONSPUNKT_TYPE',
   },
   kode: 'MANU',
@@ -17,13 +19,12 @@ const avklarAnnenforelderHarRettAp = [{
   besluttersBegrunnelse: null,
   definisjon: {
     kode: '5086',
-    navn: 'Avklar annen forelder har ikke rett',
+    kodeverk: '',
   },
   erAktivt: true,
   kanLoses: true,
   status: {
     kode: 'UTFO',
-    navn: 'Utført',
     kodeverk: 'AKSJONSPUNKT_STATUS',
   },
   toTrinnsBehandling: true,
@@ -35,6 +36,7 @@ const avklarAnnenforelderHarRettAp = [{
 describe('<AnnenForelderHarRettForm>', () => {
   it('skal vise AnnenForelderHarRettForm', () => {
     const wrapper = shallow(<AnnenForelderHarRettForm
+      {...reduxFormPropsMock}
       readOnly={false}
       hasOpenAksjonspunkter
       hasOpenUttakAksjonspunkter

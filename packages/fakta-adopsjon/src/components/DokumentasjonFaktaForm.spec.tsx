@@ -193,14 +193,14 @@ describe('<DokumentasjonFaktaForm>', () => {
   it('skal sette opp initielle verdier fra avklarte data når dette finnes', () => {
     const soknad = {
       omsorgsovertakelseDato: '2016-10-15',
-      adopsjonFodelsedatoer: '2016-03-15',
+      adopsjonFodelsedatoer: { 0: '2016-03-15' } as { [key: number]: string },
     };
     const familiehendelse = {
       omsorgsovertakelseDato: '2015-10-15',
       adopsjonFodelsedatoer: '2015-03-15',
-    };
+    } as FamilieHendelse;
 
-    const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse);
+    const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad as Soknad, familiehendelse);
 
     expect(initialValues).to.eql({
       barnetsAnkomstTilNorgeDato: undefined,

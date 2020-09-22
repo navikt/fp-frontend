@@ -2,8 +2,11 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
-import { AksjonspunktHelpText } from '@fpsak-frontend/shared-components';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+
+import { AksjonspunktHelpText } from '@fpsak-frontend/shared-components';
+import { FamilieHendelseSamling, Kodeverk, Personopplysninger } from '@fpsak-frontend/types';
+
 import { UttakPerioder } from './UttakPerioder';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
 import UttakNyPeriode from './UttakNyPeriode';
@@ -29,7 +32,7 @@ const familiehendelse = {
     morForSykVedFodsel: null,
     vedtaksDatoSomSvangerskapsuke: null,
   },
-};
+} as FamilieHendelseSamling;
 
 describe('<UttakPerioder>', () => {
   it('skal vise uttak UttakPerioder', () => {
@@ -45,7 +48,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -54,7 +57,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -94,7 +97,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -103,7 +106,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -138,7 +141,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -147,7 +150,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -178,7 +181,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -187,7 +190,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -213,7 +216,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -222,7 +225,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -248,7 +251,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -257,7 +260,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -283,26 +286,24 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[
           {
             aksjonspunktType: {
               kode: 'MANU',
-              navn: 'Manuell',
               kodeverk: 'AKSJONSPUNKT_TYPE',
             },
             begrunnelse: null,
             besluttersBegrunnelse: null,
             definisjon: {
               kode: '5071',
-              navn: 'Fastsett uttaksperioder manuelt',
+              kodeverk: '',
             },
             erAktivt: true,
             kanLoses: true,
             status: {
               kode: 'OPPR',
-              navn: 'Opprettet',
               kodeverk: 'AKSJONSPUNKT_STATUS',
             },
             toTrinnsBehandling: true,
@@ -317,7 +318,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -344,7 +345,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{}}
+        personopplysninger={{} as Personopplysninger}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -353,7 +354,7 @@ describe('<UttakPerioder>', () => {
         faktaArbeidsforhold={[]}
         behandlingId={1}
         behandlingVersjon={1}
-        behandlingStatus={{}}
+        behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"

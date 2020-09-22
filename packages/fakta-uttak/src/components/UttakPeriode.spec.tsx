@@ -1,19 +1,24 @@
 import React from 'react';
 import { expect } from 'chai';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import sinon from 'sinon';
+
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { FamilieHendelseSamling } from '@fpsak-frontend/types';
+
 import UttakPeriode from './UttakPeriode';
 import UttakPeriodeType from './UttakPeriodeType';
 import UttakPeriodeInnhold from './UttakPeriodeInnhold';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
-const getMockedFields = (fieldNames: any, perioder: any) => {
+const getMockedFields = (fieldNames: any, perioder: any): FieldArrayFieldsProps<any> => {
   const field = {
     get: (idx: any) => perioder[idx],
   };
   return {
     map: (callback: any) => fieldNames.map((fieldname: any, idx: any) => callback(fieldname, idx, field)),
-  };
+  } as FieldArrayFieldsProps<any>;
 };
 
 const fieldNames = ['periode[0]', 'periode[1]'];
@@ -51,10 +56,8 @@ const perioder = [{
   samtidigUttak: false,
   flerbarnsdager: false,
   arbeidsgiver: {},
-}];
-// const inntektsmeldinger = [{
-//   arbeidsgiver: '',
-// }];
+}] as CustomUttakKontrollerFaktaPerioder[];
+
 const openSlettPeriodeModalCallback = sinon.spy();
 const updatePeriode = sinon.spy();
 const editPeriode = sinon.spy();
@@ -62,7 +65,7 @@ const cancelEditPeriode = sinon.spy();
 const isAnyFormOpen = sinon.spy();
 const meta = {
   error: undefined,
-};
+} as FieldArrayMetaProps;
 const endringsdato = '2018-08-01';
 
 describe('<UttakPeriode>', () => {
@@ -79,7 +82,6 @@ describe('<UttakPeriode>', () => {
       readOnly
       perioder={perioder}
       isNyPeriodeFormOpen
-      inntektsmeldingInfo={[]}
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
@@ -89,8 +91,8 @@ describe('<UttakPeriode>', () => {
         kode: '1',
         kodeverk: '1',
       }}
-      familiehendelse={{}}
-      sisteUttakdatoFørsteSeksUker={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
+      sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
     />);
     const uttakPeriodeType = wrapper.find(UttakPeriodeType);
     expect(uttakPeriodeType).to.have.length(2);
@@ -111,7 +113,6 @@ describe('<UttakPeriode>', () => {
       readOnly
       perioder={perioder}
       isNyPeriodeFormOpen
-      inntektsmeldingInfo={[]}
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
@@ -121,8 +122,8 @@ describe('<UttakPeriode>', () => {
         kode: '1',
         kodeverk: '1',
       }}
-      familiehendelse={{}}
-      sisteUttakdatoFørsteSeksUker={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
+      sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
     />);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
@@ -142,7 +143,6 @@ describe('<UttakPeriode>', () => {
       readOnly={false}
       perioder={perioder}
       isNyPeriodeFormOpen
-      inntektsmeldingInfo={[]}
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
@@ -152,8 +152,8 @@ describe('<UttakPeriode>', () => {
         kode: '1',
         kodeverk: '1',
       }}
-      familiehendelse={{}}
-      sisteUttakdatoFørsteSeksUker={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
+      sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
     />);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
@@ -164,12 +164,11 @@ describe('<UttakPeriode>', () => {
     const otherProps = {
       meta: {
         error: 'Perioder overlapper',
-      },
+      } as FieldArrayMetaProps,
     };
     const wrapper = shallowWithIntl(<UttakPeriode.WrappedComponent
       intl={intlMock}
       fields={getMockedFields(fieldNames, perioder)}
-      meta={meta}
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       updatePeriode={updatePeriode}
       editPeriode={editPeriode}
@@ -178,7 +177,6 @@ describe('<UttakPeriode>', () => {
       readOnly={false}
       perioder={perioder}
       isNyPeriodeFormOpen
-      inntektsmeldingInfo={[]}
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
@@ -188,8 +186,8 @@ describe('<UttakPeriode>', () => {
         kode: '1',
         kodeverk: '1',
       }}
-      familiehendelse={{}}
-      sisteUttakdatoFørsteSeksUker={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
+      sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       {...otherProps}
     />);
 

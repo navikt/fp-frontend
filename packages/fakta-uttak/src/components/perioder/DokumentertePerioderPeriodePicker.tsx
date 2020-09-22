@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
-import { FieldArrayFieldsProps } from 'redux-form';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
 import { PeriodpickerField } from '@fpsak-frontend/form';
 import { FlexColumn, FlexRow, PeriodFieldArray } from '@fpsak-frontend/shared-components';
@@ -17,6 +17,7 @@ const periode = {
 
 interface OwnProps {
   fields: FieldArrayFieldsProps<{ fom: string; tom: string }>;
+  meta: FieldArrayMetaProps;
   fraDato: string;
   tilDato: string;
   readOnly: boolean;
@@ -45,7 +46,6 @@ class DokumentertePerioderPeriodePicker extends PureComponent<OwnProps> {
                       names={[`${fieldId}.fom`, `${fieldId}.tom`]}
                       label={index === 0 ? { id: 'UttakInfoPanel.AvklartPeriode' } : ''}
                       validate={[required, hasValidDate, dateRangesNotOverlapping]}
-                      defaultValue={null}
                       readOnly={readOnly}
                     />
                   </FlexColumn>

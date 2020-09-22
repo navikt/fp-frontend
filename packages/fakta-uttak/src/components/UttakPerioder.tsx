@@ -10,7 +10,7 @@ import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import {
-  Aksjonspunkt, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
+  Aksjonspunkt, FaktaArbeidsforhold, FamilieHendelse, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
 } from '@fpsak-frontend/types';
 import { getBehandlingFormPrefix, behandlingFormValueSelector, CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
@@ -30,9 +30,9 @@ import UttakNyPeriode from './UttakNyPeriode';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
-const createNewPerioder = (perioder: any, id: number, values: any) => {
-  const updatedIndex = perioder.findIndex((p: any) => p.id === id);
-  const updatedPeriode = perioder.find((p: any) => p.id === id);
+const createNewPerioder = (perioder: CustomUttakKontrollerFaktaPerioder[], id: string, values: any) => {
+  const updatedIndex = perioder.findIndex((p: CustomUttakKontrollerFaktaPerioder) => p.id === id);
+  const updatedPeriode = perioder.find((p: CustomUttakKontrollerFaktaPerioder) => p.id === id);
 
   return [
     ...perioder.slice(0, updatedIndex),
@@ -44,7 +44,7 @@ const createNewPerioder = (perioder: any, id: number, values: any) => {
   ];
 };
 
-export const findFamiliehendelseDato = (gjeldendeFamiliehendelse: any) => {
+export const findFamiliehendelseDato = (gjeldendeFamiliehendelse: FamilieHendelse) => {
   const { termindato, avklartBarn } = gjeldendeFamiliehendelse;
 
   if (avklartBarn && avklartBarn.length > 0) {
@@ -63,16 +63,15 @@ interface OwnProps {
   reduxFormChange: (...args: any[]) => any;
   reduxFormReset: (...args: any[]) => any;
   submitting: boolean;
-  initialValues: {};
+  initialValues: {
+    perioder?: CustomUttakKontrollerFaktaPerioder[];
+  };
   personopplysninger: Personopplysninger;
-  uttakPeriodeVurderingTyper: {
-    kode?: string;
-    name?: string;
-  }[];
+  uttakPeriodeVurderingTyper: KodeverkMedNavn[];
   aksjonspunkter: Aksjonspunkt[];
   hasRevurderingOvertyringAp: boolean;
   kanOverstyre: boolean;
-  getKodeverknavn: (...args: any[]) => any;
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   behandlingId: number;
   behandlingVersjon: number;
@@ -80,7 +79,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   familiehendelse: FamilieHendelseSamling;
   førsteUttaksdato?: string;
-  slettedePerioder?: {}[];
+  slettedePerioder?: CustomUttakKontrollerFaktaPerioder[];
   endringsdato?: string;
   isManuellOverstyring?: boolean;
   vilkarForSykdomExists?: boolean;
@@ -95,15 +94,15 @@ interface OwnState {
 export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
   static defaultProps: any;
 
+  nyPeriodeFormRef: any;
+
   constructor(props: OwnProps) {
     super(props);
-
-    const { perioder } = props;
 
     this.state = {
       isNyPeriodeFormOpen: false,
       showModalSlettPeriode: false,
-      periodeSlett: {},
+      periodeSlett: undefined,
     };
 
     this.newPeriodeCallback = this.newPeriodeCallback.bind(this);
@@ -145,7 +144,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     this.setState({ isNyPeriodeFormOpen: !isNyPeriodeFormOpen });
   }
 
-  newPeriodeCallback(nyPeriode: any) {
+  newPeriodeCallback(nyPeriode: CustomUttakKontrollerFaktaPerioder) {
     const {
       behandlingFormPrefix, perioder, reduxFormChange: formChange,
     } = this.props;
@@ -160,7 +159,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     });
   }
 
-  openSlettPeriodeModalCallback(id: any) {
+  openSlettPeriodeModalCallback(id: string) {
     const { showModalSlettPeriode } = this.state;
     const { perioder } = this.props;
     const periodeSlett = perioder.filter((periode: any) => periode.id === id);
@@ -213,7 +212,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     });
   }
 
-  cleaningUpForm(id: any) {
+  cleaningUpForm(id: string) {
     const { behandlingFormPrefix, perioder, reduxFormChange: formChange } = this.props;
 
     formChange(
@@ -234,7 +233,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     );
   }
 
-  editPeriode(id: any) {
+  editPeriode(id: string) {
     const { perioder, behandlingFormPrefix, reduxFormChange: formChange } = this.props;
 
     const newPerioder = createNewPerioder(perioder, id, { openForm: true });
@@ -242,7 +241,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     formChange(`${behandlingFormPrefix}.UttakFaktaForm`, 'perioder', newPerioder);
   }
 
-  cancelEditPeriode(id: any) {
+  cancelEditPeriode(id: string) {
     const { perioder, behandlingFormPrefix, reduxFormChange: formChange } = this.props;
 
     const newPerioder = createNewPerioder(perioder, id, { openForm: false });
@@ -262,7 +261,6 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
       resultat, dokumentertePerioder, id, kontoType, nyFom, nyTom, nyArbeidstidsprosent, oppholdArsak,
     } = values;
     const updatedPeriode = perioder.find((p: any) => p.id === id);
-    const updatedPeriodeIndex = perioder.findIndex((p: any) => p.id === id);
     const tom = nyTom || updatedPeriode.tom;
     const fom = nyFom || updatedPeriode.fom;
     const newPeriodeObject = {
@@ -293,6 +291,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     };
 
     if (kontoType) {
+      // @ts-ignore Fiks
       newPeriodeObject.uttakPeriodeType = {
         kode: kontoType,
         navn: uttakPeriodeNavn[kontoType],
@@ -301,6 +300,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     }
 
     if (oppholdArsak) {
+      // @ts-ignore Fiks
       newPeriodeObject.oppholdÅrsak = {
         kode: oppholdArsak,
         navn: getKodeverknavn(updatedPeriode.oppholdÅrsak),
@@ -361,7 +361,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     const {
       periodeSlett, isNyPeriodeFormOpen, showModalSlettPeriode,
     } = this.state;
-    const nyPeriodeDisabledDaysFom = førsteUttaksdato || (perioder[0] || []).fom;
+    const nyPeriodeDisabledDaysFom = førsteUttaksdato || (perioder[0] || {}).fom;
     const sisteUttakdatoFørsteSeksUker = moment(findFamiliehendelseDato(familiehendelse.gjeldende)).add(6, 'weeks');
     const farSøkerFør6Uker = (perioder[0] || {}).uttakPeriodeType
       && (perioder[0] || {}).uttakPeriodeType.kode === 'FEDREKVOTE'

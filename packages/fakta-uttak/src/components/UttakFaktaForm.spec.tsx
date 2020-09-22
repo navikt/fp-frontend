@@ -1,14 +1,16 @@
 import React from 'react';
 import { expect } from 'chai';
 
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { FamilieHendelseSamling, Kodeverk, Personopplysninger } from '@fpsak-frontend/types';
+
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
 const ap5070 = {
   aksjonspunktType: {
     kode: 'MANU',
-    navn: 'Manuell',
     kodeverk: 'AKSJONSPUNKT_TYPE',
   },
   kode: 'MANU',
@@ -18,13 +20,12 @@ const ap5070 = {
   besluttersBegrunnelse: null,
   definisjon: {
     kode: '5070',
-    navn: 'Avklar annen forelder har ikke rett',
+    kodeverk: '',
   },
   erAktivt: true,
   kanLoses: true,
   status: {
     kode: 'UTFO',
-    navn: 'Utført',
     kodeverk: 'AKSJONSPUNKT_STATUS',
   },
   toTrinnsBehandling: true,
@@ -36,7 +37,6 @@ const ap5070 = {
 const ap6070 = {
   aksjonspunktType: {
     kode: 'MANU',
-    navn: 'Manuell',
     kodeverk: 'AKSJONSPUNKT_TYPE',
   },
   kode: 'MANU',
@@ -46,13 +46,12 @@ const ap6070 = {
   besluttersBegrunnelse: null,
   definisjon: {
     kode: '6070',
-    navn: 'Avklar annen forelder har ikke rett',
+    kodeverk: '',
   },
   erAktivt: true,
   kanLoses: true,
   status: {
     kode: 'UTFO',
-    navn: 'Utført',
     kodeverk: 'AKSJONSPUNKT_STATUS',
   },
   toTrinnsBehandling: true,
@@ -64,7 +63,6 @@ const ap6070 = {
 const ap6013 = {
   aksjonspunktType: {
     kode: 'MANU',
-    navn: 'Manuell',
     kodeverk: 'AKSJONSPUNKT_TYPE',
   },
   kode: 'MANU',
@@ -74,13 +72,12 @@ const ap6013 = {
   besluttersBegrunnelse: null,
   definisjon: {
     kode: '6013',
-    navn: 'Avklar annen forelder har ikke rett',
+    kodeverk: '',
   },
   erAktivt: true,
   kanLoses: true,
   status: {
     kode: 'OPPR',
-    navn: 'Opprettet',
     kodeverk: 'AKSJONSPUNKT_STATUS',
   },
   toTrinnsBehandling: true,
@@ -96,6 +93,7 @@ describe('<UttakFaktaForm>', () => {
     };
     const wrapper = shallowWithIntl(
       <UttakFaktaForm
+        {...reduxFormPropsMock}
         readOnly={false}
         hasOpenAksjonspunkter
         behandlingFormPrefix="UttakFaktaForm"
@@ -108,9 +106,9 @@ describe('<UttakFaktaForm>', () => {
         alleKodeverk={{}}
         kanOverstyre={false}
         faktaArbeidsforhold={[]}
-        personopplysninger={{}}
-        behandlingStatus={{}}
-        familiehendelse={{}}
+        personopplysninger={{} as Personopplysninger}
+        behandlingStatus={{} as Kodeverk}
+        familiehendelse={{} as FamilieHendelseSamling}
         vilkarForSykdomExists
         {...formProps}
       />,

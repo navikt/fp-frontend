@@ -34,10 +34,10 @@ interface OwnProps {
   bekreftet: boolean;
   cancelEditPeriode: (...args: any[]) => any;
   readOnly: boolean;
-  dokumentertePerioder?: {}[];
+  dokumentertePerioder?: { fom: string; tom: string }[];
   fraDato: string;
   tilDato: string;
-  formSyncErrors?: {};
+  formSyncErrors?: { dokumentertePerioder: any[] };
   behandlingStatusKode?: string;
 }
 
@@ -162,15 +162,14 @@ export const InnleggelsePeriode: FunctionComponent<OwnProps & InjectedFormProps>
 };
 
 InnleggelsePeriode.defaultProps = {
-  dokumentertePerioder: [{}],
-  formSyncErrors: {},
-  resultat: undefined,
-  behandlingStatusKode: undefined,
+  dokumentertePerioder: [],
+  formSyncErrors: { dokumentertePerioder: [] },
 };
 
 const validateInnleggelseForm = (values: any) => {
-  const errors = {};
-  errors.dokumentertePerioder = [];
+  const errors = {
+    dokumentertePerioder: [],
+  };
   if (values && values.dokumentertePerioder) {
     values.dokumentertePerioder.forEach((periode: any, index: any) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
@@ -184,23 +183,31 @@ const validateInnleggelseForm = (values: any) => {
   return errors;
 };
 
+interface PureOwnProps {
+  id: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+  fieldId: string;
+  updatePeriode: (...args: any[]) => any;
+}
+
 const buildInitialValues = createSelector([
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
-  (state: any, ownProps: any) => behandlingFormValueSelector(
+  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
     'UttakFaktaForm',
     ownProps.behandlingId,
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
-  (_state: any, ownProps: any) => ownProps.id],
+  (_state: any, ownProps: PureOwnProps) => ownProps.id],
 (begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
   begrunnelse,
   id,
@@ -211,12 +218,12 @@ const buildInitialValues = createSelector([
           : [],
 }));
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `innleggelseForm-${initialOwnProps.id}`;
   const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
 
-  return (state: any, ownProps: any) => ({
+  return (state: any, ownProps: PureOwnProps) => ({
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
     dokumentertePerioder: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'dokumentertePerioder'),
     resultat: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat'),
@@ -228,9 +235,8 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
   });
 };
 
-export default connect(mapStateToPropsFactory)(
-  behandlingForm({
-    enableReinitialize: true,
-    validate: (values) => validateInnleggelseForm(values),
-  })(InnleggelsePeriode),
-);
+// @ts-ignore Dynamisk navn på form
+export default connect(mapStateToPropsFactory)(behandlingForm({
+  enableReinitialize: true,
+  validate: (values) => validateInnleggelseForm(values),
+})(InnleggelsePeriode));
