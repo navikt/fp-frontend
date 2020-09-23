@@ -64,10 +64,6 @@ interface OwnProps {
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Fødselsvilkåret.
  */
 export class FodselInfoPanelImpl extends Component<OwnProps> {
-  static defaultProps: {
-    avklartBarn: [],
-  };
-
   submittedAksjonspunkter?: any;
 
   constructor(props) {
@@ -200,6 +196,8 @@ export class FodselInfoPanelImpl extends Component<OwnProps> {
   }
 }
 
+const EMPTY_ARRAY = [];
+
 const nullSafe = (value: any) => value || {};
 
 interface PureOwnProps {
@@ -210,7 +208,7 @@ interface PureOwnProps {
 
 const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   formPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-  avklartBarn: nullSafe(ownProps.familiehendelse.register).avklartBarn,
+  avklartBarn: nullSafe(ownProps.familiehendelse.register).avklartBarn || EMPTY_ARRAY,
   termindato: nullSafe(ownProps.familiehendelse.gjeldende).termindato,
   vedtaksDatoSomSvangerskapsuke: nullSafe(ownProps.familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
 });

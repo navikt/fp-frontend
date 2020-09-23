@@ -92,12 +92,6 @@ interface OwnState {
 }
 
 export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
-  static defaultProps: {
-    isManuellOverstyring: false,
-    slettedePerioder: [],
-    perioder: [],
-  };
-
   nyPeriodeFormRef: any;
 
   constructor(props: OwnProps) {
@@ -509,20 +503,22 @@ interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
+const EMPTY_ARRAY = [];
+
 const mapStateToProps = (state: any, props: PureOwnProps) => {
   const { behandlingId, behandlingVersjon, alleKodeverk } = props;
   const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
 
   return {
     behandlingFormPrefix,
-    isManuellOverstyring: manuellOverstyring(state, behandlingId, behandlingVersjon),
+    isManuellOverstyring: manuellOverstyring(state, behandlingId, behandlingVersjon) || false,
     openForms: !!perioder(state, behandlingId, behandlingVersjon).find((periode: CustomUttakKontrollerFaktaPerioder) => periode.openForm === true),
     førsteUttaksdato: getFørsteUttaksdato(state, behandlingId, behandlingVersjon),
     endringsdato: getEndringsdato(state, behandlingId, behandlingVersjon),
     uttakPeriodeVurderingTyper: alleKodeverk[kodeverkTyper.UTTAK_PERIODE_VURDERING_TYPE],
     initialValues: getFormInitialValues(`${behandlingFormPrefix}.UttakFaktaForm`)(state),
-    slettedePerioder: slettedePerioder(state, behandlingId, behandlingVersjon),
-    perioder: perioder(state, behandlingId, behandlingVersjon),
+    slettedePerioder: slettedePerioder(state, behandlingId, behandlingVersjon) || EMPTY_ARRAY,
+    perioder: perioder(state, behandlingId, behandlingVersjon) || EMPTY_ARRAY,
   };
 };
 
