@@ -65,7 +65,6 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       intl={intlMock}
       isEngangsstonad
       fagsakYtelseTypeForSak={fagsakYtelseTypeEngangsstonad}
-
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',

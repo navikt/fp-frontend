@@ -11,13 +11,13 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/nap-person-card": "1.1.4",
-    "moment": "^2.27.0",
+    "moment": "^2.29.0",
     "nav-frontend-etiketter": "2.0.8",
     "nav-frontend-etiketter-style": "1.0.3",
     "nav-frontend-typografi": "2.0.26",
     "nav-frontend-typografi-style": "1.0.22",
     "react": "^16.13.1",
-    "react-intl": "^5.8.0"
+    "react-intl": "^5.8.2"
   },
   "devDependencies": {}
 }
