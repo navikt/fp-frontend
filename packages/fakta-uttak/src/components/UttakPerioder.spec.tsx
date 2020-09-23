@@ -40,7 +40,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -89,7 +88,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -133,7 +131,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -165,7 +162,7 @@ describe('<UttakPerioder>', () => {
     expect(fieldArray).to.have.length(1);
     expect(flexContainer).to.have.length(2);
     expect(uttakNyPeriode).to.have.length(0);
-    expect(uttakSlettPeriodeModal).to.have.length(1);
+    expect(uttakSlettPeriodeModal).to.have.length(0);
   });
 
   it('skal disable knapper når disableButtons er true', () => {
@@ -173,7 +170,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -208,7 +204,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -243,7 +238,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly={false}
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -278,7 +272,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly={false}
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
@@ -337,7 +330,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly={false}
         hasOpenAksjonspunkter
-        inntektsmeldinger={[]}
         behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}

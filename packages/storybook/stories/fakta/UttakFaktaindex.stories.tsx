@@ -32,6 +32,15 @@ import faktaArbeidsforholdOverføringAvPerioder from './mocks/uttak/overføring-
 import personopplysningerOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/personopplysninger.json';
 import familiehendelseOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/familiehendelse.json';
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
@@ -43,9 +52,9 @@ export const vurderOmAnnenPartHarRett = () => {
 
   return (
     <UttakFaktaIndex
+      {...standardFaktaProps}
       behandling={behandlingVurderAnnenPartHarRett}
       aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
-      submitCallback={action('button-click')}
       ytelsefordeling={ytelsefordelingVurderAnnenPartHarRett}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
       alleKodeverk={alleKodeverk as any}
@@ -63,9 +72,9 @@ export const farSøkerFørsteSeksUker = () => {
 
   return (
     <UttakFaktaIndex
+      {...standardFaktaProps}
       behandling={behandlingFarSøkerFørsteSeksUker}
       aksjonspunkter={aksjonspunkterFarSøkerFørsteSeksUker}
-      submitCallback={action('button-click')}
       ytelsefordeling={ytelsefordelingFarSøkerFørsteSeksUker}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker}
       alleKodeverk={alleKodeverk as any}
@@ -83,9 +92,9 @@ export const overføringAvPerioder = () => {
 
   return (
     <UttakFaktaIndex
+      {...standardFaktaProps}
       behandling={behandlingOverføringAvPerioder}
       aksjonspunkter={aksjonspunkterOverføringAvPerioder}
-      submitCallback={action('button-click')}
       ytelsefordeling={ytelsefordelingOverføringAvPerioder}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderOverføringAvPerioder}
       alleKodeverk={alleKodeverk as any}

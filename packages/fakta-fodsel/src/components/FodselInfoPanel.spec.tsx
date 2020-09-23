@@ -2,7 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -47,15 +46,12 @@ describe('<FodselInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<FodselInfoPanelImpl
-      intl={intlMock}
       aksjonspunkter={[antallBarnAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
       formPrefix="test"
       submitCallback={sinon.spy()}
-      isFormSubmitting={false}
-      isDirty={false}
       dispatch={sinon.spy}
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad as Soknad}
@@ -87,15 +83,12 @@ describe('<FodselInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<FodselInfoPanelImpl
-      intl={intlMock}
       aksjonspunkter={[terminbekreftelseAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
       formPrefix="test"
       submitCallback={sinon.spy()}
-      isFormSubmitting={false}
-      isDirty={false}
       dispatch={sinon.spy}
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad as Soknad}
@@ -111,15 +104,12 @@ describe('<FodselInfoPanel>', () => {
 
   it('skal vise infoview når det ikke finnes aksjonspunkter', () => {
     const wrapper = shallowWithIntl(<FodselInfoPanelImpl
-      intl={intlMock}
       aksjonspunkter={[]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
       formPrefix="test"
       submitCallback={sinon.spy()}
-      isFormSubmitting={false}
-      isDirty={false}
       dispatch={sinon.spy}
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad as Soknad}

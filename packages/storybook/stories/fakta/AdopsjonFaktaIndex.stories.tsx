@@ -50,6 +50,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
@@ -58,6 +67,7 @@ export default {
 
 export const visAksjonspunktForAdopsjonsvilkåret = () => (
   <AdopsjonFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -79,16 +89,13 @@ export const visAksjonspunktForAdopsjonsvilkåret = () => (
       [aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     alleKodeverk={alleKodeverk as any}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     isForeldrepengerFagsak
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
   <AdopsjonFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -110,16 +117,13 @@ export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
       [aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     alleKodeverk={alleKodeverk as any}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     isForeldrepengerFagsak
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
   <AdopsjonFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -141,10 +145,6 @@ export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
       [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     alleKodeverk={alleKodeverk as any}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

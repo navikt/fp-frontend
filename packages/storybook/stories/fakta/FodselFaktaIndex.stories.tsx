@@ -89,6 +89,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
@@ -97,6 +106,7 @@ export default {
 
 export const visAksjonspunktTerminbekreftelse = () => (
   <FodselFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -107,15 +117,12 @@ export const visAksjonspunktTerminbekreftelse = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.TERMINBEKREFTELSE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visAksjonspunktSjekkManglendeFødsel = () => (
   <FodselFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -132,15 +139,12 @@ export const visAksjonspunktSjekkManglendeFødsel = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visAksjonspunktVurderOmVilkårForSykdomErOppfylt = () => (
   <FodselFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -157,15 +161,12 @@ export const visAksjonspunktVurderOmVilkårForSykdomErOppfylt = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visPanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter = () => (
   <FodselFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -173,10 +174,5 @@ export const visPanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter = (
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
     aksjonspunkter={[]}
-    alleMerknaderFraBeslutter={{}}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

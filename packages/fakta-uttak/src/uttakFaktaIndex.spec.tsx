@@ -43,12 +43,20 @@ describe('<UttakFaktaIndex>', () => {
     erAktivt: true,
   }];
 
+  const standardFaktaProps = {
+    aksjonspunkter: [],
+    submitCallback: sinon.spy(),
+    readOnly: false,
+    harApneAksjonspunkter: true,
+    submittable: true,
+    alleMerknaderFraBeslutter: {},
+  };
+
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<UttakFaktaIndex
+      {...standardFaktaProps}
       behandling={behandling as Behandling}
       aksjonspunkter={aksjonspunkter as Aksjonspunkt[]}
-      submitCallback={sinon.spy()}
-      readOnly={false}
       uttakKontrollerFaktaPerioder={{
         perioder: [],
       }}

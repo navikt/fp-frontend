@@ -2,8 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, Behandling, InntektArbeidYtelse, KodeverkMedNavn,
+  Behandling, InntektArbeidYtelse, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -18,15 +19,10 @@ const intl = createIntl({
 interface OwnProps {
   behandling: Behandling;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
-  readOnly: boolean;
-  harApneAksjonspunkter: boolean;
 }
 
-const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps> = ({
+const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   inntektArbeidYtelse,
   alleKodeverk,

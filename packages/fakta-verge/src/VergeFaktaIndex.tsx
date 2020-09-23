@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';
 import Verge from './types/VergeTsType';
@@ -17,16 +18,10 @@ const intl = createIntl({
 type OwnProps = {
   behandling: Behandling;
   verge?: Verge;
-  aksjonspunkter: Aksjonspunkt[];
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submitCallback: (...args: any[]) => any;
-  readOnly: boolean;
-  harApneAksjonspunkter: boolean;
-  submittable: boolean;
 };
 
-const VergeFaktaIndex: FunctionComponent<OwnProps> = ({
+const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   verge,
   aksjonspunkter,

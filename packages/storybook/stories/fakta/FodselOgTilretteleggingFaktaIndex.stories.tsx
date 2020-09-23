@@ -119,6 +119,15 @@ const inntektArbeidYtelse = {
   skalKunneLeggeTilNyeArbeidsforhold: false,
 } as InntektArbeidYtelse;
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-fodsel-og-tilrettelegging',
   component: FodselOgTilretteleggingFaktaIndex,
@@ -127,6 +136,7 @@ export default {
 
 export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
   <FodselOgTilretteleggingFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     svangerskapspengerTilrettelegging={object('Tilrettelegging', svangerskapspengerTilretteleggingForArbeidsgiver)}
     aksjonspunkter={[{
@@ -142,10 +152,6 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
     inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={false}
   />
@@ -153,6 +159,7 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
 
 export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = () => (
   <FodselOgTilretteleggingFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     svangerskapspengerTilrettelegging={object('Tilrettelegging', svangerskapspengerTilretteleggingForFrilanser)}
     aksjonspunkter={[{
@@ -168,10 +175,6 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
       kanLoses: true,
       erAktivt: true,
     }]}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
     inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={false}
   />
@@ -191,6 +194,7 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
 
   return (
     <FodselOgTilretteleggingFaktaIndex
+      {...standardFaktaProps}
       behandling={behandling}
       svangerskapspengerTilrettelegging={object('Tilrettelegging', svangerskapspengerTilretteleggingForArbeidsgiver)}
       aksjonspunkter={[{
@@ -206,10 +210,6 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
         kanLoses: true,
         erAktivt: true,
       }]}
-      submitCallback={action('button-click')}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
       inntektArbeidYtelse={inntektArbeidYtelseForAnnenArbeidsgiver}
       erOverstyrer={false}
     />

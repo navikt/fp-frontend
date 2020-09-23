@@ -129,6 +129,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/tilbakekreving/fakta-feilutbetaling',
   component: FeilutbetalingFaktaIndex,
@@ -137,6 +146,7 @@ export default {
 
 export const visAksjonspunktForFeilutbetaling = () => (
   <FeilutbetalingFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
     feilutbetalingFakta={object('feilutbetalingFakta', feilutbetalingFakta as FeilutbetalingFakta)}
     feilutbetalingAarsak={object('feilutbetalingAarsak', feilutbetalingAarsak as FeilutbetalingAarsak[])}
@@ -158,9 +168,6 @@ export const visAksjonspunktForFeilutbetaling = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
   />
 );

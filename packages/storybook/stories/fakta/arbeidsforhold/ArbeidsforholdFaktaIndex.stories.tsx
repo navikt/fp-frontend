@@ -41,6 +41,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-arbeidsforhold',
   component: ArbeidsforholdFaktaIndex,
@@ -49,6 +58,7 @@ export default {
 
 export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
   <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', {
       arbeidsforhold: [{
@@ -81,14 +91,12 @@ export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
   />
 );
 
 export const visAksjonspunktForIngenArbeidsforholdRegistrert = () => (
   <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', {
       arbeidsforhold: [],
@@ -111,14 +119,12 @@ export const visAksjonspunktForIngenArbeidsforholdRegistrert = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    readOnly={boolean('readOnly', false)}
   />
 );
 
 export const visPanelUtenAksjonspunkter = () => (
   <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', {
       arbeidsforhold: [arbeidsforhold],
@@ -126,15 +132,13 @@ export const visPanelUtenAksjonspunkter = () => (
     } as InntektArbeidYtelse)}
     aksjonspunkter={[]}
     alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{}}
-    submitCallback={action('button-click')}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
-    readOnly={boolean('readOnly', false)}
   />
 );
 
 export const visPanelForPermisjon = () => (
   <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', {
       arbeidsforhold: [{
@@ -170,14 +174,12 @@ export const visPanelForPermisjon = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
   />
 );
 
 export const visPanelForFlerePermisjoner = () => (
   <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', {
       arbeidsforhold: [{
@@ -222,13 +224,12 @@ export const visPanelForFlerePermisjoner = () => (
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
   />
 );
 
 export const visPanelForFlereArbeidsforholdMedAksjonspunkt = () => (
   <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', flereArbfor)}
     aksjonspunkter={[apFlereArbfor]}
@@ -236,8 +237,5 @@ export const visPanelForFlereArbeidsforholdMedAksjonspunkt = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
   />
 );

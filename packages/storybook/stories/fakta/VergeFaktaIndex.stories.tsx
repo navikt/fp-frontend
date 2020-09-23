@@ -36,6 +36,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-verge',
   component: VergeFaktaIndex,
@@ -44,6 +53,7 @@ export default {
 
 export const visAksjonspunktForAvklaringAvVerge = () => (
   <VergeFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
     verge={verge}
     aksjonspunkter={aksjonspunkter}
@@ -51,9 +61,5 @@ export const visAksjonspunktForAvklaringAvVerge = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_VERGE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

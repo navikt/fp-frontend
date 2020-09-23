@@ -2,8 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, Behandling, FamilieHendelseSamling, InntektArbeidYtelse, KodeverkMedNavn, Personopplysninger, Soknad,
+  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, KodeverkMedNavn, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
+import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import OmsorgOgForeldreansvarInfoPanel from './components/OmsorgOgForeldreansvarInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -21,16 +22,10 @@ interface OwnProps {
   soknad: Soknad;
   personopplysninger: Personopplysninger;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback: (...args: any[]) => any;
-  readOnly: boolean;
-  harApneAksjonspunkter: boolean;
-  submittable: boolean;
 }
 
-const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps> = ({
+const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   familiehendelse,
   soknad,

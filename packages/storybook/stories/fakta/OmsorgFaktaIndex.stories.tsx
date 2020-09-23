@@ -59,6 +59,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
@@ -67,6 +76,7 @@ export default {
 
 export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
   <OmsorgFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
     soknad={object('soknad', soknad)}
@@ -88,15 +98,12 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
   <OmsorgFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
     soknad={object('soknad', soknad)}
@@ -118,9 +125,5 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

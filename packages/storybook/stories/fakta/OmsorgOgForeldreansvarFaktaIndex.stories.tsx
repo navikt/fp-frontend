@@ -76,6 +76,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-omsorg-og-foreldreansvar',
   component: OmsorgOgForeldreansvarFaktaIndex,
@@ -84,6 +93,7 @@ export default {
 
 export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
   <OmsorgOgForeldreansvarFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -105,16 +115,13 @@ export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.OMSORGSOVERTAKELSE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     alleKodeverk={alleKodeverk as any}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
   <OmsorgOgForeldreansvarFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
@@ -136,10 +143,6 @@ export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     alleKodeverk={alleKodeverk as any}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

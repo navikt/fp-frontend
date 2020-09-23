@@ -31,6 +31,15 @@ const aksjonspunkter = [{
   erAktivt: true,
 }];
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-tilleggsopplysninger',
   component: TilleggsopplysningerFaktaIndex,
@@ -39,11 +48,9 @@ export default {
 
 export const visAksjonspunktForTilleggsopplysninger = () => (
   <TilleggsopplysningerFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
     soknad={object('soknad', soknad as Soknad)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
   />
 );

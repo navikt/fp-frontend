@@ -126,6 +126,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
@@ -134,6 +143,7 @@ export default {
 
 export const visAksjonspunktForOpptjeningsvilkåret = () => (
   <OpptjeningFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
     opptjening={object('opptjening', opptjeningNårEnHarAksjonspunkt)}
     aksjonspunkter={[{
@@ -153,23 +163,14 @@ export const visAksjonspunktForOpptjeningsvilkåret = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visPanelUtenAksjonpunkt = () => (
   <OpptjeningFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
     opptjening={object('opptjening', opptjeningUtenAksjonspunkt)}
-    aksjonspunkter={[]}
     alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{}}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

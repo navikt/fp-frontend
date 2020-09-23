@@ -231,6 +231,15 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-medlemskap',
   component: MedlemskapFaktaIndex,
@@ -239,6 +248,7 @@ export default {
 
 export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = () => (
   <MedlemskapFaktaIndex
+    {...standardFaktaProps}
     behandling={object('behandling', behandling)}
     medlemskap={object('medlemskap', medlemskap)}
     soknad={object('soknad', soknad)}
@@ -262,16 +272,13 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
   <MedlemskapFaktaIndex
+    {...standardFaktaProps}
     behandling={object('behandling', behandling)}
     medlemskap={object('medlemskap', medlemskap)}
     soknad={object('soknad', soknad)}
@@ -334,10 +341,6 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

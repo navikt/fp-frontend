@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { submit as reduxSubmit } from 'redux-form';
 import { connect } from 'react-redux';
 
@@ -213,4 +213,4 @@ const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   vedtaksDatoSomSvangerskapsuke: nullSafe(ownProps.familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
 });
 
-export default connect(mapStateToProps)(injectIntl(FodselInfoPanelImpl));
+export default connect(mapStateToProps)(FodselInfoPanelImpl);
