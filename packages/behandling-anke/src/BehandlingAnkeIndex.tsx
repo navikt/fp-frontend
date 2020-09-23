@@ -62,12 +62,13 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & DispatchProps> = ({
   setRequestPendingMessage,
   destroyReduxForm,
 }) => {
-  const [behandling, setBehandlingState] = useState<Behandling>();
-  const [forrigeBehandling, setForrigeBehandling] = useState<Behandling>();
+  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
+  const behandling = nyOgForrigeBehandling.current;
+  const forrigeBehandling = nyOgForrigeBehandling.previous;
+
   const setBehandling = useCallback((nyBehandling) => {
-    setForrigeBehandling(behandling);
-    setBehandlingState(nyBehandling);
-  }, [behandling]);
+    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
+  }, []);
 
   const { startRequest: hentBehandling, data: behandlingRes } = restApiAnkeHooks
     .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.BEHANDLING_ANKE);

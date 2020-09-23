@@ -60,12 +60,13 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & DispatchProps>
   harApenRevurdering,
   setRequestPendingMessage,
 }) => {
-  const [behandling, setBehandlingState] = useState<Behandling>();
-  const [forrigeBehandling, setForrigeBehandling] = useState<Behandling>();
+  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
+  const behandling = nyOgForrigeBehandling.current;
+  const forrigeBehandling = nyOgForrigeBehandling.previous;
+
   const setBehandling = useCallback((nyBehandling) => {
-    setForrigeBehandling(behandling);
-    setBehandlingState(nyBehandling);
-  }, [behandling]);
+    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
+  }, []);
 
   const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks
     .useRestApi<{[key: string]: KodeverkMedNavn[]}>(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK);

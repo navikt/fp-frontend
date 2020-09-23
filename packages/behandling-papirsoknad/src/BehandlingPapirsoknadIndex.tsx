@@ -50,12 +50,13 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & DispatchProps> = 
   rettigheter,
   setRequestPendingMessage,
 }) => {
-  const [behandling, setBehandlingState] = useState<Behandling>();
-  const [forrigeBehandling, setForrigeBehandling] = useState<Behandling>();
+  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
+  const behandling = nyOgForrigeBehandling.current;
+  const forrigeBehandling = nyOgForrigeBehandling.previous;
+
   const setBehandling = useCallback((nyBehandling) => {
-    setForrigeBehandling(behandling);
-    setBehandlingState(nyBehandling);
-  }, [behandling]);
+    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
+  }, []);
 
   const { startRequest: hentBehandling, data: behandlingRes } = restApiPapirsoknadHooks
     .useRestApiRunner<Behandling>(PapirsoknadApiKeys.BEHANDLING_PAPIRSOKNAD);

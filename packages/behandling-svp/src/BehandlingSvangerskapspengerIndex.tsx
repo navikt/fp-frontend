@@ -62,12 +62,13 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps & DispatchPr
   opneSokeside,
   setRequestPendingMessage,
 }) => {
-  const [behandling, setBehandlingState] = useState<Behandling>();
-  const [forrigeBehandling, setForrigeBehandling] = useState<Behandling>();
+  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
+  const behandling = nyOgForrigeBehandling.current;
+  const forrigeBehandling = nyOgForrigeBehandling.previous;
+
   const setBehandling = useCallback((nyBehandling) => {
-    setForrigeBehandling(behandling);
-    setBehandlingState(nyBehandling);
-  }, [behandling]);
+    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
+  }, []);
 
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiSvpHooks
     .useRestApiRunner<Behandling>(SvpBehandlingApiKeys.BEHANDLING_SVP);
