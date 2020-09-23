@@ -104,7 +104,6 @@ const createAndelerTableRows = (
 
 const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag, behandlingId, behandlingVersjon) => (
   <SummaryRow
-
     readOnly={readOnly}
     key="summaryRow"
     skalVisePeriode={skalVisePeriode(fields)}
