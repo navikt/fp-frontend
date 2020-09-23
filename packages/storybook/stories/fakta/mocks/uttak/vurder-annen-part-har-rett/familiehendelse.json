@@ -14,7 +14,11 @@
         "antallBarnTermin": null,
         "utstedtdato": null,
         "morForSykVedFodsel": null,
-        "vedtaksDatoSomSvangerskapsuke": null
+        "vedtaksDatoSomSvangerskapsuke": null,
+        "soknadType": {
+            "kode": "ST-001",
+            "kodeverk": "SOKNAD_TYPE"
+        }
     },
     "gjeldende": {
         "@type": "AvklartDataFodselDto",
@@ -31,7 +35,11 @@
         "antallBarnTermin": null,
         "utstedtdato": null,
         "morForSykVedFodsel": null,
-        "vedtaksDatoSomSvangerskapsuke": null
+        "vedtaksDatoSomSvangerskapsuke": null,
+        "soknadType": {
+            "kode": "ST-001",
+            "kodeverk": "SOKNAD_TYPE"
+        }
     },
     "register": {
         "@type": "AvklartDataFodselDto",
@@ -48,6 +56,10 @@
         "antallBarnTermin": null,
         "utstedtdato": null,
         "morForSykVedFodsel": null,
-        "vedtaksDatoSomSvangerskapsuke": null
+        "vedtaksDatoSomSvangerskapsuke": null,
+        "soknadType": {
+            "kode": "ST-001",
+            "kodeverk": "SOKNAD_TYPE"
+        }
     }
 }

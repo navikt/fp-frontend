@@ -2,6 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
+import { FaktaArbeidsforhold, FamilieHendelseSamling, UttakKontrollerFaktaPerioderWrapper } from '@fpsak-frontend/types';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -46,14 +47,13 @@ export const vurderOmAnnenPartHarRett = () => {
       aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
       submitCallback={action('button-click')}
       ytelsefordeling={ytelsefordelingVurderAnnenPartHarRett}
-      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett}
-      alleKodeverk={alleKodeverk}
-      faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett}
+      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
+      alleKodeverk={alleKodeverk as any}
+      faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
       personopplysninger={personopplysningerVurderAnnenPartHarRett}
-      familiehendelse={familiehendelseVurderAnnenPartHarRett}
+      familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
       readOnly={boolean('readOnly', readOnly)}
       kanOverstyre={false}
-      submittable={boolean('submittable', true)}
     />
   );
 };
@@ -68,13 +68,12 @@ export const farSøkerFørsteSeksUker = () => {
       submitCallback={action('button-click')}
       ytelsefordeling={ytelsefordelingFarSøkerFørsteSeksUker}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker}
-      alleKodeverk={alleKodeverk}
-      faktaArbeidsforhold={faktaArbeidsforholdFarSøkerFørsteSeksUker}
+      alleKodeverk={alleKodeverk as any}
+      faktaArbeidsforhold={faktaArbeidsforholdFarSøkerFørsteSeksUker as FaktaArbeidsforhold[]}
       personopplysninger={personopplysningerFarSøkerFørsteSeksUker}
-      familiehendelse={familiehendelseFarSøkerFørsteSeksUker}
+      familiehendelse={familiehendelseFarSøkerFørsteSeksUker as FamilieHendelseSamling}
       readOnly={boolean('readOnly', readOnly)}
       kanOverstyre={false}
-      submittable={boolean('submittable', true)}
     />
   );
 };
@@ -89,13 +88,12 @@ export const overføringAvPerioder = () => {
       submitCallback={action('button-click')}
       ytelsefordeling={ytelsefordelingOverføringAvPerioder}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderOverføringAvPerioder}
-      alleKodeverk={alleKodeverk}
-      faktaArbeidsforhold={faktaArbeidsforholdOverføringAvPerioder}
+      alleKodeverk={alleKodeverk as any}
+      faktaArbeidsforhold={faktaArbeidsforholdOverføringAvPerioder as FaktaArbeidsforhold[]}
       personopplysninger={personopplysningerOverføringAvPerioder}
-      familiehendelse={familiehendelseOverføringAvPerioder}
+      familiehendelse={familiehendelseOverføringAvPerioder as FamilieHendelseSamling}
       readOnly={boolean('readOnly', readOnly)}
       kanOverstyre={false}
-      submittable={boolean('submittable', true)}
     />
   );
 };

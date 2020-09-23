@@ -6,6 +6,9 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
+import {
+  Behandling, Personopplysninger, Soknad, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -14,14 +17,14 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const soknad = {
   oppgittRettighet: {
     omsorgForBarnet: true,
     aleneomsorgForBarnet: true,
   },
-};
+} as Soknad;
 
 const personopplysninger = {
   navn: 'Espen Utvikler',
@@ -48,9 +51,9 @@ const personopplysninger = {
     },
   }],
   adresser: [],
-};
+} as Personopplysninger;
 
-const ytelsefordeling = {};
+const ytelsefordeling = {} as Ytelsefordeling;
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -71,15 +74,17 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -99,15 +104,17 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}

@@ -7,6 +7,7 @@ import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import region from '@fpsak-frontend/kodeverk/src/region';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
+import { Personopplysninger } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -33,7 +34,7 @@ const personopplysninger = {
     kode: personstatusType.BOSATT,
     kodeverk: 'PERSONSTATUS_TYPE',
   },
-};
+} as Personopplysninger;
 
 export default {
   title: 'fakta/fakta-bosted-soker',
@@ -45,7 +46,7 @@ export const visPanelForInformasjonOmSøkersBosted = () => (
   <div style={{ padding: '50px' }}>
     <BostedSokerFaktaIndex
       personopplysninger={object('personopplysninger', personopplysninger)}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
     />
   </div>
 );

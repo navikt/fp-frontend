@@ -281,7 +281,7 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
       erSelvstendig: updatedPeriode.erSelvstendig,
       samtidigUttak: updatedPeriode.samtidigUttak,
       samtidigUttaksprosent: updatedPeriode.samtidigUttaksprosent,
-      flerBarnsDager: updatedPeriode.flerBarnsDager,
+      flerBarnsDager: updatedPeriode.flerbarnsdager,
       morsAktivitet: updatedPeriode.morsAktivitet,
       arbeidsgiver: updatedPeriode.arbeidsgiver,
       isFromSøknad: updatedPeriode.isFromSøknad,

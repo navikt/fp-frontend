@@ -1,9 +1,9 @@
-import Arbeidsforhold from './arbeidsforholdTsType';
+import ArbeidsforholdFodselOgTilrettelegging from './arbeidsforholdFodselOgTilretteleggingTsType';
 
 type FodselOgTilrettelegging = Readonly<{
   termindato?: string;
   fødselsdato?: string;
-  arbeidsforholdListe: Arbeidsforhold[];
+  arbeidsforholdListe: ArbeidsforholdFodselOgTilrettelegging[];
   saksbehandlet: boolean;
 }>
 

@@ -2,20 +2,23 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { Arbeidsforhold, Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
+import ArbeidsforholdFodselOgTilrettelegging from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging/src/types/arbeidsforholdFodselOgTilretteleggingTsType';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const svangerskapspengerTilretteleggingForArbeidsgiver = {
   termindato: '2020-01-13',
+  saksbehandlet: false,
   arbeidsforholdListe: [{
     tilretteleggingId: 1315951,
     tilretteleggingBehovFom: '2019-09-16',
@@ -37,8 +40,6 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
     arbeidsgiverNavn: 'WWW.EIENDOMSDRIFT.CC SA',
     arbeidsgiverIdent: '555864629',
     arbeidsgiverIdentVisning: '555864629',
-    kopiertFraTidligereBehandling: false,
-    mottattTidspunkt: '2019-09-12T18:15:52.655168',
     internArbeidsforholdReferanse: 'c5534-6e55-4112-9645-fe52ee4950c2',
     eksternArbeidsforholdReferanse: 'T555864629R5021761S1103L5555',
     skalBrukes: true,
@@ -55,16 +56,15 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
     arbeidsgiverNavn: 'WWW.EIENDOMSDRIFT.CC SA',
     arbeidsgiverIdent: '555864629',
     arbeidsgiverIdentVisning: '555864629',
-    kopiertFraTidligereBehandling: false,
-    mottattTidspunkt: '2019-09-12T18:15:52.655168',
     internArbeidsforholdReferanse: '5gb912b7-4187-45a0-8c44-02322887d0ad',
     eksternArbeidsforholdReferanse: 'H555864629R5021761S1100L5555',
     skalBrukes: true,
-  }],
+  }] as ArbeidsforholdFodselOgTilrettelegging[],
 };
 
 const svangerskapspengerTilretteleggingForFrilanser = {
   termindato: '2020-02-27',
+  saksbehandlet: false,
   arbeidsforholdListe: [{
     tilretteleggingId: 1008653,
     tilretteleggingBehovFom: '2019-10-01',
@@ -75,8 +75,6 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       },
     }],
     arbeidsgiverNavn: 'Frilanser, samlet aktivitet',
-    kopiertFraTidligereBehandling: false,
-    mottattTidspunkt: '2019-10-24T12:06:36.548',
     skalBrukes: true,
   }, {
     tilretteleggingId: 1008654,
@@ -88,10 +86,8 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       },
     }],
     arbeidsgiverNavn: 'Selvstendig næringsdrivende',
-    kopiertFraTidligereBehandling: false,
-    mottattTidspunkt: '2019-10-24T12:06:36.548',
     skalBrukes: true,
-  }],
+  }] as ArbeidsforholdFodselOgTilrettelegging[],
 };
 
 const inntektArbeidYtelse = {
@@ -107,7 +103,6 @@ const inntektArbeidYtelse = {
     skjaeringstidspunkt: '2020-01-30',
     mottattDatoInntektsmelding: '2020-01-28',
     fomDato: '2016-01-28',
-    harErstattetEttEllerFlere: true,
     ikkeRegistrertIAaRegister: false,
     tilVurdering: false,
     vurderOmSkalErstattes: false,
@@ -119,8 +114,10 @@ const inntektArbeidYtelse = {
     lagtTilAvSaksbehandler: false,
     basertPaInntektsmelding: false,
     permisjoner: [],
+    kanOppretteNyttArbforFraIM: false,
   }],
-};
+  skalKunneLeggeTilNyeArbeidsforhold: false,
+} as InntektArbeidYtelse;
 
 export default {
   title: 'fakta/fakta-fodsel-og-tilrettelegging',
@@ -135,9 +132,11 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -148,6 +147,7 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     inntektArbeidYtelse={inntektArbeidYtelse}
+    erOverstyrer={false}
   />
 );
 
@@ -158,9 +158,11 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -171,19 +173,21 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     inntektArbeidYtelse={inntektArbeidYtelse}
+    erOverstyrer={false}
   />
 );
 
 export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = () => {
   const inntektArbeidYtelseForAnnenArbeidsgiver = {
     arbeidsforhold: [{
-      ...inntektArbeidYtelse.arbeidsforhold,
+      ...inntektArbeidYtelse.arbeidsforhold[0],
       id: '1111111-null',
       navn: 'STATOIL',
       arbeidsgiverIdentifikator: '1111111',
       arbeidsgiverIdentifiktorGUI: '1111111',
-    }],
-  };
+    }] as Arbeidsforhold[],
+    skalKunneLeggeTilNyeArbeidsforhold: false,
+  } as InntektArbeidYtelse;
 
   return (
     <FodselOgTilretteleggingFaktaIndex
@@ -192,9 +196,11 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
+          kodeverk: '',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: '',
         },
         begrunnelse: undefined,
         kanLoses: true,
@@ -205,6 +211,7 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       inntektArbeidYtelse={inntektArbeidYtelseForAnnenArbeidsgiver}
+      erOverstyrer={false}
     />
   );
 };

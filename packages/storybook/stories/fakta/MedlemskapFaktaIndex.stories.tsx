@@ -7,6 +7,9 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
+import {
+  Behandling, FagsakPerson, InntektArbeidYtelse, Soknad,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -17,10 +20,11 @@ const behandling = {
   versjon: 1,
   type: {
     kode: behandlingType.FORSTEGANGSSOKNAD,
+    kodeverk: '',
   },
   behandlingPaaVent: false,
   status: behandlingStatus.OPPRETTET,
-};
+} as Behandling;
 
 const soknad = {
   oppgittFordeling: {
@@ -41,17 +45,17 @@ const soknad = {
       tom: '2019-01-01',
     }],
   },
-};
+} as Soknad;
 
 const inntektArbeidYtelse = {
   inntektsmeldinger: [{
     arbeidsgiverStartdato: '2019-02-02',
-    arbeidsgiver: 'Studio Espen',
   }, {
     arbeidsgiverStartdato: '2019-02-03',
-    arbeidsgiver: 'Auto Joachim bilpleie',
   }],
-};
+  skalKunneLeggeTilNyeArbeidsforhold: false,
+} as InntektArbeidYtelse;
+
 const medlemskap = {
   inntekt: [{
     navn: 'MYGG ROBUST',
@@ -221,7 +225,7 @@ const medlemskap = {
     begrunnelse: null,
   }],
 };
-const fagsakPerson = {};
+const fagsakPerson = {} as FagsakPerson;
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -242,9 +246,11 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -252,7 +258,7 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
     }]}
     fagsakPerson={object('fagsakPerson', fagsakPerson)}
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -273,9 +279,11 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -283,9 +291,11 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     }, {
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -293,9 +303,11 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     }, {
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -303,9 +315,11 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     }, {
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -313,7 +327,7 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     }]}
     fagsakPerson={object('fagsakPerson', fagsakPerson)}
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       [aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP]: object('merknaderFraBeslutter', merknaderFraBeslutter),

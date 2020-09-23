@@ -6,6 +6,9 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
+import {
+  Behandling, FamilieHendelseSamling, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -14,38 +17,35 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const familieHendelse = {
   gjeldende: {
-    omsorgsovertakelseDato: undefined,
-    barnetsAnkomstTilNorgeDato: '2019-01-01',
     adopsjonFodelsedatoer: {
       1: '2018-01-01',
       2: '2000-01-02',
     },
-    ektefellesBarn: undefined,
-    mannAdoptererAlene: undefined,
   },
-};
+} as FamilieHendelseSamling;
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' },
+  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
   soknadType: {
     kode: soknadType.FODSEL,
+    kodeverk: '',
   },
   farSokerType: {
     kode: 'ADOPTERER_ALENE',
     kodeverk: 'FAR_SOEKER_TYPE',
   },
-};
+} as Soknad;
 
 const personopplysninger = {
   barnSoktFor: [],
-};
+} as Personopplysninger;
 const merknaderFraBeslutter = {
   notAccepted: false,
 };
@@ -64,9 +64,11 @@ export const visAksjonspunktForAdopsjonsvilkåret = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -76,7 +78,7 @@ export const visAksjonspunktForAdopsjonsvilkåret = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
     isForeldrepengerFagsak
@@ -93,9 +95,11 @@ export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -105,7 +109,7 @@ export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
     isForeldrepengerFagsak
@@ -122,9 +126,11 @@ export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -134,7 +140,7 @@ export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}

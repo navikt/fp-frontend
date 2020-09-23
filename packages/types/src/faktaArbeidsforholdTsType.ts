@@ -7,7 +7,7 @@ type FaktaArbeidsforhold = Readonly<{
     fødselsdato: string;
     navn: string;
   };
-  uttakArbeidType: Kodeverk;
+  arbeidType: Kodeverk;
 }>
 
 export default FaktaArbeidsforhold;

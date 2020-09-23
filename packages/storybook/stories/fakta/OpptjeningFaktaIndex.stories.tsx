@@ -6,6 +6,7 @@ import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAkti
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
+import { Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -29,6 +30,7 @@ const opptjeningNårEnHarAksjonspunkt = {
   opptjeningAktivitetList: [{
     aktivitetType: {
       kode: opptjeningAktivitetType.NARING,
+      kodeverk: '',
     },
     originalFom: null,
     originalTom: null,
@@ -51,6 +53,7 @@ const opptjeningNårEnHarAksjonspunkt = {
   }, {
     aktivitetType: {
       kode: opptjeningAktivitetType.ARBEID,
+      kodeverk: '',
     },
     originalFom: null,
     originalTom: null,
@@ -87,6 +90,7 @@ const opptjeningUtenAksjonspunkt = {
     opptjeningTom: '9999-12-31',
     aktivitetType: {
       kode: opptjeningAktivitetType.ARBEID,
+      kodeverk: '',
     },
     arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
     arbeidsgiver: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
@@ -103,6 +107,7 @@ const opptjeningUtenAksjonspunkt = {
     opptjeningTom: '9999-12-31',
     aktivitetType: {
       kode: opptjeningAktivitetType.DAGPENGER,
+      kodeverk: '',
     },
     arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
     arbeidsgiver: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
@@ -129,20 +134,22 @@ export default {
 
 export const visAksjonspunktForOpptjeningsvilkåret = () => (
   <OpptjeningFaktaIndex
-    behandling={behandling}
+    behandling={behandling as Behandling}
     opptjening={object('opptjening', opptjeningNårEnHarAksjonspunkt)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -155,10 +162,10 @@ export const visAksjonspunktForOpptjeningsvilkåret = () => (
 
 export const visPanelUtenAksjonpunkt = () => (
   <OpptjeningFaktaIndex
-    behandling={behandling}
+    behandling={behandling as Behandling}
     opptjening={object('opptjening', opptjeningUtenAksjonspunkt)}
     aksjonspunkter={[]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{}}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}

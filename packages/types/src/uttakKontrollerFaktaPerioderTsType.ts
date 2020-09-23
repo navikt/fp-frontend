@@ -22,7 +22,6 @@ export type UttakKontrollerFaktaPerioder = Readonly<{
   samtidigUttaksprosent: string;
   oppholdÅrsak: Kodeverk;
   erArbeidstaker: boolean;
-  flerBarnsDager: boolean;
   morsAktivitet: Kodeverk;
   resultat: Kodeverk;
 }>

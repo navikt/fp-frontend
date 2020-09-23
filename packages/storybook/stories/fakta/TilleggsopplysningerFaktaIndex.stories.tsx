@@ -4,53 +4,46 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
+import TilleggsopplysningerFaktaIndex from '@fpsak-frontend/fakta-tilleggsopplysninger';
+import { Behandling, Soknad } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
   id: 1,
   versjon: 1,
 };
 
+const soknad = {
+  tilleggsopplysninger: 'Dette er en tilleggsopplysning',
+};
+
 const aksjonspunkter = [{
   definisjon: {
-    kode: aksjonspunktCodes.AVKLAR_VERGE,
+    kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER,
+    kodeverk: '',
   },
   status: {
     kode: aksjonspunktStatus.OPPRETTET,
+    kodeverk: '',
   },
-  begrunnelse: undefined,
   kanLoses: true,
   erAktivt: true,
 }];
 
-const verge = {};
-
-const merknaderFraBeslutter = {
-  notAccepted: false,
-};
-
 export default {
-  title: 'fakta/fakta-verge',
-  component: VergeFaktaIndex,
+  title: 'fakta/fakta-tilleggsopplysninger',
+  component: TilleggsopplysningerFaktaIndex,
   decorators: [withKnobs, withReduxProvider],
 };
 
-export const visAksjonspunktForAvklaringAvVerge = () => (
-  <VergeFaktaIndex
-    behandling={behandling}
-    verge={verge}
+export const visAksjonspunktForTilleggsopplysninger = () => (
+  <TilleggsopplysningerFaktaIndex
+    behandling={behandling as Behandling}
+    soknad={object('soknad', soknad as Soknad)}
     aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_VERGE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-    }}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

@@ -13,8 +13,8 @@ export type OpptjeningAktivitet = {
   stillingsandel: number;
   arbeidsforholdRef: string;
   erPeriodeEndret: boolean;
-  privatpersonNavn: string;
-  privatpersonFødselsdato: string;
+  privatpersonNavn?: string;
+  privatpersonFødselsdato?: string;
 };
 
 type Opptjening = {

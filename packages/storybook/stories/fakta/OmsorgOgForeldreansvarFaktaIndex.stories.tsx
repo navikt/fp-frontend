@@ -10,6 +10,9 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OmsorgOgForeldreansvarFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-foreldreansvar';
+import {
+  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -18,7 +21,7 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const familieHendelse = {
   gjeldende: {
@@ -27,43 +30,48 @@ const familieHendelse = {
     antallBarnTermin: 1,
     dokumentasjonForeligger: true,
   },
-};
+} as FamilieHendelseSamling;
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' },
+  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
   utstedtdato: '2019-01-02',
   antallBarn: 1,
   soknadType: {
     kode: soknadType.FODSEL,
+    kodeverk: '',
   },
   farSokerType: {
     kode: 'ADOPTERER_ALENE',
     kodeverk: 'FAR_SOEKER_TYPE',
   },
-};
+} as Soknad;
 
 const personopplysninger = {
   aktoerId: '1',
   navn: 'Espen Utvikler',
   navBrukerKjonn: {
     kode: navBrukerKjonn.KVINNE,
+    kodeverk: '',
   },
   personstatus: {
     kode: personstatusType.BOSATT,
+    kodeverk: '',
   },
   barnSoktFor: [],
-};
+} as Personopplysninger;
+
 const inntektArbeidYtelse = {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [{
     tilgrensendeYtelserListe: [{
-      status: {
-        kode: relatertYtelseTilstand.LOPENDE,
-      },
+      status: relatertYtelseTilstand.LOPENDE,
       periodeFraDato: '2019-01-01',
+      saksNummer: '2323',
     }],
     relatertYtelseType: relatertYtelseType.FORELDREPENGER,
   }],
-};
+  skalKunneLeggeTilNyeArbeidsforhold: false,
+} as InntektArbeidYtelse;
+
 const merknaderFraBeslutter = {
   notAccepted: false,
 };
@@ -84,9 +92,11 @@ export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -97,7 +107,7 @@ export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
     }}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
   />
@@ -113,9 +123,11 @@ export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
@@ -126,7 +138,7 @@ export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
     }}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
   />

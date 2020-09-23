@@ -11,6 +11,9 @@ import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbake
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
+import { Behandling } from '@fpsak-frontend/types';
+import FeilutbetalingFakta from '@fpsak-frontend/fakta-feilutbetaling/src/types/feilutbetalingFaktaTsType';
+import FeilutbetalingAarsak from '@fpsak-frontend/fakta-feilutbetaling/src/types/feilutbetalingAarsakTsType';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -134,15 +137,17 @@ export default {
 
 export const visAksjonspunktForFeilutbetaling = () => (
   <FeilutbetalingFaktaIndex
-    behandling={behandling}
-    feilutbetalingFakta={object('feilutbetalingFakta', feilutbetalingFakta)}
-    feilutbetalingAarsak={object('feilutbetalingAarsak', feilutbetalingAarsak)}
+    behandling={behandling as Behandling}
+    feilutbetalingFakta={object('feilutbetalingFakta', feilutbetalingFakta as FeilutbetalingFakta)}
+    feilutbetalingAarsak={object('feilutbetalingAarsak', feilutbetalingAarsak as FeilutbetalingAarsak[])}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,

@@ -22,7 +22,7 @@ type InntektArbeidYtelse = Readonly<{
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder?: {
     relatertYtelseType: string;
     tilgrensendeYtelserListe: {
-      periodeTilDato: string;
+      periodeTilDato?: string;
       periodeFraDato: string;
       status: string;
       saksNummer: string;

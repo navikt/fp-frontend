@@ -2,7 +2,9 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
-import { Behandling, BeregningsresultatEs, Beregningsgrunnlag, Medlemskap } from '@fpsak-frontend/types';
+import {
+  Behandling, BeregningsresultatEs, Beregningsgrunnlag, Medlemskap,
+} from '@fpsak-frontend/types';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';

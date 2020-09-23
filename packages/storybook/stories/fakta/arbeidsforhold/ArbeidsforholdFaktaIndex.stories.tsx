@@ -6,6 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import arbeidsforholdKilder from '@fpsak-frontend/fakta-arbeidsforhold/src/kodeverk/arbeidsforholdKilder';
+import { Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
 
 import { iay as flereArbfor, ap as apFlereArbfor } from './scenario/FlereArbforMedAksjonspunkt';
 import withReduxProvider from '../../../decorators/withRedux';
@@ -15,12 +16,13 @@ import alleKodeverk from '../../mocks/alleKodeverk.json';
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const arbeidsforhold = {
   navn: 'Vy',
   kilde: {
     navn: arbeidsforholdKilder.INNTEKTSMELDING,
+    kodeverk: '',
   },
   id: '1',
   arbeidsgiverIdentifikator: '11212',
@@ -32,6 +34,7 @@ const arbeidsforhold = {
   stillingsprosent: 100,
   arbeidsforholdId: '1234',
   arbeidsgiverIdentifiktorGUI: '23232',
+  kanOppretteNyttArbforFraIM: false,
 };
 
 const merknaderFraBeslutter = {
@@ -60,19 +63,21 @@ export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
         mottattDatoInntektsmelding: undefined,
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
-    })}
+    } as InntektArbeidYtelse)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -92,15 +97,17 @@ export const visAksjonspunktForIngenArbeidsforholdRegistrert = () => (
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -116,9 +123,9 @@ export const visPanelUtenAksjonspunkter = () => (
     inntektArbeidYtelse={object('inntektArbeidYtelse', {
       arbeidsforhold: [arbeidsforhold],
       skalKunneLeggeTilNyeArbeidsforhold: false,
-    })}
+    } as InntektArbeidYtelse)}
     aksjonspunkter={[]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{}}
     submitCallback={action('button-click')}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
@@ -137,27 +144,29 @@ export const visPanelForPermisjon = () => (
         permisjoner: [{
           type: {
             kode: 'PERMISJON',
+            kodeverk: '',
           },
           permisjonFom: '2018-10-10',
           permisjonTom: '2019-10-10',
           permisjonsprosent: 100,
-          permisjonsÅrsak: 'aarsak',
         }],
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
-    })}
+    } as InntektArbeidYtelse)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -177,6 +186,7 @@ export const visPanelForFlerePermisjoner = () => (
         permisjoner: [{
           type: {
             kode: 'PERMISJON',
+            kodeverk: '',
           },
           permisjonFom: '2015-01-01',
           permisjonTom: undefined,
@@ -185,27 +195,29 @@ export const visPanelForFlerePermisjoner = () => (
         }, {
           type: {
             kode: 'PERMISJON',
+            kodeverk: '',
           },
           permisjonFom: '2017-01-01',
           permisjonTom: '2019-01-01',
           permisjonsprosent: 100,
-          permisjonsÅrsak: 'aarsak',
         }],
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
-    })}
+    } as InntektArbeidYtelse)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -220,7 +232,7 @@ export const visPanelForFlereArbeidsforholdMedAksjonspunkt = () => (
     behandling={behandling}
     inntektArbeidYtelse={object('inntektArbeidYtelse', flereArbfor)}
     aksjonspunkter={[apFlereArbfor]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}

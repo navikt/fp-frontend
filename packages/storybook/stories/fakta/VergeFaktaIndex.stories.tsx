@@ -4,43 +4,56 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import TilleggsopplysningerFaktaIndex from '@fpsak-frontend/fakta-tilleggsopplysninger';
+import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
+import { Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
+
+import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
   id: 1,
   versjon: 1,
 };
 
-const soknad = {
-  tilleggsopplysninger: 'Dette er en tilleggsopplysning',
-};
-
 const aksjonspunkter = [{
   definisjon: {
-    kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER,
+    kode: aksjonspunktCodes.AVKLAR_VERGE,
+    kodeverk: '',
   },
   status: {
     kode: aksjonspunktStatus.OPPRETTET,
+    kodeverk: '',
   },
+  begrunnelse: undefined,
   kanLoses: true,
   erAktivt: true,
 }];
 
+const verge = {};
+
+const merknaderFraBeslutter = {
+  notAccepted: false,
+};
+
 export default {
-  title: 'fakta/fakta-tilleggsopplysninger',
-  component: TilleggsopplysningerFaktaIndex,
+  title: 'fakta/fakta-verge',
+  component: VergeFaktaIndex,
   decorators: [withKnobs, withReduxProvider],
 };
 
-export const visAksjonspunktForTilleggsopplysninger = () => (
-  <TilleggsopplysningerFaktaIndex
-    behandling={behandling}
-    soknad={object('soknad', soknad)}
+export const visAksjonspunktForAvklaringAvVerge = () => (
+  <VergeFaktaIndex
+    behandling={behandling as Behandling}
+    verge={verge}
     aksjonspunkter={aksjonspunkter}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_VERGE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+    }}
     submitCallback={action('button-click')}
     readOnly={boolean('readOnly', false)}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
+    submittable={boolean('submittable', true)}
   />
 );
