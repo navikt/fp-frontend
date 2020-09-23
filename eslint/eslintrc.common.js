@@ -53,6 +53,10 @@ const config = {
     'react/static-property-placement': OFF,
     'react/state-in-constructor': OFF,
 
+    // note you must disable the base rule as it can report incorrect errors
+    'no-use-before-define': OFF,
+    '@typescript-eslint/no-use-before-define': [ERROR],
+
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
     'jsx-a11y/anchor-is-valid': OFF,
     'react/jsx-props-no-spreading': OFF,
