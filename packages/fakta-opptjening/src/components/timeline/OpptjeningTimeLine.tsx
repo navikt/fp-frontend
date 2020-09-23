@@ -129,8 +129,6 @@ interface OwnState {
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for fakta/opptjening
  */
 class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
-  static defaultProps: any;
-
   timelineRef: RefObject<any>;
 
   constructor(props) {

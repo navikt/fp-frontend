@@ -92,7 +92,11 @@ interface OwnState {
 }
 
 export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
-  static defaultProps: any;
+  static defaultProps: {
+    isManuellOverstyring: false,
+    slettedePerioder: [],
+    perioder: [],
+  };
 
   nyPeriodeFormRef: any;
 
@@ -481,12 +485,6 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
     );
   }
 }
-
-UttakPerioder.defaultProps = {
-  isManuellOverstyring: false,
-  slettedePerioder: [],
-  perioder: [],
-};
 
 const getFørsteUttaksdato = (state: any, behandlingId: number, behandlingVersjon: number) => behandlingFormValueSelector(
   'UttakFaktaForm', behandlingId, behandlingVersjon,

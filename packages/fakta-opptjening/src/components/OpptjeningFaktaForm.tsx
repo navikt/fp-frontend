@@ -82,8 +82,6 @@ interface OwnState {
  * det aksjonspunkt kan nav-ansatt endre opplysninger før en går videre i prosessen.
  */
 export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
-  static defaultProps: any;
-
   constructor(props) {
     super(props);
 
