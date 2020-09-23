@@ -466,15 +466,17 @@ export class UttakPerioder extends PureComponent<OwnProps, OwnState> {
             />
           </div>
         )}
-        <UttakSlettPeriodeModal
-          showModal={showModalSlettPeriode}
-          periode={periodeSlett}
-          cancelEvent={this.hideModal}
-          closeEvent={this.removePeriode}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-          getKodeverknavn={getKodeverknavn}
-        />
+        {periodeSlett && (
+          <UttakSlettPeriodeModal
+            showModal={showModalSlettPeriode}
+            periode={periodeSlett}
+            cancelEvent={this.hideModal}
+            closeEvent={this.removePeriode}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            getKodeverknavn={getKodeverknavn}
+          />
+        )}
       </>
     );
   }
