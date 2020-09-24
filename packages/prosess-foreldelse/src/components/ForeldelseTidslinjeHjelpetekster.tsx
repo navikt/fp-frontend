@@ -1,13 +1,14 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import ikkeOppfyltUrl from '@fpsak-frontend/assets/images/ikke_oppfylt.svg';
 import oppfyltUrl from '@fpsak-frontend/assets/images/oppfylt.svg';
 import uavklartUrl from '@fpsak-frontend/assets/images/uavklart.svg';
 import { LegendBox } from '@fpsak-frontend/tidslinje';
 
-const ForeldelseTidslinjeHjelpetekster = ({ intl }) => {
+const ForeldelseTidslinjeHjelpetekster: FunctionComponent<WrappedComponentProps> = ({
+  intl,
+}) => {
   const legends = [
     {
       src: oppfyltUrl,
@@ -23,8 +24,5 @@ const ForeldelseTidslinjeHjelpetekster = ({ intl }) => {
     },
   ];
   return <LegendBox legends={legends} />;
-};
-ForeldelseTidslinjeHjelpetekster.propTypes = {
-  intl: PropTypes.shape().isRequired,
 };
 export default injectIntl(ForeldelseTidslinjeHjelpetekster);

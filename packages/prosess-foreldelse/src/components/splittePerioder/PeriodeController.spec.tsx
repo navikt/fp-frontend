@@ -1,10 +1,13 @@
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
+
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
+
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 import { PeriodeController } from './PeriodeController';
+import ForeldelsesresultatActivity from '../../types/foreldelsesresultatActivitytsType';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-foreldelse';
 
 describe('<PeriodeController>', () => {
@@ -17,7 +20,7 @@ describe('<PeriodeController>', () => {
       oppdaterSplittedePerioder={sinon.spy()}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
-      periode={{}}
+      periode={{} as ForeldelsesresultatActivity}
       readOnly={false}
     />);
 
@@ -37,7 +40,7 @@ describe('<PeriodeController>', () => {
       oppdaterSplittedePerioder={sinon.spy()}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
-      periode={{}}
+      periode={{} as ForeldelsesresultatActivity}
       readOnly
     />);
 
@@ -65,7 +68,7 @@ describe('<PeriodeController>', () => {
       oppdaterSplittedePerioder={oppdaterSplittedePerioder}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
-      periode={periode}
+      periode={periode as ForeldelsesresultatActivity}
       readOnly
     />);
     wrapper.setState({ showDelPeriodeModal: true });

@@ -1,27 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent, RefObject } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import Timeline from 'react-visjs-timeline';
 import { Column, Row } from 'nav-frontend-grid';
-import { injectIntl } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { Image } from '@fpsak-frontend/shared-components';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
-
 import { TimeLineControl } from '@fpsak-frontend/tidslinje';
+
+import TidslinjePeriode from '../../types/tidslinjePeriodeTsType';
 
 import styles from './tilbakekrevingTimeline.less';
 
 export const GODKJENT_CLASSNAME = 'godkjentPeriode';
 export const AVVIST_CLASSNAME = 'avvistPeriode';
 
-const isKvinne = (kode) => kode === navBrukerKjonn.KVINNE;
+type Periode = {
+  className?: string;
+  group: number;
+} & TidslinjePeriode;
 
-const getOptions = (sortedPeriods) => {
+const isKvinne = (kode: string) => kode === navBrukerKjonn.KVINNE;
+
+const getOptions = (sortedPeriods: Periode[]) => {
   const firstPeriod = sortedPeriods[0];
   const lastPeriod = sortedPeriods[sortedPeriods.length - 1];
 
@@ -46,10 +51,10 @@ const getOptions = (sortedPeriods) => {
   };
 };
 
-const parseDateString = (dateString) => moment(dateString, ISO_DATE_FORMAT)
+const parseDateString = (dateString: moment.Moment | string) => moment(dateString, ISO_DATE_FORMAT)
   .toDate();
 
-function sortByDate(a, b) {
+function sortByDate(a: Periode, b: Periode) {
   if (a.fom < b.fom) {
     return -1;
   }
@@ -59,16 +64,16 @@ function sortByDate(a, b) {
   return 0;
 }
 
-const parseDates = (item) => ({
+const parseDates = (item: Periode) => ({
   ...item,
   start: parseDateString(item.fom),
-  end: parseDateString(moment(item.tom)
-    .add(1, 'days')),
+
+  end: parseDateString(moment(item.tom).add(1, 'days')),
 });
 
-const formatItems = (periodItems = []) => {
+const formatItems = (periodItems: Periode[] = []) => {
   const itemsWithDates = periodItems.map(parseDates);
-  const formattedItemsArray = [];
+  const formattedItemsArray: any = [];
   formattedItemsArray.length = 0;
   itemsWithDates.forEach((item) => {
     formattedItemsArray.push(item);
@@ -76,7 +81,7 @@ const formatItems = (periodItems = []) => {
   return formattedItemsArray;
 };
 
-const formatGroups = (periodItems = []) => {
+const formatGroups = (periodItems: Periode[] = []) => {
   const duplicatesRemoved = periodItems.reduce((accPeriods, period) => {
     const hasPeriod = accPeriods.some((p) => p.group === period.group);
     if (!hasPeriod) accPeriods.push(period);
@@ -88,15 +93,25 @@ const formatGroups = (periodItems = []) => {
   }));
 };
 
+interface OwnProps {
+  perioder: TidslinjePeriode[];
+  toggleDetaljevindu: (event: MouseEvent) => void
+  selectedPeriod?: TidslinjePeriode;
+  selectPeriodCallback: (...args: any[]) => any;
+  hjelpetekstKomponent: React.ReactNode;
+  kjonn: string;
+}
+
 /**
  * TilbakekrevingTimeLine
  *
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for tilbakekreving
  */
+class TilbakekrevingTimeline extends Component<OwnProps & WrappedComponentProps> {
+  timelineRef: RefObject<any>
 
-class TilbakekrevingTimeline extends Component {
-  constructor() {
-    super();
+  constructor(props: OwnProps & WrappedComponentProps) {
+    super(props);
 
     this.goForward = this.goForward.bind(this);
     this.goBackward = this.goBackward.bind(this);
@@ -157,7 +172,7 @@ class TilbakekrevingTimeline extends Component {
       kjonn,
     } = this.props;
 
-    const newPerioder = perioder.map((periode) => {
+    const newPerioder = perioder.map((periode: TidslinjePeriode) => {
       const className = periode.isGodkjent ? GODKJENT_CLASSNAME : AVVIST_CLASSNAME;
       return {
         ...periode,
@@ -204,6 +219,7 @@ class TilbakekrevingTimeline extends Component {
               zoomInCallback={this.zoomIn}
               zoomOutCallback={this.zoomOut}
               openPeriodInfo={toggleDetaljevindu}
+              // @ts-ignore Fiks denne. Typane stemmer ikkje
               selectedPeriod={selectedPeriod}
             >
               {hjelpetekstKomponent}
@@ -214,31 +230,5 @@ class TilbakekrevingTimeline extends Component {
     );
   }
 }
-
-TilbakekrevingTimeline.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  perioder: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    fom: PropTypes.string.isRequired,
-    tom: PropTypes.string.isRequired,
-    isAksjonspunktOpen: PropTypes.bool.isRequired,
-    isGodkjent: PropTypes.bool.isRequired,
-  })).isRequired,
-  toggleDetaljevindu: PropTypes.func.isRequired,
-  selectedPeriod: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    fom: PropTypes.string.isRequired,
-    tom: PropTypes.string.isRequired,
-    isAksjonspunktOpen: PropTypes.bool.isRequired,
-    isGodkjent: PropTypes.bool.isRequired,
-  }),
-  selectPeriodCallback: PropTypes.func.isRequired,
-  hjelpetekstKomponent: PropTypes.node.isRequired,
-  kjonn: PropTypes.string.isRequired,
-};
-
-TilbakekrevingTimeline.defaultProps = {
-  selectedPeriod: undefined,
-};
 
 export default injectIntl(TilbakekrevingTimeline);

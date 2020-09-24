@@ -4,8 +4,10 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
 
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 
+import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 import { ForeldelseForm } from './ForeldelseForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import ForeldelsePeriodeForm from './ForeldelsePeriodeForm';
@@ -17,9 +19,12 @@ describe('<ForeldelseForm>', () => {
       tom: '2019-11-10',
       foreldelseVurderingType: {
         kode: foreldelseVurderingType.UDEFINERT,
+        kodeverk: '',
       },
-    }];
+    }] as ForeldelsesresultatActivity[];
+
     const wrapper = shallow(<ForeldelseForm
+      {...reduxFormPropsMock}
       foreldelsesresultatActivity={perioder}
       behandlingFormPrefix="form"
       reduxFormChange={sinon.spy()}
@@ -49,8 +54,9 @@ describe('<ForeldelseForm>', () => {
       foreldelseVurderingType: {
         kode: foreldelseVurderingType.UDEFINERT,
       },
-    }];
+    }] as ForeldelsesresultatActivity[];
     const wrapper = shallow(<ForeldelseForm
+      {...reduxFormPropsMock}
       foreldelsesresultatActivity={perioder}
       behandlingFormPrefix="form"
       reduxFormChange={sinon.spy()}
@@ -79,8 +85,9 @@ describe('<ForeldelseForm>', () => {
       foreldelseVurderingType: {
         kode: foreldelseVurderingType.FORELDET,
       },
-    }];
+    }] as ForeldelsesresultatActivity[];
     const wrapper = shallow(<ForeldelseForm
+      {...reduxFormPropsMock}
       foreldelsesresultatActivity={perioder}
       behandlingFormPrefix="form"
       reduxFormChange={sinon.spy()}

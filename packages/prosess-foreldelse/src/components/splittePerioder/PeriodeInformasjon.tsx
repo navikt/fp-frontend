@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -9,6 +8,12 @@ import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@fps
 
 import styles from './periodeInformasjon.less';
 
+interface OwnProps {
+  fom: string;
+  tom: string;
+  feilutbetaling: number;
+}
+
 /**
  * PeriodeInformasjon
  *
@@ -16,11 +21,10 @@ import styles from './periodeInformasjon.less';
  *
  * Presentationskomponent
  */
-const PeriodeInformasjon = ({
+const PeriodeInformasjon: FunctionComponent<OwnProps> = ({
   fom,
   tom,
   feilutbetaling,
-  arsak,
 }) => {
   const daysAndWeeks = calcDaysAndWeeks(moment(fom.toString()), moment(tom.toString()));
   return (
@@ -54,32 +58,12 @@ const PeriodeInformasjon = ({
                   <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(feilutbetaling) }</span>
                 </Normaltekst>
               </Column>
-              <Column xs="6">
-                {arsak && (
-                  <Normaltekst className={styles.resultName}>
-                    {arsak.årsak}
-                  </Normaltekst>
-                )}
-              </Column>
             </Row>
           </div>
         </div>
       </Column>
     </Row>
   );
-};
-
-PeriodeInformasjon.propTypes = {
-  fom: PropTypes.string.isRequired,
-  tom: PropTypes.string.isRequired,
-  feilutbetaling: PropTypes.number.isRequired,
-  arsak: PropTypes.shape({
-    årsak: PropTypes.string.isRequired,
-  }),
-};
-
-PeriodeInformasjon.defaultProsp = {
-  arsak: undefined,
 };
 
 export default PeriodeInformasjon;

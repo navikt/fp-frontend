@@ -14,7 +14,14 @@ describe('<TilbakekrevingTimelineData>', () => {
       periode={{
         fom: '2019-10-10',
         tom: '2019-11-10',
+        belop: 1212,
+        foreldelseVurderingType: {
+          kode: '',
+          kodeverk: '',
+        },
+        begrunnelse: 'Test',
         feilutbetaling: 12,
+        foreldet: '',
       }}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}

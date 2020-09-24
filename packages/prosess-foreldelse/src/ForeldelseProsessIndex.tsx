@@ -1,11 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import ForeldelseForm from './components/ForeldelseForm';
+import ForeldelsePerioderWrapper from './types/foreldelsePerioderTsType';
+
 import messages from '../i18n/nb_NO.json';
-import foreldelsePerioderPropType from './propTypes/foreldelsePerioderPropType';
-import foreldelseBehandlingPropType from './propTypes/foreldelseBehandlingPropType';
 
 const cache = createIntlCache();
 
@@ -14,13 +15,20 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const ForeldelseProsessIndex = ({
+interface OwnProps {
+  perioderForeldelse: ForeldelsePerioderWrapper;
+  navBrukerKjonn: string;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  beregnBelop: (data: any) => Promise<any>;
+}
+
+const ForeldelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   perioderForeldelse,
   navBrukerKjonn,
   alleMerknaderFraBeslutter,
-  alleKodeverk,
   beregnBelop,
+  alleKodeverk,
   submitCallback,
   isReadOnly,
   readOnlySubmitButton,
@@ -42,18 +50,5 @@ const ForeldelseProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-ForeldelseProsessIndex.propTypes = {
-  behandling: foreldelseBehandlingPropType.isRequired,
-  perioderForeldelse: foreldelsePerioderPropType.isRequired,
-  navBrukerKjonn: PropTypes.string.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  beregnBelop: PropTypes.func.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
 
 export default ForeldelseProsessIndex;

@@ -60,6 +60,7 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      splitPeriod: () => undefined,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -78,6 +79,7 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      splitPeriod: () => undefined,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -98,6 +100,7 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      splitPeriod: () => undefined,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -118,7 +121,7 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
-      splitPeriod: (value) => value,
+      splitPeriod: (value: any) => value,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();

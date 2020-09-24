@@ -16,6 +16,12 @@ interface DatepickerFieldProps {
   format?: (value: string) => string;
   parse?: (value: string) => string;
   isEdited?: boolean;
+  className?: string;
+  disabledDays?: {
+    before: Date;
+    after?: Date;
+  };
+  initialMonth?: Date;
   validate?: (((text: any) => ({ id: string; length?: undefined }
     | { length: any; id?: undefined })[])
     | ((value: any) => { id: string }[])

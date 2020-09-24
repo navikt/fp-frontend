@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { change as reduxFormChange, initialize as reduxFormInitialize } from 'redux-form';
+import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity, omit } from '@fpsak-frontend/utils';
@@ -17,27 +16,32 @@ import {
 } from '@fpsak-frontend/form';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME } from './ForeldelsePeriodeForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import ForeldelseTidslinjeHjelpetekster from './ForeldelseTidslinjeHjelpetekster';
+import { ForeldelsePerioder } from '../types/foreldelsePerioderTsType';
+import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
+import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
 
 import styles from './foreldelseForm.less';
 
 const FORELDELSE_FORM_NAME = 'ForeldelseForm';
 
-const sortPeriods = (periode1, periode2) => new Date(periode1.fom) - new Date(periode2.fom);
+const sortPeriods = (periode1: ForeldelsesresultatActivity, periode2: ForeldelsesresultatActivity) => moment(periode1.fom).diff(moment(periode2.fom));
 
 const getDate = () => moment().subtract(30, 'months').format(DDMMYYYY_DATE_FORMAT);
-const getApTekst = (apCode) => (apCode
+const getApTekst = (apCode: string) => (apCode
   ? [<FormattedMessage id={`ForeldelseForm.AksjonspunktHelpText.${apCode}`} key="vurderForeldelse" values={{ dato: getDate() }} />]
   : []);
 
-const harApentAksjonspunkt = (periode) => ((!periode.foreldelseVurderingType || periode.foreldelseVurderingType.kode === foreldelseVurderingType.UDEFINERT)
+const harApentAksjonspunkt = (periode: ForeldelsesresultatActivity) => ((!periode.foreldelseVurderingType
+  || periode.foreldelseVurderingType.kode === foreldelseVurderingType.UDEFINERT)
   && (!periode.begrunnelse || !!periode.erSplittet));
 
-const formaterPerioderForTidslinje = (perioder = []) => perioder
-  .map((periode, index) => ({
+const formaterPerioderForTidslinje = (perioder: ForeldelsesresultatActivity[] = []): TidslinjePeriode[] => perioder
+  .map((periode: ForeldelsesresultatActivity, index: number) => ({
     fom: periode.fom,
     tom: periode.tom,
     isAksjonspunktOpen: harApentAksjonspunkt(periode),
@@ -45,8 +49,28 @@ const formaterPerioderForTidslinje = (perioder = []) => perioder
     id: index,
   }));
 
-export class ForeldelseForm extends Component {
-  constructor(props) {
+interface OwnProps {
+  foreldelsesresultatActivity?: ForeldelsesresultatActivity[];
+  behandlingFormPrefix: string;
+  reduxFormChange: (...args: any[]) => any;
+  reduxFormInitialize: (...args: any[]) => any;
+  navBrukerKjonn: string;
+  apCodes?: string[];
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  merknaderFraBeslutter?: { notAccepted?: boolean };
+  beregnBelop: (data: any) => Promise<any>;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+interface OwnState {
+  valgtPeriode?: ForeldelsesresultatActivity;
+}
+
+export class ForeldelseForm extends Component<OwnProps & InjectedFormProps, OwnState> {
+  constructor(props: OwnProps & InjectedFormProps) {
     super(props);
     this.state = {
       valgtPeriode: null,
@@ -60,17 +84,21 @@ export class ForeldelseForm extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: OwnProps & InjectedFormProps) {
     const { foreldelsesresultatActivity } = this.props;
     if (!prevProps.foreldelsesresultatActivity && foreldelsesresultatActivity) {
       this.setPeriode(foreldelsesresultatActivity.find(harApentAksjonspunkt));
     }
   }
 
-  setPeriode = (periode) => {
+  setPeriode = (periode: TidslinjePeriode | ForeldelsesresultatActivity) => {
     const { foreldelsesresultatActivity } = this.props;
-    const valgt = periode ? foreldelsesresultatActivity.find((p) => p.fom === periode.fom && p.tom === periode.tom) : undefined;
-    this.setState((state) => ({ ...state, valgtPeriode: valgt }));
+    const valgt = periode ? foreldelsesresultatActivity
+      .find((p: ForeldelsesresultatActivity) => p.fom === periode.fom && p.tom === periode.tom) : undefined;
+    this.setState((state: any) => ({
+      ...state,
+      valgtPeriode: valgt,
+    }));
     this.initializeValgtPeriodeForm(valgt);
   }
 
@@ -84,24 +112,26 @@ export class ForeldelseForm extends Component {
   setNestePeriode = () => {
     const { foreldelsesresultatActivity } = this.props;
     const { valgtPeriode } = this.state;
-    const index = foreldelsesresultatActivity.findIndex((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
+    const index = foreldelsesresultatActivity
+      .findIndex((p: ForeldelsesresultatActivity) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
     this.setPeriode(foreldelsesresultatActivity[index + 1]);
   }
 
   setForrigePeriode = () => {
     const { foreldelsesresultatActivity } = this.props;
     const { valgtPeriode } = this.state;
-    const index = foreldelsesresultatActivity.findIndex((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
+    const index = foreldelsesresultatActivity
+      .findIndex((p: ForeldelsesresultatActivity) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
     this.setPeriode(foreldelsesresultatActivity[index - 1]);
   }
 
-  oppdaterPeriode = (values) => {
+  oppdaterPeriode = (values: any) => {
     const {
       foreldelsesresultatActivity, reduxFormChange: formChange, behandlingFormPrefix,
     } = this.props;
-    const { ...verdier } = omit(values, 'erSplittet');
+    const { ...verdier } = omit(values, 'erSplittet') as ForeldelsesresultatActivity;
 
-    const otherThanUpdated = foreldelsesresultatActivity.filter((o) => o.fom !== verdier.fom && o.tom !== verdier.tom);
+    const otherThanUpdated = foreldelsesresultatActivity.filter((o: ForeldelsesresultatActivity) => o.fom !== verdier.fom && o.tom !== verdier.tom);
     const sortedActivities = otherThanUpdated.concat(verdier).sort(sortPeriods);
     formChange(`${behandlingFormPrefix}.${FORELDELSE_FORM_NAME}`, 'foreldelsesresultatActivity', sortedActivities);
     this.togglePeriode();
@@ -112,25 +142,25 @@ export class ForeldelseForm extends Component {
     }
   }
 
-  initializeValgtPeriodeForm = (valgtPeriode) => {
+  initializeValgtPeriodeForm = (valgtPeriode: ForeldelsesresultatActivity) => {
     const { reduxFormInitialize: formInitialize, behandlingFormPrefix } = this.props;
     formInitialize(`${behandlingFormPrefix}.${FORELDELSE_PERIODE_FORM_NAME}`, valgtPeriode);
   }
 
-  oppdaterSplittedePerioder = (perioder) => {
+  oppdaterSplittedePerioder = (perioder: ForeldelsesresultatActivity[]) => {
     const {
       foreldelsesresultatActivity, reduxFormChange: formChange, behandlingFormPrefix,
     } = this.props;
     const { valgtPeriode } = this.state;
 
-    const periode = foreldelsesresultatActivity.find((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
-    const nyePerioder = perioder.map((p) => ({
+    const periode = foreldelsesresultatActivity.find((p: ForeldelsesresultatActivity) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
+    const nyePerioder = perioder.map((p: ForeldelsesresultatActivity) => ({
       ...periode,
       ...p,
       erSplittet: true,
     }));
 
-    const otherThanUpdated = foreldelsesresultatActivity.filter((o) => o.fom !== valgtPeriode.fom && o.tom !== valgtPeriode.tom);
+    const otherThanUpdated = foreldelsesresultatActivity.filter((o: ForeldelsesresultatActivity) => o.fom !== valgtPeriode.fom && o.tom !== valgtPeriode.tom);
     const sortedActivities = otherThanUpdated.concat(nyePerioder).sort(sortPeriods);
 
     this.togglePeriode();
@@ -143,7 +173,7 @@ export class ForeldelseForm extends Component {
       foreldelsesresultatActivity,
       behandlingFormPrefix,
       navBrukerKjonn,
-      apCodes,
+      apCodes = [],
       readOnlySubmitButton,
       readOnly,
       merknaderFraBeslutter,
@@ -166,7 +196,6 @@ export class ForeldelseForm extends Component {
     return (
       <form onSubmit={formProps.handleSubmit}>
         <FaktaGruppe
-          aksjonspunktCode={aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE}
           merknaderFraBeslutter={merknaderFraBeslutter}
           withoutBorder
         >
@@ -239,32 +268,8 @@ export class ForeldelseForm extends Component {
   }
 }
 
-ForeldelseForm.propTypes = {
-  foreldelsesresultatActivity: PropTypes.arrayOf(PropTypes.shape()),
-  behandlingFormPrefix: PropTypes.string.isRequired,
-  reduxFormChange: PropTypes.func.isRequired,
-  reduxFormInitialize: PropTypes.func.isRequired,
-  navBrukerKjonn: PropTypes.string.isRequired,
-  apCodes: PropTypes.arrayOf(PropTypes.string),
-  readOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  merknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool.isRequired,
-  }),
-  beregnBelop: PropTypes.func.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
-
-ForeldelseForm.defaultProps = {
-  foreldelsesresultatActivity: undefined,
-  apCodes: [],
-  merknaderFraBeslutter: undefined,
-};
-
-export const transformValues = (values, apCode) => {
-  const foreldelsePerioder = values.foreldelsesresultatActivity.map((period) => ({
+export const transformValues = (values: any, apCode: string) => {
+  const foreldelsePerioder = values.foreldelsesresultatActivity.map((period: any) => ({
     fraDato: period.fom,
     tilDato: period.tom,
     begrunnelse: period.begrunnelse,
@@ -275,8 +280,8 @@ export const transformValues = (values, apCode) => {
     kode: apCode,
   }];
 };
-export const buildInitialValues = (foreldelsePerioder) => ({
-  foreldelsesresultatActivity: foreldelsePerioder.map((p) => ({
+export const buildInitialValues = (foreldelsePerioder: ForeldelsePerioder[]): { foreldelsesresultatActivity: ForeldelsesresultatActivity[] } => ({
+  foreldelsesresultatActivity: foreldelsePerioder.map((p: ForeldelsePerioder) => ({
     ...p,
     feilutbetaling: p.belop,
     foreldet: p.foreldelseVurderingType.kode === foreldelseVurderingType.UDEFINERT ? null : p.foreldelseVurderingType.kode,
@@ -284,9 +289,18 @@ export const buildInitialValues = (foreldelsePerioder) => ({
   })),
 });
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const submitCallback = (values) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.apCodes[0]));
-  return (state, ownProps) => ({
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  apCodes: string[];
+  perioderForeldelse: any;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+}
+
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
+  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.apCodes[0]));
+  return (state: any, ownProps: PureOwnProps) => ({
     initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),
     foreldelsesresultatActivity: behandlingFormValueSelector(FORELDELSE_FORM_NAME,
       ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'foreldelsesresultatActivity'),
@@ -296,13 +310,13 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(injectIntl(behandlingForm({
+export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
   form: FORELDELSE_FORM_NAME,
-})(ForeldelseForm)));
+})(ForeldelseForm));
