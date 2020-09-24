@@ -1,19 +1,32 @@
 import React from 'react';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
+import { intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
+
 import VilkarResultPicker from './VilkarResultPicker';
+import * as useIntl from '../useIntl';
 
 describe('<VilkarResultPicker>', () => {
   const avslagsarsaker = [{ kode: 'TEST', navn: 'test', kodeverk: '' }];
 
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlWithMessages());
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise komponent med radioknapper', () => {
-    const wrapper = shallowWithIntl(<VilkarResultPicker.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<VilkarResultPicker
       avslagsarsaker={avslagsarsaker}
       erVilkarOk
       readOnly={false}
@@ -23,20 +36,19 @@ describe('<VilkarResultPicker>', () => {
 
   it('skal kunne overstyre vilkårtekster', () => {
     const textId = 'Test';
-    const wrapper = shallowWithIntl(<VilkarResultPicker.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<VilkarResultPicker
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={false}
       customVilkarIkkeOppfyltText={{ id: textId, values: { test: 'testvalue' } }}
       readOnly={false}
     />);
 
+    // @ts-ignore fiks
     expect(wrapper.find('RadioOption').at(1).prop('label').props.id).to.equal(textId);
   });
 
   it('skal ikke vise nedtrekksliste når vilkårsresultat ikke er valgt', () => {
-    const wrapper = shallowWithIntl(<VilkarResultPicker.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<VilkarResultPicker
       avslagsarsaker={avslagsarsaker}
       erVilkarOk
       readOnly={false}
@@ -46,8 +58,7 @@ describe('<VilkarResultPicker>', () => {
   });
 
   it('skal ikke vise nedtrekksliste når vilkårsresultat er OK', () => {
-    const wrapper = shallowWithIntl(<VilkarResultPicker.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<VilkarResultPicker
       avslagsarsaker={avslagsarsaker}
       erVilkarOk
       readOnly={false}
@@ -57,8 +68,7 @@ describe('<VilkarResultPicker>', () => {
   });
 
   it('skal vise nedtrekksliste når vilkårsresultat er valgt', () => {
-    const wrapper = shallowWithIntl(<VilkarResultPicker.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<VilkarResultPicker
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={false}
       readOnly={false}
@@ -74,7 +84,6 @@ describe('<VilkarResultPicker>', () => {
   it('skal feile validering når en har valgt å avvise vilkår men ikke valgt avslagsårsak', () => {
     const erVilkarOk = false;
     const avslagCode = undefined;
-    // @ts-ignore Korleis fikse dette på ein bra måte?
     const errors = VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
     expect(errors.avslagCode).to.eql(isRequiredMessage());
@@ -83,7 +92,6 @@ describe('<VilkarResultPicker>', () => {
   it('skal ikke feile validering når en har valgt både å avvise vilkår og avslagsårsak', () => {
     const erVilkarOk = false;
     const avslagCode = 'VALGT_KODE';
-    // @ts-ignore Korleis fikse dette på ein bra måte?
     const errors = VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
     expect(errors).to.eql({});
@@ -93,8 +101,9 @@ describe('<VilkarResultPicker>', () => {
     const behandlingsresultat = {
       avslagsarsak: {
         kode: 'Avslagskoden',
+        kodeverk: '',
       },
-    };
+    } as Behandlingsresultat;
     const aksjonspunkter = [{
       status: {
         kode: aksjonspunktStatus.UTFORT,
@@ -102,8 +111,7 @@ describe('<VilkarResultPicker>', () => {
       vilkarType: {
         kode: vilkarType.FODSELSVILKARET_MOR,
       },
-    }];
-    // @ts-ignore Korleis fikse dette på ein bra måte?
+    }] as Aksjonspunkt[];
     const intielleVerdier = VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 
     expect(intielleVerdier).to.eql({

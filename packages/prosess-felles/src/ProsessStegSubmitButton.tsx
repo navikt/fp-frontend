@@ -5,7 +5,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 
-const isDisabled = (isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields) => {
+const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean) => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
     return true;
   }
@@ -47,7 +47,18 @@ export const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
   </>
 );
 
-const mapStateToProps = (state, ownProps) => {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  formNames?: string[];
+  formName: string;
+  isDirty: boolean;
+  isBehandlingFormSubmitting: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
+  isBehandlingFormDirty: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
+  hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: { id: string; }[]) => (state: any) => boolean;
+}
+
+const mapStateToProps = (state, ownProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = ownProps;
   const fNames = ownProps.formNames ? ownProps.formNames : [ownProps.formName];
   const formNames = fNames.map((f) => (f.includes('.') ? f.substr(f.lastIndexOf('.') + 1) : f));
