@@ -52,7 +52,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   formNames?: string[];
   formName: string;
-  isDirty: boolean;
+  isDirty?: boolean;
   isBehandlingFormSubmitting: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
   isBehandlingFormDirty: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
   hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: { id: string; }[]) => (state: any) => boolean;

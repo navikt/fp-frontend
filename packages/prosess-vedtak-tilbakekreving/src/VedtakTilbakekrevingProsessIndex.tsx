@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
-import vedtaksbrevPropType from './propTypes/vedtaksbrevPropType';
-import vedtakTilbakekrevingBehandlingPropType from './propTypes/vedtakTilbakekrevingBehandlingPropType';
-import vedtakTilbakekrevingBeregningsresultatPropType from './propTypes/vedtakTilbakekrevingBeregningsresultatPropType';
+import BeregningsresultatTilbakekreving from './types/beregningsresultatTilbakekrevingTsType';
+import Vedtaksbrev from './types/vedtaksbrevTsType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -21,15 +21,21 @@ const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_NFP,
 ];
 
-const erTilbakekrevingÅrsakKlage = (årsak) => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
+const erTilbakekrevingÅrsakKlage = (årsak: any) => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
 
-const VedtakTilbakekrevingProsessIndex = ({
+interface OwnProps {
+  beregningsresultat: BeregningsresultatTilbakekreving;
+  vedtaksbrev: Vedtaksbrev ;
+  fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
+  aksjonspunktKodeForeslaVedtak: string;
+}
+
+const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   beregningsresultat,
   vedtaksbrev,
   submitCallback,
   isReadOnly,
-  isBehandlingHenlagt,
   alleKodeverk,
   fetchPreviewVedtaksbrev,
   aksjonspunktKodeForeslaVedtak,
@@ -46,7 +52,6 @@ const VedtakTilbakekrevingProsessIndex = ({
         avsnittsliste={vedtaksbrev.avsnittsliste}
         submitCallback={submitCallback}
         readOnly={isReadOnly}
-        isBehandlingHenlagt={isBehandlingHenlagt}
         alleKodeverk={alleKodeverk}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
@@ -54,18 +59,6 @@ const VedtakTilbakekrevingProsessIndex = ({
       />
     </RawIntlProvider>
   );
-};
-
-VedtakTilbakekrevingProsessIndex.propTypes = {
-  behandling: vedtakTilbakekrevingBehandlingPropType.isRequired,
-  beregningsresultat: vedtakTilbakekrevingBeregningsresultatPropType.isRequired,
-  vedtaksbrev: vedtaksbrevPropType.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  isBehandlingHenlagt: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  fetchPreviewVedtaksbrev: PropTypes.func.isRequired,
-  aksjonspunktKodeForeslaVedtak: PropTypes.string.isRequired,
 };
 
 export default VedtakTilbakekrevingProsessIndex;

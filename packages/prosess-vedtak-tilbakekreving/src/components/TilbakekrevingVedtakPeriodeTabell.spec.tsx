@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
+import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
 
 describe('<TilbakekrevingVedtakPeriodeTabell>', () => {
   it('skal lage tabell med to perioder og en sum-rad', () => {
@@ -35,7 +36,7 @@ describe('<TilbakekrevingVedtakPeriodeTabell>', () => {
       andelAvBeløp: 50,
       tilbakekrevingBeløp: 7000,
       tilbakekrevingBeløpEtterSkatt: 6000,
-    }];
+    }] as BeregningResultatPeriode[];
     const getKodeverknavn = () => 'Simpel uaktsomhet';
 
     const wrapper = shallow(<TilbakekrevingVedtakPeriodeTabell

@@ -36,6 +36,9 @@ type Behandling = Readonly<{
   ansvarligSaksbehandler?: string;
   kanHenleggeBehandling?: boolean;
   harVerge?: boolean;
+  førsteÅrsak?: { // Kun for tilbakekreving
+    behandlingArsakType: Kodeverk;
+  }
 }>
 
 export default Behandling;

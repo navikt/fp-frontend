@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
@@ -7,6 +6,9 @@ import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
+import { Kodeverk } from '@fpsak-frontend/types';
+
+import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
 
 import styles from './tilbakekrevingVedtakPeriodeTabell.less';
 
@@ -20,7 +22,12 @@ const headerTextCodes = [
   'TilbakekrevingVedtakPeriodeTabell.BelopSomTilbakekreves',
 ];
 
-const TilbakekrevingVedtakPeriodeTabell = ({
+interface OwnProps {
+  perioder: BeregningResultatPeriode[];
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+}
+
+const TilbakekrevingVedtakPeriodeTabell: FunctionComponent<OwnProps> = ({
   perioder,
   getKodeverknavn,
 }) => {
@@ -53,11 +60,6 @@ const TilbakekrevingVedtakPeriodeTabell = ({
       </Table>
     </div>
   );
-};
-
-TilbakekrevingVedtakPeriodeTabell.propTypes = {
-  perioder: PropTypes.arrayOf(PropTypes.shape()),
-  getKodeverknavn: PropTypes.func.isRequired,
 };
 
 export default TilbakekrevingVedtakPeriodeTabell;

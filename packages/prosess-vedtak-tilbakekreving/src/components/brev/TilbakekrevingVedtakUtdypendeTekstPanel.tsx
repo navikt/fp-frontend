@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
@@ -19,7 +18,14 @@ const maxLength4000 = maxLength(4000);
 const valideringsregler = [minLength3, maxLength4000, hasValidText];
 const valideringsreglerPakrevet = [required, minLength3, maxLength4000, hasValidText];
 
-export const TilbakekrevingVedtakUtdypendeTekstPanel = ({
+interface OwnProps {
+  type: string;
+  isEmpty: boolean;
+  readOnly: boolean;
+  fritekstPakrevet: boolean;
+}
+
+export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   isEmpty,
   type,
@@ -37,7 +43,7 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel = ({
             onKeyDown={(event) => { event.preventDefault(); hideTextField(false); }}
             className={styles.addPeriode}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
           >
             <Image
               className={styles.addCircleIcon}
@@ -45,7 +51,7 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel = ({
               alt={intl.formatMessage({ id: 'TilbakekrevingVedtakUtdypendeTekstPanel.LeggTilUtdypendeTekst' })}
             />
             <Undertekst className={styles.imageText}>
-              <FormattedMessage className={styles.text} id="TilbakekrevingVedtakUtdypendeTekstPanel.LeggTilUtdypendeTekst" />
+              <FormattedMessage id="TilbakekrevingVedtakUtdypendeTekstPanel.LeggTilUtdypendeTekst" />
             </Undertekst>
           </div>
         </>
@@ -67,15 +73,7 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel = ({
   );
 };
 
-TilbakekrevingVedtakUtdypendeTekstPanel.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  type: PropTypes.string.isRequired,
-  isEmpty: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  fritekstPakrevet: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   isEmpty: behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, ownProps.type) === undefined,
 });
 

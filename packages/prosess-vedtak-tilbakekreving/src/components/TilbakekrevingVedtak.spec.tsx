@@ -7,10 +7,11 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import TilbakekrevingVedtak from './TilbakekrevingVedtak';
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
 import TilbakekrevingVedtakForm from './TilbakekrevingVedtakForm';
+import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
 
 describe('<TilbakekrevingVedtak>', () => {
   const perioder = [{
-    periode: ['2019-10-10', '2019-12-10'],
+    periode: { fom: '2019-10-10', tom: '2019-12-10' },
     feilutbetaltBeløp: 15430,
     vurdering: {
       kode: 'SIMP',
@@ -34,11 +35,8 @@ describe('<TilbakekrevingVedtak>', () => {
     const wrapper = shallow(<TilbakekrevingVedtak
       submitCallback={sinon.spy()}
       readOnly={false}
-      readOnlySubmitButton={false}
-      resultat={{ kode: 'testresultat' }}
-      konsekvensAvBehandling="testkonsekvens"
-      perioder={perioder}
-      isBehandlingHenlagt={false}
+      resultat={{ kode: 'testresultat', kodeverk: '' }}
+      perioder={perioder as BeregningResultatPeriode[]}
       behandlingId={1}
       behandlingUuid="uuid"
       behandlingVersjon={1}

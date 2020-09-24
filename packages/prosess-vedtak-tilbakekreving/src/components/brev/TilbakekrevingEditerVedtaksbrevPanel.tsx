@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -8,19 +7,33 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import TilbakekrevingVedtakUtdypendeTekstPanel from './TilbakekrevingVedtakUtdypendeTekstPanel';
-import vedtaksbrevAvsnittPropType from '../../propTypes/vedtaksbrevAvsnittPropType';
 import underavsnittType from '../../kodeverk/avsnittType';
+import VedtaksbrevAvsnitt from '../../types/vedtaksbrevAvsnittTsType';
 
 import styles from './tilbakekrevingEditerVedtaksbrevPanel.less';
 
-const TilbakekrevingEditerVedtaksbrevPanel = ({
+interface OwnProps {
+  vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];
+  formName: string;
+  readOnly: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
+  fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
+}
+
+interface StaticFunctions {
+  buildInitialValues?: (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => any,
+}
+
+const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   vedtaksbrevAvsnitt,
   formName,
   readOnly,
   behandlingId,
   behandlingVersjon,
   perioderSomIkkeHarUtfyltObligatoriskVerdi,
-  fritekstOppsummeringPakrevdMenIkkeUtfylt,
+  fritekstOppsummeringPakrevdMenIkkeUtfylt = false,
 }) => (
   <div className={styles.container}>
     <VerticalSpacer twentyPx />
@@ -28,20 +41,19 @@ const TilbakekrevingEditerVedtaksbrevPanel = ({
       <FormattedMessage id="TilbakekrevingVedtak.Vedtaksbrev" />
     </Undertittel>
     <VerticalSpacer eightPx />
-    {vedtaksbrevAvsnitt.map((avsnitt) => {
+    {vedtaksbrevAvsnitt.map((avsnitt: VedtaksbrevAvsnitt) => {
       const underavsnitter = avsnitt.underavsnittsliste;
       const periode = `${avsnitt.fom}_${avsnitt.tom}`;
-      const harPeriodeSomManglerObligatoriskVerdi = perioderSomIkkeHarUtfyltObligatoriskVerdi.some((p) => p === periode);
+      const harPeriodeSomManglerObligatoriskVerdi = perioderSomIkkeHarUtfyltObligatoriskVerdi.some((p: any) => p === periode);
       const visApen = avsnitt.avsnittstype === underavsnittType.OPPSUMMERING && fritekstOppsummeringPakrevdMenIkkeUtfylt;
       return (
         <React.Fragment key={avsnitt.avsnittstype + avsnitt.fom}>
           <Ekspanderbartpanel
             className={harPeriodeSomManglerObligatoriskVerdi || visApen ? styles.panelMedGulmarkering : styles.panel}
             tittel={avsnitt.overskrift ? avsnitt.overskrift : ''}
-            tag="h2"
             apen={harPeriodeSomManglerObligatoriskVerdi || visApen}
           >
-            {underavsnitter.map((underavsnitt) => (
+            {underavsnitter.map((underavsnitt: any) => (
               <React.Fragment key={underavsnitt.underavsnittstype + underavsnitt.overskrift + underavsnitt.brødtekst}>
                 {underavsnitt.overskrift && (
                   <Element>
@@ -77,27 +89,13 @@ const TilbakekrevingEditerVedtaksbrevPanel = ({
   </div>
 );
 
-TilbakekrevingEditerVedtaksbrevPanel.propTypes = {
-  vedtaksbrevAvsnitt: PropTypes.arrayOf(vedtaksbrevAvsnittPropType).isRequired,
-  formName: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  perioderSomIkkeHarUtfyltObligatoriskVerdi: PropTypes.arrayOf(PropTypes.string).isRequired,
-  fritekstOppsummeringPakrevdMenIkkeUtfylt: PropTypes.bool,
-};
-
-TilbakekrevingEditerVedtaksbrevPanel.defaultProps = {
-  fritekstOppsummeringPakrevdMenIkkeUtfylt: false,
-};
-
-TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues = (vedtaksbrevAvsnitt) => vedtaksbrevAvsnitt
-  .filter((avsnitt) => avsnitt.underavsnittsliste.some((underavsnitt) => underavsnitt.fritekst))
-  .reduce((acc, avsnitt) => {
+TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues = (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => vedtaksbrevAvsnitt
+  .filter((avsnitt: VedtaksbrevAvsnitt) => avsnitt.underavsnittsliste.some((underavsnitt: any) => underavsnitt.fritekst))
+  .reduce((acc: any, avsnitt: VedtaksbrevAvsnitt) => {
     const underavsnitter = avsnitt.underavsnittsliste;
     const friteksterForUnderavsnitt = underavsnitter
-      .filter((underavsnitt) => underavsnitt.fritekst)
-      .reduce((underAcc, underavsnitt) => ({
+      .filter((underavsnitt: any) => underavsnitt.fritekst)
+      .reduce((underAcc: any, underavsnitt: any) => ({
         ...underAcc,
         [underavsnitt.underavsnittstype ? underavsnitt.underavsnittstype
           : avsnitt.avsnittstype]: decodeHtmlEntity(underavsnitt.fritekst),
