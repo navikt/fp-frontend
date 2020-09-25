@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { EditedIcon, Image, FloatRight } from '@fpsak-frontend/shared-components';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
@@ -15,21 +14,25 @@ import styles from './periodeController.less';
 
 const isEdited = false;
 
-export class PeriodeController extends Component {
-  static propTypes = {
-    intl: PropTypes.shape().isRequired,
-    behandlingId: PropTypes.number.isRequired,
-    behandlingVersjon: PropTypes.number.isRequired,
-    beregnBelop: PropTypes.func.isRequired,
-    oppdaterSplittedePerioder: PropTypes.func.isRequired,
-    callbackForward: PropTypes.func.isRequired,
-    callbackBackward: PropTypes.func.isRequired,
-    periode: PropTypes.shape().isRequired,
-    readOnly: PropTypes.bool.isRequired,
-  };
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  beregnBelop: (...args: any[]) => any;
+  oppdaterSplittedePerioder: (...args: any[]) => any;
+  callbackForward: (...args: any[]) => any;
+  callbackBackward: (...args: any[]) => any;
+  periode: {};
+  readOnly: boolean;
+}
 
-  constructor() {
-    super();
+interface StateProps {
+  showDelPeriodeModal: boolean;
+  finnesBelopMed0Verdi: boolean;
+}
+
+export class PeriodeController extends Component<OwnProps & WrappedComponentProps, StateProps> {
+  constructor(props) {
+    super(props);
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.splitPeriod = this.splitPeriod.bind(this);
@@ -40,8 +43,8 @@ export class PeriodeController extends Component {
     };
   }
 
-  showModal(event) {
-    this.setState((state) => ({
+  showModal(event: any) {
+    this.setState((state: any) => ({
       ...state,
       showDelPeriodeModal: true,
     }));
@@ -49,14 +52,14 @@ export class PeriodeController extends Component {
   }
 
   hideModal() {
-    this.setState((state) => ({
+    this.setState((state: any) => ({
       ...state,
       showDelPeriodeModal: false,
     }));
   }
 
-  splitPeriod(formValues) {
-    this.setState((state) => ({
+  splitPeriod(formValues: any) {
+    this.setState((state: any) => ({
       ...state,
       finnesBelopMed0Verdi: false,
     }));
@@ -90,9 +93,9 @@ export class PeriodeController extends Component {
       const { perioder } = response;
       const harPeriodeMedBelop0 = perioder.some((p) => p.belop === 0);
       if (harPeriodeMedBelop0) {
-        this.setState((state) => ({
+        this.setState((state: any) => ({
           ...state,
-          finnesBelopMed0Verdi: true,
+          finnesBelopMed0Verdi: true
         }));
       } else {
         const forstePeriodeMedBeløp = {
@@ -137,7 +140,7 @@ export class PeriodeController extends Component {
           && (
             <span className={styles.splitPeriodPosition}>
               <Image
-                tabIndex="0"
+                tabIndex={0}
                 className={styles.splitPeriodImage}
                 src={splitPeriodImageUrl}
                 srcHover={splitPeriodImageHoverUrl}

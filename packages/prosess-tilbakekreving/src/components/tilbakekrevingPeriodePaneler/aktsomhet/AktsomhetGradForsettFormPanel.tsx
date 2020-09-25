@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import PropTypes from 'prop-types';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -9,7 +8,12 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import styles from './aktsomhetReduksjonAvBelopFormPanel.less';
 
-const AktsomhetGradForsettFormPanel = ({
+interface OwnProps {
+  readOnly: boolean;
+  erValgtResultatTypeForstoBurdeForstaatt?: boolean;
+}
+
+const AktsomhetGradForsettFormPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   erValgtResultatTypeForstoBurdeForstaatt,
 }) => (
@@ -51,10 +55,5 @@ const AktsomhetGradForsettFormPanel = ({
     </ArrowBox>
   </div>
 );
-
-AktsomhetGradForsettFormPanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  erValgtResultatTypeForstoBurdeForstaatt: PropTypes.bool,
-};
 
 export default AktsomhetGradForsettFormPanel;

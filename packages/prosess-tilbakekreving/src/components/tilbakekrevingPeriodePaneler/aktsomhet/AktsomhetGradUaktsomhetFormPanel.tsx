@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -8,6 +9,7 @@ import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/for
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import aktsomhet from '../../../kodeverk/aktsomhet';
 import AktsomhetSarligeGrunnerFormPanel from './AktsomhetSarligeGrunnerFormPanel';
@@ -17,7 +19,7 @@ import styles from './aktsomhetGradUaktsomhetFormPanel.less';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const sarligGrunnerBegrunnelseDiv = (readOnly, intl) => (
+const sarligGrunnerBegrunnelseDiv = (readOnly: boolean, intl: IntlShape) => (
   <div>
     <Element>
       <FormattedMessage id="AktsomhetGradUaktsomhetFormPanel.SærligGrunner" />
@@ -35,7 +37,21 @@ const sarligGrunnerBegrunnelseDiv = (readOnly, intl) => (
     <VerticalSpacer twentyPx />
   </div>
 );
-const AktsomhetGradUaktsomhetFormPanel = ({
+
+interface OwnProps {
+  harGrunnerTilReduksjon?: boolean;
+  readOnly: boolean;
+  handletUaktsomhetGrad: string;
+  erSerligGrunnAnnetValgt: boolean;
+  harMerEnnEnYtelse: boolean;
+  feilutbetalingBelop: number;
+  erTotalBelopUnder4Rettsgebyr: boolean;
+  sarligGrunnTyper?: KodeverkMedNavn[];
+  andelSomTilbakekreves?: string;
+}
+
+const AktsomhetGradUaktsomhetFormPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   harGrunnerTilReduksjon,
   readOnly,
   handletUaktsomhetGrad,
@@ -45,7 +61,6 @@ const AktsomhetGradUaktsomhetFormPanel = ({
   feilutbetalingBelop,
   erTotalBelopUnder4Rettsgebyr,
   andelSomTilbakekreves,
-  intl,
 }) => (
   <ArrowBox alignOffset={handletUaktsomhetGrad === aktsomhet.GROVT_UAKTSOM ? 120 : 285}>
     {(handletUaktsomhetGrad === aktsomhet.SIMPEL_UAKTSOM && erTotalBelopUnder4Rettsgebyr) && (
@@ -96,23 +111,5 @@ const AktsomhetGradUaktsomhetFormPanel = ({
     )}
   </ArrowBox>
 );
-
-AktsomhetGradUaktsomhetFormPanel.propTypes = {
-  harGrunnerTilReduksjon: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  handletUaktsomhetGrad: PropTypes.string.isRequired,
-  erSerligGrunnAnnetValgt: PropTypes.bool.isRequired,
-  harMerEnnEnYtelse: PropTypes.bool.isRequired,
-  feilutbetalingBelop: PropTypes.number.isRequired,
-  erTotalBelopUnder4Rettsgebyr: PropTypes.bool.isRequired,
-  sarligGrunnTyper: PropTypes.arrayOf(PropTypes.shape()),
-  andelSomTilbakekreves: PropTypes.string,
-  intl: PropTypes.shape().isRequired,
-};
-
-AktsomhetGradUaktsomhetFormPanel.defaultProps = {
-  harGrunnerTilReduksjon: undefined,
-  andelSomTilbakekreves: undefined,
-};
 
 export default injectIntl(AktsomhetGradUaktsomhetFormPanel);

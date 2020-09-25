@@ -95,7 +95,7 @@ const formatGroups = (periodItems: Periode[] = []) => {
 
 interface OwnProps {
   perioder: TidslinjePeriode[];
-  toggleDetaljevindu: (event: MouseEvent) => void
+  toggleDetaljevindu: (event: MouseEvent) => void;
   selectedPeriod?: TidslinjePeriode;
   selectPeriodCallback: (...args: any[]) => any;
   hjelpetekstKomponent: React.ReactNode;

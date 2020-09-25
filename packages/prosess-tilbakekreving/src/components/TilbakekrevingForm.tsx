@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { createSelector } from 'reselect';
-import { change as reduxFormChange, initialize as reduxFormInitialize } from 'redux-form';
+import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -20,18 +19,24 @@ import {
 import { omit } from '@fpsak-frontend/utils';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
+import { ForeldelsePerioder } from '@fpsak-frontend/prosess-foreldelse/src/types/foreldelsePerioderTsType';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
-import TilbakekrevingPeriodeForm, { TILBAKEKREVING_PERIODE_FORM_NAME } from './TilbakekrevingPeriodeForm';
+import TilbakekrevingPeriodeForm, { DataForDetailForm, TILBAKEKREVING_PERIODE_FORM_NAME } from './TilbakekrevingPeriodeForm';
 import TilbakekrevingTidslinjeHjelpetekster from './TilbakekrevingTidslinjeHjelpetekster';
+import Vilkarvurderingsperioder, { Vilkarvurderingsperiode } from '../types/vilkarvurderingsperioderTsType';
+import VilkarsvurderingWrapper, { VilkarsVurdertPeriode } from '../types/vilkarsvurderingTsType';
+import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
+import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
 
 const TILBAKEKREVING_FORM_NAME = 'TilbakekrevingForm';
 
-const sortPeriods = (periode1, periode2) => new Date(periode1.fom) - new Date(periode2.fom);
+const sortPeriods = (periode1: CustomVilkarsVurdertePeriode, periode2: CustomVilkarsVurdertePeriode) => moment(periode1.fom).diff(moment(periode2.fom));
 
-const harApentAksjonspunkt = (periode) => (!periode.erForeldet && (periode.begrunnelse === undefined || periode.erSplittet));
+const harApentAksjonspunkt = (periode: CustomVilkarsVurdertePeriode) => !periode.erForeldet && (periode.begrunnelse === undefined || periode.erSplittet);
 
-const emptyFeltverdiOmFinnes = (periode) => {
+const emptyFeltverdiOmFinnes = (periode: CustomVilkarsVurdertePeriode) => {
   const valgtVilkarResultatType = periode[periode.valgtVilkarResultatType];
   const handletUaktsomhetGrad = valgtVilkarResultatType[valgtVilkarResultatType.handletUaktsomhetGrad];
 
@@ -57,9 +62,9 @@ const emptyFeltverdiOmFinnes = (periode) => {
   return periode;
 };
 
-const formaterPerioderForTidslinje = (perioder = [], vilkarsVurdertePerioder) => perioder
-  .map((periode, index) => {
-    const per = vilkarsVurdertePerioder.find((p) => p.fom === periode.fom && p.tom === periode.tom);
+const formaterPerioderForTidslinje = (perioder: DataForDetailForm[] = [], vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[]) => perioder
+  .map((periode: DataForDetailForm, index: number): TidslinjePeriode => {
+    const per = vilkarsVurdertePerioder.find((p: CustomVilkarsVurdertePeriode) => p.fom === periode.fom && p.tom === periode.tom);
     const erBelopetIBehold = per && per[per.valgtVilkarResultatType] ? per[per.valgtVilkarResultatType].erBelopetIBehold : undefined;
     const erSplittet = per ? !!per.erSplittet : false;
     return {
@@ -71,13 +76,39 @@ const formaterPerioderForTidslinje = (perioder = [], vilkarsVurdertePerioder) =>
     };
   });
 
+interface OwnProps {
+  vilkarsVurdertePerioder?: CustomVilkarsVurdertePeriode[];
+  dataForDetailForm?: DataForDetailForm[];
+  behandlingFormPrefix: string;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  navBrukerKjonn: string;
+  antallPerioderMedAksjonspunkt: number;
+  behandlingId: number;
+  behandlingVersjon: number;
+  merknaderFraBeslutter: {
+    notAccepted: boolean;
+  };
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  beregnBelop: (data: any) => Promise<any>;
+}
+
+interface DispatchProps {
+  reduxFormChange: (...args: any[]) => any;
+  reduxFormInitialize: (...args: any[]) => any;
+}
+
+interface StateProps {
+  valgtPeriode?: CustomVilkarsVurdertePeriode;
+}
+
 /**
  * TilbakekrevingForm
  *
  * Behandlingspunkt Tilbakekreving. Setter opp en tidslinje som lar en velge periode. Ved valg blir et detaljevindu vist.
  */
-export class TilbakekrevingFormImpl extends Component {
-  constructor(props) {
+export class TilbakekrevingFormImpl extends Component<OwnProps & DispatchProps & InjectedFormProps, StateProps> {
+  constructor(props: OwnProps & DispatchProps & InjectedFormProps) {
     super(props);
     this.state = {
       valgtPeriode: null,
@@ -91,17 +122,20 @@ export class TilbakekrevingFormImpl extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: OwnProps & InjectedFormProps) {
     const { vilkarsVurdertePerioder } = this.props;
     if (!prevProps.vilkarsVurdertePerioder && vilkarsVurdertePerioder) {
       this.setPeriode(vilkarsVurdertePerioder.find(harApentAksjonspunkt));
     }
   }
 
-  setPeriode = (periode) => {
+  setPeriode = (periode: CustomVilkarsVurdertePeriode | TidslinjePeriode) => {
     const { vilkarsVurdertePerioder } = this.props;
     const valgt = periode ? vilkarsVurdertePerioder.find((p) => p.fom === periode.fom && p.tom === periode.tom) : undefined;
-    this.setState((state) => ({ ...state, valgtPeriode: valgt }));
+    this.setState((state: any) => ({
+      ...state,
+      valgtPeriode: valgt,
+    }));
     this.initializeValgtPeriodeForm(valgt);
   }
 
@@ -126,11 +160,11 @@ export class TilbakekrevingFormImpl extends Component {
     this.setPeriode(vilkarsVurdertePerioder[index - 1]);
   }
 
-  oppdaterPeriode = (values) => {
+  oppdaterPeriode = (values: any) => {
     const {
       vilkarsVurdertePerioder, reduxFormChange: formChange, behandlingFormPrefix,
     } = this.props;
-    const { ...verdier } = omit(values, 'erSplittet');
+    const { ...verdier } = omit(values, 'erSplittet') as CustomVilkarsVurdertePeriode;
 
     const otherThanUpdated = vilkarsVurdertePerioder.filter((o) => o.fom !== verdier.fom && o.tom !== verdier.tom);
     const sortedActivities = otherThanUpdated.concat(verdier).sort(sortPeriods);
@@ -143,19 +177,19 @@ export class TilbakekrevingFormImpl extends Component {
     }
   }
 
-  initializeValgtPeriodeForm = (valgtPeriode) => {
+  initializeValgtPeriodeForm = (valgtPeriode: CustomVilkarsVurdertePeriode) => {
     const { reduxFormInitialize: formInitialize, behandlingFormPrefix } = this.props;
     formInitialize(`${behandlingFormPrefix}.${TILBAKEKREVING_PERIODE_FORM_NAME}`, valgtPeriode);
   }
 
-  oppdaterSplittedePerioder = (perioder) => {
+  oppdaterSplittedePerioder = (perioder: any) => {
     const {
       vilkarsVurdertePerioder, reduxFormChange: formChange, behandlingFormPrefix,
     } = this.props;
     const { valgtPeriode } = this.state;
 
     const periode = vilkarsVurdertePerioder.find((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
-    const nyePerioder = perioder.map((p) => ({
+    const nyePerioder = perioder.map((p: CustomVilkarsVurdertePeriode) => ({
       ...emptyFeltverdiOmFinnes(periode),
       ...p,
       erSplittet: true,
@@ -190,15 +224,14 @@ export class TilbakekrevingFormImpl extends Component {
     } = this.state;
 
     const perioderFormatertForTidslinje = formaterPerioderForTidslinje(dataForDetailForm, vilkarsVurdertePerioder);
-    const isApOpen = perioderFormatertForTidslinje.some(harApentAksjonspunkt);
+    const isApOpen = perioderFormatertForTidslinje.some((p) => p.isAksjonspunktOpen);
     const valgtPeriodeFormatertForTidslinje = valgtPeriode
-      ? perioderFormatertForTidslinje.find((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom)
+      ? perioderFormatertForTidslinje.find((p: TidslinjePeriode) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom)
       : undefined;
 
     return (
       <form onSubmit={formProps.handleSubmit}>
         <FaktaGruppe
-          aksjonspunktCode={aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING}
           merknaderFraBeslutter={merknaderFraBeslutter}
           withoutBorder
         >
@@ -268,52 +301,47 @@ export class TilbakekrevingFormImpl extends Component {
   }
 }
 
-TilbakekrevingFormImpl.propTypes = {
-  vilkarsVurdertePerioder: PropTypes.arrayOf(PropTypes.shape()),
-  dataForDetailForm: PropTypes.arrayOf(PropTypes.shape()),
-  behandlingFormPrefix: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  navBrukerKjonn: PropTypes.string.isRequired,
-  reduxFormChange: PropTypes.func.isRequired,
-  reduxFormInitialize: PropTypes.func.isRequired,
-  antallPerioderMedAksjonspunkt: PropTypes.number.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  merknaderFraBeslutter: PropTypes.shape({
-    notAccepted: PropTypes.bool.isRequired,
-  }).isRequired,
-  alleKodeverk: PropTypes.shape({}).isRequired,
-  beregnBelop: PropTypes.func.isRequired,
-};
-
-export const transformValues = (values, sarligGrunnTyper) => [{
+export const transformValues = (values: { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] }, sarligGrunnTyper: KodeverkMedNavn[]) => [{
   kode: aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING,
   vilkarsVurdertePerioder: values.vilkarsVurdertePerioder
-    .filter((p) => !p.erForeldet)
-    .map((p) => TilbakekrevingPeriodeForm.transformValues(p, sarligGrunnTyper)),
+    .filter((p: CustomVilkarsVurdertePeriode) => !p.erForeldet)
+    .map((p: CustomVilkarsVurdertePeriode) => TilbakekrevingPeriodeForm.transformValues(p, sarligGrunnTyper)),
 }];
 
-const finnOriginalPeriode = (lagretPeriode, perioder) => perioder
-  .find((periode) => !moment(lagretPeriode.fom).isBefore(moment(periode.fom)) && !moment(lagretPeriode.tom).isAfter(moment(periode.tom)));
+const finnOriginalPeriode = (lagretPeriode: VilkarsVurdertPeriode, perioder: Vilkarvurderingsperiode[]) => perioder
+  .find((periode: Vilkarvurderingsperiode) => !moment(lagretPeriode.fom).isBefore(moment(periode.fom))
+  && !moment(lagretPeriode.tom).isAfter(moment(periode.tom)));
 
-const erIkkeLagret = (periode, lagredePerioder) => lagredePerioder
-  .every((lagretPeriode) => {
+const erIkkeLagret = (periode: Vilkarvurderingsperiode, lagredePerioder: any) => lagredePerioder
+  .every((lagretPeriode: any) => {
     const isOverlapping = moment(periode.fom).isSameOrBefore(moment(lagretPeriode.tom)) && moment(lagretPeriode.fom).isSameOrBefore(moment(periode.tom));
     return !isOverlapping;
   });
 
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  perioderForeldelse: ForeldelsePerioder[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  readOnly: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  perioder: Vilkarvurderingsperiode[];
+  vilkarvurdering: VilkarsvurderingWrapper;
+  rettsgebyr: Vilkarvurderingsperioder['rettsgebyr'];
+}
+
 export const slaSammenOriginaleOgLagredePeriode = createSelector([
-  (state, ownProps) => ownProps.perioder,
-  (state, ownProps) => ownProps.vilkarvurdering,
-  (state, ownProps) => ownProps.rettsgebyr,
+  (_state, ownProps: PureOwnProps) => ownProps.perioder,
+  (_state, ownProps: PureOwnProps) => ownProps.vilkarvurdering,
+  (_state, ownProps: PureOwnProps) => ownProps.rettsgebyr,
 ], (perioder, vilkarsvurdering, rettsgebyr) => {
-  const totalbelop = perioder.reduce((acc, periode) => acc + periode.feilutbetaling, 0);
+  const totalbelop = perioder.reduce((acc: number, periode: Vilkarvurderingsperiode) => acc + periode.feilutbetaling, 0);
   const erTotalBelopUnder4Rettsgebyr = totalbelop < (rettsgebyr * 4);
   const lagredeVilkarsvurdertePerioder = vilkarsvurdering.vilkarsVurdertePerioder;
 
   const lagredePerioder = lagredeVilkarsvurdertePerioder
-    .map((lagretPeriode) => ({
+    .map((lagretPeriode: VilkarsVurdertPeriode) => ({
       ...finnOriginalPeriode(lagretPeriode, perioder),
       ...omit(lagretPeriode, 'feilutbetalingBelop'),
       feilutbetaling: lagretPeriode.feilutbetalingBelop,
@@ -321,8 +349,8 @@ export const slaSammenOriginaleOgLagredePeriode = createSelector([
     }));
 
   const originaleUrortePerioder = perioder
-    .filter((periode) => erIkkeLagret(periode, lagredePerioder))
-    .map((periode) => ({
+    .filter((periode: Vilkarvurderingsperiode) => erIkkeLagret(periode, lagredePerioder))
+    .map((periode: Vilkarvurderingsperiode) => ({
       ...periode,
       erTotalBelopUnder4Rettsgebyr,
     }));
@@ -334,23 +362,24 @@ export const slaSammenOriginaleOgLagredePeriode = createSelector([
 
 export const buildInitialValues = createSelector([
   slaSammenOriginaleOgLagredePeriode,
-  (state, ownProps) => ownProps.perioderForeldelse],
-(perioder, foreldelsePerioder) => ({
-  vilkarsVurdertePerioder: perioder.perioder.map((p) => ({
+  (_state, ownProps: PureOwnProps) => ownProps.perioderForeldelse],
+(perioder, foreldelsePerioder): { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] } => ({
+  vilkarsVurdertePerioder: perioder.perioder.map((p: any) => ({
     ...TilbakekrevingPeriodeForm.buildInitialValues(p, foreldelsePerioder),
     fom: p.fom,
     tom: p.tom,
   })).sort(sortPeriods),
 }));
 
-const settOppPeriodeDataForDetailForm = createSelector([slaSammenOriginaleOgLagredePeriode,
-  (state, ownProps) => behandlingFormValueSelector(TILBAKEKREVING_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-    'vilkarsVurdertePerioder')], (perioder, perioderFormState) => {
+const settOppPeriodeDataForDetailForm = createSelector([
+  slaSammenOriginaleOgLagredePeriode,
+  (state, ownProps: PureOwnProps) => behandlingFormValueSelector(TILBAKEKREVING_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
+    'vilkarsVurdertePerioder')], (perioder, perioderFormState: CustomVilkarsVurdertePeriode[]): DataForDetailForm[] => {
   if (!perioder || !perioderFormState) {
     return undefined;
   }
 
-  return perioderFormState.map((periodeFormState) => {
+  return perioderFormState.map((periodeFormState: CustomVilkarsVurdertePeriode) => {
     const periode = finnOriginalPeriode(periodeFormState, perioder.perioder);
     const erForeldet = periode.foreldelseVurderingType
       ? periode.foreldelseVurderingType.kode === foreldelseVurderingType.FORELDET : periode.foreldet;
@@ -368,16 +397,17 @@ const settOppPeriodeDataForDetailForm = createSelector([slaSammenOriginaleOgLagr
   });
 });
 
-const getAntallPerioderMedAksjonspunkt = createSelector([(state, ownProps) => behandlingFormValueSelector(
+const getAntallPerioderMedAksjonspunkt = createSelector([(state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
   TILBAKEKREVING_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon,
 )(state, 'vilkarsVurdertePerioder')],
-(perioder = []) => perioder.reduce((sum, periode) => (!periode.erForeldet ? sum + 1 : sum), 0));
+(perioder: CustomVilkarsVurdertePeriode[] = []) => perioder.reduce((sum: number, periode) => (!periode.erForeldet ? sum + 1 : sum), 0));
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const sarligGrunnTyper = initialOwnProps.alleKodeverk[tilbakekrevingKodeverkTyper.SARLIG_GRUNN];
-  const submitCallback = (values) => initialOwnProps.submitCallback(transformValues(values, sarligGrunnTyper));
-  return (state, ownProps) => {
-    const periodFormValues = getBehandlingFormValues(TILBAKEKREVING_PERIODE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state) || {};
+  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, sarligGrunnTyper));
+  return (state: any, ownProps: PureOwnProps) => {
+    const periodFormValues = getBehandlingFormValues(TILBAKEKREVING_PERIODE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state)
+      || { erForeldet: false };
     return {
       initialValues: buildInitialValues(state, ownProps),
       dataForDetailForm: settOppPeriodeDataForDetailForm(state, ownProps),
@@ -392,25 +422,25 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: DispatchProps) => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,
   }, dispatch),
 });
 
-const validateForm = (values) => {
+const validateForm = (values: any) => {
   const errors = {};
   if (!values.vilkarsVurdertePerioder) {
     return errors;
   }
   const perioder = values.vilkarsVurdertePerioder;
-  const antallPerioderMedAksjonspunkt = perioder.reduce((sum, periode) => (!periode.erForeldet ? sum + 1 : sum), 0);
+  const antallPerioderMedAksjonspunkt = perioder.reduce((sum: any, periode: any) => (!periode.erForeldet ? sum + 1 : sum), 0);
   if (antallPerioderMedAksjonspunkt < 2) {
     return errors;
   }
 
-  const antallValgt = perioder.reduce((sum, periode) => {
+  const antallValgt = perioder.reduce((sum: number, periode: CustomVilkarsVurdertePeriode) => {
     const { valgtVilkarResultatType } = periode;
     const vilkarResultatInfo = periode[valgtVilkarResultatType];
     const { handletUaktsomhetGrad } = vilkarResultatInfo;
@@ -422,7 +452,9 @@ const validateForm = (values) => {
   }, 0);
   if (antallValgt > 0 && antallValgt !== perioder.length) {
     // eslint-disable-next-line no-underscore-dangle
-    errors._error = 'TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr';
+    return {
+      _error: 'TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr',
+    };
   }
   return errors;
 };

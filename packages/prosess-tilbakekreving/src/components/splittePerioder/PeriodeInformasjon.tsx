@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -9,6 +8,15 @@ import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@fps
 
 import styles from './periodeInformasjon.less';
 
+interface OwnProps {
+  fom: string;
+  tom: string;
+  feilutbetaling: number;
+  arsak?: {
+    hendelseType?: {};
+  };
+}
+
 /**
  * PeriodeInformasjon
  *
@@ -16,7 +24,7 @@ import styles from './periodeInformasjon.less';
  *
  * Presentationskomponent
  */
-const PeriodeInformasjon = ({
+const PeriodeInformasjon: FunctionComponent<OwnProps> = ({
   fom,
   tom,
   feilutbetaling,
@@ -67,19 +75,6 @@ const PeriodeInformasjon = ({
       </Column>
     </Row>
   );
-};
-
-PeriodeInformasjon.propTypes = {
-  fom: PropTypes.string.isRequired,
-  tom: PropTypes.string.isRequired,
-  feilutbetaling: PropTypes.number.isRequired,
-  arsak: PropTypes.shape({
-    hendelseType: PropTypes.shape(),
-  }),
-};
-
-PeriodeInformasjon.defaultProsp = {
-  arsak: undefined,
 };
 
 export default PeriodeInformasjon;

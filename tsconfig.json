@@ -58,6 +58,8 @@
 		"packages/prosess-beregningsresultat",
 		"packages/prosess-felles",
 		"packages/prosess-foreldelse",
+		"packages/prosess-tilbakekreving",
+		"packages/prosess-vedtak-tilbakekreving",
 		"packages/prosess-vilkar-overstyring",
 		"packages/prosess-innsyn",
 		"packages/prosess-vedtak-innsyn",

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -12,7 +11,14 @@ const headerTextCodes = [
   'TilbakekrevingAktivitetTabell.FeilutbetaltBelop',
 ];
 
-const TilbakekrevingAktivitetTabell = ({
+interface OwnProps {
+  ytelser: {
+    aktivitet: string;
+    belop: number;
+  }[];
+}
+
+const TilbakekrevingAktivitetTabell: FunctionComponent<OwnProps> = ({
   ytelser,
 }) => {
   if (ytelser.length === 0) {
@@ -36,13 +42,6 @@ const TilbakekrevingAktivitetTabell = ({
       })}
     </Table>
   );
-};
-
-TilbakekrevingAktivitetTabell.propTypes = {
-  ytelser: PropTypes.arrayOf(PropTypes.shape({
-    aktivitet: PropTypes.string.isRequired,
-    belop: PropTypes.number.isRequired,
-  })).isRequired,
 };
 
 export default TilbakekrevingAktivitetTabell;

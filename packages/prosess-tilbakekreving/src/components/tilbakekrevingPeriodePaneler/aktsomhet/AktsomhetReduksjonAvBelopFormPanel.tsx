@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -21,7 +20,7 @@ import styles from './aktsomhetReduksjonAvBelopFormPanel.less';
 const minValue1 = minValue(0.01);
 const maxValue100 = maxValue(99.99);
 
-const parseCurrencyInput = (input) => {
+const parseCurrencyInput = (input: any) => {
   const inputNoSpace = input.toString().replace(/\s/g, '');
   const parsedValue = parseInt(inputNoSpace, 10);
   return Number.isNaN(parsedValue) ? '' : parsedValue;
@@ -30,7 +29,16 @@ const parseCurrencyInput = (input) => {
 export const EGENDEFINERT = 'Egendefinert';
 export const ANDELER = ['30', '50', '70', EGENDEFINERT];
 
-const AktsomhetReduksjonAvBelopFormPanel = ({
+interface OwnProps {
+  harGrunnerTilReduksjon?: boolean;
+  readOnly: boolean;
+  handletUaktsomhetGrad: string;
+  harMerEnnEnYtelse: boolean;
+  feilutbetalingBelop: number;
+  andelSomTilbakekreves?: string;
+}
+
+const AktsomhetReduksjonAvBelopFormPanel: FunctionComponent<OwnProps> = ({
   harGrunnerTilReduksjon,
   readOnly,
   handletUaktsomhetGrad,
@@ -84,6 +92,7 @@ const AktsomhetReduksjonAvBelopFormPanel = ({
                       label={<FormattedMessage id="AktsomhetReduksjonAvBelopFormPanel.AngiAndelSomTilbakekreves" />}
                       readOnly={readOnly}
                       validate={[required, minValue1, maxValue100]}
+                      // @ts-ignore Fiks!
                       normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                       bredde="S"
                     />
@@ -143,19 +152,5 @@ const AktsomhetReduksjonAvBelopFormPanel = ({
     )}
   </>
 );
-
-AktsomhetReduksjonAvBelopFormPanel.propTypes = {
-  harGrunnerTilReduksjon: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  handletUaktsomhetGrad: PropTypes.string.isRequired,
-  harMerEnnEnYtelse: PropTypes.bool.isRequired,
-  feilutbetalingBelop: PropTypes.number.isRequired,
-  andelSomTilbakekreves: PropTypes.string,
-};
-
-AktsomhetReduksjonAvBelopFormPanel.defaultProps = {
-  harGrunnerTilReduksjon: undefined,
-  andelSomTilbakekreves: undefined,
-};
 
 export default AktsomhetReduksjonAvBelopFormPanel;

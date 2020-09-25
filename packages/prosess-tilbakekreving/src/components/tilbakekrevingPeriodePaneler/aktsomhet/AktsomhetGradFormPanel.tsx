@@ -1,11 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 
-import aktsomhet from '../../../kodeverk/aktsomhet';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
+
+import Aktsomhet from '../../../kodeverk/aktsomhet';
 import AktsomhetGradForsettFormPanel from './AktsomhetGradForsettFormPanel';
 import AktsomhetGradUaktsomhetFormPanel from './AktsomhetGradUaktsomhetFormPanel';
 
-const AktsomhetGradFormPanel = ({
+interface OwnProps {
+  harGrunnerTilReduksjon?: boolean;
+  readOnly: boolean;
+  handletUaktsomhetGrad: Aktsomhet;
+  erSerligGrunnAnnetValgt: boolean;
+  erValgtResultatTypeForstoBurdeForstaatt?: boolean;
+  harMerEnnEnYtelse: boolean;
+  feilutbetalingBelop: number;
+  erTotalBelopUnder4Rettsgebyr: boolean;
+  sarligGrunnTyper?: KodeverkMedNavn[];
+  andelSomTilbakekreves?: string;
+}
+
+const AktsomhetGradFormPanel: FunctionComponent<OwnProps> = ({
   harGrunnerTilReduksjon,
   readOnly,
   handletUaktsomhetGrad,
@@ -18,13 +32,13 @@ const AktsomhetGradFormPanel = ({
   andelSomTilbakekreves,
 }) => (
   <>
-    { handletUaktsomhetGrad === aktsomhet.FORSETT && (
+    { handletUaktsomhetGrad === Aktsomhet.FORSETT && (
       <AktsomhetGradForsettFormPanel
         readOnly={readOnly}
         erValgtResultatTypeForstoBurdeForstaatt={erValgtResultatTypeForstoBurdeForstaatt}
       />
     )}
-    { handletUaktsomhetGrad !== aktsomhet.FORSETT && (
+    { handletUaktsomhetGrad !== Aktsomhet.FORSETT && (
       <AktsomhetGradUaktsomhetFormPanel
         harGrunnerTilReduksjon={harGrunnerTilReduksjon}
         readOnly={readOnly}
@@ -39,23 +53,5 @@ const AktsomhetGradFormPanel = ({
     )}
   </>
 );
-
-AktsomhetGradFormPanel.propTypes = {
-  harGrunnerTilReduksjon: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  handletUaktsomhetGrad: PropTypes.string.isRequired,
-  erSerligGrunnAnnetValgt: PropTypes.bool.isRequired,
-  erValgtResultatTypeForstoBurdeForstaatt: PropTypes.bool,
-  harMerEnnEnYtelse: PropTypes.bool.isRequired,
-  feilutbetalingBelop: PropTypes.number.isRequired,
-  erTotalBelopUnder4Rettsgebyr: PropTypes.bool.isRequired,
-  sarligGrunnTyper: PropTypes.arrayOf(PropTypes.shape()),
-  andelSomTilbakekreves: PropTypes.string,
-};
-
-AktsomhetGradFormPanel.defaultProps = {
-  harGrunnerTilReduksjon: undefined,
-  andelSomTilbakekreves: undefined,
-};
 
 export default AktsomhetGradFormPanel;

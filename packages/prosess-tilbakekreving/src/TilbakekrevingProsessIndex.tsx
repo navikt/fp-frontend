@@ -1,13 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import TilbakekrevingForm from './components/TilbakekrevingForm';
+import { ForeldelsePerioder } from './types/foreldelsePerioderTsType';
+import Vilkarsvurdering from './types/vilkarsvurderingTsType';
+import Vilkarvurderingsperioder from './types/vilkarvurderingsperioderTsType';
+
 import messages from '../i18n/nb_NO.json';
-import perioderForeldelsePropType from './propTypes/perioderForeldelsePropType';
-import vilkarvurderingsperioderPropType from './propTypes/vilkarvurderingsperioderPropType';
-import tilbakekrevingBehandlingPropType from './propTypes/tilbakekrevingBehandlingPropType';
-import vilkarsvurderingPropType from './propTypes/vilkarsvurderingPropType';
 
 const cache = createIntlCache();
 
@@ -16,7 +17,16 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const TilbakekrevingProsessIndex = ({
+interface OwnProps {
+  perioderForeldelse: ForeldelsePerioder;
+  vilkarvurderingsperioder: Vilkarvurderingsperioder;
+  vilkarvurdering: Vilkarsvurdering;
+  navBrukerKjonn: string;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  beregnBelop: (data: any) => Promise<any>;
+}
+
+const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   perioderForeldelse,
   vilkarvurderingsperioder,
@@ -49,20 +59,5 @@ const TilbakekrevingProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-TilbakekrevingProsessIndex.propTypes = {
-  behandling: tilbakekrevingBehandlingPropType.isRequired,
-  perioderForeldelse: perioderForeldelsePropType.isRequired,
-  vilkarvurderingsperioder: vilkarvurderingsperioderPropType.isRequired,
-  vilkarvurdering: vilkarsvurderingPropType.isRequired,
-  navBrukerKjonn: PropTypes.string.isRequired,
-  alleMerknaderFraBeslutter: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  beregnBelop: PropTypes.func.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
 
 export default TilbakekrevingProsessIndex;

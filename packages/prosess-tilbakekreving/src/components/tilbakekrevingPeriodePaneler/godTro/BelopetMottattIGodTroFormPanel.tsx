@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
@@ -15,13 +14,31 @@ import styles from './belopetMottattIGodTroFormPanel.less';
 
 const minValue1 = minValue(1);
 
-const parseCurrencyInput = (input) => {
+const parseCurrencyInput = (input: any) => {
   const inputNoSpace = input.toString().replace(/\s/g, '');
   const parsedValue = parseInt(inputNoSpace, 10);
   return Number.isNaN(parsedValue) ? '' : parsedValue;
 };
 
-const BelopetMottattIGodTroFormPanel = ({
+interface OwnProps {
+  readOnly: boolean;
+  erBelopetIBehold?: boolean;
+}
+
+interface StaticFunctions {
+  buildIntialValues?: (info: { erBelopetIBehold: boolean; tilbakekrevesBelop: number }) => {
+    erBelopetIBehold: boolean;
+    tilbakekrevdBelop: number;
+  },
+  transformValues?: (info: { erBelopetIBehold: boolean; tilbakekrevdBelop: number }, vurderingBegrunnelse: string) => {
+    '@type': string;
+    begrunnelse: string;
+    erBelopetIBehold: boolean;
+    tilbakekrevesBelop: number;
+  },
+}
+
+const BelopetMottattIGodTroFormPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   erBelopetIBehold,
 }) => (
@@ -61,23 +78,14 @@ const BelopetMottattIGodTroFormPanel = ({
   </>
 );
 
-BelopetMottattIGodTroFormPanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  erBelopetIBehold: PropTypes.bool,
-};
-
-BelopetMottattIGodTroFormPanel.defaultProps = {
-  erBelopetIBehold: undefined,
-};
-
-BelopetMottattIGodTroFormPanel.transformValues = (info, vurderingBegrunnelse) => ({
+BelopetMottattIGodTroFormPanel.transformValues = (info: { erBelopetIBehold: boolean; tilbakekrevdBelop: number }, vurderingBegrunnelse: string) => ({
   '@type': 'godTro',
   begrunnelse: vurderingBegrunnelse,
   erBelopetIBehold: info.erBelopetIBehold,
   tilbakekrevesBelop: info.erBelopetIBehold ? removeSpacesFromNumber(info.tilbakekrevdBelop) : undefined,
 });
 
-BelopetMottattIGodTroFormPanel.buildIntialValues = (info) => ({
+BelopetMottattIGodTroFormPanel.buildIntialValues = (info: { erBelopetIBehold: boolean; tilbakekrevesBelop: number }) => ({
   erBelopetIBehold: info.erBelopetIBehold,
   tilbakekrevdBelop: info.tilbakekrevesBelop,
 });

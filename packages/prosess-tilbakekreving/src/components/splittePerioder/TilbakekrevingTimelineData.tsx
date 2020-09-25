@@ -1,11 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import PeriodeController from './PeriodeController';
 import PeriodeInformasjon from './PeriodeInformasjon';
 
-export const TilbakekrevingTimelineData = ({
+type OwnProps = {
+  periode: {};
+  callbackForward: (...args: any[]) => any;
+  callbackBackward: (...args: any[]) => any;
+  oppdaterSplittedePerioder: (...args: any[]) => any;
+  readOnly: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  beregnBelop: (...args: any[]) => any;
+};
+
+export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({
   periode,
   callbackForward,
   callbackBackward,
@@ -36,16 +46,5 @@ export const TilbakekrevingTimelineData = ({
     </Column>
   </Row>
 );
-
-TilbakekrevingTimelineData.propTypes = {
-  periode: PropTypes.shape().isRequired,
-  callbackForward: PropTypes.func.isRequired,
-  callbackBackward: PropTypes.func.isRequired,
-  oppdaterSplittedePerioder: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  beregnBelop: PropTypes.func.isRequired,
-};
 
 export default TilbakekrevingTimelineData;

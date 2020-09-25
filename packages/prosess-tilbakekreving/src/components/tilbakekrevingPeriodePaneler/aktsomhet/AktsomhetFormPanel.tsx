@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FormSection } from 'redux-form';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -7,10 +6,12 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity, removeSpacesFromNumber, required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import Aktsomhet from '../../../kodeverk/aktsomhet';
 import AktsomhetGradFormPanel from './AktsomhetGradFormPanel';
 import { ANDELER, EGENDEFINERT } from './AktsomhetReduksjonAvBelopFormPanel';
+import { AktsomhetInfo } from '../../../types/vilkarsvurderingTsType';
 
 const uaktsomhetCodes = [
   Aktsomhet.GROVT_UAKTSOM,
@@ -24,7 +25,54 @@ const forstoBurdeForstattTekster = {
   [Aktsomhet.SIMPEL_UAKTSOM]: 'AktsomhetFormPanel.AktsomhetTyperLabel.SimpelUaktsom',
 };
 
-const AktsomhetFormPanel = ({
+interface AktsomhetData {
+  andelSomTilbakekreves: number | string;
+  andelSomTilbakekrevesManuell: number;
+  harGrunnerTilReduksjon: boolean;
+  skalDetTilleggesRenter: boolean;
+  belopSomSkalTilbakekreves: number;
+  annetBegrunnelse: string;
+  sarligGrunnerBegrunnelse: string;
+  tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: boolean;
+}
+
+interface InitialValuesAktsomhetForm {
+  handletUaktsomhetGrad: Aktsomhet;
+  [Aktsomhet.FORSETT]?: AktsomhetData;
+  [Aktsomhet.GROVT_UAKTSOM]?: AktsomhetData;
+  [Aktsomhet.SIMPEL_UAKTSOM]?: AktsomhetData;
+}
+
+interface TransformedValuesAktsomhetForm {
+  '@type': string;
+  aktsomhet: any;
+  begrunnelse: string;
+  aktsomhetInfo: any;
+}
+
+interface OwnProps {
+  readOnly: boolean;
+  resetFields: (...args: any[]) => any;
+  resetAnnetTextField: (...args: any[]) => any;
+  harGrunnerTilReduksjon?: boolean;
+  erSerligGrunnAnnetValgt?: boolean;
+  erValgtResultatTypeForstoBurdeForstaatt?: boolean;
+  handletUaktsomhetGrad?: Aktsomhet;
+  antallYtelser: number;
+  feilutbetalingBelop: number;
+  erTotalBelopUnder4Rettsgebyr: boolean;
+  aktsomhetTyper?: KodeverkMedNavn[];
+  sarligGrunnTyper?: KodeverkMedNavn[];
+  andelSomTilbakekreves?: string;
+}
+
+interface StaticFunctions {
+  buildInitalValues?: (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo: AktsomhetInfo }) => InitialValuesAktsomhetForm,
+  transformValues?: (info: { handletUaktsomhetGrad: string }, sarligGrunnTyper: KodeverkMedNavn[], vurderingBegrunnelse: string) => 
+    TransformedValuesAktsomhetForm,
+}
+
+const AktsomhetFormPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   resetFields,
   resetAnnetTextField,
@@ -50,7 +98,7 @@ const AktsomhetFormPanel = ({
       readOnly={readOnly}
       onChange={resetFields}
     >
-      {aktsomhetTyper.map((vrt) => (
+      {aktsomhetTyper.map((vrt: any) => (
         <RadioOption
           key={vrt.kode}
           label={erValgtResultatTypeForstoBurdeForstaatt ? <FormattedMessage id={forstoBurdeForstattTekster[vrt.kode]} /> : vrt.navn}
@@ -78,42 +126,23 @@ const AktsomhetFormPanel = ({
   </>
 );
 
-AktsomhetFormPanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  resetFields: PropTypes.func.isRequired,
-  resetAnnetTextField: PropTypes.func.isRequired,
-  harGrunnerTilReduksjon: PropTypes.bool,
-  erSerligGrunnAnnetValgt: PropTypes.bool,
-  erValgtResultatTypeForstoBurdeForstaatt: PropTypes.bool,
-  handletUaktsomhetGrad: PropTypes.string,
-  antallYtelser: PropTypes.number.isRequired,
-  feilutbetalingBelop: PropTypes.number.isRequired,
-  erTotalBelopUnder4Rettsgebyr: PropTypes.bool.isRequired,
-  aktsomhetTyper: PropTypes.arrayOf(PropTypes.shape()),
-  sarligGrunnTyper: PropTypes.arrayOf(PropTypes.shape()),
-  andelSomTilbakekreves: PropTypes.string,
-};
-
 AktsomhetFormPanel.defaultProps = {
   erSerligGrunnAnnetValgt: false,
   erValgtResultatTypeForstoBurdeForstaatt: false,
-  harGrunnerTilReduksjon: undefined,
-  handletUaktsomhetGrad: undefined,
-  andelSomTilbakekreves: undefined,
 };
 
-const parseIntAndelSomTilbakekreves = (andelSomTilbakekreves, harGrunnerTilReduksjon) => {
+const parseIntAndelSomTilbakekreves = (andelSomTilbakekreves: string, harGrunnerTilReduksjon: boolean) => {
   const parsedValue = parseInt(andelSomTilbakekreves, 10);
   return !harGrunnerTilReduksjon || Number.isNaN(parsedValue) ? {} : { andelTilbakekreves: parsedValue };
 };
 
-const parseFloatAndelSomTilbakekreves = (andelSomTilbakekreves, harGrunnerTilReduksjon) => {
+const parseFloatAndelSomTilbakekreves = (andelSomTilbakekreves: string, harGrunnerTilReduksjon: boolean) => {
   const parsedValue = parseFloat(andelSomTilbakekreves);
   return !harGrunnerTilReduksjon || Number.isNaN(parsedValue) ? {} : { andelTilbakekreves: parsedValue };
 };
 
-const formatAktsomhetData = (aktsomhet, sarligGrunnTyper) => {
-  const sarligeGrunner = sarligGrunnTyper.reduce((acc, type) => (aktsomhet[type.kode] ? acc.concat(type.kode) : acc), []);
+const formatAktsomhetData = (aktsomhet: {}, sarligGrunnTyper: KodeverkMedNavn[]) => {
+  const sarligeGrunner = sarligGrunnTyper.reduce((acc: string[], type: KodeverkMedNavn) => (aktsomhet[type.kode] ? acc.concat(type.kode) : acc), []);
 
   const { harGrunnerTilReduksjon } = aktsomhet;
   const andelSomTilbakekreves = aktsomhet.andelSomTilbakekreves === EGENDEFINERT
@@ -132,7 +161,8 @@ const formatAktsomhetData = (aktsomhet, sarligGrunnTyper) => {
   };
 };
 
-AktsomhetFormPanel.transformValues = (info, sarligGrunnTyper, vurderingBegrunnelse) => {
+AktsomhetFormPanel.transformValues = (info: { handletUaktsomhetGrad: string }, sarligGrunnTyper: KodeverkMedNavn[],
+  vurderingBegrunnelse: string): TransformedValuesAktsomhetForm => {
   const aktsomhet = info[info.handletUaktsomhetGrad];
   return {
     '@type': 'annet',
@@ -142,11 +172,11 @@ AktsomhetFormPanel.transformValues = (info, sarligGrunnTyper, vurderingBegrunnel
   };
 };
 
-AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo) => {
+AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo: AktsomhetInfo }): InitialValuesAktsomhetForm => {
   const { aktsomhet, aktsomhetInfo } = vilkarResultatInfo;
   const andelSomTilbakekreves = aktsomhetInfo && aktsomhetInfo.andelTilbakekreves ? `${aktsomhetInfo.andelTilbakekreves}` : undefined;
   const aktsomhetData = aktsomhetInfo ? {
-    [aktsomhet.kode ? aktsomhet.kode : aktsomhet]: {
+    [(aktsomhet.kode && 'kode' in aktsomhet ? aktsomhet.kode : aktsomhet)]: {
       andelSomTilbakekreves: andelSomTilbakekreves === undefined || ANDELER.includes(andelSomTilbakekreves) ? andelSomTilbakekreves : EGENDEFINERT,
       andelSomTilbakekrevesManuell: !ANDELER.includes(andelSomTilbakekreves) ? aktsomhetInfo.andelTilbakekreves : undefined,
       harGrunnerTilReduksjon: aktsomhetInfo.harGrunnerTilReduksjon,
@@ -155,12 +185,12 @@ AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo) => {
       annetBegrunnelse: aktsomhetInfo.annetBegrunnelse,
       sarligGrunnerBegrunnelse: decodeHtmlEntity(aktsomhetInfo.sarligGrunnerBegrunnelse),
       tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: aktsomhetInfo.tilbakekrevSelvOmBeloepErUnder4Rettsgebyr,
-      ...(aktsomhetInfo.sarligGrunner ? aktsomhetInfo.sarligGrunner.reduce((acc, sg) => ({ ...acc, [(sg.kode ? sg.kode : sg)]: true }), {}) : {}),
+      ...(aktsomhetInfo.sarligGrunner ? aktsomhetInfo.sarligGrunner.reduce((acc: any, sg: any) => ({ ...acc, [(sg.kode ? sg.kode : sg)]: true }), {}) : {}),
     },
   } : {};
 
   return {
-    handletUaktsomhetGrad: aktsomhet && aktsomhet.kode ? aktsomhet.kode : aktsomhet,
+    handletUaktsomhetGrad: aktsomhet && aktsomhet.kode && 'kode' in aktsomhet ? aktsomhet.kode : aktsomhet,
     ...aktsomhetData,
   };
 };
