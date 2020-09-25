@@ -7,7 +7,7 @@ import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 
 import VedtakResultatType from '../../kodeverk/vedtakResultatType';
-import tilbakekrevingApi from '../../data/tilbakekrevingBehandlingApi';
+import { TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <VedtakTilbakekrevingProsessIndex {...props} />
@@ -27,7 +27,7 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    tilbakekrevingApi.VEDTAKSBREV,
+    TilbakekrevingBehandlingApiKeys.VEDTAKSBREV,
   ]
 
   getData = ({ behandling, beregningsresultat, fetchPreviewVedtaksbrev }) => ({

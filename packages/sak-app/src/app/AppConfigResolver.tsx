@@ -1,11 +1,11 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 
 import { featureToggle } from '@fpsak-frontend/konstanter';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { isObjectEmpty } from '@fpsak-frontend/utils';
+import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
 
 interface OwnProps {
   children: ReactElement,
@@ -19,6 +19,11 @@ const NO_PARAMS = {};
 const AppConfigResolver: FunctionComponent<OwnProps> = ({
   children,
 }) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+  useEffect(() => {
+    requestApi.setAddErrorMessageHandler(addErrorMessage);
+  }, []);
+
   const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT);
   const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE);
   const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER);

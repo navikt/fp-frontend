@@ -6,6 +6,7 @@ import { ErrorPage } from '@fpsak-frontend/sak-feilsider';
 interface OwnProps {
   errorMessageCallback: (error: any) => void;
   children: ReactNode;
+  doNotShowErrorPage?: boolean;
 }
 
 interface State {
@@ -13,6 +14,10 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<OwnProps, State> {
+  static defaultProps = {
+    doNotShowErrorPage: false,
+  };
+
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -46,10 +51,10 @@ export class ErrorBoundary extends Component<OwnProps, State> {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, doNotShowErrorPage } = this.props;
     const { hasError } = this.state;
 
-    return hasError ? <ErrorPage /> : children;
+    return hasError && !doNotShowErrorPage ? <ErrorPage /> : children;
   }
 }
 

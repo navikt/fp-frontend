@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import svpBehandlingApi from '../../data/svpBehandlingApi';
+import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
 class FodseltilretteleggingFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.FODSELTILRETTELEGGING
@@ -14,7 +14,7 @@ class FodseltilretteleggingFaktaPanelDef extends FaktaPanelDef {
 
   getAksjonspunktKoder = () => [aksjonspunktCodes.FODSELTILRETTELEGGING]
 
-  getEndepunkter = () => [svpBehandlingApi.SVANGERSKAPSPENGER_TILRETTELEGGING]
+  getEndepunkter = () => [SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING]
 
   getKomponent = (props) => <FodselOgTilretteleggingFaktaIndex {...props} />
 

@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
-import { Dispatch } from 'redux';
 
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { DataFetcher, DataFetcherTriggers, EndpointOperations } from '@fpsak-frontend/rest-api-redux';
+
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Options, EndpointData, RestApiData } from '@fpsak-frontend/rest-api-hooks/src/local-data/useMultipleRestApi';
 
 import FagsakInfo from '../types/fagsakInfoTsType';
 import MargMarkering from './MargMarkering';
 import InngangsvilkarPanel from './InngangsvilkarPanel';
-
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessStegIkkeBehandletPanel from './ProsessStegIkkeBehandletPanel';
 import prosessStegHooks from '../util/prosessSteg/prosessStegHooks';
@@ -23,8 +23,9 @@ interface OwnProps {
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void;
   lagringSideeffekterCallback: (aksjonspunktModeller: [{ kode: string; isVedtakSubmission?: boolean; sendVarsel?: boolean }]) => any;
-  behandlingApi: {[name: string]: EndpointOperations};
-  dispatch: Dispatch;
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
+  useMultipleRestApi: (endpoints: EndpointData[], options: Options) => RestApiData<any>;
 }
 
 const ProsessStegPanel: FunctionComponent<OwnProps> = ({
@@ -35,10 +36,28 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   lagringSideeffekterCallback,
-  behandlingApi,
-  dispatch,
+  lagreAksjonspunkter,
+  lagreOverstyrteAksjonspunkter,
+  useMultipleRestApi,
 }) => {
   const erHenlagtOgVedtakStegValgt = behandling.behandlingHenlagt && valgtProsessSteg && valgtProsessSteg.getUrlKode() === prosessStegCodes.VEDTAK;
+
+  const panelKeys = valgtProsessSteg ? valgtProsessSteg.getDelPaneler()[0].getProsessStegDelPanelDef().getEndepunkter()
+    .map((e) => ({ key: e })) : [];
+
+  const suspendRequest = !!(panelKeys.length === 0 || erHenlagtOgVedtakStegValgt || !valgtProsessSteg
+    || (!valgtProsessSteg.getErStegBehandlet() && valgtProsessSteg.getUrlKode()));
+
+  const { data, state: hentDataState } = useMultipleRestApi(panelKeys, {
+    keepData: true,
+    isCachingOn: true,
+    suspendRequest,
+    updateTriggers: [behandling?.versjon, suspendRequest, valgtProsessSteg],
+  });
+
+  const bekreftAksjonspunktCallback = prosessStegHooks.useBekreftAksjonspunkt(fagsak, behandling,
+    lagringSideeffekterCallback, lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, valgtProsessSteg);
+
   if (erHenlagtOgVedtakStegValgt) {
     return <BehandlingHenlagtPanel />;
   }
@@ -49,9 +68,7 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
     return <ProsessStegIkkeBehandletPanel />;
   }
 
-  const bekreftAksjonspunktCallback = prosessStegHooks.useBekreftAksjonspunkt(fagsak, behandling, behandlingApi, lagringSideeffekterCallback,
-    dispatch, valgtProsessSteg);
-
+  const harHentetData = panelKeys.length === 0 || hentDataState === RestApiState.SUCCESS;
   const delPaneler = valgtProsessSteg.getDelPaneler();
 
   return (
@@ -65,19 +82,20 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
         >
           {delPaneler.length === 1 && (
             <FadingPanel>
-              <DataFetcher
-                key={valgtProsessSteg.getUrlKode()}
-                fetchingTriggers={new DataFetcherTriggers({ behandlingVersion: behandling.versjon }, true)}
-                endpoints={delPaneler[0].getProsessStegDelPanelDef().getEndepunkter()}
-                loadingPanel={<LoadingPanel />}
-                render={(dataProps) => delPaneler[0].getProsessStegDelPanelDef().getKomponent({
-                  ...dataProps,
-                  behandling,
-                  alleKodeverk,
-                  submitCallback: bekreftAksjonspunktCallback,
-                  ...delPaneler[0].getKomponentData(),
-                })}
-              />
+              {!harHentetData && (
+                <LoadingPanel />
+              )}
+              {harHentetData && (
+                <>
+                  {delPaneler[0].getProsessStegDelPanelDef().getKomponent({
+                    ...data,
+                    behandling,
+                    alleKodeverk,
+                    submitCallback: bekreftAksjonspunktCallback,
+                    ...delPaneler[0].getKomponentData(),
+                  })}
+                </>
+              )}
             </FadingPanel>
           )}
           {delPaneler.length > 1 && (
@@ -88,6 +106,7 @@ const ProsessStegPanel: FunctionComponent<OwnProps> = ({
               submitCallback={bekreftAksjonspunktCallback}
               apentFaktaPanelInfo={apentFaktaPanelInfo}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+              useMultipleRestApi={useMultipleRestApi}
             />
           )}
         </MargMarkering>

@@ -28,8 +28,8 @@ interface FetchedData {
         konsekvenserForYtelsen: Kodeverk[];
       };
       behandlingÅrsaker: {
-        behandlingArsakType: Kodeverk[];
-      };
+        behandlingArsakType: Kodeverk;
+      }[];
       tilbakekrevingValg?: {
         videreBehandling: Kodeverk;
       };

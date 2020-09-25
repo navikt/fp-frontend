@@ -2,9 +2,8 @@ import {
   useState, useEffect, DependencyList,
 } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, NotificationMapper, AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { REQUEST_POLLING_CANCELLED, AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
-import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
 import RestApiState from '../RestApiState';
 
 interface RestApiData<T> {
@@ -53,12 +52,6 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
     data: undefined,
   });
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  const notif = new NotificationMapper();
-  notif.addRequestErrorEventHandlers((errorData, type) => {
-    addErrorMessage({ ...errorData, type });
-  });
-
   useEffect(() => {
     if (requestApi.hasPath(key) && !allOptions.suspendRequest) {
       setData((oldState) => ({
@@ -67,7 +60,7 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
         data: allOptions.keepData ? oldState.data : undefined,
       }));
 
-      requestApi.startRequest(key, params, notif)
+      requestApi.startRequest(key, params)
         .then((dataRes) => {
           if (dataRes.payload !== REQUEST_POLLING_CANCELLED) {
             setData({

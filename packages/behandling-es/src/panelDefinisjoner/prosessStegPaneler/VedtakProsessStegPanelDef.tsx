@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 
 import findStatusForVedtak from '../vedtakStatusUtlederEs';
-import esBehandlingApi from '../../data/esBehandlingApi';
+import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <VedtakProsessIndex {...props} />
@@ -24,10 +24,10 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    esBehandlingApi.TILBAKEKREVINGVALG,
-    esBehandlingApi.SEND_VARSEL_OM_REVURDERING,
-    esBehandlingApi.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
-    esBehandlingApi.MEDLEMSKAP,
+    EsBehandlingApiKeys.TILBAKEKREVINGVALG,
+    EsBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING,
+    EsBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
+    EsBehandlingApiKeys.MEDLEMSKAP,
   ]
 
   getOverstyrVisningAvKomponent = () => true

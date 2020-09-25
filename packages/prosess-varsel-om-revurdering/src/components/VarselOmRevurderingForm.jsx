@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { formPropTypes } from 'redux-form';
+import { formPropTypes, setSubmitFailed } from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -283,7 +284,13 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
   });
 };
 
-const VarselOmRevurderingForm = connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators({
+    dispatchSubmitFailed: setSubmitFailed,
+  }, dispatch),
+});
+
+const VarselOmRevurderingForm = connect(mapStateToPropsFactory, mapDispatchToProps)(injectIntl(behandlingForm({
   form: formName,
   enableReinitialize: true,
 })(VarselOmRevurderingFormImpl)));

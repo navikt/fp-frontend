@@ -4,13 +4,10 @@ import {
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 
-import { reducerRegistry } from '@fpsak-frontend/rest-api-redux';
-
 const isDevelopment = process.env.NODE_ENV === 'development';
 const logger = isDevelopment ? require('redux-logger') : null;
 
-const combineAllReducers = (reduxFormReducer, applicationReducers) => combineReducers({
-  default: combineReducers(applicationReducers),
+const combineAllReducers = (reduxFormReducer) => combineReducers({
   form: reduxFormReducer,
 });
 
@@ -27,19 +24,11 @@ const configureStore = () => {
     enhancer = compose(applyMiddleware(...middleware));
   }
 
-  const allReducers = combineAllReducers(formReducer, reducerRegistry.getReducers());
+  const allReducers = combineAllReducers(formReducer);
 
   const initialState = {};
 
-  const store = createStore(allReducers, initialState, enhancer);
-
-  // Replace the store's reducer whenever a new reducer is registered.
-  reducerRegistry.setChangeListener((reducers) => {
-    const newReducers = combineAllReducers(formReducer, reducers);
-    store.replaceReducer(newReducers);
-  });
-
-  return store;
+  return createStore(allReducers, initialState, enhancer);
 };
 
 export default configureStore;

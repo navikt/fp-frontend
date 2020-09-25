@@ -1,17 +1,17 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
-import { Dispatch } from 'redux';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer,
+  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel,
+  ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 
-import innsynBehandlingApi from '../data/innsynBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegInnsynPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
+import { restApiInnsynHooks, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
@@ -25,16 +25,24 @@ interface OwnProps {
   oppdaterBehandlingVersjon: (versjon: number) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  dispatch: Dispatch;
+  setBehandling: (behandling: Behandling) => void;
 }
 
-const previewCallback = (dispatch, fagsak, behandling) => (data) => {
+const forhandsvis = (data) => {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data);
+  } else if (URL.createObjectURL) {
+    window.open(URL.createObjectURL(data));
+  }
+};
+
+const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
-  return dispatch(innsynBehandlingApi.PREVIEW_MESSAGE.makeRestApiRequest()(brevData));
+  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
 const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl) => (aksjonspunktModels) => {
@@ -64,14 +72,20 @@ const InnsynProsess: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   oppdaterBehandlingVersjon,
   opneSokeside,
-  dispatch,
+  setBehandling,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
+
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiInnsynHooks
+    .useRestApiRunner<Behandling>(InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  const { startRequest: forhandsvisMelding } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.PREVIEW_MESSAGE);
+
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     alleDokumenter: data.innsynDokumenter,
     innsyn: data.innsyn,
-    previewCallback: useCallback(previewCallback(dispatch, fagsak, behandling), [behandling.versjon]),
+    previewCallback: useCallback(previewCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
@@ -101,8 +115,8 @@ const InnsynProsess: FunctionComponent<OwnProps> = ({
           behandling={behandling}
           alleKodeverk={alleKodeverk}
           lagringSideeffekterCallback={lagringSideeffekterCallback}
-          behandlingApi={innsynBehandlingApi}
-          dispatch={dispatch}
+          lagreAksjonspunkter={lagreAksjonspunkter}
+          useMultipleRestApi={restApiInnsynHooks.useMultipleRestApi}
         />
       </ProsessStegContainer>
     </>

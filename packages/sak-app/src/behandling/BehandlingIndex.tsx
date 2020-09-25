@@ -2,7 +2,6 @@ import React, {
   Suspense, FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useLocation } from 'react-router';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -22,7 +21,7 @@ import {
 } from '../app/paths';
 import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
 import behandlingEventHandler from './BehandlingEventHandler';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../app/ErrorBoundary';
 
 const BehandlingEngangsstonadIndex = React.lazy(() => import('@fpsak-frontend/behandling-es'));
 const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-fp'));
@@ -37,8 +36,9 @@ const erTilbakekreving = (behandlingTypeKode) => behandlingTypeKode === Behandli
   || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
 const formatName = (bpName = '') => replaceNorwegianCharacters(bpName.toLowerCase());
 
-const getOppdaterProsessStegOgFaktaPanelIUrl = (history, location) => (prosessStegId, faktaPanelId) => {
+const getOppdaterProsessStegOgFaktaPanelIUrl = (history) => (prosessStegId, faktaPanelId) => {
   let newLocation;
+  const { location } = history;
   if (prosessStegId === 'default') {
     newLocation = getLocationWithDefaultProsessStegAndFakta(location);
   } else if (prosessStegId) {
@@ -89,14 +89,13 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (behandling) {
-      requestApi.injectPaths(behandling?.links);
+      requestApi.setLinks(behandling.links);
       setBehandlingIdOgVersjon(behandlingId, behandlingVersjon);
     }
   }, [behandling]);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
-  const location = useLocation();
   const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
 
   const fagsakInfo = {
@@ -117,8 +116,9 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const history = useHistory();
   const opneSokeside = useCallback(() => { history.push('/'); }, []);
-  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(history, location), [location]);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(history), [history]);
 
+  const { location } = history;
   const query = parseQueryString(location.search);
 
   const defaultProps = {

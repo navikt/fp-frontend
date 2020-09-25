@@ -2,7 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import { Dispatch } from 'redux';
 
 import { Behandling } from '@fpsak-frontend/types';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
@@ -13,7 +12,8 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
-import { DataFetcher, EndpointOperations } from '@fpsak-frontend/rest-api-redux';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import InngangsvilkarPanel from './InngangsvilkarPanel';
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
@@ -113,8 +113,8 @@ describe('<ProsessStegPanel>', () => {
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         lagringSideeffekterCallback={sinon.spy()}
-        behandlingApi={{}}
-        dispatch={sinon.spy()}
+        lagreAksjonspunkter={sinon.spy()}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 
@@ -138,8 +138,8 @@ describe('<ProsessStegPanel>', () => {
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         lagringSideeffekterCallback={sinon.spy()}
-        behandlingApi={{}}
-        dispatch={sinon.spy()}
+        lagreAksjonspunkter={sinon.spy()}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 
@@ -173,8 +173,8 @@ describe('<ProsessStegPanel>', () => {
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         lagringSideeffekterCallback={sinon.spy()}
-        behandlingApi={{}}
-        dispatch={sinon.spy()}
+        lagreAksjonspunkter={sinon.spy()}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 
@@ -183,7 +183,7 @@ describe('<ProsessStegPanel>', () => {
     expect(wrapper.find(BehandlingHenlagtPanel)).to.have.length(0);
 
     expect(wrapper.find(InngangsvilkarPanel)).to.have.length(1);
-    expect(wrapper.find(DataFetcher)).to.have.length(0);
+    expect(wrapper.find('DataFetcher')).to.have.length(0);
   });
 
   it('skal vise kun vise ett panel', () => {
@@ -208,8 +208,8 @@ describe('<ProsessStegPanel>', () => {
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         lagringSideeffekterCallback={sinon.spy()}
-        behandlingApi={{}}
-        dispatch={sinon.spy()}
+        lagreAksjonspunkter={sinon.spy()}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 
@@ -217,7 +217,12 @@ describe('<ProsessStegPanel>', () => {
     expect(wrapper.find(ProsessStegIkkeBehandletPanel)).to.have.length(0);
     expect(wrapper.find(BehandlingHenlagtPanel)).to.have.length(0);
 
-    expect(wrapper.find(DataFetcher)).to.have.length(1);
+    const komponent = wrapper.find('div');
+    expect(komponent).to.have.length(1);
+    expect(komponent.prop('status')).is.eql(vilkarUtfallType.IKKE_VURDERT);
+    expect(komponent.prop('isReadOnly')).is.false;
+    expect(komponent.prop('readOnlySubmitButton')).is.false;
+    expect(komponent.prop('isAksjonspunktOpen')).is.true;
     expect(wrapper.find(InngangsvilkarPanel)).to.have.length(0);
   });
 
@@ -239,13 +244,8 @@ describe('<ProsessStegPanel>', () => {
     const utledetInngangsvilkarSteg = new ProsessStegUtledet(inngangsvilkarStegDef, [utledetFodselDelPanel, utledetOmsorgDelPanel]);
 
     const lagringSideeffekterCallback = sinon.spy();
-    const makeRestApiRequest = sinon.spy();
-    const behandlingApi: Partial<{[name: string]: Partial<EndpointOperations>}> = {
-      SAVE_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-    };
-    const dispatch = () => Promise.resolve();
+    const makeRestApiRequest = sinon.stub();
+    makeRestApiRequest.returns(Promise.resolve());
 
     const wrapper = shallow(
       <ProsessStegPanel
@@ -255,8 +255,8 @@ describe('<ProsessStegPanel>', () => {
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         lagringSideeffekterCallback={lagringSideeffekterCallback}
-        behandlingApi={behandlingApi as {[name: string]: EndpointOperations}}
-        dispatch={dispatch as Dispatch}
+        lagreAksjonspunkter={makeRestApiRequest}
+        useMultipleRestApi={() => ({ data: undefined, state: RestApiState.SUCCESS })}
       />,
     );
 
@@ -271,7 +271,7 @@ describe('<ProsessStegPanel>', () => {
 
     const requestKall = makeRestApiRequest.getCalls();
     expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(1);
+    expect(requestKall[0].args).to.have.length(2);
     expect(requestKall[0].args[0]).to.eql({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,

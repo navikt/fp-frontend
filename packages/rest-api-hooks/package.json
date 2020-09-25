@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.13.1",
-    "@fpsak-frontend/rest-api-new": "1.0.0"
+    "@fpsak-frontend/rest-api": "1.0.0"
   },
   "devDependencies": {}
 }

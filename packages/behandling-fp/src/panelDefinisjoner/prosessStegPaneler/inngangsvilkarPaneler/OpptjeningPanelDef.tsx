@@ -5,7 +5,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegPanelDef, ProsessStegOverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import fpBehandlingApi from '../../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../../data/fpBehandlingApi';
 
 class OpptjeningPanelDef extends ProsessStegPanelDef {
   getId = () => 'OPPTJENINGSVILKARET'
@@ -28,7 +28,7 @@ class OpptjeningPanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    fpBehandlingApi.OPPTJENING,
+    FpBehandlingApiKeys.OPPTJENING,
   ]
 
   getData = ({ vilkarForSteg }) => ({

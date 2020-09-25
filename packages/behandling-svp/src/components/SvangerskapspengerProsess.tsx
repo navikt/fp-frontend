@@ -1,21 +1,29 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
-import { Dispatch } from 'redux';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FagsakInfo, Rettigheter, ProsessStegPanel, prosessStegHooks, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessStegContainer,
+  FagsakInfo, Rettigheter, ProsessStegPanel, prosessStegHooks, IverksetterVedtakStatusModal,
+  FatterVedtakStatusModal, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 
-import svpBehandlingApi from '../data/svpBehandlingApi';
+import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegSvpPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
+
+const forhandsvis = (data) => {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data);
+  } else if (URL.createObjectURL) {
+    window.open(URL.createObjectURL(data));
+  }
+};
 
 interface OwnProps {
   data: FetchedData;
@@ -30,19 +38,19 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
-  dispatch: Dispatch;
+  setBehandling: (behandling: Behandling) => void;
 }
 
-const getForhandsvisCallback = (dispatch, fagsak, behandling) => (data) => {
+const getForhandsvisCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
-  return dispatch(svpBehandlingApi.PREVIEW_MESSAGE.makeRestApiRequest()(brevData));
+  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getForhandsvisFptilbakeCallback = (dispatch, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
+const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
   const data = {
     behandlingUuid: behandling.uuid,
     fagsakYtelseType: fagsak.fagsakYtelseType,
@@ -51,7 +59,7 @@ const getForhandsvisFptilbakeCallback = (dispatch, fagsak, behandling) => (motta
     brevmalkode,
     saksnummer,
   };
-  return dispatch(svpBehandlingApi.PREVIEW_TILBAKEKREVING_MESSAGE.makeRestApiRequest()(data));
+  return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
 };
 
 const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleFatterVedtakModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl,
@@ -95,13 +103,24 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   apentFaktaPanelInfo,
-  dispatch,
+  setBehandling,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiSvpHooks
+    .useRestApiRunner<Behandling>(SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiSvpHooks
+    .useRestApiRunner<Behandling>(SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
+  const { startRequest: forhandsvisMelding } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiSvpHooks
+    .useRestApiRunner<Behandling>(SvpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
+
   const dataTilUtledingAvSvpPaneler = {
-    previewCallback: useCallback(getForhandsvisCallback(dispatch, fagsak, behandling), [behandling.versjon]),
-    previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(dispatch, fagsak, behandling), [behandling.versjon]),
+    previewCallback: useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
+    previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
     alleKodeverk,
     ...data,
   };
@@ -144,8 +163,9 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
           apentFaktaPanelInfo={apentFaktaPanelInfo}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           lagringSideeffekterCallback={lagringSideeffekterCallback}
-          behandlingApi={svpBehandlingApi}
-          dispatch={dispatch}
+          lagreAksjonspunkter={lagreAksjonspunkter}
+          lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
+          useMultipleRestApi={restApiSvpHooks.useMultipleRestApi}
         />
       </ProsessStegContainer>
     </>

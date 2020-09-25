@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
 import { RestApiErrorProvider } from '../error/RestApiErrorContext';
 import { RestApiProvider } from './RestApiContext';
@@ -20,13 +20,19 @@ class RequestApiTestMock extends AbstractRequestApi {
 
   public startRequest = () => Promise.resolve({ payload: this.data })
 
-  public cancelRequest = () => undefined;
-
   public hasPath = () => true;
 
   public injectPaths = () => {}
 
+  public resetCache = () => {}
+
   public isMock = () => false;
+
+  public setAddErrorMessageHandler = () => {}
+
+  public setRequestPendingHandler = () => {}
+
+  public setLinks = () => {}
 
   public mock = () => { throw new Error('Not Implemented'); };
 

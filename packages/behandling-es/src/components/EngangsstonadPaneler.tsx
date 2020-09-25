@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import {
   FagsakInfo, Rettigheter, BehandlingPaVent, SettPaVentParams,
@@ -21,9 +20,10 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, { keepData: boolean }) => Promise<any>;
+  hentBehandling: ({ behandlingId: number }, keepData: boolean) => Promise<any>;
   opneSokeside: () => void;
   hasFetchError: boolean;
+  setBehandling: (behandling: Behandling) => void;
 }
 
 interface FaktaPanelInfo {
@@ -45,10 +45,9 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   hentBehandling,
   opneSokeside,
   hasFetchError,
+  setBehandling,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
-  // TODO (TOR) Har trekt denne ut hit grunna redux test-oppsett. Fiks
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -72,7 +71,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={hasFetchError}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
-        dispatch={dispatch}
+        setBehandling={setBehandling}
       />
       <EngangsstonadFakta
         behandling={behandling}
@@ -85,7 +84,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         setApentFaktaPanel={setApentFaktaPanel}
-        dispatch={dispatch}
+        setBehandling={setBehandling}
       />
     </>
   );

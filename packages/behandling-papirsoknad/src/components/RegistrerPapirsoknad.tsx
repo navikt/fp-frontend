@@ -16,8 +16,8 @@ interface OwnProps {
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
   settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, { keepData: boolean }) => Promise<any>;
-  lagreAksjonspunkt: (params: any) => Promise<void>;
+  hentBehandling: ({ behandlingId: number }, keepData: boolean) => Promise<any>;
+  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>;
   erAksjonspunktLagret: boolean;
 }
 

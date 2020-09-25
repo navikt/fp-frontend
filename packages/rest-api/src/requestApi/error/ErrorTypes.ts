@@ -1,4 +1,4 @@
-import { ErrorType } from './errorTsType';
+import ErrorType from './errorTsType';
 
 /**
  * Feiltyper til differensiering av framvisning i GUI
@@ -13,7 +13,14 @@ export const ErrorTypes = {
 
 export const handledErrorTypes = [ErrorTypes.MANGLER_TILGANG_FEIL];
 
-export const getErrorResponseData = (error: ErrorType) => (error && error.response && error.response.data ? error.response.data : error);
+export const getErrorResponseData = (error: ErrorType) => (error
+  && error.response && error.response.data ? error.response.data : error);
 export const errorOfType = (error: ErrorType, errorType: string) => error && (getErrorResponseData(error).type === errorType);
 
 export const isHandledError = (errorType?: string) => errorType && handledErrorTypes.includes(errorType);
+
+const hasStatusCode = (statusCode) => (errorStatus?: string) => errorStatus === statusCode;
+
+export const is401Error = hasStatusCode(401);
+
+export const is418Error = hasStatusCode(418);

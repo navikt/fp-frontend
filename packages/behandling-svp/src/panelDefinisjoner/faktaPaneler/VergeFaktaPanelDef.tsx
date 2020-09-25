@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import svpBehandlingApi from '../../data/svpBehandlingApi';
+import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
 class VergeFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.VERGE
@@ -14,7 +14,7 @@ class VergeFaktaPanelDef extends FaktaPanelDef {
 
   getAksjonspunktKoder = () => [aksjonspunktCodes.AVKLAR_VERGE];
 
-  getEndepunkter = () => [svpBehandlingApi.VERGE]
+  getEndepunkter = () => [SvpBehandlingApiKeys.VERGE]
 
   getKomponent = (props) => <VergeFaktaIndex {...props} />
 }

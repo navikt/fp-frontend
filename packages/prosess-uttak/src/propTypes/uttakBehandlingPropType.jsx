@@ -9,7 +9,9 @@ const uttakBehandlingPropType = PropTypes.shape({
   type: kodeverkObjektPropType.isRequired,
   status: kodeverkObjektPropType.isRequired,
   behandlingsresultat: PropTypes.shape({
-    skjaeringstidspunktForeldrepenger: PropTypes.string.isRequired,
+    skjæringstidspunkt: PropTypes.shape({
+      dato: PropTypes.string.isRequired,
+    }),
   }).isRequired,
 });
 
