@@ -6,7 +6,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef, ProsessStegOverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import esBehandlingApi from '../../data/esBehandlingApi';
+import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <SoknadsfristVilkarProsessIndex {...props} />
@@ -20,7 +20,7 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    esBehandlingApi.FAMILIEHENDELSE,
+    EsBehandlingApiKeys.FAMILIEHENDELSE,
   ]
 
   getData = ({ soknad }) => ({ soknad })

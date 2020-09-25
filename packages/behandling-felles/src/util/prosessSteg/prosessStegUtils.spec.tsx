@@ -1,9 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { Dispatch } from 'redux';
 
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
@@ -233,21 +231,12 @@ describe('<prosessStegUtils>', () => {
   });
 
   it('skal lagre aksjonspunkt', () => {
-    const dispatch = () => Promise.resolve();
-    const makeRestApiRequest = sinon.spy();
-    const api: Partial<{[name: string]: Partial<EndpointOperations>}> = {
-      SAVE_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-      SAVE_OVERSTYRT_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-    };
+    const lagreAksjonspunkter = sinon.stub();
+    lagreAksjonspunkter.returns(Promise.resolve());
     const lagringSideEffectsCallback = sinon.spy();
 
     const callback = getBekreftAksjonspunktCallback(
-      dispatch as Dispatch, lagringSideEffectsCallback, fagsak, behandling as Behandling, aksjonspunkter,
-      api as {[name: string]: EndpointOperations},
+      lagringSideEffectsCallback, fagsak, behandling as Behandling, aksjonspunkter, lagreAksjonspunkter,
     );
     const aksjonspunktModeller = [{
       kode: aksjonspunkter[0].definisjon.kode,
@@ -255,9 +244,9 @@ describe('<prosessStegUtils>', () => {
 
     callback(aksjonspunktModeller);
 
-    const requestKall = makeRestApiRequest.getCalls();
+    const requestKall = lagreAksjonspunkter.getCalls();
     expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(1);
+    expect(requestKall[0].args).to.have.length(2);
     expect(requestKall[0].args[0]).to.eql({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
@@ -270,20 +259,13 @@ describe('<prosessStegUtils>', () => {
   });
 
   it('skal lagre overstyrt aksjonspunkt', () => {
-    const dispatch = () => Promise.resolve();
-    const makeRestApiRequest = sinon.spy();
-    const api: Partial<{[name: string]: Partial<EndpointOperations>}> = {
-      SAVE_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-      SAVE_OVERSTYRT_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-    };
+    const lagreAksjonspunkter = sinon.spy();
+    const lagreOverstyrteAksjonspunkter = sinon.stub();
+    lagreOverstyrteAksjonspunkter.returns(Promise.resolve());
     const lagringSideEffectsCallback = sinon.spy();
 
-    const callback = getBekreftAksjonspunktCallback(dispatch as Dispatch, lagringSideEffectsCallback, fagsak, behandling as Behandling, aksjonspunkter,
-      api as {[name: string]: EndpointOperations});
+    const callback = getBekreftAksjonspunktCallback(lagringSideEffectsCallback, fagsak, behandling as Behandling, aksjonspunkter,
+      lagreAksjonspunkter, lagreOverstyrteAksjonspunkter);
 
     const aksjonspunktModeller = [{
       kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
@@ -291,9 +273,9 @@ describe('<prosessStegUtils>', () => {
 
     callback(aksjonspunktModeller);
 
-    const requestKall = makeRestApiRequest.getCalls();
+    const requestKall = lagreOverstyrteAksjonspunkter.getCalls();
     expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(1);
+    expect(requestKall[0].args).to.have.length(2);
     expect(requestKall[0].args[0]).to.eql({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,

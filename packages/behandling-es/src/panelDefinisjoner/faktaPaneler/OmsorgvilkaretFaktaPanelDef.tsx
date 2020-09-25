@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgOgForeldreansvarFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-foreldreansvar';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import esBehandlingApi from '../../data/esBehandlingApi';
+import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
 
 class OmsorgvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.OMSORGSVILKARET
@@ -14,7 +14,7 @@ class OmsorgvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getAksjonspunktKoder = () => [aksjonspunktCodes.OMSORGSOVERTAKELSE, aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]
 
-  getEndepunkter = () => [esBehandlingApi.FAMILIEHENDELSE]
+  getEndepunkter = () => [EsBehandlingApiKeys.FAMILIEHENDELSE]
 
   getKomponent = (props) => <OmsorgOgForeldreansvarFaktaIndex {...props} />
 

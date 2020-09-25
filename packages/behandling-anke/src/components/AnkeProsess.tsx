@@ -1,19 +1,18 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
-import { Dispatch } from 'redux';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer,
+  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { Kodeverk, KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import AnkeBehandlingModal from './AnkeBehandlingModal';
-import ankeBehandlingApi from '../data/ankeBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegAnkePanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
+import { restApiAnkeHooks, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
@@ -27,38 +26,38 @@ interface OwnProps {
   oppdaterBehandlingVersjon: (versjon: number) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  dispatch: Dispatch;
   alleBehandlinger: {
     id: number;
     type: Kodeverk;
     avsluttet?: string;
   }[];
+  setBehandling: (behandling: Behandling) => void;
 }
 
-const saveAnkeText = (dispatch, behandling, aksjonspunkter) => (aksjonspunktModel) => {
+const forhandsvis = (data) => {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data);
+  } else if (URL.createObjectURL) {
+    window.open(URL.createObjectURL(data));
+  }
+};
+
+const saveAnkeText = (lagreAnkeVurdering, behandling) => (aksjonspunktModel) => {
   const data = {
     behandlingId: behandling.id,
     ...aksjonspunktModel,
   };
 
-  const getForeslaVedtakAp = aksjonspunkter
-    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
-    .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK);
-
-  if (getForeslaVedtakAp.length === 1) {
-    dispatch(ankeBehandlingApi.SAVE_ANKE_VURDERING.makeRestApiRequest()(data));
-  } else {
-    dispatch(ankeBehandlingApi.SAVE_ANKE_VURDERING.makeRestApiRequest()(data));
-  }
+  lagreAnkeVurdering(data);
 };
 
-const previewCallback = (dispatch, fagsak, behandling) => (data) => {
+const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
-  return dispatch(ankeBehandlingApi.PREVIEW_MESSAGE.makeRestApiRequest()(brevData));
+  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
 const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleAnkeModal, toggleOppdatereFagsakContext,
@@ -97,15 +96,22 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
   oppdaterBehandlingVersjon,
   opneSokeside,
   alleBehandlinger,
-  dispatch,
+  setBehandling,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
+
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiAnkeHooks
+    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: lagreAnkeVurdering } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING);
+
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
 
   const dataTilUtledingAvFpPaneler = {
     alleBehandlinger,
     ankeVurdering: data.ankeVurdering,
-    saveAnke: useCallback(saveAnkeText(dispatch, behandling, data.aksjonspunkter), [behandling.versjon]),
-    previewCallback: useCallback(previewCallback(dispatch, fagsak, behandling), [behandling.versjon]),
+    saveAnke: useCallback(saveAnkeText(lagreAnkeVurdering, behandling), [behandling.versjon]),
+    previewCallback: useCallback(previewCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
@@ -145,8 +151,8 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
           behandling={behandling}
           alleKodeverk={alleKodeverk}
           lagringSideeffekterCallback={lagringSideeffekterCallback}
-          behandlingApi={ankeBehandlingApi}
-          dispatch={dispatch}
+          lagreAksjonspunkter={lagreAksjonspunkter}
+          useMultipleRestApi={restApiAnkeHooks.useMultipleRestApi}
         />
       </ProsessStegContainer>
     </>

@@ -1,20 +1,27 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
-import { Dispatch } from 'redux';
 
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
 import {
-  FagsakInfo, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter,
+  FagsakInfo, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 
-import tilbakekrevingApi from '../data/tilbakekrevingBehandlingApi';
+import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegTilbakekrevingPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
+
+const forhandsvis = (data) => {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data);
+  } else if (URL.createObjectURL) {
+    window.open(URL.createObjectURL(data));
+  }
+};
 
 interface OwnProps {
   data: FetchedData;
@@ -27,13 +34,9 @@ interface OwnProps {
   oppdaterBehandlingVersjon: (versjon: number) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  dispatch: Dispatch;
   harApenRevurdering: boolean;
+  setBehandling: (behandling: Behandling) => void;
 }
-
-const getForhandsvisCallback = (dispatch) => (data) => dispatch(tilbakekrevingApi.PREVIEW_VEDTAKSBREV.makeRestApiRequest()(data));
-
-const getBeregnBelopCallback = (dispatch) => (data) => dispatch(tilbakekrevingApi.BEREGNE_BELØP.makeRestApiRequest()(data));
 
 const getLagringSideeffekter = (toggleFatterVedtakModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl) => (aksjonspunktModels) => {
   const isFatterVedtakAp = aksjonspunktModels.some((ap) => ap.kode === aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK);
@@ -63,15 +66,19 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   harApenRevurdering,
-  dispatch,
+  setBehandling,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
-  const dataTilUtledingAvTilbakekrevingPaneler = {
-    beregnBelop: useCallback(getBeregnBelopCallback(dispatch), [behandling.versjon]),
-    fetchPreviewVedtaksbrev: useCallback(getForhandsvisCallback(dispatch), [behandling.versjon]),
-    ...data,
-  };
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiTilbakekrevingHooks
+    .useRestApiRunner<Behandling>(TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+
+  const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
+  const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
+  const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvis(response)), []);
+
+  const dataTilUtledingAvTilbakekrevingPaneler = { beregnBelop, fetchPreviewVedtaksbrev, ...data };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
     dataTilUtledingAvTilbakekrevingPaneler, fagsak, rettigheter, behandling, data.aksjonspunkter, [], hasFetchError, valgtProsessSteg);
 
@@ -109,8 +116,8 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           lagringSideeffekterCallback={lagringSideeffekterCallback}
-          behandlingApi={tilbakekrevingApi}
-          dispatch={dispatch}
+          lagreAksjonspunkter={lagreAksjonspunkter}
+          useMultipleRestApi={restApiTilbakekrevingHooks.useMultipleRestApi}
         />
       </ProsessStegContainer>
     </>

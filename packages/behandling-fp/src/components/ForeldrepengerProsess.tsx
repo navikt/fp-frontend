@@ -1,22 +1,29 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
-import { setSubmitFailed } from 'redux-form';
-import { Dispatch } from 'redux';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer,
+  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal,
+  FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 
-import fpBehandlingApi from '../data/fpBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegFpPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
+import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
+
+const forhandsvis = (data) => {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data);
+  } else if (URL.createObjectURL) {
+    window.open(URL.createObjectURL(data));
+  }
+};
 
 interface OwnProps {
   data: FetchedData;
@@ -31,20 +38,20 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
-  dispatch: Dispatch;
+  setBehandling: (behandling: Behandling) => void;
 }
 
-const getForhandsvisCallback = (dispatch, fagsak, behandling) => (data) => {
+const getForhandsvisCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
 
-  return dispatch(fpBehandlingApi.PREVIEW_MESSAGE.makeRestApiRequest()(brevData));
+  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getForhandsvisFptilbakeCallback = (dispatch, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
+const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
   const data = {
     behandlingUuid: behandling.uuid,
     fagsakYtelseType: fagsak.fagsakYtelseType,
@@ -53,7 +60,7 @@ const getForhandsvisFptilbakeCallback = (dispatch, fagsak, behandling) => (motta
     brevmalkode,
     saksnummer,
   };
-  return dispatch(fpBehandlingApi.PREVIEW_TILBAKEKREVING_MESSAGE.makeRestApiRequest()(data));
+  return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
 };
 
 const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleFatterVedtakModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl,
@@ -96,16 +103,26 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   apentFaktaPanelInfo,
-  dispatch,
+  setBehandling,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks
+    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiFpHooks
+    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
+  const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks
+    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+  const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
+
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
+
   const dataTilUtledingAvFpPaneler = {
-    previewCallback: useCallback(getForhandsvisCallback(dispatch, fagsak, behandling), [behandling.versjon]),
-    previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(dispatch, fagsak, behandling), [behandling.versjon]),
-    dispatchSubmitFailed: useCallback((formName) => dispatch(setSubmitFailed(formName)), []),
-    tempUpdateStonadskontoer: useCallback((params) => dispatch(fpBehandlingApi.STONADSKONTOER_GITT_UTTAKSPERIODER.makeRestApiRequest()(params)),
-      [behandling.versjon]),
+    previewCallback: useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
+    previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
+    tempUpdateStonadskontoer,
     alleKodeverk,
     ...data,
   };
@@ -148,8 +165,9 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
           apentFaktaPanelInfo={apentFaktaPanelInfo}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           lagringSideeffekterCallback={lagringSideeffekterCallback}
-          behandlingApi={fpBehandlingApi}
-          dispatch={dispatch}
+          lagreAksjonspunkter={lagreAksjonspunkter}
+          lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
+          useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
         />
       </ProsessStegContainer>
     </>

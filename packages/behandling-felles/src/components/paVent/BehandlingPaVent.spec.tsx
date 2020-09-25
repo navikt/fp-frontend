@@ -143,8 +143,6 @@ describe('<BehandlingPaVent>', () => {
     expect(calls2[0].args[0]).to.eql({
       behandlingId: 1,
     });
-    expect(calls2[0].args[1]).to.eql({
-      keepData: false,
-    });
+    expect(calls2[0].args[1]).to.false;
   });
 });

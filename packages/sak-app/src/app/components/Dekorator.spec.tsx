@@ -4,8 +4,9 @@ import sinon from 'sinon';
 
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
-
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
+import * as useRestApiError from '@fpsak-frontend/rest-api-hooks/src/error/useRestApiError';
+
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import Dekorator from './Dekorator';
 
@@ -21,6 +22,13 @@ const navAnsatt = {
   navn: 'Test',
 };
 
+let contextStubHistory;
+afterEach(() => {
+  if (contextStubHistory) {
+    contextStubHistory.restore();
+  }
+});
+
 describe('<Dekorator>', () => {
   it('skal vise søkeskjermbildet, men ikke systemstatuser', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
@@ -29,7 +37,6 @@ describe('<Dekorator>', () => {
     const wrapper = shallowWithIntl(<Dekorator.WrappedComponent
       intl={intlMock}
       queryStrings={{}}
-      removeErrorMessage={sinon.spy()}
       setSiteHeight={sinon.spy()}
     />);
     const header = wrapper.find(HeaderWithErrorPanel);
@@ -59,15 +66,15 @@ describe('<Dekorator>', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
     requestApi.mock(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES, false);
 
+    contextStubHistory = sinon.stub(useRestApiError, 'default').returns([{
+      type: EventType.REQUEST_ERROR,
+      feilmelding: 'Dette er en feilmelding',
+    }]);
+
     const wrapper = shallowWithIntl(<Dekorator.WrappedComponent
       intl={intlMock}
       queryStrings={{}}
-      removeErrorMessage={sinon.spy()}
       setSiteHeight={sinon.spy()}
-      errorMessages={[{
-        type: EventType.REQUEST_ERROR,
-        text: 'Dette er en feilmelding',
-      }]}
     />);
     const header = wrapper.find(HeaderWithErrorPanel);
     expect(header.prop('errorMessages')).is.eql([{

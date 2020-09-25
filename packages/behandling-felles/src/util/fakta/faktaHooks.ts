@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { Dispatch } from 'redux';
 
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
 
 import {
@@ -56,14 +54,14 @@ const useCallbacks = (
   oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
   valgtProsessSteg: string,
   overstyringApCodes: string[],
-  behandlingApi: {[name: string]: EndpointOperations},
-  dispatch: Dispatch,
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
 ) => {
   const velgFaktaPanelCallback = useCallback((index) => oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, faktaPaneler[index].getUrlKode()),
     [behandling.versjon, valgtProsessSteg]);
 
-  const bekreftAksjonspunktCallback = useCallback(getBekreftAksjonspunktCallback(dispatch, fagsak, behandling,
-    oppdaterProsessStegOgFaktaPanelIUrl, overstyringApCodes, behandlingApi),
+  const bekreftAksjonspunktCallback = useCallback(getBekreftAksjonspunktCallback(fagsak, behandling,
+    oppdaterProsessStegOgFaktaPanelIUrl, overstyringApCodes, lagreAksjonspunkter, lagreOverstyrteAksjonspunkter),
   [behandling.versjon]);
 
   return [velgFaktaPanelCallback, bekreftAksjonspunktCallback];

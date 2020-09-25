@@ -6,7 +6,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import svpBehandlingApi from '../../data/svpBehandlingApi';
+import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
 const harPeriodeMedUtbetaling = (perioder) => {
   const periode = perioder.find((p) => p.dagsats > 0);
@@ -31,7 +31,7 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    svpBehandlingApi.FAMILIEHENDELSE,
+    SvpBehandlingApiKeys.FAMILIEHENDELSE,
   ]
 
   getOverstyrVisningAvKomponent = () => true

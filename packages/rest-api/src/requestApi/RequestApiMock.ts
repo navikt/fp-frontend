@@ -26,11 +26,15 @@ class RequestApiMock extends AbstractRequestApi {
     return data;
   }
 
-  public cancelRequest = () => undefined;
-
   public hasPath = (endpointName: string) => !this.missingPaths.some((p) => p === endpointName);
 
-  public injectPaths = () => {}
+  public setLinks = () => {}
+
+  public setRequestPendingHandler = () => {}
+
+  public setAddErrorMessageHandler = () => {};
+
+  public resetCache = () => {}
 
   public isMock = () => true;
 

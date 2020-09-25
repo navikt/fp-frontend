@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { readOnlyUtils, FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import fpBehandlingApi from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.MEDLEMSKAPSVILKARET
@@ -22,7 +22,7 @@ class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
     aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
   ]
 
-  getEndepunkter = () => [fpBehandlingApi.MEDLEMSKAP]
+  getEndepunkter = () => [FpBehandlingApiKeys.MEDLEMSKAP]
 
   getKomponent = (props) => <MedlemskapFaktaIndex {...props} />
 

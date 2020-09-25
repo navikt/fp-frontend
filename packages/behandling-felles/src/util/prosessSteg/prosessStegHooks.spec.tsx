@@ -2,10 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
-import { Dispatch } from 'redux';
 import { StepType } from '@navikt/nap-process-menu/dist/Step';
 
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -199,25 +197,19 @@ describe('<prosessStegHooks>', () => {
       toggleOverstyring, kanOverstyreAccess, []);
     const utledetPanel = new ProsessStegUtledet(stegDef, [utledetDelPanel]);
 
-    const dispatch = () => Promise.resolve();
-    const makeRestApiRequest = sinon.spy();
+    const lagreAksjonspunkter = sinon.stub();
+    lagreAksjonspunkter.returns(Promise.resolve());
     const lagringSideEffectsCallback = () => () => {};
-    const behandlingApi: Partial<{[name: string]: Partial<EndpointOperations>}> = {
-      SAVE_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-    };
 
     const wrapper = testHook(() => prosessStegHooks.useBekreftAksjonspunkt(fagsak, behandling as Behandling,
-      behandlingApi as {[name: string]: EndpointOperations},
-      lagringSideEffectsCallback, dispatch as Dispatch, utledetPanel));
+      lagringSideEffectsCallback, lagreAksjonspunkter, undefined, utledetPanel));
     const bekreftAksjonspunkt = wrapper.find('div').prop('data-values') as (number) => void;
 
     bekreftAksjonspunkt([{ kode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU }]);
 
-    const requestKall = makeRestApiRequest.getCalls();
+    const requestKall = lagreAksjonspunkter.getCalls();
     expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(1);
+    expect(requestKall[0].args).to.have.length(2);
     expect(requestKall[0].args[0]).to.eql({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,

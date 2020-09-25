@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import esBehandlingApi from '../../data/esBehandlingApi';
+import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
 
 class SakenFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.SAKEN
@@ -14,7 +14,7 @@ class SakenFaktaPanelDef extends FaktaPanelDef {
 
   getAksjonspunktKoder = () => [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK, aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE]
 
-  getEndepunkter = () => [esBehandlingApi.UTLAND_DOK_STATUS]
+  getEndepunkter = () => [EsBehandlingApiKeys.UTLAND_DOK_STATUS]
 
   getKomponent = (props) => <SakenFaktaIndex {...props} />
 

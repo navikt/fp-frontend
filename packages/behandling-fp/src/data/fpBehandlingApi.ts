@@ -1,48 +1,47 @@
-import {
-  reducerRegistry, setRequestPollingMessage, ReduxEvents, ReduxRestApiBuilder, RestApiConfigBuilder,
-} from '@fpsak-frontend/rest-api-redux';
-import errorHandler from '@fpsak-frontend/error-api-redux';
+import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
-export const FpBehandlingApiKeys = {
-  BEHANDLING_FP: 'BEHANDLING_FP',
-  UPDATE_ON_HOLD: 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT: 'SAVE_AKSJONSPUNKT',
-  SAVE_OVERSTYRT_AKSJONSPUNKT: 'SAVE_OVERSTYRT_AKSJONSPUNKT',
-  PREVIEW_MESSAGE: 'PREVIEW_MESSAGE',
-  PREVIEW_TILBAKEKREVING_MESSAGE: 'PREVIEW_TILBAKEKREVING_MESSAGE',
-  STONADSKONTOER_GITT_UTTAKSPERIODER: 'STONADSKONTOER_GITT_UTTAKSPERIODER',
-  AKSJONSPUNKTER: 'AKSJONSPUNKTER',
-  VILKAR: 'VILKAR',
-  PERSONOPPLYSNINGER: 'PERSONOPPLYSNINGER',
-  SIMULERING_RESULTAT: 'SIMULERING_RESULTAT',
-  TILBAKEKREVINGVALG: 'TILBAKEKREVINGVALG',
-  BEREGNINGRESULTAT_FORELDREPENGER: 'BEREGNINGRESULTAT_FORELDREPENGER',
-  BEREGNINGSGRUNNLAG: 'BEREGNINGSGRUNNLAG',
-  FAMILIEHENDELSE: 'FAMILIEHENDELSE',
-  SOKNAD: 'SOKNAD',
-  SOKNAD_ORIGINAL_BEHANDLING: 'SOKNAD_ORIGINAL_BEHANDLING',
-  FAMILIEHENDELSE_ORIGINAL_BEHANDLING: 'FAMILIEHENDELSE_ORIGINAL_BEHANDLING',
-  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: 'BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING',
-  MEDLEMSKAP: 'MEDLEMSKAP',
-  UTTAK_PERIODE_GRENSE: 'UTTAK_PERIODE_GRENSE',
-  INNTEKT_ARBEID_YTELSE: 'INNTEKT_ARBEID_YTELSE',
-  VERGE: 'VERGE',
-  YTELSEFORDELING: 'YTELSEFORDELING',
-  OPPTJENING: 'OPPTJENING',
-  SEND_VARSEL_OM_REVURDERING: 'SEND_VARSEL_OM_REVURDERING',
-  FAKTA_ARBEIDSFORHOLD: 'FAKTA_ARBEIDSFORHOLD',
-  UTTAKSRESULTAT_PERIODER: 'UTTAKSRESULTAT_PERIODER',
-  UTTAK_STONADSKONTOER: 'UTTAK_STONADSKONTOER',
-  UTTAK_KONTROLLER_FAKTA_PERIODER: 'UTTAK_KONTROLLER_FAKTA_PERIODER',
-  BEHANDLING_NY_BEHANDLENDE_ENHET: 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING: 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING: 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD: 'BEHANDLING_ON_HOLD',
-  OPEN_BEHANDLING_FOR_CHANGES: 'OPEN_BEHANDLING_FOR_CHANGES',
-  VERGE_OPPRETT: 'VERGE_OPPRETT',
-  VERGE_FJERN: 'VERGE_FJERN',
-  UTLAND_DOK_STATUS: 'UTLAND_DOK_STATUS',
-};
+// eslint-disable-next-line no-shadow
+export enum FpBehandlingApiKeys {
+  BEHANDLING_FP = 'BEHANDLING_FP',
+  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
+  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
+  SAVE_OVERSTYRT_AKSJONSPUNKT = 'SAVE_OVERSTYRT_AKSJONSPUNKT',
+  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
+  PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
+  STONADSKONTOER_GITT_UTTAKSPERIODER = 'STONADSKONTOER_GITT_UTTAKSPERIODER',
+  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
+  VILKAR = 'VILKAR',
+  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
+  SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
+  TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
+  BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
+  BEREGNINGSGRUNNLAG = 'BEREGNINGSGRUNNLAG',
+  FAMILIEHENDELSE = 'FAMILIEHENDELSE',
+  SOKNAD = 'SOKNAD',
+  SOKNAD_ORIGINAL_BEHANDLING = 'SOKNAD_ORIGINAL_BEHANDLING',
+  FAMILIEHENDELSE_ORIGINAL_BEHANDLING = 'FAMILIEHENDELSE_ORIGINAL_BEHANDLING',
+  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING = 'BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING',
+  MEDLEMSKAP = 'MEDLEMSKAP',
+  UTTAK_PERIODE_GRENSE = 'UTTAK_PERIODE_GRENSE',
+  INNTEKT_ARBEID_YTELSE = 'INNTEKT_ARBEID_YTELSE',
+  VERGE = 'VERGE',
+  YTELSEFORDELING = 'YTELSEFORDELING',
+  OPPTJENING = 'OPPTJENING',
+  SEND_VARSEL_OM_REVURDERING = 'SEND_VARSEL_OM_REVURDERING',
+  FAKTA_ARBEIDSFORHOLD = 'FAKTA_ARBEIDSFORHOLD',
+  UTTAKSRESULTAT_PERIODER = 'UTTAKSRESULTAT_PERIODER',
+  UTTAK_STONADSKONTOER = 'UTTAK_STONADSKONTOER',
+  UTTAK_KONTROLLER_FAKTA_PERIODER = 'UTTAK_KONTROLLER_FAKTA_PERIODER',
+  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
+  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
+  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
+  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
+  OPEN_BEHANDLING_FOR_CHANGES = 'OPEN_BEHANDLING_FOR_CHANGES',
+  VERGE_OPPRETT = 'VERGE_OPPRETT',
+  VERGE_FJERN = 'VERGE_FJERN',
+  UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
+}
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', FpBehandlingApiKeys.BEHANDLING_FP)
@@ -77,32 +76,23 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)
   .withRel('bytt-behandlende-enhet', FpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)
   .withRel('henlegg-behandling', FpBehandlingApiKeys.HENLEGG_BEHANDLING)
-  .withRel('gjenoppta-behandling', FpBehandlingApiKeys.RESUME_BEHANDLING, { saveResponseIn: FpBehandlingApiKeys.BEHANDLING_FP })
+  .withRel('gjenoppta-behandling', FpBehandlingApiKeys.RESUME_BEHANDLING)
   .withRel('sett-behandling-pa-vent', FpBehandlingApiKeys.BEHANDLING_ON_HOLD)
   .withRel('endre-pa-vent', FpBehandlingApiKeys.UPDATE_ON_HOLD)
-  .withRel('opne-for-endringer', FpBehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES, { saveResponseIn: FpBehandlingApiKeys.BEHANDLING_FP })
-  .withRel('lagre-aksjonspunkter', FpBehandlingApiKeys.SAVE_AKSJONSPUNKT, { saveResponseIn: FpBehandlingApiKeys.BEHANDLING_FP })
-  .withRel('lagre-overstyr-aksjonspunkter', FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT, { saveResponseIn: FpBehandlingApiKeys.BEHANDLING_FP })
-  .withRel('opprett-verge', FpBehandlingApiKeys.VERGE_OPPRETT, { saveResponseIn: FpBehandlingApiKeys.BEHANDLING_FP })
-  .withRel('fjern-verge', FpBehandlingApiKeys.VERGE_FJERN, { saveResponseIn: FpBehandlingApiKeys.BEHANDLING_FP })
+  .withRel('opne-for-endringer', FpBehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES)
+  .withRel('lagre-aksjonspunkter', FpBehandlingApiKeys.SAVE_AKSJONSPUNKT)
+  .withRel('lagre-overstyr-aksjonspunkter', FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT)
+  .withRel('opprett-verge', FpBehandlingApiKeys.VERGE_OPPRETT)
+  .withRel('fjern-verge', FpBehandlingApiKeys.VERGE_FJERN)
 
   /* FPTILBAKE */
-  .withPostAndOpenBlob('/fptilbake/api/dokument/forhandsvis-varselbrev', FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE)
+  .withPost('/fptilbake/api/dokument/forhandsvis-varselbrev', FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE, { isResponseBlob: true })
 
   /* FPFORMIDLING */
-  .withPostAndOpenBlob('/fpformidling/api/brev/forhaandsvis', FpBehandlingApiKeys.PREVIEW_MESSAGE)
+  .withPost('/fpformidling/api/brev/forhaandsvis', FpBehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
 
   .build();
 
-const reducerName = 'dataContextFPBehandling';
+export const requestFpApi = createRequestApi(endpoints);
 
-export const reduxRestApi = new ReduxRestApiBuilder(endpoints, reducerName)
-  .withReduxEvents(new ReduxEvents()
-    .withErrorActionCreator(errorHandler.getErrorActionCreator())
-    .withPollingMessageActionCreator(setRequestPollingMessage))
-  .build();
-
-reducerRegistry.register(reducerName, reduxRestApi.getDataReducer());
-
-const fpBehandlingApi = reduxRestApi.getEndpointApi();
-export default fpBehandlingApi;
+export const restApiFpHooks = RestApiHooks.initHooks(requestFpApi);
