@@ -12,9 +12,11 @@ describe('<AktsomhetSarligeGrunnerFormPanel>', () => {
     const sarligGrunnTyper = [{
       kode: sarligGrunn.GRAD_AV_UAKTSOMHET,
       navn: 'grad av uaktsomhet',
+      kodeverk: '',
     }, {
       kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
       navn: 'navs feil',
+      kodeverk: '',
     }];
     const wrapper = shallow(<AktsomhetSarligeGrunnerFormPanel
       harGrunnerTilReduksjon
@@ -33,9 +35,11 @@ describe('<AktsomhetSarligeGrunnerFormPanel>', () => {
     const sarligGrunnTyper = [{
       kode: sarligGrunn.ANNET,
       navn: 'annet',
+      kodeverk: '',
     }, {
       kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
       navn: 'navs feil',
+      kodeverk: '',
     }];
     const wrapper = shallow(<AktsomhetSarligeGrunnerFormPanel
       harGrunnerTilReduksjon

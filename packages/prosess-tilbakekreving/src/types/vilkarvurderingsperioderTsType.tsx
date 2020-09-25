@@ -8,7 +8,10 @@ export type Vilkarvurderingsperiode = {
   hendelseType: Kodeverk;
   hendelseUndertype?: Kodeverk;
   oppfyltValg?: Kodeverk;
-  redusertBeloper: {}[];
+  redusertBeloper?: {
+    erTrekk: boolean;
+    belop: number;
+  }[];
   ytelser: {
     aktivitet: string;
     belop: number;

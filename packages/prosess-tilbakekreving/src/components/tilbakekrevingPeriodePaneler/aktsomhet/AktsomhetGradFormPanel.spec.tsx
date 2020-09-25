@@ -12,9 +12,11 @@ describe('<AktsomhetGradFormPanel>', () => {
   const sarligGrunnTyper = [{
     kode: sarligGrunn.GRAD_AV_UAKTSOMHET,
     navn: 'grad av uaktsomhet',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
     navn: 'navs feil',
+    kodeverk: '',
   }];
 
   it('skal vise panel for å forsett når denne radio-knappen er valgt', () => {

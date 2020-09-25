@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { RadioOption } from '@fpsak-frontend/form';
 
 import sarligGrunn from '../../../kodeverk/sarligGrunn';
-import aktsomhet from '../../../kodeverk/aktsomhet';
+import Aktsomhet from '../../../kodeverk/aktsomhet';
 import AktsomhetGradFormPanel from './AktsomhetGradFormPanel';
 
 import AktsomhetFormPanel from './AktsomhetFormPanel';
@@ -17,19 +17,24 @@ describe('<AktsomhetFormPanel>', () => {
   const sarligGrunnTyper = [{
     kode: sarligGrunn.GRAD_AV_UAKTSOMHET,
     navn: 'grad av uaktsomhet',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
     navn: 'navs feil',
+    kodeverk: '',
   }];
   const aktsomhetTyper = [{
-    kode: aktsomhet.GROVT_UAKTSOM,
+    kode: Aktsomhet.GROVT_UAKTSOM,
     navn: 'grovt',
+    kodeverk: '',
   }, {
-    kode: aktsomhet.SIMPEL_UAKTSOM,
+    kode: Aktsomhet.SIMPEL_UAKTSOM,
     navn: 'simpel',
+    kodeverk: '',
   }, {
-    kode: aktsomhet.FORSETT,
+    kode: Aktsomhet.FORSETT,
     navn: 'forsett',
+    kodeverk: '',
   }];
 
   it('skal vise radioknapp for hver aksomhetstype', () => {
@@ -56,7 +61,7 @@ describe('<AktsomhetFormPanel>', () => {
       readOnly={false}
       resetFields={sinon.spy()}
       resetAnnetTextField={sinon.spy()}
-      handletUaktsomhetGrad={aktsomhet.GROVT_UAKTSOM}
+      handletUaktsomhetGrad={Aktsomhet.GROVT_UAKTSOM}
       harGrunnerTilReduksjon
       erSerligGrunnAnnetValgt={false}
       aktsomhetTyper={aktsomhetTyper}
@@ -144,20 +149,18 @@ describe('<AktsomhetFormPanel>', () => {
 
   it('skal lage form-initialvalues fra struktur når en har aktsomhetsgrad FORSETT', () => {
     const vilkarResultatInfo = {
-      begrunnelse: 'test',
-      aktsomhet: { kode: aktsomhet.FORSETT },
+      aktsomhet: { kode: Aktsomhet.FORSETT, kodeverk: '' },
     };
     const initialValues = AktsomhetFormPanel.buildInitalValues(vilkarResultatInfo);
 
     expect(initialValues).to.eql({
-      handletUaktsomhetGrad: aktsomhet.FORSETT,
+      handletUaktsomhetGrad: Aktsomhet.FORSETT,
     });
   });
 
   it('skal lage form-initialvalues fra struktur når en har aktsomhetsgrad FORSETT', () => {
     const vilkarResultatInfo = {
-      begrunnelse: 'test',
-      aktsomhet: { kode: aktsomhet.GROVT_UAKTSOM },
+      aktsomhet: { kode: Aktsomhet.GROVT_UAKTSOM, kodeverk: '' },
       aktsomhetInfo: {
         harGrunnerTilReduksjon: true,
         ileggRenter: true,
@@ -166,13 +169,14 @@ describe('<AktsomhetFormPanel>', () => {
         annetBegrunnelse: 'test',
         tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: true,
         sarligGrunner: sarligGrunnTyper,
+        sarligGrunnerBegrunnelse: '',
       },
     };
     const initialValues = AktsomhetFormPanel.buildInitalValues(vilkarResultatInfo);
 
     expect(initialValues).to.eql({
-      handletUaktsomhetGrad: aktsomhet.GROVT_UAKTSOM,
-      [aktsomhet.GROVT_UAKTSOM]: {
+      handletUaktsomhetGrad: Aktsomhet.GROVT_UAKTSOM,
+      [Aktsomhet.GROVT_UAKTSOM]: {
         [sarligGrunn.GRAD_AV_UAKTSOMHET]: true,
         [sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL]: true,
         harGrunnerTilReduksjon: true,
@@ -190,7 +194,7 @@ describe('<AktsomhetFormPanel>', () => {
   it('skal lage form-initialvalues fra struktur når en har andel som skal tilbakekreves som er ulik standardverdier', () => {
     const vilkarResultatInfo = {
       begrunnelse: 'test',
-      aktsomhet: { kode: aktsomhet.GROVT_UAKTSOM },
+      aktsomhet: { kode: Aktsomhet.GROVT_UAKTSOM },
       aktsomhetInfo: {
         harGrunnerTilReduksjon: true,
         ileggRenter: true,
@@ -205,8 +209,8 @@ describe('<AktsomhetFormPanel>', () => {
     const initialValues = AktsomhetFormPanel.buildInitalValues(vilkarResultatInfo);
 
     expect(initialValues).to.eql({
-      handletUaktsomhetGrad: aktsomhet.GROVT_UAKTSOM,
-      [aktsomhet.GROVT_UAKTSOM]: {
+      handletUaktsomhetGrad: Aktsomhet.GROVT_UAKTSOM,
+      [Aktsomhet.GROVT_UAKTSOM]: {
         [sarligGrunn.GRAD_AV_UAKTSOMHET]: true,
         [sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL]: true,
         harGrunnerTilReduksjon: true,
@@ -223,7 +227,7 @@ describe('<AktsomhetFormPanel>', () => {
 
   it('skal klargjøre data for lagring når en har FORSETT', () => {
     const info = {
-      handletUaktsomhetGrad: aktsomhet.FORSETT,
+      handletUaktsomhetGrad: Aktsomhet.FORSETT,
       aktsomhetBegrunnelse: 'test',
     };
     const vurderingBegrunnelse = 'test';
@@ -231,7 +235,7 @@ describe('<AktsomhetFormPanel>', () => {
 
     expect(transformertData).to.eql({
       '@type': 'annet',
-      aktsomhet: aktsomhet.FORSETT,
+      aktsomhet: Aktsomhet.FORSETT,
       aktsomhetInfo: null,
       begrunnelse: 'test',
     });
@@ -239,9 +243,9 @@ describe('<AktsomhetFormPanel>', () => {
 
   it('skal klargjøre data for lagring når en har vært uaktsom', () => {
     const info = {
-      handletUaktsomhetGrad: aktsomhet.GROVT_UAKTSOM,
+      handletUaktsomhetGrad: Aktsomhet.GROVT_UAKTSOM,
       aktsomhetBegrunnelse: 'test',
-      [aktsomhet.GROVT_UAKTSOM]: {
+      [Aktsomhet.GROVT_UAKTSOM]: {
         [sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL]: true,
         harGrunnerTilReduksjon: true,
         skalDetTilleggesRenter: true,
@@ -257,7 +261,7 @@ describe('<AktsomhetFormPanel>', () => {
 
     expect(transformertData).to.eql({
       '@type': 'annet',
-      aktsomhet: aktsomhet.GROVT_UAKTSOM,
+      aktsomhet: Aktsomhet.GROVT_UAKTSOM,
       aktsomhetInfo: {
         harGrunnerTilReduksjon: true,
         ileggRenter: undefined,

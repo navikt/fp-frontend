@@ -36,7 +36,7 @@ interface AktsomhetData {
   tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: boolean;
 }
 
-interface InitialValuesAktsomhetForm {
+export interface InitialValuesAktsomhetForm {
   handletUaktsomhetGrad: Aktsomhet;
   [Aktsomhet.FORSETT]?: AktsomhetData;
   [Aktsomhet.GROVT_UAKTSOM]?: AktsomhetData;
@@ -53,7 +53,6 @@ interface TransformedValuesAktsomhetForm {
 interface OwnProps {
   readOnly: boolean;
   resetFields: (...args: any[]) => any;
-  resetAnnetTextField: (...args: any[]) => any;
   harGrunnerTilReduksjon?: boolean;
   erSerligGrunnAnnetValgt?: boolean;
   erValgtResultatTypeForstoBurdeForstaatt?: boolean;
@@ -67,15 +66,14 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitalValues?: (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo: AktsomhetInfo }) => InitialValuesAktsomhetForm,
-  transformValues?: (info: { handletUaktsomhetGrad: string }, sarligGrunnTyper: KodeverkMedNavn[], vurderingBegrunnelse: string) => 
+  buildInitalValues?: (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo?: AktsomhetInfo }) => InitialValuesAktsomhetForm,
+  transformValues?: (info: { handletUaktsomhetGrad: string }, sarligGrunnTyper: KodeverkMedNavn[], vurderingBegrunnelse: string) =>
     TransformedValuesAktsomhetForm,
 }
 
 const AktsomhetFormPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   resetFields,
-  resetAnnetTextField,
   handletUaktsomhetGrad,
   harGrunnerTilReduksjon,
   erSerligGrunnAnnetValgt,
@@ -114,7 +112,6 @@ const AktsomhetFormPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           handletUaktsomhetGrad={handletUaktsomhetGrad}
           erSerligGrunnAnnetValgt={erSerligGrunnAnnetValgt}
           erValgtResultatTypeForstoBurdeForstaatt={erValgtResultatTypeForstoBurdeForstaatt}
-          resetAnnetTextField={resetAnnetTextField}
           sarligGrunnTyper={sarligGrunnTyper}
           harMerEnnEnYtelse={antallYtelser > 1}
           feilutbetalingBelop={feilutbetalingBelop}
@@ -172,7 +169,7 @@ AktsomhetFormPanel.transformValues = (info: { handletUaktsomhetGrad: string }, s
   };
 };
 
-AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo: AktsomhetInfo }): InitialValuesAktsomhetForm => {
+AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo?: AktsomhetInfo }): InitialValuesAktsomhetForm => {
   const { aktsomhet, aktsomhetInfo } = vilkarResultatInfo;
   const andelSomTilbakekreves = aktsomhetInfo && aktsomhetInfo.andelTilbakekreves ? `${aktsomhetInfo.andelTilbakekreves}` : undefined;
   const aktsomhetData = aktsomhetInfo ? {

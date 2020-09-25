@@ -20,16 +20,18 @@ const parseCurrencyInput = (input: any) => {
   return Number.isNaN(parsedValue) ? '' : parsedValue;
 };
 
+export interface InitialValuesGodTroForm {
+  erBelopetIBehold: boolean;
+  tilbakekrevdBelop: number;
+}
+
 interface OwnProps {
   readOnly: boolean;
   erBelopetIBehold?: boolean;
 }
 
 interface StaticFunctions {
-  buildIntialValues?: (info: { erBelopetIBehold: boolean; tilbakekrevesBelop: number }) => {
-    erBelopetIBehold: boolean;
-    tilbakekrevdBelop: number;
-  },
+  buildIntialValues?: (info: { erBelopetIBehold: boolean; tilbakekrevesBelop: number }) => InitialValuesGodTroForm,
   transformValues?: (info: { erBelopetIBehold: boolean; tilbakekrevdBelop: number }, vurderingBegrunnelse: string) => {
     '@type': string;
     begrunnelse: string;

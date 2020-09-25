@@ -312,8 +312,8 @@ const finnOriginalPeriode = (lagretPeriode: VilkarsVurdertPeriode, perioder: Vil
   .find((periode: Vilkarvurderingsperiode) => !moment(lagretPeriode.fom).isBefore(moment(periode.fom))
   && !moment(lagretPeriode.tom).isAfter(moment(periode.tom)));
 
-const erIkkeLagret = (periode: Vilkarvurderingsperiode, lagredePerioder: any) => lagredePerioder
-  .every((lagretPeriode: any) => {
+const erIkkeLagret = (periode: Vilkarvurderingsperiode, lagredePerioder: { tom: string; fom: string }[]) => lagredePerioder
+  .every((lagretPeriode) => {
     const isOverlapping = moment(periode.fom).isSameOrBefore(moment(lagretPeriode.tom)) && moment(lagretPeriode.fom).isSameOrBefore(moment(periode.tom));
     return !isOverlapping;
   });
@@ -331,11 +331,21 @@ interface PureOwnProps {
   rettsgebyr: Vilkarvurderingsperioder['rettsgebyr'];
 }
 
+type CustomPeriode = {
+  fom: string;
+  tom: string;
+  erTotalBelopUnder4Rettsgebyr: boolean;
+} & Vilkarvurderingsperiode
+
+type CustomPerioder = {
+  perioder: CustomPeriode[];
+}
+
 export const slaSammenOriginaleOgLagredePeriode = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.perioder,
   (_state, ownProps: PureOwnProps) => ownProps.vilkarvurdering,
   (_state, ownProps: PureOwnProps) => ownProps.rettsgebyr,
-], (perioder, vilkarsvurdering, rettsgebyr) => {
+], (perioder, vilkarsvurdering, rettsgebyr): CustomPerioder => {
   const totalbelop = perioder.reduce((acc: number, periode: Vilkarvurderingsperiode) => acc + periode.feilutbetaling, 0);
   const erTotalBelopUnder4Rettsgebyr = totalbelop < (rettsgebyr * 4);
   const lagredeVilkarsvurdertePerioder = vilkarsvurdering.vilkarsVurdertePerioder;
@@ -364,7 +374,7 @@ export const buildInitialValues = createSelector([
   slaSammenOriginaleOgLagredePeriode,
   (_state, ownProps: PureOwnProps) => ownProps.perioderForeldelse],
 (perioder, foreldelsePerioder): { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] } => ({
-  vilkarsVurdertePerioder: perioder.perioder.map((p: any) => ({
+  vilkarsVurdertePerioder: perioder.perioder.map((p: CustomPeriode) => ({
     ...TilbakekrevingPeriodeForm.buildInitialValues(p, foreldelsePerioder),
     fom: p.fom,
     tom: p.tom,
@@ -374,7 +384,7 @@ export const buildInitialValues = createSelector([
 const settOppPeriodeDataForDetailForm = createSelector([
   slaSammenOriginaleOgLagredePeriode,
   (state, ownProps: PureOwnProps) => behandlingFormValueSelector(TILBAKEKREVING_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-    'vilkarsVurdertePerioder')], (perioder, perioderFormState: CustomVilkarsVurdertePeriode[]): DataForDetailForm[] => {
+    'vilkarsVurdertePerioder')], (perioder: CustomPerioder, perioderFormState: CustomVilkarsVurdertePeriode[]): DataForDetailForm[] => {
   if (!perioder || !perioderFormState) {
     return undefined;
   }
@@ -422,20 +432,20 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   };
 };
 
-const mapDispatchToProps = (dispatch: DispatchProps) => ({
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,
   }, dispatch),
 });
 
-const validateForm = (values: any) => {
+const validateForm = (values: { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] }) => {
   const errors = {};
   if (!values.vilkarsVurdertePerioder) {
     return errors;
   }
   const perioder = values.vilkarsVurdertePerioder;
-  const antallPerioderMedAksjonspunkt = perioder.reduce((sum: any, periode: any) => (!periode.erForeldet ? sum + 1 : sum), 0);
+  const antallPerioderMedAksjonspunkt = perioder.reduce((sum: number, periode) => (!periode.erForeldet ? sum + 1 : sum), 0);
   if (antallPerioderMedAksjonspunkt < 2) {
     return errors;
   }

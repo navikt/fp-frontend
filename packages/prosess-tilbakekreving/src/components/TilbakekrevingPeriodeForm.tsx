@@ -21,15 +21,15 @@ import {
 } from '@fpsak-frontend/shared-components';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { ForeldelsePerioder } from '@fpsak-frontend/prosess-foreldelse/src/types/foreldelsePerioderTsType';
+import ForeldelsePerioderWrapper from '@fpsak-frontend/prosess-foreldelse/src/types/foreldelsePerioderTsType';
 
 import sarligGrunn from '../kodeverk/sarligGrunn';
 import Aktsomhet, { AKTSOMHET_REKKEFØLGE } from '../kodeverk/aktsomhet';
 import VilkarResultat from '../kodeverk/vilkarResultat';
 import TilbakekrevingAktivitetTabell from './tilbakekrevingPeriodePaneler/TilbakekrevingAktivitetTabell';
 import ForeldetFormPanel from './tilbakekrevingPeriodePaneler/ForeldetFormPanel';
-import BelopetMottattIGodTroFormPanel from './tilbakekrevingPeriodePaneler/godTro/BelopetMottattIGodTroFormPanel';
-import AktsomhetFormPanel from './tilbakekrevingPeriodePaneler/aktsomhet/AktsomhetFormPanel';
+import BelopetMottattIGodTroFormPanel, { InitialValuesGodTroForm } from './tilbakekrevingPeriodePaneler/godTro/BelopetMottattIGodTroFormPanel';
+import AktsomhetFormPanel, { InitialValuesAktsomhetForm } from './tilbakekrevingPeriodePaneler/aktsomhet/AktsomhetFormPanel';
 import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimelineData';
 import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
 
@@ -41,13 +41,22 @@ const maxLength1500 = maxLength(1500);
 export const TILBAKEKREVING_PERIODE_FORM_NAME = 'TilbakekrevingPeriodeForm';
 
 export type DataForDetailForm = {
-  redusertBeloper: {}[];
-  ytelser: {};
+  redusertBeloper?: {
+    erTrekk: boolean;
+    belop: number;
+  }[];
+  ytelser: {
+    aktivitet: string;
+    belop: number;
+  }[];
   feilutbetaling: number;
   erTotalBelopUnder4Rettsgebyr: boolean;
   fom: string;
   tom: string;
-  årsak: Kodeverk;
+  årsak: {
+    hendelseType: Kodeverk;
+    hendelseUndertype?: Kodeverk;
+  };
   begrunnelse: string;
   erForeldet: boolean;
 }
@@ -65,8 +74,8 @@ interface OwnProps {
   oppdaterSplittedePerioder: (...args: any[]) => any;
   antallPerioderMedAksjonspunkt: number;
   andelSomTilbakekreves?: string;
-  vilkarResultatTyper?: {}[];
-  aktsomhetTyper?: {}[];
+  vilkarResultatTyper?: KodeverkMedNavn[];
+  aktsomhetTyper?: KodeverkMedNavn[];
   sarligGrunnTyper?: KodeverkMedNavn[];
   reduserteBelop?: {
     erTrekk: boolean;
@@ -75,14 +84,23 @@ interface OwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   beregnBelop: (...args: any[]) => any;
-  vilkarsVurdertePerioder: {}[];
+  vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[];
+  valgtVilkarResultatType?: string;
+  handletUaktsomhetGrad: Aktsomhet;
+  harGrunnerTilReduksjon: boolean;
+  erSerligGrunnAnnetValgt: boolean;
+}
+
+interface DispatchProps {
+  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, ...fields: string[]) => void;
+  change: (form: string, field: string, value: any, touch?: boolean, persistentSubmitErrors?: boolean) => void;
 }
 
 interface OwnState {
   showModal: boolean;
 }
 
-export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedComponentProps & InjectedFormProps, OwnState> {
+export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & DispatchProps & WrappedComponentProps & InjectedFormProps, OwnState> {
   state = { showModal: false }
 
   static defaultProps = {
@@ -124,6 +142,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedC
         showModal: !showModal,
       }));
     } else {
+      // @ts-ignore Kva med parametere?
       formProps.handleSubmit();
     }
   };
@@ -138,14 +157,15 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedC
       ...state,
       showModal: !showModal,
     }));
+    // @ts-ignore Kva med parametere?
     formProps.handleSubmit();
   };
 
-  onEndrePeriodeForKopi = (event: any, vurdertePerioder: any) => {
+  onEndrePeriodeForKopi = (event: any, vurdertePerioder: CustomVilkarsVurdertePeriode[]) => {
     const { change: changeValue } = this.props;
 
     const fomTom = event.target.value.split('_');
-    const kopierDenne = vurdertePerioder.find((per: any) => per.fom === fomTom[0] && per.tom === fomTom[1]);
+    const kopierDenne = vurdertePerioder.find((per) => per.fom === fomTom[0] && per.tom === fomTom[1]);
     const vilkårResultatType = kopierDenne.valgtVilkarResultatType;
     const resultatType = kopierDenne[vilkårResultatType];
 
@@ -162,10 +182,10 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedC
       valgtVilkarResultatType,
       handletUaktsomhetGrad,
       harGrunnerTilReduksjon,
+      erSerligGrunnAnnetValgt,
       skjulPeriode,
       readOnly,
       erBelopetIBehold,
-      erSerligGrunnAnnetValgt,
       vilkarResultatTyper,
       aktsomhetTyper,
       sarligGrunnTyper,
@@ -205,7 +225,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedC
                 values={{ belop: formatCurrencyNoKr(belop.belop), b: (chunks: any) => <b>{chunks}</b> }}
               />
             </Normaltekst>
-            <VerticalSpacer eigthPx />
+            <VerticalSpacer eightPx />
           </>
         ))}
         <TilbakekrevingAktivitetTabell ytelser={data.ytelser} />
@@ -311,7 +331,6 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedC
                           readOnly={readOnly}
                           handletUaktsomhetGrad={handletUaktsomhetGrad}
                           resetFields={this.resetFields}
-                          resetAnnetTextField={this.resetAnnetTextField}
                           erSerligGrunnAnnetValgt={erSerligGrunnAnnetValgt}
                           erValgtResultatTypeForstoBurdeForstaatt={valgtVilkarResultatType === VilkarResultat.FORSTO_BURDE_FORSTAATT}
                           aktsomhetTyper={aktsomhetTyper}
@@ -354,14 +373,14 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & WrappedC
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   ...bindActionCreators({
     clearFields,
     change,
   }, dispatch),
 });
 
-const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: any) => {
+const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataForDetailForm) => {
   let errors = {};
   if (!values) {
     return errors;
@@ -369,7 +388,7 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: any) =
   const vilkarResultatInfo = values[values.valgtVilkarResultatType];
   if (vilkarResultatInfo && vilkarResultatInfo.handletUaktsomhetGrad && vilkarResultatInfo.handletUaktsomhetGrad !== Aktsomhet.FORSETT) {
     const aktsomhetInfo = vilkarResultatInfo[vilkarResultatInfo.handletUaktsomhetGrad];
-    if (aktsomhetInfo && !sarligGrunnTyper.some((type: any) => aktsomhetInfo[type.kode])) {
+    if (aktsomhetInfo && !sarligGrunnTyper.some((type: KodeverkMedNavn) => aktsomhetInfo[type.kode])) {
       errors = {
         [values.valgtVilkarResultatType]: {
           [vilkarResultatInfo.handletUaktsomhetGrad]: {
@@ -414,9 +433,11 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const sarligGrunnTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.SARLIG_GRUNN];
   const vilkarResultatTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.VILKAR_RESULTAT];
   const aktsomhetTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.AKTSOMHET];
-  const sorterteAktsomhetTyper = AKTSOMHET_REKKEFØLGE.map((a) => aktsomhetTyper.find((el: any) => el.kode === a));
+  const sorterteAktsomhetTyper = AKTSOMHET_REKKEFØLGE.map((a) => aktsomhetTyper.find((el: KodeverkMedNavn) => el.kode === a));
+
   const submitCallback = (values: any) => ownProps.oppdaterPeriode(values);
   const validateForm = (values: any) => validate(values, sarligGrunnTyper, ownProps.data);
+
   return (state: any, oProps: PureOwnProps) => {
     const { behandlingId, behandlingVersjon } = oProps;
     const sel = behandlingFormValueSelector(TILBAKEKREVING_PERIODE_FORM_NAME, behandlingId, behandlingVersjon);
@@ -441,10 +462,10 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   };
 };
 
-const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToProps)(injectIntl(behandlingForm({
+const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
   form: TILBAKEKREVING_PERIODE_FORM_NAME,
   enableReinitialize: true,
-})(TilbakekrevingPeriodeFormImpl)));
+})(injectIntl(TilbakekrevingPeriodeFormImpl)));
 
 interface InitialValuesDetailForm {
   valgtVilkarResultatType: string;
@@ -452,13 +473,18 @@ interface InitialValuesDetailForm {
   erForeldet?: boolean;
   periodenErForeldet?: boolean;
   foreldetBegrunnelse?: string;
+  vurderingBegrunnelse?: string;
+  [VilkarResultat.FEIL_OPPLYSNINGER]?: InitialValuesAktsomhetForm;
+  [VilkarResultat.FORSTO_BURDE_FORSTAATT]?: InitialValuesAktsomhetForm;
+  [VilkarResultat.MANGELFULL_OPPLYSNING]?: InitialValuesAktsomhetForm;
+  [VilkarResultat.GOD_TRO]?: InitialValuesGodTroForm;
 }
 
-TilbakekrevingPeriodeForm.buildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioder[]): InitialValuesDetailForm => {
+TilbakekrevingPeriodeForm.buildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
 
   const vilkarResultatKode = vilkarResultat && vilkarResultat.kode ? vilkarResultat.kode : vilkarResultat;
-  let foreldetData = { erForeldet: false };
+  let foreldetData = { erForeldet: false, periodenErForeldet: undefined, foreldetBegrunnelse: undefined };
   const erForeldet = periode.erForeldet ? periode.erForeldet : periode.foreldet;
   if (erForeldet) {
     const foreldelsePeriode = foreldelsePerioder.perioder.find((p: any) => p.fom === periode.fom && p.tom === periode.tom);

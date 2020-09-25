@@ -14,9 +14,11 @@ describe('<AktsomhetGradUaktsomhetFormPanel>', () => {
   const sarligGrunnTyper = [{
     kode: sarligGrunn.GRAD_AV_UAKTSOMHET,
     navn: 'grad av uaktsomhet',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
     navn: 'navs feil',
+    kodeverk: '',
   }];
 
   it('skal måtte velge om en skal tilbakekreve beløp når totalbeløpet er under 4 rettsgebyr når grad er simpel uaktsom', () => {
