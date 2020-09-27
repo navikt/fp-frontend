@@ -110,7 +110,7 @@ const SKAL_REALITETSBEHANDLES = {
   NEI: false,
 };
 
-const filtrerKlage = (behandlinger = []) => behandlinger.filter((b) => b.type.kode === behandlingType.KLAGE);
+const filtrerKlage = (behandlinger = []) => behandlinger.filter((b) => b.type.kode === behandlingType.KLAGE).filter((b) => !b.behandlingHenlagt);
 
 /**
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling.
