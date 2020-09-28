@@ -29,6 +29,7 @@ type CustomVilkarsVurdertePeriode = {
   vurderingBegrunnelse: string;
   erForeldet: boolean;
   valgtVilkarResultatType: VilkarResultat;
+  feilutbetaling: number;
 } & (ForstoBurdeForstatt | FeilOpplysninger | MangelfullOpplysning | GodTro);
 
 export default CustomVilkarsVurdertePeriode;

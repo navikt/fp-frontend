@@ -4,9 +4,9 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import TilbakekrevingForm from './components/TilbakekrevingForm';
-import { ForeldelsePerioder } from './types/foreldelsePerioderTsType';
-import Vilkarsvurdering from './types/vilkarsvurderingTsType';
-import Vilkarvurderingsperioder from './types/vilkarvurderingsperioderTsType';
+import FeilutbetalingPerioderWrapper from './types/feilutbetalingPerioderTsType';
+import VilkarsvurderingWrapper from './types/vilkarsVurdertePerioderTsType';
+import DetaljerteFeilutbetalingsperioder from './types/detaljerteFeilutbetalingsperioderTsType';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -18,9 +18,9 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  perioderForeldelse: ForeldelsePerioder;
-  vilkarvurderingsperioder: Vilkarvurderingsperioder;
-  vilkarvurdering: Vilkarsvurdering;
+  perioderForeldelse: FeilutbetalingPerioderWrapper;
+  vilkarvurderingsperioder: DetaljerteFeilutbetalingsperioder;
+  vilkarvurdering: VilkarsvurderingWrapper;
   navBrukerKjonn: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   beregnBelop: (data: any) => Promise<any>;

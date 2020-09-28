@@ -32,6 +32,7 @@ import BelopetMottattIGodTroFormPanel, { InitialValuesGodTroForm } from './tilba
 import AktsomhetFormPanel, { InitialValuesAktsomhetForm } from './tilbakekrevingPeriodePaneler/aktsomhet/AktsomhetFormPanel';
 import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimelineData';
 import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
+import { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
 
 import styles from './tilbakekrevingPeriodeForm.less';
 
@@ -39,6 +40,18 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 export const TILBAKEKREVING_PERIODE_FORM_NAME = 'TilbakekrevingPeriodeForm';
+
+export type CustomPeriode = {
+  fom: string;
+  tom: string;
+  erTotalBelopUnder4Rettsgebyr: boolean;
+  foreldelseVurderingType?: Kodeverk;
+  begrunnelse?: string;
+} & DetaljertFeilutbetalingPeriode
+
+export type CustomPerioder = {
+  perioder: CustomPeriode[];
+}
 
 export type DataForDetailForm = {
   redusertBeloper?: {
@@ -480,7 +493,7 @@ interface InitialValuesDetailForm {
   [VilkarResultat.GOD_TRO]?: InitialValuesGodTroForm;
 }
 
-TilbakekrevingPeriodeForm.buildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
+TilbakekrevingPeriodeForm.buildInitialValues = (periode: CustomPeriode, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
 
   const vilkarResultatKode = vilkarResultat && vilkarResultat.kode ? vilkarResultat.kode : vilkarResultat;
