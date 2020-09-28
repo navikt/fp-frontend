@@ -493,7 +493,8 @@ interface InitialValuesDetailForm {
   [VilkarResultat.GOD_TRO]?: InitialValuesGodTroForm;
 }
 
-TilbakekrevingPeriodeForm.buildInitialValues = (periode: CustomPeriode, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
+// TODO Fiks typen til periode
+TilbakekrevingPeriodeForm.buildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
 
   const vilkarResultatKode = vilkarResultat && vilkarResultat.kode ? vilkarResultat.kode : vilkarResultat;

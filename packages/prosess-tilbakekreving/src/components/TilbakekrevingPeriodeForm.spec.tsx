@@ -145,6 +145,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
     // Tester om nedtrekksmenyen for perioder som kan kopieres vises
     const selectField = wrapper.find('[name="perioderForKopi"]');
     expect(selectField).to.have.lengthOf(1);
+    // @ts-ignore
     const values = selectField.props().selectValues;
     expect(values).to.have.lengthOf(2);
 
@@ -153,6 +154,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       target: {
         value: '2020-03-15_2020-03-31',
       },
+    // @ts-ignore Fiks
     }, vilkårsPerioder);
 
     const changeValueCalls = changeValue.getCalls();

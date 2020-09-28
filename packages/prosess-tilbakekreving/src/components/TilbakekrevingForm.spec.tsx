@@ -4,32 +4,37 @@ import { shallow } from 'enzyme';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import VilkarResultat from '../kodeverk/vilkarResultat';
 import { slaSammenOriginaleOgLagredePeriode, TilbakekrevingFormImpl } from './TilbakekrevingForm';
-import TilbakekrevingPeriodeForm from './TilbakekrevingPeriodeForm';
+import TilbakekrevingPeriodeForm, { DataForDetailForm } from './TilbakekrevingPeriodeForm';
+import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
+import { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
 
 describe('<TilbakekrevingForm>', () => {
   it('skal vise tidslinje når en har perioder', () => {
     const perioder = [{
       fom: '2019-01-01',
       tom: '2019-01-10',
-      isAksjonspunktOpen: false,
-      isGodkjent: false,
-    }];
+    }] as CustomVilkarsVurdertePeriode[];
+    const perioderDetail = [{
+      fom: '2019-01-01',
+      tom: '2019-01-10',
+    }] as DataForDetailForm[];
+
     const wrapper = shallow(<TilbakekrevingFormImpl
+      {...reduxFormPropsMock}
       vilkarsVurdertePerioder={perioder}
-      dataForDetailForm={perioder}
+      dataForDetailForm={perioderDetail}
       behandlingFormPrefix="behandling_V1"
-      isApOpen
       navBrukerKjonn={navBrukerKjonn.KVINNE}
       readOnly={false}
       readOnlySubmitButton={false}
       reduxFormChange={() => undefined}
       reduxFormInitialize={() => undefined}
       antallPerioderMedAksjonspunkt={2}
-      isDetailFormOpen
       handleSubmit={() => undefined}
       merknaderFraBeslutter={{
         notAccepted: false,
@@ -49,17 +54,16 @@ describe('<TilbakekrevingForm>', () => {
   it('skal ikke vise tidslinje når en har perioder', () => {
     const perioder = undefined;
     const wrapper = shallow(<TilbakekrevingFormImpl
+      {...reduxFormPropsMock}
       vilkarsVurdertePerioder={perioder}
       dataForDetailForm={perioder}
       behandlingFormPrefix="behandling_V1"
-      isApOpen
       navBrukerKjonn={navBrukerKjonn.KVINNE}
       readOnly={false}
       readOnlySubmitButton={false}
       reduxFormChange={() => undefined}
       reduxFormInitialize={() => undefined}
       antallPerioderMedAksjonspunkt={2}
-      isDetailFormOpen
       handleSubmit={() => undefined}
       merknaderFraBeslutter={{
         notAccepted: false,
@@ -78,17 +82,16 @@ describe('<TilbakekrevingForm>', () => {
   it('skal vise feilmelding når en har dette', () => {
     const perioder = undefined;
     const wrapper = shallow(<TilbakekrevingFormImpl
+      {...reduxFormPropsMock}
       vilkarsVurdertePerioder={perioder}
       dataForDetailForm={perioder}
       behandlingFormPrefix="behandling_V1"
-      isApOpen
       navBrukerKjonn={navBrukerKjonn.KVINNE}
       readOnly={false}
       readOnlySubmitButton={false}
       reduxFormChange={() => undefined}
       reduxFormInitialize={() => undefined}
       antallPerioderMedAksjonspunkt={2}
-      isDetailFormOpen
       handleSubmit={() => undefined}
       merknaderFraBeslutter={{
         notAccepted: false,
@@ -105,14 +108,14 @@ describe('<TilbakekrevingForm>', () => {
 
   it('skal lage initial values til form der en har lagret en periode og den andre er foreldet', () => {
     const arsak = {
-      kodeverk: 'MORS_AKTIVITET_KRAV',
-      underÅrsaker: [{
+      hendelseType: {
+        kode: 'MORS_AKTIVITET_TYPE',
+        kodeverk: 'MORS_AKTIVITET_KRAV',
+      },
+      hendelseUndertype: {
         kodeverk: 'MORS_AKTIVITET_TYPE',
-        underÅrsak: 'Mor ikke arbeidet heltid',
-        underÅrsakKode: 'IKKE_ARBEIDET_HELTID',
-      }],
-      årsak: 'Aktivitetskrav $14-33',
-      årsakKode: 'MORS_AKTIVITET_TYPE',
+        kode: 'IKKE_ARBEIDET_HELTID',
+      },
     };
     const oppfyltValg = {
       kode: '-',
@@ -140,7 +143,7 @@ describe('<TilbakekrevingForm>', () => {
       redusertBeloper: [],
       ytelser,
       årsak: arsak,
-    }];
+    }] as DetaljertFeilutbetalingPeriode[];
     const lagredePerioder = {
       vilkarsVurdertePerioder: [{
         feilutbetalingBelop: 19000,
@@ -201,14 +204,14 @@ describe('<TilbakekrevingForm>', () => {
 
   it('skal lage initial values til form der en har splittet en periode i to', () => {
     const arsak = {
-      kodeverk: 'MORS_AKTIVITET_KRAV',
-      underÅrsaker: [{
+      hendelseType: {
+        kode: 'MORS_AKTIVITET_TYPE',
+        kodeverk: 'MORS_AKTIVITET_KRAV',
+      },
+      hendelseUndertype: {
         kodeverk: 'MORS_AKTIVITET_TYPE',
-        underÅrsak: 'Mor ikke arbeidet heltid',
-        underÅrsakKode: 'IKKE_ARBEIDET_HELTID',
-      }],
-      årsak: 'Aktivitetskrav $14-33',
-      årsakKode: 'MORS_AKTIVITET_TYPE',
+        kode: 'IKKE_ARBEIDET_HELTID',
+      },
     };
     const oppfyltValg = {
       kode: '-',
@@ -227,7 +230,7 @@ describe('<TilbakekrevingForm>', () => {
       redusertBeloper: [],
       ytelser,
       årsak: arsak,
-    }];
+    }] as DetaljertFeilutbetalingPeriode[];
     const lagredePerioder = {
       vilkarsVurdertePerioder: [{
         begrunnelse: '3434',

@@ -41,7 +41,6 @@ describe('<AktsomhetFormPanel>', () => {
     const wrapper = shallow(<AktsomhetFormPanel
       readOnly={false}
       resetFields={sinon.spy()}
-      resetAnnetTextField={sinon.spy()}
       handletUaktsomhetGrad={undefined}
       harGrunnerTilReduksjon
       erSerligGrunnAnnetValgt={false}
@@ -60,7 +59,6 @@ describe('<AktsomhetFormPanel>', () => {
     const wrapper = shallow(<AktsomhetFormPanel
       readOnly={false}
       resetFields={sinon.spy()}
-      resetAnnetTextField={sinon.spy()}
       handletUaktsomhetGrad={Aktsomhet.GROVT_UAKTSOM}
       harGrunnerTilReduksjon
       erSerligGrunnAnnetValgt={false}
@@ -79,7 +77,6 @@ describe('<AktsomhetFormPanel>', () => {
     const wrapper = shallow(<AktsomhetFormPanel
       readOnly={false}
       resetFields={sinon.spy()}
-      resetAnnetTextField={sinon.spy()}
       handletUaktsomhetGrad={undefined}
       harGrunnerTilReduksjon
       erSerligGrunnAnnetValgt={false}
@@ -98,7 +95,6 @@ describe('<AktsomhetFormPanel>', () => {
     const wrapper = shallow(<AktsomhetFormPanel
       readOnly={false}
       resetFields={sinon.spy()}
-      resetAnnetTextField={sinon.spy()}
       handletUaktsomhetGrad={undefined}
       erValgtResultatTypeForstoBurdeForstaatt={false}
       harGrunnerTilReduksjon
@@ -120,7 +116,6 @@ describe('<AktsomhetFormPanel>', () => {
     const wrapper = shallow(<AktsomhetFormPanel
       readOnly={false}
       resetFields={sinon.spy()}
-      resetAnnetTextField={sinon.spy()}
       handletUaktsomhetGrad={undefined}
       erValgtResultatTypeForstoBurdeForstaatt
       harGrunnerTilReduksjon

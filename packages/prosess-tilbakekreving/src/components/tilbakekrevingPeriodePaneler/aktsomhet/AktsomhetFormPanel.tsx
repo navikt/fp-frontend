@@ -11,7 +11,7 @@ import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Aktsomhet from '../../../kodeverk/aktsomhet';
 import AktsomhetGradFormPanel from './AktsomhetGradFormPanel';
 import { ANDELER, EGENDEFINERT } from './AktsomhetReduksjonAvBelopFormPanel';
-import { AktsomhetInfo } from '../../../types/vilkarsvurderingTsType';
+import { AktsomhetInfo } from '../../../types/vilkarsVurdertePerioderTsType';
 
 const uaktsomhetCodes = [
   Aktsomhet.GROVT_UAKTSOM,
@@ -138,7 +138,8 @@ const parseFloatAndelSomTilbakekreves = (andelSomTilbakekreves: string, harGrunn
   return !harGrunnerTilReduksjon || Number.isNaN(parsedValue) ? {} : { andelTilbakekreves: parsedValue };
 };
 
-const formatAktsomhetData = (aktsomhet: {}, sarligGrunnTyper: KodeverkMedNavn[]) => {
+// TODO Fiks typen til aktsomhet
+const formatAktsomhetData = (aktsomhet: any, sarligGrunnTyper: KodeverkMedNavn[]) => {
   const sarligeGrunner = sarligGrunnTyper.reduce((acc: string[], type: KodeverkMedNavn) => (aktsomhet[type.kode] ? acc.concat(type.kode) : acc), []);
 
   const { harGrunnerTilReduksjon } = aktsomhet;
