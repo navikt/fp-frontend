@@ -34,6 +34,7 @@
 		"packages/fakta-saken",
 		"packages/form",
 		"packages/konstanter",
+		"packages/prosess-anke",
 		"packages/prosess-vedtak",
 		"packages/prosess-beregningsresultat",
 		"packages/prosess-felles",

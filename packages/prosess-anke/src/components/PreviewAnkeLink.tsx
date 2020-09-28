@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
@@ -8,7 +7,7 @@ import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 
 import styles from './previewAnkeLink.less';
 
-const getBrevKode = (ankeVurdering) => {
+const getBrevKode = (ankeVurdering: string) => {
   switch (ankeVurdering) {
     case ankeVurderingType.ANKE_OMGJOER:
       return dokumentMalType.ANKE_VEDTAK_OMGJORING;
@@ -19,7 +18,7 @@ const getBrevKode = (ankeVurdering) => {
   }
 };
 
-const getBrevData = (ankeVurdering, aksjonspunktCode, fritekstTilBrev) => {
+const getBrevData = (ankeVurdering: string, fritekstTilBrev?: string) => {
   const data = {
     fritekst: fritekstTilBrev || '',
     mottaker: '',
@@ -28,16 +27,22 @@ const getBrevData = (ankeVurdering, aksjonspunktCode, fritekstTilBrev) => {
   return data;
 };
 
-const PreviewAnkeLink = ({
+interface OwnProps {
+  previewCallback: (...args: any[]) => any;
+  fritekstTilBrev?: string;
+  ankeVurdering?: string;
+  readOnly?: boolean;
+}
+
+const PreviewAnkeLink: FunctionComponent<OwnProps> = ({
   previewCallback,
   fritekstTilBrev,
   ankeVurdering,
-  aksjonspunktCode,
   readOnly,
 }) => {
-  const previewMessage = (e) => {
+  const previewMessage = (e: any) => {
     e.preventDefault();
-    previewCallback(getBrevData(ankeVurdering, aksjonspunktCode, fritekstTilBrev));
+    previewCallback(getBrevData(ankeVurdering, fritekstTilBrev));
   };
   if (readOnly) {
     return (
@@ -60,17 +65,7 @@ const PreviewAnkeLink = ({
   );
 };
 
-PreviewAnkeLink.propTypes = {
-  previewCallback: PropTypes.func.isRequired,
-  aksjonspunktCode: PropTypes.string.isRequired,
-  fritekstTilBrev: PropTypes.string,
-  ankeVurdering: PropTypes.string,
-  readOnly: PropTypes.bool,
-};
-
 PreviewAnkeLink.defaultProps = {
-  ankeVurdering: null,
-  fritekstTilBrev: null,
   readOnly: false,
 };
 

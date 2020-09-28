@@ -1,8 +1,10 @@
+import Kodeverk from './kodeverkTsType';
+
 type AnkeVurdering = Readonly<{
-  ankeVurderingResultat: {
-    ankeVurdering: string;
+  ankeVurderingResultat?: {
+    ankeVurdering?: string;
     ankeVurderingOmgjoer?: string;
-    ankeOmgjoerArsakNavn?: string;
+    ankeOmgjoerArsak?: Kodeverk;
     begrunnelse: string;
     paAnketBehandlingId?: number;
     erAnkerIkkePart: boolean;
@@ -10,7 +12,8 @@ type AnkeVurdering = Readonly<{
     erFristIkkeOverholdt: boolean;
     erIkkeSignert: boolean;
     erSubsidiartRealitetsbehandles: boolean;
-  };
-}>
+    fritekstTilBrev: string;
+ };
+}>;
 
 export default AnkeVurdering;

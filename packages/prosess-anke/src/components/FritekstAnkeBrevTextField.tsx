@@ -1,13 +1,18 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { getLanguageCodeFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './fritekstAnkeBrevTextField.less';
 
-const FritekstAnkeBrevTextField = ({
+interface OwnProps {
+  sprakkode: Kodeverk;
+  readOnly?: boolean;
+}
+
+const FritekstAnkeBrevTextField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   sprakkode,
   readOnly,
   intl,
@@ -28,12 +33,6 @@ const FritekstAnkeBrevTextField = ({
     />
   </div>
 );
-
-FritekstAnkeBrevTextField.propTypes = {
-  sprakkode: PropTypes.shape().isRequired,
-  intl: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool,
-};
 
 FritekstAnkeBrevTextField.defaultProps = {
   readOnly: true,
