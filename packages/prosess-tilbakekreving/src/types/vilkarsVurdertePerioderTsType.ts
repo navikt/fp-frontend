@@ -28,8 +28,8 @@ export type VilkarsVurdertPeriode = {
   feilutbetalingBelop?: number;
 };
 
-type VilkarsvurderingWrapper = {
+type VilkarsVurdertePerioderWrapper = {
   vilkarsVurdertePerioder: VilkarsVurdertPeriode[];
 };
 
-export default VilkarsvurderingWrapper;
+export default VilkarsVurdertePerioderWrapper;

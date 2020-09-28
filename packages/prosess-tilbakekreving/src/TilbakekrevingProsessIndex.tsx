@@ -5,7 +5,7 @@ import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import TilbakekrevingForm from './components/TilbakekrevingForm';
 import FeilutbetalingPerioderWrapper from './types/feilutbetalingPerioderTsType';
-import VilkarsvurderingWrapper from './types/vilkarsVurdertePerioderTsType';
+import VilkarsVurdertePerioderWrapper from './types/vilkarsVurdertePerioderTsType';
 import DetaljerteFeilutbetalingsperioder from './types/detaljerteFeilutbetalingsperioderTsType';
 
 import messages from '../i18n/nb_NO.json';
@@ -20,7 +20,7 @@ const intl = createIntl({
 interface OwnProps {
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   vilkarvurderingsperioder: DetaljerteFeilutbetalingsperioder;
-  vilkarvurdering: VilkarsvurderingWrapper;
+  vilkarvurdering: VilkarsVurdertePerioderWrapper;
   navBrukerKjonn: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   beregnBelop: (data: any) => Promise<any>;

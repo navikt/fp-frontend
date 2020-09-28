@@ -27,7 +27,7 @@ import TilbakekrevingPeriodeForm, {
 } from './TilbakekrevingPeriodeForm';
 import TilbakekrevingTidslinjeHjelpetekster from './TilbakekrevingTidslinjeHjelpetekster';
 import FeilutbetalingPerioderWrapper from '../types/feilutbetalingPerioderTsType';
-import VilkarsvurderingWrapper, { VilkarsVurdertPeriode } from '../types/vilkarsVurdertePerioderTsType';
+import VilkarsVurdertePerioderWrapper, { VilkarsVurdertPeriode } from '../types/vilkarsVurdertePerioderTsType';
 import DetaljerteFeilutbetalingsperioder, { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
 import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
 import DataForPeriode from '../types/dataForPeriodeTsType';
@@ -331,7 +331,7 @@ interface PureOwnProps {
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   perioder: DetaljertFeilutbetalingPeriode[];
-  vilkarvurdering: VilkarsvurderingWrapper;
+  vilkarvurdering: VilkarsVurdertePerioderWrapper;
   rettsgebyr: DetaljerteFeilutbetalingsperioder['rettsgebyr'];
 }
 
