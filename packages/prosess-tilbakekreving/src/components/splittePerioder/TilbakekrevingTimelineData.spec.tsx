@@ -7,6 +7,7 @@ import PeriodeController from './PeriodeController';
 import PeriodeInformasjon from './PeriodeInformasjon';
 
 import TilbakekrevingTimelineData from './TilbakekrevingTimelineData';
+import DataForPeriode from '../../types/dataForPeriodeTsType';
 
 describe('<TilbakekrevingTimelineData>', () => {
   it('skal rendre komponent korrekt', () => {
@@ -15,7 +16,7 @@ describe('<TilbakekrevingTimelineData>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
         feilutbetaling: 12,
-      }}
+      } as DataForPeriode}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       readOnly={false}

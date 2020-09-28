@@ -147,13 +147,12 @@ describe('<AktsomhetFormPanel>', () => {
       aktsomhet: { kode: Aktsomhet.FORSETT, kodeverk: '' },
     };
     const initialValues = AktsomhetFormPanel.buildInitalValues(vilkarResultatInfo);
-
     expect(initialValues).to.eql({
       handletUaktsomhetGrad: Aktsomhet.FORSETT,
     });
   });
 
-  it('skal lage form-initialvalues fra struktur når en har aktsomhetsgrad FORSETT', () => {
+  it('skal lage form-initialvalues fra struktur når en har aktsomhetsgrad GROVT_UAKTSOM', () => {
     const vilkarResultatInfo = {
       aktsomhet: { kode: Aktsomhet.GROVT_UAKTSOM, kodeverk: '' },
       aktsomhetInfo: {
@@ -164,7 +163,7 @@ describe('<AktsomhetFormPanel>', () => {
         annetBegrunnelse: 'test',
         tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: true,
         sarligGrunner: sarligGrunnTyper,
-        sarligGrunnerBegrunnelse: '',
+        sarligGrunnerBegrunnelse: undefined,
       },
     };
     const initialValues = AktsomhetFormPanel.buildInitalValues(vilkarResultatInfo);

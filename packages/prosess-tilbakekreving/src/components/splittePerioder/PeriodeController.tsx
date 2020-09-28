@@ -9,6 +9,7 @@ import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 
 import DelOppPeriodeModal from './DelOppPeriodeModal';
+import DataForPeriode from '../../types/dataForPeriodeTsType';
 
 import styles from './periodeController.less';
 
@@ -17,11 +18,11 @@ const isEdited = false;
 interface OwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  beregnBelop: (...args: any[]) => any;
+  beregnBelop: (data: any) => Promise<any>;
   oppdaterSplittedePerioder: (...args: any[]) => any;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
-  periode: {};
+  periode: DataForPeriode;
   readOnly: boolean;
 }
 
@@ -95,7 +96,7 @@ export class PeriodeController extends Component<OwnProps & WrappedComponentProp
       if (harPeriodeMedBelop0) {
         this.setState((state: any) => ({
           ...state,
-          finnesBelopMed0Verdi: true
+          finnesBelopMed0Verdi: true,
         }));
       } else {
         const forstePeriodeMedBeløp = {

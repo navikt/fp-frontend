@@ -9,9 +9,9 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import VilkarResultat from '../kodeverk/vilkarResultat';
 import { slaSammenOriginaleOgLagredePeriode, TilbakekrevingFormImpl } from './TilbakekrevingForm';
-import TilbakekrevingPeriodeForm, { DataForDetailForm } from './TilbakekrevingPeriodeForm';
-import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
+import TilbakekrevingPeriodeForm, { CustomVilkarsVurdertePeriode } from './TilbakekrevingPeriodeForm';
 import { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
+import DataForPeriode from '../types/dataForPeriodeTsType';
 
 describe('<TilbakekrevingForm>', () => {
   it('skal vise tidslinje når en har perioder', () => {
@@ -22,7 +22,7 @@ describe('<TilbakekrevingForm>', () => {
     const perioderDetail = [{
       fom: '2019-01-01',
       tom: '2019-01-10',
-    }] as DataForDetailForm[];
+    }] as DataForPeriode[];
 
     const wrapper = shallow(<TilbakekrevingFormImpl
       {...reduxFormPropsMock}

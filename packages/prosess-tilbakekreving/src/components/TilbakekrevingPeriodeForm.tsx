@@ -31,8 +31,8 @@ import ForeldetFormPanel from './tilbakekrevingPeriodePaneler/ForeldetFormPanel'
 import BelopetMottattIGodTroFormPanel, { InitialValuesGodTroForm } from './tilbakekrevingPeriodePaneler/godTro/BelopetMottattIGodTroFormPanel';
 import AktsomhetFormPanel, { InitialValuesAktsomhetForm } from './tilbakekrevingPeriodePaneler/aktsomhet/AktsomhetFormPanel';
 import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimelineData';
-import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
 import { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
+import DataForPeriode from '../types/dataForPeriodeTsType';
 
 import styles from './tilbakekrevingPeriodeForm.less';
 
@@ -53,29 +53,28 @@ export type CustomPerioder = {
   perioder: CustomPeriode[];
 }
 
-export type DataForDetailForm = {
-  redusertBeloper?: {
-    erTrekk: boolean;
-    belop: number;
-  }[];
-  ytelser: {
-    aktivitet: string;
-    belop: number;
-  }[];
-  feilutbetaling: number;
-  erTotalBelopUnder4Rettsgebyr: boolean;
-  fom: string;
-  tom: string;
-  årsak: {
-    hendelseType: Kodeverk;
-    hendelseUndertype?: Kodeverk;
-  };
+export interface InitialValuesDetailForm {
+  valgtVilkarResultatType: string;
   begrunnelse: string;
-  erForeldet: boolean;
+  erForeldet?: boolean;
+  periodenErForeldet?: boolean;
+  foreldetBegrunnelse?: string;
+  vurderingBegrunnelse?: string;
+  [VilkarResultat.FEIL_OPPLYSNINGER]?: InitialValuesAktsomhetForm;
+  [VilkarResultat.FORSTO_BURDE_FORSTAATT]?: InitialValuesAktsomhetForm;
+  [VilkarResultat.MANGELFULL_OPPLYSNING]?: InitialValuesAktsomhetForm;
+  [VilkarResultat.GOD_TRO]?: InitialValuesGodTroForm;
 }
 
+export type CustomVilkarsVurdertePeriode = {
+  fom: string;
+  tom: string;
+  erSplittet?: boolean;
+  feilutbetaling?: number;
+} & InitialValuesDetailForm
+
 interface OwnProps {
-  data: DataForDetailForm;
+  data: DataForPeriode;
   behandlingFormPrefix: string;
   skjulPeriode: (...args: any[]) => any;
   setNestePeriode: (...args: any[]) => any;
@@ -393,7 +392,7 @@ const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   }, dispatch),
 });
 
-const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataForDetailForm) => {
+const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataForPeriode) => {
   let errors = {};
   if (!values) {
     return errors;
@@ -438,7 +437,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   oppdaterPeriode: (values: any) => any;
-  data: DataForDetailForm;
+  data: DataForPeriode;
   periode: CustomVilkarsVurdertePeriode;
 }
 
@@ -480,21 +479,8 @@ const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToP
   enableReinitialize: true,
 })(injectIntl(TilbakekrevingPeriodeFormImpl)));
 
-interface InitialValuesDetailForm {
-  valgtVilkarResultatType: string;
-  begrunnelse: string;
-  erForeldet?: boolean;
-  periodenErForeldet?: boolean;
-  foreldetBegrunnelse?: string;
-  vurderingBegrunnelse?: string;
-  [VilkarResultat.FEIL_OPPLYSNINGER]?: InitialValuesAktsomhetForm;
-  [VilkarResultat.FORSTO_BURDE_FORSTAATT]?: InitialValuesAktsomhetForm;
-  [VilkarResultat.MANGELFULL_OPPLYSNING]?: InitialValuesAktsomhetForm;
-  [VilkarResultat.GOD_TRO]?: InitialValuesGodTroForm;
-}
-
 // TODO Fiks typen til periode
-TilbakekrevingPeriodeForm.buildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
+export const periodeFormBuildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
 
   const vilkarResultatKode = vilkarResultat && vilkarResultat.kode ? vilkarResultat.kode : vilkarResultat;
@@ -528,7 +514,7 @@ TilbakekrevingPeriodeForm.buildInitialValues = (periode: any, foreldelsePerioder
   };
 };
 
-TilbakekrevingPeriodeForm.transformValues = (values: CustomVilkarsVurdertePeriode, sarligGrunnTyper: KodeverkMedNavn[]) => {
+export const periodeFormTransformValues = (values: CustomVilkarsVurdertePeriode, sarligGrunnTyper: KodeverkMedNavn[]) => {
   const { valgtVilkarResultatType, begrunnelse, vurderingBegrunnelse } = values;
   const info = values[valgtVilkarResultatType];
 

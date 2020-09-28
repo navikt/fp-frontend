@@ -1,11 +1,11 @@
-import { Kodeverk } from '@fpsak-frontend/types';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 export type DetaljertFeilutbetalingPeriode = {
   fom: string;
   tom: string;
   årsak: {
-    hendelseType: Kodeverk;
-    hendelseUndertype?: Kodeverk;
+    hendelseType: KodeverkMedNavn;
+    hendelseUndertype?: KodeverkMedNavn;
   };
   feilutbetaling: number;
   ytelser: {
@@ -17,7 +17,7 @@ export type DetaljertFeilutbetalingPeriode = {
     belop: number;
   }[];
   oppfyltValg?: Kodeverk;
-  foreldet: boolean;
+  foreldet?: boolean;
 };
 
 type DetaljerteFeilutbetalingsperioder = {

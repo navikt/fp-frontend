@@ -57,6 +57,7 @@ interface OwnProps {
   perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
   erRevurderingTilbakekrevingKlage?: boolean;
   fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
 }
 
 export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({

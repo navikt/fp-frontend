@@ -22,14 +22,15 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import TilbakekrevingPeriodeForm, {
-  DataForDetailForm, CustomPeriode, CustomPerioder, TILBAKEKREVING_PERIODE_FORM_NAME,
+  CustomPeriode, CustomPerioder, TILBAKEKREVING_PERIODE_FORM_NAME,
+  periodeFormTransformValues, periodeFormBuildInitialValues, CustomVilkarsVurdertePeriode,
 } from './TilbakekrevingPeriodeForm';
 import TilbakekrevingTidslinjeHjelpetekster from './TilbakekrevingTidslinjeHjelpetekster';
 import FeilutbetalingPerioderWrapper from '../types/feilutbetalingPerioderTsType';
 import VilkarsvurderingWrapper, { VilkarsVurdertPeriode } from '../types/vilkarsVurdertePerioderTsType';
 import DetaljerteFeilutbetalingsperioder, { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
 import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
-import CustomVilkarsVurdertePeriode from '../types/customVilkarsVurdertePeriode';
+import DataForPeriode from '../types/dataForPeriodeTsType';
 
 const TILBAKEKREVING_FORM_NAME = 'TilbakekrevingForm';
 
@@ -63,8 +64,8 @@ const emptyFeltverdiOmFinnes = (periode: CustomVilkarsVurdertePeriode) => {
   return periode;
 };
 
-const formaterPerioderForTidslinje = (perioder: DataForDetailForm[] = [], vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[]) => perioder
-  .map((periode: DataForDetailForm, index: number): TidslinjePeriode => {
+const formaterPerioderForTidslinje = (perioder: DataForPeriode[] = [], vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[]) => perioder
+  .map((periode: DataForPeriode, index: number): TidslinjePeriode => {
     const per = vilkarsVurdertePerioder.find((p: CustomVilkarsVurdertePeriode) => p.fom === periode.fom && p.tom === periode.tom);
     const erBelopetIBehold = per && per[per.valgtVilkarResultatType] ? per[per.valgtVilkarResultatType].erBelopetIBehold : undefined;
     const erSplittet = per ? !!per.erSplittet : false;
@@ -80,7 +81,7 @@ const formaterPerioderForTidslinje = (perioder: DataForDetailForm[] = [], vilkar
 interface OwnProps {
   intl: IntlShape;
   vilkarsVurdertePerioder?: CustomVilkarsVurdertePeriode[];
-  dataForDetailForm?: DataForDetailForm[];
+  dataForDetailForm?: DataForPeriode[];
   behandlingFormPrefix: string;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
@@ -307,7 +308,7 @@ export const transformValues = (values: { vilkarsVurdertePerioder: CustomVilkars
   kode: aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING,
   vilkarsVurdertePerioder: values.vilkarsVurdertePerioder
     .filter((p: CustomVilkarsVurdertePeriode) => !p.erForeldet)
-    .map((p: CustomVilkarsVurdertePeriode) => TilbakekrevingPeriodeForm.transformValues(p, sarligGrunnTyper)),
+    .map((p: CustomVilkarsVurdertePeriode) => periodeFormTransformValues(p, sarligGrunnTyper)),
 }];
 
 const finnOriginalPeriode = (lagretPeriode: CustomVilkarsVurdertePeriode | VilkarsVurdertPeriode,
@@ -368,7 +369,7 @@ export const buildInitialValues = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.perioderForeldelse],
 (perioder, foreldelsePerioder): { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] } => ({
   vilkarsVurdertePerioder: perioder.perioder.map((p: CustomPeriode) => ({
-    ...TilbakekrevingPeriodeForm.buildInitialValues(p, foreldelsePerioder),
+    ...periodeFormBuildInitialValues(p, foreldelsePerioder),
     fom: p.fom,
     tom: p.tom,
   })).sort(sortPeriods),
@@ -377,7 +378,7 @@ export const buildInitialValues = createSelector([
 const settOppPeriodeDataForDetailForm = createSelector([
   slaSammenOriginaleOgLagredePeriode,
   (state, ownProps: PureOwnProps) => behandlingFormValueSelector(TILBAKEKREVING_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-    'vilkarsVurdertePerioder')], (perioder: CustomPerioder, perioderFormState: CustomVilkarsVurdertePeriode[]): DataForDetailForm[] => {
+    'vilkarsVurdertePerioder')], (perioder: CustomPerioder, perioderFormState: CustomVilkarsVurdertePeriode[]): DataForPeriode[] => {
   if (!perioder || !perioderFormState) {
     return undefined;
   }

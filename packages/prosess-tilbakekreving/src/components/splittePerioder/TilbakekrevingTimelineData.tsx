@@ -3,16 +3,17 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import PeriodeController from './PeriodeController';
 import PeriodeInformasjon from './PeriodeInformasjon';
+import DataForPeriode from '../../types/dataForPeriodeTsType';
 
 type OwnProps = {
-  periode: {};
+  periode: DataForPeriode;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
   oppdaterSplittedePerioder: (...args: any[]) => any;
   readOnly: boolean;
   behandlingId: number;
   behandlingVersjon: number;
-  beregnBelop: (...args: any[]) => any;
+  beregnBelop: (data: any) => Promise<any>;
 };
 
 export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({

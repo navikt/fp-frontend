@@ -6,15 +6,15 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
+import DataForPeriode from '../../types/dataForPeriodeTsType';
+
 import styles from './periodeInformasjon.less';
 
 interface OwnProps {
   fom: string;
   tom: string;
   feilutbetaling: number;
-  arsak?: {
-    hendelseType?: {};
-  };
+  arsak?: DataForPeriode['årsak'];
 }
 
 /**
