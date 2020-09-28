@@ -35,6 +35,7 @@
 		"packages/form",
 		"packages/konstanter",
 		"packages/prosess-anke",
+		"packages/prosess-anke-merknader",
 		"packages/prosess-vedtak",
 		"packages/prosess-beregningsresultat",
 		"packages/prosess-felles",

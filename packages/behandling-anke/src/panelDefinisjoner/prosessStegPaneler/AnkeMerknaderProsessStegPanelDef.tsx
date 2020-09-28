@@ -18,7 +18,6 @@ class PanelDef extends ProsessStegPanelDef {
   getData = ({
     ankeVurdering, saveAnke, previewCallback,
   }) => ({
-    previewVedtakCallback: previewCallback,
     previewCallback,
     ankeVurdering,
     saveAnke,

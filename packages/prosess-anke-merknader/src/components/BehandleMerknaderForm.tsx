@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -14,10 +13,32 @@ import {
 } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
+import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
 
 import PreviewAnkeLink from './PreviewAnkeLink';
 
-const AnkeMerknader = ({
+type FormValuesUttrekk = {
+  ankeVurdering?: string;
+  fritekstTilBrev?: string;
+}
+
+type FormValues = {
+  erMerknaderMottatt: string;
+  merknadKommentar: string;
+} & FormValuesUttrekk
+
+interface OwnProps {
+  saveAnke: (data: any) => Promise<any>;
+  previewCallback: (data: any) => Promise<any>;
+  aksjonspunktCode: string;
+  formValues?: FormValuesUttrekk;
+  readOnly?: boolean;
+  readOnlySubmitButton?: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly,
   handleSubmit,
   previewCallback,
@@ -42,7 +63,7 @@ const AnkeMerknader = ({
           <RadioGroupField
             name="erMerknaderMottatt"
             validate={[required]}
-            direction="horisontal"
+            direction="horizontal"
             readOnly={readOnly}
           >
             <RadioOption value="ja" label={{ id: 'Ankebehandling.Merknad.Merknader.Ja' }} />
@@ -54,7 +75,7 @@ const AnkeMerknader = ({
       <VerticalSpacer sixteenPx />
       <Row>
         <Column xs="7">
-          <TextAreaField readOnly={readOnly} readOnlyHideEmpty={false} label={{ id: 'Ankebehandling.Merknad.Merknader.Kommentarer' }} name="merknadKommentar" />
+          <TextAreaField readOnly={readOnly} label={{ id: 'Ankebehandling.Merknad.Merknader.Kommentarer' }} name="merknadKommentar" />
         </Column>
       </Row>
       <VerticalSpacer sixteenPx />
@@ -83,49 +104,41 @@ const AnkeMerknader = ({
   </form>
 );
 
-AnkeMerknader.propTypes = {
-  previewCallback: PropTypes.func.isRequired,
-  saveAnke: PropTypes.func.isRequired,
-  aksjonspunktCode: PropTypes.string.isRequired,
-  formValues: PropTypes.shape(),
-  readOnly: PropTypes.bool,
-  readOnlySubmitButton: PropTypes.bool,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  ...formPropTypes,
-};
-
 AnkeMerknader.defaultProps = {
-  formValues: {},
   readOnly: true,
   readOnlySubmitButton: true,
 };
 
 const ankeMerknaderFormName = 'ankeMerknaderForm';
 
-const transformValues = (values, aksjonspunktCode) => ({
+const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
   erMerknaderMottatt: values.erMerknaderMottatt === 'ja',
   merknadKommentar: values.merknadKommentar,
   kode: aksjonspunktCode,
 });
 
-const buildInitialValues = createSelector([(ownProps) => ownProps.ankeVurderingResultat], (resultat) => ({
+interface PureOwnProps {
+  ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => Promise<any>;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
   fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
-  merknadKommentar: resultat ? resultat.merknadKommentar : null,
-  // eslint-disable-next-line no-nested-ternary
-  erMerknaderMottatt: resultat && resultat.merknadKommentar !== null ? (resultat.erMerknaderMottatt ? 'ja' : 'nei') : null,
 }));
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const aksjonspunktCode = initialOwnProps.aksjonspunkter[0].definisjon.kode;
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (state, ownProps) => ({
+  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
+  return (state: any, ownProps: PureOwnProps) => ({
     aksjonspunktCode,
     initialValues: buildInitialValues(ownProps),
     formValues: behandlingFormValueSelector(ankeMerknaderFormName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-      'ankeVurdering', 'fritekstTilBrev'),
+      'ankeVurdering', 'fritekstTilBrev') || {},
     onSubmit,
   });
 };
