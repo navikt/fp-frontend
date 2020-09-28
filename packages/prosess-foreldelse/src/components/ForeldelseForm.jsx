@@ -34,7 +34,7 @@ const getApTekst = (apCode) => (apCode
   : []);
 
 const harApentAksjonspunkt = (periode) => ((!periode.foreldelseVurderingType || periode.foreldelseVurderingType.kode === foreldelseVurderingType.UDEFINERT)
-  && (periode.begrunnelse === null || periode.begrunnelse === undefined || periode.erSplittet));
+  && (!periode.begrunnelse || !!periode.erSplittet));
 
 const formaterPerioderForTidslinje = (perioder = []) => perioder
   .map((periode, index) => ({
