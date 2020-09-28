@@ -41,7 +41,7 @@ const formaterPerioderForTidslinje = (perioder = []) => perioder
     fom: periode.fom,
     tom: periode.tom,
     isAksjonspunktOpen: harApentAksjonspunkt(periode),
-    isGodkjent: foreldelseVurderingType.FORELDET !== periode.foreldet,
+    isGodkjent: foreldelseVurderingType.FORELDET !== periode.foreldet && foreldelseVurderingType.UDEFINERT !== periode.foreldet,
     id: index,
   }));
 
@@ -158,7 +158,7 @@ export class ForeldelseForm extends Component {
     } = this.state;
 
     const perioderFormatertForTidslinje = formaterPerioderForTidslinje(foreldelsesresultatActivity);
-    const isApOpen = perioderFormatertForTidslinje.some(harApentAksjonspunkt);
+    const isApOpen = perioderFormatertForTidslinje.some((p) => p.isAksjonspunktOpen);
     const valgtPeriodeFormatertForTidslinje = valgtPeriode
       ? perioderFormatertForTidslinje.find((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom)
       : undefined;
@@ -279,7 +279,7 @@ export const buildInitialValues = (foreldelsePerioder) => ({
   foreldelsesresultatActivity: foreldelsePerioder.map((p) => ({
     ...p,
     feilutbetaling: p.belop,
-    foreldet: p.foreldelseVurderingType.kode,
+    foreldet: p.foreldelseVurderingType.kode === foreldelseVurderingType.UDEFINERT ? null : p.foreldelseVurderingType.kode,
     begrunnelse: decodeHtmlEntity(p.begrunnelse),
   })),
 });
