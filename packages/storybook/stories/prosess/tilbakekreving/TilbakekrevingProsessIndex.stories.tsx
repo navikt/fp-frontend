@@ -11,6 +11,9 @@ import NavBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
+import { Behandling } from '@fpsak-frontend/types';
+import FeilutbetalingPerioderWrapper from '@fpsak-frontend/prosess-tilbakekreving/src/types/feilutbetalingPerioderTsType';
+import DetaljerteFeilutbetalingsperioder from '@fpsak-frontend/prosess-tilbakekreving/src/types/detaljerteFeilutbetalingsperioderTsType';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -32,7 +35,7 @@ const perioderForeldelse = {
       kodeverk: 'FORELDELSE_VURDERING',
     },
   }],
-};
+} as FeilutbetalingPerioderWrapper;
 
 const vilkarvurderingsperioder = {
   perioder: [{
@@ -40,24 +43,21 @@ const vilkarvurderingsperioder = {
     tom: '2019-04-01',
     foreldet: false,
     feilutbetaling: 10,
-    hendelseType: {
-      kode: 'MEDLEM',
-      navn: '§22 Medlemskap',
+    årsak: {
+      hendelseType: {
+        kode: 'MEDLEM',
+        kodeverk: '',
+        navn: '§22 Medlemskap',
+      },
     },
     redusertBeloper: [],
     ytelser: [{
       aktivitet: 'Arbeidstaker',
       belop: 1050,
     }],
-    årsak: {
-      hendelseType: {
-        kode: 'MEDLEM',
-        navn: '§22 Medlemskap',
-      },
-    },
   }],
   rettsgebyr: 1000,
-};
+} as DetaljerteFeilutbetalingsperioder;
 const vilkarvurdering = {
   vilkarsVurdertePerioder: [],
 };
@@ -83,42 +83,69 @@ const alleKodeverk = {
   [tilbakekrevingKodeverkTyper.SARLIG_GRUNN]: [{
     kode: sarligGrunn.GRAD_AV_UAKTSOMHET,
     navn: 'Grad av uaktsomhet',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
     navn: 'Helt eller delvis NAVs feil',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.STOERRELSE_BELOEP,
     navn: 'Størrelse beløp',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.TID_FRA_UTBETALING,
     navn: 'Tid fra utbetaling',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.ANNET,
     navn: 'Annet',
+    kodeverk: '',
   }],
   [tilbakekrevingKodeverkTyper.VILKAR_RESULTAT]: [{
     kode: vilkarResultat.FORSTO_BURDE_FORSTAATT,
     navn: 'Forsto eller burde forstått',
+    kodeverk: '',
   }, {
     kode: vilkarResultat.FEIL_OPPLYSNINGER,
     navn: 'Feil opplysninger',
+    kodeverk: '',
   }, {
     kode: vilkarResultat.MANGELFULL_OPPLYSNING,
     navn: 'Mangelfull opplysning',
+    kodeverk: '',
   }, {
     kode: vilkarResultat.GOD_TRO,
     navn: 'God tro',
+    kodeverk: '',
   }],
   [tilbakekrevingKodeverkTyper.AKTSOMHET]: [{
     kode: aktsomhet.FORSETT,
     navn: 'Forsett',
+    kodeverk: '',
   }, {
     kode: aktsomhet.GROVT_UAKTSOM,
     navn: 'Grovt uaktsom',
+    kodeverk: '',
   }, {
     kode: aktsomhet.SIMPEL_UAKTSOM,
     navn: 'Simpel uaktsom',
+    kodeverk: '',
   }],
+};
+
+const standardProsessProps = {
+  behandling: {
+    id: 1,
+    versjon: 1,
+  } as Behandling,
+  alleKodeverk,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: false,
+  status: '',
+  vilkar: [],
 };
 
 export default {
@@ -136,32 +163,27 @@ const beregnBelop = (params) => {
 
 export const visAksjonspunktForTilbakekreving = () => (
   <TilbakekrevingProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-    }}
+    {...standardProsessProps}
     perioderForeldelse={object('perioderForeldelse', perioderForeldelse)}
     vilkarvurderingsperioder={object('vilkarvurderingsperioder', vilkarvurderingsperioder)}
     vilkarvurdering={object('vilkarvurdering', vilkarvurdering)}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    readOnlySubmitButton={boolean('readOnly', false)}
     navBrukerKjonn={NavBrukerKjonn.KVINNE}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    alleKodeverk={alleKodeverk}
     beregnBelop={(params) => beregnBelop(params)}
   />
 );

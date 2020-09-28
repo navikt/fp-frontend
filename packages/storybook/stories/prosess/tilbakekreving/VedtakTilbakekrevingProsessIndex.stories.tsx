@@ -6,6 +6,8 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
 import aktsomhet from '@fpsak-frontend/prosess-tilbakekreving/src/kodeverk/aktsomhet';
+import { Behandling } from '@fpsak-frontend/types';
+import BeregningsresultatTilbakekreving from '@fpsak-frontend/prosess-vedtak-tilbakekreving/src/types/beregningsresultatTilbakekrevingTsType';
 
 import vedtakResultatType from './vedtakResultatType';
 import withReduxProvider from '../../../decorators/withRedux';
@@ -149,7 +151,7 @@ const beregningsresultat = {
     kode: vedtakResultatType.DELVIS_TILBAKEBETALING,
     kodeverk: 'VEDTAK_RESULTAT_TYPE',
   },
-};
+} as BeregningsresultatTilbakekreving;
 
 const alleKodeverk = {
   [kodeverkTyper.VEDTAK_RESULTAT_TYPE]: [{
@@ -164,6 +166,21 @@ const alleKodeverk = {
   }],
 };
 
+const standardProsessProps = {
+  behandling: {
+    id: 1,
+    versjon: 1,
+  } as Behandling,
+  alleKodeverk,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: false,
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/tilbakekreving/prosess-vedtak-tilbakekreving',
   component: VedtakTilbakekrevingProsessIndex,
@@ -172,17 +189,10 @@ export default {
 
 export const visVedtakspanel = () => (
   <VedtakTilbakekrevingProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-    }}
     beregningsresultat={beregningsresultat}
     vedtaksbrev={vedtaksbrev}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    isBehandlingHenlagt={boolean('isBehandlingHenlagt', false)}
-    alleKodeverk={alleKodeverk}
-    fetchPreviewVedtaksbrev={action('button-click')}
+    fetchPreviewVedtaksbrev={action('button-click') as () => Promise<any>}
     aksjonspunktKodeForeslaVedtak={aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK}
+    {...standardProsessProps}
   />
 );

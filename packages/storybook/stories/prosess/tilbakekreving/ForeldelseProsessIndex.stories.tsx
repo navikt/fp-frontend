@@ -8,6 +8,8 @@ import NavBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
+import ForeldelsePerioderWrapper from '@fpsak-frontend/prosess-foreldelse/src/types/foreldelsePerioderTsType';
+import { Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -29,7 +31,7 @@ const perioderForeldelse = {
       kodeverk: 'FORELDELSE_VURDERING',
     },
   }],
-};
+} as ForeldelsePerioderWrapper;
 
 const alleKodeverk = {
   [tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]: [{
@@ -47,6 +49,21 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const standardProsessProps = {
+  behandling: {
+    id: 1,
+    versjon: 1,
+  } as Behandling,
+  alleKodeverk,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: false,
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/tilbakekreving/prosess-foreldelse',
   component: ForeldelseProsessIndex,
@@ -62,30 +79,25 @@ const beregnBelop = (params) => {
 
 export const visAksjonspunktForForeldelse = () => (
   <ForeldelseProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-    }}
+    {...standardProsessProps}
     perioderForeldelse={object('perioderForeldelse', perioderForeldelse)}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE,
+        kodeverk: '',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
       },
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }]}
-    readOnlySubmitButton={boolean('readOnly', false)}
     navBrukerKjonn={NavBrukerKjonn.KVINNE}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    alleKodeverk={alleKodeverk}
     beregnBelop={(params) => beregnBelop(params)}
   />
 );
