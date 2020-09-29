@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, Behandling, KlageVurdering, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import messages from '../i18n/nb_NO.json';
 import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
 import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
-import klageVurderingPropType from './propTypes/klageVurderingPropType';
-import klagevurderingBehandlingPropType from './propTypes/klagevurderingBehandlingPropType';
 
 const cache = createIntlCache();
 
@@ -17,7 +17,19 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const KlagevurderingProsessIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  klageVurdering: KlageVurdering;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  saveKlage: (data: any) => Promise<any>;
+  submitCallback: (data: any) => Promise<any>;
+  isReadOnly: boolean;
+  previewCallback: (data: any) => Promise<any>;
+  readOnlySubmitButton: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+}
+
+const KlagevurderingProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
   klageVurdering,
   alleKodeverk,
@@ -59,17 +71,5 @@ const KlagevurderingProsessIndex = ({
     )}
   </RawIntlProvider>
 );
-
-KlagevurderingProsessIndex.propTypes = {
-  behandling: klagevurderingBehandlingPropType.isRequired,
-  klageVurdering: klageVurderingPropType.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  saveKlage: PropTypes.func.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  previewCallback: PropTypes.func.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
 
 export default KlagevurderingProsessIndex;

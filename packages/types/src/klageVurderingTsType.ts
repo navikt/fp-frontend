@@ -1,25 +1,31 @@
+import Kodeverk from './kodeverkTsType';
+
 type KlageVurdering = Readonly<{
-  klageVurderingResultatNK: {
+  klageVurderingResultatNK?: {
     klageVurdertAv: string;
     klageVurdering?: string;
     fritekstTilBrev?: string;
-    klageMedholdArsakNavn?: string;
+    klageMedholdArsak?: Kodeverk;
+    klageVurderingOmgjoer?: string;
     godkjentAvMedunderskriver: boolean;
+    begrunnelse?: string;
   };
-  klageVurderingResultatNFP: {
+  klageVurderingResultatNFP?: {
     klageVurdertAv: string;
     klageVurdering?: string;
     fritekstTilBrev?: string;
-    klageMedholdArsakNavn?: string;
+    klageMedholdArsak?: Kodeverk;
+    klageVurderingOmgjoer?: string;
     godkjentAvMedunderskriver: boolean;
+    begrunnelse?: string;
   };
-  klageFormkravResultatKA: {
-    avvistArsaker: {
+  klageFormkravResultatKA?: {
+    avvistArsaker?: {
       navn?: string;
     }[];
   };
-  klageFormkravResultatNFP: {
-    avvistArsaker: {
+  klageFormkravResultatNFP?: {
+    avvistArsaker?: {
       navn?: string;
     }[];
   };

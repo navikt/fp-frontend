@@ -36,6 +36,8 @@
 		"packages/konstanter",
 		"packages/prosess-anke",
 		"packages/prosess-anke-merknader",
+		"packages/prosess-anke-resultat",
+		"packages/prosess-klagevurdering",
 		"packages/prosess-vedtak",
 		"packages/prosess-beregningsresultat",
 		"packages/prosess-felles",

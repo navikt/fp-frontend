@@ -1,19 +1,12 @@
 import React from 'react';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { expect } from 'chai';
-import sinon from 'sinon';
-
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { KlageVurderingRadioOptionsKa } from './KlageVurderingRadioOptionsKa';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-klagevurdering';
 
 describe('<KlageVurderingRadioOptionsKaImpl>', () => {
-  const sprakkode = {
-    kode: 'NO',
-    navn: 'Norsk',
-  };
   const medholdReasons = [
     { kode: 'NYE_OPPLYSNINGER', navn: 'Nytt faktum', kodeverk: 'KLAGE_MEDHOLD_AARSAK' },
     { kode: 'ULIK_REGELVERKSTOLKNING', navn: 'Feil lovanvendelse', kodeverk: 'KLAGE_MEDHOLD_AARSAK' },
@@ -25,13 +18,8 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
       medholdReasons={medholdReasons}
-      readOnlySubmitButton
-      aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
       klageVurdering={klageVurdering.STADFESTE_YTELSESVEDTAK}
-      previewCallback={sinon.spy()}
       intl={intlMock}
-      formProps={{}}
-      sprakkode={sprakkode}
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).to.have.length(4);
@@ -44,15 +32,9 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
   it('skal vise syv options når aksjonspunkt er NK og klage medhold', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
-      readOnlySubmitButton
       medholdReasons={medholdReasons}
-      aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
-      klageMedholdArsaker={[]}
       klageVurdering={klageVurdering.MEDHOLD_I_KLAGE}
-      previewCallback={sinon.spy()}
       intl={intlMock}
-      formProps={{}}
-      sprakkode={sprakkode}
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).to.have.length(7);
@@ -68,14 +50,9 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
   it('skal vise selectfield når klagevurdering er omgjort vedtak', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
-      readOnlySubmitButton
       medholdReasons={medholdReasons}
-      aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
       klageVurdering={klageVurdering.MEDHOLD_I_KLAGE}
-      previewCallback={sinon.spy()}
       intl={intlMock}
-      formProps={{}}
-      sprakkode={sprakkode}
     />);
     expect(wrapper.find('SelectField').props().name).to.equal('klageMedholdArsak');
     expect(wrapper.find('SelectField')).to.have.length(1);
@@ -84,14 +61,9 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
   it('skal ikke vise selectfield når klagevurdering er opphev vedtak', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
-      readOnlySubmitButton
       medholdReasons={medholdReasons}
-      aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
       klageVurdering={klageVurdering.STADFESTE_YTELSESVEDTAK}
-      previewCallback={sinon.spy()}
       intl={intlMock}
-      formProps={{}}
-      sprakkode={sprakkode}
     />);
     expect(wrapper.find('SelectField')).to.have.length(0);
   });

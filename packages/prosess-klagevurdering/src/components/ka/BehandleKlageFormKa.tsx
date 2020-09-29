@@ -1,9 +1,8 @@
-import React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { formPropTypes } from 'redux-form';
-import PropTypes from 'prop-types';
+import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
 
@@ -15,6 +14,7 @@ import {
   behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import KlageVurderingRadioOptionsKa from './KlageVurderingRadioOptionsKa';
 import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
@@ -23,12 +23,35 @@ import TempsaveKlageButton from '../felles/TempsaveKlageButton';
 
 import styles from './behandleKlageFormKa.less';
 
+type FormValuesUtrekk = {
+  begrunnelse: string;
+  fritekstTilBrev: string;
+  klageVurdering: string;
+  klageVurderingOmgjoer: string;
+  klageMedholdArsak: string;
+};
+
+type FormValues = {
+} & FormValuesUtrekk
+
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  previewCallback: (data: any) => Promise<any>;
+  saveKlage: (data: any) => Promise<any>;
+  formValues?: FormValuesUtrekk;
+  readOnly?: boolean;
+  readOnlySubmitButton?: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  sprakkode: Kodeverk;
+}
+
 /**
  * BehandleklageformNfp
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (KA).
  */
-export const BehandleKlageFormKaImpl = ({
+export const BehandleKlageFormKaImpl: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -53,8 +76,6 @@ export const BehandleKlageFormKaImpl = ({
       <KlageVurderingRadioOptionsKa
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}
-        aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
-        intl={intl}
         medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
       />
       <div className={styles.confirmVilkarForm}>
@@ -62,7 +83,6 @@ export const BehandleKlageFormKaImpl = ({
         <FritekstBrevTextField
           sprakkode={sprakkode}
           readOnly={readOnly}
-          intl={intl}
         />
         <VerticalSpacer sixteenPx />
         <Row>
@@ -89,7 +109,11 @@ export const BehandleKlageFormKaImpl = ({
           </Column>
           <Column xs="2">
             <TempsaveKlageButton
-              formValues={formValues}
+              klageVurdering={formValues.klageVurdering}
+              klageMedholdArsak={formValues.klageMedholdArsak}
+              klageVurderingOmgjoer={formValues.klageVurderingOmgjoer}
+              fritekstTilBrev={formValues.fritekstTilBrev}
+              begrunnelse={formValues.begrunnelse}
               saveKlage={saveKlage}
               readOnly={readOnly}
               aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
@@ -101,23 +125,21 @@ export const BehandleKlageFormKaImpl = ({
   </form>
 );
 
-BehandleKlageFormKaImpl.propTypes = {
-  previewCallback: PropTypes.func.isRequired,
-  saveKlage: PropTypes.func.isRequired,
-  formValues: PropTypes.shape(),
-  readOnly: PropTypes.bool,
-  readOnlySubmitButton: PropTypes.bool,
-  ...formPropTypes,
-};
-
 BehandleKlageFormKaImpl.defaultProps = {
-  formValues: {},
   readOnly: true,
   readOnlySubmitButton: true,
 };
 
+interface PureOwnProps {
+  klageVurdering: KlageVurdering;
+  submitCallback: (data: any) => Promise<any>;
+  behandlingId: number;
+  behandlingVersjon: number;
+  readOnly: boolean;
+}
+
 export const buildInitialValues = createSelector([
-  (ownProps) => ownProps.klageVurdering.klageVurderingResultatNK], (klageVurderingResultat) => ({
+  (ownProps: PureOwnProps) => ownProps.klageVurdering.klageVurderingResultatNK], (klageVurderingResultat) => ({
   klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
@@ -125,7 +147,7 @@ export const buildInitialValues = createSelector([
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
 }));
 
-export const transformValues = (values) => ({
+export const transformValues = (values: FormValues) => ({
   klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
@@ -137,19 +159,17 @@ export const transformValues = (values) => ({
 
 const formName = 'BehandleKlageKaForm';
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values)]);
+  return (state: any, ownProps: PureOwnProps) => ({
     initialValues: buildInitialValues(ownProps),
     formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(
       state, 'begrunnelse', 'fritekstTilBrev', 'klageVurdering', 'klageVurderingOmgjoer', 'klageMedholdArsak',
-    ),
+    ) || {},
     onSubmit,
   });
 };
 
-const BehandleKlageFormKa = connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
-})(BehandleKlageFormKaImpl));
-
-export default injectIntl(BehandleKlageFormKa);
+})(injectIntl(BehandleKlageFormKaImpl)));

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
@@ -9,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import styles from './previewKlageLink.less';
 
-const getBrevKode = (klageVurdering, klageVurdertAvKa) => {
+const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean) => {
   switch (klageVurdering) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
@@ -24,7 +23,7 @@ const getBrevKode = (klageVurdering, klageVurdertAvKa) => {
   }
 };
 
-const getBrevData = (klageVurdering, aksjonspunktCode, fritekstTilBrev) => {
+const getBrevData = (klageVurdering: string, aksjonspunktCode: string, fritekstTilBrev?: string) => {
   const klageVurdertAv = aksjonspunktCode === aksjonspunktCodes.BEHANDLE_KLAGE_NK ? 'NK' : 'NFP';
   const data = {
     fritekst: fritekstTilBrev || '',
@@ -36,13 +35,20 @@ const getBrevData = (klageVurdering, aksjonspunktCode, fritekstTilBrev) => {
   return data;
 };
 
-const PreviewKlageLink = ({
+interface OwnProps {
+  previewCallback: (data: any) => Promise<any>;
+  aksjonspunktCode: string;
+  fritekstTilBrev?: string;
+  klageVurdering?: string;
+}
+
+const PreviewKlageLink: FunctionComponent<OwnProps> = ({
   previewCallback,
   fritekstTilBrev,
   klageVurdering,
   aksjonspunktCode,
 }) => {
-  const previewMessage = (e) => {
+  const previewMessage = (e: any) => {
     previewCallback(getBrevData(klageVurdering, aksjonspunktCode, fritekstTilBrev));
     e.preventDefault();
   };
@@ -56,18 +62,6 @@ const PreviewKlageLink = ({
       <FormattedMessage id="PreviewKlageLink.ForhandvisBrev" />
     </a>
   );
-};
-
-PreviewKlageLink.propTypes = {
-  previewCallback: PropTypes.func.isRequired,
-  aksjonspunktCode: PropTypes.string.isRequired,
-  fritekstTilBrev: PropTypes.string,
-  klageVurdering: PropTypes.string,
-};
-
-PreviewKlageLink.defaultProps = {
-  klageVurdering: null,
-  fritekstTilBrev: null,
 };
 
 export default PreviewKlageLink;

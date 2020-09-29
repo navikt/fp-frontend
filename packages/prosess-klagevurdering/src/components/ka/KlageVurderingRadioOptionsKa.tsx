@@ -1,6 +1,5 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { required } from '@fpsak-frontend/utils';
@@ -9,16 +8,23 @@ import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './klageVurderingRadioOptionsKa.less';
 
-export const KlageVurderingRadioOptionsKa = ({
+interface OwnProps {
+  readOnly?: boolean;
+  medholdReasons: KodeverkMedNavn[];
+  klageVurdering?: string;
+}
+
+export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   readOnly,
   medholdReasons,
   klageVurdering,
   intl,
 }) => {
-  const medholdOptions = medholdReasons.map((mo) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
+  const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   return (
     <div>
       <ProsessStegBegrunnelseTextField
@@ -94,19 +100,9 @@ export const KlageVurderingRadioOptionsKa = ({
     </div>
   );
 };
-KlageVurderingRadioOptionsKa.propTypes = {
-  readOnly: PropTypes.bool,
-  medholdReasons: PropTypes.arrayOf(PropTypes.shape({
-    kode: PropTypes.string,
-    navn: PropTypes.string,
-  })).isRequired,
-  klageVurdering: PropTypes.string,
-  intl: PropTypes.shape().isRequired,
-};
 
 KlageVurderingRadioOptionsKa.defaultProps = {
   readOnly: true,
-  klageVurdering: null,
 };
 
 export default injectIntl(KlageVurderingRadioOptionsKa);

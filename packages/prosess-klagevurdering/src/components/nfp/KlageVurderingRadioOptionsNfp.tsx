@@ -1,22 +1,28 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { required } from '@fpsak-frontend/utils';
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './klageVurderingRadioOptionsNfp.less';
 
-export const KlageVurderingRadioOptionsNfp = ({
+interface OwnProps {
+  readOnly?: boolean;
+  medholdReasons: KodeverkMedNavn[];
+  klageVurdering?: string;
+}
+
+export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   readOnly,
   medholdReasons,
   klageVurdering,
   intl,
 }) => {
-  const medholdOptions = medholdReasons.map((mo) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
+  const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   return (
     <div>
       <>
@@ -32,7 +38,7 @@ export const KlageVurderingRadioOptionsNfp = ({
       </>
       {(klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
-        <ArrowBox className={readOnly ? styles.selectReadOnly : null}>
+        <ArrowBox>
           <SelectField
             readOnly={readOnly}
             name="klageMedholdArsak"
@@ -73,19 +79,9 @@ export const KlageVurderingRadioOptionsNfp = ({
     </div>
   );
 };
-KlageVurderingRadioOptionsNfp.propTypes = {
-  readOnly: PropTypes.bool,
-  medholdReasons: PropTypes.arrayOf(PropTypes.shape({
-    kode: PropTypes.string,
-    navn: PropTypes.string,
-  })).isRequired,
-  klageVurdering: PropTypes.string,
-  intl: PropTypes.shape().isRequired,
-};
 
 KlageVurderingRadioOptionsNfp.defaultProps = {
   readOnly: true,
-  klageVurdering: null,
 };
 
 export default injectIntl(KlageVurderingRadioOptionsNfp);

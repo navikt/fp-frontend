@@ -7,18 +7,15 @@ import { shallow } from 'enzyme/build';
 import TempsaveKlageButton from './TempsaveKlageButton';
 
 describe('<TempsaveKlageButton>', () => {
-  const formValuesWithEmptyStrings = {
-    klageVurdering: klageVurderingType.STADFESTE_YTELSESVEDTAK,
-    fritekstTilBrev: '',
-    begrunnelse: '',
-  };
-
   it('Skal rendre komponent korrekt', () => {
     const wrapper = shallow(<TempsaveKlageButton
-      formValues={formValuesWithEmptyStrings}
+      klageVurdering={klageVurderingType.STADFESTE_YTELSESVEDTAK}
+      fritekstTilBrev=""
+      begrunnelse=""
       saveKlage={sinon.spy()}
       aksjonspunktCode="123"
-      hasForeslaVedtakAp={false}
+      klageMedholdArsak=""
+      klageVurderingOmgjoer=""
     />);
     expect(wrapper.find(Hovedknapp)).has.length(1);
   });

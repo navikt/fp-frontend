@@ -1,13 +1,18 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { getLanguageCodeFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './fritekstKlageBrevTextField.less';
 
-const FritekstKlageBrevTextField = ({
+interface OwnProps {
+  sprakkode: Kodeverk;
+  readOnly?: boolean;
+}
+
+const FritekstKlageBrevTextField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   sprakkode,
   readOnly,
   intl,
@@ -28,12 +33,6 @@ const FritekstKlageBrevTextField = ({
     />
   </div>
 );
-
-FritekstKlageBrevTextField.propTypes = {
-  sprakkode: PropTypes.shape().isRequired,
-  intl: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool,
-};
 
 FritekstKlageBrevTextField.defaultProps = {
   readOnly: true,

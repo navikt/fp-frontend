@@ -11,7 +11,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {
-  behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
+  behandlingForm, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
@@ -121,31 +121,12 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat> = ({
   }
 };
 
-type FormValuesUtrekk = {
-  ankeVurdering: string;
-  fritekstTilBrev?: string;
-  gjelderVedtak: string;
-};
-
-type FormValues = {
-  erMerknaderMottatt: boolean;
-  erGodkjentAvMedunderskriver: boolean;
-  erAnkerIkkePart: boolean;
-  erIkkeKonkret: boolean;
-  erFristIkkeOverholdt: boolean;
-  erIkkeSignert: boolean;
-  vedtak: string;
-  begrunnelse: string;
-  erSubsidiartRealitetsbehandles: boolean;
-  ankeOmgjoerArsak: string;
-  ankeVurderingOmgjoer: string;
-} & FormValuesUtrekk
-
 interface OwnProps {
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
   aksjonspunktCode: string;
-  formValues?: FormValuesUtrekk;
+  ankeVurderingVerdi?: string;
+  fritekstTilBrev?: string;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
@@ -157,7 +138,8 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   handleSubmit,
   previewCallback,
   aksjonspunktCode,
-  formValues,
+  ankeVurderingVerdi,
+  fritekstTilBrev,
   ankeVurderingResultat,
   readOnly = true,
   behandlingId,
@@ -204,30 +186,16 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
         <span>&nbsp;</span>
         <PreviewAnkeLink
           previewCallback={previewCallback}
-          fritekstTilBrev={formValues.fritekstTilBrev}
-          ankeVurdering={formValues.ankeVurdering}
+          fritekstTilBrev={fritekstTilBrev}
+          ankeVurdering={ankeVurderingVerdi}
         />
       </Column>
     </Row>
   </form>
 );
 
-// TODO Kvifor sender ein med alle desse verdiane til backend? Ingen av dei blir endra i forma
-const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
-  vedtak: values.vedtak === '0' ? null : values.vedtak,
-  ankeVurdering: values.ankeVurdering,
+const transformValues = (values: { begrunnelse: string }, aksjonspunktCode: string) => ({
   begrunnelse: values.begrunnelse,
-  erMerknaderMottatt: values.erMerknaderMottatt,
-  fritekstTilBrev: values.fritekstTilBrev,
-  erGodkjentAvMedunderskriver: values.erGodkjentAvMedunderskriver,
-  erAnkerIkkePart: values.erAnkerIkkePart,
-  erIkkeKonkret: values.erIkkeKonkret,
-  erFristIkkeOverholdt: values.erFristIkkeOverholdt,
-  erIkkeSignert: values.erIkkeSignert,
-  erSubsidiartRealitetsbehandles: values.erSubsidiartRealitetsbehandles,
-  ankeOmgjoerArsak: values.ankeOmgjoerArsak,
-  ankeVurderingOmgjoer: values.ankeVurderingOmgjoer,
-  gjelderVedtak: values.vedtak !== '0',
   kode: aksjonspunktCode,
 });
 
@@ -240,21 +208,8 @@ interface PureOwnProps {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
 }
 
-const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
-const formatId = (b: number) => (b === null ? IKKE_PAA_ANKET_BEHANDLING_ID : `${b}`);
-// TODO Kvifor set ein opp alle desse verdiane som initial props? Ingen felt i forma for desse verdiane
 const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
-  vedtak: resultat ? formatId(resultat.paAnketBehandlingId) : null,
-  ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
-  fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
-  erAnkerIkkePart: resultat ? resultat.erAnkerIkkePart : false,
-  erIkkeKonkret: resultat ? resultat.erIkkeKonkret : false,
-  erFristIkkeOverholdt: resultat ? resultat.erFristIkkeOverholdt : false,
-  erIkkeSignert: resultat ? resultat.erIkkeSignert : false,
-  erSubsidiartRealitetsbehandles: resultat ? resultat.erSubsidiartRealitetsbehandles : null,
-  ankeOmgjoerArsak: resultat ? resultat.ankeOmgjoerArsak : null,
-  ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
 }));
 
 const formName = 'ankeResultatForm';
@@ -264,12 +219,12 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     .filter((ap: Aksjonspunkt) => initialOwnProps.readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
     .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
   const aksjonspunktCode = !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? aksjonspunktCodes.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
-  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (state: any, ownProps: PureOwnProps) => ({
+  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
+  return (_state, ownProps: PureOwnProps) => ({
     aksjonspunktCode,
     initialValues: buildInitialValues(ownProps),
-    formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-      'ankeVurdering', 'fritekstTilBrev', 'gjelderVedtak') || {},
+    ankeVurderingVerdi: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
+    fritekstTilBrev: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.fritekstTilBrev : null,
     onSubmit,
   });
 };
