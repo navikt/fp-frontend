@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -16,64 +15,75 @@ import {
 } from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
+import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
 
 import PreviewAnkeLink from './PreviewAnkeLink';
 
-const isVedtakUtenToTrinn = (apCodes) => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
-const isMedUnderskriver = (apCodes) => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
-const isFatterVedtak = (apCodes) => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
+const isVedtakUtenToTrinn = (apCodes: string) => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
+const isMedUnderskriver = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
+const isFatterVedtak = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
 
-const ResultatEnkel = (resultat) => (
+interface OwnPropsResultat {
+  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat']
+}
+
+const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
+  ankeVurderingResultat,
+}) => (
   <div>
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" /></Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{resultat.ankevurderingresultat.begrunnelse}</Undertekst>
+    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
   </div>
 );
 
-const ResultatOpphev = (resultat) => (
+const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
+  ankeVurderingResultat,
+}) => (
   <div>
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" /></Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{resultat.ankevurderingresultat.begrunnelse}</Undertekst>
+    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
   </div>
 );
 
-const ResultatAvvise = (resultat) => (
+const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
+  ankeVurderingResultat,
+}) => (
   <>
     <Undertekst>
-      {resultat.ankevurderingresultat.paAnketBehandlingId != null
+      {ankeVurderingResultat.paAnketBehandlingId != null
       && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />)}
-      {resultat.ankevurderingresultat.paAnketBehandlingId == null
+      {ankeVurderingResultat.paAnketBehandlingId == null
       && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />)}
     </Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
     <ul>
-      {resultat.ankevurderingresultat.erAnkerIkkePart
+      {ankeVurderingResultat.erAnkerIkkePart
       && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkePart" /></li>)}
-      {resultat.ankevurderingresultat.erIkkeKonkret
+      {ankeVurderingResultat.erIkkeKonkret
       && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" /></li>)}
-      {resultat.ankevurderingresultat.erFristIkkeOverholdt
+      {ankeVurderingResultat.erFristIkkeOverholdt
       && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" /></li>)}
-      {resultat.ankevurderingresultat.erIkkeSignert
+      {ankeVurderingResultat.erIkkeSignert
       && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" /></li>)}
     </ul>
     <Undertekst>
       <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
-      <FormattedMessage id={resultat.ankevurderingresultat.erSubsidiartRealitetsbehandles
+      <FormattedMessage id={ankeVurderingResultat.erSubsidiartRealitetsbehandles
         ? 'Ankebehandling.Realitetsbehandles.Ja' : 'Ankebehandling.Realitetsbehandles.Nei'}
       />
     </Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{resultat.ankevurderingresultat.begrunnelse}</Undertekst>
+    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
   </>
 );
 
-const hentSprakKode = (ankeOmgjoerArsak) => {
+const hentSprakKode = (ankeOmgjoerArsak: string) => {
   switch (ankeOmgjoerArsak) {
     case ankeVurderingOmgjoer.ANKE_TIL_UGUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
     case ankeVurderingOmgjoer.ANKE_TIL_GUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
@@ -82,39 +92,74 @@ const hentSprakKode = (ankeOmgjoerArsak) => {
   }
 };
 
-const ResultatOmgjores = (resultat) => (
+const ResultatOmgjores: FunctionComponent<OwnPropsResultat> = ({
+  ankeVurderingResultat,
+}) => (
   <>
-    <Undertekst><FormattedMessage id={hentSprakKode(resultat.ankevurderingresultat.ankeVurderingOmgjoer)} /></Undertekst>
+    <Undertekst><FormattedMessage id={hentSprakKode(ankeVurderingResultat.ankeVurderingOmgjoer)} /></Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-    <Undertekst>{resultat.ankevurderingresultat.ankeOmgjoerArsakNavn}</Undertekst>
+    <Undertekst>{ankeVurderingResultat.ankeOmgjoerArsak.kode}</Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{resultat.ankevurderingresultat.begrunnelse}</Undertekst>
+    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
   </>
 );
 
-const AnkeResultat = (resultat) => {
-  if (!resultat || !resultat.ankevurderingresultat) {
+const AnkeResultat: FunctionComponent<OwnPropsResultat> = ({
+  ankeVurderingResultat,
+}) => {
+  if (!ankeVurderingResultat) {
     return null;
   }
-  const { ankevurderingresultat } = resultat;
-  switch (ankevurderingresultat.ankeVurdering) {
-    case ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK: return (<ResultatEnkel ankevurderingresultat={ankevurderingresultat} />);
-    case ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE: return (<ResultatOpphev ankevurderingresultat={ankevurderingresultat} />);
-    case ankeVurdering.ANKE_OMGJOER: return (<ResultatOmgjores ankevurderingresultat={ankevurderingresultat} />);
-    case ankeVurdering.ANKE_AVVIS: return (<ResultatAvvise ankevurderingresultat={ankevurderingresultat} />);
+  switch (ankeVurderingResultat.ankeVurdering) {
+    case ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK: return (<ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />);
+    case ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE: return (<ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />);
+    case ankeVurdering.ANKE_OMGJOER: return (<ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} />);
+    case ankeVurdering.ANKE_AVVIS: return (<ResultatAvvise ankeVurderingResultat={ankeVurderingResultat} />);
     default: return <div>???</div>;
   }
 };
 
-const AnkeResultatForm = ({
+type FormValuesUtrekk = {
+  ankeVurdering: string;
+  fritekstTilBrev?: string;
+  gjelderVedtak: string;
+};
+
+type FormValues = {
+  erMerknaderMottatt: boolean;
+  erGodkjentAvMedunderskriver: boolean;
+  erAnkerIkkePart: boolean;
+  erIkkeKonkret: boolean;
+  erFristIkkeOverholdt: boolean;
+  erIkkeSignert: boolean;
+  vedtak: string;
+  begrunnelse: string;
+  erSubsidiartRealitetsbehandles: boolean;
+  ankeOmgjoerArsak: string;
+  ankeVurderingOmgjoer: string;
+} & FormValuesUtrekk
+
+interface OwnProps {
+  saveAnke: (data: any) => Promise<any>;
+  previewCallback: (data: any) => Promise<any>;
+  aksjonspunktCode: string;
+  formValues?: FormValuesUtrekk;
+  readOnly?: boolean;
+  readOnlySubmitButton?: boolean;
+  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   handleSubmit,
   previewCallback,
   aksjonspunktCode,
   formValues,
   ankeVurderingResultat,
-  readOnly,
+  readOnly = true,
   behandlingId,
   behandlingVersjon,
   ...formProps
@@ -125,7 +170,7 @@ const AnkeResultatForm = ({
     <Row>
       <Column xs="12">
         <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling" /></Undertekst>
-        <AnkeResultat ankevurderingresultat={ankeVurderingResultat} />
+        <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} />
       </Column>
     </Row>
     <VerticalSpacer sixteenPx />
@@ -161,89 +206,70 @@ const AnkeResultatForm = ({
           previewCallback={previewCallback}
           fritekstTilBrev={formValues.fritekstTilBrev}
           ankeVurdering={formValues.ankeVurdering}
-          aksjonspunktCode={aksjonspunktCode}
         />
       </Column>
     </Row>
   </form>
 );
 
-AnkeResultatForm.propTypes = {
-  previewCallback: PropTypes.func.isRequired,
-  saveAnke: PropTypes.func.isRequired,
-  aksjonspunktCode: PropTypes.string.isRequired,
-  formValues: PropTypes.shape(),
-  readOnly: PropTypes.bool,
-  readOnlySubmitButton: PropTypes.bool,
-  ankevurderingresultat: PropTypes.shape(),
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  ...formPropTypes,
-};
-
-AnkeResultatForm.defaultProps = {
-  formValues: {},
-  readOnly: true,
-  readOnlySubmitButton: true,
-  ankevurderingresultat: {},
-};
-
-// TODO (TOR) Her ligg det masse som ikkje er felt i forma! Rydd
-const transformValues = (values, aksjonspunktCode) => ({
+// TODO Kvifor sender ein med alle desse verdiane til backend? Ingen av dei blir endra i forma
+const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
   vedtak: values.vedtak === '0' ? null : values.vedtak,
   ankeVurdering: values.ankeVurdering,
   begrunnelse: values.begrunnelse,
   erMerknaderMottatt: values.erMerknaderMottatt,
-  merknadKommentar: values.merknadKommentar,
   fritekstTilBrev: values.fritekstTilBrev,
-  vedtaksdatoAnketBehandling: values.vedtaksdatoAnketBehandling,
   erGodkjentAvMedunderskriver: values.erGodkjentAvMedunderskriver,
   erAnkerIkkePart: values.erAnkerIkkePart,
   erIkkeKonkret: values.erIkkeKonkret,
   erFristIkkeOverholdt: values.erFristIkkeOverholdt,
   erIkkeSignert: values.erIkkeSignert,
   erSubsidiartRealitetsbehandles: values.erSubsidiartRealitetsbehandles,
-  ankeAvvistArsak: values.ankeAvvistArsak,
   ankeOmgjoerArsak: values.ankeOmgjoerArsak,
   ankeVurderingOmgjoer: values.ankeVurderingOmgjoer,
   gjelderVedtak: values.vedtak !== '0',
   kode: aksjonspunktCode,
 });
 
+interface PureOwnProps {
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  submitCallback: (data: any) => Promise<any>;
+  behandlingId: number;
+  behandlingVersjon: number;
+  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
+}
+
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
-const formatId = (b) => (b === null ? IKKE_PAA_ANKET_BEHANDLING_ID : `${b}`);
-// TODO (TOR) Rydd i dette! Treng neppe senda med alt dette til backend
-const buildInitialValues = createSelector([(ownProps) => ownProps.ankeVurderingResultat], (resultat) => ({
+const formatId = (b: number) => (b === null ? IKKE_PAA_ANKET_BEHANDLING_ID : `${b}`);
+// TODO Kvifor set ein opp alle desse verdiane som initial props? Ingen felt i forma for desse verdiane
+const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
   vedtak: resultat ? formatId(resultat.paAnketBehandlingId) : null,
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
   fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
-  vedtaksdatoAnketBehandling: resultat ? resultat.vedtaksdatoAnketBehandling : null,
-  erGodkjentAvMedunderskriver: resultat ? resultat.erGodkjentAvMedunderskriver : false,
   erAnkerIkkePart: resultat ? resultat.erAnkerIkkePart : false,
   erIkkeKonkret: resultat ? resultat.erIkkeKonkret : false,
   erFristIkkeOverholdt: resultat ? resultat.erFristIkkeOverholdt : false,
   erIkkeSignert: resultat ? resultat.erIkkeSignert : false,
   erSubsidiartRealitetsbehandles: resultat ? resultat.erSubsidiartRealitetsbehandles : null,
-  ankeAvvistArsak: resultat ? resultat.ankeAvvistArsak : null,
   ankeOmgjoerArsak: resultat ? resultat.ankeOmgjoerArsak : null,
   ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
-  gjelderVedtak: resultat ? resultat.gjelderVedtak : null,
 }));
 
 const formName = 'ankeResultatForm';
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const vedtaksaksjonspunkt = initialOwnProps.aksjonspunkter
-    .filter((ap) => initialOwnProps.readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
-    .filter((ap) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
+    .filter((ap: Aksjonspunkt) => initialOwnProps.readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
+    .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
   const aksjonspunktCode = !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? aksjonspunktCodes.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (state, ownProps) => ({
+  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
+  return (state: any, ownProps: PureOwnProps) => ({
     aksjonspunktCode,
     initialValues: buildInitialValues(ownProps),
     formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-      'ankeVurdering', 'fritekstTilBrev', 'gjelderVedtak'),
+      'ankeVurdering', 'fritekstTilBrev', 'gjelderVedtak') || {},
     onSubmit,
   });
 };

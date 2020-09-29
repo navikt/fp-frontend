@@ -3,7 +3,7 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
 
-import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
+import BehandleResultatForm from './components/BehandleResultatForm';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -22,13 +22,11 @@ interface OwnProps {
   readOnlySubmitButton: boolean;
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
-  behandlinger: BehandlingInfo[];
 }
 
-const AnkeProsessIndex: FunctionComponent<OwnProps> = ({
+const AnkeResultatProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
   ankeVurdering,
-  behandlinger,
   aksjonspunkter,
   submitCallback,
   isReadOnly,
@@ -37,12 +35,10 @@ const AnkeProsessIndex: FunctionComponent<OwnProps> = ({
   previewCallback,
 }) => (
   <RawIntlProvider value={intl}>
-    <BehandleAnkeForm
+    <BehandleResultatForm
       behandlingId={behandling.id}
       behandlingVersjon={behandling.versjon}
-      sprakkode={behandling.sprakkode}
-      ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
-      behandlinger={behandlinger}
+      ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
       readOnly={isReadOnly}
@@ -53,4 +49,4 @@ const AnkeProsessIndex: FunctionComponent<OwnProps> = ({
   </RawIntlProvider>
 );
 
-export default AnkeProsessIndex;
+export default AnkeResultatProsessIndex;
