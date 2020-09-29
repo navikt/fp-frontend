@@ -25,11 +25,25 @@ type KlageVurdering = Readonly<{
     avvistArsaker?: {
       navn?: string;
     }[];
+    paKlagdBehandlingId: number;
+    paklagdBehandlingType: Kodeverk;
+    begrunnelse: string;
+    erKlagerPart: boolean;
+    erKlageKonkret: boolean;
+    erKlagefirstOverholdt: boolean;
+    erSignert: boolean;
   };
   klageFormkravResultatNFP?: {
     avvistArsaker?: {
       navn?: string;
     }[];
+    paKlagdBehandlingId: number;
+    paklagdBehandlingType: Kodeverk;
+    begrunnelse: string;
+    erKlagerPart: boolean;
+    erKlageKonkret: boolean;
+    erKlagefirstOverholdt: boolean;
+    erSignert: boolean;
   };
 }>
 

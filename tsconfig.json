@@ -37,6 +37,7 @@
 		"packages/prosess-anke",
 		"packages/prosess-anke-merknader",
 		"packages/prosess-anke-resultat",
+		"packages/prosess-formkrav",
 		"packages/prosess-klagevurdering",
 		"packages/prosess-vedtak",
 		"packages/prosess-vedtak-klage",

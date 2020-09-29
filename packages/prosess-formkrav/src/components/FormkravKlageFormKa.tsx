@@ -1,31 +1,42 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { formPropTypes } from 'redux-form';
-import PropTypes from 'prop-types';
+import { InjectedFormProps } from 'redux-form';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { behandlingForm } from '@fpsak-frontend/form';
+import { KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import FormkravKlageForm, { getPaKlagdVedtak, IKKE_PA_KLAGD_VEDTAK } from './FormkravKlageForm';
 import { erTilbakekreving, påklagdTilbakekrevingInfo } from './FormkravKlageFormNfp';
+import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
+
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  klageVurdering: KlageVurdering;
+  submitCallback: (data: any) => Promise<any>;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  avsluttedeBehandlinger: AvsluttetBehandling[];
+}
 
 /**
  * FormkravKlageFormKA
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (KA).
  */
-export const FormkravKlageFormKa = ({
+export const FormkravKlageFormKa: FunctionComponent<OwnProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
-  handleSubmit,
   readOnly,
   readOnlySubmitButton,
   alleKodeverk,
   avsluttedeBehandlinger,
   ...formProps
 }) => (
-  <form onSubmit={handleSubmit}>
+  <form onSubmit={formProps.handleSubmit}>
     <FormkravKlageForm
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
@@ -39,20 +50,21 @@ export const FormkravKlageFormKa = ({
   </form>
 );
 
-FormkravKlageFormKa.propTypes = {
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  readOnly: PropTypes.bool,
-  readOnlySubmitButton: PropTypes.bool,
-  ...formPropTypes,
-};
-
 FormkravKlageFormKa.defaultProps = {
   readOnly: true,
   readOnlySubmitButton: true,
 };
 
-export const transformValues = (values, avsluttedeBehandlinger) => ({
+type FormValues = {
+  erKlagerPart: boolean;
+  erFristOverholdt: boolean;
+  erKonkret: boolean;
+  erSignert: boolean;
+  begrunnelse: boolean;
+  vedtak: string;
+}
+
+export const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]) => ({
   erKlagerPart: values.erKlagerPart,
   erFristOverholdt: values.erFristOverholdt,
   erKonkret: values.erKonkret,
@@ -66,7 +78,7 @@ export const transformValues = (values, avsluttedeBehandlinger) => ({
 
 const formName = 'FormkravKlageFormKa';
 
-const buildInitialValues = createSelector([(ownProps) => ownProps.klageVurdering], (klageVurdering) => {
+const buildInitialValues = createSelector([(ownProps: OwnProps) => ownProps.klageVurdering], (klageVurdering) => {
   const klageFormkavResultatKa = klageVurdering ? klageVurdering.klageFormkravResultatKA : null;
   return {
     vedtak: klageFormkavResultatKa ? getPaKlagdVedtak(klageFormkavResultatKa) : null,
@@ -78,11 +90,10 @@ const buildInitialValues = createSelector([(ownProps) => ownProps.klageVurdering
   };
 });
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, initialOwnProps.avsluttedeBehandlinger)]);
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: OwnProps) => {
+  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, initialOwnProps.avsluttedeBehandlinger)]);
+  return (_state, ownProps: OwnProps) => ({
     initialValues: buildInitialValues(ownProps),
-    readOnly: ownProps.readOnly,
     onSubmit,
   });
 };

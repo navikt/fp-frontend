@@ -69,7 +69,7 @@ describe('<VedtakKlageForm>', () => {
     describe('getIsAvgetAvvisningsAarsakervist', () => {
       it('should return avvisningsAarsaker with length 2', () => {
         const klageVurdering = {
-          klageFormkravResultatNFP: { avvistArsaker: [{ navn: 'arsak1' }, { navn: 'arsak2' }] },
+          klageFormkravResultatNFP: { avvistArsaker: [{ navn: 'arsak1' }, { navn: 'arsak2' }] } as KlageVurdering['klageFormkravResultatNFP'],
           klageVurderingResultatNFP: { klageAvvistArsakNavn: 'Klager er ikke part', klageVurdertAv: '' },
         } as KlageVurdering;
         const selected = getAvvisningsAarsaker.resultFunc(klageVurdering);

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -13,16 +15,17 @@ import {
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import styles from './formkravKlageForm.less';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
-export const getPaKlagdVedtak = (klageFormkavResultat) => (
-  klageFormkavResultat.paKlagdBehandlingId ? `${klageFormkavResultat.paKlagdBehandlingId}` : IKKE_PA_KLAGD_VEDTAK
-);
+export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']) => (klageFormkavResultat.paKlagdBehandlingId
+  ? `${klageFormkavResultat.paKlagdBehandlingId}` : IKKE_PA_KLAGD_VEDTAK);
 
-const getKlagBareVedtak = (avsluttedeBehandlinger, intl, getKodeverknavn) => {
+const getKlagBareVedtak = (avsluttedeBehandlinger: AvsluttetBehandling[], intl: IntlShape, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
   const klagBareVedtak = [<option key="formkrav" value={IKKE_PA_KLAGD_VEDTAK}>{intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' })}</option>];
   return klagBareVedtak.concat(avsluttedeBehandlinger.map((behandling) => (
     <option key={behandling.id} value={`${behandling.id}`}>
@@ -31,16 +34,26 @@ const getKlagBareVedtak = (avsluttedeBehandlinger, intl, getKodeverknavn) => {
   )));
 };
 
-const getLovHjemmeler = (aksjonspunktCode) => (
-  aksjonspunktCode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA'
-);
+const getLovHjemmeler = (aksjonspunktCode: string) => (aksjonspunktCode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
+  ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA');
+
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  avsluttedeBehandlinger: AvsluttetBehandling[];
+  formProps: InjectedFormProps;
+  aksjonspunktCode: string;
+  readOnly?: boolean;
+  readOnlySubmitButton?: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
 
 /**
  * FormkravKlageForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP og KA).
  */
-export const FormkravKlageForm = ({
+export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -142,25 +155,6 @@ export const FormkravKlageForm = ({
 
     </>
   );
-};
-
-FormkravKlageForm.propTypes = {
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  avsluttedeBehandlinger: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    type: PropTypes.shape({
-      kode: PropTypes.string.isRequired,
-    }).isRequired,
-    avsluttet: PropTypes.string,
-    uuid: PropTypes.string,
-  })).isRequired,
-  formProps: PropTypes.shape().isRequired,
-  aksjonspunktCode: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool,
-  readOnlySubmitButton: PropTypes.bool,
-  intl: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
 };
 
 FormkravKlageForm.defaultProps = {

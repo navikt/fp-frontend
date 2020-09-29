@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import { ProsessStegContainer } from '@fpsak-frontend/behandling-felles';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -79,7 +79,7 @@ describe('<KlageProsess.>', () => {
     klageFormkravResultatNFP: {
       avvistArsaker: [],
     },
-  };
+  } as KlageVurdering;
 
   it('skal vise alle aktuelle prosessSteg i meny', () => {
     const wrapper = shallow(

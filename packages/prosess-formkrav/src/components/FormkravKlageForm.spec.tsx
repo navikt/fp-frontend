@@ -1,10 +1,12 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { expect } from 'chai';
+import { InjectedFormProps } from 'redux-form';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+
 import { FormkravKlageForm } from './FormkravKlageForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-formkrav';
 
@@ -44,7 +46,7 @@ describe('<FormkravKlageForm>', () => {
       aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP}
       avsluttedeBehandlinger={behandlinger}
       intl={intlMock}
-      formProps={{}}
+      formProps={{} as InjectedFormProps}
       alleKodeverk={{
         [kodeverkTyper.BEHANDLING_TYPE]: [{
           kode: behandlingType.FORSTEGANGSSOKNAD,
