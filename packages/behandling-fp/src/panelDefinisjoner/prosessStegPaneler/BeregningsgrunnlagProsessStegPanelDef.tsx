@@ -18,6 +18,17 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.VURDER_DEKNINGSGRAD,
 ];
 
+/**
+ * getStatusForBeregningsgrunnlag
+ * @param bg beregningsgrunnlaget for behandlingen
+ * @param aksjonspunkter aksjonspunkter for behandlingen
+ * @param vilkarene vilkårene for behandlingen
+ * Siden visning av prosesssteg bruker vilkårsresultat til å utlede status (om de skal vise informaskjon, hvilken farge de skal ha osv),
+ * må vi returnere vilkarUtfallType selvom det ikke nødvendigvis er vilkåret som sjekkes.
+ * vilkarUtfallType.IKKE_VURDERT = Grått steg uten innhold
+ * vilkarUtfallType.OPPFYLT = Grønt steg med innhold
+ * vilkarUtfallType.IKKE_OPPFYLT = Rødt steg med innhold
+ */
 const getStatusForBeregningsgrunnlag = (bg, aksjonspunkter, vilkarene) => {
   if (!bg) {
     return vilkarUtfallType.IKKE_VURDERT;
