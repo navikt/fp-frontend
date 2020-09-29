@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import fpBehandlingApi from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 class UttakFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.UTTAK
@@ -24,9 +24,9 @@ class UttakFaktaPanelDef extends FaktaPanelDef {
   ]
 
   getEndepunkter = () => [
-    fpBehandlingApi.UTTAK_KONTROLLER_FAKTA_PERIODER,
-    fpBehandlingApi.FAKTA_ARBEIDSFORHOLD,
-    fpBehandlingApi.FAMILIEHENDELSE,
+    FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER,
+    FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
+    FpBehandlingApiKeys.FAMILIEHENDELSE,
   ]
 
   getKomponent = (props) => <UttakFaktaIndex {...props} />

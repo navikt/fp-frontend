@@ -2,9 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import { Dispatch } from 'redux';
 
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -129,19 +127,14 @@ describe('<faktaHooks>', () => {
 
     const panelUtledet = new FaktaPanelUtledet(panelDef, aksjonspunkter, behandling);
 
-    const dispatch = () => Promise.resolve();
     const oppdaterProsessStegOgFaktaPanelIUrl = sinon.spy();
-    const makeRestApiRequest = sinon.spy();
+    const lagreAksjonspunkter = sinon.stub();
+    lagreAksjonspunkter.returns(Promise.resolve());
     const overstyringApCodes = [];
     const valgtProsessSteg = 'default';
-    const behandlingApi: Partial<{[name: string]: Partial<EndpointOperations>}> = {
-      SAVE_AKSJONSPUNKT: {
-        makeRestApiRequest: () => (data) => makeRestApiRequest(data),
-      },
-    };
 
     const wrapper = testHook(() => faktaHooks.useCallbacks([panelUtledet], fagsak, behandling as Behandling, oppdaterProsessStegOgFaktaPanelIUrl,
-      valgtProsessSteg, overstyringApCodes, behandlingApi as {[name: string]: EndpointOperations}, dispatch as Dispatch));
+      valgtProsessSteg, overstyringApCodes, lagreAksjonspunkter));
     const [velgFaktaPanelCallback, bekreftAksjonspunktCallback] = Object.values(wrapper.find('div').props()).reduce((acc, value) => [...acc, value], []);
 
     velgFaktaPanelCallback(0);
@@ -157,9 +150,9 @@ describe('<faktaHooks>', () => {
     }];
     bekreftAksjonspunktCallback(aksjonspunkterSomSkalLagres);
 
-    const requestKall = makeRestApiRequest.getCalls();
+    const requestKall = lagreAksjonspunkter.getCalls();
     expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(1);
+    expect(requestKall[0].args).to.have.length(2);
     expect(requestKall[0].args[0]).to.eql({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,

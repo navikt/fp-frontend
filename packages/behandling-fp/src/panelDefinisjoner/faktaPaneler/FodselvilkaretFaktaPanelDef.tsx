@@ -6,7 +6,7 @@ import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 
-import fpBehandlingApi from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 class FodselvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.FODSELSVILKARET
@@ -20,9 +20,9 @@ class FodselvilkaretFaktaPanelDef extends FaktaPanelDef {
   ]
 
   getEndepunkter = () => [
-    fpBehandlingApi.FAMILIEHENDELSE,
-    fpBehandlingApi.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
-    fpBehandlingApi.SOKNAD_ORIGINAL_BEHANDLING,
+    FpBehandlingApiKeys.FAMILIEHENDELSE,
+    FpBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
+    FpBehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
   ]
 
   getKomponent = (props) => <FodselFaktaIndex {...props} />

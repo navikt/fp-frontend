@@ -1,10 +1,13 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { History } from 'history';
+import { match } from 'react-router-dom';
 
 import AppIndex from './AppIndex';
 import Home from './components/Home';
 import Dekorator from './components/Dekorator';
+import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
 describe('<AppIndex>', () => {
   const locationMock = {
@@ -14,42 +17,27 @@ describe('<AppIndex>', () => {
     hash: 'test',
   };
 
-  it('skal vise hjem-skjermbilde inkludert header men ikke feilmelding', () => {
+  it('skal vise hjem-skjermbilde', () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     const wrapper = shallow(<AppIndex.WrappedComponent
-      navAnsattName="Peder"
       location={locationMock}
+      history={{} as History}
+      match={{} as match}
     />);
-    const headerComp = wrapper.find(Dekorator);
-    expect(headerComp).to.have.length(1);
-    expect(headerComp.prop('errorMessages').length).is.eql(0);
-
-    const homeComp = wrapper.find(Home);
-    expect(homeComp).to.have.length(1);
-  });
-
-  it('skal vise hjem-skjermbilde inkludert header og feilmelding', () => {
-    const wrapper = shallow(<AppIndex.WrappedComponent
-      navAnsattName="Peder"
-      errorMessages={[{ message: 'error' }]}
-      location={locationMock}
-    />);
-
-    const headerComp = wrapper.find(Dekorator);
-    expect(headerComp).to.have.length(1);
-    expect(headerComp.prop('errorMessages').length).is.eql(1);
-
-    const homeComp = wrapper.find(Home);
-    expect(homeComp).to.have.length(1);
+    expect(wrapper.find(Dekorator)).to.have.length(1);
+    expect(wrapper.find(Home)).to.have.length(1);
   });
 
   it('skal vise query-feilmelding', () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     const location = {
       search: '?errormessage=Det+finnes+ingen+sak+med+denne+referansen%3A+266',
     };
 
     const wrapper = shallow(<AppIndex.WrappedComponent
-      navAnsattName="Peder"
       location={{ ...locationMock, ...location }}
+      history={{} as History}
+      match={{} as match}
     />);
 
     const headerComp = wrapper.find(Dekorator);

@@ -6,7 +6,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import svpBehandlingApi from '../../data/svpBehandlingApi';
+import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <AvregningProsessIndex {...props} />
@@ -16,7 +16,7 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    svpBehandlingApi.TILBAKEKREVINGVALG,
+    SvpBehandlingApiKeys.TILBAKEKREVINGVALG,
   ]
 
   getOverstyrVisningAvKomponent = () => true

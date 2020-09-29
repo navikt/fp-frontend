@@ -1,6 +1,3 @@
-import { Dispatch } from 'redux';
-
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
 
 import FagsakInfo from '../../types/fagsakInfoTsType';
@@ -45,12 +42,12 @@ FaktaPanelMenyRad[] => faktaPaneler.map((panel) => ({
 }));
 
 export const getBekreftAksjonspunktCallback = (
-  dispatch: Dispatch,
   fagsak: FagsakInfo,
   behandling: Behandling,
   oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
   overstyringApCodes: string[],
-  api: {[name: string]: EndpointOperations},
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
 ) => (aksjonspunkter) => {
   const model = aksjonspunkter.map((ap) => ({
     '@type': ap.kode,
@@ -64,14 +61,14 @@ export const getBekreftAksjonspunktCallback = (
   };
 
   if (model && overstyringApCodes.includes(model[0].kode)) {
-    return dispatch(api.SAVE_OVERSTYRT_AKSJONSPUNKT.makeRestApiRequest()({
+    return lagreOverstyrteAksjonspunkter({
       ...params,
       overstyrteAksjonspunktDtoer: model,
-    }, { keepData: true })).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+    }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
   }
 
-  return dispatch(api.SAVE_AKSJONSPUNKT.makeRestApiRequest()({
+  return lagreAksjonspunkter({
     ...params,
     bekreftedeAksjonspunktDtoer: model,
-  }, { keepData: true })).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+  }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
 };

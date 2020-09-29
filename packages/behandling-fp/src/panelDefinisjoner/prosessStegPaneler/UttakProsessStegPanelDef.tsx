@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
-import fpBehandlingApi from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 const faktaUttakAp = [
   aksjonspunktCodes.AVKLAR_UTTAK,
@@ -49,9 +49,9 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    fpBehandlingApi.FAKTA_ARBEIDSFORHOLD,
-    fpBehandlingApi.FAMILIEHENDELSE,
-    fpBehandlingApi.UTTAK_PERIODE_GRENSE,
+    FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
+    FpBehandlingApiKeys.FAMILIEHENDELSE,
+    FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE,
   ]
 
   getOverstyrVisningAvKomponent = () => true

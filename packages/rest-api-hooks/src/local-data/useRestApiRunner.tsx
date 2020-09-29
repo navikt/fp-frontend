@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
 
 import {
-  REQUEST_POLLING_CANCELLED, NotificationMapper, ErrorType, AbstractRequestApi,
-} from '@fpsak-frontend/rest-api-new';
+  REQUEST_POLLING_CANCELLED, ErrorType, AbstractRequestApi,
+} from '@fpsak-frontend/rest-api';
 
-import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
 import RestApiState from '../RestApiState';
 
 interface RestApiData<T> {
@@ -13,7 +12,6 @@ interface RestApiData<T> {
   state: RestApiState;
   error?: ErrorType;
   data?: T;
-  cancelRequest: () => void;
 }
 
 /**
@@ -39,7 +37,6 @@ export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => funct
   return {
     startRequest,
     resetRequestData: () => undefined,
-    cancelRequest: () => undefined,
     ...data,
   };
 };
@@ -54,12 +51,6 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
     error: undefined,
   });
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  const notif = new NotificationMapper();
-  notif.addRequestErrorEventHandlers((errorData, type) => {
-    addErrorMessage({ ...errorData, type });
-  });
-
   const startRequest = useCallback((params?: any, keepData = false):Promise<T> => {
     if (requestApi.hasPath(key)) {
       setData((oldState) => ({
@@ -68,7 +59,7 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
         error: undefined,
       }));
 
-      return requestApi.startRequest(key, params, notif)
+      return requestApi.startRequest(key, params)
         .then((dataRes) => {
           if (dataRes.payload !== REQUEST_POLLING_CANCELLED) {
             setData({
@@ -107,7 +98,6 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
   return {
     startRequest,
     resetRequestData,
-    cancelRequest: () => requestApi.cancelRequest(key),
     ...data,
   };
 };

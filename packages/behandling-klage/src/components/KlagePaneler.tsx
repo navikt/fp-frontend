@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import {
   FagsakInfo, Rettigheter, BehandlingPaVent, SettPaVentParams,
@@ -19,7 +18,7 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, { keepData: boolean }) => Promise<any>;
+  hentBehandling: (params: { behandlingId: number }, keepData: boolean) => Promise<any>;
   opneSokeside: () => void;
   alleBehandlinger: {
     id: number;
@@ -29,6 +28,7 @@ interface OwnProps {
     opprettet: string;
     avsluttet?: string;
   }[];
+  setBehandling: (behandling: Behandling) => void;
 }
 
 const KlagePaneler: FunctionComponent<OwnProps> = ({
@@ -44,34 +44,30 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
   hentBehandling,
   opneSokeside,
   alleBehandlinger,
-}) => {
-  // TODO (TOR) Har trekt denne ut hit grunna redux test-oppsett. Fiks
-  const dispatch = useDispatch();
-
-  return (
-    <>
-      <BehandlingPaVent
-        behandling={behandling}
-        aksjonspunkter={fetchedData.aksjonspunkter}
-        kodeverk={kodeverk}
-        settPaVent={settPaVent}
-        hentBehandling={hentBehandling}
-      />
-      <KlageProsess
-        data={fetchedData}
-        fagsak={fagsak}
-        behandling={behandling}
-        rettigheter={rettigheter}
-        valgtProsessSteg={valgtProsessSteg}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-        opneSokeside={opneSokeside}
-        alleBehandlinger={alleBehandlinger}
-        dispatch={dispatch}
-        alleKodeverk={kodeverk}
-      />
-    </>
-  );
-};
+  setBehandling,
+}) => (
+  <>
+    <BehandlingPaVent
+      behandling={behandling}
+      aksjonspunkter={fetchedData.aksjonspunkter}
+      kodeverk={kodeverk}
+      settPaVent={settPaVent}
+      hentBehandling={hentBehandling}
+    />
+    <KlageProsess
+      data={fetchedData}
+      fagsak={fagsak}
+      behandling={behandling}
+      rettigheter={rettigheter}
+      valgtProsessSteg={valgtProsessSteg}
+      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+      opneSokeside={opneSokeside}
+      alleBehandlinger={alleBehandlinger}
+      alleKodeverk={kodeverk}
+      setBehandling={setBehandling}
+    />
+  </>
+);
 
 export default KlagePaneler;

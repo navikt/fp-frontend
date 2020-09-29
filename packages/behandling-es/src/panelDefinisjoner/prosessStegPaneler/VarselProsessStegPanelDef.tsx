@@ -5,7 +5,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 
-import esBehandlingApi from '../../data/esBehandlingApi';
+import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <VarselOmRevurderingProsessIndex {...props} />
@@ -16,14 +16,13 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    esBehandlingApi.FAMILIEHENDELSE,
-    esBehandlingApi.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
-    esBehandlingApi.SOKNAD_ORIGINAL_BEHANDLING,
+    EsBehandlingApiKeys.FAMILIEHENDELSE,
+    EsBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
+    EsBehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
   ]
 
-  getData = ({ previewCallback, dispatchSubmitFailed, soknad }) => ({
+  getData = ({ previewCallback, soknad }) => ({
     previewCallback,
-    dispatchSubmitFailed,
     soknad,
   })
 }

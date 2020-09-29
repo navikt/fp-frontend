@@ -1,9 +1,7 @@
 import {
   useState, useMemo, useCallback, useEffect,
 } from 'react';
-import { Dispatch } from 'redux';
 
-import { EndpointOperations } from '@fpsak-frontend/rest-api-redux';
 import {
   Behandling, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
@@ -80,14 +78,14 @@ const useProsessStegVelger = (
 const useBekreftAksjonspunkt = (
   fagsak: FagsakInfo,
   behandling: Behandling,
-  behandlingApi: {[name: string]: EndpointOperations},
   lagringSideEffectsCallback: (aksjonspunktModeller: any) => () => void,
-  dispatch: Dispatch,
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
   valgtPanel?: ProsessStegUtledet,
 ) => useCallback((
   aksjonspunktModels,
-) => getBekreftAksjonspunktCallback(dispatch, lagringSideEffectsCallback, fagsak,
-  behandling, valgtPanel ? valgtPanel.getAksjonspunkter() : [], behandlingApi)(aksjonspunktModels),
+) => getBekreftAksjonspunktCallback(lagringSideEffectsCallback, fagsak,
+  behandling, valgtPanel ? valgtPanel.getAksjonspunkter() : [], lagreAksjonspunkter, lagreOverstyrteAksjonspunkter)(aksjonspunktModels),
 [behandling.versjon, valgtPanel]);
 
 const useOppdateringAvBehandlingsversjon = (behandlingVersjon: number, oppdaterBehandlingVersjon: (versjon: number) => void) => {

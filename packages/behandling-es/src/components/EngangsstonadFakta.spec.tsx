@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
-import { DataFetcher } from '@fpsak-frontend/rest-api-redux';
 import { Behandling } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -69,6 +68,7 @@ describe('<EngangsstonadFakta>', () => {
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
+    inntektArbeidYtelse,
   };
 
   it('skal rendre faktapaneler og sidemeny korrekt', () => {
@@ -85,7 +85,7 @@ describe('<EngangsstonadFakta>', () => {
         valgtProsessSteg="default"
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -116,7 +116,7 @@ describe('<EngangsstonadFakta>', () => {
         valgtProsessSteg="default"
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
@@ -133,16 +133,10 @@ describe('<EngangsstonadFakta>', () => {
   });
 
   it('skal rendre faktapanel korrekt', () => {
-    const fetchedDataLocal: Partial<FetchedData> = {
-      aksjonspunkter,
-      vilkar,
-      inntektArbeidYtelse,
-    };
-
     const wrapper = shallowWithIntl(
       <EngangsstonadFakta.WrappedComponent
         intl={intlMock}
-        data={fetchedDataLocal as FetchedData}
+        data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
         rettigheter={rettigheter}
@@ -152,15 +146,11 @@ describe('<EngangsstonadFakta>', () => {
         valgtProsessSteg="default"
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
-        dispatch={sinon.spy()}
+        setBehandling={sinon.spy()}
       />,
     );
 
-    const dataFetcher = wrapper.find(DataFetcher);
-    expect(dataFetcher.prop('fetchingTriggers').triggers.behandlingVersion).is.eql(behandling.versjon);
-    expect(dataFetcher.prop('endpoints')).is.eql([]);
-
-    const arbeidsforholdPanel = dataFetcher.renderProp('render')({}).find(ArbeidsforholdFaktaIndex);
+    const arbeidsforholdPanel = wrapper.find(ArbeidsforholdFaktaIndex);
     expect(arbeidsforholdPanel.prop('readOnly')).is.false;
     expect(arbeidsforholdPanel.prop('submittable')).is.true;
     expect(arbeidsforholdPanel.prop('harApneAksjonspunkter')).is.true;

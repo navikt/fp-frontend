@@ -1,6 +1,6 @@
-// TODO (TOR) default export feilar for yarn:coverage
-// eslint-disable-next-line import/prefer-default-export
-export type RequestAdditionalConfig = Readonly<{
+type RequestAdditionalConfig = Readonly<{
   maxPollingLimit?: number;
-  saveResponseIn?: string;
+  isResponseBlob?: boolean,
 }>
+
+export default RequestAdditionalConfig;

@@ -2,9 +2,8 @@ import {
   useState, useEffect, useContext, DependencyList,
 } from 'react';
 
-import { NotificationMapper, AbstractRequestApi } from '@fpsak-frontend/rest-api-new';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
-import useRestApiErrorDispatcher from '../error/useRestApiErrorDispatcher';
 import { RestApiDispatchContext } from './RestApiContext';
 import RestApiState from '../RestApiState';
 
@@ -49,12 +48,6 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
     data: undefined,
   });
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  const notif = new NotificationMapper();
-  notif.addRequestErrorEventHandlers((errorData, type) => {
-    addErrorMessage({ ...errorData, type });
-  });
-
   const dispatch = useContext(RestApiDispatchContext);
 
   useEffect(() => {
@@ -67,7 +60,7 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
         data: undefined,
       });
 
-      requestApi.startRequest(key, params, notif)
+      requestApi.startRequest(key, params)
         .then((dataRes) => {
           dispatch({ type: 'success', key, data: dataRes.payload });
           setData({
