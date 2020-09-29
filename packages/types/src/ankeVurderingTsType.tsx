@@ -12,7 +12,7 @@ type AnkeVurdering = Readonly<{
     erFristIkkeOverholdt: boolean;
     erIkkeSignert: boolean;
     erSubsidiartRealitetsbehandles: boolean;
-    fritekstTilBrev: string;
+    fritekstTilBrev?: string;
  };
 }>;
 

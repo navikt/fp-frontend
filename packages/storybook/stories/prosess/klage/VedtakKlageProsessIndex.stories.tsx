@@ -7,6 +7,7 @@ import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakKlageProsessIndex from '@fpsak-frontend/prosess-vedtak-klage';
+import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -21,7 +22,7 @@ const behandling = {
     },
   },
   behandlingPaaVent: false,
-};
+} as Behandling;
 
 const aksjonspunkter = [{
   definisjon: {
@@ -31,7 +32,7 @@ const aksjonspunkter = [{
     kode: aksjonspunktStatus.OPPRETTET,
   },
   begrunnelse: undefined,
-}];
+}] as Aksjonspunkt[];
 
 export default {
   title: 'prosess/klage/prosess-vedtak-klage',
@@ -52,14 +53,13 @@ export const visVedtakspanelDerKlageErVurdertAvNk = () => (
       },
       klageFormkravResultatKA: {
         avvistArsaker: [{
-          kode: 'IKKE_KONKRET',
-          kodeverk: 'KLAGE_AVVIST_AARSAK',
+          navn: 'IKKE_KONKRET',
         }],
-      },
-    })}
+      } as KlageVurdering['klageFormkravResultatKA'],
+    } as KlageVurdering)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
-    previewVedtakCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     alleKodeverk={alleKodeverk}
   />
@@ -78,14 +78,13 @@ export const visVedtakspanelDerKlageErVurdertAvNfp = () => (
       },
       klageFormkravResultatKA: {
         avvistArsaker: [{
-          kode: 'IKKE_KONKRET',
-          kodeverk: 'KLAGE_AVVIST_AARSAK',
+          navn: 'IKKE_KONKRET',
         }],
-      },
-    })}
+      } as KlageVurdering['klageFormkravResultatKA'],
+    } as KlageVurdering)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
-    previewVedtakCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     alleKodeverk={alleKodeverk}
   />

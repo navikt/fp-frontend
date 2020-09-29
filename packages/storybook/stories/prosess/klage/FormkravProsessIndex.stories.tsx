@@ -4,7 +4,9 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import KlagevurderingProsessIndex from '@fpsak-frontend/prosess-klagevurdering';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
+import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -16,16 +18,25 @@ const behandling = {
   sprakkode: {
     kode: 'NO',
   },
-};
+} as Behandling;
+
+const avsluttedeBehandlinger = [{
+  id: 1,
+  type: {
+    kode: behandlingType.FORSTEGANGSSOKNAD,
+    kodeverk: '',
+  },
+  avsluttet: '2017-08-02T00:54:25.455',
+}];
 
 export default {
-  title: 'prosess/klage/prosess-klagevurdering',
-  component: KlagevurderingProsessIndex,
+  title: 'prosess/klage/prosess-formkrav',
+  component: FormkravProsessIndex,
   decorators: [withKnobs, withReduxProvider],
 };
 
-export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
-  <KlagevurderingProsessIndex
+export const visFormkravPanelForAksjonspunktNfp = () => (
+  <FormkravProsessIndex
     behandling={behandling}
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
@@ -40,23 +51,22 @@ export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
           navn: 'Denne er avvist fordi...',
         }],
       },
-    })}
-    saveKlage={action('button-click')}
-    submitCallback={action('button-click')}
+    } as KlageVurdering)}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
-    previewCallback={action('button-click')}
     readOnlySubmitButton={boolean('readOnly', false)}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
+    avsluttedeBehandlinger={avsluttedeBehandlinger}
     aksjonspunkter={[{
       definisjon: {
-        kode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
+        kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
       },
-    }]}
+    }] as Aksjonspunkt[]}
   />
 );
 
-export const visPanelForKlagevurderingMedAksjonspunktNfp = () => (
-  <KlagevurderingProsessIndex
+export const visFormkravPanelForAksjonspunktKa = () => (
+  <FormkravProsessIndex
     behandling={behandling}
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
@@ -71,17 +81,16 @@ export const visPanelForKlagevurderingMedAksjonspunktNfp = () => (
           navn: 'Denne er avvist fordi...',
         }],
       },
-    })}
-    saveKlage={action('button-click')}
-    submitCallback={action('button-click')}
+    } as KlageVurdering)}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
-    previewCallback={action('button-click')}
     readOnlySubmitButton={boolean('readOnly', false)}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
+    avsluttedeBehandlinger={avsluttedeBehandlinger}
     aksjonspunkter={[{
       definisjon: {
-        kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+        kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
       },
-    }]}
+    }] as Aksjonspunkt[]}
   />
 );

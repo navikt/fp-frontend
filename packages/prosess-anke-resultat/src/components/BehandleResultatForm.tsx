@@ -98,9 +98,13 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat> = ({
   <>
     <Undertekst><FormattedMessage id={hentSprakKode(ankeVurderingResultat.ankeVurderingOmgjoer)} /></Undertekst>
     <VerticalSpacer sixteenPx />
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-    <Undertekst>{ankeVurderingResultat.ankeOmgjoerArsak.kode}</Undertekst>
-    <VerticalSpacer sixteenPx />
+    {ankeVurderingResultat.ankeOmgjoerArsak && (
+      <>
+        <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
+        <Undertekst>{ankeVurderingResultat.ankeOmgjoerArsak.kode}</Undertekst>
+        <VerticalSpacer sixteenPx />
+      </>
+    )}
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
     <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
   </>

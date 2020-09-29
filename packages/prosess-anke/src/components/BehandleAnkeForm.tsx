@@ -344,7 +344,7 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
   erFristIkkeOverholdt: resultat ? resultat.erFristIkkeOverholdt : false,
   erIkkeSignert: resultat ? resultat.erIkkeSignert : false,
   erSubsidiartRealitetsbehandles: resultat ? resultat.erSubsidiartRealitetsbehandles : null,
-  ankeOmgjoerArsak: resultat ? resultat.ankeOmgjoerArsak.kode : null,
+  ankeOmgjoerArsak: resultat && resultat.ankeOmgjoerArsak ? resultat.ankeOmgjoerArsak.kode : null,
   ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
 }));
 

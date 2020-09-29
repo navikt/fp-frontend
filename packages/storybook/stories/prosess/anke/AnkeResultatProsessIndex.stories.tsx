@@ -7,23 +7,26 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import AnkeResultatProsessIndex from '@fpsak-frontend/prosess-anke-resultat';
+import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const aksjonspunkter = [{
   definisjon: {
     kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
+    kodeverk: '',
   },
   status: {
     kode: aksjonspunktStatus.OPPRETTET,
+    kodeverk: '',
   },
   begrunnelse: undefined,
-}];
+}] as Aksjonspunkt[];
 
 const ankeVurderingResultat = {
   ankeVurdering: ankeVurdering.ANKE_AVVIS,
@@ -50,14 +53,13 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
         ...ankeVurderingResultat,
         ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
       },
-    })}
+    } as AnkeVurdering)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click')}
-    previewCallback={action('button-click')}
-    previewVedtakCallback={action('button-click')}
+    saveAnke={action('button-click') as (data: any) => Promise<any>}
+    previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
 
@@ -69,14 +71,13 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
         ...ankeVurderingResultat,
         ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
       },
-    })}
+    } as AnkeVurdering)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click')}
-    previewCallback={action('button-click')}
-    previewVedtakCallback={action('button-click')}
+    saveAnke={action('button-click') as (data: any) => Promise<any>}
+    previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
 
@@ -90,14 +91,13 @@ export const visPanelForResultatVedOmgjør = () => (
         ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
         ankeOmgjoerArsakNavn: 'Testårsak',
       },
-    })}
+    } as AnkeVurdering)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click')}
-    previewCallback={action('button-click')}
-    previewVedtakCallback={action('button-click')}
+    saveAnke={action('button-click') as (data: any) => Promise<any>}
+    previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
 
@@ -106,13 +106,12 @@ export const visPanelForResultatVedAvvis = () => (
     behandling={behandling}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat,
-    })}
+    } as AnkeVurdering)}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click')}
-    previewCallback={action('button-click')}
-    previewVedtakCallback={action('button-click')}
+    saveAnke={action('button-click') as (data: any) => Promise<any>}
+    previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
