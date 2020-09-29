@@ -39,6 +39,7 @@
 		"packages/prosess-anke-resultat",
 		"packages/prosess-klagevurdering",
 		"packages/prosess-vedtak",
+		"packages/prosess-vedtak-klage",
 		"packages/prosess-beregningsresultat",
 		"packages/prosess-felles",
 		"packages/prosess-vilkar-overstyring",

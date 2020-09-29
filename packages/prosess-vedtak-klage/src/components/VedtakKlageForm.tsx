@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
-import { formPropTypes } from 'redux-form';
 import { createSelector } from 'reselect';
+import { InjectedFormProps } from 'redux-form';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -12,22 +11,49 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
+import {
+  Aksjonspunkt, Behandling, KlageVurdering, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
 import VedtakKlageKaSubmitPanel from './VedtakKlageKaSubmitPanel';
 
 export const VEDTAK_KLAGE_FORM_NAME = 'VEDTAK_KLAGE_FORM';
 
-const getPreviewVedtakCallback = (previewVedtakCallback) => () => previewVedtakCallback({
+const getPreviewVedtakCallback = (previewVedtakCallback: any) => () => previewVedtakCallback({
   gjelderVedtak: true,
 });
+
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingsresultat: Behandling['behandlingsresultat'];
+  behandlingPaaVent: boolean;
+  klageVurdering: KlageVurdering;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => Promise<any>;
+  previewVedtakCallback: (data: any) => Promise<any>;
+  readOnly: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface MappedOwnProps {
+  isAvvist: boolean;
+  isOmgjort: boolean;
+  isOpphevOgHjemsend: boolean;
+  behandlingsResultatTekst: string;
+  klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
+  avvistArsaker?: any[];
+  omgjortAarsak?: string;
+  fritekstTilBrev?: string;
+}
 
 /**
  * VedtakKlageForm
  *
  * Redux-form-komponent for klage-vedtak.
  */
-export const VedtakKlageFormImpl = ({
+export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   readOnly,
   omgjortAarsak,
@@ -38,7 +64,7 @@ export const VedtakKlageFormImpl = ({
   isOpphevOgHjemsend,
   avvistArsaker,
   behandlingsResultatTekst,
-  klageVurdering,
+  klageVurderingResultat,
   behandlingPaaVent,
   alleKodeverk,
   ...formProps
@@ -59,7 +85,7 @@ export const VedtakKlageFormImpl = ({
         {isAvvist && (
         <div>
           <Undertekst>{intl.formatMessage({ id: 'VedtakKlageForm.ArsakTilAvvisning' })}</Undertekst>
-          { avvistArsaker.map((arsak) => <Normaltekst key={arsak.kode}>{kodeverknavn(arsak)}</Normaltekst>) }
+          { avvistArsaker.map((arsak: any) => <Normaltekst key={arsak.kode}>{kodeverknavn(arsak)}</Normaltekst>) }
           <VerticalSpacer sixteenPx />
         </div>
         )}
@@ -77,20 +103,20 @@ export const VedtakKlageFormImpl = ({
           <VerticalSpacer sixteenPx />
         </div>
         )}
-        {klageVurdering.klageVurdertAv === 'NK' && (
+        {klageVurderingResultat.klageVurdertAv === 'NK' && (
         <VedtakKlageKaSubmitPanel
           begrunnelse={fritekstTilBrev}
-          klageResultat={klageVurdering}
+          klageResultat={klageVurderingResultat}
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           formProps={formProps}
           readOnly={readOnly}
           behandlingPaaVent={behandlingPaaVent}
         />
         )}
-        {klageVurdering.klageVurdertAv === 'NFP' && (
+        {klageVurderingResultat.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
           begrunnelse={fritekstTilBrev}
-          klageResultat={klageVurdering}
+          klageResultat={klageVurderingResultat}
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           formProps={formProps}
           readOnly={readOnly}
@@ -102,33 +128,12 @@ export const VedtakKlageFormImpl = ({
   );
 };
 
-VedtakKlageFormImpl.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  isAvvist: PropTypes.bool.isRequired,
-  isOmgjort: PropTypes.bool.isRequired,
-  isOpphevOgHjemsend: PropTypes.bool.isRequired,
-  behandlingsResultatTekst: PropTypes.string.isRequired,
-  klageVurdering: PropTypes.shape().isRequired,
-  previewVedtakCallback: PropTypes.func.isRequired,
-  avvistArsaker: PropTypes.arrayOf(PropTypes.object),
-  omgjortAarsak: PropTypes.string,
-  fritekstTilBrev: PropTypes.string,
-  behandlingsresultat: PropTypes.shape().isRequired,
-  ...formPropTypes,
-};
-
-VedtakKlageFormImpl.defaultProps = {
-  omgjortAarsak: undefined,
-  avvistArsaker: undefined,
-  fritekstTilBrev: undefined,
-};
-
-const transformValues = (values) => values.aksjonspunktKoder.map((apCode) => ({
+const transformValues = (values: { fritekstTilBrev: string, aksjonspunktKoder: string[] }) => values.aksjonspunktKoder.map((apCode: string) => ({
   kode: apCode,
   begrunnelse: values.fritekstTilBrev,
 }));
 
-export const getAvvisningsAarsaker = createSelector([(ownProps) => ownProps.klageVurdering], (klageVurderingResultat) => {
+export const getAvvisningsAarsaker = createSelector([(ownProps: PureOwnProps) => ownProps.klageVurdering], (klageVurderingResultat) => {
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
       return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
@@ -147,13 +152,13 @@ const omgjoerTekstMap = {
 };
 
 const getKlageResultat = createSelector(
-  [(ownProps) => ownProps.klageVurdering],
+  [(ownProps: PureOwnProps) => ownProps.klageVurdering],
   (behandlingKlageVurdering) => (behandlingKlageVurdering.klageVurderingResultatNK
     ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP),
 );
 
 const getResultatText = createSelector(
-  [(ownProps) => ownProps.klageVurdering],
+  [(ownProps: PureOwnProps) => ownProps.klageVurdering],
   (behandlingKlageVurdering) => {
     const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
       ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP;
@@ -175,7 +180,7 @@ const getResultatText = createSelector(
 );
 
 const getOmgjortAarsak = createSelector(
-  [(ownProps) => ownProps.klageVurdering],
+  [(ownProps: PureOwnProps) => ownProps.klageVurdering],
   (klageVurderingResultat) => {
     if (klageVurderingResultat) {
       if (klageVurderingResultat.klageVurderingResultatNK) {
@@ -190,22 +195,22 @@ const getOmgjortAarsak = createSelector(
 );
 
 const getIsOmgjort = createSelector(
-  [(ownProps) => ownProps.behandlingsresultat],
+  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat],
   (behandlingsresultat) => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_MEDHOLD,
 );
 
 export const getIsAvvist = createSelector(
-  [(ownProps) => ownProps.behandlingsresultat],
+  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat],
   (behandlingsresultat) => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_AVVIST,
 );
 
 export const getIsOpphevOgHjemsend = createSelector(
-  [(ownProps) => ownProps.behandlingsresultat],
+  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat],
   (behandlingsresultat) => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
 );
 
 export const getFritekstTilBrev = createSelector(
-  [(ownProps) => ownProps.klageVurdering],
+  [(ownProps: PureOwnProps) => ownProps.klageVurdering],
   (behandlingKlageVurdering) => {
     const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
       ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP;
@@ -213,16 +218,16 @@ export const getFritekstTilBrev = createSelector(
   },
 );
 
-export const buildInitialValues = createSelector([(ownProps) => ownProps.aksjonspunkter], (aksjonspunkter) => {
-  const behandlingAksjonspunktCodes = aksjonspunkter.map((ap) => ap.definisjon.kode);
+export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => {
+  const behandlingAksjonspunktCodes = aksjonspunkter.map((ap: Aksjonspunkt) => ap.definisjon.kode);
   return {
     aksjonspunktKoder: behandlingAksjonspunktCodes,
   };
 });
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback(transformValues(values));
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.submitCallback(transformValues(values));
+  return (state: any, ownProps: PureOwnProps) => ({
     onSubmit,
     initialValues: buildInitialValues(ownProps),
     isAvvist: getIsAvvist(ownProps),
@@ -232,7 +237,7 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
     omgjortAarsak: getOmgjortAarsak(ownProps),
     fritekstTilBrev: getFritekstTilBrev(ownProps),
     behandlingsResultatTekst: getResultatText(ownProps),
-    klageVurdering: getKlageResultat(ownProps),
+    klageVurderingResultat: getKlageResultat(ownProps),
     ...behandlingFormValueSelector(VEDTAK_KLAGE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
       state,
       'begrunnelse',
@@ -241,8 +246,6 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   });
 };
 
-const VedtakKlageForm = connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(behandlingForm({
   form: VEDTAK_KLAGE_FORM_NAME,
-})(injectIntl(VedtakKlageFormImpl)));
-
-export default VedtakKlageForm;
+})(injectIntl(VedtakKlageForm)));

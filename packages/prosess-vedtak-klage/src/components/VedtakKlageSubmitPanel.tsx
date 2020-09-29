@@ -1,22 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import classNames from 'classnames';
+import { InjectedFormProps } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
+import { KlageVurdering } from '@fpsak-frontend/types';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import styles from './vedtakKlageSubmitPanel.less';
 
-const medholdIKlage = (klageVurderingResultat) => (klageVurderingResultat && klageVurderingResultat.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE);
-
-export const isMedholdIKlage = (
-  klageVurderingResultatNFP, klageVurderingResultatNK,
-) => medholdIKlage(klageVurderingResultatNFP) || medholdIKlage(klageVurderingResultatNK);
-
-const getBrevKode = (klageVurdering, klageVurdertAvKa) => {
+const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean) => {
   switch (klageVurdering) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTE : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
@@ -33,7 +28,9 @@ const getBrevKode = (klageVurdering, klageVurdertAvKa) => {
   }
 };
 
-const getPreviewCallback = (formProps, begrunnelse, previewVedtakCallback, klageResultat) => (e) => {
+const getPreviewCallback = (formProps: InjectedFormProps, previewVedtakCallback: (data: any) => Promise<any>,
+  begrunnelse?: string,
+  klageResultat?: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP']) => (e: any) => {
   const klageVurdertAvNK = klageResultat.klageVurdertAv === 'NFP';
   const data = {
     fritekst: begrunnelse || '',
@@ -45,12 +42,22 @@ const getPreviewCallback = (formProps, begrunnelse, previewVedtakCallback, klage
   if (formProps.valid || formProps.pristine) {
     previewVedtakCallback(data);
   } else {
+    // @ts-ignore Fiks
     formProps.submit();
   }
   e.preventDefault();
 };
 
-export const VedtakKlageSubmitPanelImpl = ({
+interface OwnProps {
+  previewVedtakCallback: (data: any) => Promise<any>;
+  behandlingPaaVent: boolean;
+  begrunnelse?: string;
+  klageResultat?: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
+  readOnly: boolean;
+  formProps: InjectedFormProps;
+}
+
+export const VedtakKlageSubmitPanelImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   behandlingPaaVent,
   previewVedtakCallback,
@@ -59,7 +66,7 @@ export const VedtakKlageSubmitPanelImpl = ({
   formProps,
   readOnly,
 }) => {
-  const previewBrev = getPreviewCallback(formProps, begrunnelse, previewVedtakCallback, klageResultat);
+  const previewBrev = getPreviewCallback(formProps, previewVedtakCallback, begrunnelse, klageResultat);
 
   return (
     <Row>
@@ -87,21 +94,6 @@ export const VedtakKlageSubmitPanelImpl = ({
       </Column>
     </Row>
   );
-};
-
-VedtakKlageSubmitPanelImpl.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  previewVedtakCallback: PropTypes.func.isRequired,
-  behandlingPaaVent: PropTypes.bool.isRequired,
-  begrunnelse: PropTypes.string,
-  klageResultat: PropTypes.shape(),
-  readOnly: PropTypes.bool.isRequired,
-  formProps: PropTypes.shape().isRequired,
-};
-
-VedtakKlageSubmitPanelImpl.defaultProps = {
-  begrunnelse: undefined,
-  klageResultat: undefined,
 };
 
 export default injectIntl(VedtakKlageSubmitPanelImpl);

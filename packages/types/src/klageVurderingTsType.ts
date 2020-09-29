@@ -6,6 +6,7 @@ type KlageVurdering = Readonly<{
     klageVurdering?: string;
     fritekstTilBrev?: string;
     klageMedholdArsak?: Kodeverk;
+    klageMedholdArsakNavn?: string;
     klageVurderingOmgjoer?: string;
     godkjentAvMedunderskriver: boolean;
     begrunnelse?: string;
@@ -15,8 +16,9 @@ type KlageVurdering = Readonly<{
     klageVurdering?: string;
     fritekstTilBrev?: string;
     klageMedholdArsak?: Kodeverk;
+    klageMedholdArsakNavn?: string;
     klageVurderingOmgjoer?: string;
-    godkjentAvMedunderskriver: boolean;
+    godkjentAvMedunderskriver?: boolean;
     begrunnelse?: string;
   };
   klageFormkravResultatKA?: {

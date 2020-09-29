@@ -1,11 +1,14 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { getAvvisningsAarsaker, getIsAvvist, VedtakKlageFormImpl } from './VedtakKlageForm';
+import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
+
+import { getAvvisningsAarsaker, getIsAvvist, VedtakKlageForm } from './VedtakKlageForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-vedtak-klage';
 
 const KLAGE_OMGJORT_TEKST = 'VedtakKlageForm.KlageOmgjortGunst';
@@ -22,7 +25,7 @@ describe('<VedtakKlageForm>', () => {
         navn: 'avvist',
       },
     };
-    const wrapper = shallowWithIntl(<VedtakKlageFormImpl
+    const wrapper = shallowWithIntl(<VedtakKlageForm
       {...reduxFormPropsMock}
       intl={intlMock}
       readOnly={false}
@@ -39,7 +42,7 @@ describe('<VedtakKlageForm>', () => {
       previewVedtakCallback={forhandsvisVedtaksbrevFunc}
       finishKlageCallback={forhandsvisVedtaksbrevFunc}
       aksjonspunktKoder={[]}
-      klageVurdering={{}}
+      klageVurderingResultat={{}}
       isBehandlingReadOnly
       alleKodeverk={{
         KlageAvvistÅrsak: [{
@@ -57,7 +60,7 @@ describe('<VedtakKlageForm>', () => {
   describe('Klage vedtak Selectors', () => {
     describe('getIsAvvist', () => {
       it('should return true', () => {
-        const brt = { type: { kode: behandlingResultatType.KLAGE_AVVIST } };
+        const brt = { type: { kode: behandlingResultatType.KLAGE_AVVIST } } as Behandling['behandlingsresultat'];
         const selected = getIsAvvist.resultFunc(brt);
         expect(selected).equal(true);
       });
@@ -67,8 +70,8 @@ describe('<VedtakKlageForm>', () => {
       it('should return avvisningsAarsaker with length 2', () => {
         const klageVurdering = {
           klageFormkravResultatNFP: { avvistArsaker: [{ navn: 'arsak1' }, { navn: 'arsak2' }] },
-          klageVurderingResultatNFP: { klageAvvistArsakNavn: 'Klager er ikke part' },
-        };
+          klageVurderingResultatNFP: { klageAvvistArsakNavn: 'Klager er ikke part', klageVurdertAv: '' },
+        } as KlageVurdering;
         const selected = getAvvisningsAarsaker.resultFunc(klageVurdering);
         expect(selected).to.have.length(2);
       });

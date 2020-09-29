@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import {
+  Aksjonspunkt, Behandling, KlageVurdering, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
+
 import VedtakKlageForm from './components/VedtakKlageForm';
-import vedtakKlageVurderingPropType from './propTypes/vedtakKlageVurderingPropType';
-import vedtakKlageBehandlingPropType from './propTypes/vedtakKlageBehandlingPropType';
-import vedtakKlageAksjonspunkterPropType from './propTypes/vedtakKlageAksjonspunkterPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -15,7 +15,17 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const VedtakKlageProsessIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  klageVurdering: KlageVurdering;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => Promise<any>;
+  previewVedtakCallback: (data: any) => Promise<any>;
+  isReadOnly: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+const VedtakKlageProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
   klageVurdering,
   aksjonspunkter,
@@ -39,15 +49,5 @@ const VedtakKlageProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-VedtakKlageProsessIndex.propTypes = {
-  behandling: vedtakKlageBehandlingPropType.isRequired,
-  klageVurdering: vedtakKlageVurderingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(vedtakKlageAksjonspunkterPropType).isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  previewVedtakCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 export default VedtakKlageProsessIndex;
