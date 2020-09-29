@@ -26,11 +26,11 @@ const getStatusForBeregningsgrunnlag = (bg, aksjonspunkter, vilkarene) => {
   if (bgVilkar && bgVilkar.vilkarStatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
     return bgVilkar.vilkarStatus.kode;
   }
-  const førstePeriode = bg && bg.beregningsgrunnlagPeriode ? bg.beregningsgrunnlagPeriode[0] : undefined;
+  const førstePeriode = bg.beregningsgrunnlagPeriode ? bg.beregningsgrunnlagPeriode[0] : undefined;
   const andelerIFørstePeriode = førstePeriode && førstePeriode.beregningsgrunnlagPrStatusOgAndel ? førstePeriode.beregningsgrunnlagPrStatusOgAndel : [];
   const finnesAndelMedBeregnet = andelerIFørstePeriode.some((andel) => andel.beregnetPrAar || andel.beregnetPrAar === 0);
   const finnesAksjonspunkt = aksjonspunkter && aksjonspunkter.some((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)
-    && (aksjonspunktStatus.OPPRETTET || ap.status.kode === aksjonspunktStatus.UTFORT));
+    && (ap.status.kode === aksjonspunktStatus.OPPRETTET || ap.status.kode === aksjonspunktStatus.UTFORT));
   if (finnesAksjonspunkt || finnesAndelMedBeregnet) {
     return vilkarUtfallType.OPPFYLT;
   }
