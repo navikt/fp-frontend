@@ -64,6 +64,8 @@ type FormValues = {
   erIkkeSignert: boolean;
 } & FormValuesUtrekk
 
+const skalViseForhaandlenke = (avr: ankeVurdering) => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr?.kode === ankeVurdering.ANKE_OMGJOER;
+
 const canSubmit = (formValues: FormValuesUtrekk) => {
   if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode && !formValues.erSubsidiartRealitetsbehandles) {
     return false;
@@ -306,12 +308,15 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
             isBehandlingFormDirty={isBehandlingFormDirty}
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
-          <PreviewAnkeLink
-            readOnly={!canPreview(formValues.begrunnelse, formValues.fritekstTilBrev)}
-            previewCallback={previewCallback}
-            fritekstTilBrev={formValues.fritekstTilBrev}
-            ankeVurdering={formValues.ankeVurdering}
-          />
+          {skalViseForhaandlenke(formValues.ankeVurdering)
+          && (
+            <PreviewAnkeLink
+              readOnly={!canPreview(formValues.begrunnelse, formValues.fritekstTilBrev)}
+              previewCallback={previewCallback}
+              fritekstTilBrev={formValues.fritekstTilBrev}
+              ankeVurdering={formValues.ankeVurdering}
+            />
+          )}
         </Column>
         <Column xs="2">
           <TempsaveAnkeButton

@@ -15,8 +15,6 @@ import { required } from '@fpsak-frontend/utils';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
 
-import PreviewAnkeLink from './PreviewAnkeLink';
-
 interface OwnProps {
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
@@ -32,13 +30,10 @@ interface OwnProps {
 const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly,
   handleSubmit,
-  previewCallback,
   readOnlySubmitButton,
   aksjonspunktCode,
   behandlingId,
   behandlingVersjon,
-  ankeVurdering,
-  fritekstTilBrev,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -83,12 +78,6 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
             isBehandlingFormSubmitting={isBehandlingFormSubmitting}
             isBehandlingFormDirty={isBehandlingFormDirty}
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-          />
-          <PreviewAnkeLink
-            previewCallback={previewCallback}
-            fritekstTilBrev={fritekstTilBrev}
-            ankeVurdering={ankeVurdering}
-            aksjonspunktCode={aksjonspunktCode}
           />
         </Column>
       </Row>
