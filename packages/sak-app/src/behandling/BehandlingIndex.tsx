@@ -164,6 +164,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   }
 
   const fagsakBehandlingerInfo = alleBehandlinger
+    .filter((b) => !b.behandlingHenlagt)
     .map((b) => ({
       id: b.id,
       uuid: b.uuid,
