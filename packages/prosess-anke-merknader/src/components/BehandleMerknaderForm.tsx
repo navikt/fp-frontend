@@ -13,12 +13,12 @@ import {
 } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
 
 import PreviewAnkeLink from './PreviewAnkeLink';
 
 type FormValuesUttrekk = {
-  ankeVurdering?: string;
+  ankeVurdering?: Kodeverk;
   fritekstTilBrev?: string;
 }
 

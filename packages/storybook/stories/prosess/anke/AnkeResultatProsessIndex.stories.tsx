@@ -10,6 +10,7 @@ import AnkeResultatProsessIndex from '@fpsak-frontend/prosess-anke-resultat';
 import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
+import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
   id: 1,
@@ -60,6 +61,7 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -78,6 +80,7 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -98,6 +101,7 @@ export const visPanelForResultatVedOmgjør = () => (
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -113,5 +117,6 @@ export const visPanelForResultatVedAvvis = () => (
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
+    alleKodeverk={alleKodeverk as any}
   />
 );

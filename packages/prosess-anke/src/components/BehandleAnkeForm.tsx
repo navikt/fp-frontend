@@ -46,10 +46,10 @@ export type BehandlingInfo = {
 }
 
 type FormValuesUtrekk = {
-  ankeVurdering: string;
+  ankeVurdering: Kodeverk;
   erSubsidiartRealitetsbehandles: boolean;
-  ankeOmgjoerArsak: string;
-  ankeVurderingOmgjoer: string;
+  ankeOmgjoerArsak: Kodeverk;
+  ankeVurderingOmgjoer: Kodeverk;
   vedtak: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
@@ -65,10 +65,10 @@ type FormValues = {
 } & FormValuesUtrekk
 
 const canSubmit = (formValues: FormValuesUtrekk) => {
-  if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering && !formValues.erSubsidiartRealitetsbehandles) {
+  if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode && !formValues.erSubsidiartRealitetsbehandles) {
     return false;
   }
-  if (ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering && (!formValues.ankeOmgjoerArsak || !formValues.ankeVurderingOmgjoer)) {
+  if (ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode && (!formValues.ankeOmgjoerArsak || !formValues.ankeVurderingOmgjoer)) {
     return false;
   }
   return formValues.ankeVurdering != null && formValues.vedtak != null;
@@ -196,7 +196,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
     <Row>
       <Column xs="4">
         <RadioGroupField
-          name="ankeVurdering"
+          name="ankeVurdering.kode"
           validate={[required]}
           direction="vertical"
           readOnly={readOnly}
@@ -207,7 +207,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
       </Column>
       <Column xs="4">
         <RadioGroupField
-          name="ankeVurdering"
+          name="ankeVurdering.kode"
           validate={[required]}
           readOnly={readOnly}
           className={readOnly ? styles.selectReadOnly : null}
@@ -249,7 +249,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
           <Column xs="7">
             <ArrowBox>
               <RadioGroupField
-                name="ankeVurderingOmgjoer"
+                name="ankeVurderingOmgjoer.kode"
                 validate={[required]}
                 readOnly={readOnly}
                 className={readOnly ? styles.selectReadOnly : null}
@@ -262,7 +262,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
               <VerticalSpacer fourPx />
               <SelectField
                 readOnly={readOnly}
-                name="ankeOmgjoerArsak"
+                name="ankeOmgjoerArsak.kode"
                 selectValues={omgjorArsakValues.map((arsak) => <option key={arsak.kode} value={arsak.kode}>{intl.formatMessage({ id: arsak.navn })}</option>)}
                 className={readOnly ? styles.selectReadOnly : null}
                 label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
@@ -344,7 +344,7 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
   erFristIkkeOverholdt: resultat ? resultat.erFristIkkeOverholdt : false,
   erIkkeSignert: resultat ? resultat.erIkkeSignert : false,
   erSubsidiartRealitetsbehandles: resultat ? resultat.erSubsidiartRealitetsbehandles : null,
-  ankeOmgjoerArsak: resultat && resultat.ankeOmgjoerArsak ? resultat.ankeOmgjoerArsak.kode : null,
+  ankeOmgjoerArsak: resultat ? resultat.ankeOmgjoerArsak : null,
   ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
 }));
 

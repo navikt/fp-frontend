@@ -4,11 +4,12 @@ import classNames from 'classnames';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './previewAnkeLink.less';
 
-const getBrevKode = (ankeVurdering?: string) => {
-  switch (ankeVurdering) {
+const getBrevKode = (ankeVurdering?: Kodeverk) => {
+  switch (ankeVurdering.kode) {
     case ankeVurderingType.ANKE_OMGJOER:
       return dokumentMalType.ANKE_VEDTAK_OMGJORING;
     case ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE:
@@ -18,7 +19,7 @@ const getBrevKode = (ankeVurdering?: string) => {
   }
 };
 
-const getBrevData = (ankeVurdering?: string, fritekstTilBrev?: string) => {
+const getBrevData = (ankeVurdering?: Kodeverk, fritekstTilBrev?: string) => {
   const data = {
     fritekst: fritekstTilBrev || '',
     mottaker: '',
@@ -31,7 +32,7 @@ interface OwnProps {
   previewCallback: (data: any) => Promise<any>;
   aksjonspunktCode: string;
   fritekstTilBrev?: string;
-  ankeVurdering?: string;
+  ankeVurdering?: Kodeverk;
   readOnly?: boolean;
 }
 

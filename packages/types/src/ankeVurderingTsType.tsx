@@ -2,8 +2,8 @@ import Kodeverk from './kodeverkTsType';
 
 type AnkeVurdering = Readonly<{
   ankeVurderingResultat?: {
-    ankeVurdering?: string;
-    ankeVurderingOmgjoer?: string;
+    ankeVurdering?: Kodeverk;
+    ankeVurderingOmgjoer?: Kodeverk;
     ankeOmgjoerArsak?: Kodeverk;
     begrunnelse: string;
     paAnketBehandlingId?: number;

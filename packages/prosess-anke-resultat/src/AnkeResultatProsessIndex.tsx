@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AnkeVurdering, Behandling, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import BehandleResultatForm from './components/BehandleResultatForm';
 import messages from '../i18n/nb_NO.json';
@@ -22,6 +24,7 @@ interface OwnProps {
   readOnlySubmitButton: boolean;
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const AnkeResultatProsessIndex: FunctionComponent<OwnProps> = ({
@@ -33,6 +36,7 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps> = ({
   readOnlySubmitButton,
   saveAnke,
   previewCallback,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <BehandleResultatForm
@@ -45,6 +49,7 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps> = ({
       readOnlySubmitButton={readOnlySubmitButton}
       saveAnke={saveAnke}
       previewCallback={previewCallback}
+      alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>
 );

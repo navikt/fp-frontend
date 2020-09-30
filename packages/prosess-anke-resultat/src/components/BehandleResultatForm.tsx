@@ -6,6 +6,8 @@ import { InjectedFormProps } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
+import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -15,7 +17,9 @@ import {
 } from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import PreviewAnkeLink from './PreviewAnkeLink';
 
@@ -24,7 +28,7 @@ const isMedUnderskriver = (apCodes: string) => apCodes.includes(aksjonspunktCode
 const isFatterVedtak = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
 
 interface OwnPropsResultat {
-  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat']
+  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
 }
 
 const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
@@ -83,8 +87,8 @@ const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   </>
 );
 
-const hentSprakKode = (ankeOmgjoerArsak: string) => {
-  switch (ankeOmgjoerArsak) {
+const hentSprakKode = (ankeOmgjoerArsak: Kodeverk) => {
+  switch (ankeOmgjoerArsak.kode) {
     case ankeVurderingOmgjoer.ANKE_TIL_UGUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
     case ankeVurderingOmgjoer.ANKE_TIL_GUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
     case ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.Delvis';
@@ -92,8 +96,9 @@ const hentSprakKode = (ankeOmgjoerArsak: string) => {
   }
 };
 
-const ResultatOmgjores: FunctionComponent<OwnPropsResultat> = ({
+const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
   ankeVurderingResultat,
+  alleKodeverk,
 }) => (
   <>
     <Undertekst><FormattedMessage id={hentSprakKode(ankeVurderingResultat.ankeVurderingOmgjoer)} /></Undertekst>
@@ -101,7 +106,7 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat> = ({
     {ankeVurderingResultat.ankeOmgjoerArsak && (
       <>
         <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-        <Undertekst>{ankeVurderingResultat.ankeOmgjoerArsak.kode}</Undertekst>
+        <Undertekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(ankeVurderingResultat.ankeOmgjoerArsak)}</Undertekst>
         <VerticalSpacer sixteenPx />
       </>
     )}
@@ -110,16 +115,17 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat> = ({
   </>
 );
 
-const AnkeResultat: FunctionComponent<OwnPropsResultat> = ({
+const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
   ankeVurderingResultat,
+  alleKodeverk,
 }) => {
   if (!ankeVurderingResultat) {
     return null;
   }
-  switch (ankeVurderingResultat.ankeVurdering) {
+  switch (ankeVurderingResultat.ankeVurdering.kode) {
     case ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK: return (<ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />);
     case ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE: return (<ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />);
-    case ankeVurdering.ANKE_OMGJOER: return (<ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} />);
+    case ankeVurdering.ANKE_OMGJOER: return (<ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />);
     case ankeVurdering.ANKE_AVVIS: return (<ResultatAvvise ankeVurderingResultat={ankeVurderingResultat} />);
     default: return <div>???</div>;
   }
@@ -129,13 +135,14 @@ interface OwnProps {
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
   aksjonspunktCode: string;
-  ankeVurderingVerdi?: string;
+  ankeVurderingVerdi?: Kodeverk;
   fritekstTilBrev?: string;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
   behandlingId: number;
   behandlingVersjon: number;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
@@ -148,6 +155,7 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly = true,
   behandlingId,
   behandlingVersjon,
+  alleKodeverk,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -156,7 +164,7 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
     <Row>
       <Column xs="12">
         <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling" /></Undertekst>
-        <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} />
+        <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
       </Column>
     </Row>
     <VerticalSpacer sixteenPx />
