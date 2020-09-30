@@ -23,7 +23,7 @@ import TempsaveKlageButton from '../felles/TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.less';
 
-type FormValuesUtrekk = {
+type FormValues = {
   klageVurdering?: Kodeverk;
   fritekstTilBrev?: string;
   klageMedholdArsak: Kodeverk;
@@ -31,15 +31,12 @@ type FormValuesUtrekk = {
   begrunnelse: string;
 };
 
-type FormValues = {
-} & FormValuesUtrekk
-
 interface OwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   previewCallback: (...args: any[]) => any;
   saveKlage: (...args: any[]) => any;
-  formValues?: FormValuesUtrekk;
+  formValues?: FormValues;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: Kodeverk;
