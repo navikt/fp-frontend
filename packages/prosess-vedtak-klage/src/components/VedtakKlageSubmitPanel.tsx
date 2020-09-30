@@ -5,14 +5,14 @@ import { InjectedFormProps } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { KlageVurdering } from '@fpsak-frontend/types';
+import { KlageVurdering, Kodeverk } from '@fpsak-frontend/types';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import styles from './vedtakKlageSubmitPanel.less';
 
-const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean) => {
-  switch (klageVurdering) {
+const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean) => {
+  switch (klageVurdering.kode) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTE : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
     case klageVurderingType.OPPHEVE_YTELSESVEDTAK:

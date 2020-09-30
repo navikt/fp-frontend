@@ -8,14 +8,14 @@ import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './klageVurderingRadioOptionsKa.less';
 
 interface OwnProps {
   readOnly?: boolean;
   medholdReasons: KodeverkMedNavn[];
-  klageVurdering?: string;
+  klageVurdering?: Kodeverk;
 }
 
 export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -57,7 +57,7 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
           </RadioGroupField>
         </Column>
       </Row>
-      {(klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE)
+      {(klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE)
     && (
       <ArrowBox>
         <SelectField
@@ -83,7 +83,7 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
         </RadioGroupField>
       </ArrowBox>
     )}
-      {(klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
+      {(klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
       && (
         <ArrowBox marginLeft={380}>
           <SelectField

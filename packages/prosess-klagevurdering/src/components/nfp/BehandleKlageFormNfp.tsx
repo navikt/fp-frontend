@@ -24,10 +24,10 @@ import TempsaveKlageButton from '../felles/TempsaveKlageButton';
 import styles from './behandleKlageFormNfp.less';
 
 type FormValuesUtrekk = {
-  klageVurdering?: string;
+  klageVurdering?: Kodeverk;
   fritekstTilBrev?: string;
-  klageMedholdArsak: string;
-  klageVurderingOmgjoer: string;
+  klageMedholdArsak: Kodeverk;
+  klageVurderingOmgjoer: Kodeverk;
   begrunnelse: string;
 };
 
@@ -150,9 +150,9 @@ export const buildInitialValues = createSelector([
 }));
 
 export const transformValues = (values: FormValues) => ({
-  klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
+    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,

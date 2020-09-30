@@ -3,13 +3,14 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
+import { Kodeverk } from '@fpsak-frontend/types';
 
-const transformValues = (klageVurdering: string, klageMedholdArsak: string, klageVurderingOmgjoer: string,
+const transformValues = (klageVurdering: Kodeverk, klageMedholdArsak: Kodeverk, klageVurderingOmgjoer: Kodeverk,
   fritekstTilBrev: string, begrunnelse: string, aksjonspunktCode: string) => ({
   kode: aksjonspunktCode,
-  klageMedholdArsak: (klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
-    || klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? klageMedholdArsak : null,
-  klageVurderingOmgjoer: klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? klageVurderingOmgjoer : null,
+  klageMedholdArsak: (klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
+    || klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? klageMedholdArsak : null,
+  klageVurderingOmgjoer: klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? klageVurderingOmgjoer : null,
   fritekstTilBrev,
   begrunnelse,
   klageVurdering,
@@ -17,9 +18,9 @@ const transformValues = (klageVurdering: string, klageMedholdArsak: string, klag
 
 interface OwnProps {
   aksjonspunktCode: string;
-  klageVurdering: string,
-  klageMedholdArsak: string,
-  klageVurderingOmgjoer: string,
+  klageVurdering: Kodeverk,
+  klageMedholdArsak: Kodeverk,
+  klageVurderingOmgjoer: Kodeverk,
   fritekstTilBrev: string,
   begrunnelse: string,
   saveKlage: (data: any) => Promise<any>;

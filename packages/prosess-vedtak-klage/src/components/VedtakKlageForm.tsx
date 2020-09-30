@@ -162,7 +162,7 @@ const getResultatText = createSelector(
   (behandlingKlageVurdering) => {
     const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
       ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP;
-    switch (klageResultat.klageVurdering) {
+    switch (klageResultat.klageVurdering.kode) {
       case klageVurderingCodes.AVVIS_KLAGE:
         return 'VedtakKlageForm.KlageAvvist';
       case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
@@ -172,7 +172,7 @@ const getResultatText = createSelector(
       case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
         return 'VedtakKlageForm.HjemmsendUtenOpphev';
       case klageVurderingCodes.MEDHOLD_I_KLAGE:
-        return omgjoerTekstMap[klageResultat.klageVurderingOmgjoer];
+        return omgjoerTekstMap[klageResultat.klageVurderingOmgjoer.kode];
       default:
         return null;
     }
@@ -180,14 +180,15 @@ const getResultatText = createSelector(
 );
 
 const getOmgjortAarsak = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.klageVurdering],
-  (klageVurderingResultat) => {
+  [(ownProps: PureOwnProps) => ownProps.klageVurdering, (ownProps: PureOwnProps) => ownProps.alleKodeverk],
+  (klageVurderingResultat, alleKodeverk) => {
+    const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
     if (klageVurderingResultat) {
       if (klageVurderingResultat.klageVurderingResultatNK) {
-        return klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsakNavn;
+        return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak);
       }
       if (klageVurderingResultat.klageVurderingResultatNFP) {
-        return klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsakNavn;
+        return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsak);
       }
     }
     return null;

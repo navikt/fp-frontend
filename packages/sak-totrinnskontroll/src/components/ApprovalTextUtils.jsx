@@ -160,7 +160,7 @@ const omgjoerTekstMap = {
 
 const getTextForKlageHelper = (klageVurderingResultat) => {
   let aksjonspunktTextId = '';
-  switch (klageVurderingResultat.klageVurdering) {
+  switch (klageVurderingResultat.klageVurdering.kode) {
     case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
@@ -175,8 +175,8 @@ const getTextForKlageHelper = (klageVurderingResultat) => {
       break;
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
       if (klageVurderingResultat.klageVurderingOmgjoer
-        && klageVurderingResultat.klageVurderingOmgjoer !== klageVurderingOmgjoerCodes.UDEFINERT) {
-        aksjonspunktTextId = omgjoerTekstMap[klageVurderingResultat.klageVurderingOmgjoer];
+        && klageVurderingResultat.klageVurderingOmgjoer.kode !== klageVurderingOmgjoerCodes.UDEFINERT) {
+        aksjonspunktTextId = omgjoerTekstMap[klageVurderingResultat.klageVurderingOmgjoer.kode];
         break;
       }
       aksjonspunktTextId = 'VedtakForm.ResultatKlageMedhold';

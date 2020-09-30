@@ -26,9 +26,9 @@ import styles from './behandleKlageFormKa.less';
 type FormValuesUtrekk = {
   begrunnelse: string;
   fritekstTilBrev: string;
-  klageVurdering: string;
-  klageVurderingOmgjoer: string;
-  klageMedholdArsak: string;
+  klageVurdering: Kodeverk;
+  klageVurderingOmgjoer: Kodeverk;
+  klageMedholdArsak: Kodeverk;
 };
 
 type FormValues = {
@@ -148,9 +148,9 @@ export const buildInitialValues = createSelector([
 }));
 
 export const transformValues = (values: FormValues) => ({
-  klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
+    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,

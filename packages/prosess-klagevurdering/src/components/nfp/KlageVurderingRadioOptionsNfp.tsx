@@ -6,14 +6,14 @@ import { required } from '@fpsak-frontend/utils';
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './klageVurderingRadioOptionsNfp.less';
 
 interface OwnProps {
   readOnly?: boolean;
   medholdReasons: KodeverkMedNavn[];
-  klageVurdering?: string;
+  klageVurdering?: Kodeverk;
 }
 
 export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -36,7 +36,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
           <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.KeepVedtakNfp' }} />
         </RadioGroupField>
       </>
-      {(klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE)
+      {(klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
         <ArrowBox>
           <SelectField
@@ -62,7 +62,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
           </RadioGroupField>
         </ArrowBox>
       )}
-      {(klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
+      {(klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
       && (
         <ArrowBox>
           <SelectField

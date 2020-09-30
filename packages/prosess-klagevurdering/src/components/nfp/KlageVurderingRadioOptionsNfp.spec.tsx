@@ -18,7 +18,7 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsNfp
       readOnly={false}
       medholdReasons={medholdReasons}
-      klageVurdering={klageVurdering.STADFESTE_YTELSESVEDTAK}
+      klageVurdering={{ kode: klageVurdering.STADFESTE_YTELSESVEDTAK, kodeverk: '' }}
       intl={intlMock}
     />);
     const radios = wrapper.find('RadioOption');
@@ -30,7 +30,7 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
   it('skal vise fem options når klage medhold', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsNfp
       readOnly={false}
-      klageVurdering={klageVurdering.MEDHOLD_I_KLAGE}
+      klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       medholdReasons={medholdReasons}
       intl={intlMock}
     />);

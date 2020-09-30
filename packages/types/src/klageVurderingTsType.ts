@@ -3,21 +3,19 @@ import Kodeverk from './kodeverkTsType';
 type KlageVurdering = Readonly<{
   klageVurderingResultatNK?: {
     klageVurdertAv: string;
-    klageVurdering?: string;
+    klageVurdering?: Kodeverk;
     fritekstTilBrev?: string;
     klageMedholdArsak?: Kodeverk;
-    klageMedholdArsakNavn?: string;
-    klageVurderingOmgjoer?: string;
+    klageVurderingOmgjoer?: Kodeverk;
     godkjentAvMedunderskriver: boolean;
     begrunnelse?: string;
   };
   klageVurderingResultatNFP?: {
     klageVurdertAv: string;
-    klageVurdering?: string;
+    klageVurdering?: Kodeverk;
     fritekstTilBrev?: string;
     klageMedholdArsak?: Kodeverk;
-    klageMedholdArsakNavn?: string;
-    klageVurderingOmgjoer?: string;
+    klageVurderingOmgjoer?: Kodeverk;
     godkjentAvMedunderskriver?: boolean;
     begrunnelse?: string;
   };

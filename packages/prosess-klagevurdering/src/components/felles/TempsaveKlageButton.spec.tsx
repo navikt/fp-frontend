@@ -14,8 +14,8 @@ describe('<TempsaveKlageButton>', () => {
       begrunnelse=""
       saveKlage={sinon.spy()}
       aksjonspunktCode="123"
-      klageMedholdArsak=""
-      klageVurderingOmgjoer=""
+      klageMedholdArsak={undefined}
+      klageVurderingOmgjoer={undefined}
     />);
     expect(wrapper.find(Hovedknapp)).has.length(1);
   });

@@ -7,12 +7,12 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
-import { KlageVurdering } from '@fpsak-frontend/types';
+import { KlageVurdering, Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './vedtakKlageSubmitPanel.less';
 
-const getBrevKode = (klageVurdering: any, klageVurdertAvKa: any) => {
-  switch (klageVurdering) {
+const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: any) => {
+  switch (klageVurdering.kode) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
     case klageVurderingType.OPPHEVE_YTELSESVEDTAK:

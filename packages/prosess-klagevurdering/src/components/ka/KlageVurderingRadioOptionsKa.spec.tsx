@@ -18,7 +18,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
       medholdReasons={medholdReasons}
-      klageVurdering={klageVurdering.STADFESTE_YTELSESVEDTAK}
+      klageVurdering={{ kode: klageVurdering.STADFESTE_YTELSESVEDTAK, kodeverk: '' }}
       intl={intlMock}
     />);
     const radios = wrapper.find('RadioOption');
@@ -33,7 +33,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
       medholdReasons={medholdReasons}
-      klageVurdering={klageVurdering.MEDHOLD_I_KLAGE}
+      klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       intl={intlMock}
     />);
     const radios = wrapper.find('RadioOption');
@@ -51,7 +51,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
       medholdReasons={medholdReasons}
-      klageVurdering={klageVurdering.MEDHOLD_I_KLAGE}
+      klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       intl={intlMock}
     />);
     expect(wrapper.find('SelectField').props().name).to.equal('klageMedholdArsak');
@@ -62,7 +62,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     const wrapper = shallowWithIntl(<KlageVurderingRadioOptionsKa
       readOnly={false}
       medholdReasons={medholdReasons}
-      klageVurdering={klageVurdering.STADFESTE_YTELSESVEDTAK}
+      klageVurdering={{ kode: klageVurdering.STADFESTE_YTELSESVEDTAK, kodeverk: '' }}
       intl={intlMock}
     />);
     expect(wrapper.find('SelectField')).to.have.length(0);

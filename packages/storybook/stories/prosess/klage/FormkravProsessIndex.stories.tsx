@@ -41,9 +41,8 @@ export const visFormkravPanelForAksjonspunktNfp = () => (
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
+        klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
         fritekstTilBrev: 'test',
-        klageMedholdArsakNavn: 'TEST',
         godkjentAvMedunderskriver: false,
       },
       klageFormkravResultatKA: {
@@ -71,9 +70,8 @@ export const visFormkravPanelForAksjonspunktKa = () => (
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
+        klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
         fritekstTilBrev: 'test',
-        klageMedholdArsakNavn: 'TEST',
         godkjentAvMedunderskriver: false,
       },
       klageFormkravResultatKA: {
