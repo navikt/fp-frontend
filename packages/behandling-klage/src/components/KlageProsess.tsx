@@ -64,7 +64,7 @@ const getLagringSideeffekter = (toggleFatterVedtakModal, toggleKlageModal, toggl
   oppdaterProsessStegOgFaktaPanelIUrl) => (aksjonspunktModels) => {
   const skalByttTilKlageinstans = aksjonspunktModels
     .some((apValue) => apValue.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
-    && apValue.klageVurdering === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
+    && apValue.klageVurdering?.kode === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
   const erVedtakAp = aksjonspunktModels[0].kode === aksjonspunktCodes.FORESLA_VEDTAK
     || aksjonspunktModels[0].kode === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL;
 
