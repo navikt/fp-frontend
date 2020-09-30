@@ -218,7 +218,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
         </RadioGroupField>
       </Column>
     </Row>
-    {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering
+    {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode
       && (
         <Row>
           <Column xs="7">
@@ -243,7 +243,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
           </Column>
         </Row>
       )}
-    {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering
+    {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode
       && (
         <Row>
           <Column xs="7">
