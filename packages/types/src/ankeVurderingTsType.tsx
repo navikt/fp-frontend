@@ -13,6 +13,8 @@ type AnkeVurdering = Readonly<{
     erIkkeSignert: boolean;
     erSubsidiartRealitetsbehandles: boolean;
     fritekstTilBrev?: string;
+    merknadKommentar?: string;
+    erMerknaderMottatt?: boolean;
  };
 }>;
 

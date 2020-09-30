@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { AksjonspunktHelpTextTemp, FadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
+  RadioGroupField, RadioOption, TextAreaField, behandlingForm,
   hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
@@ -17,25 +17,16 @@ import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
 
 import PreviewAnkeLink from './PreviewAnkeLink';
 
-type FormValuesUttrekk = {
-  ankeVurdering?: Kodeverk;
-  fritekstTilBrev?: string;
-}
-
-type FormValues = {
-  erMerknaderMottatt: string;
-  merknadKommentar: string;
-} & FormValuesUttrekk
-
 interface OwnProps {
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
   aksjonspunktCode: string;
-  formValues?: FormValuesUttrekk;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   behandlingId: number;
   behandlingVersjon: number;
+  ankeVurdering?: Kodeverk;
+  fritekstTilBrev?: string;
 }
 
 const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
@@ -44,9 +35,10 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
   previewCallback,
   readOnlySubmitButton,
   aksjonspunktCode,
-  formValues,
   behandlingId,
   behandlingVersjon,
+  ankeVurdering,
+  fritekstTilBrev,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -66,8 +58,8 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
             direction="horizontal"
             readOnly={readOnly}
           >
-            <RadioOption value="ja" label={{ id: 'Ankebehandling.Merknad.Merknader.Ja' }} />
-            <RadioOption value="nei" label={{ id: 'Ankebehandling.Merknad.Merknader.Nei' }} />
+            <RadioOption value label={{ id: 'Ankebehandling.Merknad.Merknader.Ja' }} />
+            <RadioOption value={false} label={{ id: 'Ankebehandling.Merknad.Merknader.Nei' }} />
           </RadioGroupField>
         </Column>
       </Row>
@@ -94,8 +86,8 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
           />
           <PreviewAnkeLink
             previewCallback={previewCallback}
-            fritekstTilBrev={formValues.fritekstTilBrev}
-            ankeVurdering={formValues.ankeVurdering}
+            fritekstTilBrev={fritekstTilBrev}
+            ankeVurdering={ankeVurdering}
             aksjonspunktCode={aksjonspunktCode}
           />
         </Column>
@@ -111,8 +103,13 @@ AnkeMerknader.defaultProps = {
 
 const ankeMerknaderFormName = 'ankeMerknaderForm';
 
+type FormValues = {
+  erMerknaderMottatt: string;
+  merknadKommentar: string;
+}
+
 const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
-  erMerknaderMottatt: values.erMerknaderMottatt === 'ja',
+  erMerknaderMottatt: values.erMerknaderMottatt,
   merknadKommentar: values.merknadKommentar,
   kode: aksjonspunktCode,
 });
@@ -126,19 +123,18 @@ interface PureOwnProps {
 }
 
 const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
-  ankeVurdering: resultat ? resultat.ankeVurdering : null,
-  begrunnelse: resultat ? resultat.begrunnelse : null,
-  fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
+  merknadKommentar: resultat ? resultat.merknadKommentar : null,
+  erMerknaderMottatt: resultat ? resultat.erMerknaderMottatt : null,
 }));
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const aksjonspunktCode = initialOwnProps.aksjonspunkter[0].definisjon.kode;
   const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (state: any, ownProps: PureOwnProps) => ({
+  return (_state, ownProps: PureOwnProps) => ({
     aksjonspunktCode,
     initialValues: buildInitialValues(ownProps),
-    formValues: behandlingFormValueSelector(ankeMerknaderFormName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-      'ankeVurdering', 'fritekstTilBrev') || {},
+    ankeVurdering: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
+    fritekstTilBrev: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.fritekstTilBrev : null,
     onSubmit,
   });
 };

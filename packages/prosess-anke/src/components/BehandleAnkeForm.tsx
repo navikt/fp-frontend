@@ -222,13 +222,19 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
       && (
         <Row>
           <Column xs="7">
-            <ArrowBox>
+            <ArrowBox alignOffset={355}>
               <Normaltekst><FormattedMessage id="Ankebehandling.Avvisning" /></Normaltekst>
+              <VerticalSpacer fourPx />
               <CheckboxField name="erAnkerIkkePart" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />} />
+              <VerticalSpacer fourPx />
               <CheckboxField name="erIkkeKonkret" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" />} />
+              <VerticalSpacer fourPx />
               <CheckboxField name="erFristIkkeOverholdt" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" />} />
+              <VerticalSpacer fourPx />
               <CheckboxField name="erIkkeSignert" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />} />
+              <VerticalSpacer sixteenPx />
               <Normaltekst><FormattedMessage id="Ankebehandling.Realitetsbehandles" /></Normaltekst>
+              <VerticalSpacer fourPx />
               <RadioGroupField
                 name="erSubsidiartRealitetsbehandles"
                 validate={[required]}
