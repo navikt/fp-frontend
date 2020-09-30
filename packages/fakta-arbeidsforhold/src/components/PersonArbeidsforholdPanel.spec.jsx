@@ -430,7 +430,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       erstatterArbeidsforholdId: undefined,
       tilVurdering: false,
     }];
-    const isAllowed = erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(toArbeidsforhold);
+    const isAllowed = erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(toArbeidsforhold, '1234567');
 
     expect(isAllowed).is.false;
   });
@@ -473,7 +473,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       erstatterArbeidsforholdId: undefined,
       tilVurdering: false,
     }];
-    const isAllowed = erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(toArbeidsforhold);
+    const isAllowed = erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(toArbeidsforhold, '1234567');
 
     expect(isAllowed).is.true;
   });
