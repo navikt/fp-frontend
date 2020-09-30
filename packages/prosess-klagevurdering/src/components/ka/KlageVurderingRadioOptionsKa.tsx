@@ -57,7 +57,7 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
           </RadioGroupField>
         </Column>
       </Row>
-      {(klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE)
+      {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
     && (
       <ArrowBox>
         <SelectField
@@ -83,7 +83,7 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
         </RadioGroupField>
       </ArrowBox>
     )}
-      {(klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
+      {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
       && (
         <ArrowBox marginLeft={380}>
           <SelectField

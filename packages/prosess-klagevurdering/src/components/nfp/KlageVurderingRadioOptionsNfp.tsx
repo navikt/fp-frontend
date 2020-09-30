@@ -36,7 +36,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
           <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.KeepVedtakNfp' }} />
         </RadioGroupField>
       </>
-      {(klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE)
+      {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
         <ArrowBox>
           <SelectField
@@ -62,7 +62,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
           </RadioGroupField>
         </ArrowBox>
       )}
-      {(klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
+      {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
       && (
         <ArrowBox>
           <SelectField
