@@ -142,7 +142,7 @@ interface PureOwnProps {
 
 export const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.klageVurdering.klageVurderingResultatNFP], (klageVurderingResultat) => ({
-  klageMedholdArsak: klageVurderingResultat && klageVurderingResultat.klageMedholdArsak ? klageVurderingResultat.klageMedholdArsak.kode : null,
+  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
   begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,

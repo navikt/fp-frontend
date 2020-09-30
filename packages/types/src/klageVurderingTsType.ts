@@ -20,7 +20,7 @@ type KlageVurdering = Readonly<{
     begrunnelse?: string;
   };
   klageFormkravResultatKA?: {
-    avvistArsaker?: {
+    avvistArsaker: {
       navn?: string;
     }[];
     paKlagdBehandlingId: number;
@@ -32,7 +32,7 @@ type KlageVurdering = Readonly<{
     erSignert: boolean;
   };
   klageFormkravResultatNFP?: {
-    avvistArsaker?: {
+    avvistArsaker: {
       navn?: string;
     }[];
     paKlagdBehandlingId: number;

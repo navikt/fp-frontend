@@ -54,7 +54,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
       klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       intl={intlMock}
     />);
-    expect(wrapper.find('SelectField').props().name).to.equal('klageMedholdArsak');
+    expect(wrapper.find('SelectField').props().name).to.equal('klageMedholdArsak.kode');
     expect(wrapper.find('SelectField')).to.have.length(1);
   });
 

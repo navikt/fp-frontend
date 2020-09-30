@@ -27,7 +27,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
     <div>
       <>
         <RadioGroupField
-          name="klageVurdering"
+          name="klageVurdering.kode"
           validate={[required]}
           readOnly={readOnly}
           className={readOnly ? styles.selectReadOnly : null}
@@ -41,7 +41,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
         <ArrowBox>
           <SelectField
             readOnly={readOnly}
-            name="klageMedholdArsak"
+            name="klageMedholdArsak.kode"
             selectValues={medholdOptions}
             className={readOnly ? styles.selectReadOnly : null}
             label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
@@ -50,7 +50,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
           />
           <VerticalSpacer sixteenPx />
           <RadioGroupField
-            name="klageVurderingOmgjoer"
+            name="klageVurderingOmgjoer.kode"
             validate={[required]}
             readOnly={readOnly}
             className={readOnly ? styles.selectReadOnly : null}
@@ -68,7 +68,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
           <SelectField
             readOnly={readOnly}
             className={readOnly ? styles.selectReadOnly : null}
-            name="klageMedholdArsak"
+            name="klageMedholdArsak.kode"
             selectValues={medholdOptions}
             label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
             validate={[required]}
