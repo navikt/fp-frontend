@@ -1,9 +1,7 @@
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { isBGAksjonspunktSomGirFritekstfelt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -64,24 +62,6 @@ export const findAvslagResultatText = (behandlingResultatTypeKode, ytelseType) =
 
 export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar) => vilkar.some((v) => v.vilkarType.kode === vilkarType.SOKNADFRISTVILKARET
   && v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
-
-export const medholdIKlage = (klageVurderingResultat) => (klageVurderingResultat && klageVurderingResultat.klageVurdering === klageVurdering.MEDHOLD_I_KLAGE);
-
-export const hasKlageVurderingSomIkkeErAvvist = (klageVurderingResultatNFP, klageVurderingResultatNK) => {
-  const isKlageVurderingNfpAvvisKlage = klageVurderingResultatNFP
-    && klageVurderingResultatNFP.klageVurdering === klageVurdering.AVVIS_KLAGE;
-  const isKlageVurderingNkAvvisKlage = klageVurderingResultatNK
-    && klageVurderingResultatNK.klageVurdering === klageVurdering.AVVIS_KLAGE;
-  const isKlageVurderingNkMedholdKlage = klageVurderingResultatNK
-    && klageVurderingResultatNK.klageVurdering === klageVurdering.MEDHOLD_I_KLAGE;
-  return !(isKlageVurderingNfpAvvisKlage || isKlageVurderingNkAvvisKlage || isKlageVurderingNkMedholdKlage);
-};
-
-export const shouldGiveBegrunnelse = (
-  klageVurderingResultatNK, klageVurderingResultatNFP, vilkar, behandlingStatus,
-) => behandlingStatus === behandlingStatusCode.BEHANDLING_UTREDES
-  && (hasIkkeOppfyltSoknadsfristvilkar(vilkar)
-    || hasKlageVurderingSomIkkeErAvvist(klageVurderingResultatNFP, klageVurderingResultatNK));
 
 export const skalSkriveFritekstGrunnetFastsettingAvBeregning = (beregningsgrunnlag, aksjonspunkter) => {
   if (!beregningsgrunnlag || !aksjonspunkter) {

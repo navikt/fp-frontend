@@ -1,6 +1,4 @@
-import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
-
-import KlageVurdering from './klageVurderingTsType';
+import { Aksjonspunkt, KlageVurdering, Vilkar } from '@fpsak-frontend/types';
 
 interface FetchedData {
   aksjonspunkter: Aksjonspunkt[];

@@ -167,7 +167,6 @@ export class ApprovalPanel extends Component {
                       <ToTrinnsFormReadOnly
                         approvalList={approvals}
                         isForeldrepengerFagsak={isForeldrepengerFagsak}
-                        behandlingKlageVurdering={behandlingKlageVurdering}
                         behandlingStatus={behandlingStatus}
                         alleKodeverk={alleKodeverk}
                         erTilbakekreving={erTilbakekreving}
@@ -197,8 +196,14 @@ ApprovalPanel.propTypes = {
   forhandsvisVedtaksbrev: PropTypes.func.isRequired,
   isForeldrepengerFagsak: PropTypes.bool.isRequired,
   behandlingKlageVurdering: PropTypes.shape({
-    klageVurdering: PropTypes.string,
-    klageVurderingOmgjoer: PropTypes.string,
+    klageVurdering: PropTypes.shape({
+      kode: PropTypes.string.isRequired,
+      kodeverk: PropTypes.string.isRequired,
+    }),
+    klageVurderingOmgjoer: PropTypes.shape({
+      kode: PropTypes.string.isRequired,
+      kodeverk: PropTypes.string.isRequired,
+    }),
   }),
   alleKodeverk: PropTypes.shape().isRequired,
   behandlingsresultat: PropTypes.shape(),
