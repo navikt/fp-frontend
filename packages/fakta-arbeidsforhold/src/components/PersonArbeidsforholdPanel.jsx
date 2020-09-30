@@ -70,12 +70,13 @@ export const sortArbeidsforhold = (arbeidsforhold) => arbeidsforhold
     return a1.id.localeCompare(a2.id);
   });
 
-export const erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM = (arbeidsforhold) => {
+export const erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM = (arbeidsforhold, arbeidsgiverIdentifikator) => {
   let isAllowed = true;
   const arbeidsforholdUtenInntektsmeldingTilVurdering = arbeidsforhold.filter((a) => (a.tilVurdering || a.erEndret) && !a.mottattDatoInntektsmelding);
   arbeidsforholdUtenInntektsmeldingTilVurdering.forEach((a) => {
     const arbeidsforholdFraSammeArbeidsgiverMedInntekstmelding = arbeidsforhold
-      .filter((b) => a.id !== b.id && a.arbeidsgiverIdentifikator === b.arbeidsgiverIdentifikator && b.mottattDatoInntektsmelding);
+      .filter((b) => a.id !== b.id && a.arbeidsgiverIdentifikator === b.arbeidsgiverIdentifikator && b.mottattDatoInntektsmelding
+        && a.arbeidsgiverIdentifikator === arbeidsgiverIdentifikator);
     if (arbeidsforholdFraSammeArbeidsgiverMedInntekstmelding.length > 0) {
       isAllowed = false;
     }
@@ -392,10 +393,12 @@ const FORM_NAVN = 'ArbeidsforholdInfoPanel';
 const mapStateToProps = (state, ownProps) => {
   const arbeidsforhold = behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'arbeidsforhold');
   const sorterteArbeidsforhold = sortArbeidsforhold(arbeidsforhold);
+  const arbeidsgiverIdentifikator = behandlingFormValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM, ownProps.behandlingId,
+    ownProps.behandlingVersjon)(state, 'arbeidsgiverIdentifikator');
   return {
     arbeidsforhold: sorterteArbeidsforhold,
     behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-    aktivtArbeidsforholdTillatUtenIM: erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(sorterteArbeidsforhold),
+    aktivtArbeidsforholdTillatUtenIM: erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(sorterteArbeidsforhold, arbeidsgiverIdentifikator),
   };
 };
 
