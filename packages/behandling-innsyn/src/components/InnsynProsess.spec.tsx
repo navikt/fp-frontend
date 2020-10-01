@@ -72,11 +72,11 @@ describe('<InnsynProsess>', () => {
       kode: innsynResultatType.INNVILGET,
       kodeverk: 'INNSYN_RESULTAT_TYPE',
     },
-    vedtaksdokumentasjon: {
+    vedtaksdokumentasjon: [{
       dokumentId: '1',
       tittel: 'test',
       opprettetDato: '2020.01.01',
-    },
+    }],
   };
   const innsynDokumenter = [];
 
