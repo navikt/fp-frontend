@@ -7,6 +7,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
+import { Aksjonspunkt, Behandling, Innsyn } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -16,17 +17,19 @@ const behandling = {
   id: 1,
   versjon: 1,
   behandlingPaaVent: false,
-};
+} as Behandling;
 
 const aksjonspunkter = [{
   definisjon: {
     kode: aksjonspunktCodes.VURDER_INNSYN,
+    kodeverk: '',
   },
   status: {
     kode: aksjonspunktStatus.OPPRETTET,
+    kodeverk: '',
   },
   begrunnelse: undefined,
-}];
+}] as Aksjonspunkt[];
 
 export default {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -44,7 +47,7 @@ export const visPanelForVurderingAvInnsyn = () => (
         tittel: behandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       }],
-    })}
+    } as Innsyn)}
     saksnummer={123434}
     aksjonspunkter={aksjonspunkter}
     alleDokumenter={[{
@@ -54,8 +57,8 @@ export const visPanelForVurderingAvInnsyn = () => (
       tidspunkt: '2017-08-02T00:54:25.455',
       kommunikasjonsretning: kommunikasjonsretning.INN,
     }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    alleKodeverk={alleKodeverk as any}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('isSubmittable', false)}
   />

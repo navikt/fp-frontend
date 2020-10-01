@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import moment from 'moment';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Row } from 'nav-frontend-grid';
@@ -22,20 +21,50 @@ import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
+import {
+  Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
+
+interface PureOwnProps {
+  saksNr: number;
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingPaaVent: boolean;
+  innsynMottattDato: string;
+  innsynDokumenter: InnsynDokument[];
+  innsynResultatType: Kodeverk;
+  vedtaksdokumentasjon: InnsynVedtaksdokument[];
+  alleDokumenter: Dokument[];
+  aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (data: any) => Promise<any>;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+}
+
+interface MappedOwnProps {
+  innsynResultatTypeKode?: string;
+  documents: Dokument[];
+  vedtaksdokumenter?: InnsynVedtaksdokument[];
+  innsynResultatTyper: KodeverkMedNavn[];
+  behandlingTypes: KodeverkMedNavn[];
+  isApOpen: boolean;
+  sattPaVent?: boolean;
+}
 
 /**
  * InnsynForm
  *
  * Presentasjonskomponent. Viser panelet som håndterer avklaring av innsyn.
  */
-export const InnsynFormImpl = ({
+export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   readOnlySubmitButton,
   innsynResultatTyper,
-  innsynResultatType,
+  innsynResultatTypeKode,
   behandlingTypes,
   sattPaVent,
   saksNr,
@@ -73,10 +102,11 @@ export const InnsynFormImpl = ({
       label={<FormattedMessage id="InnsynForm.Resultat" key="1" />}
       isEdited={!isApOpen}
     >
-      {innsynResultatTyper.filter((irt) => irt.kode !== '-').map((irt) => <RadioOption key={irt.kode} value={irt.kode} label={irt.navn} />)}
+      {innsynResultatTyper.filter((irt: KodeverkMedNavn) => irt.kode !== '-')
+        .map((irt: KodeverkMedNavn) => <RadioOption key={irt.kode} value={irt.kode} label={irt.navn} />)}
     </RadioGroupField>
-    {(innsynResultatType === innsynResultatTyperKV.INNVILGET || innsynResultatType === innsynResultatTyperKV.DELVISTINNVILGET) && (
-    <ArrowBox alignOffset={(innsynResultatType === innsynResultatTyperKV.INNVILGET) ? 28 : 176}>
+    {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET || innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
+    <ArrowBox alignOffset={(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET) ? 28 : 176}>
       <RadioGroupField
         name="sattPaVent"
         label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" key="1" />}
@@ -116,37 +146,11 @@ export const InnsynFormImpl = ({
   </form>
 );
 
-InnsynFormImpl.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  innsynResultatTyper: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  behandlingTypes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  saksNr: PropTypes.number.isRequired,
-  documents: PropTypes.arrayOf(PropTypes.shape({
-    journalpostId: PropTypes.string.isRequired,
-    dokumentId: PropTypes.string.isRequired,
-    tittel: PropTypes.string,
-    tidspunkt: PropTypes.string,
-    kommunikasjonsretning: PropTypes.string,
-  })).isRequired,
-  vedtaksdokumenter: PropTypes.arrayOf(PropTypes.shape({
-    dokumentId: PropTypes.string.isRequired,
-    tittel: PropTypes.string.isRequired,
-    opprettetDato: PropTypes.string.isRequired,
-  }).isRequired),
-  innsynResultatType: PropTypes.string,
-  sattPaVent: PropTypes.bool,
-  isApOpen: PropTypes.bool.isRequired,
-  ...formPropTypes,
-};
-
 InnsynFormImpl.defaultProps = {
-  innsynResultatType: undefined,
-  sattPaVent: undefined,
   vedtaksdokumenter: [],
 };
 
-const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter) => dokumenter.reduce((acc, d) => {
+const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]) => dokumenter.reduce((acc: any, d: InnsynDokument) => {
   const dokumentNavn = `dokument_${d.dokumentId}`;
   return {
     [dokumentNavn]: d.fikkInnsyn,
@@ -155,7 +159,7 @@ const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter) => dokumenter.reduce((acc
 }, {});
 
 const buildInitialValues = createSelector(
-  [(ownProps) => ownProps.innsynMottattDato,
+  [(ownProps: PureOwnProps) => ownProps.innsynMottattDato,
     (ownProps) => ownProps.innsynResultatType,
     (ownProps) => ownProps.behandlingPaaVent,
     (ownProps) => ownProps.innsynDokumenter,
@@ -165,49 +169,49 @@ const buildInitialValues = createSelector(
     innsynResultatType: innsynResultatType ? innsynResultatType.kode : undefined,
     fristDato: moment().add(3, 'days').format(ISO_DATE_FORMAT),
     sattPaVent: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : !!fristBehandlingPaaVent,
+    // @ts-ignore Temp-fjerna til ein får inn kode fra annan branch
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
     ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
   }),
 );
 
-const getDocumentsStatus = (values, documents) => documents.map((document) => ({
+const getDocumentsStatus = (values: any, documents: Dokument[]) => documents.map((document: Dokument) => ({
   dokumentId: document.dokumentId,
   journalpostId: document.journalpostId,
   fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
 }));
 
-const getFilteredValues = (values) => (Object.keys(values)
+const getFilteredValues = (values: any) => Object.keys(values)
   .filter((valueKey) => !valueKey.startsWith('dokument_'))
   .reduce((acc, valueKey) => ({
     ...acc,
     [valueKey]: values[valueKey],
-  }), {})
-);
+  }), {});
 
-const transformValues = (values, documents) => ({
+const transformValues = (values: any, documents: Dokument[]) => ({
   kode: aksjonspunktCodes.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   ...getFilteredValues(values),
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
-const getFilteredReceivedDocuments = createSelector([(ownProps) => ownProps.alleDokumenter], (allDocuments) => {
-  const filteredDocuments = allDocuments.filter((doc) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
-  allDocuments.forEach((doc) => !filteredDocuments.some((fd) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
+const getFilteredReceivedDocuments = createSelector([(ownProps: PureOwnProps) => ownProps.alleDokumenter], (allDocuments) => {
+  const filteredDocuments = allDocuments.filter((doc: Dokument) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  allDocuments.forEach((doc: Dokument) => !filteredDocuments.some((fd: Dokument) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
   return filteredDocuments;
 });
 
 const formName = 'InnsynForm';
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, initialOwnProps.alleDokumenter)]);
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values, initialOwnProps.alleDokumenter)]);
+  return (state: any, ownProps: PureOwnProps) => ({
     documents: getFilteredReceivedDocuments(ownProps),
     vedtaksdokumenter: ownProps.vedtaksdokumentasjon,
     innsynResultatTyper: ownProps.alleKodeverk[kodeverkTyper.INNSYN_RESULTAT_TYPE],
     behandlingTypes: ownProps.alleKodeverk[kodeverkTyper.BEHANDLING_TYPE],
     isApOpen: isAksjonspunktOpen(ownProps.aksjonspunkter[0].status.kode),
-    innsynResultatType: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'innsynResultatType'),
+    innsynResultatTypeKode: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'innsynResultatType'),
     sattPaVent: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'sattPaVent'),
     initialValues: buildInitialValues(ownProps),
     onSubmit,
@@ -217,7 +221,5 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
 const InnsynForm = connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
 })(InnsynFormImpl));
-
-InnsynForm.formName = formName;
 
 export default InnsynForm;

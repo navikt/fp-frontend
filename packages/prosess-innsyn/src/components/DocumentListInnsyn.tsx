@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -9,7 +10,7 @@ import {
   DateTimeLabel, Image, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
-
+import { Dokument } from '@fpsak-frontend/types';
 import sendDokumentImageUrl from '@fpsak-frontend/assets/images/send_dokument.svg';
 import mottaDokumentImageUrl from '@fpsak-frontend/assets/images/motta_dokument.svg';
 import internDokumentImageUrl from '@fpsak-frontend/assets/images/intern_dokument.svg';
@@ -18,9 +19,10 @@ import styles from './documentListInnsyn.less';
 
 // TODO (TOR) Flytt url ut av komponent
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document, saksNr) => `${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`;
+const getLink = (document: Dokument, saksNr: number) => (`${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
+  .journalpostId}&dokumentId=${document.dokumentId}`);
 
-const getDirectionImage = (document, intl) => {
+const getDirectionImage = (document: Dokument, intl: IntlShape) => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
     return (
       <Image
@@ -53,6 +55,12 @@ const getDirectionImage = (document, intl) => {
 
 const noLabelHack = () => <span className={styles.hidden}>-</span>;
 
+interface OwnProps {
+  saksNr: number;
+  documents: Dokument[];
+  readOnly?: boolean;
+}
+
 /**
  * DocumentListInnsyn
  *
@@ -60,7 +68,7 @@ const noLabelHack = () => <span className={styles.hidden}>-</span>;
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListInnsyn = ({
+const DocumentListInnsyn: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   documents,
   saksNr,
@@ -111,19 +119,6 @@ const DocumentListInnsyn = ({
       </Row>
     </>
   );
-};
-
-DocumentListInnsyn.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  saksNr: PropTypes.number.isRequired,
-  documents: PropTypes.arrayOf(PropTypes.shape({
-    journalpostId: PropTypes.string.isRequired,
-    dokumentId: PropTypes.string.isRequired,
-    tittel: PropTypes.string,
-    tidspunkt: PropTypes.string,
-    kommunikasjonsretning: PropTypes.string,
-  }).isRequired).isRequired,
-  readOnly: PropTypes.bool,
 };
 
 DocumentListInnsyn.defaultProps = {

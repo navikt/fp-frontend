@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
@@ -12,12 +11,11 @@ describe('<InnsynForm>', () => {
   it('skal vise radioknapper for valg av sett på vent når innvilget', () => {
     const wrapper = shallowWithIntl(<InnsynFormImpl
       {...reduxFormPropsMock}
-      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
-      innsynResultatTyper={[{ kode: innsynResultatTyperKV.INNVILGET, navn: 'navnTest' }]}
-      innsynResultatType={innsynResultatTyperKV.INNVILGET}
-      behandlingTypes={[{ kode: 'kodeTest', navn: 'navnTest' }]}
+      innsynResultatTyper={[{ kode: innsynResultatTyperKV.INNVILGET, kodeverk: '', navn: 'navnTest' }]}
+      innsynResultatTypeKode={innsynResultatTyperKV.INNVILGET}
+      behandlingTypes={[{ kode: 'kodeTest', kodeverk: '', navn: 'navnTest' }]}
       saksNr={123}
       documents={[]}
       vedtaksdokumenter={[]}
@@ -31,12 +29,11 @@ describe('<InnsynForm>', () => {
   it('skal ikke vise radioknapper for valg av sett på vent når innvilget', () => {
     const wrapper = shallowWithIntl(<InnsynFormImpl
       {...reduxFormPropsMock}
-      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
-      innsynResultatTyper={[{ kode: innsynResultatTyperKV.AVVIST, navn: 'navnTest' }]}
-      innsynResultatType={innsynResultatTyperKV.AVVIST}
-      behandlingTypes={[{ kode: 'kodeTest', navn: 'navnTest' }]}
+      innsynResultatTyper={[{ kode: innsynResultatTyperKV.AVVIST, kodeverk: '', navn: 'navnTest' }]}
+      innsynResultatTypeKode={innsynResultatTyperKV.AVVIST}
+      behandlingTypes={[{ kode: 'kodeTest', kodeverk: '', navn: 'navnTest' }]}
       saksNr={123}
       documents={[]}
       vedtaksdokumenter={[]}

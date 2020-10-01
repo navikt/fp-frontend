@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import classNames from 'classnames';
 
 import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 /* TODO Ta i bruk fpsakApi - Flytt url ut av komponent */
 const DOCUMENT_SERVER_URL = '/fpsak/api/vedtak/hent-vedtaksdokument';
-const getLink = (document) => `${DOCUMENT_SERVER_URL}?behandlingId=${document.dokumentId}`;
+const getLink = (document: InnsynVedtaksdokument) => `${DOCUMENT_SERVER_URL}?behandlingId=${document.dokumentId}`;
+
+interface OwnProps {
+  behandlingTypes: KodeverkMedNavn[];
+  vedtaksdokumenter: InnsynVedtaksdokument[];
+}
+
+interface OwnState {
+  showDocuments: boolean;
+}
 
 /**
  * VedtakDocuments
  *
  * Presentasjonskomponent.
  */
-class VedtakDocuments extends Component {
-  constructor() {
-    super();
+class VedtakDocuments extends Component<OwnProps, OwnState> {
+  constructor(props: OwnProps) {
+    super(props);
 
     this.toggleDocuments = this.toggleDocuments.bind(this);
     this.state = {
@@ -26,8 +35,8 @@ class VedtakDocuments extends Component {
     };
   }
 
-  toggleDocuments(evt) {
-    this.setState((prevState) => ({
+  toggleDocuments(evt: any) {
+    this.setState((prevState: any) => ({
       showDocuments: !prevState.showDocuments,
     }));
     evt.preventDefault();
@@ -65,14 +74,5 @@ class VedtakDocuments extends Component {
     );
   }
 }
-
-VedtakDocuments.propTypes = {
-  behandlingTypes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  vedtaksdokumenter: PropTypes.arrayOf(PropTypes.shape({
-    dokumentId: PropTypes.string.isRequired,
-    tittel: PropTypes.string.isRequired,
-    opprettetDato: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-};
 
 export default VedtakDocuments;

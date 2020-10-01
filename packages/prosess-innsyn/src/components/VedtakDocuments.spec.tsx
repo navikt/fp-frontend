@@ -14,7 +14,7 @@ describe('<VedtakDocuments>', () => {
     }];
 
     const wrapper = shallow(<VedtakDocuments
-      behandlingTypes={[{ kode: 'test', navn: 'navnTest' }]}
+      behandlingTypes={[{ kode: 'test', kodeverk: '', navn: 'navnTest' }]}
       vedtaksdokumenter={vedtaksdokumenter}
     />);
 
@@ -29,7 +29,7 @@ describe('<VedtakDocuments>', () => {
     }];
 
     const wrapper = shallow(<VedtakDocuments
-      behandlingTypes={[{ kode: 'test', navn: 'navnTest' }]}
+      behandlingTypes={[{ kode: 'test', kodeverk: '', navn: 'navnTest' }]}
       vedtaksdokumenter={vedtaksdokumenter}
     />);
 

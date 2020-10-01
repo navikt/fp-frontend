@@ -44,6 +44,8 @@
 		"packages/prosess-beregningsresultat",
 		"packages/prosess-felles",
 		"packages/prosess-vilkar-overstyring",
+		"packages/prosess-innsyn",
+		"packages/prosess-vedtak-innsyn",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import {
+  Aksjonspunkt, Behandling, Dokument, Innsyn,
+} from '@fpsak-frontend/types';
+
 import InnsynVedtakForm from './components/InnsynVedtakForm';
-import innsynPropType from './propTypes/innsynPropType';
-import vedtakInnsynBehandlingPropType from './propTypes/vedtakInnsynBehandlingPropType';
-import vedtakInnsynAksjonspunkterPropType from './propTypes/vedtakInnsynAksjonspunkterPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -15,7 +15,18 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const VedtakInnsynProsessIndex = ({
+interface OwnProps {
+  behandling: Behandling;
+  innsyn: Innsyn;
+  saksnummer: number;
+  aksjonspunkter: Aksjonspunkt[];
+  alleDokumenter: Dokument[];
+  submitCallback: (...args: any[]) => any;
+  previewCallback: (...args: any[]) => any;
+  isReadOnly: boolean;
+}
+
+const VedtakInnsynProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
   innsyn,
   saksnummer,
@@ -42,16 +53,5 @@ const VedtakInnsynProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-VedtakInnsynProsessIndex.propTypes = {
-  behandling: vedtakInnsynBehandlingPropType.isRequired,
-  innsyn: innsynPropType.isRequired,
-  saksnummer: PropTypes.number.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(vedtakInnsynAksjonspunkterPropType).isRequired,
-  alleDokumenter: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  previewCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-};
 
 export default VedtakInnsynProsessIndex;
