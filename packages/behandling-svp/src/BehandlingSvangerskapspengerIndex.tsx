@@ -1,11 +1,7 @@
 import React, {
   FunctionComponent, useEffect, useState, useCallback,
 } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { destroy } from 'redux-form';
 
-import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import {
   FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
@@ -44,14 +40,9 @@ interface OwnProps {
   kodeverk?: {[key: string]: KodeverkMedNavn[]};
 }
 
-interface DispatchProps {
-  destroyReduxForm: (form: string) => void;
-}
-
-const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps & DispatchProps> = ({
+const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
   behandlingEventHandler,
   behandlingId,
-  destroyReduxForm,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -67,6 +58,8 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps & DispatchPr
   const forrigeBehandling = nyOgForrigeBehandling.previous;
 
   const setBehandling = useCallback((nyBehandling) => {
+    requestSvpApi.resetCache();
+    requestSvpApi.setLinks(nyBehandling.links);
     setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
   }, []);
 
@@ -111,31 +104,14 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps & DispatchPr
 
     return () => {
       behandlingEventHandler.clear();
-      setTimeout(() => {
-        if (forrigeBehandling) {
-          destroyReduxForm(getBehandlingFormPrefix(behandlingId, forrigeBehandling.versjon));
-        }
-      }, 1000);
     };
-  }, [behandlingId]);
+  }, []);
 
-  useEffect(() => {
-    if (behandling) {
-      requestSvpApi.resetCache();
-      requestSvpApi.setLinks(behandling.links);
-    }
-  }, [behandling]);
-
-  const behandlingVersjon = behandling?.versjon;
   const { data, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(svangerskapspengerData,
-    { keepData: true, updateTriggers: [behandlingVersjon], suspendRequest: !behandling });
-
-  if (!behandling) {
-    return <LoadingPanel />;
-  }
+    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
   const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  if (hasNotFinished && data === undefined) {
+  if (!behandling || (hasNotFinished && data === undefined)) {
     return <LoadingPanel />;
   }
 
@@ -165,10 +141,4 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps & DispatchPr
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  ...bindActionCreators({
-    destroyReduxForm: destroy,
-  }, dispatch),
-});
-
-export default connect<unknown, DispatchProps, OwnProps>(() => ({}), mapDispatchToProps)(BehandlingSvangerskapspengerIndex);
+export default BehandlingSvangerskapspengerIndex;

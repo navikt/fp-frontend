@@ -122,6 +122,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const query = parseQueryString(location.search);
 
   const defaultProps = {
+    key: behandlingId,
     behandlingId,
     oppdaterBehandlingVersjon,
     behandlingEventHandler,
