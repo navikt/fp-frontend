@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+import { InjectedFormProps } from 'redux-form';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
@@ -19,6 +18,9 @@ import {
   decodeHtmlEntity, getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine,
 } from '@fpsak-frontend/utils';
 import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
+import {
+  Aksjonspunkt, Dokument, InnsynDokument, Kodeverk,
+} from '@fpsak-frontend/types';
 
 import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
 
@@ -27,7 +29,7 @@ import styles from './innsynVedtakForm.less';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-const getPreviewCallback = (formProps, begrunnelse, previewCallback) => (e) => {
+const getPreviewCallback = (formProps: InjectedFormProps, begrunnelse: string, previewCallback: (data: any) => Promise<any>) => (e: any) => {
   if (formProps.valid || formProps.pristine) {
     const data = {
       fritekst: begrunnelse || ' ',
@@ -37,12 +39,13 @@ const getPreviewCallback = (formProps, begrunnelse, previewCallback) => (e) => {
     };
     previewCallback(data);
   } else {
+    // @ts-ignore
     formProps.submit();
   }
   e.preventDefault();
 };
 
-const findResultTypeMessage = (resultat) => {
+const findResultTypeMessage = (resultat: string) => {
   if (resultat === innsynResultatType.AVVIST) {
     return 'InnsynVedtakForm.Avslatt';
   }
@@ -52,12 +55,36 @@ const findResultTypeMessage = (resultat) => {
   return 'InnsynVedtakForm.Innvilget';
 };
 
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  sprakkode: Kodeverk;
+  innsynDokumenter: InnsynDokument[];
+  innsynMottattDato: string;
+  innsynResultatType: Kodeverk;
+  alleDokumenter: Dokument[];
+  saksNr: number;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => Promise<any>;
+  previewCallback: (data: any) => Promise<any>;
+  readOnly: boolean;
+}
+
+interface MappedOwnProps {
+  apBegrunnelse: string;
+  resultat: string;
+  begrunnelse?: string;
+  documents: ({
+    fikkInnsyn: boolean;
+  } & Dokument)[];
+}
+
 /**
  * InnsynVedtakForm
  *
  * Presentasjonskomponent. Viser panelet som håndterer vedtaksforslag av innsyn.
  */
-export const InnsynVedtakFormImpl = ({
+export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   readOnly,
   previewCallback,
@@ -104,7 +131,7 @@ export const InnsynVedtakFormImpl = ({
       )}
       <VerticalSpacer twentyPx />
       {resultat !== innsynResultatType.AVVIST && (
-      <DocumentListVedtakInnsyn saksNr={saksNr} documents={documents.filter((document) => document.fikkInnsyn === true)} readOnly={readOnly} />
+      <DocumentListVedtakInnsyn saksNr={saksNr} documents={documents.filter((document) => document.fikkInnsyn === true)} />
       )}
       <VerticalSpacer twentyPx />
       <Row>
@@ -131,7 +158,7 @@ export const InnsynVedtakFormImpl = ({
             target="_blank"
             rel="noopener noreferrer"
             role="link"
-            tabIndex="0"
+            tabIndex={0}
           >
             <FormattedMessage id={readOnly ? 'InnsynVedtakForm.VisVedtaksbrev' : 'InnsynVedtakForm.ForhåndsvisBrev'} />
           </a>
@@ -141,63 +168,41 @@ export const InnsynVedtakFormImpl = ({
   );
 };
 
-InnsynVedtakFormImpl.propTypes = {
-  saksNr: PropTypes.number.isRequired,
-  intl: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  apBegrunnelse: PropTypes.string.isRequired,
-  resultat: PropTypes.string.isRequired,
-  begrunnelse: PropTypes.string,
-  sprakkode: PropTypes.shape().isRequired,
-  documents: PropTypes.arrayOf(PropTypes.shape({
-    journalpostId: PropTypes.string.isRequired,
-    dokumentId: PropTypes.string.isRequired,
-    tittel: PropTypes.string.isRequired,
-    tidspunkt: PropTypes.string,
-    kommunikasjonsretning: PropTypes.string.isRequired,
-  })).isRequired,
-  ...formPropTypes,
-};
-
-InnsynVedtakFormImpl.defaultProps = {
-  begrunnelse: undefined,
-};
-
-const buildInitialValues = (innsynMottattDato, aksjonspunkter) => ({
+const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]) => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
+  begrunnelse: aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
 });
 
-const transformValues = (values) => ({
+const transformValues = (values: any) => ({
   kode: aksjonspunktCodes.FORESLA_VEDTAK,
   ...values,
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
-const getFilteredReceivedDocuments = createSelector([(ownProps) => ownProps.alleDokumenter], (allDocuments) => {
-  const filteredDocuments = allDocuments.filter((doc) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
-  allDocuments.forEach((doc) => !filteredDocuments.some((fd) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
+const getFilteredReceivedDocuments = createSelector([(ownProps: PureOwnProps) => ownProps.alleDokumenter], (allDocuments) => {
+  const filteredDocuments = allDocuments.filter((doc: Dokument) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  allDocuments.forEach((doc: Dokument) => !filteredDocuments.some((fd: Dokument) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
   return filteredDocuments;
 });
 
 const getDocumenterMedFikkInnsynVerdi = createSelector(
-  [getFilteredReceivedDocuments, (ownProps) => ownProps.innsynDokumenter],
+  [getFilteredReceivedDocuments, (ownProps: PureOwnProps) => ownProps.innsynDokumenter],
   (alleDokumenter, valgteDokumenter) => alleDokumenter
-    .filter((dokAlle) => valgteDokumenter.find((dokValgte) => dokValgte.dokumentId === dokAlle.dokumentId))
-    .map((dokAlle) => ({
+    .filter((dokAlle: Dokument) => valgteDokumenter.find((dokValgte: InnsynDokument) => dokValgte.dokumentId === dokAlle.dokumentId))
+    .map((dokAlle: Dokument) => ({
       ...dokAlle,
-      fikkInnsyn: valgteDokumenter.find((dokValgte) => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
+      fikkInnsyn: valgteDokumenter.find((dokValgte: InnsynDokument) => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
     })),
 );
 
 const formName = 'InnsynVedtakForm';
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values)]);
+  return (state: any, ownProps: PureOwnProps) => ({
     documents: getDocumenterMedFikkInnsynVerdi(ownProps),
     initialValues: buildInitialValues(ownProps.innsynMottattDato, ownProps.aksjonspunkter),
-    apBegrunnelse: ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
+    apBegrunnelse: ownProps.aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
     begrunnelse: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'begrunnelse'),
     resultat: ownProps.innsynResultatType.kode,
     onSubmit,
@@ -207,7 +212,5 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
 const InnsynVedtakForm = connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
   form: formName,
 })(InnsynVedtakFormImpl)));
-
-InnsynVedtakForm.formName = formName;
 
 export default InnsynVedtakForm;

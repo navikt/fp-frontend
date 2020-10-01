@@ -200,6 +200,7 @@ describe('<InnsynVedtakForm>', () => {
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Innvilget');
   });
+
   it('skal vise resultattekst for delvis innvilget når resultat = DELVISINNVILGET', () => {
     const wrapper = shallowWithIntl(<InnsynVedtakFormImpl
       {...reduxFormPropsMock}

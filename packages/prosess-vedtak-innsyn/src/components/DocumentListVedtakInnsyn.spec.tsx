@@ -11,7 +11,6 @@ describe('<DocumentListVedtakInnsyn>', () => {
     const wrapper = shallow(<DocumentListVedtakInnsyn
       documents={[]}
       saksNr={123}
-      readOnly={false}
     />);
     expect(wrapper.find('FormattedMessage').prop('id')).is.equal('DocumentListVedtakInnsyn.NoDocuments');
   });
@@ -23,6 +22,7 @@ describe('<DocumentListVedtakInnsyn>', () => {
       tittel: 'Dok1',
       tidspunkt: '22.12.2017',
       kommunikasjonsretning: kommunikasjonsretning.INN,
+      fikkInnsyn: false,
     }];
     const wrapper = shallow(<DocumentListVedtakInnsyn
       saksNr={123}

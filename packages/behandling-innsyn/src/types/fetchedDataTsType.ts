@@ -1,8 +1,6 @@
 import {
-  Aksjonspunkt, Vilkar, Dokument,
+  Aksjonspunkt, Vilkar, Dokument, Innsyn,
 } from '@fpsak-frontend/types';
-
-import Innsyn from './innsynTsType';
 
 interface FetchedData {
   aksjonspunkter: Aksjonspunkt[];

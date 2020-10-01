@@ -1,20 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Dokument } from '@fpsak-frontend/types';
 
 import styles from './documentListVedtakInnsyn.less';
 
 // TODO (TOR) Flytt url ut av komponent
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document, saksNr) => `${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`;
+const getLink = (document: Dokument, saksNr: number) => `${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
+  .journalpostId}&dokumentId=${document.dokumentId}`;
 
 const headerTextCodes = [
   'DocumentListVedtakInnsyn.Dokument',
 ];
+
+interface OwnProps {
+  saksNr: number;
+  documents: ({
+    fikkInnsyn: boolean;
+  } & Dokument)[];
+}
 
 /**
  * DocumentListVedtakInnsyn
@@ -22,8 +30,9 @@ const headerTextCodes = [
  * Presentasjonskomponent. Viser dokumenter  som er valgt til innsyn i en liste . Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListVedtakInnsyn = ({
-  documents, saksNr,
+const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({
+  documents,
+  saksNr,
 }) => {
   if (documents.length === 0) {
     return <Normaltekst className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" /></Normaltekst>;
@@ -50,17 +59,6 @@ const DocumentListVedtakInnsyn = ({
       </Row>
     </>
   );
-};
-
-DocumentListVedtakInnsyn.propTypes = {
-  saksNr: PropTypes.number.isRequired,
-  documents: PropTypes.arrayOf(PropTypes.shape({
-    journalpostId: PropTypes.string.isRequired,
-    dokumentId: PropTypes.string.isRequired,
-    tittel: PropTypes.string.isRequired,
-    tidspunkt: PropTypes.string,
-    kommunikasjonsretning: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
 };
 
 export default DocumentListVedtakInnsyn;
