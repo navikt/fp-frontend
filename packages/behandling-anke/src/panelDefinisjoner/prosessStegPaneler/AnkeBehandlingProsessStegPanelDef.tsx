@@ -18,7 +18,6 @@ class PanelDef extends ProsessStegPanelDef {
     alleBehandlinger, ankeVurdering, saveAnke, previewCallback,
   }) => ({
     behandlinger: alleBehandlinger,
-    previewVedtakCallback: previewCallback,
     ankeVurdering,
     saveAnke,
     previewCallback,

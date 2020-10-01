@@ -25,13 +25,13 @@ const lagAksjonspunkt = (
 });
 
 const medholdIKlage = {
-  klageVurdering: klageVurderingCodes.MEDHOLD_I_KLAGE,
-  klageVurderingOmgjoer: klageVurderingOmgjoerCodes.GUNST_MEDHOLD_I_KLAGE,
+  klageVurdering: { kode: klageVurderingCodes.MEDHOLD_I_KLAGE, kodeverk: '' },
+  klageVurderingOmgjoer: { kode: klageVurderingOmgjoerCodes.GUNST_MEDHOLD_I_KLAGE, kodeverk: '' },
 };
-const oppheveYtelsesVedtak = { klageVurdering: klageVurderingCodes.OPPHEVE_YTELSESVEDTAK };
-const avvistKlage = { klageVurdering: klageVurderingCodes.AVVIS_KLAGE };
+const oppheveYtelsesVedtak = { klageVurdering: { kode: klageVurderingCodes.OPPHEVE_YTELSESVEDTAK, kodeverk: '' } };
+const avvistKlage = { klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' } };
 const behandlingStatusFVED = { kode: behandlingStatusCodes.FATTER_VEDTAK };
-const stadfesteKlage = { klageVurdering: klageVurderingCodes.STADFESTE_YTELSESVEDTAK };
+const stadfesteKlage = { klageVurdering: { kode: klageVurderingCodes.STADFESTE_YTELSESVEDTAK, kodeverk: '' } };
 
 describe('<ApprovalTextUtils2>', () => {
   // Klage

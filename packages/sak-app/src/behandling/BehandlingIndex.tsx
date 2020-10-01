@@ -122,6 +122,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const query = parseQueryString(location.search);
 
   const defaultProps = {
+    key: behandlingId,
     behandlingId,
     oppdaterBehandlingVersjon,
     behandlingEventHandler,
@@ -164,6 +165,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   }
 
   const fagsakBehandlingerInfo = alleBehandlinger
+    .filter((b) => !b.behandlingHenlagt)
     .map((b) => ({
       id: b.id,
       uuid: b.uuid,

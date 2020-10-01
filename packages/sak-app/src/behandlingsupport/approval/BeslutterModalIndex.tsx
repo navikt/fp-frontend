@@ -10,8 +10,8 @@ import { FatterVedtakApprovalModalSakIndex } from '@fpsak-frontend/sak-totrinnsk
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
 interface TotrinnsKlageVurdering {
-  klageVurdering?: string;
-  klageVurderingOmgjoer?: string;
+  klageVurdering?: Kodeverk;
+  klageVurderingOmgjoer?: Kodeverk;
   klageVurderingResultatNFP?: any;
   klageVurderingResultatNK?: any;
 }

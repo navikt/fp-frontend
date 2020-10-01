@@ -68,8 +68,14 @@ TotrinnskontrollSakIndex.propTypes = {
   skjemalenkeTyper: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   isForeldrepengerFagsak: PropTypes.bool.isRequired,
   behandlingKlageVurdering: PropTypes.shape({
-    klageVurdering: PropTypes.string,
-    klageVurderingOmgjoer: PropTypes.string,
+    klageVurdering: PropTypes.shape({
+      kode: PropTypes.string.isRequired,
+      kodeverk: PropTypes.string.isRequired,
+    }),
+    klageVurderingOmgjoer: PropTypes.shape({
+      kode: PropTypes.string.isRequired,
+      kodeverk: PropTypes.string.isRequired,
+    }),
     klageVurderingResultatNFP: PropTypes.shape(),
     klageVurderingResultatNK: PropTypes.shape(),
   }),
