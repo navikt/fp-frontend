@@ -62,7 +62,7 @@ export const FaktaSubmitButton: FunctionComponent<OwnProps> = ({
         onClick={onClick || ariaCheck}
         htmlType={onClick ? 'button' : 'submit'}
       >
-        {buttonText && buttonText}
+        {!!buttonText && buttonText}
         {!buttonText && <FormattedMessage id="SubmitButton.ConfirmInformation" />}
       </Hovedknapp>
       )}

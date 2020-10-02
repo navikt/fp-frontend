@@ -187,7 +187,7 @@ const HistorikkMalType5 = ({
 
         {lagGjeldendeFraInnslag(historikkinnslagDel)}
 
-        {historikkinnslagDel.soeknadsperiode && lagSoeknadsperiode(historikkinnslagDel.soeknadsperiode, getKodeverknavn)}
+        {historikkinnslagDel.soeknadsperiode && lagSoeknadsperiode(historikkinnslagDel.soeknadsperiode)}
 
         {lagTemaHeadingId(historikkinnslagDel)}
 
