@@ -1,14 +1,27 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
+
 import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
+import * as useIntl from './useIntl';
 
 describe('<ProsessStegBegrunnelseTextField>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlWithMessages());
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise tekstfelt som ikke readOnly', () => {
-    const wrapper = shallowWithIntl(<ProsessStegBegrunnelseTextField.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<ProsessStegBegrunnelseTextField
       readOnly={false}
     />);
 
@@ -18,8 +31,7 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
   });
 
   it('skal vise tekstfelt som readOnly', () => {
-    const wrapper = shallowWithIntl(<ProsessStegBegrunnelseTextField.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<ProsessStegBegrunnelseTextField
       readOnly
     />);
 
@@ -29,8 +41,7 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
   });
 
   it('skal vise default tekstkode', () => {
-    const wrapper = shallowWithIntl(<ProsessStegBegrunnelseTextField.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<ProsessStegBegrunnelseTextField
       readOnly={false}
     />);
 
@@ -39,8 +50,7 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
   });
 
   it('skal vise gitt tekstkode', () => {
-    const wrapper = shallowWithIntl(<ProsessStegBegrunnelseTextField.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<ProsessStegBegrunnelseTextField
       readOnly={false}
       textCode="Klage.ResolveKlage.ExplanationRequiredBrev"
     />);
@@ -52,8 +62,7 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
   it('skal hente begrunnelse fra første aksjonspunkt', () => {
     const aksjonspunkter = [{
       begrunnelse: 'test &amp;',
-    }];
-    // @ts-ignore Korleis fikse dette på ein bra måte?
+    }] as Aksjonspunkt[];
     const initalValues = ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter);
     expect(initalValues).is.eql({ begrunnelse: 'test &' });
   });

@@ -24,7 +24,7 @@ import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
-import Arbeidsforhold from '../types/arbeidsforholdTsType';
+import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
 
 import styles from './fodselOgTilretteleggingFaktaForm.less';
 
@@ -68,7 +68,7 @@ interface FodselOgTilretteleggingFaktaFormProps {
   hasOpenAksjonspunkter: boolean;
   fødselsdato?: string;
   submittable: boolean;
-  arbeidsforhold: Arbeidsforhold[];
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
   iayArbeidsforhold: IayArbeidsforhold[];
   erOverstyrer: boolean;
   formName: string;
@@ -330,7 +330,7 @@ export const validateForm = (values, arbeidsforhold) => {
 
 interface OwnProps {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  arbeidsforhold: Arbeidsforhold[];
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
   iayArbeidsforhold: IayArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (values: any) => void;

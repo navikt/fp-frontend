@@ -17,7 +17,6 @@ describe('<InnhentDokOpptjeningUtlandPanel>', () => {
       handleSubmit={() => undefined}
       readOnly={false}
       submittable
-      dirty
       initialValues={{ begrunnelse: undefined }}
       form="FORM_NAVN"
     />);

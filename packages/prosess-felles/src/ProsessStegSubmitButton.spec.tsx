@@ -9,6 +9,12 @@ import { ProsessStegSubmitButton } from './ProsessStegSubmitButton';
 describe('<ProsessStegSubmitButton>', () => {
   it('skal ikke vise submit-knapp når behandlingspunkt er readonly', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly
       isSubmittable={false}
       isSubmitting={false}
@@ -21,6 +27,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise submit-knapp med standard tekst når behandlingspunkt ikke er readonly', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable={false}
       isSubmitting={false}
@@ -37,6 +49,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise submit-knapp med spesifikk tekst når behandlingspunkt ikke er readonly', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable={false}
       isSubmitting={false}
@@ -54,6 +72,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise knapp som enabled når behandlingspunkt er dirty og submittable', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable
       isSubmitting={false}
@@ -68,6 +92,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise knapp som disabled når behandlingspunkt ikke er dirty eller submittable', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable={false}
       isSubmitting={false}
@@ -82,6 +112,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise knapp som disabled når innsending av behandlingspunkt-data pågår', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable
       isSubmitting
@@ -96,6 +132,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise knapp som disabled en ikke har fylt ut alle obligatoriske felter', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable
       isSubmitting={false}
@@ -110,6 +152,12 @@ describe('<ProsessStegSubmitButton>', () => {
 
   it('skal vise knapp som disabled når behandlingspunkt ikke er dirty og en ikke har fylt ut alle obligatoriske felter', () => {
     const wrapper = shallow(<ProsessStegSubmitButton
+      behandlingId={1}
+      behandlingVersjon={2}
+      formName="test"
+      isBehandlingFormSubmitting={() => undefined}
+      isBehandlingFormDirty={() => undefined}
+      hasBehandlingFormErrorsOfType={() => undefined}
       isReadOnly={false}
       isSubmittable
       isSubmitting={false}

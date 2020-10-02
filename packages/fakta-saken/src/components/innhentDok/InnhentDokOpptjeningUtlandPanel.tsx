@@ -23,7 +23,6 @@ interface OwnProps {
   behandlingVersjon: number;
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
-  dirty: boolean;
   submittable: boolean;
   initialValues: { begrunnelse?: string };
   handleSubmit: () => void;
@@ -36,7 +35,6 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps & Wrapp
   behandlingVersjon,
   readOnly,
   harApneAksjonspunkter,
-  dirty,
   submittable,
   initialValues,
   handleSubmit,
@@ -70,7 +68,6 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps & Wrapp
         />
       </RadioGroupField>
       <FaktaBegrunnelseTextField
-        isDirty={dirty}
         isSubmittable={submittable}
         isReadOnly={readOnly}
         hasBegrunnelse={!!initialValues.begrunnelse}

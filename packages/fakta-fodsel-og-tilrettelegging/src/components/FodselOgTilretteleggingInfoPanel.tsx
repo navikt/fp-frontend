@@ -15,7 +15,7 @@ interface OwnProps {
   iayArbeidsforhold: Arbeidsforhold[];
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
-  submitCallback: () => void;
+  submitCallback?: (aksjonspunktData: { kode: string }) => Promise<any>
   submittable: boolean;
   erOverstyrer: boolean;
 }

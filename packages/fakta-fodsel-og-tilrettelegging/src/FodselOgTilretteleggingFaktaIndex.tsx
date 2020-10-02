@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, InntektArbeidYtelse, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
+import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import FodselOgTilretteleggingInfoPanel from './components/FodselOgTilretteleggingInfoPanel';
 import FodselOgTilrettelegging from './types/fodselOgTilretteleggingTsType';
@@ -19,15 +20,10 @@ interface OwnProps {
   behandling: Behandling;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: () => void;
-  readOnly: boolean;
-  harApneAksjonspunkter: boolean;
-  submittable: boolean;
   erOverstyrer: boolean;
 }
 
-const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps> = ({
+const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   svangerskapspengerTilrettelegging,
   inntektArbeidYtelse,
