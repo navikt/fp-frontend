@@ -280,7 +280,7 @@ export const buildInitialValues = createSelector(
   [(ownProps: { aksjonspunkter: Aksjonspunkt[] }) => ownProps.aksjonspunkter,
     (ownProps: { behandling: Behandling }) => ownProps.behandling],
   (aksjonspunkter, behandling) => ({
-    aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses && ap.kanLoses).map((ap) => ap.definisjon.kode),
+    aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
     overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
     brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
   }),
