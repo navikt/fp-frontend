@@ -74,7 +74,6 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
             behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
             isSubmittable={!readOnly}
-            hasEmptyRequiredFields={false}
             isBehandlingFormSubmitting={isBehandlingFormSubmitting}
             isBehandlingFormDirty={isBehandlingFormDirty}
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
