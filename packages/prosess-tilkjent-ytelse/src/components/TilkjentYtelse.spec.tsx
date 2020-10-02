@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { TilkjentYtelse } from './TilkjentYtelse';
+import { PeriodeMedId, TilkjentYtelse } from './TilkjentYtelse';
 
 describe('<TilkjentYtelse>', () => {
   it('skall innehålla korrekt antal felter', () => {
@@ -12,21 +12,19 @@ describe('<TilkjentYtelse>', () => {
         id: 1,
         tom: '2018-10-01',
         fom: '2018-02-02',
+        dagsats: 2300,
         andeler: [{
-          arbeidsgiver: '973861778',
+          arbeidsgiverOrgnr: '973861778',
           refusjon: 0,
           sisteUtbetalingsdato: '2018-03-31',
           tilSoker: 1846,
           uttak: {
-            trekkdager: 10,
             stonadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
-            periodeType: 'Foreldrepenger før fødsel',
+            gradering: true,
             periodeResultatType: 'INNVILGET',
           },
-          uttaksgrad: 100,
         }],
-        group: 1,
-      }]}
+      }] as PeriodeMedId[]}
       groups={[]}
       soknadDate="2018-04-05"
       familiehendelseDate={new Date('2018-05-10')}

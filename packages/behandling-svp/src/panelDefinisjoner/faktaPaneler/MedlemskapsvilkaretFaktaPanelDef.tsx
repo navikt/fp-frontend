@@ -3,9 +3,22 @@ import React from 'react';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
-import { readOnlyUtils, FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
+import { readOnlyUtils, FaktaPanelDef, Rettigheter } from '@fpsak-frontend/behandling-felles';
+import {
+  Behandling, Fagsak, InntektArbeidYtelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
+
+interface Data {
+  fagsak: Fagsak;
+  behandling: Behandling;
+  hasFetchError: boolean;
+  personopplysninger: Personopplysninger;
+  soknad: Soknad;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  rettigheter: Rettigheter;
+}
 
 class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.MEDLEMSKAPSVILKARET
@@ -30,12 +43,12 @@ class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getData = ({
     fagsak, behandling, hasFetchError, personopplysninger, soknad, inntektArbeidYtelse, rettigheter,
-  }) => ({
+  }: Data) => ({
     personopplysninger,
     soknad,
     inntektArbeidYtelse,
     isForeldrepengerFagsak: false,
-    fagsakPerson: fagsak.fagsakPerson,
+    fagsakPerson: fagsak.person,
     readOnlyForStartdatoForForeldrepenger: !rettigheter.writeAccess.isEnabled
       || hasFetchError
       || behandling.behandlingPaaVent

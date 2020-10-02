@@ -95,8 +95,10 @@ describe('<AvregningPanelImpl>', () => {
     />);
 
     expect(wrapper.state('showDetails')).is.eql([]);
+    // @ts-ignore
     wrapper.instance().toggleDetails(id);
     expect(wrapper.state('showDetails')).is.eql([{ id, show: true }]);
+    // @ts-ignore
     wrapper.instance().toggleDetails(id);
     expect(wrapper.state('showDetails')).is.eql([{ id, show: false }]);
   });

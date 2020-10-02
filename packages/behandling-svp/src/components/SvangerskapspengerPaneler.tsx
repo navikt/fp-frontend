@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
 
 import {
-  FagsakInfo, BehandlingPaVent, SettPaVentParams, Rettigheter,
+  BehandlingPaVent, SettPaVentParams, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import SvangerskapspengerProsess from './SvangerskapspengerProsess';
 import SvangerskapspengerFakta from './SvangerskapspengerFakta';
@@ -11,7 +11,7 @@ import FetchedData from '../types/fetchedDataTsType';
 
 interface OwnProps {
   fetchedData: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;

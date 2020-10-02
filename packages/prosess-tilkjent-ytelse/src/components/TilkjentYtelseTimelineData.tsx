@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer, FloatRight,
@@ -11,40 +11,28 @@ import {
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
+import { BeregningsresultatPeriodeAndel, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import tilkjentYtelseBeregningresultatPropType from '../propTypes/tilkjentYtelseBeregningresultatPropType';
-
+import { PeriodeMedId } from './TilkjentYtelse';
 import styles from './tilkjentYtelse.less';
 
-const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id: string) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-export const createVisningsnavnForAktivitet = (aktivitet, getKodeverknavn) => {
-  if (!aktivitet.arbeidsgiverNavn) {
-    return aktivitet.arbeidsforholdType ? getKodeverknavn(aktivitet.arbeidsforholdType) : '';
-  }
-  return aktivitet.arbeidsgiverId
-    ? `${aktivitet.arbeidsgiverNavn} (${aktivitet.arbeidsgiverId})${getEndCharFromId(aktivitet.eksternArbeidsforholdId)}`
-    : aktivitet.arbeidsgiverNavn;
-};
-
-const createVisningNavnForUttakArbeidstaker = (andel, getKodeverknavn) => {
+const createVisningNavnForUttakArbeidstaker = (andel: BeregningsresultatPeriodeAndel, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
   if (!andel.arbeidsgiverOrgnr) {
     return <FormattedMessage id="TilkjentYtelse.PeriodeData.Arbeidstaker" />;
   }
-  // Strukturerer objektet på en måte som gjør det mulig å bruke samme
-  // visningsformat som resten av løsningen
-  const andelsObjekt = {
-    arbeidsgiverNavn: andel.arbeidsgiverNavn,
-    arbeidsgiverId: andel.arbeidsgiverOrgnr,
-    arbeidsforholType: andel.arbeidsforholdType,
-    eksternArbeidsforholdId: andel.eksternArbeidsforholdId,
-  };
-  return createVisningsnavnForAktivitet(andelsObjekt, getKodeverknavn);
+
+  if (!andel.arbeidsgiverNavn) {
+    return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType) : '';
+  }
+  return andel.arbeidsgiverOrgnr
+    ? `${andel.arbeidsgiverNavn} (${andel.arbeidsgiverOrgnr})${getEndCharFromId(andel.eksternArbeidsforholdId)}`
+    : andel.arbeidsgiverNavn;
 };
 
-const tableHeaderTextCodes = (isFagsakSVP = 'false') => {
+const tableHeaderTextCodes = (isFagsakSVP = false) => {
   if (isFagsakSVP) {
     return ([
       'TilkjentYtelse.PeriodeData.Andel',
@@ -65,7 +53,7 @@ const tableHeaderTextCodes = (isFagsakSVP = 'false') => {
   ]);
 };
 
-const findAndelsnavn = (andel, getKodeverknavn) => {
+const findAndelsnavn = (andel: BeregningsresultatPeriodeAndel, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
   switch (andel.aktivitetStatus.kode) {
     case aktivitetStatus.ARBEIDSTAKER:
       return createVisningNavnForUttakArbeidstaker(andel, getKodeverknavn);
@@ -87,7 +75,7 @@ const findAndelsnavn = (andel, getKodeverknavn) => {
   }
 };
 
-const getGradering = (andel) => {
+const getGradering = (andel?: BeregningsresultatPeriodeAndel) => {
   if (andel === undefined) {
     return null;
   }
@@ -101,12 +89,22 @@ const getGradering = (andel) => {
   );
 };
 
+interface OwnProps {
+  selectedItemStartDate: string;
+  selectedItemEndDate: string;
+  selectedItemData?: PeriodeMedId;
+  callbackForward: (...args: any[]) => any;
+  callbackBackward: (...args: any[]) => any;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  isSoknadSvangerskapspenger: boolean;
+}
+
 /**
  * TimeLineData
  *
  * Viser opp data fra valgt periode i tilkjent ytelse-tidslinjen
  */
-const TilkjentYtelseTimeLineData = ({
+const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   selectedItemStartDate,
   selectedItemEndDate,
   selectedItemData,
@@ -171,7 +169,7 @@ const TilkjentYtelseTimeLineData = ({
           <Column xs="12">
             <FormattedMessage
               id="TilkjentYtelse.PeriodeData.Dagsats"
-              values={{ dagsatsVerdi: selectedItemData.dagsats, b: (chunks) => <b>{chunks}</b> }}
+              values={{ dagsatsVerdi: selectedItemData.dagsats, b: (chunks: any) => <b>{chunks}</b> }}
             />
           </Column>
         </Row>
@@ -180,7 +178,7 @@ const TilkjentYtelseTimeLineData = ({
       {selectedItemData.andeler.length !== 0
           && (
             <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
-              {selectedItemData.andeler.map((andel, index) => (
+              {selectedItemData.andeler.map((andel, index: number) => (
                 <TableRow key={`index${index + 1}`}>
                   <TableColumn>{findAndelsnavn(andel, getKodeverknavn)}</TableColumn>
                   {!isSoknadSvangerskapspenger && (
@@ -208,20 +206,6 @@ const TilkjentYtelseTimeLineData = ({
           )}
     </TimeLineDataContainer>
   );
-};
-
-TilkjentYtelseTimeLineData.propTypes = {
-  selectedItemStartDate: PropTypes.string.isRequired,
-  selectedItemEndDate: PropTypes.string.isRequired,
-  selectedItemData: tilkjentYtelseBeregningresultatPropType,
-  callbackForward: PropTypes.func.isRequired,
-  callbackBackward: PropTypes.func.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  isSoknadSvangerskapspenger: PropTypes.bool.isRequired,
-};
-
-TilkjentYtelseTimeLineData.defaultProps = {
-  selectedItemData: undefined,
 };
 
 export default TilkjentYtelseTimeLineData;

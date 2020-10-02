@@ -2,11 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
+
+import { DetaljertSimuleringResultat } from '@fpsak-frontend/types';
+
 import AvregningTable from './AvregningTable';
 
 const simuleringResultat = {
   perioderPerMottaker: [],
-};
+} as DetaljertSimuleringResultat;
 const mottaker = {
   mottakerNavn: '',
   mottakerNummer: '',
@@ -58,7 +61,7 @@ describe('<AvregningTable>', () => {
       ...mockProps,
       simuleringResultat: {
         perioderPerMottaker: [mottaker, mottaker],
-      },
+      } as DetaljertSimuleringResultat,
     };
     const wrapper = shallow(<AvregningTable
       {...props}
@@ -73,7 +76,7 @@ describe('<AvregningTable>', () => {
       ...mockProps,
       simuleringResultat: {
         perioderPerMottaker: [mottaker],
-      },
+      } as DetaljertSimuleringResultat,
     };
     const wrapper = shallow(<AvregningTable
       {...props}
@@ -95,7 +98,7 @@ describe('<AvregningTable>', () => {
       ...mockProps,
       simuleringResultat: {
         perioderPerMottaker: [mottaker, { ...mottaker, ...arbeidsgiver }],
-      },
+      } as DetaljertSimuleringResultat,
     };
     const wrapper = shallow(<AvregningTable
       {...props}

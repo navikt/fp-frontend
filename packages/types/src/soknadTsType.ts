@@ -1,19 +1,14 @@
 import Kodeverk from './kodeverkTsType';
 
 type Soknad = Readonly<{
-  fodselsdatoer?: { [key: number]: string };
-  adopsjonFodelsedatoer?: { [key: number]: string };
-  termindato?: string;
-  antallBarn: number;
-  utstedtdato?: string;
   soknadType: Kodeverk;
-  tilleggsopplysninger?: string;
-  omsorgsovertakelseDato?: string;
-  farSokerType?: Kodeverk;
-  barnetsAnkomstTilNorgeDato?: string;
-  oppgittFordeling: {
-    startDatoForPermisjon?: string;
-  };
+  mottattDato: string;
+  soknadDato: string;
+  tilleggsopplysninger: string;
+  begrunnelseForSenInnsending: string;
+  annenPartNavn: string;
+  antallBarn: number;
+  dekningsgrad: number;
   oppgittTilknytning: {
     oppholdNorgeNa: boolean;
     oppholdSistePeriode: boolean;
@@ -29,10 +24,31 @@ type Soknad = Readonly<{
       tom: string;
     }[];
   }
+  manglendeVedlegg: {
+    dokumentType: Kodeverk;
+    arbeidsgiver: {
+      navn: string;
+      organisasjonsnummer: string;
+      fødselsdato: string;
+      aktørId: string;
+    };
+    brukerHarSagtAtIkkeKommer: boolean;
+  }[];
   oppgittRettighet: {
     omsorgForBarnet: boolean;
     aleneomsorgForBarnet: boolean;
   };
+  oppgittFordeling: {
+    startDatoForPermisjon?: string;
+  };
+  spraakkode: Kodeverk;
+  utstedtdato?: string;
+  termindato?: string;
+  fodselsdatoer?: { [key: number]: string };
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  adopsjonFodelsedatoer?: { [key: number]: string }
+  farSokerType?: Kodeverk;
 }>
 
 export default Soknad;

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -10,12 +9,21 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import styles from './avregningSummary.less';
 
+interface OwnProps {
+  fom: string;
+  tom: string;
+  feilutbetaling: number;
+  etterbetaling: number;
+  inntrekk?: number;
+  ingenPerioderMedAvvik?: boolean;
+}
+
 /**
  * Avregning oppsummering
  *
  * Presentationskomponent
  */
-const AvregningSummary = ({
+const AvregningSummary: FunctionComponent<OwnProps> = ({
   fom,
   tom,
   feilutbetaling,
@@ -79,18 +87,5 @@ const AvregningSummary = ({
     </div>
   </>
 );
-
-AvregningSummary.propTypes = {
-  fom: PropTypes.string.isRequired,
-  tom: PropTypes.string.isRequired,
-  feilutbetaling: PropTypes.number.isRequired,
-  etterbetaling: PropTypes.number.isRequired,
-  inntrekk: PropTypes.number,
-  ingenPerioderMedAvvik: PropTypes.bool.isRequired,
-};
-
-AvregningSummary.defaultProps = {
-  inntrekk: null,
-};
 
 export default AvregningSummary;

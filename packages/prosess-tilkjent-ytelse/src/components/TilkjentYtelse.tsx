@@ -1,23 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import Timeline from 'react-visjs-timeline';
-import { injectIntl } from 'react-intl';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import { BeregningsresultatPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
+import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
+
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
 
 import styles from './tilkjentYtelse.less';
 
-const parseDateString = (dateString) => moment(dateString, ISO_DATE_FORMAT)
+export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
+
+type NyPeriode = {
+  className: string;
+  group: number;
+  start: Date;
+  end: moment.Moment;
+  title: string;
+} & PeriodeMedId;
+
+const parseDateString = (dateString: Date | string) => moment(dateString, ISO_DATE_FORMAT)
   .toDate();
 
-const getOptions = (nyePerioder) => {
+const getOptions = (nyePerioder: NyPeriode[]) => {
   const firstPeriod = nyePerioder[0];
   const lastPeriod = nyePerioder[nyePerioder.length - 1];
 
@@ -40,7 +52,7 @@ const getOptions = (nyePerioder) => {
 const gradertKlassenavn = 'gradert';
 const innvilgetKlassenavn = 'innvilget';
 
-const getStatusForPeriode = (periode) => {
+const getStatusForPeriode = (periode: PeriodeMedId) => {
   const graderteAndeler = periode.andeler.filter((andel) => andel.uttak && andel.uttak.gradering === true);
   if (graderteAndeler.length === 0) {
     return innvilgetKlassenavn;
@@ -48,7 +60,7 @@ const getStatusForPeriode = (periode) => {
   return gradertKlassenavn;
 };
 
-const createTooltipContent = (periodeType, intl, item) => (`
+const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId) => (`
   <p>
     ${moment(item.fom)
     .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
@@ -60,8 +72,7 @@ const createTooltipContent = (periodeType, intl, item) => (`
       days: calcDaysAndWeeks(moment(item.fom), moment(item.tom)).days,
     })}
     </br>
-    ${item.utsettelseType && item.utsettelseType.kode !== '-'
-    ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' }) : periodeType}
+    ${periodeType}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     ${intl.formatMessage({ id: 'Timeline.tooltip.dagsats' },
     {
@@ -70,7 +81,7 @@ const createTooltipContent = (periodeType, intl, item) => (`
    </p>
 `);
 
-const findKorrektLabelForKvote = (stonadtype) => {
+const findKorrektLabelForKvote = (stonadtype: string) => {
   switch (stonadtype) {
     case stonadskontoType.FEDREKVOTE:
       return uttakPeriodeNavn.FEDREKVOTE;
@@ -90,38 +101,56 @@ const findKorrektLabelForKvote = (stonadtype) => {
 };
 
 // og grupp kan endres nor vi har en medsøkare
-const addClassNameGroupIdToPerioder = (perioder, intl) => {
-  const perioderMedClassName = [];
+const addClassNameGroupIdToPerioder = (perioder: PeriodeMedId[], intl: IntlShape): NyPeriode[] => {
+  const perioderMedClassName: NyPeriode[] = [];
   perioder.forEach((item) => {
     const status = getStatusForPeriode(item);
-    const copyOfItem = { ...item };
-    copyOfItem.className = status;
-    copyOfItem.group = 1;
-    copyOfItem.start = parseDateString(item.fom);
-    copyOfItem.end = moment(item.tom)
-      .add(1, 'days');
-    copyOfItem.title = createTooltipContent(findKorrektLabelForKvote(item.andeler[0].uttak.stonadskontoType), intl, item);
+    const copyOfItem = {
+      ...item,
+      className: status,
+      group: 1,
+      start: parseDateString(item.fom),
+      end: moment(item.tom).add(1, 'days'),
+      title: createTooltipContent(findKorrektLabelForKvote(item.andeler[0].uttak.stonadskontoType), intl, item),
+    };
     perioderMedClassName.push(copyOfItem);
   });
   return perioderMedClassName;
 };
 
-const getCustomTimes = (soknadDate, familiehendelseDate, lastPeriod) => ({
+const getCustomTimes = (soknadDate: string, familiehendelseDate: Date, lastPeriod: PeriodeMedId) => ({
   soknad: parseDateString(soknadDate),
   fodsel: parseDateString(familiehendelseDate),
-  lastDateInSoknad: lastPeriod ? parseDateString(lastPeriod.tom) : parseDateString(moment()
-    .toDate()),
+  lastDateInSoknad: lastPeriod ? parseDateString(lastPeriod.tom) : parseDateString(moment().toDate()),
 });
+
+interface OwnProps {
+  items: PeriodeMedId[];
+  groups: {
+    id: number;
+    content: string;
+  }[];
+  soknadDate: string;
+  familiehendelseDate: Date;
+  hovedsokerKjonnKode: Kjønnkode;
+  isSoknadSvangerskapspenger: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface OwnState {
+  selectedItem?: PeriodeMedId;
+}
 
 /**
  * TilkjentYtelse
  *
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for tilkjent ytelse
  */
+export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, OwnState> {
+  timelineRef: RefObject<any>;
 
-export class TilkjentYtelse extends Component {
-  constructor() {
-    super();
+  constructor(props: OwnProps & WrappedComponentProps) {
+    super(props);
 
     this.state = {
       selectedItem: null,
@@ -183,7 +212,7 @@ export class TilkjentYtelse extends Component {
     }
   }
 
-  selectHandler(eventProps) {
+  selectHandler(eventProps: { items: number[] }) {
     const { props: { items } } = this;
     const selectedItem = items.find((item) => item.id === eventProps.items[0]);
     this.setState({
@@ -236,7 +265,6 @@ export class TilkjentYtelse extends Component {
         soknadDate,
         familiehendelseDate,
         hovedsokerKjonnKode,
-        medsokerKjonnKode,
         intl,
         isSoknadSvangerskapspenger,
         alleKodeverk,
@@ -257,7 +285,6 @@ export class TilkjentYtelse extends Component {
           <Column xs="1" className={styles.sokerContainer}>
             <TimeLineSokerEnsamSoker
               hovedsokerKjonnKode={hovedsokerKjonnKode}
-              medsokerKjonnKode={medsokerKjonnKode}
             />
           </Column>
           <Column xs="11">
@@ -301,21 +328,5 @@ export class TilkjentYtelse extends Component {
     );
   }
 }
-
-TilkjentYtelse.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  groups: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  soknadDate: PropTypes.string.isRequired,
-  familiehendelseDate: PropTypes.shape().isRequired,
-  hovedsokerKjonnKode: PropTypes.string.isRequired,
-  medsokerKjonnKode: PropTypes.string,
-  intl: PropTypes.shape().isRequired,
-  isSoknadSvangerskapspenger: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
-
-TilkjentYtelse.defaultProps = {
-  medsokerKjonnKode: undefined,
-};
 
 export default injectIntl(TilkjentYtelse);

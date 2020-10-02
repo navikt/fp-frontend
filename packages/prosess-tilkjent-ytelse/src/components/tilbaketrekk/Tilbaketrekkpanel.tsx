@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -20,6 +20,7 @@ import {
 } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
+import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
 
 import styles from './tilbaketrekkpanel.less';
 
@@ -30,7 +31,17 @@ const formName = 'vurderTilbaketrekkForm';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-export const Tilbaketrekkpanel = ({
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  readOnly: boolean;
+  vurderTilbaketrekkAP?: Aksjonspunkt;
+  submitCallback: (data: any) => Promise<any>;
+  readOnlySubmitButton: boolean;
+  beregningsresultat?: BeregningsresultatFp;
+}
+
+export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   readOnly,
   vurderTilbaketrekkAP,
@@ -116,16 +127,7 @@ export const Tilbaketrekkpanel = ({
 
 );
 
-Tilbaketrekkpanel.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  vurderTilbaketrekkAP: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
-
-export const transformValues = (values) => {
+export const transformValues = (values: any) => {
   const hindreTilbaketrekk = values[radioFieldName];
   const begrunnelse = values[begrunnelseFieldName];
   return {
@@ -136,8 +138,8 @@ export const transformValues = (values) => {
 };
 
 export const buildInitialValues = createSelector([
-  (state, ownProps) => ownProps.vurderTilbaketrekkAP,
-  (state, ownProps) => ownProps.beregningsresultat], (ap, tilkjentYtelse) => {
+  (_state, ownProps: PureOwnProps) => ownProps.vurderTilbaketrekkAP,
+  (_state, ownProps: PureOwnProps) => ownProps.beregningsresultat], (ap, tilkjentYtelse) => {
   const tidligereValgt = tilkjentYtelse.skalHindreTilbaketrekk;
   if (tidligereValgt === undefined || tidligereValgt === null || !ap || !ap.begrunnelse) {
     return undefined;
@@ -148,10 +150,10 @@ export const buildInitialValues = createSelector([
   };
 });
 
-const lagSubmitFn = createSelector([(ownProps) => ownProps.submitCallback],
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values) => submitCallback([transformValues(values)]));
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),
   initialValues: buildInitialValues(state, ownProps),
 });

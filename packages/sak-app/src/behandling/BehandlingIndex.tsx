@@ -98,16 +98,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
 
-  const fagsakInfo = {
-    saksnummer: fagsak.saksnummer,
-    fagsakStatus: fagsak.status,
-    fagsakPerson: fagsak.person,
-    fagsakYtelseType: fagsak.sakstype,
-    kanRevurderingOpprettes: fagsak.kanRevurderingOpprettes,
-    skalBehandlesAvInfotrygd: fagsak.skalBehandlesAvInfotrygd,
-    isForeldrepengerFagsak: fagsak.sakstype.kode === FagsakYtelseType.FORELDREPENGER,
-  };
-
   const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
@@ -127,7 +117,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     oppdaterBehandlingVersjon,
     behandlingEventHandler,
     kodeverk,
-    fagsak: fagsakInfo,
+    fagsak,
     rettigheter,
     opneSokeside,
     setRequestPendingMessage,

@@ -4,7 +4,7 @@ export { default as Behandling } from './src/behandlingTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
 export { default as Beregningsgrunnlag } from './src/beregningsgrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
-export { default as BeregningsresultatFp } from './src/beregningsresultatFpTsType';
+export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
 export { default as Dokument } from './src/dokumentTsType';
 export { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export { default as InntektArbeidYtelse } from './src/inntektArbeidYtelseTsType';
@@ -12,7 +12,9 @@ export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';
 export { default as Personopplysninger } from './src/personopplysningerTsType';
-export { default as SimuleringResultat } from './src/simuleringResultatTsType';
+export {
+  default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
+} from './src/simuleringResultatTsType';
 export { default as Soknad } from './src/soknadTsType';
 export { default as UttaksresultatPeriode } from './src/uttaksresultatPeriodeTsType';
 export { default as UttakStonadskontoer } from './src/uttakStonadskontoerTsType';
@@ -28,3 +30,4 @@ export { default as KlageVurdering } from './src/klageVurderingTsType';
 export { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
 export { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioder } from './src/uttakKontrollerFaktaPerioderTsType';
 export { default as Opptjening, OpptjeningAktivitet } from './src/opptjeningTsType';
+export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';

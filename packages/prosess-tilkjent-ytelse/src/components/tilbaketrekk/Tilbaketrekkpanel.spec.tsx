@@ -1,24 +1,29 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { Element } from 'nav-frontend-typografi';
+
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioOption, TextAreaField } from '@fpsak-frontend/form';
-import { Element } from 'nav-frontend-typografi';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
+
 import { buildInitialValues, Tilbaketrekkpanel as UnwrappedForm, transformValues } from './Tilbaketrekkpanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-tilkjent-ytelse';
 
-const lagAksjonspunktTilbaketrekk = (begrunnelse) => ({
+const lagAksjonspunktTilbaketrekk = (begrunnelse?: string): Aksjonspunkt => ({
   definisjon: {
     kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
   },
+
   status: {
     kode: 'OPPR',
   },
+
   begrunnelse,
-});
+} as Aksjonspunkt);
 
 describe('<Tilbaketrekkpanel>', () => {
   it('skal teste at komponent vises korrekt', () => {
@@ -27,7 +32,7 @@ describe('<Tilbaketrekkpanel>', () => {
       readOnly={false}
       submitCallback={sinon.spy()}
       readOnlySubmitButton={false}
-      vurderTilbaketrekkAP={lagAksjonspunktTilbaketrekk(undefined)}
+      vurderTilbaketrekkAP={lagAksjonspunktTilbaketrekk()}
       behandlingId={1}
       behandlingVersjon={1}
       {...reduxFormPropsMock}
@@ -46,19 +51,19 @@ describe('<Tilbaketrekkpanel>', () => {
   it('skal teste at komponent bygger korrekte initial values dersom alle data mangler', () => {
     const expectedInitialValues = undefined;
 
-    const actualInitialValues = buildInitialValues.resultFunc({}, {});
+    const actualInitialValues = buildInitialValues.resultFunc(undefined, undefined);
     expect(actualInitialValues).is.deep.equal(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom aksjonspunkt ikke er løst før', () => {
     const expectedInitialValues = undefined;
     const ownProps = {
-      vurderTilbaketrekkAP: lagAksjonspunktTilbaketrekk(undefined),
+      vurderTilbaketrekkAP: lagAksjonspunktTilbaketrekk(),
     };
     const tilkjentYtelse = {
       skalHindreTilbaketrekk: null,
-    };
-    const actualInitialValues = buildInitialValues.resultFunc(ownProps, tilkjentYtelse);
+    } as BeregningsresultatFp;
+    const actualInitialValues = buildInitialValues.resultFunc(ownProps.vurderTilbaketrekkAP, tilkjentYtelse);
     expect(actualInitialValues).is.deep.equal(expectedInitialValues);
   });
 
@@ -72,7 +77,7 @@ describe('<Tilbaketrekkpanel>', () => {
     };
     const tilkjentYtelse = {
       skalHindreTilbaketrekk: false,
-    };
+    } as BeregningsresultatFp;
     const actualInitialValues = buildInitialValues.resultFunc(ownProps.vurderTilbaketrekkAP, tilkjentYtelse);
     expect(actualInitialValues).is.deep.equal(expectedInitialValues);
   });
@@ -87,7 +92,7 @@ describe('<Tilbaketrekkpanel>', () => {
     };
     const tilkjentYtelse = {
       skalHindreTilbaketrekk: true,
-    };
+    } as BeregningsresultatFp;
     const actualInitialValues = buildInitialValues.resultFunc(ownProps.vurderTilbaketrekkAP, tilkjentYtelse);
     expect(actualInitialValues).is.deep.equal(expectedInitialValues);
   });

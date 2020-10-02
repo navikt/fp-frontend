@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import PropTypes from 'prop-types';
 import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import styles from './collapseButton.less';
 
-const buttonText = (showDetails) => (showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer');
+const buttonText = (showDetails: boolean) => (showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer');
 
-const CollapseButton = ({
+interface OwnProps {
+  toggleDetails: (id: number) => void;
+  showDetails: boolean;
+  mottakerIndex: number;
+}
+
+const CollapseButton: FunctionComponent<OwnProps> = ({
   toggleDetails,
   showDetails,
   mottakerIndex,
@@ -17,11 +22,5 @@ const CollapseButton = ({
     {showDetails ? <OppChevron /> : <NedChevron />}
   </button>
 );
-
-CollapseButton.propTypes = {
-  toggleDetails: PropTypes.func.isRequired,
-  showDetails: PropTypes.bool.isRequired,
-  mottakerIndex: PropTypes.number.isRequired,
-};
 
 export default CollapseButton;

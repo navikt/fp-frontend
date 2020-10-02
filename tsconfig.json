@@ -63,6 +63,8 @@
 		"packages/prosess-vilkar-overstyring",
 		"packages/prosess-innsyn",
 		"packages/prosess-vedtak-innsyn",
+		"packages/prosess-avregning",
+		"packages/prosess-tilkjent-ytelse",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

@@ -5,9 +5,9 @@ import React, {
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
 import {
-  FagsakInfo, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter, useSetBehandlingVedEndring,
+  prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegTilbakekrevingPanelDefinisjoner';
@@ -25,7 +25,7 @@ const forhandsvis = (data) => {
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;

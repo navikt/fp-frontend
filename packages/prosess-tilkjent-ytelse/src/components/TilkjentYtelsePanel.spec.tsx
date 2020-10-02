@@ -1,9 +1,13 @@
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Undertittel } from 'nav-frontend-typografi';
+
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import { TilkjentYtelsePanelImpl } from './TilkjentYtelsePanel';
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
@@ -17,26 +21,28 @@ const tilbaketrekkAP = {
     kode: 'OPPR',
   },
   begrunnelse: undefined,
-};
+} as Aksjonspunkt;
 
 describe('<TilkjentYtelsePanelImpl>', () => {
   it('skall innehålla rätt undertekst', () => {
     const familieDate = new Date('2018-04-04');
     const wrapper = shallowWithIntl(<TilkjentYtelsePanelImpl
-      intl={intlMock}
       readOnly
-      beregningsresultatMedUttaksplan={null}
+      beregningresultat={null}
       hovedsokerKjonn="K"
-      medsokerKjonn="M"
       soknadDato="2018-04-04"
       familiehendelseDato={familieDate}
-      stonadskontoer={null}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       isSoknadSvangerskapspenger={false}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
     />);
     expect(wrapper.find(Undertittel)).to.have.length(1);
     expect(wrapper.find(Undertittel).props().children.props.id).to.equal('TilkjentYtelse.Title');
@@ -46,14 +52,11 @@ describe('<TilkjentYtelsePanelImpl>', () => {
   it('Skal vise tilbaketrekkpanel gitt tilbaketrekkaksjonspunkt', () => {
     const familieDate = new Date('2018-04-04');
     const wrapper = shallowWithIntl(<TilkjentYtelsePanelImpl
-      intl={intlMock}
       readOnly
-      beregningsresultatMedUttaksplan={null}
+      beregningresultat={null}
       hovedsokerKjonn="K"
-      medsokerKjonn="M"
       soknadDato="2018-04-04"
       familiehendelseDato={familieDate}
-      stonadskontoer={null}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       vurderTilbaketrekkAP={tilbaketrekkAP}
@@ -61,6 +64,11 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
     />);
     expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(1);
   });

@@ -4,9 +4,11 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
+  Rettigheter, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { Kodeverk, KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import {
+  Kodeverk, KodeverkMedNavn, Behandling, Fagsak,
+} from '@fpsak-frontend/types';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 
 import KlageBehandlingModal from './KlageBehandlingModal';
@@ -18,7 +20,7 @@ import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;

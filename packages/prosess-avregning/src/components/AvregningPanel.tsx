@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { clearFields, formPropTypes } from 'redux-form';
+import { clearFields, FormAction, InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   Element, Normaltekst, Undertekst, Undertittel,
@@ -26,8 +25,10 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
 import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
+import {
+  Aksjonspunkt, DetaljertSimuleringResultat, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
+} from '@fpsak-frontend/types';
 
-import avregningSimuleringResultatPropType from '../propTypes/avregningSimuleringResultatPropType';
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 
@@ -43,20 +44,64 @@ const simuleringAksjonspunkter = [
 const formName = 'AvregnigForm';
 const IKKE_SEND = 'IKKE_SEND';
 
-const createHelptextTooltip = (isForeldrepenger) => (
+const createHelptextTooltip = (isForeldrepenger: boolean) => (
   <FormattedMessage id={isForeldrepenger ? 'Avregning.HjelpetekstForeldrepenger' : 'Avregning.HjelpetekstEngangsstonad'} />
 );
 
-const getSimuleringResult = (simuleringResultat, feilutbetaling) => {
+const getSimuleringResult = (simuleringResultat: SimuleringResultat, feilutbetaling: number): DetaljertSimuleringResultat => {
   if (!simuleringResultat) {
-    return simuleringResultat;
+    return undefined;
   }
   return feilutbetaling === undefined || feilutbetaling ? simuleringResultat.simuleringResultat : simuleringResultat.simuleringResultatUtenInntrekk;
 };
 
-export class AvregningPanelImpl extends Component {
-  constructor() {
-    super();
+interface PureOwnProps {
+  fagsak: Fagsak;
+  behandlingId: number;
+  behandlingVersjon: number;
+  sprakkode: Kodeverk;
+  aksjonspunkter: Aksjonspunkt[];
+  simuleringResultat?: SimuleringResultat;
+  tilbakekrevingvalg?: TilbakekrevingValg;
+  submitCallback: (data: any) => Promise<any>;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  apCodes: string[];
+  isApOpen: boolean;
+  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
+}
+
+interface MappedOwnProps {
+  hasOpenTilbakekrevingsbehandling: boolean;
+  isForeldrepenger: boolean;
+  behandlingFormPrefix: string;
+  varseltekst?: string;
+  saksnummer: number;
+}
+
+type Details = {
+  id: number;
+  show: boolean;
+}
+
+interface DispatchProps {
+  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, ...fields: string[]) => FormAction
+}
+
+interface OwnState {
+  showDetails: Details[];
+  feilutbetaling?: number;
+}
+
+type Props = PureOwnProps & MappedOwnProps & DispatchProps & WrappedComponentProps & InjectedFormProps
+
+export class AvregningPanelImpl extends Component<Props, OwnState> {
+  static defaultProps = {
+    simuleringResultat: null,
+  };
+
+  constructor(props: Props) {
+    super(props);
     this.toggleDetails = this.toggleDetails.bind(this);
     this.resetFields = this.resetFields.bind(this);
     this.previewMessage = this.previewMessage.bind(this);
@@ -67,9 +112,9 @@ export class AvregningPanelImpl extends Component {
     };
   }
 
-  toggleDetails(id) {
+  toggleDetails(id: number) {
     const { showDetails } = this.state;
-    const tableIndex = showDetails.findIndex((table) => table.id === id);
+    const tableIndex = showDetails.findIndex((table: Details) => table.id === id);
     let newShowDetailsArray = [];
 
     if (tableIndex !== -1) {
@@ -98,8 +143,8 @@ export class AvregningPanelImpl extends Component {
     clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
   }
 
-  previewMessage(e, previewCallback) {
-    const { varseltekst, saksnummer } = this.props;
+  previewMessage(e: any) {
+    const { varseltekst, saksnummer, previewCallback } = this.props;
     previewCallback('', dokumentMalType.TBKVAR, varseltekst || ' ', saksnummer);
     e.preventDefault();
   }
@@ -113,7 +158,6 @@ export class AvregningPanelImpl extends Component {
       apCodes,
       readOnly,
       sprakkode,
-      previewCallback,
       isForeldrepenger,
       hasOpenTilbakekrevingsbehandling,
       ...formProps
@@ -174,7 +218,6 @@ export class AvregningPanelImpl extends Component {
                         validate={[required, minLength3, maxLength1500, hasValidText]}
                         maxLength={1500}
                         readOnly={readOnly}
-                        id="avregningVurdering"
                       />
                     </Column>
                     { apCodes[0] === aksjonspunktCodes.VURDER_FEILUTBETALING && (
@@ -194,7 +237,7 @@ export class AvregningPanelImpl extends Component {
                                   </Column>
                                   <Column sm="2">
                                     <Image
-                                      tabIndex="0"
+                                      tabIndex={0}
                                       src={questionNormalUrl}
                                       srcHover={questionHoverUrl}
                                       alt={intl.formatMessage({ id: 'Avregning.HjelpetekstForeldrepenger' })}
@@ -209,7 +252,6 @@ export class AvregningPanelImpl extends Component {
                                   validate={[required, minLength3, maxLength1500, hasValidText]}
                                   maxLength={1500}
                                   readOnly={readOnly}
-                                  id="avregningFritekst"
                                   badges={[{
                                     type: 'fokus',
                                     textId: getLanguageCodeFromSprakkode(sprakkode),
@@ -221,9 +263,7 @@ export class AvregningPanelImpl extends Component {
                                     <VerticalSpacer fourPx />
                                     <a
                                       href=""
-                                      onClick={(e) => {
-                                        this.previewMessage(e, previewCallback);
-                                      }}
+                                      onClick={this.previewMessage}
                                       className={styles.previewLink}
                                     >
                                       <FormattedMessage id="Messages.PreviewText" />
@@ -251,8 +291,7 @@ export class AvregningPanelImpl extends Component {
                         mini
                         htmlType="button"
                         onClick={formProps.handleSubmit}
-                        disabled={formProps.invalid || formProps.pristine || formProps.submitting}
-                        readOnly={readOnly}
+                        disabled={formProps.invalid || formProps.pristine || formProps.submitting || readOnly}
                         spinner={formProps.submitting}
                       >
                         <FormattedMessage id="SubmitButton.ConfirmInformation" />
@@ -269,20 +308,7 @@ export class AvregningPanelImpl extends Component {
   }
 }
 
-AvregningPanelImpl.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  isApOpen: PropTypes.bool.isRequired,
-  simuleringResultat: avregningSimuleringResultatPropType,
-  previewCallback: PropTypes.func.isRequired,
-  hasOpenTilbakekrevingsbehandling: PropTypes.bool.isRequired,
-  ...formPropTypes,
-};
-
-AvregningPanelImpl.defaultProps = {
-  simuleringResultat: null,
-};
-
-export const transformValues = (values, ap) => {
+export const transformValues = (values: any, ap: string) => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
   const info = {
     kode: ap,
@@ -302,10 +328,11 @@ export const transformValues = (values, ap) => {
 };
 
 const buildInitialValues = createSelector(
-  [(state, ownProps) => ownProps.tilbakekrevingvalg, (state, ownProps) => ownProps.aksjonspunkter], (
+  [(_state, ownProps: PureOwnProps) => ownProps.tilbakekrevingvalg,
+    (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
     tilbakekrevingvalg, aksjonspunkter,
   ) => {
-    const aksjonspunkt = aksjonspunkter.find((ap) => simuleringAksjonspunkter.includes(ap.definisjon.kode));
+    const aksjonspunkt = aksjonspunkter.find((ap: Aksjonspunkt) => simuleringAksjonspunkter.includes(ap.definisjon.kode));
     if (!aksjonspunkt || !tilbakekrevingvalg) {
       return undefined;
     }
@@ -322,12 +349,13 @@ const buildInitialValues = createSelector(
 );
 
 const lagSubmitFn = createSelector([
-  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.apCodes],
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
 (submitCallback, apCodes) => (values) => submitCallback([transformValues(values, apCodes[0])]));
 
-const mapStateToProps = (state, ownProps) => {
+
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   const {
-    sprakkode, behandlingId, behandlingVersjon, tilbakekrevingvalg, simuleringResultat, fagsak,
+    behandlingId, behandlingVersjon, tilbakekrevingvalg, fagsak,
   } = ownProps;
   const hasOpenTilbakekrevingsbehandling = tilbakekrevingvalg !== undefined
     && tilbakekrevingvalg.videreBehandling.kode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
@@ -336,15 +364,13 @@ const mapStateToProps = (state, ownProps) => {
     initialValues: buildInitialValues(state, ownProps),
     behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
     saksnummer: fagsak.saksnummer,
-    isForeldrepenger: fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER,
-    onSubmit: lagSubmitFn(ownProps),
+    isForeldrepenger: fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER,
     hasOpenTilbakekrevingsbehandling,
-    sprakkode,
-    simuleringResultat,
+    onSubmit: lagSubmitFn(ownProps),
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   ...bindActionCreators({
     clearFields,
   }, dispatch),

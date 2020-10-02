@@ -128,7 +128,7 @@ export const findDifferenceInMonthsAndDays = (fomDate, tomDate) => {
   };
 };
 
-export const getRangeOfMonths = (fom, tom) => {
+export const getRangeOfMonths = (fom: string, tom: string): { month: string, year: string }[] => {
   moment.locale('nb');
   const fraMåned = moment(fom, YYYY_MM_FORMAT);
   const tilMåned = moment(tom, YYYY_MM_FORMAT);
