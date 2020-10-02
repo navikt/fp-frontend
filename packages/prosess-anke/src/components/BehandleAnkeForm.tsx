@@ -303,7 +303,6 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
             behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
             isSubmittable={!readOnly && canSubmit(formValues)}
-            hasEmptyRequiredFields={false}
             isBehandlingFormSubmitting={isBehandlingFormSubmitting}
             isBehandlingFormDirty={isBehandlingFormDirty}
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}

@@ -2,11 +2,11 @@ type Ytelsefordeling = Readonly<{
   ikkeOmsorgPerioder?: {
     periodeFom: string;
     periodeTom: string;
-  };
+  }[];
   aleneOmsorgPerioder?: {
     periodeFom: string;
     periodeTom: string;
-  };
+  }[];
   annenforelderHarRettDto: {
     annenforelderHarRett?: boolean;
     begrunnelse?: string;

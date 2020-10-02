@@ -1,9 +1,12 @@
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
+
 import Image from './Image';
 import VerticalSpacer from './VerticalSpacer';
 
@@ -19,7 +22,7 @@ const onKeyDown = (fields, emptyPeriodTemplate) => ({ keyCode }) => {
   }
 };
 
-const getRemoveButton = (index: number, fields) => (className) => {
+const getRemoveButton = (index: number, fields) => (className?: string): ReactNode | undefined => {
   if (index > 0) {
     return (
       <button
@@ -37,16 +40,9 @@ const getRemoveButton = (index: number, fields) => (className) => {
 const showErrorMessage = (meta) => meta && meta.error && (meta.dirty || meta.submitFailed);
 
 interface OwnProps {
-  children: (id: any, index: number, removeButtonElmt?: ReactNode) => ReactNode;
-  fields: any[];
-  meta?: {
-    error?: {
-      id: string;
-      values?: {[key: string]: string};
-    };
-    dirty: boolean;
-    submitFailed: boolean;
-  };
+  children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
+  fields: FieldArrayFieldsProps<any>;
+  meta?: FieldArrayMetaProps;
   readOnly?: boolean;
   titleTextCode?: string;
   textCode?: string;

@@ -29,6 +29,7 @@ interface RadioGroupFieldProps {
   legend?: React.ReactNode;
   isEdited?: boolean;
   className?: string;
+  onChange?: () => void;
 }
 
 const classNames = classnames.bind(styles);

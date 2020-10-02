@@ -1,13 +1,14 @@
 {
   "name": "@fpsak-frontend/fakta-uttak",
   "version": "1.0.0",
-  "module": "index.jsx",
+  "module": "index.ts",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "@fpsak-frontend/fakta-felles": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
+    "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "classnames": "^2.2.6",
     "moment": "^2.29.0",
@@ -20,7 +21,6 @@
     "nav-frontend-modal": "1.0.40",
     "nav-frontend-modal-style": "0.3.35",
     "nav-frontend-typografi": "2.0.26",
-    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-intl": "^5.8.2",
     "react-redux": "^7.2.1",

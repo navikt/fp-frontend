@@ -30,11 +30,10 @@ class PanelDef extends ProsessStegPanelDef {
     TilbakekrevingBehandlingApiKeys.VEDTAKSBREV,
   ]
 
-  getData = ({ behandling, beregningsresultat, fetchPreviewVedtaksbrev }) => ({
+  getData = ({ beregningsresultat, fetchPreviewVedtaksbrev }) => ({
     beregningsresultat,
     fetchPreviewVedtaksbrev,
     aksjonspunktKodeForeslaVedtak: aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK,
-    isBehandlingHenlagt: behandling.behandlingHenlagt,
   })
 }
 

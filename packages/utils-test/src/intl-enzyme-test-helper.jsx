@@ -57,6 +57,8 @@ export function mountWithIntl(node, options, moduleMessages = undefined) {
   return mount(nodeWithIntlProp(node), { ...getOptions(moduleMessages), ...options });
 }
 
+export const intlWithMessages = (customMessages) => getIntlObject(customMessages || messages);
+
 /* Lagt til for a hindre warnings i tester */
 export const intlMock = {
   formatDate: sinon.spy(),

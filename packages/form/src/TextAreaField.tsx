@@ -37,6 +37,7 @@ interface TextAreaFieldProps {
   maxLength?: number;
   badges?: Badges[];
   placeholder?: string;
+  autoFocus?: boolean;
 }
 
 const TextAreaWithBadge: FunctionComponent<TextAreaWithBadgeProps & WrappedComponentProps & TextareaProps> = ({

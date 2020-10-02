@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { Fields } from 'redux-form';
 import moment from 'moment';
 import { injectIntl, IntlShape } from 'react-intl';
@@ -19,13 +19,18 @@ interface PeriodpickerFieldProps {
   parse?: (value: string) => string;
   isEdited?: boolean;
   renderIfMissingDateOnReadOnly?: boolean;
-  validate?: ((value: string) => boolean | undefined)[] | ((value: string) => boolean | undefined);
+  validate?: (((text: any) => ({ id: string; length?: undefined }
+    | { length: any; id?: undefined })[])
+    | ((value: any) => { id: string }[])
+    | ((text: any) => ({ id: string; limit?: undefined; } | { limit: any; id?: undefined; })[])
+    | ((text: any) => ({ id: string; text?: undefined; length?: undefined }
+    | { text: any; id?: undefined })[]))[]
   dataId?: string;
   renderUpwards?: boolean;
   ariaLabel?: string;
   disabledDays?: {
     before: Date;
-    after: Date;
+    after?: Date;
   };
 }
 
@@ -111,7 +116,7 @@ const acceptedFormatToIso = (value: string, name: string, names: string[]): stri
 const formatValue = (format: (value: string) => string) => (value: string) => isoToDdMmYyyy(format(value));
 const parseValue = (parse: (value: string) => string, names: string[]) => (value: string, name: string) => parse(acceptedFormatToIso(value, name, names));
 
-const PeriodpickerField = ({
+const PeriodpickerField: FunctionComponent<PeriodpickerFieldProps> = ({
   names, label, readOnly, format, parse, isEdited, hideLabel, ...otherProps
 }) => {
   const memoReadOnly = useMemo(() => renderReadOnly(), []);

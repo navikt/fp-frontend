@@ -27,6 +27,15 @@ const behandling = {
   links: [],
 };
 
+const standardFaktaProps = {
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: boolean('readOnly', false),
+  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
+  submittable: boolean('submittable', true),
+  alleMerknaderFraBeslutter: {},
+};
+
 export default {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
@@ -35,17 +44,15 @@ export default {
 
 export const visEndringAvUtland = () => (
   <SakenFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
-    aksjonspunkter={[]}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
-    submittable={boolean('submittable', true)}
   />
 );
 
 export const visApentAksjonspunktForInnhentingAvDokumentasjon = () => (
   <SakenFaktaIndex
+    {...standardFaktaProps}
     behandling={behandling as Behandling}
     aksjonspunkter={[{
       definisjon: {
@@ -59,9 +66,5 @@ export const visApentAksjonspunktForInnhentingAvDokumentasjon = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    submitCallback={action('button-click')}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
   />
 );

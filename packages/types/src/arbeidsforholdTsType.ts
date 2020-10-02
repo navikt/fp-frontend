@@ -37,6 +37,7 @@ type Arbeidsforhold = Readonly<{
     type?: Kodeverk;
   }[];
   brukPermisjon?: boolean;
+  kanOppretteNyttArbforFraIM: boolean;
 }>
 
 export default Arbeidsforhold;

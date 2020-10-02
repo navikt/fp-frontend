@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Soknad } from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -74,13 +74,13 @@ describe('<ForeldrepengerProsess>', () => {
   const soknad = {
     fodselsdatoer: {
       0: '2019-01-01',
-    },
+    } as {[key: number]: string},
     antallBarn: 1,
     soknadType: {
       kode: soknadType.FODSERL,
       kodeverk: 'test',
     },
-  };
+  } as Soknad;
 
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
