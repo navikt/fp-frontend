@@ -14,7 +14,17 @@ interface OwnProps {
   visModal?: boolean;
   lukkModal: () => void;
   erFerdigbehandlet: boolean;
+  venterTrygderett: boolean;
 }
+
+const tekstTilMelding = (erFerdigbehandlet, venterTrygderett) => {
+  if (erFerdigbehandlet && venterTrygderett) {
+    return 'AnkeVurderingModal.SettVent';
+  } if (erFerdigbehandlet && !venterTrygderett) {
+    return 'AnkeVurderingModal.Ferdigbehandlet';
+  }
+  return 'AnkeVurderingModal.VedtakOversendt';
+};
 
 /**
  * AnkeVurderingModal
@@ -27,6 +37,7 @@ const AnkeVurderingModal: FunctionComponent<OwnProps & WrappedComponentProps> = 
   visModal = false,
   lukkModal,
   erFerdigbehandlet,
+  venterTrygderett,
   intl,
 }) => (
   <Modal
@@ -43,7 +54,7 @@ const AnkeVurderingModal: FunctionComponent<OwnProps & WrappedComponentProps> = 
         <div className={styles.divider} />
       </Column>
       <Column xs="9">
-        <Normaltekst><FormattedMessage id={erFerdigbehandlet ? 'AnkeVurderingModal.Ferdigbehandlet' : 'AnkeVurderingModal.VedtakOversendt'} /></Normaltekst>
+        <Normaltekst><FormattedMessage id={tekstTilMelding(erFerdigbehandlet, venterTrygderett)} /></Normaltekst>
         <Normaltekst><FormattedMessage id="AnkeVurderingModal.GoToSearchPage" /></Normaltekst>
       </Column>
       <Column xs="2">

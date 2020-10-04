@@ -1,6 +1,7 @@
 {
   "Ankebehandling.Resultat.Title": "Resultat",
   "Ankebehandling.Resultat.FerdigstillAnke": "Ferdigstill Anke",
+  "Ankebehandling.Resultat.VentMerknader": "Vent på merknader",
   "Ankebehandling.Resultat.SendTilMedunderskriver": "Send til medunderskriver",
   "Ankebehandling.Resultat.Innstilling": "Innstilling på resultat av anke",
   "Ankebehandling.Resultat.Innstilling.Stadfest": "Vedtaket stadfestes",
@@ -17,7 +18,7 @@
   "Ankebehandling.Avvisning.IkkeKonkret": "Det ankes ikke på konkrete elementer i vedtaket",
   "Ankebehandling.Avvisning.IkkeFrist": "Ankefristen er ikke overholdt",
   "Ankebehandling.Avvisning.IkkeSignert": "Anken er ikke signert",
-  "Ankebehandling.Realitetsbehandles": "Skal anken subsidiert realitetsbehandles?",
+  "Ankebehandling.Realitetsbehandles": "Skal anken subsidiært realitetsbehandles?",
   "Ankebehandling.Realitetsbehandles.Ja": "Ja",
   "Ankebehandling.Realitetsbehandles.Nei": "Nei",
 

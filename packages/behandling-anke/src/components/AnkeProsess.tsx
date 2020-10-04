@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
+  FagsakInfo, Rettigheter, prosessStegHooks, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { Kodeverk, KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -60,7 +60,7 @@ const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleAnkeModal, toggleOppdatereFagsakContext,
+const getLagringSideeffekter = (toggleAnkeModal, toggleOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl) => (aksjonspunktModels) => {
   const skalTilMedunderskriver = aksjonspunktModels
     .some((apValue) => apValue.kode === aksjonspunktCodes.FORESLA_VEDTAK);
@@ -75,10 +75,8 @@ const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleAnkeModal, t
 
   // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
   return () => {
-    if (skalTilMedunderskriver || skalFerdigstilles) {
+    if (skalTilMedunderskriver || skalFerdigstilles || erManuellVurderingAvAnke) {
       toggleAnkeModal(true);
-    } else if (erManuellVurderingAvAnke) {
-      toggleIverksetterVedtakModal(true);
     } else {
       oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
     }
@@ -117,9 +115,8 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
     dataTilUtledingAvFpPaneler, fagsak, rettigheter, behandling, data.aksjonspunkter, data.vilkar, false, valgtProsessSteg);
 
-  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visModalAnkeBehandling, toggleAnkeModal] = useState(false);
-  const lagringSideeffekterCallback = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleAnkeModal, toggleSkalOppdatereFagsakContext,
+  const lagringSideeffekterCallback = getLagringSideeffekter(toggleAnkeModal, toggleSkalOppdatereFagsakContext,
     oppdaterProsessStegOgFaktaPanelIUrl);
 
   const velgProsessStegPanelCallback = prosessStegHooks.useProsessStegVelger(prosessStegPaneler, 'undefined', behandling,
@@ -128,18 +125,18 @@ const AnkeProsess: FunctionComponent<OwnProps> = ({
   const erFerdigbehandlet = useMemo(() => data.aksjonspunkter
     .some((ap) => ap.definisjon.kode === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL && ap.status.kode === aksjonspunktStatus.UTFORT),
   [behandling.versjon]);
+  const venterTrygderett = useMemo(() => data.aksjonspunkter
+    .some((ap) => (ap.definisjon.kode === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
+        || ap.definisjon.kode === aksjonspunktCodes.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN) && ap.status.kode === aksjonspunktStatus.OPPRETTET),
+  [behandling.versjon]);
 
   return (
     <>
-      <IverksetterVedtakStatusModal
-        visModal={visIverksetterVedtakModal}
-        lukkModal={useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, [])}
-        behandlingsresultat={behandling.behandlingsresultat}
-      />
       <AnkeBehandlingModal
         visModal={visModalAnkeBehandling}
         lukkModal={useCallback(() => { toggleAnkeModal(false); opneSokeside(); }, [])}
         erFerdigbehandlet={erFerdigbehandlet}
+        venterTrygderett={venterTrygderett}
       />
       <ProsessStegContainer
         formaterteProsessStegPaneler={formaterteProsessStegPaneler}
