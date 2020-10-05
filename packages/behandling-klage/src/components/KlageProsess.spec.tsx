@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import { ProsessStegContainer } from '@fpsak-frontend/behandling-felles';
-import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, KlageVurdering } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -17,12 +17,12 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 
 import KlageProsess from './KlageProsess';
 
-describe('<KlageProsess.>', () => {
+describe('<KlageProsess>', () => {
   const fagsak = {
     saksnummer: 123456,
-    fagsakYtelseType: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
-    fagsakStatus: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    fagsakPerson: {
+    sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
+    status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
+    person: {
       alder: 30,
       personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
       erDod: false,
@@ -30,7 +30,7 @@ describe('<KlageProsess.>', () => {
       navn: 'Espen Utvikler',
       personnummer: '12345',
     },
-  };
+  } as Fagsak;
   const behandling = {
     id: 1,
     versjon: 2,

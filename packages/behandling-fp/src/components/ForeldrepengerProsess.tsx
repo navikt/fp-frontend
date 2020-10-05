@@ -41,20 +41,22 @@ interface OwnProps {
   setBehandling: (behandling: Behandling) => void;
 }
 
-const getForhandsvisCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
+const getForhandsvisCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: fagsak.sakstype,
   };
 
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
+const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak: Fagsak, behandling: Behandling) => (
+  mottaker, brevmalkode, fritekst, saksnummer,
+) => {
   const data = {
     behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.sakstype,
     varseltekst: fritekst || '',
     mottaker,
     brevmalkode,

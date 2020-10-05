@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { Behandling, Soknad } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, Soknad } from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -25,9 +25,9 @@ import SvangerskapspengerProsess from './SvangerskapspengerProsess';
 describe('<SvangerskapspengerProsess>', () => {
   const fagsak = {
     saksnummer: 123456,
-    fagsakYtelseType: { kode: fagsakYtelseType.SVANGERSKAPSPENGER, kodeverk: 'test' },
-    fagsakStatus: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    fagsakPerson: {
+    sakstype: { kode: fagsakYtelseType.SVANGERSKAPSPENGER, kodeverk: 'test' },
+    status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
+    person: {
       alder: 30,
       personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
       erDod: false,
@@ -35,7 +35,7 @@ describe('<SvangerskapspengerProsess>', () => {
       navn: 'Espen Utvikler',
       personnummer: '12345',
     },
-  };
+  } as Fagsak;
   const behandling = {
     id: 1,
     uuid: 'uuid-test',
@@ -73,7 +73,7 @@ describe('<SvangerskapspengerProsess>', () => {
   const soknad = {
     fodselsdatoer: {
       0: '2019-01-01',
-    } as { [key: number]: string },
+    } as {[key: number]: string},
     antallBarn: 1,
     soknadType: {
       kode: soknadType.FODSERL,
@@ -401,7 +401,7 @@ describe('<SvangerskapspengerProsess>', () => {
     expect(requestData[0].params).to.eql({
       param: 'test',
       behandlingUuid: 'uuid-test',
-      ytelseType: fagsak.fagsakYtelseType,
+      ytelseType: fagsak.sakstype,
     });
   });
 
@@ -436,7 +436,7 @@ describe('<SvangerskapspengerProsess>', () => {
     expect(requestData[0].params).to.eql({
       behandlingUuid: 'uuid-test',
       brevmalkode: undefined,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
+      fagsakYtelseType: fagsak.sakstype,
       mottaker: {
         param: 'test',
       },

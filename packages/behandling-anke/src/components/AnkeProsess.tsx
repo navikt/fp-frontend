@@ -44,7 +44,7 @@ const forhandsvis = (data) => {
   }
 };
 
-const saveAnkeText = (lagreAnkeVurdering, behandling) => (aksjonspunktModel) => {
+const saveAnkeText = (lagreAnkeVurdering, behandling: Behandling) => (aksjonspunktModel) => {
   const data = {
     behandlingId: behandling.id,
     ...aksjonspunktModel,
@@ -53,11 +53,11 @@ const saveAnkeText = (lagreAnkeVurdering, behandling) => (aksjonspunktModel) => 
   lagreAnkeVurdering(data);
 };
 
-const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
+const previewCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: fagsak.sakstype,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };

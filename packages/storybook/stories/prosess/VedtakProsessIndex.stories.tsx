@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
-  Behandling, BeregningsresultatEs, Beregningsgrunnlag, Medlemskap, BeregningsresultatFp,
+  Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap,
 } from '@fpsak-frontend/types';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
@@ -66,7 +66,7 @@ const vilkar = [{
   overstyrbar: true,
 }];
 
-const resultatstruktur = {
+const beregningresultatForeldrepenger = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
   sokerErMor: true,
@@ -85,7 +85,7 @@ export default {
 export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
     behandling={behandling as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -106,7 +106,7 @@ export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
         kodeverk: '',
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -121,7 +121,7 @@ export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
 export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
     behandling={behandling as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -142,7 +142,7 @@ export const visGodkjentForeldrepengerForSaksbehandlerMedOverstyring = () => (
         kodeverk: '',
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -175,7 +175,7 @@ export const visGodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyri
         },
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -199,7 +199,7 @@ export const visAvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyri
         avslagsarsakFritekst: 'Dette er ein fritekst',
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -226,7 +226,7 @@ export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = 
         },
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -241,7 +241,7 @@ export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = 
 export const visInnvilgetForeldrepengerDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
     behandling={behandling as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -272,7 +272,7 @@ export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
         avslagsarsakFritekst: 'Dette er ein fritekst',
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -294,7 +294,7 @@ export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
 export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () => (
   <VedtakProsessIndex
     behandling={behandling as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[{
@@ -445,7 +445,7 @@ export const visAvslåttEngangsstønadDerBeregningErManueltFastsatt = () => (
         avslagsarsakFritekst: 'Dette er ein fritekst',
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -497,7 +497,7 @@ export const visAvslåttSvangerskapspengerOgVisModal = () => (
         },
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -535,7 +535,7 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
         }],
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -573,7 +573,7 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring
         }],
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -607,7 +607,7 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
         }],
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -645,7 +645,7 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring 
         }],
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -686,7 +686,7 @@ export const visGodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerM
         }],
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -716,7 +716,7 @@ export const visAvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerM
     } as Behandling}
     beregningsresultatOriginalBehandling={{
       'beregningsresultat-foreldrepenger': {
-        ...resultatstruktur,
+        ...beregningresultatForeldrepenger,
       },
     }}
     vilkar={vilkar}
@@ -751,7 +751,7 @@ export const visGodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOve
     } as Behandling}
     beregningsresultatOriginalBehandling={{
       'beregningsresultat-foreldrepenger': {
-        ...resultatstruktur,
+        ...beregningresultatForeldrepenger,
       },
     }}
     vilkar={vilkar}
@@ -781,7 +781,7 @@ export const visOpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyrin
       },
     } as Behandling}
     vilkar={vilkar}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -811,7 +811,7 @@ export const visInnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsa
         }],
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
@@ -853,7 +853,7 @@ export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkk
         },
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',
       vilkarType: {
@@ -898,7 +898,7 @@ export const visOpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt
         },
       },
     } as Behandling}
-    beregningresultatForeldrepenger={resultatstruktur}
+    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}

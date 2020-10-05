@@ -5,6 +5,7 @@ import sinon from 'sinon';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import AvregningPanel from './components/AvregningPanel';
 import AvregningProsessIndex from './AvregningProsessIndex';
@@ -12,10 +13,11 @@ import AvregningProsessIndex from './AvregningProsessIndex';
 describe('<AvregningProsessIndex>', () => {
   const fagsak = {
     saksnummer: 123,
-    ytelseType: {
+    sakstype: {
       kode: fagsakYtelseType.FORELDREPENGER,
+      kodeverk: '',
     },
-  };
+  } as Fagsak;
 
   const behandling = {
     id: 1,
@@ -23,14 +25,14 @@ describe('<AvregningProsessIndex>', () => {
     sprakkode: {
       kode: 'NO',
     },
-  };
+  } as Behandling;
 
   const aksjonspunkter = [{
     definisjon: {
       kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
     },
     begrunnelse: 'test',
-  }];
+  }] as Aksjonspunkt[];
 
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<AvregningProsessIndex

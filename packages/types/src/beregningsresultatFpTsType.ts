@@ -29,10 +29,10 @@ export type BeregningsresultatPeriode = Readonly<{
 
 type BeregningsresultatFp = Readonly<{
   sokerErMor: boolean;
-  opphoersdato: string;
+  opphoersdato?: string;
   perioder?: BeregningsresultatPeriode[];
-  utbetPerioder: BeregningsresultatPeriode[];
-  skalHindreTilbaketrekk: boolean;
+  utbetPerioder?: BeregningsresultatPeriode[];
+  skalHindreTilbaketrekk?: boolean;
 }>
 
 export default BeregningsresultatFp;

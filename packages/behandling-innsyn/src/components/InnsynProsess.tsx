@@ -36,11 +36,11 @@ const forhandsvis = (data) => {
   }
 };
 
-const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
+const previewCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: fagsak.sakstype,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };

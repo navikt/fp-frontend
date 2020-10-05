@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Fagsak } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -22,9 +22,9 @@ import {
 describe('<faktaUtils>', () => {
   const fagsak = {
     saksnummer: 123456,
-    fagsakYtelseType: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
-    fagsakStatus: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    fagsakPerson: {
+    sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
+    status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
+    person: {
       alder: 30,
       personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
       erDod: false,
@@ -32,7 +32,7 @@ describe('<faktaUtils>', () => {
       navn: 'Espen Utvikler',
       personnummer: '12345',
     },
-  };
+  } as Fagsak;
   const behandling = {
     id: 1,
     versjon: 2,
