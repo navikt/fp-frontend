@@ -1,22 +1,25 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import {
-  withKnobs, object, boolean, array,
+  withKnobs, object, boolean,
 } from '@storybook/addon-knobs';
 
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
+import {
+  Aksjonspunkt, Behandling, Fagsak, TilbakekrevingValg,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 const fagsak = {
   saksnummer: 123,
-  fagsakYtelseType: {
+  sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
   },
-};
+} as Fagsak;
 
 const behandling = {
   id: 1,
@@ -24,7 +27,7 @@ const behandling = {
   sprakkode: {
     kode: 'NO',
   },
-};
+} as Behandling;
 
 const simuleringResultat = {
   simuleringResultat: {
@@ -119,10 +122,10 @@ export const visAksjonspunktVurderFeilutbetaling = () => (
         kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
       },
       begrunnelse: undefined,
-    }])}
+    }] as Aksjonspunkt[])}
     simuleringResultat={object('simuleringResultat', simuleringResultat)}
-    submitCallback={action('button-click')}
-    previewFptilbakeCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
@@ -138,14 +141,14 @@ export const visSimuleringspanelUtenAksjonspunkt = () => (
     tilbakekrevingvalg={object('tilbakekrevingvalg', {
       videreBehandling: {
         kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+        kodeverk: '',
       },
       varseltekst: 'varsel-eksempel',
-    })}
-    submitCallback={action('button-click')}
-    previewFptilbakeCallback={action('button-click')}
+    } as TilbakekrevingValg)}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    apCodes={array('apCodes', [])}
   />
 );

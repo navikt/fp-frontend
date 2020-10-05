@@ -12,40 +12,45 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse';
+import {
+  Aksjonspunkt,
+  Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const fagsak = {
-  fagsakYtelseType: {
+  sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
   },
-};
+} as Fagsak;
 
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const familiehendelse = {
   gjeldende: {
-    fodselsdato: '2019-01-01',
+    avklartBarn: [{
+      fodselsdato: '2019-01-01',
+    }],
     omsorgsovertakelseDato: '2019-01-01',
-  },
-};
+  } as FamilieHendelse,
+} as FamilieHendelseSamling;
 
 const personopplysninger = {
   navBrukerKjonn: {
     kode: navBrukerKjonn.KVINNE,
   },
-};
+} as Personopplysninger;
 
 const beregningresultat = {
+  sokerErMor: true,
   perioder: [{
     andeler: [{
-      fom: '2019-01-01',
-      tom: '2019-01-10',
       uttak: {
         stonadskontoType: stonadskontoType.FELLESPERIODE,
       },
@@ -61,7 +66,7 @@ const beregningresultat = {
     tom: '2019-01-10',
     dagsats: 1000,
   }],
-};
+} as BeregningsresultatFp;
 
 const soknad = {
   mottattDato: '2019-01-01',
@@ -71,12 +76,12 @@ const soknad = {
   omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {
     1: '2019-01-01',
-  },
+  } as {[key: number]: string},
   adopsjonFodelsedatoer: {
     1: '2019-01-01',
-  },
+  } as {[key: number]: string},
   termindato: '2019-02-01',
-};
+} as Soknad;
 
 export default {
   title: 'prosess/prosess-tilkjent-ytelse',
@@ -93,9 +98,9 @@ export const visUtenAksjonspunkt = () => (
     soknad={soknad}
     fagsak={fagsak}
     aksjonspunkter={[]}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     isReadOnly={boolean('isReadOnly', false)}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnlySubmitButton={boolean('readOnly', true)}
   />
 );
@@ -115,10 +120,10 @@ export const visÅpentAksjonspunkt = () => (
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
       },
-    }]}
-    alleKodeverk={alleKodeverk}
+    }] as Aksjonspunkt[]}
+    alleKodeverk={alleKodeverk as any}
     isReadOnly={boolean('isReadOnly', false)}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnlySubmitButton={boolean('readOnly', true)}
   />
 );
