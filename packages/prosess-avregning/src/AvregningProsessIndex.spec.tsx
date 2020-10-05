@@ -44,6 +44,9 @@ describe('<AvregningProsessIndex>', () => {
       readOnlySubmitButton={false}
       isAksjonspunktOpen
       previewFptilbakeCallback={sinon.spy()}
+      alleKodeverk={{}}
+      status=""
+      vilkar={[]}
     />);
     expect(wrapper.find(AvregningPanel)).has.length(1);
   });

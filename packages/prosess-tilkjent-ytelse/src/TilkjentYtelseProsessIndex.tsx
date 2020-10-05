@@ -2,8 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, Behandling, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, KodeverkMedNavn, Personopplysninger, Soknad,
+  BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import TilkjentYtelsePanel from './components/TilkjentYtelsePanel';
 import messages from '../i18n/nb_NO.json';
@@ -16,20 +17,14 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   beregningresultat: BeregningsresultatFp;
   familiehendelse: FamilieHendelseSamling;
   personopplysninger: Personopplysninger;
   soknad: Soknad;
   fagsak: Fagsak;
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  isReadOnly: boolean;
-  submitCallback: (data: any) => Promise<any>;
-  readOnlySubmitButton: boolean;
 }
 
-const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps> = ({
+const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   beregningresultat,
   familiehendelse,

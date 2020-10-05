@@ -20,7 +20,7 @@ export { default as UttaksresultatPeriode } from './src/uttaksresultatPeriodeTsT
 export { default as UttakStonadskontoer } from './src/uttakStonadskontoerTsType';
 export { default as Vilkar } from './src/vilkarTsType';
 export { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
-export { FamilieHendelse, FamilieHendelseSamling } from './src/familieHendelseTsType';
+export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export { default as Fagsak } from './src/fagsakTsType';
 export { default as FagsakPerson } from './src/fagsakPersonTsType';
 export { default as Medlemskap, MedlemPeriode } from './src/medlemskapTsType';

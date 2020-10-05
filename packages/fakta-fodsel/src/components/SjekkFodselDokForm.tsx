@@ -52,7 +52,7 @@ interface OwnProps {
   vedtaksDatoSomSvangerskapsuke?: string;
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
-  familiehendelseOriginalBehandling: FamilieHendelseSamling;
+  familiehendelseOriginalBehandling?: FamilieHendelseSamling;
   initialValues: {
     begrunnelse: string;
   };
@@ -86,7 +86,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps & InjectedFormProps>
       vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
       soknad={soknad}
       soknadOriginalBehandling={soknadOriginalBehandling}
-      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling?.gjeldende}
     />
     <FaktaGruppe
       titleCode="SjekkFodselDokForm.DokumentasjonAvFodsel"

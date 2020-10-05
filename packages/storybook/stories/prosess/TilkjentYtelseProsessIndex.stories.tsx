@@ -83,6 +83,18 @@ const soknad = {
   termindato: '2019-02-01',
 } as Soknad;
 
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', true),
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
@@ -91,23 +103,18 @@ export default {
 
 export const visUtenAksjonspunkt = () => (
   <TilkjentYtelseProsessIndex
-    behandling={object('behandling', behandling)}
+    {...standardProsessProps}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
     personopplysninger={object('personopplysninger', personopplysninger)}
     soknad={soknad}
     fagsak={fagsak}
-    aksjonspunkter={[]}
-    alleKodeverk={alleKodeverk as any}
-    isReadOnly={boolean('isReadOnly', false)}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnlySubmitButton={boolean('readOnly', true)}
   />
 );
 
 export const visÅpentAksjonspunkt = () => (
   <TilkjentYtelseProsessIndex
-    behandling={object('behandling', behandling)}
+    {...standardProsessProps}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
     personopplysninger={object('personopplysninger', personopplysninger)}
@@ -121,9 +128,5 @@ export const visÅpentAksjonspunkt = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
     }] as Aksjonspunkt[]}
-    alleKodeverk={alleKodeverk as any}
-    isReadOnly={boolean('isReadOnly', false)}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnlySubmitButton={boolean('readOnly', true)}
   />
 );

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { EtikettInfo } from 'nav-frontend-etiketter';
@@ -12,22 +11,32 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { AvklartBarn, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
-import fodselSammenligningSoknadPropType from '../propTypes/fodselSammenligningSoknadPropType';
-import fodselSammenligningFamiliehendelsePropType from '../propTypes/fodselSammenligningFamiliehendelsePropType';
 import FodselSammenligningOtherPanel from './FodselSammenligningOtherPanel';
 import FodselSammenligningRevurderingPanel from './FodselSammenligningRevurderingPanel';
 
 import styles from './fodselSammenligningPanel.less';
 
-const formatDate = (date) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+
+interface OwnProps {
+  behandlingsTypeKode: string;
+  avklartBarn: AvklartBarn[];
+  nrOfDodfodteBarn: number;
+  soknad: Soknad;
+  soknadOriginalBehandling?: Soknad;
+  familiehendelseOriginalBehandling?: FamilieHendelse;
+  termindato?: string;
+  vedtaksDatoSomSvangerskapsuke?: string;
+}
 
 /**
  * FodselSammenlingningPanel
  *
  * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-const FodselSammenligningPanel = ({
+const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
   behandlingsTypeKode,
   avklartBarn,
   nrOfDodfodteBarn,
@@ -49,87 +58,65 @@ const FodselSammenligningPanel = ({
         />
       )}
     </Panel>
-    <Panel className={styles.panel} name="tpsFodseldato">
+    <Panel className={styles.panel}>
       <Row>
         <Column xs="9">
           <Element><FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" /></Element>
         </Column>
-        {nrOfDodfodteBarn > 0
-          && (
+        {nrOfDodfodteBarn > 0 && (
           <Column xs="3">
             <EtikettInfo className={styles.dodMerke} typo="undertekst">
               <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
             </EtikettInfo>
           </Column>
-          )}
+        )}
       </Row>
       <Row>
         <Column xs="4"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.Fodselsdato" /></Normaltekst></Column>
         <Column xs="4"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.Dodsdato" /></Normaltekst></Column>
       </Row>
       <Row>
-        {avklartBarn.length > 0
-        && (
-        <Table>
-          {avklartBarn.map((barn) => {
-            const key = barn.fodselsdato + barn.dodsdato;
-            return (
-              <TableRow key={key} id={key}>
-                <TableColumn>
-                  <Normaltekst>
-                    {formatDate(barn.fodselsdato)}
-                  </Normaltekst>
-                </TableColumn>
-                <TableColumn>
-                  <Normaltekst>
-                    {formatDate(barn.dodsdato)}
-                  </Normaltekst>
-                </TableColumn>
-                <TableColumn>
-                  {barn.dodsdato && (
-                    <EtikettInfo className={styles.dodMerke} typo="undertekst">
-                      <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                    </EtikettInfo>
-                  )}
-                </TableColumn>
-              </TableRow>
-            );
-          })}
-        </Table>
+        {avklartBarn.length > 0 && (
+          <Table>
+            {avklartBarn.map((barn: AvklartBarn) => {
+              const key = barn.fodselsdato + barn.dodsdato;
+              return (
+                <TableRow key={key} id={key}>
+                  <TableColumn>
+                    <Normaltekst>
+                      {formatDate(barn.fodselsdato)}
+                    </Normaltekst>
+                  </TableColumn>
+                  <TableColumn>
+                    <Normaltekst>
+                      {formatDate(barn.dodsdato)}
+                    </Normaltekst>
+                  </TableColumn>
+                  <TableColumn>
+                    {barn.dodsdato && (
+                      <EtikettInfo className={styles.dodMerke} typo="undertekst">
+                        <FormattedMessage id="FodselsammenligningPanel.Dod" />
+                      </EtikettInfo>
+                    )}
+                  </TableColumn>
+                </TableRow>
+              );
+            })}
+          </Table>
         )}
 
-        {!avklartBarn.length > 0
-      && (
-      <Row>
-        <Column xs="12" className={styles.noChildrenInTps}>
-          <Normaltekst>
-            -
-          </Normaltekst>
-        </Column>
-      </Row>
-      )}
+        {avklartBarn.length === 0 && (
+          <Row>
+            <Column xs="12" className={styles.noChildrenInTps}>
+              <Normaltekst>
+                -
+              </Normaltekst>
+            </Column>
+          </Row>
+        )}
       </Row>
     </Panel>
   </div>
 );
-
-FodselSammenligningPanel.propTypes = {
-  behandlingsTypeKode: PropTypes.string.isRequired,
-  avklartBarn: PropTypes.arrayOf(PropTypes.shape()),
-  nrOfDodfodteBarn: PropTypes.number.isRequired,
-  soknad: fodselSammenligningSoknadPropType.isRequired,
-  soknadOriginalBehandling: fodselSammenligningSoknadPropType,
-  familiehendelseOriginalBehandling: fodselSammenligningFamiliehendelsePropType,
-  termindato: PropTypes.string,
-  vedtaksDatoSomSvangerskapsuke: PropTypes.string,
-};
-
-FodselSammenligningPanel.defaultProps = {
-  avklartBarn: [],
-  termindato: undefined,
-  vedtaksDatoSomSvangerskapsuke: undefined,
-  soknadOriginalBehandling: undefined,
-  familiehendelseOriginalBehandling: undefined,
-};
 
 export default FodselSammenligningPanel;

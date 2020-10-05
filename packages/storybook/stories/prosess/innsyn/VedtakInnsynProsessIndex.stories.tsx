@@ -10,6 +10,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakInnsynProsessIndex from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
+import alleKodeverk from '../../mocks/alleKodeverk.json';
 import withReduxProvider from '../../../decorators/withRedux';
 
 const behandling = {
@@ -42,6 +43,18 @@ const aksjonspunkter = [{
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
   component: VedtakInnsynProsessIndex,
@@ -50,7 +63,7 @@ export default {
 
 export const visPanelForInnvilgetVedtak = () => (
   <VedtakInnsynProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     innsyn={object('innsyn', {
       dokumenter: [{
         journalpostId: '2',
@@ -69,7 +82,6 @@ export const visPanelForInnvilgetVedtak = () => (
       innsynMottattDato: '2019-01-01',
     })}
     saksnummer={123434}
-    aksjonspunkter={aksjonspunkter}
     alleDokumenter={[{
       journalpostId: '2',
       dokumentId: '3',
@@ -77,15 +89,13 @@ export const visPanelForInnvilgetVedtak = () => (
       tidspunkt: '2017-08-02T00:54:25.455',
       kommunikasjonsretning: kommunikasjonsretning.INN,
     }]}
-    submitCallback={action('button-click')}
     previewCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
   />
 );
 
 export const visPanelForAvvistVedtak = () => (
   <VedtakInnsynProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     innsyn={object('innsyn', {
       dokumenter: [{
         journalpostId: '2',
@@ -104,7 +114,6 @@ export const visPanelForAvvistVedtak = () => (
       innsynMottattDato: '2019-01-01',
     })}
     saksnummer={123434}
-    aksjonspunkter={aksjonspunkter}
     alleDokumenter={[{
       journalpostId: '2',
       dokumentId: '3',
@@ -112,8 +121,6 @@ export const visPanelForAvvistVedtak = () => (
       tidspunkt: '2017-08-02T00:54:25.455',
       kommunikasjonsretning: kommunikasjonsretning.INN,
     }]}
-    submitCallback={action('button-click')}
     previewCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
   />
 );

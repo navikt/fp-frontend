@@ -51,7 +51,7 @@ const behandling = {
       kodeverk: 'BEHANDLING_AARSAK',
     },
   }],
-};
+} as Behandling;
 
 const vilkar = [{
   lovReferanse: '§§Dette er en lovreferanse',
@@ -72,6 +72,18 @@ const beregningresultatForeldrepenger = {
   sokerErMor: true,
 } as BeregningsresultatFp;
 
+const standardProsessProps = {
+  behandling,
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: false,
+  status: '',
+  vilkar,
+};
+
 export default {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
@@ -84,14 +96,10 @@ export default {
 
 export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -99,6 +107,7 @@ export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerUtenOversty
 
 export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       status: {
@@ -107,12 +116,9 @@ export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -120,14 +126,10 @@ export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
 
 export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -135,6 +137,7 @@ export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyr
 
 export const visGodkjentForeldrepengerForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       status: {
@@ -143,12 +146,9 @@ export const visGodkjentForeldrepengerForSaksbehandlerMedOverstyring = () => (
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -156,6 +156,7 @@ export const visGodkjentForeldrepengerForSaksbehandlerMedOverstyring = () => (
 
 export const visGodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       status: {
@@ -176,12 +177,9 @@ export const visGodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyri
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -189,6 +187,7 @@ export const visGodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyri
 
 export const visAvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       behandlingsresultat: {
@@ -200,12 +199,8 @@ export const visAvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyri
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -213,6 +208,7 @@ export const visAvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyri
 
 export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       status: {
@@ -227,12 +223,9 @@ export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = 
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -240,14 +233,10 @@ export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = 
 
 export const visInnvilgetForeldrepengerDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={{
@@ -262,6 +251,7 @@ export const visInnvilgetForeldrepengerDerBeregningErManueltFastsatt = () => (
 
 export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       behandlingsresultat: {
@@ -273,12 +263,8 @@ export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={{
@@ -293,9 +279,8 @@ export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
 
 export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[{
       definisjon: {
@@ -336,9 +321,7 @@ export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () =>
       erAktivt: true,
       toTrinnsBehandling: true,
     }]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -350,13 +333,9 @@ export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () =>
 
 export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
-    vilkar={vilkar}
+    {...standardProsessProps}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
     beregningresultatEngangsstonad={{
@@ -368,6 +347,7 @@ export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOversty
 
 export const visGodkjentEngangsstønadForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       status: {
@@ -375,12 +355,9 @@ export const visGodkjentEngangsstønadForSaksbehandlerUtenOverstyring = () => (
         kodeverk: '',
       },
     } as Behandling}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
     beregningresultatEngangsstonad={{
@@ -392,13 +369,9 @@ export const visGodkjentEngangsstønadForSaksbehandlerUtenOverstyring = () => (
 
 export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
-    vilkar={vilkar}
+    {...standardProsessProps}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
     beregningresultatEngangsstonad={{
@@ -410,13 +383,9 @@ export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyr
 
 export const visInnvilgetEngangsstønadDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
-    vilkar={vilkar}
+    {...standardProsessProps}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
     beregningresultatEngangsstonad={{
@@ -435,6 +404,7 @@ export const visInnvilgetEngangsstønadDerBeregningErManueltFastsatt = () => (
 
 export const visAvslåttEngangsstønadDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       behandlingsresultat: {
@@ -446,12 +416,8 @@ export const visAvslåttEngangsstønadDerBeregningErManueltFastsatt = () => (
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
     beregningresultatEngangsstonad={{
@@ -474,13 +440,9 @@ export const visAvslåttEngangsstønadDerBeregningErManueltFastsatt = () => (
 
 export const visInnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
-    behandling={behandling as Behandling}
-    vilkar={vilkar}
+    {...standardProsessProps}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -488,6 +450,7 @@ export const visInnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOver
 
 export const visAvslåttSvangerskapspengerOgVisModal = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       behandlingsresultat: {
@@ -498,12 +461,8 @@ export const visAvslåttSvangerskapspengerOgVisModal = () => (
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -515,6 +474,7 @@ export const visAvslåttSvangerskapspengerOgVisModal = () => (
 
 export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -536,12 +496,8 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -549,6 +505,7 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
 
 export const visGodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -574,12 +531,8 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -587,6 +540,7 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring
 
 export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -608,12 +562,8 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -621,6 +571,7 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
 
 export const visGodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -646,12 +597,9 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring 
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -659,6 +607,7 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring 
 
 export const visGodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -687,12 +636,9 @@ export const visGodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerM
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -700,6 +646,7 @@ export const visGodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerM
 
 export const visAvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -719,12 +666,8 @@ export const visAvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerM
         ...beregningresultatForeldrepenger,
       },
     }}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -732,6 +675,7 @@ export const visAvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerM
 
 export const visGodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -754,12 +698,9 @@ export const visGodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOve
         ...beregningresultatForeldrepenger,
       },
     }}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
   />
@@ -767,6 +708,7 @@ export const visGodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOve
 
 export const visOpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -780,20 +722,16 @@ export const visOpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyrin
         },
       },
     } as Behandling}
-    vilkar={vilkar}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
-    alleKodeverk={alleKodeverk as any}
   />
 );
 
 export const visInnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -812,12 +750,8 @@ export const visInnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsa
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={{
@@ -832,6 +766,7 @@ export const visInnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsa
 
 export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -867,10 +802,7 @@ export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkk
       overstyrbar: true,
     }]}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={{
@@ -885,6 +817,7 @@ export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkk
 
 export const visOpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
+    {...standardProsessProps}
     behandling={{
       ...behandling,
       type: {
@@ -899,12 +832,8 @@ export const visOpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt
       },
     } as Behandling}
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
-    vilkar={vilkar}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    aksjonspunkter={[]}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
-    submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={{

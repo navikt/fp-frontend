@@ -2,8 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
+  Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import AvregningPanel from './components/AvregningPanel';
 import messages from '../i18n/nb_NO.json';
@@ -17,18 +18,12 @@ const intl = createIntl({
 
 interface OwnProps {
   fagsak: Fagsak;
-  behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  submitCallback: (data: any) => Promise<any>;
   previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
-  isReadOnly: boolean;
-  isAksjonspunktOpen: boolean;
-  readOnlySubmitButton: boolean;
 }
 
-const AvregningProsessIndex: FunctionComponent<OwnProps> = ({
+const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   fagsak,
   behandling,
   aksjonspunkter,

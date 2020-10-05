@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import {
-  Aksjonspunkt, Behandling, Dokument, Innsyn, KodeverkMedNavn,
-} from '@fpsak-frontend/types';
+import { Dokument, Innsyn } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import InnsynForm from './components/InnsynForm';
 import messages from '../i18n/nb_NO.json';
@@ -16,18 +15,12 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   innsyn?: Innsyn;
   alleDokumenter: Dokument[];
   saksnummer: number;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => Promise<any>;
-  isReadOnly: boolean;
-  readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const InnsynProsessIndex: FunctionComponent<OwnProps> = ({
+const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   innsyn = {},
   alleDokumenter,

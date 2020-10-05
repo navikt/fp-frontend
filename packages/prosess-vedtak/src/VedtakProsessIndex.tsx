@@ -3,10 +3,11 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import {
-  KodeverkMedNavn, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
-  Aksjonspunkt, SimuleringResultat, Beregningsgrunnlag, Medlemskap, Kodeverk,
+  BeregningsresultatFp, BeregningsresultatEs, Vilkar, TilbakekrevingValg,
+  SimuleringResultat, Beregningsgrunnlag, Medlemskap,
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import VedtakForm from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
@@ -21,12 +22,9 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   beregningresultatForeldrepenger?: BeregningsresultatFp;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
-  tilbakekrevingvalg?: {
-    videreBehandling: Kodeverk;
-  };
+  tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
   beregningsresultatOriginalBehandling?: {
@@ -35,15 +33,11 @@ interface OwnProps {
   };
   medlemskap: Medlemskap;
   vilkar: Vilkar[];
-  aksjonspunkter: Aksjonspunkt[];
-  isReadOnly: boolean;
   previewCallback: () => void;
-  submitCallback: (data: any) => void;
   ytelseTypeKode: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const VedtakProsessIndex: FunctionComponent<OwnProps> = ({
+const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   beregningresultatForeldrepenger,
   beregningresultatEngangsstonad,

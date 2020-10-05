@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
+import { BeregningsresultatEs } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import BeregningsresultatEngangsstonadForm from './components/BeregningsresultatEngangsstonadForm';
 import messages from '../i18n/nb_NO.json';
@@ -14,18 +15,15 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   beregningresultatEngangsstonad: BeregningsresultatEs;
-  aksjonspunkter: Aksjonspunkt[];
   overrideReadOnly: boolean;
-  submitCallback: (data: any) => void;
   kanOverstyreAccess: {
     isEnabled: boolean;
   };
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
 }
 
-const BeregningsresultatProsessIndex: FunctionComponent<OwnProps> = ({
+const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   beregningresultatEngangsstonad,
   aksjonspunkter,

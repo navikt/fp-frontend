@@ -5,6 +5,7 @@ import {
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -15,21 +16,19 @@ const avklartBarn = [{
 }];
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' },
+  fodselsdatoer: { 1: '2019-01-10' } as {[key: number]: string},
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
-};
+} as Soknad;
 
-const originalBehandling = {
-  soknad,
-  familiehendelse: {
-    termindato: '2019-01-01',
+const familiehendelse = {
+  avklartBarn: [{
     fodselsdato: '2019-01-10',
-    antallBarnTermin: 1,
-    antallBarnFodsel: 1,
-  },
-};
+  }],
+  termindato: '2019-01-01',
+  antallBarnTermin: 1,
+} as FamilieHendelse;
 
 export default {
   title: 'prosessOgFakta/prosess-fakta-fodsel-sammenligning',
@@ -44,7 +43,7 @@ export const visPanelForNårBehandlingstypeErRevurdering = () => (
     termindato={text('termindato', '2019-01-01')}
     vedtaksDatoSomSvangerskapsuke={text('vedtaksDatoSomSvangerskapsuke', '2019-01-01')}
     soknad={object('soknad', soknad)}
-    originalBehandling={object('originalBehandling', originalBehandling)}
+    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelse)}
   />
 );
 
@@ -55,6 +54,6 @@ export const visPanelForNårBehandlingstypeErFørstegangssoknad = () => (
     termindato={text('termindato', '2019-01-01')}
     vedtaksDatoSomSvangerskapsuke={text('vedtaksDatoSomSvangerskapsuke', '2019-01-01')}
     soknad={object('soknad', soknad)}
-    originalBehandling={object('originalBehandling', originalBehandling)}
+    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelse)}
   />
 );

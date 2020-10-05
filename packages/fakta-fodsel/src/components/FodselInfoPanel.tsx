@@ -46,7 +46,7 @@ interface OwnProps {
   submitCallback: (...args: any[]) => any;
   avklartBarn?: FamilieHendelse['avklartBarn'];
   termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: number;
+  vedtaksDatoSomSvangerskapsuke?: string;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelseSamling;
@@ -90,7 +90,7 @@ export class FodselInfoPanelImpl extends Component<OwnProps> {
     };
     const { aksjonspunkter, submitCallback } = this.props;
 
-    return aksjonspunkter.every((ap: any) => this.submittedAksjonspunkter[ap.definisjon.kode])
+    return aksjonspunkter.every((ap) => this.submittedAksjonspunkter[ap.definisjon.kode])
       ? submitCallback(Object.values(this.submittedAksjonspunkter))
       : undefined;
   }
@@ -187,7 +187,7 @@ export class FodselInfoPanelImpl extends Component<OwnProps> {
               vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
               soknad={soknad}
               soknadOriginalBehandling={soknadOriginalBehandling}
-              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling?.gjeldende}
             />
           )}
         </form>

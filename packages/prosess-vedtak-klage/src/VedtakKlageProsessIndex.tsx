@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import {
-  Aksjonspunkt, Behandling, KlageVurdering, KodeverkMedNavn,
-} from '@fpsak-frontend/types';
+import { KlageVurdering } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import VedtakKlageForm from './components/VedtakKlageForm';
 import messages from '../i18n/nb_NO.json';
@@ -16,16 +15,11 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   klageVurdering: KlageVurdering;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => Promise<any>;
   previewVedtakCallback: (data: any) => Promise<any>;
-  isReadOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const VedtakKlageProsessIndex: FunctionComponent<OwnProps> = ({
+const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   klageVurdering,
   aksjonspunkter,
