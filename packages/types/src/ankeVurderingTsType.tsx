@@ -15,6 +15,7 @@ type AnkeVurdering = Readonly<{
     fritekstTilBrev?: string;
     merknadKommentar?: string;
     erMerknaderMottatt?: boolean;
+    avsluttBehandling?: boolean;
  };
 }>;
 

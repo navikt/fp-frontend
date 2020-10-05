@@ -8,12 +8,15 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { AksjonspunktHelpTextTemp, FadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm,
+  RadioGroupField, RadioOption, behandlingForm,
   hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
+import CheckboxField from '@fpsak-frontend/form/src/CheckboxField';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
 
 interface OwnProps {
   saveAnke: (data: any) => Promise<any>;
@@ -22,9 +25,9 @@ interface OwnProps {
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   behandlingId: number;
+  sprakkode: Kodeverk;
   behandlingVersjon: number;
   ankeVurdering?: Kodeverk;
-  fritekstTilBrev?: string;
 }
 
 const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
@@ -34,6 +37,7 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
   aksjonspunktCode,
   behandlingId,
   behandlingVersjon,
+  sprakkode,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -60,11 +64,10 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
       </Row>
 
       <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="7">
-          <TextAreaField readOnly={readOnly} label={{ id: 'Ankebehandling.Merknad.Merknader.Kommentarer' }} name="merknadKommentar" />
-        </Column>
-      </Row>
+      <FritekstAnkeMerknaderTextField
+        sprakkode={sprakkode}
+        readOnly={readOnly}
+      />
       <VerticalSpacer sixteenPx />
       <Row>
         <Column xs="8">
@@ -77,8 +80,14 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
             isBehandlingFormSubmitting={isBehandlingFormSubmitting}
             isBehandlingFormDirty={isBehandlingFormDirty}
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
+            textCode="Ankebehandling.Merknad.Merknader.LagreKommentarer"
           />
         </Column>
+        {!readOnly && (
+          <Column xs="3">
+            <CheckboxField name="avsluttBehandling" label={<FormattedMessage id="Ankebehandling.Merknad.AvsluttBehandling" />} />
+          </Column>
+        )}
       </Row>
     </FadingPanel>
   </form>
@@ -94,11 +103,13 @@ const ankeMerknaderFormName = 'ankeMerknaderForm';
 type FormValues = {
   erMerknaderMottatt: string;
   merknadKommentar: string;
+  avsluttBehandling: string;
 }
 
 const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
   erMerknaderMottatt: values.erMerknaderMottatt,
   merknadKommentar: values.merknadKommentar,
+  avsluttBehandling: values.avsluttBehandling,
   kode: aksjonspunktCode,
 });
 
@@ -113,16 +124,16 @@ interface PureOwnProps {
 const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
   merknadKommentar: resultat ? resultat.merknadKommentar : null,
   erMerknaderMottatt: resultat ? resultat.erMerknaderMottatt : null,
+  avsluttBehandling: false,
 }));
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const aksjonspunktCode = initialOwnProps.aksjonspunkter[0].definisjon.kode;
+  const aksjonspunktCode = aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER;
   const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
   return (_state, ownProps: PureOwnProps) => ({
     aksjonspunktCode,
     initialValues: buildInitialValues(ownProps),
     ankeVurdering: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
-    fritekstTilBrev: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.fritekstTilBrev : null,
     onSubmit,
   });
 };

@@ -41,6 +41,7 @@ const AnkeMerknaderProsessIndex: FunctionComponent<OwnProps> = ({
       ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
+      sprakkode={behandling.sprakkode}
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       saveAnke={saveAnke}

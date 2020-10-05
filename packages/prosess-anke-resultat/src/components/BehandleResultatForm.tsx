@@ -192,7 +192,7 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
           isBehandlingFormSubmitting={isBehandlingFormSubmitting}
           isBehandlingFormDirty={isBehandlingFormDirty}
           hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-          textCode="Ankebehandling.Resultat.FerdigstillAnke"
+          textCode={skalViseForhaandlenke(ankeVurderingVerdi) ? 'Ankebehandling.Resultat.FerdigstillAnke' : 'Ankebehandling.Resultat.VentMerknader'}
         />
         <span>&nbsp;</span>
         {skalViseForhaandlenke(ankeVurderingVerdi)
