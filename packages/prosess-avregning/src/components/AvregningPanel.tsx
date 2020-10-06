@@ -352,7 +352,6 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
 (submitCallback, apCodes) => (values) => submitCallback([transformValues(values, apCodes[0])]));
 
-
 const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   const {
     behandlingId, behandlingVersjon, tilbakekrevingvalg, fagsak,
