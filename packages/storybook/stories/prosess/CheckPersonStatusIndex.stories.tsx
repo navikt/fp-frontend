@@ -6,6 +6,9 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import CheckPersonStatusIndex from '@fpsak-frontend/prosess-saksopplysninger';
+import {
+  Aksjonspunkt, Behandling, Medlemskap, Personopplysninger,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -17,11 +20,11 @@ const behandling = {
   id: 1,
   versjon: 1,
   behandlingHenlagt: false,
-};
+} as Behandling;
 
 const medlemskap = {
   fom: '2019-01-01',
-};
+} as Medlemskap;
 
 const personopplysninger = {
   personstatus: {
@@ -38,6 +41,18 @@ const personopplysninger = {
       kodeverk: personstatusKodeverk,
     },
   },
+} as Personopplysninger;
+
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
 };
 
 export default {
@@ -48,7 +63,7 @@ export default {
 
 export const visÅpentAksjonspunkt = () => (
   <CheckPersonStatusIndex
-    behandling={object('behandling', behandling)}
+    {...standardProsessProps}
     medlemskap={object('medlemskap', medlemskap)}
     personopplysninger={object('personopplysninger', personopplysninger)}
     aksjonspunkter={[{
@@ -59,17 +74,13 @@ export const visÅpentAksjonspunkt = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
+    }] as Aksjonspunkt[]}
   />
 );
 
 export const visUtførtAksjonspunkt = () => (
   <CheckPersonStatusIndex
-    behandling={object('behandling', behandling)}
+    {...standardProsessProps}
     medlemskap={object('medlemskap', medlemskap)}
     personopplysninger={object('personopplysninger', personopplysninger)}
     aksjonspunkter={[{
@@ -80,9 +91,7 @@ export const visUtførtAksjonspunkt = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette er en begrunnelse',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly
     readOnlySubmitButton
   />

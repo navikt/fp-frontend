@@ -66,6 +66,7 @@
 		"packages/prosess-avregning",
 		"packages/prosess-tilkjent-ytelse",
 		"packages/prosess-fakta-fodsel-sammenligning",
+		"packages/prosess-saksopplysninger",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

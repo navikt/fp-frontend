@@ -7,10 +7,11 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-
+import { Aksjonspunkt, Personopplysninger } from '@fpsak-frontend/types';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { RadioOption } from '@fpsak-frontend/form';
-import { buildInitialValues, CheckPersonStatusFormImpl as UnwrappedForm } from './CheckPersonStatusForm';
+
+import { buildInitialValues, CheckPersonStatusForm as UnwrappedForm } from './CheckPersonStatusForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-saksopplysninger';
 
 describe('<CheckPersonStatusForm>', () => {
@@ -150,7 +151,7 @@ describe('<CheckPersonStatusForm>', () => {
           kodeverk: 'PERSONSTATUS_TYPE',
         },
       },
-    };
+    } as Personopplysninger;
     const aksjonspunkter = [{
       definisjon: {
         kode: 'test',
@@ -159,7 +160,7 @@ describe('<CheckPersonStatusForm>', () => {
         kode: aksjonspunktStatus.AVBRUTT,
       },
       begrunnelse: 'Dette er en begrunnelse',
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk);
 
@@ -188,7 +189,7 @@ describe('<CheckPersonStatusForm>', () => {
           kodeverk: 'PERSONSTATUS_TYPE',
         },
       },
-    };
+    } as Personopplysninger;
     const aksjonspunkter = [{
       definisjon: {
         kode: 'test',
@@ -197,7 +198,7 @@ describe('<CheckPersonStatusForm>', () => {
         kode: aksjonspunktStatus.AVBRUTT,
       },
       begrunnelse: 'Dette er en begrunnelse',
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk);
 
@@ -216,7 +217,7 @@ describe('<CheckPersonStatusForm>', () => {
         kode: 'UKJENT',
         kodeverk: 'PERSONSTATUS_TYPE',
       },
-    };
+    } as Personopplysninger;
     const aksjonspunkter = [{
       definisjon: {
         kode: 'test',
@@ -225,7 +226,7 @@ describe('<CheckPersonStatusForm>', () => {
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: 'Dette er en begrunnelse',
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk);
 

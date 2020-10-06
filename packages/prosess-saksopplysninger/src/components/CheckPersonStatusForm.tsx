@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { formPropTypes } from 'redux-form';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
@@ -19,16 +18,36 @@ import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { Aksjonspunkt, KodeverkMedNavn, Personopplysninger } from '@fpsak-frontend/types';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 
 import styles from './checkPersonStatusForm.less';
+
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingHenlagt: boolean;
+  gjeldeneFom?: string;
+  personopplysninger: Personopplysninger;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+}
+
+interface MappedOwnProps {
+  fortsettBehandling?: boolean;
+  originalPersonstatusName?: string;
+  personStatuser: KodeverkMedNavn[];
+}
 
 /**
  * CheckPersonStatusForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for kontroll av personstatus.
  */
-export const CheckPersonStatusFormImpl = ({
+export const CheckPersonStatusForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   behandlingId,
   behandlingVersjon,
@@ -70,9 +89,7 @@ export const CheckPersonStatusFormImpl = ({
           <Undertekst>{intl.formatMessage({ id: 'CheckPersonStatusForm.SetPersonStatus' })}</Undertekst>
           <VerticalSpacer eightPx />
           <RadioGroupField name="personstatus" validate={[required]} readOnly={readOnly}>
-            {personStatuser.map((d) => (
-              <RadioOption key={d.kode} value={d.kode} label={d.navn} />
-            ))}
+            {personStatuser.map((d: any) => <RadioOption key={d.kode} value={d.kode} label={d.navn} />)}
           </RadioGroupField>
         </ArrowBox>
       )}
@@ -93,27 +110,7 @@ export const CheckPersonStatusFormImpl = ({
   </form>
 );
 
-CheckPersonStatusFormImpl.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  /**
-   * Skal input-felter vises eller ikke
-   */
-  readOnly: PropTypes.bool.isRequired,
-  /**
-   * Skal knapp for å bekrefte data være trykkbar
-   */
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  gjeldeneFom: PropTypes.string,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  ...formPropTypes,
-};
-
-CheckPersonStatusFormImpl.defaultProps = {
-  gjeldeneFom: undefined,
-};
-
-const getValgtOpplysning = (avklartPersonstatus) => {
+const getValgtOpplysning = (avklartPersonstatus: Personopplysninger['avklartPersonstatus']) => {
   if (avklartPersonstatus && avklartPersonstatus.overstyrtPersonstatus) {
     const statusKode = avklartPersonstatus.overstyrtPersonstatus.kode;
     if (statusKode === personstatusType.DOD || statusKode === personstatusType.BOSATT || statusKode === personstatusType.UTVANDRET) {
@@ -124,10 +121,10 @@ const getValgtOpplysning = (avklartPersonstatus) => {
 };
 
 export const buildInitialValues = createSelector(
-  [(state, ownProps) => ownProps.behandlingHenlagt,
-    (state, ownProps) => ownProps.aksjonspunkter,
-    (state, ownProps) => ownProps.personopplysninger,
-    (state, ownProps) => ownProps.alleKodeverk],
+  [(ownProps: PureOwnProps) => ownProps.behandlingHenlagt,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.personopplysninger,
+    (ownProps: PureOwnProps) => ownProps.alleKodeverk],
   (behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk) => {
     const shouldContinueBehandling = !behandlingHenlagt;
     const { avklartPersonstatus, personstatus } = personopplysning;
@@ -144,11 +141,17 @@ export const buildInitialValues = createSelector(
 );
 
 const getFilteredKodeverk = createSelector(
-  [(state, ownProps) => ownProps.alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]], (kodeverk) => kodeverk
-    .filter((ps) => ps.kode === personstatusType.DOD || ps.kode === personstatusType.BOSATT || ps.kode === personstatusType.UTVANDRET),
+  [(ownProps: PureOwnProps) => ownProps.alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]], (kodeverk) => kodeverk
+    .filter((ps: KodeverkMedNavn) => ps.kode === personstatusType.DOD || ps.kode === personstatusType.BOSATT || ps.kode === personstatusType.UTVANDRET),
 );
 
-const transformValues = (values, aksjonspunkter) => ({
+interface FormValues {
+  fortsettBehandling: boolean;
+  personstatus: string;
+  begrunnelse: string;
+}
+
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
   fortsettBehandling: values.fortsettBehandling,
   personstatus: values.personstatus,
   kode: aksjonspunkter[0].definisjon.kode,
@@ -156,23 +159,21 @@ const transformValues = (values, aksjonspunkter) => ({
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
 
 const formName = 'CheckPersonStatusForm';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = ownProps;
   return {
-    initialValues: buildInitialValues(state, ownProps),
+    initialValues: buildInitialValues(ownProps),
     ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'fortsettBehandling', 'originalPersonstatusName'),
-    personStatuser: getFilteredKodeverk(state, ownProps),
+    personStatuser: getFilteredKodeverk(ownProps),
     onSubmit: lagSubmitFn(ownProps),
   };
 };
 
-const CheckPersonStatusForm = connect(mapStateToProps)(injectIntl(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: formName,
-})(CheckPersonStatusFormImpl)));
-
-export default CheckPersonStatusForm;
+})(injectIntl(CheckPersonStatusForm)));
