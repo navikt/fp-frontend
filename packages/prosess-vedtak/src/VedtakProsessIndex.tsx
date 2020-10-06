@@ -29,7 +29,6 @@ interface OwnProps {
   };
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
-  sendVarselOmRevurdering?: boolean;
   beregningsresultatOriginalBehandling?: {
     'beregningsresultat-engangsstonad'?: any;
     'beregningsresultat-foreldrepenger'?: any;
@@ -39,7 +38,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
   previewCallback: () => void;
-  submitCallback: () => void;
+  submitCallback: (data: any) => void;
   ytelseTypeKode: string;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
@@ -60,7 +59,6 @@ const VedtakProsessIndex: FunctionComponent<OwnProps> = ({
   submitCallback,
   ytelseTypeKode,
   alleKodeverk,
-  sendVarselOmRevurdering = false,
 }) => {
   const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(beregningsgrunnlag, aksjonspunkter);
   const resultatstruktur = ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
@@ -102,7 +100,6 @@ const VedtakProsessIndex: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
-          sendVarselOmRevurdering={sendVarselOmRevurdering}
           resultatstrukturOriginalBehandling={beregningsresultatOriginalBehandling}
           medlemskapFom={medlemskap ? medlemskap.fom : undefined}
         />

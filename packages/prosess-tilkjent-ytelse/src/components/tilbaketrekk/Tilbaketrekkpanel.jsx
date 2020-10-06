@@ -148,12 +148,12 @@ export const buildInitialValues = createSelector([
   };
 });
 
-const mapStateToPropsFactory = (initialState, ownProps) => {
-  const onSubmit = (values) => ownProps.submitCallback([transformValues(values)]);
-  return (state) => ({
-    onSubmit,
-    initialValues: buildInitialValues(state, ownProps),
-  });
-};
+const lagSubmitFn = createSelector([(ownProps) => ownProps.submitCallback],
+  (submitCallback) => (values) => submitCallback([transformValues(values)]));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({ form: formName })(injectIntl(Tilbaketrekkpanel)));
+const mapStateToProps = (state, ownProps) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  initialValues: buildInitialValues(state, ownProps),
+});
+
+export default connect(mapStateToProps)(behandlingForm({ form: formName })(injectIntl(Tilbaketrekkpanel)));

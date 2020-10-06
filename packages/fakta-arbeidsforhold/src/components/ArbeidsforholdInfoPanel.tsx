@@ -121,12 +121,13 @@ const transformValues = (values: any) => {
   };
 };
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (_state, ownProps: PureOwnProps) => ({
-    initialValues: buildInitialValues(ownProps),
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({ form: formName })(ArbeidsforholdInfoPanelImpl));
+const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps),
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+export default connect(mapStateToProps)(behandlingForm({ form: formName })(ArbeidsforholdInfoPanelImpl));

@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { createSelector } from 'reselect';
+import { InjectedFormProps } from 'redux-form';
 import {
   Normaltekst, Element, Undertittel,
 } from 'nav-frontend-typografi';
@@ -16,6 +18,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import utlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';
@@ -26,7 +29,7 @@ const {
   AUTOMATISK_MARKERING_AV_UTENLANDSSAK, MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
 } = aksjonspunktCodes;
 
-const getUtlandSakstype = (aksjonspunkter) => {
+const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]) => {
   if (hasAksjonspunkt(AUTOMATISK_MARKERING_AV_UTENLANDSSAK, aksjonspunkter)) {
     return utlandSakstypeKode.EØS_BOSATT_NORGE;
   }
@@ -36,7 +39,7 @@ const getUtlandSakstype = (aksjonspunkter) => {
   return utlandSakstypeKode.NASJONAL;
 };
 
-const getSakstypeId = (vurdering) => {
+const getSakstypeId = (vurdering: string) => {
   switch (vurdering) {
     case utlandSakstypeKode.EØS_BOSATT_NORGE:
       return 'UtlandPanel.EøsBosattNorge';
@@ -47,15 +50,19 @@ const getSakstypeId = (vurdering) => {
   }
 };
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  dirty: boolean;
-  handleSubmit: (data: any) => void;
-  reset: () => void;
+  submitCallback: (data: any) => void;
+}
+
+interface MappedOwnProps {
   utlandSakstype?: string;
 }
 
-export const UtlandPanelImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   readOnly,
   dirty,
@@ -154,22 +161,21 @@ export const UtlandPanelImpl: FunctionComponent<OwnProps & WrappedComponentProps
   );
 };
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([{
-    kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
-    begrunnelse: values.utlandSakstype,
-    gammelVerdi: values.gammelVerdi,
-  }]);
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback([{
+  kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
+  begrunnelse: values.utlandSakstype,
+  gammelVerdi: values.gammelVerdi,
+}]));
 
-  return (state, ownProps) => ({
-    initialValues: {
-      utlandSakstype: getUtlandSakstype(ownProps.aksjonspunkter),
-      gammelVerdi: getUtlandSakstype(ownProps.aksjonspunkter),
-    },
-    utlandSakstype: behandlingFormValueSelector('UtlandPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'utlandSakstype'),
-    onSubmit,
-  });
-};
+const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+  initialValues: {
+    utlandSakstype: getUtlandSakstype(ownProps.aksjonspunkter),
+    gammelVerdi: getUtlandSakstype(ownProps.aksjonspunkter),
+  },
+  utlandSakstype: behandlingFormValueSelector('UtlandPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'utlandSakstype'),
+  onSubmit: lagSubmitFn(ownProps),
+});
 
-// @ts-ignore TODO Fiks
-export default connect(mapStateToPropsFactory)(behandlingForm({ form: 'UtlandPanel' })(injectIntl(UtlandPanelImpl)));
+export default connect(mapStateToProps)(behandlingForm({ form: 'UtlandPanel' })(injectIntl(UtlandPanelImpl)));

@@ -108,11 +108,14 @@ export const getFodselVilkarAvslagsarsaker = (isFpFagsak, fodselsvilkarAvslagsko
   ? fodselsvilkarAvslagskoder.filter((arsak) => !avslagsarsakerES.includes(arsak.kode))
   : fodselsvilkarAvslagskoder);
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const {
-    aksjonspunkter, status, alleKodeverk, submitCallback, ytelseTypeKode,
+    aksjonspunkter, status, alleKodeverk, ytelseTypeKode,
   } = initialOwnProps;
-  const onSubmit = (values) => submitCallback([transformValues(values, aksjonspunkter)]);
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.FODSELSVILKARET_MOR];
   const filtrerteAvslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER, avslagsarsaker);
 
@@ -122,7 +125,7 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   return (state, ownProps) => {
     const { behandlingId, behandlingVersjon, vilkar } = ownProps;
     return {
-      onSubmit,
+      onSubmit: lagSubmitFn(ownProps),
       avslagsarsaker: filtrerteAvslagsarsaker,
       originalErVilkarOk: erVilkarOk,
       initialValues: buildInitialValues(state, ownProps),

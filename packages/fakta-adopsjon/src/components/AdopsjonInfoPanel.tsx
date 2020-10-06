@@ -212,15 +212,16 @@ const getEditedStatus = createSelector(
   ),
 );
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter));
-  return (_state: any, ownProps: PureOwnProps) => ({
-    editedStatus: getEditedStatus(ownProps),
-    initialValues: buildInitialValues(ownProps),
-    farSokerType: ownProps.soknad.farSokerType,
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter)));
+
+const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps) => ({
+  editedStatus: getEditedStatus(ownProps),
+  initialValues: buildInitialValues(ownProps),
+  farSokerType: ownProps.soknad.farSokerType,
+  onSubmit: lagSubmitFn(ownProps),
+});
 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: 'AdopsjonInfoPanel',

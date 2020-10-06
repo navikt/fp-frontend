@@ -18,7 +18,7 @@ interface OwnProps {
   beregningresultatEngangsstonad: BeregningsresultatEs;
   aksjonspunkter: Aksjonspunkt[];
   overrideReadOnly: boolean;
-  submitCallback: () => void;
+  submitCallback: (data: any) => void;
   kanOverstyreAccess: {
     isEnabled: boolean;
   };

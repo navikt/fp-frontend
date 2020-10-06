@@ -127,18 +127,17 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
   avsluttBehandling: false,
 }));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const aksjonspunktCode = aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER;
-  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (_state, ownProps: PureOwnProps) => ({
-    aksjonspunktCode,
-    initialValues: buildInitialValues(ownProps),
-    ankeVurdering: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER)]));
 
-const BehandleMerknaderForm = connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+  aksjonspunktCode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
+  initialValues: buildInitialValues(ownProps),
+  ankeVurdering: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+const BehandleMerknaderForm = connect(mapStateToProps)(behandlingForm({
   form: ankeMerknaderFormName,
 })(AnkeMerknader));
 

@@ -155,23 +155,23 @@ const transformValues = (values, aksjonspunkter) => ({
   ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+
 const formName = 'CheckPersonStatusForm';
 
-const mapStateToPropsFactory = (initialState, staticOwnProps) => {
-  const onSubmit = (values) => staticOwnProps.submitCallback([transformValues(values, staticOwnProps.aksjonspunkter)]);
-  const personStatuser = getFilteredKodeverk(initialState, staticOwnProps);
-  return (state, ownProps) => {
-    const { behandlingId, behandlingVersjon } = ownProps;
-    return {
-      initialValues: buildInitialValues(state, ownProps),
-      ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'fortsettBehandling', 'originalPersonstatusName'),
-      personStatuser,
-      onSubmit,
-    };
+const mapStateToProps = (state, ownProps) => {
+  const { behandlingId, behandlingVersjon } = ownProps;
+  return {
+    initialValues: buildInitialValues(state, ownProps),
+    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'fortsettBehandling', 'originalPersonstatusName'),
+    personStatuser: getFilteredKodeverk(state, ownProps),
+    onSubmit: lagSubmitFn(ownProps),
   };
 };
 
-const CheckPersonStatusForm = connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+const CheckPersonStatusForm = connect(mapStateToProps)(injectIntl(behandlingForm({
   form: formName,
 })(CheckPersonStatusFormImpl)));
 

@@ -406,24 +406,24 @@ const getAntallPerioderMedAksjonspunkt = createSelector([(state: any, ownProps: 
 )(state, 'vilkarsVurdertePerioder')],
 (perioder: CustomVilkarsVurdertePeriode[] = []) => perioder.reduce((sum: number, periode) => (!periode.erForeldet ? sum + 1 : sum), 0));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const sarligGrunnTyper = initialOwnProps.alleKodeverk[tilbakekrevingKodeverkTyper.SARLIG_GRUNN];
-  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, sarligGrunnTyper));
-  return (state: any, ownProps: PureOwnProps) => {
-    const periodFormValues = getBehandlingFormValues(TILBAKEKREVING_PERIODE_FORM_NAME, ownProps.behandlingId,
-      ownProps.behandlingVersjon)(state) as { erForeldet: boolean }
-      || { erForeldet: false };
-    return {
-      initialValues: buildInitialValues(state, ownProps),
-      dataForDetailForm: settOppPeriodeDataForDetailForm(state, ownProps),
-      vilkarsVurdertePerioder: behandlingFormValueSelector(TILBAKEKREVING_FORM_NAME, ownProps.behandlingId,
-        ownProps.behandlingVersjon)(state, 'vilkarsVurdertePerioder'),
-      behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-      readOnly: ownProps.readOnly || periodFormValues.erForeldet === true,
-      antallPerioderMedAksjonspunkt: getAntallPerioderMedAksjonspunkt(state, ownProps),
-      merknaderFraBeslutter: ownProps.alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING],
-      onSubmit: submitCallback,
-    };
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.alleKodeverk],
+(submitCallback, alleKodeverk) => (values: any) => submitCallback(transformValues(values, alleKodeverk[tilbakekrevingKodeverkTyper.SARLIG_GRUNN])));
+
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+  const periodFormValues = getBehandlingFormValues(TILBAKEKREVING_PERIODE_FORM_NAME, ownProps.behandlingId,
+    ownProps.behandlingVersjon)(state) as { erForeldet: boolean }
+    || { erForeldet: false };
+  return {
+    initialValues: buildInitialValues(state, ownProps),
+    dataForDetailForm: settOppPeriodeDataForDetailForm(state, ownProps),
+    vilkarsVurdertePerioder: behandlingFormValueSelector(TILBAKEKREVING_FORM_NAME, ownProps.behandlingId,
+      ownProps.behandlingVersjon)(state, 'vilkarsVurdertePerioder'),
+    behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
+    readOnly: ownProps.readOnly || periodFormValues.erForeldet === true,
+    antallPerioderMedAksjonspunkt: getAntallPerioderMedAksjonspunkt(state, ownProps),
+    merknaderFraBeslutter: ownProps.alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING],
+    onSubmit: lagSubmitFn(ownProps),
   };
 };
 
@@ -464,7 +464,7 @@ const validateForm = (values: { vilkarsVurdertePerioder: CustomVilkarsVurdertePe
   return errors;
 };
 
-const TilbakekrevingForm = connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+const TilbakekrevingForm = connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: TILBAKEKREVING_FORM_NAME,
   validate: validateForm,
 })(TilbakekrevingFormImpl));

@@ -99,12 +99,15 @@ const transformValues = (values, aksjonspunkter) => ({
   ...{ kode: aksjonspunkter[0].definisjon.kode },
 });
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+
 const formName = 'AdopsjonVilkarForm';
 
 const mapStateToPropsFactory = (initialState, staticOwnProps) => {
   const { aksjonspunkter, status, alleKodeverk } = staticOwnProps;
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.ADOPSJONSVILKARET];
-  const onSubmit = (values) => staticOwnProps.submitCallback([transformValues(values, aksjonspunkter)]);
 
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
@@ -118,7 +121,7 @@ const mapStateToPropsFactory = (initialState, staticOwnProps) => {
       lovReferanse: vilkar[0].lovReferanse,
       hasAksjonspunkt: aksjonspunkter.length > 0,
       avslagsarsaker,
-      onSubmit,
+      onSubmit: lagSubmitFn(ownProps),
     };
   };
 };

@@ -92,6 +92,7 @@ interface OwnProps {
   opptjeningAktiviteter: OpptjeningAktivitet[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => void;
 }
 
 export const buildInitialValues = createSelector(
@@ -138,16 +139,15 @@ const transformValues = (values: any) => ({
   kode: values.aksjonspunkt[0].definisjon.kode,
 });
 
-const mapStateToPropsFactory = (_initialState: any, {
-  submitCallback,
-}: any) => {
-  const onSubmit = (values: any) => submitCallback([transformValues(values)]);
-  return (_state: any, ownProps: OwnProps) => ({
-    aksjonspunkt: ownProps.aksjonspunkter[0],
-    initialValues: buildInitialValues(ownProps),
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: OwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
+
+const mapStateToPropsFactory = (_state: any, ownProps: OwnProps) => ({
+  aksjonspunkt: ownProps.aksjonspunkter[0],
+  initialValues: buildInitialValues(ownProps),
+  onSubmit: lagSubmitFn(ownProps),
+});
 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,

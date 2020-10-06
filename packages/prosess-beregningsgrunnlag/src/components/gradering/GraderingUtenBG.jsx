@@ -207,14 +207,16 @@ export const buildInitialValues = createSelector(
   },
 );
 
-const mapStateToPropsFactory = (initialState, ownProps) => {
-  const onSubmit = (values) => ownProps.submitCallback([transformValues(values)]);
-  const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk, kodeverkTyper);
-  return (state) => {
+const lagSubmitFn = createSelector([(ownProps) => ownProps.submitCallback],
+  (submitCallback) => (values) => submitCallback([transformValues(values)]));
+
+const mapStateToPropsFactory = (initialState, defaultOwnProps) => {
+  const getKodeverknavn = getKodeverknavnFn(defaultOwnProps.alleKodeverk, kodeverkTyper);
+  return (state, ownProps) => {
     const initialValues = buildInitialValues(state, ownProps);
     return ({
+      onSubmit: lagSubmitFn(ownProps),
       getKodeverknavn,
-      onSubmit,
       initialValues,
     });
   };

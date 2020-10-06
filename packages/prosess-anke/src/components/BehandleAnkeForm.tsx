@@ -378,24 +378,24 @@ export const transformValues = (values: FormValues, aksjonspunktCode: string) =>
 
 const formName = 'BehandleAnkeForm';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const aksjonspunktCode = initialOwnProps.aksjonspunkter[0].definisjon.kode;
-  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (state: any, ownProps: PureOwnProps) => ({
-    aksjonspunktCode,
-    initialValues: buildInitialValues(ownProps),
-    formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-      'vedtak',
-      'ankeVurdering',
-      'begrunnelse',
-      'fritekstTilBrev',
-      'erSubsidiartRealitetsbehandles',
-      'ankeOmgjoerArsak',
-      'ankeVurderingOmgjoer') || {},
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0].definisjon.kode)]));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon.kode,
+  initialValues: buildInitialValues(ownProps),
+  formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
+    'vedtak',
+    'ankeVurdering',
+    'begrunnelse',
+    'fritekstTilBrev',
+    'erSubsidiartRealitetsbehandles',
+    'ankeOmgjoerArsak',
+    'ankeVurderingOmgjoer') || {},
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+export default connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(injectIntl(BehandleAnkeForm)));

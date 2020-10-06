@@ -198,15 +198,18 @@ export const validateVurderFaktaBeregning = (values) => {
   return null;
 };
 
-const mapStateToPropsFactory = (initialState, initialProps) => {
-  const onSubmit = (values) => initialProps.submitCallback(transformValuesVurderFaktaBeregning(values));
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback],
+(submitCallback) => (values) => submitCallback(transformValuesVurderFaktaBeregning(values)));
+
+const mapStateToPropsFactory = () => {
   const validate = (values) => validateVurderFaktaBeregning(values);
   return (state, ownProps) => {
     const initialValues = buildInitialValuesVurderFaktaBeregning(state, ownProps);
     return ({
       initialValues,
-      onSubmit,
       validate,
+      onSubmit: lagSubmitFn(ownProps),
       verdiForAvklarAktivitetErEndret: erAvklartAktivitetEndret(state, ownProps),
       erOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
       hasBegrunnelse: initialValues && !!initialValues[BEGRUNNELSE_FAKTA_TILFELLER_NAME],

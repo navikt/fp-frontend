@@ -107,15 +107,16 @@ const transformValues = (values, aksjonspunkter) => ({
   ...{ kode: aksjonspunkter[0].definisjon.kode },
 });
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const { aksjonspunkter, submitCallback } = initialOwnProps;
-  const onSubmit = (values) => submitCallback([transformValues(values, aksjonspunkter)]);
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
 
+const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const isOpenAksjonspunkt = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === initialOwnProps.status;
 
   return (state, ownProps) => ({
-    onSubmit,
+    onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitialValues(ownProps),
     originalErVilkarOk: erVilkarOk,
     erVilkarOk: behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'erVilkarOk'),
