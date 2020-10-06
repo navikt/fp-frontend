@@ -319,7 +319,7 @@ const buildInitialValues = createSelector(
 
 const lagSubmitFn = createSelector([
   (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.apCodes],
-(submitCallback, apCodes) => (values) => submitCallback([transformValues(values, apCodes)]));
+(submitCallback, apCodes) => (values) => submitCallback([transformValues(values, apCodes[0])]));
 
 const mapStateToProps = (state, ownProps) => {
   const {
