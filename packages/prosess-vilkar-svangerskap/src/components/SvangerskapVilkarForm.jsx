@@ -99,29 +99,28 @@ const transformValues = (values, aksjonspunkter) => ({
 
 const formName = 'SvangerskapVilkarForm';
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const { aksjonspunkter, alleKodeverk } = initialOwnProps;
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values, aksjonspunkter)]);
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
 
-  return (state, ownProps) => {
-    const {
-      behandlingId, behandlingVersjon, vilkar, status,
-    } = ownProps;
-    const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
-    const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
-    return {
-      originalErVilkarOk: erVilkarOk,
-      initialValues: buildInitialValues(ownProps),
-      erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
-      lovReferanse: vilkar[0].lovReferanse,
-      hasAksjonspunkt: aksjonspunkter.length > 0,
-      avslagsarsaker: alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.SVANGERSKAPVILKARET],
-      onSubmit,
-    };
+const mapStateToProps = (state, ownProps) => {
+  const {
+    behandlingId, behandlingVersjon, vilkar, status, alleKodeverk, aksjonspunkter,
+  } = ownProps;
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  return {
+    originalErVilkarOk: erVilkarOk,
+    initialValues: buildInitialValues(ownProps),
+    erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
+    lovReferanse: vilkar[0].lovReferanse,
+    hasAksjonspunkt: aksjonspunkter.length > 0,
+    avslagsarsaker: alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.SVANGERSKAPVILKARET],
+    onSubmit: lagSubmitFn(ownProps),
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: formName,
   validate,
 })(SvangerskapVilkarFormImpl));

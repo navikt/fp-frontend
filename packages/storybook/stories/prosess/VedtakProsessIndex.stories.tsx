@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
-  Behandling, BeregningsresultatEs, Beregningsgrunnlag, Medlemskap,
+  Behandling, BeregningsresultatEs, Beregningsgrunnlag, Medlemskap, BeregningsresultatFp,
 } from '@fpsak-frontend/types';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
@@ -69,7 +69,8 @@ const vilkar = [{
 const resultatstruktur = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
-};
+  sokerErMor: true,
+} as BeregningsresultatFp;
 
 export default {
   title: 'prosess/prosess-vedtak',
@@ -93,7 +94,6 @@ export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerUtenOversty
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -115,7 +115,6 @@ export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -131,7 +130,6 @@ export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyr
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -153,7 +151,6 @@ export const visGodkjentForeldrepengerForSaksbehandlerMedOverstyring = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -187,7 +184,6 @@ export const visGodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyri
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -212,7 +208,6 @@ export const visAvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyri
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -240,7 +235,6 @@ export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = 
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -256,7 +250,6 @@ export const visInnvilgetForeldrepengerDerBeregningErManueltFastsatt = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -288,7 +281,6 @@ export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -349,7 +341,6 @@ export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () =>
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -368,7 +359,6 @@ export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOversty
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -393,7 +383,6 @@ export const visGodkjentEngangsstønadForSaksbehandlerUtenOverstyring = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -412,7 +401,6 @@ export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyr
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -431,7 +419,6 @@ export const visInnvilgetEngangsstønadDerBeregningErManueltFastsatt = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -467,7 +454,6 @@ export const visAvslåttEngangsstønadDerBeregningErManueltFastsatt = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -497,7 +483,6 @@ export const visInnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOver
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -521,7 +506,6 @@ export const visAvslåttSvangerskapspengerOgVisModal = () => (
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -560,7 +544,6 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -599,7 +582,6 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -634,7 +616,6 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -673,7 +654,6 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring 
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -715,7 +695,6 @@ export const visGodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerM
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -748,7 +727,6 @@ export const visAvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerM
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -784,7 +762,6 @@ export const visGodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOve
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -805,7 +782,6 @@ export const visOpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyrin
     } as Behandling}
     vilkar={vilkar}
     beregningresultatForeldrepenger={resultatstruktur}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -844,7 +820,6 @@ export const visInnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsa
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -898,7 +873,6 @@ export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkk
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -933,7 +907,6 @@ export const visOpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{

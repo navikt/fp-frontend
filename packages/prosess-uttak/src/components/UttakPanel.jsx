@@ -370,18 +370,21 @@ export const transformValues = (values, apCodes, aksjonspunkter) => {
   }));
 };
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.apCodes, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, apCodes, aksjonspunkter) => (values) => submitCallback(transformValues(values, apCodes, aksjonspunkter)));
+
 const mapStateToPropsFactory = (_initialState, initOwnProps) => {
-  const { behandlingId, behandlingVersjon, aksjonspunkter } = initOwnProps;
+  const { behandlingId, behandlingVersjon } = initOwnProps;
   const validate = (values) => validateUttakPanelForm(values);
-  const onSubmit = (values) => initOwnProps.submitCallback(transformValues(values, initOwnProps.apCodes, aksjonspunkter));
 
   return (state, ownProps) => {
     const initialValues = buildInitialValues(ownProps);
 
     return {
       validate,
-      onSubmit,
       initialValues,
+      onSubmit: lagSubmitFn(ownProps),
       manuellOverstyring: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'manuellOverstyring'),
     };
   };

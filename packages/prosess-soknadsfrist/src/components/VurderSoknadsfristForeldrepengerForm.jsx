@@ -165,26 +165,25 @@ const transformValues = (values, aksjonspunkter) => ({
   ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+
 const formName = 'VurderSoknadsfristForeldrepengerForm';
 
-const mapStateToPropsFactory = (initialState, staticOwnProps) => {
-  const uttaksperiodegrense = staticOwnProps.uttakPeriodeGrense;
-  const { aksjonspunkter } = staticOwnProps;
-  const onSubmit = (values) => staticOwnProps.submitCallback([transformValues(values, aksjonspunkter)]);
-
-  return (state, ownProps) => {
-    const { behandlingId, behandlingVersjon } = ownProps;
-    return {
-      onSubmit,
-      initialValues: buildInitialValues(state, ownProps),
-      gyldigSenFremsetting: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
-      antallDagerSoknadLevertForSent: uttaksperiodegrense ? uttaksperiodegrense.antallDagerLevertForSent : {},
-      soknadsperiodeStart: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeStart : {},
-      soknadsperiodeSlutt: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeSlutt : {},
-      soknadsfristdato: uttaksperiodegrense ? uttaksperiodegrense.soknadsfristForForsteUttaksdato : {},
-      hasAksjonspunkt: aksjonspunkter.length > 0,
-      ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
-    };
+const mapStateToPropsFactory = (state, ownProps) => {
+  const uttaksperiodegrense = ownProps.uttakPeriodeGrense;
+  const { behandlingId, behandlingVersjon, aksjonspunkter } = ownProps;
+  return {
+    onSubmit: lagSubmitFn(ownProps),
+    initialValues: buildInitialValues(state, ownProps),
+    gyldigSenFremsetting: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
+    antallDagerSoknadLevertForSent: uttaksperiodegrense ? uttaksperiodegrense.antallDagerLevertForSent : {},
+    soknadsperiodeStart: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeStart : {},
+    soknadsperiodeSlutt: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeSlutt : {},
+    soknadsfristdato: uttaksperiodegrense ? uttaksperiodegrense.soknadsfristForForsteUttaksdato : {},
+    hasAksjonspunkt: aksjonspunkter.length > 0,
+    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
   };
 };
 

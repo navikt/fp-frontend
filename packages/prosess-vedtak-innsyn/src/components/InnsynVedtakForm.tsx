@@ -195,21 +195,22 @@ const getDocumenterMedFikkInnsynVerdi = createSelector(
     })),
 );
 
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
+
 const formName = 'InnsynVedtakForm';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (state: any, ownProps: PureOwnProps) => ({
-    documents: getDocumenterMedFikkInnsynVerdi(ownProps),
-    initialValues: buildInitialValues(ownProps.innsynMottattDato, ownProps.aksjonspunkter),
-    apBegrunnelse: ownProps.aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
-    begrunnelse: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'begrunnelse'),
-    resultat: ownProps.innsynResultatType.kode,
-    onSubmit,
-  });
-};
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  documents: getDocumenterMedFikkInnsynVerdi(ownProps),
+  initialValues: buildInitialValues(ownProps.innsynMottattDato, ownProps.aksjonspunkter),
+  apBegrunnelse: ownProps.aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
+  begrunnelse: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'begrunnelse'),
+  resultat: ownProps.innsynResultatType.kode,
+  onSubmit: lagSubmitFn(ownProps),
+});
 
-const InnsynVedtakForm = connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+const InnsynVedtakForm = connect(mapStateToProps)(injectIntl(behandlingForm({
   form: formName,
 })(InnsynVedtakFormImpl)));
 

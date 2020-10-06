@@ -168,21 +168,22 @@ const harFritekstOppsummeringPakrevdMenIkkeUtfylt = (vedtaksbrevAvsnitt: Vedtaks
   .filter((avsnitt: VedtaksbrevAvsnitt) => avsnitt.avsnittstype === underavsnittType.OPPSUMMERING)
   .some((avsnitt: VedtaksbrevAvsnitt) => avsnitt.underavsnittsliste.some((underAvsnitt: any) => underAvsnitt.fritekstPåkrevet && !underAvsnitt.fritekst));
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunktKodeForeslaVedtak));
-  return (state: any, ownProps: PureOwnProps) => {
-    const vedtaksbrevAvsnitt = ownProps.avsnittsliste;
-    const initialValues = TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt);
-    const formVerdier = getBehandlingFormValues(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state) || {};
-    const fritekstOppsummeringPakrevdMenIkkeUtfylt = harFritekstOppsummeringPakrevdMenIkkeUtfylt(vedtaksbrevAvsnitt);
-    return {
-      initialValues,
-      formVerdier,
-      vedtaksbrevAvsnitt,
-      onSubmit: submitCallback,
-      perioderSomIkkeHarUtfyltObligatoriskVerdi: finnPerioderSomIkkeHarVerdiForObligatoriskFelt({ vedtaksbrevAvsnitt, formVerdier }),
-      fritekstOppsummeringPakrevdMenIkkeUtfylt,
-    };
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunktKodeForeslaVedtak],
+(submitCallback, aksjonspunktKodeForeslaVedtak) => (values: any) => submitCallback(transformValues(values, aksjonspunktKodeForeslaVedtak)));
+
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => {
+  const vedtaksbrevAvsnitt = ownProps.avsnittsliste;
+  const initialValues = TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt);
+  const formVerdier = getBehandlingFormValues(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state) || {};
+  const fritekstOppsummeringPakrevdMenIkkeUtfylt = harFritekstOppsummeringPakrevdMenIkkeUtfylt(vedtaksbrevAvsnitt);
+  return {
+    initialValues,
+    formVerdier,
+    vedtaksbrevAvsnitt,
+    onSubmit: lagSubmitFn(ownProps),
+    perioderSomIkkeHarUtfyltObligatoriskVerdi: finnPerioderSomIkkeHarVerdiForObligatoriskFelt({ vedtaksbrevAvsnitt, formVerdier }),
+    fritekstOppsummeringPakrevdMenIkkeUtfylt,
   };
 };
 

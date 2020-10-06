@@ -97,11 +97,14 @@ const transformValues = (values, aksjonspunkter) => aksjonspunkter.map((ap) => (
 
 const formName = 'ErForeldreansvarVilkaarOppfyltForm';
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback(transformValues(values, aksjonspunkter)));
+
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const {
-    aksjonspunkter, submitCallback, isForeldreansvar2Ledd, alleKodeverk, status,
+    aksjonspunkter, isForeldreansvar2Ledd, alleKodeverk, status,
   } = initialOwnProps;
-  const onSubmit = (values) => submitCallback(transformValues(values, aksjonspunkter));
   const vilkarTypeKode = isForeldreansvar2Ledd ? vilkarType.FORELDREANSVARSVILKARET_2_LEDD : vilkarType.FORELDREANSVARSVILKARET_4_LEDD;
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarTypeKode];
 
@@ -114,9 +117,9 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
       initialValues: buildInitialValues(state, ownProps),
       erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
       originalErVilkarOk: erVilkarOk,
+      onSubmit: lagSubmitFn(ownProps),
       avslagsarsaker,
       aksjonspunkter,
-      onSubmit,
     };
   };
 };

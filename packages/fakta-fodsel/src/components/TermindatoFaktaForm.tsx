@@ -189,27 +189,28 @@ const getEditedStatus = createSelector(
   ),
 );
 
-const mapStateToPropsFactory = (_initialState, staticOwnProps:PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = staticOwnProps;
-  const onSubmit = (values: any) => staticOwnProps.submitHandler(transformValues(values));
-  return (state: any, ownProps: PureOwnProps) => {
-    const termindato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'termindato');
-    const utstedtdato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'utstedtdato');
-    const editedStatus = getEditedStatus(ownProps);
-    return {
-      onSubmit,
-      initialValues: buildInitialValues(ownProps),
-      isTerminDatoEdited: editedStatus.termindato,
-      isUtstedtDatoEdited: editedStatus.utstedtdato,
-      isForTidligTerminbekreftelse: erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato),
-      isAntallBarnEdited: editedStatus.antallBarn,
-      fodselsdatoTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length > 0 ? ownProps.gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined,
-      antallBarnTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length,
-      isOverridden: ownProps.gjeldendeFamiliehendelse.erOverstyrt,
-    };
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitHandler],
+(submitCallback) => (values: any) => submitCallback(transformValues(values)));
+
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+  const { behandlingId, behandlingVersjon } = ownProps;
+  const termindato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'termindato');
+  const utstedtdato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'utstedtdato');
+  const editedStatus = getEditedStatus(ownProps);
+  return {
+    onSubmit: lagSubmitFn(ownProps),
+    initialValues: buildInitialValues(ownProps),
+    isTerminDatoEdited: editedStatus.termindato,
+    isUtstedtDatoEdited: editedStatus.utstedtdato,
+    isForTidligTerminbekreftelse: erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato),
+    isAntallBarnEdited: editedStatus.antallBarn,
+    fodselsdatoTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length > 0 ? ownProps.gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined,
+    antallBarnTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length,
+    isOverridden: ownProps.gjeldendeFamiliehendelse.erOverstyrt,
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: termindatoFaktaFormName,
 })(TermindatoFaktaForm));

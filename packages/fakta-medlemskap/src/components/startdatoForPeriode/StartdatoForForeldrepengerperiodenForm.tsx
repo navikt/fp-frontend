@@ -140,19 +140,25 @@ const transformValues = (values: any, isOverstyring: boolean) => ({
   begrunnelse: values.begrunnelse,
 });
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const { aksjonspunkt, submitCallback } = initialOwnProps;
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkt],
+(submitCallback, aksjonspunkt) => {
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isOverstyring = !hasAksjonspunkt || aksjonspunkt.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO;
+  return (values: any) => submitCallback([transformValues(values, isOverstyring)]);
+});
+
+const mapStateToProps = (_state, ownProps: PureOwnProps) => {
+  const { aksjonspunkt } = ownProps;
+  const hasAksjonspunkt = aksjonspunkt !== undefined;
   const hasOpenAksjonspunkt = hasAksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
-  const onSubmit = (values: any) => submitCallback([transformValues(values, isOverstyring)]);
-  return (_state, ownProps: PureOwnProps) => ({
+  return {
     hasAksjonspunkt,
     hasOpenAksjonspunkt,
-    onSubmit,
+    onSubmit: lagSubmitFn(ownProps),
     overstyringDisabled: ownProps.readOnlyForStartdatoForForeldrepenger || ownProps.behandlingStatus.kode !== behandlingStatus.BEHANDLING_UTREDES,
     initialValues: buildInitialValues(ownProps),
-  });
+  };
 };
 
 const isBefore2019 = (startdato: string) => moment(startdato).isBefore(moment('2019-01-01'));
@@ -182,7 +188,7 @@ const validateDates = (values: any) => {
   return errors;
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: 'StartdatoForForeldrepengerperiodenForm',
   validate: validateDates,
 })(injectIntl(StartdatoForForeldrepengerperiodenForm)));

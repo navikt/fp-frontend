@@ -131,9 +131,12 @@ const transformValues = (values: any, aksjonspunkt: Aksjonspunkt) => ({
   ...{ begrunnelse: values.begrunnelse },
 });
 
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: any) => submitCallback([transformValues(values, aksjonspunkter[0])]));
+
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const { submitCallback, aksjonspunkter, alleKodeverk } = initialOwnProps;
-  const onSubmit = (values: any) => submitCallback([transformValues(values, aksjonspunkter[0])]);
+  const { aksjonspunkter, alleKodeverk } = initialOwnProps;
   const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
   const vilkarTypes = alleKodeverk[kodeverkTyper.OMSORGSOVERTAKELSE_VILKAR_TYPE];
   const relatertYtelseTypes = alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE];
@@ -143,7 +146,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
     vilkarTypes,
     relatertYtelseTypes,
     erAksjonspunktForeldreansvar,
-    onSubmit,
+    onSubmit: lagSubmitFn(ownProps),
   });
 };
 

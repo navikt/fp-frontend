@@ -353,26 +353,27 @@ const getIsAksjonspunktClosed = createSelector([(ownProps) => ownProps.aksjonspu
     return relevantOpenAps.length === 0;
   });
 
-const mapStateToPropsFactory = (initialState, initialProps) => {
-  const onSubmit = (vals) => initialProps.submitCallback(transformValues(vals));
-  return (state, ownProps) => {
-    const values = getFormValuesForAvklarAktiviteter(state, ownProps);
-    const initialValues = buildInitialValuesAvklarAktiviteter(ownProps);
-    return ({
-      initialValues,
-      onSubmit,
-      validate,
-      formValues: values,
-      kanOverstyre: skalKunneOverstyre(ownProps.erOverstyrer, ownProps.aksjonspunkter),
-      helpText: getHelpTextsAvklarAktiviteter(ownProps),
-      behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-      isAksjonspunktClosed: getIsAksjonspunktClosed(ownProps),
-      avklarAktiviteter: getAvklarAktiviteter(ownProps),
-      hasBegrunnelse: initialValues && !!initialValues[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME],
-      erOverstyrt: !!values && values[MANUELL_OVERSTYRING_FIELD],
-      erBgOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
-    });
-  };
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback],
+(submitCallback) => (values) => submitCallback(transformValues(values)));
+
+const mapStateToProps = (state, ownProps) => {
+  const values = getFormValuesForAvklarAktiviteter(state, ownProps);
+  const initialValues = buildInitialValuesAvklarAktiviteter(ownProps);
+  return ({
+    initialValues,
+    validate,
+    formValues: values,
+    onSubmit: lagSubmitFn(ownProps),
+    kanOverstyre: skalKunneOverstyre(ownProps.erOverstyrer, ownProps.aksjonspunkter),
+    helpText: getHelpTextsAvklarAktiviteter(ownProps),
+    behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
+    isAksjonspunktClosed: getIsAksjonspunktClosed(ownProps),
+    avklarAktiviteter: getAvklarAktiviteter(ownProps),
+    hasBegrunnelse: initialValues && !!initialValues[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME],
+    erOverstyrt: !!values && values[MANUELL_OVERSTYRING_FIELD],
+    erBgOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
+  });
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -381,6 +382,6 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: formNameAvklarAktiviteter,
 })(injectIntl(AvklareAktiviteterPanelImpl)));

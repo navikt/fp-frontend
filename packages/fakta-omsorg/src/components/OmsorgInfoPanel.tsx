@@ -127,14 +127,15 @@ const transformValues = (values: any, submitCallback: (...args: any[]) => any, a
   return submitCallback(aksjonspunkterMedBegrunnelse);
 };
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => transformValues(values, initialOwnProps.submitCallback, initialOwnProps.aksjonspunkter);
-  return (state: any, ownProps: PureOwnProps) => ({
-    initialValues: buildInitialValues(ownProps),
-    omsorg: behandlingFormValueSelector('OmsorgInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'omsorg'),
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: any) => transformValues(values, submitCallback, aksjonspunkter));
+
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps),
+  omsorg: behandlingFormValueSelector('OmsorgInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'omsorg'),
+  onSubmit: lagSubmitFn(ownProps),
+});
 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: 'OmsorgInfoPanel',

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { InjectedFormProps } from 'redux-form';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -13,6 +14,7 @@ interface OwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   tilleggsopplysninger?: string;
+  submitCallback?: (data: any) => Promise<any>;
 }
 
 // TODO (TOR) Fjern redux-form => ingen behov for det her
@@ -41,17 +43,17 @@ TilleggsopplysningerInfoPanel.defaultProps = {
   tilleggsopplysninger: '',
 };
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: any) => {
-  const onSubmit = () => initialOwnProps.submitCallback([{
-    kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER,
-  }]);
+const lagSubmitFn = createSelector([
+  (ownProps: OwnProps) => ownProps.submitCallback],
+(submitCallback) => () => submitCallback([{
+  kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER,
+}]));
 
-  return (_state: any, ownProps: any) => ({
-    onSubmit,
-    dirty: !ownProps.notSubmittable && ownProps.dirty,
-  });
-};
+const mapStateToProps = (_state: any, ownProps: any) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  dirty: !ownProps.notSubmittable && ownProps.dirty,
+});
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: 'TilleggsopplysningerInfoPanel',
 })(TilleggsopplysningerInfoPanel));

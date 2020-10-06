@@ -111,17 +111,18 @@ const transformValues = (values: { begrunnelse: string }) => ({
 
 const FORM_NAVN = 'RegistrereVergeInfoPanel';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (state: any, ownProps: PureOwnProps) => ({
-    valgtVergeType: behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vergeType'),
-    aksjonspunkt: ownProps.aksjonspunkter[0],
-    initialValues: buildInitialValues(ownProps),
-    vergetyper: ownProps.alleKodeverk[kodeverkTyper.VERGE_TYPE],
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  valgtVergeType: behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vergeType'),
+  aksjonspunkt: ownProps.aksjonspunkter[0],
+  initialValues: buildInitialValues(ownProps),
+  vergetyper: ownProps.alleKodeverk[kodeverkTyper.VERGE_TYPE],
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+export default connect(mapStateToProps)(behandlingForm({
   form: FORM_NAVN,
 })(injectIntl(RegistrereVergeInfoPanelImpl)));

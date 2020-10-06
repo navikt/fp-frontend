@@ -392,18 +392,21 @@ const transformValues = (values: any, aksjonspunkter: Aksjonspunkt[], årsaker: 
     feilutbetalingFakta,
   }];
 };
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const årsaker = getSortedFeilutbetalingArsaker(initialOwnProps);
-  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter, årsaker));
-  return (state: any, ownProps: any) => ({
-    årsaker,
-    initialValues: buildInitialValues(ownProps),
-    behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-    behandlePerioderSamlet: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'behandlePerioderSamlet'),
-    formValues: getFormValues(getBehandlingFormName(ownProps.behandlingId, ownProps.behandlingVersjon, formName))(state) || {},
-    onSubmit: submitCallback,
-  });
-};
+
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback,
+  getSortedFeilutbetalingArsaker,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, årsaker, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter, årsaker)));
+
+const mapStateToPropsFactory = (state: any, ownProps: any) => ({
+  årsaker: getSortedFeilutbetalingArsaker(ownProps),
+  initialValues: buildInitialValues(ownProps),
+  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
+  behandlePerioderSamlet: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'behandlePerioderSamlet'),
+  formValues: getFormValues(getBehandlingFormName(ownProps.behandlingId, ownProps.behandlingVersjon, formName))(state) || {},
+  onSubmit: lagSubmitFn(ownProps),
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
   ...bindActionCreators({

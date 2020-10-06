@@ -151,23 +151,24 @@ export const getValidationFordelBeregning = createSelector(
   },
 );
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback(transformValuesFordelBeregning(initialOwnProps)(values));
-  return (state, ownProps) => {
-    const relevantAp = ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === FORDEL_BEREGNINGSGRUNNLAG);
-    const isAksjonspunktClosed = !isAksjonspunktOpen(relevantAp.status.kode);
-    const initialValues = buildInitialValuesFordelBeregning(ownProps);
-    const hasBegrunnelse = initialValues && !!initialValues[BEGRUNNELSE_FORDELING_NAME];
-    return {
-      isAksjonspunktClosed,
-      hasBegrunnelse,
-      initialValues,
-      validate: getValidationFordelBeregning(ownProps),
-      onSubmit,
-    };
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, transformValuesFordelBeregning],
+(submitCallback, transformValuesFordelBeregningFn) => (values) => submitCallback(transformValuesFordelBeregningFn(values)));
+
+const mapStateToProps = (state, ownProps) => {
+  const relevantAp = ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === FORDEL_BEREGNINGSGRUNNLAG);
+  const isAksjonspunktClosed = !isAksjonspunktOpen(relevantAp.status.kode);
+  const initialValues = buildInitialValuesFordelBeregning(ownProps);
+  const hasBegrunnelse = initialValues && !!initialValues[BEGRUNNELSE_FORDELING_NAME];
+  return {
+    isAksjonspunktClosed,
+    hasBegrunnelse,
+    initialValues,
+    validate: getValidationFordelBeregning(ownProps),
+    onSubmit: lagSubmitFn(ownProps),
   };
 };
 
-const FordelingForm = connect(mapStateToPropsFactory)(behandlingForm({ form: FORM_NAME_FORDEL_BEREGNING })(FordelingFormImpl));
+const FordelingForm = connect(mapStateToProps)(behandlingForm({ form: FORM_NAME_FORDEL_BEREGNING })(FordelingFormImpl));
 
 export default FordelingForm;
