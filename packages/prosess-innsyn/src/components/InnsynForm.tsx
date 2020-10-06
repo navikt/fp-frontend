@@ -201,24 +201,25 @@ const getFilteredReceivedDocuments = createSelector([(ownProps: PureOwnProps) =>
   return filteredDocuments;
 });
 
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.alleDokumenter],
+(submitCallback, alleDokumenter) => (values: any) => submitCallback([transformValues(values, alleDokumenter)]));
+
 const formName = 'InnsynForm';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values, initialOwnProps.alleDokumenter)]);
-  return (state: any, ownProps: PureOwnProps) => ({
-    documents: getFilteredReceivedDocuments(ownProps),
-    vedtaksdokumenter: ownProps.vedtaksdokumentasjon,
-    innsynResultatTyper: ownProps.alleKodeverk[kodeverkTyper.INNSYN_RESULTAT_TYPE],
-    behandlingTypes: ownProps.alleKodeverk[kodeverkTyper.BEHANDLING_TYPE],
-    isApOpen: isAksjonspunktOpen(ownProps.aksjonspunkter[0].status.kode),
-    innsynResultatTypeKode: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'innsynResultatType'),
-    sattPaVent: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'sattPaVent'),
-    initialValues: buildInitialValues(ownProps),
-    onSubmit,
-  });
-};
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  documents: getFilteredReceivedDocuments(ownProps),
+  vedtaksdokumenter: ownProps.vedtaksdokumentasjon,
+  innsynResultatTyper: ownProps.alleKodeverk[kodeverkTyper.INNSYN_RESULTAT_TYPE],
+  behandlingTypes: ownProps.alleKodeverk[kodeverkTyper.BEHANDLING_TYPE],
+  isApOpen: isAksjonspunktOpen(ownProps.aksjonspunkter[0].status.kode),
+  innsynResultatTypeKode: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'innsynResultatType'),
+  sattPaVent: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'sattPaVent'),
+  initialValues: buildInitialValues(ownProps),
+  onSubmit: lagSubmitFn(ownProps),
+});
 
-const InnsynForm = connect(mapStateToPropsFactory)(behandlingForm({
+const InnsynForm = connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(InnsynFormImpl));
 

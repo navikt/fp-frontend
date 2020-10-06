@@ -253,15 +253,20 @@ export const transformValues = (values: any, initialValues: any, aksjonspunkter:
   }));
 };
 
-const mapStateToPropsFactory = (_state: any, props: PureOwnProps) => {
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback,
+  buildInitialValues,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, initialValues, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, initialValues, aksjonspunkter)));
+
+const mapStateToPropsFactory = (_initialState: any, props: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = props;
   const initialValues = buildInitialValues(props);
 
   const validate = (values: any) => validateUttakForm(values, props.aksjonspunkter);
   const warn = (values: any) => warningsUttakForm(values);
-  const onSubmit = (values: any) => props.submitCallback(transformValues(values, initialValues, props.aksjonspunkter));
 
-  return () => {
+  return (_state, ownProps) => {
     const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
     const hasRevurderingOvertyringAp = props.aksjonspunkter.some(
       (ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK,
@@ -272,7 +277,7 @@ const mapStateToPropsFactory = (_state: any, props: PureOwnProps) => {
       hasRevurderingOvertyringAp,
       validate,
       warn,
-      onSubmit,
+      onSubmit: lagSubmitFn(ownProps),
     };
   };
 };

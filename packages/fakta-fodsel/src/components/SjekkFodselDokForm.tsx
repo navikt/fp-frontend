@@ -202,27 +202,30 @@ const transformValues = (values: any, antallBarnFraSoknad: number, antallBarnFra
 
 export const sjekkFodselDokForm = 'SjekkFodselDokForm';
 
-const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => {
-  const fodselInfo = staticOwnProps.gjeldendeFamiliehendelse.avklartBarn;
-  const onSubmit = (values: any) => staticOwnProps.submitHandler(transformValues(values,
-    staticOwnProps.soknad.antallBarn, staticOwnProps.avklartBarn.length, fodselInfo));
-  return (state: any, ownProps: PureOwnProps) => {
-    const {
-      behandlingId, behandlingVersjon, gjeldendeFamiliehendelse,
-    } = ownProps;
-    return {
-      onSubmit,
-      initialValues: buildInitialValues(ownProps),
-      fodselInfo,
-      avklartBarn: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'avklartBarn'),
-      dokumentasjonForeliggerIsEdited: getEditedStatus(ownProps).dokumentasjonForeligger,
-      dokumentasjonForeligger: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'dokumentasjonForeligger'),
-      termindato: gjeldendeFamiliehendelse.termindato,
-      vedtaksDatoSomSvangerskapsuke: gjeldendeFamiliehendelse.vedtaksDatoSomSvangerskapsuke,
-    };
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitHandler,
+  (ownProps: PureOwnProps) => ownProps.avklartBarn,
+  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
+  (ownProps: PureOwnProps) => ownProps.soknad],
+(submitCallback, avklartBarn, gjeldendeFamiliehendelse, soknad) => (values: any) => submitCallback(transformValues(values, soknad.antallBarn,
+  avklartBarn.length, gjeldendeFamiliehendelse.avklartBarn)));
+
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+  const {
+    behandlingId, behandlingVersjon, gjeldendeFamiliehendelse,
+  } = ownProps;
+  return {
+    onSubmit: lagSubmitFn(ownProps),
+    initialValues: buildInitialValues(ownProps),
+    fodselInfo: gjeldendeFamiliehendelse.avklartBarn,
+    avklartBarn: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'avklartBarn'),
+    dokumentasjonForeliggerIsEdited: getEditedStatus(ownProps).dokumentasjonForeligger,
+    dokumentasjonForeligger: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'dokumentasjonForeligger'),
+    termindato: gjeldendeFamiliehendelse.termindato,
+    vedtaksDatoSomSvangerskapsuke: gjeldendeFamiliehendelse.vedtaksDatoSomSvangerskapsuke,
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: sjekkFodselDokForm,
 })(SjekkFodselDokForm));

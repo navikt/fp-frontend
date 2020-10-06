@@ -156,17 +156,17 @@ export const transformValues = (values: FormValues) => ({
 
 const formName = 'BehandleKlageKaForm';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (state: any, ownProps: PureOwnProps) => ({
-    initialValues: buildInitialValues(ownProps),
-    formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(
-      state, 'begrunnelse', 'fritekstTilBrev', 'klageVurdering', 'klageVurderingOmgjoer', 'klageMedholdArsak',
-    ) || {},
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps),
+  formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(
+    state, 'begrunnelse', 'fritekstTilBrev', 'klageVurdering', 'klageVurderingOmgjoer', 'klageMedholdArsak',
+  ) || {},
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+export default connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(injectIntl(BehandleKlageFormKaImpl)));

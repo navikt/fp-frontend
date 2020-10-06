@@ -90,14 +90,15 @@ const buildInitialValues = createSelector([(ownProps: OwnProps) => ownProps.klag
   };
 });
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: OwnProps) => {
-  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback([transformValues(values, initialOwnProps.avsluttedeBehandlinger)]);
-  return (_state, ownProps: OwnProps) => ({
-    initialValues: buildInitialValues(ownProps),
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: OwnProps) => ownProps.submitCallback, (ownProps: OwnProps) => ownProps.avsluttedeBehandlinger],
+(submitCallback, avsluttedeBehandlinger) => (values: FormValues) => submitCallback([transformValues(values, avsluttedeBehandlinger)]));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (_state, ownProps: OwnProps) => ({
+  initialValues: buildInitialValues(ownProps),
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+export default connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(FormkravKlageFormKa));

@@ -226,27 +226,28 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
   };
 });
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback(transformValues(values));
-  return (state: any, ownProps: PureOwnProps) => ({
-    onSubmit,
-    initialValues: buildInitialValues(ownProps),
-    isAvvist: getIsAvvist(ownProps),
-    avvistArsaker: getAvvisningsAarsaker(ownProps),
-    isOpphevOgHjemsend: getIsOpphevOgHjemsend(ownProps),
-    isOmgjort: getIsOmgjort(ownProps),
-    omgjortAarsak: getOmgjortAarsak(ownProps),
-    fritekstTilBrev: getFritekstTilBrev(ownProps),
-    behandlingsResultatTekst: getResultatText(ownProps),
-    klageVurderingResultat: getKlageResultat(ownProps),
-    ...behandlingFormValueSelector(VEDTAK_KLAGE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
-      state,
-      'begrunnelse',
-      'aksjonspunktKoder',
-    ),
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback(transformValues(values)));
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  initialValues: buildInitialValues(ownProps),
+  isAvvist: getIsAvvist(ownProps),
+  avvistArsaker: getAvvisningsAarsaker(ownProps),
+  isOpphevOgHjemsend: getIsOpphevOgHjemsend(ownProps),
+  isOmgjort: getIsOmgjort(ownProps),
+  omgjortAarsak: getOmgjortAarsak(ownProps),
+  fritekstTilBrev: getFritekstTilBrev(ownProps),
+  behandlingsResultatTekst: getResultatText(ownProps),
+  klageVurderingResultat: getKlageResultat(ownProps),
+  ...behandlingFormValueSelector(VEDTAK_KLAGE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
+    state,
+    'begrunnelse',
+    'aksjonspunktKoder',
+  ),
+});
+
+export default connect(mapStateToProps)(behandlingForm({
   form: VEDTAK_KLAGE_FORM_NAME,
 })(injectIntl(VedtakKlageForm)));

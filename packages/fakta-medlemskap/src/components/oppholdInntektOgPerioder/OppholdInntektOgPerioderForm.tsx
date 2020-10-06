@@ -294,20 +294,20 @@ const buildInitalValues = createSelector([
 
 const EMPTY_ARRAY = [];
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.aksjonspunkter));
-  const hasOpenAksjonspunkter = initialOwnProps.aksjonspunkter.some((ap: Aksjonspunkt) => isAksjonspunktOpen(ap.status.kode));
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter)));
 
-  return (state: any, ownProps: PureOwnProps) => {
-    const { behandlingId, behandlingVersjon } = ownProps;
-    const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
-    return {
-      behandlingFormPrefix,
-      onSubmit,
-      hasOpenAksjonspunkter,
-      initialValues: buildInitalValues(ownProps),
-      perioder: behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(state, 'perioder') || EMPTY_ARRAY,
-    };
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+  const hasOpenAksjonspunkter = ownProps.aksjonspunkter.some((ap: Aksjonspunkt) => isAksjonspunktOpen(ap.status.kode));
+  const { behandlingId, behandlingVersjon } = ownProps;
+  const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
+  return {
+    behandlingFormPrefix,
+    hasOpenAksjonspunkter,
+    onSubmit: lagSubmitFn(ownProps),
+    initialValues: buildInitalValues(ownProps),
+    perioder: behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(state, 'perioder') || EMPTY_ARRAY,
   };
 };
 
@@ -318,6 +318,6 @@ const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: 'OppholdInntektOgPerioderForm',
 })(injectIntl(OppholdInntektOgPerioderForm)));

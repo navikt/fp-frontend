@@ -4,6 +4,7 @@ import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedF
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+import { createSelector } from 'reselect';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity, omit } from '@fpsak-frontend/utils';
@@ -298,17 +299,18 @@ interface PureOwnProps {
   submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
 }
 
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const submitCallback = (values: any) => initialOwnProps.submitCallback(transformValues(values, initialOwnProps.apCodes[0]));
-  return (state: any, ownProps: PureOwnProps) => ({
-    initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),
-    foreldelsesresultatActivity: behandlingFormValueSelector(FORELDELSE_FORM_NAME,
-      ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'foreldelsesresultatActivity'),
-    behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-    merknaderFraBeslutter: ownProps.alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE],
-    onSubmit: submitCallback,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
+(submitCallback, apCodes) => (values: any) => submitCallback(transformValues(values, apCodes[0])));
+
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),
+  foreldelsesresultatActivity: behandlingFormValueSelector(FORELDELSE_FORM_NAME,
+    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'foreldelsesresultatActivity'),
+  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
+  merknaderFraBeslutter: ownProps.alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE],
+  onSubmit: lagSubmitFn(ownProps),
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
   ...bindActionCreators({

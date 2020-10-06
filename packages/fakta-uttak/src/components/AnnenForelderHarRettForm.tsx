@@ -109,16 +109,16 @@ const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelse
   return undefined;
 });
 
-const mapStateToPropsFactory = (_initialState: any, initialProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialProps.submitCallback(transformValues(values, initialProps.aksjonspunkter));
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter)));
 
-  return (_state: any, props: PureOwnProps) => ({
-    initialValues: buildInitialValues(props),
-    onSubmit,
-  });
-};
+const mapStateToProps = (_state: any, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps),
+  onSubmit: lagSubmitFn(ownProps),
+});
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: 'AnnenForelderHarRettForm',
   enableReinitialize: true,
 })(AnnenForelderHarRettForm));

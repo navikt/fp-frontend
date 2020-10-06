@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import {
@@ -74,16 +75,17 @@ interface PureOwnProps {
   submitHandler: (values: any) => any;
 }
 
-const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => staticOwnProps.submitHandler(transformValues(values));
-  return (_state, ownProps: PureOwnProps) => ({
-    initialValues: buildInitialValues(ownProps.aksjonspunkt, ownProps.morForSykVedFodsel),
-    onSubmit,
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitHandler],
+(submitCallback) => (values: any) => submitCallback(transformValues(values)));
+
+const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps.aksjonspunkt, ownProps.morForSykVedFodsel),
+  onSubmit: lagSubmitFn(ownProps),
+});
 
 export const sykdomPanelName = 'SykdomPanel';
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: sykdomPanelName,
 })(SykdomPanel));

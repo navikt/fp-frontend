@@ -145,14 +145,11 @@ const finnVedtakstatusTekst = (behandlingsresultat, intl, ytelseTypeKode, konsek
   return '';
 };
 
-interface OwnProps {
+interface PureOwnProps {
   behandling: Behandling;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
   previewCallback: () => void;
-  begrunnelse?: string;
-  brødtekst?: string;
-  overskrift?: string;
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -167,10 +164,22 @@ interface OwnProps {
     'beregningsresultat-engangsstonad'?: any;
     'beregningsresultat-foreldrepenger'?: any;
   };
+  behandlingId: number;
+  behandlingVersjon: number;
+  submitCallback: (data: any) => void;
+}
+
+interface MappedOwnProps {
+  begrunnelse?: string;
+  brødtekst?: string;
+  overskrift?: string;
+}
+
+interface DispatchProps {
   clearFormField: (fieldId: string) => void;
 }
 
-export const VedtakRevurderingForm: FunctionComponent<OwnProps & InjectedFormProps & WrappedComponentProps> = ({
+export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps & WrappedComponentProps> = ({
   intl,
   behandling,
   readOnly,
@@ -277,8 +286,8 @@ export const VedtakRevurderingForm: FunctionComponent<OwnProps & InjectedFormPro
 };
 
 export const buildInitialValues = createSelector(
-  [(ownProps: { aksjonspunkter: Aksjonspunkt[] }) => ownProps.aksjonspunkter,
-    (ownProps: { behandling: Behandling }) => ownProps.behandling],
+  [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.behandling],
   (aksjonspunkter, behandling) => ({
     aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
     overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
@@ -297,22 +306,22 @@ const transformValues = (values) => values.aksjonspunktKoder.map((apCode) => ({
 
 export const VEDTAK_REVURDERING_FORM_NAME = 'VEDTAK_REVURDERING_FORM';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback(transformValues(values));
-  return (state, ownProps) => ({
-    onSubmit,
-    initialValues: buildInitialValues(ownProps),
-    ...behandlingFormValueSelector(VEDTAK_REVURDERING_FORM_NAME, ownProps.behandling.id, ownProps.behandling.versjon)(
-      state,
-      'aksjonspunktKoder',
-      'begrunnelse',
-      'overskrift',
-      'brødtekst',
-    ),
-  });
-};
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values) => submitCallback(transformValues(values)));
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  initialValues: buildInitialValues(ownProps),
+  ...behandlingFormValueSelector(VEDTAK_REVURDERING_FORM_NAME, ownProps.behandling.id, ownProps.behandling.versjon)(
+    state,
+    'aksjonspunktKoder',
+    'begrunnelse',
+    'overskrift',
+    'brødtekst',
+  ),
+});
+
+const mapDispatchToProps = (dispatch, ownProps: PureOwnProps): DispatchProps => ({
   ...bindActionCreators({
     clearFormField: (fieldId) => change(`${getBehandlingFormPrefix(
       ownProps.behandlingId, ownProps.behandlingVersjon,
@@ -320,6 +329,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: VEDTAK_REVURDERING_FORM_NAME,
 })(injectIntl(VedtakRevurderingForm)));

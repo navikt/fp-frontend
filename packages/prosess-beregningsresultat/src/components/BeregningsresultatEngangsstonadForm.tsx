@@ -8,7 +8,7 @@ import {
   Element, Undertekst, Undertittel, Normaltekst,
 } from 'nav-frontend-typografi';
 
-import { BeregningsresultatEs } from '@fpsak-frontend/types';
+import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OverstyringKnapp,
 } from '@fpsak-frontend/shared-components';
@@ -24,11 +24,16 @@ import styles from './beregningsresultatEngangsstonadForm.less';
 const minValue1 = minValue(1);
 const maxValue500000 = maxValue(500000);
 
-interface OwnProps {
+interface PureOwnProps {
   overrideReadOnly: boolean;
   kanOverstyre: boolean;
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
   behandlingResultatstruktur?: BeregningsresultatEs;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => void;
+}
+
+interface MappedOwnProps {
   isOverstyrt?: boolean;
 }
 
@@ -38,7 +43,7 @@ interface OwnProps {
  * Presentasjonskomponent. Viser beregnet engangsstønad. Resultatet kan overstyres av Nav-ansatt
  * med overstyr-rettighet.
  */
-export const BeregningsresultatEngangsstonadFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const BeregningsresultatEngangsstonadFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   overrideReadOnly,
   kanOverstyre,
   toggleOverstyring,
@@ -159,7 +164,7 @@ BeregningsresultatEngangsstonadFormImpl.defaultProps = {
 };
 
 const buildInitialValues = createSelector([
-  (_state, ownProps) => ownProps.aksjonspunkter, (_state, ownProps) => ownProps.behandlingResultatstruktur],
+  (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter, (_state, ownProps: PureOwnProps) => ownProps.behandlingResultatstruktur],
 (aksjonspunkter, behandlingResultatstruktur) => {
   const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING);
   return {
@@ -174,17 +179,17 @@ const transformValues = (values) => ({
   begrunnelse: values.begrunnelse,
 });
 
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values) => submitCallback([transformValues(values)]));
+
 const formName = 'BeregningsresultatEngangsstonadForm';
 
-const mapStateToPropsFactory = (_initialState, staticOwnProps) => {
-  const onSubmit = (values) => staticOwnProps.submitCallback([transformValues(values)]);
-  return (state, ownProps) => ({
-    onSubmit,
-    isOverstyrt: !!ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING),
-    initialValues: buildInitialValues(state, ownProps),
-  });
-};
+const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  isOverstyrt: !!ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING),
+  initialValues: buildInitialValues(state, ownProps),
+});
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(BeregningsresultatEngangsstonadFormImpl));
