@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "es2020",
+		"moduleResolution": "node",
+		"types": [ "node", "mocha" ],
+		"allowJs": true,
+		"noEmit": true,
+		"strict": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"jsx": "react",
+		"typeRoots": ["./node_modules/@types", "./@types"],
+		"baseUrl": "packages/",
+	},
+}

@@ -70,6 +70,7 @@
 		"packages/prosess-soknadsfrist",
 		"packages/prosess-varsel-om-revurdering",
 		"packages/prosess-vilkar-adopsjon",
+		"packages/prosess-vilkar-fodsel",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

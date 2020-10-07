@@ -1,14 +1,15 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { expect } from 'chai';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-
 import { ProsessStegBegrunnelseTextField, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
+
 import { buildInitialValues, FodselVilkarFormImpl as UnwrappedForm } from './FodselVilkarForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-fodsel';
 
@@ -91,7 +92,7 @@ describe('<FodselVilkarForm>', () => {
       avslagsarsak: {
         kode: 'TEST',
       },
-    };
+    } as Behandling['behandlingsresultat'];
     const aksjonspunkter = [{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -103,7 +104,7 @@ describe('<FodselVilkarForm>', () => {
       vilkarType: {
         kode: vilkarType.FODSELSVILKARET_MOR,
       },
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -119,7 +120,7 @@ describe('<FodselVilkarForm>', () => {
       avslagsarsak: {
         kode: 'TEST',
       },
-    };
+    } as Behandling['behandlingsresultat'];
     const aksjonspunkter = [{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -131,7 +132,7 @@ describe('<FodselVilkarForm>', () => {
       vilkarType: {
         kode: vilkarType.FODSELSVILKARET_MOR,
       },
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -147,7 +148,7 @@ describe('<FodselVilkarForm>', () => {
       avslagsarsak: {
         kode: 'TEST',
       },
-    };
+    } as Behandling['behandlingsresultat'];
 
     const aksjonspunkter = [{
       definisjon: {
@@ -160,7 +161,7 @@ describe('<FodselVilkarForm>', () => {
       vilkarType: {
         kode: vilkarType.FODSELSVILKARET_MOR,
       },
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 

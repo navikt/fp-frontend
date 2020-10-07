@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Kodeverk, Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import {
+  Behandling, Aksjonspunkt, Medlemskap, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
 import messages from '../i18n/nb_NO.json';
@@ -15,9 +17,7 @@ const intl = createIntl({
 
 interface OwnProps {
   behandling: Behandling;
-  medlemskap?: {
-    fom?: string;
-  };
+  medlemskap?: Medlemskap;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: () => void;
   overrideReadOnly: boolean;
@@ -25,7 +25,7 @@ interface OwnProps {
     isEnabled: boolean;
   };
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
-  avslagsarsaker: Kodeverk[];
+  avslagsarsaker: KodeverkMedNavn[];
   status: string;
   erOverstyrt: boolean;
   panelTittelKode: string;

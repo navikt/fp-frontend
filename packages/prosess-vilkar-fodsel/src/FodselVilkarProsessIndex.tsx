@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import fodselVilkarAksjonspunkterPropType from './propTypes/fodselVilkarAksjonspunkterPropType';
-import fodselVilkarBehandlingPropType from './propTypes/fodselVilkarBehandlingPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import FodselVilkarForm from './components/FodselVilkarForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -14,7 +13,11 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const FodselVilkarProsessIndex = ({
+interface OwnProps {
+  ytelseTypeKode: string;
+}
+
+const FodselVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   aksjonspunkter,
   status,
@@ -43,18 +46,5 @@ const FodselVilkarProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-FodselVilkarProsessIndex.propTypes = {
-  behandling: fodselVilkarBehandlingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(fodselVilkarAksjonspunkterPropType).isRequired,
-  status: PropTypes.string.isRequired,
-  vilkar: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  ytelseTypeKode: PropTypes.string.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  isAksjonspunktOpen: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 export default FodselVilkarProsessIndex;

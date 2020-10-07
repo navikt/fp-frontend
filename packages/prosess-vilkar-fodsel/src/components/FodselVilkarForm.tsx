@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
-import { formPropTypes } from 'redux-form';
 import { connect } from 'react-redux';
+import { InjectedFormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
@@ -15,15 +14,40 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import {
+  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
+} from '@fpsak-frontend/types';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
+
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  aksjonspunkter: Aksjonspunkt[];
+  status: string;
+  vilkar: Vilkar[];
+  ytelseTypeKode: string
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  isApOpen: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface MappedOwnProps {
+  originalErVilkarOk: boolean;
+  erVilkarOk?: boolean;
+  lovReferanse: string;
+  avslagsarsaker: KodeverkMedNavn[];
+}
 
 /**
  * FodselVilkarForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarFormImpl = ({
+export const FodselVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   isApOpen,
   avslagsarsaker,
   lovReferanse,
@@ -31,7 +55,6 @@ export const FodselVilkarFormImpl = ({
   readOnlySubmitButton,
   erVilkarOk,
   originalErVilkarOk,
-  hasAksjonspunkt,
   behandlingId,
   behandlingVersjon,
   ...formProps
@@ -54,7 +77,6 @@ export const FodselVilkarFormImpl = ({
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      hasAksjonspunkt={hasAksjonspunkt}
       customVilkarOppfyltText={{ id: 'FodselVilkarForm.Oppfylt' }}
       customVilkarIkkeOppfyltText={{ id: 'FodselVilkarForm.IkkeOppfylt' }}
     />
@@ -62,41 +84,29 @@ export const FodselVilkarFormImpl = ({
   </ProsessPanelTemplate>
 );
 
-FodselVilkarFormImpl.propTypes = {
-  lovReferanse: PropTypes.string.isRequired,
-  avslagsarsaker: PropTypes.arrayOf(PropTypes.shape({
-    kode: PropTypes.string.isRequired,
-    navn: PropTypes.string.isRequired,
-  })).isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  erVilkarOk: PropTypes.bool,
-  originalErVilkarOk: PropTypes.bool,
-  hasAksjonspunkt: PropTypes.bool,
-  isApOpen: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  ...formPropTypes,
-};
+interface FormValues {
+  erVilkarOk: boolean;
+  avslagCode: string;
+  avslagDato: string;
+  begrunnelse: string;
+}
 
-FodselVilkarFormImpl.defaultProps = {
-  erVilkarOk: undefined,
-  originalErVilkarOk: undefined,
-  hasAksjonspunkt: false,
-};
-
-const validate = ({ erVilkarOk, avslagCode }) => VilkarResultPicker.validate(erVilkarOk, avslagCode);
+const validate = ({
+  erVilkarOk,
+  avslagCode,
+}: FormValues) => VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
 export const buildInitialValues = createSelector(
-  [(state, ownProps) => ownProps.behandlingsresultat,
-    (state, ownProps) => ownProps.aksjonspunkter,
-    (state, ownProps) => ownProps.status],
+  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.status],
   (behandlingsresultat, aksjonspunkter, status) => ({
     ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   }),
 );
 
-const transformValues = (values, aksjonspunkter) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   ...{ kode: aksjonspunkter[0].definisjon.kode },
@@ -104,34 +114,35 @@ const transformValues = (values, aksjonspunkter) => ({
 
 const formName = 'FodselVilkarForm';
 
-export const getFodselVilkarAvslagsarsaker = (isFpFagsak, fodselsvilkarAvslagskoder) => (isFpFagsak
+export const getFodselVilkarAvslagsarsaker = (isFpFagsak: boolean, fodselsvilkarAvslagskoder: KodeverkMedNavn[]) => (isFpFagsak
   ? fodselsvilkarAvslagskoder.filter((arsak) => !avslagsarsakerES.includes(arsak.kode))
   : fodselsvilkarAvslagskoder);
 
 const lagSubmitFn = createSelector([
-  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const {
     aksjonspunkter, status, alleKodeverk, ytelseTypeKode,
   } = initialOwnProps;
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.FODSELSVILKARET_MOR];
+  // @ts-ignore Avslagsårsakane er spesielle sidan dei er gruppert på vilkårtype. Så alleKodeverk har eigentleg feil type gjennom
+  // heile applikasjonen. Spørst om ein bør flytta ut avslagsårsaker til eige kodeverk
   const filtrerteAvslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER, avslagsarsaker);
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap: any) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  return (state, ownProps) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const { behandlingId, behandlingVersjon, vilkar } = ownProps;
     return {
       onSubmit: lagSubmitFn(ownProps),
       avslagsarsaker: filtrerteAvslagsarsaker,
       originalErVilkarOk: erVilkarOk,
-      initialValues: buildInitialValues(state, ownProps),
+      initialValues: buildInitialValues(ownProps),
       erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
       lovReferanse: vilkar[0].lovReferanse,
-      hasAksjonspunkt: aksjonspunkter.length > 0,
     };
   };
 };
