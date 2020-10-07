@@ -10,11 +10,10 @@ import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/ut
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  KodeverkMedNavn, NavAnsatt, Fagsak,
+  KodeverkMedNavn, NavAnsatt, Fagsak, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
-import BehandlingAppKontekst from './behandlingAppKontekstTsType';
 import getAccessRights from '../app/util/access';
 import {
   getProsessStegLocation, getFaktaLocation, getLocationWithDefaultProsessStegAndFakta,

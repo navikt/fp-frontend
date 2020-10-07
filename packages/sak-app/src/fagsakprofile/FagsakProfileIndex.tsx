@@ -7,7 +7,7 @@ import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import {
-  KodeverkMedNavn, Fagsak, Aksjonspunkt, Risikoklassifisering,
+  KodeverkMedNavn, Fagsak, Aksjonspunkt, Risikoklassifisering, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -24,7 +24,6 @@ import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 
 import styles from './fagsakProfileIndex.less';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 
 const findPathToBehandling = (saksnummer, location, alleBehandlinger) => {
   if (alleBehandlinger.length === 1) {

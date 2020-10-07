@@ -1,6 +1,7 @@
 export { default as Aksjonspunkt } from './src/aksjonspunktTsType';
 export { default as Arbeidsforhold } from './src/arbeidsforholdTsType';
 export { default as Behandling } from './src/behandlingTsType';
+export { default as BehandlingAppKontekst } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
 export { default as Beregningsgrunnlag } from './src/beregningsgrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';

@@ -68,6 +68,7 @@
 		"packages/prosess-fakta-fodsel-sammenligning",
 		"packages/prosess-saksopplysninger",
 		"packages/prosess-soknadsfrist",
+		"packages/prosess-varsel-om-revurdering",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

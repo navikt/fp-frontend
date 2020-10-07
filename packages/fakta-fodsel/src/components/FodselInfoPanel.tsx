@@ -49,7 +49,7 @@ interface OwnProps {
   vedtaksDatoSomSvangerskapsuke?: string;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
-  familiehendelseOriginalBehandling?: FamilieHendelseSamling;
+  familiehendelseOriginalBehandling?: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   familiehendelse: FamilieHendelseSamling;
   behandlingId: number;
@@ -187,7 +187,7 @@ export class FodselInfoPanelImpl extends Component<OwnProps> {
               vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
               soknad={soknad}
               soknadOriginalBehandling={soknadOriginalBehandling}
-              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling?.gjeldende}
+              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
             />
           )}
         </form>

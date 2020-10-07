@@ -8,14 +8,17 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import MenySakIndex from '@fpsak-frontend/sak-meny';
-import { Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
 import * as useHistory from '../app/useHistory';
 import * as useLocation from '../app/useLocation';
+import { VergeBehandlingmenyValg } from './sakRettigheterTsType';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
-import { VergeBehandlingmenyValg } from './sakRettigheterTsType';
+
+const location = {
+  pathname: '', search: '', state: {}, hash: '',
+};
 
 const navAnsatt = {
   brukernavn: 'Test',
