@@ -317,26 +317,26 @@ const buildInitialValues = createSelector(
   },
 );
 
-const mapStateToPropsFactory = (initialState, ownPropsStatic) => {
-  const onSubmit = (values) => ownPropsStatic.submitCallback([transformValues(values, ownPropsStatic.apCodes[0])]);
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.apCodes],
+(submitCallback, apCodes) => (values) => submitCallback([transformValues(values, apCodes[0])]));
 
-  return (state, ownProps) => {
-    const {
-      sprakkode, behandlingId, behandlingVersjon, tilbakekrevingvalg, simuleringResultat, fagsak,
-    } = ownProps;
-    const hasOpenTilbakekrevingsbehandling = tilbakekrevingvalg !== undefined
-      && tilbakekrevingvalg.videreBehandling.kode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
-    return {
-      varseltekst: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'varseltekst'),
-      initialValues: buildInitialValues(state, ownProps),
-      behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
-      saksnummer: fagsak.saksnummer,
-      isForeldrepenger: fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER,
-      hasOpenTilbakekrevingsbehandling,
-      sprakkode,
-      simuleringResultat,
-      onSubmit,
-    };
+const mapStateToProps = (state, ownProps) => {
+  const {
+    sprakkode, behandlingId, behandlingVersjon, tilbakekrevingvalg, simuleringResultat, fagsak,
+  } = ownProps;
+  const hasOpenTilbakekrevingsbehandling = tilbakekrevingvalg !== undefined
+    && tilbakekrevingvalg.videreBehandling.kode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
+  return {
+    varseltekst: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'varseltekst'),
+    initialValues: buildInitialValues(state, ownProps),
+    behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
+    saksnummer: fagsak.saksnummer,
+    isForeldrepenger: fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER,
+    onSubmit: lagSubmitFn(ownProps),
+    hasOpenTilbakekrevingsbehandling,
+    sprakkode,
+    simuleringResultat,
   };
 };
 
@@ -346,7 +346,7 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: formName,
   enableReinitialize: true,
 })(injectIntl(AvregningPanelImpl)));

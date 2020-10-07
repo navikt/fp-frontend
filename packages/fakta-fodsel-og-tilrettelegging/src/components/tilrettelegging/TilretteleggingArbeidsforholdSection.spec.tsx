@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { CheckboxField, DatepickerField } from '@fpsak-frontend/form';
 
-import Arbeidsforhold from '../../types/arbeidsforholdTsType';
+import ArbeidsforholdFodselOgTilrettelegging from '../../types/arbeidsforholdFodselOgTilretteleggingTsType';
 import { TilretteleggingArbeidsforholdSection } from './TilretteleggingArbeidsforholdSection';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 
@@ -19,7 +19,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverIdentVisning: '111222333',
         eksternArbeidsforholdReferanse: 'ARB001-001',
         velferdspermisjoner: [],
-      } as Arbeidsforhold}
+      } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger
       behandlingId={1}
@@ -48,7 +48,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverIdent: '',
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
-      } as Arbeidsforhold}
+      } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger={false}
       behandlingId={1}

@@ -178,6 +178,7 @@ interface SelectorProps {
   overstyringApKode: string;
   medlemskapFom: string;
   behandlingType: Kodeverk;
+  submitCallback: (data: any) => void;
 }
 
 const buildInitialValues = createSelector(
@@ -226,9 +227,12 @@ const transformValues = (values, overstyringApKode) => ({
 // @ts-ignore Korleis fikse dette på ein bra måte?
 const validate = (values: { erVilkarOk: boolean; avslagCode: string }) => VilkarResultPicker.validate(values.erVilkarOk, values.avslagCode);
 
+const lagSubmitFn = createSelector([
+  (ownProps: SelectorProps) => ownProps.submitCallback, (ownProps: SelectorProps) => ownProps.overstyringApKode],
+(submitCallback, overstyringApKode) => (values) => submitCallback([transformValues(values, overstyringApKode)]));
+
 const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
-  const { overstyringApKode, submitCallback } = initialOwnProps;
-  const onSubmit = (values) => submitCallback([transformValues(values, overstyringApKode)]);
+  const { overstyringApKode } = initialOwnProps;
   const validateFn = (values) => validate(values);
   const aksjonspunktCodes = initialOwnProps.aksjonspunkter.map((a) => a.definisjon.kode);
   const formName = `VilkarresultatForm_${overstyringApKode}`;
@@ -248,9 +252,9 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
     const erVilkarOk = vilkarUtfallType.IKKE_VURDERT !== ownProps.status ? erOppfylt : undefined;
 
     return {
-      onSubmit,
       aksjonspunktCodes,
       initialValues,
+      onSubmit: lagSubmitFn(ownProps),
       customVilkarOppfyltText: getCustomVilkarTextForOppfylt(ownProps),
       customVilkarIkkeOppfyltText: getCustomVilkarTextForIkkeOppfylt(ownProps),
       isSolvable: erOverstyrt || isSolvable,

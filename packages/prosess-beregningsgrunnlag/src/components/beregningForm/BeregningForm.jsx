@@ -364,11 +364,12 @@ BeregningFormImpl.propTypes = {
   vilkaarBG: PropTypes.shape().isRequired,
 };
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const {
-    gjeldendeAksjonspunkter, relevanteStatuser,
-    submitCallback, beregningsgrunnlag,
-  } = initialOwnProps;
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.gjeldendeAksjonspunkter,
+  (ownProps) => ownProps.relevanteStatuser,
+  (ownProps) => ownProps.submitCallback,
+  (ownProps) => ownProps.beregningsgrunnlag],
+(gjeldendeAksjonspunkter, relevanteStatuser, submitCallback, beregningsgrunnlag) => {
   const allePerioder = beregningsgrunnlag ? beregningsgrunnlag.beregningsgrunnlagPeriode : [];
   const alleAndelerIForstePeriode = allePerioder && allePerioder.length > 0
     ? allePerioder[0].beregningsgrunnlagPrStatusOgAndel : [];
@@ -380,13 +381,15 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
 
   const onSubmit = (values) => submitCallback(transformValues(values, relevanteStatuser, alleAndelerIForstePeriode, gjeldendeAksjonspunkter,
     allePerioder, harNyttIkkeSamletSammenligningsgrunnlag));
-  return (state, ownProps) => ({
-    onSubmit,
-    initialValues: buildInitialValues(state, ownProps),
-  });
-};
+  return onSubmit;
+});
 
-const BeregningForm = connect(mapStateToPropsFactory)(behandlingForm({
+const mapStateToProps = (state, ownProps) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  initialValues: buildInitialValues(state, ownProps),
+});
+
+const BeregningForm = connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(BeregningFormImpl));
 

@@ -2,7 +2,9 @@ import React, { FunctionComponent } from 'react';
 import {
   FormattedMessage, injectIntl, WrappedComponentProps,
 } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { Undertittel, Element } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -10,6 +12,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fa
 import { AksjonspunktBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption, behandlingForm } from '@fpsak-frontend/form';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import styles from './innhentDokOpptjeningUtlandPanel.less';
 
@@ -18,25 +21,27 @@ const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET: 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET',
 };
 
-interface OwnProps {
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
-  dirty: boolean;
   submittable: boolean;
-  initialValues: { begrunnelse?: string };
-  handleSubmit: () => void;
-  form: string;
+  submitCallback: (data: any) => void;
+  aksjonspunkt: Aksjonspunkt;
+  dokStatus?: string;
 }
 
-export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+interface MappedOwnProps {
+  initialValues: { begrunnelse?: string };
+}
+
+export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   behandlingId,
   behandlingVersjon,
   readOnly,
   harApneAksjonspunkter,
-  dirty,
   submittable,
   initialValues,
   handleSubmit,
@@ -70,7 +75,6 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps & Wrapp
         />
       </RadioGroupField>
       <FaktaBegrunnelseTextField
-        isDirty={dirty}
         isSubmittable={submittable}
         isReadOnly={readOnly}
         hasBegrunnelse={!!initialValues.begrunnelse}
@@ -94,16 +98,16 @@ const transformValues = (values) => ({
   ...values,
 });
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback([transformValues(values)]);
-  return (_state, ownProps) => ({
-    onSubmit,
-    initialValues: {
-      dokStatus: ownProps.dokStatus,
-      ...FaktaBegrunnelseTextField.buildInitialValues(ownProps.aksjonspunkt),
-    },
-  });
-};
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
 
-// @ts-ignore TODO Fiks
-export default connect(mapStateToPropsFactory)(behandlingForm({ form: 'InnhentDokOpptjeningUtlandPanel' })(injectIntl(InnhentDokOpptjeningUtlandPanel)));
+const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+  onSubmit: lagSubmitFn(ownProps),
+  initialValues: {
+    dokStatus: ownProps.dokStatus,
+    ...FaktaBegrunnelseTextField.buildInitialValues(ownProps.aksjonspunkt),
+  },
+});
+
+export default connect(mapStateToProps)(behandlingForm({ form: 'InnhentDokOpptjeningUtlandPanel' })(injectIntl(InnhentDokOpptjeningUtlandPanel)));

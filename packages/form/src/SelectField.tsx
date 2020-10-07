@@ -13,6 +13,7 @@ interface SelectFieldProps {
   validate?: (((text: any) => ({ id: string; length?: undefined }
     | { length: any; id?: undefined })[])
     | ((value: any) => { id: string }[])
+    | ((value: any, allValues: any, props: any) => { id: string; }[])
     | ((text: any) => ({ id: string; text?: undefined }
     | { text: any; id?: undefined })[]))[];
   readOnly?: boolean;

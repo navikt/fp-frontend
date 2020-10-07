@@ -177,7 +177,6 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
           behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnly && isMedUnderskriver(aksjonspunktCode) && !isFatterVedtak(aksjonspunktCode)}
-          hasEmptyRequiredFields={false}
           isBehandlingFormSubmitting={isBehandlingFormSubmitting}
           isBehandlingFormDirty={isBehandlingFormDirty}
           hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
@@ -190,11 +189,10 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
           behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnly && isVedtakUtenToTrinn(aksjonspunktCode) && !isFatterVedtak(aksjonspunktCode)}
-          hasEmptyRequiredFields={false}
           isBehandlingFormSubmitting={isBehandlingFormSubmitting}
           isBehandlingFormDirty={isBehandlingFormDirty}
           hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-          textCode="Ankebehandling.Resultat.FerdigstillAnke"
+          textCode={skalViseForhaandlenke(ankeVurderingVerdi) ? 'Ankebehandling.Resultat.FerdigstillAnke' : 'Ankebehandling.Resultat.VentMerknader'}
         />
         <span>&nbsp;</span>
         {skalViseForhaandlenke(ankeVurderingVerdi)
@@ -230,22 +228,28 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
 
 const formName = 'ankeResultatForm';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const vedtaksaksjonspunkt = initialOwnProps.aksjonspunkter
-    .filter((ap: Aksjonspunkt) => initialOwnProps.readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
+const finnAksjonspunktKode = createSelector([
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter, (ownProps: PureOwnProps) => ownProps.readOnly],
+(aksjonspunkter, readOnly) => {
+  const vedtaksaksjonspunkt = aksjonspunkter
+    .filter((ap: Aksjonspunkt) => readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
     .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
-  const aksjonspunktCode = !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? aksjonspunktCodes.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
-  const onSubmit = (values: any) => initialOwnProps.submitCallback([transformValues(values, aksjonspunktCode)]);
-  return (_state, ownProps: PureOwnProps) => ({
-    aksjonspunktCode,
-    initialValues: buildInitialValues(ownProps),
-    ankeVurderingVerdi: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
-    fritekstTilBrev: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.fritekstTilBrev : null,
-    onSubmit,
-  });
-};
+  return !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? aksjonspunktCodes.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
+});
 
-const BehandleResultatForm = connect(mapStateToPropsFactory)(behandlingForm({
+const lagSubmitFn = createSelector([
+  (ownProps: PureOwnProps) => ownProps.submitCallback, finnAksjonspunktKode],
+(submitCallback, aksjonspunktCode) => (values: any) => submitCallback([transformValues(values, aksjonspunktCode)]));
+
+const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+  aksjonspunktCode: finnAksjonspunktKode(ownProps),
+  initialValues: buildInitialValues(ownProps),
+  ankeVurderingVerdi: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
+  fritekstTilBrev: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.fritekstTilBrev : null,
+  onSubmit: lagSubmitFn(ownProps),
+});
+
+const BehandleResultatForm = connect(mapStateToProps)(behandlingForm({
   form: formName,
 })(AnkeResultatForm));
 

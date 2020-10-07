@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import { Image } from '@fpsak-frontend/shared-components';
@@ -13,7 +14,12 @@ describe('<UtlandPanel>', () => {
   it('skal vise komponent både før og etter editeringsmodus', () => {
     const wrapper = shallowWithIntl(
       <UtlandPanel
+        {...reduxFormPropsMock}
         intl={intlMock}
+        behandlingId={1}
+        behandlingVersjon={2}
+        aksjonspunkter={[]}
+        submitCallback={() => undefined}
         readOnly={false}
         dirty
         handleSubmit={sinon.spy()}

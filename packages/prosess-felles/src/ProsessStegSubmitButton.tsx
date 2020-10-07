@@ -5,26 +5,37 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 
-const isDisabled = (isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields) => {
+const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean) => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
     return true;
   }
   return (!isDirty && hasEmptyRequiredFields) || hasEmptyRequiredFields;
 };
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  formNames?: string[];
+  formName: string;
+  isDirty?: boolean;
+  isBehandlingFormSubmitting: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
+  isBehandlingFormDirty: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
+  hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: { id: string; }[]) => (state: any) => boolean;
   isReadOnly: boolean;
   isSubmittable: boolean;
+  textCode?: string;
+}
+
+interface MappedOwnProps {
   isSubmitting: boolean;
   isDirty: boolean;
   hasEmptyRequiredFields: boolean;
-  textCode?: string;
 }
 
 /**
  * ProsessStegSubmitButton
  */
-export const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
+export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   isReadOnly,
   isSubmittable,
   isSubmitting,
@@ -47,7 +58,7 @@ export const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
   </>
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = ownProps;
   const fNames = ownProps.formNames ? ownProps.formNames : [ownProps.formName];
   const formNames = fNames.map((f) => (f.includes('.') ? f.substr(f.lastIndexOf('.') + 1) : f));

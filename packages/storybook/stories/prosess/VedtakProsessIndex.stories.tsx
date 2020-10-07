@@ -2,7 +2,9 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
-import { Behandling, BeregningsresultatEs, Beregningsgrunnlag } from '@fpsak-frontend/types';
+import {
+  Behandling, BeregningsresultatEs, Beregningsgrunnlag, Medlemskap, BeregningsresultatFp,
+} from '@fpsak-frontend/types';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -67,7 +69,8 @@ const vilkar = [{
 const resultatstruktur = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
-};
+  sokerErMor: true,
+} as BeregningsresultatFp;
 
 export default {
   title: 'prosess/prosess-vedtak',
@@ -84,14 +87,13 @@ export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerUtenOversty
     behandling={behandling as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -106,14 +108,13 @@ export const visGodkjentForeldrepengerForSaksbehandlerUtenOverstyring = () => (
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -122,14 +123,13 @@ export const visInnvilgetForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyr
     behandling={behandling as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -144,14 +144,13 @@ export const visGodkjentForeldrepengerForSaksbehandlerMedOverstyring = () => (
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -178,14 +177,13 @@ export const visGodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyri
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -203,14 +201,13 @@ export const visAvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyri
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -231,14 +228,13 @@ export const visGodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring = 
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -247,14 +243,13 @@ export const visInnvilgetForeldrepengerDerBeregningErManueltFastsatt = () => (
     behandling={behandling as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -279,14 +274,13 @@ export const visAvslåttForeldrepengerDerBeregningErManueltFastsatt = () => (
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -302,7 +296,7 @@ export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () =>
     behandling={behandling as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.VURDERE_ANNEN_YTELSE,
@@ -347,7 +341,6 @@ export const visTeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = () =>
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -359,14 +352,13 @@ export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOversty
   <VedtakProsessIndex
     behandling={behandling as Behandling}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -384,14 +376,13 @@ export const visGodkjentEngangsstønadForSaksbehandlerUtenOverstyring = () => (
       },
     } as Behandling}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -403,14 +394,13 @@ export const visInnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyr
   <VedtakProsessIndex
     behandling={behandling as Behandling}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -422,14 +412,13 @@ export const visInnvilgetEngangsstønadDerBeregningErManueltFastsatt = () => (
   <VedtakProsessIndex
     behandling={behandling as Behandling}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -458,14 +447,13 @@ export const visAvslåttEngangsstønadDerBeregningErManueltFastsatt = () => (
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningresultatEngangsstonad={{
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -488,14 +476,13 @@ export const visInnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOver
   <VedtakProsessIndex
     behandling={behandling as Behandling}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -512,14 +499,13 @@ export const visAvslåttSvangerskapspengerOgVisModal = () => (
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -551,14 +537,13 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -590,14 +575,13 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -625,14 +609,13 @@ export const visInnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandler
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -664,14 +647,13 @@ export const visGodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring 
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -706,14 +688,13 @@ export const visGodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerM
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -739,14 +720,13 @@ export const visAvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerM
       },
     }}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -775,14 +755,13 @@ export const visGodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOve
       },
     }}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
   />
 );
 
@@ -803,8 +782,7 @@ export const visOpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyrin
     } as Behandling}
     vilkar={vilkar}
     beregningresultatForeldrepenger={resultatstruktur}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     isReadOnly={boolean('isReadOnly', false)}
@@ -835,14 +813,13 @@ export const visInnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsa
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -889,14 +866,13 @@ export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkk
       },
       overstyrbar: true,
     }]}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{
@@ -924,14 +900,13 @@ export const visOpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt
     } as Behandling}
     beregningresultatForeldrepenger={resultatstruktur}
     vilkar={vilkar}
-    medlemskap={{ fom: '2019-01-01' }}
+    medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     aksjonspunkter={[]}
     isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click')}
     submitCallback={action('button-click')}
     ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
     alleKodeverk={alleKodeverk as any}
-    sendVarselOmRevurdering={boolean('sendVarselOmRevurdering', false)}
     beregningsgrunnlag={{
       beregningsgrunnlagPeriode: [{
         beregningsgrunnlagPrStatusOgAndel: [{

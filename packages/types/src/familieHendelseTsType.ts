@@ -14,9 +14,15 @@ export type FamilieHendelse = Readonly<{
   morForSykVedFodsel?: boolean;
   vedtaksDatoSomSvangerskapsuke?: string;
   soknadType: Kodeverk;
-  adopsjonFodelsedatoer?: {};
+  adopsjonFodelsedatoer?: any;
   omsorgsovertakelseDato?: string;
   antallBarnTilBeregning?: number;
+  ektefellesBarn?: boolean;
+  mannAdoptererAlene?: boolean;
+  vilkarType?: Kodeverk;
+  ankomstNorge?: string;
+  erOverstyrt?: boolean;
+  foreldreansvarDato?: string;
 }>
 
 export type FamilieHendelseSamling = Readonly<{

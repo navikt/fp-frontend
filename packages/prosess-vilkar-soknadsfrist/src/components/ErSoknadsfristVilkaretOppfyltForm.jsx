@@ -237,12 +237,15 @@ const findTextCode = createSelector([
 
 const formName = 'ErSoknadsfristVilkaretOppfyltForm';
 
+const lagSubmitFn = createSelector([
+  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+
 const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const {
-    aksjonspunkter, vilkar, alleKodeverk, submitCallback,
+    aksjonspunkter, vilkar, alleKodeverk,
   } = initialOwnProps;
   const vilkarCodes = aksjonspunkter.map((a) => a.vilkarType.kode);
-  const onSubmit = (values) => submitCallback([transformValues(values, aksjonspunkter)]);
   const antallDagerSoknadLevertForSent = vilkar
     .find((v) => vilkarCodes.includes(v.vilkarType.kode)).merknadParametere.antallDagerSoeknadLevertForSent;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
@@ -251,8 +254,8 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
     const { behandlingId, behandlingVersjon } = ownProps;
     return {
       getKodeverknavn,
-      onSubmit,
       antallDagerSoknadLevertForSent,
+      onSubmit: lagSubmitFn(ownProps),
       initialValues: buildInitialValues(state, ownProps),
       dato: findDate(state, ownProps),
       textCode: findTextCode(state, ownProps),

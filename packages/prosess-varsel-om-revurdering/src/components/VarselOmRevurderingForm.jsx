@@ -259,17 +259,19 @@ const formName = 'VarselOmRevurderingForm';
 
 const nullSafe = (value) => (value || {});
 
-const mapStateToPropsFactory = (initialState, ownProps) => {
+const lagSubmitFn = createSelector([(ownProps) => ownProps.submitCallback],
+  (submitCallback) => (values) => submitCallback([values]));
+
+const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const {
-    behandlingId, behandlingVersjon, behandlingType, behandlingArsaker, aksjonspunkter, submitCallback, sprakkode, familiehendelse,
-  } = ownProps;
-  const onSubmit = (values) => submitCallback([values]);
+    behandlingId, behandlingVersjon, behandlingType, behandlingArsaker, aksjonspunkter, sprakkode, familiehendelse,
+  } = initialOwnProps;
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
   const aksjonspunkt = aksjonspunkter[0];
-  const ventearsaker = ownProps.alleKodeverk[kodeverkTyper.VENT_AARSAK];
+  const ventearsaker = initialOwnProps.alleKodeverk[kodeverkTyper.VENT_AARSAK];
   const languageCode = getLanguageCodeFromSprakkode(sprakkode);
 
-  return (state) => ({
+  return (state, ownProps) => ({
     initialValues: buildInitialValues(state, ownProps),
     aksjonspunktStatus: aksjonspunkt.status.kode,
     ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'begrunnelse', 'kode'),
@@ -277,10 +279,10 @@ const mapStateToPropsFactory = (initialState, ownProps) => {
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
     behandlingTypeKode: behandlingType.kode,
+    onSubmit: lagSubmitFn(ownProps),
     languageCode,
     ventearsaker,
     erAutomatiskRevurdering,
-    onSubmit,
   });
 };
 

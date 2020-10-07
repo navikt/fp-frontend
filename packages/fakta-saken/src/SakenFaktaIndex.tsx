@@ -1,20 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling } from '@fpsak-frontend/types';
+import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
+
 import SakenFaktaPanel from './components/SakenFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {
   behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
   utlandDokStatus?: {
     dokStatus: string;
   };
-  submitCallback: (data: any) => void;
-  submittable: boolean;
-  harApneAksjonspunkter: boolean;
-  readOnly: boolean;
 }
 
 const cache = createIntlCache();
@@ -24,7 +21,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const SakenFaktaIndex: FunctionComponent<OwnProps> = ({
+const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   aksjonspunkter,
   utlandDokStatus,

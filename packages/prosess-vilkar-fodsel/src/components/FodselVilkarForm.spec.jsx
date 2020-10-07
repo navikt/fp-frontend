@@ -4,7 +4,7 @@ import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
-import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
+import { ProsessStegBegrunnelseTextField, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -54,7 +54,7 @@ describe('<FodselVilkarForm>', () => {
       behandlingVersjon={1}
     />);
 
-    const selector = wrapper.find('injectIntl(VilkarResultPickerImpl)');
+    const selector = wrapper.find(VilkarResultPicker);
     expect(selector).to.have.length(1);
     expect(selector.prop('avslagsarsaker')).to.eql([{
       kode: 'TEST_KODE',

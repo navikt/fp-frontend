@@ -10,13 +10,13 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 
-import Arbeidsforhold from '../../types/arbeidsforholdTsType';
+import ArbeidsforholdFodselOgTilrettelegging from '../../types/arbeidsforholdFodselOgTilretteleggingTsType';
 import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
 import VelferdspermisjonSection from './VelferdspermisjonSection';
 
-const utledArbeidsforholdTittel = (arbeidsforhold: Arbeidsforhold) => {
+const utledArbeidsforholdTittel = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging) => {
   let tittel = arbeidsforhold.arbeidsgiverNavn;
   if (arbeidsforhold.arbeidsgiverIdent) {
     tittel += ` (${arbeidsforhold.arbeidsgiverIdentVisning})`;
@@ -33,7 +33,7 @@ const utledArbeidsforholdTittel = (arbeidsforhold: Arbeidsforhold) => {
 
 interface OwnProps {
   readOnly: boolean;
-  arbeidsforhold: Arbeidsforhold;
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   formSectionName: string;
   visTilrettelegginger: boolean;
   behandlingId: number;

@@ -11,6 +11,9 @@ interface CheckboxFieldProps {
   label: LabelType;
   validate?: ((value: string) => boolean | undefined)[] | ((value: string) => boolean | undefined);
   readOnly?: boolean;
+  className?: string;
+  disabled?: boolean;
+  onClick?: () => void;
 }
 
 interface RenderCheckboxFieldProps {
