@@ -5,17 +5,19 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-soknadsfrist';
+import { Aksjonspunkt, Behandling, Soknad } from '@fpsak-frontend/types';
 
+import alleKodeverk from '../mocks/alleKodeverk.json';
 import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const soknad = {
   mottattDato: '2019-01-01',
-};
+} as Soknad;
 
 const uttakPeriodeGrense = {
   mottattDato: '2019-01-01',
@@ -23,6 +25,18 @@ const uttakPeriodeGrense = {
   soknadsperiodeStart: '2019-01-01',
   soknadsperiodeSlutt: '2019-01-10',
   soknadsfristForForsteUttaksdato: '2019-10-01',
+};
+
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', true),
+  status: '',
+  vilkar: [],
 };
 
 export default {
@@ -33,7 +47,7 @@ export default {
 
 export const visPanelForSoknadsfrist = () => (
   <VurderSoknadsfristForeldrepengerIndex
-    behandling={object('behandling', behandling)}
+    {...standardProsessProps}
     uttakPeriodeGrense={object('uttakPeriodeGrense', uttakPeriodeGrense)}
     soknad={object('soknad', soknad)}
     aksjonspunkter={[{
@@ -44,10 +58,6 @@ export const visPanelForSoknadsfrist = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnly', true)}
-    isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
+    }] as Aksjonspunkt[]}
   />
 );

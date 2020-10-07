@@ -31,3 +31,4 @@ export { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/
 export { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioder } from './src/uttakKontrollerFaktaPerioderTsType';
 export { default as Opptjening, OpptjeningAktivitet } from './src/opptjeningTsType';
 export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
+export { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';

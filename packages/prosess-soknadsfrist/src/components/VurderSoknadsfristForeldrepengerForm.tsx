@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { formPropTypes } from 'redux-form';
 import { createSelector } from 'reselect';
 import moment from 'moment';
+import { InjectedFormProps } from 'redux-form';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import {
@@ -25,17 +24,39 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   ProsessStegBegrunnelseTextField, ProsessStegSubmitButton,
 } from '@fpsak-frontend/prosess-felles';
+import { Aksjonspunkt, UttakPeriodeGrense } from '@fpsak-frontend/types';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
-const isEdited = (hasAksjonspunkt, gyldigSenFremsetting) => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: string) => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  uttakPeriodeGrense?: UttakPeriodeGrense;
+  mottattDato: string;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => any;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  isApOpen: boolean;
+}
+
+interface MappedOwnProps {
+  gyldigSenFremsetting?: string;
+  antallDagerSoknadLevertForSent?: number;
+  hasAksjonspunkt: boolean;
+  soknadsperiodeStart?: string;
+  soknadsperiodeSlutt?: string;
+  soknadsfristdato?: string;
+}
 
 /**
  * VurderSoknadsfristForeldrepengerForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
-export const VurderSoknadsfristForeldrepengerFormImpl = ({
+export const VurderSoknadsfristForeldrepengerFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   readOnlySubmitButton,
   mottattDato,
@@ -59,7 +80,7 @@ export const VurderSoknadsfristForeldrepengerFormImpl = ({
         id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
         values={{
           numberOfDays: antallDagerSoknadLevertForSent,
-          soknadsfristdato: moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT),
+          soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
         }}
       />]}
     </AksjonspunktHelpTextTemp>
@@ -82,12 +103,14 @@ export const VurderSoknadsfristForeldrepengerFormImpl = ({
             {mottattDato
               && <Normaltekst>{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</Normaltekst>}
           </Column>
-          <Column xs="6">
-            <Undertekst><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Undertekst>
-            <Normaltekst>
-              {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(soknadsperiodeSlutt).format(DDMMYYYY_DATE_FORMAT)}`}
-            </Normaltekst>
-          </Column>
+          {soknadsperiodeStart && soknadsperiodeSlutt && (
+            <Column xs="6">
+              <Undertekst><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Undertekst>
+              <Normaltekst>
+                {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(soknadsperiodeSlutt).format(DDMMYYYY_DATE_FORMAT)}`}
+              </Normaltekst>
+            </Column>
+          )}
         </Row>
       </Column>
     </Row>
@@ -132,33 +155,31 @@ export const VurderSoknadsfristForeldrepengerFormImpl = ({
   </>
 );
 
-VurderSoknadsfristForeldrepengerFormImpl.propTypes = {
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  antallDagerSoknadLevertForSent: PropTypes.number,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  isApOpen: PropTypes.bool.isRequired,
-  hasAksjonspunkt: PropTypes.bool,
-  ...formPropTypes,
-};
-
 VurderSoknadsfristForeldrepengerFormImpl.defaultProps = {
-  antallDagerSoknadLevertForSent: undefined,
   hasAksjonspunkt: false,
 };
 
 export const buildInitialValues = createSelector(
-  [(state, ownProps) => ownProps.aksjonspunkter,
-    (state, ownProps) => ownProps.uttakPeriodeGrense,
-    (state, ownProps) => ownProps.mottattDato],
-  (aksjonspunkter, uttaksperiodegrense = {}, mottattDato) => ({
-    gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : uttaksperiodegrense.mottattDato !== mottattDato,
-    ansesMottatt: uttaksperiodegrense.mottattDato,
-    ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
-  }),
+  [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.uttakPeriodeGrense,
+    (ownProps: PureOwnProps) => ownProps.mottattDato],
+  (aksjonspunkter, uttaksperiodegrense, mottattDato) => {
+    const upgMottattDato = uttaksperiodegrense ? uttaksperiodegrense.mottattDato : undefined;
+    return {
+      gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : upgMottattDato !== mottattDato,
+      ansesMottatt: upgMottattDato,
+      ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
+    };
+  },
 );
 
-const transformValues = (values, aksjonspunkter) => ({
+interface FormValues {
+  gyldigSenFremsetting: string;
+  ansesMottatt: string;
+  begrunnelse: string;
+}
+
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
   kode: aksjonspunkter[0].definisjon.kode,
@@ -166,24 +187,23 @@ const transformValues = (values, aksjonspunkter) => ({
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
 
 const formName = 'VurderSoknadsfristForeldrepengerForm';
 
-const mapStateToPropsFactory = (state, ownProps) => {
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => {
   const uttaksperiodegrense = ownProps.uttakPeriodeGrense;
   const { behandlingId, behandlingVersjon, aksjonspunkter } = ownProps;
   return {
     onSubmit: lagSubmitFn(ownProps),
-    initialValues: buildInitialValues(state, ownProps),
+    initialValues: buildInitialValues(ownProps),
     gyldigSenFremsetting: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
-    antallDagerSoknadLevertForSent: uttaksperiodegrense ? uttaksperiodegrense.antallDagerLevertForSent : {},
-    soknadsperiodeStart: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeStart : {},
-    soknadsperiodeSlutt: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeSlutt : {},
-    soknadsfristdato: uttaksperiodegrense ? uttaksperiodegrense.soknadsfristForForsteUttaksdato : {},
+    antallDagerSoknadLevertForSent: uttaksperiodegrense ? uttaksperiodegrense.antallDagerLevertForSent : undefined,
+    soknadsperiodeStart: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeStart : undefined,
+    soknadsperiodeSlutt: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeSlutt : undefined,
+    soknadsfristdato: uttaksperiodegrense ? uttaksperiodegrense.soknadsfristForForsteUttaksdato : undefined,
     hasAksjonspunkt: aksjonspunkter.length > 0,
-    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
   };
 };
 

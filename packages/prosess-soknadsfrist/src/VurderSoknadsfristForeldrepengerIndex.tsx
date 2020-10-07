@@ -1,11 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import soknadsfristAksjonspunkterPropType from './propTypes/soknadsfristAksjonspunkterPropType';
-import soknadsfristBehandlingPropType from './propTypes/soknadsfristBehandlingPropType';
-import soknadsfristUttakPeriodeGrensePropType from './propTypes/soknadsfristUttakPeriodeGrensePropType';
-import soknadsfristSoknadPropType from './propTypes/soknadsfristSoknadPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { Soknad, UttakPeriodeGrense } from '@fpsak-frontend/types';
+
 import VurderSoknadsfristForeldrepengerForm from './components/VurderSoknadsfristForeldrepengerForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -16,7 +14,12 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const VurderSoknadsfristForeldrepengerIndex = ({
+interface OwnProps {
+  uttakPeriodeGrense?: UttakPeriodeGrense;
+  soknad: Soknad;
+}
+
+const VurderSoknadsfristForeldrepengerIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   uttakPeriodeGrense,
   soknad,
@@ -40,16 +43,5 @@ const VurderSoknadsfristForeldrepengerIndex = ({
     />
   </RawIntlProvider>
 );
-
-VurderSoknadsfristForeldrepengerIndex.propTypes = {
-  behandling: soknadsfristBehandlingPropType.isRequired,
-  uttakPeriodeGrense: soknadsfristUttakPeriodeGrensePropType.isRequired,
-  soknad: soknadsfristSoknadPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(soknadsfristAksjonspunkterPropType).isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  isAksjonspunktOpen: PropTypes.bool.isRequired,
-};
 
 export default VurderSoknadsfristForeldrepengerIndex;
