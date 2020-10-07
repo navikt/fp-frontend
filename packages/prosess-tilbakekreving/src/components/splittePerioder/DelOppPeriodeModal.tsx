@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
 import { InjectedFormProps } from 'redux-form';
@@ -135,4 +135,4 @@ export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) =>
 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: 'DelOppPeriode',
-})(DelOppPeriodeModalImpl));
+})(injectIntl(DelOppPeriodeModalImpl)));
