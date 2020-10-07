@@ -15,7 +15,11 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
-export const getAvslagArsak = (vilkar, behandlingsresultat, getKodeverknavn) => {
+export const getAvslagArsak = (
+  vilkar: Vilkar[],
+  behandlingsresultat: Behandlingsresultat,
+  getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
+) => {
   const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;

@@ -25,12 +25,12 @@ import VedtakHelpTextPanel from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.less';
 
-export const getTextCode = (behandlingStatus) => (behandlingStatus === behandlingStatusCode.AVSLUTTET
+export const getTextCode = (behandlingStatus: string) => (behandlingStatus === behandlingStatusCode.AVSLUTTET
   || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK ? 'VedtakForm.vedtak' : 'VedtakForm.ForslagTilVedtak');
 
-const kanSendesTilGodkjenning = (behandlingStatusKode) => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
+const kanSendesTilGodkjenning = (behandlingStatusKode: string) => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
-const finnKnappetekstkode = (behandlingType, aksjonspunkter) => {
+const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]) => {
   if (aksjonspunkter && aksjonspunkter.some((ap) => ap.erAktivt && ap.toTrinnsBehandling)) {
     return 'VedtakForm.TilGodkjenning';
   }
@@ -38,7 +38,7 @@ const finnKnappetekstkode = (behandlingType, aksjonspunkter) => {
   return 'VedtakForm.FattVedtak';
 };
 
-const harIkkeKonsekvenserForYtelsen = (behandlingResultat, ...konsekvenserForYtelsenKoder) => {
+const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
   if (!behandlingResultat) {
     return true;
   }
@@ -80,7 +80,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
   clearFormField,
 }) => {
   const {
-    behandlingsresultat, behandlingPaaVent, sprakkode, status, type,
+    behandlingsresultat, behandlingPaaVent, sprakkode, status,
   } = behandling;
 
   const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev.kode === 'FRITEKST');
@@ -102,8 +102,9 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
   const skalViseLink = !behandlingsresultat.avslagsarsak
     || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak.kode !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
 
-  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen(behandlingsresultat,
-    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING), [behandlingsresultat]);
+  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
+    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
+  ], behandlingsresultat), [behandlingsresultat]);
 
   return (
     <>
@@ -195,7 +196,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
                     disabled={behandlingPaaVent || submitting}
                     spinner={submitting}
                   >
-                    <FormattedMessage id={finnKnappetekstkode(type, aksjonspunkter)} />
+                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkter)} />
                   </Hovedknapp>
                 )}
               </FlexColumn>

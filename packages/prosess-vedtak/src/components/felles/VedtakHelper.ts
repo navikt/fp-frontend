@@ -1,17 +1,21 @@
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { isBGAksjonspunktSomGirFritekstfelt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import {
+  KodeverkMedNavn, SimuleringResultat, TilbakekrevingValg, Vilkar,
+} from '@fpsak-frontend/types';
 
-const tilbakekrevingMedInntrekk = (tilbakekrevingKode, simuleringResultat) => tilbakekrevingKode === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD
+const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat) => tilbakekrevingKode
+  === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD
   && (simuleringResultat.simuleringResultat.sumInntrekk || simuleringResultat.simuleringResultatUtenInntrekk);
 
-export const getTilbakekrevingText = (simuleringResultat, tilbakekrevingvalg, alleKodeverk) => {
+export const getTilbakekrevingText = (
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  simuleringResultat: SimuleringResultat,
+  tilbakekrevingvalg?: TilbakekrevingValg,
+): string => {
   if (tilbakekrevingvalg !== null && tilbakekrevingvalg !== undefined) {
     if (tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling.kode, simuleringResultat)) {
       return 'VedtakForm.TilbakekrInfotrygdOgInntrekk';
@@ -22,54 +26,5 @@ export const getTilbakekrevingText = (simuleringResultat, tilbakekrevingvalg, al
   return '';
 };
 
-export const findInnvilgetResultatText = (behandlingResultatTypeKode, ytelseType) => {
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
-    return 'VedtakForm.ResultatOpprettholdVedtak';
-  }
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_MEDHOLD) {
-    return 'VedtakForm.ResultatKlageMedhold';
-  }
-
-  if (ytelseType === fagsakYtelseType.ENGANGSSTONAD) {
-    return 'VedtakForm.VilkarStatusInnvilgetEngangsstonad';
-  }
-
-  if (ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER) {
-    return 'VedtakForm.SvangerskapspengerInnvilget';
-  }
-
-  return 'VedtakForm.VilkarStatusInnvilgetForeldrepenger';
-};
-
-export const findAvslagResultatText = (behandlingResultatTypeKode, ytelseType) => {
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
-    return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
-  }
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST) {
-    return 'VedtakForm.ResultatKlageAvvist';
-  }
-
-  if (ytelseType === fagsakYtelseType.ENGANGSSTONAD) {
-    return 'VedtakForm.EngangsstonadIkkeInnvilget';
-  }
-
-  if (ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER) {
-    return 'VedtakForm.SvangerskapspengerIkkeInnvilget';
-  }
-
-  return 'VedtakForm.ForeldrepengerIkkeInnvilget';
-};
-
-export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar) => vilkar.some((v) => v.vilkarType.kode === vilkarType.SOKNADFRISTVILKARET
+export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar: Vilkar[]) => vilkar.some((v) => v.vilkarType.kode === vilkarType.SOKNADFRISTVILKARET
   && v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
-
-export const skalSkriveFritekstGrunnetFastsettingAvBeregning = (beregningsgrunnlag, aksjonspunkter) => {
-  if (!beregningsgrunnlag || !aksjonspunkter) {
-    return false;
-  }
-  const behandlingHarLøstBGAP = aksjonspunkter.find((ap) => isBGAksjonspunktSomGirFritekstfelt(ap.definisjon.kode)
-    && ap.status.kode === aksjonspunktStatus.UTFORT);
-  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find((andel) => andel.overstyrtPrAar || andel.overstyrtPrAar === 0);
-  return (!!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt);
-};
