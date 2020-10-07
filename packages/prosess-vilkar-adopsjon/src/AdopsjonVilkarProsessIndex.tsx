@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import adopsjonVilkarAksjonspunkterPropType from './propTypes/adopsjonVilkarAksjonspunkterPropType';
-import adopsjonVilkarBehandlingPropType from './propTypes/adopsjonVilkarBehandlingPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import AdopsjonVilkarForm from './components/AdopsjonVilkarForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -14,7 +13,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const AdopsjonVilkarProsessIndex = ({
+const AdopsjonVilkarProsessIndex: FunctionComponent<StandardProsessFormProps> = ({
   behandling,
   aksjonspunkter,
   status,
@@ -41,17 +40,5 @@ const AdopsjonVilkarProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-AdopsjonVilkarProsessIndex.propTypes = {
-  behandling: adopsjonVilkarBehandlingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(adopsjonVilkarAksjonspunkterPropType).isRequired,
-  status: PropTypes.string.isRequired,
-  vilkar: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  isAksjonspunktOpen: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 export default AdopsjonVilkarProsessIndex;
