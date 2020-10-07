@@ -12,20 +12,20 @@ import { refusjonAndelTilVurderingPropType } from '../../propTypes/beregningsgru
 import styles from './vurderEndringRefusjonRad.less';
 
 const visningsnavn = (andel) => {
-  if (andel.arbeidsgiverNavn) {
-    return andel.arbeidsgiverNavn;
-  } if (andel.arbeidsgiverId && andel.arbeidsgiverId.arbeidsgiverOrgnr) {
-    return andel.arbeidsgiverId.arbeidsgiverOrgnr;
-  } if (andel.arbeidsgiverId && andel.arbeidsgiverId.arbeidsgiverAktørId) {
-    return andel.arbeidsgiverId.arbeidsgiverAktørId;
+  if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
+    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiverId.arbeidsgiverOrgnr})`;
   }
-  return undefined;
+  return `${andel.arbeidsgiverNavn}`;
 };
 
 const FIELD_KEY = 'REFUSJON_ENDRING_DATO';
 
-export const lagNøkkel = (andel) => `${FIELD_KEY}${andel.arbeidsgiverNavn}${andel.aktivitetStatus.kode}${andel.internArbeidsforholdRef}
-${andel.arbeidsgiverId.arbeidsgiverOrgnr}${andel.arbeidsgiverId.arbeidsgiverAktørId}`;
+export const lagNøkkel = (andel) => {
+  if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
+    return `${FIELD_KEY}${andel.arbeidsgiverId.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef}`;
+  }
+  return `${FIELD_KEY}${andel.arbeidsgiverId.arbeidsgiverAktørId}${andel.internArbeidsforholdRef}`;
+};
 
 export const VurderEndringRefusjonRad = ({
   refusjonAndel,

@@ -9,14 +9,10 @@ import { refusjonAndelTilVurderingPropType } from '../../propTypes/beregningsgru
 import styles from './tidligereUtbetalinger.less';
 
 const visningsnavn = (andel) => {
-  if (andel.arbeidsgiverNavn) {
-    return andel.arbeidsgiverNavn;
-  } if (andel.arbeidsgiverId && andel.arbeidsgiverId.arbeidsgiverOrgnr) {
-    return andel.arbeidsgiverId.arbeidsgiverOrgnr;
-  } if (andel.arbeidsgiverId && andel.arbeidsgiverId.arbeidsgiverAktørId) {
-    return andel.arbeidsgiverId.arbeidsgiverAktørId;
+  if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
+    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiverId.arbeidsgiverOrgnr})`;
   }
-  return undefined;
+  return `${andel.arbeidsgiverNavn}`;
 };
 
 const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling) => (
