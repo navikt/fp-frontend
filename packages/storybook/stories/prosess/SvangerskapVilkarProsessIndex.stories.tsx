@@ -7,10 +7,21 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
+import { Aksjonspunkt, Behandling, Vilkar } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const standardProsessProps = {
+  aksjonspunkter: [],
+  alleKodeverk: alleKodeverk as any,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+};
 
 export default {
   title: 'prosess/prosess-vilkar-svangerskap',
@@ -20,10 +31,11 @@ export default {
 
 export const visÅpentAksjonspunkt = () => (
   <SvangerskapVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
@@ -32,26 +44,22 @@ export const visÅpentAksjonspunkt = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
+    }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',
-    }]}
+    }] as Vilkar[]}
   />
 );
 
 export const visOppfyltVilkår = () => (
   <SvangerskapVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
       behandlingsresultat: {},
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
@@ -60,21 +68,20 @@ export const visOppfyltVilkår = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er godkjent',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
     status={vilkarUtfallType.OPPFYLT}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',
-    }]}
+    }] as Vilkar[]}
   />
 );
 
 export const visAvslåttVilkår = () => (
   <SvangerskapVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
@@ -83,7 +90,7 @@ export const visAvslåttVilkår = () => (
           kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
         },
       },
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
@@ -92,15 +99,13 @@ export const visAvslåttVilkår = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er avslått',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
     status={vilkarUtfallType.IKKE_OPPFYLT}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',
-    }]}
+    }] as Vilkar[]}
   />
 );

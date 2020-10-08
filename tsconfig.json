@@ -76,6 +76,7 @@
 		"packages/prosess-vilkar-opptjening",
 		"packages/prosess-vilkar-sokers-opplysningsplikt",
 		"packages/prosess-vilkar-soknadsfrist",
+		"packages/prosess-vilkar-svangerskap",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

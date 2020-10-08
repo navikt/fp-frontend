@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -13,12 +12,11 @@ describe('<SvangerskapVilkarForm>', () => {
   it('skal vise readonly-form med utgråete knapper når readonly og vilkåret ikke er vurdert', () => {
     const wrapper = shallowWithIntl(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
+        kodeverk: '',
       }]}
-      lovReferanse="test"
       readOnly
       readOnlySubmitButton
       erVilkarOk={undefined}
