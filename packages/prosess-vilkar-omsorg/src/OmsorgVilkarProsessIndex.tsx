@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import omsorgVilkarAksjonspunkterPropType from './propTypes/omsorgVilkarAksjonspunkterPropType';
-import omsorgVilkarBehandlingPropType from './propTypes/omsorgVilkarBehandlingPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import ErOmsorgVilkaarOppfyltForm from './components/ErOmsorgVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -14,7 +13,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const OmsorgVilkarProsessIndex = ({
+const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessFormProps> = ({
   behandling,
   aksjonspunkter,
   status,
@@ -37,15 +36,5 @@ const OmsorgVilkarProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-OmsorgVilkarProsessIndex.propTypes = {
-  behandling: omsorgVilkarBehandlingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(omsorgVilkarAksjonspunkterPropType).isRequired,
-  status: PropTypes.string.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 export default OmsorgVilkarProsessIndex;

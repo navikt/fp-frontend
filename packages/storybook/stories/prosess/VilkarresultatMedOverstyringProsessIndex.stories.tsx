@@ -6,17 +6,32 @@ import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vilkar-overstyring';
+import { Aksjonspunkt, Behandling, Medlemskap } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
+import alleKodeverk from '../mocks/alleKodeverk.json';
 import withReduxProvider from '../../decorators/withRedux';
 
 const avslagsarsaker = [{
   kode: 'AVSLAG_TEST_1',
   navn: 'Dette er en avslagsårsak',
+  kodeverk: '',
 }, {
   kode: 'AVSLAG_TEST_2',
   navn: 'Dette er en annen avslagsårsak',
+  kodeverk: '',
 }];
+
+const standardProsessProps = {
+  aksjonspunkter: [],
+  alleKodeverk: alleKodeverk as any,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
 
 export default {
   title: 'prosess/prosess-vilkar-overstyring',
@@ -28,18 +43,17 @@ export const visOverstyringspanelForFødsel = () => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
   return (
     <VilkarresultatMedOverstyringProsessIndex
+      {...standardProsessProps}
       behandling={{
         id: 1,
         versjon: 1,
         type: {
           kode: behandlingType.FORSTEGANGSSOKNAD,
         },
-      }}
+      } as Behandling}
       medlemskap={{
         fom: '2019-01-01',
-      }}
-      aksjonspunkter={[]}
-      submitCallback={action('button-click')}
+      } as Medlemskap}
       overrideReadOnly={boolean('overrideReadOnly', false)}
       kanOverstyreAccess={object('kanOverstyreAccess', {
         isEnabled: true,
@@ -60,18 +74,17 @@ export const visOverstyringspanelForMedlemskap = () => {
   const [erOverstyrt, toggleOverstyring] = React.useState(false);
   return (
     <VilkarresultatMedOverstyringProsessIndex
+      {...standardProsessProps}
       behandling={{
         id: 1,
         versjon: 1,
         type: {
           kode: behandlingType.FORSTEGANGSSOKNAD,
         },
-      }}
+      } as Behandling}
       medlemskap={{
         fom: '2019-01-01',
-      }}
-      aksjonspunkter={[]}
-      submitCallback={action('button-click')}
+      } as Medlemskap}
       overrideReadOnly={boolean('overrideReadOnly', false)}
       kanOverstyreAccess={object('kanOverstyreAccess', {
         isEnabled: true,
@@ -90,6 +103,7 @@ export const visOverstyringspanelForMedlemskap = () => {
 
 export const visOverstyrtAksjonspunktSomErBekreftet = () => (
   <VilkarresultatMedOverstyringProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
@@ -101,10 +115,10 @@ export const visOverstyrtAksjonspunktSomErBekreftet = () => (
           kode: 'AVSLAG_TEST_1',
         },
       },
-    }}
+    } as Behandling}
     medlemskap={{
       fom: '2019-01-01',
-    }}
+    } as Medlemskap}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
@@ -114,8 +128,7 @@ export const visOverstyrtAksjonspunktSomErBekreftet = () => (
       },
       kanLoses: false,
       begrunnelse: 'Dette er en begrunnelse',
-    }]}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     overrideReadOnly={boolean('overrideReadOnly', false)}
     kanOverstyreAccess={object('kanOverstyreAccess', {
       isEnabled: true,

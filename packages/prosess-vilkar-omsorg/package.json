@@ -1,7 +1,7 @@
 {
   "name": "@fpsak-frontend/prosess-vilkar-omsorg",
   "version": "1.0.0",
-  "module": "index.jsx",
+  "module": "index.ts",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -10,7 +10,6 @@
     "nav-frontend-core": "5.0.5",
     "nav-frontend-typografi": "2.0.29",
     "nav-frontend-typografi-style": "1.0.25",
-    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-intl": "^5.8.6",
     "react-redux": "^7.2.1",

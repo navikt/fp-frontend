@@ -72,6 +72,7 @@
 		"packages/prosess-vilkar-adopsjon",
 		"packages/prosess-vilkar-fodsel",
 		"packages/prosess-vilkar-foreldreansvar",
+		"packages/prosess-vilkar-omsorg",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",
