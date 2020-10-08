@@ -1,19 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import Timeline from 'react-visjs-timeline';
 import { Column, Row } from 'nav-frontend-grid';
+
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { TimeLineNavigation } from '@fpsak-frontend/tidslinje';
 import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
+import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
+
 import DateContainer from './DateContainer';
 import styles from './opptjeningTimeLineLight.less';
-
 import TimeLineData from './TimeLineData';
 
+type Item = {
+  id?: number;
+  start: moment.Moment;
+  end: moment.Moment;
+  className: string;
+  content: string;
+  data?: FastsattOpptjeningAktivitet;
+  group?: number;
+}
+
 // Desse må alltid vare med for rett skala av tidslinjen
-const standardItems = (opptjeningFomDate, opptjeningTomDate) => {
+const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): Item[] => {
   const items = [
     {
       id: 1000,
@@ -40,7 +51,7 @@ const standardItems = (opptjeningFomDate, opptjeningTomDate) => {
   return items;
 };
 
-const classNameGenerator = (klasseKode) => {
+const classNameGenerator = (klasseKode: string) => {
   if (klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST || klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST) {
     return 'avvistPeriode';
   }
@@ -50,9 +61,8 @@ const classNameGenerator = (klasseKode) => {
   return 'mellomliggendePeriode';
 };
 
-const createItems = (opptjeningPeriods, opptjeningFomDate, opptjeningTomDate) => {
-  const items = opptjeningPeriods.map((ap) => ({
-    id: ap.id,
+const createItems = (opptjeningPeriods: FastsattOpptjeningAktivitet[], opptjeningFomDate: string, opptjeningTomDate: string): Item[] => {
+  const items = opptjeningPeriods.map((ap): Item => ({
     start: moment(ap.fom),
     end: moment(ap.tom),
     className: classNameGenerator(ap.klasse.kode),
@@ -62,7 +72,7 @@ const createItems = (opptjeningPeriods, opptjeningFomDate, opptjeningTomDate) =>
   return items.concat(standardItems(opptjeningFomDate, opptjeningTomDate));
 };
 
-const options = (opptjeningFomDate, opptjeningTomDate) => ({
+const options = (opptjeningFomDate: string, opptjeningTomDate: string) => ({
   end: moment(opptjeningTomDate).endOf('month'),
   locale: moment.locale('nb'),
   margin: { item: 10 },
@@ -79,9 +89,22 @@ const options = (opptjeningFomDate, opptjeningTomDate) => ({
   zoomable: false,
 });
 
-class OpptjeningTimeLineLight extends Component {
-  constructor() {
-    super();
+interface OwnProps {
+  opptjeningPeriods: FastsattOpptjeningAktivitet[];
+  opptjeningFomDate: string;
+  opptjeningTomDate: string;
+}
+
+interface OwnState {
+  items?: Item[];
+  selectedPeriod?: Item;
+}
+
+class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
+  timelineRef: RefObject<any>
+
+  constructor(props: OwnProps) {
+    super(props);
 
     this.state = {
       items: undefined,
@@ -99,7 +122,7 @@ class OpptjeningTimeLineLight extends Component {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     const { opptjeningPeriods, opptjeningFomDate, opptjeningTomDate } = this.props;
-    const unsortedItems = opptjeningPeriods.sort((a, b) => new Date(a.fom) - new Date(b.fom));
+    const unsortedItems = opptjeningPeriods.sort((a, b) => moment(a.fom).diff(moment(b.fom)));
     const items = createItems(unsortedItems, opptjeningFomDate, opptjeningTomDate);
     this.setState({ items });
   }
@@ -113,7 +136,7 @@ class OpptjeningTimeLineLight extends Component {
     }
   }
 
-  selectHandler(eventProps) {
+  selectHandler(eventProps: { items: number[] }) {
     const { items } = this.state;
     const selectedItem = items.find((item) => item.id === eventProps.items[0]);
     if (selectedItem) {
@@ -123,7 +146,7 @@ class OpptjeningTimeLineLight extends Component {
     }
   }
 
-  openPeriodInfo(event) {
+  openPeriodInfo(event: any) {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     const currentSelectedItem = selectedPeriod;
@@ -139,7 +162,7 @@ class OpptjeningTimeLineLight extends Component {
     }
   }
 
-  selectNextPeriod(event) {
+  selectNextPeriod(event: any) {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) + 1;
@@ -150,7 +173,7 @@ class OpptjeningTimeLineLight extends Component {
     }
   }
 
-  selectPrevPeriod(event) {
+  selectPrevPeriod(event: any) {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) - 1;
@@ -193,7 +216,7 @@ class OpptjeningTimeLineLight extends Component {
                   {selectedPeriod
                   && (
                     <TimeLineData
-                      selectedPeriod={selectedPeriod}
+                      fastsattOpptjeningAktivitet={selectedPeriod.data}
                       selectNextPeriod={this.selectNextPeriod}
                       selectPrevPeriod={this.selectPrevPeriod}
                     />
@@ -207,11 +230,5 @@ class OpptjeningTimeLineLight extends Component {
     );
   }
 }
-
-OpptjeningTimeLineLight.propTypes = {
-  opptjeningPeriods: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  opptjeningFomDate: PropTypes.string.isRequired,
-  opptjeningTomDate: PropTypes.string.isRequired,
-};
 
 export default OpptjeningTimeLineLight;

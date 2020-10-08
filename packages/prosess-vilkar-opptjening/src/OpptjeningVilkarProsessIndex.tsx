@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import opptjeningVilkarAksjonspunkterPropType from './propTypes/opptjeningVilkarAksjonspunkterPropType';
-import opptjeningVilkarBehandlingPropType from './propTypes/opptjeningVilkarBehandlingPropType';
-import opptjeningVilkarOpptjeningPropType from './propTypes/opptjeningVilkarOpptjeningPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { Opptjening } from '@fpsak-frontend/types';
+
 import OpptjeningVilkarForm from './components/OpptjeningVilkarForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -15,7 +14,12 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const OpptjeningVilkarProsessIndex = ({
+interface OwnProps {
+  opptjening: Opptjening;
+  lovReferanse?: string;
+}
+
+const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   opptjening,
   aksjonspunkter,
@@ -42,21 +46,5 @@ const OpptjeningVilkarProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-OpptjeningVilkarProsessIndex.propTypes = {
-  behandling: opptjeningVilkarBehandlingPropType.isRequired,
-  opptjening: opptjeningVilkarOpptjeningPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(opptjeningVilkarAksjonspunkterPropType).isRequired,
-  status: PropTypes.string.isRequired,
-  lovReferanse: PropTypes.string,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  isAksjonspunktOpen: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-};
-
-OpptjeningVilkarProsessIndex.defaultProps = {
-  lovReferanse: undefined,
-};
 
 export default OpptjeningVilkarProsessIndex;

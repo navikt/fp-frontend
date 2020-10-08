@@ -1,41 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage, useIntl } from 'react-intl';
+
 import { Image } from '@fpsak-frontend/shared-components';
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import advarselImg from '@fpsak-frontend/assets/images/remove.svg';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
+import { FastsattOpptjeningAktivitet, Kodeverk } from '@fpsak-frontend/types';
+
 import styles from './timeLineData.less';
 
 const MELLOMLIGGENDE_PERIODE = 'MELLOMLIGGENDE_PERIODE';
 
-const isoToDdMmYyyy = (string) => {
-  const parsedDate = moment(string, ISO_DATE_FORMAT, true);
-  return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : string;
+const isoToDdMmYyyy = (dato: string) => {
+  const parsedDate = moment(dato, ISO_DATE_FORMAT, true);
+  return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : dato;
 };
 
-const backgroundStyle = (kode) => (
-  (kode === MELLOMLIGGENDE_PERIODE
-  || kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
-  || kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT) ? 'godkjent' : 'avvist'
-);
+const backgroundStyle = (kode: string) => ((kode === MELLOMLIGGENDE_PERIODE
+|| kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
+|| kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT) ? 'godkjent' : 'avvist');
 
-const periodStatus = (periodState) => (periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST
+const periodStatus = (periodState: string) => (periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST
 || periodState === opptjeningAktivitetKlassifisering.ANTATT_AVVIST ? 'OpptjeningVilkarView.Avslatt' : 'OpptjeningVilkarView.Godkjent');
 
-const isPeriodGodkjent = (period) => (
-  !!(period.kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT
-    || period.kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
-    || period.kode === MELLOMLIGGENDE_PERIODE)
-);
+const isPeriodGodkjent = (period: Kodeverk) => !!(period.kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT
+  || period.kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
+  || period.kode === MELLOMLIGGENDE_PERIODE);
 
-const TimeLineData = ({
-  selectedPeriod,
+interface OwnProps {
+  fastsattOpptjeningAktivitet: FastsattOpptjeningAktivitet;
+  selectNextPeriod: (...args: any[]) => any;
+  selectPrevPeriod: (...args: any[]) => any;
+}
+
+const TimeLineData: FunctionComponent<OwnProps> = ({
+  fastsattOpptjeningAktivitet,
   selectNextPeriod,
   selectPrevPeriod,
 }) => {
@@ -48,17 +52,17 @@ const TimeLineData = ({
         </Element>
       </Row>
       <Row>
-        <Column xs="6" className={backgroundStyle(selectedPeriod.data.klasse.kode)}>
+        <Column xs="6" className={backgroundStyle(fastsattOpptjeningAktivitet.klasse.kode)}>
           <Row className={styles.timeLineDataContainer}>
             <Column xs="6">
               <div>
                 <Element>
-                  {`${isoToDdMmYyyy(selectedPeriod.data.fom)} - ${isoToDdMmYyyy(selectedPeriod.data.tom)}`}
+                  {`${isoToDdMmYyyy(fastsattOpptjeningAktivitet.fom)} - ${isoToDdMmYyyy(fastsattOpptjeningAktivitet.tom)}`}
                 </Element>
               </div>
             </Column>
             <Column xs="6">
-              {isPeriodGodkjent(selectedPeriod.data.klasse)
+              {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse)
               && (
               <span className={styles.image}>
                 <Image
@@ -67,7 +71,7 @@ const TimeLineData = ({
                 />
               </span>
               )}
-              {!isPeriodGodkjent(selectedPeriod.data.klasse)
+              {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse)
             && (
             <span className={styles.image}>
               <Image
@@ -76,7 +80,7 @@ const TimeLineData = ({
               />
             </span>
             )}
-              <FormattedMessage id={periodStatus(selectedPeriod.data.klasse.kode)} />
+              <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse.kode)} />
             </Column>
           </Row>
         </Column>
@@ -88,12 +92,6 @@ const TimeLineData = ({
       <Row />
     </div>
   );
-};
-
-TimeLineData.propTypes = {
-  selectedPeriod: PropTypes.shape().isRequired,
-  selectNextPeriod: PropTypes.func.isRequired,
-  selectPrevPeriod: PropTypes.func.isRequired,
 };
 
 export default TimeLineData;

@@ -5,8 +5,9 @@ import { shallow } from 'enzyme';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-
 import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
+import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
+
 import OpptjeningVilkarForm from './OpptjeningVilkarForm';
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
@@ -17,7 +18,6 @@ const fastsattOpptjening = {
     dager: 3,
   },
   fastsattOpptjeningAktivitetList: [{
-    id: 1,
     fom: '2018-01-01',
     tom: '2018-04-04',
     klasse: {
@@ -26,7 +26,7 @@ const fastsattOpptjening = {
   }],
   opptjeningFom: '2018-01-01',
   opptjeningTom: '2018-10-01',
-};
+} as FastsattOpptjening;
 
 describe('<OpptjeningVilkarForm>', () => {
   it('skal vise OpptjeningVilkarAksjonspunktPanel når en har aksjonspunkt', () => {
@@ -34,11 +34,10 @@ describe('<OpptjeningVilkarForm>', () => {
       readOnlySubmitButton
       readOnly
       isAksjonspunktOpen
-      hasAksjonspunkt
       submitCallback={sinon.spy()}
       behandlingId={1}
       behandlingVersjon={2}
-      behandlingsresultat={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
@@ -47,7 +46,7 @@ describe('<OpptjeningVilkarForm>', () => {
           kode: aksjonspunktStatus.OPPRETTET,
         },
         begrunnelse: undefined,
-      }]}
+      }] as Aksjonspunkt[]}
       status="test"
       lovReferanse="Dette er en lovreferanse"
       fastsattOpptjening={fastsattOpptjening}
@@ -62,11 +61,10 @@ describe('<OpptjeningVilkarForm>', () => {
       readOnlySubmitButton
       readOnly
       isAksjonspunktOpen={false}
-      hasAksjonspunkt={false}
       submitCallback={sinon.spy()}
       behandlingId={1}
       behandlingVersjon={2}
-      behandlingsresultat={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
       aksjonspunkter={[]}
       status="test"
       lovReferanse="Dette er en lovreferanse"

@@ -1,19 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 
-import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
+import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
 
-import opptjeningVilkarAksjonspunkterPropType from '../propTypes/opptjeningVilkarAksjonspunkterPropType';
-import { fastsattOpptjeningPropType } from '../propTypes/opptjeningVilkarOpptjeningPropType';
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
+
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  fastsattOpptjening?: FastsattOpptjening;
+  aksjonspunkter: Aksjonspunkt[];
+  status: string;
+  lovReferanse?: string;
+  isAksjonspunktOpen: boolean;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+}
 
 /**
  * OpptjeningVilkarForm
  *
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
-const OpptjeningVilkarForm = ({
+const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   behandlingsresultat,
@@ -52,26 +63,6 @@ const OpptjeningVilkarForm = ({
       opptjeningTomDate={fastsattOpptjening.opptjeningTom}
     />
   );
-};
-
-OpptjeningVilkarForm.propTypes = {
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  behandlingsresultat: PropTypes.shape({
-    avslagsarsak: kodeverkObjektPropType,
-  }),
-  fastsattOpptjening: fastsattOpptjeningPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(opptjeningVilkarAksjonspunkterPropType).isRequired,
-  status: PropTypes.string.isRequired,
-  lovReferanse: PropTypes.string,
-  isAksjonspunktOpen: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-};
-
-OpptjeningVilkarForm.defaultProps = {
-  lovReferanse: undefined,
 };
 
 export default OpptjeningVilkarForm;

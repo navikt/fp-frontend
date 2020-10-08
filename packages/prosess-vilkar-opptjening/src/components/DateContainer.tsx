@@ -1,10 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import styles from './dateContainer.less';
 
-const DateContainer = ({
+interface OwnProps {
+  opptjeningFomDate: string;
+  opptjeningTomDate: string;
+}
+
+const DateContainer: FunctionComponent<OwnProps> = ({
   opptjeningFomDate,
   opptjeningTomDate,
 }) => (
@@ -24,10 +28,5 @@ const DateContainer = ({
     </div>
   </div>
 );
-
-DateContainer.propTypes = {
-  opptjeningFomDate: PropTypes.string.isRequired,
-  opptjeningTomDate: PropTypes.string.isRequired,
-};
 
 export default DateContainer;

@@ -1,21 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
+import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 import { PeriodLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import OpptjeningTimeLineLight from './OpptjeningTimeLineLight';
+
+interface OwnProps {
+  months: number;
+  days: number;
+  fastsattOpptjeningActivities?: FastsattOpptjeningAktivitet[];
+  opptjeningFomDate: string;
+  opptjeningTomDate: string;
+}
 
 /**
  * OpptjeningVilkarView
  *
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
-export const OpptjeningVilkarViewImpl = ({
+export const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
   months,
   days,
-  fastsattOpptjeningActivities,
+  fastsattOpptjeningActivities = [],
   opptjeningFomDate,
   opptjeningTomDate,
 }) => (
@@ -37,17 +45,5 @@ export const OpptjeningVilkarViewImpl = ({
     )}
   </>
 );
-
-OpptjeningVilkarViewImpl.propTypes = {
-  months: PropTypes.number.isRequired,
-  days: PropTypes.number.isRequired,
-  fastsattOpptjeningActivities: PropTypes.arrayOf(PropTypes.shape()),
-  opptjeningFomDate: PropTypes.string.isRequired,
-  opptjeningTomDate: PropTypes.string.isRequired,
-};
-
-OpptjeningVilkarViewImpl.defaultProps = {
-  fastsattOpptjeningActivities: [],
-};
 
 export default OpptjeningVilkarViewImpl;

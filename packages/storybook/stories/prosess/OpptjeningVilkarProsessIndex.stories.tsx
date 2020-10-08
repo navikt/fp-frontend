@@ -7,8 +7,16 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-opptjening';
 import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
+import { Aksjonspunkt, Behandling, Opptjening } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
+import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const behandling = {
+  id: 1,
+  versjon: 1,
+  behandlingsresultat: {},
+} as Behandling;
 
 const opptjening = {
   fastsattOpptjening: {
@@ -17,7 +25,6 @@ const opptjening = {
       dager: 3,
     },
     fastsattOpptjeningAktivitetList: [{
-      id: 1,
       fom: '2018-01-01',
       tom: '2018-04-04',
       klasse: {
@@ -27,6 +34,18 @@ const opptjening = {
     opptjeningFom: '2018-01-01',
     opptjeningTom: '2018-10-01',
   },
+} as Opptjening;
+
+const standardProsessProps = {
+  behandling,
+  aksjonspunkter: [],
+  alleKodeverk: alleKodeverk as any,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
 };
 
 export default {
@@ -37,11 +56,7 @@ export default {
 
 export const visPanelForÅpentAksjonspunkt = () => (
   <OpptjeningVilkarProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-      behandlingsresultat: {},
-    }}
+    {...standardProsessProps}
     opptjening={opptjening}
     aksjonspunkter={[{
       definisjon: {
@@ -51,30 +66,17 @@ export const visPanelForÅpentAksjonspunkt = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
+    }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
     lovReferanse="§§Dette er en lovreferanse"
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
   />
 );
 
 export const visPanelForNårEnIkkeHarAksjonspunkt = () => (
   <OpptjeningVilkarProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-      behandlingsresultat: {},
-    }}
+    {...standardProsessProps}
     opptjening={opptjening}
-    aksjonspunkter={[]}
     status={vilkarUtfallType.IKKE_VURDERT}
     lovReferanse="§§Dette er en lovreferanse"
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
   />
 );

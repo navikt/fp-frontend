@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { InjectedFormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
@@ -12,18 +12,37 @@ import {
   VilkarResultPicker, ProsessStegBegrunnelseTextField, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
 
-import { fastsattOpptjeningPropType } from '../propTypes/opptjeningVilkarOpptjeningPropType';
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
 const FORM_NAME = 'OpptjeningVilkarForm';
+
+interface PureOwnProps {
+  fastsattOpptjening: FastsattOpptjening;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  aksjonspunkter: Aksjonspunkt[];
+  status: string;
+  isApOpen: boolean;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  lovReferanse?: string;
+}
+
+interface MappedOwnProps {
+  erVilkarOk?: boolean;
+  originalErVilkarOk?: boolean;
+}
 
 /**
  * OpptjeningVilkarAksjonspunktPanel
  *
  * Presentasjonskomponent. Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanelImpl = ({
+export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   isApOpen,
   erVilkarOk,
   originalErVilkarOk,
@@ -64,7 +83,6 @@ export const OpptjeningVilkarAksjonspunktPanelImpl = ({
     <VilkarResultPicker
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      hasAksjonspunkt
       customVilkarOppfyltText={{ id: 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt' }}
       customVilkarIkkeOppfyltText={{ id: 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt' }}
     />
@@ -73,54 +91,42 @@ export const OpptjeningVilkarAksjonspunktPanelImpl = ({
   </ProsessPanelTemplate>
 );
 
-OpptjeningVilkarAksjonspunktPanelImpl.propTypes = {
-  fastsattOpptjening: fastsattOpptjeningPropType.isRequired,
-  isApOpen: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  erVilkarOk: PropTypes.bool,
-  originalErVilkarOk: PropTypes.bool,
-  lovReferanse: PropTypes.string,
-};
-
-OpptjeningVilkarAksjonspunktPanelImpl.defaultProps = {
-  erVilkarOk: undefined,
-  originalErVilkarOk: undefined,
-  lovReferanse: undefined,
-};
-
 export const buildInitialValues = createSelector(
-  [(ownProps) => ownProps.behandlingsresultat,
-    (ownProps) => ownProps.aksjonspunkter,
-    (ownProps) => ownProps.status],
+  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.status],
   (behandlingsresultat, aksjonspunkter, status) => ({
     ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   }),
 );
 
-const transformValues = (values, aksjonspunkter) => ({
+interface FormValues {
+  erVilkarOk: boolean;
+  avslagCode: string;
+  avslagDato: string;
+  begrunnelse: string;
+}
+
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   ...{ kode: aksjonspunkter[0].definisjon.kode },
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values) => submitCallback([transformValues(values, aksjonspunkter)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const isOpenAksjonspunkt = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === initialOwnProps.status;
 
-  return (state, ownProps) => ({
+  return (state: any, ownProps: PureOwnProps) => ({
     onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitialValues(ownProps),
     originalErVilkarOk: erVilkarOk,
     erVilkarOk: behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'erVilkarOk'),
-    lovReferanse: ownProps.lovReferanse,
   });
 };
 
