@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -25,34 +26,43 @@ import {
 } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
+import { InjectedFormProps } from 'redux-form';
+import {
+  Aksjonspunkt, Behandling, Kodeverk, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad,
+} from '@fpsak-frontend/types';
 
 const formName = 'SokersOpplysningspliktForm';
 
 const orgPrefix = 'org_';
 const aktørPrefix = 'aktør_';
 
-const findRadioButtonTextCode = (erVilkarOk) => (erVilkarOk ? 'SokersOpplysningspliktForm.VilkarOppfylt' : 'SokersOpplysningspliktForm.VilkarIkkeOppfylt');
-const getLabel = (intl) => (
+const findRadioButtonTextCode = (erVilkarOk: boolean) => (erVilkarOk
+  ? 'SokersOpplysningspliktForm.VilkarOppfylt' : 'SokersOpplysningspliktForm.VilkarIkkeOppfylt');
+
+const getLabel = (intl: IntlShape) => (
   <div>
     <div>
       <FormattedMessage
         id={findRadioButtonTextCode(false)}
         values={{
-          b: (chunks) => <b>{chunks}</b>,
+          b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
     </div>
     <div>{intl.formatMessage({ id: 'SokersOpplysningspliktForm.VilkarIkkeOppfyltMerInfo' })}</div>
   </div>
 );
-const capitalizeFirstLetters = (navn) => navn.toLowerCase().split(' ').map((w) => w.charAt(0).toUpperCase() + w.substr(1)).join(' ');
+const capitalizeFirstLetters = (navn: string) => navn.toLowerCase().split(' ').map((w: string) => w.charAt(0).toUpperCase() + w.substr(1)).join(' ');
 
-const lagArbeidsgiverNavnOgFødselsdatoTekst = (arbeidsgiver) => `${capitalizeFirstLetters(arbeidsgiver.navn)} (${moment(arbeidsgiver.fødselsdato)
-  .format(DDMMYYYY_DATE_FORMAT)})`;
+const lagArbeidsgiverNavnOgFødselsdatoTekst = (
+  arbeidsgiver: ManglendeVedleggSoknad['arbeidsgiver'],
+) => `${capitalizeFirstLetters(arbeidsgiver.navn)} (${moment(arbeidsgiver.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`;
 
-const lagArbeidsgiverNavnOgOrgnrTekst = (arbeidsgiver) => `${capitalizeFirstLetters(arbeidsgiver.navn)} (${arbeidsgiver.organisasjonsnummer})`;
+const lagArbeidsgiverNavnOgOrgnrTekst = (
+  arbeidsgiver: ManglendeVedleggSoknad['arbeidsgiver'],
+) => `${capitalizeFirstLetters(arbeidsgiver.navn)} (${arbeidsgiver.organisasjonsnummer})`;
 
-const formatArbeidsgiver = (arbeidsgiver) => {
+const formatArbeidsgiver = (arbeidsgiver?: ManglendeVedleggSoknad['arbeidsgiver']) => {
   if (!arbeidsgiver) {
     return '';
   }
@@ -62,12 +72,38 @@ const formatArbeidsgiver = (arbeidsgiver) => {
   return lagArbeidsgiverNavnOgOrgnrTekst(arbeidsgiver);
 };
 
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  soknad: Soknad;
+  aksjonspunkter: Aksjonspunkt[];
+  status: string;
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface MappedOwnProps {
+  getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string;
+  hasSoknad: boolean;
+  originalErVilkarOk: boolean;
+  dokumentTypeIds: KodeverkMedNavn[];
+  manglendeVedlegg: ManglendeVedleggSoknad[],
+  erVilkarOk?: boolean;
+  hasAksjonspunkt: boolean;
+  initialValues: {
+    erVilkarOk?: boolean;
+  }
+}
+
 /**
  * SokersOpplysningspliktForm
  *
  * Presentasjonskomponent. Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
-export const SokersOpplysningspliktFormImpl = ({
+export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   readOnly,
   readOnlySubmitButton,
@@ -110,7 +146,7 @@ export const SokersOpplysningspliktFormImpl = ({
                   </TableColumn>
                   <TableColumn>
                     {vedlegg.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING
-                    && formatArbeidsgiver(vedlegg.arbeidsgiver)}
+                  && formatArbeidsgiver(vedlegg.arbeidsgiver)}
                   </TableColumn>
                 </TableRow>
               ))}
@@ -143,7 +179,7 @@ export const SokersOpplysningspliktFormImpl = ({
     )}
     {readOnly && (
       <div>
-        {originalErVilkarOk === false && behandlingsresultat.avslagsarsak && (
+        {originalErVilkarOk === false && behandlingsresultat?.avslagsarsak && (
           <>
             <VerticalSpacer sixteenPx />
             <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, vilkarType.SOKERSOPPLYSNINGSPLIKT)}</Normaltekst>
@@ -154,56 +190,39 @@ export const SokersOpplysningspliktFormImpl = ({
   </ProsessPanelTemplate>
 );
 
-SokersOpplysningspliktFormImpl.propTypes = {
-  intl: PropTypes.shape().isRequired,
-  /**
-   * Skal input-felter vises eller ikke
-   */
-  readOnly: PropTypes.bool.isRequired,
-  /**
-   * Skal knapp for å bekrefte data være trykkbar
-   */
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  hasSoknad: PropTypes.bool,
-  erVilkarOk: PropTypes.bool,
-  originalErVilkarOk: PropTypes.bool,
-  hasAksjonspunkt: PropTypes.bool,
-  behandlingsresultat: PropTypes.shape(),
-  manglendeVedlegg: PropTypes.arrayOf(PropTypes.shape()),
-  dokumentTypeIds: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
-
 SokersOpplysningspliktFormImpl.defaultProps = {
-  hasSoknad: undefined,
-  erVilkarOk: undefined,
-  originalErVilkarOk: undefined,
   hasAksjonspunkt: false,
-  behandlingsresultat: {},
   manglendeVedlegg: [],
 };
 
 export const getSortedManglendeVedlegg = createSelector([
-  (state, ownProps) => ownProps.soknad], (soknad) => (soknad && soknad.manglendeVedlegg
+  (ownProps: PureOwnProps) => ownProps.soknad], (soknad) => (soknad && soknad.manglendeVedlegg
   ? soknad.manglendeVedlegg.slice().sort((mv1) => (mv1.dokumentType.kode === dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL ? 1 : -1))
   : []));
 
-const hasSoknad = createSelector([(state, ownProps) => ownProps.soknad], (soknad) => soknad !== null && isObject(soknad));
+const hasSoknad = createSelector([(ownProps: PureOwnProps) => ownProps.soknad], (soknad) => soknad !== null && isObject(soknad));
 
-const lagArbeidsgiverKey = (arbeidsgiver) => {
+const lagArbeidsgiverKey = (arbeidsgiver: ManglendeVedleggSoknad['arbeidsgiver']) => {
   if (arbeidsgiver.aktørId) {
     return `${aktørPrefix}${arbeidsgiver.aktørId}`;
-  } return `${orgPrefix}${arbeidsgiver.organisasjonsnummer}`;
+  }
+  return `${orgPrefix}${arbeidsgiver.organisasjonsnummer}`;
 };
+
+interface FormValues {
+  erVilkarOk?: boolean;
+  begrunnelse?: string;
+  aksjonspunktKode: string;
+  inntektsmeldingerSomIkkeKommer: { [key: string]: boolean };
+  hasAksjonspunkt: boolean;
+}
 
 export const buildInitialValues = createSelector(
   [getSortedManglendeVedlegg,
     hasSoknad,
-    (state, ownProps) => ownProps.status,
-    (state, ownProps) => ownProps.aksjonspunkter],
-  (manglendeVedlegg, soknadExists, status, aksjonspunkter) => {
+    (ownProps: PureOwnProps) => ownProps.status,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+  (manglendeVedlegg, soknadExists, status, aksjonspunkter): FormValues => {
     const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
     const isOpenAksjonspunkt = aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
     const isVilkarGodkjent = soknadExists && vilkarUtfallType.OPPFYLT === status;
@@ -227,7 +246,7 @@ export const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values, manglendeVedlegg) => {
+const transformValues = (values: FormValues, manglendeVedlegg: ManglendeVedleggSoknad[]) => {
   const arbeidsgivere = manglendeVedlegg
     .filter((mv) => mv.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING)
     .map((mv) => mv.arbeidsgiver);
@@ -235,7 +254,9 @@ const transformValues = (values, manglendeVedlegg) => {
     kode: values.aksjonspunktKode,
     erVilkarOk: values.erVilkarOk,
     inntektsmeldingerSomIkkeKommer: arbeidsgivere.map((ag) => ({
-      organisasjonsnummer: ag.aktørId ? null : ag.organisasjonsnummer, // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
+      // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
+      organisasjonsnummer: ag.aktørId ? null : ag.organisasjonsnummer,
+
       aktørId: ag.aktørId,
       brukerHarSagtAtIkkeKommer: values.inntektsmeldingerSomIkkeKommer[lagArbeidsgiverKey(ag)],
     }), {}),
@@ -244,25 +265,25 @@ const transformValues = (values, manglendeVedlegg) => {
 };
 
 const submitSelector = createSelector(
-  [getSortedManglendeVedlegg, (state, props) => props.submitCallback],
-  (manglendeVedlegg, submitCallback) => (values) => submitCallback([transformValues(values, manglendeVedlegg)]),
+  [getSortedManglendeVedlegg, (props: PureOwnProps) => props.submitCallback],
+  (manglendeVedlegg, submitCallback) => (values: FormValues) => submitCallback([transformValues(values, manglendeVedlegg)]),
 );
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
   const isOpenAksjonspunkt = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === initialOwnProps.status;
 
-  return (state, ownProps) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const { behandlingId, behandlingVersjon, alleKodeverk } = ownProps;
     return {
       getKodeverknavn,
-      onSubmit: submitSelector(state, ownProps),
-      hasSoknad: hasSoknad(state, ownProps),
+      onSubmit: submitSelector(ownProps),
+      hasSoknad: hasSoknad(ownProps),
       originalErVilkarOk: erVilkarOk,
       dokumentTypeIds: alleKodeverk[kodeverkTyper.DOKUMENT_TYPE_ID],
-      manglendeVedlegg: getSortedManglendeVedlegg(state, ownProps),
-      initialValues: buildInitialValues(state, ownProps),
+      manglendeVedlegg: getSortedManglendeVedlegg(ownProps),
+      initialValues: buildInitialValues(ownProps),
       ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'hasAksjonspunkt', 'erVilkarOk'),
     };
   };

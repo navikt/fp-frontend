@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import sokersOpplysningspliktAksjonspunkterPropType from './propTypes/sokersOpplysningspliktAksjonspunkterPropType';
-import sokersOpplysningspliktSoknadPropType from './propTypes/sokersOpplysningspliktSoknadPropType';
-import sokersOpplysningspliltBehandlingPropType from './propTypes/sokersOpplysningspliltBehandlingPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { Soknad } from '@fpsak-frontend/types';
+
 import SokersOpplysningspliktForm from './components/SokersOpplysningspliktForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -15,7 +14,11 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const SokersOpplysningspliktVilkarProsessIndex = ({
+interface OwnProps {
+  soknad: Soknad;
+}
+
+const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   soknad,
   aksjonspunkter,
@@ -40,16 +43,5 @@ const SokersOpplysningspliktVilkarProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-SokersOpplysningspliktVilkarProsessIndex.propTypes = {
-  behandling: sokersOpplysningspliltBehandlingPropType.isRequired,
-  soknad: sokersOpplysningspliktSoknadPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(sokersOpplysningspliktAksjonspunkterPropType).isRequired,
-  status: PropTypes.string.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 export default SokersOpplysningspliktVilkarProsessIndex;

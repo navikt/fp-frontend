@@ -8,10 +8,16 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-sokers-opplysningsplikt';
+import { Aksjonspunkt, Behandling, Soknad } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const behandling = {
+  id: 1,
+  versjon: 1,
+} as Behandling;
 
 const soknad = {
   manglendeVedlegg: [{
@@ -24,6 +30,18 @@ const soknad = {
       navn: 'arbeidsgiver1',
     },
   }],
+} as Soknad;
+
+const standardProsessProps = {
+  behandling,
+  aksjonspunkter: [],
+  alleKodeverk: alleKodeverk as any,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
 };
 
 export default {
@@ -34,10 +52,7 @@ export default {
 
 export const visÅpentAksjonspunkt = () => (
   <SokersOpplysningspliktVilkarProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-    }}
+    {...standardProsessProps}
     soknad={soknad}
     aksjonspunkter={[{
       definisjon: {
@@ -47,22 +62,19 @@ export const visÅpentAksjonspunkt = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
+    }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
   />
 );
 
 export const visOppfyltVilkår = () => (
   <SokersOpplysningspliktVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
       behandlingsresultat: {},
-    }}
+    } as Behandling}
     soknad={soknad}
     aksjonspunkter={[{
       definisjon: {
@@ -72,9 +84,7 @@ export const visOppfyltVilkår = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er godkjent',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.OPPFYLT}
@@ -83,6 +93,7 @@ export const visOppfyltVilkår = () => (
 
 export const visAvslåttVilkår = () => (
   <SokersOpplysningspliktVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
@@ -91,7 +102,7 @@ export const visAvslåttVilkår = () => (
           kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
         },
       },
-    }}
+    } as Behandling}
     soknad={soknad}
     aksjonspunkter={[{
       definisjon: {
@@ -101,9 +112,7 @@ export const visAvslåttVilkår = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er avslått',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.IKKE_OPPFYLT}

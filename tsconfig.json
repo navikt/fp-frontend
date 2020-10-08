@@ -74,6 +74,7 @@
 		"packages/prosess-vilkar-foreldreansvar",
 		"packages/prosess-vilkar-omsorg",
 		"packages/prosess-vilkar-opptjening",
+		"packages/prosess-vilkar-sokers-opplysningsplikt",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

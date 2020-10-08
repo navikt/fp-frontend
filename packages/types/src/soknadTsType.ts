@@ -1,5 +1,16 @@
 import Kodeverk from './kodeverkTsType';
 
+export type ManglendeVedleggSoknad = Readonly<{
+  dokumentType: Kodeverk;
+  arbeidsgiver: {
+    navn: string;
+    organisasjonsnummer: string;
+    fødselsdato: string;
+    aktørId: string;
+  };
+  brukerHarSagtAtIkkeKommer: boolean;
+}>
+
 type Soknad = Readonly<{
   soknadType: Kodeverk;
   mottattDato: string;
@@ -24,16 +35,7 @@ type Soknad = Readonly<{
       tom: string;
     }[];
   }
-  manglendeVedlegg: {
-    dokumentType: Kodeverk;
-    arbeidsgiver: {
-      navn: string;
-      organisasjonsnummer: string;
-      fødselsdato: string;
-      aktørId: string;
-    };
-    brukerHarSagtAtIkkeKommer: boolean;
-  }[];
+  manglendeVedlegg: ManglendeVedleggSoknad[];
   oppgittRettighet: {
     omsorgForBarnet: boolean;
     aleneomsorgForBarnet: boolean;

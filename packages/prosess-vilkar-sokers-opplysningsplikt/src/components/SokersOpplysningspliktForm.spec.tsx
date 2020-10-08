@@ -3,11 +3,14 @@ import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Table, TableRow } from '@fpsak-frontend/shared-components';
+import {
+  Aksjonspunkt, Behandling, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad,
+} from '@fpsak-frontend/types';
+
 import { buildInitialValues, getSortedManglendeVedlegg, SokersOpplysningspliktFormImpl } from './SokersOpplysningspliktForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-sokers-opplysningsplikt';
 
@@ -18,7 +21,7 @@ describe('<SokersOpplysningspliktForm>', () => {
     const manglendeVedlegg = [{
       dokumentType: {
         kode: dokumentTypeId.INNTEKTSMELDING,
-        navn: 'Inntektsmelding',
+        kodeverk: '',
       },
       arbeidsgiver: {
         navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
@@ -32,13 +35,15 @@ describe('<SokersOpplysningspliktForm>', () => {
       },
       arbeidsgiver: null,
       brukerHarSagtAtIkkeKommer: null,
-    }];
+    }] as ManglendeVedleggSoknad[];
     const dokumentTypeIds = [{
       kode: dokumentTypeId.INNTEKTSMELDING,
       navn: 'Inntektsmelding',
+      kodeverk: '',
     }, {
       kode: dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL,
       navn: 'terminbekreftelse',
+      kodeverk: '',
     }];
 
     const wrapper = shallowWithIntl(<SokersOpplysningspliktFormImpl
@@ -46,15 +51,12 @@ describe('<SokersOpplysningspliktForm>', () => {
       intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
-      behandlingsresultat={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
       hasSoknad
       erVilkarOk={undefined}
       hasAksjonspunkt
       manglendeVedlegg={manglendeVedlegg}
       dokumentTypeIds={dokumentTypeIds}
-      inntektsmeldingerSomIkkeKommer={undefined}
-      reduxFormChange={() => undefined}
-      behandlingFormPrefix="form"
       getKodeverknavn={getKodeverknavn}
       behandlingId={1}
       behandlingVersjon={1}
@@ -77,23 +79,20 @@ describe('<SokersOpplysningspliktForm>', () => {
   });
 
   it('skal ikke vise tabell når ingen vedlegg mangler', () => {
-    const manglendeVedlegg = [];
-    const dokumentTypeIds = [];
+    const manglendeVedlegg: ManglendeVedleggSoknad[] = [];
+    const dokumentTypeIds: KodeverkMedNavn[] = [];
 
     const wrapper = shallowWithIntl(<SokersOpplysningspliktFormImpl
       {...reduxFormPropsMock}
       intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
-      behandlingsresultat={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
       hasSoknad
       erVilkarOk={undefined}
       hasAksjonspunkt
       manglendeVedlegg={manglendeVedlegg}
       dokumentTypeIds={dokumentTypeIds}
-      inntektsmeldingerSomIkkeKommer={undefined}
-      reduxFormChange={() => undefined}
-      behandlingFormPrefix="form"
       getKodeverknavn={getKodeverknavn}
       behandlingId={1}
       behandlingVersjon={1}
@@ -114,18 +113,18 @@ describe('<SokersOpplysningspliktForm>', () => {
       }, {
         dokumentType: {
           kode: dokumentTypeId.INNTEKTSMELDING,
-          navn: 'Inntektsmelding',
+          kodeverk: '',
         },
         arbeidsgiver: {
           navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
           organisasjonsnummer: '973861778',
         },
         brukerHarSagtAtIkkeKommer: false,
-      }];
+      }] as ManglendeVedleggSoknad[];
 
       const smv = getSortedManglendeVedlegg.resultFunc({
         manglendeVedlegg,
-      });
+      } as Soknad);
 
       expect(smv).to.eql([manglendeVedlegg[1], manglendeVedlegg[0]]);
     });
@@ -134,15 +133,15 @@ describe('<SokersOpplysningspliktForm>', () => {
       const manglendeVedlegg = [{
         dokumentType: {
           kode: dokumentTypeId.INNTEKTSMELDING,
-          navn: 'Inntektsmelding',
+          kodeverk: '',
         },
         arbeidsgiver: {
           navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
           organisasjonsnummer: '973861778',
         },
         brukerHarSagtAtIkkeKommer: false,
-      }];
-      const aksjonspunkter = [];
+      }] as ManglendeVedleggSoknad[];
+      const aksjonspunkter: Aksjonspunkt[] = [];
 
       const intitialValues = buildInitialValues.resultFunc(manglendeVedlegg, true, vilkarUtfallType.OPPFYLT, aksjonspunkter);
 
