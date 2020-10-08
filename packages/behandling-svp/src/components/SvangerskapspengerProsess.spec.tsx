@@ -69,6 +69,7 @@ describe('<SvangerskapspengerProsess>', () => {
     vilkarType: { kode: vilkarType.SVANGERSKAPVILKARET, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.IKKE_VURDERT, kodeverk: 'test' },
     overstyrbar: true,
+    merknadParametere: {},
   }];
   const soknad = {
     fodselsdatoer: {

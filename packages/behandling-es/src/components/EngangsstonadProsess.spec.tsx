@@ -70,6 +70,7 @@ describe('<EngangsstonadProsess>', () => {
     vilkarType: { kode: vilkarType.ADOPSJONSVILKARET, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.IKKE_VURDERT, kodeverk: 'test' },
     overstyrbar: true,
+    merknadParametere: {},
   }];
   const soknad = {
     fodselsdatoer: {

@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
-  Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap,
+  Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
@@ -64,7 +64,7 @@ const vilkar = [{
     kodeverk: '',
   },
   overstyrbar: true,
-}];
+}] as Vilkar[];
 
 const beregningresultatForeldrepenger = {
   antallBarn: 1,
@@ -800,6 +800,7 @@ export const visAvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkk
         kodeverk: 'VILKAR_UTFALL_TYPE',
       },
       overstyrbar: true,
+      merknadParametere: {},
     }]}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     previewCallback={action('button-click')}

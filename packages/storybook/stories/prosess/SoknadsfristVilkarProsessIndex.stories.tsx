@@ -9,10 +9,19 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
+import {
+  Aksjonspunkt,
+  Behandling, FamilieHendelseSamling, Soknad, Vilkar,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const behandling = {
+  id: 1,
+  versjon: 1,
+} as Behandling;
 
 const vilkar = [{
   vilkarType: {
@@ -21,19 +30,35 @@ const vilkar = [{
   merknadParametere: {
     antallDagerSoeknadLevertForSent: '2',
   },
-}];
+}] as Vilkar[];
+
 const soknad = {
   soknadType: {
     kode: soknadType.FODSEL,
   },
   mottattDato: '2019-01-01',
-  fodselsdatoer: { 1: '2019-01-01' },
+  fodselsdatoer: { 1: '2019-01-01' } as {[key: number]: string},
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
-};
+} as Soknad;
+
 const familiehendelse = {
   gjeldende: {
-    fodselsdato: '2019-01-02',
+    avklartBarn: [{
+      fodselsdato: '2019-01-02',
+    }],
   },
+} as FamilieHendelseSamling;
+
+const standardProsessProps = {
+  behandling,
+  aksjonspunkter: [],
+  alleKodeverk: alleKodeverk as any,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar,
 };
 
 export default {
@@ -44,11 +69,7 @@ export default {
 
 export const visÅpentAksjonspunkt = () => (
   <SoknadsfristVilkarProsessIndex
-    behandling={{
-      id: 1,
-      versjon: 1,
-    }}
-    vilkar={vilkar}
+    {...standardProsessProps}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familiehendelse)}
     aksjonspunkter={[{
@@ -62,23 +83,19 @@ export const visÅpentAksjonspunkt = () => (
       vilkarType: {
         kode: vilkarType.SOKNADFRISTVILKARET,
       },
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
+    }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
   />
 );
 
 export const visOppfyltVilkår = () => (
   <SoknadsfristVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
       behandlingsresultat: {},
-    }}
-    vilkar={vilkar}
+    } as Behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familiehendelse)}
     aksjonspunkter={[{
@@ -92,9 +109,7 @@ export const visOppfyltVilkår = () => (
       vilkarType: {
         kode: vilkarType.SOKNADFRISTVILKARET,
       },
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.OPPFYLT}
@@ -103,6 +118,7 @@ export const visOppfyltVilkår = () => (
 
 export const visAvslåttVilkår = () => (
   <SoknadsfristVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
@@ -111,8 +127,7 @@ export const visAvslåttVilkår = () => (
           kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
         },
       },
-    }}
-    vilkar={vilkar}
+    } as Behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familiehendelse)}
     aksjonspunkter={[{
@@ -126,9 +141,7 @@ export const visAvslåttVilkår = () => (
       vilkarType: {
         kode: vilkarType.SOKNADFRISTVILKARET,
       },
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.IKKE_OPPFYLT}

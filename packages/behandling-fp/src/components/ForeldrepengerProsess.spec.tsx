@@ -70,6 +70,7 @@ describe('<ForeldrepengerProsess>', () => {
     vilkarType: { kode: vilkarType.ADOPSJONSVILKARET_FORELDREPENGER, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.IKKE_VURDERT, kodeverk: 'test' },
     overstyrbar: true,
+    merknadParametere: {},
   }];
   const soknad = {
     fodselsdatoer: {

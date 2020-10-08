@@ -3,41 +3,16 @@ import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
+
 import { buildInitialValues, ErSoknadsfristVilkaretOppfyltFormImpl as UnwrappedForm } from './ErSoknadsfristVilkaretOppfyltForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-soknadsfrist';
 
 describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
-  const behandlingspunkt = {
-    name: 'test',
-    status: vilkarUtfallType.OPPFYLT,
-    aksjonspunkter: [{
-      id: 1,
-      definisjon: {
-        navn: 'test',
-        kode: 'test',
-      },
-      status: {
-        kode: '',
-        navn: '',
-      },
-      vilkarType: {
-        kode: vilkarType.SOKNADFRISTVILKARET,
-        navn: 'test',
-      },
-      begrunnelse: 'begrunnelse',
-      kanLoses: true,
-    }],
-    aksjonspunktCodes: [],
-    vilkarType: vilkarType.SOKNADFRISTVILKARET,
-    merknadParametere: { test: 'test' },
-  };
-
   const getKodeverknavn = () => undefined;
 
   it('skal rendre form og vise søknadsfristdato som er lik mottatt dato minus antallDagerSoknadLevertForSent', () => {
@@ -49,11 +24,10 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       soknad={{
         mottattDato: '2017-10-15',
         begrunnelseForSenInnsending: 'testbegrunnelse',
-      }}
+      } as Soknad}
       antallDagerSoknadLevertForSent="9"
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
-      behandlingspunkt={behandlingspunkt}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -68,15 +42,13 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
-      mottattDato="2017-10-15"
       soknad={{
         mottattDato: '2017-10-15',
         begrunnelseForSenInnsending: 'testbegrunnelse',
-      }}
+      } as Soknad}
       antallDagerSoknadLevertForSent="9"
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
-      behandlingspunkt={behandlingspunkt}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -95,11 +67,10 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       soknad={{
         mottattDato: '2017-10-15',
         begrunnelseForSenInnsending: 'testbegrunnelse',
-      }}
+      } as Soknad}
       antallDagerSoknadLevertForSent="9"
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
-      behandlingspunkt={behandlingspunkt}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -116,11 +87,10 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       readOnlySubmitButton={false}
       soknad={{
         mottattDato: '2017-10-15',
-      }}
+      } as Soknad}
       antallDagerSoknadLevertForSent="9"
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
-      behandlingspunkt={behandlingspunkt}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -137,11 +107,10 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       readOnlySubmitButton={false}
       soknad={{
         mottattDato: '2017-10-15',
-      }}
+      } as Soknad}
       antallDagerSoknadLevertForSent="9"
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
-      behandlingspunkt={behandlingspunkt}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -160,11 +129,10 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       soknad={{
         mottattDato: '2017-10-15',
         begrunnelseForSenInnsending: 'testbegrunnelse',
-      }}
+      } as Soknad}
       antallDagerSoknadLevertForSent="9"
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
-      behandlingspunkt={behandlingspunkt}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -182,7 +150,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       definisjon: {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
       },
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -200,7 +168,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       definisjon: {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
       },
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -218,7 +186,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       definisjon: {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
       },
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -237,7 +205,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
       },
       begrunnelse: 'har lagret',
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -256,7 +224,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
       },
       begrunnelse: 'har lagret',
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 

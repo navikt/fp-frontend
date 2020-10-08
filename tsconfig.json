@@ -75,6 +75,7 @@
 		"packages/prosess-vilkar-omsorg",
 		"packages/prosess-vilkar-opptjening",
 		"packages/prosess-vilkar-sokers-opplysningsplikt",
+		"packages/prosess-vilkar-soknadsfrist",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

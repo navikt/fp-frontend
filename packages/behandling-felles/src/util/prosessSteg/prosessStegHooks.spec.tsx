@@ -62,6 +62,7 @@ describe('<prosessStegHooks>', () => {
     vilkarType: { kode: vilkarType.SOKERSOPPLYSNINGSPLIKT, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.IKKE_VURDERT, kodeverk: 'test' },
     overstyrbar: false,
+    merknadParametere: {},
   }];
 
   const kanOverstyreAccess = { isEnabled: false, employeeHasAccess: false };

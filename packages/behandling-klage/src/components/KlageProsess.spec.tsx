@@ -63,6 +63,7 @@ describe('<KlageProsess>', () => {
     vilkarType: { kode: vilkarType.ADOPSJONSVILKARET, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.IKKE_VURDERT, kodeverk: 'test' },
     overstyrbar: true,
+    merknadParametere: {},
   }];
   const klageVurdering = {
     klageVurderingResultatNK: {
