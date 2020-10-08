@@ -194,10 +194,11 @@ const lagSubmitFn = createSelector([
 (submitCallback) => (values: any) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = ownProps;
+  const { behandlingId, behandlingVersjon, gjeldendeFamiliehendelse } = ownProps;
   const termindato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'termindato');
   const utstedtdato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'utstedtdato');
   const editedStatus = getEditedStatus(ownProps);
+  const { avklartBarn } = gjeldendeFamiliehendelse;
   return {
     onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitialValues(ownProps),
@@ -205,9 +206,9 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
     isUtstedtDatoEdited: editedStatus.utstedtdato,
     isForTidligTerminbekreftelse: erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato),
     isAntallBarnEdited: editedStatus.antallBarn,
-    fodselsdatoTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length > 0 ? ownProps.gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined,
-    antallBarnTps: ownProps.gjeldendeFamiliehendelse.avklartBarn.length,
-    isOverridden: ownProps.gjeldendeFamiliehendelse.erOverstyrt,
+    fodselsdatoTps: avklartBarn && avklartBarn.length > 0 ? avklartBarn[0].fodselsdato : undefined,
+    antallBarnTps: avklartBarn ? avklartBarn.length : 0,
+    isOverridden: gjeldendeFamiliehendelse.erOverstyrt,
   };
 };
 
