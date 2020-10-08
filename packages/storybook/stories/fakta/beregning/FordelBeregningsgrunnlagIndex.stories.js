@@ -13,6 +13,7 @@ import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturalytelse } from './scenario/NyttArbeidOgNaturalytelse';
 import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from './scenario/ArbeidOgGradertNæring';
+import { beregningsgrunnlag as vurderRefusjonBG, aksjonspunkt as vurderRefusjonAP } from './scenario/VurderRefusjon';
 
 export default {
   title: 'fakta/fakta-fordel-beregningsgrunnlag',
@@ -434,3 +435,19 @@ export const skalSlåSammenNaturalytelseperioder = () => {
     />
   );
 };
+
+export const viseVurderTilkommetRefusjonskrav = () => (
+  <FordelBeregningsgrunnlagFaktaIndex
+    behandling={behandling}
+    alleKodeverk={alleKodeverk}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+    }}
+    submitCallback={action('button-click')}
+    readOnly={false}
+    beregningsgrunnlag={vurderRefusjonBG}
+    aksjonspunkter={vurderRefusjonAP}
+    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
+    submittable={boolean('submittable', true)}
+  />
+);
