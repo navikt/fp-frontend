@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import foreldreansvarVilkarAksjonspunkterPropType from './propTypes/foreldreansvarVilkarAksjonspunkterPropType';
-import foreldreansvarVilkarBehandlingPropType from './propTypes/foreldreansvarVilkarBehandlingPropType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
 import ErForeldreansvarVilkaarOppfyltForm from './components/ErForeldreansvarVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -14,7 +13,12 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const ForeldreansvarVilkarProsessIndex = ({
+interface OwnProps {
+  isForeldreansvar2Ledd: boolean;
+  isEngangsstonad: boolean;
+}
+
+const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   aksjonspunkter,
   isEngangsstonad,
@@ -41,17 +45,5 @@ const ForeldreansvarVilkarProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-ForeldreansvarVilkarProsessIndex.propTypes = {
-  behandling: foreldreansvarVilkarBehandlingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(foreldreansvarVilkarAksjonspunkterPropType).isRequired,
-  isForeldreansvar2Ledd: PropTypes.bool.isRequired,
-  isEngangsstonad: PropTypes.bool.isRequired,
-  status: PropTypes.string.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
 
 export default ForeldreansvarVilkarProsessIndex;

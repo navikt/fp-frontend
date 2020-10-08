@@ -9,6 +9,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
 import { buildInitialValues, ErForeldreansvarVilkaarOppfyltForm as UnwrappedForm } from './ErForeldreansvarVilkaarOppfyltForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-foreldreansvar';
@@ -133,7 +134,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       avslagsarsak: {
         kode: 'TEST',
       },
-    };
+    } as Behandling['behandlingsresultat'];
     const aksjonspunkter = [{
       definisjon: {
         kode: 'test',
@@ -146,7 +147,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
         kode: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
       },
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -162,7 +163,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       avslagsarsak: {
         kode: 'TEST',
       },
-    };
+    } as Behandling['behandlingsresultat'];
     const aksjonspunkter = [{
       definisjon: {
         kode: 'test',
@@ -175,7 +176,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
         kode: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
       },
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
@@ -191,7 +192,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       avslagsarsak: {
         kode: 'TEST',
       },
-    };
+    } as Behandling['behandlingsresultat'];
     const aksjonspunkter = [{
       definisjon: {
         kode: 'test',
@@ -204,7 +205,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
         kode: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
       },
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 

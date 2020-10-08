@@ -71,6 +71,7 @@
 		"packages/prosess-varsel-om-revurdering",
 		"packages/prosess-vilkar-adopsjon",
 		"packages/prosess-vilkar-fodsel",
+		"packages/prosess-vilkar-foreldreansvar",
 		"packages/sak-app",
 		"packages/sak-behandling-velger",
 		"packages/sak-dekorator",

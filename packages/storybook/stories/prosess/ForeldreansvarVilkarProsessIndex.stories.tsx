@@ -7,10 +7,21 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ForeldreansvarVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-foreldreansvar';
+import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const standardProsessProps = {
+  alleKodeverk: alleKodeverk as any,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
 
 export default {
   title: 'prosess/prosess-vilkar-foreldreansvar',
@@ -20,10 +31,11 @@ export default {
 
 export const visÅpentAksjonspunkt2Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
@@ -32,11 +44,7 @@ export const visÅpentAksjonspunkt2Ledd = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
+    }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
     isEngangsstonad={boolean('isEngangsstonad', false)}
     isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', true)}
@@ -45,11 +53,12 @@ export const visÅpentAksjonspunkt2Ledd = () => (
 
 export const visOppfyltVilkår2Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
       behandlingsresultat: {},
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
@@ -58,9 +67,7 @@ export const visOppfyltVilkår2Ledd = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er godkjent',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.OPPFYLT}
@@ -71,6 +78,7 @@ export const visOppfyltVilkår2Ledd = () => (
 
 export const visAvslåttVilkår2Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
@@ -79,7 +87,7 @@ export const visAvslåttVilkår2Ledd = () => (
           kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
         },
       },
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
@@ -88,9 +96,7 @@ export const visAvslåttVilkår2Ledd = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er avslått',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.IKKE_OPPFYLT}
@@ -101,10 +107,11 @@ export const visAvslåttVilkår2Ledd = () => (
 
 export const visÅpentAksjonspunkt4Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
@@ -113,11 +120,7 @@ export const visÅpentAksjonspunkt4Ledd = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
       begrunnelse: undefined,
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
+    }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
     isEngangsstonad={false}
     isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', false)}
@@ -126,11 +129,12 @@ export const visÅpentAksjonspunkt4Ledd = () => (
 
 export const visOppfyltVilkår4Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
       behandlingsresultat: {},
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
@@ -139,9 +143,7 @@ export const visOppfyltVilkår4Ledd = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er godkjent',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.OPPFYLT}
@@ -152,6 +154,7 @@ export const visOppfyltVilkår4Ledd = () => (
 
 export const visAvslåttVilkår4Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
+    {...standardProsessProps}
     behandling={{
       id: 1,
       versjon: 1,
@@ -160,7 +163,7 @@ export const visAvslåttVilkår4Ledd = () => (
           kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
         },
       },
-    }}
+    } as Behandling}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
@@ -169,9 +172,7 @@ export const visAvslåttVilkår4Ledd = () => (
         kode: aksjonspunktStatus.UTFORT,
       },
       begrunnelse: 'Dette vilkåret er avslått',
-    }]}
-    alleKodeverk={alleKodeverk}
-    submitCallback={action('button-click')}
+    }] as Aksjonspunkt[]}
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.IKKE_OPPFYLT}
