@@ -18,7 +18,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
-  ISO_DATE_FORMAT, getKodeverknavnFn, calcDays,
+  ISO_DATE_FORMAT, getKodeverknavnFn, calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT,
 } from '@fpsak-frontend/utils';
 import { CheckboxField, getBehandlingFormPrefix, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -29,7 +29,6 @@ import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
   Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, AvklartBarn, UttakStonadskontoer, PeriodeSoker,
 } from '@fpsak-frontend/types';
-
 import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
 import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
 
@@ -37,12 +36,6 @@ import TimeLineInfo from './stonadkonto/TimeLineInfo';
 import UttakTimeLineData from './UttakTimeLineData';
 import UttakMedsokerReadOnly from './UttakMedsokerReadOnly';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
-import {
-  getCorrectPeriodName,
-  getStatusPeriodeMed,
-  createTooltipContent,
-  getStatusPeriodeHoved,
-} from '../selectors/uttakSelectors';
 
 import styles from './uttak.less';
 
@@ -57,8 +50,11 @@ export type PeriodeMedClassName = {
   hovedsoker: boolean;
   group: number;
   title: string;
+  erOppfylt?: boolean;
 } & UttaksresultatActivity
 
+const godkjentKlassenavn = 'godkjentPeriode';
+const avvistKlassenavn = 'avvistPeriode';
 const endretClassnavn = 'endretPeriode';
 const ACTIVITY_PANEL_NAME = 'uttaksresultatActivity';
 const STONADSKONTOER_TEMP = 'stonadskonto';
@@ -293,7 +289,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     formInitialize(`${behandlingFormPrefix}.${ACTIVITY_PANEL_NAME}`, uttakActivity);
   }
 
-  updateActivity(values: any) {
+  updateActivity(values: PeriodeMedClassName) {
     const { uttakPerioder } = this.props;
     const { ...verdier } = values;
     verdier.aktiviteter = verdier.aktiviteter.map((a) => {
@@ -645,7 +641,7 @@ const lagUttakMedOpphold = createSelector(
           kodeverk: uttak.oppholdÅrsak.kodeverk,
           navn: uttakPeriodeNavn[stonadskonto],
         },
-        trekkdagerDesimaler: calcDays(moment(uttak.fom.toString()), moment(uttak.tom.toString())),
+        trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
         trekkdager: null,
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
@@ -666,6 +662,61 @@ const lagUttaksresultatActivity = createSelector(
     }));
   },
 );
+
+const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker) => {
+  if (periode.erOppfylt === false) {
+    return avvistKlassenavn;
+  }
+  if (periode.erOppfylt === true || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET
+    && !periode.tilknyttetStortinget)) {
+    return godkjentKlassenavn;
+  }
+  if (periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING
+    || periode.tilknyttetStortinget
+  ) {
+    return 'undefined';
+  }
+  return avvistKlassenavn;
+};
+
+const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker) => {
+  if (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
+    return godkjentKlassenavn;
+  }
+  return avvistKlassenavn;
+};
+
+const createTooltipContent = (periodeType: string, intl: IntlShape, item: UttaksresultatActivity | PeriodeSoker) => (`
+    <p>
+      ${moment(item.fom).format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom).format(DDMMYY_DATE_FORMAT)}
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       ${intl.formatMessage({ id: calcDaysAndWeeks(item.fom, item.tom).id },
+    {
+      weeks: calcDaysAndWeeks(item.fom, item.tom).weeks,
+      days: calcDaysAndWeeks(item.fom, item.tom).days,
+    })}
+      </br>
+      ${item.utsettelseType && item.utsettelseType.kode !== '-'
+    ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' }) : periodeType}
+     </p>
+  `);
+
+const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+  if (item.utsettelseType && item.utsettelseType.kode !== '-') {
+    return (<FormattedMessage id="Timeline.tooltip.slutt" />);
+  }
+
+  if (item.aktiviteter.length > 0 && item.aktiviteter[0].stønadskontoType) {
+    return getKodeverknavn(item.aktiviteter[0].stønadskontoType);
+  }
+
+  if (item.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+    const stonadskonto = oppholdArsakMapper[item.oppholdÅrsak.kode];
+    return uttakPeriodeNavn[stonadskonto];
+  }
+
+  return '';
+};
 
 const addClassNameGroupIdToPerioder = (
   hovedsokerPerioder: UttaksresultatActivity[],

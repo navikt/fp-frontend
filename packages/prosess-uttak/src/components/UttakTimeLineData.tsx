@@ -11,18 +11,20 @@ import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Behandling, KodeverkMedNavn, UttakStonadskontoer } from '@fpsak-frontend/types';
+import {
+  Behandling, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet, UttakStonadskontoer,
+} from '@fpsak-frontend/types';
 import UttakActivity from './UttakActivity';
-import DelOppPeriodeModal from './DelOppPeriodeModal';
-
-import styles from './uttakTimeLineData.less';
+import DelOppPeriodeModal, { DeltPeriodeData } from './DelOppPeriodeModal';
 import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
 
-const getCorrectEmptyArbeidsForhold = (preiodeTypeKode: any, arbeidsForhold: any, getKodeverknavn: any) => {
-  const arbeidsForholdMedNullDagerIgjenArray: any = [];
+import styles from './uttakTimeLineData.less';
+
+const getCorrectEmptyArbeidsForhold = (getKodeverknavn: (kodeverk: Kodeverk) => string, periodeTypeKode?: string, stonadskonto?: UttakStonadskontoer) => {
+  const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
   let arbeidsforholdMedPositivSaldoFinnes = false;
-  if (arbeidsForhold.stonadskontoer[preiodeTypeKode] && arbeidsForhold.stonadskontoer[preiodeTypeKode].aktivitetSaldoDtoList) {
-    arbeidsForhold.stonadskontoer[preiodeTypeKode].aktivitetSaldoDtoList.forEach((item: any) => {
+  if (stonadskonto && stonadskonto.stonadskontoer[periodeTypeKode] && stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList) {
+    stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList.forEach((item) => {
       if (item.saldo === 0) {
         if (item.aktivitetIdentifikator.arbeidsgiver) {
           arbeidsForholdMedNullDagerIgjenArray.push(item.aktivitetIdentifikator.arbeidsgiver.navn);
@@ -40,12 +42,17 @@ const getCorrectEmptyArbeidsForhold = (preiodeTypeKode: any, arbeidsForhold: any
   return [];
 };
 
-const hentApTekst = (manuellBehandlingÅrsak: any, stonadskonto: any, getKodeverknavn: any, aktiviteter: any) => {
+const hentApTekst = (
+  manuellBehandlingÅrsak: Kodeverk,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  stonadskonto?: UttakStonadskontoer,
+  periodeTypeKode?: string,
+) => {
   const texts = [];
 
   // TODO: Fix - ta bort 5001 med verdi fra kodeverk
   if (manuellBehandlingÅrsak.kode === '5001') {
-    const arbeidsForhold = getCorrectEmptyArbeidsForhold(aktiviteter, stonadskonto, getKodeverknavn);
+    const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, periodeTypeKode, stonadskonto);
     const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
     if (arbeidsForhold.length > 1) {
       texts.push(
@@ -77,7 +84,7 @@ const hentApTekst = (manuellBehandlingÅrsak: any, stonadskonto: any, getKodever
   return texts;
 };
 
-export const kalkulerTrekkdager = (aktivitet: any, samtidigUttak: any, samtidigUttaksprosent: any, virkedager: any) => {
+export const kalkulerTrekkdager = (aktivitet: PeriodeSokerAktivitet, virkedager: number, samtidigUttak?: boolean, samtidigUttaksprosent?: number) => {
   let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
   uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
 
@@ -96,8 +103,8 @@ interface OwnProps {
   callbackBackward: (event: any) => void;
   callbackCancelSelectedActivity: () => void;
   callbackForward: (event: any) => void;
-  callbackSetSelected: (uttakActivity: any, isMounting: boolean) => void;
-  callbackUpdateActivity: (values: any) => void;
+  callbackSetSelected: (uttakActivity: PeriodeMedClassName, isMounting: boolean) => void;
+  callbackUpdateActivity: (data: PeriodeMedClassName) => void;
   formName: string;
   harSoktOmFlerbarnsdager: boolean;
   isApOpen?: boolean;
@@ -128,7 +135,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     };
   }
 
-  setFormField(fieldName: any, fieldValue: any) {
+  setFormField(fieldName: string, fieldValue: UttaksresultatActivity[]) {
     const { behandlingFormPrefix, formName, reduxFormChange: formChange } = this.props;
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
@@ -148,14 +155,14 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     });
   }
 
-  splitPeriod(formValues: any) {
+  splitPeriod(formValues: DeltPeriodeData) {
     const { uttaksresultatActivity, activityPanelName, callbackSetSelected: setSelected } = this.props;
     const {
       periodeId, forstePeriode, andrePeriode, hovedsoker,
     } = formValues;
 
-    const periodeSomSkalSplittes = uttaksresultatActivity.find((o: any) => o.id === periodeId);
-    const alleAndrePerioder = uttaksresultatActivity.filter((o: any) => o.id !== periodeId);
+    const periodeSomSkalSplittes = uttaksresultatActivity.find((o) => o.id === periodeId);
+    const alleAndrePerioder = uttaksresultatActivity.filter((o) => o.id !== periodeId);
     const nyId = periodeId + 1;
 
     const virkedagerForPeriode1 = calcDays(forstePeriode.fom, forstePeriode.tom);
@@ -163,14 +170,14 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
 
     const { samtidigUttak, samtidigUttaksprosent } = periodeSomSkalSplittes;
     const oppdaterteAktiviteterPeriode1 = periodeSomSkalSplittes.aktiviteter
-      .map((aktivitet: any) => ({
+      .map((aktivitet) => ({
         ...aktivitet,
-        ...kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedagerForPeriode1),
+        ...kalkulerTrekkdager(aktivitet, virkedagerForPeriode1, samtidigUttak, samtidigUttaksprosent),
       }));
     const oppdaterteAktiviteterPeriode2 = periodeSomSkalSplittes.aktiviteter
-      .map((aktivitet: any) => ({
+      .map((aktivitet) => ({
         ...aktivitet,
-        ...kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedagerForPeriode2),
+        ...kalkulerTrekkdager(aktivitet, virkedagerForPeriode2, samtidigUttak, samtidigUttaksprosent),
       }));
 
     const nyPeriode1 = {
@@ -191,7 +198,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       hovedsoker,
     };
 
-    alleAndrePerioder.forEach((p: any) => {
+    alleAndrePerioder.forEach((p) => {
       if (p.id >= nyId) {
         // eslint-disable-next-line no-param-reassign
         p.id += 1;
@@ -199,7 +206,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     });
 
     const sorterteAktiviteter = alleAndrePerioder.concat(nyPeriode1, nyPeriode2);
-    sorterteAktiviteter.sort((a: any, b: any) => a.id - b.id);
+    sorterteAktiviteter.sort((a, b) => a.id - b.id);
 
     this.setFormField(activityPanelName, sorterteAktiviteter);
     this.hideModal();
@@ -218,7 +225,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       behandlingVersjon,
       behandlingsresultat,
       intl,
-      isApOpen,
+      isApOpen = false,
       readOnly,
       selectedItemData,
       stonadskonto,
@@ -275,8 +282,8 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
         <>
           <AksjonspunktHelpText isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
             {selectedItemData.periodeType
-              ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, stonadskonto, getKodeverknavn, selectedItemData.periodeType.kode)
-              : hentApTekst(selectedItemData.manuellBehandlingÅrsak, stonadskonto, getKodeverknavn)}
+              ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, stonadskonto, selectedItemData.periodeType.kode)
+              : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, stonadskonto)}
           </AksjonspunktHelpText>
           <VerticalSpacer twentyPx />
         </>
@@ -286,7 +293,6 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           updateActivity={callbackUpdateActivity}
           selectedItemData={selectedItemData}
           readOnly={readOnly}
-          isApOpen={isApOpen}
           harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
           alleKodeverk={alleKodeverk}
           behandlingId={behandlingId}
@@ -297,10 +303,5 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     );
   }
 }
-
-UttakTimeLineData.defaultProps = {
-  isApOpen: false,
-  stonadskonto: {},
-};
 
 export default injectIntl(UttakTimeLineData);

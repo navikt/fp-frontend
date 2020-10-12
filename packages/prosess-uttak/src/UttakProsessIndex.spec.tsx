@@ -3,10 +3,12 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Personopplysninger,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import UttakPanel from './components/UttakPanel';
 import UttakProsessIndex from './UttakProsessIndex';
@@ -14,10 +16,10 @@ import UttakProsessIndex from './UttakProsessIndex';
 describe('<UttakProsessIndex>', () => {
   const fagsak = {
     saksnummer: 123,
-    ytelseType: {
+    sakstype: {
       kode: fagsakYtelseType.FORELDREPENGER,
     },
-  };
+  } as Fagsak;
 
   const uttaksresultatPerioder = {
     perioderSøker: [
@@ -90,20 +92,13 @@ describe('<UttakProsessIndex>', () => {
           kodeverk: 'OPPHOLD_AARSAK_TYPE',
         },
         gradertAktivitet: null,
-        periodeResultatÅrsakLovhjemmel: {
-          fagsakYtelseType: {
-            FP: {
-              lovreferanse: '14-10',
-            },
-          },
-        },
         graderingsAvslagÅrsakLovhjemmel: null,
       },
     ],
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-  };
+  } as UttaksresultatPeriode;
 
   const behandling = {
     id: 1,
@@ -116,13 +111,12 @@ describe('<UttakProsessIndex>', () => {
       kodeverk: '1',
     },
     behandlingsresultat: {
-      skjaeringstidspunktForeldrepenger: '2019-01-01',
-    },
+    } as Behandling['behandlingsresultat'],
     status: {
       kode: '1',
       kodeverk: '1',
     },
-  };
+  } as Behandling;
 
   const aksjonspunkter = [{
     definisjon: {
@@ -132,28 +126,29 @@ describe('<UttakProsessIndex>', () => {
       kode: '1',
       kodeverk: '1',
     },
-  }];
+  }] as Aksjonspunkt[];
 
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<UttakProsessIndex
       fagsak={fagsak}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ skjaeringstidspunktForeldrepenger: string;... Remove this comment to see the full error message
       behandling={behandling}
       aksjonspunkter={aksjonspunkter}
       submitCallback={sinon.spy()}
       isReadOnly={false}
       readOnlySubmitButton={false}
       isAksjonspunktOpen
-      uttakStonadskontoer={{}}
-      soknad={{}}
-      familiehendelse={{}}
+      uttakStonadskontoer={{} as UttakStonadskontoer}
+      soknad={{} as Soknad}
+      familiehendelse={{} as FamilieHendelseSamling}
       uttaksresultatPerioder={uttaksresultatPerioder}
-      personopplysninger={{}}
+      personopplysninger={{} as Personopplysninger}
       alleKodeverk={{}}
       employeeHasAccess
       tempUpdateStonadskontoer={sinon.spy()}
-      uttakPeriodeGrense={{}}
-      ytelsefordeling={{}}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      status=""
+      vilkar={[]}
     />);
     expect(wrapper.find(UttakPanel)).has.length(1);
   });

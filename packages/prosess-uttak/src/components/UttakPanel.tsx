@@ -12,7 +12,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, PeriodeSoker, Personopplysninger,
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -386,7 +386,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, apCodes, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, apCodes, aksjonspunkter)));
 
-const mapStateToPropsFactory = (_initialState: any, initOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initOwnProps;
   const validate = (values: FormValues) => validateUttakPanelForm(values);
 

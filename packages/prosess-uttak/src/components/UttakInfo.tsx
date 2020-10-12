@@ -13,17 +13,14 @@ import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidTyp
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import { PeriodeMedClassName } from './Uttak';
 import styles from './uttakActivity.less';
-
-/**
- * UttakInfo
- * Presentationskomponent. Viser opp den faktiska informasjonen om en periode i uttak
- */
 
 const maxValue100 = maxValue(100);
 
-const periodeStatusClassName = (periode: any) => {
+const periodeStatusClassName = (periode: PeriodeMedClassName) => {
   if (periode.erOppfylt === false) {
     return styles.redDetailsPeriod;
   }
@@ -37,7 +34,7 @@ const periodeStatusClassName = (periode: any) => {
   return styles.redDetailsPeriod;
 };
 
-const periodeIsInnvilget = (periode: any) => {
+const periodeIsInnvilget = (periode: PeriodeMedClassName) => {
   if (periode.erOppfylt === false) {
     return false;
   }
@@ -47,7 +44,7 @@ const periodeIsInnvilget = (periode: any) => {
   return false;
 };
 
-const gradertArbforhold = (selectedItem: any) => {
+const gradertArbforhold = (selectedItem: PeriodeMedClassName) => {
   let arbeidsforhold = '';
   if (selectedItem.gradertAktivitet) {
     const {
@@ -55,8 +52,9 @@ const gradertArbforhold = (selectedItem: any) => {
     } = selectedItem.gradertAktivitet;
 
     if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-      arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
-    } else if (arbeidsgiver) {
+      return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
+    }
+    if (arbeidsgiver) {
       const {
         navn, identifikator,
       } = arbeidsgiver;
@@ -67,39 +65,37 @@ const gradertArbforhold = (selectedItem: any) => {
   return arbeidsforhold;
 };
 
-const typePeriode = (selectedItem: any, kontoIkkeSatt: any, getKodeverknavn: any) => {
-  let returnText = '';
+const typePeriode = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string, kontoIkkeSatt?: boolean) => {
   if (selectedItem.utsettelseType.kode === '-' && !kontoIkkeSatt) {
-    returnText = (<FormattedMessage id="UttakActivity.Uttak" />);
-  } else if (selectedItem.utsettelseType.kode !== '-') {
-    returnText = (<FormattedMessage id="UttakActivity.Utsettelse" values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType) }} />);
-  } else if (kontoIkkeSatt) {
-    returnText = (<FormattedMessage id="UttakActivity.IngenKonto" />);
+    return <FormattedMessage id="UttakActivity.Uttak" />;
   }
-  return returnText;
+  if (selectedItem.utsettelseType.kode !== '-') {
+    return <FormattedMessage id="UttakActivity.Utsettelse" values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType) }} />;
+  }
+  if (kontoIkkeSatt) {
+    return <FormattedMessage id="UttakActivity.IngenKonto" />;
+  }
+  return '';
 };
 
-const isInnvilgetText = (selectedItemData: any, getKodeverknavn: any) => {
-  let returnText = '';
+const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
   if (periodeIsInnvilget(selectedItemData)) {
-    returnText = (
+    return (
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
         values={{ innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
       />
     );
-  } else {
-    returnText = (
-      <FormattedMessage
-        id="UttakActivity.IkkeOppfyltAarsak"
-        values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
-      />
-    );
   }
-  return returnText;
+  return (
+    <FormattedMessage
+      id="UttakActivity.IkkeOppfyltAarsak"
+      values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
+    />
+  );
 };
 
-const stonadskonto = (selectedItem: any, kontoIkkeSatt: any, getKodeverknavn: any) => {
+const stonadskonto = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string, kontoIkkeSatt?: boolean) => {
   let returnText = '';
   if (!kontoIkkeSatt) {
     returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType);
@@ -113,15 +109,15 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
 
-const mapPeriodeTyper = (typer: any) => typer
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
   .filter(({
     kode,
-  }: any) => gyldigeÅrsaker.includes(kode))
+  }) => gyldigeÅrsaker.includes(kode))
   .map(({
     kode,
-  }: any) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
+  }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
 
-const visGraderingIkkeInnvilget = (selectedItem: any, readOnly: any, graderingInnvilget: any) => {
+const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean) => {
   const visGradering = selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
     && selectedItem.gradertAktivitet
     && graderingInnvilget === false
@@ -130,16 +126,20 @@ const visGraderingIkkeInnvilget = (selectedItem: any, readOnly: any, graderingIn
 };
 
 interface OwnProps {
-  oppholdArsakTyper: any; // TODO: kodeverkPropType
-  selectedItemData: {};
+  oppholdArsakTyper: KodeverkMedNavn[];
+  selectedItemData: PeriodeMedClassName;
   kontoIkkeSatt?: boolean;
   readOnly: boolean;
   harSoktOmFlerbarnsdager: boolean;
   graderingInnvilget?: boolean;
   erSamtidigUttak?: boolean;
-  alleKodeverk: {};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
+/**
+ * UttakInfo
+ * Presentationskomponent. Viser opp den faktiska informasjonen om en periode i uttak
+ */
 export const UttakInfo: FunctionComponent<OwnProps> = ({
   selectedItemData,
   kontoIkkeSatt,
@@ -162,13 +162,13 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 <Row>
                   <Column xs="12">
                     <Element>
-                      {typePeriode(selectedItemData, kontoIkkeSatt, getKodeverknavn)}
+                      {typePeriode(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
                     </Element>
                   </Column>
                 </Row>
                 <Row>
                   <Column xs="12">
-                    {stonadskonto(selectedItemData, kontoIkkeSatt, getKodeverknavn)}
+                    {stonadskonto(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
                   </Column>
                 </Row>
               </Column>
@@ -218,12 +218,13 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                             value={selectedItemData.samtidigUttaksprosent}
                             label={{ id: 'UttakInfo.SamtidigUttaksprosent' }}
                             validate={[required, maxValue100, hasValidDecimal]}
-                            format={(value: any) => {
+                            format={(value) => {
                               if (value || value === 0) {
                                 return readOnly ? `${value} %` : value;
                               }
                               return '';
                             }}
+                            // @ts-ignore Fiks dette
                             normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                           />
                         </Column>
@@ -256,10 +257,10 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 <Row>
                   <Column xs="12">
                     <FormattedMessage
-                      id={calcDaysAndWeeks(moment(selectedItemData.fom.toString()), moment(selectedItemData.tom.toString())).id}
+                      id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
                       values={{
-                        weeks: calcDaysAndWeeks(moment(selectedItemData.fom.toString()), moment(selectedItemData.tom.toString())).weeks,
-                        days: calcDaysAndWeeks(moment(selectedItemData.fom.toString()), moment(selectedItemData.tom.toString())).days,
+                        weeks: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).weeks,
+                        days: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).days,
                       }}
                     />
                   </Column>
@@ -278,10 +279,10 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 {selectedItemData.oppholdÅrsak.kode !== '-'
                   && (
                     <FormattedMessage
-                      id={calcDaysAndWeeks(moment(selectedItemData.fom.toString()), moment(selectedItemData.tom.toString())).id}
+                      id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
                       values={{
-                        weeks: calcDaysAndWeeks(moment(selectedItemData.fom.toString()), moment(selectedItemData.tom.toString())).weeks,
-                        days: calcDaysAndWeeks(moment(selectedItemData.fom.toString()), moment(selectedItemData.tom.toString())).days,
+                        weeks: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).weeks,
+                        days: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).days,
                       }}
                     />
                   )}

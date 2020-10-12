@@ -64,8 +64,8 @@ function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn) {
 }
 
 type ArsakKodeverk = {
-  gyldigFom: string;
-  gyldigTom: string;
+  gyldigFom?: string;
+  gyldigTom?: string;
   uttakTyper?: string[];
   valgbarForKonto?: string[];
 } & KodeverkMedNavn;
@@ -108,7 +108,7 @@ const mapAarsak = (
 
 interface PureOwnProps {
   cancelSelectedActivity: (...args: any[]) => any;
-  updateActivity: (...args: any[]) => any;
+  updateActivity: (data: PeriodeMedClassName) => void;
   selectedItemData: PeriodeMedClassName;
   readOnly: boolean;
   harSoktOmFlerbarnsdager: boolean;
@@ -457,12 +457,27 @@ const validateUttakActivity = (values: FormValues) => {
   return errors;
 };
 
+const getPeriodeResultatÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakKodeverk, innvilgelseAarsakObject: ArsakKodeverk) => {
+  if (!erOppfylt && avslagAarsakObject) {
+    return avslagAarsakObject;
+  }
+  if (erOppfylt && innvilgelseAarsakObject) {
+    return innvilgelseAarsakObject;
+  }
+
+  return {
+    kode: '-',
+    kodeverk: '',
+    navn: '',
+  };
+};
+
 const transformValues = (
   values: FormValues,
   avslagAarsakKoder: ArsakKodeverk[],
   innvilgelseAarsakKoder: ArsakKodeverk[],
   graderingAvslagAarsakKoder: KodeverkMedNavn[],
-) => {
+): PeriodeMedClassName => {
   const { ...transformvalue } = values.selectedItem;
   const { ...nyeVerdier } = omit(values, 'selectedItem');
   const [avslagAarsakObject] = avslagAarsakKoder.filter((a) => a.kode === values.avslagAarsak);
@@ -476,31 +491,27 @@ const transformValues = (
     bekreftetAktivitet.stønadskontoType.navn = uttakPeriodeNavn[a.stønadskontoType.kode];
     return bekreftetAktivitet;
   });
-  transformvalue.begrunnelse = values.begrunnelse;
-  transformvalue.flerbarnsdager = values.flerbarnsdager;
-  transformvalue.samtidigUttak = values.samtidigUttak;
-  transformvalue.samtidigUttaksprosent = values.samtidigUttaksprosent !== 'NaN' ? values.samtidigUttaksprosent : null;
-  transformvalue.erOppfylt = values.erOppfylt;
-  transformvalue.graderingInnvilget = values.erOppfylt ? values.graderingInnvilget : false;
-  transformvalue.oppholdÅrsak.kode = values.oppholdArsak;
-  transformvalue.periodeResultatType = resultatTypeObject(values.erOppfylt, values.oppholdArsak);
-  transformvalue.periodeResultatÅrsak = {
-    kode: '-',
-  };
-  transformvalue.graderingAvslagÅrsak = {
-    kode: '-',
-  };
-  if (!values.erOppfylt && avslagAarsakObject) {
-    transformvalue.periodeResultatÅrsak = avslagAarsakObject;
-  }
-  if (values.erOppfylt && innvilgelseAarsakObject) {
-    transformvalue.periodeResultatÅrsak = innvilgelseAarsakObject;
-  }
-  if (values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject) {
-    transformvalue.graderingAvslagÅrsak = graderingAvslagAarsakObject;
-  }
 
-  return transformvalue;
+  return {
+    ...values.selectedItem,
+    begrunnelse: values.begrunnelse,
+    flerbarnsdager: values.flerbarnsdager,
+    samtidigUttak: values.samtidigUttak,
+    samtidigUttaksprosent: values.samtidigUttaksprosent !== 'NaN' ? values.samtidigUttaksprosent : null,
+    erOppfylt: values.erOppfylt,
+    graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
+    oppholdÅrsak: {
+      kode: values.oppholdArsak,
+      kodeverk: values.selectedItem.oppholdÅrsak.kodeverk,
+    },
+    periodeResultatType: resultatTypeObject(values.erOppfylt, values.oppholdArsak),
+    periodeResultatÅrsak: getPeriodeResultatÅrsak(values.erOppfylt, avslagAarsakObject, innvilgelseAarsakObject),
+    graderingAvslagÅrsak: values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject ? graderingAvslagAarsakObject : {
+      kode: '-',
+      kodeverk: '',
+      navn: '',
+    },
+  };
 };
 
 // https://jira.adeo.no/browse/PFP-7937

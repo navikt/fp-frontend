@@ -15,9 +15,8 @@ interface OwnProps {
   callbackForward: (event: any) => void;
   callbackBackward: (event: any) => void;
   readOnly: boolean;
-  callbackUpdateActivity: (...args: any[]) => any;
+  callbackUpdateActivity: (data: PeriodeMedClassName) => void;
   callbackCancelSelectedActivity: (...args: any[]) => any;
-  isApOpen?: boolean;
   harSoktOmFlerbarnsdager: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -32,7 +31,6 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   callbackBackward,
   callbackUpdateActivity,
   callbackCancelSelectedActivity,
-  isApOpen,
   harSoktOmFlerbarnsdager,
   alleKodeverk,
   behandlingId,
@@ -61,7 +59,6 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
         updateActivity={callbackUpdateActivity}
         selectedItemData={selectedItemData}
         readOnly={readOnly}
-        isApOpen={isApOpen}
         harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
         alleKodeverk={alleKodeverk}
         behandlingId={behandlingId}
@@ -70,10 +67,6 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
       />
     </TimeLineDataContainer>
   );
-};
-
-UttakMedsokerReadOnly.defaultProps = {
-  isApOpen: false,
 };
 
 export default UttakMedsokerReadOnly;

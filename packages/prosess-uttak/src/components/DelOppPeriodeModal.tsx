@@ -16,13 +16,29 @@ import { DatepickerField, behandlingForm, behandlingFormValueSelector } from '@f
 import styles from './delOppPeriodeModal.less';
 import { PeriodeMedClassName } from './Uttak';
 
+export type DeltPeriodeData = {
+  periodeId: number;
+  trekkdager: number;
+  hovedsoker: boolean;
+  gradertProsentandelArbeid?: number;
+  gradertTrekkdager?: number;
+  forstePeriode: {
+    fom: string;
+    tom: string;
+  };
+  andrePeriode: {
+    fom: string;
+    tom: string;
+  };
+}
+
 interface PureOwnProps {
   periodeData: PeriodeMedClassName;
   cancelEvent: () => void;
   showModal: boolean;
   behandlingId: number;
   behandlingVersjon: number;
-  splitPeriod: (data: any) => void;
+  splitPeriod: (data: DeltPeriodeData) => void;
 }
 
 interface MappedOwnProps {
@@ -133,7 +149,7 @@ const validateForm = (value: FormValues, periodeData: PeriodeMedClassName) => {
   return null;
 };
 
-const transformValues = (values: FormValues, periodeData: PeriodeMedClassName) => {
+const transformValues = (values: FormValues, periodeData: PeriodeMedClassName): DeltPeriodeData => {
   const addDay = moment(values.ForstePeriodeTomDato).add(1, 'days');
   const forstePeriode = {
     fom: periodeData.fom,
