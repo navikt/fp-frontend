@@ -13,8 +13,8 @@ import TimeLineSokerEnsamSoker from './components/TimeLineSokerEnsamSoker';
 
 import styles from './tidslinje.less';
 
-interface EventProps {
-  items: string[];
+export interface EventProps {
+  items: string[] | number[];
   event: Event;
 }
 

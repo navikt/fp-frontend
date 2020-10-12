@@ -18,7 +18,6 @@ import { PeriodeMedClassName } from './Uttak';
 
 export type DeltPeriodeData = {
   periodeId: number;
-  trekkdager: number;
   hovedsoker: boolean;
   gradertProsentandelArbeid?: number;
   gradertTrekkdager?: number;
@@ -161,10 +160,9 @@ const transformValues = (values: FormValues, periodeData: PeriodeMedClassName): 
   };
   return {
     periodeId: periodeData.id,
-    trekkdager: periodeData.trekkdager,
     hovedsoker: periodeData.hovedsoker,
     gradertProsentandelArbeid: periodeData.gradertAktivitet ? periodeData.gradertAktivitet.prosentArbeid : null,
-    gradertTrekkdager: periodeData.gradertAktivitet ? periodeData.gradertAktivitet.trekkdager : null,
+    gradertTrekkdager: periodeData.gradertAktivitet ? periodeData.gradertAktivitet.trekkdagerDesimaler : null,
     forstePeriode,
     andrePeriode,
   };

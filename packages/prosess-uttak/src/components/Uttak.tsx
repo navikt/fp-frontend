@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import moment from 'moment';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ import { CheckboxField, getBehandlingFormPrefix, behandlingFormValueSelector } f
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import { Tidslinje } from '@fpsak-frontend/tidslinje';
+import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
   Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, AvklartBarn, UttakStonadskontoer, PeriodeSoker,
@@ -71,13 +71,13 @@ const getCustomTimes = (
   barnFraTps: AvklartBarn[],
   familiehendelse: FamilieHendelseSamling,
   isRevurdering: boolean,
-  omsorgsOvertagelseDato: string,
   person: Personopplysninger,
   soknadDate: string,
   soknadsType: string,
   endredFodselsDato?: string,
   endringsdato?: string,
   familiehendelseDate?: string,
+  omsorgsOvertagelseDato?: string,
 ): TidslinjeTimes => {
   // TODO: trumfa tps med avklartebarn fra lösningen - blir TPS-barn en del av dem?
 
@@ -129,11 +129,11 @@ interface PureOwnProps {
   uttaksresultat: UttaksresultatPeriode;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   mottattDato: Soknad['mottattDato'];
-  fodselsdatoer: Soknad['fodselsdatoer'];
-  termindato: Soknad['termindato'];
-  adopsjonFodelsedatoer: Soknad['adopsjonFodelsedatoer'];
+  fodselsdatoer?: Soknad['fodselsdatoer'];
+  termindato?: Soknad['termindato'];
+  adopsjonFodelsedatoer?: Soknad['adopsjonFodelsedatoer'];
   soknadsType: string;
-  omsorgsovertakelseDato: string;
+  omsorgsovertakelseDato?: string;
   tempUpdateStonadskontoer: (...args: any[]) => any;
 }
 
@@ -295,7 +295,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     verdier.aktiviteter = verdier.aktiviteter.map((a) => {
       const { ...aktivitet } = a;
       aktivitet.utbetalingsgrad = a.utbetalingsgrad || a.utbetalingsgrad === 0 ? parseFloat(a.utbetalingsgrad) : null;
-      aktivitet.trekkdager = null;
       return aktivitet;
     });
 
@@ -315,7 +314,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     this.setState({ selectedItem: undefined });
   }
 
-  openPeriodInfo(event: any) {
+  openPeriodInfo(event: MouseEvent) {
     const { uttakPerioder } = this.props;
     const { selectedItem: currentSelectedItem } = this.state;
     if (currentSelectedItem) {
@@ -327,7 +326,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     event.preventDefault();
   }
 
-  selectHandler(eventProps: any) {
+  selectHandler(eventProps: EventProps) {
     const { uttakPerioder } = this.props;
     const { selectedItem: currentSelectedItem } = this.state;
     const selectedItem = uttakPerioder.find((item: PeriodeMedClassName) => item.id === eventProps.items[0]);
@@ -340,17 +339,17 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     eventProps.event.preventDefault();
   }
 
-  nextPeriod(event: any) {
+  nextPeriod(event: MouseEvent) {
     const { uttakPerioder } = this.props;
     const { selectedItem } = this.state;
-    const newIndex = uttakPerioder.findIndex((item: any) => item.id === selectedItem.id) + 1;
+    const newIndex = uttakPerioder.findIndex((item) => item.id === selectedItem.id) + 1;
     if (newIndex < uttakPerioder.length) {
       this.setSelectedUttakActivity(uttakPerioder[newIndex]);
     }
     event.preventDefault();
   }
 
-  prevPeriod(event: any) {
+  prevPeriod(event: MouseEvent) {
     const { uttakPerioder } = this.props;
     const { selectedItem } = this.state;
     const newIndex = uttakPerioder.findIndex((item) => item.id === selectedItem.id) - 1;
@@ -470,13 +469,13 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       barnFraTps,
       familiehendelse,
       isRevurdering,
-      omsorgsovertakelseDato,
       person,
       soknadDate,
       soknadsType,
       endredFodselsDato,
       endringsdato,
       familiehendelseDate,
+      omsorgsovertakelseDato,
     );
     return (
       <div>
@@ -625,14 +624,6 @@ const lagUttakMedOpphold = createSelector(
   (uttaksresultatActivity: UttaksresultatActivity[]) => uttaksresultatActivity.map((uttak): UttaksresultatActivity => {
     const { ...uttakPerioder } = uttak;
 
-    // Setter trekkdager til null - brukes som lowkey feature-toggle - remove when everything works (06.05.19)
-    if (uttakPerioder && uttakPerioder.aktiviteter.length > 0) {
-      const aktivitetArray = uttakPerioder.aktiviteter;
-      aktivitetArray.forEach((item) => {
-        item.trekkdager = null; // eslint-disable-line no-param-reassign
-      });
-    }
-    // remove to here
     if (uttak.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT) {
       const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak.kode];
       const oppholdInfo = {

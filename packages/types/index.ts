@@ -17,8 +17,12 @@ export {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
 } from './src/simuleringResultatTsType';
 export { default as Soknad, ManglendeVedleggSoknad } from './src/soknadTsType';
-export { default as UttaksresultatPeriode, PeriodeSoker, PeriodeSokerAktivitet } from './src/uttaksresultatPeriodeTsType';
-export { default as UttakStonadskontoer, Stonadskonto, AktivitetSaldo, AktivitetIdentifikator } from './src/uttakStonadskontoerTsType';
+export {
+  default as UttaksresultatPeriode, PeriodeSoker, PeriodeSokerAktivitet, ArsakKodeverk,
+} from './src/uttaksresultatPeriodeTsType';
+export {
+  default as UttakStonadskontoer, Stonadskonto, AktivitetSaldo, AktivitetIdentifikator,
+} from './src/uttakStonadskontoerTsType';
 export { default as Vilkar } from './src/vilkarTsType';
 export { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
@@ -35,3 +39,4 @@ export {
 } from './src/opptjeningTsType';
 export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';
+export { default as Arbeidsgiver } from './src/arbeidsgiverTsType';

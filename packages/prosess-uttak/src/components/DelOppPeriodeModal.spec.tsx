@@ -1,21 +1,24 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
+
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { DelOppPeriodeModalImpl } from './DelOppPeriodeModal';
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
+import { DelOppPeriodeModal } from './DelOppPeriodeModal';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import { PeriodeMedClassName } from './Uttak';
 
 describe('<DelOppPeriodeModal>', () => {
   const periodeData = {
     fom: '2018-01-01',
     tom: '2018-03-01',
-  };
+  } as PeriodeMedClassName;
   const cancelEvent = sinon.spy();
 
   it('skal rendre modal for del opp periode', () => {
-    const wrapper = shallowWithIntl(<DelOppPeriodeModalImpl
+    const wrapper = shallowWithIntl(<DelOppPeriodeModal
       {...reduxFormPropsMock}
       periodeData={periodeData}
       showModal
@@ -32,7 +35,7 @@ describe('<DelOppPeriodeModal>', () => {
   });
 
   it('skal rendre lukket modal', () => {
-    const wrapper = shallowWithIntl(<DelOppPeriodeModalImpl
+    const wrapper = shallowWithIntl(<DelOppPeriodeModal
       {...reduxFormPropsMock}
       periodeData={periodeData}
       showModal={false}
@@ -44,7 +47,7 @@ describe('<DelOppPeriodeModal>', () => {
   });
 
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
-    const wrapper = shallowWithIntl(<DelOppPeriodeModalImpl
+    const wrapper = shallowWithIntl(<DelOppPeriodeModal
       {...reduxFormPropsMock}
       periodeData={periodeData}
       showModal

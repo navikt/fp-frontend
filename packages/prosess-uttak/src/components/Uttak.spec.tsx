@@ -1,61 +1,60 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-
-import { Row } from 'nav-frontend-grid';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { Tidslinje } from '@fpsak-frontend/tidslinje';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { FormattedMessage } from 'react-intl';
+import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjønnkode';
+import {
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personopplysninger,
+  UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+
 import UttakTimeLineData from './UttakTimeLineData';
-import { UttakImpl as Uttak } from './Uttak';
+import { Uttak, UttaksresultatActivity, PeriodeMedClassName } from './Uttak';
 
 describe('<Uttak>', () => {
   const uttakActivities = [{
     id: 1,
-    hovedsoker: true,
-    group: 1,
     fom: '',
     tom: '',
     periodeResultatType: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     aktiviteter: [{
       stønadskontoType: {
         kode: '',
-        navn: '',
         kodeverk: '',
       },
-    }],
+    }] as PeriodeSokerAktivitet[],
   }, {
     id: 2,
-    group: 1,
-    hovedsoker: true,
     fom: '',
     tom: '',
     periodeResultatType: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     aktiviteter: [{
       stønadskontoType: {
         kode: '',
-        navn: '',
         kodeverk: '',
       },
-    }],
+    }] as PeriodeSokerAktivitet[],
   }];
 
   const stonadskonto = {
     stonadskontoer: {},
-  };
+  } as UttakStonadskontoer;
 
   it('skal rendre uttak, uten selected timeline', () => {
     const wrapper = shallow(<Uttak
@@ -65,19 +64,16 @@ describe('<Uttak>', () => {
       soknadDate="2018-03-02"
       familiehendelseDate="2018-02-02"
       endringsdato="2018-01-12"
-      hovedsokerKjonnKode=""
+      hovedsokerKjonnKode={KjønnkodeEnum.KVINNE}
       behandlingVersjon={1}
-      periodeTyper={[]}
       uttaksresultatActivity={[]}
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       submitting={false}
       isDirty={false}
       manuellOverstyring={false}
-      kanOverstyre
       isApOpen={false}
       stonadskonto={stonadskonto}
-      allAksjonspunkter={[]}
       intl={intlMock}
       soknadsType="ST-001"
       uttakPerioder={[]}
@@ -87,8 +83,24 @@ describe('<Uttak>', () => {
       saksnummer={123}
       behandlingId={999}
       alleKodeverk={{}}
-      behandlingsresultat={{}}
-      uttakStonadskontoer={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
+      medsokerKjonnKode={KjønnkodeEnum.MANN}
+      person={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      behandlingStatus={{
+        kode: behandlingStatus.OPPRETTET,
+        kodeverk: '',
+      }}
+      fagsak={{} as Fagsak}
+      employeeHasAccess
+      uttaksresultat={{} as UttaksresultatPeriode}
+      mottattDato="10.10.2020"
     />);
     wrapper.setState({ selectedItem: null });
     const rows = wrapper.find(Row);
@@ -112,19 +124,16 @@ describe('<Uttak>', () => {
       soknadDate="2018-03-02"
       familiehendelseDate="2018-02-02"
       endringsdato="2018-01-12"
-      hovedsokerKjonnKode=""
-      periodeTyper={[]}
-      uttaksresultatActivity={uttakActivities}
-      uttakPerioder={uttakActivities}
+      hovedsokerKjonnKode={KjønnkodeEnum.KVINNE}
+      uttaksresultatActivity={uttakActivities as UttaksresultatActivity[]}
+      uttakPerioder={uttakActivities as PeriodeMedClassName[]}
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       submitting={false}
       isDirty={false}
       manuellOverstyring
-      kanOverstyre
       isApOpen={false}
       stonadskonto={stonadskonto}
-      allAksjonspunkter={[]}
       intl={intlMock}
       soknadsType="ST-001"
       harSoktOmFlerbarnsdager={false}
@@ -134,8 +143,24 @@ describe('<Uttak>', () => {
       behandlingId={999}
       behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingsresultat={{}}
-      uttakStonadskontoer={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
+      medsokerKjonnKode={KjønnkodeEnum.MANN}
+      person={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      behandlingStatus={{
+        kode: behandlingStatus.OPPRETTET,
+        kodeverk: '',
+      }}
+      fagsak={{} as Fagsak}
+      employeeHasAccess
+      uttaksresultat={{} as UttaksresultatPeriode}
+      mottattDato="10.10.2020"
     />);
     wrapper.setState({ selectedItem: uttakActivities[0] });
     const checkBox = wrapper.find(CheckboxField);
@@ -161,18 +186,15 @@ describe('<Uttak>', () => {
       soknadDate="2018-03-02"
       familiehendelseDate="2018-02-02"
       endringsdato="2018-01-12"
-      hovedsokerKjonnKode=""
-      periodeTyper={[]}
-      uttaksresultatActivity={uttakActivities}
+      hovedsokerKjonnKode={KjønnkodeEnum.KVINNE}
+      uttaksresultatActivity={uttakActivities as UttaksresultatActivity[]}
       uttakPerioder={[]}
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       submitting={false}
       isDirty={false}
       manuellOverstyring={false}
-      kanOverstyre={false}
       stonadskonto={stonadskonto}
-      allAksjonspunkter={[]}
       intl={intlMock}
       soknadsType="ST-001"
       harSoktOmFlerbarnsdager={false}
@@ -182,8 +204,24 @@ describe('<Uttak>', () => {
       behandlingId={999}
       behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingsresultat={{}}
-      uttakStonadskontoer={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
+      medsokerKjonnKode={KjønnkodeEnum.MANN}
+      person={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      behandlingStatus={{
+        kode: behandlingStatus.OPPRETTET,
+        kodeverk: '',
+      }}
+      fagsak={{} as Fagsak}
+      employeeHasAccess
+      uttaksresultat={{} as UttaksresultatPeriode}
+      mottattDato="10.10.2020"
     />);
     wrapper.setState({ selectedItem: uttakActivities[0] });
     const checkBox = wrapper.find(CheckboxField);
@@ -201,20 +239,19 @@ describe('<Uttak>', () => {
 
   it('skal rendre uttak, med aksjonspunkt', () => {
     const aksjonspunkter = [{
-      id: 1,
       definisjon: {
         kode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 'OPPR',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
     const wrapper = shallow(<Uttak
       readOnly={false}
       aksjonspunkter={aksjonspunkter}
@@ -223,19 +260,16 @@ describe('<Uttak>', () => {
       soknadDate="2018-03-02"
       familiehendelseDate="2018-02-02"
       endringsdato="2018-01-12"
-      hovedsokerKjonnKode=""
-      periodeTyper={[]}
-      uttaksresultatActivity={uttakActivities}
+      hovedsokerKjonnKode={KjønnkodeEnum.KVINNE}
+      uttaksresultatActivity={uttakActivities as UttaksresultatActivity[]}
       uttakPerioder={[]}
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       submitting={false}
       isDirty={false}
       manuellOverstyring={false}
-      kanOverstyre={false}
       isApOpen
       stonadskonto={stonadskonto}
-      allAksjonspunkter={[]}
       intl={intlMock}
       soknadsType="ST-001"
       harSoktOmFlerbarnsdager={false}
@@ -245,8 +279,24 @@ describe('<Uttak>', () => {
       behandlingId={999}
       behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingsresultat={{}}
-      uttakStonadskontoer={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
+      medsokerKjonnKode={KjønnkodeEnum.MANN}
+      person={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      behandlingStatus={{
+        kode: behandlingStatus.OPPRETTET,
+        kodeverk: '',
+      }}
+      fagsak={{} as Fagsak}
+      employeeHasAccess
+      uttaksresultat={{} as UttaksresultatPeriode}
+      mottattDato="10.10.2020"
     />);
     wrapper.setState({ selectedItem: uttakActivities[0] });
     const checkBox = wrapper.find(CheckboxField);
@@ -264,20 +314,19 @@ describe('<Uttak>', () => {
 
   it('skal rendre uttak, med uttakTimeLineData', () => {
     const aksjonspunkter = [{
-      id: 1,
       definisjon: {
         kode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 'UTFO',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
     const wrapper = shallow(<Uttak
       readOnly={false}
       aksjonspunkter={aksjonspunkter}
@@ -286,19 +335,16 @@ describe('<Uttak>', () => {
       soknadDate="2018-03-02"
       familiehendelseDate="2018-02-02"
       endringsdato="2018-01-12"
-      hovedsokerKjonnKode=""
-      periodeTyper={[]}
-      uttaksresultatActivity={uttakActivities}
-      uttakPerioder={uttakActivities}
+      hovedsokerKjonnKode={KjønnkodeEnum.KVINNE}
+      uttaksresultatActivity={uttakActivities as UttaksresultatActivity[]}
+      uttakPerioder={uttakActivities as PeriodeMedClassName[]}
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       submitting={false}
       isDirty={false}
       manuellOverstyring={false}
-      kanOverstyre={false}
       isApOpen
       stonadskonto={stonadskonto}
-      allAksjonspunkter={[]}
       intl={intlMock}
       soknadsType="ST-001"
       harSoktOmFlerbarnsdager={false}
@@ -308,8 +354,24 @@ describe('<Uttak>', () => {
       behandlingId={999}
       behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingsresultat={{}}
-      uttakStonadskontoer={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
+      medsokerKjonnKode={KjønnkodeEnum.MANN}
+      person={{} as Personopplysninger}
+      familiehendelse={{} as FamilieHendelseSamling}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      behandlingStatus={{
+        kode: behandlingStatus.OPPRETTET,
+        kodeverk: '',
+      }}
+      fagsak={{} as Fagsak}
+      employeeHasAccess
+      uttaksresultat={{} as UttaksresultatPeriode}
+      mottattDato="10.10.2020"
     />);
     wrapper.setState({ selectedItem: uttakActivities[0] });
     expect(wrapper.state('selectedItem')).to.eql(uttakActivities[0]);
@@ -318,7 +380,7 @@ describe('<Uttak>', () => {
     expect(uttakTimeLineData).to.have.length(1);
 
     const uttakTimeLine = wrapper.find(Tidslinje);
-    uttakTimeLine.prop('openPeriodInfo', { preventDefault: sinon.spy() });
+    uttakTimeLine.prop('openPeriodInfo')({ preventDefault() { return undefined; } });
     wrapper.update();
     expect(wrapper.state('selectedItem')).to.eql(uttakActivities[0]);
 

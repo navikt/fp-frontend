@@ -2,7 +2,7 @@ import Kodeverk from './kodeverkTsType';
 import Arbeidsgiver from './arbeidsgiverTsType';
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 
-type ArsakKodeverk = {
+export type ArsakKodeverk = {
   gyldigFom?: string;
   gyldigTom?: string;
   uttakTyper?: string[];
@@ -11,9 +11,6 @@ type ArsakKodeverk = {
 
 export type PeriodeSokerAktivitet = Readonly<{
   stønadskontoType?: Kodeverk;
-  trekkdager: {
-    verdi: number;
-  };
   prosentArbeid?: number;
   arbeidsforholdId?: string;
   eksternArbeidsforholdId?: string;
@@ -36,12 +33,10 @@ export type PeriodeSoker = Readonly<{
   graderingAvslagÅrsak: ArsakKodeverk;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;
-  samtidigUttaksprosent?: {
-    verdi: number;
-  };
+  samtidigUttaksprosent?: number;
   graderingInnvilget: boolean;
   graderingsAvslagÅrsakLovhjemmel?: string;
-  gradertAktivitet?: boolean;
+  gradertAktivitet?: PeriodeSokerAktivitet;
   periodeType: Kodeverk;
   utsettelseType: Kodeverk;
   oppholdÅrsak: Kodeverk;

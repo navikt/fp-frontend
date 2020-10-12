@@ -1,15 +1,21 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
+import { Column } from 'nav-frontend-grid';
+
 import { AksjonspunktHelpText } from '@fpsak-frontend/shared-components';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { FormattedMessage } from 'react-intl';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
-import { Column } from 'nav-frontend-grid';
+import {
+  Arbeidsgiver, AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto,
+} from '@fpsak-frontend/types';
+
 import { kalkulerTrekkdager, UttakTimeLineData } from './UttakTimeLineData';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 import UttakActivity from './UttakActivity';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import { PeriodeMedClassName } from './Uttak';
 
 describe('<UttakTimeLineData>', () => {
   const selectedItem = {
@@ -18,22 +24,19 @@ describe('<UttakTimeLineData>', () => {
     tom: '',
     periodeResultatType: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     periodeResultatÅrsak: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     aktiviteter: [{
       stønadskontoType: {
         kode: '',
-        navn: '',
         kodeverk: '',
       },
     }],
-  };
+  } as PeriodeMedClassName;
   const selectedItem2 = {
     id: 1,
     fom: '',
@@ -41,56 +44,84 @@ describe('<UttakTimeLineData>', () => {
     periodeResultatType: {
       kode: 'MANUELL_BEHANDLING',
       kodeverk: '',
-      navn: '',
     },
     periodeResultatÅrsak: {
       kode: '4002',
     },
     manuellBehandlingÅrsak: {
-      navn: 'test',
       kode: '5001',
+      kodeverk: '',
     },
     periodeType: {
       kode: 'MØDREKVOTE',
     },
     aktiviteter: [{
     }],
-  };
+  } as PeriodeMedClassName;
 
   const stonadskonto = {
     stonadskontoer: {
       MØDREKVOTE: {
-        aktivitetSaldoDtoList: [{ aktivitetIdentifikator: { arbeidsgiver: { navn: 'UNIVERSITETET I OSLO' } }, saldo: 0 },
-          { aktivitetIdentifikator: { arbeidsgiver: { navn: 'STATOIL' } }, saldo: 4 }],
-      },
-    },
-  };
+        aktivitetSaldoDtoList: [{
+          aktivitetIdentifikator: {
+            arbeidsgiver: {
+              navn: 'UNIVERSITETET I OSLO',
+            },
+          },
+          saldo: 0,
+        }, {
+          aktivitetIdentifikator: {
+            arbeidsgiver: {
+              navn: 'STATOIL',
+            },
+          },
+          saldo: 4,
+        }],
+      } as Stonadskonto,
+    } as { [key: string]: Stonadskonto },
+  } as UttakStonadskontoer;
 
   const stonadskontoFlerGarTom = {
     stonadskontoer: {
       MØDREKVOTE: {
-        aktivitetSaldoDtoList: [{ aktivitetIdentifikator: { arbeidsgiver: { navn: 'UNIVERSITETET I OSLO' } }, saldo: 0 },
-          { aktivitetIdentifikator: { arbeidsgiver: { navn: 'STATOIL' } }, saldo: 4 },
-          { aktivitetIdentifikator: { arbeidsgiver: { navn: 'MYS' } }, saldo: 0 }],
-      },
-    },
-  };
+        aktivitetSaldoDtoList: [{
+          aktivitetIdentifikator: {
+            arbeidsgiver: {
+              navn: 'UNIVERSITETET I OSLO',
+            } as Arbeidsgiver,
+          } as AktivitetIdentifikator,
+          saldo: 0,
+        }, {
+          aktivitetIdentifikator: {
+            arbeidsgiver: {
+              navn: 'STATOIL',
+            } as Arbeidsgiver,
+          } as AktivitetIdentifikator,
+          saldo: 4,
+        }, {
+          aktivitetIdentifikator: {
+            arbeidsgiver: {
+              navn: 'MYS',
+            } as Arbeidsgiver,
+          } as AktivitetIdentifikator,
+          saldo: 0,
+        }] as AktivitetSaldo[],
+      } as Stonadskonto,
+    } as { [key: string]: Stonadskonto },
+  } as UttakStonadskontoer;
 
   const kodeverk = {
-    BehandlingStatus: [
-      {
-        kode: 'AVSLU',
-        navn: 'Avsluttet',
-        kodeverk: 'BEHANDLING_STATUS',
-      },
-    ],
+    BehandlingStatus: [{
+      kode: 'AVSLU',
+      navn: 'Avsluttet',
+      kodeverk: 'BEHANDLING_STATUS',
+    }],
   };
 
   it('skal rendre UttakTimeLineData, ikke deloppperiode, ikke readonly', () => {
     const wrapper = shallowWithIntl(<UttakTimeLineData
       intl={intlMock}
       readOnly={false}
-      periodeTyper={[]}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       callbackSetSelected={sinon.spy()}
@@ -102,12 +133,10 @@ describe('<UttakTimeLineData>', () => {
       behandlingFormPrefix=""
       formName=""
       activityPanelName=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -126,7 +155,6 @@ describe('<UttakTimeLineData>', () => {
     const wrapper = shallowWithIntl(<UttakTimeLineData
       intl={intlMock}
       readOnly={false}
-      periodeTyper={[]}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       callbackSetSelected={sinon.spy()}
@@ -138,12 +166,10 @@ describe('<UttakTimeLineData>', () => {
       behandlingFormPrefix=""
       formName=""
       activityPanelName=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     wrapper.setState({ showDelPeriodeModal: true });
     expect(wrapper.state('showDelPeriodeModal')).is.true;
@@ -161,7 +187,6 @@ describe('<UttakTimeLineData>', () => {
     const wrapper = shallowWithIntl(<UttakTimeLineData
       intl={intlMock}
       readOnly
-      periodeTyper={[]}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       callbackSetSelected={sinon.spy()}
@@ -173,12 +198,10 @@ describe('<UttakTimeLineData>', () => {
       behandlingFormPrefix=""
       formName=""
       activityPanelName=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -198,7 +221,6 @@ describe('<UttakTimeLineData>', () => {
     const wrapper = shallowWithIntl(<UttakTimeLineData
       intl={intlMock}
       readOnly={false}
-      periodeTyper={[]}
       callbackForward={callbackForward}
       callbackBackward={callbackBackward}
       callbackSetSelected={sinon.spy()}
@@ -210,12 +232,10 @@ describe('<UttakTimeLineData>', () => {
       behandlingFormPrefix=""
       formName=""
       activityPanelName=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     const buttons = wrapper.find(TimeLineButton);
     expect(buttons).to.have.length(2);
@@ -232,7 +252,6 @@ describe('<UttakTimeLineData>', () => {
       isApOpen
       readOnly={false}
       intl={intlMock}
-      periodeTyper={[]}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       callbackSetSelected={sinon.spy()}
@@ -244,12 +263,10 @@ describe('<UttakTimeLineData>', () => {
       behandlingFormPrefix=""
       formName=""
       activityPanelName=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     const uttakActivity = wrapper.find(UttakActivity);
     expect(uttakActivity).to.have.length(1);
@@ -267,7 +284,6 @@ describe('<UttakTimeLineData>', () => {
       intl={intlMock}
       isApOpen
       readOnly={false}
-      periodeTyper={[]}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       callbackSetSelected={sinon.spy()}
@@ -284,7 +300,6 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     const uttak = wrapper.find(AksjonspunktHelpText);
     expect(uttak).has.length(1);
@@ -301,7 +316,6 @@ describe('<UttakTimeLineData>', () => {
       intl={intlMock}
       isApOpen
       readOnly={false}
-      periodeTyper={[]}
       callbackForward={sinon.spy()}
       callbackBackward={sinon.spy()}
       callbackSetSelected={sinon.spy()}
@@ -318,7 +332,6 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
-      behandlingsresultat={{}}
     />);
     const uttak = wrapper.find(AksjonspunktHelpText);
     expect(uttak).has.length(1);
@@ -336,7 +349,7 @@ describe('<UttakTimeLineData>', () => {
     const samtidigUttak = false;
     const samtidigUttaksprosent = undefined;
 
-    const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedager);
+    const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent);
 
     expect(trekkdagerForAktivitet).is.eql({
       weeks: 1,
@@ -354,7 +367,7 @@ describe('<UttakTimeLineData>', () => {
     const samtidigUttak = false;
     const samtidigUttaksprosent = undefined;
 
-    const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedager);
+    const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent);
 
     expect(trekkdagerForAktivitet).is.eql({
       weeks: 0,
@@ -372,7 +385,7 @@ describe('<UttakTimeLineData>', () => {
     const samtidigUttak = true;
     const samtidigUttaksprosent = 50;
 
-    const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedager);
+    const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent);
 
     expect(trekkdagerForAktivitet).is.eql({
       weeks: 0,

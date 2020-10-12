@@ -12,17 +12,19 @@ import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidT
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@fpsak-frontend/utils';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet } from '@fpsak-frontend/types';
 
+import { FormValues } from './UttakActivity';
 import lagVisningsNavn from '../utils/uttakVisningsnavnHelper';
 import styles from './renderUttakTable.less';
 
-/**
- *  RenderUttakTable
- *
- * Presentasjonskomponent: Viser felter for arbeidsforhold, stønadskonto, samtidig uttak, trakk uker og dager, andel i arbeid, utbetalingsgrad.
- * Komponenten må rendres som komponenten til et FieldArray.
- */
+export type AktivitetFieldArray = {
+  fom: string;
+  tom: string;
+  weeks: number;
+  days: number;
+} & PeriodeSokerAktivitet;
+
 const headerTextCodes = [
   'RenderUttakTable.PeriodeData.Aktivitet',
   'RenderUttakTable.PeriodeData.Stonadskonto',
@@ -62,42 +64,51 @@ const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk) => {
 };
 
 const merEnNullMessage = () => ([{ id: 'ValidationMessage.MerEnNullUtaksprosent' }]);
-const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: any) => (utsettelse(elmnt.erOppfylt, elmnt.utsettelseType) && parseFloat(value) > 0
+const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: FormValues) => (utsettelse(
+  elmnt.erOppfylt, elmnt.utsettelseType,
+) && parseFloat(value) > 0
   ? merEnNullMessage() : null);
 
-const createTextStrings = (fields: any) => {
+const createTextStrings = (fields: AktivitetFieldArray) => {
   const {
-    prosentArbeid, stillingsprosent, arbeidsgiver, eksternArbeidsforholdId, uttakArbeidType,
+    prosentArbeid, arbeidsgiver, eksternArbeidsforholdId, uttakArbeidType,
   } = fields;
 
   const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
-  const stillingsProsentText = (typeof stillingsprosent !== 'undefined') ? `${stillingsprosent}%` : '';
-  let arbeidsforhold = '';
+  let arbeidsforhold;
   if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
     arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
-  } else if (arbeidsgiver) {
+  }
+  if (arbeidsgiver) {
     arbeidsforhold = lagVisningsNavn(arbeidsgiver, eksternArbeidsforholdId);
   }
   return {
     prosentArbeidText,
-    stillingsProsentText,
-    arbeidsforhold,
+    arbeidsforhold: arbeidsforhold || '',
   };
 };
 
 const checkForMonthsOrDays = (fieldName: string) => {
+  // @ts-ignore Fiks
   const weeksValue = document.getElementById(`${fieldName}.weeks`) ? document.getElementById(`${fieldName}.weeks`).value : null;
+  // @ts-ignore Fiks
   const daysValue = document.getElementById(`${fieldName}.days`) ? document.getElementById(`${fieldName}.days`).value : null;
   return (weeksValue !== '0' || daysValue !== '0');
 };
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<string>;
+  fields: FieldArrayFieldsProps<AktivitetFieldArray>;
   periodeTyper: KodeverkMedNavn[];
   readOnly: boolean;
 }
 
-export const RenderUttakTable: FunctionComponent<OwnProps> = ({
+/**
+ *  RenderUttakTable
+ *
+ * Presentasjonskomponent: Viser felter for arbeidsforhold, stønadskonto, samtidig uttak, trakk uker og dager, andel i arbeid, utbetalingsgrad.
+ * Komponenten må rendres som komponenten til et FieldArray.
+ */
+const RenderUttakTable: FunctionComponent<OwnProps> = ({
   fields,
   periodeTyper,
   readOnly,
@@ -150,6 +161,7 @@ export const RenderUttakTable: FunctionComponent<OwnProps> = ({
                       readOnly={readOnly}
                       bredde="XS"
                       validate={[required, hasValidDecimal, maxLength3]}
+                      // @ts-ignore Fiks
                       normalizeOnBlur={(value) => (parseFloat(value).toFixed(1))}
                     />
                   </Column>
@@ -165,12 +177,13 @@ export const RenderUttakTable: FunctionComponent<OwnProps> = ({
                     validate={[required, minValue0, maxProsentValue100, hasValidDecimal, noMoreThanZeroIfRejectedAndNotUtsettelse]}
                     readOnly={readOnly}
                     bredde="XS"
-                    format={(value: any) => {
+                    format={(value) => {
                       if (value || value === 0) {
                         return readOnly ? `${value} %` : value;
                       }
                       return '';
                     }}
+                    // @ts-ignore Fiks
                     normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                   />
                 </Column>

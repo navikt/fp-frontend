@@ -38,7 +38,7 @@ import {
 import {
   Behandling, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
 } from '@fpsak-frontend/types';
-import RenderUttakTable from './RenderUttakTable';
+import RenderUttakTable, { AktivitetFieldArray } from './RenderUttakTable';
 import UttakInfo from './UttakInfo';
 
 import styles from './uttakActivity.less';
@@ -107,7 +107,7 @@ const mapAarsak = (
 };
 
 interface PureOwnProps {
-  cancelSelectedActivity: (...args: any[]) => any;
+  cancelSelectedActivity: () => void;
   updateActivity: (data: PeriodeMedClassName) => void;
   selectedItemData: PeriodeMedClassName;
   readOnly: boolean;
@@ -296,14 +296,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   </div>
 );
 
-type AktivitetFieldArray = {
-  fom: string;
-  tom: string;
-  weeks: number;
-  days: number;
-} & PeriodeSokerAktivitet;
-
-type FormValues = {
+export type FormValues = {
   UttakFieldArray: AktivitetFieldArray[];
   begrunnelse?: string;
   flerbarnsdager: boolean;

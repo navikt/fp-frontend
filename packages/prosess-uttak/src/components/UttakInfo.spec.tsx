@@ -1,7 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+
+import { PeriodeSokerAktivitet } from '@fpsak-frontend/types';
+
 import { UttakInfo } from './UttakInfo';
+import { PeriodeMedClassName } from './Uttak';
 
 describe('<UttakInfo>', () => {
   const selectedItem = {
@@ -10,12 +14,10 @@ describe('<UttakInfo>', () => {
     tom: '2018-02-01',
     periodeResultatType: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     periodeResultatÅrsak: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     flerbarnsdager: false,
@@ -29,15 +31,13 @@ describe('<UttakInfo>', () => {
       kode: '-',
     },
     aktiviteter: [{
-      trekkdager: 28,
       utbetalingsgrad: 100,
       stønadskontoType: {
         kode: '',
-        navn: 'Mødrekvote',
         kodeverk: '',
       },
-    }],
-  };
+    }] as PeriodeSokerAktivitet[],
+  } as PeriodeMedClassName;
 
   it('skal rendre uttakinfo med to checkboxes, når flerbarnsdager', () => {
     const wrapper = shallow(<UttakInfo

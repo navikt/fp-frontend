@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { MouseEvent, FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
@@ -12,11 +12,11 @@ import { PeriodeMedClassName } from './Uttak';
 
 interface OwnProps {
   selectedItemData: PeriodeMedClassName;
-  callbackForward: (event: any) => void;
-  callbackBackward: (event: any) => void;
+  callbackForward: (event: MouseEvent) => void;
+  callbackBackward: (event: MouseEvent) => void;
   readOnly: boolean;
   callbackUpdateActivity: (data: PeriodeMedClassName) => void;
-  callbackCancelSelectedActivity: (...args: any[]) => any;
+  callbackCancelSelectedActivity: () => void;
   harSoktOmFlerbarnsdager: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingsresultat?: Behandling['behandlingsresultat'];

@@ -8,7 +8,7 @@ import { AktivitetIdentifikator } from '@fpsak-frontend/types';
 const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
 const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const lagVisningsNavn = (arbeidsgiver: AktivitetIdentifikator['arbeidsgiver'], eksternArbeidsforholdId?: any) => {
+const lagVisningsNavn = (arbeidsgiver: AktivitetIdentifikator['arbeidsgiver'], eksternArbeidsforholdId?: any): string => {
   const {
     navn, fødselsdato, virksomhet, identifikator,
   } = arbeidsgiver;

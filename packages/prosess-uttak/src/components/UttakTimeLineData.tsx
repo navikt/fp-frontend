@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, MouseEvent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
@@ -100,9 +100,9 @@ export const kalkulerTrekkdager = (aktivitet: PeriodeSokerAktivitet, virkedager:
 interface OwnProps {
   activityPanelName: string;
   behandlingFormPrefix: string;
-  callbackBackward: (event: any) => void;
+  callbackBackward: (event: MouseEvent) => void;
   callbackCancelSelectedActivity: () => void;
-  callbackForward: (event: any) => void;
+  callbackForward: (event: MouseEvent) => void;
   callbackSetSelected: (uttakActivity: PeriodeMedClassName, isMounting: boolean) => void;
   callbackUpdateActivity: (data: PeriodeMedClassName) => void;
   formName: string;
@@ -116,7 +116,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingVersjon: number;
   behandlingId: number;
-  behandlingsresultat: Behandling['behandlingsresultat'];
+  behandlingsresultat?: Behandling['behandlingsresultat'];
 }
 
 interface OwnState {
@@ -140,7 +140,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
 
-  showModal(event: any) {
+  showModal(event: MouseEvent) {
     event.preventDefault();
     this.setState({
       showDelPeriodeModal: true,
