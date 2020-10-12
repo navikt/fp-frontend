@@ -12,7 +12,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
-import { mapAndelToField, skalFastsetteInntektForSN, skalHaBesteberegningSelector } from './BgFordelingUtils';
+import { mapAndelToField, skalHaBesteberegningSelector } from './BgFordelingUtils';
 import styles from './inntektFieldArray.less';
 import { validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
@@ -63,44 +63,32 @@ const removeAndel = (fields, index) => () => {
   fields.remove(index);
 };
 
-const skalViseRad = (field, skalFastsetteSN) => field.aktivitetStatus !== aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE || skalFastsetteSN;
-
 const createAndelerTableRows = (
   fields,
   readOnly,
-  skalFastsetteSN,
   beregningsgrunnlag,
   behandlingId,
   behandlingVersjon,
   isAksjonspunktClosed,
   alleKodeverk,
-) => {
-  const rows = [];
-  fields.forEach((andelElementFieldId, index) => {
-    const field = fields.get(index);
-    if (skalViseRad(field, skalFastsetteSN)) {
-      rows.push(
-        <AndelRow
-          key={andelElementFieldId}
-          fields={fields}
-          skalVisePeriode={skalVisePeriode(fields)}
-          skalViseRefusjon={skalViseRefusjon(fields)}
-          skalViseSletteknapp={skalViseSletteknapp(index, fields, readOnly)}
-          andelElementFieldId={andelElementFieldId}
-          readOnly={readOnly}
-          removeAndel={removeAndel(fields, index)}
-          index={index}
-          behandlingId={behandlingId}
-          beregningsgrunnlag={beregningsgrunnlag}
-          behandlingVersjon={behandlingVersjon}
-          isAksjonspunktClosed={isAksjonspunktClosed}
-          alleKodeverk={alleKodeverk}
-        />,
-      );
-    }
-  });
-  return rows;
-};
+) => fields.map((andelElementFieldId, index) => (
+  <AndelRow
+    key={andelElementFieldId}
+    fields={fields}
+    skalVisePeriode={skalVisePeriode(fields)}
+    skalViseRefusjon={skalViseRefusjon(fields)}
+    skalViseSletteknapp={skalViseSletteknapp(index, fields, readOnly)}
+    andelElementFieldId={andelElementFieldId}
+    readOnly={readOnly}
+    removeAndel={removeAndel(fields, index)}
+    index={index}
+    behandlingId={behandlingId}
+    beregningsgrunnlag={beregningsgrunnlag}
+    behandlingVersjon={behandlingVersjon}
+    isAksjonspunktClosed={isAksjonspunktClosed}
+    alleKodeverk={alleKodeverk}
+  />
+));
 
 const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag, behandlingId, behandlingVersjon) => (
   <SummaryRow
@@ -160,7 +148,6 @@ export const InntektFieldArrayImpl = ({
   aktivitetStatuser,
   dagpengeAndelLagtTilIForrige,
   skalHaBesteberegning,
-  skalFastsetteSN,
   behandlingId,
   behandlingVersjon,
   beregningsgrunnlag,
@@ -170,7 +157,6 @@ export const InntektFieldArrayImpl = ({
   const tablerows = createAndelerTableRows(
     fields,
     readOnly,
-    skalFastsetteSN,
     beregningsgrunnlag,
     behandlingId,
     behandlingVersjon,
@@ -211,7 +197,6 @@ InntektFieldArrayImpl.propTypes = {
   aktivitetStatuser: PropTypes.arrayOf(kodeverkObjektPropType).isRequired,
   skalHaBesteberegning: PropTypes.bool.isRequired,
   dagpengeAndelLagtTilIForrige: PropTypes.shape(),
-  skalFastsetteSN: PropTypes.bool.isRequired,
   behandlingId: PropTypes.number.isRequired,
   behandlingVersjon: PropTypes.number.isRequired,
   beregningsgrunnlag: PropTypes.shape().isRequired,
@@ -283,11 +268,9 @@ export const mapStateToProps = (state, ownProps) => {
   const isBeregningFormDirty = isFormDirty(state, ownProps);
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
   const skalHaBesteberegning = skalHaBesteberegningSelector(state, ownProps) === true;
-  const skalFastsetteSN = skalFastsetteInntektForSN(state, ownProps);
   const tilfeller = ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller
     ? ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : [];
   return {
-    skalFastsetteSN,
     isBeregningFormDirty,
     skalHaBesteberegning,
     aktivitetStatuser,
