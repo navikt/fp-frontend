@@ -3,7 +3,9 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import UttakPanel from './components/UttakPanel';
@@ -135,6 +137,7 @@ describe('<UttakProsessIndex>', () => {
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<UttakProsessIndex
       fagsak={fagsak}
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ skjaeringstidspunktForeldrepenger: string;... Remove this comment to see the full error message
       behandling={behandling}
       aksjonspunkter={aksjonspunkter}
       submitCallback={sinon.spy()}

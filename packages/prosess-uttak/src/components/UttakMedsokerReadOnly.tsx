@@ -1,15 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { uttaksresultatAktivitetPropType } from '@fpsak-frontend/prop-types';
 
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import { FloatRight } from '@fpsak-frontend/shared-components';
-import UttakActivity from './UttakActivity';
+import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-const UttakMedsokerReadOnly = ({
+import UttakActivity from './UttakActivity';
+import { PeriodeMedClassName } from './Uttak';
+
+interface OwnProps {
+  selectedItemData: PeriodeMedClassName;
+  callbackForward: (event: any) => void;
+  callbackBackward: (event: any) => void;
+  readOnly: boolean;
+  callbackUpdateActivity: (...args: any[]) => any;
+  callbackCancelSelectedActivity: (...args: any[]) => any;
+  isApOpen?: boolean;
+  harSoktOmFlerbarnsdager: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   readOnly,
   selectedItemData,
   callbackForward,
@@ -56,23 +72,7 @@ const UttakMedsokerReadOnly = ({
   );
 };
 
-UttakMedsokerReadOnly.propTypes = {
-  selectedItemData: uttaksresultatAktivitetPropType,
-  callbackForward: PropTypes.func.isRequired,
-  callbackBackward: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  callbackUpdateActivity: PropTypes.func.isRequired,
-  callbackCancelSelectedActivity: PropTypes.func.isRequired,
-  isApOpen: PropTypes.bool,
-  harSoktOmFlerbarnsdager: PropTypes.bool.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  behandlingsresultat: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-};
-
 UttakMedsokerReadOnly.defaultProps = {
-  selectedItemData: undefined,
   isApOpen: false,
 };
 

@@ -1,5 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
+
+import { UttakStonadskontoer, Stonadskonto } from '@fpsak-frontend/types';
+
 import TimeLineInfo from './TimeLineInfo';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-proses-uttak';
 
@@ -9,26 +12,26 @@ const stonadskonto = {
     maxDager: 30,
     aktivitetSaldoDtoList: [
     ],
-  },
+  } as Stonadskonto,
   FELLESPERIODE: {
     saldo: 30,
     maxDager: 30,
     aktivitetSaldoDtoList: [
     ],
-  },
+  } as Stonadskonto,
   MØDREKVOTE: {
     saldo: 40,
     maxDager: 30,
     aktivitetSaldoDtoList: [
     ],
-  },
+  } as Stonadskonto,
   FEDREKVOTE: {
     saldo: 20,
     maxDager: 30,
     aktivitetSaldoDtoList: [
     ],
-  },
-};
+  } as Stonadskonto,
+} as UttakStonadskontoer['stonadskontoer'];
 
 describe('<TimeLineInfo>', () => {
   it('skal vise max-uker tilgjengelig lik summen av alle kontoers max dager delt på fem', () => {
@@ -80,7 +83,7 @@ describe('<TimeLineInfo>', () => {
   it('skal vise tabs', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDato="2018-12-01"
+      maksDatoUttak="2018-12-01"
     />);
     wrapper.setState({ aktiv: 1 });
     const timelineTab = wrapper.find('TimeLineTab');

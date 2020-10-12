@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
+import classnames from 'classnames/bind';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
-import PropTypes from 'prop-types';
-import { stonadskontoerPropType } from '@fpsak-frontend/prop-types';
-import classnames from 'classnames/bind';
+import { Stonadskonto } from '@fpsak-frontend/types';
+
 import styles from './timeLineTab.less';
 
 const classNames = classnames.bind(styles);
 
-const findKorrektLabelForKvote = (stonadtype) => {
+const findKorrektLabelForKvote = (stonadtype: string) => {
   switch (stonadtype) {
     case stonadskontoType.FEDREKVOTE:
       return 'TimeLineTab.Stonadinfo.Fedrekvote';
@@ -29,7 +30,7 @@ const findKorrektLabelForKvote = (stonadtype) => {
   }
 };
 
-const findAntallUkerOgDager = (kontoinfo) => {
+const findAntallUkerOgDager = (kontoinfo: Stonadskonto) => {
   const modifier = kontoinfo.saldo < 0 ? -1 : 1;
   const justertSaldo = kontoinfo.saldo * modifier;
   return {
@@ -38,10 +39,21 @@ const findAntallUkerOgDager = (kontoinfo) => {
   };
 };
 
-const TimeLineTab = ({
+export type CustomStonadskonto = {
+  kontonavn: string;
+  kontoinfo: Stonadskonto;
+}
+
+interface OwnProps {
+  stonadskonto: CustomStonadskonto;
+  onClickCallback: (...args: any[]) => any;
+  aktiv?: boolean;
+}
+
+const TimeLineTab: FunctionComponent<OwnProps> = ({
   stonadskonto,
   onClickCallback,
-  aktiv,
+  aktiv = false,
 }) => {
   const fordelteDager = findAntallUkerOgDager(stonadskonto.kontoinfo);
   return (
@@ -69,7 +81,7 @@ const TimeLineTab = ({
                   values={{
                     ukerVerdi: fordelteDager.uker,
                     dagerVerdi: fordelteDager.dager,
-                    b: (chunks) => <b>{chunks}</b>,
+                    b: (chunks: any) => <b>{chunks}</b>,
                   }}
                 />
               </Normaltekst>
@@ -79,16 +91,6 @@ const TimeLineTab = ({
       </li>
     </div>
   );
-};
-
-TimeLineTab.propTypes = {
-  stonadskonto: stonadskontoerPropType.isRequired,
-  onClickCallback: PropTypes.func.isRequired,
-  aktiv: PropTypes.bool,
-};
-
-TimeLineTab.defaultProps = {
-  aktiv: false,
 };
 
 export default TimeLineTab;

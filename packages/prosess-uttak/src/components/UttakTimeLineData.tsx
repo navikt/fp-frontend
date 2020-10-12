@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
 
@@ -10,19 +9,20 @@ import {
 } from '@fpsak-frontend/shared-components';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
-import { uttaksresultatAktivitetPropType } from '@fpsak-frontend/prop-types';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { Behandling, KodeverkMedNavn, UttakStonadskontoer } from '@fpsak-frontend/types';
 import UttakActivity from './UttakActivity';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 
 import styles from './uttakTimeLineData.less';
+import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
 
-const getCorrectEmptyArbeidsForhold = (preiodeTypeKode, arbeidsForhold, getKodeverknavn) => {
-  const arbeidsForholdMedNullDagerIgjenArray = [];
+const getCorrectEmptyArbeidsForhold = (preiodeTypeKode: any, arbeidsForhold: any, getKodeverknavn: any) => {
+  const arbeidsForholdMedNullDagerIgjenArray: any = [];
   let arbeidsforholdMedPositivSaldoFinnes = false;
   if (arbeidsForhold.stonadskontoer[preiodeTypeKode] && arbeidsForhold.stonadskontoer[preiodeTypeKode].aktivitetSaldoDtoList) {
-    arbeidsForhold.stonadskontoer[preiodeTypeKode].aktivitetSaldoDtoList.forEach((item) => {
+    arbeidsForhold.stonadskontoer[preiodeTypeKode].aktivitetSaldoDtoList.forEach((item: any) => {
       if (item.saldo === 0) {
         if (item.aktivitetIdentifikator.arbeidsgiver) {
           arbeidsForholdMedNullDagerIgjenArray.push(item.aktivitetIdentifikator.arbeidsgiver.navn);
@@ -40,7 +40,7 @@ const getCorrectEmptyArbeidsForhold = (preiodeTypeKode, arbeidsForhold, getKodev
   return [];
 };
 
-const hentApTekst = (manuellBehandlingÅrsak, stonadskonto, getKodeverknavn, aktiviteter) => {
+const hentApTekst = (manuellBehandlingÅrsak: any, stonadskonto: any, getKodeverknavn: any, aktiviteter: any) => {
   const texts = [];
 
   // TODO: Fix - ta bort 5001 med verdi fra kodeverk
@@ -77,7 +77,7 @@ const hentApTekst = (manuellBehandlingÅrsak, stonadskonto, getKodeverknavn, akt
   return texts;
 };
 
-export const kalkulerTrekkdager = (aktivitet, samtidigUttak, samtidigUttaksprosent, virkedager) => {
+export const kalkulerTrekkdager = (aktivitet: any, samtidigUttak: any, samtidigUttaksprosent: any, virkedager: any) => {
   let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
   uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
 
@@ -90,9 +90,35 @@ export const kalkulerTrekkdager = (aktivitet, samtidigUttak, samtidigUttaksprose
   };
 };
 
-export class UttakTimeLineData extends Component {
-  constructor() {
-    super();
+interface OwnProps {
+  activityPanelName: string;
+  behandlingFormPrefix: string;
+  callbackBackward: (event: any) => void;
+  callbackCancelSelectedActivity: () => void;
+  callbackForward: (event: any) => void;
+  callbackSetSelected: (uttakActivity: any, isMounting: boolean) => void;
+  callbackUpdateActivity: (values: any) => void;
+  formName: string;
+  harSoktOmFlerbarnsdager: boolean;
+  isApOpen?: boolean;
+  readOnly: boolean;
+  reduxFormChange: (...args: any[]) => any;
+  selectedItemData?: PeriodeMedClassName;
+  stonadskonto?: UttakStonadskontoer;
+  uttaksresultatActivity: UttaksresultatActivity[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  behandlingVersjon: number;
+  behandlingId: number;
+  behandlingsresultat: Behandling['behandlingsresultat'];
+}
+
+interface OwnState {
+  showDelPeriodeModal: boolean;
+}
+
+export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProps, OwnState> {
+  constructor(props: OwnProps & WrappedComponentProps) {
+    super(props);
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.splitPeriod = this.splitPeriod.bind(this);
@@ -102,12 +128,12 @@ export class UttakTimeLineData extends Component {
     };
   }
 
-  setFormField(fieldName, fieldValue) {
+  setFormField(fieldName: any, fieldValue: any) {
     const { behandlingFormPrefix, formName, reduxFormChange: formChange } = this.props;
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
 
-  showModal(event) {
+  showModal(event: any) {
     event.preventDefault();
     this.setState({
       showDelPeriodeModal: true,
@@ -122,14 +148,14 @@ export class UttakTimeLineData extends Component {
     });
   }
 
-  splitPeriod(formValues) {
+  splitPeriod(formValues: any) {
     const { uttaksresultatActivity, activityPanelName, callbackSetSelected: setSelected } = this.props;
     const {
       periodeId, forstePeriode, andrePeriode, hovedsoker,
     } = formValues;
 
-    const periodeSomSkalSplittes = uttaksresultatActivity.find((o) => o.id === periodeId);
-    const alleAndrePerioder = uttaksresultatActivity.filter((o) => o.id !== periodeId);
+    const periodeSomSkalSplittes = uttaksresultatActivity.find((o: any) => o.id === periodeId);
+    const alleAndrePerioder = uttaksresultatActivity.filter((o: any) => o.id !== periodeId);
     const nyId = periodeId + 1;
 
     const virkedagerForPeriode1 = calcDays(forstePeriode.fom, forstePeriode.tom);
@@ -137,9 +163,15 @@ export class UttakTimeLineData extends Component {
 
     const { samtidigUttak, samtidigUttaksprosent } = periodeSomSkalSplittes;
     const oppdaterteAktiviteterPeriode1 = periodeSomSkalSplittes.aktiviteter
-      .map((aktivitet) => ({ ...aktivitet, ...kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedagerForPeriode1) }));
+      .map((aktivitet: any) => ({
+        ...aktivitet,
+        ...kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedagerForPeriode1),
+      }));
     const oppdaterteAktiviteterPeriode2 = periodeSomSkalSplittes.aktiviteter
-      .map((aktivitet) => ({ ...aktivitet, ...kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedagerForPeriode2) }));
+      .map((aktivitet: any) => ({
+        ...aktivitet,
+        ...kalkulerTrekkdager(aktivitet, samtidigUttak, samtidigUttaksprosent, virkedagerForPeriode2),
+      }));
 
     const nyPeriode1 = {
       ...periodeSomSkalSplittes,
@@ -159,7 +191,7 @@ export class UttakTimeLineData extends Component {
       hovedsoker,
     };
 
-    alleAndrePerioder.forEach((p) => {
+    alleAndrePerioder.forEach((p: any) => {
       if (p.id >= nyId) {
         // eslint-disable-next-line no-param-reassign
         p.id += 1;
@@ -167,7 +199,7 @@ export class UttakTimeLineData extends Component {
     });
 
     const sorterteAktiviteter = alleAndrePerioder.concat(nyPeriode1, nyPeriode2);
-    sorterteAktiviteter.sort((a, b) => a.id - b.id);
+    sorterteAktiviteter.sort((a: any, b: any) => a.id - b.id);
 
     this.setFormField(activityPanelName, sorterteAktiviteter);
     this.hideModal();
@@ -206,31 +238,31 @@ export class UttakTimeLineData extends Component {
           </Column>
           <Column xs="7">
             {!readOnly
-              && (
-                <span className={styles.splitPeriodPosition}>
-                  <Image
-                    tabIndex="0"
-                    className={styles.splitPeriodImage}
-                    src={splitPeriodImageUrl}
-                    srcHover={splitPeriodImageHoverUrl}
-                    alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-                    onMouseDown={this.showModal}
-                    onKeyDown={(e) => (e.keyCode === 13 ? this.showModal(e) : null)}
-                  />
-                  <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-                </span>
-              )}
+                && (
+                  <span className={styles.splitPeriodPosition}>
+                    <Image
+                      tabIndex={0}
+                      className={styles.splitPeriodImage}
+                      src={splitPeriodImageUrl}
+                      srcHover={splitPeriodImageHoverUrl}
+                      alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+                      onMouseDown={this.showModal}
+                      onKeyDown={(e) => (e.keyCode === 13 ? this.showModal(e) : null)}
+                    />
+                    <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
+                  </span>
+                )}
             {showDelPeriodeModal
-              && (
-                <DelOppPeriodeModal
-                  cancelEvent={this.hideModal}
-                  showModal={showDelPeriodeModal}
-                  periodeData={selectedItemData}
-                  splitPeriod={this.splitPeriod}
-                  behandlingId={behandlingId}
-                  behandlingVersjon={behandlingVersjon}
-                />
-              )}
+                && (
+                  <DelOppPeriodeModal
+                    cancelEvent={this.hideModal}
+                    showModal={showDelPeriodeModal}
+                    periodeData={selectedItemData}
+                    splitPeriod={this.splitPeriod}
+                    behandlingId={behandlingId}
+                    behandlingVersjon={behandlingVersjon}
+                  />
+                )}
           </Column>
           <Column xs="2">
             <FloatRight>
@@ -240,14 +272,14 @@ export class UttakTimeLineData extends Component {
           </Column>
         </Row>
         {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak.kode !== '-' && (
-          <>
-            <AksjonspunktHelpText isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
-              {selectedItemData.periodeType
-                ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, stonadskonto, getKodeverknavn, selectedItemData.periodeType.kode)
-                : hentApTekst(selectedItemData.manuellBehandlingÅrsak, stonadskonto, getKodeverknavn)}
-            </AksjonspunktHelpText>
-            <VerticalSpacer twentyPx />
-          </>
+        <>
+          <AksjonspunktHelpText isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
+            {selectedItemData.periodeType
+              ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, stonadskonto, getKodeverknavn, selectedItemData.periodeType.kode)
+              : hentApTekst(selectedItemData.manuellBehandlingÅrsak, stonadskonto, getKodeverknavn)}
+          </AksjonspunktHelpText>
+          <VerticalSpacer twentyPx />
+        </>
         )}
         <UttakActivity
           cancelSelectedActivity={callbackCancelSelectedActivity}
@@ -266,32 +298,8 @@ export class UttakTimeLineData extends Component {
   }
 }
 
-UttakTimeLineData.propTypes = {
-  activityPanelName: PropTypes.string.isRequired,
-  behandlingFormPrefix: PropTypes.string.isRequired,
-  callbackBackward: PropTypes.func.isRequired,
-  callbackCancelSelectedActivity: PropTypes.func.isRequired,
-  callbackForward: PropTypes.func.isRequired,
-  callbackSetSelected: PropTypes.func.isRequired,
-  callbackUpdateActivity: PropTypes.func.isRequired,
-  formName: PropTypes.string.isRequired,
-  harSoktOmFlerbarnsdager: PropTypes.bool.isRequired,
-  intl: PropTypes.shape().isRequired,
-  isApOpen: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  reduxFormChange: PropTypes.func.isRequired,
-  selectedItemData: uttaksresultatAktivitetPropType,
-  stonadskonto: PropTypes.shape(),
-  uttaksresultatActivity: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingsresultat: PropTypes.shape().isRequired,
-};
-
 UttakTimeLineData.defaultProps = {
   isApOpen: false,
-  selectedItemData: undefined,
   stonadskonto: {},
 };
 

@@ -1,25 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { InjectedFormProps } from 'redux-form';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { formPropTypes } from 'redux-form';
+import { Undertittel } from 'nav-frontend-typografi';
 
-import { uttaksresultaltPerioderSøkerPropType } from '@fpsak-frontend/prop-types';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
+import {
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, PeriodeSoker, Personopplysninger,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
-import Uttak from './Uttak';
+import Uttak, { UttaksresultatActivity } from './Uttak';
 import styles from './uttakPanel.less';
 
 const formName = 'UttakForm';
 
-const hentApTekst = (uttaksresultat, isApOpen, aksjonspunkter) => {
+const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]) => {
   const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.FASTSETT_UTTAKPERIODER
     && ap.definisjon.kode !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
 
@@ -36,7 +38,7 @@ const hentApTekst = (uttaksresultat, isApOpen, aksjonspunkter) => {
   };
 
   const texts = [];
-  const helpText = uttaksresultat.perioderSøker.find((p) => (p.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING));
+  const helpText = uttaksresultat.perioderSøker.find((p) => p.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
 
   const overstyrApHelpTextOpen = aksjonspunkter.length === 1
     && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
@@ -47,8 +49,9 @@ const hentApTekst = (uttaksresultat, isApOpen, aksjonspunkter) => {
     && aksjonspunkter[0].status.kode === 'UTFO';
 
   helptTextAksjonspunkter.forEach((ap) => {
-    if (uttakPanelAksjonsPunktKoder[ap.definisjon.kode]) {
-      texts.push(<FormattedMessage key="aksjonspunktTekst" id={uttakPanelAksjonsPunktKoder[ap.definisjon.kode]} />);
+    const tekstkode = uttakPanelAksjonsPunktKoder[ap.definisjon.kode];
+    if (tekstkode) {
+      texts.push(<FormattedMessage key="aksjonspunktTekst" id={tekstkode} />);
     }
   });
 
@@ -69,7 +72,38 @@ const hentApTekst = (uttaksresultat, isApOpen, aksjonspunkter) => {
   return texts;
 };
 
-export const UttakPanelImpl = ({
+interface PureOwnProps {
+  fagsak: Fagsak;
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingType: Kodeverk;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  behandlingStatus: Kodeverk;
+  sprakkode: Kodeverk;
+  uttaksresultat: UttaksresultatPeriode;
+  stonadskonto: UttakStonadskontoer;
+  aksjonspunkter: Aksjonspunkt[];
+  employeeHasAccess: boolean;
+  soknad: Soknad;
+  person: Personopplysninger;
+  familiehendelse: FamilieHendelseSamling;
+  uttakPeriodeGrense: UttakPeriodeGrense;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  ytelsefordeling: Ytelsefordeling;
+  tempUpdateStonadskontoer: (...args: any[]) => any;
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  apCodes: string[];
+  isApOpen: boolean;
+
+}
+
+interface MappedOwnProps {
+  manuellOverstyring?: boolean;
+}
+
+export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   uttaksresultat,
   aksjonspunkter,
   soknad,
@@ -97,92 +131,69 @@ export const UttakPanelImpl = ({
       <FormattedMessage id="UttakPanel.Title" />
     </Undertittel>
     <VerticalSpacer twentyPx />
-    {aksjonspunkter.length > 0
-        && (
-          <>
-            <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-              {hentApTekst(uttaksresultat, isApOpen, aksjonspunkter)}
-            </AksjonspunktHelpTextTemp>
-            <VerticalSpacer twentyPx />
-          </>
-        )}
-    {uttaksresultat
-        && (
-          <form onSubmit={formProps.handleSubmit}>
-            <Uttak
-              intl={intl}
-              submitting={formProps.submitting}
-              isDirty={formProps.dirty}
-              formName={formName}
-              manuellOverstyring={manuellOverstyring}
-              person={person}
-              familiehendelse={familiehendelse}
-              uttakPeriodeGrense={uttakPeriodeGrense}
-              ytelsefordeling={ytelsefordeling}
-              behandlingId={behandlingId}
-              behandlingType={behandlingType}
-              behandlingVersjon={behandlingVersjon}
-              behandlingStatus={behandlingStatus}
-              fagsak={fagsak}
-              alleKodeverk={alleKodeverk}
-              readOnly={readOnly}
-              isApOpen={isApOpen}
-              aksjonspunkter={aksjonspunkter}
-              employeeHasAccess={employeeHasAccess}
-              uttaksresultat={uttaksresultat}
-              behandlingsresultat={behandlingsresultat}
-              dekningsgrad={soknad.dekningsgrad}
-              mottattDato={soknad.mottattDato}
-              fodselsdatoer={soknad.fodselsdatoer}
-              termindato={soknad.termindato}
-              adopsjonFodelsedatoer={soknad.adopsjonFodelsedatoer}
-              soknadsType={soknad.soknadType.kode}
-              omsorgsovertakelseDato={soknad.omsorgsovertakelseDato}
-              tempUpdateStonadskontoer={tempUpdateStonadskontoer}
-            />
-          </form>
-        )}
+    {aksjonspunkter.length > 0 && (
+      <>
+        <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
+          {hentApTekst(uttaksresultat, isApOpen, aksjonspunkter)}
+        </AksjonspunktHelpTextTemp>
+        <VerticalSpacer twentyPx />
+      </>
+    )}
+    {uttaksresultat && (
+      <form onSubmit={formProps.handleSubmit}>
+        <Uttak
+          intl={intl}
+          submitting={formProps.submitting}
+          isDirty={formProps.dirty}
+          formName={formName}
+          manuellOverstyring={manuellOverstyring}
+          person={person}
+          familiehendelse={familiehendelse}
+          uttakPeriodeGrense={uttakPeriodeGrense}
+          ytelsefordeling={ytelsefordeling}
+          behandlingId={behandlingId}
+          behandlingType={behandlingType}
+          behandlingVersjon={behandlingVersjon}
+          behandlingStatus={behandlingStatus}
+          fagsak={fagsak}
+          alleKodeverk={alleKodeverk}
+          readOnly={readOnly}
+          isApOpen={isApOpen}
+          aksjonspunkter={aksjonspunkter}
+          employeeHasAccess={employeeHasAccess}
+          uttaksresultat={uttaksresultat}
+          behandlingsresultat={behandlingsresultat}
+          mottattDato={soknad.mottattDato}
+          fodselsdatoer={soknad.fodselsdatoer}
+          termindato={soknad.termindato}
+          adopsjonFodelsedatoer={soknad.adopsjonFodelsedatoer}
+          soknadsType={soknad.soknadType.kode}
+          omsorgsovertakelseDato={soknad.omsorgsovertakelseDato}
+          tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+        />
+      </form>
+    )}
     {formProps.error && formProps.submitFailed
         && formProps.error}
   </>
 );
 
-UttakPanelImpl.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  uttaksresultat: uttaksresultaltPerioderSøkerPropType,
-  stonadskonto: PropTypes.shape().isRequired,
-  soknad: PropTypes.shape().isRequired,
-  manuellOverstyring: PropTypes.bool,
-  apCodes: PropTypes.arrayOf(PropTypes.string),
-  isApOpen: PropTypes.bool,
-  familiehendelse: PropTypes.shape().isRequired,
-  person: PropTypes.shape().isRequired,
-  uttakPeriodeGrense: PropTypes.shape().isRequired,
-  ytelsefordeling: PropTypes.shape().isRequired,
-  behandlingType: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingStatus: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  fagsak: PropTypes.shape().isRequired,
-  employeeHasAccess: PropTypes.bool.isRequired,
-  behandlingsresultat: PropTypes.shape().isRequired,
-  tempUpdateStonadskontoer: PropTypes.func.isRequired,
-  ...formPropTypes,
-};
+interface FormValues {
+  uttaksresultatActivity: UttaksresultatActivity[];
+  stonadskonto: UttakStonadskontoer;
+  manuellOverstyring?: boolean;
+}
 
-UttakPanelImpl.defaultProps = {
-  uttaksresultat: undefined,
-  apCodes: undefined,
-  isApOpen: false,
-  manuellOverstyring: undefined,
-};
+type UttakResultat = { [key: string]: {
+    trekkdagerDesimaler: number;
+    konto: string;
+  }
+}
 
-const getResult = (uttaksresultatActivity) => {
+const getResult = (uttaksresultatActivity: UttaksresultatActivity[]): UttakResultat => {
   const uttakResult = {};
   uttaksresultatActivity.forEach((uttak) => {
-    uttak.aktiviteter.forEach((a, index) => {
+    uttak.aktiviteter.forEach((a, index: number) => {
       const aktivitetDays = (typeof a.days !== 'undefined' && typeof a.weeks !== 'undefined')
         ? ((a.weeks * 5) + parseFloat(a.days))
         : a.trekkdagerDesimaler;
@@ -204,7 +215,7 @@ const getResult = (uttaksresultatActivity) => {
   return uttakResult;
 };
 
-const convertToArray = (uttakResult) => Object.values(uttakResult)
+const convertToArray = (uttakResult: UttakResultat) => Object.values(uttakResult)
   .map((u) => {
     const uttakElement = { ...u };
     uttakElement.trekkdagerDesimaler = u.trekkdagerDesimaler;
@@ -212,7 +223,7 @@ const convertToArray = (uttakResult) => Object.values(uttakResult)
     return uttakElement;
   });
 
-const getGjeldendeStønadskonto = (stonadskontoTypeKode, stonadskontoer) => {
+const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer: UttakStonadskontoer['stonadskontoer']) => {
   switch (stonadskontoTypeKode) {
     case stonadskontoType.FORELDREPENGER_FØR_FØDSEL:
       return stonadskontoer.FORELDREPENGER_FØR_FØDSEL;
@@ -229,7 +240,7 @@ const getGjeldendeStønadskonto = (stonadskontoTypeKode, stonadskontoer) => {
   }
 };
 
-const checkMaxDager = (uttaksresultatActivity, stonadskonto) => {
+const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonadskonto: UttakStonadskontoer) => {
   let errors = null;
   const uttakResult = getResult(uttaksresultatActivity);
   const uttakResultArray = convertToArray(uttakResult);
@@ -238,7 +249,7 @@ const checkMaxDager = (uttaksresultatActivity, stonadskonto) => {
     .forEach((value) => {
       const gjeldendeStønadskonto = getGjeldendeStønadskonto(value.konto, stonadskonto.stonadskontoer);
       if (gjeldendeStønadskonto && !gjeldendeStønadskonto.gyldigForbruk) {
-        const minsteSaldo = gjeldendeStønadskonto.aktivitetSaldoDtoList.reduce((min, akt) => {
+        const minsteSaldo = gjeldendeStønadskonto.aktivitetSaldoDtoList.reduce((min: number, akt) => {
           if (akt.saldo < min) {
             return akt.saldo;
           }
@@ -264,7 +275,7 @@ const checkMaxDager = (uttaksresultatActivity, stonadskonto) => {
   return errors;
 };
 
-const checkFlerbarnsMaksDager = (stonadskonto = {}) => {
+const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskontoer'] = {}) => {
   let errors = null;
   if (stonadskonto.FLERBARNSDAGER && !stonadskonto.FLERBARNSDAGER.gyldigForbruk) {
     errors = {
@@ -282,7 +293,7 @@ const checkFlerbarnsMaksDager = (stonadskonto = {}) => {
   return errors;
 };
 
-const checkValidStonadKonto = (uttakPerioder, stonadskontoer) => {
+const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadskontoer?: UttakStonadskontoer['stonadskontoer']) => {
   let errors = null;
   uttakPerioder.forEach((periode) => {
     const ikkeGyldigKonto = periode.aktiviteter.filter((a) => !(Object.prototype.hasOwnProperty.call(stonadskontoer, a.stønadskontoType.kode))
@@ -304,10 +315,10 @@ const checkValidStonadKonto = (uttakPerioder, stonadskontoer) => {
   return errors;
 };
 
-const validateUttakPanelForm = (values) => {
-  const { uttaksresultatActivity, stonadskonto = {} } = values;
+const validateUttakPanelForm = (values: FormValues) => {
+  const { uttaksresultatActivity, stonadskonto } = values;
   if (uttaksresultatActivity) {
-    const stonadkontoError = checkValidStonadKonto(uttaksresultatActivity, stonadskonto.stonadskontoer);
+    const stonadkontoError = checkValidStonadKonto(uttaksresultatActivity, stonadskonto?.stonadskontoer);
     if (stonadkontoError) {
       return stonadkontoError;
     }
@@ -315,7 +326,7 @@ const validateUttakPanelForm = (values) => {
     if (maxDagerError) {
       return maxDagerError;
     }
-    const flerbarnsMaksDager = checkFlerbarnsMaksDager(stonadskonto.stonadskontoer);
+    const flerbarnsMaksDager = checkFlerbarnsMaksDager(stonadskonto?.stonadskontoer);
     if (flerbarnsMaksDager) {
       return flerbarnsMaksDager;
     }
@@ -324,9 +335,9 @@ const validateUttakPanelForm = (values) => {
 };
 
 export const buildInitialValues = createSelector(
-  [(props) => props.uttaksresultat, (props) => props.stonadskonto],
-  (uttaksresultat, stonadskonto) => ({
-    uttaksresultatActivity: uttaksresultat.perioderSøker.map((ua, index) => ({
+  [(props: PureOwnProps) => props.uttaksresultat, (props: PureOwnProps) => props.stonadskonto],
+  (uttaksresultat, stonadskonto): FormValues => ({
+    uttaksresultatActivity: uttaksresultat.perioderSøker.map((ua, index: number) => ({
       ...ua,
       id: index + 1,
     })),
@@ -334,13 +345,12 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-export const transformValues = (values, apCodes, aksjonspunkter) => {
+export const transformValues = (values: FormValues, apCodes: string[], aksjonspunkter: Aksjonspunkt[]) => {
   const overstyrErOpprettet = aksjonspunkter.filter((ap) => ap.status.kode === 'OPPR' && ap.definisjon.kode === '6008');
   const removeOverstyrApCode = apCodes.filter((a) => a !== '6008');
   let aksjonspunkt = removeOverstyrApCode;
 
-  const transformedResultat = values.uttaksresultatActivity.map((perioder) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const transformedResultat = values.uttaksresultatActivity.map((perioder: UttaksresultatActivity) => {
     const { tilknyttetStortinget, ...uta } = perioder; // NOSONAR destruct er bedre enn delete, immutable
     const { ...transformActivity } = uta;
     if (uta.oppholdÅrsak.kode !== '-') {
@@ -371,14 +381,16 @@ export const transformValues = (values, apCodes, aksjonspunkter) => {
 };
 
 const lagSubmitFn = createSelector([
-  (ownProps) => ownProps.submitCallback, (ownProps) => ownProps.apCodes, (ownProps) => ownProps.aksjonspunkter],
-(submitCallback, apCodes, aksjonspunkter) => (values) => submitCallback(transformValues(values, apCodes, aksjonspunkter)));
+  (ownProps: PureOwnProps) => ownProps.submitCallback,
+  (ownProps: PureOwnProps) => ownProps.apCodes,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+(submitCallback, apCodes, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, apCodes, aksjonspunkter)));
 
-const mapStateToPropsFactory = (_initialState, initOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initOwnProps;
-  const validate = (values) => validateUttakPanelForm(values);
+  const validate = (values: FormValues) => validateUttakPanelForm(values);
 
-  return (state, ownProps) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const initialValues = buildInitialValues(ownProps);
 
     return {

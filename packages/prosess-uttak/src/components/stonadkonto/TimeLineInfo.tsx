@@ -1,34 +1,27 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
-import { stonadskontoerPropType } from '@fpsak-frontend/prop-types';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from '../../utils/uttakVisningsnavnHelper';
-import TimeLineTab from './TimeLineTab';
+import TimeLineTab, { CustomStonadskonto } from './TimeLineTab';
 
 import styles from './timeLineInfo.less';
-
-/**
- * TimeLineInfo
- *
- * Presentationskomponent. Viser de ulike perioderne og kvarvarende uker/dagar for soknad
- */
 
 const headerTextCodes = [
   'TimeLineInfo.Aktivitet',
   'TimeLineInfo.Disponibelt',
 ];
 
-const findTilgjengeligeUker = (stonadskontoer) => {
+const findTilgjengeligeUker = (stonadskontoer: UttakStonadskontoer['stonadskontoer']) => {
   let sumDager = 0;
   Object.keys(stonadskontoer).forEach((key) => {
     if (key !== stonadskontoType.FLERBARNSDAGER) {
@@ -38,7 +31,7 @@ const findTilgjengeligeUker = (stonadskontoer) => {
   return Math.floor(sumDager / 5);
 };
 
-const findAntallUkerOgDager = (saldo) => {
+const findAntallUkerOgDager = (saldo: number) => {
   const modifier = saldo < 0 ? -1 : 1;
   const justertSaldo = saldo * modifier;
   return {
@@ -47,25 +40,39 @@ const findAntallUkerOgDager = (saldo) => {
   };
 };
 
-const createTextStrings = (arbforhold) => {
+const createTextStrings = (arbforhold: AktivitetIdentifikator): ReactNode | string => {
   const {
-    arbeidsgiver, eksternArbeidsforholdId, uttakArbeidType,
+    arbeidsgiver, uttakArbeidType,
   } = arbforhold;
 
-  let arbeidsforhold = <FormattedMessage id="RenderUttakTable.ArbeidType.ANNET" />;
-
   if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
-  } else if (arbeidsgiver) {
-    arbeidsforhold = lagVisningsNavn(arbeidsgiver, eksternArbeidsforholdId);
+    return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
+  }
+  if (arbeidsgiver) {
+    return lagVisningsNavn(arbeidsgiver);
   }
 
-  return arbeidsforhold;
+  return <FormattedMessage id="RenderUttakTable.ArbeidType.ANNET" />;
 };
 
-class TimeLineInfo extends Component {
-  constructor() {
-    super();
+interface OwnProps {
+  stonadskonto?: UttakStonadskontoer['stonadskontoer'];
+  maksDatoUttak?: string;
+}
+
+interface OwnState {
+  aktiv?: number;
+  visKonto?: CustomStonadskonto;
+}
+
+/**
+ * TimeLineInfo
+ *
+ * Presentationskomponent. Viser de ulike perioderne og kvarvarende uker/dagar for soknad
+ */
+class TimeLineInfo extends Component<OwnProps, OwnState> {
+  constructor(props: OwnProps) {
+    super(props);
     this.state = {
       aktiv: undefined,
       visKonto: undefined,
@@ -73,7 +80,7 @@ class TimeLineInfo extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(konto, index) {
+  handleChange(konto: CustomStonadskonto, index: number) {
     const { aktiv } = this.state;
     if (aktiv === index) {
       this.setState({
@@ -91,7 +98,7 @@ class TimeLineInfo extends Component {
   render() {
     const {
       stonadskonto,
-      maksDatoUttak,
+      maksDatoUttak = '',
     } = this.props;
     const {
       aktiv,
@@ -108,7 +115,7 @@ class TimeLineInfo extends Component {
       stonadskontoType.FORELDREPENGER,
       stonadskontoType.FLERBARNSDAGER];
 
-    const stonadArray = Object.keys(stonadskonto).map((key) => ({
+    const stonadArray = Object.keys(stonadskonto).map((key): CustomStonadskonto => ({
       kontonavn: key,
       kontoinfo: stonadskonto[key],
     }));
@@ -122,7 +129,7 @@ class TimeLineInfo extends Component {
       updatekonto = stonadArray[aktiv];
     }
 
-    const createKey = (arbeidsforhold) => {
+    const createKey = (arbeidsforhold: AktivitetSaldo) => {
       const { uttakArbeidType, arbeidsgiver, arbeidsforholdId } = arbeidsforhold.aktivitetIdentifikator;
       let arbKey = uttakArbeidType.kode;
       arbKey = arbeidsgiver ? `${arbKey} ${arbeidsgiver.navn}` : arbKey;
@@ -135,57 +142,59 @@ class TimeLineInfo extends Component {
     return (
       <div>
         {gjelderFodsel // Denne vi lager i første omgang av iterasjonen
-        && (
-          <Column xs="12">
-            <div className={styles.remainingUttak}>
-              <Row>
-                <Column xs="5">
-                  <Element>
-                    <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
-                  </Element>
-                </Column>
-                <Column xs="4">
-                  <Normaltekst>
-                    <FormattedMessage
-                      id="TimeLineInfo.Stonadinfo.Total"
-                      values={{ ukerVerdi: findTilgjengeligeUker(stonadskonto), b: (chunks) => <b>{chunks}</b> }}
-                    />
-                  </Normaltekst>
-                </Column>
-                {maksDatoUttak
-                && (
+          && (
+            <Column xs="12">
+              <div className={styles.remainingUttak}>
+                <Row>
+                  <Column xs="5">
+                    <Element>
+                      <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
+                    </Element>
+                  </Column>
+                  <Column xs="4">
+                    <Normaltekst>
+                      <FormattedMessage
+                        id="TimeLineInfo.Stonadinfo.Total"
+                        values={{ ukerVerdi: findTilgjengeligeUker(stonadskonto), b: (chunks: any) => <b>{chunks}</b> }}
+                      />
+                    </Normaltekst>
+                  </Column>
                   <Column xs="3">
                     <Normaltekst>
                       <FormattedMessage
                         id="TimeLineInfo.Stonadinfo.MaksDato"
-                        values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (chunks) => <b>{chunks}</b> }}
+                        values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (chunks: any) => <b>{chunks}</b> }}
                       />
                     </Normaltekst>
                   </Column>
-                )}
-              </Row>
-              <Row>
-                <div className={styles.tabs}>
-                  <ul role="tablist">
-                    {stonadArray.map((konto, index) => (
-                      <TimeLineTab key={konto.kontonavn} aktiv={index === aktiv} stonadskonto={konto} onClickCallback={() => this.handleChange(konto, index)} />
-                    ))}
-                  </ul>
-                </div>
-              </Row>
-              <Row>
-                {updatekonto && updatekonto.kontoinfo.aktivitetSaldoDtoList.length > 0
-                && (
-                  <div className={styles.visKonto}>
-                    <Table headerTextCodes={headerTextCodes}>
-                      {updatekonto.kontoinfo.aktivitetSaldoDtoList.map((arbforhold) => (
-                        <TableRow key={createKey(arbforhold)}>
-                          <TableColumn>
-                            <Normaltekst>{createTextStrings(arbforhold.aktivitetIdentifikator)}</Normaltekst>
-                          </TableColumn>
-                          <TableColumn>
-                            <Normaltekst>
-                              {arbforhold.saldo
+                </Row>
+                <Row>
+                  <div className={styles.tabs}>
+                    <ul role="tablist">
+                      {stonadArray.map((konto: CustomStonadskonto, index: number) => (
+                        <TimeLineTab
+                          key={konto.kontonavn}
+                          aktiv={index === aktiv}
+                          stonadskonto={konto}
+                          onClickCallback={() => this.handleChange(konto, index)}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                </Row>
+                <Row>
+                  {updatekonto && updatekonto.kontoinfo.aktivitetSaldoDtoList.length > 0
+                  && (
+                    <div className={styles.visKonto}>
+                      <Table headerTextCodes={headerTextCodes}>
+                        {updatekonto.kontoinfo.aktivitetSaldoDtoList.map((arbforhold) => (
+                          <TableRow key={createKey(arbforhold)}>
+                            <TableColumn>
+                              <Normaltekst>{createTextStrings(arbforhold.aktivitetIdentifikator)}</Normaltekst>
+                            </TableColumn>
+                            <TableColumn>
+                              <Normaltekst>
+                                {arbforhold.saldo
                               && (
                               <FormattedMessage
                                 id="TimeLineInfo.Stonadinfo.UkerDager"
@@ -196,34 +205,24 @@ class TimeLineInfo extends Component {
                                   dagerVerdi: findAntallUkerOgDager(
                                     arbforhold.saldo,
                                   ).dager,
-                                  b: (chunks) => <b>{chunks}</b>,
+                                  b: (chunks: any) => <b>{chunks}</b>,
                                 }}
                               />
                               )}
-                            </Normaltekst>
-                          </TableColumn>
-                        </TableRow>
-                      ))}
-                    </Table>
-                  </div>
-                )}
-              </Row>
-            </div>
-          </Column>
-        )}
+                              </Normaltekst>
+                            </TableColumn>
+                          </TableRow>
+                        ))}
+                      </Table>
+                    </div>
+                  )}
+                </Row>
+              </div>
+            </Column>
+          )}
       </div>
     );
   }
 }
-
-TimeLineInfo.propTypes = {
-  stonadskonto: stonadskontoerPropType,
-  maksDatoUttak: PropTypes.string,
-};
-
-TimeLineInfo.defaultProps = {
-  stonadskonto: undefined,
-  maksDatoUttak: '',
-};
 
 export default TimeLineInfo;

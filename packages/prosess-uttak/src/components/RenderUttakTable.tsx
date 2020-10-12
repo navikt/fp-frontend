@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { FieldArrayFieldsProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { kodeverkPropType } from '@fpsak-frontend/prop-types';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
@@ -13,6 +12,7 @@ import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidT
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@fpsak-frontend/utils';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from '../utils/uttakVisningsnavnHelper';
 import styles from './renderUttakTable.less';
@@ -43,11 +43,16 @@ const gyldigeUttakperioder = [
   uttakPeriodeType.MODREKVOTE,
   uttakPeriodeType.UDEFINERT];
 
-const mapPeriodeTyper = (typer) => typer
-  .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
-  .map(({ kode, navn }) => <option value={kode} key={kode}>{navn}</option>);
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
+  .filter(({
+    kode,
+  }) => gyldigeUttakperioder.includes(kode))
+  .map(({
+    kode,
+    navn,
+  }) => <option value={kode} key={kode}>{navn}</option>);
 
-const utsettelse = (erOppfylt, utsettelseType) => {
+const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk) => {
   if (!erOppfylt) {
     if (!utsettelseType || (utsettelseType && utsettelseType.kode === '-')) {
       return true;
@@ -57,10 +62,10 @@ const utsettelse = (erOppfylt, utsettelseType) => {
 };
 
 const merEnNullMessage = () => ([{ id: 'ValidationMessage.MerEnNullUtaksprosent' }]);
-const noMoreThanZeroIfRejectedAndNotUtsettelse = (value, elmnt) => (utsettelse(elmnt.erOppfylt, elmnt.utsettelseType) && parseFloat(value) > 0
+const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: any) => (utsettelse(elmnt.erOppfylt, elmnt.utsettelseType) && parseFloat(value) > 0
   ? merEnNullMessage() : null);
 
-const createTextStrings = (fields) => {
+const createTextStrings = (fields: any) => {
   const {
     prosentArbeid, stillingsprosent, arbeidsgiver, eksternArbeidsforholdId, uttakArbeidType,
   } = fields;
@@ -80,13 +85,19 @@ const createTextStrings = (fields) => {
   };
 };
 
-const checkForMonthsOrDays = (fieldName) => {
+const checkForMonthsOrDays = (fieldName: string) => {
   const weeksValue = document.getElementById(`${fieldName}.weeks`) ? document.getElementById(`${fieldName}.weeks`).value : null;
   const daysValue = document.getElementById(`${fieldName}.days`) ? document.getElementById(`${fieldName}.days`).value : null;
   return (weeksValue !== '0' || daysValue !== '0');
 };
 
-export const RenderUttakTableImpl = ({
+interface OwnProps {
+  fields: FieldArrayFieldsProps<string>;
+  periodeTyper: KodeverkMedNavn[];
+  readOnly: boolean;
+}
+
+export const RenderUttakTable: FunctionComponent<OwnProps> = ({
   fields,
   periodeTyper,
   readOnly,
@@ -95,7 +106,7 @@ export const RenderUttakTableImpl = ({
     {fields.length > 0
     && (
     <Table headerTextCodes={headerTextCodes}>
-      {fields.map((uttakElementFieldId, index) => {
+      {fields.map((uttakElementFieldId, index: number) => {
         const textStrings = createTextStrings(fields.get(index));
         return (
           <TableRow key={uttakElementFieldId}>
@@ -107,9 +118,7 @@ export const RenderUttakTableImpl = ({
                   selectValues={mapPeriodeTyper(periodeTyper)}
                   label=""
                   readOnly={readOnly}
-                  validate={
-                    checkForMonthsOrDays(uttakElementFieldId) ? [required, notDash] : []
-}
+                  validate={checkForMonthsOrDays(uttakElementFieldId) ? [required, notDash] : []}
                 />
               </div>
             </TableColumn>
@@ -156,7 +165,7 @@ export const RenderUttakTableImpl = ({
                     validate={[required, minValue0, maxProsentValue100, hasValidDecimal, noMoreThanZeroIfRejectedAndNotUtsettelse]}
                     readOnly={readOnly}
                     bredde="XS"
-                    format={(value) => {
+                    format={(value: any) => {
                       if (value || value === 0) {
                         return readOnly ? `${value} %` : value;
                       }
@@ -182,13 +191,5 @@ export const RenderUttakTableImpl = ({
     )}
   </div>
 );
-
-RenderUttakTableImpl.propTypes = {
-  fields: PropTypes.shape().isRequired,
-  periodeTyper: kodeverkPropType.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-};
-
-const RenderUttakTable = injectIntl(RenderUttakTableImpl);
 
 export default RenderUttakTable;

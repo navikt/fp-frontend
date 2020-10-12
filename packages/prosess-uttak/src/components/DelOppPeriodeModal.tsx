@@ -1,30 +1,43 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { InjectedFormProps } from 'redux-form';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { connect } from 'react-redux';
+import moment from 'moment/moment';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl } from 'react-intl';
 import Modal from 'nav-frontend-modal';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+
 import {
-  calcDaysAndWeeks, dateAfterOrEqual, dateBeforeOrEqual, DDMMYYYY_DATE_FORMAT, hasValidDate, ISO_DATE_FORMAT, required,
+  calcDaysAndWeeks, dateAfterOrEqual, dateBeforeOrEqual, DDMMYYYY_DATE_FORMAT, hasValidDate, required,
 } from '@fpsak-frontend/utils';
 import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 import { DatepickerField, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import PropTypes from 'prop-types';
-import { uttaksresultatAktivitetPropType } from '@fpsak-frontend/prop-types';
-import { formPropTypes } from 'redux-form';
-import { connect } from 'react-redux';
-import moment from 'moment/moment';
 
 import styles from './delOppPeriodeModal.less';
+import { PeriodeMedClassName } from './Uttak';
 
-export const DelOppPeriodeModalImpl = ({
+interface PureOwnProps {
+  periodeData: PeriodeMedClassName;
+  cancelEvent: () => void;
+  showModal: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  splitPeriod: (data: any) => void;
+}
+
+interface MappedOwnProps {
+  førstePeriodeTom?: string;
+}
+
+export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+  intl,
   periodeData,
   showModal,
   cancelEvent,
   førstePeriodeTom,
-  intl,
   ...formProps
 }) => {
-  const numberOfDaysAndWeeks = calcDaysAndWeeks(periodeData.fom, førstePeriodeTom, ISO_DATE_FORMAT);
+  const numberOfDaysAndWeeks = calcDaysAndWeeks(periodeData.fom, førstePeriodeTom);
   return (
     <Modal
       isOpen={showModal}
@@ -33,9 +46,8 @@ export const DelOppPeriodeModalImpl = ({
       closeButton={false}
       className={styles.modal}
       shouldCloseOnOverlayClick={false}
-      ariaHideApp={false}
     >
-      <FlexContainer fluid wrap>
+      <FlexContainer wrap>
         <FlexRow wrap>
           <FlexColumn>
             <Element className={styles.marginTop}>
@@ -106,15 +118,11 @@ export const DelOppPeriodeModalImpl = ({
   );
 };
 
-DelOppPeriodeModalImpl.propTypes = {
-  periodeData: uttaksresultatAktivitetPropType.isRequired,
-  cancelEvent: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
-  intl: PropTypes.shape().isRequired,
-  ...formPropTypes,
-};
+interface FormValues {
+  ForstePeriodeTomDato?: string;
+}
 
-const validateForm = (value, periodeData) => {
+const validateForm = (value: FormValues, periodeData: PeriodeMedClassName) => {
   if (value.ForstePeriodeTomDato
     && (dateAfterOrEqual(value.ForstePeriodeTomDato)(moment(periodeData.tom.toString()).subtract(1, 'day'))
       || dateBeforeOrEqual(value.ForstePeriodeTomDato)(periodeData.fom))) {
@@ -125,7 +133,7 @@ const validateForm = (value, periodeData) => {
   return null;
 };
 
-const transformValues = (values, periodeData) => {
+const transformValues = (values: FormValues, periodeData: PeriodeMedClassName) => {
   const addDay = moment(values.ForstePeriodeTomDato).add(1, 'days');
   const forstePeriode = {
     fom: periodeData.fom,
@@ -146,19 +154,17 @@ const transformValues = (values, periodeData) => {
   };
 };
 
-const mapStateToPropsFactory = (_initialState, ownProps) => {
+const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = ownProps;
-  const validate = (values) => validateForm(values, ownProps.periodeData);
-  const onSubmit = (values) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
-  return (state) => ({
+  const validate = (values: FormValues) => validateForm(values, ownProps.periodeData);
+  const onSubmit = (values: FormValues) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
+  return (state: any) => ({
     førstePeriodeTom: behandlingFormValueSelector('DelOppPeriode', behandlingId, behandlingVersjon)(state, 'ForstePeriodeTomDato'),
     validate,
     onSubmit,
   });
 };
 
-const DelOppPeriodeModal = connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(behandlingForm({
   form: 'DelOppPeriode',
-})(DelOppPeriodeModalImpl));
-
-export default injectIntl(DelOppPeriodeModal);
+})(injectIntl(DelOppPeriodeModal)));

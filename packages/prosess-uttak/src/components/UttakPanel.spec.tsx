@@ -233,8 +233,8 @@ describe('<UttakPanel>', () => {
     };
 
     const transformedValues = transformValues(values, ownProps.apCodes, aksjonspunkter);
-    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.FASTSETT_UTTAKPERIODER)).has.length(1);
-    expect(transformedValues.filter((ap) => ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === '29.0')).has.length(1);
+    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.FASTSETT_UTTAKPERIODER)).has.length(1);
+    expect(transformedValues.filter((ap: any) => ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === '29.0')).has.length(1);
   });
 
   it('transformValues gir korrekt trekkdager og manuell overstyring', () => {
@@ -274,8 +274,8 @@ describe('<UttakPanel>', () => {
     };
 
     const transformedValues = transformValues(values, ownProps.apCodes, aksjonspunkter);
-    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER)).has.length(1);
-    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
+    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER)).has.length(1);
+    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
       && ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === '34.0')).has.length(1);
   });
 

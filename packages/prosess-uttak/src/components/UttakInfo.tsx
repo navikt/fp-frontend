@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
@@ -9,7 +8,6 @@ import { CheckboxField, DecimalField, SelectField } from '@fpsak-frontend/form';
 import {
   calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, hasValidDecimal, maxValue, notDash, required, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
-import { kodeverkPropType } from '@fpsak-frontend/prop-types';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
@@ -25,7 +23,7 @@ import styles from './uttakActivity.less';
 
 const maxValue100 = maxValue(100);
 
-const periodeStatusClassName = (periode) => {
+const periodeStatusClassName = (periode: any) => {
   if (periode.erOppfylt === false) {
     return styles.redDetailsPeriod;
   }
@@ -39,7 +37,7 @@ const periodeStatusClassName = (periode) => {
   return styles.redDetailsPeriod;
 };
 
-const periodeIsInnvilget = (periode) => {
+const periodeIsInnvilget = (periode: any) => {
   if (periode.erOppfylt === false) {
     return false;
   }
@@ -49,7 +47,7 @@ const periodeIsInnvilget = (periode) => {
   return false;
 };
 
-const gradertArbforhold = (selectedItem) => {
+const gradertArbforhold = (selectedItem: any) => {
   let arbeidsforhold = '';
   if (selectedItem.gradertAktivitet) {
     const {
@@ -69,7 +67,7 @@ const gradertArbforhold = (selectedItem) => {
   return arbeidsforhold;
 };
 
-const typePeriode = (selectedItem, kontoIkkeSatt, getKodeverknavn) => {
+const typePeriode = (selectedItem: any, kontoIkkeSatt: any, getKodeverknavn: any) => {
   let returnText = '';
   if (selectedItem.utsettelseType.kode === '-' && !kontoIkkeSatt) {
     returnText = (<FormattedMessage id="UttakActivity.Uttak" />);
@@ -81,27 +79,27 @@ const typePeriode = (selectedItem, kontoIkkeSatt, getKodeverknavn) => {
   return returnText;
 };
 
-const isInnvilgetText = (selectedItemData, getKodeverknavn) => {
+const isInnvilgetText = (selectedItemData: any, getKodeverknavn: any) => {
   let returnText = '';
   if (periodeIsInnvilget(selectedItemData)) {
     returnText = (
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
-        values={{ innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks) => <b>{chunks}</b> }}
+        values={{ innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
       />
     );
   } else {
     returnText = (
       <FormattedMessage
         id="UttakActivity.IkkeOppfyltAarsak"
-        values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks) => <b>{chunks}</b> }}
+        values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
       />
     );
   }
   return returnText;
 };
 
-const stonadskonto = (selectedItem, kontoIkkeSatt, getKodeverknavn) => {
+const stonadskonto = (selectedItem: any, kontoIkkeSatt: any, getKodeverknavn: any) => {
   let returnText = '';
   if (!kontoIkkeSatt) {
     returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType);
@@ -115,11 +113,15 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
 
-const mapPeriodeTyper = (typer) => typer
-  .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
-  .map(({ kode }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
+const mapPeriodeTyper = (typer: any) => typer
+  .filter(({
+    kode,
+  }: any) => gyldigeÅrsaker.includes(kode))
+  .map(({
+    kode,
+  }: any) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
 
-const visGraderingIkkeInnvilget = (selectedItem, readOnly, graderingInnvilget) => {
+const visGraderingIkkeInnvilget = (selectedItem: any, readOnly: any, graderingInnvilget: any) => {
   const visGradering = selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
     && selectedItem.gradertAktivitet
     && graderingInnvilget === false
@@ -127,7 +129,18 @@ const visGraderingIkkeInnvilget = (selectedItem, readOnly, graderingInnvilget) =
   return visGradering;
 };
 
-export const UttakInfo = ({
+interface OwnProps {
+  oppholdArsakTyper: any; // TODO: kodeverkPropType
+  selectedItemData: {};
+  kontoIkkeSatt?: boolean;
+  readOnly: boolean;
+  harSoktOmFlerbarnsdager: boolean;
+  graderingInnvilget?: boolean;
+  erSamtidigUttak?: boolean;
+  alleKodeverk: {};
+}
+
+export const UttakInfo: FunctionComponent<OwnProps> = ({
   selectedItemData,
   kontoIkkeSatt,
   readOnly,
@@ -205,7 +218,7 @@ export const UttakInfo = ({
                             value={selectedItemData.samtidigUttaksprosent}
                             label={{ id: 'UttakInfo.SamtidigUttaksprosent' }}
                             validate={[required, maxValue100, hasValidDecimal]}
-                            format={(value) => {
+                            format={(value: any) => {
                               if (value || value === 0) {
                                 return readOnly ? `${value} %` : value;
                               }
@@ -318,23 +331,6 @@ export const UttakInfo = ({
       </div>
     </Column>
   );
-};
-
-UttakInfo.propTypes = {
-  oppholdArsakTyper: kodeverkPropType.isRequired,
-  selectedItemData: PropTypes.PropTypes.shape().isRequired,
-  kontoIkkeSatt: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  harSoktOmFlerbarnsdager: PropTypes.bool.isRequired,
-  graderingInnvilget: PropTypes.bool,
-  erSamtidigUttak: PropTypes.bool,
-  alleKodeverk: PropTypes.shape().isRequired,
-};
-
-UttakInfo.defaultProps = {
-  kontoIkkeSatt: undefined,
-  graderingInnvilget: undefined,
-  erSamtidigUttak: undefined,
 };
 
 export default UttakInfo;

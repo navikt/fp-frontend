@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+
+import {
+  Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 import UttakPanel from './components/UttakPanel';
 import messages from '../i18n/nb_NO.json';
-import uttakFagsakPropType from './propTypes/uttakFagsakPropType';
-import uttakBehandlingPropType from './propTypes/uttakBehandlingPropType';
-import uttakAksjonspunkterPropType from './propTypes/uttakAksjonspunkterPropType';
 
 const cache = createIntlCache();
 
@@ -15,7 +16,20 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const UttakProsessIndex = ({
+interface OwnProps {
+  fagsak: Fagsak;
+  uttakStonadskontoer: UttakStonadskontoer;
+  soknad: Soknad;
+  uttaksresultatPerioder: UttaksresultatPeriode;
+  familiehendelse: FamilieHendelseSamling;
+  personopplysninger: Personopplysninger;
+  uttakPeriodeGrense: UttakPeriodeGrense;
+  ytelsefordeling: Ytelsefordeling;
+  employeeHasAccess: boolean;
+  tempUpdateStonadskontoer: (...args: any[]) => any;
+}
+
+const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   fagsak,
   behandling,
   uttaksresultatPerioder,
@@ -62,25 +76,5 @@ const UttakProsessIndex = ({
     />
   </RawIntlProvider>
 );
-
-UttakProsessIndex.propTypes = {
-  fagsak: uttakFagsakPropType.isRequired,
-  behandling: uttakBehandlingPropType.isRequired,
-  aksjonspunkter: PropTypes.arrayOf(uttakAksjonspunkterPropType).isRequired,
-  uttakStonadskontoer: PropTypes.shape().isRequired,
-  soknad: PropTypes.shape().isRequired,
-  submitCallback: PropTypes.func.isRequired,
-  isReadOnly: PropTypes.bool.isRequired,
-  uttaksresultatPerioder: PropTypes.shape().isRequired,
-  isAksjonspunktOpen: PropTypes.bool.isRequired,
-  readOnlySubmitButton: PropTypes.bool.isRequired,
-  familiehendelse: PropTypes.shape().isRequired,
-  personopplysninger: PropTypes.shape().isRequired,
-  uttakPeriodeGrense: PropTypes.shape().isRequired,
-  ytelsefordeling: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  employeeHasAccess: PropTypes.bool.isRequired,
-  tempUpdateStonadskontoer: PropTypes.func.isRequired,
-};
 
 export default UttakProsessIndex;

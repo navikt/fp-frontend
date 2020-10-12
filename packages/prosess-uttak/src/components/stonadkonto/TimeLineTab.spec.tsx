@@ -2,6 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+import { Stonadskonto } from '@fpsak-frontend/types';
+
 import TimeLineTab from './TimeLineTab';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-proses-uttak';
 
@@ -9,15 +11,8 @@ const stonadskonto = {
   kontonavn: 'FORELDREPENGER_FØR_FØDSEL',
   kontoinfo: {
     saldo: 30,
-    aktivitetSaldoDtoList: [
-      {
-        fordelteDager: 30,
-      },
-      {
-        fordelteDager: 25,
-      },
-    ],
-  },
+    aktivitetSaldoDtoList: [],
+  } as Stonadskonto,
 };
 
 describe('<TimeLineTab>', () => {

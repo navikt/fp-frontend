@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { FieldArray, formPropTypes } from 'redux-form';
+import { FieldArray, InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -27,7 +26,6 @@ import {
   required,
   requiredIfNotPristine,
 } from '@fpsak-frontend/utils';
-import { kodeverkPropType } from '@fpsak-frontend/prop-types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
@@ -37,10 +35,14 @@ import {
   ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 
+import {
+  Behandling, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
+} from '@fpsak-frontend/types';
 import RenderUttakTable from './RenderUttakTable';
 import UttakInfo from './UttakInfo';
 
 import styles from './uttakActivity.less';
+import { PeriodeMedClassName } from './Uttak';
 
 const uttakActivityForm = 'uttaksresultatActivity';
 const minLength3 = minLength(3);
@@ -51,7 +53,7 @@ const PERIODE_RESULTAT_TYPE = 'PERIODE_RESULTAT_TYPE';
 const innvilgetTekst = 'Innvilget';
 const avlsattTekst = 'Avslått';
 
-function sortAlphabetically(a, b) {
+function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn) {
   if (a.navn < b.navn) {
     return -1;
   }
@@ -61,15 +63,30 @@ function sortAlphabetically(a, b) {
   return 0;
 }
 
-const mapAarsak = (kodeverk, starttidspunktForeldrepenger, utsettelseType, periodeType, skalFiltrere) => {
-  kodeverk.sort(sortAlphabetically);
-  const nyKodeverkListe = kodeverk.filter((kodeItem) => kodeItem.gyldigTom >= starttidspunktForeldrepenger
+type ArsakKodeverk = {
+  gyldigFom: string;
+  gyldigTom: string;
+  uttakTyper?: string[];
+  valgbarForKonto?: string[];
+} & KodeverkMedNavn;
+
+const mapAarsak = (
+  innvilgelseAarsakKoder: ArsakKodeverk[],
+  starttidspunktForeldrepenger: string,
+  utsettelseType?: Kodeverk,
+  periodeType?: Kodeverk,
+  skalFiltrere?: boolean,
+) => {
+  innvilgelseAarsakKoder.sort(sortAlphabetically);
+  let filteredNyKodeArray = innvilgelseAarsakKoder.filter((kodeItem) => kodeItem.gyldigTom >= starttidspunktForeldrepenger
     && kodeItem.gyldigFom <= starttidspunktForeldrepenger);
-  let filteredNyKodeArray = nyKodeverkListe.filter((item) => (item.kode < 4096 || item.kode > 4099));
 
   if (!skalFiltrere) {
-    return (filteredNyKodeArray
-      .map(({ kode, navn }) => <option value={kode} key={kode}>{navn}</option>));
+    return filteredNyKodeArray
+      .map(({
+        kode,
+        navn,
+      }) => <option value={kode} key={kode}>{navn}</option>);
   }
 
   if (utsettelseType && utsettelseType.kode !== utsettelseArsakCodes.UDEFINERT) {
@@ -82,11 +99,44 @@ const mapAarsak = (kodeverk, starttidspunktForeldrepenger, utsettelseType, perio
       .filter((kv) => kv.valgbarForKonto.includes(periodeType.kode));
   }
 
-  return (filteredNyKodeArray
-    .map(({ kode, navn }) => <option value={kode} key={kode}>{navn}</option>));
+  return filteredNyKodeArray
+    .map(({
+      kode,
+      navn,
+    }) => <option value={kode} key={kode}>{navn}</option>);
 };
 
-export const UttakActivity = ({
+interface PureOwnProps {
+  cancelSelectedActivity: (...args: any[]) => any;
+  updateActivity: (...args: any[]) => any;
+  selectedItemData: PeriodeMedClassName;
+  readOnly: boolean;
+  harSoktOmFlerbarnsdager: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+}
+
+interface MappedOwnProps {
+  hasValidationError: boolean;
+  kontoIkkeSatt: boolean;
+  periodeTyper: KodeverkMedNavn[];
+  oppholdArsakTyper: KodeverkMedNavn[];
+  graderingAvslagAarsakKoder: ArsakKodeverk[];
+  utsettelseAarsak: KodeverkMedNavn[];
+  uttakFieldArray: string;
+  erOppfylt: boolean;
+  currentlySelectedStønadskonto: Kodeverk;
+  avslagAarsakKoder: ArsakKodeverk[];
+  innvilgelseAarsakKoder: ArsakKodeverk[];
+  graderingInnvilget: boolean;
+  erSamtidigUttak: boolean;
+  samtidigUttaksprosent: string;
+  starttidspunktForeldrepenger: string;
+}
+
+export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   periodeTyper,
   oppholdArsakTyper,
   readOnly,
@@ -98,7 +148,6 @@ export const UttakActivity = ({
   innvilgelseAarsakKoder,
   graderingAvslagAarsakKoder,
   selectedItemData,
-  isApOpen,
   kontoIkkeSatt,
   starttidspunktForeldrepenger,
   harSoktOmFlerbarnsdager,
@@ -113,7 +162,6 @@ export const UttakActivity = ({
         oppholdArsakTyper={oppholdArsakTyper}
         selectedItemData={selectedItemData}
         kontoIkkeSatt={kontoIkkeSatt}
-        isApOpen={isApOpen}
         readOnly={readOnly}
         graderingInnvilget={graderingInnvilget}
         erSamtidigUttak={erSamtidigUttak}
@@ -223,7 +271,7 @@ export const UttakActivity = ({
                 )}
               {formProps.error}
               {formProps.warning}
-              <FlexContainer fluid>
+              <FlexContainer>
                 <FlexRow>
                   <FlexColumn>
                     <Hovedknapp
@@ -248,22 +296,32 @@ export const UttakActivity = ({
   </div>
 );
 
-UttakActivity.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  hasValidationError: PropTypes.bool.isRequired,
-  harSoktOmFlerbarnsdager: PropTypes.bool.isRequired,
-  periodeTyper: kodeverkPropType.isRequired,
-  cancelSelectedActivity: PropTypes.func.isRequired,
-  avslagAarsakKoder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  innvilgelseAarsakKoder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  graderingAvslagAarsakKoder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  starttidspunktForeldrepenger: PropTypes.string.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  currentlySelectedStønadskonto: PropTypes.shape(),
-  ...formPropTypes,
-};
+type AktivitetFieldArray = {
+  fom: string;
+  tom: string;
+  weeks: number;
+  days: number;
+} & PeriodeSokerAktivitet;
 
-const erPeriodeOppfylt = (periode, kontoIkkeSatt) => {
+type FormValues = {
+  UttakFieldArray: AktivitetFieldArray[];
+  begrunnelse?: string;
+  flerbarnsdager: boolean;
+  samtidigUttak: boolean;
+  samtidigUttaksprosent?: {
+    verdi: number;
+  };
+  avslagAarsak?: string;
+  innvilgelseAarsak?: string;
+  graderingInnvilget: boolean;
+  graderingAvslagAarsak: string;
+  oppholdArsak: string;
+  utsettelseType: Kodeverk;
+  erOppfylt: boolean;
+  selectedItem: PeriodeMedClassName;
+}
+
+const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean) => {
   if (periode.erOppfylt === false) {
     return false;
   }
@@ -285,8 +343,8 @@ const erPeriodeOppfylt = (periode, kontoIkkeSatt) => {
   return false;
 };
 
-const resultatTypeObject = (value, oppholdArsak) => {
-  if (value || oppholdArsak !== oppholdArsakType.UDEFINERT) {
+const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string) => {
+  if (erOppfylt || oppholdArsak !== oppholdArsakType.UDEFINERT) {
     return ({
       kode: periodeResultatType.INNVILGET,
       navn: innvilgetTekst,
@@ -300,9 +358,9 @@ const resultatTypeObject = (value, oppholdArsak) => {
   });
 };
 
-const warningUttakActivity = (values) => {
+const warningUttakActivity = (values: FormValues) => {
   let warnings = {};
-  const rowArray = [];
+  const rowArray: number[] = [];
   const touchedaktiviteter = document.getElementsByClassName('tableRowHighlight');
   const invalidArbeidsProsentVidUsettelse = isArbeidsProsentVidUtsettelse100(values, values.UttakFieldArray);
   if (invalidArbeidsProsentVidUsettelse && values.utsettelseType.kode === utsettelseArsakCodes.ARBEID) {
@@ -322,7 +380,7 @@ const warningUttakActivity = (values) => {
     }
   }
   if (values.UttakFieldArray) {
-    values.UttakFieldArray.forEach((aktivitet, index) => {
+    values.UttakFieldArray.forEach((aktivitet, index: number) => {
       const utbetalingsgrad = parseFloat(aktivitet.utbetalingsgrad);
       const utbetalingPlusArbeidsprosentMerEn100 = isutbetalingPlusArbeidsprosentMerEn100(utbetalingsgrad, aktivitet.prosentArbeid);
       if (utbetalingPlusArbeidsprosentMerEn100) {
@@ -362,11 +420,11 @@ const warningUttakActivity = (values) => {
   return warnings;
 };
 
-const validateUttakActivity = (values) => {
+const validateUttakActivity = (values: FormValues) => {
   const errors = {};
   errors.UttakFieldArray = [];
   if (values.UttakFieldArray) {
-    values.UttakFieldArray.forEach((aktivitet, index) => {
+    values.UttakFieldArray.forEach((aktivitet, index: number) => {
       const samtidigUttaksprosent = parseFloat(values.samtidigUttaksprosent);
       const utbetalingsgrad = parseFloat(aktivitet.utbetalingsgrad);
       const invalidUtbetalingsgradMerSamitidigUttaksprosent = isUtbetalingsgradMerSamitidigUttaksprosent(samtidigUttaksprosent, utbetalingsgrad);
@@ -383,7 +441,7 @@ const validateUttakActivity = (values) => {
       }
     });
     if (values.utsettelseType && values.utsettelseType.kode !== '-' && values.erOppfylt) {
-      values.UttakFieldArray.forEach((aktivitet, index) => {
+      values.UttakFieldArray.forEach((aktivitet, index: number) => {
         const daysInvalid = isTrekkdagerMerEnnNullUtsettelse(aktivitet.days);
         const weeksInvalid = isTrekkdagerMerEnnNullUtsettelse(aktivitet.weeks);
         const utbetalingsgradInvalid = isUtbetalingMerEnnNullUtsettelse(aktivitet.utbetalingsgrad);
@@ -399,7 +457,12 @@ const validateUttakActivity = (values) => {
   return errors;
 };
 
-const transformValues = (values, avslagAarsakKoder, innvilgelseAarsakKoder, graderingAvslagAarsakKoder) => {
+const transformValues = (
+  values: FormValues,
+  avslagAarsakKoder: ArsakKodeverk[],
+  innvilgelseAarsakKoder: ArsakKodeverk[],
+  graderingAvslagAarsakKoder: KodeverkMedNavn[],
+) => {
   const { ...transformvalue } = values.selectedItem;
   const { ...nyeVerdier } = omit(values, 'selectedItem');
   const [avslagAarsakObject] = avslagAarsakKoder.filter((a) => a.kode === values.avslagAarsak);
@@ -441,7 +504,7 @@ const transformValues = (values, avslagAarsakKoder, innvilgelseAarsakKoder, grad
 };
 
 // https://jira.adeo.no/browse/PFP-7937
-const calculateCorrectWeeks = (aktivitet, item) => {
+const calculateCorrectWeeks = (aktivitet: PeriodeSokerAktivitet, item: PeriodeMedClassName) => {
   if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
@@ -451,7 +514,7 @@ const calculateCorrectWeeks = (aktivitet, item) => {
   return Math.floor(aktivitet.trekkdagerDesimaler / 5);
 };
 
-const calculateCorrectDays = (aktivitet, item) => {
+const calculateCorrectDays = (aktivitet: PeriodeSokerAktivitet, item: PeriodeMedClassName) => {
   if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
@@ -461,33 +524,46 @@ const calculateCorrectDays = (aktivitet, item) => {
   return ((aktivitet.trekkdagerDesimaler % 5).toFixed(1));
 };
 
-export const initialValue = (selectedItem, kontoIkkeSatt) => {
-  const { ...returnValues } = selectedItem;
-  return returnValues.aktiviteter.map((a) => {
-    const { ...aktivitet } = a;
-    aktivitet.utbetalingsgrad = !kontoIkkeSatt ? aktivitet.utbetalingsgrad : 0;
-    aktivitet.fom = selectedItem.fom;
-    aktivitet.tom = selectedItem.tom;
-    aktivitet.weeks = typeof a.weeks !== 'undefined' ? a.weeks : calculateCorrectWeeks(aktivitet, selectedItem);
-    aktivitet.days = typeof a.weeks !== 'undefined' ? a.days : calculateCorrectDays(aktivitet, selectedItem);
-    if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
-      aktivitet.weeks = '';
-      aktivitet.days = '';
-    }
-    if (aktivitet.weeks < 0) { aktivitet.weeks = 0; }
-    if (aktivitet.days < 0) { aktivitet.days = 0; }
-    return aktivitet;
-  });
+const finnUker = (aktivitet: PeriodeSokerAktivitet, selectedItem: PeriodeMedClassName) => {
+  let weeks = typeof aktivitet.weeks !== 'undefined' ? aktivitet.weeks : calculateCorrectWeeks(aktivitet, selectedItem);
+  if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
+    weeks = '';
+  }
+  if (aktivitet.weeks < 0) {
+    weeks = 0;
+  }
+  return weeks;
 };
 
+const finnDager = (aktivitet: PeriodeSokerAktivitet, selectedItem: PeriodeMedClassName) => {
+  let dager = typeof aktivitet.weeks !== 'undefined' ? aktivitet.days : calculateCorrectDays(aktivitet, selectedItem);
+  if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
+    dager = '';
+  }
+  if (aktivitet.days < 0) {
+    dager = 0;
+  }
+  return dager;
+};
+
+export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt: boolean): AktivitetFieldArray[] => selectedItem.aktiviteter
+  .map((aktivitet): AktivitetFieldArray => ({
+    ...aktivitet,
+    utbetalingsgrad: !kontoIkkeSatt ? aktivitet.utbetalingsgrad : 0,
+    fom: selectedItem.fom,
+    tom: selectedItem.tom,
+    weeks: finnUker(aktivitet, selectedItem),
+    days: finnDager(aktivitet, selectedItem),
+  }));
+
 const buildInitialValues = createSelector(
-  [(props) => props.selectedItemData],
-  (selectedItem) => {
+  [(props: PureOwnProps) => props.selectedItemData],
+  (selectedItem): FormValues => {
     const kontoIkkeSatt = !selectedItem.periodeType
       && (selectedItem.aktiviteter[0].stønadskontoType.kode === '-');
     const erOppfylt = erPeriodeOppfylt(selectedItem, kontoIkkeSatt);
     return {
-      UttakFieldArray: initialValue(selectedItem, kontoIkkeSatt),
+      UttakFieldArray: lagAktiviteter(selectedItem, kontoIkkeSatt),
       begrunnelse: selectedItem.begrunnelse,
       flerbarnsdager: selectedItem.flerbarnsdager,
       samtidigUttak: selectedItem.samtidigUttak,
@@ -504,27 +580,27 @@ const buildInitialValues = createSelector(
   },
 );
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const {
     behandlingVersjon, behandlingId, behandlingsresultat, alleKodeverk,
   } = initialOwnProps;
-  const avslagAarsaker = alleKodeverk[kodeverkTyper.UTTAK_AVSLAG_ARSAK];
-  const innvilgelseAarsaker = alleKodeverk[kodeverkTyper.INNVILGET_AARSAK];
-  const graderingAvslagAarsakKoder = alleKodeverk[kodeverkTyper.GRADERING_AVSLAG_AARSAK];
+  const avslagAarsaker = alleKodeverk[kodeverkTyper.UTTAK_AVSLAG_ARSAK] as ArsakKodeverk[];
+  const innvilgelseAarsaker = alleKodeverk[kodeverkTyper.INNVILGET_AARSAK] as ArsakKodeverk[];
+  const graderingAvslagAarsakKoder = alleKodeverk[kodeverkTyper.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
   const utsettelseAarsak = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
   const periodeTyper = alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE];
   const oppholdArsakTyper = alleKodeverk[kodeverkTyper.OPPHOLD_ARSAK];
 
-  const validate = (values) => validateUttakActivity(values);
-  const warn = (values) => warningUttakActivity(values);
-  const onSubmit = (values) => initialOwnProps.updateActivity(transformValues(
+  const validate = (values: FormValues) => validateUttakActivity(values);
+  const warn = (values: FormValues) => warningUttakActivity(values);
+  const onSubmit = (values: FormValues) => initialOwnProps.updateActivity(transformValues(
     values,
     avslagAarsaker,
     innvilgelseAarsaker,
     graderingAvslagAarsakKoder,
   ));
 
-  return (state, ownProps) => {
+  return (state: any, ownProps: PureOwnProps) => {
     const erOppfylt = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'erOppfylt');
     const begrunnelse = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'begrunnelse');
     const arsak = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, erOppfylt ? 'innvilgelseAarsak' : 'avslagAarsak');
