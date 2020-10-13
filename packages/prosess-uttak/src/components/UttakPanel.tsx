@@ -5,6 +5,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { createSelector } from 'reselect';
 import { Undertittel } from 'nav-frontend-typografi';
 
+import { omit } from '@fpsak-frontend/utils';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -215,14 +216,6 @@ const getResult = (uttaksresultatActivity: UttaksresultatActivity[]): UttakResul
   return uttakResult;
 };
 
-const convertToArray = (uttakResult: UttakResultat) => Object.values(uttakResult)
-  .map((u) => {
-    const uttakElement = { ...u };
-    uttakElement.trekkdagerDesimaler = u.trekkdagerDesimaler;
-    uttakElement.saldo = u.saldo;
-    return uttakElement;
-  });
-
 const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer: UttakStonadskontoer['stonadskontoer']) => {
   switch (stonadskontoTypeKode) {
     case stonadskontoType.FORELDREPENGER_FØR_FØDSEL:
@@ -243,7 +236,8 @@ const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer:
 const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonadskonto: UttakStonadskontoer) => {
   let errors = null;
   const uttakResult = getResult(uttaksresultatActivity);
-  const uttakResultArray = convertToArray(uttakResult);
+  const uttakResultArray = Object.values(uttakResult).map((value) => ({ ...value }));
+
   uttakResultArray
     .filter((res) => !(res.konto === stonadskontoType.UDEFINERT && res.trekkdagerDesimaler === 0))
     .forEach((value) => {
@@ -350,24 +344,31 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
   const removeOverstyrApCode = apCodes.filter((a) => a !== '6008');
   let aksjonspunkt = removeOverstyrApCode;
 
-  const transformedResultat = values.uttaksresultatActivity.map((perioder: UttaksresultatActivity) => {
-    const { tilknyttetStortinget, ...uta } = perioder; // NOSONAR destruct er bedre enn delete, immutable
-    const { ...transformActivity } = uta;
+  const transformedResultat = values.uttaksresultatActivity.map((aktivitet: UttaksresultatActivity) => {
+    const uta = omit(aktivitet, 'tilknyttetStortinget');
     if (uta.oppholdÅrsak.kode !== '-') {
-      uta.aktiviteter = [];
+      return {
+        ...uta,
+        aktiviteter: [],
+      };
     }
 
     const transformAktiviteter = uta.aktiviteter.map((a) => {
       const { days, weeks, ...transformAktivitet } = a;
       if (typeof days !== 'undefined' && typeof weeks !== 'undefined') {
         const trekkdager = parseFloat((weeks * 5) + parseFloat(days)).toFixed(1);
-        transformAktivitet.trekkdagerDesimaler = trekkdager; // regner om uker og dager til trekkdager
-        transformAktivitet.trekkdager = null;
+        return {
+          ...transformAktivitet,
+          trekkdagerDesimaler: parseFloat(trekkdager), // regner om uker og dager til trekkdager
+        };
       }
       return transformAktivitet;
     });
-    transformActivity.aktiviteter = transformAktiviteter;
-    return transformActivity;
+
+    return {
+      ...uta,
+      aktiviteter: transformAktiviteter,
+    };
   });
 
   if (values.manuellOverstyring || (aksjonspunkter.length === 1 && overstyrErOpprettet.length > 0)) {

@@ -49,7 +49,6 @@ describe('<UttakProsessIndex>', () => {
             },
             gradering: false,
             trekkdagerDesimaler: 15,
-            trekkdager: null,
           },
         ],
         periodeResultatType: {

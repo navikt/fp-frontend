@@ -633,7 +633,6 @@ const lagUttakMedOpphold = createSelector(
           navn: uttakPeriodeNavn[stonadskonto],
         },
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
-        trekkdager: null,
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
     }

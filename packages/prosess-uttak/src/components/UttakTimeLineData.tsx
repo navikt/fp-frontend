@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component, MouseEvent, KeyboardEvent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
@@ -103,7 +103,7 @@ interface OwnProps {
   callbackBackward: (event: MouseEvent) => void;
   callbackCancelSelectedActivity: () => void;
   callbackForward: (event: MouseEvent) => void;
-  callbackSetSelected: (uttakActivity: PeriodeMedClassName, isMounting: boolean) => void;
+  callbackSetSelected: (uttakActivity: UttaksresultatActivity, isMounting?: boolean) => void;
   callbackUpdateActivity: (data: PeriodeMedClassName) => void;
   formName: string;
   harSoktOmFlerbarnsdager: boolean;
@@ -140,7 +140,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
 
-  showModal(event: MouseEvent) {
+  showModal(event: MouseEvent | KeyboardEvent) {
     event.preventDefault();
     this.setState({
       showDelPeriodeModal: true,

@@ -1,12 +1,17 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
+
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { FormattedMessage } from 'react-intl';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import {
+  Aksjonspunkt, Fagsak, FamilieHendelseSamling, Kodeverk, PeriodeSokerAktivitet, Personopplysninger, Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+
 import { buildInitialValues, transformValues, UttakPanelImpl as UttakPanel } from './UttakPanel';
-import Uttak from './Uttak';
+import Uttak, { UttaksresultatActivity } from './Uttak';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
 
 describe('<UttakPanel>', () => {
@@ -15,7 +20,7 @@ describe('<UttakPanel>', () => {
       kode: 'ST-001',
     },
     mottattDato: '2019-10-28',
-    soknadsdato: '2019-10-28',
+    soknadDato: '2019-10-28',
     tilleggsopplysninger: null,
     begrunnelseForSenInnsending: null,
     annenPartNavn: null,
@@ -45,8 +50,8 @@ describe('<UttakPanel>', () => {
     farSokerType: null,
     fodselsdatoer: {
       1: '2019-10-26',
-    },
-  };
+    } as  {[key: number]: string},
+  } as Soknad;
 
   const uttaksresultat = {
     perioderSøker: [{
@@ -55,10 +60,10 @@ describe('<UttakPanel>', () => {
       periodeResultatType: {
         kode: 'MANUELL_BEHANDLING',
         kodeverk: '',
-        navn: '',
       },
       manuellBehandlingÅrsak: {
-        navn: 'test',
+        kode: 'test',
+        kodeverk: 'test',
       },
       aktiviteter: [{
       }],
@@ -68,15 +73,15 @@ describe('<UttakPanel>', () => {
       periodeResultatType: {
         kode: 'MANUELL_BEHANDLING',
         kodeverk: '',
-        navn: '',
       },
       manuellBehandlingÅrsak: {
-        navn: 'test',
+        kode: 'test',
+        kodeverk: 'test',
       },
       aktiviteter: [{
       }],
     }],
-  };
+  } as UttaksresultatPeriode;
 
   const stonadskonto = {
     stonadskontoer: {
@@ -97,9 +102,9 @@ describe('<UttakPanel>', () => {
           },
           saldo: 4,
         }],
-      },
-    },
-  };
+      } as Stonadskonto,
+    } as { [key: string]: Stonadskonto },
+  } as UttakStonadskontoer;
 
   const kodeverk = {
     BehandlingStatus: [
@@ -120,20 +125,19 @@ describe('<UttakPanel>', () => {
       manuellOverstyring={false}
       isApOpen={false}
       submitCallback={sinon.spy()}
-      stonadskonto={{}}
+      stonadskonto={{} as UttakStonadskontoer}
       soknad={soknad}
-      familiehendelse={{}}
-      person={{}}
-      uttakPeriodeGrense={{}}
-      ytelsefordeling={{}}
-      behandlingType={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
+      person={{} as Personopplysninger}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
       behandlingId={1}
       behandlingVersjon={1}
-      behandlingsresultat={{}}
-      behandlingStatus={{}}
+      behandlingStatus={{} as Kodeverk}
       employeeHasAccess
-      fagsak={{}}
+      fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
     />);
     const uttak = wrapper.find(Uttak);
@@ -146,20 +150,20 @@ describe('<UttakPanel>', () => {
 
   it('skal rendre uttakpanel med aksjonspunkt', () => {
     const aksjonspunkter = [{
-      id: 1,
       definisjon: {
         kode: '',
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
+
     const wrapper = shallowWithIntl(<UttakPanel
       {...reduxFormPropsMock}
       aksjonspunkter={aksjonspunkter}
@@ -168,20 +172,19 @@ describe('<UttakPanel>', () => {
       manuellOverstyring={false}
       isApOpen
       submitCallback={sinon.spy()}
-      stonadskonto={{}}
+      stonadskonto={{} as UttakStonadskontoer}
       soknad={soknad}
-      familiehendelse={{}}
-      person={{}}
-      uttakPeriodeGrense={{}}
-      ytelsefordeling={{}}
-      behandlingType={{}}
+      familiehendelse={{} as FamilieHendelseSamling}
+      person={{} as Personopplysninger}
+      uttakPeriodeGrense={{} as UttakPeriodeGrense}
+      ytelsefordeling={{} as Ytelsefordeling}
+      behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
       behandlingId={1}
       behandlingVersjon={1}
-      behandlingsresultat={{}}
-      behandlingStatus={{}}
+      behandlingStatus={{} as Kodeverk}
       employeeHasAccess
-      fagsak={{}}
+      fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
     />);
     const uttak = wrapper.find(Uttak);
@@ -198,20 +201,19 @@ describe('<UttakPanel>', () => {
 
   it('transformValues gir korrekt trekkdager og aksjonspunkt 5071', () => {
     const aksjonspunkter = [{
-      id: 1,
       definisjon: {
         kode: '',
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
 
     const ownProps = {
       apCodes: [
@@ -228,8 +230,9 @@ describe('<UttakPanel>', () => {
         aktiviteter: [{
           days: 4,
           weeks: 5,
-        }],
-      }],
+        }] as PeriodeSokerAktivitet[],
+      }] as UttaksresultatActivity[],
+      stonadskonto: {} as UttakStonadskontoer;
     };
 
     const transformedValues = transformValues(values, ownProps.apCodes, aksjonspunkter);
@@ -239,20 +242,19 @@ describe('<UttakPanel>', () => {
 
   it('transformValues gir korrekt trekkdager og manuell overstyring', () => {
     const aksjonspunkter = [{
-      id: 1,
       definisjon: {
         kode: '',
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
       erAktivt: true,
-    }];
+    }] as Aksjonspunkt[];
 
     const ownProps = {
       apCodes: [

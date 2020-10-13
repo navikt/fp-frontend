@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import sinon from 'sinon';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { initialValue, UttakActivity } from './UttakActivity';
+import { lagAktiviteter, UttakActivity } from './UttakActivity';
 
 describe('<UttakActivity>', () => {
   const selectedItem = {
@@ -202,7 +202,7 @@ describe('<UttakActivity>', () => {
   });
 
   it('skal sette opp initial values for perioder', () => {
-    const initialValues = initialValue(selectedItem);
+    const initialValues = lagAktiviteter(selectedItem);
     expect(initialValues).to.eql([{
       days: '3.5',
       fom: '2018-01-01',
