@@ -216,16 +216,20 @@ export class AvregningPanelImpl extends Component {
                                     title: 'Malform.Beskrivelse',
                                   }]}
                                 />
-                                <VerticalSpacer fourPx />
-                                <a
-                                  href=""
-                                  onClick={(e) => {
-                                    this.previewMessage(e, previewCallback);
-                                  }}
-                                  className={styles.previewLink}
-                                >
-                                  <FormattedMessage id="Messages.PreviewText" />
-                                </a>
+                                {!readOnly && (
+                                  <>
+                                    <VerticalSpacer fourPx />
+                                    <a
+                                      href=""
+                                      onClick={(e) => {
+                                        this.previewMessage(e, previewCallback);
+                                      }}
+                                      className={styles.previewLink}
+                                    >
+                                      <FormattedMessage id="Messages.PreviewText" />
+                                    </a>
+                                  </>
+                                )}
                               </ArrowBox>
                             </div>
                           </RadioOption>
