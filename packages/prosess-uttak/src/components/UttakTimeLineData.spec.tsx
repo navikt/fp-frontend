@@ -274,7 +274,6 @@ describe('<UttakTimeLineData>', () => {
     expect(uttakActivity.first().prop('updateActivity')).to.eql(callbackUpdateActivity);
     expect(uttakActivity.first().prop('selectedItemData')).to.eql(selectedItem);
     expect(uttakActivity.first().prop('readOnly')).to.eql(false);
-    expect(uttakActivity.first().prop('isApOpen')).to.eql(true);
   });
 
   it('skal rendre uttakpanel med aksjonspunkt og korrekt tekst om man går tom för en aktivitets dager', () => {
@@ -353,7 +352,7 @@ describe('<UttakTimeLineData>', () => {
 
     expect(trekkdagerForAktivitet).is.eql({
       weeks: 1,
-      days: '3.0',
+      days: 3.0,
       trekkdagerDesimaler: 8,
     });
   });
@@ -371,7 +370,7 @@ describe('<UttakTimeLineData>', () => {
 
     expect(trekkdagerForAktivitet).is.eql({
       weeks: 0,
-      days: '4.8',
+      days: 4.8,
       trekkdagerDesimaler: 4.8,
     });
   });
@@ -389,7 +388,7 @@ describe('<UttakTimeLineData>', () => {
 
     expect(trekkdagerForAktivitet).is.eql({
       weeks: 0,
-      days: '4.0',
+      days: 4.0,
       trekkdagerDesimaler: 4,
     });
   });

@@ -36,13 +36,17 @@ import TimeLineInfo from './stonadkonto/TimeLineInfo';
 import UttakTimeLineData from './UttakTimeLineData';
 import UttakMedsokerReadOnly from './UttakMedsokerReadOnly';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
+import { AktivitetFieldArray } from './RenderUttakTable';
 
 import styles from './uttak.less';
 
-export type UttaksresultatActivity = {
+type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+export type UttaksresultatActivity = Overwrite<PeriodeSoker, {
   id: number;
   tilknyttetStortinget?: boolean;
-} & PeriodeSoker;
+  erOppfylt?: boolean;
+  aktiviteter: AktivitetFieldArray[];
+ }>
 
 export type PeriodeMedClassName = {
   tomMoment: moment.Moment;
@@ -50,7 +54,6 @@ export type PeriodeMedClassName = {
   hovedsoker: boolean;
   group: number;
   title: string;
-  erOppfylt?: boolean;
 } & UttaksresultatActivity
 
 const godkjentKlassenavn = 'godkjentPeriode';
@@ -261,7 +264,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       const transformAktiviteter = uta.aktiviteter.map((a) => {
         const { days, weeks, ...transformAktivitet } = a;
         if (typeof days !== 'undefined' && typeof weeks !== 'undefined') {
-          const trekkdager = (weeks * 5) + parseFloat(days);
+          const trekkdager = (weeks * 5) + days;
           transformAktivitet.trekkdagerDesimaler = trekkdager; // regner om uker og dager til trekkdager
         }
         return transformAktivitet;
@@ -294,6 +297,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     const { ...verdier } = values;
     verdier.aktiviteter = verdier.aktiviteter.map((a) => {
       const { ...aktivitet } = a;
+      // @ts-ignore utbetalingsgrad må vel konverterast?
       aktivitet.utbetalingsgrad = a.utbetalingsgrad || a.utbetalingsgrad === 0 ? parseFloat(a.utbetalingsgrad) : null;
       return aktivitet;
     });
@@ -654,14 +658,16 @@ const lagUttaksresultatActivity = createSelector(
 );
 
 const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker) => {
-  if (periode.erOppfylt === false) {
+  if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return avvistKlassenavn;
   }
-  if (periode.erOppfylt === true || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET
+  if (('erOppfylt' in periode && periode.erOppfylt === true) || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET
+    // @ts-ignore Fiks
     && !periode.tilknyttetStortinget)) {
     return godkjentKlassenavn;
   }
   if (periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING
+    // @ts-ignore Fiks
     || periode.tilknyttetStortinget
   ) {
     return 'undefined';
@@ -670,6 +676,7 @@ const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker) =
 };
 
 const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker) => {
+  // @ts-ignore Fiks
   if (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
     return godkjentKlassenavn;
   }

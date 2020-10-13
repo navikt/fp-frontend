@@ -12,13 +12,14 @@ import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet, UttakStonadskontoer,
+  Behandling, Kodeverk, KodeverkMedNavn, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 import UttakActivity from './UttakActivity';
 import DelOppPeriodeModal, { DeltPeriodeData } from './DelOppPeriodeModal';
 import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
 
 import styles from './uttakTimeLineData.less';
+import { AktivitetFieldArray } from './RenderUttakTable';
 
 const getCorrectEmptyArbeidsForhold = (getKodeverknavn: (kodeverk: Kodeverk) => string, periodeTypeKode?: string, stonadskonto?: UttakStonadskontoer) => {
   const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
@@ -84,7 +85,7 @@ const hentApTekst = (
   return texts;
 };
 
-export const kalkulerTrekkdager = (aktivitet: PeriodeSokerAktivitet, virkedager: number, samtidigUttak?: boolean, samtidigUttaksprosent?: number) => {
+export const kalkulerTrekkdager = (aktivitet: AktivitetFieldArray, virkedager: number, samtidigUttak?: boolean, samtidigUttaksprosent?: number) => {
   let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
   uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
 
@@ -92,7 +93,7 @@ export const kalkulerTrekkdager = (aktivitet: PeriodeSokerAktivitet, virkedager:
 
   return {
     weeks: Math.trunc(trekkdager / 5),
-    days: (trekkdager % 5).toFixed(1),
+    days: parseFloat((trekkdager % 5).toFixed(1)),
     trekkdagerDesimaler: trekkdager,
   };
 };

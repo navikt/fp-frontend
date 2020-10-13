@@ -12,11 +12,7 @@ import TimeLineSoker from './components/TimeLineSoker';
 import TimeLineSokerEnsamSoker from './components/TimeLineSokerEnsamSoker';
 
 import styles from './tidslinje.less';
-
-export interface EventProps {
-  items: string[] | number[];
-  event: Event;
-}
+import EventProps from './eventPropsTsType';
 
 interface Periode {
   fom: string;

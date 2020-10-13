@@ -196,7 +196,7 @@ const getResult = (uttaksresultatActivity: UttaksresultatActivity[]): UttakResul
   uttaksresultatActivity.forEach((uttak) => {
     uttak.aktiviteter.forEach((a, index: number) => {
       const aktivitetDays = (typeof a.days !== 'undefined' && typeof a.weeks !== 'undefined')
-        ? ((a.weeks * 5) + parseFloat(a.days))
+        ? ((a.weeks * 5) + a.days)
         : a.trekkdagerDesimaler;
 
       if ((`${a.stønadskontoType.kode}_${index}`) in uttakResult) {
@@ -345,7 +345,7 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
   let aksjonspunkt = removeOverstyrApCode;
 
   const transformedResultat = values.uttaksresultatActivity.map((aktivitet: UttaksresultatActivity) => {
-    const uta = omit(aktivitet, 'tilknyttetStortinget');
+    const uta = omit(aktivitet, 'tilknyttetStortinget') as UttaksresultatActivity;
     if (uta.oppholdÅrsak.kode !== '-') {
       return {
         ...uta,
@@ -356,7 +356,7 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
     const transformAktiviteter = uta.aktiviteter.map((a) => {
       const { days, weeks, ...transformAktivitet } = a;
       if (typeof days !== 'undefined' && typeof weeks !== 'undefined') {
-        const trekkdager = parseFloat((weeks * 5) + parseFloat(days)).toFixed(1);
+        const trekkdager = ((weeks * 5) + days).toFixed(1);
         return {
           ...transformAktivitet,
           trekkdagerDesimaler: parseFloat(trekkdager), // regner om uker og dager til trekkdager

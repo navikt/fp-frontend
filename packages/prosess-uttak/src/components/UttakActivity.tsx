@@ -36,7 +36,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
+  Behandling, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import RenderUttakTable, { AktivitetFieldArray } from './RenderUttakTable';
 import UttakInfo from './UttakInfo';
@@ -301,9 +301,7 @@ export type FormValues = {
   begrunnelse?: string;
   flerbarnsdager: boolean;
   samtidigUttak: boolean;
-  samtidigUttaksprosent?: {
-    verdi: number;
-  };
+  samtidigUttaksprosent?: string;
   avslagAarsak?: string;
   innvilgelseAarsak?: string;
   graderingInnvilget: boolean;
@@ -374,7 +372,8 @@ const warningUttakActivity = (values: FormValues) => {
   }
   if (values.UttakFieldArray) {
     values.UttakFieldArray.forEach((aktivitet, index: number) => {
-      const utbetalingsgrad = parseFloat(aktivitet.utbetalingsgrad);
+      // @ts-ignore Fiks
+      const utbetalingsgrad = Number.isNaN(aktivitet.utbetalingsgrad) ? aktivitet.utbetalingsgrad : parseFloat(aktivitet.utbetalingsgrad);
       const utbetalingPlusArbeidsprosentMerEn100 = isutbetalingPlusArbeidsprosentMerEn100(utbetalingsgrad, aktivitet.prosentArbeid);
       if (utbetalingPlusArbeidsprosentMerEn100) {
         rowArray.push(index);
@@ -414,11 +413,13 @@ const warningUttakActivity = (values: FormValues) => {
 };
 
 const validateUttakActivity = (values: FormValues) => {
-  const errors = {};
-  errors.UttakFieldArray = [];
+  const errors = {
+    UttakFieldArray: [],
+  };
   if (values.UttakFieldArray) {
     values.UttakFieldArray.forEach((aktivitet, index: number) => {
       const samtidigUttaksprosent = parseFloat(values.samtidigUttaksprosent);
+      // @ts-ignore Fiks
       const utbetalingsgrad = parseFloat(aktivitet.utbetalingsgrad);
       const invalidUtbetalingsgradMerSamitidigUttaksprosent = isUtbetalingsgradMerSamitidigUttaksprosent(samtidigUttaksprosent, utbetalingsgrad);
       const invalidUkerOgDagerVidNullUtbetalningsgrad = isUkerOgDagerVidNullUtbetalningsgrad(aktivitet.weeks, aktivitet.days, utbetalingsgrad);
@@ -437,7 +438,8 @@ const validateUttakActivity = (values: FormValues) => {
       values.UttakFieldArray.forEach((aktivitet, index: number) => {
         const daysInvalid = isTrekkdagerMerEnnNullUtsettelse(aktivitet.days);
         const weeksInvalid = isTrekkdagerMerEnnNullUtsettelse(aktivitet.weeks);
-        const utbetalingsgradInvalid = isUtbetalingMerEnnNullUtsettelse(aktivitet.utbetalingsgrad);
+        // @ts-ignore Fiks
+        const utbetalingsgradInvalid = isUtbetalingMerEnnNullUtsettelse(parseFloat(aktivitet.utbetalingsgrad));
         errors.UttakFieldArray[index] = {
           days: daysInvalid,
           weeks: weeksInvalid,
@@ -490,7 +492,7 @@ const transformValues = (
     begrunnelse: values.begrunnelse,
     flerbarnsdager: values.flerbarnsdager,
     samtidigUttak: values.samtidigUttak,
-    samtidigUttaksprosent: values.samtidigUttaksprosent !== 'NaN' ? values.samtidigUttaksprosent : null,
+    samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : null,
     erOppfylt: values.erOppfylt,
     graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
     oppholdÅrsak: {
@@ -508,7 +510,7 @@ const transformValues = (
 };
 
 // https://jira.adeo.no/browse/PFP-7937
-const calculateCorrectWeeks = (aktivitet: PeriodeSokerAktivitet, item: PeriodeMedClassName) => {
+const calculateCorrectWeeks = (aktivitet: AktivitetFieldArray, item: PeriodeMedClassName): number => {
   if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
@@ -518,20 +520,20 @@ const calculateCorrectWeeks = (aktivitet: PeriodeSokerAktivitet, item: PeriodeMe
   return Math.floor(aktivitet.trekkdagerDesimaler / 5);
 };
 
-const calculateCorrectDays = (aktivitet: PeriodeSokerAktivitet, item: PeriodeMedClassName) => {
+const calculateCorrectDays = (aktivitet: AktivitetFieldArray, item: PeriodeMedClassName): number => {
   if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
     return 0;
   }
-  return ((aktivitet.trekkdagerDesimaler % 5).toFixed(1));
+  return parseFloat(((aktivitet.trekkdagerDesimaler % 5).toFixed(1)));
 };
 
-const finnUker = (aktivitet: PeriodeSokerAktivitet, selectedItem: PeriodeMedClassName) => {
+const finnUker = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassName): number => {
   let weeks = typeof aktivitet.weeks !== 'undefined' ? aktivitet.weeks : calculateCorrectWeeks(aktivitet, selectedItem);
   if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
-    weeks = '';
+    weeks = undefined;
   }
   if (aktivitet.weeks < 0) {
     weeks = 0;
@@ -539,10 +541,10 @@ const finnUker = (aktivitet: PeriodeSokerAktivitet, selectedItem: PeriodeMedClas
   return weeks;
 };
 
-const finnDager = (aktivitet: PeriodeSokerAktivitet, selectedItem: PeriodeMedClassName) => {
+const finnDager = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassName): number => {
   let dager = typeof aktivitet.weeks !== 'undefined' ? aktivitet.days : calculateCorrectDays(aktivitet, selectedItem);
   if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
-    dager = '';
+    dager = undefined;
   }
   if (aktivitet.days < 0) {
     dager = 0;
@@ -553,7 +555,7 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, selectedItem: PeriodeMedCla
 export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt: boolean): AktivitetFieldArray[] => selectedItem.aktiviteter
   .map((aktivitet): AktivitetFieldArray => ({
     ...aktivitet,
-    utbetalingsgrad: !kontoIkkeSatt ? aktivitet.utbetalingsgrad : 0,
+    utbetalingsgrad: !kontoIkkeSatt ? aktivitet.utbetalingsgrad : '0',
     fom: selectedItem.fom,
     tom: selectedItem.tom,
     weeks: finnUker(aktivitet, selectedItem),
@@ -571,7 +573,7 @@ const buildInitialValues = createSelector(
       begrunnelse: selectedItem.begrunnelse,
       flerbarnsdager: selectedItem.flerbarnsdager,
       samtidigUttak: selectedItem.samtidigUttak,
-      samtidigUttaksprosent: selectedItem.samtidigUttaksprosent,
+      samtidigUttaksprosent: selectedItem.samtidigUttaksprosent ? selectedItem.samtidigUttaksprosent.toString() : undefined,
       avslagAarsak: erOppfylt ? undefined : selectedItem.periodeResultatÅrsak.kode,
       innvilgelseAarsak: erOppfylt ? selectedItem.periodeResultatÅrsak.kode : undefined,
       graderingInnvilget: selectedItem.graderingInnvilget,

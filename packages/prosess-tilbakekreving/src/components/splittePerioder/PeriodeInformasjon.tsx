@@ -30,7 +30,7 @@ const PeriodeInformasjon: FunctionComponent<OwnProps> = ({
   feilutbetaling,
   arsak,
 }) => {
-  const daysAndWeeks = calcDaysAndWeeks(moment(fom.toString()), moment(tom.toString()));
+  const daysAndWeeks = calcDaysAndWeeks(fom, tom);
   return (
     <Row>
       <Column md="8">

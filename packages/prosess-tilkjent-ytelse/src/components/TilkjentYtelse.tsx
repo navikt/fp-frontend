@@ -66,10 +66,10 @@ const createTooltipContent = (periodeType: string, intl: IntlShape, item: Period
     .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
     .format(DDMMYY_DATE_FORMAT)}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-     ${intl.formatMessage({ id: calcDaysAndWeeks(moment(item.fom), moment(item.tom)).id },
+     ${intl.formatMessage({ id: calcDaysAndWeeks(item.fom, item.tom).id },
     {
-      weeks: calcDaysAndWeeks(moment(item.fom), moment(item.tom)).weeks,
-      days: calcDaysAndWeeks(moment(item.fom), moment(item.tom)).days,
+      weeks: calcDaysAndWeeks(item.fom, item.tom).weeks,
+      days: calcDaysAndWeeks(item.fom, item.tom).days,
     })}
     </br>
     ${periodeType}

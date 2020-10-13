@@ -7,12 +7,14 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, Fagsak, FamilieHendelseSamling, Kodeverk, PeriodeSokerAktivitet, Personopplysninger, Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Aksjonspunkt, Fagsak, FamilieHendelseSamling, Kodeverk, Personopplysninger,
+  Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import { buildInitialValues, transformValues, UttakPanelImpl as UttakPanel } from './UttakPanel';
 import Uttak, { UttaksresultatActivity } from './Uttak';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import { AktivitetFieldArray } from './RenderUttakTable';
 
 describe('<UttakPanel>', () => {
   const soknad = {
@@ -50,7 +52,7 @@ describe('<UttakPanel>', () => {
     farSokerType: null,
     fodselsdatoer: {
       1: '2019-10-26',
-    } as  {[key: number]: string},
+    } as {[key: number]: string},
   } as Soknad;
 
   const uttaksresultat = {
@@ -230,14 +232,14 @@ describe('<UttakPanel>', () => {
         aktiviteter: [{
           days: 4,
           weeks: 5,
-        }] as PeriodeSokerAktivitet[],
+        }] as AktivitetFieldArray[],
       }] as UttaksresultatActivity[],
-      stonadskonto: {} as UttakStonadskontoer;
+      stonadskonto: {} as UttakStonadskontoer,
     };
 
     const transformedValues = transformValues(values, ownProps.apCodes, aksjonspunkter);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.FASTSETT_UTTAKPERIODER)).has.length(1);
-    expect(transformedValues.filter((ap: any) => ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === '29.0')).has.length(1);
+    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.FASTSETT_UTTAKPERIODER)).has.length(1);
+    expect(transformedValues.filter((ap) => ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === 29.0)).has.length(1);
   });
 
   it('transformValues gir korrekt trekkdager og manuell overstyring', () => {
@@ -271,14 +273,15 @@ describe('<UttakPanel>', () => {
         aktiviteter: [{
           days: 4,
           weeks: 6,
-        }],
-      }],
+        }] as AktivitetFieldArray[],
+      }] as UttaksresultatActivity[],
+      stonadskonto: {} as UttakStonadskontoer,
     };
 
     const transformedValues = transformValues(values, ownProps.apCodes, aksjonspunkter);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER)).has.length(1);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
-      && ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === '34.0')).has.length(1);
+    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER)).has.length(1);
+    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
+      && ap.perioder[0].aktiviteter[0].trekkdagerDesimaler === 34.0)).has.length(1);
   });
 
   it('skal sette initielle verdier for uttaksperioder', () => {
@@ -291,10 +294,10 @@ describe('<UttakPanel>', () => {
         periodeResultatType: {
           kode: 'MANUELL_BEHANDLING',
           kodeverk: '',
-          navn: '',
         },
         manuellBehandlingÅrsak: {
-          navn: 'test',
+          kode: 'test',
+          kodeverk: 'test',
         },
         aktiviteter: [{
         }],
@@ -305,10 +308,10 @@ describe('<UttakPanel>', () => {
         periodeResultatType: {
           kode: 'MANUELL_BEHANDLING',
           kodeverk: '',
-          navn: '',
         },
         manuellBehandlingÅrsak: {
-          navn: 'test',
+          kode: 'test',
+          kodeverk: 'test',
         },
         aktiviteter: [{
         }],

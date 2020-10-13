@@ -18,12 +18,14 @@ import { FormValues } from './UttakActivity';
 import lagVisningsNavn from '../utils/uttakVisningsnavnHelper';
 import styles from './renderUttakTable.less';
 
-export type AktivitetFieldArray = {
-  fom: string;
-  tom: string;
-  weeks: number;
-  days: number;
-} & PeriodeSokerAktivitet;
+type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+export type AktivitetFieldArray = Overwrite<PeriodeSokerAktivitet, {
+  fom?: string;
+  tom?: string;
+  weeks?: number;
+  days?: number;
+  utbetalingsgrad?: string | number;
+ }>
 
 const headerTextCodes = [
   'RenderUttakTable.PeriodeData.Aktivitet',

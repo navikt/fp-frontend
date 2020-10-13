@@ -1,10 +1,14 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-
 import sinon from 'sinon';
+
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+
 import { lagAktiviteter, UttakActivity } from './UttakActivity';
+import { PeriodeMedClassName } from './Uttak';
+import { AktivitetFieldArray } from './RenderUttakTable';
 
 describe('<UttakActivity>', () => {
   const selectedItem = {
@@ -13,12 +17,10 @@ describe('<UttakActivity>', () => {
     tom: '2018-02-01',
     periodeResultatType: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     periodeResultatÅrsak: {
       kode: '',
-      navn: '',
       kodeverk: '',
     },
     flerbarnsdager: false,
@@ -36,11 +38,10 @@ describe('<UttakActivity>', () => {
       utbetalingsgrad: 100,
       stønadskontoType: {
         kode: '',
-        navn: 'Mødrekvote',
         kodeverk: '',
       },
-    }],
-  };
+    }] as AktivitetFieldArray[],
+  } as PeriodeMedClassName;
   it('skal rendre uttakactivity med oppfylt periode', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
@@ -54,10 +55,19 @@ describe('<UttakActivity>', () => {
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{}}
+      updateActivity={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
+      kontoIkkeSatt={false}
+      utsettelseAarsak={{} as KodeverkMedNavn[]}
+      uttakFieldArray="test"
+      currentlySelectedStønadskonto={{} as Kodeverk}
+      graderingInnvilget
+      erSamtidigUttak={false}
+      samtidigUttaksprosent="20"
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -78,7 +88,6 @@ describe('<UttakActivity>', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
       erOppfylt
-      isApOpen={false}
       selectedItemData={selectedItem}
       readOnly={false}
       periodeTyper={[]}
@@ -88,10 +97,19 @@ describe('<UttakActivity>', () => {
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{}}
+      updateActivity={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
+      kontoIkkeSatt={false}
+      utsettelseAarsak={{} as KodeverkMedNavn[]}
+      uttakFieldArray="test"
+      currentlySelectedStønadskonto={{} as Kodeverk}
+      graderingInnvilget
+      erSamtidigUttak={false}
+      samtidigUttaksprosent="20"
     />);
 
     const row = wrapper.find('Row');
@@ -115,10 +133,19 @@ describe('<UttakActivity>', () => {
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{}}
+      updateActivity={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
+      kontoIkkeSatt={false}
+      utsettelseAarsak={{} as KodeverkMedNavn[]}
+      uttakFieldArray="test"
+      currentlySelectedStønadskonto={{} as Kodeverk}
+      graderingInnvilget
+      erSamtidigUttak={false}
+      samtidigUttaksprosent="20"
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -138,7 +165,7 @@ describe('<UttakActivity>', () => {
   it('skal rendre uttakactivity med aksjonspunkt', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
-      erOppfylt="undefined"
+      erOppfylt
       readOnly={false}
       selectedItemData={selectedItem}
       periodeTyper={[]}
@@ -148,10 +175,19 @@ describe('<UttakActivity>', () => {
       innvilgelseAarsakKoder={[{ kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK' }]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{}}
+      updateActivity={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
+      kontoIkkeSatt={false}
+      utsettelseAarsak={{} as KodeverkMedNavn[]}
+      uttakFieldArray="test"
+      currentlySelectedStønadskonto={{} as Kodeverk}
+      graderingInnvilget
+      erSamtidigUttak={false}
+      samtidigUttaksprosent="20"
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -181,10 +217,19 @@ describe('<UttakActivity>', () => {
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
-      stonadskontoer={{}}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{}}
+      updateActivity={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
+      kontoIkkeSatt={false}
+      utsettelseAarsak={{} as KodeverkMedNavn[]}
+      uttakFieldArray="test"
+      currentlySelectedStønadskonto={{} as Kodeverk}
+      graderingInnvilget
+      erSamtidigUttak={false}
+      samtidigUttaksprosent="20"
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -202,14 +247,13 @@ describe('<UttakActivity>', () => {
   });
 
   it('skal sette opp initial values for perioder', () => {
-    const initialValues = lagAktiviteter(selectedItem);
+    const initialValues = lagAktiviteter(selectedItem, false);
     expect(initialValues).to.eql([{
-      days: '3.5',
+      days: 3.5,
       fom: '2018-01-01',
       tom: '2018-02-01',
       stønadskontoType: {
         kode: '',
-        navn: 'Mødrekvote',
         kodeverk: '',
       },
       trekkdagerDesimaler: 28.5,
