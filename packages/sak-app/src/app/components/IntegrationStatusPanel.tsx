@@ -70,11 +70,11 @@ class IntegrationStatusPanel extends Component<OwnProps, OwnState> {
 
     return (
       <button
-        type="button"
-        tabIndex={0}
-        className={styles.container}
-        onClick={this.togglePanelOnClick}
-        onKeyDown={this.togglePanelOnKeyDown}
+          type="button"
+          tabIndex={0}
+          className={styles.container}
+          onClick={this.togglePanelOnClick}
+          onKeyDown={this.togglePanelOnKeyDown}
       >
         <Image className={styles.cursor} src={toggleOpen ? chevronUp : chevronDown} />
         <Row className={styles.row}>
