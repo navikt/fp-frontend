@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { arbeidsforholdPropType } from '@fpsak-frontend/prop-types';
 import {
   DateLabel, Image, PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
+import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
@@ -22,9 +22,9 @@ const headerColumnContent = [
   <></>,
 ];
 
-const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id?: string) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledNavn = (arbeidsforhold: any) => {
+const utledNavn = (arbeidsforhold: Arbeidsforhold) => {
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return arbeidsforhold.navn;
   }
@@ -33,7 +33,7 @@ const utledNavn = (arbeidsforhold: any) => {
     : `${arbeidsforhold.navn}(${arbeidsforhold.arbeidsgiverIdentifiktorGUI})`;
 };
 
-export const utledNøkkel = (arbeidsforhold: any) => {
+export const utledNøkkel = (arbeidsforhold: Arbeidsforhold) => {
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return arbeidsforhold.navn;
   }
@@ -41,7 +41,7 @@ export const utledNøkkel = (arbeidsforhold: any) => {
 };
 
 interface OwnProps {
-  alleArbeidsforhold: arbeidsforholdPropType[];
+  alleArbeidsforhold: Arbeidsforhold[];
   selectedId?: string;
   selectArbeidsforholdCallback: (...args: any[]) => any;
 }
@@ -61,8 +61,8 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <Table headerColumnContent={headerColumnContent}>
-      {alleArbeidsforhold && alleArbeidsforhold.map((a: any) => {
-        const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${parseFloat(a.stillingsprosent).toFixed(2)} %` : '';
+      {alleArbeidsforhold && alleArbeidsforhold.map((a) => {
+        const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
         const navn = utledNavn(a);
         return (
           <TableRow
@@ -103,10 +103,6 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
       })}
     </Table>
   );
-};
-
-PersonArbeidsforholdTable.defaultProps = {
-  selectedId: undefined,
 };
 
 export default PersonArbeidsforholdTable;
