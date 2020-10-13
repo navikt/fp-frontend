@@ -167,9 +167,10 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     event.preventDefault();
     const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) + 1;
     if (newIndex < items.length - 2) {
-      this.setState({
+      this.setState((state) => ({
+        ...state,
         selectedPeriod: items[newIndex],
-      });
+      }));
     }
   }
 
@@ -178,9 +179,10 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     event.preventDefault();
     const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) - 1;
     if (newIndex >= 0) {
-      this.setState({
+      this.setState((state) => ({
+        ...state,
         selectedPeriod: items[newIndex],
-      });
+      }));
     }
   }
 

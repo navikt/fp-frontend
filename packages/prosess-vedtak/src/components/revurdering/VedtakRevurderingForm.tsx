@@ -104,21 +104,17 @@ const isNewAmount = (
     return false;
   }
 
-  if (beregningResultat && !originaltBeregningResultat) {
+  if (!originaltBeregningResultat) {
     return true;
   }
 
   if (erInnvilget
-    && beregningResultat
-    && originaltBeregningResultat
     && 'beregnetTilkjentYtelse' in beregningResultat
     && 'beregnetTilkjentYtelse' in originaltBeregningResultat) {
     return beregningResultat.beregnetTilkjentYtelse !== originaltBeregningResultat.beregnetTilkjentYtelse;
   }
 
-  if (beregningResultat
-    && originaltBeregningResultat
-    && 'antallBarn' in beregningResultat
+  if ('antallBarn' in beregningResultat
     && 'antallBarn' in originaltBeregningResultat) {
     return beregningResultat.antallBarn !== originaltBeregningResultat.antallBarn;
   }

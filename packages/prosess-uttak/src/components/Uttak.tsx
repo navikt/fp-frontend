@@ -382,14 +382,11 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     let validationError = false;
     if (stonadskonto && stonadskonto.stonadskontoer) {
       const kontoer = stonadskonto.stonadskontoer;
-      const myArray = Object.entries(kontoer);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      for (const [name, periode] of myArray) { // eslint-disable-line no-restricted-syntax
+      Object.values(kontoer).forEach((periode) => {
         if (!periode.gyldigForbruk) {
           validationError = true;
-          break;
         }
-      }
+      });
     }
     return validationError;
   }

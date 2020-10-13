@@ -58,7 +58,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
 
 const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk) => {
   if (!erOppfylt) {
-    if (!utsettelseType || (utsettelseType && utsettelseType.kode === '-')) {
+    if (!utsettelseType || utsettelseType.kode === '-') {
       return true;
     }
   }
