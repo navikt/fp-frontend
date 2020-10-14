@@ -8,8 +8,9 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import { Arbeidsforhold, Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
 import ArbeidsforholdFodselOgTilrettelegging from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging/src/types/arbeidsforholdFodselOgTilretteleggingTsType';
+import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from './scenario/tilretteleggningMedPermisjon';
 
-import withReduxProvider from '../../decorators/withRedux';
+import withReduxProvider from '../../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -76,6 +77,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
     }],
     arbeidsgiverNavn: 'Frilanser, samlet aktivitet',
     skalBrukes: true,
+    velferdspermisjoner: [],
   }, {
     tilretteleggingId: 1008654,
     tilretteleggingBehovFom: '2019-10-01',
@@ -133,6 +135,29 @@ export default {
   component: FodselOgTilretteleggingFaktaIndex,
   decorators: [withKnobs, withReduxProvider],
 };
+
+export const tilretteleggingMedVelferdspermisjon = () => (
+  <FodselOgTilretteleggingFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    svangerskapspengerTilrettelegging={object('Tilrettelegging', tilretteleggingPermisjon)}
+    aksjonspunkter={[{
+      definisjon: {
+        kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
+        kodeverk: '',
+      },
+      status: {
+        kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
+      },
+      begrunnelse: undefined,
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    inntektArbeidYtelse={iayPermisjon}
+    erOverstyrer={false}
+  />
+);
 
 export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
   <FodselOgTilretteleggingFaktaIndex
