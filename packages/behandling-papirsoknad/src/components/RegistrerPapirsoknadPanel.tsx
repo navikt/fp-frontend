@@ -80,7 +80,6 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.person}
           />
         )}
       </Container>

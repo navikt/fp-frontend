@@ -102,6 +102,10 @@
 		"packages/tidslinje",
 		"packages/types",
 		"packages/utils",
+		"packages/papirsoknad-svp",
+		"packages/papirsoknad-paneler/papirsoknad-frilans",
+		"packages/papirsoknad-paneler/papirsoknad-mottatt-dato",
+		"packages/papirsoknad-paneler/papirsoknad-opphold-i-norge",
 		"@types"
 	],
 
