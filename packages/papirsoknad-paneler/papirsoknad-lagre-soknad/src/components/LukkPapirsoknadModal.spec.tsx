@@ -4,14 +4,12 @@ import { expect } from 'chai';
 import ModalWrapper from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import Image from '@fpsak-frontend/shared-components/src/Image';
 
 import { LukkPapirSoknadModal } from './LukkPapirsoknadModal';
 
 describe('<LukkPapirSoknadModal>', () => {
-  const onChangeEventCallback = sinon.spy();
   const submitEventCallback = sinon.spy();
   const cancelEventCallback = sinon.spy();
   const form = 'TEST';
@@ -22,8 +20,6 @@ describe('<LukkPapirSoknadModal>', () => {
       form={form}
       handleSubmit={submitEventCallback}
       intl={intlMock}
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'onChangeEvent' does not exist on type 'I... Remove this comment to see the full error message
-      onChangeEvent={onChangeEventCallback}
       showModal
     />);
 
@@ -51,8 +47,6 @@ describe('<LukkPapirSoknadModal>', () => {
   it('skal kalle submit ved klikk på ok-knapp', () => {
     const wrapper = shallowWithIntl(<LukkPapirSoknadModal
       showModal
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'onChangeEvent' does not exist on type 'I... Remove this comment to see the full error message
-      onChangeEvent={onChangeEventCallback}
       handleSubmit={submitEventCallback}
       cancelEvent={cancelEventCallback}
       intl={intlMock}
@@ -66,8 +60,6 @@ describe('<LukkPapirSoknadModal>', () => {
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
     const wrapper = shallowWithIntl(<LukkPapirSoknadModal
       showModal
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'onChangeEvent' does not exist on type 'I... Remove this comment to see the full error message
-      onChangeEvent={onChangeEventCallback}
       handleSubmit={submitEventCallback}
       cancelEvent={cancelEventCallback}
       intl={intlMock}

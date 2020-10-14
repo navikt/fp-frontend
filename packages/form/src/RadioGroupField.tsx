@@ -24,7 +24,10 @@ interface RadioGroupFieldProps {
   rows?: number;
   direction?: Direction;
   DOMName?: string;
-  validate?: ((value: any) => { id: string }[])[] | ((value: string) => boolean | undefined)[] | ((value: string) => boolean | undefined);
+  validate?: ((value: any) => { id: string }[])[]
+    | ((value: any) => { id: string; }[])
+    | ((value: string) => boolean | undefined)[]
+    | ((value: string) => boolean | undefined);
   readOnly?: boolean;
   legend?: React.ReactNode;
   isEdited?: boolean;
