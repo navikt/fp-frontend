@@ -52,7 +52,6 @@ interface OwnProps {
   queryStrings: any;
   navAnsattName: string;
   removeErrorMessage: () => void;
-  showDetailedErrorMessages?: boolean;
   errorMessages?: any[];
   setSiteHeight: (height: number) => void;
 }
@@ -70,7 +69,6 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
   navAnsattName,
   removeErrorMessage,
   queryStrings,
-  showDetailedErrorMessages = false,
   errorMessages = [],
   setSiteHeight,
 }) => {
@@ -130,7 +128,6 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
         <ErrorMessagePanel
           queryStrings={queryStrings}
           removeErrorMessage={removeErrorMessage}
-          showDetailedErrorMessages={showDetailedErrorMessages}
           errorMessages={errorMessages}
         />
       </RawIntlProvider>
