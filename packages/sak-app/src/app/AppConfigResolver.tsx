@@ -27,7 +27,6 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT);
   const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE);
   const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER);
-  const { state: visDetaljerteFeilmeldingerState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES);
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
   const { state: featureToggleState } = restApiHooks
     .useGlobalStateRestApi<{ featureToggles: {[key: string]: boolean} }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams, {
@@ -38,8 +37,7 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK_FPTILBAKE, NO_PARAMS);
 
   const erFerdig = navAnsattState === RestApiState.SUCCESS && sprakFilState === RestApiState.SUCCESS
-    && behandlendeEnheterState === RestApiState.SUCCESS && visDetaljerteFeilmeldingerState === RestApiState.SUCCESS
-    && kodeverkFpSakStatus === RestApiState.SUCCESS
+    && behandlendeEnheterState === RestApiState.SUCCESS && kodeverkFpSakStatus === RestApiState.SUCCESS
     && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS)
     && (kodeverkFpTilbakeStatus === RestApiState.SUCCESS || kodeverkFpTilbakeStatus === RestApiState.ERROR);
 

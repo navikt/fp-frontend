@@ -12,7 +12,6 @@ describe('<ErrorMessagePanel>', () => {
   it('skal vise feilmelding med ikke lenke for å vise detaljert info', () => {
     const wrapper = shallowWithIntl(<ErrorMessagePanel
       intl={intlMock}
-      showDetailedErrorMessages={false}
       errorMessages={[{
         message: 'Error!',
         additionalInfo: undefined,
@@ -30,7 +29,6 @@ describe('<ErrorMessagePanel>', () => {
   it('skal erstatte spesialtegn i feilmelding', () => {
     const wrapper = shallowWithIntl(<ErrorMessagePanel
       intl={intlMock}
-      showDetailedErrorMessages={false}
       errorMessages={[{
         message: 'Høna &amp; egget og &#34;test1&#34; og &#39;test2&#39;',
         additionalInfo: undefined,
@@ -46,7 +44,6 @@ describe('<ErrorMessagePanel>', () => {
   it('skal vise lenke for å se feildetaljer når dette er konfigurert og en har info', () => {
     const wrapper = shallowWithIntl(<ErrorMessagePanel
       intl={intlMock}
-      showDetailedErrorMessages
       errorMessages={[{
         message: 'Høna &amp; egget og &#34;test1&#34; og &#39;test2&#39;',
         additionalInfo: {
@@ -64,7 +61,6 @@ describe('<ErrorMessagePanel>', () => {
   it('skal åpne, og så lukke, modal for visning av feildetaljer ved klikk på lenke', () => {
     const wrapper = shallowWithIntl(<ErrorMessagePanel
       intl={intlMock}
-      showDetailedErrorMessages
       errorMessages={[{
         message: 'Høna &amp; egget og &#34;test1&#34; og &#39;test2&#39;',
         additionalInfo: {
