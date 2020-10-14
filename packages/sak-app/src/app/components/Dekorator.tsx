@@ -54,7 +54,6 @@ const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   hideErrorMessages = false,
 }) => {
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
-  const showDetailedErrorMessages = restApiHooks.useGlobalStateRestApiData<boolean>(FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES);
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
   const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, undefined), [errorMessages]);
@@ -80,7 +79,6 @@ const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       queryStrings={queryStrings}
       navAnsattName={navAnsatt.navn}
       removeErrorMessage={removeErrorMessages}
-      showDetailedErrorMessages={showDetailedErrorMessages}
       errorMessages={hideErrorMessages ? [] : resolvedErrorMessages}
       setSiteHeight={setSiteHeight}
     />

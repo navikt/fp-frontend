@@ -6,7 +6,7 @@ import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import { getPathToFplos } from '../paths';
-import Dashboard from './Dashboard';
+import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
 const isDevelopment = () => process.env.NODE_ENV === 'development';
 
@@ -40,7 +40,7 @@ export const DashboardResolver: FunctionComponent<WrappedComponentProps> = ({
     gotoLosOrSetErrorMsg();
   }, []);
 
-  return !isDevelopment() && isLoading ? <LoadingPanel /> : <Dashboard />;
+  return !isDevelopment() && isLoading ? <LoadingPanel /> : <FagsakSearchIndex />;
 };
 
 export default injectIntl(DashboardResolver);
