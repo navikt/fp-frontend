@@ -169,7 +169,6 @@ describe('<InntektFieldArray>', () => {
       fields={newFields}
       meta={{}}
       readOnly={false}
-      skalFastsetteSN={false}
       beregningsgrunnlag={bg}
       {...ownProps}
       {...props}
@@ -177,7 +176,7 @@ describe('<InntektFieldArray>', () => {
     const table = wrapper.find(Table);
     expect(table.length).to.eql(1);
     const andelRows = table.find(AndelRow);
-    expect(andelRows.length).to.eql(1);
+    expect(andelRows.length).to.eql(2);
     const summaryRow = table.find(SummaryRow);
     expect(summaryRow.length).to.eql(1);
   });
@@ -200,7 +199,6 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...props}
       {...ownProps}
-      skalFastsetteSN
     />);
     const table = wrapper.find(Table);
     expect(table.length).to.eql(1);

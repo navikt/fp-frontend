@@ -175,20 +175,7 @@ export const getSkalRedigereInntekt = createSelector([
   (state, ownProps) => ownProps.beregningsgrunnlag.faktaOmBeregning,
   (state, ownProps) => ownProps.beregningsgrunnlag], skalRedigereInntektForAndel);
 
-// Skal redigere inntekt
-export const skalFastsetteInntektForSN = createSelector([
-  getFormValuesForBeregning,
-  getSkalRedigereInntekt],
-(values, skalFastsette) => {
-  const fields = values[INNTEKT_FIELD_ARRAY_NAME];
-  if (!fields) {
-    return false;
-  }
-  return fields.filter((field) => field.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE).map(skalFastsette).includes(true);
-});
-
 // Skal redigere inntektskategori
-
 export const skalRedigereInntektskategoriForAndel = (values, beregningsgrunnlag) => (andel) => {
   if (skalHaBesteberegning(values)) {
     return true;

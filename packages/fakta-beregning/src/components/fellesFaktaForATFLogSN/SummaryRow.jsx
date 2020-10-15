@@ -9,18 +9,18 @@ import { getSkalRedigereInntekt } from './BgFordelingUtils';
 
 import styles from './inntektFieldArray.less';
 
-const summerFordeling = (fields, skalRedigereInntekt) => {
+const summerBeregnet = (fields, skalRedigereInntekt) => {
   let sum = 0;
   fields.forEach((andelElementFieldId, index) => {
     const field = fields.get(index);
     const belop = skalRedigereInntekt(field) ? field.fastsattBelop : field.belopReadOnly;
     sum += belop ? parseInt(removeSpacesFromNumber(belop), 10) : 0;
   });
-  return sum > 0 ? formatCurrencyNoKr(sum) : 0;
+  return sum > 0 ? sum : 0;
 };
 
 const SummaryRow = ({
-  skalVisePeriode, skalViseRefusjon, readOnly, sumFordeling,
+  skalVisePeriode, skalViseRefusjon, readOnly, sumBeregnet,
 }) => (
   <TableRow key="bruttoBGSummaryRow">
     <TableColumn>
@@ -31,7 +31,7 @@ const SummaryRow = ({
     <TableColumn className={styles.rightAlign}>
       <div className={styles.readOnlyContainer}>
         <Normaltekst className={readOnly ? styles.readOnlyContent : ''}>
-          {sumFordeling}
+          {formatCurrencyNoKr(sumBeregnet)}
         </Normaltekst>
       </div>
     </TableColumn>
@@ -45,13 +45,13 @@ SummaryRow.propTypes = {
   readOnly: PropTypes.bool.isRequired,
   skalVisePeriode: PropTypes.bool.isRequired,
   skalViseRefusjon: PropTypes.bool.isRequired,
-  sumFordeling: PropTypes.number.isRequired,
+  sumBeregnet: PropTypes.number.isRequired,
 };
 
 export const mapStateToProps = (state, ownProps) => {
-  const sumFordeling = summerFordeling(ownProps.fields, getSkalRedigereInntekt(state, ownProps)) || 0;
+  const sumBeregnet = summerBeregnet(ownProps.fields, getSkalRedigereInntekt(state, ownProps)) || 0;
   return {
-    sumFordeling,
+    sumBeregnet,
   };
 };
 
