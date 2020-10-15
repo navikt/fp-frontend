@@ -2,7 +2,6 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import HenleggBehandlingModal from './components/HenleggBehandlingModal';
 import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
@@ -15,19 +14,6 @@ const intl = createIntl({
   locale: 'nb-NO',
   messages,
 }, cache);
-
-const hasHenleggBehandlingEnabledForTilbakekreving = (behandlingType, kanHenlegge) => {
-  if ((behandlingType.kode === BehandlingType.TILBAKEKREVING
-    || behandlingType.kode === BehandlingType.TILBAKEKREVING_REVURDERING)
-    && !kanHenlegge) {
-    return false;
-  }
-  return true;
-};
-
-export const skalViseIMeny = (behandlingId, behandlingType, kanHenlegge, henleggBehandlingAccess) => behandlingId
-  && henleggBehandlingAccess.employeeHasAccess && henleggBehandlingAccess.isEnabled
-  && hasHenleggBehandlingEnabledForTilbakekreving(behandlingType, kanHenlegge);
 
 export const getMenytekst = () => intl.formatMessage({ id: 'MenyHenleggIndex.HenleggBehandling' });
 

@@ -2,7 +2,9 @@ import React, { useEffect, FunctionComponent } from 'react';
 import { formValueSelector, reduxForm, InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -19,7 +21,7 @@ import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './nyBehandlingModal.less';
 
-const createOptions = (bt, enabledBehandlingstyper, intl) => {
+const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[], intl: IntlShape) => {
   // TODO Burde retta opp navn for behandlingstype i DB
   const navn = bt.kode === bType.REVURDERING
     ? intl.formatMessage({ id: 'MenyNyBehandlingIndex.OpprettRevurdering' })
@@ -29,14 +31,38 @@ const createOptions = (bt, enabledBehandlingstyper, intl) => {
   return (<option key={bt.kode} value={bt.kode} disabled={!isEnabled}>{` ${navn} `}</option>);
 };
 
-interface OwnProps {
+export type BehandlingOppretting = Readonly<{
+  behandlingType: Kodeverk;
+  kanOppretteBehandling: boolean;
+}>
+
+export type FormValues = {
+  behandlingType: string;
+  nyBehandlingEtterKlage?: string;
+  behandlingArsakType?: string;
+}
+
+interface PureOwnProps {
+  ytelseType: Kodeverk;
+  saksnummer: number;
   cancelEvent: () => void;
-  behandlingTyper: KodeverkMedNavn[];
-  valgtBehandlingTypeKode?: string;
-  behandlingArsakTyper: KodeverkMedNavn[];
-  enabledBehandlingstyper: KodeverkMedNavn[];
+  submitCallback: (data: {
+    eksternUuid?: string,
+    fagsakYtelseType: Kodeverk,
+  } & FormValues) => void;
+  behandlingOppretting: BehandlingOppretting[];
+  behandlingstyper: KodeverkMedNavn[];
+  tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
+  revurderingArsaker: KodeverkMedNavn[];
+  kanTilbakekrevingOpprettes: {
+    kanBehandlingOpprettes: boolean;
+    kanRevurderingOpprettes: boolean;
+  };
+  behandlingType?: Kodeverk;
   behandlingId?: number;
   behandlingUuid?: string;
+  uuidForSistLukkede?: string;
+  erTilbakekrevingAktivert: boolean;
   sjekkOmTilbakekrevingKanOpprettes: (params: {
     saksnummer: number;
     uuid: string;
@@ -44,9 +70,14 @@ interface OwnProps {
   sjekkOmTilbakekrevingRevurderingKanOpprettes: (params: {
     uuid: string;
   }) => void;
+}
+
+interface MappedOwnProps {
+  behandlingTyper: KodeverkMedNavn[];
+  enabledBehandlingstyper: KodeverkMedNavn[];
   uuid?: string;
-  saksnummer: number;
-  erTilbakekrevingAktivert: boolean;
+  behandlingArsakTyper: KodeverkMedNavn[];
+  valgtBehandlingTypeKode: KodeverkMedNavn;
   erTilbakekreving: boolean;
 }
 
@@ -56,7 +87,7 @@ interface OwnProps {
  * Presentasjonskomponent. Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
  * Ved å trykke på ok skal ny behandling(1.gangsbehandling) av sak opprettes.
  */
-export const NyBehandlingModal: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const NyBehandlingModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   handleSubmit,
   cancelEvent,
   intl,
@@ -195,9 +226,9 @@ const tilbakekrevingRevurderingArsaker = [
 ];
 
 export const getBehandlingAarsaker = createSelector([
-  (_state, ownProps) => ownProps.ytelseType,
-  (_state, ownProps) => ownProps.revurderingArsaker,
-  (_state, ownProps) => ownProps.tilbakekrevingRevurderingArsaker,
+  (_state, ownProps: PureOwnProps) => ownProps.ytelseType,
+  (_state, ownProps: PureOwnProps) => ownProps.revurderingArsaker,
+  (_state, ownProps: PureOwnProps) => ownProps.tilbakekrevingRevurderingArsaker,
   (state) => formValueSelector(formName)(state, 'behandlingType')],
 (ytelseType, alleRevurderingArsaker, alleTilbakekrevingRevurderingArsaker, valgtBehandlingType) => {
   if (valgtBehandlingType === bType.TILBAKEKREVING_REVURDERING) {
@@ -221,41 +252,32 @@ export const getBehandlingAarsaker = createSelector([
   return [];
 });
 
-interface Props {
-  behandlingstyper: KodeverkMedNavn[];
-  hasEnabledCreateNewBehandling: boolean;
-  hasEnabledCreateRevurdering: boolean;
-  kanTilbakekrevingOpprettes?: {
-    kanBehandlingOpprettes: boolean;
-    kanRevurderingOpprettes: boolean;
-  };
-  behandlingType: Kodeverk;
-}
-
-export const getBehandlingTyper = createSelector([(ownProps: Props) => ownProps.behandlingstyper],
+export const getBehandlingTyper = createSelector([(ownProps: PureOwnProps) => ownProps.behandlingstyper],
   (behandlingstyper) => behandlingstyper.sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn)));
+
+const kanOppretteBehandlingstype = (behandlingOppretting: BehandlingOppretting[], behandlingType: Kodeverk) => behandlingOppretting
+  .some((bo) => bo.behandlingType.kode === behandlingType.kode && bo.kanOppretteBehandling);
 
 export const getEnabledBehandlingstyper = createSelector([
   getBehandlingTyper,
-  (ownProps) => ownProps.hasEnabledCreateNewBehandling,
-  (ownProps) => ownProps.hasEnabledCreateRevurdering,
-  (ownProps) => ownProps.kanTilbakekrevingOpprettes],
-(behandlingstyper, hasEnabledCreateNewBehandling, hasEnabledCreateRevurdering, kanTilbakekrevingOpprettes = {
+  (ownProps: PureOwnProps) => ownProps.behandlingOppretting,
+  (ownProps: PureOwnProps) => ownProps.kanTilbakekrevingOpprettes],
+(behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes = {
   kanBehandlingOpprettes: false,
   kanRevurderingOpprettes: false,
 }) => behandlingstyper
   .filter((b) => (b.kode === bType.TILBAKEKREVING ? kanTilbakekrevingOpprettes.kanBehandlingOpprettes : true))
   .filter((b) => (b.kode === bType.TILBAKEKREVING_REVURDERING ? kanTilbakekrevingOpprettes.kanRevurderingOpprettes : true))
-  .filter((b) => (b.kode === bType.FORSTEGANGSSOKNAD ? hasEnabledCreateNewBehandling : true))
-  .filter((b) => (b.kode === bType.REVURDERING ? hasEnabledCreateRevurdering : true)));
+  .filter((b) => (b.kode === bType.FORSTEGANGSSOKNAD ? kanOppretteBehandlingstype(behandlingOppretting, bType.FORSTEGANGSSOKNAD) : true))
+  .filter((b) => (b.kode === bType.REVURDERING ? kanOppretteBehandlingstype(behandlingOppretting, bType.REVURDERING) : true)));
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.submitCallback({
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback({
     ...values,
     eksternUuid: initialOwnProps.uuidForSistLukkede,
     fagsakYtelseType: initialOwnProps.ytelseType,
   });
-  return (state, ownProps) => ({
+  return (state, ownProps: PureOwnProps) => ({
     onSubmit,
     behandlingTyper: getBehandlingTyper(ownProps),
     enabledBehandlingstyper: getEnabledBehandlingstyper(ownProps),

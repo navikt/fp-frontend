@@ -33,6 +33,7 @@ export enum FpsakApiKeys {
   BREVMALER = 'BREVMALER',
   SUBMIT_MESSAGE = 'SUBMIT_MESSAGE',
   MENYHANDLING_RETTIGHETER = 'MENYHANDLING_RETTIGHETER',
+  MENYHANDLING_RETTIGHETER_FPTILBAKE = 'MENYHANDLING_RETTIGHETER_FPTILBAKE',
   VERGE_MENYVALG = 'VERGE_MENYVALG',
   KAN_TILBAKEKREVING_OPPRETTES = 'KAN_TILBAKEKREVING_OPPRETTES',
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES = 'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
@@ -64,6 +65,7 @@ const endpoints = new RestApiConfigBuilder()
   .withGet('/fpsak/api/dokument/hent-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withGet('/fptilbake/api/behandlinger/kan-opprettes', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withGet('/fptilbake/api/behandlinger/kan-revurdering-opprettes-v2', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
+  .withGet('/fptilbake/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE)
   .withRel('soeker-personopplysninger', FpsakApiKeys.BEHANDLING_PERSONOPPLYSNINGER)
   .withRel('familiehendelse-v2', FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE)
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)
@@ -76,7 +78,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('har-apent-kontroller-revurdering-aksjonspunkt', FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP)
   .withRel('brev-maler', FpsakApiKeys.BREVMALER)
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
-  .withRel('handling-rettigheter', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
+  .withRel('handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
   .withRel('finn-menyvalg-for-verge', FpsakApiKeys.VERGE_MENYVALG)
   .build();
 
