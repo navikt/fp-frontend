@@ -11,7 +11,6 @@ import ErrorMessageDetailsModal from './ErrorMessageDetailsModal';
 import styles from './errorMessagePanel.less';
 
 interface OwnProps {
-  showDetailedErrorMessages: boolean;
   errorMessages: {
     message: string;
     additionalInfo?: any;
@@ -62,7 +61,7 @@ export class ErrorMessagePanel extends Component<OwnProps & WrappedComponentProp
 
   render() {
     const {
-      showDetailedErrorMessages, errorMessages, removeErrorMessage, intl,
+      errorMessages, removeErrorMessage, intl,
     } = this.props;
     const { isModalOpen, selectedErrorMsgIndex } = this.state;
 
@@ -78,8 +77,7 @@ export class ErrorMessagePanel extends Component<OwnProps & WrappedComponentProp
               <Undertekst className={styles.wordWrap}>
                 {`${decodeHtmlEntity(message.message)} `}
               </Undertekst>
-              {showDetailedErrorMessages && message.additionalInfo
-              && (
+              {message.additionalInfo && (
                 <Undertekst>
                   <a
                     href=""

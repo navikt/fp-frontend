@@ -18,8 +18,6 @@ export enum FpsakApiKeys {
   NEW_BEHANDLING_FPTILBAKE = 'NEW_BEHANDLING_FPTILBAKE',
   BEHANDLING_FAMILIE_HENDELSE = 'BEHANDLING_FAMILIE_HENDELSE',
   ANNEN_PART_BEHANDLING = 'ANNEN_PART_BEHANDLING',
-  SHOW_DETAILED_ERROR_MESSAGES = 'SHOW_DETAILED_ERROR_MESSAGES',
-  INTEGRATION_STATUS = 'INTEGRATION_STATUS',
   HISTORY_FPSAK = 'HISTORY_FPSAK',
   HISTORY_FPTILBAKE = 'HISTORY_FPTILBAKE',
   KONTROLLRESULTAT = 'KONTROLLRESULTAT',
@@ -59,8 +57,6 @@ const endpoints = new RestApiConfigBuilder()
   .withGet('/fpsak/public/sprak/nb_NO.json', FpsakApiKeys.LANGUAGE_FILE)
   .withGet('/fpsak/api/kodeverk', FpsakApiKeys.KODEVERK)
   .withGet('/fpsak/api/kodeverk/behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
-  .withGet('/fpsak/api/integrasjon/status/vises', FpsakApiKeys.SHOW_DETAILED_ERROR_MESSAGES)
-  .withGet('/fpsak/api/integrasjon/status', FpsakApiKeys.INTEGRATION_STATUS)
   .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)
   .withGet('/fpsak/api/historikk', FpsakApiKeys.HISTORY_FPSAK)
   .withGet('/fptilbake/api/historikk', FpsakApiKeys.HISTORY_FPTILBAKE)

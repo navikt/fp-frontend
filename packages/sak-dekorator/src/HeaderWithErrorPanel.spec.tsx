@@ -13,7 +13,6 @@ describe('<HeaderWithErrorPanel>', () => {
       systemTittel="My System"
       removeErrorMessage={() => undefined}
       queryStrings={{}}
-      showDetailedErrorMessages={false}
       setSiteHeight={() => undefined}
     />);
     const header = wrapper.find(Header);
