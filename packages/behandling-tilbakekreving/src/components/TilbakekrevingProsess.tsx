@@ -8,6 +8,7 @@ import {
   FagsakInfo, prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegTilbakekrevingPanelDefinisjoner';
@@ -73,12 +74,19 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiTilbakekrevingHooks
     .useRestApiRunner<Behandling>(TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT);
   useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  const erRevurderingTilbakekrevingFeilBeløpBortfalt = behandling.førsteÅrsak
+    && behandlingArsakType.RE_FEILBELØP_BORTFALT === behandling.førsteÅrsak.behandlingArsakType.kode;
 
   const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
-  const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
+  const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(erRevurderingTilbakekrevingFeilBeløpBortfalt
+    ? TilbakekrevingBehandlingApiKeys.PREVIEW_FRITEKST_VEDTAKSBREV
+    : TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
+
   const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvis(response)), []);
 
-  const dataTilUtledingAvTilbakekrevingPaneler = { beregnBelop, fetchPreviewVedtaksbrev, ...data };
+  const dataTilUtledingAvTilbakekrevingPaneler = {
+    beregnBelop, fetchPreviewVedtaksbrev, ...data,
+  };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
     dataTilUtledingAvTilbakekrevingPaneler, fagsak, rettigheter, behandling, data.aksjonspunkter, [], hasFetchError, valgtProsessSteg);
 

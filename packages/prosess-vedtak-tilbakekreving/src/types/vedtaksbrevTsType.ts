@@ -1,7 +1,8 @@
 import VedtaksbrevAvsnitt from './vedtaksbrevAvsnittTsType';
 
 type Vedtaksbrev = {
-  avsnittsliste: VedtaksbrevAvsnitt[];
+  avsnittsliste: VedtaksbrevAvsnitt[],
+  oppsummeringFritekst: string;
 };
 
 export default Vedtaksbrev;

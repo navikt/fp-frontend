@@ -22,9 +22,11 @@ interface OwnProps {
   behandlingUuid: string;
   behandlingVersjon: number;
   avsnittsliste: VedtaksbrevAvsnitt[];
+  oppsummeringFritekst: string;
   fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
   aksjonspunktKodeForeslaVedtak: string;
   erRevurderingTilbakekrevingKlage?: boolean;
+  erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
 }
 
 const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
@@ -37,9 +39,11 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   behandlingVersjon,
   avsnittsliste,
+  oppsummeringFritekst,
   fetchPreviewVedtaksbrev,
   aksjonspunktKodeForeslaVedtak,
   erRevurderingTilbakekrevingKlage,
+  erRevurderingTilbakekrevingFeilBeløpBortfalt,
 }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   return (
@@ -64,9 +68,11 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
         behandlingUuid={behandlingUuid}
         behandlingVersjon={behandlingVersjon}
         avsnittsliste={avsnittsliste}
+        oppsummeringFritekst={oppsummeringFritekst}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
+        erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
       />
     </>
   );
