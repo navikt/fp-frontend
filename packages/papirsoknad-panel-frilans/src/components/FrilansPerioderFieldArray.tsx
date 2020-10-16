@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import moment from 'moment';
+import { Column, Row } from 'nav-frontend-grid';
 
 import {
   dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, required,

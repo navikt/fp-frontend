@@ -26,6 +26,7 @@ describe('<FrilansPerioderFieldArray>', () => {
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
 
+    // @ts-ignore Fiks
     const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);

@@ -33,7 +33,7 @@ export type FormValues = {
   }[];
   perioder: {
     periodeFom: string;
-    periodeTom: string;
+    periodeTom?: string;
   }[];
 }
 

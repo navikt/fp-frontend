@@ -15,7 +15,6 @@
   "BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores": "c) kan ikke gjennomføres og arbeidstakeren må midlertidig gå ut av sitt arbeid fra og med",
   "Registrering.RegistrerVirksomhetModalForm.ModalDescription": "Legg til næringsvirksomhet",
   "Registrering.Adopsjon.FodselsdatoBarnN": "Fødselsdato barn {n}",
-  "Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation": "F.o.m må være lik eller etter dato for første periode med frilansvirksomhet",
   
   "MigreringFraInfotrygdPanel.Migrering": "Flytting fra Infotrygd",
   "MigreringFraInfotrygdPanel.Ja": "Ja",
@@ -87,13 +86,6 @@
   "Registrering.VirksomhetRegnskapPanel.AccountantName": "Navn på regnskapsfører/revisor?",
   "Registrering.VirksomhetRegnskapPanel.AccountantPhone": "Telefonnummer til regnskapsfører/revisor?",
   "Registrering.VirksomhetIdentifikasjonPanel.Country": "Hvilket land er virksomheten registrert i?",
-  "Registrering.FrilansOppdrag.HarHattOppdragForFamilie": "Har søker hatt oppdrag for nær familie?",
-  "Registrering.FrilansOppdrag.Yes": "Ja",
-  "Registrering.FrilansOppdrag.No": "Nei",
-  "Registrering.FrilansOppdrag.OppgiPeriode": "Oppgi periode",
-  "Registrering.FrilansOppdrag.FieldArray.periodeFom": "F.o.m.",
-  "Registrering.FrilansOppdrag.FieldArray.periodeTom": "T.o.m.",
-  "Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver": "Oppdragsgiver",
 
   "ModalLukkPapirSoknad.ModalDescription": "Registrering av søknaden avsluttes",
   "ModalLukkPapirSoknad.Avslutt": "Avslutt registrering av søknaden",
@@ -130,16 +122,6 @@
   "Registrering.EgenVirksomhet.Add": "Legg til næringsvirksomhet",
   "Registrering.EgenVirksomhet.Stillingsprosent": "Stillingsprosent",
   "Registrering.EgenVirksomhet.Name": "Navn på virksomhet",
-
-  "Registrering.Frilans.Title": "Frilanser",
-  "Registrering.Frilans.HarFrilansvirksomhet": "Har søker periode med frilansvirksomhet?",
-  "Registrering.Frilans.OppgiPeriode": "Oppgi periode med frilansvirksomhet",
-  "Registrering.Frilans.Yes": "Ja",
-  "Registrering.Frilans.No": "Nei",
-  "Registrering.Frilans.periodeTom": "T.o.m.",
-  "Registrering.Frilans.periodeFom": "F.o.m.",
-  "Registrering.Frilans.ErNyoppstartedFrilanser": "Er søker nyoppstartet frilanser?",
-  "Registrering.Frilans.HarInntektFraForsterhjem": "Har søker inntekt fra fosterhjem?",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

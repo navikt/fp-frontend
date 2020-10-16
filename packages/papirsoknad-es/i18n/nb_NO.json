@@ -30,7 +30,6 @@
   "Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt": "Søkers opplysningsplikt er ikke overholdt",
   "Registrering.SaveApplication.EndButton": "Bekreft og avslutt behandling",
   "Registrering.Adopsjon.FodselsdatoBarnN": "Fødselsdato barn {n}",
-  "Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation": "F.o.m må være lik eller etter dato for første periode med frilansvirksomhet",
 
   "ModalLukkPapirSoknad.ModalDescription": "Registrering av søknaden avsluttes",
   "ModalLukkPapirSoknad.Avslutt": "Avslutt registrering av søknaden",

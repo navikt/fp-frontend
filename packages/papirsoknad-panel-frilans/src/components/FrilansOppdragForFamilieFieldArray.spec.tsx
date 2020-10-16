@@ -2,7 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField } from '@fpsak-frontend/form';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
@@ -27,7 +26,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
 
-    // @ts-expect-error ts-migrate(2769) FIXME: Type 'undefined' is not assignable to type 'ReactE... Remove this comment to see the full error message
+    // @ts-ignore Fiks
     const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);

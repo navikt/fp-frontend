@@ -19,7 +19,7 @@ interface OwnProps {
 export type FieldValues = FieldArrayFormValues;
 
 interface StaticFunctions {
-  buildInitialValues: () => {
+  buildInitialValues?: () => {
     oppdragPerioder: {
       fomDato: string;
       tomDato: string;

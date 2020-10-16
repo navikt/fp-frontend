@@ -1,15 +1,14 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import FrilansPanel from './FrilansPanel';
 
 describe('<FrilansPanel>', () => {
   it('Skal rendre panel korrekt', () => {
-    const wrapper = shallowWithIntl(<FrilansPanel.WrappedComponent intl={intlMock} readOnly={false} formName="test" />);
+    const wrapper = shallow(<FrilansPanel readOnly={false} formName="test" />);
 
     const radioGroupField = wrapper.find(RadioGroupField);
     expect(radioGroupField).has.length(3);
@@ -22,7 +21,7 @@ describe('<FrilansPanel>', () => {
   });
 
   it('Skal rendre panel ved readOnly', () => {
-    const wrapper = shallowWithIntl(<FrilansPanel.WrappedComponent intl={intlMock} readOnly formName="test" />);
+    const wrapper = shallow(<FrilansPanel readOnly formName="test" />);
 
     const radioGroupField = wrapper.find(RadioGroupField);
     expect(radioGroupField).has.length(3);
@@ -30,7 +29,6 @@ describe('<FrilansPanel>', () => {
   });
 
   it('Skal lage defaultperiode', () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = FrilansPanel.buildInitialValues();
     expect(initialValues).is.eql({
       frilans: {
@@ -57,7 +55,6 @@ describe('<FrilansPanel>', () => {
       },
     };
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'FC<Wit... Remove this comment to see the full error message
     const validationResult = FrilansPanel.validate(values);
 
     expect(validationResult).is.eql({
@@ -79,7 +76,6 @@ describe('<FrilansPanel>', () => {
       },
     };
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'FC<Wit... Remove this comment to see the full error message
     const validationResult = FrilansPanel.validate(values);
 
     expect(validationResult).is.eql({
