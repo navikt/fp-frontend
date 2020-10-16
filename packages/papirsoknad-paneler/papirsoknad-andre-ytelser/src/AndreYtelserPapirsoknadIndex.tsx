@@ -17,18 +17,21 @@ interface OwnProps {
   readOnly: boolean;
   form: string;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  kunMiliterEllerSiviltjeneste?: boolean,
 }
 
 const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   form,
   alleKodeverk,
+  kunMiliterEllerSiviltjeneste,
 }) => (
   <RawIntlProvider value={intl}>
     <AndreYtelserPanel
       readOnly={readOnly}
       form={form}
       alleKodeverk={alleKodeverk}
+      kunMiliterEllerSiviltjeneste={kunMiliterEllerSiviltjeneste}
     />
   </RawIntlProvider>
 );

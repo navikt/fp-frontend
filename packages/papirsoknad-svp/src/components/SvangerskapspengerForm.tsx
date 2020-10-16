@@ -7,13 +7,17 @@ import { connect } from 'react-redux';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  SoknadData, OppholdINorgePanel, TilleggsopplysningerPanel, LagreSoknadForm, EgenVirksomhetPanel,
-  InntektsgivendeArbeidPanel, AndreYtelserPanel, ANDRE_YTELSER_FORM_NAME_PREFIX, getRegisteredFields,
+  SoknadData, ANDRE_YTELSER_FORM_NAME_PREFIX, getRegisteredFields,
 } from '@fpsak-frontend/papirsoknad-felles';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-mottatt-dato';
 import FrilansPapirsoknadIndex from '@fpsak-frontend/papirsoknad-frilans';
 import OppholdINorgePapirsoknadIndex from '@fpsak-frontend/papirsoknad-opphold-i-norge';
+import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-tilleggsopplysninger';
+import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-lagre-soknad';
+import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-virksomhet';
+import InntektsgivendeArbeidPapirsoknadIndex from '@fpsak-frontend/papirsoknad-inntektsgivende-arbeid';
+import AndreYtelserPapirsoknadIndex from '@fpsak-frontend/papirsoknad-andre-ytelser';
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
 import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
@@ -61,17 +65,17 @@ export class SvangerskapspengerForm extends React.Component<OwnProps & InjectedF
       <form onSubmit={handleSubmit}>
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <OppholdINorgePapirsoknadIndex form={form} readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
-        <InntektsgivendeArbeidPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <EgenVirksomhetPanel readOnly={readOnly} form={form} alleKodeverk={alleKodeverk} />
+        <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        <VirksomhetPapirsoknadIndex readOnly={readOnly} form={form} alleKodeverk={alleKodeverk} />
         <FrilansPapirsoknadIndex readOnly={readOnly} form={form} formName={SVANGERSKAPSPENGER_FORM_NAME} />
-        <AndreYtelserPanel readOnly={readOnly} form={form} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
+        <AndreYtelserPapirsoknadIndex readOnly={readOnly} form={form} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
         <TerminFodselSvpPanel readOnly={readOnly} />
         <FormSection name={TILRETTELEGGING_NAME_PREFIX}>
           <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} namePrefix={TILRETTELEGGING_NAME_PREFIX} />
         </FormSection>
-        <TilleggsopplysningerPanel readOnly={readOnly} />
+        <TilleggsopplysningerPapirsoknadIndex readOnly={readOnly} />
         <MigreringFraInfotrygdPanel readOnly={readOnly} />
-        <LagreSoknadForm readOnly={readOnly} onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad} form={form} submitting={submitting} />
+        <LagreSoknadPapirsoknadIndex readOnly={readOnly} onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad} form={form} submitting={submitting} />
       </form>
     );
   }
@@ -87,7 +91,7 @@ type FormValues = {
 };
 
 const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues) => ({
-  ...AndreYtelserPanel.validate(values, andreYtelser),
+  ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
   ...InntektsgivendeArbeidPanel.validate(values),
   ...FrilansPanel.validate(values),
   ...OppholdINorgePanel.validate(values),

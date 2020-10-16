@@ -13,17 +13,23 @@ const intl = createIntl({
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
+  form: string;
+  onSubmitUfullstendigsoknad: () => Promise<any>;
+  submitting: boolean;
 }
 
 const LagreSoknadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
-  formName,
+  form,
+  onSubmitUfullstendigsoknad,
+  submitting,
 }) => (
   <RawIntlProvider value={intl}>
     <LagreSoknadPanel
       readOnly={readOnly}
-      formName={formName}
+      form={form}
+      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+      submitting={submitting}
     />
   </RawIntlProvider>
 );

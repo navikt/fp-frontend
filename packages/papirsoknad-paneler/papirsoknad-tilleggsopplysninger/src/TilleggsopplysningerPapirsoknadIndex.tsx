@@ -13,17 +13,14 @@ const intl = createIntl({
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
 }
 
 const TilleggsopplysningerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
-  formName,
 }) => (
   <RawIntlProvider value={intl}>
     <TilleggsopplysningerPanel
       readOnly={readOnly}
-      formName={formName}
     />
   </RawIntlProvider>
 );

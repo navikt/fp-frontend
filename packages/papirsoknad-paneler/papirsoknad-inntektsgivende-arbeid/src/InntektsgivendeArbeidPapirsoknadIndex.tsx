@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
+
 import InntektsgivendeArbeidPanel from './components/InntektsgivendeArbeidPanel';
 import messages from '../i18n/nb_NO.json';
 
@@ -13,17 +15,17 @@ const intl = createIntl({
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const InntektsgivendeArbeidPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
-  formName,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <InntektsgivendeArbeidPanel
       readOnly={readOnly}
-      formName={formName}
+      alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>
 );
