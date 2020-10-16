@@ -1,19 +1,17 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import SoknadData from '../SoknadData';
 import AnnenForelderPanel, { AnnenForelderPanelImpl, KanIkkeOppgiBegrunnelsePanel } from './AnnenForelderPanel';
 
 describe('<AnnenForelderPanel>', () => {
   describe('validate', () => {
     describe('hvis kan oppgi annen forelder', () => {
       const sokersPersonnummer = '12345678910';
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
       const validate = (values: any) => AnnenForelderPanel.validate(sokersPersonnummer, { kanIkkeOppgiAnnenForelder: false, ...values });
       it('skal validere fornavn', () => {
         const errorsWithoutFornavn = validate({});
@@ -47,7 +45,6 @@ describe('<AnnenForelderPanel>', () => {
 
     describe('hvis ikke kan oppgi annen forelder', () => {
       const sokersPersonnummer = '12345678910';
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
       const validateBegrunnelse = (kanIkkeOppgiBegrunnelse: any) => AnnenForelderPanel.validate(sokersPersonnummer,
         { kanIkkeOppgiAnnenForelder: true, kanIkkeOppgiBegrunnelse });
       it('skal validere årsak', () => {
@@ -64,20 +61,23 @@ describe('<AnnenForelderPanel>', () => {
     {
       kode: 'NOR',
       navn: 'Norge',
+      kodeverk: '',
     },
     {
       kode: 'SWE',
       navn: 'Sverige',
+      kodeverk: '',
     },
   ];
 
   it('skal kun vise angi begrunnelse hvis kanIkkeOppgiAnnenForelder er valgt', () => {
-    const wrapper = shallowWithIntl(<AnnenForelderPanelImpl
-      intl={intlMock}
-      countryCodes={countryCodes}
+    const wrapper = shallow(<AnnenForelderPanelImpl
       form="test"
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 4.
-      soknadData={new SoknadData('ES', 'TEST', 'TEST', [])}
+      soknadData={new SoknadData('ES', 'TEST', 'TEST')}
+      namePrefix="test"
+      alleKodeverk={{
+        [kodeverkTyper.LANDKODER]: countryCodes,
+      }}
     />);
 
     let begrunnelse = wrapper.find({ name: 'kanIkkeOppgiBegrunnelse' });
@@ -92,11 +92,11 @@ describe('<AnnenForelderPanel>', () => {
 
   describe('<KanIkkeOppgiBegrunnelseForm>', () => {
     it('skal kun vise land dropdown og utenlandskFodelsnummer felt hvis arsak er IKKE_NORSK_FNR', () => {
-      const wrapper = shallowWithIntl(<KanIkkeOppgiBegrunnelsePanel
+      const wrapper = shallow(<KanIkkeOppgiBegrunnelsePanel
         readOnly={false}
         formatMessage={() => ''}
         countryCodes={countryCodes}
-        kanIkkeOppgiBegrunnelse={{}}
+        kanIkkeOppgiBegrunnelse={{ arsak: undefined }}
       />);
 
       let land = wrapper.find({ name: 'land' });

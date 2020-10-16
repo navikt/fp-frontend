@@ -11,7 +11,6 @@
   "Registrering.Opphold.No": "Nei",
   "Registrering.SokerensTilleggsopplysninger": "Tilleggsopplysninger om søknadsfrist",
   "Registrering.Adopsjon.Title": "Adopsjon",
-  "Registrering.TheOtherParent.Title": "Den andre forelderen",
   "Registrering.Sprak": "Språk",
   "Registrering.Sprak.Bokmal": "Bokmål",
   "Registrering.Sprak.Nynorsk": "Nynorsk",
@@ -32,7 +31,6 @@
   "Registrering.Adopsjon.DatoForOvertakelsen": "Dato for omsorgsovertakelsen",
   "Registrering.SaveApplication.Description": "Ved endring av opplysningene er begrunnelse obligatorisk",
   "Registrering.Verge": "Verge/fullmektig skal knyttes til saken",
-  "Registrering.TheOtherParent.Fodselsnummer": "Fødselsnummer/D-nummer",
   "Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt": "Søkers opplysningsplikt er ikke overholdt",
   "Registrering.SaveApplication.EndButton": "Bekreft og avslutt behandling",
   "Registrering.AntallBarn": "Antall barn",
@@ -48,14 +46,6 @@
   "ModalLukkPapirSoknad.BekreftAvslag": "Bekreft at søknaden skal avslås",
   "ModalLukkPapirSoknad.Ok": "OK",
   "ModalLukkPapirSoknad.Avbryt": "Avbryt",
-
-
-  "Registrering.TheOtherParent.CannotSpecifyOtherParent": "Kan ikke oppgi annen forelder",
-  "Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title": "Angi årsak",
-  "Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1": "Forelder er ukjent",
-  "Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2": "Har ikke norsk f.nr. eller d-nr.",
-  "Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer": "Utenlandsk fødselsnummer",
-  "Registrering.TheOtherParent.CannotSpecifyOtherParent.Land": "Land",
 
   "Registrering.RegistreringOpphold.AngiOpphold": "Oppgi hvilket land og i hvilken periode",
   "Registrering.RegistreringOpphold.Add": "Legg til",

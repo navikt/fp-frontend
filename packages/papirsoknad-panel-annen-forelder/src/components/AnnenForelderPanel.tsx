@@ -1,9 +1,10 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { FormSection, formValueSelector } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
+import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
 import {
   CheckboxField, InputField, NavFieldGroup, RadioGroupField, RadioOption, SelectField,
@@ -27,7 +28,9 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]) => countryCodes
 
 interface OwnProps {
   readOnly: boolean;
-  kanIkkeOppgiBegrunnelse: {};
+  kanIkkeOppgiBegrunnelse: {
+    arsak: string;
+  };
   formatMessage: (...args: any[]) => any;
   countryCodes: KodeverkMedNavn[];
 }
@@ -69,23 +72,45 @@ export const KanIkkeOppgiBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   </NavFieldGroup>
 );
 
-interface OwnPropsAnnenForelderPanel {
-  countryCodes: KodeverkMedNavn[];
-  kanIkkeOppgiAnnenForelder?: boolean;
-  kanIkkeOppgiBegrunnelse?: {};
+interface PureOwnPropsAnnenForelderPanel {
   readOnly?: boolean;
   permisjonRettigheterPanel?: ReactNode;
+  form: string;
+  namePrefix: string;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  soknadData: SoknadData;
 }
 
-export const AnnenForelderPanelImpl: FunctionComponent<OwnPropsAnnenForelderPanel & WrappedComponentProps> = ({
+interface MappedOwnPropsAnnenForelderPanel {
+  kanIkkeOppgiAnnenForelder?: boolean;
+  kanIkkeOppgiBegrunnelse?: {
+    arsak: string;
+  };
+}
+
+type FormValues = {
+  kanIkkeOppgiAnnenForelder?: boolean;
+  kanIkkeOppgiBegrunnelse?: {
+    arsak: string;
+  };
+  fornavn?: string;
+  etternavn?: string;
+  foedselsnummer?: string;
+}
+
+interface StaticFunctions {
+  validate?: (sokerPersonnummer: string, values: FormValues) => any,
+}
+
+export const AnnenForelderPanelImpl: FunctionComponent<PureOwnPropsAnnenForelderPanel & MappedOwnPropsAnnenForelderPanel> & StaticFunctions = ({
   readOnly,
-  intl,
-  countryCodes,
   kanIkkeOppgiAnnenForelder,
   kanIkkeOppgiBegrunnelse,
   permisjonRettigheterPanel,
+  alleKodeverk,
 }) => {
-  const { formatMessage } = intl;
+  const countryCodes = alleKodeverk[kodeverkTyper.LANDKODER];
+  const { formatMessage } = useIntl();
   const sortedCountriesByName = countryCodes.slice().sort((a, b) => a.navn.localeCompare(b.navn));
   return (
     <BorderBox>
@@ -123,32 +148,36 @@ export const AnnenForelderPanelImpl: FunctionComponent<OwnPropsAnnenForelderPane
 };
 
 AnnenForelderPanelImpl.defaultProps = {
-  kanIkkeOppgiBegrunnelse: {},
+  kanIkkeOppgiBegrunnelse: {
+    arsak: '',
+  },
   readOnly: true,
 };
 
-const mapStateToProps = (state: any, initialProps: OwnProps) => ({
-  countryCodes: initialProps.alleKodeverk[kodeverkTyper.LANDKODER],
+const mapStateToProps = (state: any, initialProps: PureOwnPropsAnnenForelderPanel) => ({
   ...formValueSelector(initialProps.form)(state, initialProps.namePrefix),
 });
 
-const AnnenForelderPanel = connect(mapStateToProps)(injectIntl(AnnenForelderPanelImpl));
+const AnnenForelderPanel = connect(mapStateToProps)(AnnenForelderPanelImpl);
 
-AnnenForelderPanel.validate = (sokerPersonnummer: any, values = {}) => {
-  const errors = {};
+AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) => {
   if (values.kanIkkeOppgiAnnenForelder) {
-    const begrunnelse = values.kanIkkeOppgiBegrunnelse || {};
-    errors.kanIkkeOppgiBegrunnelse = {};
-    errors.kanIkkeOppgiBegrunnelse.arsak = required(begrunnelse.arsak);
-  } else {
-    errors.fornavn = required(values.fornavn) || hasValidName(values.fornavn);
-    errors.etternavn = required(values.etternavn) || hasValidName(values.etternavn);
-    errors.foedselsnummer = required(values.foedselsnummer)
+    const begrunnelse = values.kanIkkeOppgiBegrunnelse || { arsak: undefined };
+    return {
+      kanIkkeOppgiBegrunnelse: {
+        arsak: required(begrunnelse.arsak),
+      },
+    };
+  }
+
+  return {
+    fornavn: required(values.fornavn) || hasValidName(values.fornavn),
+    etternavn: required(values.etternavn) || hasValidName(values.etternavn),
+    foedselsnummer: required(values.foedselsnummer)
       || hasValidFodselsnummerFormat(values.foedselsnummer)
       || hasValidFodselsnummer(values.foedselsnummer)
-      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null);
-  }
-  return errors;
+      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null),
+  };
 };
 
 export default AnnenForelderPanel;
