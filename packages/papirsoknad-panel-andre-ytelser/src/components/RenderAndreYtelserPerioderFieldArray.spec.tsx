@@ -14,12 +14,12 @@ const fields = new MockFields('perioder', 1);
 
 const getRemoveButton = () => <button id="avslutt" type="button" />;
 
-const getPeriodDaysFromToday = (startDaysFromToday: any, endDaysFromToday: any) => ({
+const getPeriodDaysFromToday = (startDaysFromToday: number, endDaysFromToday: number) => ({
   periodeFom: moment().add(startDaysFromToday, 'days').format(ISO_DATE_FORMAT),
   periodeTom: moment().add(endDaysFromToday, 'days').format(ISO_DATE_FORMAT),
 });
 
-const getPeriod = (periodeFom: any, periodeTom: any) => ({ periodeFom, periodeTom });
+const getPeriod = (periodeFom: string, periodeTom: string) => ({ periodeFom, periodeTom });
 
 describe('<RenderAndreYtelserPerioderFieldArray>', () => {
   it('Skal rendre FrilansPerioderFieldArray', () => {
@@ -34,6 +34,7 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
+    // @ts-ignore Fiks
     const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);

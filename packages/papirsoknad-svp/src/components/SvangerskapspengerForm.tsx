@@ -15,7 +15,7 @@ import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-pa
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
 import InntektsgivendeArbeidPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
-import AndreYtelserPapirsoknadIndex, { ANDRE_YTELSER_FORM_NAME_PREFIX } from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
+import AndreYtelserPapirsoknadIndex, { ANDRE_YTELSER_FORM_NAME_PREFIX, AndreYtelserFormValues } from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
 import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
@@ -86,7 +86,7 @@ type FormValues = {
     organisasjonsnummer: string;
     tilretteleggingArbeidsgiver: {};
   }[];
-};
+} & AndreYtelserFormValues;
 
 const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues) => ({
   ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),

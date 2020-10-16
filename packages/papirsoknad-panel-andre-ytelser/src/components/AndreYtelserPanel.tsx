@@ -36,11 +36,17 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   andreYtelser: KodeverkMedNavn[];
-  selectedYtelser: {};
+  selectedYtelser: { [key: string ]: {
+    periodeFom: string;
+    periodeTom: string;
+  }[]};
 }
 
 export type FormValues = {
-  [ANDRE_YTELSER_FORM_NAME_PREFIX]: {};
+  [ANDRE_YTELSER_FORM_NAME_PREFIX]: { [key: string ]: {
+    periodeFom: string;
+    periodeTom: string;
+  }[]};
 }
 
 interface StaticFunctions {

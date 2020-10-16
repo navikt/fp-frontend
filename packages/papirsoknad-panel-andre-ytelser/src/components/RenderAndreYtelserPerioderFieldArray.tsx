@@ -10,7 +10,6 @@ import { DatepickerField } from '@fpsak-frontend/form';
 import {
   dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, isRequiredMessage, required,
 } from '@fpsak-frontend/utils';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './renderAndreYtelserPerioderFieldArray.less';
 
@@ -27,8 +26,8 @@ export type FormValues = {
 
 interface StaticFunctions {
   validate?: (values: FormValues[]) => any,
-  transformValues: (values: FormValues[], ytelseType: Kodeverk) => {
-    ytelseType: Kodeverk;
+  transformValues: (values: FormValues[], ytelseType: string) => {
+    ytelseType: string;
     periodeFom: string;
     periodeTom: string;
   }[];
@@ -106,7 +105,7 @@ RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]) => {
   return null;
 };
 
-RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: Kodeverk) => values.map((ytelsePeriode) => ({
+RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string) => values.map((ytelsePeriode) => ({
   ytelseType,
   periodeFom: ytelsePeriode.periodeFom,
   periodeTom: ytelsePeriode.periodeTom,
