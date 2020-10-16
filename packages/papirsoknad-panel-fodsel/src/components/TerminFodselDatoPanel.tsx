@@ -26,11 +26,14 @@ import {
 
 import styles from './terminFodselDatoPanel.less';
 
-interface OwnProps {
+interface PureOwnProps {
   readOnly: boolean;
-  erBarnetFodt?: boolean;
   erForeldrepenger?: boolean;
   form: string;
+}
+
+interface MappedOwnProps {
+  erBarnetFodt?: boolean;
 }
 
 type FormValues = {
@@ -51,7 +54,7 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere termin i papir soknad.
  */
-export const TerminFodselDatoPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const TerminFodselDatoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   erBarnetFodt,
   erForeldrepenger,
@@ -159,7 +162,7 @@ TerminFodselDatoPanelImpl.defaultProps = {
   erForeldrepenger: false,
 };
 
-const mapStateToProps = (state: any, initialProps: OwnProps) => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps) => ({
   erBarnetFodt: formValueSelector(initialProps.form)(state, 'erBarnetFodt'),
 });
 

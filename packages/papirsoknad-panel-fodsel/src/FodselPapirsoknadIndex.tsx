@@ -14,16 +14,19 @@ const intl = createIntl({
 interface OwnProps {
   readOnly: boolean;
   form: string;
+  erForeldrepenger?: boolean;
 }
 
 const FodselPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   form,
+  erForeldrepenger,
 }) => (
   <RawIntlProvider value={intl}>
     <TerminFodselDatoPanel
       readOnly={readOnly}
       form={form}
+      erForeldrepenger={erForeldrepenger}
     />
   </RawIntlProvider>
 );
