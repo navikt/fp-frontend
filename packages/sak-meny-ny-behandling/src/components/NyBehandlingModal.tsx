@@ -284,7 +284,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     uuid: ownProps.uuidForSistLukkede,
     behandlingArsakTyper: getBehandlingAarsaker(state, ownProps),
     valgtBehandlingTypeKode: formValueSelector(formName)(state, 'behandlingType'),
-    erTilbakekreving: ownProps.behandlingType.kode === bType.TILBAKEKREVING || ownProps.behandlingType.kode === bType.TILBAKEKREVING_REVURDERING,
+    erTilbakekreving: ownProps.behandlingType?.kode === bType.TILBAKEKREVING || ownProps.behandlingType?.kode === bType.TILBAKEKREVING_REVURDERING,
   });
 };
 

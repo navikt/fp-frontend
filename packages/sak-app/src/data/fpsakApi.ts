@@ -34,7 +34,6 @@ export enum FpsakApiKeys {
   SUBMIT_MESSAGE = 'SUBMIT_MESSAGE',
   MENYHANDLING_RETTIGHETER = 'MENYHANDLING_RETTIGHETER',
   MENYHANDLING_RETTIGHETER_FPTILBAKE = 'MENYHANDLING_RETTIGHETER_FPTILBAKE',
-  VERGE_MENYVALG = 'VERGE_MENYVALG',
   KAN_TILBAKEKREVING_OPPRETTES = 'KAN_TILBAKEKREVING_OPPRETTES',
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES = 'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
   PREVIEW_MESSAGE_TILBAKEKREVING = 'PREVIEW_MESSAGE_TILBAKEKREVING',
@@ -60,6 +59,7 @@ const endpoints = new RestApiConfigBuilder()
   .withGet('/fpsak/api/kodeverk/behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
   .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)
   .withGet('/fpsak/api/historikk', FpsakApiKeys.HISTORY_FPSAK)
+  .withGet('/fpsak/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
   .withGet('/fptilbake/api/historikk', FpsakApiKeys.HISTORY_FPTILBAKE)
   .withGet('/fptilbake/api/kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
   .withGet('/fpsak/api/dokument/hent-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
@@ -78,8 +78,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('har-apent-kontroller-revurdering-aksjonspunkt', FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP)
   .withRel('brev-maler', FpsakApiKeys.BREVMALER)
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
-  .withRel('handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
-  .withRel('finn-menyvalg-for-verge', FpsakApiKeys.VERGE_MENYVALG)
   .build();
 
 export const requestApi = createRequestApi(endpoints);

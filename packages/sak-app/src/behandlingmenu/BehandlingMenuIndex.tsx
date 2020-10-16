@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useCallback, useMemo, useEffect, useRef,
 } from 'react';
-import { Location } from 'history';
+import { useHistory, useLocation } from 'react-router-dom';
 import moment from 'moment';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -17,17 +17,18 @@ import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-fr
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
 
+import {
+  fjernVerge, opprettVerge,
+  nyBehandlendeEnhet, resumeBehandling, shelveBehandling, setBehandlingOnHold, openBehandlingForChanges,
+} from './behandlingMenuOperations';
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
 import useVisForhandsvisningAvMelding from '../data/useVisForhandsvisningAvMelding';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
-import {
-  nyBehandlendeEnhet, resumeBehandling, shelveBehandling, setBehandlingOnHold, openBehandlingForChanges,
-} from './behandlingMenuOperations';
 import MenyKodeverk from './MenyKodeverk';
-import SakRettigheter from './sakRettigheterTsType';
+import SakRettigheter, { VergeBehandlingmenyValg } from './sakRettigheterTsType';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
@@ -64,10 +65,6 @@ interface OwnProps {
   saksnummer: number;
   behandlingId?: number;
   behandlingVersion?: number;
-  fjernVerge: () => void;
-  opprettVerge: () => void;
-  pushLocation: (location: Location | string) => void;
-  location: Location;
   sakRettigheter: SakRettigheter;
   oppfriskBehandlinger: () => void;
 }
@@ -78,14 +75,13 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingId,
   behandlingVersion,
-  fjernVerge,
-  opprettVerge,
-  pushLocation,
-  location,
   sakRettigheter,
   oppfriskBehandlinger,
 }) => {
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+
+  const { push: pushLocation } = useHistory();
+  const location = useLocation();
 
   const ref = useRef<number>();
   useEffect(() => {
@@ -132,11 +128,16 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  const erKoet = behandling ? behandling.behandlingKoet : false;
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
 
-  const behandlingOperasjoner = sakRettigheter.behandlingTillatteOperasjoner.find((op) => op.uuid === behandling.uuid);
+  const behandlingOperasjoner = sakRettigheter.behandlingTillatteOperasjoner.find((op) => op.uuid === behandling?.uuid);
+
+  const vergeMenyvalg = behandlingOperasjoner?.vergeBehandlingsmeny;
+  const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN
+    ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+  const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT
+    ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
 
   return (
     <MenySakIndex
@@ -197,12 +198,12 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(sakRettigheter.sakSkalTilInfotrygd, getNyBehandlingMenytekst())
+        new MenyData(!sakRettigheter.sakSkalTilInfotrygd, getNyBehandlingMenytekst())
           .medModal((lukkModal) => (
             <MenyNyBehandlingIndex
               saksnummer={saksnummer}
               behandlingId={behandlingId}
-              behandlingUuid={behandling.uuid}
+              behandlingUuid={behandling?.uuid}
               behandlingVersjon={behandlingVersion}
               behandlingType={behandling?.type}
               uuidForSistLukkede={uuidForSistLukkede}
@@ -224,11 +225,11 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(!erPaVent && (!!opprettVerge || !!fjernVerge), getVergeMenytekst(!!opprettVerge))
+        new MenyData(!erPaVent && (!!opprettVergeFn || !!fjernVergeFn), getVergeMenytekst(!!opprettVerge))
           .medModal((lukkModal) => (
             <MenyVergeIndex
-              fjernVerge={fjernVerge}
-              opprettVerge={opprettVerge}
+              fjernVerge={fjernVergeFn}
+              opprettVerge={opprettVergeFn}
               lukkModal={lukkModal}
             />
           )),
