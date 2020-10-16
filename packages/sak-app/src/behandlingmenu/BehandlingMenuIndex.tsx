@@ -1,7 +1,6 @@
 import React, {
   FunctionComponent, useCallback, useMemo, useEffect, useRef,
 } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
 import moment from 'moment';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -17,6 +16,8 @@ import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-fr
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
 
+import useHistory from '../app/useHistory';
+import useLocation from '../app/useLocation';
 import {
   fjernVerge, opprettVerge,
   nyBehandlendeEnhet, resumeBehandling, shelveBehandling, setBehandlingOnHold, openBehandlingForChanges,

@@ -4,6 +4,7 @@ import { Fagsak } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
+import useBehandlingEndret from '../behandling/useBehandligEndret';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
@@ -46,8 +47,11 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
 }) => {
+  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
+
   const { data: sakRettigheterFpSak, state: stateFpSak } = restApiHooks.useRestApi<SakRettigheter>(
     FpsakApiKeys.MENYHANDLING_RETTIGHETER, { saksnummer: fagsak.saksnummer }, {
+      suspendRequest: erBehandlingEndretFraUndefined,
       updateTriggers: [behandlingId, behandlingVersjon],
       keepData: true,
     },
@@ -57,7 +61,7 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
   const { data: sakRettigheterFpTilbake, state: stateFpTilbake } = restApiHooks.useRestApi<SakRettigheter>(
     FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE, { saksnummer: fagsak.saksnummer }, {
-      suspendRequest: !erTilbakekrevingAktivert,
+      suspendRequest: !erTilbakekrevingAktivert || erBehandlingEndretFraUndefined,
       updateTriggers: [behandlingId, behandlingVersjon],
       keepData: true,
     },

@@ -255,8 +255,8 @@ export const getBehandlingAarsaker = createSelector([
 export const getBehandlingTyper = createSelector([(ownProps: PureOwnProps) => ownProps.behandlingstyper],
   (behandlingstyper) => behandlingstyper.sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn)));
 
-const kanOppretteBehandlingstype = (behandlingOppretting: BehandlingOppretting[], behandlingType: Kodeverk) => behandlingOppretting
-  .some((bo) => bo.behandlingType.kode === behandlingType.kode && bo.kanOppretteBehandling);
+const kanOppretteBehandlingstype = (behandlingOppretting: BehandlingOppretting[], behandlingTypeKode: string) => behandlingOppretting
+  .some((bo) => bo.behandlingType.kode === behandlingTypeKode && bo.kanOppretteBehandling);
 
 export const getEnabledBehandlingstyper = createSelector([
   getBehandlingTyper,
