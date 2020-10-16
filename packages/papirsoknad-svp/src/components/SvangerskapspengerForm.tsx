@@ -6,18 +6,16 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  SoknadData, ANDRE_YTELSER_FORM_NAME_PREFIX, getRegisteredFields,
-} from '@fpsak-frontend/papirsoknad-felles';
+import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
-import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-mottatt-dato';
-import FrilansPapirsoknadIndex from '@fpsak-frontend/papirsoknad-frilans';
-import OppholdINorgePapirsoknadIndex from '@fpsak-frontend/papirsoknad-opphold-i-norge';
-import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-tilleggsopplysninger';
-import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-lagre-soknad';
-import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-virksomhet';
-import InntektsgivendeArbeidPapirsoknadIndex from '@fpsak-frontend/papirsoknad-inntektsgivende-arbeid';
-import AndreYtelserPapirsoknadIndex from '@fpsak-frontend/papirsoknad-andre-ytelser';
+import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
+import FrilansPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-frilans';
+import OppholdINorgePapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
+import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
+import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
+import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
+import InntektsgivendeArbeidPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
+import AndreYtelserPapirsoknadIndex, { ANDRE_YTELSER_FORM_NAME_PREFIX } from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
 import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
@@ -67,7 +65,7 @@ export class SvangerskapspengerForm extends React.Component<OwnProps & InjectedF
         <OppholdINorgePapirsoknadIndex form={form} readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
         <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
         <VirksomhetPapirsoknadIndex readOnly={readOnly} form={form} alleKodeverk={alleKodeverk} />
-        <FrilansPapirsoknadIndex readOnly={readOnly} form={form} formName={SVANGERSKAPSPENGER_FORM_NAME} />
+        <FrilansPapirsoknadIndex readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} />
         <AndreYtelserPapirsoknadIndex readOnly={readOnly} form={form} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
         <TerminFodselSvpPanel readOnly={readOnly} />
         <FormSection name={TILRETTELEGGING_NAME_PREFIX}>
@@ -84,17 +82,17 @@ export class SvangerskapspengerForm extends React.Component<OwnProps & InjectedF
 type FormValues = {
   foedselsDato?: number;
   tilretteleggingArbeidsforhold: {
-    behovsdato
-    organisasjonsnummer
-    tilretteleggingArbeidsgiver
+    behovsdato: string;
+    organisasjonsnummer: string;
+    tilretteleggingArbeidsgiver: {};
   }[];
 };
 
 const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues) => ({
   ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
-  ...InntektsgivendeArbeidPanel.validate(values),
-  ...FrilansPanel.validate(values),
-  ...OppholdINorgePanel.validate(values),
+  ...InntektsgivendeArbeidPapirsoknadIndex.validate(values),
+  ...FrilansPapirsoknadIndex.validate(values),
+  ...OppholdINorgePapirsoknadIndex.validate(values),
 });
 
 const transformRootValues = (state: any, registeredFieldNames: any) => {
@@ -103,10 +101,10 @@ const transformRootValues = (state: any, registeredFieldNames: any) => {
 };
 
 const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMedNavn[] }) => ownProps], (ownProps) => ({
-  ...FrilansPanel.buildInitialValues(),
-  ...AndreYtelserPanel.buildInitialValues(ownProps.andreYtelser),
-  ...InntektsgivendeArbeidPanel.initialValues,
-  ...OppholdINorgePanel.initialValues,
+  ...FrilansPapirsoknadIndex.buildInitialValues(),
+  ...AndreYtelserPapirsoknadIndex.buildInitialValues(ownProps.andreYtelser),
+  ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
+  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   [TILRETTELEGGING_NAME_PREFIX]: BehovForTilretteleggingPanel.buildInitialValues(),
 }));
 
@@ -157,7 +155,7 @@ const mapStateToPropsFactory = (_initialState, ownProps: OwnProps) => {
     const valuesForRegisteredFieldsOnly = registeredFieldNames.length
       ? {
         ...transformRootValues(state, registeredFieldNames),
-        [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPanel
+        [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex
           .transformValues(formValueSelector(SVANGERSKAPSPENGER_FORM_NAME)(state, ...registeredFieldNames), andreYtelserObject.andreYtelser),
       }
       : {};
