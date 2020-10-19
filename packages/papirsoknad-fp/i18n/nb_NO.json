@@ -1,13 +1,6 @@
 {
   "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
  
-  "ModalLukkPapirSoknad.ModalDescription": "Registrering av søknaden avsluttes",
-  "ModalLukkPapirSoknad.Avslutt": "Avslutt registrering av søknaden",
-  "ModalLukkPapirSoknad.AvslutterRegistrering": "Avslutter registrering av søknaden. Det er ikke mulig å innhente ytterligere opplysninger.",
-  "ModalLukkPapirSoknad.BekreftAvslag": "Bekreft at søknaden skal avslås",
-  "ModalLukkPapirSoknad.Ok": "OK",
-  "ModalLukkPapirSoknad.Avbryt": "Avbryt",
-
   "Registrering.Dekningsgrad.Title": "Dekningsgrad",
   "Registrering.Dekningsgrad.prosent.80": "80 prosent",
   "Registrering.Dekningsgrad.prosent.100": "100 prosent",

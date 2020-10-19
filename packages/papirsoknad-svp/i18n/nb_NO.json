@@ -6,6 +6,7 @@
   "BehovForTilretteleggingPanel.Nei": "Nei",
   "BehovForTilretteleggingPanel.SokForFrilans": "Søkes det om svangerskapspenger som frilanser?",
   "BehovForTilretteleggingPanel.SokForArbeidsgiver": "Søkes det om svangerskapspenger som arbeidstaker?",
+
   "BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov": "Legg til tilretteleggingsbehov",
   "BehovForTilrettteleggingFieldArray.BehovForTilrettelegging": "Behov for tilrettelegging",
   "BehovForTilrettteleggingFieldArray.FraDato": "Fra dato",
@@ -14,27 +15,20 @@
   "BehovForTilrettteleggingFieldArray.RedusertArbeid": "b) kan gjennomføres slik at arbeidstakeren kan fortsette med redusert arbeidstid fra og med",
   "BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores": "c) kan ikke gjennomføres og arbeidstakeren må midlertidig gå ut av sitt arbeid fra og med",
   
+  "TilretteleggingForArbeidsgiverFieldArray.OrgNr": "Arbeidsgivers orgnr/fnr",
+  "TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
+  "TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver": "Legg til arbeidsgiver",
+
   "MigreringFraInfotrygdPanel.Migrering": "Flytting fra Infotrygd",
   "MigreringFraInfotrygdPanel.Ja": "Ja",
   "MigreringFraInfotrygdPanel.Nei": "Nei",
   "MigreringFraInfotrygdPanel.ErDenneSakenMigrert": "Gjelder denne søknaden flytting av en sak fra Infotrygd?",
 
-  "TilretteleggingForArbeidsgiverFieldArray.OrgNr": "Arbeidsgivers orgnr/fnr",
-  "TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver": "Legg til arbeidsgiver",
   "TerminFodselSvpPanel.TerminOgFodsel": "Opplysninger om termin og fødsel",
   "TerminFodselSvpPanel.Termindato": "Termindato",
   "TerminFodselSvpPanel.Fodselsdato": "Fødselsdato",
 
-  "Registrering.RegistrerVirksomhetModalForm.Save": "Lagre",
-  "Registrering.RegistrerVirksomhetModalForm.Cancel": "Avbryt",
   "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
-
-  "ModalLukkPapirSoknad.ModalDescription": "Registrering av søknaden avsluttes",
-  "ModalLukkPapirSoknad.Avslutt": "Avslutt registrering av søknaden",
-  "ModalLukkPapirSoknad.AvslutterRegistrering": "Avslutter registrering av søknaden. Det er ikke mulig å innhente ytterligere opplysninger.",
-  "ModalLukkPapirSoknad.BekreftAvslag": "Bekreft at søknaden skal avslås",
-  "ModalLukkPapirSoknad.Ok": "OK",
-  "ModalLukkPapirSoknad.Avbryt": "Avbryt",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

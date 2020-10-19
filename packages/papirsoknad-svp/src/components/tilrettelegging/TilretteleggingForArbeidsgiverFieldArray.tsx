@@ -8,6 +8,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { required, hasValidOrgNumberOrFodselsnr } from '@fpsak-frontend/utils';
+
 import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';
 
 const behovForTilretteleggingFieldArrayName = 'tilretteleggingArbeidsgiver';
@@ -53,7 +54,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <DatepickerField
                 name={`${fieldId}.behovsdato`}
-                label={{ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' }}
+                label={{ id: 'TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra' }}
                 validate={[required]}
                 readOnly={readOnly}
               />
