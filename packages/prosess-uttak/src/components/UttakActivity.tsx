@@ -473,7 +473,6 @@ const transformValues = (
   innvilgelseAarsakKoder: ArsakKodeverk[],
   graderingAvslagAarsakKoder: KodeverkMedNavn[],
 ): PeriodeMedClassName => {
-  const { ...transformvalue } = values.selectedItem;
   const { ...nyeVerdier } = omit(values, 'selectedItem');
   const [avslagAarsakObject] = avslagAarsakKoder.filter((a) => a.kode === values.avslagAarsak);
   const [innvilgelseAarsakObject] = innvilgelseAarsakKoder.filter((a) => a.kode === values.innvilgelseAarsak);
@@ -481,7 +480,7 @@ const transformValues = (
   if (values.oppholdArsak !== oppholdArsakType.UDEFINERT) {
     nyeVerdier.UttakFieldArray[0].stønadskontoType.kode = oppholdArsakMapper[values.oppholdArsak];
   }
-  transformvalue.aktiviteter = nyeVerdier.UttakFieldArray.map((a) => {
+  const aktiviteter = nyeVerdier.UttakFieldArray.map((a) => {
     const { ...bekreftetAktivitet } = a;
     bekreftetAktivitet.stønadskontoType.navn = uttakPeriodeNavn[a.stønadskontoType.kode];
     return bekreftetAktivitet;
@@ -489,6 +488,7 @@ const transformValues = (
 
   return {
     ...values.selectedItem,
+    aktiviteter,
     begrunnelse: values.begrunnelse,
     flerbarnsdager: values.flerbarnsdager,
     samtidigUttak: values.samtidigUttak,
