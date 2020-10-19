@@ -139,7 +139,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
   const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT
     ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
-
+  const test = !!opprettVerge;
   return (
     <MenySakIndex
       data={[
@@ -226,7 +226,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(!erPaVent && (!!opprettVergeFn || !!fjernVergeFn), getVergeMenytekst(!!opprettVerge))
+        new MenyData(!erPaVent && (!!opprettVergeFn || !!fjernVergeFn), getVergeMenytekst(!!opprettVergeFn))
           .medModal((lukkModal) => (
             <MenyVergeIndex
               fjernVerge={fjernVergeFn}
