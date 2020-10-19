@@ -237,6 +237,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
         </NavFieldGroup>
         <RegistrerVirksomhetModalForm
           showModal={!!editVirksomhet}
+          // @ts-ignore Fiks
           onSubmit={this.addVirksomhet}
           closeEvent={this.hideRegistrerVirksomhetModal}
           readOnly={readOnly}

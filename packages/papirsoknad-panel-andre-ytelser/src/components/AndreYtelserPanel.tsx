@@ -43,7 +43,7 @@ interface MappedOwnProps {
 }
 
 export type FormValues = {
-  [ANDRE_YTELSER_FORM_NAME_PREFIX]: { [key: string ]: {
+  [ANDRE_YTELSER_FORM_NAME_PREFIX]?: { [key: string ]: {
     periodeFom: string;
     periodeTom: string;
   }[]};

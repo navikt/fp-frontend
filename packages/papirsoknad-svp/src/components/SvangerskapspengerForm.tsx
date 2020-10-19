@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  formValueSelector, reduxForm, FormSection, InjectedFormProps,
+  formValueSelector, reduxForm, FormSection, InjectedFormProps, InjectedArrayProps,
 } from 'redux-form';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -9,13 +9,17 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
-import FrilansPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-frilans';
-import OppholdINorgePapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
+import FrilansPapirsoknadIndex, { FormValues as FrilansFormValues } from '@fpsak-frontend/papirsoknad-panel-frilans';
+import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
 import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
-import InntektsgivendeArbeidPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
-import AndreYtelserPapirsoknadIndex, { ANDRE_YTELSER_FORM_NAME_PREFIX, AndreYtelserFormValues } from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
+import InntektsgivendeArbeidPapirsoknadIndex, {
+  FormValues as InntektFormValues,
+} from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
+import AndreYtelserPapirsoknadIndex, {
+  ANDRE_YTELSER_FORM_NAME_PREFIX, FormValues as AndreYtelserFormValues,
+} from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
 import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
@@ -24,7 +28,33 @@ import BehovForTilretteleggingPanel from './tilrettelegging/BehovForTilrettelegg
 const SVANGERSKAPSPENGER_FORM_NAME = 'SvangerskapspengerForm';
 const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
 
-interface OwnProps {
+type Tilrettelegging = {
+  tilretteleggingType: string;
+  fomDato: string;
+  stillingsprosent?: string;
+}
+
+type TilretteleggingArbeidsforhold = {
+  tilretteleggingForArbeidsgiver?: {
+    behovsdato: string;
+    organisasjonsnummer: string;
+    tilretteleggingArbeidsgiver: Tilrettelegging[];
+  }[];
+  sokForArbeidsgiver: boolean;
+  sokForFrilans: boolean;
+  behovsdatoFrilans?: string;
+  tilretteleggingFrilans?: Tilrettelegging[];
+  sokForSelvstendigNaringsdrivende: boolean;
+  behovsdatoSN?: string;
+  tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
+}
+
+type FormValues = {
+  foedselsDato?: string;
+  tilretteleggingArbeidsforhold: TilretteleggingArbeidsforhold;
+} & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues;
+
+interface PureOwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   submitCallback: (_formValues, _dispatch, values: any) => Promise<any>;
   readOnly?: boolean;
@@ -32,13 +62,17 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
+interface MappedOwnProps {
+  valuesForRegisteredFieldsOnly: FormValues;
+}
+
 /**
  * SvangerskapspengerForm
  *
  * Redux-form-komponent for registrering av papirsøknad for svangerskapspenger.
  */
-export class SvangerskapspengerForm extends React.Component<OwnProps & InjectedFormProps> {
-  shouldComponentUpdate(nextProps: OwnProps) {
+export class SvangerskapspengerForm extends React.Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
+  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
     // Dette er gjort for å hindra rerender for testetrykk på alle underformene
     const notRerenderIfChangedProps = ['array', 'blur', 'change', 'clearSubmit', 'destroy', 'dirty', 'initialize', 'error', 'pristine', 'reset',
       'resetSection', 'touch', 'untouch', 'valuesForRegisteredFieldsOnly', 'autofill', 'clearFields', 'clearSubmitErrors', 'clearAsyncError', 'submit'];
@@ -79,15 +113,6 @@ export class SvangerskapspengerForm extends React.Component<OwnProps & InjectedF
   }
 }
 
-type FormValues = {
-  foedselsDato?: number;
-  tilretteleggingArbeidsforhold: {
-    behovsdato: string;
-    organisasjonsnummer: string;
-    tilretteleggingArbeidsgiver: {};
-  }[];
-} & AndreYtelserFormValues;
-
 const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues) => ({
   ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
   ...InntektsgivendeArbeidPapirsoknadIndex.validate(values),
@@ -95,7 +120,7 @@ const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues) 
   ...OppholdINorgePapirsoknadIndex.validate(values),
 });
 
-const transformRootValues = (state: any, registeredFieldNames: any) => {
+const transformRootValues = (state: any, registeredFieldNames: string[]) => {
   const values = formValueSelector(SVANGERSKAPSPENGER_FORM_NAME)(state, ...registeredFieldNames);
   return values;
 };
@@ -108,8 +133,8 @@ const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMe
   [TILRETTELEGGING_NAME_PREFIX]: BehovForTilretteleggingPanel.buildInitialValues(),
 }));
 
-const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold: any) => {
-  let transformerteVerdier: any = [];
+const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold: TilretteleggingArbeidsforhold) => {
+  let transformerteVerdier = [];
   if (tilretteleggingArbeidsforhold.sokForArbeidsgiver) {
     transformerteVerdier = transformerteVerdier.concat(tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map((ta) => ({
       '@type': 'VI',
@@ -142,14 +167,15 @@ export const transformValues = (values: FormValues) => ({
   tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values.tilretteleggingArbeidsforhold),
 });
 
-const mapStateToPropsFactory = (_initialState, ownProps: OwnProps) => {
+const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
   const validate = getValidation(andreYtelserObject.andreYtelser);
-  const onSubmit = (values: FormValues, dispatch: any, props: OwnProps) => ownProps.submitCallback(values, dispatch, {
+  const onSubmit = (values: FormValues, dispatch: any, props: PureOwnProps & MappedOwnProps & InjectedArrayProps) => ownProps.submitCallback(values, dispatch, {
     valuesForRegisteredFieldsOnly: transformValues(props.valuesForRegisteredFieldsOnly),
   });
   return (state: any) => {
     const registeredFields = getRegisteredFields(SVANGERSKAPSPENGER_FORM_NAME)(state);
+    // @ts-ignore Fiks
     const registeredFieldNames = Object.values(registeredFields).map((rf) => rf.name);
 
     const valuesForRegisteredFieldsOnly = registeredFieldNames.length
@@ -169,6 +195,7 @@ const mapStateToPropsFactory = (_initialState, ownProps: OwnProps) => {
   };
 };
 
+// @ts-ignore Fiks
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: SVANGERSKAPSPENGER_FORM_NAME,
 })(SvangerskapspengerForm));

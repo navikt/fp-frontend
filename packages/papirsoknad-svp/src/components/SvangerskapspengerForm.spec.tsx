@@ -7,7 +7,8 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { SoknadData, MottattDatoPanel } from '@fpsak-frontend/papirsoknad-felles';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-svp';
 import { SvangerskapspengerForm, transformValues } from './SvangerskapspengerForm';
@@ -20,10 +21,10 @@ describe('<SvangerskapspengerForm>', () => {
       onSubmitUfullstendigsoknad={sinon.spy()}
       countryCodes={[]}
       readOnly={false}
-      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR, [])}
+      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
       alleKodeverk={{}}
     />);
-    expect(wrapper.find(MottattDatoPanel)).has.length(1);
+    expect(wrapper.find(MottattDatoPapirsoknadIndex)).has.length(1);
   });
 
   it('skal transformere tilretteleggingsdata for arbeidsgiver før lagring', () => {

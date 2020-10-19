@@ -25,7 +25,7 @@ interface OwnProps {
 }
 
 export type FormValues = {
-  [AMBASSADE_ARBEIDS_FORHOLD_PREFIX]: IAFormValues[];
+  [AMBASSADE_ARBEIDS_FORHOLD_PREFIX]?: IAFormValues[];
 }
 
 interface StaticFunctions {

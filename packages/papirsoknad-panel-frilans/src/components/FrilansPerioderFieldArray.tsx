@@ -21,7 +21,7 @@ interface OwnProps {
 
 export type FormValues = {
   periodeFom: string;
-  periodeTom: string;
+  periodeTom?: string;
 }
 
 interface StaticFunctions {

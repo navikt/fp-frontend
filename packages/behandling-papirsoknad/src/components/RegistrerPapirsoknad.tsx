@@ -87,6 +87,7 @@ export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
         fagsak={fagsak}
         kodeverk={kodeverk}
         readOnly={readOnly}
+        // @ts-ignore Fiks
         setSoknadData={setSoknadData}
         soknadData={soknadData}
         lagreUfullstendig={lagreUfullstendig}

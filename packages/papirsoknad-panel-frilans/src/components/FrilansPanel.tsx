@@ -19,7 +19,7 @@ interface OwnProps {
 }
 
 export type FormValues = {
-  [FRILANS_FORM_NAME_PREFIX]: FormValuesOppdragForFamilie;
+  [FRILANS_FORM_NAME_PREFIX]?: FormValuesOppdragForFamilie;
 }
 
 interface StaticFunctions {
