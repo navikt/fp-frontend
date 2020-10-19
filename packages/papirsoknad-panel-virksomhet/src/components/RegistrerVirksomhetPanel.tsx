@@ -21,6 +21,9 @@ import styles from './registrerVirksomhetPanel.less';
 interface VirksomhetProps {
   showRegistrerVirksomhetModal: (index: number) => void;
   index: number;
+  input: {
+    value?: string;
+  };
 }
 
 const renderVirksomhetsnavn: FunctionComponent<VirksomhetProps> = ({
@@ -157,7 +160,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
     const {
       form, namePrefix, name, dispatchArraySplice: splice,
     } = this.props;
-    splice(form, `${namePrefix}.${name}`, index, 1);
+    splice(form, `${namePrefix}.${name}`, index, 1, undefined);
   }
 
   render() {

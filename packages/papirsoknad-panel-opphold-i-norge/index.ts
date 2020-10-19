@@ -1,1 +1,1 @@
-export { default } from './src/MottattDatoPapirsoknadIndex';
+export { default } from './src/OppholdINorgePapirsoknadIndex';

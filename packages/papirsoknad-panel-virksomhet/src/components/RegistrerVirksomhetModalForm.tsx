@@ -25,7 +25,7 @@ const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 
 interface OwnProps {
   showModal?: boolean;
-  closeEvent: (...args: any[]) => any;
+  closeEvent: () => void;
   readOnly?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
