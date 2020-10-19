@@ -21,7 +21,6 @@ export enum TilbakekrevingBehandlingApiKeys {
   BEREGNE_BELØP = 'BEREGNE_BELØP',
   TILBAKE_KODEVERK = 'TILBAKE_KODEVERK',
   PREVIEW_VEDTAKSBREV = 'PREVIEW_VEDTAKSBREV',
-  PREVIEW_FRITEKST_VEDTAKSBREV = 'PREVIEW_FRITEKST_VEDTAKSBREV',
   VERGE = 'VERGE',
   VERGE_OPPRETT = 'VERGE_OPPRETT',
   VERGE_FJERN = 'VERGE_FJERN',
@@ -55,7 +54,6 @@ const endpoints = new RestApiConfigBuilder()
 
   /* FPFORMIDLING */
   .withPost('/fptilbake/api/dokument/forhandsvis-vedtaksbrev', TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV, { isResponseBlob: true })
-  .withPost('/fptilbake/api/dokument/forhandsvis-fritekst-vedtaksbrev', TilbakekrevingBehandlingApiKeys.PREVIEW_FRITEKST_VEDTAKSBREV, { isResponseBlob: true })
 
   .build();
 

@@ -52,7 +52,6 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
         perioder={beregningsresultat.beregningResultatPerioder}
         resultat={beregningsresultat.vedtakResultatType}
         avsnittsliste={vedtaksbrev.avsnittsliste}
-        oppsummeringFritekst={vedtaksbrev.oppsummeringFritekst}
         submitCallback={submitCallback}
         readOnly={isReadOnly}
         alleKodeverk={alleKodeverk}

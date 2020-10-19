@@ -15,14 +15,15 @@ import styles from './tilbakekrevingVedtakUtdypendeTekstPanel.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-const valideringsregler = [minLength3, maxLength4000, hasValidText];
-const valideringsreglerPakrevet = [required, minLength3, maxLength4000, hasValidText];
+const valideringsregler = [minLength3, hasValidText];
+const valideringsreglerPakrevet = [required, minLength3, hasValidText];
 
 interface OwnProps {
   type: string;
   isEmpty: boolean;
   readOnly: boolean;
   fritekstPakrevet: boolean;
+  maximumLength?: number;
 }
 
 export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -31,8 +32,11 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<OwnProps
   type,
   readOnly,
   fritekstPakrevet,
+  maximumLength,
 }) => {
   const [isTextfieldHidden, hideTextField] = useState(isEmpty && !fritekstPakrevet);
+  const valideringsRegler = fritekstPakrevet ? valideringsreglerPakrevet : valideringsregler;
+  valideringsRegler.push(maximumLength ? maxLength(maximumLength) : maxLength4000);
   return (
     <>
       {(isTextfieldHidden && !readOnly) && (
@@ -63,8 +67,8 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<OwnProps
             <TextAreaField
               name={type}
               label={intl.formatMessage({ id: 'TilbakekrevingVedtakUtdypendeTekstPanel.UtdypendeTekst' })}
-              validate={fritekstPakrevet ? valideringsreglerPakrevet : valideringsregler}
-              maxLength={4000}
+              validate={valideringsRegler}
+              maxLength={maximumLength || 4000}
               readOnly={readOnly}
             />
           </>

@@ -22,7 +22,6 @@ interface OwnProps {
   behandlingUuid: string;
   behandlingVersjon: number;
   avsnittsliste: VedtaksbrevAvsnitt[];
-  oppsummeringFritekst: string;
   fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
   aksjonspunktKodeForeslaVedtak: string;
   erRevurderingTilbakekrevingKlage?: boolean;
@@ -39,7 +38,6 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   behandlingVersjon,
   avsnittsliste,
-  oppsummeringFritekst,
   fetchPreviewVedtaksbrev,
   aksjonspunktKodeForeslaVedtak,
   erRevurderingTilbakekrevingKlage,
@@ -68,7 +66,6 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
         behandlingUuid={behandlingUuid}
         behandlingVersjon={behandlingVersjon}
         avsnittsliste={avsnittsliste}
-        oppsummeringFritekst={oppsummeringFritekst}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}

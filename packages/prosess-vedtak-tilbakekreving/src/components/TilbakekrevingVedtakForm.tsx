@@ -5,9 +5,7 @@ import classNames from 'classnames';
 import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
 
-import {
-  hasValidText, omit, required,
-} from '@fpsak-frontend/utils';
+import { omit } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -18,7 +16,6 @@ import {
   isBehandlingFormDirty,
   hasBehandlingFormErrorsOfType,
   getBehandlingFormValues,
-  TextAreaField,
 } from '@fpsak-frontend/form';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
@@ -30,14 +27,7 @@ import styles from './tilbakekrevingVedtakForm.less';
 
 const formName = 'TilbakekrevingVedtakForm';
 
-const formatFritekstVedtakData = (values: any) => ({
-  oppsummeringstekst: values.fritekstTilBrev,
-});
-
 const formatVedtakData = (values: any) => {
-  if (values.fritekstTilBrev) {
-    return formatFritekstVedtakData(values);
-  }
   const perioder = omit(values, underavsnittType.OPPSUMMERING);
   return {
     oppsummeringstekst: values[underavsnittType.OPPSUMMERING],
@@ -52,30 +42,11 @@ const formatVedtakData = (values: any) => {
   };
 };
 
-const kanViseForhåndsvisLenken = (erRevurderingTilbakekrevingFeilBeløpBortfalt: boolean, fritekstTilBrev: string,
-  perioderSomIkkeHarUtfyltObligatoriskVerdi: string[]) => {
-  if (erRevurderingTilbakekrevingFeilBeløpBortfalt && fritekstTilBrev) {
-    return true;
-  }
-  if (!erRevurderingTilbakekrevingFeilBeløpBortfalt) {
-    return perioderSomIkkeHarUtfyltObligatoriskVerdi.length === 0;
-  }
-  return false;
-};
-
-const fetchPreview = (fetchPreviewVedtaksbrev: (data: any) => Promise<any>, uuid: string,
-  formVerdier: any, erRevurderingTilbakekrevingFeilBeløpBortfalt:boolean) => (e: any) => {
-  if (erRevurderingTilbakekrevingFeilBeløpBortfalt) {
-    fetchPreviewVedtaksbrev({
-      uuid,
-      ...formatFritekstVedtakData(formVerdier),
-    });
-  } else {
-    fetchPreviewVedtaksbrev({
-      uuid,
-      ...formatVedtakData(formVerdier),
-    });
-  }
+const fetchPreview = (fetchPreviewVedtaksbrev: (data: any) => Promise<any>, uuid: string, formVerdier: any) => (e: any) => {
+  fetchPreviewVedtaksbrev({
+    uuid,
+    ...formatVedtakData(formVerdier),
+  });
   e.preventDefault();
 };
 
@@ -110,7 +81,6 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
 }) => (
   <form onSubmit={formProps.handleSubmit}>
     <VerticalSpacer twentyPx />
-    {!erRevurderingTilbakekrevingFeilBeløpBortfalt && (
     <TilbakekrevingEditerVedtaksbrevPanel
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName={formName}
@@ -119,20 +89,8 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
       behandlingVersjon={behandlingVersjon}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={perioderSomIkkeHarUtfyltObligatoriskVerdi}
       fritekstOppsummeringPakrevdMenIkkeUtfylt={fritekstOppsummeringPakrevdMenIkkeUtfylt}
+      erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
     />
-    )}
-    {erRevurderingTilbakekrevingFeilBeløpBortfalt && (
-      <div className={styles.fritekstTilBrevTextArea}>
-        <TextAreaField
-          name="fritekstTilBrev"
-          label={<FormattedMessage id="TilbakekrevingVedtakForm.fritekstbrev" />}
-          validate={[required, hasValidText]}
-          readOnly={readOnly}
-          textareaClass={styles.explanationTextarea}
-          maxLength={100000}
-        />
-      </div>
-    )}
     <VerticalSpacer twentyPx />
     <FlexContainer>
       <FlexRow>
@@ -149,14 +107,13 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
         </FlexColumn>
-        {kanViseForhåndsvisLenken(erRevurderingTilbakekrevingFeilBeløpBortfalt, formVerdier.fritekstTilBrev, perioderSomIkkeHarUtfyltObligatoriskVerdi) && (
+        { perioderSomIkkeHarUtfyltObligatoriskVerdi.length === 0 && (
           <FlexColumn>
             <div className={styles.padding}>
               <a
                 href=""
-                onClick={fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid, formVerdier, erRevurderingTilbakekrevingFeilBeløpBortfalt)}
-                onKeyDown={(e) => (e.keyCode === 13 ? fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid,
-                  formVerdier, erRevurderingTilbakekrevingFeilBeløpBortfalt)(e) : null)}
+                onClick={fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid, formVerdier)}
+                onKeyDown={(e) => (e.keyCode === 13 ? fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid, formVerdier)(e) : null)}
                 className={classNames(styles.buttonLink, 'lenke lenke--frittstaende')}
               >
                 <FormattedMessage id="TilbakekrevingVedtakForm.ForhandvisBrev" />
@@ -192,7 +149,6 @@ interface PureOwnProps {
   aksjonspunktKodeForeslaVedtak: string;
   submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
   avsnittsliste: VedtaksbrevAvsnitt[];
-  oppsummeringFritekst?: string;
 }
 
 const finnPerioderSomIkkeHarVerdiForObligatoriskFelt = createSelector([
@@ -225,12 +181,7 @@ const lagSubmitFn = createSelector([
 
 const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => {
   const vedtaksbrevAvsnitt = ownProps.avsnittsliste;
-  const initialValues = !ownProps.oppsummeringFritekst
-    ? TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt)
-    : {
-      ...TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt),
-      fritekstTilBrev: ownProps.oppsummeringFritekst,
-    };
+  const initialValues = TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt);
   const formVerdier = getBehandlingFormValues(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state) || {};
   const fritekstOppsummeringPakrevdMenIkkeUtfylt = harFritekstOppsummeringPakrevdMenIkkeUtfylt(vedtaksbrevAvsnitt);
   return {
