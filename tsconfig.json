@@ -102,6 +102,8 @@
 		"packages/tidslinje",
 		"packages/types",
 		"packages/utils",
+		"packages/papirsoknad-es",
+		"packages/papirsoknad-fp",
 		"packages/papirsoknad-svp",
 		"packages/papirsoknad-andre-ytelser",
 		"packages/papirsoknad-annen-forelder",

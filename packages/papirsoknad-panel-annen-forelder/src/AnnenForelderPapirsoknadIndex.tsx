@@ -4,7 +4,7 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import AnnenForelderPanel from './components/AnnenForelderPanel';
+import AnnenForelderPanel, { FormValues } from './components/AnnenForelderPanel';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -20,15 +20,20 @@ interface OwnProps {
   soknadData: SoknadData;
   namePrefix: string;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  permisjonRettigheterPanel: ReactNode;
+  permisjonRettigheterPanel?: ReactNode;
 }
 
-const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+interface StaticFunctions {
+  validate?: (sokerPersonnummer: string, values: FormValues) => any,
+}
+
+const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   form,
   soknadData,
   namePrefix,
   alleKodeverk,
+  permisjonRettigheterPanel,
 }) => (
   <RawIntlProvider value={intl}>
     <AnnenForelderPanel
@@ -37,8 +42,11 @@ const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> = ({
       soknadData={soknadData}
       namePrefix={namePrefix}
       alleKodeverk={alleKodeverk}
+      permisjonRettigheterPanel={permisjonRettigheterPanel}
     />
   </RawIntlProvider>
 );
+
+AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) => AnnenForelderPanel.validate(sokerPersonnummer, values);
 
 export default AnnenForelderPapirsoknadIndex;

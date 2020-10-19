@@ -88,7 +88,7 @@ interface MappedOwnPropsAnnenForelderPanel {
   };
 }
 
-type FormValues = {
+export type FormValues = {
   kanIkkeOppgiAnnenForelder?: boolean;
   kanIkkeOppgiBegrunnelse?: {
     arsak: string;
