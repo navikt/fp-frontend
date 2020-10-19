@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import OmsorgOgAdopsjonPanel from './components/OmsorgOgAdopsjonPanel';
+import OmsorgOgAdopsjonPanel, { FormValues } from './components/OmsorgOgAdopsjonPanel';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -13,19 +13,35 @@ const intl = createIntl({
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
+  form: string;
+  namePrefix: string;
+  familieHendelseType: string;
+  isForeldrepengerFagsak: boolean;
 }
 
-const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+interface StaticFunctions {
+  validate?: (values: FormValues, rettigheter: string, otherFodselsdato: string) => any;
+}
+
+const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  formName,
+  form,
+  namePrefix,
+  familieHendelseType,
+  isForeldrepengerFagsak,
 }) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgAdopsjonPanel
       readOnly={readOnly}
-      formName={formName}
+      form={form}
+      namePrefix={namePrefix}
+      familieHendelseType={familieHendelseType}
+      isForeldrepengerFagsak={isForeldrepengerFagsak}
     />
   </RawIntlProvider>
 );
+
+OmsorgOgAdopsjonPapirsoknadIndex.validate = (values: FormValues, rettigheter: string, otherFodselsdato: string) => OmsorgOgAdopsjonPanel
+  .validate(values, rettigheter, otherFodselsdato);
 
 export default OmsorgOgAdopsjonPapirsoknadIndex;
