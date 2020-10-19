@@ -1,15 +1,4 @@
 {
-  "Registrering.Rettigheter.AnnenForelderDoed": "Den andre forelderen er død",
-  "Registrering.Rettigheter.OvertaForeldreansvaretAlene": "Omsorgen er overtatt med sikte på å overta foreldreansvaret alene",
-  "Registrering.Rettigheter.MannAdoptererAlene": "Mann adopterer alene",
-  "Registrering.Rettigheter.IkkeRelevant": "Ikke relevant",
-  "Registrering.Rettigheter.Title": "Rettigheter",
-  "Registrering.SokerensTilleggsopplysninger": "Tilleggsopplysninger om søknadsfrist",
-  "Registrering.Sprak": "Språk",
-  "Registrering.Sprak.Bokmal": "Bokmål",
-  "Registrering.Sprak.Nynorsk": "Nynorsk",
-  "Registrering.Sprak.Engelsk": "Engelsk",
-
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
   "ValidationMessage.MaxLength": "Du kan skrive maksimalt {length} tegn",

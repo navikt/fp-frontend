@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+
 import RettigheterPanel from './components/RettigheterPanel';
 import messages from '../i18n/nb_NO.json';
 
@@ -13,17 +15,17 @@ const intl = createIntl({
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
+  soknadData: SoknadData;
 }
 
 const RettigheterPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
-  formName,
+  soknadData,
 }) => (
   <RawIntlProvider value={intl}>
     <RettigheterPanel
       readOnly={readOnly}
-      formName={formName}
+      soknadData={soknadData}
     />
   </RawIntlProvider>
 );
