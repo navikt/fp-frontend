@@ -109,6 +109,7 @@ export {
   isUtbetalingMerEnnNullUtsettelse,
   hasValidOrgNumber,
   hasValidOrgNumberOrFodselsnr,
+  Options,
 } from './src/validation/validators';
 
 export {

@@ -13,30 +13,33 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
 import useIntl from '../useIntl';
-import UtenlandsOppholdField from './UtenlandsOppholdField';
+import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 import styles from './oppholdINorgePanel.less';
 
-interface OwnProps {
-  countryCodes: KodeverkMedNavn[];
+interface PureOwnProps {
   soknadData: SoknadData;
+  readOnly: boolean;
+  form: string;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface MappedOwnProps {
   harFremtidigeOppholdUtenlands?: boolean;
   harTidligereOppholdUtenlands?: boolean;
-  readOnly: boolean;
 }
 
 export type FormValues = {
   oppholdINorge?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   harFremtidigeOppholdUtenlands?: boolean;
+  tidligereOppholdUtenlands?: FormValuesFieldArray[];
+  fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
 };
 
 interface StaticFunctions {
-  buildInitialValues: () => any;
-  validate?: (values: FormValues[]) => {
-    periodeFom: any;
-    periodeTom: any;
-  }[] | null,
+  buildInitialValues?: () => any;
+  validate?: (values: FormValues) => any,
 }
 
 /**
@@ -46,15 +49,15 @@ interface StaticFunctions {
  * Inneholder delen av skjemaet som omhandler informasjon om utenlandsopphold.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
  */
-export const OppholdINorgePanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const OppholdINorgePanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
-  countryCodes,
+  alleKodeverk,
   harFremtidigeOppholdUtenlands,
   harTidligereOppholdUtenlands,
   soknadData,
 }) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = countryCodes.slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk[kodeverkTyper.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
     <BorderBox>
@@ -131,15 +134,20 @@ OppholdINorgePanelImpl.defaultProps = {
   readOnly: true,
 };
 
-const mapStateToProps = (state, initialProps) => ({
+const mapStateToProps = (state, initialProps: PureOwnProps) => ({
   ...formValueSelector(initialProps.form)(state, 'harTidligereOppholdUtenlands', 'harFremtidigeOppholdUtenlands'),
-  countryCodes: initialProps.alleKodeverk[kodeverkTyper.LANDKODER],
 });
 
 const OppholdINorgePanel = connect(mapStateToProps)(OppholdINorgePanelImpl);
 
 OppholdINorgePanel.validate = (values: FormValues) => {
-  const errors = {};
+  const errors = {
+    oppholdINorge: undefined,
+    harTidligereOppholdUtenlands: undefined,
+    tidligereOppholdUtenlands: undefined,
+    harFremtidigeOppholdUtenlands: undefined,
+    fremtidigeOppholdUtenlands: undefined,
+  };
   if (values.oppholdINorge === undefined) {
     errors.oppholdINorge = isRequiredMessage();
   }
@@ -151,7 +159,7 @@ OppholdINorgePanel.validate = (values: FormValues) => {
   if (values.harFremtidigeOppholdUtenlands === undefined) {
     errors.harFremtidigeOppholdUtenlands = isRequiredMessage();
   } else if (values.harFremtidigeOppholdUtenlands) {
-    errors.fremtidigeOppholdUtenlands = UtenlandsOppholdField.validate(values.fremtidigeOppholdUtenlands, { tidligstDato: values.mottattDato });
+    errors.fremtidigeOppholdUtenlands = UtenlandsOppholdField.validate(values.fremtidigeOppholdUtenlands);
   }
   return errors;
 };

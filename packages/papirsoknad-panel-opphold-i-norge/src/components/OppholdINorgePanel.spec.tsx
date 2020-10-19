@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import {
   dateNotAfterOrEqualMessage,
   dateNotBeforeOrEqualMessage,
@@ -12,20 +14,21 @@ import {
   isRequiredMessage,
 } from '@fpsak-frontend/utils';
 
-import SoknadData from '../SoknadData';
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';
 
 describe('<OppholdINorgePanel>', () => {
-  const countryCodes = [
-    {
-      kode: 'NOR',
-      navn: 'Norge',
-    },
-    {
-      kode: 'SWE',
-      navn: 'Sverige',
-    },
-  ];
+  const countryCodes = [{
+    kode: 'NOR',
+    navn: 'Norge',
+    kodeverk: '',
+  }, {
+    kode: 'SWE',
+    navn: 'Sverige',
+    kodeverk: '',
+  }];
+  const alleKodeverk = {
+    [kodeverkTyper.LANDKODER]: countryCodes,
+  };
 
   describe('validate', () => {
     it('skal validere at opphold i Norge nå er besvart', () => {
@@ -103,7 +106,7 @@ describe('<OppholdINorgePanel>', () => {
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands).to.be.an('array');
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeFom).to.not.exist;
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.be.an('array');
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom[0].id).to.eql(dateNotBeforeOrEqualMessage()[0].id);
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom[0].id).to.eql(dateNotBeforeOrEqualMessage(1)[0].id);
 
         expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
       });
@@ -157,18 +160,16 @@ describe('<OppholdINorgePanel>', () => {
         const errorsWithInvalidDates = OppholdINorgePanel.validate({
           harFremtidigeOppholdUtenlands: true,
           fremtidigeOppholdUtenlands: [periode],
-          mottattDato: '2019-02-01',
         });
         const errorsWithValidDates = OppholdINorgePanel.validate({
           harFremtidigeOppholdUtenlands: true,
           fremtidigeOppholdUtenlands: [periode],
-          mottattDato: '2019-01-01',
         });
 
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('array');
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).to.not.exist;
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.be.an('array');
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage()[0].id);
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage(1)[0].id);
 
         expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
       });
@@ -193,11 +194,11 @@ describe('<OppholdINorgePanel>', () => {
   });
 
   it('skal vise tidligere utenlandsopphold hvis harTidligereOppholdUtenlands er valgt', () => {
-    const wrapper = shallowWithIntl(<OppholdINorgePanelImpl
-      intl={intlMock}
-      countryCodes={countryCodes}
+    const wrapper = shallow(<OppholdINorgePanelImpl
+      alleKodeverk={alleKodeverk}
       form="test"
-      soknadData={new SoknadData('TEST', 'TEST', 'TEST', [])}
+      soknadData={new SoknadData('TEST', 'TEST', 'TEST')}
+      readOnly={false}
     />);
 
     let tidligreOppholdUtenlands = wrapper.find({ name: 'tidligereOppholdUtenlands' });
@@ -211,11 +212,11 @@ describe('<OppholdINorgePanel>', () => {
   });
 
   it('skal vise land dropdown, datepicker og knappen hvis harFremtidigeOppholdUtenlands er valgt', () => {
-    const wrapper = shallowWithIntl(<OppholdINorgePanelImpl
-      intl={intlMock}
-      countryCodes={countryCodes}
+    const wrapper = shallow(<OppholdINorgePanelImpl
+      alleKodeverk={alleKodeverk}
       form="test"
-      soknadData={new SoknadData('TEST', 'TEST', 'TEST', [])}
+      soknadData={new SoknadData('TEST', 'TEST', 'TEST')}
+      readOnly={false}
     />);
 
     let fremtidigeOppholdUtenlands = wrapper.find({ name: 'fremtidigeOppholdUtenlands' });

@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
 import {
-  hasValidPeriodIncludingOtherErrors, hasValidValue, isRequiredMessage, required,
+  hasValidPeriodIncludingOtherErrors, hasValidValue, isRequiredMessage, required, Options,
 } from '@fpsak-frontend/utils';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -88,12 +88,14 @@ interface OwnPropsUtenlandsOppholdField {
   readOnly: boolean;
 }
 
-type FormValues = {
+export type FormValues = {
   land: string;
+  periodeFom: string;
+  periodeTom: string;
 };
 
 interface StaticFunctions {
-  validate?: (values: FormValues[]) => any;
+  validate?: (values: FormValues[], options?: Options) => any;
 }
 
 /**
@@ -117,7 +119,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnPropsUtenlandsOppholdField> & 
   />
 );
 
-UtenlandsOppholdField.validate = (values: FormValues[], options = {}) => {
+UtenlandsOppholdField.validate = (values: FormValues[], options?: Options) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
