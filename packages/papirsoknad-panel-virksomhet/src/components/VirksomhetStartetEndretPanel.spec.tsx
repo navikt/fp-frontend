@@ -8,12 +8,12 @@ import { VirksomhetStartetEndretPanel } from './VirksomhetStartetEndretPanel';
 
 describe('<VirksomhetStartetEndretPanel>', () => {
   it('skal rendre visning korrekt når det ikke er varig endring eller nyoppstartet', () => {
-    const wrapper = shallow(<VirksomhetStartetEndretPanel readOnly={false} varigEndretEllerStartetSisteFireAr={false} />);
+    const wrapper = shallow(<VirksomhetStartetEndretPanel readOnly={false} form="test" varigEndretEllerStartetSisteFireAr={false} />);
     expect(wrapper.find(CheckboxField)).to.have.length(0);
   });
 
   it('skal rendre visning korrekt når virksomhet er varig endret i løpet av de fire siste årene', () => {
-    const wrapper = shallow(<VirksomhetStartetEndretPanel readOnly={false} varigEndretEllerStartetSisteFireAr />);
+    const wrapper = shallow(<VirksomhetStartetEndretPanel readOnly={false} form="test" varigEndretEllerStartetSisteFireAr />);
     expect(wrapper.find(CheckboxField)).to.have.length(3);
   });
 });

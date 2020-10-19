@@ -9,10 +9,13 @@ import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { InputField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 
-interface OwnProps {
-  harRegnskapsforer?: boolean;
+interface PureOwnProps {
   readOnly?: boolean;
   form: string;
+}
+
+interface MappedOwnProps {
+  harRegnskapsforer?: boolean;
 }
 
 /**
@@ -22,7 +25,7 @@ interface OwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
  * søker.
  */
-export const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
+export const VirksomhetRegnskapPanel: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   harRegnskapsforer,
   readOnly,
 }) => (
@@ -58,16 +61,15 @@ export const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
       </>
     )}
   </>
-
 );
-
-const mapStateToProps = (state: any, initialProps: OwnProps) => ({
-  harRegnskapsforer: formValueSelector(initialProps.form)(state, 'harRegnskapsforer'),
-});
 
 VirksomhetRegnskapPanel.defaultProps = {
   readOnly: true,
   harRegnskapsforer: false,
 };
+
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
+  harRegnskapsforer: formValueSelector(initialProps.form)(state, 'harRegnskapsforer'),
+});
 
 export default connect(mapStateToProps)(VirksomhetRegnskapPanel);

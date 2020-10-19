@@ -2,7 +2,7 @@ import React, { Component, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  arrayPush as dispatchArrayPush, arraySplice as dispatchArraySplice, Field, FieldArrayFieldsProps, FieldArrayMetaProps, formValueSelector,
+  arrayPush as dispatchArrayPush, arraySplice as dispatchArraySplice, Field, FieldArrayFieldsProps, FieldArrayMetaProps, FormAction, formValueSelector,
 } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -19,7 +19,7 @@ import RegistrerVirksomhetModalForm from './RegistrerVirksomhetModalForm';
 import styles from './registrerVirksomhetPanel.less';
 
 interface VirksomhetProps {
-  showRegistrerVirksomhetModal: (...args: any[]) => any;
+  showRegistrerVirksomhetModal: (index: number) => void;
   index: number;
 }
 
@@ -45,22 +45,32 @@ const renderVirksomhetsnavn: FunctionComponent<VirksomhetProps> = ({
   </>
 );
 
-interface OwnProps {
+interface PureOwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta: FieldArrayMetaProps;
   namePrefix: string;
   formatMessage: (...args: any[]) => any;
-  dispatchArrayPush: (...args: any[]) => any;
-  virksomheter?: {}[];
-  dispatchArraySplice: (...args: any[]) => any;
   form: string;
   name?: string;
   readOnly?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
+type Virksomhet = {
+
+}
+
+interface MappedOwnProps {
+  virksomheter?: Virksomhet[];
+}
+
+interface DispatchProps {
+  dispatchArrayPush: (form: string, field: string, value: any) => FormAction;
+  dispatchArraySplice: (form: string, field: string, index: number, removeNum: number, value: any) => FormAction;
+}
+
 interface OwnState {
-  editVirksomhet?: {};
+  editVirksomhet?: Virksomhet;
   editIndex: number;
 }
 
@@ -71,14 +81,14 @@ interface OwnState {
  * papirsøknad dersom søknad gjelder foreldrepenger og søker har arbeidet i egen virksomhet.
  * Viser registrerte virksomheter samt knapp for å legge til nye virksomheter.
  */
-export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
+export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwnProps & DispatchProps, OwnState> {
   static defaultProps = {
     readOnly: false,
     name: 'virksomheter',
     virksomheter: [],
   };
 
-  constructor(props: OwnProps) {
+  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps) {
     super(props);
     this.showRegistrerVirksomhetModal = this.showRegistrerVirksomhetModal.bind(this);
     this.hideRegistrerVirksomhetModal = this.hideRegistrerVirksomhetModal.bind(this);
@@ -91,7 +101,7 @@ export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
     };
   }
 
-  showRegistrerVirksomhetModal(index: number) {
+  showRegistrerVirksomhetModal(index?: number) {
     if (index !== null && index !== undefined && index > -1) {
       const { virksomheter } = this.props;
       this.setState({
@@ -113,9 +123,17 @@ export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
     });
   }
 
-  addVirksomhet(values: any, dispatch: any, {
+  addVirksomhet(_values, _dispatch, {
     valuesForRegisteredFieldsOnly,
-  }: any) {
+  }: {
+    valuesForRegisteredFieldsOnly: {
+      virksomhetRegistrertINorge?: boolean;
+      landJobberFra: string;
+      nyIArbeidslivetFom?: string;
+      varigEndringGjeldendeFom: string;
+      stillingsprosent?: string;
+    };
+  }) {
     const { editIndex: index } = this.state;
     const {
       form, namePrefix, name, dispatchArraySplice: splice, dispatchArrayPush: push,
@@ -135,7 +153,7 @@ export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
     this.hideRegistrerVirksomhetModal();
   }
 
-  removeVirksomhet(index: any) {
+  removeVirksomhet(index: number) {
     const {
       form, namePrefix, name, dispatchArraySplice: splice,
     } = this.props;
@@ -161,11 +179,11 @@ export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
             <React.Fragment key={1}>
               <Row key="VirksomhetHeader">
                 <Column xs="8">
-                  <Element><FormattedMessage id="Registrering.EgenVirksomhet.Name" /></Element>
+                  <Element><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" /></Element>
                 </Column>
               </Row>
               <hr className={styles.divider} />
-              {fields.map((virksomhet: any, index: any) => (
+              {fields.map((virksomhet: string, index: number) => (
                 <React.Fragment key={2}>
                   <Row key={`${virksomhet}.navn`}>
                     <Column xs="8">
@@ -211,7 +229,7 @@ export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
               className={styles.addCircleIcon}
               src={addCircleIcon}
             />
-            <Undertekst className={styles.imageText}><FormattedMessage id="Registrering.EgenVirksomhet.Add" /></Undertekst>
+            <Undertekst className={styles.imageText}><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" /></Undertekst>
           </div>
         </NavFieldGroup>
         <RegistrerVirksomhetModalForm
@@ -228,12 +246,12 @@ export class RegistrerVirksomhetPanel extends Component<OwnProps, OwnState> {
   }
 }
 
-const mapStateToProps = (state: any, initialProps: any) => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
   virksomheter: formValueSelector(initialProps.form)(state, initialProps.namePrefix)
     ? formValueSelector(initialProps.form)(state, initialProps.namePrefix).virksomheter : null,
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   ...bindActionCreators({
     dispatchArrayPush,
     dispatchArraySplice,

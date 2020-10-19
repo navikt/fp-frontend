@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
+import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { RegistrerVirksomhetModalForm } from './RegistrerVirksomhetModalForm';
@@ -10,6 +11,7 @@ import { RegistrerVirksomhetModalForm } from './RegistrerVirksomhetModalForm';
 describe('<RegistrerVirksomhetModalForm>', () => {
   it('skal rendre form for å registrere virksomhet i modalvisning', () => {
     const wrapper = shallowWithIntl(<RegistrerVirksomhetModalForm
+      {...reduxFormPropsMock}
       intl={intlMock}
       handleSubmit={sinon.spy()}
       closeEvent={sinon.spy()}
@@ -36,6 +38,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
 
   it('skal rendre lukket modal', () => {
     const wrapper = shallowWithIntl(<RegistrerVirksomhetModalForm
+      {...reduxFormPropsMock}
       intl={intlMock}
       handleSubmit={sinon.spy()}
       closeEvent={sinon.spy()}
@@ -50,6 +53,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
   it('skal kalle submit ved trykk på hovedknapp', () => {
     const handleSubmit = sinon.spy();
     const wrapper = shallowWithIntl(<RegistrerVirksomhetModalForm
+      {...reduxFormPropsMock}
       intl={intlMock}
       handleSubmit={handleSubmit}
       closeEvent={sinon.spy()}
@@ -65,6 +69,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
   it('skal kalle close ved trykk på knapp', () => {
     const closeEvent = sinon.spy();
     const wrapper = shallowWithIntl(<RegistrerVirksomhetModalForm
+      {...reduxFormPropsMock}
       intl={intlMock}
       handleSubmit={sinon.spy()}
       closeEvent={closeEvent}

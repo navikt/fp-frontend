@@ -6,9 +6,7 @@ import { VirksomhetRelasjonPanel } from './VirksomhetRelasjonPanel';
 
 describe('<VirksomhetRelasjonPanel>', () => {
   it('Skal rendre visning korrekt ved default props', () => {
-    const wrapper = shallow(<VirksomhetRelasjonPanel
-      intl={{}}
-    />);
+    const wrapper = shallow(<VirksomhetRelasjonPanel />);
 
     const undertekst = wrapper.find('Undertekst');
     expect(undertekst).to.have.length(1);

@@ -17,10 +17,20 @@ const naringsvirksomhetTypeOrder = {
   [naringsvirksomhetType.ANNEN]: 4,
 };
 
-interface OwnProps {
+const compare = (arg1, arg2) => {
+  if (arg1 > arg2) {
+    return 1;
+  }
+  return arg1 < arg2 ? -1 : 0;
+};
+
+interface PureOwnProps {
   readOnly: boolean;
-  naringvirksomhetTyper: KodeverkMedNavn[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface MappedOwnProps {
+  naringvirksomhetTyper: KodeverkMedNavn[];
 }
 
 /**
@@ -30,24 +40,24 @@ interface OwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
  * søker.
  */
-export const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
+export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   readOnly,
   naringvirksomhetTyper,
 }) => (
   <>
     <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
     <VerticalSpacer fourPx />
-    {naringvirksomhetTyper.sort((a, b) => naringsvirksomhetTypeOrder[a.kode] > naringsvirksomhetTypeOrder[b.kode])
-      .map((nv: any) => <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />)}
+    {naringvirksomhetTyper.sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
+      .map((nv) => <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />)}
   </>
 );
 
 const getFilteredNaringsvirksomhetTypes = createSelector(
-  [(ownProps: OwnProps) => ownProps.alleKodeverk[kodeverkTyper.VIRKSOMHET_TYPE]], (types = []) => types
+  [(ownProps: PureOwnProps) => ownProps.alleKodeverk[kodeverkTyper.VIRKSOMHET_TYPE]], (types = []) => types
     .filter((t) => t.kode !== naringsvirksomhetType.FRILANSER),
 );
 
-const mapStateToProps = (state: any, ownProps: OwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   naringvirksomhetTyper: getFilteredNaringsvirksomhetTypes(ownProps),
 });
 

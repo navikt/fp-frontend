@@ -15,16 +15,29 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-const countrySelectValues = (countryCodes: any) => countryCodes
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]) => countryCodes
   .map(({
     kode,
     navn,
-  }: any) => <option value={kode} key={kode}>{navn}</option>);
+  }) => <option value={kode} key={kode}>{navn}</option>);
 
-interface OwnProps {
-  virksomhetRegistrertINorge?: boolean;
+interface PureOwnProps {
   readOnly?: boolean;
-  countryCodes: KodeverkMedNavn[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  form: string;
+}
+
+interface MappedOwnProps {
+  virksomhetRegistrertINorge?: boolean;
+}
+
+type FormValues = {
+  fom?: string;
+  tom?: string;
+}
+
+interface StaticFunctions {
+  validate: (values: FormValues) => any;
 }
 
 /**
@@ -34,13 +47,13 @@ interface OwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
  * søker.
  */
-export const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> & StaticFunctions = ({
   virksomhetRegistrertINorge,
   readOnly,
-  countryCodes,
   intl,
+  alleKodeverk,
 }) => {
-  const sortedCountriesByName = countryCodes.slice().sort((a: any, b: any) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk[kodeverkTyper.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
     <>
@@ -95,8 +108,7 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps & Wrapped
                   readOnly={readOnly}
                   validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
                   name="fom"
-                  defaultValue={null}
-                  label={{ id: 'Registrering.InntektsgivendeArbeid.periodeFom' }}
+                  label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' }}
                 />
               </Column>
               <Column xs="3">
@@ -104,8 +116,7 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps & Wrapped
                   readOnly={readOnly}
                   validate={[hasValidDate]}
                   name="tom"
-                  defaultValue={null}
-                  label={{ id: 'Registrering.InntektsgivendeArbeid.periodeTom' }}
+                  label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' }}
                 />
               </Column>
             </Row>
@@ -120,17 +131,18 @@ VirksomhetIdentifikasjonPanel.defaultProps = {
   readOnly: true,
 };
 
-VirksomhetIdentifikasjonPanel.validate = (values: any) => {
+VirksomhetIdentifikasjonPanel.validate = (values: FormValues) => {
   const errors = {};
   if (values && values.fom && values.tom) {
-    errors.fom = validPeriodeFomTom(values.fom, values.tom);
+    return {
+      fom: validPeriodeFomTom(values.fom, values.tom),
+    };
   }
   return errors;
 };
 
-const mapStateToProps = (state: any, initialProps: any) => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
   virksomhetRegistrertINorge: formValueSelector(initialProps.form)(state, 'virksomhetRegistrertINorge'),
-  countryCodes: initialProps.alleKodeverk[kodeverkTyper.LANDKODER],
 });
 
 export default connect(mapStateToProps)(VirksomhetIdentifikasjonPanel);

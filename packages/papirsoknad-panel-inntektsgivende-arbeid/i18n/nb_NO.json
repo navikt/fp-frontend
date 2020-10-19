@@ -4,8 +4,6 @@
   "Registrering.InntektsgivendeArbeid.ArbeidIUtlandet.Title": "Inntektsgivende arbeid i utlandet",
   "Registrering.InntektsgivendeArbeid.ArbeidPaAmbassade": "Arbeid som ambassadepersonell i Norge",
   "Registrering.InntektsgivendeArbeid.Arbeidsgiver": "Arbeidsgiver",
-  "Registrering.InntektsgivendeArbeid.periodeTom": "T.o.m.",
-  "Registrering.InntektsgivendeArbeid.periodeFom": "F.o.m.",
   "Registrering.InntektsgivendeArbeid.Virksomhetsnummer": "Virksomhetsnummer",
   "Registrering.InntektsgivendeArbeid.Land": "Land",
   "Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold": "Legg til utenlandsk arbeidsforhold",
@@ -14,6 +12,8 @@
   "Registrering.InntektsgivendeArbeid.No": "Nei, arbeidsgiver og søker er ikke nære venner eller i familie",
   "Registrering.InntektsgivendeArbeid.Relasjon": "Relasjon",
   "Registrering.InntektsgivendeArbeid.Placeholder": "Placeholder - Oppslag av arbeidsforhold",
+  "Registrering.InntektsgivendeArbeid.periodeFom": "Til og med",
+  "Registrering.InntektsgivendeArbeid.periodeTom": "Fra og med",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

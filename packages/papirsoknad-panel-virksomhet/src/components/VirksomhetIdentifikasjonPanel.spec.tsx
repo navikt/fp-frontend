@@ -9,7 +9,8 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt ved default props', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       intl={intlMock}
-      countryCodes={[]}
+      alleKodeverk={{}}
+      form="test"
     />);
 
     const undertekst = wrapper.find('Undertekst');
@@ -32,8 +33,9 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt når virksomhet er registrert i Norge', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       virksomhetRegistrertINorge
-      countryCodes={[]}
+      alleKodeverk={{}}
       intl={intlMock}
+      form="test"
     />);
 
     const inputs = wrapper.find('InputField');
@@ -45,8 +47,9 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt når virksomhet ikke er registrert i Norge', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       virksomhetRegistrertINorge={false}
-      countryCodes={[]}
+      alleKodeverk={{}}
       intl={intlMock}
+      form="test"
     />);
 
     const select = wrapper.find('SelectField');

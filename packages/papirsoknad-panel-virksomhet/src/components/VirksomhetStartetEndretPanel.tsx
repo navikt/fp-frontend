@@ -11,12 +11,15 @@ import {
   CheckboxField, DatepickerField, InputField, RadioGroupField, RadioOption, TextAreaField,
 } from '@fpsak-frontend/form';
 
-interface OwnProps {
+interface PureOwnProps {
   readOnly: boolean;
+  form: string;
+}
+
+interface MappedOwnProps {
   varigEndretEllerStartetSisteFireAr?: boolean;
   harVarigEndring?: boolean;
   erNyIArbeidslivet?: boolean;
-  form: string;
 }
 
 /**
@@ -26,7 +29,7 @@ interface OwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
  * søker.
  */
-export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
+export const VirksomhetStartetEndretPanel: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   readOnly,
   varigEndretEllerStartetSisteFireAr,
   erNyIArbeidslivet,
@@ -101,7 +104,7 @@ VirksomhetStartetEndretPanel.defaultProps = {
   erNyIArbeidslivet: false,
 };
 
-const mapStateToProps = (state: any, initialProps: OwnProps) => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps):MappedOwnProps => ({
   varigEndretEllerStartetSisteFireAr: formValueSelector(initialProps.form)(state, 'varigEndretEllerStartetSisteFireAr'),
   harVarigEndring: formValueSelector(initialProps.form)(state, 'harVarigEndring'),
   erNyIArbeidslivet: formValueSelector(initialProps.form)(state, 'erNyIArbeidslivet'),

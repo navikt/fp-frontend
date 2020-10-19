@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { FormSection, formValueSelector, reduxForm } from 'redux-form';
+import {
+  FormSection, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -24,7 +26,6 @@ const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 interface OwnProps {
   showModal?: boolean;
   closeEvent: (...args: any[]) => any;
-  handleSubmit: (...args: any[]) => any;
   readOnly?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
@@ -36,7 +37,7 @@ interface OwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
  * søker.
  */
-export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
   showModal,
   closeEvent,
   handleSubmit,
@@ -64,14 +65,12 @@ export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedC
       <FormSection name={TYPE_VIRKSOMHET_PREFIX}>
         <VirksomhetTypeNaringPanel
           readOnly={readOnly}
-          form={REGISTRER_VIRKSOMHET_FORM_NAME}
-          namePrefix={TYPE_VIRKSOMHET_PREFIX}
           alleKodeverk={alleKodeverk}
         />
       </FormSection>
       <VirksomhetStartetEndretPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
       <VirksomhetRegnskapPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
-      <VirksomhetRelasjonPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
+      <VirksomhetRelasjonPanel readOnly={readOnly} />
       <VerticalSpacer sixteenPx />
       <Hovedknapp
         htmlType="button"
@@ -102,6 +101,7 @@ RegistrerVirksomhetModalForm.defaultProps = {
 
 const mapStateToProps = (state: any) => {
   const registeredFields = getRegisteredFields(REGISTRER_VIRKSOMHET_FORM_NAME)(state);
+  // @ts-ignore Fiks
   const registeredFieldNames = registeredFields ? Object.values(registeredFields).map((rf) => rf.name) : [];
   const valuesForRegisteredFieldsOnly = registeredFieldNames.length
     ? formValueSelector(REGISTRER_VIRKSOMHET_FORM_NAME)(state, ...registeredFieldNames)

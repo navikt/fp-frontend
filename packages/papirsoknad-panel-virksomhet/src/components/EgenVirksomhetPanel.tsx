@@ -19,10 +19,13 @@ const harArbeidetIEgenVirksomhetName = 'harArbeidetIEgenVirksomhet';
 const virksomhetsFieldArrayName = 'virksomheter';
 const EGEN_VIRKSOMHET_FORM_NAME_PREFIX = 'egenVirksomhet';
 
-interface OwnProps {
+interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   form: string;
   readOnly?: boolean;
+}
+
+interface MappedOwnProps {
   harArbeidetIEgenVirksomhet?: boolean;
 }
 
@@ -33,7 +36,7 @@ interface OwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger. Søker velger må oppgi om hen har arbdeidet i
  * egen virksomhet.
  */
-export const EgenVirksomhetPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const EgenVirksomhetPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
   readOnly,
   intl,
   form,
@@ -73,7 +76,7 @@ EgenVirksomhetPanel.defaultProps = {
   readOnly: true,
 };
 
-const mapStateToProps = (state: any, initialProps: OwnProps) => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
   harArbeidetIEgenVirksomhet: formValueSelector(initialProps.form)(state, EGEN_VIRKSOMHET_FORM_NAME_PREFIX)
     ? formValueSelector(initialProps.form)(state, EGEN_VIRKSOMHET_FORM_NAME_PREFIX).harArbeidetIEgenVirksomhet : null,
 });
