@@ -188,6 +188,7 @@ export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedO
           </Row>
           <FieldArray
             name="foedselsDato"
+            // @ts-ignore Fiks
             component={FodselsDatoFields}
             readOnly={readOnly}
             antallBarn={antallBarn}

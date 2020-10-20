@@ -22,6 +22,7 @@ describe('<PermisjonPanel>', () => {
       visFeilMelding={false}
       fulltUttak
       alleKodeverk={{}}
+      submitFailed={false}
     />);
     const fieldArray = wrapper.find(FieldArray);
     expect(fieldArray).has.length(1);
@@ -35,6 +36,7 @@ describe('<PermisjonPanel>', () => {
       visFeilMelding={false}
       fulltUttak
       alleKodeverk={{}}
+      submitFailed={false}
     />);
 
     const permisjonOverforingAvKvoterPanel = wrapper.find(PermisjonOverforingAvKvoterPanel);

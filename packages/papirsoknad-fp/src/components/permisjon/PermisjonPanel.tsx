@@ -31,6 +31,7 @@ interface PureOwnProps {
     permisjonsError?: string;
   };
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitFailed: boolean;
 }
 
 interface MappedOwnProps {
@@ -38,9 +39,13 @@ interface MappedOwnProps {
   visFeilMelding: boolean;
 }
 
-type FormValues = {
+type TidsromPermisjon = {
   fulltUttak: boolean;
 } & FormValuesOverforing & FormValuesPermisjon & FormValuesUtsettelse & FormValuesGradering & FormValuesOpphold;
+
+export type FormValues = {
+  [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: TidsromPermisjon;
+};
 
 interface StaticFunctions {
   buildInitialValues?: () => any;
@@ -131,7 +136,7 @@ PermisjonPanel.defaultProps = {
   error: { permisjonsError: undefined },
 };
 
-const permisjonErrors = (values: FormValues) => {
+const permisjonErrors = (values: TidsromPermisjon) => {
   const errors = PermisjonOverforingAvKvoterPanel.validate(values);
 
   const permisjonPeriodeValues = values ? values[permisjonPeriodeFieldArrayName] : null;
@@ -174,7 +179,7 @@ const validateXrossPeriodTypes = (errorArray: Periode[]) => {
   return false;
 };
 
-const overLappingError = (values: FormValues) => {
+const overLappingError = (values: TidsromPermisjon) => {
   if (values) {
     const permisjonPeriodeValues = values.fulltUttak ? values[permisjonPeriodeFieldArrayName] : [];
     const utsettelseperiodeValues = values.skalUtsette ? values[utsettelsePeriodeFieldArrayName] : [];

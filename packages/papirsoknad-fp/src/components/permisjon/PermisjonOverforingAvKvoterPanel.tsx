@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { formValueSelector, FieldArray } from 'redux-form';
@@ -27,7 +27,7 @@ const getText = (intl: IntlShape, kode: string, navn: string) => {
   return navn;
 };
 
-const mapArsaker = (arsaker: KodeverkMedNavn[], sokerErMor: boolean, intl: IntlShape) => arsaker.map(({
+const mapArsaker = (arsaker: KodeverkMedNavn[], sokerErMor: boolean, intl: IntlShape): ReactNode[] => arsaker.map(({
   kode,
   navn,
 }) => (!sokerErMor

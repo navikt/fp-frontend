@@ -29,7 +29,7 @@ import FodselPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-fodsel';
 
 import PermisjonRettigheterPanel from './permisjon/PermisjonRettigheterPanel';
 import DekningsgradPanel from './dekningsgrad/DekningsgradPanel';
-import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './permisjon/PermisjonPanel';
+import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues as FormValuesPermisjon } from './permisjon/PermisjonPanel';
 import BekreftelsePanel from './bekreftelse/BekreftelsePanel';
 
 const FORELDREPENGER_FORM_NAME = 'ForeldrepengerForm';
@@ -47,7 +47,7 @@ interface PureOwnProps {
 type FormValues = {
   rettigheter?: string;
   foedselsDato?: string;
-} & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues;
+} & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues & FormValuesPermisjon;
 
 interface MappedOwnProps {
   valuesForRegisteredFieldsOnly: FormValues;
@@ -126,6 +126,7 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
           soknadData={soknadData}
           form={form}
           readOnly={readOnly}
+          // @ts-ignore fiks
           error={error}
           submitFailed={submitFailed}
           sokerHarAleneomsorg={sokerHarAleneomsorg}

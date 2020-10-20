@@ -90,7 +90,7 @@ export type FormValues = {
   periodeFom: string;
   periodeTom: string;
   flerbarnsdager?: boolean;
-  morsAktivitet?: boolean;
+  morsAktivitet?: string;
   harSamtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
 }
