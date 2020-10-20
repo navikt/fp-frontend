@@ -172,10 +172,12 @@ describe('<OppholdINorgePanel>', () => {
         const errorsWithInvalidDates = OppholdINorgePanel.validate({
           harFremtidigeOppholdUtenlands: true,
           fremtidigeOppholdUtenlands: [periode],
+          mottattDato: '2019-02-01',
         });
         const errorsWithValidDates = OppholdINorgePanel.validate({
           harFremtidigeOppholdUtenlands: true,
           fremtidigeOppholdUtenlands: [periode],
+          mottattDato: '2019-01-01',
         });
 
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('array');

@@ -35,6 +35,7 @@ export type FormValues = {
   harFremtidigeOppholdUtenlands?: boolean;
   tidligereOppholdUtenlands?: FormValuesFieldArray[];
   fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
+  mottattDato?: string;
 };
 
 interface StaticFunctions {
@@ -159,7 +160,7 @@ OppholdINorgePanel.validate = (values: FormValues) => {
   if (values.harFremtidigeOppholdUtenlands === undefined) {
     errors.harFremtidigeOppholdUtenlands = isRequiredMessage();
   } else if (values.harFremtidigeOppholdUtenlands) {
-    errors.fremtidigeOppholdUtenlands = UtenlandsOppholdField.validate(values.fremtidigeOppholdUtenlands);
+    errors.fremtidigeOppholdUtenlands = UtenlandsOppholdField.validate(values.fremtidigeOppholdUtenlands, { tidligstDato: values.mottattDato });
   }
   return errors;
 };

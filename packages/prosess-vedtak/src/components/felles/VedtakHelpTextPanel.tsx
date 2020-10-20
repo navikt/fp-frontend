@@ -42,7 +42,7 @@ const VedtakHelpTextPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
         <Alertstripe type="info">
           <Normaltekst><FormattedMessage id="VedtakHelpTextPanel.Vurder" /></Normaltekst>
           <ul>
-            {helpTexts.map((text) => <li><Normaltekst>{text}</Normaltekst></li>)}
+            {helpTexts.map((text) => <li key={text}><Normaltekst>{text}</Normaltekst></li>)}
           </ul>
         </Alertstripe>
       </>
