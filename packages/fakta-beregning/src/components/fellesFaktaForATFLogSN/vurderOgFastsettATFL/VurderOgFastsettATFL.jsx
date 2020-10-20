@@ -18,7 +18,7 @@ import VurderMottarYtelseForm from './forms/VurderMottarYtelseForm';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 import {
   skalRedigereInntektForAndel, mapAndelToField, erOverstyring, erOverstyringAvBeregningsgrunnlag,
-  getSkalRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME, skalFastsetteInntektForSN,
+  getSkalRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME,
 } from '../BgFordelingUtils';
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
 import InntektFieldArray from '../InntektFieldArray';
@@ -316,16 +316,8 @@ const getManglerInntektsmelding = createSelector([(ownProps) => ownProps.faktaOm
   });
 
 const getSkalViseTabell = createSelector([
-  (state, ownProps) => ownProps.tilfeller,
-  (state, ownProps) => ownProps.beregningsgrunnlag,
-  skalFastsetteInntektForSN],
-(tilfeller, beregningsgrunnlag, skalFastsetteSN) => {
-  if (beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel
-    .some((andel) => andel.aktivitetStatus.kode !== aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE)) {
-    return !tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE);
-  }
-  return skalFastsetteSN;
-});
+  (state, ownProps) => ownProps.tilfeller],
+(tilfeller) => !tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE));
 
 const mapStateToProps = (state, ownProps) => ({
   erOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
