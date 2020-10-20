@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import ForeldrepengerForm from './components/ForeldrepengerForm';
 import messages from '../i18n/nb_NO.json';
@@ -13,18 +14,23 @@ const intl = createIntl({
   messages,
 }, cache);
 
-type Props = {
-    onSubmitUfullstendigsoknad: (...args: any[]) => any;
-    onSubmit: (...args: any[]) => any;
-    readOnly: boolean;
-    soknadData: any; // TODO: PropTypes.instanceOf(SoknadData)
-    alleKodeverk: {};
-    fagsakPerson: {};
-};
+interface OwnProps {
+  onSubmitUfullstendigsoknad: () => Promise<any>;
+  onSubmit: (_formValues, _dispatch, values: any) => Promise<any>;
+  readOnly: boolean;
+  soknadData: SoknadData;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  fagsakPerson: FagsakPerson;
+}
 
-const ForeldrepengerPapirsoknadIndex = ({
-  onSubmitUfullstendigsoknad, onSubmit, readOnly, soknadData, alleKodeverk, fagsakPerson,
-}: Props) => (
+const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+  onSubmitUfullstendigsoknad,
+  onSubmit,
+  readOnly,
+  soknadData,
+  alleKodeverk,
+  fagsakPerson,
+}) => (
   <RawIntlProvider value={intl}>
     <ForeldrepengerForm
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
