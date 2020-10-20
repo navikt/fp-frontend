@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { formValueSelector, FieldArray } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
@@ -14,6 +14,7 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { hasValidPeriodIncludingOtherErrors } from '@fpsak-frontend/utils';
 
 import RenderOverforingAvKvoterFieldArray from './RenderOverforingAvKvoterFieldArray';
+import useIntl from '../../useIntl';
 
 import styles from './permisjonPanel.less';
 

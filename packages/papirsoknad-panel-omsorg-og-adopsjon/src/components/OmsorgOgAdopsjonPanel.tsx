@@ -1,6 +1,6 @@
 import React, { Component, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { FieldArray, FieldArrayFieldsProps, formValueSelector } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Column, Container, Row } from 'nav-frontend-grid';
@@ -16,6 +16,7 @@ import {
 } from '@fpsak-frontend/utils';
 import { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 
+import useIntl from '../useIntl';
 import styles from './omsorgOgAdopsjonPanel.less';
 
 const MIN_ANTALL_BARN = 1;

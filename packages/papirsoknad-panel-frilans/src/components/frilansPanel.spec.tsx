@@ -16,8 +16,6 @@ describe('<FrilansPanel>', () => {
 
     const options = wrapper.find(RadioOption);
     expect(options).has.length(6);
-    expect(options.first().prop('label')).is.eql('Registrering.Frilans.No');
-    expect(options.at(1).prop('label')).is.eql('Registrering.Frilans.Yes');
   });
 
   it('Skal rendre panel ved readOnly', () => {

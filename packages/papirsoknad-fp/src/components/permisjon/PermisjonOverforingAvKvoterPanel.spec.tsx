@@ -1,12 +1,15 @@
 import React from 'react';
 import { expect } from 'chai';
 import { FieldArray } from 'redux-form';
+import sinon from 'sinon';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
 import { PermisjonOverforingAvKvoterPanelImpl as PermisjonOverforingAvKvoterPanel } from './PermisjonOverforingAvKvoterPanel';
+import * as useIntl from '../../useIntl';
 
 const overtaKvoteReasons = [{
   navn: 'Den andre forelderen er innlagt i helseinstitusjon',
@@ -21,6 +24,15 @@ const overtaKvoteReasons = [{
 const readOnly = false;
 
 describe('<PermisjonOverforingAvKvoterPanel>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise årsaker for overføring i nedtrekksliste når søker ikke er mor', () => {
     const wrapper = shallowWithIntl(<PermisjonOverforingAvKvoterPanel
       overtaKvoteReasons={overtaKvoteReasons}

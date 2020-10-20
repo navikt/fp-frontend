@@ -4,8 +4,9 @@ import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-virksomhet';
 import { RegistrerVirksomhetModalForm } from './RegistrerVirksomhetModalForm';
 
 describe('<RegistrerVirksomhetModalForm>', () => {

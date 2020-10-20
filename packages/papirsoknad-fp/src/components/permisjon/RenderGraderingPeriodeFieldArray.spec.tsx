@@ -2,7 +2,6 @@ import React from 'react';
 import { expect } from 'chai';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   CheckboxField, DatepickerField, DecimalField, InputField, SelectField,
 } from '@fpsak-frontend/form';

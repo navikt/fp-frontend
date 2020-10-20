@@ -2,7 +2,9 @@ import React from 'react';
 import moment from 'moment';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import {
@@ -14,6 +16,7 @@ import {
   isRequiredMessage,
 } from '@fpsak-frontend/utils';
 
+import * as useIntl from '../useIntl';
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';
 
 describe('<OppholdINorgePanel>', () => {
@@ -29,6 +32,15 @@ describe('<OppholdINorgePanel>', () => {
   const alleKodeverk = {
     [kodeverkTyper.LANDKODER]: countryCodes,
   };
+
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
 
   describe('validate', () => {
     it('skal validere at opphold i Norge nå er besvart', () => {
@@ -169,7 +181,7 @@ describe('<OppholdINorgePanel>', () => {
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('array');
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).to.not.exist;
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.be.an('array');
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage(1)[0].id);
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage(0)[0].id);
 
         expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
       });

@@ -76,16 +76,16 @@ export class MockFields {
     this.push = () => array.push(formatName(array.length));
     this.pop = array.pop.bind(array);
     this.map = array.map.bind(array);
-    this.forEach = array.forEach.bind(array);
-    this.getAll = array.getAll.bind(array);
+    /* this.forEach = array.forEach.bind(array);
+     this.getAll = array.getAll.bind(array);
     this.removeAll = array.removeAll.bind(array);
-    this.insert = array.insert.bind(array);
+     this.insert = array.insert.bind(array);
     this.name = array.name.bind(array);
     this.shift = array.shift.bind(array);
     this.splice = array.splice.bind(array);
     this.swap = array.swap.bind(array);
     this.move = array.move.bind(array);
-    this.unshift = array.unshift.bind(array);
+    this.unshift = array.unshift.bind(array); */
 
     this.get = (index) => array[index];
 

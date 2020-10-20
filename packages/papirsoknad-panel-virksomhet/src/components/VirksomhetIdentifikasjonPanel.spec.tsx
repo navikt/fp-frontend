@@ -1,15 +1,19 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-virksomhet';
 import { VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
 
 describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt ved default props', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       intl={intlMock}
-      alleKodeverk={{}}
+      alleKodeverk={{
+        [kodeverkTyper.LANDKODER]: [],
+      }}
       form="test"
     />);
 
@@ -33,7 +37,9 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt når virksomhet er registrert i Norge', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       virksomhetRegistrertINorge
-      alleKodeverk={{}}
+      alleKodeverk={{
+        [kodeverkTyper.LANDKODER]: [],
+      }}
       intl={intlMock}
       form="test"
     />);
@@ -47,7 +53,9 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt når virksomhet ikke er registrert i Norge', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       virksomhetRegistrertINorge={false}
-      alleKodeverk={{}}
+      alleKodeverk={{
+        [kodeverkTyper.LANDKODER]: [],
+      }}
       intl={intlMock}
       form="test"
     />);

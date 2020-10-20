@@ -8,16 +8,27 @@ import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-e
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
+import * as useIntl from '../useIntl';
 import { FodselsDatoFields, OmsorgOgAdopsjonPanelImpl } from './OmsorgOgAdopsjonPanel';
 
 chai.use(sinonChai);
 
 describe('<OmsorgOgAdopsjonPanel>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise komponent med to datepickers når årsakstype er adopsjon', () => {
     const wrapper = shallowWithIntl(<OmsorgOgAdopsjonPanelImpl
       form="form"
-      intl={intlMock}
+      namePrefix="test"
       familieHendelseType={familieHendelseType.ADOPSJON}
+      isForeldrepengerFagsak
       isForeldrepenger
     />);
     const overtakelseDatepicker = wrapper.find('DatepickerField');
@@ -29,8 +40,9 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
   it('skal vise komponent med en datepicker når årsakstype er omsorg', () => {
     const wrapper = shallowWithIntl(<OmsorgOgAdopsjonPanelImpl
       form="form"
-      intl={intlMock}
+      namePrefix="test"
       familieHendelseType={familieHendelseType.OMSORG}
+      isForeldrepengerFagsak
       isForeldrepenger
     />);
     const overtakelseDatepicker = wrapper.find('DatepickerField');
@@ -42,7 +54,6 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       const wrapper = shallow(<FodselsDatoFields
         fields={new MockFields('barn', 2)}
         antallBarn={2}
-        familieHendelseType={familieHendelseType.ADOPSJON}
       />);
 
       const datepicker = wrapper.find('DatepickerField');

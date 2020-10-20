@@ -1,9 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
 
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-tilleggsopplysninger';
 import { TilleggsopplysningerPanel } from './TilleggsopplysningerPanel';
 
 describe('<TilleggsopplysningerPanel>', () => {

@@ -4,9 +4,10 @@ import { expect } from 'chai';
 import ModalWrapper from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import Image from '@fpsak-frontend/shared-components/src/Image';
 
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-lagre-soknad';
 import { LukkPapirSoknadModal } from './LukkPapirsoknadModal';
 
 describe('<LukkPapirSoknadModal>', () => {
@@ -27,7 +28,7 @@ describe('<LukkPapirSoknadModal>', () => {
     expect(modal).to.have.length(1);
     expect(modal.prop('isOpen')).is.true;
     expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('ModalLukkPapirSoknad.ModalDescription');
+    expect(modal.prop('contentLabel')).to.eql('Registrering av søknaden avsluttes');
     expect(modal.prop('onRequestClose')).to.eql(cancelEventCallback);
     expect(modal.prop('onAfterOpen')).is.not.null;
 
