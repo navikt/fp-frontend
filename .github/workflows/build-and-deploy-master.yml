@@ -18,26 +18,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Lukk deployment-issues
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: ['bygg']
-            }).then(response => {
-              response.data.forEach(issue => {
-                github.issues.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  state: 'closed'
-                });
-              });
-            });
 
       - name: Sjekk ut kode
         uses: actions/checkout@v2
@@ -80,6 +60,29 @@ jobs:
           docker build --pull --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
           echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_USERNAME} --password-stdin
           docker push ${IMAGE_BASE}
+
+      - name: Lukk deployment-issues
+        if: success()
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['bygg']
+            }).then(response => {
+              response.data.forEach(issue => {
+                if (issue.tags == dev) {
+                github.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+              });
+            });
 
       - name: Opprett issue, trigg deploy til dev-fss
         if: success()
