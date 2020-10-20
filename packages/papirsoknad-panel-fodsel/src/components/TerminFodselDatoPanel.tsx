@@ -36,7 +36,7 @@ interface MappedOwnProps {
   erBarnetFodt?: boolean;
 }
 
-type FormValues = {
+export type FormValues = {
   termindato?: string;
   terminbekreftelseDato?: string;
   antallBarnFraTerminbekreftelse?: number;

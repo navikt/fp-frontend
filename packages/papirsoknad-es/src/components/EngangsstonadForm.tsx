@@ -5,19 +5,20 @@ import { createSelector } from 'reselect';
 
 import { isEqual, omit } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
 import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
+import { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 
-import RegistreringAdopsjonOgOmsorgGrid from './RegistreringAdopsjonOgOmsorgGrid';
-import RegistreringFodselGrid from './RegistreringFodselGrid';
+import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
+import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './RegistreringFodselGrid';
 
 export const ENGANGSSTONAD_FORM_NAME = 'EngangsstonadForm';
 
 const buildInitialValues = (soknadData: SoknadData) => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
-    return { ...RegistreringFodselGrid.initialValues };
+    return { ...RegistreringFodselGrid.buildInitialValues() };
   }
   if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
     return { ...RegistreringAdopsjonOgOmsorgGrid.buildInitialValues() };
@@ -27,7 +28,7 @@ const buildInitialValues = (soknadData: SoknadData) => {
 
 interface PureOwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  readOnly?: boolean;
+  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   fagsakPerson: FagsakPerson;
@@ -43,10 +44,6 @@ interface MappedOwnProps {
  * Redux-form-komponent for registrering av papirsøknad for engangsstønad.
  */
 export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
-  static defaultProps = {
-    readOnly: true,
-  };
-
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
     const { soknadData } = this.props;
@@ -77,7 +74,6 @@ export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps &
             && (
             <RegistreringFodselGrid
               soknadData={soknadData}
-              onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
               readOnly={readOnly}
               form={form}
               alleKodeverk={alleKodeverk}
@@ -87,7 +83,6 @@ export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps &
             && (
               <RegistreringAdopsjonOgOmsorgGrid
                 soknadData={soknadData}
-                onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
                 readOnly={readOnly}
                 form={form}
                 alleKodeverk={alleKodeverk}
@@ -99,16 +94,12 @@ export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps &
   }
 }
 
-type FormValues = {
-
-}
-
 const getValidation = (soknadData: SoknadData, sokerPersonnummer: string) => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
-    return (values: FormValues) => RegistreringFodselGrid.validate(values, sokerPersonnummer);
+    return (values: FormValuesFodsel) => RegistreringFodselGrid.validate(values, sokerPersonnummer);
   }
   if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
-    return (values: FormValues) => RegistreringAdopsjonOgOmsorgGrid.validate(values, sokerPersonnummer);
+    return (values: FormValuesAdopsjon) => RegistreringAdopsjonOgOmsorgGrid.validate(values, sokerPersonnummer);
   }
   return null;
 };
@@ -131,6 +122,7 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const validate = getValidation(ownProps.soknadData, sokerPersonnummer);
   return (state: any) => {
     const registeredFields = getRegisteredFields(ENGANGSSTONAD_FORM_NAME)(state);
+    // @ts-ignore fiks
     const registeredFieldNames = Object.values(registeredFields).map((rf) => rf.name);
     const valuesForRegisteredFieldsOnly = registeredFieldNames.length
       ? transformRootValues(state, registeredFieldNames)

@@ -10,6 +10,7 @@ import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-pa
 import RettigheterPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 import OmsorgOgAdopsjonPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
 import AnnenForelderPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
+import FodselPapirsoknadIndex, { FormValues as FodselFormValues } from '@fpsak-frontend/papirsoknad-panel-fodsel';
 
 /*
  * RegistreringFodselForm
@@ -21,12 +22,22 @@ const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
 interface OwnProps {
   form: string;
-  readOnly?: boolean;
+  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const RegistreringFodselGrid: FunctionComponent<OwnProps> = ({
+export type FormValues = {
+  rettigheter: string;
+  foedselsData: string;
+} & OppholdFormValues & FodselFormValues;
+
+interface StaticFunctions {
+  buildInitialValues?: () => any;
+  validate?: (values: FormValues, sokerPersonnummer: string) => any;
+}
+
+const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   form,
   soknadData,
@@ -52,7 +63,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> = ({
           />
         </FormSection>
         )}
-      <TerminFodselDatoPanel readOnly={readOnly} form={form} />
+      <FodselPapirsoknadIndex readOnly={readOnly} form={form} />
       <FormSection name={annenForelderFormNamePrefix}>
         <AnnenForelderPapirsoknadIndex
           soknadData={soknadData}
@@ -66,23 +77,14 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> = ({
   </Row>
 );
 
-RegistreringFodselGrid.defaultProps = {
-  readOnly: true,
-};
-
-RegistreringFodselGrid.initialValues = {
+RegistreringFodselGrid.buildInitialValues = () => ({
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   [OMSORG_FORM_NAME_PREFIX]: {},
-};
+});
 
-type FormValues = {
-  rettigheter: {};
-  foedselsData: {};
-}
-
-RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: any) => ({
+RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string) => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
-  ...TerminFodselDatoPanel.validate(values),
+  ...FodselPapirsoknadIndex.validate(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.rettigheter, values.foedselsDato),
   [annenForelderFormNamePrefix]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[annenForelderFormNamePrefix]),
 });

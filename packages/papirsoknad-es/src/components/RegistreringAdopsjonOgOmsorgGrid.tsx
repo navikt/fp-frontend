@@ -15,9 +15,19 @@ const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
 interface OwnProps {
   form: string;
-  readOnly?: boolean;
+  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+export type FormValues = {
+  rettigheter: string;
+  foedselsDato: string;
+} & OppholdFormValues;
+
+interface StaticFunctions {
+  buildInitialValues?: () => any;
+  validate?: (values: FormValues, sokerPersonnummer: string) => any;
 }
 
 /*
@@ -25,7 +35,7 @@ interface OwnProps {
  *
  * Form som brukes vid adopsjon for tilleggsopplysninger. Containerkomponent for AnnenForelderForm
  */
-const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> = ({
+const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   form,
   soknadData,
@@ -60,19 +70,10 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> = ({
   </Row>
 );
 
-RegistreringAdopsjonOgOmsorgGrid.defaultProps = {
-  readOnly: true,
-};
-
 RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
 });
-
-type FormValues = {
-  rettigheter: {};
-  foedselsData: {};
-}
 
 RegistreringAdopsjonOgOmsorgGrid.validate = (values: FormValues, sokerPersonnummer: string) => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
