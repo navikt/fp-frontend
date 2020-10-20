@@ -7,6 +7,10 @@
   "dependencies": {
     "@fpsak-frontend/shared-components": "1.0.0",
     "moment": "^2.29.1",
+    "nav-frontend-alertstriper": "3.0.27",
+    "nav-frontend-alertstriper-style": "2.0.21",
+    "nav-frontend-skjema": "3.0.24",
+    "nav-frontend-skjema-style": "2.0.15",
     "nav-frontend-typografi": "2.0.29",
     "nav-frontend-typografi-style": "1.0.25",
     "react": "^16.13.1",
