@@ -8,6 +8,13 @@
   "Registrering.TheOtherParent.Title": "Den andre forelderen",
   "Registrering.TheOtherParent.Fodselsnummer": "Fødselsnummer/D-nummer",
 
+  "Registrering.Permisjon.SøkerHarAleneomsorg": "Har søker aleneomsorg for barnet?",
+  "Registrering.Permisjon.SøkerHarAleneomsorg.Yes": "Ja",
+  "Registrering.Permisjon.SøkerHarAleneomsorg.No": "Nei",
+  "Registrering.Permisjon.HarRettPaForeldrepenger": "Har den andre forelderen rett på foreldrepenger?",
+  "Registrering.Permisjon.HarRettPaForeldrepenger.Yes": "Ja",
+  "Registrering.Permisjon.HarRettPaForeldrepenger.No": "Nei",
+
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
   "ValidationMessage.MaxLength": "Du kan skrive maksimalt {length} tegn",

@@ -5,10 +5,6 @@
   "Registrering.Dekningsgrad.prosent.80": "80 prosent",
   "Registrering.Dekningsgrad.prosent.100": "100 prosent",
 
-  "Registrering.Permisjon.SøkerHarAleneomsorg": "Har søker aleneomsorg for barnet?",
-  "Registrering.Permisjon.SøkerHarAleneomsorg.Yes": "Ja",
-  "Registrering.Permisjon.SøkerHarAleneomsorg.No": "Nei",
-
   "Registrering.Permisjon.Title": "Tidsrom for permisjon",
   "Registrering.Permisjon.PermisjonForFodsel": "Permisjon før fødsel",
   "Registrering.Permisjon.PerioderForeldrepenger": "Perioder med permisjon med foreldrepenger",
@@ -38,9 +34,6 @@
   "Registrering.Permisjon.Fellesperiode.periodeTom": "Fellesperiode T.o.m.",
   "Registrering.Permisjon.Fellesperiode.morsAktivitet": "Mors aktivitet",
   "Registrering.Permisjon.MorBorSammenFaren": "Mor bor sammen med faren til barnet",
-  "Registrering.Permisjon.HarRettPaForeldrepenger": "Har den andre forelderen rett på foreldrepenger?",
-  "Registrering.Permisjon.HarRettPaForeldrepenger.Yes": "Ja",
-  "Registrering.Permisjon.HarRettPaForeldrepenger.No": "Nei",
   "Registrering.Permisjon.Mor.Yes": "Ja",
   "Registrering.Permisjon.Mor.No": "Nei",
   "Registrering.Permisjon.HarSamtidigUttak": "Samtidig uttak",

@@ -161,6 +161,9 @@ const mapStateToProps = (state: any, initialProps: PureOwnPropsAnnenForelderPane
 const AnnenForelderPanel = connect(mapStateToProps)(AnnenForelderPanelImpl);
 
 AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) => {
+  if (!values) {
+    return undefined;
+  }
   if (values.kanIkkeOppgiAnnenForelder) {
     const begrunnelse = values.kanIkkeOppgiBegrunnelse || { arsak: undefined };
     return {

@@ -47,6 +47,6 @@ const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   </RawIntlProvider>
 );
 
-AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) => AnnenForelderPanel.validate(sokerPersonnummer, values);
+AnnenForelderPapirsoknadIndex.validate = (sokerPersonnummer: string, values: FormValues) => AnnenForelderPanel.validate(sokerPersonnummer, values);
 
 export default AnnenForelderPapirsoknadIndex;
