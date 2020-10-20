@@ -20,7 +20,7 @@ const buildInitialValues = (soknadData: SoknadData) => {
     return { ...RegistreringFodselGrid.initialValues };
   }
   if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
-    return { ...RegistreringAdopsjonOgOmsorgGrid.initialValues };
+    return { ...RegistreringAdopsjonOgOmsorgGrid.buildInitialValues() };
   }
   return {};
 };

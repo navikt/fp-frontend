@@ -24,7 +24,6 @@ interface OwnProps {
  * RegistreringAdopsjonOgOmsorgGrid
  *
  * Form som brukes vid adopsjon for tilleggsopplysninger. Containerkomponent for AnnenForelderForm
- *
  */
 const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> = ({
   readOnly,
@@ -65,12 +64,17 @@ RegistreringAdopsjonOgOmsorgGrid.defaultProps = {
   readOnly: true,
 };
 
-RegistreringAdopsjonOgOmsorgGrid.initialValues = {
+RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-};
+});
 
-RegistreringAdopsjonOgOmsorgGrid.validate = (values: any, sokerPersonnummer: any) => ({
+type FormValues = {
+  rettigheter: {};
+  foedselsData: {};
+}
+
+RegistreringAdopsjonOgOmsorgGrid.validate = (values: FormValues, sokerPersonnummer: string) => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.rettigheter, values.foedselsDato),
   [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),

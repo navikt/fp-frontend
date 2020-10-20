@@ -1,18 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import EngangsstonadForm from './components/EngangsstonadForm';
-import messages from '../i18n/nb_NO.json';
-
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
@@ -31,16 +22,14 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   fagsakPerson,
 }) => (
-  <RawIntlProvider value={intl}>
-    <EngangsstonadForm
-      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-      onSubmit={onSubmit}
-      readOnly={readOnly}
-      soknadData={soknadData}
-      alleKodeverk={alleKodeverk}
-      fagsakPerson={fagsakPerson}
-    />
-  </RawIntlProvider>
+  <EngangsstonadForm
+    onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+    onSubmit={onSubmit}
+    readOnly={readOnly}
+    soknadData={soknadData}
+    alleKodeverk={alleKodeverk}
+    fagsakPerson={fagsakPerson}
+  />
 );
 
 export default EngangsstonadPapirsoknadIndex;
