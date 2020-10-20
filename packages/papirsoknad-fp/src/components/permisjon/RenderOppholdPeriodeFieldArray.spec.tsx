@@ -3,14 +3,12 @@ import { expect } from 'chai';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
 import { RenderOppholdPeriodeFieldArray } from './RenderOppholdPeriodeFieldArray';
 
-const oppholdsReasons = [{ navn: 'Grunn1', kode: 'Grunn1' }];
-const uttaksKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE' }];
+const oppholdsReasons = [{ navn: 'Grunn1', kode: 'Grunn1', kodeverk: '' }];
 
 const fields = new MockFields('perioder', 1);
 
@@ -22,8 +20,6 @@ describe('<RenderOppholdPeriodeFieldArray>', () => {
       fields={fields}
       meta={metaMock}
       oppholdsReasons={oppholdsReasons}
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'uttaksKvoter' does not exist on type 'In... Remove this comment to see the full error message
-      uttaksKvoter={uttaksKvoter}
       readOnly={false}
     />);
 

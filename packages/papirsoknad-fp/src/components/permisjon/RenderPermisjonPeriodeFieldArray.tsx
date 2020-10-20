@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { FieldArrayFieldsProps, FieldArrayMetaProps, getFormValues } from 'redux-form';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -21,17 +21,13 @@ import {
   maxValue,
   required,
 } from '@fpsak-frontend/utils';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__prop-types... Remove this comment to see the full error message
-import { kodeverkPropType } from '@fpsak-frontend/prop-types';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
   CheckboxField, DatepickerField, DecimalField, SelectField,
 } from '@fpsak-frontend/form';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './renderPermisjonPeriodeFieldA... Remove this comment to see the full error message
 import styles from './renderPermisjonPeriodeFieldArray.less';
 
 const maxValue100 = maxValue(100);
@@ -42,27 +38,27 @@ export const gyldigeUttakperioder = [uttakPeriodeType.FELLESPERIODE,
   uttakPeriodeType.FORELDREPENGER,
   uttakPeriodeType.MODREKVOTE];
 
-const mapPeriodeTyper = (typer: any) => typer
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
   .filter(({
     kode,
-  }: any) => gyldigeUttakperioder.includes(kode))
+  }) => gyldigeUttakperioder.includes(kode))
   .map(({
     kode,
     navn,
-  }: any) => <option value={kode} key={kode}>{navn}</option>);
+  }) => <option value={kode} key={kode}>{navn}</option>);
 
-const mapAktiviteter = (aktiviteter: any) => aktiviteter
+const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]) => aktiviteter
   .map(({
     kode,
     navn,
-  }: any) => <option value={kode} key={kode}>{navn}</option>);
+  }) => <option value={kode} key={kode}>{navn}</option>);
 
 export const periodsWithNoMorsAktivitet = [
   uttakPeriodeType.FEDREKVOTE,
   uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   uttakPeriodeType.MODREKVOTE];
 
-const shouldDisableSelect = (selectedPeriodeTyper: any, index: any) => {
+const shouldDisableSelect = (selectedPeriodeTyper: string[], index: number) => {
   if (typeof selectedPeriodeTyper === 'undefined' || typeof selectedPeriodeTyper[index] === 'undefined') {
     return true;
   }
@@ -71,17 +67,38 @@ const shouldDisableSelect = (selectedPeriodeTyper: any, index: any) => {
     || selectedPeriodeTyper[index] === '';
 };
 
-const getLabel = (erForsteRad: any, id: any) => (erForsteRad ? { id } : '');
+const getLabel = (erForsteRad: boolean, id: string) => (erForsteRad ? { id } : '');
 
-type RenderPermisjonPeriodeFieldArrayProps = {
-    fields: {};
-    meta: {};
-    readOnly: boolean;
-    periodeTyper: any; // TODO: kodeverkPropType
-    morsAktivitetTyper: any; // TODO: kodeverkPropType
-    sokerErMor: boolean;
-    selectedPeriodeTyper: string[];
-};
+interface PureOwnProps {
+  fields: FieldArrayFieldsProps<any>;
+  meta: FieldArrayMetaProps;
+  readOnly: boolean;
+  sokerErMor: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  periodePrefix: string;
+  namePrefix: string;
+}
+
+interface MappedOwnProps {
+  periodeTyper: KodeverkMedNavn[];
+  morsAktivitetTyper: KodeverkMedNavn[];
+  selectedPeriodeTyper: string[];
+}
+
+export type FormValues = {
+  periodeType: string;
+  periodeFom: string;
+  periodeTom: string;
+  flerbarnsdager?: boolean;
+  morsAktivitet?: boolean;
+  harSamtidigUttak?: boolean;
+  samtidigUttaksprosent?: number;
+}
+
+interface StaticFunctions {
+  validate?: (values: FormValues[]) => any;
+  transformValues?: (values: FormValues[]) => any;
+}
 
 /**
  *  RenderPermisjonPeriodeFieldArray
@@ -89,18 +106,22 @@ type RenderPermisjonPeriodeFieldArrayProps = {
  * Presentasjonskomponent: Viser inputfelter for dato for bestemmelse av perioder med permijon.
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-export const RenderPermisjonPeriodeFieldArray = ({
-  fields, meta, periodeTyper, morsAktivitetTyper, sokerErMor, readOnly, selectedPeriodeTyper,
-}: RenderPermisjonPeriodeFieldArrayProps) => {
+export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+  fields,
+  meta,
+  periodeTyper,
+  morsAktivitetTyper,
+  sokerErMor,
+  readOnly,
+  selectedPeriodeTyper,
+}) => {
   if (morsAktivitetTyper.filter(({
     kode,
-  }: any) => kode === '-').length === 0) { morsAktivitetTyper.unshift({ kode: '-', navn: '' }); }
+  }) => kode === '-').length === 0) { morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' }); }
   return (
-    // @ts-expect-error ts-migrate(2740) FIXME: Type '{}' is missing the following properties from... Remove this comment to see the full error message
     <PeriodFieldArray readOnly={readOnly} fields={fields} meta={meta} emptyPeriodTemplate={{}}>
       {(periodeElementFieldId, index) => {
         const erForsteRad = (index === 0);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'get' does not exist on type '{}'.
         const { periodeFom, harSamtidigUttak } = fields.get(index);
         const periodeFomForTidlig = periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
         return (
@@ -122,8 +143,6 @@ export const RenderPermisjonPeriodeFieldArray = ({
                       <DatepickerField
                         readOnly={readOnly}
                         name={`${periodeElementFieldId}.periodeFom`}
-                        // @ts-expect-error ts-migrate(2322) FIXME: Property 'defaultValue' does not exist on type 'In... Remove this comment to see the full error message
-                        defaultValue={null}
                         label={getLabel(erForsteRad, 'Registrering.Permisjon.periodeFom')}
                       />
                     </FlexColumn>
@@ -131,8 +150,6 @@ export const RenderPermisjonPeriodeFieldArray = ({
                       <DatepickerField
                         readOnly={readOnly}
                         name={`${periodeElementFieldId}.periodeTom`}
-                        // @ts-expect-error ts-migrate(2322) FIXME: Property 'defaultValue' does not exist on type 'In... Remove this comment to see the full error message
-                        defaultValue={null}
                         label={getLabel(erForsteRad, 'Registrering.Permisjon.periodeTom')}
                       />
                     </FlexColumn>
@@ -176,10 +193,9 @@ export const RenderPermisjonPeriodeFieldArray = ({
                       <DecimalField
                         name={`${periodeElementFieldId}.samtidigUttaksprosent`}
                         bredde="S"
-                        // @ts-expect-error ts-migrate(2322) FIXME: Type 'null' is not assignable to type '({ id: stri... Remove this comment to see the full error message
                         validate={[hasValidDecimal, maxValue100]}
                         label={{ id: 'Registrering.Permisjon.SamtidigUttaksprosent' }}
-                        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number'.
+                        // @ts-ignore Fiks
                         normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                       />
                     </FlexColumn>
@@ -191,7 +207,6 @@ export const RenderPermisjonPeriodeFieldArray = ({
                         className={erForsteRad ? styles.buttonRemoveFirst : styles.buttonRemove}
                         type="button"
                         onClick={() => {
-                          // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type '{}'.
                           fields.remove(index);
                         }}
                       />
@@ -220,7 +235,7 @@ export const RenderPermisjonPeriodeFieldArray = ({
   );
 };
 
-RenderPermisjonPeriodeFieldArray.validate = (values: any) => {
+RenderPermisjonPeriodeFieldArray.validate = (values: FormValues[]) => {
   if ((!values || !values.length)) {
     return { _error: isRequiredMessage() };
   }
@@ -229,7 +244,7 @@ RenderPermisjonPeriodeFieldArray.validate = (values: any) => {
     periodeType,
     periodeFom,
     periodeTom,
-  }: any) => {
+  }) => {
     const periodeFomDate = moment(periodeFom, ISO_DATE_FORMAT);
     const periodeTomDate = moment(periodeTom, ISO_DATE_FORMAT);
     const periodeFomError = required(periodeFom) || hasValidDate(periodeFom);
@@ -249,7 +264,7 @@ RenderPermisjonPeriodeFieldArray.validate = (values: any) => {
     return null;
   });
 
-  if (arrayErrors.some((errors: any) => errors !== null)) {
+  if (arrayErrors.some((errors) => errors !== null)) {
     return arrayErrors;
   }
 
@@ -259,14 +274,14 @@ RenderPermisjonPeriodeFieldArray.validate = (values: any) => {
   const overlapError = dateRangesNotOverlapping(values.map(({
     periodeFom,
     periodeTom,
-  }: any) => [periodeFom, periodeTom]));
+  }) => [periodeFom, periodeTom]));
   if (overlapError) {
     return { _error: overlapError };
   }
   return null;
 };
 
-RenderPermisjonPeriodeFieldArray.transformValues = (values: any) => values.map((value: any) => {
+RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) => values.map((value) => {
   if (periodsWithNoMorsAktivitet.includes(value.periodeType)) {
     return {
       periodeType: value.periodeType,
@@ -288,20 +303,19 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: any) => values.map((
   };
 });
 
-const mapStateToPropsFactory = (initialState: any, ownProps: any) => {
+const mapStateToPropsFactory = (initialState: any, ownProps: PureOwnProps) => {
   const values = getFormValues(ownProps.meta.form)(initialState);
-  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const permisjonValues = values[ownProps.namePrefix];
   let selectedPeriodeTyper = [''];
   if (typeof permisjonValues[ownProps.periodePrefix] !== 'undefined') {
     selectedPeriodeTyper = permisjonValues[ownProps.periodePrefix].map(({
       periodeType,
-    }: any) => periodeType);
+    }) => periodeType);
   }
   const periodeTyper = ownProps.alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE];
   const morsAktivitetTyper = ownProps.alleKodeverk[kodeverkTyper.MORS_AKTIVITET];
 
-  return () => ({
+  return (): MappedOwnProps => ({
     selectedPeriodeTyper,
     periodeTyper,
     morsAktivitetTyper,

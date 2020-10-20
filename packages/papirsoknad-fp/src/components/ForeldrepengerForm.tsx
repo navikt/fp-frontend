@@ -180,7 +180,7 @@ const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMe
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  ...PermisjonPanel.initialValues,
+  ...PermisjonPanel.buildInitialValues(),
 }));
 
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {

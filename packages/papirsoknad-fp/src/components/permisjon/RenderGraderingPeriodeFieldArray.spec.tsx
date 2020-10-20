@@ -2,19 +2,17 @@ import React from 'react';
 import { expect } from 'chai';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   CheckboxField, DatepickerField, DecimalField, InputField, SelectField,
 } from '@fpsak-frontend/form';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
 import { RenderGraderingPeriodeFieldArray } from './RenderGraderingPeriodeFieldArray';
 
-const graderingKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE' }];
-const arbeidskategoriTyper = [{ navn: 'Arbeidstaker', kode: 'ARBEIDSTAKER' }];
+const graderingKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE', kodeverk: '' }];
+const arbeidskategoriTyper = [{ navn: 'Arbeidstaker', kode: 'ARBEIDSTAKER', kodeverk: '' }];
 
 const fields = new MockFields('perioder', 1);
 
@@ -25,15 +23,15 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderGraderingPeriodeFieldArray
       fields={fields}
       meta={metaMock}
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'intl' does not exist on type 'IntrinsicA... Remove this comment to see the full error message
-      intl={intlMock}
       graderingKvoter={graderingKvoter}
       arbeidskategoriTyper={arbeidskategoriTyper}
       readOnly={false}
       graderingValues={[{
-        harSamtidigUttak: '',
-      },
-      ]}
+        harSamtidigUttak: false,
+      }]}
+      namePrefix="test"
+      graderingPrefix="test"
+      form="test"
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -55,15 +53,15 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderGraderingPeriodeFieldArray
       fields={fields}
       meta={metaMock}
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'intl' does not exist on type 'IntrinsicA... Remove this comment to see the full error message
-      intl={intlMock}
       graderingKvoter={graderingKvoter}
       arbeidskategoriTyper={arbeidskategoriTyper}
       readOnly={false}
       graderingValues={[{
         harSamtidigUttak: true,
-      },
-      ]}
+      }]}
+      namePrefix="test"
+      graderingPrefix="test"
+      form="test"
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);

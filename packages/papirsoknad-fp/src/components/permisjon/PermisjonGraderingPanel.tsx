@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { FieldArray, formValueSelector } from 'redux-form';
@@ -6,10 +6,7 @@ import { Element } from 'nav-frontend-typografi';
 
 import { CheckboxField } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__prop-types... Remove this comment to see the full error message
-import { kodeverkPropType } from '@fpsak-frontend/prop-types';
 import {
   hasValidFodselsnummer,
   hasValidInteger,
@@ -19,27 +16,55 @@ import {
   required,
   validateProsentandel,
 } from '@fpsak-frontend/utils';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderGraderingPeriodeFieldArray from './RenderGraderingPeriodeFieldArray';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './permisjonPanel.less' or its ... Remove this comment to see the full error message
 import styles from './permisjonPanel.less';
 
 export const graderingPeriodeFieldArrayName = 'graderingPeriode';
 
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
-type PermisjonGraderingPanelProps = {
-    graderingKvoter: any; // TODO: kodeverkPropType
-    form: string;
-    namePrefix: string;
-    skalGradere: boolean;
-    readOnly: boolean;
-    visFeilMelding: boolean;
-    arbeidskategoriTyper: any; // TODO: kodeverkPropType
-};
+interface PureOwnProps {
+  form: string;
+  namePrefix: string;
+  readOnly: boolean;
+  visFeilMelding: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
+interface MappedOwnProps {
+  graderingKvoter: KodeverkMedNavn[];
+  skalGradere: boolean;
+  arbeidskategoriTyper: KodeverkMedNavn[];
+}
+
+export type FormValues = {
+  periodeForGradering: string;
+  prosentandelArbeid: number;
+  arbeidsgiverIdentifikator?: string;
+  arbeidskategoriType?: string;
+  samtidigUttaksprosent?: number;
+  harSamtidigUttak?: boolean;
+  skalGradere?: boolean;
+  periodeFom: string;
+  periodeTom: string;
+}
+
+type Periode = {
+  arbeidskategoriType: string;
+  erArbeidstaker: boolean;
+  erFrilanser: boolean;
+  erSelvstNæringsdrivende: boolean;
+}
+
+interface StaticFunctions {
+  buildInitialValues?: () => any;
+  validate: (values: FormValues[]) => any;
+  transformValues: (perioder: Periode[]) => any;
+}
 
 /**
  *  PermisjonGraderingPanel
@@ -47,9 +72,15 @@ type PermisjonGraderingPanelProps = {
  * Presentasjonskomponent: Viser panel for gradering
  * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
  */
-export const PermisjonGraderingPanel = ({
-  graderingKvoter, form, namePrefix, skalGradere, readOnly, visFeilMelding, arbeidskategoriTyper,
-}: PermisjonGraderingPanelProps) => (
+export const PermisjonGraderingPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+  graderingKvoter,
+  form,
+  namePrefix,
+  skalGradere,
+  readOnly,
+  visFeilMelding,
+  arbeidskategoriTyper,
+}) => (
   <div>
     <Element><FormattedMessage id="Registrering.Permisjon.Gradering.Title" /></Element>
     <VerticalSpacer sixteenPx />
@@ -75,14 +106,14 @@ export const PermisjonGraderingPanel = ({
   </div>
 );
 
-export const validateOtherErrors = (values: any) => values.map(({
+export const validateOtherErrors = (values: FormValues[]) => values.map(({
   periodeForGradering,
   prosentandelArbeid,
   arbeidsgiverIdentifikator,
   arbeidskategoriType,
   samtidigUttaksprosent,
   harSamtidigUttak,
-}: any) => {
+}) => {
   const periodeForGraderingError = required(periodeForGradering);
   const prosentandelArbeidError = validateProsentandel(prosentandelArbeid);
   const arbeidsgiverShouldBeRequired = arbeidskategoriType === arbeidskategori.ARBEIDSTAKER;
@@ -103,7 +134,7 @@ export const validateOtherErrors = (values: any) => values.map(({
   return null;
 });
 
-PermisjonGraderingPanel.validate = (values: any) => {
+PermisjonGraderingPanel.validate = (values: FormValues[]) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
@@ -112,7 +143,7 @@ PermisjonGraderingPanel.validate = (values: any) => {
   return hasValidPeriodIncludingOtherErrors(values, otherErrors);
 };
 
-PermisjonGraderingPanel.transformValues = (perioder: any) => perioder.map((p: any) => {
+PermisjonGraderingPanel.transformValues = (perioder: Periode[]) => perioder.map((p) => {
   const { ...periode } = p;
   if (p.arbeidskategoriType) {
     periode.erArbeidstaker = p.arbeidskategoriType === arbeidskategori.ARBEIDSTAKER;
@@ -122,12 +153,12 @@ PermisjonGraderingPanel.transformValues = (perioder: any) => perioder.map((p: an
   return periode;
 });
 
-PermisjonGraderingPanel.initialValues = {
+PermisjonGraderingPanel.buildInitialValues = () => ({
   [graderingPeriodeFieldArrayName]: [{}],
   skalGradere: false,
-};
+});
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   graderingKvoter: ownProps.alleKodeverk[kodeverkTyper.UTSETTELSE_GRADERING_KVOTE],
   skalGradere: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalGradere,
   arbeidskategoriTyper: ownProps.alleKodeverk[kodeverkTyper.ARBEIDSKATEGORI],

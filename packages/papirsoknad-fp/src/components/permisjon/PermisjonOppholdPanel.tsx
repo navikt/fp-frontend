@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { FieldArray, formValueSelector } from 'redux-form';
@@ -6,21 +6,37 @@ import { Element } from 'nav-frontend-typografi';
 
 import { CheckboxField } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__prop-types... Remove this comment to see the full error message
-import { kodeverkPropType } from '@fpsak-frontend/prop-types';
 import { hasValidPeriodIncludingOtherErrors, isRequiredMessage, required } from '@fpsak-frontend/utils';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderOppholdPeriodeFieldArray from './RenderOppholdPeriodeFieldArray';
 
 export const oppholdPeriodeFieldArrayName = 'oppholdPerioder';
 
-type PermisjonOppholdPanelProps = {
-    oppholdsReasons: any; // TODO: kodeverkPropType
-    skalHaOpphold: boolean;
-    readOnly: boolean;
-};
+interface PureOwnProps {
+  readOnly: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  form: string;
+  namePrefix: string;
+}
+
+interface MappedOwnProps {
+  oppholdsReasons: KodeverkMedNavn[];
+  skalHaOpphold: boolean;
+}
+
+export type FormValues = {
+  årsak: string;
+  skalHaOpphold?: boolean;
+  periodeFom: string;
+  periodeTom: string;
+}
+
+interface StaticFunctions {
+  buildInitialValues?: () => any;
+  validate: (values: FormValues[]) => any;
+}
 
 /**
  *  PermisjonOppholdPanel
@@ -28,7 +44,11 @@ type PermisjonOppholdPanelProps = {
  * Presentasjonskomponent: Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
  */
-export const PermisjonOppholdPanel = ({ oppholdsReasons, skalHaOpphold, readOnly }: PermisjonOppholdPanelProps) => (
+export const PermisjonOppholdPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+  oppholdsReasons,
+  skalHaOpphold,
+  readOnly,
+}) => (
   <div>
     <Element><FormattedMessage id="Registrering.Permisjon.Opphold.Title" /></Element>
     <VerticalSpacer sixteenPx />
@@ -49,13 +69,13 @@ export const PermisjonOppholdPanel = ({ oppholdsReasons, skalHaOpphold, readOnly
   </div>
 );
 
-PermisjonOppholdPanel.validate = (values: any) => {
+PermisjonOppholdPanel.validate = (values: FormValues[]) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
   const otherErrors = values.map(({
     årsak,
-  }: any) => {
+  }) => {
     const aarsakError = required(årsak);
     if (aarsakError) {
       return {
@@ -68,12 +88,12 @@ PermisjonOppholdPanel.validate = (values: any) => {
   return hasValidPeriodIncludingOtherErrors(values, otherErrors);
 };
 
-PermisjonOppholdPanel.initialValues = {
+PermisjonOppholdPanel.buildInitialValues = () => ({
   [oppholdPeriodeFieldArrayName]: [{}],
   skalHaOpphold: false,
-};
+});
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   oppholdsReasons: ownProps.alleKodeverk[kodeverkTyper.OPPHOLD_ARSAK],
   skalHaOpphold: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalHaOpphold,
 });

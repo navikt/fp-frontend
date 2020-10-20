@@ -3,20 +3,18 @@ import moment from 'moment';
 import { expect } from 'chai';
 
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
 import RenderPermisjonPeriodeFieldArray, { RenderPermisjonPeriodeFieldArray as RenderPermisjonPeriodeFieldArrayImpl } from './RenderPermisjonPeriodeFieldArray';
 
-const periodeTyper = [{ navn: 'FELLESPERIODE', kode: uttakPeriodeType.FELLESPERIODE },
-  { navn: 'MODREKVOTE', kode: uttakPeriodeType.MODREKVOTE },
-  { navn: 'FEDREKVOTE', kode: uttakPeriodeType.FEDREKVOTE },
-  { navn: 'FORELDREPENGER_FOR_FODSEL', kode: uttakPeriodeType.FORELDREPENGER_FOR_FODSEL }];
+const periodeTyper = [{ navn: 'FELLESPERIODE', kode: uttakPeriodeType.FELLESPERIODE, kodeverk: '' },
+  { navn: 'MODREKVOTE', kode: uttakPeriodeType.MODREKVOTE, kodeverk: '' },
+  { navn: 'FEDREKVOTE', kode: uttakPeriodeType.FEDREKVOTE, kodeverk: '' },
+  { navn: 'FORELDREPENGER_FOR_FODSEL', kode: uttakPeriodeType.FORELDREPENGER_FOR_FODSEL, kodeverk: '' }];
 
 const fields = new MockFields('perioder', 1);
 const readOnly = false;
@@ -31,6 +29,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       sokerErMor
       selectedPeriodeTyper={[]}
       readOnly={readOnly}
+      namePrefix="test"
+      periodePrefix="test"
+      alleKodeverk={{}}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -59,6 +60,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       sokerErMor={false}
       selectedPeriodeTyper={[]}
       readOnly={readOnly}
+      namePrefix="test"
+      periodePrefix="test"
+      alleKodeverk={{}}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -82,6 +86,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       sokerErMor={false}
       selectedPeriodeTyper={[uttakPeriodeType.FEDREKVOTE]}
       readOnly={readOnly}
+      namePrefix="test"
+      periodePrefix="test"
+      alleKodeverk={{}}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -108,6 +115,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       sokerErMor={false}
       selectedPeriodeTyper={[uttakPeriodeType.MODREKVOTE]}
       readOnly={readOnly}
+      namePrefix="test"
+      periodePrefix="test"
+      alleKodeverk={{}}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -134,6 +144,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       sokerErMor={false}
       selectedPeriodeTyper={[]}
       readOnly={readOnly}
+      namePrefix="test"
+      periodePrefix="test"
+      alleKodeverk={{}}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -160,6 +173,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       sokerErMor={false}
       selectedPeriodeTyper={[uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]}
       readOnly={readOnly}
+      namePrefix="test"
+      periodePrefix="test"
+      alleKodeverk={{}}
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -177,21 +193,19 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     expect(selectFields.last().prop('disabled')).is.true;
   });
 
-  const getPeriodDaysFromToday = (periodeType: any, startDaysFromToday: any, endDaysFromToday: any) => ({
+  const getPeriodDaysFromToday = (periodeType: string, startDaysFromToday: number, endDaysFromToday: number) => ({
     periodeType,
     periodeFom: moment().add(startDaysFromToday, 'days').format(ISO_DATE_FORMAT),
     periodeTom: moment().add(endDaysFromToday, 'days').format(ISO_DATE_FORMAT),
   });
 
-  const getPeriod = (periodeType: any, periodeFom: any, periodeTom: any) => ({ periodeType, periodeFom, periodeTom });
+  const getPeriod = (periodeType: string, periodeFom: string, periodeTom: string) => ({ periodeType, periodeFom, periodeTom });
 
   it('skal validere at alle perioder har gyldige datoer', () => {
     const errorsWithInvalidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriod('FELLESPERIODE', 'abc', 'xyz'),
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 2.
-      getPeriodDaysFromToday('FELLESPERIODE', -20, -15)], []);
+      getPeriodDaysFromToday('FELLESPERIODE', -20, -15)]);
     const errorsWithValidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -10, -5),
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 2.
-      getPeriodDaysFromToday('FELLESPERIODE', -20, -15)], []);
+      getPeriodDaysFromToday('FELLESPERIODE', -20, -15)]);
 
     expect(errorsWithInvalidDates).to.be.an('array');
     expect(errorsWithInvalidDates[0].periodeFom).to.be.an('array').that.eql(invalidDateMessage());
@@ -203,11 +217,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
 
   it('skal validere at ingen perioder overlapper', () => {
     const errorsWithInvalidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -20, -15),
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 2.
-      getPeriodDaysFromToday('FELLESPERIODE', -16, -11)], []);
+      getPeriodDaysFromToday('FELLESPERIODE', -16, -11)]);
     const errorsWithValidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -20, -15),
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 2.
-      getPeriodDaysFromToday('FELLESPERIODE', -14, -10)], []);
+      getPeriodDaysFromToday('FELLESPERIODE', -14, -10)]);
 
     expect(errorsWithInvalidDates).to.be.an('object');
     // eslint-disable-next-line no-underscore-dangle

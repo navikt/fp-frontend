@@ -1,19 +1,16 @@
 import React from 'react';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
 import { RenderUtsettelsePeriodeFieldArray } from './RenderUtsettelsePeriodeFieldArray';
 
-const utsettelseReasons = [{ navn: 'Grunn1', kode: 'Grunn1' }];
-const utsettelseKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE' }];
+const utsettelseReasons = [{ navn: 'Grunn1', kode: 'Grunn1', kodeverk: '' }];
+const utsettelseKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE', kodeverk: '' }];
 
 const fields = new MockFields('perioder', 1);
 
@@ -26,8 +23,6 @@ describe('<RenderUtsettelsePeriodeFieldArray>', () => {
       meta={metaMock}
       utsettelseReasons={utsettelseReasons}
       utsettelseKvoter={utsettelseKvoter}
-      // @ts-expect-error ts-migrate(2322) FIXME: Property 'formatMessage' does not exist on type 'I... Remove this comment to see the full error message
-      formatMessage={sinon.spy()}
       intl={intlMock}
       readOnly={false}
     />);

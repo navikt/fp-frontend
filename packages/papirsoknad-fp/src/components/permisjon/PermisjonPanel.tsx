@@ -1,51 +1,67 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { dateRangesNotOverlappingCrossTypes } from '@fpsak-frontend/utils';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import PermisjonUtsettelsePanel, { utsettelsePeriodeFieldArrayName } from './PermisjonUtsettelsePanel';
-import PermisjonGraderingPanel, { graderingPeriodeFieldArrayName } from './PermisjonGraderingPanel';
-import PermisjonOverforingAvKvoterPanel, { overforingPeriodeFieldArrayName } from './PermisjonOverforingAvKvoterPanel';
-import RenderPermisjonPeriodeFieldArray from './RenderPermisjonPeriodeFieldArray';
-import PermisjonOppholdPanel, { oppholdPeriodeFieldArrayName } from './PermisjonOppholdPanel';
+import PermisjonUtsettelsePanel, { utsettelsePeriodeFieldArrayName, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
+import PermisjonGraderingPanel, { graderingPeriodeFieldArrayName, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
+import PermisjonOverforingAvKvoterPanel, { overforingPeriodeFieldArrayName, FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
+import RenderPermisjonPeriodeFieldArray, { FormValues as FormValuesPermisjon } from './RenderPermisjonPeriodeFieldArray';
+import PermisjonOppholdPanel, { oppholdPeriodeFieldArrayName, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './permisjonPanel.less' or its ... Remove this comment to see the full error message
 import styles from './permisjonPanel.less';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 
 export const permisjonPeriodeFieldArrayName = 'permisjonsPerioder';
 
-type OwnPermisjonPanelProps = {
-    soknadData: any; // TODO: PropTypes.instanceOf(SoknadData)
-    form: string;
-    readOnly: boolean;
-    fulltUttak?: boolean;
-    visFeilMelding: boolean;
-    error?: {};
-    alleKodeverk: {};
-};
+interface PureOwnProps {
+  soknadData: SoknadData;
+  form: string;
+  readOnly: boolean;
+  error?: {
+    permisjonsError?: string;
+  };
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
 
-// @ts-expect-error ts-migrate(2456) FIXME: Type alias 'PermisjonPanelProps' circularly refere... Remove this comment to see the full error message
-type PermisjonPanelProps = OwnPermisjonPanelProps & typeof PermisjonPanel.defaultProps;
+interface MappedOwnProps {
+  fulltUttak?: boolean;
+  visFeilMelding: boolean;
+}
+
+type FormValues = {
+  fulltUttak: boolean;
+} & FormValuesOverforing & FormValuesPermisjon & FormValuesUtsettelse & FormValuesGradering & FormValuesOpphold;
+
+interface StaticFunctions {
+  buildInitialValues?: () => any;
+  validate: (values: FormValues) => any;
+  transformValues: (values: FormValues) => any;
+}
 
 /**
  * PermisjonPanel
  *
  * Presentasjonskomponent: Viser permisjonspanel for mor eller far/medmor
  */
-// @ts-expect-error ts-migrate(7022) FIXME: 'PermisjonPanel' implicitly has type 'any' because... Remove this comment to see the full error message
-export const PermisjonPanel = ({
-  soknadData, fulltUttak, form, readOnly, error, visFeilMelding, alleKodeverk,
-}: PermisjonPanelProps) => (
+export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+  soknadData,
+  fulltUttak,
+  form,
+  readOnly,
+  error,
+  visFeilMelding,
+  alleKodeverk,
+}) => (
   <FormSection name={TIDSROM_PERMISJON_FORM_NAME_PREFIX}>
     <BorderBox>
       <div className={styles.flexContainer}>
@@ -112,11 +128,10 @@ export const PermisjonPanel = ({
 
 PermisjonPanel.defaultProps = {
   fulltUttak: false,
-  error: {},
+  error: { permisjonsError: undefined },
 };
 
-const permisjonErrors = (values: any) => {
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
+const permisjonErrors = (values: FormValues) => {
   const errors = PermisjonOverforingAvKvoterPanel.validate(values);
 
   const permisjonPeriodeValues = values ? values[permisjonPeriodeFieldArrayName] : null;
@@ -138,7 +153,28 @@ const permisjonErrors = (values: any) => {
   return errors;
 };
 
-const overLappingError = (values: any) => {
+type Periode = {
+  periodeFom,
+  periodeTom,
+};
+
+// Den her checken trengs för att ikke validerings skall slå till för tidligt
+const checkForFomTom = (val: Periode) => 'periodeTom' in val && val.periodeTom !== '' && 'periodeFom' in val && val.periodeFom !== '';
+
+const validateXrossPeriodTypes = (errorArray: Periode[]) => {
+  if (errorArray.every(checkForFomTom)) {
+    const overlapError = dateRangesNotOverlappingCrossTypes(errorArray.map(({
+      periodeFom,
+      periodeTom,
+    }) => [periodeFom, periodeTom]));
+    if (overlapError) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const overLappingError = (values: FormValues) => {
   if (values) {
     const permisjonPeriodeValues = values.fulltUttak ? values[permisjonPeriodeFieldArrayName] : [];
     const utsettelseperiodeValues = values.skalUtsette ? values[utsettelsePeriodeFieldArrayName] : [];
@@ -153,19 +189,18 @@ const overLappingError = (values: any) => {
       ...overforingsperiodeValues,
     ];
     const errorArray = errorArrayRaw.filter((value) => Object.keys(value).length !== 0);
-    if (errorArray.length > 0 && PermisjonPanel.validateXrossPeriodTypes(errorArray)) {
+    if (errorArray.length > 0 && validateXrossPeriodTypes(errorArray)) {
       return true;
     }
   }
   return false;
 };
 
-PermisjonPanel.validate = (values: any) => {
+PermisjonPanel.validate = (values: FormValues) => {
   let errors = {};
   if (!values.tidsromPermisjon) {
     return errors;
   }
-  // @ts-expect-error ts-migrate(7053) FIXME: Property 'tidsromPermisjon' does not exist on type... Remove this comment to see the full error message
   errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX] = {};
   const permisjonsError = !(values.tidsromPermisjon.skalUtsette
     || values.tidsromPermisjon.skalGradere
@@ -187,28 +222,11 @@ PermisjonPanel.validate = (values: any) => {
       },
     };
   }
-  // @ts-expect-error ts-migrate(7053) FIXME: Property 'tidsromPermisjon' does not exist on type... Remove this comment to see the full error message
   errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX] = permisjonErrors(permisjonValues);
   return errors;
 };
 
-// Den her checken trengs för att ikke validerings skall slå till för tidligt
-PermisjonPanel.checkForFomTom = (val: any) => 'periodeTom' in val && val.periodeTom !== '' && 'periodeFom' in val && val.periodeFom !== '';
-
-PermisjonPanel.validateXrossPeriodTypes = (values: any) => {
-  if (values.every(PermisjonPanel.checkForFomTom)) {
-    const overlapError = dateRangesNotOverlappingCrossTypes(values.map(({
-      periodeFom,
-      periodeTom,
-    }: any) => [periodeFom, periodeTom]));
-    if (overlapError) {
-      return true;
-    }
-  }
-  return false;
-};
-
-PermisjonPanel.transformValues = (values: any) => {
+PermisjonPanel.transformValues = (values: FormValues) => {
   const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX];
   const newValues = permisjonValues;
   if (values.tidsromPermisjon.fulltUttak && permisjonValues[permisjonPeriodeFieldArrayName]) {
@@ -220,19 +238,18 @@ PermisjonPanel.transformValues = (values: any) => {
   return newValues;
 };
 
-PermisjonPanel.initialValues = {
+PermisjonPanel.buildInitialValues = () => ({
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    ...PermisjonUtsettelsePanel.initialValues,
-    ...PermisjonGraderingPanel.initialValues,
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'initialValues' does not exist on type 'C... Remove this comment to see the full error message
-    ...PermisjonOverforingAvKvoterPanel.initialValues,
-    ...PermisjonOppholdPanel.initialValues,
+    ...PermisjonUtsettelsePanel.buildInitialValues(),
+    ...PermisjonGraderingPanel.buildInitialValues(),
+    ...PermisjonOverforingAvKvoterPanel.buildInitialValues(),
+    ...PermisjonOppholdPanel.buildInitialValues(),
     [permisjonPeriodeFieldArrayName]: [{}],
     fulltUttak: false,
   },
-};
+});
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   const visFeilMelding = !!(ownProps.error && ownProps.error.permisjonsError && ownProps.submitFailed);
   return {
     fulltUttak: formValueSelector(ownProps.form)(state, TIDSROM_PERMISJON_FORM_NAME_PREFIX).fulltUttak,
