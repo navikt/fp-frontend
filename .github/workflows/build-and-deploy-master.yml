@@ -50,7 +50,7 @@ jobs:
 
       - name: Build
         run: |
-          echo "IMAGE::$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+          echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
           yarn build
 
       - name: Bygg, tag og push Docker image
@@ -74,7 +74,6 @@ jobs:
               labels: ['bygg']
             }).then(response => {
               response.data.forEach(issue => {
-                if (issue.tags == dev) {
                 github.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
