@@ -356,7 +356,8 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
     const transformAktiviteter = uta.aktiviteter.map((a) => {
       const { days, weeks, ...transformAktivitet } = a;
       if (typeof days !== 'undefined' && typeof weeks !== 'undefined') {
-        const trekkdager = ((weeks * 5) + days).toFixed(1);
+        // @ts-ignore Fiks dette
+        const trekkdager = ((weeks * 5) + parseFloat(days)).toFixed(1);
         return {
           ...transformAktivitet,
           trekkdagerDesimaler: parseFloat(trekkdager), // regner om uker og dager til trekkdager

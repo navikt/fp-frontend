@@ -159,14 +159,16 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
                       />
                     </Normaltekst>
                   </Column>
-                  <Column xs="3">
-                    <Normaltekst>
-                      <FormattedMessage
-                        id="TimeLineInfo.Stonadinfo.MaksDato"
-                        values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (chunks: any) => <b>{chunks}</b> }}
-                      />
-                    </Normaltekst>
-                  </Column>
+                  {maksDatoUttak && (
+                    <Column xs="3">
+                      <Normaltekst>
+                        <FormattedMessage
+                          id="TimeLineInfo.Stonadinfo.MaksDato"
+                          values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (chunks: any) => <b>{chunks}</b> }}
+                        />
+                      </Normaltekst>
+                    </Column>
+                  )}
                 </Row>
                 <Row>
                   <div className={styles.tabs}>
