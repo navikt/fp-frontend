@@ -1,2 +1,2 @@
 export { default } from './src/InntektsgivendeArbeidPapirsoknadIndex';
-export { FormValues } from './src/components/InntektsgivendeArbeidPanel';
+export type { FormValues } from './src/components/InntektsgivendeArbeidPanel';

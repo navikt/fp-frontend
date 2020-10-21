@@ -1,2 +1,2 @@
 export { default } from './src/OppholdINorgePapirsoknadIndex';
-export { FormValues } from './src/components/OppholdINorgePanel';
+export type { FormValues } from './src/components/OppholdINorgePanel';
