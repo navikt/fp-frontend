@@ -16,7 +16,7 @@ import {
 } from './NyBehandlingModal';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meny';
 
-describe('<CreateNewBehandlingModal>', () => {
+describe('<NyBehandlingModal>', () => {
   const submitEventCallback = sinon.spy();
   const cancelEventCallback = sinon.spy();
 
@@ -181,19 +181,24 @@ describe('<CreateNewBehandlingModal>', () => {
   it('skal finne filtrerte behandlingsårsaker når det er valgt behandlingstype TILBAKEKREVING_REVURDERING', () => {
     const ytelseType = {
       kode: fagsakYtelseType.FORELDREPENGER,
+      kodeverk: '',
     };
     const behandlingArsakerFpTilbake = [{
       kode: behandlingArsakType.RE_KLAGE_KA,
       navn: 'RE_KLAGE_KA',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.RE_KLAGE_NFP,
       navn: 'RE_KLAGE_KA',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.RE_VILKÅR,
       navn: 'Nye opplysninger om vilkårsvurdering',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.RE_FORELDELSE,
       navn: 'Nye opplysninger om foreldelse',
+      kodeverk: '',
     }];
     const bType = behandlingType.TILBAKEKREVING_REVURDERING;
 
@@ -209,22 +214,28 @@ describe('<CreateNewBehandlingModal>', () => {
   it('skal finne filtrerte behandlingsårsaker når det er valgt behandlingstype REVURDERING', () => {
     const ytelseType = {
       kode: fagsakYtelseType.REVURDERING,
+      kodeverk: '',
     };
     const behandlingArsakerFpSak = [{
       kode: behandlingArsakType.ANNET,
       navn: 'annet',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.FEIL_I_LOVANDVENDELSE,
       navn: 'feil i lovandvendelse',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.FEIL_ELLER_ENDRET_FAKTA,
       navn: 'feil eller endret fakta',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.FEIL_REGELVERKSFORSTAELSE,
       navn: 'feil regelverksforstaelse',
+      kodeverk: '',
     }, {
       kode: behandlingArsakType.FEIL_PROSESSUELL,
       navn: 'feil prosessuell',
+      kodeverk: '',
     }];
     const bType = behandlingType.REVURDERING;
     const behandlingArsakerFpTilbake = [];
@@ -281,15 +292,27 @@ describe('<CreateNewBehandlingModal>', () => {
       navn: '',
       kodeverk: 'BEHANDLING_TYPE',
     }];
-    const hasEnabledCreateNewBehandling = true;
-    const hasEnabledCreateRevurdering = true;
+
+    const behandlingOppretting = [{
+      behandlingType: {
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }, {
+      behandlingType: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }];
     const kanTilbakekrevingOpprettes = {
       kanBehandlingOpprettes: false,
       kanRevurderingOpprettes: true,
     };
 
     const res = getEnabledBehandlingstyper.resultFunc(
-      behandlingstyper, hasEnabledCreateNewBehandling, hasEnabledCreateRevurdering, kanTilbakekrevingOpprettes,
+      behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
     expect(res).is.eql([
@@ -317,15 +340,27 @@ describe('<CreateNewBehandlingModal>', () => {
       navn: '',
       kodeverk: 'BEHANDLING_TYPE',
     }];
-    const hasEnabledCreateNewBehandling = true;
-    const hasEnabledCreateRevurdering = true;
+
+    const behandlingOppretting = [{
+      behandlingType: {
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }, {
+      behandlingType: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }];
     const kanTilbakekrevingOpprettes = {
       kanBehandlingOpprettes: true,
       kanRevurderingOpprettes: false,
     };
 
     const res = getEnabledBehandlingstyper.resultFunc(
-      behandlingstyper, hasEnabledCreateNewBehandling, hasEnabledCreateRevurdering, kanTilbakekrevingOpprettes,
+      behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
     expect(res).is.eql([
@@ -353,15 +388,27 @@ describe('<CreateNewBehandlingModal>', () => {
       navn: '',
       kodeverk: 'BEHANDLING_TYPE',
     }];
-    const hasEnabledCreateNewBehandling = false;
-    const hasEnabledCreateRevurdering = true;
+
+    const behandlingOppretting = [{
+      behandlingType: {
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: false,
+    }, {
+      behandlingType: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }];
     const kanTilbakekrevingOpprettes = {
       kanBehandlingOpprettes: true,
       kanRevurderingOpprettes: true,
     };
 
     const res = getEnabledBehandlingstyper.resultFunc(
-      behandlingstyper, hasEnabledCreateNewBehandling, hasEnabledCreateRevurdering, kanTilbakekrevingOpprettes,
+      behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
     expect(res).is.eql([
@@ -389,15 +436,28 @@ describe('<CreateNewBehandlingModal>', () => {
       navn: '',
       kodeverk: 'BEHANDLING_TYPE',
     }];
-    const hasEnabledCreateNewBehandling = true;
-    const hasEnabledCreateRevurdering = false;
+
+    const behandlingOppretting = [{
+      behandlingType: {
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }, {
+      behandlingType: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: false,
+    }];
+
     const kanTilbakekrevingOpprettes = {
       kanBehandlingOpprettes: true,
       kanRevurderingOpprettes: true,
     };
 
     const res = getEnabledBehandlingstyper.resultFunc(
-      behandlingstyper, hasEnabledCreateNewBehandling, hasEnabledCreateRevurdering, kanTilbakekrevingOpprettes,
+      behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
     expect(res).is.eql([

@@ -14,6 +14,20 @@ describe('<MenyNyBehandlingIndex>', () => {
     const lagNyBehandlingCallback = sinon.stub().resolves();
     const lukkModalCallback = sinon.spy();
 
+    const behandlingOppretting = [{
+      behandlingType: {
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }, {
+      behandlingType: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }];
+
     const wrapper = shallowWithIntl(<MenyNyBehandlingIndex
       ytelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
@@ -27,11 +41,10 @@ describe('<MenyNyBehandlingIndex>', () => {
         kodeverk: 'BEHANDLING_TYPE',
       }}
       lagNyBehandling={lagNyBehandlingCallback}
-      opprettNyForstegangsBehandlingEnabled
+      behandlingOppretting={behandlingOppretting}
       behandlingstyper={[]}
       tilbakekrevingRevurderingArsaker={[]}
       revurderingArsaker={[]}
-      opprettRevurderingEnabled
       kanTilbakekrevingOpprettes={{
         kanBehandlingOpprettes: false,
         kanRevurderingOpprettes: false,
