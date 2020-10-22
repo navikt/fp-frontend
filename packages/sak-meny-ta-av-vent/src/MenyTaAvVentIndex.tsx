@@ -12,13 +12,6 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const skalViseIMeny = (behandlingId, erPaVent, erKoet, gjenopptaBehandlingAccess) => {
-  if (!behandlingId || erKoet || !gjenopptaBehandlingAccess.employeeHasAccess) {
-    return false;
-  }
-  return erPaVent;
-};
-
 export const getMenytekst = () => intl.formatMessage({ id: 'MenyTaAvVentIndex.ResumeBehandling' });
 
 interface OwnProps {

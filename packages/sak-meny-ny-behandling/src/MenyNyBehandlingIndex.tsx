@@ -4,7 +4,7 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import NyBehandlingModal from './components/NyBehandlingModal';
+import NyBehandlingModal, { BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -16,8 +16,6 @@ const intl = createIntl({
   locale: 'nb-NO',
   messages,
 }, cache);
-
-export const skalViseIMeny = (erKoet, ikkeVisOpprettNyBehandling) => !erKoet && !ikkeVisOpprettNyBehandling.isEnabled;
 
 export const getMenytekst = () => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
 
@@ -32,8 +30,7 @@ interface OwnProps {
   behandlingstyper: KodeverkMedNavn[];
   tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
   revurderingArsaker: KodeverkMedNavn[];
-  opprettNyForstegangsBehandlingEnabled: boolean;
-  opprettRevurderingEnabled: boolean;
+  behandlingOppretting: BehandlingOppretting[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;
@@ -61,8 +58,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   behandlingstyper,
   tilbakekrevingRevurderingArsaker,
   revurderingArsaker,
-  opprettNyForstegangsBehandlingEnabled,
-  opprettRevurderingEnabled,
+  behandlingOppretting,
   kanTilbakekrevingOpprettes,
   uuidForSistLukkede,
   erTilbakekrevingAktivert,
@@ -70,7 +66,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   sjekkOmTilbakekrevingRevurderingKanOpprettes,
   lukkModal,
 }) => {
-  const submit = useCallback((formValues) => {
+  const submit = useCallback((formValues: FormValues) => {
     const isTilbakekreving = TILBAKEKREVING_BEHANDLINGSTYPER.includes(formValues.behandlingType);
     const tilbakekrevingBehandlingId = behandlingId && isTilbakekreving ? { behandlingId } : {};
     const params = {
@@ -90,8 +86,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
         saksnummer={saksnummer}
         cancelEvent={lukkModal}
         submitCallback={submit}
-        hasEnabledCreateNewBehandling={opprettNyForstegangsBehandlingEnabled}
-        hasEnabledCreateRevurdering={opprettRevurderingEnabled}
+        behandlingOppretting={behandlingOppretting}
         behandlingstyper={behandlingstyper}
         tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
         revurderingArsaker={revurderingArsaker}
