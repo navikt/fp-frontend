@@ -140,7 +140,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
       soknad.soknadType.kode,
       soknad.omsorgsovertakelseDato,
       getFamiliehendelsedatoFraSoknad(soknad),
-      familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : undefined,
+      familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : undefined,
       familiehendelse.omsorgsovertakelseDato,
     ),
     vurderTilbaketrekkAP: finnTilbaketrekkAksjonspunkt(state, ownProps),
