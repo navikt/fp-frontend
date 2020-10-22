@@ -77,11 +77,12 @@ const FagsakIndex: FunctionComponent = () => {
       keepData: true,
     },
   );
-  const { data: behandlingerFpTilbake } = restApiHooks.useRestApi<BehandlingAppKontekst[]>(
+
+  const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
+  const { data: behandlingerFpTilbake, state: behandlingerFpTilbakeState } = restApiHooks.useRestApi<BehandlingAppKontekst[]>(
     FpsakApiKeys.BEHANDLINGER_FPTILBAKE, { saksnummer: selectedSaksnummer }, {
       updateTriggers: [selectedSaksnummer, behandlingId, behandlingVersjon, behandlingerTeller],
-      suspendRequest: !selectedSaksnummer || !enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE)
-      || erBehandlingEndretFraUndefined,
+      suspendRequest: !selectedSaksnummer || !skalHenteFraFpTilbake || erBehandlingEndretFraUndefined,
       keepData: true,
     },
   );
@@ -120,6 +121,10 @@ const FagsakIndex: FunctionComponent = () => {
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const harVerge = behandling ? behandling.harVerge : false;
+
+  const harHentetBehandlingerFraFpsak = !!behandlingerFpSak || behandlingerFpSakState === RestApiState.SUCCESS;
+  const harHentetBehandlingerFraFpTilbake = !skalHenteFraFpTilbake || !!behandlingerFpTilbake || behandlingerFpTilbakeState === RestApiState.SUCCESS;
+
   return (
     <>
       <FagsakGrid
@@ -144,7 +149,7 @@ const FagsakIndex: FunctionComponent = () => {
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
             alleBehandlinger={alleBehandlinger}
-            harHentetBehandlinger={!!behandlingerFpSak || behandlingerFpSakState === RestApiState.SUCCESS}
+            harHentetBehandlinger={harHentetBehandlingerFraFpsak && harHentetBehandlingerFraFpTilbake}
             oppfriskBehandlinger={oppfriskBehandlinger}
           />
         )}
