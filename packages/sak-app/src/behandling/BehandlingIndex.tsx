@@ -10,7 +10,7 @@ import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/ut
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  KodeverkMedNavn, NavAnsatt, Fagsak, BehandlingAppKontekst,
+  KodeverkMedNavn, NavAnsatt, Fagsak, BehandlingAppKontekst, FagsakPerson,
 } from '@fpsak-frontend/types';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
@@ -60,6 +60,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history) => (prosessStegId, fakt
 interface OwnProps {
   setBehandlingIdOgVersjon: (behandlingId: number, behandlingVersjon: number) => void;
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   alleBehandlinger: BehandlingAppKontekst[];
   setRequestPendingMessage: (message: string) => void;
 }
@@ -99,6 +100,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
+  const fagsakPerson = restApiHooks.useGlobalStateRestApiData<FagsakPerson>(FpsakApiKeys.FAGSAK_BRUKER);
+
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
@@ -134,6 +137,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingPapirsoknadIndex
             {...defaultProps}
+            fagsakPerson={fagsakPerson}
           />
         </ErrorBoundary>
       </Suspense>
@@ -215,6 +219,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingEngangsstonadIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
+            fagsakPerson={fagsakPerson}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -229,6 +234,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingForeldrepengerIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
+            fagsakPerson={fagsakPerson}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -243,6 +249,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingSvangerskapspengerIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
+            fagsakPerson={fagsakPerson}
             {...defaultProps}
           />
         </ErrorBoundary>

@@ -46,12 +46,15 @@ export enum FpsakApiKeys {
 const endpoints = new RestApiConfigBuilder()
   .withGet('/fpsak/api/init-fetch', FpsakApiKeys.INIT_FETCH)
 
+  // Generelle
   .withRel('nav-ansatt', FpsakApiKeys.NAV_ANSATT)
   .withRel('kodeverk', FpsakApiKeys.KODEVERK)
   .withRel('behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
 
+  // Feature toggles
   .withRel('feature-toggle', FpsakApiKeys.FEATURE_TOGGLE)
 
+  // Fagsak
   .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
   .withRel('sak-bruker', FpsakApiKeys.FAGSAK_BRUKER)
   .withRel('handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
@@ -60,20 +63,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('sak-alle-behandlinger', FpsakApiKeys.BEHANDLINGER_FPSAK)
   .withRel('sak-annen-part-behandling', FpsakApiKeys.ANNEN_PART_BEHANDLING)
 
-  .withPost('/fpsak/api/fagsak/sok', FpsakApiKeys.SEARCH_FAGSAK)
-  .withPost('/fpformidling/api/brev/forhaandsvis', FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
-  .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
-  .withPost('/fptilbake/api/dokument/forhandsvis-henleggelsesbrev', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE, { isResponseBlob: true })
-  .withAsyncPut('/fpsak/api/behandlinger', FpsakApiKeys.NEW_BEHANDLING_FPSAK)
-  .withAsyncPost('/fptilbake/api/behandlinger/opprett', FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
-  .withGet('/fptilbake/api/behandlinger/alle', FpsakApiKeys.BEHANDLINGER_FPTILBAKE)
-  .withGet('/fpsak/public/sprak/nb_NO.json', FpsakApiKeys.LANGUAGE_FILE)
-  .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)
-  .withGet('/fptilbake/api/historikk', FpsakApiKeys.HISTORY_FPTILBAKE)
-  .withGet('/fptilbake/api/kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
-  .withGet('/fptilbake/api/behandlinger/kan-opprettes', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
-  .withGet('/fptilbake/api/behandlinger/kan-revurdering-opprettes-v2', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
-  .withGet('/fptilbake/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE)
+  // Behandling
   .withRel('soeker-personopplysninger', FpsakApiKeys.BEHANDLING_PERSONOPPLYSNINGER)
   .withRel('familiehendelse-v2', FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE)
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)
@@ -86,6 +76,31 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('har-apent-kontroller-revurdering-aksjonspunkt', FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP)
   .withRel('brev-maler', FpsakApiKeys.BREVMALER)
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
+
+  // TODO FpTilbake
+  .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
+  .withPost('/fptilbake/api/dokument/forhandsvis-henleggelsesbrev', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE, { isResponseBlob: true })
+  .withGet('/fptilbake/api/behandlinger/alle', FpsakApiKeys.BEHANDLINGER_FPTILBAKE)
+  .withGet('/fptilbake/api/historikk', FpsakApiKeys.HISTORY_FPTILBAKE)
+  .withGet('/fptilbake/api/kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
+  .withGet('/fptilbake/api/behandlinger/kan-opprettes', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
+  .withGet('/fptilbake/api/behandlinger/kan-revurdering-opprettes-v2', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
+  .withGet('/fptilbake/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE)
+
+  // TODO ??
+  .withAsyncPost('/fptilbake/api/behandlinger/opprett', FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
+  .withAsyncPut('/fpsak/api/behandlinger', FpsakApiKeys.NEW_BEHANDLING_FPSAK)
+  .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)
+
+  // FpFormidling
+  .withPost('/fpformidling/api/brev/forhaandsvis', FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
+
+  // Språkfil (ligg på klient - Det som ligg i denne skal flyttes til spesifikke pakker)
+  .withGet('/fpsak/public/sprak/nb_NO.json', FpsakApiKeys.LANGUAGE_FILE)
+
+  // Kun brukt i test
+  .withPost('/fpsak/api/fagsak/sok', FpsakApiKeys.SEARCH_FAGSAK)
+
   .build();
 
 export const requestApi = createRequestApi(endpoints);

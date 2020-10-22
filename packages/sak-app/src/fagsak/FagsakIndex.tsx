@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, BehandlingAppKontekst,
+  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, BehandlingAppKontekst, FagsakPerson,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -62,10 +62,11 @@ const FagsakIndex: FunctionComponent = () => {
 
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
-  const { state: fagsakPersonState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.FAGSAK_BRUKER, { saksnummer: selectedSaksnummer }, {
-    updateTriggers: [selectedSaksnummer],
-    suspendRequest: !selectedSaksnummer,
-  });
+  const { data: fagsakPerson, state: fagsakPersonState } = restApiHooks.useGlobalStateRestApi<FagsakPerson>(FpsakApiKeys.FAGSAK_BRUKER,
+    { saksnummer: selectedSaksnummer }, {
+      updateTriggers: [selectedSaksnummer],
+      suspendRequest: !selectedSaksnummer,
+    });
 
   const { data: fagsak, state: fagsakState } = restApiHooks.useRestApi<Fagsak>(FpsakApiKeys.FETCH_FAGSAK, { saksnummer: selectedSaksnummer }, {
     updateTriggers: [selectedSaksnummer, behandlingId, behandlingVersjon],
@@ -187,6 +188,7 @@ const FagsakIndex: FunctionComponent = () => {
               alleKodeverk={alleKodeverk}
               sprakkode={behandling?.sprakkode}
               fagsak={fagsak}
+              fagsakPerson={fagsakPerson}
               harTilbakekrevingVerge={erTilbakekreving(behandling?.type) && harVerge}
             />
           );

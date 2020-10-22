@@ -9,7 +9,9 @@ import {
   Rettigheter, ProsessStegPanel, prosessStegHooks, IverksetterVedtakStatusModal,
   FatterVedtakStatusModal, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+} from '@fpsak-frontend/types';
 
 import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegSvpPanelDefinisjoner';
@@ -28,6 +30,7 @@ const forhandsvis = (data) => {
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -95,6 +98,7 @@ const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleFatterVedtak
 const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
   data,
   fagsak,
+  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -124,6 +128,7 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
     previewCallback: useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
     alleKodeverk,
+    fagsakPerson,
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,

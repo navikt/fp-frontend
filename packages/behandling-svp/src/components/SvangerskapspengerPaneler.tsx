@@ -3,7 +3,9 @@ import React, { FunctionComponent, useState } from 'react';
 import {
   BehandlingPaVent, SettPaVentParams, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+} from '@fpsak-frontend/types';
 
 import SvangerskapspengerProsess from './SvangerskapspengerProsess';
 import SvangerskapspengerFakta from './SvangerskapspengerFakta';
@@ -12,6 +14,7 @@ import FetchedData from '../types/fetchedDataTsType';
 interface OwnProps {
   fetchedData: FetchedData;
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -34,6 +37,7 @@ interface FaktaPanelInfo {
 const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
   fetchedData,
   fagsak,
+  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -62,6 +66,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         data={fetchedData}
         behandling={behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         valgtProsessSteg={valgtProsessSteg}
