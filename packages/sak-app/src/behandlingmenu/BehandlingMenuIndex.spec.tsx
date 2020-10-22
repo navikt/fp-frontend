@@ -16,10 +16,6 @@ import { VergeBehandlingmenyValg } from './sakRettigheterTsType';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
-const location = {
-  pathname: '', search: '', state: {}, hash: '',
-};
-
 const navAnsatt = {
   brukernavn: 'Test',
   kanBehandleKode6: false,
