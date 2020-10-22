@@ -74,6 +74,7 @@ export const setGenerellAndelsinfo = (andel, harKunYtelse, getKodeverknavn) => (
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
   nyAndel: false,
+  kilde: andel.kilde == null ? null : andel.kilde.kode,
   lagtTilAvSaksbehandler: andel.lagtTilAvSaksbehandler === true,
   inntektskategori: finnnInntektskategorikode(andel),
   forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori.kode === inntektskategorier.UDEFINERT ? null : andel.inntektskategori.kode,
