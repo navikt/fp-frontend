@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { Location } from 'history';
 
 import ApprovalPanel from './components/ApprovalPanel';
 import messages from '../i18n/nb_NO.json';
+import { Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext } from '@fpsak-frontend/types';
 
 const cache = createIntlCache();
 
@@ -12,7 +13,28 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const TotrinnskontrollSakIndex = ({
+interface OwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
+  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollReadOnlySkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
+  behandlingStatus: Kodeverk;
+  toTrinnsBehandling: boolean;
+  location: Location;
+  skjemalenkeTyper: KodeverkMedNavn[];
+  isForeldrepengerFagsak: boolean;
+  behandlingKlageVurdering?: TotrinnsKlageVurdering;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  erBehandlingEtterKlage: boolean;
+  readOnly: boolean;
+  onSubmit: (...args: any[]) => any;
+  forhandsvisVedtaksbrev: () => void;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  erTilbakekreving?: boolean;
+};
+
+const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   behandlingsresultat,
@@ -29,7 +51,7 @@ const TotrinnskontrollSakIndex = ({
   behandlingKlageVurdering,
   alleKodeverk,
   erBehandlingEtterKlage,
-  erTilbakekreving,
+  erTilbakekreving = false,
   createLocationForSkjermlenke,
 }) => (
   <RawIntlProvider value={intl}>
@@ -55,43 +77,5 @@ const TotrinnskontrollSakIndex = ({
     />
   </RawIntlProvider>
 );
-
-TotrinnskontrollSakIndex.propTypes = {
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  behandlingsresultat: PropTypes.shape(),
-  totrinnskontrollSkjermlenkeContext: PropTypes.arrayOf(PropTypes.shape()),
-  totrinnskontrollReadOnlySkjermlenkeContext: PropTypes.arrayOf(PropTypes.shape()),
-  behandlingStatus: PropTypes.shape().isRequired,
-  toTrinnsBehandling: PropTypes.bool.isRequired,
-  location: PropTypes.shape().isRequired,
-  skjemalenkeTyper: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  isForeldrepengerFagsak: PropTypes.bool.isRequired,
-  behandlingKlageVurdering: PropTypes.shape({
-    klageVurdering: PropTypes.shape({
-      kode: PropTypes.string.isRequired,
-      kodeverk: PropTypes.string.isRequired,
-    }),
-    klageVurderingOmgjoer: PropTypes.shape({
-      kode: PropTypes.string.isRequired,
-      kodeverk: PropTypes.string.isRequired,
-    }),
-    klageVurderingResultatNFP: PropTypes.shape(),
-    klageVurderingResultatNK: PropTypes.shape(),
-  }),
-  alleKodeverk: PropTypes.shape().isRequired,
-  erBehandlingEtterKlage: PropTypes.bool.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  forhandsvisVedtaksbrev: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-  erTilbakekreving: PropTypes.bool,
-};
-
-TotrinnskontrollSakIndex.defaultProps = {
-  behandlingsresultat: undefined,
-  behandlingKlageVurdering: undefined,
-  erTilbakekreving: false,
-};
 
 export default TotrinnskontrollSakIndex;

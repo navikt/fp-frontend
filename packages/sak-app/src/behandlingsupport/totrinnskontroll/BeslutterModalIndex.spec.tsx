@@ -6,10 +6,11 @@ import { shallow } from 'enzyme';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { FatterVedtakApprovalModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
+import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BeslutterModalIndex from './BeslutterModalIndex';
+import { Behandling } from '@fpsak-frontend/types';
 
 describe('<BeslutterModalIndex>', () => {
   it('skal vise modal når beslutter godkjenner', () => {
@@ -23,7 +24,7 @@ describe('<BeslutterModalIndex>', () => {
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
       }}
-      behandlingsresultat={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
       behandlingId={1}
       behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       pushLocation={sinon.spy()}
@@ -35,7 +36,7 @@ describe('<BeslutterModalIndex>', () => {
       totrinnsKlageVurdering={{}}
     />);
 
-    const modal = wrapper.find(FatterVedtakApprovalModalSakIndex);
+    const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
     expect(modal).to.have.length(1);
     expect(modal.prop('harSammeResultatSomOriginalBehandling')).is.true;
   });
@@ -52,7 +53,7 @@ describe('<BeslutterModalIndex>', () => {
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
       }}
-      behandlingsresultat={{}}
+      behandlingsresultat={{} as Behandling['behandlingsresultat']}
       behandlingId={1}
       behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       pushLocation={sinon.spy()}
@@ -64,7 +65,7 @@ describe('<BeslutterModalIndex>', () => {
       totrinnsKlageVurdering={{}}
     />);
 
-    const modal = wrapper.find(FatterVedtakApprovalModalSakIndex);
+    const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
     expect(modal).to.have.length(1);
     expect(modal.prop('harSammeResultatSomOriginalBehandling')).is.false;
   });

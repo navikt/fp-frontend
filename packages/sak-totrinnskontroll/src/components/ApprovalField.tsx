@@ -1,35 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { NavFieldGroup, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Kodeverk, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
 import { getAksjonspunktTextSelector } from './ApprovalTextUtils';
 import ReasonsField from './ReasonsField';
 
 import styles from './ApprovalField.less';
 
+interface OwnProps {
+  aksjonspunkt: TotrinnskontrollAksjonspunkt;
+  getAksjonspunktText: (...args: any[]) => any;
+  readOnly: boolean;
+  approvalIndex?: number;
+  contextIndex?: number;
+  currentValue?: {};
+  showBegrunnelse?: boolean;
+  klageKA?: boolean;
+  isForeldrepengerFagsak: boolean;
+  klagebehandlingVurdering: TotrinnsKlageVurdering,
+  behandlingStatus: Kodeverk,
+  arbeidsforholdHandlingTyper: Kodeverk[],
+  erTilbakekreving: boolean,
+}
+
 /*
  * ApprovalField
  *
  * Presentasjonskomponent. Holds the radiobuttons for approving or disapproving the decisions of the handler
- *
- * Eksempel:
- * ```html
- * <ApprovalField
- *   key={aksjonspunkt.aksjonspunktId}
- *   aksjonspunkt={aksjonspunkt}
- *   currentValue={formState[vilkarIndex].toTrinnsAksjonspunkter[approvalIndex]}
- *   vilkarIndex={vilkarIndex}
- *   approvalIndex={approvalIndex}
- *   showBegrunnelse={akspktDef}
- * />
- * ```
  */
-export const ApprovalFieldImpl = ({
+const ApprovalField: FunctionComponent<OwnProps> = ({
   aksjonspunkt,
   readOnly,
   currentValue,
@@ -38,15 +42,24 @@ export const ApprovalFieldImpl = ({
   showBegrunnelse,
   getAksjonspunktText,
   klageKA,
+  isForeldrepengerFagsak,
+  klagebehandlingVurdering,
+  behandlingStatus,
+  arbeidsforholdHandlingTyper,
+  erTilbakekreving,
 }) => {
   const fieldName = `approvals[${contextIndex}].aksjonspunkter[${approvalIndex}]`;
   const erKlageKA = (klageKA && currentValue && currentValue.totrinnskontrollGodkjent);
   const erAnke = aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && currentValue.totrinnskontrollGodkjent === true;
   const showOnlyBegrunnelse = erAnke || erKlageKA ? currentValue.totrinnskontrollGodkjent : showBegrunnelse;
   const showReasons = (erAnke || ((currentValue && currentValue.totrinnskontrollGodkjent === false) || erKlageKA));
+
+  const aksjonspunktText = getAksjonspunktText(isForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
+    arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
+
   return (
     <div className={styles.approvalItemContainer}>
-      {getAksjonspunktText(aksjonspunkt).map((formattedMessage, index) => (
+      {aksjonspunktText.map((formattedMessage, index: number) => (
         <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))} className={styles.aksjonspunktTextContainer}>
           <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))}>
             {formattedMessage}
@@ -71,25 +84,9 @@ export const ApprovalFieldImpl = ({
   );
 };
 
-ApprovalFieldImpl.propTypes = {
-  aksjonspunkt: PropTypes.shape().isRequired,
-  getAksjonspunktText: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  approvalIndex: PropTypes.number,
-  contextIndex: PropTypes.number,
-  currentValue: PropTypes.shape(),
-  showBegrunnelse: PropTypes.bool,
-  klageKA: PropTypes.bool,
-};
-
-ApprovalFieldImpl.defaultProps = {
+ApprovalField.defaultProps = {
   showBegrunnelse: false,
-  currentValue: undefined,
-  approvalIndex: null,
-  contextIndex: null,
   klageKA: false,
 };
 
-const mapStateToProps = (state, ownProps) => ({ getAksjonspunktText: getAksjonspunktTextSelector(ownProps) });
-
-export default connect(mapStateToProps)(injectIntl(ApprovalFieldImpl));
+export default injectIntl(ApprovalField);

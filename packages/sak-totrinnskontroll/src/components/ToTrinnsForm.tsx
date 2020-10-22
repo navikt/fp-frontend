@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { NavLink } from 'react-router-dom';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
@@ -10,20 +9,21 @@ import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtel
 import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import ApprovalField from './ApprovalField';
 
 import styles from './ToTrinnsForm.less';
 
-const allApproved = (formState) => formState
-  .reduce((a, b) => a.concat(b.aksjonspunkter), [])
-  .every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true);
+const allApproved = (formState: any) => formState
+  .reduce((a: any, b: any) => a.concat(b.aksjonspunkter), [])
+  .every((ap: any) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true);
 
-const allSelected = (formState) => formState
-  .reduce((a, b) => a.concat(b.aksjonspunkter), [])
-  .every((ap) => ap.totrinnskontrollGodkjent !== null);
+const allSelected = (formState: any) => formState
+  .reduce((a: any, b: any) => a.concat(b.aksjonspunkter), [])
+  .every((ap: any) => ap.totrinnskontrollGodkjent !== null);
 
-const harIkkeKonsekvenserForYtelsen = (behandlingResultat, ...konsekvenserForYtelsenKoder) => {
+const harIkkeKonsekvenserForYtelsen = (behandlingResultat: any, ...konsekvenserForYtelsenKoder) => {
   if (!behandlingResultat) {
     return true;
   }
@@ -34,12 +34,28 @@ const harIkkeKonsekvenserForYtelsen = (behandlingResultat, ...konsekvenserForYte
   return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0].kode);
 };
 
+interface OwnProps {
+  totrinnskontrollContext?: {}[];
+  formState?: {}[];
+  forhandsvisVedtaksbrev: (...args: any[]) => any;
+  klageVurderingResultatNFP?: {};
+  klageVurderingResultatNK?: {};
+  behandlingKlageVurdering?: {};
+  behandlingsresultat?: {};
+  erBehandlingEtterKlage?: boolean;
+  readOnly: boolean;
+  erTilbakekreving?: boolean;
+  behandlingStatus: Kodeverk;
+  isForeldrepengerFagsak: boolean;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+}
+
 /*
   * ToTrinnsForm
   *
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
-export const ToTrinnsFormImpl = ({
+export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
   handleSubmit,
   formState,
   forhandsvisVedtaksbrev,
@@ -66,15 +82,18 @@ export const ToTrinnsFormImpl = ({
   return (
     <form name="toTrinn" onSubmit={handleSubmit}>
       {totrinnskontrollContext.map(({
-        contextCode, skjermlenke, aksjonspunkter, skjermlenkeNavn,
-      }, contextIndex) => {
+        contextCode,
+        skjermlenke,
+        aksjonspunkter,
+        skjermlenkeNavn,
+      }: any, contextIndex: any) => {
         if (aksjonspunkter.length > 0) {
           return (
             <div key={contextCode}>
               <NavLink to={skjermlenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
                 {skjermlenkeNavn}
               </NavLink>
-              {aksjonspunkter.map((aksjonspunkt, approvalIndex) => (
+              {aksjonspunkter.map((aksjonspunkt: any, approvalIndex: any) => (
                 <div key={aksjonspunkt.aksjonspunktKode}>
                   <ApprovalField
                     aksjonspunkt={aksjonspunkt}
@@ -129,38 +148,21 @@ export const ToTrinnsFormImpl = ({
   );
 };
 
-ToTrinnsFormImpl.propTypes = {
-  ...formPropTypes,
-  totrinnskontrollContext: PropTypes.arrayOf(PropTypes.shape({})),
-  formState: PropTypes.arrayOf(PropTypes.shape({})),
-  forhandsvisVedtaksbrev: PropTypes.func.isRequired,
-  klageVurderingResultatNFP: PropTypes.shape(),
-  klageVurderingResultatNK: PropTypes.shape(),
-  behandlingKlageVurdering: PropTypes.shape(),
-  behandlingsresultat: PropTypes.shape(),
-  erBehandlingEtterKlage: PropTypes.bool,
-  readOnly: PropTypes.bool.isRequired,
-  erTilbakekreving: PropTypes.bool,
-};
-
 ToTrinnsFormImpl.defaultProps = {
-  behandlingsresultat: undefined,
-  klageVurderingResultatNFP: undefined,
-  klageVurderingResultatNK: undefined,
   totrinnskontrollContext: [],
   formState: [{ aksjonspunkter: [] }],
   behandlingKlageVurdering: {},
   erTilbakekreving: false,
 };
 
-const validate = (values) => {
+const validate = (values: any) => {
   const errors = {};
   if (!values.approvals) {
     return errors;
   }
 
-  errors.approvals = values.approvals.map((kontekst) => ({
-    aksjonspunkter: kontekst.aksjonspunkter.map((ap) => {
+  errors.approvals = values.approvals.map((kontekst: any) => ({
+    aksjonspunkter: kontekst.aksjonspunkter.map((ap: any) => {
       if (!ap.feilFakta && !ap.feilLov && !ap.feilRegel && !ap.annet) {
         return { missingArsakError: isRequiredMessage() };
       }
@@ -174,7 +176,7 @@ const validate = (values) => {
 
 const formName = 'toTrinnForm';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   formState: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'approvals'),
 });
 const ToTrinnsForm = behandlingForm({ form: formName, validate })(connect(mapStateToProps)(ToTrinnsFormImpl));

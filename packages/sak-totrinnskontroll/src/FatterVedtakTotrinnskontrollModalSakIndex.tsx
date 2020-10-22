@@ -1,11 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
-
-import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
 
 import FatterVedtakApprovalModal from './components/modal/FatterVedtakApprovalModal';
 import messages from '../i18n/nb_NO.json';
+import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 
 const cache = createIntlCache();
 
@@ -14,12 +12,22 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const FatterVedtakApprovalModalSakIndex = ({
-  showModal,
+interface OwnProps {
+  closeEvent: () => void;
+  allAksjonspunktApproved: boolean;
+  fagsakYtelseType: Kodeverk;
+  erKlageWithKA?: boolean;
+  behandlingsresultat: Behandling['behandlingsresultat'];
+  behandlingId: number;
+  behandlingStatusKode: string;
+  behandlingTypeKode: string;
+  harSammeResultatSomOriginalBehandling?: boolean;
+};
+
+const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = ({
   closeEvent,
   allAksjonspunktApproved,
   fagsakYtelseType,
-  erGodkjenningFerdig,
   erKlageWithKA,
   behandlingsresultat,
   behandlingId,
@@ -29,11 +37,9 @@ const FatterVedtakApprovalModalSakIndex = ({
 }) => (
   <RawIntlProvider value={intl}>
     <FatterVedtakApprovalModal
-      showModal={showModal}
       closeEvent={closeEvent}
       allAksjonspunktApproved={allAksjonspunktApproved}
       fagsakYtelseType={fagsakYtelseType}
-      erGodkjenningFerdig={erGodkjenningFerdig}
       erKlageWithKA={erKlageWithKA}
       behandlingsresultat={behandlingsresultat}
       behandlingId={behandlingId}
@@ -44,23 +50,8 @@ const FatterVedtakApprovalModalSakIndex = ({
   </RawIntlProvider>
 );
 
-FatterVedtakApprovalModalSakIndex.propTypes = {
-  showModal: PropTypes.bool.isRequired,
-  closeEvent: PropTypes.func.isRequired,
-  allAksjonspunktApproved: PropTypes.bool.isRequired,
-  fagsakYtelseType: kodeverkObjektPropType.isRequired,
-  erGodkjenningFerdig: PropTypes.bool.isRequired,
-  erKlageWithKA: PropTypes.bool,
-  behandlingsresultat: PropTypes.shape().isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingStatusKode: PropTypes.string.isRequired,
-  behandlingTypeKode: PropTypes.string.isRequired,
-  harSammeResultatSomOriginalBehandling: PropTypes.bool,
-};
-
-FatterVedtakApprovalModalSakIndex.defaultProps = {
-  erKlageWithKA: undefined,
+FatterVedtakTotrinnskontrollModalSakIndex.defaultProps = {
   harSammeResultatSomOriginalBehandling: false,
 };
 
-export default FatterVedtakApprovalModalSakIndex;
+export default FatterVedtakTotrinnskontrollModalSakIndex;

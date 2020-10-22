@@ -1,9 +1,13 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__utils-test... Remove this comment to see the full error message
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FormattedMessage } from 'react-intl';
 import { ToTrinnsFormImpl } from './ToTrinnsForm';

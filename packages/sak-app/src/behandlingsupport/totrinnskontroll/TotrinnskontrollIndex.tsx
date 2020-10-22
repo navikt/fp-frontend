@@ -9,7 +9,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak, BehandlingAppKontekst,
+  NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext, TotrinnskontrollAksjonspunkt,
 } from '@fpsak-frontend/types';
 import { requireProps, LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
@@ -25,24 +25,39 @@ import {
 import { useFpSakKodeverk, useFpTilbakeKodeverk } from '../../data/useKodeverk';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
-const getArsaker = (approval) => ([{
+const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunkt) => ([{
   code: vurderPaNyttArsakType.FEIL_FAKTA,
-  isSet: approval.feilFakta,
+  isSet: totrinnskontrollAksjonspunkt.feilFakta,
 }, {
   code: vurderPaNyttArsakType.FEIL_LOV,
-  isSet: approval.feilLov,
+  isSet: totrinnskontrollAksjonspunkt.feilLov,
 }, {
   code: vurderPaNyttArsakType.FEIL_REGEL,
-  isSet: approval.feilRegel,
+  isSet: totrinnskontrollAksjonspunkt.feilRegel,
 }, {
   code: vurderPaNyttArsakType.ANNET,
-  isSet: approval.annet,
+  isSet: totrinnskontrollAksjonspunkt.annet,
 }].filter((arsak) => arsak.isSet)
   .map((arsak) => arsak.code)
 );
 
-const getOnSubmit = (erTilbakekreving, behandlingId, saksnummer, selectedBehandlingVersjon, setAllAksjonspunktApproved,
-  setShowBeslutterModal, approveAp) => (values) => {
+type Values = {
+  approvals: {
+    aksjonspunkter: TotrinnskontrollAksjonspunkt[];
+  }[];
+};
+
+const getLagreFunksjon = (
+  erTilbakekreving: boolean,
+  behandlingId: number,
+  saksnummer: number, 
+  selectedBehandlingVersjon: number,
+  setAllAksjonspunktApproved: (erGodkjent: boolean) => void,
+  setShowBeslutterModal: (visModal: boolean) => void,
+  approveAp: (params: any) => Promise<any>,
+) => (
+  values: Values,
+) => {
   const aksjonspunkter = values.approvals
     .map((context) => context.aksjonspunkter)
     .reduce((a, b) => a.concat(b));
@@ -72,28 +87,21 @@ const getOnSubmit = (erTilbakekreving, behandlingId, saksnummer, selectedBehandl
   return approveAp(params);
 };
 
-interface TotrinnsKlageVurdering {
-  klageVurdering?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageVurderingResultatNFP?: any;
-  klageVurderingResultatNK?: any;
-}
-
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingId?: number;
   behandlingVersjon?: number;
-  totrinnskontrollSkjermlenkeContext?: any[];
-  totrinnskontrollReadOnlySkjermlenkeContext?: any[];
+  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollReadOnlySkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
 }
 
 /**
- * ApprovalIndex
+ * TotrinnskontrollIndex
  *
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
-export const ApprovalIndex: FunctionComponent<OwnProps> = ({
+export const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   behandlingId,
@@ -146,7 +154,7 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getOnSubmit(erTilbakekreving, behandlingId, fagsak.saksnummer, behandlingVersjon,
+  const onSubmit = useCallback(getLagreFunksjon(erTilbakekreving, behandlingId, fagsak.saksnummer, behandlingVersjon,
     setAllAksjonspunktApproved, setShowBeslutterModal, godkjennBehandling),
   [behandlingId, behandlingVersjon]);
 
@@ -182,7 +190,6 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
       />
       {showBeslutterModal && (
         <BeslutterModalIndex
-          erGodkjenningFerdig={stateGodkjennBehandling === RestApiState.SUCCESS}
           selectedBehandlingVersjon={behandlingVersjon}
           fagsakYtelseType={fagsak.sakstype}
           behandlingsresultat={behandling?.behandlingsresultat}
@@ -198,4 +205,4 @@ export const ApprovalIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default requireProps(['behandlingId', 'behandlingVersjon'])(ApprovalIndex);
+export default requireProps(['behandlingId', 'behandlingVersjon'])(TotrinnskontrollIndex);

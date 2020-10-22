@@ -5,9 +5,10 @@ import React, {
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Kodeverk } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { FatterVedtakApprovalModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
+import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
+import BehandlingAppKontekst from 'sak-app/src/behandling/behandlingAppKontekstTsType';
 
 interface TotrinnsKlageVurdering {
   klageVurdering?: Kodeverk;
@@ -17,10 +18,9 @@ interface TotrinnsKlageVurdering {
 }
 
 interface OwnProps {
-  erGodkjenningFerdig?: boolean;
   selectedBehandlingVersjon?: number;
   fagsakYtelseType: Kodeverk;
-  behandlingsresultat: any;
+  behandlingsresultat: BehandlingAppKontekst['behandlingsresultat'];
   behandlingId: number;
   behandlingTypeKode: string;
   pushLocation: (location: string) => void;
@@ -30,7 +30,6 @@ interface OwnProps {
 }
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
-  erGodkjenningFerdig = false,
   selectedBehandlingVersjon,
   fagsakYtelseType,
   behandlingsresultat,
@@ -56,12 +55,10 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <FatterVedtakApprovalModalSakIndex
-      showModal
+    <FatterVedtakTotrinnskontrollModalSakIndex
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
       fagsakYtelseType={fagsakYtelseType}
-      erGodkjenningFerdig={erGodkjenningFerdig}
       erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
       behandlingsresultat={behandlingsresultat}
       behandlingId={behandlingId}

@@ -8,15 +8,16 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
 import * as useHistory from '../../app/useHistory';
 import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import { ApprovalIndex } from './ApprovalIndex';
+import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
+import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
-describe('<ApprovalIndex>', () => {
+describe('<TotrinnskontrollIndex>', () => {
   const fagsak = {
     saksnummer: 1,
     sakstype: {
@@ -74,7 +75,7 @@ describe('<ApprovalIndex>', () => {
       opptjeningAktiviteter: [],
       totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
-    }
+    } as TotrinnskontrollAksjonspunkt
   );
 
   const navAnsatt = {
@@ -123,7 +124,7 @@ describe('<ApprovalIndex>', () => {
       getTotrinnsaksjonspunkterForeldreansvar(),
     ];
 
-    const wrapper = shallow(<ApprovalIndex
+    const wrapper = shallow(<TotrinnskontrollIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={alleBehandlinger[0].id}

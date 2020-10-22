@@ -2,9 +2,12 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
+// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import ToTrinnsForm from './ToTrinnsForm';
 import ToTrinnsFormReadOnly from './ToTrinnsFormReadOnly';
@@ -28,12 +31,12 @@ describe('<ApprovalPanel>', () => {
     toTrinnsBehandling: true,
   });
 
-  const getKodeverkSkjemalenkeTyper = (aksjonspunkter) => aksjonspunkter.map((ap) => ({
+  const getKodeverkSkjemalenkeTyper = (aksjonspunkter: any) => aksjonspunkter.map((ap: any) => ({
     kode: ap.skjermlenkeType,
     navn: 'Dummy Tekst',
   }));
 
-  const getNextProps = (totrinnskontrollSkjermlenkeContext, status) => (
+  const getNextProps = (totrinnskontrollSkjermlenkeContext: any, status: any) => (
     {
       totrinnskontrollSkjermlenkeContext,
       behandlingStatus: { kode: status },
@@ -43,16 +46,14 @@ describe('<ApprovalPanel>', () => {
     }
   );
 
-  const createAksjonspunkt = (aksjonspunktKode) => (
-    {
-      aksjonspunktKode,
-      beregningDto: null,
-      besluttersBegrunnelse: null,
-      opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
-      vurderPaNyttArsaker: [],
-    }
-  );
+  const createAksjonspunkt = (aksjonspunktKode: any) => ({
+    aksjonspunktKode,
+    beregningDto: null,
+    besluttersBegrunnelse: null,
+    opptjeningAktiviteter: [],
+    totrinnskontrollGodkjent: null,
+    vurderPaNyttArsaker: [],
+  });
 
   const getTotrinnsaksjonspunkterFoedsel = () => ({
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
@@ -155,7 +156,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(8);
-    const foedselContext = context.filter(({ contextCode }) => contextCode === 'FAKTA_OM_FOEDSEL');
+    const foedselContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'FAKTA_OM_FOEDSEL');
     expect(foedselContext)
       .to
       .have
@@ -164,7 +167,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(3);
-    const omsorgContext = context.filter(({ contextCode }) => contextCode === 'FAKTA_FOR_OMSORG');
+    const omsorgContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'FAKTA_FOR_OMSORG');
     expect(omsorgContext)
       .to
       .have
@@ -173,7 +178,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(2);
-    const foreldreansContext = context.filter(({ contextCode }) => contextCode === 'PUNKT_FOR_FORELDREANSVAR');
+    const foreldreansContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'PUNKT_FOR_FORELDREANSVAR');
     expect(foreldreansContext)
       .to
       .have
@@ -182,7 +189,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(2);
-    const adopsjonContext = context.filter(({ contextCode }) => contextCode === 'PUNKT_FOR_ADOPSJON');
+    const adopsjonContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'PUNKT_FOR_ADOPSJON');
     expect(adopsjonContext)
       .to
       .have
@@ -191,7 +200,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(3);
-    const beregningContext = context.filter(({ contextCode }) => contextCode === 'BEREGNING_FORELDREPENGER');
+    const beregningContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'BEREGNING_FORELDREPENGER');
     expect(beregningContext)
       .to
       .have
@@ -200,7 +211,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(4);
-    const opptjeningContext = context.filter(({ contextCode }) => contextCode === 'FAKTA_FOR_OPPTJENING');
+    const opptjeningContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'FAKTA_FOR_OPPTJENING');
     expect(opptjeningContext)
       .to
       .have
@@ -209,7 +222,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(1);
-    const medlemskapContext = context.filter(({ contextCode }) => contextCode === 'FAKTA_OM_MEDLEMSKAP');
+    const medlemskapContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'FAKTA_OM_MEDLEMSKAP');
     expect(medlemskapContext)
       .to
       .have
@@ -218,7 +233,9 @@ describe('<ApprovalPanel>', () => {
       .to
       .have
       .length(5);
-    const faktaOmBeregningContext = context.filter(({ contextCode }) => contextCode === 'FAKTA_OM_BEREGNING');
+    const faktaOmBeregningContext = context.filter(({
+      contextCode,
+    }: any) => contextCode === 'FAKTA_OM_BEREGNING');
     expect(faktaOmBeregningContext)
       .to
       .have

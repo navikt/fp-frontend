@@ -1,6 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import {
@@ -16,6 +15,12 @@ import styles from './ReasonsField.less';
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
 
+interface OwnProps {
+  fieldName: string;
+  showOnlyBegrunnelse: boolean;
+  godkjentHosKA: boolean;
+}
+
 /*
  * ReasonsField
  *
@@ -26,16 +31,18 @@ const maxLength2000 = maxLength(2000);
  * <ReasonsField fieldName={fieldName} showOnlyBegrunnelse={showBegrunnelse} />
  * ```
  */
-const ReasonsField = ({
-  fieldName, godkjentHosKA, showOnlyBegrunnelse, intl,
+const ReasonsField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  fieldName,
+  godkjentHosKA,
+  showOnlyBegrunnelse,
+  intl,
 }) => (
   <>
     <ArrowBox
       alignOffset={godkjentHosKA ? 1 : 110}
     >
-      {!showOnlyBegrunnelse
-        && (
-        <FlexContainer fluid wrap>
+      {!showOnlyBegrunnelse && (
+        <FlexContainer wrap>
           <FlexRow>
             <FlexColumn>
               <Undertekst className="blokk-xs"><FormattedMessage id="ReasonsField.Arsak" /></Undertekst>
@@ -68,7 +75,7 @@ const ReasonsField = ({
             </NavFieldGroup>
           </FlexRow>
         </FlexContainer>
-        )}
+      )}
       <TextAreaField
         name={`${fieldName}.besluttersBegrunnelse`}
         label={intl.formatMessage({ id: 'ReasonsField.Begrunnelse' })}
@@ -78,12 +85,5 @@ const ReasonsField = ({
     </ArrowBox>
   </>
 );
-
-ReasonsField.propTypes = {
-  fieldName: PropTypes.string.isRequired,
-  showOnlyBegrunnelse: PropTypes.bool.isRequired,
-  godkjentHosKA: PropTypes.bool.isRequired,
-  intl: PropTypes.shape().isRequired,
-};
 
 export default injectIntl(ReasonsField);

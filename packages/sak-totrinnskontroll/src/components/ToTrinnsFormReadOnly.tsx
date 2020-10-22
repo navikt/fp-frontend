@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -9,8 +8,10 @@ import { Image } from '@fpsak-frontend/shared-components';
 import checkImg from '@fpsak-frontend/assets/images/check.svg'; //
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
 import { getAksjonspunktTextSelector } from './ApprovalTextUtils';
+import TotrinnContext from '../TotrinnContext';
 
 import styles from './ToTrinnsFormReadOnly.less';
 
@@ -26,7 +27,7 @@ import styles from './ToTrinnsFormReadOnly.less';
   */
 
 /* eslint-disable react/no-array-index-key */
-const godkjendAksjonspunkt = (aksjonspunkt) => {
+const godkjendAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => {
   const { vurderPaNyttArsaker } = aksjonspunkt;
   return (
     <div className={styles.approvalItem}>
@@ -46,7 +47,7 @@ const godkjendAksjonspunkt = (aksjonspunkt) => {
         )
         : (
           <div className={styles.approvalItem}>
-            {vurderPaNyttArsaker.map((item, index) => (
+            {vurderPaNyttArsaker.map((item, index: number) => (
               <div key={`${item.kode}${index}`}>
                 <span>
                   <Image
@@ -64,10 +65,10 @@ const godkjendAksjonspunkt = (aksjonspunkt) => {
 };
 /* eslint-enable react/no-array-index-key */
 
-const renderAksjonspunkt = (aksjonspunkt, getAksjonspunktText) => (
+const renderAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt, getAksjonspunktText: any) => (
   <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
     <span>{aksjonspunkt.navn}</span>
-    {getAksjonspunktText(aksjonspunkt).map((formattedMessage, index) => (
+    {getAksjonspunktText(aksjonspunkt).map((formattedMessage: any, index: any) => (
       <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))} className={styles.aksjonspunktTextContainer}>
         <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))}>
           {formattedMessage}
@@ -83,7 +84,15 @@ const renderAksjonspunkt = (aksjonspunkt, getAksjonspunktText) => (
   </div>
 );
 
-export const ToTrinnsFormReadOnlyImpl = ({ approvalList, getAksjonspunktText }) => {
+interface OwnProps {
+  approvalList: TotrinnContext[];
+  getAksjonspunktText: (...args: any[]) => any;
+}
+
+export const ToTrinnsFormReadOnlyImpl: FunctionComponent<OwnProps> = ({
+  approvalList,
+  getAksjonspunktText,
+}) => {
   if (!approvalList || approvalList.length === 0) {
     return null;
   }
@@ -98,7 +107,7 @@ export const ToTrinnsFormReadOnlyImpl = ({ approvalList, getAksjonspunktText }) 
               <NavLink to={skjermlenke} onClick={() => window.scroll(0, 0)}>
                 {skjermlenkeNavn}
               </NavLink>
-              {aksjonspunkter.map((aksjonspunkt) => renderAksjonspunkt(aksjonspunkt, getAksjonspunktText))}
+              {aksjonspunkter.map((aksjonspunkt: any) => renderAksjonspunkt(aksjonspunkt, getAksjonspunktText))}
             </React.Fragment>
           );
         }
@@ -108,12 +117,7 @@ export const ToTrinnsFormReadOnlyImpl = ({ approvalList, getAksjonspunktText }) 
   );
 };
 
-ToTrinnsFormReadOnlyImpl.propTypes = {
-  approvalList: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  getAksjonspunktText: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: OwnProps) => ({
   getAksjonspunktText: getAksjonspunktTextSelector(ownProps),
 });
 
