@@ -3,6 +3,7 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
 // eslint-disable-next-line no-shadow
 export enum FpsakApiKeys {
+  INIT_FETCH = 'INIT_FETCH',
   KODEVERK = 'KODEVERK',
   KODEVERK_FPTILBAKE = 'KODEVERK_FPTILBAKE',
   LANGUAGE_FILE = 'LANGUAGE_FILE',
@@ -11,6 +12,7 @@ export enum FpsakApiKeys {
   FEATURE_TOGGLE = 'FEATURE_TOGGLE',
   SEARCH_FAGSAK = 'SEARCH_FAGSAK',
   FETCH_FAGSAK = 'FETCH_FAGSAK',
+  FAGSAK_BRUKER = 'FAGSAK_BRUKER',
   BEHANDLINGER_FPSAK = 'BEHANDLINGER_FPSAK',
   BEHANDLINGER_FPTILBAKE = 'BEHANDLINGER_FPTILBAKE',
   BEHANDLING_PERSONOPPLYSNINGER = 'BEHANDLING_PERSONOPPLYSNINGER',
@@ -42,27 +44,33 @@ export enum FpsakApiKeys {
 }
 
 const endpoints = new RestApiConfigBuilder()
+  .withGet('/fpsak/api/init-fetch', FpsakApiKeys.INIT_FETCH)
+
+  .withRel('nav-ansatt', FpsakApiKeys.NAV_ANSATT)
+  .withRel('kodeverk', FpsakApiKeys.KODEVERK)
+  .withRel('behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
+
+  .withRel('feature-toggle', FpsakApiKeys.FEATURE_TOGGLE)
+
+  .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
+  .withRel('sak-bruker', FpsakApiKeys.FAGSAK_BRUKER)
+  .withRel('handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
+  .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
+  .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
+  .withRel('sak-alle-behandlinger', FpsakApiKeys.BEHANDLINGER_FPSAK)
+  .withRel('sak-annen-part-behandling', FpsakApiKeys.ANNEN_PART_BEHANDLING)
+
   .withPost('/fpsak/api/fagsak/sok', FpsakApiKeys.SEARCH_FAGSAK)
-  .withPost('/fpsak/api/feature-toggle', FpsakApiKeys.FEATURE_TOGGLE)
   .withPost('/fpformidling/api/brev/forhaandsvis', FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
   .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
   .withPost('/fptilbake/api/dokument/forhandsvis-henleggelsesbrev', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE, { isResponseBlob: true })
   .withAsyncPut('/fpsak/api/behandlinger', FpsakApiKeys.NEW_BEHANDLING_FPSAK)
   .withAsyncPost('/fptilbake/api/behandlinger/opprett', FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
-  .withGet('/fpsak/api/behandlinger/alle', FpsakApiKeys.BEHANDLINGER_FPSAK)
   .withGet('/fptilbake/api/behandlinger/alle', FpsakApiKeys.BEHANDLINGER_FPTILBAKE)
-  .withGet('/fpsak/api/fagsak', FpsakApiKeys.FETCH_FAGSAK)
-  .withGet('/fpsak/api/behandlinger/annen-part-behandling', FpsakApiKeys.ANNEN_PART_BEHANDLING)
-  .withGet('/fpsak/api/nav-ansatt', FpsakApiKeys.NAV_ANSATT)
   .withGet('/fpsak/public/sprak/nb_NO.json', FpsakApiKeys.LANGUAGE_FILE)
-  .withGet('/fpsak/api/kodeverk', FpsakApiKeys.KODEVERK)
-  .withGet('/fpsak/api/kodeverk/behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
   .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)
-  .withGet('/fpsak/api/historikk', FpsakApiKeys.HISTORY_FPSAK)
-  .withGet('/fpsak/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
   .withGet('/fptilbake/api/historikk', FpsakApiKeys.HISTORY_FPTILBAKE)
   .withGet('/fptilbake/api/kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
-  .withGet('/fpsak/api/dokument/hent-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withGet('/fptilbake/api/behandlinger/kan-opprettes', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withGet('/fptilbake/api/behandlinger/kan-revurdering-opprettes-v2', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
   .withGet('/fptilbake/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE)

@@ -13,6 +13,8 @@ abstract class AbstractRequestApi {
 
   public abstract setLinks(links: Link[]);
 
+  public abstract addLinks(links: Link[]);
+
   public abstract setRequestPendingHandler(requestPendingHandler): void;
 
   public abstract setAddErrorMessageHandler(addErrorMessage): void;

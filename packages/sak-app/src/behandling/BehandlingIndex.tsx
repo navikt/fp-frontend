@@ -88,7 +88,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (behandling) {
-      requestApi.setLinks(behandling.links);
+      requestApi.addLinks(behandling.links);
       setBehandlingIdOgVersjon(behandlingId, behandlingVersjon);
     }
   }, [behandling]);

@@ -62,6 +62,11 @@ const FagsakIndex: FunctionComponent = () => {
 
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
+  const { state: fagsakPersonState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.FAGSAK_BRUKER, { saksnummer: selectedSaksnummer }, {
+    updateTriggers: [selectedSaksnummer],
+    suspendRequest: !selectedSaksnummer,
+  });
+
   const { data: fagsak, state: fagsakState } = restApiHooks.useRestApi<Fagsak>(FpsakApiKeys.FETCH_FAGSAK, { saksnummer: selectedSaksnummer }, {
     updateTriggers: [selectedSaksnummer, behandlingId, behandlingVersjon],
     suspendRequest: !selectedSaksnummer || erBehandlingEndretFraUndefined,
@@ -115,6 +120,10 @@ const FagsakIndex: FunctionComponent = () => {
     }
     return <Redirect to={pathToMissingPage()} />;
   }
+  if (fagsakPersonState === RestApiState.NOT_STARTED || fagsakState === RestApiState.LOADING) {
+    return <LoadingPanel />;
+  }
+
   if (fagsak.saksnummer !== selectedSaksnummer) {
     return <Redirect to={pathToMissingPage()} />;
   }
