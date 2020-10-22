@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 
 import {
-  FagsakInfo, ReduxFormStateCleaner, Rettigheter, useSetBehandlingVedEndring,
+  ReduxFormStateCleaner, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
@@ -21,7 +21,7 @@ const tilbakekrevingData = [
 
 interface OwnProps {
   behandlingId: number;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;

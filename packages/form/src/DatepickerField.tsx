@@ -22,6 +22,7 @@ interface DatepickerFieldProps {
     after?: Date;
   };
   initialMonth?: Date;
+  numberOfMonths?: number;
   validate?: (((text: any) => ({ id: string; length?: undefined }
     | { length: any; id?: undefined })[])
     | ((value: any) => { id: string }[])

@@ -10,7 +10,7 @@ const history = createBrowserHistory({
 });
 
 const withReduxAndRouterProvider = (Story) => {
-  const store = configureStore(history);
+  const store = configureStore();
 
   return (
     <Provider store={store}>

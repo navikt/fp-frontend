@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { Behandling, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 
 import BehandlingPickerItem from './BehandlingPickerItem';
 
@@ -39,7 +39,7 @@ const renderListItems = (behandlinger, getBehandlingLocation, behandlingId, show
 );
 
 interface OwnProps {
-  behandlinger: Behandling[];
+  behandlinger: BehandlingAppKontekst[];
   getBehandlingLocation: (behandlingId: number) => void;
   noExistingBehandlinger: boolean;
   behandlingId?: number;

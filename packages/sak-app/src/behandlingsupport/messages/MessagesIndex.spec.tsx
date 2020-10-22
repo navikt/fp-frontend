@@ -6,13 +6,12 @@ import { shallow } from 'enzyme';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import * as useHistory from '../../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import MessagesIndex from './MessagesIndex';
 
 describe('<MessagesIndex>', () => {

@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak,
+  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -25,7 +25,6 @@ import {
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling) => pathToAnnenPart(annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId);
 

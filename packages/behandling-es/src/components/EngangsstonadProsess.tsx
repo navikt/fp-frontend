@@ -6,10 +6,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel,
+  Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel,
   FatterVedtakStatusModal, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { Fagsak, KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
 
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegEsPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
@@ -17,7 +17,7 @@ import { restApiEsHooks, EsBehandlingApiKeys } from '../data/esBehandlingApi';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -27,7 +27,7 @@ const forhandsvis = (data) => {
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -41,19 +41,21 @@ interface OwnProps {
   setBehandling: (behandling: Behandling) => void;
 }
 
-const getForhandsvisCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
+const getForhandsvisCallback = (forhandsvisMelding: (data: any) => Promise<any>, fagsak: Fagsak, behandling: Behandling) => (data: any) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: fagsak.sakstype,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
+const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding: (data: any) => Promise<any>, fagsak: Fagsak, behandling: Behandling) => (
+  mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string,
+) => {
   const data = {
     behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.sakstype,
     varseltekst: fritekst || '',
     mottaker,
     brevmalkode,

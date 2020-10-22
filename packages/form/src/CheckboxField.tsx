@@ -14,6 +14,7 @@ interface CheckboxFieldProps {
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
+  onChange? :() => void;
 }
 
 interface RenderCheckboxFieldProps {

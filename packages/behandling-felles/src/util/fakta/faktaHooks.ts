@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt, Fagsak } from '@fpsak-frontend/types';
 
 import {
   utledFaktaPaneler, finnValgtPanel, formaterPanelerForSidemeny, getBekreftAksjonspunktCallback,
 } from './faktaUtils';
-import FagsakInfo from '../../types/fagsakInfoTsType';
 import Rettigheter from '../../types/rettigheterTsType';
 import FaktaPanelMenyRad from '../../types/faktaPanelMenyRadTsType';
 import FaktaPanelDef from './FaktaPanelDef';
@@ -49,7 +48,7 @@ const useFaktaAksjonspunktNotifikator = (
 
 const useCallbacks = (
   faktaPaneler: FaktaPanelUtledet[],
-  fagsak: FagsakInfo,
+  fagsak: Fagsak,
   behandling: Behandling,
   oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
   valgtProsessSteg: string,

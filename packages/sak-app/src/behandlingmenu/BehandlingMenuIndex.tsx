@@ -7,7 +7,6 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MenySakIndex, { MenyData } from '@fpsak-frontend/sak-meny';
-import { NavAnsatt, Fagsak } from '@fpsak-frontend/types';
 import MenyEndreBehandlendeEnhetIndex, { getMenytekst } from '@fpsak-frontend/sak-meny-endre-enhet';
 import MenyVergeIndex, { getMenytekst as getVergeMenytekst } from '@fpsak-frontend/sak-meny-verge';
 import MenyTaAvVentIndex, { getMenytekst as getTaAvVentMenytekst } from '@fpsak-frontend/sak-meny-ta-av-vent';
@@ -15,6 +14,7 @@ import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@fp
 import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-frontend/sak-meny-henlegg';
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
+import { NavAnsatt, Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import useHistory from '../app/useHistory';
 import useLocation from '../app/useLocation';
@@ -22,7 +22,6 @@ import {
   fjernVerge, opprettVerge,
   nyBehandlendeEnhet, resumeBehandling, shelveBehandling, setBehandlingOnHold, openBehandlingForChanges,
 } from './behandlingMenuOperations';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
 import useVisForhandsvisningAvMelding from '../data/useVisForhandsvisningAvMelding';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';

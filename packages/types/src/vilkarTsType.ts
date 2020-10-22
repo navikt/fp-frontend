@@ -1,10 +1,16 @@
 import Kodeverk from './kodeverkTsType';
 
 type Vilkar = Readonly<{
-  lovReferanse?: string;
   vilkarType: Kodeverk;
   vilkarStatus: Kodeverk;
+  merknadParametere: {
+    antallDagerSoeknadLevertForSent?: string;
+  };
+  avslagKode?: string;
+  lovReferanse?: string;
   overstyrbar: boolean;
+  evaluering?: string;
+  input?: string;
 }>
 
 export default Vilkar;

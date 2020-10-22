@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import { ProsessStegContainer } from '@fpsak-frontend/behandling-felles';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Fagsak } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -20,9 +20,9 @@ import AnkeProsess from './AnkeProsess';
 describe('<AnkeProsess>', () => {
   const fagsak = {
     saksnummer: 123456,
-    fagsakYtelseType: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
-    fagsakStatus: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    fagsakPerson: {
+    sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
+    status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
+    person: {
       alder: 30,
       personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
       erDod: false,
@@ -30,7 +30,7 @@ describe('<AnkeProsess>', () => {
       navn: 'Espen Utvikler',
       personnummer: '12345',
     },
-  };
+  } as Fagsak;
   const behandling = {
     id: 1,
     versjon: 2,
@@ -63,6 +63,7 @@ describe('<AnkeProsess>', () => {
     vilkarType: { kode: vilkarType.ADOPSJONSVILKARET, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.IKKE_VURDERT, kodeverk: 'test' },
     overstyrbar: true,
+    merknadParametere: {},
   }];
   const ankeVurdering = {
     ankeVurderingResultat: undefined,

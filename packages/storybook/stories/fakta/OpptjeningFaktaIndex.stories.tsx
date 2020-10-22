@@ -6,7 +6,7 @@ import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAkti
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Opptjening } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -82,7 +82,7 @@ const opptjeningUtenAksjonspunkt = {
     opptjeningTom: '2019-09-29',
     opptjeningperiode: {
       dager: 4,
-      månder: 10,
+      måneder: 10,
     },
   },
   opptjeningAktivitetList: [{
@@ -99,7 +99,7 @@ const opptjeningUtenAksjonspunkt = {
     erGodkjent: true,
     erManueltOpprettet: false,
     erPeriodeEndret: false,
-    aringRegistreringsdato: '1995-09-14',
+    naringRegistreringsdato: '1995-09-14',
     oppdragsgiverOrg: '973861778',
     stillingsandel: 50,
   }, {
@@ -120,7 +120,7 @@ const opptjeningUtenAksjonspunkt = {
     oppdragsgiverOrg: '973861778',
     stillingsandel: 50,
   }],
-};
+} as Opptjening;
 
 const merknaderFraBeslutter = {
   notAccepted: false,

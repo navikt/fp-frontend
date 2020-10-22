@@ -1,6 +1,5 @@
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt, Fagsak } from '@fpsak-frontend/types';
 
-import FagsakInfo from '../../types/fagsakInfoTsType';
 import Rettigheter from '../../types/rettigheterTsType';
 import FaktaPanelDef from './FaktaPanelDef';
 import FaktaPanelMenyRad from '../../types/faktaPanelMenyRadTsType';
@@ -42,7 +41,7 @@ FaktaPanelMenyRad[] => faktaPaneler.map((panel) => ({
 }));
 
 export const getBekreftAksjonspunktCallback = (
-  fagsak: FagsakInfo,
+  fagsak: Fagsak,
   behandling: Behandling,
   oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
   overstyringApCodes: string[],

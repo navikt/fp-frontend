@@ -32,6 +32,8 @@ type Behandling = Readonly<{
   toTrinnsBehandling: boolean;
   behandlingArsaker: {
     behandlingArsakType: Kodeverk;
+    manueltOpprettet: boolean;
+    erAutomatiskRevurdering: boolean;
   }[];
   ansvarligSaksbehandler?: string;
   kanHenleggeBehandling?: boolean;

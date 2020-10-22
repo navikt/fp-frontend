@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 import {
-  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
+  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
@@ -24,7 +24,7 @@ const engansstonadData = [
 
 interface OwnProps {
   behandlingId: number;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;

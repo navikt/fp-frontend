@@ -3,25 +3,64 @@ import { connect } from 'react-redux';
 import { change, InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import {
   KodeverkMedNavn, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
-  Aksjonspunkt, SimuleringResultat, Kodeverk,
+  Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import behandlingResultatType, { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { behandlingForm, behandlingFormValueSelector, getBehandlingFormPrefix } from '@fpsak-frontend/form';
 
-import { findInnvilgetResultatText, findAvslagResultatText, getTilbakekrevingText } from '../felles/VedtakHelper';
+import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
 import VedtakAvslagPanel from './VedtakAvslagPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import VedtakFritekstbrevModal from '../felles/svp/VedtakFritekstbrevModal';
 
-const getPreviewManueltBrevCallback = (formProps, begrunnelse, brodtekst, overskrift, skalOverstyre, previewCallback) => (e) => {
+export const findAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string) => {
+  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
+    return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
+  }
+  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST) {
+    return 'VedtakForm.ResultatKlageAvvist';
+  }
+
+  if (ytelseType === fagsakYtelseType.ENGANGSSTONAD) {
+    return 'VedtakForm.EngangsstonadIkkeInnvilget';
+  }
+
+  if (ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER) {
+    return 'VedtakForm.SvangerskapspengerIkkeInnvilget';
+  }
+
+  return 'VedtakForm.ForeldrepengerIkkeInnvilget';
+};
+
+export const findInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string) => {
+  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
+    return 'VedtakForm.ResultatOpprettholdVedtak';
+  }
+  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_MEDHOLD) {
+    return 'VedtakForm.ResultatKlageMedhold';
+  }
+
+  if (ytelseType === fagsakYtelseType.ENGANGSSTONAD) {
+    return 'VedtakForm.VilkarStatusInnvilgetEngangsstonad';
+  }
+
+  if (ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER) {
+    return 'VedtakForm.SvangerskapspengerInnvilget';
+  }
+
+  return 'VedtakForm.VilkarStatusInnvilgetForeldrepenger';
+};
+
+const getPreviewManueltBrevCallback = (formProps: InjectedFormProps, begrunnelse: string, brodtekst: string,
+  overskrift: string, skalOverstyre: boolean, previewCallback: (data: any) => void) => (e) => {
   if (formProps.valid || formProps.pristine) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
@@ -35,18 +74,19 @@ const getPreviewManueltBrevCallback = (formProps, begrunnelse, brodtekst, oversk
 
     previewCallback(data);
   } else {
+    // @ts-ignore
     formProps.submit();
   }
   e.preventDefault();
 };
 
-const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper = []) => behandlingArsakTyper
+const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingArsaker'] = []) => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
   .some((bt) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE
     || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
     || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK);
 
-const finnVedtakstatusTekst = (behandlingsresultat, intl, ytelseTypeKode) => {
+const finnVedtakstatusTekst = (behandlingsresultat: Behandling['behandlingsresultat'], intl: IntlShape, ytelseTypeKode: string) => {
   const erInnvilget = isInnvilget(behandlingsresultat.type.kode);
   const erAvslatt = isAvslag(behandlingsresultat.type.kode);
 
@@ -67,9 +107,7 @@ interface PureOwnProps {
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  tilbakekrevingvalg?: {
-    videreBehandling: Kodeverk;
-  };
+  tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
@@ -112,7 +150,7 @@ export const VedtakForm: FunctionComponent<PureOwnProps & MappedOwnProps & Dispa
   } = behandling;
 
   const erBehandlingEtterKlage = useMemo(() => erArsakTypeBehandlingEtterKlage(behandling.behandlingArsaker), [behandling.behandlingArsaker]);
-  const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(simuleringResultat, tilbakekrevingvalg, alleKodeverk), [
+  const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
   const vedtakstatusTekst = useMemo(() => finnVedtakstatusTekst(behandlingsresultat, intl, ytelseTypeKode), [behandlingsresultat]);
 
@@ -185,7 +223,14 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values) => values.aksjonspunktKoder.map((apCode) => ({
+interface FormValues {
+  aksjonspunktKoder: string[];
+  begrunnelse: string;
+  brødtekst?: string;
+  overskrift: string;
+}
+
+const transformValues = (values: FormValues) => values.aksjonspunktKoder.map((apCode) => ({
   kode: apCode,
   begrunnelse: values.begrunnelse,
   fritekstBrev: values.brødtekst,
@@ -197,7 +242,7 @@ const transformValues = (values) => values.aksjonspunktKoder.map((apCode) => ({
 const formName = 'VedtakForm';
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: any) => submitCallback(transformValues(values)));
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),
