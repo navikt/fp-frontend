@@ -36,6 +36,7 @@ const ENTER_KEY_CODE = 13;
 
 const defaultBGFordeling = (periodeUtenAarsak) => ({
   nyAndel: true,
+  kilde: 'SAKSBEHANDLER_FORDELING',
   fordelingForrigeBehandling: 0,
   fastsattBelop: formatCurrencyNoKr(0),
   lagtTilAvSaksbehandler: true,
