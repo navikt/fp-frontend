@@ -15,7 +15,7 @@ import useIntl from '../useIntl';
 
 import styles from './dokumentasjonFaktaForm.less';
 
-const findAntallBarnUnder15 = (fodselsdatoer: any, omsorgsovertakelseDato: any) => {
+const findAntallBarnUnder15 = (fodselsdatoer: { [key: number ]: string }, omsorgsovertakelseDato: string) => {
   const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer)
     .filter((id) => fodselsdatoer[id]).length;
   if (nrOfNotNullFodselsdatoer === 0 || !omsorgsovertakelseDato) {
@@ -29,7 +29,7 @@ const findAntallBarnUnder15 = (fodselsdatoer: any, omsorgsovertakelseDato: any) 
     .reduce((a, b) => a + b, 0);
 };
 
-const isAgeAbove15 = (fodselsdatoer: any, omsorgsovertakelseDato: any, id: any) => fodselsdatoer[id]
+const isAgeAbove15 = (fodselsdatoer: { [key: number ]: string }, omsorgsovertakelseDato: string, id: string) => fodselsdatoer[id]
   && omsorgsovertakelseDato
   && moment(fodselsdatoer[id])
     .isSameOrBefore(moment(omsorgsovertakelseDato)
@@ -149,8 +149,6 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<OwnProps> & StaticFunctions 
 
 DokumentasjonFaktaFormImpl.defaultProps = {
   fodselsdatoer: {},
-  omsorgsovertakelseDato: undefined,
-  barnetsAnkomstTilNorgeDato: undefined,
 };
 
 const FORM_NAME = 'AdopsjonInfoPanel';

@@ -7,14 +7,13 @@ import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
-import { Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import * as useLocation from '../app/useLocation';
 import * as useRouteMatch from '../app/useRouteMatch';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 
 describe('<FagsakProfileIndex>', () => {
   const locationMock = {

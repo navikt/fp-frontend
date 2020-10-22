@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
-import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Options, EndpointData, RestApiData } from '@fpsak-frontend/rest-api-hooks/src/local-data/useMultipleRestApi';
 
-import FagsakInfo from '../types/fagsakInfoTsType';
 import MargMarkering from './MargMarkering';
 import InngangsvilkarPanel from './InngangsvilkarPanel';
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
@@ -16,7 +15,7 @@ import prosessStegHooks from '../util/prosessSteg/prosessStegHooks';
 import { ProsessStegUtledet } from '../util/prosessSteg/ProsessStegUtledet';
 
 interface OwnProps {
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   valgtProsessSteg?: ProsessStegUtledet;

@@ -10,15 +10,14 @@ import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { FagsakInfo } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
 import styles from './registrerPapirsoknadPanel.less';
 
 interface OwnProps {
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
   setSoknadData: (soknadData: SoknadData) => void;
@@ -51,7 +50,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
         <SoknadTypePickerForm
           setSoknadData={setSoknadData}
           soknadData={soknadData}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
+          fagsakYtelseType={fagsak.sakstype}
           alleKodeverk={kodeverk}
         />
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.ENGANGSSTONAD && (
@@ -61,7 +60,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.fagsakPerson}
+            fagsakPerson={fagsak.person}
           />
         )}
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.FORELDREPENGER && (
@@ -71,7 +70,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.fagsakPerson}
+            fagsakPerson={fagsak.person}
           />
         )}
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.SVANGERSKAPSPENGER && (
@@ -81,7 +80,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.fagsakPerson}
+            fagsakPerson={fagsak.person}
           />
         )}
       </Container>

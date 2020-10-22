@@ -1,11 +1,13 @@
 import Kodeverk from './kodeverkTsType';
 
+export type AvklartBarn = Readonly<{
+  fodselsdato: string;
+  dodsdato?: string;
+}>
+
 export type FamilieHendelse = Readonly<{
   skjaringstidspunkt: string;
-  avklartBarn?: {
-    fodselsdato: string;
-    dodsdato?: string;
-  }[];
+  avklartBarn?: AvklartBarn[];
   brukAntallBarnFraTps?: boolean;
   dokumentasjonForeligger?: boolean;
   termindato?: string;

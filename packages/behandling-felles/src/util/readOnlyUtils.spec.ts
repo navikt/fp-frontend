@@ -46,6 +46,7 @@ describe('<readOnlyUtils>', () => {
     vilkarType: { kode: vilkarType.FODSELSVILKARET_MOR, kodeverk: 'test' },
     vilkarStatus: { kode: vilkarUtfallType.OPPFYLT, kodeverk: 'test' },
     overstyrbar: true,
+    merknadParametere: {},
   }];
 
   const rettigheter = {

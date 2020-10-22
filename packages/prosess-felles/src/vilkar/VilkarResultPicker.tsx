@@ -46,7 +46,7 @@ interface StaticFunctions {
     erVilkarOk: boolean;
     avslagCode?: string;
   },
-  transformValues?: (values: { erVilkarOk: boolean; avslagCode: string; avslagDato: string }) => {
+  transformValues?: (values: { erVilkarOk: boolean; avslagCode?: string; avslagDato?: string }) => {
     erVilkarOk: boolean;
   } | {
     erVilkarOk: boolean;
@@ -178,7 +178,7 @@ VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresulta
   };
 };
 
-VilkarResultPicker.transformValues = (values: { erVilkarOk: boolean; avslagCode: string; avslagDato: string }) => (
+VilkarResultPicker.transformValues = (values: { erVilkarOk: boolean; avslagCode?: string; avslagDato?: string }) => (
   values.erVilkarOk
     ? { erVilkarOk: values.erVilkarOk }
     : {

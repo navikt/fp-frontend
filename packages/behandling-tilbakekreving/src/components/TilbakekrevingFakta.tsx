@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import {
-  FagsakInfo, SideMenuWrapper, faktaHooks, Rettigheter, useSetBehandlingVedEndring,
+  SideMenuWrapper, faktaHooks, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -16,7 +16,7 @@ const overstyringApCodes = [];
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};

@@ -10,11 +10,10 @@ import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/ut
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  KodeverkMedNavn, NavAnsatt, Fagsak,
+  KodeverkMedNavn, NavAnsatt, Fagsak, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
-import BehandlingAppKontekst from './behandlingAppKontekstTsType';
 import getAccessRights from '../app/util/access';
 import {
   getProsessStegLocation, getFaktaLocation, getLocationWithDefaultProsessStegAndFakta,
@@ -98,16 +97,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
 
-  const fagsakInfo = {
-    saksnummer: fagsak.saksnummer,
-    fagsakStatus: fagsak.status,
-    fagsakPerson: fagsak.person,
-    fagsakYtelseType: fagsak.sakstype,
-    kanRevurderingOpprettes: fagsak.kanRevurderingOpprettes,
-    skalBehandlesAvInfotrygd: fagsak.skalBehandlesAvInfotrygd,
-    isForeldrepengerFagsak: fagsak.sakstype.kode === FagsakYtelseType.FORELDREPENGER,
-  };
-
   const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
@@ -127,7 +116,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     oppdaterBehandlingVersjon,
     behandlingEventHandler,
     kodeverk,
-    fagsak: fagsakInfo,
+    fagsak,
     rettigheter,
     opneSokeside,
     setRequestPendingMessage,

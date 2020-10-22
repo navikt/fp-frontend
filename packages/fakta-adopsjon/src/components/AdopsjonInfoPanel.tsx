@@ -22,7 +22,7 @@ import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
 const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = aksjonspunktCodes;
 const adopsjonAksjonspunkter = [OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, ADOPSJONSDOKUMENTAJON, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN];
 
-const getHelpTexts = (aksjonspunkter: any) => {
+const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
   const helpTexts = [
     <FormattedMessage key="KontrollerMotDok" id="AdopsjonInfoPanel.KontrollerMotDok" />,
   ];
@@ -160,7 +160,7 @@ const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
   soknad, familiehendelse, allAksjonspunkter,
 ) => {
-  const aksjonspunkter = allAksjonspunkter.filter((ap: any) => adopsjonAksjonspunkter.includes(ap.definisjon.kode));
+  const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.includes(ap.definisjon.kode));
 
   let mannAdoptererAleneValues = {};
   if (hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter)) {
