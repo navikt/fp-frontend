@@ -34,10 +34,8 @@ export const AktoerGrid: FunctionComponent<OwnProps> = ({
     <>
       <VisittkortSakIndex
         alleKodeverk={alleKodeverk}
-        fagsak={{
-          ...vFagsak,
-          person: data.person,
-        } as Fagsak}
+        fagsak={vFagsak as Fagsak}
+        fagsakPerson={data.person}
       />
       <div className={styles.list}>
         {data.fagsaker.length ? data.fagsaker.map((fagsak) => (
