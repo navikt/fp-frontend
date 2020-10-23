@@ -12002,10 +12002,10 @@ nav-frontend-lenkepanel@^1.0.50:
   resolved "https://registry.yarnpkg.com/nav-frontend-lenkepanel/-/nav-frontend-lenkepanel-1.0.50.tgz#e7a90176c000fff92932317c484a6d73e2102b6b"
   integrity sha512-oqV0+DURtfjQ2dMQd+LfHsg//9PRZsiH8CyU07d5P4senhRlPpY1zG2LzC3bWJgg46j4t/YcH3r4uCnD6+Qvuw==
 
-nav-frontend-lenker-style@0.2.32:
-  version "0.2.32"
-  resolved "https://registry.yarnpkg.com/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.32.tgz#40aaf3e1d7dc3df5cd247f00c78fa91ccdf36b07"
-  integrity sha512-+lI52E2jn0rYOe7+JbeLqWyWxgGTgFVkI5w70Sq93LUphk+sDuF+WNmrxdb8w8G8H7unq2x52HjX5u7QHwUbpA==
+nav-frontend-lenker-style@0.2.33:
+  version "0.2.33"
+  resolved "https://registry.yarnpkg.com/nav-frontend-lenker-style/-/nav-frontend-lenker-style-0.2.33.tgz#69f8f38fd512e68ea7bb1be1461a3b0be7294514"
+  integrity sha512-+CIsEihE/84xS/JeqCYWWJN9qGv+5xbTRsKD8xi+dR17IJoJRjAcDmCjFXy4Jckfta5NMAPDO6iPuKuqf3xwNQ==
 
 nav-frontend-lenker@1.0.44:
   version "1.0.44"
