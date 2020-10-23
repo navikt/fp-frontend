@@ -4,7 +4,7 @@ import {
 } from 'react-intl';
 
 import { Innholdstittel } from 'nav-frontend-typografi';
-import { pageContainer } from './errorPageWrapper.less';
+import styles from './errorPageWrapper.less';
 import messages from '../../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -30,7 +30,7 @@ const ErrorPageWrapper: FunctionComponent<OwnProps> = ({
   titleCode,
 }) => (
   <RawIntlProvider value={intl}>
-    <div className={pageContainer}>
+    <div className={styles.pageContainer}>
       <Innholdstittel>
         <FormattedMessage id={titleCode} values={{ br: <br /> }} />
       </Innholdstittel>
