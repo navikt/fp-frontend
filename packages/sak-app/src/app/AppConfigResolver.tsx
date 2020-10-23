@@ -6,7 +6,9 @@ import { isObjectEmpty } from '@fpsak-frontend/utils';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { Link } from '@fpsak-frontend/rest-api';
 
-import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
+import {
+  LinkCategory, FpsakApiKeys, requestApi, restApiHooks,
+} from '../data/fpsakApi';
 
 interface OwnProps {
   children: ReactElement,
@@ -35,9 +37,9 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
   const harHentaFerdigInitData = initFetchState === RestApiState.SUCCESS;
 
   if (harHentaFerdigInitData) {
-    requestApi.setLinks(initFetchData.links);
-    requestApi.addLinks(initFetchData.toggleLinks);
-    requestApi.addLinks(initFetchData.sakLinks);
+    requestApi.setLinks(initFetchData.links, LinkCategory.INIT_DATA);
+    requestApi.setLinks(initFetchData.toggleLinks, LinkCategory.FEATURE_TOGGLE);
+    requestApi.setLinks(initFetchData.sakLinks, LinkCategory.FAGSAK);
   }
 
   const options = {

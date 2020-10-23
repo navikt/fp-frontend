@@ -6,6 +6,8 @@ import RequestRunner from './RequestRunner';
 import ResponseCache from './ResponseCache';
 import RequestConfig, { RequestType } from '../RequestConfig';
 
+const DEFAULT_CATEGORY = 'DEFAULT_CATEGORY';
+
 const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseBlob: boolean) => {
   if (restMethod === RequestType.GET) {
     return httpClientApi.get;
@@ -50,7 +52,7 @@ class RequestApi extends AbstractRequestApi {
 
   endpointConfigList: RequestConfig[];
 
-  links: Link[] = [];
+  links: {[key: string]: Link[]} = {};
 
   notificationMapper: NotificationMapper = new NotificationMapper();
 
@@ -73,12 +75,14 @@ class RequestApi extends AbstractRequestApi {
     return undefined;
   }
 
+  private findLinks = (rel: string): Link => Object.values(this.links).flat().find((link) => link.rel === rel);
+
   public startRequest = async (endpointName: string, params?: any, isCachingOn = false) => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
-    const link = this.links.find((l) => l.rel === endpointConfig.rel);
+    const link = this.findLinks(endpointConfig.rel);
     const restMethod = link ? link.type : endpointConfig.restMethod;
     const href = link ? link.href : endpointConfig.path;
 
@@ -115,16 +119,15 @@ class RequestApi extends AbstractRequestApi {
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
-    const link = this.links.find((l) => l.rel === endpointConfig.rel);
+    const link = this.findLinks(endpointConfig.rel);
     return !!link?.href || !!endpointConfig?.path;
   };
 
-  public setLinks = (links: Link[]) => {
-    this.links = links;
-  }
-
-  public addLinks = (links: Link[]) => {
-    this.links = this.links.concat(links);
+  public setLinks = (links: Link[], linkCategory: string = DEFAULT_CATEGORY) => {
+    this.links = {
+      ...this.links,
+      [linkCategory]: links,
+    };
   }
 
   public setRequestPendingHandler = (requestPendingHandler) => {

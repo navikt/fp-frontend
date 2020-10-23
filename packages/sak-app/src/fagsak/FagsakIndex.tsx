@@ -25,6 +25,7 @@ import {
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import SakRettigheter from './sakRettigheterTsType';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling) => pathToAnnenPart(annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId);
 
@@ -74,6 +75,13 @@ const FagsakIndex: FunctionComponent = () => {
     keepData: true,
   });
 
+  const { data: fagsakRettigheter, state: fagsakRettigheterState } = restApiHooks
+    .useRestApi<SakRettigheter>(FpsakApiKeys.SAK_RETTIGHETER, { saksnummer: selectedSaksnummer }, {
+      updateTriggers: [selectedSaksnummer, behandlingId, behandlingVersjon],
+      suspendRequest: !selectedSaksnummer || erBehandlingEndretFraUndefined,
+      keepData: true,
+    });
+
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
 
   const { data: behandlingerFpSak, state: behandlingerFpSakState } = restApiHooks.useRestApi<BehandlingAppKontekst[]>(
@@ -121,7 +129,8 @@ const FagsakIndex: FunctionComponent = () => {
     }
     return <Redirect to={pathToMissingPage()} />;
   }
-  if (fagsakPersonState === RestApiState.NOT_STARTED || fagsakState === RestApiState.LOADING) {
+  if (fagsakPersonState === RestApiState.NOT_STARTED || fagsakState === RestApiState.LOADING
+    || fagsakRettigheterState === RestApiState.NOT_STARTED || fagsakRettigheterState === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
 
@@ -161,6 +170,7 @@ const FagsakIndex: FunctionComponent = () => {
             alleBehandlinger={alleBehandlinger}
             harHentetBehandlinger={harHentetBehandlingerFraFpsak && harHentetBehandlingerFraFpTilbake}
             oppfriskBehandlinger={oppfriskBehandlinger}
+            fagsakRettigheter={fagsakRettigheter}
           />
         )}
         supportContent={(

@@ -2,6 +2,14 @@ import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
 // eslint-disable-next-line no-shadow
+export enum LinkCategory {
+  INIT_DATA = 'INIT_DATA',
+  FEATURE_TOGGLE = 'FEATURE_TOGGLE',
+  FAGSAK = 'FAGSAK',
+  BEHANDLING = 'BEHANDLING',
+}
+
+// eslint-disable-next-line no-shadow
 export enum FpsakApiKeys {
   INIT_FETCH = 'INIT_FETCH',
   KODEVERK = 'KODEVERK',
@@ -12,7 +20,7 @@ export enum FpsakApiKeys {
   FEATURE_TOGGLE = 'FEATURE_TOGGLE',
   SEARCH_FAGSAK = 'SEARCH_FAGSAK',
   FETCH_FAGSAK = 'FETCH_FAGSAK',
-  FAGSAK_BRUKER = 'FAGSAK_BRUKER',
+  SAK_BRUKER = 'SAK_BRUKER',
   BEHANDLINGER_FPSAK = 'BEHANDLINGER_FPSAK',
   BEHANDLINGER_FPTILBAKE = 'BEHANDLINGER_FPTILBAKE',
   BEHANDLING_PERSONOPPLYSNINGER = 'BEHANDLING_PERSONOPPLYSNINGER',
@@ -34,7 +42,8 @@ export enum FpsakApiKeys {
   HAR_APENT_KONTROLLER_REVURDERING_AP = 'HAR_APENT_KONTROLLER_REVURDERING_AP',
   BREVMALER = 'BREVMALER',
   SUBMIT_MESSAGE = 'SUBMIT_MESSAGE',
-  MENYHANDLING_RETTIGHETER = 'MENYHANDLING_RETTIGHETER',
+  SAK_RETTIGHETER = 'SAK_RETTIGHETER',
+  BEHANDLING_RETTIGHETER = 'BEHANDLING_RETTIGHETER',
   MENYHANDLING_RETTIGHETER_FPTILBAKE = 'MENYHANDLING_RETTIGHETER_FPTILBAKE',
   KAN_TILBAKEKREVING_OPPRETTES = 'KAN_TILBAKEKREVING_OPPRETTES',
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES = 'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
@@ -56,8 +65,8 @@ const endpoints = new RestApiConfigBuilder()
 
   // Fagsak
   .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
-  .withRel('sak-bruker', FpsakApiKeys.FAGSAK_BRUKER)
-  .withRel('handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER)
+  .withRel('sak-bruker', FpsakApiKeys.SAK_BRUKER)
+  .withRel('sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER)
   .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withRel('sak-alle-behandlinger', FpsakApiKeys.BEHANDLINGER_FPSAK)
@@ -76,6 +85,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('har-apent-kontroller-revurdering-aksjonspunkt', FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP)
   .withRel('brev-maler', FpsakApiKeys.BREVMALER)
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
+  .withRel('behandling-rettigheter', FpsakApiKeys.BEHANDLING_RETTIGHETER)
 
   // TODO FpTilbake
   .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })

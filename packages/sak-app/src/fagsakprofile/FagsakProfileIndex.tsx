@@ -22,6 +22,7 @@ import BehandlingMenuDataResolver from '../behandlingmenu/BehandlingMenuDataReso
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
+import SakRettigheter from '../fagsak/sakRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
@@ -42,6 +43,7 @@ interface OwnProps {
   behandlingVersjon?: number;
   harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
+  fagsakRettigheter: SakRettigheter;
 }
 
 export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
@@ -51,6 +53,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   oppfriskBehandlinger,
+  fagsakRettigheter,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingId);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -103,6 +106,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}
               oppfriskBehandlinger={oppfriskBehandlinger}
+              fagsakRettigheter={fagsakRettigheter}
             />
           )}
           renderBehandlingVelger={() => (

@@ -10,6 +10,7 @@ import ApplicationContextPath from '../app/ApplicationContextPath';
 import BehandlingMenuIndex from './BehandlingMenuIndex';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';
+import SakRettigheter from '../fagsak/sakRettigheterTsType';
 
 const defaultSakRettigheter: SakRettigheter = {
   sakSkalTilInfotrygd: true,
@@ -37,6 +38,7 @@ interface OwnProps {
   oppfriskBehandlinger: () => void;
   behandlingId?: number;
   behandlingVersjon?: number;
+  fagsakRettigheter: SakRettigheter;
 }
 
 const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
@@ -45,17 +47,19 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   oppfriskBehandlinger,
   behandlingId,
   behandlingVersjon,
+  fagsakRettigheter,
 }) => {
+  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
-  const { data: sakRettigheterFpSak, state: stateFpSak } = restApiHooks.useRestApi<SakRettigheter>(
-    FpsakApiKeys.MENYHANDLING_RETTIGHETER, { saksnummer: fagsak.saksnummer }, {
+  const { data: behandlingRettigheterFpSak, state: stateFpSak } = restApiHooks.useRestApi<SakRettigheter>(
+    FpsakApiKeys.BEHANDLING_RETTIGHETER, { uuid: behandling.uuid }, {
       suspendRequest: erBehandlingEndretFraUndefined,
       updateTriggers: [behandlingId, behandlingVersjon],
       keepData: true,
     },
   );
-  const erRettigheterFpSakVisningsklar = sakRettigheterFpSak || erFerdig(stateFpSak);
+  const erRettigheterFpSakVisningsklar = behandlingRettigheterFpSak || erFerdig(stateFpSak);
 
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
   const { data: sakRettigheterFpTilbake, state: stateFpTilbake } = restApiHooks.useRestApi<SakRettigheter>(
@@ -67,8 +71,8 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   );
   const erRettigheterFpTilbakeVisningsklar = !erTilbakekrevingAktivert || sakRettigheterFpTilbake || erFerdig(stateFpTilbake);
 
-  const sakRettigheter = useMemo(() => slaSammenRettigheter(sakRettigheterFpSak, sakRettigheterFpTilbake),
-    [sakRettigheterFpSak, sakRettigheterFpTilbake]);
+  const sakRettigheter = useMemo(() => slaSammenRettigheter(behandlingRettigheterFpSak, sakRettigheterFpTilbake),
+    [behandlingRettigheterFpSak, sakRettigheterFpTilbake]);
 
   if (!erRettigheterFpSakVisningsklar || !erRettigheterFpTilbakeVisningsklar) {
     return <LoadingPanel />;
@@ -83,6 +87,7 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
       behandlingVersion={behandlingVersjon}
       sakRettigheter={sakRettigheter}
       oppfriskBehandlinger={oppfriskBehandlinger}
+      fagsakRettigheter={fagsakRettigheter}
     />
   );
 };

@@ -18,7 +18,9 @@ import getAccessRights from '../app/util/access';
 import {
   getProsessStegLocation, getFaktaLocation, getLocationWithDefaultProsessStegAndFakta,
 } from '../app/paths';
-import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
+import {
+  FpsakApiKeys, requestApi, restApiHooks, LinkCategory,
+} from '../data/fpsakApi';
 import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from '../app/ErrorBoundary';
 
@@ -89,7 +91,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (behandling) {
-      requestApi.addLinks(behandling.links);
+      requestApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
       setBehandlingIdOgVersjon(behandlingId, behandlingVersjon);
     }
   }, [behandling]);

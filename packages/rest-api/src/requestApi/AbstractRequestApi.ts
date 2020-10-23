@@ -11,9 +11,7 @@ abstract class AbstractRequestApi {
 
   public abstract hasPath(endpointName: string);
 
-  public abstract setLinks(links: Link[]);
-
-  public abstract addLinks(links: Link[]);
+  public abstract setLinks(links: Link[], linkCategory?: string);
 
   public abstract setRequestPendingHandler(requestPendingHandler): void;
 
