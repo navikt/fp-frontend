@@ -5,6 +5,8 @@ import sinon from 'sinon';
 import {
   DateLabel, Image, PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
+import { Arbeidsforhold } from '@fpsak-frontend/types';
+
 import PersonArbeidsforholdTable, { utledNøkkel } from './PersonArbeidsforholdTable';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 import { mountWithIntl } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
@@ -20,7 +22,6 @@ describe('<PersonArbeidsforholdTable>', () => {
     fomDato: '2018-01-01',
     tomDato: '2018-10-10',
     kilde: {
-      kode: 'INNTEKT',
       navn: '',
     },
     mottattDatoInntektsmelding: undefined,
@@ -28,7 +29,7 @@ describe('<PersonArbeidsforholdTable>', () => {
     tilVurdering: true,
     stillingsprosent: 80,
     lagtTilAvSaksbehandler: false,
-  };
+  } as Arbeidsforhold;
 
   it('skal vise tabell med to arbeidsforhold der den ene raden er markert som valgt', () => {
     const arbeidsforhold2 = {
@@ -41,14 +42,13 @@ describe('<PersonArbeidsforholdTable>', () => {
       fomDato: '2018-02-01',
       tomDato: '2018-02-10',
       kilde: {
-        kode: 'AA',
         navn: '',
       },
       mottattDatoInntektsmelding: undefined,
       brukArbeidsforholdet: false,
       stillingsprosent: 50,
       lagtTilAvSaksbehandler: false,
-    };
+    } as Arbeidsforhold;
 
     const wrapper = mountWithIntl(<PersonArbeidsforholdTable
       alleArbeidsforhold={[arbeidsforhold, arbeidsforhold2]}

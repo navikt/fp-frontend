@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react';
 
 import {
-  FagsakInfo, Rettigheter, BehandlingPaVent, SettPaVentParams,
+  Rettigheter, BehandlingPaVent, SettPaVentParams,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import InnsynProsess from './InnsynProsess';
 import FetchedData from '../types/fetchedDataTsType';
 
 interface OwnProps {
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   fetchedData: FetchedData;
   kodeverk: {[key: string]: KodeverkMedNavn[]};

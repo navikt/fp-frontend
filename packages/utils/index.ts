@@ -110,6 +110,7 @@ export {
   hasValidOrgNumber,
   hasValidOrgNumberOrFodselsnr,
 } from './src/validation/validators';
+export type { Options } from './src/validation/validators';
 
 export {
   isRequiredMessage,

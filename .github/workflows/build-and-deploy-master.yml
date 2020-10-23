@@ -18,33 +18,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Lukk deployment-issues
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: ['bygg']
-            }).then(response => {
-              response.data.forEach(issue => {
-                github.issues.update({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  state: 'closed'
-                });
-              });
-            });
 
       - name: Sjekk ut kode
         uses: actions/checkout@v2
       - run:  git fetch --prune --unshallow
 
       - name: Hent tag
-        run: echo "::set-env name=TAG::1.1_$(git log -1 --pretty='%ad' --date=format:'%Y.%m.%d.%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)"
+        run: echo "TAG=1.1_$(git log -1 --pretty='%ad' --date=format:'%Y.%m.%d.%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Sette opp Node
         uses: actions/setup-node@v2.1.2
@@ -70,7 +50,7 @@ jobs:
 
       - name: Build
         run: |
-          echo "::set-env name=IMAGE::$IMAGE_BASE:$TAG"
+          echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
           yarn build
 
       - name: Bygg, tag og push Docker image
@@ -80,6 +60,28 @@ jobs:
           docker build --pull --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
           echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_USERNAME} --password-stdin
           docker push ${IMAGE_BASE}
+
+      - name: Lukk deployment-issues
+        if: success()
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['bygg']
+            }).then(response => {
+              response.data.forEach(issue => {
+                github.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+              });
+            });
 
       - name: Opprett issue, trigg deploy til dev-fss
         if: success()

@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Aksjonspunkt, OpptjeningAktivitet } from '@fpsak-frontend/types';
+import { Aksjonspunkt, FastsattOpptjening, OpptjeningAktivitet } from '@fpsak-frontend/types';
 
 import { buildInitialValues, OpptjeningInfoPanel } from './OpptjeningInfoPanel';
 import OpptjeningFaktaForm from './OpptjeningFaktaForm';
@@ -54,7 +54,7 @@ describe('<OpptjeningInfoPanel>', () => {
     const fastsattOpptjening = {
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-10-01',
-    };
+    } as FastsattOpptjening;
     const aksjonspunkter = { definisjon: { kode: '5058' }, erAktivt: true, toTrinnsBehandling: false } as Aksjonspunkt;
 
     const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, [aksjonspunkter]);
@@ -113,7 +113,7 @@ describe('<OpptjeningInfoPanel>', () => {
     const fastsattOpptjening = {
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-10-01',
-    };
+    } as FastsattOpptjening;
     const aksjonspunkter = [{ definisjon: { kode: '5051' }, erAktivt: true, toTrinnsBehandling: false },
       { definisjon: { kode: '5080' }, erAktivt: true, toTrinnsBehandling: false }];
 

@@ -2,11 +2,10 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import SupportMenySakIndex, { supportTabs } from '@fpsak-frontend/sak-support-meny';
-import { NavAnsatt, Fagsak } from '@fpsak-frontend/types';
+import { NavAnsatt, Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistoryIndex from './history/HistoryIndex';
 import MessagesIndex from './messages/MessagesIndex';

@@ -2,15 +2,17 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, BehandlingPaVent, SettPaVentParams,
+  Rettigheter, BehandlingPaVent, SettPaVentParams,
 } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Behandling, Aksjonspunkt, KodeverkMedNavn, Fagsak,
+} from '@fpsak-frontend/types';
 
 import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 
 interface OwnProps {
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   kodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -85,6 +87,7 @@ export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
         fagsak={fagsak}
         kodeverk={kodeverk}
         readOnly={readOnly}
+        // @ts-ignore Flytt ut RegistrerPapirsoknadPanel i ny pakke og flytt soknadData setState dit
         setSoknadData={setSoknadData}
         soknadData={soknadData}
         lagreUfullstendig={lagreUfullstendig}

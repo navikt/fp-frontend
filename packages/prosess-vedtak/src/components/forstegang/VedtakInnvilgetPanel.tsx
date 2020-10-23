@@ -33,7 +33,7 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps & WrappedComponentProps> 
   resultatstruktur = {},
 }) => (
   <>
-    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && (
+    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
       <>
         <Row>
           <Column xs="4">

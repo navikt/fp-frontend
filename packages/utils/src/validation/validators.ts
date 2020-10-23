@@ -143,11 +143,11 @@ const validateDate = (dateAsText, date, earliestDate, latestDate) => {
   return error;
 };
 
-interface Options {
+export type Options = {
   todayOrBefore?: boolean;
   todayOrAfter?: boolean;
   tidligstDato?: string;
-}
+};
 
 export const hasValidPeriodIncludingOtherErrors = (values, otherErrors = [{}], options: Options = {}) => {
   const today = moment().format(ISO_DATE_FORMAT);
@@ -209,14 +209,14 @@ export const isWithinOpptjeningsperiode = (fomDateLimit, tomDateLimit) => (fom, 
   return isBefore || isAfter ? invalidPeriodRangeMessage() : null;
 };
 
-export const isUtbetalingsgradMerSamitidigUttaksprosent = (samtidigUttaksProsent, utbetalingsgrad) => {
+export const isUtbetalingsgradMerSamitidigUttaksprosent = (samtidigUttaksProsent: number, utbetalingsgrad: number) => {
   if (samtidigUttaksProsent < utbetalingsgrad) {
     return utbetalingsgradErMerSamtidigUttaksprosentMessage();
   }
   return null;
 };
 
-export const isUkerOgDagerVidNullUtbetalningsgrad = (weeks, days, utbetalingsgrad) => {
+export const isUkerOgDagerVidNullUtbetalningsgrad = (weeks: number, days: number, utbetalingsgrad: number) => {
   if (weeks === 0 && days === 0 && utbetalingsgrad > 0) {
     return ukerOgDagerVidNullUtbetalningsgradMessage();
   }
@@ -269,6 +269,6 @@ export const ariaCheck = () => {
   }, 300);
 };
 
-export const isTrekkdagerMerEnnNullUtsettelse = (value) => (value > 0 ? trekkdagerErMerEnnNullUtsettelseMessage() : null);
+export const isTrekkdagerMerEnnNullUtsettelse = (value: number) => (value > 0 ? trekkdagerErMerEnnNullUtsettelseMessage() : null);
 
-export const isUtbetalingMerEnnNullUtsettelse = (value) => (value > 0 ? utbetalingMerEnnNullUtsettelseMessage() : null);
+export const isUtbetalingMerEnnNullUtsettelse = (value: number) => (value > 0 ? utbetalingMerEnnNullUtsettelseMessage() : null);

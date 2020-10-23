@@ -24,7 +24,7 @@ interface OwnProps {
   behandlingVersjon: number;
   lovReferanse?: string;
   isAksjonspunktOpen: boolean;
-  handleSubmit: () => void;
+  handleSubmit: (data: any) => any;
   formName: string;
   readOnlySubmitButton: boolean;
   originalErVilkarOk?: boolean;

@@ -14,7 +14,7 @@ import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknad from './RegistrerPapirsoknad';
 import SoknadRegistrertModal from './SoknadRegistrertModal';
@@ -22,11 +22,11 @@ import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 
 const fagsak = {
   saksnummer: 123456,
-  fagsakYtelseType: {
+  sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
-  fagsakPerson: {
+  person: {
     alder: 30,
     erDod: false,
     erKvinne: true,
@@ -37,11 +37,11 @@ const fagsak = {
       kodeverk: 'PERSONSTATUS_TYPE',
     },
   },
-  fagsakStatus: {
+  status: {
     kode: fagsakStatus.UNDER_BEHANDLING,
     kodeverk: 'FAGSAK_STATUS',
   },
-};
+} as Fagsak;
 
 const behandling = {
   id: 1,

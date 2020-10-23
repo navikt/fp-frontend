@@ -11,17 +11,18 @@ import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
 const fagsak = {
   saksnummer: 123456,
-  fagsakYtelseType: {
+  sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
-  fagsakPerson: {
+  person: {
     alder: 30,
     erDod: false,
     erKvinne: true,
@@ -32,11 +33,11 @@ const fagsak = {
       kodeverk: 'PERSONSTATUS_TYPE',
     },
   },
-  fagsakStatus: {
+  status: {
     kode: fagsakStatus.UNDER_BEHANDLING,
     kodeverk: 'FAGSAK_STATUS',
   },
-};
+} as Fagsak;
 
 describe('<RegistrerPapirsoknadPanel>', () => {
   it('skal vise aksjonspunkt-hjelpetekst og form for engangsstønad', () => {
@@ -44,7 +45,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       fagsak={fagsak}
       kodeverk={{}}
       readOnly={false}
-      soknadData={new SoknadData('ES', 'TEST', 'TEST', [])}
+      soknadData={new SoknadData('ES', 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
@@ -61,7 +62,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       fagsak={fagsak}
       kodeverk={{}}
       readOnly
-      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST', [])}
+      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
@@ -75,14 +76,14 @@ describe('<RegistrerPapirsoknadPanel>', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={{
         ...fagsak,
-        fagsakYtelseType: {
+        sakstype: {
           kode: fagsakYtelseType.SVANGERSKAPSPENGER,
           kodeverk: 'YTELSE_TYPE',
         },
       }}
       kodeverk={{}}
       readOnly
-      soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', [])}
+      soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}

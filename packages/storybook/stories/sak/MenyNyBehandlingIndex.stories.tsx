@@ -45,6 +45,20 @@ const behandlingstyper = [{
   navn: 'Anke',
 }];
 
+const behandlingOppretting = [{
+  behandlingType: {
+    kode: behandlingType.FORSTEGANGSSOKNAD,
+    kodeverk: '',
+  },
+  kanOppretteBehandling: true,
+}, {
+  behandlingType: {
+    kode: behandlingType.REVURDERING,
+    kodeverk: '',
+  },
+  kanOppretteBehandling: true,
+}];
+
 export const visMenyForÅLageNyBehandling = () => (
   <MenyNyBehandlingIndex
     ytelseType={{
@@ -70,8 +84,7 @@ export const visMenyForÅLageNyBehandling = () => (
       kodeverk: 'BEHANDLING_ARSAK_TYPE',
       navn: 'Fødsel',
     }]}
-    opprettNyForstegangsBehandlingEnabled
-    opprettRevurderingEnabled
+    behandlingOppretting={behandlingOppretting}
     kanTilbakekrevingOpprettes={{
       kanBehandlingOpprettes: false,
       kanRevurderingOpprettes: false,
@@ -116,8 +129,7 @@ export const visMenyForÅLageNyTilbakekrevingsbehandling = () => (
       kodeverk: 'BEHANDLING_ARSAK_TYPE',
       navn: 'Fødsel',
     }]}
-    opprettNyForstegangsBehandlingEnabled
-    opprettRevurderingEnabled
+    behandlingOppretting={behandlingOppretting}
     kanTilbakekrevingOpprettes={{
       kanBehandlingOpprettes: true,
       kanRevurderingOpprettes: true,

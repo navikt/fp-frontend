@@ -8,7 +8,9 @@ import {
   Undertittel, Element, EtikettLiten, Normaltekst,
 } from 'nav-frontend-typografi';
 
-import { KodeverkMedNavn, Kodeverk, Aksjonspunkt } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, Kodeverk, Aksjonspunkt, Behandling,
+} from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
@@ -28,14 +30,31 @@ import styles from './vilkarresultatMedOverstyringForm.less';
 const isOverridden = (aksjonspunktCodes, aksjonspunktCode) => aksjonspunktCodes.some((code) => code === aksjonspunktCode);
 const isHidden = (kanOverstyre, aksjonspunktCodes, aksjonspunktCode) => !isOverridden(aksjonspunktCodes, aksjonspunktCode) && !kanOverstyre;
 
-interface OwnProps {
-  panelTittelKode: string;
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  behandlingType: Kodeverk;
+  behandlingsresultat?: Behandling['behandlingsresultat']
+  medlemskapFom: string;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => void;
+  overrideReadOnly: boolean;
+  kanOverstyreAccess: {
+    isEnabled: boolean;
+  };
+  toggleOverstyring: (fn: (oldArray: []) => void) => void;
+  avslagsarsaker: KodeverkMedNavn[];
+  status: string;
   erOverstyrt?: boolean;
+  panelTittelKode: string;
   overstyringApKode: string;
   lovReferanse?: string;
-  isSolvable: boolean;
+  erMedlemskapsPanel: boolean;
+}
+
+interface MappedOwnProps {
   erVilkarOk?: boolean;
-  originalErVilkarOk?: boolean;
+  aksjonspunktCodes: string[];
   customVilkarIkkeOppfyltText?: {
     id: string;
     values?: any;
@@ -44,15 +63,9 @@ interface OwnProps {
     id: string;
     values?: any;
   };
-  erMedlemskapsPanel: boolean;
+  isSolvable: boolean;
   hasAksjonspunkt: boolean;
-  avslagsarsaker: KodeverkMedNavn[];
-  overrideReadOnly: boolean;
-  kanOverstyreAccess: {
-    isEnabled: boolean;
-  };
-  aksjonspunktCodes: string[];
-  toggleOverstyring: (fn: (oldArray: []) => void) => void;
+  originalErVilkarOk?: boolean;
 }
 
 /**
@@ -61,7 +74,7 @@ interface OwnProps {
  * Presentasjonskomponent. Viser resultat av vilkårskjøring når det ikke finnes tilknyttede aksjonspunkter.
  * Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.
  */
-export const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   panelTittelKode,
   erOverstyrt,
   overstyringApKode,
@@ -169,35 +182,22 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps & Inje
   );
 };
 
-interface SelectorProps {
-  behandlingsresultat: {
-    avslagsarsak: Kodeverk;
-  };
-  aksjonspunkter: Aksjonspunkt[];
-  status: string;
-  overstyringApKode: string;
-  medlemskapFom: string;
-  behandlingType: Kodeverk;
-  submitCallback: (data: any) => void;
-}
-
 const buildInitialValues = createSelector(
-  [(ownProps: SelectorProps) => ownProps.behandlingsresultat,
-    (ownProps) => ownProps.aksjonspunkter,
-    (ownProps) => ownProps.status,
-    (ownProps) => ownProps.overstyringApKode],
+  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.status,
+    (ownProps: PureOwnProps) => ownProps.overstyringApKode],
   (behandlingsresultat, aksjonspunkter, status, overstyringApKode) => {
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === overstyringApKode);
     return {
       isOverstyrt: aksjonspunkt !== undefined,
       begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
-      // @ts-ignore Korleis fikse dette på ein bra måte?
       ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
     };
   },
 );
 
-const getCustomVilkarText = (medlemskapFom, behandlingType, erOppfylt) => {
+const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, erOppfylt: boolean) => {
   const isBehandlingRevurderingFortsattMedlemskap = behandlingType.kode === BehandlingType.REVURDERING && !!medlemskapFom;
   if (isBehandlingRevurderingFortsattMedlemskap) {
     return {
@@ -209,35 +209,40 @@ const getCustomVilkarText = (medlemskapFom, behandlingType, erOppfylt) => {
 };
 
 const getCustomVilkarTextForOppfylt = createSelector(
-  [(ownProps: SelectorProps) => ownProps.medlemskapFom, (ownProps) => ownProps.behandlingType],
+  [(ownProps: PureOwnProps) => ownProps.medlemskapFom, (ownProps: PureOwnProps) => ownProps.behandlingType],
   (medlemskapFom, behandlingType) => getCustomVilkarText(medlemskapFom, behandlingType, true),
 );
 const getCustomVilkarTextForIkkeOppfylt = createSelector(
-  [(ownProps: SelectorProps) => ownProps.medlemskapFom, (ownProps) => ownProps.behandlingType],
+  [(ownProps: PureOwnProps) => ownProps.medlemskapFom, (ownProps: PureOwnProps) => ownProps.behandlingType],
   (medlemskapFom, behandlingType) => getCustomVilkarText(medlemskapFom, behandlingType, false),
 );
 
-const transformValues = (values, overstyringApKode) => ({
+interface FormValues {
+  erVilkarOk: boolean;
+  avslagCode: string;
+  avslagDato: string;
+  begrunnelse: string;
+}
+
+const transformValues = (values: FormValues, overstyringApKode: string) => ({
   kode: overstyringApKode,
   begrunnelse: values.begrunnelse,
-  // @ts-ignore Korleis fikse dette på ein bra måte?
   ...VilkarResultPicker.transformValues(values),
 });
 
-// @ts-ignore Korleis fikse dette på ein bra måte?
-const validate = (values: { erVilkarOk: boolean; avslagCode: string }) => VilkarResultPicker.validate(values.erVilkarOk, values.avslagCode);
+const validate = (values: FormValues) => VilkarResultPicker.validate(values.erVilkarOk, values.avslagCode);
 
 const lagSubmitFn = createSelector([
-  (ownProps: SelectorProps) => ownProps.submitCallback, (ownProps: SelectorProps) => ownProps.overstyringApKode],
-(submitCallback, overstyringApKode) => (values) => submitCallback([transformValues(values, overstyringApKode)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.overstyringApKode],
+(submitCallback, overstyringApKode) => (values: FormValues) => submitCallback([transformValues(values, overstyringApKode)]));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const { overstyringApKode } = initialOwnProps;
-  const validateFn = (values) => validate(values);
+  const validateFn = (values: FormValues) => validate(values);
   const aksjonspunktCodes = initialOwnProps.aksjonspunkter.map((a) => a.definisjon.kode);
   const formName = `VilkarresultatForm_${overstyringApKode}`;
 
-  return (state, ownProps) => {
+  return (state, ownProps: PureOwnProps) => {
     const {
       behandlingId, behandlingVersjon, aksjonspunkter, erOverstyrt,
     } = ownProps;
@@ -262,7 +267,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
       validate: validateFn,
       form: formName,
       originalErVilkarOk: erVilkarOk,
-      ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'isOverstyrt', 'erVilkarOk'),
+      erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
     };
   };
 };

@@ -12,10 +12,6 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const skalViseIMeny = (behandlingId, erPaVent, erKoet, opneBehandlingForEndringerAccess) => !!behandlingId
-  && opneBehandlingForEndringerAccess.employeeHasAccess
-  && opneBehandlingForEndringerAccess.isEnabled && !erKoet && !erPaVent;
-
 export const getMenytekst = () => intl.formatMessage({ id: 'MenyApneForEndringerIndex.ReopenBehandling' });
 
 interface OwnProps {

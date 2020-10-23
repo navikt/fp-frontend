@@ -1,23 +1,35 @@
-import React, { FunctionComponent } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { FunctionComponent, useMemo } from 'react';
 
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
-import { fjernVerge, opprettVerge } from './behandlingMenuOperations';
+import useBehandlingEndret from '../behandling/useBehandligEndret';
+import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
+import ApplicationContextPath from '../app/ApplicationContextPath';
 import BehandlingMenuIndex from './BehandlingMenuIndex';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import SakRettigheter from './sakRettigheterTsType';
 
-const YTELSE_BEHANDLINGTYPER = [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING,
-  BehandlingType.TILBAKEKREVING, BehandlingType.TILBAKEKREVING_REVURDERING];
-
-const VERGE_MENYVALG = {
-  FJERN: 'FJERN',
-  OPPRETT: 'OPPRETT',
+const defaultSakRettigheter: SakRettigheter = {
+  sakSkalTilInfotrygd: true,
+  behandlingTypeKanOpprettes: [],
+  behandlingTillatteOperasjoner: [],
 };
+
+const slaSammenRettigheter = (sakRettigheterFpSak: SakRettigheter, sakRettigheterFpTilbake?: SakRettigheter) => {
+  if (!sakRettigheterFpSak) {
+    return defaultSakRettigheter;
+  }
+  const sakRettigheterAnnet = sakRettigheterFpTilbake || defaultSakRettigheter;
+  return {
+    sakSkalTilInfotrygd: sakRettigheterFpSak.sakSkalTilInfotrygd,
+    behandlingTypeKanOpprettes: sakRettigheterFpSak.behandlingTypeKanOpprettes.concat(sakRettigheterAnnet.behandlingTypeKanOpprettes),
+    behandlingTillatteOperasjoner: sakRettigheterFpSak.behandlingTillatteOperasjoner.concat(sakRettigheterAnnet.behandlingTillatteOperasjoner),
+  };
+};
+
+const erFerdig = (state: RestApiState) => state !== RestApiState.NOT_STARTED && state !== RestApiState.LOADING;
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -34,35 +46,33 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
 }) => {
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
-  const skalHenteVergeMenyvalg = behandling && YTELSE_BEHANDLINGTYPER.includes(behandling.type.kode);
-  const { data: vergeMenyvalgData, state: stateVerge } = restApiHooks.useRestApi<{ vergeBehandlingsmeny: string }>(
-    FpsakApiKeys.VERGE_MENYVALG, { saksnummer: fagsak.saksnummer, behandlingId }, {
-      updateTriggers: [behandlingId, behandlingVersjon],
-      suspendRequest: !skalHenteVergeMenyvalg,
-    },
-  );
+  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
-  const { data: menyhandlingRettigheter, state } = restApiHooks.useRestApi<{ harSoknad: boolean }>(
-    FpsakApiKeys.MENYHANDLING_RETTIGHETER, undefined, {
+  const { data: sakRettigheterFpSak, state: stateFpSak } = restApiHooks.useRestApi<SakRettigheter>(
+    FpsakApiKeys.MENYHANDLING_RETTIGHETER, { saksnummer: fagsak.saksnummer }, {
+      suspendRequest: erBehandlingEndretFraUndefined,
       updateTriggers: [behandlingId, behandlingVersjon],
-      suspendRequest: !behandlingId,
       keepData: true,
     },
   );
+  const erRettigheterFpSakVisningsklar = sakRettigheterFpSak || erFerdig(stateFpSak);
 
-  if ((skalHenteVergeMenyvalg && stateVerge === RestApiState.LOADING) || (behandlingId && state === RestApiState.LOADING)) {
+  const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
+  const { data: sakRettigheterFpTilbake, state: stateFpTilbake } = restApiHooks.useRestApi<SakRettigheter>(
+    FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE, { saksnummer: fagsak.saksnummer }, {
+      suspendRequest: !erTilbakekrevingAktivert || erBehandlingEndretFraUndefined,
+      updateTriggers: [behandlingId, behandlingVersjon],
+      keepData: true,
+    },
+  );
+  const erRettigheterFpTilbakeVisningsklar = !erTilbakekrevingAktivert || sakRettigheterFpTilbake || erFerdig(stateFpTilbake);
+
+  const sakRettigheter = useMemo(() => slaSammenRettigheter(sakRettigheterFpSak, sakRettigheterFpTilbake),
+    [sakRettigheterFpSak, sakRettigheterFpTilbake]);
+
+  if (!erRettigheterFpSakVisningsklar || !erRettigheterFpTilbakeVisningsklar) {
     return <LoadingPanel />;
   }
-
-  const history = useHistory();
-  const location = useLocation();
-
-  const vergeMenyvalg = vergeMenyvalgData?.vergeBehandlingsmeny;
-  const fjernVergeFn = vergeMenyvalg === VERGE_MENYVALG.FJERN
-    ? fjernVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
-  const opprettVergeFn = vergeMenyvalg === VERGE_MENYVALG.OPPRETT
-    ? opprettVerge(location, history.push, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
 
   return (
     <BehandlingMenuIndex
@@ -71,11 +81,7 @@ const BehandlingMenuDataResolver: FunctionComponent<OwnProps> = ({
       saksnummer={fagsak.saksnummer}
       behandlingId={behandlingId}
       behandlingVersion={behandlingVersjon}
-      fjernVerge={fjernVergeFn}
-      opprettVerge={opprettVergeFn}
-      pushLocation={history.push}
-      location={location}
-      menyhandlingRettigheter={menyhandlingRettigheter}
+      sakRettigheter={sakRettigheter}
       oppfriskBehandlinger={oppfriskBehandlinger}
     />
   );

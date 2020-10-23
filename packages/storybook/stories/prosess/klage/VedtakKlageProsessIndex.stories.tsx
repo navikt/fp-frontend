@@ -34,6 +34,18 @@ const aksjonspunkter = [{
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/klage/prosess-vedtak-klage',
   component: VedtakKlageProsessIndex,
@@ -42,7 +54,7 @@ export default {
 
 export const visVedtakspanelDerKlageErVurdertAvNk = () => (
   <VedtakKlageProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -57,17 +69,13 @@ export const visVedtakspanelDerKlageErVurdertAvNk = () => (
         }],
       } as KlageVurdering['klageFormkravResultatKA'],
     } as KlageVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
     previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    alleKodeverk={alleKodeverk}
   />
 );
 
 export const visVedtakspanelDerKlageErVurdertAvNfp = () => (
   <VedtakKlageProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NFP',
@@ -82,10 +90,6 @@ export const visVedtakspanelDerKlageErVurdertAvNfp = () => (
         }],
       } as KlageVurdering['klageFormkravResultatKA'],
     } as KlageVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
     previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    alleKodeverk={alleKodeverk}
   />
 );

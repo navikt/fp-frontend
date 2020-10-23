@@ -1,4 +1,4 @@
-import { FamilieHendelse } from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { expect } from 'chai';
 
 import isFieldEdited from './isFieldEdited';
@@ -126,8 +126,8 @@ const soknad = {
   farSokerType: null,
   fodselsdatoer: {
     1: '2018-05-30',
-  },
-};
+  } as {[key: number]: string},
+} as Soknad;
 
 describe('isFieldEdited', () => {
   describe('termindato', () => {

@@ -3,11 +3,10 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
 import NoSelectedBehandling from './components/NoSelectedBehandling';
 import { BehandlingerIndex } from './BehandlingerIndex';
-import BehandlingAppKontekst from './behandlingAppKontekstTsType';
 
 describe('BehandlingerIndex', () => {
   it('skal rendre komponent korrekt', () => {

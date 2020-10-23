@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { change, InjectedFormProps } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
 
 import {
@@ -15,7 +15,7 @@ import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 
 import {
   KodeverkMedNavn, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
-  Aksjonspunkt, SimuleringResultat, Kodeverk,
+  Aksjonspunkt, SimuleringResultat, Kodeverk, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { behandlingForm, behandlingFormValueSelector, getBehandlingFormPrefix } from '@fpsak-frontend/form';
@@ -28,7 +28,8 @@ import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakFritekstbrevModal from '../felles/svp/VedtakFritekstbrevModal';
 
-const getPreviewManueltBrevCallback = (formProps, begrunnelse, brodtekst, overskrift, skalOverstyre, previewCallback) => (e) => {
+const getPreviewManueltBrevCallback = (formProps: InjectedFormProps, begrunnelse: string, brodtekst: string,
+  overskrift: string, skalOverstyre: boolean, previewCallback: (data: any) => void) => (e) => {
   if (formProps.valid || formProps.pristine) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
@@ -42,18 +43,22 @@ const getPreviewManueltBrevCallback = (formProps, begrunnelse, brodtekst, oversk
 
     previewCallback(data);
   } else {
+    // @ts-ignore
     formProps.submit();
   }
   e.preventDefault();
 };
 
-const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper = []) => behandlingArsakTyper
+const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingArsaker'] = []) => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
   .some((bt) => bt.kode === BehandlingArsakType.ETTER_KLAGE
     || bt.kode === BehandlingArsakType.KLAGE_U_INNTK
     || bt.kode === BehandlingArsakType.KLAGE_M_INNTK);
 
-const createAarsakString = (revurderingAarsaker, getKodeverknavn) => {
+const createAarsakString = (
+  revurderingAarsaker: Kodeverk[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+) => {
   if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
     return undefined;
   }
@@ -71,53 +76,91 @@ const createAarsakString = (revurderingAarsaker, getKodeverknavn) => {
   return aarsakTekstList.join(', ');
 };
 
-const isNewBehandlingResult = (beregningResultat, originaltBeregningResultat) => {
+const isNewBehandlingResult = (
+  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+) => {
   const vedtakResult = beregningResultat ? vedtakResultType.INNVILGET : vedtakResultType.AVSLAG;
   const vedtakResultOriginal = originaltBeregningResultat ? vedtakResultType.INNVILGET : vedtakResultType.AVSLAG;
   return vedtakResultOriginal !== vedtakResult;
 };
 
-export const lagKonsekvensForYtelsenTekst = (konsekvenser, getKodeverknavn) => {
+export const lagKonsekvensForYtelsenTekst = (
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  konsekvenser?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
+) => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
   }
   return konsekvenser.map((k) => getKodeverknavn(k)).join(' og ');
 };
 
-const isNewAmount = (beregningResultat, originaltBeregningResultat, erInnvilget) => {
-  if (beregningResultat === null) {
+const isNewAmount = (
+  erInnvilget: boolean,
+  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+) => {
+  if (!beregningResultat) {
     return false;
   }
-  return erInnvilget
-    ? beregningResultat.beregnetTilkjentYtelse !== originaltBeregningResultat.beregnetTilkjentYtelse
-    : beregningResultat.antallBarn !== originaltBeregningResultat.antallBarn;
+
+  if (!originaltBeregningResultat) {
+    return true;
+  }
+
+  if (erInnvilget
+    && 'beregnetTilkjentYtelse' in beregningResultat
+    && 'beregnetTilkjentYtelse' in originaltBeregningResultat) {
+    return beregningResultat.beregnetTilkjentYtelse !== originaltBeregningResultat.beregnetTilkjentYtelse;
+  }
+
+  if ('antallBarn' in beregningResultat
+    && 'antallBarn' in originaltBeregningResultat) {
+    return beregningResultat.antallBarn !== originaltBeregningResultat.antallBarn;
+  }
+  return false;
 };
 
-const resultText = (beregningResultat, originaltBeregningResultat, erInnvilget) => {
+const resultText = (
+  erInnvilget: boolean,
+  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+) => {
   if (isNewBehandlingResult(beregningResultat, originaltBeregningResultat)) {
     return beregningResultat ? 'VedtakForm.Resultat.EndretTilInnvilget' : 'VedtakForm.Resultat.EndretTilAvslag';
   }
   if (erInnvilget) {
-    return isNewAmount(beregningResultat, originaltBeregningResultat, erInnvilget)
+    return isNewAmount(erInnvilget, beregningResultat, originaltBeregningResultat)
       ? 'VedtakForm.Resultat.EndretTilkjentYtelse'
       : 'VedtakForm.Resultat.IngenEndring';
   }
-  return isNewAmount(beregningResultat, originaltBeregningResultat, erInnvilget)
+  return isNewAmount(erInnvilget, beregningResultat, originaltBeregningResultat)
     ? 'VedtakForm.Resultat.EndretAntallBarn'
     : 'VedtakForm.Resultat.IngenEndring';
 };
 
-const finnInvilgetRevurderingTekst = (intl, ytelseTypeKode, konsekvenserForYtelsen,
-  getKodeverknavn, tilbakekrevingText, beregningResultat, originaltBeregningResultat) => {
+const finnInvilgetRevurderingTekst = (
+  intl: IntlShape,
+  ytelseTypeKode: string,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  tilbakekrevingText: string,
+  konsekvenserForYtelsen?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
+  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+) => {
   if (ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD) {
-    return intl.formatMessage({ id: resultText(beregningResultat, originaltBeregningResultat, true) });
+    return intl.formatMessage({ id: resultText(true, beregningResultat, originaltBeregningResultat) });
   }
-  const konsekvens = lagKonsekvensForYtelsenTekst(konsekvenserForYtelsen, getKodeverknavn);
+  const konsekvens = lagKonsekvensForYtelsenTekst(getKodeverknavn, konsekvenserForYtelsen);
   return `${konsekvens}${konsekvens !== '' ? tilbakekrevingText : '. '}`;
 };
 
-const getOpphorsdato = (resultatstruktur, medlemskapFom, behandlingsresultat) => {
-  if (resultatstruktur && resultatstruktur.opphoersdato) {
+const getOpphorsdato = (
+  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs,
+  medlemskapFom?: string,
+  behandlingsresultat?: Behandling['behandlingsresultat'],
+) => {
+  if (resultatstruktur && 'opphoersdato' in resultatstruktur && resultatstruktur.opphoersdato) {
     return resultatstruktur.opphoersdato;
   }
   if (medlemskapFom) {
@@ -127,14 +170,23 @@ const getOpphorsdato = (resultatstruktur, medlemskapFom, behandlingsresultat) =>
     ? behandlingsresultat.skjæringstidspunkt.dato : '';
 };
 
-const finnVedtakstatusTekst = (behandlingsresultat, intl, ytelseTypeKode, konsekvenserForYtelsen,
-  getKodeverknavn, tilbakekrevingtekst, resultatstruktur, resultatstrukturOriginalBehandling, medlemskapFom) => {
+const finnVedtakstatusTekst = (
+  intl: IntlShape,
+  ytelseTypeKode: string,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  tilbakekrevingtekst: string,
+  behandlingsresultat?: Behandling['behandlingsresultat'],
+  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs,
+  resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs,
+  medlemskapFom?: string,
+) => {
+  const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
   if (isInnvilget(behandlingsresultat.type.kode)) {
-    return finnInvilgetRevurderingTekst(intl, ytelseTypeKode, konsekvenserForYtelsen,
-      getKodeverknavn, tilbakekrevingtekst, resultatstruktur, resultatstrukturOriginalBehandling);
+    return finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavn, tilbakekrevingtekst,
+      konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
   }
   if (isAvslag(behandlingsresultat.type.kode)) {
-    return intl.formatMessage({ id: resultText(resultatstruktur, resultatstrukturOriginalBehandling, false) });
+    return intl.formatMessage({ id: resultText(false, resultatstruktur, resultatstrukturOriginalBehandling) });
   }
   if (isOpphor(behandlingsresultat.type.kode)) {
     return intl.formatMessage({
@@ -153,17 +205,12 @@ interface PureOwnProps {
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  tilbakekrevingvalg?: {
-    videreBehandling: Kodeverk;
-  };
+  tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   medlemskapFom?: string;
-  resultatstrukturOriginalBehandling?: {
-    'beregningsresultat-engangsstonad'?: any;
-    'beregningsresultat-foreldrepenger'?: any;
-  };
+  resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs;
   behandlingId: number;
   behandlingVersjon: number;
   submitCallback: (data: any) => void;
@@ -207,14 +254,13 @@ export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnPr
   const erBehandlingEtterKlage = useMemo(() => erArsakTypeBehandlingEtterKlage(behandling.behandlingArsaker), [behandling.behandlingArsaker]);
   const revurderingsAarsakString = useMemo(() => createAarsakString(behandlingArsaker
     .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, kodeverkTyper)), [behandlingArsaker]);
-  const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(simuleringResultat, tilbakekrevingvalg, alleKodeverk), [
+  const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
-  const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
 
   // TODO (TOR) Kan ein forenkle dette? Frykteleg mykje kode for utleding av ein enkel tekst
-  const vedtakstatusTekst = useMemo(() => finnVedtakstatusTekst(behandlingsresultat, intl, ytelseTypeKode, konsekvenserForYtelsen,
-    getKodeverknavnFn(alleKodeverk, kodeverkTyper), tilbakekrevingtekst, resultatstruktur, resultatstrukturOriginalBehandling, medlemskapFom), [
-    behandlingsresultat, konsekvenserForYtelsen, tilbakekrevingtekst, resultatstruktur, medlemskapFom]);
+  const vedtakstatusTekst = useMemo(() => finnVedtakstatusTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, kodeverkTyper),
+    tilbakekrevingtekst, behandlingsresultat, resultatstruktur, resultatstrukturOriginalBehandling, medlemskapFom), [
+    behandlingsresultat, tilbakekrevingtekst, resultatstruktur, medlemskapFom]);
 
   const previewOverstyrtBrev = getPreviewManueltBrevCallback(formProps, begrunnelse, brødtekst, overskrift, true, previewCallback);
   const previewDefaultBrev = getPreviewManueltBrevCallback(formProps, begrunnelse, brødtekst, overskrift, false, previewCallback);
@@ -295,7 +341,14 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values) => values.aksjonspunktKoder.map((apCode) => ({
+interface FormValues {
+  aksjonspunktKoder: string[];
+  begrunnelse: string;
+  brødtekst?: string;
+  overskrift: string;
+}
+
+const transformValues = (values: FormValues) => values.aksjonspunktKoder.map((apCode) => ({
   kode: apCode,
   begrunnelse: values.begrunnelse,
   fritekstBrev: values.brødtekst,
@@ -307,7 +360,7 @@ const transformValues = (values) => values.aksjonspunktKoder.map((apCode) => ({
 export const VEDTAK_REVURDERING_FORM_NAME = 'VEDTAK_REVURDERING_FORM';
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values) => submitCallback(transformValues(values)));
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),
