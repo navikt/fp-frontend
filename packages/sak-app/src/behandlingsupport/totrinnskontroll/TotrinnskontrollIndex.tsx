@@ -50,7 +50,7 @@ type Values = {
 const getLagreFunksjon = (
   erTilbakekreving: boolean,
   behandlingId: number,
-  saksnummer: number, 
+  saksnummer: number,
   selectedBehandlingVersjon: number,
   setAllAksjonspunktApproved: (erGodkjent: boolean) => void,
   setShowBeslutterModal: (visModal: boolean) => void,
@@ -143,7 +143,7 @@ export const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     },
   );
 
-  const { startRequest: godkjennBehandling, state: stateGodkjennBehandling } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
+  const { startRequest: godkjennBehandling } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
   const fetchPreview = useVisForhandsvisningAvMelding();
 

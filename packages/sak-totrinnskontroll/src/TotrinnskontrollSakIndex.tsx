@@ -2,9 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
+import {
+  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
+} from '@fpsak-frontend/types';
 import ApprovalPanel from './components/ApprovalPanel';
 import messages from '../i18n/nb_NO.json';
-import { Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext } from '@fpsak-frontend/types';
 
 const cache = createIntlCache();
 
@@ -32,7 +34,7 @@ interface OwnProps {
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
   erTilbakekreving?: boolean;
-};
+}
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   behandlingId,

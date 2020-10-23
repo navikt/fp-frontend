@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { createSelector } from 'reselect';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
@@ -9,11 +8,11 @@ import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus'
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import aksjonspunktCodes, { isUttakAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
+import { Kodeverk, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../totrinnskontrollaksjonspunktTextCodes';
 import vurderFaktaOmBeregningTotrinnText from '../VurderFaktaBeregningTotrinnText';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
-import { Kodeverk, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
 const formatDate = (date?: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -27,7 +26,7 @@ const buildVarigEndringBeregningText = (beregningDto: TotrinnskontrollAksjonspun
   />
 ));
 
-export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: any, arbeidsforholdHandlingTyper: any) => {
+const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: any, arbeidsforholdHandlingTyper: any) => {
   const formattedMessages = [];
   const { kode } = arbeidforholdDto.arbeidsforholdHandlingType;
   if (arbeidforholdDto.brukPermisjon === true) {
@@ -58,7 +57,8 @@ export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: any, arbeidsf
 
 const buildArbeidsforholdText = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  arbeidsforholdHandlingTyper: any) => aksjonspunkt.arbeidforholdDtos.map((arbeidforholdDto) => {
+  arbeidsforholdHandlingTyper: any,
+) => aksjonspunkt.arbeidforholdDtos.map((arbeidforholdDto) => {
   const formattedMessages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
   return (
     <>
@@ -80,37 +80,37 @@ const buildArbeidsforholdText = (
   );
 });
 
-const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode => aksjonspunkt
-  .uttakPerioder.map((uttakperiode) => {
-  const fom = formatDate(uttakperiode.fom);
-  const tom = formatDate(uttakperiode.tom);
-  let id;
+const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => aksjonspunkt
+  .uttakPerioder.map((uttakperiode): ReactNode => {
+    const fom = formatDate(uttakperiode.fom);
+    const tom = formatDate(uttakperiode.tom);
+    let id;
 
-  if (uttakperiode.erSlettet) {
-    id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
-  } else if (uttakperiode.erLagtTil) {
-    id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
-  } else if (uttakperiode.erEndret && (
-    aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.FASTSETT_UTTAKPERIODER
+    if (uttakperiode.erSlettet) {
+      id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
+    } else if (uttakperiode.erLagtTil) {
+      id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
+    } else if (uttakperiode.erEndret && (
+      aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.FASTSETT_UTTAKPERIODER
     || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.TILKNYTTET_STORTINGET
-  )
-  ) {
-    id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
-  } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER) {
-    id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-  } else if (uttakperiode.erEndret) {
-    id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
-  } else {
-    id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
-  }
+    )
+    ) {
+      id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
+    } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER) {
+      id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+    } else if (uttakperiode.erEndret) {
+      id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
+    } else {
+      id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
+    }
 
-  return (
-    <FormattedMessage
-      id={id}
-      values={{ a: fom, b: tom }}
-    />
-  );
-});
+    return (
+      <FormattedMessage
+        id={id}
+        values={{ a: fom, b: tom }}
+      />
+    );
+  });
 
 const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => aksjonspunkt
   .opptjeningAktiviteter.map((aktivitet) => (
@@ -213,14 +213,14 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => aksj
   || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
   || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA;
 
-export const getAksjonspunktText = (
+const getAksjonspunktText = (
   isForeldrepenger: boolean,
   klagebehandlingVurdering: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
   arbeidsforholdHandlingTyper: Kodeverk[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-) => {
+): ReactNode[] => {
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
   }
@@ -251,3 +251,5 @@ export const getAksjonspunktText = (
   }
   return [getTextFromAksjonspunktkode(aksjonspunkt)];
 };
+
+export default getAksjonspunktText;

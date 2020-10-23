@@ -1,24 +1,21 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { NavFieldGroup, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Kodeverk, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
-import { getAksjonspunktTextSelector } from './ApprovalTextUtils';
+import getAksjonspunktText from './ApprovalTextUtils';
 import ReasonsField from './ReasonsField';
 
 import styles from './ApprovalField.less';
 
 interface OwnProps {
   aksjonspunkt: TotrinnskontrollAksjonspunkt;
-  getAksjonspunktText: (...args: any[]) => any;
   readOnly: boolean;
   approvalIndex?: number;
   contextIndex?: number;
-  currentValue?: {};
+  currentValue?: TotrinnskontrollAksjonspunkt;
   showBegrunnelse?: boolean;
   klageKA?: boolean;
   isForeldrepengerFagsak: boolean;
@@ -40,7 +37,6 @@ const ApprovalField: FunctionComponent<OwnProps> = ({
   approvalIndex,
   contextIndex,
   showBegrunnelse,
-  getAksjonspunktText,
   klageKA,
   isForeldrepengerFagsak,
   klagebehandlingVurdering,
@@ -59,9 +55,9 @@ const ApprovalField: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.approvalItemContainer}>
-      {aksjonspunktText.map((formattedMessage, index: number) => (
-        <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))} className={styles.aksjonspunktTextContainer}>
-          <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))}>
+      {aksjonspunktText.map((formattedMessage, index) => (
+        <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))} className={styles.aksjonspunktTextContainer}>
+          <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))}>
             {formattedMessage}
           </Normaltekst>
         </div>
@@ -89,4 +85,4 @@ ApprovalField.defaultProps = {
   klageKA: false,
 };
 
-export default injectIntl(ApprovalField);
+export default ApprovalField;

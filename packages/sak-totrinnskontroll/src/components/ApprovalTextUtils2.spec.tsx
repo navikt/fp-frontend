@@ -1,14 +1,9 @@
 import { expect } from 'chai';
 
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
 import getAksjonspunktText from './ApprovalTextUtils';
@@ -42,7 +37,6 @@ describe('<ApprovalTextUtils2>', () => {
   // Klage
   // Klage medhold
   it('skal vise korrekt tekst for aksjonspunkt 5035 medhold', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NFP, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
@@ -50,12 +44,10 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: medholdIKlage,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 medhold', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NK, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
@@ -63,7 +55,6 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: medholdIKlage,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
@@ -73,12 +64,10 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: oppheveYtelsesVedtak,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NFP, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
@@ -86,12 +75,10 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: oppheveYtelsesVedtak,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NK, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
@@ -100,12 +87,10 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: avvistKlage,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NFP, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.Avvist');
   });
@@ -113,12 +98,10 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: avvistKlage,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NK, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.Avvist');
   });
@@ -127,12 +110,10 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: stadfesteKlage,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NK, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
@@ -140,19 +121,16 @@ describe('<ApprovalTextUtils2>', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: stadfesteKlage,
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.BEHANDLE_KLAGE_NK, undefined,
       undefined, 'begrunnelse', false, undefined, 'status', undefined,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 3.
     const message = getAksjonspunktText.resultFunc(true, klagebehandlingVurdering, behandlingStatusFVED)(aksjonspunkt);
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5058 vurder tidsbegrenset', () => {
     const beregningDto = { faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD }] };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN, undefined,
       beregningDto, 'begrunnelse', false, undefined, 'status', undefined,
@@ -162,7 +140,6 @@ describe('<ApprovalTextUtils2>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5058 ATFL i samme org', () => {
     const beregningDto = { faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON }] };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN, undefined,
       beregningDto, 'begrunnelse', false, undefined, 'status', undefined,
@@ -175,7 +152,6 @@ describe('<ApprovalTextUtils2>', () => {
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING },
         { kode: faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD }],
     };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 9 arguments, but got 8.
     const aksjonspunkt = lagAksjonspunkt(
       aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN, undefined,
       beregningDto, 'begrunnelse', false, undefined, 'status', undefined,
@@ -209,7 +185,6 @@ describe('<ApprovalTextUtils2>', () => {
       aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD, undefined,
       undefined, undefined, false, undefined, 'status', undefined, arbeidforholdDtos,
     );
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 5 arguments, but got 4.
     const messages = getAksjonspunktText.resultFunc(true, null, null, [])(aksjonspunkt);
     expect(messages[0].props.children[0].props.id).to.eql('ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold');
     expect(messages[0].props.children[1][0].key).to.eql('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');

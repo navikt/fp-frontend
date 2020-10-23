@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 import FatterVedtakApprovalModal from './components/modal/FatterVedtakApprovalModal';
 import messages from '../i18n/nb_NO.json';
-import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 
 const cache = createIntlCache();
 
@@ -22,7 +22,7 @@ interface OwnProps {
   behandlingStatusKode: string;
   behandlingTypeKode: string;
   harSammeResultatSomOriginalBehandling?: boolean;
-};
+}
 
 const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = ({
   closeEvent,

@@ -7,8 +7,8 @@ import { Kodeverk } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
-import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 import BehandlingAppKontekst from 'sak-app/src/behandling/behandlingAppKontekstTsType';
+import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
 interface TotrinnsKlageVurdering {
   klageVurdering?: Kodeverk;

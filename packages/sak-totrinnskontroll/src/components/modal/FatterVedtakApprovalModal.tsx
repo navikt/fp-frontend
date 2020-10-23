@@ -98,7 +98,7 @@ const utledInfoTextCode = (
 ) => {
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
-      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, harSammeResultatSomOriginalBehandling, fagsakYtelseType, 
+      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, harSammeResultatSomOriginalBehandling, fagsakYtelseType,
         erKlageWithKA, isBehandlingsresultatOpphor)
       : '';
   }

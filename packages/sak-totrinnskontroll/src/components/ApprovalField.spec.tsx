@@ -1,10 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
-// @ts-expect-error ts-migrate(7016) FIXME: Try `npm install @types/fpsak-frontend__kodeverk` ... Remove this comment to see the full error message
+import { shallow } from 'enzyme';
+
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ApprovalField from './ApprovalField';
 import getAksjonspunktText from './ApprovalTextUtils';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
 
 describe('<ApprovalField>', () => {
   it('skal kunne vise fleire oppjeningstekster for fleire aktiviteter', () => {
@@ -30,16 +30,11 @@ describe('<ApprovalField>', () => {
     const isForeldrepenger = false;
     const currentValue = { totrinnskontrollGodkjent: true };
     const approvalIndex = 1;
-    const wrapper = shallowWithIntl(<ApprovalField.WrappedComponent
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '(aksjonspunkt: any) => any' is missing the f... Remove this comment to see the full error message
+    const wrapper = shallow(<ApprovalField
       getAksjonspunktText={getAksjonspunktText.resultFunc(isForeldrepenger, null, null, null, null)}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'boolean' is not assignable to type 'IntlShap... Remove this comment to see the full error message
       readOnly={readOnly}
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '{ aksjonspunktKode: any; opptjeningAktivitet... Remove this comment to see the full error message
       aksjonspunkt={aksjonspunkt}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'IntlShape... Remove this comment to see the full error message
       approvalIndex={approvalIndex}
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '{ totrinnskontrollGodkjent: boolean; }' is m... Remove this comment to see the full error message
       currentValue={currentValue}
     />);
 
@@ -55,16 +50,11 @@ describe('<ApprovalField>', () => {
       aksjonspunktKode: aksjonspunktCodes.AUTO_VENT_PÅ_FODSELREGISTRERING,
     };
     const approvalIndex = 1;
-    const wrapper = shallowWithIntl(<ApprovalField.WrappedComponent
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '(aksjonspunkt: any) => any' is not assignabl... Remove this comment to see the full error message
+    const wrapper = shallow(<ApprovalField
       getAksjonspunktText={getAksjonspunktText.resultFunc(isForeldrepenger, null, null, null, null)}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'boolean' is not assignable to type 'IntlShap... Remove this comment to see the full error message
       readOnly={readOnly}
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '{ aksjonspunktKode: any; }' is missing the f... Remove this comment to see the full error message
       aksjonspunkt={aksjonspunkt}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'IntlShape... Remove this comment to see the full error message
       approvalIndex={approvalIndex}
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '{ totrinnskontrollGodkjent: boolean; }' is m... Remove this comment to see the full error message
       currentValue={currentValue}
     />);
 
@@ -87,16 +77,11 @@ describe('<ApprovalField>', () => {
 
     const approvalIndex = 1;
     const currentValue = { totrinnskontrollGodkjent: false };
-    const wrapper = shallowWithIntl(<ApprovalField.WrappedComponent
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '(aksjonspunkt: any) => any' is not assignabl... Remove this comment to see the full error message
+    const wrapper = shallow(<ApprovalField
       getAksjonspunktText={getAksjonspunktText.resultFunc(isForeldrepenger, null, null, null, null)}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'boolean' is not assignable to type 'IntlShap... Remove this comment to see the full error message
       readOnly={readOnly}
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '{ aksjonspunktKode: any; }' is missing the f... Remove this comment to see the full error message
       aksjonspunkt={aksjonspunkt}
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'IntlShape... Remove this comment to see the full error message
       approvalIndex={approvalIndex}
-      // @ts-expect-error ts-migrate(2740) FIXME: Type '{ totrinnskontrollGodkjent: boolean; }' is m... Remove this comment to see the full error message
       currentValue={currentValue}
     />);
     const reasonsField = wrapper.find('injectIntl(ReasonsField)');

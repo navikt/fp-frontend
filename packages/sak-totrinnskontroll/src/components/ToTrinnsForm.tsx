@@ -5,6 +5,7 @@ import { InjectedFormProps } from 'redux-form';
 import { NavLink } from 'react-router-dom';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
 import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -12,16 +13,17 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import ApprovalField from './ApprovalField';
+import TotrinnContext from '../TotrinnContextTsType';
 
 import styles from './ToTrinnsForm.less';
 
-const allApproved = (formState: any) => formState
-  .reduce((a: any, b: any) => a.concat(b.aksjonspunkter), [])
-  .every((ap: any) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true);
+const allApproved = (formState: TotrinnContext[]) => formState
+  .reduce((a, b) => a.concat(b.aksjonspunkter), [])
+  .every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true);
 
-const allSelected = (formState: any) => formState
-  .reduce((a: any, b: any) => a.concat(b.aksjonspunkter), [])
-  .every((ap: any) => ap.totrinnskontrollGodkjent !== null);
+const allSelected = (formState: TotrinnContext[]) => formState
+  .reduce((a, b) => a.concat(b.aksjonspunkter), [])
+  .every((ap) => ap.totrinnskontrollGodkjent !== null);
 
 const harIkkeKonsekvenserForYtelsen = (behandlingResultat: any, ...konsekvenserForYtelsenKoder) => {
   if (!behandlingResultat) {
@@ -35,8 +37,8 @@ const harIkkeKonsekvenserForYtelsen = (behandlingResultat: any, ...konsekvenserF
 };
 
 interface OwnProps {
-  totrinnskontrollContext?: {}[];
-  formState?: {}[];
+  totrinnskontrollContext?: TotrinnContext[];
+  formState?: TotrinnContext[];
   forhandsvisVedtaksbrev: (...args: any[]) => any;
   klageVurderingResultatNFP?: {};
   klageVurderingResultatNK?: {};
@@ -105,8 +107,8 @@ export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> =
                     isForeldrepengerFagsak={isForeldrepengerFagsak}
                     behandlingKlageVurdering={behandlingKlageVurdering}
                     behandlingStatus={behandlingStatus}
-                    alleKodeverk={alleKodeverk}
                     erTilbakekreving={erTilbakekreving}
+                    arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
                   />
                 </div>
               ))}

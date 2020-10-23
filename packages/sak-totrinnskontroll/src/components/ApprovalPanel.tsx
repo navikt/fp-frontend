@@ -9,10 +9,11 @@ import {
   Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import ToTrinnsForm from './ToTrinnsForm';
 import ToTrinnsFormReadOnly from './ToTrinnsFormReadOnly';
-import TotrinnContext from '../TotrinnContext';
+import TotrinnContext from '../TotrinnContextTsType';
 
 import styles from './approvalPanel.less';
 
@@ -23,8 +24,8 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes.VEDTAK,
 ];
 
-const sorterTilbakekrevingContext = (approvals: any) => sorterteSkjermlenkeCodesForTilbakekreving
-  .map((s) => approvals.find((el: any) => el.contextCode === s.kode))
+const sorterTilbakekrevingContext = (approvals: TotrinnContext[]) => sorterteSkjermlenkeCodesForTilbakekreving
+  .map((s) => approvals.find((el) => el.contextCode === s.kode))
   .filter((s) => s);
 
 const håndterSpeiselleTegn = (aksjonspunkter: TotrinnskontrollAksjonspunkt[]): TotrinnskontrollAksjonspunkt[] => aksjonspunkter.map((aksjonspunkt) => ({
@@ -84,7 +85,7 @@ interface OwnProps {
   forhandsvisVedtaksbrev: () => void;
   isForeldrepengerFagsak: boolean;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
-  alleKodeverk: {};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingsresultat?: Behandling['behandlingsresultat'];
   erBehandlingEtterKlage: boolean;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
@@ -131,8 +132,9 @@ export class ApprovalPanel extends Component<OwnProps, OwnState> {
   UNSAFE_componentWillReceiveProps(nextProps: OwnProps) {
     if (nextProps.totrinnskontrollSkjermlenkeContext || nextProps.totrinnskontrollReadOnlySkjermlenkeContext) {
       this.setState({
-        approvals: mapPropsToContext(nextProps.toTrinnsBehandling, nextProps.behandlingStatus, nextProps.skjemalenkeTyper, nextProps.createLocationForSkjermlenke,
-          nextProps.location, nextProps.totrinnskontrollSkjermlenkeContext, nextProps.totrinnskontrollReadOnlySkjermlenkeContext),
+        approvals: mapPropsToContext(nextProps.toTrinnsBehandling, nextProps.behandlingStatus, nextProps.skjemalenkeTyper,
+          nextProps.createLocationForSkjermlenke, nextProps.location, nextProps.erTilbakekreving, nextProps.totrinnskontrollSkjermlenkeContext,
+          nextProps.totrinnskontrollReadOnlySkjermlenkeContext),
       });
     }
   }
@@ -213,8 +215,9 @@ export class ApprovalPanel extends Component<OwnProps, OwnState> {
                       <ToTrinnsFormReadOnly
                         approvalList={approvals}
                         isForeldrepengerFagsak={isForeldrepengerFagsak}
+                        klagebehandlingVurdering={behandlingKlageVurdering}
                         behandlingStatus={behandlingStatus}
-                        alleKodeverk={alleKodeverk}
+                        arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
                         erTilbakekreving={erTilbakekreving}
                       />
                     </div>
