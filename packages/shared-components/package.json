@@ -33,6 +33,7 @@
     "react-day-picker": "^7.4.8",
     "react-intl": "^5.8.6",
     "react-modal": "3.11.2",
+    "redux-form": "^8.3.6",
     "react-redux": "^7.2.1"
   },
   "devDependencies": {

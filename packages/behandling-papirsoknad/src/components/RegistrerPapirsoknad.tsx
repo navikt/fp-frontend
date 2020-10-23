@@ -87,6 +87,7 @@ export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
         fagsak={fagsak}
         kodeverk={kodeverk}
         readOnly={readOnly}
+        // @ts-ignore Flytt ut RegistrerPapirsoknadPanel i ny pakke og flytt soknadData setState dit
         setSoknadData={setSoknadData}
         soknadData={soknadData}
         lagreUfullstendig={lagreUfullstendig}

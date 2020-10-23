@@ -45,7 +45,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       fagsak={fagsak}
       kodeverk={{}}
       readOnly={false}
-      soknadData={new SoknadData('ES', 'TEST', 'TEST', [])}
+      soknadData={new SoknadData('ES', 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
@@ -62,7 +62,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       fagsak={fagsak}
       kodeverk={{}}
       readOnly
-      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST', [])}
+      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
@@ -83,7 +83,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       }}
       kodeverk={{}}
       readOnly
-      soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', [])}
+      soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
