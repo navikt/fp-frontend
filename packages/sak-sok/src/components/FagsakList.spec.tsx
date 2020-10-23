@@ -32,18 +32,6 @@ const alleKodeverk = {
 };
 
 describe('<FagsakList>', () => {
-  const person = {
-    erDod: false,
-    navn: 'Frida',
-    alder: 44,
-    personnummer: '0405198632231',
-    erKvinne: true,
-    personstatusType: {
-      kode: 'TEST',
-      kodeverk: '',
-    },
-  };
-
   const fagsak = {
     saksnummer: 12345,
     sakstype: {
@@ -64,7 +52,6 @@ describe('<FagsakList>', () => {
     antallBarn: 1,
     kanRevurderingOpprettes: false,
     skalBehandlesAvInfotrygd: false,
-    person,
     dekningsgrad: 100,
   };
 
@@ -112,7 +99,6 @@ describe('<FagsakList>', () => {
       barnFodt: null,
       opprettet: '2019-02-18T13:49:18.645',
       endret: '2019-02-18T13:49:18.645',
-      person,
       dekningsgrad: 100,
     };
     const fagsak3 = {
@@ -128,7 +114,6 @@ describe('<FagsakList>', () => {
       barnFodt: null,
       opprettet: '2019-02-18T13:49:18.645',
       endret: '2019-02-18T13:49:18.645',
-      person,
       dekningsgrad: 100,
     };
 
@@ -179,7 +164,6 @@ describe('<FagsakList>', () => {
       barnFodt: '2019-02-18T13:49:18.645',
       opprettet: '2019-02-18T13:49:18.645',
       endret: '2019-02-18T13:49:18.645',
-      person,
       dekningsgrad: 100,
     };
 

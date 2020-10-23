@@ -22,27 +22,29 @@ const fagsak = {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
-  person: {
-    alder: 30,
-    erDod: false,
-    erKvinne: true,
-    navn: 'Petra',
-    personnummer: '12343541',
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-  },
   status: {
     kode: fagsakStatus.UNDER_BEHANDLING,
     kodeverk: 'FAGSAK_STATUS',
   },
 } as Fagsak;
 
+const fagsakPerson = {
+  alder: 30,
+  erDod: false,
+  erKvinne: true,
+  navn: 'Petra',
+  personnummer: '12343541',
+  personstatusType: {
+    kode: personstatusType.BOSATT,
+    kodeverk: 'PERSONSTATUS_TYPE',
+  },
+};
+
 describe('<RegistrerPapirsoknadPanel>', () => {
   it('skal vise aksjonspunkt-hjelpetekst og form for engangsstønad', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       kodeverk={{}}
       readOnly={false}
       soknadData={new SoknadData('ES', 'TEST', 'TEST')}
@@ -60,6 +62,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
   it('skal vise foreldrepenger-form', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       kodeverk={{}}
       readOnly
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST')}
@@ -81,6 +84,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
           kodeverk: 'YTELSE_TYPE',
         },
       }}
+      fagsakPerson={fagsakPerson}
       kodeverk={{}}
       readOnly
       soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', 'TEST')}

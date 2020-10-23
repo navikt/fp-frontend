@@ -26,22 +26,23 @@ const fagsak = {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
-  person: {
-    alder: 30,
-    erDod: false,
-    erKvinne: true,
-    navn: 'Petra',
-    personnummer: '12343541',
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-  },
   status: {
     kode: fagsakStatus.UNDER_BEHANDLING,
     kodeverk: 'FAGSAK_STATUS',
   },
 } as Fagsak;
+
+const fagsakPerson = {
+  alder: 30,
+  erDod: false,
+  erKvinne: true,
+  navn: 'Petra',
+  personnummer: '12343541',
+  personstatusType: {
+    kode: personstatusType.BOSATT,
+    kodeverk: 'PERSONSTATUS_TYPE',
+  },
+};
 
 const behandling = {
   id: 1,
@@ -74,6 +75,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       behandling={behandling as Behandling}
       aksjonspunkter={[]}
       kodeverk={{}}
@@ -93,6 +95,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter som readonly når veileder', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       behandling={behandling as Behandling}
       aksjonspunkter={[]}
       kodeverk={{}}
@@ -115,6 +118,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter som readonly når behandling er satt på vent', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       behandling={{
         ...behandling,
         behandlingPaaVent: true,
@@ -137,6 +141,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal sette nye søknadsdata', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       behandling={behandling as Behandling}
       aksjonspunkter={[]}
       kodeverk={{}}
@@ -161,6 +166,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const lagreAksjonspunkt = sinon.spy();
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       behandling={behandling as Behandling}
       aksjonspunkter={[{
         definisjon: {

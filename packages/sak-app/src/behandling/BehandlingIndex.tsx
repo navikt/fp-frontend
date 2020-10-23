@@ -62,7 +62,6 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history) => (prosessStegId, fakt
 interface OwnProps {
   setBehandlingIdOgVersjon: (behandlingId: number, behandlingVersjon: number) => void;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   alleBehandlinger: BehandlingAppKontekst[];
   setRequestPendingMessage: (message: string) => void;
 }
@@ -102,7 +101,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
-  const fagsakPerson = restApiHooks.useGlobalStateRestApiData<FagsakPerson>(FpsakApiKeys.FAGSAK_BRUKER);
+  const fagsakPerson = restApiHooks.useGlobalStateRestApiData<FagsakPerson>(FpsakApiKeys.SAK_BRUKER);
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
@@ -207,6 +206,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
             harApenRevurdering={fagsakBehandlingerInfo
               .some((b) => b.type.kode === BehandlingType.REVURDERING && b.status.kode !== BehandlingStatus.AVSLUTTET)}
             valgtFaktaSteg={query.fakta}
+            fagsakPerson={fagsakPerson}
             {...defaultProps}
           />
         </ErrorBoundary>

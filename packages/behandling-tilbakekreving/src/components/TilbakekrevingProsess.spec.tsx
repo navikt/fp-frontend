@@ -22,15 +22,17 @@ describe('<TilbakekrevingProsess>', () => {
     saksnummer: 123456,
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    person: {
-      alder: 30,
-      personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-      erDod: false,
-      erKvinne: true,
-      navn: 'Espen Utvikler',
-      personnummer: '12345',
-    },
   } as Fagsak;
+
+  const fagsakPerson = {
+    alder: 30,
+    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
+    erDod: false,
+    erKvinne: true,
+    navn: 'Espen Utvikler',
+    personnummer: '12345',
+  };
+
   const behandling: Partial<Behandling> = {
     id: 1,
     versjon: 2,
@@ -111,6 +113,7 @@ describe('<TilbakekrevingProsess>', () => {
           aksjonspunkter, perioderForeldelse, beregningsresultat, feilutbetalingFakta,
         }}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -154,6 +157,7 @@ describe('<TilbakekrevingProsess>', () => {
           aksjonspunkter, perioderForeldelse, beregningsresultat, feilutbetalingFakta,
         }}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}

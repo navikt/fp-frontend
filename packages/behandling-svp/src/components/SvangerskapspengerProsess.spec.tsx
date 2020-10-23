@@ -27,15 +27,16 @@ describe('<SvangerskapspengerProsess>', () => {
     saksnummer: 123456,
     sakstype: { kode: fagsakYtelseType.SVANGERSKAPSPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    person: {
-      alder: 30,
-      personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-      erDod: false,
-      erKvinne: true,
-      navn: 'Espen Utvikler',
-      personnummer: '12345',
-    },
   } as Fagsak;
+  const fagsakPerson = {
+    alder: 30,
+    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
+    erDod: false,
+    erKvinne: true,
+    navn: 'Espen Utvikler',
+    personnummer: '12345',
+  };
+
   const behandling = {
     id: 1,
     uuid: 'uuid-test',
@@ -93,6 +94,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -152,6 +154,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -181,6 +184,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -226,6 +230,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={vedtakBehandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -274,6 +279,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -322,6 +328,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -348,6 +355,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -377,6 +385,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -412,6 +421,7 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}

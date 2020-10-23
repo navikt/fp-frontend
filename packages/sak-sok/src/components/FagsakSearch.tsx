@@ -7,7 +7,6 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';
-import PersonInfo from './person/PersonInfo';
 
 import styles from './fagsakSearch.less';
 
@@ -48,10 +47,6 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
 
     {searchResultReceived && fagsaker.length === 0 && (
       <Normaltekst className={styles.label}><FormattedMessage id="FagsakSearch.ZeroSearchResults" /></Normaltekst>
-    )}
-
-    {fagsaker.length > 1 && fagsaker[0].person && (
-      <PersonInfo person={fagsaker[0].person} />
     )}
 
     <VerticalSpacer eightPx />

@@ -63,7 +63,7 @@ const FagsakIndex: FunctionComponent = () => {
 
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
-  const { data: fagsakPerson, state: fagsakPersonState } = restApiHooks.useGlobalStateRestApi<FagsakPerson>(FpsakApiKeys.FAGSAK_BRUKER,
+  const { data: fagsakPerson, state: fagsakPersonState } = restApiHooks.useGlobalStateRestApi<FagsakPerson>(FpsakApiKeys.SAK_BRUKER,
     { saksnummer: selectedSaksnummer }, {
       updateTriggers: [selectedSaksnummer],
       suspendRequest: !selectedSaksnummer,
