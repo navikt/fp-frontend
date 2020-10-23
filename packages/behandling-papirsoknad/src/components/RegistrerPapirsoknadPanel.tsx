@@ -20,7 +20,7 @@ interface OwnProps {
   fagsak: Fagsak;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
-  setSoknadData: (soknadData: SoknadData) => void;
+  setSoknadData: (soknadData: SoknadData) => SoknadData;
   soknadData: SoknadData;
   lagreUfullstendig: () => Promise<any>;
   lagreFullstendig: (_formValues, _dispatch, values: any) => Promise<any>;
@@ -80,7 +80,6 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.person}
           />
         )}
       </Container>

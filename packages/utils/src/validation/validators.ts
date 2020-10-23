@@ -143,11 +143,11 @@ const validateDate = (dateAsText, date, earliestDate, latestDate) => {
   return error;
 };
 
-interface Options {
+export type Options = {
   todayOrBefore?: boolean;
   todayOrAfter?: boolean;
   tidligstDato?: string;
-}
+};
 
 export const hasValidPeriodIncludingOtherErrors = (values, otherErrors = [{}], options: Options = {}) => {
   const today = moment().format(ISO_DATE_FORMAT);
