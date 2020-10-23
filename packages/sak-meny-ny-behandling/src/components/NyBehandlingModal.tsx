@@ -192,7 +192,7 @@ const tilbakekrevingRevurderingArsaker = [
   behandlingArsakType.RE_KLAGE_NFP,
   behandlingArsakType.RE_VILKÅR,
   behandlingArsakType.RE_FORELDELSE,
-  behandlingArsakType.RE_FEILBELØP_BORTFALT,
+  behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
 ];
 
 export const getBehandlingAarsaker = createSelector([

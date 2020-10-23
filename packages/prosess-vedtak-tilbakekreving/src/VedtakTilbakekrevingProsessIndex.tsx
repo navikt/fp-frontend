@@ -42,7 +42,7 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
 }) => {
   const erRevurderingTilbakekrevingKlage = behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt = behandling.førsteÅrsak
-    && behandlingArsakType.RE_FEILBELØP_BORTFALT === behandling.førsteÅrsak.behandlingArsakType.kode;
+    && behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType.kode;
   return (
     <RawIntlProvider value={intl}>
       <TilbakekrevingVedtak
