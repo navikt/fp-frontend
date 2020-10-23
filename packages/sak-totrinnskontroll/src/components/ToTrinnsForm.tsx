@@ -10,7 +10,9 @@ import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtel
 import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering,
+} from '@fpsak-frontend/types';
 
 import ApprovalField from './ApprovalField';
 import TotrinnContext from '../TotrinnContextTsType';
@@ -25,7 +27,7 @@ const allSelected = (formState: TotrinnContext[]) => formState
   .reduce((a, b) => a.concat(b.aksjonspunkter), [])
   .every((ap) => ap.totrinnskontrollGodkjent !== null);
 
-const harIkkeKonsekvenserForYtelsen = (behandlingResultat: any, ...konsekvenserForYtelsenKoder) => {
+const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
   if (!behandlingResultat) {
     return true;
   }
@@ -36,14 +38,13 @@ const harIkkeKonsekvenserForYtelsen = (behandlingResultat: any, ...konsekvenserF
   return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0].kode);
 };
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
   totrinnskontrollContext?: TotrinnContext[];
-  formState?: TotrinnContext[];
-  forhandsvisVedtaksbrev: (...args: any[]) => any;
-  klageVurderingResultatNFP?: {};
-  klageVurderingResultatNK?: {};
-  behandlingKlageVurdering?: {};
-  behandlingsresultat?: {};
+  forhandsvisVedtaksbrev: () => void;
+  behandlingKlageVurdering?: TotrinnsKlageVurdering;
+  behandlingsresultat?: Behandling['behandlingsresultat'];
   erBehandlingEtterKlage?: boolean;
   readOnly: boolean;
   erTilbakekreving?: boolean;
@@ -52,12 +53,16 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
+interface MappedOwnProps {
+  formState?: TotrinnContext[];
+}
+
 /*
   * ToTrinnsForm
   *
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
-export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const ToTrinnsForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   handleSubmit,
   formState,
   forhandsvisVedtaksbrev,
@@ -72,14 +77,15 @@ export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> =
   behandlingsresultat,
   ...formProps
 }) => {
-  if (formState.length !== totrinnskontrollContext.length) {
+  if (!formState || formState.length !== totrinnskontrollContext.length) {
     return null;
   }
 
   const erKlage = !!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK;
 
-  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen(behandlingsresultat,
-    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING), [behandlingsresultat]);
+  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
+    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRINGbehandlingsresultat,
+  ], behandlingsresultat), [behandlingsresultat]);
 
   return (
     <form name="toTrinn" onSubmit={handleSubmit}>
@@ -88,14 +94,14 @@ export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> =
         skjermlenke,
         aksjonspunkter,
         skjermlenkeNavn,
-      }: any, contextIndex: any) => {
+      }, contextIndex) => {
         if (aksjonspunkter.length > 0) {
           return (
             <div key={contextCode}>
               <NavLink to={skjermlenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
                 {skjermlenkeNavn}
               </NavLink>
-              {aksjonspunkter.map((aksjonspunkt: any, approvalIndex: any) => (
+              {aksjonspunkter.map((aksjonspunkt, approvalIndex) => (
                 <div key={aksjonspunkt.aksjonspunktKode}>
                   <ApprovalField
                     aksjonspunkt={aksjonspunkt}
@@ -105,7 +111,7 @@ export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> =
                     readOnly={readOnly}
                     klageKA={!!behandlingKlageVurdering.klageVurderingResultatNK}
                     isForeldrepengerFagsak={isForeldrepengerFagsak}
-                    behandlingKlageVurdering={behandlingKlageVurdering}
+                    klagebehandlingVurdering={behandlingKlageVurdering}
                     behandlingStatus={behandlingStatus}
                     erTilbakekreving={erTilbakekreving}
                     arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
@@ -150,21 +156,24 @@ export const ToTrinnsFormImpl: FunctionComponent<OwnProps & InjectedFormProps> =
   );
 };
 
-ToTrinnsFormImpl.defaultProps = {
+ToTrinnsForm.defaultProps = {
   totrinnskontrollContext: [],
-  formState: [{ aksjonspunkter: [] }],
   behandlingKlageVurdering: {},
   erTilbakekreving: false,
 };
 
-const validate = (values: any) => {
+type FormValues = {
+  approvals?: TotrinnContext[];
+}
+
+const validate = (values: FormValues) => {
   const errors = {};
   if (!values.approvals) {
     return errors;
   }
 
-  errors.approvals = values.approvals.map((kontekst: any) => ({
-    aksjonspunkter: kontekst.aksjonspunkter.map((ap: any) => {
+  errors.approvals = values.approvals.map((kontekst) => ({
+    aksjonspunkter: kontekst.aksjonspunkter.map((ap) => {
       if (!ap.feilFakta && !ap.feilLov && !ap.feilRegel && !ap.annet) {
         return { missingArsakError: isRequiredMessage() };
       }
@@ -178,11 +187,8 @@ const validate = (values: any) => {
 
 const formName = 'toTrinnForm';
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   formState: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'approvals'),
 });
-const ToTrinnsForm = behandlingForm({ form: formName, validate })(connect(mapStateToProps)(ToTrinnsFormImpl));
 
-ToTrinnsForm.formName = formName;
-
-export default ToTrinnsForm;
+export default behandlingForm({ form: formName, validate })(connect(mapStateToProps)(ToTrinnsForm));

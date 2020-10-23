@@ -9,6 +9,14 @@ enum TypeEndring {
   LAGT_TIL = 'LAGT_TIL',
 }
 
+export type TotrinnskontrollArbeidsforhold = Readonly<{
+  navn: string;
+  organisasjonsnummer: string;
+  arbeidsforholdId: string;
+  arbeidsforholdHandlingType: Kodeverk;
+  brukPermisjon: boolean;
+}>
+
 type TotrinnskontrollAksjonspunkt = Readonly<{
   aksjonspunktKode: string;
   opptjeningAktiviteter: {
@@ -31,13 +39,7 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     tom: string;
     typeEndring: TypeEndring;
   }[];
-  arbeidforholdDtos: {
-    navn: string;
-    organisasjonsnummer: string;
-    arbeidsforholdId: string;
-    arbeidsforholdHandlingType: Kodeverk;
-    brukPermisjon: boolean;
-  }[];
+  arbeidforholdDtos: TotrinnskontrollArbeidsforhold[];
 }>
 
 export default TotrinnskontrollAksjonspunkt;

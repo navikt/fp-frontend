@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -7,7 +7,9 @@ import { Image } from '@fpsak-frontend/shared-components';
 import checkImg from '@fpsak-frontend/assets/images/check.svg'; //
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { Kodeverk, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
+import {
+  Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt,
+} from '@fpsak-frontend/types';
 
 import getAksjonspunktText from './ApprovalTextUtils';
 import TotrinnContext from '../TotrinnContextTsType';
@@ -64,12 +66,11 @@ const godkjendAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => {
 };
 /* eslint-enable react/no-array-index-key */
 
-const renderAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt, aksjonspunktTexts: string[]) => (
+const renderAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt, aksjonspunktTexts: ReactNode[]) => (
   <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
-    <span>{aksjonspunkt.navn}</span>
     {aksjonspunktTexts.map((formattedMessage: ReactNode, index: number) => (
-      <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))} className={styles.aksjonspunktTextContainer}>
-        <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index))}>
+      <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))} className={styles.aksjonspunktTextContainer}>
+        <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))}>
           {formattedMessage}
         </Normaltekst>
       </div>
@@ -88,7 +89,7 @@ interface OwnProps {
   isForeldrepengerFagsak: boolean;
   klagebehandlingVurdering: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
-  arbeidsforholdHandlingTyper: Kodeverk[],
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
 }
 
@@ -129,4 +130,4 @@ const ToTrinnsFormReadOnly: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default injectIntl(ToTrinnsFormReadOnly);
+export default ToTrinnsFormReadOnly;

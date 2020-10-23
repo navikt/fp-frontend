@@ -3,7 +3,9 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { NavFieldGroup, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
+import {
+  Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt,
+} from '@fpsak-frontend/types';
 
 import getAksjonspunktText from './ApprovalTextUtils';
 import ReasonsField from './ReasonsField';
@@ -19,9 +21,9 @@ interface OwnProps {
   showBegrunnelse?: boolean;
   klageKA?: boolean;
   isForeldrepengerFagsak: boolean;
-  klagebehandlingVurdering: TotrinnsKlageVurdering,
+  klagebehandlingVurdering?: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
-  arbeidsforholdHandlingTyper: Kodeverk[],
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
 }
 

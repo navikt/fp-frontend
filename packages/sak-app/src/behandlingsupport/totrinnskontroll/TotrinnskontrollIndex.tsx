@@ -4,8 +4,6 @@ import React, {
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
@@ -25,30 +23,12 @@ import {
 import { useFpSakKodeverk, useFpTilbakeKodeverk } from '../../data/useKodeverk';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
-const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunkt) => ([{
-  code: vurderPaNyttArsakType.FEIL_FAKTA,
-  isSet: totrinnskontrollAksjonspunkt.feilFakta,
-}, {
-  code: vurderPaNyttArsakType.FEIL_LOV,
-  isSet: totrinnskontrollAksjonspunkt.feilLov,
-}, {
-  code: vurderPaNyttArsakType.FEIL_REGEL,
-  isSet: totrinnskontrollAksjonspunkt.feilRegel,
-}, {
-  code: vurderPaNyttArsakType.ANNET,
-  isSet: totrinnskontrollAksjonspunkt.annet,
-}].filter((arsak) => arsak.isSet)
-  .map((arsak) => arsak.code)
-);
-
 type Values = {
-  approvals: {
-    aksjonspunkter: TotrinnskontrollAksjonspunkt[];
-  }[];
+  fatterVedtakAksjonspunktDto: any;
+  erAlleAksjonspunktGodkjent: boolean
 };
 
 const getLagreFunksjon = (
-  erTilbakekreving: boolean,
   behandlingId: number,
   saksnummer: number,
   selectedBehandlingVersjon: number,
@@ -56,33 +36,15 @@ const getLagreFunksjon = (
   setShowBeslutterModal: (visModal: boolean) => void,
   approveAp: (params: any) => Promise<any>,
 ) => (
-  values: Values,
+  totrinnskontrollData: Values,
 ) => {
-  const aksjonspunkter = values.approvals
-    .map((context) => context.aksjonspunkter)
-    .reduce((a, b) => a.concat(b));
-
-  const aksjonspunktGodkjenningDtos = aksjonspunkter
-    .map((toTrinnsAksjonspunkt) => ({
-      aksjonspunktKode: toTrinnsAksjonspunkt.aksjonspunktKode,
-      godkjent: toTrinnsAksjonspunkt.totrinnskontrollGodkjent,
-      begrunnelse: toTrinnsAksjonspunkt.besluttersBegrunnelse,
-      arsaker: getArsaker(toTrinnsAksjonspunkt),
-    }));
-
-  // TODO (TOR) Fjern hardkodinga av 5005
-  const fatterVedtakAksjonspunktDto = {
-    '@type': erTilbakekreving ? '5005' : aksjonspunktCodes.FATTER_VEDTAK,
-    begrunnelse: null,
-    aksjonspunktGodkjenningDtos,
-  };
   const params = {
     behandlingId,
     saksnummer,
     behandlingVersjon: selectedBehandlingVersjon,
-    bekreftedeAksjonspunktDtoer: [fatterVedtakAksjonspunktDto],
+    bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
   };
-  setAllAksjonspunktApproved(aksjonspunkter.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true));
+  setAllAksjonspunktApproved(totrinnskontrollData.erAlleAksjonspunktGodkjent);
   setShowBeslutterModal(true);
   return approveAp(params);
 };
@@ -154,7 +116,7 @@ export const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(erTilbakekreving, behandlingId, fagsak.saksnummer, behandlingVersjon,
+  const onSubmit = useCallback(getLagreFunksjon(behandlingId, fagsak.saksnummer, behandlingVersjon,
     setAllAksjonspunktApproved, setShowBeslutterModal, godkjennBehandling),
   [behandlingId, behandlingVersjon]);
 

@@ -41,5 +41,5 @@ export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';
 export { default as Arbeidsgiver } from './src/arbeidsgiverTsType';
 export { default as TotrinnsKlageVurdering } from './src/totrinnsKlageVurderingTsType';
-export { default as TotrinnskontrollAksjonspunkt } from './src/totrinnskontrollAksjonspunktTsType';
+export { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold } from './src/totrinnskontrollAksjonspunktTsType';
 export { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
