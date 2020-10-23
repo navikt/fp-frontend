@@ -85,8 +85,8 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           <RadioOption
             label={(
               <FormattedMessage
-                  id="OmsorgFaktaForm.HarIkkeAleneomsorg"
-                  values={{
+                id="OmsorgFaktaForm.HarIkkeAleneomsorg"
+                values={{
                     b: (chunks: any) => <b>{chunks}</b>,
                   }}
               />
@@ -108,8 +108,8 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             ? <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
             : (
               <FormattedMessage
-                id="OmsorgFaktaForm.OppgittIkkeOmsorg"
-                values={{
+                  id="OmsorgFaktaForm.OppgittIkkeOmsorg"
+                  values={{
                   b: (chunks: any) => <b>{chunks}</b>,
                 }}
               />
