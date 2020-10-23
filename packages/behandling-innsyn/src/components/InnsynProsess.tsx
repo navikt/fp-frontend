@@ -4,10 +4,10 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FagsakInfo, Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel,
+  Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal, ProsessStegPanel,
   ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegInnsynPanelDefinisjoner';
 import FetchedData from '../types/fetchedDataTsType';
@@ -17,7 +17,7 @@ import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -36,11 +36,11 @@ const forhandsvis = (data) => {
   }
 };
 
-const previewCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
+const previewCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: fagsak.sakstype,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };

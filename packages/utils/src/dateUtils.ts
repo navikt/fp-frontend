@@ -41,8 +41,9 @@ const checkDays = (weeks, days) => {
   };
 };
 
-export const calcDays = (fraDatoPeriode, tilDatoPeriode, notWeekends = true) => {
+export const calcDays = (fraDatoPeriode: string, tilDatoPeriode: string, notWeekends = true): number => {
   if (tilDatoPeriode === TIDENES_ENDE) {
+    // @ts-ignore Kva er dette?
     return checkDays(undefined, undefined);
   }
 
@@ -72,7 +73,7 @@ export const calcDays = (fraDatoPeriode, tilDatoPeriode, notWeekends = true) => 
   return numOfDays;
 };
 
-export const calcDaysAndWeeks = (fraDatoPeriode, tilDatoPeriode) => {
+export const calcDaysAndWeeks = (fraDatoPeriode: string, tilDatoPeriode: string) => {
   const numOfDays = calcDays(fraDatoPeriode, tilDatoPeriode);
 
   const weeks = Math.floor(numOfDays / 5);
@@ -81,7 +82,7 @@ export const calcDaysAndWeeks = (fraDatoPeriode, tilDatoPeriode) => {
   return checkDays(weeks, days);
 };
 
-export const calcDaysAndWeeksWithWeekends = (fraDatoPeriode, tilDatoPeriode) => {
+export const calcDaysAndWeeksWithWeekends = (fraDatoPeriode: string, tilDatoPeriode: string) => {
   const notWeekends = false;
 
   const numOfDays = calcDays(fraDatoPeriode, tilDatoPeriode, notWeekends);
@@ -128,7 +129,7 @@ export const findDifferenceInMonthsAndDays = (fomDate, tomDate) => {
   };
 };
 
-export const getRangeOfMonths = (fom, tom) => {
+export const getRangeOfMonths = (fom: string, tom: string): { month: string, year: string }[] => {
   moment.locale('nb');
   const fraMåned = moment(fom, YYYY_MM_FORMAT);
   const tilMåned = moment(tom, YYYY_MM_FORMAT);

@@ -1,8 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
+import Modal from 'nav-frontend-modal';
+
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import Modal from 'nav-frontend-modal';
+import { Behandlingsresultat } from '@fpsak-frontend/types';
+
 import { VedtakFritekstbrevModal } from './VedtakFritekstbrevModal';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
 
@@ -16,7 +19,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kode: behandlingResultatType.AVSLATT,
           kodeverk: '',
         },
-      }}
+      } as Behandlingsresultat}
     />);
     const modal = wrapper.find(Modal);
     const isOpen = modal.prop('isOpen');
@@ -33,7 +36,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kode: behandlingResultatType.OPPHOR,
           kodeverk: '',
         },
-      }}
+      } as Behandlingsresultat}
     />);
     const modal = wrapper.find(Modal);
     const isOpen = modal.prop('isOpen');
@@ -50,7 +53,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kode: behandlingResultatType.INNVILGET,
           kodeverk: '',
         },
-      }}
+      } as Behandlingsresultat}
     />);
     const modal = wrapper.find(Modal);
     expect(modal).to.have.length(0);
@@ -65,7 +68,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kode: behandlingResultatType.AVSLATT,
           kodeverk: '',
         },
-      }}
+      } as Behandlingsresultat}
     />);
     const modal = wrapper.find(Modal);
     expect(modal).to.have.length(0);

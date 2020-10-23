@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
-import { Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import useBehandlingEndret from '../behandling/useBehandligEndret';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 import BehandlingMenuIndex from './BehandlingMenuIndex';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';

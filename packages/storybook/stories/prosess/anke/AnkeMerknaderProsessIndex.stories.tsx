@@ -8,6 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeMerknaderProsessIndex from '@fpsak-frontend/prosess-anke-merknader';
 import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
 
+import alleKodeverk from '../../mocks/alleKodeverk.json';
 import withReduxProvider from '../../../decorators/withRedux';
 
 const behandling = {
@@ -27,6 +28,18 @@ const aksjonspunkter = [{
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/anke/prosess-anke-merknader',
   component: AnkeMerknaderProsessIndex,
@@ -35,17 +48,13 @@ export default {
 
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
   <AnkeMerknaderProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
         begrunnelse: 'Dette er en begrunnelse',
       },
     } as AnkeVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />

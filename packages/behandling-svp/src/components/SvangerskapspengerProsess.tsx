@@ -6,10 +6,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FagsakInfo, Rettigheter, ProsessStegPanel, prosessStegHooks, IverksetterVedtakStatusModal,
+  Rettigheter, ProsessStegPanel, prosessStegHooks, IverksetterVedtakStatusModal,
   FatterVedtakStatusModal, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegSvpPanelDefinisjoner';
@@ -27,7 +27,7 @@ const forhandsvis = (data) => {
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -41,19 +41,21 @@ interface OwnProps {
   setBehandling: (behandling: Behandling) => void;
 }
 
-const getForhandsvisCallback = (forhandsvisMelding, fagsak, behandling) => (data) => {
+const getForhandsvisCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: fagsak.sakstype,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak, behandling) => (mottaker, brevmalkode, fritekst, saksnummer) => {
+const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsak: Fagsak, behandling: Behandling) => (
+  mottaker, brevmalkode, fritekst, saksnummer,
+) => {
   const data = {
     behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.sakstype,
     varseltekst: fritekst || '',
     mottaker,
     brevmalkode,

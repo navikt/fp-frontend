@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
+import { AnkeVurdering } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import BehandleMerknaderForm from './components/BehandleMerknaderForm';
 import messages from '../i18n/nb_NO.json';
@@ -14,17 +15,12 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   ankeVurdering: AnkeVurdering;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => Promise<any>;
-  isReadOnly: boolean;
-  readOnlySubmitButton: boolean;
   saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
 }
 
-const AnkeMerknaderProsessIndex: FunctionComponent<OwnProps> = ({
+const AnkeMerknaderProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   ankeVurdering,
   aksjonspunkter,

@@ -9,7 +9,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak,
+  NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 import { requireProps, LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
@@ -17,7 +17,6 @@ import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArs
 
 import useHistory from '../../app/useHistory';
 import useLocation from '../../app/useLocation';
-import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import {

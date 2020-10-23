@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
 import {
-  Behandling, FamilieHendelseSamling, Personopplysninger, Soknad,
+  Behandling, FamilieHendelse, FamilieHendelseSamling, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -59,14 +59,12 @@ const soknadOriginalBehandling = {
 };
 
 const familiehendelseOriginalBehandling = {
-  gjeldende: {
-    avklartBarn: [{
-      fodselsdato: '2019-01-10',
-    }],
-    termindato: '2019-01-01',
-    antallBarnTermin: 1,
-  },
-} as FamilieHendelseSamling;
+  avklartBarn: [{
+    fodselsdato: '2019-01-10',
+  }],
+  termindato: '2019-01-01',
+  antallBarnTermin: 1,
+} as FamilieHendelse;
 
 const aksjonspunkter = [{
   definisjon: {

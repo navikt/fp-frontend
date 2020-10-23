@@ -34,7 +34,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
   skalBrukeOverstyrendeFritekstBrev,
 }) => (
   <>
-    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && (
+    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
       <Row>
         <Column xs="4">
           <Undertekst><FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" /></Undertekst>

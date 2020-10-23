@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 
 import {
-  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
+  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
@@ -21,7 +21,7 @@ const getInnsynData = (saksnummer) => [
 
 interface OwnProps {
   behandlingId: number;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;

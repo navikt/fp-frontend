@@ -12,27 +12,25 @@ import TimeLineSoker from './components/TimeLineSoker';
 import TimeLineSokerEnsamSoker from './components/TimeLineSokerEnsamSoker';
 
 import styles from './tidslinje.less';
-
-interface EventProps {
-  items: string[];
-  event: Event;
-}
+import EventProps from './eventPropsTsType';
 
 interface Periode {
   fom: string;
   tom: string;
-  id: string;
+  id: string | number;
   className?: string;
   hoverText?: string;
 }
 
+export type TidslinjeTimes = {
+  soknad: string;
+  fodsel: string;
+  revurdering: string;
+  dodSoker: string;
+}
+
 interface TidslinjeProps {
-  customTimes: {
-    soknad: string;
-    fodsel: string;
-    revurdering: string;
-    dodSoker: string;
-  };
+  customTimes: TidslinjeTimes;
   hovedsokerKjonnKode: Kjønnkode;
   medsokerKjonnKode?: Kjønnkode;
   openPeriodInfo: (event: MouseEvent) => void;
