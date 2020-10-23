@@ -12,7 +12,7 @@ import { behandlingForm } from '@fpsak-frontend/form';
 import fordelBeregningsgrunnlagAksjonspunkterPropType from '../../propTypes/fordelBeregningsgrunnlagAksjonspunkterPropType';
 import beregningsgrunnlagPropType from '../../propTypes/beregningsgrunnlagPropType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
-import VurderEndringRefusjonRad, { lagNøkkel } from './VurderEndringRefusjonRad';
+import VurderEndringRefusjonRad, { lagNøkkelRefusjonsstart } from './VurderEndringRefusjonRad';
 
 const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
@@ -83,7 +83,7 @@ export const buildInitialValues = (bg, aksjonspunkter) => {
   const { andeler } = bg.refusjonTilVurdering;
   const initialValues = {};
   andeler.forEach((andel) => {
-    initialValues[lagNøkkel(andel)] = VurderEndringRefusjonRad.buildInitialValues(andel);
+    initialValues[lagNøkkelRefusjonsstart(andel)] = VurderEndringRefusjonRad.buildInitialValues(andel);
   });
   const refusjonAP = finnAksjonspunkt(aksjonspunkter);
   initialValues[BEGRUNNELSE_FIELD] = refusjonAP && refusjonAP.begrunnelse ? refusjonAP.begrunnelse : '';

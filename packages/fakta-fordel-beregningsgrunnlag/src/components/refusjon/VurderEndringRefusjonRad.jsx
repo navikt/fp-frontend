@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  dateFormat, hasValidDate, required, dateAfterOrEqual,
+  dateFormat, hasValidDate, required, dateAfterOrEqual, parseCurrencyInput, minValueFormatted, maxValueFormatted, removeSpacesFromNumber,
 } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
-import { DatepickerField } from '@fpsak-frontend/form';
+import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -18,14 +18,18 @@ const visningsnavn = (andel) => {
   return `${andel.arbeidsgiverNavn}`;
 };
 
-const FIELD_KEY = 'REFUSJON_ENDRING_DATO';
+const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
+const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';
 
-export const lagNøkkel = (andel) => {
+const lagNøkkel = (prefix, andel) => {
   if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
-    return `${FIELD_KEY}${andel.arbeidsgiverId.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef}`;
+    return `${prefix}${andel.arbeidsgiverId.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef}`;
   }
-  return `${FIELD_KEY}${andel.arbeidsgiverId.arbeidsgiverAktørId}${andel.internArbeidsforholdRef}`;
+  return `${prefix}${andel.arbeidsgiverId.arbeidsgiverAktørId}${andel.internArbeidsforholdRef}`;
 };
+
+export const lagNøkkelRefusjonsstart = (andel) => lagNøkkel(FIELD_KEY_REFUSJONSTART, andel);
+export const lagNøkkelDelvisRefusjon = (andel) => lagNøkkel(FIELD_KEY_DELVIS_REF, andel);
 
 export const VurderEndringRefusjonRad = ({
   refusjonAndel,
@@ -35,12 +39,15 @@ export const VurderEndringRefusjonRad = ({
     return null;
   }
   const navn = visningsnavn(refusjonAndel);
+  const andelTekst = refusjonAndel.skalKunneFastsetteDelvisRefusjon
+    ? 'BeregningInfoPanel.RefusjonBG.TidligereRefusjon'
+    : 'BeregningInfoPanel.RefusjonBG.IngenTidligereRefusjon';
   return (
     <>
       <Row>
         <Column xs="8">
           <FormattedMessage
-            id="BeregningInfoPanel.RefusjonBG.Arbeidsgiver"
+            id={andelTekst}
             values={{
               ag: navn,
               dato: dateFormat(refusjonAndel.nyttRefusjonskravFom),
@@ -59,13 +66,34 @@ export const VurderEndringRefusjonRad = ({
         </Column>
         <Column xs="4">
           <DatepickerField
-            name={lagNøkkel(refusjonAndel)}
+            name={lagNøkkelRefusjonsstart(refusjonAndel)}
             readOnly={readOnly}
             validate={[required, hasValidDate, dateAfterOrEqual(refusjonAndel.tidligsteMuligeRefusjonsdato)]}
             isEdited={!!refusjonAndel.fastsattNyttRefusjonskravFom}
           />
         </Column>
       </Row>
+      {refusjonAndel.skalKunneFastsetteDelvisRefusjon && (
+        <Row>
+          <Column xs="4">
+            <Normaltekst className={styles.marginTopp}>
+              <FormattedMessage
+                id="BeregningInfoPanel.RefusjonBG.DelvisPrMnd"
+              />
+            </Normaltekst>
+          </Column>
+          <Column xs="4">
+            <InputField
+              name={lagNøkkelDelvisRefusjon(refusjonAndel)}
+              bredde="S"
+              validate={[required, minValueFormatted(1), maxValueFormatted(refusjonAndel.maksTillattDelvisRefusjonPrMnd)]}
+              parse={parseCurrencyInput}
+              readOnly={readOnly}
+              isEdited={!!refusjonAndel.fastsattDelvisRefusjonPrMnd}
+            />
+          </Column>
+        </Row>
+      )}
     </>
   );
 };
@@ -73,13 +101,20 @@ export const VurderEndringRefusjonRad = ({
 VurderEndringRefusjonRad.buildInitialValues = (refusjonAndel) => (refusjonAndel.fastsattNyttRefusjonskravFom);
 
 VurderEndringRefusjonRad.transformValues = (values, andel) => {
-  const nøkkel = lagNøkkel(andel);
-  const fastsattDato = values[nøkkel];
+  let delvisRefusjonPrMnd = null;
+  if (andel.skalKunneFastsetteDelvisRefusjon) {
+    const delvisNøkkel = lagNøkkelDelvisRefusjon(andel);
+    delvisRefusjonPrMnd = removeSpacesFromNumber(values[delvisNøkkel]);
+  }
+  const datoNøkkel = lagNøkkelRefusjonsstart(andel);
+  const fastsattDato = values[datoNøkkel];
   return {
     arbeidsgiverOrgnr: andel.arbeidsgiverId.arbeidsgiverOrgnr,
     arbeidsgiverAktoerId: andel.arbeidsgiverId.arbeidsgiverAktørId,
     internArbeidsforholdRef: andel.internArbeidsforholdRef,
     fastsattRefusjonFom: fastsattDato,
+    delvisRefusjonPrMndFørStart: delvisRefusjonPrMnd,
+    skalKunneFastsetteDelvisRefusjon: andel.skalKunneFastsetteDelvisRefusjon,
   };
 };
 
