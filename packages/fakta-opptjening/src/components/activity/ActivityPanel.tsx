@@ -140,8 +140,8 @@ export const ActivityPanel: FunctionComponent<PureOwnProps & OwnProps & WrappedC
   ...formProps
 }) => (
   <FaktaGruppe
-      className={styles.panel}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]}
+    className={styles.panel}
+    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]}
   >
     <Row>
       <Column xs="10">
