@@ -73,10 +73,10 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             ? <FormattedMessage id="OmsorgFaktaForm.OppgittAleneomsorg" />
             : (
               <FormattedMessage
-                  id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
+                    id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
+                    values={{
+                      b: (chunks: any) => <b>{chunks}</b>,
+                    }}
               />
             )}
         </Normaltekst>
