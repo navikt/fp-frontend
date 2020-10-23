@@ -87,8 +87,8 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
               <FormattedMessage
                 id="OmsorgFaktaForm.HarIkkeAleneomsorg"
                 values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
               />
             )}
             value={false}
@@ -110,8 +110,8 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
               <FormattedMessage
                   id="OmsorgFaktaForm.OppgittIkkeOmsorg"
                   values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
               />
             )}
         </Normaltekst>
