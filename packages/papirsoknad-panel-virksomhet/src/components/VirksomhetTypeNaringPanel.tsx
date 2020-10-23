@@ -48,7 +48,12 @@ export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedO
     <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
     <VerticalSpacer fourPx />
     {naringvirksomhetTyper.sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
-      .map((nv) => <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />)}
+      .map((nv) => (
+        <>
+          <VerticalSpacer fourPx />
+          <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />
+        </>
+      ))}
   </>
 );
 

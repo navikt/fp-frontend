@@ -64,6 +64,7 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & Map
         label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.Name" />}
         readOnly={readOnly}
       />
+      <VerticalSpacer sixteenPx />
       <Undertekst><FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" /></Undertekst>
       <VerticalSpacer fourPx />
       <RadioGroupField name="virksomhetRegistrertINorge" validate={[required]} readOnly={readOnly}>
