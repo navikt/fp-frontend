@@ -32,8 +32,8 @@ const lagPeriode = (utbetaling) => {
   const utbTom = utbetaling.tom === TIDENES_ENDE ? undefined : utbetaling.tom;
   return (
     <FormattedMessage
-        id="BeregningInfoPanel.RefusjonBG.Periode"
-        values={{ fom: dateFormat(utbetaling.fom), tom: utbTom ? dateFormat(utbTom) : '' }}
+      id="BeregningInfoPanel.RefusjonBG.Periode"
+      values={{ fom: dateFormat(utbetaling.fom), tom: utbTom ? dateFormat(utbTom) : '' }}
     />
   );
 };
