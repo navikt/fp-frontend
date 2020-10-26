@@ -6,6 +6,9 @@ export enum VergeBehandlingmenyValg {
 }
 
 type BehandlingRettigheter = Readonly<{
+  behandlingFraBeslutter: boolean;
+  behandlingKanSendeMelding: boolean;
+  behandlingTilGodkjenning: boolean;
   behandlingKanBytteEnhet: boolean;
   behandlingKanHenlegges: boolean;
   behandlingKanGjenopptas: boolean;

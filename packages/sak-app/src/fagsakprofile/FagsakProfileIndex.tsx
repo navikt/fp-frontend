@@ -18,11 +18,12 @@ import {
   pathToBehandling,
   pathToBehandlinger,
 } from '../app/paths';
-import BehandlingMenuDataResolver from '../behandlingmenu/BehandlingMenuDataResolver';
+import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import SakRettigheter from '../fagsak/sakRettigheterTsType';
+import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
@@ -44,6 +45,7 @@ interface OwnProps {
   harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
   fagsakRettigheter: SakRettigheter;
+  behandlingRettigheter?: BehandlingRettigheter;
 }
 
 export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
@@ -54,6 +56,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   oppfriskBehandlinger,
   fagsakRettigheter,
+  behandlingRettigheter,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingId);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -99,16 +102,22 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
-          renderBehandlingMeny={() => (
-            <BehandlingMenuDataResolver
-              fagsak={fagsak}
-              alleBehandlinger={alleBehandlinger}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              oppfriskBehandlinger={oppfriskBehandlinger}
-              fagsakRettigheter={fagsakRettigheter}
-            />
-          )}
+          renderBehandlingMeny={() => {
+            if (!behandlingRettigheter) {
+              return <LoadingPanel />;
+            }
+            return (
+              <BehandlingMenuIndex
+                fagsak={fagsak}
+                alleBehandlinger={alleBehandlinger}
+                behandlingId={behandlingId}
+                behandlingVersjon={behandlingVersjon}
+                oppfriskBehandlinger={oppfriskBehandlinger}
+                behandlingRettigheter={behandlingRettigheter}
+                sakRettigheter={fagsakRettigheter}
+              />
+            );
+          }}
           renderBehandlingVelger={() => (
             <BehandlingVelgerSakIndex
               behandlinger={alleBehandlinger}

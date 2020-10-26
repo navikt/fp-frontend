@@ -26,6 +26,7 @@ import {
 import FagsakGrid from './components/FagsakGrid';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';
+import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling) => pathToAnnenPart(annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId);
 
@@ -75,14 +76,14 @@ const FagsakIndex: FunctionComponent = () => {
     keepData: true,
   });
 
+  const enabledApplicationContexts = useGetEnabledApplikasjonContext();
+
   const { data: fagsakRettigheter, state: fagsakRettigheterState } = restApiHooks
     .useRestApi<SakRettigheter>(FpsakApiKeys.SAK_RETTIGHETER, { saksnummer: selectedSaksnummer }, {
       updateTriggers: [selectedSaksnummer, behandlingId, behandlingVersjon],
       suspendRequest: !selectedSaksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     });
-
-  const enabledApplicationContexts = useGetEnabledApplikasjonContext();
 
   const { data: behandlingerFpSak, state: behandlingerFpSakState } = restApiHooks.useRestApi<BehandlingAppKontekst[]>(
     FpsakApiKeys.BEHANDLINGER_FPSAK, { saksnummer: selectedSaksnummer }, {
@@ -123,6 +124,16 @@ const FagsakIndex: FunctionComponent = () => {
     data: annenPartBehandling, state: annenPartState,
   } = restApiHooks.useRestApi<AnnenPartBehandling>(FpsakApiKeys.ANNEN_PART_BEHANDLING, { saksnummer: selectedSaksnummer }, options);
 
+  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+
+  const { data: behandlingRettigheter } = restApiHooks.useRestApi<BehandlingRettigheter>(
+    FpsakApiKeys.BEHANDLING_RETTIGHETER, { uuid: behandling?.uuid }, {
+      suspendRequest: !behandling,
+      updateTriggers: [behandlingId, behandlingVersjon],
+      keepData: true,
+    },
+  );
+
   if (!fagsak) {
     if (fagsakState === RestApiState.NOT_STARTED || fagsakState === RestApiState.LOADING) {
       return <LoadingPanel />;
@@ -138,7 +149,6 @@ const FagsakIndex: FunctionComponent = () => {
     return <Redirect to={pathToMissingPage()} />;
   }
 
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const harVerge = behandling ? behandling.harVerge : false;
 
   const harHentetBehandlingerFraFpsak = !!behandlingerFpSak || behandlingerFpSakState === RestApiState.SUCCESS;
@@ -171,6 +181,7 @@ const FagsakIndex: FunctionComponent = () => {
             harHentetBehandlinger={harHentetBehandlingerFraFpsak && harHentetBehandlingerFraFpTilbake}
             oppfriskBehandlinger={oppfriskBehandlinger}
             fagsakRettigheter={fagsakRettigheter}
+            behandlingRettigheter={behandlingRettigheter}
           />
         )}
         supportContent={(
@@ -179,6 +190,7 @@ const FagsakIndex: FunctionComponent = () => {
             alleBehandlinger={alleBehandlinger}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
+            behandlingRettigheter={behandlingRettigheter}
           />
         )}
         visittkortContent={() => {
