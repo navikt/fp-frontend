@@ -7,7 +7,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
-  NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext, TotrinnskontrollAksjonspunkt,
+  NavAnsatt, Kodeverk, KodeverkMedNavn, Fagsak, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 import { requireProps, LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';

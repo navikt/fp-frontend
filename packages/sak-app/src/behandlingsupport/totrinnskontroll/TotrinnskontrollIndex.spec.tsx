@@ -8,12 +8,11 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { Fagsak, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
+import { Fagsak, TotrinnskontrollAksjonspunkt, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import * as useHistory from '../../app/useHistory';
 import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
