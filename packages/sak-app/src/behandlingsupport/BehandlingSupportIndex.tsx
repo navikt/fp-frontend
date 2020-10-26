@@ -81,15 +81,13 @@ const getReturnedIsRelevant = (isOnHold, toTrinnsAksjonspunkter: Totrinnskontrol
   .reduce((a, b) => a.concat(b.totrinnskontrollAksjonspunkter), [])
   .some((ap) => ap.totrinnskontrollGodkjent === false) && status && status.kode === BehandlingStatus.BEHANDLING_UTREDES;
 
-export const getAccessibleSupportPanels = (returnIsRelevant, approvalIsRelevant, behandlingRettigheter: BehandlingRettigheter) => Object.values(supportTabs)
+export const getAccessibleSupportPanels = (returnIsRelevant, approvalIsRelevant) => Object.values(supportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {
-      case supportTabs.MESSAGES:
-        return behandlingRettigheter ? behandlingRettigheter.behandlingKanSendeMelding : false;
       case supportTabs.APPROVAL:
-        return behandlingRettigheter ? approvalIsRelevant && behandlingRettigheter.behandlingTilGodkjenning : false;
+        return approvalIsRelevant;
       case supportTabs.RETURNED:
-        return behandlingRettigheter ? returnIsRelevant && behandlingRettigheter.behandlingFraBeslutter : false;
+        return returnIsRelevant;
       default:
         return true;
     }
@@ -101,7 +99,7 @@ export const getEnabledSupportPanels = (
   .filter((supportPanel) => {
     switch (supportPanel) {
       case supportTabs.MESSAGES:
-        return behandlingRettigheter ? sendMessageIsRelevant && behandlingRettigheter.behandlingKanSendeMelding : false;
+        return behandlingRettigheter && sendMessageIsRelevant ? behandlingRettigheter.behandlingKanSendeMelding : false;
       case supportTabs.APPROVAL:
         return behandlingRettigheter ? behandlingRettigheter.behandlingTilGodkjenning : false;
       case supportTabs.RETURNED:
@@ -155,8 +153,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const returnedIsRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status),
     [behandling?.id, behandling?.versjon, totrinnArsakerReadOnly]);
   const approvalIsRelevant = useMemo(() => !erPaVent && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK, [behandling?.id, behandling?.versjon]);
-  const acccessibleSupportPanels = useMemo(() => getAccessibleSupportPanels(returnedIsRelevant, approvalIsRelevant, behandlingRettigheter),
-    [returnedIsRelevant, approvalIsRelevant, behandlingRettigheter]);
+  const acccessibleSupportPanels = useMemo(() => getAccessibleSupportPanels(returnedIsRelevant, approvalIsRelevant),
+    [returnedIsRelevant, approvalIsRelevant]);
   const sendMessageIsRelevant = useMemo(() => (fagsak && !erPaVent), [fagsak, erPaVent]);
   const enabledSupportPanels = useMemo(() => getEnabledSupportPanels(acccessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter),
     [acccessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter]);

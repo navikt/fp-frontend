@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
-import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
+import { LoadingPanel, requireProps, usePrevious } from '@fpsak-frontend/shared-components';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import { Dokument } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -42,10 +42,11 @@ export const DocumentIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   saksnummer,
 }) => {
+  const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
   const { data: alleDokumenter, state } = restApiHooks.useRestApi<Dokument[]>(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
-    suspendRequest: erBehandlingEndretFraUndefined,
+    suspendRequest: forrigeSaksnummer && erBehandlingEndretFraUndefined,
     keepData: true,
   });
 
