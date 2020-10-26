@@ -103,7 +103,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
           renderBehandlingMeny={() => {
-            if (!behandlingRettigheter) {
+            if (!fagsakRettigheter) {
               return <LoadingPanel />;
             }
             return (
