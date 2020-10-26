@@ -43,8 +43,8 @@ export enum FpsakApiKeys {
   BREVMALER = 'BREVMALER',
   SUBMIT_MESSAGE = 'SUBMIT_MESSAGE',
   SAK_RETTIGHETER = 'SAK_RETTIGHETER',
+  SAK_RETTIGHETER_FPTILBAKE = 'SAK_RETTIGHETER_FPTILBAKE',
   BEHANDLING_RETTIGHETER = 'BEHANDLING_RETTIGHETER',
-  MENYHANDLING_RETTIGHETER_FPTILBAKE = 'MENYHANDLING_RETTIGHETER_FPTILBAKE',
   KAN_TILBAKEKREVING_OPPRETTES = 'KAN_TILBAKEKREVING_OPPRETTES',
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES = 'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
   PREVIEW_MESSAGE_TILBAKEKREVING = 'PREVIEW_MESSAGE_TILBAKEKREVING',
@@ -67,6 +67,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
   .withRel('sak-bruker', FpsakApiKeys.SAK_BRUKER)
   .withRel('sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER)
+  .withRel('tilbake-sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE)
   .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withRel('sak-alle-behandlinger', FpsakApiKeys.BEHANDLINGER_FPSAK)
@@ -95,7 +96,6 @@ const endpoints = new RestApiConfigBuilder()
   .withGet('/fptilbake/api/kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
   .withGet('/fptilbake/api/behandlinger/kan-opprettes', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withGet('/fptilbake/api/behandlinger/kan-revurdering-opprettes-v2', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
-  .withGet('/fptilbake/api/behandlinger/handling-rettigheter-v2', FpsakApiKeys.MENYHANDLING_RETTIGHETER_FPTILBAKE)
 
   // TODO ??
   .withAsyncPost('/fptilbake/api/behandlinger/opprett', FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
