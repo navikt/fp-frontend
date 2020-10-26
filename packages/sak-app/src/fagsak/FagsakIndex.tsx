@@ -114,7 +114,7 @@ const FagsakIndex: FunctionComponent = () => {
     }
     return <Redirect to={pathToMissingPage()} />;
   }
-  if (fagsakPersonState === RestApiState.NOT_STARTED || fagsakState === RestApiState.LOADING || !harFerdighentetfagsakRettigheter) {
+  if (fagsakPersonState === RestApiState.NOT_STARTED || fagsakPersonState === RestApiState.LOADING || !harFerdighentetfagsakRettigheter) {
     return <LoadingPanel />;
   }
 
