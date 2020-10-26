@@ -4,23 +4,16 @@ import { featureToggle } from '@fpsak-frontend/konstanter';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { isObjectEmpty } from '@fpsak-frontend/utils';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { Link } from '@fpsak-frontend/rest-api';
 
-import {
-  LinkCategory, FpsakApiKeys, requestApi, restApiHooks,
-} from '../data/fpsakApi';
+import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
+import useHentInitLenker from './useHentInitLenker';
+import useHentKodeverk from './useHentKodeverk';
 
 interface OwnProps {
   children: ReactElement,
 }
 
 const NO_PARAMS = {};
-
-type InitLinks = {
-  links: Link[];
-  toggleLinks: Link[];
-  sakLinks: Link[];
-};
 
 /**
  * Komponent som henter backend-data som skal kunne aksesseres globalt i applikasjonen. Denne dataen blir kun hentet en gang.
@@ -33,18 +26,11 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
     requestApi.setAddErrorMessageHandler(addErrorMessage);
   }, []);
 
-  const { data: initFetchData, state: initFetchState } = restApiHooks.useGlobalStateRestApi<InitLinks>(FpsakApiKeys.INIT_FETCH);
-  const harHentaFerdigInitData = initFetchState === RestApiState.SUCCESS;
-
-  if (harHentaFerdigInitData) {
-    requestApi.setLinks(initFetchData.links, LinkCategory.INIT_DATA);
-    requestApi.setLinks(initFetchData.toggleLinks, LinkCategory.FEATURE_TOGGLE);
-    requestApi.setLinks(initFetchData.sakLinks, LinkCategory.FAGSAK);
-  }
+  const harHentetFerdigInitLenker = useHentInitLenker();
 
   const options = {
-    suspendRequest: !harHentaFerdigInitData,
-    updateTriggers: [harHentaFerdigInitData],
+    suspendRequest: !harHentetFerdigInitLenker,
+    updateTriggers: [harHentetFerdigInitLenker],
   };
 
   const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT, NO_PARAMS, options);
@@ -58,14 +44,11 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
       suspendRequest: options.suspendRequest || isObjectEmpty(featureToggle),
     });
 
-  const { state: kodeverkFpSakStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK, NO_PARAMS, options);
-  const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK_FPTILBAKE, NO_PARAMS, options);
+  const harHentetFerdigKodeverk = useHentKodeverk(harHentetFerdigInitLenker);
 
-  // TODO Fiks denne
-  const erFerdig = initFetchState === RestApiState.ERROR
-    || (navAnsattState === RestApiState.SUCCESS && sprakFilState === RestApiState.SUCCESS
-    && behandlendeEnheterState === RestApiState.SUCCESS && kodeverkFpSakStatus === RestApiState.SUCCESS
-    && (kodeverkFpTilbakeStatus === RestApiState.ERROR || featureToggleState === RestApiState.SUCCESS)
+  const erFerdig = harHentetFerdigInitLenker
+    && (navAnsattState === RestApiState.SUCCESS && sprakFilState === RestApiState.SUCCESS
+    && behandlendeEnheterState === RestApiState.SUCCESS && harHentetFerdigKodeverk
     && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS));
 
   return erFerdig ? children : <LoadingPanel />;

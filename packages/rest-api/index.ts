@@ -14,7 +14,7 @@ export { default as RestApiConfigBuilder } from './src/RestApiConfigBuilder';
 export { default as getAxiosHttpClientApi } from './src/axios/getAxiosHttpClientApi';
 export { ErrorTypes, errorOfType, getErrorResponseData } from './src/requestApi/error/ErrorTypes';
 export { default as ErrorType } from './src/requestApi/error/errorTsType';
-export { default as Link } from './src/requestApi/LinkTsType';
+export type { default as Link } from './src/requestApi/LinkTsType';
 
 let isUnitTestModeOn = false;
 export const switchOnTestMode = () => {
