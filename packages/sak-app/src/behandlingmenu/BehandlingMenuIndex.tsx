@@ -65,7 +65,7 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingId?: number;
   behandlingVersjon?: number;
-  behandlingRettigheter:BehandlingRettigheter;
+  behandlingRettigheter: BehandlingRettigheter;
   sakRettigheter: SakRettigheter;
   oppfriskBehandlinger: () => void;
 }

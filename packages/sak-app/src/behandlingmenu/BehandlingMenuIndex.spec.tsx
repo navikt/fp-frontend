@@ -12,7 +12,7 @@ import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
 import * as useHistory from '../app/useHistory';
 import * as useLocation from '../app/useLocation';
-import { VergeBehandlingmenyValg } from './sakRettigheterTsType';
+import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
@@ -93,24 +93,27 @@ describe('BehandlingMenuIndex', () => {
     const sakRettigheter = {
       sakSkalTilInfotrygd: false,
       behandlingTypeKanOpprettes: [],
-      behandlingTillatteOperasjoner: [{
-        uuid: alleBehandlinger[0].uuid,
-        behandlingKanBytteEnhet: true,
-        behandlingKanHenlegges: true,
-        behandlingKanGjenopptas: false,
-        behandlingKanOpnesForEndringer: true,
-        behandlingKanSettesPaVent: true,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-      }],
+    };
+
+    const behandlingRettigheter = {
+      behandlingFraBeslutter: false,
+      behandlingKanSendeMelding: true,
+      behandlingTilGodkjenning: false,
+      behandlingKanBytteEnhet: true,
+      behandlingKanHenlegges: true,
+      behandlingKanGjenopptas: false,
+      behandlingKanOpnesForEndringer: true,
+      behandlingKanSettesPaVent: true,
+      vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
     };
 
     const wrapper = shallow(<BehandlingMenuIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      saksnummer={123}
       behandlingId={1}
-      behandlingVersion={2}
+      behandlingVersjon={2}
       oppfriskBehandlinger={sinon.spy()}
+      behandlingRettigheter={behandlingRettigheter}
       sakRettigheter={sakRettigheter}
     />);
 
