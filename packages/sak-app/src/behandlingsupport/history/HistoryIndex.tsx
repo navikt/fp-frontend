@@ -6,7 +6,7 @@ import moment from 'moment';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
-import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import useLocation from '../../app/useLocation';
 import useBehandlingEndret from '../../behandling/useBehandligEndret';
@@ -58,16 +58,14 @@ const HistoryIndex: FunctionComponent<OwnProps> = ({
 
   const skalBrukeFpTilbakeHistorikk = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
-  const forrigeSaksnummer = usePrevious(saksnummer);
-  const erBehandlingEndret = forrigeSaksnummer && erBehandlingEndretFraUndefined;
 
   const { data: historikkFpSak, state: historikkFpSakState } = restApiHooks.useRestApi<History[]>(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
-    suspendRequest: erBehandlingEndret,
+    suspendRequest: erBehandlingEndretFraUndefined,
   });
   const { data: historikkFpTilbake, state: historikkFpTilbakeState } = restApiHooks.useRestApi<History[]>(FpsakApiKeys.HISTORY_FPTILBAKE, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
-    suspendRequest: !skalBrukeFpTilbakeHistorikk || erBehandlingEndret,
+    suspendRequest: !skalBrukeFpTilbakeHistorikk || erBehandlingEndretFraUndefined,
   });
 
   const historikkInnslag = useMemo(() => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake), [historikkFpSak, historikkFpTilbake]);
