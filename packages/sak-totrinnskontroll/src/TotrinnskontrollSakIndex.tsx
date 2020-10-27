@@ -18,7 +18,14 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunkt) => ([{
+type TotrinnskontrollAksjonspunktMedFaktaValg = {
+  feilFakta?: boolean;
+  feilLov?: boolean;
+  feilRegel?: boolean;
+  annet?: boolean;
+} & TotrinnskontrollAksjonspunkt;
+
+const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunktMedFaktaValg) => ([{
   code: vurderPaNyttArsakType.FEIL_FAKTA,
   isSet: totrinnskontrollAksjonspunkt.feilFakta,
 }, {
@@ -57,7 +64,7 @@ interface OwnProps {
 
 type Values = {
   approvals: {
-    aksjonspunkter: TotrinnskontrollAksjonspunkt[];
+    aksjonspunkter: TotrinnskontrollAksjonspunktMedFaktaValg[];
   }[];
   erAlleAksjonspunktGodkjent: boolean
 };
