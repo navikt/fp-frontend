@@ -21,7 +21,7 @@ interface History {
   type: Kodeverk;
 }
 
-const sortAndTagTilbakekreving = (historyFpsak = [], historyFptilbake = []) => {
+const sortAndTagTilbakekreving = (historyFpsak: History[] = [], historyFptilbake: History[] = []) => {
   const historikkFraTilbakekrevingMedMarkor = historyFptilbake.map((ht) => ({
     ...ht,
     erTilbakekreving: true,
