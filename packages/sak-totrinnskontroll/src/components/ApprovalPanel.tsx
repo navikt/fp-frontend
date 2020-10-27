@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Location } from 'history';
 
@@ -6,7 +6,7 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -35,51 +35,35 @@ const håndterSpeiselleTegn = (aksjonspunkter: TotrinnskontrollAksjonspunkt[]): 
 
 export const mapPropsToContext = (
   toTrinnsBehandling: boolean,
-  behandlingStatus: Kodeverk,
-  skjemalenkeTyper: KodeverkMedNavn[],
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location,
   location: Location,
+  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[],
   erTilbakekreving?: boolean,
-  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[],
-  totrinnskontrollReadOnlySkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[],
 ): TotrinnContext[] => {
   if (toTrinnsBehandling) {
-    let skjermlenkeContext;
-    if (behandlingStatus.kode === BehandlingStatus.FATTER_VEDTAK && totrinnskontrollSkjermlenkeContext) {
-      skjermlenkeContext = totrinnskontrollSkjermlenkeContext;
+    const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
+    const totrinnsContext = totrinnskontrollSkjermlenkeContext.map((context) => {
+      const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
+      return {
+        contextCode: context.skjermlenkeType,
+        skjermlenke: createLocationForSkjermlenke(location, context.skjermlenkeType),
+        skjermlenkeNavn: skjermlenkeTypeKodeverk.navn,
+        aksjonspunkter: håndterSpeiselleTegn(context.totrinnskontrollAksjonspunkter),
+      };
+    });
+    if (erTilbakekreving && totrinnsContext) {
+      return sorterTilbakekrevingContext(totrinnsContext);
     }
-    if (behandlingStatus.kode !== BehandlingStatus.FATTER_VEDTAK && totrinnskontrollReadOnlySkjermlenkeContext) {
-      skjermlenkeContext = totrinnskontrollReadOnlySkjermlenkeContext;
-    }
-    if (skjermlenkeContext) {
-      const totrinnsContext = skjermlenkeContext.map((context) => {
-        const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
-        return {
-          contextCode: context.skjermlenkeType,
-          skjermlenke: createLocationForSkjermlenke(location, context.skjermlenkeType),
-          skjermlenkeNavn: skjermlenkeTypeKodeverk.navn,
-          aksjonspunkter: håndterSpeiselleTegn(context.totrinnskontrollAksjonspunkter),
-        };
-      });
-      if (erTilbakekreving && totrinnsContext) {
-        return sorterTilbakekrevingContext(totrinnsContext);
-      }
-
-      return totrinnsContext || [];
-    }
+    return totrinnsContext || [];
   }
   return [];
 };
 
 interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
+  behandling: Behandling;
   totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadOnlySkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
-  behandlingStatus: Kodeverk;
-  toTrinnsBehandling: boolean;
   location: Location;
-  skjemalenkeTyper: KodeverkMedNavn[];
   readOnly: boolean;
   onSubmit: (...args: any[]) => any;
   forhandsvisVedtaksbrev: () => void;
@@ -92,143 +76,91 @@ interface OwnProps {
   erTilbakekreving?: boolean;
 }
 
-interface OwnState {
-  approvals: TotrinnContext[];
-  allAksjonspunktApproved?: boolean;
-}
-
 /**
  * ApprovalPanel
  *
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
-export class ApprovalPanel extends Component<OwnProps, OwnState> {
-  constructor(props: OwnProps) {
-    super(props);
-    this.state = {
-      approvals: [],
-    };
+const ApprovalPanel: FunctionComponent<OwnProps> = ({
+  behandling,
+  location,
+  readOnly,
+  onSubmit,
+  forhandsvisVedtaksbrev,
+  behandlingKlageVurdering,
+  isForeldrepengerFagsak,
+  alleKodeverk,
+  erBehandlingEtterKlage,
+  erTilbakekreving,
+  totrinnskontrollSkjermlenkeContext,
+  createLocationForSkjermlenke,
+}) => {
+  const approvals = totrinnskontrollSkjermlenkeContext
+    ? mapPropsToContext(behandling.toTrinnsBehandling, alleKodeverk, createLocationForSkjermlenke, location,
+      totrinnskontrollSkjermlenkeContext, erTilbakekreving)
+    : [];
 
-    const {
-      totrinnskontrollSkjermlenkeContext,
-      totrinnskontrollReadOnlySkjermlenkeContext,
-      toTrinnsBehandling,
-      skjemalenkeTyper,
-      createLocationForSkjermlenke,
-      behandlingStatus,
-      erTilbakekreving,
-      location,
-    } = props;
-    if (totrinnskontrollSkjermlenkeContext || totrinnskontrollReadOnlySkjermlenkeContext) {
-      this.state = {
-        ...this.state,
-        approvals: mapPropsToContext(toTrinnsBehandling, behandlingStatus, skjemalenkeTyper, createLocationForSkjermlenke, location, erTilbakekreving,
-          totrinnskontrollSkjermlenkeContext, totrinnskontrollReadOnlySkjermlenkeContext),
-      };
-    }
-  }
-
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: OwnProps) {
-    if (nextProps.totrinnskontrollSkjermlenkeContext || nextProps.totrinnskontrollReadOnlySkjermlenkeContext) {
-      this.setState({
-        approvals: mapPropsToContext(nextProps.toTrinnsBehandling, nextProps.behandlingStatus, nextProps.skjemalenkeTyper,
-          nextProps.createLocationForSkjermlenke, nextProps.location, nextProps.erTilbakekreving, nextProps.totrinnskontrollSkjermlenkeContext,
-          nextProps.totrinnskontrollReadOnlySkjermlenkeContext),
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    this.setState({ approvals: [] });
-  }
-
-  setAksjonspunktApproved(toTrinnsAksjonspunkter: TotrinnskontrollAksjonspunkt[]) {
-    this.setState({
-      allAksjonspunktApproved: toTrinnsAksjonspunkter.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true),
-    });
-  }
-
-  render() {
-    const {
-      behandlingId,
-      behandlingVersjon,
-      behandlingsresultat,
-      behandlingStatus,
-      location,
-      readOnly,
-      onSubmit,
-      forhandsvisVedtaksbrev,
-      behandlingKlageVurdering,
-      isForeldrepengerFagsak,
-      alleKodeverk,
-      erBehandlingEtterKlage,
-      erTilbakekreving,
-    } = this.props;
-    const { approvals } = this.state;
-    return (
-      <>
-        {approvals && approvals.length > 0
-          ? (
-            <div>
-              {behandlingStatus.kode === BehandlingStatus.FATTER_VEDTAK
-                ? (
-                  <div>
-                    {!readOnly && (
+  return (
+    <>
+      {approvals && approvals.length > 0
+        ? (
+          <div>
+            {behandling.status.kode === BehandlingStatus.FATTER_VEDTAK
+              ? (
+                <div>
+                  {!readOnly && (
                     <>
                       <AksjonspunktHelpTextHTML>
                         {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
                       </AksjonspunktHelpTextHTML>
                       <VerticalSpacer sixteenPx />
                     </>
-                    )}
-                    <ToTrinnsForm
-                      behandlingId={behandlingId}
-                      behandlingVersjon={behandlingVersjon}
-                      behandlingsresultat={behandlingsresultat}
-                      totrinnskontrollContext={approvals}
-                      initialValues={{ approvals }}
-                      onSubmit={onSubmit}
-                      location={location}
-                      forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-                      readOnly={readOnly}
+                  )}
+                  <ToTrinnsForm
+                    behandlingId={behandling.id}
+                    behandlingVersjon={behandling.versjon}
+                    behandlingsresultat={behandling.behandlingsresultat}
+                    totrinnskontrollContext={approvals}
+                    initialValues={{ approvals }}
+                    onSubmit={onSubmit}
+                    location={location}
+                    forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+                    readOnly={readOnly}
+                    isForeldrepengerFagsak={isForeldrepengerFagsak}
+                    behandlingKlageVurdering={behandlingKlageVurdering}
+                    behandlingStatus={behandling.status}
+                    alleKodeverk={alleKodeverk}
+                    erBehandlingEtterKlage={erBehandlingEtterKlage}
+                    erTilbakekreving={erTilbakekreving}
+                  />
+                </div>
+              )
+              : (
+                <div>
+                  <div className={styles.resultatFraGodkjenningTextContainer}>
+                    <FormattedMessage
+                      id="ToTrinnsForm.LøstAksjonspunkt"
+                      values={{
+                        b: (chunks: any) => <b>{chunks}</b>,
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <ToTrinnsFormReadOnly
+                      approvalList={approvals}
                       isForeldrepengerFagsak={isForeldrepengerFagsak}
-                      behandlingKlageVurdering={behandlingKlageVurdering}
-                      behandlingStatus={behandlingStatus}
-                      alleKodeverk={alleKodeverk}
-                      erBehandlingEtterKlage={erBehandlingEtterKlage}
+                      klagebehandlingVurdering={behandlingKlageVurdering}
+                      behandlingStatus={behandling.status}
+                      arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
                       erTilbakekreving={erTilbakekreving}
                     />
                   </div>
-                )
-                : (
-                  <div>
-                    <div className={styles.resultatFraGodkjenningTextContainer}>
-                      <FormattedMessage
-                        id="ToTrinnsForm.LøstAksjonspunkt"
-                        values={{
-                          b: (chunks: any) => <b>{chunks}</b>,
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <ToTrinnsFormReadOnly
-                        approvalList={approvals}
-                        isForeldrepengerFagsak={isForeldrepengerFagsak}
-                        klagebehandlingVurdering={behandlingKlageVurdering}
-                        behandlingStatus={behandlingStatus}
-                        arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
-                        erTilbakekreving={erTilbakekreving}
-                      />
-                    </div>
-                  </div>
-                )}
-            </div>
-          )
-          : null}
-      </>
-    );
-  }
-}
-
+                </div>
+              )}
+          </div>
+        )
+        : null}
+    </>
+  );
+};
 export default ApprovalPanel;

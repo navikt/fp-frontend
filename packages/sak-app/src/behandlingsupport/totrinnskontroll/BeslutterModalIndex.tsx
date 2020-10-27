@@ -17,30 +17,22 @@ interface TotrinnsKlageVurdering {
 }
 
 interface OwnProps {
-  selectedBehandlingVersjon?: number;
+  behandling: BehandlingAppKontekst;
   fagsakYtelseType: Kodeverk;
-  behandlingsresultat: BehandlingAppKontekst['behandlingsresultat'];
-  behandlingId: number;
-  behandlingTypeKode: string;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
-  behandlingStatus: Kodeverk;
   totrinnsKlageVurdering: TotrinnsKlageVurdering,
 }
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
-  selectedBehandlingVersjon,
+  behandling,
   fagsakYtelseType,
-  behandlingsresultat,
-  behandlingId,
-  behandlingTypeKode,
   pushLocation,
   allAksjonspunktApproved,
-  behandlingStatus,
   totrinnsKlageVurdering,
 }) => {
   const { data, state } = restApiHooks.useRestApi<{ harRevurderingSammeResultat: boolean }>(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, undefined, {
-    updateTriggers: [behandlingId, selectedBehandlingVersjon],
+    updateTriggers: [behandling.id, behandling.versjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT),
     keepData: true,
   });
@@ -55,14 +47,11 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <FatterVedtakTotrinnskontrollModalSakIndex
+      behandling={behandling}
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
       fagsakYtelseType={fagsakYtelseType}
       erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
-      behandlingsresultat={behandlingsresultat}
-      behandlingId={behandlingId}
-      behandlingStatusKode={behandlingStatus.kode}
-      behandlingTypeKode={behandlingTypeKode}
       harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />
   );

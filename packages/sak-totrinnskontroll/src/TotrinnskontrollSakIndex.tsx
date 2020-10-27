@@ -1,16 +1,19 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
+import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import ApprovalPanel from './components/ApprovalPanel';
-import messages from '../i18n/nb_NO.json';
 import { TotrinnskontrollAksjonspunktMedFaktaValg } from './TotrinnContextTsType';
+import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
 
@@ -36,24 +39,16 @@ const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunktMe
 );
 
 interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  behandlingsresultat?: Behandling['behandlingsresultat'];
+  behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadOnlySkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
-  behandlingStatus: Kodeverk;
-  toTrinnsBehandling: boolean;
   location: Location;
-  skjemalenkeTyper: KodeverkMedNavn[];
-  isForeldrepengerFagsak: boolean;
+  fagsakYtelseType: Kodeverk;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  erBehandlingEtterKlage: boolean;
   readOnly: boolean;
   onSubmit: (...args: any[]) => any;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
-  erTilbakekreving?: boolean;
 }
 
 type Values = {
@@ -64,25 +59,20 @@ type Values = {
 };
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
-  behandlingsresultat,
+  behandling,
   totrinnskontrollSkjermlenkeContext,
-  totrinnskontrollReadOnlySkjermlenkeContext,
-  behandlingStatus,
   location,
+  fagsakYtelseType,
   readOnly,
   onSubmit,
   forhandsvisVedtaksbrev,
-  toTrinnsBehandling,
-  skjemalenkeTyper,
-  isForeldrepengerFagsak,
   behandlingKlageVurdering,
   alleKodeverk,
-  erBehandlingEtterKlage,
-  erTilbakekreving = false,
   createLocationForSkjermlenke,
 }) => {
+  const isForeldrepengerFagsak = fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER;
+  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling?.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling?.type.kode;
+
   const submitHandler = (values: Values) => {
     const aksjonspunkter = values.approvals
       .map((context) => context.aksjonspunkter)
@@ -109,21 +99,20 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     });
   };
 
+  const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingArsaker
+    .map(({ behandlingArsakType }) => behandlingArsakType)
+    .some((bt: Kodeverk) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
+    || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false), [behandling]);
+
   return (
     <RawIntlProvider value={intl}>
       <ApprovalPanel
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
-        behandlingsresultat={behandlingsresultat}
+        behandling={behandling}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-        totrinnskontrollReadOnlySkjermlenkeContext={totrinnskontrollReadOnlySkjermlenkeContext}
-        behandlingStatus={behandlingStatus}
         location={location}
         readOnly={readOnly}
         onSubmit={submitHandler}
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        toTrinnsBehandling={toTrinnsBehandling}
-        skjemalenkeTyper={skjemalenkeTyper}
         isForeldrepengerFagsak={isForeldrepengerFagsak}
         behandlingKlageVurdering={behandlingKlageVurdering}
         alleKodeverk={alleKodeverk}

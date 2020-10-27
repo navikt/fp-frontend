@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Kodeverk } from '@fpsak-frontend/types';
 import FatterVedtakApprovalModal from './components/modal/FatterVedtakApprovalModal';
 import messages from '../i18n/nb_NO.json';
 
@@ -13,26 +13,20 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
+  behandling: BehandlingAppKontekst;
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
   fagsakYtelseType: Kodeverk;
   erKlageWithKA?: boolean;
-  behandlingsresultat: Behandling['behandlingsresultat'];
-  behandlingId: number;
-  behandlingStatusKode: string;
-  behandlingTypeKode: string;
   harSammeResultatSomOriginalBehandling?: boolean;
 }
 
 const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = ({
+  behandling,
   closeEvent,
   allAksjonspunktApproved,
   fagsakYtelseType,
   erKlageWithKA,
-  behandlingsresultat,
-  behandlingId,
-  behandlingStatusKode,
-  behandlingTypeKode,
   harSammeResultatSomOriginalBehandling,
 }) => (
   <RawIntlProvider value={intl}>
@@ -41,10 +35,10 @@ const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = (
       allAksjonspunktApproved={allAksjonspunktApproved}
       fagsakYtelseType={fagsakYtelseType}
       erKlageWithKA={erKlageWithKA}
-      behandlingsresultat={behandlingsresultat}
-      behandlingId={behandlingId}
-      behandlingStatusKode={behandlingStatusKode}
-      behandlingTypeKode={behandlingTypeKode}
+      behandlingsresultat={behandling.behandlingsresultat}
+      behandlingId={behandling.id}
+      behandlingStatusKode={behandling.status.kode}
+      behandlingTypeKode={behandling.type.kode}
       harSammeResultatSomOriginalBehandling={harSammeResultatSomOriginalBehandling}
     />
   </RawIntlProvider>

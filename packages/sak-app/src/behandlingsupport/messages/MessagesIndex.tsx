@@ -7,7 +7,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak, Kodeverk } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import useHistory from '../../app/useHistory';
@@ -18,8 +18,16 @@ import {
   FpsakApiKeys, restApiHooks, requestApi,
 } from '../../data/fpsakApi';
 
-const getSubmitCallback = (setShowMessageModal, behandlingTypeKode, behandlingId, behandlingUuid, submitMessage, resetMessage, setShowSettPaVentModal,
-  setSubmitCounter) => (values) => {
+const getSubmitCallback = (
+  setShowMessageModal: (showModal: boolean) => void,
+  behandlingTypeKode: string,
+  behandlingId: number,
+  behandlingUuid: string,
+  submitMessage: (data: any) => Promise<any>,
+  resetMessage: () => void,
+  setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
+  setSubmitCounter: (fn: any) => void,
+) => (values) => {
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_MEDL_DOK;
@@ -46,7 +54,12 @@ const getSubmitCallback = (setShowMessageModal, behandlingTypeKode, behandlingId
     });
 };
 
-const getPreviewCallback = (behandlingTypeKode, behandlingUuid, fagsakYtelseType, fetchPreview) => (
+const getPreviewCallback = (
+  behandlingTypeKode: string,
+  behandlingUuid: string,
+  fagsakYtelseType: Kodeverk,
+  fetchPreview: (erHenleggelse: boolean, data: any) => void,
+) => (
   mottaker, dokumentMal, fritekst, aarsakskode,
 ) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
@@ -62,7 +75,7 @@ const getPreviewCallback = (behandlingTypeKode, behandlingUuid, fagsakYtelseType
     mottaker,
     dokumentMal,
   };
-  fetchPreview(erTilbakekreving, false, data);
+  fetchPreview(false, data);
 };
 
 interface OwnProps {
@@ -130,7 +143,7 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
     history.push('/');
   }, [behandlingId, behandlingVersjon]);
 
-  const fetchPreview = useVisForhandsvisningAvMelding();
+  const fetchPreview = useVisForhandsvisningAvMelding(behandling.type);
 
   const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandling.uuid, fagsak.sakstype, fetchPreview),
     [behandlingId, behandlingVersjon]);
