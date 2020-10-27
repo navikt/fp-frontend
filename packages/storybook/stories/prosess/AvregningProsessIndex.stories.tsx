@@ -4,6 +4,7 @@ import {
   withKnobs, object, boolean,
 } from '@storybook/addon-knobs';
 
+import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -40,8 +41,7 @@ const simuleringResultat = {
     ingenPerioderMedAvvik: false,
     perioderPerMottaker: [{
       mottakerType: {
-        kode: 'BRUKER',
-        navn: null,
+        kode: mottakerTyper.ARBG,
         kodeverk: 'MOTTAKER_TYPE',
       },
       mottakerIdentifikator: '123',
