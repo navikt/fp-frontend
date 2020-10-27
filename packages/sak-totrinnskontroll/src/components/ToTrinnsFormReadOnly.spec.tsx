@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { ToTrinnsFormReadOnlyImpl } from './ToTrinnsFormReadOnly';
+import ToTrinnsFormReadOnly from './ToTrinnsFormReadOnly';
 import getAksjonspunktText from './ApprovalTextUtils';
 
 const getTotrinnsaksjonspunkterFødsel = () => (
@@ -101,7 +101,7 @@ describe('<ToTrinnsFormReadOnly>', () => {
     },
     ];
 
-    const wrapper = shallow(<ToTrinnsFormReadOnlyImpl
+    const wrapper = shallow(<ToTrinnsFormReadOnly
       approvalList={approvalList}
       getAksjonspunktText={getAksjonspunktText.resultFunc(true, null, null, null, null)}
     />);

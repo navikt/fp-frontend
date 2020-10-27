@@ -62,7 +62,12 @@ const getInfoTextCode = (
   return 'FatterVedtakApprovalModal.InnvilgetForeldrepenger';
 };
 
-const getModalDescriptionTextCode = (isOpphor, ytelseType, erKlageWithKA, behandlingTypeKode) => {
+const getModalDescriptionTextCode = (
+  isOpphor: boolean,
+  ytelseType: Kodeverk,
+  erKlageWithKA: boolean,
+  behandlingTypeKode: string,
+) => {
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     if (erKlageWithKA) {
       return 'FatterVedtakApprovalModal.ModalDescriptionKlageKA';
@@ -87,7 +92,7 @@ const getModalDescriptionTextCode = (isOpphor, ytelseType, erKlageWithKA, behand
 const isStatusFatterVedtak = (behandlingStatusKode: string) => behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
 
 const utledInfoTextCode = (
-  allAksjonspunktApproved,
+  allAksjonspunktApproved: boolean,
   behandlingStatusKode: string,
   behandlingTypeKode: string,
   behandlingsresultat: Behandling['behandlingsresultat'],

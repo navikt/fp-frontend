@@ -17,16 +17,18 @@ export type TotrinnskontrollArbeidsforhold = Readonly<{
   brukPermisjon: boolean;
 }>
 
+export type OpptjeningAktiviteter = Readonly<{
+  aktivitetType: string;
+  erEndring: boolean;
+  arbeidsgiverNavn: string;
+  orgnr: string;
+  godkjent: boolean;
+  privatpersonFødselsdato: string;
+}>
+
 type TotrinnskontrollAksjonspunkt = Readonly<{
   aksjonspunktKode: string;
-  opptjeningAktiviteter: {
-    aktivitetType: string;
-    erEndring: boolean;
-    arbeidsgiverNavn: string;
-    orgnr: string;
-    godkjent: boolean;
-    privatpersonFødselsdato: string;
-  }[];
+  opptjeningAktiviteter: OpptjeningAktiviteter[];
   beregningDto: {
     fastsattVarigEndringNaering: boolean;
     faktaOmBeregningTilfeller: Kodeverk[];
@@ -38,6 +40,10 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     fom: string;
     tom: string;
     typeEndring: TypeEndring;
+    erSlettet: boolean;
+    erAvklart: boolean;
+    erLagtTil: boolean;
+    erEndret: boolean;
   }[];
   arbeidforholdDtos: TotrinnskontrollArbeidsforhold[];
 }>

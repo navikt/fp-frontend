@@ -1,4 +1,5 @@
-import React from 'react';
+import { OpptjeningAktiviteter } from '@fpsak-frontend/types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const mapAktivitetTextEndring = (aktivitetType: string, arbeidsgiverNavn?: string, orgnr?: string) => {
@@ -78,16 +79,18 @@ const mapAktivitetTextGodkjenning = (aktivitetType: string, arbeidsgiverNavn?: s
   );
 };
 
-type Props = {
-    aktivitet?: {};
-};
+interface OwnProps {
+  aktivitet: OpptjeningAktiviteter;
+}
 
 /*
  * OpptjeningTotrinnText
  *
 
  */
-export const OpptjeningTotrinnText = ({ aktivitet }: Props) => {
+export const OpptjeningTotrinnText: FunctionComponent<OwnProps> = ({
+  aktivitet,
+}) => {
   if (aktivitet.erEndring) {
     return mapAktivitetTextEndring(aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : null, aktivitet.arbeidsgiverNavn, aktivitet.orgnr);
   }

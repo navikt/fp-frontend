@@ -14,7 +14,6 @@ describe('<FatterVedtakApprovalModal>', () => {
   it('skal rendre modal for fatter vedtak', () => {
     const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
       intl={intlMock}
-      showModal
       infoTextCode="testInfo"
       altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
       modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescription"
@@ -34,7 +33,6 @@ describe('<FatterVedtakApprovalModal>', () => {
   it('skal rendre modal for iverksetter vedtak', () => {
     const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
       intl={intlMock}
-      showModal
       infoTextCode="testInfo"
       altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
       modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescriptionESApproval"
@@ -54,7 +52,6 @@ describe('<FatterVedtakApprovalModal>', () => {
   it('skal rendre modal for iverksetter vedtak foreldrepenger', () => {
     const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
       intl={intlMock}
-      showModal
       infoTextCode="testInfo"
       altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
       modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescriptionFPApproval"
@@ -69,25 +66,5 @@ describe('<FatterVedtakApprovalModal>', () => {
 
     const button = wrapper.find(Hovedknapp);
     expect(button).to.have.length(1);
-  });
-
-  it('skal lukke modal ved trykk på knapp', () => {
-    const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
-      intl={intlMock}
-      showModal={false}
-      infoTextCode="testInfo"
-      altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
-      modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescriptionFPApproval"
-      closeEvent={closeEventCallback}
-      resolveProsessAksjonspunkterSuccess
-    />);
-
-    const modal = wrapper.find(Modal);
-    expect(modal.prop('isOpen')).is.false;
-
-    const button = wrapper.find(Hovedknapp);
-    expect(closeEventCallback).to.have.property('callCount', 0);
-    button.simulate('click');
-    expect(closeEventCallback).to.have.property('callCount', 1);
   });
 });

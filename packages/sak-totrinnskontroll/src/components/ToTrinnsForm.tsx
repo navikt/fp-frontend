@@ -172,17 +172,17 @@ const validate = (values: FormValues) => {
     return errors;
   }
 
-  errors.approvals = values.approvals.map((kontekst) => ({
-    aksjonspunkter: kontekst.aksjonspunkter.map((ap) => {
-      if (!ap.feilFakta && !ap.feilLov && !ap.feilRegel && !ap.annet) {
-        return { missingArsakError: isRequiredMessage() };
-      }
+  return {
+    approvals: values.approvals.map((kontekst) => ({
+      aksjonspunkter: kontekst.aksjonspunkter.map((ap) => {
+        if (!ap.feilFakta && !ap.feilLov && !ap.feilRegel && !ap.annet) {
+          return { missingArsakError: isRequiredMessage() };
+        }
 
-      return undefined;
-    }),
-  }));
-
-  return errors;
+        return undefined;
+      }),
+    })),
+  };
 };
 
 const formName = 'toTrinnForm';

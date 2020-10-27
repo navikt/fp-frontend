@@ -5,11 +5,12 @@ import { Location } from 'history';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import ApprovalPanel from './components/ApprovalPanel';
 import messages from '../i18n/nb_NO.json';
+import { TotrinnskontrollAksjonspunktMedFaktaValg } from './TotrinnContextTsType';
 
 const cache = createIntlCache();
 
@@ -17,13 +18,6 @@ const intl = createIntl({
   locale: 'nb-NO',
   messages,
 }, cache);
-
-type TotrinnskontrollAksjonspunktMedFaktaValg = {
-  feilFakta?: boolean;
-  feilLov?: boolean;
-  feilRegel?: boolean;
-  annet?: boolean;
-} & TotrinnskontrollAksjonspunkt;
 
 const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunktMedFaktaValg) => ([{
   code: vurderPaNyttArsakType.FEIL_FAKTA,
