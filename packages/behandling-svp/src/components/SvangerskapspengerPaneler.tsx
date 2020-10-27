@@ -4,7 +4,7 @@ import {
   BehandlingPaVent, SettPaVentParams, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 
 import SvangerskapspengerProsess from './SvangerskapspengerProsess';
@@ -27,6 +27,7 @@ interface OwnProps {
   opneSokeside: () => void;
   hasFetchError: boolean;
   setBehandling: (behandling: Behandling) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface FaktaPanelInfo {
@@ -50,6 +51,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
   opneSokeside,
   hasFetchError,
   setBehandling,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
@@ -77,6 +79,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         hasFetchError={hasFetchError}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         setBehandling={setBehandling}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       <SvangerskapspengerFakta
         behandling={behandling}

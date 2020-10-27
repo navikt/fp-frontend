@@ -26,7 +26,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
 import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
 import {
-  Aksjonspunkt, DetaljertSimuleringResultat, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, DetaljertSimuleringResultat, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 
 import AvregningSummary from './AvregningSummary';
@@ -62,6 +62,7 @@ interface PureOwnProps {
   sprakkode: Kodeverk;
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   tilbakekrevingvalg?: TilbakekrevingValg;
   submitCallback: (data: any) => Promise<any>;
   readOnly: boolean;
@@ -160,6 +161,7 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
       sprakkode,
       isForeldrepenger,
       hasOpenTilbakekrevingsbehandling,
+      arbeidsgiverOpplysningerPerId,
       ...formProps
     } = this.props;
     const simuleringResultatOption = getSimuleringResult(simuleringResultat, feilutbetaling);
@@ -191,6 +193,7 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
                   toggleDetails={this.toggleDetails}
                   simuleringResultat={simuleringResultatOption}
                   ingenPerioderMedAvvik={simuleringResultatOption.ingenPerioderMedAvvik}
+                  arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 />
                 <VerticalSpacer twentyPx />
                 {hasOpenTilbakekrevingsbehandling && (

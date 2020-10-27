@@ -6,7 +6,7 @@ import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -114,8 +114,16 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
   const { data, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(svangerskapspengerData,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
-  const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  if (!behandling || (hasNotFinished && data === undefined)) {
+  const { data: arbeidsgiverOpplysningerPerId, state: arbeidOppState } = restApiSvpHooks.useRestApi<ArbeidsgiverOpplysningerPerId>(
+    SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
+      updateTriggers: [!behandling],
+      suspendRequest: !behandling,
+    },
+  );
+
+  const harIkkeHentetBehandlingsdata = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
+  const harIkkeHentetArbeidsgiverOpplysninger = arbeidOppState === RestApiState.LOADING || arbeidOppState === RestApiState.NOT_STARTED;
+  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || (harIkkeHentetBehandlingsdata && data === undefined)) {
     return <LoadingPanel />;
   }
 
@@ -123,10 +131,10 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={hasNotFinished ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={harIkkeHentetBehandlingsdata ? forrigeBehandling.versjon : behandling.versjon}
       />
       <SvangerskapspengerPaneler
-        behandling={hasNotFinished ? forrigeBehandling : behandling}
+        behandling={harIkkeHentetBehandlingsdata ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
         fagsakPerson={fagsakPerson}
@@ -141,6 +149,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </>
   );

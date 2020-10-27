@@ -27,6 +27,13 @@ describe('<AvregningProsessIndex>', () => {
     },
   } as Behandling;
 
+  const arbeidsgiverOpplysningerPerId = {
+    123: {
+      identifikator: 'testId',
+      navn: 'testNavn',
+    },
+  };
+
   const aksjonspunkter = [{
     definisjon: {
       kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
@@ -39,6 +46,7 @@ describe('<AvregningProsessIndex>', () => {
       fagsak={fagsak}
       behandling={behandling}
       aksjonspunkter={aksjonspunkter}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       submitCallback={sinon.spy()}
       isReadOnly={false}
       readOnlySubmitButton={false}

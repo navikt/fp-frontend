@@ -4,7 +4,7 @@ import React, {
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
-  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson,
+  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
@@ -113,8 +113,16 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
   const { data, state } = restApiEsHooks.useMultipleRestApi<FetchedData>(engansstonadData,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
-  const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  if (!behandling || (hasNotFinished && data === undefined)) {
+  const { data: arbeidsgiverOpplysningerPerId, state: arbeidOppState } = restApiEsHooks.useRestApi<ArbeidsgiverOpplysningerPerId>(
+    EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
+      updateTriggers: [!behandling],
+      suspendRequest: !behandling,
+    },
+  );
+
+  const harIkkeHentetBehandlingsdata = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
+  const harIkkeHentetArbeidsgiverOpplysninger = arbeidOppState === RestApiState.LOADING || arbeidOppState === RestApiState.NOT_STARTED;
+  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || (harIkkeHentetBehandlingsdata && data === undefined)) {
     return <LoadingPanel />;
   }
 
@@ -122,10 +130,10 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={hasNotFinished ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={harIkkeHentetBehandlingsdata ? forrigeBehandling.versjon : behandling.versjon}
       />
       <EngangsstonadPaneler
-        behandling={hasNotFinished ? forrigeBehandling : behandling}
+        behandling={harIkkeHentetBehandlingsdata ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
         fagsakPerson={fagsakPerson}
@@ -140,6 +148,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </>
   );
