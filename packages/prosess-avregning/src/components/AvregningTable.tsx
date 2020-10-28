@@ -85,7 +85,7 @@ const createColumns = (perioder: SimuleringResultatRad['resultaterPerMåned'], r
 
 const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   if (mottaker.mottakerType.kode === mottakerTyper.ARBG) {
-    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId.arbeidsgivere[mottaker.mottakerIdentifikator];
+    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[mottaker.mottakerIdentifikator];
     return (
       <Normaltekst className={styles.tableTitle}>
         {`${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`}

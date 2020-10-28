@@ -4,7 +4,7 @@ import React, {
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
-  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson, ArbeidsgiverOpplysningerWrapper,
 } from '@fpsak-frontend/types';
 import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
@@ -113,7 +113,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
   const { data, state } = restApiEsHooks.useMultipleRestApi<FetchedData>(engansstonadData,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
-  const { data: arbeidsgiverOpplysningerPerId, state: arbeidOppState } = restApiEsHooks.useRestApi<ArbeidsgiverOpplysningerPerId>(
+  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiEsHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
     EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
       updateTriggers: [!behandling],
       suspendRequest: !behandling,
@@ -148,7 +148,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
       />
     </>
   );

@@ -46,4 +46,4 @@ export {
   default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,
   HistorikkInnslagOpplysning, HistorikkInnslagAksjonspunkt,
 } from './src/historikkinnslagTsType';
-export { default as ArbeidsgiverOpplysningerPerId, ArbeidsgiverOpplysninger } from './src/arbeidsgiverOpplysningerTsType';
+export { default as ArbeidsgiverOpplysningerPerId, ArbeidsgiverOpplysningerWrapper, ArbeidsgiverOpplysninger } from './src/arbeidsgiverOpplysningerTsType';

@@ -6,7 +6,7 @@ import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerWrapper,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -114,7 +114,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
   const { data, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(svangerskapspengerData,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
-  const { data: arbeidsgiverOpplysningerPerId, state: arbeidOppState } = restApiSvpHooks.useRestApi<ArbeidsgiverOpplysningerPerId>(
+  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiSvpHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
     SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
       updateTriggers: [!behandling],
       suspendRequest: !behandling,
@@ -149,7 +149,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
       />
     </>
   );
