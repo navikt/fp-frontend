@@ -136,26 +136,14 @@ const ApprovalPanel: FunctionComponent<OwnProps> = ({
                 </div>
               )
               : (
-                <div>
-                  <div className={styles.resultatFraGodkjenningTextContainer}>
-                    <FormattedMessage
-                      id="ToTrinnsForm.LøstAksjonspunkt"
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <ToTrinnsFormReadOnly
-                      approvalList={approvals}
-                      isForeldrepengerFagsak={isForeldrepengerFagsak}
-                      klagebehandlingVurdering={behandlingKlageVurdering}
-                      behandlingStatus={behandling.status}
-                      arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
-                      erTilbakekreving={erTilbakekreving}
-                    />
-                  </div>
-                </div>
+                <ToTrinnsFormReadOnly
+                  approvalList={approvals}
+                  isForeldrepengerFagsak={isForeldrepengerFagsak}
+                  klagebehandlingVurdering={behandlingKlageVurdering}
+                  behandlingStatus={behandling.status}
+                  arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
+                  erTilbakekreving={erTilbakekreving}
+                />
               )}
           </div>
         )

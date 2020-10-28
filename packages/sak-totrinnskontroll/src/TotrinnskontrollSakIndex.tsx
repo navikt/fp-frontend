@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
@@ -70,10 +70,9 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   createLocationForSkjermlenke,
 }) => {
-  const isForeldrepengerFagsak = fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER;
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling?.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling?.type.kode;
 
-  const submitHandler = (values: Values) => {
+  const submitHandler = useCallback((values: Values) => {
     const aksjonspunkter = values.approvals
       .map((context) => context.aksjonspunkter)
       .reduce((a, b) => a.concat(b));
@@ -97,12 +96,13 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
       fatterVedtakAksjonspunktDto,
       erAlleAksjonspunktGodkjent: aksjonspunkter.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true),
     });
-  };
+  }, [erTilbakekreving]);
 
   const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingArsaker
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some((bt: Kodeverk) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
-    || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false), [behandling]);
+    || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
+  [behandling]);
 
   return (
     <RawIntlProvider value={intl}>
@@ -113,7 +113,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         onSubmit={submitHandler}
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        isForeldrepengerFagsak={isForeldrepengerFagsak}
+        isForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
         behandlingKlageVurdering={behandlingKlageVurdering}
         alleKodeverk={alleKodeverk}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
