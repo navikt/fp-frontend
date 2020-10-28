@@ -200,6 +200,7 @@
   "AnkeVurderingModal.Ok": "OK",
   "OkAvbrytModal.Ok": "OK",
   "OkAvbrytModal.Avbryt": "Avbryt",
+  "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
   "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
   "BehandlingTilbakekrevingIndex.ApenRevurderingHeader": "Åpen revurdering",
   "DataFetchPendingModal.LosningenJobberMedBehandlingen": "Løsningen jobber med behandlingen...",
