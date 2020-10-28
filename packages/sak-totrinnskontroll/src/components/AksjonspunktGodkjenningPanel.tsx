@@ -8,9 +8,9 @@ import {
 } from '@fpsak-frontend/types';
 
 import getAksjonspunktText from './ApprovalTextUtils';
-import ReasonsField from './ReasonsField';
+import AksjonspunktGodkjenningArsakPanel from './AksjonspunktGodkjenningArsakPanel';
 
-import styles from './ApprovalField.less';
+import styles from './aksjonspunktGodkjenningPanel.less';
 
 interface OwnProps {
   aksjonspunkt: TotrinnskontrollAksjonspunkt;
@@ -28,11 +28,11 @@ interface OwnProps {
 }
 
 /*
- * ApprovalField
+ * AksjonspunktGodkjenningPanel
  *
  * Presentasjonskomponent. Holds the radiobuttons for approving or disapproving the decisions of the handler
  */
-const ApprovalField: FunctionComponent<OwnProps> = ({
+const AksjonspunktGodkjenningPanel: FunctionComponent<OwnProps> = ({
   aksjonspunkt,
   readOnly,
   currentValue,
@@ -59,7 +59,7 @@ const ApprovalField: FunctionComponent<OwnProps> = ({
     <div className={styles.approvalItemContainer}>
       {aksjonspunktText.map((formattedMessage, index) => (
         <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))} className={styles.aksjonspunktTextContainer}>
-          <Normaltekst key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))}>
+          <Normaltekst>
             {formattedMessage}
           </Normaltekst>
         </div>
@@ -71,10 +71,10 @@ const ApprovalField: FunctionComponent<OwnProps> = ({
         </RadioGroupField>
         {showReasons
         && (
-        <ReasonsField
+        <AksjonspunktGodkjenningArsakPanel
           fieldName={fieldName}
           godkjentHosKA={erKlageKA}
-          showOnlyBegrunnelse={showOnlyBegrunnelse}
+          visKunBegrunnelse={showOnlyBegrunnelse}
         />
         )}
       </NavFieldGroup>
@@ -82,9 +82,9 @@ const ApprovalField: FunctionComponent<OwnProps> = ({
   );
 };
 
-ApprovalField.defaultProps = {
+AksjonspunktGodkjenningPanel.defaultProps = {
   showBegrunnelse: false,
   klageKA: false,
 };
 
-export default ApprovalField;
+export default AksjonspunktGodkjenningPanel;

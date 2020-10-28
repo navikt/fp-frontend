@@ -14,10 +14,10 @@ import {
   Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering,
 } from '@fpsak-frontend/types';
 
-import ApprovalField from './ApprovalField';
+import AksjonspunktGodkjenningPanel from './AksjonspunktGodkjenningPanel';
 import TotrinnContext from '../TotrinnContextTsType';
 
-import styles from './ToTrinnsForm.less';
+import styles from './totrinnskontrollBeslutterForm.less';
 
 const allApproved = (formState: TotrinnContext[]) => formState
   .reduce((a, b) => a.concat(b.aksjonspunkter), [])
@@ -58,11 +58,11 @@ interface MappedOwnProps {
 }
 
 /*
-  * ToTrinnsForm
+  * TotrinnskontrollBeslutterForm
   *
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
-export const ToTrinnsForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   handleSubmit,
   formState,
   forhandsvisVedtaksbrev,
@@ -103,7 +103,7 @@ export const ToTrinnsForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inj
               </NavLink>
               {aksjonspunkter.map((aksjonspunkt, approvalIndex) => (
                 <div key={aksjonspunkt.aksjonspunktKode}>
-                  <ApprovalField
+                  <AksjonspunktGodkjenningPanel
                     aksjonspunkt={aksjonspunkt}
                     contextIndex={contextIndex}
                     currentValue={formState[contextIndex].aksjonspunkter[approvalIndex]}
@@ -156,7 +156,7 @@ export const ToTrinnsForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inj
   );
 };
 
-ToTrinnsForm.defaultProps = {
+TotrinnskontrollBeslutterForm.defaultProps = {
   totrinnskontrollContext: [],
   behandlingKlageVurdering: {},
   erTilbakekreving: false,
@@ -191,4 +191,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   formState: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'approvals'),
 });
 
-export default behandlingForm({ form: formName, validate })(connect(mapStateToProps)(ToTrinnsForm));
+export default behandlingForm({ form: formName, validate })(connect(mapStateToProps)(TotrinnskontrollBeslutterForm));

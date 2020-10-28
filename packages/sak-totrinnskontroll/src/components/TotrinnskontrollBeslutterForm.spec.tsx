@@ -6,12 +6,12 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FormattedMessage } from 'react-intl';
-import { ToTrinnsFormImpl } from './ToTrinnsForm';
+import { TotrinnskontrollBeslutterForm } from './TotrinnskontrollBeslutterForm';
 import ApprovalField from './ApprovalField';
 import getAksjonspunktText from './ApprovalTextUtils';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
 
-describe('<ToTrinnsForm>', () => {
+describe('<TotrinnskontrollBeslutterForm>', () => {
   const getTotrinnsaksjonspunkterFoedsel = () => (
     [
       {
@@ -126,7 +126,7 @@ describe('<ToTrinnsForm>', () => {
 
     const isForeldrepenger = true;
 
-    const wrapper = shallowWithIntl(<ToTrinnsFormImpl
+    const wrapper = shallowWithIntl(<TotrinnskontrollBeslutterForm
       {...reduxFormPropsMock}
       totrinnskontrollContext={totrinnskontrollContext}
       formState={formState}
@@ -160,7 +160,7 @@ describe('<ToTrinnsForm>', () => {
 
     const isForeldrepenger = true;
 
-    const wrapper = shallowWithIntl(<ToTrinnsFormImpl
+    const wrapper = shallowWithIntl(<TotrinnskontrollBeslutterForm
       {...reduxFormPropsMock}
       totrinnskontrollContext={totrinnskontrollContext}
       formState={formState}
@@ -224,7 +224,7 @@ describe('<ToTrinnsForm>', () => {
 
     const isForeldrepenger = true;
 
-    const wrapper = shallowWithIntl(<ToTrinnsFormImpl
+    const wrapper = shallowWithIntl(<TotrinnskontrollBeslutterForm
       {...reduxFormPropsMock}
       totrinnskontrollContext={totrinnskontrollContext}
       formState={formState}
@@ -264,7 +264,7 @@ describe('<ToTrinnsForm>', () => {
 
     const isForeldrepenger = true;
 
-    const wrapper = shallowWithIntl(<ToTrinnsFormImpl
+    const wrapper = shallowWithIntl(<TotrinnskontrollBeslutterForm
       {...reduxFormPropsMock}
       totrinnskontrollContext={totrinnskontrollContext}
       formState={formState}

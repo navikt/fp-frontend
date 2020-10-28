@@ -3,10 +3,10 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import ApprovalField from './ApprovalField';
+import AksjonspunktGodkjenningPanel from './AksjonspunktGodkjenningPanel';
 import getAksjonspunktText from './ApprovalTextUtils';
 
-describe('<ApprovalField>', () => {
+describe('<AksjonspunktGodkjenningPanel>', () => {
   it('skal kunne vise fleire oppjeningstekster for fleire aktiviteter', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
@@ -30,7 +30,7 @@ describe('<ApprovalField>', () => {
     const isForeldrepenger = false;
     const currentValue = { totrinnskontrollGodkjent: true };
     const approvalIndex = 1;
-    const wrapper = shallow(<ApprovalField
+    const wrapper = shallow(<AksjonspunktGodkjenningPanel
       getAksjonspunktText={getAksjonspunktText.resultFunc(isForeldrepenger, null, null, null, null)}
       readOnly={readOnly}
       aksjonspunkt={aksjonspunkt}
@@ -50,7 +50,7 @@ describe('<ApprovalField>', () => {
       aksjonspunktKode: aksjonspunktCodes.AUTO_VENT_PÅ_FODSELREGISTRERING,
     };
     const approvalIndex = 1;
-    const wrapper = shallow(<ApprovalField
+    const wrapper = shallow(<AksjonspunktGodkjenningPanel
       getAksjonspunktText={getAksjonspunktText.resultFunc(isForeldrepenger, null, null, null, null)}
       readOnly={readOnly}
       aksjonspunkt={aksjonspunkt}
@@ -77,7 +77,7 @@ describe('<ApprovalField>', () => {
 
     const approvalIndex = 1;
     const currentValue = { totrinnskontrollGodkjent: false };
-    const wrapper = shallow(<ApprovalField
+    const wrapper = shallow(<AksjonspunktGodkjenningPanel
       getAksjonspunktText={getAksjonspunktText.resultFunc(isForeldrepenger, null, null, null, null)}
       readOnly={readOnly}
       aksjonspunkt={aksjonspunkt}

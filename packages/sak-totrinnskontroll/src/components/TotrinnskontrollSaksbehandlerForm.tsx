@@ -12,7 +12,7 @@ import { Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering } from '@fpsak-fronte
 import getAksjonspunktText from './ApprovalTextUtils';
 import TotrinnContext from '../TotrinnContextTsType';
 
-import styles from './ToTrinnsFormReadOnly.less';
+import styles from './totrinnskontrollSaksbehandlerForm.less';
 
 interface OwnProps {
   approvalList: TotrinnContext[];
@@ -23,7 +23,7 @@ interface OwnProps {
   erTilbakekreving: boolean,
 }
 
-const ToTrinnsFormReadOnly: FunctionComponent<OwnProps> = ({
+const TotrinnskontrollSaksbehandlerForm: FunctionComponent<OwnProps> = ({
   approvalList,
   isForeldrepengerFagsak,
   klagebehandlingVurdering,
@@ -106,4 +106,4 @@ const ToTrinnsFormReadOnly: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default ToTrinnsFormReadOnly;
+export default TotrinnskontrollSaksbehandlerForm;

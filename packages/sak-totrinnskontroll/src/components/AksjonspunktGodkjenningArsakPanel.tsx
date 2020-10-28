@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import {
@@ -10,42 +10,41 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 
-import styles from './ReasonsField.less';
+import styles from './aksjonspunktGodkjenningArsakPanel.less';
 
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
 
 interface OwnProps {
   fieldName: string;
-  showOnlyBegrunnelse: boolean;
+  visKunBegrunnelse: boolean;
   godkjentHosKA: boolean;
 }
 
 /*
- * ReasonsField
+ * AksjonspunktGodkjenningArsakPanel
  *
- * Presentasjonskomponent. Holds the form of reasons the manager sends his thoughts back to the saksbehandler
+ * Presentasjonskomponent. Lar beslutter velge årsaken til valg "vurder på nytt"
  *
  * Eksempel:
  * ```html
- * <ReasonsField fieldName={fieldName} showOnlyBegrunnelse={showBegrunnelse} />
+ * <AksjonspunktGodkjenningArsakPanel fieldName={fieldName} visKunBegrunnelse={showBegrunnelse} />
  * ```
  */
-const ReasonsField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const AksjonspunktGodkjenningArsakPanel: FunctionComponent<OwnProps> = ({
   fieldName,
   godkjentHosKA,
-  showOnlyBegrunnelse,
-  intl,
+  visKunBegrunnelse,
 }) => (
   <>
     <ArrowBox
       alignOffset={godkjentHosKA ? 1 : 110}
     >
-      {!showOnlyBegrunnelse && (
+      {!visKunBegrunnelse && (
         <FlexContainer wrap>
           <FlexRow>
             <FlexColumn>
-              <Undertekst className="blokk-xs"><FormattedMessage id="ReasonsField.Arsak" /></Undertekst>
+              <Undertekst className="blokk-xs"><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" /></Undertekst>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
@@ -54,21 +53,21 @@ const ReasonsField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                 <FlexColumn className={styles.halfColumn}>
                   <CheckboxField
                     name={`${fieldName}.feilFakta`}
-                    label={intl.formatMessage({ id: 'ReasonsField.FeilFakta' })}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilFakta" />}
                   />
                   <CheckboxField
                     name={`${fieldName}.feilRegel`}
-                    label={intl.formatMessage({ id: 'ReasonsField.FeilRegelForstaelse' })}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse" />}
                   />
                 </FlexColumn>
                 <FlexColumn className={styles.halfColumn}>
                   <CheckboxField
                     name={`${fieldName}.feilLov`}
-                    label={intl.formatMessage({ id: 'ReasonsField.FeilLovanvendelse' })}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse" />}
                   />
                   <CheckboxField
                     name={`${fieldName}.annet`}
-                    label={intl.formatMessage({ id: 'ReasonsField.Annet' })}
+                    label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
                   />
                 </FlexColumn>
               </FlexRow>
@@ -78,12 +77,11 @@ const ReasonsField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       )}
       <TextAreaField
         name={`${fieldName}.besluttersBegrunnelse`}
-        label={intl.formatMessage({ id: 'ReasonsField.Begrunnelse' })}
+        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
         validate={[required, minLength3, maxLength2000, hasValidText]}
       />
-
     </ArrowBox>
   </>
 );
 
-export default injectIntl(ReasonsField);
+export default AksjonspunktGodkjenningArsakPanel;

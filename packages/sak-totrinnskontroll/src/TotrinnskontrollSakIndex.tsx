@@ -11,7 +11,7 @@ import {
   BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
-import ApprovalPanel from './components/ApprovalPanel';
+import TotrinnskontrollPanel from './components/TotrinnskontrollPanel';
 import { TotrinnskontrollAksjonspunktMedFaktaValg } from './TotrinnContextTsType';
 import messages from '../i18n/nb_NO.json';
 
@@ -106,7 +106,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <ApprovalPanel
+      <TotrinnskontrollPanel
         behandling={behandling}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         location={location}

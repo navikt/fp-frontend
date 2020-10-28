@@ -2,12 +2,12 @@ import React from 'react';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { expect } from 'chai';
 
-import ReasonsField from './ReasonsField';
+import AksjonspunktGodkjenningArsakPanel from './AksjonspunktGodkjenningArsakPanel';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
 
-describe('<ReasonsField>', () => {
+describe('<AksjonspunktGodkjenningArsakPanel>', () => {
   it('skal vise korrekt antall element', () => {
-    const wrapper = shallowWithIntl(<ReasonsField.WrappedComponent
+    const wrapper = shallowWithIntl(<AksjonspunktGodkjenningArsakPanel.WrappedComponent
       fieldName="test"
       showOnlyBegrunnelse={false}
       godkjentHosKA={false}

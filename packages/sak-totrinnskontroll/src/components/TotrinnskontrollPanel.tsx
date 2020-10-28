@@ -11,11 +11,9 @@ import {
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
-import ToTrinnsForm from './ToTrinnsForm';
-import ToTrinnsFormReadOnly from './ToTrinnsFormReadOnly';
+import TotrinnskontrollBeslutterForm from './TotrinnskontrollBeslutterForm';
+import TotrinnskontrollSaksbehandlerForm from './TotrinnskontrollSaksbehandlerForm';
 import TotrinnContext from '../TotrinnContextTsType';
-
-import styles from './approvalPanel.less';
 
 const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes.FAKTA_OM_FEILUTBETALING,
@@ -77,11 +75,11 @@ interface OwnProps {
 }
 
 /**
- * ApprovalPanel
+ * TotrinnskontrollPanel
  *
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
-const ApprovalPanel: FunctionComponent<OwnProps> = ({
+const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
   behandling,
   location,
   readOnly,
@@ -116,7 +114,7 @@ const ApprovalPanel: FunctionComponent<OwnProps> = ({
                       <VerticalSpacer sixteenPx />
                     </>
                   )}
-                  <ToTrinnsForm
+                  <TotrinnskontrollBeslutterForm
                     behandlingId={behandling.id}
                     behandlingVersjon={behandling.versjon}
                     behandlingsresultat={behandling.behandlingsresultat}
@@ -136,7 +134,7 @@ const ApprovalPanel: FunctionComponent<OwnProps> = ({
                 </div>
               )
               : (
-                <ToTrinnsFormReadOnly
+                <TotrinnskontrollSaksbehandlerForm
                   approvalList={approvals}
                   isForeldrepengerFagsak={isForeldrepengerFagsak}
                   klagebehandlingVurdering={behandlingKlageVurdering}
@@ -151,4 +149,4 @@ const ApprovalPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-export default ApprovalPanel;
+export default TotrinnskontrollPanel;

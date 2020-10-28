@@ -7,11 +7,11 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import ToTrinnsForm from './ToTrinnsForm';
-import ToTrinnsFormReadOnly from './ToTrinnsFormReadOnly';
-import { ApprovalPanel, mapPropsToContext } from './ApprovalPanel';
+import TotrinnskontrollSaksbehandlerForm from './TotrinnskontrollSaksbehandlerForm';
+import TotrinnskontrollPanel, { mapPropsToContext } from './TotrinnskontrollPanel';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
 
-describe('<ApprovalPanel>', () => {
+describe('<TotrinnskontrollPanel>', () => {
   const getBehandling = () => ({
     id: 1234,
     versjon: 123,
@@ -247,7 +247,7 @@ describe('<ApprovalPanel>', () => {
     const behandling = getBehandling();
     const totrinnskontrollAksjonspunkter = getTotrinnsaksjonspunkter();
 
-    const wrapper = shallowWithIntl(<ApprovalPanel
+    const wrapper = shallowWithIntl(<TotrinnskontrollPanel
       behandlingId={1}
       behandlingVersjon={1}
       behandlingStatus={behandling.status}
@@ -290,7 +290,7 @@ describe('<ApprovalPanel>', () => {
     const behandling = getBehandling();
     const totrinnskontrollSkjermlenkecontexts = getTilbakekrevingsSkjermlenkeContexts();
 
-    const wrapper = shallowWithIntl(<ApprovalPanel
+    const wrapper = shallowWithIntl(<TotrinnskontrollPanel
       behandlingId={1}
       behandlingVersjon={1}
       behandlingStatus={behandling.status}
@@ -333,7 +333,7 @@ describe('<ApprovalPanel>', () => {
   it('skal ikkje vise approvals under godkjenning fanen når aksjonspunkter ikkje har komt inn frå resttjeneste', () => {
     const behandling = getBehandling();
 
-    const wrapper = shallowWithIntl(<ApprovalPanel
+    const wrapper = shallowWithIntl(<TotrinnskontrollPanel
       behandlingId={1}
       behandlingVersjon={1}
       behandlingStatus={behandling.status}
@@ -380,7 +380,7 @@ describe('<ApprovalPanel>', () => {
       getTotrinnsaksjonspunkterForeldreansvar(),
     ];
 
-    const wrapper = shallowWithIntl(<ApprovalPanel
+    const wrapper = shallowWithIntl(<TotrinnskontrollPanel
       behandlingId={1}
       behandlingVersjon={1}
       behandlingStatus={behandling.status}
@@ -407,7 +407,7 @@ describe('<ApprovalPanel>', () => {
       .have
       .length(3);
 
-    const toTrinnsFormReadOnly = wrapper.find(ToTrinnsFormReadOnly);
+    const toTrinnsFormReadOnly = wrapper.find(TotrinnskontrollSaksbehandlerForm);
     expect(toTrinnsFormReadOnly)
       .to
       .have
