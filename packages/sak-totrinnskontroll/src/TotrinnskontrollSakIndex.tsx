@@ -7,6 +7,7 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
   BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
@@ -75,7 +76,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const submitHandler = useCallback((values: Values) => {
     const aksjonspunkter = values.approvals
       .map((context) => context.aksjonspunkter)
-      .reduce((a, b) => a.concat(b));
+      .flat();
 
     const aksjonspunktGodkjenningDtos = aksjonspunkter
       .map((toTrinnsAksjonspunkt) => ({
@@ -85,9 +86,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         arsaker: getArsaker(toTrinnsAksjonspunkt),
       }));
 
-    // TODO (TOR) Fjern hardkodinga av 5005
     const fatterVedtakAksjonspunktDto = {
-      '@type': erTilbakekreving ? '5005' : aksjonspunktCodes.FATTER_VEDTAK,
+      '@type': erTilbakekreving ? aksjonspunktCodesTilbakekreving.FATTER_VEDTAK : aksjonspunktCodes.FATTER_VEDTAK,
       begrunnelse: null,
       aksjonspunktGodkjenningDtos,
     };
