@@ -5,6 +5,8 @@ export type ArbeidsgiverOpplysninger = Readonly<{
   fødselsdato?: string;
 }>
 
-type ArbeidsgiverOpplysningerPerId = Record<string, ArbeidsgiverOpplysninger>;
+type ArbeidsgiverOpplysningerPerId = {
+  arbeidsgivere: Record<string, ArbeidsgiverOpplysninger>;
+}
 
 export default ArbeidsgiverOpplysningerPerId;
