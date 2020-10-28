@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { NavFieldGroup, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
@@ -7,7 +7,7 @@ import {
   Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt,
 } from '@fpsak-frontend/types';
 
-import getAksjonspunktText from './ApprovalTextUtils';
+import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
 import AksjonspunktGodkjenningArsakPanel from './AksjonspunktGodkjenningArsakPanel';
 
 import styles from './aksjonspunktGodkjenningPanel.less';
@@ -20,7 +20,7 @@ interface OwnProps {
   currentValue?: TotrinnskontrollAksjonspunkt;
   showBegrunnelse?: boolean;
   klageKA?: boolean;
-  isForeldrepengerFagsak: boolean;
+  erForeldrepengerFagsak: boolean;
   klagebehandlingVurdering?: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
@@ -38,22 +38,22 @@ const AksjonspunktGodkjenningPanel: FunctionComponent<OwnProps> = ({
   currentValue,
   approvalIndex,
   contextIndex,
-  showBegrunnelse,
-  klageKA,
-  isForeldrepengerFagsak,
+  showBegrunnelse = false,
+  klageKA = false,
+  erForeldrepengerFagsak,
   klagebehandlingVurdering,
   behandlingStatus,
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
 }) => {
   const fieldName = `approvals[${contextIndex}].aksjonspunkter[${approvalIndex}]`;
-  const erKlageKA = (klageKA && currentValue && currentValue.totrinnskontrollGodkjent);
+  const erKlageKA = klageKA && currentValue && currentValue.totrinnskontrollGodkjent;
   const erAnke = aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && currentValue.totrinnskontrollGodkjent === true;
-  const showOnlyBegrunnelse = erAnke || erKlageKA ? currentValue.totrinnskontrollGodkjent : showBegrunnelse;
-  const showReasons = (erAnke || ((currentValue && currentValue.totrinnskontrollGodkjent === false) || erKlageKA));
+  const visKunBegrunnelse = erAnke || erKlageKA ? currentValue.totrinnskontrollGodkjent : showBegrunnelse;
+  const visArsaker = erAnke || ((currentValue && currentValue.totrinnskontrollGodkjent === false) || erKlageKA);
 
-  const aksjonspunktText = getAksjonspunktText(isForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
-    arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
+  const aksjonspunktText = useMemo(() => getAksjonspunkttekst(erForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
+    arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt), [aksjonspunkt]);
 
   return (
     <div className={styles.approvalItemContainer}>
@@ -69,22 +69,16 @@ const AksjonspunktGodkjenningPanel: FunctionComponent<OwnProps> = ({
           <RadioOption label={{ id: 'ApprovalField.Godkjent' }} value />
           <RadioOption label={{ id: 'ApprovalField.Vurder' }} value={false} />
         </RadioGroupField>
-        {showReasons
-        && (
-        <AksjonspunktGodkjenningArsakPanel
-          fieldName={fieldName}
-          godkjentHosKA={erKlageKA}
-          visKunBegrunnelse={showOnlyBegrunnelse}
-        />
+        {visArsaker && (
+          <AksjonspunktGodkjenningArsakPanel
+            fieldName={fieldName}
+            godkjentHosKA={erKlageKA}
+            visKunBegrunnelse={visKunBegrunnelse}
+          />
         )}
       </NavFieldGroup>
     </div>
   );
-};
-
-AksjonspunktGodkjenningPanel.defaultProps = {
-  showBegrunnelse: false,
-  klageKA: false,
 };
 
 export default AksjonspunktGodkjenningPanel;

@@ -61,7 +61,7 @@ interface OwnProps {
   readOnly: boolean;
   onSubmit: (...args: any[]) => any;
   forhandsvisVedtaksbrev: () => void;
-  isForeldrepengerFagsak: boolean;
+  erForeldrepengerFagsak: boolean;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -82,7 +82,7 @@ const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
   onSubmit,
   forhandsvisVedtaksbrev,
   behandlingKlageVurdering,
-  isForeldrepengerFagsak,
+  erForeldrepengerFagsak,
   alleKodeverk,
   erBehandlingEtterKlage,
   erTilbakekreving,
@@ -124,7 +124,7 @@ const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
                     location={location}
                     forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
                     readOnly={readOnly}
-                    isForeldrepengerFagsak={isForeldrepengerFagsak}
+                    erForeldrepengerFagsak={erForeldrepengerFagsak}
                     behandlingKlageVurdering={behandlingKlageVurdering}
                     behandlingStatus={behandling.status}
                     alleKodeverk={alleKodeverk}

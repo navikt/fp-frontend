@@ -215,7 +215,7 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => aksj
   || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
   || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA;
 
-const getAksjonspunktText = (
+const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
   klagebehandlingVurdering: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
@@ -254,4 +254,4 @@ const getAksjonspunktText = (
   return [getTextFromAksjonspunktkode(aksjonspunkt)];
 };
 
-export default getAksjonspunktText;
+export default getAksjonspunkttekst;

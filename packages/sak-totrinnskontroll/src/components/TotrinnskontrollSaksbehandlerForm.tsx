@@ -9,7 +9,7 @@ import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering } from '@fpsak-frontend/types';
 
-import getAksjonspunktText from './ApprovalTextUtils';
+import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
 import TotrinnContext from '../TotrinnContextTsType';
 
 import styles from './totrinnskontrollSaksbehandlerForm.less';
@@ -50,7 +50,7 @@ const TotrinnskontrollSaksbehandlerForm: FunctionComponent<OwnProps> = ({
               {skjermlenkeNavn}
             </NavLink>
             {aksjonspunkter.map((aksjonspunkt) => {
-              const aksjonspunktTexts = getAksjonspunktText(isForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
+              const aksjonspunktTexts = getAksjonspunkttekst(isForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
                 arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
               return (
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>

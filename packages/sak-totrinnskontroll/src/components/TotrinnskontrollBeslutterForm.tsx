@@ -49,7 +49,7 @@ interface PureOwnProps {
   readOnly: boolean;
   erTilbakekreving: boolean;
   behandlingStatus: Kodeverk;
-  isForeldrepengerFagsak: boolean;
+  erForeldrepengerFagsak: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
@@ -71,7 +71,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
   erBehandlingEtterKlage,
   behandlingKlageVurdering,
   behandlingStatus,
-  isForeldrepengerFagsak,
+  erForeldrepengerFagsak,
   alleKodeverk,
   erTilbakekreving,
   behandlingsresultat,
@@ -108,12 +108,13 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
                 approvalIndex={approvalIndex}
                 readOnly={readOnly}
                 klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
-                isForeldrepengerFagsak={isForeldrepengerFagsak}
+                erForeldrepengerFagsak={erForeldrepengerFagsak}
                 klagebehandlingVurdering={behandlingKlageVurdering}
                 behandlingStatus={behandlingStatus}
                 erTilbakekreving={erTilbakekreving}
                 arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
               />
+              <VerticalSpacer sixteenPx />
             </div>
           ))}
         </div>

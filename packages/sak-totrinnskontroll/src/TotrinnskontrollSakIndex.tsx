@@ -113,7 +113,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         onSubmit={submitHandler}
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        isForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+        erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
         behandlingKlageVurdering={behandlingKlageVurdering}
         alleKodeverk={alleKodeverk}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
