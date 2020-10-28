@@ -219,10 +219,10 @@ const manuelleRevurderingsArsakerSVP = [
 ];
 
 const tilbakekrevingRevurderingArsaker = [
+  behandlingArsakType.RE_FORELDELSE,
+  behandlingArsakType.RE_VILKÅR,
   behandlingArsakType.RE_KLAGE_KA,
   behandlingArsakType.RE_KLAGE_NFP,
-  behandlingArsakType.RE_VILKÅR,
-  behandlingArsakType.RE_FORELDELSE,
   behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
 ];
 
@@ -233,9 +233,9 @@ export const getBehandlingAarsaker = createSelector([
   (state) => formValueSelector(formName)(state, 'behandlingType')],
 (ytelseType, alleRevurderingArsaker, alleTilbakekrevingRevurderingArsaker, valgtBehandlingType) => {
   if (valgtBehandlingType === bType.TILBAKEKREVING_REVURDERING) {
-    return alleTilbakekrevingRevurderingArsaker
-      .filter((ba) => tilbakekrevingRevurderingArsaker.includes(ba.kode))
-      .sort((ba1, ba2) => ba1.navn.localeCompare(ba2.navn));
+    return tilbakekrevingRevurderingArsaker
+      .map((ar) => alleTilbakekrevingRevurderingArsaker.find((el) => el.kode === ar))
+      .filter((ar) => ar);
   }
 
   if (valgtBehandlingType === bType.REVURDERING) {
