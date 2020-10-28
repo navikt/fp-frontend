@@ -32,30 +32,26 @@ const håndterSpeiselleTegn = (aksjonspunkter: TotrinnskontrollAksjonspunkt[]): 
 }));
 
 export const mapPropsToContext = (
-  toTrinnsBehandling: boolean,
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location,
   location: Location,
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[],
   erTilbakekreving?: boolean,
 ): TotrinnContext[] => {
-  if (toTrinnsBehandling) {
-    const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
-    const totrinnsContext = totrinnskontrollSkjermlenkeContext.map((context) => {
-      const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
-      return {
-        contextCode: context.skjermlenkeType,
-        skjermlenke: createLocationForSkjermlenke(location, context.skjermlenkeType),
-        skjermlenkeNavn: skjermlenkeTypeKodeverk.navn,
-        aksjonspunkter: håndterSpeiselleTegn(context.totrinnskontrollAksjonspunkter),
-      };
-    });
-    if (erTilbakekreving && totrinnsContext) {
-      return sorterTilbakekrevingContext(totrinnsContext);
-    }
-    return totrinnsContext || [];
+  const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
+  const totrinnsContext = totrinnskontrollSkjermlenkeContext.map((context) => {
+    const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
+    return {
+      contextCode: context.skjermlenkeType,
+      skjermlenke: createLocationForSkjermlenke(location, context.skjermlenkeType),
+      skjermlenkeNavn: skjermlenkeTypeKodeverk.navn,
+      aksjonspunkter: håndterSpeiselleTegn(context.totrinnskontrollAksjonspunkter),
+    };
+  });
+  if (erTilbakekreving && totrinnsContext) {
+    return sorterTilbakekrevingContext(totrinnsContext);
   }
-  return [];
+  return totrinnsContext || [];
 };
 
 interface OwnProps {
@@ -71,7 +67,7 @@ interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   erBehandlingEtterKlage: boolean;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
-  erTilbakekreving?: boolean;
+  erTilbakekreving: boolean;
 }
 
 /**
@@ -93,8 +89,12 @@ const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
   totrinnskontrollSkjermlenkeContext,
   createLocationForSkjermlenke,
 }) => {
+  if (!behandling.toTrinnsBehandling) {
+    return null;
+  }
+
   const approvals = totrinnskontrollSkjermlenkeContext
-    ? mapPropsToContext(behandling.toTrinnsBehandling, alleKodeverk, createLocationForSkjermlenke, location,
+    ? mapPropsToContext(alleKodeverk, createLocationForSkjermlenke, location,
       totrinnskontrollSkjermlenkeContext, erTilbakekreving)
     : [];
 
