@@ -4,13 +4,15 @@ import { FormattedMessage } from 'react-intl';
 import { InjectedFormProps, FieldArray } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
+import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
 import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
@@ -35,16 +37,13 @@ const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], be
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
+  behandling: Behandling;
   totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
-  behandlingsresultat?: Behandling['behandlingsresultat'];
   erBehandlingEtterKlage?: boolean;
   readOnly: boolean;
   erTilbakekreving: boolean;
-  behandlingStatus: Kodeverk;
   erForeldrepengerFagsak: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   lagLenke: (skjermlenkeCode: string) => Location;
@@ -61,35 +60,47 @@ interface MappedOwnProps {
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
 const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+  behandling,
   handleSubmit,
   forhandsvisVedtaksbrev,
   readOnly,
   erBehandlingEtterKlage,
   behandlingKlageVurdering,
-  behandlingStatus,
   erForeldrepengerFagsak,
   alleKodeverk,
   erTilbakekreving,
-  behandlingsresultat,
   aksjonspunktGodkjenning,
   totrinnskontrollSkjermlenkeContext,
   lagLenke,
   ...formProps
 }) => {
+  const isReadOnly = behandling.status.kode !== BehandlingStatus.FATTER_VEDTAK || readOnly;
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
 
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRINGbehandlingsresultat,
-  ], behandlingsresultat), [behandlingsresultat]);
+  ], behandling.behandlingsresultat), [behandling.behandlingsresultat]);
+
+  if (!behandling.toTrinnsBehandling || !totrinnskontrollSkjermlenkeContext || totrinnskontrollSkjermlenkeContext.length === 0) {
+    return null;
+  }
 
   return (
     <form name="toTrinn" onSubmit={handleSubmit}>
+      {!isReadOnly && (
+        <>
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
       <FieldArray
         name="aksjonspunktGodkjenning"
         component={AksjonspunktGodkjenningFieldArray}
         erForeldrepengerFagsak={erForeldrepengerFagsak}
         klagebehandlingVurdering={behandlingKlageVurdering}
-        behandlingStatus={behandlingStatus}
+        behandlingStatus={behandling.status}
         erTilbakekreving={erTilbakekreving}
         arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
         readOnly={readOnly}
@@ -147,24 +158,38 @@ export type FormValues = {
 
 const validate = (values: FormValues) => {
   const errors = {};
-  if (!values.approvals) {
+  if (!values.aksjonspunktGodkjenning) {
     return errors;
   }
 
   return {
-    approvals: values.approvals.map((kontekst) => ({
-      aksjonspunkter: kontekst.aksjonspunkter.map((ap) => {
-        if (!ap.feilFakta && !ap.feilLov && !ap.feilRegel && !ap.annet) {
-          return { missingArsakError: isRequiredMessage() };
-        }
+    aksjonspunktGodkjenning: values.aksjonspunktGodkjenning.map((kontekst) => {
+      if (!kontekst.feilFakta && !kontekst.feilLov && !kontekst.feilRegel && !kontekst.annet) {
+        return {
+          missingArsakError: isRequiredMessage(),
+        };
+      }
 
-        return undefined;
-      }),
-    })),
+      return undefined;
+    }),
   };
 };
 
-const formName = 'toTrinnForm';
+const finnArsaker = (vurderPaNyttArsaker) => vurderPaNyttArsaker.reduce((acc, arsak) => {
+  if (arsak.kode === vurderPaNyttArsakType.FEIL_FAKTA) {
+    return { ...acc, feilFakta: true };
+  }
+  if (arsak.kode === vurderPaNyttArsakType.FEIL_LOV) {
+    return { ...acc, feilLov: true };
+  }
+  if (arsak.kode === vurderPaNyttArsakType.FEIL_REGEL) {
+    return { ...acc, feilRegel: true };
+  }
+  if (arsak.kode === vurderPaNyttArsakType.ANNET) {
+    return { ...acc, annet: true };
+  }
+  return {};
+}, {});
 
 const buildInitialValues = (totrinnskontrollContext: TotrinnskontrollSkjermlenkeContext[]): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollContext
@@ -173,14 +198,18 @@ const buildInitialValues = (totrinnskontrollContext: TotrinnskontrollSkjermlenke
     .map((ap) => ({
       aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
+      besluttersBegrunnelse: ap.besluttersBegrunnelse,
+      ...finnArsaker(ap.vurderPaNyttArsaker),
     })),
 });
+
+const formName = 'toTrinnForm';
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   const initialValues = buildInitialValues(ownProps.totrinnskontrollSkjermlenkeContext);
   return {
     initialValues,
-    aksjonspunktGodkjenning: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'aksjonspunktGodkjenning'),
+    aksjonspunktGodkjenning: behandlingFormValueSelector(formName, ownProps.behandling.id, ownProps.behandling.versjon)(state, 'aksjonspunktGodkjenning'),
   };
 };
 

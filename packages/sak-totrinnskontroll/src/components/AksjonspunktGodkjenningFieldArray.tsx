@@ -19,7 +19,7 @@ import {
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
+import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 import styles from './aksjonspunktGodkjenningFieldArray.less';
 

@@ -12,8 +12,8 @@ import {
   Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold,
 } from '@fpsak-frontend/types';
 
-import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../totrinnskontrollaksjonspunktTextCodes';
-import vurderFaktaOmBeregningTotrinnText from '../VurderFaktaBeregningTotrinnText';
+import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
+import vurderFaktaOmBeregningTotrinnText from '../../vurderFaktaBeregningTotrinnText';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
 
 const formatDate = (date?: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');

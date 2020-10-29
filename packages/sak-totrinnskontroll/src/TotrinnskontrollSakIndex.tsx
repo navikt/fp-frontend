@@ -12,8 +12,7 @@ import {
   BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
-import TotrinnskontrollPanel from './components/TotrinnskontrollPanel';
-import { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
+import TotrinnskontrollBeslutterForm, { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -94,12 +93,14 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
   [behandling]);
 
-  const lagLenke = useCallback((skjermlenkeCode: string) => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
+  const lagLenke = useCallback((skjermlenkeCode: string): Location => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
 
   return (
     <RawIntlProvider value={intl}>
-      <TotrinnskontrollPanel
+      <TotrinnskontrollBeslutterForm
         behandling={behandling}
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         readOnly={readOnly}
         onSubmit={submitHandler}

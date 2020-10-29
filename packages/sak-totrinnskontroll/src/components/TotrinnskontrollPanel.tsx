@@ -91,48 +91,35 @@ const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
     return null;
   }
 
+  const isReadOnly = behandling.status.kode !== BehandlingStatus.FATTER_VEDTAK || readOnly;
+
   return (
-    <>
-      {behandling.status.kode === BehandlingStatus.FATTER_VEDTAK
-        ? (
-          <div>
-            {!readOnly && (
-              <>
-                <AksjonspunktHelpTextHTML>
-                  {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
-                </AksjonspunktHelpTextHTML>
-                <VerticalSpacer sixteenPx />
-              </>
-            )}
-            <TotrinnskontrollBeslutterForm
-              behandlingId={behandling.id}
-              behandlingVersjon={behandling.versjon}
-              behandlingsresultat={behandling.behandlingsresultat}
-              totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-              onSubmit={onSubmit}
-              forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-              readOnly={readOnly}
-              erForeldrepengerFagsak={erForeldrepengerFagsak}
-              behandlingKlageVurdering={behandlingKlageVurdering}
-              behandlingStatus={behandling.status}
-              alleKodeverk={alleKodeverk}
-              erBehandlingEtterKlage={erBehandlingEtterKlage}
-              erTilbakekreving={erTilbakekreving}
-              lagLenke={lagLenke}
-            />
-          </div>
-        )
-        : (
-          <TotrinnskontrollSaksbehandlerForm
-            approvalList={approvals}
-            isForeldrepengerFagsak={isForeldrepengerFagsak}
-            klagebehandlingVurdering={behandlingKlageVurdering}
-            behandlingStatus={behandling.status}
-            arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
-            erTilbakekreving={erTilbakekreving}
-          />
-        )}
-    </>
+    <div>
+      {!isReadOnly && (
+        <>
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
+      <TotrinnskontrollBeslutterForm
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        behandlingsresultat={behandling.behandlingsresultat}
+        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+        onSubmit={onSubmit}
+        forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+        readOnly={isReadOnly}
+        erForeldrepengerFagsak={erForeldrepengerFagsak}
+        behandlingKlageVurdering={behandlingKlageVurdering}
+        behandlingStatus={behandling.status}
+        alleKodeverk={alleKodeverk}
+        erBehandlingEtterKlage={erBehandlingEtterKlage}
+        erTilbakekreving={erTilbakekreving}
+        lagLenke={lagLenke}
+      />
+    </div>
   );
 };
 export default TotrinnskontrollPanel;
