@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/types';
 
 import TotrinnskontrollPanel from './components/TotrinnskontrollPanel';
-import { TotrinnskontrollAksjonspunktMedFaktaValg } from './TotrinnContextTsType';
+import { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -23,21 +23,22 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const getArsaker = (totrinnskontrollAksjonspunkt: TotrinnskontrollAksjonspunktMedFaktaValg) => ([{
-  code: vurderPaNyttArsakType.FEIL_FAKTA,
-  isSet: totrinnskontrollAksjonspunkt.feilFakta,
-}, {
-  code: vurderPaNyttArsakType.FEIL_LOV,
-  isSet: totrinnskontrollAksjonspunkt.feilLov,
-}, {
-  code: vurderPaNyttArsakType.FEIL_REGEL,
-  isSet: totrinnskontrollAksjonspunkt.feilRegel,
-}, {
-  code: vurderPaNyttArsakType.ANNET,
-  isSet: totrinnskontrollAksjonspunkt.annet,
-}].filter((arsak) => arsak.isSet)
-  .map((arsak) => arsak.code)
-);
+const getArsaker = (apData: AksjonspunktGodkjenningData) => {
+  const arsaker = [];
+  if (apData.feilFakta) {
+    arsaker.push(vurderPaNyttArsakType.FEIL_FAKTA);
+  }
+  if (apData.feilLov) {
+    arsaker.push(vurderPaNyttArsakType.FEIL_LOV);
+  }
+  if (apData.feilRegel) {
+    arsaker.push(vurderPaNyttArsakType.FEIL_REGEL);
+  }
+  if (apData.annet) {
+    arsaker.push(vurderPaNyttArsakType.ANNET);
+  }
+  return arsaker;
+};
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
@@ -51,13 +52,6 @@ interface OwnProps {
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
 }
-
-type Values = {
-  approvals: {
-    aksjonspunkter: TotrinnskontrollAksjonspunktMedFaktaValg[];
-  }[];
-  erAlleAksjonspunktGodkjent: boolean
-};
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   behandling,
@@ -73,17 +67,13 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling?.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling?.type.kode;
 
-  const submitHandler = useCallback((values: Values) => {
-    const aksjonspunkter = values.approvals
-      .map((context) => context.aksjonspunkter)
-      .flat();
-
-    const aksjonspunktGodkjenningDtos = aksjonspunkter
-      .map((toTrinnsAksjonspunkt) => ({
-        aksjonspunktKode: toTrinnsAksjonspunkt.aksjonspunktKode,
-        godkjent: toTrinnsAksjonspunkt.totrinnskontrollGodkjent,
-        begrunnelse: toTrinnsAksjonspunkt.besluttersBegrunnelse,
-        arsaker: getArsaker(toTrinnsAksjonspunkt),
+  const submitHandler = useCallback((values: FormValues) => {
+    const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning
+      .map((apData) => ({
+        aksjonspunktKode: apData.aksjonspunktKode,
+        godkjent: apData.totrinnskontrollGodkjent,
+        begrunnelse: apData.besluttersBegrunnelse,
+        arsaker: getArsaker(apData),
       }));
 
     const fatterVedtakAksjonspunktDto = {
@@ -94,7 +84,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
     return onSubmit({
       fatterVedtakAksjonspunktDto,
-      erAlleAksjonspunktGodkjent: aksjonspunkter.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true),
+      erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true),
     });
   }, [erTilbakekreving]);
 
@@ -104,12 +94,13 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
   [behandling]);
 
+  const lagLenke = useCallback((skjermlenkeCode: string) => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
+
   return (
     <RawIntlProvider value={intl}>
       <TotrinnskontrollPanel
         behandling={behandling}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-        location={location}
         readOnly={readOnly}
         onSubmit={submitHandler}
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
@@ -118,7 +109,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         erTilbakekreving={erTilbakekreving}
-        createLocationForSkjermlenke={createLocationForSkjermlenke}
+        lagLenke={lagLenke}
       />
     </RawIntlProvider>
   );

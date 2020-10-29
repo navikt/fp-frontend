@@ -57,7 +57,6 @@ export const mapPropsToContext = (
 interface OwnProps {
   behandling: Behandling;
   totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
-  location: Location;
   readOnly: boolean;
   onSubmit: (...args: any[]) => any;
   forhandsvisVedtaksbrev: () => void;
@@ -66,7 +65,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingsresultat?: Behandling['behandlingsresultat'];
   erBehandlingEtterKlage: boolean;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  lagLenke: (skjermlenkeCode: string) => Location;
   erTilbakekreving: boolean;
 }
 
@@ -77,7 +76,6 @@ interface OwnProps {
  */
 const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  location,
   readOnly,
   onSubmit,
   forhandsvisVedtaksbrev,
@@ -87,64 +85,53 @@ const TotrinnskontrollPanel: FunctionComponent<OwnProps> = ({
   erBehandlingEtterKlage,
   erTilbakekreving,
   totrinnskontrollSkjermlenkeContext,
-  createLocationForSkjermlenke,
+  lagLenke,
 }) => {
-  if (!behandling.toTrinnsBehandling) {
+  if (!behandling.toTrinnsBehandling || !totrinnskontrollSkjermlenkeContext || totrinnskontrollSkjermlenkeContext.length === 0) {
     return null;
   }
 
-  const approvals = totrinnskontrollSkjermlenkeContext
-    ? mapPropsToContext(alleKodeverk, createLocationForSkjermlenke, location,
-      totrinnskontrollSkjermlenkeContext, erTilbakekreving)
-    : [];
-
   return (
     <>
-      {approvals && approvals.length > 0
+      {behandling.status.kode === BehandlingStatus.FATTER_VEDTAK
         ? (
           <div>
-            {behandling.status.kode === BehandlingStatus.FATTER_VEDTAK
-              ? (
-                <div>
-                  {!readOnly && (
-                    <>
-                      <AksjonspunktHelpTextHTML>
-                        {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
-                      </AksjonspunktHelpTextHTML>
-                      <VerticalSpacer sixteenPx />
-                    </>
-                  )}
-                  <TotrinnskontrollBeslutterForm
-                    behandlingId={behandling.id}
-                    behandlingVersjon={behandling.versjon}
-                    behandlingsresultat={behandling.behandlingsresultat}
-                    totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-                    onSubmit={onSubmit}
-                    location={location}
-                    forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-                    readOnly={readOnly}
-                    erForeldrepengerFagsak={erForeldrepengerFagsak}
-                    behandlingKlageVurdering={behandlingKlageVurdering}
-                    behandlingStatus={behandling.status}
-                    alleKodeverk={alleKodeverk}
-                    erBehandlingEtterKlage={erBehandlingEtterKlage}
-                    erTilbakekreving={erTilbakekreving}
-                  />
-                </div>
-              )
-              : (
-                <TotrinnskontrollSaksbehandlerForm
-                  approvalList={approvals}
-                  isForeldrepengerFagsak={isForeldrepengerFagsak}
-                  klagebehandlingVurdering={behandlingKlageVurdering}
-                  behandlingStatus={behandling.status}
-                  arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
-                  erTilbakekreving={erTilbakekreving}
-                />
-              )}
+            {!readOnly && (
+              <>
+                <AksjonspunktHelpTextHTML>
+                  {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
+                </AksjonspunktHelpTextHTML>
+                <VerticalSpacer sixteenPx />
+              </>
+            )}
+            <TotrinnskontrollBeslutterForm
+              behandlingId={behandling.id}
+              behandlingVersjon={behandling.versjon}
+              behandlingsresultat={behandling.behandlingsresultat}
+              totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+              onSubmit={onSubmit}
+              forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+              readOnly={readOnly}
+              erForeldrepengerFagsak={erForeldrepengerFagsak}
+              behandlingKlageVurdering={behandlingKlageVurdering}
+              behandlingStatus={behandling.status}
+              alleKodeverk={alleKodeverk}
+              erBehandlingEtterKlage={erBehandlingEtterKlage}
+              erTilbakekreving={erTilbakekreving}
+              lagLenke={lagLenke}
+            />
           </div>
         )
-        : null}
+        : (
+          <TotrinnskontrollSaksbehandlerForm
+            approvalList={approvals}
+            isForeldrepengerFagsak={isForeldrepengerFagsak}
+            klagebehandlingVurdering={behandlingKlageVurdering}
+            behandlingStatus={behandling.status}
+            arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
+            erTilbakekreving={erTilbakekreving}
+          />
+        )}
     </>
   );
 };

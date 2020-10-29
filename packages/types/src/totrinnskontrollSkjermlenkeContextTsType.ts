@@ -1,4 +1,3 @@
-import KodeverkMedNavn from './kodeverkMedNavnTsType';
 import TotrinnskontrollAksjonspunkt from './totrinnskontrollAksjonspunktTsType';
 
 type TotrinnskontrollSkjermlenkeContext = Readonly<{

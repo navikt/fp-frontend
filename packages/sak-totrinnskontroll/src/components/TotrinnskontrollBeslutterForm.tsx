@@ -14,7 +14,6 @@ import {
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
-import TotrinnContext from '../TotrinnContextTsType';
 
 import styles from './totrinnskontrollBeslutterForm.less';
 
@@ -48,6 +47,7 @@ interface PureOwnProps {
   behandlingStatus: Kodeverk;
   erForeldrepengerFagsak: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  lagLenke: (skjermlenkeCode: string) => Location;
 }
 
 interface MappedOwnProps {
@@ -73,6 +73,7 @@ const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnP
   behandlingsresultat,
   aksjonspunktGodkjenning,
   totrinnskontrollSkjermlenkeContext,
+  lagLenke,
   ...formProps
 }) => {
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
@@ -94,6 +95,8 @@ const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnP
         readOnly={readOnly}
         klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+        alleKodeverk={alleKodeverk}
+        lagLenke={lagLenke}
       />
       <div className={styles.buttonRow}>
         <Hovedknapp
@@ -128,9 +131,19 @@ const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnP
   );
 };
 
-type FormValues = {
-  approvals?: TotrinnContext[];
+export type AksjonspunktGodkjenningData = {
+  aksjonspunktKode: string;
+  totrinnskontrollGodkjent: boolean;
+  besluttersBegrunnelse?: boolean;
+  feilFakta?: boolean;
+  feilRegel?: boolean;
+  feilLov?: boolean;
+  annet?: boolean;
 }
+
+export type FormValues = {
+  aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
+};
 
 const validate = (values: FormValues) => {
   const errors = {};
@@ -153,11 +166,12 @@ const validate = (values: FormValues) => {
 
 const formName = 'toTrinnForm';
 
-const buildInitialValues = (totrinnskontrollContext: TotrinnskontrollSkjermlenkeContext[]) => ({
+const buildInitialValues = (totrinnskontrollContext: TotrinnskontrollSkjermlenkeContext[]): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollContext
     .map((context) => context.totrinnskontrollAksjonspunkter)
     .flat()
     .map((ap) => ({
+      aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
     })),
 });
