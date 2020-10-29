@@ -199,6 +199,10 @@ describe('<NyBehandlingModal>', () => {
       kode: behandlingArsakType.RE_FORELDELSE,
       navn: 'Nye opplysninger om foreldelse',
       kodeverk: '',
+    }, {
+      kode: behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
+      navn: 'Feilutbetalt beløp helt eller delvis bortfalt',
+      kodeverk: '',
     }];
     const bType = behandlingType.TILBAKEKREVING_REVURDERING;
 

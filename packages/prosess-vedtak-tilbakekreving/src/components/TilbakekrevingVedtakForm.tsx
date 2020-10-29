@@ -11,7 +11,11 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {
-  behandlingForm, isBehandlingFormSubmitting, isBehandlingFormDirty, hasBehandlingFormErrorsOfType, getBehandlingFormValues,
+  behandlingForm,
+  isBehandlingFormSubmitting,
+  isBehandlingFormDirty,
+  hasBehandlingFormErrorsOfType,
+  getBehandlingFormValues,
 } from '@fpsak-frontend/form';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
@@ -56,6 +60,7 @@ interface OwnProps {
   behandlingVersjon: number;
   perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
   erRevurderingTilbakekrevingKlage?: boolean;
+  erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
   fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
   submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
 }
@@ -70,6 +75,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
   behandlingVersjon,
   perioderSomIkkeHarUtfyltObligatoriskVerdi,
   erRevurderingTilbakekrevingKlage,
+  erRevurderingTilbakekrevingFeilBeløpBortfalt,
   fritekstOppsummeringPakrevdMenIkkeUtfylt,
   ...formProps
 }) => (
@@ -83,6 +89,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
       behandlingVersjon={behandlingVersjon}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={perioderSomIkkeHarUtfyltObligatoriskVerdi}
       fritekstOppsummeringPakrevdMenIkkeUtfylt={fritekstOppsummeringPakrevdMenIkkeUtfylt}
+      erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
     />
     <VerticalSpacer twentyPx />
     <FlexContainer>

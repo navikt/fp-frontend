@@ -25,6 +25,7 @@ interface OwnProps {
   fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
   aksjonspunktKodeForeslaVedtak: string;
   erRevurderingTilbakekrevingKlage?: boolean;
+  erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
 }
 
 const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
@@ -40,6 +41,7 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
   fetchPreviewVedtaksbrev,
   aksjonspunktKodeForeslaVedtak,
   erRevurderingTilbakekrevingKlage,
+  erRevurderingTilbakekrevingFeilBeløpBortfalt,
 }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   return (
@@ -67,6 +69,7 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
+        erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
       />
     </>
   );
