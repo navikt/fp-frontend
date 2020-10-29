@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
-import { NavLink } from 'react-router-dom';
+import { InjectedFormProps, FieldArray } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -11,20 +10,18 @@ import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering,
+  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
-import AksjonspunktGodkjenningPanel from './AksjonspunktGodkjenningPanel';
+import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
 import TotrinnContext from '../TotrinnContextTsType';
 
 import styles from './totrinnskontrollBeslutterForm.less';
 
-const erAlleGodkjent = (formState: TotrinnContext[]) => formState
-  .reduce((a, b) => a.concat(b.aksjonspunkter), [])
+const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
   .every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true);
 
-const erAlleGodkjentEllerAvvist = (formState: TotrinnContext[]) => formState
-  .reduce((a, b) => a.concat(b.aksjonspunkter), [])
+const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
   .every((ap) => ap.totrinnskontrollGodkjent !== null);
 
 const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
@@ -41,7 +38,7 @@ const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], be
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  totrinnskontrollContext?: TotrinnContext[];
+  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -54,7 +51,8 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  formState?: TotrinnContext[];
+  aksjonspunkter: TotrinnskontrollAksjonspunkt[];
+  aksjonspunktGodkjenning: TotrinnskontrollAksjonspunkt[];
 }
 
 /*
@@ -62,12 +60,10 @@ interface MappedOwnProps {
   *
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
-export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   handleSubmit,
-  formState,
   forhandsvisVedtaksbrev,
   readOnly,
-  totrinnskontrollContext = [],
   erBehandlingEtterKlage,
   behandlingKlageVurdering,
   behandlingStatus,
@@ -75,12 +71,10 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
   alleKodeverk,
   erTilbakekreving,
   behandlingsresultat,
+  aksjonspunktGodkjenning,
+  totrinnskontrollSkjermlenkeContext,
   ...formProps
 }) => {
-  if (!formState || formState.length !== totrinnskontrollContext.length) {
-    return null;
-  }
-
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
 
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
@@ -89,47 +83,29 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
 
   return (
     <form name="toTrinn" onSubmit={handleSubmit}>
-      {totrinnskontrollContext.filter((context) => context.aksjonspunkter.length > 0).map(({
-        contextCode,
-        skjermlenke,
-        aksjonspunkter,
-        skjermlenkeNavn,
-      }, contextIndex) => (
-        <div key={contextCode}>
-          <NavLink to={skjermlenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
-            {skjermlenkeNavn}
-          </NavLink>
-          {aksjonspunkter.map((aksjonspunkt, approvalIndex) => (
-            <div key={aksjonspunkt.aksjonspunktKode}>
-              <AksjonspunktGodkjenningPanel
-                aksjonspunkt={aksjonspunkt}
-                contextIndex={contextIndex}
-                currentValue={formState[contextIndex].aksjonspunkter[approvalIndex]}
-                approvalIndex={approvalIndex}
-                readOnly={readOnly}
-                klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
-                erForeldrepengerFagsak={erForeldrepengerFagsak}
-                klagebehandlingVurdering={behandlingKlageVurdering}
-                behandlingStatus={behandlingStatus}
-                erTilbakekreving={erTilbakekreving}
-                arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
-              />
-              <VerticalSpacer sixteenPx />
-            </div>
-          ))}
-        </div>
-      ))}
+      <FieldArray
+        name="aksjonspunktGodkjenning"
+        component={AksjonspunktGodkjenningFieldArray}
+        erForeldrepengerFagsak={erForeldrepengerFagsak}
+        klagebehandlingVurdering={behandlingKlageVurdering}
+        behandlingStatus={behandlingStatus}
+        erTilbakekreving={erTilbakekreving}
+        arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
+        readOnly={readOnly}
+        klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
+        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+      />
       <div className={styles.buttonRow}>
         <Hovedknapp
           mini
-          disabled={!erAlleGodkjent(formState) || !erAlleGodkjentEllerAvvist(formState) || formProps.submitting}
+          disabled={!erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formProps.submitting}
           spinner={formProps.submitting}
         >
           <FormattedMessage id="ToTrinnsForm.Godkjenn" />
         </Hovedknapp>
         <Hovedknapp
           mini
-          disabled={erAlleGodkjent(formState) || !erAlleGodkjentEllerAvvist(formState) || formProps.submitting}
+          disabled={erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formProps.submitting}
           spinner={formProps.submitting}
           onClick={ariaCheck}
         >
@@ -177,8 +153,21 @@ const validate = (values: FormValues) => {
 
 const formName = 'toTrinnForm';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
-  formState: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'approvals'),
+const buildInitialValues = (totrinnskontrollContext: TotrinnskontrollSkjermlenkeContext[]) => ({
+  aksjonspunktGodkjenning: totrinnskontrollContext
+    .map((context) => context.totrinnskontrollAksjonspunkter)
+    .flat()
+    .map((ap) => ({
+      totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
+    })),
 });
 
-export default behandlingForm({ form: formName, validate })(connect(mapStateToProps)(TotrinnskontrollBeslutterForm));
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+  const initialValues = buildInitialValues(ownProps.totrinnskontrollSkjermlenkeContext);
+  return {
+    initialValues,
+    aksjonspunktGodkjenning: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'aksjonspunktGodkjenning'),
+  };
+};
+
+export default connect(mapStateToProps)(behandlingForm({ form: formName, validate })(TotrinnskontrollBeslutterForm));
