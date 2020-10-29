@@ -41,6 +41,8 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
   aksjonspunktKodeForeslaVedtak,
 }) => {
   const erRevurderingTilbakekrevingKlage = behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
+  const erRevurderingTilbakekrevingFeilBeløpBortfalt = behandling.førsteÅrsak
+    && behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType.kode;
   return (
     <RawIntlProvider value={intl}>
       <TilbakekrevingVedtak
@@ -56,6 +58,7 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
+        erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
       />
     </RawIntlProvider>
   );

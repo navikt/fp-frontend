@@ -76,9 +76,12 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
 
   const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
   const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
+
   const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvis(response)), []);
 
-  const dataTilUtledingAvTilbakekrevingPaneler = { beregnBelop, fetchPreviewVedtaksbrev, ...data };
+  const dataTilUtledingAvTilbakekrevingPaneler = {
+    beregnBelop, fetchPreviewVedtaksbrev, ...data,
+  };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
     dataTilUtledingAvTilbakekrevingPaneler, fagsak, rettigheter, behandling, data.aksjonspunkter, [], hasFetchError, valgtProsessSteg);
 

@@ -20,6 +20,7 @@ interface OwnProps {
   behandlingVersjon: number;
   perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
   fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
+  erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
 }
 
 interface StaticFunctions {
@@ -34,6 +35,7 @@ const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & Static
   behandlingVersjon,
   perioderSomIkkeHarUtfyltObligatoriskVerdi,
   fritekstOppsummeringPakrevdMenIkkeUtfylt = false,
+  erRevurderingTilbakekrevingFeilBeløpBortfalt,
 }) => (
   <div className={styles.container}>
     <VerticalSpacer twentyPx />
@@ -75,6 +77,7 @@ const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & Static
                       behandlingId={behandlingId}
                       behandlingVersjon={behandlingVersjon}
                       fritekstPakrevet={underavsnitt.fritekstPåkrevet}
+                      maximumLength={erRevurderingTilbakekrevingFeilBeløpBortfalt ? 10000 : null}
                     />
                   </>
                 )}
