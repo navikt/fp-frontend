@@ -51,6 +51,7 @@ describe('<FagsakIndex>', () => {
     requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE, {
       behandlingTypeKanOpprettes: [],
     });
+    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);

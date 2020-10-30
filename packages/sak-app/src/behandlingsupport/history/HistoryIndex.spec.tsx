@@ -28,6 +28,7 @@ describe('<HistoryIndex>', () => {
   });
 
   it('skal slå sammen og sortere historikk for fpsak og fptilbake', () => {
+    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.HISTORY_FPSAK, [{
