@@ -41,7 +41,7 @@ const getInfoTextCode = (
   if (harSammeResultatSomOriginalBehandling) {
     return 'FatterVedtakApprovalModal.UendretUtfall';
   }
-  if (behandlingsresultat.type.kode === behandlingResultatType.AVSLATT) {
+  if (behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.AVSLATT) {
     if (ytelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
       return 'FatterVedtakApprovalModal.IkkeInnvilgetES';
     }
@@ -133,7 +133,7 @@ interface OwnProps {
   allAksjonspunktApproved: boolean;
   fagsakYtelseType: Kodeverk;
   erKlageWithKA?: boolean;
-  behandlingsresultat: Behandling['behandlingsresultat'];
+  behandlingsresultat?: Behandling['behandlingsresultat'];
   behandlingId: number;
   behandlingStatusKode: string;
   behandlingTypeKode: string;

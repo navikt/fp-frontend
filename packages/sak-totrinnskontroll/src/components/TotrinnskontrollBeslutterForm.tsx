@@ -52,7 +52,6 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  aksjonspunkter: TotrinnskontrollAksjonspunkt[];
   aksjonspunktGodkjenning: TotrinnskontrollAksjonspunkt[];
 }
 
@@ -61,7 +60,7 @@ interface MappedOwnProps {
   *
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
-const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   behandling,
   handleSubmit,
   forhandsvisVedtaksbrev,

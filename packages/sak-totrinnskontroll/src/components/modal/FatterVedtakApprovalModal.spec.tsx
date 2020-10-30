@@ -4,6 +4,9 @@ import sinon from 'sinon';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import FatterVedtakApprovalModal from './FatterVedtakApprovalModal';
@@ -14,17 +17,22 @@ describe('<FatterVedtakApprovalModal>', () => {
   it('skal rendre modal for fatter vedtak', () => {
     const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
       intl={intlMock}
-      infoTextCode="testInfo"
-      altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
-      modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescription"
       closeEvent={closeEventCallback}
-      resolveProsessAksjonspunkterSuccess
+      allAksjonspunktApproved
+      behandlingId={1}
+      behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
+      behandlingTypeKode={BehandlingType.KLAGE}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
+      erKlageWithKA
     />);
 
     const modal = wrapper.find(Modal);
     expect(modal).to.have.length(1);
     expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('Forslag til vedtak er sendt til beslutter. Du kommer nå til forsiden.');
+    expect(modal.prop('contentLabel')).is.eql('Returneres til saksbehandler for iverksettelse');
 
     const button = wrapper.find(Hovedknapp);
     expect(button).to.have.length(1);
@@ -33,11 +41,16 @@ describe('<FatterVedtakApprovalModal>', () => {
   it('skal rendre modal for iverksetter vedtak', () => {
     const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
       intl={intlMock}
-      infoTextCode="testInfo"
-      altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
-      modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescriptionESApproval"
       closeEvent={closeEventCallback}
-      resolveProsessAksjonspunkterSuccess
+      allAksjonspunktApproved
+      behandlingId={1}
+      behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
+      behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.ENGANGSSTONAD,
+        kodeverk: '',
+      }}
+      erKlageWithKA
     />);
 
     const modal = wrapper.find(Modal);
@@ -52,11 +65,16 @@ describe('<FatterVedtakApprovalModal>', () => {
   it('skal rendre modal for iverksetter vedtak foreldrepenger', () => {
     const wrapper = shallowWithIntl(<FatterVedtakApprovalModal.WrappedComponent
       intl={intlMock}
-      infoTextCode="testInfo"
-      altImgTextCode="HelpText.Aksjonspunkt" // random intl ID
-      modalDescriptionTextCode="FatterVedtakApprovalModal.ModalDescriptionFPApproval"
       closeEvent={closeEventCallback}
-      resolveProsessAksjonspunkterSuccess
+      allAksjonspunktApproved
+      behandlingId={1}
+      behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
+      behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
+      erKlageWithKA
     />);
 
     const modal = wrapper.find(Modal);

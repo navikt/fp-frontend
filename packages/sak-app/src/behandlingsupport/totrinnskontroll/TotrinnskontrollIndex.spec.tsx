@@ -13,7 +13,7 @@ import { Fagsak, TotrinnskontrollAksjonspunkt, BehandlingAppKontekst } from '@fp
 import * as useHistory from '../../app/useHistory';
 import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import { TotrinnskontrollIndex } from './TotrinnskontrollIndex';
+import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
 describe('<TotrinnskontrollIndex>', () => {
@@ -137,9 +137,11 @@ describe('<TotrinnskontrollIndex>', () => {
 
     const submit = index.prop('onSubmit') as (params: any) => void;
     submit({
-      approvals: [{
-        aksjonspunkter: [],
-      }],
+      fatterVedtakAksjonspunktDto: {
+        '@type': '5016',
+        aksjonspunktGodkjenningDtos: [],
+        begrunnelse: null,
+      },
     });
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);

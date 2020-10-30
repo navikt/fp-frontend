@@ -103,7 +103,19 @@ describe('<TotrinnskontrollSaksbehandlerPanel>', () => {
       }}
       arbeidsforholdHandlingTyper={[]}
       erTilbakekreving={false}
-      skjemalenkeTyper={[]}
+      skjemalenkeTyper={[{
+        kode: 'FOEDSEL',
+        navn: 'Fødsel',
+        kodeverk: '',
+      }, {
+        kode: 'OMSORG',
+        navn: 'Omsorg',
+        kodeverk: '',
+      }, {
+        kode: 'FORELDREANSVAR',
+        navn: 'Foreldreansvar',
+        kodeverk: '',
+      }]}
       lagLenke={() => location}
     />);
     const navFieldGroup = wrapper.find('NavLink');

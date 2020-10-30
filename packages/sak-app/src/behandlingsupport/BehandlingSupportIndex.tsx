@@ -162,36 +162,38 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     },
   );
 
-  const erReturnertFraBeslutterErRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status),
+  const erReturnertFraBeslutterRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status),
     [behandling?.id, behandling?.versjon, totrinnArsakerReadOnly]);
   const erGodkjenningAvBeslutterRelevant = useMemo(() => !erPaVent && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK,
     [behandling?.id, behandling?.versjon]);
-  const acccessibleSupportPanels = useMemo(() => getAccessibleSupportPanels(erReturnertFraBeslutterErRelevant, erGodkjenningAvBeslutterRelevant),
-    [erReturnertFraBeslutterErRelevant, erGodkjenningAvBeslutterRelevant]);
-  const sendMessageIsRelevant = useMemo(() => (fagsak && !erPaVent), [fagsak, erPaVent]);
-  const enabledSupportPanels = useMemo(() => getEnabledSupportPanels(acccessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter),
-    [acccessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter]);
-  const defaultSupportPanel = enabledSupportPanels.find(() => true) || supportTabs.HISTORY;
-  const activeSupportPanel = enabledSupportPanels.includes(valgtSupportPanel) ? valgtSupportPanel : defaultSupportPanel;
+  const erSendMeldingRelevant = useMemo(() => (fagsak && !erPaVent), [fagsak, erPaVent]);
+
+  const tilgjengeligeSupportPaneler = useMemo(() => getAccessibleSupportPanels(erReturnertFraBeslutterRelevant, erGodkjenningAvBeslutterRelevant),
+    [erReturnertFraBeslutterRelevant, erGodkjenningAvBeslutterRelevant]);
+  const valgbareSupportPaneler = useMemo(() => getEnabledSupportPanels(tilgjengeligeSupportPaneler, erSendMeldingRelevant, behandlingRettigheter),
+    [tilgjengeligeSupportPaneler, erSendMeldingRelevant, behandlingRettigheter]);
+
+  const defaultSupportPanel = valgbareSupportPaneler.find(() => true) || supportTabs.HISTORY;
+  const aktivtSupportPanel = valgbareSupportPaneler.includes(valgtSupportPanel) ? valgtSupportPanel : defaultSupportPanel;
 
   const changeRouteCallback = useCallback((index) => {
-    const supportPanel = acccessibleSupportPanels[index];
+    const supportPanel = tilgjengeligeSupportPaneler[index];
     history.push(getSupportPanelLocation(supportPanel));
-  }, [location, acccessibleSupportPanels]);
+  }, [location, tilgjengeligeSupportPaneler]);
 
   return (
     <>
       <div className={styles.meny}>
         <SupportMenySakIndex
-          tilgjengeligeTabs={acccessibleSupportPanels}
-          valgbareTabs={enabledSupportPanels}
-          valgtIndex={acccessibleSupportPanels.findIndex((p) => p === activeSupportPanel)}
+          tilgjengeligeTabs={tilgjengeligeSupportPaneler}
+          valgbareTabs={valgbareSupportPaneler}
+          valgtIndex={tilgjengeligeSupportPaneler.findIndex((p) => p === aktivtSupportPanel)}
           onClick={changeRouteCallback}
         />
       </div>
-      <div className={(activeSupportPanel === supportTabs.HISTORY ? styles.containerHistorikk : styles.container)}>
+      <div className={(aktivtSupportPanel === supportTabs.HISTORY ? styles.containerHistorikk : styles.container)}>
         {renderSupportPanel(
-          activeSupportPanel,
+          aktivtSupportPanel,
           fagsak,
           alleBehandlinger,
           behandlingId,
