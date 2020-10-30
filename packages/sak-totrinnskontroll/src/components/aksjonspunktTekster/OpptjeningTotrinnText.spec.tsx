@@ -1,9 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
-import OpptjeningTotrinnText from './OpptjeningTotrinnText';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
+import { OpptjeningAktiviteter } from '@fpsak-frontend/types';
 
-const lagOpptjeningAktivitetArbeidMedNavn = (resultat: any) => ({
+import OpptjeningTotrinnText from './OpptjeningTotrinnText';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
+
+const lagOpptjeningAktivitetArbeidMedNavn = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Arbeid',
   arbeidsgiverNavn: 'Andersen Transport AS',
@@ -11,7 +13,7 @@ const lagOpptjeningAktivitetArbeidMedNavn = (resultat: any) => ({
   godkjent: resultat === 'GODKJENT',
 });
 
-const lagOpptjeningAktivitetArbeidUtenNavn = (resultat: any) => ({
+const lagOpptjeningAktivitetArbeidUtenNavn = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Arbeid',
   arbeidsgiverNavn: null,
@@ -19,7 +21,7 @@ const lagOpptjeningAktivitetArbeidUtenNavn = (resultat: any) => ({
   godkjent: resultat === 'GODKJENT',
 });
 
-const lagOpptjeningAktivitet = (resultat: any) => ({
+const lagOpptjeningAktivitet = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Aktivitet',
   arbeidsgiverNavn: null,

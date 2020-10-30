@@ -3,6 +3,9 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
+import {
+  Behandling, Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad, UttakStonadskontoer,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -42,7 +45,7 @@ const aksjonspunkter = [
 
 const fagsak = {
   saksnummer: 1,
-};
+} as Fagsak;
 
 const familiehendelse = {
   gjeldende: {
@@ -61,7 +64,7 @@ const familiehendelse = {
     morForSykVedFodsel: null,
     vedtaksDatoSomSvangerskapsuke: null,
   },
-};
+} as FamilieHendelseSamling;
 
 const behandling = {
   id: 1,
@@ -71,7 +74,9 @@ const behandling = {
     kodeverk: 'BEHANDLING_TYPE',
   },
   behandlingsresultat: {
-    skjaeringstidspunktForeldrepenger: '2019-10-14',
+    skjæringstidspunkt: {
+      dato: '2019-10-14',
+    },
   },
   status: {
     kode: 'UTRED',
@@ -81,10 +86,11 @@ const behandling = {
     kode: '-',
     kodeverk: 'SPRAAK_KODE',
   },
-};
+} as Behandling;
 
 const uttakStonadskontoer = {
   maksDatoUttak: null,
+  tapteDagerFpff: 1,
   stonadskontoer: {
     FEDREKVOTE: {
       stonadskontotype: 'FEDREKVOTE',
@@ -191,7 +197,7 @@ const uttakStonadskontoer = {
       kontoUtvidelser: null,
     },
   },
-};
+} as UttakStonadskontoer;
 
 const uttaksresultatPerioder = {
   perioderSøker: [
@@ -507,8 +513,8 @@ const soknad = {
   termindato: null,
   fodselsdatoer: {
     1: '2019-11-04',
-  },
-};
+  } as {[key: number]: string},
+} as Soknad;
 
 const personopplysninger = {
   navBrukerKjonn: {
@@ -517,7 +523,7 @@ const personopplysninger = {
   },
   dodsdato: null,
   annenPart: null,
-};
+} as Personopplysninger;
 
 const ytelsefordeling = {
   ikkeOmsorgPerioder: null,
@@ -544,12 +550,14 @@ export const visProsessUttak = () => (
     personopplysninger={personopplysninger}
     uttakPeriodeGrense={uttakPeriodeGrense}
     ytelsefordeling={ytelsefordeling}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     employeeHasAccess={boolean('employeeHasAccess', true)}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as () => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     tempUpdateStonadskontoer={action('button-click')}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
+    status="test"
+    vilkar={[]}
   />
 );

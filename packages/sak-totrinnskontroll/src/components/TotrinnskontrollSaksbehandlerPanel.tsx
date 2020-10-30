@@ -19,7 +19,7 @@ import styles from './totrinnskontrollSaksbehandlerPanel.less';
 interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
-  behandlingKlageVurdering: TotrinnsKlageVurdering,
+  behandlingKlageVurdering?: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
   erTilbakekreving: boolean,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],

@@ -1,4 +1,3 @@
-import KodeverkMedNavn from './kodeverkMedNavnTsType';
 import Kodeverk from './kodeverkTsType';
 
 // eslint-disable-next-line no-shadow
@@ -23,20 +22,20 @@ export type OpptjeningAktiviteter = Readonly<{
   arbeidsgiverNavn: string;
   orgnr: string;
   godkjent: boolean;
-  privatpersonFødselsdato: string;
+  privatpersonFødselsdato?: string;
 }>
 
 type TotrinnskontrollAksjonspunkt = Readonly<{
   aksjonspunktKode: string;
   opptjeningAktiviteter: OpptjeningAktiviteter[];
-  beregningDto: {
+  beregningDto?: {
     fastsattVarigEndringNaering: boolean;
     faktaOmBeregningTilfeller: Kodeverk[];
   };
-  besluttersBegrunnelse: string;
-  totrinnskontrollGodkjent: boolean;
+  besluttersBegrunnelse?: string;
+  totrinnskontrollGodkjent?: boolean;
   vurderPaNyttArsaker: { kode: string; navn: string}[];
-  uttakPerioder: {
+  uttakPerioder?: {
     fom: string;
     tom: string;
     typeEndring: TypeEndring;
@@ -45,7 +44,7 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     erLagtTil: boolean;
     erEndret: boolean;
   }[];
-  arbeidforholdDtos: TotrinnskontrollArbeidsforhold[];
+  arbeidforholdDtos?: TotrinnskontrollArbeidsforhold[];
 }>
 
 export default TotrinnskontrollAksjonspunkt;

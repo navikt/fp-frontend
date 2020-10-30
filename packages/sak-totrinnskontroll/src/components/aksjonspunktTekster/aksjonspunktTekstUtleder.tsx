@@ -28,7 +28,8 @@ const buildVarigEndringBeregningText = (beregningDto: TotrinnskontrollAksjonspun
   />
 ));
 
-const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: TotrinnskontrollArbeidsforhold, arbeidsforholdHandlingTyper: KodeverkMedNavn[]) => {
+// Eksportert kun for test
+export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: TotrinnskontrollArbeidsforhold, arbeidsforholdHandlingTyper: KodeverkMedNavn[]) => {
   const formattedMessages = [];
   const { kode } = arbeidforholdDto.arbeidsforholdHandlingType;
   if (arbeidforholdDto.brukPermisjon === true) {

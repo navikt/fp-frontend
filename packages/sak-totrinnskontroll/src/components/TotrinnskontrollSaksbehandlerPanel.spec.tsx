@@ -1,8 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+
 import TotrinnskontrollSaksbehandlerPanel from './TotrinnskontrollSaksbehandlerPanel';
-import getAksjonspunktText from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 const getTotrinnsaksjonspunkterFødsel = () => (
   [
@@ -75,35 +77,34 @@ const getTotrinnsaksjonspunkterForeldreansvar = () => (
   ]
 );
 
+const totrinnskontrollSkjermlenkeContext = [{
+  skjermlenkeType: 'FOEDSEL',
+  totrinnskontrollAksjonspunkter: getTotrinnsaksjonspunkterFødsel(),
+}, {
+  skjermlenkeType: 'OMSORG',
+  totrinnskontrollAksjonspunkter: getTotrinnsaksjonspunkterOmsorg(),
+}, {
+  skjermlenkeType: 'FORELDREANSVAR',
+  totrinnskontrollAksjonspunkter: getTotrinnsaksjonspunkterForeldreansvar(),
+}];
+
+const location = {
+  pathname: '', search: '', state: {}, hash: '',
+};
+
 describe('<TotrinnskontrollSaksbehandlerPanel>', () => {
   it('skal vise korrekt antall element og navn', () => {
-    const aksjonspunkterFødsel = getTotrinnsaksjonspunkterFødsel();
-    const aksjonspunkterOmsorg = getTotrinnsaksjonspunkterOmsorg();
-    const aksjonspunkterForeldreansvar = getTotrinnsaksjonspunkterForeldreansvar();
-
-    const approvalList = [{
-      contextCode: 'FOEDSEL',
-      skjermlenkeId: 'Behandlingspunkt.Fodselsvilkaret',
-      skjermlenke: 'testLocation',
-      aksjonspunkter: aksjonspunkterFødsel,
-    },
-    {
-      contextCode: 'OMSORG',
-      skjermlenkeId: 'Behandlingspunkt.Omsorgsvilkaret',
-      skjermlenke: 'testLocation',
-      aksjonspunkter: aksjonspunkterOmsorg,
-    },
-    {
-      contextCode: 'FORELDREANSVAR',
-      skjermlenkeId: 'Behandlingspunkt.Foreldreansvar',
-      skjermlenke: 'testLocation',
-      aksjonspunkter: aksjonspunkterForeldreansvar,
-    },
-    ];
-
     const wrapper = shallow(<TotrinnskontrollSaksbehandlerPanel
-      approvalList={approvalList}
-      getAksjonspunktText={getAksjonspunktText.resultFunc(true, null, null, null, null)}
+      totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+      erForeldrepengerFagsak
+      behandlingStatus={{
+        kode: behandlingStatus.BEHANDLING_UTREDES,
+        kodeverk: '',
+      }}
+      arbeidsforholdHandlingTyper={[]}
+      erTilbakekreving={false}
+      skjemalenkeTyper={[]}
+      lagLenke={() => location}
     />);
     const navFieldGroup = wrapper.find('NavLink');
     expect(navFieldGroup)
