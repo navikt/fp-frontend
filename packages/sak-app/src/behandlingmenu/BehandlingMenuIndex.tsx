@@ -28,7 +28,8 @@ import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import MenyKodeverk from './MenyKodeverk';
-import SakRettigheter, { VergeBehandlingmenyValg } from './sakRettigheterTsType';
+import BehandlingRettigheter, { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
+import SakRettigheter from '../fagsak/sakRettigheterTsType';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
@@ -62,9 +63,9 @@ type BehandlendeEnheter = {
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  saksnummer: number;
   behandlingId?: number;
-  behandlingVersion?: number;
+  behandlingVersjon?: number;
+  behandlingRettigheter: BehandlingRettigheter;
   sakRettigheter: SakRettigheter;
   oppfriskBehandlinger: () => void;
 }
@@ -72,10 +73,10 @@ interface OwnProps {
 export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger = EMPTY_ARRAY,
-  saksnummer,
   behandlingId,
-  behandlingVersion,
+  behandlingVersjon,
   sakRettigheter,
+  behandlingRettigheter,
   oppfriskBehandlinger,
 }) => {
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
@@ -87,7 +88,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     // Når antallet har endret seg er det laget en ny behandling og denne må da velges
     if (ref.current > 0) {
-      const pathname = pathToBehandling(saksnummer, findNewBehandlingId(alleBehandlinger));
+      const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingId(alleBehandlinger));
       pushLocation(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
     }
 
@@ -131,41 +132,39 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
 
-  const behandlingOperasjoner = sakRettigheter.behandlingTillatteOperasjoner.find((op) => op.uuid === behandling?.uuid);
-
-  const vergeMenyvalg = behandlingOperasjoner?.vergeBehandlingsmeny;
+  const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
   const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN
-    ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+    ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
   const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT
-    ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersion) : undefined;
+    ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
   return (
     <MenySakIndex
       data={[
-        new MenyData(behandlingOperasjoner?.behandlingKanGjenopptas, getTaAvVentMenytekst())
+        new MenyData(behandlingRettigheter?.behandlingKanGjenopptas, getTaAvVentMenytekst())
           .medModal((lukkModal) => (
             <MenyTaAvVentIndex
               behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersion}
+              behandlingVersjon={behandlingVersjon}
               taBehandlingAvVent={resumeBehandling}
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(behandlingOperasjoner?.behandlingKanSettesPaVent, getSettPaVentMenytekst())
+        new MenyData(behandlingRettigheter?.behandlingKanSettesPaVent, getSettPaVentMenytekst())
           .medModal((lukkModal) => (
             <MenySettPaVentIndex
               behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersion}
+              behandlingVersjon={behandlingVersjon}
               settBehandlingPaVent={setBehandlingOnHold}
               ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.VENT_AARSAK)}
               lukkModal={lukkModal}
               erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
             />
           )),
-        new MenyData(behandlingOperasjoner?.behandlingKanHenlegges, getHenleggMenytekst())
+        new MenyData(behandlingRettigheter?.behandlingKanHenlegges, getHenleggMenytekst())
           .medModal((lukkModal) => (
             <MenyHenleggIndex
               behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersion}
+              behandlingVersjon={behandlingVersjon}
               forhandsvisHenleggBehandling={previewHenleggBehandling}
               henleggBehandling={shelveBehandling}
               ytelseType={fagsak.sakstype}
@@ -176,11 +175,11 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               gaaTilSokeside={gaaTilSokeside}
             />
           )),
-        new MenyData(behandlingOperasjoner?.behandlingKanBytteEnhet, getMenytekst())
+        new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getMenytekst())
           .medModal((lukkModal) => (
             <MenyEndreBehandlendeEnhetIndex
               behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersion}
+              behandlingVersjon={behandlingVersjon}
               behandlendeEnhetId={behandling?.behandlendeEnhetId}
               behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
               nyBehandlendeEnhet={nyBehandlendeEnhet}
@@ -188,11 +187,11 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(behandlingOperasjoner?.behandlingKanOpnesForEndringer, getApneForEndringerMenytekst())
+        new MenyData(behandlingRettigheter?.behandlingKanOpnesForEndringer, getApneForEndringerMenytekst())
           .medModal((lukkModal) => (
             <MenyApneForEndringerIndex
               behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersion}
+              behandlingVersjon={behandlingVersjon}
               apneBehandlingForEndringer={openBehandlingForChanges}
               lukkModal={lukkModal}
             />
@@ -200,10 +199,10 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
         new MenyData(!sakRettigheter.sakSkalTilInfotrygd, getNyBehandlingMenytekst())
           .medModal((lukkModal) => (
             <MenyNyBehandlingIndex
-              saksnummer={saksnummer}
+              saksnummer={fagsak.saksnummer}
               behandlingId={behandlingId}
               behandlingUuid={behandling?.uuid}
-              behandlingVersjon={behandlingVersion}
+              behandlingVersjon={behandlingVersjon}
               behandlingType={behandling?.type}
               uuidForSistLukkede={uuidForSistLukkede}
               behandlingOppretting={sakRettigheter.behandlingTypeKanOpprettes}

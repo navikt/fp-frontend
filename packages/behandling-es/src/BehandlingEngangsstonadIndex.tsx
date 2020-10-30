@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { Fagsak, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson,
+} from '@fpsak-frontend/types';
 import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
@@ -25,6 +27,7 @@ const engansstonadData = [
 interface OwnProps {
   behandlingId: number;
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;
@@ -45,6 +48,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
+  fagsakPerson,
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
@@ -124,6 +128,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
         behandling={hasNotFinished ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         alleKodeverk={kodeverk}
         rettigheter={rettigheter}
         valgtProsessSteg={valgtProsessSteg}

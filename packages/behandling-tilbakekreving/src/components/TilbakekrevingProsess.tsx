@@ -7,7 +7,9 @@ import { AdvarselModal } from '@fpsak-frontend/shared-components';
 import {
   prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+} from '@fpsak-frontend/types';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegTilbakekrevingPanelDefinisjoner';
@@ -26,6 +28,7 @@ const forhandsvis = (data) => {
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -57,6 +60,7 @@ const getLagringSideeffekter = (toggleFatterVedtakModal, toggleOppdatereFagsakCo
 const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
   data,
   fagsak,
+  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -80,7 +84,7 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
   const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvis(response)), []);
 
   const dataTilUtledingAvTilbakekrevingPaneler = {
-    beregnBelop, fetchPreviewVedtaksbrev, ...data,
+    fagsakPerson, beregnBelop, fetchPreviewVedtaksbrev, ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
     dataTilUtledingAvTilbakekrevingPaneler, fagsak, rettigheter, behandling, data.aksjonspunkter, [], hasFetchError, valgtProsessSteg);

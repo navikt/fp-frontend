@@ -28,15 +28,17 @@ describe('<EngangsstonadProsess>', () => {
     saksnummer: 123456,
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
-    person: {
-      alder: 30,
-      personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-      erDod: false,
-      erKvinne: true,
-      navn: 'Espen Utvikler',
-      personnummer: '12345',
-    },
   } as Fagsak;
+
+  const fagsakPerson = {
+    alder: 30,
+    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
+    erDod: false,
+    erKvinne: true,
+    navn: 'Espen Utvikler',
+    personnummer: '12345',
+  };
+
   const behandling = {
     id: 1,
     uuid: 'uuid-test',
@@ -94,6 +96,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -141,6 +144,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -170,6 +174,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -215,6 +220,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={vedtakBehandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -265,6 +271,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -315,6 +322,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -343,6 +351,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -372,6 +381,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -407,6 +417,7 @@ describe('<EngangsstonadProsess>', () => {
       <EngangsstonadProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}

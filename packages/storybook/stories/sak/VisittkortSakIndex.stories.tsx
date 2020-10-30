@@ -36,23 +36,24 @@ const fagsak = {
     kodeverk: 'STATUS',
   },
   barnFodt: '20120-01-01',
-  person: {
-    erDod: false,
-    navn: 'Espen Utvikler',
-    alder: 41,
-    personnummer: '1234567',
-    erKvinne: false,
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-  },
   opprettet: '20120-01-01',
   endret: '20120-01-01',
   antallBarn: 1,
   kanRevurderingOpprettes: false,
   skalBehandlesAvInfotrygd: false,
   dekningsgrad: 100,
+};
+
+const fagsakPerson = {
+  erDod: false,
+  navn: 'Espen Utvikler',
+  alder: 41,
+  personnummer: '1234567',
+  erKvinne: false,
+  personstatusType: {
+    kode: personstatusType.BOSATT,
+    kodeverk: 'PERSONSTATUS_TYPE',
+  },
 };
 
 const familieHendelse = {
@@ -180,6 +181,7 @@ const personopplysningerAnnenPart = {
 export const visVisittkortNårEnHarBegrensetMedInformasjon = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
+    fagsakPerson={fagsakPerson}
     familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
     alleKodeverk={alleKodeverk as any}
@@ -190,6 +192,7 @@ export const visVisittkortNårEnHarBegrensetMedInformasjon = () => (
 export const visVisittkortNårEnHarPersonopplysninger = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
+    fagsakPerson={fagsakPerson}
     personopplysninger={personopplysningerSoker}
     familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
@@ -201,6 +204,7 @@ export const visVisittkortNårEnHarPersonopplysninger = () => (
 export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
+    fagsakPerson={fagsakPerson}
     personopplysninger={{
       ...personopplysningerSoker,
       annenPart: personopplysningerAnnenPart,
@@ -215,6 +219,7 @@ export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
 export const visVisittkortForAnnenPartDerAktørIdErUkjent = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
+    fagsakPerson={fagsakPerson}
     personopplysninger={{
       ...personopplysningerSoker,
       annenPart: {

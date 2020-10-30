@@ -10,7 +10,7 @@ import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
@@ -18,6 +18,7 @@ import styles from './registrerPapirsoknadPanel.less';
 
 interface OwnProps {
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
   setSoknadData: (soknadData: SoknadData) => SoknadData;
@@ -28,6 +29,7 @@ interface OwnProps {
 
 const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
   fagsak,
+  fagsakPerson,
   kodeverk,
   readOnly,
   setSoknadData,
@@ -60,7 +62,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.person}
+            fagsakPerson={fagsakPerson}
           />
         )}
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.FORELDREPENGER && (
@@ -70,7 +72,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPerson={fagsak.person}
+            fagsakPerson={fagsakPerson}
           />
         )}
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.SVANGERSKAPSPENGER && (
