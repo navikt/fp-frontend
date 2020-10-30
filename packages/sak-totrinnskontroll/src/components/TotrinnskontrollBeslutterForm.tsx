@@ -1,14 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { createSelector } from 'reselect';
 import { InjectedFormProps, FieldArray } from 'redux-form';
+import { Location } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
-import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
-import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
+import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
@@ -38,14 +39,15 @@ const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], be
 
 interface PureOwnProps {
   behandling: Behandling;
-  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
   erBehandlingEtterKlage?: boolean;
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
+  skjemalenkeTyper: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -67,27 +69,27 @@ const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnP
   erBehandlingEtterKlage,
   behandlingKlageVurdering,
   erForeldrepengerFagsak,
-  alleKodeverk,
+  arbeidsforholdHandlingTyper,
+  skjemalenkeTyper,
   erTilbakekreving,
   aksjonspunktGodkjenning,
   totrinnskontrollSkjermlenkeContext,
   lagLenke,
   ...formProps
 }) => {
-  const isReadOnly = behandling.status.kode !== BehandlingStatus.FATTER_VEDTAK || readOnly;
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
 
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRINGbehandlingsresultat,
   ], behandling.behandlingsresultat), [behandling.behandlingsresultat]);
 
-  if (!behandling.toTrinnsBehandling || !totrinnskontrollSkjermlenkeContext || totrinnskontrollSkjermlenkeContext.length === 0) {
+  if (!behandling.toTrinnsBehandling) {
     return null;
   }
 
   return (
     <form name="toTrinn" onSubmit={handleSubmit}>
-      {!isReadOnly && (
+      {!readOnly && (
         <>
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
@@ -102,11 +104,11 @@ const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnP
         klagebehandlingVurdering={behandlingKlageVurdering}
         behandlingStatus={behandling.status}
         erTilbakekreving={erTilbakekreving}
-        arbeidsforholdHandlingTyper={alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]}
+        arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
         readOnly={readOnly}
         klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-        alleKodeverk={alleKodeverk}
+        skjemalenkeTyper={skjemalenkeTyper}
         lagLenke={lagLenke}
       />
       <div className={styles.buttonRow}>
@@ -145,7 +147,7 @@ const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnP
 export type AksjonspunktGodkjenningData = {
   aksjonspunktKode: string;
   totrinnskontrollGodkjent: boolean;
-  besluttersBegrunnelse?: boolean;
+  besluttersBegrunnelse?: string;
   feilFakta?: boolean;
   feilRegel?: boolean;
   feilLov?: boolean;
@@ -175,7 +177,7 @@ const validate = (values: FormValues) => {
   };
 };
 
-const finnArsaker = (vurderPaNyttArsaker) => vurderPaNyttArsaker.reduce((acc, arsak) => {
+const finnArsaker = (vurderPaNyttArsaker: { kode: string, navn: string }[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
   if (arsak.kode === vurderPaNyttArsakType.FEIL_FAKTA) {
     return { ...acc, feilFakta: true };
   }
@@ -191,26 +193,24 @@ const finnArsaker = (vurderPaNyttArsaker) => vurderPaNyttArsaker.reduce((acc, ar
   return {};
 }, {});
 
-const buildInitialValues = (totrinnskontrollContext: TotrinnskontrollSkjermlenkeContext[]): FormValues => ({
-  aksjonspunktGodkjenning: totrinnskontrollContext
-    .map((context) => context.totrinnskontrollAksjonspunkter)
-    .flat()
-    .map((ap) => ({
-      aksjonspunktKode: ap.aksjonspunktKode,
-      totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
-      besluttersBegrunnelse: ap.besluttersBegrunnelse,
-      ...finnArsaker(ap.vurderPaNyttArsaker),
-    })),
-});
+const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.totrinnskontrollSkjermlenkeContext],
+  (totrinnskontrollContext): FormValues => ({
+    aksjonspunktGodkjenning: totrinnskontrollContext
+      .map((context) => context.totrinnskontrollAksjonspunkter)
+      .flat()
+      .map((ap) => ({
+        aksjonspunktKode: ap.aksjonspunktKode,
+        totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
+        besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse),
+        ...finnArsaker(ap.vurderPaNyttArsaker),
+      })),
+  }));
 
 const formName = 'toTrinnForm';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
-  const initialValues = buildInitialValues(ownProps.totrinnskontrollSkjermlenkeContext);
-  return {
-    initialValues,
-    aksjonspunktGodkjenning: behandlingFormValueSelector(formName, ownProps.behandling.id, ownProps.behandling.versjon)(state, 'aksjonspunktGodkjenning'),
-  };
-};
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+  initialValues: buildInitialValues(ownProps),
+  aksjonspunktGodkjenning: behandlingFormValueSelector(formName, ownProps.behandling.id, ownProps.behandling.versjon)(state, 'aksjonspunktGodkjenning'),
+});
 
 export default connect(mapStateToProps)(behandlingForm({ form: formName, validate })(TotrinnskontrollBeslutterForm));

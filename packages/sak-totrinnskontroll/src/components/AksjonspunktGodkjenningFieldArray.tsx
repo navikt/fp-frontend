@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { NavLink } from 'react-router-dom';
+import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
@@ -41,7 +41,7 @@ interface OwnProps {
   behandlingStatus: Kodeverk,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  skjemalenkeTyper: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -56,7 +56,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   behandlingStatus,
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
-  alleKodeverk,
+  skjemalenkeTyper,
   lagLenke,
 }) => (
   <>
@@ -74,7 +74,6 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
       const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
         arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
 
-      const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
       const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
 
       return (
@@ -111,20 +110,24 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                               <CheckboxField
                                 name={`${id}.feilFakta`}
                                 label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilFakta" />}
+                                readOnly={readOnly}
                               />
                               <CheckboxField
                                 name={`${id}.feilRegel`}
                                 label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse" />}
+                                readOnly={readOnly}
                               />
                             </FlexColumn>
                             <FlexColumn className={styles.halfColumn}>
                               <CheckboxField
                                 name={`${id}.feilLov`}
                                 label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse" />}
+                                readOnly={readOnly}
                               />
                               <CheckboxField
                                 name={`${id}.annet`}
                                 label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
+                                readOnly={readOnly}
                               />
                             </FlexColumn>
                           </FlexRow>
@@ -136,6 +139,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                     name={`${id}.besluttersBegrunnelse`}
                     label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
                     validate={[required, minLength3, maxLength2000, hasValidText]}
+                    readOnly={readOnly}
                   />
                 </ArrowBox>
               )}

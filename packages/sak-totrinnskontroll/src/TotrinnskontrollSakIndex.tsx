@@ -2,6 +2,9 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
@@ -13,6 +16,7 @@ import {
 } from '@fpsak-frontend/types';
 
 import TotrinnskontrollBeslutterForm, { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
+import TotrinnskontrollSaksbehandlerPanel from './components/TotrinnskontrollSaksbehandlerPanel';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -21,6 +25,13 @@ const intl = createIntl({
   locale: 'nb-NO',
   messages,
 }, cache);
+
+const sorterteSkjermlenkeCodesForTilbakekreving = [
+  skjermlenkeCodes.FAKTA_OM_FEILUTBETALING,
+  skjermlenkeCodes.FORELDELSE,
+  skjermlenkeCodes.TILBAKEKREVING,
+  skjermlenkeCodes.VEDTAK,
+];
 
 const getArsaker = (apData: AksjonspunktGodkjenningData) => {
   const arsaker = [];
@@ -41,7 +52,7 @@ const getArsaker = (apData: AksjonspunktGodkjenningData) => {
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
-  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
   fagsakYtelseType: Kodeverk;
   behandlingKlageVurdering?: TotrinnsKlageVurdering;
@@ -64,7 +75,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   createLocationForSkjermlenke,
 }) => {
-  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling?.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling?.type.kode;
+  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type.kode;
 
   const submitHandler = useCallback((values: FormValues) => {
     const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning
@@ -93,25 +104,51 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
   [behandling]);
 
+  const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(() => (erTilbakekreving
+    ? sorterteSkjermlenkeCodesForTilbakekreving
+      .map((s) => totrinnskontrollSkjermlenkeContext.find((el) => el.skjermlenkeType === s.kode))
+      .filter((s) => s)
+    : totrinnskontrollSkjermlenkeContext),
+  [erTilbakekreving, totrinnskontrollSkjermlenkeContext]);
+
   const lagLenke = useCallback((skjermlenkeCode: string): Location => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
+
+  const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
+  const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
+  const arbeidsforholdHandlingTyper = alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE];
 
   return (
     <RawIntlProvider value={intl}>
-      <TotrinnskontrollBeslutterForm
-        behandling={behandling}
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
-        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-        readOnly={readOnly}
-        onSubmit={submitHandler}
-        forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
-        behandlingKlageVurdering={behandlingKlageVurdering}
-        alleKodeverk={alleKodeverk}
-        erBehandlingEtterKlage={erBehandlingEtterKlage}
-        erTilbakekreving={erTilbakekreving}
-        lagLenke={lagLenke}
-      />
+      {erStatusFatterVedtak && (
+        <TotrinnskontrollBeslutterForm
+          behandling={behandling}
+          behandlingId={behandling.id}
+          behandlingVersjon={behandling.versjon}
+          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+          readOnly={readOnly}
+          onSubmit={submitHandler}
+          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+          erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+          behandlingKlageVurdering={behandlingKlageVurdering}
+          arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
+          skjemalenkeTyper={skjemalenkeTyper}
+          erBehandlingEtterKlage={erBehandlingEtterKlage}
+          erTilbakekreving={erTilbakekreving}
+          lagLenke={lagLenke}
+        />
+      )}
+      {!erStatusFatterVedtak && (
+        <TotrinnskontrollSaksbehandlerPanel
+          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+          erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+          behandlingKlageVurdering={behandlingKlageVurdering}
+          behandlingStatus={behandling.status}
+          erTilbakekreving={erTilbakekreving}
+          arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
+          skjemalenkeTyper={skjemalenkeTyper}
+          lagLenke={lagLenke}
+        />
+      )}
     </RawIntlProvider>
   );
 };

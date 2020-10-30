@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import TotrinnskontrollSaksbehandlerForm from './TotrinnskontrollSaksbehandlerForm';
-import getAksjonspunktText from './ApprovalTextUtils';
+import TotrinnskontrollSaksbehandlerPanel from './TotrinnskontrollSaksbehandlerPanel';
+import getAksjonspunktText from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 const getTotrinnsaksjonspunkterFødsel = () => (
   [
@@ -75,7 +75,7 @@ const getTotrinnsaksjonspunkterForeldreansvar = () => (
   ]
 );
 
-describe('<ToTrinnsFormReadOnly>', () => {
+describe('<TotrinnskontrollSaksbehandlerPanel>', () => {
   it('skal vise korrekt antall element og navn', () => {
     const aksjonspunkterFødsel = getTotrinnsaksjonspunkterFødsel();
     const aksjonspunkterOmsorg = getTotrinnsaksjonspunkterOmsorg();
@@ -101,7 +101,7 @@ describe('<ToTrinnsFormReadOnly>', () => {
     },
     ];
 
-    const wrapper = shallow(<TotrinnskontrollSaksbehandlerForm
+    const wrapper = shallow(<TotrinnskontrollSaksbehandlerPanel
       approvalList={approvalList}
       getAksjonspunktText={getAksjonspunktText.resultFunc(true, null, null, null, null)}
     />);

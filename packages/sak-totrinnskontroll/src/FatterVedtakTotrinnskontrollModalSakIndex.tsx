@@ -27,7 +27,7 @@ const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = (
   allAksjonspunktApproved,
   fagsakYtelseType,
   erKlageWithKA,
-  harSammeResultatSomOriginalBehandling,
+  harSammeResultatSomOriginalBehandling = false,
 }) => (
   <RawIntlProvider value={intl}>
     <FatterVedtakApprovalModal
@@ -43,9 +43,5 @@ const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = (
     />
   </RawIntlProvider>
 );
-
-FatterVedtakTotrinnskontrollModalSakIndex.defaultProps = {
-  harSammeResultatSomOriginalBehandling: false,
-};
 
 export default FatterVedtakTotrinnskontrollModalSakIndex;
