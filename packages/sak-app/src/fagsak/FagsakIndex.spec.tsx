@@ -44,6 +44,14 @@ describe('<FagsakIndex>', () => {
   it('skal hente alle behandlinger fra fpsak og fptilbake', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.FETCH_FAGSAK, fagsak);
+    requestApi.mock(FpsakApiKeys.SAK_BRUKER, {});
+    requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER, {
+      behandlingTypeKanOpprettes: [],
+    });
+    requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE, {
+      behandlingTypeKanOpprettes: [],
+    });
+    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);

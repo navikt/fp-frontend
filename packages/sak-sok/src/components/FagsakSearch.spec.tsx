@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import FagsakSearch from './FagsakSearch';
 import FagsakList from './FagsakList';
 import SearchForm from './SearchForm';
-import PersonInfo from './person/PersonInfo';
 
 describe('<FagsakSearch>', () => {
   const fagsak = {
@@ -76,7 +75,7 @@ describe('<FagsakSearch>', () => {
     expect(labelComp.find('FormattedMessage').prop('id')).to.eql('FagsakSearch.ZeroSearchResults');
   });
 
-  it('skal vise søkefelt og søketreff der person og to fagsaker blir vist', () => {
+  it('skal vise søkefelt og søketreff der to fagsaker blir vist', () => {
     const searchFagsakFunction = sinon.spy();
     const selectFagsakFunction = sinon.spy();
     const wrapper = shallow(<FagsakSearch
@@ -90,9 +89,6 @@ describe('<FagsakSearch>', () => {
 
     expect(wrapper.find(SearchForm)).to.have.length(1);
     expect(wrapper.find('Label')).to.have.length(0);
-
-    const personComp = wrapper.find(PersonInfo);
-    expect(personComp).to.have.length(1);
 
     const fagsakListComp = wrapper.find(FagsakList);
     expect(fagsakListComp).to.have.length(1);

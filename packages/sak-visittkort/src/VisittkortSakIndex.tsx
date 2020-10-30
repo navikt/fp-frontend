@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Kodeverk, KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak,
+  Kodeverk, KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
 } from '@fpsak-frontend/types';
 
 import VisittkortPanel from './components/VisittkortPanel';
@@ -17,6 +17,7 @@ const intl = createIntl({
 
 interface OwnProps {
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   sprakkode?: Kodeverk;
   alleKodeverk: {[key: string]: [KodeverkMedNavn]};
   personopplysninger?: Personopplysninger;
@@ -27,6 +28,7 @@ interface OwnProps {
 
 const VisittkortSakIndex: FunctionComponent<OwnProps> = ({
   fagsak,
+  fagsakPerson,
   sprakkode,
   alleKodeverk,
   personopplysninger,
@@ -40,6 +42,7 @@ const VisittkortSakIndex: FunctionComponent<OwnProps> = ({
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart={lenkeTilAnnenPart}
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       alleKodeverk={alleKodeverk}
       sprakkode={sprakkode}
       harTilbakekrevingVerge={harTilbakekrevingVerge}

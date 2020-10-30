@@ -8,6 +8,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import SupportMenySakIndex from '@fpsak-frontend/sak-support-meny';
 
+import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingSupportIndex, { getAccessibleSupportPanels, getEnabledSupportPanels } from './BehandlingSupportIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -74,22 +75,8 @@ describe('<BehandlingSupportIndex>', () => {
     it('skal kunne aksessere alle support-paneler', () => {
       const returnIsRelevant = true;
       const approvalIsRelevant = true;
-      const rettigheter = {
-        sendMeldingAccess: {
-          isEnabled: true,
-          employeeHasAccess: true,
-        },
-        godkjenningsFaneAccess: {
-          isEnabled: true,
-          employeeHasAccess: true,
-        },
-        fraBeslutterFaneAccess: {
-          isEnabled: true,
-          employeeHasAccess: true,
-        },
-      };
 
-      const accessiblePanels = getAccessibleSupportPanels(returnIsRelevant, approvalIsRelevant, rettigheter);
+      const accessiblePanels = getAccessibleSupportPanels(returnIsRelevant, approvalIsRelevant);
 
       expect(accessiblePanels).is.eql([
         'godkjenning',
@@ -103,25 +90,12 @@ describe('<BehandlingSupportIndex>', () => {
     it('skal kunne aksessere kun supportpanelene som alltid vises; historikk og dokumenter', () => {
       const returnIsRelevant = false;
       const approvalIsRelevant = false;
-      const rettigheter = {
-        sendMeldingAccess: {
-          isEnabled: false,
-          employeeHasAccess: false,
-        },
-        godkjenningsFaneAccess: {
-          isEnabled: false,
-          employeeHasAccess: false,
-        },
-        fraBeslutterFaneAccess: {
-          isEnabled: false,
-          employeeHasAccess: false,
-        },
-      };
 
-      const accessiblePanels = getAccessibleSupportPanels(returnIsRelevant, approvalIsRelevant, rettigheter);
+      const accessiblePanels = getAccessibleSupportPanels(returnIsRelevant, approvalIsRelevant);
 
       expect(accessiblePanels).is.eql([
         'historikk',
+        'sendmelding',
         'dokumenter',
       ]);
     });
@@ -137,24 +111,27 @@ describe('<BehandlingSupportIndex>', () => {
         'dokumenter',
       ];
       const sendMessageIsRelevant = true;
-      const rettigheter = {
-        sendMeldingAccess: {
-          isEnabled: true,
-          employeeHasAccess: true,
-        },
-        godkjenningsFaneAccess: {
-          isEnabled: true,
-          employeeHasAccess: true,
-        },
-        fraBeslutterFaneAccess: {
-          isEnabled: true,
-          employeeHasAccess: true,
-        },
+
+      const behandlingRettigheter = {
+        behandlingFraBeslutter: true,
+        behandlingKanSendeMelding: true,
+        behandlingTilGodkjenning: false,
+        behandlingKanBytteEnhet: true,
+        behandlingKanHenlegges: true,
+        behandlingKanGjenopptas: false,
+        behandlingKanOpnesForEndringer: true,
+        behandlingKanSettesPaVent: true,
+        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
       };
 
-      const enabledPanels = getEnabledSupportPanels(accessibleSupportPanels, sendMessageIsRelevant, rettigheter);
+      const enabledPanels = getEnabledSupportPanels(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
 
-      expect(enabledPanels).is.eql(accessibleSupportPanels);
+      expect(enabledPanels).is.eql([
+        'frabeslutter',
+        'historikk',
+        'sendmelding',
+        'dokumenter',
+      ]);
     });
 
     it('skal kun vise historikk og dokument-panelene som trykkbare', () => {
@@ -166,22 +143,19 @@ describe('<BehandlingSupportIndex>', () => {
         'dokumenter',
       ];
       const sendMessageIsRelevant = false;
-      const rettigheter = {
-        sendMeldingAccess: {
-          isEnabled: false,
-          employeeHasAccess: false,
-        },
-        godkjenningsFaneAccess: {
-          isEnabled: false,
-          employeeHasAccess: false,
-        },
-        fraBeslutterFaneAccess: {
-          isEnabled: false,
-          employeeHasAccess: false,
-        },
+      const behandlingRettigheter = {
+        behandlingFraBeslutter: false,
+        behandlingKanSendeMelding: false,
+        behandlingTilGodkjenning: false,
+        behandlingKanBytteEnhet: true,
+        behandlingKanHenlegges: true,
+        behandlingKanGjenopptas: false,
+        behandlingKanOpnesForEndringer: true,
+        behandlingKanSettesPaVent: true,
+        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
       };
 
-      const enabledPanels = getEnabledSupportPanels(accessibleSupportPanels, sendMessageIsRelevant, rettigheter);
+      const enabledPanels = getEnabledSupportPanels(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
 
       expect(enabledPanels).is.eql([
         'historikk',

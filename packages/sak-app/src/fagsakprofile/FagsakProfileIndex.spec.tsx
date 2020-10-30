@@ -52,6 +52,11 @@ describe('<FagsakProfileIndex>', () => {
     id: 1,
   };
 
+  const fagsakRettigheter = {
+    sakSkalTilInfotrygd: true,
+    behandlingTypeKanOpprettes: [],
+  };
+
   let contextStubLocation;
   let contextStubMatch;
   beforeEach(() => {
@@ -76,6 +81,7 @@ describe('<FagsakProfileIndex>', () => {
       alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
       harHentetBehandlinger
       oppfriskBehandlinger={sinon.spy()}
+      fagsakRettigheter={fagsakRettigheter}
     />);
 
     const fagsakProfile = wrapper.find(FagsakProfilSakIndex);
@@ -98,6 +104,7 @@ describe('<FagsakProfileIndex>', () => {
       harHentetBehandlinger
       oppfriskBehandlinger={sinon.spy()}
       behandlingId={1}
+      fagsakRettigheter={fagsakRettigheter}
     />);
 
     const fagsakProfile = wrapper.find(FagsakProfilSakIndex);

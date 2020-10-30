@@ -4,9 +4,9 @@ import ApplicationContextPath from './ApplicationContextPath';
 const useGetEnabledApplikasjonContext = (): ApplicationContextPath[] => {
   const enabledApplicationContexts = [ApplicationContextPath.FPSAK];
 
-  const kodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const initFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH_FPTILBAKE);
 
-  if (kodeverkFpTilbake) {
+  if (initFpTilbake) {
     enabledApplicationContexts.push(ApplicationContextPath.FPTILBAKE);
   }
 

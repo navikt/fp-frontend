@@ -5,7 +5,7 @@ import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { getAlleMerknaderFraBeslutter, ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
-import { Aksjonspunkt, Behandling, Fagsak } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Behandling, FagsakPerson } from '@fpsak-frontend/types';
 
 import { TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 
@@ -13,7 +13,7 @@ interface Data {
   behandling: Behandling;
   aksjonspunkterForSteg: Aksjonspunkt[];
   perioderForeldelse: any;
-  fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   beregnBelop: () => number;
 }
 
@@ -32,11 +32,11 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getData = ({
-    behandling, aksjonspunkterForSteg, perioderForeldelse, fagsak, beregnBelop,
+    behandling, aksjonspunkterForSteg, perioderForeldelse, fagsakPerson, beregnBelop,
   }: Data) => ({
     perioderForeldelse,
     beregnBelop,
-    navBrukerKjonn: fagsak.person.erKvinne ? navBrukerKjonn.KVINNE : navBrukerKjonn.MANN,
+    navBrukerKjonn: fagsakPerson.erKvinne ? navBrukerKjonn.KVINNE : navBrukerKjonn.MANN,
     alleMerknaderFraBeslutter: getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg),
   })
 }
