@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import SupportMenySakIndex, { supportTabs } from '@fpsak-frontend/sak-support-meny';
 import {
-  Fagsak, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
+  Fagsak, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst, Kodeverk,
 } from '@fpsak-frontend/types';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -78,11 +78,15 @@ interface OwnProps {
   behandlingRettigheter?: BehandlingRettigheter;
 }
 
-const getReturnedIsRelevant = (isOnHold, toTrinnsAksjonspunkter: TotrinnskontrollSkjermlenkeContext[] = [], status) => !isOnHold && toTrinnsAksjonspunkter
+const getReturnedIsRelevant = (
+  isOnHold: boolean,
+  toTrinnsAksjonspunkter: TotrinnskontrollSkjermlenkeContext[] = [],
+  status: Kodeverk,
+) => !isOnHold && toTrinnsAksjonspunkter
   .reduce((a, b) => a.concat(b.totrinnskontrollAksjonspunkter), [])
   .some((ap) => ap.totrinnskontrollGodkjent === false) && status && status.kode === BehandlingStatus.BEHANDLING_UTREDES;
 
-export const getAccessibleSupportPanels = (returnIsRelevant, approvalIsRelevant) => Object.values(supportTabs)
+export const getAccessibleSupportPanels = (returnIsRelevant: boolean, approvalIsRelevant: boolean) => Object.values(supportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {
       case supportTabs.APPROVAL:
@@ -95,7 +99,7 @@ export const getAccessibleSupportPanels = (returnIsRelevant, approvalIsRelevant)
   });
 
 export const getEnabledSupportPanels = (
-  accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter?: BehandlingRettigheter,
+  accessibleSupportPanels: string[], sendMessageIsRelevant: boolean, behandlingRettigheter?: BehandlingRettigheter,
 ) => accessibleSupportPanels
   .filter((supportPanel) => {
     switch (supportPanel) {
