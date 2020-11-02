@@ -37,7 +37,7 @@ describe('<VedtakForm>', () => {
       id: 1,
       type: {
         kode: BehandlingResultatType.INNVILGET,
-        navn: 'test',
+        kodeverk: '',
       },
       avslagsarsak: null,
       avslagsarsakFritekst: null,
