@@ -82,6 +82,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         behandling={behandling}
         data={fetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         hasFetchError={hasFetchError}
