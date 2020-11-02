@@ -59,7 +59,8 @@ export const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = 
   const terminOrFodselDate = getTermindatoEllerFodselsdato(erTermin, soknadOriginalBehandling, familiehendelseOriginalBehandling);
   const antallBarn = getAntallBarn(erTermin, soknadOriginalBehandling, familiehendelseOriginalBehandling);
   const shouldShowVedtaksdatoAsSvangerskapsuke = !familiehendelseOriginalBehandling
-    ? false : familiehendelseOriginalBehandling.avklartBarn.length === 0 && !!vedtaksDatoSomSvangerskapsuke;
+    ? false
+    : (!familiehendelseOriginalBehandling.avklartBarn || familiehendelseOriginalBehandling.avklartBarn.length === 0) && !!vedtaksDatoSomSvangerskapsuke;
 
   return (
     <>
