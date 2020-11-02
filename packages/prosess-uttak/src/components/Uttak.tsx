@@ -264,7 +264,8 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       const transformAktiviteter = uta.aktiviteter.map((a) => {
         const { days, weeks, ...transformAktivitet } = a;
         if (typeof days !== 'undefined' && typeof weeks !== 'undefined') {
-          const trekkdager = (weeks * 5) + days;
+          // @ts-ignore Fikse denne. Kan days både vera string og number?
+          const trekkdager = (weeks * 5) + parseFloat(days);
           transformAktivitet.trekkdagerDesimaler = trekkdager; // regner om uker og dager til trekkdager
         }
         return transformAktivitet;
