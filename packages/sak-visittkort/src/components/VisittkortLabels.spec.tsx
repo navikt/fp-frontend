@@ -95,7 +95,10 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       personopplysninger={{
         ...personopplysningerSoker,
-        diskresjonskode: diskresjonskodeType.KODE6,
+        diskresjonskode: {
+          kode: diskresjonskodeType.KODE6,
+          kodeverk: '',
+        },
       }}
     />);
 
@@ -110,7 +113,10 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       personopplysninger={{
         ...personopplysningerSoker,
-        diskresjonskode: diskresjonskodeType.KODE7,
+        diskresjonskode: {
+          kode: diskresjonskodeType.KODE7,
+          kodeverk: '',
+        },
       }}
     />);
 

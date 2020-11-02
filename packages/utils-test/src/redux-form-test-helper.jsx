@@ -65,6 +65,19 @@ export const reduxFormPropsMock = Object.assign(metaMock, {
   clearFields: sinon.spy(),
   clearSubmitErrors: sinon.spy(),
   submitAsSideEffect: false,
+  array: {
+    insert: sinon.spy(),
+    move: sinon.spy(),
+    pop: sinon.spy(),
+    push: sinon.spy(),
+    remove: sinon.spy(),
+    removeAll: sinon.spy(),
+    shift: sinon.spy(),
+    splice: sinon.spy(),
+    swap: sinon.spy(),
+    unshift: sinon.spy(),
+  },
+  initialValues: {},
 });
 
 export class MockFields {
@@ -76,16 +89,17 @@ export class MockFields {
     this.push = () => array.push(formatName(array.length));
     this.pop = array.pop.bind(array);
     this.map = array.map.bind(array);
-    /* this.forEach = array.forEach.bind(array);
-     this.getAll = array.getAll.bind(array);
-    this.removeAll = array.removeAll.bind(array);
-     this.insert = array.insert.bind(array);
-    this.name = array.name.bind(array);
-    this.shift = array.shift.bind(array);
-    this.splice = array.splice.bind(array);
-    this.swap = array.swap.bind(array);
-    this.move = array.move.bind(array);
-    this.unshift = array.unshift.bind(array); */
+
+    this.forEach = sinon.spy();
+    this.getAll = sinon.spy();
+    this.removeAll = sinon.spy();
+    this.insert = sinon.spy();
+    this.name = '';
+    this.shift = sinon.spy();
+    this.splice = sinon.spy();
+    this.swap = sinon.spy();
+    this.move = sinon.spy();
+    this.unshift = sinon.spy();
 
     this.get = (index) => array[index];
 

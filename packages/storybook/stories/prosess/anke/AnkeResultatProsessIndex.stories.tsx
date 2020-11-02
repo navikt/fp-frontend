@@ -30,7 +30,10 @@ const aksjonspunkter = [{
 }] as Aksjonspunkt[];
 
 const ankeVurderingResultat = {
-  ankeVurdering: ankeVurdering.ANKE_AVVIS,
+  ankeVurdering: {
+    kode: ankeVurdering.ANKE_AVVIS,
+    kodeverk: '',
+  },
   paAnketBehandlingId: 1,
   erAnkerIkkePart: true,
   erIkkeKonkret: true,
@@ -64,7 +67,10 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+          kodeverk: '',
+        },
       },
     } as AnkeVurdering)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
@@ -78,7 +84,10 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
+          kodeverk: '',
+        },
       },
     } as AnkeVurdering)}
     saveAnke={action('button-click') as (data: any) => Promise<any>}
@@ -92,8 +101,14 @@ export const visPanelForResultatVedOmgjør = () => (
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: ankeVurdering.ANKE_OMGJOER,
-        ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_OMGJOER,
+          kodeverk: '',
+        },
+        ankeVurderingOmgjoer: {
+          kode: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+          kodeverk: '',
+        },
         ankeOmgjoerArsakNavn: 'Testårsak',
       },
     } as AnkeVurdering)}

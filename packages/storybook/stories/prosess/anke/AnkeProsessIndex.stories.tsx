@@ -51,7 +51,10 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
     {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
-        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+          kodeverk: '',
+        },
         begrunnelse: 'Dette er en begrunnelse',
       },
     } as AnkeVurdering)}
