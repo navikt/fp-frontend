@@ -7,6 +7,7 @@ import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-e
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
 import { Behandling, Fagsak } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -22,6 +23,15 @@ describe('<EngangsstonadFakta>', () => {
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
+  const fagsakPerson = {
+    alder: 30,
+    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
+    erDod: false,
+    erKvinne: true,
+    navn: 'Espen Utvikler',
+    personnummer: '12345',
+  };
+
   const behandling = {
     id: 1,
     versjon: 2,
@@ -69,6 +79,7 @@ describe('<EngangsstonadFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
@@ -100,6 +111,7 @@ describe('<EngangsstonadFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -130,6 +142,7 @@ describe('<EngangsstonadFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}

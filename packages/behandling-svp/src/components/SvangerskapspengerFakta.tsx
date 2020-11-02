@@ -5,7 +5,9 @@ import {
   SideMenuWrapper, faktaHooks, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, Behandling, Fagsak } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+} from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -19,6 +21,7 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STA
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -35,6 +38,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   data,
   behandling,
   fagsak,
+  fagsakPerson,
   rettigheter,
   alleKodeverk,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -56,7 +60,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvSvpPaneler = {
-    fagsak, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError,
+    fagsak, fagsakPerson, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

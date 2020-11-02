@@ -12,6 +12,7 @@ import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import FetchedData from '../types/fetchedDataTsType';
 
 import SvangerskapspengerFakta from './SvangerskapspengerFakta';
@@ -22,6 +23,14 @@ describe('<SvangerskapspengerFakta>', () => {
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
+  const fagsakPerson = {
+    alder: 30,
+    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
+    erDod: false,
+    erKvinne: true,
+    navn: 'Espen Utvikler',
+    personnummer: '12345',
+  };
   const behandling: Partial<Behandling> = {
     id: 1,
     versjon: 2,
@@ -69,6 +78,7 @@ describe('<SvangerskapspengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
@@ -100,6 +110,7 @@ describe('<SvangerskapspengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -130,6 +141,7 @@ describe('<SvangerskapspengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}

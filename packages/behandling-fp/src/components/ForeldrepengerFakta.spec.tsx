@@ -11,6 +11,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import FetchedData from '../types/fetchedDataTsType';
 
@@ -22,6 +23,15 @@ describe('<ForeldrepengerFakta>', () => {
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
+  const fagsakPerson = {
+    alder: 30,
+    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
+    erDod: false,
+    erKvinne: true,
+    navn: 'Espen Utvikler',
+    personnummer: '12345',
+  };
+
   const behandling = {
     id: 1,
     versjon: 2,
@@ -69,6 +79,7 @@ describe('<ForeldrepengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
@@ -100,6 +111,7 @@ describe('<ForeldrepengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -130,6 +142,7 @@ describe('<ForeldrepengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
