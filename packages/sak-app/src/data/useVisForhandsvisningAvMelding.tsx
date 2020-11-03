@@ -1,3 +1,6 @@
+import { Kodeverk } from '@fpsak-frontend/types';
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 
 const forhandsvis = (data) => {
@@ -8,12 +11,14 @@ const forhandsvis = (data) => {
   }
 };
 
-const useVisForhandsvisningAvMelding = () => {
+const useVisForhandsvisningAvMelding = (behandlingType?: Kodeverk) => {
   const { startRequest: forhandsvisTilbakekrevingHenleggelse } = restApiHooks.useRestApiRunner(FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE);
   const { startRequest: forhandsvisTilbakekreving } = restApiHooks.useRestApiRunner(FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING);
   const { startRequest: forhandsvisMelding } = restApiHooks.useRestApiRunner(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING);
 
-  return (erTilbakekreving, erHenleggelse, data) => {
+  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType?.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType?.kode;
+
+  return (erHenleggelse: boolean, data: any) => {
     if (erTilbakekreving && erHenleggelse) {
       forhandsvisTilbakekrevingHenleggelse(data).then((response) => forhandsvis(response));
     } else if (erTilbakekreving) {

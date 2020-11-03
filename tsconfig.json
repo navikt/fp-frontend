@@ -95,6 +95,7 @@
 		"packages/sak-meny-verge",
 		"packages/sak-risikoklassifisering",
 		"packages/sak-sok",
+		"packages/sak-totrinnskontroll",
 		"packages/sak-visittkort",
 		"packages/sak-support-meny",
 		"packages/shared-components",

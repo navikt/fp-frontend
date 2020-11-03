@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { Kodeverk } from '@fpsak-frontend/types';
+import { Kodeverk, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { FatterVedtakApprovalModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
+import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
@@ -17,32 +17,22 @@ interface TotrinnsKlageVurdering {
 }
 
 interface OwnProps {
-  erGodkjenningFerdig?: boolean;
-  selectedBehandlingVersjon?: number;
+  behandling: BehandlingAppKontekst;
   fagsakYtelseType: Kodeverk;
-  behandlingsresultat: any;
-  behandlingId: number;
-  behandlingTypeKode: string;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
-  behandlingStatus: Kodeverk;
   totrinnsKlageVurdering: TotrinnsKlageVurdering,
 }
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
-  erGodkjenningFerdig = false,
-  selectedBehandlingVersjon,
+  behandling,
   fagsakYtelseType,
-  behandlingsresultat,
-  behandlingId,
-  behandlingTypeKode,
   pushLocation,
   allAksjonspunktApproved,
-  behandlingStatus,
   totrinnsKlageVurdering,
 }) => {
   const { data, state } = restApiHooks.useRestApi<{ harRevurderingSammeResultat: boolean }>(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, undefined, {
-    updateTriggers: [behandlingId, selectedBehandlingVersjon],
+    updateTriggers: [behandling.id, behandling.versjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT),
     keepData: true,
   });
@@ -56,17 +46,12 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <FatterVedtakApprovalModalSakIndex
-      showModal
+    <FatterVedtakTotrinnskontrollModalSakIndex
+      behandling={behandling}
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
       fagsakYtelseType={fagsakYtelseType}
-      erGodkjenningFerdig={erGodkjenningFerdig}
       erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
-      behandlingsresultat={behandlingsresultat}
-      behandlingId={behandlingId}
-      behandlingStatusKode={behandlingStatus.kode}
-      behandlingTypeKode={behandlingTypeKode}
       harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />
   );

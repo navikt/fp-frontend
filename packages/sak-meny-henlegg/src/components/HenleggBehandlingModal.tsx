@@ -21,7 +21,13 @@ const maxLength1500 = maxLength(1500);
 
 // TODO (TOR) Skal bruka navn fra kodeverk i staden for oppslag klientside for "henleggArsaker"
 
-const previewHenleggBehandlingDoc = (behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, fritekst, behandlingId) => (e) => {
+const previewHenleggBehandlingDoc = (
+  previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void,
+  ytelseType: Kodeverk,
+  fritekst: string,
+  behandlingId: number,
+  behandlingUuid?: string,
+) => (e) => {
   // TODO Hardkoda verdiar. Er dette eit kodeverk?
   const data = {
     behandlingUuid,
@@ -31,14 +37,13 @@ const previewHenleggBehandlingDoc = (behandlingTypeKode, previewHenleggBehandlin
     mottaker: 'Søker',
     behandlingId,
   };
-  previewHenleggBehandling(behandlingType.TILBAKEKREVING === behandlingTypeKode
-    || behandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode, true, data);
+  previewHenleggBehandling(true, data);
   e.preventDefault();
 };
 
 interface OwnProps {
   cancelEvent: () => void;
-  previewHenleggBehandling: () => void;
+  previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   behandlingUuid?: string;
   ytelseType: Kodeverk;
   behandlingId?: number;
@@ -156,8 +161,8 @@ export const HenleggBehandlingModalImpl: FunctionComponent<OwnProps & StateProps
                   <Undertekst>{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Undertekst>
                   <a
                     href=""
-                    onClick={previewHenleggBehandlingDoc(behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, fritekst, behandlingId)}
-                    onKeyDown={previewHenleggBehandlingDoc(behandlingTypeKode, previewHenleggBehandling, behandlingUuid, ytelseType, fritekst, behandlingId)}
+                    onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingId, behandlingUuid)}
+                    onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingId, behandlingUuid)}
                     className="lenke lenke--frittstaende"
                   >
                     {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
