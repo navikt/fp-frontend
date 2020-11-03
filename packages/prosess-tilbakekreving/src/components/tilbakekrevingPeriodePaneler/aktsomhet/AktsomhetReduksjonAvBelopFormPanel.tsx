@@ -17,7 +17,7 @@ import aktsomhet from '../../../kodeverk/aktsomhet';
 
 import styles from './aktsomhetReduksjonAvBelopFormPanel.less';
 
-const minValue1 = minValue(0.01);
+const minValue1 = minValue(0.00);
 const maxValue100 = maxValue(99.99);
 
 const parseCurrencyInput = (input: any) => {
@@ -85,11 +85,11 @@ const AktsomhetReduksjonAvBelopFormPanel: FunctionComponent<OwnProps> = ({
             )}
             {(!harMerEnnEnYtelse && andelSomTilbakekreves === EGENDEFINERT) && (
               <>
+                <Undertekst><FormattedMessage id="AktsomhetReduksjonAvBelopFormPanel.AngiAndelSomTilbakekreves" /></Undertekst>
                 <FlexRow>
                   <FlexColumn>
                     <DecimalField
                       name="andelSomTilbakekrevesManuell"
-                      label={<FormattedMessage id="AktsomhetReduksjonAvBelopFormPanel.AngiAndelSomTilbakekreves" />}
                       readOnly={readOnly}
                       validate={[required, minValue1, maxValue100]}
                       // @ts-ignore Fiks!
@@ -97,7 +97,7 @@ const AktsomhetReduksjonAvBelopFormPanel: FunctionComponent<OwnProps> = ({
                       bredde="S"
                     />
                   </FlexColumn>
-                  <FlexColumn className={handletUaktsomhetGrad === aktsomhet.GROVT_UAKTSOM ? styles.suffixGrovText : styles.suffixSimpelText}>%</FlexColumn>
+                  <FlexColumn className={handletUaktsomhetGrad === aktsomhet.GROVT_UAKTSOM ? styles.suffixGrovText : styles.suffix}>%</FlexColumn>
                 </FlexRow>
               </>
             )}

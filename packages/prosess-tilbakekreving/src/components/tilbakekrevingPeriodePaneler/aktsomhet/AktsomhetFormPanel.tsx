@@ -172,7 +172,7 @@ AktsomhetFormPanel.transformValues = (info: { handletUaktsomhetGrad: string }, s
 
 AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo?: AktsomhetInfo }): InitialValuesAktsomhetForm => {
   const { aktsomhet, aktsomhetInfo } = vilkarResultatInfo;
-  const andelSomTilbakekreves = aktsomhetInfo && aktsomhetInfo.andelTilbakekreves ? `${aktsomhetInfo.andelTilbakekreves}` : undefined;
+  const andelSomTilbakekreves = aktsomhetInfo && aktsomhetInfo.andelTilbakekreves !== undefined ? `${aktsomhetInfo.andelTilbakekreves}` : undefined;
   const aktsomhetData = aktsomhetInfo ? {
     [(aktsomhet.kode && 'kode' in aktsomhet ? aktsomhet.kode : aktsomhet)]: {
       andelSomTilbakekreves: andelSomTilbakekreves === undefined || ANDELER.includes(andelSomTilbakekreves) ? andelSomTilbakekreves : EGENDEFINERT,
