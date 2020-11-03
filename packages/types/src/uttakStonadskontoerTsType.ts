@@ -4,7 +4,7 @@ import Kodeverk from './kodeverkTsType';
 export type AktivitetIdentifikator = Readonly<{
   uttakArbeidType: Kodeverk;
   arbeidsgiver: Arbeidsgiver;
-  arbeidsforholdId: string;
+  arbeidsforholdId?: string;
 }>
 
 export type AktivitetSaldo = Readonly<{
@@ -18,14 +18,14 @@ export type Stonadskonto = Readonly<{
   saldo: number;
   aktivitetSaldoDtoList: AktivitetSaldo[];
   gyldigForbruk: boolean;
-  kontoUtvidelser: {
+  kontoUtvidelser?: {
     prematurdager: number;
     flerbarnsdager: number;
   };
 }>
 
 type UttakStonadskontoer = Readonly<{
-  maksDatoUttak: string;
+  maksDatoUttak?: string;
   stonadskontoer: { [key: string]: Stonadskonto };
   tapteDagerFpff: number;
 }>
