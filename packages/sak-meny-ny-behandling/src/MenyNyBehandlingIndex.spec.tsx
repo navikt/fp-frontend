@@ -60,6 +60,10 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(modal).to.have.length(1);
     modal.prop('submitCallback')({
       behandlingType: behandlingType.FORSTEGANGSSOKNAD,
+      fagsakYtelseType: {
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      },
     });
 
     const kall = lagNyBehandlingCallback.getCalls();
@@ -69,6 +73,10 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(kall[0].args[1]).to.eql({
       saksnummer: '123',
       behandlingType: behandlingType.FORSTEGANGSSOKNAD,
+      fagsakYtelseType: {
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      },
     });
 
     expect(lukkModalCallback.getCalls()).to.have.length(1);

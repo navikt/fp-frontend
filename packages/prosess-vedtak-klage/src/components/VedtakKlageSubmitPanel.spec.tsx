@@ -37,7 +37,10 @@ describe('<VedtakKlageSubmitPanel>', () => {
 
   it('skal rendre submit panel med medhold i klagevurdering', () => {
     const klageVurderingResultatNK = {
-      klageVurdering: klageVurdering.MEDHOLD_I_KLAGE,
+      klageVurdering: {
+        kode: klageVurdering.MEDHOLD_I_KLAGE,
+        kodeverk: '',
+      },
     } as KlageVurdering['klageVurderingResultatNK'];
 
     const wrapper = shallowWithIntl(<VedtakKlageSubmitPanelImpl

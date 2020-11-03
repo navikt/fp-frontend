@@ -5,26 +5,33 @@ import sinon from 'sinon';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { FamilieHendelse, Soknad, FamilieHendelseSamling } from '@fpsak-frontend/types';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { VarselOmRevurderingFormImpl as UnwrappedForm } from './VarselOmRevurderingForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-varsel-om-revurdering';
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' },
+  fodselsdatoer: { 1: '2019-01-10' } as {[key: number]: string},
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
-};
+} as Soknad;
 
 const originalBehandling = {
   soknad,
   familiehendelse: {
     termindato: '2019-01-01',
-    fodselsdato: '2019-01-10',
+    avklartBarn: [{
+      fodselsdato: '2019-01-10',
+    }],
     antallBarnTermin: 1,
-    antallBarnFodsel: 1,
-  },
+  } as FamilieHendelse,
+};
+
+const sprakkode = {
+  kode: 'NO',
+  kodeverk: '',
 };
 
 describe('<VarselOmRevurderingFormImpl>', () => {
@@ -38,16 +45,28 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       languageCode="NN"
       readOnly={false}
       sendVarsel
-      frist="2017-05-15"
       aksjonspunktStatus="OPPR"
       begrunnelse="Begrunnelse"
       avklartBarn={[]}
-      behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       soknad={soknad}
       termindato="2019-01-01"
       soknadOriginalBehandling={originalBehandling.soknad}
       familiehendelseOriginalBehandling={originalBehandling.familiehendelse}
       vedtaksDatoSomSvangerskapsuke="2019-01-01"
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingArsaker={[]}
+      sprakkode={sprakkode}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      familiehendelse={{} as FamilieHendelseSamling}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      kode=""
+      ventearsaker={[]}
     />);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
     expect(fodselPanel).to.have.length(1);
@@ -63,16 +82,28 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       languageCode="NN"
       readOnly={false}
       sendVarsel
-      frist="2017-05-15"
       aksjonspunktStatus="OPPR"
       begrunnelse="Begrunnelse"
       avklartBarn={[]}
-      behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       soknad={soknad}
       termindato="2019-01-01"
       soknadOriginalBehandling={originalBehandling.soknad}
       familiehendelseOriginalBehandling={originalBehandling.familiehendelse}
       vedtaksDatoSomSvangerskapsuke="2019-01-01"
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingArsaker={[]}
+      sprakkode={sprakkode}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      familiehendelse={{} as FamilieHendelseSamling}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      kode=""
+      ventearsaker={[]}
     />);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
     expect(fodselPanel).to.have.length(0);
@@ -93,16 +124,28 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       languageCode="NN"
       readOnly={false}
       sendVarsel={false}
-      frist="2017-05-15"
       aksjonspunktStatus="OPPR"
       begrunnelse="Begrunnelse"
       avklartBarn={[]}
-      behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       soknad={soknad}
       termindato="2019-01-01"
       soknadOriginalBehandling={originalBehandling.soknad}
       familiehendelseOriginalBehandling={originalBehandling.familiehendelse}
       vedtaksDatoSomSvangerskapsuke="2019-01-01"
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingArsaker={[]}
+      sprakkode={sprakkode}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      familiehendelse={{} as FamilieHendelseSamling}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      kode=""
+      ventearsaker={[]}
     />);
 
     const textarea = wrapper.find('TextAreaField');
@@ -122,16 +165,28 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       languageCode="NN"
       readOnly={false}
       sendVarsel={false}
-      frist="2017-05-15"
       aksjonspunktStatus="UTFRT"
       begrunnelse={begrunnelse}
       avklartBarn={[]}
-      behandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       soknad={soknad}
       termindato="2019-01-01"
       soknadOriginalBehandling={originalBehandling.soknad}
       familiehendelseOriginalBehandling={originalBehandling.familiehendelse}
       vedtaksDatoSomSvangerskapsuke="2019-01-01"
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingArsaker={[]}
+      sprakkode={sprakkode}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      familiehendelse={{} as FamilieHendelseSamling}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      kode=""
+      ventearsaker={[]}
     />);
 
     expect(wrapper.find('Undertekst')).to.have.length(1);

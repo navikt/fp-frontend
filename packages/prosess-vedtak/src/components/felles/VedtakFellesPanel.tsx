@@ -54,7 +54,7 @@ interface OwnProps {
   readOnly: boolean;
   erBehandlingEtterKlage: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  renderPanel: (skalBrukeManueltBrev: boolean, erInnvilget: boolean, erAvslatt: boolean, erOpphor: boolean) => ReactNode;
+  renderPanel: (skalBrukeManueltBrev: boolean, erInnvilget: boolean, erAvslatt: boolean, erOpphor?: boolean) => ReactNode;
   previewAutomatiskBrev: (e: MouseEvent) => void;
   previewOverstyrtBrev: (e: MouseEvent) => void;
   tilbakekrevingtekst?: string;
