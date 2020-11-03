@@ -18,7 +18,7 @@ const AktsomhetGradForsettFormPanel: FunctionComponent<OwnProps> = ({
   erValgtResultatTypeForstoBurdeForstaatt,
 }) => (
   <div>
-    <ArrowBox alignOffset={20}>
+    <ArrowBox alignOffset={erValgtResultatTypeForstoBurdeForstaatt ? 320 : 360}>
       {erValgtResultatTypeForstoBurdeForstaatt && (
         <Row>
           <Column md="6">
