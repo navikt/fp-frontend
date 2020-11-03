@@ -28,7 +28,7 @@ const updateQueryParams = (queryString, nextParams) => {
   });
 };
 
-export const getLocationWithQueryParams = (location: Location, queryParams) => ({
+export const getLocationWithQueryParams = (location: Location, queryParams): Location => ({
   ...location,
   search: updateQueryParams(location.search, queryParams),
 });
@@ -54,7 +54,7 @@ export const getPathToFplos = (href) => {
   return hostAndContextPath.replace(new RegExp(FPSAK, 'g'), FPLOS);
 };
 
-export const createLocationForSkjermlenke = (behandlingLocation, skjermlenkeCode) => {
+export const createLocationForSkjermlenke = (behandlingLocation: Location, skjermlenkeCode: string): Location => {
   const skjermlenke = skjermlenkeCodes[skjermlenkeCode];
   return getLocationWithQueryParams(behandlingLocation, { punkt: skjermlenke.punktNavn, fakta: skjermlenke.faktaNavn });
 };

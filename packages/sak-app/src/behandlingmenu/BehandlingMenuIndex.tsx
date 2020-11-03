@@ -123,7 +123,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const uuidForSistLukkede = useMemo(() => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger), [alleBehandlinger]);
-  const previewHenleggBehandling = useVisForhandsvisningAvMelding();
+  const previewHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);
 
   if (navAnsatt.kanVeilede) {
     return null;

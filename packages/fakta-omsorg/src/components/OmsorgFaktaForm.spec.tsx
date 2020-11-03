@@ -136,7 +136,10 @@ describe('<OmsorgFaktaForm>', () => {
     expect(initialValues).to.eql({
       aleneomsorg: null,
       omsorg: null,
-      ikkeOmsorgPerioder: [],
+      ikkeOmsorgPerioder: [{
+        periodeFom: undefined,
+        periodeTom: undefined,
+      }],
     });
   });
 });

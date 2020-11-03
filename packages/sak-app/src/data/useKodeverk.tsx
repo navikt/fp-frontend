@@ -5,6 +5,17 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 
 /**
+ * Hook som henter kodeverk knyttet til behandlingstype
+ */
+export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[key: string]: T[]} {
+  const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK);
+  const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
+
+  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType?.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType?.kode;
+  return erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
+}
+
+/**
  * Hook som henter et gitt FPSAK-kodeverk fra respons som allerede er hentet fra backend. For å kunne bruke denne
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */

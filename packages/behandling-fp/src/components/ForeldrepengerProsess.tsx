@@ -1,10 +1,9 @@
 import React, {
-  FunctionComponent, useState, useCallback, useMemo,
+  FunctionComponent, useState, useCallback,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
   Rettigheter, prosessStegHooks, IverksetterVedtakStatusModal,
   FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
@@ -144,10 +143,6 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
   const velgProsessStegPanelCallback = prosessStegHooks.useProsessStegVelger(prosessStegPaneler, valgtFaktaSteg, behandling,
     oppdaterProsessStegOgFaktaPanelIUrl, valgtProsessSteg, valgtPanel);
 
-  const fatterVedtakTextCode = useMemo(() => (valgtPanel && valgtPanel.getStatus() === vilkarUtfallType.OPPFYLT
-    ? 'FatterVedtakStatusModal.SendtBeslutter' : 'FatterVedtakStatusModal.ModalDescriptionFP'),
-  [behandling.versjon]);
-
   return (
     <>
       <IverksetterVedtakStatusModal
@@ -158,7 +153,7 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
       <FatterVedtakStatusModal
         visModal={visFatterVedtakModal && behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
         lukkModal={useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, [])}
-        tekstkode={fatterVedtakTextCode}
+        tekstkode="FatterVedtakStatusModal.SendtBeslutter"
       />
       <ProsessStegContainer
         formaterteProsessStegPaneler={formaterteProsessStegPaneler}

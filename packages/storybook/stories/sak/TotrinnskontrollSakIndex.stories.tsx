@@ -1,0 +1,145 @@
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
+
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
+import { Behandling } from '@fpsak-frontend/types';
+
+import withReduxAndRouterProvider from '../../decorators/withReduxAndRouter';
+
+import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const data = [{
+  skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
+  totrinnskontrollAksjonspunkter: [
+    {
+      aksjonspunktKode: '5082',
+      opptjeningAktiviteter: [],
+      beregningDto: {
+        fastsattVarigEndringNaering: false,
+        faktaOmBeregningTilfeller: null,
+      },
+      besluttersBegrunnelse: null,
+      totrinnskontrollGodkjent: null,
+      vurderPaNyttArsaker: [],
+      uttakPerioder: [],
+      arbeidforholdDtos: [],
+    },
+  ],
+}];
+
+const dataReadOnly = [{
+  skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
+  totrinnskontrollAksjonspunkter: [
+    {
+      aksjonspunktKode: '5082',
+      opptjeningAktiviteter: [],
+      beregningDto: {
+        fastsattVarigEndringNaering: false,
+        faktaOmBeregningTilfeller: null,
+      },
+      besluttersBegrunnelse: 'asdfa',
+      totrinnskontrollGodkjent: false,
+      vurderPaNyttArsaker: [
+        {
+          kode: 'FEIL_REGEL',
+          navn: 'Feil regelforståelse',
+        },
+        {
+          kode: 'FEIL_FAKTA',
+          navn: 'Feil fakta',
+        },
+      ],
+      uttakPerioder: [],
+      arbeidforholdDtos: [],
+    },
+  ],
+}];
+
+const location = {
+  pathname: '', search: '', state: {}, hash: '',
+};
+
+const behandling = {
+  id: 1,
+  versjon: 2,
+  status: {
+    kode: behandlingStatus.FATTER_VEDTAK,
+    kodeverk: '',
+  },
+  type: {
+    kode: behandlingType.FORSTEGANGSSOKNAD,
+    kodeverk: '',
+  },
+  behandlingArsaker: [],
+  toTrinnsBehandling: true,
+} as Behandling;
+
+export default {
+  title: 'sak/sak-totrinnskontroll',
+  component: TotrinnskontrollSakIndex,
+  decorators: [withKnobs, withReduxAndRouterProvider],
+};
+
+export const visTotrinnskontrollForBeslutter = () => (
+  <div style={{
+    width: '600px', margin: '50px', padding: '20px', backgroundColor: 'white',
+  }}
+  >
+    <TotrinnskontrollSakIndex
+      behandling={behandling}
+      totrinnskontrollSkjermlenkeContext={data}
+      location={location}
+      readOnly={boolean('readOnly', false)}
+      onSubmit={action('button-click')}
+      forhandsvisVedtaksbrev={action('button-click')}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
+      behandlingKlageVurdering={{
+        klageVurderingResultatNFP: {
+          klageVurdering: 'STADFESTE_YTELSESVEDTAK',
+        },
+      }}
+      alleKodeverk={alleKodeverk as any}
+      createLocationForSkjermlenke={() => location}
+    />
+  </div>
+);
+
+export const visTotrinnskontrollForSaksbehandler = () => (
+  <div style={{
+    width: '600px', margin: '50px', padding: '20px', backgroundColor: 'white',
+  }}
+  >
+    <TotrinnskontrollSakIndex
+      behandling={{
+        ...behandling,
+        status: {
+          kode: behandlingStatus.BEHANDLING_UTREDES,
+          kodeverk: '',
+        },
+      }}
+      totrinnskontrollSkjermlenkeContext={dataReadOnly}
+      location={location}
+      readOnly
+      onSubmit={action('button-click')}
+      forhandsvisVedtaksbrev={action('button-click')}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
+      behandlingKlageVurdering={{
+        klageVurderingResultatNFP: {
+          klageVurdering: 'STADFESTE_YTELSESVEDTAK',
+        },
+      }}
+      alleKodeverk={alleKodeverk as any}
+      createLocationForSkjermlenke={() => location}
+    />
+  </div>
+);

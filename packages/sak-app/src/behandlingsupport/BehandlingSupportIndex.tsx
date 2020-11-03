@@ -2,7 +2,9 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import SupportMenySakIndex, { supportTabs } from '@fpsak-frontend/sak-support-meny';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import {
+  Fagsak, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst, Kodeverk,
+} from '@fpsak-frontend/types';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
@@ -10,20 +12,26 @@ import { getSupportPanelLocationCreator } from '../app/paths';
 import HistoryIndex from './history/HistoryIndex';
 import MessagesIndex from './messages/MessagesIndex';
 import DocumentIndex from './documents/DocumentIndex';
-import ApprovalIndex from './approval/ApprovalIndex';
+import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import styles from './behandlingSupportIndex.less';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 const renderSupportPanel = (
-  supportPanel, totrinnArsaker, totrinnArsakerReadOnly, fagsak, alleBehandlinger, behandlingId, behandlingVersjon,
+  supportPanel: string,
+  fagsak: Fagsak,
+  alleBehandlinger: BehandlingAppKontekst[],
+  behandlingId: number,
+  behandlingVersjon: number,
+  totrinnArsaker?: TotrinnskontrollSkjermlenkeContext[],
+  totrinnArsakerReadOnly?: TotrinnskontrollSkjermlenkeContext[],
 ) => {
   switch (supportPanel) {
     case supportTabs.APPROVAL:
     case supportTabs.RETURNED:
       return (
-        <ApprovalIndex
+        <TotrinnskontrollIndex
           fagsak={fagsak}
           alleBehandlinger={alleBehandlinger}
           behandlingId={behandlingId}
@@ -62,13 +70,6 @@ const renderSupportPanel = (
   }
 };
 
-type TotrinnskontrollAksjonspunkt = {
-  skjermlenkeType: string;
-  totrinnskontrollAksjonspunkter: {
-    aksjonspunktKode: string;
-  };
-}
-
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
@@ -77,11 +78,15 @@ interface OwnProps {
   behandlingRettigheter?: BehandlingRettigheter;
 }
 
-const getReturnedIsRelevant = (isOnHold, toTrinnsAksjonspunkter: TotrinnskontrollAksjonspunkt[] = [], status) => !isOnHold && toTrinnsAksjonspunkter
+const getReturnedIsRelevant = (
+  isOnHold: boolean,
+  toTrinnsAksjonspunkter: TotrinnskontrollSkjermlenkeContext[] = [],
+  status: Kodeverk,
+) => !isOnHold && toTrinnsAksjonspunkter
   .reduce((a, b) => a.concat(b.totrinnskontrollAksjonspunkter), [])
   .some((ap) => ap.totrinnskontrollGodkjent === false) && status && status.kode === BehandlingStatus.BEHANDLING_UTREDES;
 
-export const getAccessibleSupportPanels = (returnIsRelevant, approvalIsRelevant) => Object.values(supportTabs)
+export const getAccessibleSupportPanels = (returnIsRelevant: boolean, approvalIsRelevant: boolean) => Object.values(supportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {
       case supportTabs.APPROVAL:
@@ -94,7 +99,7 @@ export const getAccessibleSupportPanels = (returnIsRelevant, approvalIsRelevant)
   });
 
 export const getEnabledSupportPanels = (
-  accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter?: BehandlingRettigheter,
+  accessibleSupportPanels: string[], sendMessageIsRelevant: boolean, behandlingRettigheter?: BehandlingRettigheter,
 ) => accessibleSupportPanels
   .filter((supportPanel) => {
     switch (supportPanel) {
@@ -108,6 +113,13 @@ export const getEnabledSupportPanels = (
         return true;
     }
   });
+
+interface OwnProps {
+  fagsak: Fagsak;
+  alleBehandlinger: BehandlingAppKontekst[];
+  behandlingId?: number;
+  behandlingVersjon?: number;
+}
 
 /**
  * BehandlingSupportIndex
@@ -123,7 +135,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   behandlingRettigheter,
 }) => {
-  const { selected: selectedSupportPanel, location } = useTrackRouteParam<string>({
+  const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
     paramName: 'stotte',
     isQueryParam: true,
   });
@@ -131,60 +143,63 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
 
-  const isInnsynBehandling = behandling && behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
+  const erInnsynBehandling = behandling && behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
 
   const history = useHistory();
   const getSupportPanelLocation = getSupportPanelLocationCreator(location);
 
   const behandlingStatusKode = behandling ? behandling.status.kode : undefined;
-  const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(
+  const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
       updateTriggers: [behandlingId, behandlingStatusKode],
-      suspendRequest: !!isInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK),
+      suspendRequest: !!erInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK),
     },
   );
-  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollAksjonspunkt[]>(
+  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
       updateTriggers: [behandlingId, behandlingStatusKode],
-      suspendRequest: !!isInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.BEHANDLING_UTREDES),
+      suspendRequest: !!erInnsynBehandling || !(behandlingStatusKode === BehandlingStatus.BEHANDLING_UTREDES),
     },
   );
 
-  const returnedIsRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status),
+  const erReturnertFraBeslutterRelevant = useMemo(() => getReturnedIsRelevant(erPaVent, totrinnArsakerReadOnly, behandling?.status),
     [behandling?.id, behandling?.versjon, totrinnArsakerReadOnly]);
-  const approvalIsRelevant = useMemo(() => !erPaVent && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK, [behandling?.id, behandling?.versjon]);
-  const acccessibleSupportPanels = useMemo(() => getAccessibleSupportPanels(returnedIsRelevant, approvalIsRelevant),
-    [returnedIsRelevant, approvalIsRelevant]);
-  const sendMessageIsRelevant = useMemo(() => (fagsak && !erPaVent), [fagsak, erPaVent]);
-  const enabledSupportPanels = useMemo(() => getEnabledSupportPanels(acccessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter),
-    [acccessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter]);
-  const defaultSupportPanel = enabledSupportPanels.find(() => true) || supportTabs.HISTORY;
-  const activeSupportPanel = enabledSupportPanels.includes(selectedSupportPanel) ? selectedSupportPanel : defaultSupportPanel;
+  const erGodkjenningAvBeslutterRelevant = useMemo(() => !erPaVent && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK,
+    [behandling?.id, behandling?.versjon]);
+  const erSendMeldingRelevant = useMemo(() => (fagsak && !erPaVent), [fagsak, erPaVent]);
+
+  const tilgjengeligeSupportPaneler = useMemo(() => getAccessibleSupportPanels(erReturnertFraBeslutterRelevant, erGodkjenningAvBeslutterRelevant),
+    [erReturnertFraBeslutterRelevant, erGodkjenningAvBeslutterRelevant]);
+  const valgbareSupportPaneler = useMemo(() => getEnabledSupportPanels(tilgjengeligeSupportPaneler, erSendMeldingRelevant, behandlingRettigheter),
+    [tilgjengeligeSupportPaneler, erSendMeldingRelevant, behandlingRettigheter]);
+
+  const defaultSupportPanel = valgbareSupportPaneler.find(() => true) || supportTabs.HISTORY;
+  const aktivtSupportPanel = valgbareSupportPaneler.includes(valgtSupportPanel) ? valgtSupportPanel : defaultSupportPanel;
 
   const changeRouteCallback = useCallback((index) => {
-    const supportPanel = acccessibleSupportPanels[index];
+    const supportPanel = tilgjengeligeSupportPaneler[index];
     history.push(getSupportPanelLocation(supportPanel));
-  }, [location, acccessibleSupportPanels]);
+  }, [location, tilgjengeligeSupportPaneler]);
 
   return (
     <>
       <div className={styles.meny}>
         <SupportMenySakIndex
-          tilgjengeligeTabs={acccessibleSupportPanels}
-          valgbareTabs={enabledSupportPanels}
-          valgtIndex={acccessibleSupportPanels.findIndex((p) => p === activeSupportPanel)}
+          tilgjengeligeTabs={tilgjengeligeSupportPaneler}
+          valgbareTabs={valgbareSupportPaneler}
+          valgtIndex={tilgjengeligeSupportPaneler.findIndex((p) => p === aktivtSupportPanel)}
           onClick={changeRouteCallback}
         />
       </div>
-      <div className={(activeSupportPanel === supportTabs.HISTORY ? styles.containerHistorikk : styles.container)}>
+      <div className={(aktivtSupportPanel === supportTabs.HISTORY ? styles.containerHistorikk : styles.container)}>
         {renderSupportPanel(
-          activeSupportPanel,
-          totrinnArsaker,
-          totrinnArsakerReadOnly,
+          aktivtSupportPanel,
           fagsak,
           alleBehandlinger,
           behandlingId,
           behandlingVersjon,
+          totrinnArsaker,
+          totrinnArsakerReadOnly,
         )}
       </div>
     </>
