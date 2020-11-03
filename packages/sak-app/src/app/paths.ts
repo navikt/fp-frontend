@@ -16,7 +16,7 @@ export const pathToBehandlinger = (saksnummer) => buildPath(behandlingerPath, { 
 export const pathToBehandling = (saksnummer, behandlingId) => buildPath(behandlingPath, { saksnummer, behandlingId });
 export const pathToMissingPage = () => '/404';
 
-export const pathToAnnenPart = (saksnummer, behandlingId) => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/?fakta=default&punkt=uttak`;
+export const pathToAnnenPart = (saksnummer, behandlingId) => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/`;
 
 const emptyQueryString = (queryString) => queryString === '?' || !queryString;
 
