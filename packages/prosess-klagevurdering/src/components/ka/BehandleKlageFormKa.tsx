@@ -24,11 +24,11 @@ import TempsaveKlageButton from '../felles/TempsaveKlageButton';
 import styles from './behandleKlageFormKa.less';
 
 type FormValues = {
-  begrunnelse: string;
-  fritekstTilBrev: string;
-  klageVurdering: Kodeverk;
-  klageVurderingOmgjoer: Kodeverk;
-  klageMedholdArsak: Kodeverk;
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  klageVurdering?: Kodeverk;
+  klageVurderingOmgjoer?: Kodeverk;
+  klageMedholdArsak?: Kodeverk;
 };
 
 interface OwnProps {

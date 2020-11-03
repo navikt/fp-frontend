@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
+
 import { InnsynFormImpl } from './InnsynForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-innsyn';
 
@@ -20,6 +20,20 @@ describe('<InnsynForm>', () => {
       documents={[]}
       vedtaksdokumenter={[]}
       isApOpen
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingPaaVent={false}
+      innsynMottattDato=""
+      innsynDokumenter={[]}
+      innsynResultatType={{
+        kode: innsynResultatTyperKV.INNVILGET,
+        kodeverk: '',
+      }}
+      vedtaksdokumentasjon={[]}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
+      submitCallback={() => undefined}
     />);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');
@@ -38,6 +52,20 @@ describe('<InnsynForm>', () => {
       documents={[]}
       vedtaksdokumenter={[]}
       isApOpen
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingPaaVent={false}
+      innsynMottattDato=""
+      innsynDokumenter={[]}
+      innsynResultatType={{
+        kode: innsynResultatTyperKV.AVVIST,
+        kodeverk: '',
+      }}
+      vedtaksdokumentasjon={[]}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
+      submitCallback={() => undefined}
     />);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');

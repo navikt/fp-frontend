@@ -9,7 +9,10 @@ import TempsaveKlageButton from './TempsaveKlageButton';
 describe('<TempsaveKlageButton>', () => {
   it('Skal rendre komponent korrekt', () => {
     const wrapper = shallow(<TempsaveKlageButton
-      klageVurdering={klageVurderingType.STADFESTE_YTELSESVEDTAK}
+      klageVurdering={{
+        kode: klageVurderingType.STADFESTE_YTELSESVEDTAK,
+        kodeverk: '',
+      }}
       fritekstTilBrev=""
       begrunnelse=""
       saveKlage={sinon.spy()}
