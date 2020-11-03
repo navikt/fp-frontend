@@ -22,7 +22,7 @@ const parseCurrencyInput = (input: any) => {
 
 export interface InitialValuesGodTroForm {
   erBelopetIBehold: boolean;
-  tilbakekrevdBelop: number;
+  tilbakekrevdBelop?: number;
 }
 
 interface OwnProps {

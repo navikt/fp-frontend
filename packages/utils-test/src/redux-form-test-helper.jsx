@@ -119,6 +119,17 @@ export class MockFieldsWithContent {
     this.array = [array].map(formatName); // NOSONAR;
     this.push = () => array.push(formatName(array.length));
 
+    this.forEach = sinon.spy();
+    this.getAll = sinon.spy();
+    this.removeAll = sinon.spy();
+    this.insert = sinon.spy();
+    this.name = '';
+    this.shift = sinon.spy();
+    this.splice = sinon.spy();
+    this.swap = sinon.spy();
+    this.move = sinon.spy();
+    this.unshift = sinon.spy();
+
     this.pop = array.pop.bind(array);
     this.map = array.map.bind(array);
     this.get = (index) => array[index];

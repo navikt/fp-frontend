@@ -13,7 +13,7 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-klage
 describe('<BehandleKlageFormNfpImpl>', () => {
   const sprakkode = {
     kode: 'NO',
-    navn: 'Norsk',
+    kodeverk: '',
   };
   const formValues1 = {
     fritekstTilBrev: '123',

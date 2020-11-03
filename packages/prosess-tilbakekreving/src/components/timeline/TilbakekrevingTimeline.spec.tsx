@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import moment from 'moment';
 import { expect } from 'chai';
 
 import Timeline from 'react-visjs-timeline';
@@ -48,8 +49,9 @@ describe('<TilbakekrevingTimeline>', () => {
     expect(wrapper.find(TimeLineControl)).has.length(1);
 
     const tidslinje = wrapper.find(Timeline);
-    expect(tidslinje.prop('options').min.format(ISO_DATE_FORMAT)).is.eql('2019-09-12');
-    expect(tidslinje.prop('options').max.format(ISO_DATE_FORMAT)).is.eql('2023-10-10');
+    const options = tidslinje.prop('options') as { min: moment.Moment; max: moment.Moment };
+    expect(options.min.format(ISO_DATE_FORMAT)).is.eql('2019-09-12');
+    expect(options.max.format(ISO_DATE_FORMAT)).is.eql('2023-10-10');
 
     expect(tidslinje.prop('groups')).is.eql([{ id: 1, content: '' }]);
   });

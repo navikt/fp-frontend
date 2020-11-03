@@ -705,7 +705,7 @@ const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKo
     return getKodeverknavn(item.aktiviteter[0].stønadskontoType);
   }
 
-  if (item.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+  if (item.oppholdÅrsak?.kode !== oppholdArsakType.UDEFINERT) {
     const stonadskonto = oppholdArsakMapper[item.oppholdÅrsak.kode];
     return uttakPeriodeNavn[stonadskonto];
   }
@@ -816,7 +816,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     familiehendelseDate: getFodselTerminDato(props),
     harSoktOmFlerbarnsdager: hovedsokerPerioder.filter((p) => p.flerbarnsdager === true).length > 0,
     hovedsokerKjonnKode,
-    isRevurdering: props.behandlingType === behandlingType.REVURDERING,
+    isRevurdering: props.behandlingType.kode === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
     saksnummer: fagsak.saksnummer,
