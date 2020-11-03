@@ -178,7 +178,10 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
     aleneomsorg,
     omsorg,
     ikkeOmsorgPerioder: ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0
-      ? ytelsefordeling.ikkeOmsorgPerioder : [],
+      ? ytelsefordeling.ikkeOmsorgPerioder : [{
+        periodeFom: undefined,
+        periodeTom: undefined,
+      }],
   };
 };
 
