@@ -49,6 +49,7 @@ const AktsomhetGradFormPanel: FunctionComponent<OwnProps> = ({
         feilutbetalingBelop={feilutbetalingBelop}
         erTotalBelopUnder4Rettsgebyr={erTotalBelopUnder4Rettsgebyr}
         andelSomTilbakekreves={andelSomTilbakekreves}
+        erValgtResultatTypeForstoBurdeForstaatt={erValgtResultatTypeForstoBurdeForstaatt}
       />
     )}
   </>
