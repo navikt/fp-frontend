@@ -67,41 +67,41 @@ const gyldigeOverføringÅrsaker = [
   overforingArsak.ALENEOMSORG,
 ];
 
-const mapPeriodeTyper = (typer: any) => typer.filter(({
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer.filter(({
   kode,
-}: any) => gyldigeUttakperioder.includes(kode))
+}) => gyldigeUttakperioder.includes(kode))
   .map(({
     kode,
     navn,
-  }: any) => (
+  }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
   ));
 
-const mapOverføringÅrsaker = (typer: any) => typer
+const mapOverføringÅrsaker = (typer: KodeverkMedNavn[]) => typer
   .filter(({
     kode,
-  }: any) => gyldigeOverføringÅrsaker.includes(kode))
+  }) => gyldigeOverføringÅrsaker.includes(kode))
   .map(({
     kode,
     navn,
-  }: any) => (
+  }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
   ));
 
-const mapUtsettelseÅrsaker = (typer: any) => typer.map(({
+const mapUtsettelseÅrsaker = (typer: KodeverkMedNavn[]) => typer.map(({
   kode,
   navn,
-}: any) => (
+}) => (
   <option value={kode} key={kode}>
     {navn}
   </option>
 ));
 
-const mapArbeidsforhold = (andeler: any, getKodeverknavn: any) => andeler.map((andel: any) => {
+const mapArbeidsforhold = (andeler: FaktaArbeidsforhold[], getKodeverknavn: (kodeverk: Kodeverk) => string) => andeler.map((andel: any) => {
   const { arbeidType, arbeidsgiver } = andel;
 
   let periodeArbeidsforhold = '';
@@ -126,7 +126,7 @@ const mapArbeidsforhold = (andeler: any, getKodeverknavn: any) => andeler.map((a
 const periodeTypeTrengerArsak = (sokerKjonn: string, periodeType: string) => (sokerKjonn === navBrukerKjonn.MANN && periodeType === uttakPeriodeType.MODREKVOTE)
   || (sokerKjonn === navBrukerKjonn.KVINNE && periodeType === uttakPeriodeType.FEDREKVOTE);
 
-interface NyPeriode {
+export type NyPeriode = {
   fom: string;
   tom: string;
   periodeType: string;

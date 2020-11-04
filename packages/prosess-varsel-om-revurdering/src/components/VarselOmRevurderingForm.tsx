@@ -58,7 +58,6 @@ interface MappedOwnProps {
   avklartBarn?: AvklartBarn[];
   termindato?: string;
   vedtaksDatoSomSvangerskapsuke?: string;
-  behandlingTypeKode:string;
   languageCode: string;
   ventearsaker: KodeverkMedNavn[];
   erAutomatiskRevurdering?: boolean;
@@ -160,7 +159,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
       begrunnelse,
       ventearsaker,
       avklartBarn,
-      behandlingTypeKode,
+      behandlingType,
       soknad,
       termindato,
       soknadOriginalBehandling,
@@ -183,7 +182,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
             { erAutomatiskRevurdering && (
               <div>
                 <FodselSammenligningIndex
-                  behandlingsTypeKode={behandlingTypeKode}
+                  behandlingsTypeKode={behandlingType.kode}
                   avklartBarn={avklartBarn}
                   termindato={termindato}
                   vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
@@ -248,7 +247,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
           ventearsaker={ventearsaker}
           visBrevErBestilt
           hasManualPaVent
-          erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
+          erTilbakekreving={behandlingType.kode === BehandlingType.TILBAKEKREVING || behandlingType.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       </form>
     );
@@ -271,7 +270,7 @@ const EMPTY_ARRAY = [];
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const {
-    behandlingId, behandlingVersjon, behandlingType, behandlingArsaker, aksjonspunkter, sprakkode, familiehendelse,
+    behandlingId, behandlingVersjon, behandlingArsaker, aksjonspunkter, sprakkode, familiehendelse,
   } = initialOwnProps;
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
   const aksjonspunkt = aksjonspunkter[0];
@@ -285,7 +284,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     avklartBarn: nullSafe(familiehendelse.register).avklartBarn,
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
-    behandlingTypeKode: behandlingType.kode,
     onSubmit: lagSubmitFn(ownProps),
     languageCode,
     ventearsaker,

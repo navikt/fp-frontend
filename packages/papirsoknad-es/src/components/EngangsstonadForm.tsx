@@ -35,7 +35,7 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  valuesForRegisteredFieldsOnly: string[];
+  valuesForRegisteredFieldsOnly?: string[];
 }
 
 /**

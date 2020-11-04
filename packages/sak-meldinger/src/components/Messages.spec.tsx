@@ -25,7 +25,7 @@ describe('<Messages>', () => {
 
   const sprakkode = {
     kode: 'en',
-    navn: 'Engelsk',
+    kodeverk: '',
   };
 
   const templates = [
@@ -33,11 +33,6 @@ describe('<Messages>', () => {
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
   ];
-
-  const model = {
-    mottaker: 'Søker',
-    brevmalkode: 'Mal1',
-  };
 
   const causes = [
     { kode: 'kode', navn: 'Årsak 1', kodeverk: 'kode' },
@@ -50,7 +45,6 @@ describe('<Messages>', () => {
       templates={templates}
       sprakKode={sprakkode}
       causes={causes}
-      model={model}
     />);
 
     const form = wrapper.find('form');
@@ -73,7 +67,6 @@ describe('<Messages>', () => {
       recipients={recipients}
       templates={templates}
       sprakKode={sprakkode}
-      model={model}
       causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
@@ -96,7 +89,6 @@ describe('<Messages>', () => {
       templates={templates}
       sprakKode={sprakkode}
       brevmalkode="REVURD"
-      model={model}
       causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"

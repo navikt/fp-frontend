@@ -41,28 +41,39 @@ const finnTextTilRadio2 = (erHeimevern: any, erNavTiltak: any) => {
   return erNavTiltak ? 'SykdomOgSkadePeriode.TiltakIRegiNavErIkkeDok' : 'UttakInfoPanel.SykdomSkadenIkkeDokumentert';
 };
 
-interface OwnProps {
-  resultat?: string;
-  updatePeriode: (...args: any[]) => any;
-  cancelEditPeriode: (...args: any[]) => any;
+interface PureOwnProps {
   id: string;
-  updated: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  fieldId: string;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  vilkarForSykdomExists: boolean;
+  overforingArsak?: Kodeverk;
+  updatePeriode: (...args: any[]) => any;
+  resultat?: string;
+  cancelEditPeriode: (...args: any[]) => any;
   bekreftet: boolean;
   readOnly: boolean;
   dokumentertePerioder?: { fom: string; tom: string }[];
   fraDato: string;
   tilDato: string;
-  utsettelseArsak?: Kodeverk;
-  overforingArsak?: Kodeverk;
   formSyncErrors?: { dokumentertePerioder: any[] };
   behandlingStatusKode?: string;
   erHeimevern?: boolean;
   erNavTiltak?: boolean;
 }
 
+interface MappedOwnProps {
+  formSyncErrors?: { dokumentertePerioder: any[] };
+  dokumentertePerioder?: { fom: string; tom: string }[];
+  resultat?: string;
+  bekreftet: boolean;
+  updated: boolean;
+}
+
 // TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
 
-export const SykdomOgSkadePeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const SykdomOgSkadePeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   resultat,
   fraDato,
   tilDato,
@@ -214,18 +225,6 @@ const validateSykdomOgSkadeForm = (
   }
   return errors;
 };
-
-interface PureOwnProps {
-  id: string;
-  behandlingId: number;
-  behandlingVersjon: number;
-  fieldId: string;
-  utsettelseArsak: Kodeverk;
-  gjeldendeFamiliehendelse: FamilieHendelse;
-  vilkarForSykdomExists: boolean;
-  overforingArsak: Kodeverk;
-  updatePeriode: (...args: any[]) => any;
-}
 
 const buildInitialValues = createSelector([
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(

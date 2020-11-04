@@ -68,7 +68,7 @@ export const finnValgtPanel = (
 };
 
 const finnProsessmenyType = (
-  status: vilkarUtfallType.OPPFYLT | vilkarUtfallType.IKKE_OPPFYLT | vilkarUtfallType.IKKE_VURDERT,
+  status: string,
   harApentAksjonspunkt: boolean,
 ): StepType => {
   if (harApentAksjonspunkt) {

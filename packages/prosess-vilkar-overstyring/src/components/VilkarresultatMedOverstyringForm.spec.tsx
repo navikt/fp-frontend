@@ -4,6 +4,7 @@ import { EtikettLiten } from 'nav-frontend-typografi';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import { VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
@@ -13,14 +14,11 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
   it('skal rendre form med knapp når vilkåret er overstyrt', () => {
     const wrapper = shallow(<VilkarresultatMedOverstyringForm
       {...reduxFormPropsMock}
-      behandlingspunktTitleCode="Behandlingspunkt.Fodselsvilkaret"
       erVilkarOk
-      isReadOnly
       overstyringApKode="5011"
-      avslagsarsaker={[{ kode: 'test1', navn: 'test' }, { kode: 'test2', navn: 'test' }]}
+      avslagsarsaker={[{ kode: 'test1', navn: 'test', kodeverk: '' }, { kode: 'test2', navn: 'test', kodeverk: '' }]}
       lovReferanse="§23"
       hasAksjonspunkt
-      behandlingspunkt="foedsel"
       overrideReadOnly={false}
       kanOverstyreAccess={{
         isEnabled: true,
@@ -30,6 +28,17 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
       erMedlemskapsPanel={false}
       panelTittelKode="Fødsel"
       erOverstyrt
+      behandlingId={1}
+      behandlingVersjon={2}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      medlemskapFom="10.10.2010"
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      status=""
+      isSolvable
     />);
 
     const melding = wrapper.find(FormattedMessage);

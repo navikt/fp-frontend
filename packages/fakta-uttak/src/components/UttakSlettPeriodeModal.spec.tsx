@@ -70,7 +70,7 @@ describe('<UttakSlettPeriodeModal>', () => {
       intl={intlMock}
       closeEvent={closeEvent}
       cancelEvent={cancelEvent}
-      periode={periode}
+      periode={periode as CustomUttakKontrollerFaktaPerioder}
       getKodeverknavn={getKodeverknavn}
     />);
     const modal = wrapper.find(Modal);

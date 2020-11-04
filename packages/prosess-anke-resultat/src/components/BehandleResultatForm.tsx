@@ -26,7 +26,7 @@ import PreviewAnkeLink from './PreviewAnkeLink';
 const isVedtakUtenToTrinn = (apCodes: string) => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
 const isMedUnderskriver = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
 const isFatterVedtak = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
-const skalViseForhaandlenke = (avr: ankeVurdering) => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr.kode === ankeVurdering.ANKE_OMGJOER;
+const skalViseForhaandlenke = (avr: Kodeverk) => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr.kode === ankeVurdering.ANKE_OMGJOER;
 
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];

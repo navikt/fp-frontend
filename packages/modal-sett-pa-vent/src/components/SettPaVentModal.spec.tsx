@@ -27,6 +27,7 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       showModal
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -41,6 +42,7 @@ describe('<SettPaVentModal>', () => {
   it('skal ikke disable knapp for lagring når frist er en gyldig fremtidig dato', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="2099-10-10"
       originalFrist="frist"
@@ -49,6 +51,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -59,6 +62,7 @@ describe('<SettPaVentModal>', () => {
   it('skal disable knapp for lagring når frist er en ugyldig dato', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="20-10-10"
       originalFrist="frist"
@@ -67,6 +71,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -77,6 +82,7 @@ describe('<SettPaVentModal>', () => {
   it('skal disable knapp for lagring når frist er en historisk dato', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="2015-10-10"
       originalFrist="frist"
@@ -85,6 +91,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -95,6 +102,7 @@ describe('<SettPaVentModal>', () => {
   it('skal være obligatorisk å velge årsak', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="2099-10-10"
       originalFrist="frist"
@@ -103,6 +111,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
     const select = wrapper.find(SelectField);
@@ -112,12 +121,14 @@ describe('<SettPaVentModal>', () => {
   it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       ventearsak="ventearsak"
       originalVentearsak="ventearsak"
       hasManualPaVent={false}
       ventearsaker={[]}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -127,11 +138,13 @@ describe('<SettPaVentModal>', () => {
   it('skal vise frist-input når behandling automatisk er satt på vent med frist', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="2015-10-10"
       ventearsaker={[]}
       hasManualPaVent={false}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -141,11 +154,13 @@ describe('<SettPaVentModal>', () => {
   it('skal vise årsak-input som readonly når behandling automatisk er satt på vent', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="2015-10-10"
       ventearsaker={[]}
       hasManualPaVent={false}
       erTilbakekreving={false}
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -155,6 +170,7 @@ describe('<SettPaVentModal>', () => {
   it('skal vise fristen tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', () => {
     const wrapper = shallowWithIntl(<SettPaVentModal
       intl={intlMock}
+      showModal
       cancelEvent={sinon.spy()}
       frist="2015-10-10"
       ventearsaker={[{
@@ -165,6 +181,7 @@ describe('<SettPaVentModal>', () => {
       ventearsak="VENT_PÅ_TILBAKEKREVINGSGRUNNLAG"
       hasManualPaVent={false}
       erTilbakekreving
+      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 

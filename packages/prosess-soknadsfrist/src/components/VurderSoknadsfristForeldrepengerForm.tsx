@@ -28,7 +28,7 @@ import { Aksjonspunkt, UttakPeriodeGrense } from '@fpsak-frontend/types';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
-const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: string) => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean) => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
 
 interface PureOwnProps {
   behandlingId: number;
@@ -43,7 +43,7 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  gyldigSenFremsetting?: string;
+  gyldigSenFremsetting?: boolean;
   antallDagerSoknadLevertForSent?: number;
   hasAksjonspunkt: boolean;
   soknadsperiodeStart?: string;

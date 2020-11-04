@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { FieldArrayMetaProps } from 'redux-form';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -13,9 +14,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
   it('skal rendre korrekt når antall virksomheter er 0', () => {
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 0)}
-      dispatchArrayPush={sinon.spy}
-      dispatchArraySplice={sinon.spy}
-      meta={{}}
+      dispatchArrayPush={sinon.spy()}
+      dispatchArraySplice={sinon.spy()}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       form="form"
@@ -32,9 +33,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
   it('skal rendre korrekt når antall virksomheter er større enn 0', () => {
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
-      dispatchArrayPush={sinon.spy}
-      dispatchArraySplice={sinon.spy}
-      meta={{}}
+      dispatchArrayPush={sinon.spy()}
+      dispatchArraySplice={sinon.spy()}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       form="form"
@@ -49,9 +50,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
     const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
-      dispatchArrayPush={sinon.spy}
-      dispatchArraySplice={sinon.spy}
-      meta={{}}
+      dispatchArrayPush={sinon.spy()}
+      dispatchArraySplice={sinon.spy()}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       virksomheter={virksomheter}
@@ -59,7 +60,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
       alleKodeverk={{}}
     />);
 
+    // @ts-ignore
     wrapper.instance().showRegistrerVirksomhetModal(0);
+    // @ts-ignore
     expect(wrapper.state().editVirksomhet).to.equal(virksomheter[0]);
   });
 
@@ -67,9 +70,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
     const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
-      dispatchArrayPush={sinon.spy}
-      dispatchArraySplice={sinon.spy}
-      meta={{}}
+      dispatchArrayPush={sinon.spy()}
+      dispatchArraySplice={sinon.spy()}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       virksomheter={virksomheter}
@@ -77,11 +80,16 @@ describe('<RegistrerVirksomhetPanel>', () => {
       alleKodeverk={{}}
     />);
 
+    // @ts-ignore
     wrapper.instance().showRegistrerVirksomhetModal(0);
+    // @ts-ignore
     expect(wrapper.state().editVirksomhet).to.equal(virksomheter[0]);
 
+    // @ts-ignore
     wrapper.instance().hideRegistrerVirksomhetModal(0);
+    // @ts-ignore
     expect(wrapper.state().editVirksomhet).to.equal(null);
+    // @ts-ignore
     expect(wrapper.state().editIndex).to.equal(-1);
   });
 
@@ -89,9 +97,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
     const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
-      dispatchArrayPush={sinon.spy}
-      dispatchArraySplice={sinon.spy}
-      meta={{}}
+      dispatchArrayPush={sinon.spy()}
+      dispatchArraySplice={sinon.spy()}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       virksomheter={virksomheter}
@@ -99,11 +107,16 @@ describe('<RegistrerVirksomhetPanel>', () => {
       alleKodeverk={{}}
     />);
 
+    // @ts-ignore
     wrapper.instance().showRegistrerVirksomhetModal(0);
+    // @ts-ignore
     expect(wrapper.state().editVirksomhet).to.equal(virksomheter[0]);
 
+    // @ts-ignore
     wrapper.instance().hideRegistrerVirksomhetModal(0);
+    // @ts-ignore
     expect(wrapper.state().editVirksomhet).to.equal(null);
+    // @ts-ignore
     expect(wrapper.state().editIndex).to.equal(-1);
   });
 
@@ -113,8 +126,8 @@ describe('<RegistrerVirksomhetPanel>', () => {
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
       dispatchArrayPush={dispatchPush}
-      dispatchArraySplice={sinon.spy}
-      meta={{}}
+      dispatchArraySplice={sinon.spy()}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       virksomheter={virksomheter}
@@ -122,6 +135,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       alleKodeverk={{}}
     />);
 
+    // @ts-ignore
     wrapper.instance().addVirksomhet({}, sinon.spy(), {
       valuesForRegisteredFieldsOnly: {
         stillingsprosent: 50,
@@ -138,7 +152,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       fields={new MockFields('virksomhet', 2)}
       dispatchArrayPush={dispatchPush}
       dispatchArraySplice={dispatchSplice}
-      meta={{}}
+      meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       formatMessage={sinon.spy()}
       virksomheter={virksomheter}
@@ -146,7 +160,9 @@ describe('<RegistrerVirksomhetPanel>', () => {
       alleKodeverk={{}}
     />);
 
+    // @ts-ignore
     wrapper.instance().showRegistrerVirksomhetModal(1);
+    // @ts-ignore
     wrapper.instance().addVirksomhet({}, sinon.spy(), {
       valuesForRegisteredFieldsOnly: {
         stillingsprosent: 50,

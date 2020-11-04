@@ -21,11 +21,15 @@ describe('<StatusForBorgerFaktaPanel>', () => {
 
     const radioFieldsGroup1 = groups.first().find('RadioOption');
     expect(radioFieldsGroup1).to.have.length(2);
+    // @ts-ignore
     expect(radioFieldsGroup1.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenEEA');
+    // @ts-ignore
     expect(radioFieldsGroup1.last().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenOutsideEEA');
     const radioFieldsGroup2 = groups.last().find('RadioOption');
     expect(radioFieldsGroup2).to.have.length(2);
+    // @ts-ignore
     expect(radioFieldsGroup2.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.HarOppholdsrett');
+    // @ts-ignore
     expect(radioFieldsGroup2.last().prop('label').props.id).to.eql('StatusForBorgerFaktaPanel.HarIkkeOppholdsrett');
   });
 
@@ -42,10 +46,13 @@ describe('<StatusForBorgerFaktaPanel>', () => {
     expect(groups).to.have.length(2);
     const radioFieldsGroup1 = groups.first().find('RadioOption');
     expect(radioFieldsGroup1).to.have.length(2);
+    // @ts-ignore
     expect(radioFieldsGroup1.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenEEA');
+    // @ts-ignore
     expect(radioFieldsGroup1.last().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenOutsideEEA');
     const radioFieldsGroup2 = groups.last().find('RadioOption');
     expect(radioFieldsGroup2).to.have.length(2);
+    // @ts-ignore
     expect(radioFieldsGroup2.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.HarLovligOpphold');
   });
 

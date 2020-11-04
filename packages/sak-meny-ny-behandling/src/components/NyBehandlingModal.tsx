@@ -77,7 +77,7 @@ interface MappedOwnProps {
   enabledBehandlingstyper: KodeverkMedNavn[];
   uuid?: string;
   behandlingArsakTyper: KodeverkMedNavn[];
-  valgtBehandlingTypeKode: KodeverkMedNavn;
+  valgtBehandlingTypeKode: string;
   erTilbakekreving: boolean;
 }
 

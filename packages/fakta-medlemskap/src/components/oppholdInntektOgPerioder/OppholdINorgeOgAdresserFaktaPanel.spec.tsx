@@ -126,6 +126,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
 
     const radioFields = wrapper.find('RadioOption');
     expect(radioFields).to.have.length(2);
+    // @ts-ignore
     expect(radioFields.first().prop('label').id).to.eql('OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway');
   });
 

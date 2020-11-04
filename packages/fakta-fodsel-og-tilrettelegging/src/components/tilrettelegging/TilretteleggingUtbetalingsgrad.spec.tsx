@@ -25,7 +25,7 @@ describe('<TilretteleggingUtbetalingsgrad>', () => {
     expect(wrapper.find(DecimalField).prop('readOnly')).is.true;
 
     const image = wrapper.find(Image);
-    image.prop('onClick')();
+    image.prop('onClick')({} as React.MouseEvent);
 
     expect(wrapper.find(DecimalField).prop('readOnly')).is.false;
   });

@@ -45,6 +45,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       aksjonspunkter={[]}
     />);
     expect(wrapper.find(Undertittel)).to.have.length(1);
+    // @ts-ignore
     expect(wrapper.find(Undertittel).props().children.props.id).to.equal('TilkjentYtelse.Title');
     expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(0);
   });

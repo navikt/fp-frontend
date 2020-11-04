@@ -34,14 +34,14 @@ const VisittkortLabels: FunctionComponent<OwnProps & WrappedComponentProps> = ({
           </EtikettInfo>
         </Tooltip>
       )}
-      {personopplysninger && personopplysninger.diskresjonskode === diskresjonskodeType.KODE6 && !personopplysninger.dodsdato && (
+      {personopplysninger && personopplysninger.diskresjonskode.kode === diskresjonskodeType.KODE6 && !personopplysninger.dodsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon6Tittel' })} alignBottom>
           <EtikettAdvarsel className={styles.etikett}>
             <FormattedMessage id="VisittkortLabels.Diskresjon6" />
           </EtikettAdvarsel>
         </Tooltip>
       )}
-      {personopplysninger && personopplysninger.diskresjonskode === diskresjonskodeType.KODE7 && !personopplysninger.dodsdato && (
+      {personopplysninger && personopplysninger.diskresjonskode.kode === diskresjonskodeType.KODE7 && !personopplysninger.dodsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon7Tittel' })} alignBottom>
           <EtikettFokus className={styles.etikett}>
             <FormattedMessage id="VisittkortLabels.Diskresjon7" />

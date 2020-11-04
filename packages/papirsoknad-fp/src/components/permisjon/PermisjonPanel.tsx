@@ -44,7 +44,7 @@ type TidsromPermisjon = {
 } & FormValuesOverforing & FormValuesPermisjon & FormValuesUtsettelse & FormValuesGradering & FormValuesOpphold;
 
 export type FormValues = {
-  [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: TidsromPermisjon;
+  [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
 };
 
 interface StaticFunctions {

@@ -22,7 +22,7 @@ describe('<VedtakKlageForm>', () => {
       id: 1,
       type: {
         kode: behandlingResultatType.KLAGE_AVVIST,
-        navn: 'avvist',
+        kodeverk: '',
       },
     };
     const wrapper = shallowWithIntl(<VedtakKlageForm
@@ -32,18 +32,12 @@ describe('<VedtakKlageForm>', () => {
       isAvvist
       isOmgjort={false}
       behandlingsResultatTekst={KLAGE_OMGJORT_TEKST}
-      behandlingsresultatTypeKode=""
       isOpphevOgHjemsend={false}
       avvistArsaker={avvistArsaker}
-      avvisningsAarsakerForFeature={[null]}
       behandlingPaaVent={false}
-      behandlingStatusKode="UTRED"
       behandlingsresultat={br}
       previewVedtakCallback={forhandsvisVedtaksbrevFunc}
-      finishKlageCallback={forhandsvisVedtaksbrevFunc}
-      aksjonspunktKoder={[]}
-      klageVurderingResultat={{}}
-      isBehandlingReadOnly
+      klageVurderingResultat={{} as KlageVurdering['klageVurderingResultatNK']}
       alleKodeverk={{
         KlageAvvistÅrsak: [{
           kode: 'KLAGET_FOR_SENT', navn: 'Bruker har klaget for sent', kodeverk: 'KLAGE_AVVIST_AARSAK',
@@ -51,6 +45,11 @@ describe('<VedtakKlageForm>', () => {
           kode: 'KLAGER_IKKE_PART', navn: 'Klager er ikke part', kodeverk: 'KLAGE_AVVIST_AARSAK',
         }],
       }}
+      behandlingId={1}
+      behandlingVersjon={2}
+      klageVurdering={{} as KlageVurdering}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
     />);
     expect(wrapper.find(Undertekst).at(1).childAt(0).text()).equal('Årsak til avvisning');
     expect(wrapper.find(Normaltekst).at(1).childAt(0).text()).equal('Bruker har klaget for sent');

@@ -3,14 +3,15 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Column, Row } from 'nav-frontend-grid';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-
-import { Undertittel } from 'nav-frontend-typografi';
+import { Fagsak, SimuleringResultat } from '@fpsak-frontend/types';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { Column, Row } from 'nav-frontend-grid';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 import { AvregningPanelImpl, transformValues } from './AvregningPanel';
@@ -26,7 +27,7 @@ const simuleringResultat = {
     ingenPerioderMedAvvik: false,
   },
   simuleringResultatUtenInntrekk: null,
-};
+} as SimuleringResultat;
 
 const mockProps = {
   ...reduxFormPropsMock,
@@ -39,6 +40,19 @@ const mockProps = {
   grunnerTilReduksjon: false,
   previewCallback: sinon.spy(),
   hasOpenTilbakekrevingsbehandling: false,
+  fagsak: {} as Fagsak,
+  behandlingId: 1,
+  behandlingVersjon: 2,
+  sprakkode: {
+    kode: 'NB',
+    kodeverk: '',
+  },
+  saksnummer: 123,
+  aksjonspunkter: [],
+  submitCallback: sinon.spy(),
+  readOnlySubmitButton: false,
+  isForeldrepenger: true,
+  behandlingFormPrefix: '',
 };
 
 describe('<AvregningPanelImpl>', () => {

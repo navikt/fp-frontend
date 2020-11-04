@@ -26,6 +26,7 @@ describe('<DelOppPeriodeModal>', () => {
       showModal
       intl={intlMock}
       cancelEvent={cancelEvent}
+      finnesBelopMed0Verdi={false}
     />);
 
     const modal = wrapper.find(Modal);
@@ -48,6 +49,7 @@ describe('<DelOppPeriodeModal>', () => {
       showModal
       intl={intlMock}
       cancelEvent={cancelEvent}
+      finnesBelopMed0Verdi={false}
     />);
     wrapper.find(Knapp).simulate('click');
     expect(cancelEvent).to.have.property('callCount', 1);

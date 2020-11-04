@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,10 +23,20 @@ describe('<InnsynVedtakForm>', () => {
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
       saksNr={123}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(ProsessStegSubmitButton)).to.have.length(1);
   });
@@ -38,10 +49,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(ProsessStegSubmitButton)).to.have.length(0);
   });
@@ -56,9 +78,20 @@ describe('<InnsynVedtakForm>', () => {
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
       saksNr={123}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('InnsynVedtakForm.ForhåndsvisBrev');
   });
@@ -71,10 +104,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('InnsynVedtakForm.VisVedtaksbrev');
   });
@@ -89,10 +133,20 @@ describe('<InnsynVedtakForm>', () => {
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.AVVIST}
       saksNr={123}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(TextAreaField)).to.have.length(1);
   });
@@ -106,10 +160,20 @@ describe('<InnsynVedtakForm>', () => {
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.DELVISTINNVILGET}
       saksNr={123}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(TextAreaField)).to.have.length(1);
   });
@@ -122,11 +186,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(TextAreaField)).to.have.length(0);
   });
@@ -140,11 +214,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(1);
   });
@@ -157,11 +241,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.DELVISTINNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(1);
   });
@@ -174,11 +268,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.AVVIST}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(0);
   });
@@ -192,11 +296,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Innvilget');
   });
@@ -209,11 +323,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.DELVISTINNVILGET}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Delvis');
   });
@@ -226,11 +350,21 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.AVVIST}
-      sprakkode={{}}
+      sprakkode={{
+        kode: 'NN',
+        kodeverk: '',
+      }}
       saksNr={123}
       documents={[]}
-      innsynResultatTyper={[{ kode: 'kodeTest', navn: 'navnTest' }]}
-
+      behandlingId={1}
+      behandlingVersjon={2}
+      innsynDokumenter={[]}
+      innsynMottattDato="10.10.2020"
+      innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
+      alleDokumenter={[]}
+      aksjonspunkter={[]}
+      submitCallback={sinon.spy()}
+      previewCallback={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Avslatt');
   });

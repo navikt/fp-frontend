@@ -21,10 +21,15 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       aksjonspunkter={[]}
       hasOpenAksjonspunkter={false}
       submittable
-      isRevurdering={false}
       perioder={perioder}
       readOnly
       alleMerknaderFraBeslutter={{}}
+      behandlingId={2}
+      behandlingVersjon={1}
+      alleKodeverk={{}}
+      behandlingFormPrefix=""
+      reduxFormReset={() => undefined}
+      reduxFormChange={() => undefined}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -51,14 +56,19 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT}`]: 'test' }}
       intl={intlMock}
       aksjonspunkter={[bosattAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      isRevurdering={false}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={2}
+      behandlingVersjon={1}
+      alleKodeverk={{}}
+      behandlingFormPrefix=""
+      reduxFormReset={() => undefined}
+      reduxFormChange={() => undefined}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -88,14 +98,19 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE}`]: 'test' }}
       intl={intlMock}
       aksjonspunkter={[periodeAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      isRevurdering={false}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={2}
+      behandlingVersjon={1}
+      alleKodeverk={{}}
+      behandlingFormPrefix=""
+      reduxFormReset={() => undefined}
+      reduxFormChange={() => undefined}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.GyldigMedlemFolketrygden');
@@ -122,14 +137,19 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OPPHOLDSRETT}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OPPHOLDSRETT}`]: 'test' }}
       intl={intlMock}
       aksjonspunkter={[oppholdsrettAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      isRevurdering={false}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={2}
+      behandlingVersjon={1}
+      alleKodeverk={{}}
+      behandlingFormPrefix=""
+      reduxFormReset={() => undefined}
+      reduxFormChange={() => undefined}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.EOSBorgerMedOppholdsrett');
@@ -156,14 +176,19 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD}`]: 'test' }}
       intl={intlMock}
       aksjonspunkter={[lovligOppholdAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      isRevurdering={false}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={2}
+      behandlingVersjon={1}
+      alleKodeverk={{}}
+      behandlingFormPrefix=""
+      reduxFormReset={() => undefined}
+      reduxFormChange={() => undefined}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold');
@@ -190,14 +215,19 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP}`]: 'test' }}
       intl={intlMock}
       aksjonspunkter={[fortsattMedlemskapAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      isRevurdering={false}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={2}
+      behandlingVersjon={1}
+      alleKodeverk={{}}
+      behandlingFormPrefix=""
+      reduxFormReset={() => undefined}
+      reduxFormChange={() => undefined}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.HarFortsattMedlemskap');

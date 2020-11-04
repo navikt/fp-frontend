@@ -3,6 +3,7 @@ import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import { RegistrereVergeInfoPanelImpl } from './RegistrereVergeInfoPanel';
 import RegistrereVergeFaktaForm from './RegistrereVergeFaktaForm';
@@ -16,14 +17,13 @@ describe('<RegistrereVergeInfoPanel>', () => {
       hasOpenAksjonspunkter
       readOnly={false}
       aksjonspunkt={{
-        kode: 5030,
         id: 100001,
-        definisjon: { kode: '5030', navn: 'VERGE' },
-        status: { kode: 'OPPR', navn: 'Opprettet', kodeverk: 'AKSJONSPUNKT_STATUS' },
+        definisjon: { kode: '5030', kodeverk: '' },
+        status: { kode: 'OPPR', kodeverk: 'AKSJONSPUNKT_STATUS' },
         kanLoses: true,
         erAktivt: true,
-      }}
-      vergetyper={[{}]}
+      } as Aksjonspunkt}
+      vergetyper={[]}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
