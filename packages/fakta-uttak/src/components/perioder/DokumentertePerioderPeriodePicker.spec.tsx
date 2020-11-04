@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { FieldArrayMetaProps } from 'redux-form';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
-import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { PeriodpickerField } from '@fpsak-frontend/form';
 import DokumentertePerioderPeriodePicker from './DokumentertePerioderPeriodePicker';
 
@@ -13,7 +13,7 @@ const periode = {
   fom: '01-10-2017',
 };
 
-const fields = new MockFields('perioder', 1);
+const fields = new MockFieldsWithContent('perioder', [periode]);
 
 const getRemoveButton = () => <button id="avslutt" type="button" />;
 

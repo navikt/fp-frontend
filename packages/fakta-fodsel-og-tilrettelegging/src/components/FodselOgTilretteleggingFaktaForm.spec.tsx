@@ -5,10 +5,12 @@ import { AlertStripeFeil, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { Arbeidsforhold as IayArbeidsforhold } from '@fpsak-frontend/types';
 
 import { FodselOgTilretteleggingFaktaForm, validateForm } from './FodselOgTilretteleggingFaktaForm';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
+import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
 
 const arbeidsforhold = [
   {
@@ -16,7 +18,6 @@ const arbeidsforhold = [
     arbeidsgiverIdent: '910909088',
     arbeidsgiverNavn: 'BEDRIFT AS',
     begrunnelse: null,
-    kopiertFraTidligereBehandling: false,
     opplysningerOmRisiko: null,
     opplysningerOmTilrettelegging: null,
     skalBrukes: true,
@@ -29,7 +30,6 @@ const arbeidsforhold = [
     arbeidsgiverIdent: '910909088',
     arbeidsgiverNavn: 'BEDRIFT AS',
     begrunnelse: null,
-    kopiertFraTidligereBehandling: false,
     opplysningerOmRisiko: null,
     opplysningerOmTilrettelegging: null,
     skalBrukes: true,
@@ -37,7 +37,7 @@ const arbeidsforhold = [
     tilretteleggingDatoer: [],
     tilretteleggingId: 1000304,
   },
-];
+] as ArbeidsforholdFodselOgTilrettelegging[];
 
 const formProps = {
   error: 'SOME_ERROR',
@@ -55,6 +55,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
     />);
 
@@ -81,6 +82,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
     />);
 
@@ -107,6 +109,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
       {...formProps}
     />);
@@ -286,6 +289,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
     />);
 
@@ -314,7 +318,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       skjaeringstidspunkt: '2020-01-30',
       mottattDatoInntektsmelding: '2020-01-28',
       fomDato: '2016-01-28',
-      harErstattetEttEllerFlere: true,
       ikkeRegistrertIAaRegister: false,
       tilVurdering: false,
       vurderOmSkalErstattes: false,
@@ -326,7 +329,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       lagtTilAvSaksbehandler: false,
       basertPaInntektsmelding: false,
       permisjoner: [],
-    }];
+    }] as IayArbeidsforhold[];
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       behandlingId={1}
@@ -338,6 +341,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={iayArbeidsforhold}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
     />);
 
@@ -358,7 +362,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       mottattDatoInntektsmelding: '2020-01-28',
       fomDato: '2016-01-28',
       tomDato: '2019-09-14',
-      harErstattetEttEllerFlere: true,
       ikkeRegistrertIAaRegister: false,
       tilVurdering: false,
       vurderOmSkalErstattes: false,
@@ -370,7 +373,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       lagtTilAvSaksbehandler: false,
       basertPaInntektsmelding: false,
       permisjoner: [],
-    }];
+    }] as IayArbeidsforhold[];
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       behandlingId={1}
@@ -382,6 +385,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={iayArbeidsforhold}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
     />);
 
@@ -401,7 +405,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       skjaeringstidspunkt: '2020-01-30',
       mottattDatoInntektsmelding: '2020-01-28',
       fomDato: '2016-01-28',
-      harErstattetEttEllerFlere: true,
       ikkeRegistrertIAaRegister: false,
       tilVurdering: false,
       vurderOmSkalErstattes: false,
@@ -413,7 +416,8 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       lagtTilAvSaksbehandler: false,
       basertPaInntektsmelding: false,
       permisjoner: [],
-    }];
+      kanOppretteNyttArbforFraIM: false,
+    }] as IayArbeidsforhold[];
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       behandlingId={1}
@@ -425,6 +429,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={iayArbeidsforhold}
       erOverstyrer
+      formName="test"
       {...reduxFormPropsMock}
     />);
 

@@ -13,6 +13,7 @@ export const inputMock = {
   onDragStart: noop,
   onDrop: noop,
   onFocus: noop,
+  value: '',
 };
 
 export const metaMock = {

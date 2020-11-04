@@ -13,9 +13,6 @@ const periode = {
 };
 const behandlingStatusKode = '';
 
-const dokumentertePerioder = [{}];
-const formSyncErrors = {};
-
 describe('<InnleggelsePeriode>', () => {
   it('skal vise innleggelseperiode', () => {
     const wrapper = shallowWithIntl(<InnleggelsePeriode
@@ -27,12 +24,12 @@ describe('<InnleggelsePeriode>', () => {
       cancelEditPeriode={sinon.spy()}
       behandlingStatusKode={behandlingStatusKode}
       id="2018-06-02|2018-06-25"
-      dokumentertePerioder={dokumentertePerioder}
       updated
       bekreftet
       {...reduxFormPropsMock}
       readOnly={false}
-      formSyncErrors={formSyncErrors}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const undertekst = wrapper.find('Undertekst');
@@ -53,12 +50,12 @@ describe('<InnleggelsePeriode>', () => {
       cancelEditPeriode={sinon.spy()}
       behandlingStatusKode={behandlingStatusKode}
       id="2018-06-02|2018-06-25"
-      dokumentertePerioder={dokumentertePerioder}
       updated
       bekreftet
       {...reduxFormPropsMock}
       readOnly={false}
-      formSyncErrors={formSyncErrors}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const textAreaField = wrapper.find('TextAreaField');
