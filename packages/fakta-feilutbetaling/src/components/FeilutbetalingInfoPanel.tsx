@@ -37,29 +37,34 @@ const feilutbetalingAksjonspunkter = [
   aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
 ];
 
-interface OwnProps {
+interface PureOwnProps {
+  feilutbetalingFakta: FeilutbetalingFakta;
+  feilutbetalingAarsak: FeilutbetalingAarsak;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
-  feilutbetalingFakta: FeilutbetalingFakta;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submitCallback: (...args: any[]) => any;
-  årsaker: FeilutbetalingAarsak['hendelseTyper'];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
   behandlingVersjon: number;
+  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, fields?: string) => void;
+}
+
+interface MappedOwnProps {
+  årsaker: FeilutbetalingAarsak['hendelseTyper'];
   behandlingFormPrefix: string;
+  behandlePerioderSamlet: boolean;
   formValues: {
     perioder: {
       årsak: any;
     }[];
   }
-  behandlePerioderSamlet: boolean;
-  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, fields?: string) => void;
 }
 
-export class FeilutbetalingInfoPanelImpl extends Component<OwnProps & InjectedFormProps> {
-  constructor(props: OwnProps & InjectedFormProps) {
+export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
+  constructor(props: PureOwnProps & MappedOwnProps & InjectedFormProps) {
     super(props);
     this.onChangeÅrsak = this.onChangeÅrsak.bind(this);
     this.onChangeUnderÅrsak = this.onChangeUnderÅrsak.bind(this);
@@ -311,13 +316,6 @@ export class FeilutbetalingInfoPanelImpl extends Component<OwnProps & InjectedFo
       </>
     );
   }
-}
-
-interface PureOwnProps {
-  feilutbetalingFakta: FeilutbetalingFakta;
-  feilutbetalingAarsak: FeilutbetalingAarsak;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
 }
 
 const buildInitialValues = createSelector([

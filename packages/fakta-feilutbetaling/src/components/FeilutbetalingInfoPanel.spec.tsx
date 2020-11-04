@@ -1,5 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 import sinon from 'sinon';
 
@@ -10,11 +11,10 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 
 import { FeilutbetalingInfoPanelImpl } from './FeilutbetalingInfoPanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-feilutbetaling';
+import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const BEHANDLING_AARSAK_KODEVERK = 'BEHANDLING_AARSAK';
 const TILBAKEKR_VIDERE_BEH_KODEVERK = 'TILBAKEKR_VIDERE_BEH';
@@ -97,9 +97,8 @@ const fpsakKodeverk = {
 
 describe('<FeilutbetalingInfoPanel>', () => {
   it('skal rendre komponent korrekt', () => {
-    const wrapper = shallowWithIntl(<FeilutbetalingInfoPanelImpl
+    const wrapper = shallow(<FeilutbetalingInfoPanelImpl
       feilutbetalingFakta={feilutbetalingFakta}
-      intl={intlMock}
       hasOpenAksjonspunkter
       readOnly={false}
       submitCallback={sinon.spy()}
@@ -113,6 +112,13 @@ describe('<FeilutbetalingInfoPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={alleKodeverk}
       fpsakKodeverk={fpsakKodeverk}
+      feilutbetalingAarsak={{} as FeilutbetalingAarsak}
+      aksjonspunkter={[]}
+      behandlingFormPrefix="test"
+      behandlePerioderSamlet
+      formValues={{
+        perioder: [],
+      }}
       {...reduxFormPropsMock}
     />);
 

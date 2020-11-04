@@ -84,7 +84,7 @@ describe('<VedtakFellesPanel>', () => {
     const lenker = wrapper.find(Lenke);
     expect(lenker).to.have.length(2);
 
-    lenker.last().prop('onClick')();
+    lenker.last().prop('onClick')({} as React.MouseEvent<any>);
 
     expect(wrapper.find(ManueltVedtaksbrevPanel)).to.have.length(1);
   });

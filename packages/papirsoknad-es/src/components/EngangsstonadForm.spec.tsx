@@ -8,6 +8,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { FagsakPerson } from '@fpsak-frontend/types';
 
 import RegistreringFodselGrid from './RegistreringFodselGrid';
 import RegistreringAdopsjonOgOmsorgGrid from './RegistreringAdopsjonOgOmsorgGrid';
@@ -21,6 +22,7 @@ describe('<EngangsstonadForm>', () => {
       readOnly={false}
       soknadData={new SoknadData(fagsakYtelseType.ENGANGSSTONAD, familieHendelseType.FODSEL, foreldreType.MOR)}
       alleKodeverk={{}}
+      fagsakPerson={{} as FagsakPerson}
     />);
     const form = wrapper.find(RegistreringFodselGrid);
     expect(form).to.have.length(1);
@@ -33,6 +35,7 @@ describe('<EngangsstonadForm>', () => {
       readOnly={false}
       soknadData={new SoknadData(fagsakYtelseType.ENGANGSSTONAD, familieHendelseType.ADOPSJON, foreldreType.MOR)}
       alleKodeverk={{}}
+      fagsakPerson={{} as FagsakPerson}
     />);
     const form = wrapper.find(RegistreringAdopsjonOgOmsorgGrid);
     expect(form).to.have.length(1);

@@ -1,31 +1,24 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/types';
 
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import { OmsorgOgForeldreansvarInfoPanelImpl } from './OmsorgOgForeldreansvarInfoPanel';
 import * as useIntl from '../useIntl';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
-  const aksjonspunkt = {
-    id: 1,
-    definisjon: {
-      kode: 'ap1',
-      navn: 'ap1',
-    },
-    status: {
-      kode: 's1',
-      navn: 's1',
-    },
-    kanLoses: true,
-    erAktivt: true,
-  };
+  const relatertYtelseTypeListe = Object.values(relatertYtelseType).map((type) => ({
+    kode: type,
+    kodeverk: '',
+    navn: '',
+  }));
 
   let contextStub;
   beforeEach(() => {
@@ -37,20 +30,21 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   });
 
   it('skal vise faktapanel og form for omsorgsvilkåret', () => {
-    const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarInfoPanelImpl
+    const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
-      intl={intlMock}
-      aksjonspunkt={aksjonspunkt}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      vilkarTypes={[{ data: 'test' }]}
-      relatertYtelseTypes={[relatertYtelseType]}
+      vilkarTypes={[{ kode: 'test', kodeverk: '', navn: '' }]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      personopplysninger={{} as Personopplysninger}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -63,20 +57,21 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   });
 
   it('skal vise readonly form', () => {
-    const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarInfoPanelImpl
+    const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
-      intl={intlMock}
-      aksjonspunkt={aksjonspunkt}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
       submittable
       readOnly
-      vilkarTypes={[{ data: 'test' }]}
-      relatertYtelseTypes={[relatertYtelseType]}
+      vilkarTypes={[{ kode: 'test', kodeverk: '', navn: '' }]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      personopplysninger={{} as Personopplysninger}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -84,20 +79,21 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   });
 
   it('skal vise readonly submit-knapp når det ikke er åpne aksjonspunkter', () => {
-    const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarInfoPanelImpl
+    const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
-      intl={intlMock}
-      aksjonspunkt={aksjonspunkt}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter={false}
       submittable
       readOnly={false}
-      vilkarTypes={[{ data: 'test' }]}
-      relatertYtelseTypes={[relatertYtelseType]}
+      vilkarTypes={[{ kode: 'test', kodeverk: '', navn: '' }]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      personopplysninger={{} as Personopplysninger}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
     />);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
@@ -105,20 +101,21 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   });
 
   it('skal gi foreldreansvar lik true når aksjonspunkt er foreldreansvar', () => {
-    const wrapper = shallowWithIntl(<OmsorgOgForeldreansvarInfoPanelImpl
+    const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
-      intl={intlMock}
-      aksjonspunkt={aksjonspunkt}
       erAksjonspunktForeldreansvar
       hasOpenAksjonspunkter={false}
       submittable
       readOnly={false}
-      vilkarTypes={[{ data: 'test' }]}
-      relatertYtelseTypes={[relatertYtelseType]}
+      vilkarTypes={[{ kode: 'test', kodeverk: '', navn: '' }]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      personopplysninger={{} as Personopplysninger}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
     />);
     const omsorgOgForeldreAnsvarFaktaForm = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).is.true;

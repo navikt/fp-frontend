@@ -19,11 +19,12 @@ describe('<MenySakIndex>', () => {
 
     expect(popover.prop('popperIsVisible')).is.false;
 
+    // @ts-ignore
     const wrapper2 = shallowWithIntl(popover.prop('referenceProps').children('ref'));
 
     const knapp = wrapper2.find(Knapp);
     expect(knapp).to.have.length(1);
-    knapp.prop('onClick')();
+    knapp.prop('onClick')({} as React.MouseEvent<any>);
 
     expect(wrapper.find(Popover).prop('popperIsVisible')).is.true;
   });
@@ -41,12 +42,12 @@ describe('<MenySakIndex>', () => {
 
     const button = wrapper2.find('button');
     expect(button).to.have.length(1);
-    button.prop('onClick')(0);
+    button.prop('onClick')({} as React.MouseEvent<any>);
 
     const span = wrapper.find('button');
     expect(span).to.have.length(1);
 
-    span.prop('onClick')();
+    span.prop('onClick')({} as React.MouseEvent<any>);
 
     expect(wrapper.find('button')).to.have.length(0);
   });

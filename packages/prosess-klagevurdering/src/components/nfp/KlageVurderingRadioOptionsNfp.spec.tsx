@@ -23,7 +23,9 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).to.have.length(2);
+    // @ts-ignore
     expect(radios.at(0).prop('label').id).to.equal('Klage.ResolveKlage.ChangeVedtak');
+    // @ts-ignore
     expect(radios.at(1).prop('label').id).to.equal('Klage.ResolveKlage.KeepVedtakNfp');
   });
 
@@ -36,10 +38,15 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).to.have.length(5);
+    // @ts-ignore
     expect(radios.at(0).prop('label').id).to.equal('Klage.ResolveKlage.ChangeVedtak');
+    // @ts-ignore
     expect(radios.at(1).prop('label').id).to.equal('Klage.ResolveKlage.KeepVedtakNfp');
+    // @ts-ignore
     expect(radios.at(2).prop('label').id).to.equal('Klage.Behandle.Omgjort');
+    // @ts-ignore
     expect(radios.at(3).prop('label').id).to.equal('Klage.Behandle.Ugunst');
+    // @ts-ignore
     expect(radios.at(4).prop('label').id).to.equal('Klage.Behandle.DelvisOmgjort');
   });
 });

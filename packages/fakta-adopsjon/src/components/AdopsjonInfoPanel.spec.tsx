@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -11,18 +11,17 @@ import { AdopsjonInfoPanelImpl } from './AdopsjonInfoPanel';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
 import EktefelleFaktaForm from './EktefelleFaktaForm';
 import MannAdoptererAleneFaktaForm from './MannAdoptererAleneFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
 
 describe('<AdopsjonInfoPanel>', () => {
   const adopsjonAksjonspunkt = {
     id: 1,
     definisjon: {
       kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
-      navn: 'ap1',
+      kodeverk: '',
     },
     status: {
       kode: 's1',
-      navn: 's1',
+      kodeverk: '',
     },
     toTrinnsBehandling: true,
     toTrinnsBehandlingGodkjent: false,
@@ -33,11 +32,11 @@ describe('<AdopsjonInfoPanel>', () => {
     id: 2,
     definisjon: {
       kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      navn: 'ap1',
+      kodeverk: 'ap1',
     },
     status: {
       kode: 's1',
-      navn: 's1',
+      kodeverk: 's1',
     },
     toTrinnsBehandling: true,
     toTrinnsBehandlingGodkjent: false,
@@ -54,10 +53,9 @@ describe('<AdopsjonInfoPanel>', () => {
   };
 
   it('skal vise de to aksjonspunktene som alltid skal vises', () => {
-    const wrapper = shallowWithIntl(<AdopsjonInfoPanelImpl
+    const wrapper = shallow(<AdopsjonInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[adopsjonAksjonspunkt, ektefellesBarnAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
@@ -87,11 +85,11 @@ describe('<AdopsjonInfoPanel>', () => {
       id: 3,
       definisjon: {
         kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -99,10 +97,9 @@ describe('<AdopsjonInfoPanel>', () => {
       erAktivt: true,
     };
 
-    const wrapper = shallowWithIntl(<AdopsjonInfoPanelImpl
+    const wrapper = shallow(<AdopsjonInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ [`punkt${aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE}`]: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[adopsjonAksjonspunkt, ektefellesBarnAksjonspunkt, mannSokerAleneAksjonspunkt]}
       hasOpenAksjonspunkter
       submittable
@@ -130,10 +127,9 @@ describe('<AdopsjonInfoPanel>', () => {
   });
 
   it('skal ikke vise hjelpetekster når saken er lukket', () => {
-    const wrapper = shallowWithIntl(<AdopsjonInfoPanelImpl
+    const wrapper = shallow(<AdopsjonInfoPanelImpl
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[adopsjonAksjonspunkt, ektefellesBarnAksjonspunkt]}
       hasOpenAksjonspunkter={false}
       submittable

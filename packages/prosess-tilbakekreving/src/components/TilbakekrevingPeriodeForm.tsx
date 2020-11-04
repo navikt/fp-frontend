@@ -99,8 +99,8 @@ interface OwnProps {
   vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[];
   valgtVilkarResultatType?: string;
   handletUaktsomhetGrad: Aktsomhet;
-  harGrunnerTilReduksjon: boolean;
-  erSerligGrunnAnnetValgt: boolean;
+  harGrunnerTilReduksjon?: boolean;
+  erSerligGrunnAnnetValgt?: boolean;
 }
 
 interface DispatchProps {

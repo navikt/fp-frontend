@@ -7,17 +7,15 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import soknadTypeTillegg from '@fpsak-frontend/kodeverk/src/soknadTypeTillegg';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
 
 describe('<SoknadTypePickerForm>', () => {
   it('skal rendre komponent og vise kodeverk i radioknapper', () => {
-    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon' }];
-    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.FORELDREPENGER, navn: 'Foreldrepenger' }];
-    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor' }];
-    const soknadTypeTillegger = [{ kode: soknadTypeTillegg.UTSETTELSE, navn: 'Utsettelse' }];
+    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon', kodeverk: '' }];
+    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.FORELDREPENGER, navn: 'Foreldrepenger', kodeverk: '' }];
+    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor', kodeverk: '' }];
     const ytelseErSatt = false;
 
     const wrapper = shallow(<SoknadTypePickerForm
@@ -25,7 +23,6 @@ describe('<SoknadTypePickerForm>', () => {
       familieHendelseTyper={familieHendelseTyper}
       fagsakYtelseTyper={fagsakYtelseTyper}
       foreldreTyper={foreldreTyper}
-      soknadTypeTillegg={soknadTypeTillegger}
       ytelseErSatt={ytelseErSatt}
     />);
 
@@ -46,10 +43,9 @@ describe('<SoknadTypePickerForm>', () => {
   });
 
   it('radioknapper for ytelsetype skal vere disabled om ytelsetype er satt i fagsaken', () => {
-    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon' }];
-    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.FORELDREPENGER, navn: 'Endring foreldrepenger' }];
-    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor' }];
-    const soknadTypeTillegger = [{ kode: soknadTypeTillegg.UTSETTELSE, navn: 'Utsettelse' }];
+    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon', kodeverk: '' }];
+    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.FORELDREPENGER, navn: 'Endring foreldrepenger', kodeverk: '' }];
+    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor', kodeverk: '' }];
     const selectedFagsakYtelseType = fagsakYtelseType.FORELDREPENGER;
 
     const wrapper = shallow(<SoknadTypePickerForm
@@ -57,7 +53,6 @@ describe('<SoknadTypePickerForm>', () => {
       familieHendelseTyper={familieHendelseTyper}
       fagsakYtelseTyper={fagsakYtelseTyper}
       foreldreTyper={foreldreTyper}
-      soknadTypeTillegg={soknadTypeTillegger}
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt
     />);
@@ -69,10 +64,9 @@ describe('<SoknadTypePickerForm>', () => {
   });
 
   it('radioknapper for familieHendelseType skal vere disabled og validering slått av når ytelsetype er svangerskapspenger', () => {
-    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon' }];
-    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.SVANGERSKAPSPENGER, navn: 'Endring foreldrepenger' }];
-    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor' }];
-    const soknadTypeTillegger = [{ kode: soknadTypeTillegg.UTSETTELSE, navn: 'Utsettelse' }];
+    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon', kodeverk: '' }];
+    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.SVANGERSKAPSPENGER, navn: 'Endring foreldrepenger', kodeverk: '' }];
+    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor', kodeverk: '' }];
     const selectedFagsakYtelseType = fagsakYtelseType.SVANGERSKAPSPENGER;
 
     const wrapper = shallow(<SoknadTypePickerForm
@@ -80,7 +74,6 @@ describe('<SoknadTypePickerForm>', () => {
       familieHendelseTyper={familieHendelseTyper}
       fagsakYtelseTyper={fagsakYtelseTyper}
       foreldreTyper={foreldreTyper}
-      soknadTypeTillegg={soknadTypeTillegger}
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt
     />);
@@ -93,9 +86,9 @@ describe('<SoknadTypePickerForm>', () => {
   });
 
   it('skal kalle submitevent', () => {
-    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon' }];
-    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.FORELDREPENGER, navn: 'Endring foreldrepenger' }];
-    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor' }];
+    const familieHendelseTyper = [{ kode: familieHendelseType.ADOPSJON, navn: 'Adopsjon', kodeverk: '' }];
+    const fagsakYtelseTyper = [{ kode: fagsakYtelseType.FORELDREPENGER, navn: 'Endring foreldrepenger', kodeverk: '' }];
+    const foreldreTyper = [{ kode: foreldreType.MOR, navn: 'Mor', kodeverk: '' }];
     const selectedFagsakYtelseType = fagsakYtelseType.FORELDREPENGER;
 
     const submitEvent = sinon.spy();

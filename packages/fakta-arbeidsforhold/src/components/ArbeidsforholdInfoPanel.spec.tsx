@@ -14,11 +14,11 @@ import BekreftOgForsettKnapp from './BekreftOgForsettKnapp';
 const ap5080 = {
   id: 0,
   definisjon: {
-    navn: 'avklar arbeidsforhold',
+    kodeverk: '',
     kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
   },
   status: {
-    navn: 'Opprettet',
+    kodeverk: '',
     kode: '',
   },
   kanLoses: true,

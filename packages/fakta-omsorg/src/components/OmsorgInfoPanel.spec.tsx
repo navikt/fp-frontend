@@ -1,15 +1,15 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { Personopplysninger, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import OmsorgFaktaForm from './OmsorgFaktaForm';
 import { OmsorgInfoPanel } from './OmsorgInfoPanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
 
 describe('<OmsorgInfoPanel>', () => {
   const personopplysning = {
@@ -17,39 +17,39 @@ describe('<OmsorgInfoPanel>', () => {
     aktoerId: '1',
     personstatus: {
       kode: 'BOSA',
-      navn: 'Bosatt',
+      kodeverk: '',
     },
     navBrukerKjonn: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     statsborgerskap: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     diskresjonskode: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     sivilstand: {
       kode: 'UGIF',
-      navn: 'Ugift',
+      kodeverk: '',
     },
     region: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     adresser: [],
-  };
+  } as Personopplysninger;
   const aleneomsorgAp = {
     id: 1,
     definisjon: {
       kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      navn: 'ap1',
+      kodeverk: '',
     },
     status: {
       kode: 's1',
-      navn: 's1',
+      kodeverk: '',
     },
     kanLoses: true,
     erAktivt: false,
@@ -59,21 +59,20 @@ describe('<OmsorgInfoPanel>', () => {
     id: 1,
     definisjon: {
       kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-      navn: 'ap1',
+      kodeverk: '',
     },
     status: {
       kode: 's1',
-      navn: 's1',
+      kodeverk: '',
     },
     kanLoses: true,
     erAktivt: false,
   };
   it('skal vise omsorginfopanel når en har aleneomsorgaksjonspunkt', () => {
-    const wrapper = shallowWithIntl(<OmsorgInfoPanel
+    const wrapper = shallow(<OmsorgInfoPanel
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       omsorg={false}
-      intl={intlMock}
       aksjonspunkter={[aleneomsorgAp]}
       hasOpenAksjonspunkter
       submittable
@@ -81,21 +80,21 @@ describe('<OmsorgInfoPanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
-      soknad={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
       personopplysninger={personopplysning}
+      submitCallback={() => undefined}
     />);
     const panel = wrapper.find(OmsorgFaktaForm);
     expect(panel).to.have.length(1);
   });
 
   it('skal vise helptext for omsorg og aleneomsorg aksjonspunkt', () => {
-    const wrapper = shallowWithIntl(<OmsorgInfoPanel
+    const wrapper = shallow(<OmsorgInfoPanel
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       omsorg={false}
-      intl={intlMock}
       aksjonspunkter={[aleneomsorgAp, omsorgAp]}
       hasOpenAksjonspunkter
       submittable
@@ -104,9 +103,10 @@ describe('<OmsorgInfoPanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
-      soknad={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
+      submitCallback={() => undefined}
     />);
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).has.length(1);
@@ -117,11 +117,10 @@ describe('<OmsorgInfoPanel>', () => {
   });
 
   it('skal vise helptext for omsorg aksjonspunkt', () => {
-    const wrapper = shallowWithIntl(<OmsorgInfoPanel
+    const wrapper = shallow(<OmsorgInfoPanel
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       omsorg={false}
-      intl={intlMock}
       aksjonspunkter={[omsorgAp]}
       hasOpenAksjonspunkter
       submittable
@@ -130,9 +129,10 @@ describe('<OmsorgInfoPanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
-      soknad={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
+      submitCallback={() => undefined}
     />);
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).has.length(1);
@@ -142,11 +142,10 @@ describe('<OmsorgInfoPanel>', () => {
   });
 
   it('skal vise BostedFakta', () => {
-    const wrapper = shallowWithIntl(<OmsorgInfoPanel
+    const wrapper = shallow(<OmsorgInfoPanel
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       omsorg={false}
-      intl={intlMock}
       aksjonspunkter={[omsorgAp]}
       hasOpenAksjonspunkter
       submittable
@@ -155,9 +154,10 @@ describe('<OmsorgInfoPanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
-      soknad={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
+      submitCallback={() => undefined}
     />);
     const bostedFaktaView = wrapper.find('BostedFaktaView');
     expect(bostedFaktaView).has.length(1);
@@ -165,11 +165,10 @@ describe('<OmsorgInfoPanel>', () => {
   });
 
   it('skal vise OmsorgFaktaForm', () => {
-    const wrapper = shallowWithIntl(<OmsorgInfoPanel
+    const wrapper = shallow(<OmsorgInfoPanel
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       omsorg={false}
-      intl={intlMock}
       aksjonspunkter={[omsorgAp]}
       hasOpenAksjonspunkter
       submittable
@@ -178,9 +177,10 @@ describe('<OmsorgInfoPanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      ytelsefordeling={{}}
-      soknad={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
+      submitCallback={() => undefined}
     />);
     const omsorgFaktaForm = wrapper.find(OmsorgFaktaForm);
     expect(omsorgFaktaForm).has.length(1);

@@ -24,6 +24,11 @@ describe('<SvangerskapVilkarForm>', () => {
       isApOpen
       behandlingId={1}
       behandlingVersjon={1}
+      aksjonspunkter={[]}
+      vilkar={[]}
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

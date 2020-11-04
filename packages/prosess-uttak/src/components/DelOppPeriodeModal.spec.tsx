@@ -24,6 +24,9 @@ describe('<DelOppPeriodeModal>', () => {
       showModal
       intl={intlMock}
       cancelEvent={cancelEvent}
+      behandlingId={1}
+      behandlingVersjon={2}
+      splitPeriod={sinon.spy()}
     />);
     const modal = wrapper.find(Modal);
     expect(modal).to.have.length(1);
@@ -41,6 +44,9 @@ describe('<DelOppPeriodeModal>', () => {
       showModal={false}
       intl={intlMock}
       cancelEvent={cancelEvent}
+      behandlingId={1}
+      behandlingVersjon={2}
+      splitPeriod={sinon.spy()}
     />);
     const modal = wrapper.find(Modal);
     expect(modal.prop('isOpen')).is.false;
@@ -53,6 +59,9 @@ describe('<DelOppPeriodeModal>', () => {
       showModal
       intl={intlMock}
       cancelEvent={cancelEvent}
+      behandlingId={1}
+      behandlingVersjon={2}
+      splitPeriod={sinon.spy()}
     />);
     wrapper.find('Knapp').simulate('click');
     expect(cancelEvent).to.have.property('callCount', 1);

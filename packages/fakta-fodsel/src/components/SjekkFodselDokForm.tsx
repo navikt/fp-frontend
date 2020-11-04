@@ -51,7 +51,7 @@ interface OwnProps {
   termindato?: string;
   vedtaksDatoSomSvangerskapsuke?: string;
   soknad: Soknad;
-  soknadOriginalBehandling: Soknad;
+  soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   initialValues: {
     begrunnelse: string;

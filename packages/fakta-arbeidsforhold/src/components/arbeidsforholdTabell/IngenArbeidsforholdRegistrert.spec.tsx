@@ -21,6 +21,7 @@ describe('<IngenArbeidsforholdRegistrert>', () => {
       />,
     );
     expect(wrapper.find(TableColumn)).has.length(6);
+    // @ts-ignore
     expect(wrapper.find(FormattedMessage).props().id).to.eql('PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert');
   });
 });

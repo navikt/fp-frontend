@@ -130,7 +130,6 @@ describe('<TilbakekrevingVedtakForm>', () => {
         overskrift: 'Dette er en overskrift',
         underavsnittsliste: [{
           fritekstTillatt: false,
-          fritekstPåkrevet: true,
         }],
       }]}
       behandlingId={1}

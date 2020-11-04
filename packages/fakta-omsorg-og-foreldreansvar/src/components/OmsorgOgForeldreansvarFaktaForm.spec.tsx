@@ -15,6 +15,12 @@ import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
+  const relatertYtelseTypeListe = Object.values(relatertYtelseType).map((type) => ({
+    kode: type,
+    kodeverk: '',
+    navn: '',
+  }));
+
   const getKodeverknavn = (kodeverk: any) => {
     if (kodeverk.kode === opplysningsKilde.SAKSBEHANDLER) {
       return 'test';
@@ -34,7 +40,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       hasOpenAksjonspunkter
       antallBarn={1}
       vilkarType="test"
-      relatertYtelseTypes={[relatertYtelseType]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
@@ -62,7 +68,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       hasOpenAksjonspunkter
       antallBarn={1}
       vilkarType="test"
-      relatertYtelseTypes={[relatertYtelseType]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
@@ -90,7 +96,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       hasOpenAksjonspunkter
       antallBarn={1}
       vilkarType="kode1"
-      relatertYtelseTypes={[relatertYtelseType]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
@@ -118,7 +124,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       hasOpenAksjonspunkter
       antallBarn={1}
       vilkarType="test"
-      relatertYtelseTypes={[relatertYtelseType]}
+      relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,

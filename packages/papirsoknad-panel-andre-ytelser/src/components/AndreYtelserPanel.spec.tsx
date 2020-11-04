@@ -47,7 +47,12 @@ describe('<AndreYtelserPanel>', () => {
     const wrapper = shallow(<AndreYtelserPanelImpl
       readOnly={false}
       andreYtelser={andreYtelser}
-      selectedYtelser={{ LONN_UTDANNING: true }}
+      selectedYtelser={{
+        LONN_UTDANNING: [{
+          periodeFom: undefined,
+          periodeTom: undefined,
+        }],
+      }}
       form="test"
       alleKodeverk={{}}
     />);
@@ -60,7 +65,15 @@ describe('<AndreYtelserPanel>', () => {
   });
 
   it('validering skal returnerer errors objekt på riktig format', () => {
-    const values = { andreYtelser: { LONN_UTDANNING: true, LONN_UTDANNING_PERIODER: [{ periodeFom: 'abc', periodeTom: 'ads' }] } };
+    const values = {
+      andreYtelser: {
+        LONN_UTDANNING: true,
+        LONN_UTDANNING_PERIODER: [{
+          periodeFom: 'abc',
+          periodeTom: 'ads',
+        }],
+      },
+    };
 
     const errorsWithInvalidDates = AndreYtelserPanel.validate(values, andreYtelser);
     expect(errorsWithInvalidDates).to.be.an('object');

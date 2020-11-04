@@ -4,7 +4,7 @@ import moment from 'moment';
 import { createSelector } from 'reselect';
 import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
 import { bindActionCreators } from 'redux';
-import { FormattedMessage, IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
@@ -79,7 +79,6 @@ const formaterPerioderForTidslinje = (perioder: DataForPeriode[] = [], vilkarsVu
   });
 
 interface OwnProps {
-  intl: IntlShape;
   vilkarsVurdertePerioder?: CustomVilkarsVurdertePeriode[];
   dataForDetailForm?: DataForPeriode[];
   behandlingFormPrefix: string;

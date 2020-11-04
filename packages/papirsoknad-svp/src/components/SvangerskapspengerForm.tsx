@@ -51,7 +51,7 @@ type TilretteleggingArbeidsforhold = {
 
 type FormValues = {
   foedselsDato?: string;
-  tilretteleggingArbeidsforhold: TilretteleggingArbeidsforhold;
+  tilretteleggingArbeidsforhold?: TilretteleggingArbeidsforhold;
 } & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues;
 
 interface PureOwnProps {
