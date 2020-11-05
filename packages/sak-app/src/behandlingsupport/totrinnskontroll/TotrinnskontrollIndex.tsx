@@ -2,6 +2,8 @@ import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
 
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   NavAnsatt, Fagsak, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
@@ -50,8 +52,6 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingId?: number;
   behandlingVersjon?: number;
-  totrinnskontrollSkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadOnlySkjermlenkeContext?: TotrinnskontrollSkjermlenkeContext[];
 }
 
 /**
@@ -64,8 +64,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   alleBehandlinger,
   behandlingId,
   behandlingVersjon,
-  totrinnskontrollSkjermlenkeContext,
-  totrinnskontrollReadOnlySkjermlenkeContext,
 }) => {
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setErAlleAksjonspunktGodkjent] = useState(false);
@@ -78,6 +76,21 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
 
   const alleKodeverk = useKodeverk(behandling?.type);
+
+  const erInnsynBehandling = behandling && behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
+
+  const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
+    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
+      updateTriggers: [behandlingId, behandling.status.kode],
+      suspendRequest: !!erInnsynBehandling || !(behandling.status.kode === BehandlingStatus.FATTER_VEDTAK),
+    },
+  );
+  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
+    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
+      updateTriggers: [behandlingId, behandling.status.kode],
+      suspendRequest: !!erInnsynBehandling || !(behandling.status.kode === BehandlingStatus.BEHANDLING_UTREDES),
+    },
+  );
 
   const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<TotrinnsKlageVurdering>(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
@@ -102,7 +115,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     setErAlleAksjonspunktGodkjent, setVisBeslutterModal, godkjennBehandling),
   [behandlingId, behandlingVersjon]);
 
-  if (!totrinnskontrollSkjermlenkeContext && !totrinnskontrollReadOnlySkjermlenkeContext) {
+  if (!totrinnArsaker && !totrinnArsakerReadOnly) {
     return null;
   }
 
@@ -114,7 +127,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     <>
       <TotrinnskontrollSakIndex
         behandling={behandling}
-        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext || totrinnskontrollReadOnlySkjermlenkeContext}
+        totrinnskontrollSkjermlenkeContext={totrinnArsaker || totrinnArsakerReadOnly}
         location={location}
         readOnly={brukernavn === behandling.ansvarligSaksbehandler || kanVeilede}
         onSubmit={onSubmit}

@@ -34,7 +34,7 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
   };
   besluttersBegrunnelse?: string;
   totrinnskontrollGodkjent?: boolean;
-  vurderPaNyttArsaker: { kode: string; navn: string}[];
+  vurderPaNyttArsaker: Kodeverk[];
   uttakPerioder?: {
     fom: string;
     tom: string;

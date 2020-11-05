@@ -24,6 +24,7 @@ interface OwnProps {
   erTilbakekreving: boolean,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
+  vurderArsaker: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -35,6 +36,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
+  vurderArsaker,
   lagLenke,
 }) => (
   <>
@@ -92,7 +94,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                                 className={styles.image}
                               />
                             </span>
-                            <span>{item.navn}</span>
+                            <span>{vurderArsaker.find((arsak) => item.kode === arsak.kode).navn}</span>
                           </div>
                         ))}
                       </div>

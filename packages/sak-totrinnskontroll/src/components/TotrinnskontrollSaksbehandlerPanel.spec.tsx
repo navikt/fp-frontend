@@ -103,6 +103,7 @@ describe('<TotrinnskontrollSaksbehandlerPanel>', () => {
       }}
       arbeidsforholdHandlingTyper={[]}
       erTilbakekreving={false}
+      vurderArsaker={[]}
       skjemalenkeTyper={[{
         kode: 'FOEDSEL',
         navn: 'Fødsel',

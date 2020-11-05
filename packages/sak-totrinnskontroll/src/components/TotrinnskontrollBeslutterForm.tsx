@@ -13,7 +13,7 @@ import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Behandling, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
@@ -176,7 +176,7 @@ const validate = (values: FormValues) => {
   };
 };
 
-const finnArsaker = (vurderPaNyttArsaker: { kode: string, navn: string }[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
+const finnArsaker = (vurderPaNyttArsaker: Kodeverk[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
   if (arsak.kode === vurderPaNyttArsakType.FEIL_FAKTA) {
     return { ...acc, feilFakta: true };
   }
