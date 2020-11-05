@@ -48,6 +48,7 @@ interface PureOwnProps {
   erForeldrepengerFagsak: boolean;
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -73,6 +74,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
   erTilbakekreving,
   aksjonspunktGodkjenning,
   totrinnskontrollSkjermlenkeContext,
+  faktaOmBeregningTilfeller,
   lagLenke,
   ...formProps
 }) => {
@@ -108,6 +110,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
         klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         skjemalenkeTyper={skjemalenkeTyper}
+        faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
         lagLenke={lagLenke}
       />
       <div className={styles.buttonRow}>

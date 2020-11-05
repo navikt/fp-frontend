@@ -73,10 +73,19 @@ describe('<BehandlingSupportIndex>', () => {
 
   describe('getAccessibleSupportPanels', () => {
     it('skal kunne aksessere alle support-paneler', () => {
-      const returnIsRelevant = true;
-      const approvalIsRelevant = true;
+      const behandlingRettigheter = {
+        behandlingFraBeslutter: true,
+        behandlingKanSendeMelding: true,
+        behandlingTilGodkjenning: true,
+        behandlingKanBytteEnhet: true,
+        behandlingKanHenlegges: true,
+        behandlingKanGjenopptas: false,
+        behandlingKanOpnesForEndringer: true,
+        behandlingKanSettesPaVent: true,
+        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+      };
 
-      const accessiblePanels = getAccessibleSupportPanels(returnIsRelevant, approvalIsRelevant);
+      const accessiblePanels = getAccessibleSupportPanels(behandlingRettigheter);
 
       expect(accessiblePanels).is.eql([
         'godkjenning',
@@ -88,10 +97,19 @@ describe('<BehandlingSupportIndex>', () => {
     });
 
     it('skal kunne aksessere kun supportpanelene som alltid vises; historikk og dokumenter', () => {
-      const returnIsRelevant = false;
-      const approvalIsRelevant = false;
+      const behandlingRettigheter = {
+        behandlingFraBeslutter: false,
+        behandlingKanSendeMelding: false,
+        behandlingTilGodkjenning: false,
+        behandlingKanBytteEnhet: true,
+        behandlingKanHenlegges: true,
+        behandlingKanGjenopptas: false,
+        behandlingKanOpnesForEndringer: false,
+        behandlingKanSettesPaVent: true,
+        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+      };
 
-      const accessiblePanels = getAccessibleSupportPanels(returnIsRelevant, approvalIsRelevant);
+      const accessiblePanels = getAccessibleSupportPanels(behandlingRettigheter);
 
       expect(accessiblePanels).is.eql([
         'historikk',

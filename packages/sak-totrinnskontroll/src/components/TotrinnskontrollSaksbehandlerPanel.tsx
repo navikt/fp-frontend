@@ -25,6 +25,7 @@ interface OwnProps {
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
   vurderArsaker: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -37,6 +38,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
   erTilbakekreving,
   skjemalenkeTyper,
   vurderArsaker,
+  faktaOmBeregningTilfeller,
   lagLenke,
 }) => (
   <>
@@ -60,7 +62,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
             </NavLink>
             {aksjonspunkter.map((aksjonspunkt) => {
               const aksjonspunktTexts = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingKlageVurdering, behandlingStatus,
-                arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
+                arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
 
               return (
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>

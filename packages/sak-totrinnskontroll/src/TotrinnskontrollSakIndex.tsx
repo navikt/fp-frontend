@@ -117,6 +117,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
   const arbeidsforholdHandlingTyper = alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE];
   const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
+  const faktaOmBeregningTilfeller = alleKodeverk[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE];
 
   return (
     <RawIntlProvider value={intl}>
@@ -134,6 +135,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
+          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
           erTilbakekreving={erTilbakekreving}
           lagLenke={lagLenke}
         />
@@ -149,6 +151,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           skjemalenkeTyper={skjemalenkeTyper}
           lagLenke={lagLenke}
           vurderArsaker={vurderArsaker}
+          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
         />
       )}
     </RawIntlProvider>
