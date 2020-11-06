@@ -64,7 +64,7 @@ type FormValues = {
   erIkkeSignert: boolean;
 } & FormValuesUtrekk
 
-const skalViseForhaandlenke = (avr: ankeVurdering) => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr?.kode === ankeVurdering.ANKE_OMGJOER;
+const skalViseForhaandlenke = (avr: Kodeverk) => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr?.kode === ankeVurdering.ANKE_OMGJOER;
 
 const canSubmit = (formValues: FormValuesUtrekk) => {
   if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode && !formValues.erSubsidiartRealitetsbehandles) {

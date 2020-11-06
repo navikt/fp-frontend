@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
@@ -118,9 +119,15 @@ describe('<UttakPanel>', () => {
     ],
   };
 
+  const sprakkode = {
+    kode: 'NO',
+    kodeverk: '',
+  };
+
   it('skal rendre uttakpanel uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<UttakPanel
       {...reduxFormPropsMock}
+      intl={intlMock}
       aksjonspunkter={[]}
       readOnly={false}
       uttaksresultat={uttaksresultat}
@@ -141,6 +148,9 @@ describe('<UttakPanel>', () => {
       employeeHasAccess
       fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
+      sprakkode={sprakkode}
+      readOnlySubmitButton={false}
+      apCodes={[]}
     />);
     const uttak = wrapper.find(Uttak);
     expect(uttak).has.length(1);
@@ -168,6 +178,7 @@ describe('<UttakPanel>', () => {
 
     const wrapper = shallowWithIntl(<UttakPanel
       {...reduxFormPropsMock}
+      intl={intlMock}
       aksjonspunkter={aksjonspunkter}
       readOnly={false}
       uttaksresultat={uttaksresultat}
@@ -188,6 +199,9 @@ describe('<UttakPanel>', () => {
       employeeHasAccess
       fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
+      sprakkode={sprakkode}
+      readOnlySubmitButton={false}
+      apCodes={[]}
     />);
     const uttak = wrapper.find(Uttak);
     expect(uttak).has.length(1);

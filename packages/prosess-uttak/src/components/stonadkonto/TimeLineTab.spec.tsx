@@ -26,7 +26,9 @@ describe('<TimeLineTab>', () => {
     expect(formattedMessage.at(0).props().id).to.equal('TimeLineTab.Stonadinfo.ForeldrepengerFF');
 
     const FormattedMessage = wrapper.find('FormattedMessage');
+    // @ts-ignore
     expect(FormattedMessage.at(1).props().values.ukerVerdi).to.equal(6);
+    // @ts-ignore
     expect(FormattedMessage.at(1).props().values.dagerVerdi).to.equal(0);
   });
 });

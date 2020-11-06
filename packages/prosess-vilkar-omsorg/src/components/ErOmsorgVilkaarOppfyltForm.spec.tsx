@@ -1,6 +1,6 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
@@ -11,22 +11,21 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import { buildInitialValues, ErOmsorgVilkaarOppfyltFormImpl as UnwrappedForm } from './ErOmsorgVilkaarOppfyltForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-omsorg';
 
 describe('<ErOmsorgVilkaarOppfyltForm>', () => {
   const aksjonspunkterList = [{
     id: 1,
     definisjon: {
-      navn: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
       kode: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      kodeverk: '',
     },
     status: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     vilkarType: {
       kode: vilkarType.OMSORGSVILKARET,
-      navn: 'Omsorgsvilkåret',
+      kodeverk: '',
     },
     begrunnelse: 'begrunnelse',
     kanLoses: true,
@@ -34,12 +33,12 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
   }];
 
   it('skal vise readonly-form med utgråete knapper når readonly og vilkåret ikke er vurdert', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
+        kodeverk: '',
       }]}
       aksjonspunkter={aksjonspunkterList}
       readOnly
@@ -47,6 +46,10 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       erVilkarOk={false}
       behandlingId={1}
       behandlingVersjon={1}
+      status=""
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const form = wrapper.find(ProsessStegBegrunnelseTextField);
@@ -55,12 +58,12 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
   });
 
   it('skal vise radioknapper og nedtrekksliste for å velge om vilkåret skal godkjennes eller avvises med avslagsgrunn når ikke readonly', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
+        kodeverk: '',
       }]}
       aksjonspunkter={aksjonspunkterList}
       readOnly={false}
@@ -68,6 +71,10 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       erVilkarOk={undefined}
       behandlingId={1}
       behandlingVersjon={1}
+      status=""
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const selector = wrapper.find(VilkarResultPicker);
@@ -75,6 +82,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
     expect(selector.prop('avslagsarsaker')).to.eql([{
       kode: 'TEST_KODE',
       navn: 'testnavn',
+      kodeverk: '',
     }]);
     expect(selector.prop('erVilkarOk')).is.undefined;
 
@@ -86,25 +94,24 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
     const aksjonspunkter = [{
       id: 1,
       definisjon: {
-        navn: 'test',
         kode: 'test',
+        kodeverk: '',
       },
       status: {
         kode: '',
-        navn: '',
+        kodeverk: '',
       },
       vilkarType: {
         kode: vilkarType.ADOPSJONSVILKARET,
-        navn: 'Adopsjonvilkåret',
+        kodeverk: '',
       },
       begrunnelse: 'begrunnelse',
       kanLoses: true,
       erAktivt: true,
     }];
 
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       avslagsarsaker={[]}
       aksjonspunkter={aksjonspunkter}
       readOnly
@@ -112,6 +119,10 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       erVilkarOk
       behandlingId={1}
       behandlingVersjon={1}
+      status=""
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

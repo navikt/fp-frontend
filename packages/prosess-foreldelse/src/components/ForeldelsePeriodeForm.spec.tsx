@@ -8,10 +8,11 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 
 import { ForeldelsePeriodeFormImpl } from './ForeldelsePeriodeForm';
+import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 
 describe('<ForeldelsePeriodeForm>', () => {
   it('skal rendre komponent korrekt', () => {
-    const periode = {};
+    const periode = {} as ForeldelsesresultatActivity;
     const wrapper = shallow(
       <ForeldelsePeriodeFormImpl
         periode={periode}
@@ -21,15 +22,19 @@ describe('<ForeldelsePeriodeForm>', () => {
         foreldelseVurderingTyper={[{
           kode: foreldelseVurderingType.IKKE_VURDERT,
           navn: 'IKKE_VURDERT',
+          kodeverk: '',
         }, {
           kode: foreldelseVurderingType.FORELDET,
           navn: 'FORELDET',
+          kodeverk: '',
         }, {
           kode: foreldelseVurderingType.IKKE_FORELDET,
           navn: 'IKKE_FORELDET',
+          kodeverk: '',
         }, {
           kode: foreldelseVurderingType.TILLEGGSFRIST,
           navn: 'TILLEGGSFRIST',
+          kodeverk: '',
         }]}
         setNestePeriode={sinon.spy()}
         setForrigePeriode={sinon.spy()}

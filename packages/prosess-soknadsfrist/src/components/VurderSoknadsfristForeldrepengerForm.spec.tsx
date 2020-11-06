@@ -1,16 +1,15 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { VurderSoknadsfristForeldrepengerFormImpl as UnwrappedForm } from './VurderSoknadsfristForeldrepengerForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-soknadsfrist';
 
 describe('<VurderSoknadsfristForeldrepengerForm>', () => {
   it('skal rendre form og vise søknadsfristdato som er lik mottatt dato minus antallDagerSoknadLevertForSent', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
       readOnly={false}
       readOnlySubmitButton={false}
@@ -22,6 +21,9 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       isApOpen
       behandlingId={1}
       behandlingVersjon={1}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      hasAksjonspunkt={false}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -30,9 +32,8 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
   });
 
   it('skal rendre form og vise mottatt dato, periode og begrunnelse', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
       mottattDato="2017-10-15"
@@ -43,6 +44,9 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       isApOpen
       behandlingId={1}
       behandlingVersjon={1}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      hasAksjonspunkt={false}
     />);
     const normalTekst = wrapper.find('Normaltekst');
     expect(normalTekst).has.length(2);
@@ -54,9 +58,8 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
   });
 
   it('skal rendre radiobuttons', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
       gyldigSenFremsetting={false}
@@ -68,6 +71,9 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       isApOpen
       behandlingId={1}
       behandlingVersjon={1}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      hasAksjonspunkt={false}
     />);
     const radioGroup = wrapper.find('RadioGroupField');
     expect(radioGroup).has.length(1);
@@ -77,9 +83,8 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
   });
 
   it('skal ikke vise datepicker når gyldigSenFremsetting er false', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
       gyldigSenFremsetting={false}
@@ -91,15 +96,17 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       isApOpen
       behandlingId={1}
       behandlingVersjon={1}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      hasAksjonspunkt={false}
     />);
     const datepicker = wrapper.find('DatepickerField');
     expect(datepicker).has.length(0);
   });
 
   it('skal vise datepicker når gyldigSenFremsetting er true', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       gyldigSenFremsetting
       readOnly={false}
       readOnlySubmitButton={false}
@@ -111,6 +118,9 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       isApOpen
       behandlingId={1}
       behandlingVersjon={1}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      hasAksjonspunkt={false}
     />);
     const datepicker = wrapper.find('DatepickerField');
     expect(datepicker).has.length(1);

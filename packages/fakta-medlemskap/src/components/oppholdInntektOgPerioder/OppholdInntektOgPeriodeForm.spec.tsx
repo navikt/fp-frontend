@@ -1,38 +1,34 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
-import { OppholdInntektOgPeriodeForm } from './OppholdInntektOgPeriodeForm';
+import { OppholdInntektOgPeriodeForm, PeriodeMedId } from './OppholdInntektOgPeriodeForm';
 import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import PerioderMedMedlemskapFaktaPanel from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel from './StatusForBorgerFaktaPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 const valgtPeriode = {
   aksjonspunkter: [],
-  id: '123',
-};
+  id: 123,
+} as PeriodeMedId;
 
 describe('<OppholdInntektOgPeriodeForm>', () => {
   it('skal vise informasjon uten editeringsmuligheter når det ikke finnes aksjonspunkter', () => {
-    const wrapper = shallowWithIntl(<OppholdInntektOgPeriodeForm
+    const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
       initialValues={{}}
-      intl={intlMock}
       aksjonspunkter={[]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
-      hasOpenAksjonspunkter={false}
       valgtPeriode={valgtPeriode}
       submittable
       readOnly
-      isRevurdering={false}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
@@ -51,11 +47,11 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -65,21 +61,18 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedBosattAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT],
-      id: '123',
-    };
+      id: 123,
+    } as PeriodeMedId;
 
-    const wrapper = shallowWithIntl(<OppholdInntektOgPeriodeForm
+    const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
       initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT}`]: 'test', begrunnelse: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[bosattAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
-      hasOpenAksjonspunkter
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedBosattAksjonspunkt}
-      isRevurdering={false}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
@@ -95,11 +88,11 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -109,21 +102,18 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
-      id: '123',
-    };
+      id: 123,
+    } as PeriodeMedId;
 
-    const wrapper = shallowWithIntl(<OppholdInntektOgPeriodeForm
+    const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
       initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE}`]: 'test', begrunnelse: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[periodeAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
-      hasOpenAksjonspunkter
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedAksjonspunkt}
-      isRevurdering={false}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
@@ -140,11 +130,11 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -154,21 +144,18 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedOppholdsrettAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT],
-      id: '123',
-    };
+      id: 123,
+    } as PeriodeMedId;
 
-    const wrapper = shallowWithIntl(<OppholdInntektOgPeriodeForm
+    const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
       initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OPPHOLDSRETT}`]: 'test', begrunnelse: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[oppholdsrettAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
-      hasOpenAksjonspunkter
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedOppholdsrettAksjonspunkt}
-      isRevurdering={false}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
@@ -185,11 +172,11 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       id: 1,
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
-        navn: 'ap1',
+        kodeverk: '',
       },
       status: {
         kode: 's1',
-        navn: 's1',
+        kodeverk: '',
       },
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
@@ -199,21 +186,18 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedLovligoppholdAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD],
-      id: '123',
-    };
+      id: 123,
+    } as PeriodeMedId;
 
-    const wrapper = shallowWithIntl(<OppholdInntektOgPeriodeForm
+    const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
       initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD}`]: 'test', begrunnelse: 'test' }}
-      intl={intlMock}
       aksjonspunkter={[lovligOppholdAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
-      hasOpenAksjonspunkter
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedLovligoppholdAksjonspunkt}
-      isRevurdering={false}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}

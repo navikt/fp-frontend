@@ -26,7 +26,10 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: () => {
-    [tilretteleggingForArbeidsgiverFieldArrayName]: [];
+    [tilretteleggingForArbeidsgiverFieldArrayName]: {
+      organisasjonsnummer?: string;
+      behovsdato?: string;
+    }[];
   },
 }
 
@@ -120,7 +123,7 @@ const mapStateToProps = (state: any, ownProps: OwnProps) => ({
 const BehovForTilretteleggingPanel = connect(mapStateToProps)(BehovForTilretteleggingPanelImpl);
 
 BehovForTilretteleggingPanel.buildInitialValues = () => ({
-  [tilretteleggingForArbeidsgiverFieldArrayName]: [],
+  [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
 });
 
 export default BehovForTilretteleggingPanel;

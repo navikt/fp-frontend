@@ -1,8 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
@@ -10,19 +10,18 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-svp';
 import { SvangerskapspengerForm, transformValues } from './SvangerskapspengerForm';
 
 describe('<SvangerskapspengerForm>', () => {
   it('skal vise fødselpaneler når familieHendelseType er lik fødsel', () => {
-    const wrapper = shallowWithIntl(<SvangerskapspengerForm
+    const wrapper = shallow(<SvangerskapspengerForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       onSubmitUfullstendigsoknad={sinon.spy()}
-      countryCodes={[]}
       readOnly={false}
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
       alleKodeverk={{}}
+      submitCallback={sinon.spy()}
+      valuesForRegisteredFieldsOnly={{}}
     />);
     expect(wrapper.find(MottattDatoPapirsoknadIndex)).has.length(1);
   });

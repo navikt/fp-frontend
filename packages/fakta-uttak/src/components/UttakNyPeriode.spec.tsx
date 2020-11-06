@@ -8,70 +8,61 @@ import {
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import sinon from 'sinon';
-import { UttakNyPeriode } from './UttakNyPeriode';
+import { NyPeriode, UttakNyPeriode } from './UttakNyPeriode';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
-const periodeTyper = [{
-  0: { kode: 'FELLESPERIODE', navn: 'Fellesperioden', kodeverk: 'UTTAK_PERIODE_TYPE' },
-  1: { kode: 'MØDREKVOTE', navn: 'Mødrekvoten', kodeverk: 'UTTAK_PERIODE_TYPE' },
-  2: { kode: 'FEDREKVOTE', navn: 'Fedrekvoten', kodeverk: 'UTTAK_PERIODE_TYPE' },
-  3: { kode: 'FORELDREPENGER', navn: 'Foreldrepenger', kodeverk: 'UTTAK_PERIODE_TYPE' },
-  4: { kode: 'ANNET', navn: 'Andre typer som f.eks utsettelse', kodeverk: 'UTTAK_PERIODE_TYPE' },
-  5: { kode: 'FORELDREPENGER_FØR_FØDSEL', navn: 'Foreldrepenger før fødsel', kodeverk: 'UTTAK_PERIODE_TYPE' },
-}];
+const periodeTyper = [{ kode: 'FELLESPERIODE', navn: 'Fellesperioden', kodeverk: 'UTTAK_PERIODE_TYPE' },
+  { kode: 'MØDREKVOTE', navn: 'Mødrekvoten', kodeverk: 'UTTAK_PERIODE_TYPE' },
+  { kode: 'FEDREKVOTE', navn: 'Fedrekvoten', kodeverk: 'UTTAK_PERIODE_TYPE' },
+  { kode: 'FORELDREPENGER', navn: 'Foreldrepenger', kodeverk: 'UTTAK_PERIODE_TYPE' },
+  { kode: 'ANNET', navn: 'Andre typer som f.eks utsettelse', kodeverk: 'UTTAK_PERIODE_TYPE' },
+  { kode: 'FORELDREPENGER_FØR_FØDSEL', navn: 'Foreldrepenger før fødsel', kodeverk: 'UTTAK_PERIODE_TYPE' },
+];
 
-const utsettelseÅrsaker = [{
-  0: { kode: 'LOVBESTEMT_FERIE', navn: 'Lovbestemt ferie', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
-  1: { kode: 'SYKDOM', navn: 'Avhengig av hjelp grunnet sykdom', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
-  2: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
-  3: { kode: 'INSTITUSJONSOPPHOLD_SØKER', navn: 'Søker er innlagt i helseinstitusjon', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
-  4: { kode: 'INSTITUSJONSOPPHOLD_BARNET', navn: 'Barn er innlagt i helseinstitusjon', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
-}];
+const utsettelseÅrsaker = [{ kode: 'LOVBESTEMT_FERIE', navn: 'Lovbestemt ferie', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
+  { kode: 'SYKDOM', navn: 'Avhengig av hjelp grunnet sykdom', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
+  { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
+  { kode: 'INSTITUSJONSOPPHOLD_SØKER', navn: 'Søker er innlagt i helseinstitusjon', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
+  { kode: 'INSTITUSJONSOPPHOLD_BARNET', navn: 'Barn er innlagt i helseinstitusjon', kodeverk: 'UTSETTELSE_AARSAK_TYPE' },
+];
 
 const overføringÅrsaker = [{
-  0: {
-    kode: 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER',
-    navn: 'Den andre foreldren er innlagt i helseinstitusjon',
-    kodeverk: 'OVERFOERING_AARSAK_TYPE',
-  },
-  1: {
-    kode: 'SYKDOM_ANNEN_FORELDER',
-    navn: 'Den andre foreldren er pga sykdom avhengig av hjelp for å ta seg av barnet/barna',
-    kodeverk: 'OVERFOERING_AARSAK_TYPE',
-  },
-  2: {
-    kode: 'IKKE_RETT_ANNEN_FORELDER',
-    navn: 'Den andre foreldren har ikke rett',
-    kodeverk: 'OVERFOERING_AARSAK_TYPE',
-  },
-  3: {
-    kode: 'ALENEOMSORG',
-    navn: 'Søker har aleneomsorg',
-    kodeverk: 'OVERFOERING_AARSAK_TYPE',
-  },
+  kode: 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER',
+  navn: 'Den andre foreldren er innlagt i helseinstitusjon',
+  kodeverk: 'OVERFOERING_AARSAK_TYPE',
+}, {
+  kode: 'SYKDOM_ANNEN_FORELDER',
+  navn: 'Den andre foreldren er pga sykdom avhengig av hjelp for å ta seg av barnet/barna',
+  kodeverk: 'OVERFOERING_AARSAK_TYPE',
+}, {
+  kode: 'IKKE_RETT_ANNEN_FORELDER',
+  navn: 'Den andre foreldren har ikke rett',
+  kodeverk: 'OVERFOERING_AARSAK_TYPE',
+}, {
+  kode: 'ALENEOMSORG',
+  navn: 'Søker har aleneomsorg',
+  kodeverk: 'OVERFOERING_AARSAK_TYPE',
 }];
 
 const nyPeriode = {
   fom: '2018-02-01',
   tom: '2018-03-05',
-};
+} as NyPeriode;
 
-const andeler = [
-  {
-    arbeidsgiver: {
-      aktørId: null,
-      fødselsdato: null,
-      identifikator: '973861778',
-      navn: 'STATOIL ASA AVD STATOIL SOKKELVIRKSOMHET',
-      virksomhet: true,
-    },
-    arbeidType: {
-      kode: 'ORDINÆRT_ARBEID',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
-      navn: 'null',
-    },
+const andeler = [{
+  arbeidsgiver: {
+    aktørId: null,
+    fødselsdato: null,
+    identifikator: '973861778',
+    navn: 'STATOIL ASA AVD STATOIL SOKKELVIRKSOMHET',
+    virksomhet: true,
   },
-];
+  arbeidType: {
+    kode: 'ORDINÆRT_ARBEID',
+    kodeverk: 'UTTAK_ARBEID_TYPE',
+    navn: 'null',
+  },
+}];
 
 const sokerKjonn = navBrukerKjonn.MANN;
 
@@ -162,9 +153,10 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
+      // @ts-ignore Fiks
       nyPeriode: {
         periodeType: 'MØDREKVOTE',
-      },
+      } as NyPeriode,
     });
     const input = wrapper.find(SelectField);
     expect(input).to.have.length(2);
@@ -185,6 +177,7 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
+      // @ts-ignore Fiks
       nyPeriode: {
         typeUttak: 'utsettelse',
       },
@@ -208,6 +201,7 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
+      // @ts-ignore Fiks
       nyPeriode: {
         typeUttak: 'gradert',
       },
@@ -231,6 +225,7 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
+      // @ts-ignore Fiks
       nyPeriode: {
         samtidigUttakNyPeriode: true,
       },
@@ -254,6 +249,7 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
+      // @ts-ignore Fiks
       nyPeriode: {
         periodeType: 'FEDREKVOTE',
       },

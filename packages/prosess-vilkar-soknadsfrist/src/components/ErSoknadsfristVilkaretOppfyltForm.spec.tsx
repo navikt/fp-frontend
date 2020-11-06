@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -7,7 +8,7 @@ import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles'
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import { buildInitialValues, ErSoknadsfristVilkaretOppfyltFormImpl as UnwrappedForm } from './ErSoknadsfristVilkaretOppfyltForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-soknadsfrist';
@@ -29,6 +30,15 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
       getKodeverknavn={getKodeverknavn}
+      behandlingId={1}
+      behandlingVersjon={2}
+      vilkar={[]}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkter={[]}
+      status=""
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      hasAksjonspunkt
     />);
 
     const dateLabel = wrapper.find('DateLabel');
@@ -50,6 +60,15 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
       getKodeverknavn={getKodeverknavn}
+      behandlingId={1}
+      behandlingVersjon={2}
+      vilkar={[]}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkter={[]}
+      status=""
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      hasAksjonspunkt
     />);
 
     const dateLabel = wrapper.find('DateLabel');
@@ -72,6 +91,15 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
       getKodeverknavn={getKodeverknavn}
+      behandlingId={1}
+      behandlingVersjon={2}
+      vilkar={[]}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkter={[]}
+      status=""
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      hasAksjonspunkt
     />);
 
     const dateLabel = wrapper.find('span');
@@ -92,6 +120,15 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
       getKodeverknavn={getKodeverknavn}
+      behandlingId={1}
+      behandlingVersjon={2}
+      vilkar={[]}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkter={[]}
+      status=""
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      hasAksjonspunkt
     />);
 
     const dateLabel = wrapper.find('span');
@@ -112,6 +149,15 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
       getKodeverknavn={getKodeverknavn}
+      behandlingId={1}
+      behandlingVersjon={2}
+      vilkar={[]}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkter={[]}
+      status=""
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      hasAksjonspunkt
     />);
 
     const radioButtons = wrapper.find('RadioOption');
@@ -134,6 +180,15 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       textCode="ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato"
       dato="2017-10-10"
       getKodeverknavn={getKodeverknavn}
+      behandlingId={1}
+      behandlingVersjon={2}
+      vilkar={[]}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkter={[]}
+      status=""
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      hasAksjonspunkt
     />);
 
     const confirm = wrapper.find(ProsessStegBegrunnelseTextField);

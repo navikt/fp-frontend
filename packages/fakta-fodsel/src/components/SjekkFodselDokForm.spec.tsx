@@ -7,18 +7,18 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, FamilieHendelse } from '@fpsak-frontend/types';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import { buildInitialValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-01' },
+  fodselsdatoer: { 1: '2019-01-01' } as {[key: number]: string},
   antallBarn: 1,
   soknadType: {
     kode: soknadType.FODSEL,
     kodeverk: '',
   },
-};
+} as Soknad;
 const alleMerknaderFraBeslutter = {
   [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: {},
 };

@@ -7,6 +7,7 @@ import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper
 import BehandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Behandling, BeregningsresultatEs } from '@fpsak-frontend/types';
 
 import { VedtakRevurderingForm } from './VedtakRevurderingForm';
 import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
@@ -18,7 +19,6 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedta
 const createBehandling = (behandlingResultatType) => ({
   id: 1,
   versjon: 123,
-  fagsakId: 1,
   behandlingPaaVent: false,
   behandlingHenlagt: false,
   sprakkode: {
@@ -51,7 +51,7 @@ const createBehandling = (behandlingResultatType) => ({
 
 const resultatstruktur = {
   antallBarn: 1,
-};
+} as BeregningsresultatEs;
 
 const createBehandlingAvslag = () => createBehandling(BehandlingResultatType.AVSLATT);
 const createBehandlingOpphor = () => createBehandling(BehandlingResultatType.OPPHOR);
@@ -83,14 +83,18 @@ describe('<VedtakRevurderingForm>', () => {
     const wrapper = shallowWithIntl(<VedtakRevurderingForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      behandling={revurdering}
+      behandling={revurdering as Behandling}
       aksjonspunkter={aksjonspunkter}
       previewCallback={previewCallback}
       readOnly={false}
       ytelseTypeKode="ES"
-      isBehandlingReadOnly={false}
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      submitCallback={() => undefined}
+      clearFormField={() => undefined}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
@@ -128,15 +132,18 @@ describe('<VedtakRevurderingForm>', () => {
     const wrapper = shallowWithIntl(<VedtakRevurderingForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      antallBarn={1}
-      behandling={revurdering}
+      behandling={revurdering as Behandling}
       aksjonspunkter={aksjonspunkter}
       previewCallback={previewCallback}
       readOnly={false}
       ytelseTypeKode="ES"
-      isBehandlingReadOnly
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      submitCallback={() => undefined}
+      clearFormField={() => undefined}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
@@ -152,16 +159,18 @@ describe('<VedtakRevurderingForm>', () => {
     const wrapper = shallowWithIntl(<VedtakRevurderingForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      behandling={revurdering}
+      behandling={revurdering as Behandling}
       aksjonspunkter={[]}
-      antallBarn={1}
       previewCallback={previewCallback}
-      haveSentVarsel
       readOnly={false}
       ytelseTypeKode="ES"
-      isBehandlingReadOnly
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      submitCallback={() => undefined}
+      clearFormField={() => undefined}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);

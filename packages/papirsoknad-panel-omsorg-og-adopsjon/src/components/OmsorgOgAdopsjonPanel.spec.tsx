@@ -69,18 +69,21 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       const pushSpy = sinon.spy(props.fields, 'push');
       const wrapper = shallow(<FodselsDatoFields {...props} />);
 
+      // @ts-ignore
       expect(pushSpy).to.have.been.calledOnce;
       expect(props.fields.length).to.eql(1);
 
-      wrapper.instance().UNSAFE_componentWillReceiveProps(props);
+      wrapper.instance().UNSAFE_componentWillReceiveProps(props, {});
       wrapper.update();
 
+      // @ts-ignore
       expect(pushSpy).to.have.been.calledTwice;
       expect(props.fields.length).to.eql(2);
 
-      wrapper.instance().UNSAFE_componentWillReceiveProps(props);
+      wrapper.instance().UNSAFE_componentWillReceiveProps(props, {});
       wrapper.update();
 
+      // @ts-ignore
       expect(pushSpy).to.have.been.calledTwice;
       expect(props.fields.length).to.eql(2);
     });

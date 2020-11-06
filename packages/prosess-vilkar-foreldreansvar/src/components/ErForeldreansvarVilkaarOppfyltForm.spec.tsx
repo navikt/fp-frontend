@@ -1,36 +1,30 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { ProsessStegBegrunnelseTextField, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
 import { buildInitialValues, ErForeldreansvarVilkaarOppfyltForm as UnwrappedForm } from './ErForeldreansvarVilkaarOppfyltForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-foreldreansvar';
-
-const fagsakYtelseTypeEngangsstonad = {
-  kode: fagsakYtelseType.ENGANGSSTONAD,
-};
 
 describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
   const aksjonspunkterList = [{
     definisjon: {
-      navn: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
       kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      kodeverk: '',
     },
     status: {
       kode: '',
-      navn: '',
+      kodeverk: '',
     },
     vilkarType: {
       kode: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
-      navn: 'Omsorgsvilkåret',
+      kodeverk: '',
     },
     begrunnelse: 'begrunnelse',
     kanLoses: true,
@@ -38,14 +32,13 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
   }];
 
   it('skal vise readonly-form med utgråete knapper når readonly og vilkåret ikke er vurdert', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       isEngangsstonad
-      fagsakYtelseTypeForSak={fagsakYtelseTypeEngangsstonad}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
+        kodeverk: '',
       }]}
       aksjonspunkter={aksjonspunkterList}
       readOnly
@@ -53,6 +46,11 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       erVilkarOk={false}
       behandlingId={1}
       behandlingVersjon={1}
+      isForeldreansvar2Ledd
+      status=""
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
@@ -61,14 +59,13 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
   });
 
   it('skal vise radioknapper og nedtrekksliste for å velge om vilkåret skal godkjennes eller avvises med avslagsgrunn når ikke readonly', () => {
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       isEngangsstonad
-      fagsakYtelseTypeForSak={fagsakYtelseTypeEngangsstonad}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
+        kodeverk: '',
       }]}
       aksjonspunkter={aksjonspunkterList}
       readOnly={false}
@@ -76,6 +73,11 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       erVilkarOk={undefined}
       behandlingId={1}
       behandlingVersjon={1}
+      isForeldreansvar2Ledd
+      status=""
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const selector = wrapper.find(VilkarResultPicker);
@@ -83,6 +85,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
     expect(selector.prop('avslagsarsaker')).to.eql([{
       kode: 'TEST_KODE',
       navn: 'testnavn',
+      kodeverk: '',
     }]);
     expect(selector.prop('erVilkarOk')).is.undefined;
 
@@ -94,27 +97,25 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
     const aksjonspunkter = [{
       id: 1,
       definisjon: {
-        navn: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-        kode: 'test',
+        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        kodeverk: '',
       },
       status: {
         kode: '',
-        navn: '',
+        kodeverk: '',
       },
       vilkarType: {
         kode: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
-        navn: 'Adopsjonvilkåret',
+        kodeverk: '',
       },
       begrunnelse: 'begrunnelse',
       kanLoses: true,
       erAktivt: true,
     }];
 
-    const wrapper = shallowWithIntl(<UnwrappedForm
+    const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
-      intl={intlMock}
       isEngangsstonad
-      fagsakYtelseTypeForSak={fagsakYtelseTypeEngangsstonad}
       avslagsarsaker={[]}
       aksjonspunkter={aksjonspunkter}
       readOnly
@@ -122,6 +123,11 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       erVilkarOk
       behandlingId={1}
       behandlingVersjon={1}
+      isForeldreansvar2Ledd
+      status=""
+      submitCallback={() => undefined}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

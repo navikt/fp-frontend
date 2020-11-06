@@ -8,7 +8,6 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { FerieOgArbeidsPeriode } from './FerieOgArbeidsPeriode';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
-const arbeidsgiver = {};
 const behandlingStatusKode = '';
 
 describe('<FerieOgArbeidsPeriode>', () => {
@@ -21,29 +20,22 @@ describe('<FerieOgArbeidsPeriode>', () => {
       id="2018-06-02|2018-06-25"
       fraDato="2018-06-02"
       tilDato="2018-06-25"
-      uttakPeriodeType={{}}
-      originalResultat={{}}
+      uttakPeriodeType={{
+        kode: '',
+        kodeverk: '',
+      }}
+      originalResultat={{
+        kode: '',
+        kodeverk: '',
+      }}
       updated
       bekreftet
       readOnly={false}
       behandlingStatusKode={behandlingStatusKode}
-      arbeidsgiver={arbeidsgiver}
       skalViseResultat
-      oppholdArsak={{}}
-      inntektsmeldinger={[{
-        arbeidsgiver: 'test',
-        arbeidsgiverStartdato: '2000-01-01',
-        utsettelsePerioder: [{
-          fom: '2000-01-01',
-          tom: '2000-01-10',
-          utsettelseArsak: {
-            kode: 'ARBEID',
-            kodeverk: 'UTSETTELSE_AARSAK_TYPE',
-            navn: 'Arbeid',
-          },
-        }],
-      }]}
-      getKodeverknavn={sinon.spy()}
+      behandlingId={1}
+      behandlingVersjon={2}
+      arbeidstidprosent={10}
       {...reduxFormPropsMock}
     />);
 

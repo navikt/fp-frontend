@@ -9,7 +9,6 @@
 import React from 'react';
 import { createIntl, createIntlCache, IntlProvider } from 'react-intl';
 import { mount, shallow } from 'enzyme';
-import sinon from 'sinon';
 // You can pass your messages to the IntlProvider. Optional: remove if unneeded.
 import messages from '../../../public/sprak/nb_NO.json';
 
@@ -59,13 +58,5 @@ export function mountWithIntl(node, options, moduleMessages = undefined) {
 
 export const intlWithMessages = (customMessages) => getIntlObject(customMessages || messages);
 
-/* Lagt til for a hindre warnings i tester */
-export const intlMock = {
-  formatDate: sinon.spy(),
-  formatTime: sinon.spy(),
-  formatRelative: sinon.spy(),
-  formatNumber: sinon.spy(),
-  formatPlural: sinon.spy(),
-  formatMessage: sinon.spy(),
-  now: sinon.spy(),
-};
+// TODO Denne burde ein vel kunne fjerna? Blir injecta i shallowWithInlt og mountWithIntl
+export const intlMock = getIntlObject(messages);

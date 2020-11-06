@@ -33,13 +33,17 @@ describe('<CheckPersonStatusForm>', () => {
       intl={intlMock}
       readOnly={false}
       readOnlySubmitButton
-      fortsettBehandling="false"
+      fortsettBehandling={false}
       originalPersonstatusName="Ukjent"
-      personstatusName=""
       personStatuser={[]}
       gjeldeneFom="2018-10-10"
       behandlingId={1}
       behandlingVersjon={1}
+      behandlingHenlagt={false}
+      personopplysninger={{} as Personopplysninger}
+      alleKodeverk={{}}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -57,18 +61,24 @@ describe('<CheckPersonStatusForm>', () => {
       intl={intlMock}
       readOnly={false}
       readOnlySubmitButton
-      fortsettBehandling="false"
+      fortsettBehandling={false}
       originalPersonstatusName="Ukjent"
-      personstatusName=""
       personStatuser={[]}
       gjeldeneFom="2018-10-10"
       behandlingId={1}
       behandlingVersjon={1}
+      behandlingHenlagt={false}
+      personopplysninger={{} as Personopplysninger}
+      alleKodeverk={{}}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
     />);
 
     const radios = wrapper.find(RadioOption);
     expect(radios).to.have.length(2);
+    // @ts-ignore
     expect(radios.first().prop('label').id).is.eql('CheckPersonStatusForm.HaltBehandling');
+    // @ts-ignore
     expect(radios.last().prop('label').id).is.eql('CheckPersonStatusForm.ContinueBehandling');
   });
 
@@ -76,9 +86,11 @@ describe('<CheckPersonStatusForm>', () => {
     const personstatuser = [{
       kode: 'BOSATT',
       navn: 'Bosatt',
+      kodeverk: '',
     }, {
       kode: 'ANNEN',
       navn: 'Annen',
+      kodeverk: '',
     }];
     const wrapper = shallowWithIntl(<UnwrappedForm
       {...reduxFormPropsMock}
@@ -87,11 +99,15 @@ describe('<CheckPersonStatusForm>', () => {
       readOnlySubmitButton
       fortsettBehandling
       originalPersonstatusName="Ukjent"
-      personstatusName=""
       personStatuser={personstatuser}
       gjeldeneFom="2018-10-10"
       behandlingId={1}
       behandlingVersjon={1}
+      behandlingHenlagt={false}
+      personopplysninger={{} as Personopplysninger}
+      alleKodeverk={{}}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
     />);
 
     const radios = wrapper.find(RadioOption);
@@ -112,14 +128,18 @@ describe('<CheckPersonStatusForm>', () => {
       intl={intlMock}
       readOnly
       readOnlySubmitButton
-      fortsettBehandling="false"
+      fortsettBehandling={false}
       originalPersonstatusName="Ukjent"
-      personstatusName="Bosatt"
       initialValues={initialValues}
-      personStatuser={[{}]}
+      personStatuser={[]}
       gjeldeneFom="2018-10-10"
       behandlingId={1}
       behandlingVersjon={1}
+      behandlingHenlagt={false}
+      personopplysninger={{} as Personopplysninger}
+      alleKodeverk={{}}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
     />);
 
     const radioGroupField = wrapper.find('RadioGroupField');

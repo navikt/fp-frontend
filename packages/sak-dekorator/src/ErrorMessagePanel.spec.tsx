@@ -82,9 +82,7 @@ describe('<ErrorMessagePanel>', () => {
       url: 'www.test.no',
     });
 
-    modal.prop('closeModalFn')({
-      preventDefault: sinon.spy(),
-    });
+    modal.prop('closeModalFn')();
 
     expect(wrapper.find(ErrorMessageDetailsModal)).to.have.length(0);
   });

@@ -27,6 +27,7 @@ describe('<TilretteleggingForArbeidsgiverFieldArray>', () => {
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
+    // @ts-ignore
     const innerWrapper = shallow(comp);
 
     expect(innerWrapper.find(SelectField)).has.length(1);

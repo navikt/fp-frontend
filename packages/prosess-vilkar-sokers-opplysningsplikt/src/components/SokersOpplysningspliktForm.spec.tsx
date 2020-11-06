@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -60,6 +61,12 @@ describe('<SokersOpplysningspliktForm>', () => {
       getKodeverknavn={getKodeverknavn}
       behandlingId={1}
       behandlingVersjon={1}
+      soknad={{} as Soknad}
+      aksjonspunkter={[]}
+      status="test"
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     const table = wrapper.find(Table);
@@ -96,6 +103,12 @@ describe('<SokersOpplysningspliktForm>', () => {
       getKodeverknavn={getKodeverknavn}
       behandlingId={1}
       behandlingVersjon={1}
+      soknad={{} as Soknad}
+      aksjonspunkter={[]}
+      status="test"
+      submitCallback={sinon.spy()}
+      alleKodeverk={{}}
+      originalErVilkarOk
     />);
 
     expect(wrapper.find(Table)).to.have.length(0);

@@ -7,43 +7,47 @@ import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import sarligGrunn from '../kodeverk/sarligGrunn';
-import aktsomhet from '../kodeverk/aktsomhet';
+import Aktsomhet from '../kodeverk/aktsomhet';
 import ForeldetFormPanel from './tilbakekrevingPeriodePaneler/ForeldetFormPanel';
-import { TilbakekrevingPeriodeFormImpl } from './TilbakekrevingPeriodeForm';
+import { TilbakekrevingPeriodeFormImpl, CustomVilkarsVurdertePeriode } from './TilbakekrevingPeriodeForm';
 import vilkarResultat from '../kodeverk/vilkarResultat';
+import DataForPeriode from '../types/dataForPeriodeTsType';
 
 describe('<TilbakekrevingPeriodeForm>', () => {
   const sarligGrunnTyper = [{
     kode: sarligGrunn.GRAD_AV_UAKTSOMHET,
     navn: 'grad av uaktsomhet',
+    kodeverk: '',
   }, {
     kode: sarligGrunn.HELT_ELLER_DELVIS_NAVS_FEIL,
     navn: 'navs feil',
+    kodeverk: '',
   }];
   const aktsomhetTyper = [{
-    kode: aktsomhet.GROVT_UAKTSOM,
+    kode: Aktsomhet.GROVT_UAKTSOM,
     navn: 'grovt',
+    kodeverk: '',
   }, {
-    kode: aktsomhet.SIMPEL_UAKTSOM,
+    kode: Aktsomhet.SIMPEL_UAKTSOM,
     navn: 'simpel',
+    kodeverk: '',
   }, {
-    kode: aktsomhet.FORSETT,
+    kode: Aktsomhet.FORSETT,
     navn: 'forsett',
+    kodeverk: '',
   }];
 
   it('skal vise panel for foreldet periode', () => {
     const periode = {
       erForeldet: true,
       ytelser: [],
-    };
+    } as DataForPeriode;
     const wrapper = shallow(<TilbakekrevingPeriodeFormImpl
-      periode={periode}
       data={periode}
       behandlingFormPrefix="behandling_V1"
       skjulPeriode={() => undefined}
       readOnly={false}
       erBelopetIBehold
-      formName="testForm"
       tilbakekrevSelvOmBeloepErUnder4Rettsgebyr
       oppdaterPeriode={() => undefined}
       oppdaterSplittedePerioder={() => undefined}
@@ -59,6 +63,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       beregnBelop={() => undefined}
       intl={intlMock}
       vilkarsVurdertePerioder={[]}
+      handletUaktsomhetGrad={Aktsomhet.FORSETT}
       {...reduxFormPropsMock}
     />);
 
@@ -67,62 +72,54 @@ describe('<TilbakekrevingPeriodeForm>', () => {
 
   it('skal teste kopiering av vilkårsvudering for periode', () => {
     const periode = {
-      erForeldet: false,
       begrunnelse: null,
-      valgtVilkarResultatType: null,
-      vurderingBegrunnelse: null,
+      erForeldet: false,
       fom: '2020-04-01',
       tom: '2020-04-15',
       ytelser: [],
-    };
-    const vilkårsPerioder = [
-      {
-        erForeldet: false,
-        begrunnelse: 'Begrunnelse periode 1',
-        valgtVilkarResultatType: vilkarResultat.GOD_TRO,
-        vurderingBegrunnelse: 'Vurdering periode 1',
-        fom: '2020-03-01',
-        tom: '2020-03-15',
-        GOD_TRO: {
-          erBelopetIBehold: false,
+    } as DataForPeriode;
+
+    const vilkårsPerioder = [{
+      erForeldet: false,
+      begrunnelse: 'Begrunnelse periode 1',
+      valgtVilkarResultatType: vilkarResultat.GOD_TRO,
+      vurderingBegrunnelse: 'Vurdering periode 1',
+      fom: '2020-03-01',
+      tom: '2020-03-15',
+      GOD_TRO: {
+        erBelopetIBehold: false,
+      },
+    }, {
+      erForeldet: false,
+      begrunnelse: 'Begrunnelse periode 2',
+      valgtVilkarResultatType: vilkarResultat.FORSTO_BURDE_FORSTAATT,
+      vurderingBegrunnelse: 'Vurdering periode 2',
+      fom: '2020-03-15',
+      tom: '2020-03-31',
+      FORSTO_BURDE_FORSTAATT: {
+        handletUaktsomhetGrad: Aktsomhet.FORSETT,
+        FORSETT: {
+          skalDetTilleggesRenter: false,
         },
       },
-      {
-        erForeldet: false,
-        begrunnelse: 'Begrunnelse periode 2',
-        valgtVilkarResultatType: vilkarResultat.FORSTO_BURDE_FORSTAATT,
-        vurderingBegrunnelse: 'Vurdering periode 2',
-        fom: '2020-03-15',
-        tom: '2020-03-31',
-        FORSTO_BURDE_FORSTAATT: {
-          handletUaktsomhetGrad: aktsomhet.FORSETT,
-          FORSETT: {
-            skalDetTilleggesRenter: false,
-          },
-        },
-      },
-      {
-        erForeldet: false,
-        valgtVilkarResultatType: null,
-        fom: '2020-04-01',
-        tom: '2020-04-15',
-      },
-      {
-        erForeldet: false,
-        fom: '2020-04-15',
-        tom: '2020-04-30',
-      },
-    ];
+    }, {
+      erForeldet: false,
+      valgtVilkarResultatType: null,
+      fom: '2020-04-01',
+      tom: '2020-04-15',
+    }, {
+      erForeldet: false,
+      fom: '2020-04-15',
+      tom: '2020-04-30',
+    }] as CustomVilkarsVurdertePeriode[];
 
     const changeValue = sinon.spy();
     const wrapper = shallow(<TilbakekrevingPeriodeFormImpl
-      periode={periode}
       data={periode}
       behandlingFormPrefix="behandling_V1"
       skjulPeriode={() => undefined}
       readOnly={false}
       erBelopetIBehold
-      formName="testForm"
       tilbakekrevSelvOmBeloepErUnder4Rettsgebyr
       oppdaterPeriode={() => undefined}
       oppdaterSplittedePerioder={() => undefined}
@@ -138,6 +135,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       beregnBelop={() => undefined}
       intl={intlMock}
       vilkarsVurdertePerioder={vilkårsPerioder}
+      handletUaktsomhetGrad={Aktsomhet.FORSETT}
       {...reduxFormPropsMock}
       change={changeValue}
     />);
