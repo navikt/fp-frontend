@@ -122,13 +122,13 @@ describe('<TotrinnskontrollIndex>', () => {
       getTotrinnsaksjonspunkterOmsorg(),
       getTotrinnsaksjonspunkterForeldreansvar(),
     ];
+    requestApi.mock(FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, totrinnskontrollAksjonspunkter);
 
     const wrapper = shallow(<TotrinnskontrollIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={alleBehandlinger[0].id}
       behandlingVersjon={alleBehandlinger[0].versjon}
-      totrinnskontrollSkjermlenkeContext={totrinnskontrollAksjonspunkter}
     />);
 
     const index = wrapper.find(TotrinnskontrollSakIndex);

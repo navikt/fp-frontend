@@ -7,9 +7,9 @@ import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 
 import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import HistoryIndex from './HistoryIndex';
+import HistorikkIndex from './HistorikkIndex';
 
-describe('<HistoryIndex>', () => {
+describe('<HistorikkIndex>', () => {
   const locationMock = {
     pathname: 'test',
     search: 'test',
@@ -52,7 +52,7 @@ describe('<HistoryIndex>', () => {
       },
     }]);
 
-    const wrapper = shallow(<HistoryIndex
+    const wrapper = shallow(<HistorikkIndex
       saksnummer={12345}
       behandlingId={1}
       behandlingVersjon={2}

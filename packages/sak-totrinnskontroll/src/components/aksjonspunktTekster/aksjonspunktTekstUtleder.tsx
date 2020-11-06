@@ -13,7 +13,6 @@ import {
 } from '@fpsak-frontend/types';
 
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
-import vurderFaktaOmBeregningTotrinnText from '../../vurderFaktaBeregningTotrinnText';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
 
 const formatDate = (date?: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
@@ -147,18 +146,14 @@ const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean) 
   return [<FormattedMessage id={aksjonspunktTextId} />];
 };
 
-const getFaktaOmBeregningText = (beregningDto: TotrinnskontrollAksjonspunkt['beregningDto']) => {
+const getFaktaOmBeregningText = (beregningDto: TotrinnskontrollAksjonspunkt['beregningDto'], faktaOmBeregningTilfeller: KodeverkMedNavn[]) => {
   if (!beregningDto.faktaOmBeregningTilfeller) {
     return null;
   }
-  const aksjonspunktTextIds = beregningDto.faktaOmBeregningTilfeller.map(({
+
+  return beregningDto.faktaOmBeregningTilfeller.map(({
     kode,
-  }) => vurderFaktaOmBeregningTotrinnText[kode]);
-  return aksjonspunktTextIds.map((aksjonspunktTextId) => (aksjonspunktTextId ? (
-    <FormattedMessage
-      id={aksjonspunktTextId}
-    />
-  ) : null));
+  }) => faktaOmBeregningTilfeller.find((tilfelle) => tilfelle.kode === kode)?.navn);
 };
 
 const omgjoerTekstMap = {
@@ -221,6 +216,7 @@ const getAksjonspunkttekst = (
   klagebehandlingVurdering: TotrinnsKlageVurdering,
   behandlingStatus: Kodeverk,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
+  faktaOmBeregningTilfeller: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
 ): ReactNode[] => {
@@ -231,7 +227,7 @@ const getAksjonspunkttekst = (
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN) {
-    return getFaktaOmBeregningText(aksjonspunkt.beregningDto);
+    return getFaktaOmBeregningText(aksjonspunkt.beregningDto, faktaOmBeregningTilfeller);
   }
   if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder && aksjonspunkt.uttakPerioder.length > 0) {
     return buildUttakText(aksjonspunkt);

@@ -3,18 +3,11 @@ import React, {
 } from 'react';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { Kodeverk, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import { Kodeverk, BehandlingAppKontekst, TotrinnsKlageVurdering } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
-
-interface TotrinnsKlageVurdering {
-  klageVurdering?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageVurderingResultatNFP?: any;
-  klageVurderingResultatNK?: any;
-}
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;

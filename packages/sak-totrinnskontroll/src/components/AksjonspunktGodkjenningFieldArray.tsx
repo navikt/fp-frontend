@@ -42,6 +42,7 @@ interface OwnProps {
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   skjemalenkeTyper: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -57,6 +58,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
+  faktaOmBeregningTilfeller,
   lagLenke,
 }) => (
   <>
@@ -72,7 +74,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
       const visArsaker = erAnke || ((fieldValues && fieldValues.totrinnskontrollGodkjent === false) || erKlageKA);
 
       const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
-        arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
+        arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
 
       const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
 

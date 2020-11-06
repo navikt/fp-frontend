@@ -36,11 +36,11 @@ interface OwnProps {
 }
 
 /**
- * HistoryIndex
+ * HistorikkIndex
  *
  * Container komponent. Har ansvar for å hente historiken for en fagsak fra state og vise den
  */
-const HistoryIndex: FunctionComponent<OwnProps> = ({
+const HistorikkIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingId,
   behandlingVersjon,
@@ -92,4 +92,4 @@ const HistoryIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default HistoryIndex;
+export default HistorikkIndex;
