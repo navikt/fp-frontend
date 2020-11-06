@@ -3,14 +3,14 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import SupportMenySakIndex from './SupportMenySakIndex';
-import supportTabs from './supportTabs';
+import SupportTabs from './supportTabs';
 import TabMeny from './components/TabMeny';
 
 describe('<SupportMenySakIndex>', () => {
   it('skal lage tabs og sette Send melding som valgt', () => {
     const wrapper = shallow(<SupportMenySakIndex
-      tilgjengeligeTabs={[supportTabs.HISTORY, supportTabs.MESSAGES, supportTabs.DOCUMENTS]}
-      valgbareTabs={[supportTabs.HISTORY, supportTabs.MESSAGES, supportTabs.DOCUMENTS]}
+      tilgjengeligeTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER, SupportTabs.DOKUMENTER]}
+      valgbareTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER, SupportTabs.DOKUMENTER]}
       valgtIndex={1}
       onClick={() => undefined}
     />);
@@ -32,8 +32,8 @@ describe('<SupportMenySakIndex>', () => {
 
   it('skal lage tabs og sette Send Melding til disablet', () => {
     const wrapper = shallow(<SupportMenySakIndex
-      tilgjengeligeTabs={[supportTabs.HISTORY, supportTabs.MESSAGES]}
-      valgbareTabs={[supportTabs.HISTORY]}
+      tilgjengeligeTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER]}
+      valgbareTabs={[SupportTabs.HISTORIKK]}
       onClick={() => undefined}
     />);
 

@@ -27,31 +27,31 @@ type Values = {
 };
 
 const getLagreFunksjon = (
-  behandlingId: number,
   saksnummer: number,
-  selectedBehandlingVersjon: number,
-  setAllAksjonspunktApproved: (erGodkjent: boolean) => void,
-  setShowBeslutterModal: (visModal: boolean) => void,
-  approveAp: (params: any) => Promise<any>,
+  behandlingId: number,
+  behandlingVersjon: number,
+  setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
+  setVisBeslutterModal: (visModal: boolean) => void,
+  godkjennTotrinnsaksjonspunkter: (params: any) => Promise<any>,
 ) => (
   totrinnskontrollData: Values,
 ) => {
   const params = {
-    behandlingId,
     saksnummer,
-    behandlingVersjon: selectedBehandlingVersjon,
+    behandlingId,
+    behandlingVersjon,
     bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
   };
-  setAllAksjonspunktApproved(totrinnskontrollData.erAlleAksjonspunktGodkjent);
-  setShowBeslutterModal(true);
-  return approveAp(params);
+  setAlleAksjonspunktTilGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
+  setVisBeslutterModal(true);
+  return godkjennTotrinnsaksjonspunkter(params);
 };
 
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId?: number;
-  behandlingVersjon?: number;
+  behandlingId: number;
+  behandlingVersjon: number;
 }
 
 /**
@@ -66,7 +66,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
 }) => {
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
-  const [erAlleAksjonspunktGodkjent, setErAlleAksjonspunktGodkjent] = useState(false);
+  const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
@@ -75,9 +75,9 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
 
   const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
 
-  const alleKodeverk = useKodeverk(behandling?.type);
+  const alleKodeverk = useKodeverk(behandling.type);
 
-  const erInnsynBehandling = behandling && behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
+  const erInnsynBehandling = behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
 
   const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
@@ -100,19 +100,19 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     },
   );
 
-  const { startRequest: godkjennBehandling } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
+  const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
-  const fetchPreview = useVisForhandsvisningAvMelding(behandling?.type);
+  const forhandsvisMelding = useVisForhandsvisningAvMelding(behandling.type);
 
   const forhandsvisVedtaksbrev = useCallback(() => {
-    fetchPreview(false, {
+    forhandsvisMelding(false, {
       behandlingUuid: behandling.uuid,
       ytelseType: fagsak.sakstype,
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(behandlingId, fagsak.saksnummer, behandlingVersjon,
-    setErAlleAksjonspunktGodkjent, setVisBeslutterModal, godkjennBehandling),
+  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, behandlingId, behandlingVersjon,
+    setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
   [behandlingId, behandlingVersjon]);
 
   if (!totrinnArsaker && !totrinnArsakerReadOnly) {

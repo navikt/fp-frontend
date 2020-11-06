@@ -12,9 +12,9 @@ import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import * as useHistory from '../../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import MessagesIndex from './MessagesIndex';
+import MeldingIndex from './MeldingIndex';
 
-describe('<MessagesIndex>', () => {
+describe('<MeldingIndex>', () => {
   const recipients = ['Søker'];
 
   const fagsak = {
@@ -57,7 +57,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -75,7 +75,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
     requestApi.mock(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, {});
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -97,7 +97,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -133,7 +133,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -168,7 +168,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -210,7 +210,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -252,7 +252,7 @@ describe('<MessagesIndex>', () => {
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
     requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}
@@ -299,7 +299,7 @@ describe('<MessagesIndex>', () => {
       settBehandlingPaVent: setBehandlingOnHoldCallback,
     });
 
-    const wrapper = shallow(<MessagesIndex
+    const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
       behandlingId={1}

@@ -5,9 +5,9 @@ import { shallow } from 'enzyme';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
-import { DocumentIndex } from './DocumentIndex';
+import { DokumentIndex } from './DokumentIndex';
 
-describe('<DocumentIndex>', () => {
+describe('<DokumentIndex>', () => {
   const documents = [{
     journalpostId: '1',
     dokumentId: '1',
@@ -31,7 +31,7 @@ describe('<DocumentIndex>', () => {
   it('skal vise liste med sorterte dokumenter', () => {
     requestApi.mock(FpsakApiKeys.ALL_DOCUMENTS, documents);
 
-    const wrapper = shallow(<DocumentIndex
+    const wrapper = shallow(<DokumentIndex
       behandlingId={1}
       behandlingVersjon={2}
       saksnummer={123}

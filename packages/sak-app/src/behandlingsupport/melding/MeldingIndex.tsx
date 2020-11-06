@@ -95,11 +95,11 @@ const EMPTY_ARRAY = [];
 const RECIPIENTS = ['Søker'];
 
 /**
- * MessagesIndex
+ * MeldingIndex
  *
  * Container komponent. Har ansvar for å hente mottakere og brevmaler fra serveren.
  */
-const MessagesIndex: FunctionComponent<OwnProps> = ({
+const MeldingIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   behandlingId,
@@ -201,4 +201,4 @@ const MessagesIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default MessagesIndex;
+export default MeldingIndex;
