@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Element } from 'nav-frontend-typografi';
 
 import BubbleText from './felles/bubbleText';
@@ -7,12 +6,16 @@ import { findHendelseText } from './felles/historikkUtils';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
 import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
 
+type Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    dokumentLinks: {}[];
+    saksNr: number;
+    getKodeverknavn: (...args: any[]) => any;
+};
+
 const HistorikkMalType1 = ({
-  historikkinnslagDeler,
-  dokumentLinks,
-  saksNr,
-  getKodeverknavn,
-}) => (
+  historikkinnslagDeler, dokumentLinks, saksNr, getKodeverknavn,
+}: Props) => (
   <div>
     {historikkinnslagDeler[0] && historikkinnslagDeler[0].hendelse
       && <Element className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</Element>}
@@ -21,15 +24,19 @@ const HistorikkMalType1 = ({
       <BubbleText
         bodyText={getKodeverknavn(historikkinnslagDeler[0].begrunnelse)}
         cutOffLength={70}
+        // @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message
         className="snakkeboble-panel__tekst"
       />
     )}
     {historikkinnslagDeler[0].begrunnelseFritekst
+    // @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message
     && <BubbleText bodyText={historikkinnslagDeler[0].begrunnelseFritekst} className="snakkeboble-panel__tekst" />}
     <div>
       {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
         <HistorikkDokumentLenke
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'tag' does not exist on type '{}'.
           key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+          // @ts-expect-error ts-migrate(2322) FIXME: Property 'dokumentLenke' does not exist on type 'I... Remove this comment to see the full error message
           dokumentLenke={dokumentLenke}
           saksNr={saksNr}
         />
@@ -37,13 +44,6 @@ const HistorikkMalType1 = ({
     </div>
   </div>
 );
-
-HistorikkMalType1.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  dokumentLinks: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  saksNr: PropTypes.number.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-};
 
 export default HistorikkMalType1;
 

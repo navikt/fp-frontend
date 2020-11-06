@@ -1,6 +1,4 @@
 import React from 'react';
-
-import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
@@ -117,14 +115,21 @@ const formaterAksjonspunkt = (aksjonspunkt, intl, erTilbakekreving) => {
   );
 };
 
+type OwnHistorikkMalType3Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    behandlingLocation: {};
+    getKodeverknavn: (...args: any[]) => any;
+    createLocationForSkjermlenke: (...args: any[]) => any;
+    intl: {};
+    erTilbakekreving?: boolean;
+};
+
+// @ts-expect-error ts-migrate(2456) FIXME: Type alias 'HistorikkMalType3Props' circularly ref... Remove this comment to see the full error message
+type HistorikkMalType3Props = OwnHistorikkMalType3Props & typeof HistorikkMalType3.defaultProps;
+
 const HistorikkMalType3 = ({
-  historikkinnslagDeler,
-  behandlingLocation,
-  intl,
-  getKodeverknavn,
-  erTilbakekreving,
-  createLocationForSkjermlenke,
-}) => (
+  historikkinnslagDeler, behandlingLocation, intl, getKodeverknavn, erTilbakekreving, createLocationForSkjermlenke,
+}: HistorikkMalType3Props) => (
   <div>
     {historikkinnslagDeler && historikkinnslagDeler.map((historikkinnslagDel, index) => (
       <div key={`totrinnsvurdering${index + 1}`}>
@@ -156,15 +161,6 @@ const HistorikkMalType3 = ({
     ))}
   </div>
 );
-
-HistorikkMalType3.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-  intl: PropTypes.shape().isRequired,
-  erTilbakekreving: PropTypes.bool,
-};
 
 HistorikkMalType3.defaultProps = {
   erTilbakekreving: false,

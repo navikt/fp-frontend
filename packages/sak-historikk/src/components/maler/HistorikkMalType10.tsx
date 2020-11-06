@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element } from 'nav-frontend-typografi';
@@ -16,9 +15,20 @@ const scrollUp = () => {
   window.scroll(0, 0);
 };
 
+type HistorikkMalType10Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    behandlingLocation: {};
+    dokumentLinks: {}[];
+    intl: {};
+    originType: {};
+    saksNr: number;
+    getKodeverknavn: (...args: any[]) => any;
+    createLocationForSkjermlenke: (...args: any[]) => any;
+};
+
 const HistorikkMalType10 = ({
   historikkinnslagDeler, behandlingLocation, dokumentLinks, intl, originType, saksNr, getKodeverknavn, createLocationForSkjermlenke,
-}) => {
+}: HistorikkMalType10Props) => {
   const historikkFromToValues = (endretFelt, fieldName) => {
     const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
     const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
@@ -122,6 +132,7 @@ const HistorikkMalType10 = ({
         </Element>
         )}
 
+        {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'kode' does not exist on type '{}'. */}
         {historikkinnslagDel.opplysninger && originType.kode === historikkinnslagType.OVST_UTTAK
         && (
         <FormattedMessage
@@ -134,6 +145,7 @@ const HistorikkMalType10 = ({
         />
         )}
 
+        {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'kode' does not exist on type '{}'. */}
         {historikkinnslagDel.opplysninger && originType.kode === historikkinnslagType.FASTSATT_UTTAK
         && (
         <FormattedMessage
@@ -151,6 +163,7 @@ const HistorikkMalType10 = ({
 
         {historikkinnslagDel.begrunnelse && (
         <BubbleText
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ kode?: string; kodeverk?: string; }' is no... Remove this comment to see the full error message
           bodyText={historikkinnslagDel.begrunnelse}
           className="snakkeboble-panel__tekst"
         />
@@ -159,7 +172,9 @@ const HistorikkMalType10 = ({
         <div>
           {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
             <HistorikkDokumentLenke
+              // @ts-expect-error ts-migrate(2339) FIXME: Property 'tag' does not exist on type '{}'.
               key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+              // @ts-expect-error ts-migrate(2322) FIXME: Property 'dokumentLenke' does not exist on type 'I... Remove this comment to see the full error message
               dokumentLenke={dokumentLenke}
               saksNr={saksNr}
             />
@@ -169,15 +184,5 @@ const HistorikkMalType10 = ({
     )));
 };
 
-HistorikkMalType10.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  dokumentLinks: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  intl: PropTypes.shape().isRequired,
-  originType: PropTypes.shape().isRequired,
-  saksNr: PropTypes.number.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
-
+// @ts-expect-error ts-migrate(2769) FIXME: Type '({ historikkinnslagDeler, behandlingLocation... Remove this comment to see the full error message
 export default injectIntl(HistorikkMalType10);

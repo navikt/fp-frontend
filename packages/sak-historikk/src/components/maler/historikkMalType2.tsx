@@ -1,6 +1,5 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Element } from 'nav-frontend-typografi';
 
@@ -11,13 +10,17 @@ const scrollUp = () => {
   window.scroll(0, 0);
 };
 
+type HistorikkMalType2Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    behandlingLocation: {};
+    getKodeverknavn: (...args: any[]) => any;
+    createLocationForSkjermlenke: (...args: any[]) => any;
+    intl: {};
+};
+
 const HistorikkMalType2 = ({
-  historikkinnslagDeler,
-  behandlingLocation,
-  intl,
-  getKodeverknavn,
-  createLocationForSkjermlenke,
-}) => (
+  historikkinnslagDeler, behandlingLocation, intl, getKodeverknavn, createLocationForSkjermlenke,
+}: HistorikkMalType2Props) => (
   <div>
     {historikkinnslagDeler[0].skjermlenke
     && (
@@ -41,14 +44,7 @@ const HistorikkMalType2 = ({
   </div>
 );
 
-HistorikkMalType2.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-  intl: PropTypes.shape().isRequired,
-};
-
+// @ts-expect-error ts-migrate(2769) FIXME: Type '({ historikkinnslagDeler, behandlingLocation... Remove this comment to see the full error message
 export default injectIntl(HistorikkMalType2);
 
 /*

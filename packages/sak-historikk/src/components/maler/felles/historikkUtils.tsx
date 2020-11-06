@@ -1,4 +1,7 @@
 import React from 'react';
+import { IntlShape } from 'react-intl';
+
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import historikkResultatTypeCodes from '../../../kodeverk/historikkResultatTypeCodes';
 import historikkEndretFeltVerdiTypeCodes from '../../../kodeverk/historikkEndretFeltVerdiTypeCodes';
@@ -30,7 +33,7 @@ export const findIdForSoeknadsperiodeCode = (soeknadsperiode) => {
   return soeknadsperiodeCode.feltId;
 };
 
-export const findResultatText = (resultat, intl) => {
+export const findResultatText = (resultat, intl: IntlShape) => {
   if (!resultat) {
     return null;
   }
@@ -42,7 +45,7 @@ export const findResultatText = (resultat, intl) => {
   return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> });
 };
 
-export const findHendelseText = (hendelse, getKodeverknavn) => {
+export const findHendelseText = (hendelse, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
   if (!hendelse) {
     return undefined;
   }
@@ -54,7 +57,7 @@ export const findHendelseText = (hendelse, getKodeverknavn) => {
 
 const convertToBoolean = (verdi) => (verdi === true ? 'Ja' : 'Nei');
 
-export const findEndretFeltVerdi = (endretFelt, verdi, intl) => {
+export const findEndretFeltVerdi = (endretFelt, verdi: string | boolean, intl: IntlShape) => {
   if (verdi === null) {
     return null;
   }
@@ -71,7 +74,7 @@ export const findEndretFeltVerdi = (endretFelt, verdi, intl) => {
   return verdi;
 };
 
-export const findEndretFeltNavn = (endretFelt, intl) => {
+export const findEndretFeltNavn = (endretFelt, intl: IntlShape) => {
   const { formatMessage } = intl;
   const navnCode = endretFelt.endretFeltNavn.kode;
   const endretFeltNavnType = historikkEndretFeltTypeCodes[navnCode];

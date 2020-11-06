@@ -4,19 +4,21 @@ import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { omit } from '@fpsak-frontend/utils';
+import { HistorikkinnslagDel } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
-import { HistorikkMalTypeForeldelse } from './HistorikkMalTypeForeldelse';
+import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';
+import HistorikkMalTypeTilbakekreving from './HistorikkMalTypeTilbakekreving';
 
-describe('HistorikkMalTypeForeldelse', () => {
+describe('HistorikkMalTypeTilbakekreving', () => {
   it('skal vise alle historikkelement korrekt', () => {
     const historikkinnslagDeler = [{
       skjermlenke: {
-        kode: 'FORELDELSE',
+        kode: 'TILBAKEKREVING',
       },
       endredeFelter: [{
         endretFeltNavn: {
-          kode: 'feltkode',
+          kode: historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT,
         },
         fraVerdi: 'gammel verdi',
         tilVerdi: 'ny verdi',
@@ -29,18 +31,30 @@ describe('HistorikkMalTypeForeldelse', () => {
       opplysninger: [{
         opplysningType: {
           kode: historikkOpplysningTypeCodes.PERIODE_FOM.kode,
-          tilVerdi: '10.10.2018',
+          kodeverk: '',
         },
+        tilVerdi: '10.10.2018',
       }, {
         opplysningType: {
           kode: historikkOpplysningTypeCodes.PERIODE_TOM.kode,
           tilVerdi: '10.12.2018',
         },
+      }, {
+        opplysningType: {
+          kode: historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode,
+          tilVerdi: 'test',
+        },
+      },
+      {
+        opplysningType: {
+          kode: historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode,
+          tilVerdi: 'test',
+        },
       }],
-    }];
+    }] as HistorikkinnslagDel[];
 
     const getKodeverknavn = (kodeverk) => {
-      if (kodeverk.kode === 'feltkode') {
+      if (kodeverk.kode === historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT) {
         return 'testing';
       }
       if (kodeverk.kode === 'Anna feltkode') {
@@ -49,11 +63,18 @@ describe('HistorikkMalTypeForeldelse', () => {
       return '';
     };
 
-    const wrapper = shallow(<HistorikkMalTypeForeldelse
+    const locationMock = {
+      pathname: 'test',
+      search: 'test',
+      state: {},
+      hash: 'test',
+    };
+
+    const wrapper = shallow(<HistorikkMalTypeTilbakekreving
       historikkinnslagDeler={historikkinnslagDeler}
-      behandlingLocation={{}}
+      behandlingLocation={locationMock}
       getKodeverknavn={getKodeverknavn}
-      createLocationForSkjermlenke={() => 'url'}
+      createLocationForSkjermlenke={() => locationMock}
     />);
 
     const messages = wrapper.find(FormattedMessage);

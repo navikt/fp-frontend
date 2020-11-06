@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { Location } from 'history';
 
-import historikkinnslagPropType from '../propTypes/historikkinnslagPropType';
+import { Historikk, Kodeverk } from '@fpsak-frontend/types';
+import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
+
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
 import Snakkeboble from './maler/felles/snakkeboble';
 import HistorikkMalType1 from './maler/historikkMalType1';
@@ -19,7 +21,7 @@ import HistorikkMalTypeTilbakekreving from './maler/HistorikkMalTypeTilbakekrevi
 import HistorikkMalTypeForeldelse from './maler/HistorikkMalTypeForeldelse';
 import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
 
-const velgHistorikkMal = (histType) => { // NOSONAR
+const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
   switch (histType.kode) { // NOSONAR
     case historikkinnslagType.BEH_GJEN:
     case historikkinnslagType.KOET_BEH_GJEN:
@@ -93,57 +95,51 @@ const velgHistorikkMal = (histType) => { // NOSONAR
   }
 };
 
+interface OwnProps {
+  historieInnslag: Historikk;
+  saksnummer?: number;
+  getBehandlingLocation: (behandlingId: number) => Location;
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+}
+
 /**
  * History
  *
  * Historikken for en behandling
  */
-const History = ({
+const History: FunctionComponent<OwnProps> = ({
   historieInnslag,
-  saksNr,
+  saksnummer = 0,
   getBehandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
 }) => {
   const HistorikkMal = velgHistorikkMal(historieInnslag.type);
-  const aktorIsVL = historieInnslag.aktoer.kode === 'VL';
-  const aktorIsSOKER = historieInnslag.aktoer.kode === 'SOKER';
-  const aktorIsArbeidsgiver = historieInnslag.aktoer.kode === 'ARBEIDSGIVER';
+  const aktorIsVL = historieInnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
+  const aktorIsSOKER = historieInnslag.aktoer.kode === HistorikkAktor.SOKER;
+  const aktorIsArbeidsgiver = historieInnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
+
   return (
     <Snakkeboble
-      historikkinnslagDeler={historieInnslag.historikkinnslagDeler}
-      rolle={historieInnslag.aktoer.kode}
+      aktoer={historieInnslag.aktoer}
       rolleNavn={getKodeverknavn(historieInnslag.aktoer)}
       dato={historieInnslag.opprettetTidspunkt}
-      kjoennKode={historieInnslag.kjoenn ? historieInnslag.kjoenn.kode : ''}
-      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? null : historieInnslag.opprettetAv}
-      histType={historieInnslag.type}
-      dokumentLinks={historieInnslag.dokumentLinks}
+      kjoenn={historieInnslag.kjoenn}
+      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historieInnslag.opprettetAv}
     >
       <HistorikkMal
         historikkinnslagDeler={historieInnslag.historikkinnslagDeler}
         dokumentLinks={historieInnslag.dokumentLinks}
         behandlingLocation={getBehandlingLocation(historieInnslag.behandlingId)}
         originType={historieInnslag.type}
-        saksNr={saksNr}
+        saksNr={saksnummer}
         getKodeverknavn={getKodeverknavn}
         erTilbakekreving={historieInnslag.erTilbakekreving}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />
     </Snakkeboble>
   );
-};
-
-History.propTypes = {
-  historieInnslag: historikkinnslagPropType.isRequired,
-  saksNr: PropTypes.number,
-  getBehandlingLocation: PropTypes.func.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
-
-History.defaultProps = {
-  saksNr: 0,
 };
 
 export default History;

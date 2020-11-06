@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
 import { findHendelseText } from './felles/historikkUtils';
 import BubbleText from './felles/bubbleText';
 
-const HistorikkMalType4 = ({ historikkinnslagDeler, getKodeverknavn }) => (
+type Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    getKodeverknavn: (...args: any[]) => any;
+};
+
+const HistorikkMalType4 = ({ historikkinnslagDeler, getKodeverknavn }: Props) => (
   <div>
     {
       historikkinnslagDeler.map((del, delIndex) => (
@@ -16,17 +20,14 @@ const HistorikkMalType4 = ({ historikkinnslagDeler, getKodeverknavn }) => (
         >
           <Element className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</Element>
           {del.aarsak && <Normaltekst>{getKodeverknavn(del.aarsak)}</Normaltekst>}
+          {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
           {del.begrunnelse && <BubbleText bodyText={getKodeverknavn(del.begrunnelse)} className="snakkeboble-panel__tekst" />}
+          {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
           {del.begrunnelseFritekst && <BubbleText bodyText={del.begrunnelseFritekst} className="snakkeboble-panel__tekst" />}
         </div>
       ))
     }
   </div>
 );
-
-HistorikkMalType4.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-};
 
 export default HistorikkMalType4;

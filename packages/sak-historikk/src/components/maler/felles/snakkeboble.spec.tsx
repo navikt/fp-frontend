@@ -4,30 +4,25 @@ import { expect } from 'chai';
 import { Undertekst } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 
+import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
+import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
+
 import Snakkeboble from './snakkeboble';
 
 // TODO: AA - refactor to before()? Har provat men fungerer ikke så bra
 describe('Snakkeboble', () => {
   it('skal vise opp boble med korrekt class', () => {
-    const tekst = 'Min tekst';
     const opprettetTidspunkt = '2017-12-10';
-    const aktoer = { kode: 'SBH', navn: 'Saksbehandler' };
-    const kjoenn = 'Kvinne';
-    const type = { kode: 'VEDTAK', navn: 'Vedtak fattet' };
-    const dokumentLinks = [];
-    const location = { pathname: 'myPath' };
+    const aktoer = { kode: HistorikkAktor.SAKSBEHANDLER, kodeverk: '' };
+    const kjoenn = { kode: navBrukerKjonn.KVINNE, kodeverk: '' };
 
     const wrapper = shallow(
       <Snakkeboble
-        key={opprettetTidspunkt}
-        tekst={tekst}
-        rolle={aktoer.kode}
-        rolleNavn={aktoer.navn}
+        aktoer={aktoer}
+        rolleNavn="Saksbehandler"
         dato={opprettetTidspunkt}
-        kjoennKode={kjoenn}
-        histType={type}
-        dokumentLinks={dokumentLinks}
-        location={location}
+        kjoenn={kjoenn}
+        opprettetAv="test"
       >
         <div />
       </Snakkeboble>,
@@ -38,25 +33,17 @@ describe('Snakkeboble', () => {
   });
 
   it('skal innehalla korrekt type, id og tidpunkt', () => {
-    const tekst = 'Min tekst';
     const opprettetTidspunkt = '2017-12-10';
-    const aktoer = { kode: 'SBH', navn: 'Saksbehandler' };
-    const kjoenn = 'Kvinne';
-    const type = { kode: 'VEDTAK', navn: 'Vedtak fattet' };
-    const dokumentLinks = [];
-    const location = { pathname: 'myPath' };
+    const aktoer = { kode: HistorikkAktor.SAKSBEHANDLER, kodeverk: '' };
+    const kjoenn = { kode: navBrukerKjonn.KVINNE, kodeverk: '' };
 
     const wrapper = shallow(
       <Snakkeboble
-        key={opprettetTidspunkt}
-        tekst={tekst}
-        rolle={aktoer.kode}
-        rolleNavn={aktoer.navn}
+        aktoer={aktoer}
+        rolleNavn="Saksbehandler"
         dato={opprettetTidspunkt}
-        kjoennKode={kjoenn}
-        histType={type}
-        dokumentLinks={dokumentLinks}
-        location={location}
+        kjoenn={kjoenn}
+        opprettetAv="test"
       >
         <div />
       </Snakkeboble>,

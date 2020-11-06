@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element } from 'nav-frontend-typografi';
@@ -11,11 +10,21 @@ import { findEndretFeltVerdi } from './felles/historikkUtils';
 import BubbleText from './felles/bubbleText';
 import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
 
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './historikkMalType.less' or it... Remove this comment to see the full error message
 import styles from './historikkMalType.less';
+
+type Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    behandlingLocation: {};
+    intl: {};
+    originType: {};
+    getKodeverknavn: (...args: any[]) => any;
+    createLocationForSkjermlenke: (...args: any[]) => any;
+};
 
 export const HistorikkMalType9 = ({
   historikkinnslagDeler, behandlingLocation, originType, intl, getKodeverknavn, createLocationForSkjermlenke,
-}) => {
+}: Props) => {
   const getSplitPeriods = (endredeFelter) => {
     let text = '';
     endredeFelter.forEach((felt, index) => {
@@ -47,6 +56,7 @@ export const HistorikkMalType9 = ({
               </Element>
             )}
 
+            {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'kode' does not exist on type '{}'. */}
             {historikkinnslagDel.endredeFelter && originType.kode === historikkinnslagType.OVST_UTTAK_SPLITT
             && (
               <FormattedMessage
@@ -61,6 +71,7 @@ export const HistorikkMalType9 = ({
               />
             )}
 
+            {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'kode' does not exist on type '{}'. */}
             {historikkinnslagDel.endredeFelter && originType.kode === historikkinnslagType.FASTSATT_UTTAK_SPLITT
             && (
               <FormattedMessage
@@ -75,6 +86,7 @@ export const HistorikkMalType9 = ({
               />
             )}
 
+            {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'kode' does not exist on type '{}'. */}
             {(originType.kode === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
               historikkinnslagDel.endredeFelter
                 .filter((endretFelt) => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
@@ -91,20 +103,14 @@ export const HistorikkMalType9 = ({
                   </div>
                 ))
             )}
+            {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
             {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} className="snakkeboble-panel__tekst" />}
+            {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
             {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} className="snakkeboble-panel__tekst" />}
           </div>
         </div>
       )));
 };
 
-HistorikkMalType9.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  intl: PropTypes.shape().isRequired,
-  originType: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
-
+// @ts-expect-error ts-migrate(2769) FIXME: Type '({ historikkinnslagDeler, behandlingLocation... Remove this comment to see the full error message
 export default injectIntl(HistorikkMalType9);

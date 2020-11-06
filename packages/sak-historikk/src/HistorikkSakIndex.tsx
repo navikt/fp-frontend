@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { Location } from 'history';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { Historikk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import History from './components/History';
-import historikkinnslagPropType from './propTypes/historikkinnslagPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -16,7 +16,15 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const HistorikkSakIndex = ({
+interface OwnProps {
+  historieInnslag: Historikk;
+  saksnummer?: number;
+  getBehandlingLocation: (behandlingId: number) => Location;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+}
+
+const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
   historieInnslag,
   saksnummer,
   getBehandlingLocation,
@@ -26,20 +34,12 @@ const HistorikkSakIndex = ({
   <RawIntlProvider value={intl}>
     <History
       historieInnslag={historieInnslag}
-      saksNr={saksnummer}
+      saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       getKodeverknavn={getKodeverknavnFn(alleKodeverk, kodeverkTyper)}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
     />
   </RawIntlProvider>
 );
-
-HistorikkSakIndex.propTypes = {
-  historieInnslag: historikkinnslagPropType.isRequired,
-  saksnummer: PropTypes.number,
-  getBehandlingLocation: PropTypes.func.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
 
 export default HistorikkSakIndex;

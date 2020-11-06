@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
@@ -11,9 +10,19 @@ import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
 import BubbleText from './felles/bubbleText';
 import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
 
+type Props = {
+    historikkinnslagDeler: historikkinnslagDelPropType[];
+    behandlingLocation: {};
+    dokumentLinks: {}[];
+    intl: {};
+    saksNr: number;
+    getKodeverknavn: (...args: any[]) => any;
+    createLocationForSkjermlenke: (...args: any[]) => any;
+};
+
 const HistorikkMalType8 = ({
   historikkinnslagDeler, behandlingLocation, dokumentLinks, intl, saksNr, getKodeverknavn, createLocationForSkjermlenke,
-}) => {
+}: Props) => {
   const formatChangedField = (endretFelt) => {
     const fieldName = findEndretFeltNavn(endretFelt, intl);
     const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
@@ -85,12 +94,16 @@ const HistorikkMalType8 = ({
           ))}
 
           {historikkinnslagDel.aarsak && <Normaltekst>{getKodeverknavn(historikkinnslagDel.aarsak)}</Normaltekst>}
+          {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
           {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} className="snakkeboble-panel__tekst" />}
+          {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} className="snakkeboble-panel__tekst" />}
           <div>
             {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
               <HistorikkDokumentLenke
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'tag' does not exist on type '{}'.
                 key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+                // @ts-expect-error ts-migrate(2322) FIXME: Property 'dokumentLenke' does not exist on type 'I... Remove this comment to see the full error message
                 dokumentLenke={dokumentLenke}
                 saksNr={saksNr}
               />
@@ -102,14 +115,5 @@ const HistorikkMalType8 = ({
     )));
 };
 
-HistorikkMalType8.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  dokumentLinks: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  intl: PropTypes.shape().isRequired,
-  saksNr: PropTypes.number.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
-
+// @ts-expect-error ts-migrate(2769) FIXME: Type '({ historikkinnslagDeler, behandlingLocation... Remove this comment to see the full error message
 export default injectIntl(HistorikkMalType8);
