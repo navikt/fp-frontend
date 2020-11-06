@@ -39,18 +39,18 @@ const dataReadOnly = [{
       opptjeningAktiviteter: [],
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
+        faktaOmBeregningTilfeller: [null],
       },
       besluttersBegrunnelse: 'asdfa',
       totrinnskontrollGodkjent: false,
       vurderPaNyttArsaker: [
         {
           kode: 'FEIL_REGEL',
-          navn: 'Feil regelforståelse',
+          kodeverk: '',
         },
         {
           kode: 'FEIL_FAKTA',
-          navn: 'Feil fakta',
+          kodeverk: '',
         },
       ],
       uttakPerioder: [],

@@ -46,6 +46,7 @@ describe('<TotrinnskontrollBeslutterForm>', () => {
       arbeidsforholdHandlingTyper={[]}
       skjemalenkeTyper={[]}
       aksjonspunktGodkjenning={[]}
+      faktaOmBeregningTilfeller={[]}
     />);
 
     const form = wrapper.find('form');

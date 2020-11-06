@@ -33,11 +33,11 @@ interface OwnProps {
 }
 
 /**
- * DocumentIndex
+ * DokumentIndex
  *
  * Container komponent. Har ansvar for å hente sakens dokumenter fra state og rendre det i en liste.
  */
-export const DocumentIndex: FunctionComponent<OwnProps> = ({
+export const DokumentIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   saksnummer,
@@ -65,4 +65,4 @@ export const DocumentIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default requireProps(['saksnummer'], <LoadingPanel />)(DocumentIndex);
+export default requireProps(['saksnummer'], <LoadingPanel />)(DokumentIndex);
