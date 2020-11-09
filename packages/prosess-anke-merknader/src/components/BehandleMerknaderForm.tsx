@@ -28,11 +28,11 @@ import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
 
 import styles from './behandleMerknaderForm.less';
 
-const omgjorArsakValues = [
-  ankeOmgjorArsak.PROSESSUELL_FEIL,
-  ankeOmgjorArsak.ULIK_VURDERING,
-  ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+const ankeOmgjorArsakRekkefolge = [
   ankeOmgjorArsak.NYE_OPPLYSNINGER,
+  ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+  ankeOmgjorArsak.ULIK_VURDERING,
+  ankeOmgjorArsak.PROSESSUELL_FEIL,
 ];
 
 interface OwnProps {
@@ -112,7 +112,7 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
               <SelectField
                 readOnly={readOnly}
                 name="trygderettOmgjoerArsak.kode"
-                selectValues={omgjorArsakValues
+                selectValues={ankeOmgjorArsakRekkefolge
                   .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
                 className={readOnly ? styles.selectReadOnly : null}
                 label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}

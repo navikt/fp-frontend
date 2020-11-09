@@ -33,11 +33,11 @@ import TempsaveAnkeButton from './TempsaveAnkeButton';
 
 import styles from './behandleAnkeForm.less';
 
-const omgjorArsakValues = [
-  ankeOmgjorArsak.PROSESSUELL_FEIL,
-  ankeOmgjorArsak.ULIK_VURDERING,
-  ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+const ankeOmgjorArsakRekkefolge = [
   ankeOmgjorArsak.NYE_OPPLYSNINGER,
+  ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+  ankeOmgjorArsak.ULIK_VURDERING,
+  ankeOmgjorArsak.PROSESSUELL_FEIL,
 ];
 
 export type BehandlingInfo = {
@@ -275,7 +275,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
               <SelectField
                 readOnly={readOnly}
                 name="ankeOmgjoerArsak.kode"
-                selectValues={omgjorArsakValues
+                selectValues={ankeOmgjorArsakRekkefolge
                   .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
                 className={readOnly ? styles.selectReadOnly : null}
                 label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
