@@ -43,4 +43,6 @@ export { default as Arbeidsgiver } from './src/arbeidsgiverTsType';
 export { default as TotrinnsKlageVurdering } from './src/totrinnsKlageVurderingTsType';
 export { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
 export { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
-export { default as Historikk, HistorikkInnslagDokumentLink, HistorikkinnslagDel } from './src/historikkTsType';
+export {
+  default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,
+} from './src/historikkinnslagTsType';

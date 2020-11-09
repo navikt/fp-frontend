@@ -79,7 +79,7 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
       {historikkInnslag.map((innslag) => (
         <HistorikkSakIndex
           key={innslag.opprettetTidspunkt + innslag.type.kode}
-          historieInnslag={innslag}
+          historikkinnslag={innslag}
           saksnummer={saksnummer}
           alleKodeverk={innslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak}
           getBehandlingLocation={getBehandlingLocation}

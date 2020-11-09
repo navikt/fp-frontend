@@ -4,7 +4,7 @@ import { Location } from 'history';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import { Historikk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Historikkinnslag, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import History from './components/History';
 import messages from '../i18n/nb_NO.json';
@@ -17,7 +17,7 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  historieInnslag: Historikk;
+  historikkinnslag: Historikkinnslag;
   saksnummer?: number;
   getBehandlingLocation: (behandlingId: number) => Location;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -25,7 +25,7 @@ interface OwnProps {
 }
 
 const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
-  historieInnslag,
+  historikkinnslag,
   saksnummer,
   getBehandlingLocation,
   alleKodeverk,
@@ -33,7 +33,7 @@ const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
 }) => (
   <RawIntlProvider value={intl}>
     <History
-      historieInnslag={historieInnslag}
+      historikkinnslag={historikkinnslag}
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       getKodeverknavn={getKodeverknavnFn(alleKodeverk, kodeverkTyper)}

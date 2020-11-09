@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { omit } from '@fpsak-frontend/utils';
-import { HistorikkinnslagDel } from '@fpsak-frontend/types';
+import { Historikkinnslag, HistorikkinnslagDel } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';
@@ -71,7 +71,7 @@ describe('HistorikkMalTypeTilbakekreving', () => {
     };
 
     const wrapper = shallow(<HistorikkMalTypeTilbakekreving
-      historikkinnslagDeler={historikkinnslagDeler}
+      historikkinnslag={{ historikkinnslagDeler } as Historikkinnslag}
       behandlingLocation={locationMock}
       getKodeverknavn={getKodeverknavn}
       createLocationForSkjermlenke={() => locationMock}

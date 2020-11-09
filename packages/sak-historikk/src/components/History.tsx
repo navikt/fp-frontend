@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Location } from 'history';
 
-import { Historikk, Kodeverk } from '@fpsak-frontend/types';
+import { Historikkinnslag, Kodeverk } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
 
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
@@ -96,7 +96,7 @@ const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
 };
 
 interface OwnProps {
-  historieInnslag: Historikk;
+  historikkinnslag: Historikkinnslag;
   saksnummer?: number;
   getBehandlingLocation: (behandlingId: number) => Location;
   getKodeverknavn: (kodeverk: Kodeverk) => string;
@@ -109,33 +109,30 @@ interface OwnProps {
  * Historikken for en behandling
  */
 const History: FunctionComponent<OwnProps> = ({
-  historieInnslag,
+  historikkinnslag,
   saksnummer = 0,
   getBehandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
 }) => {
-  const HistorikkMal = velgHistorikkMal(historieInnslag.type);
-  const aktorIsVL = historieInnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
-  const aktorIsSOKER = historieInnslag.aktoer.kode === HistorikkAktor.SOKER;
-  const aktorIsArbeidsgiver = historieInnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
+  const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
+  const aktorIsVL = historikkinnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
+  const aktorIsSOKER = historikkinnslag.aktoer.kode === HistorikkAktor.SOKER;
+  const aktorIsArbeidsgiver = historikkinnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
 
   return (
     <Snakkeboble
-      aktoer={historieInnslag.aktoer}
-      rolleNavn={getKodeverknavn(historieInnslag.aktoer)}
-      dato={historieInnslag.opprettetTidspunkt}
-      kjoenn={historieInnslag.kjoenn}
-      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historieInnslag.opprettetAv}
+      aktoer={historikkinnslag.aktoer}
+      rolleNavn={getKodeverknavn(historikkinnslag.aktoer)}
+      dato={historikkinnslag.opprettetTidspunkt}
+      kjoenn={historikkinnslag.kjoenn}
+      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historikkinnslag.opprettetAv}
     >
       <HistorikkMal
-        historikkinnslagDeler={historieInnslag.historikkinnslagDeler}
-        dokumentLinks={historieInnslag.dokumentLinks}
-        behandlingLocation={getBehandlingLocation(historieInnslag.behandlingId)}
-        originType={historieInnslag.type}
-        saksNr={saksnummer}
+        historikkinnslag={historikkinnslag}
+        behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingId)}
+        saksnummer={saksnummer}
         getKodeverknavn={getKodeverknavn}
-        erTilbakekreving={historieInnslag.erTilbakekreving}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />
     </Snakkeboble>

@@ -1,32 +1,25 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import { Location } from 'history';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
+import HistorikkMal from '../HistorikkMalTsType';
 
 const scrollUp = () => {
   window.scroll(0, 0);
 };
 
-interface OwnProps {
-  historikkinnslagDeler: HistorikkinnslagDel[];
-  behandlingLocation: Location;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
-}
-
-const HistorikkMalTypeForeldelse: FunctionComponent<OwnProps> = ({
-  historikkinnslagDeler,
+const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
+  historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
 }) => {
+  const { historikkinnslagDeler } = historikkinnslag;
   if (historikkinnslagDeler.length === 0) {
     return null;
   }

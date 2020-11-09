@@ -1,5 +1,15 @@
 import Kodeverk from './kodeverkTsType';
 
+export type HistorikkinnslagEndretFelt = {
+  endretFeltNavn: Kodeverk;
+  navnVerdi?: string;
+  klNavn?: string;
+  fraVerdi?: string | boolean;
+  tilVerdi?: string | boolean;
+  klFraVerdi?: string;
+  klTilVerdi?: string;
+};
+
 export type HistorikkinnslagDel = {
   begrunnelse?: Kodeverk;
   begrunnelseFritekst?: string;
@@ -29,15 +39,7 @@ export type HistorikkinnslagDel = {
     verdi?: string;
   };
   resultat?: string;
-  endredeFelter?: {
-    endretFeltNavn: Kodeverk;
-    navnVerdi?: string;
-    klNavn?: string;
-    fraVerdi?: string | boolean;
-    tilVerdi?: string | boolean;
-    klFraVerdi?: string;
-    klTilVerdi?: string;
-  }[];
+  endredeFelter?: HistorikkinnslagEndretFelt[];
   aksjonspunkter?: {
     aksjonspunktKode: string;
     godkjent: boolean;
@@ -53,7 +55,7 @@ export type HistorikkInnslagDokumentLink = Readonly<{
   utgått: boolean;
 }>
 
-type Historikk = Readonly<{
+type Historikkinnslag = Readonly<{
   opprettetAv?: string;
   opprettetTidspunkt: string;
   type: Kodeverk;
@@ -64,4 +66,4 @@ type Historikk = Readonly<{
   historikkinnslagDeler: HistorikkinnslagDel[];
 }>
 
-export default Historikk;
+export default Historikkinnslag;

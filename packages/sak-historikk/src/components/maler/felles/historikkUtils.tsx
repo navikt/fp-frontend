@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { IntlShape } from 'react-intl';
 
-import { Kodeverk } from '@fpsak-frontend/types';
+import { HistorikkinnslagEndretFelt, Kodeverk } from '@fpsak-frontend/types';
 
 import historikkResultatTypeCodes from '../../../kodeverk/historikkResultatTypeCodes';
 import historikkEndretFeltVerdiTypeCodes from '../../../kodeverk/historikkEndretFeltVerdiTypeCodes';
@@ -74,7 +74,7 @@ export const findEndretFeltVerdi = (endretFelt, verdi: string | boolean, intl: I
   return verdi;
 };
 
-export const findEndretFeltNavn = (endretFelt, intl: IntlShape) => {
+export const findEndretFeltNavn = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): ReactNode => {
   const { formatMessage } = intl;
   const navnCode = endretFelt.endretFeltNavn.kode;
   const endretFeltNavnType = historikkEndretFeltTypeCodes[navnCode];
