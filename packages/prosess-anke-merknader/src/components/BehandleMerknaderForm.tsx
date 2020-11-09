@@ -1,22 +1,37 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
-import { Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
-import { AksjonspunktHelpTextTemp, FadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
+import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import {
-  RadioGroupField, RadioOption, behandlingForm,
+  AksjonspunktHelpTextTemp, FadingPanel, VerticalSpacer, ArrowBox,
+} from '@fpsak-frontend/shared-components';
+import {
+  RadioGroupField, RadioOption, behandlingForm, SelectField, behandlingFormValueSelector,
   hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
+import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
 import CheckboxField from '@fpsak-frontend/form/src/CheckboxField';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+
 import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
+
+import styles from './behandleMerknaderForm.less';
+
+const omgjorArsakValues = [
+  { kode: ankeOmgjorArsak.PROSESSUELL_FEIL, navn: 'Ankebehandling.OmgjoeringArsak.ProsessuellFeil' },
+  { kode: ankeOmgjorArsak.ULIK_VURDERING, navn: 'Ankebehandling.OmgjoeringArsak.UlikVurdering' },
+  { kode: ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING, navn: 'Ankebehandling.OmgjoeringArsak.UlikRegelverkstolkning' },
+  { kode: ankeOmgjorArsak.NYE_OPPLYSNINGER, navn: 'Ankebehandling.OmgjoeringArsak.NyeOpplysninger' },
+];
 
 interface OwnProps {
   saveAnke: (data: any) => Promise<any>;
@@ -27,10 +42,10 @@ interface OwnProps {
   behandlingId: number;
   sprakkode: Kodeverk;
   behandlingVersjon: number;
-  ankeVurdering?: Kodeverk;
+  valgtTrygderettVurdering?: Kodeverk;
 }
 
-const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
+const AnkeMerknader: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
   readOnly,
   handleSubmit,
   readOnlySubmitButton,
@@ -38,6 +53,8 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   sprakkode,
+  valgtTrygderettVurdering,
+  intl,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -62,6 +79,46 @@ const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
           </RadioGroupField>
         </Column>
       </Row>
+
+      <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
+      <RadioGroupField
+        name="trygderettVurdering.kode"
+        validate={[required]}
+        readOnly={readOnly}
+      >
+        <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
+        <RadioOption value={ankeVurderingType.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
+        <RadioOption value={ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
+      </RadioGroupField>
+      {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering?.kode && (
+        <Row>
+          <Column xs="7">
+            <ArrowBox alignOffset={164}>
+              <RadioGroupField
+                name="trygderettVurderingOmgjoer.kode"
+                validate={[required]}
+                readOnly={readOnly}
+                className={readOnly ? styles.selectReadOnly : null}
+                direction="horizontal"
+              >
+                <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Gunst' }} />
+                <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_UGUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Ugunst' }} />
+                <RadioOption value={ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Delvis' }} />
+              </RadioGroupField>
+              <VerticalSpacer fourPx />
+              <SelectField
+                readOnly={readOnly}
+                name="trygderettOmgjoerArsak.kode"
+                selectValues={omgjorArsakValues.map((arsak) => <option key={arsak.kode} value={arsak.kode}>{intl.formatMessage({ id: arsak.navn })}</option>)}
+                className={readOnly ? styles.selectReadOnly : null}
+                label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
+                validate={[required]}
+                bredde="xl"
+              />
+            </ArrowBox>
+          </Column>
+        </Row>
+      )}
 
       <VerticalSpacer sixteenPx />
       <FritekstAnkeMerknaderTextField
@@ -104,12 +161,18 @@ type FormValues = {
   erMerknaderMottatt: string;
   merknadKommentar: string;
   avsluttBehandling: string;
+  trygderettVurdering: Kodeverk;
+  trygderettOmgjoerArsak: Kodeverk;
+  trygderettVurderingOmgjoer: Kodeverk;
 }
 
 const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
   erMerknaderMottatt: values.erMerknaderMottatt,
   merknadKommentar: values.merknadKommentar,
   avsluttBehandling: values.avsluttBehandling,
+  trygderettVurdering: values.trygderettVurdering,
+  trygderettOmgjoerArsak: values.trygderettOmgjoerArsak,
+  trygderettVurderingOmgjoer: values.trygderettVurderingOmgjoer,
   kode: aksjonspunktCode,
 });
 
@@ -124,21 +187,24 @@ interface PureOwnProps {
 const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
   merknadKommentar: resultat ? resultat.merknadKommentar : null,
   erMerknaderMottatt: resultat ? resultat.erMerknaderMottatt : null,
+  trygderettVurdering: resultat ? resultat.trygderettVurdering : null,
+  trygderettOmgjoerArsak: resultat ? resultat.trygderettOmgjoerArsak : null,
+  trygderettVurderingOmgjoer: resultat ? resultat.trygderettVurderingOmgjoer : null,
   avsluttBehandling: false,
 }));
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER)]));
 
-const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps) => ({
   aksjonspunktCode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
   initialValues: buildInitialValues(ownProps),
-  ankeVurdering: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
   onSubmit: lagSubmitFn(ownProps),
+  valgtTrygderettVurdering: behandlingFormValueSelector(ankeMerknaderFormName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'trygderettVurdering'),
 });
 
 const BehandleMerknaderForm = connect(mapStateToProps)(behandlingForm({
   form: ankeMerknaderFormName,
-})(AnkeMerknader));
+})(injectIntl(AnkeMerknader)));
 
 export default BehandleMerknaderForm;

@@ -22,9 +22,9 @@ import {
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
 
-import ankeOmgjorArsak from '../kodeverk/ankeOmgjorArsak';
 import PreviewAnkeLink from './PreviewAnkeLink';
 import FritekstBrevTextField from './FritekstAnkeBrevTextField';
 import TempsaveAnkeButton from './TempsaveAnkeButton';

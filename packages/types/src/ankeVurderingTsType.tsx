@@ -5,6 +5,9 @@ type AnkeVurdering = Readonly<{
     ankeVurdering?: Kodeverk;
     ankeVurderingOmgjoer?: Kodeverk;
     ankeOmgjoerArsak?: Kodeverk;
+    trygderettVurdering?: Kodeverk;
+    trygderettVurderingOmgjoer?: Kodeverk;
+    trygderettOmgjoerArsak?: Kodeverk;
     begrunnelse: string;
     paAnketBehandlingId?: number;
     erAnkerIkkePart: boolean;
