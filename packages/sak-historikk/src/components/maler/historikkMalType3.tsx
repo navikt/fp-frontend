@@ -1,16 +1,15 @@
-import React from 'react';
-
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import React, { FunctionComponent, ReactNode } from 'react';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { HistorikkInnslagAksjonspunkt } from '@fpsak-frontend/types';
 
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
 import { findHendelseText } from './felles/historikkUtils';
+import HistorikkMal from '../HistorikkMalTsType';
 
 const aksjonspunktCodesToTextCode = {
   [aksjonspunktCodes.TERMINBEKREFTELSE]: 'Historikk.TermindatoFaktaForm.ApplicationInformation',
@@ -92,7 +91,7 @@ const scrollUp = () => {
   window.scroll(0, 0);
 };
 
-const formaterAksjonspunkt = (aksjonspunkt, intl, erTilbakekreving) => {
+const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: IntlShape, erTilbakekreving: boolean): ReactNode => {
   const aksjonspktText = erTilbakekreving
     ? tilbakekrevingsAksjonspunktCodesToTextCode[aksjonspunkt.aksjonspunktKode]
     : aksjonspunktCodesToTextCode[aksjonspunkt.aksjonspunktKode];
@@ -117,22 +116,22 @@ const formaterAksjonspunkt = (aksjonspunkt, intl, erTilbakekreving) => {
   );
 };
 
-const HistorikkMalType3 = ({
-  historikkinnslagDeler,
-  behandlingLocation,
+const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
   intl,
+  historikkinnslag,
+  behandlingLocation,
   getKodeverknavn,
-  erTilbakekreving,
   createLocationForSkjermlenke,
+  erTilbakekreving,
 }) => (
-  <div>
-    {historikkinnslagDeler && historikkinnslagDeler.map((historikkinnslagDel, index) => (
+  <>
+    {historikkinnslag.historikkinnslagDeler && historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, index) => (
       <div key={`totrinnsvurdering${index + 1}`}>
         {historikkinnslagDel.hendelse && (
-          <div>
+          <>
             <Element>{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Element>
             <VerticalSpacer fourPx />
-          </div>
+          </>
         )}
         {historikkinnslagDel.skjermlenke
           ? (
@@ -154,20 +153,7 @@ const HistorikkMalType3 = ({
         ))}
       </div>
     ))}
-  </div>
+  </>
 );
-
-HistorikkMalType3.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-  intl: PropTypes.shape().isRequired,
-  erTilbakekreving: PropTypes.bool,
-};
-
-HistorikkMalType3.defaultProps = {
-  erTilbakekreving: false,
-};
 
 export default injectIntl(HistorikkMalType3);

@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { Location } from 'history';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { Historikkinnslag, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import History from './components/History';
-import historikkinnslagPropType from './propTypes/historikkinnslagPropType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -16,30 +16,33 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const HistorikkSakIndex = ({
-  historieInnslag,
+interface OwnProps {
+  historikkinnslag: Historikkinnslag;
+  saksnummer?: number;
+  getBehandlingLocation: (behandlingId: number) => Location;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  erTilbakekreving: boolean;
+}
+
+const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
+  historikkinnslag,
   saksnummer,
   getBehandlingLocation,
   alleKodeverk,
   createLocationForSkjermlenke,
+  erTilbakekreving,
 }) => (
   <RawIntlProvider value={intl}>
     <History
-      historieInnslag={historieInnslag}
-      saksNr={saksnummer}
+      historikkinnslag={historikkinnslag}
+      saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       getKodeverknavn={getKodeverknavnFn(alleKodeverk, kodeverkTyper)}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
+      erTilbakekreving={erTilbakekreving}
     />
   </RawIntlProvider>
 );
-
-HistorikkSakIndex.propTypes = {
-  historieInnslag: historikkinnslagPropType.isRequired,
-  saksnummer: PropTypes.number,
-  getBehandlingLocation: PropTypes.func.isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
 
 export default HistorikkSakIndex;

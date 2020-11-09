@@ -1,4 +1,9 @@
 import React from 'react';
+import { IntlShape } from 'react-intl';
+
+import {
+  HistorikkinnslagDel, HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt, Kodeverk,
+} from '@fpsak-frontend/types';
 
 import historikkResultatTypeCodes from '../../../kodeverk/historikkResultatTypeCodes';
 import historikkEndretFeltVerdiTypeCodes from '../../../kodeverk/historikkEndretFeltVerdiTypeCodes';
@@ -6,7 +11,7 @@ import historikkEndretFeltTypeCodes from '../../../kodeverk/historikkEndretFeltT
 import historikkOpplysningTypeCodes from '../../../kodeverk/historikkOpplysningTypeCodes';
 import historikkSoeknadsperiodeTypeCodes from '../../../kodeverk/historikkSoeknadsperiodeTypeCodes';
 
-export const findIdForOpplysningCode = (opplysning) => {
+export const findIdForOpplysningCode = (opplysning: HistorikkInnslagOpplysning): string => {
   if (!opplysning) {
     return null;
   }
@@ -18,7 +23,7 @@ export const findIdForOpplysningCode = (opplysning) => {
   return opplysningCode.feltId;
 };
 
-export const findIdForSoeknadsperiodeCode = (soeknadsperiode) => {
+export const findIdForSoeknadsperiodeCode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiode']): string => {
   if (!soeknadsperiode) {
     return null;
   }
@@ -30,7 +35,7 @@ export const findIdForSoeknadsperiodeCode = (soeknadsperiode) => {
   return soeknadsperiodeCode.feltId;
 };
 
-export const findResultatText = (resultat, intl) => {
+export const findResultatText = (resultat: string, intl: IntlShape): string => {
   if (!resultat) {
     return null;
   }
@@ -39,10 +44,10 @@ export const findResultatText = (resultat, intl) => {
     return (`ResultatTypeCode ${resultat} finnes ikke-LEGG DET INN`);
   }
   const fieldId = resultatCode.feltId;
-  return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> });
+  return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> }) as string;
 };
 
-export const findHendelseText = (hendelse, getKodeverknavn) => {
+export const findHendelseText = (hendelse: HistorikkinnslagDel['hendelse'], getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
   if (!hendelse) {
     return undefined;
   }
@@ -52,9 +57,9 @@ export const findHendelseText = (hendelse, getKodeverknavn) => {
   return `${getKodeverknavn(hendelse.navn)} ${hendelse.verdi}`;
 };
 
-const convertToBoolean = (verdi) => (verdi === true ? 'Ja' : 'Nei');
+const convertToBoolean = (verdi: boolean): string => (verdi === true ? 'Ja' : 'Nei');
 
-export const findEndretFeltVerdi = (endretFelt, verdi, intl) => {
+export const findEndretFeltVerdi = (endretFelt: HistorikkinnslagEndretFelt, verdi: string | number | boolean, intl: IntlShape): string | number => {
   if (verdi === null) {
     return null;
   }
@@ -66,25 +71,19 @@ export const findEndretFeltVerdi = (endretFelt, verdi, intl) => {
     if (!verdiCode) {
       return (`EndretFeltVerdiTypeCode ${verdi} finnes ikke-LEGG DET INN`);
     }
-    return intl.formatMessage({ id: verdiCode.verdiId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> });
+    return intl.formatMessage({ id: verdiCode.verdiId });
   }
   return verdi;
 };
 
-export const findEndretFeltNavn = (endretFelt, intl) => {
-  const { formatMessage } = intl;
+export const findEndretFeltNavn = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): string => {
   const navnCode = endretFelt.endretFeltNavn.kode;
   const endretFeltNavnType = historikkEndretFeltTypeCodes[navnCode];
   if (!endretFeltNavnType) {
     return (`EndretFeltTypeCode ${navnCode} finnes ikke-LEGG DET INN`);
   }
   const fieldId = endretFeltNavnType.feltId;
-  return endretFelt.navnVerdi !== null ? formatMessage({ id: fieldId }, {
+  return endretFelt.navnVerdi !== null ? intl.formatMessage({ id: fieldId }, {
     value: endretFelt.navnVerdi,
-    b: (chunks) => <b>{chunks}</b>,
-    br: <br />,
-  }) : formatMessage({ id: fieldId }, {
-    b: (chunks) => <b>{chunks}</b>,
-    br: <br />,
-  });
+  }) : intl.formatMessage({ id: fieldId });
 };

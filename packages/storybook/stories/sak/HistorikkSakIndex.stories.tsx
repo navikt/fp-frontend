@@ -136,6 +136,13 @@ const history = [{
   ],
 }];
 
+const locationMock = {
+  pathname: 'test',
+  search: 'test',
+  state: {},
+  hash: 'test',
+};
+
 export default {
   title: 'sak/sak-historikk',
   component: HistorikkSakIndex,
@@ -149,11 +156,12 @@ export const visHistorikk = () => (
     {history.map((h) => (
       <HistorikkSakIndex
         key={h.behandlingId}
-        historieInnslag={h}
+        historikkinnslag={h}
         saksnummer={2}
-        getBehandlingLocation={() => 'url'}
-        alleKodeverk={alleKodeverk}
-        createLocationForSkjermlenke={() => 'url'}
+        getBehandlingLocation={() => locationMock}
+        alleKodeverk={alleKodeverk as any}
+        createLocationForSkjermlenke={() => locationMock}
+        erTilbakekreving={false}
       />
     ))}
   </div>

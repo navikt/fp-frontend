@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
+import { Location } from 'history';
 
-import historikkinnslagPropType from '../propTypes/historikkinnslagPropType';
+import { Historikkinnslag, Kodeverk } from '@fpsak-frontend/types';
+import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
+
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
 import Snakkeboble from './maler/felles/snakkeboble';
 import HistorikkMalType1 from './maler/historikkMalType1';
@@ -19,7 +21,95 @@ import HistorikkMalTypeTilbakekreving from './maler/HistorikkMalTypeTilbakekrevi
 import HistorikkMalTypeForeldelse from './maler/HistorikkMalTypeForeldelse';
 import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
 
-const velgHistorikkMal = (histType) => { // NOSONAR
+/*
+ https://confluence.adeo.no/display/MODNAV/OMR-13+SF4+Sakshistorikk+-+UX+og+grafisk+design
+
+ Fem design patterns:
+
+ +----------------------------+
+ | Type 1                     |
+ | BEH_VENT                   |
+ | BEH_GJEN                   |
+ | KØET_BEH_GJEN              |
+ | BEH_STARTET                |
+ | VEDLEGG_MOTTATT            |
+ | BREV_SENT                  |
+ | BREV_BESTILT               |
+ | REGISTRER_PAPIRSØK         |
+ | MANGELFULL_SØKNAD          |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>
+ <begrunnelsestekst>
+ <dokumentLinker>
+
+ +----------------------------+
+ | Type 2                     |
+ | FORSLAG_VEDTAK             |
+ | FORSLAG_VEDTAK_UTEN_TOTRINN|
+ | VEDTAK_FATTET              |
+ | VEDTAK_FATTET_AUTOMATISK   |
+ | OVERSTYRT (hvis beslutter) |
+ | REGISTRER_OM_VERGE         |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>: <resultat>
+ <skjermlinke>
+
+ +----------------------------+
+ | Type 3                     |
+ | SAK_RETUR                  |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>
+ <begrunnelsestekst>
+ <dokumentLinker>
+
+ +----------------------------+
+ | Type 4                     |
+ | AVBRUTT_BEH                |
+ | OVERSTYRT (hvis saksbeh.)  |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>
+ <årsak>
+ <begrunnelsestekst>
+
+ +----------------------------+
+ | Type 5                     |
+ | FAKTA_ENDRET               |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <skjermlinke>
+ <feltnavn> er endret <fra-verdi> til <til-verdi>
+ <radiogruppe> er satt til <verdi>
+ <begrunnelsestekst>
+ <dokumentLinker>
+
+ +----------------------------+
+ | Type 6                     |
+ | NY_INFO_FRA_TPS            |
+ +----------------------------+
+ Ikke definert
+
+ +----------------------------+
+ | Type 7                     |
+ | OVERSTYRT                  |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <skjermlinke>
+ Overstyrt <vurdering/beregning>: <Utfallet/beløpet> er endret fra <fra-verdi> til <til-verdi>
+ <begrunnelsestekst>
+
++----------------------------+
+ | Type 8                     |
+ | ???                        |
+ +----------------------------+
+ Ikke definiert
+
+ */
+
+const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
   switch (histType.kode) { // NOSONAR
     case historikkinnslagType.BEH_GJEN:
     case historikkinnslagType.KOET_BEH_GJEN:
@@ -93,57 +183,51 @@ const velgHistorikkMal = (histType) => { // NOSONAR
   }
 };
 
+interface OwnProps {
+  historikkinnslag: Historikkinnslag;
+  saksnummer?: number;
+  getBehandlingLocation: (behandlingId: number) => Location;
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  erTilbakekreving: boolean;
+}
+
 /**
  * History
  *
  * Historikken for en behandling
  */
-const History = ({
-  historieInnslag,
-  saksNr,
+const History: FunctionComponent<OwnProps> = ({
+  historikkinnslag,
+  saksnummer = 0,
   getBehandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
+  erTilbakekreving,
 }) => {
-  const HistorikkMal = velgHistorikkMal(historieInnslag.type);
-  const aktorIsVL = historieInnslag.aktoer.kode === 'VL';
-  const aktorIsSOKER = historieInnslag.aktoer.kode === 'SOKER';
-  const aktorIsArbeidsgiver = historieInnslag.aktoer.kode === 'ARBEIDSGIVER';
+  const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
+  const aktorIsVL = historikkinnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
+  const aktorIsSOKER = historikkinnslag.aktoer.kode === HistorikkAktor.SOKER;
+  const aktorIsArbeidsgiver = historikkinnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
+
   return (
     <Snakkeboble
-      historikkinnslagDeler={historieInnslag.historikkinnslagDeler}
-      rolle={historieInnslag.aktoer.kode}
-      rolleNavn={getKodeverknavn(historieInnslag.aktoer)}
-      dato={historieInnslag.opprettetTidspunkt}
-      kjoennKode={historieInnslag.kjoenn ? historieInnslag.kjoenn.kode : ''}
-      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? null : historieInnslag.opprettetAv}
-      histType={historieInnslag.type}
-      dokumentLinks={historieInnslag.dokumentLinks}
+      aktoer={historikkinnslag.aktoer}
+      rolleNavn={getKodeverknavn(historikkinnslag.aktoer)}
+      dato={historikkinnslag.opprettetTidspunkt}
+      kjoenn={historikkinnslag.kjoenn}
+      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historikkinnslag.opprettetAv}
     >
       <HistorikkMal
-        historikkinnslagDeler={historieInnslag.historikkinnslagDeler}
-        dokumentLinks={historieInnslag.dokumentLinks}
-        behandlingLocation={getBehandlingLocation(historieInnslag.behandlingId)}
-        originType={historieInnslag.type}
-        saksNr={saksNr}
+        historikkinnslag={historikkinnslag}
+        behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingId)}
+        saksnummer={saksnummer}
         getKodeverknavn={getKodeverknavn}
-        erTilbakekreving={historieInnslag.erTilbakekreving}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
+        erTilbakekreving={erTilbakekreving}
       />
     </Snakkeboble>
   );
-};
-
-History.propTypes = {
-  historieInnslag: historikkinnslagPropType.isRequired,
-  saksNr: PropTypes.number,
-  getBehandlingLocation: PropTypes.func.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
-};
-
-History.defaultProps = {
-  saksNr: 0,
 };
 
 export default History;

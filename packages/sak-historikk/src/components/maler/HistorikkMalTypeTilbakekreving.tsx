@@ -1,26 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';
-import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
+import HistorikkMal from '../HistorikkMalTsType';
 
 const scrollUp = () => {
   window.scroll(0, 0);
 };
 
-export const HistorikkMalTypeTilbakekreving = ({
-  historikkinnslagDeler,
+const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
+  historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
 }) => {
+  const { historikkinnslagDeler } = historikkinnslag;
   if (historikkinnslagDeler.length === 0) {
     return null;
   }
@@ -99,13 +99,6 @@ export const HistorikkMalTypeTilbakekreving = ({
       })}
     </>
   );
-};
-
-HistorikkMalTypeTilbakekreving.propTypes = {
-  historikkinnslagDeler: PropTypes.arrayOf(historikkinnslagDelPropType).isRequired,
-  behandlingLocation: PropTypes.shape().isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-  createLocationForSkjermlenke: PropTypes.func.isRequired,
 };
 
 export default HistorikkMalTypeTilbakekreving;
