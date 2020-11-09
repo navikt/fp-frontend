@@ -1,8 +1,11 @@
-import React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent, ReactNode } from 'react';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
+import { HistorikkinnslagDel, HistorikkinnslagEndretFelt, Kodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
@@ -16,18 +19,18 @@ import {
   findResultatText,
 } from './felles/historikkUtils';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
-import historikkinnslagDelPropType from '../../propTypes/historikkinnslagDelPropType';
 import BubbleText from './felles/bubbleText';
+import HistorikkMal from '../HistorikkMalTsType';
 
 const scrollUp = () => {
   window.scroll(0, 0);
 };
 
-function isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) {
+function isGjeldendeFraUtenEndredeFelter(historikkinnslagDel: HistorikkinnslagDel): boolean {
   return (historikkinnslagDel.gjeldendeFra && !historikkinnslagDel.endredeFelter);
 }
 
-const lagGjeldendeFraInnslag = (historikkinnslagDel) => {
+const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): ReactNode => {
   if (!historikkinnslagDel.gjeldendeFra) {
     return undefined;
   }
@@ -38,20 +41,16 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel) => {
           id={historikkEndretFeltTypeCodes[historikkinnslagDel.gjeldendeFra.navn].feltId}
           values={{ value: historikkinnslagDel.gjeldendeFra.verdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
         />
-        {historikkinnslagDel.gjeldendeFra.fra
-        && (
+        {historikkinnslagDel.gjeldendeFra.fra && (
           <FormattedMessage
             id="Historikk.Template.5.VerdiGjeldendeFra"
             values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks) => <b>{chunks}</b> }}
           />
         )}
-        {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel)
-        && (
-          <div>
-            <FormattedMessage
-              id="Historikk.Template.5.IngenEndring"
-            />
-          </div>
+        {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) && (
+          <FormattedMessage
+            id="Historikk.Template.5.IngenEndring"
+          />
         )}
       </>
     );
@@ -63,13 +62,10 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel) => {
           id="Historikk.Template.5.GjeldendeFra"
           values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks) => <b>{chunks}</b> }}
         />
-        {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel)
-        && (
-          <div>
-            <FormattedMessage
-              id="Historikk.Template.5.IngenEndring"
-            />
-          </div>
+        {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) && (
+          <FormattedMessage
+            id="Historikk.Template.5.IngenEndring"
+          />
         )}
       </>
     );
@@ -77,102 +73,92 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel) => {
   return undefined;
 };
 
-type HistorikkMalType5Props = {
-    historikkinnslagDeler: historikkinnslagDelPropType[];
-    behandlingLocation: {};
-    dokumentLinks: {}[];
-    intl: {};
-    saksNr: number;
-    createLocationForSkjermlenke: (...args: any[]) => any;
-    getKodeverknavn: (...args: any[]) => any;
+const lageElementInnhold = (historikkDel: HistorikkinnslagDel, intl: IntlShape, getKodeverknavn: (kodeverk: Kodeverk) => string): string[] => {
+  const list = [];
+  if (historikkDel.hendelse) {
+    list.push(findHendelseText(historikkDel.hendelse, getKodeverknavn));
+  }
+  if (historikkDel.resultat) {
+    list.push(findResultatText(historikkDel.resultat, intl));
+  }
+  return list;
 };
 
-const HistorikkMalType5 = ({
-  historikkinnslagDeler, behandlingLocation, dokumentLinks, intl, saksNr, getKodeverknavn, createLocationForSkjermlenke,
-}: HistorikkMalType5Props) => {
-  const lageElementInnhold = (historikkDel) => {
-    const list = [];
-    if (historikkDel.hendelse) {
-      list.push(findHendelseText(historikkDel.hendelse, getKodeverknavn));
-    }
-    if (historikkDel.resultat) {
-      list.push(findResultatText(historikkDel.resultat, intl));
-    }
-    return list;
-  };
+const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): ReactNode => {
+  const fieldName = findEndretFeltNavn(endretFelt, intl);
+  const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
+  const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
 
-  const formatChangedField = (endretFelt) => {
-    const fieldName = findEndretFeltNavn(endretFelt, intl);
-    const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
-    const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
-
-    if (endretFelt.fraVerdi !== null && endretFelt.endretFeltNavn.kode !== historikkEndretFeltTypeCodes.FORDELING_FOR_NY_ANDEL.kode) {
-      return (
-        <div>
-          <FormattedMessage
-            id="Historikk.Template.5.ChangedFromTo"
-            values={{
-              fieldName,
-              fromValue,
-              toValue,
-              b: (chunks) => <b>{chunks}</b>,
-            }}
-          />
-        </div>
-      );
-    }
+  if (endretFelt.fraVerdi !== null && endretFelt.endretFeltNavn.kode !== historikkEndretFeltTypeCodes.FORDELING_FOR_NY_ANDEL.kode) {
     return (
-      <div>
-        <FormattedMessage
-          id="Historikk.Template.5.FieldSetTo"
-          values={{
-            fieldName,
-            value: toValue,
-            b: (chunks) => <b>{chunks}</b>,
-          }}
-        />
-      </div>
-    );
-  };
-
-  const lagTemaHeadingId = (historikkinnslagDel) => {
-    const { tema } = historikkinnslagDel;
-    if (tema) {
-      const heading = historikkEndretFeltTypeHeadingCodes[tema.endretFeltNavn.kode];
-      if (heading && tema.navnVerdi) {
-        return <FormattedMessage id={heading.feltId} values={{ value: tema.navnVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }} />;
-      }
-    }
-    return undefined;
-  };
-
-  const lagSoeknadsperiode = (soeknadsperiode) => (soeknadsperiode.navnVerdi
-    ? (
       <FormattedMessage
-        id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
+        id="Historikk.Template.5.ChangedFromTo"
         values={{
-          navnVerdi: soeknadsperiode.navnVerdi,
-          value: soeknadsperiode.tilVerdi,
+          fieldName,
+          fromValue,
+          toValue,
           b: (chunks) => <b>{chunks}</b>,
-          br: <br />,
         }}
       />
-    )
-    : (
-      <FormattedMessage
-        id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
-        values={{ value: soeknadsperiode.tilVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
-      />
-    ));
-
+    );
+  }
   return (
-    historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
+    <FormattedMessage
+      id="Historikk.Template.5.FieldSetTo"
+      values={{
+        fieldName,
+        value: toValue,
+        b: (chunks) => <b>{chunks}</b>,
+      }}
+    />
+  );
+};
+
+const lagTemaHeadingId = (historikkinnslagDel: HistorikkinnslagDel): ReactNode => {
+  const { tema } = historikkinnslagDel;
+  if (tema) {
+    const heading = historikkEndretFeltTypeHeadingCodes[tema.endretFeltNavn.kode];
+    if (heading && tema.navnVerdi) {
+      return <FormattedMessage id={heading.feltId} values={{ value: tema.navnVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }} />;
+    }
+  }
+  return undefined;
+};
+
+const lagSoeknadsperiode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiode']): ReactNode => (soeknadsperiode.navnVerdi
+  ? (
+    <FormattedMessage
+      id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
+      values={{
+        navnVerdi: soeknadsperiode.navnVerdi,
+        value: soeknadsperiode.tilVerdi,
+        b: (chunks) => <b>{chunks}</b>,
+        br: <br />,
+      }}
+    />
+  )
+  : (
+    <FormattedMessage
+      id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
+      values={{ value: soeknadsperiode.tilVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
+    />
+  ));
+
+const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
+  intl,
+  historikkinnslag,
+  behandlingLocation,
+  getKodeverknavn,
+  createLocationForSkjermlenke,
+  saksnummer,
+}) => (
+  <>
+    {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
       <div key={
         `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
       }
       >
-        {historikkinnslagDel.skjermlenke
-        && (
+        {historikkinnslagDel.skjermlenke && (
           <Element>
             <NavLink
               to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDel.skjermlenke.kode)}
@@ -183,10 +169,9 @@ const HistorikkMalType5 = ({
           </Element>
         )}
 
-        {lageElementInnhold(historikkinnslagDel)
-          .map((tekst) => (
-            <div key={tekst}><Element>{tekst}</Element></div>
-          ))}
+        {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
+          <div key={tekst}><Element>{tekst}</Element></div>
+        ))}
 
         {lagGjeldendeFraInnslag(historikkinnslagDel)}
 
@@ -196,7 +181,7 @@ const HistorikkMalType5 = ({
 
         {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter.map((endretFelt, i) => (
           <div key={`endredeFelter${i + 1}`}>
-            {formatChangedField(endretFelt)}
+            {formatChangedField(endretFelt, intl)}
           </div>
         ))}
 
@@ -204,32 +189,27 @@ const HistorikkMalType5 = ({
           <FormattedMessage
             id={findIdForOpplysningCode(opplysning)}
             values={{ antallBarn: opplysning.tilVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
-            key={`${getKodeverknavn(opplysning)}@${opplysning.tilVerdi}`}
+            key={`${getKodeverknavn(opplysning.opplysningType)}@${opplysning.tilVerdi}`}
           />
         ))}
 
         {historikkinnslagDel.aarsak && <Normaltekst>{getKodeverknavn(historikkinnslagDel.aarsak)}</Normaltekst>}
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
-        {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} className="snakkeboble-panel__tekst" />}
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Property 'className' does not exist on type 'Intri... Remove this comment to see the full error message */}
-        {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} className="snakkeboble-panel__tekst" />}
-        <div>
-          {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
+        {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} />}
+        {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
+        <>
+          {historikkinnslag.dokumentLinks && historikkinnslag.dokumentLinks.map((dokumentLenke) => (
             <HistorikkDokumentLenke
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'tag' does not exist on type '{}'.
               key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
-              // @ts-expect-error ts-migrate(2322) FIXME: Property 'dokumentLenke' does not exist on type 'I... Remove this comment to see the full error message
               dokumentLenke={dokumentLenke}
-              saksNr={saksNr}
+              saksnummer={saksnummer}
             />
           ))}
-        </div>
+        </>
 
-        {historikkinnslagDelIndex < historikkinnslagDeler.length - 1
-        && <VerticalSpacer sixteenPx />}
+        {historikkinnslagDelIndex < historikkinnslag.historikkinnslagDeler.length - 1 && <VerticalSpacer sixteenPx />}
       </div>
-    )));
-};
+    ))}
+  </>
+);
 
-// @ts-expect-error ts-migrate(2769) FIXME: Type '({ historikkinnslagDeler, behandlingLocation... Remove this comment to see the full error message
 export default injectIntl(HistorikkMalType5);

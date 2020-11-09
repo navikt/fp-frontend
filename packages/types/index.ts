@@ -45,4 +45,5 @@ export { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold
 export { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
 export {
   default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,
+  HistorikkInnslagOpplysning, HistorikkInnslagAksjonspunkt,
 } from './src/historikkinnslagTsType';

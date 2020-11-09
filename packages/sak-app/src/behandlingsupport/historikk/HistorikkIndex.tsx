@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
-import { KodeverkMedNavn, Historikk } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Historikkinnslag } from '@fpsak-frontend/types';
 import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
 
 import useLocation from '../../app/useLocation';
@@ -15,11 +15,14 @@ import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths'
 import ApplicationContextPath from '../../app/ApplicationContextPath';
 import useGetEnabledApplikasjonContext from '../../app/useGetEnabledApplikasjonContext';
 
-type HistorikkMedTilbakekrevingIndikator = Historikk & {
+type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
   erTilbakekreving?: boolean;
 }
 
-const sortAndTagTilbakekreving = (historikkFpsak: Historikk[] = [], historikkFptilbake: Historikk[] = []): HistorikkMedTilbakekrevingIndikator[] => {
+const sortAndTagTilbakekreving = (
+  historikkFpsak: Historikkinnslag[] = [],
+  historikkFptilbake: Historikkinnslag[] = [],
+): HistorikkMedTilbakekrevingIndikator[] => {
   const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map((ht) => ({
     ...ht,
     erTilbakekreving: true,
@@ -59,14 +62,15 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndret = forrigeSaksnummer && erBehandlingEndretFraUndefined;
 
-  const { data: historikkFpSak, state: historikkFpSakState } = restApiHooks.useRestApi<Historikk[]>(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
+  const { data: historikkFpSak, state: historikkFpSakState } = restApiHooks.useRestApi<Historikkinnslag[]>(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: erBehandlingEndret,
   });
-  const { data: historikkFpTilbake, state: historikkFpTilbakeState } = restApiHooks.useRestApi<Historikk[]>(FpsakApiKeys.HISTORY_FPTILBAKE, { saksnummer }, {
-    updateTriggers: [behandlingId, behandlingVersjon],
-    suspendRequest: !skalBrukeFpTilbakeHistorikk || erBehandlingEndret,
-  });
+  const { data: historikkFpTilbake, state: historikkFpTilbakeState } = restApiHooks
+    .useRestApi<Historikkinnslag[]>(FpsakApiKeys.HISTORY_FPTILBAKE, { saksnummer }, {
+      updateTriggers: [behandlingId, behandlingVersjon],
+      suspendRequest: !skalBrukeFpTilbakeHistorikk || erBehandlingEndret,
+    });
 
   const historikkInnslag = useMemo(() => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake), [historikkFpSak, historikkFpTilbake]);
 
@@ -82,6 +86,7 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
           historikkinnslag={innslag}
           saksnummer={saksnummer}
           alleKodeverk={innslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak}
+          erTilbakekreving={!!innslag.erTilbakekreving}
           getBehandlingLocation={getBehandlingLocation}
           createLocationForSkjermlenke={createLocationForSkjermlenke}
         />

@@ -7,6 +7,7 @@ interface HistorikkMal {
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
   saksnummer: number;
+  erTilbakekreving: boolean;
 }
 
 export default HistorikkMal;

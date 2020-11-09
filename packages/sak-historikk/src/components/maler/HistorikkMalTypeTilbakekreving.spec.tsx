@@ -75,6 +75,8 @@ describe('HistorikkMalTypeTilbakekreving', () => {
       behandlingLocation={locationMock}
       getKodeverknavn={getKodeverknavn}
       createLocationForSkjermlenke={() => locationMock}
+      erTilbakekreving={false}
+      saksnummer={123}
     />);
 
     const messages = wrapper.find(FormattedMessage);

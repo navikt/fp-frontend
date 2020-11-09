@@ -4,7 +4,7 @@ import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import styles from './bubbleText.less';
 
-const truncateText = (tekst: string, cutOffLength: number) => (tekst.length > cutOffLength
+const truncateText = (tekst: string, cutOffLength: number): string => (tekst.length > cutOffLength
   ? (`${tekst.substring(0, cutOffLength - 3)}...`)
   : tekst);
 

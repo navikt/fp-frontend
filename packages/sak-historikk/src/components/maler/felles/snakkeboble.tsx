@@ -18,14 +18,14 @@ import styles from './snakkeboble.less';
 
 const cx = classNames.bind(styles);
 
-const snakkebobleCls = (aktoer: Kodeverk) => cx('snakkeboble', {
+const snakkebobleCls = (aktoer: Kodeverk): string => cx('snakkeboble', {
   'snakkeboble--hoyre': aktoer.kode !== HistorikkAktor.SOKER && aktoer.kode !== HistorikkAktor.ARBEIDSGIVER,
   'snakkeboble--venstre': aktoer.kode === HistorikkAktor.SOKER || aktoer.kode === HistorikkAktor.ARBEIDSGIVER,
 });
 
-const formatDate = (date: string) => (`${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)} - ${date.substring(11, 16)}`);
+const formatDate = (date: string): string => (`${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)} - ${date.substring(11, 16)}`);
 
-const snakkeboblePilCls = (aktoer: Kodeverk) => cx('snakkeboble__snakkebole-pil', {
+const snakkeboblePilCls = (aktoer: Kodeverk): string => cx('snakkeboble__snakkebole-pil', {
   'snakkeboble__snakkebole-pil--hoyre--saksbehandler': aktoer.kode === HistorikkAktor.SAKSBEHANDLER,
   'snakkeboble__snakkebole-pil--hoyre--beslutter': aktoer.kode === HistorikkAktor.BESLUTTER,
   'snakkeboble__snakkebole-pil--hoyre--losningen': aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN,
@@ -33,7 +33,7 @@ const snakkeboblePilCls = (aktoer: Kodeverk) => cx('snakkeboble__snakkebole-pil'
   'snakkeboble__snakkebole-pil--venstre--ekstern': aktoer.kode === HistorikkAktor.ARBEIDSGIVER,
 });
 
-const snakkeboblePanelCls = (aktoer: Kodeverk) => cx('snakkeboble__panel snakkeboble-panel', {
+const snakkeboblePanelCls = (aktoer: Kodeverk): string => cx('snakkeboble__panel snakkeboble-panel', {
   'snakkeboble__snakkebole-panel--saksbehandler': aktoer.kode === HistorikkAktor.SAKSBEHANDLER,
   'snakkeboble__snakkebole-panel--beslutter': aktoer.kode === HistorikkAktor.BESLUTTER,
   'snakkeboble__snakkebole-panel--losningen': aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN,
@@ -56,7 +56,7 @@ const utledIkon = (aktoer: Kodeverk, kjoenn: Kodeverk) => {
   return arbeidsgiverImg;
 };
 
-const utledTooltipPlassering = (aktoer: Kodeverk) => aktoer.kode === HistorikkAktor.SAKSBEHANDLER
+const utledTooltipPlassering = (aktoer: Kodeverk): boolean => aktoer.kode === HistorikkAktor.SAKSBEHANDLER
 || aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN || aktoer.kode === HistorikkAktor.BESLUTTER;
 
 interface OwnProps {

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
@@ -16,17 +16,17 @@ const scrollUp = () => {
   window.scroll(0, 0);
 };
 
-const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']) => {
+const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode);
   return found.tilVerdi;
 };
 
-const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']) => {
+const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode);
   return found.tilVerdi;
 };
 
-const buildEndretFeltText = (endredeFelter: HistorikkinnslagDel['endredeFelter'], getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+const buildEndretFeltText = (endredeFelter: HistorikkinnslagDel['endredeFelter'], getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
   const årsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_AARSAK.kode)[0];
   const underÅrsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_UNDERAARSAK.kode)[0];
   const underÅrsakFraVerdi = underÅrsakFelt ? getKodeverknavn({ kode: underÅrsakFelt.fraVerdi as string, kodeverk: underÅrsakFelt.klFraVerdi }) : null;

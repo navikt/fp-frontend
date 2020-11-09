@@ -21,6 +21,94 @@ import HistorikkMalTypeTilbakekreving from './maler/HistorikkMalTypeTilbakekrevi
 import HistorikkMalTypeForeldelse from './maler/HistorikkMalTypeForeldelse';
 import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
 
+/*
+ https://confluence.adeo.no/display/MODNAV/OMR-13+SF4+Sakshistorikk+-+UX+og+grafisk+design
+
+ Fem design patterns:
+
+ +----------------------------+
+ | Type 1                     |
+ | BEH_VENT                   |
+ | BEH_GJEN                   |
+ | KØET_BEH_GJEN              |
+ | BEH_STARTET                |
+ | VEDLEGG_MOTTATT            |
+ | BREV_SENT                  |
+ | BREV_BESTILT               |
+ | REGISTRER_PAPIRSØK         |
+ | MANGELFULL_SØKNAD          |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>
+ <begrunnelsestekst>
+ <dokumentLinker>
+
+ +----------------------------+
+ | Type 2                     |
+ | FORSLAG_VEDTAK             |
+ | FORSLAG_VEDTAK_UTEN_TOTRINN|
+ | VEDTAK_FATTET              |
+ | VEDTAK_FATTET_AUTOMATISK   |
+ | OVERSTYRT (hvis beslutter) |
+ | REGISTRER_OM_VERGE         |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>: <resultat>
+ <skjermlinke>
+
+ +----------------------------+
+ | Type 3                     |
+ | SAK_RETUR                  |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>
+ <begrunnelsestekst>
+ <dokumentLinker>
+
+ +----------------------------+
+ | Type 4                     |
+ | AVBRUTT_BEH                |
+ | OVERSTYRT (hvis saksbeh.)  |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <hendelse>
+ <årsak>
+ <begrunnelsestekst>
+
+ +----------------------------+
+ | Type 5                     |
+ | FAKTA_ENDRET               |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <skjermlinke>
+ <feltnavn> er endret <fra-verdi> til <til-verdi>
+ <radiogruppe> er satt til <verdi>
+ <begrunnelsestekst>
+ <dokumentLinker>
+
+ +----------------------------+
+ | Type 6                     |
+ | NY_INFO_FRA_TPS            |
+ +----------------------------+
+ Ikke definert
+
+ +----------------------------+
+ | Type 7                     |
+ | OVERSTYRT                  |
+ +----------------------------+
+ <tidspunkt> // <rolle> <id>
+ <skjermlinke>
+ Overstyrt <vurdering/beregning>: <Utfallet/beløpet> er endret fra <fra-verdi> til <til-verdi>
+ <begrunnelsestekst>
+
++----------------------------+
+ | Type 8                     |
+ | ???                        |
+ +----------------------------+
+ Ikke definiert
+
+ */
+
 const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
   switch (histType.kode) { // NOSONAR
     case historikkinnslagType.BEH_GJEN:
@@ -101,6 +189,7 @@ interface OwnProps {
   getBehandlingLocation: (behandlingId: number) => Location;
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  erTilbakekreving: boolean;
 }
 
 /**
@@ -114,6 +203,7 @@ const History: FunctionComponent<OwnProps> = ({
   getBehandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
+  erTilbakekreving,
 }) => {
   const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
   const aktorIsVL = historikkinnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
@@ -134,6 +224,7 @@ const History: FunctionComponent<OwnProps> = ({
         saksnummer={saksnummer}
         getKodeverknavn={getKodeverknavn}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
+        erTilbakekreving={erTilbakekreving}
       />
     </Snakkeboble>
   );

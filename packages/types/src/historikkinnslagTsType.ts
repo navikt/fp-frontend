@@ -4,11 +4,22 @@ export type HistorikkinnslagEndretFelt = {
   endretFeltNavn: Kodeverk;
   navnVerdi?: string;
   klNavn?: string;
-  fraVerdi?: string | boolean;
-  tilVerdi?: string | boolean;
+  fraVerdi?: string | number | boolean;
+  tilVerdi?: string | number | boolean;
   klFraVerdi?: string;
   klTilVerdi?: string;
 };
+
+export type HistorikkInnslagOpplysning = {
+  opplysningType?: Kodeverk;
+  tilVerdi?: string;
+}
+
+export type HistorikkInnslagAksjonspunkt = {
+  aksjonspunktKode: string;
+  godkjent: boolean;
+  aksjonspunktBegrunnelse?: string;
+}
 
 export type HistorikkinnslagDel = {
   begrunnelse?: Kodeverk;
@@ -17,10 +28,7 @@ export type HistorikkinnslagDel = {
     navn?: Kodeverk;
     verdi?: string;
   };
-  opplysninger?: {
-    opplysningType?: Kodeverk;
-    tilVerdi?: string;
-  }[];
+  opplysninger?: HistorikkInnslagOpplysning[];
   soeknadsperiode?: {
     soeknadsperiodeType?: Kodeverk;
     navnVerdi?: string;
@@ -32,7 +40,7 @@ export type HistorikkinnslagDel = {
     endretFeltNavn: Kodeverk;
     klNavn: string;
     navnVerdi: string;
-  }[];
+  };
   gjeldendeFra?: {
     fra?: string;
     navn?: string;
@@ -40,11 +48,7 @@ export type HistorikkinnslagDel = {
   };
   resultat?: string;
   endredeFelter?: HistorikkinnslagEndretFelt[];
-  aksjonspunkter?: {
-    aksjonspunktKode: string;
-    godkjent: boolean;
-    aksjonspunktBegrunnelse?: string;
-  }[];
+  aksjonspunkter?: HistorikkInnslagAksjonspunkt[];
 };
 
 export type HistorikkInnslagDokumentLink = Readonly<{
