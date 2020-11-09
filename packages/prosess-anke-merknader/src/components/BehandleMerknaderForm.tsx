@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -18,7 +18,9 @@ import {
 import { required } from '@fpsak-frontend/utils';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { Aksjonspunkt, AnkeVurdering, Kodeverk } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import CheckboxField from '@fpsak-frontend/form/src/CheckboxField';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
@@ -27,10 +29,10 @@ import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
 import styles from './behandleMerknaderForm.less';
 
 const omgjorArsakValues = [
-  { kode: ankeOmgjorArsak.PROSESSUELL_FEIL, navn: 'Ankebehandling.OmgjoeringArsak.ProsessuellFeil' },
-  { kode: ankeOmgjorArsak.ULIK_VURDERING, navn: 'Ankebehandling.OmgjoeringArsak.UlikVurdering' },
-  { kode: ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING, navn: 'Ankebehandling.OmgjoeringArsak.UlikRegelverkstolkning' },
-  { kode: ankeOmgjorArsak.NYE_OPPLYSNINGER, navn: 'Ankebehandling.OmgjoeringArsak.NyeOpplysninger' },
+  ankeOmgjorArsak.PROSESSUELL_FEIL,
+  ankeOmgjorArsak.ULIK_VURDERING,
+  ankeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+  ankeOmgjorArsak.NYE_OPPLYSNINGER,
 ];
 
 interface OwnProps {
@@ -43,9 +45,10 @@ interface OwnProps {
   sprakkode: Kodeverk;
   behandlingVersjon: number;
   valgtTrygderettVurdering?: Kodeverk;
+  ankeOmgorArsaker: KodeverkMedNavn[];
 }
 
-const AnkeMerknader: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+const AnkeMerknader: FunctionComponent<OwnProps & InjectedFormProps> = ({
   readOnly,
   handleSubmit,
   readOnlySubmitButton,
@@ -54,7 +57,7 @@ const AnkeMerknader: FunctionComponent<OwnProps & WrappedComponentProps & Inject
   behandlingVersjon,
   sprakkode,
   valgtTrygderettVurdering,
-  intl,
+  ankeOmgorArsaker,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -109,7 +112,8 @@ const AnkeMerknader: FunctionComponent<OwnProps & WrappedComponentProps & Inject
               <SelectField
                 readOnly={readOnly}
                 name="trygderettOmgjoerArsak.kode"
-                selectValues={omgjorArsakValues.map((arsak) => <option key={arsak.kode} value={arsak.kode}>{intl.formatMessage({ id: arsak.navn })}</option>)}
+                selectValues={omgjorArsakValues
+                  .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
                 className={readOnly ? styles.selectReadOnly : null}
                 label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
                 validate={[required]}
@@ -205,6 +209,6 @@ const mapStateToProps = (state, ownProps: PureOwnProps) => ({
 
 const BehandleMerknaderForm = connect(mapStateToProps)(behandlingForm({
   form: ankeMerknaderFormName,
-})(injectIntl(AnkeMerknader)));
+})(AnkeMerknader));
 
 export default BehandleMerknaderForm;
