@@ -285,7 +285,7 @@
   "HistorikkEndretFelt.MilitærEllerSiviltjeneste": "Har søker militær- eller siviltjeneste i opptjeningsperioden",
   "HistorikkEndretFelt.NyRefusjonsfrist": "Utvidelse av frist for fremsatt refusjonskrav for {value}",
   "HistorikkEndretFelt.NyStartdatoRefusjon": "Startdato for refusjon til {value}",
-  "HistorikkEndretFelt.DelvisRefusjonFørStardato": "Delvis refusjon før startdato til {value}",
+  "HistorikkEndretFelt.DelvisRefusjonFørStardato": "Delvis refusjon før ",
   "HistorikkEndretFelt.Oppholdsrett.Omsorgsovertakelsesdato": "Dato for omsorgsovertakelse",
   "HistorikkEndretFelt.Oppholdsrett.ApplicationInformation": "Omsorgsvilkåret",
   "HistorikkEndretFelt.AdoptererAlene": "Adopterer alene",

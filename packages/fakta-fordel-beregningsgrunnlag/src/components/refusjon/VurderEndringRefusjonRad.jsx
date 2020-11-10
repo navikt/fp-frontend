@@ -127,7 +127,6 @@ VurderEndringRefusjonRad.transformValues = (values, andel) => {
     internArbeidsforholdRef: andel.internArbeidsforholdRef,
     fastsattRefusjonFom: fastsattDato,
     delvisRefusjonPrMndFørStart: delvisRefusjonPrMnd,
-    skalKunneFastsetteDelvisRefusjon: andel.skalKunneFastsetteDelvisRefusjon,
   };
 };
 
