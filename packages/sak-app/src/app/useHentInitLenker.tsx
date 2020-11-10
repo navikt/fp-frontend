@@ -11,10 +11,11 @@ type InitLinks = {
   sakLinks: Link[];
 };
 
-const useHentInitLenker = (): boolean => {
+const useHentInitLenker = (): boolean[] => {
   const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restApiHooks.useGlobalStateRestApi<InitLinks>(FpsakApiKeys.INIT_FETCH);
   const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restApiHooks.useGlobalStateRestApi<InitLinks>(FpsakApiKeys.INIT_FETCH_FPTILBAKE);
 
+  const harFpsakInitKallFeilet = initFetchStateFpSak === RestApiState.ERROR;
   const harHentetFerdigInitLenker = initFetchStateFpSak === RestApiState.SUCCESS
     && (initFetchStateFpTilbake === RestApiState.SUCCESS || initFetchStateFpTilbake === RestApiState.ERROR);
 
@@ -30,7 +31,7 @@ const useHentInitLenker = (): boolean => {
     }
   }
 
-  return harHentetFerdigInitLenker;
+  return [harHentetFerdigInitLenker, harFpsakInitKallFeilet];
 };
 
 export default useHentInitLenker;

@@ -6,7 +6,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
 import withReduxAndRouterProvider from '../../decorators/withReduxAndRouter';
 
@@ -102,9 +102,12 @@ export const visTotrinnskontrollForBeslutter = () => (
       }}
       behandlingKlageVurdering={{
         klageVurderingResultatNFP: {
-          klageVurdering: 'STADFESTE_YTELSESVEDTAK',
+          klageVurdering: {
+            kode: 'STADFESTE_YTELSESVEDTAK',
+            kodeverk: '',
+          },
         },
-      }}
+      } as KlageVurdering}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
     />
@@ -135,9 +138,12 @@ export const visTotrinnskontrollForSaksbehandler = () => (
       }}
       behandlingKlageVurdering={{
         klageVurderingResultatNFP: {
-          klageVurdering: 'STADFESTE_YTELSESVEDTAK',
+          klageVurdering: {
+            kode: 'STADFESTE_YTELSESVEDTAK',
+            kodeverk: '',
+          },
         },
-      }}
+      } as KlageVurdering}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
     />

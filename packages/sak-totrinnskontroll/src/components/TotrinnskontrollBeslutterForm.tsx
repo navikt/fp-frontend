@@ -13,7 +13,7 @@ import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
@@ -41,7 +41,7 @@ interface PureOwnProps {
   behandling: Behandling;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
-  behandlingKlageVurdering?: TotrinnsKlageVurdering;
+  behandlingKlageVurdering?: KlageVurdering;
   erBehandlingEtterKlage?: boolean;
   readOnly: boolean;
   erTilbakekreving: boolean;
