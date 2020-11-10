@@ -26,15 +26,14 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
     requestApi.setAddErrorMessageHandler(addErrorMessage);
   }, []);
 
-  const harHentetFerdigInitLenker = useHentInitLenker();
+  const [harHentetFerdigInitLenker, harFpsakInitKallFeilet] = useHentInitLenker();
 
   const options = {
-    suspendRequest: !harHentetFerdigInitLenker,
+    suspendRequest: harFpsakInitKallFeilet || !harHentetFerdigInitLenker,
     updateTriggers: [harHentetFerdigInitLenker],
   };
 
   const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT, NO_PARAMS, options);
-  const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE, NO_PARAMS, options);
   const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER, NO_PARAMS, options);
 
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
@@ -44,14 +43,20 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
       suspendRequest: options.suspendRequest || isObjectEmpty(featureToggle),
     });
 
+  const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE, NO_PARAMS);
+
   const harHentetFerdigKodeverk = useHentKodeverk(harHentetFerdigInitLenker);
 
-  const erFerdig = harHentetFerdigInitLenker
-    && (navAnsattState === RestApiState.SUCCESS && sprakFilState === RestApiState.SUCCESS
-    && behandlendeEnheterState === RestApiState.SUCCESS && harHentetFerdigKodeverk
-    && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS));
+  const harFeilet = harFpsakInitKallFeilet && sprakFilState === RestApiState.SUCCESS;
 
-  return erFerdig ? children : <LoadingPanel />;
+  const erFerdig = harHentetFerdigInitLenker
+    && harHentetFerdigKodeverk
+    && navAnsattState === RestApiState.SUCCESS
+    && sprakFilState === RestApiState.SUCCESS
+    && behandlendeEnheterState === RestApiState.SUCCESS
+    && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS);
+
+  return harFeilet || erFerdig ? children : <LoadingPanel />;
 };
 
 export default AppConfigResolver;

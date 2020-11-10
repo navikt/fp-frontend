@@ -6,6 +6,8 @@ import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 const FPSAK = 'fpsak';
 const FPLOS = 'fplos';
 
+const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/jetty/login';
+
 export const fagsakPath = '/fagsak/:saksnummer(\\d+)/';
 export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
 export const behandlingerPath = `${fagsakPath}behandling/`;
@@ -64,3 +66,10 @@ export const createLocationForSkjermlenke = (behandlingLocation: Location, skjer
 export const erUrlUnderBehandling = (location) => !location.pathname.includes('behandling/');
 
 export const erBehandlingValgt = (location) => location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');
+
+export const redirectToLogin = () => {
+  if (process.env.NODE_ENV === 'development') {
+    window.location.assign(DEV_LOGIN_URL);
+  }
+  return undefined;
+};

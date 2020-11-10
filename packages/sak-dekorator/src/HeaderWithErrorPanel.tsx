@@ -50,7 +50,7 @@ interface OwnProps {
   }[];
   systemTittel: string;
   queryStrings: any;
-  navAnsattName: string;
+  navAnsattName?: string;
   removeErrorMessage: () => void;
   errorMessages?: any[];
   setSiteHeight: (height: number) => void;
@@ -66,7 +66,7 @@ interface OwnProps {
 const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
   iconLinks,
   systemTittel,
-  navAnsattName,
+  navAnsattName = '',
   removeErrorMessage,
   queryStrings,
   errorMessages = [],
