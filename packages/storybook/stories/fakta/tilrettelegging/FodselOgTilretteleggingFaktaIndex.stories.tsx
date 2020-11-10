@@ -89,6 +89,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
     }],
     arbeidsgiverNavn: 'Selvstendig næringsdrivende',
     skalBrukes: true,
+    velferdspermisjoner: [],
   }] as ArbeidsforholdFodselOgTilrettelegging[],
 };
 

@@ -40,7 +40,7 @@ describe('<BeslutterModalIndex>', () => {
       }}
       pushLocation={sinon.spy()}
       allAksjonspunktApproved={false}
-      totrinnsKlageVurdering={{}}
+      erKlageWithKA={false}
     />);
 
     const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
@@ -62,7 +62,7 @@ describe('<BeslutterModalIndex>', () => {
       }}
       pushLocation={sinon.spy()}
       allAksjonspunktApproved={false}
-      totrinnsKlageVurdering={{}}
+      erKlageWithKA={false}
     />);
 
     const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);

@@ -6,7 +6,7 @@ import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
-import { TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold } from '@fpsak-frontend/types';
+import { KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold } from '@fpsak-frontend/types';
 
 import getAksjonspunkttekst, { getFaktaOmArbeidsforholdMessages } from './aksjonspunktTekstUtleder';
 
@@ -635,7 +635,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: medholdIKlage,
-    };
+    } as KlageVurdering;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], [], false, aksjonspunkt);
     // @ts-ignore
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OmgjortTilGunst');
@@ -648,7 +648,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: medholdIKlage,
-    };
+    } as KlageVurdering;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], null, false, aksjonspunkt);
     // @ts-ignore
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OmgjortTilGunst');
@@ -658,7 +658,7 @@ describe('<ApprovalTextUtils>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: oppheveYtelsesVedtak,
-    };
+    } as KlageVurdering;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
@@ -671,7 +671,7 @@ describe('<ApprovalTextUtils>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: oppheveYtelsesVedtak,
-    };
+    } as KlageVurdering;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
@@ -685,7 +685,7 @@ describe('<ApprovalTextUtils>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: avvistKlage,
-    };
+    } as KlageVurdering;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
@@ -698,7 +698,7 @@ describe('<ApprovalTextUtils>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag klage avvist', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: avvistKlage,
-    };
+    } as KlageVurdering;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
@@ -712,7 +712,7 @@ describe('<ApprovalTextUtils>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ikke fastsatt', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: stadfesteKlage,
-    };
+    } as KlageVurdering;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
@@ -725,7 +725,7 @@ describe('<ApprovalTextUtils>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: stadfesteKlage,
-    };
+    } as KlageVurdering;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',

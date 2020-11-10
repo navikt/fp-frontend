@@ -9,7 +9,7 @@ import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import {
-  Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -19,7 +19,7 @@ import styles from './totrinnskontrollSaksbehandlerPanel.less';
 interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
-  behandlingKlageVurdering?: TotrinnsKlageVurdering,
+  behandlingKlageVurdering?: KlageVurdering,
   behandlingStatus: Kodeverk,
   erTilbakekreving: boolean,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
