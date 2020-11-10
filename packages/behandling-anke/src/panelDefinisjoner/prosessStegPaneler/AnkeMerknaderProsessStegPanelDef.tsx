@@ -1,12 +1,12 @@
 import React from 'react';
 
-import AnkeMerknaderProsessIndex from '@fpsak-frontend/prosess-anke-merknader';
+import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 
 class PanelDef extends ProsessStegPanelDef {
-  getKomponent = (props) => <AnkeMerknaderProsessIndex {...props} />
+  getKomponent = (props) => <AnkeTrygderettsbehandlingProsessIndex {...props} />
 
   getOverstyrVisningAvKomponent = () => true
 
@@ -16,11 +16,10 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getData = ({
-    ankeVurdering, saveAnke, previewCallback,
+    ankeVurdering, previewCallback,
   }) => ({
     previewCallback,
     ankeVurdering,
-    saveAnke,
   })
 }
 

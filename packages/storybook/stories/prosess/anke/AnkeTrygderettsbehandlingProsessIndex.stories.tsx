@@ -5,7 +5,7 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeMerknaderProsessIndex from '@fpsak-frontend/prosess-anke-merknader';
+import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
@@ -41,13 +41,13 @@ const standardProsessProps = {
 };
 
 export default {
-  title: 'prosess/anke/prosess-anke-merknader',
-  component: AnkeMerknaderProsessIndex,
+  title: 'prosess/anke/prosess-anke-trygderettsbehandling',
+  component: AnkeTrygderettsbehandlingProsessIndex,
   decorators: [withKnobs, withReduxProvider],
 };
 
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
-  <AnkeMerknaderProsessIndex
+  <AnkeTrygderettsbehandlingProsessIndex
     {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
@@ -58,7 +58,6 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
         begrunnelse: 'Dette er en begrunnelse',
       },
     } as AnkeVurdering)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );

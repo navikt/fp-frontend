@@ -197,7 +197,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
         />
       </Column>
     </Row>
-
+    <VerticalSpacer sixteenPx />
     <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
     <Row>
       <Column xs="4">
