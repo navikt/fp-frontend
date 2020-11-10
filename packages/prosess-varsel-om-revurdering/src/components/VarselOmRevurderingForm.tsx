@@ -88,26 +88,20 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     this.state = { showSettPaVentModal: false };
   }
 
-  previewMessage(e: any) {
+  handleSubmitFromModal(values: any) {
     const {
-      valid,
-      pristine,
-      fritekst,
-      // @ts-ignore submit kjem vel frå rudux-form?
-      submit,
-      previewCallback,
+      valid, submitCallback, begrunnelse, kode, fritekst, sendVarsel = false,
     } = this.props;
-    if (valid || pristine) {
-      const data = {
-        mottaker: '',
-        dokumentMal: 'REVURD',
-        fritekst: fritekst || ' ',
-      };
-      previewCallback(data);
-    } else {
-      submit();
+    submitCallback([{
+      kode,
+      begrunnelse,
+      fritekst,
+      sendVarsel,
+      ...values,
+    }]);
+    if (valid) {
+      this.hideSettPaVentModal();
     }
-    e.preventDefault();
   }
 
   bekreftOgFortsettClicked() {
@@ -128,20 +122,26 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     }
   }
 
-  handleSubmitFromModal(values: any) {
+  previewMessage(e: any) {
     const {
-      valid, submitCallback, begrunnelse, kode, fritekst, sendVarsel = false,
-    } = this.props;
-    submitCallback([{
-      kode,
-      begrunnelse,
+      valid,
+      pristine,
       fritekst,
-      sendVarsel,
-      ...values,
-    }]);
-    if (valid) {
-      this.hideSettPaVentModal();
+      // @ts-ignore submit kjem vel frå rudux-form?
+      submit,
+      previewCallback,
+    } = this.props;
+    if (valid || pristine) {
+      const data = {
+        mottaker: '',
+        dokumentMal: 'REVURD',
+        fritekst: fritekst || ' ',
+      };
+      previewCallback(data);
+    } else {
+      submit();
     }
+    e.preventDefault();
   }
 
   hideSettPaVentModal() {
