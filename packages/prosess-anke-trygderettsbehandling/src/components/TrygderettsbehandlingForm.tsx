@@ -96,12 +96,13 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
     >
       <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
       <RadioOption value={ankeVurderingType.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
-      <RadioOption value={ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
+      <RadioOption value={ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.Opphev' }} />
+      <RadioOption value={ankeVurderingType.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
     </RadioGroupField>
     {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering?.kode && (
     <Row>
       <Column xs="7">
-        <ArrowBox alignOffset={164}>
+        <ArrowBox alignOffset={114}>
           <RadioGroupField
             name="trygderettVurderingOmgjoer.kode"
             validate={[required]}

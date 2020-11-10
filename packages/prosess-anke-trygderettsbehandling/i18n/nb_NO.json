@@ -1,6 +1,6 @@
 {
   "Ankebehandling.Merknad.Title": "Trygderettsbehandling",
-  "Ankebehandling.Merknad.HelpText": "Kommenter Trygderettsbehandling og videre oppfølging",
+  "Ankebehandling.Merknad.HelpText": "Kommentarer til Trygderettsbehandlingen og videre oppfølging",
   "Ankebehandling.Merknad.AvsluttBehandling": "Avslutt behandlingen",
   "Ankebehandling.Merknad.Merknader": "Har det kommet merknader?",
   "Ankebehandling.Merknad.Merknader.Ja": "Ja",
@@ -9,16 +9,17 @@
   "Ankebehandling.Merknad.Merknader.LagreKommentarer": "Lagre kommentarer",
   "FritekstAnkeMerknaderTextField": "Fritekst for Trygderettsbehandling",
 
-  "Ankebehandling.Resultat": "Resultat",
-  "Ankebehandling.Resultat.Stadfest": "Stadfest vedtaket",
-  "Ankebehandling.Resultat.Omgjør": "Omgjør vedtaket",
-  "Ankebehandling.Resultat.OpphevHjemsend": "Opphev og hjemsend vedtaket",
+  "Ankebehandling.Resultat": "Resultat fra Trygdretten",
+  "Ankebehandling.Resultat.Stadfest": "Stadfestet",
+  "Ankebehandling.Resultat.Omgjør": "Omgjort",
+  "Ankebehandling.Resultat.Opphev": "Opphevet",
+  "Ankebehandling.Resultat.Avvis": "Avvist",
   "Ankebehandling.Resultat.Vedtak": "Vedtaket som er anket",
   "Ankebehandling.VurderingOmgjoer.Delvis": "Delvis omgjøring, til gunst",
   "Ankebehandling.VurderingOmgjoer.Gunst": "Til gunst",
   "Ankebehandling.VurderingOmgjoer.Ugunst": "Til ugunst",
   "Ankebehandling.OmgjoeringArsak": "Årsak til omgjøring",
-  
+
   "Malform.Beskrivelse": "Foretrukket språk",
   "Malform.Bokmal": "Bokmål",
   "Malform.Nynorsk": "Nynorsk",
