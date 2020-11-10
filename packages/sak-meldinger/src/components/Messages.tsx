@@ -22,10 +22,12 @@ import styles from './messages.less';
 const maxLength4000 = maxLength(4000);
 const minLength3 = minLength(3);
 
-const getFritekstMessage = (brevmalkode) => (brevmalkode === dokumentMalType.INNHENT_DOK ? 'Messages.DocumentList' : 'Messages.Fritekst');
+const getFritekstMessage = (brevmalkode) => (brevmalkode === dokumentMalType.INNHENT_DOK || brevmalkode === dokumentMalType.INNOPP
+  ? 'Messages.DocumentList' : 'Messages.Fritekst');
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
 const showFritekst = (brevmalkode, arsakskode) => (brevmalkode === dokumentMalType.INNHENT_DOK
+  || brevmalkode === dokumentMalType.INNOPP
   || brevmalkode === dokumentMalType.KORRIGVARS
   || brevmalkode === dokumentMalType.FRITKS
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
