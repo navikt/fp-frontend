@@ -6,7 +6,7 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  NavAnsatt, Fagsak, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
+  NavAnsatt, Fagsak, KlageVurdering, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
@@ -92,7 +92,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     },
   );
 
-  const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<TotrinnsKlageVurdering>(
+  const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<KlageVurdering>(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
       updateTriggers: [behandlingId, behandlingVersjon],
@@ -143,7 +143,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
           fagsakYtelseType={fagsak.sakstype}
           pushLocation={history.push}
           allAksjonspunktApproved={erAlleAksjonspunktGodkjent}
-          totrinnsKlageVurdering={totrinnsKlageVurdering}
+          erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
         />
       )}
     </>
