@@ -12,7 +12,7 @@ import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import TotrinnskontrollBeslutterForm, { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
@@ -55,7 +55,7 @@ interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
   fagsakYtelseType: Kodeverk;
-  behandlingKlageVurdering?: TotrinnsKlageVurdering;
+  behandlingKlageVurdering?: KlageVurdering;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
   onSubmit: (...args: any[]) => any;
