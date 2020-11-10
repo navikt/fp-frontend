@@ -1,6 +1,14 @@
 import React from 'react';
 import {
-  dateFormat, hasValidDate, required, dateAfterOrEqual, parseCurrencyInput, minValueFormatted, maxValueFormatted, removeSpacesFromNumber,
+  dateFormat,
+  hasValidDate,
+  required,
+  dateAfterOrEqual,
+  parseCurrencyInput,
+  minValueFormatted,
+  maxValueFormatted,
+  removeSpacesFromNumber,
+  formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
@@ -98,7 +106,12 @@ export const VurderEndringRefusjonRad = ({
   );
 };
 
-VurderEndringRefusjonRad.buildInitialValues = (refusjonAndel) => (refusjonAndel.fastsattNyttRefusjonskravFom);
+VurderEndringRefusjonRad.buildInitialValues = (refusjonAndel) => {
+  const initialValues = {};
+  initialValues[lagNøkkelRefusjonsstart(refusjonAndel)] = refusjonAndel.fastsattNyttRefusjonskravFom;
+  initialValues[lagNøkkelDelvisRefusjon(refusjonAndel)] = formatCurrencyNoKr(refusjonAndel.fastsattDelvisRefusjonPrMnd);
+  return initialValues;
+};
 
 VurderEndringRefusjonRad.transformValues = (values, andel) => {
   let delvisRefusjonPrMnd = null;
