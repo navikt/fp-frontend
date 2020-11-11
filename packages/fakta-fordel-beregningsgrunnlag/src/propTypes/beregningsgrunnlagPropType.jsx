@@ -89,6 +89,9 @@ export const refusjonAndelTilVurderingPropType = PropTypes.shape({
   arbeidsgiverNavn: PropTypes.string,
   internArbeidsforholdRef: PropTypes.string,
   eksternArbeidsforholdRef: PropTypes.string,
+  skalKunneFastsetteDelvisRefusjon: PropTypes.bool,
+  maksTillattDelvisRefusjonPrMnd: PropTypes.number,
+  fastsattDelvisRefusjonPrMnd: PropTypes.number,
   tidligereUtbetalinger: PropTypes.arrayOf(tidligereUtbetalingPropType),
 });
 
