@@ -18,11 +18,10 @@ class PanelDef extends ProsessStegPanelDef {
   getOverstyrVisningAvKomponent = () => true
 
   getData = ({
-    ankeVurdering, saveAnke, previewCallback,
+    ankeVurdering, previewCallback,
   }) => ({
     previewCallback,
     ankeVurdering,
-    saveAnke,
   })
 }
 

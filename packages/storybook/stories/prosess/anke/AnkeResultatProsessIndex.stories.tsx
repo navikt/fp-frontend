@@ -73,7 +73,6 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
         },
       },
     } as AnkeVurdering)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -90,7 +89,6 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
         },
       },
     } as AnkeVurdering)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -112,7 +110,6 @@ export const visPanelForResultatVedOmgjør = () => (
         ankeOmgjoerArsakNavn: 'Testårsak',
       },
     } as AnkeVurdering)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -123,7 +120,6 @@ export const visPanelForResultatVedAvvis = () => (
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat,
     } as AnkeVurdering)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );

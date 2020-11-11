@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AnkeVurdering } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
@@ -31,6 +32,7 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> =
   readOnlySubmitButton,
   saveAnke,
   previewCallback,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <BehandleAnkeForm
@@ -45,6 +47,7 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> =
       readOnlySubmitButton={readOnlySubmitButton}
       saveAnke={saveAnke}
       previewCallback={previewCallback}
+      ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
     />
   </RawIntlProvider>
 );

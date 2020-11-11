@@ -68,6 +68,7 @@ const kodeverkTyper = {
   HENDELSE_TYPE: 'HendelseType',
   HENDELSE_UNDERTYPE: 'HendelseUnderType',
   VURDER_AARSAK: 'VurderÅrsak',
+  ANKE_OMGJOER_AARSAK: 'AnkeOmgjørÅrsak',
 };
 
 export default kodeverkTyper;
