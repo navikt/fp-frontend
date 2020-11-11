@@ -96,6 +96,8 @@ export {
   hasValidInteger,
   maxValue,
   minValue,
+  maxValueFormatted,
+  minValueFormatted,
   maxLength,
   minLength,
   requiredIfCustomFunctionIsTrue,
