@@ -12,7 +12,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const getMenytekst = (erOpprettVerge: boolean) => intl.formatMessage({
+export const getMenytekst = (erOpprettVerge: boolean): string => intl.formatMessage({
   id: erOpprettVerge ? 'MenyVergeIndex.OpprettVerge' : 'MenyVergeIndex.FjernVerge',
 });
 

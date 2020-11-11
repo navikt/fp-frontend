@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared
 import { Risikoklassifisering, Aksjonspunkt } from '@fpsak-frontend/types';
 
 import Faresignaler from './Faresignaler';
-import AvklarFaresignalerForm from './AvklarFaresignalerForm';
+import AvklarFaresignalerForm, { VuderFaresignalerAp } from './AvklarFaresignalerForm';
 
 interface OwnProps {
   behandlingId: number;
@@ -15,7 +15,7 @@ interface OwnProps {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback: (aksjonspunkt: Aksjonspunkt) => Promise<any>;
+  submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
 }
 
 /**

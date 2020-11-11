@@ -3,7 +3,7 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import Messages from './components/Messages';
+import Messages, { FormValues, Template } from './components/Messages';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -14,13 +14,9 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  submitCallback: (values: any) => void;
+  submitCallback: (values: FormValues) => void;
   recipients: string[];
-  templates?: {
-    kode: string;
-    navn: string;
-    tilgjengelig: boolean;
-  }[];
+  templates?: Template[];
   sprakKode: Kodeverk;
   previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, arsakskode: string) => void;
   behandlingId: number;

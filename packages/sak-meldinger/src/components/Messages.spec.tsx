@@ -4,6 +4,7 @@ import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { MessagesImpl as Messages } from './Messages';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meldinger';
@@ -45,6 +46,9 @@ describe('<Messages>', () => {
       templates={templates}
       sprakKode={sprakkode}
       causes={causes}
+      behandlingId={1}
+      behandlingVersjon={2}
+      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
     />);
 
     const form = wrapper.find('form');
@@ -70,6 +74,9 @@ describe('<Messages>', () => {
       causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
+      behandlingId={1}
+      behandlingVersjon={2}
+      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
     />);
 
     const previewLink = wrapper.find('a');
@@ -92,6 +99,9 @@ describe('<Messages>', () => {
       causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
+      behandlingId={1}
+      behandlingVersjon={2}
+      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
     />);
 
     const form = wrapper.find('form');

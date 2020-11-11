@@ -17,7 +17,7 @@ import VisittkortBarnInfoPanel from './VisittkortBarnInfoPanel';
 
 import styles from './visittkortPanel.less';
 
-const utledKjonn = (kjonn) => {
+const utledKjonn = (kjonn: Kodeverk): Gender => {
   if (kjonn.kode === navBrukerKjonn.KVINNE) {
     return Gender.female;
   }

@@ -17,7 +17,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const getMenytekst = () => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
+export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
 
 interface OwnProps {
   ytelseType: Kodeverk;

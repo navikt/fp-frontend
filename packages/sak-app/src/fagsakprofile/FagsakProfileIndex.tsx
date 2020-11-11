@@ -2,6 +2,7 @@ import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Location } from 'history';
 
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
@@ -27,7 +28,7 @@ import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
-const findPathToBehandling = (saksnummer, location, alleBehandlinger) => {
+const findPathToBehandling = (saksnummer: number, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
     return getLocationWithDefaultProsessStegAndFakta({
       ...location,

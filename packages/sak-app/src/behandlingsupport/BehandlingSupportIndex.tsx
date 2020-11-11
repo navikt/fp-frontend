@@ -13,7 +13,7 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import styles from './behandlingSupportIndex.less';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
-export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter) => Object.values(SupportTabs)
+export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {
       case SupportTabs.TIL_BESLUTTER:
@@ -27,7 +27,7 @@ export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter
 
 export const hentValgbarePaneler = (
   synligePaneler: string[], sendMeldingErRelevant: boolean, behandlingRettigheter?: BehandlingRettigheter,
-) => synligePaneler
+): string[] => synligePaneler
   .filter((supportPanel) => {
     switch (supportPanel) {
       case SupportTabs.MELDINGER:

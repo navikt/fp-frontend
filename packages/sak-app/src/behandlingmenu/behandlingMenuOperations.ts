@@ -1,3 +1,5 @@
+import { Location } from 'history';
+
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
 
@@ -11,7 +13,7 @@ export const nyBehandlendeEnhet = (params: any) => behandlingEventHandler.endreB
 
 export const openBehandlingForChanges = (params: any) => behandlingEventHandler.opneBehandlingForEndringer(params);
 
-export const opprettVerge = (location, push, saksnummer, behandlingId, versjon) => () => behandlingEventHandler.opprettVerge({
+export const opprettVerge = (location: Location, push, saksnummer: number, behandlingId: number, versjon: number) => () => behandlingEventHandler.opprettVerge({
   behandlingId,
   behandlingVersjon: versjon,
 }).then(() => push(getLocationWithDefaultProsessStegAndFakta({
@@ -19,7 +21,7 @@ export const opprettVerge = (location, push, saksnummer, behandlingId, versjon) 
   pathname: pathToBehandling(saksnummer, behandlingId),
 })));
 
-export const fjernVerge = (location, push, saksnummer, behandlingId, versjon) => () => behandlingEventHandler.fjernVerge({
+export const fjernVerge = (location: Location, push, saksnummer: number, behandlingId: number, versjon: number) => () => behandlingEventHandler.fjernVerge({
   behandlingId,
   behandlingVersjon: versjon,
 }).then(() => push(getLocationWithDefaultProsessStegAndFakta({
