@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import BehandlingPickerItem from './BehandlingPickerItem';
 import BehandlingPicker, { sortBehandlinger } from './BehandlingPicker';
@@ -32,11 +32,18 @@ describe('<BehandlingPicker>', () => {
     gjeldendeVedtak: false,
   };
 
+  const locationMock = {
+    pathname: 'test',
+    search: 'test',
+    state: {},
+    hash: 'test',
+  };
+
   it('skal vise forklarende tekst når det ikke finnes behandlinger', () => {
     const wrapper = shallow(<BehandlingPicker
       noExistingBehandlinger
       behandlinger={[]}
-      getBehandlingLocation={() => 'url'}
+      getBehandlingLocation={() => locationMock}
       showAll={false}
       toggleShowAll={sinon.spy()}
       getKodeverkFn={sinon.spy()}
@@ -64,7 +71,7 @@ describe('<BehandlingPicker>', () => {
     const wrapper = shallow(<BehandlingPicker
       noExistingBehandlinger={false}
       behandlinger={behandlinger as Behandling[]}
-      getBehandlingLocation={() => 'url'}
+      getBehandlingLocation={() => locationMock}
       showAll
       toggleShowAll={sinon.spy()}
       getKodeverkFn={sinon.spy()}
@@ -95,7 +102,7 @@ describe('<BehandlingPicker>', () => {
       noExistingBehandlinger={false}
       behandlinger={behandlinger as Behandling[]}
       behandlingId={2}
-      getBehandlingLocation={() => 'url'}
+      getBehandlingLocation={() => locationMock}
       showAll
       toggleShowAll={sinon.spy()}
       getKodeverkFn={sinon.spy()}
@@ -119,7 +126,7 @@ describe('<BehandlingPicker>', () => {
       avsluttet: '2019-09-13T13:32:57',
     }, {
       opprettet: '2019-08-13T13:32:57',
-    }];
+    }] as BehandlingAppKontekst[];
 
     const sorterteBehandlinger = sortBehandlinger(behandlinger);
 

@@ -33,7 +33,7 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes.VEDTAK,
 ];
 
-const getArsaker = (apData: AksjonspunktGodkjenningData) => {
+const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
   if (apData.feilFakta) {
     arsaker.push(vurderPaNyttArsakType.FEIL_FAKTA);

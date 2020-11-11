@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+import { Location } from 'history';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { BehandlingAppKontekst, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
@@ -9,7 +10,7 @@ import BehandlingPickerItem from './BehandlingPickerItem';
 
 import styles from './behandlingPicker.less';
 
-export const sortBehandlinger = (behandlinger) => behandlinger.sort((b1, b2) => {
+export const sortBehandlinger = (behandlinger: BehandlingAppKontekst[]): BehandlingAppKontekst[] => behandlinger.sort((b1, b2) => {
   if (b1.avsluttet && !b2.avsluttet) {
     return 1;
   } if (!b1.avsluttet && b2.avsluttet) {
@@ -20,7 +21,14 @@ export const sortBehandlinger = (behandlinger) => behandlinger.sort((b1, b2) => 
   return moment(b2.opprettet).diff(moment(b1.opprettet));
 });
 
-const renderListItems = (behandlinger, getBehandlingLocation, behandlingId, showAll, toggleShowAll, getKodeverkFn) => (
+const renderListItems = (
+  behandlinger: BehandlingAppKontekst[],
+  getBehandlingLocation: (behandlingId: number) => Location,
+  showAll: boolean,
+  toggleShowAll: () => void,
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn,
+  behandlingId?: number,
+): ReactElement[] => (
   sortBehandlinger(behandlinger)
     .filter((behandling) => showAll || behandling.id === behandlingId)
     .map((behandling) => (
@@ -40,7 +48,7 @@ const renderListItems = (behandlinger, getBehandlingLocation, behandlingId, show
 
 interface OwnProps {
   behandlinger: BehandlingAppKontekst[];
-  getBehandlingLocation: (behandlingId: number) => void;
+  getBehandlingLocation: (behandlingId: number) => Location;
   noExistingBehandlinger: boolean;
   behandlingId?: number;
   showAll: boolean;
@@ -64,7 +72,7 @@ const BehandlingPicker: FunctionComponent<OwnProps> = ({
 }) => (
   <ul className={styles.behandlingList}>
     {noExistingBehandlinger && <Normaltekst><FormattedMessage id="BehandlingList.ZeroBehandlinger" /></Normaltekst>}
-    {!noExistingBehandlinger && renderListItems(behandlinger, getBehandlingLocation, behandlingId, showAll, toggleShowAll, getKodeverkFn)}
+    {!noExistingBehandlinger && renderListItems(behandlinger, getBehandlingLocation, showAll, toggleShowAll, getKodeverkFn, behandlingId)}
   </ul>
 );
 

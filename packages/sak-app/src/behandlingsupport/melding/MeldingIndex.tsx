@@ -4,7 +4,7 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
+import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { BehandlingAppKontekst, Fagsak, Kodeverk } from '@fpsak-frontend/types';
@@ -26,8 +26,8 @@ const getSubmitCallback = (
   submitMessage: (data: any) => Promise<any>,
   resetMessage: () => void,
   setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
-  setSubmitCounter: (fn: any) => void,
-) => (values) => {
+  setSubmitCounter: (fn: (prevValue: number) => number) => void,
+) => (values: FormValues) => {
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
     || values.brevmalkode === dokumentMalType.INNOPP
     || values.brevmalkode === dokumentMalType.FORLENGET_DOK
@@ -61,7 +61,10 @@ const getPreviewCallback = (
   fagsakYtelseType: Kodeverk,
   fetchPreview: (erHenleggelse: boolean, data: any) => void,
 ) => (
-  mottaker, dokumentMal, fritekst, aarsakskode,
+  mottaker: string,
+  dokumentMal: string,
+  fritekst: string,
+  aarsakskode: string,
 ) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
   const data = erTilbakekreving ? {

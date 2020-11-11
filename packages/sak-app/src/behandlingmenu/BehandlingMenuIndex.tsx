@@ -14,7 +14,9 @@ import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@fp
 import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-frontend/sak-meny-henlegg';
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
-import { NavAnsatt, Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import {
+  NavAnsatt, Fagsak, BehandlingAppKontekst, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import useHistory from '../app/useHistory';
 import useLocation from '../app/useLocation';
@@ -41,13 +43,13 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.TILBAKEKREVING_REVURDERING,
 ];
 
-const findNewBehandlingId = (alleBehandlinger) => {
+const findNewBehandlingId = (alleBehandlinger: BehandlingAppKontekst[]): number => {
   const sortedBehandlinger = alleBehandlinger
     .sort((b1, b2) => moment(b2.opprettet).diff(moment(b1.opprettet)));
   return sortedBehandlinger[0].id;
 };
 
-const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger = []) => {
+const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string => {
   const behandling = behandlinger.find((b) => b.gjeldendeVedtak && b.status.kode === BehandlingStatus.AVSLUTTET
     && (b.type.kode === BehandlingType.FORSTEGANGSSOKNAD || b.type.kode === BehandlingType.REVURDERING));
   return behandling ? behandling.uuid : undefined;
@@ -107,8 +109,8 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
 
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
 
-  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK);
+  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
   const menyKodeverk = new MenyKodeverk(behandling?.type)
     .medFpSakKodeverk(alleFpSakKodeverk)
     .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);

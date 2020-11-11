@@ -1,20 +1,19 @@
-import DefaultFormatter from './DefaultFormatter';
-import RestTimeoutFormatter from './RestTimeoutFormatter';
-import RestHaltedOrDelayedFormatter from './RestHaltedOrDelayedFormatter';
-import RestGatewayTimeoutOrNotFoundFormatter from './RestGatewayTimeoutOrNotFoundFormatter';
+import DefaultFormatter, { ErrorData as ErrorDataDefault } from './DefaultFormatter';
+import RestTimeoutFormatter, { ErrorData as ErrorDataRestDefault } from './RestTimeoutFormatter';
+import RestHaltedOrDelayedFormatter, { ErrorData as ErrorDataHaltedOrDelayed } from './RestHaltedOrDelayedFormatter';
+import RestGatewayTimeoutOrNotFoundFormatter, { ErrorData as ErrorDataTimeoutOrNotFound } from './RestGatewayTimeoutOrNotFoundFormatter';
+import ErrorMessage from './ErrorMessage';
 
 const defaultFormatter = new DefaultFormatter();
 const formatters = [new RestTimeoutFormatter(), new RestHaltedOrDelayedFormatter(), new RestGatewayTimeoutOrNotFoundFormatter(), defaultFormatter];
 
-interface ErrorMessage {
-  type: string;
-}
+type InputErrorMessage = ErrorDataDefault | ErrorDataRestDefault | ErrorDataHaltedOrDelayed | ErrorDataTimeoutOrNotFound;
 
 class ErrorFormatter {
-  format = (errorMessages: ErrorMessage[], crashMessage?: string) => {
-    const allErrorMessages = [];
+  format = (errorMessages: InputErrorMessage[], crashMessage?: string): ErrorMessage[] => {
+    const allErrorMessages: ErrorMessage[] = [];
     if (crashMessage) {
-      allErrorMessages.push(defaultFormatter.format(crashMessage));
+      allErrorMessages.push(defaultFormatter.formatString(crashMessage));
     }
 
     if (errorMessages.length > 0) {

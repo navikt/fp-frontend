@@ -9,14 +9,16 @@ import {
 } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { getKodeverknavnFn, getLanguageCodeFromSprakkode, getAddresses } from '@fpsak-frontend/utils';
+import {
+  getKodeverknavnFn, getLanguageCodeFromSprakkode, getAddresses, Adresser,
+} from '@fpsak-frontend/utils';
 
 import styles from './visittkortDetaljerPopup.less';
 
-const borSokerMedBarnet = (adresser, personopplysningerForBarn = []) => personopplysningerForBarn
+const borSokerMedBarnet = (adresser: Adresser, personopplysningerForBarn: Personopplysninger[] = []): boolean => personopplysningerForBarn
   .some((barn) => adresser[opplysningAdresseType.BOSTEDSADRESSE] === getAddresses(barn.adresser)[opplysningAdresseType.BOSTEDSADRESSE]);
 
-const findPersonStatus = (personopplysning) => {
+const findPersonStatus = (personopplysning: Personopplysninger): Kodeverk => {
   if (personopplysning.avklartPersonstatus) {
     return personopplysning.avklartPersonstatus.overstyrtPersonstatus;
   }

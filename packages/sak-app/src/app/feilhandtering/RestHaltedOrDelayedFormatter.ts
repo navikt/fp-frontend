@@ -7,10 +7,11 @@ import Formatter from './Formatter';
 const HALTED_PROCESS_TASK_MESSAGE_CODE = 'Rest.ErrorMessage.General';
 const DELAYED_PROCESS_TASK_MESSAGE_CODE = 'Rest.ErrorMessage.DownTime';
 
-interface ErrorData {
+export type ErrorData = {
    message: string;
    status: string;
    eta: string;
+   type: string;
 }
 
 class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { Location } from 'history';
 
 import { BehandlingAppKontekst, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 
@@ -15,7 +16,7 @@ const intl = createIntl({
 
 interface OwnProps {
   behandlinger: BehandlingAppKontekst[];
-  getBehandlingLocation: (behandlingId: number) => void;
+  getBehandlingLocation: (behandlingId: number) => Location;
   noExistingBehandlinger: boolean;
   behandlingId?: number;
   showAll: boolean;

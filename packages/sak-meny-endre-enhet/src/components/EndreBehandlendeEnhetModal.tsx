@@ -16,7 +16,7 @@ import styles from './endreBehandlendeEnhetModal.less';
 
 const maxLength400 = maxLength(400);
 
-interface OwnProps {
+interface PureOwnProps {
   lukkModal: () => void;
   behandlendeEnheter: {
     enhetId: string;
@@ -26,7 +26,7 @@ interface OwnProps {
   gjeldendeBehandlendeEnhetNavn?: string;
 }
 
-interface StateProps {
+interface MappedOwnProps {
   nyEnhet?: string;
   begrunnelse?: string;
 }
@@ -37,7 +37,7 @@ interface StateProps {
  * Presentasjonskomponent. Denne modalen vises når saksbehandler valger 'Bytt behandlende enhet'.
  * Ved å angi ny enhet og begrunnelse og trykke på 'OK' blir behandlende enhet endret.
  */
-export const EndreBehandlendeEnhetModal: FunctionComponent<OwnProps & StateProps & WrappedComponentProps & InjectedFormProps> = ({
+export const EndreBehandlendeEnhetModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   handleSubmit,
   lukkModal,
@@ -126,7 +126,7 @@ export const EndreBehandlendeEnhetModal: FunctionComponent<OwnProps & StateProps
   );
 };
 
-const mapStateToProps = (state): StateProps => ({
+const mapStateToProps = (state): MappedOwnProps => ({
   nyEnhet: formValueSelector('ChangeBehandlendeEnhetModal')(state, 'nyEnhet'),
   begrunnelse: formValueSelector('ChangeBehandlendeEnhetModal')(state, 'begrunnelse'),
 });
