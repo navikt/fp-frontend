@@ -42,6 +42,7 @@ export const lagNøkkelDelvisRefusjon = (andel) => lagNøkkel(FIELD_KEY_DELVIS_R
 export const VurderEndringRefusjonRad = ({
   refusjonAndel,
   readOnly,
+  erAksjonspunktÅpent,
 }) => {
   if (!refusjonAndel) {
     return null;
@@ -77,7 +78,7 @@ export const VurderEndringRefusjonRad = ({
             name={lagNøkkelRefusjonsstart(refusjonAndel)}
             readOnly={readOnly}
             validate={[required, hasValidDate, dateAfterOrEqual(refusjonAndel.tidligsteMuligeRefusjonsdato)]}
-            isEdited={!!refusjonAndel.fastsattNyttRefusjonskravFom}
+            isEdited={!!refusjonAndel.fastsattNyttRefusjonskravFom && !erAksjonspunktÅpent}
           />
         </Column>
       </Row>
@@ -97,7 +98,7 @@ export const VurderEndringRefusjonRad = ({
               validate={[required, minValueFormatted(1), maxValueFormatted(refusjonAndel.maksTillattDelvisRefusjonPrMnd)]}
               parse={parseCurrencyInput}
               readOnly={readOnly}
-              isEdited={!!refusjonAndel.fastsattDelvisRefusjonPrMnd}
+              isEdited={!!refusjonAndel.fastsattDelvisRefusjonPrMnd && !erAksjonspunktÅpent}
             />
           </Column>
         </Row>
@@ -133,6 +134,7 @@ VurderEndringRefusjonRad.transformValues = (values, andel) => {
 VurderEndringRefusjonRad.propTypes = {
   refusjonAndel: refusjonAndelTilVurderingPropType,
   readOnly: PropTypes.bool.isRequired,
+  erAksjonspunktÅpent: PropTypes.bool.isRequired,
 };
 
 export default VurderEndringRefusjonRad;

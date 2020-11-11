@@ -35,10 +35,10 @@ export const VurderEndringRefusjonFormImpl = ({
 }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
   const ap = finnAksjonspunkt(aksjonspunkter);
-  const erAksjonspunktApent = ap ? isAksjonspunktOpen(ap.status.kode) : false;
+  const erAksjonspunktÅpent = ap ? isAksjonspunktOpen(ap.status.kode) : false;
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktApent}>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktÅpent}>
         <FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" />
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
@@ -50,6 +50,7 @@ export const VurderEndringRefusjonFormImpl = ({
           <VurderEndringRefusjonRad
             refusjonAndel={andel}
             readOnly={readOnly}
+            erAksjonspunktÅpent={erAksjonspunktÅpent}
             key={andel.arbeidsgiverNavn}
           />
         ))}
@@ -68,7 +69,7 @@ export const VurderEndringRefusjonFormImpl = ({
             formName={formProps.form}
             isSubmittable={submittable && submitEnabled}
             isReadOnly={readOnly}
-            hasOpenAksjonspunkter={erAksjonspunktApent}
+            hasOpenAksjonspunkter={erAksjonspunktÅpent}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
           />
