@@ -1,4 +1,4 @@
-export const parseQueryString = (queryString = '') => (
+export const parseQueryString = (queryString = ''): {[paramName: string]: string} => (
   queryString
     .replace(/^\?/, '') // Remove leading question mark
     .replace(/\+/g, '%20') // Replace plus signs with URL-encoded spaces
@@ -32,7 +32,7 @@ const resolveParam = (params) => (segment) => {
   return paramValue || (optional ? '' : segment);
 };
 
-export const buildPath = (path, params = {}) => (
+export const buildPath = (path: string, params = {}): string => (
   path
     .replace(/^\//, ' /') // Add whitespace before leading slash to keep it from being consumed by split
     .replace(/\/$/, '/ ') // Add whitespace after trailing slash to keep it from being consumed by split

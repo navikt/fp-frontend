@@ -37,6 +37,7 @@ describe('<MenyHenleggIndex>', () => {
     const modal = wrapper.find(HenleggBehandlingModal);
     expect(modal).to.have.length(1);
     expect(wrapper.find(HenlagtBehandlingModal)).to.have.length(0);
+    // @ts-ignore fiks denne
     modal.prop('onSubmit')({
       årsakKode: 'test',
       begrunnelse: 'Dette er en begrunnelse',

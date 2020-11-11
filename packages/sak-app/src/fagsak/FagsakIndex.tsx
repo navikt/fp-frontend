@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson, Kodeverk,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -27,17 +27,19 @@ import useHentFagsakRettigheter from './useHentFagsakRettigheter';
 import useHentAlleBehandlinger from './useHentAlleBehandlinger';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
-const finnLenkeTilAnnenPart = (annenPartBehandling) => pathToAnnenPart(annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId);
-
-const erTilbakekreving = (behandlingType) => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
-  || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
-
-interface AnnenPartBehandling {
+type AnnenPartBehandling = {
   saksnr: {
-    verdi: string;
+    verdi: number;
   };
   behandlingId: number;
-}
+};
+
+const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string => pathToAnnenPart(
+  annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId,
+);
+
+const erTilbakekreving = (behandlingType: Kodeverk): boolean => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
+  || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
 /**
  * FagsakIndex

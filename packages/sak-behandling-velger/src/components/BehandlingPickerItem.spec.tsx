@@ -32,6 +32,13 @@ describe('<BehandlingPickerItem>', () => {
     gjeldendeVedtak: false,
   };
 
+  const locationMock = {
+    pathname: 'test',
+    search: 'test',
+    state: {},
+    hash: 'test',
+  };
+
   const getKodeverkFn = () => ({
     kode: '',
     kodeverk: '',
@@ -42,7 +49,7 @@ describe('<BehandlingPickerItem>', () => {
     const wrapper = shallow(<BehandlingPickerItem
       onlyOneBehandling
       behandling={behandlingTemplate as Behandling}
-      getBehandlingLocation={() => 'url'}
+      getBehandlingLocation={() => locationMock}
       isActive
       showAll
       toggleShowAll={() => undefined}
@@ -57,7 +64,7 @@ describe('<BehandlingPickerItem>', () => {
     const wrapper = shallow(<BehandlingPickerItem
       onlyOneBehandling
       behandling={behandlingTemplate as Behandling}
-      getBehandlingLocation={() => 'url'}
+      getBehandlingLocation={() => locationMock}
       isActive={false}
       showAll
       toggleShowAll={() => undefined}
@@ -72,7 +79,7 @@ describe('<BehandlingPickerItem>', () => {
     const wrapper = shallow(<BehandlingPickerItem
       onlyOneBehandling={false}
       behandling={behandlingTemplate as Behandling}
-      getBehandlingLocation={() => 'url'}
+      getBehandlingLocation={() => locationMock}
       isActive
       showAll={false}
       toggleShowAll={() => undefined}

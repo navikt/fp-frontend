@@ -4,6 +4,7 @@ import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
+import { Risikoklassifisering } from '@fpsak-frontend/types';
 
 import faresignalVurdering from '../kodeverk/faresignalVurdering';
 
@@ -43,6 +44,8 @@ describe('<AvklarFaresignalerForm>', () => {
     const wrapper = shallow(<AvklarFaresignalerForm
       readOnly
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
+      submitCallback={() => undefined}
+      risikoklassifisering={{} as Risikoklassifisering}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(TextAreaField)).has.length(1);
@@ -54,6 +57,8 @@ describe('<AvklarFaresignalerForm>', () => {
     const wrapper = shallow(<AvklarFaresignalerForm
       readOnly
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
+      submitCallback={() => undefined}
+      risikoklassifisering={{} as Risikoklassifisering}
       {...reduxFormPropsMock}
     />);
     const textArea = wrapper.find('TextAreaField');

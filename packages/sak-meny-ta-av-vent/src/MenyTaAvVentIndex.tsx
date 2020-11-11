@@ -12,7 +12,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const getMenytekst = () => intl.formatMessage({ id: 'MenyTaAvVentIndex.ResumeBehandling' });
+export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyTaAvVentIndex.ResumeBehandling' });
 
 interface OwnProps {
   behandlingId?: number;

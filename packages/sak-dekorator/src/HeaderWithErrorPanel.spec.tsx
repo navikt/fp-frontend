@@ -12,7 +12,6 @@ describe('<HeaderWithErrorPanel>', () => {
       navAnsattName="Per"
       systemTittel="My System"
       removeErrorMessage={() => undefined}
-      queryStrings={{}}
       setSiteHeight={() => undefined}
     />);
     const header = wrapper.find(Header);
