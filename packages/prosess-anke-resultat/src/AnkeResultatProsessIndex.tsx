@@ -16,7 +16,6 @@ const intl = createIntl({
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
 }
 
@@ -27,7 +26,6 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessForm
   submitCallback,
   isReadOnly,
   readOnlySubmitButton,
-  saveAnke,
   previewCallback,
   alleKodeverk,
 }) => (
@@ -40,7 +38,6 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessForm
       submitCallback={submitCallback}
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
-      saveAnke={saveAnke}
       previewCallback={previewCallback}
       alleKodeverk={alleKodeverk}
     />
