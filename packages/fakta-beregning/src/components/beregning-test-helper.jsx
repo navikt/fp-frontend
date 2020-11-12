@@ -1,26 +1,5 @@
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-/* import { ApiStateBuilder } from '@fpsak-frontend/utils-test/src/data-test-helper';
 
-const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
-
-const fagsak = {
-  antallBarn: 1,
-  barnFodt: true,
-  kanRevurderingOpprettes: false,
-  saksnummer: 1,
-  sakstype: {
-    kode: 'FP',
-    navn: 'Foreldrepenger',
-    kodeverk: 'FAGSAK_YTELSE',
-  },
-  skalBehandlesAvInfotrygd: false,
-  status: {
-    kode: 'UBEH',
-    navn: 'Under behandling',
-    kodeverk: 'FAGSAK_STATUS',
-  },
-};
-*/
 const behandlingFormName = 'behandling_1000051_v1';
 
 export const getBehandlingFormName = () => behandlingFormName;
