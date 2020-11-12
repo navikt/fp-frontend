@@ -13,7 +13,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const getMenytekst = () => intl.formatMessage({ id: 'MenySettPaVentIndex.BehandlingOnHold' });
+export const getMenytekst = (): string => intl.formatMessage({ id: 'MenySettPaVentIndex.BehandlingOnHold' });
 
 interface OwnProps {
   behandlingId?: number;

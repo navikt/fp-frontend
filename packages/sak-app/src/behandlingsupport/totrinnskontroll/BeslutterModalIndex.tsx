@@ -9,19 +9,12 @@ import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-t
 
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
-interface TotrinnsKlageVurdering {
-  klageVurdering?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageVurderingResultatNFP?: any;
-  klageVurderingResultatNK?: any;
-}
-
 interface OwnProps {
   behandling: BehandlingAppKontekst;
   fagsakYtelseType: Kodeverk;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
-  totrinnsKlageVurdering: TotrinnsKlageVurdering,
+  erKlageWithKA: boolean,
 }
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
@@ -29,7 +22,7 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   fagsakYtelseType,
   pushLocation,
   allAksjonspunktApproved,
-  totrinnsKlageVurdering,
+  erKlageWithKA,
 }) => {
   const { data, state } = restApiHooks.useRestApi<{ harRevurderingSammeResultat: boolean }>(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, undefined, {
     updateTriggers: [behandling.id, behandling.versjon],
@@ -51,7 +44,7 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
       fagsakYtelseType={fagsakYtelseType}
-      erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
+      erKlageWithKA={erKlageWithKA}
       harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />
   );

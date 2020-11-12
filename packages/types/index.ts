@@ -12,7 +12,7 @@ export { default as InntektArbeidYtelse } from './src/inntektArbeidYtelseTsType'
 export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';
-export { default as Personopplysninger } from './src/personopplysningerTsType';
+export { default as Personopplysninger, PersonopplysningAdresse } from './src/personopplysningerTsType';
 export {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
 } from './src/simuleringResultatTsType';
@@ -40,6 +40,9 @@ export {
 export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';
 export { default as Arbeidsgiver } from './src/arbeidsgiverTsType';
-export { default as TotrinnsKlageVurdering } from './src/totrinnsKlageVurderingTsType';
 export { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
 export { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
+export {
+  default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,
+  HistorikkInnslagOpplysning, HistorikkInnslagAksjonspunkt,
+} from './src/historikkinnslagTsType';

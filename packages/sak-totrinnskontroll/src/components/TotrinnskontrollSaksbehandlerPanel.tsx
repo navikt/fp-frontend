@@ -9,7 +9,7 @@ import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import {
-  Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -19,11 +19,13 @@ import styles from './totrinnskontrollSaksbehandlerPanel.less';
 interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
-  behandlingKlageVurdering?: TotrinnsKlageVurdering,
+  behandlingKlageVurdering?: KlageVurdering,
   behandlingStatus: Kodeverk,
   erTilbakekreving: boolean,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
+  vurderArsaker: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -35,6 +37,8 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
+  vurderArsaker,
+  faktaOmBeregningTilfeller,
   lagLenke,
 }) => (
   <>
@@ -58,7 +62,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
             </NavLink>
             {aksjonspunkter.map((aksjonspunkt) => {
               const aksjonspunktTexts = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingKlageVurdering, behandlingStatus,
-                arbeidsforholdHandlingTyper, erTilbakekreving, aksjonspunkt);
+                arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
 
               return (
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
@@ -92,7 +96,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                                 className={styles.image}
                               />
                             </span>
-                            <span>{item.navn}</span>
+                            <span>{vurderArsaker.find((arsak) => item.kode === arsak.kode).navn}</span>
                           </div>
                         ))}
                       </div>

@@ -10,6 +10,11 @@ import { RestApiErrorProvider, RestApiProvider } from '@fpsak-frontend/rest-api-
 import AppIndex from './app/AppIndex';
 import configureStore from './configureStore';
 
+const app = document.getElementById('app');
+if (app === null) {
+  throw new Error('No app element');
+}
+
 /* global VERSION:true */
 /* eslint no-undef: "error" */
 // @ts-ignore
@@ -51,23 +56,15 @@ const history = createBrowserHistory({
 });
 const store = configureStore();
 
-const renderFunc = (Component) => {
-  const app = document.getElementById('app');
-  if (app === null) {
-    throw new Error('No app element');
-  }
-  render(
-    <Provider store={store}>
-      <Router history={history}>
-        <RestApiProvider>
-          <RestApiErrorProvider>
-            <Component />
-          </RestApiErrorProvider>
-        </RestApiProvider>
-      </Router>
-    </Provider>,
-    app,
-  );
-};
-
-renderFunc(AppIndex);
+render(
+  <Provider store={store}>
+    <Router history={history}>
+      <RestApiProvider>
+        <RestApiErrorProvider>
+          <AppIndex />
+        </RestApiErrorProvider>
+      </RestApiProvider>
+    </Router>
+  </Provider>,
+  app,
+);

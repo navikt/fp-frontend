@@ -2,6 +2,7 @@ import React, {
   Suspense, FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
 import { useHistory } from 'react-router-dom';
+import { History } from 'history';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -33,11 +34,12 @@ const BehandlingTilbakekrevingIndex = React.lazy(() => import('@fpsak-frontend/b
 const BehandlingAnkeIndex = React.lazy(() => import('@fpsak-frontend/behandling-anke'));
 const BehandlingPapirsoknadIndex = React.lazy(() => import('@fpsak-frontend/behandling-papirsoknad'));
 
-const erTilbakekreving = (behandlingTypeKode) => behandlingTypeKode === BehandlingType.TILBAKEKREVING
+const erTilbakekreving = (behandlingTypeKode:string): boolean => behandlingTypeKode === BehandlingType.TILBAKEKREVING
   || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
-const formatName = (bpName = '') => replaceNorwegianCharacters(bpName.toLowerCase());
 
-const getOppdaterProsessStegOgFaktaPanelIUrl = (history) => (prosessStegId, faktaPanelId) => {
+const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());
+
+const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessStegId: string, faktaPanelId: string): void => {
   let newLocation;
   const { location } = history;
   if (prosessStegId === 'default') {
@@ -158,7 +160,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  const fagsakBehandlingerInfo = alleBehandlinger
+  const fagsakBehandlingerInfo = useMemo(() => alleBehandlinger
     .filter((b) => !b.behandlingHenlagt)
     .map((b) => ({
       id: b.id,
@@ -167,7 +169,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       status: b.status,
       opprettet: b.opprettet,
       avsluttet: b.avsluttet,
-    }));
+    })), [alleBehandlinger]);
 
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return (

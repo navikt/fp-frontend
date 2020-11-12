@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent } from 'react';
+import React, { useEffect, FunctionComponent, ReactElement } from 'react';
 import { formValueSelector, reduxForm, InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './nyBehandlingModal.less';
 
-const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[], intl: IntlShape) => {
+const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[], intl: IntlShape): ReactElement => {
   // TODO Burde retta opp navn for behandlingstype i DB
   const navn = bt.kode === bType.REVURDERING
     ? intl.formatMessage({ id: 'MenyNyBehandlingIndex.OpprettRevurdering' })
@@ -231,7 +231,7 @@ export const getBehandlingAarsaker = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.revurderingArsaker,
   (_state, ownProps: PureOwnProps) => ownProps.tilbakekrevingRevurderingArsaker,
   (state) => formValueSelector(formName)(state, 'behandlingType')],
-(ytelseType, alleRevurderingArsaker, alleTilbakekrevingRevurderingArsaker, valgtBehandlingType) => {
+(ytelseType, alleRevurderingArsaker, alleTilbakekrevingRevurderingArsaker, valgtBehandlingType: string) => {
   if (valgtBehandlingType === bType.TILBAKEKREVING_REVURDERING) {
     return tilbakekrevingRevurderingArsaker
       .map((ar) => alleTilbakekrevingRevurderingArsaker.find((el) => el.kode === ar))
@@ -256,7 +256,7 @@ export const getBehandlingAarsaker = createSelector([
 export const getBehandlingTyper = createSelector([(ownProps: PureOwnProps) => ownProps.behandlingstyper],
   (behandlingstyper) => behandlingstyper.sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn)));
 
-const kanOppretteBehandlingstype = (behandlingOppretting: BehandlingOppretting[], behandlingTypeKode: string) => behandlingOppretting
+const kanOppretteBehandlingstype = (behandlingOppretting: BehandlingOppretting[], behandlingTypeKode: string): boolean => behandlingOppretting
   .some((bo) => bo.behandlingType.kode === behandlingTypeKode && bo.kanOppretteBehandling);
 
 export const getEnabledBehandlingstyper = createSelector([

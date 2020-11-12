@@ -1,4 +1,4 @@
-import { Location } from 'history';
+import { Location, Search } from 'history';
 
 import { buildPath, formatQueryString, parseQueryString } from '@fpsak-frontend/utils';
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
@@ -6,21 +6,33 @@ import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 const FPSAK = 'fpsak';
 const FPLOS = 'fplos';
 
+const DEFAULT_FAKTA = 'default';
+const DEFAULT_PROSESS_STEG = 'default';
+
+type QueryParams = {
+  punkt?: string;
+  fakta?: string;
+  stotte?: string;
+  risiko?: boolean;
+}
+
+const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/jetty/login';
+
 export const fagsakPath = '/fagsak/:saksnummer(\\d+)/';
 export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
 export const behandlingerPath = `${fagsakPath}behandling/`;
 export const behandlingPath = `${behandlingerPath}:behandlingId(\\d+)/`;
 
-export const pathToFagsak = (saksnummer) => buildPath(fagsakPath, { saksnummer });
-export const pathToBehandlinger = (saksnummer) => buildPath(behandlingerPath, { saksnummer });
-export const pathToBehandling = (saksnummer, behandlingId) => buildPath(behandlingPath, { saksnummer, behandlingId });
-export const pathToMissingPage = () => '/404';
+export const pathToFagsak = (saksnummer: number): string => buildPath(fagsakPath, { saksnummer });
+export const pathToBehandlinger = (saksnummer: number): string => buildPath(behandlingerPath, { saksnummer });
+export const pathToBehandling = (saksnummer: number, behandlingId: number): string => buildPath(behandlingPath, { saksnummer, behandlingId });
+export const pathToMissingPage = (): string => '/404';
 
-export const pathToAnnenPart = (saksnummer, behandlingId) => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/`;
+export const pathToAnnenPart = (saksnummer: number, behandlingId: number): string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/`;
 
-const emptyQueryString = (queryString) => queryString === '?' || !queryString;
+const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 
-const updateQueryParams = (queryString, nextParams) => {
+const updateQueryParams = (queryString: string, nextParams: QueryParams): Search => {
   const prevParams = emptyQueryString(queryString) ? {} : parseQueryString(queryString);
   return formatQueryString({
     ...prevParams,
@@ -28,28 +40,25 @@ const updateQueryParams = (queryString, nextParams) => {
   });
 };
 
-export const getLocationWithQueryParams = (location: Location, queryParams): Location => ({
+export const getLocationWithQueryParams = (location: Location, queryParams: QueryParams): Location => ({
   ...location,
   search: updateQueryParams(location.search, queryParams),
 });
 
 export const getSupportPanelLocationCreator = (location: Location) => (
-  supportPanel,
-) => getLocationWithQueryParams(location, { stotte: supportPanel });
-export const getProsessStegLocation = (location: Location) => (prosessSteg) => getLocationWithQueryParams(location, { punkt: prosessSteg });
-export const getFaktaLocation = (location: Location) => (fakta) => getLocationWithQueryParams(location, { fakta });
+  supportPanel: string,
+): Location => getLocationWithQueryParams(location, { stotte: supportPanel });
+export const getProsessStegLocation = (location: Location) => (prosessSteg: string): Location => getLocationWithQueryParams(location, { punkt: prosessSteg });
+export const getFaktaLocation = (location: Location) => (fakta: string): Location => getLocationWithQueryParams(location, { fakta });
 export const getRiskPanelLocationCreator = (location: Location) => (
   isRiskPanelOpen,
-) => getLocationWithQueryParams(location, { risiko: isRiskPanelOpen });
+): Location => getLocationWithQueryParams(location, { risiko: isRiskPanelOpen });
 
-const DEFAULT_FAKTA = 'default';
-const DEFAULT_PROSESS_STEG = 'default';
-
-export const getLocationWithDefaultProsessStegAndFakta = (location: Location) => (
+export const getLocationWithDefaultProsessStegAndFakta = (location: Location): Location => (
   getLocationWithQueryParams(location, { punkt: DEFAULT_PROSESS_STEG, fakta: DEFAULT_FAKTA })
 );
 
-export const getPathToFplos = (href) => {
+export const getPathToFplos = (href: string): string => {
   const hostAndContextPath = href.substr(0, href.lastIndexOf(FPSAK) + FPSAK.length);
   return hostAndContextPath.replace(new RegExp(FPSAK, 'g'), FPLOS);
 };
@@ -61,6 +70,13 @@ export const createLocationForSkjermlenke = (behandlingLocation: Location, skjer
 
 // Kan gå inn på url som ser sånn ut "http://localhost:9000/fpsak/fagsak/", men
 // da vil ein automatisk redirecte til http://localhost:9000/fpsak/fagsak/behandling/*"
-export const erUrlUnderBehandling = (location) => !location.pathname.includes('behandling/');
+export const erUrlUnderBehandling = (location: Location): boolean => !location.pathname.includes('behandling/');
 
-export const erBehandlingValgt = (location) => location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');
+export const erBehandlingValgt = (location: Location): boolean => location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');
+
+export const redirectToLogin = () => {
+  if (process.env.NODE_ENV === 'development') {
+    window.location.assign(DEV_LOGIN_URL);
+  }
+  return undefined;
+};

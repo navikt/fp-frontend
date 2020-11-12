@@ -57,6 +57,7 @@ export {
   omit,
 } from './src/objectUtils';
 export { default as getAddresses } from './src/getAddresses';
+export type { Adresser } from './src/getAddresses';
 export {
   parseQueryString,
   buildPath,
@@ -96,6 +97,8 @@ export {
   hasValidInteger,
   maxValue,
   minValue,
+  maxValueFormatted,
+  minValueFormatted,
   maxLength,
   minLength,
   requiredIfCustomFunctionIsTrue,

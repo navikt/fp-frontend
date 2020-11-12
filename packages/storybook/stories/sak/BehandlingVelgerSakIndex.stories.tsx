@@ -150,6 +150,13 @@ const behandlinger = [{
   },
 }];
 
+const locationMock = {
+  pathname: 'test',
+  search: 'test',
+  state: {},
+  hash: 'test',
+};
+
 const getKodeverkFn = (kodeverk: Kodeverk) => {
   const kodeverkType = kodeverkTyper[kodeverk.kodeverk];
   const kodeverkForType = alleKodeverk[kodeverkType];
@@ -168,7 +175,7 @@ export const visPanelForValgAvBehandlinger = () => {
     <div style={{ width: '600px' }}>
       <BehandlingVelgerSakIndex
         behandlinger={object('behandlinger', behandlinger as Behandling[])}
-        getBehandlingLocation={() => 'test'}
+        getBehandlingLocation={() => locationMock}
         noExistingBehandlinger={boolean('noExistingBehandlinger', false)}
         behandlingId={number('behandlingId', 1)}
         showAll={visAlle}

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
-import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
+import HeaderWithErrorPanel, { Feilmelding } from '@fpsak-frontend/sak-dekorator';
 import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
 import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg';
@@ -11,9 +11,15 @@ import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import ErrorFormatter from '../feilhandtering/ErrorFormatter';
+import ErrorMessage from '../feilhandtering/ErrorMessage';
 
-const lagFeilmeldinger = (intl, errorMessages, queryStrings) => {
-  const resolvedErrorMessages = [];
+type QueryStrings = {
+  errorcode?: string;
+  errormessage?: string;
+};
+
+const lagFeilmeldinger = (intl: IntlShape, errorMessages: ErrorMessage[], queryStrings: QueryStrings): Feilmelding[] => {
+  const resolvedErrorMessages: Feilmelding[] = [];
   if (queryStrings.errorcode) {
     resolvedErrorMessages.push({ message: intl.formatMessage({ id: queryStrings.errorcode }) });
   }
@@ -39,10 +45,7 @@ const lagFeilmeldinger = (intl, errorMessages, queryStrings) => {
 const EMPTY_ARRAY = [];
 
 interface OwnProps {
-  queryStrings: {
-    errorcode?: string;
-    errormessage?: string;
-  };
+  queryStrings: QueryStrings;
   hideErrorMessages?: boolean;
   setSiteHeight: (headerHeight: number) => void;
 }
@@ -76,10 +79,9 @@ const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     <HeaderWithErrorPanel
       systemTittel={intl.formatMessage({ id: 'Header.Foreldrepenger' })}
       iconLinks={iconLinks}
-      queryStrings={queryStrings}
-      navAnsattName={navAnsatt.navn}
+      navAnsattName={navAnsatt?.navn}
       removeErrorMessage={removeErrorMessages}
-      errorMessages={hideErrorMessages ? [] : resolvedErrorMessages}
+      errorMessages={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
       setSiteHeight={setSiteHeight}
     />
   );

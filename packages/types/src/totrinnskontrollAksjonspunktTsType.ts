@@ -27,14 +27,14 @@ export type OpptjeningAktiviteter = Readonly<{
 
 type TotrinnskontrollAksjonspunkt = Readonly<{
   aksjonspunktKode: string;
-  opptjeningAktiviteter: OpptjeningAktiviteter[];
+  opptjeningAktiviteter?: OpptjeningAktiviteter[];
   beregningDto?: {
     fastsattVarigEndringNaering: boolean;
     faktaOmBeregningTilfeller: Kodeverk[];
   };
   besluttersBegrunnelse?: string;
   totrinnskontrollGodkjent?: boolean;
-  vurderPaNyttArsaker: { kode: string; navn: string}[];
+  vurderPaNyttArsaker?: Kodeverk[];
   uttakPerioder?: {
     fom: string;
     tom: string;

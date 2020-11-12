@@ -133,7 +133,6 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: 
 };
 
 interface OwnProps {
-  saveAnke: (data: any) => Promise<any>;
   previewCallback: (data: any) => Promise<any>;
   aksjonspunktCode: string;
   ankeVurderingVerdi?: Kodeverk;

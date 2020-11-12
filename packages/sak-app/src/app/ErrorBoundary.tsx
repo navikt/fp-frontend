@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { captureException, withScope } from '@sentry/browser';
 
 import { ErrorPage } from '@fpsak-frontend/sak-feilsider';
@@ -18,7 +18,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
     doNotShowErrorPage: false,
   };
 
-  constructor(props) {
+  constructor(props: OwnProps) {
     super(props);
     this.state = { hasError: false };
   }
@@ -28,7 +28,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
     return { hasError: true };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: ErrorInfo): void {
     const { errorMessageCallback } = this.props;
 
     withScope((scope) => {
@@ -50,7 +50,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
     console.error(error);
   }
 
-  render() {
+  render(): ReactNode {
     const { children, doNotShowErrorPage } = this.props;
     const { hasError } = this.state;
 

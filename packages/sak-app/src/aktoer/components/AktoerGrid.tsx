@@ -23,7 +23,7 @@ interface OwnProps {
   };
 }
 
-export const AktoerGrid: FunctionComponent<OwnProps> = ({
+const AktoerGrid: FunctionComponent<OwnProps> = ({
   data,
 }) => {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);

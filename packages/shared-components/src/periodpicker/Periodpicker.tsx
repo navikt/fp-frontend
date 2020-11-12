@@ -72,17 +72,6 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     };
   }
 
-  onBlur(e) {
-    getStartDateInput(this.props).onBlur(e);
-    getEndDateInput(this.props).onBlur(e);
-  }
-
-  onChange(e) {
-    this.setState({ period: e.target.value });
-    getStartDateInput(this.props).onChange(e);
-    getEndDateInput(this.props).onChange(e);
-  }
-
   handleButtonRef(buttonRef) {
     if (buttonRef) {
       this.buttonRef = buttonRef;
@@ -147,6 +136,17 @@ class Periodpicker extends Component<OwnProps, StateProps> {
       startInput.onChange(period);
       endInput.onChange(period);
     }
+  }
+
+  onChange(e) {
+    this.setState({ period: e.target.value });
+    getStartDateInput(this.props).onChange(e);
+    getEndDateInput(this.props).onChange(e);
+  }
+
+  onBlur(e) {
+    getStartDateInput(this.props).onBlur(e);
+    getEndDateInput(this.props).onBlur(e);
   }
 
   parseToDate(name) {

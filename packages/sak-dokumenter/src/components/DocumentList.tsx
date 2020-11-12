@@ -21,10 +21,10 @@ const headerTextCodes = [
   'DocumentList.DateTime',
 ];
 
-const isTextMoreThan25char = (text) => text && text.length > 25;
-const trimText = (text) => `${text.substring(0, 24)}...`;
+const isTextMoreThan25char = (text: string): boolean => text && text.length > 25;
+const trimText = (text: string): string => `${text.substring(0, 24)}...`;
 
-const getDirectionImage = (document) => {
+const getDirectionImage = (document: Dokument): string => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
     return mottaDokumentImageUrl;
   }
@@ -33,7 +33,7 @@ const getDirectionImage = (document) => {
   }
   return internDokumentImageUrl;
 };
-const getDirectionText = (document) => {
+const getDirectionText = (document: Dokument): string => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
     return 'DocumentList.Motta';
   }

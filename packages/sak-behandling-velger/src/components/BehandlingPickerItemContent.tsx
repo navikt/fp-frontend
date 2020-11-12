@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -12,13 +12,13 @@ import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import chevronUp from '@fpsak-frontend/assets/images/pil_opp.svg';
 import chevronDown from '@fpsak-frontend/assets/images/pil_ned.svg';
 import stjerneImg from '@fpsak-frontend/assets/images/stjerne.svg';
-import { Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './behandlingPickerItemContent.less';
 
 // TODO (TOR) Kva er dette for noko? Desse tekstane burde vel komma fra kodeverket? Ein skal uansett ikkje hardkoda kodane her!
 // TODO hente de forksjellige kodeverkene man trenger
-const getÅrsak = (årsak) => {
+const getÅrsak = (årsak: BehandlingAppKontekst['førsteÅrsak']) => {
   switch (årsak.behandlingArsakType.kode) {
     case 'RE-MF':
     case 'RE-MFIP':
@@ -87,9 +87,9 @@ const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_NFP,
 ];
 
-const erTilbakekrevingÅrsakKlage = (årsak) => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
+const erTilbakekrevingÅrsakKlage = (årsak?: Kodeverk): boolean => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
 
-const renderChevron = (chevron, messageId) => (
+const renderChevron = (chevron: string, messageId: string): ReactElement => (
   <FormattedMessage id={messageId}>
     {(altText: string) => <Image src={chevron} alt={altText} />}
   </FormattedMessage>
@@ -105,11 +105,7 @@ interface OwnProps {
   behandlingsstatus: string;
   behandlingTypeKode: string;
   behandlingTypeNavn: string;
-  førsteÅrsak?: {
-    behandlingArsakType?: Kodeverk;
-    erAutomatiskRevurdering?: boolean;
-    manueltOpprettet?: boolean;
-  };
+  førsteÅrsak?: BehandlingAppKontekst['førsteÅrsak'];
   erGjeldendeVedtak?: boolean;
   behandlingsresultatTypeKode?: string;
   behandlingsresultatTypeNavn?: string;
@@ -132,11 +128,7 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
   erGjeldendeVedtak = false,
   behandlingsresultatTypeKode,
   behandlingsresultatTypeNavn,
-  førsteÅrsak = {
-    behandlingArsakType: {
-      kode: '-',
-    },
-  },
+  førsteÅrsak,
   behandlingTypeKode,
 }) => (
   <Panel border>
@@ -145,7 +137,7 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
         <FlexColumn className={styles.arsakPadding}>
           <Element>{behandlingTypeNavn}</Element>
         </FlexColumn>
-        {behandlingTypeKode === behandlingType.REVURDERING && førsteÅrsak.behandlingArsakType && (
+        {behandlingTypeKode === behandlingType.REVURDERING && førsteÅrsak?.behandlingArsakType && (
           <>
             <FlexColumn className={styles.arsakPadding}>-</FlexColumn>
             <FlexColumn>
@@ -155,7 +147,7 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           </>
         )}
-        {behandlingTypeKode === behandlingType.TILBAKEKREVING_REVURDERING && erTilbakekrevingÅrsakKlage(førsteÅrsak.behandlingArsakType) && (
+        {behandlingTypeKode === behandlingType.TILBAKEKREVING_REVURDERING && erTilbakekrevingÅrsakKlage(førsteÅrsak?.behandlingArsakType) && (
           <>
             <FlexColumn className={styles.arsakPadding}>-</FlexColumn>
             <FlexColumn>

@@ -13,7 +13,7 @@ import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Behandling, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
@@ -41,13 +41,14 @@ interface PureOwnProps {
   behandling: Behandling;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
-  behandlingKlageVurdering?: TotrinnsKlageVurdering;
+  behandlingKlageVurdering?: KlageVurdering;
   erBehandlingEtterKlage?: boolean;
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location;
 }
 
@@ -73,6 +74,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
   erTilbakekreving,
   aksjonspunktGodkjenning,
   totrinnskontrollSkjermlenkeContext,
+  faktaOmBeregningTilfeller,
   lagLenke,
   ...formProps
 }) => {
@@ -108,6 +110,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
         klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         skjemalenkeTyper={skjemalenkeTyper}
+        faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
         lagLenke={lagLenke}
       />
       <div className={styles.buttonRow}>
@@ -176,7 +179,7 @@ const validate = (values: FormValues) => {
   };
 };
 
-const finnArsaker = (vurderPaNyttArsaker: { kode: string, navn: string }[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
+const finnArsaker = (vurderPaNyttArsaker: Kodeverk[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
   if (arsak.kode === vurderPaNyttArsakType.FEIL_FAKTA) {
     return { ...acc, feilFakta: true };
   }

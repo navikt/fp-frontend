@@ -14,6 +14,7 @@ import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';
+import { redirectToLogin } from './paths';
 import AppConfigResolver from './AppConfigResolver';
 import LanguageProvider from './LanguageProvider';
 import Home from './components/Home';
@@ -93,7 +94,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
           />
           {shouldRenderHome && (<Home headerHeight={headerHeight} />)}
           {forbiddenErrors.length > 0 && (<ForbiddenPage />)}
-          {unauthorizedErrors.length > 0 && (<UnauthorizedPage />)}
+          {unauthorizedErrors.length > 0 && (redirectToLogin() || <UnauthorizedPage />)}
         </LanguageProvider>
       </AppConfigResolver>
     </ErrorBoundary>

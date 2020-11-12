@@ -12,7 +12,7 @@ import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, TotrinnsKlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import TotrinnskontrollBeslutterForm, { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
@@ -33,7 +33,7 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes.VEDTAK,
 ];
 
-const getArsaker = (apData: AksjonspunktGodkjenningData) => {
+const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
   if (apData.feilFakta) {
     arsaker.push(vurderPaNyttArsakType.FEIL_FAKTA);
@@ -55,7 +55,7 @@ interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
   fagsakYtelseType: Kodeverk;
-  behandlingKlageVurdering?: TotrinnsKlageVurdering;
+  behandlingKlageVurdering?: KlageVurdering;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
   onSubmit: (...args: any[]) => any;
@@ -116,6 +116,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
   const arbeidsforholdHandlingTyper = alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE];
+  const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
+  const faktaOmBeregningTilfeller = alleKodeverk[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE];
 
   return (
     <RawIntlProvider value={intl}>
@@ -133,6 +135,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
+          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
           erTilbakekreving={erTilbakekreving}
           lagLenke={lagLenke}
         />
@@ -147,6 +150,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
           lagLenke={lagLenke}
+          vurderArsaker={vurderArsaker}
+          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
         />
       )}
     </RawIntlProvider>

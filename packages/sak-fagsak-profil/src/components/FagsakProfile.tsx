@@ -9,7 +9,7 @@ import {
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-const visSakDekningsgrad = (saksKode, dekningsgrad) => {
+const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
   const erForeldrepenger = saksKode === FagsakYtelseType.FORELDREPENGER;
   const gyldigDekningsGrad = dekningsgrad === 100 || dekningsgrad === 80;
 
