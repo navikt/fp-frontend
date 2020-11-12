@@ -4,7 +4,7 @@ import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AksjonspunktHelpText from '@fpsak-frontend/shared-components/src/AksjonspunktHelpText';
+import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import { ArbeidsforholdInfoPanelImpl, fjernIdFraArbeidsforholdLagtTilAvSaksbehandler } from './ArbeidsforholdInfoPanel';
@@ -82,7 +82,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
     );
     expect(wrapper.find(PersonArbeidsforholdPanel)).has.length(1);
     expect(wrapper.find(BekreftOgForsettKnapp)).has.length(0);
-    expect(wrapper.find(AksjonspunktHelpText)).has.length(0);
+    expect(wrapper.find(AksjonspunktHelpTextTemp)).has.length(0);
   });
   it('skal fjerne ID fra arbeidsforhold som er lagt til av saksbehandler, men ikke fra andre', () => {
     const arbeidsforhold = [

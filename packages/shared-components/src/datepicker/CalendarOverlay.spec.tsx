@@ -7,8 +7,6 @@ import { dateFormat } from '@fpsak-frontend/utils';
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import CalendarOverlay from './CalendarOverlay';
 
-const disabledDays = {};
-
 describe('<CalendarOverlay>', () => {
   it('skal ikke vise overlay når disabled', () => {
     const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
@@ -19,7 +17,6 @@ describe('<CalendarOverlay>', () => {
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
       numberOfMonths={1}
-      disabledDays={disabledDays}
       disabled
     />);
 
@@ -33,7 +30,6 @@ describe('<CalendarOverlay>', () => {
       className="test"
       dayPickerClassName="test"
       numberOfMonths={1}
-      disabledDays={disabledDays}
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
     />);
@@ -57,7 +53,6 @@ describe('<CalendarOverlay>', () => {
       className="test"
       dayPickerClassName="test"
       numberOfMonths={1}
-      disabledDays={disabledDays}
       elementIsCalendarButton={sinon.spy()}
       value={date}
       onClose={sinon.spy()}
@@ -79,7 +74,6 @@ describe('<CalendarOverlay>', () => {
       className="test"
       dayPickerClassName="test"
       numberOfMonths={1}
-      disabledDays={disabledDays}
       elementIsCalendarButton={elementIsCalendarButton}
       value="21.08.2017"
       onClose={onCloseCallback}
@@ -96,7 +90,6 @@ describe('<CalendarOverlay>', () => {
       className="test"
       dayPickerClassName="test"
       numberOfMonths={1}
-      disabledDays={disabledDays}
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
       onClose={onCloseCallback}
@@ -115,7 +108,6 @@ describe('<CalendarOverlay>', () => {
       className="test"
       dayPickerClassName="test"
       numberOfMonths={1}
-      disabledDays={disabledDays}
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
       onClose={onCloseCallback}

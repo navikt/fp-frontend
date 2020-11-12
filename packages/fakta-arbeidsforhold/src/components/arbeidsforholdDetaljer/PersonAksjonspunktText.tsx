@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
-import { AksjonspunktHelpText, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { Arbeidsforhold, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -90,9 +90,9 @@ export const PersonAksjonspunktTextImpl: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer eightPx />
-      <AksjonspunktHelpText isAksjonspunktOpen={arbeidsforhold.tilVurdering}>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={arbeidsforhold.tilVurdering}>
         {[msg]}
-      </AksjonspunktHelpText>
+      </AksjonspunktHelpTextTemp>
     </>
   );
 };
