@@ -8,7 +8,6 @@ import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components'
 import { formatCurrencyNoKr, getRangeOfMonths } from '@fpsak-frontend/utils';
 import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
 import {
-  ArbeidsgiverOpplysningerPerId,
   DetaljertSimuleringResultat, Mottaker, SimuleringResultatPerFagområde, SimuleringResultatRad,
 } from '@fpsak-frontend/types';
 
@@ -83,17 +82,13 @@ const createColumns = (perioder: SimuleringResultatRad['resultaterPerMåned'], r
   ));
 };
 
-const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
-  if (mottaker.mottakerType.kode === mottakerTyper.ARBG) {
-    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[mottaker.mottakerIdentifikator];
-    return (
-      <Normaltekst className={styles.tableTitle}>
-        {`${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`}
-      </Normaltekst>
-    );
-  }
-  return null;
-};
+const tableTitle = (mottaker: Mottaker) => (mottaker.mottakerType.kode === mottakerTyper.ARBG
+  ? (
+    <Normaltekst className={styles.tableTitle}>
+      {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
+    </Normaltekst>
+  )
+  : null);
 
 const getResultatRadene = (ingenPerioderMedAvvik: boolean, resultatPerFagområde: SimuleringResultatPerFagområde[],
   resultatOgMotregningRader: Mottaker['resultatOgMotregningRader']): Mottaker['resultatOgMotregningRader'] => {
@@ -124,7 +119,6 @@ interface OwnProps {
   showDetails: Details[];
   simuleringResultat: DetaljertSimuleringResultat;
   ingenPerioderMedAvvik: boolean;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const AvregningTable: FunctionComponent<OwnProps> = ({
@@ -132,7 +126,6 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   toggleDetails,
   showDetails,
   ingenPerioderMedAvvik,
-  arbeidsgiverOpplysningerPerId,
 }) => (
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker: Mottaker, mottakerIndex: number) => {
@@ -141,7 +134,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
       const visDetaljer = showDetails.find((d) => d.id === mottakerIndex);
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
-          { tableTitle(mottaker, arbeidsgiverOpplysningerPerId) }
+          { tableTitle(mottaker) }
           <Table
             headerColumnContent={getHeaderCodes(
               showCollapseButton(mottaker.resultatPerFagområde),

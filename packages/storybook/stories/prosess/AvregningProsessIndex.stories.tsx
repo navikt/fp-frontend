@@ -45,6 +45,8 @@ const simuleringResultat = {
         kodeverk: 'MOTTAKER_TYPE',
       },
       mottakerIdentifikator: '123',
+      mottakerNummer: 'test',
+      mottakerNavn: 'test',
       resultatPerFagområde: [{
         fagOmrådeKode: {
           kode: 'FP',
@@ -107,13 +109,6 @@ const simuleringResultat = {
   slåttAvInntrekk: false,
 };
 
-const arbeidsgiverOpplysningerPerId = {
-  123: {
-    identifikator: 'testId',
-    navn: 'testNavn',
-  },
-};
-
 const standardProsessProps = {
   behandling,
   alleKodeverk: alleKodeverk as any,
@@ -143,7 +138,6 @@ export const visAksjonspunktVurderFeilutbetaling = () => (
       begrunnelse: undefined,
     }] as Aksjonspunkt[])}
     simuleringResultat={object('simuleringResultat', simuleringResultat)}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -160,7 +154,6 @@ export const visSimuleringspanelUtenAksjonspunkt = () => (
       },
       varseltekst: 'varsel-eksempel',
     } as TilbakekrevingValg)}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );

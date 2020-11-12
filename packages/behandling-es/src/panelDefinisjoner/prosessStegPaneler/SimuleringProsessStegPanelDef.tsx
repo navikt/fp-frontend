@@ -5,7 +5,7 @@ import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
-import { ArbeidsgiverOpplysningerPerId, Fagsak, SimuleringResultat } from '@fpsak-frontend/types';
+import { Fagsak, SimuleringResultat } from '@fpsak-frontend/types';
 
 import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
 
@@ -13,7 +13,6 @@ interface Data {
   fagsak: Fagsak;
   previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
   simuleringResultat?: SimuleringResultat;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 class PanelDef extends ProsessStegPanelDef {
@@ -32,12 +31,11 @@ class PanelDef extends ProsessStegPanelDef {
   getOverstyrtStatus = ({ simuleringResultat }) => (simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)
 
   getData = ({
-    fagsak, previewFptilbakeCallback, simuleringResultat, arbeidsgiverOpplysningerPerId,
+    fagsak, previewFptilbakeCallback, simuleringResultat,
   }: Data) => ({
     fagsak,
     previewFptilbakeCallback,
     simuleringResultat,
-    arbeidsgiverOpplysningerPerId,
   })
 }
 

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg, ArbeidsgiverOpplysningerPerId,
+  Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
@@ -19,7 +19,6 @@ const intl = createIntl({
 interface OwnProps {
   fagsak: Fagsak;
   simuleringResultat?: SimuleringResultat;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   tilbakekrevingvalg?: TilbakekrevingValg;
   previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
 }
@@ -35,7 +34,6 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessFormPro
   readOnlySubmitButton,
   isAksjonspunktOpen,
   previewFptilbakeCallback,
-  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <AvregningPanel
@@ -45,7 +43,6 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessFormPro
       sprakkode={behandling.sprakkode}
       aksjonspunkter={aksjonspunkter}
       simuleringResultat={simuleringResultat}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       tilbakekrevingvalg={tilbakekrevingvalg}
       submitCallback={submitCallback}
       readOnly={isReadOnly}

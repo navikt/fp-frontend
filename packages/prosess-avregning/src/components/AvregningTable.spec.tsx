@@ -11,7 +11,8 @@ const simuleringResultat = {
   perioderPerMottaker: [],
 } as DetaljertSimuleringResultat;
 const mottaker = {
-  mottakerIdentifikator: '123',
+  mottakerNavn: '',
+  mottakerNummer: '',
   mottakerType: {
     kode: '',
   },
@@ -38,19 +39,10 @@ const mottaker = {
   ],
   resultatOgMotregningRader: [],
 };
-
-const arbeidsgiverOpplysningerPerId = {
-  123: {
-    identifikator: 'testId',
-    navn: 'testNavn',
-  },
-};
-
 const mockProps = {
   toggleDetails: sinon.spy(),
   showDetails: [],
   simuleringResultat,
-  arbeidsgiverOpplysningerPerId,
   ingenPerioderMedAvvik: false,
 };
 
@@ -96,19 +88,14 @@ describe('<AvregningTable>', () => {
 
   it('skal vise mottaker navn og nummer hvis mottaker er arbeidsgiver', () => {
     const arbeidsgiver = {
+      mottakerNavn: 'Statoil',
+      mottakerNummer: '1234567',
       mottakerType: {
         kode: 'ARBG_ORG',
       },
     };
-    const mapMedStatoil = {
-      123: {
-        identifikator: '1234567',
-        navn: 'Statoil',
-      },
-    };
     const props = {
       ...mockProps,
-      arbeidsgiverOpplysningerPerId: mapMedStatoil,
       simuleringResultat: {
         perioderPerMottaker: [mottaker, { ...mottaker, ...arbeidsgiver }],
       } as DetaljertSimuleringResultat,
