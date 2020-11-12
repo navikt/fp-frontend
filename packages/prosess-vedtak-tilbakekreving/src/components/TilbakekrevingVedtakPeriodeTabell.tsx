@@ -36,7 +36,7 @@ const TilbakekrevingVedtakPeriodeTabell: FunctionComponent<OwnProps> = ({
       <TableColumn><Normaltekst><PeriodLabel dateStringFom={periode.periode.fom} dateStringTom={periode.periode.tom} /></Normaltekst></TableColumn>
       <TableColumn><Normaltekst>{formatCurrencyNoKr(periode.feilutbetaltBeløp)}</Normaltekst></TableColumn>
       <TableColumn><Normaltekst>{getKodeverknavn(periode.vurdering)}</Normaltekst></TableColumn>
-      <TableColumn><Normaltekst>{periode.andelAvBeløp ? `${periode.andelAvBeløp}%` : ''}</Normaltekst></TableColumn>
+      <TableColumn><Normaltekst>{periode.andelAvBeløp !== undefined ? `${periode.andelAvBeløp}%` : ''}</Normaltekst></TableColumn>
       <TableColumn><Normaltekst>{periode.renterProsent ? `${periode.renterProsent}%` : ''}</Normaltekst></TableColumn>
       <TableColumn><Normaltekst>{formatCurrencyNoKr(periode.tilbakekrevingBeløp)}</Normaltekst></TableColumn>
       <TableColumn><Normaltekst>{formatCurrencyNoKr(periode.tilbakekrevingBeløpEtterSkatt)}</Normaltekst></TableColumn>
