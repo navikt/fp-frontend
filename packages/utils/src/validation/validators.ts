@@ -35,6 +35,7 @@ import {
   ukerOgDagerVidNullUtbetalningsgradMessage,
   utbetalingMerEnnNullUtsettelseMessage,
   utbetalingsgradErMerSamtidigUttaksprosentMessage,
+  ValidationType,
 } from './messages';
 import {
   dateRangesAreSequential,
@@ -52,11 +53,12 @@ import {
   yesterday,
 } from './validatorsHelper';
 
-export const maxLengthOrFodselsnr = (length) => (text) => (isEmpty(text)
+export const maxLengthOrFodselsnr = (length: number) => (text: string): ValidationType[] | undefined => (isEmpty(text)
   || text.toString().trim().length <= length ? null : maxLengthOrFodselsnrMessage(length));
-export const required = (value) => (isEmpty(value) ? isRequiredMessage() : undefined);
-export const notDash = (value) => (value === '-' ? isRequiredMessage() : undefined);
-export const requiredIfNotPristine = (value, allValues, props) => (props.pristine || !isEmpty(value) ? undefined : isRequiredMessage());
+export const required = (value): ValidationType[] | undefined => (isEmpty(value) ? isRequiredMessage() : undefined);
+export const notDash = (value): ValidationType[] | undefined => (value === '-' ? isRequiredMessage() : undefined);
+export const requiredIfNotPristine = (value, allValues, props): ValidationType[] | undefined => (props.pristine
+  || !isEmpty(value) ? undefined : isRequiredMessage());
 export const requiredIfCustomFunctionIsTrue = (isRequiredFunction) => (value, allValues, props) => (isEmpty(value) && isRequiredFunction(allValues, props)
   ? isRequiredMessage() : undefined);
 

@@ -1,37 +1,38 @@
-const throwError = (message) => {
+const throwError = (message: string) => {
   throw new Error(message);
 };
 
-export const notNull = (value) => (value === undefined || value === null ? throwError(`Value is ${value}`) : value);
+export const notNull = (value: string) => (value === undefined || value === null ? throwError(`Value is ${value}`) : value);
 
-export const isObjectEmpty = (object) => Object.keys(object).length === 0;
+export const isObjectEmpty = (object: Record<string, any>): boolean => Object.keys(object).length === 0;
 
-export const isEqual = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2);
+export const isEqual = (obj1: Record<string, any>, obj2: Record<string, any>): boolean => JSON.stringify(obj1) === JSON.stringify(obj2);
 
-export const isObject = (variable) => variable !== undefined && variable !== null && variable.constructor === Object;
+export const isObject = (variable: any): boolean => variable !== undefined && variable !== null && variable.constructor === Object;
 
-export const isEqualToOneOf = (value, acceptedValues) => (!acceptedValues.includes(value) ? throwError(`${value} is not one of ${(acceptedValues)}`) : value);
-
-export const omit = (object, ...keysToOmit) => Object.keys(object)
+export const omit = (object: Record<string, any>, ...keysToOmit: string[]) => Object.keys(object)
   .filter((key) => !keysToOmit.includes(key))
   .map((key) => ({ [key]: object[key] }))
   .reduce((a, b) => Object.assign(a, b), {});
 
-const isNullOrUndefined = (obj) => obj === null || typeof obj === 'undefined';
-const isNotNullAndObject = (obj) => obj !== null && typeof obj === 'object' && obj.constructor;
+type DiffInput = Array<any> | Record<string, any> | (() => any) | string | number | boolean;
 
-const redefineIfUndefined = (obj, otherObjOfType) => {
-  if (isNullOrUndefined(obj) && isNotNullAndObject(otherObjOfType)) {
+const isNullOrUndefined = (obj: DiffInput): boolean => obj === null || typeof obj === 'undefined';
+const isNotNullAndObject = (obj: DiffInput): boolean => obj !== null && typeof obj === 'object' && !!obj.constructor;
+
+const redefineIfUndefined = (inputA: DiffInput, inputB: DiffInput): DiffInput => {
+  if (isNullOrUndefined(inputA) && isNotNullAndObject(inputB)) {
     try {
-      return new otherObjOfType.constructor();
+      // @ts-ignore Fiks
+      return new inputB.constructor();
     } catch (e) {
       return null;
     }
   }
-  return obj;
+  return inputA;
 };
 
-export const diff = (a, b) => {
+export const diff = (a: DiffInput, b: DiffInput): boolean | Record<string, boolean> => {
   const thing1 = redefineIfUndefined(a, b);
   const thing2 = redefineIfUndefined(b, a);
   if (typeof thing1 !== typeof thing2) {
@@ -65,8 +66,3 @@ export const diff = (a, b) => {
       return thing1 !== thing2;
   }
 };
-
-export const arrayToObject = (array, keyFunction, valueFunction) => array.reduce((acc, data) => ({
-  ...acc,
-  ...{ [keyFunction(data)]: valueFunction(data) },
-}), {});

@@ -52,7 +52,7 @@ NyoppstartetFLForm.buildInitialValues = (beregningsgrunnlag) => {
   }
   const alleAndeler = beregningsgrunnlag.beregningsgrunnlagPeriode
     .map((periode) => periode.beregningsgrunnlagPrStatusOgAndel);
-  const flAndeler = flatten(alleAndeler).filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
+  const flAndeler = alleAndeler.flat().filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
   if (flAndeler.length > 0) {
     initialValues[erNyoppstartetFLField] = flAndeler[0].erNyoppstartet;
   }

@@ -1,10 +1,7 @@
 export {
   range,
-  flatten,
   haystack,
   isArrayEmpty,
-  without,
-  zip,
 } from './src/arrayUtils';
 export {
   isIE11,
@@ -14,7 +11,6 @@ export {
 export {
   formatCurrencyWithKr,
   formatCurrencyNoKr,
-  parseCurrencyInput,
   removeSpacesFromNumber,
 } from './src/currencyUtils';
 export {
@@ -24,7 +20,6 @@ export {
   calcDaysAndWeeksWithWeekends,
   dateFormat,
   findDifferenceInMonthsAndDays,
-  splitWeeksAndDays,
   TIDENES_ENDE,
   timeFormat,
   getRangeOfMonths,
@@ -49,10 +44,8 @@ export {
 export {
   notNull,
   isObjectEmpty,
-  arrayToObject,
   diff,
   isEqual,
-  isEqualToOneOf,
   isObject,
   omit,
 } from './src/objectUtils';
@@ -61,9 +54,7 @@ export type { Adresser } from './src/getAddresses';
 export {
   parseQueryString,
   buildPath,
-  formatArray,
   formatQueryString,
-  parseArray,
 } from './src/urlUtils';
 export {
   ariaCheck,
