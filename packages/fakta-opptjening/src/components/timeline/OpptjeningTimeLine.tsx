@@ -59,7 +59,7 @@ interface Group {
   content: string;
   aktivitetTypeKode: string;
   arbeidsforholdRef: string;
-  oppdragsgiverOrg: string;
+  arbeidsgiverReferanse: string;
 }
 
 const createItems = (opptjeningPeriods: CustomOpptjeningAktivitet[], groups: Group[], opptjeningFomDato: string, opptjeningTomDato: string) => {
@@ -67,8 +67,8 @@ const createItems = (opptjeningPeriods: CustomOpptjeningAktivitet[], groups: Gro
     id: ap.id,
     start: moment(ap.opptjeningFom),
     end: moment(ap.opptjeningTom),
-    group: groups.find((g: any) => g.aktivitetTypeKode === ap.aktivitetType.kode
-      && g.arbeidsforholdRef === ap.arbeidsforholdRef && g.oppdragsgiverOrg === ap.oppdragsgiverOrg).id,
+    group: groups.find((g) => g.aktivitetTypeKode === ap.aktivitetType.kode
+      && g.arbeidsforholdRef === ap.arbeidsforholdRef && g.arbeidsgiverReferanse === ap.arbeidsgiverReferanse).id,
     className: classNameGenerator(ap),
     content: '',
     data: ap,
@@ -78,8 +78,8 @@ const createItems = (opptjeningPeriods: CustomOpptjeningAktivitet[], groups: Gro
 
 const createGroups = (opptjeningPeriods: CustomOpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]) => {
   const duplicatesRemoved = opptjeningPeriods.reduce((accPeriods: any, period: CustomOpptjeningAktivitet): Group[] => {
-    const hasPeriod = accPeriods.some((p: any) => p.aktivitetType.kode === period.aktivitetType.kode
-      && p.arbeidsforholdRef === period.arbeidsforholdRef && p.oppdragsgiverOrg === period.oppdragsgiverOrg);
+    const hasPeriod = accPeriods.some((p) => p.aktivitetType.kode === period.aktivitetType.kode
+      && p.arbeidsforholdRef === period.arbeidsforholdRef && p.oppdragsgiverOrg === period.arbeidsgiverReferanse);
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
@@ -88,7 +88,7 @@ const createGroups = (opptjeningPeriods: CustomOpptjeningAktivitet[], opptjening
     content: opptjeningAktivitetTypes.find((oat: any) => oat.kode === activity.aktivitetType.kode).navn,
     aktivitetTypeKode: activity.aktivitetType.kode,
     arbeidsforholdRef: activity.arbeidsforholdRef,
-    oppdragsgiverOrg: activity.oppdragsgiverOrg,
+    arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
   }));
 };
 

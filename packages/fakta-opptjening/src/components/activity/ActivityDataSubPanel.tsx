@@ -45,7 +45,9 @@ const getArbeidsgiverText = (
     return `${arbeidsgiverOpplysninger.navn} (${fodselsdato})`;
   }
 
-  return initialValues.oppdragsgiverOrg ? `${arbeidsgiverOpplysninger.navn} (${initialValues.oppdragsgiverOrg})` : arbeidsgiverOpplysninger.navn;
+  return arbeidsgiverOpplysninger.identifikator
+    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`
+    : arbeidsgiverOpplysninger.navn;
 };
 
 const isManuallyAddedAndNotUtenlandskArbeidsforhold = (

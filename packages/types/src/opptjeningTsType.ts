@@ -7,7 +7,6 @@ export type OpptjeningAktivitet = {
   opptjeningFom: string;
   opptjeningTom: string;
   arbeidsgiverReferanse: string;
-  oppdragsgiverOrg: string;
   arbeidsforholdRef: string;
   stillingsandel: number;
   naringRegistreringsdato: string;

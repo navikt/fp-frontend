@@ -12,7 +12,6 @@ import ActivityDataSubPanel from './ActivityDataSubPanel';
 
 describe('<ActivityDataSubPanel>', () => {
   const activity1 = {
-    oppdragsgiverOrg: '123456789',
     arbeidsgiverReferanse: '1',
   } as CustomOpptjeningAktivitet;
   const activity2 = {
