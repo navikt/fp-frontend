@@ -1,4 +1,5 @@
 export type ArbeidsgiverOpplysninger = Readonly<{
+  erPrivatPerson: boolean;
   referanse?: string;
   identifikator: string;
   navn: string;

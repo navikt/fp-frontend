@@ -12,13 +12,26 @@ import ActivityDataSubPanel from './ActivityDataSubPanel';
 
 describe('<ActivityDataSubPanel>', () => {
   const activity1 = {
-    arbeidsgiver: 'Svensen Eksos',
     oppdragsgiverOrg: '123456789',
+    arbeidsgiverReferanse: '1',
   } as CustomOpptjeningAktivitet;
   const activity2 = {
-    privatpersonNavn: 'Tom Hansen',
-    privatpersonFødselsdato: '1992-11-10',
+    arbeidsgiverReferanse: '2',
   } as CustomOpptjeningAktivitet;
+
+  const arbeidsgiverOpplysningerPerId = {
+    1: {
+      erPrivatPerson: false,
+      identifikator: '123456789',
+      navn: 'Svensen Eksos',
+    },
+    2: {
+      erPrivatPerson: true,
+      identifikator: '232',
+      navn: 'Tom Hansen',
+      fødselsdato: '1992-11-10',
+    },
+  };
 
   it('skal vise arbeidsgiver, org-nr og stillingsandel for type Arbeid', () => {
     const wrapper = shallow(<ActivityDataSubPanel
@@ -26,6 +39,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -50,6 +64,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -74,6 +89,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.FRILANS, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -89,6 +105,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.NARING, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
@@ -105,6 +122,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.VARTPENGER, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(FormattedMessage)).to.have.length(0);
@@ -118,6 +136,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(FormattedMessage)).to.have.length(0);
@@ -137,6 +156,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly
       isManuallyAdded
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(FormattedMessage)).to.have.length(0);
@@ -154,6 +174,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tekst = wrapper.find(Normaltekst);
     expect(tekst).to.have.length(1);
@@ -165,6 +186,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tekst = wrapper.find(Normaltekst);
     expect(tekst).to.have.length(1);
@@ -176,6 +198,7 @@ describe('<ActivityDataSubPanel>', () => {
       readOnly={false}
       isManuallyAdded={false}
       selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tekst = wrapper.find(Normaltekst);
     expect(tekst).to.have.length(1);

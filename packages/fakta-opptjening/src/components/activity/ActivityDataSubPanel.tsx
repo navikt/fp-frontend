@@ -10,7 +10,7 @@ import {
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { DatepickerField, DecimalField, InputField } from '@fpsak-frontend/form';
-import { Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 
 import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../../CustomOpptjeningAktivitet';
 
@@ -18,40 +18,49 @@ import styles from './activityDataSubPanel.less';
 
 const ytelseTypes = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
 
-const isOfType = (selectedActivityType: Kodeverk, ...opptjeningAktivitetType) => selectedActivityType
+const isOfType = (selectedActivityType: Kodeverk, ...opptjeningAktivitetType: string[]): boolean => selectedActivityType
   && opptjeningAktivitetType.includes(selectedActivityType.kode);
 
-const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const minValue0 = minValue(0);
 const maxValue200 = maxValue(200);
 
-const getOppdragsgiverMessageId = (selectedActivityType: Kodeverk) => (isOfType(selectedActivityType, OAType.FRILANS)
+const getOppdragsgiverMessageId = (selectedActivityType: Kodeverk): string => (isOfType(selectedActivityType, OAType.FRILANS)
   ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver');
 
-const getArbeidsgiverText = (initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet) => {
-  if (initialValues.privatpersonNavn && initialValues.privatpersonFødselsdato) {
-    const fodselsdato = formatDate(initialValues.privatpersonFødselsdato);
-    return `${initialValues.privatpersonNavn} (${fodselsdato})`;
+const getArbeidsgiverText = (
+  initialValues: CustomOpptjeningAktivitet,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): string => {
+  const { arbeidsgiverReferanse } = initialValues;
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+
+  if (!arbeidsgiverReferanse || !arbeidsgiverOpplysninger) {
+    return '-';
   }
-  if (initialValues.arbeidsgiver) {
-    return initialValues.oppdragsgiverOrg ? `${initialValues.arbeidsgiver} (${initialValues.oppdragsgiverOrg})` : initialValues.arbeidsgiver;
+
+  if (arbeidsgiverOpplysninger.erPrivatPerson) {
+    const fodselsdato = formatDate(arbeidsgiverOpplysninger.fødselsdato);
+    return `${arbeidsgiverOpplysninger.navn} (${fodselsdato})`;
   }
-  return '-';
+
+  return initialValues.oppdragsgiverOrg ? `${arbeidsgiverOpplysninger.navn} (${initialValues.oppdragsgiverOrg})` : arbeidsgiverOpplysninger.navn;
 };
 
 const isManuallyAddedAndNotUtenlandskArbeidsforhold = (
   isManuallyAdded: boolean, selectedActivityType: Kodeverk,
-) => isManuallyAdded && !isOfType(selectedActivityType, OAType.UTENLANDSK_ARBEIDSFORHOLD);
+): boolean => isManuallyAdded && !isOfType(selectedActivityType, OAType.UTENLANDSK_ARBEIDSFORHOLD);
 const isManuallyAddedAndUtenlandskArbeidsforhold = (
   isManuallyAdded: boolean, selectedActivityType: Kodeverk,
-) => isManuallyAdded && isOfType(selectedActivityType, OAType.UTENLANDSK_ARBEIDSFORHOLD);
+): boolean => isManuallyAdded && isOfType(selectedActivityType, OAType.UTENLANDSK_ARBEIDSFORHOLD);
 
 interface OwnProps {
   initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
   readOnly: boolean;
   isManuallyAdded: boolean;
   selectedActivityType?: Kodeverk;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -64,6 +73,7 @@ const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   isManuallyAdded,
   selectedActivityType = { kode: '', kodeverk: '' },
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <>
     {isOfType(selectedActivityType, ...[OAType.ARBEID, OAType.NARING, ...ytelseTypes]) && (
@@ -76,7 +86,7 @@ const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id={getOppdragsgiverMessageId(selectedActivityType)} />
               </Undertekst>
               <div className={styles.arbeidsgiver}>
-                <Normaltekst>{getArbeidsgiverText(initialValues)}</Normaltekst>
+                <Normaltekst>{getArbeidsgiverText(initialValues as CustomOpptjeningAktivitet, arbeidsgiverOpplysningerPerId)}</Normaltekst>
               </div>
             </>
           )}

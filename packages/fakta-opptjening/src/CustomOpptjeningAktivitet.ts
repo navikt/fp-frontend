@@ -16,6 +16,8 @@ type CustomOpptjeningAktivitet = OpptjeningAktivitet & {
   id: number;
   originalFom: string;
   originalTom: string;
+  opptjeningFom: string;
+  opptjeningTom: string;
 };
 
 export default CustomOpptjeningAktivitet;

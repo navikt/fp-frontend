@@ -44,7 +44,7 @@ const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => 
   return items;
 };
 
-const classNameGenerator = (ap: CustomOpptjeningAktivitet) => {
+const classNameGenerator = (ap: CustomOpptjeningAktivitet): string => {
   if (ap.erGodkjent === false) {
     return 'avvistPeriode';
   }
@@ -131,7 +131,7 @@ interface OwnState {
 class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
   timelineRef: RefObject<any>;
 
-  constructor(props) {
+  constructor(props: OwnProps) {
     super(props);
 
     this.state = {
@@ -143,7 +143,7 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount(): void {
     const {
       opptjeningAktivitetTypes, opptjeningPeriods, opptjeningFomDato, opptjeningTomDato,
     } = this.props;
@@ -155,7 +155,7 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
     });
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     // TODO Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
@@ -165,7 +165,7 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: OwnProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: OwnProps): void {
     const { opptjeningPeriods } = this.props;
     if (!isEqual(opptjeningPeriods, nextProps.opptjeningPeriods)) {
       const groups = createGroups(nextProps.opptjeningPeriods, nextProps.opptjeningAktivitetTypes);
@@ -177,10 +177,10 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
     }
   }
 
-  selectHandler(eventProps: any) {
+  selectHandler(eventProps: any): void {
     const { selectPeriodCallback } = this.props;
     const { items } = this.state;
-    const selectedItem = items.find((item: any) => item.id === eventProps.items[0]);
+    const selectedItem = items.find((item) => item.id === eventProps.items[0]);
     if (selectedItem) {
       selectPeriodCallback(selectedItem.data);
     }

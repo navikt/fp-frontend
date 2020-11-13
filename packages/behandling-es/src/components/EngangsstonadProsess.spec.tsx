@@ -87,6 +87,7 @@ describe('<EngangsstonadProsess>', () => {
 
   const arbeidsgiverOpplysningerPerId = {
     123: {
+      erPrivatPerson: false,
       identifikator: 'testId',
       navn: 'testNavn',
     },

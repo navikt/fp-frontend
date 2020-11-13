@@ -29,6 +29,7 @@ describe('<OpptjeningInfoPanel>', () => {
       opptjeningAktiviteter={[]}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const opptjeningForm = wrapper.find(OpptjeningFaktaForm);
