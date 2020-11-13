@@ -1,5 +1,5 @@
 import React, { ReactNode, Component, FunctionComponent } from 'react';
-import { Field as reduxFormField } from 'redux-form';
+import { Field as reduxFormField, Validator } from 'redux-form';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Input as NavInput } from 'nav-frontend-skjema';
 
@@ -12,12 +12,7 @@ interface DecimalFieldProps {
   type?: string;
   className?: string;
   label?: LabelType;
-  validate?: (((text: any) => ({ id: string; length?: undefined }
-    | { length: any; id?: undefined })[])
-    | ((value: any) => { id: string }[])
-    | ((value: string, elmnt: any) => { id: string; }[])
-    | ((text: any) => ({ id: string; text?: undefined }
-    | { text: any; id?: undefined })[]))[];
+  validate?: Validator | Validator[];
   readOnly?: boolean;
   isEdited?: boolean;
   normalizeOnBlur: (value: number) => number;

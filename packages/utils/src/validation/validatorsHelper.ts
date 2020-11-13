@@ -17,7 +17,7 @@ export const isEmpty = (text?: string) => text === null || text === undefined ||
 export const yesterday = (): moment.Moment => moment().subtract(1, 'days').startOf('day');
 export const tomorrow = (): moment.Moment => moment().add(1, 'days').startOf('day');
 
-export const dateRangesAreSequential = (ranges: string): boolean => {
+export const dateRangesAreSequential = (ranges: string[][]): boolean => {
   if (Array.isArray(ranges)) {
     const isBeforeTheNextDate = (element, index, array) => {
       const current = moment(element).startOf('day');

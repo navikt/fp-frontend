@@ -35,7 +35,7 @@ import {
   ukerOgDagerVidNullUtbetalningsgradMessage,
   utbetalingMerEnnNullUtsettelseMessage,
   utbetalingsgradErMerSamtidigUttaksprosentMessage,
-  ValidationType,
+  FormValidationError,
 } from './messages';
 import {
   dateRangesAreSequential,
@@ -53,11 +53,11 @@ import {
   yesterday,
 } from './validatorsHelper';
 
-export const maxLengthOrFodselsnr = (length: number) => (text: string): ValidationType[] | undefined => (isEmpty(text)
+export const maxLengthOrFodselsnr = (length: number) => (text: string): FormValidationError | undefined => (isEmpty(text)
   || text.toString().trim().length <= length ? null : maxLengthOrFodselsnrMessage(length));
-export const required = (value): ValidationType[] | undefined => (isEmpty(value) ? isRequiredMessage() : undefined);
-export const notDash = (value): ValidationType[] | undefined => (value === '-' ? isRequiredMessage() : undefined);
-export const requiredIfNotPristine = (value, allValues, props): ValidationType[] | undefined => (props.pristine
+export const required = (value): FormValidationError | undefined => (isEmpty(value) ? isRequiredMessage() : undefined);
+export const notDash = (value): FormValidationError | undefined => (value === '-' ? isRequiredMessage() : undefined);
+export const requiredIfNotPristine = (value, allValues, props): FormValidationError | undefined => (props.pristine
   || !isEmpty(value) ? undefined : isRequiredMessage());
 export const requiredIfCustomFunctionIsTrue = (isRequiredFunction) => (value, allValues, props) => (isEmpty(value) && isRequiredFunction(allValues, props)
   ? isRequiredMessage() : undefined);
