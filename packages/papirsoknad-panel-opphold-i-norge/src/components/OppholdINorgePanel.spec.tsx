@@ -118,7 +118,7 @@ describe('<OppholdINorgePanel>', () => {
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands).to.be.an('array');
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeFom).to.not.exist;
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.be.an('array');
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom[0].id).to.eql(dateNotBeforeOrEqualMessage(1)[0].id);
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom[0].id).to.eql(dateNotBeforeOrEqualMessage('2020.01.01')[0].id);
 
         expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
       });
@@ -183,7 +183,7 @@ describe('<OppholdINorgePanel>', () => {
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('array');
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).to.not.exist;
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.be.an('array');
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage(0)[0].id);
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage('2020.01.01')[0].id);
 
         expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
       });

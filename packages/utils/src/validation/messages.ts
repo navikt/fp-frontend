@@ -13,7 +13,7 @@ export const invalidIntegerMessage = (text: string): FormValidationError => ([{ 
 export const invalidDecimalMessage = (text: string): FormValidationError => ([{ id: 'ValidationMessage.InvalidDecimal' }, { text }]);
 export const dateNotBeforeOrEqualMessage = (limit: string): FormValidationError => ([{ id: 'ValidationMessage.DateNotBeforeOrEqual' }, { limit }]);
 export const dateNotAfterOrEqualMessage = (limit: string): FormValidationError => ([{ id: 'ValidationMessage.DateNotAfterOrEqual' }, { limit }]);
-export const dateRangesOverlappingMessage = () => ([{ id: 'ValidationMessage.DateRangesOverlapping' }]);
+export const dateRangesOverlappingMessage = (): FormValidationError => ([{ id: 'ValidationMessage.DateRangesOverlapping' }]);
 export const datesNotEqual = (value): FormValidationError => ([{ id: 'ValidationMessage.DatesNotEqual' }, { value }]);
 export const invalidFodselsnummerFormatMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidFodselsnummerFormat' }]);
 export const invalidFodselsnummerMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidFodselsnummer' }]);

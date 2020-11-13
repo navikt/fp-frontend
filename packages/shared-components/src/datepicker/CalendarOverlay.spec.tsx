@@ -41,7 +41,7 @@ describe('<CalendarOverlay>', () => {
     expect(daypicker.prop('weekdaysLong')).is.eql(['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag']);
     expect(daypicker.prop('weekdaysShort')).is.eql(['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør']);
     expect(daypicker.prop('firstDayOfWeek')).is.eql(1);
-    expect(dateFormat(daypicker.prop('selectedDays'))).is.eql('21.08.2017');
+    expect(dateFormat(daypicker.prop('selectedDays') as Date)).is.eql('21.08.2017');
   });
 
   it('skal ikke sette dato når denne ikke er korrekt', () => {
