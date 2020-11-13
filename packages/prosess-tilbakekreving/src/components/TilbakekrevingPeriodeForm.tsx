@@ -47,6 +47,7 @@ export type CustomPeriode = {
   erTotalBelopUnder4Rettsgebyr: boolean;
   foreldelseVurderingType?: Kodeverk;
   begrunnelse?: string;
+  harMerEnnEnYtelse: boolean | false;
 } & DetaljertFeilutbetalingPeriode
 
 export type CustomPerioder = {
@@ -60,6 +61,7 @@ export interface InitialValuesDetailForm {
   periodenErForeldet?: boolean;
   foreldetBegrunnelse?: string;
   vurderingBegrunnelse?: string;
+  harMerEnnEnYtelse: boolean | false;
   [VilkarResultat.FEIL_OPPLYSNINGER]?: InitialValuesAktsomhetForm;
   [VilkarResultat.FORSTO_BURDE_FORSTAATT]?: InitialValuesAktsomhetForm;
   [VilkarResultat.MANGELFULL_OPPLYSNING]?: InitialValuesAktsomhetForm;
@@ -75,6 +77,7 @@ export type CustomVilkarsVurdertePeriode = {
 
 interface OwnProps {
   data: DataForPeriode;
+  periode: CustomVilkarsVurdertePeriode;
   behandlingFormPrefix: string;
   skjulPeriode: (...args: any[]) => any;
   setNestePeriode: (...args: any[]) => any;
@@ -174,17 +177,28 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
   };
 
   onEndrePeriodeForKopi = (event: any, vurdertePerioder: CustomVilkarsVurdertePeriode[]) => {
-    const { change: changeValue } = this.props;
+    const { change: changeValue, periode } = this.props;
 
     const fomTom = event.target.value.split('_');
     const kopierDenne = vurdertePerioder.find((per) => per.fom === fomTom[0] && per.tom === fomTom[1]);
     const vilkårResultatType = kopierDenne.valgtVilkarResultatType;
     const resultatType = kopierDenne[vilkårResultatType];
 
+    const arbeidendeResultatType = JSON.parse(JSON.stringify(resultatType));
+    // const arbeidendeResultatType = { ...resultatType };
+    if (vilkårResultatType !== VilkarResultat.GOD_TRO) {
+      const { handletUaktsomhetGrad } = arbeidendeResultatType;
+      if (handletUaktsomhetGrad !== Aktsomhet.FORSETT && periode.harMerEnnEnYtelse !== kopierDenne.harMerEnnEnYtelse) {
+        arbeidendeResultatType[handletUaktsomhetGrad].andelSomTilbakekreves = null;
+        arbeidendeResultatType[handletUaktsomhetGrad].andelSomTilbakekrevesManuell = null;
+        arbeidendeResultatType[handletUaktsomhetGrad].belopSomSkalTilbakekreves = null;
+      }
+    }
+
     changeValue('valgtVilkarResultatType', vilkårResultatType, true, false);
     changeValue('begrunnelse', kopierDenne.begrunnelse, true, false);
     changeValue('vurderingBegrunnelse', kopierDenne.vurderingBegrunnelse, true, false);
-    changeValue(vilkårResultatType, resultatType);
+    changeValue(vilkårResultatType, arbeidendeResultatType);
 
     event.preventDefault();
   }
@@ -230,7 +244,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
         />
         <VerticalSpacer twentyPx />
         {reduserteBelop.map((belop) => (
-          <>
+          <React.Fragment key={belop.belop}>
             <Normaltekst>
               <FormattedMessage
                 id={belop.erTrekk ? 'TilbakekrevingPeriodeForm.FeilutbetaltBelopTrekk' : 'TilbakekrevingPeriodeForm.FeilutbetaltBelopEtterbetaling'}
@@ -238,7 +252,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
               />
             </Normaltekst>
             <VerticalSpacer eightPx />
-          </>
+          </React.Fragment>
         ))}
         <TilbakekrevingAktivitetTabell ytelser={data.ytelser} />
         <VerticalSpacer twentyPx />
@@ -498,6 +512,7 @@ export const periodeFormBuildInitialValues = (periode: any, foreldelsePerioder: 
   const initialValues = {
     valgtVilkarResultatType: vilkarResultatKode,
     begrunnelse: decodeHtmlEntity(begrunnelse),
+    harMerEnnEnYtelse: periode.ytelser.length > 1,
     ...foreldetData,
   };
 
