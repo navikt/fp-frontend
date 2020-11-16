@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
+import { ariaCheck, FormValidationError, isRequiredMessage } from '@fpsak-frontend/utils';
 
 const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean) => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
@@ -20,7 +20,7 @@ interface PureOwnProps {
   isDirty?: boolean;
   isBehandlingFormSubmitting: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
   isBehandlingFormDirty: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
-  hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: { id: string; }[]) => (state: any) => boolean;
+  hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: FormValidationError) => (state: any) => boolean;
   isReadOnly: boolean;
   isSubmittable: boolean;
   textCode?: string;

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  dateAfterOrEqual, hasValidDate, required, dateIsBefore,
+  dateAfterOrEqual, hasValidDate, required, dateIsBefore, FormValidationError,
 } from '@fpsak-frontend/utils';
 import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { ArrowBox } from '@fpsak-frontend/shared-components';
@@ -26,8 +26,10 @@ const AA_REGISTERET = 'aa-registeret';
 // METHODS
 // ----------------------------------------------------------------------------------
 
-const arbeidsforholdTomDatoPickerErrorMsg = (dato: any) => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
-const dateMustBeBeforeSkjaeringstidspunkt = (dato: any) => [{ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeSkjaeringstidspunkt' }, { dato }];
+const arbeidsforholdTomDatoPickerErrorMsg = (dato: string): FormValidationError => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
+const dateMustBeBeforeSkjaeringstidspunkt = (dato: string): FormValidationError => [
+  { id: 'PersonArbeidsforholdDetailForm.DateNotBeforeSkjaeringstidspunkt' }, { dato },
+];
 
 const isKildeAaRegisteret = (arbeidsforhold: any) => arbeidsforhold.kilde && arbeidsforhold.kilde.navn.toLowerCase() === AA_REGISTERET;
 

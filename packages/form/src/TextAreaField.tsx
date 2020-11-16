@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field, Validator } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Textarea as NavTextarea, TextareaProps } from 'nav-frontend-skjema';
 import EtikettFokus from 'nav-frontend-etiketter';
@@ -26,11 +26,7 @@ interface TextAreaWithBadgeProps {
 interface TextAreaFieldProps {
   name: string;
   label: LabelType;
-  validate?: (((text: any) => ({ id: string; length?: undefined } | { length: any; id?: undefined })[])
-    | ((value: any, allValues: any, props: any) => { id: string }[])
-    | ((value: any) => { id: string }[])
-    | ((text: any) => ({ id: string; text?: undefined }
-    | { text: any; id?: undefined })[]))[];
+  validate?: Validator | Validator[];
   readOnly?: boolean;
   dataId?: string;
   textareaClass?: string;

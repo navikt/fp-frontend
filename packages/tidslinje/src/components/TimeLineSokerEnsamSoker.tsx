@@ -10,7 +10,7 @@ import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 
 import styles from './timeLineSokerEnsamSoker.less';
 
-const isKvinne = (kode) => kode === navBrukerKjonn.KVINNE;
+const isKvinne = (kode: string): boolean => kode === navBrukerKjonn.KVINNE;
 
 /**
  * TimeLineSoker
