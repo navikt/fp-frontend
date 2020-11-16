@@ -12,10 +12,13 @@ import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import withReduxProvider from '../../decorators/withRedux';
+import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { Vilkar } from '@fpsak-frontend/types';
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import alleKodeverk from '../mocks/alleKodeverk.json';
+import withReduxProvider from '../../decorators/withRedux';
 
 const standardFom = '2019-09-16';
 const standardTom = undefined;
@@ -24,7 +27,7 @@ const behandling = {
   id: 1,
   versjon: 1,
   venteArsakKode: venteArsakType.VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG,
-};
+} as Behandling;
 const lagPGIVerdier = () => ([
   {
     beløp: 124412,
@@ -39,17 +42,21 @@ const lagPGIVerdier = () => ([
     årstall: 2015,
   },
 ]);
-const lagAPMedKode = (kode) => ([{
+const lagAPMedKode = (kode) => ({
   definisjon: {
     kode,
+    kodeverk: 'test',
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'test',
   },
   begrunnelse: null,
+  kanLoses: true,
+  erAktivt: true,
   endretAv: 'B123456',
   endretTidspunkt: '2020-01-20',
-}]);
+});
 
 const vilkarMedUtfall = (kode) => [{
   vilkarType: {
@@ -60,9 +67,9 @@ const vilkarMedUtfall = (kode) => [{
     kode,
     kodeverk: 'vilkarStatus',
   },
-}];
+} as Vilkar];
 
-const lagArbeidsforhold = (arbeidsgiverNavn, arbeidsgiverId, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, stillingsNavn, stillingsProsent) => ({
+const lagArbeidsforhold = (arbeidsgiverNavn, arbeidsgiverId, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, navn, prosent) => ({
   arbeidsgiverNavn,
   arbeidsgiverId,
   startdato: '2018-10-09',
@@ -82,11 +89,11 @@ const lagArbeidsforhold = (arbeidsgiverNavn, arbeidsgiverId, arbeidsforholdId, e
   },
   naturalytelseBortfaltPrÅr: null,
   naturalytelseTilkommetPrÅr: null,
-  stillingsNavn,
-  stillingsProsent,
+  stillingsProsent: prosent,
+  stillingsNavn: navn,
 });
 
-const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegrensetArbeidsforhold, skalFastsetteGrunnlag) => ({
+const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegrensetArbeidsforhold, skalFastsetteGrunnlag = false) => ({
   beregningsgrunnlagTom: '2019-08-31',
   beregningsgrunnlagFom: '2019-06-01',
   aktivitetStatus: {
@@ -100,6 +107,8 @@ const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegr
   bruttoPrAar: overstyrtPrAar || beregnetPrAar,
   avkortetPrAar: 360000,
   redusertPrAar: 599000,
+  pgiVerdier: null,
+  pgiSnitt: null,
   erTidsbegrensetArbeidsforhold,
   skalFastsetteGrunnlag,
   erNyIArbeidslivet: null,
@@ -130,6 +139,8 @@ const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegr
     naturalytelseBortfaltPrÅr: null,
     naturalytelseTilkommetPrÅr: null,
   },
+  dekningsgrad: null,
+  bortfaltNaturalytelse: null,
   lagtTilAvSaksbehandler: false,
   belopPrMndEtterAOrdningen: 30000,
   belopPrAarEtterAOrdningen: 360000,
@@ -137,6 +148,7 @@ const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegr
   originalDagsatsFraTilstøtendeYtelse: null,
   fordeltPrAar: null,
   erTilkommetAndel: false,
+  næringer: null,
 });
 
 const lagPeriode = (andelsliste, dagsats, fom, tom, periodeAarsaker) => ({
@@ -161,6 +173,7 @@ const lagSammenligningsGrunnlag = (kode, rapportertPrAar, avvikProsent, differan
   avvikProsent,
   sammenligningsgrunnlagType: {
     kode,
+    kodeverk: 'test',
   },
   differanseBeregnet: differanse,
 });
@@ -183,13 +196,7 @@ const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
     beregningsgrunnlagPeriode: perioder,
     dekningsgrad: 80,
     grunnbeløp: 99858,
-    sammenligningsgrunnlag: {
-      sammenligningsgrunnlagFom: '2018-09-01',
-      sammenligningsgrunnlagTom: '2019-08-31',
-      rapportertPrAar: 330000,
-      avvikPromille: 91,
-      avvikProsent: 9,
-    },
+    sammenligningsgrunnlag: null,
     sammenligningsgrunnlagPrStatus,
     ledetekstBrutto: 'Brutto beregningsgrunnlag',
     ledetekstAvkortet: 'Avkortet beregningsgrunnlag (6G=599148)',
@@ -204,65 +211,8 @@ const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
       arbeidsforholdMedLønnsendringUtenIM: null,
       besteberegningAndeler: null,
       vurderMottarYtelse: null,
-      avklarAktiviteter: {
-        aktiviteterTomDatoMapping: [{
-          tom: '2019-09-16',
-          aktivitete: [{
-            arbeidsgiverNavn: 'BEDRIFT AS',
-            arbeidsgiverId: '910909088',
-            fom: '2018-10-09',
-            tom: '9999-12-31',
-            arbeidsforholdId: '2a3c0f5c-3d70-447a-b0d7-cd242d5155bb',
-            arbeidsforholdType: {
-              kode: 'ARBEID',
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            },
-            aktørId: null,
-            skalBrukes: null,
-          },
-          ],
-        },
-        ],
-      },
       vurderBesteberegning: null,
-      andelerForFaktaOmBeregning: [{
-        belopReadOnly: 30000,
-        fastsattBelop: null,
-        inntektskategori: {
-          kode: 'ARBEIDSTAKER',
-          kodeverk: 'INNTEKTSKATEGORI',
-        },
-        aktivitetStatus: {
-          kode: 'AT',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-        refusjonskrav: 30000,
-        visningsnavn: 'BEDRIFT AS (910909088) ...55bb',
-        arbeidsforhold: {
-          arbeidsgiverNavn: 'BEDRIFT AS',
-          arbeidsgiverId: '910909088',
-          startdato: '2018-10-09',
-          opphoersdato: null,
-          arbeidsforholdId: '2a3c0f5c-3d70-447a-b0d7-cd242d5155bb',
-          arbeidsforholdType: {
-            kode: 'ARBEID',
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          },
-          aktørId: null,
-          refusjonPrAar: null,
-          belopFraInntektsmeldingPrMnd: 30000,
-          organisasjonstype: {
-            kode: 'VIRKSOMHET',
-            kodeverk: 'ORGANISASJONSTYPE',
-          },
-          naturalytelseBortfaltPrÅr: null,
-          naturalytelseTilkommetPrÅr: null,
-        },
-        andelsnr: 1,
-        skalKunneEndreAktivitet: false,
-        lagtTilAvSaksbehandler: false,
-      },
-      ],
+      andelerForFaktaOmBeregning: [],
       vurderMilitaer: null,
       refusjonskravSomKommerForSentListe: null,
     },
@@ -402,7 +352,7 @@ export default {
 };
 
 export const arbeidstakerUtenAvvik = () => {
-  const andeler = [lagAndel('AT', 450000, undefined, false)];
+  const andeler = [lagAndel('AT', 450000, undefined, false, false)];
   const perioder = [lagPeriodeMedDagsats(andeler, 1384.6153)];
   const statuser = [lagStatus('AT')];
   const sammenligningsgrunnlagPrStatus = [
@@ -411,22 +361,23 @@ export const arbeidstakerUtenAvvik = () => {
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
+      beregningsgrunnlag={object('beregningsgrunnlag', bg as Beregningsgrunnlag)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const brukersAndelUtenAvvik = () => {
   const andeler = [
-    lagAndel('BA', 34230, undefined, false),
-    lagAndel('AT', 534230, undefined, false),
+    lagAndel('BA', 34230, undefined, false, false),
+    lagAndel('AT', 534230, undefined, false, false),
   ];
 
   const perioder = [lagPeriodeMedDagsats(andeler, 2340)];
@@ -442,20 +393,21 @@ export const brukersAndelUtenAvvik = () => {
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
+      beregningsgrunnlag={object('beregningsgrunnlag', bg as Beregningsgrunnlag)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const arbeidstakerMedAvvik = () => {
-  const andeler = [lagAndel('AT', 300000, undefined, false)];
+  const andeler = [lagAndel('AT', 300000, undefined, false, false)];
   andeler[0].skalFastsetteGrunnlag = true;
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT')];
@@ -463,23 +415,25 @@ export const arbeidstakerMedAvvik = () => {
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 25.009999999, -79059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   delete bg.sammenligningsgrunnlagInntekter;
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
+      behandling={object('behandling', behandling) as Behandling}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const arbeidstakerFrilansMedAvvikMedGradering = () => {
-  const andeler = [lagAndel('AT', 551316, undefined, false), lagAndel('FL', 596000, undefined, false)];
+  const andeler = [lagAndel('AT', 551316, undefined, false, false), lagAndel('FL', 596000, undefined, false, false)];
   andeler[0].skalFastsetteGrunnlag = true;
   andeler[1].skalFastsetteGrunnlag = false;
   const perioder = [lagStandardPeriode(andeler)];
@@ -490,50 +444,49 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
   ];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.andelerMedGraderingUtenBG = andeler;
-  const aksjonsPunkter1 = lagAPMedKode(aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
-  const aksjonsPunkter2 = lagAPMedKode(aksjonspunktCodes.AUTO_VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
-  aksjonsPunkter1[0].status.kode = aksjonspunktStatus.UTFORT;
-  aksjonsPunkter1[0].begrunnelse = 'Dette er begrunnelsen';
+  const ap = lagAPMedKode(aksjonspunktCodes.AUTO_VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', aksjonsPunkter2)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const militær = () => {
   const andeler = [
-    lagAndel('AT', 110232, undefined, false),
-    lagAndel('MS', 300000, undefined, false)];
+    lagAndel('AT', 110232, undefined, false, false),
+    lagAndel('MS', 300000, undefined, false, false)];
   const perioder = [lagPeriodeMedDagsats(andeler, 1234)];
   const statuser = [lagStatus('AT'), lagStatus('MS')];
-  const bg = lagBG(perioder, statuser);
+  const bg = lagBG(perioder, statuser, null);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const selvstendigNæringsdrivende = () => {
   const andeler = [lagAndel('SN', 300000, undefined, false, true)];
-  const perioder = [lagPeriodeMedDagsats(andeler, null, true)];
+  const perioder = [lagPeriodeMedDagsats(andeler, null)];
   const statuser = [lagStatus('SN')];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -576,18 +529,19 @@ export const selvstendigNæringsdrivende = () => {
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.21243, -177059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
 
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -598,11 +552,14 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
     lagAndel('AT', 132250, undefined, true, true),
     lagAndel('AT', 140250, undefined, true, true),
     lagAndel('FL', 133250, undefined, undefined)];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Andeby bank', '987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf', '100');
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS', '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '200', '2019-11-11');
-  andeler[2].arbeidsforhold = lagArbeidsforhold('Svaneby sykehjem', '93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '300');
-  andeler[1].arbeidsforhold.stillingsProsent = '60';
-  andeler[1].arbeidsforhold.stillingsNavn = 'Butikkmedarbeider';
+  andeler[0].arbeidsforhold = lagArbeidsforhold('Andeby bank', '987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf', '100', null, null, null);
+  andeler[1].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS',
+    '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
+    '200',
+    '2019-11-11',
+    'Butikkmedarbeider',
+    '60');
+  andeler[2].arbeidsforhold = lagArbeidsforhold('Svaneby sykehjem', '93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '300', null, null, null);
   const perioder = [lagPeriode(andeler, undefined, '2019-09-16', '2019-09-29', []),
     lagTidsbegrensetPeriode(andeler, '2019-09-30', '2019-10-15'),
     lagPeriode(andeler, undefined, '2019-10-15', null, [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }])];
@@ -610,18 +567,19 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
   const sammenligningsgrunnlagPrStatus = [
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.2, 77059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -629,8 +587,8 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
 export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
   const andeler = [
     lagAndel('SN', 300000, undefined, undefined, true),
-    lagAndel('AT', 130250, undefined, undefined),
-    lagAndel('FL', 230250, undefined, undefined)];
+    lagAndel('AT', 130250, undefined, undefined, false),
+    lagAndel('FL', 230250, undefined, undefined, false)];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
   andeler[0].pgiSnitt = 154985;
@@ -639,26 +597,27 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
   const sammenligningsgrunnlagPrStatus = [
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.2, 77059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const naturalYtelse = () => {
-  const andel1 = lagAndel('AT', 240000, undefined, undefined);
-  const andel2 = lagAndel('AT', 740000, 744000, undefined);
-  const andel3 = lagAndel('AT', 750000, 755000, undefined);
+  const andel1 = lagAndel('AT', 240000, undefined, undefined, false);
+  const andel2 = lagAndel('AT', 740000, 744000, undefined, false);
+  const andel3 = lagAndel('AT', 750000, 755000, undefined, false);
   andel1.arbeidsforhold.arbeidsgiverNavn = 'BEDRIFT AS 1';
   andel1.arbeidsforhold.arbeidsgiverId = '9109090881';
   andel2.arbeidsforhold.arbeidsgiverNavn = 'BEDRIFT AS 2';
@@ -710,51 +669,51 @@ export const naturalYtelse = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const arbeidstakerDagpengerOgSelvstendigNæringsdrivende = () => {
   const andeler = [
-    lagAndel('AT', 596000, undefined, undefined),
-    lagAndel('DP', 331000, undefined, undefined),
-    lagAndel('SN', 331000, undefined, undefined),
+    lagAndel('AT', 596000, undefined, undefined, false),
+    lagAndel('DP', 331000, undefined, undefined, false),
+    lagAndel('SN', 331000, undefined, undefined, false),
   ];
   const pgi = lagPGIVerdier();
   andeler[2].pgiVerdier = pgi;
   andeler[2].pgiSnitt = 154985;
   const statuser = [lagStatus('AT_SN'), lagStatus('DP')];
   const perioder = [lagPeriodeMedDagsats(andeler, 923)];
-  const bg = lagBG(perioder, statuser);
+  const bg = lagBG(perioder, statuser, null);
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const graderingPåBeregningsgrunnlagUtenPenger = () => {
   const andeler = [
-    lagAndel('SN', 300000, undefined, undefined),
-    lagAndel('AT', 137250, undefined, undefined),
-    lagAndel('FL', 130250, undefined, undefined)];
+    lagAndel('SN', 300000, undefined, undefined, false),
+    lagAndel('AT', 137250, undefined, undefined, false),
+    lagAndel('FL', 130250, undefined, undefined, false)];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
   andeler[0].pgiSnitt = 654985;
@@ -765,25 +724,26 @@ export const graderingPåBeregningsgrunnlagUtenPenger = () => {
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.2, -77059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.andelerMedGraderingUtenBG = andeler;
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
   const andeler = [
     lagAndel('SN', 328105, undefined, undefined, false),
-    lagAndel('AT', 72194, undefined, undefined),
+    lagAndel('AT', 72194, undefined, undefined, false),
   ];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -820,13 +780,13 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -869,18 +829,19 @@ export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBe
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.2, -77059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 80;
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -926,30 +887,32 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
 
 export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
   const andeler = [
-    lagAndel('AT', 395232, undefined, false),
-    lagAndel('AT', 78000, undefined, false),
-    lagAndel('AT', 88084, undefined, false),
+    lagAndel('AT', 395232, undefined, false, false),
+    lagAndel('AT', 78000, undefined, false, false),
+    lagAndel('AT', 88084, undefined, false, false),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Garslien transport og Gardiner', '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das');
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg', '9478541255', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100');
-  andeler[2].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg', '9478541255', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '200', '2019-11-11');
-  andeler[1].arbeidsforhold.stillingsProsent = '30';
-  andeler[1].arbeidsforhold.stillingsNavn = 'Assistent';
-  andeler[2].arbeidsforhold.stillingsProsent = '17,5';
-  andeler[2].arbeidsforhold.stillingsNavn = 'Assistent';
+  andeler[0].arbeidsforhold = lagArbeidsforhold('Garslien transport og Gardiner', '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', null, null, null, null);
+  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg', '9478541255', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100', null, 'Assistent', '30');
+  andeler[2].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg',
+    '9478541255',
+    'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845',
+    '200',
+    '2019-11-11',
+    'Assistent',
+    '17,5');
   const perioder = [lagPeriodeMedDagsats(andeler, 1696)];
   perioder[0].redusertPrAar = 441053;
   const statuser = [lagStatus('AT')];
@@ -961,13 +924,13 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -997,12 +960,13 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
 
     />
   );
@@ -1023,17 +987,19 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
     lagSammenligningsGrunnlag(sammenligningType.AT, 169647, 105.4, 178929),
   ];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
 
     />
   );
@@ -1060,14 +1026,14 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1076,12 +1042,19 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
     lagAndel('AT', 395232, undefined, false, true),
     lagAndel('AT', 156084, undefined, true, true),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS', '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100');
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg', '93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '200', '2019-11-11');
-  andeler[0].arbeidsforhold.stillingsProsent = '60';
-  andeler[0].arbeidsforhold.stillingsNavn = 'Butikkmedarbeider';
-  andeler[1].arbeidsforhold.stillingsProsent = '30';
-  andeler[1].arbeidsforhold.stillingsNavn = 'Assistent';
+  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS',
+    '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
+    '100',
+    null,
+    'Butikkmedarbeider',
+    '60');
+  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg',
+    '93178545',
+    'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845',
+    '200',
+    '2019-11-11',
+    'Assistent',
+    '30');
   const perioder = [lagPeriode(andeler, undefined, '2019-09-16', '2019-09-29', []),
     lagTidsbegrensetPeriode(andeler, '2019-09-30', '2019-10-15'),
   ];
@@ -1089,17 +1062,19 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
   const sammenligningsgrunnlagPrStatus = [
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 404257, 36.4, 147059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
 
     />
   );
@@ -1109,12 +1084,17 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
     lagAndel('AT', 395232, undefined, false, true),
     lagAndel('AT', 156084, undefined, true, true),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS', '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100');
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg', '93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '200', '2019-11-11');
-  andeler[0].arbeidsforhold.stillingsProsent = '60';
-  andeler[0].arbeidsforhold.stillingsNavn = 'Butikkmedarbeider';
-  andeler[1].arbeidsforhold.stillingsProsent = '30';
-  andeler[1].arbeidsforhold.stillingsNavn = 'Assistent';
+  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS',
+    '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
+    '100',
+    null,
+    'Butikkmedarbeider',
+    '60');
+  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg',
+    '93178545',
+    'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845',
+    '200',
+    '2019-11-11', 'Assistent', '30');
   const klonetAndeler = JSON.parse(JSON.stringify(andeler));
   const perioder = [lagPeriode(andeler, undefined, '2019-09-16', '2019-09-29', []),
     lagTidsbegrensetPeriode(klonetAndeler, '2019-09-30', '2019-10-15'),
@@ -1149,14 +1129,14 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1175,13 +1155,13 @@ export const FrilansSide8 = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1195,18 +1175,19 @@ export const FrilansMedAksjonspunktSide9 = () => {
     lagSammenligningsGrunnlag(sammenligningType.FL, 504257, 33.1, 167000),
   ];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1222,17 +1203,19 @@ export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
   ];
 
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
 
     />
   );
@@ -1261,14 +1244,14 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1313,13 +1296,13 @@ export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 =
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1381,13 +1364,13 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1399,7 +1382,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
   andeler[0].pgiVerdier = pgi;
   andeler[0].pgiSnitt = 631129;
 
-  const perioder = [lagPeriodeMedDagsats(andeler)];
+  const perioder = [lagPeriodeMedDagsats(andeler, null)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = andeler[0].pgiSnitt;
   delete perioder[0].redusertPrAar;
   delete perioder[0].avkortetPrAar;
@@ -1428,18 +1411,19 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 900000, 29.9, -268871)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 100;
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1488,14 +1472,14 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1507,7 +1491,7 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
   andeler[0].pgiVerdier = pgi;
   andeler[0].pgiSnitt = 174544;
   andeler[0].overstyrtPrAar = 522864;
-  const perioder = [lagPeriodeMedDagsats(andeler)];
+  const perioder = [lagPeriodeMedDagsats(andeler, null)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = andeler[0].pgiSnitt;
   delete perioder[0].redusertPrAar;
   delete perioder[0].avkortetPrAar;
@@ -1541,14 +1525,14 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1561,7 +1545,7 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
   andeler[0].pgiSnitt = 174544;
   andeler[0].overstyrtPrAar = 780342;
   andeler[0].erNyIArbeidslivet = true;
-  const perioder = [lagPeriodeMedDagsats(andeler)];
+  const perioder = [lagPeriodeMedDagsats(andeler, null)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = andeler[0].pgiSnitt;
   delete perioder[0].redusertPrAar;
   delete perioder[0].avkortetPrAar;
@@ -1595,14 +1579,14 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1647,13 +1631,13 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnStorreEnnAtOgStorreEnn6g
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1699,13 +1683,13 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1719,7 +1703,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
   andeler[0].pgiVerdier = pgi;
   andeler[0].pgiSnitt = 631129;
 
-  const perioder = [lagPeriodeMedDagsats(andeler)];
+  const perioder = [lagPeriodeMedDagsats(andeler, null)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = andeler[1].bruttoPrAar;
 
   const statuser = [lagStatus('AT_SN')];
@@ -1745,18 +1729,19 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 900000, 29.9, -268871)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   delete bg.dekningsgrad;
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1800,20 +1785,20 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 80;
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
-  ap[0].begrunnelse = 'Endring eller nyoppstartet begrunnelse';
-  ap[0].status.kode = 'UTFO';
+  ap.begrunnelse = 'Endring eller nyoppstartet begrunnelse';
+  ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1857,20 +1842,20 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 80;
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
-  ap[0].begrunnelse = 'Endring eller nyoppstartet begrunnelse';
-  ap[0].status.kode = 'UTFO';
+  ap.begrunnelse = 'Endring eller nyoppstartet begrunnelse';
+  ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1884,7 +1869,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
   andeler[0].pgiVerdier = pgi;
   andeler[0].pgiSnitt = 631129;
 
-  const perioder = [lagPeriodeMedDagsats(andeler)];
+  const perioder = [lagPeriodeMedDagsats(andeler, null)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = andeler[1].bruttoPrAar;
 
   const statuser = [lagStatus('AT_FL_SN')];
@@ -1910,18 +1895,19 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 900000, 29.9, -268871)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   delete bg.dekningsgrad;
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -1977,14 +1963,14 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2040,14 +2026,14 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', true)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2059,20 +2045,21 @@ export const YtelseFraNavSide26 = () => {
   const perioder = [lagPeriodeMedDagsats(andeler, 1215)];
   perioder[0].redusertPrAar = 316000;
   perioder[0].bruttoPrAar = 395232;
-  const bg = lagBG(perioder, statuser);
+  const bg = lagBG(perioder, statuser, null);
   bg.dekningsgrad = 80;
+  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS))}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2091,14 +2078,14 @@ export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2107,7 +2094,12 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
     lagAndel('AT', 107232, undefined, false, true),
     lagAndel('AAP', 272304, undefined, false)];
   andeler[0].overstyrtPrAar = 167000;
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Garslinen transport og Gardiner AS', '987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf');
+  andeler[0].arbeidsforhold = lagArbeidsforhold('Garslinen transport og Gardiner AS',
+    '987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf',
+    null,
+    null,
+    null,
+    null);
   const perioder = [lagPeriodeMedDagsats(andeler, 379536 / 260)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 379536;
   delete perioder[0].redusertPrAar;
@@ -2123,14 +2115,14 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2156,13 +2148,13 @@ export const arbeidstakerDagpengerMedBesteberegningSide28 = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2181,20 +2173,20 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeSide29 = () => {
   perioder[0].redusertPrAar = 479318;
   perioder[0].beregnetPrAar = 631129;
   perioder[0].avkortetPrAar = 599148;
-  const bg = lagBG(perioder, statuser);
+  const bg = lagBG(perioder, statuser, null);
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2220,13 +2212,13 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeFnOgDpOverstigerSNSide
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2252,13 +2244,13 @@ export const ArbeidstagerDagpengerOgSelvstendigNæringsdrivendeATOgDpOverstigerS
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2303,14 +2295,14 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', ap)}
-      submitCallback={action('button-click')}
+      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
-      alleKodeverk={alleKodeverk}
-
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
@@ -2331,12 +2323,13 @@ export const militærOgSiviltjenesteSide33 = () => {
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
       aksjonspunkter={object('aksjonspunkter', [])}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
       isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
+      status=""
     />
   );
 };
