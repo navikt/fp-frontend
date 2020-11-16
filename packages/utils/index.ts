@@ -12,6 +12,7 @@ export {
   formatCurrencyWithKr,
   formatCurrencyNoKr,
   removeSpacesFromNumber,
+  parseCurrencyInput,
 } from './src/currencyUtils';
 export {
   addDaysToDate,
@@ -97,8 +98,6 @@ export {
   notDash,
   required,
   maxLengthOrFodselsnr,
-  isArbeidsProsentVidUtsettelse100,
-  isutbetalingPlusArbeidsprosentMerEn100,
   isTrekkdagerMerEnnNullUtsettelse,
   isUtbetalingMerEnnNullUtsettelse,
   hasValidOrgNumber,
@@ -116,6 +115,8 @@ export {
   invalidDecimalMessage,
   dateNotBeforeOrEqualMessage,
   dateNotAfterOrEqualMessage,
+  merEn100ProsentMessage,
+  arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
 } from './src/validation/messages';
 export type { FormValidationError } from './src/validation/messages';
 

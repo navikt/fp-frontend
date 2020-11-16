@@ -1,6 +1,6 @@
 export type FormValidationError = [{
   id: string;
-}, ...Array<{ text: string } | { length: number } | { limit: string } | { value: any }>];
+}, ...Array<{ text: string } | { length: number } | { limit: string } | { value: any } | { dato: any }>];
 
 export const isRequiredMessage = (): FormValidationError => ([{ id: 'ValidationMessage.NotEmpty' }]);
 export const minLengthMessage = (length: number): FormValidationError => ([{ id: 'ValidationMessage.MinLength' }, { length }]);
@@ -14,13 +14,13 @@ export const invalidDecimalMessage = (text: string): FormValidationError => ([{ 
 export const dateNotBeforeOrEqualMessage = (limit: string): FormValidationError => ([{ id: 'ValidationMessage.DateNotBeforeOrEqual' }, { limit }]);
 export const dateNotAfterOrEqualMessage = (limit: string): FormValidationError => ([{ id: 'ValidationMessage.DateNotAfterOrEqual' }, { limit }]);
 export const dateRangesOverlappingMessage = (): FormValidationError => ([{ id: 'ValidationMessage.DateRangesOverlapping' }]);
-export const datesNotEqual = (value): FormValidationError => ([{ id: 'ValidationMessage.DatesNotEqual' }, { value }]);
+export const datesNotEqual = (value: string): FormValidationError => ([{ id: 'ValidationMessage.DatesNotEqual' }, { value }]);
 export const invalidFodselsnummerFormatMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidFodselsnummerFormat' }]);
 export const invalidFodselsnummerMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidFodselsnummer' }]);
 export const sammeFodselsnummerSomSokerMessage = (): FormValidationError => ([{ id: 'ValidationMessage.SammeFodselsnummerSomSoker' }]);
 export const invalidSaksnummerOrFodselsnummerFormatMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidSaksnummerOrFodselsnummerFormat' }]);
 export const invalidTextMessage = (text: string): FormValidationError => ([{ id: 'ValidationMessage.InvalidText' }, { text }]);
-export const invalidValueMessage = (value): FormValidationError => ([{ id: 'ValidationMessage.InvalidValue' }, { value }]);
+export const invalidValueMessage = (value: string): FormValidationError => ([{ id: 'ValidationMessage.InvalidValue' }, { value }]);
 export const arrayMinLengthMessage = (length: number): FormValidationError => ([{ id: 'ValidationMessage.ArrayMinLength' }, { length }]);
 export const invalidDatesInPeriodMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidDatesInPeriod' }]);
 export const invalidPeriodMessage = (): FormValidationError => ([{ id: 'ValidationMessage.InvalidPeriod' }]);

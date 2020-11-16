@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '../formats';
+import { FormValidationError } from './messages';
 import {
   dateAfterOrEqual,
   dateAfterOrEqualToToday,
@@ -178,7 +179,7 @@ describe('Validators', () => {
       const result = hasValidInteger(2.2);
       expect(result).has.length(2);
       expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidInteger' });
-      expect(result[1]).is.eql({ text: 2.2 });
+      expect(result[1]).is.eql({ text: '2.2' });
     });
 
     it('skal feile når input ikke er et gyldig tall', () => {
@@ -199,7 +200,7 @@ describe('Validators', () => {
       const result = hasValidDecimal(2.233);
       expect(result).has.length(2);
       expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDecimal' });
-      expect(result[1]).is.eql({ text: 2.233 });
+      expect(result[1]).is.eql({ text: '2.233' });
     });
 
     it('skal feile når input ikke er et gyldig tall', () => {
@@ -512,7 +513,7 @@ describe('Validators', () => {
   });
 
   describe('dateIsBefore', () => {
-    const errorMessageFunction = (dato) => ([{ id: 'ErrorMsg.Msg' }, { dato }]);
+    const errorMessageFunction = (dato: string) => ([{ id: 'ErrorMsg.Msg' }, { dato }]) as FormValidationError;
     const dateToCheckAgainst = '2019-08-05';
     it('skal ikke feile når input datoene er før datoen som blir sjekket mot', () => {
       const result = dateIsBefore(dateToCheckAgainst, errorMessageFunction)('2019-08-04');
