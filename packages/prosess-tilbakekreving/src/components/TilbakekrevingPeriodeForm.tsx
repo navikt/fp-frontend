@@ -77,7 +77,7 @@ export type CustomVilkarsVurdertePeriode = {
 
 interface OwnProps {
   data: DataForPeriode;
-  periode: CustomVilkarsVurdertePeriode;
+  periode?: CustomVilkarsVurdertePeriode;
   behandlingFormPrefix: string;
   skjulPeriode: (...args: any[]) => any;
   setNestePeriode: (...args: any[]) => any;
