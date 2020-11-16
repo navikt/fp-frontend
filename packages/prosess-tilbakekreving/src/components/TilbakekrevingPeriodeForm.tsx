@@ -47,7 +47,7 @@ export type CustomPeriode = {
   erTotalBelopUnder4Rettsgebyr: boolean;
   foreldelseVurderingType?: Kodeverk;
   begrunnelse?: string;
-  harMerEnnEnYtelse: boolean | false;
+  harMerEnnEnYtelse: boolean;
 } & DetaljertFeilutbetalingPeriode
 
 export type CustomPerioder = {
@@ -61,7 +61,7 @@ export interface InitialValuesDetailForm {
   periodenErForeldet?: boolean;
   foreldetBegrunnelse?: string;
   vurderingBegrunnelse?: string;
-  harMerEnnEnYtelse: boolean | false;
+  harMerEnnEnYtelse: boolean;
   [VilkarResultat.FEIL_OPPLYSNINGER]?: InitialValuesAktsomhetForm;
   [VilkarResultat.FORSTO_BURDE_FORSTAATT]?: InitialValuesAktsomhetForm;
   [VilkarResultat.MANGELFULL_OPPLYSNING]?: InitialValuesAktsomhetForm;
@@ -184,21 +184,20 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
     const vilkårResultatType = kopierDenne.valgtVilkarResultatType;
     const resultatType = kopierDenne[vilkårResultatType];
 
-    const arbeidendeResultatType = JSON.parse(JSON.stringify(resultatType));
-    // const arbeidendeResultatType = { ...resultatType };
+    const resultatTypeKopi = JSON.parse(JSON.stringify(resultatType));
     if (vilkårResultatType !== VilkarResultat.GOD_TRO) {
-      const { handletUaktsomhetGrad } = arbeidendeResultatType;
+      const { handletUaktsomhetGrad } = resultatTypeKopi;
       if (handletUaktsomhetGrad !== Aktsomhet.FORSETT && periode.harMerEnnEnYtelse !== kopierDenne.harMerEnnEnYtelse) {
-        arbeidendeResultatType[handletUaktsomhetGrad].andelSomTilbakekreves = null;
-        arbeidendeResultatType[handletUaktsomhetGrad].andelSomTilbakekrevesManuell = null;
-        arbeidendeResultatType[handletUaktsomhetGrad].belopSomSkalTilbakekreves = null;
+        resultatTypeKopi[handletUaktsomhetGrad].andelSomTilbakekreves = null;
+        resultatTypeKopi[handletUaktsomhetGrad].andelSomTilbakekrevesManuell = null;
+        resultatTypeKopi[handletUaktsomhetGrad].belopSomSkalTilbakekreves = null;
       }
     }
 
     changeValue('valgtVilkarResultatType', vilkårResultatType, true, false);
     changeValue('begrunnelse', kopierDenne.begrunnelse, true, false);
     changeValue('vurderingBegrunnelse', kopierDenne.vurderingBegrunnelse, true, false);
-    changeValue(vilkårResultatType, arbeidendeResultatType);
+    changeValue(vilkårResultatType, resultatTypeKopi);
 
     event.preventDefault();
   }
