@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field, Validator } from 'redux-form';
 import moment from 'moment';
 
 import { ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
@@ -23,12 +23,7 @@ interface DatepickerFieldProps {
   };
   initialMonth?: Date;
   numberOfMonths?: number;
-  validate?: (((text: any) => ({ id: string; length?: undefined }
-    | { length: any; id?: undefined })[])
-    | ((value: any) => { id: string }[])
-    | ((text: any) => ({ id: string; limit?: undefined; } | { limit: any; id?: undefined; })[])
-    | ((text: any) => ({ id: string; text?: undefined; length?: undefined }
-    | { text: any; id?: undefined })[]))[]
+  validate?: Validator | Validator[];
 }
 
 const isoToDdMmYyyy = (string: string): string => {

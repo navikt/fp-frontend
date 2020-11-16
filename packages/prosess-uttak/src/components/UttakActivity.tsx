@@ -12,12 +12,13 @@ import {
   RadioGroupField, RadioOption, SelectField, TextAreaField, behandlingFormValueSelector, behandlingForm,
 } from '@fpsak-frontend/form';
 import {
+  FormValidationError,
+  merEn100ProsentMessage,
+  arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
   hasValidText,
-  isArbeidsProsentVidUtsettelse100,
   isTrekkdagerMerEnnNullUtsettelse,
   isUkerOgDagerVidNullUtbetalningsgrad,
   isUtbetalingMerEnnNullUtsettelse,
-  isutbetalingPlusArbeidsprosentMerEn100,
   isUtbetalingsgradMerSamitidigUttaksprosent,
   maxLength,
   minLength,
@@ -349,6 +350,33 @@ const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string) => {
   });
 };
 
+const isutbetalingPlusArbeidsprosentMerEn100 = (utbetalingsgrad: number, prosentArbeid: number): FormValidationError => {
+  if (utbetalingsgrad + prosentArbeid > 100) {
+    return merEn100ProsentMessage();
+  }
+  return null;
+};
+
+const getSum = (total: number, num: number): number => total + num;
+
+const isArbeidsProsentVidUtsettelse100 = (
+  values: FormValues,
+  aktivitetArray: AktivitetFieldArray[],
+): FormValidationError => {
+  const andelIArbeid = [0];
+  if (values.utsettelseType && values.erOppfylt && aktivitetArray) {
+    aktivitetArray.forEach((aktivitet) => {
+      andelIArbeid.push(aktivitet.prosentArbeid);
+    });
+    const prosentIArbeid = andelIArbeid.reduce(getSum);
+    if (prosentIArbeid < 100) {
+      return arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage();
+    }
+    return null;
+  }
+  return null;
+};
+
 const warningUttakActivity = (values: FormValues) => {
   let warnings = {};
   const rowArray: number[] = [];
@@ -374,6 +402,7 @@ const warningUttakActivity = (values: FormValues) => {
     values.UttakFieldArray.forEach((aktivitet, index: number) => {
       // @ts-ignore Fiks
       const utbetalingsgrad = Number.isNaN(aktivitet.utbetalingsgrad) ? aktivitet.utbetalingsgrad : parseFloat(aktivitet.utbetalingsgrad);
+      // @ts-ignore Fiks
       const utbetalingPlusArbeidsprosentMerEn100 = isutbetalingPlusArbeidsprosentMerEn100(utbetalingsgrad, aktivitet.prosentArbeid);
       if (utbetalingPlusArbeidsprosentMerEn100) {
         rowArray.push(index);

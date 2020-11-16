@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field, Validator } from 'redux-form';
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -9,7 +9,7 @@ import renderNavField from './renderNavField';
 interface CheckboxFieldProps {
   name: string;
   label: LabelType;
-  validate?: ((value: string) => boolean | undefined)[] | ((value: string) => boolean | undefined);
+  validate?: Validator | Validator[];
   readOnly?: boolean;
   className?: string;
   disabled?: boolean;

@@ -5,7 +5,7 @@ export const getKodeverknavnFraKode = (
   kodeverkType: string,
   kode: string,
   undertype?: string,
-) => {
+): string => {
   let kodeverkForType = alleKodeverk[kodeverkType];
   if (!kodeverkForType || kodeverkForType.length === 0) {
     return '';
@@ -24,6 +24,6 @@ export const getKodeverknavnFn = (
 ) => (
   kodeverkOjekt: Kodeverk,
   undertype?: string,
-) => getKodeverknavnFraKode(
+): string => getKodeverknavnFraKode(
   alleKodeverk, kodeverkTyper[kodeverkOjekt.kodeverk], kodeverkOjekt.kode, undertype,
 );

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
 
-import { AksjonspunktHelpText } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {
@@ -300,7 +300,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
     />);
-    const uttak = wrapper.find(AksjonspunktHelpText);
+    const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).has.length(1);
     const formattedMessage = uttak.find(FormattedMessage);
     expect(formattedMessage).has.length(1);
@@ -332,7 +332,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
     />);
-    const uttak = wrapper.find(AksjonspunktHelpText);
+    const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).has.length(1);
     const formattedMessage = uttak.find(FormattedMessage);
     expect(formattedMessage.prop('id')).to.eql('UttakPanel.manuellBehandlingÅrsakArbeidsforhold');

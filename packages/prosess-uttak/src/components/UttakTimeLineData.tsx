@@ -5,7 +5,7 @@ import { Element } from 'nav-frontend-typografi';
 
 import { calcDays, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
-  AksjonspunktHelpText, EditedIcon, Image, VerticalSpacer, FloatRight,
+  AksjonspunktHelpTextTemp, EditedIcon, Image, VerticalSpacer, FloatRight,
 } from '@fpsak-frontend/shared-components';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
@@ -281,11 +281,11 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
         </Row>
         {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak.kode !== '-' && (
         <>
-          <AksjonspunktHelpText isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
+          <AksjonspunktHelpTextTemp isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
             {selectedItemData.periodeType
               ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, stonadskonto, selectedItemData.periodeType.kode)
               : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, stonadskonto)}
-          </AksjonspunktHelpText>
+          </AksjonspunktHelpTextTemp>
           <VerticalSpacer twentyPx />
         </>
         )}
