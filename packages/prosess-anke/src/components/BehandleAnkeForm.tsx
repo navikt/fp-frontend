@@ -199,36 +199,22 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
     </Row>
     <VerticalSpacer sixteenPx />
     <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
-    <Row>
-      <Column xs="4">
-        <RadioGroupField
-          name="ankeVurdering.kode"
-          validate={[required]}
-          direction="vertical"
-          readOnly={readOnly}
-        >
-          <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
-          <RadioOption value={ankeVurdering.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
-        </RadioGroupField>
-      </Column>
-      <Column xs="4">
-        <RadioGroupField
-          name="ankeVurdering.kode"
-          validate={[required]}
-          readOnly={readOnly}
-          className={readOnly ? styles.selectReadOnly : null}
-          direction="vertical"
-        >
-          <RadioOption value={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
-          <RadioOption value={ankeVurdering.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
-        </RadioGroupField>
-      </Column>
-    </Row>
+    <RadioGroupField
+      name="ankeVurdering.kode"
+      validate={[required]}
+      direction="horizontal"
+      readOnly={readOnly}
+    >
+      <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
+      <RadioOption value={ankeVurdering.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
+      <RadioOption value={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
+      <RadioOption value={ankeVurdering.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
+    </RadioGroupField>
     {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode
       && (
         <Row>
           <Column xs="7">
-            <ArrowBox alignOffset={355}>
+            <ArrowBox alignOffset={484}>
               <Normaltekst><FormattedMessage id="Ankebehandling.Avvisning" /></Normaltekst>
               <VerticalSpacer fourPx />
               <CheckboxField name="erAnkerIkkePart" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />} />
@@ -258,8 +244,20 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
     {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode
       && (
         <Row>
+          <Column xs="7" />
           <Column xs="7">
-            <ArrowBox>
+            <ArrowBox alignOffset={162}>
+              <SelectField
+                readOnly={readOnly}
+                name="ankeOmgjoerArsak.kode"
+                selectValues={ankeOmgjorArsakRekkefolge
+                  .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
+                className={readOnly ? styles.selectReadOnly : null}
+                label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
+                validate={[required]}
+                bredde="xl"
+              />
+              <VerticalSpacer sixteenPx />
               <RadioGroupField
                 name="ankeVurderingOmgjoer.kode"
                 validate={[required]}
@@ -271,21 +269,29 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
                 <RadioOption name="a2" value={ankeVurderingOmgjoer.ANKE_TIL_UGUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Ugunst' }} />
                 <RadioOption name="a3" value={ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Delvis' }} />
               </RadioGroupField>
-              <VerticalSpacer fourPx />
-              <SelectField
-                readOnly={readOnly}
-                name="ankeOmgjoerArsak.kode"
-                selectValues={ankeOmgjorArsakRekkefolge
-                  .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
-                className={readOnly ? styles.selectReadOnly : null}
-                label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
-                validate={[required]}
-                bredde="xl"
-              />
             </ArrowBox>
           </Column>
         </Row>
       )}
+    {ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode && (
+      <Row>
+        <Column xs="7" />
+        <Column xs="7">
+          <ArrowBox alignOffset={322}>
+            <SelectField
+              readOnly={readOnly}
+              name="ankeOmgjoerArsak.kode"
+              selectValues={ankeOmgjorArsakRekkefolge
+                .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
+              className={readOnly ? styles.selectReadOnly : null}
+              label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
+              validate={[required]}
+              bredde="xl"
+            />
+          </ArrowBox>
+        </Column>
+      </Row>
+    )}
 
     <Row>
       <Column xs="7">
