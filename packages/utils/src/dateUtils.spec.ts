@@ -6,7 +6,6 @@ import {
   calcDaysAndWeeksWithWeekends,
   dateFormat,
   findDifferenceInMonthsAndDays,
-  splitWeeksAndDays,
   timeFormat,
 } from './dateUtils';
 
@@ -34,14 +33,6 @@ describe('dateutils', () => {
         days: 4,
       };
       expect(calcDaysAndWeeks(fom, tom)).is.deep.equal(formatedMessage);
-    });
-  });
-
-  describe('splitWeeksAndDays', () => {
-    it('Skal kalkulere antall dager mellom to datoer inkludert helger og skrive det ut som uker og dager', () => {
-      const days = 33;
-      const weeks = 2;
-      expect(splitWeeksAndDays(weeks, days)).is.eql([{ weeks: 4, days: 1 }, { weeks: 4, days: 2 }]);
     });
   });
 

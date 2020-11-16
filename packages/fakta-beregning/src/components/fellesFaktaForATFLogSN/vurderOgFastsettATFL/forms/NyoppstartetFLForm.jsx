@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { flatten, required } from '@fpsak-frontend/utils';
+import { required } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -52,7 +52,7 @@ NyoppstartetFLForm.buildInitialValues = (beregningsgrunnlag) => {
   }
   const alleAndeler = beregningsgrunnlag.beregningsgrunnlagPeriode
     .map((periode) => periode.beregningsgrunnlagPrStatusOgAndel);
-  const flAndeler = flatten(alleAndeler).filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
+  const flAndeler = alleAndeler.flat().filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
   if (flAndeler.length > 0) {
     initialValues[erNyoppstartetFLField] = flAndeler[0].erNyoppstartet;
   }

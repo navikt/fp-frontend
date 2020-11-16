@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field, Validator } from 'redux-form';
 import { Input as NavInput, InputProps as NavFrontendInputProps } from 'nav-frontend-skjema';
 
 import LabelType from './LabelType';
@@ -12,11 +12,7 @@ interface InputFieldProps {
   name: string;
   type?: string;
   label?: LabelType;
-  validate?: (((text: any) => ({ id: string; length?: undefined } | { length: any; id?: undefined })[])
-  | ((value: any, allValues: any, props: any) => { id: string }[])
-  | ((value: any) => { id: string }[])
-  | ((text: any) => ({ id: string; text?: undefined }
-  | { text: any; id?: undefined })[]))[];
+  validate?: Validator | Validator[];
   readOnly?: boolean;
   isEdited?: boolean;
   renderReadOnlyValue?: (value: any) => any;

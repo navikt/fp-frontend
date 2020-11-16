@@ -53,11 +53,13 @@ interface MappedOwnProps {
 
 export type FormValues = {
   skalOvertaKvote: boolean;
+  periodeFom: string;
+  periodeTom: string;
 }
 
 interface StaticFunctions {
   buildInitialValues?: () => any;
-  validate?: (values: FormValues) => any;
+  validate?: (values: FormValues[]) => any;
 }
 
 /**
@@ -111,6 +113,6 @@ PermisjonOverforingAvKvoterPanel.buildInitialValues = () => ({
   overforingsperioder: [{}],
 });
 
-PermisjonOverforingAvKvoterPanel.validate = (values: FormValues) => hasValidPeriodIncludingOtherErrors(values);
+PermisjonOverforingAvKvoterPanel.validate = (values: FormValues[]) => hasValidPeriodIncludingOtherErrors(values);
 
 export default PermisjonOverforingAvKvoterPanel;

@@ -20,6 +20,7 @@ interface Periode {
   id: string | number;
   className?: string;
   hoverText?: string;
+  tomMoment?: moment.Moment;
 }
 
 export type TidslinjeTimes = {
@@ -40,7 +41,7 @@ interface TidslinjeProps {
   children?: React.ReactNode;
 }
 
-const getOptions = (customTimes, sortedUttakPeriods) => ({
+const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: Periode[]) => ({
   end: moment(sortedUttakPeriods[sortedUttakPeriods.length - 1].tom).add(2, 'days'),
   locale: moment.locale('nb'),
   margin: { item: 14 },
@@ -60,9 +61,9 @@ const getOptions = (customTimes, sortedUttakPeriods) => ({
   zoomMin: 1000 * 60 * 60 * 24 * 30,
 });
 
-const parseDateString = (dateString) => moment(dateString, ISO_DATE_FORMAT).toDate();
+const parseDateString = (dateString: string | moment.Moment): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
-function sortByDate(a, b) {
+const sortByDate = (a: Periode, b: Periode): number => {
   if (a.fom < b.fom) {
     return -1;
   }
@@ -70,15 +71,15 @@ function sortByDate(a, b) {
     return 1;
   }
   return 0;
-}
+};
 
-const parseDates = (item) => ({
+const parseDates = (item: Periode) => ({
   ...item,
   start: parseDateString(item.fom),
   end: parseDateString(item.tomMoment),
 });
 
-const formatItems = (periodItems = []) => {
+const formatItems = (periodItems: Periode[] = []) => {
   const itemsWithDates = periodItems.map(parseDates);
   const formattedItemsArray = [];
   formattedItemsArray.length = 0;
@@ -88,8 +89,9 @@ const formatItems = (periodItems = []) => {
   return formattedItemsArray;
 };
 
-const formatGroups = (periodItems = []) => {
+const formatGroups = (periodItems: Periode[] = []) => {
   const duplicatesRemoved = periodItems.reduce((accPeriods, period) => {
+    // @ts-ignore Fiks
     const hasPeriod = accPeriods.some((p) => p.group === period.group);
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
@@ -108,7 +110,7 @@ const formatGroups = (periodItems = []) => {
 class Tidslinje extends Component<TidslinjeProps> {
   timelineRef: React.RefObject<any>;
 
-  constructor(props) {
+  constructor(props: TidslinjeProps) {
     super(props);
 
     this.goForward = this.goForward.bind(this);
@@ -119,7 +121,7 @@ class Tidslinje extends Component<TidslinjeProps> {
     this.timelineRef = React.createRef();
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     // TODO Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
@@ -128,17 +130,17 @@ class Tidslinje extends Component<TidslinjeProps> {
     }
   }
 
-  zoomIn() {
+  zoomIn(): void {
     const timeline = this.timelineRef.current.$el;
     timeline.zoomIn(0.5);
   }
 
-  zoomOut() {
+  zoomOut(): void {
     const timeline = this.timelineRef.current.$el;
     timeline.zoomOut(0.5);
   }
 
-  goForward() {
+  goForward(): void {
     const timeline = this.timelineRef.current.$el;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
@@ -149,7 +151,7 @@ class Tidslinje extends Component<TidslinjeProps> {
     timeline.setWindow(newWindowTimes);
   }
 
-  goBackward() {
+  goBackward(): void {
     const timeline = this.timelineRef.current.$el;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {

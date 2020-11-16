@@ -16,7 +16,7 @@ interface TimeLineSokerProps {
   soker2KjonnKode: Kjønnkode;
 }
 
-const getKjønn = (kode) => {
+const getKjønn = (kode: string) => {
   switch (kode) {
     case navBrukerKjonn.KVINNE:
       return { src: urlKvinne, title: 'Person.Woman' };

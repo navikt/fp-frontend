@@ -1,6 +1,6 @@
 export const fodselsnummerPattern = /^\d{11}$/;
 
-const sum = (fodselsnummer, faktors) => {
+const sum = (fodselsnummer: string, faktors: number[]): number => {
   let s = 0;
   for (let i = 0; i < faktors.length; i += 1) {
     s += parseInt(fodselsnummer[i], 10) * faktors[i];
@@ -8,7 +8,7 @@ const sum = (fodselsnummer, faktors) => {
   return s;
 };
 
-export const isValidFodselsnummer = (input) => {
+export const isValidFodselsnummer = (input: string): boolean => {
   const fodselsnummer = `${input}`;
   if (!fodselsnummerPattern.test(fodselsnummer)) {
     return false;

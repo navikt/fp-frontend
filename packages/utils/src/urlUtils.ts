@@ -8,7 +8,7 @@ export const parseQueryString = (queryString = ''): {[paramName: string]: string
     .reduce((a, b) => ({ ...a, ...b }), {})
 );
 
-export const formatQueryString = (queryParams = {}) => (
+export const formatQueryString = (queryParams: Record<string, any> = {}): string => (
   `?${( // Add leading question mark
     Object.entries(queryParams)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,7 +22,7 @@ export const formatQueryString = (queryParams = {}) => (
 
 const paramSegmentPattern = /^:(\w+)(\(.+\))?(\?)?$/;
 
-const resolveParam = (params) => (segment) => {
+const resolveParam = (params: Record<string, any>) => (segment: string): string => {
   if (!paramSegmentPattern.test(segment)) {
     return segment;
   }
@@ -32,7 +32,7 @@ const resolveParam = (params) => (segment) => {
   return paramValue || (optional ? '' : segment);
 };
 
-export const buildPath = (path: string, params = {}): string => (
+export const buildPath = (path: string, params: Record<string, any> = {}): string => (
   path
     .replace(/^\//, ' /') // Add whitespace before leading slash to keep it from being consumed by split
     .replace(/\/$/, '/ ') // Add whitespace after trailing slash to keep it from being consumed by split
@@ -42,7 +42,3 @@ export const buildPath = (path: string, params = {}): string => (
     .join('/')
     .trim()
 );
-
-export const formatArray = (array) => array.join(',');
-
-export const parseArray = (formattedArray) => formattedArray.split(',');

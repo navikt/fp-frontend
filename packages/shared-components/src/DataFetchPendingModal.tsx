@@ -29,7 +29,7 @@ interface OwnState {
 export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
   timer: ReturnType<typeof setTimeout>;
 
-  constructor(props) {
+  constructor(props: OwnProps) {
     super(props);
     this.enableMessage = this.enableMessage.bind(this);
 
@@ -40,11 +40,11 @@ export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
     this.timer = setTimeout(this.enableMessage, MESSAGE_DELAY_MILLIS);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     clearTimeout(this.timer);
   }
 
-  enableMessage() {
+  enableMessage(): void {
     this.setState({ displayMessage: true });
   }
 
