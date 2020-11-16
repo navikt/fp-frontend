@@ -23,7 +23,7 @@ const lagFagsakSortObj = (fagsak: Fagsak) => ({
 
 interface OwnProps {
   fagsaker: Fagsak[];
-  selectFagsakCallback: (e: Event, saksnummer: number) => void;
+  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer: number) => void;
   alleKodeverk: {[key: string]: [KodeverkMedNavn]};
 }
 

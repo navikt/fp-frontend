@@ -1,7 +1,12 @@
 import React, { ReactNode, FunctionComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
+
+import { isObject } from '@fpsak-frontend/utils';
 
 import AksjonspunktHelpTextHTML from './AksjonspunktHelpTextHTML';
-import AksjonspunktHelpText from './AksjonspunktHelpText';
+
+import styles from './AksjonspunktHelpTextTemp.less';
 
 interface OwnProps {
   children: string[] | ReactNode[];
@@ -22,9 +27,17 @@ const AksjonspunktHelpTextTemp: FunctionComponent<OwnProps> = ({
       </AksjonspunktHelpTextHTML>
     )}
     {!isAksjonspunktOpen && (
-      <AksjonspunktHelpText isAksjonspunktOpen={false}>
-        {children}
-      </AksjonspunktHelpText>
+      <>
+        {React.Children.map(children, (child) => (
+          // @ts-ignore (Dette skal fjernast)
+          <Normaltekst key={isObject(child) ? child.key : child} className={styles.wordwrap}>
+            <strong>
+              <FormattedMessage id="HelpText.Aksjonspunkt.BehandletAksjonspunkt" />
+            </strong>
+            {child}
+          </Normaltekst>
+        ))}
+      </>
     )}
   </>
 );

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import { AksjonspunktHelpText } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { FamilieHendelseSamling, Kodeverk, Personopplysninger } from '@fpsak-frontend/types';
 
 import { UttakPerioder } from './UttakPerioder';
@@ -318,7 +318,7 @@ describe('<UttakPerioder>', () => {
       />,
     );
 
-    const aksjonspunktHelpText = wrapper.find(AksjonspunktHelpText);
+    const aksjonspunktHelpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(aksjonspunktHelpText).to.have.length(1);
     const formattedMessage = aksjonspunktHelpText.find(FormattedMessage);
     expect(formattedMessage.prop('id')).to.eql('UttakInfoPanel.Aksjonspunkt.5071');
