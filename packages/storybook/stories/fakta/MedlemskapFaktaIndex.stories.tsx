@@ -23,7 +23,10 @@ const behandling = {
     kodeverk: '',
   },
   behandlingPaaVent: false,
-  status: behandlingStatus.OPPRETTET,
+  status: {
+    kode: behandlingStatus.OPPRETTET,
+    kodeverk: '',
+  },
 } as Behandling;
 
 const soknad = {

@@ -23,17 +23,6 @@ describe('<FagsakSearchIndex>', () => {
     },
     barnFodt: '10.10.2017',
     antallBarn: 1,
-    person: {
-      navn: 'Espen',
-      alder: 38,
-      personnummer: '123456789',
-      erKvinne: true,
-      erDod: false,
-      personstatusType: {
-        kode: 'TEst',
-        kodeverk: 'test',
-      },
-    },
     opprettet: '13‎.‎02‎.‎2017‎ ‎09‎:‎54‎:‎22',
     dekningsgrad: 100,
   };

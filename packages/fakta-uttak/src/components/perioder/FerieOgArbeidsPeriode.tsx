@@ -27,23 +27,32 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-interface OwnProps {
-  resultat?: string;
+interface PureOwnProps {
+  id: string,
+  behandlingId: number;
+  behandlingVersjon: number;
+  fieldId: string;
+  tilDato: string;
+  fraDato: string;
+  arbeidstidprosent: number;
+  uttakPeriodeType: Kodeverk;
   updatePeriode: (...args: any[]) => any;
-  cancelEditPeriode: (...args: any[]) => any;
-  id: string;
-  updated: boolean;
-  bekreftet: boolean;
   readOnly: boolean;
-  arbeidstidprosent?: number;
+  cancelEditPeriode: (...args: any[]) => any;
+  behandlingStatusKode?: string;
+  bekreftet: boolean;
+}
+
+interface MappedOwnProps {
+  resultat?: string;
+  updated: boolean;
   skalViseResultat: boolean;
   oppholdArsak?: Kodeverk;
-  behandlingStatusKode?: string;
   førsteUttaksdato?: string;
   originalResultat: Kodeverk;
 }
 
-export const FerieOgArbeidsPeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const FerieOgArbeidsPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   resultat,
   id,
   cancelEditPeriode,
@@ -160,20 +169,6 @@ const validateForm = (values: any) => {
 
   return errors;
 };
-
-interface PureOwnProps {
-  id: string,
-  behandlingId: number;
-  behandlingVersjon: number;
-  fieldId: string;
-  tilDato: string;
-  fraDato: string;
-  arbeidstidprosent: number;
-  uttakPeriodeType: Kodeverk;
-  updatePeriode: (...args: any[]) => any;
-  readOnly: boolean;
-  bekreftet: boolean;
-}
 
 const buildInitialValues = createSelector([
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(

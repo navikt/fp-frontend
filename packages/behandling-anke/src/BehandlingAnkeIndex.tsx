@@ -4,9 +4,11 @@ import React, {
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
-  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
+  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Fagsak, Behandling, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import AnkePaneler from './components/AnkePaneler';
@@ -21,7 +23,7 @@ const ankeData = [
 
 interface OwnProps {
   behandlingId: number;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
   rettigheter: Rettigheter;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;

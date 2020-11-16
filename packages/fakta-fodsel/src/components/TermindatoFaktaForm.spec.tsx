@@ -17,7 +17,6 @@ describe('<TermindatoFaktaForm>', () => {
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       readOnly={false}
-      error={false}
       isForTidligTerminbekreftelse={false}
       submittable
       alleMerknaderFraBeslutter={{
@@ -34,7 +33,6 @@ describe('<TermindatoFaktaForm>', () => {
       {...reduxFormPropsMock}
       initialValues={{ begrunnelse: 'test' }}
       readOnly={false}
-      error={false}
       fodselsdatoTps="2018-01-01"
       antallBarnTps={1}
       isForTidligTerminbekreftelse={false}

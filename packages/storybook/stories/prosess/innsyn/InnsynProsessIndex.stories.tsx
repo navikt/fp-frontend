@@ -31,6 +31,18 @@ const aksjonspunkter = [{
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
+const standardProsessProps = {
+  behandling,
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
@@ -39,7 +51,7 @@ export default {
 
 export const visPanelForVurderingAvInnsyn = () => (
   <InnsynProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     innsyn={object('innsyn', {
       dokumenter: [],
       vedtaksdokumentasjon: [{
@@ -49,7 +61,6 @@ export const visPanelForVurderingAvInnsyn = () => (
       }],
     } as Innsyn)}
     saksnummer={123434}
-    aksjonspunkter={aksjonspunkter}
     alleDokumenter={[{
       journalpostId: '2',
       dokumentId: '3',
@@ -57,9 +68,5 @@ export const visPanelForVurderingAvInnsyn = () => (
       tidspunkt: '2017-08-02T00:54:25.455',
       kommunikasjonsretning: kommunikasjonsretning.INN,
     }]}
-    alleKodeverk={alleKodeverk as any}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('isSubmittable', false)}
   />
 );

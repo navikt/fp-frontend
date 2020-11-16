@@ -26,9 +26,9 @@ import styles from './behandleKlageFormNfp.less';
 type FormValues = {
   klageVurdering?: Kodeverk;
   fritekstTilBrev?: string;
-  klageMedholdArsak: Kodeverk;
-  klageVurderingOmgjoer: Kodeverk;
-  begrunnelse: string;
+  klageMedholdArsak?: Kodeverk;
+  klageVurderingOmgjoer?: Kodeverk;
+  begrunnelse?: string;
 };
 
 interface OwnProps {

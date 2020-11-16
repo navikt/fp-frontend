@@ -1,0 +1,76 @@
+import React from 'react';
+import sinon from 'sinon';
+import { expect } from 'chai';
+import { Undertittel } from 'nav-frontend-typografi';
+
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
+
+import { TilkjentYtelsePanelImpl } from './TilkjentYtelsePanel';
+import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-tilkjent-ytelse';
+
+const tilbaketrekkAP = {
+  definisjon: {
+    kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
+  },
+  status: {
+    kode: 'OPPR',
+  },
+  begrunnelse: undefined,
+} as Aksjonspunkt;
+
+describe('<TilkjentYtelsePanelImpl>', () => {
+  it('skall innehålla rätt undertekst', () => {
+    const familieDate = new Date('2018-04-04');
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanelImpl
+      readOnly
+      beregningresultat={null}
+      hovedsokerKjonn="K"
+      soknadDato="2018-04-04"
+      familiehendelseDato={familieDate}
+      submitCallback={sinon.spy()}
+      readOnlySubmitButton
+      isSoknadSvangerskapspenger={false}
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={1}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
+    />);
+    expect(wrapper.find(Undertittel)).to.have.length(1);
+    // @ts-ignore
+    expect(wrapper.find(Undertittel).props().children.props.id).to.equal('TilkjentYtelse.Title');
+    expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(0);
+  });
+
+  it('Skal vise tilbaketrekkpanel gitt tilbaketrekkaksjonspunkt', () => {
+    const familieDate = new Date('2018-04-04');
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanelImpl
+      readOnly
+      beregningresultat={null}
+      hovedsokerKjonn="K"
+      soknadDato="2018-04-04"
+      familiehendelseDato={familieDate}
+      submitCallback={sinon.spy()}
+      readOnlySubmitButton
+      vurderTilbaketrekkAP={tilbaketrekkAP}
+      isSoknadSvangerskapspenger={false}
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={1}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
+    />);
+    expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(1);
+  });
+});

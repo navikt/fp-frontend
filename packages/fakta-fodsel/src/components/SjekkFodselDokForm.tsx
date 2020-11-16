@@ -16,7 +16,7 @@ import {
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Kodeverk, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, Kodeverk, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 
 import avklartBarnFieldArray from './AvklartBarnFieldArray';
@@ -51,8 +51,8 @@ interface OwnProps {
   termindato?: string;
   vedtaksDatoSomSvangerskapsuke?: string;
   soknad: Soknad;
-  soknadOriginalBehandling: Soknad;
-  familiehendelseOriginalBehandling: FamilieHendelseSamling;
+  soknadOriginalBehandling?: Soknad;
+  familiehendelseOriginalBehandling?: FamilieHendelse;
   initialValues: {
     begrunnelse: string;
   };

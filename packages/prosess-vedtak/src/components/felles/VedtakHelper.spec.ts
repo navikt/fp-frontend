@@ -1,6 +1,9 @@
 import { expect } from 'chai';
+
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { Vilkar } from '@fpsak-frontend/types';
+
 import { hasIkkeOppfyltSoknadsfristvilkar } from './VedtakHelper';
 
 describe('<VedtakHelper>', () => {
@@ -8,14 +11,14 @@ describe('<VedtakHelper>', () => {
     const vilkarListe = [{
       vilkarType: {
         kode: vilkarType.SOKNADFRISTVILKARET,
-        navn: 'Medlemskapsvilkåret',
+        kodeverk: '',
       },
       vilkarStatus: {
         kode: vilkarUtfallType.IKKE_OPPFYLT,
-        navn: 'test',
+        kodeverk: '',
       },
       lovReferanse: '§ 22-13, 2. ledd',
-    }];
+    }] as Vilkar[];
 
     const hasIkkeOppfylt = hasIkkeOppfyltSoknadsfristvilkar(vilkarListe);
 

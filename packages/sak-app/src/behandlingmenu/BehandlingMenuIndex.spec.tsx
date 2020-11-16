@@ -8,15 +8,13 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import MenySakIndex from '@fpsak-frontend/sak-meny';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
-import { Fagsak } from '@fpsak-frontend/types';
+import * as useHistory from '../app/useHistory';
+import * as useLocation from '../app/useLocation';
+import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
-
-const location = {
-  pathname: '', search: '', state: {}, hash: '',
-};
 
 const navAnsatt = {
   brukernavn: 'Test',
@@ -63,8 +61,29 @@ const alleBehandlinger = [{
   erAktivPapirsoknad: false,
 }];
 
+const locationMock = {
+  pathname: 'test',
+  search: 'test',
+  state: {},
+  hash: 'test',
+};
+
 describe('BehandlingMenuIndex', () => {
+  let contextStubHistory;
+  let contextStubLocation;
+  beforeEach(() => {
+    // @ts-ignore
+    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push: sinon.spy() }));
+    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
+  });
+
+  afterEach(() => {
+    contextStubHistory.restore();
+    contextStubLocation.restore();
+  });
+
   it('skal vise meny der alle menyhandlinger er synlige', () => {
+    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
     requestApi.mock(FpsakApiKeys.BEHANDLENDE_ENHETER, []);
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
@@ -72,20 +91,31 @@ describe('BehandlingMenuIndex', () => {
     requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES, false);
     requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, false);
 
+    const sakRettigheter = {
+      sakSkalTilInfotrygd: false,
+      behandlingTypeKanOpprettes: [],
+    };
+
+    const behandlingRettigheter = {
+      behandlingFraBeslutter: false,
+      behandlingKanSendeMelding: true,
+      behandlingTilGodkjenning: false,
+      behandlingKanBytteEnhet: true,
+      behandlingKanHenlegges: true,
+      behandlingKanGjenopptas: false,
+      behandlingKanOpnesForEndringer: true,
+      behandlingKanSettesPaVent: true,
+      vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+    };
+
     const wrapper = shallow(<BehandlingMenuIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      saksnummer={123}
       behandlingId={1}
-      behandlingVersion={2}
-      opprettVerge={sinon.spy()}
-      fjernVerge={sinon.spy()}
-      pushLocation={sinon.spy()}
-      location={location}
+      behandlingVersjon={2}
       oppfriskBehandlinger={sinon.spy()}
-      menyhandlingRettigheter={{
-        harSoknad: true,
-      }}
+      behandlingRettigheter={behandlingRettigheter}
+      sakRettigheter={sakRettigheter}
     />);
 
     const meny = wrapper.find(MenySakIndex);

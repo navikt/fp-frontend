@@ -9,7 +9,7 @@ import styles from './timeLineControl.less';
 interface Periode {
   fom: string;
   tom: string;
-  id: string;
+  id: string | number;
   className?: string;
   hoverText?: string;
 }

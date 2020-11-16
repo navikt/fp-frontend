@@ -13,6 +13,7 @@ export const inputMock = {
   onDragStart: noop,
   onDrop: noop,
   onFocus: noop,
+  value: '',
 };
 
 export const metaMock = {
@@ -65,6 +66,19 @@ export const reduxFormPropsMock = Object.assign(metaMock, {
   clearFields: sinon.spy(),
   clearSubmitErrors: sinon.spy(),
   submitAsSideEffect: false,
+  array: {
+    insert: sinon.spy(),
+    move: sinon.spy(),
+    pop: sinon.spy(),
+    push: sinon.spy(),
+    remove: sinon.spy(),
+    removeAll: sinon.spy(),
+    shift: sinon.spy(),
+    splice: sinon.spy(),
+    swap: sinon.spy(),
+    unshift: sinon.spy(),
+  },
+  initialValues: {},
 });
 
 export class MockFields {
@@ -76,6 +90,18 @@ export class MockFields {
     this.push = () => array.push(formatName(array.length));
     this.pop = array.pop.bind(array);
     this.map = array.map.bind(array);
+
+    this.forEach = sinon.spy();
+    this.getAll = sinon.spy();
+    this.removeAll = sinon.spy();
+    this.insert = sinon.spy();
+    this.name = '';
+    this.shift = sinon.spy();
+    this.splice = sinon.spy();
+    this.swap = sinon.spy();
+    this.move = sinon.spy();
+    this.unshift = sinon.spy();
+
     this.get = (index) => array[index];
 
     this.get = (index) => array[index];
@@ -93,6 +119,17 @@ export class MockFieldsWithContent {
     this.fields = array;
     this.array = [array].map(formatName); // NOSONAR;
     this.push = () => array.push(formatName(array.length));
+
+    this.forEach = sinon.spy();
+    this.getAll = sinon.spy();
+    this.removeAll = sinon.spy();
+    this.insert = sinon.spy();
+    this.name = '';
+    this.shift = sinon.spy();
+    this.splice = sinon.spy();
+    this.swap = sinon.spy();
+    this.move = sinon.spy();
+    this.unshift = sinon.spy();
 
     this.pop = array.pop.bind(array);
     this.map = array.map.bind(array);

@@ -27,25 +27,29 @@ const {
 const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: string[]) => aksjonspunkter
   .some((ap: string) => ap === aksjonspunktCode);
 
-type PeriodeMedId = MedlemPeriode & { id: number; }
+export type PeriodeMedId = MedlemPeriode & { id: number; }
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  valgtPeriode: PeriodeMedId;
+  aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  updateOppholdInntektPeriode: (values: any) => void;
   selectedId?: string;
   readOnly: boolean;
-  updateOppholdInntektPeriode: (...args: any[]) => any;
+  periodeResetCallback: (...args: any[]) => any;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submittable: boolean;
-  valgtPeriode: PeriodeMedId;
+}
+
+interface MappedOwnProps {
   initialValues: {
     begrunnelse?: string;
   };
-  periodeResetCallback: (...args: any[]) => any;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
-export const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   valgtPeriode,
   readOnly,
   initialValues,
@@ -138,16 +142,6 @@ const transformValues = (values: any) => ({
   ...values,
 });
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  valgtPeriode: PeriodeMedId;
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submittable: boolean;
-  updateOppholdInntektPeriode: (values: any) => void;
-}
-
 const buildInitialValues = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.valgtPeriode,
   (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter,
@@ -191,12 +185,11 @@ const buildInitialValues = createSelector([
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: any) => initialOwnProps.updateOppholdInntektPeriode(transformValues(values));
   return (state: any, ownProps: PureOwnProps) => {
-    const { valgtPeriode, submittable } = ownProps;
+    const { valgtPeriode } = ownProps;
     const formName = `OppholdInntektOgPeriodeForm-${valgtPeriode.id}`;
     return {
       initialValues: buildInitialValues(state, ownProps),
       form: formName,
-      submittable,
       onSubmit,
     };
   };

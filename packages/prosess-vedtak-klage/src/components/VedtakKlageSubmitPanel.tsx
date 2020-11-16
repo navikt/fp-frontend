@@ -37,7 +37,7 @@ const getPreviewCallback = (formProps: InjectedFormProps, previewVedtakCallback:
     mottaker: '',
     brevmalkode: getBrevKode(klageResultat.klageVurdering, klageVurdertAvNK),
     klageVurdertAv: klageResultat.klageVurdertAv,
-    erOpphevet: klageResultat.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
+    erOpphevet: klageResultat.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
   };
   if (formProps.valid || formProps.pristine) {
     previewVedtakCallback(data);

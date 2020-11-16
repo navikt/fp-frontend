@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Kodeverk, Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Medlemskap, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
 import messages from '../i18n/nb_NO.json';
@@ -14,19 +15,13 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
-  medlemskap?: {
-    fom?: string;
-  };
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: () => void;
+  medlemskap?: Medlemskap;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
     isEnabled: boolean;
   };
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
-  avslagsarsaker: Kodeverk[];
-  status: string;
+  avslagsarsaker: KodeverkMedNavn[];
   erOverstyrt: boolean;
   panelTittelKode: string;
   overstyringApKode: string;
@@ -34,7 +29,7 @@ interface OwnProps {
   erMedlemskapsPanel: boolean;
 }
 
-const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps> = ({
+const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   medlemskap = {},
   aksjonspunkter,

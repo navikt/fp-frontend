@@ -75,6 +75,7 @@ describe('<BgFordelingUtils>', () => {
       },
       aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
       andelsnr: 3,
+      kilde: { kode: 'PROSESS_START' },
       lagtTilAvSaksbehandler: false,
       inntektskategori: { kode: 'ARBEIDSTAKER' },
     };
@@ -84,6 +85,7 @@ describe('<BgFordelingUtils>', () => {
     expect(andelsInfo.aktivitetStatus).to.equal('AT');
     expect(andelsInfo.andelsnr).to.equal(3);
     expect(andelsInfo.nyAndel).to.equal(false);
+    expect(andelsInfo.kilde).to.equal('PROSESS_START');
     expect(andelsInfo.lagtTilAvSaksbehandler).to.equal(false);
     expect(andelsInfo.inntektskategori).to.equal('ARBEIDSTAKER');
   });

@@ -6,6 +6,8 @@ import { isObjectEmpty } from '@fpsak-frontend/utils';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import { FpsakApiKeys, requestApi, restApiHooks } from '../data/fpsakApi';
+import useHentInitLenker from './useHentInitLenker';
+import useHentKodeverk from './useHentKodeverk';
 
 interface OwnProps {
   children: ReactElement,
@@ -24,24 +26,37 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
     requestApi.setAddErrorMessageHandler(addErrorMessage);
   }, []);
 
-  const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT);
-  const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE);
-  const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER);
+  const [harHentetFerdigInitLenker, harFpsakInitKallFeilet] = useHentInitLenker();
+
+  const options = {
+    suspendRequest: harFpsakInitKallFeilet || !harHentetFerdigInitLenker,
+    updateTriggers: [harHentetFerdigInitLenker],
+  };
+
+  const { state: navAnsattState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.NAV_ANSATT, NO_PARAMS, options);
+  const { state: behandlendeEnheterState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.BEHANDLENDE_ENHETER, NO_PARAMS, options);
+
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
   const { state: featureToggleState } = restApiHooks
     .useGlobalStateRestApi<{ featureToggles: {[key: string]: boolean} }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams, {
-      suspendRequest: isObjectEmpty(featureToggle),
+      ...options,
+      suspendRequest: options.suspendRequest || isObjectEmpty(featureToggle),
     });
 
-  const { state: kodeverkFpSakStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK, NO_PARAMS);
-  const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK_FPTILBAKE, NO_PARAMS);
+  const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE, NO_PARAMS);
 
-  const erFerdig = navAnsattState === RestApiState.SUCCESS && sprakFilState === RestApiState.SUCCESS
-    && behandlendeEnheterState === RestApiState.SUCCESS && kodeverkFpSakStatus === RestApiState.SUCCESS
-    && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS)
-    && (kodeverkFpTilbakeStatus === RestApiState.SUCCESS || kodeverkFpTilbakeStatus === RestApiState.ERROR);
+  const harHentetFerdigKodeverk = useHentKodeverk(harHentetFerdigInitLenker);
 
-  return erFerdig ? children : <LoadingPanel />;
+  const harFeilet = harFpsakInitKallFeilet && sprakFilState === RestApiState.SUCCESS;
+
+  const erFerdig = harHentetFerdigInitLenker
+    && harHentetFerdigKodeverk
+    && navAnsattState === RestApiState.SUCCESS
+    && sprakFilState === RestApiState.SUCCESS
+    && behandlendeEnheterState === RestApiState.SUCCESS
+    && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS);
+
+  return harFeilet || erFerdig ? children : <LoadingPanel />;
 };
 
 export default AppConfigResolver;

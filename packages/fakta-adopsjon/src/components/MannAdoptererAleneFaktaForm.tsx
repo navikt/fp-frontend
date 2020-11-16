@@ -61,10 +61,6 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
   </FaktaGruppe>
 );
 
-MannAdoptererAleneFaktaForm.defaultProps = {
-  farSokerType: undefined,
-};
-
 MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse) => ({
   mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,
 });

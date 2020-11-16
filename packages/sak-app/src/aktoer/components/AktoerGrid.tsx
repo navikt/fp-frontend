@@ -23,7 +23,7 @@ interface OwnProps {
   };
 }
 
-export const AktoerGrid: FunctionComponent<OwnProps> = ({
+const AktoerGrid: FunctionComponent<OwnProps> = ({
   data,
 }) => {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
@@ -34,10 +34,8 @@ export const AktoerGrid: FunctionComponent<OwnProps> = ({
     <>
       <VisittkortSakIndex
         alleKodeverk={alleKodeverk}
-        fagsak={{
-          ...vFagsak,
-          person: data.person,
-        } as Fagsak}
+        fagsak={vFagsak as Fagsak}
+        fagsakPerson={data.person}
       />
       <div className={styles.list}>
         {data.fagsaker.length ? data.fagsaker.map((fagsak) => (

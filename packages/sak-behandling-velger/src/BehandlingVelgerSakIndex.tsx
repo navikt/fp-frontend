@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { Location } from 'history';
 
-import { Behandling, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 
 import BehandlingPicker from './components/BehandlingPicker';
 import messages from '../i18n/nb_NO.json';
@@ -14,8 +15,8 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandlinger: Behandling[];
-  getBehandlingLocation: (behandlingId: number) => void;
+  behandlinger: BehandlingAppKontekst[];
+  getBehandlingLocation: (behandlingId: number) => Location;
   noExistingBehandlinger: boolean;
   behandlingId?: number;
   showAll: boolean;

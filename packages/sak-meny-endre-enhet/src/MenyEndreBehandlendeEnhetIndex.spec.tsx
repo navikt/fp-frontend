@@ -30,6 +30,7 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     const modal = wrapper.find(EndreBehandlendeEnhetModal);
     expect(modal).to.have.length(1);
 
+    // @ts-ignore
     modal.prop('onSubmit')({
       nyEnhet: '0',
       begrunnelse: 'Dette er en begrunnelse',

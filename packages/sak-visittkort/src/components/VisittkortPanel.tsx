@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  Kodeverk, KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak,
+  Kodeverk, KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
 } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
@@ -17,7 +17,7 @@ import VisittkortBarnInfoPanel from './VisittkortBarnInfoPanel';
 
 import styles from './visittkortPanel.less';
 
-const utledKjonn = (kjonn) => {
+const utledKjonn = (kjonn: Kodeverk): Gender => {
   if (kjonn.kode === navBrukerKjonn.KVINNE) {
     return Gender.female;
   }
@@ -26,6 +26,7 @@ const utledKjonn = (kjonn) => {
 
 interface OwnProps {
   fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   alleKodeverk: { [key: string]: [KodeverkMedNavn] };
   sprakkode?: Kodeverk;
   personopplysninger?: Personopplysninger;
@@ -37,6 +38,7 @@ interface OwnProps {
 const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   fagsak,
+  fagsakPerson,
   personopplysninger,
   familieHendelse,
   lenkeTilAnnenPart,
@@ -46,25 +48,23 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 }) => {
   const erMor = fagsak.relasjonsRolleType.kode === relasjonsRolleType.MOR;
   if (!personopplysninger && !harTilbakekrevingVerge) {
-    const { person } = fagsak;
     return (
       <div className={styles.container}>
         <PersonCard
-          name={person.navn}
-          fodselsnummer={person.personnummer}
-          gender={person.erKvinne ? Gender.female : Gender.male}
+          name={fagsakPerson.navn}
+          fodselsnummer={fagsakPerson.personnummer}
+          gender={fagsakPerson.erKvinne ? Gender.female : Gender.male}
         />
       </div>
     );
   }
   if (harTilbakekrevingVerge) {
-    const { person } = fagsak;
     return (
       <div className={styles.container}>
         <PersonCard
-          name={person.navn}
-          fodselsnummer={person.personnummer}
-          gender={person.erKvinne ? Gender.female : Gender.male}
+          name={fagsakPerson.navn}
+          fodselsnummer={fagsakPerson.personnummer}
+          gender={fagsakPerson.erKvinne ? Gender.female : Gender.male}
           renderLabelContent={(): JSX.Element => <VisittkortLabels personopplysninger={personopplysninger} harTilbakekrevingVerge={harTilbakekrevingVerge} />}
         />
       </div>

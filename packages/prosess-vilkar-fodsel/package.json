@@ -1,20 +1,21 @@
 {
   "name": "@fpsak-frontend/prosess-vilkar-fodsel",
   "version": "1.0.0",
-  "module": "index.jsx",
+  "module": "index.ts",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "@fpsak-frontend/kodeverk": "1.0.0",
+    "@fpsak-frontend/prosess-felles": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
+    "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "nav-frontend-core": "5.0.5",
-    "nav-frontend-typografi": "2.0.29",
-    "nav-frontend-typografi-style": "1.0.25",
-    "prop-types": "^15.7.2",
+    "nav-frontend-core": "5.0.8",
+    "nav-frontend-typografi": "2.0.34",
+    "nav-frontend-typografi-style": "1.0.29",
     "react": "^16.13.1",
-    "react-intl": "^5.8.6",
-    "react-redux": "^7.2.1",
+    "react-intl": "^5.10.0",
+    "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-form": "^8.3.6",
     "reselect": "^4.0.0"
@@ -23,6 +24,6 @@
     "@fpsak-frontend/utils-test": "1.0.0",
     "chai": "^4.2.0",
     "enzyme": "^3.11.0",
-    "sinon": "^9.2.0"
+    "sinon": "^9.2.1"
   }
 }

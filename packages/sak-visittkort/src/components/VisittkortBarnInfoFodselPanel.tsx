@@ -4,20 +4,20 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { FamilieHendelseSamling } from '@fpsak-frontend/types';
+import { FamilieHendelseSamling, AvklartBarn } from '@fpsak-frontend/types';
 import { FlexColumn } from '@fpsak-frontend/shared-components';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 
 import styles from './visittkortBarnInfoFodselPanel.less';
 
-const finnFodselsdatoTekstkode = (antallBarn) => {
+const finnFodselsdatoTekstkode = (antallBarn: number): string => {
   if (antallBarn === 1) {
     return 'VisittkortBarnInfoFodselPanel.Fodt';
   }
   return antallBarn === 2 ? 'VisittkortBarnInfoFodselPanel.Tvillinger' : 'VisittkortBarnInfoFodselPanel.Flerlinger';
 };
 
-const finnAlderTekstProps = (avklartBarn) => {
+const finnAlderTekstProps = (avklartBarn: AvklartBarn[]) => {
   const forsteFodselsdato = moment.min(avklartBarn.map((barn) => moment(barn.fodselsdato)));
 
   const ar = moment().diff(forsteFodselsdato, 'years');

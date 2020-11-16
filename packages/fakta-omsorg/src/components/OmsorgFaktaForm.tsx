@@ -73,10 +73,10 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             ? <FormattedMessage id="OmsorgFaktaForm.OppgittAleneomsorg" />
             : (
               <FormattedMessage
-                  id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
+                id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
+                values={{
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
               />
             )}
         </Normaltekst>
@@ -108,10 +108,10 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             ? <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
             : (
               <FormattedMessage
-                  id="OmsorgFaktaForm.OppgittIkkeOmsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
+                id="OmsorgFaktaForm.OppgittIkkeOmsorg"
+                values={{
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
               />
             )}
         </Normaltekst>
@@ -178,7 +178,10 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
     aleneomsorg,
     omsorg,
     ikkeOmsorgPerioder: ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0
-      ? ytelsefordeling.ikkeOmsorgPerioder : [],
+      ? ytelsefordeling.ikkeOmsorgPerioder : [{
+        periodeFom: undefined,
+        periodeTom: undefined,
+      }],
   };
 };
 

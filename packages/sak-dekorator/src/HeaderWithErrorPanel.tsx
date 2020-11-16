@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useMemo, useCallback, useEffect, useRef,
+  FunctionComponent, useState, useMemo, useCallback, useEffect, useRef, RefObject,
 } from 'react';
 import BoxedListWithLinks from '@navikt/boxed-list-with-links';
 import Header from '@navikt/nap-header';
@@ -13,6 +13,7 @@ import ErrorMessagePanel from './ErrorMessagePanel';
 import messages from '../i18n/nb_NO.json';
 
 import styles from './headerWithErrorPanel.less';
+import Feilmelding from './feilmeldingTsType';
 
 const cache = createIntlCache();
 
@@ -21,7 +22,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const useOutsideClickEvent = (erLenkepanelApent, setLenkePanelApent) => {
+const useOutsideClickEvent = (erLenkepanelApent: boolean, setLenkePanelApent: (erApent: boolean) => void): RefObject<HTMLDivElement> => {
   const wrapperRef = useRef(null);
   const handleClickOutside = useCallback((event) => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -49,10 +50,9 @@ interface OwnProps {
     url: string;
   }[];
   systemTittel: string;
-  queryStrings: any;
-  navAnsattName: string;
+  navAnsattName?: string;
   removeErrorMessage: () => void;
-  errorMessages?: any[];
+  errorMessages?: Feilmelding[];
   setSiteHeight: (height: number) => void;
 }
 
@@ -66,9 +66,8 @@ interface OwnProps {
 const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
   iconLinks,
   systemTittel,
-  navAnsattName,
+  navAnsattName = '',
   removeErrorMessage,
-  queryStrings,
   errorMessages = [],
   setSiteHeight,
 }) => {
@@ -126,7 +125,6 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
           </Header>
         </div>
         <ErrorMessagePanel
-          queryStrings={queryStrings}
           removeErrorMessage={removeErrorMessage}
           errorMessages={errorMessages}
         />

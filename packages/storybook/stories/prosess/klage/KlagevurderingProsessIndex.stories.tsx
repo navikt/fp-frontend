@@ -19,6 +19,18 @@ const behandling = {
   },
 } as Behandling;
 
+const standardProsessProps = {
+  behandling: object('behandling', behandling),
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter: [],
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
+
 export default {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
@@ -27,7 +39,7 @@ export default {
 
 export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
   <KlagevurderingProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -42,11 +54,7 @@ export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
       },
     } as KlageVurdering)}
     saveKlage={action('button-click') as (data: any) => Promise<any>}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnlySubmitButton={boolean('readOnly', false)}
-    alleKodeverk={alleKodeverk as any}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
@@ -57,7 +65,7 @@ export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
 
 export const visPanelForKlagevurderingMedAksjonspunktNfp = () => (
   <KlagevurderingProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     klageVurdering={object('klageVurdering', {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
@@ -72,11 +80,7 @@ export const visPanelForKlagevurderingMedAksjonspunktNfp = () => (
       },
     } as KlageVurdering)}
     saveKlage={action('button-click') as (data: any) => Promise<any>}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnlySubmitButton={boolean('readOnly', false)}
-    alleKodeverk={alleKodeverk as any}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,

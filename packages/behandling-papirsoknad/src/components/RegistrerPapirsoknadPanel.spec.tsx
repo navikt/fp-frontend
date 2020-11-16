@@ -11,30 +11,32 @@ import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
 const fagsak = {
   saksnummer: 123456,
-  fagsakYtelseType: {
+  sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
-  fagsakPerson: {
-    alder: 30,
-    erDod: false,
-    erKvinne: true,
-    navn: 'Petra',
-    personnummer: '12343541',
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-  },
-  fagsakStatus: {
+  status: {
     kode: fagsakStatus.UNDER_BEHANDLING,
     kodeverk: 'FAGSAK_STATUS',
+  },
+} as Fagsak;
+
+const fagsakPerson = {
+  alder: 30,
+  erDod: false,
+  erKvinne: true,
+  navn: 'Petra',
+  personnummer: '12343541',
+  personstatusType: {
+    kode: personstatusType.BOSATT,
+    kodeverk: 'PERSONSTATUS_TYPE',
   },
 };
 
@@ -42,9 +44,10 @@ describe('<RegistrerPapirsoknadPanel>', () => {
   it('skal vise aksjonspunkt-hjelpetekst og form for engangsstønad', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       kodeverk={{}}
       readOnly={false}
-      soknadData={new SoknadData('ES', 'TEST', 'TEST', [])}
+      soknadData={new SoknadData('ES', 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
@@ -59,9 +62,10 @@ describe('<RegistrerPapirsoknadPanel>', () => {
   it('skal vise foreldrepenger-form', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       kodeverk={{}}
       readOnly
-      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST', [])}
+      soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
@@ -75,14 +79,15 @@ describe('<RegistrerPapirsoknadPanel>', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={{
         ...fagsak,
-        fagsakYtelseType: {
+        sakstype: {
           kode: fagsakYtelseType.SVANGERSKAPSPENGER,
           kodeverk: 'YTELSE_TYPE',
         },
       }}
+      fagsakPerson={fagsakPerson}
       kodeverk={{}}
       readOnly
-      soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', [])}
+      soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}

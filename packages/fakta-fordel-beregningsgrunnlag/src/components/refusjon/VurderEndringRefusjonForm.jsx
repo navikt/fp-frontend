@@ -12,7 +12,7 @@ import { behandlingForm } from '@fpsak-frontend/form';
 import fordelBeregningsgrunnlagAksjonspunkterPropType from '../../propTypes/fordelBeregningsgrunnlagAksjonspunkterPropType';
 import beregningsgrunnlagPropType from '../../propTypes/beregningsgrunnlagPropType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
-import VurderEndringRefusjonRad, { lagNøkkel } from './VurderEndringRefusjonRad';
+import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
 
 const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
@@ -35,10 +35,10 @@ export const VurderEndringRefusjonFormImpl = ({
 }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
   const ap = finnAksjonspunkt(aksjonspunkter);
-  const erAksjonspunktApent = ap ? isAksjonspunktOpen(ap.status.kode) : false;
+  const erAksjonspunktÅpent = ap ? isAksjonspunktOpen(ap.status.kode) : false;
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktApent}>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktÅpent}>
         <FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" />
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
@@ -50,6 +50,7 @@ export const VurderEndringRefusjonFormImpl = ({
           <VurderEndringRefusjonRad
             refusjonAndel={andel}
             readOnly={readOnly}
+            erAksjonspunktÅpent={erAksjonspunktÅpent}
             key={andel.arbeidsgiverNavn}
           />
         ))}
@@ -68,7 +69,7 @@ export const VurderEndringRefusjonFormImpl = ({
             formName={formProps.form}
             isSubmittable={submittable && submitEnabled}
             isReadOnly={readOnly}
-            hasOpenAksjonspunkter={erAksjonspunktApent}
+            hasOpenAksjonspunkter={erAksjonspunktÅpent}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
           />
@@ -81,9 +82,12 @@ export const VurderEndringRefusjonFormImpl = ({
 
 export const buildInitialValues = (bg, aksjonspunkter) => {
   const { andeler } = bg.refusjonTilVurdering;
-  const initialValues = {};
+  let initialValues = {};
   andeler.forEach((andel) => {
-    initialValues[lagNøkkel(andel)] = VurderEndringRefusjonRad.buildInitialValues(andel);
+    initialValues = {
+      ...initialValues,
+      ...VurderEndringRefusjonRad.buildInitialValues(andel),
+    };
   });
   const refusjonAP = finnAksjonspunkt(aksjonspunkter);
   initialValues[BEGRUNNELSE_FIELD] = refusjonAP && refusjonAP.begrunnelse ? refusjonAP.begrunnelse : '';

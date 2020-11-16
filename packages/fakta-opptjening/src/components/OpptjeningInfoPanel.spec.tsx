@@ -1,27 +1,34 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Aksjonspunkt, OpptjeningAktivitet } from '@fpsak-frontend/types';
+import { Aksjonspunkt, FastsattOpptjening, OpptjeningAktivitet } from '@fpsak-frontend/types';
 
 import { buildInitialValues, OpptjeningInfoPanel } from './OpptjeningInfoPanel';
 import OpptjeningFaktaForm from './OpptjeningFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-opptjening';
 
 describe('<OpptjeningInfoPanel>', () => {
   it('skal vise opptjeningspanel', () => {
-    const wrapper = shallowWithIntl(<OpptjeningInfoPanel
+    const wrapper = shallow(<OpptjeningInfoPanel
       {...reduxFormPropsMock}
-      intl={intlMock}
       hasOpenAksjonspunkter
       readOnly={false}
       fastsattOpptjening={{
         opptjeningFom: '2017-01-01',
         opptjeningTom: '2017-10-01',
+        opptjeningperiode: {
+          måneder: 1,
+          dager: 1,
+        },
       }}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      opptjeningAktiviteter={[]}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
     />);
 
     const opptjeningForm = wrapper.find(OpptjeningFaktaForm);
@@ -54,7 +61,7 @@ describe('<OpptjeningInfoPanel>', () => {
     const fastsattOpptjening = {
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-10-01',
-    };
+    } as FastsattOpptjening;
     const aksjonspunkter = { definisjon: { kode: '5058' }, erAktivt: true, toTrinnsBehandling: false } as Aksjonspunkt;
 
     const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, [aksjonspunkter]);
@@ -113,7 +120,7 @@ describe('<OpptjeningInfoPanel>', () => {
     const fastsattOpptjening = {
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-10-01',
-    };
+    } as FastsattOpptjening;
     const aksjonspunkter = [{ definisjon: { kode: '5051' }, erAktivt: true, toTrinnsBehandling: false },
       { definisjon: { kode: '5080' }, erAktivt: true, toTrinnsBehandling: false }];
 

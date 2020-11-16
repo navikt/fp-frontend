@@ -23,6 +23,7 @@ interface SelectFieldProps {
   disabled?: boolean;
   onChange?: (elmt: ReactNode, value: any) => void;
   className?: string;
+  value?: string;
 }
 
 /* eslint-disable-next-line react/prop-types */

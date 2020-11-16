@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 
 import {
-  FagsakInfo, Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
+  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Aksjonspunkt, Behandling,
+  KodeverkMedNavn, Aksjonspunkt, Behandling, Fagsak, FagsakPerson,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -23,7 +23,8 @@ interface DataProps {
 
 interface OwnProps {
   behandlingId: number;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
   behandlingEventHandler: {
@@ -38,6 +39,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
   kodeverk,
   fagsak,
+  fagsakPerson,
   rettigheter,
   setRequestPendingMessage,
 }) => {
@@ -105,6 +107,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
         behandling={hasNotFinished ? forrigeBehandling : behandling}
         aksjonspunkter={data.aksjonspunkter}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         kodeverk={kodeverk}
         rettigheter={rettigheter}
         settPaVent={settPaVent}

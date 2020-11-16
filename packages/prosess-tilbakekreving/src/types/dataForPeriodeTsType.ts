@@ -2,7 +2,7 @@ import { DetaljertFeilutbetalingPeriode } from './detaljerteFeilutbetalingsperio
 
 export type DataForPeriode = {
   erTotalBelopUnder4Rettsgebyr: boolean;
-  begrunnelse: string;
+  begrunnelse?: string;
   erForeldet: boolean;
 } & DetaljertFeilutbetalingPeriode
 

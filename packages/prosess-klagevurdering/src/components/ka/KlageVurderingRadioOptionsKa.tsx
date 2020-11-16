@@ -59,43 +59,52 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
       </Row>
       {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
     && (
-      <ArrowBox>
-        <SelectField
-          readOnly={readOnly}
-          name="klageMedholdArsak.kode"
-          selectValues={medholdOptions}
-          className={readOnly ? styles.selectReadOnly : null}
-          label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
-          validate={[required]}
-          bredde="xl"
-        />
-        <VerticalSpacer sixteenPx />
-        <RadioGroupField
-          name="klageVurderingOmgjoer.kode"
-          validate={[required]}
-          readOnly={readOnly}
-          className={readOnly ? styles.selectReadOnly : null}
-          direction="vertical"
-        >
-          <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Omgjort' }} />
-          <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Ugunst' }} />
-          <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.DelvisOmgjort' }} />
-        </RadioGroupField>
-      </ArrowBox>
+      <Row>
+        <Column xs="4">
+          <ArrowBox>
+            <SelectField
+              readOnly={readOnly}
+              name="klageMedholdArsak.kode"
+              selectValues={medholdOptions}
+              className={readOnly ? styles.selectReadOnly : null}
+              label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
+              validate={[required]}
+              bredde="xl"
+            />
+            <VerticalSpacer sixteenPx />
+            <RadioGroupField
+              name="klageVurderingOmgjoer.kode"
+              validate={[required]}
+              readOnly={readOnly}
+              className={readOnly ? styles.selectReadOnly : null}
+              direction="vertical"
+            >
+              <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Omgjort' }} />
+              <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Ugunst' }} />
+              <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.DelvisOmgjort' }} />
+            </RadioGroupField>
+          </ArrowBox>
+        </Column>
+      </Row>
     )}
       {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
       && (
-        <ArrowBox marginLeft={380}>
-          <SelectField
-            readOnly={readOnly}
-            name="klageMedholdArsak.kode"
-            className={readOnly ? styles.selectReadOnly : null}
-            selectValues={medholdOptions}
-            label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
-            validate={[required]}
-            bredde="xl"
-          />
-        </ArrowBox>
+        <Row>
+          <Column xs="4" />
+          <Column xs="4">
+            <ArrowBox>
+              <SelectField
+                readOnly={readOnly}
+                name="klageMedholdArsak.kode"
+                className={readOnly ? styles.selectReadOnly : null}
+                selectValues={medholdOptions}
+                label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
+                validate={[required]}
+                bredde="xl"
+              />
+            </ArrowBox>
+          </Column>
+        </Row>
       )}
     </div>
   );

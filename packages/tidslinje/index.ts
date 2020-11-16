@@ -1,5 +1,6 @@
 export { default as LegendBox } from './src/components/LegendBox';
 export { default as Tidslinje } from './src/Tidslinje';
+export { default as EventProps } from './src/eventPropsTsType';
 export { default as TimeLineButton } from './src/components/TimeLineButton';
 export { default as TimeLineControl } from './src/components/TimeLineControl';
 export { default as TimeLineDataContainer } from './src/components/TimeLineDataContainer';

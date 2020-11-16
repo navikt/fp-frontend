@@ -6,6 +6,15 @@ import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { getAlleMerknaderFraBeslutter, ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
+import { Aksjonspunkt, Behandling, FagsakPerson } from '@fpsak-frontend/types';
+
+interface Data {
+  behandling: Behandling;
+  aksjonspunkterForSteg: Aksjonspunkt[];
+  perioderForeldelse: any;
+  fagsakPerson: FagsakPerson;
+  beregnBelop: () => number;
+}
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <ForeldelseProsessIndex {...props} />
@@ -19,11 +28,11 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getData = ({
-    behandling, aksjonspunkterForSteg, perioderForeldelse, fagsak, beregnBelop,
-  }) => ({
+    behandling, aksjonspunkterForSteg, perioderForeldelse, fagsakPerson, beregnBelop,
+  }: Data) => ({
     perioderForeldelse,
     beregnBelop,
-    navBrukerKjonn: fagsak.fagsakPerson.erKvinne ? navBrukerKjonn.KVINNE : navBrukerKjonn.MANN,
+    navBrukerKjonn: fagsakPerson.erKvinne ? navBrukerKjonn.KVINNE : navBrukerKjonn.MANN,
     alleMerknaderFraBeslutter: getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg),
   })
 }

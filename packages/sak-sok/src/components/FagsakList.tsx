@@ -16,7 +16,7 @@ const headerTextCodes = [
   'FagsakList.Status',
   'FagsakList.BarnFodt',
 ];
-const lagFagsakSortObj = (fagsak) => ({
+const lagFagsakSortObj = (fagsak: Fagsak) => ({
   avsluttet: fagsak.status.kode === fagsakStatus.AVSLUTTET,
   endret: fagsak.endret ? fagsak.endret : fagsak.opprettet,
 });

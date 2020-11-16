@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 
@@ -7,7 +9,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-const findHelpTexts = (intl, aksjonspunkter) => {
+const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]) => {
   const helpTexts = [];
   if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
@@ -40,7 +42,7 @@ const VedtakHelpTextPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
         <Alertstripe type="info">
           <Normaltekst><FormattedMessage id="VedtakHelpTextPanel.Vurder" /></Normaltekst>
           <ul>
-            {helpTexts.map((text) => <li><Normaltekst>{text}</Normaltekst></li>)}
+            {helpTexts.map((text) => <li key={text}><Normaltekst>{text}</Normaltekst></li>)}
           </ul>
         </Alertstripe>
       </>

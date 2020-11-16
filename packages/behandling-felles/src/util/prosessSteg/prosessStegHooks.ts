@@ -3,10 +3,9 @@ import {
 } from 'react';
 
 import {
-  Behandling, Aksjonspunkt, Vilkar,
+  Fagsak, Behandling, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
 
-import FagsakInfo from '../../types/fagsakInfoTsType';
 import Rettigheter from '../../types/rettigheterTsType';
 import ProsessStegMenyRad from '../../types/prosessStegMenyRadTsType';
 import {
@@ -18,7 +17,7 @@ import { ProsessStegUtledet } from './ProsessStegUtledet';
 const useProsessStegPaneler = (
   prosessStegPanelDefinisjoner: ProsessStegDef[],
   panelData: any,
-  fagsak: FagsakInfo,
+  fagsak: Fagsak,
   rettigheter: Rettigheter,
   behandling: Behandling,
   aksjonspunkter: Aksjonspunkt[],
@@ -76,7 +75,7 @@ const useProsessStegVelger = (
 }, [behandling.versjon, valgtProsessSteg, valgtFaktaSteg]);
 
 const useBekreftAksjonspunkt = (
-  fagsak: FagsakInfo,
+  fagsak: Fagsak,
   behandling: Behandling,
   lagringSideEffectsCallback: (aksjonspunktModeller: any) => () => void,
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,

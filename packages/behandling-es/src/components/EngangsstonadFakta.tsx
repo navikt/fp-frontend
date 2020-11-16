@@ -3,10 +3,12 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
-  FagsakInfo, Rettigheter, SideMenuWrapper, faktaHooks, useSetBehandlingVedEndring,
+  Rettigheter, SideMenuWrapper, faktaHooks, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import {
+  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson,
+} from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import faktaPanelDefinisjoner from '../panelDefinisjoner/faktaEsPanelDefinisjoner';
@@ -17,7 +19,8 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STA
 
 interface OwnProps {
   data: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -33,6 +36,7 @@ const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = 
   intl,
   data,
   fagsak,
+  fagsakPerson,
   behandling,
   rettigheter,
   alleKodeverk,
@@ -55,7 +59,7 @@ const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = 
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvEsPaneler = {
-    fagsak, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, hasFetchError,
+    fagsak, fagsakPerson, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, hasFetchError,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

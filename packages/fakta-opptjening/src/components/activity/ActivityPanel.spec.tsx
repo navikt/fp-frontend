@@ -1,15 +1,17 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { FormattedMessage } from 'react-intl';
 import {
   PeriodpickerField, RadioGroupField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
+
+import CustomOpptjeningAktivitet from '../../CustomOpptjeningAktivitet';
 import { ActivityPanel } from './ActivityPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-opptjening';
 
@@ -17,17 +19,18 @@ describe('<ActivityPanel>', () => {
   const opptjeningAktivitetTypes = [{
     kode: OAType.ARBEID,
     navn: 'Arbeid',
+    kodeverk: '',
   }, {
     kode: OAType.NARING,
     navn: 'Næring',
+    kodeverk: '',
   }];
 
   it('skal vise periodevelger som aktiv når aktivitet ikke er godkjent eller avvist og en har aksjonspunkt', () => {
     const activity = {
       erManueltOpprettet: false,
       erGodkjent: undefined,
-      begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -36,12 +39,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -54,7 +64,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: true,
       erGodkjent: true,
       begrunnelse: 'en begrunnelse',
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -63,12 +73,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -81,7 +98,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: false,
       erGodkjent: true,
       erEndret: true,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -90,12 +107,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -108,7 +132,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: false,
       erGodkjent: true,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -117,12 +141,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt={false}
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -135,7 +166,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: false,
       erGodkjent: true,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -144,12 +175,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt={false}
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const daysInPeriodLabel = wrapper.find(FormattedMessage);
@@ -165,7 +203,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: true,
       erGodkjent: true,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -174,12 +212,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const select = wrapper.find(SelectField);
@@ -193,7 +238,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: false,
       erGodkjent: true,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -202,12 +247,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     const select = wrapper.find(SelectField);
@@ -220,7 +272,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: false,
       erGodkjent: undefined,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -229,12 +281,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(1);
@@ -246,7 +305,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: false,
       erGodkjent: true,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -255,12 +314,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt={false}
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(0);
@@ -271,7 +337,7 @@ describe('<ActivityPanel>', () => {
       erManueltOpprettet: true,
       erGodkjent: undefined,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -280,12 +346,19 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(1);
@@ -298,7 +371,7 @@ describe('<ActivityPanel>', () => {
       erGodkjent: false,
       erEndret: false,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -307,16 +380,24 @@ describe('<ActivityPanel>', () => {
       readOnly
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).to.have.length(1);
     expect(tekstFelt.props().readOnly).to.eql(true);
+    // @ts-ignore
     expect(tekstFelt.props().label.props.id).to.eql('ActivityPanel.Begrunnelse');
   });
 
@@ -326,7 +407,7 @@ describe('<ActivityPanel>', () => {
       erGodkjent: true,
       erEndret: false,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -335,16 +416,24 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).to.have.length(1);
     expect(tekstFelt.props().readOnly).to.eql(true);
+    // @ts-ignore
     expect(tekstFelt.props().label.props.id).to.eql('ActivityPanel.Begrunnelse');
   });
 
@@ -354,7 +443,7 @@ describe('<ActivityPanel>', () => {
       erGodkjent: false,
       erEndret: false,
       begrunnelse: undefined,
-    };
+    } as CustomOpptjeningAktivitet;
 
     const wrapper = shallowWithIntl(<ActivityPanel
       {...reduxFormPropsMock}
@@ -363,16 +452,24 @@ describe('<ActivityPanel>', () => {
       readOnly={false}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       cancelSelectedOpptjeningActivity={sinon.spy()}
-      selectedActivityType={{ kode: OAType.ARBEID, navn: 'ARBEID' }}
+      selectedActivityType={{ kode: OAType.ARBEID, kodeverk: '' }}
       opptjeningFom="2017-08-15"
       opptjeningTom="2017-12-31"
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
+      updateActivity={() => undefined}
+      alleKodeverk={{}}
+      activity={activity}
+      opptjeningFomDato="2017-08-15"
+      opptjeningTomDato="2017-12-31"
     />);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).to.have.length(1);
     expect(tekstFelt.props().readOnly).to.eql(false);
+    // @ts-ignore
     expect(tekstFelt.props().label.props.id).to.eql('ActivityPanel.BegrunnEndringene');
   });
 });

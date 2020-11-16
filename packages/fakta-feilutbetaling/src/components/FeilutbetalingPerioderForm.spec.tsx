@@ -40,15 +40,13 @@ describe('<FeilutbetalingPerioderFormImpl>', () => {
   it('skal rendre underÅrsak selectfield hvis årsak har underÅrsaker', () => {
     const årsak = 'MEDLEMSKAP_VILKAARET_TYPE';
     const årsaker = [{
-      kodeverk: 'MEDLEMSKAP_VILKAARET_TYPE',
-      årsak: 'Medlemskapsvilkåret §14-2',
       hendelseType: {
         kode: 'MEDLEMSKAP_VILKAARET_TYPE',
+        navn: '',
       },
       hendelseUndertyper: [{
-        kodeverk: 'MEDLEMSKAP_VILKAAR',
-        underÅrsak: 'Utvandret – fødsel',
-        underÅrsakKode: 'UTVANDRET_FODSEL',
+        kode: 'MEDLEMSKAP_VILKAAR',
+        navn: '',
       }],
     }];
     const props = {

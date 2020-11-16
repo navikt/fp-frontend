@@ -3,10 +3,11 @@ import { StepType } from '@navikt/nap-process-menu/dist/Step';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
-import { Behandling, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
+import {
+  Fagsak, Behandling, Aksjonspunkt, Vilkar,
+} from '@fpsak-frontend/types';
 
 import readOnlyUtils from '../readOnlyUtils';
-import FagsakInfo from '../../types/fagsakInfoTsType';
 import ProsessStegMenyRad from '../../types/prosessStegMenyRadTsType';
 import Rettigheter from '../../types/rettigheterTsType';
 import { ProsessStegDef, ProsessStegPanelDef } from './ProsessStegDef';
@@ -67,7 +68,7 @@ export const finnValgtPanel = (
 };
 
 const finnProsessmenyType = (
-  status: vilkarUtfallType.OPPFYLT | vilkarUtfallType.IKKE_OPPFYLT | vilkarUtfallType.IKKE_VURDERT,
+  status: string,
   harApentAksjonspunkt: boolean,
 ): StepType => {
   if (harApentAksjonspunkt) {
@@ -97,7 +98,7 @@ export const formaterPanelerForProsessmeny = (
 
 export const getBekreftAksjonspunktCallback = (
   lagringSideEffectsCallback: (aksjonspunktModeller: any) => () => void,
-  fagsak: FagsakInfo,
+  fagsak: Fagsak,
   behandling: Behandling,
   aksjonspunkter: Aksjonspunkt[],
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,

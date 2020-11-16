@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { InjectedFormProps, WrappedReduxFormContext } from 'redux-form';
+import { InjectedFormProps } from 'redux-form';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
@@ -31,12 +31,11 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
   return helpTexts;
 };
 
-interface OwnProps {
+interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
-  omsorg?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
@@ -44,9 +43,14 @@ interface OwnProps {
   personopplysninger: Personopplysninger;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
+  submitCallback: (...args: any[]) => any;
 }
 
-export const OmsorgInfoPanel: FunctionComponent<OwnProps & WrappedReduxFormContext & InjectedFormProps> = ({
+interface MappedOwnProps {
+  omsorg?: boolean;
+}
+
+export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   personopplysninger,
   readOnly,
   hasOpenAksjonspunkter,
@@ -91,14 +95,6 @@ export const OmsorgInfoPanel: FunctionComponent<OwnProps & WrappedReduxFormConte
   </>
 );
 
-interface PureOwnProps {
-  ytelsefordeling: Ytelsefordeling;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
 const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.ytelsefordeling,
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
@@ -131,13 +127,13 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, aksjonspunkter) => (values: any) => transformValues(values, submitCallback, aksjonspunkter));
 
-const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   initialValues: buildInitialValues(ownProps),
   omsorg: behandlingFormValueSelector('OmsorgInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'omsorg'),
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToProps)(behandlingForm({
   form: 'OmsorgInfoPanel',
   validate: IkkeOmsorgPeriodeField.validate,
 })(OmsorgInfoPanel));

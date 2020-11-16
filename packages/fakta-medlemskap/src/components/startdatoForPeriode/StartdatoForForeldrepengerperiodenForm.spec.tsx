@@ -14,7 +14,6 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
     const wrapper = shallowWithIntl(<StartdatoForForeldrepengerperiodenForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      arbeidsgiver="Sopra Steria"
       hasAksjonspunkt
       hasOpenAksjonspunkt
       hasOpenMedlemskapAksjonspunkter

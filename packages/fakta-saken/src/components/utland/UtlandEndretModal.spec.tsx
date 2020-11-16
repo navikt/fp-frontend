@@ -21,7 +21,7 @@ describe('<UtlandEndretModal>', () => {
     const knapp = wrapper.find(Hovedknapp);
     expect(knapp).to.have.length(1);
 
-    knapp.prop('onClick')();
+    knapp.prop('onClick')({} as React.MouseEvent<any>);
 
     expect(lagreOgLukk.getCalls()).to.have.length(1);
   });

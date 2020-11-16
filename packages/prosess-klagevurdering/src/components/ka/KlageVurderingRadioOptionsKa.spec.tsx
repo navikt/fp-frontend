@@ -23,9 +23,13 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).to.have.length(4);
+    // @ts-ignore
     expect(radios.at(0).prop('label').id).to.equal('Klage.ResolveKlage.KeepVedtakNk');
+    // @ts-ignore
     expect(radios.at(1).prop('label').id).to.equal('Klage.ResolveKlage.ChangeVedtak');
+    // @ts-ignore
     expect(radios.at(2).prop('label').id).to.equal('Klage.Behandle.Hjemsendt');
+    // @ts-ignore
     expect(radios.at(3).prop('label').id).to.equal('Klage.ResolveKlage.NullifyVedtak');
   });
 
@@ -38,12 +42,19 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).to.have.length(7);
+    // @ts-ignore
     expect(radios.at(0).prop('label').id).to.equal('Klage.ResolveKlage.KeepVedtakNk');
+    // @ts-ignore
     expect(radios.at(1).prop('label').id).to.equal('Klage.ResolveKlage.ChangeVedtak');
+    // @ts-ignore
     expect(radios.at(2).prop('label').id).to.equal('Klage.Behandle.Hjemsendt');
+    // @ts-ignore
     expect(radios.at(3).prop('label').id).to.equal('Klage.ResolveKlage.NullifyVedtak');
+    // @ts-ignore
     expect(radios.at(4).prop('label').id).to.equal('Klage.Behandle.Omgjort');
+    // @ts-ignore
     expect(radios.at(5).prop('label').id).to.equal('Klage.Behandle.Ugunst');
+    // @ts-ignore
     expect(radios.at(6).prop('label').id).to.equal('Klage.Behandle.DelvisOmgjort');
   });
 

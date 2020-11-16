@@ -1,18 +1,16 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import { TilleggsopplysningerInfoPanel } from './TilleggsopplysningerInfoPanel';
 import TilleggsopplysningerFaktaForm from './TilleggsopplysningerFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-tilleggsopplysninger';
 
 describe('<TilleggsopplysningerInfoPanel>', () => {
   it('skal vise faktapanel og form for tilleggsopplysninger', () => {
-    const wrapper = shallowWithIntl(<TilleggsopplysningerInfoPanel
+    const wrapper = shallow(<TilleggsopplysningerInfoPanel
       {...reduxFormPropsMock}
-      intl={intlMock}
       hasOpenAksjonspunkter
       readOnly={false}
       behandlingId={1}
@@ -26,9 +24,8 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
   });
 
   it('skal vise readonly form når ingen åpne aksjonspunkter', () => {
-    const wrapper = shallowWithIntl(<TilleggsopplysningerInfoPanel
+    const wrapper = shallow(<TilleggsopplysningerInfoPanel
       {...reduxFormPropsMock}
-      intl={intlMock}
       hasOpenAksjonspunkter={false}
       readOnly={false}
       behandlingId={1}
@@ -40,9 +37,8 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
   });
 
   it('skal vise readonly form når ikke rettigheter', () => {
-    const wrapper = shallowWithIntl(<TilleggsopplysningerInfoPanel
+    const wrapper = shallow(<TilleggsopplysningerInfoPanel
       {...reduxFormPropsMock}
-      intl={intlMock}
       hasOpenAksjonspunkter
       readOnly
       behandlingId={1}

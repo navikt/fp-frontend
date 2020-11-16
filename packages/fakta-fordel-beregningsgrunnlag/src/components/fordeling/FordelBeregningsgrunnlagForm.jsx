@@ -193,6 +193,7 @@ export const mapAndel = (aktivitet) => ({
   arbeidsgiverId: aktivitet.arbeidsgiverId !== '' ? aktivitet.arbeidsgiverId : null,
   arbeidsforholdId: aktivitet.arbeidsforholdId !== '' ? aktivitet.arbeidsforholdId : null,
   nyAndel: aktivitet.nyAndel,
+  kilde: aktivitet.kilde,
   lagtTilAvSaksbehandler: aktivitet.lagtTilAvSaksbehandler,
   arbeidsforholdType: aktivitet.arbeidsforholdType,
   beregningsperiodeTom: aktivitet.beregningsperiodeTom,

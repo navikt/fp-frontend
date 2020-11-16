@@ -85,7 +85,7 @@ describe('<CalendarOverlay>', () => {
       onClose={onCloseCallback}
     />);
 
-    wrapper.find('div').prop('onBlur')('test');
+    wrapper.find('div').prop('onBlur')({} as React.FocusEvent);
   });
 
   it('skal kjøre callback når en trykker escape-knappen', () => {
@@ -102,7 +102,7 @@ describe('<CalendarOverlay>', () => {
       onClose={onCloseCallback}
     />);
 
-    wrapper.find('div').prop('onKeyDown')({ keyCode: 27 });
+    wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent<any>);
 
     expect(onCloseCallback.called).is.true;
   });
@@ -121,7 +121,7 @@ describe('<CalendarOverlay>', () => {
       onClose={onCloseCallback}
     />);
 
-    wrapper.find('div').prop('onKeyDown')({ keyCode: 20 });
+    wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent<any>);
 
     expect(onCloseCallback.called).is.false;
   });

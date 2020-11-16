@@ -1,16 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
+import { isBGAksjonspunktSomGirFritekstfelt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  KodeverkMedNavn, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
-  Aksjonspunkt, SimuleringResultat, Beregningsgrunnlag, Medlemskap, Kodeverk,
+  BeregningsresultatFp, BeregningsresultatEs, Vilkar, TilbakekrevingValg,
+  SimuleringResultat, Beregningsgrunnlag, Medlemskap, Aksjonspunkt,
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import VedtakForm from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
-import { skalSkriveFritekstGrunnetFastsettingAvBeregning } from './components/felles/VedtakHelper';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -20,30 +22,34 @@ const intl = createIntl({
   messages,
 }, cache);
 
+const skalSkriveFritekstGrunnetFastsettingAvBeregning = (aksjonspunkter: Aksjonspunkt[], beregningsgrunnlag?: Beregningsgrunnlag) => {
+  if (!beregningsgrunnlag || !aksjonspunkter) {
+    return false;
+  }
+  const behandlingHarLøstBGAP = aksjonspunkter.find((ap) => isBGAksjonspunktSomGirFritekstfelt(ap.definisjon.kode)
+    && ap.status.kode === aksjonspunktStatus.UTFORT);
+  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
+  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find((andel) => andel.overstyrtPrAar || andel.overstyrtPrAar === 0);
+  return (!!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt);
+};
+
 interface OwnProps {
-  behandling: Behandling;
   beregningresultatForeldrepenger?: BeregningsresultatFp;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
-  tilbakekrevingvalg?: {
-    videreBehandling: Kodeverk;
-  };
+  tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
   beregningsresultatOriginalBehandling?: {
-    'beregningsresultat-engangsstonad'?: any;
-    'beregningsresultat-foreldrepenger'?: any;
+    'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
+    'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
   };
   medlemskap: Medlemskap;
   vilkar: Vilkar[];
-  aksjonspunkter: Aksjonspunkt[];
-  isReadOnly: boolean;
   previewCallback: () => void;
-  submitCallback: (data: any) => void;
   ytelseTypeKode: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const VedtakProsessIndex: FunctionComponent<OwnProps> = ({
+const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   beregningresultatForeldrepenger,
   beregningresultatEngangsstonad,
@@ -60,9 +66,15 @@ const VedtakProsessIndex: FunctionComponent<OwnProps> = ({
   ytelseTypeKode,
   alleKodeverk,
 }) => {
-  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(beregningsgrunnlag, aksjonspunkter);
+  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkter, beregningsgrunnlag);
   const resultatstruktur = ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
     ? beregningresultatEngangsstonad : beregningresultatForeldrepenger;
+
+  let originaltBeregningsresultat;
+  if (beregningsresultatOriginalBehandling) {
+    originaltBeregningsresultat = ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
+      ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad'] : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
+  }
 
   return (
     <RawIntlProvider value={intl}>
@@ -100,7 +112,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
-          resultatstrukturOriginalBehandling={beregningsresultatOriginalBehandling}
+          resultatstrukturOriginalBehandling={originaltBeregningsresultat}
           medlemskapFom={medlemskap ? medlemskap.fom : undefined}
         />
       )}

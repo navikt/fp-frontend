@@ -35,23 +35,24 @@ describe('<VisittkortPanel>', () => {
       kodeverk: 'STATUS',
     },
     barnFodt: '20120-01-01',
-    person: {
-      erDod: false,
-      navn: 'Olga Utvikler',
-      alder: 41,
-      personnummer: '1234567',
-      erKvinne: true,
-      personstatusType: {
-        kode: personstatusType.BOSATT,
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
-    },
     opprettet: '20120-01-01',
     endret: '20120-01-01',
     antallBarn: 1,
     kanRevurderingOpprettes: false,
     skalBehandlesAvInfotrygd: false,
     dekningsgrad: 100,
+  };
+
+  const fagsakPerson = {
+    erDod: false,
+    navn: 'Olga Utvikler',
+    alder: 41,
+    personnummer: '1234567',
+    erKvinne: true,
+    personstatusType: {
+      kode: personstatusType.BOSATT,
+      kodeverk: 'PERSONSTATUS_TYPE',
+    },
   };
 
   const familieHendelse = {
@@ -181,6 +182,7 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
       alleKodeverk={{}}
@@ -190,8 +192,8 @@ describe('<VisittkortPanel>', () => {
     expect(wrapper.find(FlexContainer)).has.length(0);
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).has.length(1);
-    expect(visittkort.prop('name')).is.eql(fagsak.person.navn);
-    expect(visittkort.prop('fodselsnummer')).is.eql(fagsak.person.personnummer);
+    expect(visittkort.prop('name')).is.eql(fagsakPerson.navn);
+    expect(visittkort.prop('fodselsnummer')).is.eql(fagsakPerson.personnummer);
     expect(visittkort.prop('gender')).is.eql(Gender.female);
   });
 
@@ -199,6 +201,7 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
       alleKodeverk={{}}
@@ -209,8 +212,8 @@ describe('<VisittkortPanel>', () => {
     expect(wrapper.find(FlexContainer)).has.length(0);
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).has.length(1);
-    expect(visittkort.prop('name')).is.eql(fagsak.person.navn);
-    expect(visittkort.prop('fodselsnummer')).is.eql(fagsak.person.personnummer);
+    expect(visittkort.prop('name')).is.eql(fagsakPerson.navn);
+    expect(visittkort.prop('fodselsnummer')).is.eql(fagsakPerson.personnummer);
     expect(visittkort.prop('gender')).is.eql(Gender.female);
   });
 
@@ -218,6 +221,7 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       personopplysninger={personopplysningerSoker}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
@@ -238,6 +242,7 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       personopplysninger={{
         ...personopplysningerSoker,
         annenPart: personopplysningerAnnenPart,
@@ -265,6 +270,7 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
+      fagsakPerson={fagsakPerson}
       personopplysninger={{
         ...personopplysningerSoker,
         annenPart: {

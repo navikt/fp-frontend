@@ -30,7 +30,10 @@ const aksjonspunkter = [{
 }] as Aksjonspunkt[];
 
 const ankeVurderingResultat = {
-  ankeVurdering: ankeVurdering.ANKE_AVVIS,
+  ankeVurdering: {
+    kode: ankeVurdering.ANKE_AVVIS,
+    kodeverk: '',
+  },
   paAnketBehandlingId: 1,
   erAnkerIkkePart: true,
   erIkkeKonkret: true,
@@ -38,6 +41,18 @@ const ankeVurderingResultat = {
   erIkkeSignert: true,
   erSubsidiartRealitetsbehandles: true,
   begrunnelse: 'Dette er en begrunnelse',
+};
+
+const standardProsessProps = {
+  behandling,
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
 };
 
 export default {
@@ -48,75 +63,63 @@ export default {
 
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
   <AnkeResultatProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+          kodeverk: '',
+        },
       },
     } as AnkeVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
-    alleKodeverk={alleKodeverk as any}
   />
 );
 
 export const visPanelForResultatVedOppheveOgHjemsende = () => (
   <AnkeResultatProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
+          kodeverk: '',
+        },
       },
     } as AnkeVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
-    alleKodeverk={alleKodeverk as any}
   />
 );
 
 export const visPanelForResultatVedOmgjør = () => (
   <AnkeResultatProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: ankeVurdering.ANKE_OMGJOER,
-        ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+        ankeVurdering: {
+          kode: ankeVurdering.ANKE_OMGJOER,
+          kodeverk: '',
+        },
+        ankeVurderingOmgjoer: {
+          kode: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+          kodeverk: '',
+        },
         ankeOmgjoerArsakNavn: 'Testårsak',
       },
     } as AnkeVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
-    alleKodeverk={alleKodeverk as any}
   />
 );
 
 export const visPanelForResultatVedAvvis = () => (
   <AnkeResultatProsessIndex
-    behandling={behandling}
+    {...standardProsessProps}
     ankeVurdering={object('ankeVurdering', {
       ankeVurderingResultat,
     } as AnkeVurdering)}
-    aksjonspunkter={aksjonspunkter}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-    saveAnke={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
-    alleKodeverk={alleKodeverk as any}
   />
 );

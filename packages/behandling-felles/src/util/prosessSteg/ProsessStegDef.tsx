@@ -53,7 +53,7 @@ export abstract class ProsessStegPanelDef {
   protected getOverstyrVisningAvKomponent = (_data: any): boolean => false
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getOverstyrtStatus = (_data: any): boolean => undefined
+  public getOverstyrtStatus = (_data: any): string => undefined
 
   /**
    * Data som skal sendes med til komponent. Dette er data som frontend allerede har tilgang til (Trenger ikke hente på nytt)

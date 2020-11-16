@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
 
 import {
-  FagsakInfo, Rettigheter, BehandlingPaVent, SettPaVentParams,
+  Rettigheter, BehandlingPaVent, SettPaVentParams,
 } from '@fpsak-frontend/behandling-felles';
-import { KodeverkMedNavn, Behandling } from '@fpsak-frontend/types';
+import {
+  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson,
+} from '@fpsak-frontend/types';
 
 import EngangsstonadProsess from './EngangsstonadProsess';
 import EngangsstonadFakta from './EngangsstonadFakta';
@@ -11,7 +13,8 @@ import FetchedData from '../types/fetchedDataTsType';
 
 interface OwnProps {
   fetchedData: FetchedData;
-  fagsak: FagsakInfo;
+  fagsak: Fagsak;
+  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -34,6 +37,7 @@ interface FaktaPanelInfo {
 const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   fetchedData,
   fagsak,
+  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -61,6 +65,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
       <EngangsstonadProsess
         data={fetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         behandling={behandling}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
@@ -77,6 +82,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         behandling={behandling}
         data={fetchedData}
         fagsak={fagsak}
+        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         hasFetchError={hasFetchError}

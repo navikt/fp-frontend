@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { fodselsnummerPattern, isValidFodselsnummer } from '../fodselsnummerUtils';
+import { removeSpacesFromNumber } from '../currencyUtils';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '../formats';
 import {
   arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
@@ -64,6 +65,9 @@ export const maxLength = (length) => (text) => (isEmpty(text) || text.toString()
 
 export const minValue = (length) => (number) => (number >= length ? null : minValueMessage(length));
 export const maxValue = (length) => (number) => (number <= length ? null : maxValueMessage(length));
+
+export const minValueFormatted = (min) => (number) => (removeSpacesFromNumber(number) >= min ? null : minValueMessage(min));
+export const maxValueFormatted = (max) => (number) => (removeSpacesFromNumber(number) <= max ? null : maxValueMessage(max));
 
 export const hasValidOrgNumber = (number) => (number.toString().trim().length === 9 ? null : invalidOrgNumberMessage());
 export const hasValidOrgNumberOrFodselsnr = (number) => (number.toString().trim().length === 9 || number.toString().trim().length === 11
@@ -143,11 +147,11 @@ const validateDate = (dateAsText, date, earliestDate, latestDate) => {
   return error;
 };
 
-interface Options {
+export type Options = {
   todayOrBefore?: boolean;
   todayOrAfter?: boolean;
   tidligstDato?: string;
-}
+};
 
 export const hasValidPeriodIncludingOtherErrors = (values, otherErrors = [{}], options: Options = {}) => {
   const today = moment().format(ISO_DATE_FORMAT);
@@ -209,14 +213,14 @@ export const isWithinOpptjeningsperiode = (fomDateLimit, tomDateLimit) => (fom, 
   return isBefore || isAfter ? invalidPeriodRangeMessage() : null;
 };
 
-export const isUtbetalingsgradMerSamitidigUttaksprosent = (samtidigUttaksProsent, utbetalingsgrad) => {
+export const isUtbetalingsgradMerSamitidigUttaksprosent = (samtidigUttaksProsent: number, utbetalingsgrad: number) => {
   if (samtidigUttaksProsent < utbetalingsgrad) {
     return utbetalingsgradErMerSamtidigUttaksprosentMessage();
   }
   return null;
 };
 
-export const isUkerOgDagerVidNullUtbetalningsgrad = (weeks, days, utbetalingsgrad) => {
+export const isUkerOgDagerVidNullUtbetalningsgrad = (weeks: number, days: number, utbetalingsgrad: number) => {
   if (weeks === 0 && days === 0 && utbetalingsgrad > 0) {
     return ukerOgDagerVidNullUtbetalningsgradMessage();
   }
@@ -269,6 +273,6 @@ export const ariaCheck = () => {
   }, 300);
 };
 
-export const isTrekkdagerMerEnnNullUtsettelse = (value) => (value > 0 ? trekkdagerErMerEnnNullUtsettelseMessage() : null);
+export const isTrekkdagerMerEnnNullUtsettelse = (value: number) => (value > 0 ? trekkdagerErMerEnnNullUtsettelseMessage() : null);
 
-export const isUtbetalingMerEnnNullUtsettelse = (value) => (value > 0 ? utbetalingMerEnnNullUtsettelseMessage() : null);
+export const isUtbetalingMerEnnNullUtsettelse = (value: number) => (value > 0 ? utbetalingMerEnnNullUtsettelseMessage() : null);

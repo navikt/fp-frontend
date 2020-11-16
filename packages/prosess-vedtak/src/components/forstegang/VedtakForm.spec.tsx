@@ -8,6 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BehandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { Behandling, BeregningsresultatEs } from '@fpsak-frontend/types';
 
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { VedtakForm } from './VedtakForm';
@@ -18,6 +19,7 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedta
 describe('<VedtakForm>', () => {
   const sprakkode = {
     kode: 'NO',
+    kodeverk: '',
   };
   const aksjonspunktKoder = [
     {
@@ -37,12 +39,13 @@ describe('<VedtakForm>', () => {
       id: 1,
       type: {
         kode: BehandlingResultatType.INNVILGET,
-        navn: 'test',
+        kodeverk: '',
       },
       avslagsarsak: null,
       avslagsarsakFritekst: null,
       vedtaksbrev: {
         kode: 'FRITEKST',
+        kodeverk: '',
       },
     };
     const aksjonspunkter = [];
@@ -58,18 +61,22 @@ describe('<VedtakForm>', () => {
           kodeverk: '',
         },
         behandlingPaaVent: false,
-      }}
+      } as Behandling}
       readOnly={false}
       aksjonspunkter={aksjonspunkter}
       previewCallback={previewCallback}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       resultatstruktur={{
         antallBarn: 2,
-      }}
+      } as BeregningsresultatEs}
       alleKodeverk={{}}
       initialValues={initialValues}
       vilkar={[]}
       beregningErManueltFastsatt={false}
+      behandlingId={1}
+      behandlingVersjon={2}
+      submitCallback={sinon.spy()}
+      clearFormField={sinon.spy()}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
@@ -84,12 +91,13 @@ describe('<VedtakForm>', () => {
       id: 1,
       type: {
         kode: BehandlingResultatType.AVSLÅTT,
-        navn: 'test',
+        kodeverk: '',
       },
       avslagsarsak: null,
       avslagsarsakFritekst: null,
       vedtaksbrev: {
         kode: 'FRITEKST',
+        kodeverk: '',
       },
     };
     const aksjonspunkter = [];
@@ -105,18 +113,22 @@ describe('<VedtakForm>', () => {
           kodeverk: '',
         },
         behandlingPaaVent: false,
-      }}
+      } as Behandling}
       readOnly={false}
       aksjonspunkter={aksjonspunkter}
       previewCallback={previewCallback}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       resultatstruktur={{
         antallBarn: 2,
-      }}
+      } as BeregningsresultatEs}
       alleKodeverk={{}}
       initialValues={initialValues}
       vilkar={[]}
       beregningErManueltFastsatt={false}
+      behandlingId={1}
+      behandlingVersjon={2}
+      submitCallback={sinon.spy()}
+      clearFormField={sinon.spy()}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);

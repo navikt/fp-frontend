@@ -42,6 +42,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const modal = wrapper.find(Modal);
@@ -76,6 +81,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const selectField = wrapper.find('SelectField');
@@ -176,6 +186,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const button = wrapper.find('Hovedknapp');
@@ -198,6 +213,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const button = wrapper.find('Hovedknapp');
@@ -223,6 +243,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const form = wrapper.find('form');
@@ -249,6 +274,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const avbrytKnapp = wrapper.find('Knapp');
@@ -278,6 +308,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const previewLink = wrapper.find('a');
@@ -309,6 +344,11 @@ describe('<HenleggBehandlingModal>', () => {
       }}
       behandlingUuid="123"
       behandlingId={123}
+      behandlingResultatTyper={[]}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
     />);
 
     const previewLink = wrapper.find('a');

@@ -11,7 +11,7 @@ describe('<ErrorMessageDetailsModal>', () => {
   it('skal vise feildetaljer', () => {
     const errorDetails = {
       feilmelding: 'Dette er feil',
-      stacktrace: 'test',
+      url: 'test',
     };
     const wrapper = shallowWithIntl(<ErrorMessageDetailsModal.WrappedComponent
       intl={intlMock}
@@ -23,7 +23,7 @@ describe('<ErrorMessageDetailsModal>', () => {
     const undertekst = wrapper.find(Undertekst);
     expect(undertekst).to.have.length(2);
     expect(undertekst.first().childAt(0).text()).is.eql('Feilmelding:');
-    expect(undertekst.last().childAt(0).text()).is.eql('Stacktrace:');
+    expect(undertekst.last().childAt(0).text()).is.eql('Url:');
 
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).to.have.length(2);

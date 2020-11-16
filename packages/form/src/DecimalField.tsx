@@ -15,6 +15,7 @@ interface DecimalFieldProps {
   validate?: (((text: any) => ({ id: string; length?: undefined }
     | { length: any; id?: undefined })[])
     | ((value: any) => { id: string }[])
+    | ((value: string, elmnt: any) => { id: string; }[])
     | ((text: any) => ({ id: string; text?: undefined }
     | { text: any; id?: undefined })[]))[];
   readOnly?: boolean;

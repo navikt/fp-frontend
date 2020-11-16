@@ -7,12 +7,13 @@ import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
 
+import alleKodeverk from '../mocks/alleKodeverk.json';
 import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const beregningsresultat = {
   beregnetTilkjentYtelse: 100,
@@ -25,7 +26,19 @@ const aksjonspunkter = [{
     kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
   },
   begrunnelse: 'test',
-}];
+}] as Aksjonspunkt[];
+
+const standardProsessProps = {
+  behandling,
+  alleKodeverk: alleKodeverk as any,
+  aksjonspunkter,
+  submitCallback: action('button-click') as () => Promise<any>,
+  isReadOnly: boolean('readOnly', false),
+  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  readOnlySubmitButton: boolean('readOnly', false),
+  status: '',
+  vilkar: [],
+};
 
 export default {
   title: 'prosess/prosess-beregningsresultat',
@@ -35,11 +48,9 @@ export default {
 
 export const saksbehandlerKanIkkeOverstyre = () => (
   <BeregningsresultatProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatEngangsstonad={beregningsresultat}
-    aksjonspunkter={aksjonspunkter as Aksjonspunkt[]}
     overrideReadOnly={false}
-    submitCallback={action('button-click')}
     kanOverstyreAccess={{ isEnabled: false }}
     toggleOverstyring={action('button-click')}
   />
@@ -47,11 +58,10 @@ export const saksbehandlerKanIkkeOverstyre = () => (
 
 export const saksbehandlerKanOverstyre = () => (
   <BeregningsresultatProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatEngangsstonad={beregningsresultat}
     aksjonspunkter={aksjonspunkter as Aksjonspunkt[]}
     overrideReadOnly={boolean('readOnly', false)}
-    submitCallback={action('button-click')}
     kanOverstyreAccess={{ isEnabled: true }}
     toggleOverstyring={action('button-click')}
   />
@@ -59,7 +69,7 @@ export const saksbehandlerKanOverstyre = () => (
 
 export const visOverstyrtReadonlyPanel = () => (
   <BeregningsresultatProsessIndex
-    behandling={behandling as Behandling}
+    {...standardProsessProps}
     beregningresultatEngangsstonad={beregningsresultat}
     aksjonspunkter={[{
       definisjon: {
@@ -68,7 +78,6 @@ export const visOverstyrtReadonlyPanel = () => (
       begrunnelse: 'Dette er en begrunnelse',
     }] as Aksjonspunkt[]}
     overrideReadOnly={false}
-    submitCallback={action('button-click')}
     kanOverstyreAccess={{ isEnabled: true }}
     toggleOverstyring={action('button-click')}
   />

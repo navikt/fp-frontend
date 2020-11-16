@@ -4,6 +4,7 @@ import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { MessagesImpl as Messages } from './Messages';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meldinger';
@@ -25,7 +26,7 @@ describe('<Messages>', () => {
 
   const sprakkode = {
     kode: 'en',
-    navn: 'Engelsk',
+    kodeverk: '',
   };
 
   const templates = [
@@ -33,11 +34,6 @@ describe('<Messages>', () => {
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
   ];
-
-  const model = {
-    mottaker: 'Søker',
-    brevmalkode: 'Mal1',
-  };
 
   const causes = [
     { kode: 'kode', navn: 'Årsak 1', kodeverk: 'kode' },
@@ -50,7 +46,9 @@ describe('<Messages>', () => {
       templates={templates}
       sprakKode={sprakkode}
       causes={causes}
-      model={model}
+      behandlingId={1}
+      behandlingVersjon={2}
+      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
     />);
 
     const form = wrapper.find('form');
@@ -73,10 +71,12 @@ describe('<Messages>', () => {
       recipients={recipients}
       templates={templates}
       sprakKode={sprakkode}
-      model={model}
       causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
+      behandlingId={1}
+      behandlingVersjon={2}
+      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
     />);
 
     const previewLink = wrapper.find('a');
@@ -96,10 +96,12 @@ describe('<Messages>', () => {
       templates={templates}
       sprakKode={sprakkode}
       brevmalkode="REVURD"
-      model={model}
       causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
+      behandlingId={1}
+      behandlingVersjon={2}
+      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
     />);
 
     const form = wrapper.find('form');

@@ -2,12 +2,13 @@ import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Location } from 'history';
 
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import {
-  KodeverkMedNavn, Fagsak, Aksjonspunkt, Risikoklassifisering,
+  KodeverkMedNavn, Fagsak, Aksjonspunkt, Risikoklassifisering, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -18,15 +19,16 @@ import {
   pathToBehandling,
   pathToBehandlinger,
 } from '../app/paths';
-import BehandlingMenuDataResolver from '../behandlingmenu/BehandlingMenuDataResolver';
+import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
+import SakRettigheter from '../fagsak/sakRettigheterTsType';
+import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
-import BehandlingAppKontekst from '../behandling/behandlingAppKontekstTsType';
 
-const findPathToBehandling = (saksnummer, location, alleBehandlinger) => {
+const findPathToBehandling = (saksnummer: number, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
     return getLocationWithDefaultProsessStegAndFakta({
       ...location,
@@ -43,6 +45,8 @@ interface OwnProps {
   behandlingVersjon?: number;
   harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
+  fagsakRettigheter: SakRettigheter;
+  behandlingRettigheter?: BehandlingRettigheter;
 }
 
 export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
@@ -52,6 +56,8 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   oppfriskBehandlinger,
+  fagsakRettigheter,
+  behandlingRettigheter,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingId);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -97,15 +103,22 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
-          renderBehandlingMeny={() => (
-            <BehandlingMenuDataResolver
-              fagsak={fagsak}
-              alleBehandlinger={alleBehandlinger}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              oppfriskBehandlinger={oppfriskBehandlinger}
-            />
-          )}
+          renderBehandlingMeny={() => {
+            if (!fagsakRettigheter) {
+              return <LoadingPanel />;
+            }
+            return (
+              <BehandlingMenuIndex
+                fagsak={fagsak}
+                alleBehandlinger={alleBehandlinger}
+                behandlingId={behandlingId}
+                behandlingVersjon={behandlingVersjon}
+                oppfriskBehandlinger={oppfriskBehandlinger}
+                behandlingRettigheter={behandlingRettigheter}
+                sakRettigheter={fagsakRettigheter}
+              />
+            );
+          }}
           renderBehandlingVelger={() => (
             <BehandlingVelgerSakIndex
               behandlinger={alleBehandlinger}

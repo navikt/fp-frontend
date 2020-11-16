@@ -4,7 +4,6 @@ import { withKnobs, object, boolean } from '@storybook/addon-knobs';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
 import { Fagsak } from '@fpsak-frontend/types';
@@ -14,7 +13,6 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const FAGSAK_STATUS_KODEVERK = 'FAGSAK_STATUS';
 const FAGSAK_YTELSE_KODEVERK = 'FAGSAK_YTELSE';
-const PERSONSTATUS_TYPE_KODEVERK = 'PERSONSTATUS_TYPE';
 
 const fagsaker = [{
   saksnummer: 1,
@@ -31,16 +29,6 @@ const fagsaker = [{
     kodeverk: FAGSAK_STATUS_KODEVERK,
   },
   barnFodt: '2019-01-01',
-  person: {
-    navn: 'Espen Utvikler',
-    alder: 40,
-    personnummer: '123456789',
-    erKvinne: false,
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: PERSONSTATUS_TYPE_KODEVERK,
-    },
-  },
   opprettet: '2017-08-02T00:54:25.455',
 }, {
   saksnummer: 2,
@@ -53,16 +41,6 @@ const fagsaker = [{
     kodeverk: FAGSAK_STATUS_KODEVERK,
   },
   barnFodt: '2019-01-01',
-  person: {
-    navn: 'Espen Utvikler',
-    alder: 40,
-    personnummer: '123456789',
-    erKvinne: false,
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: PERSONSTATUS_TYPE_KODEVERK,
-    },
-  },
   opprettet: '2017-08-02T00:54:25.455',
 }];
 

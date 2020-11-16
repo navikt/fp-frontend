@@ -72,9 +72,9 @@ interface OwnProps {
   behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   initialValues: {
-    perioder: PeriodeMedId[];
+    perioder?: PeriodeMedId[];
   }
-  perioder: PeriodeMedId[];
+  perioder?: PeriodeMedId[];
   behandlingFormPrefix: string;
 }
 

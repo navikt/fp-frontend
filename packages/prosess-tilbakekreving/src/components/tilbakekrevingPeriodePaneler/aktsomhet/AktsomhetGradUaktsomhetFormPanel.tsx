@@ -48,6 +48,7 @@ interface OwnProps {
   erTotalBelopUnder4Rettsgebyr: boolean;
   sarligGrunnTyper?: KodeverkMedNavn[];
   andelSomTilbakekreves?: string;
+  erValgtResultatTypeForstoBurdeForstaatt?: boolean;
 }
 
 const AktsomhetGradUaktsomhetFormPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -61,9 +62,12 @@ const AktsomhetGradUaktsomhetFormPanel: FunctionComponent<OwnProps & WrappedComp
   feilutbetalingBelop,
   erTotalBelopUnder4Rettsgebyr,
   andelSomTilbakekreves,
-}) => (
-  <ArrowBox alignOffset={handletUaktsomhetGrad === aktsomhet.GROVT_UAKTSOM ? 120 : 285}>
-    {(handletUaktsomhetGrad === aktsomhet.SIMPEL_UAKTSOM && erTotalBelopUnder4Rettsgebyr) && (
+  erValgtResultatTypeForstoBurdeForstaatt,
+}) => {
+  const grovUaktsomOffset = erValgtResultatTypeForstoBurdeForstaatt ? 180 : 200;
+  return (
+    <ArrowBox alignOffset={handletUaktsomhetGrad === aktsomhet.GROVT_UAKTSOM ? grovUaktsomOffset : 20}>
+      {(handletUaktsomhetGrad === aktsomhet.SIMPEL_UAKTSOM && erTotalBelopUnder4Rettsgebyr) && (
       <>
         <Undertekst><FormattedMessage id="AktsomhetGradUaktsomhetFormPanel.Tilbakekrev" /></Undertekst>
         <VerticalSpacer eightPx />
@@ -93,8 +97,8 @@ const AktsomhetGradUaktsomhetFormPanel: FunctionComponent<OwnProps & WrappedComp
         </RadioGroupField>
         <VerticalSpacer eightPx />
       </>
-    )}
-    {(handletUaktsomhetGrad !== aktsomhet.SIMPEL_UAKTSOM || !erTotalBelopUnder4Rettsgebyr) && (
+      )}
+      {(handletUaktsomhetGrad !== aktsomhet.SIMPEL_UAKTSOM || !erTotalBelopUnder4Rettsgebyr) && (
       <>
         {sarligGrunnerBegrunnelseDiv(readOnly, intl)}
         <AktsomhetSarligeGrunnerFormPanel
@@ -108,8 +112,9 @@ const AktsomhetGradUaktsomhetFormPanel: FunctionComponent<OwnProps & WrappedComp
           andelSomTilbakekreves={andelSomTilbakekreves}
         />
       </>
-    )}
-  </ArrowBox>
-);
+      )}
+    </ArrowBox>
+  );
+};
 
 export default injectIntl(AktsomhetGradUaktsomhetFormPanel);

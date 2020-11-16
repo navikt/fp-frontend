@@ -1,14 +1,16 @@
 import React from 'react';
+import sinon from 'sinon';
 import { expect } from 'chai';
+
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
-import sinon from 'sinon';
+import { FamilieHendelse } from '@fpsak-frontend/types';
+
 import { SykdomOgSkadePeriode } from './SykdomOgSkadePeriode';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
-const dokumentertePerioder = [{}];
-const formSyncErrors = {};
+const dokumentertePerioder = [];
 const periode = {
   tom: '10-10-2017',
   fom: '01-10-2017',
@@ -28,12 +30,13 @@ describe('<SykdomOgSkadePeriode>', () => {
       updated
       bekreftet
       dokumentertePerioder={dokumentertePerioder}
-      utsettelseArsak={{}}
-      overforingArsak={{}}
       {...reduxFormPropsMock}
       readOnly={false}
       behandlingStatusKode={behandlingStatusKode}
-      formSyncErrors={formSyncErrors}
+      behandlingId={1}
+      behandlingVersjon={2}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      vilkarForSykdomExists
     />);
 
     const undertekst = wrapper.find('Undertekst');
@@ -57,11 +60,12 @@ describe('<SykdomOgSkadePeriode>', () => {
       updated
       bekreftet
       behandlingStatusKode={behandlingStatusKode}
-      utsettelseArsak={{}}
-      overforingArsak={{}}
       {...reduxFormPropsMock}
       readOnly={false}
-      formSyncErrors={formSyncErrors}
+      behandlingId={1}
+      behandlingVersjon={2}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      vilkarForSykdomExists
     />);
     const textAreaField = wrapper.find('TextAreaField');
     expect(textAreaField).to.have.length(1);

@@ -14,6 +14,20 @@ describe('<MenyNyBehandlingIndex>', () => {
     const lagNyBehandlingCallback = sinon.stub().resolves();
     const lukkModalCallback = sinon.spy();
 
+    const behandlingOppretting = [{
+      behandlingType: {
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }, {
+      behandlingType: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+      kanOppretteBehandling: true,
+    }];
+
     const wrapper = shallowWithIntl(<MenyNyBehandlingIndex
       ytelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
@@ -27,11 +41,10 @@ describe('<MenyNyBehandlingIndex>', () => {
         kodeverk: 'BEHANDLING_TYPE',
       }}
       lagNyBehandling={lagNyBehandlingCallback}
-      opprettNyForstegangsBehandlingEnabled
+      behandlingOppretting={behandlingOppretting}
       behandlingstyper={[]}
       tilbakekrevingRevurderingArsaker={[]}
       revurderingArsaker={[]}
-      opprettRevurderingEnabled
       kanTilbakekrevingOpprettes={{
         kanBehandlingOpprettes: false,
         kanRevurderingOpprettes: false,
@@ -47,6 +60,10 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(modal).to.have.length(1);
     modal.prop('submitCallback')({
       behandlingType: behandlingType.FORSTEGANGSSOKNAD,
+      fagsakYtelseType: {
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      },
     });
 
     const kall = lagNyBehandlingCallback.getCalls();
@@ -56,6 +73,10 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(kall[0].args[1]).to.eql({
       saksnummer: '123',
       behandlingType: behandlingType.FORSTEGANGSSOKNAD,
+      fagsakYtelseType: {
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      },
     });
 
     expect(lukkModalCallback.getCalls()).to.have.length(1);

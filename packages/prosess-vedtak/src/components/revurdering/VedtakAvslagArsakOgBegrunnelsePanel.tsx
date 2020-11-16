@@ -22,7 +22,11 @@ import styles from './vedtakAvslagArsakOgBegrunnelsePanel.less';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-export const getAvslagArsak = (vilkar, behandlingsresultat, getKodeverknavn) => {
+export const getAvslagArsak = (
+  vilkar: Vilkar[],
+  behandlingsresultat: Behandlingsresultat,
+  getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
+) => {
   const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;

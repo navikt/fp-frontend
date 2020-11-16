@@ -13,10 +13,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-export const skalViseIMeny = (behandlingId, erPaVent, erKoet, settBehandlingPaVentAccess) => !!behandlingId
-  && !erPaVent && !erKoet && settBehandlingPaVentAccess.employeeHasAccess && settBehandlingPaVentAccess.isEnabled;
-
-export const getMenytekst = () => intl.formatMessage({ id: 'MenySettPaVentIndex.BehandlingOnHold' });
+export const getMenytekst = (): string => intl.formatMessage({ id: 'MenySettPaVentIndex.BehandlingOnHold' });
 
 interface OwnProps {
   behandlingId?: number;

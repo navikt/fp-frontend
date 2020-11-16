@@ -1,0 +1,79 @@
+import React, { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
+import { FieldArray, formValueSelector } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
+
+import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+
+import FrilansOppdragForFamilieFieldArray, { defaultFrilansPeriode, FormValues as FieldArrayFormValues } from './FrilansOppdragForFamilieFieldArray';
+
+interface OwnProps {
+  readOnly: boolean;
+  harHattOppdragForFamilie?: boolean;
+  formName: string;
+  namePrefix: string;
+}
+
+export type FieldValues = FieldArrayFormValues;
+
+interface StaticFunctions {
+  buildInitialValues?: () => {
+    oppdragPerioder: {
+      fomDato: string;
+      tomDato: string;
+    }[];
+  };
+  validate?: (values: FieldValues) => {
+    oppdragPerioder: {
+      tomDato?: any;
+      fomDato?: any;
+    }[] | null;
+  };
+}
+
+/**
+ * FrilansOppdragForFamiliePanel
+ *
+ * Presentasjonskomponent.
+ */
+export const FrilansOppdragForFamiliePanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+  readOnly,
+  harHattOppdragForFamilie,
+}) => (
+  <>
+    <RadioGroupField
+      name="harHattOppdragForFamilie"
+      readOnly={readOnly}
+      label={<FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" />}
+    >
+      <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.Yes" />} value />
+      <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.No" />} value={false} />
+    </RadioGroupField>
+    {harHattOppdragForFamilie
+      && (
+      <ArrowBox>
+        <Normaltekst><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Normaltekst>
+        <VerticalSpacer fourPx />
+        <FieldArray name="oppdragPerioder" component={FrilansOppdragForFamilieFieldArray} readOnly={readOnly} />
+      </ArrowBox>
+      )}
+  </>
+);
+
+const mapStateToProps = (state: any, ownProps: OwnProps) => ({
+  harHattOppdragForFamilie: formValueSelector(ownProps.formName)(state, ownProps.namePrefix).harHattOppdragForFamilie,
+});
+
+const FrilansOppdragForFamiliePanel = connect(mapStateToProps)(FrilansOppdragForFamiliePanelImpl);
+
+FrilansOppdragForFamiliePanel.buildInitialValues = () => ({
+  oppdragPerioder: [defaultFrilansPeriode],
+});
+
+FrilansOppdragForFamiliePanel.validate = (values: FieldValues) => ({
+  oppdragPerioder: FrilansOppdragForFamilieFieldArray.validate(values),
+});
+
+export default FrilansOppdragForFamiliePanel;

@@ -3,21 +3,20 @@ import React, {
 } from 'react';
 
 import {
-  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak,
+  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
 
 import useHistory from '../../app/useHistory';
 import useLocation from '../../app/useLocation';
-import BehandlingAppKontekst from '../../behandling/behandlingAppKontekstTsType';
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
-import getAccessRights from '../../app/util/access';
+import getAccessRights, { AksessRettigheter } from '../../app/util/access';
 
-const getReadOnly = (navAnsatt: NavAnsatt, rettigheter, erPaaVent: boolean) => {
+const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {
     return true;
   }
