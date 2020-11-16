@@ -84,6 +84,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       begrunnelse: 'Begrunnelse periode 1',
       valgtVilkarResultatType: vilkarResultat.GOD_TRO,
       vurderingBegrunnelse: 'Vurdering periode 1',
+      harMerEnnEnYtelse: false,
       fom: '2020-03-01',
       tom: '2020-03-15',
       GOD_TRO: {
