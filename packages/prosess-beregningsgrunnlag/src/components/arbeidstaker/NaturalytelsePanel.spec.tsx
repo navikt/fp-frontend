@@ -10,12 +10,14 @@ const bgPerioder = [
   {
     periodeAarsaker: [{
       kode: periodeAarsak.UDEFINERT,
+      kodeverk: 'test',
     }],
     beregningsgrunnlagPeriodeFom: '2018-06-01',
     beregningsgrunnlagPrStatusOgAndel: [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver',
@@ -26,6 +28,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver',
@@ -36,6 +39,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver',
@@ -48,12 +52,14 @@ const bgPerioder = [
   {
     periodeAarsaker: [{
       kode: periodeAarsak.NATURALYTELSE_BORTFALT,
+      kodeverk: 'test',
     }],
     beregningsgrunnlagPeriodeFom: '2018-07-01',
     beregningsgrunnlagPrStatusOgAndel: [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver1',
@@ -64,6 +70,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         bortfaltNaturalytelse: 10000,
         arbeidsforhold: {
@@ -75,6 +82,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         bortfaltNaturalytelse: 70000,
         arbeidsforhold: {
@@ -88,12 +96,14 @@ const bgPerioder = [
   {
     periodeAarsaker: [{
       kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET,
+      kodeverk: 'test',
     }],
     beregningsgrunnlagPeriodeFom: '2018-08-01',
     beregningsgrunnlagPrStatusOgAndel: [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver1',
@@ -104,6 +114,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         bortfaltNaturalytelse: 70000,
         arbeidsforhold: {
@@ -115,6 +126,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         bortfaltNaturalytelse: 10000,
         arbeidsforhold: {
@@ -128,6 +140,7 @@ const bgPerioder = [
   {
     periodeAarsaker: [{
       kode: periodeAarsak.NATURALYTELSE_BORTFALT,
+      kodeverk: 'test',
     }],
     beregningsgrunnlagPeriodeFom: '2018-09-01',
     beregningsgrunnlagPeriodeTom: '2018-12-01',
@@ -135,6 +148,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         bortfaltNaturalytelse: 50000,
         arbeidsforhold: {
@@ -146,6 +160,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver2',
@@ -156,6 +171,7 @@ const bgPerioder = [
       {
         aktivitetStatus: {
           kode: aktivitetStatus.ARBEIDSTAKER,
+          kodeverk: 'test',
         },
         arbeidsforhold: {
           arbeidsgiverNavn: 'arbeidsgiver3',

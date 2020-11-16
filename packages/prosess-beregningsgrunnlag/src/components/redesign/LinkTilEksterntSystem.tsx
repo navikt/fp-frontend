@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './linkTilEksternSystem.less' o... Remove this comment to see the full error message
 import styles from './linkTilEksternSystem.less';
 
 type OwnProps = {

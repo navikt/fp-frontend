@@ -7,23 +7,27 @@ import { Element } from 'nav-frontend-typografi';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { buildInitialValues, GraderingUtenBG as UnwrappedForm } from './GraderingUtenBG';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 
 const mockAksjonspunktMedKodeOgStatus = (apKode, status) => ({
   definisjon: {
     kode: apKode,
+    kodeverk: 'test',
   },
   status: {
     kode: status,
+    kodeverk: 'test',
   },
   begrunnelse: 'begrunnelse',
 
-});
+} as Aksjonspunkt);
 
 const atAndelEn = {
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSTAKER,
+    kodeverk: 'test',
   },
   arbeidsforhold: {
     arbeidsgiverNavn: 'arbeidsgiver',
@@ -35,6 +39,7 @@ const atAndelEn = {
 const atAndelTo = {
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSTAKER,
+    kodeverk: 'test',
   },
   arbeidsforhold: {
     arbeidsgiverNavn: 'arbeidsgiver',
@@ -46,6 +51,7 @@ const atAndelTo = {
 const snAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
+    kodeverk: 'test',
   },
   andelsnr: 3,
 };
@@ -53,6 +59,7 @@ const snAndel = {
 const flAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.FRILANSER,
+    kodeverk: 'test',
   },
   andelsnr: 4,
 };

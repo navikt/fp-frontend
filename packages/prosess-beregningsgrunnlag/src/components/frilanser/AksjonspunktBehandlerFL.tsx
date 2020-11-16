@@ -7,7 +7,6 @@ import {
   formatCurrencyNoKr, parseCurrencyInput, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../fellesPaneler/aksjonspunktB... Remove this comment to see the full error message
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 
 interface StaticFunctions {

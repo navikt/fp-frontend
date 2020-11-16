@@ -30,6 +30,7 @@ const arbeidstakerAndel = {
 const frilanserAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.FRILANSER,
+    kodeverk: 'test',
   },
   elementNavn: 'frilansinntekt',
   beregnetPrAar: 200000,
@@ -41,6 +42,7 @@ const frilanserAndel = {
 const tyAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.KUN_YTELSE,
+    kodeverk: 'test',
   },
   beregnetPrAar: 300000,
   beregningsperiodeFom: '2016-01-01',
@@ -49,6 +51,7 @@ const tyAndel = {
 const dagpengerAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.DAGPENGER,
+    kodeverk: 'test',
   },
   beregnetPrAar: 300000,
   beregningsperiodeFom: '2016-01-01',
@@ -57,6 +60,7 @@ const dagpengerAndel = {
 const aapAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSAVKLARINGSPENGER,
+    kodeverk: 'test',
   },
   beregnetPrAar: 300000,
   beregningsperiodeFom: '2016-01-01',
@@ -65,6 +69,7 @@ const aapAndel = {
 const militaerAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.MILITAER_ELLER_SIVIL,
+    kodeverk: 'test',
   },
   beregnetPrAar: 300000,
 };
@@ -80,6 +85,7 @@ const lagPerioderMedAndeler = (andelListe) => ([{
 const selvstedigNaeringsdrivendeAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
+    kodeverk: 'test',
   },
   elementNavn: 'pensjonsgivende inntekt',
   beregnetPrAar: 300000,
@@ -169,7 +175,6 @@ describe('<Beregningsgrunnlag>', () => {
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
     expect(atPanel.props().alleAndeler[0]).to.equal(arbeidstakerAndel);
-    expect(atPanel.props().aksjonspunkt).to.equal(undefined);
   });
   it('Skal teste at korrekte komponenter vises for frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -187,7 +192,6 @@ describe('<Beregningsgrunnlag>', () => {
     expect(flPanel).to.have.length(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
     expect(flPanel.props().alleAndeler[0]).to.equal(frilanserAndel);
-    expect(flPanel.props().aksjonspunkt).to.equal(undefined);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -205,7 +209,6 @@ describe('<Beregningsgrunnlag>', () => {
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
     expect(snPanel).to.have.length(1);
     expect(snPanel.props().alleAndeler[0]).to.equal(selvstedigNaeringsdrivendeAndel);
-    expect(snPanel.props().aksjonspunkt).to.equal(undefined);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende med NyIArbeidslivet aksjonspunkt', () => {
     const ap = [selvstendigNyIArbAksjonspunkt as Aksjonspunkt];
@@ -225,7 +228,6 @@ describe('<Beregningsgrunnlag>', () => {
     expect(snPanel).to.have.length(1);
 
     expect(snPanel.props().alleAndeler[0]).to.equal(selvstedigNaeringsdrivendeAndel);
-    expect(snPanel.props().aksjonspunkt).to.equal(undefined);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende / arbeidstaker med aksjonspunkt', () => {
     const ap = [selvstendigAksjonspunkt as Aksjonspunkt];

@@ -3,7 +3,6 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 import Label from '@fpsak-frontend/form/src/Label';
 import EditedIcon from './EditedIcon';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './readOnlyField.less' or its c... Remove this comment to see the full error message
 import styles from './readOnlyField.less';
 
 type labelPropType = {

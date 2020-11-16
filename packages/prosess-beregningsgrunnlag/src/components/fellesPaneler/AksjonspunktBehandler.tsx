@@ -20,9 +20,7 @@ import {
   KodeverkMedNavn,
   RelevanteStatuserProp,
 } from '@fpsak-frontend/types';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './aksjonspunktBehandler.less' ... Remove this comment to see the full error message
 import styles from './aksjonspunktBehandler.less';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';

@@ -11,7 +11,11 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import shallowWithIntl from '@fpsak-frontend/prosess-vedtak/i18n/intl-enzyme-test-helper-prosess-vedtak';
-import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import {
+  Beregningsgrunnlag as BeregningsgrunnlagProp,
+  RelevanteStatuserProp,
+  SammenligningsgrunlagProp,
+} from '@fpsak-frontend/types';
 import { BeregningFormImpl, transformValues, buildInitialValues } from './BeregningForm';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
 import SkjeringspunktOgStatusPanel2 from '../fellesPaneler/SkjeringspunktOgStatusPanel';
@@ -22,10 +26,12 @@ import BeregningsresultatTable from '../beregningsresultatPanel/Beregningsresult
 const apVurderDekningsgrad = {
   definisjon: {
     kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
+    kodeverk: 'test',
     navn: 'apNavn2',
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'test',
     navn: 'statusNavn2',
   },
   kanLoses: true,
@@ -34,10 +40,12 @@ const apVurderDekningsgrad = {
 const apFastsettBgATFL = {
   definisjon: {
     kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+    kodeverk: 'test',
     navn: 'apNavn1',
   },
   status: {
     kode: 'UTFO',
+    kodeverk: 'test',
     navn: 'statusNavn1',
   },
   kanLoses: false,
@@ -47,10 +55,12 @@ const apFastsettBgATFL = {
 const apVurderVarigEndretEllerNyoppstartetSN = {
   definisjon: {
     kode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+    kodeverk: 'test',
     navn: 'apNavn3',
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'test',
     navn: 'statusNavn3',
   },
   kanLoses: true,
@@ -60,10 +70,12 @@ const apVurderVarigEndretEllerNyoppstartetSN = {
 const apFastsettBgSnNyIArbeidslivet = {
   definisjon: {
     kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
+    kodeverk: 'test',
     navn: 'apNavn4',
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'test',
     navn: 'statusNavn4',
   },
   kanLoses: true,
@@ -76,6 +88,7 @@ const apFastsettBgTidsbegrensetArbeidsforhold = {
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'test',
     navn: 'statusNavn5',
   },
   kanLoses: true,
@@ -119,28 +132,32 @@ const lagPeriode = () => ({
   andelerLagtTilManueltIForrige: [],
 });
 const lagBeregningsgrunnlag = (avvikPromille, årsinntektVisningstall,
-  sammenligningSum, dekningsgrad, tilfeller) => ({
+  sammenligningSum, dekningsgrad) => ({
   beregningsgrunnlagPeriode: [lagPeriode()],
   sammenligningsgrunnlagPrStatus: null,
   sammenligningsgrunnlag: {
-    avvikPromille,
+    sammenligningsgrunnlagFom: '2018-09-01',
+    sammenligningsgrunnlagTom: '2019-10-31',
+    avvikProsent: 27.5,
+    sammenligningsgrunnlagType: {
+      kode: 'SAMMENLIGNING_AT',
+      kodeverk: 'test',
+    },
+    differanseBeregnet: 12100,
     rapportertPrAar: sammenligningSum,
+    avvikPromille,
   },
   dekningsgrad,
   årsinntektVisningstall,
-  faktaOmBeregning: {
-    faktaOmBeregningTilfeller: tilfeller,
-  },
   aktivitetStatus: [{
     kode: 'UDEFINERT',
+    kodeverk: 'test',
   }],
 });
-const alleKodeverk = {
-  test: 'test',
-};
 const mockVilkar = [{
   vilkarType: {
     kode: 'FP_VK_41',
+    kodeverk: 'test',
   },
   vilkarStatus: {
     kode: vilkarUtfallType.OPPFYLT,
@@ -162,19 +179,19 @@ const sammenligningsgrunnlag = (kode) => ({
 const getBGVilkar = (vilkar) => (vilkar ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET) : undefined);
 describe('<BeregningForm>', () => {
   it('skal teste at AvviksopplysningerPanel får korrekte props fra BeregningFP', () => {
-    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 100000, 100000, 100, []);
+    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 100000, 100000, 100);
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN');
     beregningsgrunnlag.sammenligningsgrunnlagPrStatus = [sammenligningsgrunnlagPrStatus as SammenligningsgrunlagProp];
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       beregningsgrunnlag={beregningsgrunnlag}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      relevanteStatuser={relevanteStatuser}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={{}}
       vilkaarBG={getBGVilkar(mockVilkar)}
       {...reduxFormPropsMock}
     />);
@@ -190,11 +207,11 @@ describe('<BeregningForm>', () => {
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100, [])}
+      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
-      relevanteStatuser={relevanteStatuser}
+      alleKodeverk={{}}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
@@ -207,11 +224,11 @@ describe('<BeregningForm>', () => {
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100, [])}
+      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
-      relevanteStatuser={relevanteStatuser}
+      alleKodeverk={{}}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
@@ -225,11 +242,11 @@ describe('<BeregningForm>', () => {
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100, [])}
+      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
-      relevanteStatuser={relevanteStatuser}
+      alleKodeverk={{}}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
@@ -248,11 +265,11 @@ describe('<BeregningForm>', () => {
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100, [])}
+      beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100)}
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
-      relevanteStatuser={relevanteStatuser}
+      alleKodeverk={{}}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
@@ -271,11 +288,11 @@ describe('<BeregningForm>', () => {
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100, [])}
+      beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100)}
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
-      relevanteStatuser={relevanteStatuser}
+      alleKodeverk={{}}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
@@ -287,15 +304,15 @@ describe('<BeregningForm>', () => {
 
   it('skal teste at BeregningForm rendrer riktige komponenter', () => {
     relevanteStatuser.skalViseBeregningsgrunnlag = false;
-    const bg = lagBeregningsgrunnlag(0, 100000, 100000, 100, []);
+    const bg = lagBeregningsgrunnlag(0, 100000, 100000, 100);
     const wrapper = shallowWithIntl(<BeregningFormImpl
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={bg}
+      beregningsgrunnlag={bg as BeregningsgrunnlagProp}
       behandlingId={1}
       behandlingVersjon={1}
-      alleKodeverk={alleKodeverk}
-      relevanteStatuser={relevanteStatuser}
+      alleKodeverk={{}}
+      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
@@ -417,7 +434,7 @@ describe('<BeregningForm>', () => {
   });
   it('skal teste buildInitialValues', () => {
     const gjeldendeAksjonspunkter = [apFastsettBgTidsbegrensetArbeidsforhold];
-    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 120000, 100000, 100, []);
+    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 120000, 100000, 100);
 
     const actualValues = buildInitialValues.resultFunc(beregningsgrunnlag, gjeldendeAksjonspunkter);
     const expectedValues = {

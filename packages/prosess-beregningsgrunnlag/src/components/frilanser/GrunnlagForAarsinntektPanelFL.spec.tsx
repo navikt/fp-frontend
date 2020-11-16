@@ -1,9 +1,8 @@
 import React from 'react';
 import { expect } from 'chai';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import GrunnlagForAarsinntektPanelFL from './GrunnlagForAarsinntektPanelFL';
 
@@ -24,10 +23,7 @@ const andel = {
 describe('<GrunnlagForAarsinntektPanelFL>', () => {
   it('Skal teste tabellen får korrekt antall rader UTEN arbeidsforhold startdato', () => {
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelFL
-      {...reduxFormPropsMock}
-      intl={intlMock}
       alleAndeler={[andel]}
-      isKombinasjonsstatus={false}
     />);
     const rows = wrapper.find('Row');
 
@@ -43,10 +39,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
   it('Skal teste tabellen får korrekt antall rader ved arbeidsforhold startdato', () => {
     andel.arbeidsforhold.startdato = '2011-12-12';
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelFL
-      {...reduxFormPropsMock}
-      intl={intlMock}
       alleAndeler={[andel]}
-      isKombinasjonsstatus={false}
     />);
     const rows = wrapper.find('Row');
     const ledeTextStart = rows.at(0).find('FormattedMessage');

@@ -21,7 +21,6 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import TextAreaField from '../redesign/TextAreaField';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../fellesPaneler/aksjonspunktB... Remove this comment to see the full error message
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 
 const maxLength1500 = maxLength(1500);
@@ -88,6 +87,7 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
                   validate={[required]}
                   parse={parseCurrencyInput}
                   className={styles['input--xs']}
+                  isEdited={isAksjonspunktClosed}
                   readOnly={readOnly}
                 />
               </div>
@@ -110,7 +110,6 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
                   validate={[required, maxLength1500, minLength3, hasValidText]}
                   maxLength={1500}
                   readOnly={readOnly}
-                  isEdited={isAksjonspunktClosed}
                   placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
                   endrettekst={endretTekst}
                 />

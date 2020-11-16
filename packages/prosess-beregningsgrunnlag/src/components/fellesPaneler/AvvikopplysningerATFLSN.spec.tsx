@@ -3,6 +3,7 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import { expect } from 'chai';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { RelevanteStatuserProp } from '@fpsak-frontend/types';
+import { FormattedMessage } from 'react-intl';
 import AvvikopplysningerATFLSN from './AvvikopplysningerATFLSN';
 
 const beregnetAarsinntekt = 360000;
@@ -52,9 +53,13 @@ describe('<AvviksOpplysningerATFLSN>', () => {
     expect(avvikText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Frilans');
     const avvikVerdi = rows.at(3).find('Normaltekst');
     expect(avvikVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
-    const avvikProsentText = rows.at(3).find('FormattedMessage').at(1);
-    const avvikProsentValue = avvikProsentText.first().prop('values');
+    const avvikProsentText = rows.at(3).find(FormattedMessage).at(1);
     expect(avvikProsentText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
+
+    type ValueProp = {
+      avvik: number;
+    }
+    const avvikProsentValue = avvikProsentText.first().prop('values') as ValueProp;
     expect(avvikProsentValue.avvik).to.eql(avvikRounded);
   });
 
@@ -87,9 +92,13 @@ describe('<AvviksOpplysningerATFLSN>', () => {
     const avvikVerdi = rows.at(3).find('Normaltekst');
     expect(avvikVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
 
-    const avvikProsentText = rows.at(3).find('FormattedMessage').at(1);
-    const avvikProsentValue = avvikProsentText.first().prop('values');
+    const avvikProsentText = rows.at(3).find(FormattedMessage).at(1);
     expect(avvikProsentText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
+
+    type ValueProp = {
+      avvik: number;
+    }
+    const avvikProsentValue = avvikProsentText.first().prop('values') as ValueProp;
     expect(avvikProsentValue.avvik).to.eql(avvikRounded);
   });
   // fra SNtester
@@ -123,9 +132,13 @@ describe('<AvviksOpplysningerATFLSN>', () => {
     expect(avvikText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik');
     const avvikVerdi = rows.at(3).find('Normaltekst');
     expect(avvikVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
-    const avvikProsentText = rows.at(3).find('FormattedMessage').at(1);
-    const avvikProsentValue = avvikProsentText.first().prop('values');
+    const avvikProsentText = rows.at(3).find(FormattedMessage).at(1);
     expect(avvikProsentText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
+
+    type ValueProp = {
+      avvik: number;
+    }
+    const avvikProsentValue = avvikProsentText.first().prop('values') as ValueProp;
     expect(avvikProsentValue.avvik).to.eql(avvikRounded);
   });
 });

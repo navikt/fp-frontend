@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import classnames from 'classnames/bind';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '@fpsak-frontend/assets/images/... Remove this comment to see the full error message
 import endretFelt from '@fpsak-frontend/assets/images/person-edit-2.svg';
 import { useIntl } from 'react-intl';
 import { Image } from '@fpsak-frontend/shared-components';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './editedIcon.less' or its corr... Remove this comment to see the full error message
 import styles from './editedIcon.less';
 
 const classNames = classnames.bind(styles);

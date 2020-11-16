@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
   Element, Normaltekst, Undertekst, EtikettLiten,
 } from 'nav-frontend-typografi';
@@ -17,7 +17,6 @@ import { FlexColumn, FlexRow, VerticalSpacer } from '@fpsak-frontend/shared-comp
 import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import NaturalytelsePanel2 from './NaturalytelsePanel';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
@@ -262,4 +261,4 @@ GrunnlagForAarsinntektPanelATImpl.buildInitialValues = (alleAndeler) => {
   });
   return initialValues;
 };
-export default injectIntl(connect(mapStateToProps)(GrunnlagForAarsinntektPanelATImpl));
+export default connect(mapStateToProps)(GrunnlagForAarsinntektPanelATImpl);

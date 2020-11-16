@@ -13,7 +13,6 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { BeregningsgrunnlagAndel, KodeverkMedNavn, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../fellesPaneler/aksjonspunktB... Remove this comment to see the full error message
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 
 const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel) => {

@@ -5,7 +5,6 @@ import EtikettFokus from 'nav-frontend-etiketter';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 
 import renderNavField from '@fpsak-frontend/form/src/renderNavField';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './textAreaField.less' or its c... Remove this comment to see the full error message
 import styles from './textAreaField.less';
 import ReadOnlyField from './ReadOnlyField';
 

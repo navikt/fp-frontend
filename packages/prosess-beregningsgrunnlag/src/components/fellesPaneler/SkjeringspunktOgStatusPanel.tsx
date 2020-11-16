@@ -16,9 +16,7 @@ import { EtikettInfo } from 'nav-frontend-etiketter';
 
 import { Kodeverk } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import styles from './skjeringspunktOgStatusPanel.less';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
 

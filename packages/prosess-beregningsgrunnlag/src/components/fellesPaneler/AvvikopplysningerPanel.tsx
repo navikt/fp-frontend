@@ -10,7 +10,6 @@ import { BeregningsgrunnlagPeriodeProp, RelevanteStatuserProp, Sammenligningsgru
 import AvviksopplysningerSN from '../selvstendigNaeringsdrivende/AvvikopplysningerSN';
 import AvviksopplysningerAT from '../arbeidstaker/AvvikopplysningerAT';
 import AvviksopplysningerFL from '../frilanser/AvvikopplysningerFL';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
 

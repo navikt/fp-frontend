@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import cn from 'classnames';
 import Chevron from 'nav-frontend-chevron';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './lesMerPanel.less' or its cor... Remove this comment to see the full error message
 import styles from './lesMerPanel.less';
 
 type OwnProps = {

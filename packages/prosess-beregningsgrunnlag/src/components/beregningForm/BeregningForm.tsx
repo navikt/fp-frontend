@@ -34,7 +34,6 @@ import BeregningsresultatTable from '../beregningsresultatPanel/Beregningsresult
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 // ------------------------------------------------------------------------------------------ //

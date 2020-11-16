@@ -4,9 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { RelevanteStatuserProp } from '@fpsak-frontend/types';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './avvikopplysningerPanel.less'... Remove this comment to see the full error message
 import styles from './avvikopplysningerPanel.less';
 
 const lagFormatertetekster = (kriterie, visPanel, relevanteStatuser, isBold) => (

@@ -15,9 +15,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './sammenligningsgrunnlagAOrdni... Remove this comment to see the full error message
 import styles from './sammenligningsgrunnlagAOrdningen.less';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
 import Lesmerpanel from '../redesign/LesmerPanel';

@@ -4,7 +4,6 @@ import { UnmountClosed } from 'react-collapse';
 import { guid, omit } from 'nav-frontend-js-utils';
 import classNames from 'classnames';
 import LesMerToggle from './LesMerToggle';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './lesMerPanel.less' or its cor... Remove this comment to see the full error message
 import styles from './lesMerPanel.less';
 
 const lesMerPanelCls = (props) => classNames(styles.lesMerPanel, props.className, props.border ? styles['lesMerPanel--border'] : '');

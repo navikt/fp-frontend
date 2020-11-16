@@ -1,8 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
@@ -81,16 +80,9 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       mockAndel('Arbeidsgiver 1', 100, 200000, false) as BeregningsgrunnlagAndel,
       mockAndel('Arbeidsgiver 2', 100, 100000, false) as BeregningsgrunnlagAndel];
     const wrapper = shallowWithIntl(<UnwrappedForm
-      {...reduxFormPropsMock}
-      intl={intlMock}
-      readOnly
-      isKombinasjonsstatus={false}
-      isAksjonspunktClosed
       allePerioder={perioder}
       alleAndeler={andeler}
-      aksjonspunkter={[]}
       getKodeverknavn={getKodeverknavn}
-      bruttoFastsattInntekt={0}
     />);
 
     const rows = wrapper.find('Row');

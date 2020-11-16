@@ -7,6 +7,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
+import { FormattedMessage } from 'react-intl';
 import BeregningsresutatPanel from './BeregningsResultatPanel';
 
 const tableData = {
@@ -71,7 +72,8 @@ describe('BeregningsresultatPanel', () => {
     expect(formatCurrencyNoKr(andelVerdi)).to.equal(formatCurrencyNoKr(tableData.rowsAndeler[0].verdi));
     const sumRow = rows.last();
     const sumText = sumRow.find('FormattedMessage').props().id;
-    const sumTextTall = sumRow.find('FormattedMessage').props().values.dagSats;
+    // @ts-ignore
+    const sumTextTall = sumRow.find(FormattedMessage).props().values.dagSats;
     const sumVerdi = sumRow.find('Normaltekst').last().childAt(0).text();
     expect(sumText).to.equal('Beregningsgrunnlag.BeregningTable.DagsatsNy');
     expect(sumTextTall).to.equal(formatCurrencyNoKr(400));

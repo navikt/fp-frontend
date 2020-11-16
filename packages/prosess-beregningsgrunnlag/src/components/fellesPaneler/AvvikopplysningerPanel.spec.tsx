@@ -7,6 +7,9 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvviksopplysningerPanel from './AvvikopplysningerPanel';
+import AvviksopplysningerSN from '../selvstendigNaeringsdrivende/AvvikopplysningerSN';
+import AvviksopplysningerFL from '../frilanser/AvvikopplysningerFL';
+import AvviksopplysningerAT from '../arbeidstaker/AvvikopplysningerAT';
 
 const sammenligningsgrunnlag = (kode) => ({
   sammenligningsgrunnlagFom: '2018-09-01',
@@ -16,6 +19,7 @@ const sammenligningsgrunnlag = (kode) => ({
   avvikProsent: 27.5,
   sammenligningsgrunnlagType: {
     kode,
+    kodeverk: 'test',
   },
   differanseBeregnet: 12100,
 });
@@ -51,7 +55,7 @@ describe('<Avviksopplysninger>', () => {
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
     expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
-    const avvikPanelAT = wrapper.find('AvviksopplysningerAT');
+    const avvikPanelAT = wrapper.find(AvviksopplysningerAT);
     expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
     expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
     expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
@@ -67,7 +71,7 @@ describe('<Avviksopplysninger>', () => {
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
     expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
-    const avvikPanelAT = wrapper.find('AvviksopplysningerAT');
+    const avvikPanelAT = wrapper.find(AvviksopplysningerAT);
     expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
     expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
     expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
@@ -102,7 +106,7 @@ describe('<Avviksopplysninger>', () => {
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
     expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
-    const avvikPanelSN = wrapper.find('AvviksopplysningerSN');
+    const avvikPanelSN = wrapper.find(AvviksopplysningerSN);
     expect(avvikPanelSN.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
     expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
     expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
@@ -121,7 +125,7 @@ describe('<Avviksopplysninger>', () => {
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
     expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
-    const avvikPanelFL = wrapper.find('AvviksopplysningerFL');
+    const avvikPanelFL = wrapper.find(AvviksopplysningerFL);
     expect(avvikPanelFL.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
     expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
     expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);

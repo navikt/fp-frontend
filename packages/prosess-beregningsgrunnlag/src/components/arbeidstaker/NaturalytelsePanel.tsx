@@ -7,7 +7,6 @@ import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';

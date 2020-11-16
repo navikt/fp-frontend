@@ -8,7 +8,6 @@ import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 type OwnProps = {

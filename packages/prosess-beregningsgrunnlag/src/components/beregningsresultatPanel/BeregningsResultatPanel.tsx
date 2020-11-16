@@ -6,13 +6,10 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '@fpsak-frontend/assets/images/... Remove this comment to see the full error message
 import avslaatIkonUrl from '@fpsak-frontend/assets/images/avslaatt_mini.svg';
 import Panel from 'nav-frontend-paneler';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module './beregningsresultatTable.less... Remove this comment to see the full error message
 import styles from './beregningsresultatTable.less';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 const lagSpesialRaderRad = (visningsObjekt) => {

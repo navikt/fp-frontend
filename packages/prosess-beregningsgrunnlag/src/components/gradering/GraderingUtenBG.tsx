@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { BeregningsgrunnlagAndel, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {
@@ -71,7 +71,6 @@ const lagAksjonspunktViser = (aksjonspunktTekstId, andelerMedGraderingUtenBG, ge
 
 type OwnProps = {
     readOnly: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     andelerMedGraderingUtenBG: BeregningsgrunnlagAndel[];
     submitCallback: (...args: any[]) => any;
     aksjonspunkter: Aksjonspunkt[];
@@ -88,7 +87,13 @@ type OwnProps = {
  * // TODO se om vi kan rydde bort all innsendingslogikk her
  */
 export const GraderingUtenBG: FunctionComponent<OwnProps & InjectedFormProps> = ({
-  andelerMedGraderingUtenBG, readOnly, aksjonspunkter, getKodeverknavn, behandlingId, behandlingVersjon, ...formProps
+  andelerMedGraderingUtenBG,
+  readOnly,
+  aksjonspunkter,
+  getKodeverknavn,
+  behandlingId,
+  behandlingVersjon,
+  ...formProps
 }) => {
   const aksjonspunkt = aksjonspunkter
     ? aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG)
@@ -212,7 +217,7 @@ export const buildInitialValues = createSelector(
 const lagSubmitFn = createSelector([(ownProps: OwnProps) => ownProps.submitCallback],
   (submitCallback) => (values) => submitCallback([transformValues(values)]));
 
-const mapStateToPropsFactory = (initialState, defaultOwnProps: OwnProps) => {
+const mapStateToPropsFactory = (initialState, defaultOwnProps) => {
   const getKodeverknavn = getKodeverknavnFn(defaultOwnProps.alleKodeverk, kodeverkTyper);
   return (state, ownProps) => {
     const initialValues = buildInitialValues(state, ownProps);

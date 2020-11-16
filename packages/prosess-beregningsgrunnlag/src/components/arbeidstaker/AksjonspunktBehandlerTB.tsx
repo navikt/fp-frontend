@@ -17,9 +17,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../fellesPaneler/aksjonspunktB... Remove this comment to see the full error message
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 const formPrefix = 'inntektField';

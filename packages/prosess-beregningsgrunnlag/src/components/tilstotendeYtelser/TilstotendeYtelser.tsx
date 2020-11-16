@@ -6,7 +6,6 @@ import { Column, Row } from 'nav-frontend-grid';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus, { isStatusDagpengerOrAAP } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module '../beregningsgrunnlagPanel/ber... Remove this comment to see the full error message
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
