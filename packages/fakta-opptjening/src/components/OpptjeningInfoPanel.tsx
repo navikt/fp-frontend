@@ -8,23 +8,31 @@ import { behandlingForm } from '@fpsak-frontend/form';
 import { addDaysToDate, omit } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, KodeverkMedNavn, Opptjening, OpptjeningAktivitet,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FastsattOpptjening, KodeverkMedNavn, Opptjening, OpptjeningAktivitet,
 } from '@fpsak-frontend/types';
 
 import OpptjeningFaktaForm from './OpptjeningFaktaForm';
+import CustomOpptjeningAktivitet from '../CustomOpptjeningAktivitet';
 
 export const formName = 'OpptjeningInfoPanel';
 
-interface OwnProps {
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
-  aksjonspunkt?: Aksjonspunkt;
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   dokStatus?: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  opptjeningAktiviteter: OpptjeningAktivitet[];
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: any) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+interface MappedOwnProps {
+  aksjonspunkt?: Aksjonspunkt;
 }
 
 /**
@@ -32,7 +40,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for Opptjeningsvilkåret.
  */
-export const OpptjeningInfoPanel: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const OpptjeningInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   hasOpenAksjonspunkter,
   readOnly,
   aksjonspunkt,
@@ -42,6 +50,7 @@ export const OpptjeningInfoPanel: FunctionComponent<OwnProps & InjectedFormProps
   dokStatus,
   alleMerknaderFraBeslutter,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
@@ -59,21 +68,24 @@ export const OpptjeningInfoPanel: FunctionComponent<OwnProps & InjectedFormProps
       isDirty={formProps.dirty}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </form>
 );
 
-const addDay = (date: string) => addDaysToDate(date, 1);
+const addDay = (date: string): string => addDaysToDate(date, 1);
 const getOpptjeningsperiodeIfEqual = (
   activityDate: string, opptjeningsperiodeDate: string,
-) => (moment(addDay(activityDate)).isSame(opptjeningsperiodeDate) ? opptjeningsperiodeDate : activityDate);
+): string => (moment(addDay(activityDate)).isSame(opptjeningsperiodeDate) ? opptjeningsperiodeDate : activityDate);
 
-const buildPeriod = (activity, opptjeningsperiodeFom: string, opptjeningsperiodeTom: string): {
+type Periode = {
   originalFom: string;
   originalTom: string;
   opptjeningFom: string;
   opptjeningTom: string;
-} => {
+}
+
+const buildPeriod = (activity: OpptjeningAktivitet, opptjeningsperiodeFom: string, opptjeningsperiodeTom: string): Periode => {
   const fomDate = moment(activity.opptjeningFom).isBefore(opptjeningsperiodeFom)
     ? opptjeningsperiodeFom
     : getOpptjeningsperiodeIfEqual(activity.opptjeningFom, opptjeningsperiodeTom);
@@ -88,18 +100,17 @@ const buildPeriod = (activity, opptjeningsperiodeFom: string, opptjeningsperiode
   };
 };
 
-interface OwnProps {
-  opptjeningAktiviteter: OpptjeningAktivitet[];
-  fastsattOpptjening?: Opptjening['fastsattOpptjening'];
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => void;
+type FormValues = {
+  opptjeningActivities: CustomOpptjeningAktivitet[];
+  aksjonspunkt?: Aksjonspunkt[];
+  fastsattOpptjening: FastsattOpptjening;
 }
 
 export const buildInitialValues = createSelector(
-  [(ownProps: OwnProps) => ownProps.opptjeningAktiviteter,
-    (ownProps: OwnProps) => ownProps.fastsattOpptjening,
-    (ownProps: OwnProps) => ownProps.aksjonspunkter],
-  (opptjeningActivities, fastsattOpptjening, aksjonspunkter) => fastsattOpptjening
+  [(ownProps: PureOwnProps) => ownProps.opptjeningAktiviteter,
+    (ownProps: PureOwnProps) => ownProps.fastsattOpptjening,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+  (opptjeningActivities, fastsattOpptjening, aksjonspunkter): FormValues => fastsattOpptjening
     && ({
       opptjeningActivities: opptjeningActivities
         .filter((oa) => moment(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
@@ -114,7 +125,7 @@ export const buildInitialValues = createSelector(
     }),
 );
 
-const transformPeriod = (activity: any, opptjeningsperiodeFom: string, opptjeningsperiodeTom: string) => {
+const transformPeriod = (activity: CustomOpptjeningAktivitet, opptjeningsperiodeFom: string, opptjeningsperiodeTom: string): CustomOpptjeningAktivitet => {
   let fomDate = activity.opptjeningFom;
   if (activity.originalFom && moment(activity.originalFom).isBefore(opptjeningsperiodeFom)) {
     fomDate = fomDate === opptjeningsperiodeFom ? activity.originalFom : fomDate;
@@ -131,19 +142,19 @@ const transformPeriod = (activity: any, opptjeningsperiodeFom: string, opptjenin
   };
 };
 
-const transformValues = (values: any) => ({
+const transformValues = (values: FormValues) => ({
   opptjeningAktivitetList: values.opptjeningActivities
-    .map((oa: any) => transformPeriod(oa, addDay(values.fastsattOpptjening.opptjeningFom), addDay(values.fastsattOpptjening.opptjeningTom)))
-    .map((oa: any) => omit(oa, 'id')),
+    .map((oa) => transformPeriod(oa, addDay(values.fastsattOpptjening.opptjeningFom), addDay(values.fastsattOpptjening.opptjeningTom)))
+    .map((oa) => omit(oa, 'id')),
 
   kode: values.aksjonspunkt[0].definisjon.kode,
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps: OwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
-const mapStateToPropsFactory = (_state: any, ownProps: OwnProps) => ({
+const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps) => ({
   aksjonspunkt: ownProps.aksjonspunkter[0],
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),

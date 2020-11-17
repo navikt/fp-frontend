@@ -15,7 +15,7 @@ import {
   AksjonspunktHelpTextTemp, DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { TimeLineNavigation } from '@fpsak-frontend/tidslinje';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import OpptjeningTimeLine from './timeline/OpptjeningTimeLine';
 import ActivityPanel, { activityPanelName } from './activity/ActivityPanel';
@@ -23,13 +23,13 @@ import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../CustomOpptj
 
 import styles from './opptjeningFaktaForm.less';
 
-const getAksjonspunktHelpTexts = (activities: any) => {
+const getAksjonspunktHelpTexts = (activities: CustomOpptjeningAktivitet[]): string[] => {
   const texts = [];
-  if (activities.some((a: any) => a.stillingsandel === 0)) {
+  if (activities.some((a) => a.stillingsandel === 0)) {
     texts.push(<FormattedMessage id="OpptjeningFaktaForm.AktivitetenErTimeAvslonnet" key="AktivitetenErTimeAvslonnet" />);
   }
 
-  const aktivitetTypes = activities.filter((a: any) => (a.erGodjent === undefined || a.beskrivelse) && a.stillingsandel !== 0);
+  const aktivitetTypes = activities.filter((a) => (a.erGodkjent === undefined || a.erGodkjent === null || a.begrunnelse) && a.stillingsandel !== 0);
   if (aktivitetTypes.length === 1) {
     texts.push(<FormattedMessage id="OpptjeningFaktaForm.EttArbeidKanGodkjennes" key="EttArbeidKanGodkjennes" />);
   } else if (aktivitetTypes.length > 1) {
@@ -38,37 +38,39 @@ const getAksjonspunktHelpTexts = (activities: any) => {
   return texts;
 };
 
-const findSkjaringstidspunkt = (date: any) => moment(date).add(1, 'days').format(ISO_DATE_FORMAT);
+const findSkjaringstidspunkt = (date: string): string => moment(date).add(1, 'days').format(ISO_DATE_FORMAT);
 
-const sortByFomDate = (opptjeningPeriods: any) => opptjeningPeriods
-  .sort((o1: any, o2: any) => {
-    const isSame = moment(o2.opptjeningFom, ISO_DATE_FORMAT).isSame(moment(o1.opptjeningFom, ISO_DATE_FORMAT));
-    return isSame
-      ? o1.id < o2.id
-      : moment(o2.opptjeningFom, ISO_DATE_FORMAT).isBefore(moment(o1.opptjeningFom, ISO_DATE_FORMAT));
-  });
+const sortByFomDate = (opptjeningPeriods: CustomOpptjeningAktivitet[]): CustomOpptjeningAktivitet[] => opptjeningPeriods
+  .sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
 
 const DOKUMENTASJON_VIL_BLI_INNHENTET = 'DOKUMENTASJON_VIL_BLI_INNHENTET';
 
-interface OwnProps {
+interface PureOwnProps {
   hasAksjonspunkt: boolean;
   hasOpenAksjonspunkter: boolean;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
   dokStatus?: string;
   readOnly: boolean;
-  opptjeningActivities: CustomOpptjeningAktivitet[];
-  opptjeningAktivitetTypes: KodeverkMedNavn[];
   formName: string;
-  behandlingFormPrefix: string;
   submitting: boolean;
   isDirty: boolean;
-  reduxFormChange: (...args: any[]) => any;
-  reduxFormInitialize: (...args: any[]) => any;
   behandlingId: number;
   behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+interface MappedOwnProps {
+  opptjeningAktivitetTypes: KodeverkMedNavn[];
+  behandlingFormPrefix: string;
+  opptjeningActivities: CustomOpptjeningAktivitet[];
+}
+
+interface DispatchProps {
+  reduxFormChange: (...args: any[]) => any;
+  reduxFormInitialize: (...args: any[]) => any;
 }
 
 interface OwnState {
@@ -81,8 +83,8 @@ interface OwnState {
  * Presentasjonskomponent. Vises faktapanelet for opptjeningsvilkåret. For Foreldrepenger vises dette alltid. Finnes
  * det aksjonspunkt kan nav-ansatt endre opplysninger før en går videre i prosessen.
  */
-export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
-  constructor(props) {
+export class OpptjeningFaktaFormImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps, OwnState> {
+  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps) {
     super(props);
 
     this.addOpptjeningActivity = this.addOpptjeningActivity.bind(this);
@@ -104,7 +106,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount(): void {
     const { opptjeningActivities } = this.props;
     const { selectedOpptjeningActivity } = this.state;
     const opptjeningActivityWithAp = opptjeningActivities.find((o: CustomOpptjeningAktivitet) => o.erGodkjent === null);
@@ -112,32 +114,32 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     this.setSelectedOpptjeningActivity(selected, true);
   }
 
-  setSelectedOpptjeningActivity(opptjeningActivity: CustomOpptjeningAktivitet | NyOpptjeningAktivitet, isMounting = false) {
+  setSelectedOpptjeningActivity(opptjeningActivity: CustomOpptjeningAktivitet | NyOpptjeningAktivitet, isMounting = false): void {
     if (!isMounting) {
       this.initializeActivityForm(opptjeningActivity);
     }
     this.setState({ selectedOpptjeningActivity: opptjeningActivity });
   }
 
-  setFormField(fieldName: string, fieldValue: CustomOpptjeningAktivitet[]) {
+  setFormField(fieldName: string, fieldValue: CustomOpptjeningAktivitet[]): void {
     const { behandlingFormPrefix, formName, reduxFormChange: formChange } = this.props;
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
 
-  initializeActivityForm(opptjeningActivity: NyOpptjeningAktivitet) {
+  initializeActivityForm(opptjeningActivity: NyOpptjeningAktivitet): void {
     const { behandlingFormPrefix, reduxFormInitialize: formInitialize } = this.props;
     formInitialize(`${behandlingFormPrefix}.${activityPanelName}`, opptjeningActivity);
   }
 
-  cancelSelectedOpptjeningActivity() {
+  cancelSelectedOpptjeningActivity(): void {
     this.initializeActivityForm({} as NyOpptjeningAktivitet);
     this.setState({ selectedOpptjeningActivity: undefined });
   }
 
-  addOpptjeningActivity() {
+  addOpptjeningActivity(): void {
     const { opptjeningActivities } = this.props;
     const newOpptjeningActivity = {
-      id: opptjeningActivities.map((oa: CustomOpptjeningAktivitet) => oa.id).reduce((acc: any, value: any) => (acc < value ? value : acc), 0) + 1,
+      id: opptjeningActivities.map((oa: CustomOpptjeningAktivitet) => oa.id).reduce((acc, value) => (acc < value ? value : acc), 0) + 1,
       erGodkjent: true,
       erManueltOpprettet: true,
     };
@@ -145,7 +147,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     this.setState({ selectedOpptjeningActivity: newOpptjeningActivity });
   }
 
-  updateActivity(values: any) {
+  updateActivity(values: any): void {
     const { opptjeningActivities } = this.props;
     const otherThanUpdated = opptjeningActivities.filter((o: CustomOpptjeningAktivitet) => o.id !== values.id);
     this.setFormField('opptjeningActivities', otherThanUpdated.concat({
@@ -156,7 +158,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     this.setSelectedOpptjeningActivity(opptjeningActivityWithAp || undefined);
   }
 
-  openPeriodInfo(event: any) {
+  openPeriodInfo(event: React.MouseEvent): void {
     const { opptjeningActivities } = this.props;
     const { selectedOpptjeningActivity } = this.state;
     event.preventDefault();
@@ -169,7 +171,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     }
   }
 
-  selectNextPeriod(event: any) {
+  selectNextPeriod(event: any): void {
     const { opptjeningActivities } = this.props;
     const { selectedOpptjeningActivity } = this.state;
     const newIndex = opptjeningActivities.findIndex((oa: CustomOpptjeningAktivitet) => oa.id === selectedOpptjeningActivity.id) + 1;
@@ -179,7 +181,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     event.preventDefault();
   }
 
-  selectPrevPeriod(event: any) {
+  selectPrevPeriod(event: any): void {
     const { opptjeningActivities } = this.props;
     const { selectedOpptjeningActivity } = this.state;
     const newIndex = opptjeningActivities.findIndex((oa: CustomOpptjeningAktivitet) => oa.id === selectedOpptjeningActivity.id) - 1;
@@ -189,7 +191,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     event.preventDefault();
   }
 
-  isSelectedActivityAndButtonsEnabled() {
+  isSelectedActivityAndButtonsEnabled(): boolean {
     const { selectedOpptjeningActivity } = this.state;
     if (selectedOpptjeningActivity === undefined) {
       return false;
@@ -197,7 +199,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     return !!selectedOpptjeningActivity.erManueltOpprettet || !!selectedOpptjeningActivity.erEndret;
   }
 
-  isConfirmButtonDisabled() {
+  isConfirmButtonDisabled(): boolean {
     const {
       hasOpenAksjonspunkter, opptjeningActivities, readOnly, submitting, isDirty,
     } = this.props;
@@ -211,7 +213,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
       || opptjeningActivities.some((ac: CustomOpptjeningAktivitet) => ac.erGodkjent === null);
   }
 
-  isAddButtonDisabled() {
+  isAddButtonDisabled(): boolean {
     const {
       readOnly, submitting,
     } = this.props;
@@ -225,6 +227,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
     const {
       hasAksjonspunkt, hasOpenAksjonspunkter, opptjeningActivities, opptjeningAktivitetTypes, opptjeningFomDato, dokStatus,
       opptjeningTomDato, readOnly, submitting, behandlingId, behandlingVersjon, alleMerknaderFraBeslutter, alleKodeverk,
+      arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { selectedOpptjeningActivity } = this.state;
     return (
@@ -284,6 +287,7 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
                 hasAksjonspunkt={hasAksjonspunkt}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 alleKodeverk={alleKodeverk}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
               <VerticalSpacer twentyPx />
             </>
@@ -319,21 +323,14 @@ export class OpptjeningFaktaFormImpl extends Component<OwnProps, OwnState> {
   }
 }
 
-interface PureOwnProps {
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  behandlingId: number;
-  behandlingVersjon: number;
-  formName: string;
-}
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   opptjeningAktivitetTypes: ownProps.alleKodeverk[kodeverkTyper.OPPTJENING_AKTIVITET_TYPE],
   behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
   opptjeningActivities: sortByFomDate(behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId,
     ownProps.behandlingVersjon)(state, 'opptjeningActivities')),
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: any): DispatchProps => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,
