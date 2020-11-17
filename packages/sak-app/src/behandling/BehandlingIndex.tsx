@@ -130,6 +130,17 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   };
   const behandlingTypeKode = behandling?.type ? behandling.type.kode : undefined;
 
+  const fagsakBehandlingerInfo = useMemo(() => alleBehandlinger
+    .filter((b) => !b.behandlingHenlagt)
+    .map((b) => ({
+      id: b.id,
+      uuid: b.uuid,
+      type: b.type,
+      status: b.status,
+      opprettet: b.opprettet,
+      avsluttet: b.avsluttet,
+    })), [alleBehandlinger]);
+
   if (!behandlingId) {
     return <LoadingPanel />;
   }
@@ -159,17 +170,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       </Suspense>
     );
   }
-
-  const fagsakBehandlingerInfo = useMemo(() => alleBehandlinger
-    .filter((b) => !b.behandlingHenlagt)
-    .map((b) => ({
-      id: b.id,
-      uuid: b.uuid,
-      type: b.type,
-      status: b.status,
-      opprettet: b.opprettet,
-      avsluttet: b.avsluttet,
-    })), [alleBehandlinger]);
 
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return (
