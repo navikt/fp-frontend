@@ -83,6 +83,14 @@ describe('<SvangerskapspengerProsess>', () => {
     },
   } as Soknad;
 
+  const arbeidsgiverOpplysningerPerId = {
+    123: {
+      erPrivatPerson: false,
+      identifikator: 'testId',
+      navn: 'testNavn',
+    },
+  };
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -105,6 +113,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -165,6 +174,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -195,6 +205,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -241,6 +252,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -290,6 +302,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -339,6 +352,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -366,6 +380,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -396,6 +411,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -432,6 +448,7 @@ describe('<SvangerskapspengerProsess>', () => {
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 

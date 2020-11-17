@@ -19,11 +19,10 @@ describe('<OpptjeningFaktaForm>', () => {
     opptjeningTom: '2017-07-10',
     originalFom: '2017-06-01',
     originalTom: '2017-07-10',
-    arbeidsgiver: 'Andersen Transport AS',
-    oppdragsgiverOrg: '583948180',
+    arbeidsgiverReferanse: '1',
     stillingsandel: 100,
     erGodkjent: true,
-    begrunnelse: null,
+    begrunnelse: 'test',
     erManueltOpprettet: false,
     erEndret: false,
   }, {
@@ -33,10 +32,8 @@ describe('<OpptjeningFaktaForm>', () => {
     opptjeningTom: '2017-08-15',
     originalFom: '2017-07-15',
     originalTom: '2017-08-15',
-    arbeidsgiver: 'Andersen Transport AS',
-    oppdragsgiverOrg: '583948180',
+    arbeidsgiverReferanse: '1',
     stillingsandel: 100,
-    registreringsdato: '2018-02-20',
     erGodkjent: null,
     begrunnelse: null,
     erManueltOpprettet: false,
@@ -72,6 +69,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     wrapper.setState({ selectedOpptjeningActivity: opptjeningActivities[0] });
@@ -111,6 +109,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     wrapper.setState({ selectedOpptjeningActivity: opptjeningActivities[0] });
@@ -139,6 +138,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     wrapper.setState({ selectedOpptjeningActivity: undefined });
@@ -170,6 +170,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     wrapper.setState({ selectedOpptjeningActivity: undefined });
@@ -203,6 +204,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     // @ts-ignore Fiks
@@ -233,6 +235,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const activityPanel = wrapper.find(ActivityPanel);
@@ -280,6 +283,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     wrapper.find(Knapp).simulate('click');
@@ -314,6 +318,7 @@ describe('<OpptjeningFaktaForm>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const activityPanel = wrapper.find(ActivityPanel);

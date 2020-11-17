@@ -9,7 +9,7 @@ import {
   FatterVedtakStatusModal, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 
 import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
@@ -41,6 +41,7 @@ interface OwnProps {
   opneSokeside: () => void;
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
   setBehandling: (behandling: Behandling) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const getForhandsvisCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
@@ -109,6 +110,7 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
   opneSokeside,
   apentFaktaPanelInfo,
   setBehandling,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
@@ -128,6 +130,7 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
     alleKodeverk,
     fagsakPerson,
+    arbeidsgiverOpplysningerPerId,
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
