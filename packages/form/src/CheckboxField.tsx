@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field, Validator } from 'redux-form';
+import { BaseFieldProps, Field, WrappedFieldProps } from 'redux-form';
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -7,14 +7,11 @@ import LabelType from './LabelType';
 import renderNavField from './renderNavField';
 
 interface CheckboxFieldProps {
-  name: string;
   label: LabelType;
-  validate?: Validator | Validator[];
   readOnly?: boolean;
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
-  onChange? :() => void;
 }
 
 interface RenderCheckboxFieldProps {
@@ -24,7 +21,11 @@ interface RenderCheckboxFieldProps {
   isEdited: boolean;
 }
 
-export const RenderCheckboxField = renderNavField(({ onChange, label, ...otherProps }: RenderCheckboxFieldProps) => {
+export const RenderCheckboxField = renderNavField(({
+  onChange,
+  label,
+  ...otherProps
+}: WrappedFieldProps & RenderCheckboxFieldProps) => {
   // eslint-disable-next-line no-param-reassign
   delete otherProps.isEdited;
   return (
@@ -37,7 +38,7 @@ export const RenderCheckboxField = renderNavField(({ onChange, label, ...otherPr
   );
 });
 
-const CheckboxField: FunctionComponent<CheckboxFieldProps> = ({
+const CheckboxField: FunctionComponent<BaseFieldProps & CheckboxFieldProps> = ({
   name,
   label,
   validate,

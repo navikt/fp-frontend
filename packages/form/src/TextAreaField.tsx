@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field, Validator } from 'redux-form';
+import { BaseFieldProps, Field } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Textarea as NavTextarea, TextareaProps } from 'nav-frontend-skjema';
 import EtikettFokus from 'nav-frontend-etiketter';
@@ -21,19 +21,6 @@ interface Badges {
 interface TextAreaWithBadgeProps {
   badges: Badges[];
   dataId?: string;
-}
-
-interface TextAreaFieldProps {
-  name: string;
-  label: LabelType;
-  validate?: Validator | Validator[];
-  readOnly?: boolean;
-  dataId?: string;
-  textareaClass?: string;
-  maxLength?: number;
-  badges?: Badges[];
-  placeholder?: string;
-  autoFocus?: boolean;
 }
 
 const TextAreaWithBadge: FunctionComponent<TextAreaWithBadgeProps & WrappedComponentProps & TextareaProps> = ({
@@ -59,8 +46,23 @@ const TextAreaWithBadge: FunctionComponent<TextAreaWithBadgeProps & WrappedCompo
 
 const renderNavTextArea = renderNavField(injectIntl(TextAreaWithBadge));
 
-const TextAreaField: FunctionComponent<TextAreaFieldProps> = ({
-  name, label, validate, readOnly, ...otherProps
+interface TextAreaFieldProps {
+  label: LabelType;
+  readOnly?: boolean;
+  dataId?: string;
+  textareaClass?: string;
+  maxLength?: number;
+  badges?: Badges[];
+  placeholder?: string;
+  autoFocus?: boolean;
+}
+
+const TextAreaField: FunctionComponent<BaseFieldProps & TextAreaFieldProps> = ({
+  name,
+  label,
+  validate,
+  readOnly,
+  ...otherProps
 }) => (
   <Field
     name={name}
@@ -76,12 +78,7 @@ const TextAreaField: FunctionComponent<TextAreaFieldProps> = ({
 );
 
 TextAreaField.defaultProps = {
-  validate: null,
   readOnly: false,
-};
-
-TextAreaWithBadge.defaultProps = {
-  badges: null,
 };
 
 export default TextAreaField;

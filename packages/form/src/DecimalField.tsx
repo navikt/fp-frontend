@@ -1,5 +1,5 @@
-import React, { ReactNode, Component, FunctionComponent } from 'react';
-import { Field as reduxFormField, Validator } from 'redux-form';
+import React, { Component, FunctionComponent } from 'react';
+import { BaseFieldProps, Field as reduxFormField, WrappedFieldProps } from 'redux-form';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Input as NavInput } from 'nav-frontend-skjema';
 
@@ -7,26 +7,14 @@ import renderNavField from './renderNavField';
 import ReadOnlyField from './ReadOnlyField';
 import LabelType from './LabelType';
 
-interface DecimalFieldProps {
-  name: string;
-  type?: string;
-  className?: string;
-  label?: LabelType;
-  validate?: Validator | Validator[];
-  readOnly?: boolean;
-  isEdited?: boolean;
-  normalizeOnBlur: (value: number) => number;
-  alignRightCenterOnReadOnly?: boolean;
-  onChange?: (elmt: ReactNode, value: number) => void;
+interface NormalizeOnBlurFieldProps {
+  normalizeOnBlur: (value: any) => void;
+  component?: () => reduxFormField;
 }
 
 const createNormalizeOnBlurField = (WrappedNavFieldComponent) => {
-  interface FieldComponent {
-    normalizeOnBlur: (value: any) => void;
-    component?: () => reduxFormField;
-  }
-  class FieldComponent extends Component<FieldComponent & WrappedComponentProps> {
-    constructor(props: FieldComponent & WrappedComponentProps) {
+  class FieldComponent extends Component<WrappedFieldProps & NormalizeOnBlurFieldProps & WrappedComponentProps> {
+    constructor(props: WrappedFieldProps & NormalizeOnBlurFieldProps & WrappedComponentProps) {
       super(props);
       this.blurHandler = this.blurHandler.bind(this);
     }
@@ -71,8 +59,26 @@ const createNormalizeOnBlurField = (WrappedNavFieldComponent) => {
 const renderNavInput = renderNavField(NavInput);
 const NormalizeOnBlurField = createNormalizeOnBlurField(reduxFormField);
 
-const DecimalField: FunctionComponent<DecimalFieldProps> = ({
-  name, type, label, validate, readOnly, isEdited, normalizeOnBlur, alignRightCenterOnReadOnly, ...otherProps
+interface DecimalFieldProps {
+  type?: string;
+  className?: string;
+  label?: LabelType;
+  readOnly?: boolean;
+  isEdited?: boolean;
+  normalizeOnBlur: (value: number) => number;
+  alignRightCenterOnReadOnly?: boolean;
+}
+
+const DecimalField: FunctionComponent<BaseFieldProps & DecimalFieldProps> = ({
+  name,
+  type,
+  label,
+  validate,
+  readOnly,
+  isEdited,
+  normalizeOnBlur,
+  alignRightCenterOnReadOnly,
+  ...otherProps
 }) => {
   const other = readOnly ? {
     ...otherProps,
@@ -99,7 +105,6 @@ const DecimalField: FunctionComponent<DecimalFieldProps> = ({
 
 DecimalField.defaultProps = {
   type: 'number',
-  validate: null,
   readOnly: false,
   label: '',
   isEdited: false,
