@@ -45,7 +45,7 @@ const SelectField: FunctionComponent<BaseFieldProps & SelectFieldProps> = ({
   <Field
     name={name}
     validate={validate}
-    component={!readOnly ? renderReadOnly() : renderNavSelect}
+    component={readOnly ? renderReadOnly() : renderNavSelect}
     label={label}
     selectValues={selectValues}
     disabled={!!readOnly}

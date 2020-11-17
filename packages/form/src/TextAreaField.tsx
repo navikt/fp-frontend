@@ -30,15 +30,14 @@ const TextAreaWithBadge: FunctionComponent<TextAreaWithBadgeProps & WrappedCompo
   ...otherProps
 }) => (
   <div className={badges ? styles.textAreaFieldWithBadges : null}>
-    { badges
-    && (
-    <div className={styles.etikettWrapper}>
-      { badges.map(({ textId, type, title }) => (
-        <EtikettFokus key={textId} type={type} title={intl.formatMessage({ id: title })}>
-          <FormattedMessage id={textId} />
-        </EtikettFokus>
-      ))}
-    </div>
+    { badges && (
+      <div className={styles.etikettWrapper}>
+        { badges.map(({ textId, type, title }) => (
+          <EtikettFokus key={textId} type={type} title={intl.formatMessage({ id: title })}>
+            <FormattedMessage id={textId} />
+          </EtikettFokus>
+        ))}
+      </div>
     )}
     <NavTextarea data-id={dataId} {...otherProps} />
   </div>

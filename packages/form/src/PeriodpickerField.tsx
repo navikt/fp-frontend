@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import {
-  BaseFieldProps, Fields, Formatter, Parser, WrappedFieldProps,
+  BaseFieldsProps, Fields, Formatter, Parser, WrappedFieldsProps,
 } from 'redux-form';
 import moment from 'moment';
 import { injectIntl, IntlShape } from 'react-intl';
@@ -47,7 +47,7 @@ const formatError = (intl: IntlShape, otherProps: any, names: string[]): string 
 
 const hasValue = (value: string): boolean => value !== undefined && value !== null && value !== '';
 
-const renderReadOnly = (): FunctionComponent<Partial<PeriodpickerFieldProps> & WrappedFieldProps> => ({
+const renderReadOnly = (): FunctionComponent<Partial<PeriodpickerFieldProps> & WrappedFieldsProps> => ({
   names,
   renderIfMissingDateOnReadOnly,
   ...otherProps
@@ -80,7 +80,7 @@ interface PeriodePickerRenderProps {
 const renderPeriodpicker = (hideLabel?: boolean) => injectIntl(({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   intl, label, isEdited, names, ...otherProps
-}: PeriodePickerRenderProps & WrappedFieldProps) => {
+}: PeriodePickerRenderProps & WrappedFieldsProps) => {
   const fieldProps = {
     id: `${names[0]}-${names[1]}`,
     feil: formatError(intl, otherProps, names),
@@ -109,7 +109,7 @@ const acceptedFormatToIso = (value: string, name: string, names: string[]): stri
 const formatValue = (format: Formatter) => (value: string, name: string) => isoToDdMmYyyy(format(value, name));
 const parseValue = (parse: Parser, names: string[]) => (value: string, name: string) => parse(acceptedFormatToIso(value, name, names), name);
 
-const PeriodpickerField: FunctionComponent<Partial<BaseFieldProps> & PeriodpickerFieldProps> = ({
+const PeriodpickerField: FunctionComponent<BaseFieldsProps & PeriodpickerFieldProps> = ({
   names,
   label,
   readOnly,
@@ -123,6 +123,7 @@ const PeriodpickerField: FunctionComponent<Partial<BaseFieldProps> & Periodpicke
   const memoPeriodpicker = useMemo(() => renderPeriodpicker(hideLabel), [hideLabel]);
 
   return (
+    // @ts-ignore Fiks
     <Fields
       names={names}
       component={readOnly ? memoReadOnly : memoPeriodpicker}

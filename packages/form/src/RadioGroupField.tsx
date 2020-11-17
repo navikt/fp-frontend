@@ -3,6 +3,7 @@ import classnames from 'classnames/bind';
 import { BaseFieldProps, Field } from 'redux-form';
 import { SkjemaGruppe as NavSkjemaGruppe } from 'nav-frontend-skjema';
 
+import LabelType from './LabelType';
 import renderNavField from './renderNavField';
 import OptionGrid from './OptionGrid';
 import { RadioOptionProps } from './RadioOption';
@@ -12,7 +13,7 @@ import styles from './radioGroupField.less';
 type Direction = 'horizontal' | 'vertical';
 
 interface RadioGroupFieldProps {
-  label?: React.ReactElement;
+  label?: LabelType;
   /**
    * columns: Antall kolonner som valgene skal fordeles på. Default er samme som antall valg.
    */
@@ -49,7 +50,7 @@ const renderRadioGroupField = renderNavField(({
   direction,
   DOMName,
   legend,
-}: BaseFieldProps & RadioGroupFieldProps) => {
+}: BaseFieldProps & RadioGroupFieldProps & { feil?: string; value: any }) => {
   const optionProps = {
     onChange,
     name: DOMName || name,
@@ -70,10 +71,12 @@ const renderRadioGroupField = renderNavField(({
       className={classNames(`input--${bredde}`, 'radioGroup', { readOnly })}
       legend={legend}
     >
+      {/* @ts-ignore Fiks  */}
       {label.props.input && <span className={classNames('radioGroupLabel', { readOnly })}>{label}</span>}
       <OptionGrid
         direction={direction}
         isEdited={readOnly && isEdited}
+        // @ts-ignore Fiks
         options={options}
         spaceBetween={spaceBetween}
         columns={showCheckedOnly ? 1 : columns}
