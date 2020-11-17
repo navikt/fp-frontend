@@ -3,7 +3,7 @@ export const formatCurrencyWithKr = (value: number | string): string => {
   return `${formattedValue} kr`;
 };
 
-export const formatCurrencyNoKr = (value?: string | number): string => {
+export const formatCurrencyNoKr = (value?: string | number): string | undefined => {
   if (value === null || value === undefined) {
     return undefined;
   }
@@ -23,7 +23,7 @@ export const removeSpacesFromNumber = (input: number | string): number => {
   return Number.isNaN(parsedValue) ? input as number : parsedValue;
 };
 
-export const parseCurrencyInput = (input: number | string): string => {
+export const parseCurrencyInput = (input: number | string): string | undefined => {
   const inputNoSpace = input.toString().replace(/\s/g, '');
   const parsedValue = parseInt(inputNoSpace, 10);
   return Number.isNaN(parsedValue) ? '' : formatCurrencyNoKr(parsedValue);

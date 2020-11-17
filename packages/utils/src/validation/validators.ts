@@ -54,86 +54,88 @@ import {
 
 type InputValue = string | number | boolean;
 
-export const maxLengthOrFodselsnr = (length: number) => (text: string): FormValidationError => (isEmpty(text)
+type FormValidationResult = FormValidationError | null | undefined;
+
+export const maxLengthOrFodselsnr = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
   || text.toString().trim().length <= length ? null : maxLengthOrFodselsnrMessage(length));
-export const required = (value: InputValue): FormValidationError => (isEmpty(value) ? isRequiredMessage() : undefined);
-export const notDash = (value: InputValue): FormValidationError => (value === '-' ? isRequiredMessage() : undefined);
-export const requiredIfNotPristine = (value: InputValue, _allValues, props: { pristine: boolean}): FormValidationError => (props.pristine
+export const required = (value: InputValue): FormValidationResult => (isEmpty(value) ? isRequiredMessage() : undefined);
+export const notDash = (value: InputValue): FormValidationResult => (value === '-' ? isRequiredMessage() : undefined);
+export const requiredIfNotPristine = (value: InputValue, _allValues: any, props: { pristine: boolean}): FormValidationResult => (props.pristine
   || !isEmpty(value) ? undefined : isRequiredMessage());
 export const requiredIfCustomFunctionIsTrue = (isRequiredFunction: (values: InputValue, props: { pristine: boolean}) => any) => (
   value: InputValue,
   allValues: InputValue,
   props: { pristine: boolean},
-): FormValidationError => (isEmpty(value) && isRequiredFunction(allValues, props) ? isRequiredMessage() : undefined);
+): FormValidationResult => (isEmpty(value) && isRequiredFunction(allValues, props) ? isRequiredMessage() : undefined);
 
-export const minLength = (length: number) => (text: string): FormValidationError => (isEmpty(text)
+export const minLength = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
   || text.toString().trim().length >= length ? null : minLengthMessage(length));
-export const maxLength = (length: number) => (text: string): FormValidationError => (isEmpty(text)
+export const maxLength = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
   || text.toString().trim().length <= length ? null : maxLengthMessage(length));
 
-export const minValue = (length: number) => (number: number): FormValidationError => (number >= length ? null : minValueMessage(length));
-export const maxValue = (length: number) => (number: number): FormValidationError => (number <= length ? null : maxValueMessage(length));
+export const minValue = (length: number) => (number: number): FormValidationResult => (number >= length ? null : minValueMessage(length));
+export const maxValue = (length: number) => (number: number): FormValidationResult => (number <= length ? null : maxValueMessage(length));
 
-export const minValueFormatted = (min: number) => (number: number): FormValidationError => (removeSpacesFromNumber(number) >= min
+export const minValueFormatted = (min: number) => (number: number): FormValidationResult => (removeSpacesFromNumber(number) >= min
   ? null : minValueMessage(min));
-export const maxValueFormatted = (max: number) => (number: number): FormValidationError => (removeSpacesFromNumber(number) <= max
+export const maxValueFormatted = (max: number) => (number: number): FormValidationResult => (removeSpacesFromNumber(number) <= max
   ? null : maxValueMessage(max));
 
-export const hasValidOrgNumber = (number: number): FormValidationError => (number.toString().trim().length === 9 ? null : invalidOrgNumberMessage());
-export const hasValidOrgNumberOrFodselsnr = (number: number): FormValidationError => (number.toString().trim().length === 9
+export const hasValidOrgNumber = (number: number): FormValidationResult => (number.toString().trim().length === 9 ? null : invalidOrgNumberMessage());
+export const hasValidOrgNumberOrFodselsnr = (number: number): FormValidationResult => (number.toString().trim().length === 9
   || number.toString().trim().length === 11 ? null : invalidOrgNumberOrFodselsnrMessage());
 
-const hasValidNumber = (text: string | number): FormValidationError => (isEmpty(text) || numberRegex.test(text.toString())
+const hasValidNumber = (text: string | number): FormValidationResult => (isEmpty(text) || numberRegex.test(text.toString())
   ? null : invalidNumberMessage(text.toString()));
-const hasValidInt = (text: string | number): FormValidationError => (isEmpty(text) || integerRegex.test(text.toString())
+const hasValidInt = (text: string | number): FormValidationResult => (isEmpty(text) || integerRegex.test(text.toString())
   ? null : invalidIntegerMessage(text.toString()));
-const hasValidDec = (text: string | number): FormValidationError => (isEmpty(text) || decimalRegex.test(text.toString())
+const hasValidDec = (text: string | number): FormValidationResult => (isEmpty(text) || decimalRegex.test(text.toString())
   ? null : invalidDecimalMessage(text.toString()));
-export const hasValidInteger = (text: string | number): FormValidationError => (hasValidNumber(text) || hasValidInt(text));
-export const hasValidDecimal = (text: string | number): FormValidationError => (hasValidNumber(text) || hasValidDec(text));
+export const hasValidInteger = (text: string | number): FormValidationResult => (hasValidNumber(text) || hasValidInt(text));
+export const hasValidDecimal = (text: string | number): FormValidationResult => (hasValidNumber(text) || hasValidDec(text));
 
-export const hasValidSaksnummerOrFodselsnummerFormat = (text: string): FormValidationError => (isEmpty(text) || saksnummerOrFodselsnummerPattern.test(text)
+export const hasValidSaksnummerOrFodselsnummerFormat = (text: string): FormValidationResult => (isEmpty(text) || saksnummerOrFodselsnummerPattern.test(text)
   ? null : invalidSaksnummerOrFodselsnummerFormatMessage());
 
-export const hasValidDate = (text: string): FormValidationError => (isEmpty(text) || isoDateRegex.test(text) ? null : invalidDateMessage());
-export const dateBeforeOrEqual = (latest: moment.Moment | Date | string) => (text: moment.Moment | string): FormValidationError => (
+export const hasValidDate = (text: string): FormValidationResult => (isEmpty(text) || isoDateRegex.test(text) ? null : invalidDateMessage());
+export const dateBeforeOrEqual = (latest: moment.Moment | Date | string) => (text: moment.Moment | string): FormValidationResult => (
   (isEmpty(text) || moment(text).isSameOrBefore(moment(latest).startOf('day')))
     ? null
     : dateNotBeforeOrEqualMessage(moment(latest).format(DDMMYYYY_DATE_FORMAT))
 );
-const getErrorMessage = (earliest: moment.Moment | Date | string, customErrorMessage?: (date: string) => FormValidationError): FormValidationError => {
+const getErrorMessage = (earliest: moment.Moment | Date | string, customErrorMessage?: (date: string) => FormValidationResult): FormValidationResult => {
   const date = moment(earliest).format(DDMMYYYY_DATE_FORMAT);
   return customErrorMessage ? customErrorMessage(date) : dateNotAfterOrEqualMessage(date);
 };
-export const dateAfterOrEqual = (earliest: moment.Moment | Date | string, customErrorMessageFunction?: (date: string) => FormValidationError) => (
+export const dateAfterOrEqual = (earliest: moment.Moment | Date | string, customErrorMessageFunction?: (date: string) => FormValidationResult) => (
   text: moment.Moment | string,
-): FormValidationError => (
+): FormValidationResult => (
   (isEmpty(text) || moment(text).isSameOrAfter(moment(earliest).startOf('day')))
     ? null
     : getErrorMessage(earliest, customErrorMessageFunction)
 );
-export const dateIsBefore = (dateToCheckAgainst: string, errorMessageFunction: (date: string) => FormValidationError) => (
+export const dateIsBefore = (dateToCheckAgainst: string, errorMessageFunction: (date: string) => FormValidationResult) => (
   inputDate: string,
-): FormValidationError => (
+): FormValidationResult => (
   (isEmpty(inputDate) || moment(inputDate).isBefore(moment(dateToCheckAgainst).startOf('day')))
     ? null
     : errorMessageFunction(moment(dateToCheckAgainst).format(DDMMYYYY_DATE_FORMAT))
 );
 
-export const dateRangesNotOverlapping = (ranges: string[][]): FormValidationError => (dateRangesAreSequential(ranges) ? null : dateRangesOverlappingMessage());
-export const dateRangesNotOverlappingCrossTypes = (ranges: string[][]): FormValidationError => (dateRangesAreSequential(ranges)
+export const dateRangesNotOverlapping = (ranges: string[][]): FormValidationResult => (dateRangesAreSequential(ranges) ? null : dateRangesOverlappingMessage());
+export const dateRangesNotOverlappingCrossTypes = (ranges: string[][]): FormValidationResult => (dateRangesAreSequential(ranges)
   ? null : dateRangesOverlappingBetweenPeriodTypesMessage());
 
-export const dateBeforeToday = (text: moment.Moment | string): FormValidationError => dateBeforeOrEqual(yesterday())(text);
-export const dateBeforeOrEqualToToday = (text: moment.Moment | string): FormValidationError => dateBeforeOrEqual(moment().startOf('day'))(text);
-export const dateAfterToday = (text: moment.Moment | string): FormValidationError => dateAfterOrEqual(tomorrow())(text);
-export const dateAfterOrEqualToToday = (text: moment.Moment | string): FormValidationError => dateAfterOrEqual(moment().startOf('day'))(text);
+export const dateBeforeToday = (text: moment.Moment | string): FormValidationResult => dateBeforeOrEqual(yesterday())(text);
+export const dateBeforeOrEqualToToday = (text: moment.Moment | string): FormValidationResult => dateBeforeOrEqual(moment().startOf('day'))(text);
+export const dateAfterToday = (text: moment.Moment | string): FormValidationResult => dateAfterOrEqual(tomorrow())(text);
+export const dateAfterOrEqualToToday = (text: moment.Moment | string): FormValidationResult => dateAfterOrEqual(moment().startOf('day'))(text);
 
-export const hasValidFodselsnummerFormat = (text: string): FormValidationError => (!fodselsnummerPattern.test(text)
+export const hasValidFodselsnummerFormat = (text: string): FormValidationResult => (!fodselsnummerPattern.test(text)
   ? invalidFodselsnummerFormatMessage() : null);
-export const hasValidFodselsnummer = (text: string): FormValidationError => (!isValidFodselsnummer(text) ? invalidFodselsnummerMessage() : null);
+export const hasValidFodselsnummer = (text: string): FormValidationResult => (!isValidFodselsnummer(text) ? invalidFodselsnummerMessage() : null);
 
-export const hasValidText = (text: string): FormValidationError => {
+export const hasValidText = (text: string): FormValidationResult => {
   if (!textRegex.test(text)) {
     const illegalChars = text.replace(textGyldigRegex, '');
     return invalidTextMessage(illegalChars.replace(/[\t]/g, 'Tabulatortegn'));
@@ -141,7 +143,7 @@ export const hasValidText = (text: string): FormValidationError => {
   return null;
 };
 
-export const hasValidName = (text: string): FormValidationError => {
+export const hasValidName = (text: string): FormValidationResult => {
   if (!nameRegex.test(text)) {
     const illegalChars = text.replace(nameGyldigRegex, '');
     return invalidTextMessage(illegalChars.replace(/[\t]/g, 'Tabulatortegn'));
@@ -149,20 +151,20 @@ export const hasValidName = (text: string): FormValidationError => {
   return null;
 };
 
-export const hasValidValue = (value: string) => (invalidValue: string): FormValidationError => (value === invalidValue ? invalidValueMessage(value) : null);
-export const arrayMinLength = (length: number) => (value: string): FormValidationError => (value && value.length >= length
+export const hasValidValue = (value: string) => (invalidValue: string): FormValidationResult => (value === invalidValue ? invalidValueMessage(value) : null);
+export const arrayMinLength = (length: number) => (value: string): FormValidationResult => (value && value.length >= length
   ? null : arrayMinLengthMessage(length));
 
 export const dateIsAfter = (date: string, checkAgainsDate: string): boolean => moment(date).isAfter(checkAgainsDate);
-export const isDatesEqual = (date1: string, date2: string): FormValidationError => (date1 !== date2
+export const isDatesEqual = (date1: string, date2: string): FormValidationResult => (date1 !== date2
   ? datesNotEqual(moment(date2).format(DDMMYYYY_DATE_FORMAT)) : null);
 
 const validateDate = (
   dateAsText: string,
   date: moment.Moment,
-  earliestDate: moment.Moment | string,
-  latestDate: moment.Moment | string,
-): FormValidationError => {
+  earliestDate: moment.Moment | string | null,
+  latestDate: moment.Moment | string | null,
+): FormValidationResult => {
   const error = required(dateAsText) || hasValidDate(dateAsText);
   if (!error && earliestDate) {
     return dateAfterOrEqual(earliestDate)(date);
@@ -183,7 +185,7 @@ export const hasValidPeriodIncludingOtherErrors = (
   values: { periodeFom: string; periodeTom: string }[],
   otherErrors: Record<number, any> = [{}],
   options: Options = {},
-): { periodeFom: string; periodeTom: string }[] | { _error: FormValidationError } => {
+): { periodeFom: string; periodeTom: string }[] | { _error: FormValidationResult } | null => {
   const today = moment().format(ISO_DATE_FORMAT);
   let earliestDate = options.todayOrAfter ? today : null;
   if (options.tidligstDato) {
@@ -220,14 +222,14 @@ export const hasValidPeriodIncludingOtherErrors = (
   return null;
 };
 
-export const validPeriodeFomTom = (fomDate: string, tomDate: string): FormValidationError => {
+export const validPeriodeFomTom = (fomDate: string, tomDate: string): FormValidationResult => {
   if (isEmpty(fomDate) && isEmpty(tomDate)) {
     return null;
   }
   return moment(fomDate).isSameOrBefore(moment(tomDate).startOf('day')) ? null : invalidPeriodMessage();
 };
 
-export const hasValidPeriod = (fomDate: string, tomDate: string): FormValidationError => {
+export const hasValidPeriod = (fomDate: string, tomDate: string): FormValidationResult => {
   if (isEmpty(fomDate) && isEmpty(tomDate)) {
     return null;
   }
@@ -237,31 +239,31 @@ export const hasValidPeriod = (fomDate: string, tomDate: string): FormValidation
   return moment(fomDate).isSameOrBefore(moment(tomDate).startOf('day')) ? null : invalidPeriodMessage();
 };
 
-export const isWithinOpptjeningsperiode = (fomDateLimit: string, tomDateLimit: string) => (fom: string, tom: string): FormValidationError => {
+export const isWithinOpptjeningsperiode = (fomDateLimit: string, tomDateLimit: string) => (fom: string, tom: string): FormValidationResult => {
   const isBefore = moment(fom).isBefore(moment(fomDateLimit));
   const isAfter = moment(tom).isAfter(moment(tomDateLimit));
   return isBefore || isAfter ? invalidPeriodRangeMessage() : null;
 };
 
-export const isUtbetalingsgradMerSamitidigUttaksprosent = (samtidigUttaksProsent: number, utbetalingsgrad: number): FormValidationError => {
+export const isUtbetalingsgradMerSamitidigUttaksprosent = (samtidigUttaksProsent: number, utbetalingsgrad: number): FormValidationResult => {
   if (samtidigUttaksProsent < utbetalingsgrad) {
     return utbetalingsgradErMerSamtidigUttaksprosentMessage();
   }
   return null;
 };
 
-export const isUkerOgDagerVidNullUtbetalningsgrad = (weeks: number, days: number, utbetalingsgrad: number): FormValidationError => {
+export const isUkerOgDagerVidNullUtbetalningsgrad = (weeks: number, days: number, utbetalingsgrad: number): FormValidationResult => {
   if (weeks === 0 && days === 0 && utbetalingsgrad > 0) {
     return ukerOgDagerVidNullUtbetalningsgradMessage();
   }
   return null;
 };
 
-export const validateProsentandel = (prosentandel: string | number): FormValidationError => required(prosentandel)
+export const validateProsentandel = (prosentandel: string | number): FormValidationResult => required(prosentandel)
   || hasValidDecimal(prosentandel) || hasValidNumber(prosentandel.toString().replace('.', ''));
 
 export const ariaCheck = (): void => {
-  let errors;
+  let errors: any;
   setTimeout(() => {
     if (document.getElementsByClassName('skjemaelement__feilmelding').length > 0) {
       errors = document.getElementsByClassName('skjemaelement__feilmelding');
@@ -280,6 +282,6 @@ export const ariaCheck = (): void => {
   }, 300);
 };
 
-export const isTrekkdagerMerEnnNullUtsettelse = (value: number): FormValidationError => (value > 0 ? trekkdagerErMerEnnNullUtsettelseMessage() : null);
+export const isTrekkdagerMerEnnNullUtsettelse = (value: number): FormValidationResult => (value > 0 ? trekkdagerErMerEnnNullUtsettelseMessage() : null);
 
-export const isUtbetalingMerEnnNullUtsettelse = (value: number): FormValidationError => (value > 0 ? utbetalingMerEnnNullUtsettelseMessage() : null);
+export const isUtbetalingMerEnnNullUtsettelse = (value: number): FormValidationResult => (value > 0 ? utbetalingMerEnnNullUtsettelseMessage() : null);

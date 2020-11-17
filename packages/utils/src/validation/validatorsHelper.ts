@@ -12,14 +12,14 @@ export const textGyldigRegex = /[0-9a-zA-ZæøåÆØÅAaÁáBbCcČčDdĐđEeFfGg
 export const nameRegex = /^[0-9a-zA-ZæøåÆØÅAaÁáBbCcČčDdĐđEeFfGgHhIiJjKkLlMmNnŊŋOoPpRrSsŠšTtŦŧUuVvZzŽžéôèÉöüäÖÜÄ .'-]*$/;
 export const nameGyldigRegex = /[0-9a-zA-ZæøåÆØÅAaÁáBbCcČčDdĐđEeFfGgHhIiJjKkLlMmNnŊŋOoPpRrSsŠšTtŦŧUuVvZzŽžéôèÉöüäÖÜÄ .'-]*/g;
 
-export const isEmpty = (text?: string | number | boolean | moment.Moment) => text === null || text === undefined || text.toString().trim().length === 0;
+export const isEmpty = (text?: string | number | boolean | moment.Moment | null) => text === null || text === undefined || text.toString().trim().length === 0;
 
 export const yesterday = (): moment.Moment => moment().subtract(1, 'days').startOf('day');
 export const tomorrow = (): moment.Moment => moment().add(1, 'days').startOf('day');
 
 export const dateRangesAreSequential = (ranges: string[][]): boolean => {
   if (Array.isArray(ranges)) {
-    const isBeforeTheNextDate = (element, index, array) => {
+    const isBeforeTheNextDate = (element: string, index: number, array: string[]): boolean => {
       const current = moment(element).startOf('day');
       const next = index + 1 < array.length ? moment(array[index + 1]).startOf('day') : null;
       return next !== null ? current.isBefore(next) : true;
