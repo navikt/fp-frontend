@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import asyncPollingStatus from './asyncPollingStatus';
+import AsyncPollingStatus from './asyncPollingStatus';
 import RequestRunner, { REQUEST_POLLING_CANCELLED } from './RequestRunner';
 import NotificationMapper from './NotificationMapper';
 
@@ -96,14 +96,14 @@ describe('RequestRunner', () => {
     const allGetResults = [{
       ...response,
       data: {
-        status: asyncPollingStatus.PENDING,
+        status: AsyncPollingStatus.PENDING,
         message: 'Polling continues',
         pollIntervalMillis: 0,
       },
     }, {
       ...response,
       data: {
-        status: asyncPollingStatus.PENDING,
+        status: AsyncPollingStatus.PENDING,
         message: 'Polling continues',
         pollIntervalMillis: 0,
       },
@@ -171,7 +171,7 @@ describe('RequestRunner', () => {
       get: () => Promise.resolve({
         ...response,
         data: {
-          status: asyncPollingStatus.PENDING,
+          status: AsyncPollingStatus.PENDING,
           message: 'Polling continues',
           pollIntervalMillis: 0,
         },

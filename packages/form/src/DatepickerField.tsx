@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Field, Validator } from 'redux-form';
+import { BaseFieldProps, Field } from 'redux-form';
 import moment from 'moment';
 
 import { ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
@@ -10,11 +10,8 @@ import ReadOnlyField from './ReadOnlyField';
 import LabelType from './LabelType';
 
 interface DatepickerFieldProps {
-  name: string;
   label?: LabelType;
   readOnly?: boolean;
-  format?: (value: string) => string;
-  parse?: (value: string) => string;
   isEdited?: boolean;
   className?: string;
   disabledDays?: {
@@ -23,7 +20,6 @@ interface DatepickerFieldProps {
   };
   initialMonth?: Date;
   numberOfMonths?: number;
-  validate?: Validator | Validator[];
 }
 
 const isoToDdMmYyyy = (string: string): string => {
@@ -46,16 +42,22 @@ const acceptedFormatToIso = (string: string): string => {
 
 export const RenderDatepickerField = renderNavField(Datepicker);
 
-const DatepickerField: FunctionComponent<DatepickerFieldProps> = ({
-  name, label, readOnly, format, parse, isEdited, ...otherProps
+const DatepickerField: FunctionComponent<BaseFieldProps & DatepickerFieldProps> = ({
+  name,
+  label,
+  readOnly,
+  format,
+  parse,
+  isEdited,
+  ...otherProps
 }) => (
   <Field
     name={name}
     component={readOnly ? ReadOnlyField : RenderDatepickerField}
     label={label}
     {...otherProps}
-    format={(value) => isoToDdMmYyyy(format(value))}
-    parse={(value) => parse(acceptedFormatToIso(value))}
+    format={(value) => isoToDdMmYyyy(format(value, name))}
+    parse={(value) => parse(acceptedFormatToIso(value), name)}
     readOnly={readOnly}
     readOnlyHideEmpty
     isEdited={isEdited}

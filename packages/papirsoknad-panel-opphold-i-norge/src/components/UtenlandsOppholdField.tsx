@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FieldArray, FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import classnames from 'classnames/bind';
 import { Column, Row } from 'nav-frontend-grid';
@@ -21,15 +21,15 @@ const defaultUtenlandsOpphold = {
   periodeTom: '',
 };
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactNode[] => countryCodes
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .filter(({ kode }) => kode !== landkoder.NORGE)
-  .map(({ kode, navn }): ReactNode => <option value={kode} key={kode}>{navn}</option>);
+  .map(({ kode, navn }): ReactElement => <option value={kode} key={kode}>{navn}</option>);
 
 interface OwnProps {
   readOnly: boolean;
   fields: FieldArrayFieldsProps<any>;
   meta: FieldArrayMetaProps;
-  selectValues: ReactNode[];
+  selectValues: ReactElement[];
 }
 
 const renderUtenlandsOppholdFieldArray: FunctionComponent<OwnProps> = ({

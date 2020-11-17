@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { Fields, Validator } from 'redux-form';
+import {
+  BaseFieldsProps, Fields, Formatter, Parser, WrappedFieldsProps,
+} from 'redux-form';
 import moment from 'moment';
 import { injectIntl, IntlShape } from 'react-intl';
 import {
@@ -15,11 +17,8 @@ interface PeriodpickerFieldProps {
   label?: LabelType;
   readOnly?: boolean;
   hideLabel?: boolean;
-  format?: (value: string) => string;
-  parse?: (value: string) => string;
   isEdited?: boolean;
   renderIfMissingDateOnReadOnly?: boolean;
-  validate?: Validator | Validator[];
   dataId?: string;
   renderUpwards?: boolean;
   ariaLabel?: string;
@@ -29,7 +28,7 @@ interface PeriodpickerFieldProps {
   };
 }
 
-const formatError = (intl: IntlShape, otherProps: any, names: string[]) => {
+const formatError = (intl: IntlShape, otherProps: any, names: string[]): string => {
   const getField1 = haystack(otherProps, names[0]);
   const meta1 = getField1.meta;
 
@@ -46,14 +45,13 @@ const formatError = (intl: IntlShape, otherProps: any, names: string[]) => {
   return undefined;
 };
 
-const hasValue = (value: string) => value !== undefined && value !== null && value !== '';
+const hasValue = (value: string): boolean => value !== undefined && value !== null && value !== '';
 
-// eslint-disable-next-line react/prop-types
-const renderReadOnly = () => ({
+const renderReadOnly = (): FunctionComponent<Partial<PeriodpickerFieldProps> & WrappedFieldsProps> => ({
   names,
   renderIfMissingDateOnReadOnly,
   ...otherProps
-}: Partial<PeriodpickerFieldProps>) => {
+}) => {
   const getFomDate = haystack(otherProps, names[0]);
   const getTomDate = haystack(otherProps, names[1]);
   const fomDate = getFomDate.input.value;
@@ -82,7 +80,7 @@ interface PeriodePickerRenderProps {
 const renderPeriodpicker = (hideLabel?: boolean) => injectIntl(({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   intl, label, isEdited, names, ...otherProps
-}: PeriodePickerRenderProps) => {
+}: PeriodePickerRenderProps & WrappedFieldsProps) => {
   const fieldProps = {
     id: `${names[0]}-${names[1]}`,
     feil: formatError(intl, otherProps, names),
@@ -92,7 +90,7 @@ const renderPeriodpicker = (hideLabel?: boolean) => injectIntl(({
   return <Periodpicker {...fieldProps} {...otherProps} hideLabel={hideLabel} />;
 });
 
-const isoToDdMmYyyy = (string: string) => {
+const isoToDdMmYyyy = (string: string): string => {
   const parsedDate = moment(string, ISO_DATE_FORMAT, true);
   return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : string;
 };
@@ -108,16 +106,24 @@ const acceptedFormatToIso = (value: string, name: string, names: string[]): stri
   return validDate ? validDate.format(ISO_DATE_FORMAT) : date;
 };
 
-const formatValue = (format: (value: string) => string) => (value: string) => isoToDdMmYyyy(format(value));
-const parseValue = (parse: (value: string) => string, names: string[]) => (value: string, name: string) => parse(acceptedFormatToIso(value, name, names));
+const formatValue = (format: Formatter) => (value: string, name: string) => isoToDdMmYyyy(format(value, name));
+const parseValue = (parse: Parser, names: string[]) => (value: string, name: string) => parse(acceptedFormatToIso(value, name, names), name);
 
-const PeriodpickerField: FunctionComponent<PeriodpickerFieldProps> = ({
-  names, label, readOnly, format, parse, isEdited, hideLabel, ...otherProps
+const PeriodpickerField: FunctionComponent<BaseFieldsProps & PeriodpickerFieldProps> = ({
+  names,
+  label,
+  readOnly,
+  format,
+  parse,
+  isEdited,
+  hideLabel,
+  ...otherProps
 }) => {
   const memoReadOnly = useMemo(() => renderReadOnly(), []);
   const memoPeriodpicker = useMemo(() => renderPeriodpicker(hideLabel), [hideLabel]);
 
   return (
+    // @ts-ignore Fiks
     <Fields
       names={names}
       component={readOnly ? memoReadOnly : memoPeriodpicker}

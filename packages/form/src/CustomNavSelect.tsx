@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, RefObject } from 'react';
 import { Select as NavSelect } from 'nav-frontend-skjema';
+import { WrappedFieldProps } from 'redux-form';
 
 interface CustomNavSelectProps {
   selectValues: React.ReactElement[];
   placeholder?: React.ReactNode;
-  value?: React.ReactNode;
+  value?: string;
   hideValueOnDisable?: boolean;
   disabled?: boolean;
   label: string;
 }
 
-class CustomNavSelect extends Component<CustomNavSelectProps> {
-  selectElement: any;
+class CustomNavSelect extends Component<WrappedFieldProps & CustomNavSelectProps> {
+  selectElement: RefObject<any>;
 
   static defaultProps = {
     hideValueOnDisable: false,
     disabled: false,
   };
 
-  constructor(props: CustomNavSelectProps) {
+  constructor(props: WrappedFieldProps & CustomNavSelectProps) {
     super(props);
     this.getOptionValues = this.getOptionValues.bind(this);
     this.checkCorrespondingOptionForValue = this.checkCorrespondingOptionForValue.bind(this);
@@ -26,34 +27,34 @@ class CustomNavSelect extends Component<CustomNavSelectProps> {
     this.selectedValue = this.selectedValue.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.checkCorrespondingOptionForValue();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     this.checkCorrespondingOptionForValue();
   }
 
-  handleSelectRef(selectRef?: any) {
+  handleSelectRef(selectRef?: RefObject<any>): void {
     if (selectRef) {
       this.selectElement = selectRef;
     }
   }
 
-  getOptionValues(): React.ReactNode[] {
+  getOptionValues(): string[] {
     const { props: { selectValues } } = this;
     return selectValues
       .map((option) => option.props)
       .map((props = {}) => props.value);
   }
 
-  selectedValue(value): any {
+  selectedValue(value: string): string {
     const selectedValue = this.getOptionValues().find((optionValue) => optionValue === value);
 
     return selectedValue || '';
   }
 
-  checkCorrespondingOptionForValue() {
+  checkCorrespondingOptionForValue(): void {
     const { getOptionValues, props: { value } } = this;
     // (aa) added "&& value !== ''" as to not spam other browsers
     if (!getOptionValues().includes(value) && value !== '') {
