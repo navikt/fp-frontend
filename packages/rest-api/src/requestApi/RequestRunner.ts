@@ -1,5 +1,5 @@
 import EventType from './eventType';
-import asyncPollingStatus from './asyncPollingStatus';
+import AsyncPollingStatus from './asyncPollingStatus';
 import HttpClientApi from '../HttpClientApiTsType';
 import { Response } from './ResponseTsType';
 import RequestAdditionalConfig from '../RequestAdditionalConfigTsType';
@@ -10,10 +10,10 @@ const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 150;
 export const REQUEST_POLLING_CANCELLED = 'INTERNAL_CANCELLATION';
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const hasLocationAndStatusDelayedOrHalted = (responseData) => responseData.location && (responseData.status === asyncPollingStatus.DELAYED
-  || responseData.status === asyncPollingStatus.HALTED);
+const hasLocationAndStatusDelayedOrHalted = (responseData): boolean => responseData.location && (responseData.status === AsyncPollingStatus.DELAYED
+  || responseData.status === AsyncPollingStatus.HALTED);
 
 type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void
 type NotificationEmitter = (eventType: keyof typeof EventType, data?: any) => void
@@ -51,7 +51,7 @@ class RequestRunner {
     this.maxPollingLimit = config.maxPollingLimit || this.maxPollingLimit;
   }
 
-  setNotificationEmitter = (notificationEmitter: NotificationEmitter) => {
+  setNotificationEmitter = (notificationEmitter: NotificationEmitter): void => {
     this.notify = notificationEmitter;
   }
 
@@ -74,7 +74,7 @@ class RequestRunner {
       return statusOrResultResponse;
     }
     const responseData = statusOrResultResponse.data;
-    if (responseData && responseData.status === asyncPollingStatus.PENDING) {
+    if (responseData && responseData.status === AsyncPollingStatus.PENDING) {
       const { pollIntervalMillis, message } = responseData;
       this.notify(EventType.UPDATE_POLLING_MESSAGE, message);
       return this.execLongPolling(location, pollIntervalMillis, pollingCounter + 1);
@@ -104,7 +104,7 @@ class RequestRunner {
     return response;
   }
 
-  cancel = () => {
+  cancel = (): void => {
     this.isCancelled = true;
   }
 

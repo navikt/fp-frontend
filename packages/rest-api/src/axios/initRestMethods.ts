@@ -1,11 +1,14 @@
-const cancellable = (axiosInstance, config) => {
+import axios, { AxiosInstance, AxiosRequestConfig, ResponseType } from 'axios';
+
+const cancellable = (axiosInstance: AxiosInstance, config: AxiosRequestConfig): Promise<any> => {
   let cancel;
   const request = axiosInstance({
     ...config,
-    cancelToken: new axiosInstance.CancelToken((c) => { cancel = c; }),
+    cancelToken: new axios.CancelToken((c) => { cancel = c; }),
   });
+  // @ts-ignore Fiks
   request.cancel = cancel;
-  return request.catch((error) => (axiosInstance.isCancel(error) ? Promise.reject(new Error(null)) : Promise.reject(error)));
+  return request.catch((error) => (axios.isCancel(error) ? Promise.reject(new Error(null)) : Promise.reject(error)));
 };
 
 const defaultHeaders = {
@@ -18,7 +21,7 @@ const defaultPostHeaders = {
   'Content-Type': 'application/json',
 };
 
-const get = (axiosInstance) => (url: string, params: any, responseType = 'json') => cancellable(axiosInstance, {
+const get = (axiosInstance: AxiosInstance) => (url: string, params: any, responseType: ResponseType = 'json') => cancellable(axiosInstance, {
   url,
   params,
   responseType,
@@ -28,7 +31,7 @@ const get = (axiosInstance) => (url: string, params: any, responseType = 'json')
   },
 });
 
-const post = (axiosInstance) => (url: string, data: any, responseType = 'json') => cancellable(axiosInstance, {
+const post = (axiosInstance: AxiosInstance) => (url: string, data: any, responseType: ResponseType = 'json') => cancellable(axiosInstance, {
   url,
   responseType,
   data: JSON.stringify(data),
@@ -37,10 +40,9 @@ const post = (axiosInstance) => (url: string, data: any, responseType = 'json') 
     ...defaultHeaders,
     ...defaultPostHeaders,
   },
-  cache: false,
 });
 
-const put = (axiosInstance) => (url: string, data: any, responseType = 'json') => cancellable(axiosInstance, {
+const put = (axiosInstance: AxiosInstance) => (url: string, data: any, responseType: ResponseType = 'json') => cancellable(axiosInstance, {
   url,
   responseType,
   data: JSON.stringify(data),
@@ -49,18 +51,17 @@ const put = (axiosInstance) => (url: string, data: any, responseType = 'json') =
     ...defaultHeaders,
     ...defaultPostHeaders,
   },
-  cache: false,
 });
 
-const getBlob = (axiosInstance) => (url: string, params: any) => get(axiosInstance)(url, params, 'blob');
+const getBlob = (axiosInstance: AxiosInstance) => (url: string, params: any) => get(axiosInstance)(url, params, 'blob');
 
-const postBlob = (axiosInstance) => (url: string, data: any) => post(axiosInstance)(url, data, 'blob');
+const postBlob = (axiosInstance: AxiosInstance) => (url: string, data: any) => post(axiosInstance)(url, data, 'blob');
 
-const getAsync = (axiosInstance) => (url: string, params: any) => get(axiosInstance)(url, params);
-const postAsync = (axiosInstance) => (url: string, params: any) => post(axiosInstance)(url, params);
-const putAsync = (axiosInstance) => (url: string, params: any) => put(axiosInstance)(url, params);
+const getAsync = (axiosInstance: AxiosInstance) => (url: string, params: any) => get(axiosInstance)(url, params);
+const postAsync = (axiosInstance: AxiosInstance) => (url: string, params: any) => post(axiosInstance)(url, params);
+const putAsync = (axiosInstance: AxiosInstance) => (url: string, params: any) => put(axiosInstance)(url, params);
 
-const initRestMethods = (axiosInstance: any) => {
+const initRestMethods = (axiosInstance: AxiosInstance) => {
   const restMethods = {
     get: get(axiosInstance),
     post: post(axiosInstance),
