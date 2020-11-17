@@ -10,7 +10,9 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   DatepickerField, RadioGroupField, RadioOption, SelectField,
 } from '@fpsak-frontend/form';
-import { hasValidDate, isRequiredMessage, required } from '@fpsak-frontend/utils';
+import {
+  FormValidationError, hasValidDate, isRequiredMessage, required,
+} from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -53,7 +55,7 @@ interface StaticFunctions {
     avslagskode: string;
     avslagDato: string;
   },
-  validate?: (erVilkarOk: boolean, avslagCode: string) => { avslagCode?: { id: string; }[] }
+  validate?: (erVilkarOk: boolean, avslagCode: string) => { avslagCode?: FormValidationError }
 }
 
 /**

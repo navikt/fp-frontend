@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames/bind';
-import { Field } from 'redux-form';
+import { Field, Validator } from 'redux-form';
 import { SkjemaGruppe as NavSkjemaGruppe } from 'nav-frontend-skjema';
 
 import renderNavField from './renderNavField';
@@ -24,10 +24,7 @@ interface RadioGroupFieldProps {
   rows?: number;
   direction?: Direction;
   DOMName?: string;
-  validate?: ((value: any) => { id: string }[])[]
-    | ((value: any) => { id: string; }[])
-    | ((value: string) => boolean | undefined)[]
-    | ((value: string) => boolean | undefined);
+  validate?: Validator | Validator[];
   readOnly?: boolean;
   legend?: React.ReactNode;
   isEdited?: boolean;

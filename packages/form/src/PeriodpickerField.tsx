@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { Fields } from 'redux-form';
+import { Fields, Validator } from 'redux-form';
 import moment from 'moment';
 import { injectIntl, IntlShape } from 'react-intl';
 import {
@@ -19,12 +19,7 @@ interface PeriodpickerFieldProps {
   parse?: (value: string) => string;
   isEdited?: boolean;
   renderIfMissingDateOnReadOnly?: boolean;
-  validate?: (((text: any) => ({ id: string; length?: undefined }
-    | { length: any; id?: undefined })[])
-    | ((value: any) => { id: string }[])
-    | ((text: any) => ({ id: string; limit?: undefined; } | { limit: any; id?: undefined; })[])
-    | ((text: any) => ({ id: string; text?: undefined; length?: undefined }
-    | { text: any; id?: undefined })[]))[]
+  validate?: Validator | Validator[];
   dataId?: string;
   renderUpwards?: boolean;
   ariaLabel?: string;

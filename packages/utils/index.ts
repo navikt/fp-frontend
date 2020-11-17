@@ -1,10 +1,7 @@
 export {
   range,
-  flatten,
   haystack,
   isArrayEmpty,
-  without,
-  zip,
 } from './src/arrayUtils';
 export {
   isIE11,
@@ -14,8 +11,8 @@ export {
 export {
   formatCurrencyWithKr,
   formatCurrencyNoKr,
-  parseCurrencyInput,
   removeSpacesFromNumber,
+  parseCurrencyInput,
 } from './src/currencyUtils';
 export {
   addDaysToDate,
@@ -24,7 +21,6 @@ export {
   calcDaysAndWeeksWithWeekends,
   dateFormat,
   findDifferenceInMonthsAndDays,
-  splitWeeksAndDays,
   TIDENES_ENDE,
   timeFormat,
   getRangeOfMonths,
@@ -49,10 +45,8 @@ export {
 export {
   notNull,
   isObjectEmpty,
-  arrayToObject,
   diff,
   isEqual,
-  isEqualToOneOf,
   isObject,
   omit,
 } from './src/objectUtils';
@@ -61,9 +55,7 @@ export type { Adresser } from './src/getAddresses';
 export {
   parseQueryString,
   buildPath,
-  formatArray,
   formatQueryString,
-  parseArray,
 } from './src/urlUtils';
 export {
   ariaCheck,
@@ -106,8 +98,6 @@ export {
   notDash,
   required,
   maxLengthOrFodselsnr,
-  isArbeidsProsentVidUtsettelse100,
-  isutbetalingPlusArbeidsprosentMerEn100,
   isTrekkdagerMerEnnNullUtsettelse,
   isUtbetalingMerEnnNullUtsettelse,
   hasValidOrgNumber,
@@ -125,6 +115,9 @@ export {
   invalidDecimalMessage,
   dateNotBeforeOrEqualMessage,
   dateNotAfterOrEqualMessage,
+  merEn100ProsentMessage,
+  arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
 } from './src/validation/messages';
+export type { FormValidationError } from './src/validation/messages';
 
 export { getKodeverknavnFn } from './src/kodeverkUtils';

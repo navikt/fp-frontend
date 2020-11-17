@@ -137,6 +137,7 @@ PermisjonPanel.defaultProps = {
 };
 
 const permisjonErrors = (values: TidsromPermisjon) => {
+  // @ts-ignore Fiks
   const errors = PermisjonOverforingAvKvoterPanel.validate(values);
 
   const permisjonPeriodeValues = values ? values[permisjonPeriodeFieldArrayName] : null;

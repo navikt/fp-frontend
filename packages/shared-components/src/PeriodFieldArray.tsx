@@ -1,6 +1,8 @@
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -12,17 +14,19 @@ import VerticalSpacer from './VerticalSpacer';
 
 import styles from './periodFieldArray.less';
 
-const onClick = (fields, emptyPeriodTemplate) => () => {
+// TODO Denne komponenten bør flyttast ut av shared-components da den drar inn avhengighet til redux og redux-form
+
+const onClick = (fields: FieldArrayFieldsProps<any>, emptyPeriodTemplate?: any) => (): void => {
   fields.push(emptyPeriodTemplate);
 };
 
-const onKeyDown = (fields, emptyPeriodTemplate) => ({ keyCode }) => {
+const onKeyDown = (fields: FieldArrayFieldsProps<any>, emptyPeriodTemplate?: any) => ({ keyCode }: React.KeyboardEvent): void => {
   if (keyCode === 13) {
     fields.push(emptyPeriodTemplate);
   }
 };
 
-const getRemoveButton = (index: number, fields) => (className?: string): ReactNode | undefined => {
+const getRemoveButton = (index: number, fields: FieldArrayFieldsProps<any>) => (className?: string): ReactNode | undefined => {
   if (index > 0) {
     return (
       <button
@@ -37,7 +41,11 @@ const getRemoveButton = (index: number, fields) => (className?: string): ReactNo
   return undefined;
 };
 
-const showErrorMessage = (meta) => meta && meta.error && (meta.dirty || meta.submitFailed);
+const showErrorMessage = (meta?: FieldArrayMetaProps): boolean => meta && meta.error && (meta.dirty || meta.submitFailed);
+
+const finnFeilmelding = (intl: IntlShape, meta?: FieldArrayMetaProps): string => (Array.isArray(meta.error)
+  ? intl.formatMessage({ id: meta.error[0].id }, meta.error[0].values)
+  : intl.formatMessage({ id: meta.error.id }, meta.error.values));
 
 interface OwnProps {
   children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
@@ -50,10 +58,6 @@ interface OwnProps {
   shouldShowAddButton?: boolean;
   createAddButtonInsteadOfImageLink?: boolean;
 }
-
-const finnFeilmelding = (intl, meta) => (Array.isArray(meta.error)
-  ? intl.formatMessage({ id: meta.error[0].id }, meta.error[0].values)
-  : intl.formatMessage({ id: meta.error.id }, meta.error.values));
 
 /**
  * PeriodFieldArray

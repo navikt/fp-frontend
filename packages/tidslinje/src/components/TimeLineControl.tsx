@@ -58,8 +58,4 @@ const TimeLineControl: FunctionComponent<TimeLineControlProps & WrappedComponent
   );
 };
 
-TimeLineControl.defaultProps = {
-  selectedPeriod: undefined,
-};
-
 export default injectIntl(TimeLineControl);

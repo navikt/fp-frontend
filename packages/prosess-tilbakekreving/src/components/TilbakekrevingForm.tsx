@@ -344,17 +344,22 @@ export const slaSammenOriginaleOgLagredePeriode = createSelector([
   const lagredeVilkarsvurdertePerioder = vilkarsvurdering.vilkarsVurdertePerioder;
 
   const lagredePerioder = lagredeVilkarsvurdertePerioder
-    .map((lagretPeriode: VilkarsVurdertPeriode) => ({
-      ...finnOriginalPeriode(lagretPeriode, perioder),
-      ...omit(lagretPeriode, 'feilutbetalingBelop'),
-      feilutbetaling: lagretPeriode.feilutbetalingBelop,
-      erTotalBelopUnder4Rettsgebyr,
-    }));
+    .map((lagretPeriode: VilkarsVurdertPeriode) => {
+      const originalPeriode = finnOriginalPeriode(lagretPeriode, perioder);
+      return ({
+        ...originalPeriode,
+        harMerEnnEnYtelse: originalPeriode.ytelser.length > 1,
+        ...omit(lagretPeriode, 'feilutbetalingBelop'),
+        feilutbetaling: lagretPeriode.feilutbetalingBelop,
+        erTotalBelopUnder4Rettsgebyr,
+      });
+    });
 
   const originaleUrortePerioder = perioder
     .filter((periode: DetaljertFeilutbetalingPeriode) => erIkkeLagret(periode, lagredePerioder))
     .map((periode: DetaljertFeilutbetalingPeriode): CustomPeriode => ({
       ...periode,
+      harMerEnnEnYtelse: periode.ytelser.length > 1,
       erTotalBelopUnder4Rettsgebyr,
     }));
 

@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { AksjonspunktHelpText, OverstyringKnapp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@fpsak-frontend/shared-components';
 
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
@@ -235,7 +235,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize={() => {}}
       {...behandlingProps}
     />);
-    const helptext = wrapper.find(AksjonspunktHelpText);
+    const helptext = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helptext).has.length(0);
   });
 
