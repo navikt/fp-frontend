@@ -9,12 +9,6 @@ import initRestMethods from './initRestMethods';
 const getAxiosHttpClientApi = () => {
   const axiosInstance = axios.create();
 
-  // @ts-ignore
-  axiosInstance.CancelToken = axios.CancelToken;
-
-  // @ts-ignore
-  axiosInstance.isCancel = axios.isCancel;
-
   // TODO (TOR) sentry bør ikkje vera ein avhengighet til pakka "rest-api". Konfigurer dette utanfor
   axiosInstance.interceptors.request.use((c): any => {
     const navCallId = `CallId_${(new Date()).getTime()}_${Math.floor(Math.random() * 1000000000)}`;

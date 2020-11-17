@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ReactNode } from 'react';
-import { Field, Validator } from 'redux-form';
+import React, { FunctionComponent, ReactElement } from 'react';
+import { BaseFieldProps, Field, WrappedFieldProps } from 'redux-form';
 
 import CustomNavSelect from './CustomNavSelect';
 import renderNavField from './renderNavField';
@@ -7,23 +7,26 @@ import ReadOnlyField from './ReadOnlyField';
 import LabelType from './LabelType';
 
 interface SelectFieldProps {
-  name: string;
-  selectValues: any[];
+  selectValues: ReactElement[];
   label: LabelType;
-  validate?: Validator | Validator[];
   readOnly?: boolean;
   placeholder?: string;
   hideValueOnDisable?: boolean;
   bredde?: string;
   disabled?: boolean;
-  onChange?: (elmt: ReactNode, value: any) => void;
   className?: string;
   value?: string;
 }
 
-/* eslint-disable-next-line react/prop-types */
-const renderReadOnly = () => ({ input, selectValues, ...otherProps }) => {
-  /* eslint-disable-next-line react/prop-types */
+interface ReadOnlyProps {
+  selectValues: ReactElement[];
+}
+
+const renderReadOnly = (): FunctionComponent<WrappedFieldProps & ReadOnlyProps> => ({
+  input,
+  selectValues,
+  ...otherProps
+}): JSX.Element => {
   const option = selectValues.map((sv) => sv.props).find((o) => o.value === input.value);
   const value = option ? option.children : undefined;
   return <ReadOnlyField input={{ value }} {...otherProps} />;
@@ -31,9 +34,14 @@ const renderReadOnly = () => ({ input, selectValues, ...otherProps }) => {
 
 const renderNavSelect = renderNavField(CustomNavSelect);
 
-const SelectField: FunctionComponent<SelectFieldProps> = ({
-  name, label, selectValues, validate, readOnly, ...otherProps
-}) => (
+const SelectField: FunctionComponent<BaseFieldProps & SelectFieldProps> = ({
+  name,
+  label,
+  selectValues,
+  validate,
+  readOnly,
+  ...otherProps
+}): JSX.Element => (
   <Field
     name={name}
     validate={validate}
@@ -43,13 +51,10 @@ const SelectField: FunctionComponent<SelectFieldProps> = ({
     disabled={!!readOnly}
     {...otherProps}
     readOnly={readOnly}
-    // @ts-ignore TODO Fiks
-    readOnlyHideEmpty
   />
 );
 
 SelectField.defaultProps = {
-  validate: null,
   readOnly: false,
   placeholder: ' ',
   hideValueOnDisable: false,

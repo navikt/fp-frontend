@@ -1,13 +1,19 @@
 import React from 'react';
-import { FieldArrayMetaProps, WrappedFieldInputProps } from 'redux-form';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { WrappedFieldProps } from 'redux-form';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import Label from './Label';
 import LabelType from './LabelType';
 
+const formatError = (submitFailed: boolean, error: any, intl: IntlShape) => {
+  if (submitFailed && error) {
+    // @ts-ignore
+    return intl.formatMessage(...error);
+  }
+  return undefined;
+};
+
 interface FieldComponentProps {
-  input: WrappedFieldInputProps;
-  meta: FieldArrayMetaProps;
   label: LabelType;
   readOnly?: boolean;
   readOnlyHideEmpty?: boolean;
@@ -15,17 +21,9 @@ interface FieldComponentProps {
 }
 
 const renderNavField = (WrappedNavFieldComponent) => {
-  const FieldComponent = (props: FieldComponentProps & WrappedComponentProps) => {
-    const formatError = (submitFailed: boolean, error: any) => {
-      const { intl } = props;
-      if (submitFailed && error) {
-        // @ts-ignore
-        return intl.formatMessage(...error);
-      }
-      return undefined;
-    };
-
+  const FieldComponent = (props: FieldComponentProps & WrappedFieldProps & WrappedComponentProps) => {
     const {
+      intl,
       input,
       meta: { submitFailed, error },
       label,
@@ -40,15 +38,13 @@ const renderNavField = (WrappedNavFieldComponent) => {
     }
     const fieldProps = {
       id: input.name,
-      feil: formatError(submitFailed, error),
+      feil: formatError(submitFailed, error, intl),
       label: <Label input={label} readOnly={readOnly} />,
     };
-    if (!readOnly) {
-      return <WrappedNavFieldComponent {...fieldProps} {...input} {...otherProps} readOnly={readOnly} />;
-    }
-    return (
-      <WrappedNavFieldComponent {...fieldProps} {...input} isEdited={isEdited} {...otherProps} readOnly={readOnly} />
-    );
+
+    return readOnly
+      ? <WrappedNavFieldComponent {...fieldProps} {...input} isEdited={isEdited} {...otherProps} readOnly={readOnly} />
+      : <WrappedNavFieldComponent {...fieldProps} {...input} {...otherProps} readOnly={readOnly} />;
   };
 
   FieldComponent.defaultProps = {

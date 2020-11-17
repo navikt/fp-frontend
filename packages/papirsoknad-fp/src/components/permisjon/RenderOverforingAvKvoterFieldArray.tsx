@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
@@ -17,7 +17,7 @@ const defaultOverforingPeriode = {
 interface OwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta: FieldArrayMetaProps;
-  selectValues: ReactNode[];
+  selectValues: ReactElement[];
   readOnly: boolean;
 }
 

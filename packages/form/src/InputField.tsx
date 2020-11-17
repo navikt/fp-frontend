@@ -1,33 +1,29 @@
 import React, { FunctionComponent } from 'react';
-import { Field, Validator } from 'redux-form';
+import { BaseFieldProps, Field } from 'redux-form';
 import { Input as NavInput, InputProps as NavFrontendInputProps } from 'nav-frontend-skjema';
 
-import LabelType from './LabelType';
 import renderNavField from './renderNavField';
 import ReadOnlyField, { ReadOnlyFieldProps } from './ReadOnlyField';
 
 const renderNavInput = renderNavField(NavInput);
 
 interface InputFieldProps {
-  name: string;
-  type?: string;
-  label?: LabelType;
-  validate?: Validator | Validator[];
   readOnly?: boolean;
   isEdited?: boolean;
-  renderReadOnlyValue?: (value: any) => any;
-  parse?: (value: string) => string | number;
-  format?: (value: string) => string | number;
 }
 
-const InputField: FunctionComponent<InputFieldProps & (NavFrontendInputProps | ReadOnlyFieldProps)> = ({
-  name, type, label, validate, readOnly, isEdited, ...otherProps
+const InputField: FunctionComponent<BaseFieldProps & InputFieldProps & (NavFrontendInputProps | ReadOnlyFieldProps)> = ({
+  name,
+  type,
+  label,
+  validate,
+  readOnly,
+  isEdited,
+  ...otherProps
 }) => (
-  // @ts-ignore TODO Fiks
   <Field
     name={name}
     validate={validate}
-    // @ts-ignore TODO Fiks
     component={readOnly ? ReadOnlyField : renderNavInput}
     type={type}
     label={label}
@@ -41,7 +37,6 @@ const InputField: FunctionComponent<InputFieldProps & (NavFrontendInputProps | R
 
 InputField.defaultProps = {
   type: 'text',
-  validate: null,
   readOnly: false,
   label: '',
   isEdited: false,

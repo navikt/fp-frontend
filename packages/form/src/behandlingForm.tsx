@@ -13,10 +13,11 @@ import {
   ConfigProps,
 } from 'redux-form';
 
+import { FormValidationError } from '@fpsak-frontend/utils';
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 
-export const getBehandlingFormPrefix = (behandlingId: number, behandlingVersjon: number) => `behandling_${behandlingId}_v${behandlingVersjon}`;
-export const getBehandlingFormName = (behandlingId: number, behandlingVersjon: number, form: string) => `${getBehandlingFormPrefix(behandlingId,
+export const getBehandlingFormPrefix = (behandlingId: number, behandlingVersjon: number): string => `behandling_${behandlingId}_v${behandlingVersjon}`;
+export const getBehandlingFormName = (behandlingId: number, behandlingVersjon: number, form: string): string => `${getBehandlingFormPrefix(behandlingId,
   behandlingVersjon)}.${form}`;
 
 interface BehandlingFormProps {
@@ -61,34 +62,34 @@ export const behandlingForm = (config: ConfigProps) => (WrappedComponent: Compon
   );
 };
 
-const getFormName = (formName: string, behandlingId: number, behandlingVersjon: number) => (behandlingId && behandlingVersjon
+const getFormName = (formName: string, behandlingId: number, behandlingVersjon: number): string => (behandlingId && behandlingVersjon
   ? getBehandlingFormName(behandlingId, behandlingVersjon, formName)
   : '');
 
 export const behandlingFormValueSelector = (formName: string, behandlingId: number, behandlingVersjon: number) => (
   state,
   ...fieldNames
-) => formValueSelector(getFormName(formName, behandlingId, behandlingVersjon))(state, ...fieldNames);
+): any => formValueSelector(getFormName(formName, behandlingId, behandlingVersjon))(state, ...fieldNames);
 
 export const isBehandlingFormDirty = (formName: string, behandlingId: number, behandlingVersjon: number) => (
   state,
-) => isDirty(getFormName(formName, behandlingId, behandlingVersjon))(state);
+): boolean => isDirty(getFormName(formName, behandlingId, behandlingVersjon))(state);
 
 export const isBehandlingFormSubmitting = (formName: string, behandlingId: number, behandlingVersjon: number) => (
   state,
-) => isSubmitting(getFormName(formName, behandlingId, behandlingVersjon))(state);
+): boolean => isSubmitting(getFormName(formName, behandlingId, behandlingVersjon))(state);
 
 export const getBehandlingFormValues = (formName: string, behandlingId: number, behandlingVersjon: number) => (
   state,
-) => getFormValues(getFormName(formName, behandlingId, behandlingVersjon))(state);
+): any => getFormValues(getFormName(formName, behandlingId, behandlingVersjon))(state);
 
 export const getBehandlingFormInitialValues = (formName: string, behandlingId: number, behandlingVersjon: number) => (
   state,
-) => getFormInitialValues(getFormName(formName, behandlingId, behandlingVersjon))(state);
+): any => getFormInitialValues(getFormName(formName, behandlingId, behandlingVersjon))(state);
 
 export const getBehandlingFormSyncErrors = (formName: string, behandlingId: number, behandlingVersjon: number) => (
   state,
-) => getFormSyncErrors(getFormName(formName, behandlingId, behandlingVersjon))(state);
+): any => getFormSyncErrors(getFormName(formName, behandlingId, behandlingVersjon))(state);
 
 const getFormState = (state) => state.form;
 export const getBehandlingFormRegisteredFields = (formName: string, behandlingId: number, behandlingVersjon: number) => createSelector(
@@ -99,9 +100,14 @@ export const getBehandlingFormRegisteredFields = (formName: string, behandlingId
   },
 );
 
-const traverseAndFindValue = (error: { [x: string]: string }, idParts: any[]) => idParts.reduce((o, i) => (o[i] ? o[i] : []), error);
+const traverseAndFindValue = (error: { [x: string]: string }, idParts: any[]): any => idParts.reduce((o, i) => (o[i] ? o[i] : []), error);
 
-export const hasBehandlingFormErrorsOfType = (formName, behandlingId, behandlingVersjon, errorMsg) => createSelector(
+export const hasBehandlingFormErrorsOfType = (
+  formName: string,
+  behandlingId: number,
+  behandlingVersjon: number,
+  errorMsg: FormValidationError,
+) => createSelector(
   [getBehandlingFormRegisteredFields(formName, behandlingId, behandlingVersjon),
     getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)],
   (registeredFields = {}, errors = {}) => {

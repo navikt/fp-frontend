@@ -1,13 +1,14 @@
 import RequestAdditionalConfig from './RequestAdditionalConfigTsType';
 
-export const RequestType = {
-  GET: 'GET',
-  GET_ASYNC: 'GET_ASYNC',
-  POST: 'POST',
-  POST_ASYNC: 'POST_ASYNC',
-  PUT: 'PUT',
-  PUT_ASYNC: 'PUT_ASYNC',
-};
+// eslint-disable-next-line no-shadow
+export enum RequestType {
+  GET = 'GET',
+  GET_ASYNC = 'GET_ASYNC',
+  POST = 'POST',
+  POST_ASYNC = 'POST_ASYNC',
+  PUT = 'PUT',
+  PUT_ASYNC = 'PUT_ASYNC',
+}
 
 /**
  * maxPollingLimit: Maksimum antall ganger en skal forsøke å polle når en venter på ressurs (long polling). Kun aktuell ved metodene som inkluderer "Async".
@@ -16,7 +17,7 @@ const defaultConfig = {
   maxPollingLimit: undefined,
   isResponseBlob: false,
 };
-const formatConfig = (config = {}) => ({
+const formatConfig = (config: RequestAdditionalConfig = {}): RequestAdditionalConfig => ({
   ...defaultConfig,
   ...config,
 });
@@ -43,47 +44,47 @@ class RequestConfig {
       this.config = formatConfig(config);
     }
 
-    withGetMethod = () => {
+    withGetMethod = (): this => {
       this.restMethod = RequestType.GET;
       return this;
     }
 
-    withGetAsyncMethod = () => {
+    withGetAsyncMethod = (): this => {
       this.restMethod = RequestType.GET_ASYNC;
       return this;
     }
 
-    withPostMethod = () => {
+    withPostMethod = (): this => {
       this.restMethod = RequestType.POST;
       return this;
     }
 
-    withPostAsyncMethod = () => {
+    withPostAsyncMethod = (): this => {
       this.restMethod = RequestType.POST_ASYNC;
       return this;
     }
 
-    withPutMethod = () => {
+    withPutMethod = (): this => {
       this.restMethod = RequestType.PUT;
       return this;
     }
 
-    withPutAsyncMethod = () => {
+    withPutAsyncMethod = (): this => {
       this.restMethod = RequestType.PUT_ASYNC;
       return this;
     }
 
-    withRel = (rel: string) => {
+    withRel = (rel: string): this => {
       this.rel = rel;
       return this;
     }
 
-    withRestMethod = (restMethod: string) => {
+    withRestMethod = (restMethod: string): this => {
       this.restMethod = restMethod.toUpperCase();
       return this;
     }
 
-    withRequestPayload = (requestPayload?: any) => {
+    withRequestPayload = (requestPayload?: any): this => {
       this.requestPayload = requestPayload;
       return this;
     }

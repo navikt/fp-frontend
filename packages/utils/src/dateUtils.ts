@@ -108,7 +108,7 @@ export const addDaysToDate = (dateString: string, nrOfDays: number): string => (
   ? dateString
   : moment(dateString, ISO_DATE_FORMAT).add(nrOfDays, 'days').format(ISO_DATE_FORMAT));
 
-export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string): { months: number; days: number; } => {
+export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string): { months: number; days: number; } | undefined => {
   const fDate = moment(fomDate, ISO_DATE_FORMAT, true);
   const tDate = moment(tomDate, ISO_DATE_FORMAT, true).add(1, 'days');
   if (!fDate.isValid() || !tDate.isValid() || fDate.isAfter(tDate)) {

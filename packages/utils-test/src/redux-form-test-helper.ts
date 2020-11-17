@@ -25,6 +25,7 @@ export const metaMock = {
   dispatch: noop,
   error: null,
   form: 'mockForm',
+  initial: {},
   invalid: false,
   pristine: false,
   submitting: false,
