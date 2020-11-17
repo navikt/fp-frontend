@@ -52,6 +52,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -86,6 +89,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -120,6 +126,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -154,6 +163,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
@@ -188,6 +200,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const daysInPeriodLabel = wrapper.find(FormattedMessage);
@@ -225,6 +240,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const select = wrapper.find(SelectField);
@@ -260,6 +278,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     const select = wrapper.find(SelectField);
@@ -294,6 +315,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(1);
@@ -327,6 +351,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(0);
@@ -359,6 +386,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(1);
@@ -393,6 +423,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).to.have.length(1);
@@ -429,6 +462,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).to.have.length(1);
@@ -465,6 +501,9 @@ describe('<ActivityPanel>', () => {
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
+      arbeidsgiverOpplysningerPerId={{}}
+      filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
+      onSubmit={sinon.spy()}
     />);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).to.have.length(1);
