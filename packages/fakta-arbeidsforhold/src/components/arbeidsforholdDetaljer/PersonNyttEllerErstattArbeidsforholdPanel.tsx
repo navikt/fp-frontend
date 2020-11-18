@@ -8,7 +8,7 @@ import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
 
-const getEndCharFromId = (id: any) => id.substring(id.length - 4, id.length);
+const getEndCharFromId = (id: string): string => id.substring(id.length - 4, id.length);
 
 interface OwnProps {
   readOnly: boolean;

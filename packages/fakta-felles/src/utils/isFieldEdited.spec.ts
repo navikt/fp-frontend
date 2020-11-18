@@ -216,7 +216,7 @@ describe('isFieldEdited', () => {
       const familiehendelse = {
         adopsjonFodelsedatoer: {
           1: '2018-01-01',
-        },
+        } as Record<number, string>,
       };
 
       const endretDato = {
@@ -237,7 +237,7 @@ describe('isFieldEdited', () => {
       const familiehendelse = {
         adopsjonFodelsedatoer: {
           1: '2018-01-01',
-        },
+        } as Record<number, string>,
       };
 
       const adopsjonsSoknad = { ...soknad, ...familiehendelse };

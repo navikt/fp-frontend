@@ -3,18 +3,19 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
+
 import * as useIntl from '../useIntl';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
 
 describe('<DokumentasjonFaktaForm>', () => {
   const editedStatus = {
-    adopsjonFodelsedatoer: { 1: '20.01.2017' },
+    adopsjonFodelsedatoer: { 1: true },
     omsorgsovertakelseDato: false,
     barnetsAnkomstTilNorgeDato: false,
-  };
+  } as FieldEditedInfo;
 
   let contextStub;
   beforeEach(() => {
@@ -34,6 +35,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
     const datepickers = wrapper.find('DatepickerField');
     expect(datepickers).to.have.length(3);
@@ -61,6 +64,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
@@ -77,6 +82,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
@@ -93,6 +100,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
@@ -124,6 +133,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const dateField = wrapper.find('[name="barnetsAnkomstTilNorgeDato"]');
@@ -139,6 +150,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const dateField = wrapper.find('[name="barnetsAnkomstTilNorgeDato"]');
@@ -154,6 +167,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
@@ -169,6 +184,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
@@ -184,6 +201,8 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
@@ -197,7 +216,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     };
     const familiehendelse = {
       omsorgsovertakelseDato: '2015-10-15',
-      adopsjonFodelsedatoer: '2015-03-15',
+      adopsjonFodelsedatoer: { 1: '2015-03-15' } as Record<number, string>,
     } as FamilieHendelse;
 
     const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad as Soknad, familiehendelse);
@@ -205,7 +224,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     expect(initialValues).to.eql({
       barnetsAnkomstTilNorgeDato: undefined,
       omsorgsovertakelseDato: '2015-10-15',
-      fodselsdatoer: '2015-03-15',
+      fodselsdatoer: { 1: '2015-03-15' },
     });
   });
 });

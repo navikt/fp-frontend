@@ -22,9 +22,9 @@ const headerColumnContent = [
   <></>,
 ];
 
-const getEndCharFromId = (id?: string) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledNavn = (arbeidsforhold: Arbeidsforhold) => {
+const utledNavn = (arbeidsforhold: Arbeidsforhold): string => {
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return arbeidsforhold.navn;
   }
@@ -33,7 +33,7 @@ const utledNavn = (arbeidsforhold: Arbeidsforhold) => {
     : `${arbeidsforhold.navn}(${arbeidsforhold.arbeidsgiverIdentifiktorGUI})`;
 };
 
-export const utledNøkkel = (arbeidsforhold: Arbeidsforhold) => {
+export const utledNøkkel = (arbeidsforhold: Arbeidsforhold): string => {
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return arbeidsforhold.navn;
   }
@@ -43,7 +43,7 @@ export const utledNøkkel = (arbeidsforhold: Arbeidsforhold) => {
 interface OwnProps {
   alleArbeidsforhold: Arbeidsforhold[];
   selectedId?: string;
-  selectArbeidsforholdCallback: (...args: any[]) => any;
+  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: string, model: Arbeidsforhold) => void;
 }
 
 const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({

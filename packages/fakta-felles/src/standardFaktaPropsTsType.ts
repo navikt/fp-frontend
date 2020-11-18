@@ -6,7 +6,7 @@ type StandardFaktaProps = Readonly<{
   submittable: boolean;
   harApneAksjonspunkter: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback?: (aksjonspunktData: { kode: string }) => Promise<any>;
+  submitCallback?: (aksjonspunktData: any) => Promise<any>;
 }>
 
 export default StandardFaktaProps;

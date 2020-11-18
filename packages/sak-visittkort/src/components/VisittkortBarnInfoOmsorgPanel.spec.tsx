@@ -12,9 +12,9 @@ describe('<VisittkortBarnInfoOmsorgPanel>', () => {
     oppgitt: {
       skjaringstidspunkt: '2020-01-01',
       omsorgsovertakelseDato: '2020-01-21',
-      adopsjonFodelsedatoer: [{
+      adopsjonFodelsedatoer: {
         1: '2019-01-01',
-      }],
+      },
       soknadType: {
         kode: soknadType.FODSEL,
         kodeverk: 'SOKNAD_TYPE',

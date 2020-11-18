@@ -3,7 +3,7 @@ import moment from 'moment';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { change as reduxFormChange, initialize as reduxFormInitialize } from 'redux-form';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -827,7 +827,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,

@@ -14,6 +14,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty={false}
       hasEmptyRequiredFields={false}
       hasOpenAksjonspunkter
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     expect(wrapper.find(Hovedknapp)).to.have.length(0);
@@ -27,6 +29,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty
       hasEmptyRequiredFields={false}
       hasOpenAksjonspunkter
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const button = wrapper.find(Hovedknapp);
@@ -42,6 +46,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty
       hasEmptyRequiredFields={false}
       hasOpenAksjonspunkter
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const button = wrapper.find(Hovedknapp);
@@ -57,6 +63,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty
       hasEmptyRequiredFields={false}
       hasOpenAksjonspunkter
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const button = wrapper.find(Hovedknapp);
@@ -72,6 +80,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty={false}
       hasEmptyRequiredFields
       hasOpenAksjonspunkter
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const button = wrapper.find(Hovedknapp);
@@ -87,6 +97,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty={false}
       hasEmptyRequiredFields={false}
       hasOpenAksjonspunkter
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const button = wrapper.find(Hovedknapp);
@@ -102,6 +114,8 @@ describe('<FaktaSubmitButton>', () => {
       isDirty={false}
       hasEmptyRequiredFields={false}
       hasOpenAksjonspunkter={false}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const button = wrapper.find(Hovedknapp);

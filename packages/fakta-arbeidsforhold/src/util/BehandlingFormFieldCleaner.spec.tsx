@@ -14,6 +14,9 @@ describe('BehandlingFormFieldCleaner', () => {
         behandlingFormName="TEST_FORM"
         fieldNames={['tomDato', 'fomDato']}
         reduxChange={changeCallback}
+        formName="test"
+        behandlingId={1}
+        behandlingVersjon={2}
       >
         <InputField name="fomDato" />
         <div>
@@ -33,6 +36,9 @@ describe('BehandlingFormFieldCleaner', () => {
         behandlingFormName="TEST_FORM"
         fieldNames={['tomDato', 'fomDato']}
         reduxChange={changeCallback}
+        formName="test"
+        behandlingId={1}
+        behandlingVersjon={2}
       >
         <InputField name="fomDato" />
         <div>
@@ -70,6 +76,9 @@ describe('BehandlingFormFieldCleaner', () => {
         behandlingFormName="TEST_FORM"
         fieldNames={['tomDato', 'fomDato']}
         reduxChange={changeCallback}
+        formName="test"
+        behandlingId={1}
+        behandlingVersjon={2}
       >
         <InputField name="fomDato" />
         <div>
@@ -104,6 +113,9 @@ describe('BehandlingFormFieldCleaner', () => {
         behandlingFormName="TEST_FORM"
         fieldNames={['tomDato', 'fomDato']}
         reduxChange={changeCallback}
+        formName="test"
+        behandlingId={1}
+        behandlingVersjon={2}
       >
         <InputField name="fomDato" />
         <div>

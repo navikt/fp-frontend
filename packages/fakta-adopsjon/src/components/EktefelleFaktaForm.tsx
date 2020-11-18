@@ -17,14 +17,18 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
+export type FormValues = {
+  ektefellesBarn?: boolean;
+}
+
+export type TransformedValues = {
+  kode: string,
+  ektefellesBarn: boolean,
+}
+
 interface StaticFunctions {
-  buildInitialValues: (familiehendelse: FamilieHendelse) => {
-    ektefellesBarn: boolean,
-  },
-  transformValues: (ektefellesBarn: boolean) => {
-    kode: string,
-    ektefellesBarn: boolean,
-  },
+  buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
+  transformValues: (ektefellesBarn: boolean) => TransformedValues;
 }
 
 /**
@@ -57,13 +61,13 @@ EktefelleFaktaForm.defaultProps = {
   ektefellesBarnIsEdited: false,
 };
 
-EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse) => ({
+EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
   ektefellesBarn: familiehendelse && familiehendelse.ektefellesBarn !== null
     ? familiehendelse.ektefellesBarn
     : undefined,
 });
 
-EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean) => ({
+EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): TransformedValues => ({
   kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
   ektefellesBarn,
 });

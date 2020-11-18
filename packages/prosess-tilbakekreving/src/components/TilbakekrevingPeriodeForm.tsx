@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import {
   clearFields, FormSection, change, InjectedFormProps,
 } from 'redux-form';
@@ -398,7 +398,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
   }
 }
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     clearFields,
     change,

@@ -24,12 +24,12 @@ const familieHendelse = {
     adopsjonFodelsedatoer: {
       1: '2018-01-01',
       2: '2000-01-02',
-    },
+    } as Record<number, string>,
   },
 } as FamilieHendelseSamling;
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
+  fodselsdatoer: { 1: '2019-01-10' } as Record<number, string>,
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,

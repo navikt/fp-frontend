@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -9,26 +9,32 @@ import { SelectField, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import styles from './feilutbetalingPerioderTable.less';
 import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
-const getHendelseUndertyper = (årsakNavn: any, årsaker: any) => {
-  const årsak = årsaker.find((a: any) => a.hendelseType.kode === årsakNavn);
+const getHendelseUndertyper = (årsakNavn: string, årsaker: FeilutbetalingAarsak['hendelseTyper']): { kode: string; navn: string}[] | null => {
+  const årsak = årsaker.find((a) => a.hendelseType.kode === årsakNavn);
   return årsak && årsak.hendelseUndertyper.length > 0 ? årsak.hendelseUndertyper : null;
 };
 
-interface OwnProps {
+interface PureOwnProps {
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
   periode: {
     fom: string;
     tom: string;
     belop: number;
   };
   elementId: number;
-  årsak?: string;
-  årsaker: FeilutbetalingAarsak['hendelseTyper']
+  årsaker: FeilutbetalingAarsak['hendelseTyper'];
   readOnly: boolean;
-  onChangeÅrsak: (...args: any[]) => any;
-  onChangeUnderÅrsak: (...args: any[]) => any;
+  onChangeÅrsak: (event: ReactNode, elementId: number, årsak: string) => void;
+  onChangeUnderÅrsak: (event: ReactNode, elementId: number, årsak: string) => void;
 }
 
-export const FeilutbetalingPerioderFormImpl: FunctionComponent<OwnProps> = ({
+interface MappedOwnProps {
+  årsak?: string;
+}
+
+export const FeilutbetalingPerioderFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   periode,
   årsak,
   elementId,
@@ -46,7 +52,7 @@ export const FeilutbetalingPerioderFormImpl: FunctionComponent<OwnProps> = ({
       <TableColumn>
         <SelectField
           name={`perioder.${elementId}.årsak`}
-          selectValues={årsaker.map((a: any) => <option key={a.hendelseType.kode} value={a.hendelseType.kode}>{a.hendelseType.navn}</option>)}
+          selectValues={årsaker.map((a) => <option key={a.hendelseType.kode} value={a.hendelseType.kode}>{a.hendelseType.navn}</option>)}
           validate={[required]}
           disabled={readOnly}
           onChange={(event) => onChangeÅrsak(event, elementId, årsak)}
@@ -56,7 +62,7 @@ export const FeilutbetalingPerioderFormImpl: FunctionComponent<OwnProps> = ({
         {hendelseUndertyper && (
           <SelectField
             name={`perioder.${elementId}.${årsak}.underÅrsak`}
-            selectValues={hendelseUndertyper.map((a: any) => <option key={a.kode} value={a.kode}>{a.navn}</option>)}
+            selectValues={hendelseUndertyper.map((a) => <option key={a.kode} value={a.kode}>{a.navn}</option>)}
             validate={[required]}
             disabled={readOnly}
             onChange={(event) => onChangeUnderÅrsak(event, elementId, årsak)}
@@ -76,7 +82,7 @@ FeilutbetalingPerioderFormImpl.defaultProps = {
   årsak: null,
 };
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   årsak: behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, `perioder.${ownProps.elementId}.årsak`),
 });
 

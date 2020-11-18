@@ -2,21 +2,22 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
 import {
-  DDMMYYYY_DATE_FORMAT, hasValidDate, hasValidInteger, maxValue, minValue, required,
+  DDMMYYYY_DATE_FORMAT, FormValidationError, hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 
 import styles from './leggTilArbeidsforholdFelter.less';
 
 // ----------------------------------------------------------------------------------
 // Methods
 // ----------------------------------------------------------------------------------
-const sluttdatoErrorMsg = (dato: string) => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
-const startdatoErrorMsg = (dato: string) => [{ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeOrEqual' }, { dato }];
-const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
+const sluttdatoErrorMsg = (dato: string): FormValidationError => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
+const startdatoErrorMsg = (dato: string): FormValidationError => [{ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeOrEqual' }, { dato }];
+const formatDate = (dato: string): string => moment(dato).format(DDMMYYYY_DATE_FORMAT);
 
 interface OwnProps {
   readOnly: boolean;
@@ -26,10 +27,10 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  validate?: (values: { fomDato: string, tomDato: string }) => {
-    tomDato: ({ id: string; dato?: string } | { dato: string; id?: string })[]
-    fomDato: ({ id: string; dato?: string } | { dato: string; id?: string })[]
-  } | null,
+  validate?: (values: CustomArbeidsforhold) => {
+    tomDato: FormValidationError;
+    fomDato: FormValidationError;
+  } | null;
 }
 
 // ----------------------------------------------------------------------------------
@@ -93,7 +94,10 @@ const LeggTilArbeidsforholdFelter: FunctionComponent<OwnProps> & StaticFunctions
   </BehandlingFormFieldCleaner>
 );
 
-LeggTilArbeidsforholdFelter.validate = (values: { fomDato: string, tomDato: string }) => {
+LeggTilArbeidsforholdFelter.validate = (values: CustomArbeidsforhold): {
+  tomDato: FormValidationError;
+  fomDato: FormValidationError;
+} | null => {
   if (values === undefined || values === null) {
     return null;
   }

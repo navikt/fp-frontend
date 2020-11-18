@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import moment from 'moment';
 
+import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import { DatepickerField, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { Image, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
@@ -15,7 +16,7 @@ import useIntl from '../useIntl';
 
 import styles from './dokumentasjonFaktaForm.less';
 
-const findAntallBarnUnder15 = (fodselsdatoer: { [key: number ]: string }, omsorgsovertakelseDato: string) => {
+const findAntallBarnUnder15 = (fodselsdatoer: Record<number, string>, omsorgsovertakelseDato: string): number | string => {
   const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer)
     .filter((id) => fodselsdatoer[id]).length;
   if (nrOfNotNullFodselsdatoer === 0 || !omsorgsovertakelseDato) {
@@ -29,39 +30,44 @@ const findAntallBarnUnder15 = (fodselsdatoer: { [key: number ]: string }, omsorg
     .reduce((a, b) => a + b, 0);
 };
 
-const isAgeAbove15 = (fodselsdatoer: { [key: number ]: string }, omsorgsovertakelseDato: string, id: string) => fodselsdatoer[id]
+const isAgeAbove15 = (fodselsdatoer: Record<number, string>, omsorgsovertakelseDato: string, id: string): boolean => fodselsdatoer[id]
   && omsorgsovertakelseDato
   && moment(fodselsdatoer[id])
     .isSameOrBefore(moment(omsorgsovertakelseDato)
       .subtract(15, 'years'));
 
-interface OwnProps {
-  fodselsdatoer?: { [key: number ]: string };
-  omsorgsovertakelseDato?: string;
-  barnetsAnkomstTilNorgeDato?: string;
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
-  editedStatus: {
-    adopsjonFodelsedatoer: { [key: number ]: string };
-    omsorgsovertakelseDato: boolean;
-    barnetsAnkomstTilNorgeDato: boolean;
-  };
+  editedStatus: FieldEditedInfo;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
+interface MappedOwnProps {
+  fodselsdatoer?: Record<number, string>;
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+}
+
+export type FormValues = {
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  fodselsdatoer?: Record<number, string>;
+}
+
+export type TransformedValues = {
+  kode: string;
+  omsorgsovertakelseDato: string;
+  barnetsAnkomstTilNorgeDato: string;
+  fodselsdatoer: Record<number, string>;
+}
+
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => {
-    omsorgsovertakelseDato: string;
-    barnetsAnkomstTilNorgeDato: string;
-    fodselsdatoer: { [key: number ]: string };
-  },
-  transformValues?: (values: { omsorgsovertakelseDato: string, barnetsAnkomstTilNorgeDato: string, fodselsdatoer: { [key: number ]: string } }) => {
-    kode: string;
-    omsorgsovertakelseDato: string;
-    barnetsAnkomstTilNorgeDato: string;
-    fodselsdatoer: { [key: number ]: string };
-  },
+  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
+  transformValues?: (values: FormValues) => TransformedValues;
 }
 
 /**
@@ -69,7 +75,7 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av adopsjonsopplysninger i søknaden.
  */
-const DokumentasjonFaktaFormImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   fodselsdatoer,
   omsorgsovertakelseDato,
@@ -96,37 +102,34 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<OwnProps> & StaticFunctions 
           readOnly={readOnly}
           isEdited={editedStatus.omsorgsovertakelseDato}
         />
-        {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato
-      && (
-        <DatepickerField
-          name="barnetsAnkomstTilNorgeDato"
-          label={{ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' }}
-          validate={[hasValidDate]}
-          readOnly={readOnly}
-          isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
-        />
-      )}
+        {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
+          <DatepickerField
+            name="barnetsAnkomstTilNorgeDato"
+            label={{ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' }}
+            validate={[hasValidDate]}
+            readOnly={readOnly}
+            isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
+          />
+        )}
 
-        {Object.keys(fodselsdatoer)
-          .map((id, i) => (
-            <div key={`div-${aksjonspunktCodes.ADOPSJONSDOKUMENTAJON}-${id}`}>
-              <VerticalSpacer eightPx />
-              <Row>
-                <Column xs="6">
-                  <DatepickerField
-                    name={`fodselsdatoer.${id}`}
-                    label={{
-                      id: 'DokumentasjonFaktaForm.Fodselsdato',
-                      args: { number: i + 1 },
-                    }}
-                    validate={[required, hasValidDate]}
-                    readOnly={readOnly}
-                    isEdited={editedStatus.adopsjonFodelsedatoer[id]}
-                  />
-                </Column>
-                <Column xs="6">
-                  {(!readOnly && isAgeAbove15(fodselsdatoer, omsorgsovertakelseDato, id))
-                && (
+        {Object.keys(fodselsdatoer).map((id, i) => (
+          <div key={`div-${aksjonspunktCodes.ADOPSJONSDOKUMENTAJON}-${id}`}>
+            <VerticalSpacer eightPx />
+            <Row>
+              <Column xs="6">
+                <DatepickerField
+                  name={`fodselsdatoer.${id}`}
+                  label={{
+                    id: 'DokumentasjonFaktaForm.Fodselsdato',
+                    args: { number: i + 1 },
+                  }}
+                  validate={[required, hasValidDate]}
+                  readOnly={readOnly}
+                  isEdited={editedStatus.adopsjonFodelsedatoer[id]}
+                />
+              </Column>
+              <Column xs="6">
+                {(!readOnly && isAgeAbove15(fodselsdatoer, omsorgsovertakelseDato, id)) && (
                   <Image
                     className={styles.image}
                     alt={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
@@ -134,11 +137,10 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<OwnProps> & StaticFunctions 
                     src={advarselImageUrl}
                   />
                 )}
-
-                </Column>
-              </Row>
-            </div>
-          ))}
+              </Column>
+            </Row>
+          </div>
+        ))}
         <VerticalSpacer twentyPx />
         <Undertekst>{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Undertekst>
         <Normaltekst>{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</Normaltekst>
@@ -153,12 +155,7 @@ DokumentasjonFaktaFormImpl.defaultProps = {
 
 const FORM_NAME = 'AdopsjonInfoPanel';
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   ...behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
     state, 'fodselsdatoer', 'omsorgsovertakelseDato', 'barnetsAnkomstTilNorgeDato',
   ),
@@ -166,7 +163,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
 
 const DokumentasjonFaktaForm = connect(mapStateToProps)(DokumentasjonFaktaFormImpl);
 
-DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse) => ({
+DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse && familiehendelse.omsorgsovertakelseDato ? familiehendelse.omsorgsovertakelseDato : soknad.omsorgsovertakelseDato,
   barnetsAnkomstTilNorgeDato: familiehendelse && familiehendelse.ankomstNorge
     ? familiehendelse.ankomstNorge
@@ -174,7 +171,7 @@ DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: Fa
   fodselsdatoer: familiehendelse && familiehendelse.adopsjonFodelsedatoer ? familiehendelse.adopsjonFodelsedatoer : soknad.adopsjonFodelsedatoer,
 });
 
-DokumentasjonFaktaForm.transformValues = (values: { omsorgsovertakelseDato: string, barnetsAnkomstTilNorgeDato: string, fodselsdatoer: string[] }) => ({
+DokumentasjonFaktaForm.transformValues = (values: FormValues): TransformedValues => ({
   kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
   omsorgsovertakelseDato: values.omsorgsovertakelseDato,
   barnetsAnkomstTilNorgeDato: values.barnetsAnkomstTilNorgeDato,

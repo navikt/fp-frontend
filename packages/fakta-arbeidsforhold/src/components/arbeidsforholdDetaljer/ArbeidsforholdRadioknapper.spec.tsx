@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { RadioOption } from '@fpsak-frontend/form';
 
 import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
-import arbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
+import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 
 const arbeidsforhold = {
@@ -37,7 +37,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       hasReceivedInntektsmelding
       arbeidsforhold={arbeidsforhold}
       aktivtArbeidsforholdTillatUtenIM={false}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -51,7 +51,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       hasReceivedInntektsmelding={false}
       arbeidsforhold={arbeidsforhold}
       aktivtArbeidsforholdTillatUtenIM={false}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -80,7 +80,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         tomDato: '2019-01-01',
       }}
       aktivtArbeidsforholdTillatUtenIM={false}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -107,7 +107,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         tomDato: undefined,
       }}
       aktivtArbeidsforholdTillatUtenIM={false}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -137,7 +137,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         tomDato: undefined,
       }}
       aktivtArbeidsforholdTillatUtenIM={false}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -165,7 +165,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         brukMedJustertPeriode: true,
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.OVERSTYR_TOM}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.OVERSTYR_TOM}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -189,7 +189,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         brukMedJustertPeriode: false,
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.OVERSTYR_TOM}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.OVERSTYR_TOM}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -214,7 +214,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         },
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.FJERN_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -236,7 +236,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         lagtTilAvSaksbehandler: true,
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -271,7 +271,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         ],
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -304,7 +304,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         ],
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -331,7 +331,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         ],
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -364,7 +364,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         ],
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -397,7 +397,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         ],
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);
@@ -436,7 +436,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
         ],
       }}
       aktivtArbeidsforholdTillatUtenIM
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
     />);

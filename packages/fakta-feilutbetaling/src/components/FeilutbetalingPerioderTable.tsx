@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import moment from 'moment';
 
 import { Table } from '@fpsak-frontend/shared-components';
@@ -23,8 +23,8 @@ type OwnProps = {
   formName: string;
   årsaker: FeilutbetalingAarsak['hendelseTyper'];
   readOnly: boolean;
-  onChangeÅrsak: (...args: any[]) => any;
-  onChangeUnderÅrsak: (...args: any[]) => any;
+  onChangeÅrsak: (event: ReactNode, elementId: number, årsak: string) => void;
+  onChangeUnderÅrsak: (event: ReactNode, elementId: number, årsak: string) => void;
   behandlingId: number;
   behandlingVersjon: number;
 };
