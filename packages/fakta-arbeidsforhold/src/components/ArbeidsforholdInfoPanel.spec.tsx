@@ -37,6 +37,8 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         behandlingVersjon={1}
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
+        arbeidsforhold={[]}
+        submitCallback={() => undefined}
         {...reduxFormPropsMock}
       />,
     );
@@ -57,6 +59,8 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         behandlingVersjon={1}
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
+        arbeidsforhold={[]}
+        submitCallback={() => undefined}
         {...reduxFormPropsMock}
       />,
     );
@@ -77,6 +81,8 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         behandlingVersjon={1}
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
+        arbeidsforhold={[]}
+        submitCallback={() => undefined}
         {...reduxFormPropsMock}
       />,
     );

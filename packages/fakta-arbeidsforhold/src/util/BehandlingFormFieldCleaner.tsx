@@ -1,12 +1,12 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component, ReactElement, ReactNode } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { change as reduxChange } from 'redux-form';
 
 import { getBehandlingFormName } from '@fpsak-frontend/form';
 
-const findAllNames = (children: any) => (children ? React.Children
+const findAllNames = (children: any): any[] => (children ? React.Children
   .map(children, (child) => {
     let all = [];
     if (child && child.props && child.props.children) {
@@ -18,11 +18,20 @@ const findAllNames = (children: any) => (children ? React.Children
     return all;
   }) : []);
 
-interface OwnProps {
-  behandlingFormName: string;
+interface PureOwnProps {
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
   fieldNames: string[];
-  reduxChange: (...args: any[]) => any;
-  children: ReactNode;
+  children: ReactNode | ReactElement;
+}
+
+interface MappedOwnProps {
+  behandlingFormName: string;
+}
+
+interface DispatchProps {
+  reduxChange: (behandlingFormName: string, fieldName: string, value: any) => void;
 }
 
 /**
@@ -36,22 +45,22 @@ interface OwnProps {
  * <BehandlingFormFieldCleaner formName={TEST_FORM} fieldNames={['fomDato']}>{children}</BehandlingFormFieldCleaner>
  * ```
  */
-export class BehandlingFormFieldCleaner extends Component<OwnProps> {
+export class BehandlingFormFieldCleaner extends Component<PureOwnProps & MappedOwnProps & DispatchProps> {
   static defaultProps = {
     children: [],
   };
 
-  shouldComponentUpdate(nextProps: OwnProps) {
+  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & DispatchProps): boolean {
     const { children } = this.props;
     const oldNames = findAllNames(children);
     const newNames = findAllNames(nextProps.children);
 
-    const diff1 = oldNames.every((k: any) => newNames.includes(k));
-    const diff2 = newNames.every((k: any) => oldNames.includes(k));
+    const diff1 = oldNames.every((k) => newNames.includes(k));
+    const diff2 = newNames.every((k) => oldNames.includes(k));
     return !diff1 || !diff2;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     const {
       behandlingFormName, children, fieldNames, reduxChange: reduxFieldChange,
     } = this.props;
@@ -74,24 +83,18 @@ export class BehandlingFormFieldCleaner extends Component<OwnProps> {
   }
 }
 
-interface PureOwnProps {
-  formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
 const getCompleteFormName = createSelector(
   [(ownProps: PureOwnProps) => ownProps.formName,
     (ownProps: PureOwnProps) => ownProps.behandlingId,
     (ownProps: PureOwnProps) => ownProps.behandlingVersjon],
-  (formName, behandlingId, versjon) => getBehandlingFormName(behandlingId, versjon, formName),
+  (formName, behandlingId, versjon): string => getBehandlingFormName(behandlingId, versjon, formName),
 );
 
-const mapStateToProps = (_state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   behandlingFormName: getCompleteFormName(ownProps),
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     reduxChange,
   }, dispatch),

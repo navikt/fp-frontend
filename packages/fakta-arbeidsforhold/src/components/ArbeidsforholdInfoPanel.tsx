@@ -33,13 +33,15 @@ export const fjernIdFraArbeidsforholdLagtTilAvSaksbehandler = (arbeidsforhold: A
   return a;
 });
 
-const harAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter
+const harAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCode);
 
-interface OwnProps {
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
+  arbeidsforhold: Arbeidsforhold[];
+  submitCallback: (...args: any[]) => any;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
@@ -52,7 +54,7 @@ interface OwnProps {
  * Ansvarlig for å rendre aksjonspunktteksten, arbeidsforholdene, og
  * bekreft & fortsett knappen
  * */
-export const ArbeidsforholdInfoPanelImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & InjectedFormProps> = ({
   aksjonspunkter,
   readOnly,
   hasOpenAksjonspunkter,
@@ -93,25 +95,23 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<OwnProps & InjectedF
       )}
     </form>
   </>
-
 );
 
-interface PureOwnProps {
-  arbeidsforhold: Arbeidsforhold[];
-  submitCallback: (...args: any[]) => any;
+type FormValues = {
+  arbeidsforhold: any;
 }
 
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.arbeidsforhold],
-  (arbeidsforhold) => ({
+  (arbeidsforhold): FormValues => ({
     ...PersonArbeidsforholdPanel.buildInitialValues(arbeidsforhold),
   }),
 );
 
-const transformValues = (values: any) => {
+const transformValues = (values: FormValues) => {
   const arbeidsforhold = fjernIdFraArbeidsforholdLagtTilAvSaksbehandler(values.arbeidsforhold);
   return {
-    arbeidsforhold: arbeidsforhold.map((a: any) => omit(a,
+    arbeidsforhold: arbeidsforhold.map((a) => omit(a,
       'erEndret',
       'replaceOptions',
       'originalFomDato',
@@ -123,7 +123,7 @@ const transformValues = (values: any) => {
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   initialValues: buildInitialValues(ownProps),

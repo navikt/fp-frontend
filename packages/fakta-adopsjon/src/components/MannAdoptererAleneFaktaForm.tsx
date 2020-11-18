@@ -20,14 +20,18 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
+export type FormValues = {
+  mannAdoptererAlene?: boolean,
+}
+
+export type TransformedValues = {
+  kode: string,
+  mannAdoptererAlene: boolean,
+}
+
 interface StaticFunctions {
-  buildInitialValues: (familiehendelse: FamilieHendelse) => {
-    mannAdoptererAlene: boolean,
-  },
-  transformValues: (mannAdoptererAlene: boolean) => {
-    kode: string,
-    mannAdoptererAlene: boolean,
-  },
+  buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
+  transformValues: (mannAdoptererAlene: boolean) => TransformedValues;
 }
 
 /**
@@ -61,11 +65,11 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
   </FaktaGruppe>
 );
 
-MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse) => ({
+MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
   mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,
 });
 
-MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean) => ({
+MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): TransformedValues => ({
   kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
   mannAdoptererAlene,
 });

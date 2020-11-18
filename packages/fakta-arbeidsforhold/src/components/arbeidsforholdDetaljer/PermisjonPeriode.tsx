@@ -3,19 +3,20 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer, PeriodLabel } from '@fpsak-frontend/shared-components';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
 
-const utledPermisjonLabelID = (arbeidsforhold: any) => {
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
+
+const utledPermisjonLabelID = (arbeidsforhold: CustomArbeidsforhold): string => {
   if (arbeidsforhold.permisjoner.length > 1) {
     return 'PersonArbeidsforholdDetailForm.Permisjoner';
   }
   return 'PersonArbeidsforholdDetailForm.Permisjon';
 };
 
-const utledPeriodeLabelKey = (id: any, index: any) => id + index;
+const utledPeriodeLabelKey = (id: string, index: number): string => id + index;
 
 interface OwnProps {
-  arbeidsforhold: Arbeidsforhold;
+  arbeidsforhold: CustomArbeidsforhold;
 }
 
 const PermisjonPeriode: FunctionComponent<OwnProps> = ({

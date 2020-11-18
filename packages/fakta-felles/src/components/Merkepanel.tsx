@@ -38,7 +38,11 @@ interface OwnProps {
  * ```
  */
 const MerkePanel: FunctionComponent<OwnProps> = ({
-  erDod, erDodFodt, erNAVAnsatt, erVerge, diskresjonskode,
+  erDod,
+  erDodFodt,
+  erNAVAnsatt,
+  erVerge,
+  diskresjonskode,
 }) => {
   const { formatMessage } = intl;
 

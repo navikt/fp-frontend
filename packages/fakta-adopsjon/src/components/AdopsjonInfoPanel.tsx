@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -6,7 +6,9 @@ import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { behandlingForm } from '@fpsak-frontend/form';
-import { FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@fpsak-frontend/fakta-felles';
+import {
+  FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
+} from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, FamilieHendelse, Kodeverk, KodeverkMedNavn, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
@@ -15,14 +17,16 @@ import {
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import MannAdoptererAleneFaktaForm from './MannAdoptererAleneFaktaForm';
-import EktefelleFaktaForm from './EktefelleFaktaForm';
-import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
+import MannAdoptererAleneFaktaForm, {
+  TransformedValues as MannAdoptererTransformedValues, FormValues as MannAdoptererFormValues,
+} from './MannAdoptererAleneFaktaForm';
+import EktefelleFaktaForm, { TransformedValues as EktefelleTransformedValues, FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
+import DokumentasjonFaktaForm, { FormValues as DokFormValues, TransformedValues as DokTransformedValues } from './DokumentasjonFaktaForm';
 
 const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = aksjonspunktCodes;
 const adopsjonAksjonspunkter = [OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, ADOPSJONSDOKUMENTAJON, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN];
 
-const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
+const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts = [
     <FormattedMessage key="KontrollerMotDok" id="AdopsjonInfoPanel.KontrollerMotDok" />,
   ];
@@ -36,27 +40,29 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
   return helpTexts;
 };
 
-interface OwnProps {
+type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
+
+interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submittable: boolean;
   readOnly: boolean;
   behandlingId: number;
   behandlingVersjon: number;
-  farSokerType?: Kodeverk;
-  editedStatus: {
-    mannAdoptererAlene: boolean;
-    ektefellesBarn: boolean;
-    adopsjonFodelsedatoer: { [key: number]: string };
-    omsorgsovertakelseDato: boolean;
-    barnetsAnkomstTilNorgeDato: boolean;
-  };
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   hasOpenAksjonspunkter: boolean;
   isForeldrepengerFagsak: boolean;
-  initialValues: {
-    begrunnelse?: string;
-  },
+  soknad: Soknad;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  personopplysninger: Personopplysninger;
+  submitCallback: (aksjonspunktData: any) => Promise<any>;
+}
+
+interface MappedOwnProps {
+  farSokerType?: Kodeverk;
+  editedStatus: FieldEditedInfo;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => void;
 }
 
 /**
@@ -64,7 +70,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Adopsjonsvilkåret.
  */
-export const AdopsjonInfoPanelImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const AdopsjonInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   aksjonspunkter,
   hasOpenAksjonspunkter,
   submittable,
@@ -142,24 +148,12 @@ export const AdopsjonInfoPanelImpl: FunctionComponent<OwnProps & InjectedFormPro
   </>
 );
 
-AdopsjonInfoPanelImpl.defaultProps = {
-  farSokerType: undefined,
-};
-
-interface PureOwnProps {
-  soknad: Soknad;
-  gjeldendeFamiliehendelse: FamilieHendelse;
-  aksjonspunkter: Aksjonspunkt[];
-  personopplysninger: Personopplysninger;
-  submitCallback: (...args: any[]) => any;
-}
-
 const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.soknad,
   (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
   soknad, familiehendelse, allAksjonspunkter,
-) => {
+): FormValues => {
   const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.includes(ap.definisjon.kode));
 
   let mannAdoptererAleneValues = {};
@@ -171,6 +165,7 @@ const buildInitialValues = createSelector([
     omAdopsjonGjelderEktefellesBarn = EktefelleFaktaForm.buildInitialValues(familiehendelse);
   }
 
+  // @ts-ignore Fiks!
   return {
     ...DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse),
     ...omAdopsjonGjelderEktefellesBarn,
@@ -179,17 +174,10 @@ const buildInitialValues = createSelector([
   };
 });
 
-interface FormValues {
-  omsorgsovertakelseDato: string;
-  barnetsAnkomstTilNorgeDato: string;
-  fodselsdatoer: { [key: number ]: string };
-  ektefellesBarn?: boolean;
-  begrunnelse: string;
-  mannAdoptererAlene?: boolean;
-}
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => {
+  const aksjonspunkterArray = [] as Array<EktefelleTransformedValues | DokTransformedValues | MannAdoptererTransformedValues>;
+  aksjonspunkterArray.push(DokumentasjonFaktaForm.transformValues(values));
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => {
-  const aksjonspunkterArray = [DokumentasjonFaktaForm.transformValues(values)] as any;
   if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter)) {
     aksjonspunkterArray.push(EktefelleFaktaForm.transformValues(values.ektefellesBarn));
   }
@@ -207,16 +195,16 @@ const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
     (ownProps: PureOwnProps) => ownProps.personopplysninger],
-  (soknad, familiehendelse, personopplysning) => (
+  (soknad, familiehendelse, personopplysning): FieldEditedInfo => (
     isFieldEdited(soknad, familiehendelse, personopplysning)
   ),
 );
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter)));
+(submitCallback, aksjonspunkter) => (values: FormValues): Promise<any> => submitCallback(transformValues(values, aksjonspunkter)));
 
-const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps) => ({
+const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   editedStatus: getEditedStatus(ownProps),
   initialValues: buildInitialValues(ownProps),
   farSokerType: ownProps.soknad.farSokerType,

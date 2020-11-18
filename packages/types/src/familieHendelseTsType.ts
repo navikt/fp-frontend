@@ -16,7 +16,7 @@ export type FamilieHendelse = Readonly<{
   morForSykVedFodsel?: boolean;
   vedtaksDatoSomSvangerskapsuke?: string;
   soknadType: Kodeverk;
-  adopsjonFodelsedatoer?: any;
+  adopsjonFodelsedatoer?: Record<number, string>;
   omsorgsovertakelseDato?: string;
   antallBarnTilBeregning?: number;
   ektefellesBarn?: boolean;

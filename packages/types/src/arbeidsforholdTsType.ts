@@ -1,5 +1,12 @@
 import Kodeverk from './kodeverkTsType';
 
+export type ArbeidsforholdPermisjon = Readonly<{
+  permisjonFom?: string;
+  permisjonTom?: string;
+  permisjonsprosent?: number;
+  type?: Kodeverk;
+}>
+
 type Arbeidsforhold = Readonly<{
   id?: string;
   navn?: string;
@@ -31,14 +38,10 @@ type Arbeidsforhold = Readonly<{
   inntektMedTilBeregningsgrunnlag?: boolean;
   skjaeringstidspunkt?: string;
   begrunnelse?: string;
-  permisjoner?: {
-    permisjonFom?: string;
-    permisjonTom?: string;
-    permisjonsprosent?: number;
-    type?: Kodeverk;
-  }[];
+  permisjoner?: ArbeidsforholdPermisjon[];
   brukPermisjon?: boolean;
-  kanOppretteNyttArbforFraIM: boolean;
+  kanOppretteNyttArbforFraIM?: boolean;
+  harErstattetEttEllerFlere?: boolean;
 }>
 
 export default Arbeidsforhold;

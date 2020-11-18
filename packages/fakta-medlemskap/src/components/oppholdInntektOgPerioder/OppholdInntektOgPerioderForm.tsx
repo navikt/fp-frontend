@@ -5,7 +5,7 @@ import {
   change as reduxFormChange, FormAction, InjectedFormProps, reset as reduxFormReset,
 } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -311,7 +311,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormReset,

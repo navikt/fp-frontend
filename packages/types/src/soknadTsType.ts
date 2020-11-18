@@ -46,10 +46,10 @@ type Soknad = Readonly<{
   spraakkode: Kodeverk;
   utstedtdato?: string;
   termindato?: string;
-  fodselsdatoer?: {[key: number]: string};
+  fodselsdatoer?: Record<number, string>;
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
-  adopsjonFodelsedatoer?: {[key: number]: string};
+  adopsjonFodelsedatoer?: Record<number, string>;
   farSokerType?: Kodeverk;
 }>
 

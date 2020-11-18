@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { Arbeidsforhold } from '@fpsak-frontend/types';
-import aktivtArbeidsforholdHandling from '../kodeverk/aktivtArbeidsforholdHandling';
-import arbeidsforholdHandling from '../kodeverk/arbeidsforholdHandling';
+import AktivtArbeidsforholdHandling from '../kodeverk/aktivtArbeidsforholdHandling';
+import ArbeidsforholdHandling from '../kodeverk/arbeidsforholdHandling';
 import PersonArbeidsforholdTable from './arbeidsforholdTabell/PersonArbeidsforholdTable';
 import PersonArbeidsforholdDetailForm from './arbeidsforholdDetaljer/PersonArbeidsforholdDetailForm';
 import PersonArbeidsforholdPanel, {
@@ -196,7 +196,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     expect(detailForm).has.length(1);
 
-    detailForm.prop('cancelArbeidsforhold')();
+    detailForm.prop('cancelArbeidsforhold')({} as React.MouseEvent);
     wrapper.update();
 
     // @ts-ignore
@@ -227,7 +227,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     />);
     const editedArbeidsforhold = {
       ...newArbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
     };
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
@@ -285,7 +285,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const editedArbeidsforhold = {
       ...newArbeidsforhold,
       erNyttArbeidsforhold: true,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
     };
     wrapper.setState({ selectedArbeidsforhold: editedArbeidsforhold });
 
@@ -370,14 +370,14 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [oldArbeidsforhold],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
       }, {
         ...oldArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
       }],
@@ -491,7 +491,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
     };
 
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
@@ -537,8 +537,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-      aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+      aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
     };
 
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
@@ -583,8 +583,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-      aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.AVSLA_YTELSE,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+      aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.AVSLA_YTELSE,
     };
 
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
@@ -629,7 +629,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.OVERSTYR_TOM,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.OVERSTYR_TOM,
       aktivtArbeidsforholdHandlingField: undefined,
       overstyrtTom: '2019-03-06',
     };
@@ -689,7 +689,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(valgtArbeidsforhold.kilde.navn).to.eql('Saksbehandler');
     expect(valgtArbeidsforhold.brukArbeidsforholdet).to.eql(true);
     // @ts-ignore
-    expect(valgtArbeidsforhold.arbeidsforholdHandlingField).to.eql(arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD);
+    expect(valgtArbeidsforhold.arbeidsforholdHandlingField).to.eql(ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD);
     expect(valgtArbeidsforhold.erEndret).to.eql(undefined);
     expect(valgtArbeidsforhold.vurderOmSkalErstattes).to.eql(undefined);
     expect(valgtArbeidsforhold.ikkeRegistrertIAaRegister).to.eql(undefined);
@@ -775,7 +775,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.SOKER_ER_I_PERMISJON,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.SOKER_ER_I_PERMISJON,
       permisjoner: [
         {
           permisjonFom: '2018-10-10',
@@ -824,7 +824,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
       permisjoner: [
         {
           permisjonFom: '2012-01-01',
@@ -879,8 +879,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
-      arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-      aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG,
+      arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+      aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG,
     };
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
@@ -944,7 +944,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.OVERSTYR_TOM,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.OVERSTYR_TOM,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: '2018-10-10',
       }],
@@ -968,7 +968,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.SOKER_ER_I_PERMISJON,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.SOKER_ER_I_PERMISJON,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
       }],
@@ -986,7 +986,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
       }],
@@ -1005,8 +1005,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-        aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.AVSLA_YTELSE,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+        aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.AVSLA_YTELSE,
         overstyrtTom: undefined,
       }],
     });
@@ -1024,8 +1024,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-        aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+        aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG,
         overstyrtTom: undefined,
       }],
     });
@@ -1043,8 +1043,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-        aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+        aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
         overstyrtTom: undefined,
       }],
     });
@@ -1068,8 +1068,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
         replaceOptions: [],
-        arbeidsforholdHandlingField: arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-        aktivtArbeidsforholdHandlingField: aktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
+        arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
+        aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
         overstyrtTom: undefined,
       }],
     });

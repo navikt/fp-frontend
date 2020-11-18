@@ -7,17 +7,22 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
   readOnly: boolean;
-  isBekreftButtonReadOnly: boolean;
   isSubmitting: boolean;
+}
+
+interface MappedOwnProps {
+  isBekreftButtonReadOnly: boolean;
 }
 
 /**
  * BekreftOgForsettKnapp:
  * Ansvarlig for å rendre bekreft og fortsett knappen, samt disable den hvis nødvendig
  */
-export const BekreftOgForsettKnapp: FunctionComponent<OwnProps> = ({
+export const BekreftOgForsettKnapp: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   readOnly,
   isBekreftButtonReadOnly,
   isSubmitting,
@@ -34,12 +39,7 @@ export const BekreftOgForsettKnapp: FunctionComponent<OwnProps> = ({
   </>
 );
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   isBekreftButtonReadOnly: PersonArbeidsforholdPanel.isReadOnly(state, ownProps.behandlingId, ownProps.behandlingVersjon),
 });
 

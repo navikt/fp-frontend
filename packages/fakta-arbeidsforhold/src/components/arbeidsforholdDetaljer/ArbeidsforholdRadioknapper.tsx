@@ -8,11 +8,11 @@ import {
 } from '@fpsak-frontend/utils';
 import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { ArrowBox } from '@fpsak-frontend/shared-components';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
 
-import aktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
+import AktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 import arbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
-import arbeidsforholdKilder from '../../kodeverk/arbeidsforholdKilder';
+import ArbeidsforholdKilder from '../../kodeverk/arbeidsforholdKilder';
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
 
 // ----------------------------------------------------------------------------------
@@ -31,34 +31,35 @@ const dateMustBeBeforeSkjaeringstidspunkt = (dato: string): FormValidationError 
   { id: 'PersonArbeidsforholdDetailForm.DateNotBeforeSkjaeringstidspunkt' }, { dato },
 ];
 
-const isKildeAaRegisteret = (arbeidsforhold: any) => arbeidsforhold.kilde && arbeidsforhold.kilde.navn.toLowerCase() === AA_REGISTERET;
+const isKildeAaRegisteret = (arbeidsforhold: CustomArbeidsforhold): boolean => arbeidsforhold.kilde
+  && arbeidsforhold.kilde.navn.toLowerCase() === AA_REGISTERET;
 
-const skalDisableOverstyrTom = (arbeidsforhold: any) => {
+const skalDisableOverstyrTom = (arbeidsforhold: CustomArbeidsforhold): boolean => {
   const erTomDatoLikEllerEtterSkjaeringstidspunkt = moment(arbeidsforhold.tomDato).isSameOrAfter(arbeidsforhold.skjaeringstidspunkt);
   return erTomDatoLikEllerEtterSkjaeringstidspunkt && !arbeidsforhold.brukMedJustertPeriode;
 };
 
-const kanSetteOverstyrtTom = (hasReceivedInntekstmelding: any, arbeidsforhold: any) => (isKildeAaRegisteret(arbeidsforhold)
+const kanSetteOverstyrtTom = (hasReceivedInntekstmelding: boolean, arbeidsforhold: CustomArbeidsforhold): boolean => (isKildeAaRegisteret(arbeidsforhold)
   && !hasReceivedInntekstmelding)
   || arbeidsforhold.brukMedJustertPeriode;
 
-const skalViseInntektIkkeMedTilBeregningsgrunnlagetValgmulighet = (arbeidsforhold: any, hasReceivedInntektsmelding: any) => {
+const skalViseInntektIkkeMedTilBeregningsgrunnlagetValgmulighet = (arbeidsforhold: CustomArbeidsforhold, hasReceivedInntektsmelding: boolean): boolean => {
   const fomDatoFoerStp = moment(arbeidsforhold.fomDato).isBefore(arbeidsforhold.skjaeringstidspunkt);
   const tomDatoIkkeSattEllerEtterStp = (arbeidsforhold.tomDato === undefined || arbeidsforhold.tomDato === null)
     || moment(arbeidsforhold.tomDato).isAfter(arbeidsforhold.skjaeringstidspunkt);
   return fomDatoFoerStp && tomDatoIkkeSattEllerEtterStp && !hasReceivedInntektsmelding;
 };
 
-const erFlerePermisjoner = (arbeidsforhold: any) => arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 1;
+const erFlerePermisjoner = (arbeidsforhold: CustomArbeidsforhold): boolean => arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 1;
 
 const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
-  arbeidsforhold: any,
-  hasReceivedInntektsmelding: any,
-  arbeidsforholdHandlingVerdi: any,
-  formName: any,
-  readOnly: any,
-  behandlingId: any,
-  behandlingVersjon: any,
+  arbeidsforhold: CustomArbeidsforhold,
+  hasReceivedInntektsmelding: boolean,
+  formName: string,
+  readOnly: boolean,
+  behandlingId: number,
+  behandlingVersjon: number,
+  arbeidsforholdHandlingVerdi?: string,
 ) => {
   if (arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 0) {
     return (
@@ -110,17 +111,17 @@ const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
   );
 };
 
-const utledAktivtArbeidsforholdLabel = (arbeidsforhold: any) => {
+const utledAktivtArbeidsforholdLabel = (arbeidsforhold: CustomArbeidsforhold): string => {
   if (arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 0) {
     return 'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
   }
-  if (arbeidsforhold.kilde.navn === arbeidsforholdKilder.INNTEKTSMELDING) {
+  if (arbeidsforhold.kilde.navn === ArbeidsforholdKilder.INNTEKTSMELDING) {
     return 'PersonArbeidsforholdDetailForm.OppdaterArbeidsforhold';
   }
   return 'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt';
 };
 
-const skalViseRadioOptionsForAktivtArbeidsforholdHandlinger = (hasReceivedInntektsmelding: any, arbeidsforholdHandlingVerdi: any) => {
+const skalViseRadioOptionsForAktivtArbeidsforholdHandlinger = (hasReceivedInntektsmelding: boolean, arbeidsforholdHandlingVerdi?: string): boolean => {
   if (arbeidsforholdHandlingVerdi !== arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD) {
     return false;
   }
@@ -131,7 +132,7 @@ interface OwnProps {
   readOnly: boolean;
   formName: string;
   hasReceivedInntektsmelding: boolean;
-  arbeidsforhold: Arbeidsforhold;
+  arbeidsforhold: CustomArbeidsforhold;
   aktivtArbeidsforholdTillatUtenIM: boolean;
   arbeidsforholdHandlingVerdi?: string;
   behandlingId: number;
@@ -182,19 +183,19 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps> = ({
               >
                 <RadioOption
                   label={{ id: 'PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger' }}
-                  value={aktivtArbeidsforholdHandling.AVSLA_YTELSE}
+                  value={AktivtArbeidsforholdHandling.AVSLA_YTELSE}
                   disabled={arbeidsforhold.lagtTilAvSaksbehandler === true}
                 />
                 { skalViseInntektIkkeMedTilBeregningsgrunnlagetValgmulighet(arbeidsforhold, hasReceivedInntektsmelding) && (
                   <RadioOption
                     label={{ id: 'PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget' }}
-                    value={aktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG}
+                    value={AktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG}
                     disabled={arbeidsforhold.lagtTilAvSaksbehandler === true}
                   />
                 )}
                 <RadioOption
                   label={{ id: 'PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag' }}
-                  value={aktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG}
+                  value={AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG}
                   disabled={!aktivtArbeidsforholdTillatUtenIM}
                 />
               </RadioGroupField>
@@ -206,11 +207,11 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps> = ({
     { utledRadioOptionForArbeidsforholdSomIkkeErAktive(
       arbeidsforhold,
       hasReceivedInntektsmelding,
-      arbeidsforholdHandlingVerdi,
       formName,
       readOnly,
       behandlingId,
       behandlingVersjon,
+      arbeidsforholdHandlingVerdi,
     )}
   </RadioGroupField>
 );

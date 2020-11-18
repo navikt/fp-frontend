@@ -1,15 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Arbeidsforhold, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, ArbeidsforholdPermisjon, Kodeverk,
+} from '@fpsak-frontend/types';
 
-import arbeidsforholdKilder from '../../kodeverk/arbeidsforholdKilder';
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
+import ArbeidsforholdKilder from '../../kodeverk/arbeidsforholdKilder';
 
-const utledPermisjonValues = (permisjon: any, getKodeverknavn: any) => {
+const utledPermisjonValues = (permisjon: ArbeidsforholdPermisjon, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
   const kodeverknavn = getKodeverknavn(permisjon.type);
   const permisjonType = kodeverknavn !== undefined && kodeverknavn !== null ? kodeverknavn.toLowerCase() : '';
   return {
@@ -20,15 +23,15 @@ const utledPermisjonValues = (permisjon: any, getKodeverknavn: any) => {
   };
 };
 
-const harPermisjonOgIkkeMottattIM = (arbeidsforhold: any) => arbeidsforhold.permisjoner
+const harPermisjonOgIkkeMottattIM = (arbeidsforhold: CustomArbeidsforhold): boolean => arbeidsforhold.permisjoner
     && arbeidsforhold.permisjoner.length === 1
     && (arbeidsforhold.mottattDatoInntektsmelding === undefined || arbeidsforhold.mottattDatoInntektsmelding === null);
 
-const harPermisjonOgMottattIM = (arbeidsforhold: any) => arbeidsforhold.permisjoner
+const harPermisjonOgMottattIM = (arbeidsforhold: CustomArbeidsforhold): boolean => arbeidsforhold.permisjoner
   && arbeidsforhold.permisjoner.length === 1
   && (arbeidsforhold.mottattDatoInntektsmelding !== undefined && arbeidsforhold.mottattDatoInntektsmelding !== null);
 
-const lagAksjonspunktMessage = (arbeidsforhold: any, getKodeverknavn: any) => {
+const lagAksjonspunktMessage = (arbeidsforhold: CustomArbeidsforhold, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement | null => {
   if (!arbeidsforhold || (!arbeidsforhold.tilVurdering && !arbeidsforhold.erEndret)) {
     return undefined;
   }
@@ -53,7 +56,7 @@ const lagAksjonspunktMessage = (arbeidsforhold: any, getKodeverknavn: any) => {
   if (arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 1) {
     return <FormattedMessage key="permisjoner" id="PersonAksjonspunktText.SokerHarFlerePermisjoner" />;
   }
-  if (arbeidsforhold.kilde.navn === arbeidsforholdKilder.INNTEKTSMELDING) {
+  if (arbeidsforhold.kilde.navn === ArbeidsforholdKilder.INNTEKTSMELDING) {
     return <FormattedMessage key="basertPaInntektsmelding" id="PersonAksjonspunktText.BasertPaInntektsmelding" />;
   }
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
@@ -75,7 +78,7 @@ const lagAksjonspunktMessage = (arbeidsforhold: any, getKodeverknavn: any) => {
 };
 
 interface OwnProps {
-  arbeidsforhold?: Arbeidsforhold;
+  arbeidsforhold?: CustomArbeidsforhold;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
