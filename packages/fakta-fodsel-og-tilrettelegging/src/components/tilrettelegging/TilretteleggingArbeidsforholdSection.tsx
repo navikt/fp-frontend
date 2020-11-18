@@ -9,15 +9,21 @@ import { hasValidDate, required } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
+import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
 import ArbeidsforholdFodselOgTilrettelegging from '../../types/arbeidsforholdFodselOgTilretteleggingTsType';
 import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
-
-import styles from './tilretteleggingArbeidsforholdSection.less';
 import VelferdspermisjonSection from './VelferdspermisjonSection';
 
-const utledArbeidsforholdTittel = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging) => {
-  let tittel = arbeidsforhold.arbeidsgiverNavn;
+import styles from './tilretteleggingArbeidsforholdSection.less';
+
+const utledArbeidsforholdTittel = (
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+
+  let tittel = arbeidsgiverOpplysninger.navn;
   if (arbeidsforhold.arbeidsgiverIdent) {
     tittel += ` (${arbeidsforhold.arbeidsgiverIdentVisning})`;
   }
@@ -31,11 +37,10 @@ const utledArbeidsforholdTittel = (arbeidsforhold: ArbeidsforholdFodselOgTilrett
   return tittel;
 };
 
-interface OwnProps {
+interface PureOwnProps {
   readOnly: boolean;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   formSectionName: string;
-  visTilrettelegginger: boolean;
   behandlingId: number;
   behandlingVersjon: number;
   erOverstyrer: boolean;
@@ -43,9 +48,14 @@ interface OwnProps {
   stillingsprosentArbeidsforhold?: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
   formName: string;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
+interface MappedOwnProps {
+  visTilrettelegginger: boolean;
+}
+
+export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   readOnly,
   arbeidsforhold,
   formSectionName,
@@ -57,10 +67,11 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> =
   stillingsprosentArbeidsforhold,
   setOverstyrtUtbetalingsgrad,
   formName,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <FormSection name={formSectionName}>
     <Normaltekst className={styles.arbeidsforholdTittel}>
-      {utledArbeidsforholdTittel(arbeidsforhold)}
+      {utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId)}
     </Normaltekst>
     <VerticalSpacer sixteenPx />
     <CheckboxField
@@ -129,11 +140,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> =
   </FormSection>
 );
 
-TilretteleggingArbeidsforholdSection.defaultProps = {
-  stillingsprosentArbeidsforhold: undefined,
-};
-
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   visTilrettelegginger: behandlingFormValueSelector(ownProps.formName,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, `${ownProps.formSectionName}.skalBrukes`),
 });

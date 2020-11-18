@@ -38,20 +38,23 @@ interface TilretteleggingDato {
   stillingsprosent: number;
 }
 
-interface OwnProps {
+interface PureOwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta?: FieldArrayMetaProps;
   readOnly: boolean;
   formSectionName: string;
   erOverstyrer: boolean;
   changeField: (field: string, value: string) => void;
-  tilretteleggingDatoer: TilretteleggingDato[];
   stillingsprosentArbeidsforhold: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
-  velferdspermisjonprosent: number;
   behandlingId: number;
   behandlingVersjon: number;
   formName: string;
+}
+
+interface MappedOwnProps {
+  tilretteleggingDatoer: TilretteleggingDato[];
+  velferdspermisjonprosent: number;
 }
 
 /**
@@ -59,7 +62,7 @@ interface OwnProps {
  *
  * Viser inputfelter for tilrettelegging av arbeidsforhold for selvstendig næringsdrivende eller frilans.
  */
-export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
   intl,
   fields,
   meta,
@@ -202,7 +205,7 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
   </PeriodFieldArray>
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => {
   const {
     behandlingId, behandlingVersjon, formSectionName, velferdspermisjoner, formName,
   } = ownProps;
