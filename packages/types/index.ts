@@ -3,7 +3,9 @@ export { default as Arbeidsforhold } from './src/arbeidsforholdTsType';
 export { default as Behandling } from './src/behandlingTsType';
 export { default as BehandlingAppKontekst } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
-export { default as Beregningsgrunnlag } from './src/beregningsgrunnlagTsType';
+export {
+  default as Beregningsgrunnlag, BeregningsgrunnlagAndel, RelevanteStatuserProp, SammenligningsgrunlagProp, BeregningsgrunnlagPeriodeProp,
+} from './src/beregningsgrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
 export { default as Dokument } from './src/dokumentTsType';
