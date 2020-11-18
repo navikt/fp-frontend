@@ -4,7 +4,7 @@ import {
   change as reduxFormChange, FieldArray, getFormInitialValues, reset as reduxFormReset,
 } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -522,7 +522,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   ...bindActionCreators(
     {
       reduxFormChange,

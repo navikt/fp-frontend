@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { clearFields, FormAction, InjectedFormProps } from 'redux-form';
@@ -369,7 +369,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     clearFields,
   }, dispatch),

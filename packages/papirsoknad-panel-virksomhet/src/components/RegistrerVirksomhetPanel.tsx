@@ -1,6 +1,6 @@
 import React, { Component, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import {
   arrayPush as dispatchArrayPush, arraySplice as dispatchArraySplice, Field, FieldArrayFieldsProps, FieldArrayMetaProps, FormAction, formValueSelector,
 } from 'redux-form';
@@ -255,7 +255,7 @@ const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps
     ? formValueSelector(initialProps.form)(state, initialProps.namePrefix).virksomheter : null,
 });
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     dispatchArrayPush,
     dispatchArraySplice,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { InjectedFormProps, setSubmitFailed } from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
@@ -291,7 +291,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   });
 };
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     dispatchSubmitFailed: setSubmitFailed,
   }, dispatch),

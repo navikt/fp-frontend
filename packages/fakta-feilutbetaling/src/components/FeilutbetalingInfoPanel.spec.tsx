@@ -102,6 +102,7 @@ describe('<FeilutbetalingInfoPanel>', () => {
       hasOpenAksjonspunkter
       readOnly={false}
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       årsaker={[]}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: {

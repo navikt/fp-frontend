@@ -7,22 +7,25 @@ import {
 import { TextAreaField, behandlingFormValueSelector, isBehandlingFormDirty } from '@fpsak-frontend/form';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
-import aktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
+import AktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
 
-interface OwnProps {
+interface PureOwnProps {
   readOnly: boolean;
   formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+interface MappedOwnProps {
   isDirty: boolean;
   harBegrunnelse: boolean;
   skalAvslaaYtelse: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 /**
  * ArbeidsforholdBegrunnelse er ansvarlig for å vise begrunnelsesfeltet.
  */
-export const ArbeidsforholdBegrunnelse: FunctionComponent<OwnProps> = ({
+export const ArbeidsforholdBegrunnelse: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   readOnly,
   formName,
   isDirty,
@@ -44,19 +47,13 @@ export const ArbeidsforholdBegrunnelse: FunctionComponent<OwnProps> = ({
   </BehandlingFormFieldCleaner>
 );
 
-interface PureOwnProps {
-  formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
-const mapStateToProps = (state: any, initialProps: PureOwnProps) => {
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => {
   const { formName, behandlingId, behandlingVersjon } = initialProps;
   const aktivtArbeidsforholdHandlingValue = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'aktivtArbeidsforholdHandlingField');
   return {
     isDirty: isBehandlingFormDirty(formName, behandlingId, behandlingVersjon)(state),
     harBegrunnelse: !!behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'begrunnelse'),
-    skalAvslaaYtelse: aktivtArbeidsforholdHandlingValue === aktivtArbeidsforholdHandling.AVSLA_YTELSE,
+    skalAvslaaYtelse: aktivtArbeidsforholdHandlingValue === AktivtArbeidsforholdHandling.AVSLA_YTELSE,
   };
 };
 

@@ -6,6 +6,16 @@ type FeilutbetalingFakta = {
       fom: string;
       tom: string;
       belop: number;
+      feilutbetalingÅrsakDto?: {
+        hendelseType: {
+          kode: string;
+          navn: string;
+        };
+        hendelseUndertype?: {
+          kode: string;
+          navn: string;
+        };
+      }
     }[];
     totalPeriodeFom: string;
     totalPeriodeTom: string;

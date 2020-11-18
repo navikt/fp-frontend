@@ -10,7 +10,8 @@ import { Arbeidsforhold } from '@fpsak-frontend/types';
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
 import { PersonArbeidsforholdDetailForm } from './PersonArbeidsforholdDetailForm';
 import LeggTilArbeidsforholdFelter from './LeggTilArbeidsforholdFelter';
-import arbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
+import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 
 describe('<PersonArbeidsforholdDetailForm>', () => {
   const arbeidsforhold = {
@@ -35,7 +36,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere
@@ -48,10 +49,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     expect(wrapper.find(TextAreaField)).has.length(0);
   });
@@ -59,7 +62,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere={false}
@@ -72,10 +75,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [{ id: '2' } as Arbeidsforhold],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
     expect(panel).to.be.length(1);
@@ -84,7 +89,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere
@@ -97,10 +102,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [{ id: '2' } as Arbeidsforhold],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
     expect(panel).to.be.length(0);
@@ -109,7 +116,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere
@@ -122,10 +129,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
     expect(panel).to.be.length(0);
@@ -134,7 +143,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere
@@ -147,10 +156,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(1);
@@ -159,7 +170,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.FJERN_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere
@@ -172,10 +183,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
@@ -184,7 +197,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding
       harErstattetEttEllerFlere={false}
@@ -197,10 +210,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
   });
@@ -208,7 +223,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding={false}
       harErstattetEttEllerFlere
@@ -221,10 +236,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
     expect(radiogroup).has.length(1);
@@ -233,7 +250,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       cancelArbeidsforhold={sinon.spy()}
-      arbeidsforholdHandlingVerdi={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
+      arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
       hasReceivedInntektsmelding={false}
       harErstattetEttEllerFlere
@@ -246,10 +263,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
     expect(radiogroup).has.length(0);
@@ -271,10 +290,12 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         erEndret: false,
         tilVurdering: true,
         replaceOptions: [],
-      }}
+      } as CustomArbeidsforhold}
       behandlingId={1}
       behandlingVersjon={1}
       alleKodeverk={{}}
+      updateArbeidsforhold={() => undefined}
+      onSubmit={() => undefined}
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
     expect(wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel)).has.length(0);

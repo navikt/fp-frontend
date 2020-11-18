@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import {
   clearFields, change, getFormValues, InjectedFormProps,
 } from 'redux-form';
@@ -37,11 +37,20 @@ const feilutbetalingAksjonspunkter = [
   aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
 ];
 
+type FormValues = {
+  begrunnelse?: string;
+  perioder?: {
+    fom: string;
+    tom: string;
+    årsak?: string;
+  }[];
+}
+
 interface PureOwnProps {
   feilutbetalingFakta: FeilutbetalingFakta;
   feilutbetalingAarsak: FeilutbetalingAarsak;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (aksjonspunktData: any) => Promise<any>;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -49,34 +58,36 @@ interface PureOwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
   behandlingVersjon: number;
-  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, fields?: string) => void;
 }
 
 interface MappedOwnProps {
   årsaker: FeilutbetalingAarsak['hendelseTyper'];
   behandlingFormPrefix: string;
   behandlePerioderSamlet: boolean;
-  formValues: {
-    perioder: {
-      årsak: any;
-    }[];
-  }
+  formValues: FormValues;
+  initialValues: FormValues;
+  onSubmit: (values: FormValues) => void;
 }
 
-export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
-  constructor(props: PureOwnProps & MappedOwnProps & InjectedFormProps) {
+interface DispatchProps {
+  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, fields?: string) => void;
+}
+
+export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps> {
+  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps) {
     super(props);
     this.onChangeÅrsak = this.onChangeÅrsak.bind(this);
     this.onChangeUnderÅrsak = this.onChangeUnderÅrsak.bind(this);
   }
 
-  onChangeÅrsak(event: any, elementId: any, årsak: any) {
+  onChangeÅrsak(event: ReactNode, elementId: number, årsak: string): void {
     const {
       behandlingFormPrefix, clearFields: clearFormFields, change: changeValue, formValues, behandlePerioderSamlet,
     } = this.props;
 
     if (behandlePerioderSamlet) {
       const { perioder } = formValues;
+      // @ts-ignore Fiks
       const { value: nyÅrsak } = event.target;
 
       for (let i = 0; i < perioder.length; i += 1) {
@@ -93,13 +104,14 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
     clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
   }
 
-  onChangeUnderÅrsak(event: any, elementId: any, årsak: any) {
+  onChangeUnderÅrsak(event: ReactNode, elementId: number, årsak: string): void {
     const {
       change: changeValue, formValues, behandlePerioderSamlet,
     } = this.props;
 
     if (behandlePerioderSamlet) {
       const { perioder } = formValues;
+      // @ts-ignore Fiks
       const { value: nyUnderÅrsak } = event.target;
 
       for (let i = 0; i < perioder.length; i += 1) {
@@ -235,7 +247,7 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
                   </Undertekst>
                   { feilutbetaling.behandlingÅrsaker && (
                     <Normaltekst className={styles.smallPaddingRight}>
-                      {feilutbetaling.behandlingÅrsaker.map((ba: any) => getFpsakKodeverknavn(ba.behandlingArsakType)).join(', ')}
+                      {feilutbetaling.behandlingÅrsaker.map((ba) => getFpsakKodeverknavn(ba.behandlingArsakType)).join(', ')}
                     </Normaltekst>
                   )}
                 </Column>
@@ -268,7 +280,7 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
                   </Undertekst>
                   {feilutbetaling.behandlingsresultat && (
                     <Normaltekst className={styles.smallPaddingRight}>
-                      {feilutbetaling.behandlingsresultat.konsekvenserForYtelsen.map((ba: any) => getFpsakKodeverknavn(ba)).join(', ')}
+                      {feilutbetaling.behandlingsresultat.konsekvenserForYtelsen.map((ba) => getFpsakKodeverknavn(ba)).join(', ')}
                     </Normaltekst>
                   )}
                 </Column>
@@ -319,13 +331,13 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
 }
 
 const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.feilutbetalingFakta], (feilutbetalingFakta) => {
+  (ownProps: PureOwnProps) => ownProps.feilutbetalingFakta], (feilutbetalingFakta): FormValues => {
   const { behandlingFakta } = feilutbetalingFakta;
   const { perioder, begrunnelse } = behandlingFakta;
   return {
     begrunnelse: decodeHtmlEntity(begrunnelse),
     perioder: perioder.sort((a, b) => moment(a.fom).diff(moment(b.fom)))
-      .map((p: any) => {
+      .map((p) => {
         const {
           fom, tom, feilutbetalingÅrsakDto,
         } = p;
@@ -353,25 +365,26 @@ const buildInitialValues = createSelector([
 });
 
 const getSortedFeilutbetalingArsaker = createSelector([
-  (ownProps: PureOwnProps) => ownProps.feilutbetalingAarsak], (feilutbetalingArsaker) => {
+  (ownProps: PureOwnProps) => ownProps.feilutbetalingAarsak], (feilutbetalingArsaker): FeilutbetalingAarsak['hendelseTyper'] => {
   const { hendelseTyper } = feilutbetalingArsaker;
-  return hendelseTyper.sort((ht1: any, ht2: any) => {
+  return hendelseTyper.sort((ht1, ht2) => {
     const hendelseType1 = ht1.hendelseType.navn;
     const hendelseType2 = ht2.hendelseType.navn;
     const hendelseType1ErParagraf = hendelseType1.startsWith('§');
     const hendelseType2ErParagraf = hendelseType2.startsWith('§');
     const ht1v = hendelseType1ErParagraf ? hendelseType1.replace(/\D/g, '') : hendelseType1;
     const ht2v = hendelseType2ErParagraf ? hendelseType2.replace(/\D/g, '') : hendelseType2;
+    // @ts-ignore Kan ein ikkje alltid bruka localeCompare?
     return hendelseType1ErParagraf && hendelseType2ErParagraf ? ht1v - ht2v : ht1v.localeCompare(ht2v);
   });
 });
 
-const transformValues = (values: any, aksjonspunkter: Aksjonspunkt[], årsaker: any) => {
-  const apCode = aksjonspunkter.find((ap: any) => ap.definisjon.kode === feilutbetalingAksjonspunkter[0]);
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[], årsaker: FeilutbetalingAarsak['hendelseTyper']): any => {
+  const apCode = aksjonspunkter.find((ap) => ap.definisjon.kode === feilutbetalingAksjonspunkter[0]);
 
-  const feilutbetalingFakta = values.perioder.map((periode: any) => {
-    const feilutbetalingÅrsak = årsaker.find((el: any) => el.hendelseType.kode === periode.årsak);
-    const findUnderÅrsakObjekt = (underÅrsak: any) => feilutbetalingÅrsak.hendelseUndertyper.find((el: any) => el.kode === underÅrsak);
+  const feilutbetalingFakta = values.perioder.map((periode) => {
+    const feilutbetalingÅrsak = årsaker.find((el) => el.hendelseType.kode === periode.årsak);
+    const findUnderÅrsakObjekt = (underÅrsak) => feilutbetalingÅrsak.hendelseUndertyper.find((el) => el.kode === underÅrsak);
     const feilutbetalingUnderÅrsak = periode[periode.årsak] ? findUnderÅrsakObjekt(periode[periode.årsak].underÅrsak) : false;
 
     return {
@@ -395,9 +408,9 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback,
   getSortedFeilutbetalingArsaker,
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, årsaker, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter, årsaker)));
+(submitCallback, årsaker, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter, årsaker)));
 
-const mapStateToPropsFactory = (state: any, ownProps: any) => ({
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   årsaker: getSortedFeilutbetalingArsaker(ownProps),
   initialValues: buildInitialValues(ownProps),
   behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
@@ -406,7 +419,7 @@ const mapStateToPropsFactory = (state: any, ownProps: any) => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     clearFields,
     change,

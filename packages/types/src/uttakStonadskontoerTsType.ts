@@ -26,7 +26,7 @@ export type Stonadskonto = Readonly<{
 
 type UttakStonadskontoer = Readonly<{
   maksDatoUttak?: string;
-  stonadskontoer: { [key: string]: Stonadskonto };
+  stonadskontoer: Record<string, Stonadskonto>;
   tapteDagerFpff: number;
 }>
 

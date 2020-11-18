@@ -10,7 +10,7 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { Arbeidsforhold, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import PersonAksjonspunktText from './PersonAksjonspunktText';
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
@@ -18,7 +18,8 @@ import LeggTilArbeidsforholdFelter from './LeggTilArbeidsforholdFelter';
 import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
 import ArbeidsforholdBegrunnelse from './ArbeidsforholdBegrunnelse';
 import PermisjonPeriode from './PermisjonPeriode';
-import arbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
+import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 
 // ----------------------------------------------------------------------------------
 // VARIABLES
@@ -30,36 +31,42 @@ export const PERSON_ARBEIDSFORHOLD_DETAIL_FORM = 'PersonArbeidsforholdDetailForm
 // METHODS
 // ----------------------------------------------------------------------------------
 const showNyttOrErstattPanel = (
-  arbeidsforholdHandlingVerdi: any, vurderOmSkalErstattes: any, harErstattetEttEllerFlere: any,
-) => arbeidsforholdHandlingVerdi === arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD
+  arbeidsforholdHandlingVerdi: string,
+  vurderOmSkalErstattes: boolean,
+  harErstattetEttEllerFlere: boolean,
+): boolean => arbeidsforholdHandlingVerdi === ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD
   && vurderOmSkalErstattes
   && !harErstattetEttEllerFlere;
 
-interface OwnProps {
-  cancelArbeidsforhold: (...args: any[]) => any;
-  isErstattArbeidsforhold: boolean;
-  hasReceivedInntektsmelding: boolean;
-  vurderOmSkalErstattes: boolean;
-  harErstattetEttEllerFlere?: boolean;
+type FormValues = CustomArbeidsforhold;
+
+interface PureOwnProps {
   readOnly: boolean;
+  cancelArbeidsforhold: (event: React.MouseEvent) => void;
   aktivtArbeidsforholdTillatUtenIM: boolean;
-  arbeidsforhold: Arbeidsforhold;
-  arbeidsforholdHandlingVerdi?: string;
+  arbeidsforhold: CustomArbeidsforhold;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
   behandlingId: number;
   behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  initialValues: {
-    erEndret: boolean;
-    tilVurdering: boolean;
-    replaceOptions: Arbeidsforhold[];
-  }
+  updateArbeidsforhold: (values: FormValues) => void;
+}
+
+interface MappedOwnProps {
+  initialValues: CustomArbeidsforhold;
+  readOnly: boolean;
+  hasReceivedInntektsmelding: boolean;
+  vurderOmSkalErstattes: boolean;
+  arbeidsforholdHandlingVerdi?: string;
+  harErstattetEttEllerFlere?: boolean;
+  isErstattArbeidsforhold: boolean;
+  onSubmit: (formValues: FormValues) => void;
 }
 
 // ----------------------------------------------------------------------------------
 // Component: PersonArbeidsforholdDetailForm
 // ----------------------------------------------------------------------------------
-export const PersonArbeidsforholdDetailForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const PersonArbeidsforholdDetailForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   cancelArbeidsforhold,
   isErstattArbeidsforhold,
   hasReceivedInntektsmelding,
@@ -145,7 +152,7 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<OwnProps & Inject
             behandlingVersjon={behandlingVersjon}
           />
         )}
-        { arbeidsforholdHandlingVerdi === arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD && harErstattetEttEllerFlere
+        { arbeidsforholdHandlingVerdi === ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD && harErstattetEttEllerFlere
           && !arbeidsforhold.kanOppretteNyttArbforFraIM && (
           <Normaltekst>
             <FormattedMessage id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod" />
@@ -160,13 +167,9 @@ PersonArbeidsforholdDetailForm.defaultProps = {
   harErstattetEttEllerFlere: false,
 };
 
-interface PureOwnProps {
-  updateArbeidsforhold: (values: any) => void;
-}
-
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.updateArbeidsforhold(values);
-  return (state: any, ownProps: any) => {
+  const onSubmit = (values: FormValues) => initialOwnProps.updateArbeidsforhold(values);
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const {
       arbeidsforhold, readOnly, behandlingId, behandlingVersjon,
     } = ownProps;
@@ -193,12 +196,12 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   };
 };
 
-const validateForm = (values: any) => ({
+const validateForm = (values: FormValues) => ({
   ...LeggTilArbeidsforholdFelter.validate(values),
 });
 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: PERSON_ARBEIDSFORHOLD_DETAIL_FORM,
-  validate: (values) => validateForm(values),
+  validate: (values: FormValues) => validateForm(values),
   enableReinitialize: true,
 })(PersonArbeidsforholdDetailForm));

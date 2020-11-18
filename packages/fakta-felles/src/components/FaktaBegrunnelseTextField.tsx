@@ -20,26 +20,37 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type OwnProps = {
-    isReadOnly: boolean;
-    isSubmittable: boolean;
-    hasBegrunnelse: boolean;
-    label?: string;
-    hasVurderingText?: boolean;
-    name?: string;
+  isReadOnly: boolean;
+  isSubmittable: boolean;
+  hasBegrunnelse: boolean;
+  label?: string;
+  hasVurderingText?: boolean;
+  name?: string;
+};
+
+export type FormValues = {
+  [key: string]: string;
+};
+
+type TransformedValues = {
+  begrunnelse: string;
 };
 
 interface StaticFunctions {
-  buildInitialValues: (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName?: string) => any
-  transformValues: (values: any, name?: string) => {
-    begrunnelse: string;
-  }
+  buildInitialValues: (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName?: string) => FormValues;
+  transformValues: (values: FormValues, name?: string) => TransformedValues;
 }
 
 /**
  * FaktaBegrunnelseTextField
  */
 const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions = ({
-  isReadOnly, isSubmittable, hasBegrunnelse, label, hasVurderingText, name,
+  isReadOnly,
+  isSubmittable,
+  hasBegrunnelse,
+  label,
+  hasVurderingText,
+  name,
 }) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
   const textAreaLabel = label || { id: code };
@@ -63,22 +74,21 @@ const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions =
 
 FaktaBegrunnelseTextField.defaultProps = {
   name: 'begrunnelse',
-  label: undefined,
   hasVurderingText: false,
 };
 
-const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt) => {
+const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt): string => {
   if (aksjonspunkt && Array.isArray(aksjonspunkt)) {
     return aksjonspunkt.length > 0 ? aksjonspunkt[0].begrunnelse : '';
   }
   return aksjonspunkt && !Array.isArray(aksjonspunkt) ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName = 'begrunnelse') => ({
+FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName = 'begrunnelse'): FormValues => ({
   [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt)),
 });
 
-FaktaBegrunnelseTextField.transformValues = (values: any, name = 'begrunnelse') => ({
+FaktaBegrunnelseTextField.transformValues = (values: FormValues, name = 'begrunnelse'): TransformedValues => ({
   begrunnelse: values[name],
 });
 

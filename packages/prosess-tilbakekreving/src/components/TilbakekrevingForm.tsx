@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { createSelector } from 'reselect';
 import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -431,7 +431,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,

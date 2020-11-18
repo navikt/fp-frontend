@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
@@ -312,7 +312,7 @@ const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   ...bindActionCreators({
     reduxFormChange,
     reduxFormInitialize,
