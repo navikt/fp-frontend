@@ -5,13 +5,13 @@ import React, { Component, ReactNode } from 'react';
  *
  *  Komponent som sikkerstiller att requiredprops virkligen er lastade.
  */
-const propsWithValue = (propNames, value) => propNames
-  .map((propName) => ({ [propName]: value }))
+const lagPropsMedNullVerdier = (propNames: string[]) => propNames
+  .map((propName) => ({ [propName]: null }))
   .reduce((a, b) => ({ ...a, ...b }));
 
 const requireProps = (requiredPropNames: string[], alternative?: ReactNode) => (WrappedComponent) => {
   class ComponentWithRequiredProps extends Component {
-    static defaultProps = propsWithValue(requiredPropNames, null)
+    static defaultProps = lagPropsMedNullVerdier(requiredPropNames)
 
     displayName = `ComponentWithRequiredProps(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 

@@ -30,10 +30,10 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseB
   return httpClientApi.postBlob;
 };
 
-const isGetRequest = (restMethod) => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
+const isGetRequest = (restMethod: string): boolean => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const waitUntilFinished = async (cache, endpointName) => {
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const waitUntilFinished = async (cache: ResponseCache, endpointName: string) => {
   if (cache.isFetching(endpointName)) {
     await wait(50);
     return waitUntilFinished(cache, endpointName);
@@ -64,7 +64,7 @@ class RequestApi extends AbstractRequestApi {
     this.endpointConfigList = endpointConfigList;
   }
 
-  private doCaching = async (endpointName) => {
+  private doCaching = async (endpointName: string): Promise<any> => {
     if (this.cache.hasFetched(endpointName)) {
       return this.cache.getData(endpointName);
     } if (this.cache.isFetching(endpointName)) {
@@ -77,7 +77,7 @@ class RequestApi extends AbstractRequestApi {
 
   private findLinks = (rel: string): Link => Object.values(this.links).flat().find((link) => link.rel === rel);
 
-  public startRequest = async (endpointName: string, params?: any, isCachingOn = false) => {
+  public startRequest = async (endpointName: string, params?: any, isCachingOn = false): Promise<{ payload: any }> => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
@@ -114,7 +114,7 @@ class RequestApi extends AbstractRequestApi {
     }
   }
 
-  public hasPath = (endpointName: string) => {
+  public hasPath = (endpointName: string): boolean => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
@@ -123,14 +123,14 @@ class RequestApi extends AbstractRequestApi {
     return !!link?.href || !!endpointConfig?.path;
   };
 
-  public setLinks = (links: Link[], linkCategory: string = DEFAULT_CATEGORY) => {
+  public setLinks = (links: Link[], linkCategory: string = DEFAULT_CATEGORY): void => {
     this.links = {
       ...this.links,
       [linkCategory]: links,
     };
   }
 
-  public setRequestPendingHandler = (requestPendingHandler) => {
+  public setRequestPendingHandler = (requestPendingHandler: (message?: string) => void): void => {
     this.notificationMapper.addUpdatePollingMessageEventHandler((data) => {
       requestPendingHandler(data);
     });
@@ -142,25 +142,28 @@ class RequestApi extends AbstractRequestApi {
     });
   }
 
-  public setAddErrorMessageHandler = (addErrorMessage) => {
+  public setAddErrorMessageHandler = (addErrorMessage: (message: string) => void): void => {
     this.notificationMapper.addRequestErrorEventHandlers((errorData, type) => {
       addErrorMessage({ ...errorData, type });
     });
   };
 
-  public resetCache = () => {
+  public resetCache = (): void => {
     this.cache = new ResponseCache();
   }
 
-  public isMock = () => false;
+  public isMock = (): boolean => false;
 
   // Kun for test
   public mock = () => { throw new Error('Not Implemented'); };
 
+  // Kun for test
   public setMissingPath = () => { throw new Error('Not Implemented'); };
 
+  // Kun for test
   public getRequestMockData = () => { throw new Error('Not Implemented'); };
 
+  // Kun for test
   public clearAllMockData = () => { throw new Error('Not Implemented'); };
 }
 

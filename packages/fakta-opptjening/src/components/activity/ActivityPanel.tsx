@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { InjectedFormProps } from 'redux-form';
@@ -30,7 +30,7 @@ import {
   PeriodpickerField, RadioGroupField, RadioOption, SelectField, TextAreaField, behandlingForm, behandlingFormValueSelector,
 } from '@fpsak-frontend/form';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../../CustomOpptjeningAktivitet';
 import ActivityDataSubPanel from './ActivityDataSubPanel';
@@ -40,12 +40,12 @@ import styles from './activityPanel.less';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-function erFraAvvikendeKode(atCodes: string[], oat: KodeverkMedNavn) {
+function erFraAvvikendeKode(atCodes: string[], oat: KodeverkMedNavn): boolean {
   return (atCodes.includes(arbeidType.LONN_UNDER_UTDANNING) && oat.kode === opptjeningAktivitetType.VIDERE_ETTERUTDANNING)
     || (atCodes.includes(arbeidType.FRILANSER) && oat.kode === opptjeningAktivitetType.FRILANS);
 }
 
-const filterActivityType = (opptjeningAktivitetTypes: KodeverkMedNavn[], erManueltOpprettet: boolean, arbeidTypes: KodeverkMedNavn[]) => {
+const filterActivityType = (opptjeningAktivitetTypes: KodeverkMedNavn[], erManueltOpprettet: boolean, arbeidTypes: KodeverkMedNavn[]): KodeverkMedNavn[] => {
   if (!erManueltOpprettet) {
     return opptjeningAktivitetTypes;
   }
@@ -55,14 +55,14 @@ const filterActivityType = (opptjeningAktivitetTypes: KodeverkMedNavn[], erManue
     || erFraAvvikendeKode(atCodes, oat));
 };
 
-const shouldDisablePeriodpicker = (hasAksjonspunkt: boolean, initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet) => {
+const shouldDisablePeriodpicker = (hasAksjonspunkt: boolean, initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet): boolean => {
   if (!hasAksjonspunkt) {
     return true;
   }
   return !initialValues.erManueltOpprettet && !!initialValues.erGodkjent && !initialValues.erEndret;
 };
 
-const findInYearsMonthsAndDays = (opptjeningFom: string, opptjeningTom: string) => {
+const findInYearsMonthsAndDays = (opptjeningFom: string, opptjeningTom: string): ReactElement => {
   const difference = findDifferenceInMonthsAndDays(opptjeningFom, opptjeningTom);
   if (!difference) {
     return <span />;
@@ -83,7 +83,7 @@ const isBegrunnelseRequired = (allValues: any, props: any) => {
 };
 const requiredCustom = requiredIfCustomFunctionIsTrue(isBegrunnelseRequired);
 
-const finnBegrunnelseLabel = (initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet, readOnly: boolean, hasAksjonspunkt: boolean) => (
+const finnBegrunnelseLabel = (initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet, readOnly: boolean, hasAksjonspunkt: boolean): string => (
   initialValues.erManueltOpprettet || readOnly || shouldDisablePeriodpicker(hasAksjonspunkt, initialValues)
     ? 'ActivityPanel.Begrunnelse'
     : 'ActivityPanel.BegrunnEndringene'
@@ -91,12 +91,16 @@ const finnBegrunnelseLabel = (initialValues: CustomOpptjeningAktivitet | NyOpptj
 
 export const activityPanelName = 'ActivityPanel';
 
+type FormValues = {
+  opptjeningFom: string;
+  opptjeningTom: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   updateActivity: (values: any) => void
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  opptjeningAktivitetTypes: KodeverkMedNavn[];
   activity: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
@@ -106,14 +110,18 @@ interface PureOwnProps {
   selectPrevPeriod?: (...args: any[]) => any;
   hasAksjonspunkt: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  opptjeningAktivitetTypes: KodeverkMedNavn[];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-interface OwnProps {
+interface MappedOwnProps {
+  filtrerteOpptjeningAktivitetTypes: KodeverkMedNavn[];
   selectedActivityType?: Kodeverk;
   opptjeningFom?: string;
   opptjeningTom?: string;
   activityId?: number;
   initialValues: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
+  onSubmit: (values: FormValues) => void;
 }
 
 /**
@@ -121,7 +129,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Viser informasjon om valgt aktivitet
  */
-export const ActivityPanel: FunctionComponent<PureOwnProps & OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const ActivityPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   initialValues,
   readOnly,
@@ -137,6 +145,7 @@ export const ActivityPanel: FunctionComponent<PureOwnProps & OwnProps & WrappedC
   opptjeningFomDato,
   opptjeningTomDato,
   alleMerknaderFraBeslutter,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <FaktaGruppe
@@ -190,6 +199,7 @@ export const ActivityPanel: FunctionComponent<PureOwnProps & OwnProps & WrappedC
       readOnly={readOnly}
       isManuallyAdded={initialValues.erManueltOpprettet}
       selectedActivityType={selectedActivityType}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     { !shouldDisablePeriodpicker(hasAksjonspunkt, initialValues) && (
       <>
@@ -251,16 +261,16 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   const {
     updateActivity, alleKodeverk, opptjeningAktivitetTypes, activity,
   } = initialOwnProps;
-  const onSubmit = (values: any) => updateActivity(values);
+  const onSubmit = (values: FormValues) => updateActivity(values);
   const arbeidTyper = alleKodeverk[kodeverkTyper.ARBEID_TYPE];
   const filtrerteOpptjeningAktivitetTypes = filterActivityType(opptjeningAktivitetTypes, activity.erManueltOpprettet, arbeidTyper);
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const { behandlingId, behandlingVersjon } = ownProps;
     return {
       onSubmit,
+      filtrerteOpptjeningAktivitetTypes,
       initialValues: ownProps.activity,
-      opptjeningAktivitetTypes: filtrerteOpptjeningAktivitetTypes,
       selectedActivityType: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'aktivitetType'),
       opptjeningFom: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'opptjeningFom'),
       opptjeningTom: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'opptjeningTom'),
@@ -269,7 +279,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   };
 };
 
-const validateForm = (values: any, props: any) => {
+const validateForm = (values: FormValues, props: PureOwnProps & MappedOwnProps) => {
   if (!values) {
     return {};
   }

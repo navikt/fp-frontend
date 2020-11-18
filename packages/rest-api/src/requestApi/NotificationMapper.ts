@@ -2,7 +2,7 @@ import EventType from './eventType';
 
 type EventCallback = (data?: any, type?: string, isAsync?: boolean) => void
 
-// TODO (TOR) Refaktorer denne
+// TODO (TOR) Refaktorer denne (evt fjern. Trur kanskje ikkje ein treng denne lenger)
 
 /**
  * NotificationMapper
@@ -25,18 +25,18 @@ class NotificationMapper {
     [EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND]: [],
   };
 
-  private addEventHandler = (eventType: string, callback: EventCallback) => {
+  private addEventHandler = (eventType: string, callback: EventCallback): void => {
     this.eventTypes = {
       ...this.eventTypes,
       [eventType]: [callback],
     };
   }
 
-  public addRequestStartedEventHandler = (callback: EventCallback) => this.addEventHandler(EventType.REQUEST_STARTED, callback);
+  public addRequestStartedEventHandler = (callback: EventCallback): void => this.addEventHandler(EventType.REQUEST_STARTED, callback);
 
-  public addRequestFinishedEventHandler = (callback: EventCallback) => this.addEventHandler(EventType.REQUEST_FINISHED, callback);
+  public addRequestFinishedEventHandler = (callback: EventCallback): void => this.addEventHandler(EventType.REQUEST_FINISHED, callback);
 
-  public addRequestErrorEventHandlers = (callback: EventCallback) => {
+  public addRequestErrorEventHandlers = (callback: EventCallback): void => {
     this.addEventHandler(EventType.REQUEST_ERROR, callback);
     this.addEventHandler(EventType.REQUEST_FORBIDDEN, callback);
     this.addEventHandler(EventType.REQUEST_UNAUTHORIZED, callback);
@@ -45,13 +45,13 @@ class NotificationMapper {
     this.addEventHandler(EventType.POLLING_HALTED_OR_DELAYED, callback);
   };
 
-  public addStatusRequestStartedEventHandler = (callback: EventCallback) => this.addEventHandler(EventType.STATUS_REQUEST_STARTED, callback);
+  public addStatusRequestStartedEventHandler = (callback: EventCallback): void => this.addEventHandler(EventType.STATUS_REQUEST_STARTED, callback);
 
-  public addStatusRequestFinishedEventHandler = (callback: EventCallback) => this.addEventHandler(EventType.STATUS_REQUEST_FINISHED, callback);
+  public addStatusRequestFinishedEventHandler = (callback: EventCallback): void => this.addEventHandler(EventType.STATUS_REQUEST_FINISHED, callback);
 
-  public addUpdatePollingMessageEventHandler = (callback: EventCallback) => this.addEventHandler(EventType.UPDATE_POLLING_MESSAGE, callback);
+  public addUpdatePollingMessageEventHandler = (callback: EventCallback): void => this.addEventHandler(EventType.UPDATE_POLLING_MESSAGE, callback);
 
-  public getNotificationEmitter = () => (eventType: keyof typeof EventType, data?: any, isAsync?: boolean) => {
+  public getNotificationEmitter = () => (eventType: keyof typeof EventType, data?: any, isAsync?: boolean): void => {
     const eventHandlers = this.eventTypes[eventType];
     eventHandlers.forEach((handler) => handler(data, eventType, isAsync));
   }

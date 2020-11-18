@@ -17,7 +17,7 @@ export interface ReadOnlyFieldProps {
   alignRightCenterOnReadOnly?: boolean;
 }
 
-const hasValue = (value: string | number) => value !== undefined && value !== null && value !== '';
+const hasValue = (value: string | number): boolean => value !== undefined && value !== null && value !== '';
 
 export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
   label,
@@ -44,9 +44,7 @@ export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
 };
 
 ReadOnlyField.defaultProps = {
-  label: undefined,
   isEdited: false,
-  type: undefined,
   alignRightCenterOnReadOnly: false,
 };
 

@@ -32,6 +32,7 @@ export enum EsBehandlingApiKeys {
   VERGE_OPPRETT = 'VERGE_OPPRETT',
   VERGE_FJERN = 'VERGE_FJERN',
   UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
+  ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
 }
 
 const endpoints = new RestApiConfigBuilder()
@@ -54,6 +55,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soeker-verge', EsBehandlingApiKeys.VERGE)
   .withRel('sendt-varsel-om-revurdering', EsBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('utland-dok-status', EsBehandlingApiKeys.UTLAND_DOK_STATUS)
+  .withRel('arbeidsgivere-oversikt', EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', EsBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)

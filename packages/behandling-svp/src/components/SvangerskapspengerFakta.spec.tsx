@@ -65,6 +65,14 @@ describe('<SvangerskapspengerFakta>', () => {
     relatertTilgrensendeYtelserForAnnenForelder: [],
   };
 
+  const arbeidsgiverOpplysningerPerId = {
+    123: {
+      erPrivatPerson: false,
+      identifikator: 'testId',
+      navn: 'testNavn',
+    },
+  };
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -87,6 +95,7 @@ describe('<SvangerskapspengerFakta>', () => {
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -119,6 +128,7 @@ describe('<SvangerskapspengerFakta>', () => {
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -150,6 +160,7 @@ describe('<SvangerskapspengerFakta>', () => {
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 

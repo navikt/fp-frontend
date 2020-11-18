@@ -89,9 +89,11 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
     </Row>
 
     <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
+    <VerticalSpacer fourPx />
     <RadioGroupField
       name="trygderettVurdering.kode"
       validate={[required]}
+      direction="horizontal"
       readOnly={readOnly}
     >
       <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
@@ -101,8 +103,20 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
     </RadioGroupField>
     {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering?.kode && (
     <Row>
+      <Column xs="7" />
       <Column xs="7">
         <ArrowBox alignOffset={114}>
+          <SelectField
+            readOnly={readOnly}
+            name="trygderettOmgjoerArsak.kode"
+            selectValues={ankeOmgjorArsakRekkefolge
+              .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
+            className={readOnly ? styles.selectReadOnly : null}
+            label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
+            validate={[required]}
+            bredde="xl"
+          />
+          <VerticalSpacer sixteenPx />
           <RadioGroupField
             name="trygderettVurderingOmgjoer.kode"
             validate={[required]}
@@ -114,20 +128,27 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
             <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_UGUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Ugunst' }} />
             <RadioOption value={ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Delvis' }} />
           </RadioGroupField>
-          <VerticalSpacer fourPx />
-          <SelectField
-            readOnly={readOnly}
-            name="trygderettOmgjoerArsak.kode"
-            selectValues={ankeOmgjorArsakRekkefolge
-              .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
-            className={readOnly ? styles.selectReadOnly : null}
-            label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
-            validate={[required]}
-            bredde="xl"
-          />
         </ArrowBox>
       </Column>
     </Row>
+    )}
+    {ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === valgtTrygderettVurdering?.kode && (
+      <Row>
+        <Column xs="7">
+          <ArrowBox alignOffset={218}>
+            <SelectField
+              readOnly={readOnly}
+              name="trygderettOmgjoerArsak.kode"
+              selectValues={ankeOmgjorArsakRekkefolge
+                .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
+              className={readOnly ? styles.selectReadOnly : null}
+              label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
+              validate={[required]}
+              bredde="xl"
+            />
+          </ArrowBox>
+        </Column>
+      </Row>
     )}
 
     <VerticalSpacer sixteenPx />

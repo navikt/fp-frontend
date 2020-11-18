@@ -36,14 +36,14 @@ const Image: FunctionComponent<OwnProps> = ({
 }) => {
   const [isHovering, setHoovering] = useState(false);
 
-  const onFocus = useCallback(() => {
+  const onFocus = useCallback((): void => {
     setHoovering(true);
   }, []);
-  const onBlur = useCallback(() => {
+  const onBlur = useCallback((): void => {
     setHoovering(false);
   }, []);
 
-  const onKeyDownFn = useCallback((e) => {
+  const onKeyDownFn = useCallback((e: React.KeyboardEvent): void => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (onKeyDown) {
         onKeyDown(e);

@@ -2,12 +2,12 @@ import OpplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdress
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { PersonopplysningAdresse } from '@fpsak-frontend/types';
 
-// TODO (TOR) Flytt ut av util-folder (lag selector)
+// TODO (TOR) Flytt ut av util-folder
 
 /**
  * personUtils
  *
- * Utils klasse med diverse støttefunksjoner til person komponentene
+ * Diverse støttefunksjoner til person komponentene
  */
 
 const emptyIfnull = (text?: string): string => (text == null ? '' : text);
@@ -22,7 +22,7 @@ const constructAddress = (
 export type Adresser = {[key in OpplysningAdresseType]?: string}
 
 const getAddresses = (addresses: PersonopplysningAdresse[] = []): Adresser => addresses.reduce<Adresser>((acc, address) => {
-  if (address.adresseType.kode === OpplysningAdresseType.UKJENT) {
+  if (!address.adresseType || address.adresseType.kode === OpplysningAdresseType.UKJENT) {
     return {
       ...acc,
       [OpplysningAdresseType.BOSTEDSADRESSE]: 'UKJENT',

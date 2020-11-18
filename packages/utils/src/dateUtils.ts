@@ -6,8 +6,14 @@ import {
 
 export const TIDENES_ENDE = '9999-12-31';
 
+type WeekAndDay = {
+  id: string;
+  weeks?: number;
+  days?: number;
+}
+
 // TODO Denne funksjonen må ut ifrå utils. Dette er uttakslogikk
-const checkDays = (weeks, days) => {
+const checkDays = (weeks?: number, days?: number): WeekAndDay => {
   const weeksDaysObj = {
     weeks,
     days,
@@ -73,7 +79,7 @@ export const calcDays = (fraDatoPeriode: string, tilDatoPeriode: string, notWeek
   return numOfDays;
 };
 
-export const calcDaysAndWeeks = (fraDatoPeriode: string, tilDatoPeriode: string) => {
+export const calcDaysAndWeeks = (fraDatoPeriode: string, tilDatoPeriode: string): WeekAndDay => {
   const numOfDays = calcDays(fraDatoPeriode, tilDatoPeriode);
 
   const weeks = Math.floor(numOfDays / 5);
@@ -82,7 +88,7 @@ export const calcDaysAndWeeks = (fraDatoPeriode: string, tilDatoPeriode: string)
   return checkDays(weeks, days);
 };
 
-export const calcDaysAndWeeksWithWeekends = (fraDatoPeriode: string, tilDatoPeriode: string) => {
+export const calcDaysAndWeeksWithWeekends = (fraDatoPeriode: string, tilDatoPeriode: string): WeekAndDay => {
   const notWeekends = false;
 
   const numOfDays = calcDays(fraDatoPeriode, tilDatoPeriode, notWeekends);
@@ -93,27 +99,16 @@ export const calcDaysAndWeeksWithWeekends = (fraDatoPeriode: string, tilDatoPeri
   return checkDays(weeks, days);
 };
 
-export const splitWeeksAndDays = (weeks, days) => {
-  const returnArray = [];
-  const allDays = weeks ? (weeks * 5) + days : days;
-  const firstPeriodDays = allDays % 2 === 0 ? allDays / 2 : (allDays / 2) + 0.5;
-  const secondPeriodDays = allDays % 2 === 0 ? allDays / 2 : (allDays / 2) - 0.5;
-  const firstPeriodWeeksAndDays = { weeks: Math.trunc(firstPeriodDays / 5), days: firstPeriodDays % 5 };
-  const secondPeriodWeeksAndDays = { weeks: Math.trunc(secondPeriodDays / 5), days: secondPeriodDays % 5 };
-  returnArray.push(secondPeriodWeeksAndDays, firstPeriodWeeksAndDays);
-  return returnArray;
-};
+export const dateFormat = (date: Date | string): string => moment(date).format(DDMMYYYY_DATE_FORMAT);
 
-export const dateFormat = (date) => moment(date).format(DDMMYYYY_DATE_FORMAT);
-
-export const timeFormat = (date) => moment(date).format(HHMM_TIME_FORMAT);
+export const timeFormat = (date: string): string => moment(date).format(HHMM_TIME_FORMAT);
 
 // Skal ikke legge til dag når dato er tidenes ende
-export const addDaysToDate = (dateString: string, nrOfDays: number) => (dateString === TIDENES_ENDE
+export const addDaysToDate = (dateString: string, nrOfDays: number): string => (dateString === TIDENES_ENDE
   ? dateString
   : moment(dateString, ISO_DATE_FORMAT).add(nrOfDays, 'days').format(ISO_DATE_FORMAT));
 
-export const findDifferenceInMonthsAndDays = (fomDate, tomDate) => {
+export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string): { months: number; days: number; } | undefined => {
   const fDate = moment(fomDate, ISO_DATE_FORMAT, true);
   const tDate = moment(tomDate, ISO_DATE_FORMAT, true).add(1, 'days');
   if (!fDate.isValid() || !tDate.isValid() || fDate.isAfter(tDate)) {

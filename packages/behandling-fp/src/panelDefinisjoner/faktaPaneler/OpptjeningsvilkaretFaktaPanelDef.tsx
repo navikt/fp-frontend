@@ -6,8 +6,13 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
+import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
+
+type Data = {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
 
 class OpptjeningsvilkaretFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.OPPTJENINGSVILKARET
@@ -24,6 +29,10 @@ class OpptjeningsvilkaretFaktaPanelDef extends FaktaPanelDef {
     && vilkar.some(
       (v) => v.vilkarType.kode === vilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus.kode === vilkarUtfallType.OPPFYLT,
     )
+
+  getData = ({ arbeidsgiverOpplysningerPerId }): Data => ({
+    arbeidsgiverOpplysningerPerId,
+  })
 }
 
 export default OpptjeningsvilkaretFaktaPanelDef;

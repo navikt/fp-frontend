@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import { FieldArrayFieldsProps } from 'redux-form';
 import { intlMock, mountWithIntl } from './intl-enzyme-test-helper';
 
 function noop() {
@@ -24,6 +25,7 @@ export const metaMock = {
   dispatch: noop,
   error: null,
   form: 'mockForm',
+  initial: {},
   invalid: false,
   pristine: false,
   submitting: false,
@@ -81,8 +83,40 @@ export const reduxFormPropsMock = Object.assign(metaMock, {
   initialValues: {},
 });
 
-export class MockFields {
-  constructor(name, len) {
+export class MockFields implements FieldArrayFieldsProps<any> {
+  array: any[];
+
+  push: () => void;
+
+  pop: () => any;
+
+  map: () => any[];
+
+  forEach: () => undefined;
+
+  getAll: () => undefined;
+
+  removeAll: () => undefined;
+
+  insert: () => undefined;
+
+  name: string;
+
+  shift: () => undefined;
+
+  splice: () => undefined;
+
+  swap: () => undefined;
+
+  move: () => undefined;
+
+  unshift: () => undefined;
+
+  get: (index: any) => any;
+
+  remove: (index: any) => any[];
+
+  constructor(name?: string, len?: number) {
     const formatName = (index) => `${name}[${index}]`;
     const array = [...new Array(len).keys()].map(formatName); // NOSONAR
 
@@ -104,7 +138,6 @@ export class MockFields {
 
     this.get = (index) => array[index];
 
-    this.get = (index) => array[index];
     this.remove = (index) => array.splice(index, 1);
   }
 
@@ -113,7 +146,41 @@ export class MockFields {
   }
 }
 
-export class MockFieldsWithContent {
+export class MockFieldsWithContent implements FieldArrayFieldsProps<any> {
+  fields: [];
+
+  array: any[];
+
+  push: () => void;
+
+  pop: () => any;
+
+  map: () => any[];
+
+  forEach: () => undefined;
+
+  getAll: () => undefined;
+
+  removeAll: () => undefined;
+
+  insert: () => undefined;
+
+  name: string;
+
+  shift: () => undefined;
+
+  splice: () => undefined;
+
+  swap: () => undefined;
+
+  move: () => undefined;
+
+  unshift: () => undefined;
+
+  get: (index: any) => any;
+
+  remove: (index: any) => any[];
+
   constructor(name, array) {
     const formatName = (index) => `${name}[${index}]`;
     this.fields = array;

@@ -127,6 +127,9 @@ const lagTableRow = (
       && (
         <>
           <DateLabel dateString={aktivitet.fom} />
+          {' '}
+          -
+          {' '}
           <DatepickerField
             name={`${lagAktivitetFieldId(aktivitet)}.tom`}
             validate={[required]}

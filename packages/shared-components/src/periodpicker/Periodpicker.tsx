@@ -1,17 +1,12 @@
 import React, { ReactNode, Component } from 'react';
 import moment from 'moment';
 import { Input } from 'nav-frontend-skjema';
-import { DateUtils } from 'react-day-picker';
+import { DateUtils, Modifier } from 'react-day-picker';
 import { DDMMYYYY_DATE_FORMAT, haystack } from '@fpsak-frontend/utils';
 import CalendarToggleButton from '../datepicker/CalendarToggleButton';
 import PeriodCalendarOverlay from './PeriodCalendarOverlay';
 
 import styles from './periodpicker.less';
-
-const getStartDateInput = (props) => haystack(props, props.names[0]).input;
-const getEndDateInput = (props) => haystack(props, props.names[1]).input;
-const isValidDate = (date) => moment(date, DDMMYYYY_DATE_FORMAT, true).isValid();
-const createPeriod = (startDay, endDay) => `${moment(startDay).format(DDMMYYYY_DATE_FORMAT)} - ${moment(endDay).format(DDMMYYYY_DATE_FORMAT)}`;
 
 interface OwnProps {
   names: string[];
@@ -19,10 +14,7 @@ interface OwnProps {
   placeholder?: string;
   feil?: string;
   disabled?: boolean;
-  disabledDays: {
-    before: Date;
-    after?: Date;
-  };
+  disabledDays?: Modifier | Modifier[];
   hideLabel?: boolean;
 }
 
@@ -33,8 +25,14 @@ interface StateProps {
   inputOffsetWidth?: number;
 }
 
+const getStartDateInput = (props: OwnProps) => haystack(props, props.names[0]).input;
+const getEndDateInput = (props: OwnProps) => haystack(props, props.names[1]).input;
+const isValidDate = (date: Date): boolean => moment(date, DDMMYYYY_DATE_FORMAT, true).isValid();
+const createPeriod = (startDay: Date, endDay: Date): string => `${moment(startDay)
+  .format(DDMMYYYY_DATE_FORMAT)} - ${moment(endDay).format(DDMMYYYY_DATE_FORMAT)}`;
+
 class Periodpicker extends Component<OwnProps, StateProps> {
-  buttonRef: HTMLDivElement;
+  buttonRef: HTMLButtonElement;
 
   inputRef: HTMLDivElement;
 
@@ -43,10 +41,9 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     placeholder: 'dd.mm.åååå - dd.mm.åååå',
     feil: null,
     disabled: false,
-    disabledDays: {},
   };
 
-  constructor(props) {
+  constructor(props: OwnProps) {
     super(props);
     this.handleInputRef = this.handleInputRef.bind(this);
     this.handleButtonRef = this.handleButtonRef.bind(this);
@@ -72,21 +69,21 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     };
   }
 
-  handleButtonRef(buttonRef) {
+  handleButtonRef(buttonRef: HTMLButtonElement): void {
     if (buttonRef) {
       this.buttonRef = buttonRef;
       this.handleUpdatedRefs();
     }
   }
 
-  handleInputRef(inputRef) {
+  handleInputRef(inputRef: HTMLDivElement): void {
     if (inputRef) {
       this.inputRef = inputRef;
       this.handleUpdatedRefs();
     }
   }
 
-  handleUpdatedRefs() {
+  handleUpdatedRefs(): void {
     const { inputRef, buttonRef } = this;
     if (inputRef) {
       this.setState({
@@ -99,7 +96,7 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     }
   }
 
-  handleDayChange(selectedDay) {
+  handleDayChange(selectedDay: Date): void {
     if (!isValidDate(selectedDay)) {
       return;
     }
@@ -138,33 +135,34 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     }
   }
 
-  onChange(e) {
+  onChange(e: React.ChangeEvent): void {
+    // @ts-ignore Fiks
     this.setState({ period: e.target.value });
     getStartDateInput(this.props).onChange(e);
     getEndDateInput(this.props).onChange(e);
   }
 
-  onBlur(e) {
+  onBlur(e: React.FocusEvent): void {
     getStartDateInput(this.props).onBlur(e);
     getEndDateInput(this.props).onBlur(e);
   }
 
-  parseToDate(name) {
+  parseToDate(name: string): Date {
     const nameFromProps = haystack(this.props, name);
     const day = nameFromProps.input.value;
     return isValidDate(day) ? moment(day, DDMMYYYY_DATE_FORMAT).toDate() : null;
   }
 
-  toggleShowCalendar() {
+  toggleShowCalendar(): void {
     const { showCalendar } = this.state;
     this.setState({ showCalendar: !showCalendar });
   }
 
-  hideCalendar() {
+  hideCalendar(): void {
     this.setState({ showCalendar: false });
   }
 
-  elementIsCalendarButton(element) {
+  elementIsCalendarButton(element: EventTarget): boolean {
     return element === this.buttonRef;
   }
 

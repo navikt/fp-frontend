@@ -5,13 +5,9 @@ import AbstractRequestApi from './src/requestApi/AbstractRequestApi';
 import RequestApiMock from './src/requestApi/RequestApiMock';
 
 export { default as RequestApi } from './src/requestApi/RequestApi';
-export { default as AbstractRequestApi } from './src/requestApi/AbstractRequestApi';
-export { default as RequestConfig } from './src/RequestConfig';
-export { default as NotificationMapper } from './src/requestApi/NotificationMapper';
 export { REQUEST_POLLING_CANCELLED } from './src/requestApi/RequestRunner';
-export { default as asyncPollingStatus } from './src/requestApi/asyncPollingStatus';
 export { default as RestApiConfigBuilder } from './src/RestApiConfigBuilder';
-export { default as getAxiosHttpClientApi } from './src/axios/getAxiosHttpClientApi';
+export { default as AbstractRequestApi } from './src/requestApi/AbstractRequestApi';
 export { ErrorTypes, errorOfType, getErrorResponseData } from './src/requestApi/error/ErrorTypes';
 export { default as ErrorType } from './src/requestApi/error/errorTsType';
 export type { default as Link } from './src/requestApi/LinkTsType';

@@ -6,9 +6,9 @@ import { ErrorResponse } from '../ResponseTsType';
 
 type NotificationEmitter = (eventType: keyof typeof EventType, data?: any, isPollingRequest?: boolean) => void
 
-const isString = (value) => typeof value === 'string';
+const isString = (value: any): boolean => typeof value === 'string';
 
-const isOfTypeBlob = (error) => error && error.config && error.config.responseType === 'blob';
+const isOfTypeBlob = (error: ErrorType): boolean => error && error.config && error.config.responseType === 'blob';
 
 const blobParser = (blob: any): Promise<string> => {
   const fileReader = new FileReader();
