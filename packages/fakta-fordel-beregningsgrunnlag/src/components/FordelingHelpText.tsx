@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import moment from 'moment';
@@ -8,7 +7,10 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { createVisningsnavnForAktivitet } from './util/visningsnavnHelper';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
 
 const {
   FORDEL_BEREGNINGSGRUNNLAG,
@@ -151,10 +153,28 @@ const lagHelpTextsFordelBG = (endredeArbeidsforhold, getKodeverknavn) => {
   return helpTexts;
 };
 
+type MappedOwnProps = {
+  helpText: React.ReactElement[];
+}
+
+type OwnProps = {
+    isAksjonspunktClosed: boolean;
+};
+
+type OwnInitialProps = {
+  beregningsgrunnlag: Beregningsgrunnlag;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  aksjonspunkter: Aksjonspunkt[];
+}
+
+export const FordelingHelpTextImpl: FunctionComponent<OwnProps & MappedOwnProps & OwnInitialProps> = ({ helpText, isAksjonspunktClosed }) => (
+  <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed}>{helpText}</AksjonspunktHelpTextTemp>
+);
+
 export const getHelpTextsFordelBG = createSelector(
-  [(ownProps) => ownProps.beregningsgrunnlag,
-    (ownProps) => ownProps.alleKodeverk,
-    (ownProps) => ownProps.aksjonspunkter],
+  [(ownProps: OwnInitialProps) => ownProps.beregningsgrunnlag,
+    (ownProps: OwnInitialProps) => ownProps.alleKodeverk,
+    (ownProps: OwnInitialProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag, alleKodeverk, aksjonspunkter) => {
     const fordelBG = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag;
     const endredeArbeidsforhold = fordelBG ? fordelBG.arbeidsforholdTilFordeling : [];
@@ -164,19 +184,7 @@ export const getHelpTextsFordelBG = createSelector(
   },
 );
 
-export const FordelingHelpTextImpl = ({
-  helpText,
-  isAksjonspunktClosed,
-}) => (
-  <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed}>{helpText}</AksjonspunktHelpTextTemp>
-);
-
-FordelingHelpTextImpl.propTypes = {
-  isAksjonspunktClosed: PropTypes.bool.isRequired,
-  helpText: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps: OwnInitialProps) => ({
   helpText: getHelpTextsFordelBG(ownProps),
 });
 

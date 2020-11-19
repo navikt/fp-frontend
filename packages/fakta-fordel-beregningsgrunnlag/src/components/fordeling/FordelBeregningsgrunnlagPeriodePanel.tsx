@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FieldArray } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
@@ -10,9 +9,14 @@ import {
   DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT,
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
-import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
-
-import RenderFordelBGFieldArray from './RenderFordelBGFieldArray';
+import {
+  BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp,
+  FordelBeregningsgrunnlagPeriode,
+  Kodeverk,
+  KodeverkMedNavn,
+} from '@fpsak-frontend/types';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import RenderFordelBGFieldArray, { RenderFordelBGFieldArrayImpl } from './RenderFordelBGFieldArray';
 import {
   settAndelIArbeid, setGenerellAndelsinfo, setArbeidsforholdInitialValues, settFastsattBelop, starterPaaEllerEtterStp, finnFastsattPrAar,
 } from '../BgFordelingUtils';
@@ -44,13 +48,45 @@ const renderDateHeading = (fom, tom) => {
   );
 };
 
+type OwnProps = {
+    readOnly: boolean;
+    fordelBGFieldArrayName: string;
+    fom: string;
+    tom?: string;
+    open?: boolean;
+    skalRedigereInntekt: boolean;
+    isAksjonspunktClosed: boolean;
+    showPanel: (...args: any[]) => any;
+    beregningsgrunnlag: Beregningsgrunnlag;
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    behandlingType: Kodeverk;
+};
+
+interface StaticFunctions {
+  validate: (values: any,
+             sumIPeriode: number,
+             skalValidereMotBeregningsgrunnlagPrAar: (andel: BeregningsgrunnlagAndel) => boolean,
+             getKodeverknavn: (kodeverk: Kodeverk) => string,
+             grunnbeløp: number,
+             periodeDato: {
+              fom: string;
+              tom: string;
+             },
+             skalValidereRefusjon: boolean) => any;
+  buildInitialValues: (periode: FordelBeregningsgrunnlagPeriode,
+                       bgPeriode: BeregningsgrunnlagPeriodeProp,
+                       skjaeringstidspunktBeregning: string,
+                       harKunYtelse: boolean,
+                       getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
+}
+
 /**
  * FordelBeregningsgrunnlagPeriodePanel
  *
  * Presentasjonskomponent. Viser ekspanderbart panel for perioder i nytt/endret beregningsgrunnlag
  */
 
-const FordelBeregningsgrunnlagPeriodePanel = ({
+const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   fordelBGFieldArrayName,
   fom,
@@ -82,27 +118,13 @@ const FordelBeregningsgrunnlagPeriodePanel = ({
   </EkspanderbartpanelBase>
 );
 
-FordelBeregningsgrunnlagPeriodePanel.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  fordelBGFieldArrayName: PropTypes.string.isRequired,
-  fom: PropTypes.string.isRequired,
-  tom: PropTypes.string,
-  open: PropTypes.bool,
-  skalRedigereInntekt: PropTypes.bool.isRequired,
-  isAksjonspunktClosed: PropTypes.bool.isRequired,
-  showPanel: PropTypes.func.isRequired,
-  beregningsgrunnlag: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  behandlingType: kodeverkObjektPropType.isRequired,
-};
-
 FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
   open: null,
   tom: null,
 };
 
 FordelBeregningsgrunnlagPeriodePanel.validate = (values, sumIPeriode, skalValidereMotRapportert,
-  getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon) => RenderFordelBGFieldArray
+  getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon) => RenderFordelBGFieldArrayImpl
   .validate(values, sumIPeriode, skalValidereMotRapportert, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
 
 const finnRiktigAndel = (andel, bgPeriode) => bgPeriode.beregningsgrunnlagPrStatusOgAndel.find((a) => a.andelsnr === andel.andelsnr);
@@ -147,7 +169,7 @@ FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode, bgPeriode, s
           nyttArbeidsforhold: andel.nyttArbeidsforhold || starterPaaEllerEtterStp(bgAndel, skjaeringstidspunktBeregning),
           beregningsgrunnlagPrAar: finnBeregningsgrunnlagPrAar(bgAndel),
           forrigeRefusjonPrAar: andel.refusjonskravPrAar,
-          forrigeArbeidsinntektPrAar: finnFastsattPrAar(andel.fordeltPrAar, periode.skalPreutfyllesMedBeregningsgrunnlag),
+          forrigeArbeidsinntektPrAar: finnFastsattPrAar(andel.fordeltPrAar),
           beregningsperiodeFom: bgAndel.beregningsperiodeFom,
           beregningsperiodeTom: bgAndel.beregningsperiodeTom,
         });

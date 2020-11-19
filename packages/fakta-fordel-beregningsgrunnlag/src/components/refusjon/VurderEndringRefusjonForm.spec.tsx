@@ -9,7 +9,7 @@ const lagAndel = (agNavn, agOrgnr, arbId, dato) => ({
     kode: 'AT',
   },
   nyttRefusjonskravFom: dato,
-  arbeidsgiverId: {
+  arbeidsgiver: {
     arbeidsgiverOrgnr: agOrgnr,
   },
   arbeidsgiverNavn: agNavn,

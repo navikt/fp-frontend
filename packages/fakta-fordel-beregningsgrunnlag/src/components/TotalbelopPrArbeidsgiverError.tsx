@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
-import { createVisningsnavnForAktivitet } from './util/visningsnavnHelper';
+import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
 
 export const AAP_ARBEIDSGIVER_KEY = 'AAP_ARBEIDSGIVER_GRUNNLAG';
 
@@ -72,14 +71,23 @@ const aapOgRefusjonValidering = (value) => (
   </div>
 );
 
+type OwnProps = {
+    totalInntektPrArbeidsforhold: {
+        key?: string;
+        fastsattBelop?: number;
+        beregningsgrunnlagPrAar?: number;
+        registerInntekt?: number;
+        belopFraInntektsmelding?: number;
+        notBeforeStp?: boolean;
+    }[];
+};
+
 /**
  *  TotalbelopPrArbeidsgiverError
  *
  * Presentasjonskomponent: Viser error for fastsatt totalbeløp for arbeidsgivere
  */
-const TotalbelopPrArbeidsgiverError = ({
-  totalInntektPrArbeidsforhold,
-}) => {
+const TotalbelopPrArbeidsgiverError: FunctionComponent<OwnProps> = ({ totalInntektPrArbeidsforhold }) => {
   const valideringList = totalInntektPrArbeidsforhold.filter(({ fastsattBelop, beregningsgrunnlagPrAar }) => fastsattBelop > beregningsgrunnlagPrAar);
   return (
     <div>
@@ -87,18 +95,6 @@ const TotalbelopPrArbeidsgiverError = ({
         ? aapOgRefusjonValidering(v) : arbeidsforholdValidering(v)))}
     </div>
   );
-};
-
-TotalbelopPrArbeidsgiverError.propTypes = {
-  totalInntektPrArbeidsforhold: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string,
-      fastsattBelop: PropTypes.number,
-      registerInntekt: PropTypes.number,
-      belopFraInntektsmelding: PropTypes.number,
-      notBeforeStp: PropTypes.bool,
-    }),
-  ).isRequired,
 };
 
 export default TotalbelopPrArbeidsgiverError;
