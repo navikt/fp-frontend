@@ -16,7 +16,7 @@ const visningsnavn = (andel) => {
 };
 
 const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling) => (
-  <Row className={styles.correctPadding}>
+  <Row className={styles.correctPadding} key={`${andelsnavn}_(${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {utbetaling && utbetaling.erTildeltRefusjon
         ? <Normaltekst>{andelsnavn}</Normaltekst>
@@ -39,7 +39,7 @@ const lagPeriode = (utbetaling) => {
 };
 
 const perioder = (utbetalinger) => utbetalinger.map((utbetaling) => (
-  <Row className={styles.correctPadding}>
+  <Row className={styles.correctPadding} key={`${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {lagPeriode(utbetaling)}
     </Column>

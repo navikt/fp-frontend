@@ -54,7 +54,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktÅpent}>
-        {[<FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" />]}
+        {[<FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" key="aksjonspunktText" />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
       <form onSubmit={formProps.handleSubmit}>
