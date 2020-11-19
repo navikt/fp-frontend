@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { createSelector } from 'reselect';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
 const arbeidsforholdEksistererIListen = (arbeidsforhold, arbeidsgiverList) => {
   if (arbeidsforhold.arbeidsforholdId === null) {
@@ -12,7 +12,7 @@ const finnBgAndelMedSammeArbeidsforhold = (bgAndeler, andel) => bgAndeler.find((
 && arbeidsforhold.arbeidsgiverId === andel.arbeidsforhold.arbeidsgiverId
 && arbeidsforhold.arbeidsforholdId === andel.arbeidsforhold.arbeidsforholdId);
 
-export const getUniqueListOfArbeidsforholdFromAndeler = (andeler, bgAndeler) => {
+const getUniqueListOfArbeidsforholdFromAndeler = (andeler, bgAndeler) => {
   const arbeidsgiverList = [];
   if (andeler === undefined) {
     return arbeidsgiverList;
@@ -46,8 +46,12 @@ const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder, bgPerioder) =
   finnAndelerFraBgperioder(bgPerioder),
 );
 
-export const getUniqueListOfArbeidsforhold = createSelector(
-  [(props) => props.beregningsgrunnlag],
+type SelectorProps = {
+  beregningsgrunnlag: Beregningsgrunnlag;
+}
+
+const getUniqueListOfArbeidsforhold = createSelector(
+  [(props: SelectorProps) => props.beregningsgrunnlag],
   (beregningsgrunnlag) => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
@@ -55,32 +59,4 @@ export const getUniqueListOfArbeidsforhold = createSelector(
   },
 );
 
-export const getUniqueListOfArbeidsforholdFields = (fields) => {
-  const arbeidsgiverList = [];
-  if (fields === undefined) {
-    return arbeidsgiverList;
-  }
-  for (let index = 0; index < fields.length; index += 1) {
-    const field = fields.get(index);
-    if (field.arbeidsforhold && !arbeidsforholdEksistererIListen(field, arbeidsgiverList)) {
-      const arbeidsforholdObject = {
-        andelsnr: field.andelsnr,
-        arbeidsforholdId: field.arbeidsforholdId,
-        arbeidsgiverId: field.arbeidsgiverId,
-        arbeidsgiverNavn: field.arbeidsgiverNavn,
-        arbeidsperiodeFom: field.arbeidsperiodeFom,
-        arbeidsperiodeTom: field.arbeidsperiodeTom,
-      };
-      arbeidsgiverList.push(arbeidsforholdObject);
-    }
-  }
-  return arbeidsgiverList;
-};
-
-export const arbeidsforholdProptype = PropTypes.shape({
-  arbeidsgiverNavn: PropTypes.string,
-  arbeidsgiverId: PropTypes.string,
-  startdato: PropTypes.string,
-  opphoersdato: PropTypes.string,
-  arbeidsforholdId: PropTypes.string,
-});
+export default getUniqueListOfArbeidsforhold;

@@ -1,14 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { kodeverkObjektPropType } from '@fpsak-frontend/prop-types';
+import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
+import {
+  BeregningsgrunnlagPeriodeProp,
+  FordelBeregningsgrunnlagPeriode,
+  KodeverkMedNavn,
+} from '@fpsak-frontend/types';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import FordelBeregningsgrunnlagForm from './FordelBeregningsgrunnlagForm';
 
-export const FastsettFordeltBeregningsgrunnlagImpl = ({
+type OwnProps = {
+    readOnly: boolean;
+    perioder: FordelBeregningsgrunnlagPeriode[];
+    isAksjonspunktClosed: boolean;
+    bgPerioder: BeregningsgrunnlagPeriodeProp[];
+    beregningsgrunnlag: Beregningsgrunnlag;
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    behandlingType: Kodeverk;
+};
+
+interface StaticFunctions {
+  buildInitialValues: (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bg: Beregningsgrunnlag, getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
+  transformValues: (values: any, fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bgPerioder: BeregningsgrunnlagPeriodeProp[]) => any;
+  validate: (values: any,
+             fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+             beregningsgrunnlag: Beregningsgrunnlag,
+             getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
+}
+
+export const FastsettFordeltBeregningsgrunnlagImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
   isAksjonspunktClosed,
   readOnly,
-  perioder,
-  bgPerioder,
+  perioder, bgPerioder,
   beregningsgrunnlag,
   alleKodeverk,
   behandlingType,
@@ -33,16 +56,6 @@ FastsettFordeltBeregningsgrunnlagImpl.transformValues = (values, fordelBGPeriode
 FastsettFordeltBeregningsgrunnlagImpl.validate = (values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn) => (
   FordelBeregningsgrunnlagForm
     .validate(values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn));
-
-FastsettFordeltBeregningsgrunnlagImpl.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  perioder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  isAksjonspunktClosed: PropTypes.bool.isRequired,
-  bgPerioder: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  beregningsgrunnlag: PropTypes.shape().isRequired,
-  alleKodeverk: PropTypes.shape().isRequired,
-  behandlingType: kodeverkObjektPropType.isRequired,
-};
 
 const emptyArray = [];
 

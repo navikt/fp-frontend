@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Table } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 
-import beregningsgrunnlagPropType from '../../propTypes/beregningsgrunnlagPropType';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import styles from './tidligereUtbetalinger.less';
 import TidligereUtbetalingRad from './TidligereUtbetalingRad';
 
-export const TidligereUtbetalinger = ({
-  beregningsgrunnlag,
-}) => {
+type OwnProps = {
+    beregningsgrunnlag: Beregningsgrunnlag;
+};
+
+export const TidligereUtbetalinger: FunctionComponent<OwnProps> = ({ beregningsgrunnlag }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
   return (
     <>
@@ -23,7 +25,6 @@ export const TidligereUtbetalinger = ({
             { andeler.map((andel) => (
               <TidligereUtbetalingRad
                 refusjonAndel={andel}
-                readOnly
                 key={andel.arbeidsgiverNavn}
               />
             ))}
@@ -32,9 +33,6 @@ export const TidligereUtbetalinger = ({
       </Row>
     </>
   );
-};
-TidligereUtbetalinger.propTypes = {
-  beregningsgrunnlag: beregningsgrunnlagPropType.isRequired,
 };
 
 export default TidligereUtbetalinger;

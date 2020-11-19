@@ -13,7 +13,7 @@ import {
 } from './FordelBeregningsgrunnlagForm';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 
-const getKodeverknavn = () => ({});
+const getKodeverknavn = (kodeverk) => (kodeverk.kode === 'A' ? 'Arbeidstaker' : '');
 
 const andel1 = {
   andelsnr: 1,
@@ -159,6 +159,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
 
     const bt = {
       kode: 'BT-003',
+      kodeverk: 'test',
     };
 
     const wrapper = shallow(<FordelBeregningsgrunnlagForm
@@ -520,7 +521,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPrStatusOgAndel: [],
       },
       {
-        periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+        periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV, kodeverk: 'test' }],
         beregningsgrunnlagPeriodeFom: '2018-07-02',
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
@@ -531,6 +532,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
   });
 
   it('skal mappe andel til fastsatte verdier uten endring i refusjon', () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const fastsatteVerdier = mapTilFastsatteVerdier(andel2);
     expect(fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
     expect(fastsatteVerdier.refusjonPrÅr).to.equal(null);
@@ -539,6 +541,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
 
   it('skal mappe andel til fastsatte verdier med endring i refusjon', () => {
     const andel = { ...andel2, skalKunneEndreRefusjon: true };
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const fastsatteVerdier = mapTilFastsatteVerdier(andel);
     expect(fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
     expect(fastsatteVerdier.refusjonPrÅr).to.equal(10000);

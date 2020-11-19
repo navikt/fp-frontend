@@ -1,6 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { formPropTypes } from 'redux-form';
+import React, { FunctionComponent } from 'react';
+import { InjectedFormProps } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -9,8 +8,8 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm } from '@fpsak-frontend/form';
-import fordelBeregningsgrunnlagAksjonspunkterPropType from '../../propTypes/fordelBeregningsgrunnlagAksjonspunkterPropType';
-import beregningsgrunnlagPropType from '../../propTypes/beregningsgrunnlagPropType';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
 import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
 
@@ -23,7 +22,23 @@ const {
 
 const finnAksjonspunkt = (aksjonspunkter) => (aksjonspunkter ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_REFUSJON_BERGRUNN) : undefined);
 
-export const VurderEndringRefusjonFormImpl = ({
+interface MappedOwnProps {
+  initialValues: any;
+  onSubmit: (formValues: any) => void;
+}
+
+type OwnProps = {
+    submitCallback: (...args: any[]) => any;
+    readOnly: boolean;
+    submittable: boolean;
+    submitEnabled: boolean;
+    behandlingId: number;
+    behandlingVersjon: number;
+    beregningsgrunnlag?: Beregningsgrunnlag;
+    aksjonspunkter: Aksjonspunkt[];
+};
+
+export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedOwnProps & InjectedFormProps> = ({
   submitEnabled,
   submittable,
   readOnly,
@@ -39,7 +54,7 @@ export const VurderEndringRefusjonFormImpl = ({
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktÅpent}>
-        <FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" />
+        {[<FormattedMessage id="BeregningInfoPanel.RefusjonBG.Aksjonspunkt" key="aksjonspunktText" />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
       <form onSubmit={formProps.handleSubmit}>
@@ -58,7 +73,6 @@ export const VurderEndringRefusjonFormImpl = ({
           <VerticalSpacer twentyPx />
           <FaktaBegrunnelseTextField
             name={BEGRUNNELSE_FIELD}
-            isDirty={formProps.dirty}
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={!!(ap && ap.begrunnelse)}
@@ -102,18 +116,6 @@ export const transformValues = (values, bg) => {
     kode: VURDER_REFUSJON_BERGRUNN,
     fastsatteAndeler: transformedAndeler,
   };
-};
-
-VurderEndringRefusjonFormImpl.propTypes = {
-  submitCallback: PropTypes.func.isRequired,
-  readOnly: PropTypes.bool.isRequired,
-  submittable: PropTypes.bool.isRequired,
-  submitEnabled: PropTypes.bool.isRequired,
-  behandlingId: PropTypes.number.isRequired,
-  behandlingVersjon: PropTypes.number.isRequired,
-  beregningsgrunnlag: beregningsgrunnlagPropType,
-  aksjonspunkter: PropTypes.arrayOf(fordelBeregningsgrunnlagAksjonspunkterPropType).isRequired,
-  ...formPropTypes,
 };
 
 const mapStateToProps = (initialState, initialProps) => {

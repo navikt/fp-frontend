@@ -36,8 +36,8 @@ const lagArbeidstakerAndelEtterStp = (andelsnr, lagtTilAvSaksbehandler, fordelin
   beregnetPrAar, fordeltPrAar, refusjonskravPrAar, belopFraInntektsmeldingPrAar,
   refusjonskravFraInntektsmeldingPrAar, andelIArbeid) => ({
   arbeidsforhold: arbeidsforholdEtterStp,
-  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, navn: 'Arbeidstaker' },
-  inntektskategori: { kode: 'ARBEIDSTAKER' },
+  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, navn: 'Arbeidstaker', kodeverk: 'test' },
+  inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
   andelIArbeid,
   andelsnr,
   lagtTilAvSaksbehandler,
@@ -67,8 +67,8 @@ const lagArbeidstakerAndel = (andelsnr, lagtTilAvSaksbehandler, fordelingForrige
   beregnetPrAar, fordeltPrAar, refusjonskravPrAar, belopFraInntektsmeldingPrAar,
   refusjonskravFraInntektsmeldingPrAar, andelIArbeid) => ({
   arbeidsforhold,
-  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, navn: 'Arbeidstaker' },
-  inntektskategori: { kode: 'ARBEIDSTAKER' },
+  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, navn: 'Arbeidstaker', kodeverk: 'test' },
+  inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
   andelIArbeid,
   andelsnr,
   lagtTilAvSaksbehandler,
@@ -83,8 +83,8 @@ const lagArbeidstakerAndel = (andelsnr, lagtTilAvSaksbehandler, fordelingForrige
 const lagSNAndel = (andelsnr, lagtTilAvSaksbehandler, fordelingForrigeBehandlingPrAar,
   beregnetPrAar, fordeltPrAar, andelIArbeid) => ({
   arbeidsforhold,
-  aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, navn: 'Selvstendig næringsdrivende' },
-  inntektskategori: { kode: 'SN' },
+  aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, navn: 'Selvstendig næringsdrivende', kodeverk: 'test' },
+  inntektskategori: { kode: 'SN', kodeverk: 'test' },
   andelIArbeid,
   andelsnr,
   lagtTilAvSaksbehandler,
@@ -98,8 +98,8 @@ const lagSNAndel = (andelsnr, lagtTilAvSaksbehandler, fordelingForrigeBehandling
 
 const lagFLAndel = (andelsnr, lagtTilAvSaksbehandler, fordelingForrigeBehandlingPrAar,
   beregnetPrAar, fordeltPrAar, andelIArbeid) => ({
-  aktivitetStatus: { kode: aktivitetStatuser.FRILANSER, navn: 'Frilanser' },
-  inntektskategori: { kode: 'SN' },
+  aktivitetStatus: { kode: aktivitetStatuser.FRILANSER, navn: 'Frilanser', kodeverk: 'test' },
+  inntektskategori: { kode: 'SN', kodeverk: 'test' },
   andelIArbeid,
   andelsnr,
   lagtTilAvSaksbehandler,
@@ -133,7 +133,7 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
       beregningsgrunnlagPrStatusOgAndel: [
         {
           andelsnr: 1,
-          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
           belopPrAarEtterAOrdningen: 100,
           arbeidsforhold,
           beregnetPrAar: 10000,
@@ -141,7 +141,7 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
         {
           andelsnr: 2,
-          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
           belopPrAarEtterAOrdningen: 100,
           arbeidsforhold,
           beregnetPrAar: 10000,
@@ -150,7 +150,7 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
         {
           andelsnr: 3,
-          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
           belopPrAarEtterAOrdningen: 100,
           arbeidsforhold,
           beregnetPrAar: 10000,
@@ -159,7 +159,7 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
         {
           andelsnr: 4,
-          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
           belopPrAarEtterAOrdningen: 1000,
           arbeidsforhold,
           beregnetPrAar: 1000,
@@ -168,7 +168,7 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
         {
           andelsnr: 5,
-          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
           belopPrAarEtterAOrdningen: 1000,
           arbeidsforhold: arbeidsforholdEtterStp,
           beregnetPrAar: null,
@@ -177,24 +177,24 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
         {
           andelsnr: 6,
-          aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE },
+          aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'test' },
           beregnetPrAar: 10000,
           overstyrtPrAar: null,
           bruttoPrAar: 10000,
         },
         {
           andelsnr: 7,
-          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+          aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
           arbeidsforhold: arbeidsforhold2,
           belopPrAarEtterAOrdningen: 40000,
           beregnetPrAar: 1000,
           overstyrtPrAar: null,
           bruttoPrAar: 1000,
         },
-        { andelsnr: 8, aktivitetStatus: { kode: aktivitetStatuser.FRILANSER }, belopPrAarEtterAOrdningen: null },
+        { andelsnr: 8, aktivitetStatus: { kode: aktivitetStatuser.FRILANSER, kodeverk: 'test' }, belopPrAarEtterAOrdningen: null },
         {
           andelsnr: 9,
-          aktivitetStatus: { kode: aktivitetStatuser.FRILANSER },
+          aktivitetStatus: { kode: aktivitetStatuser.FRILANSER, kodeverk: 'test' },
           belopPrAarEtterAOrdningen: null,
           beregnetPrAar: 0,
         },
