@@ -10,13 +10,24 @@ import { TilretteleggingArbeidsforholdSection } from './TilretteleggingArbeidsfo
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 
 describe('<TilretteleggingArbeidsforholdSection>', () => {
+  const arbeidsgiverOpplysningerPerId = {
+    111222333: {
+      erPrivatPerson: false,
+      identifikator: '111222333',
+      navn: 'ARB_NAVN_1',
+    },
+    0: {
+      erPrivatPerson: true,
+      identifikator: '23',
+      navn: 'FRILANSER',
+    },
+  };
+
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er true', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
       readOnly={false}
       arbeidsforhold={{
-        arbeidsgiverNavn: 'ARB_NAVN_1',
-        arbeidsgiverIdent: '111222333',
-        arbeidsgiverIdentVisning: '111222333',
+        arbeidsgiverReferanse: '111222333',
         eksternArbeidsforholdReferanse: 'ARB001-001',
         velferdspermisjoner: [],
       } as ArbeidsforholdFodselOgTilrettelegging}
@@ -29,6 +40,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       stillingsprosentArbeidsforhold={40}
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(2);
@@ -44,8 +56,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
       readOnly={false}
       arbeidsforhold={{
-        arbeidsgiverNavn: 'FRILANSER',
-        arbeidsgiverIdent: '',
+        arbeidsgiverReferanse: '0',
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
       } as ArbeidsforholdFodselOgTilrettelegging}
@@ -58,10 +69,11 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       stillingsprosentArbeidsforhold={40}
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(1);
-    expect(normaltekst.props().children).to.eq('FRILANSER');
+    expect(normaltekst.props().children).to.eq('FRILANSER (23)');
     const checkboxField = wrapper.find(CheckboxField);
     expect(checkboxField).has.length(1);
     const datepickerField = wrapper.find(DatepickerField);

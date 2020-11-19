@@ -10,13 +10,21 @@ import { Arbeidsforhold as IayArbeidsforhold } from '@fpsak-frontend/types';
 import { FodselOgTilretteleggingFaktaForm, validateForm } from './FodselOgTilretteleggingFaktaForm';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
+import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
+
+const arbeidsgiverOpplysningerPerId = {
+  910909088: {
+    erPrivatPerson: false,
+    identifikator: '910909088',
+    navn: 'BEDRIFT AS',
+  },
+};
 
 const arbeidsforhold = [
   {
     internArbeidsforholdReferanse: '0f70f2f2-79f8-4cc0-8929-be25ef2be878',
-    arbeidsgiverIdent: '910909088',
-    arbeidsgiverNavn: 'BEDRIFT AS',
+    arbeidsgiverReferanse: '910909088',
     begrunnelse: null,
     opplysningerOmRisiko: null,
     opplysningerOmTilrettelegging: null,
@@ -27,8 +35,7 @@ const arbeidsforhold = [
   },
   {
     internArbeidsforholdReferanse: 'fb74d757-6bd3-4ed3-a1f4-c2424ebb64d5',
-    arbeidsgiverIdent: '910909088',
-    arbeidsgiverNavn: 'BEDRIFT AS',
+    arbeidsgiverReferanse: '910909088',
     begrunnelse: null,
     opplysningerOmRisiko: null,
     opplysningerOmTilrettelegging: null,
@@ -55,7 +62,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
 
@@ -82,7 +94,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
 
@@ -109,7 +126,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
       {...formProps}
     />);
@@ -144,7 +166,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
 
     expect(errors).is.eql({});
   });
@@ -166,7 +188,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
 
     // @ts-ignore
     // eslint-disable-next-line no-underscore-dangle
@@ -195,7 +217,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
 
     expect(errors).is.eql({
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
@@ -223,7 +245,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
 
     expect(errors).is.eql({
       termindato: [{
@@ -248,7 +270,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
 
     expect(errors).is.eql({
       termindato: [{
@@ -273,7 +295,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
 
     expect(errors).is.eql({});
   });
@@ -289,7 +311,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={[]}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
 
@@ -341,7 +368,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={iayArbeidsforhold}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
 
@@ -385,7 +417,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={iayArbeidsforhold}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
 
@@ -429,7 +466,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       arbeidsforhold={arbeidsforhold}
       iayArbeidsforhold={iayArbeidsforhold}
       erOverstyrer
-      formName="test"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
+      aksjonspunkter={[]}
+      submitCallback={() => undefined}
+      validate={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
 

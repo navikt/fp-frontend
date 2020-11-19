@@ -38,9 +38,7 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
         type: { kode: 'VELFERDSPERMISJON', kodeverk: 'PERMISJONSBESKRIVELSE_TYPE' },
       },
     ],
-    arbeidsgiverNavn: 'WWW.EIENDOMSDRIFT.CC SA',
-    arbeidsgiverIdent: '555864629',
-    arbeidsgiverIdentVisning: '555864629',
+    arbeidsgiverReferanse: '3',
     internArbeidsforholdReferanse: 'c5534-6e55-4112-9645-fe52ee4950c2',
     eksternArbeidsforholdReferanse: 'T555864629R5021761S1103L5555',
     skalBrukes: true,
@@ -54,9 +52,7 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
       },
     }],
     velferdspermisjoner: [],
-    arbeidsgiverNavn: 'WWW.EIENDOMSDRIFT.CC SA',
-    arbeidsgiverIdent: '555864629',
-    arbeidsgiverIdentVisning: '555864629',
+    arbeidsgiverReferanse: '3',
     internArbeidsforholdReferanse: '5gb912b7-4187-45a0-8c44-02322887d0ad',
     eksternArbeidsforholdReferanse: 'H555864629R5021761S1100L5555',
     skalBrukes: true,
@@ -75,7 +71,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
         kode: tilretteleggingType.INGEN_TILRETTELEGGING,
       },
     }],
-    arbeidsgiverNavn: 'Frilanser, samlet aktivitet',
+    arbeidsgiverReferanse: '1',
     skalBrukes: true,
     velferdspermisjoner: [],
   }, {
@@ -87,7 +83,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
         kode: tilretteleggingType.INGEN_TILRETTELEGGING,
       },
     }],
-    arbeidsgiverNavn: 'Selvstendig næringsdrivende',
+    arbeidsgiverReferanse: '2',
     skalBrukes: true,
     velferdspermisjoner: [],
   }] as ArbeidsforholdFodselOgTilrettelegging[],
@@ -121,6 +117,29 @@ const inntektArbeidYtelse = {
   }],
   skalKunneLeggeTilNyeArbeidsforhold: false,
 } as InntektArbeidYtelse;
+
+const arbeidsgiverOpplysningerPerId = {
+  1: {
+    erPrivatPerson: false,
+    identifikator: '973861778',
+    navn: 'Frilanser, samlet aktivitet',
+  },
+  2: {
+    erPrivatPerson: true,
+    identifikator: '973861779',
+    navn: 'Selvstendig næringsdrivende',
+  },
+  555864629: {
+    erPrivatPerson: false,
+    identifikator: '555864629',
+    navn: 'WWW.EIENDOMSDRIFT.CC SA',
+  },
+  999999999: {
+    erPrivatPerson: false,
+    identifikator: '999999999',
+    navn: 'Arbeidsgiveren AS',
+  },
+};
 
 const standardFaktaProps = {
   aksjonspunkter: [],
@@ -157,6 +176,7 @@ export const tilretteleggingMedVelferdspermisjon = () => (
     }]}
     inntektArbeidYtelse={iayPermisjon}
     erOverstyrer={false}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -180,6 +200,7 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
     }]}
     inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={false}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -203,6 +224,7 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
     }]}
     inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={false}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -238,6 +260,7 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
       }]}
       inntektArbeidYtelse={inntektArbeidYtelseForAnnenArbeidsgiver}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   );
 };

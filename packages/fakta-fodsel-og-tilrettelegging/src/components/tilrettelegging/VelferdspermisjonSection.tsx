@@ -19,7 +19,6 @@ interface PureOwnProps {
   readOnly: boolean;
   permisjon: Permisjon;
   formSectionName: string;
-  tilretteleggingBehovFom: string;
 }
 
 interface MappedOwnProps {

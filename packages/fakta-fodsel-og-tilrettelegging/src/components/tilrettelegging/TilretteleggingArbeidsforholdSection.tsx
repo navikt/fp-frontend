@@ -23,9 +23,9 @@ const utledArbeidsforholdTittel = (
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
 
-  let tittel = arbeidsgiverOpplysninger.navn;
-  if (arbeidsforhold.arbeidsgiverIdent) {
-    tittel += ` (${arbeidsforhold.arbeidsgiverIdentVisning})`;
+  let tittel = '';
+  if (arbeidsforhold.arbeidsgiverReferanse && arbeidsgiverOpplysninger) {
+    tittel += `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
   }
   if (arbeidsforhold.eksternArbeidsforholdReferanse) {
     let ref = arbeidsforhold.eksternArbeidsforholdReferanse;
@@ -44,7 +44,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   erOverstyrer: boolean;
-  changeField: () => void;
+  changeField: (field: string, value: any) => void;
   stillingsprosentArbeidsforhold?: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
   formName: string;

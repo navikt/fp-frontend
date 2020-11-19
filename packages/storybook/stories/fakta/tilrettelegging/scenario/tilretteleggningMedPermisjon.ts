@@ -9,9 +9,7 @@ export const tilrettelegging = {
     }, {
       fom: '2020-10-15', type: { kode: 'HEL_TILRETTELEGGING', kodeverk: 'SVP_TILRETTELEGGING_TYPE' }, stillingsprosent: null, overstyrtUtbetalingsgrad: null,
     }],
-    arbeidsgiverNavn: 'Arbeidsgiveren AS',
-    arbeidsgiverIdent: '999999999',
-    arbeidsgiverIdentVisning: '999999999',
+    arbeidsgiverReferanse: '999999999',
     opplysningerOmRisiko: null,
     opplysningerOmTilrettelegging: null,
     kopiertFraTidligereBehandling: true,

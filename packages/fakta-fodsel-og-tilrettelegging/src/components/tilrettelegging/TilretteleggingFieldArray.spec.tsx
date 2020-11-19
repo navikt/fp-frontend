@@ -29,6 +29,7 @@ describe('<TilretteleggingFieldArray>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       formName="FORM_NAME"
+      velferdspermisjoner={[]}
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).has.length(1);
@@ -67,6 +68,7 @@ describe('<TilretteleggingFieldArray>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       formName="FORM_NAME"
+      velferdspermisjoner={[]}
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).has.length(1);
@@ -108,6 +110,7 @@ describe('<TilretteleggingFieldArray>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       formName="FORM_NAME"
+      velferdspermisjoner={[]}
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).has.length(1);

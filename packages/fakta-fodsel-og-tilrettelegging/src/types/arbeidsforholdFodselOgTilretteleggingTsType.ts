@@ -13,13 +13,10 @@ type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[];
   arbeidsgiverReferanse: string;
-  // arbeidsgiverNavn: string;
-  // arbeidsgiverIdent?: string;
-  // arbeidsgiverIdentVisning?: string;
   opplysningerOmRisiko?: string;
   opplysningerOmTilrettelegging?: string;
-  // internArbeidsforholdReferanse?: string;
-  // eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  eksternArbeidsforholdReferanse?: string;
   skalBrukes: boolean;
   begrunnelse?: string;
   velferdspermisjoner: Permisjon[];
