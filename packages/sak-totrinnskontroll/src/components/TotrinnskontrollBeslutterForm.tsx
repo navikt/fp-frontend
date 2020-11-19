@@ -16,7 +16,7 @@ import {
   Behandling, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
-import AksjonspunktGodkjenningFieldArray from './AksjonspunktGodkjenningFieldArray';
+import AksjonspunktGodkjenningFieldArray, { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
 
 import styles from './totrinnskontrollBeslutterForm.less';
 
@@ -145,16 +145,6 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
     </form>
   );
 };
-
-export type AksjonspunktGodkjenningData = {
-  aksjonspunktKode: string;
-  totrinnskontrollGodkjent: boolean;
-  besluttersBegrunnelse?: string;
-  feilFakta?: boolean;
-  feilRegel?: boolean;
-  feilLov?: boolean;
-  annet?: boolean;
-}
 
 export type FormValues = {
   aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
