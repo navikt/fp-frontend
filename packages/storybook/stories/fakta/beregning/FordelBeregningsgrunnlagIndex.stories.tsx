@@ -7,13 +7,19 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FordelBeregningsgrunnlagFaktaIndex from '@fpsak-frontend/fakta-fordel-beregningsgrunnlag';
 
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
+import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import withReduxProvider from '../../../decorators/withRedux';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturalytelse } from './scenario/NyttArbeidOgNaturalytelse';
 import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from './scenario/ArbeidOgGradertNæring';
-import { beregningsgrunnlag as vurderRefusjonBG, aksjonspunkt as vurderRefusjonAP } from './scenario/VurderRefusjon';
+import {
+  bgUtenDelvisRefusjon as vurderRefusjonBG,
+  bgMedDelvisRefusjon as vurderDelvisRefBG,
+  aksjonspunkt as vurderRefusjonAP,
+} from './scenario/VurderRefusjon';
 
 export default {
   title: 'fakta/fakta-fordel-beregningsgrunnlag',
@@ -26,8 +32,9 @@ const behandling = {
   versjon: 1,
   type: {
     kode: 'BT-003',
+    kodeverk: 'test',
   },
-};
+} as Behandling;
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -36,9 +43,11 @@ const merknaderFraBeslutter = {
 const fordelAP = ([{
   definisjon: {
     kode: aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG,
+    kodeverk: 'test',
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'test',
   },
   begrunnelse: null,
   erAktivt: true,
@@ -65,6 +74,7 @@ const lagBGAndel = (andelsnr, aktivitetstatuskode, beregnet) => ({
   },
   fordeltPrAar: null,
   erTilkommetAndel: false,
+  arbeidsforhold: null,
 });
 
 const lagBGPeriode = (andelsliste, fom, tom, periodeAarsaker) => {
@@ -86,88 +96,12 @@ const lagBG = (perioder, faktaOmFordeling) => {
     skjaeringstidspunktBeregning: '2019-09-16',
     aktivitetStatus: [],
     beregningsgrunnlagPeriode: perioder,
-    sammenligningsgrunnlag: {
-      sammenligningsgrunnlagFom: '2018-09-01',
-      sammenligningsgrunnlagTom: '2019-08-31',
-      rapportertPrAar: 330000,
-      avvikPromille: 91,
-      avvikProsent: 9,
-    },
+    sammenligningsgrunnlag: null,
     ledetekstBrutto: 'Brutto beregningsgrunnlag',
     ledetekstAvkortet: 'Avkortet beregningsgrunnlag (6G=599148)',
     ledetekstRedusert: 'Redusert beregningsgrunnlag (100%)',
     halvG: 49929,
-    faktaOmBeregning: {
-      kortvarigeArbeidsforhold: null,
-      frilansAndel: null,
-      kunYtelse: null,
-      faktaOmBeregningTilfeller: null,
-      arbeidstakerOgFrilanserISammeOrganisasjonListe: null,
-      arbeidsforholdMedLønnsendringUtenIM: null,
-      besteberegningAndeler: null,
-      vurderMottarYtelse: null,
-      avklarAktiviteter: {
-        aktiviteterTomDatoMapping: [{
-          tom: '2019-09-16',
-          aktivitete: [{
-            arbeidsgiverNavn: 'BEDRIFT AS',
-            arbeidsgiverId: '910909088',
-            fom: '2018-10-09',
-            tom: '9999-12-31',
-            arbeidsforholdId: '2a3c0f5c-3d70-447a-b0d7-cd242d5155bb',
-            arbeidsforholdType: {
-              kode: 'ARBEID',
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            },
-            aktørId: null,
-            skalBrukes: null,
-          },
-          ],
-        },
-        ],
-      },
-      vurderBesteberegning: null,
-      andelerForFaktaOmBeregning: [{
-        belopReadOnly: 30000,
-        fastsattBelop: null,
-        inntektskategori: {
-          kode: 'ARBEIDSTAKER',
-          kodeverk: 'INNTEKTSKATEGORI',
-        },
-        aktivitetStatus: {
-          kode: 'AT',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-        refusjonskrav: 30000,
-        visningsnavn: 'BEDRIFT AS (910909088) ...55bb',
-        arbeidsforhold: {
-          arbeidsgiverNavn: 'BEDRIFT AS',
-          arbeidsgiverId: '910909088',
-          startdato: '2018-10-09',
-          opphoersdato: null,
-          arbeidsforholdId: '2a3c0f5c-3d70-447a-b0d7-cd242d5155bb',
-          arbeidsforholdType: {
-            kode: 'ARBEID',
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          },
-          aktørId: null,
-          refusjonPrAar: null,
-          belopFraInntektsmeldingPrMnd: 30000,
-          organisasjonstype: {
-            kode: 'VIRKSOMHET',
-            kodeverk: 'ORGANISASJONSTYPE',
-          },
-          naturalytelseBortfaltPrÅr: null,
-          naturalytelseTilkommetPrÅr: null,
-        },
-        andelsnr: 1,
-        skalKunneEndreAktivitet: false,
-        lagtTilAvSaksbehandler: false,
-      },
-      ],
-      vurderMilitaer: null,
-      refusjonskravSomKommerForSentListe: null,
-    },
+    faktaOmBeregning: null,
     andelerMedGraderingUtenBG: null,
     hjemmel: {
       kode: 'F_14_7_8_30',
@@ -175,7 +109,7 @@ const lagBG = (perioder, faktaOmFordeling) => {
     },
     faktaOmFordeling,
     årsinntektVisningstall: 360000,
-  };
+  } as Beregningsgrunnlag;
   return beregningsgrunnlag;
 };
 
@@ -289,11 +223,11 @@ const lagArbeidsforhold = (arbeidsgiverNavn, arbeidsgiverId, arbeidsforholdId, r
 export const arbeidOgGradertNæringUtenBeregningsgrunnlag = () => (
   <FordelBeregningsgrunnlagFaktaIndex
     behandling={behandling}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={bgArbeidOgGradertNæring}
     aksjonspunkter={apArbeidOgGradertNæring}
@@ -305,11 +239,11 @@ export const arbeidOgGradertNæringUtenBeregningsgrunnlag = () => (
 export const tilkommetArbeidMedFlyttingAvNaturalytelse = () => (
   <FordelBeregningsgrunnlagFaktaIndex
     behandling={behandling}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={bgMedNaturalytelse}
     aksjonspunkter={apMedNaturalytelse}
@@ -337,11 +271,11 @@ export const aapOgRefusjon = () => {
   return (
     <FordelBeregningsgrunnlagFaktaIndex
       behandling={behandling}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={false}
       beregningsgrunnlag={bg}
       aksjonspunkter={fordelAP}
@@ -370,11 +304,11 @@ export const kanEndreRefusjonskrav = () => {
   return (
     <FordelBeregningsgrunnlagFaktaIndex
       behandling={behandling}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={false}
       beregningsgrunnlag={bg}
       aksjonspunkter={fordelAP}
@@ -422,11 +356,11 @@ export const skalSlåSammenNaturalytelseperioder = () => {
   return (
     <FordelBeregningsgrunnlagFaktaIndex
       behandling={behandling}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverk as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={false}
       beregningsgrunnlag={bg}
       aksjonspunkter={fordelAP}
@@ -439,13 +373,29 @@ export const skalSlåSammenNaturalytelseperioder = () => {
 export const viseVurderTilkommetRefusjonskrav = () => (
   <FordelBeregningsgrunnlagFaktaIndex
     behandling={behandling}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={vurderRefusjonBG}
+    aksjonspunkter={vurderRefusjonAP}
+    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
+    submittable={boolean('submittable', true)}
+  />
+);
+
+export const skalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon = () => (
+  <FordelBeregningsgrunnlagFaktaIndex
+    behandling={behandling}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+    }}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    readOnly={false}
+    beregningsgrunnlag={vurderDelvisRefBG}
     aksjonspunkter={vurderRefusjonAP}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}

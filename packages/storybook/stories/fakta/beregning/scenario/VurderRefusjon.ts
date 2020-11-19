@@ -1,4 +1,4 @@
-export const beregningsgrunnlag = {
+export const bgUtenDelvisRefusjon = {
   skjaeringstidspunktBeregning: '2020-05-15',
   skjæringstidspunkt: '2020-05-15',
   refusjonTilVurdering: {
@@ -17,10 +17,41 @@ export const beregningsgrunnlag = {
         ],
         nyttRefusjonskravFom: '2020-06-01',
         tidligsteMuligeRefusjonsdato: '2020-06-01',
-        arbeidsgiverId: {
+        skalKunneFastsetteDelvisRefusjon: false,
+        arbeidsgiver: {
           arbeidsgiverOrgnr: '999999999',
         },
         arbeidsgiverNavn: 'JENS OLE KÅRES FRANSKE BAKEVARER',
+      },
+    ],
+  },
+};
+
+export const bgMedDelvisRefusjon = {
+  skjaeringstidspunktBeregning: '2020-05-15',
+  skjæringstidspunkt: '2020-05-15',
+  refusjonTilVurdering: {
+    andeler: [
+      {
+        aktivitetStatus: {
+          kodeverk: 'AKTIVITET_STATUS',
+          kode: 'AT',
+        },
+        tidligereUtbetalinger: [
+          {
+            fom: '2020-05-15',
+            tom: '9999-12-31',
+            erTildeltRefusjon: true,
+          },
+        ],
+        nyttRefusjonskravFom: '2020-06-01',
+        tidligsteMuligeRefusjonsdato: '2020-06-01',
+        skalKunneFastsetteDelvisRefusjon: true,
+        maksTillattDelvisRefusjonPrMnd: 12000,
+        arbeidsgiver: {
+          arbeidsgiverOrgnr: '999999999',
+        },
+        arbeidsgiverNavn: 'KATOLSK KEBAB A/S',
       },
     ],
   },

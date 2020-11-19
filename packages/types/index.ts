@@ -4,7 +4,13 @@ export { default as Behandling } from './src/behandlingTsType';
 export { default as BehandlingAppKontekst } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
 export {
-  default as Beregningsgrunnlag, BeregningsgrunnlagAndel, RelevanteStatuserProp, SammenligningsgrunlagProp, BeregningsgrunnlagPeriodeProp,
+  default as Beregningsgrunnlag,
+  BeregningsgrunnlagAndel,
+  RelevanteStatuserProp,
+  SammenligningsgrunlagProp,
+  BeregningsgrunnlagPeriodeProp,
+  RefusjonTilVurderingAndel,
+  FordelBeregningsgrunnlagPeriode,
 } from './src/beregningsgrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
