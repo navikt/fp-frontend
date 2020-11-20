@@ -26,12 +26,18 @@ import styles from './aksjonspunktGodkjenningFieldArray.less';
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
 
-type FieldValues = {
-  totrinnskontrollGodkjent: boolean;
+export type AksjonspunktGodkjenningData = {
+  aksjonspunktKode: string;
+  totrinnskontrollGodkjent?: boolean;
+  besluttersBegrunnelse?: string;
+  feilFakta?: boolean;
+  feilRegel?: boolean;
+  feilLov?: boolean;
+  annet?: boolean;
 }
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<FieldValues>;
+  fields: FieldArrayFieldsProps<AksjonspunktGodkjenningData>;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
   showBegrunnelse?: boolean;
@@ -63,18 +69,19 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
 }) => (
   <>
     {fields.map((id, index) => {
-      const fieldValues = fields.get(index);
-      const context = totrinnskontrollSkjermlenkeContext
-        .reduce((acc, c) => acc.concat(c.totrinnskontrollAksjonspunkter.map(() => c)), [])[index];
-      const aksjonspunkt = totrinnskontrollSkjermlenkeContext.map((t) => t.totrinnskontrollAksjonspunkter).flat()[index];
+      const { aksjonspunktKode, totrinnskontrollGodkjent } = fields.get(index);
+      const context = totrinnskontrollSkjermlenkeContext.find((c) => c.totrinnskontrollAksjonspunkter
+        .some((ta) => ta.aksjonspunktKode === aksjonspunktKode));
+      const totrinnskontrollAksjonspunkt = context.totrinnskontrollAksjonspunkter
+        .find((c) => c.aksjonspunktKode === aksjonspunktKode);
 
-      const erKlageKA = klageKA && fieldValues.totrinnskontrollGodkjent;
-      const erAnke = aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && fieldValues.totrinnskontrollGodkjent === true;
-      const visKunBegrunnelse = erAnke || erKlageKA ? fieldValues.totrinnskontrollGodkjent : showBegrunnelse;
-      const visArsaker = erAnke || ((fieldValues && fieldValues.totrinnskontrollGodkjent === false) || erKlageKA);
+      const erKlageKA = klageKA && totrinnskontrollGodkjent;
+      const erAnke = aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && totrinnskontrollGodkjent === true;
+      const visKunBegrunnelse = erAnke || erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
+      const visArsaker = erAnke || erKlageKA || totrinnskontrollGodkjent === false;
 
       const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
-        arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
+        arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, totrinnskontrollAksjonspunkt);
 
       const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
 
@@ -85,7 +92,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
           </NavLink>
           <div className={styles.approvalItemContainer}>
             {aksjonspunktText.map((formattedMessage, i) => (
-              <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
+              <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
                 <Normaltekst>
                   {formattedMessage}
                 </Normaltekst>
