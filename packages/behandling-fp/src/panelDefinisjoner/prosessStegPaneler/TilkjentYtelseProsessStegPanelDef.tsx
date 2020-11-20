@@ -6,6 +6,9 @@ import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse'
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
@@ -31,6 +34,14 @@ const getStatusFromResultatstruktur = (resultatstruktur, uttaksresultat) => {
   return vilkarUtfallType.IKKE_VURDERT;
 };
 
+type Data = {
+  fagsak: Fagsak;
+  beregningresultatForeldrepenger: BeregningsresultatFp;
+  personopplysninger: Personopplysninger;
+  soknad: Soknad;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <TilkjentYtelseProsessIndex {...props} />
 
@@ -49,11 +60,12 @@ class PanelDef extends ProsessStegPanelDef {
   )
 
   getData = ({
-    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad,
-  }) => ({
+    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId,
+  }: Data) => ({
     fagsak,
     personopplysninger,
     soknad,
+    arbeidsgiverOpplysningerPerId,
     beregningresultat: beregningresultatForeldrepenger,
   })
 }
