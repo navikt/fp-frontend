@@ -15,7 +15,8 @@ import {
   BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
-import TotrinnskontrollBeslutterForm, { AksjonspunktGodkjenningData, FormValues } from './components/TotrinnskontrollBeslutterForm';
+import TotrinnskontrollBeslutterForm, { FormValues } from './components/TotrinnskontrollBeslutterForm';
+import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
 import TotrinnskontrollSaksbehandlerPanel from './components/TotrinnskontrollSaksbehandlerPanel';
 import messages from '../i18n/nb_NO.json';
 
