@@ -64,7 +64,7 @@ const skalViseInfoAlert = (
   tilretteleggingArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
 ): boolean => !tilretteleggingArbeidsforhold
   .filter((ta) => ta.arbeidsgiverReferanse)
-  .every((ta) => iayArbeidsforhold.some((ia) => ta.arbeidsgiverReferanse === ia.arbeidsgiverIdentifikator
+  .every((ta) => iayArbeidsforhold.some((ia) => ta.arbeidsgiverReferanse === ia.arbeidsgiverReferanse
     && erInnenforIntervall(ta.tilretteleggingBehovFom, ia.fomDato, ia.tomDato)));
 
 const finnArbeidsforhold = (alleIafAf: IayArbeidsforhold[], internArbeidsforholdReferanse: string): IayArbeidsforhold | undefined => {
@@ -176,7 +176,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
         <FlexRow>
           <FlexColumn>
             {arbeidsforhold.map((a, index) => {
-              const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverReferanse);
+              const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
               const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
               const formSectionName = utledFormSectionName(a, arbeidsgiverOpplysningerPerId);
               return (
@@ -280,14 +280,14 @@ const finnOverstyrtUtbetalingsgrad = (
 const transformValues = (
   values: FormValues,
   iayArbeidsforhold: IayArbeidsforhold[],
-  arbeidsforhold,
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ) => ([{
   kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
   ...values,
   bekreftetSvpArbeidsforholdList: arbeidsforhold.map((a) => {
     const value = values[utledFormSectionName(a, arbeidsgiverOpplysningerPerId)];
-    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverIdent);
+    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
     const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
@@ -415,7 +415,7 @@ const getInitialArbeidsforholdValues = createSelector([
   }
   const arbeidsforholdValues = [];
   arbeidsforhold.forEach((a) => {
-    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverReferanse);
+    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
     const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => p.erGyldig)

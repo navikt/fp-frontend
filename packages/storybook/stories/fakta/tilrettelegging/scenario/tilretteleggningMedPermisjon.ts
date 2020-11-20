@@ -43,8 +43,7 @@ export const tilrettelegging = {
 
 export const inntektArbeidYtelse = {
   inntektsmeldinger: [{
-    arbeidsgiver: 'Arbeidsgiveren AS',
-    arbeidsgiverOrgnr: '999999999',
+    arbeidsgiverReferanse: '999999999',
     arbeidsgiverStartdato: '2020-03-17',
     innsendingstidspunkt: '2020-03-20T16:11:18',
     utsettelsePerioder: [],
@@ -92,9 +91,7 @@ export const inntektArbeidYtelse = {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [],
   arbeidsforhold: [{
     id: '999999999-null',
-    navn: 'Arbeidsgiveren AS',
-    arbeidsgiverIdentifikator: '999999999',
-    arbeidsgiverIdentifiktorGUI: '999999999',
+    arbeidsgiverReferanse: '999999999',
     arbeidsforholdId: null,
     eksternArbeidsforholdId: null,
     begrunnelse: 'vurdert tidligere ',

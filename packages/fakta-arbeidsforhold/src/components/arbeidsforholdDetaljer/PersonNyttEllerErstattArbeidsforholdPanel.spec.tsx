@@ -9,6 +9,14 @@ import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattA
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 
 describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
+  const arbeidsgiverOpplysningerPerId = {
+    123456789: {
+      erPrivatPerson: false,
+      identifikator: '123456789',
+      navn: 'Svendsen Eksos',
+    },
+  };
+
   it('skal vise dropdown med tidligere arbeidsforhold når en har valgt å erstatte gammelt med nytt', () => {
     const wrapper = shallowWithIntl(<PersonNyttEllerErstattArbeidsforholdPanel.WrappedComponent
       intl={intlMock}
@@ -16,15 +24,14 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
       isErstattArbeidsforhold
       arbeidsforholdList={[{
         id: '1',
-        navn: 'Svendsen Eksos',
-        arbeidsgiverIdentifikator: '123456789',
-        arbeidsgiverIdentifiktorGUI: '123456789',
+        arbeidsgiverReferanse: '123456789',
         arbeidsforholdId: '1234-1232',
         fomDato: '2019-10-10',
       }] as Arbeidsforhold[]}
       formName="form"
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const select = wrapper.find(SelectField);
@@ -39,15 +46,14 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
       isErstattArbeidsforhold={false}
       arbeidsforholdList={[{
         id: '1',
-        navn: 'Svendsen Eksos',
-        arbeidsgiverIdentifikator: '123456789',
-        arbeidsgiverIdentifiktorGUI: '123456789',
+        arbeidsgiverReferanse: '123456789',
         arbeidsforholdId: '1234-1232',
         fomDato: '2019-10-10',
       }] as Arbeidsforhold[]}
       formName="form"
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(SelectField)).has.length(0);
   });

@@ -10,7 +10,7 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import PersonAksjonspunktText from './PersonAksjonspunktText';
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
@@ -50,6 +50,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   updateArbeidsforhold: (values: FormValues) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -80,6 +81,7 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<PureOwnProps & Ma
   behandlingId,
   behandlingVersjon,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <>
@@ -150,6 +152,7 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<PureOwnProps & Ma
             formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         )}
         { arbeidsforholdHandlingVerdi === ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD && harErstattetEttEllerFlere

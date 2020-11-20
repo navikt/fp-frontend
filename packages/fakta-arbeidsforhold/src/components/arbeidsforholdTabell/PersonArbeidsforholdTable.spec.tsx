@@ -7,6 +7,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 
+import { Normaltekst } from 'nav-frontend-typografi';
 import PersonArbeidsforholdTable, { utledNøkkel } from './PersonArbeidsforholdTable';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 import { mountWithIntl } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
@@ -16,9 +17,7 @@ describe('<PersonArbeidsforholdTable>', () => {
     id: '1',
     arbeidsforholdId: '1231-2345',
     eksternArbeidsforholdId: '23456789',
-    navn: 'Svendsen Eksos',
-    arbeidsgiverIdentifikator: '1234567',
-    arbeidsgiverIdentifiktorGUI: '1234567',
+    arbeidsgiverReferanse: '1234567',
     fomDato: '2018-01-01',
     tomDato: '2018-10-10',
     kilde: {
@@ -31,14 +30,25 @@ describe('<PersonArbeidsforholdTable>', () => {
     lagtTilAvSaksbehandler: false,
   } as Arbeidsforhold;
 
+  const arbeidsgiverOpplysningerPerId = {
+    1234567: {
+      erPrivatPerson: false,
+      identifikator: '1234567',
+      navn: 'Svendsen Eksos',
+    },
+    223455667: {
+      erPrivatPerson: false,
+      identifikator: '223455667',
+      navn: 'Nilsen Eksos',
+    },
+  };
+
   it('skal vise tabell med to arbeidsforhold der den ene raden er markert som valgt', () => {
     const arbeidsforhold2 = {
       id: '2',
       arbeidsforholdId: '1231-2345',
       eksternArbeidsforholdId: '565656565',
-      navn: 'Nilsen Eksos',
-      arbeidsgiverIdentifikator: '223455667',
-      arbeidsgiverIdentifiktorGUI: '223455667',
+      arbeidsgiverReferanse: '223455667',
       fomDato: '2018-02-01',
       tomDato: '2018-02-10',
       kilde: {
@@ -54,6 +64,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[arbeidsforhold, arbeidsforhold2]}
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const table = wrapper.find(Table);
@@ -80,6 +91,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[arbeidsforhold]}
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -98,6 +110,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[newArbeidsforhold]}
       selectedId={newArbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -110,6 +123,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[arbeidsforhold]}
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -127,6 +141,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[newArbeidsforhold]}
       selectedId={newArbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const cols = wrapper.find(TableColumn);
@@ -139,6 +154,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const element = wrapper.find(IngenArbeidsforholdRegistrert);
     expect(element).has.length(1);
@@ -153,6 +169,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find(TableRow).at(1);
     expect(tableRow.props().model.stillingsprosent).to.eql(0);
@@ -167,10 +184,13 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find(TableRow).at(1);
-    expect(tableRow.props().model.navn).to.eql('Svendsen Eksos');
+    const tekst = tableRow.find(Normaltekst).at(0);
+    expect(tekst.childAt(0).text()).to.eql('Svendsen Eksos');
   });
+
   it('skal vise overstyrt tom dato', () => {
     const endretArbeidsforhold = {
       ...arbeidsforhold,
@@ -180,6 +200,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const periodeLabel = wrapper.find(PeriodLabel);
     expect(periodeLabel.props().dateStringTom).to.eql('2025-01-01');
@@ -192,6 +213,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       alleArbeidsforhold={[endretArbeidsforhold]}
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const periodeLabel = wrapper.find(PeriodLabel);
     expect(periodeLabel.props().dateStringTom).to.eql('2018-10-10');
@@ -205,8 +227,8 @@ describe('<PersonArbeidsforholdTable>', () => {
     arbfor2.arbeidsforholdId = null;
     arbfor2.eksternArbeidsforholdId = null;
 
-    const nøkkel1 = utledNøkkel(arbfor1);
-    const nøkkel2 = utledNøkkel(arbfor2);
+    const nøkkel1 = utledNøkkel(arbfor1, arbeidsgiverOpplysningerPerId);
+    const nøkkel2 = utledNøkkel(arbfor2, arbeidsgiverOpplysningerPerId);
     expect(nøkkel1).to.not.eql(nøkkel2);
   });
 });

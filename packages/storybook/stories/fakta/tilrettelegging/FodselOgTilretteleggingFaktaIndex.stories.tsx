@@ -92,9 +92,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
 const inntektArbeidYtelse = {
   arbeidsforhold: [{
     id: '555864629-null',
-    navn: 'WWW.EIENDOMSDRIFT.CC SA',
-    arbeidsgiverIdentifikator: '555864629',
-    arbeidsgiverIdentifiktorGUI: '555864629',
+    arbeidsgiverReferanse: '555864629',
     kilde: {
       navn: 'AA-Registeret',
     },
@@ -138,6 +136,11 @@ const arbeidsgiverOpplysningerPerId = {
     erPrivatPerson: false,
     identifikator: '999999999',
     navn: 'Arbeidsgiveren AS',
+  },
+  1111111: {
+    erPrivatPerson: false,
+    identifikator: '1111111',
+    navn: 'STATOIL',
   },
 };
 
@@ -233,9 +236,7 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
     arbeidsforhold: [{
       ...inntektArbeidYtelse.arbeidsforhold[0],
       id: '1111111-null',
-      navn: 'STATOIL',
-      arbeidsgiverIdentifikator: '1111111',
-      arbeidsgiverIdentifiktorGUI: '1111111',
+      arbeidsgiverReferanse: '1111111',
     }] as Arbeidsforhold[],
     skalKunneLeggeTilNyeArbeidsforhold: false,
   } as InntektArbeidYtelse;

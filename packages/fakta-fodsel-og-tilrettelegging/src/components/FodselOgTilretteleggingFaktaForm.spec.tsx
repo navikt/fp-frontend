@@ -19,6 +19,11 @@ const arbeidsgiverOpplysningerPerId = {
     identifikator: '910909088',
     navn: 'BEDRIFT AS',
   },
+  555864629: {
+    erPrivatPerson: false,
+    identifikator: '555864629',
+    navn: 'WWW.EIENDOMSDRIFT.CC SA',
+  },
 };
 
 const arbeidsforhold = [
@@ -335,9 +340,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal vise alert-info når arbeidsgiver ikke finnes i arbeidsforhold i inntektArbeidYtelse', () => {
     const iayArbeidsforhold = [{
       id: '555864629-null',
-      navn: 'WWW.EIENDOMSDRIFT.CC SA',
-      arbeidsgiverIdentifikator: '555864629',
-      arbeidsgiverIdentifiktorGUI: '555864629',
+      arbeidsgiverReferanse: '555864629',
       kilde: {
         navn: 'AA-Registeret',
       },
@@ -383,9 +386,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal vise alert-info når arbeidsgiver finnes i arbeidsforhold men arbeidsforholdet er før tilretteleggingBehovFom', () => {
     const iayArbeidsforhold = [{
       id: '910909088-null',
-      navn: 'BEDRIFT AS',
-      arbeidsgiverIdentifikator: '910909088',
-      arbeidsgiverIdentifiktorGUI: '910909088',
+      arbeidsgiverReferanse: '910909088',
       kilde: {
         navn: 'AA-Registeret',
       },
@@ -432,9 +433,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal ikke vise alert-info når arbeidsgiver finnes i arbeidsforhold i inntektArbeidYtelse og er innenfor intervall', () => {
     const iayArbeidsforhold = [{
       id: '910909088-null',
-      navn: 'BEDRIFT AS',
-      arbeidsgiverIdentifikator: '910909088',
-      arbeidsgiverIdentifiktorGUI: '910909088',
+      arbeidsgiverReferanse: '910909088',
       kilde: {
         navn: 'AA-Registeret',
       },
