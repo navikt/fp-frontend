@@ -4,9 +4,10 @@ import AktivitetStatus, { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend
 import {
   dateIsAfter, formatCurrencyNoKr, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
+import { FormValidationError } from '@fpsak-frontend/utils/src/validation/messages';
 import { erAAPEllerArbeidsgiverOgSkalFlytteMellomAAPOgArbeidsgiver, GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
 import TotalbelopPrArbeidsgiverError, { lagTotalInntektArbeidsforholdList } from './TotalbelopPrArbeidsgiverError';
-import { createVisningsnavnForAktivitet } from './util/visningsnavnHelper';
+import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
 
 const convertToNumber = (n) => (n == null || undefined ? null : Number(removeSpacesFromNumber(n)));
 
@@ -110,15 +111,11 @@ export const validateTotalRefusjonPrArbeidsforhold = (andelList, getKodeverknavn
   return null;
 };
 
-const skalIkkjeVereHogareEnn = (
-  value, registerInntekt, errorMessage,
-) => ((value > Math.round(registerInntekt)) ? errorMessage() : undefined);
-
 export const skalVereLikFordelingMessage = (fordeling) => (
   [{ id: 'BeregningInfoPanel.FordelBG.Validation.LikFordeling' },
     { fordeling }]);
 
-export const kanIkkjeHaNullBeregningsgrunnlagError = () => (
+export const kanIkkjeHaNullBeregningsgrunnlagError = (): FormValidationError => (
   [{ id: 'FordelBeregningsgrunnlag.Validation.KanIkkeHaNullIBeregningsgrunnlag' }]);
 
 export const tomErrorMessage = () => (
@@ -156,7 +153,7 @@ export const validateRefusjonsbelop = (refusjonskrav, skalKunneEndreRefusjon) =>
   return refusjonskravError;
 };
 
-const validateFordelingForGradertAndel = (andel, periodeDato) => {
+const validateFordelingForGradertAndel = (andel, periodeDato): FormValidationError => {
   const arbeidsforholdIkkeOpphørt = !andel.arbeidsperiodeTom || dateIsAfter(andel.arbeidsperiodeTom, periodeDato.fom);
   if (!andel.andelIArbeid || !arbeidsforholdIkkeOpphørt) {
     return null;
@@ -171,22 +168,6 @@ const validateFordelingForGradertAndel = (andel, periodeDato) => {
   const arbeidsprosenterOverNull = arbeidsprosenter.filter((val) => val > 0);
   if (arbeidsprosenterOverNull.length > 0 && Number(andel.fastsattBelop) === 0) {
     return kanIkkjeHaNullBeregningsgrunnlagError();
-  }
-  return null;
-};
-
-export const validateFastsattBelopEqualOrBelowBeregningsgrunnlagPrAar = (fastsattBelop, beregningsgrunnlagPrAar) => {
-  if (beregningsgrunnlagPrAar !== null && beregningsgrunnlagPrAar !== undefined) {
-    return skalIkkjeVereHogareEnn(Number(fastsattBelop),
-      beregningsgrunnlagPrAar, tomErrorMessage);
-  }
-  return null;
-};
-
-export const validateFastsattBelopEqualOrBelowRefusjon = (fastsattBelop, refusjon) => {
-  if (refusjon !== null && refusjon !== undefined) {
-    return skalIkkjeVereHogareEnn(Number(fastsattBelop),
-      refusjon, tomErrorMessage);
   }
   return null;
 };
@@ -207,7 +188,12 @@ export const validateAndelFields = (andelFieldValues, periodeDato) => {
     refusjonskrav, skalKunneEndreRefusjon,
     andel, inntektskategori,
   } = andelFieldValues;
-  const fieldErrors = {};
+  const fieldErrors = {
+    refusjonskrav: undefined,
+    fastsattBelop: undefined,
+    andel: undefined,
+    inntektskategori: undefined,
+  };
   fieldErrors.refusjonskrav = validateRefusjonsbelop(refusjonskrav, skalKunneEndreRefusjon);
   fieldErrors.fastsattBelop = validateFastsattBelop(andelFieldValues, periodeDato);
   fieldErrors.andel = required(andel);

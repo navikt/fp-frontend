@@ -122,7 +122,7 @@ type FordelBeregningsgrunnlagAndel = Readonly<{
   refusjonskravPrAar?: number;
 }>
 
-type FordelBeregningsgrunnlagPeriode = Readonly<{
+export type FordelBeregningsgrunnlagPeriode = Readonly<{
   fom?: string;
   fordelBeregningsgrunnlagAndeler?: FordelBeregningsgrunnlagAndel[];
   skalRedigereInntekt?: boolean;
@@ -235,6 +235,32 @@ export type BeregningsgrunnlagPeriodeProp = Readonly<{
   beregningsgrunnlagPrStatusOgAndel?: BeregningsgrunnlagAndel[];
 }>
 
+export type RefusjonTilVurderingAndel = Readonly<{
+  aktivitetStatus: Kodeverk;
+  tidligereUtbetalinger?: {
+    fom: string;
+    tom?: string;
+    erTildeltRefusjon: boolean;
+  }[];
+  nyttRefusjonskravFom: string;
+  fastsattNyttRefusjonskravFom?: string;
+  tidligsteMuligeRefusjonsdato: string;
+  arbeidsgiver?: {
+    arbeidsgiverOrgnr?: string;
+    arbeidsgiverAktørId?: string;
+  }
+  arbeidsgiverNavn?: string;
+  internArbeidsforholdRef?: string;
+  eksternArbeidsforholdRef?: string;
+  skalKunneFastsetteDelvisRefusjon: boolean;
+  fastsattDelvisRefusjonPrMnd?: number;
+  maksTillattDelvisRefusjonPrMnd?: number;
+}>
+
+type RefusjonTilVurdering = Readonly<{
+  andeler: RefusjonTilVurderingAndel[];
+}>
+
 type Beregningsgrunnlag = Readonly<{
   aktivitetStatus?: Kodeverk[];
   beregningsgrunnlagPeriode?: BeregningsgrunnlagPeriodeProp[];
@@ -247,6 +273,7 @@ type Beregningsgrunnlag = Readonly<{
   faktaOmFordeling?: FaktaOmFordeling;
   andelerMedGraderingUtenBG?: BeregningsgrunnlagAndel[];
   ytelsesspesifiktGrunnlag?: YtelseGrunnlag;
+  refusjonTilVurdering?: RefusjonTilVurdering;
 }>
 
 export default Beregningsgrunnlag;

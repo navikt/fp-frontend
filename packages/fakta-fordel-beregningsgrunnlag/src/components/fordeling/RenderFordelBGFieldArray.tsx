@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -17,20 +16,21 @@ import {
   DecimalField, InputField, NavFieldGroup, PeriodpickerField, SelectField,
 } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { arbeidsforholdBeregningProptype, kodeverkPropType } from '@fpsak-frontend/prop-types';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import inntektskategorier, { isSelvstendigNæringsdrivende } from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 
 import 'core-js/features/array/flat-map';
 
-import { getUniqueListOfArbeidsforhold } from '../ArbeidsforholdHelper';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { BeregningsgrunnlagAndel, Kodeverk } from '@fpsak-frontend/types';
+import getUniqueListOfArbeidsforhold from '../ArbeidsforholdHelper';
 import {
   validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
 } from '../ValidateAndelerUtils';
 import styles from './renderFordelBGFieldArray.less';
-import { createVisningsnavnForAktivitet } from '../util/visningsnavnHelper';
+import createVisningsnavnForAktivitet from '../util/visningsnavnHelper';
 
 const ENTER_KEY_CODE = 13;
 
@@ -231,7 +231,6 @@ const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
             <PeriodpickerField
               names={[`${andelElementFieldId}.arbeidsperiodeFom`, `${andelElementFieldId}.arbeidsperiodeTom`]}
               readOnly
-              defaultValue={null}
               renderIfMissingDateOnReadOnly
             />
           </div>
@@ -259,6 +258,7 @@ const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
             }
             return '';
           }}
+          // @ts-ignore Fiks
           normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
         />
       </TableColumn>
@@ -287,7 +287,6 @@ const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
           selectValues={inntektskategoriSelectValues(inntektskategoriKoder)}
           value={fields.get(index).inntektskategori}
           readOnly={(readOnly || periodeUtenAarsak)}
-          isEdited={isAksjonspunktClosed && !periodeUtenAarsak}
         />
       </TableColumn>
       <TableColumn>
@@ -349,13 +348,61 @@ const getHeaderTextCodes = (erRevurdering) => {
   return headerCodes;
 };
 
+type Arbeidsforhold = {
+  andelsnr: number;
+  nyttArbeidsforhold: boolean;
+  beregningsperiodeTom: string;
+  beregningsperiodeFom: string;
+  arbeidsgiverNavn?: string;
+  arbeidsgiverId?: string;
+  arbeidsgiverIdVisning?: string;
+  eksternArbeidsforholdId?: string;
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: Kodeverk;
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  arbeidsforholdType?: Kodeverk;
+}
+type MappedOwnProps = {
+  erRevurdering: boolean;
+  inntektskategoriKoder: Kodeverk[];
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  arbeidsforholdList: Arbeidsforhold[];
+  harKunYtelse: boolean;
+}
+
+type OwnProps = {
+    readOnly: boolean;
+    fields: FieldArrayFieldsProps<any>;
+    meta?: FieldArrayMetaProps;
+    isAksjonspunktClosed: boolean;
+    periodeUtenAarsak: boolean;
+};
+
+interface StaticFunctions {
+  validate: (values: any,
+             sumIPeriode: number,
+             skalValidereMotBeregningsgrunnlagPrAar: (andel: BeregningsgrunnlagAndel) => boolean,
+             getKodeverknavn: (kodeverk: Kodeverk) => string,
+             grunnbeløp: number,
+             periodeDato: {
+              fom: string;
+              tom: string;
+             },
+             skalValidereRefusjon: boolean) => any;
+}
+
 /**
  *  RenderFordelBGFieldArray
  *
  * Presentasjonskomponent: Viser fordeling av brutto beregningsgrunnlag ved endret beregningsgrunnlag
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-export const RenderFordelBGFieldArrayImpl = ({
+export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOwnProps & WrappedComponentProps> & StaticFunctions = ({
   fields,
   meta,
   intl,
@@ -397,7 +444,7 @@ export const RenderFordelBGFieldArrayImpl = ({
             onKeyDown={onKeyDown(fields, periodeUtenAarsak)}
             className={styles.addPeriode}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
           >
             <Image
               className={styles.addCircleIcon}
@@ -416,23 +463,9 @@ export const RenderFordelBGFieldArrayImpl = ({
   );
 };
 
-RenderFordelBGFieldArrayImpl.propTypes = {
-  readOnly: PropTypes.bool.isRequired,
-  fields: PropTypes.shape().isRequired,
-  meta: PropTypes.shape().isRequired,
-  intl: PropTypes.shape().isRequired,
-  arbeidsforholdList: PropTypes.arrayOf(arbeidsforholdBeregningProptype).isRequired,
-  inntektskategoriKoder: kodeverkPropType.isRequired,
-  isAksjonspunktClosed: PropTypes.bool.isRequired,
-  periodeUtenAarsak: PropTypes.bool.isRequired,
-  harKunYtelse: PropTypes.bool.isRequired,
-  erRevurdering: PropTypes.bool.isRequired,
-  getKodeverknavn: PropTypes.func.isRequired,
-};
-
 const RenderFordelBGFieldArray = injectIntl(RenderFordelBGFieldArrayImpl);
 
-RenderFordelBGFieldArray.validate = (values, sumIPeriode, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn,
+RenderFordelBGFieldArrayImpl.validate = (values, sumIPeriode, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn,
   grunnbeløp, periodeDato, skalValidereRefusjon) => {
   const fieldErrors = validateAndeler(values, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, periodeDato);
   if (fieldErrors != null) {
@@ -473,7 +506,7 @@ const mapStateToPropsFactory = (initialState, initialOwnProps) => {
   const erRevurdering = behandlingType ? behandlingType.kode === bt.REVURDERING : false;
   const inntektskategoriKoder = initialOwnProps.alleKodeverk[kodeverkTyper.INNTEKTSKATEGORI];
   const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
-  return (state, ownProps) => ({
+  return (state, ownProps): MappedOwnProps => ({
     erRevurdering,
     inntektskategoriKoder,
     getKodeverknavn,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import {
   dateFormat,
   hasValidDate,
@@ -12,16 +12,15 @@ import {
 } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import { refusjonAndelTilVurderingPropType } from '../../propTypes/beregningsgrunnlagPropType';
+import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import styles from './vurderEndringRefusjonRad.less';
 
 const visningsnavn = (andel) => {
-  if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
-    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiverId.arbeidsgiverOrgnr})`;
+  if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
+    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiver.arbeidsgiverOrgnr})`;
   }
   return `${andel.arbeidsgiverNavn}`;
 };
@@ -30,20 +29,35 @@ const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
 const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';
 
 const lagNøkkel = (prefix, andel) => {
-  if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
-    return `${prefix}${andel.arbeidsgiverId.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef}`;
+  if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
+    return `${prefix}${andel.arbeidsgiver.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef}`;
   }
-  return `${prefix}${andel.arbeidsgiverId.arbeidsgiverAktørId}${andel.internArbeidsforholdRef}`;
+  return `${prefix}${andel.arbeidsgiver.arbeidsgiverAktørId}${andel.internArbeidsforholdRef}`;
 };
 
 export const lagNøkkelRefusjonsstart = (andel) => lagNøkkel(FIELD_KEY_REFUSJONSTART, andel);
 export const lagNøkkelDelvisRefusjon = (andel) => lagNøkkel(FIELD_KEY_DELVIS_REF, andel);
 
-export const VurderEndringRefusjonRad = ({
-  refusjonAndel,
-  readOnly,
-  erAksjonspunktÅpent,
-}) => {
+type OwnProps = {
+    refusjonAndel?: RefusjonTilVurderingAndel;
+    readOnly: boolean;
+    erAksjonspunktÅpent: boolean;
+};
+
+type TransformedValues = {
+  arbeidsgiverOrgnr?: string;
+  arbeidsgiverAktoerId?: string;
+  internArbeidsforholdRef?: string;
+  fastsattRefusjonFom: string;
+  delvisRefusjonPrMndFørStart?: number;
+}
+
+interface StaticFunctions {
+  buildInitialValues: (andel: RefusjonTilVurderingAndel) => any;
+  transformValues: (values: any, andel: RefusjonTilVurderingAndel) => TransformedValues;
+}
+
+export const VurderEndringRefusjonRad: FunctionComponent<OwnProps> & StaticFunctions = ({ refusjonAndel, readOnly, erAksjonspunktÅpent }) => {
   if (!refusjonAndel) {
     return null;
   }
@@ -107,14 +121,14 @@ export const VurderEndringRefusjonRad = ({
   );
 };
 
-VurderEndringRefusjonRad.buildInitialValues = (refusjonAndel) => {
+VurderEndringRefusjonRad.buildInitialValues = (refusjonAndel: RefusjonTilVurderingAndel) => {
   const initialValues = {};
   initialValues[lagNøkkelRefusjonsstart(refusjonAndel)] = refusjonAndel.fastsattNyttRefusjonskravFom;
   initialValues[lagNøkkelDelvisRefusjon(refusjonAndel)] = formatCurrencyNoKr(refusjonAndel.fastsattDelvisRefusjonPrMnd);
   return initialValues;
 };
 
-VurderEndringRefusjonRad.transformValues = (values, andel) => {
+VurderEndringRefusjonRad.transformValues = (values, andel: RefusjonTilVurderingAndel) => {
   let delvisRefusjonPrMnd = null;
   if (andel.skalKunneFastsetteDelvisRefusjon) {
     const delvisNøkkel = lagNøkkelDelvisRefusjon(andel);
@@ -123,18 +137,12 @@ VurderEndringRefusjonRad.transformValues = (values, andel) => {
   const datoNøkkel = lagNøkkelRefusjonsstart(andel);
   const fastsattDato = values[datoNøkkel];
   return {
-    arbeidsgiverOrgnr: andel.arbeidsgiverId.arbeidsgiverOrgnr,
-    arbeidsgiverAktoerId: andel.arbeidsgiverId.arbeidsgiverAktørId,
+    arbeidsgiverOrgnr: andel.arbeidsgiver.arbeidsgiverOrgnr,
+    arbeidsgiverAktoerId: andel.arbeidsgiver.arbeidsgiverAktørId,
     internArbeidsforholdRef: andel.internArbeidsforholdRef,
     fastsattRefusjonFom: fastsattDato,
     delvisRefusjonPrMndFørStart: delvisRefusjonPrMnd,
   };
-};
-
-VurderEndringRefusjonRad.propTypes = {
-  refusjonAndel: refusjonAndelTilVurderingPropType,
-  readOnly: PropTypes.bool.isRequired,
-  erAksjonspunktÅpent: PropTypes.bool.isRequired,
 };
 
 export default VurderEndringRefusjonRad;

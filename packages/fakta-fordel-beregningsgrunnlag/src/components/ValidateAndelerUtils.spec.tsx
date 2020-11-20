@@ -12,7 +12,12 @@ import {
   validateUlikeAndeler,
 } from './ValidateAndelerUtils';
 
-const skalValidereMotRapportert = () => true;
+const getKodeverknavn = (kodeverk) => {
+  if (kodeverk.kode === 'AAP') {
+    return 'Arbeidsavklaringspenger';
+  }
+  return '';
+};
 
 describe('<ValidateAndelerUtils>', () => {
   it('skal ikkje gi error når total refusjon er lavere enn inntektsmelding', () => {
@@ -42,7 +47,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
     expect(error).to.equal(null);
   });
 
@@ -73,7 +78,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
     expect(error).to.equal(null);
   });
 
@@ -104,7 +109,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
     expect(error).to.equal(null);
   });
 
@@ -135,10 +140,13 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
+
     const arbeidsgiverString = 'Andersen flyttebyrå (36363463463) ...f923';
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
+    // @ts-ignore TODO fiks denne
     expect(error.id).to.equal(expected.id);
+    // @ts-ignore TODO fiks denne
     expect(error.arbeidsgiver).to.equal(expected.arbeidsgiver);
   });
 
@@ -550,7 +558,7 @@ describe('<ValidateAndelerUtils>', () => {
     ];
     const fastsattError = validateSumFastsattBelop(values, 40000);
     expect(fastsattError).to.have.length(2);
-    expect(fastsattError[0].id).to.equal(skalVereLikFordelingMessage()[0].id);
+    expect(fastsattError[0].id).to.equal(skalVereLikFordelingMessage(40000)[0].id);
     expect(fastsattError[1].fordeling).to.equal('40 000');
   });
 
@@ -607,13 +615,6 @@ describe('<ValidateAndelerUtils>', () => {
   });
 
   it('skal gi error om fastsatt beløp og read only beløp er ulik sum', () => {
-    const skalRedigereInntekt = (andel) => {
-      if (andel.andelsnr <= 2) {
-        return true;
-      }
-      return false;
-    };
-
     const values = [{
       andelsnr: 1,
       fastsattBelop: '50 000',
@@ -635,9 +636,9 @@ describe('<ValidateAndelerUtils>', () => {
       readOnlyBelop: '15 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values, 50000, skalRedigereInntekt);
+    const fastsattError = validateSumFastsattBelop(values, 50000);
     expect(fastsattError).to.have.length(2);
-    expect(fastsattError[0].id).to.equal(skalVereLikFordelingMessage()[0].id);
+    expect(fastsattError[0].id).to.equal(skalVereLikFordelingMessage(50000)[0].id);
     expect(fastsattError[1].fordeling).to.equal('50 000');
   });
 
@@ -649,12 +650,11 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '3r4h3uihr43',
       fastsattBelop: '',
     };
-    const inntektList = [{
-      key: 'Arbeidsgiver 1 (2342353525) ...hr43',
-      beregningsgrunnlagPrAar: null,
-      fastsattBelop: 20000,
+    const periodeDato = [{
+      fom: '2020-01-01',
+      tom: null,
     }];
-    const fastsattError = validateFastsattBelop(andelValue, inntektList, skalValidereMotRapportert);
+    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
     expect(fastsattError[0].id).to.equal(isRequiredMessage()[0].id);
   });
 
@@ -665,16 +665,11 @@ describe('<ValidateAndelerUtils>', () => {
       andelIArbeid: '50.00',
       arbeidsperiodeTom: null,
     };
-    const inntektList = [{
-      key: 'Selvstendig næringsgivende',
-      beregningsgrunnlagPrAar: null,
-      fastsattBelop: 0,
-    }];
     const periodeDato = [{
       fom: '2020-01-01',
       tom: null,
     }];
-    const fastsattError = validateFastsattBelop(andelValue, inntektList, () => false, undefined, periodeDato);
+    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
     expect(fastsattError[0].id).to.equal(kanIkkjeHaNullBeregningsgrunnlagError()[0].id);
   });
 
@@ -685,16 +680,11 @@ describe('<ValidateAndelerUtils>', () => {
       andelIArbeid: '0 - 50',
       arbeidsperiodeTom: '2020-12-01',
     };
-    const inntektList = [{
-      key: 'Selvstendig næringsgivende',
-      beregningsgrunnlagPrAar: null,
-      fastsattBelop: 0,
-    }];
     const periodeDato = [{
       fom: '2020-01-01',
       tom: null,
     }];
-    const fastsattError = validateFastsattBelop(andelValue, inntektList, () => false, undefined, periodeDato);
+    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
     expect(fastsattError[0].id).to.equal(kanIkkjeHaNullBeregningsgrunnlagError()[0].id);
   });
 
@@ -705,16 +695,11 @@ describe('<ValidateAndelerUtils>', () => {
       andelIArbeid: '0',
       arbeidsperiodeTom: undefined,
     };
-    const inntektList = [{
-      key: 'Selvstendig næringsgivende',
-      beregningsgrunnlagPrAar: null,
-      fastsattBelop: 0,
-    }];
     const periodeDato = [{
       fom: '2015-01-01',
       tom: null,
     }];
-    const fastsattError = validateFastsattBelop(andelValue, inntektList, () => false, undefined, periodeDato);
+    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
     expect(fastsattError).to.equal(null);
   });
 
@@ -724,12 +709,7 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '0',
       andelIArbeid: '',
     };
-    const inntektList = [{
-      key: 'Selvstendig næringsgivende',
-      beregningsgrunnlagPrAar: null,
-      fastsattBelop: 0,
-    }];
-    const fastsattError = validateFastsattBelop(andelValue, inntektList, () => false);
+    const fastsattError = validateFastsattBelop(andelValue, null);
     expect(fastsattError).to.equal(null);
   });
 
@@ -740,16 +720,11 @@ describe('<ValidateAndelerUtils>', () => {
       andelIArbeid: '0 - 50',
       arbeidsperiodeTom: '2019-12-31',
     };
-    const inntektList = [{
-      key: 'Selvstendig næringsgivende',
-      beregningsgrunnlagPrAar: null,
-      fastsattBelop: 0,
-    }];
     const periodeDato = [{
       fom: '2020-01-01',
       tom: null,
     }];
-    const fastsattError = validateFastsattBelop(andelValue, inntektList, () => false, undefined, periodeDato);
+    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
     expect(fastsattError).to.equal(null);
   });
 });

@@ -2,31 +2,32 @@ import React from 'react';
 import { expect } from 'chai';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+
 import { SelectField } from '@fpsak-frontend/form';
 import { TableRow } from '@fpsak-frontend/shared-components';
 import { Element } from 'nav-frontend-typografi';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding } from '../ValidateAndelerUtils';
-import RenderFordelBGFieldArray, { lagBelopKolonne, RenderFordelBGFieldArrayImpl } from './RenderFordelBGFieldArray';
+import { lagBelopKolonne, RenderFordelBGFieldArrayImpl } from './RenderFordelBGFieldArray';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
 
 const inntektskategorier = [
   {
     kode: 'ARBEIDSTAKER',
     navn: 'Arbeidstaker',
+    kodeverk: 'test',
   },
   {
     kode: 'SELVSTENDIG_NÆRINGSDRIVENDE',
     navn: 'Selvstendig næringsdrivende',
+    kodeverk: 'test',
   },
 ];
 
 const getKodeverknavn = () => undefined;
 
 const skalValidereMotBeregningsgrunnlagPrAar = () => true;
-
-const skjaeringstidspunktBeregning = '2018-01-01';
 
 const andel = {
   nyAndel: true,
@@ -44,6 +45,9 @@ const arbeidstakerAndelsnr = 1;
 const arbeidsgiverId = '12338';
 const arbeidsforholdList = [
   {
+    nyttArbeidsforhold: false,
+    beregningsperiodeTom: '2016-01-01',
+    beregningsperiodeFom: '2016-03-31',
     arbeidsgiverNavn: arbeidstakerNavn,
     arbeidsgiverId,
     startDato: '2016-01-01',
@@ -60,7 +64,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderFordelBGFieldArrayImpl
       fields={fields}
       intl={intlMock}
-      meta={{}}
+      meta={metaMock}
       inntektskategoriKoder={inntektskategorier}
       arbeidsforholdList={arbeidsforholdList}
       readOnly={false}
@@ -68,7 +72,6 @@ describe('<RenderFordelBGFieldArray>', () => {
       periodeUtenAarsak={false}
       harKunYtelse
       erRevurdering={false}
-      skjaeringstidspunktBeregning={skjaeringstidspunktBeregning}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -86,7 +89,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderFordelBGFieldArrayImpl
       fields={fields}
       intl={intlMock}
-      meta={{}}
+      meta={metaMock}
       inntektskategoriKoder={inntektskategorier}
       arbeidsforholdList={arbeidsforholdList}
       readOnly={false}
@@ -94,7 +97,6 @@ describe('<RenderFordelBGFieldArray>', () => {
       harKunYtelse={false}
       periodeUtenAarsak={false}
       erRevurdering={false}
-      skjaeringstidspunktBeregning={skjaeringstidspunktBeregning}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -133,7 +135,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderFordelBGFieldArrayImpl
       fields={fields2}
       intl={intlMock}
-      meta={{}}
+      meta={metaMock}
       inntektskategoriKoder={inntektskategorier}
       arbeidsforholdList={arbeidsforholdList}
       readOnly={false}
@@ -141,7 +143,6 @@ describe('<RenderFordelBGFieldArray>', () => {
       harKunYtelse={false}
       periodeUtenAarsak={false}
       erRevurdering={false}
-      skjaeringstidspunktBeregning={skjaeringstidspunktBeregning}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -177,7 +178,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderFordelBGFieldArrayImpl
       fields={fields2}
       intl={intlMock}
-      meta={{}}
+      meta={metaMock}
       inntektskategoriKoder={inntektskategorier}
       arbeidsforholdList={arbeidsforholdList}
       readOnly={false}
@@ -185,7 +186,6 @@ describe('<RenderFordelBGFieldArray>', () => {
       harKunYtelse={false}
       periodeUtenAarsak={false}
       erRevurdering={false}
-      skjaeringstidspunktBeregning={skjaeringstidspunktBeregning}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -235,7 +235,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     const wrapper = shallowWithIntl(<RenderFordelBGFieldArrayImpl
       fields={fields2}
       intl={intlMock}
-      meta={{}}
+      meta={metaMock}
       inntektskategoriKoder={inntektskategorier}
       arbeidsforholdList={arbeidsforholdList}
       readOnly={false}
@@ -243,7 +243,6 @@ describe('<RenderFordelBGFieldArray>', () => {
       harKunYtelse={false}
       periodeUtenAarsak={false}
       erRevurdering={false}
-      skjaeringstidspunktBeregning={skjaeringstidspunktBeregning}
       getKodeverknavn={getKodeverknavn}
     />);
 
@@ -266,8 +265,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors).to.equal(null);
   });
 
@@ -285,8 +284,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors).to.equal(null);
   });
 
@@ -304,8 +303,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors).to.equal(null);
   });
 
@@ -323,8 +322,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors[0].refusjonskrav).to.have.length(1);
     expect(errors[0].refusjonskrav[0].id).to.equal(isRequiredMessage()[0].id);
   });
@@ -343,8 +342,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: null,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors[0].refusjonskrav).to.have.length(1);
     expect(errors[0].refusjonskrav[0].id).to.equal(isRequiredMessage()[0].id);
   });
@@ -373,7 +372,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: null,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, true);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
@@ -396,7 +395,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 0,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, true);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
@@ -419,8 +418,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       nyttArbeidsforhold: false,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors[0].fastsattBelop).to.have.length(1);
     expect(errors[0].fastsattBelop[0].id).to.equal(isRequiredMessage()[0].id);
   });
@@ -439,8 +438,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors[0].inntektskategori).to.have.length(1);
     expect(errors[0].inntektskategori[0].id).to.equal(isRequiredMessage()[0].id);
   });
@@ -460,8 +459,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       nyAndel: true,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors[0].andel).to.have.length(1);
     expect(errors[0].andel[0].id).to.equal(isRequiredMessage()[0].id);
   });
@@ -481,8 +480,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       nyAndel: true,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArray.validate(values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn);
+    const errors = RenderFordelBGFieldArrayImpl.validate(values, 100000,
+      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
     expect(errors).to.equal(null);
   });
 

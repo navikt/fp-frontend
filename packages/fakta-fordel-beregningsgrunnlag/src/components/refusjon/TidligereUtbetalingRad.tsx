@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { dateFormat, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { refusjonAndelTilVurderingPropType } from '../../propTypes/beregningsgrunnlagPropType';
+import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import styles from './tidligereUtbetalinger.less';
 
 const visningsnavn = (andel) => {
-  if (andel.arbeidsgiverId.arbeidsgiverOrgnr) {
-    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiverId.arbeidsgiverOrgnr})`;
+  if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
+    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiver.arbeidsgiverOrgnr})`;
   }
   return `${andel.arbeidsgiverNavn}`;
 };
 
 const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling) => (
-  <Row className={styles.correctPadding}>
+  <Row className={styles.correctPadding} key={`${andelsnavn}_(${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {utbetaling && utbetaling.erTildeltRefusjon
         ? <Normaltekst>{andelsnavn}</Normaltekst>
@@ -39,16 +39,18 @@ const lagPeriode = (utbetaling) => {
 };
 
 const perioder = (utbetalinger) => utbetalinger.map((utbetaling) => (
-  <Row className={styles.correctPadding}>
+  <Row className={styles.correctPadding} key={`${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {lagPeriode(utbetaling)}
     </Column>
   </Row>
 ));
 
-export const TidligereUtbetalingRad = ({
-  refusjonAndel,
-}) => (
+type OwnProps = {
+    refusjonAndel?: RefusjonTilVurderingAndel;
+};
+
+export const TidligereUtbetalingRad: FunctionComponent<OwnProps> = ({ refusjonAndel }) => (
   <TableRow>
     <TableColumn>
       {visningsnavn(refusjonAndel)}
@@ -61,8 +63,5 @@ export const TidligereUtbetalingRad = ({
     </TableColumn>
   </TableRow>
 );
-TidligereUtbetalingRad.propTypes = {
-  refusjonAndel: refusjonAndelTilVurderingPropType,
-};
 
 export default TidligereUtbetalingRad;
