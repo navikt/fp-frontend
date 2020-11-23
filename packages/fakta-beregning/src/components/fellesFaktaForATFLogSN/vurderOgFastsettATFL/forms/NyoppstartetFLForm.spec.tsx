@@ -5,6 +5,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import NyoppstartetFLForm, { erNyoppstartetFLField } from './NyoppstartetFLForm';
+import { InntektTransformed } from '../../andelFieldValueTs';
 
 describe('<NyoppstartetFLForm>', () => {
   it('skal teste at korrekt antall radioknapper vises med korrekte props', () => {
@@ -51,8 +52,8 @@ describe('<NyoppstartetFLForm>', () => {
     const values = { };
     values[erNyoppstartetFLField] = true;
     const inntekterPrMnd = [
-      frilansAndelInntekt,
-      arbeidstakerInntekt,
+      frilansAndelInntekt as InntektTransformed,
+      arbeidstakerInntekt as InntektTransformed,
     ];
     const fastsatteAndeler = [];
     const transformedObject = NyoppstartetFLForm.transformValues(values, inntekterPrMnd, faktaOmBeregning, fastsatteAndeler);

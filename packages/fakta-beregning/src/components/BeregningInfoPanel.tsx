@@ -6,9 +6,9 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
 import AvklareAktiviteterPanel from './avklareAktiviteter/AvklareAktiviteterPanel';
-import Aksjonspunkt from "@fpsak-frontend/types/src/aksjonspunktTsType";
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,

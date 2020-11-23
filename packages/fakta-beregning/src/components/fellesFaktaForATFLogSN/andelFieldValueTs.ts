@@ -16,4 +16,15 @@ type AndelFieldValue = {
   refusjonskrav?: number;
 }
 
+export type InntektTransformed = {
+  andelsnr: number;
+  fastsattBelop: number;
+  inntektskategori: string;
+  nyAndel: boolean;
+  lagtTilAvSaksbehandler: boolean;
+  aktivitetStatus: string;
+  arbeidsforholdId: string;
+  arbeidsgiverId: string;
+}
+
 export default AndelFieldValue;

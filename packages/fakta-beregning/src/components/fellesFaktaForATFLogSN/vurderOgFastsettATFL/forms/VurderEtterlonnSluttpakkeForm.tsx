@@ -13,6 +13,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Beregningsgrunnlag, { FaktaOmBeregning } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { getFormValuesForBeregning } from '../../../BeregningFormUtils';
+import { InntektTransformed } from '../../andelFieldValueTs';
 
 /**
  * VurderEtterlønnSluttpakkeForm
@@ -29,7 +30,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag, faktaAksjonspunkt: Aksjonspunkt) => any;
-  transformValues: (values: any, inntektPrMnd: any, faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
+  transformValues: (values: any, inntektPrMnd: InntektTransformed[], faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
 }
 
 const VurderEtterlonnSluttpakkeForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed }) => (

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { NavFieldGroup } from '@fpsak-frontend/form';
 import {
-  formatCurrencyNoKr, isArrayEmpty, removeSpacesFromNumber, required,
+  isArrayEmpty, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -13,7 +13,6 @@ import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
   AndelForFaktaOmBeregning,
-  BeregningsgrunnlagAndel,
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -25,12 +24,12 @@ import { isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
 import { AndelRow, getHeaderTextCodes } from './InntektFieldArrayRow';
 import AddAndelButton from './AddAndelButton';
 import SummaryRow from './SummaryRow';
-import AndelFieldValue from './andelFieldValueTs';
+import AndelFieldValue, { InntektTransformed } from './andelFieldValueTs';
 
-const dagpenger = (aktivitetStatuser, beregnetPrAar) => ({
+const dagpenger = (aktivitetStatuser) => ({
   andel: aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.DAGPENGER)[0].navn,
   aktivitetStatus: aktivitetStatus.DAGPENGER,
-  fastsattBelop: beregnetPrAar || beregnetPrAar === 0 ? formatCurrencyNoKr(beregnetPrAar / 12) : '',
+  fastsattBelop: '',
   inntektskategori: inntektskategorier.DAGPENGER,
   nyAndel: true,
   skalKunneEndreAktivitet: false,
@@ -121,7 +120,7 @@ const findDagpengerIndex = (fields) => {
   return dagpengerIndex;
 };
 
-export const leggTilDagpengerOmBesteberegning = (fields, skalHaBesteberegning, aktivitetStatuser, dagpengeAndelLagtTilIForrige) => {
+export const leggTilDagpengerOmBesteberegning = (fields, skalHaBesteberegning, aktivitetStatuser) => {
   const dpIndex = findDagpengerIndex(fields);
   if (!skalHaBesteberegning) {
     if (dpIndex !== -1) {
@@ -135,7 +134,7 @@ export const leggTilDagpengerOmBesteberegning = (fields, skalHaBesteberegning, a
   if (dpIndex !== -1) {
     return;
   }
-  fields.push(dagpenger(aktivitetStatuser, dagpengeAndelLagtTilIForrige ? dagpengeAndelLagtTilIForrige.beregnetPrAar : undefined));
+  fields.push(dagpenger(aktivitetStatuser));
 };
 
 type OwnProps = {
@@ -147,7 +146,6 @@ type OwnProps = {
     skalKunneLeggeTilAndel?: boolean;
     aktivitetStatuser: Kodeverk[];
     skalHaBesteberegning: boolean;
-    dagpengeAndelLagtTilIForrige?: BeregningsgrunnlagAndel;
     behandlingId: number;
     behandlingVersjon: number;
     beregningsgrunnlag: Beregningsgrunnlag;
@@ -156,9 +154,11 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  validate: (values: any, erKunYtelse: boolean, skalRedigereInntekt: boolean) => any;
+  validate: (values: any,
+             erKunYtelse: boolean,
+             skalRedigereInntekt: (andel) => boolean) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[]) => any;
-  transformValues: (values: any) => any;
+  transformValues: (values: any) => InntektTransformed;
 }
 
 /**
@@ -175,7 +175,6 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
   erKunYtelse,
   skalKunneLeggeTilAndel,
   aktivitetStatuser,
-  dagpengeAndelLagtTilIForrige,
   skalHaBesteberegning,
   behandlingId,
   behandlingVersjon,
@@ -192,7 +191,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
     isAksjonspunktClosed,
     alleKodeverk,
   );
-  leggTilDagpengerOmBesteberegning(fields, skalHaBesteberegning, aktivitetStatuser, dagpengeAndelLagtTilIForrige);
+  leggTilDagpengerOmBesteberegning(fields, skalHaBesteberegning, aktivitetStatuser);
   if (tablerows.length === 0) {
     return null;
   }
@@ -216,11 +215,10 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
 };
 
 InntektFieldArrayImpl.defaultProps = {
-  dagpengeAndelLagtTilIForrige: undefined,
   skalKunneLeggeTilAndel: true,
 };
 
-InntektFieldArrayImpl.transformValues = (values) => (values
+InntektFieldArrayImpl.transformValues = (values): InntektTransformed => (values
   ? values.filter(({ skalRedigereInntekt }) => skalRedigereInntekt).map((fieldValue) => ({
     andelsnr: fieldValue.andelsnr,
     fastsattBelop: removeSpacesFromNumber(fieldValue.fastsattBelop),
@@ -247,7 +245,7 @@ InntektFieldArrayImpl.validate = (values: AndelFieldValue[], erKunYtelse, skalRe
         inntektskategori: null,
       };
       fieldErrors.andel = required(andelFieldValues.andel);
-      fieldErrors.fastsattBelop = skalRedigereInntekt ? required(andelFieldValues.fastsattBelop) : null;
+      fieldErrors.fastsattBelop = skalRedigereInntekt(andelFieldValues) ? required(andelFieldValues.fastsattBelop) : null;
       fieldErrors.inntektskategori = required(andelFieldValues.inntektskategori);
       return fieldErrors.andel || fieldErrors.fastsattBelop || fieldErrors.inntektskategori ? fieldErrors : null;
     });
@@ -271,12 +269,6 @@ InntektFieldArrayImpl.buildInitialValues = (andeler) => {
   return andeler.map((a) => mapAndelToField(a));
 };
 
-const finnDagpengeAndelLagtTilIForrige = (bg) => {
-  const andelerLagtTil = bg.beregningsgrunnlagPeriode[0].andelerLagtTilManueltIForrige;
-  return andelerLagtTil
-    ? andelerLagtTil.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.DAGPENGER) : undefined;
-};
-
 export const mapStateToProps = (state, ownProps) => {
   const isBeregningFormDirty = isFormDirty(state, ownProps);
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
@@ -287,7 +279,6 @@ export const mapStateToProps = (state, ownProps) => {
     isBeregningFormDirty,
     skalHaBesteberegning,
     aktivitetStatuser,
-    dagpengeAndelLagtTilIForrige: finnDagpengeAndelLagtTilIForrige(ownProps.beregningsgrunnlag),
     erKunYtelse: tilfeller && tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE),
   };
 };

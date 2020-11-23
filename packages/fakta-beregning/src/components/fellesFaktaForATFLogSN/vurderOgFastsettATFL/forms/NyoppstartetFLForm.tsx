@@ -7,6 +7,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import Beregningsgrunnlag, { FaktaOmBeregning } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { InntektTransformed } from '../../andelFieldValueTs';
 
 /**
  * NyOppstartetFLForm
@@ -26,7 +27,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => any;
-  transformValues: (values: any, inntektPrMnd: any, faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
+  transformValues: (values: any, inntektPrMnd: InntektTransformed[], faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
 }
 
 const NyoppstartetFLForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed }) => (

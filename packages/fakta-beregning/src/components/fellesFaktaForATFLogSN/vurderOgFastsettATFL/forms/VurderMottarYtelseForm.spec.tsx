@@ -7,24 +7,26 @@ import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
+import { ArbeidstakerUtenIMAndel, FaktaOmBeregning } from '@fpsak-frontend/types';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { createVisningsnavnForAktivitet } from '../../../ArbeidsforholdHelper';
 import VurderMottarYtelseForm, {
   frilansMedAndreFrilanstilfeller,
   frilansUtenAndreFrilanstilfeller,
   mottarYtelseForArbeidMsg,
-  VurderMottarYtelseForm,
 } from './VurderMottarYtelseForm';
 import { finnFrilansFieldName, utledArbeidsforholdFieldName } from './VurderMottarYtelseUtils';
+import { InntektTransformed } from '../../andelFieldValueTs';
 
 const requiredMessageId = isRequiredMessage()[0].id;
 
 const beregningsgrunnlag = {
   beregningsgrunnlagPeriode: [{
     beregningsgrunnlagPrStatusOgAndel: [
-      { andelsnr: 1, aktivitetStatus: { kode: 'AT' } },
-      { andelsnr: 2, aktivitetStatus: { kode: 'AT' } },
-      { andelsnr: 3, aktivitetStatus: { kode: 'AT' } },
-      { andelsnr: 4, aktivitetStatus: { kode: 'FL' } },
+      { andelsnr: 1, aktivitetStatus: { kode: 'AT', kodeverk: 'test' } },
+      { andelsnr: 2, aktivitetStatus: { kode: 'AT', kodeverk: 'test' } },
+      { andelsnr: 3, aktivitetStatus: { kode: 'AT', kodeverk: 'test' } },
+      { andelsnr: 4, aktivitetStatus: { kode: 'FL', kodeverk: 'test' } },
     ],
   }],
 };
@@ -72,16 +74,15 @@ const andel3 = {
 };
 
 const arbeidstakerAndelerUtenIM = [
-  { ...andel, mottarYtelse: null },
-  { ...andel2, mottarYtelse: false },
-  { ...andel3, mottarYtelse: true },
+  { ...andel, mottarYtelse: null } as ArbeidstakerUtenIMAndel,
+  { ...andel2, mottarYtelse: false } as ArbeidstakerUtenIMAndel,
+  { ...andel3, mottarYtelse: true } as ArbeidstakerUtenIMAndel,
 ];
 
 const alleKodeverk = {};
 
 describe('<VurderMottarYtelseForm>', () => {
   it('skal teste at initial values bygges korrekt uten dto til stede', () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = VurderMottarYtelseForm.buildInitialValues(undefined);
     expect(initialValues).to.equal(null);
   });
@@ -91,7 +92,6 @@ describe('<VurderMottarYtelseForm>', () => {
       erFrilans: true,
       frilansMottarYtelse: null,
     };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = VurderMottarYtelseForm.buildInitialValues(mottarYtelse);
     expect(initialValues[finnFrilansFieldName()]).to.equal(null);
   });
@@ -101,7 +101,6 @@ describe('<VurderMottarYtelseForm>', () => {
       erFrilans: true,
       frilansMottarYtelse: true,
     };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = VurderMottarYtelseForm.buildInitialValues(mottarYtelse);
     expect(initialValues[finnFrilansFieldName()]).to.equal(true);
   });
@@ -111,7 +110,6 @@ describe('<VurderMottarYtelseForm>', () => {
       erFrilans: true,
       frilansMottarYtelse: false,
     };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = VurderMottarYtelseForm.buildInitialValues(mottarYtelse);
     expect(initialValues[finnFrilansFieldName()]).to.equal(false);
   });
@@ -122,7 +120,6 @@ describe('<VurderMottarYtelseForm>', () => {
       frilansMottarYtelse: false,
       arbeidstakerAndelerUtenIM,
     };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const initialValues = VurderMottarYtelseForm.buildInitialValues(mottarYtelse);
     expect(initialValues[finnFrilansFieldName()]).to.equal(false);
     expect(initialValues[utledArbeidsforholdFieldName(andel)]).to.equal(null);
@@ -141,7 +138,6 @@ describe('<VurderMottarYtelseForm>', () => {
     values[utledArbeidsforholdFieldName(andel)] = false;
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = false;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
     const errors = VurderMottarYtelseForm.validate(values, mottarYtelse);
     expect(errors[finnFrilansFieldName()]).to.equal(undefined);
     expect(errors[utledArbeidsforholdFieldName(andel)]).to.equal(undefined);
@@ -160,7 +156,6 @@ describe('<VurderMottarYtelseForm>', () => {
     values[utledArbeidsforholdFieldName(andel)] = null;
     values[utledArbeidsforholdFieldName(andel2)] = null;
     values[utledArbeidsforholdFieldName(andel3)] = null;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
     const errors = VurderMottarYtelseForm.validate(values, mottarYtelse);
     expect(errors[finnFrilansFieldName()][0].id).to.equal(requiredMessageId);
     expect(errors[utledArbeidsforholdFieldName(andel)][0].id).to.equal(requiredMessageId);
@@ -169,13 +164,18 @@ describe('<VurderMottarYtelseForm>', () => {
   });
 
   it('skal vise radioknapp for frilans uten andre frilanstilfeller', () => {
+    const faktaBG = {
+      vurderMottarYtelse: {
+        erFrilans: true,
+      },
+      andelerForFaktaOmBeregning: [],
+    } as FaktaOmBeregning;
     const wrapper = shallow(<VurderMottarYtelseForm
       readOnly={false}
       isAksjonspunktClosed={false}
       tilfeller={[]}
-      erFrilans
-      arbeidsforholdUtenIM={[]}
       alleKodeverk={alleKodeverk}
+      beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).to.have.length(1);
@@ -186,12 +186,17 @@ describe('<VurderMottarYtelseForm>', () => {
   });
 
   it('skal vise radioknapp for frilans med andre frilanstilfeller', () => {
+    const faktaBG = {
+      vurderMottarYtelse: {
+        erFrilans: true,
+      },
+      andelerForFaktaOmBeregning: [],
+    } as FaktaOmBeregning;
     const wrapper = shallow(<VurderMottarYtelseForm
       readOnly={false}
       isAksjonspunktClosed={false}
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
-      erFrilans
-      arbeidsforholdUtenIM={[]}
+      beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
       alleKodeverk={alleKodeverk}
     />);
     const flRadio = wrapper.find(RadioGroupField);
@@ -203,12 +208,19 @@ describe('<VurderMottarYtelseForm>', () => {
   });
 
   it('skal vise radioknapper for AT uten inntektsmelding', () => {
+    const bg = {
+      faktaOmBeregning: {
+        vurderMottarYtelse: {
+          arbeidstakerAndelerUtenIM,
+        },
+        andelerForFaktaOmBeregning: [],
+      },
+    };
     const wrapper = shallow(<VurderMottarYtelseForm
       readOnly={false}
       isAksjonspunktClosed={false}
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
-      erFrilans={false}
-      arbeidsforholdUtenIM={arbeidstakerAndelerUtenIM}
+      beregningsgrunnlag={bg as Beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
     />);
     const atRadio = wrapper.find(RadioGroupField);
@@ -218,30 +230,29 @@ describe('<VurderMottarYtelseForm>', () => {
     expect(formattedMsg).to.have.length(3);
     formattedMsg.forEach((msg, index) => {
       expect(msg.prop('id')).to.equal(mottarYtelseForArbeidMsg());
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'arbeid' does not exist on type 'unknown'... Remove this comment to see the full error message
-      expect(msg.prop('values').arbeid).to.equal(createVisningsnavnForAktivitet(arbeidstakerAndelerUtenIM[index].arbeidsforhold, alleKodeverk));
+      expect(msg.prop('values')).to.eql({ arbeid: createVisningsnavnForAktivitet(arbeidstakerAndelerUtenIM[index].arbeidsforhold, alleKodeverk) });
     });
   });
 
   it('skal transform values og sende ned FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING ved mottar ytelse for AT uten inntektsmelding', () => {
     const tilfeller = [faktaOmBeregningTilfelle.VURDER_LONNSENDRING, faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE];
     const inntektPrMnd = [
-      { andelsnr: andel.andelsnr, fastsattBelop: 10000 },
-      { andelsnr: andel3.andelsnr, fastsattBelop: 20000 },
+      { andelsnr: andel.andelsnr, fastsattBelop: 10000 } as InntektTransformed,
+      { andelsnr: andel3.andelsnr, fastsattBelop: 20000 } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
       vurderMottarYtelse: {
         erFrilanser: false,
         arbeidstakerAndelerUtenIM,
       },
+      andelerForFaktaOmBeregning: [],
     };
     const values = {};
     values[utledArbeidsforholdFieldName(andel)] = true;
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = true;
     const fastsatteAndelsnr = [];
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     const transformed = VurderMottarYtelseForm.transformValues(values, inntektPrMnd, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr);
     const fastsatteInntekter = transformed.fastsattUtenInntektsmelding.andelListe;
     expect(fastsatteAndelsnr.length).to.equal(2);
@@ -261,22 +272,22 @@ describe('<VurderMottarYtelseForm>', () => {
   it('skal kunne sette beløp til 0', () => {
     const tilfeller = [faktaOmBeregningTilfelle.VURDER_LONNSENDRING, faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE];
     const inntektPrMnd = [
-      { andelsnr: andel.andelsnr, fastsattBelop: 0 },
-      { andelsnr: andel3.andelsnr, fastsattBelop: 0 },
+      { andelsnr: andel.andelsnr, fastsattBelop: 0 } as InntektTransformed,
+      { andelsnr: andel3.andelsnr, fastsattBelop: 0 } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
       vurderMottarYtelse: {
         erFrilanser: false,
         arbeidstakerAndelerUtenIM,
       },
+      andelerForFaktaOmBeregning: [],
     };
     const values = {};
     values[utledArbeidsforholdFieldName(andel)] = true;
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = true;
     const fastsatteAndelsnr = [];
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     const transformed = VurderMottarYtelseForm.transformValues(values, inntektPrMnd, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr);
     const fastsatteInntekter = transformed.fastsattUtenInntektsmelding.andelListe;
     expect(fastsatteAndelsnr.length).to.equal(2);
@@ -296,19 +307,19 @@ describe('<VurderMottarYtelseForm>', () => {
   it('skal transform values og sende ned FASTSETT_MAANEDSINNTEKT_FL ved mottar ytelse for Frilans', () => {
     const tilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE];
     const inntektPrMnd = [
-      { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' },
+      { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
       vurderMottarYtelse: {
         erFrilanser: true,
         arbeidstakerAndelerUtenIM: [],
       },
+      andelerForFaktaOmBeregning: [],
     };
     const values = {};
     values[finnFrilansFieldName()] = true;
     const fastsatteAndelsnr = [];
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     const transformed = VurderMottarYtelseForm.transformValues(values, inntektPrMnd, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr);
     const fastsattInntekt = transformed.fastsettMaanedsinntektFL.maanedsinntekt;
     expect(fastsatteAndelsnr.length).to.equal(1);

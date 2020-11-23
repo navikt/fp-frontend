@@ -90,7 +90,7 @@ export type KunYtelse = Readonly<{
 
 export type VurderMottarYtelse = Readonly<{
   erFrilans?: boolean;
-  frilansMottarYtelse?: number;
+  frilansMottarYtelse?: boolean;
   frilansInntektPrMnd?: number;
   arbeidstakerAndelerUtenIM?: ArbeidstakerUtenIMAndel[];
 }>
@@ -113,8 +113,8 @@ export type FaktaOmBeregning = Readonly<{
   kortvarigeArbeidsforhold?: KortvarigAndel[];
   kunYtelse?: KunYtelse;
   faktaOmBeregningTilfeller?: Kodeverk[];
-  vurderMottarYtelse: VurderMottarYtelse;
-  arbeidstakerOgFrilanserISammeOrganisasjonListe: ATFLSammeOrgAndel[];
+  vurderMottarYtelse?: VurderMottarYtelse;
+  arbeidstakerOgFrilanserISammeOrganisasjonListe?: ATFLSammeOrgAndel[];
 }>
 
 type PerioderMedGraderingEllerRefusjon = Readonly<{

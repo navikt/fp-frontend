@@ -23,9 +23,8 @@ import {
   getSkalRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME,
 } from '../BgFaktaUtils';
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
-import InntektFieldArray from '../InntektFieldArray';
+import InntektFieldArray, { InntektFieldArrayImpl } from '../InntektFieldArray';
 import VurderEtterlonnSluttpakkeForm from './forms/VurderEtterlonnSluttpakkeForm';
-import beregningAksjonspunkterPropType from '../../../propTypes/beregningAksjonspunkterPropType';
 
 const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller, values) => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)
@@ -207,8 +206,7 @@ VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning, erOverstyrt) => {
     return {};
   }
   return {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
-    [INNTEKT_FIELD_ARRAY_NAME]: InntektFieldArray.buildInitialValues(andeler),
+    [INNTEKT_FIELD_ARRAY_NAME]: InntektFieldArrayImpl.buildInitialValues(andeler),
     ...InntektstabellPanel.buildInitialValues(erOverstyrt),
   };
 };
@@ -216,8 +214,7 @@ VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning, erOverstyrt) => {
 VurderOgFastsettATFL.validate = (values, tilfeller, faktaOmBeregning, beregningsgrunnlag) => {
   const errors = {};
   if (harVurdert(tilfeller, values, faktaOmBeregning) && skalFastsetteInntekt(values, faktaOmBeregning, beregningsgrunnlag)) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
-    errors[INNTEKT_FIELD_ARRAY_NAME] = InntektFieldArray.validate(values[INNTEKT_FIELD_ARRAY_NAME], false,
+    errors[INNTEKT_FIELD_ARRAY_NAME] = InntektFieldArrayImpl.validate(values[INNTEKT_FIELD_ARRAY_NAME], false,
       skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag));
   }
   return errors;
@@ -269,7 +266,6 @@ const transformValuesForAksjonspunkt = (values, inntektVerdier, fastsatteAndelsn
     // Lønnsendring FL
     transformed = concatTilfeller(transformed, LonnsendringForm.transformValues(values, faktaOmBeregning));
     // Mottar ytelse
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     transformed = concatTilfeller(transformed, VurderMottarYtelseForm.transformValues(values, allInntektErFastsatt ? null : inntektVerdier,
       faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr));
     // ATFL i samme org
@@ -283,8 +279,7 @@ const transformValuesForAksjonspunkt = (values, inntektVerdier, fastsatteAndelsn
 };
 
 VurderOgFastsettATFL.transformValues = (faktaOmBeregning, beregningsgrunnlag) => (values) => {
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
-  const inntektVerdier = InntektFieldArray.transformValues(values[INNTEKT_FIELD_ARRAY_NAME]);
+  const inntektVerdier = InntektFieldArrayImpl.transformValues(values[INNTEKT_FIELD_ARRAY_NAME]);
   const fastsatteAndelsnr = [];
   const transformed = transformValuesForAksjonspunkt(values, inntektVerdier, fastsatteAndelsnr, faktaOmBeregning, beregningsgrunnlag);
   return transformValuesForOverstyring(values, transformed, inntektVerdier, fastsatteAndelsnr);

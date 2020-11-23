@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
+import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import VurderOgFastsettATFL, { skalFastsettInntektForArbeidstaker, skalFastsettInntektForFrilans } from './VurderOgFastsettATFL';
 import { INNTEKT_FIELD_ARRAY_NAME } from '../BgFaktaUtils';
 import VurderBesteberegningForm, { besteberegningField } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
@@ -73,7 +74,7 @@ describe('<VurderOgFastsettATFL>', () => {
     const andeler = [lagAndel(1, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER)];
     const beregningsgrunnlag = lagBeregningsgrunnlag(andeler);
     const faktaOmBeregning = lagFaktaOmBeregning([VURDER_BESTEBEREGNING], undefined, undefined);
-    const transformed = VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag)(values);
+    const transformed = VurderOgFastsettATFL.transformValues(faktaOmBeregning as FaktaOmBeregning, beregningsgrunnlag)(values);
     expect(transformed.fakta.besteberegningAndeler.besteberegningAndelListe.length).to.equal(1);
     expect(transformed.fakta.besteberegningAndeler.besteberegningAndelListe[0].andelsnr).to.equal(1);
     expect(transformed.fakta.besteberegningAndeler.besteberegningAndelListe[0].fastsatteVerdier.fastsattBeløp).to.equal(10000);
@@ -100,7 +101,7 @@ describe('<VurderOgFastsettATFL>', () => {
     const beregningsgrunnlag = lagBeregningsgrunnlag(andeler);
     const faktaOmBeregning = lagFaktaOmBeregning([VURDER_BESTEBEREGNING,
       VURDER_NYOPPSTARTET_FL, VURDER_LONNSENDRING], [andelMedLonnsendring], undefined);
-    const transformed = VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag)(values);
+    const transformed = VurderOgFastsettATFL.transformValues(faktaOmBeregning as FaktaOmBeregning, beregningsgrunnlag)(values);
     expect(transformed.fakta.besteberegningAndeler.besteberegningAndelListe.length).to.equal(2);
     expect(transformed.fakta.besteberegningAndeler.nyDagpengeAndel === null).to.equal(false);
     expect(transformed.fakta.faktaOmBeregningTilfeller.length).to.equal(4);
@@ -126,7 +127,7 @@ describe('<VurderOgFastsettATFL>', () => {
     const beregningsgrunnlag = lagBeregningsgrunnlag(andeler);
     const faktaOmBeregning = lagFaktaOmBeregning([VURDER_LONNSENDRING,
       VURDER_NYOPPSTARTET_FL], [andelMedLonnsendring], undefined);
-    const transformed = VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag)(values).fakta;
+    const transformed = VurderOgFastsettATFL.transformValues(faktaOmBeregning as FaktaOmBeregning, beregningsgrunnlag)(values).fakta;
     expect(transformed.fastsattUtenInntektsmelding.andelListe.length).to.equal(1);
     expect(transformed.fastsattUtenInntektsmelding.andelListe[0].andelsnr).to.equal(1);
     expect(transformed.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).to.equal(10000);

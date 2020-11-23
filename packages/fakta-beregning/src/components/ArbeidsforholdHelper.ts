@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 

@@ -14,8 +14,8 @@ import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import beregningAksjonspunkterPropType from '../../propTypes/beregningAksjonspunkterPropType';
 
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from './InntektstabellPanel.less';
 
 export const MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD = 'manuellOverstyringRapportertInntekt';
@@ -32,7 +32,7 @@ type OwnProps = {
     skalViseTabell?: boolean;
     kanOverstyre: boolean;
     readOnly: boolean;
-    aksjonspunkter: beregningAksjonspunkterPropType[];
+    aksjonspunkter: Aksjonspunkt[];
     behandlingFormPrefix: string;
     erOverstyrer: boolean;
 };

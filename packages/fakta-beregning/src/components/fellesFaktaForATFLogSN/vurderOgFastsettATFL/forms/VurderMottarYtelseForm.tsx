@@ -7,7 +7,7 @@ import { removeSpacesFromNumber, required } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import {FaktaOmBeregning, KodeverkMedNavn, VurderMottarYtelse} from '@fpsak-frontend/types';
+import { FaktaOmBeregning, KodeverkMedNavn, VurderMottarYtelse } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import {
   andelsnrMottarYtelseMap,
@@ -17,6 +17,7 @@ import {
   utledArbeidsforholdFieldName,
 } from './VurderMottarYtelseUtils';
 import { createVisningsnavnForAktivitet } from '../../../ArbeidsforholdHelper';
+import { InntektTransformed } from '../../andelFieldValueTs';
 
 const andreFrilansTilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON];
 
@@ -65,7 +66,11 @@ type OwnProps = {
 
 interface StaticFunctions {
   validate: (values: any, vurderMottarYtelse: VurderMottarYtelse) => any;
-  transformValues: (values: any, inntektVerdier: any, faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag, fastsatteAndelsnr: number[], faktaOmBeregningTilfeller: string[]) => any;
+  transformValues: (values: any,
+                    inntektVerdier: InntektTransformed[],
+                    faktaOmBeregning: FaktaOmBeregning,
+                    beregningsgrunnlag: Beregningsgrunnlag,
+                    fastsatteAndelsnr: number[]) => any;
   buildInitialValues: (vurderMottarYtelse: VurderMottarYtelse) => any;
 }
 

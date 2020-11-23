@@ -25,8 +25,11 @@ const aksjonspunkter = [{
   definisjon:
   {
     kode: VURDER_FAKTA_FOR_ATFL_SN,
+    kodeverk: 'test',
   },
-  status: { kode: 'OPPR' },
+  status: { kode: 'OPPR', kodeverk: 'test' },
+  kanLoses: true,
+  erAktivt: true,
 }];
 
 const lagBeregningsgrunnlag = (andeler) => ({

@@ -39,7 +39,9 @@ describe('<InntektstabellPanel>', () => {
         hjelpeTekstId="hjelpetekst"
         tabell={<span> tabell </span>}
         kanOverstyre
-        aksjonspunkter={[{ definisjon: { kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG }, status: { kode: 'OPPR' } }]}
+        aksjonspunkter={[{
+          definisjon: { kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
+        }]}
         readOnly={false}
         erOverstyrer={false}
         reduxFormChange={() => undefined}

@@ -6,18 +6,17 @@ import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
-import {metaMock, MockFieldsWithContent} from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Table } from '@fpsak-frontend/shared-components';
+import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { AndelRow } from './InntektFieldArrayRow';
 import SummaryRow from './SummaryRow';
-import InntektFieldArray, { InntektFieldArrayImpl, leggTilDagpengerOmBesteberegning, mapStateToProps } from './InntektFieldArray';
+import { InntektFieldArrayImpl, leggTilDagpengerOmBesteberegning, mapStateToProps } from './InntektFieldArray';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
-import PeriodFieldArray from "@fpsak-frontend/shared-components/src/PeriodFieldArray";
-import {BeregningsgrunnlagAndel, FaktaOmBeregning} from "@fpsak-frontend/types";
-import Beregningsgrunnlag from "@fpsak-frontend/types/src/beregningsgrunnlagTsType";
 
 const aksjonspunkter = [
   {
@@ -76,27 +75,6 @@ describe('<InntektFieldArray>', () => {
     const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
     expect(props.isBeregningFormDirty).to.eql(false);
     expect(props.erKunYtelse).to.eql(false);
-  });
-
-  it('skal med dagpengeandel lagt til tidligere', () => {
-    const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING }],
-    };
-    const dagpengeAndel = { aktivitetStatus: { kode: aktivitetStatuser.DAGPENGER }, beregnetPrAar: 120000 };
-    const bg = {
-      beregningsgrunnlagPeriode: [
-        {
-          andelerLagtTilManueltIForrige: [
-            dagpengeAndel,
-          ],
-        },
-      ],
-      faktaOmBeregning,
-    };
-    const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning);
-    const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
-    expect(props.isBeregningFormDirty).to.eql(false);
-    expect(props.dagpengeAndelLagtTilIForrige).to.eql(dagpengeAndel);
   });
 
   it('skal mappe state til props for kun ytelse', () => {
@@ -221,15 +199,8 @@ describe('<InntektFieldArray>', () => {
   });
 
   it('skal legge til dagpengeandel', () => {
-    const dagpengeAndel = { aktivitetStatus: { kode: aktivitetStatuser.DAGPENGER }, beregnetPrAar: 120000 };
     const newbg = {
-      beregningsgrunnlagPeriode: [
-        {
-          andelerLagtTilManueltIForrige: [
-            dagpengeAndel,
-          ],
-        },
-      ],
+      beregningsgrunnlagPeriode: [],
       faktaOmBeregning,
     } as Beregningsgrunnlag;
     const values = { [besteberegningField]: true };
@@ -254,35 +225,14 @@ describe('<InntektFieldArray>', () => {
 
   it('skal fjerne dagpengeandel om dagpenger og lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: true }]);
-    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER], undefined);
+    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER]);
     expect(newfields.length).to.equal(0);
   });
 
   it('skal ikkje fjerne dagpengeandel om dagpenger og ikkje lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: false }]);
-    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER], undefined);
+    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER]);
     expect(newfields.length).to.equal(1);
-  });
-
-  it('skal legge til dagpengeandel med fastsatt belop', () => {
-    const dagpengeAndel = { aktivitetStatus: { kode: aktivitetStatuser.DAGPENGER }, beregnetPrAar: 120000 };
-    const newbg = {
-      beregningsgrunnlagPeriode: [
-        {
-          andelerLagtTilManueltIForrige: [
-            dagpengeAndel,
-          ],
-        },
-      ],
-      faktaOmBeregning,
-    };
-    const values = { [besteberegningField]: true };
-    const newstate = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, newbg, formNameVurderFaktaBeregning, values);
-    const newprops = mapStateToProps(newstate, { ...ownProps, beregningsgrunnlag: newbg });
-    const newfields = [];
-    leggTilDagpengerOmBesteberegning(newfields, newprops.skalHaBesteberegning, newprops.aktivitetStatuser, newprops.dagpengeAndelLagtTilIForrige);
-    expect(newfields.length).to.equal(1);
-    expect(newfields[0].fastsattBelop).to.equal('10 000');
   });
 
   it('skal validere eksisterende andeler uten errors', () => {
@@ -295,7 +245,6 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
     const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
     expect(errors).to.equal(null);
   });
@@ -311,7 +260,6 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
     const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
     expect(errors[0].fastsattBelop).to.have.length(1);
     expect(errors[0].fastsattBelop[0].id).to.equal(isRequiredMessage()[0].id);
@@ -328,8 +276,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
-    const errors = InntektFieldArray.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
     expect(errors).to.equal(null);
   });
 
@@ -344,8 +291,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: '',
     };
     values.push(andel2);
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
-    const errors = InntektFieldArray.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
     expect(errors[0].inntektskategori).to.have.length(1);
     expect(errors[0].inntektskategori[0].id).to.equal(isRequiredMessage()[0].id);
   });
@@ -362,15 +308,13 @@ describe('<InntektFieldArray>', () => {
       nyAndel: true,
     };
     values.push(andel2);
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'validate' does not exist on type 'Connec... Remove this comment to see the full error message
-    const errors = InntektFieldArray.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
     expect(errors[0].andel).to.have.length(1);
     expect(errors[0].andel[0].id).to.equal(isRequiredMessage()[0].id);
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
-    const iv = InntektFieldArray.buildInitialValues([]);
+    const iv = InntektFieldArrayImpl.buildInitialValues([]);
     expect(iv).to.be.empty;
   });
 });

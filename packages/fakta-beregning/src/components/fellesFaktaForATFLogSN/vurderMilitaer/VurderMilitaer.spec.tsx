@@ -1,6 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 
+import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import VurderMilitaer, { vurderMilitaerField } from './VurderMilitaer';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
 
@@ -24,12 +25,12 @@ describe('<VurderMilitaer>', () => {
     const faktaBg = {
       vurderMilitaer: null,
     };
-    const acutalValues = VurderMilitaer.buildInitialValues(faktaBg);
+    const acutalValues = VurderMilitaer.buildInitialValues(faktaBg as FaktaOmBeregning);
     expect(acutalValues).to.eql({});
   });
 
   it('Skal teste at buildInitialvalues bygges korrekt når militær er satt til true', () => {
-    const values = VurderMilitaer.buildInitialValues(mockBGMedStatus(true));
+    const values = VurderMilitaer.buildInitialValues(mockBGMedStatus(true) as FaktaOmBeregning);
     const testobj = {
       [vurderMilitaerField]: true,
     };
@@ -37,7 +38,7 @@ describe('<VurderMilitaer>', () => {
   });
 
   it('Skal teste at buildInitialvalues bygges korrekt når aksjonspunktet er løst og militær er satt til false', () => {
-    const values = VurderMilitaer.buildInitialValues(mockBGMedStatus(false));
+    const values = VurderMilitaer.buildInitialValues(mockBGMedStatus(false) as FaktaOmBeregning);
     const testobj = {
       [vurderMilitaerField]: false,
     };

@@ -6,6 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidsbegrensetArbeidsforholdForm from './tidsbegrensetArbeidsforhold/TidsbegrensetArbeidsforholdForm';
 import VurderMilitaer from './vurderMilitaer/VurderMilitaer';
 import NyoppstartetFLForm from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
@@ -23,7 +24,6 @@ import VurderMottarYtelseForm from './vurderOgFastsettATFL/forms/VurderMottarYte
 import VurderBesteberegningForm from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import VurderRefusjonForm from './vurderrefusjon/VurderRefusjonForm';
 import { erOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
-import beregningAksjonspunkterPropType from '../../propTypes/beregningAksjonspunkterPropType';
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -187,7 +187,7 @@ type OwnProps = {
     behandlingId: number;
     behandlingVersjon: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    aksjonspunkter: beregningAksjonspunkterPropType[];
+    aksjonspunkter: Aksjonspunkt[];
     erOverstyrer: boolean;
 };
 
