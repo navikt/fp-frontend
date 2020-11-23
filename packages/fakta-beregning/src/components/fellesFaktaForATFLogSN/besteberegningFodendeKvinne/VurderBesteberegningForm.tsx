@@ -26,6 +26,8 @@ type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
     erOverstyrt: boolean;
+    behandlingId: number;
+    behandlingVersjon: number;
 };
 
 interface StaticFunctions {

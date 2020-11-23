@@ -8,6 +8,8 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
   it('Skal teste at komponenten vises korrekt', () => {
     const wrapper = shallowWithIntl(<VurderEtterlonnSluttpakkeForm.WrappedComponent
       readOnly={false}
+      behandlingId={1}
+      behandlingVersjon={1}
       isAksjonspunktClosed={false}
     />);
     const radios = wrapper.find('RadioOption');

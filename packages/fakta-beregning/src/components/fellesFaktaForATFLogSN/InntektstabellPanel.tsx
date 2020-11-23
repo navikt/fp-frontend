@@ -35,6 +35,8 @@ type OwnProps = {
     aksjonspunkter: Aksjonspunkt[];
     behandlingFormPrefix: string;
     erOverstyrer: boolean;
+    behandlingId: number;
+    behandlingVersjon: number;
 };
 
 interface DispatchProps {

@@ -26,6 +26,8 @@ export const harEtterlonnSluttpakkeField = 'vurderEtterlønnSluttpakke';
 type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
+    behandlingId: number;
+    behandlingVersjon: number;
 };
 
 interface StaticFunctions {

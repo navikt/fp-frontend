@@ -24,6 +24,8 @@ describe('<InntektstabellPanel>', () => {
         erOverstyrer={false}
         reduxFormChange={() => undefined}
         behandlingFormPrefix="form"
+        behandlingId={1}
+        behandlingVersjon={1}
       >
         <span>test1</span>
         <span>test2</span>
@@ -46,6 +48,8 @@ describe('<InntektstabellPanel>', () => {
         erOverstyrer={false}
         reduxFormChange={() => undefined}
         behandlingFormPrefix="form"
+        behandlingId={1}
+        behandlingVersjon={1}
       >
         <span>test1</span>
         <span>test2</span>

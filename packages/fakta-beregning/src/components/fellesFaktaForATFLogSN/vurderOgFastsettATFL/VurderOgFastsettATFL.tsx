@@ -166,6 +166,8 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
         <VurderEtterlonnSluttpakkeForm
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}
+          behandlingVersjon={behandlingVersjon}
+          behandlingId={behandlingId}
         />
       )}
       {tilfeller.includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)
@@ -191,6 +193,8 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}
           erOverstyrt={erOverstyrt}
+          behandlingVersjon={behandlingVersjon}
+          behandlingId={behandlingId}
         />
       )}
     </InntektstabellPanel>
