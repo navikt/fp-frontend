@@ -2,12 +2,7 @@ import Kodeverk from './kodeverkTsType';
 
 export type ManglendeVedleggSoknad = Readonly<{
   dokumentType: Kodeverk;
-  arbeidsgiver: {
-    navn: string;
-    organisasjonsnummer: string;
-    fødselsdato: string;
-    aktørId: string;
-  };
+  arbeidsgiverReferanse: string;
   brukerHarSagtAtIkkeKommer: boolean;
 }>
 

@@ -18,24 +18,34 @@ import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-s
 describe('<SokersOpplysningspliktForm>', () => {
   const getKodeverknavn = () => undefined;
 
+  const arbeidsgiverOpplysningerPerId = {
+    1: {
+      erPrivatPerson: false,
+      identifikator: '973861778',
+      navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
+    },
+    973861778: {
+      erPrivatPerson: false,
+      identifikator: '973861778',
+      navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
+    },
+  };
+
   it('skal vise tabell med manglende vedlegg', () => {
     const manglendeVedlegg = [{
       dokumentType: {
         kode: dokumentTypeId.INNTEKTSMELDING,
         kodeverk: '',
       },
-      arbeidsgiver: {
-        navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
-        organisasjonsnummer: '973861778',
-      },
+      arbeidsgiverReferanse: '973861778',
       brukerHarSagtAtIkkeKommer: false,
     }, {
       dokumentType: {
         kode: dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL,
-        navn: 'terminbekreftelse',
+        kodeverk: '',
       },
-      arbeidsgiver: null,
-      brukerHarSagtAtIkkeKommer: null,
+      arbeidsgiverReferanse: '1',
+      brukerHarSagtAtIkkeKommer: false,
     }] as ManglendeVedleggSoknad[];
     const dokumentTypeIds = [{
       kode: dokumentTypeId.INNTEKTSMELDING,
@@ -67,6 +77,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       submitCallback={sinon.spy()}
       alleKodeverk={{}}
       originalErVilkarOk
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const table = wrapper.find(Table);
@@ -109,6 +120,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       submitCallback={sinon.spy()}
       alleKodeverk={{}}
       originalErVilkarOk
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(Table)).to.have.length(0);
@@ -128,10 +140,7 @@ describe('<SokersOpplysningspliktForm>', () => {
           kode: dokumentTypeId.INNTEKTSMELDING,
           kodeverk: '',
         },
-        arbeidsgiver: {
-          navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
-          organisasjonsnummer: '973861778',
-        },
+        arbeidsgiverReferanse: '973861778',
         brukerHarSagtAtIkkeKommer: false,
       }] as ManglendeVedleggSoknad[];
 
@@ -148,15 +157,12 @@ describe('<SokersOpplysningspliktForm>', () => {
           kode: dokumentTypeId.INNTEKTSMELDING,
           kodeverk: '',
         },
-        arbeidsgiver: {
-          navn: 'STATOIL ASAAVD STATOIL SOKKELVIRKSOMHET',
-          organisasjonsnummer: '973861778',
-        },
+        arbeidsgiverReferanse: '973861778',
         brukerHarSagtAtIkkeKommer: false,
       }] as ManglendeVedleggSoknad[];
       const aksjonspunkter: Aksjonspunkt[] = [];
 
-      const intitialValues = buildInitialValues.resultFunc(manglendeVedlegg, true, vilkarUtfallType.OPPFYLT, aksjonspunkter);
+      const intitialValues = buildInitialValues.resultFunc(manglendeVedlegg, true, vilkarUtfallType.OPPFYLT, aksjonspunkter, arbeidsgiverOpplysningerPerId);
 
       expect(intitialValues).to.eql({
         aksjonspunktKode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
