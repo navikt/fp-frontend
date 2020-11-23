@@ -23,19 +23,19 @@ type FaktaOmBeregningAndel = Readonly<{
   aktivitetStatus?: Kodeverk;
 }>
 
-type AndelForFaktaOmBeregning = Readonly<{
-  arbeidsforhold: BeregningsgrunnlagArbeidsforhold;
+export type AndelForFaktaOmBeregning = Readonly<{
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   andelsnr?: number;
   inntektskategori?: Kodeverk;
   aktivitetStatus?: Kodeverk;
   belopReadOnly?: number;
   fastsattBelop?: number;
   visningsnavn: string;
-  skalKunneEndreAktivitet: boolean;
+  skalKunneEndreAktivitet?: boolean;
   lagtTilAvSaksbehandler: boolean;
 }>
 
-type RefusjonskravSomKommerForSentListe = Readonly<{
+export type RefusjonskravSomKommerForSentListe = Readonly<{
   arbeidsgiverId: string;
   arbeidsgiverVisningsnavn: string;
   erRefusjonskravGyldig?: boolean;
@@ -49,33 +49,72 @@ type VurderBesteberegning = Readonly<{
   skalHaBesteberegning?: boolean;
 }>
 
-type AvklarAktiviteter = Readonly<{
-  aktiviteterTomDatoMapping?: {
-    tom: string;
-    aktiviteter: {
-      arbeidsgiverNavn?: string;
-      arbeidsgiverId?: string;
-      eksternArbeidsforholdId?: string;
-      fom: string;
-      tom?: string;
-      arbeidsforholdId?: string;
-      arbeidsforholdType: Kodeverk;
-      aktørIdString?: string;
-    }[];
-  }[];
+export type BeregningAktivitet = Readonly<{
+  arbeidsgiverNavn?: string;
+  arbeidsgiverId?: string;
+  eksternArbeidsforholdId?: string;
+  fom: string;
+  tom?: string;
+  arbeidsforholdId?: string;
+  arbeidsforholdType: Kodeverk;
+  aktørIdString?: string;
 }>
 
-type FaktaOmBeregning = Readonly<{
+export type AvklarBeregningAktiviteter = Readonly<{
+  tom: string;
+  aktiviteter:BeregningAktivitet[];
+}>
+
+export type AvklarBeregningAktiviteterMap = Readonly<{
+  aktiviteterTomDatoMapping?: AvklarBeregningAktiviteter[];
+}>
+
+interface KunYtelseAndel extends FaktaOmBeregningAndel {
+  fastsattBelopPrMnd: number;
+}
+
+export interface KortvarigAndel extends AndelForFaktaOmBeregning {
+  erTidsbegrensetArbeidsforhold?: boolean;
+}
+
+export interface ArbeidstakerUtenIMAndel extends AndelForFaktaOmBeregning {
+  mottarYtelse?: boolean;
+  inntektPrMnd?: number;
+}
+
+export type KunYtelse = Readonly<{
+  andeler?: KunYtelseAndel[];
+  fodendeKvinneMedDP: boolean;
+  erBesteberegning?: boolean;
+}>
+
+export type VurderMottarYtelse = Readonly<{
+  erFrilans?: boolean;
+  frilansMottarYtelse?: number;
+  frilansInntektPrMnd?: number;
+  arbeidstakerAndelerUtenIM?: ArbeidstakerUtenIMAndel[];
+}>
+
+interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
+  inntektPrMnd: number;
+}
+
+export type FaktaOmBeregning = Readonly<{
   beregningsgrunnlagArbeidsforhold?: (BeregningsgrunnlagArbeidsforhold & {
     erTidsbegrensetArbeidsforhold?: boolean;
   })[];
-  avklarAktiviteter?: AvklarAktiviteter;
+  avklarAktiviteter?: AvklarBeregningAktiviteterMap;
   frilansAndel?: FaktaOmBeregningAndel;
   vurderMilitaer?: VurderMilitaer;
   vurderBesteberegning?: VurderBesteberegning;
   refusjonskravSomKommerForSentListe?: RefusjonskravSomKommerForSentListe[];
   arbeidsforholdMedLønnsendringUtenIM?: FaktaOmBeregningAndel[];
   andelerForFaktaOmBeregning: AndelForFaktaOmBeregning[];
+  kortvarigeArbeidsforhold?: KortvarigAndel[];
+  kunYtelse?: KunYtelse;
+  faktaOmBeregningTilfeller?: Kodeverk[];
+  vurderMottarYtelse: VurderMottarYtelse;
+  arbeidstakerOgFrilanserISammeOrganisasjonListe: ATFLSammeOrgAndel[];
 }>
 
 type PerioderMedGraderingEllerRefusjon = Readonly<{
