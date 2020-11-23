@@ -116,6 +116,7 @@ const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
     case historikkinnslagType.BEH_MAN_GJEN:
     case historikkinnslagType.BEH_STARTET:
     case historikkinnslagType.BEH_STARTET_PAA_NYTT:
+    case historikkinnslagType.BEH_STARTET_FORFRA:
     case historikkinnslagType.VEDLEGG_MOTTATT:
     case historikkinnslagType.BREV_SENT:
     case historikkinnslagType.BREV_BESTILT:
