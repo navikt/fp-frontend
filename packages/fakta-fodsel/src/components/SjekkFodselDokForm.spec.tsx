@@ -7,7 +7,9 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import { buildInitialValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
 
@@ -33,6 +35,14 @@ describe('<SjekkFodselDokForm>', () => {
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      behandlingId={1}
+      behandlingVersjon={2}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkt={{} as Aksjonspunkt}
+      personopplysninger={{} as Personopplysninger}
+      avklartBarn={[]}
+      submitHandler={() => undefined}
+      onSubmit={() => undefined}
     />);
     expect(wrapper.find(FodselSammenligningIndex)).has.length(1);
   });
@@ -55,7 +65,7 @@ describe('<SjekkFodselDokForm>', () => {
 
     expect(initialValues).to.eql({
       avklartBarn: [{
-        dodsDato: '',
+        dodsdato: '',
         fodselsdato: '',
         isBarnDodt: false,
       },
@@ -79,7 +89,7 @@ describe('<SjekkFodselDokForm>', () => {
 
     expect(initialValues).to.eql({
       avklartBarn: [{
-        dodsDato: '',
+        dodsdato: '',
         fodselsdato: '',
         isBarnDodt: false,
       },
