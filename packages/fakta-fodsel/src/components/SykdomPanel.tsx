@@ -17,15 +17,34 @@ import { InjectedFormProps } from 'redux-form';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-interface OwnProps {
+type FormValues = {
+  begrunnelseSykdom?: string;
+  erMorForSykVedFodsel?: boolean;
+}
+
+export type TransformedValues = {
+  kode: string;
+  begrunnelse: string;
+  erMorForSykVedFodsel: boolean;
+}
+
+interface PureOwnProps {
+  aksjonspunkt: Aksjonspunkt;
+  morForSykVedFodsel: boolean;
+  submitHandler: (values: FormValues) => any;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface MappedOwnProps {
+  initialValues: FormValues;
+  onSubmit: (values: FormValues) => any;
 }
 
 /**
  * SykdomPanel
  */
-export const SykdomPanel: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const SykdomPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   alleMerknaderFraBeslutter,
 }) => (
@@ -58,28 +77,22 @@ export const SykdomPanel: FunctionComponent<OwnProps & InjectedFormProps> = ({
   </FaktaGruppe>
 );
 
-const buildInitialValues = (aksjonspunkt: Aksjonspunkt, morForSykVedFodsel: boolean) => ({
+const buildInitialValues = (aksjonspunkt: Aksjonspunkt, morForSykVedFodsel: boolean): FormValues => ({
   begrunnelseSykdom: aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : '',
   erMorForSykVedFodsel: morForSykVedFodsel,
 });
 
-const transformValues = (values: any) => ({
+const transformValues = (values: FormValues): TransformedValues => ({
   kode: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
   begrunnelse: values.begrunnelseSykdom,
   erMorForSykVedFodsel: values.erMorForSykVedFodsel,
 });
 
-interface PureOwnProps {
-  aksjonspunkt: Aksjonspunkt;
-  morForSykVedFodsel: boolean;
-  submitHandler: (values: any) => any;
-}
-
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitHandler],
-(submitCallback) => (values: any) => submitCallback(transformValues(values)));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
-const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps.aksjonspunkt, ownProps.morForSykVedFodsel),
   onSubmit: lagSubmitFn(ownProps),
 });

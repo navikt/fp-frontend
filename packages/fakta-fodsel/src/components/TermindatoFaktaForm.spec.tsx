@@ -7,7 +7,9 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DateLabel, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+} from '@fpsak-frontend/types';
 
 import { buildInitialValues, TermindatoFaktaForm } from './TermindatoFaktaForm';
 
@@ -22,6 +24,14 @@ describe('<TermindatoFaktaForm>', () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.TERMINBEKREFTELSE]: {},
       }}
+      behandlingId={1}
+      behandlingVersjon={2}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkt={{} as Aksjonspunkt}
+      personopplysninger={{} as Personopplysninger}
+      soknad={{} as Soknad}
+      submitHandler={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     expect(wrapper.find(DatepickerField)).has.length(2);
@@ -41,6 +51,14 @@ describe('<TermindatoFaktaForm>', () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.TERMINBEKREFTELSE]: {},
       }}
+      behandlingId={1}
+      behandlingVersjon={2}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      aksjonspunkt={{} as Aksjonspunkt}
+      personopplysninger={{} as Personopplysninger}
+      soknad={{} as Soknad}
+      submitHandler={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     expect(wrapper.find(FaktaGruppe)).has.length(2);

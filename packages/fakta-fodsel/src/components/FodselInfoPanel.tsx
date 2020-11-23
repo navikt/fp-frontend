@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { submit as reduxSubmit } from 'redux-form';
 import { connect } from 'react-redux';
@@ -12,16 +12,17 @@ import {
   Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Kodeverk, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 
-import TermindatoFaktaForm, { termindatoFaktaFormName } from './TermindatoFaktaForm';
+import { Dispatch } from 'redux';
+import TermindatoFaktaForm, { termindatoFaktaFormName, TransformedValues as TermindatoTransformedValues } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { sjekkFodselDokForm } from './SjekkFodselDokForm';
-import SykdomPanel, { sykdomPanelName } from './SykdomPanel';
+import SykdomPanel, { sykdomPanelName, TransformedValues as SykdomTransformedValues } from './SykdomPanel';
 
 const {
   TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
 } = aksjonspunktCodes;
 
-const getHelpTexts = (aksjonspunkter: any) => {
-  const helpTexts = [];
+const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
+  const helpTexts: ReactElement[] = [];
   if (hasAksjonspunkt(VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT, aksjonspunkter)) {
     helpTexts.push(<FormattedMessage key="VurderVilkarForSykdom" id="FodselInfoPanel.VurderVilkarForSykdom" />);
   }
@@ -36,26 +37,33 @@ const getHelpTexts = (aksjonspunkter: any) => {
 
 const formNames = [sykdomPanelName, termindatoFaktaFormName, sjekkFodselDokForm];
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  familiehendelse: FamilieHendelseSamling;
   aksjonspunkter: Aksjonspunkt[];
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   readOnly: boolean;
-  formPrefix: string;
-  dispatch: (...args: any[]) => any;
   submitCallback: (...args: any[]) => any;
-  avklartBarn?: FamilieHendelse['avklartBarn'];
-  termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: string;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  familiehendelse: FamilieHendelseSamling;
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingType: Kodeverk;
   personopplysninger: Personopplysninger;
+}
+
+interface MappedOwnProps {
+  formPrefix: string;
+  avklartBarn?: FamilieHendelse['avklartBarn'];
+  termindato?: string;
+  vedtaksDatoSomSvangerskapsuke?: string;
+}
+
+interface DispatchProps {
+  // Denne blir injecta fra redux når connect kun tar en parameter
+  dispatch: Dispatch;
 }
 
 /**
@@ -63,10 +71,10 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Fødselsvilkåret.
  */
-export class FodselInfoPanelImpl extends Component<OwnProps> {
-  submittedAksjonspunkter?: any;
+export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps> {
+  submittedAksjonspunkter?: Record<string, Partial<SykdomTransformedValues> | Partial<TermindatoTransformedValues>>;
 
-  constructor(props) {
+  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps) {
     super(props);
 
     this.submittedAksjonspunkter = {};
@@ -75,15 +83,15 @@ export class FodselInfoPanelImpl extends Component<OwnProps> {
     this.getSubmitFunction = this.getSubmitFunction.bind(this);
   }
 
-  getSubmitFunction(dispatch: any, formPrefix: any) {
-    return (e: any) => {
+  getSubmitFunction(dispatch: Dispatch, formPrefix: string) {
+    return (e) => {
       this.submittedAksjonspunkter = {};
       formNames.forEach((formName) => dispatch(reduxSubmit(`${formPrefix}.${formName}`)));
       e.preventDefault();
     };
   }
 
-  submitHandler(values: any) {
+  submitHandler(values: Partial<SykdomTransformedValues> | Partial<TermindatoTransformedValues>) {
     this.submittedAksjonspunkter = {
       ...this.submittedAksjonspunkter,
       [values.kode]: values,
@@ -198,15 +206,9 @@ export class FodselInfoPanelImpl extends Component<OwnProps> {
 
 const EMPTY_ARRAY = [];
 
-const nullSafe = (value: any) => value || {};
+const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || {} as FamilieHendelse;
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  familiehendelse: FamilieHendelseSamling;
-}
-
-const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   formPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
   avklartBarn: nullSafe(ownProps.familiehendelse.register).avklartBarn || EMPTY_ARRAY,
   termindato: nullSafe(ownProps.familiehendelse.gjeldende).termindato,
