@@ -10,6 +10,9 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlems
 describe('<StatusForBorgerFaktaPanel>', () => {
   it('skal vise radioknapper for vurdering av oppholdsrett', () => {
     const wrapper = shallowWithIntl(<StatusForBorgerFaktaPanel.WrappedComponent
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       apKode={aksjonspunktCodes.AVKLAR_OPPHOLDSRETT}
       erEosBorger
       readOnly={false}
@@ -35,6 +38,9 @@ describe('<StatusForBorgerFaktaPanel>', () => {
 
   it('skal vise radioknapper for vurdering av lovlig opphold', () => {
     const wrapper = shallowWithIntl(<StatusForBorgerFaktaPanel.WrappedComponent
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       apKode={aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD}
       erEosBorger={false}
       readOnly={false}

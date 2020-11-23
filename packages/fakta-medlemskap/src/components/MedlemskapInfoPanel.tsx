@@ -4,7 +4,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FagsakPerson, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FagsakPerson, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
@@ -16,22 +16,23 @@ const {
 
 const avklarStartdatoAp = [AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, OVERSTYR_AVKLAR_STARTDATO];
 
-const hasOpen = (aksjonspunkt: any) => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
+const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
 
-const skalKunneLoseUtenAksjonpunkter = (aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
-  hasOpenAksjonspunkter: boolean, isForeldrepenger?: boolean) => (isForeldrepenger
-  && (aksjonspunkterMinusAvklarStartDato.length === 0 || !hasOpenAksjonspunkter));
+const skalKunneLoseUtenAksjonpunkter = (
+  aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
+  hasOpenAksjonspunkter: boolean,
+  isForeldrepenger?: boolean,
+): boolean => (isForeldrepenger && (aksjonspunkterMinusAvklarStartDato.length === 0 || !hasOpenAksjonspunkter));
 
-const harAksjonspunkterForAvklarStartdato = (aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter
-  .find((ap: Aksjonspunkt) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN)
-|| aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
+const harAksjonspunkterForAvklarStartdato = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
+  .some((ap) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN || ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
 
 const skalViseAvklarStartdatoPanel = (
   aksjonspunkter: Aksjonspunkt[],
   aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
   hasOpenAksjonspunkter: boolean,
   isForeldrepenger?: boolean,
-) => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
+): boolean => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
   || skalKunneLoseUtenAksjonpunkter(aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger));
 
 interface OwnProps {
@@ -53,6 +54,7 @@ interface OwnProps {
   medlemskap: Medlemskap;
   behandlingPaaVent: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -79,38 +81,38 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
   fagsakPerson,
   behandlingPaaVent,
   readOnlyForStartdatoForForeldrepenger,
+  arbeidsgiverOpplysningerPerId,
 }) => {
-  const avklarStartdatoAksjonspunkt = aksjonspunkter.find((ap: any) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
-  const avklarStartdatoOverstyring = aksjonspunkter.find((ap: any) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
+  const avklarStartdatoAksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+  const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
-    .filter((ap: any) => !avklarStartdatoAp.includes(ap.definisjon.kode)), [aksjonspunkter]);
+    .filter((ap) => !avklarStartdatoAp.includes(ap.definisjon.kode)), [aksjonspunkter]);
 
   return (
     <>
-      {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger)
-        && (
-          <>
-            <StartdatoForForeldrepengerperiodenForm
-              readOnly={readOnly}
-              aksjonspunkt={avklarStartdatoAksjonspunkt || avklarStartdatoOverstyring}
-              submitCallback={submitCallback}
-              submittable={submittable}
-              hasOpenMedlemskapAksjonspunkter={hasOpenAksjonspunkter}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              behandlingStatus={behandlingStatus}
-              behandlingPaaVent={behandlingPaaVent}
-              aksjonspunkter={aksjonspunkter}
-              soknad={soknad}
-              inntektArbeidYtelse={inntektArbeidYtelse}
-              readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
-            />
-            <VerticalSpacer twentyPx />
-          </>
-        )}
-      { (!hasOpen(avklarStartdatoAksjonspunkt) && !hasOpen(avklarStartdatoOverstyring))
-        && (
+      {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger) && (
+        <>
+          <StartdatoForForeldrepengerperiodenForm
+            readOnly={readOnly}
+            aksjonspunkt={avklarStartdatoAksjonspunkt || avklarStartdatoOverstyring}
+            submitCallback={submitCallback}
+            submittable={submittable}
+            hasOpenMedlemskapAksjonspunkter={hasOpenAksjonspunkter}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            behandlingStatus={behandlingStatus}
+            behandlingPaaVent={behandlingPaaVent}
+            aksjonspunkter={aksjonspunkter}
+            soknad={soknad}
+            inntektArbeidYtelse={inntektArbeidYtelse}
+            readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          />
+          <VerticalSpacer twentyPx />
+        </>
+      )}
+      {(!hasOpen(avklarStartdatoAksjonspunkt) && !hasOpen(avklarStartdatoOverstyring)) && (
         <OppholdInntektOgPerioderForm
           soknad={soknad}
           readOnly={readOnly}
@@ -124,8 +126,9 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           medlemskap={medlemskap}
           fagsakPerson={fagsakPerson}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
-        )}
+      )}
     </>
   );
 };

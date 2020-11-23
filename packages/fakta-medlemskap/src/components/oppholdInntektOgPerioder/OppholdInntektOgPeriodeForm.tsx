@@ -13,21 +13,31 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { Aksjonspunkt, KodeverkMedNavn, MedlemPeriode } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, MedlemPeriode,
+} from '@fpsak-frontend/types';
 
-import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
-import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
-import PerioderMedMedlemskapFaktaPanel from './PerioderMedMedlemskapFaktaPanel';
-import StatusForBorgerFaktaPanel from './StatusForBorgerFaktaPanel';
+import OppholdINorgeOgAdresserFaktaPanel, { FormValues as OppholdFormValues } from './OppholdINorgeOgAdresserFaktaPanel';
+import InntektOgYtelserFaktaPanel, { FormValues as IOYFormValues } from './InntektOgYtelserFaktaPanel';
+import PerioderMedMedlemskapFaktaPanel, { FormValues as PerioderFormValues } from './PerioderMedMedlemskapFaktaPanel';
+import StatusForBorgerFaktaPanel, { FormValues as StatusFormValues } from './StatusForBorgerFaktaPanel';
 
 const {
   AVKLAR_OPPHOLDSRETT, AVKLAR_LOVLIG_OPPHOLD,
 } = aksjonspunktCodes;
 
-const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: string[]) => aksjonspunkter
+const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: string[]): boolean => aksjonspunkter
   .some((ap: string) => ap === aksjonspunktCode);
 
-export type PeriodeMedId = MedlemPeriode & { id: number; }
+export type PeriodeMedId = MedlemPeriode & { id: string; }
+
+export type FormValues = IOYFormValues & OppholdFormValues & StatusFormValues & PerioderFormValues & {
+  begrunnelse?: string;
+}
+
+type TransformedValues = IOYFormValues & {
+  begrunnelse?: string;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -35,18 +45,19 @@ interface PureOwnProps {
   valgtPeriode: PeriodeMedId;
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  updateOppholdInntektPeriode: (values: any) => void;
+  updateOppholdInntektPeriode: (values: TransformedValues) => void;
   selectedId?: string;
   readOnly: boolean;
   periodeResetCallback: (...args: any[]) => any;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submittable: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
-  initialValues: {
-    begrunnelse?: string;
-  };
+  initialValues: FormValues;
+  form: string;
+  onSubmit: (values: FormValues) => any;
 }
 
 export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -76,7 +87,6 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
     />
-    { /* @ts-ignore Fiks denne */}
     <PerioderMedMedlemskapFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
@@ -86,16 +96,13 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
       alleKodeverk={alleKodeverk}
     />
     { (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) && (
-      <>
-        { /* @ts-ignore Fiks denne */}
-        <StatusForBorgerFaktaPanel
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-          readOnly={readOnly}
-          id={valgtPeriode.id}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        />
-      </>
+      <StatusForBorgerFaktaPanel
+        behandlingId={behandlingId}
+        behandlingVersjon={behandlingVersjon}
+        readOnly={readOnly}
+        id={valgtPeriode.id}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      />
     )}
     <VerticalSpacer twentyPx />
     { valgtPeriode.aksjonspunkter && valgtPeriode.aksjonspunkter.length > 0 && (
@@ -133,11 +140,7 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
   </BorderBox>
 );
 
-OppholdInntektOgPeriodeForm.defaultProps = {
-  selectedId: undefined,
-};
-
-const transformValues = (values: any) => ({
+const transformValues = (values: FormValues): TransformedValues => ({
   begrunnelse: values.begrunnelse,
   ...values,
 });
@@ -145,6 +148,7 @@ const transformValues = (values: any) => ({
 const buildInitialValues = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.valgtPeriode,
   (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+  (_state, ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'soknad'),
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
@@ -153,15 +157,13 @@ const buildInitialValues = createSelector([
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'inntekter'),
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'medlemskapPerioder'),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'gjeldendeFom'),
   (_state, ownProps: PureOwnProps) => ownProps.alleKodeverk,
 ],
-(valgtPeriode, alleAksjonspunkter, soknad, person, inntekter, medlemskapPerioder, gjeldendeFom, alleKodeverk) => {
+(valgtPeriode, alleAksjonspunkter, arbeidsgiverOpplysningerPerId, soknad, person, inntekter, medlemskapPerioder, alleKodeverk): FormValues => {
   const aksjonspunkter = alleAksjonspunkter
-    .filter((ap: Aksjonspunkt) => valgtPeriode.aksjonspunkter
+    .filter((ap) => valgtPeriode.aksjonspunkter
       .includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)
-    .filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+    .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
   let oppholdValues = {};
   let confirmValues = {};
   if (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) {
@@ -174,7 +176,7 @@ const buildInitialValues = createSelector([
   const kodeverkFn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   return {
     ...valgtPeriode,
-    ...InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekter),
+    ...InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekter, arbeidsgiverOpplysningerPerId),
     ...OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, valgtPeriode, aksjonspunkter),
     ...PerioderMedMedlemskapFaktaPanel.buildInitialValues(valgtPeriode, medlemskapPerioder, soknad, aksjonspunkter, kodeverkFn),
     ...oppholdValues,
@@ -183,8 +185,8 @@ const buildInitialValues = createSelector([
 });
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: any) => initialOwnProps.updateOppholdInntektPeriode(transformValues(values));
-  return (state: any, ownProps: PureOwnProps) => {
+  const onSubmit = (values: FormValues) => initialOwnProps.updateOppholdInntektPeriode(transformValues(values));
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const { valgtPeriode } = ownProps;
     const formName = `OppholdInntektOgPeriodeForm-${valgtPeriode.id}`;
     return {

@@ -6,6 +6,12 @@ export type ManglendeVedleggSoknad = Readonly<{
   brukerHarSagtAtIkkeKommer: boolean;
 }>
 
+export type UtlandsoppholdPeriode = Readonly<{
+  landNavn: string;
+  fom: string;
+  tom: string;
+}>
+
 type Soknad = Readonly<{
   soknadType: Kodeverk;
   mottattDato: string;
@@ -19,16 +25,8 @@ type Soknad = Readonly<{
     oppholdNorgeNa: boolean;
     oppholdSistePeriode: boolean;
     oppholdNestePeriode: boolean;
-    utlandsoppholdFor: {
-      landNavn: string;
-      fom: string;
-      tom: string;
-    }[];
-    utlandsoppholdEtter: {
-      landNavn: string;
-      fom: string;
-      tom: string;
-    }[];
+    utlandsoppholdFor: UtlandsoppholdPeriode[];
+    utlandsoppholdEtter: UtlandsoppholdPeriode[];
   }
   manglendeVedlegg: ManglendeVedleggSoknad[];
   oppgittRettighet: {

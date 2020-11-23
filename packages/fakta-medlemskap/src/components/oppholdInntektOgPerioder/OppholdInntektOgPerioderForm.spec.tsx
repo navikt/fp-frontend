@@ -1,22 +1,33 @@
 import React from 'react';
 import { expect } from 'chai';
 
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { FagsakPerson, Medlemskap, Soknad } from '@fpsak-frontend/types';
 
-import { OppholdInntektOgPerioderForm, transformValues } from './OppholdInntektOgPerioderForm';
+import { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
+import { OppholdInntektOgPerioderForm, transformValues, FormValues } from './OppholdInntektOgPerioderForm';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 const perioder: any = [];
 
 describe('<OppholdInntektOgPerioderForm>', () => {
+  const arbeidsgiverOpplysningerPerId = {
+    973861778: {
+      erPrivatPerson: false,
+      identifikator: '973861778',
+      navn: 'MYGG ROBUST',
+    },
+  };
+
   it('skal vise informasjon uten editeringsmuligheter når det ikke finnes aksjonspunkter', () => {
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{}}
+      initialValues={{} as FormValues}
       intl={intlMock}
       aksjonspunkter={[]}
       hasOpenAksjonspunkter={false}
@@ -30,6 +41,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
+      soknad={{} as Soknad}
+      fagsakPerson={{} as FagsakPerson}
+      medlemskap={{} as Medlemskap}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -56,7 +77,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT}`]: 'test' }}
+      initialValues={{} as FormValues}
       intl={intlMock}
       aksjonspunkter={[bosattAksjonspunkt]}
       hasOpenAksjonspunkter
@@ -69,6 +90,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
+      soknad={{} as Soknad}
+      fagsakPerson={{} as FagsakPerson}
+      medlemskap={{} as Medlemskap}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -98,7 +129,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE}`]: 'test' }}
+      initialValues={{} as FormValues}
       intl={intlMock}
       aksjonspunkter={[periodeAksjonspunkt]}
       hasOpenAksjonspunkter
@@ -111,6 +142,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
+      soknad={{} as Soknad}
+      fagsakPerson={{} as FagsakPerson}
+      medlemskap={{} as Medlemskap}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.GyldigMedlemFolketrygden');
@@ -137,7 +178,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OPPHOLDSRETT}`]: 'test' }}
+      initialValues={{} as FormValues}
       intl={intlMock}
       aksjonspunkter={[oppholdsrettAksjonspunkt]}
       hasOpenAksjonspunkter
@@ -150,6 +191,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
+      soknad={{} as Soknad}
+      fagsakPerson={{} as FagsakPerson}
+      medlemskap={{} as Medlemskap}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.EOSBorgerMedOppholdsrett');
@@ -176,7 +227,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD}`]: 'test' }}
+      initialValues={{} as FormValues}
       intl={intlMock}
       aksjonspunkter={[lovligOppholdAksjonspunkt]}
       hasOpenAksjonspunkter
@@ -189,6 +240,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
+      soknad={{} as Soknad}
+      fagsakPerson={{} as FagsakPerson}
+      medlemskap={{} as Medlemskap}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold');
@@ -215,7 +276,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP}`]: 'test' }}
+      initialValues={{} as FormValues}
       intl={intlMock}
       aksjonspunkter={[fortsattMedlemskapAksjonspunkt]}
       hasOpenAksjonspunkter
@@ -228,6 +289,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
+      soknad={{} as Soknad}
+      fagsakPerson={{} as FagsakPerson}
+      medlemskap={{} as Medlemskap}
+      behandlingType={{
+        kode: behandlingType.FORSTEGANGSSOKNAD,
+        kodeverk: '',
+      }}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.HarFortsattMedlemskap');
@@ -268,23 +339,16 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       erAktivt: true,
     };
 
-    const values = {
-      perioder: [
-        {
-          aksjonspunkter: [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD],
-          begrunnelse: 'dawdawdawdawdawda',
-          bosattVurdering: null,
-          erEosBorger: false,
-          lovligOppholdVurdering: true,
-          medlemskapManuellVurderingType: null,
-          oppholdsrettVurdering: null,
-          vurderingsdato: '2019-10-06',
-          årsaker: ['STATSBORGERSKAP'],
-        },
-      ],
-    };
+    const perioder2 = [{
+      begrunnelse: 'dawdawdawdawdawda',
+      bosattVurdering: null,
+      erEosBorger: false,
+      lovligOppholdVurdering: true,
+      medlemskapManuellVurderingType: null,
+      oppholdsrettVurdering: null,
+    }] as OppholdFormValues[];
 
-    const transformed = transformValues(values, [lovligOppholdAksjonspunkt, fortsattMedlemskapAksjonspunkt]);
+    const transformed = transformValues(perioder2, [lovligOppholdAksjonspunkt, fortsattMedlemskapAksjonspunkt]);
 
     expect(transformed).has.length(1);
     expect(transformed[0].kode).is.eql(aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
