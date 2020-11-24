@@ -4,8 +4,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 export const iay = {
   inntektsmeldinger: [
     {
-      arbeidsgiver: 'KIWI',
-      arbeidsgiverOrgnr: '999999999',
+      arbeidsgiverReferanse: '999999999',
       arbeidsgiverStartdato: '2019-06-03',
       innsendingstidspunkt: '2020-05-14T00:12:17',
       utsettelsePerioder: [],
@@ -16,8 +15,7 @@ export const iay = {
       },
     },
     {
-      arbeidsgiver: 'REMA 1000',
-      arbeidsgiverOrgnr: '999999998',
+      arbeidsgiverReferanse: '999999998',
       arbeidsgiverStartdato: '2019-05-13',
       innsendingstidspunkt: '2019-04-19T21:30:17',
       utsettelsePerioder: [

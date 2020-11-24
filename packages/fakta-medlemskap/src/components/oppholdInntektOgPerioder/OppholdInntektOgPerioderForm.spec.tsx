@@ -340,12 +340,15 @@ describe('<OppholdInntektOgPerioderForm>', () => {
     };
 
     const perioder2 = [{
+      aksjonspunkter: [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD],
       begrunnelse: 'dawdawdawdawdawda',
       bosattVurdering: null,
       erEosBorger: false,
       lovligOppholdVurdering: true,
       medlemskapManuellVurderingType: null,
       oppholdsrettVurdering: null,
+      vurderingsdato: '2019-10-06',
+      årsaker: ['STATSBORGERSKAP'],
     }] as OppholdFormValues[];
 
     const transformed = transformValues(perioder2, [lovligOppholdAksjonspunkt, fortsattMedlemskapAksjonspunkt]);

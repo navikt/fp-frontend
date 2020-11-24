@@ -51,7 +51,7 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
 
 type PeriodeMedId = MedlemPeriode & { id: string; }
 
-const createNewPerioder = (perioder: PeriodeMedId[], id: string, values: any) => {
+const createNewPerioder = (perioder: PeriodeMedId[], id: string, values: OppholdFormValues) => {
   const updatedIndex = perioder.findIndex((p: PeriodeMedId) => p.id === id);
   const updatedPeriode = perioder.find((p: PeriodeMedId) => p.id === id);
 
@@ -160,7 +160,7 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
     this.setState({ valgtPeriode });
   }
 
-  updateOppholdInntektPeriode(values: FormValues): void {
+  updateOppholdInntektPeriode(values: OppholdFormValues): void {
     const {
       behandlingFormPrefix, perioder, reduxFormChange: formChange,
     } = this.props;

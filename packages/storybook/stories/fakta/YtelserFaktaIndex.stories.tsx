@@ -9,10 +9,10 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 const inntektArbeidYtelse = {
   inntektsmeldinger: [{
     arbeidsgiverStartdato: '2019-02-02',
-    arbeidsgiver: 'Studio Espen',
+    arbeidsgiverReferanse: '123',
   }, {
     arbeidsgiverStartdato: '2019-02-03',
-    arbeidsgiver: 'Auto Joachim bilpleie',
+    arbeidsgiverReferanse: '345',
   }],
   relatertTilgrensendeYtelserForSoker: [{
     relatertYtelseType: relatertYtelseType.SVANGERSKAPSPENGER,

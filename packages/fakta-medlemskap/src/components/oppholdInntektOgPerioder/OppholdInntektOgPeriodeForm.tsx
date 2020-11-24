@@ -31,7 +31,7 @@ const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: string[]): bo
 
 export type PeriodeMedId = MedlemPeriode & { id: string; }
 
-export type FormValues = IOYFormValues & OppholdFormValues & StatusFormValues & PerioderFormValues & {
+export type FormValues = PeriodeMedId & IOYFormValues & OppholdFormValues & StatusFormValues & PerioderFormValues & {
   begrunnelse?: string;
 }
 
