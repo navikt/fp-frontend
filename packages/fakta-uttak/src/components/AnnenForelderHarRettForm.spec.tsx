@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { Ytelsefordeling } from '@fpsak-frontend/types';
 
 import { AnnenForelderHarRettForm } from './AnnenForelderHarRettForm';
 
@@ -43,6 +44,9 @@ describe('<AnnenForelderHarRettForm>', () => {
       aksjonspunkter={avklarAnnenforelderHarRettAp}
       behandlingVersjon={1}
       behandlingId={1}
+      ytelsefordeling={{} as Ytelsefordeling}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     expect(wrapper.find('[id="UttakInfoPanel.Aksjonspunkt.5086"]')).to.have.lengthOf(1);

@@ -27,19 +27,26 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-const finnTextTilRadio1 = (erHeimevern: any, erNavTiltak: any) => {
+const finnTextTilRadio1 = (erHeimevern: boolean, erNavTiltak: boolean): string => {
   if (erHeimevern) {
     return 'SykdomOgSkadePeriode.HeimevernetErDok';
   }
   return erNavTiltak ? 'SykdomOgSkadePeriode.TiltakIRegiNavErDok' : 'UttakInfoPanel.SykdomSkadenDokumentertAngiAvklartPeriode';
 };
 
-const finnTextTilRadio2 = (erHeimevern: any, erNavTiltak: any) => {
+const finnTextTilRadio2 = (erHeimevern: boolean, erNavTiltak: boolean): string => {
   if (erHeimevern) {
     return 'SykdomOgSkadePeriode.HeimevernetErIkkeDok';
   }
   return erNavTiltak ? 'SykdomOgSkadePeriode.TiltakIRegiNavErIkkeDok' : 'UttakInfoPanel.SykdomSkadenIkkeDokumentert';
 };
+
+type FormValues = {
+  begrunnelse?: string;
+  id?: string;
+  resultat?: string;
+  dokumentertePerioder?: any;
+}
 
 interface PureOwnProps {
   id: string;
@@ -69,6 +76,10 @@ interface MappedOwnProps {
   resultat?: string;
   bekreftet: boolean;
   updated: boolean;
+  onSubmit: (values: FormValues) => any;
+  validate: (values: FormValues) => any;
+  initialValues: FormValues;
+  form: string;
 }
 
 // TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
@@ -95,7 +106,7 @@ export const SykdomOgSkadePeriode: FunctionComponent<PureOwnProps & MappedOwnPro
     Object.keys(formSyncErrors).length !== 0
     && formProps.submitFailed
     && (formSyncErrors.dokumentertePerioder.length - 1) > 0) {
-    formSyncErrors.dokumentertePerioder.forEach((error: any) => {
+    formSyncErrors.dokumentertePerioder.forEach((error) => {
       errorHeight += error !== undefined && error.fom[0].id === 'ValidationMessage.NotEmpty' ? 30 : 52;
     });
   }
@@ -193,7 +204,7 @@ SykdomOgSkadePeriode.defaultProps = {
 };
 
 const validateSykdomOgSkadeForm = (
-  values: any,
+  values: FormValues,
   familieHendelse: FamilieHendelse,
   overforingArsak: Kodeverk,
   vilkarForSykdomOppfyltExists: boolean,
@@ -214,7 +225,7 @@ const validateSykdomOgSkadeForm = (
   }
 
   if (values.dokumentertePerioder) {
-    values.dokumentertePerioder.forEach((periode: any, index: any) => {
+    values.dokumentertePerioder.forEach((periode, index) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
       if (invalid) {
         errors.dokumentertePerioder[index] = {
@@ -243,7 +254,7 @@ const buildInitialValues = createSelector([
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
   (_state: any, ownProps: PureOwnProps) => ownProps.id],
-(begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
+(begrunnelse, initialResultat, initialDokumentertePerioder, id): FormValues => ({
   begrunnelse,
   id,
   resultat: initialResultat ? initialResultat.kode : undefined,
@@ -259,10 +270,10 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   } = initialOwnProps;
   const formName = `sykdomOgSkadeForm-${initialOwnProps.id}`;
   const familiehendelse = gjeldendeFamiliehendelse;
-  const validate = (values: any) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.overforingArsak, vilkarForSykdomExists);
-  const onSubmit = (values: any) => initialOwnProps.updatePeriode((values));
+  const validate = (values: FormValues) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.overforingArsak, vilkarForSykdomExists);
+  const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode((values));
 
-  return (state: any, ownProps: PureOwnProps) => ({
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     onSubmit,
     validate,
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),

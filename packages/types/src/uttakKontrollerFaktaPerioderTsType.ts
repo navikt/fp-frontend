@@ -1,4 +1,3 @@
-import Arbeidsgiver from './arbeidsgiverTsType';
 import Kodeverk from './kodeverkTsType';
 
 export type UttakKontrollerFaktaPerioder = Readonly<{
@@ -8,7 +7,7 @@ export type UttakKontrollerFaktaPerioder = Readonly<{
   begrunnelse: string;
   uttakPeriodeType: Kodeverk;
   arbeidstidsprosent: number;
-  arbeidsgiver: Arbeidsgiver;
+  arbeidsgiverReferanse: string;
   utsettelseÅrsak: Kodeverk;
   overføringÅrsak: Kodeverk;
   erSelvstendig: boolean;

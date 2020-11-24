@@ -19,16 +19,28 @@ import styles from './annenForelderHarRettForm.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-interface OwnProps {
+type FormValues = {
+  begrunnelse?: string;
+  annenForelderHarRett?: boolean;
+}
+
+interface PureOwnProps {
+  ytelsefordeling: Ytelsefordeling;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   hasOpenUttakAksjonspunkter: boolean;
-  aksjonspunkter: Aksjonspunkt[];
   behandlingVersjon: number;
   behandlingId: number;
 }
 
-export const AnnenForelderHarRettForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+interface MappedOwnProps {
+  initialValues: FormValues;
+  onSubmit: (values: any) => any;
+}
+
+export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   hasOpenAksjonspunkter,
   hasOpenUttakAksjonspunkter,
   aksjonspunkter,
@@ -85,19 +97,13 @@ export const AnnenForelderHarRettForm: FunctionComponent<OwnProps & InjectedForm
   </div>
 );
 
-const transformValues = (values: any, aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter.map((ap: Aksjonspunkt) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => aksjonspunkter.map((ap) => ({
   kode: ap.definisjon.kode,
   begrunnelse: values.begrunnelse,
   annenforelderHarRett: values.annenForelderHarRett,
 }));
 
-interface PureOwnProps {
-  ytelsefordeling: Ytelsefordeling;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
-}
-
-const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling) => {
+const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling): FormValues => {
   const annenForelderHarRett = ytelseFordeling && ytelseFordeling.annenforelderHarRettDto;
   if (ytelseFordeling) {
     return ({
@@ -111,9 +117,9 @@ const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelse
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, aksjonspunkter)));
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
 
-const mapStateToProps = (_state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),
 });
