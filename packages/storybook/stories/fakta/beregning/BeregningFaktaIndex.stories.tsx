@@ -9,16 +9,17 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
+import alleKodeverkMock from '../../mocks/alleKodeverk.json';
+
 import { beregningsgrunnlag as bgMedArbeidOgDagpenger, aksjonspunkt as aksjonspunktArbeidOgDagpenger } from './scenario/ArbeidMedDagpengerIOpptjeningsperioden';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
-import alleKodeverk from '../../mocks/alleKodeverk.json';
-
 const behandling = {
   id: 1,
   versjon: 1,
-};
+} as Behandling;
 
 const {
   VURDER_MOTTAR_YTELSE,
@@ -184,7 +185,7 @@ export const ArbeidOgDagpenger = () => (
     beregningsgrunnlag={object('beregningsgrunnlag', bgMedArbeidOgDagpenger)}
     aksjonspunkter={aksjonspunktArbeidOgDagpenger}
     erOverstyrer
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverkMock as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -219,16 +220,18 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -301,9 +304,11 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.UTFORT,
+          kodeverk: 'test',
         },
         begrunnelse: 'En begrunnelse for at arbeidsforholdet var gyldig.',
         kanLoses: true,
@@ -312,16 +317,18 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       {
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -374,16 +381,18 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -432,16 +441,18 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -489,16 +500,18 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -549,16 +562,18 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -611,16 +626,18 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -656,16 +673,18 @@ export const VurderingAvMilitær = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -719,16 +738,18 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -766,16 +787,18 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -812,16 +835,18 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -862,16 +887,18 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -907,16 +934,18 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -1095,9 +1124,11 @@ export const KombinasjonstestForFaktapanel = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.UTFORT,
+          kodeverk: 'test',
         },
         begrunnelse: 'En begrunnelse for at arbeidsforholdet var gyldig.',
         kanLoses: true,
@@ -1106,16 +1137,18 @@ export const KombinasjonstestForFaktapanel = () => {
       {
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -1184,16 +1217,18 @@ export const OverstyringAvInntekt = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
@@ -1234,16 +1269,18 @@ export const VurderKunYtelseBesteberegning = () => {
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+          kodeverk: 'test',
         },
         status: {
           kode: aksjonspunktStatus.OPPRETTET,
+          kodeverk: 'test',
         },
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
       }]}
       erOverstyrer={false}
-      alleKodeverk={alleKodeverk}
+      alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
