@@ -12,7 +12,9 @@ import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidT
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@fpsak-frontend/utils';
-import { Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
+} from '@fpsak-frontend/types';
 
 import { FormValues } from './UttakActivity';
 import lagVisningsNavn from '../utils/uttakVisningsnavnHelper';
@@ -71,9 +73,9 @@ const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: FormValu
 ) && parseFloat(value) > 0
   ? merEnNullMessage() : null);
 
-const createTextStrings = (fields: AktivitetFieldArray) => {
+const createTextStrings = (fields: AktivitetFieldArray, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   const {
-    prosentArbeid, arbeidsgiver, eksternArbeidsforholdId, uttakArbeidType,
+    prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType,
   } = fields;
 
   const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
@@ -81,8 +83,9 @@ const createTextStrings = (fields: AktivitetFieldArray) => {
   if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
     arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
   }
-  if (arbeidsgiver) {
-    arbeidsforhold = lagVisningsNavn(arbeidsgiver, eksternArbeidsforholdId);
+  if (arbeidsgiverReferanse) {
+    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    arbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId);
   }
   return {
     prosentArbeidText,
@@ -102,6 +105,7 @@ interface OwnProps {
   fields: FieldArrayFieldsProps<AktivitetFieldArray>;
   periodeTyper: KodeverkMedNavn[];
   readOnly: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -114,95 +118,94 @@ const RenderUttakTable: FunctionComponent<OwnProps> = ({
   fields,
   periodeTyper,
   readOnly,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <div className={styles.tableOverflow}>
-    {fields.length > 0
-    && (
-    <Table headerTextCodes={headerTextCodes}>
-      {fields.map((uttakElementFieldId, index: number) => {
-        const textStrings = createTextStrings(fields.get(index));
-        return (
-          <TableRow key={uttakElementFieldId}>
-            <TableColumn><Normaltekst className={styles.forsteKolWidth}>{textStrings.arbeidsforhold}</Normaltekst></TableColumn>
-            <TableColumn>
-              <div className={styles.selectStonad}>
-                <SelectField
-                  name={`${uttakElementFieldId}.stønadskontoType.kode`}
-                  selectValues={mapPeriodeTyper(periodeTyper)}
-                  label=""
-                  readOnly={readOnly}
-                  validate={checkForMonthsOrDays(uttakElementFieldId) ? [required, notDash] : []}
-                />
-              </div>
-            </TableColumn>
-            <TableColumn>
-              <Row>
-                <div className={styles.align}>
-                  <Column xs="6">
-                    <span className={styles.weekPosition}>
-                      <InputField
-                        name={`${uttakElementFieldId}.weeks`}
-                        id={`${uttakElementFieldId}.weeks`}
+    {fields.length > 0 && (
+      <Table headerTextCodes={headerTextCodes}>
+        {fields.map((uttakElementFieldId, index: number) => {
+          const textStrings = createTextStrings(fields.get(index), arbeidsgiverOpplysningerPerId);
+          return (
+            <TableRow key={uttakElementFieldId}>
+              <TableColumn><Normaltekst className={styles.forsteKolWidth}>{textStrings.arbeidsforhold}</Normaltekst></TableColumn>
+              <TableColumn>
+                <div className={styles.selectStonad}>
+                  <SelectField
+                    name={`${uttakElementFieldId}.stønadskontoType.kode`}
+                    selectValues={mapPeriodeTyper(periodeTyper)}
+                    label=""
+                    readOnly={readOnly}
+                    validate={checkForMonthsOrDays(uttakElementFieldId) ? [required, notDash] : []}
+                  />
+                </div>
+              </TableColumn>
+              <TableColumn>
+                <Row>
+                  <div className={styles.align}>
+                    <Column xs="6">
+                      <span className={styles.weekPosition}>
+                        <InputField
+                          name={`${uttakElementFieldId}.weeks`}
+                          id={`${uttakElementFieldId}.weeks`}
+                          readOnly={readOnly}
+                          bredde="XS"
+                          validate={[required, hasValidInteger, maxLength3]}
+                          parse={(value) => {
+                            const parsedValue = parseInt(value, 10);
+                            return Number.isNaN(parsedValue) ? value : parsedValue;
+                          }}
+                        />
+                      </span>
+                    </Column>
+                    <Column xs="1">
+                      {readOnly ? <span>/</span> : <span className={styles.verticalCharPlacementInTable}>/</span>}
+                    </Column>
+                    <Column xs="3">
+                      <DecimalField
+                        name={`${uttakElementFieldId}.days`}
+                        id={`${uttakElementFieldId}.days`}
                         readOnly={readOnly}
                         bredde="XS"
-                        validate={[required, hasValidInteger, maxLength3]}
-                        parse={(value) => {
-                          const parsedValue = parseInt(value, 10);
-                          return Number.isNaN(parsedValue) ? value : parsedValue;
-                        }}
+                        validate={[required, hasValidDecimal, maxLength3]}
+                        // @ts-ignore Fiks
+                        normalizeOnBlur={(value) => (parseFloat(value).toFixed(1))}
                       />
-                    </span>
-                  </Column>
-                  <Column xs="1">
-                    {readOnly ? <span>/</span> : <span className={styles.verticalCharPlacementInTable}>/</span>}
-                  </Column>
-                  <Column xs="3">
+                    </Column>
+                  </div>
+                </Row>
+              </TableColumn>
+              <TableColumn><Normaltekst>{textStrings.prosentArbeidText}</Normaltekst></TableColumn>
+              <TableColumn>
+                <Row>
+                  <Column xs="7">
                     <DecimalField
-                      name={`${uttakElementFieldId}.days`}
-                      id={`${uttakElementFieldId}.days`}
+                      name={`${uttakElementFieldId}.utbetalingsgrad`}
+                      validate={[required, minValue0, maxProsentValue100, hasValidDecimal, noMoreThanZeroIfRejectedAndNotUtsettelse]}
                       readOnly={readOnly}
                       bredde="XS"
-                      validate={[required, hasValidDecimal, maxLength3]}
+                      format={(value) => {
+                        if (value || value === 0) {
+                          return readOnly ? `${value} %` : value;
+                        }
+                        return '';
+                      }}
                       // @ts-ignore Fiks
-                      normalizeOnBlur={(value) => (parseFloat(value).toFixed(1))}
+                      normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                     />
                   </Column>
-                </div>
-              </Row>
-            </TableColumn>
-            <TableColumn><Normaltekst>{textStrings.prosentArbeidText}</Normaltekst></TableColumn>
-            <TableColumn>
-              <Row>
-                <Column xs="7">
-                  <DecimalField
-                    name={`${uttakElementFieldId}.utbetalingsgrad`}
-                    validate={[required, minValue0, maxProsentValue100, hasValidDecimal, noMoreThanZeroIfRejectedAndNotUtsettelse]}
-                    readOnly={readOnly}
-                    bredde="XS"
-                    format={(value) => {
-                      if (value || value === 0) {
-                        return readOnly ? `${value} %` : value;
-                      }
-                      return '';
-                    }}
-                    // @ts-ignore Fiks
-                    normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-                  />
-                </Column>
-                <Column xs="3">
-                  {!readOnly
-                    && (
-                    <span className={styles.verticalCharPlacementInTable}>
-                      %
-                    </span>
+                  <Column xs="3">
+                    {!readOnly && (
+                      <span className={styles.verticalCharPlacementInTable}>
+                        %
+                      </span>
                     )}
-                </Column>
-              </Row>
-            </TableColumn>
-          </TableRow>
-        );
-      })}
-    </Table>
+                  </Column>
+                </Row>
+              </TableColumn>
+            </TableRow>
+          );
+        })}
+      </Table>
     )}
   </div>
 );

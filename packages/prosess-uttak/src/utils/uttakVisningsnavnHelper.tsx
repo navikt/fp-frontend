@@ -1,20 +1,20 @@
 import moment from 'moment';
 
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { AktivitetIdentifikator } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysninger } from '@fpsak-frontend/types';
 
 // vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
 // privatperson - KLANG...(18.08.1980)
 const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
 const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const lagVisningsNavn = (arbeidsgiver: AktivitetIdentifikator['arbeidsgiver'], eksternArbeidsforholdId?: any): string => {
+const lagVisningsNavn = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: any): string => {
   const {
-    navn, fødselsdato, virksomhet, identifikator,
-  } = arbeidsgiver;
+    navn, fødselsdato, erPrivatPerson, identifikator,
+  } = arbeidsgiverOpplysninger;
 
   let visningsNavn = `${navn}`;
-  if (virksomhet) {
+  if (!erPrivatPerson) {
     visningsNavn = identifikator ? `${visningsNavn} (${identifikator})` : visningsNavn;
     visningsNavn = `${visningsNavn}${getEndCharFromId(eksternArbeidsforholdId)}`;
   } else {

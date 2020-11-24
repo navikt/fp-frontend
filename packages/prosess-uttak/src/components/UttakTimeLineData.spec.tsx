@@ -8,7 +8,7 @@ import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {
-  Arbeidsgiver, AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto,
+  AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto,
 } from '@fpsak-frontend/types';
 
 import { kalkulerTrekkdager, UttakTimeLineData } from './UttakTimeLineData';
@@ -64,16 +64,12 @@ describe('<UttakTimeLineData>', () => {
       MØDREKVOTE: {
         aktivitetSaldoDtoList: [{
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'UNIVERSITETET I OSLO',
-            },
+            arbeidsgiverReferanse: '123',
           },
           saldo: 0,
         }, {
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'STATOIL',
-            },
+            arbeidsgiverReferanse: '445',
           },
           saldo: 4,
         }],
@@ -86,23 +82,17 @@ describe('<UttakTimeLineData>', () => {
       MØDREKVOTE: {
         aktivitetSaldoDtoList: [{
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'UNIVERSITETET I OSLO',
-            } as Arbeidsgiver,
+            arbeidsgiverReferanse: '123',
           } as AktivitetIdentifikator,
           saldo: 0,
         }, {
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'STATOIL',
-            } as Arbeidsgiver,
+            arbeidsgiverReferanse: '445',
           } as AktivitetIdentifikator,
           saldo: 4,
         }, {
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'MYS',
-            } as Arbeidsgiver,
+            arbeidsgiverReferanse: '756',
           } as AktivitetIdentifikator,
           saldo: 0,
         }] as AktivitetSaldo[],
@@ -116,6 +106,29 @@ describe('<UttakTimeLineData>', () => {
       navn: 'Avsluttet',
       kodeverk: 'BEHANDLING_STATUS',
     }],
+  };
+
+  const arbeidsgiverOpplysningerPerId = {
+    910909088: {
+      erPrivatPerson: false,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+    },
+    123: {
+      erPrivatPerson: false,
+      identifikator: '123',
+      navn: 'UNIVERSITETET I OSLO',
+    },
+    445: {
+      erPrivatPerson: false,
+      identifikator: '445',
+      navn: 'STATOIL',
+    },
+    756: {
+      erPrivatPerson: false,
+      identifikator: '756',
+      navn: 'MYS',
+    },
   };
 
   it('skal rendre UttakTimeLineData, ikke deloppperiode, ikke readonly', () => {
@@ -137,6 +150,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -170,6 +184,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     wrapper.setState({ showDelPeriodeModal: true });
     expect(wrapper.state('showDelPeriodeModal')).is.true;
@@ -202,6 +217,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -236,6 +252,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const buttons = wrapper.find(TimeLineButton);
     expect(buttons).to.have.length(2);
@@ -267,6 +284,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttakActivity = wrapper.find(UttakActivity);
     expect(uttakActivity).to.have.length(1);
@@ -299,6 +317,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).has.length(1);
@@ -331,6 +350,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       behandlingVersjon={1}
       behandlingId={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).has.length(1);
