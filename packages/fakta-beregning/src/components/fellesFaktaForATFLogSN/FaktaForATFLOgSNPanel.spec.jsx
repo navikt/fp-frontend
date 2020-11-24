@@ -129,10 +129,10 @@ describe('<FaktaForATFLOgSNPanel>', () => {
     values[besteberegningField] = true;
     values[INNTEKT_FIELD_ARRAY_NAME] = [
       {
-        fastsattBelop: '10 000', inntektskategori: 'ARBEIDSTAKER', andelsnr: andel1.andelsnr, skalRedigereInntekt: true,
+        fastsattBelop: '10 000', inntektskategori: 'ARBEIDSTAKER', andelsnr: andel1.andelsnr, kanRedigereInntekt: true,
       },
       {
-        fastsattBelop: '20 000', inntektskategori: 'SELVSTENDIG_NÆRINGSDRIVENDE', andelsnr: andel2.andelsnr, skalRedigereInntekt: true,
+        fastsattBelop: '20 000', inntektskategori: 'SELVSTENDIG_NÆRINGSDRIVENDE', andelsnr: andel2.andelsnr, kanRedigereInntekt: true,
       },
     ];
     const transformedValues = transformValuesFaktaForATFLOgSN(values);
@@ -209,14 +209,14 @@ describe('<FaktaForATFLOgSNPanel>', () => {
     values[erNyoppstartetFLField] = true;
     values[INNTEKT_FIELD_ARRAY_NAME] = [
       {
-        fastsattBelop: '10 000', inntektskategori: 'ARBEIDSTAKER', andelsnr: forholdMedLonnsendringUtenIM.andelsnr, skalRedigereInntekt: true,
+        fastsattBelop: '10 000', inntektskategori: 'ARBEIDSTAKER', andelsnr: forholdMedLonnsendringUtenIM.andelsnr, kanRedigereInntekt: true,
       },
       {
         fastsattBelop: '20 000',
         inntektskategori: 'FRILANS',
         andelsnr: frilansAndel.andelsnr,
         aktivitetStatus: aktivitetStatus.FRILANSER,
-        skalRedigereInntekt: true,
+        kanRedigereInntekt: true,
       },
     ];
     const transformedValues = transformValuesFaktaForATFLOgSN(values);

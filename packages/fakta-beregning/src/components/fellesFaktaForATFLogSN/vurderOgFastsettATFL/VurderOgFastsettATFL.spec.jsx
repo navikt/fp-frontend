@@ -58,8 +58,8 @@ const lagAndel = (andelsnr, aktivitetStatus, inntektskategori) => (
 );
 
 const lagAndelValues = (andelsnr, fastsattBelop, inntektskategori, aktivitetStatus, lagtTilAvSaksbehandler = false,
-  nyAndel = false, skalRedigereInntekt = true) => ({
-  nyAndel, andelsnr, fastsattBelop, inntektskategori, aktivitetStatus, lagtTilAvSaksbehandler, skalRedigereInntekt,
+  nyAndel = false, kanRedigereInntekt = true) => ({
+  nyAndel, andelsnr, fastsattBelop, inntektskategori, aktivitetStatus, lagtTilAvSaksbehandler, kanRedigereInntekt,
 });
 
 describe('<VurderOgFastsettATFL>', () => {

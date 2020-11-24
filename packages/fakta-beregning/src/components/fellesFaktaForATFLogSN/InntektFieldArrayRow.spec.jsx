@@ -83,7 +83,7 @@ it('skal vise komponent med arbeidsperiode og refusjonskrav', () => {
     skalVisePeriode
     skalViseRefusjon
     skalViseSletteknapp={false}
-    skalRedigereInntekt
+    kanRedigereInntekt
     andelElementFieldId="fieldArrayName[0]"
     removeAndel={() => {}}
     index={0}
@@ -114,7 +114,7 @@ it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
     arbeidsgiverId: '',
     arbeidsperiodeFom: '',
     arbeidsperiodeTom: '',
-    skalRedigereInntekt: true,
+    kanRedigereInntekt: true,
   };
 
   const fields2 = new MockFieldsWithContent('fieldArrayName', [andelField2]);
@@ -126,7 +126,7 @@ it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
     skalVisePeriode={false}
     skalViseSletteknapp={false}
     skalViseRefusjon={false}
-    skalRedigereInntekt
+    kanRedigereInntekt
     andelElementFieldId="fieldArrayName[0]"
     removeAndel={() => {}}
     index={0}
@@ -159,7 +159,7 @@ it('skal vise komponent med readOnly beløp', () => {
     arbeidsgiverId: '',
     arbeidsperiodeFom: '',
     arbeidsperiodeTom: '',
-    skalRedigereInntekt: false,
+    kanRedigereInntekt: false,
   };
 
   const fields2 = new MockFieldsWithContent('fieldArrayName', [andelField2]);
@@ -171,7 +171,7 @@ it('skal vise komponent med readOnly beløp', () => {
     skalVisePeriode={false}
     skalViseSletteknapp={false}
     skalViseRefusjon={false}
-    skalRedigereInntekt={false}
+    kanRedigereInntekt={false}
     andelElementFieldId="fieldArrayName[0]"
     removeAndel={() => {}}
     index={0}
@@ -216,7 +216,7 @@ it('skal vise komponent med sletteknapp', () => {
     skalVisePeriode={false}
     skalViseSletteknapp
     skalViseRefusjon={false}
-    skalRedigereInntekt
+    kanRedigereInntekt
     andelElementFieldId="fieldArrayName[0]"
     removeAndel={() => {}}
     index={0}

@@ -16,9 +16,10 @@ import { harKunstigArbeidsforhold } from './forms/KunstigArbeidsforhold';
 import transformValuesArbeidUtenInntektsmelding from './forms/ArbeidUtenInntektsmelding';
 import VurderMottarYtelseForm from './forms/VurderMottarYtelseForm';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
+import { validateMinstEnFastsatt } from '../ValidateAndelerUtils';
 import {
-  skalRedigereInntektForAndel, mapAndelToField, erOverstyring, erOverstyringAvBeregningsgrunnlag,
-  getSkalRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME,
+  skalFastsetteInntektForAndel, mapAndelToField, erOverstyring, erOverstyringAvBeregningsgrunnlag,
+  getKanRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME,
 } from '../BgFordelingUtils';
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
 import InntektFieldArray from '../InntektFieldArray';
@@ -50,7 +51,7 @@ const harVurdert = (tilfeller, values, faktaOmBeregning) => (
 
 const skalFastsetteInntekt = (values, faktaOmBeregning, beregningsgrunnlag) => faktaOmBeregning.andelerForFaktaOmBeregning
   .map((andel) => mapAndelToField(andel))
-  .find(skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)) !== undefined;
+  .find(skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)) !== undefined;
 
 export const findInstruksjonForFastsetting = (skalHaBesteberegning, skalFastsetteFL, skalFastsetteAT, harKunstigArbeid) => {
   if (harKunstigArbeid) {
@@ -192,11 +193,22 @@ VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning, erOverstyrt) => {
   };
 };
 
+const validateEnFastsattVedOverstyring = (values) => {
+  const minstEnFastsattErrorMessage = validateMinstEnFastsatt(values);
+  if (minstEnFastsattErrorMessage != null) {
+    return { _error: minstEnFastsattErrorMessage };
+  }
+  return null;
+};
+
 VurderOgFastsettATFL.validate = (values, tilfeller, faktaOmBeregning, beregningsgrunnlag) => {
   const errors = {};
   if (harVurdert(tilfeller, values, faktaOmBeregning) && skalFastsetteInntekt(values, faktaOmBeregning, beregningsgrunnlag)) {
     errors[INNTEKT_FIELD_ARRAY_NAME] = InntektFieldArray.validate(values[INNTEKT_FIELD_ARRAY_NAME], false,
-      skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag));
+      skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag));
+  }
+  if (!errors[INNTEKT_FIELD_ARRAY_NAME] && erOverstyring(values)) {
+    errors[INNTEKT_FIELD_ARRAY_NAME] = validateEnFastsattVedOverstyring(values[INNTEKT_FIELD_ARRAY_NAME]);
   }
   return errors;
 };
@@ -211,6 +223,7 @@ const concatTilfeller = (transformed, newTransformedValues) => ({
 const transformValuesForOverstyring = (values, transformed, inntektVerdier, fastsatteAndelsnr) => {
   if (erOverstyring(values)) {
     const overstyrteAndeler = inntektVerdier.filter((andel) => !fastsatteAndelsnr.includes(andel.andelsnr))
+      .filter((verdi) => verdi.fastsattBelop != null)
       .map((verdi) => ({
         andelsnr: verdi.andelsnr,
         nyAndel: verdi.nyAndel,
@@ -287,7 +300,7 @@ VurderOgFastsettATFL.propTypes = {
 
 export const skalFastsettInntektForArbeidstaker = createSelector([
   getFormValuesForBeregning,
-  getSkalRedigereInntekt],
+  getKanRedigereInntekt],
 (values, skalFastsette) => {
   const fields = values[INNTEKT_FIELD_ARRAY_NAME];
   if (!fields) {
@@ -298,7 +311,7 @@ export const skalFastsettInntektForArbeidstaker = createSelector([
 
 export const skalFastsettInntektForFrilans = createSelector([
   getFormValuesForBeregning,
-  getSkalRedigereInntekt],
+  getKanRedigereInntekt],
 (values, skalFastsette) => {
   const fields = values[INNTEKT_FIELD_ARRAY_NAME];
   if (!fields) {
