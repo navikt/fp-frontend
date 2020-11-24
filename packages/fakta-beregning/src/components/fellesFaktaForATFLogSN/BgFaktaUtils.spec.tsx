@@ -253,6 +253,7 @@ describe('<BgFordelingUtils>', () => {
       arbeidsforholdId: '546546g54',
     },
     andelsnr: 4,
+    inntektPrMnd: null,
     ...arbeidstakerIkkeFastsatt,
   };
 
@@ -270,6 +271,8 @@ describe('<BgFordelingUtils>', () => {
 
   const faktaOmBeregning = {
     faktaOmBeregningTilfeller: [],
+    arbeidstakerOgFrilanserISammeOrganisasjonListe: null,
+    arbeidsforholdMedLønnsendringUtenIM: null,
     vurderMottarYtelse: {
       erFrilans: true,
       frilansMottarYtelse: null,
@@ -353,7 +356,6 @@ describe('<BgFordelingUtils>', () => {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(arbeidstakerAndel1),
     };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'arbeidsforholdMedLønnsendringUtenIM' doe... Remove this comment to see the full error message
     faktaOmBeregning.arbeidsforholdMedLønnsendringUtenIM = [arbeidstakerAndel1];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
@@ -378,9 +380,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(arbeidstakerAndel4),
     };
     const faktaOmBeregningCopy = { ...faktaOmBeregning };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inntektPrMnd' does not exist on type '{ ... Remove this comment to see the full error message
     arbeidstakerAndel4.inntektPrMnd = 30000;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'arbeidstakerOgFrilanserISammeOrganisasjo... Remove this comment to see the full error message
     faktaOmBeregningCopy.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(false);
@@ -392,9 +392,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(arbeidstakerAndel4),
     };
     const faktaOmBeregningCopy = { ...faktaOmBeregning };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inntektPrMnd' does not exist on type '{ ... Remove this comment to see the full error message
     arbeidstakerAndel4.inntektPrMnd = null;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'arbeidstakerOgFrilanserISammeOrganisasjo... Remove this comment to see the full error message
     faktaOmBeregningCopy.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
@@ -437,7 +435,6 @@ describe('<BgFordelingUtils>', () => {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(frilansAndel),
     };
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'arbeidstakerOgFrilanserISammeOrganisasjo... Remove this comment to see the full error message
     faktaOmBeregning.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);

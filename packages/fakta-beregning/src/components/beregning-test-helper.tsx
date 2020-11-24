@@ -43,7 +43,7 @@ export const lagStateMedAksjonspunkterOgBeregningsgrunnlag = (aksjonspunkter, be
 
   const state = {
     default: {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'default' does not exist on type '{}'.
+      // @ts-ignore
       ...dataState.default,
       fagsak: {
         selectedSaksnummer: 1,

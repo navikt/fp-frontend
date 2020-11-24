@@ -74,10 +74,8 @@ describe('<ArbeidUtenInntektsmelding>', () => {
   });
 
   it('skal teste at transformValues gir korrekt output når lønnsendring', () => {
-    const values = { };
+    const values = {};
     values[lonnsendringField] = true;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dummyField' does not exist on type '{}'.
-    values.dummyField = 'tilfeldig verdi';
     const inntektVerdier = [
       { fastsattBelop: '10 000', andelsnr: 1 },
     ];

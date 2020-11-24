@@ -334,16 +334,17 @@ describe('<VurderMottarYtelseForm>', () => {
     const tilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_LONNSENDRING,
       faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE];
     const inntektPrMnd = [
-      { andelsnr: andel.andelsnr, fastsattBelop: 10000 },
-      { andelsnr: andel3.andelsnr, fastsattBelop: 20000 },
-      { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' },
+      { andelsnr: andel.andelsnr, fastsattBelop: 10000 } as InntektTransformed,
+      { andelsnr: andel3.andelsnr, fastsattBelop: 20000 } as InntektTransformed,
+      { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
       vurderMottarYtelse: {
         erFrilanser: true,
         arbeidstakerAndelerUtenIM,
       },
+      andelerForFaktaOmBeregning: [],
     };
     const fastsatteAndelsnr = [];
     const values = {};
@@ -352,7 +353,6 @@ describe('<VurderMottarYtelseForm>', () => {
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = true;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     const transformed = VurderMottarYtelseForm.transformValues(values, inntektPrMnd, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr);
     expect(fastsatteAndelsnr.length).to.equal(3);
     const fastsattFrilansinntekt = transformed.fastsettMaanedsinntektFL.maanedsinntekt;
@@ -375,15 +375,16 @@ describe('<VurderMottarYtelseForm>', () => {
     const tilfeller = [faktaOmBeregningTilfelle.VURDER_LONNSENDRING, faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING,
       faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE];
     const inntektPrMnd = [
-      { andelsnr: andel.andelsnr, fastsattBelop: 10000 },
-      { andelsnr: andel3.andelsnr, fastsattBelop: 20000 },
+      { andelsnr: andel.andelsnr, fastsattBelop: 10000 } as InntektTransformed,
+      { andelsnr: andel3.andelsnr, fastsattBelop: 20000 } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
       vurderMottarYtelse: {
         erFrilanser: false,
         arbeidstakerAndelerUtenIM,
       },
+      andelerForFaktaOmBeregning: [],
     };
     const fastsatteAndelsnr = [andel.andelsnr, andel3.andelsnr];
     const values = {};
@@ -391,7 +392,6 @@ describe('<VurderMottarYtelseForm>', () => {
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = true;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     const transformed = VurderMottarYtelseForm.transformValues(values, inntektPrMnd, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr);
     expect(transformed.fastsattUtenInntektsmelding).to.be.equal(undefined);
   });
@@ -400,19 +400,19 @@ describe('<VurderMottarYtelseForm>', () => {
     const tilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.FASTSETT_MAANEDSINNTEKT_FL,
       faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE];
     const inntektPrMnd = [
-      { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' },
+      { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
       vurderMottarYtelse: {
         erFrilanser: true,
         arbeidstakerAndelerUtenIM: [],
       },
+      andelerForFaktaOmBeregning: [],
     };
     const fastsatteAndelsnr = [4];
     const values = {};
     values[finnFrilansFieldName()] = true;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transformValues' does not exist on type ... Remove this comment to see the full error message
     const transformed = VurderMottarYtelseForm.transformValues(values, inntektPrMnd, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr);
     expect(transformed.fastsettMaanedsinntektFL).to.equal(undefined);
   });
