@@ -236,7 +236,7 @@ describe('<InntektFieldArray>', () => {
   });
 
   it('skal validere eksisterende andeler uten errors', () => {
-    const skalRedigereInntekt = () => true;
+    const skalFastsetteInntekt = () => true;
     const values = [];
     const andel2 = {
       fastsattBelop: '10 000',
@@ -245,12 +245,12 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
     expect(errors).to.equal(null);
   });
 
   it('skal returnerer errors for fastsattbeløp når ikkje oppgitt', () => {
-    const skalRedigereInntekt = () => true;
+    const skalFastsetteInntekt = () => true;
     const values = [];
     const andel2 = {
       refusjonskrav: '10 000',
@@ -260,13 +260,13 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
     expect(errors[0].fastsattBelop).to.have.length(1);
     expect(errors[0].fastsattBelop[0].id).to.equal(isRequiredMessage()[0].id);
   });
 
   it('skal ikkje returnerer errors når man ikkje skal redigere inntekt', () => {
-    const skalRedigereInntekt = () => false;
+    const skalFastsetteInntekt = () => false;
     const values = [];
     const andel2 = {
       refusjonskrav: '10 000',
@@ -276,12 +276,12 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
     expect(errors).to.equal(null);
   });
 
   it('skal gi error om inntektkategori ikkje er oppgitt', () => {
-    const skalRedigereInntekt = () => true;
+    const skalFastsetteInntekt = () => true;
     const values = [];
     const andel2 = {
       refusjonskrav: '10 000',
@@ -291,13 +291,13 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: '',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
     expect(errors[0].inntektskategori).to.have.length(1);
     expect(errors[0].inntektskategori[0].id).to.equal(isRequiredMessage()[0].id);
   });
 
   it('skal gi error om andel ikkje er valgt for nye andeler', () => {
-    const skalRedigereInntekt = () => true;
+    const skalFastsetteInntekt = () => true;
     const values = [];
     const andel2 = {
       refusjonskrav: '10 000',
@@ -308,7 +308,7 @@ describe('<InntektFieldArray>', () => {
       nyAndel: true,
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalRedigereInntekt);
+    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
     expect(errors[0].andel).to.have.length(1);
     expect(errors[0].andel[0].id).to.equal(isRequiredMessage()[0].id);
   });

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
-import { getSkalRedigereInntekt } from './BgFaktaUtils';
+import { getKanRedigereInntekt } from './BgFaktaUtils';
 
 import styles from './inntektFieldArray.less';
 
@@ -48,7 +48,7 @@ const SummaryRow: FunctionComponent<OwnProps> = ({
 );
 
 export const mapStateToProps = (state, ownProps) => {
-  const sumBeregnet = summerBeregnet(ownProps.fields, getSkalRedigereInntekt(state, ownProps)) || 0;
+  const sumBeregnet = summerBeregnet(ownProps.fields, getKanRedigereInntekt(state, ownProps)) || 0;
   return {
     sumBeregnet,
   };

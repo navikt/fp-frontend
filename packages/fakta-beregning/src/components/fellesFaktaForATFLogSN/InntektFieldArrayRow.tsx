@@ -11,7 +11,7 @@ import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './inntektFieldArray.less';
 import ArbeidsforholdField from './ArbeidsforholdField';
-import { getSkalRedigereInntekt, getSkalRedigereInntektskategori } from './BgFaktaUtils';
+import { getKanRedigereInntekt, getSkalRedigereInntektskategori } from './BgFaktaUtils';
 
 export const getHeaderTextCodes = (skalVisePeriode, skalViseRefusjon) => {
   const headerCodes = [];
@@ -42,7 +42,7 @@ type OwnProps = {
     skalVisePeriode: boolean;
     skalViseRefusjon: boolean;
     skalViseSletteknapp: boolean;
-    skalRedigereInntekt: boolean;
+    kanRedigereInntekt: boolean;
     skalRedigereInntektskategori: boolean;
     andelElementFieldId: string;
     removeAndel: (...args: any[]) => any;
@@ -61,7 +61,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
   intl, skalVisePeriode,
   skalViseRefusjon,
   skalViseSletteknapp,
-  skalRedigereInntekt,
+  kanRedigereInntekt,
   skalRedigereInntektskategori,
   andelElementFieldId,
   inntektskategoriKoder,
@@ -71,7 +71,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
   alleKodeverk,
 }) => {
   const field = fields.get(index);
-  field.skalRedigereInntekt = skalRedigereInntekt;
+  field.kanRedigereInntekt = kanRedigereInntekt;
   return (
     <TableRow>
       <TableColumn>
@@ -93,7 +93,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
         />
       </TableColumn>
       )}
-      {skalRedigereInntekt
+      {kanRedigereInntekt
     && (
     <TableColumn className={styles.rightAlignInput}>
       <InputField
@@ -105,7 +105,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
       />
     </TableColumn>
     )}
-      {!skalRedigereInntekt
+      {!kanRedigereInntekt
     && (
     <TableColumn className={styles.rightAlign}>
       <InputField
@@ -159,10 +159,10 @@ export const getInntektskategorierAlfabetiskSortert = createSelector(
 
 export const mapStateToProps = (state, ownProps) => {
   const field = ownProps.fields.get(ownProps.index);
-  const skalRedigereInntekt = getSkalRedigereInntekt(state, ownProps)(field);
+  const kanRedigereInntekt = getKanRedigereInntekt(state, ownProps)(field);
   const skalRedigereInntektskategori = getSkalRedigereInntektskategori(state, ownProps)(field);
   return {
-    skalRedigereInntekt,
+    kanRedigereInntekt,
     skalRedigereInntektskategori,
     inntektskategoriKoder: getInntektskategorierAlfabetiskSortert(ownProps),
   };
