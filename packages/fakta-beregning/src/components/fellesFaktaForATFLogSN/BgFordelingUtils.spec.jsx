@@ -9,7 +9,8 @@ import {
   mapToBelop,
   setArbeidsforholdInitialValues,
   setGenerellAndelsinfo,
-  skalRedigereInntektForAndel,
+  skalFastsetteInntektForAndel,
+  kanRedigereInntektForAndel,
   skalRedigereInntektskategoriForAndel,
 } from './BgFordelingUtils';
 import { finnFrilansFieldName, utledArbeidsforholdFieldName } from './vurderOgFastsettATFL/forms/VurderMottarYtelseUtils';
@@ -286,7 +287,7 @@ describe('<BgFordelingUtils>', () => {
     fordelingForrigeBehandling: '',
     fastsattBelop: '',
     readOnlyBelop: 25000,
-    skalRedigereInntekt: false,
+    kanRedigereInntekt: false,
     refusjonskrav: '',
     skalKunneEndreRefusjon: false,
     belopFraInntektsmelding: null,
@@ -297,7 +298,7 @@ describe('<BgFordelingUtils>', () => {
     fordelingForrigeBehandling: 25000,
     fastsattBelop: 25000,
     readOnlyBelop: 25000,
-    skalRedigereInntekt: false,
+    kanRedigereInntekt: false,
     refusjonskrav: '',
     skalKunneEndreRefusjon: false,
     belopFraInntektsmelding: 25000,
@@ -334,7 +335,7 @@ describe('<BgFordelingUtils>', () => {
     };
     const copyValues = { ...values };
     copyValues[MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD] = true;
-    const skalRedigereInntekt = skalRedigereInntektForAndel(copyValues, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = kanRedigereInntektForAndel(copyValues, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -343,7 +344,7 @@ describe('<BgFordelingUtils>', () => {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(arbeidstakerAndel3),
     };
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -353,7 +354,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(arbeidstakerAndel1),
     };
     faktaOmBeregning.arbeidsforholdMedLønnsendringUtenIM = [arbeidstakerAndel1];
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -366,7 +367,7 @@ describe('<BgFordelingUtils>', () => {
       ...faktaOmBeregning,
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE }],
     };
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, fakta, beregningsgrunnlag)(brukersAndel);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, fakta, beregningsgrunnlag)(brukersAndel);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -378,7 +379,7 @@ describe('<BgFordelingUtils>', () => {
     const faktaOmBeregningCopy = { ...faktaOmBeregning };
     arbeidstakerAndel4.inntektPrMnd = 30000;
     faktaOmBeregningCopy.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(false);
   });
 
@@ -390,7 +391,7 @@ describe('<BgFordelingUtils>', () => {
     const faktaOmBeregningCopy = { ...faktaOmBeregning };
     arbeidstakerAndel4.inntektPrMnd = null;
     faktaOmBeregningCopy.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -399,7 +400,7 @@ describe('<BgFordelingUtils>', () => {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(frilansAndel),
     };
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -411,7 +412,7 @@ describe('<BgFordelingUtils>', () => {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(frilansAndel),
     };
-    const skalRedigereInntekt = skalRedigereInntektForAndel(valuesLocalCopy, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(valuesLocalCopy, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 
@@ -423,7 +424,7 @@ describe('<BgFordelingUtils>', () => {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(frilansAndel),
     };
-    const skalRedigereInntekt = skalRedigereInntektForAndel(valuesLocalCopy, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(valuesLocalCopy, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(false);
   });
   it('skal redigere inntekt for frilansandel i samme org som arbeidstaker', () => {
@@ -432,7 +433,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(frilansAndel),
     };
     faktaOmBeregning.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
-    const skalRedigereInntekt = skalRedigereInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).to.equal(true);
   });
 

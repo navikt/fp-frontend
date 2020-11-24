@@ -190,7 +190,7 @@ export const buildInitialValuesVurderFaktaBeregning = createSelector(
 
 export const validateVurderFaktaBeregning = (values) => {
   const { aksjonspunkter } = values;
-  if (aksjonspunkter && hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) && values) {
+  if (values && ((aksjonspunkter && hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter)) || erOverstyring(values))) {
     return {
       ...validationForVurderFakta(values),
     };

@@ -212,16 +212,18 @@ InntektFieldArrayImpl.defaultProps = {
 const InntektFieldArray = injectIntl(InntektFieldArrayImpl);
 
 InntektFieldArray.transformValues = (values) => (values
-  ? values.filter(({ skalRedigereInntekt }) => skalRedigereInntekt).map((fieldValue) => ({
-    andelsnr: fieldValue.andelsnr,
-    fastsattBelop: removeSpacesFromNumber(fieldValue.fastsattBelop),
-    inntektskategori: fieldValue.inntektskategori,
-    nyAndel: fieldValue.nyAndel,
-    lagtTilAvSaksbehandler: fieldValue.lagtTilAvSaksbehandler,
-    aktivitetStatus: fieldValue.aktivitetStatus,
-    arbeidsforholdId: fieldValue.arbeidsforholdId,
-    arbeidsgiverId: fieldValue.arbeidsgiverId,
-  })) : null
+  ? values.filter(({ kanRedigereInntekt }) => kanRedigereInntekt)
+    .filter(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '')
+    .map((fieldValue) => ({
+      andelsnr: fieldValue.andelsnr,
+      fastsattBelop: removeSpacesFromNumber(fieldValue.fastsattBelop),
+      inntektskategori: fieldValue.inntektskategori,
+      nyAndel: fieldValue.nyAndel,
+      lagtTilAvSaksbehandler: fieldValue.lagtTilAvSaksbehandler,
+      aktivitetStatus: fieldValue.aktivitetStatus,
+      arbeidsforholdId: fieldValue.arbeidsforholdId,
+      arbeidsgiverId: fieldValue.arbeidsgiverId,
+    })) : null
 );
 
 const mapAndelToSortedObject = (value) => {
@@ -229,12 +231,12 @@ const mapAndelToSortedObject = (value) => {
   return { andelsinfo: andel, inntektskategori };
 };
 
-InntektFieldArray.validate = (values, erKunYtelse, skalRedigereInntekt) => {
+InntektFieldArray.validate = (values, erKunYtelse, skalFastsetteInntekt) => {
   const arrayErrors = values
     .map((andelFieldValues) => {
       const fieldErrors = {};
       fieldErrors.andel = required(andelFieldValues.andel);
-      fieldErrors.fastsattBelop = skalRedigereInntekt(andelFieldValues) ? required(andelFieldValues.fastsattBelop) : null;
+      fieldErrors.fastsattBelop = skalFastsetteInntekt(andelFieldValues) ? required(andelFieldValues.fastsattBelop) : null;
       fieldErrors.inntektskategori = required(andelFieldValues.inntektskategori);
       return fieldErrors.andel || fieldErrors.fastsattBelop || fieldErrors.inntektskategori ? fieldErrors : null;
     });

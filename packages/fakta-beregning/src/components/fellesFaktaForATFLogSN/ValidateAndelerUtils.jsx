@@ -49,3 +49,13 @@ export const validateUlikeAndelerWithGroupingFunction = (andelList, mapToSort) =
 };
 
 export const validateUlikeAndeler = (andelList) => validateUlikeAndelerWithGroupingFunction(andelList, mapAndelToSortedObject);
+
+const minstEnFastsattErrorMessage = () => ([{ id: 'BeregningInfoPanel.Validation.MinstEnFastsatt' }]);
+
+export const validateMinstEnFastsatt = (andelList) => {
+  const harAndelMedFastsattInntekt = andelList.some(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '');
+  if (!harAndelMedFastsattInntekt) {
+    return minstEnFastsattErrorMessage();
+  }
+  return null;
+};

@@ -149,7 +149,7 @@ describe('<BgFordelingUtils>', () => {
     const andelFieldValue = {
       ...andelValuesMedInntektsmelding,
       refusjonskravFraInntektsmelding: 30000,
-      skalRedigereInntekt: true,
+      kanRedigereInntekt: true,
     };
     const bg = {
       beregningsgrunnlagPeriode: [
