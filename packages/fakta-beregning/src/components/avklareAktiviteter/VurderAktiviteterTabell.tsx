@@ -209,6 +209,20 @@ const finnHeading = (aktiviteter, erOverstyrt, skjaeringstidspunkt) => {
   return null;
 };
 
+const skalBrukesPretufylling = (aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt) => {
+  if (skalVurdereAktivitet(aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt, false)) {
+    return aktivitet.skalBrukes;
+  }
+  return aktivitet.skalBrukes === true || aktivitet.skalBrukes === null || aktivitet.skalBrukes === undefined;
+};
+
+const mapToInitialValues = (aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt) => ({
+  beregningAktivitetNavn: createVisningsnavnForAktivitet(aktivitet, alleKodeverk),
+  fom: aktivitet.fom,
+  tom: aktivitet.tom,
+  skalBrukes: skalBrukesPretufylling(aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt),
+});
+
 type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
@@ -238,133 +252,110 @@ type MappedOwnProps = {
  * Presentasjonskomponent.. Inneholder tabeller for avklaring av skjæringstidspunkt
  */
 export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps> {
-static validate: (values: any, aktiviteter: BeregningAktivitetPropType[]) => any;
-
-static transformValues: (values: any, aktiviteter: BeregningAktivitetPropType[], valgtSkjæringstidspunkt: string, tomDatoForAktivitetGruppe: string) => any;
-
-static buildInitialValues: (aktiviteter: BeregningAktivitetPropType[],
-                       alleKodeverk: {[key: string]: KodeverkMedNavn[]},
-                       erOverstyrt: boolean,
-                       harAksjonspunkt: boolean,
-                       erTomLikEllerFørSkjæringstidpunkt: boolean) => any;
-
-static hasValueChangedFromInitial: (aktiviteter: BeregningAktivitetPropType[], values: any, initialValues: any) => any;
-
-componentDidUpdate() {
-  const {
-    behandlingFormName, reduxChange: reduxFieldChange, aktiviteter,
-    valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe, ingenAktiviterErBrukt,
-  } = this.props;
-
-  const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
-  if (!erAktivitetValgbar(erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)) {
-    aktiviteter.map((a) => `${lagAktivitetFieldId(a)}.skalBrukes`)
-      .forEach((fieldName) => {
-        reduxFieldChange(behandlingFormName, fieldName, true);
+  static validate = (values: any, aktiviteter: BeregningAktivitetPropType[]) => {
+    const errors = {};
+    let harError = false;
+    aktiviteter
+      .forEach((aktivitet) => {
+        const fieldId = lagAktivitetFieldId(aktivitet);
+        const e = required(values[fieldId].skalBrukes);
+        if (e) {
+          errors[fieldId] = { skalBrukes: e };
+          harError = true;
+        }
       });
-  }
-}
-
-render() {
-  const {
-    readOnly,
-    isAksjonspunktClosed,
-    aktiviteter,
-    alleKodeverk,
-    erOverstyrt,
-    harAksjonspunkt,
-    tomDatoForAktivitetGruppe,
-    ingenAktiviterErBrukt,
-    valgtSkjæringstidspunkt,
-  } = this.props;
-
-  return (
-    <>
-      <Element>
-        {finnHeading(aktiviteter, erOverstyrt, tomDatoForAktivitetGruppe)}
-      </Element>
-      <Table headerTextCodes={getHeaderTextCodes()} noHover>
-        {aktiviteter.map((aktivitet) => (
-          lagTableRow(readOnly, isAksjonspunktClosed, aktivitet, alleKodeverk, erOverstyrt,
-            harAksjonspunkt, tomDatoForAktivitetGruppe, valgtSkjæringstidspunkt, ingenAktiviterErBrukt)
-        ))}
-      </Table>
-    </>
-  );
-}
-}
-
-VurderAktiviteterTabell.validate = (values, aktiviteter) => {
-  const errors = {};
-  let harError = false;
-  aktiviteter
-    .forEach((aktivitet) => {
-      const fieldId = lagAktivitetFieldId(aktivitet);
-      const e = required(values[fieldId].skalBrukes);
-      if (e) {
-        errors[fieldId] = { skalBrukes: e };
-        harError = true;
-      }
-    });
-  if (harError) {
-    return errors;
-  }
-  return null;
-};
-
-VurderAktiviteterTabell.transformValues = (values, aktiviteter, valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe) => {
-  const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
-  return aktiviteter
-    .filter((aktivitet) => values[lagAktivitetFieldId(aktivitet)].skalBrukes === false || values[lagAktivitetFieldId(aktivitet)].tom != null)
-    .map((aktivitet) => ({
-      oppdragsgiverOrg: aktivitet.aktørIdString ? null : aktivitet.arbeidsgiverId,
-      arbeidsforholdRef: aktivitet.arbeidsforholdId,
-      fom: aktivitet.fom,
-      tom: values[lagAktivitetFieldId(aktivitet)].tom != null ? values[lagAktivitetFieldId(aktivitet)].tom : aktivitet.tom,
-      opptjeningAktivitetType: aktivitet.arbeidsforholdType ? aktivitet.arbeidsforholdType.kode : null,
-      arbeidsgiverIdentifikator: aktivitet.aktørIdString ? aktivitet.aktørIdString : null,
-      skalBrukes: erValgtSkjæringstidspunktLikEllerFørTomDato ? values[lagAktivitetFieldId(aktivitet)].skalBrukes : true,
-    }));
-};
-
-VurderAktiviteterTabell.hasValueChangedFromInitial = (aktiviteter, values, initialValues) => {
-  const changedAktiviteter = aktiviteter.map(lagAktivitetFieldId).find((fieldId) => {
-    if (values[fieldId] && initialValues[fieldId]) {
-      if (values[fieldId].skalBrukes !== initialValues[fieldId].skalBrukes) {
-        return true;
-      }
+    if (harError) {
+      return errors;
     }
-    return false;
-  });
-  return changedAktiviteter !== undefined;
-};
+    return null;
+  };
 
-const skalBrukesPretufylling = (aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt) => {
-  if (skalVurdereAktivitet(aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt, false)) {
-    return aktivitet.skalBrukes;
+  static transformValues = (values: any, aktiviteter: BeregningAktivitetPropType[], valgtSkjæringstidspunkt: string, tomDatoForAktivitetGruppe: string) => {
+    const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
+    return aktiviteter
+      .filter((aktivitet) => values[lagAktivitetFieldId(aktivitet)].skalBrukes === false || values[lagAktivitetFieldId(aktivitet)].tom != null)
+      .map((aktivitet) => ({
+        oppdragsgiverOrg: aktivitet.aktørIdString ? null : aktivitet.arbeidsgiverId,
+        arbeidsforholdRef: aktivitet.arbeidsforholdId,
+        fom: aktivitet.fom,
+        tom: values[lagAktivitetFieldId(aktivitet)].tom != null ? values[lagAktivitetFieldId(aktivitet)].tom : aktivitet.tom,
+        opptjeningAktivitetType: aktivitet.arbeidsforholdType ? aktivitet.arbeidsforholdType.kode : null,
+        arbeidsgiverIdentifikator: aktivitet.aktørIdString ? aktivitet.aktørIdString : null,
+        skalBrukes: erValgtSkjæringstidspunktLikEllerFørTomDato ? values[lagAktivitetFieldId(aktivitet)].skalBrukes : true,
+      }));
+  };
+
+  static hasValueChangedFromInitial = (aktiviteter: BeregningAktivitetPropType[], values: any, initialValues: any) => {
+    const changedAktiviteter = aktiviteter.map(lagAktivitetFieldId).find((fieldId) => {
+      if (values[fieldId] && initialValues[fieldId]) {
+        if (values[fieldId].skalBrukes !== initialValues[fieldId].skalBrukes) {
+          return true;
+        }
+      }
+      return false;
+    });
+    return changedAktiviteter !== undefined;
+  };
+
+  static buildInitialValues = (aktiviteter: BeregningAktivitetPropType[],
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+    erOverstyrt: boolean,
+    harAksjonspunkt: boolean,
+    erTomLikEllerFørSkjæringstidpunkt: boolean) => {
+    if (!aktiviteter) {
+      return {};
+    }
+    const initialValues = {};
+    aktiviteter.forEach((aktivitet) => {
+      initialValues[lagAktivitetFieldId(aktivitet)] = mapToInitialValues(aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt,
+        erTomLikEllerFørSkjæringstidpunkt);
+    });
+    return initialValues;
+  };
+
+  componentDidUpdate() {
+    const {
+      behandlingFormName, reduxChange: reduxFieldChange, aktiviteter,
+      valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe, ingenAktiviterErBrukt,
+    } = this.props;
+
+    const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
+    if (!erAktivitetValgbar(erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)) {
+      aktiviteter.map((a) => `${lagAktivitetFieldId(a)}.skalBrukes`)
+        .forEach((fieldName) => {
+          reduxFieldChange(behandlingFormName, fieldName, true);
+        });
+    }
   }
-  return aktivitet.skalBrukes === true || aktivitet.skalBrukes === null || aktivitet.skalBrukes === undefined;
-};
 
-const mapToInitialValues = (aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt) => ({
-  beregningAktivitetNavn: createVisningsnavnForAktivitet(aktivitet, alleKodeverk),
-  fom: aktivitet.fom,
-  tom: aktivitet.tom,
-  skalBrukes: skalBrukesPretufylling(aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt),
-});
+  render() {
+    const {
+      readOnly,
+      isAksjonspunktClosed,
+      aktiviteter,
+      alleKodeverk,
+      erOverstyrt,
+      harAksjonspunkt,
+      tomDatoForAktivitetGruppe,
+      ingenAktiviterErBrukt,
+      valgtSkjæringstidspunkt,
+    } = this.props;
 
-VurderAktiviteterTabell.buildInitialValues = (aktiviteter, alleKodeverk, erOverstyrt, harAksjonspunkt,
-  erTomLikEllerFørSkjæringstidpunkt) => {
-  if (!aktiviteter) {
-    return {};
+    return (
+      <>
+        <Element>
+          {finnHeading(aktiviteter, erOverstyrt, tomDatoForAktivitetGruppe)}
+        </Element>
+        <Table headerTextCodes={getHeaderTextCodes()} noHover>
+          {aktiviteter.map((aktivitet) => (
+            lagTableRow(readOnly, isAksjonspunktClosed, aktivitet, alleKodeverk, erOverstyrt,
+              harAksjonspunkt, tomDatoForAktivitetGruppe, valgtSkjæringstidspunkt, ingenAktiviterErBrukt)
+          ))}
+        </Table>
+      </>
+    );
   }
-  const initialValues = {};
-  aktiviteter.forEach((aktivitet) => {
-    initialValues[lagAktivitetFieldId(aktivitet)] = mapToInitialValues(aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt,
-      erTomLikEllerFørSkjæringstidpunkt);
-  });
-  return initialValues;
-};
+}
 
 const getCompleteFormName = createSelector(
   [(ownProps: InitialProps) => ownProps.formNameAvklarAktiviteter,
