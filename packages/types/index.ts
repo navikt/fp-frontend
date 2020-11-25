@@ -3,6 +3,7 @@ export { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeid
 export { default as Behandling } from './src/behandlingTsType';
 export { default as BehandlingAppKontekst } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
+// TODO Denne må brytes opp, kan brytes inn i beregningsgrunnlag, fakta og fordel?
 export {
   default as Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
@@ -11,6 +12,16 @@ export {
   BeregningsgrunnlagPeriodeProp,
   RefusjonTilVurderingAndel,
   FordelBeregningsgrunnlagPeriode,
+  AvklarBeregningAktiviteterMap,
+  AvklarBeregningAktiviteter,
+  BeregningAktivitet,
+  FaktaOmBeregning,
+  KunYtelse,
+  AndelForFaktaOmBeregning,
+  KortvarigAndel,
+  VurderMottarYtelse,
+  ArbeidstakerUtenIMAndel,
+  RefusjonskravSomKommerForSentListe,
 } from './src/beregningsgrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
