@@ -12,12 +12,12 @@
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/nap-person-card": "1.1.4",
     "moment": "^2.29.1",
-    "nav-frontend-etiketter": "2.0.17",
-    "nav-frontend-etiketter-style": "1.0.11",
-    "nav-frontend-typografi": "2.0.34",
-    "nav-frontend-typografi-style": "1.0.29",
+    "nav-frontend-etiketter": "2.0.21",
+    "nav-frontend-etiketter-style": "1.0.14",
+    "nav-frontend-typografi": "2.0.37",
+    "nav-frontend-typografi-style": "1.0.31",
     "react": "^16.13.1",
-    "react-intl": "^5.10.0"
+    "react-intl": "^5.10.4"
   },
   "devDependencies": {}
 }
