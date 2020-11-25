@@ -47,7 +47,9 @@ export { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export { default as Fagsak } from './src/fagsakTsType';
 export { default as FagsakPerson } from './src/fagsakPersonTsType';
-export { default as Medlemskap, MedlemPeriode, MedlemskapPeriode, MedlemInntekt } from './src/medlemskapTsType';
+export {
+  default as Medlemskap, MedlemPeriode, MedlemskapPeriode, MedlemInntekt,
+} from './src/medlemskapTsType';
 export { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export { default as KlageVurdering } from './src/klageVurderingTsType';
@@ -58,7 +60,6 @@ export {
 } from './src/opptjeningTsType';
 export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';
-export { default as Arbeidsgiver } from './src/arbeidsgiverTsType';
 export { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
 export { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
 export {
