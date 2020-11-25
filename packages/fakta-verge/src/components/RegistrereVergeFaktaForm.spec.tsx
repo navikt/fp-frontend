@@ -5,15 +5,15 @@ import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper
 import { SelectField, InputField } from '@fpsak-frontend/form';
 
 import RegistrereVergeFaktaForm from './RegistrereVergeFaktaForm';
-import vergeType from '../kodeverk/vergeType';
+import VergeType from '../kodeverk/vergeType';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-verge';
 
 const vergetyper = [{
-  kode: vergeType.BARN,
+  kode: VergeType.BARN,
   navn: 'Barn',
   kodeverk: '',
 }, {
-  kode: vergeType.ANNEN_F,
+  kode: VergeType.ANNEN_F,
   navn: 'Annen foreldre',
   kodeverk: '',
 }];
@@ -37,7 +37,7 @@ describe('<RegistrereVergeFaktaForm>', () => {
       readOnly={false}
       vergetyper={vergetyper}
       alleMerknaderFraBeslutter={{}}
-      valgtVergeType={vergeType.BARN}
+      valgtVergeType={VergeType.BARN}
     />);
 
     expect(wrapper.find(SelectField)).to.have.length(1);
@@ -50,7 +50,7 @@ describe('<RegistrereVergeFaktaForm>', () => {
       gyldigFom: '2017',
       gyldigTom: '2018',
       fnr: '1234',
-      vergeType: { kode: vergeType.BARN },
+      vergeType: { kode: VergeType.BARN, kodeverk: '' },
     };
 
     const initialValues = RegistrereVergeFaktaForm.buildInitialValues(verge);
@@ -61,7 +61,7 @@ describe('<RegistrereVergeFaktaForm>', () => {
       gyldigTom: '2018',
       fnr: '1234',
       organisasjonsnummer: undefined,
-      vergeType: vergeType.BARN,
+      vergeType: VergeType.BARN,
     });
   });
 });

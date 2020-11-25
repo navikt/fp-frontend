@@ -7,34 +7,41 @@ import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseT
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import {
-  InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Soknad,
+  Kodeverk, KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 import { behandlingFormValueSelector } from '@fpsak-frontend/form';
 
 import styles from './rettighetFaktaPanel.less';
 
-const getLopendeOrAvsluttetYtelser = (ytelse: any) => ytelse.tilgrensendeYtelserListe.filter((y: any) => y.status !== relatertYtelseTilstand.APEN);
+const getLopendeOrAvsluttetYtelser = (ytelse: RelatertTilgrensedYtelse): RelatertTilgrensedYtelse['tilgrensendeYtelserListe'] => ytelse.tilgrensendeYtelserListe
+  .filter((y) => y.status !== relatertYtelseTilstand.APEN);
 
-interface OwnProps {
-  farSokerType: string;
-  ytelser: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'];
+export type FormValues = {
+  ytelser?: RelatertTilgrensedYtelse[];
+  farSokerType?: string;
+}
+
+interface PureOwnProps {
   relatertYtelseTypes: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  behandlingId: number;
+  behandlingVersjon: number;
+}
+
+interface MappedOwnProps {
+  farSokerType: string;
+  ytelser: RelatertTilgrensedYtelse[];
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad,
-    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-    getKodeverknavn: (kodeverk: Kodeverk) => string) => {
-      ytelser: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder']
-      farSokerType: string,
-  },
+  buildInitialValues?: (soknad: Soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
+    getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues;
 }
 
 /**
  * RettighetFaktaPanel
  */
-const RettighetFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+const RettighetFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   farSokerType,
   ytelser,
   relatertYtelseTypes,
@@ -47,7 +54,7 @@ const RettighetFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = (
     <Normaltekst>{farSokerType || '-'}</Normaltekst>
     <VerticalSpacer sixteenPx />
     <FaktaGruppe withoutBorder titleCode="OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor">
-      {ytelser.map((ytelse) => getLopendeOrAvsluttetYtelser(ytelse).map((y: any) => (
+      {ytelser.map((ytelse) => getLopendeOrAvsluttetYtelser(ytelse).map((y) => (
         <div className={styles.wrapper} key={`${relatertYtelseTypes[ytelse.relatertYtelseType]}-${y.periodeFraDato}`}>
           <Normaltekst className={styles.iverksatt}>
             <FormattedMessage
@@ -65,15 +72,15 @@ const RettighetFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = (
 
 const FORM_NAME = 'OmsorgOgForeldreansvarInfoPanel';
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   ...behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'farSokerType', 'ytelser'),
 });
 
 const RettighetFaktaPanel = connect(mapStateToProps)(RettighetFaktaPanelImpl);
 
 RettighetFaktaPanel.buildInitialValues = (soknad: Soknad,
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-  getKodeverknavn: (kodeverk: Kodeverk) => string) => ({
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
   ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   farSokerType: getKodeverknavn(soknad.farSokerType),
 });

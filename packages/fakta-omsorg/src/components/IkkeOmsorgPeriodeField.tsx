@@ -16,7 +16,12 @@ import {
 } from '@fpsak-frontend/utils';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
-const showAddButton = (fields: FieldArrayFieldsProps<any>) => {
+type Periode = {
+  periodeFom: string;
+  periodeTom: string;
+}
+
+const showAddButton = (fields: FieldArrayFieldsProps<Periode>): boolean => {
   if (fields.length > 0) {
     return (fields.get(fields.length - 1).periodeFom !== undefined && fields.get(fields.length - 1).periodeTom !== undefined);
   }
@@ -26,7 +31,7 @@ const showAddButton = (fields: FieldArrayFieldsProps<any>) => {
 interface OwnProps {
   readOnly: boolean;
   meta: FieldArrayMetaProps;
-  fields: FieldArrayFieldsProps<any>;
+  fields: FieldArrayFieldsProps<Periode>;
 }
 
 interface StaticFunctions {
@@ -75,14 +80,9 @@ const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> & StaticFunctions = ({
   </div>
 );
 
-interface FormValues {
-  periodeFom: string;
-  periodeTom: string;
-}
+const hasValue = (values: Periode[]): boolean => values && values.length && values.length < 2 && !values[0].periodeTom;
 
-const hasValue = (values: FormValues[]) => values && values.length && values.length < 2 && !values[0].periodeTom;
-
-const checkArrayErrors = (values: FormValues[]) => values.map(({
+const checkArrayErrors = (values: Periode[]) => values.map(({
   periodeFom,
   periodeTom,
 }: any, index: any) => {
@@ -113,7 +113,7 @@ const checkOverlapError = (values: any) => dateRangesNotOverlapping(values.reduc
   return result;
 }, []));
 
-const hasValidPeriodOrOnlyStartDate = (values: FormValues[]) => {
+const hasValidPeriodOrOnlyStartDate = (values: Periode[]) => {
   if (hasValue(values)) {
     return null;
   }

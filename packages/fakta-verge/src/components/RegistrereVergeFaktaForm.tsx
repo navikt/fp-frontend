@@ -14,7 +14,27 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import vergeType from '../kodeverk/vergeType';
+import VergeType from '../kodeverk/vergeType';
+import Verge from '../types/VergeTsType';
+
+export type FormValues = {
+  navn?: string;
+  gyldigFom?: string;
+  gyldigTom?: string;
+  fnr?: string;
+  organisasjonsnummer?: string;
+  vergeType?: string;
+}
+
+export type TransformedValues = {
+  vergeType: string,
+  navn: string,
+  fnr: string,
+  organisasjonsnummer: string,
+  gyldigFom: string,
+  gyldigTom: string,
+  kode: string,
+}
 
 interface OwnProps {
   readOnly: boolean;
@@ -24,23 +44,8 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues: (verge: any) => {
-    navn: string,
-    gyldigFom: string,
-    gyldigTom: string,
-    fnr: string,
-    organisasjonsnummer: string,
-    vergeType?: string,
-  },
-  transformValues: (values: any) => {
-    vergeType: string,
-    navn: string,
-    fnr: string,
-    organisasjonsnummer: string,
-    gyldigFom: string,
-    gyldigTom: string,
-    kode: string,
-  },
+  buildInitialValues: (verge: Verge) => FormValues;
+  transformValues: (values: FormValues) => TransformedValues;
 }
 
 /**
@@ -83,7 +88,7 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
               />
             </Column>
             <Column xs="3">
-              {valgtVergeType !== vergeType.ADVOKAT && (
+              {valgtVergeType !== VergeType.ADVOKAT && (
                 <InputField
                   bredde="S"
                   name="fnr"
@@ -92,7 +97,7 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
                   readOnly={readOnly}
                 />
               )}
-              {valgtVergeType === vergeType.ADVOKAT && (
+              {valgtVergeType === VergeType.ADVOKAT && (
                 <InputField
                   bredde="S"
                   name="organisasjonsnummer"
@@ -132,10 +137,9 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
 
 RegistrereVergeFaktaForm.defaultProps = {
   vergetyper: [],
-  valgtVergeType: undefined,
 };
 
-RegistrereVergeFaktaForm.buildInitialValues = (verge: any) => ({
+RegistrereVergeFaktaForm.buildInitialValues = (verge: Verge): FormValues => ({
   navn: verge.navn,
   gyldigFom: verge.gyldigFom,
   gyldigTom: verge.gyldigTom,
@@ -144,7 +148,7 @@ RegistrereVergeFaktaForm.buildInitialValues = (verge: any) => ({
   vergeType: verge.vergeType ? verge.vergeType.kode : undefined,
 });
 
-RegistrereVergeFaktaForm.transformValues = (values: any) => ({
+RegistrereVergeFaktaForm.transformValues = (values: FormValues): TransformedValues => ({
   vergeType: values.vergeType,
   navn: values.navn,
   fnr: values.fnr,

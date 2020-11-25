@@ -16,6 +16,12 @@ import CustomOpptjeningAktivitet from '../CustomOpptjeningAktivitet';
 
 export const formName = 'OpptjeningInfoPanel';
 
+type FormValues = {
+  opptjeningActivities?: CustomOpptjeningAktivitet[];
+  aksjonspunkt?: Aksjonspunkt[];
+  fastsattOpptjening?: FastsattOpptjening;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -33,6 +39,8 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   aksjonspunkt?: Aksjonspunkt;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -100,12 +108,6 @@ const buildPeriod = (activity: OpptjeningAktivitet, opptjeningsperiodeFom: strin
   };
 };
 
-type FormValues = {
-  opptjeningActivities: CustomOpptjeningAktivitet[];
-  aksjonspunkt?: Aksjonspunkt[];
-  fastsattOpptjening: FastsattOpptjening;
-}
-
 export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.opptjeningAktiviteter,
     (ownProps: PureOwnProps) => ownProps.fastsattOpptjening,
@@ -142,11 +144,10 @@ const transformPeriod = (activity: CustomOpptjeningAktivitet, opptjeningsperiode
   };
 };
 
-const transformValues = (values: FormValues) => ({
+const transformValues = (values: FormValues): any => ({
   opptjeningAktivitetList: values.opptjeningActivities
     .map((oa) => transformPeriod(oa, addDay(values.fastsattOpptjening.opptjeningFom), addDay(values.fastsattOpptjening.opptjeningTom)))
     .map((oa) => omit(oa, 'id')),
-
   kode: values.aksjonspunkt[0].definisjon.kode,
 });
 
@@ -154,7 +155,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
 (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
-const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps) => ({
+const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunkt: ownProps.aksjonspunkter[0],
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),

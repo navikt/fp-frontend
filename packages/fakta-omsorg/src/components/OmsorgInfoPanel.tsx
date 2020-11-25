@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
@@ -12,16 +12,16 @@ import {
   Aksjonspunkt, KodeverkMedNavn, Personopplysninger, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
-import OmsorgFaktaForm from './OmsorgFaktaForm';
+import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
 import BostedFaktaView from './BostedFaktaView';
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
-const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
+const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts = [];
-  const harAleneomsorgAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
-  const harOmsorgAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
+  const harAleneomsorgAp = aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
+  const harOmsorgAp = aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   if (harAleneomsorgAp.length > 0) {
     helpTexts.push(<FormattedMessage key="VurderAleneomsorg" id="OmsorgInfoPanel.VurderAleneomsorg" />);
   }
@@ -30,6 +30,10 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]) => {
   }
   return helpTexts;
 };
+
+type FormValues = OmsorgFormValues & {
+  begrunnelse?: string;
+}
 
 interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
@@ -48,6 +52,8 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   omsorg?: boolean;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -98,8 +104,8 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
 const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.ytelsefordeling,
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(ytelsefordeling, aksjonspunkter) => {
-  const omsorgAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
+(ytelsefordeling, aksjonspunkter): FormValues => {
+  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
     || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   return {
     ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
@@ -107,7 +113,7 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values: any, submitCallback: (...args: any[]) => any, aksjonspunkter: Aksjonspunkt[]) => {
+const transformValues = (values: FormValues, submitCallback: (...args: any[]) => any, aksjonspunkter: Aksjonspunkt[]): any => {
   const aksjonspunkterArray = [];
   if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)) {
     aksjonspunkterArray.push(OmsorgFaktaForm.transformAleneomsorgValues(values));
@@ -125,9 +131,9 @@ const transformValues = (values: any, submitCallback: (...args: any[]) => any, a
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: any) => transformValues(values, submitCallback, aksjonspunkter));
+(submitCallback, aksjonspunkter) => (values: FormValues) => transformValues(values, submitCallback, aksjonspunkter));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
   omsorg: behandlingFormValueSelector('OmsorgInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'omsorg'),
   onSubmit: lagSubmitFn(ownProps),

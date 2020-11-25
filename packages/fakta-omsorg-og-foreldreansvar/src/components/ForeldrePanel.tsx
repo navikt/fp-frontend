@@ -13,17 +13,30 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { Personopplysninger } from '@fpsak-frontend/types';
 
-const getParentHeader = (erMor: boolean) => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
+const getParentHeader = (erMor: boolean): string => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
+
+type CustomPersonopplysninger = {
+  aktorId?: string;
+  navn: string;
+  dodsdato?: string;
+  originalDodsdato?: string;
+  adresse: string;
+  opplysningsKilde?: string;
+  erMor: boolean;
+  erDod: boolean;
+}
+
+export type FormValues = {
+  foreldre?: CustomPersonopplysninger[],
+}
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<any>;
+  fields: FieldArrayFieldsProps<CustomPersonopplysninger>;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (sokerPersonopplysninger: Personopplysninger) => {
-    foreldre: Personopplysninger[],
-  },
+  buildInitialValues?: (sokerPersonopplysninger: Personopplysninger) => FormValues;
 }
 
 /**
@@ -39,7 +52,7 @@ export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
     titleCode="ForeldrePanel.Foreldre"
     merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
   >
-    {fields.map((foreldre: any, index: any, field: any) => {
+    {fields.map((foreldre, index, field) => {
       const f = field.get(index);
       const shouldShowAdress = f.adresse && !f.erDod;
 
@@ -81,7 +94,7 @@ export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   </FaktaGruppe>
 );
 
-const buildSokerPersonopplysning = (sokerPersonopplysninger: any) => {
+const buildSokerPersonopplysning = (sokerPersonopplysninger: Personopplysninger): CustomPersonopplysninger => {
   const addresses = getAddresses(sokerPersonopplysninger.adresser);
   const { avklartPersonstatus } = sokerPersonopplysninger;
   const isAvklartPersonstatusDod = avklartPersonstatus
@@ -99,7 +112,7 @@ const buildSokerPersonopplysning = (sokerPersonopplysninger: any) => {
   };
 };
 
-const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: any) => {
+const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: Personopplysninger): CustomPersonopplysninger => {
   const secondaryParentAddresses = getAddresses(annenPartPersonopplysninger.adresser);
   const { avklartPersonstatus } = annenPartPersonopplysninger;
   const isAvklartPersonstatusDod = avklartPersonstatus
@@ -117,7 +130,7 @@ const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: any) => {
   };
 };
 
-ForeldrePanel.buildInitialValues = (sokerPersonopplysninger: Personopplysninger) => {
+ForeldrePanel.buildInitialValues = (sokerPersonopplysninger: Personopplysninger): FormValues => {
   const parents = [];
 
   const sokerOppl = buildSokerPersonopplysning(sokerPersonopplysninger);

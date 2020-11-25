@@ -19,9 +19,7 @@ interface OwnProps {
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   frist?: string;
-  originalFrist?: string;
   ventearsak?: string;
-  originalVentearsak?: string;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
   erTilbakekreving?: boolean;
@@ -33,9 +31,7 @@ const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
   showModal,
   ventearsaker,
   frist,
-  originalFrist,
   ventearsak,
-  originalVentearsak,
   visBrevErBestilt,
   hasManualPaVent,
   erTilbakekreving,
@@ -47,9 +43,7 @@ const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
       showModal={showModal}
       ventearsaker={ventearsaker}
       frist={frist}
-      originalFrist={originalFrist}
       ventearsak={ventearsak}
-      originalVentearsak={originalVentearsak}
       visBrevErBestilt={visBrevErBestilt}
       hasManualPaVent={hasManualPaVent}
       erTilbakekreving={erTilbakekreving}

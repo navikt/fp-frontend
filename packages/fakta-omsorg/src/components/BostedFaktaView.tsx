@@ -26,7 +26,7 @@ const BostedFaktaView: FunctionComponent<OwnProps> = ({
     <FaktaGruppe titleCode="BostedFaktaView.BosattAdresser">
       <Row>
         <Column xs="6">
-          {personopplysning.barn.map((b: any, index: any) => (
+          {personopplysning.barn.map((b, index) => (
             <BostedBarnView key={b.navn} barn={b} barnNr={index + 1} />
           ))}
         </Column>

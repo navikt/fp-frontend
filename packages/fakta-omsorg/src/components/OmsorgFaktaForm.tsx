@@ -18,38 +18,46 @@ import styles from './omsorgFaktaForm.less';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
-const getAksjonspunkt = (aksjonspunktCode: any, aksjonspunkter: any) => aksjonspunkter.filter((ap: any) => ap.definisjon.kode === aksjonspunktCode);
+const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => aksjonspunkter
+  .filter((ap) => ap.definisjon.kode === aksjonspunktCode);
 
-interface OwnProps {
+export type FormValues = {
+  aleneomsorg: boolean;
+  omsorg: boolean;
+  ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
+}
+
+interface PureOwnProps {
+  ytelsefordeling: Ytelsefordeling;
+  soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  aleneomsorgIsEdited?: boolean;
-  omsorgIsEdited?: boolean;
   omsorg?: boolean;
   className?: string;
-  oppgittAleneomsorgSoknad: boolean;
-  oppgittOmsorgSoknad: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
-interface StaticFunctions {
-  buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => {
-    aleneomsorg: boolean;
-    omsorg: boolean;
-    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
-  },
-  transformAleneomsorgValues?: (values: { aleneomsorg: boolean }) => {
-    kode: string;
-    aleneomsorg: boolean;
-  },
-  transformOmsorgValues?: (values: { omsorg: boolean; ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'] }) => {
-    kode: string;
-    omsorg: boolean;
-    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
-  },
+interface MappedOwnProps {
+  aleneomsorgIsEdited?: boolean;
+  omsorgIsEdited?: boolean;
+  oppgittAleneomsorgSoknad: boolean;
+  oppgittOmsorgSoknad: boolean;
 }
 
-const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+interface StaticFunctions {
+  buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  transformAleneomsorgValues?: (values: FormValues) => {
+    kode: string;
+    aleneomsorg: boolean;
+  };
+  transformOmsorgValues?: (values: FormValues) => {
+    kode: string;
+    omsorg: boolean;
+    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
+  };
+}
+
+const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
   omsorg,
@@ -156,12 +164,7 @@ OmsorgFaktaForm.defaultProps = {
   className: styles.defaultAleneOmsorgFakta,
 };
 
-interface PureOwnProps {
-  ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
-}
-
-OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => {
+OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   const aleneomsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter);
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
   let aleneomsorg = null;
@@ -185,18 +188,18 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   };
 };
 
-OmsorgFaktaForm.transformAleneomsorgValues = (values: { aleneomsorg: boolean }) => ({
+OmsorgFaktaForm.transformAleneomsorgValues = (values: FormValues): any => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   aleneomsorg: values.aleneomsorg,
 });
 
-OmsorgFaktaForm.transformOmsorgValues = (values: { omsorg: boolean; ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'] }) => ({
+OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): any => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg,
   ikkeOmsorgPerioder: values.ikkeOmsorgPerioder && values.ikkeOmsorgPerioder.length > 0 ? values.ikkeOmsorgPerioder : null,
 });
 
-const mapStateToProps = (_state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aleneomsorgIsEdited: !!ownProps.ytelsefordeling.aleneOmsorgPerioder,
   omsorgIsEdited: !!ownProps.ytelsefordeling.ikkeOmsorgPerioder,
   oppgittOmsorgSoknad: ownProps.soknad.oppgittRettighet.omsorgForBarnet,

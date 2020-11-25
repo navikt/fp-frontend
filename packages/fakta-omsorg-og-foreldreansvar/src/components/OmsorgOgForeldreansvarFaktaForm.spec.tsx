@@ -50,6 +50,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -78,6 +81,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
     />);
 
     const select = wrapper.find(SelectField);
@@ -106,6 +112,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
     />);
 
     const select = wrapper.find(SelectField);
@@ -134,6 +143,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
+      soknad={{} as Soknad}
+      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      personopplysninger={{} as Personopplysninger}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -176,6 +188,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       antallBarn: 'test',
     };
 
+    // @ts-ignore
     const result = OmsorgOgForeldreansvarFaktaForm.validate(model);
     expect(result).is.eql({
       antallBarn: [{

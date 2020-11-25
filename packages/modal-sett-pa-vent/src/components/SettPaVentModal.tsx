@@ -19,21 +19,21 @@ import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 
 import styles from './settPaVentModal.less';
 
-const initFrist = () => {
+const initFrist = (): string => {
   const date = moment().toDate();
   date.setDate(date.getDate() + 28);
   return date.toISOString().substr(0, 10);
 };
 
-const isButtonDisabled = (frist, showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent) => {
+const isButtonDisabled = (frist: string, showAvbryt: boolean, venteArsakHasChanged: boolean, fristHasChanged: boolean, hasManualPaVent: boolean): boolean => {
   const dateNotValid = !!hasValidDate(frist) || !!dateAfterOrEqualToToday(frist);
   const defaultOptions = (!hasManualPaVent || showAvbryt) && (!venteArsakHasChanged && !fristHasChanged);
   return defaultOptions || dateNotValid;
 };
 
-const hovedKnappenType = (venteArsakHasChanged, fristHasChanged) => venteArsakHasChanged || fristHasChanged;
+const hovedKnappenType = (venteArsakHasChanged: boolean, fristHasChanged: boolean): boolean => venteArsakHasChanged || fristHasChanged;
 
-const getPaVentText = (originalVentearsak, hasManualPaVent, frist) => {
+const getPaVentText = (originalVentearsak: string, hasManualPaVent: boolean, frist: string): string => {
   if (originalVentearsak) {
     return (hasManualPaVent || frist ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.ErPaVentUtenFrist');
   }
@@ -61,29 +61,34 @@ const automatiskeVentearsakerForTilbakekreving = [
   venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
-const inkluderVentearsak = (ventearsak, valgtVentearsak) => (automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode)
-  ? ventearsak.kode === valgtVentearsak : true);
+const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean => (automatiskeVentearsakerForTilbakekreving
+  .includes(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true);
 
-interface OwnProps {
+type FormValues = {
+  frist?: string;
+  ventearsak?: string;
+}
+
+interface PureOwnProps {
   cancelEvent: () => void;
-  handleSubmit: () => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
-  visAlleVentearsaker: boolean;
+  frist?: string;
+  ventearsak?: string;
 }
 
-interface StateProps {
+interface MappedOwnProps {
   ventearsak?: string;
   frist?: string;
   originalFrist?: string;
   originalVentearsak?: string;
-  initialValues: InjectedFormProps['initialValues'],
+  initialValues: FormValues,
 }
 
-export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedComponentProps & InjectedFormProps> = ({
+export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   handleSubmit,
   cancelEvent,
@@ -213,12 +218,12 @@ export const SettPaVentModal: FunctionComponent<OwnProps & StateProps & WrappedC
   );
 };
 
-const buildInitialValues = (initialProps) => ({
+const buildInitialValues = (initialProps: PureOwnProps): FormValues => ({
   ventearsak: initialProps.ventearsak,
   frist: initialProps.frist || initialProps.hasManualPaVent === false ? initialProps.frist : initFrist(),
 });
 
-const mapStateToProps = (state, initialOwnProps): StateProps => ({
+const mapStateToProps = (state, initialOwnProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(initialOwnProps),
   frist: formValueSelector('settPaVentModalForm')(state, 'frist'),
   ventearsak: formValueSelector('settPaVentModalForm')(state, 'ventearsak'),

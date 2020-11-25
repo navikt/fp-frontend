@@ -21,6 +21,11 @@ const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET: 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET',
 };
 
+type FormValues = {
+  begrunnelse?: string;
+  dokStatus?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -33,7 +38,8 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  initialValues: { begrunnelse?: string };
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
@@ -93,16 +99,16 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & M
   </form>
 );
 
-const transformValues = (values) => ({
+const transformValues = (values: FormValues): any => ({
   kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   ...values,
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
-const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
   initialValues: {
     dokStatus: ownProps.dokStatus,

@@ -20,6 +20,7 @@ describe('<UtlandPanel>', () => {
         behandlingVersjon={2}
         aksjonspunkter={[]}
         submitCallback={() => undefined}
+        onSubmit={() => undefined}
         readOnly={false}
         dirty
         handleSubmit={sinon.spy()}

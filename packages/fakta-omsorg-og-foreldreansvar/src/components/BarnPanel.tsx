@@ -15,9 +15,23 @@ import { Personopplysninger, Soknad } from '@fpsak-frontend/types';
 
 import styles from './barnPanel.less';
 
-const calculateAgeFromDate = (fodselsdato: any) => moment().startOf('day').diff(moment(fodselsdato).startOf('day'), 'years');
+type CustomPersonopplysninger = {
+  aktorId?: string;
+  navn?: string;
+  dodsdato?: string;
+  adresse?: string;
+  opplysningsKilde?: string;
+  nummer?: number;
+  fodselsdato?: string;
+}
 
-const adjustNumberOfFields = (fields: FieldArrayFieldsProps<any>, originalFields: FieldArrayFieldsProps<any>, antallBarn: number) => {
+const calculateAgeFromDate = (fodselsdato: Date): number => moment().startOf('day').diff(moment(fodselsdato).startOf('day'), 'years');
+
+const adjustNumberOfFields = (
+  fields: FieldArrayFieldsProps<CustomPersonopplysninger>,
+  originalFields: FieldArrayFieldsProps<CustomPersonopplysninger>,
+  antallBarn: number,
+): void => {
   if (fields.length < antallBarn) {
     const diff = antallBarn - fields.length;
     for (let i = fields.length; i <= diff || i < originalFields.length; i += 1) {
@@ -33,10 +47,14 @@ const adjustNumberOfFields = (fields: FieldArrayFieldsProps<any>, originalFields
   }
 };
 
+export type FormValues = {
+  barn?: CustomPersonopplysninger[];
+}
+
 interface OwnProps {
   readOnly: boolean;
   antallBarn: number;
-  fields: FieldArrayFieldsProps<any>;
+  fields: FieldArrayFieldsProps<CustomPersonopplysninger>;
   isFodselsdatoerEdited?: { [key: number]: boolean};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
@@ -52,23 +70,23 @@ export class BarnPanel extends Component<OwnProps> {
     isFodselsdatoerEdited: {},
   };
 
-  static buildInitialValues: any
+  static buildInitialValues: (personopplysning: Personopplysninger, soknad: Soknad) => FormValues;
 
-  originalFields: any
+  originalFields: FieldArrayFieldsProps<CustomPersonopplysninger>;
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount(): void {
     const { fields, antallBarn } = this.props;
     this.originalFields = fields;
     adjustNumberOfFields(fields, fields, antallBarn);
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: any) {
+  UNSAFE_componentWillReceiveProps(nextProps: OwnProps): void {
     adjustNumberOfFields(nextProps.fields, this.originalFields, nextProps.antallBarn);
   }
 
-  shouldComponentUpdate(nextProps: OwnProps) {
+  shouldComponentUpdate(nextProps: OwnProps): boolean {
     if (Number.isNaN(nextProps.antallBarn)) {
       return true;
     }
@@ -85,7 +103,7 @@ export class BarnPanel extends Component<OwnProps> {
         titleCode="BarnPanel.BarnDetSøkesOm"
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
       >
-        {fields.map((barn: any, index: any, field: any) => {
+        {fields.map((barn, index, field) => {
           const b = field.get(index);
           if (b.opplysningsKilde === opplysningsKilde.TPS) {
             return (
@@ -139,13 +157,13 @@ export class BarnPanel extends Component<OwnProps> {
   }
 }
 
-const prepChildObj = (child: any) => ({
+const prepChildObj = (child: CustomPersonopplysninger): { isTps: boolean; navn: string; fdato: Date } => ({
   isTps: child.opplysningsKilde && child.opplysningsKilde === opplysningsKilde.TPS,
   navn: child.navn,
   fdato: new Date(child.fodselsdato),
 });
 
-const sortChildren = (children: any) => children.sort((child1: any, child2: any) => {
+const sortChildren = (children: CustomPersonopplysninger[]): CustomPersonopplysninger[] => children.sort((child1, child2) => {
   const a = prepChildObj(child1);
   const b = prepChildObj(child2);
   if (a.isTps && !b.isTps) { return -1; }
@@ -157,7 +175,7 @@ const sortChildren = (children: any) => children.sort((child1: any, child2: any)
   return 0;
 });
 
-BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: Soknad) => {
+BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: Soknad): FormValues => {
   const confirmedChildren = personopplysning.barnSoktFor
     ? personopplysning.barnSoktFor.map((b) => ({
       aktorId: b.aktoerId,

@@ -6,23 +6,23 @@ import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
+
+export type FormValues = {
+  omsorgsovertakelseDato?: string;
+  foreldreansvarDato?: string;
+  antallBarn?: number;
+}
 
 interface OwnProps {
   readOnly: boolean;
   erAksjonspunktForeldreansvar: boolean;
-  editedStatus: {
-    omsorgsovertakelseDato: boolean;
-    antallBarnOmsorgOgForeldreansvar: boolean;
-  };
+  editedStatus: FieldEditedInfo;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => {
-    omsorgsovertakelseDato: string;
-    foreldreansvarDato: string;
-    antallBarn: number;
-  },
+  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
 }
 
 /**
@@ -76,12 +76,12 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
   </FaktaGruppe>
 );
 
-const getAntallBarn = (soknad: any, familiehendelse: any) => {
+const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
   return familiehendelse.antallBarnTilBeregning ? familiehendelse.antallBarnTilBeregning : antallBarn;
 };
 
-OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse) => ({
+OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse && familiehendelse.omsorgsovertakelseDato ? familiehendelse.omsorgsovertakelseDato : soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
   antallBarn: getAntallBarn(soknad, familiehendelse),

@@ -21,7 +21,7 @@ interface OwnProps {
 }
 
 const personAksjonspunkter = [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK];
-const erMarkertUtenlandssak = (aksjonspunkter) => aksjonspunkter.some((ap) => ap.definisjon.kode === personAksjonspunkter[0]);
+const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === personAksjonspunkter[0]);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   behandlingId,
