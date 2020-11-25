@@ -38,8 +38,8 @@
     "core-js": "^3.7.0",
     "dotenv": "^8.0.0",
     "history": "^4.9.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-modal": "3.12.1"
   },
   "devDependencies": {
@@ -68,7 +68,7 @@
     "@types/history": "^4.7.8",
     "@types/mocha": "^8.0.4",
     "@types/prop-types": "^15.7.3",
-    "@types/react": "^16.9.56",
+    "@types/react": "^16.14.2",
     "@types/react-collapse": "^5.0.0",
     "@types/react-redux": "^7.1.11",
     "@types/react-router-dom": "^5.1.6",
@@ -113,7 +113,7 @@
     "null-loader": "^4.0.1",
     "nyc": "^15.1.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "react-test-renderer": "^16.13.1",
+    "react-test-renderer": "^16.14.0",
     "redux-mock-store": "^1.5.4",
     "sinon": "^9.2.1",
     "sinon-chai": "^3.5.0",
@@ -130,9 +130,9 @@
     "webpack-merge": "^5.4.0"
   },
   "resolutions": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-test-renderer": "^16.13.1"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-test-renderer": "^16.14.0"
   },
   "nyc": {
     "branches": 40,

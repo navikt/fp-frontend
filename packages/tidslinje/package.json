@@ -11,8 +11,8 @@
     "nav-frontend-grid-style": "0.2.25",
     "nav-frontend-typografi": "2.0.37",
     "nav-frontend-typografi-style": "1.0.31",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-intl": "^5.10.4",
     "react-visjs-timeline": "^1.6.0",
     "vis-timeline": "6.3.5"
