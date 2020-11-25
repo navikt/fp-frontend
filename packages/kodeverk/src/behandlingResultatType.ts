@@ -31,14 +31,14 @@ const innvilgetKlageResultatTyper = [
 
 const innvilgetRevurderingFPResultatTyper = [behandlingResultatType.FORELDREPENGER_ENDRET, behandlingResultatType.INGEN_ENDRING];
 
-export const isInnvilget = (behandlingResultatTypeKode) => innvilgetKlageResultatTyper.includes(behandlingResultatTypeKode)
+export const isInnvilget = (behandlingResultatTypeKode: string): boolean => innvilgetKlageResultatTyper.includes(behandlingResultatTypeKode)
   || innvilgetRevurderingFPResultatTyper.includes(behandlingResultatTypeKode)
   || behandlingResultatTypeKode === behandlingResultatType.INNVILGET;
 
-export const isAvslag = (behandlingResultatTypeKode) => behandlingResultatTypeKode === behandlingResultatType.AVSLATT
+export const isAvslag = (behandlingResultatTypeKode: string): boolean => behandlingResultatTypeKode === behandlingResultatType.AVSLATT
   || behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST
   || behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET;
 
-export const isOpphor = (behandlingResultatTypeKode) => behandlingResultatTypeKode === behandlingResultatType.OPPHOR;
+export const isOpphor = (behandlingResultatTypeKode: string): boolean => behandlingResultatTypeKode === behandlingResultatType.OPPHOR;
 
 export default behandlingResultatType;

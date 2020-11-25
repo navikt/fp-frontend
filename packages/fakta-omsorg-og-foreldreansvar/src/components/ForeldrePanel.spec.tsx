@@ -25,14 +25,14 @@ describe('<ForeldrePanel>', () => {
       navn: 'Petra Utvikler',
       adresse: undefined,
       dodsdato: '10-01-2017',
-      opplysningsKilde: opplysningsKilde.SOKNAD,
+      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }, {
       erMor: false,
       id: 2,
       navn: 'Espen Utvikler',
       adresse: undefined,
       dodsdato: '10-01-2017',
-      opplysningsKilde: opplysningsKilde.SOKNAD,
+      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
 
     const wrapper = shallow(<ForeldrePanel
@@ -55,7 +55,7 @@ describe('<ForeldrePanel>', () => {
       adresse: undefined,
       dodsdato: '10-01-2017',
       originalDodsdato: undefined,
-      opplysningsKilde: opplysningsKilde.SOKNAD,
+      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }, {
       erMor: false,
       id: 2,
@@ -63,7 +63,7 @@ describe('<ForeldrePanel>', () => {
       adresse: undefined,
       dodsdato: '10-01-2017',
       originalDodsdato: undefined,
-      opplysningsKilde: opplysningsKilde.SOKNAD,
+      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
 
     const wrapper = shallow(<ForeldrePanel

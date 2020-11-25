@@ -157,7 +157,7 @@ const standardFaktaYtelseAndel = {
   lagtTilAvSaksbehandler: false,
 };
 const standardFaktaNæringAndel = {
-  ...lagAndel(9, aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, inntektskategorier.SELVSTENDIG_NAERINGSDRIVENDE),
+  ...lagAndel(9, aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, inntektskategorier.SELVSTENDIG_NÆRINGSDRIVENDE),
   visningsnavn: 'Selvstendig næringsdrivende',
   belopReadOnly: 10000,
   lagtTilAvSaksbehandler: false,

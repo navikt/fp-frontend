@@ -75,8 +75,6 @@ const aksjonspunktCodesToTextCode = {
     'Historikk.BeregningsgrunnlagManueltSN',
   [aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD]:
     'Historikk.BeregningsgrunnlagManueltTidsbegrenset',
-  [aksjonspunktCodes.AVKLAR_BEREGNINGSGRUNNLAG_OG_INNTEKTSKATEGORI_FOR_BRUKER_MED_TILSTOTENDE_YTELSE]:
-    'Historikk.BeregningsgrunnlagOgInntektskategoriTY',
   [aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET]:
     'Historikk.BeregningsgrunnlagManueltSNNYIArbeidslivet',
   [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: 'Historikk.VurderFaktaATFLSN',

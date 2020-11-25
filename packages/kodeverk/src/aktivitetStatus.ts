@@ -35,16 +35,16 @@ const statuserSomStotterDagpengerEllerAAP = [aktivitetStatus.DAGPENGER, aktivite
 const statuserSomStotterTilstottendeYtelser = [aktivitetStatus.KUN_YTELSE];
 const statuserSomStotterMilitaer = [aktivitetStatus.MILITAER_ELLER_SIVIL];
 
-export const isStatusDagpengerOrAAP = (status) => (statuserSomStotterDagpengerEllerAAP.includes(status));
+export const isStatusDagpengerOrAAP = (status: string): boolean => (statuserSomStotterDagpengerEllerAAP.includes(status));
 
-export const isStatusTilstotendeYtelse = (status) => (statuserSomStotterTilstottendeYtelser.includes(status));
+export const isStatusTilstotendeYtelse = (status: string): boolean => (statuserSomStotterTilstottendeYtelser.includes(status));
 
-export const isStatusFrilanserOrKombinasjon = (status) => (statuserSomStotterFrilanser.includes(status));
+export const isStatusFrilanserOrKombinasjon = (status: string): boolean => (statuserSomStotterFrilanser.includes(status));
 
-export const isStatusArbeidstakerOrKombinasjon = (status) => (statuserSomStotterArbeidstaker.includes(status));
+export const isStatusArbeidstakerOrKombinasjon = (status: string): boolean => (statuserSomStotterArbeidstaker.includes(status));
 
-export const isStatusSNOrKombinasjon = (status) => (statuserSomStotterSelvstendigNaeringsdrivende.includes(status));
+export const isStatusSNOrKombinasjon = (status: string): boolean => (statuserSomStotterSelvstendigNaeringsdrivende.includes(status));
 
-export const isStatusKombinasjon = (status) => (kombinasjonsstatuser.includes(status));
+export const isStatusKombinasjon = (status: string): boolean => (kombinasjonsstatuser.includes(status));
 
-export const isStatusMilitaer = (status) => (statuserSomStotterMilitaer.includes(status));
+export const isStatusMilitaer = (status: string): boolean => (statuserSomStotterMilitaer.includes(status));

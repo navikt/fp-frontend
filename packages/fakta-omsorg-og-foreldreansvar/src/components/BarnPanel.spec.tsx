@@ -26,13 +26,13 @@ describe('<BarnPanel>', () => {
       navn: 'Espen Utvikler',
       fodselsdato: '10-10-2017',
       adresse: undefined,
-      opplysningsKilde: opplysningsKilde.SOKNAD,
+      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }, {
       id: 2,
       navn: 'Petra Utvikler',
       fodselsdato: '10-01-2017',
       adresse: undefined,
-      opplysningsKilde: opplysningsKilde.SOKNAD,
+      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
     const wrapper = shallow(<BarnPanel
       readOnly
