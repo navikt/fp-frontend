@@ -7,7 +7,7 @@ import LabelType from './LabelType';
 
 export interface RadioOptionProps {
   name?: string;
-  label: LabelType;
+  label?: LabelType;
   value: string[] | string | number | boolean;
   actualValue?: string[] | string | number;
   className?: string;
