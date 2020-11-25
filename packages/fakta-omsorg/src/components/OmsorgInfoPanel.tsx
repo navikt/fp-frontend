@@ -14,7 +14,6 @@ import {
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
 import BostedFaktaView from './BostedFaktaView';
-import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
@@ -141,5 +140,5 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 export default connect(mapStateToProps)(behandlingForm({
   form: 'OmsorgInfoPanel',
-  validate: IkkeOmsorgPeriodeField.validate,
+  validate: OmsorgFaktaForm.validate,
 })(OmsorgInfoPanel));
