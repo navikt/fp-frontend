@@ -8,13 +8,17 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import TilleggsopplysningerFaktaForm from './TilleggsopplysningerFaktaForm';
 
-interface OwnProps {
+interface PureOwnProps {
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
   behandlingId: number;
   behandlingVersjon: number;
   tilleggsopplysninger?: string;
   submitCallback?: (data: any) => Promise<any>;
+}
+
+interface MappedOwnProps {
+  onSubmit?: (data: any) => Promise<any>;
 }
 
 // TODO (TOR) Fjern redux-form => ingen behov for det her
@@ -24,7 +28,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for Tilleggsopplysninger.
  */
-export const TilleggsopplysningerInfoPanel: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const TilleggsopplysningerInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   hasOpenAksjonspunkter,
   readOnly,
   tilleggsopplysninger,
@@ -44,14 +48,13 @@ TilleggsopplysningerInfoPanel.defaultProps = {
 };
 
 const lagSubmitFn = createSelector([
-  (ownProps: OwnProps) => ownProps.submitCallback],
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
 (submitCallback) => () => submitCallback([{
   kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER,
 }]));
 
-const mapStateToProps = (_state: any, ownProps: any) => ({
+const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
-  dirty: !ownProps.notSubmittable && ownProps.dirty,
 });
 
 export default connect(mapStateToProps)(behandlingForm({

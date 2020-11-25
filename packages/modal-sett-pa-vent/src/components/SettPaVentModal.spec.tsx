@@ -27,7 +27,6 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       showModal
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -51,7 +50,6 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -71,7 +69,6 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -91,7 +88,6 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -111,7 +107,6 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent
       ventearsaker={[]}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
     const select = wrapper.find(SelectField);
@@ -128,7 +123,6 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent={false}
       ventearsaker={[]}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -144,7 +138,6 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       hasManualPaVent={false}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -160,7 +153,6 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       hasManualPaVent={false}
       erTilbakekreving={false}
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 
@@ -181,7 +173,6 @@ describe('<SettPaVentModal>', () => {
       ventearsak="VENT_PÅ_TILBAKEKREVINGSGRUNNLAG"
       hasManualPaVent={false}
       erTilbakekreving
-      visAlleVentearsaker
       {...reduxFormPropsMock}
     />);
 

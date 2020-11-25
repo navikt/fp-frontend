@@ -23,6 +23,7 @@ describe('<InnhentDokOpptjeningUtlandPanel>', () => {
       initialValues={{ begrunnelse: undefined }}
       form="FORM_NAVN"
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
       aksjonspunkt={{} as Aksjonspunkt}
     />);
     expect(wrapper.find(AksjonspunktBox)).to.have.length(1);

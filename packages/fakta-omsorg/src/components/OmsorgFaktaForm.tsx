@@ -2,11 +2,18 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
+import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
+import {
+  dateIsAfter,
+  dateRangesNotOverlapping,
+  dateRangesOverlappingMessage,
+  invalidPeriodMessage,
+  required,
+} from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ArrowBox, FaktaGruppe } from '@fpsak-frontend/shared-components';
@@ -18,38 +25,47 @@ import styles from './omsorgFaktaForm.less';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
-const getAksjonspunkt = (aksjonspunktCode: any, aksjonspunkter: any) => aksjonspunkter.filter((ap: any) => ap.definisjon.kode === aksjonspunktCode);
+const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => aksjonspunkter
+  .filter((ap) => ap.definisjon.kode === aksjonspunktCode);
 
-interface OwnProps {
+export type FormValues = {
+  aleneomsorg?: boolean;
+  omsorg?: boolean;
+  ikkeOmsorgPerioder?: Ytelsefordeling['ikkeOmsorgPerioder'];
+}
+
+interface PureOwnProps {
+  ytelsefordeling: Ytelsefordeling;
+  soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  aleneomsorgIsEdited?: boolean;
-  omsorgIsEdited?: boolean;
   omsorg?: boolean;
   className?: string;
-  oppgittAleneomsorgSoknad: boolean;
-  oppgittOmsorgSoknad: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
-interface StaticFunctions {
-  buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => {
-    aleneomsorg: boolean;
-    omsorg: boolean;
-    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
-  },
-  transformAleneomsorgValues?: (values: { aleneomsorg: boolean }) => {
-    kode: string;
-    aleneomsorg: boolean;
-  },
-  transformOmsorgValues?: (values: { omsorg: boolean; ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'] }) => {
-    kode: string;
-    omsorg: boolean;
-    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
-  },
+interface MappedOwnProps {
+  aleneomsorgIsEdited?: boolean;
+  omsorgIsEdited?: boolean;
+  oppgittAleneomsorgSoknad: boolean;
+  oppgittOmsorgSoknad: boolean;
 }
 
-const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+interface StaticFunctions {
+  buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  transformAleneomsorgValues?: (values: FormValues) => {
+    kode: string;
+    aleneomsorg: boolean;
+  };
+  transformOmsorgValues?: (values: FormValues) => {
+    kode: string;
+    omsorg: boolean;
+    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
+  };
+  validate?: (values: FormValues) => any;
+}
+
+const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
   omsorg,
@@ -156,12 +172,7 @@ OmsorgFaktaForm.defaultProps = {
   className: styles.defaultAleneOmsorgFakta,
 };
 
-interface PureOwnProps {
-  ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
-}
-
-OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => {
+OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   const aleneomsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter);
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
   let aleneomsorg = null;
@@ -185,18 +196,92 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   };
 };
 
-OmsorgFaktaForm.transformAleneomsorgValues = (values: { aleneomsorg: boolean }) => ({
+OmsorgFaktaForm.transformAleneomsorgValues = (values: FormValues): any => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   aleneomsorg: values.aleneomsorg,
 });
 
-OmsorgFaktaForm.transformOmsorgValues = (values: { omsorg: boolean; ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'] }) => ({
+OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): any => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg,
   ikkeOmsorgPerioder: values.ikkeOmsorgPerioder && values.ikkeOmsorgPerioder.length > 0 ? values.ikkeOmsorgPerioder : null,
 });
 
-const mapStateToProps = (_state: any, ownProps: PureOwnProps) => ({
+const hasValue = (values: Ytelsefordeling['ikkeOmsorgPerioder']): boolean => values && values.length && values.length < 2 && !values[0].periodeTom;
+
+const checkArrayErrors = (values: Ytelsefordeling['ikkeOmsorgPerioder']) => values.map(({
+  periodeFom,
+  periodeTom,
+}, index) => {
+  if (periodeFom && periodeTom) {
+    return null;
+  }
+  let periodeFomError = required(periodeFom);
+  if (periodeTom) {
+    periodeFomError = moment(periodeFom).isSameOrBefore(moment(periodeTom).startOf('day')) ? null : invalidPeriodMessage();
+  }
+  let periodeTomError;
+  if (values.length > index + 1) {
+    periodeTomError = required(periodeTom);
+  }
+  if (periodeFomError || periodeTomError) {
+    return {
+      periodeFom: periodeFomError,
+      periodeTom: periodeTomError,
+    };
+  }
+  return null;
+});
+
+const checkOverlapError = (values: Ytelsefordeling['ikkeOmsorgPerioder']) => dateRangesNotOverlapping(values.reduce((result, current) => {
+  if (current.periodeTom && current.periodeFom) {
+    result.push([current.periodeFom, current.periodeTom]);
+  }
+  return result;
+}, []));
+
+const hasValidPeriodOrOnlyStartDate = (values: Ytelsefordeling['ikkeOmsorgPerioder']): any => {
+  if (hasValue(values)) {
+    return null;
+  }
+
+  const arrayErrors = checkArrayErrors(values);
+
+  if (arrayErrors.some((errors) => errors !== null)) {
+    return arrayErrors;
+  }
+  if (values.length > 1) {
+    let overlapError = checkOverlapError(values);
+
+    const lastEntry = values[values.length - 1];
+    if (!overlapError && lastEntry.periodeFom && !lastEntry.periodeTom) {
+      const arrayWithoutLast = values.slice(0, values.length - 1);
+      overlapError = arrayWithoutLast.some((date) => dateIsAfter(date.periodeFom, lastEntry.periodeFom)
+        || dateIsAfter(date.periodeTom, lastEntry.periodeFom))
+        ? dateRangesOverlappingMessage() : null;
+    }
+    if (overlapError) {
+      return { _error: overlapError };
+    }
+  }
+  return null;
+};
+
+OmsorgFaktaForm.validate = (values: FormValues): any => {
+  const errors = {};
+  if (!values) {
+    return errors;
+  }
+  const { omsorg, ikkeOmsorgPerioder } = values;
+  if (omsorg === false) {
+    return {
+      ikkeOmsorgPerioder: hasValidPeriodOrOnlyStartDate(ikkeOmsorgPerioder),
+    };
+  }
+  return errors;
+};
+
+const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aleneomsorgIsEdited: !!ownProps.ytelsefordeling.aleneOmsorgPerioder,
   omsorgIsEdited: !!ownProps.ytelsefordeling.ikkeOmsorgPerioder,
   oppgittOmsorgSoknad: ownProps.soknad.oppgittRettighet.omsorgForBarnet,

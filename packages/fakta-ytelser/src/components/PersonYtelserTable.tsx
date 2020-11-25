@@ -30,7 +30,7 @@ const HEADER_TEXT_CODES = [
   'PersonYtelserTable.Saksnummer',
 ];
 
-const formatDateToDDMMYYYY = (date) => {
+const formatDateToDDMMYYYY = (date: string): string => {
   const parsedDate = moment(date, ISO_DATE_FORMAT, true);
   return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : date;
 };

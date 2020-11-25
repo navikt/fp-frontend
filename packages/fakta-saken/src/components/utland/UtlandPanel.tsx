@@ -20,7 +20,7 @@ import {
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
-import utlandSakstypeKode from './utlandSakstypeKode';
+import UtlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';
 
 import styles from './utlandPanel.less';
@@ -29,26 +29,31 @@ const {
   AUTOMATISK_MARKERING_AV_UTENLANDSSAK, MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
 } = aksjonspunktCodes;
 
-const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]) => {
+const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (hasAksjonspunkt(AUTOMATISK_MARKERING_AV_UTENLANDSSAK, aksjonspunkter)) {
-    return utlandSakstypeKode.EØS_BOSATT_NORGE;
+    return UtlandSakstypeKode.EØS_BOSATT_NORGE;
   }
   if (hasAksjonspunkt(MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, aksjonspunkter)) {
     return aksjonspunkter.find((ap) => ap.definisjon.kode === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE).begrunnelse;
   }
-  return utlandSakstypeKode.NASJONAL;
+  return UtlandSakstypeKode.NASJONAL;
 };
 
-const getSakstypeId = (vurdering: string) => {
+const getSakstypeId = (vurdering: string): string => {
   switch (vurdering) {
-    case utlandSakstypeKode.EØS_BOSATT_NORGE:
+    case UtlandSakstypeKode.EØS_BOSATT_NORGE:
       return 'UtlandPanel.EøsBosattNorge';
-    case utlandSakstypeKode.BOSATT_UTLAND:
+    case UtlandSakstypeKode.BOSATT_UTLAND:
       return 'UtlandPanel.BosattUtland';
     default:
       return 'UtlandPanel.Nasjonal';
   }
 };
+
+type FormValues = {
+  utlandSakstype?: string;
+  gammelVerdi?: string;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -60,6 +65,8 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   utlandSakstype?: string;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
@@ -68,7 +75,7 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
   dirty,
   handleSubmit,
   reset,
-  utlandSakstype = utlandSakstypeKode.NASJONAL,
+  utlandSakstype = UtlandSakstypeKode.NASJONAL,
 }) => {
   const [visEditeringsmodus, toggleEditUtland] = useState(false);
   const [visModal, toggleModal] = useState(false);
@@ -118,15 +125,15 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
               >
                 <RadioOption
                   label={{ id: 'UtlandPanel.Nasjonal' }}
-                  value={utlandSakstypeKode.NASJONAL}
+                  value={UtlandSakstypeKode.NASJONAL}
                 />
                 <RadioOption
                   label={{ id: 'UtlandPanel.EøsBosattNorge' }}
-                  value={utlandSakstypeKode.EØS_BOSATT_NORGE}
+                  value={UtlandSakstypeKode.EØS_BOSATT_NORGE}
                 />
                 <RadioOption
                   label={{ id: 'UtlandPanel.BosattUtland' }}
-                  value={utlandSakstypeKode.BOSATT_UTLAND}
+                  value={UtlandSakstypeKode.BOSATT_UTLAND}
                 />
               </RadioGroupField>
             </FlexColumn>
@@ -163,13 +170,13 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: any) => submitCallback([{
+(submitCallback) => (values: FormValues): any => submitCallback([{
   kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
   begrunnelse: values.utlandSakstype,
   gammelVerdi: values.gammelVerdi,
 }]));
 
-const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: {
     utlandSakstype: getUtlandSakstype(ownProps.aksjonspunkter),
     gammelVerdi: getUtlandSakstype(ownProps.aksjonspunkter),
