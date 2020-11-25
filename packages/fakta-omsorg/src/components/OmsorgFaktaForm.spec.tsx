@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Ytelsefordeling } from '@fpsak-frontend/types';
+import { Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import OmsorgFaktaForm from './OmsorgFaktaForm';
 
@@ -49,6 +49,8 @@ describe('<OmsorgFaktaForm>', () => {
       oppgittOmsorgSoknad={false}
       oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
     />);
 
     const formattedMessage = wrapper.find(FormattedMessage);
@@ -65,6 +67,8 @@ describe('<OmsorgFaktaForm>', () => {
       oppgittOmsorgSoknad={false}
       oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
     />);
 
     const formattedMessage = wrapper.find(FormattedMessage);
@@ -81,6 +85,8 @@ describe('<OmsorgFaktaForm>', () => {
       oppgittOmsorgSoknad={false}
       oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
     />);
 
     const radioGroup = wrapper.find('RadioGroupField');
@@ -117,6 +123,8 @@ describe('<OmsorgFaktaForm>', () => {
       oppgittOmsorgSoknad
       oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
+      ytelsefordeling={{} as Ytelsefordeling}
+      soknad={{} as Soknad}
     />);
     expect(wrapper.find('RadioGroupField')).to.have.length(2);
     expect(wrapper.find('FieldArray')).to.have.length(0);

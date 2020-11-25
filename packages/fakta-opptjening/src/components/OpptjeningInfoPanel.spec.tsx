@@ -29,6 +29,7 @@ describe('<OpptjeningInfoPanel>', () => {
       opptjeningAktiviteter={[]}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 

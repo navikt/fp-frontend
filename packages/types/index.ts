@@ -27,7 +27,7 @@ export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsTyp
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
 export { default as Dokument } from './src/dokumentTsType';
 export { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
-export { default as InntektArbeidYtelse } from './src/inntektArbeidYtelseTsType';
+export { default as InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';

@@ -16,17 +16,21 @@ describe('<RegistrereVergeInfoPanel>', () => {
       intl={intlMock}
       hasOpenAksjonspunkter
       readOnly={false}
-      aksjonspunkt={{
+      vergetyper={[]}
+      behandlingId={1}
+      behandlingVersjon={1}
+      alleMerknaderFraBeslutter={{}}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      aksjonspunkter={[{
         id: 100001,
         definisjon: { kode: '5030', kodeverk: '' },
         status: { kode: 'OPPR', kodeverk: 'AKSJONSPUNKT_STATUS' },
         kanLoses: true,
         erAktivt: true,
-      } as Aksjonspunkt}
-      vergetyper={[]}
-      behandlingId={1}
-      behandlingVersjon={1}
-      alleMerknaderFraBeslutter={{}}
+      } as Aksjonspunkt]}
+      alleKodeverk={{}}
+      verge={{}}
     />);
 
     const panel = wrapper.find(RegistrereVergeFaktaForm);

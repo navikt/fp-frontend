@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { FieldArray } from 'redux-form';
@@ -13,19 +13,19 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { SelectField, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { hasValidInteger, isObjectEmpty, required } from '@fpsak-frontend/utils';
 import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { isFieldEdited } from '@fpsak-frontend/fakta-felles';
+import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Personopplysninger, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
-import OmsorgsovertakelseFaktaPanel from './OmsorgsovertakelseFaktaPanel';
-import RettighetFaktaPanel from './RettighetFaktaPanel';
-import BarnPanel from './BarnPanel';
-import ForeldrePanel from './ForeldrePanel';
+import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
+import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
+import BarnPanel, { FormValues as BarnFormValues } from './BarnPanel';
+import ForeldrePanel, { FormValues as ForeldreFormValues } from './ForeldrePanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.less';
 
-const getDescriptionText = (vilkarCode: any) => {
+const getDescriptionText = (vilkarCode: string): ReactElement => {
   if (vilkarCode === VilkarType.OMSORGSVILKARET) {
     return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.HelpTextOmsorgTredjeLedd" />;
   }
@@ -38,36 +38,42 @@ const getDescriptionText = (vilkarCode: any) => {
   return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription" />;
 };
 
-const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean) => (erAksjonspunktForeldreansvar
+const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean): ReactElement[] => (erAksjonspunktForeldreansvar
   ? [<FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar" />]
   : [<FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarFaktaForm.CheckInformation" />,
     <FormattedMessage key="ChooseVilkar" id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkar" />]);
 
-interface OwnProps {
+export type FormValues = OmsorgFormValues & RettighetFormValues & BarnFormValues & ForeldreFormValues & {
+  originalAntallBarn?: number;
+  vilkarType?: string;
+}
+
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  soknad: Soknad;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  personopplysninger: Personopplysninger;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn[];
   hasOpenAksjonspunkter: boolean;
-  antallBarn: number;
-  vilkarType: string;
   relatertYtelseTypes: KodeverkMedNavn[];
   erAksjonspunktForeldreansvar: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  editedStatus: {
-    omsorgsovertakelseDato: boolean;
-    antallBarnOmsorgOgForeldreansvar: boolean;
-    vilkarType: boolean;
-    fodselsdatoer: { [key: number]: boolean};
-  };
+}
+
+interface MappedOwnProps {
+  antallBarn: number;
+  vilkarType: string;
+  editedStatus: FieldEditedInfo;
 }
 
 interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, personopplysning: Personopplysninger,
-    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-    getKodeverknavn: (kodeverk: Kodeverk) => string) => any,
-  validate?: (values: any) => any,
-  transformValues?: (values: any, aksjonspunkt: Aksjonspunkt) => any,
+    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
+    getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues,
+  validate?: (values: FormValues) => any,
+  transformValues?: (values: FormValues, aksjonspunkt: Aksjonspunkt) => any,
 }
 
 /**
@@ -75,7 +81,7 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av fakta for omsorgs og foreldreansvarsvilkåret.
  */
-const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
+const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> & StaticFunctions = ({
   intl,
   readOnly,
   vilkarTypes,
@@ -102,8 +108,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<OwnProps & WrappedC
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         />
       </Column>
-      {!erAksjonspunktForeldreansvar
-        && (
+      {!erAksjonspunktForeldreansvar && (
         <Column xs="6">
           <RettighetFaktaPanel
             relatertYtelseTypes={relatertYtelseTypes}
@@ -112,7 +117,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<OwnProps & WrappedC
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
         </Column>
-        )}
+      )}
     </Row>
     <Row>
       <Column xs="6">
@@ -135,14 +140,12 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<OwnProps & WrappedC
         />
       </Column>
     </Row>
-    {!erAksjonspunktForeldreansvar
-      && (
+    {!erAksjonspunktForeldreansvar && (
       <FaktaGruppe
         titleCode="OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes"
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
       >
-        {!readOnly
-          && (
+        {!readOnly && (
           <SelectField
             name="vilkarType"
             validate={[required]}
@@ -153,9 +156,8 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<OwnProps & WrappedC
             readOnly={readOnly}
             disabled={readOnly}
           />
-          )}
-        {(readOnly && vilkarType)
-          && (
+        )}
+        {(readOnly && vilkarType) && (
           <div className={styles.vilkarTypeReadOnly}>
             <Element tag="span">
               {(vilkarTypes.find((d) => d.kode === vilkarType) || {}).navn}
@@ -163,34 +165,26 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<OwnProps & WrappedC
             {editedStatus.vilkarType
               && <EditedIcon />}
           </div>
-          )}
+        )}
         <VerticalSpacer eightPx />
         <Normaltekst>
           {getDescriptionText(vilkarType)}
         </Normaltekst>
       </FaktaGruppe>
-      )}
+    )}
   </>
 );
-
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  soknad: Soknad;
-  gjeldendeFamiliehendelse: FamilieHendelse;
-  personopplysninger: Personopplysninger;
-}
 
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
     (ownProps: PureOwnProps) => ownProps.personopplysninger],
-  (soknad, familiehendelse, personopplysning) => (
+  (soknad, familiehendelse, personopplysning): FieldEditedInfo => (
     isFieldEdited(soknad, familiehendelse, personopplysning)
   ),
 );
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   editedStatus: getEditedStatus(ownProps),
   ...behandlingFormValueSelector('OmsorgOgForeldreansvarInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(
     state, 'antallBarn', 'vilkarType',
@@ -201,7 +195,7 @@ const OmsorgOgForeldreansvarFaktaForm = connect(mapStateToProps)(OmsorgOgForeldr
 
 OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse, personopplysning: Personopplysninger,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-  getKodeverknavn: (kodeverk: Kodeverk) => string) => ({
+  getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
   vilkarType: familiehendelse.vilkarType ? familiehendelse.vilkarType.kode : '',
   originalAntallBarn: soknad.antallBarn,
   ...ForeldrePanel.buildInitialValues(personopplysning),
@@ -210,7 +204,7 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, familiehen
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });
 
-OmsorgOgForeldreansvarFaktaForm.validate = (values: any) => {
+OmsorgOgForeldreansvarFaktaForm.validate = (values: FormValues): any => {
   const errors = {};
   if (!values) {
     return errors;
@@ -232,7 +226,7 @@ OmsorgOgForeldreansvarFaktaForm.validate = (values: any) => {
   return errors;
 };
 
-OmsorgOgForeldreansvarFaktaForm.transformValues = (values: any, aksjonspunkt: Aksjonspunkt) => {
+OmsorgOgForeldreansvarFaktaForm.transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): any => {
   const newValues = {
     omsorgsovertakelseDato: values.omsorgsovertakelseDato,
     antallBarn: values.antallBarn,

@@ -85,6 +85,7 @@ describe('<OmsorgInfoPanel>', () => {
       alleMerknaderFraBeslutter={{}}
       personopplysninger={personopplysning}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     const panel = wrapper.find(OmsorgFaktaForm);
     expect(panel).to.have.length(1);
@@ -107,6 +108,7 @@ describe('<OmsorgInfoPanel>', () => {
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).has.length(1);
@@ -133,6 +135,7 @@ describe('<OmsorgInfoPanel>', () => {
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).has.length(1);
@@ -158,6 +161,7 @@ describe('<OmsorgInfoPanel>', () => {
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     const bostedFaktaView = wrapper.find('BostedFaktaView');
     expect(bostedFaktaView).has.length(1);
@@ -181,6 +185,7 @@ describe('<OmsorgInfoPanel>', () => {
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     const omsorgFaktaForm = wrapper.find(OmsorgFaktaForm);
     expect(omsorgFaktaForm).has.length(1);

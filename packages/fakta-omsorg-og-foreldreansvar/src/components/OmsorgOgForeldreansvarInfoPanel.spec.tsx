@@ -45,6 +45,11 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       soknad={{} as Soknad}
       personopplysninger={{} as Personopplysninger}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -72,6 +77,11 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       soknad={{} as Soknad}
       personopplysninger={{} as Personopplysninger}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -94,6 +104,11 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       soknad={{} as Soknad}
       personopplysninger={{} as Personopplysninger}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
@@ -116,6 +131,11 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       soknad={{} as Soknad}
       personopplysninger={{} as Personopplysninger}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
+      submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     const omsorgOgForeldreAnsvarFaktaForm = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).is.true;

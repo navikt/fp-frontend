@@ -7,23 +7,23 @@ import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, getAddresses, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { MerkePanel } from '@fpsak-frontend/fakta-felles';
-import { Personopplysninger } from '@fpsak-frontend/types';
+import { PersonopplysningAdresse, Personopplysninger } from '@fpsak-frontend/types';
 
 import styles from './bostedBarnView.less';
 
-const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
-const getAgeFromDate = (birthDate: any) => moment().diff(moment(birthDate), 'years');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const getAgeFromDate = (birthDate?: string): number => moment().diff(moment(birthDate), 'years');
 
-const getAdresse = (adresser: any) => {
+const getAdresse = (adresser: PersonopplysningAdresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
   return adresse || '-';
 };
 
 interface OwnProps {
-    barn: Personopplysninger;
-    barnNr: number;
-    className?: string;
+  barn: Personopplysninger;
+  barnNr: number;
+  className?: string;
 }
 
 const BostedBarnView: FunctionComponent<OwnProps> = ({

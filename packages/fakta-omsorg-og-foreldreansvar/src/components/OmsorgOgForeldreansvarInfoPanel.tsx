@@ -10,30 +10,39 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Aksjonspunkt,
-  FamilieHendelse, InntektArbeidYtelse, KodeverkMedNavn, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, KodeverkMedNavn, Personopplysninger, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import useIntl from '../useIntl';
 
-import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
+import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
 
-interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  erAksjonspunktForeldreansvar: boolean;
-  hasOpenAksjonspunkter: boolean;
-  submittable: boolean;
-  readOnly: boolean;
-  vilkarTypes: KodeverkMedNavn[];
-  relatertYtelseTypes: KodeverkMedNavn[];
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+type FormValues = OmsorgFormValues & {
+  begrunnelse?: string;
+}
+
+interface PureOwnProps {
   soknad: Soknad;
   personopplysninger: Personopplysninger;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  initialValues: {
-    begrunnelse?: string;
-  };
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
+  aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  submitCallback: (...args: any[]) => any;
+  behandlingId: number;
+  behandlingVersjon: number;
+  hasOpenAksjonspunkter: boolean;
+  submittable: boolean;
+  readOnly: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface MappedOwnProps {
+  initialValues: FormValues;
+  vilkarTypes: KodeverkMedNavn[];
+  relatertYtelseTypes: KodeverkMedNavn[];
+  erAksjonspunktForeldreansvar: boolean;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -41,7 +50,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Omsorgsvilkåret.
  */
-export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   erAksjonspunktForeldreansvar,
@@ -60,7 +69,6 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<OwnProps & I
   const intl = useIntl();
   return (
     <form onSubmit={formProps.handleSubmit}>
-      {/* @ts-ignore Fiks denne */}
       <OmsorgOgForeldreansvarFaktaForm
         intl={intl}
         erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
@@ -98,16 +106,6 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<OwnProps & I
   );
 };
 
-interface PureOwnProps {
-  soknad: Soknad;
-  personopplysninger: Personopplysninger;
-  gjeldendeFamiliehendelse: FamilieHendelse;
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'];
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submitCallback: (...args: any[]) => any;
-}
-
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
@@ -115,8 +113,8 @@ const buildInitialValues = createSelector(
     (ownProps: PureOwnProps) => ownProps.innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (soknad, familiehendelse, personopplysning, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk) => {
-    const aksjonspunkt = aksjonspunkter.find((ap: any) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
+  (soknad, familiehendelse, personopplysning, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
+    const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
       || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
     return {
       ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning,
@@ -126,14 +124,14 @@ const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values: any, aksjonspunkt: Aksjonspunkt) => ({
+const transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): any => ({
   ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
   ...{ begrunnelse: values.begrunnelse },
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: any) => submitCallback([transformValues(values, aksjonspunkter[0])]));
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0])]));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { aksjonspunkter, alleKodeverk } = initialOwnProps;
@@ -141,7 +139,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   const vilkarTypes = alleKodeverk[kodeverkTyper.OMSORGSOVERTAKELSE_VILKAR_TYPE];
   const relatertYtelseTypes = alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE];
 
-  return (_state: any, ownProps: PureOwnProps) => ({
+  return (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     initialValues: buildInitialValues(ownProps),
     vilkarTypes,
     relatertYtelseTypes,
