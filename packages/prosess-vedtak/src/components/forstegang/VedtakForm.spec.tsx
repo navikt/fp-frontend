@@ -90,7 +90,7 @@ describe('<VedtakForm>', () => {
     const behandlingsresultat = {
       id: 1,
       type: {
-        kode: BehandlingResultatType.AVSLÅTT,
+        kode: BehandlingResultatType.AVSLATT,
         kodeverk: '',
       },
       avslagsarsak: null,

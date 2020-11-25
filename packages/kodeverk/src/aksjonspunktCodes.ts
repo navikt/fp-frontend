@@ -1,3 +1,5 @@
+import { Aksjonspunkt } from '@fpsak-frontend/types';
+
 const aksjonspunktCodes = {
   TERMINBEKREFTELSE: '5001',
   ADOPSJONSDOKUMENTAJON: '5004',
@@ -147,9 +149,10 @@ const beregningAksjonspunkter = [
   aksjonspunktCodes.VURDER_DEKNINGSGRAD,
 ];
 
-const aksjonspunktIsOfType = (validAksjonspunktCodes) => (aksjonspunktCode) => validAksjonspunktCodes.includes(aksjonspunktCode);
+const aksjonspunktIsOfType = (validAksjonspunktCodes: string[]) => (aksjonspunktCode: string): boolean => validAksjonspunktCodes.includes(aksjonspunktCode);
 
-export const hasAksjonspunkt = (aksjonspunktCode, aksjonspunkter) => aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCode);
+export const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
+  .some((ap) => ap.definisjon.kode === aksjonspunktCode);
 
 export const isKlageAksjonspunkt = aksjonspunktIsOfType(klageAksjonspunkter);
 export const isBGAksjonspunktSomGirFritekstfelt = aksjonspunktIsOfType(beregningsgrunnlagFritekstfeltIVedtakAksjonspunkt);

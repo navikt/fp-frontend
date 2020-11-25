@@ -327,7 +327,7 @@ describe('<NyBehandlingModal>', () => {
 
   it('skal finne filtrerte behandlingsårsaker når det er valgt behandlingstype REVURDERING', () => {
     const ytelseTypeRevudering = {
-      kode: fagsakYtelseType.REVURDERING,
+      kode: fagsakYtelseType.ENGANGSSTONAD,
       kodeverk: '',
     };
     const behandlingArsakerFpSak = [{

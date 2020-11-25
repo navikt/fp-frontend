@@ -15,7 +15,7 @@ import faktaPanelDefinisjoner from '../panelDefinisjoner/faktaSvpPanelDefinisjon
 import FetchedData from '../types/fetchedDataTsType';
 import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
-const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STARTDAT,
+const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STARTDATO,
   ac.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, ac.OVERSTYRING_AV_BEREGNINGSGRUNNLAG, ac.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE];
 
 interface OwnProps {

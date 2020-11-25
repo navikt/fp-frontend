@@ -14,6 +14,7 @@ export const stonadskontoType = {
   FELLESPERIODE: 'FELLESPERIODE',
   FORELDREPENGER_FØR_FØDSEL: 'FORELDREPENGER_FØR_FØDSEL',
   FORELDREPENGER: 'FORELDREPENGER',
+  FLERBARNSDAGER: 'FLERBARNSDAGER',
   UDEFINERT: '-',
 };
 
@@ -24,6 +25,7 @@ export const uttakPeriodeNavn = {
   FELLESPERIODE: 'Fellesperiode',
   FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
   FORELDREPENGER: 'Foreldrepenger',
+  FLERBARNSDAGER: 'Flerbarnsdager',
   ANNET: 'Annet',
   UDEFINERT: '-',
 };
