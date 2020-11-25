@@ -67,10 +67,10 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   kanOverstyre,
   submitCallback,
 }) => {
-  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const uttakAp = aksjonspunkter.filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const vilkarForSykdomExists = aksjonspunkter.filter((ap: Aksjonspunkt) => isVilkarForSykdomOppfylt(ap)).length > 0;
-  const uttakApOpen = uttakAp.some((ap: Aksjonspunkt) => isAksjonspunktOpen(ap.status.kode));
+  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
+  const uttakAp = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
+  const vilkarForSykdomExists = aksjonspunkter.filter((ap) => isVilkarForSykdomOppfylt(ap.definisjon.kode)).length > 0;
+  const uttakApOpen = uttakAp.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const overrideReadOnly = readOnly || (!uttakAp.length && !uttakAp.some((ap: Aksjonspunkt) => ap.kanLoses));
   const behandlingArsakTyper = getBehandlingArsakTyper(behandlingArsaker);
   const behandlingIsRevurdering = behandlingType.kode === behandlingTyper.REVURDERING;

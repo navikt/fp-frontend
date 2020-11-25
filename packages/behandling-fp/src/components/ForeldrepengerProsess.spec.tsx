@@ -80,7 +80,7 @@ describe('<ForeldrepengerProsess>', () => {
     } as {[key: number]: string},
     antallBarn: 1,
     soknadType: {
-      kode: soknadType.FODSERL,
+      kode: soknadType.FODSEL,
       kodeverk: 'test',
     },
   } as Soknad;

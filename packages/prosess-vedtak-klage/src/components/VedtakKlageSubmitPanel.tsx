@@ -14,7 +14,7 @@ import styles from './vedtakKlageSubmitPanel.less';
 const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean) => {
   switch (klageVurdering.kode) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
-      return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTE : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
+      return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
     case klageVurderingType.OPPHEVE_YTELSESVEDTAK:
       return dokumentMalType.KLAGE_YTELSESVEDTAK_OPPHEVET;
     case klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE:
