@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import ForeldelseForm from './components/ForeldelseForm';
-import ForeldelsePerioderWrapper from './types/foreldelsePerioderTsType';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -16,7 +16,7 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  perioderForeldelse: ForeldelsePerioderWrapper;
+  perioderForeldelse: FeilutbetalingPerioderWrapper;
   navBrukerKjonn: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   beregnBelop: (data: any) => Promise<any>;

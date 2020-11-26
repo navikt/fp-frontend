@@ -1,6 +1,5 @@
 import RequestAdditionalConfig from './RequestAdditionalConfigTsType';
 
-// eslint-disable-next-line no-shadow
 export enum RequestType {
   GET = 'GET',
   GET_ASYNC = 'GET_ASYNC',

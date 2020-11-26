@@ -1,7 +1,6 @@
 import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
-// eslint-disable-next-line no-shadow
 export enum InnsynBehandlingApiKeys {
   BEHANDLING_INNSYN = 'BEHANDLING_INNSYN',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',

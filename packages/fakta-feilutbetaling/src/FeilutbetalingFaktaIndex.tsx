@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Behandling, FeilutbetalingFakta, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import FeilutbetalingInfoPanel from './components/FeilutbetalingInfoPanel';
-import FeilutbetalingFakta from './types/feilutbetalingFaktaTsType';
 import FeilutbetalingAarsak from './types/feilutbetalingAarsakTsType';
 import messages from '../i18n/nb_NO.json';
 

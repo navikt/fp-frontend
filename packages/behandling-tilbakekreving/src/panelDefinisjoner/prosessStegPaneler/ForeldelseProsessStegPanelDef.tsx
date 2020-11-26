@@ -6,12 +6,14 @@ import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { getAlleMerknaderFraBeslutter, ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, Behandling, FagsakPerson } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, FagsakPerson, FeilutbetalingPerioderWrapper,
+} from '@fpsak-frontend/types';
 
 interface Data {
   behandling: Behandling;
   aksjonspunkterForSteg: Aksjonspunkt[];
-  perioderForeldelse: any;
+  perioderForeldelse: FeilutbetalingPerioderWrapper;
   fagsakPerson: FagsakPerson;
   beregnBelop: () => number;
 }

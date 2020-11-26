@@ -6,8 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
 import aktsomhet from '@fpsak-frontend/prosess-tilbakekreving/src/kodeverk/aktsomhet';
-import { Behandling } from '@fpsak-frontend/types';
-import BeregningsresultatTilbakekreving from '@fpsak-frontend/prosess-vedtak-tilbakekreving/src/types/beregningsresultatTilbakekrevingTsType';
+import { Behandling, BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
 
 import vedtakResultatType from './vedtakResultatType';
 import withReduxProvider from '../../../decorators/withRedux';

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 enum ResponseCacheStatus {
   FETCHED = 'FETCHED',
   FETCHING = 'FETCHING',

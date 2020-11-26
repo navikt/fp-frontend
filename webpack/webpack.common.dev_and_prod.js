@@ -24,7 +24,7 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(tsx?|ts?|jsx?)$/,
+        test: /\.(tsx?|ts?)$/,
         enforce: 'pre',
         loader: 'eslint-loader',
         options: {
@@ -36,7 +36,7 @@ const config = {
         },
         include: [PACKAGES_DIR],
       }, {
-        test: /\.(jsx?|js?|tsx?|ts?)$/,
+        test: /\.(tsx?|ts?)$/,
         use: [
           { loader: 'cache-loader' },
           {
@@ -122,7 +122,7 @@ const config = {
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.(jsx|tsx)?$/
+          test: /\.(tsx)?$/
         },
         use: [{
           loader: '@svgr/webpack',

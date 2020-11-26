@@ -15,7 +15,7 @@ const config = {
         loader: 'null-loader',
       },
       {
-        test: /\.(jsx?|js?|tsx?|ts?)$/,
+        test: /\.(tsx?|ts?)$/,
         include: PACKAGES_DIR,
         enforce: 'post', // needed if you're using Babel
         loader: 'istanbul-instrumenter-loader',

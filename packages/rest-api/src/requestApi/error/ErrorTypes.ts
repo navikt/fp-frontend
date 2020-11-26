@@ -4,7 +4,6 @@ import ErrorType from './errorTsType';
  * Feiltyper til differensiering av framvisning i GUI
  * Skal speile FeilType.java en-til-en
  */
-// eslint-disable-next-line no-shadow
 export enum ErrorTypes {
   MANGLER_TILGANG_FEIL = 'MANGLER_TILGANG_FEIL',
   TOMT_RESULTAT_FEIL = 'TOMT_RESULTAT_FEIL',

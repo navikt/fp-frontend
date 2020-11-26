@@ -16,7 +16,6 @@ module.exports = function (api) {
   ];
   const plugins = ['@babel/plugin-proposal-class-properties'];
 
-
   if (NODE_ENV && BABEL_ENV && NODE_ENV !== BABEL_ENV) {
     console.warn('WARNING: Both BABEL_ENV and NODE_ENV are set in');
     console.warn('WARNING: the environment, but with different values.');

@@ -1,9 +1,9 @@
-import { ForeldelsePerioder } from './foreldelsePerioderTsType';
+import { FeilutbetalingPeriode } from '@fpsak-frontend/types';
 
 type ForeldelsesresultatActivity = Readonly<{
   feilutbetaling: number;
   foreldet: string;
   erSplittet?: boolean;
-}> & ForeldelsePerioder;
+}> & FeilutbetalingPeriode;
 
 export default ForeldelsesresultatActivity;

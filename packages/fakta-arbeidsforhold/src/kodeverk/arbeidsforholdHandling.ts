@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 enum ArbeidsforholdHandling {
   AKTIVT_ARBEIDSFORHOLD = 'AKTIVT_ARBEIDSFORHOLD',
   FJERN_ARBEIDSFORHOLD = 'FJERN_ARBEIDSFORHOLD',

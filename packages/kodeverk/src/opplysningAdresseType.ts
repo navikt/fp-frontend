@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 enum OpplysningAdresseType {
   BOSTEDSADRESSE = 'BOSTEDSADRESSE',
   POSTADRESSE = 'POSTADRESSE',
