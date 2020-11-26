@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 enum Aktsomhet {
   FORSETT = 'FORSETT',
   GROVT_UAKTSOM = 'GROVT_UAKTSOM',

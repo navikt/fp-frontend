@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 export enum VergeBehandlingmenyValg {
   OPPRETT = 'OPPRETT',
   FJERN = 'FJERN',

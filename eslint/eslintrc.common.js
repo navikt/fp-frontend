@@ -56,6 +56,8 @@ const config = {
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': OFF,
     '@typescript-eslint/no-use-before-define': [ERROR],
+    'no-shadow': OFF,
+    '@typescript-eslint/no-shadow': [ERROR],
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
     'jsx-a11y/anchor-is-valid': OFF,

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 enum HistorikkAktor {
   BESLUTTER = 'BESL',
   SAKSBEHANDLER = 'SBH',

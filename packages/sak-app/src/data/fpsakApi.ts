@@ -1,7 +1,6 @@
 import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
-// eslint-disable-next-line no-shadow
 export enum LinkCategory {
   INIT_DATA = 'INIT_DATA',
   FEATURE_TOGGLE = 'FEATURE_TOGGLE',
@@ -9,7 +8,6 @@ export enum LinkCategory {
   BEHANDLING = 'BEHANDLING',
 }
 
-// eslint-disable-next-line no-shadow
 export enum FpsakApiKeys {
   INIT_FETCH = 'INIT_FETCH',
   INIT_FETCH_FPTILBAKE = 'INIT_FETCH_FPTILBAKE',
