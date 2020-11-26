@@ -1,5 +1,4 @@
 const OFF = 0;
-const ON = 1;
 const ERROR = 2;
 const { resolve } = require('path');
 
@@ -42,7 +41,7 @@ const config = {
     'import/extensions': [
       'error',
       'ignorePackages',
-      { 'js': 'never', 'jsx': 'never', 'ts': 'never', 'tsx': 'never' }
+      { 'ts': 'never', 'tsx': 'never' }
     ],
     'linebreak-style': OFF,
     'import/no-named-as-default': OFF,
@@ -52,6 +51,7 @@ const config = {
     'no-undef': OFF,
     'react/static-property-placement': OFF,
     'react/state-in-constructor': OFF,
+    'react/prop-types': OFF,
 
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': OFF,
@@ -68,23 +68,15 @@ const config = {
     // TODO (TOR) Midlertidig utkommentert
     'max-classes-per-file': OFF,
     'jsx-a11y/control-has-associated-label': OFF,
-
     '@typescript-eslint/no-unused-vars': ERROR,
     '@typescript-eslint/indent': OFF,
-
-    // TODO (TOR) Midlertidig utkommentert
     '@typescript-eslint/explicit-member-accessibility': OFF,
     '@typescript-eslint/explicit-function-return-type': OFF,
   },
   overrides: [{
-    files: ['*.spec.jsx', '*.spec.tsx', '*.spec.ts'],
+    files: ['*.spec.tsx', '*.spec.ts'],
     rules: {
       'no-unused-expressions': OFF,
-    },
-  }, {
-    files: ['*.tsx'],
-    rules: {
-      'react/prop-types': OFF,
     },
   }],
 };

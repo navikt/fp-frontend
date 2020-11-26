@@ -14,7 +14,7 @@ const config = {
         loader: 'null-loader',
       },
       {
-        test: /\.(jsx?|js?|tsx?|ts?)$/,
+        test: /\.(tsx?|ts?)$/,
         include: PACKAGES_DIR,
         use: [
           { loader: 'cache-loader' },

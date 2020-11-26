@@ -10,7 +10,7 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(tsx?|ts?|jsx?)$/,
+        test: /\.(tsx?|ts?)$/,
         enforce: 'pre',
         loader: 'eslint-loader',
         options: {
