@@ -532,7 +532,6 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
   });
 
   it('skal mappe andel til fastsatte verdier uten endring i refusjon', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const fastsatteVerdier = mapTilFastsatteVerdier(andel2);
     expect(fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
     expect(fastsatteVerdier.refusjonPrÅr).to.equal(null);
@@ -541,7 +540,6 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
 
   it('skal mappe andel til fastsatte verdier med endring i refusjon', () => {
     const andel = { ...andel2, skalKunneEndreRefusjon: true };
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const fastsatteVerdier = mapTilFastsatteVerdier(andel);
     expect(fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
     expect(fastsatteVerdier.refusjonPrÅr).to.equal(10000);

@@ -16,12 +16,11 @@ const fordelBGFieldArrayNamePrefix = 'fordelBGPeriode';
 
 export const getFieldNameKey = (index) => (fordelBGFieldArrayNamePrefix + index);
 
-export const mapTilFastsatteVerdier = (aktivitet, skalHaBesteberegning) => ({
+export const mapTilFastsatteVerdier = (aktivitet) => ({
   refusjonPrÅr: aktivitet.skalKunneEndreRefusjon ? removeSpacesFromNumber(aktivitet.refusjonskrav) : null,
   fastsattÅrsbeløp: removeSpacesFromNumber(aktivitet.fastsattBelop),
   fastsattÅrsbeløpInklNaturalytelse: removeSpacesFromNumber(aktivitet.fastsattBelop),
   inntektskategori: aktivitet.inntektskategori,
-  skalHaBesteberegning,
 });
 
 const finnRiktigBgPeriode = (periode, bgPerioder) => bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === periode.fom);
@@ -48,7 +47,6 @@ export const mapAndel = (aktivitet) => ({
   forrigeArbeidsinntektPrÅr: aktivitet.forrigeArbeidsinntektPrAar,
   forrigeRefusjonPrÅr: aktivitet.forrigeRefusjonPrAar,
   forrigeInntektskategori: aktivitet.forrigeInntektskategori,
-  // @ts-ignore FIXME: Denne forventer også skalHaBesteberegning, hvorfor er denne blitt borte?
   fastsatteVerdier: mapTilFastsatteVerdier(aktivitet),
 });
 

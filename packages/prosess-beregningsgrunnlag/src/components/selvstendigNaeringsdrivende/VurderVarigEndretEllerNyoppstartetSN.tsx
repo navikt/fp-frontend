@@ -23,6 +23,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import { beløpErSatt } from '@fpsak-frontend/utils/src/currencyUtils';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import TextAreaField from '../redesign/TextAreaField';
 
@@ -41,9 +42,21 @@ type OwnProps = {
     erVarigEndretNaering?: boolean;
 };
 
+type VurderOgFastsettSNValues = {
+  varigEndringNyoppstartetBegrunnelse?: string;
+  erVarigEndretNaering?: boolean;
+  bruttoBeregningsgrunnlag?: string;
+}
+
+type VurderOgFastsettSNTransformedValues = {
+  begrunnelse: string;
+  erVarigEndretNaering: boolean;
+  bruttoBeregningsgrunnlag?: number;
+}
+
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
-  transformValues?: (values: any) => any;
+  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => VurderOgFastsettSNValues;
+  transformValues?: (values: VurderOgFastsettSNValues) => VurderOgFastsettSNTransformedValues;
 }
 
 /**
@@ -153,28 +166,23 @@ VurderVarigEndretEllerNyoppstartetSNImpl.defaultProps = {
   erVarigEndretNaering: false,
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter) => {
-  if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
-    return undefined;
-  }
-  const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler,
+  gjeldendeAksjonspunkter) => {
+  const snAndel = relevanteAndeler?.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const varigEndretNaeringAP = gjeldendeAksjonspunkter
-    .find((ap) => ap.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
-  if (varigEndretNaeringAP) {
-    return {
-      [varigEndringRadioname]: isAksjonspunktOpen(varigEndretNaeringAP.status.kode) ? undefined : relevanteAndeler[0].overstyrtPrAar !== null
-        && relevanteAndeler[0].overstyrtPrAar !== undefined,
-      [begrunnelseFieldname]: varigEndretNaeringAP.begrunnelse ? varigEndretNaeringAP.begrunnelse : '',
-      [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
-    };
-  }
-  return undefined;
+    ?.find((ap) => ap.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
+  return {
+    [varigEndringRadioname]: varigEndretNaeringAP && isAksjonspunktOpen(varigEndretNaeringAP.status.kode) ? undefined : relevanteAndeler[0].overstyrtPrAar !== null
+      && relevanteAndeler[0].overstyrtPrAar !== undefined,
+    [begrunnelseFieldname]: varigEndretNaeringAP && varigEndretNaeringAP.begrunnelse ? varigEndretNaeringAP.begrunnelse : '',
+    [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
+  };
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values) => ({
+VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: Required<VurderOgFastsettSNValues>): VurderOgFastsettSNTransformedValues => ({
   begrunnelse: values[begrunnelseFieldname],
   erVarigEndretNaering: values[varigEndringRadioname],
-  bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),
+  bruttoBeregningsgrunnlag: values[fastsettInntektFieldname] ? removeSpacesFromNumber(values[fastsettInntektFieldname]) : undefined,
 });
 
 export default injectIntl(VurderVarigEndretEllerNyoppstartetSNImpl);

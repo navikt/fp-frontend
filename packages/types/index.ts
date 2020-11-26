@@ -22,6 +22,8 @@ export {
   VurderMottarYtelse,
   ArbeidstakerUtenIMAndel,
   RefusjonskravSomKommerForSentListe,
+  PgiVerdier,
+  Næring,
 } from './src/beregningsgrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';

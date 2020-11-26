@@ -28,3 +28,10 @@ export const parseCurrencyInput = (input: number | string): string | undefined =
   const parsedValue = parseInt(inputNoSpace, 10);
   return Number.isNaN(parsedValue) ? '' : formatCurrencyNoKr(parsedValue);
 };
+
+export const beløpErSatt = (beløp: number | undefined): boolean => {
+  if (Number.isNaN(beløp)) {
+    return false;
+  }
+  return !!(beløp || beløp === 0);
+};

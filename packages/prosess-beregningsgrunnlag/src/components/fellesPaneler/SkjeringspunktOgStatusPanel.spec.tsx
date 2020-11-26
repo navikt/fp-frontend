@@ -38,8 +38,7 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
     expect(messages).to.be.lengthOf(1);
     expect(messages.first().props().id).to.equal('Beregningsgrunnlag.Skjeringstidspunkt.SkjeringForBeregning');
     const dato = wrapper.find('DateLabel');
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dateString' does not exist on type 'HTML... Remove this comment to see the full error message
-    expect(dato.first().props().dateString).to.equal(skjeringstidspunktDato);
+    expect(dato.first().prop('dateString')).to.equal(skjeringstidspunktDato);
   });
 
   it('Skal teste buildInitialValues når ingen aksjonspunkt', () => {

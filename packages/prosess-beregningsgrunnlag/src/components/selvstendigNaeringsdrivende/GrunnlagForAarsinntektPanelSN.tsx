@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Element, Normaltekst, EtikettLiten,
@@ -9,7 +9,8 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import { Column, Row } from 'nav-frontend-grid';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, PgiVerdier } from '@fpsak-frontend/types';
+import { beløpErSatt } from '@fpsak-frontend/utils/src/currencyUtils';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
@@ -28,34 +29,31 @@ const createHeaderRow = () => (
     </Column>
   </Row>
 );
-const createSumRow = (pgiSnitt) => (
+const createSumRow = (pgiSnitt: number): ReactNode => (
   <>
-    {pgiSnitt !== undefined && (
-      <>
-        <Row key="grunnlagAarsinntektSNLine">
-          <Column xs="12" className={beregningStyles.noPaddingRight}>
-            <div className={beregningStyles.colDevider} />
-          </Column>
-        </Row>
-        <Row key="grunnlagAarsinntektSN">
-          <Column xs="10" className={beregningStyles.rightAlignTextInDiv}>
-            <Element>
-              <FormattedMessage
-                id="Beregningsgrunnlag.AarsinntektPanel.SnittPensjonsGivende"
-              />
-            </Element>
-          </Column>
-          <Column xs="2" className={beregningStyles.colAarText}>
-            <Element>
-              {formatCurrencyNoKr(pgiSnitt)}
-            </Element>
-          </Column>
-        </Row>
-      </>
-    )}
+    <Row key="grunnlagAarsinntektSNLine">
+      <Column xs="12" className={beregningStyles.noPaddingRight}>
+        <div className={beregningStyles.colDevider} />
+      </Column>
+    </Row>
+    <Row key="grunnlagAarsinntektSN">
+      <Column xs="10" className={beregningStyles.rightAlignTextInDiv}>
+        <Element>
+          <FormattedMessage
+            id="Beregningsgrunnlag.AarsinntektPanel.SnittPensjonsGivende"
+          />
+        </Element>
+      </Column>
+      <Column xs="2" className={beregningStyles.colAarText}>
+        <Element>
+          {formatCurrencyNoKr(pgiSnitt)}
+        </Element>
+      </Column>
+    </Row>
   </>
 );
-const createInntektRows = (pgiVerdier) => (
+
+const createInntektRows = (pgiVerdier: PgiVerdier[]) => (
   <>
     {pgiVerdier.map((element) => (
       <Row key={element.årstall}>
@@ -106,9 +104,10 @@ export const GrunnlagForAarsinntektPanelSN: FunctionComponent<OwnProps> = ({ all
       </Row>
       <VerticalSpacer fourPx />
       {createHeaderRow()}
-      {createInntektRows(pgiVerdier)}
-      {createSumRow(pgiSnitt)}
-
+      {pgiVerdier
+        && createInntektRows(pgiVerdier)}
+      {beløpErSatt(pgiSnitt)
+        && createSumRow(Number(pgiSnitt))}
     </>
   );
 };

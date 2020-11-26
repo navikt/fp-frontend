@@ -20,6 +20,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { beløpErSatt } from '@fpsak-frontend/utils/src/currencyUtils';
 import TextAreaField from '../redesign/TextAreaField';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 
@@ -40,15 +41,20 @@ type OwnProps = {
     gjeldendeAksjonspunkter: Aksjonspunkt[];
 };
 
+type FastsettSNTransformedValues = {
+  begrunnelse?: string;
+  bruttoBeregningsgrunnlag: number;
+}
+
+type FastsettSNFormValues = {
+  bruttoBeregningsgrunnlag?: string;
+  fastsettBeregningsgrnunnlagSNBegrunnelse?: string;
+}
+
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
-  transformValuesMedBegrunnelse?: (values: any) => {
-    begrunnelse: string;
-    bruttoBeregningsgrunnlag: number;
-  }
-  transformValuesUtenBegrunnelse?: (values: any) => {
-    bruttoBeregningsgrunnlag: number;
-  }
+  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => FastsettSNFormValues;
+  transformValuesMedBegrunnelse?: (values: Required<FastsettSNFormValues>) => FastsettSNTransformedValues;
+  transformValuesUtenBegrunnelse?: (values: Required<FastsettSNFormValues>) => FastsettSNTransformedValues;
 }
 
 /**
@@ -122,9 +128,12 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
   );
 };
 
-FastsettSNImpl.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter) => {
+FastsettSNImpl.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter): FastsettSNFormValues => {
   if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
-    return undefined;
+    return {
+      [fastsettInntektFieldname]: undefined,
+      [begrunnelseFieldname]: undefined,
+    };
   }
 
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
@@ -136,13 +145,16 @@ FastsettSNImpl.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter) 
     .find((ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
   const gjeldendeAP = fastsettBruttoEtterVarigEndring || fastsettBruttoNyIArbeidslivet;
 
-  if (gjeldendeAP || (snAndel.overstyrtPrAar || snAndel.overstyrtPrAar === 0)) {
+  if (snAndel && (gjeldendeAP || beløpErSatt(snAndel.overstyrtPrAar))) {
     return {
-      [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
+      [fastsettInntektFieldname]: beløpErSatt(snAndel.overstyrtPrAar) ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
       [begrunnelseFieldname]: gjeldendeAP && gjeldendeAP.begrunnelse ? gjeldendeAP.begrunnelse : '',
     };
   }
-  return undefined;
+  return {
+    [fastsettInntektFieldname]: undefined,
+    [begrunnelseFieldname]: undefined,
+  };
 };
 
 FastsettSNImpl.transformValuesMedBegrunnelse = (values) => ({

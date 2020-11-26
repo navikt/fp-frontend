@@ -179,15 +179,17 @@ type FaktaOmFordeling = Readonly<{
   fordelBeregningsgrunnlag?: FordelBeregningsgrunnlag;
 }>
 
-type Næring = Readonly <{
+export type Næring = Readonly <{
   orgnr: string;
   virksomhetType: Kodeverk;
   utenlandskvirksomhetsnavn?: string;
+  virksomhetNavn?: string;
   erVarigEndret?: boolean;
   erNyoppstartet?: boolean;
   begrunnelse?: string;
   endringsdato?: string;
   oppstartsdato?: string;
+  opphørsdato?: string;
   regnskapsførerNavn?: string;
   regnskapsførerTlf?: string;
   kanRegnskapsførerKontaktes?: boolean;
@@ -195,13 +197,13 @@ type Næring = Readonly <{
   oppgittInntekt?: number;
 }>
 
-type PgiVerdier = Readonly <{
+export type PgiVerdier = Readonly <{
   beløp: number;
   årstall: number,
 }>
 
 export type BeregningsgrunnlagAndel = Readonly <{
-  aktivitetStatus?: Kodeverk;
+  aktivitetStatus: Kodeverk;
   arbeidsforholdType?: Kodeverk;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   avkortetPrAar?: number;
@@ -252,7 +254,7 @@ export type SammenligningsgrunlagProp = Readonly<{
   differanseBeregnet: number;
   avvikProsent: number;
   avvikPromille: number;
-  rapportertPrAar?: number;
+  rapportertPrAar: number;
   sammenligningsgrunnlagFom?: string;
   sammenligningsgrunnlagTom?: string;
 }>

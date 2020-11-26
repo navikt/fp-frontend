@@ -8,19 +8,19 @@ import { FlexRow } from '@fpsak-frontend/shared-components';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvvikopplysningerATFLSN from '../fellesPaneler/AvvikopplysningerATFLSN';
 
-const ingenAvviksvurdering = (forklarendeTekst) => (
+const ingenAvviksvurdering = (forklarendeTekstId: string) => (
   <FlexRow>
     <Column xs="12">
       <Normaltekst>
-        <FormattedMessage id={forklarendeTekst} />
+        <FormattedMessage id={forklarendeTekstId} />
       </Normaltekst>
     </Column>
   </FlexRow>
 );
 
 type OwnProps = {
-    alleAndelerIForstePeriode?: BeregningsgrunnlagAndel[];
-    sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];
+    alleAndelerIForstePeriode: BeregningsgrunnlagAndel[];
+    sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[];
     relevanteStatuser: RelevanteStatuserProp
 };
 
@@ -30,9 +30,9 @@ const AvviksopplysningerSN: FunctionComponent<OwnProps> = ({
   relevanteStatuser,
 }) => {
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-  const erNyArbLivet = snAndel.erNyIArbeidslivet;
-  const erVarigEndring = snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
-  const erNyoppstartet = snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
+  const erNyArbLivet = snAndel?.erNyIArbeidslivet;
+  const erVarigEndring = snAndel?.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
+  const erNyoppstartet = snAndel?.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
   if (erNyArbLivet) {
     return ingenAvviksvurdering('Beregningsgrunnlag.Avviksopplysninger.SN.NyIArbeidslivet');
   }
@@ -49,8 +49,7 @@ const AvviksopplysningerSN: FunctionComponent<OwnProps> = ({
   const { pgiSnitt } = snAndel;
   const avvikSN = sammenligningsGrunnlagSN.avvikProsent;
   const avvikRoundedSN = avvikSN ? parseFloat((avvikSN.toFixed(1))) : 0;
-  const sammenligningsgrunnlagSumSN = sammenligningsGrunnlagSN.rapportertPrAar;
-  const { differanseBeregnet } = sammenligningsGrunnlagSN;
+  const { differanseBeregnet, rapportertPrAar } = sammenligningsGrunnlagSN;
   const visPaneler = {
     visAT: false,
     visFL: false,
@@ -63,7 +62,7 @@ const AvviksopplysningerSN: FunctionComponent<OwnProps> = ({
       differanseBeregnet={differanseBeregnet}
       relevanteStatuser={relevanteStatuser}
       visPanel={visPaneler}
-      sammenligningsgrunnlagSum={sammenligningsgrunnlagSumSN}
+      sammenligningsgrunnlagSum={rapportertPrAar}
     />
   );
 };
