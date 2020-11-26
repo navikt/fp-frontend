@@ -115,7 +115,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
 
   const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiEsHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
     EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
-      updateTriggers: [!behandling],
+      updateTriggers: [behandling?.versjon],
       suspendRequest: !behandling,
     },
   );

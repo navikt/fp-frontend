@@ -120,7 +120,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps> = ({
 
   const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiFpHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
     FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
-      updateTriggers: [!behandling],
+      updateTriggers: [behandling?.versjon],
       suspendRequest: !behandling,
     },
   );

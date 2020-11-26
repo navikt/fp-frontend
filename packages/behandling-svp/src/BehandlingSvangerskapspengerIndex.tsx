@@ -116,7 +116,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
 
   const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiSvpHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
     SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
-      updateTriggers: [!behandling],
+      updateTriggers: [behandling?.versjon],
       suspendRequest: !behandling,
     },
   );
