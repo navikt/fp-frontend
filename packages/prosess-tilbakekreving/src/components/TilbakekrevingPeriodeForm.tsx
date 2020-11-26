@@ -20,8 +20,7 @@ import {
   AdvarselModal, FlexColumn, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import ForeldelsePerioderWrapper from '@fpsak-frontend/prosess-foreldelse/src/types/foreldelsePerioderTsType';
+import { FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import sarligGrunn from '../kodeverk/sarligGrunn';
 import Aktsomhet, { AKTSOMHET_REKKEFØLGE } from '../kodeverk/aktsomhet';
@@ -493,14 +492,14 @@ const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToP
 })(injectIntl(TilbakekrevingPeriodeFormImpl)));
 
 // TODO Fiks typen til periode
-export const periodeFormBuildInitialValues = (periode: any, foreldelsePerioder: ForeldelsePerioderWrapper): InitialValuesDetailForm => {
+export const periodeFormBuildInitialValues = (periode: any, foreldelsePerioder: FeilutbetalingPerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
 
   const vilkarResultatKode = vilkarResultat && vilkarResultat.kode ? vilkarResultat.kode : vilkarResultat;
   let foreldetData = { erForeldet: false, periodenErForeldet: undefined, foreldetBegrunnelse: undefined };
   const erForeldet = periode.erForeldet ? periode.erForeldet : periode.foreldet;
   if (erForeldet) {
-    const foreldelsePeriode = foreldelsePerioder.perioder.find((p: any) => p.fom === periode.fom && p.tom === periode.tom);
+    const foreldelsePeriode = foreldelsePerioder.perioder.find((p) => p.fom === periode.fom && p.tom === periode.tom);
     foreldetData = {
       erForeldet,
       periodenErForeldet: true,

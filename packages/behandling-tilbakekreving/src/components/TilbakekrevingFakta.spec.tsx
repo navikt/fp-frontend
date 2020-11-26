@@ -53,7 +53,7 @@ describe('<TilbakekrevingFakta>', () => {
     erAktivt: true,
   }];
   const perioderForeldelse = {
-    perioder: {
+    perioder: [{
       fom: '2019-01-01',
       tom: '2019-04-01',
       belop: 1212,
@@ -61,7 +61,7 @@ describe('<TilbakekrevingFakta>', () => {
         kode: foreldelseVurderingType.FORELDET,
         kodeverk: 'FORELDRE_VURDERING_TYPE',
       },
-    },
+    }],
   };
   const beregningsresultat = {
     beregningResultatPerioder: [],

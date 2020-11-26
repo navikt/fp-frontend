@@ -66,3 +66,6 @@ export {
   HistorikkInnslagOpplysning, HistorikkInnslagAksjonspunkt,
 } from './src/historikkinnslagTsType';
 export { default as ArbeidsgiverOpplysningerPerId, ArbeidsgiverOpplysningerWrapper, ArbeidsgiverOpplysninger } from './src/arbeidsgiverOpplysningerTsType';
+export { default as BeregningsresultatTilbakekreving, BeregningResultatPeriode } from './src/beregningsresultatTilbakekrevingTsType';
+export { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from './src/feilutbetalingPerioderTsType';
+export { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';

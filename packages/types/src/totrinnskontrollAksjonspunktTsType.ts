@@ -1,6 +1,5 @@
 import Kodeverk from './kodeverkTsType';
 
-// eslint-disable-next-line no-shadow
 enum TypeEndring {
   AVKLART = 'AVKLART',
   ENDRET = 'ENDRET',

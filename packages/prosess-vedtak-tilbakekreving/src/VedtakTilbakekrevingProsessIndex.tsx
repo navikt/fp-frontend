@@ -3,9 +3,9 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
 
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
-import BeregningsresultatTilbakekreving from './types/beregningsresultatTilbakekrevingTsType';
 import Vedtaksbrev from './types/vedtaksbrevTsType';
 import messages from '../i18n/nb_NO.json';
 

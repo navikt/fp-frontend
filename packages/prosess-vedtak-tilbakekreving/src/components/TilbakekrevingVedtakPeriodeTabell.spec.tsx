@@ -3,9 +3,9 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { BeregningResultatPeriode } from '@fpsak-frontend/types';
 
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
-import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
 
 describe('<TilbakekrevingVedtakPeriodeTabell>', () => {
   it('skal lage tabell med to perioder og en sum-rad', () => {

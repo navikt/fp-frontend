@@ -1,5 +1,4 @@
 const OFF = 0;
-const ON = 1;
 const ERROR = 2;
 const { resolve } = require('path');
 
@@ -42,49 +41,40 @@ const config = {
     'import/extensions': [
       'error',
       'ignorePackages',
-      { 'js': 'never', 'jsx': 'never', 'ts': 'never', 'tsx': 'never' }
+      { 'ts': 'never', 'tsx': 'never' }
     ],
     'linebreak-style': OFF,
     'import/no-named-as-default': OFF,
     'max-len': [ERROR, 160],
+    'no-undef': OFF,
     'react/require-default-props': OFF,
     'react/jsx-filename-extension': OFF,
-    'no-undef': OFF,
     'react/static-property-placement': OFF,
     'react/state-in-constructor': OFF,
+    'react/prop-types': OFF,
 
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': OFF,
     '@typescript-eslint/no-use-before-define': [ERROR],
+    'no-shadow': OFF,
+    '@typescript-eslint/no-shadow': [ERROR],
+    'no-unused-vars': OFF,
+    '@typescript-eslint/no-unused-vars': [ERROR],
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
+    'max-classes-per-file': OFF,
     'jsx-a11y/anchor-is-valid': OFF,
+    'jsx-a11y/control-has-associated-label': OFF,
     'react/jsx-props-no-spreading': OFF,
     '@typescript-eslint/no-empty-function': OFF,
     '@typescript-eslint/no-explicit-any': OFF,
     '@typescript-eslint/ban-ts-comment': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
-
-    // TODO (TOR) Midlertidig utkommentert
-    'max-classes-per-file': OFF,
-    'jsx-a11y/control-has-associated-label': OFF,
-
-    '@typescript-eslint/no-unused-vars': ERROR,
-    '@typescript-eslint/indent': OFF,
-
-    // TODO (TOR) Midlertidig utkommentert
-    '@typescript-eslint/explicit-member-accessibility': OFF,
-    '@typescript-eslint/explicit-function-return-type': OFF,
   },
   overrides: [{
-    files: ['*.spec.jsx', '*.spec.tsx', '*.spec.ts'],
+    files: ['*.spec.tsx', '*.spec.ts'],
     rules: {
       'no-unused-expressions': OFF,
-    },
-  }, {
-    files: ['*.tsx'],
-    rules: {
-      'react/prop-types': OFF,
     },
   }],
 };

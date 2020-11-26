@@ -5,7 +5,7 @@ export type FeilutbetalingPeriode = Readonly<{
   tom: string;
   belop: number;
   foreldelseVurderingType: Kodeverk;
-  begrunnelse: string;
+  begrunnelse?: string;
 }>;
 
 type FeilutbetalingPerioderWrapper = Readonly<{
