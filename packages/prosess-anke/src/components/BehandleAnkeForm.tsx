@@ -66,13 +66,18 @@ type FormValues = {
   erIkkeSignert: boolean;
 } & FormValuesUtrekk
 
-const skalViseForhaandlenke = (avr: Kodeverk) => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr?.kode === ankeVurdering.ANKE_OMGJOER;
+const skalViseForhaandlenke = (avr: Kodeverk) => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+  || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr?.kode === ankeVurdering.ANKE_OMGJOER;
 
 const canSubmit = (formValues: FormValuesUtrekk) => {
   if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode && !formValues.erSubsidiartRealitetsbehandles) {
     return false;
   }
   if (ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode && (!formValues.ankeOmgjoerArsak || !formValues.ankeVurderingOmgjoer)) {
+    return false;
+  }
+  if (!formValues.ankeOmgjoerArsak && (ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering?.kode
+    || ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode)) {
     return false;
   }
   return formValues.ankeVurdering != null && formValues.vedtak != null;
@@ -205,16 +210,17 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
       direction="horizontal"
       readOnly={readOnly}
     >
-      <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
       <RadioOption value={ankeVurdering.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
       <RadioOption value={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
+      <RadioOption value={ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV} label={{ id: 'Ankebehandling.Resultat.Hjemsend' }} />
       <RadioOption value={ankeVurdering.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
+      <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
     </RadioGroupField>
     {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode
       && (
         <Row>
           <Column xs="7">
-            <ArrowBox alignOffset={484}>
+            <ArrowBox alignOffset={315}>
               <Normaltekst><FormattedMessage id="Ankebehandling.Avvisning" /></Normaltekst>
               <VerticalSpacer fourPx />
               <CheckboxField name="erAnkerIkkePart" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />} />
@@ -244,9 +250,8 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
     {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode
       && (
         <Row>
-          <Column xs="7" />
           <Column xs="7">
-            <ArrowBox alignOffset={162}>
+            <ArrowBox>
               <SelectField
                 readOnly={readOnly}
                 name="ankeOmgjoerArsak.kode"
@@ -273,11 +278,11 @@ const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & Inj
           </Column>
         </Row>
       )}
-    {ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode && (
+    {(ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode
+      || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering?.kode) && (
       <Row>
-        <Column xs="7" />
         <Column xs="7">
-          <ArrowBox alignOffset={322}>
+          <ArrowBox alignOffset={180}>
             <SelectField
               readOnly={readOnly}
               name="ankeOmgjoerArsak.kode"
@@ -355,6 +360,13 @@ interface PureOwnProps {
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
 }
 
+const lagreOmgjoerAarsak = (values: FormValues) => (ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === values.ankeVurdering?.kode
+|| ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === values.ankeVurdering?.kode
+|| ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode ? values.ankeOmgjoerArsak : '-');
+
+const lagreVurderingOmgjoer = (values: FormValues) => (ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode
+  ? values.ankeVurderingOmgjoer : '-');
+
 export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
   vedtak: resultat ? formatId(resultat.paAnketBehandlingId) : null,
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
@@ -381,8 +393,8 @@ export const transformValues = (values: FormValues, aksjonspunktCode: string) =>
   erFristIkkeOverholdt: values.erFristIkkeOverholdt,
   erIkkeSignert: values.erIkkeSignert,
   erSubsidiartRealitetsbehandles: values.erSubsidiartRealitetsbehandles,
-  ankeOmgjoerArsak: values.ankeOmgjoerArsak,
-  ankeVurderingOmgjoer: values.ankeVurderingOmgjoer,
+  ankeOmgjoerArsak: lagreOmgjoerAarsak(values),
+  ankeVurderingOmgjoer: lagreVurderingOmgjoer(values),
   gjelderVedtak: values.vedtak !== '0',
   kode: aksjonspunktCode,
 });
