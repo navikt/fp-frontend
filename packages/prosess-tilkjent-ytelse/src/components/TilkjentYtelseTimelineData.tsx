@@ -27,16 +27,12 @@ const createVisningNavnForUttakArbeidstaker = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
-  if (arbeidsgiverOpplysninger && arbeidsgiverOpplysninger.erPrivatPerson) {
-    return <FormattedMessage id="TilkjentYtelse.PeriodeData.Arbeidstaker" />;
-  }
-
   if (!arbeidsgiverOpplysninger || !arbeidsgiverOpplysninger.navn) {
     return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType) : '';
   }
-  return arbeidsgiverOpplysninger.identifikator
-    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(andel.eksternArbeidsforholdId)}`
-    : arbeidsgiverOpplysninger.navn;
+  return arbeidsgiverOpplysninger.erPrivatPerson
+    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
+    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(andel.eksternArbeidsforholdId)}`;
 };
 
 const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
