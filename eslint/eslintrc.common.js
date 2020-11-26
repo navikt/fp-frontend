@@ -46,9 +46,9 @@ const config = {
     'linebreak-style': OFF,
     'import/no-named-as-default': OFF,
     'max-len': [ERROR, 160],
+    'no-undef': OFF,
     'react/require-default-props': OFF,
     'react/jsx-filename-extension': OFF,
-    'no-undef': OFF,
     'react/static-property-placement': OFF,
     'react/state-in-constructor': OFF,
     'react/prop-types': OFF,
@@ -62,19 +62,14 @@ const config = {
     '@typescript-eslint/no-unused-vars': [ERROR],
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
+    'max-classes-per-file': OFF,
     'jsx-a11y/anchor-is-valid': OFF,
+    'jsx-a11y/control-has-associated-label': OFF,
     'react/jsx-props-no-spreading': OFF,
     '@typescript-eslint/no-empty-function': OFF,
     '@typescript-eslint/no-explicit-any': OFF,
     '@typescript-eslint/ban-ts-comment': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
-    'max-classes-per-file': OFF,
-
-    // TODO (TOR) Midlertidig utkommentert
-    'jsx-a11y/control-has-associated-label': OFF,
-    '@typescript-eslint/indent': OFF,
-    '@typescript-eslint/explicit-member-accessibility': OFF,
-    '@typescript-eslint/explicit-function-return-type': OFF,
   },
   overrides: [{
     files: ['*.spec.tsx', '*.spec.ts'],
