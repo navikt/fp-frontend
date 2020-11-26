@@ -17,12 +17,11 @@ import {
 } from '@fpsak-frontend/form';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, FeilutbetalingPeriode } from '@fpsak-frontend/types';
 
 import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME } from './ForeldelsePeriodeForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import ForeldelseTidslinjeHjelpetekster from './ForeldelseTidslinjeHjelpetekster';
-import { ForeldelsePerioder } from '../types/foreldelsePerioderTsType';
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
 
@@ -281,8 +280,8 @@ export const transformValues = (values: any, apCode: string) => {
     kode: apCode,
   }];
 };
-export const buildInitialValues = (foreldelsePerioder: ForeldelsePerioder[]): { foreldelsesresultatActivity: ForeldelsesresultatActivity[] } => ({
-  foreldelsesresultatActivity: foreldelsePerioder.map((p: ForeldelsePerioder) => ({
+export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]): { foreldelsesresultatActivity: ForeldelsesresultatActivity[] } => ({
+  foreldelsesresultatActivity: foreldelsePerioder.map((p) => ({
     ...p,
     feilutbetaling: p.belop,
     foreldet: p.foreldelseVurderingType.kode === foreldelseVurderingType.UDEFINERT ? null : p.foreldelseVurderingType.kode,

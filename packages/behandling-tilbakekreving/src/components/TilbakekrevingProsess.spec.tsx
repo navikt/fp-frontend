@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import { ProsessStegContainer } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Fagsak } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -62,7 +62,7 @@ describe('<TilbakekrevingProsess>', () => {
     erAktivt: true,
   }];
   const perioderForeldelse = {
-    perioder: {
+    perioder: [{
       fom: '2019-01-01',
       tom: '2019-04-01',
       belop: 1212,
@@ -70,8 +70,8 @@ describe('<TilbakekrevingProsess>', () => {
         kode: foreldelseVurderingType.FORELDET,
         kodeverk: 'FORELDRE_VURDERING_TYPE',
       },
-    },
-  };
+    }],
+  } as FeilutbetalingPerioderWrapper;
   const beregningsresultat = {
     beregningResultatPerioder: [],
     vedtakResultatType: {

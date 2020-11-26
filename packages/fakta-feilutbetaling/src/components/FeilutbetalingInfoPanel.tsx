@@ -22,12 +22,11 @@ import { VerticalSpacer, AksjonspunktHelpTextTemp, FaktaGruppe } from '@fpsak-fr
 import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required, getKodeverknavnFn, decodeHtmlEntity,
 } from '@fpsak-frontend/utils';
-import { Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Aksjonspunkt, FeilutbetalingFakta, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import FeilutbetalingPerioderTable from './FeilutbetalingPerioderTable';
 
 import styles from './feilutbetalingInfoPanel.less';
-import FeilutbetalingFakta from '../types/feilutbetalingFaktaTsType';
 import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const formName = 'FaktaFeilutbetalingForm';
