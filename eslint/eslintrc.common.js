@@ -58,6 +58,8 @@ const config = {
     '@typescript-eslint/no-use-before-define': [ERROR],
     'no-shadow': OFF,
     '@typescript-eslint/no-shadow': [ERROR],
+    'no-unused-vars': OFF,
+    '@typescript-eslint/no-unused-vars': [ERROR],
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
     'jsx-a11y/anchor-is-valid': OFF,
@@ -66,11 +68,10 @@ const config = {
     '@typescript-eslint/no-explicit-any': OFF,
     '@typescript-eslint/ban-ts-comment': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
+    'max-classes-per-file': OFF,
 
     // TODO (TOR) Midlertidig utkommentert
-    'max-classes-per-file': OFF,
     'jsx-a11y/control-has-associated-label': OFF,
-    '@typescript-eslint/no-unused-vars': ERROR,
     '@typescript-eslint/indent': OFF,
     '@typescript-eslint/explicit-member-accessibility': OFF,
     '@typescript-eslint/explicit-function-return-type': OFF,

@@ -5,12 +5,11 @@ import { Undertittel, Undertekst, Normaltekst } from 'nav-frontend-typografi';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BeregningResultatPeriode, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
 import TilbakekrevingVedtakForm from './TilbakekrevingVedtakForm';
 import VedtaksbrevAvsnitt from '../types/vedtaksbrevAvsnittTsType';
-import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
 
 interface OwnProps {
   submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;

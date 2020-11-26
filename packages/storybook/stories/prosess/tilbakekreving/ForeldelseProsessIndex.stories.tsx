@@ -8,8 +8,7 @@ import NavBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
-import ForeldelsePerioderWrapper from '@fpsak-frontend/prosess-foreldelse/src/types/foreldelsePerioderTsType';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -31,7 +30,7 @@ const perioderForeldelse = {
       kodeverk: 'FORELDELSE_VURDERING',
     },
   }],
-} as ForeldelsePerioderWrapper;
+} as FeilutbetalingPerioderWrapper;
 
 const alleKodeverk = {
   [tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]: [{

@@ -6,9 +6,7 @@ import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
-import { Kodeverk } from '@fpsak-frontend/types';
-
-import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
+import { BeregningResultatPeriode, Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './tilbakekrevingVedtakPeriodeTabell.less';
 

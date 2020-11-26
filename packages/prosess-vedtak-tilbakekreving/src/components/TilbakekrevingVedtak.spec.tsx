@@ -4,10 +4,11 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Systemtittel } from 'nav-frontend-typografi';
 
+import { BeregningResultatPeriode } from '@fpsak-frontend/types';
+
 import TilbakekrevingVedtak from './TilbakekrevingVedtak';
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
 import TilbakekrevingVedtakForm from './TilbakekrevingVedtakForm';
-import { BeregningResultatPeriode } from '../types/beregningsresultatTilbakekrevingTsType';
 
 describe('<TilbakekrevingVedtak>', () => {
   const perioder = [{

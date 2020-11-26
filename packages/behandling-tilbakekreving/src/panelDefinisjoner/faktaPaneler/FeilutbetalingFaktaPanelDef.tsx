@@ -4,12 +4,12 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
-import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, KodeverkMedNavn, FeilutbetalingFakta } from '@fpsak-frontend/types';
 
 import { TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 
 interface Data {
-  feilutbetalingFakta: any,
+  feilutbetalingFakta: FeilutbetalingFakta,
   fagsak: Fagsak;
   fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
 }

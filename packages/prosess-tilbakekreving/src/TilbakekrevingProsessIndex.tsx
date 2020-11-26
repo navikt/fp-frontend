@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import TilbakekrevingForm from './components/TilbakekrevingForm';
-import FeilutbetalingPerioderWrapper from './types/feilutbetalingPerioderTsType';
 import VilkarsVurdertePerioderWrapper from './types/vilkarsVurdertePerioderTsType';
 import DetaljerteFeilutbetalingsperioder from './types/detaljerteFeilutbetalingsperioderTsType';
 
