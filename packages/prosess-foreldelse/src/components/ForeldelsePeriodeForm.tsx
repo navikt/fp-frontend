@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm,
+  RadioGroupField, RadioOption, TextAreaField, behandlingForm, DatepickerField, behandlingFormValueSelector,
 } from '@fpsak-frontend/form';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import {
@@ -39,6 +39,8 @@ interface OwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   beregnBelop: (data: any) => Promise<any>;
+  erForeldet?: boolean;
+  erMedTilleggsfrist?: boolean;
 }
 
 interface DispatchProps {
@@ -56,6 +58,8 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<OwnProps & DispatchPro
   behandlingId,
   behandlingVersjon,
   beregnBelop,
+  erForeldet,
+  erMedTilleggsfrist,
   ...formProps
 }) => (
   <div className={styles.container}>
@@ -71,7 +75,7 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<OwnProps & DispatchPro
     />
     <VerticalSpacer twentyPx />
     <Row>
-      <Column md="6">
+      <Column md="8">
         <TextAreaField
           name="begrunnelse"
           label={{ id: 'ForeldelsePeriodeForm.Vurdering' }}
@@ -80,9 +84,11 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<OwnProps & DispatchPro
           readOnly={readOnly}
         />
       </Column>
-      <Column md="6">
+    </Row>
+    <VerticalSpacer twentyPx />
+    <Row>
+      <Column md="5">
         <Undertekst><FormattedMessage id="ForeldelsePeriodeForm.RadioGroup.Foreldet" /></Undertekst>
-        <VerticalSpacer eightPx />
         <RadioGroupField
           validate={[required]}
           name="foreldet"
@@ -91,6 +97,27 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<OwnProps & DispatchPro
         >
           {foreldelseVurderingTyper.map((type) => <RadioOption key={type.kode} label={type.navn} value={type.kode} />)}
         </RadioGroupField>
+      </Column>
+      <Column md="3">
+        {(erForeldet || erMedTilleggsfrist) && (
+          <DatepickerField
+            name="foreldelsesfrist"
+            label={{ id: 'ForeldelsePeriodeForm.Foreldelsesfrist' }}
+            validate={[required]}
+            readOnly={readOnly}
+          />
+        )}
+        {erMedTilleggsfrist && (
+          <>
+            <VerticalSpacer eightPx />
+            <DatepickerField
+              name="oppdagelsesDato"
+              label={{ id: 'ForeldelsePeriodeForm.OppdagelsesDato' }}
+              validate={[required]}
+              readOnly={readOnly}
+            />
+          </>
+        )}
       </Column>
     </Row>
     <VerticalSpacer twentyPx />
@@ -125,6 +152,8 @@ const buildInitalValues = (periode: ForeldelsesresultatActivity) => ({
 });
 
 interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
   periode: ForeldelsesresultatActivity;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   oppdaterPeriode: (values: any) => void;
@@ -135,11 +164,18 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const onSubmit = (values: any) => ownProps.oppdaterPeriode(values);
   const foreldelseVurderingTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]
     .filter((fv: KodeverkMedNavn) => fv.kode !== foreldelseVurderingType.IKKE_VURDERT);
-  return () => ({
-    initialValues,
-    onSubmit,
-    foreldelseVurderingTyper,
-  });
+  return (state: any, oProps: PureOwnProps) => {
+    const { behandlingId, behandlingVersjon } = oProps;
+    const sel = behandlingFormValueSelector(FORELDELSE_PERIODE_FORM_NAME, behandlingId, behandlingVersjon);
+    const foreldet = sel(state, 'foreldet');
+    return {
+      initialValues,
+      erForeldet: foreldet && foreldet === foreldelseVurderingType.FORELDET,
+      erMedTilleggsfrist: foreldet && foreldet === foreldelseVurderingType.TILLEGGSFRIST,
+      onSubmit,
+      foreldelseVurderingTyper,
+    };
+  };
 };
 
 const ForeldelsePeriodeForm = connect(mapStateToPropsFactory)(behandlingForm({

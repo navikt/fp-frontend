@@ -50,6 +50,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
         OPPSUMMERING: 'Dette er oppsummeringen',
         '2019-10-10_2019-11-10': {
           FAKTA: 'dette er faktateksten',
+          FORELDELSE: 'dette er foreldelseteksten',
           VILKÅR: 'dette er vilkårteksten',
           SÆRLIGEGRUNNER: 'dette er særligegrunnerteksten',
           SÆRLIGEGRUNNER_ANNET: 'dette er særligegrunnerteksten for annet',
@@ -79,6 +80,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
         faktaAvsnitt: 'dette er faktateksten',
+        foreldelseAvsnitt: 'dette er foreldelseteksten',
         vilkaarAvsnitt: 'dette er vilkårteksten',
         saerligeGrunnerAvsnitt: 'dette er særligegrunnerteksten',
         saerligeGrunnerAnnetAvsnitt: 'dette er særligegrunnerteksten for annet',

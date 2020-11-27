@@ -274,6 +274,8 @@ export const transformValues = (values: any, apCode: string) => {
     tilDato: period.tom,
     begrunnelse: period.begrunnelse,
     foreldelseVurderingType: period.foreldet,
+    foreldelsesfrist: period.foreldelsesfrist,
+    oppdagelsesDato: period.oppdagelsesDato,
   }));
   return [{
     foreldelsePerioder,
