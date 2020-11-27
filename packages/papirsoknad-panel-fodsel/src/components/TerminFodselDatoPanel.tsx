@@ -162,15 +162,15 @@ TerminFodselDatoPanelImpl.defaultProps = {
   erForeldrepenger: false,
 };
 
-const mapStateToProps = (state: any, initialProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
   erBarnetFodt: formValueSelector(initialProps.form)(state, 'erBarnetFodt'),
 });
 
 const TerminFodselDatoPanel = connect(mapStateToProps)(TerminFodselDatoPanelImpl);
 
-const getToday = () => moment().startOf('day');
-const getEarliestTerminDato = () => getToday().subtract(3, 'weeks');
-const getLatestTerminbekreftelseDato = (termindato: string) => {
+const getToday = (): moment.Moment => moment().startOf('day');
+const getEarliestTerminDato = (): moment.Moment => getToday().subtract(3, 'weeks');
+const getLatestTerminbekreftelseDato = (termindato: string): moment.Moment => {
   const earliestTerminDato = getEarliestTerminDato();
   const actualTermindato = termindato ? moment(termindato, ISO_DATE_FORMAT) : undefined;
   const today = getToday();
@@ -180,7 +180,7 @@ const getLatestTerminbekreftelseDato = (termindato: string) => {
   return today;
 };
 
-const validateTermin = (values: FormValues) => ({
+const validateTermin = (values: FormValues): any => ({
   termindato: required(values.termindato) || hasValidDate(values.termindato),
 
   terminbekreftelseDato: (

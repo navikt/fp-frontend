@@ -33,7 +33,7 @@ export type FormValues = {
 } & OppholdFormValues & FodselFormValues;
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
+  buildInitialValues?: () => FormValues;
   validate?: (values: FormValues, sokerPersonnummer: string) => any;
 }
 
@@ -77,12 +77,12 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   </Row>
 );
 
-RegistreringFodselGrid.buildInitialValues = () => ({
+RegistreringFodselGrid.buildInitialValues = (): FormValues => ({
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   [OMSORG_FORM_NAME_PREFIX]: {},
 });
 
-RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string) => ({
+RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string): any => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
   ...FodselPapirsoknadIndex.validate(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.rettigheter, values.foedselsDato),

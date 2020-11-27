@@ -73,7 +73,7 @@ export const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> &
   </PeriodFieldArray>
 );
 
-RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]) => {
+RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]): any => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
@@ -105,7 +105,7 @@ RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]) => {
   return null;
 };
 
-RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string) => values.map((ytelsePeriode) => ({
+RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): any => values.map((ytelsePeriode) => ({
   ytelseType,
   periodeFom: ytelsePeriode.periodeFom,
   periodeTom: ytelsePeriode.periodeTom,

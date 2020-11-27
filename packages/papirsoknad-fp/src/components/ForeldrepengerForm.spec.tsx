@@ -26,6 +26,7 @@ describe('<ForeldrepengerForm>', () => {
       valuesForRegisteredFieldsOnly={{}}
       annenForelderInformertRequired
       sokerHarAleneomsorg
+      validate={sinon.spy()}
     />);
     expect(wrapper.find(FodselPapirsoknadIndex)).has.length(1);
   });
@@ -41,6 +42,7 @@ describe('<ForeldrepengerForm>', () => {
       valuesForRegisteredFieldsOnly={{}}
       annenForelderInformertRequired
       sokerHarAleneomsorg
+      validate={sinon.spy()}
     />);
     expect(wrapper.find(OmsorgOgAdopsjonPapirsoknadIndex)).has.length(1);
   });

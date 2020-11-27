@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { formValueSelector, FieldArray } from 'redux-form';
+import { FieldArray } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
@@ -21,7 +20,6 @@ interface OwnProps {
   sokForFrilans?: boolean;
   sokForArbeidsgiver?: boolean;
   formName: string;
-  namePrefix: string;
 }
 
 interface StaticFunctions {
@@ -38,7 +36,7 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-export const BehovForTilretteleggingPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   sokForSelvstendigNaringsdrivende,
   sokForFrilans,
@@ -115,12 +113,6 @@ export const BehovForTilretteleggingPanelImpl: FunctionComponent<OwnProps> & Sta
     </SkjemaGruppe>
   </BorderBox>
 );
-
-const mapStateToProps = (state: any, ownProps: OwnProps) => ({
-  ...formValueSelector(ownProps.formName)(state, ownProps.namePrefix),
-});
-
-const BehovForTilretteleggingPanel = connect(mapStateToProps)(BehovForTilretteleggingPanelImpl);
 
 BehovForTilretteleggingPanel.buildInitialValues = () => ({
   [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],

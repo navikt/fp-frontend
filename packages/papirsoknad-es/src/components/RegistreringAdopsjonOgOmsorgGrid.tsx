@@ -26,7 +26,7 @@ export type FormValues = {
 } & OppholdFormValues;
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
+  buildInitialValues?: () => FormValues;
   validate?: (values: FormValues, sokerPersonnummer: string) => any;
 }
 
@@ -70,12 +70,12 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
   </Row>
 );
 
-RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
+RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = (): FormValues => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
 });
 
-RegistreringAdopsjonOgOmsorgGrid.validate = (values: FormValues, sokerPersonnummer: string) => ({
+RegistreringAdopsjonOgOmsorgGrid.validate = (values: FormValues, sokerPersonnummer: string): any => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.rettigheter, values.foedselsDato),
   [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),

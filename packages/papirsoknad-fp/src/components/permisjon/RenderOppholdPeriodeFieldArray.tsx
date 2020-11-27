@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
@@ -23,7 +23,7 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
 
-const mapTyper = (typer: KodeverkMedNavn[]) => typer
+const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeÅrsaker.includes(kode))
