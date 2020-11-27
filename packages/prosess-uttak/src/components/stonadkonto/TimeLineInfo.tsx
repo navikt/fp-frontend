@@ -9,7 +9,9 @@ import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidTyp
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer } from '@fpsak-frontend/types';
+import {
+  AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, UttakStonadskontoer,
+} from '@fpsak-frontend/types';
 
 import lagVisningsNavn from '../../utils/uttakVisningsnavnHelper';
 import TimeLineTab, { CustomStonadskonto } from './TimeLineTab';
@@ -40,16 +42,16 @@ const findAntallUkerOgDager = (saldo: number) => {
   };
 };
 
-const createTextStrings = (arbforhold: AktivitetIdentifikator): ReactNode | string => {
+const createTextStrings = (arbforhold: AktivitetIdentifikator, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactNode | string => {
   const {
-    arbeidsgiver, uttakArbeidType,
+    arbeidsgiverReferanse, uttakArbeidType,
   } = arbforhold;
 
   if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
     return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
   }
-  if (arbeidsgiver) {
-    return lagVisningsNavn(arbeidsgiver);
+  if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
+    return lagVisningsNavn(arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]);
   }
 
   return <FormattedMessage id="RenderUttakTable.ArbeidType.ANNET" />;
@@ -58,6 +60,7 @@ const createTextStrings = (arbforhold: AktivitetIdentifikator): ReactNode | stri
 interface OwnProps {
   stonadskonto?: UttakStonadskontoer['stonadskontoer'];
   maksDatoUttak?: string;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface OwnState {
@@ -99,6 +102,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
     const {
       stonadskonto,
       maksDatoUttak = '',
+      arbeidsgiverOpplysningerPerId,
     } = this.props;
     const {
       aktiv,
@@ -130,11 +134,12 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
     }
 
     const createKey = (arbeidsforhold: AktivitetSaldo) => {
-      const { uttakArbeidType, arbeidsgiver, arbeidsforholdId } = arbeidsforhold.aktivitetIdentifikator;
+      const { uttakArbeidType, arbeidsgiverReferanse, arbeidsforholdId } = arbeidsforhold.aktivitetIdentifikator;
+      const arbeidsgiverOpplysninger = arbeidsgiverReferanse ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse] : undefined;
       let arbKey = uttakArbeidType.kode;
-      arbKey = arbeidsgiver ? `${arbKey} ${arbeidsgiver.navn}` : arbKey;
+      arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.navn}` : arbKey;
       arbKey = arbeidsforholdId ? `${arbKey} ${arbeidsforholdId}` : arbKey;
-      arbKey = arbeidsgiver ? `${arbKey} ${arbeidsgiver.identifikator}` : arbKey;
+      arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.identifikator}` : arbKey;
       arbKey = `${arbKey} ${arbeidsforhold.saldo}`;
       return arbKey;
     };
@@ -192,7 +197,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
                         {updatekonto.kontoinfo.aktivitetSaldoDtoList.map((arbforhold) => (
                           <TableRow key={createKey(arbforhold)}>
                             <TableColumn>
-                              <Normaltekst>{createTextStrings(arbforhold.aktivitetIdentifikator)}</Normaltekst>
+                              <Normaltekst>{createTextStrings(arbforhold.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId)}</Normaltekst>
                             </TableColumn>
                             <TableColumn>
                               <Normaltekst>

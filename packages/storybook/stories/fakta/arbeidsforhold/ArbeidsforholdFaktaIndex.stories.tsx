@@ -19,13 +19,12 @@ const behandling = {
 } as Behandling;
 
 const arbeidsforhold = {
-  navn: 'Vy',
   kilde: {
     navn: arbeidsforholdKilder.INNTEKTSMELDING,
     kodeverk: '',
   },
   id: '1',
-  arbeidsgiverIdentifikator: '11212',
+  arbeidsgiverReferanse: '11212',
   tilVurdering: false,
   erEndret: false,
   mottattDatoInntektsmelding: '2019-01-01',
@@ -33,12 +32,29 @@ const arbeidsforhold = {
   tomDato: '2019-01-01',
   stillingsprosent: 100,
   arbeidsforholdId: '1234',
-  arbeidsgiverIdentifiktorGUI: '23232',
   kanOppretteNyttArbforFraIM: false,
 };
 
 const merknaderFraBeslutter = {
   notAccepted: false,
+};
+
+const arbeidsgiverOpplysningerPerId = {
+  11212: {
+    erPrivatPerson: false,
+    identifikator: '23232',
+    navn: 'Vy',
+  },
+  999999999: {
+    erPrivatPerson: false,
+    identifikator: '999999999',
+    navn: 'KIWI',
+  },
+  999999998: {
+    erPrivatPerson: false,
+    identifikator: '999999998',
+    navn: 'REMA 1000',
+  },
 };
 
 const standardFaktaProps = {
@@ -91,6 +107,7 @@ export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -119,6 +136,7 @@ export const visAksjonspunktForIngenArbeidsforholdRegistrert = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -133,6 +151,7 @@ export const visPanelUtenAksjonspunkter = () => (
     aksjonspunkter={[]}
     alleKodeverk={alleKodeverk as any}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -174,6 +193,7 @@ export const visPanelForPermisjon = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -224,6 +244,7 @@ export const visPanelForFlerePermisjoner = () => (
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -237,5 +258,6 @@ export const visPanelForFlereArbeidsforholdMedAksjonspunkt = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

@@ -25,6 +25,16 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
+type FormValues = {
+  begrunnelse?: string;
+  id?: string;
+  resultat?: string;
+  dokumentertePerioder?: {
+    fom: string;
+    tom: string;
+  }[];
+}
+
 interface PureOwnProps {
   fieldId: string;
   updatePeriode: (...args: any[]) => any;
@@ -44,6 +54,9 @@ interface MappedOwnProps {
   resultat?: string;
   updated: boolean;
   bekreftet: boolean;
+  initialValues: FormValues;
+  form: string;
+  onSubmit: (values: FormValues) => any;
 }
 
 // TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
@@ -69,7 +82,7 @@ export const InnleggelsePeriode: FunctionComponent<PureOwnProps & MappedOwnProps
     && formProps.submitFailed
     && formSyncErrors.dokumentertePerioder.length - 1 > 0
   ) {
-    formSyncErrors.dokumentertePerioder.forEach((error: any) => {
+    formSyncErrors.dokumentertePerioder.forEach((error) => {
       errorHeight
         += error !== undefined && error.fom[0].id === 'ValidationMessage.NotEmpty'
           ? 30
@@ -171,12 +184,12 @@ InnleggelsePeriode.defaultProps = {
   formSyncErrors: { dokumentertePerioder: [] },
 };
 
-const validateInnleggelseForm = (values: any) => {
+const validateInnleggelseForm = (values: FormValues) => {
   const errors = {
     dokumentertePerioder: [],
   };
   if (values && values.dokumentertePerioder) {
-    values.dokumentertePerioder.forEach((periode: any, index: any) => {
+    values.dokumentertePerioder.forEach((periode, index) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
       if (invalid) {
         errors.dokumentertePerioder[index] = {
@@ -205,7 +218,7 @@ const buildInitialValues = createSelector([
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
   (_state: any, ownProps: PureOwnProps) => ownProps.id],
-(begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
+(begrunnelse, initialResultat, initialDokumentertePerioder, id): FormValues => ({
   begrunnelse,
   id,
   resultat: initialResultat ? initialResultat.kode : undefined,
@@ -218,9 +231,9 @@ const buildInitialValues = createSelector([
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `innleggelseForm-${initialOwnProps.id}`;
-  const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
+  const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode(values);
 
-  return (state: any, ownProps: PureOwnProps) => ({
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
     dokumentertePerioder: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'dokumentertePerioder'),
     resultat: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat'),
@@ -235,5 +248,5 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
 // @ts-ignore Dynamisk navn på form
 export default connect(mapStateToPropsFactory)(behandlingForm({
   enableReinitialize: true,
-  validate: (values) => validateInnleggelseForm(values),
+  validate: (values: FormValues) => validateInnleggelseForm(values),
 })(InnleggelsePeriode));

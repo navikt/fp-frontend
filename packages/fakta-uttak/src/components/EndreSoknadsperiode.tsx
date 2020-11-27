@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import { ArrowBox, FlexColumn, FlexRow } from '@fpsak-frontend/shared-components';
 import { DecimalField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
@@ -14,7 +14,7 @@ import styles from './perioder/periodeTyper.less';
 const maxValue100 = maxValue(100);
 const minValue1 = minValue(1);
 
-const selectValues = () => Object.keys(stonadskontoType)
+const selectValues = (): ReactElement[] => Object.keys(stonadskontoType)
   .map((key) => (<option key={key} value={key}>{uttakPeriodeNavn[key]}</option>));
 
 const gyldigeÅrsaker = [
@@ -23,7 +23,7 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
 
-const mapPeriodeTyper = () => Object.keys(oppholdArsakType)
+const mapPeriodeTyper = (): ReactElement[] => Object.keys(oppholdArsakType)
   .filter((key) => gyldigeÅrsaker.includes(key))
   .map((key) => (<option key={key} value={key}>{oppholdArsakKontoNavn[key]}</option>));
 

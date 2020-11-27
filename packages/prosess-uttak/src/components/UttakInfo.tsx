@@ -13,7 +13,7 @@ import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidTyp
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { PeriodeMedClassName } from './Uttak';
 import styles from './uttakActivity.less';
@@ -44,20 +44,20 @@ const periodeIsInnvilget = (periode: PeriodeMedClassName) => {
   return false;
 };
 
-const gradertArbforhold = (selectedItem: PeriodeMedClassName) => {
+const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   let arbeidsforhold = '';
   if (selectedItem.gradertAktivitet) {
     const {
-      arbeidsgiver, uttakArbeidType,
+      arbeidsgiverReferanse, uttakArbeidType,
     } = selectedItem.gradertAktivitet;
 
     if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
       return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
     }
-    if (arbeidsgiver) {
+    if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const {
         navn, identifikator,
-      } = arbeidsgiver;
+      } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
       arbeidsforhold = navn ? `${navn}` : arbeidsforhold;
       arbeidsforhold = identifikator ? `${arbeidsforhold} (${identifikator})` : arbeidsforhold;
     }
@@ -134,6 +134,7 @@ interface OwnProps {
   graderingInnvilget?: boolean;
   erSamtidigUttak?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -149,6 +150,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
   harSoktOmFlerbarnsdager,
   oppholdArsakTyper,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
 
@@ -290,7 +292,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
             </Row>
             <Row>
               <Column xs="12">
-                {gradertArbforhold(selectedItemData)}
+                {gradertArbforhold(selectedItemData, arbeidsgiverOpplysningerPerId)}
               </Column>
             </Row>
             {visGraderingIkkeInnvilget(selectedItemData, readOnly, graderingInnvilget) && (

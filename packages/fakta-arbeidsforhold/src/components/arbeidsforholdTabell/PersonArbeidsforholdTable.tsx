@@ -7,7 +7,8 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
@@ -24,32 +25,37 @@ const headerColumnContent = [
 
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledNavn = (arbeidsforhold: Arbeidsforhold): string => {
+const utledNavn = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+  const navn = arbeidsforhold.navn ? arbeidsforhold.navn : arbeidsgiverOpplysninger?.navn;
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
-    return arbeidsforhold.navn;
+    return navn;
   }
   return arbeidsforhold.arbeidsforholdId
-    ? `${arbeidsforhold.navn}(${arbeidsforhold.arbeidsgiverIdentifiktorGUI})${getEndCharFromId(arbeidsforhold.eksternArbeidsforholdId)}`
-    : `${arbeidsforhold.navn}(${arbeidsforhold.arbeidsgiverIdentifiktorGUI})`;
+    ? `${navn}(${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(arbeidsforhold.eksternArbeidsforholdId)}`
+    : `${navn}(${arbeidsgiverOpplysninger.identifikator})`;
 };
 
-export const utledNøkkel = (arbeidsforhold: Arbeidsforhold): string => {
+export const utledNøkkel = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
-    return arbeidsforhold.navn;
+    return arbeidsforhold.navn ? arbeidsforhold.navn : arbeidsgiverOpplysninger?.navn;
   }
-  return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsforholdId}${arbeidsforhold.arbeidsgiverIdentifiktorGUI}`;
+  return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsforholdId}${arbeidsgiverOpplysninger.identifikator}`;
 };
 
 interface OwnProps {
-  alleArbeidsforhold: Arbeidsforhold[];
+  alleArbeidsforhold: CustomArbeidsforhold[];
   selectedId?: string;
-  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: string, model: Arbeidsforhold) => void;
+  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: string, model: CustomArbeidsforhold) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
   alleArbeidsforhold,
   selectedId,
   selectArbeidsforholdCallback,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   if (alleArbeidsforhold.length === 0) {
     return (
@@ -63,10 +69,10 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
     <Table headerColumnContent={headerColumnContent}>
       {alleArbeidsforhold && alleArbeidsforhold.map((a) => {
         const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
-        const navn = utledNavn(a);
+        const navn = utledNavn(a, arbeidsgiverOpplysningerPerId);
         return (
           <TableRow
-            key={utledNøkkel(a)}
+            key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
             model={a}
             onMouseDown={selectArbeidsforholdCallback}
             onKeyDown={selectArbeidsforholdCallback}

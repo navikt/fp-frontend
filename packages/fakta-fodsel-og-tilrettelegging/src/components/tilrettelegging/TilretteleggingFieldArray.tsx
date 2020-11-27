@@ -17,6 +17,7 @@ import {
 } from '@fpsak-frontend/utils';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import { Kodeverk } from '@fpsak-frontend/types';
+import Permisjon from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging/src/types/permisjonTsType';
 
 import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
 import { skalTaHensynTilPermisjon, finnPermisjonFieldName } from './VelferdspermisjonSection';
@@ -26,8 +27,11 @@ import styles from './tilretteleggingFieldArray.less';
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
-export const finnUtbetalingsgradForTilrettelegging = (stillingsprosentArbeidsforhold: number,
-  velferdspermisjonprosent: number, stillingsprosent?: number): string => {
+export const finnUtbetalingsgradForTilrettelegging = (
+  stillingsprosentArbeidsforhold: number,
+  velferdspermisjonprosent: number,
+  stillingsprosent?: number,
+): string => {
   const effektivStillingsprosent = stillingsprosentArbeidsforhold - velferdspermisjonprosent;
   const defaultUtbetalingsgrad = effektivStillingsprosent <= 0 ? 0 : 100 * (1 - (stillingsprosent / effektivStillingsprosent));
   return defaultUtbetalingsgrad > 0 ? defaultUtbetalingsgrad.toFixed(2) : '0';
@@ -38,20 +42,24 @@ interface TilretteleggingDato {
   stillingsprosent: number;
 }
 
-interface OwnProps {
+interface PureOwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta?: FieldArrayMetaProps;
   readOnly: boolean;
   formSectionName: string;
   erOverstyrer: boolean;
   changeField: (field: string, value: string) => void;
-  tilretteleggingDatoer: TilretteleggingDato[];
   stillingsprosentArbeidsforhold: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
-  velferdspermisjonprosent: number;
   behandlingId: number;
   behandlingVersjon: number;
   formName: string;
+  velferdspermisjoner: Permisjon[];
+}
+
+interface MappedOwnProps {
+  tilretteleggingDatoer: TilretteleggingDato[];
+  velferdspermisjonprosent: number;
 }
 
 /**
@@ -59,7 +67,7 @@ interface OwnProps {
  *
  * Viser inputfelter for tilrettelegging av arbeidsforhold for selvstendig næringsdrivende eller frilans.
  */
-export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
   intl,
   fields,
   meta,
@@ -202,7 +210,7 @@ export const TilretteleggingFieldArray: FunctionComponent<OwnProps & WrappedComp
   </PeriodFieldArray>
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => {
   const {
     behandlingId, behandlingVersjon, formSectionName, velferdspermisjoner, formName,
   } = ownProps;

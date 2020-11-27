@@ -7,11 +7,14 @@ import { behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { omit } from '@fpsak-frontend/utils';
-import { Aksjonspunkt, Arbeidsforhold, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import { InjectedFormProps } from 'redux-form';
 import BekreftOgForsettKnapp from './BekreftOgForsettKnapp';
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
+import CustomArbeidsforhold from '../typer/CustomArbeidsforholdTsType';
 
 // ----------------------------------------------------------------------------
 // VARIABLES
@@ -23,15 +26,16 @@ const formName = 'ArbeidsforholdInfoPanel';
 // METHODS
 // ----------------------------------------------------------------------------
 
-export const fjernIdFraArbeidsforholdLagtTilAvSaksbehandler = (arbeidsforhold: Arbeidsforhold[]) => arbeidsforhold.map((a: Arbeidsforhold) => {
-  if (a.lagtTilAvSaksbehandler === true) {
-    return {
-      ...a,
-      id: null,
-    };
-  }
-  return a;
-});
+export const fjernIdFraArbeidsforholdLagtTilAvSaksbehandler = (arbeidsforhold: Arbeidsforhold[]): Arbeidsforhold[] => arbeidsforhold
+  .map((a: Arbeidsforhold) => {
+    if (a.lagtTilAvSaksbehandler === true) {
+      return {
+        ...a,
+        id: null,
+      };
+    }
+    return a;
+  });
 
 const harAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCode);
@@ -47,6 +51,7 @@ interface PureOwnProps {
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -63,6 +68,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
   alleKodeverk,
   behandlingId,
   behandlingVersjon,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <>
@@ -84,6 +90,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
         alleKodeverk={alleKodeverk}
         behandlingId={behandlingId}
         behandlingVersjon={behandlingVersjon}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       { harAksjonspunkt(aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD, aksjonspunkter) && (
       <BekreftOgForsettKnapp
@@ -98,17 +105,18 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
 );
 
 type FormValues = {
-  arbeidsforhold: any;
+  arbeidsforhold: CustomArbeidsforhold[];
 }
 
 const buildInitialValues = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.arbeidsforhold],
-  (arbeidsforhold): FormValues => ({
-    ...PersonArbeidsforholdPanel.buildInitialValues(arbeidsforhold),
+  [(ownProps: PureOwnProps) => ownProps.arbeidsforhold,
+    (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId],
+  (arbeidsforhold, arbeidsgiverOpplysningerPerId): FormValues => ({
+    ...PersonArbeidsforholdPanel.buildInitialValues(arbeidsforhold, arbeidsgiverOpplysningerPerId),
   }),
 );
 
-const transformValues = (values: FormValues) => {
+const transformValues = (values: FormValues): any => {
   const arbeidsforhold = fjernIdFraArbeidsforholdLagtTilAvSaksbehandler(values.arbeidsforhold);
   return {
     arbeidsforhold: arbeidsforhold.map((a) => omit(a,

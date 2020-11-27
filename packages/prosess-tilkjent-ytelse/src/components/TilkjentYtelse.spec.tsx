@@ -6,6 +6,14 @@ import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper
 import { PeriodeMedId, TilkjentYtelse } from './TilkjentYtelse';
 
 describe('<TilkjentYtelse>', () => {
+  const arbeidsgiverOpplysningerPerId = {
+    1: {
+      erPrivatPerson: false,
+      identifikator: '973861778',
+      navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
+    },
+  };
+
   it('skall innehålla korrekt antal felter', () => {
     const wrapper = shallow(<TilkjentYtelse
       items={[{
@@ -14,7 +22,7 @@ describe('<TilkjentYtelse>', () => {
         fom: '2018-02-02',
         dagsats: 2300,
         andeler: [{
-          arbeidsgiverOrgnr: '973861778',
+          arbeidsgiverReferanse: '1',
           refusjon: 0,
           sisteUtbetalingsdato: '2018-03-31',
           tilSoker: 1846,
@@ -32,6 +40,7 @@ describe('<TilkjentYtelse>', () => {
       intl={intlMock}
       isSoknadSvangerskapspenger={false}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(TimeLineSokerEnsamSoker)).to.have.length(1);
     expect(wrapper.find(TimeLineSokerEnsamSoker).props().hovedsokerKjonnKode).to.equal('K');

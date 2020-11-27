@@ -55,7 +55,7 @@ const perioder = [{
   erArbeidstaker: true,
   samtidigUttak: false,
   flerbarnsdager: false,
-  arbeidsgiver: {},
+  arbeidsgiverReferanse: '',
 }] as CustomUttakKontrollerFaktaPerioder[];
 
 const openSlettPeriodeModalCallback = sinon.spy();
@@ -93,6 +93,7 @@ describe('<UttakPeriode>', () => {
       }}
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const uttakPeriodeType = wrapper.find(UttakPeriodeType);
     expect(uttakPeriodeType).to.have.length(2);
@@ -124,6 +125,7 @@ describe('<UttakPeriode>', () => {
       }}
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
@@ -154,6 +156,7 @@ describe('<UttakPeriode>', () => {
       }}
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
@@ -188,6 +191,7 @@ describe('<UttakPeriode>', () => {
       }}
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
+      arbeidsgiverOpplysningerPerId={{}}
       {...otherProps}
     />);
 

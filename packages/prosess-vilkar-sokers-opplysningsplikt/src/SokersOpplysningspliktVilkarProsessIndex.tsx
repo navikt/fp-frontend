@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-import { Soknad } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Soknad } from '@fpsak-frontend/types';
 
 import SokersOpplysningspliktForm from './components/SokersOpplysningspliktForm';
 import messages from '../i18n/nb_NO.json';
@@ -16,6 +16,7 @@ const intl = createIntl({
 
 interface OwnProps {
   soknad: Soknad;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
@@ -27,6 +28,7 @@ const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & Sta
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <SokersOpplysningspliktForm
@@ -40,6 +42,7 @@ const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & Sta
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );

@@ -1,10 +1,9 @@
-import Arbeidsgiver from './arbeidsgiverTsType';
 import Kodeverk from './kodeverkTsType';
 
 export type AktivitetIdentifikator = Readonly<{
   uttakArbeidType: Kodeverk;
-  arbeidsgiver: Arbeidsgiver;
   arbeidsforholdId?: string;
+  arbeidsgiverReferanse: string;
 }>
 
 export type AktivitetSaldo = Readonly<{

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
@@ -12,27 +12,30 @@ import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsa
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
-import { BeregningsresultatPeriodeAndel, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import { PeriodeMedId } from './TilkjentYtelse';
 import styles from './tilkjentYtelse.less';
 
-const getEndCharFromId = (id: string) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const createVisningNavnForUttakArbeidstaker = (andel: BeregningsresultatPeriodeAndel, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
-  if (!andel.arbeidsgiverOrgnr) {
-    return <FormattedMessage id="TilkjentYtelse.PeriodeData.Arbeidstaker" />;
-  }
-
-  if (!andel.arbeidsgiverNavn) {
+const createVisningNavnForUttakArbeidstaker = (
+  andel: BeregningsresultatPeriodeAndel,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
+  if (!arbeidsgiverOpplysninger || !arbeidsgiverOpplysninger.navn) {
     return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType) : '';
   }
-  return andel.arbeidsgiverOrgnr
-    ? `${andel.arbeidsgiverNavn} (${andel.arbeidsgiverOrgnr})${getEndCharFromId(andel.eksternArbeidsforholdId)}`
-    : andel.arbeidsgiverNavn;
+  return arbeidsgiverOpplysninger.erPrivatPerson
+    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
+    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(andel.eksternArbeidsforholdId)}`;
 };
 
-const tableHeaderTextCodes = (isFagsakSVP = false) => {
+const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
   if (isFagsakSVP) {
     return ([
       'TilkjentYtelse.PeriodeData.Andel',
@@ -53,10 +56,14 @@ const tableHeaderTextCodes = (isFagsakSVP = false) => {
   ]);
 };
 
-const findAndelsnavn = (andel: BeregningsresultatPeriodeAndel, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+const findAndelsnavn = (
+  andel: BeregningsresultatPeriodeAndel,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | string => {
   switch (andel.aktivitetStatus.kode) {
     case aktivitetStatus.ARBEIDSTAKER:
-      return createVisningNavnForUttakArbeidstaker(andel, getKodeverknavn);
+      return createVisningNavnForUttakArbeidstaker(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId);
     case aktivitetStatus.FRILANSER:
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Frilans" />;
     case aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
@@ -75,7 +82,7 @@ const findAndelsnavn = (andel: BeregningsresultatPeriodeAndel, getKodeverknavn: 
   }
 };
 
-const getGradering = (andel?: BeregningsresultatPeriodeAndel) => {
+const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | null => {
   if (andel === undefined) {
     return null;
   }
@@ -97,6 +104,7 @@ interface OwnProps {
   callbackBackward: (...args: any[]) => any;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   isSoknadSvangerskapspenger: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -112,6 +120,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   callbackBackward,
   alleKodeverk,
   isSoknadSvangerskapspenger,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemStartDate, selectedItemEndDate);
   const intl = useIntl();
@@ -180,7 +189,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
               {selectedItemData.andeler.map((andel, index: number) => (
                 <TableRow key={`index${index + 1}`}>
-                  <TableColumn>{findAndelsnavn(andel, getKodeverknavn)}</TableColumn>
+                  <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
                   {!isSoknadSvangerskapspenger && (
                     <TableColumn><Normaltekst>{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</Normaltekst></TableColumn>
                   )}

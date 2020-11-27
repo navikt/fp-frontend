@@ -1,18 +1,18 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 import Permisjon from './permisjonTsType';
 
+export type ArbeidsforholdTilretteleggingDato = Readonly<{
+  fom: string;
+  type: Kodeverk;
+  stillingsprosent?: number;
+  overstyrtUtbetalingsgrad?: number;
+}>
+
 type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingId: number;
   tilretteleggingBehovFom: string;
-  tilretteleggingDatoer: {
-    fom: string;
-    type: Kodeverk;
-    stillingsprosent?: number;
-    overstyrtUtbetalingsgrad?: boolean;
-  }[];
-  arbeidsgiverNavn: string;
-  arbeidsgiverIdent?: string;
-  arbeidsgiverIdentVisning?: string;
+  tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[];
+  arbeidsgiverReferanse: string;
   opplysningerOmRisiko?: string;
   opplysningerOmTilrettelegging?: string;
   internArbeidsforholdReferanse?: string;

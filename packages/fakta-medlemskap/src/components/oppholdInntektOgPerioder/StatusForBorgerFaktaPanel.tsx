@@ -10,24 +10,40 @@ import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsa
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
 
-export type PeriodeMedId = MedlemPeriode & { id: number; }
+export type PeriodeMedId = MedlemPeriode & { id: string; }
 
-interface OwnProps {
-  readOnly: boolean;
+export type FormValues = {
+  oppholdsrettVurdering?: boolean;
+  lovligOppholdVurdering?: boolean;
   erEosBorger?: boolean;
-  isBorgerAksjonspunktClosed: boolean;
-  apKode: string;
+  isBorgerAksjonspunktClosed?: boolean;
+  apKode?: string;
+}
+
+type TransformedValues = {
+  kode: string;
+  oppholdsrettVurdering: boolean;
+  lovligOppholdVurdering: boolean;
+  erEosBorger: boolean;
+}
+
+interface PureOwnProps {
+  id: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+  readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
+interface MappedOwnProps {
+  erEosBorger?: boolean;
+  isBorgerAksjonspunktClosed: boolean;
+  apKode: string;
+}
+
 interface StaticFunctions {
-  buildInitialValues?: (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => any,
-  transformValues?: (values: any, aksjonspunkter: Aksjonspunkt[]) => {
-    kode: string;
-    oppholdsrettVurdering: string;
-    lovligOppholdVurdering: boolean;
-    erEosBorger: boolean;
-  }
+  buildInitialValues?: (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  transformValues?: (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => TransformedValues;
 }
 
 /**
@@ -35,7 +51,7 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av borgerstatus (Medlemskapsvilkåret).
  */
-const StatusForBorgerFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   erEosBorger,
   isBorgerAksjonspunktClosed,
@@ -112,43 +128,37 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctio
   </FaktaGruppe>
 );
 
-interface PureOwnProps {
-  id: number;
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   ...behandlingFormValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
     'erEosBorger', 'isBorgerAksjonspunktClosed', 'apKode'),
 });
 
 const StatusForBorgerFaktaPanel = connect(mapStateToProps)(StatusForBorgerFaktaPanelImpl);
 
-const getApKode = (aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter
-  .map((ap: Aksjonspunkt) => ap.definisjon.kode)
-  .filter((kode: string) => kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || kode === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)[0];
+const getApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
+  .map((ap) => ap.definisjon.kode)
+  .filter((kode) => kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || kode === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)[0];
 
-const getEosBorger = (periode: any, aksjonspunkter: Aksjonspunkt[]) => (periode.erEosBorger || periode.erEosBorger === false
+const getEosBorger = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]): boolean => (periode.erEosBorger || periode.erEosBorger === false
   ? periode.erEosBorger
   : aksjonspunkter.some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
 
-const getOppholdsrettVurdering = (periode: PeriodeMedId) => (periode.oppholdsrettVurdering
+const getOppholdsrettVurdering = (periode: PeriodeMedId): boolean | undefined => (periode.oppholdsrettVurdering
 || periode.oppholdsrettVurdering === false ? periode.oppholdsrettVurdering : undefined);
 
-const getLovligOppholdVurdering = (periode: PeriodeMedId) => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
+const getLovligOppholdVurdering = (periode: PeriodeMedId): boolean | undefined => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
   ? periode.lovligOppholdVurdering : undefined);
 
-StatusForBorgerFaktaPanel.buildInitialValues = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => {
+StatusForBorgerFaktaPanel.buildInitialValues = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   const erEosBorger = getEosBorger(periode, aksjonspunkter);
 
   const closedAp = aksjonspunkter
-    .filter((ap: Aksjonspunkt) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+    .filter((ap) => periode.aksjonspunkter.includes(ap.definisjon.kode)
       || (periode.aksjonspunkter.length > 0
-        && periode.aksjonspunkter.some((pap: any) => pap === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT
+        && periode.aksjonspunkter.some((pap) => pap === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT
           || pap === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)
         && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP))
-    .filter((ap: Aksjonspunkt) => !isAksjonspunktOpen(ap.status.kode));
+    .filter((ap) => !isAksjonspunktOpen(ap.status.kode));
 
   return {
     erEosBorger,
@@ -159,7 +169,7 @@ StatusForBorgerFaktaPanel.buildInitialValues = (periode: PeriodeMedId, aksjonspu
   };
 };
 
-StatusForBorgerFaktaPanel.transformValues = (values: any, aksjonspunkter: Aksjonspunkt[]) => ({
+StatusForBorgerFaktaPanel.transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): TransformedValues => ({
   kode: getApKode(aksjonspunkter),
   oppholdsrettVurdering: values.oppholdsrettVurdering,
   lovligOppholdVurdering: values.lovligOppholdVurdering,

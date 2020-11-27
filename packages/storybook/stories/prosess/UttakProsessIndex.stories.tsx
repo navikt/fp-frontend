@@ -103,13 +103,7 @@ const uttakStonadskontoer = {
               kode: 'ORDINÆRT_ARBEID',
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
-            arbeidsgiver: {
-              identifikator: '910909088',
-              aktørId: null,
-              fødselsdato: null,
-              navn: 'BEDRIFT AS',
-              virksomhet: true,
-            },
+            arbeidsgiverReferanse: '910909088',
             arbeidsforholdId: null,
           },
           saldo: 50,
@@ -129,13 +123,7 @@ const uttakStonadskontoer = {
               kode: 'ORDINÆRT_ARBEID',
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
-            arbeidsgiver: {
-              identifikator: '910909088',
-              aktørId: null,
-              fødselsdato: null,
-              navn: 'BEDRIFT AS',
-              virksomhet: true,
-            },
+            arbeidsgiverReferanse: '910909088',
             arbeidsforholdId: null,
           },
           saldo: 35,
@@ -155,13 +143,7 @@ const uttakStonadskontoer = {
               kode: 'ORDINÆRT_ARBEID',
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
-            arbeidsgiver: {
-              identifikator: '910909088',
-              aktørId: null,
-              fødselsdato: null,
-              navn: 'BEDRIFT AS',
-              virksomhet: true,
-            },
+            arbeidsgiverReferanse: '910909088',
             arbeidsforholdId: null,
           },
           saldo: 80,
@@ -181,13 +163,7 @@ const uttakStonadskontoer = {
               kode: 'ORDINÆRT_ARBEID',
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
-            arbeidsgiver: {
-              identifikator: '910909088',
-              aktørId: null,
-              fødselsdato: null,
-              navn: 'BEDRIFT AS',
-              virksomhet: true,
-            },
+            arbeidsgiverReferanse: '910909088',
             arbeidsforholdId: null,
           },
           saldo: 0,
@@ -213,13 +189,7 @@ const uttaksresultatPerioder = {
           prosentArbeid: 0,
           arbeidsforholdId: null,
           eksternArbeidsforholdId: null,
-          arbeidsgiver: {
-            identifikator: '910909088',
-            aktørId: null,
-            fødselsdato: null,
-            navn: 'BEDRIFT AS',
-            virksomhet: true,
-          },
+          arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
           uttakArbeidType: {
             kode: 'ORDINÆRT_ARBEID',
@@ -285,13 +255,7 @@ const uttaksresultatPerioder = {
           prosentArbeid: 0,
           arbeidsforholdId: null,
           eksternArbeidsforholdId: null,
-          arbeidsgiver: {
-            identifikator: '910909088',
-            aktørId: null,
-            fødselsdato: null,
-            navn: 'BEDRIFT AS',
-            virksomhet: true,
-          },
+          arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
           uttakArbeidType: {
             kode: 'ORDINÆRT_ARBEID',
@@ -357,13 +321,7 @@ const uttaksresultatPerioder = {
           prosentArbeid: 0,
           arbeidsforholdId: null,
           eksternArbeidsforholdId: null,
-          arbeidsgiver: {
-            identifikator: '910909088',
-            aktørId: null,
-            fødselsdato: null,
-            navn: 'BEDRIFT AS',
-            virksomhet: true,
-          },
+          arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
           uttakArbeidType: {
             kode: 'ORDINÆRT_ARBEID',
@@ -430,13 +388,7 @@ const uttaksresultatPerioder = {
           prosentArbeid: 0,
           arbeidsforholdId: null,
           eksternArbeidsforholdId: null,
-          arbeidsgiver: {
-            identifikator: '910909088',
-            aktørId: null,
-            fødselsdato: null,
-            navn: 'BEDRIFT AS',
-            virksomhet: true,
-          },
+          arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: null,
           uttakArbeidType: {
             kode: 'ORDINÆRT_ARBEID',
@@ -538,6 +490,14 @@ const ytelsefordeling = {
   førsteUttaksdato: '2019-10-14',
 };
 
+const arbeidsgiverOpplysningerPerId = {
+  910909088: {
+    erPrivatPerson: false,
+    identifikator: '910909088',
+    navn: 'BEDRIFT AS',
+  },
+};
+
 export const visProsessUttak = () => (
   <UttakProsessIndex
     fagsak={fagsak}
@@ -559,5 +519,6 @@ export const visProsessUttak = () => (
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
     status="test"
     vilkar={[]}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

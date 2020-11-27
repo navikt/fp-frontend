@@ -12,6 +12,7 @@ import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
+  ArbeidsgiverOpplysningerPerId,
   Behandling, Kodeverk, KodeverkMedNavn, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 import UttakActivity from './UttakActivity';
@@ -21,14 +22,20 @@ import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
 import styles from './uttakTimeLineData.less';
 import { AktivitetFieldArray } from './RenderUttakTable';
 
-const getCorrectEmptyArbeidsForhold = (getKodeverknavn: (kodeverk: Kodeverk) => string, periodeTypeKode?: string, stonadskonto?: UttakStonadskontoer) => {
+const getCorrectEmptyArbeidsForhold = (
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  periodeTypeKode?: string,
+  stonadskonto?: UttakStonadskontoer,
+) => {
   const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
   let arbeidsforholdMedPositivSaldoFinnes = false;
   if (stonadskonto && stonadskonto.stonadskontoer[periodeTypeKode] && stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList) {
     stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList.forEach((item) => {
       if (item.saldo === 0) {
-        if (item.aktivitetIdentifikator.arbeidsgiver) {
-          arbeidsForholdMedNullDagerIgjenArray.push(item.aktivitetIdentifikator.arbeidsgiver.navn);
+        if (item.aktivitetIdentifikator.arbeidsgiverReferanse) {
+          const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
+          arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger.navn);
         } else {
           arbeidsForholdMedNullDagerIgjenArray.push(getKodeverknavn(item.aktivitetIdentifikator.uttakArbeidType));
         }
@@ -46,6 +53,7 @@ const getCorrectEmptyArbeidsForhold = (getKodeverknavn: (kodeverk: Kodeverk) => 
 const hentApTekst = (
   manuellBehandlingÅrsak: Kodeverk,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto?: UttakStonadskontoer,
   periodeTypeKode?: string,
 ) => {
@@ -53,7 +61,7 @@ const hentApTekst = (
 
   // TODO: Fix - ta bort 5001 med verdi fra kodeverk
   if (manuellBehandlingÅrsak.kode === '5001') {
-    const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, periodeTypeKode, stonadskonto);
+    const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, arbeidsgiverOpplysningerPerId, periodeTypeKode, stonadskonto);
     const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
     if (arbeidsForhold.length > 1) {
       texts.push(
@@ -118,6 +126,7 @@ interface OwnProps {
   behandlingVersjon: number;
   behandlingId: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface OwnState {
@@ -230,6 +239,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       readOnly,
       selectedItemData,
       stonadskonto,
+      arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { showDelPeriodeModal } = this.state;
     const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
@@ -283,8 +293,9 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
             {selectedItemData.periodeType
-              ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, stonadskonto, selectedItemData.periodeType.kode)
-              : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, stonadskonto)}
+              ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto,
+                selectedItemData.periodeType.kode)
+              : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto)}
           </AksjonspunktHelpTextTemp>
           <VerticalSpacer twentyPx />
         </>
@@ -299,6 +310,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           behandlingId={behandlingId}
           behandlingVersjon={behandlingVersjon}
           behandlingsresultat={behandlingsresultat}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       </TimeLineDataContainer>
     );

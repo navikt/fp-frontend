@@ -7,22 +7,30 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
-import { OppholdInntektOgPeriodeForm, PeriodeMedId } from './OppholdInntektOgPeriodeForm';
+import { OppholdInntektOgPeriodeForm, PeriodeMedId, FormValues } from './OppholdInntektOgPeriodeForm';
 import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import PerioderMedMedlemskapFaktaPanel from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel from './StatusForBorgerFaktaPanel';
 
+const arbeidsgiverOpplysningerPerId = {
+  973861778: {
+    erPrivatPerson: false,
+    identifikator: '973861778',
+    navn: 'MYGG ROBUST',
+  },
+};
+
 const valgtPeriode = {
   aksjonspunkter: [],
-  id: 123,
+  id: '123',
 } as PeriodeMedId;
 
 describe('<OppholdInntektOgPeriodeForm>', () => {
   it('skal vise informasjon uten editeringsmuligheter når det ikke finnes aksjonspunkter', () => {
     const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
-      initialValues={{}}
+      initialValues={{} as FormValues}
       aksjonspunkter={[]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
@@ -33,6 +41,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(OppholdINorgeOgAdresserFaktaPanel)).has.length(1);
@@ -61,12 +71,12 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedBosattAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT],
-      id: 123,
+      id: '123',
     } as PeriodeMedId;
 
     const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{} as FormValues}
       aksjonspunkter={[bosattAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
@@ -77,6 +87,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(FaktaBegrunnelseTextField)).has.length(1);
@@ -102,12 +114,12 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
-      id: 123,
+      id: '123',
     } as PeriodeMedId;
 
     const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{} as FormValues}
       aksjonspunkter={[periodeAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
@@ -118,6 +130,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).has.length(1);
@@ -144,12 +158,12 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedOppholdsrettAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT],
-      id: 123,
+      id: '123',
     } as PeriodeMedId;
 
     const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_OPPHOLDSRETT}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{} as FormValues}
       aksjonspunkter={[oppholdsrettAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
@@ -160,6 +174,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(StatusForBorgerFaktaPanel)).has.length(1);
@@ -186,12 +202,12 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
 
     const valgtPeriodeMedLovligoppholdAksjonspunkt = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD],
-      id: 123,
+      id: '123',
     } as PeriodeMedId;
 
     const wrapper = shallow(<OppholdInntektOgPeriodeForm
       {...reduxFormPropsMock}
-      initialValues={{ [`punkt${aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD}`]: 'test', begrunnelse: 'test' }}
+      initialValues={{} as FormValues}
       aksjonspunkter={[lovligOppholdAksjonspunkt]}
       updateOppholdInntektPeriode={sinon.spy()}
       periodeResetCallback={sinon.spy()}
@@ -202,6 +218,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(StatusForBorgerFaktaPanel)).has.length(1);
