@@ -14,6 +14,27 @@ const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNari
 const frilansFieldArrayName = 'tilretteleggingFrilans';
 const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsgiver';
 
+type Tilrettelegging = {
+  tilretteleggingType: string;
+  fomDato: string;
+  stillingsprosent?: string;
+}
+
+export type FormValues = {
+  [tilretteleggingForArbeidsgiverFieldArrayName]?: {
+    behovsdato?: string;
+    organisasjonsnummer?: string;
+    tilretteleggingArbeidsgiver?: Tilrettelegging[];
+  }[];
+  sokForArbeidsgiver?: boolean;
+  sokForFrilans?: boolean;
+  behovsdatoFrilans?: string;
+  tilretteleggingFrilans?: Tilrettelegging[];
+  sokForSelvstendigNaringsdrivende?: boolean;
+  behovsdatoSN?: string;
+  tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
+}
+
 interface OwnProps {
   readOnly: boolean;
   sokForSelvstendigNaringsdrivende?: boolean;
@@ -23,12 +44,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => {
-    [tilretteleggingForArbeidsgiverFieldArrayName]: {
-      organisasjonsnummer?: string;
-      behovsdato?: string;
-    }[];
-  },
+  buildInitialValues?: () => FormValues;
 }
 
 /*
@@ -36,7 +52,7 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-export const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   sokForSelvstendigNaringsdrivende,
   sokForFrilans,
@@ -114,7 +130,7 @@ export const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticF
   </BorderBox>
 );
 
-BehovForTilretteleggingPanel.buildInitialValues = () => ({
+BehovForTilretteleggingPanel.buildInitialValues = (): FormValues => ({
   [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
 });
 

@@ -52,16 +52,16 @@ export class FodselsDatoFields extends Component<OwnPropsFieldArray> {
   };
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount(): void {
     adjustNumberOfFields(this.props);
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: OwnPropsFieldArray) {
+  UNSAFE_componentWillReceiveProps(nextProps: OwnPropsFieldArray): void {
     adjustNumberOfFields(nextProps);
   }
 
-  shouldComponentUpdate(nextProps: OwnPropsFieldArray) {
+  shouldComponentUpdate(nextProps: OwnPropsFieldArray): boolean {
     if (Number.isNaN(nextProps.antallBarn)) {
       return true;
     }
@@ -73,7 +73,7 @@ export class FodselsDatoFields extends Component<OwnPropsFieldArray> {
     return (
       <Row>
         <Column xs="6">
-          {fields.map((name, index: number) => (
+          {fields.map((name, index) => (
             <DatepickerField
               key={name}
               name={name}
@@ -101,9 +101,9 @@ interface MappedOwnProps {
 }
 
 export type FormValues = {
-  omsorgsovertakelsesdato: string;
-  antallBarn: number;
-  foedselsDato: string[];
+  omsorgsovertakelsesdato?: string;
+  antallBarn?: number;
+  foedselsDato?: string[];
 }
 
 interface StaticFunctions {

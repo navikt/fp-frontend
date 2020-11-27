@@ -17,12 +17,15 @@ import styles from './lagreSoknadPanel.less';
 
 const maxLength1500 = maxLength(1500);
 
-interface OwnProps {
+interface PureOwnProps {
   onSubmitUfullstendigsoknad: (form: string) => void;
   readOnly?: boolean;
-  ufullstendigSoeknad?: boolean;
   submitting: boolean;
   form: string;
+}
+
+interface MappedOwnProps {
+  ufullstendigSoeknad?: boolean;
 }
 
 interface OwnState {
@@ -30,13 +33,13 @@ interface OwnState {
   verge: boolean;
 }
 
-export class LagreSoknadPanel extends Component<OwnProps & WrappedComponentProps, OwnState> {
+export class LagreSoknadPanel extends Component<PureOwnProps & MappedOwnProps & WrappedComponentProps, OwnState> {
   static defaultProps = {
     readOnly: true,
     ufullstendigSoeknad: false,
   };
 
-  constructor(props: OwnProps & WrappedComponentProps) {
+  constructor(props: PureOwnProps & MappedOwnProps & WrappedComponentProps) {
     super(props);
     this.toggleLukkPapirsoknadModal = this.toggleLukkPapirsoknadModal.bind(this);
     this.toggleVerge = this.toggleVerge.bind(this);
@@ -46,12 +49,12 @@ export class LagreSoknadPanel extends Component<OwnProps & WrappedComponentProps
     };
   }
 
-  toggleLukkPapirsoknadModal() {
+  toggleLukkPapirsoknadModal(): void {
     const { showLukkSoknadModal } = this.state;
     this.setState({ showLukkSoknadModal: !showLukkSoknadModal });
   }
 
-  toggleVerge() {
+  toggleVerge(): void {
     const { verge } = this.state;
     this.setState({ verge: !verge });
   }
@@ -134,7 +137,7 @@ export class LagreSoknadPanel extends Component<OwnProps & WrappedComponentProps
   }
 }
 
-const mapStateToProps = (state: any, ownProps: OwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   ufullstendigSoeknad: formValueSelector(ownProps.form)(state, 'ufullstendigSoeknad'),
 });
 

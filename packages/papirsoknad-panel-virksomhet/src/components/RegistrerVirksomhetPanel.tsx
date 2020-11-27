@@ -15,6 +15,7 @@ import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RegistrerVirksomhetModalForm from './RegistrerVirksomhetModalForm';
+import { FormValues as VirksomhetIdFormValues } from './VirksomhetIdentifikasjonPanel';
 
 import styles from './registrerVirksomhetPanel.less';
 
@@ -59,8 +60,12 @@ interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-type Virksomhet = {
-
+type Virksomhet = VirksomhetIdFormValues & {
+  familieEllerVennerTilknyttetNaringen?: boolean;
+  harRegnskapsforer?: boolean;
+  stillingsprosent?: number;
+  varigEndretEllerStartetSisteFireAr?: boolean;
+  varigEndringGjeldendeFom?: string;
 }
 
 interface MappedOwnProps {
@@ -104,7 +109,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
     };
   }
 
-  showRegistrerVirksomhetModal(index?: number) {
+  showRegistrerVirksomhetModal(index?: number): void {
     if (index !== null && index !== undefined && index > -1) {
       const { virksomheter } = this.props;
       this.setState({
@@ -119,7 +124,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
     }
   }
 
-  hideRegistrerVirksomhetModal() {
+  hideRegistrerVirksomhetModal(): void {
     this.setState({
       editVirksomhet: null,
       editIndex: -1,
@@ -136,7 +141,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
       varigEndringGjeldendeFom: string;
       stillingsprosent?: string;
     };
-  }) {
+  }): void {
     const { editIndex: index } = this.state;
     const {
       form, namePrefix, name, dispatchArraySplice: splice, dispatchArrayPush: push,
@@ -156,7 +161,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
     this.hideRegistrerVirksomhetModal();
   }
 
-  removeVirksomhet(index: number) {
+  removeVirksomhet(index: number): void {
     const {
       form, namePrefix, name, dispatchArraySplice: splice,
     } = this.props;

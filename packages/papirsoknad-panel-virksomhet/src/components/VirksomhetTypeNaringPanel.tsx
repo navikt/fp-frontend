@@ -17,7 +17,7 @@ const naringsvirksomhetTypeOrder = {
   [naringsvirksomhetType.ANNEN]: 4,
 };
 
-const compare = (arg1, arg2) => {
+const compare = (arg1: number, arg2: number): number => {
   if (arg1 > arg2) {
     return 1;
   }

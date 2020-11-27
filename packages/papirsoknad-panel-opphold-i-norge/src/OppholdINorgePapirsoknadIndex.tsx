@@ -22,7 +22,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues: () => any;
+  buildInitialValues: () => FormValues;
   validate?: (values: FormValues) => any
 }
 
@@ -42,7 +42,7 @@ const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   </RawIntlProvider>
 );
 
-OppholdINorgePapirsoknadIndex.buildInitialValues = () => OppholdINorgePanel.buildInitialValues();
+OppholdINorgePapirsoknadIndex.buildInitialValues = (): FormValues => OppholdINorgePanel.buildInitialValues();
 
 OppholdINorgePapirsoknadIndex.validate = (values: FormValues) => OppholdINorgePanel.validate(values);
 

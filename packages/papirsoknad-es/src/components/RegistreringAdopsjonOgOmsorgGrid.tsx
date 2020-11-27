@@ -7,7 +7,7 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
 import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
 import RettigheterPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-rettigheter';
-import OmsorgOgAdopsjonPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
+import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormValues } from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
 import AnnenForelderPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
@@ -21,8 +21,9 @@ interface OwnProps {
 }
 
 export type FormValues = {
-  rettigheter: string;
-  foedselsDato: string;
+  rettigheter?: string;
+  foedselsDato?: string;
+  omsorg?: Record<string, never> | OmsorgOgAdopsjonFormValues;
 } & OppholdFormValues;
 
 interface StaticFunctions {

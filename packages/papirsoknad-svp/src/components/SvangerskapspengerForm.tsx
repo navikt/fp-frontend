@@ -24,35 +24,14 @@ import AndreYtelserPapirsoknadIndex, {
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
 import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
-import BehovForTilretteleggingPanel from './tilrettelegging/BehovForTilretteleggingPanel';
+import BehovForTilretteleggingPanel, { FormValues as BehovForTilretteleggingFormValues } from './tilrettelegging/BehovForTilretteleggingPanel';
 
 const SVANGERSKAPSPENGER_FORM_NAME = 'SvangerskapspengerForm';
 const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
 
-type Tilrettelegging = {
-  tilretteleggingType: string;
-  fomDato: string;
-  stillingsprosent?: string;
-}
-
-type TilretteleggingArbeidsforhold = {
-  tilretteleggingForArbeidsgiver?: {
-    behovsdato: string;
-    organisasjonsnummer: string;
-    tilretteleggingArbeidsgiver: Tilrettelegging[];
-  }[];
-  sokForArbeidsgiver: boolean;
-  sokForFrilans: boolean;
-  behovsdatoFrilans?: string;
-  tilretteleggingFrilans?: Tilrettelegging[];
-  sokForSelvstendigNaringsdrivende: boolean;
-  behovsdatoSN?: string;
-  tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
-}
-
 type FormValues = {
   foedselsDato?: string;
-  tilretteleggingArbeidsforhold?: TilretteleggingArbeidsforhold;
+  tilretteleggingArbeidsforhold?: BehovForTilretteleggingFormValues;
 } & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues;
 
 interface PureOwnProps {
@@ -137,7 +116,7 @@ const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMe
   [TILRETTELEGGING_NAME_PREFIX]: BehovForTilretteleggingPanel.buildInitialValues(),
 }));
 
-const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold: TilretteleggingArbeidsforhold): any => {
+const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold: BehovForTilretteleggingFormValues): any => {
   let transformerteVerdier = [];
   if (tilretteleggingArbeidsforhold.sokForArbeidsgiver) {
     transformerteVerdier = transformerteVerdier.concat(tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map((ta) => ({

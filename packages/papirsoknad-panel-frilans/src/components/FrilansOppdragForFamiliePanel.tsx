@@ -9,22 +9,20 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import FrilansOppdragForFamilieFieldArray, { defaultFrilansPeriode, FormValues as FieldArrayFormValues } from './FrilansOppdragForFamilieFieldArray';
 
-interface OwnProps {
+interface PureOwnProps {
   readOnly: boolean;
-  harHattOppdragForFamilie?: boolean;
   formName: string;
   namePrefix: string;
+}
+
+interface MappedOwnProps {
+  harHattOppdragForFamilie?: boolean;
 }
 
 export type FieldValues = FieldArrayFormValues;
 
 interface StaticFunctions {
-  buildInitialValues?: () => {
-    oppdragPerioder: {
-      fomDato: string;
-      tomDato: string;
-    }[];
-  };
+  buildInitialValues?: () => FieldValues;
   validate?: (values: FieldValues) => {
     oppdragPerioder: {
       tomDato?: any;
@@ -38,7 +36,7 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent.
  */
-export const FrilansOppdragForFamiliePanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const FrilansOppdragForFamiliePanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   harHattOppdragForFamilie,
 }) => (
@@ -62,17 +60,17 @@ export const FrilansOppdragForFamiliePanelImpl: FunctionComponent<OwnProps> & St
   </>
 );
 
-const mapStateToProps = (state: any, ownProps: OwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   harHattOppdragForFamilie: formValueSelector(ownProps.formName)(state, ownProps.namePrefix).harHattOppdragForFamilie,
 });
 
 const FrilansOppdragForFamiliePanel = connect(mapStateToProps)(FrilansOppdragForFamiliePanelImpl);
 
-FrilansOppdragForFamiliePanel.buildInitialValues = () => ({
+FrilansOppdragForFamiliePanel.buildInitialValues = (): FieldValues => ({
   oppdragPerioder: [defaultFrilansPeriode],
 });
 
-FrilansOppdragForFamiliePanel.validate = (values: FieldValues) => ({
+FrilansOppdragForFamiliePanel.validate = (values: FieldValues): any => ({
   oppdragPerioder: FrilansOppdragForFamilieFieldArray.validate(values),
 });
 
