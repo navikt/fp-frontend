@@ -53,6 +53,8 @@ interface MappedOwnProps {
   valuesForRegisteredFieldsOnly: FormValues;
   annenForelderInformertRequired: boolean;
   sokerHarAleneomsorg: boolean;
+  initialValues: FormValues;
+  validate: (formValues: FormValues) => any;
 }
 
 /**
@@ -61,7 +63,7 @@ interface MappedOwnProps {
  * Redux-form-komponent for registrering av papirsøknad for foreldrepenger.
  */
 export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
-  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
+  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): boolean {
     // Dette er gjort for å hindra rerender for testetrykk på alle underformene
     const notRerenderIfChangedProps = ['array', 'blur', 'change', 'clearSubmit', 'destroy', 'dirty', 'initialize', 'error', 'pristine', 'reset',
       'resetSection', 'touch', 'untouch', 'valuesForRegisteredFieldsOnly', 'autofill', 'clearFields', 'clearSubmitErrors', 'clearAsyncError', 'submit'];
@@ -140,7 +142,7 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
   }
 }
 
-const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], sokerPersonnummer: string) => {
+const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], sokerPersonnummer: string): any => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
     return (values: FormValues) => ({
       ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
@@ -167,7 +169,7 @@ const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], 
   return null;
 };
 
-const transformRootValues = (state: any, registeredFieldNames: string[]) => {
+const transformRootValues = (state: any, registeredFieldNames: string[]): any => {
   const values = formValueSelector(FORELDREPENGER_FORM_NAME)(state, ...registeredFieldNames);
   if (values.rettigheter === rettighet.IKKE_RELEVANT) {
     return omit(values, 'rettigheter');
@@ -175,7 +177,7 @@ const transformRootValues = (state: any, registeredFieldNames: string[]) => {
   return values;
 };
 
-const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMedNavn[] }) => ownProps], (ownProps) => ({
+const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMedNavn[] }) => ownProps], (ownProps): FormValues => ({
   ...FrilansPapirsoknadIndex.buildInitialValues(),
   ...AndreYtelserPapirsoknadIndex.buildInitialValues(ownProps.andreYtelser),
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
@@ -188,7 +190,7 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const sokerPersonnummer = ownProps.fagsakPerson.personnummer;
   const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
   const validate = getValidation(ownProps.soknadData, andreYtelserObject.andreYtelser, sokerPersonnummer);
-  return (state: any) => {
+  return (state: any): MappedOwnProps => {
     const registeredFields = getRegisteredFields(FORELDREPENGER_FORM_NAME)(state);
     // @ts-ignore Fiks
     const registeredFieldNames = Object.values(registeredFields).map((rf) => rf.name);

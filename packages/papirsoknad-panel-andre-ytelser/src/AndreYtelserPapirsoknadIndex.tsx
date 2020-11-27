@@ -21,7 +21,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => any;
+  buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
   validate?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
   transformValues?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
 }
@@ -42,7 +42,7 @@ const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunction
   </RawIntlProvider>
 );
 
-AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => AndreYtelserPanel.buildInitialValues(andreYtelser);
+AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => AndreYtelserPanel.buildInitialValues(andreYtelser);
 
 AndreYtelserPapirsoknadIndex.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[]) => AndreYtelserPanel.validate(values, andreYtelser);
 

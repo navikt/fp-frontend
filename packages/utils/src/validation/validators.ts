@@ -182,7 +182,7 @@ export type Options = {
 };
 
 export const hasValidPeriodIncludingOtherErrors = (
-  values: { periodeFom: string; periodeTom: string }[],
+  values: { periodeFom?: string; periodeTom?: string }[],
   otherErrors: Record<number, any> = [{}],
   options: Options = {},
 ): { periodeFom: string; periodeTom: string }[] | { _error: FormValidationResult } | null => {

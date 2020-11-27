@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -22,7 +22,7 @@ const defaultInntektsgivendeArbeid = {
   land: '',
 };
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]) => countryCodes
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .filter(({
     kode,
   }) => kode !== landkoder.NORGE)

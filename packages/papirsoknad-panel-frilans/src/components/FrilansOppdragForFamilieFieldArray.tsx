@@ -31,7 +31,7 @@ export type FormValues = {
     fomDato: string;
     tomDato: string;
   }[];
-  perioder: {
+  perioder?: {
     periodeFom: string;
     periodeTom?: string;
   }[];
@@ -94,7 +94,7 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> & S
   </PeriodFieldArray>
 );
 
-FrilansOppdragForFamilieFieldArray.validate = (values: FormValues) => {
+FrilansOppdragForFamilieFieldArray.validate = (values: FormValues): any => {
   if (!values) {
     return null;
   }

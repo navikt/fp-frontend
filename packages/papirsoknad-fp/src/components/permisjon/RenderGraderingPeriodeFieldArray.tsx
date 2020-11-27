@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FieldArrayFieldsProps, FieldArrayMetaProps, getFormValues } from 'redux-form';
 import moment from 'moment/moment';
@@ -37,7 +37,7 @@ export const gyldigArbeidskategori = [
 
 const maxValue100 = maxValue(100);
 
-const mapKvoter = (typer: KodeverkMedNavn[]) => typer
+const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeUttakperioder.includes(kode))
@@ -46,7 +46,7 @@ const mapKvoter = (typer: KodeverkMedNavn[]) => typer
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-const mapArbeidskategori = (typer: KodeverkMedNavn[]) => typer
+const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigArbeidskategori.includes(kode))
