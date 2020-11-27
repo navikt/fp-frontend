@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -11,6 +12,7 @@ import {
 } from '@fpsak-frontend/form';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import {
+  dateBeforeOrEqualToToday,
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -27,18 +29,22 @@ const maxLength1500 = maxLength(1500);
 
 export const FORELDELSE_PERIODE_FORM_NAME = 'foreldelsesresultatActivity';
 
-interface OwnProps {
-  periode: ForeldelsesresultatActivity;
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
   behandlingFormPrefix: string;
+  periode: ForeldelsesresultatActivity;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  oppdaterPeriode: (values: any) => void;
   skjulPeriode: (...args: any[]) => any;
-  readOnly: boolean;
-  foreldelseVurderingTyper: KodeverkMedNavn[];
   setNestePeriode: (...args: any[]) => any;
   setForrigePeriode: (...args: any[]) => any;
   oppdaterSplittedePerioder: (...args: any[]) => any;
-  behandlingId: number;
-  behandlingVersjon: number;
+  readOnly: boolean;
   beregnBelop: (data: any) => Promise<any>;
+}
+interface MappedOwnProps {
+  foreldelseVurderingTyper: KodeverkMedNavn[];
   erForeldet?: boolean;
   erMedTilleggsfrist?: boolean;
 }
@@ -47,7 +53,7 @@ interface DispatchProps {
   clearFields: (formName: string, keepTouched: boolean, persistentSubmitErrors: boolean, ...fields: string[]) => void;
 }
 
-export const ForeldelsePeriodeFormImpl: FunctionComponent<OwnProps & DispatchProps & InjectedFormProps> = ({
+export const ForeldelsePeriodeFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps> = ({
   skjulPeriode,
   readOnly,
   foreldelseVurderingTyper,
@@ -113,8 +119,9 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<OwnProps & DispatchPro
             <DatepickerField
               name="oppdagelsesDato"
               label={{ id: 'ForeldelsePeriodeForm.OppdagelsesDato' }}
-              validate={[required]}
+              validate={[required, dateBeforeOrEqualToToday]}
               readOnly={readOnly}
+              disabledDays={{ before: moment('1970-01-01').toDate(), after: moment(moment.now()).toDate() }}
             />
           </>
         )}
@@ -150,14 +157,6 @@ const buildInitalValues = (periode: ForeldelsesresultatActivity) => ({
   ...periode,
   foreldet: checkForeldetValue(periode),
 });
-
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  periode: ForeldelsesresultatActivity;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  oppdaterPeriode: (values: any) => void;
-}
 
 const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const initialValues = buildInitalValues(ownProps.periode);

@@ -93,7 +93,7 @@ const formatGroups = (periodItems: Periode[] = []) => {
   }));
 };
 
-interface OwnProps {
+interface PureOwnProps {
   perioder: TidslinjePeriode[];
   toggleDetaljevindu: (event: MouseEvent) => void;
   selectedPeriod?: TidslinjePeriode;
@@ -107,10 +107,10 @@ interface OwnProps {
  *
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for tilbakekreving
  */
-class TilbakekrevingTimeline extends Component<OwnProps & WrappedComponentProps> {
+class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentProps> {
   timelineRef: RefObject<any>
 
-  constructor(props: OwnProps & WrappedComponentProps) {
+  constructor(props: PureOwnProps & WrappedComponentProps) {
     super(props);
 
     this.goForward = this.goForward.bind(this);

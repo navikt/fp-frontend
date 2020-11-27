@@ -5,7 +5,7 @@ import PeriodeController from './PeriodeController';
 import PeriodeInformasjon from './PeriodeInformasjon';
 import ForeldelsesresultatActivity from '../../types/foreldelsesresultatActivitytsType';
 
-interface OwnProps {
+interface PureOwnProps {
   periode: ForeldelsesresultatActivity;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
@@ -16,7 +16,7 @@ interface OwnProps {
   beregnBelop: (...args: any[]) => any;
 }
 
-export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({
+export const TilbakekrevingTimelineData: FunctionComponent<PureOwnProps> = ({
   periode,
   callbackForward,
   callbackBackward,

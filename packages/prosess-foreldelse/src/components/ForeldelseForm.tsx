@@ -17,7 +17,7 @@ import {
 } from '@fpsak-frontend/form';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
-import { KodeverkMedNavn, FeilutbetalingPeriode } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, FeilutbetalingPeriode, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME } from './ForeldelsePeriodeForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
@@ -49,28 +49,34 @@ const formaterPerioderForTidslinje = (perioder: ForeldelsesresultatActivity[] = 
     id: index,
   }));
 
-interface OwnProps {
+interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
+  apCodes: string[];
+  perioderForeldelse: FeilutbetalingPerioderWrapper;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  navBrukerKjonn: string;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  beregnBelop: (data: any) => Promise<any>;
+}
+
+interface MappedOwnProps {
   foreldelsesresultatActivity?: ForeldelsesresultatActivity[];
   behandlingFormPrefix: string;
   reduxFormChange: (...args: any[]) => any;
   reduxFormInitialize: (...args: any[]) => any;
-  navBrukerKjonn: string;
-  apCodes?: string[];
-  readOnly: boolean;
-  readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   merknaderFraBeslutter?: { notAccepted?: boolean };
-  beregnBelop: (data: any) => Promise<any>;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface OwnState {
   valgtPeriode?: ForeldelsesresultatActivity;
 }
 
-export class ForeldelseForm extends Component<OwnProps & InjectedFormProps, OwnState> {
-  constructor(props: OwnProps & InjectedFormProps) {
+export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps, OwnState> {
+  constructor(props: PureOwnProps & MappedOwnProps & InjectedFormProps) {
     super(props);
     this.state = {
       valgtPeriode: null,
@@ -84,7 +90,7 @@ export class ForeldelseForm extends Component<OwnProps & InjectedFormProps, OwnS
     }
   }
 
-  componentDidUpdate(prevProps: OwnProps & InjectedFormProps) {
+  componentDidUpdate(prevProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
     const { foreldelsesresultatActivity } = this.props;
     if (!prevProps.foreldelsesresultatActivity && foreldelsesresultatActivity) {
       this.setPeriode(foreldelsesresultatActivity.find(harApentAksjonspunkt));
@@ -290,15 +296,6 @@ export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]):
     begrunnelse: decodeHtmlEntity(p.begrunnelse),
   })),
 });
-
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  apCodes: string[];
-  perioderForeldelse: any;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
-}
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
