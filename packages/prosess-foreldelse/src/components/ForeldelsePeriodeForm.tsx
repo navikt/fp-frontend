@@ -43,10 +43,17 @@ interface PureOwnProps {
   readOnly: boolean;
   beregnBelop: (data: any) => Promise<any>;
 }
+
+type FormValues = {
+  foreldet: string;
+} & ForeldelsesresultatActivity;
+
 interface MappedOwnProps {
   foreldelseVurderingTyper: KodeverkMedNavn[];
   erForeldet?: boolean;
   erMedTilleggsfrist?: boolean;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => void;
 }
 
 interface DispatchProps {
@@ -153,7 +160,7 @@ const oldForeldetValue = (fvType: Kodeverk) => (fvType.kode !== foreldelseVurder
 const checkForeldetValue = (selectedItemData: ForeldelsesresultatActivity) => (selectedItemData.foreldet ? selectedItemData.foreldet
   : oldForeldetValue(selectedItemData.foreldelseVurderingType));
 
-const buildInitalValues = (periode: ForeldelsesresultatActivity) => ({
+const buildInitalValues = (periode: ForeldelsesresultatActivity): FormValues => ({
   ...periode,
   foreldet: checkForeldetValue(periode),
 });
@@ -163,7 +170,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const onSubmit = (values: any) => ownProps.oppdaterPeriode(values);
   const foreldelseVurderingTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]
     .filter((fv: KodeverkMedNavn) => fv.kode !== foreldelseVurderingType.IKKE_VURDERT);
-  return (state: any, oProps: PureOwnProps) => {
+  return (state: any, oProps: PureOwnProps): MappedOwnProps => {
     const { behandlingId, behandlingVersjon } = oProps;
     const sel = behandlingFormValueSelector(FORELDELSE_PERIODE_FORM_NAME, behandlingId, behandlingVersjon);
     const foreldet = sel(state, 'foreldet');

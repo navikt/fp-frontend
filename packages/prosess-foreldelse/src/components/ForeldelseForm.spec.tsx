@@ -44,6 +44,10 @@ describe('<ForeldelseForm>', () => {
       perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
       alleMerknaderFraBeslutter={{}}
       submitCallback={sinon.spy()}
+      initialValues={{
+        foreldelsesresultatActivity: perioder,
+      }}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(TilbakekrevingTimelinePanel)).has.length(0);
@@ -80,6 +84,10 @@ describe('<ForeldelseForm>', () => {
       perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
       alleMerknaderFraBeslutter={{}}
       submitCallback={sinon.spy()}
+      initialValues={{
+        foreldelsesresultatActivity: perioder,
+      }}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(TilbakekrevingTimelinePanel)).has.length(1);
@@ -114,6 +122,10 @@ describe('<ForeldelseForm>', () => {
       perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
       alleMerknaderFraBeslutter={{}}
       submitCallback={sinon.spy()}
+      initialValues={{
+        foreldelsesresultatActivity: perioder,
+      }}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(ForeldelsePeriodeForm)).has.length(0);

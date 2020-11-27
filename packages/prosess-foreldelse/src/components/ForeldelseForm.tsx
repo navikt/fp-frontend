@@ -63,20 +63,28 @@ interface PureOwnProps {
   beregnBelop: (data: any) => Promise<any>;
 }
 
+type FormValues = {
+  foreldelsesresultatActivity: ForeldelsesresultatActivity[]
+};
 interface MappedOwnProps {
   foreldelsesresultatActivity?: ForeldelsesresultatActivity[];
   behandlingFormPrefix: string;
+  merknaderFraBeslutter?: { notAccepted?: boolean };
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => void;
+}
+
+interface DispatchProps {
   reduxFormChange: (...args: any[]) => any;
   reduxFormInitialize: (...args: any[]) => any;
-  merknaderFraBeslutter?: { notAccepted?: boolean };
 }
 
 interface OwnState {
   valgtPeriode?: ForeldelsesresultatActivity;
 }
 
-export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps, OwnState> {
-  constructor(props: PureOwnProps & MappedOwnProps & InjectedFormProps) {
+export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps, OwnState> {
+  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps) {
     super(props);
     this.state = {
       valgtPeriode: null,
@@ -288,7 +296,7 @@ export const transformValues = (values: any, apCode: string) => {
     kode: apCode,
   }];
 };
-export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]): { foreldelsesresultatActivity: ForeldelsesresultatActivity[] } => ({
+export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]): FormValues => ({
   foreldelsesresultatActivity: foreldelsePerioder.map((p) => ({
     ...p,
     feilutbetaling: p.belop,
@@ -301,7 +309,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
 (submitCallback, apCodes) => (values: any) => submitCallback(transformValues(values, apCodes[0])));
 
-const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),
   foreldelsesresultatActivity: behandlingFormValueSelector(FORELDELSE_FORM_NAME,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'foreldelsesresultatActivity'),
@@ -317,6 +325,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: FORELDELSE_FORM_NAME,
 })(ForeldelseForm));

@@ -45,6 +45,11 @@ describe('<ForeldelsePeriodeForm>', () => {
         alleKodeverk={{}}
         oppdaterPeriode={sinon.spy()}
         {...reduxFormPropsMock}
+        initialValues={{
+          ...periode,
+          foreldet: null,
+        }}
+        onSubmit={sinon.spy()}
       />,
     );
 
