@@ -427,9 +427,9 @@ const transformValues = (
 
   const arbeidsgiver = arbeidsForhold && (arbeidsForhold[0] !== '-' || arbeidsForhold[2] !== '-')
     ? {
-      identifikator: arbeidsForhold[0] !== '-' ? arbeidsForhold[0] : undefined,
+      identifikator: arbeidsForhold[0] !== '-' && arbeidsForhold[3] !== '-' ? arbeidsForhold[0] : undefined,
       navn: arbeidsForhold[1] ? arbeidsForhold[1] : undefined,
-      aktørId: arbeidsForhold[2] !== '-' ? arbeidsForhold[2] : undefined,
+      aktørId: arbeidsForhold[2] !== '-' && arbeidsForhold[3] === '-' ? arbeidsForhold[2] : undefined,
       virksomhet: arbeidsForhold[3] !== '-',
       arbeidType: arbeidsForhold[4],
     }
