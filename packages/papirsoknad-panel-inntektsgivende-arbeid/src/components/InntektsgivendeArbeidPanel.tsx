@@ -14,10 +14,8 @@ import RenderInntektsgivendeArbeidAmbassadeFieldArray, { FormValues as IAFormVal
 
 const localFeature = false;
 
-const inntektsgivendeArbeidFieldArrayName = 'arbeidsforhold';
-const renderInntektsgivendeArbeidAmbassadeFieldArray = 'ambassadearbeidsforhold';
-
-const AMBASSADE_ARBEIDS_FORHOLD_PREFIX = 'ambassadearbeidsforhold';
+const INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME = 'arbeidsforhold';
+const RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY = 'ambassadearbeidsforhold';
 
 interface OwnProps {
   readOnly: boolean;
@@ -25,11 +23,12 @@ interface OwnProps {
 }
 
 export type FormValues = {
-  [AMBASSADE_ARBEIDS_FORHOLD_PREFIX]?: IAFormValues[];
+  [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]?: Record<string, any>;
+  [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]?: IAFormValues[];
 }
 
 interface StaticFunctions {
-  buildInitialValues: () => any;
+  buildInitialValues: () => FormValues;
   validate?: (values: FormValues) => any,
 }
 
@@ -53,7 +52,7 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
     <Undertittel><FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtlandet.Title" /></Undertittel>
     <VerticalSpacer eightPx />
     <FieldArray
-      name={inntektsgivendeArbeidFieldArrayName}
+      name={INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}
       component={RenderInntektsgivendeArbeidFieldArray}
       readOnly={readOnly}
       alleKodeverk={alleKodeverk}
@@ -67,7 +66,7 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
         </Undertittel>
         <VerticalSpacer eightPx />
         <FieldArray
-          name={renderInntektsgivendeArbeidAmbassadeFieldArray}
+          name={RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY}
           component={RenderInntektsgivendeArbeidAmbassadeFieldArray}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
@@ -79,16 +78,16 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
 
 InntektsgivendeArbeidPanel.validate = (values: FormValues) => {
   const errors = {
-    [AMBASSADE_ARBEIDS_FORHOLD_PREFIX]: {
-      ...RenderInntektsgivendeArbeidAmbassadeFieldArray.validate(values[AMBASSADE_ARBEIDS_FORHOLD_PREFIX]),
+    [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]: {
+      ...RenderInntektsgivendeArbeidAmbassadeFieldArray.validate(values[RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]),
     },
   };
   return errors;
 };
 
-InntektsgivendeArbeidPanel.buildInitialValues = () => ({
-  [inntektsgivendeArbeidFieldArrayName]: [{}],
-  [renderInntektsgivendeArbeidAmbassadeFieldArray]: [{}],
+InntektsgivendeArbeidPanel.buildInitialValues = (): FormValues => ({
+  [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: [{}],
+  [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]: [{}],
 });
 
 export default InntektsgivendeArbeidPanel;

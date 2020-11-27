@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
@@ -15,7 +15,7 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]) => countryCodes
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .map(({
     kode,
     navn,
@@ -31,9 +31,13 @@ interface MappedOwnProps {
   virksomhetRegistrertINorge?: boolean;
 }
 
-type FormValues = {
+export type FormValues = {
   fom?: string;
   tom?: string;
+  navn?: string;
+  virksomhetRegistrertINorge?: boolean;
+  organisasjonsnummer?: string;
+  landJobberFra?: string;
 }
 
 interface StaticFunctions {

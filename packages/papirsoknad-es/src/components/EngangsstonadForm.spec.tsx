@@ -23,6 +23,7 @@ describe('<EngangsstonadForm>', () => {
       soknadData={new SoknadData(fagsakYtelseType.ENGANGSSTONAD, familieHendelseType.FODSEL, foreldreType.MOR)}
       alleKodeverk={{}}
       fagsakPerson={{} as FagsakPerson}
+      validate={sinon.spy()}
     />);
     const form = wrapper.find(RegistreringFodselGrid);
     expect(form).to.have.length(1);
@@ -36,6 +37,7 @@ describe('<EngangsstonadForm>', () => {
       soknadData={new SoknadData(fagsakYtelseType.ENGANGSSTONAD, familieHendelseType.ADOPSJON, foreldreType.MOR)}
       alleKodeverk={{}}
       fagsakPerson={{} as FagsakPerson}
+      validate={sinon.spy()}
     />);
     const form = wrapper.find(RegistreringAdopsjonOgOmsorgGrid);
     expect(form).to.have.length(1);

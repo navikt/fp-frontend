@@ -71,7 +71,7 @@ export const FrilansPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunc
   </PeriodFieldArray>
 );
 
-FrilansPerioderFieldArray.validate = (values: FormValues[] = []) => {
+FrilansPerioderFieldArray.validate = (values: FormValues[] = []): any => {
   const arrayErrors = values.map(({
     periodeFom,
     periodeTom,
