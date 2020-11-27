@@ -37,6 +37,8 @@ describe('<SykdomOgSkadePeriode>', () => {
       behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       vilkarForSykdomExists
+      onSubmit={() => undefined}
+      validate={() => undefined}
     />);
 
     const undertekst = wrapper.find('Undertekst');
@@ -66,6 +68,8 @@ describe('<SykdomOgSkadePeriode>', () => {
       behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       vilkarForSykdomExists
+      onSubmit={() => undefined}
+      validate={() => undefined}
     />);
     const textAreaField = wrapper.find('TextAreaField');
     expect(textAreaField).to.have.length(1);

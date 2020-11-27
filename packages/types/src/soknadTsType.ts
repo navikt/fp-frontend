@@ -2,13 +2,14 @@ import Kodeverk from './kodeverkTsType';
 
 export type ManglendeVedleggSoknad = Readonly<{
   dokumentType: Kodeverk;
-  arbeidsgiver: {
-    navn: string;
-    organisasjonsnummer: string;
-    fødselsdato: string;
-    aktørId: string;
-  };
+  arbeidsgiverReferanse: string;
   brukerHarSagtAtIkkeKommer: boolean;
+}>
+
+export type UtlandsoppholdPeriode = Readonly<{
+  landNavn: string;
+  fom: string;
+  tom: string;
 }>
 
 type Soknad = Readonly<{
@@ -24,16 +25,8 @@ type Soknad = Readonly<{
     oppholdNorgeNa: boolean;
     oppholdSistePeriode: boolean;
     oppholdNestePeriode: boolean;
-    utlandsoppholdFor: {
-      landNavn: string;
-      fom: string;
-      tom: string;
-    }[];
-    utlandsoppholdEtter: {
-      landNavn: string;
-      fom: string;
-      tom: string;
-    }[];
+    utlandsoppholdFor: UtlandsoppholdPeriode[];
+    utlandsoppholdEtter: UtlandsoppholdPeriode[];
   }
   manglendeVedlegg: ManglendeVedleggSoknad[];
   oppgittRettighet: {

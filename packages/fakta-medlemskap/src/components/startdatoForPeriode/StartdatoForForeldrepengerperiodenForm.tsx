@@ -16,7 +16,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
-  Aksjonspunkt, InntektArbeidYtelse, Kodeverk, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, Soknad,
 } from '@fpsak-frontend/types';
 
 import ArbeidsgiverInfo from './ArbeidsgiverInfo';
@@ -26,15 +26,42 @@ import styles from './startdatoForForeldrepengerperiodenForm.less';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-interface OwnProps {
-  hasAksjonspunkt: boolean;
-  hasOpenAksjonspunkt: boolean;
+type FormValues = {
+  arbeidsgivere?: InntektArbeidYtelse['inntektsmeldinger'];
+  startdatoFraSoknad?: string;
+  opprinneligDato?: string;
+  begrunnelse?: string;
+}
+
+type TransformedValues = {
+  kode: string;
+  opprinneligDato: string;
+  startdatoFraSoknad: string;
+  begrunnelse: string;
+}
+
+interface PureOwnProps {
+  aksjonspunkter: Aksjonspunkt[];
+  aksjonspunkt: Aksjonspunkt;
+  soknad: Soknad;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  submitCallback: (values: TransformedValues[]) => any;
+  readOnlyForStartdatoForForeldrepenger: boolean;
+  behandlingStatus: Kodeverk;
   hasOpenMedlemskapAksjonspunkter: boolean;
   submittable: boolean;
-  overstyringDisabled?: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
   behandlingVersjon: number;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+interface MappedOwnProps {
+  hasAksjonspunkt: boolean;
+  hasOpenAksjonspunkt: boolean;
+  overstyringDisabled?: boolean;
+  onSubmit: (values: FormValues) => any;
+  initialValues: FormValues;
 }
 
 /**
@@ -42,7 +69,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for vurdering av om startdato for foreldrepengerperioden er korrekt.
  */
-export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   hasAksjonspunkt,
   hasOpenAksjonspunkt,
@@ -52,6 +79,7 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps 
   alleMerknaderFraBeslutter,
   behandlingId,
   behandlingVersjon,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <div className={hasOpenAksjonspunkt || !hasOpenMedlemskapAksjonspunkter ? undefined : styles.inactiveAksjonspunkt}>
@@ -89,6 +117,7 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps 
             <FieldArray
               component={ArbeidsgiverInfo}
               name="arbeidsgivere"
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
           </Column>
         </Row>
@@ -107,23 +136,13 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps 
   </div>
 );
 
-interface PureOwnProps {
-  aksjonspunkter: Aksjonspunkt[];
-  aksjonspunkt: Aksjonspunkt;
-  soknad: Soknad;
-  inntektArbeidYtelse: InntektArbeidYtelse;
-  submitCallback: (...args: any[]) => any;
-  readOnlyForStartdatoForForeldrepenger: boolean;
-  behandlingStatus: Kodeverk;
-}
-
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.soknad.oppgittFordeling,
     (ownProps: PureOwnProps) => ownProps.inntektArbeidYtelse],
-  (aksjonspunkter, oppgittFordeling = {}, inntektArbeidYtelse = {} as InntektArbeidYtelse) => {
-    const aksjonspunkt = aksjonspunkter.find((ap: any) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
-    const overstyringAp = aksjonspunkter.find((ap: any) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO);
+  (aksjonspunkter, oppgittFordeling = {}, inntektArbeidYtelse = {} as InntektArbeidYtelse): FormValues => {
+    const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+    const overstyringAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO);
     return {
       opprinneligDato: oppgittFordeling.startDatoForPermisjon,
       startdatoFraSoknad: oppgittFordeling.startDatoForPermisjon,
@@ -133,7 +152,7 @@ const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values: any, isOverstyring: boolean) => ({
+const transformValues = (values: FormValues, isOverstyring: boolean): TransformedValues => ({
   kode: isOverstyring ? aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO : aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
   opprinneligDato: values.opprinneligDato,
   startdatoFraSoknad: values.startdatoFraSoknad,
@@ -145,10 +164,10 @@ const lagSubmitFn = createSelector([
 (submitCallback, aksjonspunkt) => {
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isOverstyring = !hasAksjonspunkt || aksjonspunkt.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO;
-  return (values: any) => submitCallback([transformValues(values, isOverstyring)]);
+  return (values: FormValues) => submitCallback([transformValues(values, isOverstyring)]);
 });
 
-const mapStateToProps = (_state, ownProps: PureOwnProps) => {
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
   const { aksjonspunkt } = ownProps;
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const hasOpenAksjonspunkt = hasAksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
@@ -161,9 +180,9 @@ const mapStateToProps = (_state, ownProps: PureOwnProps) => {
   };
 };
 
-const isBefore2019 = (startdato: string) => moment(startdato).isBefore(moment('2019-01-01'));
+const isBefore2019 = (startdato: string): boolean => moment(startdato).isBefore(moment('2019-01-01'));
 
-const validateDates = (values: any) => {
+const validateDates = (values: FormValues): any => {
   const errors = {};
   if (!values) {
     return errors;
@@ -171,8 +190,8 @@ const validateDates = (values: any) => {
   const { arbeidsgivere, startdatoFraSoknad } = values;
 
   const isStartdatoEtterArbeidsgiverdato = arbeidsgivere && arbeidsgivere
-    .map((a: any) => a.arbeidsgiverStartdato)
-    .some((datoFraInntektsmelding: any) => moment(datoFraInntektsmelding).isBefore(moment(startdatoFraSoknad)));
+    .map((a) => a.arbeidsgiverStartdato)
+    .some((datoFraInntektsmelding) => moment(datoFraInntektsmelding).isBefore(moment(startdatoFraSoknad)));
 
   if (isStartdatoEtterArbeidsgiverdato) {
     return {

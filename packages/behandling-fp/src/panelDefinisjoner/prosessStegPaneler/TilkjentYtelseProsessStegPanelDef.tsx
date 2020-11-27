@@ -6,15 +6,18 @@ import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse'
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Personopplysninger, Soknad, UttaksresultatPeriode, BeregningsresultatPeriode,
+} from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
-const harPeriodeMedUtbetaling = (perioder) => {
+const harPeriodeMedUtbetaling = (perioder: BeregningsresultatPeriode[]): boolean => {
   const periode = perioder.find((p) => p.dagsats > 0);
   return !!periode;
 };
 
-const getStatusFromResultatstruktur = (resultatstruktur, uttaksresultat) => {
+const getStatusFromResultatstruktur = (resultatstruktur: BeregningsresultatFp, uttaksresultat: UttaksresultatPeriode): string => {
   if (resultatstruktur && resultatstruktur.perioder.length > 0) {
     if (!harPeriodeMedUtbetaling(resultatstruktur.perioder)) {
       return vilkarUtfallType.IKKE_VURDERT;
@@ -31,6 +34,15 @@ const getStatusFromResultatstruktur = (resultatstruktur, uttaksresultat) => {
   return vilkarUtfallType.IKKE_VURDERT;
 };
 
+type Data = {
+  fagsak: Fagsak;
+  beregningresultatForeldrepenger: BeregningsresultatFp;
+  personopplysninger: Personopplysninger;
+  soknad: Soknad;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  uttaksresultatPerioder: UttaksresultatPeriode;
+}
+
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <TilkjentYtelseProsessIndex {...props} />
 
@@ -44,16 +56,17 @@ class PanelDef extends ProsessStegPanelDef {
 
   getOverstyrVisningAvKomponent = () => true
 
-  getOverstyrtStatus = ({ beregningresultatForeldrepenger, uttaksresultatPerioder }) => getStatusFromResultatstruktur(
+  getOverstyrtStatus = ({ beregningresultatForeldrepenger, uttaksresultatPerioder }: Data) => getStatusFromResultatstruktur(
     beregningresultatForeldrepenger, uttaksresultatPerioder,
   )
 
   getData = ({
-    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad,
-  }) => ({
+    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId,
+  }: Data) => ({
     fagsak,
     personopplysninger,
     soknad,
+    arbeidsgiverOpplysningerPerId,
     beregningresultat: beregningresultatForeldrepenger,
   })
 }

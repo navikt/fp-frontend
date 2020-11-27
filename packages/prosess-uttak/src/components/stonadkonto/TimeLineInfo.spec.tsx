@@ -33,11 +33,20 @@ const stonadskonto = {
   } as Stonadskonto,
 } as UttakStonadskontoer['stonadskontoer'];
 
+const arbeidsgiverOpplysningerPerId = {
+  910909088: {
+    erPrivatPerson: false,
+    identifikator: '910909088',
+    navn: 'BEDRIFT AS',
+  },
+};
+
 describe('<TimeLineInfo>', () => {
   it('skal vise max-uker tilgjengelig lik summen av alle kontoers max dager delt på fem', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
       maksDatoUttak="2018-12-01"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const messages = wrapper.find('FormattedMessage');
@@ -50,6 +59,7 @@ describe('<TimeLineInfo>', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
       maksDatoUttak="2018-12-01"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const konto = {
@@ -87,6 +97,7 @@ describe('<TimeLineInfo>', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
       maksDatoUttak="2018-12-01"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     wrapper.setState({ aktiv: 1 });
     const timelineTab = wrapper.find('TimeLineTab');

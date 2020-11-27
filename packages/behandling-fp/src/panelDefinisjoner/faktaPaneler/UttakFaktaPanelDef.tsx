@@ -3,9 +3,17 @@ import React from 'react';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
-import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
+import { FaktaPanelDef, Rettigheter } from '@fpsak-frontend/behandling-felles';
+import { ArbeidsgiverOpplysningerPerId, Personopplysninger, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
+
+type Data = {
+  rettigheter: Rettigheter;
+  ytelsefordeling: Ytelsefordeling;
+  personopplysninger: Personopplysninger;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
 
 class UttakFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.UTTAK
@@ -36,10 +44,13 @@ class UttakFaktaPanelDef extends FaktaPanelDef {
     && personopplysninger !== null
     && personopplysninger !== undefined
 
-  getData = ({ rettigheter, ytelsefordeling, personopplysninger }) => ({
+  getData = ({
+    rettigheter, ytelsefordeling, personopplysninger, arbeidsgiverOpplysningerPerId,
+  }: Data) => ({
     kanOverstyre: rettigheter.kanOverstyreAccess.isEnabled,
     ytelsefordeling,
     personopplysninger,
+    arbeidsgiverOpplysningerPerId,
   })
 }
 

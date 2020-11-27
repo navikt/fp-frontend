@@ -68,6 +68,7 @@ describe('<UttakActivity>', () => {
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -110,6 +111,7 @@ describe('<UttakActivity>', () => {
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const row = wrapper.find('Row');
@@ -146,6 +148,7 @@ describe('<UttakActivity>', () => {
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -188,6 +191,7 @@ describe('<UttakActivity>', () => {
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -230,6 +234,7 @@ describe('<UttakActivity>', () => {
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const fieldArray = wrapper.find('FieldArray');

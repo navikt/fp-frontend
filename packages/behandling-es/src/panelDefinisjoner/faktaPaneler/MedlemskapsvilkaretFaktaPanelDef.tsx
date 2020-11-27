@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { Rettigheter, readOnlyUtils, FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
-  Behandling, FagsakPerson, InntektArbeidYtelse, Personopplysninger, Soknad,
+  ArbeidsgiverOpplysningerPerId, Behandling, FagsakPerson, InntektArbeidYtelse, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 
 import { EsBehandlingApiKeys } from '../../data/esBehandlingApi';
@@ -17,7 +17,8 @@ interface Data {
   personopplysninger: Personopplysninger;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  rettigheter: Rettigheter
+  rettigheter: Rettigheter;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
@@ -42,7 +43,7 @@ class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
   getOverstyrVisningAvKomponent = ({ personopplysninger, soknad }) => personopplysninger && soknad
 
   getData = ({
-    fagsakPerson, behandling, hasFetchError, personopplysninger, soknad, inntektArbeidYtelse, rettigheter,
+    fagsakPerson, behandling, hasFetchError, personopplysninger, soknad, inntektArbeidYtelse, rettigheter, arbeidsgiverOpplysningerPerId,
   }: Data) => ({
     isForeldrepengerFagsak: false,
     fagsakPerson,
@@ -53,6 +54,7 @@ class MedlemskapsvilkaretFaktaPanelDef extends FaktaPanelDef {
     personopplysninger,
     soknad,
     inntektArbeidYtelse,
+    arbeidsgiverOpplysningerPerId,
   })
 }
 

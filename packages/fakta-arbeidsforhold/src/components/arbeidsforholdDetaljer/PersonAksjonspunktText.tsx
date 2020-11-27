@@ -12,7 +12,14 @@ import {
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 import ArbeidsforholdKilder from '../../kodeverk/arbeidsforholdKilder';
 
-const utledPermisjonValues = (permisjon: ArbeidsforholdPermisjon, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+type PermisjonValues = {
+  permisjonFom: string;
+  permisjonTom: string;
+  permisjonsprosent: number;
+  permisjonType: string;
+}
+
+const utledPermisjonValues = (permisjon: ArbeidsforholdPermisjon, getKodeverknavn: (kodeverk: Kodeverk) => string): PermisjonValues => {
   const kodeverknavn = getKodeverknavn(permisjon.type);
   const permisjonType = kodeverknavn !== undefined && kodeverknavn !== null ? kodeverknavn.toLowerCase() : '';
   return {

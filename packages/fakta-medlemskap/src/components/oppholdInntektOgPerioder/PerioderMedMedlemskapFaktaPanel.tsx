@@ -23,7 +23,7 @@ const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Date',
 ];
 
-export type PeriodeMedId = MedlemPeriode & { id: number; }
+export type PeriodeMedId = MedlemPeriode & { id: string; }
 
 type FixedMedlemskapPeriode = {
   fom: string;
@@ -33,8 +33,31 @@ type FixedMedlemskapPeriode = {
   beslutningsdato: string;
 }
 
-interface OwnProps {
+export type FormValues = {
+  fixedMedlemskapPerioder?: FixedMedlemskapPeriode[];
+  medlemskapManuellVurderingType?: Kodeverk;
+  fodselsdato?: string;
+  termindato?: string;
+  omsorgsovertakelseDato?: string;
+  hasPeriodeAksjonspunkt?: boolean;
+  isPeriodAksjonspunktClosed?: boolean;
+}
+
+type TransformedValues = {
+  kode: string;
+  medlemskapManuellVurderingType: Kodeverk;
+}
+
+interface PureOwnProps {
+  id: string;
+  behandlingId: number;
+  behandlingVersjon: number;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}
+
+interface MappedOwnProps {
   fixedMedlemskapPerioder?: FixedMedlemskapPeriode[];
   fodselsdato?: string;
   termindato?: string;
@@ -42,16 +65,12 @@ interface OwnProps {
   vurderingTypes: KodeverkMedNavn[];
   hasPeriodeAksjonspunkt: boolean;
   isPeriodAksjonspunktClosed: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
 interface StaticFunctions {
   buildInitialValues?: (periode: PeriodeMedId, medlemskapPerioder: Medlemskap['medlemskapPerioder'], soknad: Soknad,
-  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kodeverk: Kodeverk) => string) => any,
-  transformValues?: (values: any, manuellVurderingTyper: Kodeverk[]) => {
-    kode: string;
-    medlemskapManuellVurderingType: Kodeverk;
-  }
+  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues;
+  transformValues?: (values: FormValues, manuellVurderingTyper: Kodeverk[]) => TransformedValues;
 }
 
 /**
@@ -59,7 +78,7 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av perioder (Medlemskapsvilkåret).
  */
-export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   hasPeriodeAksjonspunkt,
   isPeriodAksjonspunktClosed,
@@ -70,7 +89,7 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<OwnProps> & 
   vurderingTypes,
   alleMerknaderFraBeslutter,
 }) => {
-  const sorterteVurderingstyper = useMemo(() => vurderingTypes.sort((a: any, b: any) => a.navn.localeCompare(b.navn)), [vurderingTypes]);
+  const sorterteVurderingstyper = useMemo(() => vurderingTypes.sort((a, b) => a.navn.localeCompare(b.navn)), [vurderingTypes]);
 
   if (!fixedMedlemskapPerioder || fixedMedlemskapPerioder.length === 0) {
     return (
@@ -88,7 +107,7 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<OwnProps> & 
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]}
     >
       <Table headerTextCodes={headerTextCodes}>
-        {fixedMedlemskapPerioder.map((periode: any) => {
+        {fixedMedlemskapPerioder.map((periode) => {
           const key = periode.fom + periode.tom + periode.dekning + periode.status + periode.beslutningsdato;
           return (
             <TableRow key={key} id={key}>
@@ -109,40 +128,36 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<OwnProps> & 
         })}
       </Table>
       <FlexContainer>
-        {hasPeriodeAksjonspunkt
-      && (
-      <FlexRow>
-        <FlexColumn>
-          <RadioGroupField name="medlemskapManuellVurderingType.kode" validate={[required]} readOnly={readOnly} isEdited={isPeriodAksjonspunktClosed}>
-            {sorterteVurderingstyper.map((type: any) => <RadioOption key={type.kode} value={type.kode} label={type.navn} />)}
-          </RadioGroupField>
-        </FlexColumn>
-      </FlexRow>
-      )}
+        {hasPeriodeAksjonspunkt && (
+          <FlexRow>
+            <FlexColumn>
+              <RadioGroupField name="medlemskapManuellVurderingType.kode" validate={[required]} readOnly={readOnly} isEdited={isPeriodAksjonspunktClosed}>
+                {sorterteVurderingstyper.map((type) => <RadioOption key={type.kode} value={type.kode} label={type.navn} />)}
+              </RadioGroupField>
+            </FlexColumn>
+          </FlexRow>
+        )}
         <VerticalSpacer sixteenPx />
         <FlexRow className="justifyItemsToFlexEnd">
           <FlexColumn>
-            {fodselsdato
-          && (
-          <FormattedMessage
-            id="PerioderMedMedlemskapFaktaPanel.Fodselsdato"
-            values={{ dato: moment(fodselsdato).format(DDMMYYYY_DATE_FORMAT) }}
-          />
-          )}
-            {termindato
-          && (
-          <FormattedMessage
-            id="PerioderMedMedlemskapFaktaPanel.Termindato"
-            values={{ dato: moment(termindato).format(DDMMYYYY_DATE_FORMAT) }}
-          />
-          )}
-            {omsorgsovertakelseDato
-          && (
-          <FormattedMessage
-            id="PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse"
-            values={{ dato: moment(omsorgsovertakelseDato).format(DDMMYYYY_DATE_FORMAT) }}
-          />
-          )}
+            {fodselsdato && (
+              <FormattedMessage
+                id="PerioderMedMedlemskapFaktaPanel.Fodselsdato"
+                values={{ dato: moment(fodselsdato).format(DDMMYYYY_DATE_FORMAT) }}
+              />
+            )}
+            {termindato && (
+              <FormattedMessage
+                id="PerioderMedMedlemskapFaktaPanel.Termindato"
+                values={{ dato: moment(termindato).format(DDMMYYYY_DATE_FORMAT) }}
+              />
+            )}
+            {omsorgsovertakelseDato && (
+              <FormattedMessage
+                id="PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse"
+                values={{ dato: moment(omsorgsovertakelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+              />
+            )}
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -154,14 +169,7 @@ PerioderMedMedlemskapFaktaPanelImpl.defaultProps = {
   fixedMedlemskapPerioder: [],
 };
 
-interface PureOwnProps {
-  id: number;
-  behandlingId: number;
-  behandlingVersjon: number;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-}
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   ...behandlingFormValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`, ownProps.behandlingId, ownProps.behandlingVersjon)(
     state, 'fixedMedlemskapPerioder', 'fodselsdato', 'termindato',
     'omsorgsovertakelseDato', 'hasPeriodeAksjonspunkt', 'isPeriodAksjonspunktClosed',
@@ -171,10 +179,15 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
 
 const PerioderMedMedlemskapFaktaPanel = connect(mapStateToProps)(PerioderMedMedlemskapFaktaPanelImpl);
 
-PerioderMedMedlemskapFaktaPanel.buildInitialValues = (periode: PeriodeMedId, medlemskapPerioder: Medlemskap['medlemskapPerioder'], soknad: Soknad,
-  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+PerioderMedMedlemskapFaktaPanel.buildInitialValues = (
+  periode: PeriodeMedId,
+  medlemskapPerioder: Medlemskap['medlemskapPerioder'],
+  soknad: Soknad,
+  aksjonspunkter: Aksjonspunkt[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+): FormValues => {
   if (medlemskapPerioder === null) {
-    return [];
+    return {};
   }
 
   const fixedMedlemskapPerioder = medlemskapPerioder.map((i) => ({
@@ -184,8 +197,8 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (periode: PeriodeMedId, med
     status: getKodeverknavn(i.medlemskapType),
     beslutningsdato: i.beslutningsdato,
   }))
-    .sort((p1: any, p2: any) => new Date(p1.fom).getTime() - new Date(p2.fom).getTime());
-  const filteredAp = aksjonspunkter.filter((ap: any) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+    .sort((p1, p2) => new Date(p1.fom).getTime() - new Date(p2.fom).getTime());
+  const filteredAp = aksjonspunkter.filter((ap) => periode.aksjonspunkter.includes(ap.definisjon.kode)
       || (periode.aksjonspunkter.length > 0
         && periode.aksjonspunkter.includes(aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE)
         && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));
@@ -197,11 +210,11 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (periode: PeriodeMedId, med
     termindato: soknad.termindato,
     omsorgsovertakelseDato: soknad.omsorgsovertakelseDato,
     hasPeriodeAksjonspunkt: filteredAp.length > 0,
-    isPeriodAksjonspunktClosed: filteredAp.some((ap: any) => !isAksjonspunktOpen(ap.status.kode)),
+    isPeriodAksjonspunktClosed: filteredAp.some((ap) => !isAksjonspunktOpen(ap.status.kode)),
   };
 };
 
-PerioderMedMedlemskapFaktaPanel.transformValues = (values: any, manuellVurderingTyper: Kodeverk[]) => ({
+PerioderMedMedlemskapFaktaPanel.transformValues = (values: FormValues, manuellVurderingTyper: Kodeverk[]): TransformedValues => ({
   kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
   medlemskapManuellVurderingType: manuellVurderingTyper.find((m: Kodeverk) => m.kode === values.medlemskapManuellVurderingType.kode),
 });

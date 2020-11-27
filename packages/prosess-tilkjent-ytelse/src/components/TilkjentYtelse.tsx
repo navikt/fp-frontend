@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { BeregningsresultatPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
 
@@ -26,10 +26,10 @@ type NyPeriode = {
   title: string;
 } & PeriodeMedId;
 
-const parseDateString = (dateString: Date | string) => moment(dateString, ISO_DATE_FORMAT)
+const parseDateString = (dateString: Date | string): Date => moment(dateString, ISO_DATE_FORMAT)
   .toDate();
 
-const getOptions = (nyePerioder: NyPeriode[]) => {
+const getOptions = (nyePerioder: NyPeriode[]): any => {
   const firstPeriod = nyePerioder[0];
   const lastPeriod = nyePerioder[nyePerioder.length - 1];
 
@@ -52,7 +52,7 @@ const getOptions = (nyePerioder: NyPeriode[]) => {
 const gradertKlassenavn = 'gradert';
 const innvilgetKlassenavn = 'innvilget';
 
-const getStatusForPeriode = (periode: PeriodeMedId) => {
+const getStatusForPeriode = (periode: PeriodeMedId): string => {
   const graderteAndeler = periode.andeler.filter((andel) => andel.uttak && andel.uttak.gradering === true);
   if (graderteAndeler.length === 0) {
     return innvilgetKlassenavn;
@@ -60,7 +60,7 @@ const getStatusForPeriode = (periode: PeriodeMedId) => {
   return gradertKlassenavn;
 };
 
-const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId) => (`
+const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId): string => (`
   <p>
     ${moment(item.fom)
     .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
@@ -81,7 +81,7 @@ const createTooltipContent = (periodeType: string, intl: IntlShape, item: Period
    </p>
 `);
 
-const findKorrektLabelForKvote = (stonadtype: string) => {
+const findKorrektLabelForKvote = (stonadtype: string): string => {
   switch (stonadtype) {
     case stonadskontoType.FEDREKVOTE:
       return uttakPeriodeNavn.FEDREKVOTE;
@@ -135,6 +135,7 @@ interface OwnProps {
   hovedsokerKjonnKode: Kjønnkode;
   isSoknadSvangerskapspenger: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface OwnState {
@@ -168,7 +169,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     this.timelineRef = React.createRef();
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     // TODO Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
@@ -177,7 +178,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     }
   }
 
-  openPeriodInfo() {
+  openPeriodInfo(): void {
     const { props: { items }, state: { selectedItem } } = this;
     if (selectedItem) {
       this.setState({
@@ -190,7 +191,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     }
   }
 
-  nextPeriod() {
+  nextPeriod(): void {
     const { props: { items }, state: { selectedItem: currentSelectedItem } } = this;
     const newIndex = items.findIndex((item) => item.id === currentSelectedItem.id) + 1;
     if (newIndex < items.length) {
@@ -201,7 +202,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     }
   }
 
-  prevPeriod() {
+  prevPeriod(): void {
     const { props: { items }, state: { selectedItem: currentSelectedItem } } = this;
     const newIndex = items.findIndex((item) => item.id === currentSelectedItem.id) - 1;
     if (newIndex >= 0) {
@@ -212,7 +213,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     }
   }
 
-  selectHandler(eventProps: { items: number[] }) {
+  selectHandler(eventProps: { items: number[] }): void {
     const { props: { items } } = this;
     const selectedItem = items.find((item) => item.id === eventProps.items[0]);
     this.setState({
@@ -220,17 +221,17 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     });
   }
 
-  zoomIn() {
+  zoomIn(): void {
     const timeline = this.timelineRef.current.$el;
     timeline.zoomIn(0.5);
   }
 
-  zoomOut() {
+  zoomOut(): void {
     const timeline = this.timelineRef.current.$el;
     timeline.zoomOut(0.5);
   }
 
-  goForward() {
+  goForward(): void {
     const timeline = this.timelineRef.current.$el;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
@@ -241,7 +242,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     timeline.setWindow(newWindowTimes);
   }
 
-  goBackward() {
+  goBackward(): void {
     const timeline = this.timelineRef.current.$el;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
@@ -254,26 +255,21 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
 
   render() {
     const {
-      nextPeriod,
-      prevPeriod,
-      goBackward,
-      goForward,
-      openPeriodInfo,
-      props: {
-        groups,
-        items,
-        soknadDate,
-        familiehendelseDate,
-        hovedsokerKjonnKode,
-        intl,
-        isSoknadSvangerskapspenger,
-        alleKodeverk,
-      },
-      selectHandler,
-      state: { selectedItem },
-      zoomIn,
-      zoomOut,
-    } = this;
+      groups,
+      items,
+      soknadDate,
+      familiehendelseDate,
+      hovedsokerKjonnKode,
+      intl,
+      isSoknadSvangerskapspenger,
+      alleKodeverk,
+      arbeidsgiverOpplysningerPerId,
+    } = this.props;
+
+    const {
+      selectedItem,
+    } = this.state;
+
     const lastPeriod = items[items.length - 1];
     const customTimes = getCustomTimes(soknadDate, familiehendelseDate, lastPeriod);
     const nyePerioder = addClassNameGroupIdToPerioder(items, intl);
@@ -295,7 +291,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
                 items={nyePerioder}
                 groups={groups}
                 customTimes={customTimes}
-                selectHandler={selectHandler}
+                selectHandler={this.selectHandler}
                 selection={[selectedItem ? selectedItem.id : null]}
               />
             </div>
@@ -304,24 +300,24 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
         <Row>
           <Column xs="12">
             <TimeLineControl
-              goBackwardCallback={goBackward}
-              goForwardCallback={goForward}
-              zoomInCallback={zoomIn}
-              zoomOutCallback={zoomOut}
-              openPeriodInfo={openPeriodInfo}
+              goBackwardCallback={this.goBackward}
+              goForwardCallback={this.goForward}
+              zoomInCallback={this.zoomIn}
+              zoomOutCallback={this.zoomOut}
+              openPeriodInfo={this.openPeriodInfo}
             />
           </Column>
         </Row>
-        {selectedItem
-        && (
+        {selectedItem && (
           <TilkjentYtelseTimelineData
             alleKodeverk={alleKodeverk}
             selectedItemStartDate={selectedItem.fom.toString()}
             selectedItemEndDate={selectedItem.tom.toString()}
             selectedItemData={selectedItem}
-            callbackForward={nextPeriod}
-            callbackBackward={prevPeriod}
+            callbackForward={this.nextPeriod}
+            callbackBackward={this.prevPeriod}
             isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         )}
       </div>

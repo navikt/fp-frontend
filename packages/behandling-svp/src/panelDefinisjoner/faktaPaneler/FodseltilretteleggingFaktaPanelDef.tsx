@@ -3,9 +3,16 @@ import React from 'react';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
-import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
+import { FaktaPanelDef, Rettigheter } from '@fpsak-frontend/behandling-felles';
+import { ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse } from '@fpsak-frontend/types';
 
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
+
+type Data = {
+  rettigheter: Rettigheter;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
 
 class FodseltilretteleggingFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.FODSELTILRETTELEGGING
@@ -18,9 +25,10 @@ class FodseltilretteleggingFaktaPanelDef extends FaktaPanelDef {
 
   getKomponent = (props) => <FodselOgTilretteleggingFaktaIndex {...props} />
 
-  getData = ({ rettigheter, inntektArbeidYtelse }) => ({
+  getData = ({ rettigheter, inntektArbeidYtelse, arbeidsgiverOpplysningerPerId }: Data) => ({
     erOverstyrer: rettigheter.kanOverstyreAccess.isEnabled,
     inntektArbeidYtelse,
+    arbeidsgiverOpplysningerPerId,
   })
 }
 

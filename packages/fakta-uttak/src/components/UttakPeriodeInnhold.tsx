@@ -11,7 +11,6 @@ import InnleggelsePeriode from './perioder/InnleggelsePeriode';
 import ForeldreAnsvarPeriode from './perioder/ForeldreAnsvarPeriode';
 
 import styles from './uttakPeriodeInnhold.less';
-import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
 export const renderPeriode = (
   fieldId: string,
@@ -26,7 +25,6 @@ export const renderPeriode = (
   overforingArsak: Kodeverk,
   bekreftet: boolean,
   uttakPeriodeType: Kodeverk,
-  arbeidsgiver: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'],
   behandlingStatusKode: string,
   farSøkerFør6Uker: boolean,
   behandlingId: number,
@@ -55,7 +53,6 @@ export const renderPeriode = (
           tilDato={tilDato}
           bekreftet={bekreftet}
           uttakPeriodeType={uttakPeriodeType}
-          arbeidsgiver={arbeidsgiver}
           behandlingStatusKode={behandlingStatusKode}
           behandlingId={behandlingId}
           behandlingVersjon={behandlingVersjon}
@@ -178,7 +175,6 @@ export const renderPeriode = (
           tilDato={tilDato}
           bekreftet={bekreftet}
           uttakPeriodeType={uttakPeriodeType}
-          arbeidsgiver={arbeidsgiver}
           behandlingStatusKode={behandlingStatusKode}
           behandlingId={behandlingId}
           behandlingVersjon={behandlingVersjon}
@@ -212,7 +208,6 @@ interface OwnProps {
   arbeidstidprosent?: number;
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
-  arbeidsgiver?: CustomUttakKontrollerFaktaPerioder['arbeidsgiver'];
 }
 
 export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
@@ -229,7 +224,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
   bekreftet,
   openForm,
   uttakPeriodeType,
-  arbeidsgiver,
   behandlingStatusKode,
   farSøkerFør6Uker,
   behandlingId,
@@ -257,7 +251,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
         overforingArsak,
         bekreftet,
         uttakPeriodeType,
-        arbeidsgiver,
         behandlingStatusKode,
         farSøkerFør6Uker,
         behandlingId,

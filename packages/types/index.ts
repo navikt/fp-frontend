@@ -27,7 +27,7 @@ export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsTyp
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
 export { default as Dokument } from './src/dokumentTsType';
 export { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
-export { default as InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
+export { default as InntektArbeidYtelse, IAYInntektsmelding, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';
@@ -35,7 +35,7 @@ export { default as Personopplysninger, PersonopplysningAdresse } from './src/pe
 export {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
 } from './src/simuleringResultatTsType';
-export { default as Soknad, ManglendeVedleggSoknad } from './src/soknadTsType';
+export { default as Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode } from './src/soknadTsType';
 export {
   default as UttaksresultatPeriode, PeriodeSoker, PeriodeSokerAktivitet, ArsakKodeverk,
 } from './src/uttaksresultatPeriodeTsType';
@@ -47,7 +47,9 @@ export { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export { default as Fagsak } from './src/fagsakTsType';
 export { default as FagsakPerson } from './src/fagsakPersonTsType';
-export { default as Medlemskap, MedlemPeriode } from './src/medlemskapTsType';
+export {
+  default as Medlemskap, MedlemPeriode, MedlemskapPeriode, MedlemInntekt,
+} from './src/medlemskapTsType';
 export { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export { default as KlageVurdering } from './src/klageVurderingTsType';
@@ -58,7 +60,6 @@ export {
 } from './src/opptjeningTsType';
 export { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';
-export { default as Arbeidsgiver } from './src/arbeidsgiverTsType';
 export { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
 export { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
 export {

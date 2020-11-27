@@ -18,9 +18,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   const arbeidsforhold = {
     id: '1',
     arbeidsforholdId: '1231-2345',
-    navn: 'Svendsen Eksos',
-    arbeidsgiverIdentifikator: '1234567',
-    arbeidsgiverIdentifiktorGUI: '1234567',
+    arbeidsgiverReferanse: '1234567',
     fomDato: '2018-01-01',
     tomDato: '2018-10-10',
     kilde: {
@@ -39,6 +37,19 @@ describe('<PersonArbeidsforholdPanel>', () => {
     kanOppretteNyttArbforFraIM: false,
   };
 
+  const arbeidsgiverOpplysningerPerId = {
+    1234567: {
+      erPrivatPerson: false,
+      identifikator: '1234567',
+      navn: 'Svendsen Eksos',
+    },
+    2: {
+      erPrivatPerson: false,
+      identifikator: '1234568',
+      navn: 'Nav',
+    },
+  };
+
   it('skal rendre komponent', () => {
     const wrapper = shallow(<PersonArbeidsforholdPanelImpl
       readOnly={false}
@@ -54,6 +65,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(PersonArbeidsforholdTable)).has.length(1);
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(1);
@@ -79,6 +91,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const table = wrapper.find(PersonArbeidsforholdTable);
@@ -100,6 +113,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     wrapper.setState({ selectedArbeidsforhold: undefined });
@@ -122,6 +136,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(1);
@@ -146,6 +161,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(0);
@@ -169,6 +185,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(0);
@@ -189,6 +206,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     // @ts-ignore
@@ -224,6 +242,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const editedArbeidsforhold = {
       ...newArbeidsforhold,
@@ -280,6 +299,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -320,27 +340,24 @@ describe('<PersonArbeidsforholdPanel>', () => {
   it('skal sortere arbeidsforhold etter navn og mottakstidspunkt for inntektsmelding', () => {
     const arbeidsforhold2 = {
       ...arbeidsforhold,
-      navn: 'Svendsen Eksos',
       mottattDatoInntektsmelding: '2018-01-01',
     };
     const arbeidsforhold3 = {
       ...arbeidsforhold,
-      navn: 'Svendsen Eksos',
       mottattDatoInntektsmelding: '2017-01-01',
     };
     const arbeidsforhold4 = {
       ...arbeidsforhold,
-      navn: 'Svendsen Eksos',
       mottattDatoInntektsmelding: '2019-01-01',
     };
     const arbeidsforhold5 = {
       ...arbeidsforhold,
-      navn: 'Nav',
+      arbeidsgiverReferanse: '2',
       mottattDatoInntektsmelding: '2018-01-01',
     };
 
     const arbeidsforholdListe = [arbeidsforhold, arbeidsforhold2, arbeidsforhold3, arbeidsforhold4, arbeidsforhold5];
-    const sorterteArbeidsforhol = sortArbeidsforhold(arbeidsforholdListe);
+    const sorterteArbeidsforhol = sortArbeidsforhold(arbeidsforholdListe, arbeidsgiverOpplysningerPerId);
 
     expect(sorterteArbeidsforhol).is.eql([arbeidsforhold5, arbeidsforhold4, arbeidsforhold2, arbeidsforhold3, arbeidsforhold]);
   });
@@ -363,7 +380,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukArbeidsforholdet: true,
     };
 
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold, oldArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold, oldArbeidsforhold], arbeidsgiverOpplysningerPerId);
 
     expect(initialValues).is.eql({
       arbeidsforhold: [{
@@ -373,6 +390,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }, {
         ...oldArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -380,6 +398,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -388,9 +407,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const toArbeidsforhold = [{
       id: '1',
       arbeidsforholdId: '1231-2345',
-      navn: 'Svendsen Eksos',
-      arbeidsgiverIdentifikator: '1234567',
-      arbeidsgiverIdentifiktorGUI: '1234567',
+      arbeidsgiverReferanse: '1234567',
       fomDato: '2018-01-01',
       tomDato: '2018-10-10',
       kilde: {
@@ -405,9 +422,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }, {
       id: '2',
       arbeidsforholdId: '1231-2345',
-      navn: 'Svendsen Eksos',
-      arbeidsgiverIdentifikator: '1234567',
-      arbeidsgiverIdentifiktorGUI: '1234567',
+      arbeidsgiverReferanse: '1234567',
       fomDato: '2018-01-01',
       tomDato: '2018-10-10',
       kilde: {
@@ -430,9 +445,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const toArbeidsforhold = [{
       id: '1',
       arbeidsforholdId: '1231-2345',
-      navn: 'Svendsen Eksos',
-      arbeidsgiverIdentifikator: '1234567',
-      arbeidsgiverIdentifiktorGUI: '1234567',
+      arbeidsgiverReferanse: '1234567',
       basertPaInntektsmelding: false,
       fomDato: '2018-01-01',
       tomDato: '2018-10-10',
@@ -449,9 +462,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }, {
       id: '2',
       arbeidsforholdId: '1231-2345',
-      navn: 'Svendsen Eksos',
-      arbeidsgiverIdentifikator: '1234567',
-      arbeidsgiverIdentifiktorGUI: '1234567',
+      arbeidsgiverReferanse: '1234567',
       basertPaInntektsmelding: false,
       fomDato: '2018-01-01',
       tomDato: '2018-10-10',
@@ -487,6 +498,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -533,6 +545,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -579,6 +592,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -625,6 +639,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -671,6 +686,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const instance = wrapper.instance();
     // @ts-ignore
@@ -704,9 +720,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(valgtArbeidsforhold.fomDato).to.eql(undefined);
     expect(valgtArbeidsforhold.tomDato).to.eql(undefined);
     expect(valgtArbeidsforhold.arbeidsforholdId).to.eql(undefined);
-    expect(valgtArbeidsforhold.arbeidsgiverIdentifiktorGUI).to.eql(undefined);
-    expect(valgtArbeidsforhold.arbeidsgiverIdentifikator).to.eql(undefined);
-    expect(valgtArbeidsforhold.navn).to.eql(undefined);
+    expect(valgtArbeidsforhold.arbeidsgiverReferanse).to.eql(undefined);
   });
 
   it('skal vise knapp for å legge til arbeidsforhold', () => {
@@ -724,6 +738,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const btn = wrapper.find('button');
     expect(btn).to.have.length(1);
@@ -748,6 +763,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const btn = wrapper.find('button');
     expect(btn).to.have.length(0);
@@ -771,6 +787,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -820,6 +837,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -875,6 +893,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const editedArbeidsforhold = {
@@ -913,7 +932,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       tilVurdering: false,
       erEndret: false,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold, oldArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold, oldArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -922,6 +941,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: undefined,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }, {
         ...oldArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -929,6 +949,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: undefined,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -938,7 +959,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       ...arbeidsforhold,
       brukMedJustertPeriode: true,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -947,6 +968,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.OVERSTYR_TOM,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: '2018-10-10',
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -962,7 +984,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       }],
       brukPermisjon: true,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -971,6 +993,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.SOKER_ER_I_PERMISJON,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -980,7 +1003,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       ...arbeidsforhold,
       brukArbeidsforholdet: false,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -989,6 +1012,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: undefined,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -999,7 +1023,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukMedJustertPeriode: false,
       fortsettBehandlingUtenInntektsmelding: false,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -1008,6 +1032,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.AVSLA_YTELSE,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -1018,7 +1043,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukMedJustertPeriode: false,
       inntektMedTilBeregningsgrunnlag: false,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -1027,6 +1052,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -1037,7 +1063,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukMedJustertPeriode: false,
       fortsettBehandlingUtenInntektsmelding: true,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -1046,6 +1072,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
@@ -1062,7 +1089,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       }],
       fortsettBehandlingUtenInntektsmelding: true,
     };
-    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold]);
+    const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
     expect(initialValues).is.eql({
       arbeidsforhold: [{
         ...newArbeidsforhold,
@@ -1071,6 +1098,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
         arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
         aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
         overstyrtTom: undefined,
+        navn: 'Svendsen Eksos',
       }],
     });
   });
