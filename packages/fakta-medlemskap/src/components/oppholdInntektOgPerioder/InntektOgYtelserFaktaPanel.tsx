@@ -128,7 +128,7 @@ InntektOgYtelserFaktaPanel.buildInitialValues = (
     .map((i) => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[i.utbetaler];
       return {
-        person: arbeidsgiverOpplysninger.navn,
+        person: arbeidsgiverOpplysninger ? arbeidsgiverOpplysninger.navn : i.utbetaler,
         employer: i.utbetaler,
         fom: i.fom,
         tom: i.tom,
