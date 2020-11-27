@@ -19,7 +19,7 @@ export const ANDRE_YTELSER_FORM_NAME_PREFIX = 'andreYtelser';
 
 const ANDRE_YTELSER_PERIODE_SUFFIX = 'PERIODER';
 
-const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSiviltjeneste?: boolean) => {
+const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSiviltjeneste?: boolean): KodeverkMedNavn[] => {
   if (kunMiliterEllerSiviltjeneste) {
     return andreYtelser.filter((ay) => ay.kode === arbeidType.MILITÆR_ELLER_SIVILTJENESTE);
   }
@@ -50,7 +50,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => any;
+  buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
   validate?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
   transformValues?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
 }
@@ -109,7 +109,7 @@ const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps
   andreYtelser: initialProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE],
 });
 
-AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => {
+AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => {
   const ytelseInitialValues = {};
   removeArbeidstyper(andreYtelser).forEach((ay) => {
     const ytelsePeriodeFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
@@ -118,7 +118,7 @@ AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]) => {
   return { [ANDRE_YTELSER_FORM_NAME_PREFIX]: ytelseInitialValues };
 };
 
-AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[]) => {
+AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
   const ytelseValues = values[ANDRE_YTELSER_FORM_NAME_PREFIX];
   const errors = {
     [ANDRE_YTELSER_FORM_NAME_PREFIX]: {},
@@ -131,7 +131,7 @@ AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[
   return errors;
 };
 
-AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]) => {
+AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
   const ytelseValues = values[ANDRE_YTELSER_FORM_NAME_PREFIX];
   const newValues = [];
 

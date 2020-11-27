@@ -12,21 +12,26 @@ const headerTextCodes = [
   'MedlemskapEndringerTabell.Opplysning',
 ];
 
-type PeriodeMedId = MedlemPeriode & { id: number; }
+type PeriodeMedId = MedlemPeriode & { id: string; }
 
-interface OwnProps {
-  selectedId?: number;
-  velgPeriodeCallback: (_p, id: number, periode: MedlemPeriode) => void;
+interface PureOwnProps {
+  behandlingId: number,
+  behandlingVersjon: number,
+  selectedId?: string;
+  velgPeriodeCallback: (_p, id: string, periode: MedlemPeriode) => void;
+}
+
+interface MappedOwnProps {
   perioder?: PeriodeMedId[];
 }
 
-const MedlemskapEndringerTabell: FunctionComponent<OwnProps> = ({
+const MedlemskapEndringerTabell: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   perioder,
   velgPeriodeCallback,
   selectedId,
 }) => (
   <Table headerTextCodes={headerTextCodes}>
-    {perioder.map((periode: PeriodeMedId) => (
+    {perioder.map((periode) => (
       <TableRow
         key={periode.id}
         id={periode.id}
@@ -51,16 +56,11 @@ MedlemskapEndringerTabell.defaultProps = {
   perioder: [],
 };
 
-interface PureOwnProps {
-  behandlingId: number,
-  behandlingVersjon: number,
-}
-
 const mapStateToPropsFactory = (initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const perioder = (behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(initialState, 'perioder') || [])
     .sort((a: PeriodeMedId, b: PeriodeMedId) => a.vurderingsdato.localeCompare(b.vurderingsdato));
-  return () => ({
+  return (): MappedOwnProps => ({
     perioder,
   });
 };

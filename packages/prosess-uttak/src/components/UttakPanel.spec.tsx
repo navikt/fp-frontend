@@ -91,17 +91,13 @@ describe('<UttakPanel>', () => {
       MØDREKVOTE: {
         aktivitetSaldoDtoList: [{
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'UNIVERSITETET I OSLO',
-            },
+            arbeidsgiverReferanse: '123',
           },
           saldo: 0,
         },
         {
           aktivitetIdentifikator: {
-            arbeidsgiver: {
-              navn: 'STATOIL',
-            },
+            arbeidsgiverReferanse: '445',
           },
           saldo: 4,
         }],
@@ -122,6 +118,19 @@ describe('<UttakPanel>', () => {
   const sprakkode = {
     kode: 'NO',
     kodeverk: '',
+  };
+
+  const arbeidsgiverOpplysningerPerId = {
+    123: {
+      erPrivatPerson: false,
+      identifikator: '123',
+      navn: 'UNIVERSITETET I OSLO',
+    },
+    445: {
+      erPrivatPerson: false,
+      identifikator: '445',
+      navn: 'STATOIL',
+    },
   };
 
   it('skal rendre uttakpanel uten aksjonspunkt', () => {
@@ -151,6 +160,7 @@ describe('<UttakPanel>', () => {
       sprakkode={sprakkode}
       readOnlySubmitButton={false}
       apCodes={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttak = wrapper.find(Uttak);
     expect(uttak).has.length(1);
@@ -202,6 +212,7 @@ describe('<UttakPanel>', () => {
       sprakkode={sprakkode}
       readOnlySubmitButton={false}
       apCodes={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttak = wrapper.find(Uttak);
     expect(uttak).has.length(1);
@@ -335,17 +346,13 @@ describe('<UttakPanel>', () => {
           MØDREKVOTE: {
             aktivitetSaldoDtoList: [{
               aktivitetIdentifikator: {
-                arbeidsgiver: {
-                  navn: 'UNIVERSITETET I OSLO',
-                },
+                arbeidsgiverReferanse: '123',
               },
               saldo: 0,
             },
             {
               aktivitetIdentifikator: {
-                arbeidsgiver: {
-                  navn: 'STATOIL',
-                },
+                arbeidsgiverReferanse: '445',
               },
               saldo: 4,
             }],

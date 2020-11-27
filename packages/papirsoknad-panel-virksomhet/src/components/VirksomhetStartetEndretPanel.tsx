@@ -112,7 +112,7 @@ VirksomhetStartetEndretPanel.defaultProps = {
   erNyIArbeidslivet: false,
 };
 
-const mapStateToProps = (state: any, initialProps: PureOwnProps):MappedOwnProps => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
   varigEndretEllerStartetSisteFireAr: formValueSelector(initialProps.form)(state, 'varigEndretEllerStartetSisteFireAr'),
   harVarigEndring: formValueSelector(initialProps.form)(state, 'harVarigEndring'),
   erNyIArbeidslivet: formValueSelector(initialProps.form)(state, 'erNyIArbeidslivet'),

@@ -19,7 +19,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues: () => any;
+  buildInitialValues: () => FormValues;
   validate?: (values: FormValues) => any,
 }
 
@@ -35,7 +35,7 @@ const InntektsgivendeArbeidPapirsoknadIndex: FunctionComponent<OwnProps> & Stati
   </RawIntlProvider>
 );
 
-InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues = () => InntektsgivendeArbeidPanel.buildInitialValues();
+InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues = (): FormValues => InntektsgivendeArbeidPanel.buildInitialValues();
 
 InntektsgivendeArbeidPapirsoknadIndex.validate = (values: FormValues) => InntektsgivendeArbeidPanel.validate(values);
 

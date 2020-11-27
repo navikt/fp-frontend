@@ -12,17 +12,22 @@ import Permisjon from '../../types/permisjonTsType';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
 
-interface OwnProps {
+interface PureOwnProps {
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
   readOnly: boolean;
   permisjon: Permisjon;
   formSectionName: string;
-  skalTaHensynTilPermisjon: boolean;
-  tilretteleggingBehovFom: string;
 }
 
-export const finnPermisjonFieldName = (permisjon) => `permisjon${permisjon.permisjonFom}`;
+interface MappedOwnProps {
+  skalTaHensynTilPermisjon: boolean;
+}
 
-const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
+export const finnPermisjonFieldName = (permisjon: Permisjon): string => `permisjon${permisjon.permisjonFom}`;
+
+const VelferdspermisjonSection: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
   readOnly,
   permisjon,
   skalTaHensynTilPermisjon,
@@ -33,26 +38,24 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Normaltekst className={styles.arbeidsforholdTittel}>
-        {permisjon.permisjonTom == null
-        && (
-        <FormattedMessage
-          id="VelferdspermisjonSection.PermisjonDetaljerUendeligPeriode"
-          values={{
-            fom: moment(permisjon.permisjonFom).format(DDMMYYYY_DATE_FORMAT),
-            prosent: permisjon.permisjonsprosent,
-          }}
-        />
+        {permisjon.permisjonTom == null && (
+          <FormattedMessage
+            id="VelferdspermisjonSection.PermisjonDetaljerUendeligPeriode"
+            values={{
+              fom: moment(permisjon.permisjonFom).format(DDMMYYYY_DATE_FORMAT),
+              prosent: permisjon.permisjonsprosent,
+            }}
+          />
         )}
-        {permisjon.permisjonTom != null
-        && (
-        <FormattedMessage
-          id="VelferdspermisjonSection.PermisjonDetaljer"
-          values={{
-            fom: moment(permisjon.permisjonFom).format(DDMMYYYY_DATE_FORMAT),
-            tom: moment(permisjon.permisjonTom).format(DDMMYYYY_DATE_FORMAT),
-            prosent: permisjon.permisjonsprosent,
-          }}
-        />
+        {permisjon.permisjonTom != null && (
+          <FormattedMessage
+            id="VelferdspermisjonSection.PermisjonDetaljer"
+            values={{
+              fom: moment(permisjon.permisjonFom).format(DDMMYYYY_DATE_FORMAT),
+              tom: moment(permisjon.permisjonTom).format(DDMMYYYY_DATE_FORMAT),
+              prosent: permisjon.permisjonsprosent,
+            }}
+          />
         )}
       </Normaltekst>
       <VerticalSpacer sixteenPx />
@@ -69,10 +72,10 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
   );
 };
 
-export const skalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permisjon: Permisjon) => !moment(permisjon.permisjonFom)
+export const skalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permisjon: Permisjon): boolean => !moment(permisjon.permisjonFom)
   .isAfter(tilretteleggingBehovFom) && (permisjon.permisjonTom == null || !moment(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom));
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   skalTaHensynTilPermisjon: skalTaHensynTilPermisjon(behandlingFormValueSelector(ownProps.formName,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, `${ownProps.formSectionName}.tilretteleggingBehovFom`), ownProps.permisjon),
 });

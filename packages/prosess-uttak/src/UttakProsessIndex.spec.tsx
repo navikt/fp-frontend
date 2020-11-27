@@ -35,13 +35,7 @@ describe('<UttakProsessIndex>', () => {
             prosentArbeid: 0,
             arbeidsforholdId: null,
             eksternArbeidsforholdId: null,
-            arbeidsgiver: {
-              identifikator: '910909088',
-              aktørId: null,
-              fødselsdato: null,
-              navn: 'BEDRIFT AS',
-              virksomhet: true,
-            },
+            arbeidsgiverReferanse: '910909088',
             utbetalingsgrad: 100,
             uttakArbeidType: {
               kode: 'ORDINÆRT_ARBEID',
@@ -127,6 +121,14 @@ describe('<UttakProsessIndex>', () => {
     },
   }] as Aksjonspunkt[];
 
+  const arbeidsgiverOpplysningerPerId = {
+    910909088: {
+      erPrivatPerson: false,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+    },
+  };
+
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<UttakProsessIndex
       fagsak={fagsak}
@@ -148,6 +150,7 @@ describe('<UttakProsessIndex>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       status=""
       vilkar={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(UttakPanel)).has.length(1);
   });

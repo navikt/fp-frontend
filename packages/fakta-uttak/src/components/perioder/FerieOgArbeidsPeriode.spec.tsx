@@ -36,6 +36,7 @@ describe('<FerieOgArbeidsPeriode>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       arbeidstidprosent={10}
+      onSubmit={sinon.spy()}
       {...reduxFormPropsMock}
     />);
 

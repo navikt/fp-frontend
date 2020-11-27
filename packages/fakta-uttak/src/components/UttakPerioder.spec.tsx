@@ -60,6 +60,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -108,6 +109,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -151,6 +153,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -190,6 +193,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -224,6 +228,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -258,6 +263,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -315,6 +321,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 
@@ -350,6 +357,7 @@ describe('<UttakPerioder>', () => {
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
+        arbeidsgiverOpplysningerPerId={{}}
       />,
     );
 

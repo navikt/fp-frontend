@@ -10,9 +10,7 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeids
 const arbeidsforhold = {
   id: '1',
   arbeidsforholdId: '1231-2345',
-  navn: 'Svendsen Eksos',
-  arbeidsgiverIdentifikator: '1234567',
-  arbeidsgiverIdentifiktorGUI: '1234567',
+  arbeidsgiverReferanse: '1234567',
   fomDato: '2012-01-01',
   tomDato: '2025-01-01',
   kilde: {

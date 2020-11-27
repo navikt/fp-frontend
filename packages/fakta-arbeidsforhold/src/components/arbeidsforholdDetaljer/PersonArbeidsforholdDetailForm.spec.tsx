@@ -14,12 +14,18 @@ import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 
 describe('<PersonArbeidsforholdDetailForm>', () => {
+  const arbeidsgiverOpplysningerPerId = {
+    1234567: {
+      erPrivatPerson: false,
+      identifikator: '1234567',
+      navn: 'Svendsen Eksos',
+    },
+  };
+
   const arbeidsforhold = {
     id: '1',
     arbeidsforholdId: '1231-2345',
-    navn: 'Svendsen Eksos',
-    arbeidsgiverIdentifikator: '1234567',
-    arbeidsgiverIdentifiktorGUI: '1234567',
+    arbeidsgiverReferanse: '1234567',
     fomDato: '2018-01-01',
     tomDato: '2018-10-10',
     kilde: {
@@ -55,6 +61,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(TextAreaField)).has.length(0);
   });
@@ -81,6 +88,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
     expect(panel).to.be.length(1);
@@ -108,6 +116,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
     expect(panel).to.be.length(0);
@@ -135,6 +144,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
     expect(panel).to.be.length(0);
@@ -162,6 +172,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(1);
@@ -189,6 +200,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
@@ -216,6 +228,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
   });
@@ -242,6 +255,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
     expect(radiogroup).has.length(1);
@@ -269,6 +283,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
     expect(radiogroup).has.length(0);
@@ -296,6 +311,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
     expect(wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel)).has.length(0);

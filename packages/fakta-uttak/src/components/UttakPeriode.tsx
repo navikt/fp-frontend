@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
@@ -8,7 +8,7 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import { FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
 import { calcDays } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
@@ -23,21 +23,21 @@ import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPer
 
 const classNames = classnames.bind(styles);
 
-const renderTomPeriode = (intl: IntlShape) => (
+const renderTomPeriode = (intl: IntlShape): ReactElement => (
   <div className={styles.periodeIconWrapper}>
     <Image src={tomPeriode} alt={intl.formatMessage({ id: 'UttakInfoPanel.PeriodenharTommeDagerFremTilNestePeriode' })} />
     <Normaltekst><FormattedMessage id="UttakInfoPanel.TomPeriode" /></Normaltekst>
   </div>
 );
 
-const renderOverlappendePeriode = (intl: IntlShape) => (
+const renderOverlappendePeriode = (intl: IntlShape): ReactElement => (
   <div className={styles.periodeIconWrapper}>
     <Image src={overlapp} alt={intl.formatMessage({ id: 'UttakInfoPanel.PeriodenErOverlappende' })} />
     <Normaltekst><FormattedMessage id="UttakInfoPanel.OverlappendePeriode" /></Normaltekst>
   </div>
 );
 
-const renderValidationGraphic = (perioder: CustomUttakKontrollerFaktaPerioder[], index: number, isLastIndex: boolean, intl: IntlShape) => {
+const renderValidationGraphic = (perioder: CustomUttakKontrollerFaktaPerioder[], index: number, isLastIndex: boolean, intl: IntlShape): ReactElement | null => {
   if (!isLastIndex) {
     const periode = perioder[index];
     const nextPeriode = perioder[index + 1];
@@ -55,7 +55,7 @@ const renderValidationGraphic = (perioder: CustomUttakKontrollerFaktaPerioder[],
   return null;
 };
 
-const getClassName = (periode: CustomUttakKontrollerFaktaPerioder, readOnly: boolean) => {
+const getClassName = (periode: CustomUttakKontrollerFaktaPerioder, readOnly: boolean): string => {
   if (periode.oppholdÅrsak && periode.oppholdÅrsak.kode !== '-') {
     return classNames('oppholdPeriodeContainer', { active: !periode.bekreftet && !readOnly });
   }
@@ -82,6 +82,7 @@ interface OwnProps {
   sisteUttakdatoFørsteSeksUker: moment.Moment;
   endringsdato?: string;
   farSøkerFør6Uker?: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -105,6 +106,7 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   vilkarForSykdomExists,
   readOnly,
   updatePeriode,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
     {meta.error && <AlertStripe className={styles.fullWidth} type="feil">{meta.error}</AlertStripe>}
@@ -126,7 +128,8 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     uttakPeriodeType={periode.uttakPeriodeType}
                     id={periode.id}
                     arbeidstidprosent={periode.arbeidstidsprosent}
-                    arbeidsgiver={periode.arbeidsgiver}
+                    arbeidsgiverReferanse={periode.arbeidsgiverReferanse}
+                    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                     utsettelseArsak={periode.utsettelseÅrsak}
                     overforingArsak={periode.overføringÅrsak}
                     isFromSøknad={periode.isFromSøknad}
@@ -154,7 +157,6 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     fraDato={periode.fom}
                     uttakPeriodeType={periode.uttakPeriodeType}
                     overforingArsak={periode.overføringÅrsak}
-                    arbeidsgiver={periode.arbeidsgiver}
                     updatePeriode={updatePeriode}
                     cancelEditPeriode={cancelEditPeriode}
                     readOnly={readOnly}

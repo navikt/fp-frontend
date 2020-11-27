@@ -94,6 +94,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         setApentFaktaPanel={setApentFaktaPanel}
         setBehandling={setBehandling}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </>
   );

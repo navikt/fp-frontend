@@ -10,7 +10,8 @@ import { behandlingForm, getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Aksjonspunkt, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk,
+  KodeverkMedNavn, Personopplysninger, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import UttakPerioder from './UttakPerioder';
@@ -22,15 +23,23 @@ import {
 } from './utils/uttakPeriodeValidering';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
-interface OwnProps {
-  readOnly: boolean;
-  hasOpenAksjonspunkter: boolean;
-  behandlingFormPrefix: string;
-  submitting: boolean;
+type FormValues = {
+  førsteUttaksdato?: string;
+  endringsdato?: string;
+  perioder?: CustomUttakKontrollerFaktaPerioder[];
+  faktaUttakManuellOverstyring?: boolean;
+  slettedePerioder?: CustomUttakKontrollerFaktaPerioder[];
+}
+
+interface PureOwnProps {
+  uttakPerioder: UttakKontrollerFaktaPerioder[];
+  ytelsefordeling: Ytelsefordeling;
   aksjonspunkter: Aksjonspunkt[];
-  hasRevurderingOvertyringAp: boolean;
   behandlingId: number;
   behandlingVersjon: number;
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  hasOpenAksjonspunkter: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
@@ -38,9 +47,19 @@ interface OwnProps {
   behandlingStatus: Kodeverk;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const UttakFaktaForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+interface MappedOwnProps {
+  initialValues: FormValues;
+  behandlingFormPrefix: string;
+  hasRevurderingOvertyringAp: boolean;
+  validate: (values: FormValues) => any;
+  warn: (values: FormValues) => any;
+  onSubmit: (...args: any[]) => any;
+}
+
+export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   hasOpenAksjonspunkter,
   aksjonspunkter,
@@ -54,6 +73,7 @@ export const UttakFaktaForm: FunctionComponent<OwnProps & InjectedFormProps> = (
   behandlingStatus,
   familiehendelse,
   vilkarForSykdomExists,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
@@ -82,6 +102,7 @@ export const UttakFaktaForm: FunctionComponent<OwnProps & InjectedFormProps> = (
         behandlingStatus={behandlingStatus}
         familiehendelse={familiehendelse}
         vilkarForSykdomExists={vilkarForSykdomExists}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       {formProps.error
         && (
@@ -93,7 +114,7 @@ export const UttakFaktaForm: FunctionComponent<OwnProps & InjectedFormProps> = (
   );
 };
 
-const warningsUttakForm = (values: any) => {
+const warningsUttakForm = (values: FormValues) => {
   const warnings = {};
   const { førsteUttaksdato, endringsdato } = values;
 
@@ -111,15 +132,14 @@ const warningsUttakForm = (values: any) => {
   return warnings;
 };
 
-const validateUttakForm = (values: any, aksjonspunkter: Aksjonspunkt[]) => { // NOSONAR må ha disse sjekkene
+const validateUttakForm = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => { // NOSONAR må ha disse sjekkene
   const errors = {};
   if (!values.perioder) {
     return errors;
   }
 
   if (sjekkOmfaktaOmUttakAksjonspunkt(aksjonspunkter) || values.faktaUttakManuellOverstyring) {
-    // const originalStartDato = (originalPerioder[0] || []).fom;
-    const nyStartDato = (values.perioder[0] || []).fom;
+    const nyStartDato = values.perioder && values.perioder.length > 0 ? values.perioder[0].fom : undefined;
     const { førsteUttaksdato } = values;
 
     if (values.perioder.length === 0) {
@@ -167,18 +187,9 @@ const validateUttakForm = (values: any, aksjonspunkter: Aksjonspunkt[]) => { // 
   return errors;
 };
 
-interface PureOwnProps {
-  uttakPerioder: UttakKontrollerFaktaPerioder[];
-  ytelsefordeling: Ytelsefordeling;
-  aksjonspunkter: Aksjonspunkt[];
-  behandlingId: number;
-  behandlingVersjon: number;
-  submitCallback: (...args: any[]) => any;
-}
-
 const buildInitialValues = createSelector(
   [(props: PureOwnProps) => props.uttakPerioder, (props: PureOwnProps) => props.ytelsefordeling],
-  (perioder, ytelseFordeling) => {
+  (perioder, ytelseFordeling): FormValues | undefined => {
     if (perioder) {
       return {
         førsteUttaksdato: ytelseFordeling && ytelseFordeling.førsteUttaksdato ? ytelseFordeling.førsteUttaksdato : undefined,
@@ -197,7 +208,7 @@ const buildInitialValues = createSelector(
   },
 );
 
-const getOriginalPeriodeId = (origPeriode: CustomUttakKontrollerFaktaPerioder) => {
+const getOriginalPeriodeId = (origPeriode: CustomUttakKontrollerFaktaPerioder): string | null => {
   if (origPeriode) {
     return origPeriode.id;
   }
@@ -205,28 +216,28 @@ const getOriginalPeriodeId = (origPeriode: CustomUttakKontrollerFaktaPerioder) =
   return null;
 };
 
-const manueltEllerOverstyring = (manuellOverstyring: boolean, erManuellOverstyrApErOpprettet: boolean) => (
+const manueltEllerOverstyring = (manuellOverstyring: boolean, erManuellOverstyrApErOpprettet: boolean): string => (
   manuellOverstyring || erManuellOverstyrApErOpprettet ? aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK : aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK
 );
 
-export const transformValues = (values: any, initialValues: any, aksjonspunkter: Aksjonspunkt[]) => { // NOSONAR
+export const transformValues = (values: FormValues, initialValues: FormValues, aksjonspunkter: Aksjonspunkt[]): any => { // NOSONAR
   const overstyringAp = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
   const erManuellOverstyrApErOpprettet = aksjonspunkter
-    .some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK);
-  const aksjonspunktUtenOverstyr = aksjonspunkter.filter((ap: Aksjonspunkt) => !overstyringAp.includes(ap.definisjon.kode));
+    .some((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK);
+  const aksjonspunktUtenOverstyr = aksjonspunkter.filter((ap) => !overstyringAp.includes(ap.definisjon.kode));
 
   const apCodes = aksjonspunktUtenOverstyr.length
-    ? aksjonspunktUtenOverstyr.map((ap: Aksjonspunkt) => ap.definisjon.kode)
+    ? aksjonspunktUtenOverstyr.map((ap) => ap.definisjon.kode)
     : [manueltEllerOverstyring(values.faktaUttakManuellOverstyring, erManuellOverstyrApErOpprettet)];
-  return apCodes.map((ap: string) => ({
+  return apCodes.map((ap) => ({
     kode: ap,
 
-    bekreftedePerioder: values.perioder.map((periode: CustomUttakKontrollerFaktaPerioder) => {
+    bekreftedePerioder: values.perioder.map((periode) => {
       const {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         id, openForm, updated, isFromSøknad, ...bekreftetPeriode // NOSONAR
       } = periode;
-      const origPeriode = initialValues.perioder.filter((p: CustomUttakKontrollerFaktaPerioder) => p.id === id);
+      const origPeriode = initialValues.perioder.filter((p) => p.id === id);
       return {
         bekreftetPeriode,
         orginalFom: origPeriode[0] ? origPeriode[0].fom : null,
@@ -238,9 +249,9 @@ export const transformValues = (values: any, initialValues: any, aksjonspunkter:
     }),
 
     slettedePerioder: values.slettedePerioder
-      ? values.slettedePerioder.map((periode: CustomUttakKontrollerFaktaPerioder) => {
+      ? values.slettedePerioder.map((periode) => {
         const { id, begrunnelse, ...slettetPeriode } = periode;
-        const origPeriode = initialValues.perioder.filter((p: CustomUttakKontrollerFaktaPerioder) => p.id === id);
+        const origPeriode = initialValues.perioder.filter((p) => p.id === id);
 
         return {
           ...slettetPeriode,
@@ -257,20 +268,18 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback,
   buildInitialValues,
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, initialValues, aksjonspunkter) => (values: any) => submitCallback(transformValues(values, initialValues, aksjonspunkter)));
+(submitCallback, initialValues, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, initialValues, aksjonspunkter)));
 
 const mapStateToPropsFactory = (_initialState: any, props: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = props;
   const initialValues = buildInitialValues(props);
 
-  const validate = (values: any) => validateUttakForm(values, props.aksjonspunkter);
-  const warn = (values: any) => warningsUttakForm(values);
+  const validate = (values: FormValues) => validateUttakForm(values, props.aksjonspunkter);
+  const warn = (values: FormValues) => warningsUttakForm(values);
 
-  return (_state, ownProps) => {
+  return (_state, ownProps: PureOwnProps): MappedOwnProps => {
     const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
-    const hasRevurderingOvertyringAp = props.aksjonspunkter.some(
-      (ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK,
-    );
+    const hasRevurderingOvertyringAp = props.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK);
     return {
       initialValues,
       behandlingFormPrefix,

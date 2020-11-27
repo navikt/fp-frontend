@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { formValueSelector, FieldArray } from 'redux-form';
+import { FieldArray } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
@@ -15,22 +14,37 @@ const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNari
 const frilansFieldArrayName = 'tilretteleggingFrilans';
 const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsgiver';
 
+type Tilrettelegging = {
+  tilretteleggingType: string;
+  fomDato: string;
+  stillingsprosent?: string;
+}
+
+export type FormValues = {
+  [tilretteleggingForArbeidsgiverFieldArrayName]?: {
+    behovsdato?: string;
+    organisasjonsnummer?: string;
+    tilretteleggingArbeidsgiver?: Tilrettelegging[];
+  }[];
+  sokForArbeidsgiver?: boolean;
+  sokForFrilans?: boolean;
+  behovsdatoFrilans?: string;
+  tilretteleggingFrilans?: Tilrettelegging[];
+  sokForSelvstendigNaringsdrivende?: boolean;
+  behovsdatoSN?: string;
+  tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
+}
+
 interface OwnProps {
   readOnly: boolean;
   sokForSelvstendigNaringsdrivende?: boolean;
   sokForFrilans?: boolean;
   sokForArbeidsgiver?: boolean;
   formName: string;
-  namePrefix: string;
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => {
-    [tilretteleggingForArbeidsgiverFieldArrayName]: {
-      organisasjonsnummer?: string;
-      behovsdato?: string;
-    }[];
-  },
+  buildInitialValues?: () => FormValues;
 }
 
 /*
@@ -38,7 +52,7 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-export const BehovForTilretteleggingPanelImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   sokForSelvstendigNaringsdrivende,
   sokForFrilans,
@@ -116,13 +130,7 @@ export const BehovForTilretteleggingPanelImpl: FunctionComponent<OwnProps> & Sta
   </BorderBox>
 );
 
-const mapStateToProps = (state: any, ownProps: OwnProps) => ({
-  ...formValueSelector(ownProps.formName)(state, ownProps.namePrefix),
-});
-
-const BehovForTilretteleggingPanel = connect(mapStateToProps)(BehovForTilretteleggingPanelImpl);
-
-BehovForTilretteleggingPanel.buildInitialValues = () => ({
+BehovForTilretteleggingPanel.buildInitialValues = (): FormValues => ({
   [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
 });
 
