@@ -4,8 +4,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 export const iay = {
   inntektsmeldinger: [
     {
-      arbeidsgiver: 'KIWI',
-      arbeidsgiverOrgnr: '999999999',
+      arbeidsgiverReferanse: '999999999',
       arbeidsgiverStartdato: '2019-06-03',
       innsendingstidspunkt: '2020-05-14T00:12:17',
       utsettelsePerioder: [],
@@ -16,8 +15,7 @@ export const iay = {
       },
     },
     {
-      arbeidsgiver: 'REMA 1000',
-      arbeidsgiverOrgnr: '999999998',
+      arbeidsgiverReferanse: '999999998',
       arbeidsgiverStartdato: '2019-05-13',
       innsendingstidspunkt: '2019-04-19T21:30:17',
       utsettelsePerioder: [
@@ -171,9 +169,7 @@ export const iay = {
   arbeidsforhold: [
     {
       id: '999999999-c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
-      navn: 'KIWI',
-      arbeidsgiverIdentifikator: '999999999',
-      arbeidsgiverIdentifiktorGUI: '999999999',
+      arbeidsgiverReferanse: '999999999',
       arbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
       eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
       begrunnelse: null,
@@ -207,9 +203,7 @@ export const iay = {
     },
     {
       id: '999999998-null',
-      navn: 'REMA 1000',
-      arbeidsgiverIdentifikator: '999999998',
-      arbeidsgiverIdentifiktorGUI: '999999998',
+      arbeidsgiverReferanse: '999999998',
       arbeidsforholdId: null,
       eksternArbeidsforholdId: null,
       begrunnelse: null,
@@ -243,9 +237,7 @@ export const iay = {
     },
     {
       id: '999999999-b269bf8f-c90d-45c7-ae4f-53ae6d8b7dce',
-      navn: 'KIWI',
-      arbeidsgiverIdentifikator: '999999999',
-      arbeidsgiverIdentifiktorGUI: '999999999',
+      arbeidsgiverReferanse: '999999999',
       arbeidsforholdId: 'b269bf8f-c90d-45c7-ae4f-53ae6d8b7dce',
       eksternArbeidsforholdId: null,
       begrunnelse: null,

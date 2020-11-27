@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { FagsakPerson } from '@fpsak-frontend/types';
 
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
@@ -34,6 +35,9 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<InntektOgYtelserFaktaPanel.WrappedComponent
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       inntekter={inntekter}
     />);
 
@@ -46,6 +50,9 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
     const inntekter: any = [];
 
     const wrapper = shallowWithIntl(<InntektOgYtelserFaktaPanel.WrappedComponent
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       inntekter={inntekter}
     />);
 
@@ -54,26 +61,36 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
   });
 
   it('skal sette opp initielle verdier med visning av søker først og så sortert etter startdato', () => {
+    const arbeidsgiverOpplysningerPerId = {
+      Steria: {
+        erPrivatPerson: false,
+        identifikator: 'Steria',
+        navn: 'Espen Utvikler',
+      },
+      Nav: {
+        erPrivatPerson: false,
+        identifikator: 'Nav',
+        navn: 'Frida',
+      },
+    };
+
     const person = {
       navn: 'Espen Utvikler',
-    };
+    } as FagsakPerson;
     const inntekt = [
       {
-        navn: 'Espen Utvikler',
         utbetaler: 'Steria',
         fom: '2017-07-20',
         tom: '2017-07-31',
         ytelse: true,
         belop: 4,
       }, {
-        navn: 'Frida',
         utbetaler: 'Nav',
         fom: '2017-08-10',
         tom: '2017-08-20',
         ytelse: true,
         belop: 2,
       }, {
-        navn: 'Espen Utvikler',
         utbetaler: 'Steria',
         fom: '2017-08-20',
         tom: '2017-08-31',
@@ -82,7 +99,7 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
       },
     ];
 
-    const initialValues = InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekt);
+    const initialValues = InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekt, arbeidsgiverOpplysningerPerId);
 
     expect(initialValues).to.eql({
       inntekter: [{

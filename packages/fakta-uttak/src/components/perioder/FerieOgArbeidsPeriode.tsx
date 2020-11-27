@@ -27,6 +27,17 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
+type FormValues = {
+  begrunnelse?: string;
+  id?: string;
+  resultat?: string;
+  nyTom?: string;
+  nyFom?: string;
+  nyArbeidstidsprosent?: number;
+  kontoType?: string;
+  oppholdArsak?: string;
+}
+
 interface PureOwnProps {
   id: string,
   behandlingId: number;
@@ -44,12 +55,15 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
+  onSubmit: (values: FormValues) => any;
   resultat?: string;
   updated: boolean;
   skalViseResultat: boolean;
   oppholdArsak?: Kodeverk;
   førsteUttaksdato?: string;
   originalResultat: Kodeverk;
+  initialValues: FormValues;
+  form: string;
 }
 
 export const FerieOgArbeidsPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -152,7 +166,7 @@ export const FerieOgArbeidsPeriode: FunctionComponent<PureOwnProps & MappedOwnPr
   );
 };
 
-const validateForm = (values: any) => {
+const validateForm = (values: FormValues): any => {
   const errors = {};
   if (!values) {
     return errors;
@@ -192,7 +206,7 @@ const buildInitialValues = createSelector([
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.resultat`),
   (_state: any, ownProps: PureOwnProps) => ownProps],
-(begrunnelse, saksebehandlersBegrunnelse, oppholdArsak, initialResultat, ownProps) => {
+(begrunnelse, saksebehandlersBegrunnelse, oppholdArsak, initialResultat, ownProps): FormValues => {
   let initialResultatValue = initialResultat ? initialResultat.kode : undefined;
   if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse) {
     initialResultatValue = undefined;
@@ -212,9 +226,9 @@ const buildInitialValues = createSelector([
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `arbeidOgFerieForm-${initialOwnProps.id}`;
-  const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
+  const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode(values);
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const resultat = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat');
     const førsteUttaksdato = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, 'førsteUttaksdato');
     const originalResultat = behandlingFormValueSelector(
@@ -226,12 +240,10 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
     const oppholdArsak = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.oppholdÅrsak`);
 
     const skalViseResultat = !(ownProps.readOnly && oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse);
-    const { bekreftet } = ownProps;
 
     return {
       onSubmit,
       resultat,
-      bekreftet,
       skalViseResultat,
       oppholdArsak,
       førsteUttaksdato,

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, FagsakPerson,
+  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, FagsakPerson, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
@@ -25,6 +25,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   isForeldrepengerFagsak: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
@@ -42,6 +43,7 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = (
   submitCallback,
   readOnly,
   readOnlyForStartdatoForForeldrepenger,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <MedlemskapInfoPanel
@@ -63,6 +65,7 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = (
       submitCallback={submitCallback}
       readOnly={readOnly}
       readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );

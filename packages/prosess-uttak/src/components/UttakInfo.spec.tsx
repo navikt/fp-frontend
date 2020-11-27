@@ -46,6 +46,7 @@ describe('<UttakInfo>', () => {
       harSoktOmFlerbarnsdager
       oppholdArsakTyper={[]}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
     expect(checkboxField).to.have.length(2);
@@ -60,6 +61,7 @@ describe('<UttakInfo>', () => {
       oppholdArsakTyper={[]}
       harSoktOmFlerbarnsdager
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
     expect(checkboxField).to.have.length(2);
@@ -77,6 +79,7 @@ describe('<UttakInfo>', () => {
       harSoktOmFlerbarnsdager={false}
       oppholdArsakTyper={[]}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
     expect(checkboxField).to.have.length(1);

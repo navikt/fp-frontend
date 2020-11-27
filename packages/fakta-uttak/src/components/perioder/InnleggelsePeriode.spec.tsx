@@ -30,6 +30,7 @@ describe('<InnleggelsePeriode>', () => {
       readOnly={false}
       behandlingId={1}
       behandlingVersjon={2}
+      onSubmit={sinon.spy()}
     />);
 
     const undertekst = wrapper.find('Undertekst');
@@ -56,6 +57,7 @@ describe('<InnleggelsePeriode>', () => {
       readOnly={false}
       behandlingId={1}
       behandlingVersjon={2}
+      onSubmit={sinon.spy()}
     />);
 
     const textAreaField = wrapper.find('TextAreaField');

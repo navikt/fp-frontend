@@ -19,16 +19,21 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
+const arbeidsgiverOpplysningerPerId = {
+  1234: {
+    erPrivatPerson: false,
+    identifikator: '1234',
+    navn: 'arbeidsgiver1',
+    fødselsdato: '2019-01-01',
+  },
+};
+
 const soknad = {
   manglendeVedlegg: [{
     dokumentType: {
       kode: dokumentTypeId.INNTEKTSMELDING,
     },
-    arbeidsgiver: {
-      organisasjonsnummer: '1234',
-      fødselsdato: '2019-01-01',
-      navn: 'arbeidsgiver1',
-    },
+    arbeidsgiverReferanse: '1234',
   }],
 } as Soknad;
 
@@ -64,6 +69,7 @@ export const visÅpentAksjonspunkt = () => (
       begrunnelse: undefined,
     }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -88,6 +94,7 @@ export const visOppfyltVilkår = () => (
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.OPPFYLT}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -116,5 +123,6 @@ export const visAvslåttVilkår = () => (
     isReadOnly={boolean('isReadOnly', true)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     status={vilkarUtfallType.IKKE_OPPFYLT}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, FaktaArbeidsforhold, FamilieHendelseSamling,
+  ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling,
   KodeverkMedNavn, Personopplysninger, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
@@ -26,6 +26,7 @@ interface OwnProps {
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   kanOverstyre: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
@@ -40,6 +41,7 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   familiehendelse,
   readOnly,
   kanOverstyre,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <UttakInfoPanel
@@ -59,6 +61,7 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
       kanOverstyre={kanOverstyre}
       personopplysninger={personopplysninger}
       familiehendelse={familiehendelse}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );

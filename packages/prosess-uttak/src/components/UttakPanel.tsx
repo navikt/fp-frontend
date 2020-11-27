@@ -13,7 +13,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -97,7 +97,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   apCodes: string[];
   isApOpen: boolean;
-
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -125,6 +125,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   fagsak,
   isApOpen,
   intl,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <>
@@ -171,6 +172,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           soknadsType={soknad.soknadType.kode}
           omsorgsovertakelseDato={soknad.omsorgsovertakelseDato}
           tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       </form>
     )}

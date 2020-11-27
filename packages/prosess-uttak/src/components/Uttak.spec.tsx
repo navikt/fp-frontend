@@ -101,6 +101,7 @@ describe('<Uttak>', () => {
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({ selectedItem: null });
     const rows = wrapper.find(Row);
@@ -161,6 +162,7 @@ describe('<Uttak>', () => {
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
       selectedItem: {
@@ -227,6 +229,7 @@ describe('<Uttak>', () => {
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
       selectedItem: {
@@ -307,6 +310,7 @@ describe('<Uttak>', () => {
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
       selectedItem: {
@@ -387,6 +391,7 @@ describe('<Uttak>', () => {
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
       selectedItem: {

@@ -10,13 +10,16 @@ export type RelatertTilgrensedYtelse = Readonly<{
   }[];
 }>
 
+export type IAYInntektsmelding = Readonly<{
+  arbeidsgiverReferanse: string;
+  arbeidsgiverStartdato?: string;
+}>
+
 type InntektArbeidYtelse = Readonly<{
   relatertTilgrensendeYtelserForSoker?: RelatertTilgrensedYtelse[];
   relatertTilgrensendeYtelserForAnnenForelder?: RelatertTilgrensedYtelse[];
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder?: RelatertTilgrensedYtelse[];
-  inntektsmeldinger?: {
-    arbeidsgiverStartdato?: string;
-  }[];
+  inntektsmeldinger?: IAYInntektsmelding[];
   arbeidsforhold?: Arbeidsforhold[];
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
 }>

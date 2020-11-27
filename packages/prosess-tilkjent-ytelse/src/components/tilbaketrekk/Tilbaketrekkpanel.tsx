@@ -31,6 +31,11 @@ const formName = 'vurderTilbaketrekkForm';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
+type FormValues = {
+  radioVurderTilbaketrekk: boolean;
+  begrunnelseVurderTilbaketrekk?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -127,7 +132,7 @@ export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponen
 
 );
 
-export const transformValues = (values: any) => {
+export const transformValues = (values: FormValues): any => {
   const hindreTilbaketrekk = values[radioFieldName];
   const begrunnelse = values[begrunnelseFieldName];
   return {
@@ -139,7 +144,7 @@ export const transformValues = (values: any) => {
 
 export const buildInitialValues = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.vurderTilbaketrekkAP,
-  (_state, ownProps: PureOwnProps) => ownProps.beregningsresultat], (ap, tilkjentYtelse) => {
+  (_state, ownProps: PureOwnProps) => ownProps.beregningsresultat], (ap, tilkjentYtelse): FormValues => {
   const tidligereValgt = tilkjentYtelse?.skalHindreTilbaketrekk;
   if (tidligereValgt === undefined || tidligereValgt === null || !ap || !ap.begrunnelse) {
     return undefined;
@@ -151,7 +156,7 @@ export const buildInitialValues = createSelector([
 });
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values) => submitCallback([transformValues(values)]));
+  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),

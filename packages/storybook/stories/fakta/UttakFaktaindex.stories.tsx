@@ -32,6 +32,14 @@ import faktaArbeidsforholdOverføringAvPerioder from './mocks/uttak/overføring-
 import personopplysningerOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/personopplysninger.json';
 import familiehendelseOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/familiehendelse.json';
 
+const arbeidsgiverOpplysningerPerId = {
+  910909088: {
+    erPrivatPerson: false,
+    identifikator: '910909088',
+    navn: 'BEDRIFT AS',
+  },
+};
+
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -63,6 +71,7 @@ export const vurderOmAnnenPartHarRett = () => {
       familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
       readOnly={boolean('readOnly', readOnly)}
       kanOverstyre={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   );
 };
@@ -76,13 +85,14 @@ export const farSøkerFørsteSeksUker = () => {
       behandling={behandlingFarSøkerFørsteSeksUker}
       aksjonspunkter={aksjonspunkterFarSøkerFørsteSeksUker}
       ytelsefordeling={ytelsefordelingFarSøkerFørsteSeksUker}
-      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker}
+      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker as UttakKontrollerFaktaPerioderWrapper}
       alleKodeverk={alleKodeverk as any}
       faktaArbeidsforhold={faktaArbeidsforholdFarSøkerFørsteSeksUker as FaktaArbeidsforhold[]}
       personopplysninger={personopplysningerFarSøkerFørsteSeksUker}
       familiehendelse={familiehendelseFarSøkerFørsteSeksUker as FamilieHendelseSamling}
       readOnly={boolean('readOnly', readOnly)}
       kanOverstyre={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   );
 };
@@ -96,13 +106,14 @@ export const overføringAvPerioder = () => {
       behandling={behandlingOverføringAvPerioder}
       aksjonspunkter={aksjonspunkterOverføringAvPerioder}
       ytelsefordeling={ytelsefordelingOverføringAvPerioder}
-      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderOverføringAvPerioder}
+      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderOverføringAvPerioder as UttakKontrollerFaktaPerioderWrapper}
       alleKodeverk={alleKodeverk as any}
       faktaArbeidsforhold={faktaArbeidsforholdOverføringAvPerioder as FaktaArbeidsforhold[]}
       personopplysninger={personopplysningerOverføringAvPerioder}
       familiehendelse={familiehendelseOverføringAvPerioder as FamilieHendelseSamling}
       readOnly={boolean('readOnly', readOnly)}
       kanOverstyre={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   );
 };

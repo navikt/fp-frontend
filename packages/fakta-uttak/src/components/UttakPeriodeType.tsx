@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 
@@ -11,16 +11,16 @@ import editPeriodeIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editPeriodeDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import removePeriod from '@fpsak-frontend/assets/images/remove.svg';
 import removePeriodDisabled from '@fpsak-frontend/assets/images/remove_disabled.svg';
-import { Kodeverk, UttakKontrollerFaktaPerioder } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from './utils/uttakVisningsnavnHelper';
 
 import styles from './uttakPeriodeType.less';
 
-const formatProsent = (prosent: any) => `${prosent}%`;
+const formatProsent = (prosent: string | number): string => `${prosent}%`;
 
 const getUttakTypeTitle = (getKodeverknavn: (kodeverk: Kodeverk) => string, utsettelseArsak?: Kodeverk, overforingArsak?: Kodeverk,
-  arbeidstidprosent?: number, oppholdArsak?: Kodeverk) => {
+  arbeidstidprosent?: number, oppholdArsak?: Kodeverk): ReactElement => {
   if (overforingArsak && overforingArsak.kode !== overforingArsakCodes.UDEFINERT) {
     return (
       <FormattedMessage
@@ -52,7 +52,7 @@ const getUttakTypeTitle = (getKodeverknavn: (kodeverk: Kodeverk) => string, utse
   return <FormattedMessage id="UttakInfoPanel.Uttak" />;
 };
 
-const getUttakPeriode = (getKodeverknavn: (kodeverk: Kodeverk) => string, uttakPeriodeType: Kodeverk, oppholdArsak?: Kodeverk) => {
+const getUttakPeriode = (getKodeverknavn: (kodeverk: Kodeverk) => string, uttakPeriodeType: Kodeverk, oppholdArsak?: Kodeverk): string => {
   if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT) {
     return getKodeverknavn(oppholdArsak);
   }
@@ -61,7 +61,7 @@ const getUttakPeriode = (getKodeverknavn: (kodeverk: Kodeverk) => string, uttakP
 };
 
 interface OwnProps {
-  arbeidsgiver?: UttakKontrollerFaktaPerioder['arbeidsgiver'];
+  arbeidsgiverReferanse?: string;
   arbeidstidprosent?: number;
   editPeriode: (...args: any[]) => any;
   erFrilanser?: boolean;
@@ -82,10 +82,11 @@ interface OwnProps {
   tilDato: string;
   utsettelseArsak?: Kodeverk;
   uttakPeriodeType: Kodeverk;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  arbeidsgiver,
+  arbeidsgiverReferanse,
   arbeidstidprosent,
   editPeriode,
   erFrilanser,
@@ -107,6 +108,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
   tilDato,
   utsettelseArsak,
   uttakPeriodeType,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const isAnyFormOrNyPeriodeOpen = isAnyFormOpen() || isNyPeriodeFormOpen;
   const numberOfDaysAndWeeks = calcDaysAndWeeks(fraDato, tilDato);
@@ -119,8 +121,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
           <Element>{getUttakTypeTitle(getKodeverknavn, utsettelseArsak, overforingArsak, arbeidstidprosent, oppholdArsak)}</Element>
           <Normaltekst>{getUttakPeriode(getKodeverknavn, uttakPeriodeType, oppholdArsak)}</Normaltekst>
         </div>
-        {!readOnly
-          && (
+        {!readOnly && (
           <div className={styles.iconContainer}>
             <Image
               className={styles.editIcon}
@@ -135,7 +136,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
               alt={intl.formatMessage({ id: 'UttakInfoPanel.SlettPerioden' })}
             />
           </div>
-          )}
+        )}
       </div>
       <div className={styles.textWrapper}>
         <Element>{`${dateFormat(fraDato)} - ${dateFormat(tilDato)}`}</Element>
@@ -158,41 +159,34 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
           )}
         </div>
       )}
-
       {flerbarnsdager && (
         <div className={styles.textWrapper}>
           <Undertekst><FormattedMessage id="UttakInfoPanel.Flerbarnsdager" /></Undertekst>
         </div>
       )}
-
-      {(arbeidstidprosent === 0 || arbeidstidprosent)
-        && (
+      {(arbeidstidprosent === 0 || arbeidstidprosent) && (
         <div className={styles.textWrapper}>
           <Undertekst><FormattedMessage id="UttakInfoPanel.AndelIArbeid" /></Undertekst>
           <Normaltekst>{formatProsent(arbeidstidprosent)}</Normaltekst>
         </div>
-        )}
-      {isGradering
-      && (
+      )}
+      {isGradering && (
         <>
-          {erFrilanser
-        && (
-          <div className={styles.textWrapper}>
-            <Element><FormattedMessage id="UttakInfoPanel.Frilans" /></Element>
-          </div>
-        )}
-          {erSelvstendig
-        && (
-          <div className={styles.textWrapper}>
-            <Element><FormattedMessage id="UttakInfoPanel.Selvstendignæringsdrivende" /></Element>
-          </div>
-        )}
-          {arbeidsgiver && arbeidsgiver.navn && (arbeidsgiver.identifikator)
-        && (
-          <div className={styles.textWrapper}>
-            <Element>{lagVisningsNavn(arbeidsgiver)}</Element>
-          </div>
-        )}
+          {erFrilanser && (
+            <div className={styles.textWrapper}>
+              <Element><FormattedMessage id="UttakInfoPanel.Frilans" /></Element>
+            </div>
+          )}
+          {erSelvstendig && (
+            <div className={styles.textWrapper}>
+              <Element><FormattedMessage id="UttakInfoPanel.Selvstendignæringsdrivende" /></Element>
+            </div>
+          )}
+          {arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse] && (
+            <div className={styles.textWrapper}>
+              <Element>{lagVisningsNavn(arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse])}</Element>
+            </div>
+          )}
         </>
       )}
     </div>

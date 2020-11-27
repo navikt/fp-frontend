@@ -15,6 +15,14 @@ import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInnt
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<MedlemskapInfoPanel>', () => {
+  const arbeidsgiverOpplysningerPerId = {
+    973861778: {
+      erPrivatPerson: false,
+      identifikator: '973861778',
+      navn: 'MYGG ROBUST',
+    },
+  };
+
   it('skal vise form for startdato for foreldrepengerperioden når en har aksjonspunktet for dette', () => {
     const avklarStartdatoAksjonspunkt = {
       id: 1,
@@ -56,6 +64,7 @@ describe('<MedlemskapInfoPanel>', () => {
       fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
@@ -103,6 +112,7 @@ describe('<MedlemskapInfoPanel>', () => {
       fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
@@ -150,6 +160,7 @@ describe('<MedlemskapInfoPanel>', () => {
       fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
@@ -181,6 +192,7 @@ describe('<MedlemskapInfoPanel>', () => {
       fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);

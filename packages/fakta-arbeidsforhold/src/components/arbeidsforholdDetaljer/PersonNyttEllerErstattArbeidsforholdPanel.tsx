@@ -4,11 +4,16 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { required } from '@fpsak-frontend/utils';
 import { ArrowBox } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
 
 const getEndCharFromId = (id: string): string => id.substring(id.length - 4, id.length);
+
+const getOptionTekst = (arbeidsforhold: Arbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+  return `${arbeidsgiverOpplysninger.navn}(${arbeidsgiverOpplysninger.identifikator})...${getEndCharFromId(arbeidsforhold.arbeidsforholdId)}`;
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -17,6 +22,7 @@ interface OwnProps {
   formName: string;
   behandlingId: number;
   behandlingVersjon: number;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const PersonNyttEllerErstattArbeidsforholdPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -27,6 +33,7 @@ const PersonNyttEllerErstattArbeidsforholdPanel: FunctionComponent<OwnProps & Wr
   formName,
   behandlingId,
   behandlingVersjon,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <BehandlingFormFieldCleaner
     formName={formName}
@@ -50,16 +57,15 @@ const PersonNyttEllerErstattArbeidsforholdPanel: FunctionComponent<OwnProps & Wr
           value={false}
         />
       </RadioGroupField>
-      {isErstattArbeidsforhold
-      && (
+      {isErstattArbeidsforhold && (
         <SelectField
           name="erstatterArbeidsforholdId"
           label={intl.formatMessage({ id: 'PersonNyttEllerErstattArbeidsforholdPanel.SelectArbeidsforhold' })}
           placeholder={intl.formatMessage({ id: 'PersonNyttEllerErstattArbeidsforholdPanel.ChooseArbeidsforhold' })}
           validate={[required]}
           selectValues={arbeidsforholdList.map((a) => (
-            <option key={a.arbeidsgiverIdentifikator + a.arbeidsforholdId} value={a.id}>
-              {`${a.navn}(${a.arbeidsgiverIdentifiktorGUI})...${getEndCharFromId(a.arbeidsforholdId)}`}
+            <option key={a.arbeidsgiverReferanse + a.arbeidsforholdId} value={a.id}>
+              {getOptionTekst(a, arbeidsgiverOpplysningerPerId)}
             </option>
           ))}
           bredde="xl"

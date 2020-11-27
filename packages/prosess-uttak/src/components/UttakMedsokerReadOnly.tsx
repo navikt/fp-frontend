@@ -5,7 +5,7 @@ import { Element } from 'nav-frontend-typografi';
 
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import { FloatRight } from '@fpsak-frontend/shared-components';
-import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import UttakActivity from './UttakActivity';
 import { PeriodeMedClassName } from './Uttak';
@@ -22,6 +22,7 @@ interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   behandlingId: number;
   behandlingVersjon: number;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
@@ -36,6 +37,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   behandlingsresultat,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const intl = useIntl();
   return (
@@ -64,6 +66,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
         behandlingId={behandlingId}
         behandlingVersjon={behandlingVersjon}
         behandlingsresultat={behandlingsresultat}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </TimeLineDataContainer>
   );

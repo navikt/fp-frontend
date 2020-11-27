@@ -24,7 +24,7 @@ const behandling = {
   },
   behandlingPaaVent: false,
   status: {
-    kode: behandlingStatus.OPPRETTET,
+    kode: behandlingStatus.BEHANDLING_UTREDES,
     kodeverk: '',
   },
 } as Behandling;
@@ -53,22 +53,22 @@ const soknad = {
 const inntektArbeidYtelse = {
   inntektsmeldinger: [{
     arbeidsgiverStartdato: '2019-02-02',
+    arbeidsgiverReferanse: '973861778',
   }, {
     arbeidsgiverStartdato: '2019-02-03',
+    arbeidsgiverReferanse: '973861778',
   }],
   skalKunneLeggeTilNyeArbeidsforhold: false,
 } as InntektArbeidYtelse;
 
 const medlemskap = {
   inntekt: [{
-    navn: 'MYGG ROBUST',
     utbetaler: '973861778',
     fom: '2018-09-01',
     tom: '2018-09-30',
     ytelse: false,
     belop: 35000,
   }, {
-    navn: 'MYGG ROBUST',
     utbetaler: '973861778',
     fom: '2019-02-01',
     tom: '2019-02-28',
@@ -234,6 +234,14 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const arbeidsgiverOpplysningerPerId = {
+  973861778: {
+    erPrivatPerson: false,
+    identifikator: '973861778',
+    navn: 'MYGG ROBUST',
+  },
+};
+
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -276,6 +284,7 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
       [aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -345,5 +354,6 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

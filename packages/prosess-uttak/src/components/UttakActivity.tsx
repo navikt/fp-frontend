@@ -37,6 +37,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import {
+  ArbeidsgiverOpplysningerPerId,
   Behandling, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import RenderUttakTable, { AktivitetFieldArray } from './RenderUttakTable';
@@ -117,6 +118,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -155,6 +157,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   alleKodeverk,
   hasValidationError,
   currentlySelectedStønadskonto,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <div>
@@ -168,6 +171,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
         erSamtidigUttak={erSamtidigUttak}
         harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
         alleKodeverk={alleKodeverk}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </Row>
     {selectedItemData.oppholdÅrsak.kode === oppholdArsakType.UDEFINERT
@@ -179,6 +183,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                 component={RenderUttakTable}
                 periodeTyper={periodeTyper}
                 readOnly={readOnly}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
             </Column>
           </Row>

@@ -15,6 +15,7 @@ import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './uttakSlettPeriodeModal.less';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
@@ -22,15 +23,20 @@ import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPer
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
 
-interface OwnProps {
+interface PureOwnProps {
   showModal?: boolean;
   closeEvent: (...args: any[]) => any;
   cancelEvent: (...args: any[]) => any;
   periode: CustomUttakKontrollerFaktaPerioder;
-  getKodeverknavn: (...args: any[]) => any;
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
 }
 
-export const UttakSlettPeriodeModalImpl: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+interface MappedOwnProps {
+  form: string;
+  onSubmit: (...args: any[]) => any;
+}
+
+export const UttakSlettPeriodeModalImpl: FunctionComponent<PureOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   showModal,
   closeEvent,
   cancelEvent,
@@ -110,15 +116,10 @@ UttakSlettPeriodeModalImpl.defaultProps = {
   showModal: false,
 };
 
-interface PureOwnProps {
-  closeEvent: (...args: any[]) => any;
-  periode: CustomUttakKontrollerFaktaPerioder;
-}
-
 const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const onSubmit = (values: any) => ownProps.closeEvent(values);
 
-  return () => {
+  return (): MappedOwnProps => {
     const formName = `slettPeriodeForm-${ownProps.periode.id}`;
     return {
       form: formName,

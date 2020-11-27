@@ -4,8 +4,11 @@ import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
+import { ProsessStegDef, ProsessStegPanelDef, Rettigheter } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import {
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, Personopplysninger, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
@@ -18,7 +21,7 @@ const faktaUttakAp = [
   aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK,
 ];
 
-const getStatusFromUttakresultat = (uttaksresultat, aksjonspunkter) => {
+const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): string => {
   if (!uttaksresultat || aksjonspunkter.some((ap) => faktaUttakAp.includes(ap.definisjon.kode) && ap.status.kode === 'OPPR')) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -32,6 +35,19 @@ const getStatusFromUttakresultat = (uttaksresultat, aksjonspunkter) => {
   }
   return vilkarUtfallType.IKKE_OPPFYLT;
 };
+
+type Data = {
+  fagsak: Fagsak;
+  rettigheter: Rettigheter;
+  personopplysninger: Personopplysninger;
+  soknad: Soknad;
+  uttaksresultatPerioder: UttaksresultatPeriode;
+  aksjonspunkter: Aksjonspunkt[];
+  tempUpdateStonadskontoer: () => undefined;
+  uttakStonadskontoer: UttakStonadskontoer;
+  ytelsefordeling: Ytelsefordeling;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <UttakProsessIndex {...props} />
@@ -56,11 +72,19 @@ class PanelDef extends ProsessStegPanelDef {
 
   getOverstyrVisningAvKomponent = () => true
 
-  getOverstyrtStatus = ({ uttaksresultatPerioder, aksjonspunkter }) => getStatusFromUttakresultat(uttaksresultatPerioder, aksjonspunkter)
+  getOverstyrtStatus = ({ uttaksresultatPerioder, aksjonspunkter }: Data) => getStatusFromUttakresultat(uttaksresultatPerioder, aksjonspunkter)
 
   getData = ({
-    fagsak, rettigheter, tempUpdateStonadskontoer, uttaksresultatPerioder, uttakStonadskontoer, soknad, personopplysninger, ytelsefordeling,
-  }) => ({
+    fagsak,
+    rettigheter,
+    tempUpdateStonadskontoer,
+    uttaksresultatPerioder,
+    uttakStonadskontoer,
+    soknad,
+    personopplysninger,
+    ytelsefordeling,
+    arbeidsgiverOpplysningerPerId,
+  }: Data) => ({
     fagsak,
     tempUpdateStonadskontoer,
     employeeHasAccess: rettigheter.kanOverstyreAccess.isEnabled,
@@ -69,6 +93,7 @@ class PanelDef extends ProsessStegPanelDef {
     soknad,
     personopplysninger,
     ytelsefordeling,
+    arbeidsgiverOpplysningerPerId,
   })
 }
 

@@ -3,7 +3,9 @@ import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { FamilieHendelseSamling, Kodeverk, Personopplysninger } from '@fpsak-frontend/types';
+import {
+  FamilieHendelseSamling, Kodeverk, Personopplysninger, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
@@ -110,6 +112,13 @@ describe('<UttakFaktaForm>', () => {
         behandlingStatus={{} as Kodeverk}
         familiehendelse={{} as FamilieHendelseSamling}
         vilkarForSykdomExists
+        uttakPerioder={{} as UttakKontrollerFaktaPerioder[]}
+        ytelsefordeling={{} as Ytelsefordeling}
+        submitCallback={() => undefined}
+        validate={() => undefined}
+        warn={() => undefined}
+        onSubmit={() => undefined}
+        arbeidsgiverOpplysningerPerId={{}}
         {...formProps}
       />,
     );

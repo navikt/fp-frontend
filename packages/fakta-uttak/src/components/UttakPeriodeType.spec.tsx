@@ -44,6 +44,7 @@ describe('<UttakPeriodeType>', () => {
       tilDato={tilDato}
       utsettelseArsak={utsettelseArsak}
       uttakPeriodeType={uttakPeriodeType}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const image = wrapper.find(Image);
@@ -69,6 +70,7 @@ describe('<UttakPeriodeType>', () => {
       tilDato={tilDato}
       utsettelseArsak={utsettelseArsak}
       uttakPeriodeType={uttakPeriodeType}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     const image = wrapper.find(Image);
@@ -97,6 +99,7 @@ describe('<UttakPeriodeType>', () => {
       tilDato={tilDato}
       utsettelseArsak={utsettelseArsak}
       uttakPeriodeType={uttakPeriodeType}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
 
     expect(wrapper.find('FormattedMessage').last().prop('id')).to.eql('UttakInfoPanel.Frilans');

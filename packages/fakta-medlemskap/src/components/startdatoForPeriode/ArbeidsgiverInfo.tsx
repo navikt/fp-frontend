@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
+import { FieldArrayFieldsProps } from 'redux-form';
 import { Column } from 'nav-frontend-grid';
 
 import { DatepickerField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
-import { FieldArrayFieldsProps } from 'redux-form';
+import { ArbeidsgiverOpplysningerPerId, IAYInntektsmelding } from '@fpsak-frontend/types';
 
-const truncateEmployerName = (empName: string) => {
+const truncateEmployerName = (empName: string): string => {
   const cutOffLength = 20;
 
   if (empName.length > cutOffLength) {
@@ -15,28 +16,31 @@ const truncateEmployerName = (empName: string) => {
 };
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<{ arbeidsgiver: string }>;
+  fields: FieldArrayFieldsProps<IAYInntektsmelding>;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 export const ArbeidsgiverInfo: FunctionComponent<OwnProps> = ({
   fields,
+  arbeidsgiverOpplysningerPerId,
 }) => (
-  <div>
-    {fields.map((arbeidsgiverId: any, index: number) => {
-      const arbeidsgiverNavn = fields.get(index).arbeidsgiver;
+  <>
+    {fields.map((arbeidsgiverId, index) => {
+      const inntektsmeldingData = fields.get(index);
+      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[inntektsmeldingData.arbeidsgiverReferanse];
 
       return (
         <Column xs="4" key={arbeidsgiverId}>
           <DatepickerField
             name={`${arbeidsgiverId}.arbeidsgiverStartdato`}
-            label={fields.length > 2 ? truncateEmployerName(arbeidsgiverNavn) : arbeidsgiverNavn}
+            label={fields.length > 2 ? truncateEmployerName(arbeidsgiverOpplysninger.navn) : arbeidsgiverOpplysninger.navn}
             validate={[required, hasValidDate]}
             readOnly
           />
         </Column>
       );
     })}
-  </div>
+  </>
 );
 
 export default ArbeidsgiverInfo;

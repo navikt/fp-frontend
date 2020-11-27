@@ -21,10 +21,18 @@ const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
         kodeverk: 'test',
       },
     }],
-    arbeidsgiverNavn: 'Frilanser, samlet aktivitet',
+    arbeidsgiverReferanse: '1',
     skalBrukes: true,
     velferdspermisjoner: [],
   }],
+};
+
+const arbeidsgiverOpplysningerPerId = {
+  1: {
+    erPrivatPerson: true,
+    identifikator: '910909088',
+    navn: 'Frilanser, samlet aktivitet',
+  },
 };
 
 describe('<FodselOgTilretteleggingInfoPanel>', () => {
@@ -40,6 +48,7 @@ describe('<FodselOgTilretteleggingInfoPanel>', () => {
       submitCallback={sinon.spy()}
       submittable
       erOverstyrer
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const faktaForm = wrapper.find(FodselOgTilretteleggingFaktaForm);
