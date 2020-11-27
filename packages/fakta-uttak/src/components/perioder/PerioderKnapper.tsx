@@ -69,8 +69,4 @@ export const PerioderKnapper: FunctionComponent<OwnProps> = ({
   )
 );
 
-PerioderKnapper.defaultProps = {
-  resultat: undefined,
-};
-
 export default PerioderKnapper;

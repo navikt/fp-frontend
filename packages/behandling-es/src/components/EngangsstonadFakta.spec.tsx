@@ -66,6 +66,14 @@ describe('<EngangsstonadFakta>', () => {
     relatertTilgrensendeYtelserForAnnenForelder: [],
   };
 
+  const arbeidsgiverOpplysningerPerId = {
+    123: {
+      erPrivatPerson: false,
+      identifikator: 'testId',
+      navn: 'testNavn',
+    },
+  };
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -88,6 +96,7 @@ describe('<EngangsstonadFakta>', () => {
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -120,6 +129,7 @@ describe('<EngangsstonadFakta>', () => {
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 
@@ -151,6 +161,7 @@ describe('<EngangsstonadFakta>', () => {
         hasFetchError={false}
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />,
     );
 

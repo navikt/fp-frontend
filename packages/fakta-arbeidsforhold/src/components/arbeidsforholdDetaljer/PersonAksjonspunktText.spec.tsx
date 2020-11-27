@@ -10,12 +10,10 @@ import { PersonAksjonspunktTextImpl } from './PersonAksjonspunktText';
 describe('<PersonAksjonspunktText>', () => {
   const arbeidsforholdTemplate = {
     id: '1',
-    navn: 'Test',
     kilde: {
       navn: 'Aa-reg',
     },
-    arbeidsgiverIdentifikator: '123423',
-    arbeidsgiverIdentifiktorGUI: '123423',
+    arbeidsgiverReferanse: '123423',
     fomDato: '2018-10-10',
     tilVurdering: true,
     lagtTilAvSaksbehandler: false,

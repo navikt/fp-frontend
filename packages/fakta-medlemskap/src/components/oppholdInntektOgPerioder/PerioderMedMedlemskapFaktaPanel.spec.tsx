@@ -28,12 +28,16 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
       readOnly={false}
       vurderingTypes={manuelleVurderingstyper}
       alleMerknaderFraBeslutter={{}}
+      alleKodeverk={{}}
     />);
 
     const table = wrapper.find('Table');
@@ -63,6 +67,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -70,6 +77,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       fodselsdato="2016-10-16"
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
+      alleKodeverk={{}}
     />);
 
     const message = wrapper.find('FormattedMessage');
@@ -88,6 +96,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -95,6 +106,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       readOnly={false}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
+      alleKodeverk={{}}
     />);
 
     const message = wrapper.find('FormattedMessage');
@@ -113,6 +125,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -120,6 +135,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       readOnly={false}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
+      alleKodeverk={{}}
     />);
 
     const message = wrapper.find('FormattedMessage');
@@ -138,12 +154,16 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     }];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       readOnly={false}
       fixedMedlemskapPerioder={perioder}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
+      alleKodeverk={{}}
     />);
 
     const table = wrapper.find('Table');
@@ -155,12 +175,16 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     const medlemskapPerioder: any = [];
 
     const wrapper = shallowWithIntl(<UndecoratedForm
+      id="1"
+      behandlingId={2}
+      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={medlemskapPerioder}
       readOnly={false}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
+      alleKodeverk={{}}
     />);
 
     const table = wrapper.find('Table');

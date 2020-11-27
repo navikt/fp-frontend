@@ -5,6 +5,12 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
+import { ArbeidsgiverOpplysningerPerId, Soknad } from '@fpsak-frontend/types';
+
+type Data = {
+  soknad: Soknad;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
 
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <SokersOpplysningspliktVilkarProsessIndex {...props} />
@@ -25,8 +31,9 @@ class PanelDef extends ProsessStegPanelDef {
     vilkarType.SOKERSOPPLYSNINGSPLIKT,
   ]
 
-  getData = ({ soknad }) => ({
+  getData = ({ soknad, arbeidsgiverOpplysningerPerId }: Data) => ({
     soknad,
+    arbeidsgiverOpplysningerPerId,
   })
 }
 

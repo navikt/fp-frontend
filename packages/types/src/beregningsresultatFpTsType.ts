@@ -1,8 +1,7 @@
 import Kodeverk from './kodeverkTsType';
 
 export type BeregningsresultatPeriodeAndel = Readonly<{
-  arbeidsgiverNavn: string;
-  arbeidsgiverOrgnr: string;
+  arbeidsgiverReferanse: string;
   refusjon: number;
   tilSoker: number;
   uttak: {

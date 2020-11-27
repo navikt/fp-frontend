@@ -66,6 +66,7 @@ describe('<UttakFaktaIndex>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       alleKodeverk={{}}
       ytelsefordeling={{} as Ytelsefordeling}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(UttakInfoPanel)).has.length(1);
   });

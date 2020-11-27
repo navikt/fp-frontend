@@ -4,6 +4,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import {
   CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
+import { FaktaArbeidsforhold, Personopplysninger } from '@fpsak-frontend/types';
 
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
@@ -50,19 +51,20 @@ const nyPeriode = {
 } as NyPeriode;
 
 const andeler = [{
-  arbeidsgiver: {
-    aktørId: null,
-    fødselsdato: null,
-    identifikator: '973861778',
-    navn: 'STATOIL ASA AVD STATOIL SOKKELVIRKSOMHET',
-    virksomhet: true,
-  },
+  arbeidsgiverReferanse: '973861778',
   arbeidType: {
     kode: 'ORDINÆRT_ARBEID',
     kodeverk: 'UTTAK_ARBEID_TYPE',
-    navn: 'null',
   },
 }];
+
+const arbeidsgiverOpplysningerPerId = {
+  973861778: {
+    erPrivatPerson: false,
+    identifikator: '973861778',
+    navn: 'STATOIL ASA AVD STATOIL SOKKELVIRKSOMHETS',
+  },
+};
 
 const sokerKjonn = navBrukerKjonn.MANN;
 
@@ -82,6 +84,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
 
@@ -127,6 +137,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
 
@@ -150,6 +168,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -174,6 +200,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -198,6 +232,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -222,6 +264,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -246,6 +296,14 @@ describe('<UttakNyPeriode>', () => {
       alleKodeverk={{}}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      newPeriodeCallback={() => undefined}
+      onSubmit={() => undefined}
+      uttakPeriodeVurderingTyper={[]}
+      faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
+      behandlingId={1}
+      behandlingVersjon={2}
+      personopplysninger={{} as Personopplysninger}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({

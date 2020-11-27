@@ -1,6 +1,15 @@
 import Kodeverk from './kodeverkTsType';
 import Personopplysninger from './personopplysningerTsType';
 
+export type MedlemskapPeriode = Readonly<{
+  fom: string;
+  tom: string;
+  medlemskapType: Kodeverk;
+  dekningType: Kodeverk;
+  kildeType: Kodeverk;
+  beslutningsdato: string;
+}>
+
 export type MedlemPeriode = Readonly<{
   vurderingsdato: string;
   personopplysninger: Personopplysninger;
@@ -14,24 +23,18 @@ export type MedlemPeriode = Readonly<{
   begrunnelse: string;
 }>
 
+export type MedlemInntekt = Readonly<{
+  utbetaler: string;
+  fom: string;
+  tom: string;
+  ytelse: boolean;
+  belop: number;
+}>
+
 type Medlemskap = Readonly<{
   fom?: string;
-  medlemskapPerioder: {
-    fom: string;
-    tom: string;
-    medlemskapType: Kodeverk;
-    dekningType: Kodeverk;
-    kildeType: Kodeverk;
-    beslutningsdato: string;
-  }[];
-  inntekt: {
-    navn: string;
-    utbetaler: string;
-    fom: string;
-    tom: string;
-    ytelse: boolean;
-    belop: number;
-  }[];
+  medlemskapPerioder: MedlemskapPeriode[];
+  inntekt: MedlemInntekt[];
   perioder: MedlemPeriode[];
 }>
 

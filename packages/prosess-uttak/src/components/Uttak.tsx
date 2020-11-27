@@ -27,7 +27,8 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
-  Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, AvklartBarn, UttakStonadskontoer, PeriodeSoker,
+  Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling,
+  AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
 import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
@@ -156,6 +157,7 @@ interface MappedOwnProps {
   stonadskonto: UttakStonadskontoer;
   uttakPerioder: PeriodeMedClassName[];
   uttaksresultatActivity: UttaksresultatActivity[];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface DispatchProps {
@@ -465,6 +467,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       uttaksresultatActivity,
       alleKodeverk,
       behandlingsresultat,
+      arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { selectedItem, stonadskonto } = this.state;
     const customTimes = getCustomTimes(
@@ -502,6 +505,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
             <TimeLineInfo
               maksDatoUttak={stonadskonto.maksDatoUttak}
               stonadskonto={stonadskonto.stonadskontoer}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
           </Row>
           <VerticalSpacer twentyPx />
@@ -545,6 +549,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         behandlingId={behandlingId}
                         behandlingVersjon={behandlingVersjon}
                         behandlingsresultat={behandlingsresultat}
+                        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                       />
                     )}
                   {!selectedItem.hovedsoker
@@ -561,6 +566,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         behandlingId={behandlingId}
                         behandlingVersjon={behandlingVersjon}
                         behandlingsresultat={behandlingsresultat}
+                        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                       />
                     )}
                 </>

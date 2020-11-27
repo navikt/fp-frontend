@@ -10,7 +10,7 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, BeregningsresultatFp, BeregningsresultatPeriode, FamilieHendelse, KodeverkMedNavn, Personopplysninger, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode, FamilieHendelse, KodeverkMedNavn, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
 
@@ -39,6 +39,7 @@ interface PureOwnProps {
   readOnly: boolean;
   submitCallback: (data: any) => Promise<any>;
   readOnlySubmitButton: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -62,6 +63,7 @@ export const TilkjentYtelsePanelImpl: FunctionComponent<PureOwnProps & MappedOwn
   alleKodeverk,
   behandlingId,
   behandlingVersjon,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <>
     <Undertittel>
@@ -77,6 +79,7 @@ export const TilkjentYtelsePanelImpl: FunctionComponent<PureOwnProps & MappedOwn
         hovedsokerKjonnKode={hovedsokerKjonn}
         isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
         alleKodeverk={alleKodeverk}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       )}
     { vurderTilbaketrekkAP
@@ -94,7 +97,7 @@ export const TilkjentYtelsePanelImpl: FunctionComponent<PureOwnProps & MappedOwn
   </>
 );
 
-const parseDateString = (dateString: string) => moment(dateString, ISO_DATE_FORMAT).toDate();
+const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
 const getFamiliehendelsedatoFraSoknad = (soknad: Soknad): string => {
   if (soknad.fodselsdatoer && Object.keys(soknad.fodselsdatoer).length > 0) {
@@ -110,9 +113,12 @@ const getFamiliehendelsedatoFraSoknad = (soknad: Soknad): string => {
 };
 
 const getCurrentFamiliehendelseDato = (
-  soknadsType: string, omsorgsOvertagelseDato: string, familiehendelsedatoFraSoknad?: string,
-  endredFodselsDato?: string, endredomsorgsOvertagelseDato?: string,
-) => {
+  soknadsType: string,
+  omsorgsOvertagelseDato: string,
+  familiehendelsedatoFraSoknad?: string,
+  endredFodselsDato?: string,
+  endredomsorgsOvertagelseDato?: string,
+): Date => {
   if (soknadsType === soknadType.FODSEL) {
     return endredFodselsDato ? parseDateString(endredFodselsDato) : parseDateString(familiehendelsedatoFraSoknad);
   }
@@ -120,20 +126,20 @@ const getCurrentFamiliehendelseDato = (
 };
 
 const finnTilbaketrekkAksjonspunkt = createSelector([
-  (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter], (alleAksjonspunkter) => {
+  (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter], (alleAksjonspunkter): Aksjonspunkt | undefined => {
   if (alleAksjonspunkter) {
     return alleAksjonspunkter.find((ap) => ap.definisjon && ap.definisjon.kode === aksjonspunktCodes.VURDER_TILBAKETREKK);
   }
   return undefined;
 });
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const person = ownProps.personopplysninger;
   const familiehendelse = ownProps.gjeldendeFamiliehendelse;
   const { soknad } = ownProps;
   const isSVP = ownProps.fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER;
   return {
-    hovedsokerKjonn: person ? person.navBrukerKjonn.kode : undefined,
+    hovedsokerKjonn: person ? person.navBrukerKjonn.kode as Kjønnkode : undefined,
     soknadDato: soknad.mottattDato,
     isSoknadSvangerskapspenger: isSVP,
     familiehendelseDato: getCurrentFamiliehendelseDato(

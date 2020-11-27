@@ -1,5 +1,4 @@
 import Kodeverk from './kodeverkTsType';
-import Arbeidsgiver from './arbeidsgiverTsType';
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 
 export type ArsakKodeverk = {
@@ -14,7 +13,7 @@ export type PeriodeSokerAktivitet = Readonly<{
   prosentArbeid?: number;
   arbeidsforholdId?: string;
   eksternArbeidsforholdId?: string;
-  arbeidsgiver?: Arbeidsgiver;
+  arbeidsgiverReferanse?: string;
   utbetalingsgrad?: number;
   uttakArbeidType?: Kodeverk;
   gradering?: boolean;

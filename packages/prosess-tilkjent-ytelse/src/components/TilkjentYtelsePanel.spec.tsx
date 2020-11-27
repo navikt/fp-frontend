@@ -23,6 +23,14 @@ const tilbaketrekkAP = {
   begrunnelse: undefined,
 } as Aksjonspunkt;
 
+const arbeidsgiverOpplysningerPerId = {
+  1: {
+    erPrivatPerson: false,
+    identifikator: '973861778',
+    navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
+  },
+};
+
 describe('<TilkjentYtelsePanelImpl>', () => {
   it('skall innehålla rätt undertekst', () => {
     const familieDate = new Date('2018-04-04');
@@ -43,6 +51,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(Undertittel)).to.have.length(1);
     // @ts-ignore
@@ -70,6 +79,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(1);
   });

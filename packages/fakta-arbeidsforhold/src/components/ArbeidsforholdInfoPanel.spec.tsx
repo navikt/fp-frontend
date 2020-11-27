@@ -25,6 +25,14 @@ const ap5080 = {
   erAktivt: true,
 };
 
+const arbeidsgiverOpplysningerPerId = {
+  2: {
+    erPrivatPerson: false,
+    identifikator: '1234568',
+    navn: 'Nav',
+  },
+};
+
 describe('<ArbeidsforholdInfoPanel>', () => {
   it('Skal vise komponenten korrekt med aksjonspunkt hvor man ikke kan legge til nye arbeidsforhold', () => {
     const wrapper = shallow(
@@ -39,6 +47,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
         submitCallback={() => undefined}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...reduxFormPropsMock}
       />,
     );
@@ -61,6 +70,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
         submitCallback={() => undefined}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...reduxFormPropsMock}
       />,
     );
@@ -83,6 +93,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
         submitCallback={() => undefined}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...reduxFormPropsMock}
       />,
     );

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
@@ -41,6 +41,7 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import {
+  ArbeidsgiverOpplysningerPerId,
   FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personopplysninger,
 } from '@fpsak-frontend/types';
 
@@ -67,7 +68,7 @@ const gyldigeOverføringÅrsaker = [
   overforingArsak.ALENEOMSORG,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer.filter(({
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer.filter(({
   kode,
 }) => gyldigeUttakperioder.includes(kode))
   .map(({
@@ -79,7 +80,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer.filter(({
     </option>
   ));
 
-const mapOverføringÅrsaker = (typer: KodeverkMedNavn[]) => typer
+const mapOverføringÅrsaker = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeOverføringÅrsaker.includes(kode))
@@ -92,7 +93,7 @@ const mapOverføringÅrsaker = (typer: KodeverkMedNavn[]) => typer
     </option>
   ));
 
-const mapUtsettelseÅrsaker = (typer: KodeverkMedNavn[]) => typer.map(({
+const mapUtsettelseÅrsaker = (typer: KodeverkMedNavn[]): ReactElement[] => typer.map(({
   kode,
   navn,
 }) => (
@@ -101,20 +102,26 @@ const mapUtsettelseÅrsaker = (typer: KodeverkMedNavn[]) => typer.map(({
   </option>
 ));
 
-const mapArbeidsforhold = (andeler: FaktaArbeidsforhold[], getKodeverknavn: (kodeverk: Kodeverk) => string) => andeler.map((andel: any) => {
-  const { arbeidType, arbeidsgiver } = andel;
+const mapArbeidsforhold = (
+  andeler: FaktaArbeidsforhold[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement[] => andeler.map((andel) => {
+  const { arbeidType, arbeidsgiverReferanse } = andel;
+
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
 
   let periodeArbeidsforhold = '';
   if (arbeidType && arbeidType.kode !== uttakArbeidType.ORDINÆRT_ARBEID) {
     periodeArbeidsforhold = getKodeverknavn(arbeidType);
   } else {
-    periodeArbeidsforhold = lagVisningsNavn(arbeidsgiver);
+    periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
   }
 
-  const identifikator = (arbeidsgiver || []).identifikator || '-';
-  const navn = (arbeidsgiver || []).navn || getKodeverknavn(arbeidType);
-  const fixedAktørId = (arbeidsgiver || []).aktørId || '-';
-  const virksomhet = (arbeidsgiver || []).virksomhet || '-';
+  const identifikator = arbeidsgiverOpplysninger.identifikator || '-';
+  const navn = arbeidsgiverOpplysninger.navn || getKodeverknavn(arbeidType);
+  const fixedAktørId = arbeidsgiverOpplysninger.referanse || '-';
+  const virksomhet = !arbeidsgiverOpplysninger.erPrivatPerson || '-';
 
   return (
     <option value={`${identifikator}|${navn}|${fixedAktørId}|${virksomhet}|${arbeidType.kode}`} key={guid()}>
@@ -123,8 +130,8 @@ const mapArbeidsforhold = (andeler: FaktaArbeidsforhold[], getKodeverknavn: (kod
   );
 });
 
-const periodeTypeTrengerArsak = (sokerKjonn: string, periodeType: string) => (sokerKjonn === navBrukerKjonn.MANN && periodeType === uttakPeriodeType.MODREKVOTE)
-  || (sokerKjonn === navBrukerKjonn.KVINNE && periodeType === uttakPeriodeType.FEDREKVOTE);
+const periodeTypeTrengerArsak = (sokerKjonn: string, periodeType: string): boolean => (sokerKjonn === navBrukerKjonn.MANN
+  && periodeType === uttakPeriodeType.MODREKVOTE) || (sokerKjonn === navBrukerKjonn.KVINNE && periodeType === uttakPeriodeType.FEDREKVOTE);
 
 export type NyPeriode = {
   fom: string;
@@ -133,25 +140,52 @@ export type NyPeriode = {
   periodeOverforingArsak: Kodeverk;
   periodeArsak: Kodeverk;
   samtidigUttakNyPeriode: boolean;
-  arbeidsForhold: any;
+  arbeidsForhold: string;
   arbeidstidprosent: number;
   typeUttak: string;
 }
 
-interface OwnProps {
+type FormValues = {
+  fom?: string;
+  tom?: string;
+  periodeType?: string;
+  periodeOverforingArsak?: string;
+  periodeArsak?: string;
+  arbeidsForhold?: string;
+  arbeidstidprosent?: number;
+  typeUttak?: string;
+  flerbarnsdager?: boolean;
+  samtidigUttakNyPeriode?: boolean;
+  samtidigUttaksprosentNyPeriode?: string;
+  begrunnelse?: string;
+}
+
+interface PureOwnProps {
+  newPeriodeCallback: (values: FormValues) => void;
+  uttakPeriodeVurderingTyper: KodeverkMedNavn[];
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
+  behandlingId: number;
+  behandlingVersjon: number;
+  personopplysninger: Personopplysninger;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   newPeriodeResetCallback: (...args: any[]) => any;
+  nyPeriodeDisabledDaysFom: string;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+interface MappedOwnProps {
+  periodeTyper?: KodeverkMedNavn[];
   utsettelseÅrsaker: KodeverkMedNavn[];
   overføringÅrsaker: KodeverkMedNavn[];
   andeler: FaktaArbeidsforhold[];
-  nyPeriode: NyPeriode;
   sokerKjonn: string;
-  nyPeriodeDisabledDaysFom: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
-  periodeTyper?: KodeverkMedNavn[];
+  initialValues: FormValues;
+  nyPeriode: NyPeriode;
+  onSubmit: (values: FormValues) => any;
 }
 
-export const UttakNyPeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   newPeriodeResetCallback,
   periodeTyper,
   utsettelseÅrsaker,
@@ -161,6 +195,7 @@ export const UttakNyPeriode: FunctionComponent<OwnProps & InjectedFormProps> = (
   getKodeverknavn,
   nyPeriodeDisabledDaysFom,
   andeler,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(nyPeriode.fom, nyPeriode.tom);
@@ -292,7 +327,7 @@ export const UttakNyPeriode: FunctionComponent<OwnProps & InjectedFormProps> = (
                           bredde="xl"
                           name="arbeidsForhold"
                           validate={[requiredIfNotPristine, required]}
-                          selectValues={mapArbeidsforhold(andeler, getKodeverknavn)}
+                          selectValues={mapArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
                         />
                       </div>
                       <FlexRow>
@@ -356,18 +391,18 @@ export const UttakNyPeriode: FunctionComponent<OwnProps & InjectedFormProps> = (
   );
 };
 
-const getPeriodeData = (periode: string, periodeArray: KodeverkMedNavn[]) => periodeArray.filter(({
+const getPeriodeData = (periode: string, periodeArray: KodeverkMedNavn[]): KodeverkMedNavn[] => periodeArray.filter(({
   kode,
-}: any) => kode === periode);
+}) => kode === periode);
 
 const transformValues = (
-  values: any,
+  values: FormValues,
   utsettelseÅrsaker: KodeverkMedNavn[],
   overføringÅrsaker: KodeverkMedNavn[],
   uttakPeriodeVurderingTyper: KodeverkMedNavn[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   periodeTyper?: KodeverkMedNavn[],
-) => {
+): any => {
   const periodeObjekt = getPeriodeData(values.periodeType, periodeTyper)[0] || null;
   const utsettelseÅrsakObjekt = getPeriodeData(values.periodeArsak, utsettelseÅrsaker)[0];
   const overføringÅrsakObjekt = getPeriodeData(values.periodeOverforingArsak, overføringÅrsaker)[0];
@@ -392,9 +427,9 @@ const transformValues = (
 
   const arbeidsgiver = arbeidsForhold && (arbeidsForhold[0] !== '-' || arbeidsForhold[2] !== '-')
     ? {
-      identifikator: arbeidsForhold[0] !== '-' ? arbeidsForhold[0] : undefined,
+      identifikator: arbeidsForhold[0] !== '-' && arbeidsForhold[3] !== '-' ? arbeidsForhold[0] : undefined,
       navn: arbeidsForhold[1] ? arbeidsForhold[1] : undefined,
-      aktørId: arbeidsForhold[2] !== '-' ? arbeidsForhold[2] : undefined,
+      aktørId: arbeidsForhold[2] !== '-' && arbeidsForhold[3] === '-' ? arbeidsForhold[2] : undefined,
       virksomhet: arbeidsForhold[3] !== '-',
       arbeidType: arbeidsForhold[4],
     }
@@ -440,7 +475,7 @@ const transformValues = (
   };
 };
 
-const validateNyPeriodeForm = (values: any) => {
+const validateNyPeriodeForm = (values: FormValues): any => {
   const errors = {};
   if (!values) {
     return errors;
@@ -459,17 +494,6 @@ const validateNyPeriodeForm = (values: any) => {
 
 const EMPTY_ARRAY = [];
 
-interface PureOwnProps {
-  newPeriodeCallback: (values: any) => void;
-  uttakPeriodeVurderingTyper: KodeverkMedNavn[];
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
-  behandlingId: number;
-  behandlingVersjon: number;
-  personopplysninger: Personopplysninger;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-}
-
 const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const {
     newPeriodeCallback,
@@ -485,7 +509,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const periodeTyper = alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE] || null;
   const utsettelseÅrsaker = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
   const overføringÅrsaker = alleKodeverk[kodeverkTyper.OVERFOERING_AARSAK_TYPE];
-  const onSubmit = (values: any) => newPeriodeCallback(
+  const onSubmit = (values: FormValues) => newPeriodeCallback(
     transformValues(
       values,
       utsettelseÅrsaker,
@@ -496,7 +520,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
     ),
   );
 
-  return (state: any) => ({
+  return (state: any): MappedOwnProps => ({
     periodeTyper,
     utsettelseÅrsaker,
     overføringÅrsaker,
@@ -534,7 +558,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 export default connect(mapStateToPropsFactory)(
   behandlingForm({
     form: 'nyPeriodeForm',
-    validate: (values) => validateNyPeriodeForm(values),
+    validate: (values: FormValues) => validateNyPeriodeForm(values),
     enableReinitialize: true,
   })(UttakNyPeriode),
 );

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FieldArrayFieldsProps, FieldArrayMetaProps, getFormValues } from 'redux-form';
 import moment from 'moment';
@@ -38,7 +38,7 @@ export const gyldigeUttakperioder = [uttakPeriodeType.FELLESPERIODE,
   uttakPeriodeType.FORELDREPENGER,
   uttakPeriodeType.MODREKVOTE];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeUttakperioder.includes(kode))
@@ -47,7 +47,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]) => aktiviteter
+const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] => aktiviteter
   .map(({
     kode,
     navn,
@@ -58,7 +58,7 @@ export const periodsWithNoMorsAktivitet = [
   uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   uttakPeriodeType.MODREKVOTE];
 
-const shouldDisableSelect = (selectedPeriodeTyper: string[], index: number) => {
+const shouldDisableSelect = (selectedPeriodeTyper: string[], index: number): boolean => {
   if (typeof selectedPeriodeTyper === 'undefined' || typeof selectedPeriodeTyper[index] === 'undefined') {
     return true;
   }
@@ -67,7 +67,7 @@ const shouldDisableSelect = (selectedPeriodeTyper: string[], index: number) => {
     || selectedPeriodeTyper[index] === '';
 };
 
-const getLabel = (erForsteRad: boolean, id: string) => (erForsteRad ? { id } : '');
+const getLabel = (erForsteRad: boolean, id: string): { id: string } | string => (erForsteRad ? { id } : '');
 
 interface PureOwnProps {
   fields: FieldArrayFieldsProps<any>;

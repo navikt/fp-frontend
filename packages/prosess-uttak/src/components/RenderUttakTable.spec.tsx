@@ -10,10 +10,7 @@ const uttakFields1 = [
   {
     prosentArbeid: 100,
     stillingsprosent: 100,
-    arbeidsgiver: {
-      navn: 'Statoil',
-      identifikator: '987',
-    },
+    arbeidsgiverReferanse: '987',
     arbeidsforholdId: 907,
     uttakArbeidType: '',
     utbetalingsgrad: 0,
@@ -25,10 +22,7 @@ const uttakFields2 = [
   {
     prosentArbeid: 100,
     stillingsprosent: 100,
-    arbeidsgiver: {
-      navn: 'Statoil',
-      identifikator: '987',
-    },
+    arbeidsgiverReferanse: '987',
     arbeidsforholdId: 907,
     uttakArbeidType: '',
     utbetalingsgrad: 0,
@@ -37,6 +31,14 @@ const uttakFields2 = [
   ...uttakFields1,
 ];
 
+const arbeidsgiverOpplysningerPerId = {
+  987: {
+    erPrivatPerson: false,
+    identifikator: '987',
+    navn: 'Statoil',
+  },
+};
+
 describe('<RenderUttakTable>', () => {
   it('render uttakstable 1 rad', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields1);
@@ -44,6 +46,7 @@ describe('<RenderUttakTable>', () => {
       readOnly={false}
       fields={fields}
       periodeTyper={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find('TableRow');
     expect(tableRow).to.have.length(1);
@@ -62,6 +65,7 @@ describe('<RenderUttakTable>', () => {
       readOnly={false}
       fields={fields}
       periodeTyper={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find('TableRow');
     expect(tableRow).to.have.length(2);

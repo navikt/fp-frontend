@@ -47,7 +47,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
   });
 
   it('skal vise korrekt virksomhet når virksomhet blir valgt', () => {
-    const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
+    const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
       dispatchArrayPush={sinon.spy()}
@@ -67,7 +67,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
   });
 
   it('skal sette valgt virksomhet til null når modal skjules', () => {
-    const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
+    const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
       dispatchArrayPush={sinon.spy()}
@@ -94,7 +94,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
   });
 
   it('skal sette valgt virksomhet til null når modal skjules', () => {
-    const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
+    const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
       dispatchArrayPush={sinon.spy()}
@@ -121,7 +121,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
   });
 
   it('skal legge til ny virksomhet dersom editIndex ikke er satt', () => {
-    const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
+    const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
     const dispatchPush = sinon.spy();
     const wrapper = shallow(<RegistrerVirksomhetPanel
       fields={new MockFields('virksomhet', 2)}
@@ -145,7 +145,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
   });
 
   it('skal endre eksisterende virksomhet dersom editIndex er satt', () => {
-    const virksomheter = [{ virksomhet: 'virksomhet1' }, { virksomhet: 'virksomhet2' }];
+    const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
     const dispatchPush = sinon.spy();
     const dispatchSplice = sinon.spy();
     const wrapper = shallow(<RegistrerVirksomhetPanel

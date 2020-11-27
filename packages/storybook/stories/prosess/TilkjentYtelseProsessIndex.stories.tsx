@@ -83,6 +83,14 @@ const soknad = {
   termindato: '2019-02-01',
 } as Soknad;
 
+const arbeidsgiverOpplysningerPerId = {
+  1: {
+    erPrivatPerson: false,
+    identifikator: '973861778',
+    navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
+  },
+};
+
 const standardProsessProps = {
   behandling: object('behandling', behandling),
   alleKodeverk: alleKodeverk as any,
@@ -109,6 +117,7 @@ export const visUtenAksjonspunkt = () => (
     personopplysninger={object('personopplysninger', personopplysninger)}
     soknad={soknad}
     fagsak={fagsak}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -128,5 +137,6 @@ export const visÅpentAksjonspunkt = () => (
         kode: aksjonspunktStatus.OPPRETTET,
       },
     }] as Aksjonspunkt[]}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

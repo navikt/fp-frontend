@@ -28,9 +28,9 @@ interface OwnProps {
 }
 
 export type FormValues = {
-  arbeidsgiver: string;
-  periodeFom: string;
-  periodeTom: string;
+  arbeidsgiver?: string;
+  periodeFom?: string;
+  periodeTom?: string;
 }
 
 interface StaticFunctions {
@@ -95,7 +95,7 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
   </PeriodFieldArray>
 );
 
-RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values: FormValues[]) => {
+RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values: FormValues[]): any => {
   if (!values) {
     return null;
   }

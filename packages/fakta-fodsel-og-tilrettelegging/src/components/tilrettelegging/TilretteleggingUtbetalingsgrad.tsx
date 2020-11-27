@@ -19,7 +19,10 @@ const minValue1 = minValue(1);
 
 export const OVERSTYRT_UTBETALINGSGRAD_FIELDNAME = 'overstyrtUtbetalingsgrad';
 
-interface OwnProps {
+interface PureOwnProps {
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
   readOnly: boolean;
   erOverstyrer: boolean;
   fieldId: string;
@@ -29,10 +32,13 @@ interface OwnProps {
   formSectionName: string;
   changeField: (field: string, value: string) => void;
   index: number;
+}
+
+interface MappedOwnProps {
   overstyrtUtbetalingsgrad: string;
 }
 
-const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const TilretteleggingUtbetalingsgrad: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
   intl,
   tilretteleggingKode,
   readOnly,
@@ -88,7 +94,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps & WrappedCompon
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   overstyrtUtbetalingsgrad: behandlingFormValueSelector(ownProps.formName,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state,
     `${ownProps.formSectionName}.${ownProps.fieldId}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`),

@@ -1,6 +1,6 @@
 import React, { useMemo, useState, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, Validator } from 'redux-form';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
@@ -17,26 +17,36 @@ import {
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt } from '@fpsak-frontend/types';
+import {
+  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Kodeverk,
+} from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
 import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
-import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
+import ArbeidsforholdFodselOgTilrettelegging, { ArbeidsforholdTilretteleggingDato } from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
 
 import styles from './fodselOgTilretteleggingFaktaForm.less';
 
 const FODSEL_TILRETTELEGGING_FORM = 'FodselOgTilretteleggingForm';
 const maxLength1500 = maxLength(1500);
 const EMPTY_LIST = [];
-const getAksjonspunkt = (aksjonspunkter) => aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FODSELTILRETTELEGGING)[0].begrunnelse;
+const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
+  .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FODSELTILRETTELEGGING)[0].begrunnelse;
 
-const utledFormSectionName = (arbeidsforhold) => {
-  let navn = arbeidsforhold.arbeidsgiverNavn.replace(new RegExp(/\./, 'g'), '_');
-  if (arbeidsforhold.arbeidsgiverIdent) {
-    navn += arbeidsforhold.arbeidsgiverIdent;
+const utledFormSectionName = (
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): string => {
+  let navn = '';
+  if (arbeidsforhold.arbeidsgiverReferanse) {
+    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+    if (arbeidsgiverOpplysninger) {
+      navn += arbeidsgiverOpplysninger.navn.replace(new RegExp(/\./, 'g'), '_');
+    }
+    navn += arbeidsforhold.arbeidsgiverReferanse;
   }
   if (arbeidsforhold.internArbeidsforholdReferanse) {
     navn += arbeidsforhold.internArbeidsforholdReferanse;
@@ -44,41 +54,58 @@ const utledFormSectionName = (arbeidsforhold) => {
   return navn;
 };
 
-const erInnenforIntervall = (tilretteleggingBehovFom, fomDato, tomDato) => {
+const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato?: string, tomDato?: string): boolean => {
   const dato = moment(tilretteleggingBehovFom);
   return !(dato.isBefore(moment(fomDato)) || dato.isAfter(moment(tomDato)));
 };
 
-const skalViseInfoAlert = (iayArbeidsforhold, tilretteleggingArbeidsforhold) => !tilretteleggingArbeidsforhold
-  .filter((ta) => ta.arbeidsgiverIdent)
-  .every((ta) => iayArbeidsforhold.some((ia) => ta.arbeidsgiverIdent === ia.arbeidsgiverIdentifikator
+const skalViseInfoAlert = (
+  iayArbeidsforhold: IayArbeidsforhold[],
+  tilretteleggingArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
+): boolean => !tilretteleggingArbeidsforhold
+  .filter((ta) => ta.arbeidsgiverReferanse)
+  .every((ta) => iayArbeidsforhold.some((ia) => ta.arbeidsgiverReferanse === ia.arbeidsgiverReferanse
     && erInnenforIntervall(ta.tilretteleggingBehovFom, ia.fomDato, ia.tomDato)));
 
-const finnArbeidsforhold = (alleIafAf, internArbeidsforholdReferanse) => {
+const finnArbeidsforhold = (alleIafAf: IayArbeidsforhold[], internArbeidsforholdReferanse: string): IayArbeidsforhold | undefined => {
   if (alleIafAf.length > 1) {
     return alleIafAf.find((iafAf) => iafAf.arbeidsforholdId === internArbeidsforholdReferanse);
   }
   return alleIafAf.length === 1 ? alleIafAf[0] : undefined;
 };
 
-interface FodselOgTilretteleggingFaktaFormProps {
+type FormValues = {
+  termindato?: string;
+  fødselsdato?: string;
+  begrunnelse?: string;
+} & Record<string, any>;
+
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
-  fødselsdato?: string;
   submittable: boolean;
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  iayArbeidsforhold: IayArbeidsforhold[];
   erOverstyrer: boolean;
-  formName: string;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+  iayArbeidsforhold: IayArbeidsforhold[];
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (values: any) => void;
+}
+interface MappedOwnProps {
+  fødselsdato?: string;
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
+  initialValues: FormValues;
+  validate: Validator;
+  onSubmit: (formValues: FormValues) => void;
 }
 
 /**
  * Svangerskapspenger
  * Presentasjonskomponent - viser tillrettlegging før svangerskapspenger
  */
-export const FodselOgTilretteleggingFaktaForm: FunctionComponent<FodselOgTilretteleggingFaktaFormProps & InjectedFormProps> = ({
+export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -88,6 +115,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<FodselOgTilrett
   arbeidsforhold,
   iayArbeidsforhold,
   erOverstyrer,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => {
   const visInfoAlert = useMemo(() => skalViseInfoAlert(iayArbeidsforhold, arbeidsforhold), [behandlingVersjon]);
@@ -148,25 +176,27 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<FodselOgTilrett
         <FlexRow>
           <FlexColumn>
             {arbeidsforhold.map((a, index) => {
-              const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverIdent);
+              const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
               const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
+              const formSectionName = utledFormSectionName(a, arbeidsgiverOpplysningerPerId);
               return (
-                <React.Fragment key={utledFormSectionName(a)}>
+                <React.Fragment key={formSectionName}>
                   <VerticalSpacer sixteenPx />
                   <AvsnittSkiller />
                   <VerticalSpacer twentyPx />
                   <TilretteleggingArbeidsforholdSection
-                    key={utledFormSectionName(a)}
+                    key={formSectionName}
                     behandlingId={behandlingId}
                     behandlingVersjon={behandlingVersjon}
                     readOnly={readOnly}
                     arbeidsforhold={a}
-                    formSectionName={utledFormSectionName(a)}
+                    formSectionName={formSectionName}
                     erOverstyrer={erOverstyrer}
                     changeField={formProps.change}
                     stillingsprosentArbeidsforhold={af ? af.stillingsprosent : 100}
                     setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
                     formName={FODSEL_TILRETTELEGGING_FORM}
+                    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                   />
                   {index === arbeidsforhold.length - 1 && (
                     <AvsnittSkiller />
@@ -222,12 +252,14 @@ FodselOgTilretteleggingFaktaForm.defaultProps = {
   fødselsdato: '',
 };
 
-const finnOverstyrtUtbetalingsgrad = (type,
-  stillingsprosent,
-  stillingsprosentArbeidsforhold,
-  overstyrtUtbetalingsgrad,
-  oldOverstyrtUtbetalingsgrad,
-  velferdspermisjonprosent) => {
+const finnOverstyrtUtbetalingsgrad = (
+  type: Kodeverk,
+  stillingsprosent: number,
+  stillingsprosentArbeidsforhold: number,
+  overstyrtUtbetalingsgrad: string,
+  oldOverstyrtUtbetalingsgrad: number,
+  velferdspermisjonprosent: number,
+): string => {
   if (oldOverstyrtUtbetalingsgrad || type.kode === tilretteleggingType.HEL_TILRETTELEGGING) {
     return overstyrtUtbetalingsgrad;
   }
@@ -245,12 +277,17 @@ const finnOverstyrtUtbetalingsgrad = (type,
   return overstyrtUtbetalingsgrad;
 };
 
-const transformValues = (values, iayArbeidsforhold, arbeidsforhold) => ([{
+const transformValues = (
+  values: FormValues,
+  iayArbeidsforhold: IayArbeidsforhold[],
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+) => ([{
   kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
   ...values,
   bekreftetSvpArbeidsforholdList: arbeidsforhold.map((a) => {
-    const value = values[utledFormSectionName(a)];
-    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverIdent);
+    const value = values[utledFormSectionName(a, arbeidsgiverOpplysningerPerId)];
+    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
     const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
@@ -274,17 +311,21 @@ const transformValues = (values, iayArbeidsforhold, arbeidsforhold) => ([{
   }),
 }]);
 
-const finnAntallDatoerMappedByDato = (datoer) => datoer.reduce((acc, dato) => ({
+const finnAntallDatoerMappedByDato = (datoer: string[]): Record<string, number> => datoer.reduce((acc, dato) => ({
   ...acc,
   [dato]: (acc[dato] || 0) + 1,
 }), {});
 
-export const validateForm = (values, arbeidsforhold) => {
+export const validateForm = (
+  values: FormValues,
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+) => {
   let errors = {};
   if (Object.keys(values).length === 0) {
     return errors;
   }
-  const formSectionNames = arbeidsforhold.map((a) => utledFormSectionName(a));
+  const formSectionNames = arbeidsforhold.map((a) => utledFormSectionName(a, arbeidsgiverOpplysningerPerId));
   const validerArbeidsforholdList = formSectionNames.map((name) => values[name]);
   const ingenTilretteleggingSkalBrukes = validerArbeidsforholdList.every((a) => (a.skalBrukes === false));
   if (ingenTilretteleggingSkalBrukes) {
@@ -328,25 +369,31 @@ export const validateForm = (values, arbeidsforhold) => {
   return errors;
 };
 
-interface OwnProps {
-  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  iayArbeidsforhold: IayArbeidsforhold[];
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (values: any) => void;
-}
-
 const getArbeidsforhold = createSelector([
-  (ownProps: OwnProps) => ownProps.svangerskapspengerTilrettelegging], (tilrettelegging) => {
+  (ownProps: PureOwnProps) => ownProps.svangerskapspengerTilrettelegging,
+  (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
+], (tilrettelegging, arbeidsgiverOpplysningerPerId): ArbeidsforholdFodselOgTilrettelegging[] => {
   const arbeidsforhold = tilrettelegging ? tilrettelegging.arbeidsforholdListe : [];
+
   if (arbeidsforhold === undefined || arbeidsforhold === null) {
     return EMPTY_LIST;
   }
-  arbeidsforhold.sort((a, b) => a.arbeidsgiverNavn.localeCompare(b.arbeidsgiverNavn));
+
+  arbeidsforhold.sort((a, b) => {
+    const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse];
+    const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse];
+    return arbeidsgiverOpplysningerA1 && arbeidsgiverOpplysningerA2
+      ? arbeidsgiverOpplysningerA1.navn.localeCompare(arbeidsgiverOpplysningerA2.navn)
+      : 0;
+  });
   return arbeidsforhold;
 });
 
-const utledUtbetalingsgrad = (tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent) => {
+const utledUtbetalingsgrad = (
+  tilretteleggingsdato: ArbeidsforholdTilretteleggingDato,
+  stillingsprosentArbeidsforhold: number,
+  velferdspermisjonprosent: number,
+): number | string | null => {
   if (tilretteleggingsdato.type.kode === tilretteleggingType.HEL_TILRETTELEGGING) {
     return null;
   }
@@ -358,22 +405,23 @@ const utledUtbetalingsgrad = (tilretteleggingsdato, stillingsprosentArbeidsforho
 };
 
 const getInitialArbeidsforholdValues = createSelector([
-  (ownProps: OwnProps) => ownProps.svangerskapspengerTilrettelegging,
-  (ownProps: OwnProps) => ownProps.iayArbeidsforhold,
-], (tilrettelegging, iayArbeidsforhold) => {
+  (ownProps: PureOwnProps) => ownProps.svangerskapspengerTilrettelegging,
+  (ownProps: PureOwnProps) => ownProps.iayArbeidsforhold,
+  (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
+], (tilrettelegging, iayArbeidsforhold, arbeidsgiverOpplysningerPerId): Record<string, any> => {
   const arbeidsforhold = tilrettelegging ? tilrettelegging.arbeidsforholdListe : [];
   if (arbeidsforhold === undefined || arbeidsforhold === null) {
     return EMPTY_LIST;
   }
   const arbeidsforholdValues = [];
   arbeidsforhold.forEach((a) => {
-    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdentifikator === a.arbeidsgiverIdent);
+    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
     const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => p.erGyldig)
       .map((p) => p.permisjonsprosent)
       .reduce((sum, prosent) => sum + prosent, 0);
-    arbeidsforholdValues[utledFormSectionName(a)] = {
+    arbeidsforholdValues[utledFormSectionName(a, arbeidsgiverOpplysningerPerId)] = {
       ...a,
       tilretteleggingDatoer: a.tilretteleggingDatoer.map((tilretteleggingsdato) => ({
         ...tilretteleggingsdato,
@@ -383,19 +431,19 @@ const getInitialArbeidsforholdValues = createSelector([
       })),
     };
     a.velferdspermisjoner.forEach((p) => {
-      arbeidsforholdValues[utledFormSectionName(a)][finnPermisjonFieldName(p)] = p.erGyldig;
+      arbeidsforholdValues[utledFormSectionName(a, arbeidsgiverOpplysningerPerId)][finnPermisjonFieldName(p)] = p.erGyldig;
     });
   });
   return arbeidsforholdValues;
 });
 
 const getFødselsdato = createSelector([
-  (ownProps: OwnProps) => ownProps.svangerskapspengerTilrettelegging,
-], (tilrettelegging) => (tilrettelegging ? tilrettelegging.fødselsdato : ''));
+  (ownProps: PureOwnProps) => ownProps.svangerskapspengerTilrettelegging,
+], (tilrettelegging): string => (tilrettelegging ? tilrettelegging.fødselsdato : ''));
 
 const getInitialValues = createSelector(
-  [(ownProps: OwnProps) => ownProps.aksjonspunkter,
-    (ownProps: OwnProps) => ownProps.svangerskapspengerTilrettelegging,
+  [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
+    (ownProps: PureOwnProps) => ownProps.svangerskapspengerTilrettelegging,
     getInitialArbeidsforholdValues,
     getFødselsdato],
   (aksjonspunkter, tilrettelegging, arbeidsforholdValues, fødselsdato) => ({
@@ -407,15 +455,21 @@ const getInitialValues = createSelector(
 );
 
 const getOnSubmit = createSelector([
-  (ownProps: OwnProps) => ownProps.submitCallback,
-  (ownProps: OwnProps) => ownProps.iayArbeidsforhold,
+  (ownProps: PureOwnProps) => ownProps.submitCallback,
+  (ownProps: PureOwnProps) => ownProps.iayArbeidsforhold,
+  (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
   getArbeidsforhold,
 ],
-(submitCallback, iayArbeidsforhold, arbeidsforhold) => (values) => submitCallback(transformValues(values, iayArbeidsforhold, arbeidsforhold)));
+(submitCallback, iayArbeidsforhold, arbeidsgiverOpplysningerPerId, arbeidsforhold) => (
+  values,
+) => submitCallback(transformValues(values, iayArbeidsforhold, arbeidsforhold, arbeidsgiverOpplysningerPerId)));
 
-const getValidate = createSelector([getArbeidsforhold], (arbeidsforhold) => (values) => validateForm(values, arbeidsforhold));
+const getValidate = createSelector([
+  getArbeidsforhold,
+  (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
+], (arbeidsforhold, arbeidsgiverOpplysningerPerId) => (values) => validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId));
 
-const mapStateToProps = (_state, ownProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: getInitialValues(ownProps),
   fødselsdato: getFødselsdato(ownProps),
   arbeidsforhold: getArbeidsforhold(ownProps),

@@ -25,25 +25,43 @@ import styles from './periodeTyper.less';
 const minLength3 = minLength(3);
 const maxLength4000 = maxLength(4000);
 
-interface OwnProps {
-  fieldId: string;
+type FormValues = {
+  begrunnelse?: string;
+  id?: string;
   resultat?: string;
-  updatePeriode: (...args: any[]) => any;
+  dokumentertePerioder?: {
+    fom: string;
+    tom: string;
+  }[];
+}
+
+interface PureOwnProps {
   id: string;
-  updated: boolean;
-  bekreftet: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  fieldId: string;
+  updatePeriode: (...args: any[]) => any;
   cancelEditPeriode: (...args: any[]) => any;
   readOnly: boolean;
-  dokumentertePerioder?: { fom: string; tom: string }[];
   fraDato: string;
   tilDato: string;
-  formSyncErrors?: {
-    dokumentertePerioder: any[];
-  };
   behandlingStatusKode?: string;
 }
 
-export const ForeldreAnsvarPeriode: FunctionComponent<OwnProps & InjectedFormProps> = ({
+interface MappedOwnProps {
+  onSubmit: (values: FormValues) => any;
+  formSyncErrors?: {
+    dokumentertePerioder: any[];
+  };
+  dokumentertePerioder?: { fom: string; tom: string }[];
+  resultat?: string;
+  initialValues: FormValues,
+  updated: boolean;
+  bekreftet: boolean;
+  form: string;
+}
+
+export const ForeldreAnsvarPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   fraDato,
   tilDato,
   resultat,
@@ -168,12 +186,12 @@ ForeldreAnsvarPeriode.defaultProps = {
   },
 };
 
-const validateForeldreAnsvarForm = (values: any) => {
+const validateForeldreAnsvarForm = (values: FormValues): any => {
   const errors = {
     dokumentertePerioder: [],
   };
   if (values && values.dokumentertePerioder) {
-    values.dokumentertePerioder.forEach((periode: any, index: any) => {
+    values.dokumentertePerioder.forEach((periode, index) => {
       const invalid = required(periode.fom) || hasValidPeriod(periode.fom, periode.tom);
       if (invalid) {
         errors.dokumentertePerioder[index] = {
@@ -184,14 +202,6 @@ const validateForeldreAnsvarForm = (values: any) => {
   }
   return errors;
 };
-
-interface PureOwnProps {
-  id: string;
-  behandlingId: number;
-  behandlingVersjon: number;
-  fieldId: string;
-  updatePeriode: (...args: any[]) => any;
-}
 
 const buildInitialValues = createSelector([
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
@@ -210,7 +220,7 @@ const buildInitialValues = createSelector([
     ownProps.behandlingVersjon,
   )(state, `${ownProps.fieldId}.dokumentertePerioder`),
   (_state: any, ownProps: PureOwnProps) => ownProps.id],
-(begrunnelse, initialResultat, initialDokumentertePerioder, id) => ({
+(begrunnelse, initialResultat, initialDokumentertePerioder, id): FormValues => ({
   begrunnelse,
   id,
   resultat: initialResultat ? initialResultat.kode : undefined,
@@ -223,9 +233,9 @@ const buildInitialValues = createSelector([
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `foreldreAnsvarForm-${initialOwnProps.id}`;
-  const onSubmit = (values: any) => initialOwnProps.updatePeriode(values);
+  const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode(values);
 
-  return (state: any, ownProps: PureOwnProps) => ({
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     onSubmit,
     formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
     dokumentertePerioder: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'dokumentertePerioder'),
@@ -240,5 +250,5 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
 // @ts-ignore Dynamisk navn på form
 export default connect(mapStateToPropsFactory)(behandlingForm({
   enableReinitialize: true,
-  validate: (values) => validateForeldreAnsvarForm(values),
+  validate: (values: FormValues) => validateForeldreAnsvarForm(values),
 })(ForeldreAnsvarPeriode));

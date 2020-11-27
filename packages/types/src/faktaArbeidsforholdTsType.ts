@@ -1,8 +1,7 @@
-import Arbeidsgiver from './arbeidsgiverTsType';
 import Kodeverk from './kodeverkTsType';
 
 type FaktaArbeidsforhold = Readonly<{
-  arbeidsgiver: Arbeidsgiver;
+  arbeidsgiverReferanse: string;
   arbeidType: Kodeverk;
 }>
 

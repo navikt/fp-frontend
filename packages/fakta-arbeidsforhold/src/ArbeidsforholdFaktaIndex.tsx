@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, InntektArbeidYtelse, KodeverkMedNavn,
+  ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
@@ -20,6 +20,7 @@ interface OwnProps {
   behandling: Behandling;
   inntektArbeidYtelse: InntektArbeidYtelse;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
@@ -31,6 +32,7 @@ const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps>
   harApneAksjonspunkter,
   submitCallback,
   readOnly,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidsforholdInfoPanel
@@ -44,6 +46,7 @@ const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps>
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submitCallback={submitCallback}
       readOnly={readOnly}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );

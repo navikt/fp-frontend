@@ -4,6 +4,7 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import {
+  ArbeidsgiverOpplysningerPerId,
   Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import UttakPanel from './components/UttakPanel';
@@ -27,6 +28,7 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
   tempUpdateStonadskontoer: (...args: any[]) => any;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
@@ -47,6 +49,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> 
   readOnlySubmitButton,
   tempUpdateStonadskontoer,
   isAksjonspunktOpen,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <UttakPanel
@@ -73,6 +76,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> 
       readOnlySubmitButton={readOnlySubmitButton}
       apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
       isApOpen={isAksjonspunktOpen}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );
