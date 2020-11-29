@@ -26,7 +26,8 @@ import PreviewAnkeLink from './PreviewAnkeLink';
 const isVedtakUtenToTrinn = (apCodes: string) => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
 const isMedUnderskriver = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
 const isFatterVedtak = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
-const skalViseForhaandlenke = (avr: Kodeverk) => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE || avr.kode === ankeVurdering.ANKE_OMGJOER;
+const skalViseForhaandlenke = (avr: Kodeverk) => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+  || avr.kode === ankeVurdering.ANKE_OMGJOER || avr.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
 
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
@@ -48,6 +49,17 @@ const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
 }) => (
   <div>
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" /></Undertekst>
+    <VerticalSpacer sixteenPx />
+    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
+    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
+  </div>
+);
+
+const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
+  ankeVurderingResultat,
+}) => (
+  <div>
+    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" /></Undertekst>
     <VerticalSpacer sixteenPx />
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
     <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
@@ -126,6 +138,7 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: 
   switch (ankeVurderingResultat.ankeVurdering.kode) {
     case ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK: return (<ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />);
     case ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE: return (<ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />);
+    case ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV: return (<ResultatHjemsend ankeVurderingResultat={ankeVurderingResultat} />);
     case ankeVurdering.ANKE_OMGJOER: return (<ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />);
     case ankeVurdering.ANKE_AVVIS: return (<ResultatAvvise ankeVurderingResultat={ankeVurderingResultat} />);
     default: return <div>???</div>;
