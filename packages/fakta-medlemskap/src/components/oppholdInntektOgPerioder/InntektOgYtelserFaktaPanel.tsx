@@ -135,11 +135,8 @@ InntektOgYtelserFaktaPanel.buildInitialValues = (
         amount: i.belop,
       };
     });
-  const inntekterSoker = inntekter.filter((i) => i.person === person.navn).sort(sortInntekter);
-  const inntekterOther = inntekter.filter((i) => i.person !== person.navn).sort(sortInntekter);
-
   return {
-    inntekter: inntekterSoker.concat(inntekterOther),
+    inntekter: inntekter.sort(sortInntekter),
   };
 };
 
