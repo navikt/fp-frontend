@@ -1,16 +1,14 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import React, {FunctionComponent} from 'react';
+import {FormattedMessage} from 'react-intl';
+import {connect} from 'react-redux';
 import moment from 'moment';
-import { Normaltekst } from 'nav-frontend-typografi';
+import {Normaltekst} from 'nav-frontend-typografi';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
-import { formatCurrencyWithKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import {
-  PeriodLabel, Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
-import { behandlingFormValueSelector } from '@fpsak-frontend/form';
-import { ArbeidsgiverOpplysningerPerId, FagsakPerson, Medlemskap } from '@fpsak-frontend/types';
+import {formatCurrencyWithKr, ISO_DATE_FORMAT} from '@fpsak-frontend/utils';
+import {PeriodLabel, Table, TableColumn, TableRow,} from '@fpsak-frontend/shared-components';
+import {behandlingFormValueSelector} from '@fpsak-frontend/form';
+import {ArbeidsgiverOpplysningerPerId, FagsakPerson, Medlemskap} from '@fpsak-frontend/types';
 
 import useIntl from '../../useIntl';
 
@@ -135,11 +133,8 @@ InntektOgYtelserFaktaPanel.buildInitialValues = (
         amount: i.belop,
       };
     });
-  const inntekterSoker = inntekter.filter((i) => i.person === person.navn).sort(sortInntekter);
-  const inntekterOther = inntekter.filter((i) => i.person !== person.navn).sort(sortInntekter);
-
   return {
-    inntekter: inntekterSoker.concat(inntekterOther),
+    inntekter: inntekter.sort(sortInntekter),
   };
 };
 
