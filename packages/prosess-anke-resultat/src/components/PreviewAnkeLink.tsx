@@ -14,6 +14,8 @@ const getBrevKode = (ankeVurdering?: Kodeverk) => {
       return dokumentMalType.ANKE_VEDTAK_OMGJORING;
     case ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE:
       return dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING;
+    case ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV:
+      return dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING;
     default:
       return null;
   }
