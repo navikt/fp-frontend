@@ -86,7 +86,7 @@ export class SvangerskapspengerForm extends React.Component<PureOwnProps & Mappe
         <AndreYtelserPapirsoknadIndex readOnly={readOnly} form={form} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
         <TerminFodselSvpPanel readOnly={readOnly} />
         <FormSection name={TILRETTELEGGING_NAME_PREFIX}>
-          <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} />
+          <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} namePrefix={TILRETTELEGGING_NAME_PREFIX} />
         </FormSection>
         <TilleggsopplysningerPapirsoknadIndex readOnly={readOnly} />
         <MigreringFraInfotrygdPanel readOnly={readOnly} />
