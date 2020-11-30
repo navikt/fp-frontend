@@ -15,7 +15,7 @@ import styles from './periodeController.less';
 
 const isEdited = false;
 
-interface OwnProps {
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   beregnBelop: (...args: any[]) => any;
@@ -31,7 +31,7 @@ interface StateProps {
   finnesBelopMed0Verdi: boolean;
 }
 
-export class PeriodeController extends Component<OwnProps & WrappedComponentProps, StateProps> {
+export class PeriodeController extends Component<PureOwnProps & WrappedComponentProps, StateProps> {
   constructor(props) {
     super(props);
     this.showModal = this.showModal.bind(this);

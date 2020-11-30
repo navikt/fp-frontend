@@ -21,14 +21,15 @@ type PeriodeData = {
   tom: string;
 }
 
-interface OwnProps {
+interface PureOwnProps {
   periodeData: PeriodeData;
-  cancelEvent: () => void;
   showModal: boolean;
   finnesBelopMed0Verdi: boolean;
+  splitPeriod: (perioder: { forstePeriode: { fom: string; tom: string }; andrePeriode: { fom: string; tom: string }}) => void;
+  cancelEvent: () => void;
 }
 
-export const DelOppPeriodeModalImpl: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const DelOppPeriodeModalImpl: FunctionComponent<PureOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   periodeData,
   showModal,
@@ -118,11 +119,6 @@ const transformValues = (values: any, periodeData: PeriodeData) => {
     andrePeriode,
   };
 };
-
-interface PureOwnProps {
-  periodeData: PeriodeData;
-  splitPeriod: (perioder: { forstePeriode: { fom: string; tom: string }; andrePeriode: { fom: string; tom: string }}) => void;
-}
 
 export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const validate = (values: any) => validateForm(values, ownProps.periodeData);

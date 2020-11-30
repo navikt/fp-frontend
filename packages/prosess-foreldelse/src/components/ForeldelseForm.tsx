@@ -17,7 +17,7 @@ import {
 } from '@fpsak-frontend/form';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
-import { KodeverkMedNavn, FeilutbetalingPeriode } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, FeilutbetalingPeriode, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME } from './ForeldelsePeriodeForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
@@ -49,28 +49,42 @@ const formaterPerioderForTidslinje = (perioder: ForeldelsesresultatActivity[] = 
     id: index,
   }));
 
-interface OwnProps {
-  foreldelsesresultatActivity?: ForeldelsesresultatActivity[];
-  behandlingFormPrefix: string;
-  reduxFormChange: (...args: any[]) => any;
-  reduxFormInitialize: (...args: any[]) => any;
-  navBrukerKjonn: string;
-  apCodes?: string[];
-  readOnly: boolean;
-  readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  merknaderFraBeslutter?: { notAccepted?: boolean };
-  beregnBelop: (data: any) => Promise<any>;
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
+  apCodes: string[];
+  perioderForeldelse: FeilutbetalingPerioderWrapper;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  navBrukerKjonn: string;
+  readOnly: boolean;
+  readOnlySubmitButton: boolean;
+  beregnBelop: (data: any) => Promise<any>;
+}
+
+type FormValues = {
+  foreldelsesresultatActivity: ForeldelsesresultatActivity[]
+};
+interface MappedOwnProps {
+  foreldelsesresultatActivity?: ForeldelsesresultatActivity[];
+  behandlingFormPrefix: string;
+  merknaderFraBeslutter?: { notAccepted?: boolean };
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => void;
+}
+
+interface DispatchProps {
+  reduxFormChange: (...args: any[]) => any;
+  reduxFormInitialize: (...args: any[]) => any;
 }
 
 interface OwnState {
   valgtPeriode?: ForeldelsesresultatActivity;
 }
 
-export class ForeldelseForm extends Component<OwnProps & InjectedFormProps, OwnState> {
-  constructor(props: OwnProps & InjectedFormProps) {
+export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps, OwnState> {
+  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps) {
     super(props);
     this.state = {
       valgtPeriode: null,
@@ -84,7 +98,7 @@ export class ForeldelseForm extends Component<OwnProps & InjectedFormProps, OwnS
     }
   }
 
-  componentDidUpdate(prevProps: OwnProps & InjectedFormProps) {
+  componentDidUpdate(prevProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
     const { foreldelsesresultatActivity } = this.props;
     if (!prevProps.foreldelsesresultatActivity && foreldelsesresultatActivity) {
       this.setPeriode(foreldelsesresultatActivity.find(harApentAksjonspunkt));
@@ -274,13 +288,15 @@ export const transformValues = (values: any, apCode: string) => {
     tilDato: period.tom,
     begrunnelse: period.begrunnelse,
     foreldelseVurderingType: period.foreldet,
+    foreldelsesfrist: period.foreldelsesfrist,
+    oppdagelsesDato: period.oppdagelsesDato,
   }));
   return [{
     foreldelsePerioder,
     kode: apCode,
   }];
 };
-export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]): { foreldelsesresultatActivity: ForeldelsesresultatActivity[] } => ({
+export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]): FormValues => ({
   foreldelsesresultatActivity: foreldelsePerioder.map((p) => ({
     ...p,
     feilutbetaling: p.belop,
@@ -289,20 +305,11 @@ export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]):
   })),
 });
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  apCodes: string[];
-  perioderForeldelse: any;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
-}
-
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
 (submitCallback, apCodes) => (values: any) => submitCallback(transformValues(values, apCodes[0])));
 
-const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),
   foreldelsesresultatActivity: behandlingFormValueSelector(FORELDELSE_FORM_NAME,
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'foreldelsesresultatActivity'),
@@ -318,6 +325,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
   form: FORELDELSE_FORM_NAME,
 })(ForeldelseForm));
