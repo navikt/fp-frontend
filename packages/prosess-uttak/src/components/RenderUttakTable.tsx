@@ -85,7 +85,7 @@ const createTextStrings = (fields: AktivitetFieldArray, arbeidsgiverOpplysninger
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-    arbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId);
+    arbeidsforhold = arbeidsgiverOpplysninger ? lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId) : arbeidsgiverReferanse;
   }
   return {
     prosentArbeidText,
