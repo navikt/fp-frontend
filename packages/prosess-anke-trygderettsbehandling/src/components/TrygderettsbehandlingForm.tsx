@@ -96,16 +96,16 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       direction="horizontal"
       readOnly={readOnly}
     >
-      <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
       <RadioOption value={ankeVurderingType.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
       <RadioOption value={ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.Opphev' }} />
+      <RadioOption value={ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV} label={{ id: 'Ankebehandling.Resultat.Hjemsend' }} />
       <RadioOption value={ankeVurderingType.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
+      <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
     </RadioGroupField>
     {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering?.kode && (
     <Row>
-      <Column xs="7" />
       <Column xs="7">
-        <ArrowBox alignOffset={114}>
+        <ArrowBox>
           <SelectField
             readOnly={readOnly}
             name="trygderettOmgjoerArsak.kode"
@@ -132,10 +132,11 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       </Column>
     </Row>
     )}
-    {ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === valgtTrygderettVurdering?.kode && (
+    {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === valgtTrygderettVurdering?.kode
+      || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === valgtTrygderettVurdering?.kode) && (
       <Row>
         <Column xs="7">
-          <ArrowBox alignOffset={218}>
+          <ArrowBox alignOffset={180}>
             <SelectField
               readOnly={readOnly}
               name="trygderettOmgjoerArsak.kode"
@@ -196,13 +197,20 @@ type FormValues = {
   trygderettVurderingOmgjoer: Kodeverk;
 }
 
+const lagreOmgjoerAarsak = (values: FormValues) => (ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === values.trygderettVurdering?.kode
+    || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === values.trygderettVurdering?.kode
+    || ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode ? values.trygderettOmgjoerArsak : '-');
+
+const lagreVurderingOmgjoer = (values: FormValues) => (ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode
+  ? values.trygderettVurderingOmgjoer : '-');
+
 const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
   erMerknaderMottatt: values.erMerknaderMottatt,
   merknadKommentar: values.merknadKommentar,
   avsluttBehandling: values.avsluttBehandling,
   trygderettVurdering: values.trygderettVurdering,
-  trygderettOmgjoerArsak: values.trygderettOmgjoerArsak,
-  trygderettVurderingOmgjoer: values.trygderettVurderingOmgjoer,
+  trygderettOmgjoerArsak: lagreOmgjoerAarsak(values),
+  trygderettVurderingOmgjoer: lagreVurderingOmgjoer(values),
   kode: aksjonspunktCode,
 });
 

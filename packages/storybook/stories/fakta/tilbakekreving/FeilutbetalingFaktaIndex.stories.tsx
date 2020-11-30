@@ -30,7 +30,11 @@ const feilutbetalingFakta = {
   behandlingFakta: {
     perioder: [{
       fom: '2018-01-01',
-      tom: '2019-01-01',
+      tom: '2018-01-31',
+      belop: 1000,
+    }, {
+      fom: '2018-02-01',
+      tom: '2018-02-28',
       belop: 1000,
     }],
     totalPeriodeFom: '2019-01-01',

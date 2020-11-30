@@ -42,7 +42,14 @@ describe('<ForeldelsePeriodeForm>', () => {
         behandlingId={1}
         behandlingVersjon={2}
         beregnBelop={sinon.spy()}
+        alleKodeverk={{}}
+        oppdaterPeriode={sinon.spy()}
         {...reduxFormPropsMock}
+        initialValues={{
+          ...periode,
+          foreldet: null,
+        }}
+        onSubmit={sinon.spy()}
       />,
     );
 

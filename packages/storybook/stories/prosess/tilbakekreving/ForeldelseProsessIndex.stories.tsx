@@ -15,33 +15,64 @@ import withReduxProvider from '../../../decorators/withRedux';
 const perioderForeldelse = {
   perioder: [{
     fom: '2019-01-01',
-    tom: '2019-02-02',
+    tom: '2019-01-31',
     belop: 1000,
+    begrunnelse: 'Foreldet',
+    foreldelseVurderingType: {
+      kode: foreldelseVurderingType.FORELDET,
+      kodeverk: 'FORELDELSE_VURDERING',
+    },
+    foreldelsesfrist: '2020-04-01',
+  }, {
+    fom: '2019-02-01',
+    tom: '2019-02-28',
+    belop: 3000,
+    begrunnelse: 'Over foreldelsesfrist, med tillegsfrist brukes',
+    foreldelseVurderingType: {
+      kode: foreldelseVurderingType.TILLEGGSFRIST,
+      kodeverk: 'FORELDELSE_VURDERING',
+    },
+    foreldelsesfrist: '2020-04-01',
+    oppdagelsesDato: '2019-11-01',
+  }, {
+    fom: '2019-03-01',
+    tom: '2019-03-31',
+    belop: 3000,
+    begrunnelse: 'Ikke foreldet',
     foreldelseVurderingType: {
       kode: foreldelseVurderingType.IKKE_FORELDET,
       kodeverk: 'FORELDELSE_VURDERING',
     },
-  }, {
-    fom: '2019-02-03',
-    tom: '2019-04-02',
-    belop: 3000,
+  },
+  {
+    fom: '2019-04-01',
+    tom: '2019-04-30',
+    belop: 4000,
     foreldelseVurderingType: {
-      kode: foreldelseVurderingType.FORELDET,
+      kode: foreldelseVurderingType.UDEFINERT,
       kodeverk: 'FORELDELSE_VURDERING',
     },
   }],
 } as FeilutbetalingPerioderWrapper;
 
 const alleKodeverk = {
-  [tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]: [{
-    kode: foreldelseVurderingType.IKKE_FORELDET,
-    navn: 'Ikke foreldet',
-    kodeverk: 'FORELDELSE_VURDERING',
-  }, {
-    kode: foreldelseVurderingType.FORELDET,
-    navn: 'Foreldet',
-    kodeverk: 'FORELDELSE_VURDERING',
-  }],
+  [tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]: [
+    {
+      kode: foreldelseVurderingType.FORELDET,
+      navn: 'Foreldet',
+      kodeverk: 'FORELDELSE_VURDERING',
+    },
+    {
+      kode: foreldelseVurderingType.TILLEGGSFRIST,
+      navn: 'Ikke foreldet, med tilleggsfrist',
+      kodeverk: 'FORELDELSE_VURDERING',
+    },
+    {
+      kode: foreldelseVurderingType.IKKE_FORELDET,
+      navn: 'Ikke foreldet',
+      kodeverk: 'FORELDELSE_VURDERING',
+    },
+  ],
 };
 
 const merknaderFraBeslutter = {

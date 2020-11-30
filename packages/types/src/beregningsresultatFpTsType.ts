@@ -14,7 +14,6 @@ export type BeregningsresultatPeriodeAndel = Readonly<{
   aktivitetStatus: Kodeverk;
   arbeidsforholdId: string;
   eksternArbeidsforholdId: string;
-  aktørId: string;
   arbeidsforholdType: Kodeverk;
   stillingsprosent: number;
 }>;
