@@ -8,7 +8,7 @@ import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@fps
 
 import styles from './periodeInformasjon.less';
 
-interface OwnProps {
+interface PureOwnProps {
   fom: string;
   tom: string;
   feilutbetaling: number;
@@ -21,7 +21,7 @@ interface OwnProps {
  *
  * Presentationskomponent
  */
-const PeriodeInformasjon: FunctionComponent<OwnProps> = ({
+const PeriodeInformasjon: FunctionComponent<PureOwnProps> = ({
   fom,
   tom,
   feilutbetaling,

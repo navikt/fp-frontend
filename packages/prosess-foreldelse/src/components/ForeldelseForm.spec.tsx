@@ -6,6 +6,7 @@ import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
+import { FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 import { ForeldelseForm } from './ForeldelseForm';
@@ -32,6 +33,7 @@ describe('<ForeldelseForm>', () => {
       navBrukerKjonn="MANN"
       readOnly={false}
       readOnlySubmitButton={false}
+      apCodes={[]}
       merknaderFraBeslutter={{
         notAccepted: false,
       }}
@@ -39,6 +41,13 @@ describe('<ForeldelseForm>', () => {
       beregnBelop={sinon.spy()}
       behandlingId={1}
       behandlingVersjon={1}
+      perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
+      alleMerknaderFraBeslutter={{}}
+      submitCallback={sinon.spy()}
+      initialValues={{
+        foreldelsesresultatActivity: perioder,
+      }}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(TilbakekrevingTimelinePanel)).has.length(0);
@@ -72,6 +81,13 @@ describe('<ForeldelseForm>', () => {
       beregnBelop={sinon.spy()}
       behandlingId={1}
       behandlingVersjon={1}
+      perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
+      alleMerknaderFraBeslutter={{}}
+      submitCallback={sinon.spy()}
+      initialValues={{
+        foreldelsesresultatActivity: perioder,
+      }}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(TilbakekrevingTimelinePanel)).has.length(1);
@@ -103,6 +119,13 @@ describe('<ForeldelseForm>', () => {
       beregnBelop={sinon.spy()}
       behandlingId={1}
       behandlingVersjon={1}
+      perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
+      alleMerknaderFraBeslutter={{}}
+      submitCallback={sinon.spy()}
+      initialValues={{
+        foreldelsesresultatActivity: perioder,
+      }}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(ForeldelsePeriodeForm)).has.length(0);

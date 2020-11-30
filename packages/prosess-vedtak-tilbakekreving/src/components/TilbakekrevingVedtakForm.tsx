@@ -35,6 +35,7 @@ const formatVedtakData = (values: any) => {
       fom: key.split('_')[0],
       tom: key.split('_')[1],
       faktaAvsnitt: perioder[key][underavsnittType.FAKTA],
+      foreldelseAvsnitt: perioder[key][underavsnittType.FORELDELSE],
       vilkaarAvsnitt: perioder[key][underavsnittType.VILKAR],
       saerligeGrunnerAvsnitt: perioder[key][underavsnittType.SARLIGEGRUNNER],
       saerligeGrunnerAnnetAvsnitt: perioder[key][underavsnittType.SARLIGEGRUNNER_ANNET],

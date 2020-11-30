@@ -3,7 +3,7 @@ import React, { Component, MouseEvent } from 'react';
 import TilbakekrevingTimeline from './TilbakekrevingTimeline';
 import TidslinjePeriode from '../../types/tidslinjePeriodeTsType';
 
-interface OwnProps {
+interface PureOwnProps {
   perioder: TidslinjePeriode[];
   valgtPeriode?: TidslinjePeriode;
   setPeriode: (periode: TidslinjePeriode) => void;
@@ -18,8 +18,8 @@ interface StateProps {
 
 // TODO (TOR) Slå saman med TilbakekrevingTimeline.jsx
 
-class TilbakekrevingTimelinePanel extends Component<OwnProps, StateProps> {
-  constructor(props: OwnProps) {
+class TilbakekrevingTimelinePanel extends Component<PureOwnProps, StateProps> {
+  constructor(props: PureOwnProps) {
     super(props);
     this.state = {
       valgtPeriode: null,
@@ -27,7 +27,7 @@ class TilbakekrevingTimelinePanel extends Component<OwnProps, StateProps> {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: OwnProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps) {
     const {
       valgtPeriode: vPeriode,
     } = nextProps;

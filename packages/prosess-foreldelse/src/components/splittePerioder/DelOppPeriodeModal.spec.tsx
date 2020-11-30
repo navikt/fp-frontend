@@ -27,6 +27,7 @@ describe('<DelOppPeriodeModal>', () => {
       intl={intlMock}
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
+      splitPeriod={() => undefined}
     />);
 
     const modal = wrapper.find(Modal);
@@ -50,6 +51,7 @@ describe('<DelOppPeriodeModal>', () => {
       intl={intlMock}
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
+      splitPeriod={() => undefined}
     />);
     wrapper.find(Knapp).simulate('click');
     expect(cancelEvent).to.have.property('callCount', 1);
@@ -62,6 +64,9 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      showModal: true,
+      finnesBelopMed0Verdi: false,
+      cancelEvent: () => undefined,
       splitPeriod: () => undefined,
     };
 
@@ -81,6 +86,9 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      showModal: true,
+      finnesBelopMed0Verdi: false,
+      cancelEvent: () => undefined,
       splitPeriod: () => undefined,
     };
 
@@ -102,6 +110,9 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      showModal: true,
+      finnesBelopMed0Verdi: false,
+      cancelEvent: () => undefined,
       splitPeriod: () => undefined,
     };
 
@@ -123,6 +134,9 @@ describe('<DelOppPeriodeModal>', () => {
         fom: '2019-10-10',
         tom: '2019-11-10',
       },
+      showModal: true,
+      finnesBelopMed0Verdi: false,
+      cancelEvent: () => undefined,
       splitPeriod: (value: any) => value,
     };
 
