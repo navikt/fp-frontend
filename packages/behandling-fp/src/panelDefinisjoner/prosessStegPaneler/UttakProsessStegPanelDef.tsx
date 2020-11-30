@@ -65,7 +65,6 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
-    FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
     FpBehandlingApiKeys.FAMILIEHENDELSE,
     FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE,
   ]
