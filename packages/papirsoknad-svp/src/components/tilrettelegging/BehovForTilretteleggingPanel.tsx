@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray } from 'redux-form';
+import { formValueSelector, FieldArray } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
@@ -37,10 +38,14 @@ export type FormValues = {
 
 interface OwnProps {
   readOnly: boolean;
+  formName: string;
+  namePrefix: string;
+}
+
+interface MappedOwnProps {
   sokForSelvstendigNaringsdrivende?: boolean;
   sokForFrilans?: boolean;
   sokForArbeidsgiver?: boolean;
-  formName: string;
 }
 
 interface StaticFunctions {
@@ -52,7 +57,7 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const BehovForTilretteleggingPanelImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   sokForSelvstendigNaringsdrivende,
   sokForFrilans,
@@ -129,6 +134,12 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
     </SkjemaGruppe>
   </BorderBox>
 );
+
+const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => ({
+  ...formValueSelector(ownProps.formName)(state, ownProps.namePrefix),
+});
+
+const BehovForTilretteleggingPanel = connect(mapStateToProps)(BehovForTilretteleggingPanelImpl);
 
 BehovForTilretteleggingPanel.buildInitialValues = (): FormValues => ({
   [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
