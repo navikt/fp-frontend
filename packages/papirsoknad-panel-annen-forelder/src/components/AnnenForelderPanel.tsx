@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { FormSection, formValueSelector } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
@@ -18,7 +18,7 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import useIntl from '../useIntl';
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]) => countryCodes
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .filter(({
     kode,
   }) => kode !== landkoder.NORGE)

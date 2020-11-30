@@ -39,7 +39,7 @@ export type FormValues = {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
+  buildInitialValues?: () => FormValues;
   validate?: (values: FormValues) => any,
 }
 
@@ -135,7 +135,7 @@ OppholdINorgePanelImpl.defaultProps = {
   readOnly: true,
 };
 
-const mapStateToProps = (state, initialProps: PureOwnProps) => ({
+const mapStateToProps = (state, initialProps: PureOwnProps): MappedOwnProps => ({
   ...formValueSelector(initialProps.form)(state, 'harTidligereOppholdUtenlands', 'harFremtidigeOppholdUtenlands'),
 });
 
@@ -165,7 +165,7 @@ OppholdINorgePanel.validate = (values: FormValues) => {
   return errors;
 };
 
-OppholdINorgePanel.buildInitialValues = () => ({
+OppholdINorgePanel.buildInitialValues = (): FormValues => ({
   tidligereOppholdUtenlands: [{}],
   fremtidigeOppholdUtenlands: [{}],
 });

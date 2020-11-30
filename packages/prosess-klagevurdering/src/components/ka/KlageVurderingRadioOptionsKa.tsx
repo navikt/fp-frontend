@@ -87,7 +87,7 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
         </Column>
       </Row>
     )}
-      {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
+      {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK || klageVurdering?.kode === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE)
       && (
         <Row>
           <Column xs="4" />

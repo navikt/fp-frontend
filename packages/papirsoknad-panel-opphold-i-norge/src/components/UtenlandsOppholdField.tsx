@@ -89,9 +89,9 @@ interface OwnPropsUtenlandsOppholdField {
 }
 
 export type FormValues = {
-  land: string;
-  periodeFom: string;
-  periodeTom: string;
+  land?: string;
+  periodeFom?: string;
+  periodeTom?: string;
 };
 
 interface StaticFunctions {

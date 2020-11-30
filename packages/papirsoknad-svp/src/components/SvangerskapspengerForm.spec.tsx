@@ -21,6 +21,8 @@ describe('<SvangerskapspengerForm>', () => {
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
       alleKodeverk={{}}
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
+      validate={sinon.spy()}
       valuesForRegisteredFieldsOnly={{}}
     />);
     expect(wrapper.find(MottattDatoPapirsoknadIndex)).has.length(1);

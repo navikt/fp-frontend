@@ -128,18 +128,15 @@ InntektOgYtelserFaktaPanel.buildInitialValues = (
     .map((i) => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[i.utbetaler];
       return {
-        person: arbeidsgiverOpplysninger.navn,
+        person: arbeidsgiverOpplysninger ? arbeidsgiverOpplysninger.navn : i.utbetaler,
         employer: i.utbetaler,
         fom: i.fom,
         tom: i.tom,
         amount: i.belop,
       };
     });
-  const inntekterSoker = inntekter.filter((i) => i.person === person.navn).sort(sortInntekter);
-  const inntekterOther = inntekter.filter((i) => i.person !== person.navn).sort(sortInntekter);
-
   return {
-    inntekter: inntekterSoker.concat(inntekterOther),
+    inntekter: inntekter.sort(sortInntekter),
   };
 };
 

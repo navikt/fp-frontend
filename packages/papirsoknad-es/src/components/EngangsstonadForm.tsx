@@ -16,7 +16,9 @@ import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './Regist
 
 export const ENGANGSSTONAD_FORM_NAME = 'EngangsstonadForm';
 
-const buildInitialValues = (soknadData: SoknadData) => {
+type FormValues = FormValuesFodsel | FormValuesAdopsjon | Record<string, never>;
+
+const buildInitialValues = (soknadData: SoknadData): FormValues => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
     return { ...RegistreringFodselGrid.buildInitialValues() };
   }
@@ -36,6 +38,8 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   valuesForRegisteredFieldsOnly?: string[];
+  initialValues: FormValues;
+  validate: (formValues: FormValues) => any;
 }
 
 /**
@@ -45,14 +49,14 @@ interface MappedOwnProps {
  */
 export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): void {
     const { soknadData } = this.props;
     if (!isEqual(soknadData, nextProps.soknadData)) {
       nextProps.initialize(buildInitialValues(nextProps.soknadData));
     }
   }
 
-  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps) {
+  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): boolean {
     // Dette er gjort for å hindra rerender for testetrykk på alle underformene
     const notRerenderIfChangedProps = ['array', 'blur', 'change', 'clearSubmit', 'destroy', 'dirty', 'initialize', 'error', 'pristine', 'reset',
       'resetSection', 'touch', 'untouch', 'valuesForRegisteredFieldsOnly', 'autofill', 'clearFields', 'clearSubmitErrors', 'clearAsyncError', 'submit'];
@@ -94,7 +98,7 @@ export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps &
   }
 }
 
-const getValidation = (soknadData: SoknadData, sokerPersonnummer: string) => {
+const getValidation = (soknadData: SoknadData, sokerPersonnummer: string): any => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
     return (values: FormValuesFodsel) => RegistreringFodselGrid.validate(values, sokerPersonnummer);
   }
@@ -104,7 +108,7 @@ const getValidation = (soknadData: SoknadData, sokerPersonnummer: string) => {
   return null;
 };
 
-const transformRootValues = (state: any, registeredFieldNames: string[]) => {
+const transformRootValues = (state: any, registeredFieldNames: string[]): any => {
   const values = formValueSelector(ENGANGSSTONAD_FORM_NAME)(state, ...registeredFieldNames);
   if (values.rettigheter === rettighet.IKKE_RELEVANT) {
     return omit(values, 'rettigheter');
@@ -120,7 +124,7 @@ const buildInitialValuesSelector = createSelector([(ownProps: PureOwnProps) => o
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const sokerPersonnummer = ownProps.fagsakPerson.personnummer;
   const validate = getValidation(ownProps.soknadData, sokerPersonnummer);
-  return (state: any) => {
+  return (state: any): MappedOwnProps => {
     const registeredFields = getRegisteredFields(ENGANGSSTONAD_FORM_NAME)(state);
     // @ts-ignore fiks
     const registeredFieldNames = Object.values(registeredFields).map((rf) => rf.name);

@@ -18,7 +18,7 @@ import useIntl from '../../useIntl';
 
 import styles from './permisjonPanel.less';
 
-const getText = (intl: IntlShape, kode: string, navn: string) => {
+const getText = (intl: IntlShape, kode: string, navn: string): string => {
   if (kode === overforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
     return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErInnlagt' });
   }
@@ -101,7 +101,7 @@ export const PermisjonOverforingAvKvoterPanelImpl: FunctionComponent<PureOwnProp
   );
 };
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   overtaKvoteReasons: ownProps.alleKodeverk[kodeverkTyper.OVERFOERING_AARSAK_TYPE],
   skalOvertaKvote: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalOvertaKvote,
 });

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -19,13 +19,13 @@ const defaultUtsettelsePeriode = {
   arsakForUtsettelse: '',
 };
 
-const mapTyper = (typer: KodeverkMedNavn[]) => typer
+const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .map(({
     kode,
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-const mapKvoter = (typer: KodeverkMedNavn[]) => typer
+const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeUttakperioder.includes(kode))
