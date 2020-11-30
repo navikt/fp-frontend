@@ -50,8 +50,9 @@ const createTextStrings = (arbforhold: AktivitetIdentifikator, arbeidsgiverOpply
   if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
     return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
   }
-  if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
-    return lagVisningsNavn(arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]);
+  if (arbeidsgiverReferanse) {
+    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    return arbeidsgiverOpplysninger ? lagVisningsNavn(arbeidsgiverOpplysninger) : arbeidsgiverReferanse;
   }
 
   return <FormattedMessage id="RenderUttakTable.ArbeidType.ANNET" />;
