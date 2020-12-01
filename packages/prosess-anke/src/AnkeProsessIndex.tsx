@@ -6,6 +6,8 @@ import { AnkeVurdering } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
+import { AnkeData } from './components/TempsaveAnkeButton';
+import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -17,8 +19,8 @@ const intl = createIntl({
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  saveAnke: (data: any) => Promise<any>;
-  previewCallback: (data: any) => Promise<any>;
+  saveAnke: (data: AnkeData) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<any>;
   behandlinger: BehandlingInfo[];
 }
 

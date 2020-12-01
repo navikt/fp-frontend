@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
@@ -27,9 +27,9 @@ import {
   Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 
-import PreviewAnkeLink from './PreviewAnkeLink';
+import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 import FritekstBrevTextField from './FritekstAnkeBrevTextField';
-import TempsaveAnkeButton from './TempsaveAnkeButton';
+import TempsaveAnkeButton, { AnkeData } from './TempsaveAnkeButton';
 
 import styles from './behandleAnkeForm.less';
 
@@ -48,28 +48,28 @@ export type BehandlingInfo = {
 }
 
 type FormValuesUtrekk = {
-  ankeVurdering: Kodeverk;
-  erSubsidiartRealitetsbehandles: boolean;
-  ankeOmgjoerArsak: Kodeverk;
-  ankeVurderingOmgjoer: Kodeverk;
-  vedtak: string;
+  ankeVurdering?: Kodeverk;
+  erSubsidiartRealitetsbehandles?: boolean;
+  ankeOmgjoerArsak?: Kodeverk;
+  ankeVurderingOmgjoer?: Kodeverk;
+  vedtak?: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
 };
 
 type FormValues = {
-  erMerknaderMottatt: boolean;
-  erGodkjentAvMedunderskriver: boolean;
-  erAnkerIkkePart: boolean;
+  erMerknaderMottatt?: boolean;
+  erGodkjentAvMedunderskriver?: boolean;
+  erAnkerIkkePart?: boolean;
   erIkkeKonkret: boolean;
   erFristIkkeOverholdt: boolean;
   erIkkeSignert: boolean;
 } & FormValuesUtrekk
 
-const skalViseForhaandlenke = (avr: Kodeverk) => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
   || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr?.kode === ankeVurdering.ANKE_OMGJOER;
 
-const canSubmit = (formValues: FormValuesUtrekk) => {
+const canSubmit = (formValues: FormValuesUtrekk): boolean => {
   if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode && !formValues.erSubsidiartRealitetsbehandles) {
     return false;
   }
@@ -84,7 +84,7 @@ const canSubmit = (formValues: FormValuesUtrekk) => {
 };
 
 // TODO (TOR) Dette skal ikkje hardkodast!!! Hent fra kodeverk
-const formatBehandlingType = (kode: string) => {
+const formatBehandlingType = (kode: string): string | null => {
   switch (kode) {
     case behandlingType.FORSTEGANGSSOKNAD: return 'Førstegangssøknad';
     case behandlingType.KLAGE: return 'Klage';
@@ -98,7 +98,7 @@ const formatBehandlingType = (kode: string) => {
 };
 
 // TODO (TOR) Dette skal ikkje hardkodast!!! Hent fra kodeverk
-const formatBehandlingStatus = (status: string) => {
+const formatBehandlingStatus = (status: string): string | null => {
   switch (status) {
     case behandlingStatus.OPPRETTET: return 'Opprettet';
     case behandlingStatus.BEHANDLING_UTREDES: return 'Behandling utredes';
@@ -111,17 +111,19 @@ const formatBehandlingStatus = (status: string) => {
 
 const IKKE_PAA_ANKET_BEHANDLING_ID = 0;
 
-const canPreview = (begrunnelse: string, fritekstTilBrev: string) => (begrunnelse && begrunnelse.length > 0) && (fritekstTilBrev && fritekstTilBrev.length > 0);
-const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
-const formatBehandling = (b: BehandlingInfo) => `${formatDate(b.opprettet)} - ${formatBehandlingType(b.type.kode)} - ${formatBehandlingStatus(b.status.kode)}`;
-const formatId = (id?: number) => {
+const canPreview = (begrunnelse: string, fritekstTilBrev: string): boolean => (begrunnelse && begrunnelse.length > 0)
+  && (fritekstTilBrev && fritekstTilBrev.length > 0);
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatBehandling = (b: BehandlingInfo): string => `${formatDate(b.opprettet)} - ${formatBehandlingType(b.type.kode)} `
+  + `- ${formatBehandlingStatus(b.status.kode)}`;
+const formatId = (id?: number): string => {
   if (id === null) {
     return `${IKKE_PAA_ANKET_BEHANDLING_ID}`;
   }
   return `${id}`;
 };
 
-const leggTilUkjent = (behandlinger: BehandlingInfo[] = []) => {
+const leggTilUkjent = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => {
   const arr = [].concat(behandlinger);
   arr.unshift({
     id: IKKE_PAA_ANKET_BEHANDLING_ID,
@@ -134,7 +136,7 @@ const leggTilUkjent = (behandlinger: BehandlingInfo[] = []) => {
   return arr;
 };
 
-const buildOption = (b: BehandlingInfo, intl: IntlShape) => {
+const buildOption = (b: BehandlingInfo, intl: IntlShape): ReactElement => {
   const formattedId = formatId(b.id);
   if (b.id === IKKE_PAA_ANKET_BEHANDLING_ID) {
     return (<option key={formattedId} value={formattedId}>{intl.formatMessage({ id: 'Ankebehandling.Resultat.IkkePaaAnketVedtak' })}</option>);
@@ -147,15 +149,16 @@ const SKAL_REALITETSBEHANDLES = {
   NEI: false,
 };
 
-const filtrerKlage = (behandlinger: BehandlingInfo[] = []) => behandlinger.filter((b) => b.type.kode === behandlingType.KLAGE);
+const filtrerKlage = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => behandlinger.filter((b) => b.type.kode === behandlingType.KLAGE);
 
-interface OwnProps {
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  previewCallback: (...args: any[]) => any;
-  saveAnke: (...args: any[]) => any;
-  aksjonspunktCode: string;
-  formValues?: FormValuesUtrekk;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
+  ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
+  previewCallback: (data: BrevData) => Promise<any>;
+  saveAnke: (data: AnkeData) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: Kodeverk;
@@ -163,10 +166,17 @@ interface OwnProps {
   ankeOmgorArsaker: KodeverkMedNavn[];
 }
 
+interface MappedOwnProps {
+  aksjonspunktCode: string;
+  formValues?: FormValuesUtrekk;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
+}
+
 /**
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling.
  */
-const BehandleAnkeForm: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -352,22 +362,14 @@ BehandleAnkeForm.defaultProps = {
   readOnlySubmitButton: true,
 };
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
-  ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
-}
-
-const lagreOmgjoerAarsak = (values: FormValues) => (ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === values.ankeVurdering?.kode
+const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === values.ankeVurdering?.kode
 || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === values.ankeVurdering?.kode
 || ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode ? values.ankeOmgjoerArsak : '-');
 
-const lagreVurderingOmgjoer = (values: FormValues) => (ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode
+const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode
   ? values.ankeVurderingOmgjoer : '-');
 
-export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
+export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
   vedtak: resultat ? formatId(resultat.paAnketBehandlingId) : null,
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
@@ -381,7 +383,7 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
   ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
 }));
 
-export const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
+export const transformValues = (values: FormValues, aksjonspunktCode: string): any => ({
   vedtak: values.vedtak === '0' ? null : values.vedtak,
   ankeVurdering: values.ankeVurdering,
   begrunnelse: values.begrunnelse,
@@ -405,7 +407,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0].definisjon.kode)]));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon.kode,
   initialValues: buildInitialValues(ownProps),
   formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,

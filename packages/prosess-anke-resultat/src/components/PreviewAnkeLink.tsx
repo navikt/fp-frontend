@@ -8,7 +8,7 @@ import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './previewAnkeLink.less';
 
-const getBrevKode = (ankeVurdering?: Kodeverk) => {
+const getBrevKode = (ankeVurdering?: Kodeverk): string | null => {
   switch (ankeVurdering.kode) {
     case ankeVurderingType.ANKE_OMGJOER:
       return dokumentMalType.ANKE_VEDTAK_OMGJORING;
@@ -21,7 +21,13 @@ const getBrevKode = (ankeVurdering?: Kodeverk) => {
   }
 };
 
-const getBrevData = (ankeVurdering?: Kodeverk, fritekstTilBrev?: string) => {
+export type BrevData = {
+  fritekst: string;
+  mottaker: string;
+  dokumentMal?: string;
+}
+
+const getBrevData = (ankeVurdering?: Kodeverk, fritekstTilBrev?: string): BrevData => {
   const data = {
     fritekst: fritekstTilBrev || '',
     mottaker: '',
@@ -31,7 +37,7 @@ const getBrevData = (ankeVurdering?: Kodeverk, fritekstTilBrev?: string) => {
 };
 
 interface OwnProps {
-  previewCallback: (data: any) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<any>;
   fritekstTilBrev?: string;
   ankeVurdering?: Kodeverk;
   readOnly?: boolean;
@@ -43,7 +49,7 @@ const PreviewAnkeLink: FunctionComponent<OwnProps> = ({
   ankeVurdering,
   readOnly = false,
 }) => {
-  const previewMessage = (e: any) => {
+  const previewMessage = (e: React.MouseEvent | React.KeyboardEvent): void => {
     e.preventDefault();
     previewCallback(getBrevData(ankeVurdering, fritekstTilBrev));
   };
