@@ -780,7 +780,12 @@ const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
 
 const slaSammenHovedsokerOgAnnenForelder = createSelector(
   [addClassNameGroupIdToPerioderHovedsoker, addClassNameGroupIdToPerioderAnnenForelder],
-  (hovedsokerPerioder, annenForelderPerioder) => hovedsokerPerioder.concat(annenForelderPerioder),
+  (hovedsokerPerioder, annenForelderPerioder) => hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
+    if (pers1.group === pers2.group) {
+      return 0;
+    }
+    return pers1.group < pers2.group ? -1 : 1;
+  }),
 );
 
 const mapStateToProps = (state: any, props: PureOwnProps) => {
