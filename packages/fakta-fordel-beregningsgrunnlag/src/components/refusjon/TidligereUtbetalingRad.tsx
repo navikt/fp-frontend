@@ -8,11 +8,13 @@ import { Column, Row } from 'nav-frontend-grid';
 import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import styles from './tidligereUtbetalinger.less';
 
+const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+
 const visningsnavn = (andel) => {
-  if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
-    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiver.arbeidsgiverOrgnr})`;
-  }
-  return `${andel.arbeidsgiverNavn}`;
+  const arbeidsgiverId = andel.arbeidsgiver.arbeidsgiverOrgnr || andel.arbeidsgiver.arbeidsgiverAktørId;
+  return arbeidsgiverId
+    ? `${andel.arbeidsgiverNavn} (${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`
+    : andel.arbeidsgiverNavn;
 };
 
 const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling) => (
