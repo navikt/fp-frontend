@@ -7,14 +7,19 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { Soknad } from '@fpsak-frontend/types';
 
-const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 interface OwnProps {
   soknad: Soknad;
   termindato: string;
 }
 
-export const getTerminEllerFodselsdato = (hasSoknad: boolean, fødselsdatoerSoknad: {[key: number]: string}, termindatoSoknad?: string, termindato?: string) => {
+export const getTerminEllerFodselsdato = (
+  hasSoknad: boolean,
+  fødselsdatoerSoknad: {[key: number]: string},
+  termindatoSoknad?: string,
+  termindato?: string,
+): string | null => {
   if (hasSoknad && Object.keys(fødselsdatoerSoknad).length > 0) {
     return formatDate(Object.values(fødselsdatoerSoknad)[0]);
   }

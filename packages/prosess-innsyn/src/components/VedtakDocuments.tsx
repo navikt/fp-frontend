@@ -9,7 +9,7 @@ import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 /* TODO Ta i bruk fpsakApi - Flytt url ut av komponent */
 const DOCUMENT_SERVER_URL = '/fpsak/api/vedtak/hent-vedtaksdokument';
-const getLink = (document: InnsynVedtaksdokument) => `${DOCUMENT_SERVER_URL}?behandlingId=${document.dokumentId}`;
+const getLink = (document: InnsynVedtaksdokument): string => `${DOCUMENT_SERVER_URL}?behandlingId=${document.dokumentId}`;
 
 interface OwnProps {
   behandlingTypes: KodeverkMedNavn[];
@@ -35,8 +35,8 @@ class VedtakDocuments extends Component<OwnProps, OwnState> {
     };
   }
 
-  toggleDocuments(evt: any) {
-    this.setState((prevState: any) => ({
+  toggleDocuments(evt: React.MouseEvent): void {
+    this.setState((prevState: OwnState) => ({
       showDocuments: !prevState.showDocuments,
     }));
     evt.preventDefault();
