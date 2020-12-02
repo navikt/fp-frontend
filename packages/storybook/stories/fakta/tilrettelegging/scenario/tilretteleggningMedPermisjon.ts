@@ -10,9 +10,9 @@ export const tilrettelegging = {
       fom: '2020-10-15', type: { kode: 'HEL_TILRETTELEGGING', kodeverk: 'SVP_TILRETTELEGGING_TYPE' }, stillingsprosent: null, overstyrtUtbetalingsgrad: null,
     }],
     arbeidsgiverReferanse: '999999999',
-    arbeidType: {
-      kode: 'FRILANSER',
-      kodeverk: 'ARBEID_TYPE',
+    uttakArbeidType: {
+      kode: 'FRILANS',
+      kodeverk: 'UTTAK_ARBEID_TYPE',
     },
     opplysningerOmRisiko: null,
     opplysningerOmTilrettelegging: null,
