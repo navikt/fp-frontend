@@ -12,6 +12,8 @@ import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iay
 
 import withReduxProvider from '../../../decorators/withRedux';
 
+import alleKodeverk from '../../mocks/alleKodeverk.json';
+
 const behandling = {
   id: 1,
   versjon: 1,
@@ -180,6 +182,7 @@ export const tilretteleggingMedVelferdspermisjon = () => (
     inntektArbeidYtelse={iayPermisjon}
     erOverstyrer={false}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -204,6 +207,7 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
     inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={false}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -228,6 +232,7 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
     inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={false}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -262,6 +267,7 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
       inntektArbeidYtelse={inntektArbeidYtelseForAnnenArbeidsgiver}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={alleKodeverk as any}
     />
   );
 };

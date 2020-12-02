@@ -23,6 +23,12 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
     },
   };
 
+  const arbeidTyper = [{
+    kode: 'FRILANSER',
+    navn: 'Frilanser, samlet aktivitet',
+    kodeverk: 'ARBEID_TYPE',
+  }];
+
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er true', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
       readOnly={false}
@@ -30,6 +36,10 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverReferanse: '111222333',
         eksternArbeidsforholdReferanse: 'ARB001-001',
         velferdspermisjoner: [],
+        arbeidType: {
+          kode: 'FRILANSER',
+          kodeverk: 'ARBEID_TYPE',
+        },
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger
@@ -41,6 +51,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      arbeidTyper={arbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(2);
@@ -52,6 +63,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
     const fieldArray = wrapper.find(FieldArray);
     expect(fieldArray).has.length(1);
   });
+
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er false', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
       readOnly={false}
@@ -59,6 +71,10 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverReferanse: '0',
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
+        arbeidType: {
+          kode: 'FRILANSER',
+          kodeverk: 'ARBEID_TYPE',
+        },
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger={false}
@@ -70,6 +86,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      arbeidTyper={arbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(1);
@@ -80,5 +97,33 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
     expect(datepickerField).has.length(0);
     const fieldArray = wrapper.find(FieldArray);
     expect(fieldArray).has.length(0);
+  });
+
+  it('skal vise arbeidstype når arbeidsforholdReferanse ikke finnes', () => {
+    const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
+      readOnly={false}
+      arbeidsforhold={{
+        eksternArbeidsforholdReferanse: '',
+        velferdspermisjoner: [],
+        arbeidType: {
+          kode: 'FRILANSER',
+          kodeverk: 'ARBEID_TYPE',
+        },
+      } as ArbeidsforholdFodselOgTilrettelegging}
+      formSectionName="ARB_NAVN"
+      visTilrettelegginger={false}
+      behandlingId={1}
+      behandlingVersjon={1}
+      erOverstyrer
+      changeField={() => undefined}
+      stillingsprosentArbeidsforhold={40}
+      setOverstyrtUtbetalingsgrad={() => undefined}
+      formName="FORM_NAME"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      arbeidTyper={arbeidTyper}
+    />);
+    const normaltekst = wrapper.find(Normaltekst);
+    expect(normaltekst).has.length(1);
+    expect(normaltekst.props().children).to.eq('Frilanser, samlet aktivitet');
   });
 });
