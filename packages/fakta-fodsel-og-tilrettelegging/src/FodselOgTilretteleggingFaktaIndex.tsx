@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import FodselOgTilretteleggingInfoPanel from './components/FodselOgTilretteleggingInfoPanel';
@@ -22,6 +24,7 @@ interface OwnProps {
   inntektArbeidYtelse: InntektArbeidYtelse;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
@@ -35,6 +38,7 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   submittable,
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <FodselOgTilretteleggingInfoPanel
@@ -49,6 +53,7 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
       submittable={submittable}
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>
 );

@@ -2,7 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import FodselOgTilretteleggingFaktaForm from './FodselOgTilretteleggingFaktaForm';
 import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
@@ -19,6 +21,7 @@ interface OwnProps {
   submittable: boolean;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 /**
@@ -37,6 +40,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
   submittable,
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
+  alleKodeverk,
 }) => (
   <>
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
@@ -55,6 +59,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
       submittable={submittable}
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={alleKodeverk}
     />
   </>
 );
