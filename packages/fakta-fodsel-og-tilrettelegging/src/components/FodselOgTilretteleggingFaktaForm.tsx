@@ -200,7 +200,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
                     setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
                     formName={FODSEL_TILRETTELEGGING_FORM}
                     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                    arbeidTyper={alleKodeverk[kodeverkTyper.ARBEID_TYPE]}
+                    uttakArbeidTyper={alleKodeverk[kodeverkTyper.UTTAK_ARBEID_TYPE]}
                   />
                   {index === arbeidsforhold.length - 1 && (
                     <AvsnittSkiller />
