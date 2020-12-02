@@ -20,7 +20,7 @@ import styles from './tilretteleggingArbeidsforholdSection.less';
 const utledArbeidsforholdTittel = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  arbeidTyper: KodeverkMedNavn[],
+  uttakArbeidTyper: KodeverkMedNavn[],
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
 
@@ -28,7 +28,7 @@ const utledArbeidsforholdTittel = (
   if (arbeidsforhold.arbeidsgiverReferanse && arbeidsgiverOpplysninger) {
     tittel = `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
   } else {
-    const arbeidType = arbeidTyper.find((type) => type.kode === arbeidsforhold.arbeidType.kode);
+    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType.kode);
     tittel = arbeidType?.navn;
   }
 
@@ -54,7 +54,7 @@ interface PureOwnProps {
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
   formName: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  arbeidTyper: KodeverkMedNavn[],
+  uttakArbeidTyper: KodeverkMedNavn[],
 }
 
 interface MappedOwnProps {
@@ -74,11 +74,11 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
   setOverstyrtUtbetalingsgrad,
   formName,
   arbeidsgiverOpplysningerPerId,
-  arbeidTyper,
+  uttakArbeidTyper,
 }) => (
   <FormSection name={formSectionName}>
     <Normaltekst className={styles.arbeidsforholdTittel}>
-      {utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, arbeidTyper)}
+      {utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)}
     </Normaltekst>
     <VerticalSpacer sixteenPx />
     <CheckboxField
