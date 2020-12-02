@@ -53,7 +53,7 @@ describe('<FodselOgTilretteleggingInfoPanel>', () => {
       submittable
       erOverstyrer
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      alleKodeverk={{}}
+      uttakArbeidTyper={[]}
     />);
 
     const faktaForm = wrapper.find(FodselOgTilretteleggingFaktaForm);
