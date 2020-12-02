@@ -13,7 +13,7 @@ type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[];
   arbeidsgiverReferanse: string;
-  arbeidType: Kodeverk;
+  uttakArbeidType: Kodeverk;
   opplysningerOmRisiko?: string;
   opplysningerOmTilrettelegging?: string;
   internArbeidsforholdReferanse?: string;

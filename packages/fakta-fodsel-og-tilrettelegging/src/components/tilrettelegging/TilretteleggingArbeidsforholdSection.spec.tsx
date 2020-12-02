@@ -23,10 +23,10 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
     },
   };
 
-  const arbeidTyper = [{
-    kode: 'FRILANSER',
-    navn: 'Frilanser, samlet aktivitet',
-    kodeverk: 'ARBEID_TYPE',
+  const uttakArbeidTyper = [{
+    kode: 'FRILANS',
+    navn: 'Frilans',
+    kodeverk: 'UTTAK_ARBEID_TYPE',
   }];
 
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er true', () => {
@@ -36,9 +36,9 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverReferanse: '111222333',
         eksternArbeidsforholdReferanse: 'ARB001-001',
         velferdspermisjoner: [],
-        arbeidType: {
-          kode: 'FRILANSER',
-          kodeverk: 'ARBEID_TYPE',
+        uttakArbeidType: {
+          kode: 'FRILANS',
+          kodeverk: 'UTTAK_ARBEID_TYPE',
         },
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
@@ -51,7 +51,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      arbeidTyper={arbeidTyper}
+      uttakArbeidTyper={uttakArbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(2);
@@ -71,9 +71,9 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverReferanse: '0',
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
-        arbeidType: {
-          kode: 'FRILANSER',
-          kodeverk: 'ARBEID_TYPE',
+        uttakArbeidType: {
+          kode: 'FRILANS',
+          kodeverk: 'UTTAK_ARBEID_TYPE',
         },
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
@@ -86,7 +86,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      arbeidTyper={arbeidTyper}
+      uttakArbeidTyper={uttakArbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(1);
@@ -105,9 +105,9 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       arbeidsforhold={{
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
-        arbeidType: {
-          kode: 'FRILANSER',
-          kodeverk: 'ARBEID_TYPE',
+        uttakArbeidType: {
+          kode: 'FRILANS',
+          kodeverk: 'UTTAK_ARBEID_TYPE',
         },
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
@@ -120,10 +120,10 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       setOverstyrtUtbetalingsgrad={() => undefined}
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      arbeidTyper={arbeidTyper}
+      uttakArbeidTyper={uttakArbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).has.length(1);
-    expect(normaltekst.props().children).to.eq('Frilanser, samlet aktivitet');
+    expect(normaltekst.props().children).to.eq('Frilans');
   });
 });

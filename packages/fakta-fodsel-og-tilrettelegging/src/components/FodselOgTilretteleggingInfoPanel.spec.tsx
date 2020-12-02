@@ -22,9 +22,9 @@ const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
       },
     }],
     arbeidsgiverReferanse: '1',
-    arbeidType: {
-      kode: 'FRILANSER',
-      kodeverk: 'ARBEID_TYPE',
+    uttakArbeidType: {
+      kode: 'FRILANS',
+      kodeverk: 'UTTAK_ARBEID_TYPE',
     },
     skalBrukes: true,
     velferdspermisjoner: [],
