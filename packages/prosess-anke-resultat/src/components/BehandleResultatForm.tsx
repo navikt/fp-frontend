@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -21,12 +21,12 @@ import {
   Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 
-import PreviewAnkeLink from './PreviewAnkeLink';
+import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 
-const isVedtakUtenToTrinn = (apCodes: string) => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
-const isMedUnderskriver = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
-const isFatterVedtak = (apCodes: string) => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
-const skalViseForhaandlenke = (avr: Kodeverk) => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+const isVedtakUtenToTrinn = (apCodes: string): boolean => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
+const isMedUnderskriver = (apCodes: string): boolean => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
+const isFatterVedtak = (apCodes: string): boolean => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
+const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
   || avr.kode === ankeVurdering.ANKE_OMGJOER || avr.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
 
 interface OwnPropsResultat {
@@ -35,7 +35,7 @@ interface OwnPropsResultat {
 
 const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
-}) => (
+}): ReactElement => (
   <div>
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" /></Undertekst>
     <VerticalSpacer sixteenPx />
@@ -46,7 +46,7 @@ const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
 
 const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
-}) => (
+}): ReactElement => (
   <div>
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" /></Undertekst>
     <VerticalSpacer sixteenPx />
@@ -57,7 +57,7 @@ const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
 
 const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
-}) => (
+}): ReactElement => (
   <div>
     <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" /></Undertekst>
     <VerticalSpacer sixteenPx />
@@ -68,7 +68,7 @@ const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
 
 const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
-}) => (
+}): ReactElement => (
   <>
     <Undertekst>
       {ankeVurderingResultat.paAnketBehandlingId != null
@@ -100,7 +100,7 @@ const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   </>
 );
 
-const hentSprakKode = (ankeOmgjoerArsak: Kodeverk) => {
+const hentSprakKode = (ankeOmgjoerArsak: Kodeverk): string => {
   switch (ankeOmgjoerArsak.kode) {
     case ankeVurderingOmgjoer.ANKE_TIL_UGUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
     case ankeVurderingOmgjoer.ANKE_TIL_GUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
@@ -112,7 +112,7 @@ const hentSprakKode = (ankeOmgjoerArsak: Kodeverk) => {
 const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
-}) => (
+}): ReactElement => (
   <>
     <Undertekst><FormattedMessage id={hentSprakKode(ankeVurderingResultat.ankeVurderingOmgjoer)} /></Undertekst>
     <VerticalSpacer sixteenPx />
@@ -131,7 +131,7 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[k
 const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
-}) => {
+}): ReactElement | null => {
   if (!ankeVurderingResultat) {
     return null;
   }
@@ -145,20 +145,31 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: 
   }
 };
 
-interface OwnProps {
-  previewCallback: (data: any) => Promise<any>;
-  aksjonspunktCode: string;
-  ankeVurderingVerdi?: Kodeverk;
-  fritekstTilBrev?: string;
-  readOnly?: boolean;
-  readOnlySubmitButton?: boolean;
-  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
+type FormValues = {
+  begrunnelse?: string;
+}
+
+interface PureOwnProps {
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  submitCallback: (data: any) => Promise<any>;
   behandlingId: number;
   behandlingVersjon: number;
+  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
+  previewCallback: (data: BrevData) => Promise<any>;
+  readOnlySubmitButton?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+interface MappedOwnProps {
+  aksjonspunktCode: string;
+  ankeVurderingVerdi?: Kodeverk;
+  fritekstTilBrev?: string;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
+}
+
+const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   handleSubmit,
   previewCallback,
   aksjonspunktCode,
@@ -220,21 +231,12 @@ const AnkeResultatForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
   </form>
 );
 
-const transformValues = (values: { begrunnelse: string }, aksjonspunktCode: string) => ({
+const transformValues = (values: FormValues, aksjonspunktCode: string): any => ({
   begrunnelse: values.begrunnelse,
   kode: aksjonspunktCode,
 });
 
-interface PureOwnProps {
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
-  submitCallback: (data: any) => Promise<any>;
-  behandlingId: number;
-  behandlingVersjon: number;
-  ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
-}
-
-const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
+const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
   begrunnelse: resultat ? resultat.begrunnelse : null,
 }));
 
@@ -242,7 +244,7 @@ const formName = 'ankeResultatForm';
 
 const finnAksjonspunktKode = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter, (ownProps: PureOwnProps) => ownProps.readOnly],
-(aksjonspunkter, readOnly) => {
+(aksjonspunkter, readOnly): string => {
   const vedtaksaksjonspunkt = aksjonspunkter
     .filter((ap: Aksjonspunkt) => readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
     .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
@@ -251,9 +253,9 @@ const finnAksjonspunktKode = createSelector([
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, finnAksjonspunktKode],
-(submitCallback, aksjonspunktCode) => (values: any) => submitCallback([transformValues(values, aksjonspunktCode)]));
+(submitCallback, aksjonspunktCode) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunktCode)]));
 
-const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: finnAksjonspunktKode(ownProps),
   initialValues: buildInitialValues(ownProps),
   ankeVurderingVerdi: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,

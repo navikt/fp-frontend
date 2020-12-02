@@ -36,6 +36,15 @@ const ankeOmgjorArsakRekkefolge = [
   ankeOmgjorArsak.PROSESSUELL_FEIL,
 ];
 
+type FormValues = {
+  erMerknaderMottatt?: boolean;
+  merknadKommentar?: string;
+  avsluttBehandling?: boolean;
+  trygderettVurdering?: Kodeverk;
+  trygderettOmgjoerArsak?: Kodeverk;
+  trygderettVurderingOmgjoer?: Kodeverk;
+}
+
 interface PureOwnProps {
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
   aksjonspunkter: Aksjonspunkt[];
@@ -52,6 +61,8 @@ interface PureOwnProps {
 interface MappedOwnProps {
   aksjonspunktCode: string;
   valgtTrygderettVurdering?: Kodeverk;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -188,23 +199,14 @@ TrygderettsbehandlingForm.defaultProps = {
 
 const ankeMerknaderFormName = 'ankeMerknaderForm';
 
-type FormValues = {
-  erMerknaderMottatt: string;
-  merknadKommentar: string;
-  avsluttBehandling: string;
-  trygderettVurdering: Kodeverk;
-  trygderettOmgjoerArsak: Kodeverk;
-  trygderettVurderingOmgjoer: Kodeverk;
-}
-
-const lagreOmgjoerAarsak = (values: FormValues) => (ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === values.trygderettVurdering?.kode
+const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === values.trygderettVurdering?.kode
     || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === values.trygderettVurdering?.kode
     || ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode ? values.trygderettOmgjoerArsak : '-');
 
-const lagreVurderingOmgjoer = (values: FormValues) => (ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode
+const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode
   ? values.trygderettVurderingOmgjoer : '-');
 
-const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
+const transformValues = (values: FormValues, aksjonspunktCode: string): any => ({
   erMerknaderMottatt: values.erMerknaderMottatt,
   merknadKommentar: values.merknadKommentar,
   avsluttBehandling: values.avsluttBehandling,
@@ -214,7 +216,7 @@ const transformValues = (values: FormValues, aksjonspunktCode: string) => ({
   kode: aksjonspunktCode,
 });
 
-const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat) => ({
+const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
   merknadKommentar: resultat ? resultat.merknadKommentar : null,
   erMerknaderMottatt: resultat ? resultat.erMerknaderMottatt : null,
   trygderettVurdering: resultat ? resultat.trygderettVurdering : null,
@@ -226,7 +228,7 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER)]));
 
-const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),

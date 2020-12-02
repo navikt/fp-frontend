@@ -168,6 +168,7 @@ interface DispatchProps {
 interface OwnState {
   selectedItem?: PeriodeMedClassName;
   stonadskonto: UttakStonadskontoer;
+  isButtonDisabled: boolean;
 }
 
 /**
@@ -205,6 +206,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     this.state = {
       selectedItem: undefined,
       stonadskonto: props.stonadskonto,
+      isButtonDisabled: false,
     };
   }
 
@@ -284,8 +286,9 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       perioder: transformedResultat,
     };
 
+    this.setState((oldState) => ({ ...oldState, isButtonDisabled: true }));
     updateKontoer(params).then((response: UttakStonadskontoer) => {
-      this.setState({ stonadskonto: response });
+      this.setState((oldState) => ({ ...oldState, stonadskonto: response, isButtonDisabled: false }));
       formChange(`${behandlingFormPrefix}.${formName}`, STONADSKONTOER_TEMP, response);
     });
   }
@@ -469,7 +472,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       behandlingsresultat,
       arbeidsgiverOpplysningerPerId,
     } = this.props;
-    const { selectedItem, stonadskonto } = this.state;
+    const { selectedItem, stonadskonto, isButtonDisabled } = this.state;
     const customTimes = getCustomTimes(
       barnFraTps,
       familiehendelse,
@@ -579,7 +582,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                       <FlexColumn>
                         <Hovedknapp
                           mini
-                          disabled={this.isConfirmButtonDisabled() || submitting}
+                          disabled={this.isConfirmButtonDisabled() || submitting || isButtonDisabled}
                           spinner={submitting}
                         >
                           <FormattedMessage id="Uttak.Confirm" />
@@ -777,7 +780,12 @@ const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
 
 const slaSammenHovedsokerOgAnnenForelder = createSelector(
   [addClassNameGroupIdToPerioderHovedsoker, addClassNameGroupIdToPerioderAnnenForelder],
-  (hovedsokerPerioder, annenForelderPerioder) => hovedsokerPerioder.concat(annenForelderPerioder),
+  (hovedsokerPerioder, annenForelderPerioder) => hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
+    if (pers1.group === pers2.group) {
+      return 0;
+    }
+    return pers1.group < pers2.group ? -1 : 1;
+  }),
 );
 
 const mapStateToProps = (state: any, props: PureOwnProps) => {

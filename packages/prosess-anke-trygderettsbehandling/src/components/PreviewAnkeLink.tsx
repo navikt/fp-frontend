@@ -8,7 +8,7 @@ import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './previewAnkeLink.less';
 
-const getBrevKode = (ankeVurdering?: Kodeverk): string => {
+const getBrevKode = (ankeVurdering?: Kodeverk): string | null => {
   switch (ankeVurdering.kode) {
     case ankeVurderingType.ANKE_OMGJOER:
       return dokumentMalType.ANKE_VEDTAK_OMGJORING;

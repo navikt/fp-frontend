@@ -594,7 +594,8 @@ export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt:
     tom: selectedItem.tom,
     weeks: finnUker(aktivitet, selectedItem),
     days: finnDager(aktivitet, selectedItem),
-  }));
+  }))
+  .sort((a1, a2) => (a1.arbeidsgiverReferanse && a2.arbeidsgiverReferanse ? a1.arbeidsgiverReferanse.localeCompare(a2.arbeidsgiverReferanse) : 0));
 
 const buildInitialValues = createSelector(
   [(props: PureOwnProps) => props.selectedItemData],
