@@ -29,10 +29,10 @@ import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
 
 type FormValues = {
-  mottattDato: string;
+  mottattDato?: string;
   innsynResultatType?: string;
-  fristDato: string;
-  sattPaVent: boolean;
+  fristDato?: string;
+  sattPaVent?: boolean;
 }
 
 interface PureOwnProps {

@@ -27,6 +27,7 @@ describe('<BeregningsresultatEngangsstonadForm>', () => {
       toggleOverstyring={sinon.spy()}
       overrideReadOnly
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
 
     const texts = wrapper.find(Element);
@@ -53,6 +54,7 @@ describe('<BeregningsresultatEngangsstonadForm>', () => {
       toggleOverstyring={sinon.spy()}
       overrideReadOnly
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(OverstyringPanel)).to.have.length(0);

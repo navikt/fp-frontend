@@ -28,6 +28,8 @@ describe('<DelOppPeriodeModal>', () => {
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
       splitPeriod={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
 
     const modal = wrapper.find(Modal);
@@ -52,6 +54,8 @@ describe('<DelOppPeriodeModal>', () => {
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
       splitPeriod={() => undefined}
+      behandlingId={1}
+      behandlingVersjon={2}
     />);
     wrapper.find(Knapp).simulate('click');
     expect(cancelEvent).to.have.property('callCount', 1);
@@ -68,6 +72,8 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: () => undefined,
+      behandlingId: 1,
+      behandlingVersjon: 2,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -90,6 +96,8 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: () => undefined,
+      behandlingId: 1,
+      behandlingVersjon: 2,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -114,6 +122,8 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: () => undefined,
+      behandlingId: 1,
+      behandlingVersjon: 2,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -138,6 +148,8 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: (value: any) => value,
+      behandlingId: 1,
+      behandlingVersjon: 2,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();

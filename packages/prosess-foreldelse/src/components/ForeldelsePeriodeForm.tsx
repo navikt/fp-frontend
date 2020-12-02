@@ -23,13 +23,14 @@ import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimeline
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 
 import styles from './foreldelsePeriodeForm.less';
+import { PeriodeMedBelop, PeriodeMedFeilutbetaling } from './splittePerioder/PeriodeController';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 export const FORELDELSE_PERIODE_FORM_NAME = 'foreldelsesresultatActivity';
 
-type FormValues = {
+export type FormValues = {
   foreldet: string;
 } & ForeldelsesresultatActivity;
 
@@ -41,11 +42,11 @@ interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   oppdaterPeriode: (values: FormValues) => void;
   skjulPeriode: (event: React.MouseEvent) => void;
-  setNestePeriode: (...args: any[]) => any
-  setForrigePeriode: (...args: any[]) => any;
-  oppdaterSplittedePerioder: (...args: any[]) => any;
+  setNestePeriode: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  setForrigePeriode: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
   readOnly: boolean;
-  beregnBelop: (data: any) => Promise<any>;
+  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
 interface MappedOwnProps {

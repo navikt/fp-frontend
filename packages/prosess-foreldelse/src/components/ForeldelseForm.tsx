@@ -1,6 +1,8 @@
 import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
-import { change as reduxFormChange, initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
+import {
+  change as reduxFormChange, FormAction, initialize as reduxFormInitialize, InitializeOptions, InjectedFormProps,
+} from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
@@ -19,13 +21,14 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import { KodeverkMedNavn, FeilutbetalingPeriode, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
-import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME } from './ForeldelsePeriodeForm';
+import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME, FormValues as PeriodeFormValues } from './ForeldelsePeriodeForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import ForeldelseTidslinjeHjelpetekster from './ForeldelseTidslinjeHjelpetekster';
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
 
 import styles from './foreldelseForm.less';
+import { PeriodeMedBelop } from './splittePerioder/PeriodeController';
 
 const FORELDELSE_FORM_NAME = 'ForeldelseForm';
 
@@ -60,7 +63,7 @@ interface PureOwnProps {
   navBrukerKjonn: string;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  beregnBelop: (data: any) => Promise<any>;
+  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
 type FormValues = {
@@ -75,8 +78,8 @@ interface MappedOwnProps {
 }
 
 interface DispatchProps {
-  reduxFormChange: (...args: any[]) => any;
-  reduxFormInitialize: (...args: any[]) => any;
+  reduxFormChange: (form: string, field: string, value: any, touch?: boolean, persistentSubmitErrors?: boolean) => FormAction;
+  reduxFormInitialize: (form: string, data: any, keepDirty?: boolean, options?: Partial<InitializeOptions>) => FormAction;
 }
 
 interface OwnState {
@@ -139,7 +142,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
     this.setPeriode(foreldelsesresultatActivity[index - 1]);
   }
 
-  oppdaterPeriode = (values: any): void => {
+  oppdaterPeriode = (values: PeriodeFormValues): void => {
     const {
       foreldelsesresultatActivity, reduxFormChange: formChange, behandlingFormPrefix,
     } = this.props;
