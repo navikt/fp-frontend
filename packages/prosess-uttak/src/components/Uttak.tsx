@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component, MouseEvent, ReactElement } from 'react';
 import moment from 'moment';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -62,9 +62,14 @@ const avvistKlassenavn = 'avvistPeriode';
 const endretClassnavn = 'endretPeriode';
 const ACTIVITY_PANEL_NAME = 'uttaksresultatActivity';
 const STONADSKONTOER_TEMP = 'stonadskonto';
-const parseDateString = (dateString: string) => moment(dateString, ISO_DATE_FORMAT).toDate();
+const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
-const fodselsdato = (soknadsType: string, omsorgsOvertagelseDato: string, endredFodselsDato?: string, familiehendelseDate?: string) => {
+const fodselsdato = (
+  soknadsType: string,
+  omsorgsOvertagelseDato: string,
+  endredFodselsDato?: string,
+  familiehendelseDate?: string,
+): string => {
   if (soknadsType === soknadType.FODSEL) {
     return (endredFodselsDato || familiehendelseDate);
   }
@@ -108,7 +113,8 @@ const getCustomTimes = (
   return customTimesBuilder;
 };
 
-const isInnvilget = (uttaksresultatActivity: UttaksresultatActivity) => uttaksresultatActivity.periodeResultatType.kode === periodeResultatType.INNVILGET;
+const isInnvilget = (uttaksresultatActivity: UttaksresultatActivity): boolean => uttaksresultatActivity
+  .periodeResultatType.kode === periodeResultatType.INNVILGET;
 
 interface PureOwnProps {
   intl: IntlShape;
@@ -211,11 +217,11 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount(): void {
     this.setSelectedDefaultPeriod();
   }
 
-  onToggleOverstyring() {
+  onToggleOverstyring(): void {
     const { selectedItem } = this.state;
     const { uttakPerioder } = this.props;
     if (!selectedItem) {
@@ -225,7 +231,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     }
   }
 
-  setSelectedDefaultPeriod() {
+  setSelectedDefaultPeriod(): void {
     const { selectedItem } = this.state;
     const { uttakPerioder } = this.props;
     const defaultSelectedElement = uttakPerioder.find((period) => period.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
@@ -235,19 +241,19 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     }
   }
 
-  setSelectedUttakActivity(uttakActivity: PeriodeMedClassName, isMounting?: boolean) {
+  setSelectedUttakActivity(uttakActivity: PeriodeMedClassName, isMounting?: boolean): void {
     if (!isMounting) {
       this.initializeActivityForm(uttakActivity);
     }
     this.setState({ selectedItem: uttakActivity });
   }
 
-  setFormField(fieldName: string, fieldValue: PeriodeMedClassName[]) {
+  setFormField(fieldName: string, fieldValue: PeriodeMedClassName[]): void {
     const { reduxFormChange: formChange, behandlingFormPrefix, formName } = this.props;
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
 
-  updateStonadskontoer(perioder: PeriodeMedClassName[]) {
+  updateStonadskontoer(perioder: PeriodeMedClassName[]): void {
     const {
       tempUpdateStonadskontoer: updateKontoer,
       reduxFormChange: formChange,
@@ -293,12 +299,12 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     });
   }
 
-  initializeActivityForm(uttakActivity: PeriodeMedClassName) {
+  initializeActivityForm(uttakActivity: PeriodeMedClassName): void {
     const { reduxFormInitialize: formInitialize, behandlingFormPrefix } = this.props;
     formInitialize(`${behandlingFormPrefix}.${ACTIVITY_PANEL_NAME}`, uttakActivity);
   }
 
-  updateActivity(values: PeriodeMedClassName) {
+  updateActivity(values: PeriodeMedClassName): void {
     const { uttakPerioder } = this.props;
     const { ...verdier } = values;
     verdier.aktiviteter = verdier.aktiviteter.map((a) => {
@@ -318,13 +324,13 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     this.setSelectedUttakActivity(uttakActivity || undefined);
   }
 
-  cancelSelectedActivity() {
+  cancelSelectedActivity(): void {
     // TODO Bør heller senda med undefined?
     this.initializeActivityForm({} as PeriodeMedClassName);
     this.setState({ selectedItem: undefined });
   }
 
-  openPeriodInfo(event: MouseEvent) {
+  openPeriodInfo(event: MouseEvent): void {
     const { uttakPerioder } = this.props;
     const { selectedItem: currentSelectedItem } = this.state;
     if (currentSelectedItem) {
@@ -336,7 +342,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     event.preventDefault();
   }
 
-  selectHandler(eventProps: EventProps) {
+  selectHandler(eventProps: EventProps): void {
     const { uttakPerioder } = this.props;
     const { selectedItem: currentSelectedItem } = this.state;
     const selectedItem = uttakPerioder.find((item: PeriodeMedClassName) => item.id === eventProps.items[0]);
@@ -349,7 +355,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     eventProps.event.preventDefault();
   }
 
-  nextPeriod(event: MouseEvent) {
+  nextPeriod(event: MouseEvent): void {
     const { uttakPerioder } = this.props;
     const { selectedItem } = this.state;
     const newIndex = uttakPerioder.findIndex((item) => item.id === selectedItem.id) + 1;
@@ -359,7 +365,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     event.preventDefault();
   }
 
-  prevPeriod(event: MouseEvent) {
+  prevPeriod(event: MouseEvent): void {
     const { uttakPerioder } = this.props;
     const { selectedItem } = this.state;
     const newIndex = uttakPerioder.findIndex((item) => item.id === selectedItem.id) - 1;
@@ -369,7 +375,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     event.preventDefault();
   }
 
-  testForReadOnly(aksjonspunkter: Aksjonspunkt[], kanOverstyre: boolean) {
+  testForReadOnly(aksjonspunkter: Aksjonspunkt[], kanOverstyre: boolean): boolean {
     const { manuellOverstyring } = this.props;
     const kunOverStyrAp = aksjonspunkter.length === 1
         && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
@@ -383,7 +389,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
         && !manuellOverstyring;
   }
 
-  ikkeGyldigForbruk() {
+  ikkeGyldigForbruk(): boolean {
     const { stonadskonto } = this.props;
     let validationError = false;
     if (stonadskonto && stonadskonto.stonadskontoer) {
@@ -397,7 +403,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     return validationError;
   }
 
-  isConfirmButtonDisabled() {
+  isConfirmButtonDisabled(): boolean {
     const {
       uttaksresultatActivity, readOnly, submitting, isDirty,
     } = this.props;
@@ -422,7 +428,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     return submitting || readOnly;
   }
 
-  isReadOnly() {
+  isReadOnly(): boolean {
     const {
       readOnly, aksjonspunkter, endringsdato, isRevurdering, employeeHasAccess,
     } = this.props;
@@ -431,7 +437,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     return readOnly || uttakIsReadOnly;
   }
 
-  skalViseCheckbox() {
+  skalViseCheckbox(): boolean {
     const { aksjonspunkter } = this.props;
     const kunOverStyrAp = aksjonspunkter.length === 1
         && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
@@ -598,7 +604,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   }
 }
 
-const determineMottatDato = (soknadsDato: string, mottatDato: string) => {
+const determineMottatDato = (soknadsDato: string, mottatDato: string): string => {
   if (moment(mottatDato) < moment(soknadsDato)) {
     return mottatDato;
   }
@@ -606,14 +612,14 @@ const determineMottatDato = (soknadsDato: string, mottatDato: string) => {
 };
 
 const getBarnFraTpsRelatertTilSoknad = createSelector([(props: PureOwnProps) => props.familiehendelse.register],
-  (register) => (register ? register.avklartBarn : []));
+  (register): AvklartBarn[] => (register ? register.avklartBarn : []));
 
 const getFodselTerminDato = createSelector(
   [(props: PureOwnProps) => props.termindato,
     (props: PureOwnProps) => props.fodselsdatoer,
     (props: PureOwnProps) => props.adopsjonFodelsedatoer,
     (props: PureOwnProps) => props.familiehendelse.gjeldende],
-  (termindato, fodselsdatoer, adopsjonFodelsedatoer, familiehendelse) => {
+  (termindato, fodselsdatoer, adopsjonFodelsedatoer, familiehendelse): string => {
     if (familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0) {
       return familiehendelse.avklartBarn[0].fodselsdato;
     }
@@ -632,7 +638,7 @@ const getFodselTerminDato = createSelector(
 
 const lagUttakMedOpphold = createSelector(
   [(state: any, props: PureOwnProps) => behandlingFormValueSelector(props.formName, props.behandlingId, props.behandlingVersjon)(state, ACTIVITY_PANEL_NAME)],
-  (uttaksresultatActivity: UttaksresultatActivity[]) => uttaksresultatActivity.map((uttak): UttaksresultatActivity => {
+  (uttaksresultatActivity: UttaksresultatActivity[]): UttaksresultatActivity[] => uttaksresultatActivity.map((uttak): UttaksresultatActivity => {
     const { ...uttakPerioder } = uttak;
 
     if (uttak.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT) {
@@ -655,7 +661,7 @@ const lagUttaksresultatActivity = createSelector(
   [lagUttakMedOpphold,
     (_state, props: PureOwnProps) => props.aksjonspunkter,
     (_state, props: PureOwnProps) => props.isApOpen],
-  (uttakMedOpphold, aksjonspunkter, isApOpen) => {
+  (uttakMedOpphold, aksjonspunkter, isApOpen): UttaksresultatActivity[] => {
     const tilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.TILKNYTTET_STORTINGET && isApOpen);
     return uttakMedOpphold.map((periode: UttaksresultatActivity): UttaksresultatActivity => ({
       tilknyttetStortinget,
@@ -664,7 +670,7 @@ const lagUttaksresultatActivity = createSelector(
   },
 );
 
-const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker) => {
+const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker): string => {
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return avvistKlassenavn;
   }
@@ -682,7 +688,7 @@ const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker) =
   return avvistKlassenavn;
 };
 
-const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker) => {
+const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker): string => {
   // @ts-ignore Fiks
   if (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
     return godkjentKlassenavn;
@@ -690,7 +696,7 @@ const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker) => 
   return avvistKlassenavn;
 };
 
-const createTooltipContent = (periodeType: string, intl: IntlShape, item: UttaksresultatActivity | PeriodeSoker) => (`
+const createTooltipContent = (periodeType: string | ReactElement, intl: IntlShape, item: UttaksresultatActivity | PeriodeSoker): string => (`
     <p>
       ${moment(item.fom).format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom).format(DDMMYY_DATE_FORMAT)}
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -705,7 +711,7 @@ const createTooltipContent = (periodeType: string, intl: IntlShape, item: Uttaks
      </p>
   `);
 
-const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement | string => {
   if (item.utsettelseType && item.utsettelseType.kode !== '-') {
     return (<FormattedMessage id="Timeline.tooltip.slutt" />);
   }
@@ -762,7 +768,7 @@ const addClassNameGroupIdToPerioderHovedsoker = createSelector(
     (_state, props: PureOwnProps) => props.intl,
     (_state, props: PureOwnProps) => props.behandlingStatus,
     (_state, props: PureOwnProps) => props.alleKodeverk],
-  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk) => addClassNameGroupIdToPerioder(
+  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
     hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk, true,
   ),
 );
@@ -773,14 +779,14 @@ const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
     (_state, props: PureOwnProps) => props.intl,
     (_state, props: PureOwnProps) => props.behandlingStatus,
     (_state, props: PureOwnProps) => props.alleKodeverk],
-  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk) => addClassNameGroupIdToPerioder(
+  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
     hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk, false,
   ),
 );
 
 const slaSammenHovedsokerOgAnnenForelder = createSelector(
   [addClassNameGroupIdToPerioderHovedsoker, addClassNameGroupIdToPerioderAnnenForelder],
-  (hovedsokerPerioder, annenForelderPerioder) => hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
+  (hovedsokerPerioder, annenForelderPerioder): PeriodeMedClassName[] => hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
     if (pers1.group === pers2.group) {
       return 0;
     }

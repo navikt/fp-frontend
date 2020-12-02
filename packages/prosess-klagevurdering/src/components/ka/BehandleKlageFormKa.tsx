@@ -18,8 +18,8 @@ import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types
 
 import KlageVurderingRadioOptionsKa from './KlageVurderingRadioOptionsKa';
 import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
-import PreviewKlageLink from '../felles/PreviewKlageLink';
-import TempsaveKlageButton from '../felles/TempsaveKlageButton';
+import PreviewKlageLink, { BrevData } from '../felles/PreviewKlageLink';
+import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageButton';
 
 import styles from './behandleKlageFormKa.less';
 
@@ -31,16 +31,23 @@ type FormValues = {
   klageMedholdArsak?: Kodeverk;
 };
 
-interface OwnProps {
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  previewCallback: (data: any) => Promise<any>;
-  saveKlage: (data: any) => Promise<any>;
-  formValues?: FormValues;
+  previewCallback: (data: BrevData) => Promise<any>;
+  saveKlage: (data: TransformedValues) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   sprakkode: Kodeverk;
+  submitCallback: (data: any) => Promise<any>;
+  klageVurdering: KlageVurdering;
+}
+
+interface MappedOwnProps {
+  initialValues: FormValues;
+  formValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -48,7 +55,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (KA).
  */
-export const BehandleKlageFormKaImpl: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const BehandleKlageFormKaImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -127,16 +134,8 @@ BehandleKlageFormKaImpl.defaultProps = {
   readOnlySubmitButton: true,
 };
 
-interface PureOwnProps {
-  klageVurdering: KlageVurdering;
-  submitCallback: (data: any) => Promise<any>;
-  behandlingId: number;
-  behandlingVersjon: number;
-  readOnly: boolean;
-}
-
 export const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.klageVurdering.klageVurderingResultatNK], (klageVurderingResultat) => ({
+  (ownProps: PureOwnProps) => ownProps.klageVurdering.klageVurderingResultatNK], (klageVurderingResultat): FormValues => ({
   klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
@@ -144,7 +143,7 @@ export const buildInitialValues = createSelector([
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
 }));
 
-export const transformValues = (values: FormValues) => ({
+export const transformValues = (values: FormValues): any => ({
   klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
@@ -159,7 +158,7 @@ const formName = 'BehandleKlageKaForm';
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
   formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(
     state, 'begrunnelse', 'fritekstTilBrev', 'klageVurdering', 'klageVurderingOmgjoer', 'klageMedholdArsak',
