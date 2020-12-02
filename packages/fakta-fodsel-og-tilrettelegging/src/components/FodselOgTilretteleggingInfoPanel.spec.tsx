@@ -22,6 +22,10 @@ const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
       },
     }],
     arbeidsgiverReferanse: '1',
+    arbeidType: {
+      kode: 'FRILANSER',
+      kodeverk: 'ARBEID_TYPE',
+    },
     skalBrukes: true,
     velferdspermisjoner: [],
   }],
@@ -49,6 +53,7 @@ describe('<FodselOgTilretteleggingInfoPanel>', () => {
       submittable
       erOverstyrer
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
 
     const faktaForm = wrapper.find(FodselOgTilretteleggingFaktaForm);
