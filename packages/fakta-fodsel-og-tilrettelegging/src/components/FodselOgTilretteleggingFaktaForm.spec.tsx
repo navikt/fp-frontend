@@ -73,6 +73,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
     />);
 
@@ -105,6 +106,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
     />);
 
@@ -137,6 +139,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
       {...formProps}
     />);
@@ -322,6 +325,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
     />);
 
@@ -377,6 +381,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
     />);
 
@@ -424,6 +429,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
     />);
 
@@ -471,6 +477,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      alleKodeverk={{}}
       {...reduxFormPropsMock}
     />);
 

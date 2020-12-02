@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller, Image,
@@ -18,7 +19,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Kodeverk,
+  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
@@ -92,6 +93,7 @@ interface PureOwnProps {
   iayArbeidsforhold: IayArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (values: any) => void;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 interface MappedOwnProps {
   fødselsdato?: string;
@@ -116,6 +118,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
   iayArbeidsforhold,
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
+  alleKodeverk,
   ...formProps
 }) => {
   const visInfoAlert = useMemo(() => skalViseInfoAlert(iayArbeidsforhold, arbeidsforhold), [behandlingVersjon]);
@@ -197,6 +200,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
                     setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
                     formName={FODSEL_TILRETTELEGGING_FORM}
                     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                    uttakArbeidTyper={alleKodeverk[kodeverkTyper.UTTAK_ARBEID_TYPE]}
                   />
                   {index === arbeidsforhold.length - 1 && (
                     <AvsnittSkiller />
