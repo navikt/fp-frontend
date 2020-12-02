@@ -272,7 +272,7 @@ const transformValues = (
       return {
         // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
         organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson ? null : arbeidsgiverOpplysninger.identifikator,
-        aktørId: arbeidsgiverOpplysninger.referanse,
+        aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : null,
         brukerHarSagtAtIkkeKommer: values.inntektsmeldingerSomIkkeKommer[lagArbeidsgiverKey(arbeidsgiverOpplysninger)],
       };
     }, {}),
