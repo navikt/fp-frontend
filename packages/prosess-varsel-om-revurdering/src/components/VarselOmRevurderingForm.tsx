@@ -24,6 +24,7 @@ import {
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Soknad, AvklartBarn, FamilieHendelse,
 } from '@fpsak-frontend/types';
@@ -147,7 +148,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     if (valid || pristine) {
       const data = {
         mottaker: '',
-        dokumentMal: 'REVURD',
+        dokumentMal: dokumentMalType.REVURDERING_DOK,
         fritekst: fritekst || ' ',
       };
       previewCallback(data);
