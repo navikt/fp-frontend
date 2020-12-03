@@ -21,7 +21,7 @@ interface OwnProps {
   submittable: boolean;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  uttakArbeidTyper: KodeverkMedNavn[],
 }
 
 /**
@@ -40,7 +40,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
   submittable,
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk,
+  uttakArbeidTyper,
 }) => (
   <>
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
@@ -59,7 +59,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
       submittable={submittable}
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      alleKodeverk={alleKodeverk}
+      uttakArbeidTyper={uttakArbeidTyper}
     />
   </>
 );
