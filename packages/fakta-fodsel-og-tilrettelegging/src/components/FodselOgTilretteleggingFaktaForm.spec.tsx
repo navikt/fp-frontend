@@ -51,6 +51,8 @@ const arbeidsforhold = [
   },
 ] as ArbeidsforholdFodselOgTilrettelegging[];
 
+const uttakArbeidTyper = [];
+
 const formProps = {
   error: 'SOME_ERROR',
 };
@@ -73,6 +75,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
     />);
 
@@ -105,6 +108,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
     />);
 
@@ -137,6 +141,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
       {...formProps}
     />);
@@ -171,7 +176,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
     expect(errors).is.eql({});
   });
@@ -193,7 +198,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
     // @ts-ignore
     // eslint-disable-next-line no-underscore-dangle
@@ -222,7 +227,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
     expect(errors).is.eql({
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
@@ -250,7 +255,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
     expect(errors).is.eql({
       termindato: [{
@@ -275,7 +280,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
     expect(errors).is.eql({
       termindato: [{
@@ -300,7 +305,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
     expect(errors).is.eql({});
   });
@@ -322,6 +327,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
     />);
 
@@ -377,6 +383,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
     />);
 
@@ -424,6 +431,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
     />);
 
@@ -471,6 +479,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       submitCallback={() => undefined}
       validate={() => undefined}
       onSubmit={() => undefined}
+      uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
     />);
 

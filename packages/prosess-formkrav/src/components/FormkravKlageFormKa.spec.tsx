@@ -20,6 +20,7 @@ describe('<FormkravKlageFormKa>', () => {
       avsluttedeBehandlinger={[]}
       klageVurdering={{} as KlageVurdering}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     expect(wrapper.find(FormkravKlageForm)).has.length(1);
   });

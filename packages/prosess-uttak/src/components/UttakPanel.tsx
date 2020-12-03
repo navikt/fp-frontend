@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
@@ -14,7 +14,7 @@ import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto,
 } from '@fpsak-frontend/types';
 
 import Uttak, { UttaksresultatActivity } from './Uttak';
@@ -22,7 +22,7 @@ import styles from './uttakPanel.less';
 
 const formName = 'UttakForm';
 
-const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]) => {
+const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.FASTSETT_UTTAKPERIODER
     && ap.definisjon.kode !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
 
@@ -73,6 +73,12 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
   return texts;
 };
 
+interface FormValues {
+  uttaksresultatActivity?: UttaksresultatActivity[];
+  stonadskonto?: UttakStonadskontoer;
+  manuellOverstyring?: boolean;
+}
+
 interface PureOwnProps {
   fagsak: Fagsak;
   behandlingId: number;
@@ -102,6 +108,9 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   manuellOverstyring?: boolean;
+  validate: (formValues: FormValues) => any;
+  onSubmit: (formValues: FormValues) => any;
+  initialValues: FormValues;
 }
 
 export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
@@ -181,12 +190,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   </>
 );
 
-interface FormValues {
-  uttaksresultatActivity: UttaksresultatActivity[];
-  stonadskonto: UttakStonadskontoer;
-  manuellOverstyring?: boolean;
-}
-
 type UttakResultat = { [key: string]: {
     trekkdagerDesimaler: number;
     konto: string;
@@ -218,7 +221,7 @@ const getResult = (uttaksresultatActivity: UttaksresultatActivity[]): UttakResul
   return uttakResult;
 };
 
-const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer: UttakStonadskontoer['stonadskontoer']) => {
+const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer: UttakStonadskontoer['stonadskontoer']): Stonadskonto | undefined => {
   switch (stonadskontoTypeKode) {
     case stonadskontoType.FORELDREPENGER_FØR_FØDSEL:
       return stonadskontoer.FORELDREPENGER_FØR_FØDSEL;
@@ -235,7 +238,11 @@ const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer:
   }
 };
 
-const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonadskonto: UttakStonadskontoer) => {
+type FormError = {
+  _error?: ReactElement;
+}
+
+const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonadskonto: UttakStonadskontoer): FormError => {
   let errors = null;
   const uttakResult = getResult(uttaksresultatActivity);
   const uttakResultArray = Object.values(uttakResult).map((value) => ({ ...value }));
@@ -271,7 +278,7 @@ const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonads
   return errors;
 };
 
-const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskontoer'] = {}) => {
+const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskontoer'] = {}): FormError => {
   let errors = null;
   if (stonadskonto.FLERBARNSDAGER && !stonadskonto.FLERBARNSDAGER.gyldigForbruk) {
     errors = {
@@ -289,7 +296,7 @@ const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskonto
   return errors;
 };
 
-const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadskontoer?: UttakStonadskontoer['stonadskontoer']) => {
+const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadskontoer?: UttakStonadskontoer['stonadskontoer']): FormError => {
   let errors = null;
   uttakPerioder.forEach((periode) => {
     const ikkeGyldigKonto = periode.aktiviteter.filter((a) => !(Object.prototype.hasOwnProperty.call(stonadskontoer, a.stønadskontoType.kode))
@@ -341,7 +348,7 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-export const transformValues = (values: FormValues, apCodes: string[], aksjonspunkter: Aksjonspunkt[]) => {
+export const transformValues = (values: FormValues, apCodes: string[], aksjonspunkter: Aksjonspunkt[]): any => {
   const overstyrErOpprettet = aksjonspunkter.filter((ap) => ap.status.kode === 'OPPR' && ap.definisjon.kode === '6008');
   const removeOverstyrApCode = apCodes.filter((a) => a !== '6008');
   let aksjonspunkt = removeOverstyrApCode;
@@ -394,7 +401,7 @@ const mapStateToPropsFactory = (_initialState, initOwnProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = initOwnProps;
   const validate = (values: FormValues) => validateUttakPanelForm(values);
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const initialValues = buildInitialValues(ownProps);
 
     return {

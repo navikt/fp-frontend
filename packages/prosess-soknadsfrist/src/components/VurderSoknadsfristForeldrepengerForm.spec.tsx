@@ -24,6 +24,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
+      onSubmit={() => undefined}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -47,6 +48,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
+      onSubmit={() => undefined}
     />);
     const normalTekst = wrapper.find('Normaltekst');
     expect(normalTekst).has.length(2);
@@ -74,6 +76,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
+      onSubmit={() => undefined}
     />);
     const radioGroup = wrapper.find('RadioGroupField');
     expect(radioGroup).has.length(1);
@@ -99,6 +102,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
+      onSubmit={() => undefined}
     />);
     const datepicker = wrapper.find('DatepickerField');
     expect(datepicker).has.length(0);
@@ -121,6 +125,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
+      onSubmit={() => undefined}
     />);
     const datepicker = wrapper.find('DatepickerField');
     expect(datepicker).has.length(1);

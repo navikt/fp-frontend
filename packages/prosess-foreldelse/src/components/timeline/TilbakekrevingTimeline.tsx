@@ -24,9 +24,9 @@ type Periode = {
   group: number;
 } & TidslinjePeriode;
 
-const isKvinne = (kode: string) => kode === navBrukerKjonn.KVINNE;
+const isKvinne = (kode: string): boolean => kode === navBrukerKjonn.KVINNE;
 
-const getOptions = (sortedPeriods: Periode[]) => {
+const getOptions = (sortedPeriods: Periode[]): any => {
   const firstPeriod = sortedPeriods[0];
   const lastPeriod = sortedPeriods[sortedPeriods.length - 1];
 
@@ -51,10 +51,10 @@ const getOptions = (sortedPeriods: Periode[]) => {
   };
 };
 
-const parseDateString = (dateString: moment.Moment | string) => moment(dateString, ISO_DATE_FORMAT)
+const parseDateString = (dateString: moment.Moment | string): Date => moment(dateString, ISO_DATE_FORMAT)
   .toDate();
 
-function sortByDate(a: Periode, b: Periode) {
+function sortByDate(a: Periode, b: Periode): number {
   if (a.fom < b.fom) {
     return -1;
   }
@@ -71,7 +71,7 @@ const parseDates = (item: Periode) => ({
   end: parseDateString(moment(item.tom).add(1, 'days')),
 });
 
-const formatItems = (periodItems: Periode[] = []) => {
+const formatItems = (periodItems: Periode[] = []): any => {
   const itemsWithDates = periodItems.map(parseDates);
   const formattedItemsArray: any = [];
   formattedItemsArray.length = 0;
@@ -81,7 +81,7 @@ const formatItems = (periodItems: Periode[] = []) => {
   return formattedItemsArray;
 };
 
-const formatGroups = (periodItems: Periode[] = []) => {
+const formatGroups = (periodItems: Periode[] = []): any => {
   const duplicatesRemoved = periodItems.reduce((accPeriods, period) => {
     const hasPeriod = accPeriods.some((p) => p.group === period.group);
     if (!hasPeriod) accPeriods.push(period);
@@ -120,7 +120,7 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
     this.timelineRef = React.createRef();
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     // TODO Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
@@ -129,17 +129,17 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
     }
   }
 
-  zoomIn() {
+  zoomIn(): void {
     const timeline = this.timelineRef.current.$el;
     timeline.zoomIn(0.5);
   }
 
-  zoomOut() {
+  zoomOut(): void {
     const timeline = this.timelineRef.current.$el;
     timeline.zoomOut(0.5);
   }
 
-  goForward() {
+  goForward(): void {
     const timeline = this.timelineRef.current.$el;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
@@ -150,7 +150,7 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
     timeline.setWindow(newWindowTimes);
   }
 
-  goBackward() {
+  goBackward(): void {
     const timeline = this.timelineRef.current.$el;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
@@ -219,7 +219,6 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
               zoomInCallback={this.zoomIn}
               zoomOutCallback={this.zoomOut}
               openPeriodInfo={toggleDetaljevindu}
-              // @ts-ignore Fiks denne. Typane stemmer ikkje
               selectedPeriod={selectedPeriod}
             >
               {hjelpetekstKomponent}

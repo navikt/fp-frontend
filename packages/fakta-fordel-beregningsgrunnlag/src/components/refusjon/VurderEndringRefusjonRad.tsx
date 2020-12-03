@@ -18,11 +18,13 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import styles from './vurderEndringRefusjonRad.less';
 
+const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+
 const visningsnavn = (andel) => {
-  if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
-    return `${andel.arbeidsgiverNavn} (${andel.arbeidsgiver.arbeidsgiverOrgnr})`;
-  }
-  return `${andel.arbeidsgiverNavn}`;
+  const arbeidsgiverId = andel.arbeidsgiver.arbeidsgiverOrgnr || andel.arbeidsgiver.arbeidsgiverAktørId;
+  return arbeidsgiverId
+    ? `${andel.arbeidsgiverNavn} (${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`
+    : andel.arbeidsgiverNavn;
 };
 
 const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';

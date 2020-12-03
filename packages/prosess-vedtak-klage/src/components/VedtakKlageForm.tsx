@@ -12,7 +12,7 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
-  Aksjonspunkt, Behandling, KlageVurdering, KodeverkMedNavn,
+  Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
@@ -20,9 +20,18 @@ import VedtakKlageKaSubmitPanel from './VedtakKlageKaSubmitPanel';
 
 export const VEDTAK_KLAGE_FORM_NAME = 'VEDTAK_KLAGE_FORM';
 
-const getPreviewVedtakCallback = (previewVedtakCallback: any) => () => previewVedtakCallback({
+export type ForhandsvisData = {
+  gjelderVedtak: boolean;
+}
+
+const getPreviewVedtakCallback = (previewVedtakCallback: (data: ForhandsvisData) => Promise<any>) => () => previewVedtakCallback({
   gjelderVedtak: true,
 });
+
+type FormValues = {
+  aksjonspunktKoder?: string[];
+  fritekstTilBrev?: string;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -32,7 +41,7 @@ interface PureOwnProps {
   klageVurdering: KlageVurdering;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: any) => Promise<any>;
-  previewVedtakCallback: (data: any) => Promise<any>;
+  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
@@ -43,9 +52,10 @@ interface MappedOwnProps {
   isOpphevOgHjemsend: boolean;
   behandlingsResultatTekst: string;
   klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
-  avvistArsaker?: any[];
+  avvistArsaker?: KodeverkMedNavn[];
   omgjortAarsak?: string;
-  fritekstTilBrev?: string;
+  onSubmit: (formValues: FormValues) => any;
+  initialValues: FormValues;
 }
 
 /**
@@ -60,7 +70,6 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
   previewVedtakCallback,
   isAvvist,
   isOmgjort,
-  fritekstTilBrev,
   isOpphevOgHjemsend,
   avvistArsaker,
   behandlingsResultatTekst,
@@ -85,7 +94,7 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
         {isAvvist && (
         <div>
           <Undertekst>{intl.formatMessage({ id: 'VedtakKlageForm.ArsakTilAvvisning' })}</Undertekst>
-          { avvistArsaker.map((arsak: any) => <Normaltekst key={arsak.kode}>{kodeverknavn(arsak)}</Normaltekst>) }
+          { avvistArsaker.map((arsak) => <Normaltekst key={arsak.kode}>{kodeverknavn(arsak)}</Normaltekst>) }
           <VerticalSpacer sixteenPx />
         </div>
         )}
@@ -105,7 +114,6 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
         )}
         {klageVurderingResultat.klageVurdertAv === 'NK' && (
         <VedtakKlageKaSubmitPanel
-          begrunnelse={fritekstTilBrev}
           klageResultat={klageVurderingResultat}
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           formProps={formProps}
@@ -115,8 +123,6 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
         )}
         {klageVurderingResultat.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
-          begrunnelse={fritekstTilBrev}
-          klageResultat={klageVurderingResultat}
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           formProps={formProps}
           readOnly={readOnly}
@@ -128,12 +134,14 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
   );
 };
 
-const transformValues = (values: { fritekstTilBrev: string, aksjonspunktKoder: string[] }) => values.aksjonspunktKoder.map((apCode: string) => ({
+const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
   kode: apCode,
   begrunnelse: values.fritekstTilBrev,
 }));
 
-export const getAvvisningsAarsaker = createSelector([(ownProps: PureOwnProps) => ownProps.klageVurdering], (klageVurderingResultat) => {
+export const getAvvisningsAarsaker = createSelector([
+  (ownProps: PureOwnProps) => ownProps.klageVurdering,
+], (klageVurderingResultat): { navn?: string}[] | null => {
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
       return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
@@ -153,13 +161,13 @@ const omgjoerTekstMap = {
 
 const getKlageResultat = createSelector(
   [(ownProps: PureOwnProps) => ownProps.klageVurdering],
-  (behandlingKlageVurdering) => (behandlingKlageVurdering.klageVurderingResultatNK
+  (behandlingKlageVurdering): KlageVurderingResultat => (behandlingKlageVurdering.klageVurderingResultatNK
     ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP),
 );
 
 const getResultatText = createSelector(
   [(ownProps: PureOwnProps) => ownProps.klageVurdering],
-  (behandlingKlageVurdering) => {
+  (behandlingKlageVurdering): string | null => {
     const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
       ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP;
     switch (klageResultat.klageVurdering.kode) {
@@ -181,7 +189,7 @@ const getResultatText = createSelector(
 
 const getOmgjortAarsak = createSelector(
   [(ownProps: PureOwnProps) => ownProps.klageVurdering, (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (klageVurderingResultat, alleKodeverk) => {
+  (klageVurderingResultat, alleKodeverk): string | null => {
     const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
     if (klageVurderingResultat) {
       if (klageVurderingResultat.klageVurderingResultatNK) {
@@ -197,30 +205,30 @@ const getOmgjortAarsak = createSelector(
 
 const getIsOmgjort = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingsresultat],
-  (behandlingsresultat) => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_MEDHOLD,
+  (behandlingsresultat): boolean => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_MEDHOLD,
 );
 
 export const getIsAvvist = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingsresultat],
-  (behandlingsresultat) => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_AVVIST,
+  (behandlingsresultat): boolean => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_AVVIST,
 );
 
 export const getIsOpphevOgHjemsend = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingsresultat],
-  (behandlingsresultat) => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
+  (behandlingsresultat): boolean => behandlingsresultat.type.kode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
 );
 
 export const getFritekstTilBrev = createSelector(
   [(ownProps: PureOwnProps) => ownProps.klageVurdering],
-  (behandlingKlageVurdering) => {
+  (behandlingKlageVurdering): string | undefined => {
     const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
       ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP;
     return klageResultat.fritekstTilBrev;
   },
 );
 
-export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => {
-  const behandlingAksjonspunktCodes = aksjonspunkter.map((ap: Aksjonspunkt) => ap.definisjon.kode);
+export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter): FormValues => {
+  const behandlingAksjonspunktCodes = aksjonspunkter.map((ap) => ap.definisjon.kode);
   return {
     aksjonspunktKoder: behandlingAksjonspunktCodes,
   };
@@ -228,9 +236,9 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: any) => submitCallback(transformValues(values)));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
   initialValues: buildInitialValues(ownProps),
   isAvvist: getIsAvvist(ownProps),

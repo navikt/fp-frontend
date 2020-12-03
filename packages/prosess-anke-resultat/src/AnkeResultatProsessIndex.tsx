@@ -5,6 +5,7 @@ import { AnkeVurdering } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import BehandleResultatForm from './components/BehandleResultatForm';
+import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -16,7 +17,7 @@ const intl = createIntl({
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  previewCallback: (data: any) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<any>;
 }
 
 const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({

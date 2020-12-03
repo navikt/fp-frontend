@@ -21,12 +21,18 @@ import useIntl from '../useIntl';
 
 import styles from './vilkarResultPicker.less';
 
-const findRadioButtonTextCode = (customVilkarText: { id: string; }, isVilkarOk: boolean) => {
+const findRadioButtonTextCode = (customVilkarText: { id: string; }, isVilkarOk: boolean): string => {
   if (customVilkarText) {
     return customVilkarText.id;
   }
   return isVilkarOk ? 'VilkarResultPicker.VilkarOppfylt' : 'VilkarResultPicker.VilkarIkkeOppfylt';
 };
+
+type FormValues = {
+  erVilkarOk: boolean;
+  avslagCode?: string;
+  avslagDato?: string;
+}
 
 interface OwnProps {
   avslagsarsaker?: KodeverkMedNavn[];
@@ -44,18 +50,15 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string) => {
-    erVilkarOk: boolean;
-    avslagCode?: string;
-  },
-  transformValues?: (values: { erVilkarOk: boolean; avslagCode?: string; avslagDato?: string }) => {
+  buildInitialValues?: (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string) => FormValues;
+  transformValues?: (values: FormValues) => {
     erVilkarOk: boolean;
   } | {
     erVilkarOk: boolean;
     avslagskode: string;
     avslagDato: string;
-  },
-  validate?: (erVilkarOk: boolean, avslagCode: string) => { avslagCode?: FormValidationError }
+  };
+  validate?: (erVilkarOk: boolean, avslagCode: string) => { avslagCode?: FormValidationError };
 }
 
 /**
@@ -169,7 +172,7 @@ VilkarResultPicker.validate = (erVilkarOk: boolean, avslagCode: string) => {
   return {};
 };
 
-VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string) => {
+VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string): FormValues => {
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   return {
@@ -180,7 +183,7 @@ VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresulta
   };
 };
 
-VilkarResultPicker.transformValues = (values: { erVilkarOk: boolean; avslagCode?: string; avslagDato?: string }) => (
+VilkarResultPicker.transformValues = (values: FormValues) => (
   values.erVilkarOk
     ? { erVilkarOk: values.erVilkarOk }
     : {

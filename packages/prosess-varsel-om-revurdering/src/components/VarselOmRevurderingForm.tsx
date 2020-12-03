@@ -33,6 +33,17 @@ import styles from './varselOmRevurderingForm.less';
 
 const minLength3 = minLength(3);
 
+export type ForhandsvisData = {
+  mottaker: string;
+  dokumentMal: string;
+  fritekst: string;
+}
+
+type FormValues = {
+  kode?: string;
+  begrunnelse?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -45,7 +56,7 @@ interface PureOwnProps {
   familiehendelseOriginalBehandling: FamilieHendelse;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (...args: any[]) => any;
-  previewCallback: (...args: any[]) => any;
+  previewCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
@@ -62,6 +73,8 @@ interface MappedOwnProps {
   languageCode: string;
   ventearsaker: KodeverkMedNavn[];
   erAutomatiskRevurdering?: boolean;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 interface DispatchProps {
@@ -89,7 +102,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     this.state = { showSettPaVentModal: false };
   }
 
-  handleSubmitFromModal(values: any) {
+  handleSubmitFromModal(values: any): void {
     const {
       valid, submitCallback, begrunnelse, kode, fritekst, sendVarsel = false,
     } = this.props;
@@ -105,7 +118,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     }
   }
 
-  bekreftOgFortsettClicked() {
+  bekreftOgFortsettClicked(): void {
     const {
       valid: validForm, touch, dispatchSubmitFailed, sendVarsel = false, handleSubmit,
     } = this.props;
@@ -123,7 +136,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     }
   }
 
-  previewMessage(e: any) {
+  previewMessage(e: React.MouseEvent): void {
     const {
       valid,
       pristine,
@@ -145,7 +158,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     e.preventDefault();
   }
 
-  hideSettPaVentModal() {
+  hideSettPaVentModal(): void {
     this.setState({ showSettPaVentModal: false });
   }
 
@@ -255,17 +268,17 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
   }
 }
 
-export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => ({
+export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter): FormValues => ({
   kode: aksjonspunkter[0].definisjon.kode,
   begrunnelse: aksjonspunkter[0].begrunnelse,
 }));
 
 const formName = 'VarselOmRevurderingForm';
 
-const nullSafe = (value: any) => value || {};
+const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || {} as FamilieHendelse;
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: any) => submitCallback([values]));
+  (submitCallback) => (values: FormValues) => submitCallback([values]));
 
 const EMPTY_ARRAY = [];
 
@@ -278,7 +291,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const ventearsaker = initialOwnProps.alleKodeverk[kodeverkTyper.VENT_AARSAK] || EMPTY_ARRAY;
   const languageCode = getLanguageCodeFromSprakkode(sprakkode);
 
-  return (state: any, ownProps: PureOwnProps) => ({
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     initialValues: buildInitialValues(ownProps),
     aksjonspunktStatus: aksjonspunkt.status.kode,
     ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'begrunnelse', 'kode'),

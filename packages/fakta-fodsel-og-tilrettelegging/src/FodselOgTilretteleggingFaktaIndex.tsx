@@ -1,8 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import FodselOgTilretteleggingInfoPanel from './components/FodselOgTilretteleggingInfoPanel';
 import FodselOgTilrettelegging from './types/fodselOgTilretteleggingTsType';
@@ -22,6 +25,7 @@ interface OwnProps {
   inntektArbeidYtelse: InntektArbeidYtelse;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
@@ -35,6 +39,7 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   submittable,
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <FodselOgTilretteleggingInfoPanel
@@ -49,6 +54,7 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
       submittable={submittable}
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      uttakArbeidTyper={alleKodeverk[kodeverkTyper.UTTAK_ARBEID_TYPE]}
     />
   </RawIntlProvider>
 );

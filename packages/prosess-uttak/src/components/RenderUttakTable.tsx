@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage } from 'react-intl';
@@ -10,7 +10,7 @@ import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import {
-  hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
+  hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required, FormValidationError,
 } from '@fpsak-frontend/utils';
 import {
   ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
@@ -49,7 +49,7 @@ const gyldigeUttakperioder = [
   uttakPeriodeType.MODREKVOTE,
   uttakPeriodeType.UDEFINERT];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeUttakperioder.includes(kode))
@@ -58,7 +58,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk) => {
+const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk): boolean => {
   if (!erOppfylt) {
     if (!utsettelseType || utsettelseType.kode === '-') {
       return true;
@@ -67,8 +67,8 @@ const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk) => {
   return false;
 };
 
-const merEnNullMessage = () => ([{ id: 'ValidationMessage.MerEnNullUtaksprosent' }]);
-const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: FormValues) => (utsettelse(
+const merEnNullMessage = (): FormValidationError => ([{ id: 'ValidationMessage.MerEnNullUtaksprosent' }]);
+const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: FormValues): FormValidationError | null => (utsettelse(
   elmnt.erOppfylt, elmnt.utsettelseType,
 ) && parseFloat(value) > 0
   ? merEnNullMessage() : null);
@@ -93,7 +93,7 @@ const createTextStrings = (fields: AktivitetFieldArray, arbeidsgiverOpplysninger
   };
 };
 
-const checkForMonthsOrDays = (fieldName: string) => {
+const checkForMonthsOrDays = (fieldName: string): boolean => {
   // @ts-ignore Fiks
   const weeksValue = document.getElementById(`${fieldName}.weeks`) ? document.getElementById(`${fieldName}.weeks`).value : null;
   // @ts-ignore Fiks

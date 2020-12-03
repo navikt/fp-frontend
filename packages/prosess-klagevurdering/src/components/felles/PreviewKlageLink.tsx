@@ -9,7 +9,7 @@ import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './previewKlageLink.less';
 
-const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean) => {
+const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean): string | null => {
   switch (klageVurdering.kode) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
@@ -24,20 +24,24 @@ const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean) => {
   }
 };
 
-const getBrevData = (klageVurdering: Kodeverk, aksjonspunktCode: string, fritekstTilBrev?: string) => {
+export type BrevData = {
+  fritekst: string;
+  dokumentMal?: string;
+  erOpphevetKlage: boolean;
+}
+
+const getBrevData = (klageVurdering: Kodeverk, aksjonspunktCode: string, fritekstTilBrev?: string): BrevData => {
   const klageVurdertAv = aksjonspunktCode === aksjonspunktCodes.BEHANDLE_KLAGE_NK ? 'NK' : 'NFP';
   const data = {
     fritekst: fritekstTilBrev || '',
-    mottaker: '',
     dokumentMal: getBrevKode(klageVurdering, klageVurdertAv === 'NK'),
-    klageVurdertAv,
     erOpphevetKlage: klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
   };
   return data;
 };
 
 interface OwnProps {
-  previewCallback: (data: any) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<any>;
   aksjonspunktCode: string;
   fritekstTilBrev?: string;
   klageVurdering?: Kodeverk;
@@ -49,7 +53,7 @@ const PreviewKlageLink: FunctionComponent<OwnProps> = ({
   klageVurdering,
   aksjonspunktCode,
 }) => {
-  const previewMessage = (e: any) => {
+  const previewMessage = (e: React.MouseEvent | React.KeyboardEvent): void => {
     previewCallback(getBrevData(klageVurdering, aksjonspunktCode, fritekstTilBrev));
     e.preventDefault();
   };

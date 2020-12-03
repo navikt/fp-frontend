@@ -2,7 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
 
-const transformValues = (fritekstTilBrev: string, begrunnelse: string, aksjonspunktCode: string) => ({
+export type AnkeData = {
+  kode: string;
+  fritekstTilBrev: string;
+  begrunnelse: string;
+}
+
+const transformValues = (fritekstTilBrev: string, begrunnelse: string, aksjonspunktCode: string): AnkeData => ({
   kode: aksjonspunktCode,
   fritekstTilBrev,
   begrunnelse,
@@ -12,7 +18,7 @@ interface OwnProps {
   aksjonspunktCode: string;
   fritekstTilBrev: string;
   begrunnelse: string;
-  saveAnke: (...args: any[]) => any;
+  saveAnke: (data: AnkeData) => Promise<any>;
   spinner?: boolean;
   readOnly?: boolean;
 }
@@ -25,7 +31,7 @@ export const TempsaveAnkeButton: FunctionComponent<OwnProps> = ({
   aksjonspunktCode,
   readOnly,
 }) => {
-  const tempSave = (event: any) => {
+  const tempSave = (event: React.MouseEvent): void => {
     event.preventDefault();
     saveAnke(transformValues(fritekstTilBrev, begrunnelse, aksjonspunktCode));
   };

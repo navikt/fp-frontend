@@ -1,4 +1,6 @@
-import React, { Component, MouseEvent, KeyboardEvent } from 'react';
+import React, {
+  Component, MouseEvent, KeyboardEvent, ReactElement,
+} from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
@@ -27,7 +29,7 @@ const getCorrectEmptyArbeidsForhold = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   periodeTypeKode?: string,
   stonadskonto?: UttakStonadskontoer,
-) => {
+): string[] => {
   const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
   let arbeidsforholdMedPositivSaldoFinnes = false;
   if (stonadskonto && stonadskonto.stonadskontoer[periodeTypeKode] && stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList) {
@@ -56,7 +58,7 @@ const hentApTekst = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto?: UttakStonadskontoer,
   periodeTypeKode?: string,
-) => {
+): ReactElement[] => {
   const texts = [];
 
   // TODO: Fix - ta bort 5001 med verdi fra kodeverk
@@ -145,12 +147,12 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     };
   }
 
-  setFormField(fieldName: string, fieldValue: UttaksresultatActivity[]) {
+  setFormField(fieldName: string, fieldValue: UttaksresultatActivity[]): void {
     const { behandlingFormPrefix, formName, reduxFormChange: formChange } = this.props;
     formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
   }
 
-  showModal(event: MouseEvent | KeyboardEvent) {
+  showModal(event: MouseEvent | KeyboardEvent): void {
     event.preventDefault();
     this.setState({
       showDelPeriodeModal: true,
@@ -159,13 +161,13 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     formChange(`${behandlingFormPrefix}.${'DelOppPeriode'}`, 'ForstePeriodeTomDato', null);
   }
 
-  hideModal() {
+  hideModal(): void {
     this.setState({
       showDelPeriodeModal: false,
     });
   }
 
-  splitPeriod(formValues: DeltPeriodeData) {
+  splitPeriod(formValues: DeltPeriodeData): void {
     const { uttaksresultatActivity, activityPanelName, callbackSetSelected: setSelected } = this.props;
     const {
       periodeId, forstePeriode, andrePeriode, hovedsoker,

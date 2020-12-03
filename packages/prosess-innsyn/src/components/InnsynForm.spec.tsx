@@ -34,6 +34,7 @@ describe('<InnsynForm>', () => {
       aksjonspunkter={[]}
       alleKodeverk={{}}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');
@@ -66,6 +67,7 @@ describe('<InnsynForm>', () => {
       aksjonspunkter={[]}
       alleKodeverk={{}}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');

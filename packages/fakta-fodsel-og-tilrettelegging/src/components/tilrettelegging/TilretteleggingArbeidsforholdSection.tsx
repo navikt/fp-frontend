@@ -9,7 +9,7 @@ import { hasValidDate, required } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import ArbeidsforholdFodselOgTilrettelegging from '../../types/arbeidsforholdFodselOgTilretteleggingTsType';
 import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
@@ -20,13 +20,18 @@ import styles from './tilretteleggingArbeidsforholdSection.less';
 const utledArbeidsforholdTittel = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  uttakArbeidTyper: KodeverkMedNavn[],
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
 
   let tittel = '';
   if (arbeidsforhold.arbeidsgiverReferanse && arbeidsgiverOpplysninger) {
-    tittel += `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
+    tittel = `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
+  } else {
+    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType.kode);
+    tittel = arbeidType?.navn;
   }
+
   if (arbeidsforhold.eksternArbeidsforholdReferanse) {
     let ref = arbeidsforhold.eksternArbeidsforholdReferanse;
     if (ref.length > 4) {
@@ -49,6 +54,7 @@ interface PureOwnProps {
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
   formName: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  uttakArbeidTyper: KodeverkMedNavn[],
 }
 
 interface MappedOwnProps {
@@ -68,10 +74,11 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
   setOverstyrtUtbetalingsgrad,
   formName,
   arbeidsgiverOpplysningerPerId,
+  uttakArbeidTyper,
 }) => (
   <FormSection name={formSectionName}>
     <Normaltekst className={styles.arbeidsforholdTittel}>
-      {utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId)}
+      {utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)}
     </Normaltekst>
     <VerticalSpacer sixteenPx />
     <CheckboxField

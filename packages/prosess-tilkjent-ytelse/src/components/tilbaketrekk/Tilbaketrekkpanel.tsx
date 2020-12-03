@@ -46,6 +46,11 @@ interface PureOwnProps {
   beregningsresultat?: BeregningsresultatFp;
 }
 
+interface MappedOwnProps {
+  onSubmit: (formValues: FormValues) => any;
+  initialValues: FormValues;
+}
+
 export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
   readOnly,
@@ -158,7 +163,7 @@ export const buildInitialValues = createSelector([
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
   initialValues: buildInitialValues(state, ownProps),
 });
