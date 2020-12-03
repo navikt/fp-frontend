@@ -7,7 +7,9 @@ import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakKlageProsessIndex from '@fpsak-frontend/prosess-vedtak-klage';
-import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat,
+} from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -35,7 +37,7 @@ const aksjonspunkter = [{
 }] as Aksjonspunkt[];
 
 const standardProsessProps = {
-  behandling: object('behandling', behandling),
+  behandling,
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
@@ -60,17 +62,19 @@ export const visVedtakspanelDerKlageErVurdertAvNk = () => (
         klageVurdertAv: 'NK',
         klageVurdering: {
           kode: klageVurderingCodes.AVVIS_KLAGE,
-          kodeverk: '',
+          kodeverk: 'KLAGEVURDERING',
+        },
+        klageMedholdArsak: {
+          kode: 'PROSESSUELL_FEIL',
+          kodeverk: 'KLAGE_MEDHOLD_AARSAK',
         },
         fritekstTilBrev: 'test',
-        klageMedholdArsakNavn: 'TEST',
-        godkjentAvMedunderskriver: false,
-      },
+      } as KlageVurderingResultat,
       klageFormkravResultatKA: {
         avvistArsaker: [{
           navn: 'IKKE_KONKRET',
         }],
-      } as KlageVurdering['klageFormkravResultatKA'],
+      },
     } as KlageVurdering)}
     previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
   />
@@ -86,15 +90,17 @@ export const visVedtakspanelDerKlageErVurdertAvNfp = () => (
           kode: klageVurderingCodes.AVVIS_KLAGE,
           kodeverk: '',
         },
+        klageMedholdArsak: {
+          kode: 'PROSESSUELL_FEIL',
+          kodeverk: 'KLAGE_MEDHOLD_AARSAK',
+        },
         fritekstTilBrev: 'test',
-        klageMedholdArsakNavn: 'TEST',
-        godkjentAvMedunderskriver: false,
-      },
+      } as KlageVurderingResultat,
       klageFormkravResultatKA: {
         avvistArsaker: [{
           navn: 'IKKE_KONKRET',
         }],
-      } as KlageVurdering['klageFormkravResultatKA'],
+      },
     } as KlageVurdering)}
     previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
   />

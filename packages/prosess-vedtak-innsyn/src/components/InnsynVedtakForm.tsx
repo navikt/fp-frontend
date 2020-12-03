@@ -29,7 +29,18 @@ import styles from './innsynVedtakForm.less';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-const getPreviewCallback = (formProps: InjectedFormProps, begrunnelse: string, previewCallback: (data: any) => Promise<any>) => (e: any) => {
+export type ForhandsvisData = {
+  fritekst: string;
+  mottaker: string;
+  dokumentMal: string;
+  gjelderVedtak: boolean;
+}
+
+const getPreviewCallback = (
+  formProps: InjectedFormProps,
+  begrunnelse: string,
+  previewCallback: (data: ForhandsvisData) => Promise<any>,
+) => (e: React.KeyboardEvent | React.MouseEvent): void => {
   if (formProps.valid || formProps.pristine) {
     const data = {
       fritekst: begrunnelse || ' ',
@@ -45,7 +56,7 @@ const getPreviewCallback = (formProps: InjectedFormProps, begrunnelse: string, p
   e.preventDefault();
 };
 
-const findResultTypeMessage = (resultat: string) => {
+const findResultTypeMessage = (resultat: string): string => {
   if (resultat === innsynResultatType.AVVIST) {
     return 'InnsynVedtakForm.Avslatt';
   }
@@ -54,6 +65,15 @@ const findResultTypeMessage = (resultat: string) => {
   }
   return 'InnsynVedtakForm.Innvilget';
 };
+
+type DokumentMedInnsynMarkor = {
+  fikkInnsyn: boolean;
+} & Dokument;
+
+type FormValues = {
+  mottattDato?: string;
+  begrunnelse?: string;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -66,7 +86,7 @@ interface PureOwnProps {
   saksNr: number;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: any) => Promise<any>;
-  previewCallback: (data: any) => Promise<any>;
+  previewCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
 }
 
@@ -74,9 +94,9 @@ interface MappedOwnProps {
   apBegrunnelse: string;
   resultat: string;
   begrunnelse?: string;
-  documents: ({
-    fikkInnsyn: boolean;
-  } & Dokument)[];
+  documents: DokumentMedInnsynMarkor[];
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -168,43 +188,43 @@ export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
   );
 };
 
-const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]) => ({
+const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
+  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
 });
 
-const transformValues = (values: any) => ({
+const transformValues = (values: FormValues): any => ({
   kode: aksjonspunktCodes.FORESLA_VEDTAK,
   ...values,
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
-const getFilteredReceivedDocuments = createSelector([(ownProps: PureOwnProps) => ownProps.alleDokumenter], (allDocuments) => {
-  const filteredDocuments = allDocuments.filter((doc: Dokument) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
-  allDocuments.forEach((doc: Dokument) => !filteredDocuments.some((fd: Dokument) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
+const getFilteredReceivedDocuments = createSelector([(ownProps: PureOwnProps) => ownProps.alleDokumenter], (allDocuments): Dokument[] => {
+  const filteredDocuments = allDocuments.filter((doc) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  allDocuments.forEach((doc) => !filteredDocuments.some((fd) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
   return filteredDocuments;
 });
 
 const getDocumenterMedFikkInnsynVerdi = createSelector(
   [getFilteredReceivedDocuments, (ownProps: PureOwnProps) => ownProps.innsynDokumenter],
-  (alleDokumenter, valgteDokumenter) => alleDokumenter
-    .filter((dokAlle: Dokument) => valgteDokumenter.find((dokValgte: InnsynDokument) => dokValgte.dokumentId === dokAlle.dokumentId))
-    .map((dokAlle: Dokument) => ({
+  (alleDokumenter, valgteDokumenter): DokumentMedInnsynMarkor[] => alleDokumenter
+    .filter((dokAlle) => valgteDokumenter.find((dokValgte) => dokValgte.dokumentId === dokAlle.dokumentId))
+    .map((dokAlle) => ({
       ...dokAlle,
-      fikkInnsyn: valgteDokumenter.find((dokValgte: InnsynDokument) => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
+      fikkInnsyn: valgteDokumenter.find((dokValgte) => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
     })),
 );
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: any) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
 const formName = 'InnsynVedtakForm';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   documents: getDocumenterMedFikkInnsynVerdi(ownProps),
   initialValues: buildInitialValues(ownProps.innsynMottattDato, ownProps.aksjonspunkter),
-  apBegrunnelse: ownProps.aksjonspunkter.find((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
+  apBegrunnelse: ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
   begrunnelse: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'begrunnelse'),
   resultat: ownProps.innsynResultatType.kode,
   onSubmit: lagSubmitFn(ownProps),

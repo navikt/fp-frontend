@@ -89,7 +89,7 @@ export const visPanelForInnvilgetVedtak = () => (
       tidspunkt: '2017-08-02T00:54:25.455',
       kommunikasjonsretning: kommunikasjonsretning.INN,
     }]}
-    previewCallback={action('button-click')}
+    previewCallback={action('button-click') as any}
   />
 );
 
@@ -121,6 +121,6 @@ export const visPanelForAvvistVedtak = () => (
       tidspunkt: '2017-08-02T00:54:25.455',
       kommunikasjonsretning: kommunikasjonsretning.INN,
     }]}
-    previewCallback={action('button-click')}
+    previewCallback={action('button-click') as any}
   />
 );

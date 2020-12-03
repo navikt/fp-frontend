@@ -11,7 +11,7 @@ import { KlageVurdering, Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './vedtakKlageSubmitPanel.less';
 
-const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: any) => {
+const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean): string | null => {
   switch (klageVurdering.kode) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
@@ -28,9 +28,20 @@ const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: any) => {
   }
 };
 
-const getPreviewCallback = (formProps: InjectedFormProps, begrunnelse: string,
-  previewVedtakCallback: (data: any) => Promise<any>,
-  klageResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP']) => (e: any) => {
+export type ForhandsvisData = {
+  fritekst: string;
+  mottaker: string;
+  dokumentMal?: string;
+  klageVurdertAv: string;
+  erOpphevetKlage: boolean;
+}
+
+const getPreviewCallback = (
+  formProps: InjectedFormProps,
+  begrunnelse: string,
+  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>,
+  klageResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'],
+) => (e: React.MouseEvent | React.KeyboardEvent): void => {
   const klageVurdertAvNK = klageResultat.klageVurdertAv === 'KA';
   const data = {
     fritekst: begrunnelse || '',
@@ -49,7 +60,7 @@ const getPreviewCallback = (formProps: InjectedFormProps, begrunnelse: string,
 };
 
 interface OwnProps {
-  previewVedtakCallback: (data: any) => Promise<any>;
+  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
   behandlingPaaVent: boolean;
   begrunnelse?: string;
   klageResultat?: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
