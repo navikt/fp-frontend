@@ -17,6 +17,13 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 
+type FormValues = {
+  erVilkarOk: boolean;
+  avslagCode?: string;
+  avslagDato?: string;
+  begrunnelse?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -36,6 +43,8 @@ interface MappedOwnProps {
   erVilkarOk?: boolean;
   lovReferanse: string;
   avslagsarsaker: KodeverkMedNavn[];
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -82,26 +91,19 @@ export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnP
 const validate = ({
   erVilkarOk,
   avslagCode,
-}: { erVilkarOk: boolean; avslagCode: string }) => VilkarResultPicker.validate(erVilkarOk, avslagCode);
+}: FormValues): any => VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
 export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.status],
-  (behandlingsresultat, aksjonspunkter, status) => ({
+  (behandlingsresultat, aksjonspunkter, status): FormValues => ({
     ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   }),
 );
 
-interface FormValues {
-  erVilkarOk: boolean;
-  avslagCode: string;
-  avslagDato: string;
-  begrunnelse: string;
-}
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   ...{ kode: aksjonspunkter[0].definisjon.kode },
@@ -117,10 +119,10 @@ const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => 
   const { aksjonspunkter, status, alleKodeverk } = staticOwnProps;
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.ADOPSJONSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap: any) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const { behandlingId, behandlingVersjon, vilkar } = ownProps;
     return {
       originalErVilkarOk: erVilkarOk,

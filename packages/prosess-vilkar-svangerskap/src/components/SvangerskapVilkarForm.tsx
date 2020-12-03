@@ -17,6 +17,13 @@ import {
   Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
 
+type FormValues = {
+  erVilkarOk: boolean;
+  avslagCode?: string;
+  avslagDato?: string;
+  begrunnelse?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -35,6 +42,8 @@ interface MappedOwnProps {
   erVilkarOk?: boolean;
   originalErVilkarOk: boolean;
   avslagsarsaker: KodeverkMedNavn[];
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -77,17 +86,10 @@ export const SvangerskapVilkarFormImpl: FunctionComponent<PureOwnProps & MappedO
   </ProsessPanelTemplate>
 );
 
-interface FormValues {
-  erVilkarOk: boolean;
-  avslagCode?: string;
-  avslagDato?: string;
-  begrunnelse?: string;
-}
-
 const validate = ({
   erVilkarOk,
   avslagCode,
-}: FormValues) => VilkarResultPicker.validate(erVilkarOk, avslagCode);
+}: FormValues): any => VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
 export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
@@ -99,7 +101,7 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   ...{ kode: aksjonspunkter[0].definisjon.kode },
@@ -111,7 +113,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const {
     behandlingId, behandlingVersjon, status, alleKodeverk, aksjonspunkter,
   } = ownProps;

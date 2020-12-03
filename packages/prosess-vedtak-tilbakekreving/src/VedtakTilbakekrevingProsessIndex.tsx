@@ -3,8 +3,9 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-import { BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
+import { BeregningsresultatTilbakekreving, Kodeverk } from '@fpsak-frontend/types';
 
+import { ForhandsvisData } from './components/TilbakekrevingVedtakForm';
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
 import Vedtaksbrev from './types/vedtaksbrevTsType';
 import messages from '../i18n/nb_NO.json';
@@ -21,12 +22,12 @@ const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_NFP,
 ];
 
-const erTilbakekrevingÅrsakKlage = (årsak: any) => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
+const erTilbakekrevingÅrsakKlage = (årsak: Kodeverk): boolean => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
 
 interface OwnProps {
   beregningsresultat: BeregningsresultatTilbakekreving;
   vedtaksbrev: Vedtaksbrev ;
-  fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
+  fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
   aksjonspunktKodeForeslaVedtak: string;
 }
 

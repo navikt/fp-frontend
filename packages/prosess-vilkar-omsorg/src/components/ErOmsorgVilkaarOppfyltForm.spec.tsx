@@ -48,6 +48,10 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       behandlingVersjon={1}
       status=""
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -73,6 +77,10 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       behandlingVersjon={1}
       status=""
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -121,6 +129,10 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       behandlingVersjon={1}
       status=""
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);

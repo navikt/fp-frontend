@@ -16,26 +16,26 @@ import styles from './timeLineData.less';
 
 const MELLOMLIGGENDE_PERIODE = 'MELLOMLIGGENDE_PERIODE';
 
-const isoToDdMmYyyy = (dato: string) => {
+const isoToDdMmYyyy = (dato: string): string => {
   const parsedDate = moment(dato, ISO_DATE_FORMAT, true);
   return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : dato;
 };
 
-const backgroundStyle = (kode: string) => ((kode === MELLOMLIGGENDE_PERIODE
+const backgroundStyle = (kode: string): string => ((kode === MELLOMLIGGENDE_PERIODE
 || kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
 || kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT) ? 'godkjent' : 'avvist');
 
-const periodStatus = (periodState: string) => (periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST
+const periodStatus = (periodState: string): string => (periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST
 || periodState === opptjeningAktivitetKlassifisering.ANTATT_AVVIST ? 'OpptjeningVilkarView.Avslatt' : 'OpptjeningVilkarView.Godkjent');
 
-const isPeriodGodkjent = (period: Kodeverk) => !!(period.kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT
+const isPeriodGodkjent = (period: Kodeverk): boolean => !!(period.kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT
   || period.kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
   || period.kode === MELLOMLIGGENDE_PERIODE);
 
 interface OwnProps {
   fastsattOpptjeningAktivitet: FastsattOpptjeningAktivitet;
-  selectNextPeriod: (...args: any[]) => any;
-  selectPrevPeriod: (...args: any[]) => any;
+  selectNextPeriod: (event: React.MouseEvent) => void;
+  selectPrevPeriod: (event: React.MouseEvent) => void;
 }
 
 const TimeLineData: FunctionComponent<OwnProps> = ({

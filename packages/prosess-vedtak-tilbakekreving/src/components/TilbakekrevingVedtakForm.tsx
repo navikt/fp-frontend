@@ -27,7 +27,24 @@ import styles from './tilbakekrevingVedtakForm.less';
 
 const formName = 'TilbakekrevingVedtakForm';
 
-const formatVedtakData = (values: any) => {
+type FormValues = {
+  test: '';
+}
+
+type VedtakData = {
+  oppsummeringstekst: string;
+  perioderMedTekst: {
+    fom: string;
+    tom: string;
+    faktaAvsnitt: string;
+    foreldelseAvsnitt: string;
+    vilkaarAvsnitt: string;
+    saerligeGrunnerAvsnitt: string;
+    saerligeGrunnerAnnetAvsnitt: string;
+  }[];
+}
+
+const formatVedtakData = (values: FormValues): VedtakData => {
   const perioder = omit(values, underavsnittType.OPPSUMMERING);
   return {
     oppsummeringstekst: values[underavsnittType.OPPSUMMERING],
@@ -43,7 +60,15 @@ const formatVedtakData = (values: any) => {
   };
 };
 
-const fetchPreview = (fetchPreviewVedtaksbrev: (data: any) => Promise<any>, uuid: string, formVerdier: any) => (e: any) => {
+export type ForhandsvisData = {
+  uuid: string;
+} & VedtakData;
+
+const fetchPreview = (
+  fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>,
+  uuid: string,
+  formVerdier: FormValues,
+) => (e: React.KeyboardEvent | React.MouseEvent): void => {
   fetchPreviewVedtaksbrev({
     uuid,
     ...formatVedtakData(formVerdier),
@@ -51,22 +76,29 @@ const fetchPreview = (fetchPreviewVedtaksbrev: (data: any) => Promise<any>, uuid
   e.preventDefault();
 };
 
-interface OwnProps {
-  readOnly: boolean;
-  fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
-  vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];
-  formVerdier: any;
+interface PureOwnProps {
   behandlingId: number;
-  behandlingUuid: string;
   behandlingVersjon: number;
-  perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
+  aksjonspunktKodeForeslaVedtak: string;
+  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  avsnittsliste: VedtaksbrevAvsnitt[];
+  readOnly: boolean;
+  fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
+  behandlingUuid: string;
   erRevurderingTilbakekrevingKlage?: boolean;
   erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
-  fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
 }
 
-export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+interface MappedOwnProps {
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
+  formVerdier: FormValues;
+  vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];
+  perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
+  fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
+}
+
+export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   fetchPreviewVedtaksbrev,
   vedtaksbrevAvsnitt,
@@ -108,7 +140,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
         </FlexColumn>
-        { perioderSomIkkeHarUtfyltObligatoriskVerdi.length === 0 && (
+        {perioderSomIkkeHarUtfyltObligatoriskVerdi.length === 0 && (
           <FlexColumn>
             <div className={styles.padding}>
               <a
@@ -122,7 +154,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
             </div>
           </FlexColumn>
         )}
-        { erRevurderingTilbakekrevingKlage && (
+        {erRevurderingTilbakekrevingKlage && (
           <FlexColumn className={classNames(styles.infoTextContainer)}>
             <FlexRow>
               <FlexColumn className={classNames(styles.padding, styles.infoTextIconColumn)}>
@@ -139,48 +171,40 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<OwnProps & Injected
   </form>
 );
 
-const transformValues = (values: any, apKode: string) => [{
+const transformValues = (values: FormValues, apKode: string): any => [{
   kode: apKode,
   ...formatVedtakData(values),
 }];
 
-interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  aksjonspunktKodeForeslaVedtak: string;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
-  avsnittsliste: VedtaksbrevAvsnitt[];
-}
-
 const finnPerioderSomIkkeHarVerdiForObligatoriskFelt = createSelector([
   (ownProps: { vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[] }) => ownProps.vedtaksbrevAvsnitt,
-  (ownProps: { formVerdier: any }) => ownProps.formVerdier],
-(vedtaksbrevAvsnitt, formVerdier) => vedtaksbrevAvsnitt.reduce((acc: string[], va: VedtaksbrevAvsnitt) => {
+  (ownProps: { formVerdier: FormValues }) => ownProps.formVerdier],
+(vedtaksbrevAvsnitt, formVerdier): string[] => vedtaksbrevAvsnitt.reduce((acc: string[], va: VedtaksbrevAvsnitt) => {
   const periode = `${va.fom}_${va.tom}`;
   const friteksterForPeriode = formVerdier[periode];
 
-  const harObligatoriskFaktaTekst = va.underavsnittsliste.some((ua: any) => ua.fritekstPåkrevet && ua.underavsnittstype === underavsnittType.FAKTA);
+  const harObligatoriskFaktaTekst = va.underavsnittsliste.some((ua) => ua.fritekstPåkrevet && ua.underavsnittstype === underavsnittType.FAKTA);
   if (harObligatoriskFaktaTekst && (!friteksterForPeriode || !friteksterForPeriode[underavsnittType.FAKTA])) {
     return acc.concat(periode);
   }
 
   const harObligatoriskSarligeGrunnerAnnetTekst = va.underavsnittsliste
-    .some((ua: any) => ua.fritekstPåkrevet && ua.underavsnittstype === underavsnittType.SARLIGEGRUNNER_ANNET);
+    .some((ua) => ua.fritekstPåkrevet && ua.underavsnittstype === underavsnittType.SARLIGEGRUNNER_ANNET);
   if (harObligatoriskSarligeGrunnerAnnetTekst && (!friteksterForPeriode || !friteksterForPeriode[underavsnittType.SARLIGEGRUNNER_ANNET])) {
     return acc.concat(periode);
   }
   return acc;
 }, []));
 
-const harFritekstOppsummeringPakrevdMenIkkeUtfylt = (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => vedtaksbrevAvsnitt
-  .filter((avsnitt: VedtaksbrevAvsnitt) => avsnitt.avsnittstype === underavsnittType.OPPSUMMERING)
-  .some((avsnitt: VedtaksbrevAvsnitt) => avsnitt.underavsnittsliste.some((underAvsnitt: any) => underAvsnitt.fritekstPåkrevet && !underAvsnitt.fritekst));
+const harFritekstOppsummeringPakrevdMenIkkeUtfylt = (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]): boolean => vedtaksbrevAvsnitt
+  .filter((avsnitt) => avsnitt.avsnittstype === underavsnittType.OPPSUMMERING)
+  .some((avsnitt) => avsnitt.underavsnittsliste.some((underAvsnitt) => underAvsnitt.fritekstPåkrevet && !underAvsnitt.fritekst));
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunktKodeForeslaVedtak],
-(submitCallback, aksjonspunktKodeForeslaVedtak) => (values: any) => submitCallback(transformValues(values, aksjonspunktKodeForeslaVedtak)));
+(submitCallback, aksjonspunktKodeForeslaVedtak) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunktKodeForeslaVedtak)));
 
-const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => {
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const vedtaksbrevAvsnitt = ownProps.avsnittsliste;
   const initialValues = TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt);
   const formVerdier = getBehandlingFormValues(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state) || {};

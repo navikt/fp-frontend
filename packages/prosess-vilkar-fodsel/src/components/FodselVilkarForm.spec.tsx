@@ -34,6 +34,10 @@ describe('<FodselVilkarForm>', () => {
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -63,6 +67,10 @@ describe('<FodselVilkarForm>', () => {
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -96,6 +104,10 @@ describe('<FodselVilkarForm>', () => {
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
