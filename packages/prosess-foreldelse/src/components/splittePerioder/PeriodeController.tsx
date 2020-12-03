@@ -9,19 +9,32 @@ import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 
 import ForeldelsesresultatActivity from '../../types/foreldelsesresultatActivitytsType';
-import DelOppPeriodeModal from './DelOppPeriodeModal';
+import DelOppPeriodeModal, { PerioderData } from './DelOppPeriodeModal';
 
 import styles from './periodeController.less';
 
 const isEdited = false;
 
+export type PeriodeMedBelop = {
+  belop: number;
+  fom: string;
+  tom: string;
+  begrunnelse: string;
+}
+
+export type PeriodeMedFeilutbetaling = {
+  fom: string;
+  tom: string;
+  feilutbetaling: number;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  beregnBelop: (...args: any[]) => any;
-  oppdaterSplittedePerioder: (...args: any[]) => any;
-  callbackForward: (...args: any[]) => any;
-  callbackBackward: (...args: any[]) => any;
+  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
+  oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
+  callbackForward: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  callbackBackward: (event: React.KeyboardEvent | React.MouseEvent) => void;
   periode: ForeldelsesresultatActivity;
   readOnly: boolean;
 }
@@ -44,23 +57,23 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
     };
   }
 
-  showModal(event: any) {
-    this.setState((state: any) => ({
+  showModal(event: React.MouseEvent | React.KeyboardEvent): void {
+    this.setState((state: StateProps) => ({
       ...state,
       showDelPeriodeModal: true,
     }));
     event.preventDefault();
   }
 
-  hideModal() {
-    this.setState((state: any) => ({
+  hideModal(): void {
+    this.setState((state: StateProps) => ({
       ...state,
       showDelPeriodeModal: false,
     }));
   }
 
-  splitPeriod(formValues: any) {
-    this.setState((state: any) => ({
+  splitPeriod(formValues: PerioderData): void {
+    this.setState((state: StateProps) => ({
       ...state,
       finnesBelopMed0Verdi: false,
     }));
@@ -94,7 +107,7 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
       const { perioder } = response;
       const harPeriodeMedBelop0 = perioder.some((p) => p.belop === 0);
       if (harPeriodeMedBelop0) {
-        this.setState((state: any) => ({
+        this.setState((state: StateProps) => ({
           ...state,
           finnesBelopMed0Verdi: true,
         }));
@@ -137,8 +150,7 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
           </Element>
         </Column>
         <Column xs="7">
-          {!readOnly
-          && (
+          {!readOnly && (
             <span className={styles.splitPeriodPosition}>
               <Image
                 tabIndex={0}
@@ -152,8 +164,7 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
               <FormattedMessage id="PeriodeController.DelOppPerioden" />
             </span>
           )}
-          {showDelPeriodeModal
-          && (
+          {showDelPeriodeModal && (
             <DelOppPeriodeModal
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}

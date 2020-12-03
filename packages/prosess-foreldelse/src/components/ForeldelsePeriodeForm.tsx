@@ -23,11 +23,16 @@ import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimeline
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 
 import styles from './foreldelsePeriodeForm.less';
+import { PeriodeMedBelop, PeriodeMedFeilutbetaling } from './splittePerioder/PeriodeController';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 export const FORELDELSE_PERIODE_FORM_NAME = 'foreldelsesresultatActivity';
+
+export type FormValues = {
+  foreldet: string;
+} & ForeldelsesresultatActivity;
 
 interface PureOwnProps {
   behandlingId: number;
@@ -35,18 +40,14 @@ interface PureOwnProps {
   behandlingFormPrefix: string;
   periode: ForeldelsesresultatActivity;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  oppdaterPeriode: (values: any) => void;
-  skjulPeriode: (...args: any[]) => any;
-  setNestePeriode: (...args: any[]) => any;
-  setForrigePeriode: (...args: any[]) => any;
-  oppdaterSplittedePerioder: (...args: any[]) => any;
+  oppdaterPeriode: (values: FormValues) => void;
+  skjulPeriode: (event: React.MouseEvent) => void;
+  setNestePeriode: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  setForrigePeriode: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
   readOnly: boolean;
-  beregnBelop: (data: any) => Promise<any>;
+  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
-
-type FormValues = {
-  foreldet: string;
-} & ForeldelsesresultatActivity;
 
 interface MappedOwnProps {
   foreldelseVurderingTyper: KodeverkMedNavn[];
@@ -156,8 +157,8 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<PureOwnProps & MappedO
   </div>
 );
 
-const oldForeldetValue = (fvType: Kodeverk) => (fvType.kode !== foreldelseVurderingType.UDEFINERT ? fvType.kode : null);
-const checkForeldetValue = (selectedItemData: ForeldelsesresultatActivity) => (selectedItemData.foreldet ? selectedItemData.foreldet
+const oldForeldetValue = (fvType: Kodeverk): string | null => (fvType.kode !== foreldelseVurderingType.UDEFINERT ? fvType.kode : null);
+const checkForeldetValue = (selectedItemData: ForeldelsesresultatActivity): string => (selectedItemData.foreldet ? selectedItemData.foreldet
   : oldForeldetValue(selectedItemData.foreldelseVurderingType));
 
 const buildInitalValues = (periode: ForeldelsesresultatActivity): FormValues => ({
@@ -167,9 +168,9 @@ const buildInitalValues = (periode: ForeldelsesresultatActivity): FormValues => 
 
 const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const initialValues = buildInitalValues(ownProps.periode);
-  const onSubmit = (values: any) => ownProps.oppdaterPeriode(values);
+  const onSubmit = (values: FormValues) => ownProps.oppdaterPeriode(values);
   const foreldelseVurderingTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]
-    .filter((fv: KodeverkMedNavn) => fv.kode !== foreldelseVurderingType.IKKE_VURDERT);
+    .filter((fv) => fv.kode !== foreldelseVurderingType.IKKE_VURDERT);
   return (state: any, oProps: PureOwnProps): MappedOwnProps => {
     const { behandlingId, behandlingVersjon } = oProps;
     const sel = behandlingFormValueSelector(FORELDELSE_PERIODE_FORM_NAME, behandlingId, behandlingVersjon);

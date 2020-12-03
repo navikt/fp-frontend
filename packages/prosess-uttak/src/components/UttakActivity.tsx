@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -55,7 +55,7 @@ const PERIODE_RESULTAT_TYPE = 'PERIODE_RESULTAT_TYPE';
 const innvilgetTekst = 'Innvilget';
 const avlsattTekst = 'Avslått';
 
-function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn) {
+function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn): number {
   if (a.navn < b.navn) {
     return -1;
   }
@@ -78,7 +78,7 @@ const mapAarsak = (
   utsettelseType?: Kodeverk,
   periodeType?: Kodeverk,
   skalFiltrere?: boolean,
-) => {
+): ReactElement[] => {
   innvilgelseAarsakKoder.sort(sortAlphabetically);
   let filteredNyKodeArray = innvilgelseAarsakKoder.filter((kodeItem) => kodeItem.gyldigTom >= starttidspunktForeldrepenger
     && kodeItem.gyldigFom <= starttidspunktForeldrepenger);
@@ -107,6 +107,22 @@ const mapAarsak = (
       navn,
     }) => <option value={kode} key={kode}>{navn}</option>);
 };
+
+export type FormValues = {
+  UttakFieldArray?: AktivitetFieldArray[];
+  begrunnelse?: string;
+  flerbarnsdager?: boolean;
+  samtidigUttak?: boolean;
+  samtidigUttaksprosent?: string;
+  avslagAarsak?: string;
+  innvilgelseAarsak?: string;
+  graderingInnvilget?: boolean;
+  graderingAvslagAarsak?: string;
+  oppholdArsak?: string;
+  utsettelseType?: Kodeverk;
+  erOppfylt?: boolean;
+  selectedItem?: PeriodeMedClassName;
+}
 
 interface PureOwnProps {
   cancelSelectedActivity: () => void;
@@ -137,6 +153,10 @@ interface MappedOwnProps {
   erSamtidigUttak: boolean;
   samtidigUttaksprosent: string;
   starttidspunktForeldrepenger: string;
+  validate: (formValues: FormValues) => any;
+  warn: (formValues: FormValues) => any;
+  onSubmit: (formValues: FormValues) => any;
+  initialValues: FormValues;
 }
 
 export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -302,23 +322,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   </div>
 );
 
-export type FormValues = {
-  UttakFieldArray: AktivitetFieldArray[];
-  begrunnelse?: string;
-  flerbarnsdager: boolean;
-  samtidigUttak: boolean;
-  samtidigUttaksprosent?: string;
-  avslagAarsak?: string;
-  innvilgelseAarsak?: string;
-  graderingInnvilget: boolean;
-  graderingAvslagAarsak: string;
-  oppholdArsak: string;
-  utsettelseType: Kodeverk;
-  erOppfylt: boolean;
-  selectedItem: PeriodeMedClassName;
-}
-
-const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean) => {
+const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean): boolean => {
   if (periode.erOppfylt === false) {
     return false;
   }
@@ -340,7 +344,7 @@ const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean) 
   return false;
 };
 
-const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string) => {
+const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string): KodeverkMedNavn => {
   if (erOppfylt || oppholdArsak !== oppholdArsakType.UDEFINERT) {
     return ({
       kode: periodeResultatType.INNVILGET,
@@ -382,7 +386,7 @@ const isArbeidsProsentVidUtsettelse100 = (
   return null;
 };
 
-const warningUttakActivity = (values: FormValues) => {
+const warningUttakActivity = (values: FormValues): any => {
   let warnings = {};
   const rowArray: number[] = [];
   const touchedaktiviteter = document.getElementsByClassName('tableRowHighlight');
@@ -446,7 +450,7 @@ const warningUttakActivity = (values: FormValues) => {
   return warnings;
 };
 
-const validateUttakActivity = (values: FormValues) => {
+const validateUttakActivity = (values: FormValues): any => {
   const errors = {
     UttakFieldArray: [],
   };
@@ -486,7 +490,7 @@ const validateUttakActivity = (values: FormValues) => {
   return errors;
 };
 
-const getPeriodeResultatÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakKodeverk, innvilgelseAarsakObject: ArsakKodeverk) => {
+const getPeriodeResultatÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakKodeverk, innvilgelseAarsakObject: ArsakKodeverk): KodeverkMedNavn => {
   if (!erOppfylt && avslagAarsakObject) {
     return avslagAarsakObject;
   }
@@ -641,7 +645,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     graderingAvslagAarsakKoder,
   ));
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const erOppfylt = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'erOppfylt');
     const begrunnelse = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'begrunnelse');
     const arsak = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, erOppfylt ? 'innvilgelseAarsak' : 'avslagAarsak');

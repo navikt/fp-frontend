@@ -31,6 +31,10 @@ export type DeltPeriodeData = {
   };
 }
 
+interface FormValues {
+  ForstePeriodeTomDato?: string;
+}
+
 interface PureOwnProps {
   periodeData: PeriodeMedClassName;
   cancelEvent: () => void;
@@ -42,6 +46,8 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   førstePeriodeTom?: string;
+  validate: (formValues: FormValues) => any;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
@@ -133,10 +139,6 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
   );
 };
 
-interface FormValues {
-  ForstePeriodeTomDato?: string;
-}
-
 const validateForm = (value: FormValues, periodeData: PeriodeMedClassName) => {
   if (value.ForstePeriodeTomDato
     && (dateAfterOrEqual(value.ForstePeriodeTomDato)(moment(periodeData.tom.toString()).subtract(1, 'day'))
@@ -172,7 +174,7 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const { behandlingId, behandlingVersjon } = ownProps;
   const validate = (values: FormValues) => validateForm(values, ownProps.periodeData);
   const onSubmit = (values: FormValues) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
-  return (state: any) => ({
+  return (state: any): MappedOwnProps => ({
     førstePeriodeTom: behandlingFormValueSelector('DelOppPeriode', behandlingId, behandlingVersjon)(state, 'ForstePeriodeTomDato'),
     validate,
     onSubmit,

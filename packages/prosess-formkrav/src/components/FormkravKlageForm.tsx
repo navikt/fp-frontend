@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
@@ -22,10 +22,14 @@ import styles from './formkravKlageForm.less';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
-export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']) => (klageFormkavResultat.paKlagdBehandlingId
+export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string => (klageFormkavResultat.paKlagdBehandlingId
   ? `${klageFormkavResultat.paKlagdBehandlingId}` : IKKE_PA_KLAGD_VEDTAK);
 
-const getKlagBareVedtak = (avsluttedeBehandlinger: AvsluttetBehandling[], intl: IntlShape, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+const getKlagBareVedtak = (
+  avsluttedeBehandlinger: AvsluttetBehandling[],
+  intl: IntlShape,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+): ReactElement[] => {
   const klagBareVedtak = [<option key="formkrav" value={IKKE_PA_KLAGD_VEDTAK}>{intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' })}</option>];
   return klagBareVedtak.concat(avsluttedeBehandlinger.map((behandling) => (
     <option key={behandling.id} value={`${behandling.id}`}>
@@ -34,7 +38,7 @@ const getKlagBareVedtak = (avsluttedeBehandlinger: AvsluttetBehandling[], intl: 
   )));
 };
 
-const getLovHjemmeler = (aksjonspunktCode: string) => (aksjonspunktCode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
+const getLovHjemmeler = (aksjonspunktCode: string): string => (aksjonspunktCode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
   ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA');
 
 interface OwnProps {

@@ -23,6 +23,13 @@ import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak
 
 import styles from './checkPersonStatusForm.less';
 
+type FormValues = {
+  fortsettBehandling?: boolean;
+  personstatus?: string;
+  begrunnelse?: string;
+  originalPersonstatusName?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -110,7 +117,7 @@ export const CheckPersonStatusForm: FunctionComponent<PureOwnProps & MappedOwnPr
   </form>
 );
 
-const getValgtOpplysning = (avklartPersonstatus: Personopplysninger['avklartPersonstatus']) => {
+const getValgtOpplysning = (avklartPersonstatus: Personopplysninger['avklartPersonstatus']): string | undefined => {
   if (avklartPersonstatus && avklartPersonstatus.overstyrtPersonstatus) {
     const statusKode = avklartPersonstatus.overstyrtPersonstatus.kode;
     if (statusKode === personstatusType.DOD || statusKode === personstatusType.BOSATT || statusKode === personstatusType.UTVANDRET) {
@@ -125,7 +132,7 @@ export const buildInitialValues = createSelector(
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.personopplysninger,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk) => {
+  (behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk): FormValues => {
     const shouldContinueBehandling = !behandlingHenlagt;
     const { avklartPersonstatus, personstatus } = personopplysning;
     const aksjonspunkt = aksjonspunkter[0];
@@ -141,17 +148,11 @@ export const buildInitialValues = createSelector(
 );
 
 const getFilteredKodeverk = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]], (kodeverk) => kodeverk
-    .filter((ps: KodeverkMedNavn) => ps.kode === personstatusType.DOD || ps.kode === personstatusType.BOSATT || ps.kode === personstatusType.UTVANDRET),
+  [(ownProps: PureOwnProps) => ownProps.alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]], (kodeverk): KodeverkMedNavn[] => kodeverk
+    .filter((ps) => ps.kode === personstatusType.DOD || ps.kode === personstatusType.BOSATT || ps.kode === personstatusType.UTVANDRET),
 );
 
-interface FormValues {
-  fortsettBehandling: boolean;
-  personstatus: string;
-  begrunnelse: string;
-}
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
   fortsettBehandling: values.fortsettBehandling,
   personstatus: values.personstatus,
   kode: aksjonspunkter[0].definisjon.kode,
@@ -164,7 +165,7 @@ const lagSubmitFn = createSelector([
 
 const formName = 'CheckPersonStatusForm';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const { behandlingId, behandlingVersjon } = ownProps;
   return {
     initialValues: buildInitialValues(ownProps),

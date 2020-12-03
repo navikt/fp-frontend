@@ -44,7 +44,7 @@ const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (br
   || brevmalkode === dokumentMalType.KORRIGVARS
   || brevmalkode === dokumentMalType.FRITKS
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
-  || (brevmalkode === dokumentMalType.REVURDERING_DOK && arsakskode === ugunstAarsakTyper.ANNET));
+  || ((brevmalkode === dokumentMalType.REVURDERING_DOK || brevmalkode === dokumentMalType.VARREV) && arsakskode === ugunstAarsakTyper.ANNET));
 
 interface PureOwnProps {
   submitCallback: (values: FormValues) => void;
@@ -122,7 +122,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
         selectValues={templates.map((template) => <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>{template.navn}</option>)}
         bredde="xxl"
       />
-      {brevmalkode === dokumentMalType.REVURDERING_DOK && (
+      {(brevmalkode === dokumentMalType.REVURDERING_DOK || brevmalkode === dokumentMalType.VARREV) && (
         <>
           <VerticalSpacer eightPx />
           <SelectField
@@ -174,14 +174,19 @@ const buildInitalValues = (recipients: string[], templates: Template[], isKontro
     brevmalkode: templates && templates[0] ? templates[0].kode : null,
     fritekst: '',
   };
-  return isKontrollerRevurderingApOpen
-    ? { ...initialValues, brevmalkode: dokumentMalType.REVURDERING_DOK }
-    : { ...initialValues };
+
+  if (isKontrollerRevurderingApOpen) {
+    const defaultVerdi = templates.some((template) => template.kode === dokumentMalType.REVURDERING_DOK)
+      ? dokumentMalType.REVURDERING_DOK : dokumentMalType.VARREV;
+    return { ...initialValues, brevmalkode: defaultVerdi };
+  }
+  return { ...initialValues };
 };
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (values.brevmalkode === dokumentMalType.REVURDERING_DOK && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
+  if ((values.brevmalkode === dokumentMalType.REVURDERING_DOK || values.brevmalkode === dokumentMalType.VARREV)
+      && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
     newValues.fritekst = ' ';
   }
   return newValues;

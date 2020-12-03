@@ -18,7 +18,7 @@ import FodselSammenligningRevurderingPanel from './FodselSammenligningRevurderin
 
 import styles from './fodselSammenligningPanel.less';
 
-const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 interface OwnProps {
   behandlingsTypeKode: string;

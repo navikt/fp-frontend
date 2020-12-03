@@ -28,7 +28,13 @@ import { Aksjonspunkt, UttakPeriodeGrense } from '@fpsak-frontend/types';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
-const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean) => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+
+type FormValues = {
+  gyldigSenFremsetting?: boolean;
+  ansesMottatt?: string;
+  begrunnelse?: string;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -49,6 +55,8 @@ interface MappedOwnProps {
   soknadsperiodeStart?: string;
   soknadsperiodeSlutt?: string;
   soknadsfristdato?: string;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -124,21 +132,20 @@ export const VurderSoknadsfristForeldrepengerFormImpl: FunctionComponent<PureOwn
             <RadioOption value={false} label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />} />
           </RadioGroupField>
         </div>
-        {gyldigSenFremsetting
-          && (
-            <Row>
-              <Column xs="4">
-                <ArrowBox>
-                  <DatepickerField
-                    name="ansesMottatt"
-                    readOnly={readOnly}
-                    label={{ id: 'VurderSoknadsfristForeldrepengerForm.NyMottattDato' }}
-                    validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                  />
-                </ArrowBox>
-              </Column>
-            </Row>
-          )}
+        {gyldigSenFremsetting && (
+          <Row>
+            <Column xs="4">
+              <ArrowBox>
+                <DatepickerField
+                  name="ansesMottatt"
+                  readOnly={readOnly}
+                  label={{ id: 'VurderSoknadsfristForeldrepengerForm.NyMottattDato' }}
+                  validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                />
+              </ArrowBox>
+            </Column>
+          </Row>
+        )}
         <VerticalSpacer twentyPx />
         <ProsessStegSubmitButton
           formName={formProps.form}
@@ -163,7 +170,7 @@ export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.uttakPeriodeGrense,
     (ownProps: PureOwnProps) => ownProps.mottattDato],
-  (aksjonspunkter, uttaksperiodegrense, mottattDato) => {
+  (aksjonspunkter, uttaksperiodegrense, mottattDato): FormValues => {
     const upgMottattDato = uttaksperiodegrense ? uttaksperiodegrense.mottattDato : undefined;
     return {
       gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : upgMottattDato !== mottattDato,
@@ -173,13 +180,7 @@ export const buildInitialValues = createSelector(
   },
 );
 
-interface FormValues {
-  gyldigSenFremsetting: string;
-  ansesMottatt: string;
-  begrunnelse: string;
-}
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
   kode: aksjonspunkter[0].definisjon.kode,
@@ -192,7 +193,7 @@ const lagSubmitFn = createSelector([
 
 const formName = 'VurderSoknadsfristForeldrepengerForm';
 
-const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps) => {
+const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const uttaksperiodegrense = ownProps.uttakPeriodeGrense;
   const { behandlingId, behandlingVersjon, aksjonspunkter } = ownProps;
   return {

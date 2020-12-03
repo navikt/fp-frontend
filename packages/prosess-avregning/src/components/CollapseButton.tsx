@@ -4,7 +4,7 @@ import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import styles from './collapseButton.less';
 
-const buttonText = (showDetails: boolean) => (showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer');
+const buttonText = (showDetails: boolean): string => (showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer');
 
 interface OwnProps {
   toggleDetails: (id: number) => void;

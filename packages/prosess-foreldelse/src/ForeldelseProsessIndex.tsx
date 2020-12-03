@@ -5,6 +5,7 @@ import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 import { FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import ForeldelseForm from './components/ForeldelseForm';
+import { PeriodeMedBelop } from './components/splittePerioder/PeriodeController';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -19,7 +20,7 @@ interface OwnProps {
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   navBrukerKjonn: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  beregnBelop: (data: any) => Promise<any>;
+  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
 const ForeldelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
