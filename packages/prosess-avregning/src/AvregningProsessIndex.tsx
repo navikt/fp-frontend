@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg,
+  Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
@@ -47,7 +47,7 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessFormPro
       submitCallback={submitCallback}
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
-      apCodes={aksjonspunkter.map((a: Aksjonspunkt) => a.definisjon.kode)}
+      apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
       isApOpen={isAksjonspunktOpen}
       previewCallback={previewFptilbakeCallback}
     />

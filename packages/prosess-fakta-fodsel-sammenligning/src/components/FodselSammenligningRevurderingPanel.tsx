@@ -7,9 +7,9 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
-const formatDate = (date: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-export const getTermindatoEllerFodselsdato = (isTermin: boolean, originalSoknad?: Soknad, orginalFamiliehendelse?: FamilieHendelse) => {
+export const getTermindatoEllerFodselsdato = (isTermin: boolean, originalSoknad?: Soknad, orginalFamiliehendelse?: FamilieHendelse): string => {
   if (!originalSoknad && !orginalFamiliehendelse) {
     return '';
   }
@@ -24,7 +24,7 @@ export const getTermindatoEllerFodselsdato = (isTermin: boolean, originalSoknad?
     ? famHendelse.avklartBarn[0].fodselsdato : Object.values(originalSoknad.fodselsdatoer)[0]);
 };
 
-export const getAntallBarn = (isTermin: boolean, originalSoknad?: Soknad, orginalFamiliehendelse?: FamilieHendelse) => {
+export const getAntallBarn = (isTermin: boolean, originalSoknad?: Soknad, orginalFamiliehendelse?: FamilieHendelse): number => {
   if (!originalSoknad && !orginalFamiliehendelse) {
     return 0;
   }

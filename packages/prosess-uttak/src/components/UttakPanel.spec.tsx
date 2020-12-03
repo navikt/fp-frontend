@@ -157,6 +157,8 @@ describe('<UttakPanel>', () => {
       employeeHasAccess
       fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
+      validate={sinon.spy()}
+      onSubmit={sinon.spy()}
       sprakkode={sprakkode}
       readOnlySubmitButton={false}
       apCodes={[]}
@@ -209,6 +211,8 @@ describe('<UttakPanel>', () => {
       employeeHasAccess
       fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
+      validate={sinon.spy()}
+      onSubmit={sinon.spy()}
       sprakkode={sprakkode}
       readOnlySubmitButton={false}
       apCodes={[]}

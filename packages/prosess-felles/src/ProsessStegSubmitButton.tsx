@@ -5,7 +5,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { ariaCheck, FormValidationError, isRequiredMessage } from '@fpsak-frontend/utils';
 
-const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean) => {
+const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean): boolean => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
     return true;
   }
@@ -58,7 +58,7 @@ export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwn
   </>
 );
 
-const mapStateToProps = (state, ownProps: PureOwnProps) => {
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => {
   const { behandlingId, behandlingVersjon } = ownProps;
   const fNames = ownProps.formNames ? ownProps.formNames : [ownProps.formName];
   const formNames = fNames.map((f) => (f.includes('.') ? f.substr(f.lastIndexOf('.') + 1) : f));

@@ -24,6 +24,11 @@ import styles from './beregningsresultatEngangsstonadForm.less';
 const minValue1 = minValue(1);
 const maxValue500000 = maxValue(500000);
 
+type FormValues = {
+  beregnetTilkjentYtelse?: number;
+  begrunnelse?: string;
+}
+
 interface PureOwnProps {
   overrideReadOnly: boolean;
   kanOverstyre: boolean;
@@ -34,7 +39,9 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
+  onSubmit: (formValues: FormValues) => any;
   isOverstyrt?: boolean;
+  initialValues: FormValues;
 }
 
 /**
@@ -164,8 +171,8 @@ BeregningsresultatEngangsstonadFormImpl.defaultProps = {
 };
 
 const buildInitialValues = createSelector([
-  (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter, (_state, ownProps: PureOwnProps) => ownProps.behandlingResultatstruktur],
-(aksjonspunkter, behandlingResultatstruktur) => {
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkter, (ownProps: PureOwnProps) => ownProps.behandlingResultatstruktur],
+(aksjonspunkter, behandlingResultatstruktur): FormValues => {
   const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING);
   return {
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
@@ -173,21 +180,21 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values) => ({
+const transformValues = (values: FormValues): any => ({
   kode: aksjonspunktCode.OVERSTYR_BEREGNING,
   beregnetTilkjentYtelse: values.beregnetTilkjentYtelse,
   begrunnelse: values.begrunnelse,
 });
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values) => submitCallback([transformValues(values)]));
+  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
 const formName = 'BeregningsresultatEngangsstonadForm';
 
-const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
   isOverstyrt: !!ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING),
-  initialValues: buildInitialValues(state, ownProps),
+  initialValues: buildInitialValues(ownProps),
 });
 
 export default connect(mapStateToProps)(behandlingForm({

@@ -11,7 +11,7 @@ import {
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
-import VedtakForm from './components/forstegang/VedtakForm';
+import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
 import messages from '../i18n/nb_NO.json';
 
@@ -22,7 +22,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const skalSkriveFritekstGrunnetFastsettingAvBeregning = (aksjonspunkter: Aksjonspunkt[], beregningsgrunnlag?: Beregningsgrunnlag) => {
+const skalSkriveFritekstGrunnetFastsettingAvBeregning = (aksjonspunkter: Aksjonspunkt[], beregningsgrunnlag?: Beregningsgrunnlag): boolean => {
   if (!beregningsgrunnlag || !aksjonspunkter) {
     return false;
   }
@@ -45,7 +45,7 @@ interface OwnProps {
   };
   medlemskap: Medlemskap;
   vilkar: Vilkar[];
-  previewCallback: () => void;
+  previewCallback: (data: ForhandsvisData) => Promise<any>,
   ytelseTypeKode: string;
 }
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
 import moment from 'moment/moment';
@@ -26,7 +26,7 @@ export const avregningCodes = {
   REDUKSJON: 'reduksjon',
 };
 
-const isNextPeriod = (monthAndYear: { month: string, year: string}, nextPeriod: string) => `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod
+const isNextPeriod = (monthAndYear: { month: string, year: string}, nextPeriod: string): boolean => `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod
   ? moment(nextPeriod).format('MMMMYY') : false);
 
 const getHeaderCodes = (
@@ -34,7 +34,7 @@ const getHeaderCodes = (
   collapseProps: { toggleDetails: (id: number) => void, showDetails: boolean, mottakerIndex: number },
   rangeOfMonths: { month: string, year: string}[],
   nextPeriod: string,
-) => {
+): ReactElement[] => {
   const firstElement = showCollapseButton ? <CollapseButton {...collapseProps} key={`collapseButton-${rangeOfMonths.length}`} /> : <div />;
   return [
     firstElement,
@@ -54,14 +54,18 @@ const getHeaderCodes = (
 
 const showCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean => mottakerResultatPerFag.some((fag) => fag.rader.length > 1);
 
-const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean) => {
+const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
   const fagFeilUtbetalt = fagOmråde.rader.find((rad) => rad.feltnavn === avregningCodes.DIFFERANSE);
   return fagFeilUtbetalt && !rowIsFeilUtbetalt;
 };
 
-const rowIsHidden = (isRowToggable: boolean, showDetails: boolean) => isRowToggable && !showDetails;
+const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
 
-const createColumns = (perioder: SimuleringResultatRad['resultaterPerMåned'], rangeOfMonths: { month: string, year: string}[], nextPeriod: string) => {
+const createColumns = (
+  perioder: SimuleringResultatRad['resultaterPerMåned'],
+  rangeOfMonths: { month: string, year: string}[],
+  nextPeriod: string,
+): ReactElement[] => {
   const nextPeriodFormatted = `${moment(nextPeriod).format('MMMMYY')}`;
 
   const perioderData = rangeOfMonths.map((monthAndYear) => {
@@ -82,7 +86,7 @@ const createColumns = (perioder: SimuleringResultatRad['resultaterPerMåned'], r
   ));
 };
 
-const tableTitle = (mottaker: Mottaker) => (mottaker.mottakerType.kode === mottakerTyper.ARBG
+const tableTitle = (mottaker: Mottaker): ReactElement | null => (mottaker.mottakerType.kode === mottakerTyper.ARBG
   ? (
     <Normaltekst className={styles.tableTitle}>
       {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
@@ -98,11 +102,12 @@ const getResultatRadene = (ingenPerioderMedAvvik: boolean, resultatPerFagområde
   return resultatPerFagområde.length > 1 ? resultatOgMotregningRader.filter((resultat) => resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED) : [];
 };
 
-const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string) => (!!(ingenPerioderMedAvvik && mottakerTypeKode === mottakerTyper.BRUKER));
+const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean => (!!(ingenPerioderMedAvvik
+  && mottakerTypeKode === mottakerTyper.BRUKER));
 
-const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string) => (periodeFom || nesteUtbPeriodeFom);
+const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => (periodeFom || nesteUtbPeriodeFom);
 
-const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker: Mottaker) => {
+const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker: Mottaker): { month: string, year: string}[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType.kode)
     ? moment(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
     : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriodeFom);
@@ -128,7 +133,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   ingenPerioderMedAvvik,
 }) => (
   <>
-    {simuleringResultat.perioderPerMottaker.map((mottaker: Mottaker, mottakerIndex: number) => {
+    {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periodeFom, mottaker);
       const nesteMåned = mottaker.nestUtbPeriodeTom;
       const visDetaljer = showDetails.find((d) => d.id === mottakerIndex);
@@ -146,13 +151,13 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
             classNameTable={styles.simuleringTable}
           >
             {[].concat(
-              ...mottaker.resultatPerFagområde.map((fagOmråde: SimuleringResultatPerFagområde, fagIndex: number) => fagOmråde.rader
-                .filter((rad: SimuleringResultatRad) => {
+              ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) => fagOmråde.rader
+                .filter((rad) => {
                   const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
                   const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
                   return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
                 })
-                .map((rad: SimuleringResultatRad, rowIndex: number) => {
+                .map((rad, rowIndex) => {
                   const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
                   const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
                   return (
@@ -171,7 +176,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
                 })),
             )
               .concat(getResultatRadene(ingenPerioderMedAvvik, mottaker.resultatPerFagområde, mottaker.resultatOgMotregningRader)
-                .map((resultat, resultatIndex: number) => (
+                .map((resultat, resultatIndex) => (
                   <TableRow
                     isBold={resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED}
                     isSolidBottomBorder

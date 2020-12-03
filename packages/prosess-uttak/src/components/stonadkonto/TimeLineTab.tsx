@@ -11,7 +11,7 @@ import styles from './timeLineTab.less';
 
 const classNames = classnames.bind(styles);
 
-const findKorrektLabelForKvote = (stonadtype: string) => {
+const findKorrektLabelForKvote = (stonadtype: string): string => {
   switch (stonadtype) {
     case stonadskontoType.FEDREKVOTE:
       return 'TimeLineTab.Stonadinfo.Fedrekvote';
@@ -30,7 +30,7 @@ const findKorrektLabelForKvote = (stonadtype: string) => {
   }
 };
 
-const findAntallUkerOgDager = (kontoinfo: Stonadskonto) => {
+const findAntallUkerOgDager = (kontoinfo: Stonadskonto): { uker: number; dager: number } => {
   const modifier = kontoinfo.saldo < 0 ? -1 : 1;
   const justertSaldo = kontoinfo.saldo * modifier;
   return {
@@ -46,7 +46,7 @@ export type CustomStonadskonto = {
 
 interface OwnProps {
   stonadskonto: CustomStonadskonto;
-  onClickCallback: (...args: any[]) => any;
+  onClickCallback: (evernt: React.MouseEvent) => any;
   aktiv?: boolean;
 }
 

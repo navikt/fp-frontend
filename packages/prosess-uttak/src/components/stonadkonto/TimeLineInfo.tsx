@@ -23,7 +23,7 @@ const headerTextCodes = [
   'TimeLineInfo.Disponibelt',
 ];
 
-const findTilgjengeligeUker = (stonadskontoer: UttakStonadskontoer['stonadskontoer']) => {
+const findTilgjengeligeUker = (stonadskontoer: UttakStonadskontoer['stonadskontoer']): number => {
   let sumDager = 0;
   Object.keys(stonadskontoer).forEach((key) => {
     if (key !== stonadskontoType.FLERBARNSDAGER) {
@@ -33,7 +33,7 @@ const findTilgjengeligeUker = (stonadskontoer: UttakStonadskontoer['stonadskonto
   return Math.floor(sumDager / 5);
 };
 
-const findAntallUkerOgDager = (saldo: number) => {
+const findAntallUkerOgDager = (saldo: number): { uker: number; dager: number } => {
   const modifier = saldo < 0 ? -1 : 1;
   const justertSaldo = saldo * modifier;
   return {
@@ -84,7 +84,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(konto: CustomStonadskonto, index: number) {
+  handleChange(konto: CustomStonadskonto, index: number): void {
     const { aktiv } = this.state;
     if (aktiv === index) {
       this.setState({

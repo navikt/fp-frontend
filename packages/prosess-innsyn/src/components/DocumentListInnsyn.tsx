@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
@@ -19,10 +19,10 @@ import styles from './documentListInnsyn.less';
 
 // TODO (TOR) Flytt url ut av komponent
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document: Dokument, saksNr: number) => (`${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
+const getLink = (document: Dokument, saksNr: number): string => (`${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
   .journalpostId}&dokumentId=${document.dokumentId}`);
 
-const getDirectionImage = (document: Dokument, intl: IntlShape) => {
+const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
     return (
       <Image
@@ -53,7 +53,7 @@ const getDirectionImage = (document: Dokument, intl: IntlShape) => {
   );
 };
 
-const noLabelHack = () => <span className={styles.hidden}>-</span>;
+const noLabelHack = (): ReactElement => <span className={styles.hidden}>-</span>;
 
 interface OwnProps {
   saksNr: number;

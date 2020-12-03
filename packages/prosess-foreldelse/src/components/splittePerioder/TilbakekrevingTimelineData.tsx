@@ -1,19 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
-import PeriodeController from './PeriodeController';
+import PeriodeController, { PeriodeMedBelop, PeriodeMedFeilutbetaling } from './PeriodeController';
 import PeriodeInformasjon from './PeriodeInformasjon';
 import ForeldelsesresultatActivity from '../../types/foreldelsesresultatActivitytsType';
 
 interface PureOwnProps {
   periode: ForeldelsesresultatActivity;
-  callbackForward: (...args: any[]) => any;
-  callbackBackward: (...args: any[]) => any;
-  oppdaterSplittedePerioder: (...args: any[]) => any;
+  oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
+  callbackForward: (event: React.KeyboardEvent | React.MouseEvent) => void;
+  callbackBackward: (event: React.KeyboardEvent | React.MouseEvent) => void;
   readOnly: boolean;
   behandlingId: number;
   behandlingVersjon: number;
-  beregnBelop: (...args: any[]) => any;
+  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
 export const TilbakekrevingTimelineData: FunctionComponent<PureOwnProps> = ({

@@ -37,6 +37,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(ProsessStegSubmitButton)).to.have.length(1);
   });
@@ -64,6 +65,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(ProsessStegSubmitButton)).to.have.length(0);
   });
@@ -92,6 +94,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('InnsynVedtakForm.ForhåndsvisBrev');
   });
@@ -119,6 +122,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('InnsynVedtakForm.VisVedtaksbrev');
   });
@@ -147,6 +151,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(TextAreaField)).to.have.length(1);
   });
@@ -174,6 +179,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(TextAreaField)).to.have.length(1);
   });
@@ -201,6 +207,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(TextAreaField)).to.have.length(0);
   });
@@ -229,6 +236,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(1);
   });
@@ -256,6 +264,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(1);
   });
@@ -283,6 +292,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(0);
   });
@@ -311,6 +321,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Innvilget');
   });
@@ -338,6 +349,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Delvis');
   });
@@ -365,6 +377,7 @@ describe('<InnsynVedtakForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Avslatt');
   });

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
@@ -20,7 +20,7 @@ import styles from './uttakActivity.less';
 
 const maxValue100 = maxValue(100);
 
-const periodeStatusClassName = (periode: PeriodeMedClassName) => {
+const periodeStatusClassName = (periode: PeriodeMedClassName): string => {
   if (periode.erOppfylt === false) {
     return styles.redDetailsPeriod;
   }
@@ -34,7 +34,7 @@ const periodeStatusClassName = (periode: PeriodeMedClassName) => {
   return styles.redDetailsPeriod;
 };
 
-const periodeIsInnvilget = (periode: PeriodeMedClassName) => {
+const periodeIsInnvilget = (periode: PeriodeMedClassName): boolean => {
   if (periode.erOppfylt === false) {
     return false;
   }
@@ -44,7 +44,7 @@ const periodeIsInnvilget = (periode: PeriodeMedClassName) => {
   return false;
 };
 
-const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
+const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string | ReactElement => {
   let arbeidsforhold = '';
   if (selectedItem.gradertAktivitet) {
     const {
@@ -65,7 +65,11 @@ const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplys
   return arbeidsforhold;
 };
 
-const typePeriode = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string, kontoIkkeSatt?: boolean) => {
+const typePeriode = (
+  selectedItem: PeriodeMedClassName,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  kontoIkkeSatt?: boolean,
+): ReactElement | string => {
   if (selectedItem.utsettelseType.kode === '-' && !kontoIkkeSatt) {
     return <FormattedMessage id="UttakActivity.Uttak" />;
   }
@@ -78,7 +82,7 @@ const typePeriode = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeve
   return '';
 };
 
-const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement => {
   if (periodeIsInnvilget(selectedItemData)) {
     return (
       <FormattedMessage
@@ -95,7 +99,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
   );
 };
 
-const stonadskonto = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string, kontoIkkeSatt?: boolean) => {
+const stonadskonto = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string, kontoIkkeSatt?: boolean): string => {
   let returnText = '';
   if (!kontoIkkeSatt) {
     returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType);
@@ -109,7 +113,7 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => gyldigeÅrsaker.includes(kode))
@@ -117,7 +121,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]) => typer
     kode,
   }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
 
-const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean) => {
+const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean): boolean => {
   const visGradering = selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
     && selectedItem.gradertAktivitet
     && graderingInnvilget === false

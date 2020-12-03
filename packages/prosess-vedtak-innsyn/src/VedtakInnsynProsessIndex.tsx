@@ -4,7 +4,7 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { Dokument, Innsyn } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
-import InnsynVedtakForm from './components/InnsynVedtakForm';
+import InnsynVedtakForm, { ForhandsvisData } from './components/InnsynVedtakForm';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -18,7 +18,7 @@ interface OwnProps {
   innsyn: Innsyn;
   saksnummer: number;
   alleDokumenter: Dokument[];
-  previewCallback: (...args: any[]) => any;
+  previewCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
 const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({

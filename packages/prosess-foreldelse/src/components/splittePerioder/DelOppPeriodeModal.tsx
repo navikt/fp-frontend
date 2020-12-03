@@ -16,16 +16,27 @@ import { DatepickerField, behandlingForm } from '@fpsak-frontend/form';
 
 import styles from './delOppPeriodeModal.less';
 
-type PeriodeData = {
+type Periode = {
   fom: string;
   tom: string;
 }
 
+export type PerioderData = {
+  forstePeriode: Periode;
+  andrePeriode: Periode;
+}
+
+type FormValues = {
+  ForstePeriodeTomDato?: string;
+}
+
 interface PureOwnProps {
-  periodeData: PeriodeData;
+  behandlingId: number;
+  behandlingVersjon: number;
+  periodeData: Periode;
   showModal: boolean;
   finnesBelopMed0Verdi: boolean;
-  splitPeriod: (perioder: { forstePeriode: { fom: string; tom: string }; andrePeriode: { fom: string; tom: string }}) => void;
+  splitPeriod: (perioder: PerioderData) => void;
   cancelEvent: () => void;
 }
 
@@ -93,7 +104,7 @@ export const DelOppPeriodeModalImpl: FunctionComponent<PureOwnProps & WrappedCom
   </Modal>
 );
 
-const validateForm = (value: any, periodeData: PeriodeData) => {
+const validateForm = (value: FormValues, periodeData: Periode): any => {
   if (value.ForstePeriodeTomDato
     && (dateAfterOrEqual(value.ForstePeriodeTomDato)(moment(periodeData.tom.toString()).subtract(1, 'day'))
       || dateBeforeOrEqual(value.ForstePeriodeTomDato)(periodeData.fom))) {
@@ -104,7 +115,7 @@ const validateForm = (value: any, periodeData: PeriodeData) => {
   return null;
 };
 
-const transformValues = (values: any, periodeData: PeriodeData) => {
+const transformValues = (values: FormValues, periodeData: Periode): any => {
   const addDay = moment(values.ForstePeriodeTomDato).add(1, 'days');
   const forstePeriode = {
     fom: periodeData.fom,
@@ -120,9 +131,9 @@ const transformValues = (values: any, periodeData: PeriodeData) => {
   };
 };
 
-export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
-  const validate = (values: any) => validateForm(values, ownProps.periodeData);
-  const onSubmit = (values: any) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
+export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps): any => {
+  const validate = (values: FormValues) => validateForm(values, ownProps.periodeData);
+  const onSubmit = (values: FormValues) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
   return () => ({
     validate,
     onSubmit,
