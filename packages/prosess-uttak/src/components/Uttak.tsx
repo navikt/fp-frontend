@@ -786,12 +786,7 @@ const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
 
 const slaSammenHovedsokerOgAnnenForelder = createSelector(
   [addClassNameGroupIdToPerioderHovedsoker, addClassNameGroupIdToPerioderAnnenForelder],
-  (hovedsokerPerioder, annenForelderPerioder): PeriodeMedClassName[] => hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
-    if (pers1.group === pers2.group) {
-      return 0;
-    }
-    return pers1.group < pers2.group ? -1 : 1;
-  }),
+  (hovedsokerPerioder, annenForelderPerioder): PeriodeMedClassName[] => hovedsokerPerioder.concat(annenForelderPerioder),
 );
 
 const mapStateToProps = (state: any, props: PureOwnProps) => {
@@ -825,6 +820,12 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   }
   */
   const { gjeldende } = familiehendelse;
+  const uttakPerioder = slaSammenHovedsokerOgAnnenForelder(state, props).sort((pers1, pers2) => {
+    if (pers1.group === pers2.group) {
+      return 0;
+    }
+    return pers1.group < pers2.group ? -1 : 1;
+  });
 
   return {
     annenForelderSoktOmFlerbarnsdager: annenForelderPerioder.filter((p) => p.flerbarnsdager === true).length > 0,
@@ -842,8 +843,8 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     saksnummer: fagsak.saksnummer,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
     stonadskonto: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'stonadskonto'),
-    uttakPerioder: slaSammenHovedsokerOgAnnenForelder(state, props),
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),
+    uttakPerioder,
   };
 };
 
