@@ -50,6 +50,7 @@ const mockProps = {
   saksnummer: 123,
   aksjonspunkter: [],
   submitCallback: sinon.spy(),
+  onSubmit: sinon.spy(),
   readOnlySubmitButton: false,
   isForeldrepenger: true,
   behandlingFormPrefix: '',

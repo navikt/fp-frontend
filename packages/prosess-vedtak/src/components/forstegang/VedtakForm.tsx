@@ -21,7 +21,7 @@ import VedtakAvslagPanel from './VedtakAvslagPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import VedtakFritekstbrevModal from '../felles/svp/VedtakFritekstbrevModal';
 
-export const findAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string) => {
+export const findAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
     return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
   }
@@ -40,7 +40,7 @@ export const findAvslagResultatText = (behandlingResultatTypeKode: string, ytels
   return 'VedtakForm.ForeldrepengerIkkeInnvilget';
 };
 
-export const findInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string) => {
+export const findInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
     return 'VedtakForm.ResultatOpprettholdVedtak';
   }
@@ -59,8 +59,22 @@ export const findInnvilgetResultatText = (behandlingResultatTypeKode: string, yt
   return 'VedtakForm.VilkarStatusInnvilgetForeldrepenger';
 };
 
-const getPreviewManueltBrevCallback = (formProps: InjectedFormProps, begrunnelse: string, brodtekst: string,
-  overskrift: string, skalOverstyre: boolean, previewCallback: (data: any) => void) => (e) => {
+export type ForhandsvisData = {
+  fritekst: string;
+  dokumentMal?: string;
+  tittel?: string;
+  gjelderVedtak: boolean;
+  vedtaksbrev?: { kode: string };
+}
+
+const getPreviewManueltBrevCallback = (
+  formProps: InjectedFormProps,
+  begrunnelse: string,
+  brodtekst: string,
+  overskrift: string,
+  skalOverstyre: boolean,
+  previewCallback: (data: ForhandsvisData) => Promise<any>,
+) => (e: React.MouseEvent): void => {
   if (formProps.valid || formProps.pristine) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
@@ -80,13 +94,13 @@ const getPreviewManueltBrevCallback = (formProps: InjectedFormProps, begrunnelse
   e.preventDefault();
 };
 
-const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingArsaker'] = []) => behandlingArsakTyper
+const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingArsaker'] = []): boolean => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
   .some((bt) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE
     || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
     || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK);
 
-const finnVedtakstatusTekst = (behandlingsresultat: Behandling['behandlingsresultat'], intl: IntlShape, ytelseTypeKode: string) => {
+const finnVedtakstatusTekst = (behandlingsresultat: Behandling['behandlingsresultat'], intl: IntlShape, ytelseTypeKode: string): string => {
   const erInnvilget = isInnvilget(behandlingsresultat.type.kode);
   const erAvslatt = isAvslag(behandlingsresultat.type.kode);
 
@@ -99,11 +113,19 @@ const finnVedtakstatusTekst = (behandlingsresultat: Behandling['behandlingsresul
   return '';
 };
 
+type FormValues = {
+  beregningErManueltFastsatt?: boolean;
+  aksjonspunktKoder?: string[];
+  overskrift?: string;
+  brødtekst?: string;
+  begrunnelse?: string;
+}
+
 interface PureOwnProps {
   behandling: Behandling;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  previewCallback: () => void;
+  previewCallback: (data: ForhandsvisData) => Promise<any>,
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -117,6 +139,8 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
+  onSubmit: (formValues: FormValues) => any;
+  initialValues: FormValues;
   begrunnelse?: string;
   brødtekst?: string;
   overskrift?: string;
@@ -215,7 +239,7 @@ export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.behandling,
     ((ownProps: PureOwnProps) => ownProps.beregningErManueltFastsatt)],
-  (aksjonspunkter, behandling, beregningErManueltFastsatt) => ({
+  (aksjonspunkter, behandling, beregningErManueltFastsatt): FormValues => ({
     beregningErManueltFastsatt,
     aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
     overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
@@ -223,14 +247,7 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-interface FormValues {
-  aksjonspunktKoder: string[];
-  begrunnelse: string;
-  brødtekst?: string;
-  overskrift: string;
-}
-
-const transformValues = (values: FormValues) => values.aksjonspunktKoder.map((apCode) => ({
+const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
   kode: apCode,
   begrunnelse: values.begrunnelse,
   fritekstBrev: values.brødtekst,
@@ -244,7 +261,7 @@ const formName = 'VedtakForm';
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
-const mapStateToProps = (state, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
   initialValues: buildInitialValues(ownProps),
   ...behandlingFormValueSelector(formName, ownProps.behandling.id, ownProps.behandling.versjon)(

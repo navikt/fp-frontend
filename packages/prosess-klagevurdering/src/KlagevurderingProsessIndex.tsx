@@ -8,6 +8,8 @@ import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 import messages from '../i18n/nb_NO.json';
 import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
 import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
+import { BrevData } from './components/felles/PreviewKlageLink';
+import { TransformedValues } from './components/felles/TempsaveKlageButton';
 
 const cache = createIntlCache();
 
@@ -18,8 +20,8 @@ const intl = createIntl({
 
 interface OwnProps {
   klageVurdering: KlageVurdering;
-  saveKlage: (data: any) => Promise<any>;
-  previewCallback: (data: any) => Promise<any>;
+  previewCallback: (data: BrevData) => Promise<any>;
+  saveKlage: (data: TransformedValues) => Promise<any>;
 }
 
 const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({

@@ -13,9 +13,13 @@ import styles from './prosessStegBegrunnelseTextField.less';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const getBegrunnelseTextCode = (readOnly: boolean) => (readOnly
+const getBegrunnelseTextCode = (readOnly: boolean): string => (readOnly
   ? 'ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly'
   : 'ProsessStegBegrunnelseTextField.ExplanationRequired');
+
+type FormValues = {
+  begrunnelse?: string;
+}
 
 interface OwnProps {
   readOnly: boolean;
@@ -24,10 +28,8 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (aksjonspunkter: Aksjonspunkt[]) => {
-    begrunnelse?: string;
-  },
-  transformValues?: (values: { begrunnelse?: string }) => {
+  buildInitialValues?: (aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  transformValues?: (values: FormValues) => {
     begrunnelse?: string;
   },
 }
@@ -58,15 +60,15 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
   );
 };
 
-const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]) => (aksjonspunkter.length > 0 && aksjonspunkter[0].begrunnelse
+const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string => (aksjonspunkter.length > 0 && aksjonspunkter[0].begrunnelse
   ? aksjonspunkter[0].begrunnelse
   : '');
 
-ProsessStegBegrunnelseTextField.buildInitialValues = (aksjonspunkter: Aksjonspunkt[]) => ({
+ProsessStegBegrunnelseTextField.buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkter)),
 });
 
-ProsessStegBegrunnelseTextField.transformValues = (values: { begrunnelse?: string }) => ({
+ProsessStegBegrunnelseTextField.transformValues = (values: FormValues): any => ({
   begrunnelse: values.begrunnelse,
 });
 

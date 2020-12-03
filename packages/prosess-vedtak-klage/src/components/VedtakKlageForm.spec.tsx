@@ -15,8 +15,8 @@ const KLAGE_OMGJORT_TEKST = 'VedtakKlageForm.KlageOmgjortGunst';
 
 describe('<VedtakKlageForm>', () => {
   it('skal vise riktige avvisningsårsaker', () => {
-    const avvistArsaker = [{ kode: 'KLAGET_FOR_SENT', kodeverk: 'KLAGE_AVVIST_AARSAK' },
-      { kode: 'KLAGER_IKKE_PART', kodeverk: 'KLAGE_AVVIST_AARSAK' }];
+    const avvistArsaker = [{ kode: 'KLAGET_FOR_SENT', kodeverk: 'KLAGE_AVVIST_AARSAK', navn: '' },
+      { kode: 'KLAGER_IKKE_PART', kodeverk: 'KLAGE_AVVIST_AARSAK', navn: '' }];
     const forhandsvisVedtaksbrevFunc = sinon.spy();
     const br = {
       id: 1,
@@ -50,6 +50,7 @@ describe('<VedtakKlageForm>', () => {
       klageVurdering={{} as KlageVurdering}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
     />);
     expect(wrapper.find(Undertekst).at(1).childAt(0).text()).equal('Årsak til avvisning');
     expect(wrapper.find(Normaltekst).at(1).childAt(0).text()).equal('Bruker har klaget for sent');
@@ -69,7 +70,7 @@ describe('<VedtakKlageForm>', () => {
       it('should return avvisningsAarsaker with length 2', () => {
         const klageVurdering = {
           klageFormkravResultatNFP: { avvistArsaker: [{ navn: 'arsak1' }, { navn: 'arsak2' }] } as KlageVurdering['klageFormkravResultatNFP'],
-          klageVurderingResultatNFP: { klageAvvistArsakNavn: 'Klager er ikke part', klageVurdertAv: '' },
+          klageVurderingResultatNFP: { klageVurdertAv: '' },
         } as KlageVurdering;
         const selected = getAvvisningsAarsaker.resultFunc(klageVurdering);
         expect(selected).to.have.length(2);

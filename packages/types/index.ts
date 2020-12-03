@@ -52,7 +52,7 @@ export {
 } from './src/medlemskapTsType';
 export { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export { default as AnkeVurdering } from './src/ankeVurderingTsType';
-export { default as KlageVurdering } from './src/klageVurderingTsType';
+export { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
 export { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioder } from './src/uttakKontrollerFaktaPerioderTsType';
 export {

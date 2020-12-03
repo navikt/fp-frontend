@@ -11,7 +11,16 @@ import FormkravKlageForm, { getPaKlagdVedtak, IKKE_PA_KLAGD_VEDTAK } from './For
 import { erTilbakekreving, påklagdTilbakekrevingInfo } from './FormkravKlageFormNfp';
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 
-interface OwnProps {
+type FormValues = {
+  erKlagerPart?: boolean;
+  erFristOverholdt?: boolean;
+  erKonkret?: boolean;
+  erSignert?: boolean;
+  begrunnelse?: string;
+  vedtak?: string;
+}
+
+interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   klageVurdering: KlageVurdering;
@@ -22,12 +31,17 @@ interface OwnProps {
   avsluttedeBehandlinger: AvsluttetBehandling[];
 }
 
+interface MappedOwnProps {
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
+}
+
 /**
  * FormkravKlageFormKA
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (KA).
  */
-export const FormkravKlageFormKa: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const FormkravKlageFormKa: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -55,16 +69,7 @@ FormkravKlageFormKa.defaultProps = {
   readOnlySubmitButton: true,
 };
 
-type FormValues = {
-  erKlagerPart: boolean;
-  erFristOverholdt: boolean;
-  erKonkret: boolean;
-  erSignert: boolean;
-  begrunnelse: boolean;
-  vedtak: string;
-}
-
-export const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]) => ({
+export const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): any => ({
   erKlagerPart: values.erKlagerPart,
   erFristOverholdt: values.erFristOverholdt,
   erKonkret: values.erKonkret,
@@ -78,7 +83,7 @@ export const transformValues = (values: FormValues, avsluttedeBehandlinger: Avsl
 
 const formName = 'FormkravKlageFormKa';
 
-const buildInitialValues = createSelector([(ownProps: OwnProps) => ownProps.klageVurdering], (klageVurdering) => {
+const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.klageVurdering], (klageVurdering): FormValues => {
   const klageFormkavResultatKa = klageVurdering ? klageVurdering.klageFormkravResultatKA : null;
   return {
     vedtak: klageFormkavResultatKa ? getPaKlagdVedtak(klageFormkavResultatKa) : null,
@@ -91,10 +96,10 @@ const buildInitialValues = createSelector([(ownProps: OwnProps) => ownProps.klag
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps: OwnProps) => ownProps.submitCallback, (ownProps: OwnProps) => ownProps.avsluttedeBehandlinger],
+  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.avsluttedeBehandlinger],
 (submitCallback, avsluttedeBehandlinger) => (values: FormValues) => submitCallback([transformValues(values, avsluttedeBehandlinger)]));
 
-const mapStateToProps = (_state, ownProps: OwnProps) => ({
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),
 });

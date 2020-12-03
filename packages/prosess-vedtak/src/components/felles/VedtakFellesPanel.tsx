@@ -25,12 +25,12 @@ import VedtakHelpTextPanel from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.less';
 
-export const getTextCode = (behandlingStatus: string) => (behandlingStatus === behandlingStatusCode.AVSLUTTET
+export const getTextCode = (behandlingStatus: string): string => (behandlingStatus === behandlingStatusCode.AVSLUTTET
   || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK ? 'VedtakForm.vedtak' : 'VedtakForm.ForslagTilVedtak');
 
-const kanSendesTilGodkjenning = (behandlingStatusKode: string) => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
+const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
-const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]) => {
+const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (aksjonspunkter && aksjonspunkter.some((ap) => ap.erAktivt && ap.toTrinnsBehandling)) {
     return 'VedtakForm.TilGodkjenning';
   }
@@ -38,7 +38,7 @@ const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]) => {
   return 'VedtakForm.FattVedtak';
 };
 
-const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
+const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']): boolean => {
   if (!behandlingResultat) {
     return true;
   }

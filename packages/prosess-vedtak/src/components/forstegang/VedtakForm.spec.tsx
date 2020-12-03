@@ -21,16 +21,9 @@ describe('<VedtakForm>', () => {
     kode: 'NO',
     kodeverk: '',
   };
-  const aksjonspunktKoder = [
-    {
-      navn: 'annen ytelse',
-      kode: aksjonspunktCodes.VURDERE_ANNEN_YTELSE,
-    },
-  ];
+  const aksjonspunktKoder = [aksjonspunktCodes.VURDERE_ANNEN_YTELSE];
   const initialValues = {
-    skalBrukeOverstyrendeFritekstBrev: false,
     aksjonspunktKoder,
-    sprakkode,
   };
 
   it('skal vise at vedtak er innvilget', () => {
@@ -77,6 +70,7 @@ describe('<VedtakForm>', () => {
       behandlingVersjon={2}
       submitCallback={sinon.spy()}
       clearFormField={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
@@ -129,6 +123,7 @@ describe('<VedtakForm>', () => {
       behandlingVersjon={2}
       submitCallback={sinon.spy()}
       clearFormField={sinon.spy()}
+      onSubmit={sinon.spy()}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);

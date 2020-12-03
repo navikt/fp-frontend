@@ -95,7 +95,7 @@ export const visForFørstegangsbehandling = () => (
     soknad={object('soknad', soknad)}
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
-    previewCallback={action('button-click')}
+    previewCallback={action('button-click') as any}
   />
 );
 
@@ -112,6 +112,6 @@ export const visForRevurdering = () => (
     soknad={object('soknad', soknad)}
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
-    previewCallback={action('button-click')}
+    previewCallback={action('button-click') as any}
   />
 );

@@ -19,6 +19,7 @@ describe('<FormkravKlageFormNfp>', () => {
       avsluttedeBehandlinger={[]}
       klageVurdering={{} as KlageVurdering}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(FormkravKlageForm)).has.length(1);

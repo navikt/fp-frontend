@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
@@ -44,16 +44,22 @@ const simuleringAksjonspunkter = [
 const formName = 'AvregnigForm';
 const IKKE_SEND = 'IKKE_SEND';
 
-const createHelptextTooltip = (isForeldrepenger: boolean) => (
+const createHelptextTooltip = (isForeldrepenger: boolean): ReactElement => (
   <FormattedMessage id={isForeldrepenger ? 'Avregning.HjelpetekstForeldrepenger' : 'Avregning.HjelpetekstEngangsstonad'} />
 );
 
-const getSimuleringResult = (simuleringResultat: SimuleringResultat, feilutbetaling: number): DetaljertSimuleringResultat => {
+const getSimuleringResult = (simuleringResultat: SimuleringResultat, feilutbetaling: number): DetaljertSimuleringResultat | undefined => {
   if (!simuleringResultat) {
     return undefined;
   }
   return feilutbetaling === undefined || feilutbetaling ? simuleringResultat.simuleringResultat : simuleringResultat.simuleringResultatUtenInntrekk;
 };
+
+type FormValues = {
+  videreBehandling?: string;
+  varseltekst?: string;
+  begrunnelse?: string;
+}
 
 interface PureOwnProps {
   fagsak: Fagsak;
@@ -77,6 +83,8 @@ interface MappedOwnProps {
   behandlingFormPrefix: string;
   varseltekst?: string;
   saksnummer: number;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 type Details = {
@@ -112,7 +120,7 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
     };
   }
 
-  toggleDetails(id: number) {
+  toggleDetails(id: number): void {
     const { showDetails } = this.state;
     const tableIndex = showDetails.findIndex((table: Details) => table.id === id);
     let newShowDetailsArray = [];
@@ -137,13 +145,13 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
     this.setState({ showDetails: newShowDetailsArray });
   }
 
-  resetFields() {
+  resetFields(): void {
     const { behandlingFormPrefix, clearFields: clearFormFields } = this.props;
     const fields = ['videreBehandling'];
     clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
   }
 
-  previewMessage(e: any) {
+  previewMessage(e: React.MouseEvent): void {
     const { varseltekst, saksnummer, previewCallback } = this.props;
     previewCallback('', dokumentMalType.TBKVAR, varseltekst || ' ', saksnummer);
     e.preventDefault();
@@ -308,7 +316,7 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
   }
 }
 
-export const transformValues = (values: any, ap: string) => {
+export const transformValues = (values: FormValues, ap: string): any => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
   const info = {
     kode: ap,
@@ -331,8 +339,8 @@ const buildInitialValues = createSelector(
   [(_state, ownProps: PureOwnProps) => ownProps.tilbakekrevingvalg,
     (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
     tilbakekrevingvalg, aksjonspunkter,
-  ) => {
-    const aksjonspunkt = aksjonspunkter.find((ap: Aksjonspunkt) => simuleringAksjonspunkter.includes(ap.definisjon.kode));
+  ): FormValues => {
+    const aksjonspunkt = aksjonspunkter.find((ap) => simuleringAksjonspunkter.includes(ap.definisjon.kode));
     if (!aksjonspunkt || !tilbakekrevingvalg) {
       return undefined;
     }
@@ -350,9 +358,9 @@ const buildInitialValues = createSelector(
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
-(submitCallback, apCodes) => (values) => submitCallback([transformValues(values, apCodes[0])]));
+(submitCallback, apCodes) => (values: FormValues) => submitCallback([transformValues(values, apCodes[0])]));
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => {
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const {
     behandlingId, behandlingVersjon, tilbakekrevingvalg, fagsak,
   } = ownProps;

@@ -5,6 +5,8 @@ import sinon from 'sinon';
 
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { KlageVurdering } from '@fpsak-frontend/types';
+
 import { BehandleKlageFormKaImpl } from './BehandleKlageFormKa';
 import PreviewKlageLink from '../felles/PreviewKlageLink';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-klagevurdering';
@@ -34,6 +36,9 @@ describe('<BehandleKlageFormKaImpl>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={2}
+      submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
+      klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find('PreviewKlageLink')).to.have.length(1);
@@ -54,6 +59,9 @@ describe('<BehandleKlageFormKaImpl>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={2}
+      submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
+      klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(PreviewKlageLink)).to.have.length(0);
@@ -78,6 +86,9 @@ describe('<BehandleKlageFormKaImpl>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={2}
+      submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
+      klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(PreviewKlageLink)).to.have.length(0);

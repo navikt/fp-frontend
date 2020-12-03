@@ -9,7 +9,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]) => {
+const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
   const helpTexts = [];
   if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));

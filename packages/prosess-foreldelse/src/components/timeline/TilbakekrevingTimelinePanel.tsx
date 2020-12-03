@@ -27,7 +27,7 @@ class TilbakekrevingTimelinePanel extends Component<PureOwnProps, StateProps> {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps): void {
     const {
       valgtPeriode: vPeriode,
     } = nextProps;
@@ -36,14 +36,14 @@ class TilbakekrevingTimelinePanel extends Component<PureOwnProps, StateProps> {
     } = this.state;
 
     if (vPeriode !== valgtPeriode) {
-      this.setState((state: any) => ({
+      this.setState((state: StateProps) => ({
         ...state,
         valgtPeriode: vPeriode,
       }));
     }
   }
 
-  selectHandler = (eventProps: any) => {
+  selectHandler = (eventProps: any): void => {
     const { perioder, setPeriode } = this.props;
     const valgtPeriode = perioder.find((periode: TidslinjePeriode) => periode.id === eventProps.items[0]);
     if (valgtPeriode) {
