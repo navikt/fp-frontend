@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 
-import { BeregningsgrunnlagPeriodeProp, KodeverkMedNavn, RelevanteStatuserProp } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsgrunnlagPeriodeProp,
+  KodeverkMedNavn,
+  RelevanteStatuserProp,
+} from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
 import GrunnlagForAarsinntektPanelSN from '../selvstendigNaeringsdrivende/GrunnlagForAarsinntektPanelSN';
@@ -14,7 +18,7 @@ import MilitaerPanel from '../militær/MilitaerPanel';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
 import SammenlignsgrunnlagAOrdningen from '../fellesPaneler/SammenligningsgrunnlagAOrdningen';
-import GrunnlagForAarsinntektPanelAT2 from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
+import GrunnlagForAarsinntektPanelAT from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 
 import NaeringsopplysningsPanel from '../selvstendigNaeringsdrivende/NaeringsOpplysningsPanel';
 import beregningStyles from './beregningsgrunnlag.less';
@@ -34,9 +38,6 @@ const {
 // ------------------------------------------------------------------------------------------ //
 // Methods
 // ------------------------------------------------------------------------------------------ //
-
-const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder) => allePerioder.some(({ periodeAarsaker }) => periodeAarsaker
-    && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
 
 const finnAksjonspunktForATFL = (gjeldendeAksjonspunkter) => gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find(
   (ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
@@ -63,41 +64,23 @@ const createRelevantePaneler = (alleAndelerIForstePeriode,
   behandlingVersjon,
   alleKodeverk,
   sammenligningsGrunnlagInntekter,
-  skjeringstidspunktDato) => (
+  skjeringstidspunktDato,
+  arbeidsgiverOpplysningerPerId) => (
     <div className={beregningStyles.panelLeft}>
       { relevanteStatuser.isArbeidstaker
       && (
         <>
-          {!harPerioderMedAvsluttedeArbeidsforhold(allePerioder)
-          && (
-            <>
-              <GrunnlagForAarsinntektPanelAT2
-                alleAndeler={alleAndelerIForstePeriode}
-                aksjonspunkter={gjeldendeAksjonspunkter}
-                allePerioder={allePerioder}
-                readOnly={readOnly}
-                isKombinasjonsstatus={relevanteStatuser.isKombinasjonsstatus}
-                alleKodeverk={alleKodeverk}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
-              />
-            </>
-          )}
-          { harPerioderMedAvsluttedeArbeidsforhold(allePerioder)
-          && (
-            <>
-              <GrunnlagForAarsinntektPanelAT2
-                alleAndeler={alleAndelerIForstePeriode}
-                aksjonspunkter={gjeldendeAksjonspunkter}
-                allePerioder={allePerioder}
-                readOnly={readOnly}
-                isKombinasjonsstatus={relevanteStatuser.isKombinasjonsstatus}
-                alleKodeverk={alleKodeverk}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
-              />
-            </>
-          )}
+          <GrunnlagForAarsinntektPanelAT
+            alleAndeler={alleAndelerIForstePeriode}
+            aksjonspunkter={gjeldendeAksjonspunkter}
+            allePerioder={allePerioder}
+            readOnly={readOnly}
+            isKombinasjonsstatus={relevanteStatuser.isKombinasjonsstatus}
+            alleKodeverk={alleKodeverk}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          />
         </>
       )}
       { relevanteStatuser.isFrilanser
@@ -178,6 +161,7 @@ type OwnProps = {
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     sammenligningsGrunnlagInntekter?: any[];
     skjeringstidspunktDato?: string;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 // ------------------------------------------------------------------------------------------ //
@@ -200,6 +184,7 @@ const Beregningsgrunnlag: FunctionComponent<OwnProps> & StaticFunctions = ({
   alleKodeverk,
   sammenligningsGrunnlagInntekter,
   skjeringstidspunktDato,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   return (
@@ -215,6 +200,7 @@ const Beregningsgrunnlag: FunctionComponent<OwnProps> & StaticFunctions = ({
       alleKodeverk,
       sammenligningsGrunnlagInntekter,
       skjeringstidspunktDato,
+      arbeidsgiverOpplysningerPerId,
     )
   );
 };

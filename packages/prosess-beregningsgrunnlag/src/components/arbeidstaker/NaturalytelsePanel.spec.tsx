@@ -20,7 +20,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
           arbeidsgiverId: '123',
           arbeidsforholdId: '123',
         },
@@ -31,7 +30,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
           arbeidsgiverId: '456',
           arbeidsforholdId: '456',
         },
@@ -42,7 +40,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
           arbeidsgiverId: '789',
           arbeidsforholdId: '789',
         },
@@ -62,7 +59,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver1',
           arbeidsgiverId: '123',
           arbeidsforholdId: '123',
         },
@@ -74,7 +70,6 @@ const bgPerioder = [
         },
         bortfaltNaturalytelse: 10000,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver2',
           arbeidsgiverId: '456',
           arbeidsforholdId: '456',
         },
@@ -86,7 +81,6 @@ const bgPerioder = [
         },
         bortfaltNaturalytelse: 70000,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver3',
           arbeidsgiverId: '789',
           arbeidsforholdId: '789',
         },
@@ -106,7 +100,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver1',
           arbeidsgiverId: '123',
           arbeidsforholdId: '123',
         },
@@ -118,7 +111,6 @@ const bgPerioder = [
         },
         bortfaltNaturalytelse: 70000,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver2',
           arbeidsgiverId: '456',
           arbeidsforholdId: '456',
         },
@@ -130,7 +122,6 @@ const bgPerioder = [
         },
         bortfaltNaturalytelse: 10000,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver3',
           arbeidsgiverId: '789',
           arbeidsforholdId: '789',
         },
@@ -152,7 +143,6 @@ const bgPerioder = [
         },
         bortfaltNaturalytelse: 50000,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver1',
           arbeidsgiverId: '123',
           arbeidsforholdId: '123',
         },
@@ -163,7 +153,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver2',
           arbeidsgiverId: '456',
           arbeidsforholdId: '456',
         },
@@ -174,7 +163,6 @@ const bgPerioder = [
           kodeverk: 'test',
         },
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver3',
           arbeidsgiverId: '789',
           arbeidsforholdId: '789',
         },
@@ -183,10 +171,32 @@ const bgPerioder = [
   },
 ];
 
+const arbeidsgiverOpplysningerPerId = {
+  123: {
+    erPrivatPerson: false,
+    identifikator: '123',
+    referanse: '123',
+    navn: 'arbeidsgiver1',
+  },
+  456: {
+    erPrivatPerson: false,
+    identifikator: '456',
+    referanse: '456',
+    navn: 'arbeidsgiver2',
+  },
+  789: {
+    erPrivatPerson: false,
+    identifikator: '789',
+    referanse: '789',
+    navn: 'arbeidsgiver3',
+  },
+};
+
 describe('<NaturalytelsePanel>', () => {
   it('Skal teste for riktig antall rader', () => {
     const wrapper = shallowWithIntl(<NaturalytelsePanel
       allePerioder={bgPerioder}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
     expect(rows.length).to.equal(7);
@@ -195,6 +205,7 @@ describe('<NaturalytelsePanel>', () => {
   it('Skal teste at innholdet i radene er korrekt fordelt', () => {
     const wrapper = shallowWithIntl(<NaturalytelsePanel
       allePerioder={bgPerioder}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
     // Header rad
@@ -234,7 +245,7 @@ describe('<NaturalytelsePanel>', () => {
 
       },
     };
-    const selectorResult = createNaturalytelseTableData(bgPerioder);
+    const selectorResult = createNaturalytelseTableData(bgPerioder, arbeidsgiverOpplysningerPerId);
     expect(selectorResult).to.deep.equal(expectedReturnObject);
   });
 });

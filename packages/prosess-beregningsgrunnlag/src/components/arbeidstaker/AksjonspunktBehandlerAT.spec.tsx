@@ -6,15 +6,13 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import AksjonspunktBehandlerAT from './AksjonspunktBehandlerAT';
 
-const mockAndel = (arbeidsgiverNavn, overstyrtPrAar, beregnetPrAar, skalFastsetteGrunnlag) => ({
+const mockAndel = (arbeidsgiverId, overstyrtPrAar, beregnetPrAar, skalFastsetteGrunnlag) => ({
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSTAKER,
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverNavn,
-    arbeidsgiverId: '123',
-    arbeidsforholdId: '123',
+    arbeidsgiverId,
     eksternArbeidsforholdId: '345678',
     startdato: '2018-10-09',
   },
@@ -23,19 +21,36 @@ const mockAndel = (arbeidsgiverNavn, overstyrtPrAar, beregnetPrAar, skalFastsett
   skalFastsetteGrunnlag,
 } as BeregningsgrunnlagAndel);
 
+const arbeidsgiverOpplysningerPerId = {
+  123: {
+    erPrivatPerson: false,
+    identifikator: '123',
+    referanse: '123',
+    navn: 'Arbeidsgiver 1',
+  },
+  321: {
+    erPrivatPerson: false,
+    identifikator: '321',
+    referanse: '321',
+    navn: 'Arbeidsgiver 2',
+  },
+};
+
 describe('<AksjonspunktBehandlerAT>', () => {
   it('Skal teste tabellen får korrekte rader readonly=false', () => {
-    const andeler = [mockAndel('Arbeidsgiver 1', 100, 200000, true), mockAndel('Arbeidsgiver 2', 100, 200000, true)];
+    const andeler = [mockAndel('123', 100, 200000, true), mockAndel('321', 100, 200000, true)];
     const wrapper = shallowWithIntl(<AksjonspunktBehandlerAT
       readOnly={false}
       alleAndelerIForstePeriode={andeler}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
     expect(rows).to.have.length(andeler.length);
     andeler.forEach((andel, index) => {
       const arbeidsgiverNavn = rows.at(index).find('Normaltekst');
-      expect(arbeidsgiverNavn.at(0).childAt(0).text()).to.equal(`${andel.arbeidsforhold.arbeidsgiverNavn} (123)...5678`);
+      expect(arbeidsgiverNavn.at(0).childAt(0).text())
+        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId].navn} (${andel.arbeidsforhold.arbeidsgiverId})...5678`);
       const inputField = rows.first().find('InputField');
       expect(inputField).to.have.length(1);
       expect(inputField.props().readOnly).to.equal(false);
@@ -43,17 +58,20 @@ describe('<AksjonspunktBehandlerAT>', () => {
   });
 
   it('Skal teste tabellen får korrekte rader readonly=true', () => {
-    const andeler = [mockAndel('Arbeidsgiver 1', 100, 200000, true), mockAndel('Arbeidsgiver 2', 100, 200000, true)];
+    const andeler = [mockAndel('123', 100, 200000, true),
+      mockAndel('321', 100, 200000, true)];
     const wrapper = shallowWithIntl(<AksjonspunktBehandlerAT
       readOnly
       alleAndelerIForstePeriode={andeler}
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
     expect(rows).to.have.length(andeler.length);
     andeler.forEach((andel, index) => {
       const arbeidsgiverNavn = rows.at(index).find('Normaltekst');
-      expect(arbeidsgiverNavn.at(0).childAt(0).text()).to.equal(`${andel.arbeidsforhold.arbeidsgiverNavn} (123)...5678`);
+      expect(arbeidsgiverNavn.at(0).childAt(0).text())
+        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId].navn} (${andel.arbeidsforhold.arbeidsgiverId})...5678`);
       const inputField = rows.first().find('InputField');
       expect(inputField).to.have.length(1);
       expect(inputField.props().readOnly).to.equal(true);
@@ -62,7 +80,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
 
   it('Skal teste transformValues metode', () => {
     const andeler = [
-      mockAndel('Arbeidsgiver 1', 100, 200000, true),
+      mockAndel('123', 100, 200000, true),
     ];
     const relevanteStatuser = {
       isArbeidstaker: true,
@@ -89,7 +107,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
   });
   it('Skal teste transformValuesATFlhver for seg metode', () => {
     const andeler = [
-      mockAndel('Arbeidsgiver 1', 100, 200000, true),
+      mockAndel('123', 100, 200000, true),
     ];
     const values = {
       ATFLVurdering: 'Vurdering',

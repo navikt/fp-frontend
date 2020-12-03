@@ -6,18 +6,29 @@ import { Column, Row } from 'nav-frontend-grid';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
+  BeregningsgrunnlagArbeidsforhold,
+  BeregningsgrunnlagPeriodeProp,
+} from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
-const createArbeidsforholdKey = (arbeidsforhold) => `${arbeidsforhold.arbeidsgiverNavn}${arbeidsforhold.arbeidsgiverId}`;
+const createArbeidsforholdKey = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  if (arbeidsforholdInformasjon.erPrivatPerson) {
+    return `${arbeidsforholdInformasjon.navn}${arbeidsforholdInformasjon.fødselsdato}`;
+  }
+  return `${arbeidsforholdInformasjon.navn}${arbeidsforholdInformasjon.identifikator}`;
+};
 
-const findArbeidsforholdMedFrafaltYtelse = (periode) => periode.beregningsgrunnlagPrStatusOgAndel.filter((andel) => andel.bortfaltNaturalytelse !== undefined
+const findArbeidsforholdMedFrafaltYtelse = (periode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel[] => periode.beregningsgrunnlagPrStatusOgAndel
+  .filter((andel) => andel.bortfaltNaturalytelse !== undefined
     && andel.bortfaltNaturalytelse !== null
     && andel.bortfaltNaturalytelse !== 0);
 
-const createPeriodeTekst = (periode) => {
+const createPeriodeTekst = (periode: BeregningsgrunnlagPeriodeProp): string => {
   if (!periode) return '';
   if (periode.beregningsgrunnlagPeriodeFom && periode.beregningsgrunnlagPeriodeTom) {
     return `${dateFormat(periode.beregningsgrunnlagPeriodeFom)} - ${dateFormat(periode.beregningsgrunnlagPeriodeTom)}`;
@@ -25,10 +36,13 @@ const createPeriodeTekst = (periode) => {
   return dateFormat(periode.beregningsgrunnlagPeriodeFom);
 };
 
-const createOrEditMapValue = (andel, mapValue, antallPerioderMedFrafaltYtelse, periodeTekst) => {
-  let newMapValue = [];
+const createOrEditMapValue = (andel, mapValue, periodeTekst, arbeidsgiverOpplysningerPerId) => {
+  let newMapValue;
+  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+  const agNavn = arbeidsforholdInformasjon.navn;
+
   if (mapValue === undefined) {
-    newMapValue = [andel.arbeidsforhold.arbeidsgiverNavn];
+    newMapValue = [agNavn];
   } else {
     newMapValue = mapValue.slice();
   }
@@ -46,24 +60,20 @@ const createOrEditMapValue = (andel, mapValue, antallPerioderMedFrafaltYtelse, p
 //  arbeidsgiver3789: ['arbeidsgiver3', { periodeTekst: '01.07.2018', aar: 3231, maaned: 269 }],
 // }
 
-const findAllePerioderMedBortfaltNaturalytelse = (allePerioder) => allePerioder
+const findAllePerioderMedBortfaltNaturalytelse = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagPeriodeProp[] => allePerioder
   .filter((periode) => periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.NATURALYTELSE_BORTFALT));
 
-const harBortfalteNaturalytelser = (allePerioder) => {
+const harBortfalteNaturalytelser = (allePerioder: BeregningsgrunnlagPeriodeProp[]): boolean => {
   if (!allePerioder || allePerioder.length < 1) {
     return false;
   }
-
   const naturalYtelseAndel = allePerioder.filter((perioder) => perioder.beregningsgrunnlagPrStatusOgAndel
     .some((andel) => andel.bortfaltNaturalytelse !== undefined
     && andel.bortfaltNaturalytelse !== null
     && andel.bortfaltNaturalytelse !== 0));
-  if (!naturalYtelseAndel || naturalYtelseAndel.length < 1) {
-    return false;
-  }
-  return true;
+  return !(!naturalYtelseAndel || naturalYtelseAndel.length < 1);
 };
-export const createNaturalytelseTableData = (allePerioder) => {
+export const createNaturalytelseTableData = (allePerioder: BeregningsgrunnlagPeriodeProp[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   if (!allePerioder || allePerioder.length < 1) {
     return undefined;
   }
@@ -76,16 +86,14 @@ export const createNaturalytelseTableData = (allePerioder) => {
     relevantePerioder = allePerioder;
   }
   const tempMap = {};
-  let antallPerioderMedFrafaltYtelse = 0;
   relevantePerioder.forEach((periode) => {
     const andelerMedFrafaltYtelse = findArbeidsforholdMedFrafaltYtelse(periode);
     andelerMedFrafaltYtelse.forEach((andel) => {
-      const mapKey = createArbeidsforholdKey(andel.arbeidsforhold);
+      const mapKey = createArbeidsforholdKey(andel.arbeidsforhold, arbeidsgiverOpplysningerPerId);
       const mapValue = tempMap[mapKey];
       const periodeText = createPeriodeTekst(periode);
-      tempMap[mapKey] = createOrEditMapValue(andel, mapValue, antallPerioderMedFrafaltYtelse, periodeText);
+      tempMap[mapKey] = createOrEditMapValue(andel, mapValue, periodeText, arbeidsgiverOpplysningerPerId);
     });
-    antallPerioderMedFrafaltYtelse += 1;
   });
   const arbeidsforholdPeriodeMap = tempMap;
   return {
@@ -137,6 +145,7 @@ const createNaturalYtelseRows = (tableData) => {
 
 type OwnProps = {
     allePerioder: BeregningsgrunnlagPeriodeProp[];
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 /**
@@ -145,8 +154,8 @@ type OwnProps = {
  * Presentasjonskomponent. Viser en tabell med oversikt over hvilke arbeidsgivere som har hatt bortfall
  * av naturalytelse og for hvilke perioder det gjelder.
  */
-const NaturalytelsePanel: FunctionComponent<OwnProps> = ({ allePerioder }) => {
-  const tableData = createNaturalytelseTableData(allePerioder);
+const NaturalytelsePanel: FunctionComponent<OwnProps> = ({ allePerioder, arbeidsgiverOpplysningerPerId }) => {
+  const tableData = createNaturalytelseTableData(allePerioder, arbeidsgiverOpplysningerPerId);
   if (!tableData) {
     return null;
   }
