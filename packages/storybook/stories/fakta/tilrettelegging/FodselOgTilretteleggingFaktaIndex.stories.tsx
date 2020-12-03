@@ -41,6 +41,10 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
       },
     ],
     arbeidsgiverReferanse: '3',
+    uttakArbeidType: {
+      kode: 'FRILANS',
+      kodeverk: 'UTTAK_ARBEID_TYPE',
+    },
     internArbeidsforholdReferanse: 'c5534-6e55-4112-9645-fe52ee4950c2',
     eksternArbeidsforholdReferanse: 'T555864629R5021761S1103L5555',
     skalBrukes: true,
@@ -55,6 +59,10 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
     }],
     velferdspermisjoner: [],
     arbeidsgiverReferanse: '3',
+    uttakArbeidType: {
+      kode: 'FRILANS',
+      kodeverk: 'UTTAK_ARBEID_TYPE',
+    },
     internArbeidsforholdReferanse: '5gb912b7-4187-45a0-8c44-02322887d0ad',
     eksternArbeidsforholdReferanse: 'H555864629R5021761S1100L5555',
     skalBrukes: true,
@@ -86,6 +94,10 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       },
     }],
     arbeidsgiverReferanse: '2',
+    uttakArbeidType: {
+      kode: 'ORDINÆRT_ARBEID',
+      kodeverk: 'UTTAK_ARBEID_TYPE',
+    },
     skalBrukes: true,
     velferdspermisjoner: [],
   }] as ArbeidsforholdFodselOgTilrettelegging[],
