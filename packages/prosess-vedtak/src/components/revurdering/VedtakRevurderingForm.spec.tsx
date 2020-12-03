@@ -95,6 +95,7 @@ describe('<VedtakRevurderingForm>', () => {
       behandlingVersjon={2}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
@@ -144,6 +145,7 @@ describe('<VedtakRevurderingForm>', () => {
       behandlingVersjon={2}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
@@ -171,6 +173,7 @@ describe('<VedtakRevurderingForm>', () => {
       behandlingVersjon={2}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
+      onSubmit={() => undefined}
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);

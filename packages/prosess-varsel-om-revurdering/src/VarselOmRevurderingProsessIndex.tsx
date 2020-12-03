@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
-import VarselOmRevurderingForm from './components/VarselOmRevurderingForm';
+import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -22,7 +22,7 @@ interface OwnProps {
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling: FamilieHendelse;
   aksjonspunkter: Aksjonspunkt[];
-  previewCallback: (...args: any[]) => any;
+  previewCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
 const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({

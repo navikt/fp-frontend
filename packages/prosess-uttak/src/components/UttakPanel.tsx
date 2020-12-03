@@ -74,8 +74,8 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
 };
 
 interface FormValues {
-  uttaksresultatActivity: UttaksresultatActivity[];
-  stonadskonto: UttakStonadskontoer;
+  uttaksresultatActivity?: UttaksresultatActivity[];
+  stonadskonto?: UttakStonadskontoer;
   manuellOverstyring?: boolean;
 }
 

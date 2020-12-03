@@ -109,19 +109,19 @@ const mapAarsak = (
 };
 
 export type FormValues = {
-  UttakFieldArray: AktivitetFieldArray[];
+  UttakFieldArray?: AktivitetFieldArray[];
   begrunnelse?: string;
-  flerbarnsdager: boolean;
-  samtidigUttak: boolean;
+  flerbarnsdager?: boolean;
+  samtidigUttak?: boolean;
   samtidigUttaksprosent?: string;
   avslagAarsak?: string;
   innvilgelseAarsak?: string;
-  graderingInnvilget: boolean;
-  graderingAvslagAarsak: string;
-  oppholdArsak: string;
-  utsettelseType: Kodeverk;
-  erOppfylt: boolean;
-  selectedItem: PeriodeMedClassName;
+  graderingInnvilget?: boolean;
+  graderingAvslagAarsak?: string;
+  oppholdArsak?: string;
+  utsettelseType?: Kodeverk;
+  erOppfylt?: boolean;
+  selectedItem?: PeriodeMedClassName;
 }
 
 interface PureOwnProps {

@@ -12,7 +12,7 @@ import { isAvslag, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResul
 
 import styles from './vedtakFritekstbrevModal.less';
 
-const isFritekstbrevRequired = (readOnly: boolean, behandlingsresultat?: Behandlingsresultat) => {
+const isFritekstbrevRequired = (readOnly: boolean, behandlingsresultat?: Behandlingsresultat): boolean => {
   if (readOnly) {
     return false;
   }

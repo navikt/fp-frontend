@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -19,7 +19,7 @@ export const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat: Behandlingsresultat,
   getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
-) => {
+): ReactElement | string => {
   const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
