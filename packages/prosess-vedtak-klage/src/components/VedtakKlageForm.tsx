@@ -20,7 +20,7 @@ import VedtakKlageKaSubmitPanel from './VedtakKlageKaSubmitPanel';
 
 export const VEDTAK_KLAGE_FORM_NAME = 'VEDTAK_KLAGE_FORM';
 
-type ForhandsvisData = {
+export type ForhandsvisData = {
   gjelderVedtak: boolean;
 }
 
@@ -54,7 +54,6 @@ interface MappedOwnProps {
   klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
   avvistArsaker?: KodeverkMedNavn[];
   omgjortAarsak?: string;
-  fritekstTilBrev?: string;
   onSubmit: (formValues: FormValues) => any;
   initialValues: FormValues;
 }
@@ -71,7 +70,6 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
   previewVedtakCallback,
   isAvvist,
   isOmgjort,
-  fritekstTilBrev,
   isOpphevOgHjemsend,
   avvistArsaker,
   behandlingsResultatTekst,
@@ -116,7 +114,6 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
         )}
         {klageVurderingResultat.klageVurdertAv === 'NK' && (
         <VedtakKlageKaSubmitPanel
-          begrunnelse={fritekstTilBrev}
           klageResultat={klageVurderingResultat}
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           formProps={formProps}
@@ -126,8 +123,6 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
         )}
         {klageVurderingResultat.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
-          begrunnelse={fritekstTilBrev}
-          klageResultat={klageVurderingResultat}
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           formProps={formProps}
           readOnly={readOnly}

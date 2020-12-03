@@ -26,9 +26,7 @@ const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean): strin
 
 export type BrevData = {
   fritekst: string;
-  mottaker: string;
   dokumentMal?: string;
-  klageVurdertAv: string;
   erOpphevetKlage: boolean;
 }
 
@@ -36,9 +34,7 @@ const getBrevData = (klageVurdering: Kodeverk, aksjonspunktCode: string, friteks
   const klageVurdertAv = aksjonspunktCode === aksjonspunktCodes.BEHANDLE_KLAGE_NK ? 'NK' : 'NFP';
   const data = {
     fritekst: fritekstTilBrev || '',
-    mottaker: '',
     dokumentMal: getBrevKode(klageVurdering, klageVurdertAv === 'NK'),
-    klageVurdertAv,
     erOpphevetKlage: klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
   };
   return data;

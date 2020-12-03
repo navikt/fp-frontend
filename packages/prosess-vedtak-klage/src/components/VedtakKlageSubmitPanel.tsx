@@ -5,53 +5,14 @@ import { InjectedFormProps } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { KlageVurdering, Kodeverk } from '@fpsak-frontend/types';
-import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
-
 import styles from './vedtakKlageSubmitPanel.less';
-
-const getBrevKode = (klageVurdering: Kodeverk, klageVurdertAvKa: boolean): string | null => {
-  switch (klageVurdering.kode) {
-    case klageVurderingType.STADFESTE_YTELSESVEDTAK:
-      return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
-    case klageVurderingType.OPPHEVE_YTELSESVEDTAK:
-      return dokumentMalType.KLAGE_YTELSESVEDTAK_OPPHEVET;
-    case klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE:
-      return dokumentMalType.KLAGE_YTELSESVEDTAK_OPPHEVET;
-    case klageVurderingType.MEDHOLD_I_KLAGE:
-      return dokumentMalType.KLAGE_OMGJORING;
-    case klageVurderingType.AVVIS_KLAGE:
-      return dokumentMalType.KLAGE_AVVIST;
-    default:
-      return null;
-  }
-};
-
-export type ForhandsvisData = {
-  fritekst: string;
-  mottaker: string;
-  brevmalkode?: string;
-  klageVurdertAv: string;
-  erOpphevet: boolean;
-}
 
 const getPreviewCallback = (
   formProps: InjectedFormProps,
-  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>,
-  begrunnelse?: string,
-  klageResultat?: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'],
+  previewVedtakCallback: () => Promise<any>,
 ) => (e: React.MouseEvent | React.KeyboardEvent): void => {
-  const klageVurdertAvNK = klageResultat.klageVurdertAv === 'NFP';
-  const data = {
-    fritekst: begrunnelse || '',
-    mottaker: '',
-    brevmalkode: getBrevKode(klageResultat.klageVurdering, klageVurdertAvNK),
-    klageVurdertAv: klageResultat.klageVurdertAv,
-    erOpphevet: klageResultat.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
-  };
   if (formProps.valid || formProps.pristine) {
-    previewVedtakCallback(data);
+    previewVedtakCallback();
   } else {
     // @ts-ignore Fiks
     formProps.submit();
@@ -60,10 +21,8 @@ const getPreviewCallback = (
 };
 
 interface OwnProps {
-  previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
+  previewVedtakCallback: () => Promise<any>;
   behandlingPaaVent: boolean;
-  begrunnelse?: string;
-  klageResultat?: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
   readOnly: boolean;
   formProps: InjectedFormProps;
 }
@@ -72,12 +31,10 @@ export const VedtakKlageSubmitPanelImpl: FunctionComponent<OwnProps & WrappedCom
   intl,
   behandlingPaaVent,
   previewVedtakCallback,
-  begrunnelse,
-  klageResultat,
   formProps,
   readOnly,
 }) => {
-  const previewBrev = getPreviewCallback(formProps, previewVedtakCallback, begrunnelse, klageResultat);
+  const previewBrev = getPreviewCallback(formProps, previewVedtakCallback);
 
   return (
     <Row>
