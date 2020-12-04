@@ -37,6 +37,11 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
       medlemskapFom="10.10.2010"
       aksjonspunkter={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      validate={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       status=""
       isSolvable
     />);

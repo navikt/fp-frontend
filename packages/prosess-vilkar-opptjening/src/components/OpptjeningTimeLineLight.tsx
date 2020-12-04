@@ -51,7 +51,7 @@ const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): It
   return items;
 };
 
-const classNameGenerator = (klasseKode: string) => {
+const classNameGenerator = (klasseKode: string): string => {
   if (klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST || klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST) {
     return 'avvistPeriode';
   }
@@ -72,7 +72,7 @@ const createItems = (opptjeningPeriods: FastsattOpptjeningAktivitet[], opptjenin
   return items.concat(standardItems(opptjeningFomDate, opptjeningTomDate));
 };
 
-const options = (opptjeningFomDate: string, opptjeningTomDate: string) => ({
+const options = (opptjeningFomDate: string, opptjeningTomDate: string): any => ({
   end: moment(opptjeningTomDate).endOf('month'),
   locale: moment.locale('nb'),
   margin: { item: 10 },
@@ -120,14 +120,14 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount(): void {
     const { opptjeningPeriods, opptjeningFomDate, opptjeningTomDate } = this.props;
     const unsortedItems = opptjeningPeriods.sort((a, b) => moment(a.fom).diff(moment(b.fom)));
     const items = createItems(unsortedItems, opptjeningFomDate, opptjeningTomDate);
     this.setState({ items });
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     // TODO Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
@@ -136,7 +136,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     }
   }
 
-  selectHandler(eventProps: { items: number[] }) {
+  selectHandler(eventProps: { items: number[] }): void {
     const { items } = this.state;
     const selectedItem = items.find((item) => item.id === eventProps.items[0]);
     if (selectedItem) {
@@ -146,7 +146,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     }
   }
 
-  openPeriodInfo(event: any) {
+  openPeriodInfo(event: React.MouseEvent): void {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     const currentSelectedItem = selectedPeriod;
@@ -162,7 +162,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     }
   }
 
-  selectNextPeriod(event: any) {
+  selectNextPeriod(event: React.MouseEvent): void {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) + 1;
@@ -174,7 +174,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     }
   }
 
-  selectPrevPeriod(event: any) {
+  selectPrevPeriod(event: React.MouseEvent): void {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) - 1;

@@ -9,6 +9,7 @@ type VedtaksbrevAvsnitt = {
     fritekstTillatt: boolean;
     overskrift?: string;
     underavsnittstype?: string;
+    fritekstPåkrevet?: boolean;
   }[];
 };
 
