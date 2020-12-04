@@ -77,16 +77,16 @@ const arbeidsgiverOpplysninger = {
   },
 };
 
-const lagAG = (arbeidsgiverNavn, arbeidsgiverId, erPrivatPerson = false) => {
-  arbeidsgiverOpplysninger[arbeidsgiverId] = {
-    identifikator: arbeidsgiverId,
+const lagAG = (arbeidsgiverNavn, arbeidsgiverIdent, erPrivatPerson = false) => {
+  arbeidsgiverOpplysninger[arbeidsgiverIdent] = {
+    identifikator: arbeidsgiverIdent,
     navn: arbeidsgiverNavn,
     erPrivatPerson,
   };
 };
 
-const lagArbeidsforhold = (arbeidsgiverId, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, navn, prosent) => ({
-  arbeidsgiverId,
+const lagArbeidsforhold = (arbeidsgiverIdent, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, navn, prosent) => ({
+  arbeidsgiverIdent,
   startdato: '2018-10-09',
   opphoersdato,
   arbeidsforholdId,
@@ -135,7 +135,7 @@ const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegr
     kodeverk: 'INNTEKTSKATEGORI',
   },
   arbeidsforhold: {
-    arbeidsgiverId: '910909088',
+    arbeidsgiverIdent: '910909088',
     startdato: '2018-10-09',
     opphoersdato: null,
     arbeidsforholdId: '2a3c0f5c-3d70-447a-b0d7-cd242d5155bb',
@@ -646,9 +646,9 @@ export const naturalYtelse = () => {
   lagAG('BEDRIFT AS 2', '9109090882', false);
   lagAG('BEDRIFT AS 3', '9109090883', false);
 
-  andel1.arbeidsforhold.arbeidsgiverId = '9109090881';
-  andel2.arbeidsforhold.arbeidsgiverId = '9109090882';
-  andel3.arbeidsforhold.arbeidsgiverId = '9109090883';
+  andel1.arbeidsforhold.arbeidsgiverIdent = '9109090881';
+  andel2.arbeidsforhold.arbeidsgiverIdent = '9109090882';
+  andel3.arbeidsforhold.arbeidsgiverIdent = '9109090883';
   andel2.bortfaltNaturalytelse = 2231;
   andel3.bortfaltNaturalytelse = 3231;
   andel1.dekningsgrad = 100;
@@ -2098,12 +2098,11 @@ export const YtelseFraNavSide26 = () => {
   perioder[0].bruttoPrAar = 395232;
   const bg = lagBG(perioder, statuser, null);
   bg.dekningsgrad = 80;
-  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      aksjonspunkter={object('aksjonspunkter', [])}
       submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
