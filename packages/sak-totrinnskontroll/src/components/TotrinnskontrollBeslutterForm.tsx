@@ -7,7 +7,7 @@ import { Location } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
-
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
 import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
@@ -79,7 +79,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
   ...formProps
 }) => {
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
-
+  const erAnke = behandling && behandling.type.kode === BehandlingType.ANKE;
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
   ], behandling.behandlingsresultat), [behandling.behandlingsresultat]);
@@ -129,7 +129,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
         >
           <FormattedMessage id="ToTrinnsForm.SendTilbake" />
         </Hovedknapp>
-        {!erKlage && !erBehandlingEtterKlage && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
+        {!erKlage && !erBehandlingEtterKlage && !erAnke && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
           <>
             <VerticalSpacer eightPx />
             <button
