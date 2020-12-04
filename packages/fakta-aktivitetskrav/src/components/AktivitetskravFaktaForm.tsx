@@ -40,7 +40,7 @@ const AktivitetskravFaktaForm: FunctionComponent<OwnProps & WrappedComponentProp
       {uttakKontrollerAktivitetskrav && uttakKontrollerAktivitetskrav.map((krav) => (
         <TableRow key={krav.fom + krav.tom}>
           <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-          <TableColumn>{krav.avklaring}</TableColumn>
+          <TableColumn>{krav.avklaring ? krav.avklaring.kode : ''}</TableColumn>
           <TableColumn>{krav.begrunnelse}</TableColumn>
         </TableRow>
       ))}
