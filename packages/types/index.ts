@@ -70,3 +70,4 @@ export { default as ArbeidsgiverOpplysningerPerId, ArbeidsgiverOpplysningerWrapp
 export { default as BeregningsresultatTilbakekreving, BeregningResultatPeriode } from './src/beregningsresultatTilbakekrevingTsType';
 export { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from './src/feilutbetalingPerioderTsType';
 export { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';
+export { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
