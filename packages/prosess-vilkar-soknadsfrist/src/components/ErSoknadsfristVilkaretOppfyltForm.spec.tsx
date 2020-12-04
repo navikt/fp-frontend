@@ -37,8 +37,12 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       aksjonspunkter={[]}
       status=""
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       alleKodeverk={{}}
       hasAksjonspunkt
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const dateLabel = wrapper.find('DateLabel');
@@ -67,8 +71,12 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       aksjonspunkter={[]}
       status=""
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       alleKodeverk={{}}
       hasAksjonspunkt
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const dateLabel = wrapper.find('DateLabel');
@@ -98,8 +106,12 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       aksjonspunkter={[]}
       status=""
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       alleKodeverk={{}}
       hasAksjonspunkt
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const dateLabel = wrapper.find('span');
@@ -127,8 +139,12 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       aksjonspunkter={[]}
       status=""
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       alleKodeverk={{}}
       hasAksjonspunkt
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const dateLabel = wrapper.find('span');
@@ -156,8 +172,12 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       aksjonspunkter={[]}
       status=""
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       alleKodeverk={{}}
       hasAksjonspunkt
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const radioButtons = wrapper.find('RadioOption');
@@ -187,8 +207,12 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       aksjonspunkter={[]}
       status=""
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       alleKodeverk={{}}
       hasAksjonspunkt
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const confirm = wrapper.find(ProsessStegBegrunnelseTextField);

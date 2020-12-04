@@ -27,8 +27,12 @@ describe('<SvangerskapVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
       alleKodeverk={{}}
       originalErVilkarOk
+      initialValues={{
+        erVilkarOk: true,
+      }}
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

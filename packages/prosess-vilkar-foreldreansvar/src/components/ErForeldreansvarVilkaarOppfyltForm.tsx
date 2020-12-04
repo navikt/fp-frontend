@@ -15,6 +15,13 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { InjectedFormProps } from 'redux-form';
 import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
 
+type FormValues = {
+  erVilkarOk: boolean;
+  avslagCode?: string;
+  avslagDato?: string;
+  begrunnelse?: string;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -33,6 +40,8 @@ interface MappedOwnProps {
   originalErVilkarOk: boolean;
   erVilkarOk?: boolean;
   avslagsarsaker: KodeverkMedNavn[];
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -74,29 +83,22 @@ export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps 
   </ProsessPanelTemplate>
 );
 
-interface FormValues {
-  erVilkarOk: boolean;
-  avslagCode: string;
-  avslagDato: string;
-  begrunnelse: string;
-}
-
 const validate = ({
   erVilkarOk,
   avslagCode,
-}: FormValues) => VilkarResultPicker.validate(erVilkarOk, avslagCode);
+}: FormValues): any => VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
 export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.status],
-  (behandlingsresultat, aksjonspunkter, status) => ({
+  (behandlingsresultat, aksjonspunkter, status): FormValues => ({
     ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => aksjonspunkter.map((ap) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => aksjonspunkter.map((ap) => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   ...{ kode: ap.definisjon.kode },
@@ -118,7 +120,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const { behandlingId, behandlingVersjon } = ownProps;
     return {
       initialValues: buildInitialValues(ownProps),

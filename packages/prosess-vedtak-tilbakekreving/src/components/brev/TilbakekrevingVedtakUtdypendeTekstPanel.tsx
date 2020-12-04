@@ -18,15 +18,21 @@ const maxLength4000 = maxLength(4000);
 const valideringsregler = [minLength3, hasValidText];
 const valideringsreglerPakrevet = [required, minLength3, hasValidText];
 
-interface OwnProps {
+interface PureOwnProps {
   type: string;
-  isEmpty: boolean;
   readOnly: boolean;
   fritekstPakrevet: boolean;
   maximumLength?: number;
+  formName: string;
+  behandlingId: number;
+  behandlingVersjon: number;
 }
 
-export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+interface MappedOwnProps {
+  isEmpty: boolean;
+}
+
+export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
   intl,
   isEmpty,
   type,
@@ -60,24 +66,23 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<OwnProps
           </div>
         </>
       )}
-      {!isTextfieldHidden
-        && (
-          <>
-            <VerticalSpacer eightPx />
-            <TextAreaField
-              name={type}
-              label={intl.formatMessage({ id: 'TilbakekrevingVedtakUtdypendeTekstPanel.UtdypendeTekst' })}
-              validate={valideringsRegler}
-              maxLength={maximumLength || 4000}
-              readOnly={readOnly}
-            />
-          </>
-        )}
+      {!isTextfieldHidden && (
+        <>
+          <VerticalSpacer eightPx />
+          <TextAreaField
+            name={type}
+            label={intl.formatMessage({ id: 'TilbakekrevingVedtakUtdypendeTekstPanel.UtdypendeTekst' })}
+            validate={valideringsRegler}
+            maxLength={maximumLength || 4000}
+            readOnly={readOnly}
+          />
+        </>
+      )}
     </>
   );
 };
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   isEmpty: behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, ownProps.type) === undefined,
 });
 

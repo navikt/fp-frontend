@@ -27,8 +27,20 @@ import keyUtgraetImage from '@fpsak-frontend/assets/images/key-1-rotert-utgraet.
 
 import styles from './vilkarresultatMedOverstyringForm.less';
 
-const isOverridden = (aksjonspunktCodes, aksjonspunktCode) => aksjonspunktCodes.some((code) => code === aksjonspunktCode);
-const isHidden = (kanOverstyre, aksjonspunktCodes, aksjonspunktCode) => !isOverridden(aksjonspunktCodes, aksjonspunktCode) && !kanOverstyre;
+const isOverridden = (aksjonspunktCodes: string[], aksjonspunktCode: string): boolean => aksjonspunktCodes.some((code) => code === aksjonspunktCode);
+const isHidden = (
+  kanOverstyre: boolean,
+  aksjonspunktCodes: string[],
+  aksjonspunktCode: string,
+): boolean => !isOverridden(aksjonspunktCodes, aksjonspunktCode) && !kanOverstyre;
+
+type FormValues = {
+  erVilkarOk: boolean;
+  avslagCode?: string;
+  avslagDato?: string;
+  begrunnelse?: string;
+  isOverstyrt?: boolean;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -52,20 +64,26 @@ interface PureOwnProps {
   erMedlemskapsPanel: boolean;
 }
 
+type TextValues = {
+  id: string;
+  values: {
+    fom: string;
+    b: (chunks: any) => any;
+  };
+}
+
 interface MappedOwnProps {
   erVilkarOk?: boolean;
   aksjonspunktCodes: string[];
-  customVilkarIkkeOppfyltText?: {
-    id: string;
-    values?: any;
-  };
-  customVilkarOppfyltText?: {
-    id: string;
-    values?: any;
-  };
+  customVilkarIkkeOppfyltText?: TextValues;
+  customVilkarOppfyltText?: TextValues;
   isSolvable: boolean;
   hasAksjonspunkt: boolean;
   originalErVilkarOk?: boolean;
+  initialValues: FormValues;
+  onSubmit: (formValues: FormValues) => any;
+  validate: (formValues: FormValues) => any;
+  form: string;
 }
 
 /**
@@ -104,9 +122,9 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
       <FlexContainer>
         <FlexRow>
           {(!erOverstyrt && originalErVilkarOk !== undefined) && (
-          <FlexColumn>
-            <Image className={styles.status} src={originalErVilkarOk ? innvilgetImage : avslattImage} />
-          </FlexColumn>
+            <FlexColumn>
+              <Image className={styles.status} src={originalErVilkarOk ? innvilgetImage : avslattImage} />
+            </FlexColumn>
           )}
           <FlexColumn>
             <Undertittel><FormattedMessage id={panelTittelKode} /></Undertittel>
@@ -140,18 +158,18 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
           </FlexColumn>
           {originalErVilkarOk !== undefined && !isHidden(kanOverstyreAccess.isEnabled, aksjonspunktCodes, overstyringApKode) && (
             <>
-                {(!erOverstyrt && !overrideReadOnly) && (
-                  <FlexColumn>
-                    <VerticalSpacer eightPx />
-                    <Image className={styles.key} src={keyImage} onClick={togglePa} />
-                  </FlexColumn>
-                )}
-                {(erOverstyrt || overrideReadOnly) && (
-                  <FlexColumn>
-                    <VerticalSpacer eightPx />
-                    <Image className={styles.keyWithoutCursor} src={keyUtgraetImage} />
-                  </FlexColumn>
-                )}
+              {(!erOverstyrt && !overrideReadOnly) && (
+                <FlexColumn>
+                  <VerticalSpacer eightPx />
+                  <Image className={styles.key} src={keyImage} onClick={togglePa} />
+                </FlexColumn>
+              )}
+              {(erOverstyrt || overrideReadOnly) && (
+                <FlexColumn>
+                  <VerticalSpacer eightPx />
+                  <Image className={styles.keyWithoutCursor} src={keyUtgraetImage} />
+                </FlexColumn>
+              )}
             </>
           )}
         </FlexRow>
@@ -187,7 +205,7 @@ const buildInitialValues = createSelector(
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.status,
     (ownProps: PureOwnProps) => ownProps.overstyringApKode],
-  (behandlingsresultat, aksjonspunkter, status, overstyringApKode) => {
+  (behandlingsresultat, aksjonspunkter, status, overstyringApKode): FormValues => {
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === overstyringApKode);
     return {
       isOverstyrt: aksjonspunkt !== undefined,
@@ -197,7 +215,7 @@ const buildInitialValues = createSelector(
   },
 );
 
-const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, erOppfylt: boolean) => {
+const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, erOppfylt: boolean): TextValues => {
   const isBehandlingRevurderingFortsattMedlemskap = behandlingType.kode === BehandlingType.REVURDERING && !!medlemskapFom;
   if (isBehandlingRevurderingFortsattMedlemskap) {
     return {
@@ -210,27 +228,20 @@ const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, er
 
 const getCustomVilkarTextForOppfylt = createSelector(
   [(ownProps: PureOwnProps) => ownProps.medlemskapFom, (ownProps: PureOwnProps) => ownProps.behandlingType],
-  (medlemskapFom, behandlingType) => getCustomVilkarText(medlemskapFom, behandlingType, true),
+  (medlemskapFom, behandlingType): TextValues => getCustomVilkarText(medlemskapFom, behandlingType, true),
 );
 const getCustomVilkarTextForIkkeOppfylt = createSelector(
   [(ownProps: PureOwnProps) => ownProps.medlemskapFom, (ownProps: PureOwnProps) => ownProps.behandlingType],
-  (medlemskapFom, behandlingType) => getCustomVilkarText(medlemskapFom, behandlingType, false),
+  (medlemskapFom, behandlingType): TextValues => getCustomVilkarText(medlemskapFom, behandlingType, false),
 );
 
-interface FormValues {
-  erVilkarOk: boolean;
-  avslagCode: string;
-  avslagDato: string;
-  begrunnelse: string;
-}
-
-const transformValues = (values: FormValues, overstyringApKode: string) => ({
+const transformValues = (values: FormValues, overstyringApKode: string): any => ({
   kode: overstyringApKode,
   begrunnelse: values.begrunnelse,
   ...VilkarResultPicker.transformValues(values),
 });
 
-const validate = (values: FormValues) => VilkarResultPicker.validate(values.erVilkarOk, values.avslagCode);
+const validate = (values: FormValues): any => VilkarResultPicker.validate(values.erVilkarOk, values.avslagCode);
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.overstyringApKode],
@@ -242,7 +253,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const aksjonspunktCodes = initialOwnProps.aksjonspunkter.map((a) => a.definisjon.kode);
   const formName = `VilkarresultatForm_${overstyringApKode}`;
 
-  return (state, ownProps: PureOwnProps) => {
+  return (state, ownProps: PureOwnProps): MappedOwnProps => {
     const {
       behandlingId, behandlingVersjon, aksjonspunkter, erOverstyrt,
     } = ownProps;

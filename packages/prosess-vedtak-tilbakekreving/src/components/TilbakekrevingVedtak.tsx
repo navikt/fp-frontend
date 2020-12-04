@@ -8,7 +8,7 @@ import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { BeregningResultatPeriode, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
-import TilbakekrevingVedtakForm from './TilbakekrevingVedtakForm';
+import TilbakekrevingVedtakForm, { ForhandsvisData } from './TilbakekrevingVedtakForm';
 import VedtaksbrevAvsnitt from '../types/vedtaksbrevAvsnittTsType';
 
 interface OwnProps {
@@ -21,7 +21,7 @@ interface OwnProps {
   behandlingUuid: string;
   behandlingVersjon: number;
   avsnittsliste: VedtaksbrevAvsnitt[];
-  fetchPreviewVedtaksbrev: (data: any) => Promise<any>;
+  fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
   aksjonspunktKodeForeslaVedtak: string;
   erRevurderingTilbakekrevingKlage?: boolean;
   erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
