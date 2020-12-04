@@ -20,19 +20,15 @@ import {
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
 import underavsnittType from '../kodeverk/avsnittType';
-import TilbakekrevingEditerVedtaksbrevPanel from './brev/TilbakekrevingEditerVedtaksbrevPanel';
+import TilbakekrevingEditerVedtaksbrevPanel, { FormValues } from './brev/TilbakekrevingEditerVedtaksbrevPanel';
 import VedtaksbrevAvsnitt from '../types/vedtaksbrevAvsnittTsType';
 
 import styles from './tilbakekrevingVedtakForm.less';
 
 const formName = 'TilbakekrevingVedtakForm';
 
-type FormValues = {
-  test: '';
-}
-
 type VedtakData = {
-  oppsummeringstekst: string;
+  oppsummeringstekst: Record<string, string> | string;
   perioderMedTekst: {
     fom: string;
     tom: string;

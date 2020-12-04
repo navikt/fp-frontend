@@ -12,7 +12,7 @@ import VedtaksbrevAvsnitt from '../../types/vedtaksbrevAvsnittTsType';
 
 import styles from './tilbakekrevingEditerVedtaksbrevPanel.less';
 
-type FormValues = Record<string, Record<string, string>>
+export type FormValues = Record<string, Record<string, string> | string>
 
 interface OwnProps {
   vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];

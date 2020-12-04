@@ -16,6 +16,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       readOnly={false}
       fetchPreviewVedtaksbrev={sinon.spy()}
       formVerdier={{}}
@@ -30,6 +31,8 @@ describe('<TilbakekrevingVedtakForm>', () => {
       behandlingUuid="uuid"
       behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
+      aksjonspunktKodeForeslaVedtak=""
+      avsnittsliste={[]}
     />);
 
     expect(wrapper.find(TilbakekrevingEditerVedtaksbrevPanel)).to.have.length(1);
@@ -44,6 +47,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       readOnly={false}
       fetchPreviewVedtaksbrev={fetchPreview}
       formVerdier={{
@@ -67,6 +71,8 @@ describe('<TilbakekrevingVedtakForm>', () => {
       behandlingUuid="uuid"
       behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
+      aksjonspunktKodeForeslaVedtak=""
+      avsnittsliste={[]}
     />);
 
     // @ts-ignore
@@ -92,6 +98,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       readOnly={false}
       fetchPreviewVedtaksbrev={sinon.spy()}
       formVerdier={{}}
@@ -106,6 +113,8 @@ describe('<TilbakekrevingVedtakForm>', () => {
       behandlingUuid="uuid"
       behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={['2019-01-01_2019-02-02']}
+      aksjonspunktKodeForeslaVedtak=""
+      avsnittsliste={[]}
     />);
 
     const knapp = wrapper.find(ProsessStegSubmitButton);
@@ -118,6 +127,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
       submitCallback={sinon.spy()}
+      onSubmit={sinon.spy()}
       readOnly={false}
       fetchPreviewVedtaksbrev={sinon.spy()}
       formVerdier={{}}
@@ -140,6 +150,8 @@ describe('<TilbakekrevingVedtakForm>', () => {
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
       erRevurderingTilbakekrevingKlage
       fritekstOppsummeringPakrevdMenIkkeUtfylt
+      aksjonspunktKodeForeslaVedtak=""
+      avsnittsliste={[]}
     />);
 
     const knapp = wrapper.find(ProsessStegSubmitButton);
