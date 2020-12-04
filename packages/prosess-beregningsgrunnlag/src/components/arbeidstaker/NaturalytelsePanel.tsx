@@ -16,7 +16,7 @@ import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const createArbeidsforholdKey = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (arbeidsforholdInformasjon.erPrivatPerson) {
     return `${arbeidsforholdInformasjon.navn}${arbeidsforholdInformasjon.fødselsdato}`;
   }
@@ -38,7 +38,7 @@ const createPeriodeTekst = (periode: BeregningsgrunnlagPeriodeProp): string => {
 
 const createOrEditMapValue = (andel, mapValue, periodeTekst, arbeidsgiverOpplysningerPerId) => {
   let newMapValue;
-  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
   const agNavn = arbeidsforholdInformasjon.navn;
 
   if (mapValue === undefined) {

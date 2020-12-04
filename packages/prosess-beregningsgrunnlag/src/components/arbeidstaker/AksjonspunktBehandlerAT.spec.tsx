@@ -6,13 +6,13 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import AksjonspunktBehandlerAT from './AksjonspunktBehandlerAT';
 
-const mockAndel = (arbeidsgiverId, overstyrtPrAar, beregnetPrAar, skalFastsetteGrunnlag) => ({
+const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, skalFastsetteGrunnlag) => ({
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSTAKER,
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverId,
+    arbeidsgiverIdent,
     eksternArbeidsforholdId: '345678',
     startdato: '2018-10-09',
   },
@@ -50,7 +50,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
     andeler.forEach((andel, index) => {
       const arbeidsgiverNavn = rows.at(index).find('Normaltekst');
       expect(arbeidsgiverNavn.at(0).childAt(0).text())
-        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId].navn} (${andel.arbeidsforhold.arbeidsgiverId})...5678`);
+        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent].navn} (${andel.arbeidsforhold.arbeidsgiverIdent})...5678`);
       const inputField = rows.first().find('InputField');
       expect(inputField).to.have.length(1);
       expect(inputField.props().readOnly).to.equal(false);
@@ -71,7 +71,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
     andeler.forEach((andel, index) => {
       const arbeidsgiverNavn = rows.at(index).find('Normaltekst');
       expect(arbeidsgiverNavn.at(0).childAt(0).text())
-        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId].navn} (${andel.arbeidsforhold.arbeidsgiverId})...5678`);
+        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent].navn} (${andel.arbeidsforhold.arbeidsgiverIdent})...5678`);
       const inputField = rows.first().find('InputField');
       expect(inputField).to.have.length(1);
       expect(inputField.props().readOnly).to.equal(true);

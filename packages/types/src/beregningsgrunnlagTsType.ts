@@ -4,6 +4,7 @@ export type BeregningsgrunnlagArbeidsforhold = Readonly<{
   arbeidsgiverNavn?: string;
   arbeidsgiverId?: string;
   arbeidsgiverIdVisning?: string;
+  arbeidsgiverIdent?: string;
   eksternArbeidsforholdId?: string;
   refusjonPrAar?: number;
   belopFraInntektsmeldingPrMnd?: number;

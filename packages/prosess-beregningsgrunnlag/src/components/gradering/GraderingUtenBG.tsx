@@ -35,7 +35,7 @@ const radioFieldName = 'graderingUtenBGSettPaaVent';
 
 const bestemVisning = (andel, getKodeverknavn, arbeidsgiverOpplysningerPerId) => {
   if (andel.arbeidsforhold && andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER) {
-    const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+    const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
     if (!arbeidsforholdInfo) {
       return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
     }

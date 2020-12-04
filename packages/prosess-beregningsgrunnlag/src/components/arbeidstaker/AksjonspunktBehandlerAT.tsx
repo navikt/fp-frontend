@@ -41,7 +41,7 @@ const finnAndelerSomSkalVisesAT = (andeler: BeregningsgrunnlagAndel[]): Beregnin
 const lagVisningsnavn = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  const arbeidsgiverInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  const arbeidsgiverInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsgiverInformasjon) {
     return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
   }

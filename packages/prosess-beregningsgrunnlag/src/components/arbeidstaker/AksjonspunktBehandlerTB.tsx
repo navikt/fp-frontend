@@ -55,7 +55,7 @@ export const createInputFieldKey = (andel, periode) => {
   if (!andel.arbeidsforhold) {
     return undefined;
   }
-  return `${formPrefix}_${andel.arbeidsforhold.arbeidsgiverId}_${andel.andelsnr}_${periode.beregningsgrunnlagPeriodeFom}`;
+  return `${formPrefix}_${andel.arbeidsforhold.arbeidsgiverIdent}_${andel.andelsnr}_${periode.beregningsgrunnlagPeriodeFom}`;
 };
 // Lager en liste med FormattedMessages som skal brukes som overskrifter i tabellen
 
@@ -63,7 +63,7 @@ const findArbeidstakerAndeler = (periode) => periode.beregningsgrunnlagPrStatusO
   .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
 
 const createArbeidsforholdMapKey = (arbeidsforhold, arbeidsgiverOpplysningerPerId) => {
-  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInformasjon) {
     return arbeidsforhold.arbeidsforholdType ? arbeidsforhold.arbeidsforholdType : '';
   }
@@ -89,7 +89,7 @@ const createMapValueObject = () => ({
 });
 
 const lagVisningsnavnForAktivitet = (arbeidsforhold, getKodeverknavn, arbeidsgiverOpplysningerPerId) => {
-  const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInfo) {
     return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
   }

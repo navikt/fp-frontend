@@ -1,4 +1,6 @@
 import { ArbeidsgiverOpplysninger } from '@fpsak-frontend/types';
+import moment from 'moment';
+import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 
 const getEndCharFromId = (id: string | undefined): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
@@ -8,7 +10,7 @@ const createVisningsnavnForAktivitet = (arbeidsgiverOpplysninger: ArbeidsgiverOp
   } = arbeidsgiverOpplysninger;
   if (erPrivatPerson) {
     return fødselsdato
-      ? `${navn} (${fødselsdato})${getEndCharFromId(eksternReferanse)}`
+      ? `${navn} (${moment(fødselsdato).format(DDMMYYYY_DATE_FORMAT)})${getEndCharFromId(eksternReferanse)}`
       : navn;
   }
   return identifikator

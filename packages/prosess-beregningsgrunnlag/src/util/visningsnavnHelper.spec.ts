@@ -5,14 +5,14 @@ const andelUtenArbeidsforholdId = {
   arbeidsforholdType: {
     kode: 'A',
   },
-  arbeidsgiverId: '321',
+  arbeidsgiverIdent: '321',
 };
 
 const andelMedAlt = {
   arbeidsforholdType: {
     kode: 'A',
   },
-  arbeidsgiverId: '321',
+  arbeidsgiverIdent: '321',
   arbeidsforholdId: '999888777',
   eksternArbeidsforholdId: '56789',
 };
@@ -28,13 +28,13 @@ const arbeidsgiverOpplysningerPerId = {
 
 describe('visningsnavnHelper', () => {
   it('skal lage visningsnavn når vi mangler arbeidsforholdId', () => {
-    const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(arbeidsgiverOpplysningerPerId[andelUtenArbeidsforholdId.arbeidsgiverId],
+    const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(arbeidsgiverOpplysningerPerId[andelUtenArbeidsforholdId.arbeidsgiverIdent],
       undefined);
     expect(arbeidsgiverNavnOrgnr).to.equal('Andeby bank (321)');
   });
 
   it('skal lage visningsnavn når vi ikke mangler noe', () => {
-    const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(arbeidsgiverOpplysningerPerId[andelMedAlt.arbeidsgiverId],
+    const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(arbeidsgiverOpplysningerPerId[andelMedAlt.arbeidsgiverIdent],
       andelMedAlt.eksternArbeidsforholdId);
     expect(arbeidsgiverNavnOrgnr).to.equal('Andeby bank (321)...6789');
   });

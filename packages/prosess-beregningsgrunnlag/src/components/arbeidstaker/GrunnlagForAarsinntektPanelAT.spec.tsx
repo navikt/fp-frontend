@@ -9,13 +9,13 @@ import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import { GrunnlagForAarsinntektPanelATImpl as UnwrappedForm } from './GrunnlagForAarsinntektPanelAT';
 
-const mockAndel = (arbeidsgiverId, overstyrtPrAar, beregnetPrAar, erTilkommetAndel) => ({
+const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, erTilkommetAndel) => ({
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSTAKER,
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverId,
+    arbeidsgiverIdent,
     eksternArbeidsforholdId: '345678',
     startdato: '2018-10-09',
     opphoersdato: null,
@@ -77,7 +77,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     let rowNrFlex = 1;
     andeler.forEach((andel) => {
       const teksterAndel = rows.at(rowNr).find('Normaltekst');
-      const arbeidsgiverInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+      const arbeidsgiverInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
       expect(teksterAndel.at(0).childAt(0).text()).to.equal(createVisningsnavnForAktivitet(arbeidsgiverInfo, andel.arbeidsforhold.eksternArbeidsforholdId));
       expect(teksterAndel.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar / 12));
       expect(teksterAndel.at(2).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar));
@@ -107,7 +107,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     let rowNrFlex = 1;
     andeler.forEach((andel) => {
       const teksterAndel = rows.at(rowNr).find('Normaltekst');
-      const arbeidsgiverInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+      const arbeidsgiverInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
       expect(teksterAndel.at(0).childAt(0).text()).to.equal(createVisningsnavnForAktivitet(arbeidsgiverInfo, andel.arbeidsforhold.eksternArbeidsforholdId));
       expect(teksterAndel.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar / 12));
       expect(teksterAndel.at(2).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar));

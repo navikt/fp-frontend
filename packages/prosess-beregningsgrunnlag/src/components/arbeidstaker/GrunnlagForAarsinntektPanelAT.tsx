@@ -82,7 +82,7 @@ const createArbeidsStillingsNavnOgProsent = (arbeidsforhold: BeregningsgrunnlagA
 const lagVisningForAndel = (andel: BeregningsgrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
-  const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+  const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInfo) {
     return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
   }
@@ -101,29 +101,29 @@ const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
       key={`ArbInntektWrapper${lagVisningForAndel(andel, arbeidsgiverOpplysningerPerId, getKodeverknavn)}${index + 1}`}
     >
       <Row key={`index${index + 1}`}>
-        <Column xs="7" key={`ColLable${andel.arbeidsforhold.arbeidsgiverId}`}>
+        <Column xs="7" key={`ColLable${andel.arbeidsforhold.arbeidsgiverIdent}`}>
           <Normaltekst key={`ColLableTxt${index + 1}`} className={beregningStyles.semiBoldText}>
             {lagVisningForAndel(andel, arbeidsgiverOpplysningerPerId, getKodeverknavn)}
           </Normaltekst>
         </Column>
 
-        <Column key={`ColBrgMnd${andel.arbeidsforhold.arbeidsgiverId}`} xs="2" className={beregningStyles.colMaanedText}>
-          <Normaltekst key={`ColBrgMndTxt${andel.arbeidsforhold.arbeidsgiverId}`}>
+        <Column key={`ColBrgMnd${andel.arbeidsforhold.arbeidsgiverIdent}`} xs="2" className={beregningStyles.colMaanedText}>
+          <Normaltekst key={`ColBrgMndTxt${andel.arbeidsforhold.arbeidsgiverIdent}`}>
             {formatCurrencyNoKr(andel.beregnetPrAar / 12)}
           </Normaltekst>
         </Column>
-        <Column key={`ColBrgAar${andel.arbeidsforhold.arbeidsgiverId}`} xs="2" className={beregningStyles.colAarText}>
-          <Normaltekst key={`ColBrgAarTxt${andel.arbeidsforhold.arbeidsgiverId}`} className={!harFlereArbeidsforhold ? beregningStyles.semiBoldText : ''}>
+        <Column key={`ColBrgAar${andel.arbeidsforhold.arbeidsgiverIdent}`} xs="2" className={beregningStyles.colAarText}>
+          <Normaltekst key={`ColBrgAarTxt${andel.arbeidsforhold.arbeidsgiverIdent}`} className={!harFlereArbeidsforhold ? beregningStyles.semiBoldText : ''}>
             {formatCurrencyNoKr(andel.beregnetPrAar)}
           </Normaltekst>
         </Column>
-        <Column xs="1" key={`ColLink${andel.arbeidsforhold.arbeidsgiverId}`} className={beregningStyles.colLink}>
+        <Column xs="1" key={`ColLink${andel.arbeidsforhold.arbeidsgiverIdent}`} className={beregningStyles.colLink}>
           {userIdent && (
           <LinkTilEksterntSystem linkText="IM" userIdent={userIdent} type="IM" />
           )}
         </Column>
       </Row>
-      <FlexRow key={`indexD${andel.arbeidsforhold.arbeidsgiverId}`}>
+      <FlexRow key={`indexD${andel.arbeidsforhold.arbeidsgiverIdent}`}>
         {andel.arbeidsforhold && andel.arbeidsforhold.stillingsNavn && (
           <FlexColumn>
             <Normaltekst>
@@ -147,7 +147,7 @@ const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
         )}
       </FlexRow>
       {(index < relevanteAndeler.length) && (
-        <Row key={`indexSp${andel.arbeidsforhold.arbeidsgiverId}`}>
+        <Row key={`indexSp${andel.arbeidsforhold.arbeidsgiverIdent}`}>
           <VerticalSpacer eightPx />
         </Row>
       )}

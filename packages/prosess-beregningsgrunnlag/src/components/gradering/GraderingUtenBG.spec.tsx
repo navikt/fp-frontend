@@ -30,7 +30,7 @@ const atAndelEn = {
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverId: '123',
+    arbeidsgiverIdent: '123',
   },
   andelsnr: 1,
 };
@@ -41,7 +41,7 @@ const atAndelTo = {
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverId: '456',
+    arbeidsgiverIdent: '456',
   },
   andelsnr: 2,
 };
