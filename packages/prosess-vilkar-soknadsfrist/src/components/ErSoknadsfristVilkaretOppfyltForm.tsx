@@ -29,17 +29,22 @@ import {
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.less';
 
-const findRadioButtonTextCode = (erVilkarOk?: boolean) => (erVilkarOk
+const findRadioButtonTextCode = (erVilkarOk?: boolean): string => (erVilkarOk
   ? 'ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt' : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt');
 
-const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent?: string) => (
+const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent?: string): string => (
   moment(mottattDato)
     .subtract(antallDagerSoknadLevertForSent, 'days')
     .format(ISO_DATE_FORMAT)
 );
 
-const isEdited = (hasAksjonspunkt: boolean, erVilkarOk?: boolean) => hasAksjonspunkt && erVilkarOk !== undefined;
-const showAvslagsarsak = (erVilkarOk?: boolean, avslagsarsak?: Behandlingsresultat['avslagsarsak']) => erVilkarOk === false && avslagsarsak;
+const isEdited = (hasAksjonspunkt: boolean, erVilkarOk?: boolean): boolean => hasAksjonspunkt && erVilkarOk !== undefined;
+const showAvslagsarsak = (erVilkarOk?: boolean, avslagsarsak?: Behandlingsresultat['avslagsarsak']): boolean => erVilkarOk === false && !!avslagsarsak;
+
+type FormValues = {
+  erVilkarOk: boolean;
+  begrunnelse?: string;
+}
 
 interface PureOwnProps {
   behandlingId: number;
@@ -63,6 +68,8 @@ interface MappedOwnProps {
   textCode: string;
   hasAksjonspunkt: boolean;
   erVilkarOk?: boolean;
+  onSubmit: (formValues: FormValues) => any;
+  initialValues: FormValues;
 }
 
 /**
@@ -207,17 +214,12 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl: FunctionComponent<PureOwnPro
 
 export const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter, (ownProps: PureOwnProps) => ownProps.status],
-(aksjonspunkter, status) => ({
+(aksjonspunkter, status): FormValues => ({
   erVilkarOk: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : vilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 }));
 
-interface FormValues {
-  erVilkarOk: boolean;
-  begrunnelse: string;
-}
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
   erVilkarOk: values.erVilkarOk,
   kode: aksjonspunkter[0].definisjon.kode,
   ...ProsessStegBegrunnelseTextField.transformValues(values),
@@ -226,7 +228,7 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => 
 const findDate = createSelector([
   (ownProps: PureOwnProps) => ownProps.soknad,
   (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
-(soknad, familiehendelse) => {
+(soknad, familiehendelse): string => {
   if (soknad.soknadType.kode === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato = familiehendelse && familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
@@ -237,7 +239,7 @@ const findDate = createSelector([
 });
 
 const findTextCode = createSelector([
-  (ownProps: PureOwnProps) => ownProps.soknad, (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse], (soknad, familiehendelse) => {
+  (ownProps: PureOwnProps) => ownProps.soknad, (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse], (soknad, familiehendelse): string => {
   if (soknad.soknadType.kode === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato = familiehendelse && familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
@@ -261,7 +263,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     .find((v) => vilkarCodes.includes(v.vilkarType.kode)).merknadParametere.antallDagerSoeknadLevertForSent;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
 
-  return (state: any, ownProps: PureOwnProps) => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const { behandlingId, behandlingVersjon } = ownProps;
     return {
       getKodeverknavn,

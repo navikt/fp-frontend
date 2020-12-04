@@ -78,6 +78,14 @@ const formatArbeidsgiver = (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysnin
   return lagArbeidsgiverNavnOgOrgnrTekst(arbeidsgiverOpplysninger.navn, arbeidsgiverOpplysninger.identifikator);
 };
 
+type FormValues = {
+  erVilkarOk?: boolean;
+  begrunnelse?: string;
+  aksjonspunktKode?: string;
+  inntektsmeldingerSomIkkeKommer?: { [key: string]: boolean };
+  hasAksjonspunkt?: boolean;
+}
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -100,9 +108,7 @@ interface MappedOwnProps {
   manglendeVedlegg: ManglendeVedleggSoknad[],
   erVilkarOk?: boolean;
   hasAksjonspunkt: boolean;
-  initialValues: {
-    erVilkarOk?: boolean;
-  }
+  initialValues: FormValues;
 }
 
 /**
@@ -216,14 +222,6 @@ const lagArbeidsgiverKey = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger):
   }
   return `${orgPrefix}${arbeidsgiverOpplysninger.identifikator}`;
 };
-
-interface FormValues {
-  erVilkarOk?: boolean;
-  begrunnelse?: string;
-  aksjonspunktKode: string;
-  inntektsmeldingerSomIkkeKommer: { [key: string]: boolean };
-  hasAksjonspunkt: boolean;
-}
 
 export const buildInitialValues = createSelector(
   [getSortedManglendeVedlegg,

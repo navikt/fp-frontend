@@ -49,6 +49,10 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       isForeldreansvar2Ledd
       status=""
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -76,6 +80,10 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       isForeldreansvar2Ledd
       status=""
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -126,6 +134,10 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       isForeldreansvar2Ledd
       status=""
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);

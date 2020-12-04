@@ -34,6 +34,10 @@ describe('<AdopsjonVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -62,6 +66,10 @@ describe('<AdopsjonVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);
@@ -94,6 +102,10 @@ describe('<AdopsjonVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}
+      onSubmit={() => undefined}
+      initialValues={{
+        erVilkarOk: true,
+      }}
       alleKodeverk={{}}
       originalErVilkarOk
     />);

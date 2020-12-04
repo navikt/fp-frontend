@@ -12,6 +12,8 @@ import VedtaksbrevAvsnitt from '../../types/vedtaksbrevAvsnittTsType';
 
 import styles from './tilbakekrevingEditerVedtaksbrevPanel.less';
 
+export type FormValues = Record<string, Record<string, string> | string>
+
 interface OwnProps {
   vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];
   formName: string;
@@ -24,7 +26,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => any,
+  buildInitialValues?: (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => FormValues,
 }
 
 const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -43,10 +45,10 @@ const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & Static
       <FormattedMessage id="TilbakekrevingVedtak.Vedtaksbrev" />
     </Undertittel>
     <VerticalSpacer eightPx />
-    {vedtaksbrevAvsnitt.map((avsnitt: VedtaksbrevAvsnitt) => {
+    {vedtaksbrevAvsnitt.map((avsnitt) => {
       const underavsnitter = avsnitt.underavsnittsliste;
       const periode = `${avsnitt.fom}_${avsnitt.tom}`;
-      const harPeriodeSomManglerObligatoriskVerdi = perioderSomIkkeHarUtfyltObligatoriskVerdi.some((p: any) => p === periode);
+      const harPeriodeSomManglerObligatoriskVerdi = perioderSomIkkeHarUtfyltObligatoriskVerdi.some((p) => p === periode);
       const visApen = avsnitt.avsnittstype === underavsnittType.OPPSUMMERING && fritekstOppsummeringPakrevdMenIkkeUtfylt;
       return (
         <React.Fragment key={avsnitt.avsnittstype + avsnitt.fom}>
@@ -55,7 +57,7 @@ const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & Static
             tittel={avsnitt.overskrift ? avsnitt.overskrift : ''}
             apen={harPeriodeSomManglerObligatoriskVerdi || visApen}
           >
-            {underavsnitter.map((underavsnitt: any) => (
+            {underavsnitter.map((underavsnitt) => (
               <React.Fragment key={underavsnitt.underavsnittstype + underavsnitt.overskrift + underavsnitt.brødtekst}>
                 {underavsnitt.overskrift && (
                   <Element>
@@ -92,13 +94,13 @@ const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & Static
   </div>
 );
 
-TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues = (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => vedtaksbrevAvsnitt
-  .filter((avsnitt: VedtaksbrevAvsnitt) => avsnitt.underavsnittsliste.some((underavsnitt: any) => underavsnitt.fritekst))
-  .reduce((acc: any, avsnitt: VedtaksbrevAvsnitt) => {
+TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues = (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]): FormValues => vedtaksbrevAvsnitt
+  .filter((avsnitt) => avsnitt.underavsnittsliste.some((underavsnitt) => underavsnitt.fritekst))
+  .reduce((acc, avsnitt) => {
     const underavsnitter = avsnitt.underavsnittsliste;
     const friteksterForUnderavsnitt = underavsnitter
-      .filter((underavsnitt: any) => underavsnitt.fritekst)
-      .reduce((underAcc: any, underavsnitt: any) => ({
+      .filter((underavsnitt) => underavsnitt.fritekst)
+      .reduce((underAcc, underavsnitt) => ({
         ...underAcc,
         [underavsnitt.underavsnittstype ? underavsnitt.underavsnittstype
           : avsnitt.avsnittstype]: decodeHtmlEntity(underavsnitt.fritekst),
