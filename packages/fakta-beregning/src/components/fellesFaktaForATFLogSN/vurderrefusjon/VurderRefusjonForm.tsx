@@ -5,6 +5,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { FaktaOmBeregning, RefusjonskravSomKommerForSentListe } from '@fpsak-frontend/types';
+import ArbeidsgiverOpplysningerPerId from '@fpsak-frontend/types/src/arbeidsgiverOpplysningerTsType';
 
 const {
   VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT,
@@ -12,22 +13,30 @@ const {
 
 const erRefusjonskravGyldigFieldPrefix = 'erKravGyldig_';
 
-export const lagFieldName = (arbeidsgiverVisningsnavn) => erRefusjonskravGyldigFieldPrefix + arbeidsgiverVisningsnavn.replace('.', '');
+export const lagFieldName = (arbeidsgiverId: string): string => erRefusjonskravGyldigFieldPrefix + arbeidsgiverId;
 
-const lagRefusjonskravRadios = (senRefusjonkravListe, readOnly, isAksjonspunktClosed) => senRefusjonkravListe.map((kravPerArbeidsgiver) => {
-  const { arbeidsgiverVisningsnavn } = kravPerArbeidsgiver;
+const lagVisningsNavn = (andel: RefusjonskravSomKommerForSentListe, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverId];
+  return arbeidsgiverOpplysninger.navn;
+};
+
+const lagRefusjonskravRadios = (senRefusjonkravListe,
+  readOnly,
+  isAksjonspunktClosed,
+  arbeidsgiverOpplysningerPerId) => senRefusjonkravListe.map((kravPerArbeidsgiver) => {
+  const agNavn = lagVisningsNavn(kravPerArbeidsgiver, arbeidsgiverOpplysningerPerId);
   return (
-    <React.Fragment key={arbeidsgiverVisningsnavn}>
+    <React.Fragment key={agNavn}>
       <VerticalSpacer twentyPx />
       <FormattedMessage
         id="VurderRefusjonForm.ErRefusjonskravGyldig"
         values={{
-          arbeidsgiverVisningsnavn,
+          agNavn,
         }}
       />
       <VerticalSpacer eightPx />
       <RadioGroupField
-        name={lagFieldName(arbeidsgiverVisningsnavn)}
+        name={lagFieldName(kravPerArbeidsgiver.arbeidsgiverId)}
         validate={[required]}
         readOnly={readOnly}
         isEdited={isAksjonspunktClosed}
@@ -43,6 +52,7 @@ type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
     faktaOmBeregning: FaktaOmBeregning;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
@@ -55,9 +65,14 @@ interface StaticFunctions {
  *
  * Container komponent. Har ansvar for å sette opp Redux Formen for vurdering av refusjonskrav som har kommet for sent.
  */
-export const VurderRefusjonForm:FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed, faktaOmBeregning }) => {
+export const VurderRefusjonForm:FunctionComponent<OwnProps> & StaticFunctions = ({
+  readOnly,
+  isAksjonspunktClosed,
+  faktaOmBeregning,
+  arbeidsgiverOpplysningerPerId,
+}) => {
   const senRefusjonkravListe = faktaOmBeregning?.refusjonskravSomKommerForSentListe;
-  return (lagRefusjonskravRadios(senRefusjonkravListe, readOnly, isAksjonspunktClosed));
+  return (lagRefusjonskravRadios(senRefusjonkravListe, readOnly, isAksjonspunktClosed, arbeidsgiverOpplysningerPerId));
 };
 
 VurderRefusjonForm.transformValues = (arbeidsgiverListe) => (values) => {
@@ -65,9 +80,9 @@ VurderRefusjonForm.transformValues = (arbeidsgiverListe) => (values) => {
     return {};
   }
   return {
-    refusjonskravGyldighet: arbeidsgiverListe.map(({ arbeidsgiverId, arbeidsgiverVisningsnavn }) => ({
+    refusjonskravGyldighet: arbeidsgiverListe.map(({ arbeidsgiverId }) => ({
       arbeidsgiverId,
-      skalUtvideGyldighet: values[lagFieldName(arbeidsgiverVisningsnavn)],
+      skalUtvideGyldighet: values[lagFieldName(arbeidsgiverId)],
     })),
   };
 };
@@ -77,8 +92,8 @@ VurderRefusjonForm.buildInitialValues = (tilfeller, arbeidsgiverListe) => {
   if (!tilfeller.includes(VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT) || arbeidsgiverListe.length === 0) {
     return initialValues;
   }
-  arbeidsgiverListe.forEach(({ arbeidsgiverVisningsnavn, erRefusjonskravGyldig }) => {
-    initialValues[lagFieldName(arbeidsgiverVisningsnavn)] = erRefusjonskravGyldig;
+  arbeidsgiverListe.forEach(({ arbeidsgiverId, erRefusjonskravGyldig }) => {
+    initialValues[lagFieldName(arbeidsgiverId)] = erRefusjonskravGyldig;
   });
   return ({
     ...initialValues,

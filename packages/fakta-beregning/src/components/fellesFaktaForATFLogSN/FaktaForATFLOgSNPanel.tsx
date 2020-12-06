@@ -4,7 +4,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import { createSelector, createStructuredSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidsbegrensetArbeidsforholdForm from './tidsbegrensetArbeidsforhold/TidsbegrensetArbeidsforholdForm';
@@ -64,7 +64,7 @@ export const getArbeidsgiverInfoForRefusjonskravSomKommerForSent = createSelecto
   },
 );
 
-export const validationForVurderFakta = (values) => {
+export const validationForVurderFakta = (values, arbeidsgiverOpplysningerPerId, alleKodeverk) => {
   if (!values) {
     return {};
   }
@@ -82,7 +82,7 @@ export const validationForVurderFakta = (values) => {
     ...getKunYtelseValidation(values, kunYtelse, tilfeller),
     ...VurderMottarYtelseForm.validate(values, vurderMottarYtelse),
     ...VurderBesteberegningForm.validate(values, tilfeller),
-    ...VurderOgFastsettATFL.validate(values, tilfeller, faktaOmBeregning, beregningsgrunnlag),
+    ...VurderOgFastsettATFL.validate(values, tilfeller, faktaOmBeregning, beregningsgrunnlag, arbeidsgiverOpplysningerPerId, alleKodeverk),
   });
 };
 
@@ -104,6 +104,7 @@ const getFaktaPanels = (
   alleKodeverk,
   aksjonspunkter,
   erOverstyrer,
+  arbeidsgiverOpplysningerPerId,
 ) => {
   const faktaPanels = [];
   let hasShownPanel = false;
@@ -117,6 +118,7 @@ const getFaktaPanels = (
             isAksjonspunktClosed={isAksjonspunktClosed}
             faktaOmBeregning={faktaOmBeregning}
             alleKodeverk={alleKodeverk}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         </React.Fragment>,
       );
@@ -152,6 +154,7 @@ const getFaktaPanels = (
             readOnly={readOnly}
             isAksjonspunktClosed={isAksjonspunktClosed}
             faktaOmBeregning={faktaOmBeregning}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         </React.Fragment>,
       );
@@ -172,6 +175,7 @@ const getFaktaPanels = (
         alleKodeverk={alleKodeverk}
         erOverstyrer={erOverstyrer}
         aksjonspunkter={aksjonspunkter}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </React.Fragment>,
   );
@@ -189,6 +193,7 @@ type OwnProps = {
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     aksjonspunkter: Aksjonspunkt[];
     erOverstyrer: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 type MappedOwnProps = {
@@ -212,6 +217,7 @@ export const FaktaForATFLOgSNPanelImpl: FunctionComponent<OwnProps & MappedOwnPr
   alleKodeverk,
   aksjonspunkter,
   erOverstyrer,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
     {getFaktaPanels(
@@ -225,6 +231,7 @@ export const FaktaForATFLOgSNPanelImpl: FunctionComponent<OwnProps & MappedOwnPr
       alleKodeverk,
       aksjonspunkter,
       erOverstyrer,
+      arbeidsgiverOpplysningerPerId,
     ).map((panelOrSpacer) => panelOrSpacer)}
   </div>
 );
@@ -333,11 +340,11 @@ const buildInitialValuesForTilfeller = (props) => ({
   ...NyIArbeidslivetSNForm.buildInitialValues(props.beregningsgrunnlag),
   ...LonnsendringForm.buildInitialValues(props.beregningsgrunnlag),
   ...NyoppstartetFLForm.buildInitialValues(props.beregningsgrunnlag),
-  ...buildInitialValuesKunYtelse(props.kunYtelse, props.tilfeller, props.faktaOmBeregning.andelerForFaktaOmBeregning),
+  ...buildInitialValuesKunYtelse(props.kunYtelse, props.tilfeller, props.faktaOmBeregning.andelerForFaktaOmBeregning, props.alleKodeverk),
   ...VurderEtterlonnSluttpakkeForm.buildInitialValues(props.beregningsgrunnlag, props.vurderFaktaAP),
   ...VurderMottarYtelseForm.buildInitialValues(props.vurderMottarYtelse),
   ...VurderBesteberegningForm.buildInitialValues(props.aksjonspunkter, props.vurderBesteberegning, props.tilfeller, props.erOverstyrt),
-  ...VurderOgFastsettATFL.buildInitialValues(props.faktaOmBeregning, props.erOverstyrt),
+  ...VurderOgFastsettATFL.buildInitialValues(props.faktaOmBeregning, props.erOverstyrt, props.arbeidsgiverOpplysningerPerId, props.alleKodeverk),
   ...VurderRefusjonForm.buildInitialValues(props.tilfeller, props.refusjonskravSomKommerForSentListe),
 });
 

@@ -10,8 +10,9 @@ import 'core-js/features/array/flat-map';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import Beregningsgrunnlag, { FaktaOmBeregning } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import { getFormValuesForBeregning } from '../../../BeregningFormUtils';
 import { InntektTransformed } from '../../andelFieldValueTs';
 

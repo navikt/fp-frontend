@@ -2,6 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { InputField, SelectField } from '@fpsak-frontend/form';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { FieldArrayFieldsProps } from 'redux-form';
+import ArbeidsgiverOpplysningerPerId from '@fpsak-frontend/types/src/arbeidsgiverOpplysningerTsType';
+import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getUniqueListOfArbeidsforholdFields, createVisningsnavnForAktivitet } from '../ArbeidsforholdHelper';
 
 const finnArbeidsforholdForAndel = (arbeidsforholdListe, val) => {
@@ -29,10 +32,21 @@ const fieldLabel = (index, labelId) => {
   return '';
 };
 
-const arbeidsgiverSelectValues = (arbeidsforholdList, alleKodeverk) => (arbeidsforholdList
+const lagVisningsnavn = (arbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId) => {
+  if (!arbeidsforhold.arbeidsgiverId) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  const agOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  if (!agOpplysning) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitet(agOpplysning, undefined);
+};
+
+const arbeidsgiverSelectValues = (arbeidsforholdList, alleKodeverk, arbeidsgiverOpplysningerPerId) => (arbeidsforholdList
   .map((arbeidsforhold) => (
     <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
-      {createVisningsnavnForAktivitet(arbeidsforhold, alleKodeverk)}
+      {lagVisningsnavn(arbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
     </option>
   )));
 
@@ -42,10 +56,16 @@ type OwnProps = {
     readOnly: boolean;
     name: string;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 export const ArbeidsforholdFieldImpl: FunctionComponent<OwnProps> = ({
-  fields, index, name, readOnly, alleKodeverk,
+  fields,
+  index,
+  name,
+  readOnly,
+  alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const arbeidsforholdList = getUniqueListOfArbeidsforholdFields(fields);
   return (
@@ -64,7 +84,7 @@ export const ArbeidsforholdFieldImpl: FunctionComponent<OwnProps> = ({
         name={name}
         bredde="l"
         label={fieldLabel(index, 'BeregningInfoPanel.FordelingBG.Andel')}
-        selectValues={arbeidsgiverSelectValues(arbeidsforholdList, alleKodeverk)}
+        selectValues={arbeidsgiverSelectValues(arbeidsforholdList, alleKodeverk, arbeidsgiverOpplysningerPerId)}
         readOnly={readOnly}
         onChange={(event) => setArbeidsforholdInfo(fields, index, arbeidsforholdList, event.target.value)}
       />

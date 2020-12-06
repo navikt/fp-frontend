@@ -6,7 +6,8 @@ import { required } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import Beregningsgrunnlag, { FaktaOmBeregning } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import { InntektTransformed } from '../../andelFieldValueTs';
 
 /**

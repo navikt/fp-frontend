@@ -7,10 +7,16 @@ import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAkti
 import { InputField, SelectField } from '@fpsak-frontend/form';
 import { ArbeidsforholdFieldImpl } from './ArbeidsforholdField';
 
+const agOpplysninger = {
+  233647823: {
+    navn: 'Sopra Steria AS',
+    identifikator: '233647823',
+    erPrivatPerson: false,
+  },
+};
+
 const arbeidsforhold1 = {
-  arbeidsgiverNavn: 'Sopra Steria AS',
   arbeidsgiverId: '233647823',
-  arbeidsgiverIdVisning: '233647823',
   startdato: '01.01.1967',
   opphoersdato: null,
   arbeidsforholdId: null,
@@ -58,6 +64,7 @@ describe('<ArbeidsforholdField>', () => {
       name="andel"
       index={0}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
     expect(wrapper.find(InputField).length).to.eql(1);
   });
@@ -72,6 +79,7 @@ describe('<ArbeidsforholdField>', () => {
       name="andel"
       index={0}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
     const select = wrapper.find(SelectField);
     expect(select.length).to.eql(1);

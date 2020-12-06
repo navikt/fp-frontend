@@ -16,9 +16,9 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { getBehandlingFormPrefix, behandlingForm } from '@fpsak-frontend/form';
 
-import Beregningsgrunnlag, { AvklarBeregningAktiviteterMap } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, AvklarBeregningAktiviteterMap, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { formNameAvklarAktiviteter, getFormInitialValuesForAvklarAktiviteter, getFormValuesForAvklarAktiviteter } from '../BeregningFormUtils';
 import { erOverstyringAvBeregningsgrunnlag } from '../fellesFaktaForATFLogSN/BgFaktaUtils';
 import VurderAktiviteterPanel from './VurderAktiviteterPanel';
@@ -78,13 +78,13 @@ const getHelpTextsAvklarAktiviteter = createSelector(
 
 const skalViseSubmitKnappEllerBegrunnelse = (aksjonspunkter, erOverstyrt) => hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || erOverstyrt;
 
-const buildInitialValues = (aksjonspunkter, avklarAktiviteter, alleKodeverk, harOverstyrt = false) => {
+const buildInitialValues = (aksjonspunkter, avklarAktiviteter, alleKodeverk, harOverstyrt = false, arbeidsgiverOpplysningerPerId) => {
   const harAvklarAksjonspunkt = hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter);
   const erOverstyrt = hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter);
   let initialValues = {};
   if (avklarAktiviteter && avklarAktiviteter.aktiviteterTomDatoMapping) {
     initialValues = VurderAktiviteterPanel.buildInitialValues(avklarAktiviteter.aktiviteterTomDatoMapping,
-      alleKodeverk, erOverstyrt, harAvklarAksjonspunkt);
+      alleKodeverk, erOverstyrt, harAvklarAksjonspunkt, arbeidsgiverOpplysningerPerId);
   }
   const overstyrAksjonspunktMedBegrunnelse = findAksjonspunktMedBegrunnelse(aksjonspunkter, OVERSTYRING_AV_BEREGNINGSAKTIVITETER);
   const aksjonspunktMedBegrunnelse = findAksjonspunktMedBegrunnelse(aksjonspunkter, AVKLAR_AKTIVITETER);
@@ -115,6 +115,7 @@ type OwnProps = {
     aksjonspunkter: Aksjonspunkt[];
     formValues?: any;
     submitCallback: (formData: any) => void;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 type MappedOwnProps = {
@@ -167,7 +168,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
   initializeAktiviteter() {
     const {
       reduxFormInitialize: formInitialize, behandlingFormPrefix,
-      avklarAktiviteter, aksjonspunkter, alleKodeverk,
+      avklarAktiviteter, aksjonspunkter, alleKodeverk, arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { erOverstyrtKnappTrykket } = this.state;
     this.setState((state) => ({
@@ -175,7 +176,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
       erOverstyrtKnappTrykket: !erOverstyrtKnappTrykket,
     }));
     formInitialize(`${behandlingFormPrefix}.${formNameAvklarAktiviteter}`, buildInitialValues(aksjonspunkter, avklarAktiviteter,
-      alleKodeverk, !erOverstyrtKnappTrykket));
+      alleKodeverk, !erOverstyrtKnappTrykket, arbeidsgiverOpplysningerPerId));
   }
 
   render() {
@@ -196,6 +197,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
         behandlingId,
         behandlingVersjon,
         formValues,
+        arbeidsgiverOpplysningerPerId,
         ...formProps
       },
       state: {
@@ -261,6 +263,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
               formNameAvklarAktiviteter={formNameAvklarAktiviteter}
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
             )}
             <VerticalSpacer twentyPx />
@@ -341,11 +344,14 @@ const validate = (values) => {
   return {};
 };
 
-export const transformValues = (values) => {
+export const transformValues = (values, arbeidsgiverOpplysningerPerId) => {
   const { aksjonspunkter, avklarAktiviteter } = values;
   const skalOverstyre = values[MANUELL_OVERSTYRING_FIELD];
   if (skalKunneLoseAksjonspunkt(skalOverstyre, aksjonspunkter)) {
-    const vurderAktiviteterTransformed = VurderAktiviteterPanel.transformValues(values, avklarAktiviteter.aktiviteterTomDatoMapping, skalOverstyre);
+    const vurderAktiviteterTransformed = VurderAktiviteterPanel.transformValues(values,
+      avklarAktiviteter.aktiviteterTomDatoMapping,
+      skalOverstyre,
+      arbeidsgiverOpplysningerPerId);
     const beg = values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME];
     return [{
       kode: skalOverstyre ? OVERSTYRING_AV_BEREGNINGSAKTIVITETER : AVKLAR_AKTIVITETER,
@@ -371,8 +377,9 @@ const getIsAksjonspunktClosed = createSelector([(ownProps: OwnProps) => ownProps
   });
 
 const lagSubmitFn = createSelector([
-  (ownProps: OwnProps) => ownProps.submitCallback],
-(submitCallback) => (values) => submitCallback(transformValues(values)));
+  (ownProps: OwnProps) => ownProps.submitCallback,
+  (ownProps: OwnProps) => ownProps.arbeidsgiverOpplysningerPerId],
+(submitCallback, arbeidsgiverOpplysningerPerId) => (values) => submitCallback(transformValues(values, arbeidsgiverOpplysningerPerId)));
 
 const mapStateToProps = (state, ownProps) => {
   const values = getFormValuesForAvklarAktiviteter(state, ownProps);

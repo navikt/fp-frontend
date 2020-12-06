@@ -11,10 +11,27 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { VurderAktiviteterTabell, lagAktivitetFieldId, skalVurdereAktivitet } from './VurderAktiviteterTabell';
 
+const arbeidsgiverOpplysninger = {
+  384723894723: {
+    navn: 'Arbeidsgiveren',
+    identifikator: '384723894723',
+    erPrivatPerson: false,
+  },
+  334534623342: {
+    identifikator: '334534623342',
+    navn: 'Arbeidsgiveren2',
+    erPrivatPerson: false,
+  },
+  324234234234: {
+    identifikator: '324234234234',
+    navn: 'Arbeidsgiveren3',
+    erPrivatPerson: true,
+    fødselsdato: '1960-01-01',
+  },
+};
+
 const aktivitet1 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren',
   arbeidsgiverId: '384723894723',
-  arbeidsgiverIdVisning: '384723894723',
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
@@ -22,9 +39,7 @@ const aktivitet1 = {
 };
 
 const aktivitet2 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren2',
   arbeidsgiverId: '334534623342',
-  arbeidsgiverIdVisning: '334534623342',
   arbeidsforholdId: 'efj8343f34f',
   eksternArbeidsforholdId: '123456',
   fom: '2019-01-01',
@@ -34,10 +49,7 @@ const aktivitet2 = {
 };
 
 const aktivitet3 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren3',
   aktørIdString: '324234234234',
-  arbeidsgiverId: '1960-01-01',
-  arbeidsgiverIdVisning: '1960-01-01',
   arbeidsforholdId: 'efj8343f34f',
   eksternArbeidsforholdId: '56789',
   fom: '2019-01-01',
@@ -111,6 +123,7 @@ describe('<VurderAktiviteterTabell>', () => {
       tomDatoForAktivitetGruppe="2019-02-01"
       reduxChange={changeCallback}
       behandlingFormName="formname"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />);
 
     const heading = wrapper.find(FormattedMessage).first();
@@ -164,6 +177,7 @@ describe('<VurderAktiviteterTabell>', () => {
       tomDatoForAktivitetGruppe="2019-02-01"
       reduxChange={changeCallback}
       behandlingFormName="formname"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />);
 
     const heading = wrapper.find(FormattedMessage).first();
@@ -196,6 +210,7 @@ describe('<VurderAktiviteterTabell>', () => {
       tomDatoForAktivitetGruppe="2019-02-01"
       reduxChange={changeCallback}
       behandlingFormName="formname"
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />);
 
     const heading = wrapper.find(FormattedMessage).first();
@@ -262,7 +277,12 @@ describe('<VurderAktiviteterTabell>', () => {
   });
 
   it('skal bygge initial values', () => {
-    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter, alleKodeverk, false, true, true);
+    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter,
+      alleKodeverk,
+      false,
+      true,
+      true,
+      arbeidsgiverOpplysninger);
     expect(initialValues[id1].beregningAktivitetNavn).to.equal('Arbeidsgiveren (384723894723)');
     expect(initialValues[id1].fom).to.equal('2019-01-01');
     expect(initialValues[id1].tom).to.equal(null);
@@ -285,7 +305,12 @@ describe('<VurderAktiviteterTabell>', () => {
   });
 
   it('skal bygge initial values for overstyrer', () => {
-    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter, alleKodeverk, false, false, true);
+    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter,
+      alleKodeverk,
+      false,
+      false,
+      true,
+      arbeidsgiverOpplysninger);
     expect(initialValues[id1].beregningAktivitetNavn).to.equal('Arbeidsgiveren (384723894723)');
     expect(initialValues[id1].fom).to.equal('2019-01-01');
     expect(initialValues[id1].tom).to.equal(null);
@@ -313,7 +338,11 @@ describe('<VurderAktiviteterTabell>', () => {
     values[id2] = { skalBrukes: false };
     values[id3] = { skalBrukes: false };
     values[idAAP] = { skalBrukes: true };
-    const transformed = VurderAktiviteterTabell.transformValues(values, aktiviteter, '2019-02-02', '2019-02-02');
+    const transformed = VurderAktiviteterTabell.transformValues(values,
+      aktiviteter,
+      '2019-02-02',
+      '2019-02-02',
+      arbeidsgiverOpplysninger);
     expect(transformed.length).to.equal(2);
     expect(transformed[0].oppdragsgiverOrg).to.equal('334534623342');
     expect(transformed[0].arbeidsforholdRef).to.equal(aktivitet2.arbeidsforholdId);

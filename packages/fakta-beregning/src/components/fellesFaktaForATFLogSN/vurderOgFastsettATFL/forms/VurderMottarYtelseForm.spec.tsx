@@ -32,7 +32,6 @@ const beregningsgrunnlag = {
 };
 
 const arbeidsforhold = {
-  arbeidsgiverNavn: 'Virksomheten',
   arbeidsgiverId: '3284788923',
   arbeidsforholdId: '321378huda7e2',
   startdato: '2017-01-01',
@@ -40,7 +39,6 @@ const arbeidsforhold = {
 };
 
 const arbeidsforhold2 = {
-  arbeidsgiverNavn: 'Virksomheten2',
   arbeidsgiverId: '843597943435',
   arbeidsforholdId: 'jjisefoosfe',
   startdato: '2017-01-01',
@@ -48,11 +46,23 @@ const arbeidsforhold2 = {
 };
 
 const arbeidsforhold3 = {
-  arbeidsgiverNavn: 'Virksomheten2',
   arbeidsgiverId: '843597943435',
   arbeidsforholdId: '5465465464',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
+};
+
+const alleAGOpplysninger = {
+  843597943435: {
+    identifikator: '843597943435',
+    navn: 'Virksomheten2',
+    erPrivatPerson: false,
+  },
+  3284788923: {
+    identifikator: '3284788923',
+    navn: 'Virksomheten',
+    erPrivatPerson: false,
+  },
 };
 
 const andel = {
@@ -176,6 +186,7 @@ describe('<VurderMottarYtelseForm>', () => {
       tilfeller={[]}
       alleKodeverk={alleKodeverk}
       beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
+      arbeidsgiverOpplysningerPerId={alleAGOpplysninger}
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).to.have.length(1);
@@ -198,6 +209,7 @@ describe('<VurderMottarYtelseForm>', () => {
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
       beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={alleAGOpplysninger}
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).to.have.length(1);
@@ -222,6 +234,7 @@ describe('<VurderMottarYtelseForm>', () => {
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
       beregningsgrunnlag={bg as Beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={alleAGOpplysninger}
     />);
     const atRadio = wrapper.find(RadioGroupField);
     expect(atRadio).to.have.length(3);
@@ -230,7 +243,10 @@ describe('<VurderMottarYtelseForm>', () => {
     expect(formattedMsg).to.have.length(3);
     formattedMsg.forEach((msg, index) => {
       expect(msg.prop('id')).to.equal(mottarYtelseForArbeidMsg());
-      expect(msg.prop('values')).to.eql({ arbeid: createVisningsnavnForAktivitet(arbeidstakerAndelerUtenIM[index].arbeidsforhold, alleKodeverk) });
+      expect(msg.prop('values')).to.eql({
+        arbeid: createVisningsnavnForAktivitet(alleAGOpplysninger[arbeidstakerAndelerUtenIM[index].arbeidsforhold.arbeidsgiverId],
+          undefined),
+      });
     });
   });
 

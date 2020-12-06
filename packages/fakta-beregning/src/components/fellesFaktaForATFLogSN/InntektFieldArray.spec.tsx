@@ -135,6 +135,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...ownProps}
       {...props}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const table = wrapper.find(Table);
     expect(table.length).to.eql(1);
@@ -162,6 +163,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...ownProps}
       {...props}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const table = wrapper.find(Table);
     expect(table.length).to.eql(1);
@@ -189,6 +191,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...props}
       {...ownProps}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const table = wrapper.find(Table);
     expect(table.length).to.eql(1);
@@ -214,6 +217,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={newbg}
       {...ownProps}
       {...newprops}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const table = wrapper.find(Table);
     expect(table.length).to.eql(1);
@@ -314,7 +318,7 @@ describe('<InntektFieldArray>', () => {
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {
-    const iv = InntektFieldArrayImpl.buildInitialValues([]);
+    const iv = InntektFieldArrayImpl.buildInitialValues([], {}, {});
     expect(iv).to.be.empty;
   });
 });

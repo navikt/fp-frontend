@@ -9,6 +9,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FieldArrayFieldsProps } from 'redux-form';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import ArbeidsgiverOpplysningerPerId from '@fpsak-frontend/types/src/arbeidsgiverOpplysningerTsType';
 import styles from './inntektFieldArray.less';
 import ArbeidsforholdField from './ArbeidsforholdField';
 import { getKanRedigereInntekt, getSkalRedigereInntektskategori } from './BgFaktaUtils';
@@ -48,6 +49,7 @@ type OwnProps = {
     removeAndel: (...args: any[]) => any;
     index: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 /**
@@ -69,6 +71,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
   isAksjonspunktClosed,
   removeAndel,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const field = fields.get(index);
   field.kanRedigereInntekt = kanRedigereInntekt;
@@ -81,6 +84,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
           name={`${andelElementFieldId}.andel`}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       </TableColumn>
       {skalVisePeriode

@@ -21,7 +21,9 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (kunYtelse: KunYtelse, faktaOmBeregningAndeler: AndelForFaktaOmBeregning[]) => any;
+  buildInitialValues: (kunYtelse: KunYtelse,
+                       faktaOmBeregningAndeler: AndelForFaktaOmBeregning[],
+                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
   summerFordeling: (values: any) => number;
   transformValues: (values: any, kunYtelse: KunYtelse) => any;
   validate: (values: any, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
@@ -73,7 +75,7 @@ KunYtelsePanel.defaultProps = {
   skalViseInntektstabell: true,
 };
 
-KunYtelsePanel.buildInitialValues = (kunYtelse, faktaOmBeregningAndeler) => {
+KunYtelsePanel.buildInitialValues = (kunYtelse, faktaOmBeregningAndeler, alleKodeverk) => {
   if (!kunYtelse || !kunYtelse.andeler || kunYtelse.andeler.length === 0) {
     return {};
   }
@@ -81,7 +83,7 @@ KunYtelsePanel.buildInitialValues = (kunYtelse, faktaOmBeregningAndeler) => {
     [brukersAndelFieldArrayName]: kunYtelse.andeler.map((andel) => {
       const andelMedInfo = faktaOmBeregningAndeler.find((faktaAndel) => faktaAndel.andelsnr === andel.andelsnr);
       return ({
-        ...setGenerellAndelsinfo(andelMedInfo),
+        ...setGenerellAndelsinfo(andelMedInfo, undefined, alleKodeverk),
         fastsattBelop: andel.fastsattBelopPrMnd || andel.fastsattBelopPrMnd === 0
           ? formatCurrencyNoKr(andel.fastsattBelopPrMnd) : '',
       });

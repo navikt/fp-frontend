@@ -3,9 +3,11 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, getKodeverknavnFn, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import { createSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { AndelForFaktaOmBeregning, ArbeidsgiverOpplysninger, KodeverkMedNavn } from '@fpsak-frontend/types';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
 import { erNyoppstartetFLField } from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
 import { harEtterlonnSluttpakkeField } from './vurderOgFastsettATFL/forms/VurderEtterlonnSluttpakkeForm';
@@ -14,6 +16,7 @@ import { andelsnrMottarYtelseMap } from './vurderOgFastsettATFL/forms/VurderMott
 import { getFormValuesForBeregning } from '../BeregningFormUtils';
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD } from './InntektstabellPanel';
+import { createVisningsnavnForAktivitet } from '../ArbeidsforholdHelper';
 
 export const INNTEKT_FIELD_ARRAY_NAME = 'inntektFieldArray';
 
@@ -28,8 +31,23 @@ export const setArbeidsforholdInitialValues = (andel) => ({
   arbeidsforholdType: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsforholdType : '',
 });
 
-export const setGenerellAndelsinfo = (andel) => ({
-  andel: andel.visningsnavn,
+const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
+  agOpplysninger: ArbeidsgiverOpplysninger | undefined,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
+  if (!andel.arbeidsforhold) {
+    const s = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+    return s(andel.aktivitetStatus);
+  }
+  if (!agOpplysninger) {
+    return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(andel.arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitet(agOpplysninger, andel.arbeidsforhold.eksternArbeidsforholdId);
+};
+
+export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
+  agOpplysninger: ArbeidsgiverOpplysninger | undefined,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => ({
+  andel: lagVisningsnavn(andel, agOpplysninger, alleKodeverk),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
   nyAndel: false,
@@ -201,8 +219,8 @@ export const mapToBelop = (skalRedigereInntekt) => (andel) => {
   return readOnlyBelop ? removeSpacesFromNumber(readOnlyBelop) : 0;
 };
 
-export const mapAndelToField = (andel) => ({
-  ...setGenerellAndelsinfo(andel),
+export const mapAndelToField = (andel, agOpplysninger: ArbeidsgiverOpplysninger | undefined, alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => ({
+  ...setGenerellAndelsinfo(andel, agOpplysninger, alleKodeverk),
   ...setArbeidsforholdInitialValues(andel),
   skalKunneEndreAktivitet: andel.skalKunneEndreAktivitet,
   fastsattBelop: andel.fastsattBelop || andel.fastsattBelop === 0 ? formatCurrencyNoKr(andel.fastsattBelop) : '',

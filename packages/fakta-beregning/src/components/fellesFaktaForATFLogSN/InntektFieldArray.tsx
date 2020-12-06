@@ -12,11 +12,12 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
-  AndelForFaktaOmBeregning,
+  AndelForFaktaOmBeregning, ArbeidsgiverOpplysninger,
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
+import ArbeidsgiverOpplysningerPerId from '@fpsak-frontend/types/src/arbeidsgiverOpplysningerTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
 import { validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
@@ -77,6 +78,7 @@ const createAndelerTableRows = (
   behandlingVersjon,
   isAksjonspunktClosed,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 ) => fields.map((andelElementFieldId, index) => (
   <AndelRow
     key={andelElementFieldId}
@@ -93,6 +95,7 @@ const createAndelerTableRows = (
     behandlingVersjon={behandlingVersjon}
     isAksjonspunktClosed={isAksjonspunktClosed}
     alleKodeverk={alleKodeverk}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 ));
 
@@ -151,13 +154,16 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     isAksjonspunktClosed: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
   validate: (values: any,
              erKunYtelse: boolean,
              skalFastsetteInntekt: (andel) => boolean) => any;
-  buildInitialValues: (andeler: AndelForFaktaOmBeregning[]) => any;
+  buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
   transformValues: (values: any) => InntektTransformed;
 }
 
@@ -181,6 +187,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
   beregningsgrunnlag,
   isAksjonspunktClosed,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const tablerows = createAndelerTableRows(
     fields,
@@ -190,6 +197,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
     behandlingVersjon,
     isAksjonspunktClosed,
     alleKodeverk,
+    arbeidsgiverOpplysningerPerId,
   );
   leggTilDagpengerOmBesteberegning(fields, skalHaBesteberegning, aktivitetStatuser);
   if (tablerows.length === 0) {
@@ -264,11 +272,19 @@ InntektFieldArrayImpl.validate = (values: AndelFieldValue[], erKunYtelse, skalFa
   return null;
 };
 
-InntektFieldArrayImpl.buildInitialValues = (andeler) => {
+const finnArbeidsgiverOpplysning = (andel: AndelForFaktaOmBeregning,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ArbeidsgiverOpplysninger | undefined => {
+  if (andel.aktivitetStatus.kode !== aktivitetStatus.ARBEIDSTAKER || !andel.arbeidsforhold) {
+    return undefined;
+  }
+  return arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverId];
+};
+
+InntektFieldArrayImpl.buildInitialValues = (andeler, arbeidsgiverOpplysningerPerId, alleKodeverk) => {
   if (!andeler || andeler.length === 0) {
     return {};
   }
-  return andeler.map((a) => mapAndelToField(a));
+  return andeler.map((a) => mapAndelToField(a, finnArbeidsgiverOpplysning(a, arbeidsgiverOpplysningerPerId), alleKodeverk));
 };
 
 export const mapStateToProps = (state, ownProps) => {

@@ -1,14 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { removeSpacesFromNumber, required } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn, removeSpacesFromNumber, required } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { FaktaOmBeregning, KodeverkMedNavn, VurderMottarYtelse } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagArbeidsforhold,
+  FaktaOmBeregning,
+  KodeverkMedNavn,
+  VurderMottarYtelse,
+} from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   andelsnrMottarYtelseMap,
   finnFrilansFieldName,
@@ -21,17 +27,29 @@ import { InntektTransformed } from '../../andelFieldValueTs';
 
 const andreFrilansTilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON];
 
-export const mottarYtelseForArbeidMsg = () => ('BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForArbeid');
+export const mottarYtelseForArbeidMsg = (): string => ('BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForArbeid');
 
-const utledArbeidsforholdUtenIMRadioTekst = (arbeidsforhold, alleKodeverk) => (
-  <FormattedMessage id={mottarYtelseForArbeidMsg()} values={{ arbeid: createVisningsnavnForAktivitet(arbeidsforhold, alleKodeverk) }} />
+const lagVisningsnavn = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  if (!arbeidsgiverOpplysning) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitet(arbeidsgiverOpplysning, arbeidsforhold.eksternArbeidsforholdId);
+};
+
+const utledArbeidsforholdUtenIMRadioTekst = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactNode => (
+    <FormattedMessage id={mottarYtelseForArbeidMsg()} values={{ arbeid: lagVisningsnavn(arbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId) }} />
 );
 
-const mottarYtelseArbeidsforholdRadio = (andel, readOnly, isAksjonspunktClosed, alleKodeverk) => (
+const mottarYtelseArbeidsforholdRadio = (andel, readOnly, isAksjonspunktClosed, alleKodeverk, arbeidsgiverOpplysningerPerId) => (
   <div key={utledArbeidsforholdFieldName(andel)}>
     <div>
       <Normaltekst>
-        {utledArbeidsforholdUtenIMRadioTekst(andel.arbeidsforhold, alleKodeverk)}
+        {utledArbeidsforholdUtenIMRadioTekst(andel.arbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
       </Normaltekst>
     </div>
     <VerticalSpacer eightPx />
@@ -46,10 +64,10 @@ const mottarYtelseArbeidsforholdRadio = (andel, readOnly, isAksjonspunktClosed, 
   </div>
 );
 
-export const frilansMedAndreFrilanstilfeller = () => ('BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForFrilansUtenFrilans');
-export const frilansUtenAndreFrilanstilfeller = () => ('BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForFrilans');
+export const frilansMedAndreFrilanstilfeller = (): string => ('BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForFrilansUtenFrilans');
+export const frilansUtenAndreFrilanstilfeller = (): string => ('BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForFrilans');
 
-const finnFrilansTekstKode = (tilfeller) => {
+const finnFrilansTekstKode = (tilfeller: string[]): string => {
   if (tilfeller.some((tilfelle) => andreFrilansTilfeller.includes(tilfelle))) {
     return frilansMedAndreFrilanstilfeller();
   }
@@ -62,6 +80,7 @@ type OwnProps = {
     tilfeller: string[];
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
@@ -81,7 +100,12 @@ interface StaticFunctions {
  * bruker vurder om bruker har mottatt ytelse for en eller flere aktiviteter.
  */
 const VurderMottarYtelseForm:FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly, isAksjonspunktClosed, beregningsgrunnlag, tilfeller, alleKodeverk,
+  readOnly,
+  isAksjonspunktClosed,
+  beregningsgrunnlag,
+  tilfeller,
+  alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const vurderMottarYtelse = beregningsgrunnlag.faktaOmBeregning ? beregningsgrunnlag.faktaOmBeregning.vurderMottarYtelse : undefined;
   const erFrilans = vurderMottarYtelse && vurderMottarYtelse.erFrilans;
@@ -108,7 +132,7 @@ const VurderMottarYtelseForm:FunctionComponent<OwnProps> & StaticFunctions = ({
         </div>
       )}
       {arbeidsforholdUtenIM.map((andel) => (
-        mottarYtelseArbeidsforholdRadio(andel, readOnly, isAksjonspunktClosed, alleKodeverk)
+        mottarYtelseArbeidsforholdRadio(andel, readOnly, isAksjonspunktClosed, alleKodeverk, arbeidsgiverOpplysningerPerId)
       ))}
     </div>
   );

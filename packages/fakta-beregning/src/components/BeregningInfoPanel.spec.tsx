@@ -58,6 +58,7 @@ describe('<BeregningInfoPanel>', () => {
       submitCallback={sinon.spy()}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const panel = wrapper.find(VurderFaktaBeregningPanel);
     expect(panel).has.length(1);
@@ -90,6 +91,7 @@ describe('<BeregningInfoPanel>', () => {
       behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const panel = wrapper.find(VurderFaktaBeregningPanel);
     expect(panel).has.length(1);
@@ -123,6 +125,7 @@ describe('<BeregningInfoPanel>', () => {
       behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const panel = wrapper.find(AvklareAktiviteterPanel);
     expect(panel).has.length(1);
@@ -156,6 +159,7 @@ describe('<BeregningInfoPanel>', () => {
       behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const panel = wrapper.find(AvklareAktiviteterPanel);
     expect(panel).has.length(1);

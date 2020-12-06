@@ -12,18 +12,20 @@ export {
   BeregningsgrunnlagPeriodeProp,
   RefusjonTilVurderingAndel,
   FordelBeregningsgrunnlagPeriode,
+} from './src/beregningsgrunnlagTsType';
+export {
+  default as FaktaOmBeregning,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
   BeregningAktivitet,
-  FaktaOmBeregning,
   KunYtelse,
   AndelForFaktaOmBeregning,
   KortvarigAndel,
   VurderMottarYtelse,
   ArbeidstakerUtenIMAndel,
   RefusjonskravSomKommerForSentListe,
-  BeregningsgrunnlagArbeidsforhold,
-} from './src/beregningsgrunnlagTsType';
+} from './src/beregningsgrunnlagFaktaTsType';
+export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
 export { default as Dokument } from './src/dokumentTsType';

@@ -2,24 +2,43 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
-
+import { getKodeverknavnFn, DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
+
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { FaktaOmBeregning, KodeverkMedNavn, KortvarigAndel } from '@fpsak-frontend/types';
+import {
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagArbeidsforhold,
+  FaktaOmBeregning,
+  KodeverkMedNavn,
+  KortvarigAndel,
+} from '@fpsak-frontend/types';
+import ArbeidsgiverOpplysningerPerId from '@fpsak-frontend/types/src/arbeidsgiverOpplysningerTsType';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createVisningsnavnForAktivitet } from '../../ArbeidsforholdHelper';
 
 const kortvarigStringId = 'BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold';
 
-const createArbeidsforholdRadioKey = (andel) => (andel && andel.arbeidsforhold
-  ? `${andel.arbeidsforhold.arbeidsgiverNavn}(${andel.arbeidsforhold.arbeidsforholdId})(${andel.andelsnr})`
+const createArbeidsforholdRadioKey = (andel: BeregningsgrunnlagAndel): string => (andel && andel.arbeidsforhold
+  ? `${andel.arbeidsforhold.arbeidsgiverIdent}(${andel.arbeidsforhold.arbeidsforholdId})(${andel.andelsnr})`
   : '');
+
+const lagVisningsnavn = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): string => {
+  const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  if (!agOpplysninger) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitet(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
+};
 
 type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
     faktaOmBeregning: FaktaOmBeregning;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
@@ -35,18 +54,18 @@ interface StaticFunctions {
  */
 
 export const TidsbegrensetArbeidsforholdForm: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly, faktaOmBeregning, isAksjonspunktClosed, alleKodeverk,
+  readOnly, faktaOmBeregning, isAksjonspunktClosed, alleKodeverk, arbeidsgiverOpplysningerPerId,
 }) => {
   const andelsliste = faktaOmBeregning.kortvarigeArbeidsforhold;
   return (
     <div>
       {andelsliste.map((andel) => (
-        <div key={`fastsettTidsbegrensedeForhold_${createVisningsnavnForAktivitet(andel.arbeidsforhold, alleKodeverk)}`}>
+        <div key={`fastsettTidsbegrensedeForhold_${lagVisningsnavn(andel.arbeidsforhold, arbeidsgiverOpplysningerPerId, alleKodeverk)}`}>
           <Normaltekst>
             <FormattedMessage
               id={kortvarigStringId}
               values={{
-                navn: createVisningsnavnForAktivitet(andel.arbeidsforhold, alleKodeverk),
+                navn: lagVisningsnavn(andel.arbeidsforhold, arbeidsgiverOpplysningerPerId, alleKodeverk),
                 fom: moment(andel.arbeidsforhold.startdato).format(DDMMYYYY_DATE_FORMAT),
                 tom: moment(andel.arbeidsforhold.opphoersdato).format(DDMMYYYY_DATE_FORMAT),
               }}

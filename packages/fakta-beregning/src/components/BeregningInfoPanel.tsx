@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -26,6 +26,7 @@ const createRelevantForms = (
   behandlingId,
   behandlingVersjon,
   beregningsgrunnlag,
+  arbeidsgiverOpplysningerPerId,
 ) => (
   <div>
     <AvklareAktiviteterPanel
@@ -39,6 +40,7 @@ const createRelevantForms = (
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer thirtyTwoPx />
     <VurderFaktaBeregningPanel
@@ -51,6 +53,7 @@ const createRelevantForms = (
       behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag}
       erOverstyrer={erOverstyrer}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </div>
 );
@@ -66,6 +69,7 @@ type OwnProps = {
     beregningsgrunnlag?: Beregningsgrunnlag;
     behandlingId: number;
     behandlingVersjon: number;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 /**
@@ -83,6 +87,7 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   behandlingId,
   behandlingVersjon,
+  arbeidsgiverOpplysningerPerId,
 }) => createRelevantForms(
   readOnly,
   aksjonspunkter,
@@ -93,6 +98,7 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   beregningsgrunnlag,
+  arbeidsgiverOpplysningerPerId,
 );
 
 export default BeregningInfoPanel;

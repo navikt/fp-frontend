@@ -7,21 +7,44 @@ const faktaOmBeregningAndel1 = {
   andelsnr: 1,
   fastsattBelopPrMnd: null,
   lagtTilAvSaksbehandler: false,
-  inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-  aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
-  visningsnavn: 'Brukers andel',
+  inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'INNTEKTSKATEGORI' },
+  aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
 };
 
 const faktaOmBeregningAndel2 = {
   andelsnr: 2,
   fastsattBelopPrMnd: 10000,
   lagtTilAvSaksbehandler: true,
-  inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-  aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
-  visningsnavn: 'Brukers andel',
+  inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'INNTEKTSKATEGORI' },
+  aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
 };
 
 const faktaOmBeregningAndeler = [faktaOmBeregningAndel1, faktaOmBeregningAndel2];
+
+const alleKodeverk = {
+  AktivitetStatus: [
+    {
+      kode: 'AT',
+      navn: 'Arbeidstaker',
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    {
+      kode: 'SN',
+      navn: 'Selvstendig næringsdrivende',
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    {
+      kode: 'DP',
+      navn: 'Dagpenger',
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    {
+      kode: 'BA',
+      navn: 'Brukers andel',
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+  ],
+};
 
 describe('<KunYtelsePanel>', () => {
   it('skal transform values riktig', () => {
@@ -56,21 +79,21 @@ describe('<KunYtelsePanel>', () => {
       fastsattBelopPrMnd: null,
       lagtTilAvSaksbehandler: false,
       inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
     };
     const andel2 = {
       andelsnr: 2,
       fastsattBelopPrMnd: 10000,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'INNTEKTSKATEGORI' },
+      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
     };
     const kunYtelse = {
       fodendeKvinneMedDP: false,
       andeler: [andel1, andel2],
     };
 
-    const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
+    const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler, alleKodeverk);
     const andeler = initialValues[`${brukersAndelFieldArrayName}`];
     expect(andeler).to.have.length(2);
     expect(andeler[0].andelsnr).to.equal(1);
@@ -96,21 +119,21 @@ describe('<KunYtelsePanel>', () => {
       fastsattBelopPrMnd: null,
       lagtTilAvSaksbehandler: false,
       inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
     };
     const andel2 = {
       andelsnr: 2,
       fastsattBelopPrMnd: 10000,
       lagtTilAvSaksbehandler: true,
       inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
     };
     const kunYtelse = {
       andeler: [andel1, andel2],
       fodendeKvinneMedDP: true,
       erBesteberegning: true,
     };
-    const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
+    const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler, alleKodeverk);
     const andeler = initialValues[`${brukersAndelFieldArrayName}`];
     expect(andeler).to.have.length(2);
     expect(andeler[0].andelsnr).to.equal(1);
@@ -139,21 +162,21 @@ describe('<KunYtelsePanel>', () => {
       fastsattBelopPrMnd: null,
       lagtTilAvSaksbehandler: false,
       inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
     };
     const andel2 = {
       andelsnr: 2,
       fastsattBelopPrMnd: 10000,
       lagtTilAvSaksbehandler: true,
       inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
     };
     const kunYtelse = {
       andeler: [andel1, andel2],
       fodendeKvinneMedDP: true,
       erBesteberegning: false,
     };
-    const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
+    const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler, alleKodeverk);
     const andeler = initialValues[`${brukersAndelFieldArrayName}`];
     expect(andeler).to.have.length(2);
     expect(andeler[0].andelsnr).to.equal(1);

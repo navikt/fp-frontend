@@ -50,9 +50,9 @@ export const getKunYtelseValidation = (values, kunYtelse, aktivertePaneler) => {
   return {};
 };
 
-export const buildInitialValuesKunYtelse = (kunYtelse, tilfeller, faktaOmBeregningAndeler) => {
+export const buildInitialValuesKunYtelse = (kunYtelse, tilfeller, faktaOmBeregningAndeler, alleKodeverk) => {
   if (tilfeller && tilfeller.includes(FASTSETT_BG_KUN_YTELSE)) {
-    return KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
+    return KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler, alleKodeverk);
   }
   return {};
 };
