@@ -6,8 +6,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Table, TableColumn, TableRow, AksjonspunktHelpTextHTML, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import { dateFormat } from '@fpsak-frontend/utils';
+
+import AktivitetskravAksjonspunktData from '../AktivitetskravAksjonspunktData';
 
 const HEADER_TEXT_CODES = [
   'AktivitetskravFaktaForm.Periode',
@@ -18,13 +20,15 @@ const HEADER_TEXT_CODES = [
 interface OwnProps {
   harApneAksjonspunkter: boolean;
   uttakKontrollerAktivitetskrav: UttakKontrollerAktivitetskrav[];
-  submitCallback?: (aksjonspunktData: any) => Promise<any>;
+  submitCallback?: (aksjonspunkter: AktivitetskravAksjonspunktData[]) => Promise<any>;
+  aktivitetskravAvklaringer: KodeverkMedNavn[];
 }
 
 const AktivitetskravFaktaForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   harApneAksjonspunkter,
   uttakKontrollerAktivitetskrav,
   submitCallback,
+  aktivitetskravAvklaringer,
   intl,
 }) => (
   <>
@@ -40,7 +44,7 @@ const AktivitetskravFaktaForm: FunctionComponent<OwnProps & WrappedComponentProp
       {uttakKontrollerAktivitetskrav && uttakKontrollerAktivitetskrav.map((krav) => (
         <TableRow key={krav.fom + krav.tom}>
           <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-          <TableColumn>{krav.avklaring ? krav.avklaring.kode : ''}</TableColumn>
+          <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring.kode)?.navn : ''}</TableColumn>
           <TableColumn>{krav.begrunnelse}</TableColumn>
         </TableRow>
       ))}
@@ -52,7 +56,7 @@ const AktivitetskravFaktaForm: FunctionComponent<OwnProps & WrappedComponentProp
         avklartePerioder: uttakKontrollerAktivitetskrav.map((krav) => ({
           fom: krav.fom,
           tom: krav.tom,
-          avklaring: 'I_AKTIVITET',
+          avklaring: { kode: 'I_AKTIVITET', kodeverk: 'AKTIVITETSKRAV_AVKLARING' },
           begrunnelse: 'testbegrunnelse',
         })),
       }])}

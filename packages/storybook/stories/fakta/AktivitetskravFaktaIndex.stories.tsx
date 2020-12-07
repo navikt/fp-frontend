@@ -8,9 +8,11 @@ import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
 
 import withReduxProvider from '../../decorators/withRedux';
 
+import alleKodeverk from '../mocks/alleKodeverk.json';
+
 const uttakKontrollerAktivitetskrav = [{
-  avklaring: null,
-  begrunnelse: null,
+  avklaring: { kode: 'I_AKTIVITET', kodeverk: 'AKTIVITETSKRAV_AVKLARING' },
+  begrunnelse: 'Dette er en test',
   fom: '2021-01-01',
   tom: '2021-01-07',
 }, {
@@ -38,6 +40,7 @@ export const visAksjonspunktForAdopsjonsvilkåret = () => (
   <AktivitetskravFaktaIndex
     {...standardFaktaProps}
     uttakKontrollerAktivitetskrav={uttakKontrollerAktivitetskrav}
+    alleKodeverk={alleKodeverk as any}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
