@@ -30,8 +30,7 @@ const atAndelEn = {
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverNavn: 'arbeidsgiver',
-    arbeidsgiverId: '123',
+    arbeidsgiverIdent: '123',
   },
   andelsnr: 1,
 };
@@ -42,8 +41,7 @@ const atAndelTo = {
     kodeverk: 'test',
   },
   arbeidsforhold: {
-    arbeidsgiverNavn: 'arbeidsgiver',
-    arbeidsgiverId: '456',
+    arbeidsgiverIdent: '456',
   },
   andelsnr: 2,
 };
@@ -78,6 +76,21 @@ const getKodeverknavn = (kodeverk) => {
   return '';
 };
 
+const arbeidsgiverOpplysningerPerId = {
+  123: {
+    erPrivatPerson: false,
+    identifikator: '123',
+    referanse: '123',
+    navn: 'arbeidsgiver',
+  },
+  456: {
+    erPrivatPerson: false,
+    identifikator: '456',
+    referanse: '456',
+    navn: 'arbeidsgiver',
+  },
+};
+
 describe('<GraderingUtenBG>', () => {
   it('skal teste at komponent vises riktig gitt en liste arbeidsforhold', () => {
     const wrapper = shallowWithIntl(<UnwrappedForm
@@ -88,6 +101,7 @@ describe('<GraderingUtenBG>', () => {
       submitCallback={sinon.spy()}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       {...reduxFormPropsMock}
     />);
     const radioOption = wrapper.find(RadioOption);
@@ -113,6 +127,7 @@ describe('<GraderingUtenBG>', () => {
       getKodeverknavn={getKodeverknavn}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       {...reduxFormPropsMock}
     />);
     const radioOption = wrapper.find(RadioOption);

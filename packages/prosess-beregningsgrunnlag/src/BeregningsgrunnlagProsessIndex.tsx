@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
-import { Beregningsgrunnlag } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
 
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 import BeregningFP from './components/BeregningFP';
@@ -15,6 +15,7 @@ const intl = createIntl({
 
 type OwnProps = {
     beregningsgrunnlag?: Beregningsgrunnlag;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
@@ -26,6 +27,7 @@ const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProse
   readOnlySubmitButton,
   vilkar,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <BeregningFP
@@ -37,6 +39,7 @@ const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProse
       readOnlySubmitButton={readOnlySubmitButton}
       vilkar={vilkar}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );

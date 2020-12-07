@@ -15,7 +15,7 @@ import aktivitetStatus, {
   isStatusTilstotendeYtelse,
 } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
@@ -69,7 +69,8 @@ type OwnProps = {
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     beregningsgrunnlag: Beregningsgrunnlag;
     vilkar: Vilkar[];
-    behandling: Behandling
+    behandling: Behandling;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 /**
@@ -87,6 +88,7 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
   readOnlySubmitButton,
   vilkar,
   alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   if (!beregningsgrunnlag) {
     return visningForManglendeBG();
@@ -108,6 +110,7 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
         behandlingId={behandling.id}
         behandlingVersjon={behandling.versjon}
         vilkaarBG={vilkaarBG}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
 
       {sokerHarGraderingPaaAndelUtenBG
@@ -121,6 +124,7 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
             andelerMedGraderingUtenBG={beregningsgrunnlag.andelerMedGraderingUtenBG}
             alleKodeverk={alleKodeverk}
             venteaarsakKode={behandling.venteArsakKode}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
           )}
     </>

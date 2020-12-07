@@ -28,6 +28,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
       vilkar={[]}
       status=""
       alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningFp = wrapper.find('BeregningFP');
     expect(beregningFp.length).to.equal(1);

@@ -10,12 +10,17 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
-import { BeregningsgrunnlagAndel, KodeverkMedNavn, RelevanteStatuserProp } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold, Kodeverk,
+  KodeverkMedNavn,
+  RelevanteStatuserProp,
+} from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 
-const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel) => {
+const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
   if (andel.overstyrtPrAar !== null && andel.overstyrtPrAar !== undefined) {
     return true;
   }
@@ -23,7 +28,7 @@ const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel) => {
   return andel.erTilkommetAndel === false && andel.lagtTilAvSaksbehandler === false;
 };
 
-const finnAndelerSomSkalVisesAT = (andeler) => {
+const finnAndelerSomSkalVisesAT = (andeler: BeregningsgrunnlagAndel[]): BeregningsgrunnlagAndel[] => {
   if (!andeler) {
     return [];
   }
@@ -33,12 +38,24 @@ const finnAndelerSomSkalVisesAT = (andeler) => {
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
 
-const createRows = (relevanteAndelerAT, getKodeverknavn, readOnly) => {
-  const rows = relevanteAndelerAT.map((andel, index) => (
+const lagVisningsnavn = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  if (!arbeidsgiverInformasjon) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitet(arbeidsgiverInformasjon, arbeidsforhold.eksternArbeidsforholdId);
+};
+
+const createRows = (relevanteAndelerAT: BeregningsgrunnlagAndel[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  readOnly: boolean,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => relevanteAndelerAT.map((andel, index) => (
     <Row key={`index${index + 1}`} className={styles.verticalAlignMiddle}>
       <Column xs="7">
         <Normaltekst>
-          {createVisningsnavnForAktivitet(andel.arbeidsforhold, getKodeverknavn)}
+          {lagVisningsnavn(andel.arbeidsforhold, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
         </Normaltekst>
       </Column>
       <Column xs="5">
@@ -53,10 +70,7 @@ const createRows = (relevanteAndelerAT, getKodeverknavn, readOnly) => {
         </div>
       </Column>
     </Row>
-  ));
-
-  return rows;
-};
+));
 
 interface StaticFunctions {
   transformValuesForAT?: (values: any, alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],) => any;
@@ -67,13 +81,19 @@ type OwnProps = {
     readOnly: boolean;
     alleAndelerIForstePeriode: BeregningsgrunnlagAndel[];
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
-const AksjonspunktBehandlerAT: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleAndelerIForstePeriode, alleKodeverk }) => {
+const AksjonspunktBehandlerAT: FunctionComponent<OwnProps> & StaticFunctions = ({
+  readOnly,
+  alleAndelerIForstePeriode,
+  alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
+}) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   const relevanteAndelerAT = finnAndelerSomSkalVisesAT(alleAndelerIForstePeriode);
   return (
     <>
-      { createRows(relevanteAndelerAT, getKodeverknavn, readOnly) }
+      { createRows(relevanteAndelerAT, getKodeverknavn, readOnly, arbeidsgiverOpplysningerPerId) }
     </>
   );
 };

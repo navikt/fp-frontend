@@ -101,7 +101,6 @@ const allAndeler = [{
   aktivitetStatus: {
     kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   },
-  elementNavn: 'arbeidsgiver 1',
   beregnetPrAar: 200000,
   overstyrtPrAar: 100,
 }];
@@ -193,6 +192,7 @@ describe('<BeregningForm>', () => {
       behandlingVersjon={1}
       alleKodeverk={{}}
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const avvikPanel = wrapper.find(AvviksopplysningerPanel);
@@ -215,6 +215,7 @@ describe('<BeregningForm>', () => {
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const aksjonspunktHelpTextHTML = wrapper.find(AksjonspunktHelpTextHTML);
@@ -232,6 +233,7 @@ describe('<BeregningForm>', () => {
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const skjeringspunktOgStatusPanel = wrapper.find(SkjeringspunktOgStatusPanel2);
@@ -250,6 +252,7 @@ describe('<BeregningForm>', () => {
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const aksjonspunktBehandler = wrapper.find(AksjonspunktBehandler);
@@ -273,6 +276,7 @@ describe('<BeregningForm>', () => {
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const beregningsgrunnlag = wrapper.find(Beregningsgrunnlag);
@@ -296,6 +300,7 @@ describe('<BeregningForm>', () => {
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const beregningsgrunnlag = wrapper.find(Beregningsgrunnlag);
@@ -316,6 +321,7 @@ describe('<BeregningForm>', () => {
       submitCallback={sinon.spy}
       readOnlySubmitButton
       vilkaarBG={getBGVilkar(mockVilkar)}
+      arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
     />);
     const avvikspanel = wrapper.find('AvviksopplysningerPanel');

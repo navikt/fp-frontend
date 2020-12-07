@@ -74,8 +74,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '123',
+          arbeidsgiverIdent: '123',
           arbeidsforholdId: '123',
           eksternArbeidsforholdId: '345678',
         },
@@ -89,8 +88,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '456',
+          arbeidsgiverIdent: '456',
           arbeidsforholdId: '456',
           eksternArbeidsforholdId: '567890',
         },
@@ -111,8 +109,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '123',
+          arbeidsgiverIdent: '123',
           arbeidsforholdId: '123',
           eksternArbeidsforholdId: '345678',
         },
@@ -126,8 +123,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '456',
+          arbeidsgiverIdent: '456',
           arbeidsforholdId: '456',
           eksternArbeidsforholdId: '567890',
         },
@@ -147,8 +143,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '123',
+          arbeidsgiverIdent: '123',
           arbeidsforholdId: '123',
           eksternArbeidsforholdId: '345678',
         },
@@ -162,8 +157,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '123',
+          arbeidsgiverIdent: '123',
           arbeidsforholdId: '456',
           eksternArbeidsforholdId: '567890',
         },
@@ -183,8 +177,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '123',
+          arbeidsgiverIdent: '123',
           arbeidsforholdId: '123',
           eksternArbeidsforholdId: '345678',
         },
@@ -198,8 +191,7 @@ const beregningsgrunnlagPerioder = [
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
         arbeidsforhold: {
-          arbeidsgiverNavn: 'arbeidsgiver',
-          arbeidsgiverId: '123',
+          arbeidsgiverIdent: '123',
           arbeidsforholdId: '456',
           eksternArbeidsforholdId: '567890',
         },
@@ -215,13 +207,34 @@ const keyForPeriodeOgAndel = (periodeNr, andelNr) => createInputFieldKey(
 const alleKodeverk = {
   test: 'test',
 };
-describe('<AksjonspunktBehandlerTidsbegrenset>', () => {
+
+const arbeidsgiverOpplysningerPerId = {
+  123: {
+    erPrivatPerson: false,
+    identifikator: '123',
+    referanse: '123',
+    navn: 'arbeidsgiver',
+  },
+  456: {
+    erPrivatPerson: false,
+    identifikator: '456',
+    referanse: '123',
+    navn: 'arbeidsgiver',
+  },
+};
+
+describe('<AksjonspunktBehandlerTB>', () => {
   it('Skal teste tabellen får korrekte rader', () => {
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={false}
       tableData={mockTableData}
       isAksjonspunktClosed={false}
       bruttoPrPeriodeList={mockbruttoPerodeList}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      behandlingVersjon={1}
+      behandlingId={1}
+      allePerioder={[]}
+      formName="test"
     />);
     const dataRows = wrapper.findWhere((node) => node.key() === 'arbeidsgiver1');
     const arbeidsgiverNavn = dataRows.first().find('Normaltekst');
@@ -305,7 +318,7 @@ describe('<AksjonspunktBehandlerTidsbegrenset>', () => {
         ],
       },
     };
-    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, alleKodeverk);
+    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, alleKodeverk, arbeidsgiverOpplysningerPerId);
     expect(selectorData).to.deep.equal(expectedResultObjectWhenWeHaveAksjonspunkt);
   });
   it('Skal teste at selector henter ut om aksjonspunktet er lukket eller ikke', () => {
