@@ -55,7 +55,7 @@ export const createInputFieldKey = (andel, periode) => {
   if (!andel.arbeidsforhold) {
     return undefined;
   }
-  return `${formPrefix}_${andel.arbeidsforhold.arbeidsgiverIdent}_${andel.andelsnr}_${periode.beregningsgrunnlagPeriodeFom}`;
+  return `${formPrefix}_${andel.arbeidsforhold.arbeidsforholdId}_${andel.andelsnr}_${periode.beregningsgrunnlagPeriodeFom}`;
 };
 // Lager en liste med FormattedMessages som skal brukes som overskrifter i tabellen
 
@@ -67,7 +67,7 @@ const createArbeidsforholdMapKey = (arbeidsforhold, arbeidsgiverOpplysningerPerI
   if (!arbeidsforholdInformasjon) {
     return arbeidsforhold.arbeidsforholdType ? arbeidsforhold.arbeidsforholdType : '';
   }
-  return `${arbeidsforholdInformasjon.navn}${arbeidsforholdInformasjon.identifikator}`;
+  return `${arbeidsforholdInformasjon.navn}${arbeidsforhold.arbeidsforholdId}`;
 };
 
 // Finner beregnetPrAar for alle andeler, basert på data fra den første perioden
