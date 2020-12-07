@@ -5,10 +5,16 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
+import { Behandling } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
+
+const behandling = {
+  id: 1,
+  versjon: 1,
+} as Behandling;
 
 const uttakKontrollerAktivitetskrav = [{
   avklaring: { kode: 'I_AKTIVITET', kodeverk: 'AKTIVITETSKRAV_AVKLARING' },
@@ -39,6 +45,7 @@ export default {
 export const visAksjonspunktForAdopsjonsvilkåret = () => (
   <AktivitetskravFaktaIndex
     {...standardFaktaProps}
+    behandling={behandling}
     uttakKontrollerAktivitetskrav={uttakKontrollerAktivitetskrav}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={[{

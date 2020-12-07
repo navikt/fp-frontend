@@ -3,7 +3,13 @@
   "AktivitetskravFaktaForm.Periode": "Periode",
   "AktivitetskravFaktaForm.Avklaring": "Avklaring",
   "AktivitetskravFaktaForm.Begrunnelse": "Begrunnelse",
-  "AktivitetskravFaktaForm.Ferdig": "Ferdig",
+  "AktivitetskravFaktaForm.Aktivitetskravperioder": "Perioder med aktivitetskrav",
+
+  "AktivitetskravFaktaDetailForm.Header": "Detaljer",
+  "AktivitetskravFaktaDetailForm.Oppdater": "Oppdater",
+  "AktivitetskravFaktaDetailForm.Avbryt": "Avbryt",
+  "AktivitetskravFaktaDetailForm.Avklaring": "Avklaring",
+  "AktivitetskravFaktaDetailForm.Periode": "Periode",
  
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
   "ValidationMessage.InvalidDatesInPeriod": "Periode må skrives slik : dd.mm.åååå - dd.mm.åååå",
