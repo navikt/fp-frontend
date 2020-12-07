@@ -67,6 +67,7 @@ describe('<UnwrappedForm>', () => {
       alleKodeverk={alleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       tidsBegrensetInntekt={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
@@ -100,6 +101,7 @@ describe('<UnwrappedForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       tidsBegrensetInntekt={false}
       intl={intlMock}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
@@ -134,6 +136,7 @@ describe('<UnwrappedForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       tidsBegrensetInntekt={false}
       intl={intlMock}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
@@ -168,6 +171,7 @@ describe('<UnwrappedForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       tidsBegrensetInntekt
       intl={intlMock}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
@@ -219,6 +223,7 @@ describe('<UnwrappedForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       tidsBegrensetInntekt={false}
       intl={intlMock}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet');

@@ -1,9 +1,10 @@
 import Kodeverk from './kodeverkTsType';
 
-type BeregningsgrunnlagArbeidsforhold = Readonly<{
+export type BeregningsgrunnlagArbeidsforhold = Readonly<{
   arbeidsgiverNavn?: string;
   arbeidsgiverId?: string;
   arbeidsgiverIdVisning?: string;
+  arbeidsgiverIdent?: string;
   eksternArbeidsforholdId?: string;
   refusjonPrAar?: number;
   belopFraInntektsmeldingPrMnd?: number;
@@ -14,6 +15,10 @@ type BeregningsgrunnlagArbeidsforhold = Readonly<{
   opphoersdato?: string;
   arbeidsforholdId?: string;
   arbeidsforholdType?: Kodeverk;
+
+  // Felter som brukes hvis de er satt men mappes ikke backend, løses i TFP-2044
+  stillingsNavn?: string;
+  stillingsProsent?: number;
 }>
 
 type FaktaOmBeregningAndel = Readonly<{
@@ -227,6 +232,9 @@ export type BeregningsgrunnlagAndel = Readonly <{
   andelsnr?: number;
   lonnsendringIBeregningsperioden?: boolean;
   besteberegningPrAar?: number;
+  skalFastsetteGrunnlag?: boolean
+  lagtTilAvSaksbehandler?: boolean;
+  erTilkommetAndel?: boolean;
   næringer?: Næring[];
 }>;
 

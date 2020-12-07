@@ -15,7 +15,7 @@ import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { Undertittel } from 'nav-frontend-typografi';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import {
-  Aksjonspunkt,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId,
   Beregningsgrunnlag as BeregningsgrunnlagProp,
   KodeverkMedNavn,
   RelevanteStatuserProp,
@@ -234,6 +234,7 @@ type OwnProps = {
     beregningsgrunnlag: BeregningsgrunnlagProp;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     vilkaarBG: Vilkar;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 // ------------------------------------------------------------------------------------------ //
@@ -257,6 +258,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
   behandlingVersjon,
   alleKodeverk,
   vilkaarBG,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => {
   const {
@@ -306,6 +308,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 behandlingVersjon={behandlingVersjon}
                 alleKodeverk={alleKodeverk}
                 skjeringstidspunktDato={skjaeringstidspunktBeregning}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
             </>
           )}
@@ -341,6 +344,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 aksjonspunkter={gjeldendeAksjonspunkter}
                 relevanteStatuser={relevanteStatuser}
                 tidsBegrensetInntekt={tidsBegrensetInntekt}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
             </>
           )}

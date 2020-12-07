@@ -16,6 +16,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
+  ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagPeriodeProp,
   KodeverkMedNavn,
   RelevanteStatuserProp,
@@ -84,6 +85,7 @@ type OwnProps = {
     tidsBegrensetInntekt: boolean;
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
     relevanteStatuser: RelevanteStatuserProp;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
@@ -98,6 +100,7 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   alleKodeverk,
   relevanteStatuser,
   tidsBegrensetInntekt,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   let erVarigEndring = false;
@@ -150,6 +153,7 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
             behandlingVersjon={behandlingVersjon}
             alleKodeverk={alleKodeverk}
             aksjonspunkter={aksjonspunkter}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
           )}
           {!tidsBegrensetInntekt && visAT && (
@@ -157,6 +161,7 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
             readOnly={readOnly}
             alleAndelerIForstePeriode={alleAndelerIForstePeriode}
             alleKodeverk={alleKodeverk}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
           )}
           {visFL && (

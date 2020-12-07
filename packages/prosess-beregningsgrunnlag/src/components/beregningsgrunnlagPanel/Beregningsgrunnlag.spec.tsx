@@ -20,19 +20,17 @@ const arbeidstakerAndel = {
     kode: aktivitetStatus.ARBEIDSTAKER,
     kodeverk: 'test',
   },
-  elementNavn: 'arbeidsgiver 1',
   beregnetPrAar: 100000,
   overstyrtPrAar: 150000,
   beregningsperiodeFom: '2014-01-01',
   beregningsperiodeTom: '2015-01-01',
-
 };
+
 const frilanserAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.FRILANSER,
     kodeverk: 'test',
   },
-  elementNavn: 'frilansinntekt',
   beregnetPrAar: 200000,
   overstyrtPrAar: 250000,
   beregningsperiodeFom: '2015-01-01',
@@ -169,6 +167,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const atPanel = wrapper.find(GrunnlagForAarsinntektPanelAT);
     expect(atPanel).to.have.length(1);
@@ -186,6 +185,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const flPanel = wrapper.find(GrunnlagForAarsinntektPanelFL);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
@@ -203,6 +203,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
@@ -221,6 +222,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
@@ -240,6 +242,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(MilitaerPanel)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(1);
@@ -260,6 +263,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(MilitaerPanel)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
@@ -281,6 +285,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(MilitaerPanel)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(1);
@@ -303,6 +308,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(MilitaerPanel)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(1);
@@ -319,6 +325,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
@@ -339,6 +346,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
@@ -357,6 +365,7 @@ describe('<Beregningsgrunnlag>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
