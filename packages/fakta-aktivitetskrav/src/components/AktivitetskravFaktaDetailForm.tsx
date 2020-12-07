@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { WrappedComponentProps, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
@@ -31,7 +31,7 @@ interface MappedOwnProps {
   onSubmit: (formValues: FormValues) => any;
 }
 
-const AktivitetskravFaktaDetailForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+export const AktivitetskravFaktaDetailForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   valgtAktivitetskrav,
   readOnly,
   aktivitetskravAvklaringer,
@@ -111,4 +111,4 @@ export default connect(mapStateToProps)(behandlingForm({
   form: FORM_NAME,
   keepDirtyOnReinitialize: false,
   enableReinitialize: true,
-})(injectIntl(AktivitetskravFaktaDetailForm)));
+})(AktivitetskravFaktaDetailForm));

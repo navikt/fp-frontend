@@ -9,23 +9,15 @@ import { change as reduxFormChange, FormAction, InjectedFormProps } from 'redux-
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingFormValueSelector, getBehandlingFormPrefix, behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import {
-  Table, TableColumn, TableRow, AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { dateFormat } from '@fpsak-frontend/utils';
 
 import { bindActionCreators, Dispatch } from 'redux';
 import AktivitetskravAksjonspunktData from '../AktivitetskravAksjonspunktData';
 import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
+import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
 
 const FORM_NAME = 'AktivitetskravFaktaForm';
-
-const HEADER_TEXT_CODES = [
-  'AktivitetskravFaktaForm.Periode',
-  'AktivitetskravFaktaForm.Avklaring',
-  'AktivitetskravFaktaForm.Begrunnelse',
-];
 
 type FormValues = {
   aktivitetskrav: UttakKontrollerAktivitetskrav[];
@@ -58,7 +50,7 @@ interface DispatchProps {
   formChange: (form: string, field: string, value: any, touch?: boolean, persistentSubmitErrors?: boolean) => FormAction;
 }
 
-const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps & WrappedComponentProps> = ({
+export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps & WrappedComponentProps> = ({
   intl,
   behandlingId,
   behandlingVersjon,
@@ -113,22 +105,12 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]}
         >
           {aktivitetskrav && (
-            <Table headerTextCodes={HEADER_TEXT_CODES}>
-              {aktivitetskrav.map((krav) => (
-                <TableRow
-                  key={krav.fom + krav.tom}
-                  model={krav}
-                  isSelected={valgtAktivitetskrav?.fom === krav.fom}
-                  isApLeftBorder={!krav.avklaring}
-                  onMouseDown={velgAktivitetskrav}
-                  onKeyDown={velgAktivitetskrav}
-                >
-                  <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-                  <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring.kode)?.navn : ''}</TableColumn>
-                  <TableColumn>{krav.begrunnelse}</TableColumn>
-                </TableRow>
-              ))}
-            </Table>
+            <AktivitetskravFaktaTabell
+              aktivitetskrav={aktivitetskrav}
+              valgtAktivitetskravFom={valgtAktivitetskrav?.fom}
+              velgAktivitetskrav={velgAktivitetskrav}
+              aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+            />
           )}
           {valgtAktivitetskrav && (
             <AktivitetskravFaktaDetailForm
