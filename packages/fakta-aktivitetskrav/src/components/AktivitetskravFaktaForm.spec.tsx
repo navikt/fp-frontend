@@ -1,5 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -8,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { AktivitetskravFaktaForm } from './AktivitetskravFaktaForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-aktivitetskrav';
 import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
-import { AktivitetskravFaktaDetailForm } from './AktivitetskravFaktaDetailForm';
+import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
 
 describe('<AktivitetskravFaktaForm>', () => {
   const aktivitetskravAvklaringer = [{
@@ -60,7 +61,7 @@ describe('<AktivitetskravFaktaForm>', () => {
     expect(wrapper.find(AktivitetskravFaktaTabell)).to.have.length(1);
   });
 
-  it('skal vise detaljevindu når en velge krav i tabell', () => {
+  it('skal vise detaljvindu når en velger periode i tabell og så lagre periode', () => {
     const sorterteAktivitetskrav = [{
       fom: '2021-01-01',
       tom: '2021-01-07',
@@ -73,6 +74,8 @@ describe('<AktivitetskravFaktaForm>', () => {
       fom: '2021-01-08',
       tom: '2021-01-14',
     }];
+
+    const formChange = sinon.spy();
 
     const wrapper = shallowWithIntl(<AktivitetskravFaktaForm
       {...reduxFormPropsMock}
@@ -89,18 +92,32 @@ describe('<AktivitetskravFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       submittable
       behandlingFormPrefix="test"
-      formChange={() => undefined}
+      formChange={formChange}
     />);
 
-    const detaljeform = wrapper.find(AktivitetskravFaktaDetailForm);
-    expect(detaljeform).to.have.length(0);
+    expect(wrapper.find(AktivitetskravFaktaDetailForm)).to.have.length(0);
 
     const velgAktivitetskrav = wrapper.find(AktivitetskravFaktaTabell).prop('velgAktivitetskrav');
-    velgAktivitetskrav(undefined, undefined, sorterteAktivitetskrav[0]);
+    velgAktivitetskrav(undefined, undefined, sorterteAktivitetskrav[1]);
 
-    wrapper.update();
+    const detaljeform = wrapper.find(AktivitetskravFaktaDetailForm);
+    expect(detaljeform).to.have.length(1);
 
-    const detaljeform1 = wrapper.find(AktivitetskravFaktaDetailForm);
-    expect(detaljeform1).to.have.length(0);
+    const endretPeriode = {
+      fom: '2021-01-08',
+      tom: '2021-01-14',
+      avklaring: {
+        kode: 'avklaring 2',
+        kodeverk: 'AVKLARING',
+      },
+      begrunnelse: 'Dette er en ny beskrivelse',
+    };
+
+    detaljeform.prop('oppdaterAktivitetskrav')(endretPeriode);
+
+    expect(formChange.called).is.true;
+    const { args } = formChange.getCalls()[0];
+    expect(args).has.length(3);
+    expect(args[2]).is.eql([sorterteAktivitetskrav[0], endretPeriode]);
   });
 });
