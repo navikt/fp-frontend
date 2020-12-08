@@ -1,15 +1,17 @@
 {
   "AktivitetskravFaktaForm.AksjonspunktHjelpetekst": "Kontroller kravet til mors aktivitet",
-  "AktivitetskravFaktaForm.Periode": "Periode",
-  "AktivitetskravFaktaForm.Avklaring": "Avklaring",
-  "AktivitetskravFaktaForm.Begrunnelse": "Begrunnelse",
   "AktivitetskravFaktaForm.Aktivitetskravperioder": "Perioder med aktivitetskrav",
+
+  "AktivitetskravFaktaTabell.Periode": "Periode",
+  "AktivitetskravFaktaTabell.Avklaring": "Avklaring",
+  "AktivitetskravFaktaTabell.MorsAktivitet": "Mors aktivitet",
 
   "AktivitetskravFaktaDetailForm.Header": "Detaljer",
   "AktivitetskravFaktaDetailForm.Oppdater": "Oppdater",
   "AktivitetskravFaktaDetailForm.Avbryt": "Avbryt",
   "AktivitetskravFaktaDetailForm.Avklaring": "Avklaring",
   "AktivitetskravFaktaDetailForm.Periode": "Periode",
+  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
  
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
   "ValidationMessage.InvalidDatesInPeriod": "Periode må skrives slik : dd.mm.åååå - dd.mm.åååå",
@@ -26,5 +28,6 @@
   "ValidationMessage.InvalidDate": "Dato må skrives slik : dd.mm.åååå",
   "ValidationMessage.InvalidPeriod": "Startdato må være før eller lik sluttdato",
   "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
-  "PeriodFieldArray.LeggTilBarn": "Legg til barn"
+  "PeriodFieldArray.LeggTilBarn": "Legg til barn",
+  "Behandling.EditedField": "Saksbehandler har endret feltets verdi"
 }

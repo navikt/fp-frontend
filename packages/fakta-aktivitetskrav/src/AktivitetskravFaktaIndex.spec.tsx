@@ -12,12 +12,15 @@ describe('<AktivitetskravFaktaIndex>', () => {
     const uttakKontrollerAktivitetskrav = [{
       fom: '2021-01-14',
       tom: '2021-01-20',
+      endret: false,
     }, {
       fom: '2021-01-01',
       tom: '2021-01-07',
+      endret: false,
     }, {
       fom: '2021-01-08',
       tom: '2021-01-13',
+      endret: false,
     }];
 
     const wrapper = shallow(<AktivitetskravFaktaIndex
@@ -35,12 +38,15 @@ describe('<AktivitetskravFaktaIndex>', () => {
     expect(wrapper.find(AktivitetskravFaktaForm).prop('sorterteAktivitetskrav')).to.eql([{
       fom: '2021-01-01',
       tom: '2021-01-07',
+      endret: false,
     }, {
       fom: '2021-01-08',
       tom: '2021-01-13',
+      endret: false,
     }, {
       fom: '2021-01-14',
       tom: '2021-01-20',
+      endret: false,
     }]);
   });
 });

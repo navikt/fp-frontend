@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
@@ -24,6 +25,7 @@ interface PureOwnProps {
   aktivitetskravAvklaringer: KodeverkMedNavn[];
   oppdaterAktivitetskrav: (aktivitetskrav: UttakKontrollerAktivitetskrav) => void;
   avbrytEditeringAvAktivitetskrav: () => void;
+  morsAktiviteter: KodeverkMedNavn[];
 }
 
 interface MappedOwnProps {
@@ -36,27 +38,44 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<PureOwnProps & Map
   readOnly,
   aktivitetskravAvklaringer,
   avbrytEditeringAvAktivitetskrav,
+  morsAktiviteter,
   ...formProps
 }) => (
   <>
     <Element><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Element>
     <VerticalSpacer fourPx />
-    <Undertekst>
-      <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
-    </Undertekst>
-    <VerticalSpacer fourPx />
-    <Normaltekst>
-      <PeriodLabel
-        dateStringFom={valgtAktivitetskrav.fom}
-        dateStringTom={valgtAktivitetskrav.tom}
-      />
-    </Normaltekst>
+    <Row className="">
+      <Column xs="4">
+        <Undertekst>
+          <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
+        </Undertekst>
+        <VerticalSpacer fourPx />
+        <Normaltekst>
+          <PeriodLabel
+            dateStringFom={valgtAktivitetskrav.fom}
+            dateStringTom={valgtAktivitetskrav.tom}
+          />
+        </Normaltekst>
+      </Column>
+      {valgtAktivitetskrav.morsAktivitet && (
+        <Column xs="4">
+          <Undertekst>
+            <FormattedMessage id="AktivitetskravFaktaDetailForm.MorsAktivitet" />
+          </Undertekst>
+          <VerticalSpacer fourPx />
+          <Normaltekst>
+            {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet.kode)?.navn}
+          </Normaltekst>
+        </Column>
+      )}
+    </Row>
     <VerticalSpacer sixteenPx />
     <RadioGroupField
       name="avklaring.kode"
       label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Avklaring" />}
       validate={[required]}
       readOnly={readOnly}
+      isEdited={valgtAktivitetskrav.endret}
     >
       {aktivitetskravAvklaringer.sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => (
         <RadioOption

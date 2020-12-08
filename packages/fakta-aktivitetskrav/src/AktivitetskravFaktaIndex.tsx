@@ -44,6 +44,7 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps>
         sorterteAktivitetskrav={sorterteAktivitetskrav}
         submitCallback={submitCallback}
         aktivitetskravAvklaringer={alleKodeverk[kodeverkTyper.AKTIVITETSKRAV_AVKLARING]}
+        morsAktiviteter={alleKodeverk[kodeverkTyper.MORS_AKTIVITET]}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         readOnly={readOnly}
         submittable={submittable}

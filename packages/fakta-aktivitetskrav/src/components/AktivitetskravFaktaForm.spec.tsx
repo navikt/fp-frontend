@@ -22,6 +22,12 @@ describe('<AktivitetskravFaktaForm>', () => {
     kodeverk: 'AVKLARING',
   }];
 
+  const morsAktiviteter = [{
+    kode: 'mors aktivitet 1',
+    navn: 'Dette er mors aktivitet 1',
+    kodeverk: 'MORS_AKTIVITET',
+  }];
+
   it('skal vise tabell med aktivitetskrav', () => {
     const sorterteAktivitetskrav = [{
       fom: '2021-01-01',
@@ -31,9 +37,19 @@ describe('<AktivitetskravFaktaForm>', () => {
         kodeverk: 'AVKLARING',
       },
       begrunnelse: 'Dette er en beskrivelse',
+      morsAktivitet: {
+        kode: 'mors aktivitet 1',
+        kodeverk: 'MORS_AKTIVITET',
+      },
+      endret: false,
     }, {
       fom: '2021-01-08',
       tom: '2021-01-14',
+      morsAktivitet: {
+        kode: 'mors aktivitet 1',
+        kodeverk: 'MORS_AKTIVITET',
+      },
+      endret: false,
     }];
 
     const wrapper = shallowWithIntl(<AktivitetskravFaktaForm
@@ -45,6 +61,7 @@ describe('<AktivitetskravFaktaForm>', () => {
       aktivitetskrav={sorterteAktivitetskrav}
       readOnly={false}
       aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+      morsAktiviteter={morsAktiviteter}
       initialValues={{ aktivitetskrav: sorterteAktivitetskrav }}
       onSubmit={() => undefined}
       harApneAksjonspunkter
@@ -70,9 +87,19 @@ describe('<AktivitetskravFaktaForm>', () => {
         kodeverk: 'AVKLARING',
       },
       begrunnelse: 'Dette er en beskrivelse',
+      morsAktivitet: {
+        kode: 'mors aktivitet 1',
+        kodeverk: 'MORS_AKTIVITET',
+      },
+      endret: false,
     }, {
       fom: '2021-01-08',
       tom: '2021-01-14',
+      morsAktivitet: {
+        kode: 'mors aktivitet 1',
+        kodeverk: 'MORS_AKTIVITET',
+      },
+      endret: false,
     }];
 
     const formChange = sinon.spy();
@@ -86,6 +113,7 @@ describe('<AktivitetskravFaktaForm>', () => {
       aktivitetskrav={sorterteAktivitetskrav}
       readOnly={false}
       aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+      morsAktiviteter={morsAktiviteter}
       initialValues={{ aktivitetskrav: sorterteAktivitetskrav }}
       onSubmit={() => undefined}
       harApneAksjonspunkter
@@ -111,6 +139,11 @@ describe('<AktivitetskravFaktaForm>', () => {
         kodeverk: 'AVKLARING',
       },
       begrunnelse: 'Dette er en ny beskrivelse',
+      morsAktivitet: {
+        kode: 'mors aktivitet 1',
+        kodeverk: 'MORS_AKTIVITET',
+      },
+      endret: false,
     };
 
     detaljeform.prop('oppdaterAktivitetskrav')(endretPeriode);

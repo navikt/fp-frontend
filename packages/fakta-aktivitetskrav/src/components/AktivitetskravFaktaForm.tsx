@@ -34,6 +34,7 @@ interface PureOwnProps {
   sorterteAktivitetskrav: UttakKontrollerAktivitetskrav[];
   submitCallback?: (aksjonspunkter: AktivitetskravAksjonspunktData[]) => Promise<any>;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
+  morsAktiviteter: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   readOnly: boolean;
   submittable: boolean;
@@ -57,6 +58,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
   harApneAksjonspunkter,
   aktivitetskrav,
   aktivitetskravAvklaringer,
+  morsAktiviteter,
   alleMerknaderFraBeslutter,
   readOnly,
   submittable,
@@ -110,6 +112,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
               valgtAktivitetskravFom={valgtAktivitetskrav?.fom}
               velgAktivitetskrav={velgAktivitetskrav}
               aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+              morsAktiviteter={morsAktiviteter}
             />
           )}
           {valgtAktivitetskrav && (
@@ -122,6 +125,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
               aktivitetskravAvklaringer={aktivitetskravAvklaringer}
               oppdaterAktivitetskrav={oppdaterAktivitetskrav}
               avbrytEditeringAvAktivitetskrav={avbrytEditeringAvAktivitetskrav}
+              morsAktiviteter={morsAktiviteter}
             />
           )}
         </FaktaGruppe>

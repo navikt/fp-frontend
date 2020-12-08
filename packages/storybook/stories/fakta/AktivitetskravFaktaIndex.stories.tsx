@@ -21,16 +21,31 @@ const uttakKontrollerAktivitetskrav = [{
   begrunnelse: 'Dette er en test',
   fom: '2021-01-01',
   tom: '2021-01-07',
+  morsAktivitet: {
+    kode: 'INNLAGT',
+    kodeverk: 'MORS_AKTIVITET',
+  },
+  endret: false,
 }, {
   avklaring: null,
   begrunnelse: null,
   fom: '2021-01-08',
   tom: '2021-01-13',
+  morsAktivitet: {
+    kode: 'ARBEID_OG_UTDANNING',
+    kodeverk: 'MORS_AKTIVITET',
+  },
+  endret: false,
 }, {
   avklaring: null,
   begrunnelse: null,
   fom: '2021-01-15',
   tom: '2021-01-20',
+  morsAktivitet: {
+    kode: 'ARBEID_OG_UTDANNING',
+    kodeverk: 'MORS_AKTIVITET',
+  },
+  endret: false,
 }];
 
 const merknaderFraBeslutter = {

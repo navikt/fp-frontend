@@ -18,6 +18,12 @@ describe('<AktivitetskravFaktaDetailForm>', () => {
     kodeverk: 'AVKLARING',
   }];
 
+  const morsAktiviteter = [{
+    kode: 'mors aktivitet 1',
+    navn: 'Dette er mors aktivitet 1',
+    kodeverk: 'MORS_AKTIVITET',
+  }];
+
   it('skal vise radioknapper for alle aktivtetskrav-avklaringer', () => {
     const valgtAktivitetskrav = {
       fom: '2021-01-01',
@@ -27,6 +33,11 @@ describe('<AktivitetskravFaktaDetailForm>', () => {
         kodeverk: 'AVKLARING',
       },
       begrunnelse: 'Dette er en beskrivelse',
+      morsAktivitet: {
+        kode: 'mors aktivitet 1',
+        kodeverk: 'MORS_AKTIVITET',
+      },
+      endret: false,
     };
 
     const wrapper = shallow(<AktivitetskravFaktaDetailForm
@@ -37,6 +48,7 @@ describe('<AktivitetskravFaktaDetailForm>', () => {
       valgtAktivitetskrav={valgtAktivitetskrav}
       readOnly={false}
       aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+      morsAktiviteter={morsAktiviteter}
       avbrytEditeringAvAktivitetskrav={() => undefined}
       initialValues={valgtAktivitetskrav}
       onSubmit={() => undefined}

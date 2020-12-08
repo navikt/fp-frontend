@@ -5,6 +5,8 @@ type UttakKontrollerAktivitetskrav = Readonly<{
   tom: string;
   avklaring?: Kodeverk;
   begrunnelse?: string;
+  morsAktivitet?: Kodeverk;
+  endret: boolean;
 }>
 
 export default UttakKontrollerAktivitetskrav;
