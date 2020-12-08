@@ -56,8 +56,9 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<PureOwnProps & Map
       name="avklaring.kode"
       label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Avklaring" />}
       validate={[required]}
+      readOnly={readOnly}
     >
-      { aktivitetskravAvklaringer.sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => (
+      {aktivitetskravAvklaringer.sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => (
         <RadioOption
           key={avklaring.kode}
           label={avklaring.navn}
