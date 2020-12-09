@@ -32,6 +32,7 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps>
   alleMerknaderFraBeslutter,
   readOnly,
   submittable,
+  aksjonspunkter,
 }) => {
   const sorterteAktivitetskrav = useMemo(() => uttakKontrollerAktivitetskrav
     .sort((krav1, krav2) => moment(krav1.fom).diff(moment(krav2.fom))), [uttakKontrollerAktivitetskrav]);
@@ -46,7 +47,7 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps>
         aktivitetskravAvklaringer={alleKodeverk[kodeverkTyper.AKTIVITETSKRAV_AVKLARING]}
         morsAktiviteter={alleKodeverk[kodeverkTyper.MORS_AKTIVITET]}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        readOnly={readOnly}
+        readOnly={readOnly || aksjonspunkter.length === 0}
         submittable={submittable}
       />
     </RawIntlProvider>
