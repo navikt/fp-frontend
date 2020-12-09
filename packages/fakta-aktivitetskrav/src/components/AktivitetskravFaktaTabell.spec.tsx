@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 
 import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-aktivitetskrav';
 
 describe('<AktivitetskravFaktaTabell>', () => {
   const aktivitetskravAvklaringer = [{
@@ -51,7 +52,8 @@ describe('<AktivitetskravFaktaTabell>', () => {
       endret: false,
     }];
 
-    const wrapper = shallow(<AktivitetskravFaktaTabell
+    const wrapper = shallow(<AktivitetskravFaktaTabell.WrappedComponent
+      intl={intlMock}
       aktivitetskrav={uttakKontrollerAktivitetskrav}
       valgtAktivitetskravFom={uttakKontrollerAktivitetskrav[1].fom}
       velgAktivitetskrav={() => undefined}
@@ -68,7 +70,7 @@ describe('<AktivitetskravFaktaTabell>', () => {
     const kolonnerForRad1 = rader.first().find(TableColumn);
     expect(kolonnerForRad1.first().childAt(0).text()).is.eql('01.01.2021 - 07.01.2021');
     expect(kolonnerForRad1.at(1).childAt(0).text()).is.eql('Dette er mors aktivitet 1');
-    expect(kolonnerForRad1.last().childAt(0).text()).is.eql('Dette er en testavklaring');
+    expect(kolonnerForRad1.at(2).childAt(0).text()).is.eql('Dette er en testavklaring');
 
     expect(rader.at(1).prop('isSelected')).is.true;
     expect(rader.at(1).prop('isApLeftBorder')).is.true;

@@ -1,13 +1,20 @@
 import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
+import {
+  Table, TableColumn, TableRow, Image,
+} from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import { dateFormat } from '@fpsak-frontend/utils';
+
+import styles from './aktivitetskravFaktaTabell.less';
 
 const HEADER_TEXT_CODES = [
   'AktivitetskravFaktaTabell.Periode',
   'AktivitetskravFaktaTabell.MorsAktivitet',
   'AktivitetskravFaktaTabell.Avklaring',
+  'EMPTY',
 ];
 
 interface PureOwnProps {
@@ -18,7 +25,8 @@ interface PureOwnProps {
   morsAktiviteter: KodeverkMedNavn[];
 }
 
-const AktivitetskravFaktaTabell: FunctionComponent<PureOwnProps> = ({
+const AktivitetskravFaktaTabell: FunctionComponent<PureOwnProps & WrappedComponentProps> = ({
+  intl,
   aktivitetskrav,
   valgtAktivitetskravFom,
   velgAktivitetskrav,
@@ -38,9 +46,21 @@ const AktivitetskravFaktaTabell: FunctionComponent<PureOwnProps> = ({
         <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
         <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet.kode)?.navn : ''}</TableColumn>
         <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring.kode)?.navn : ''}</TableColumn>
+        <TableColumn>
+          {krav.endret && (
+            <Image
+              src={endretFelt}
+              className={styles.image}
+              alt={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
+              tooltip={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
+              tabIndex={0}
+              alignTooltipLeft
+            />
+          )}
+        </TableColumn>
       </TableRow>
     ))}
   </Table>
 );
 
-export default AktivitetskravFaktaTabell;
+export default injectIntl(AktivitetskravFaktaTabell);
