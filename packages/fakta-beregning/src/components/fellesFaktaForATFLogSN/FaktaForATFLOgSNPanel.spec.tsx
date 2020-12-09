@@ -62,6 +62,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const tidsbegrensetArbeidsforhold = wrapper.find(TidsbegrensetArbeidsforholdForm);
     expect(tidsbegrensetArbeidsforhold).to.have.length(1);
@@ -80,6 +81,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const nyIArbeidslivet = wrapper.find(NyIArbeidslivetSNForm);
     expect(nyIArbeidslivet).to.have.length(1);
@@ -98,6 +100,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       erOverstyrer={false}
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const vurderATFL = wrapper.find(VurderOgFastsettATFL);
     expect(vurderATFL).to.have.length(1);
