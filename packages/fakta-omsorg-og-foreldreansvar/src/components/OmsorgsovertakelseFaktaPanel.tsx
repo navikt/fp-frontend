@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -33,48 +34,53 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
   erAksjonspunktForeldreansvar,
   editedStatus,
   alleMerknaderFraBeslutter,
-}) => (
-  <FaktaGruppe
-    titleCode={erAksjonspunktForeldreansvar ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo' : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo'}
-    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
-  >
-    <Row>
-      <Column xs={erAksjonspunktForeldreansvar ? '4' : '8'}>
-        <DatepickerField
-          name="omsorgsovertakelseDato"
-          label={{ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' }}
-          validate={[required, hasValidDate]}
-          readOnly={readOnly}
-          isEdited={editedStatus.omsorgsovertakelseDato}
-        />
-      </Column>
-      {erAksjonspunktForeldreansvar
-        && (
-        <Column xs="4">
+}) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe
+      title={intl.formatMessage({
+        id: erAksjonspunktForeldreansvar ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo' : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo',
+      })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+    >
+      <Row>
+        <Column xs={erAksjonspunktForeldreansvar ? '4' : '8'}>
           <DatepickerField
-            name="foreldreansvarDato"
-            label={{ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' }}
+            name="omsorgsovertakelseDato"
+            label={{ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' }}
             validate={[required, hasValidDate]}
             readOnly={readOnly}
+            isEdited={editedStatus.omsorgsovertakelseDato}
           />
         </Column>
-        )}
-      <Column xs="4">
-        <InputField
-          name="antallBarn"
-          label={{ id: 'OmsorgOgForeldreansvarFaktaForm.NrOfChildren' }}
-          bredde="XS"
-          parse={(value) => {
-            const parsedValue = parseInt(value, 10);
-            return Number.isNaN(parsedValue) ? value : parsedValue;
-          }}
-          readOnly={readOnly}
-          isEdited={editedStatus.antallBarnOmsorgOgForeldreansvar}
-        />
-      </Column>
-    </Row>
-  </FaktaGruppe>
-);
+        {erAksjonspunktForeldreansvar
+          && (
+          <Column xs="4">
+            <DatepickerField
+              name="foreldreansvarDato"
+              label={{ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' }}
+              validate={[required, hasValidDate]}
+              readOnly={readOnly}
+            />
+          </Column>
+          )}
+        <Column xs="4">
+          <InputField
+            name="antallBarn"
+            label={{ id: 'OmsorgOgForeldreansvarFaktaForm.NrOfChildren' }}
+            bredde="XS"
+            parse={(value) => {
+              const parsedValue = parseInt(value, 10);
+              return Number.isNaN(parsedValue) ? value : parsedValue;
+            }}
+            readOnly={readOnly}
+            isEdited={editedStatus.antallBarnOmsorgOgForeldreansvar}
+          />
+        </Column>
+      </Row>
+    </FaktaGruppe>
+  );
+};
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;

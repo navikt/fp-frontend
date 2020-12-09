@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -65,7 +65,7 @@ interface OwnProps {
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  * Viser barn som er bekreftet av TPS som readonly, mens en kan endre fødselsdato for de som ikke er det
  */
-export class BarnPanel extends Component<OwnProps> {
+export class BarnPanel extends Component<OwnProps & WrappedComponentProps> {
   static defaultProps = {
     isFodselsdatoerEdited: {},
   };
@@ -95,12 +95,12 @@ export class BarnPanel extends Component<OwnProps> {
 
   render() {
     const {
-      fields, isFodselsdatoerEdited, readOnly, alleMerknaderFraBeslutter,
+      fields, isFodselsdatoerEdited, readOnly, alleMerknaderFraBeslutter, intl,
     } = this.props;
 
     return (
       <FaktaGruppe
-        titleCode="BarnPanel.BarnDetSøkesOm"
+        title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
       >
         {fields.map((barn, index, field) => {
@@ -218,4 +218,4 @@ BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: So
   };
 };
 
-export default BarnPanel;
+export default injectIntl(BarnPanel);

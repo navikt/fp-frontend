@@ -142,7 +142,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
     </Row>
     {!erAksjonspunktForeldreansvar && (
       <FaktaGruppe
-        titleCode="OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes"
+        title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
       >
         {!readOnly && (

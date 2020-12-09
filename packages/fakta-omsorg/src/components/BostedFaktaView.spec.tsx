@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
 import { Personopplysninger } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
 import BostedFaktaView from './BostedFaktaView';
 
 describe('<BostedFaktaView>', () => {
@@ -73,7 +74,8 @@ describe('<BostedFaktaView>', () => {
   };
 
   it('vise bostedBarn for hvert barn', () => {
-    const wrapper = shallow(<BostedFaktaView
+    const wrapper = shallow(<BostedFaktaView.WrappedComponent
+      intl={intlMock}
       personopplysning={soker as Personopplysninger}
       alleKodeverk={{}}
     />);
@@ -85,7 +87,8 @@ describe('<BostedFaktaView>', () => {
   });
 
   it('vise bostedSoker for søker', () => {
-    const wrapper = shallow(<BostedFaktaView
+    const wrapper = shallow(<BostedFaktaView.WrappedComponent
+      intl={intlMock}
       personopplysning={soker as Personopplysninger}
       alleKodeverk={{}}
     />);
@@ -124,7 +127,8 @@ describe('<BostedFaktaView>', () => {
       },
       adresser: [],
     };
-    const wrapper = shallow(<BostedFaktaView
+    const wrapper = shallow(<BostedFaktaView.WrappedComponent
+      intl={intlMock}
       personopplysning={soker as Personopplysninger}
       ektefellePersonopplysning={ektefelle as Personopplysninger}
       alleKodeverk={{}}

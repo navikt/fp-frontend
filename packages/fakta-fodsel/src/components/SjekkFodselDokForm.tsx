@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { FieldArray, InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Column } from 'nav-frontend-grid';
@@ -87,7 +87,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
-export const SjekkFodselDokForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const SjekkFodselDokForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   dokumentasjonForeliggerIsEdited,
   dokumentasjonForeligger,
@@ -113,7 +114,7 @@ export const SjekkFodselDokForm: FunctionComponent<PureOwnProps & MappedOwnProps
       familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     />
     <FaktaGruppe
-      titleCode="SjekkFodselDokForm.DokumentasjonAvFodsel"
+      title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]}
     >
       <div className={styles.horizontalForm}>
@@ -242,4 +243,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 export default connect(mapStateToProps)(behandlingForm({
   form: sjekkFodselDokForm,
-})(SjekkFodselDokForm));
+})(injectIntl(SjekkFodselDokForm)));

@@ -109,8 +109,8 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
   return (
     <>
       <OkAvbrytModal
-        textCode="VedtakFellesPanel.Forkast"
-        okButtonTextCode="VedtakFellesPanel.Ok"
+        text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
+        okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
         showModal={skalViseModal}
         cancel={() => toggleVisModal(false)}
         submit={avsluttRedigering}

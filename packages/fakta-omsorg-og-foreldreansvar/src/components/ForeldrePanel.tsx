@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
@@ -47,52 +47,55 @@ interface StaticFunctions {
 export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   fields,
   alleMerknaderFraBeslutter,
-}) => (
-  <FaktaGruppe
-    titleCode="ForeldrePanel.Foreldre"
-    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
-  >
-    {fields.map((foreldre, index, field) => {
-      const f = field.get(index);
-      const shouldShowAdress = f.adresse && !f.erDod;
+}) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe
+      title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+    >
+      {fields.map((foreldre, index, field) => {
+        const f = field.get(index);
+        const shouldShowAdress = f.adresse && !f.erDod;
 
-      const parentHeader = getParentHeader(f.erMor);
-      if (f.opplysningsKilde === opplysningsKilde.TPS && f.originalDodsdato) {
+        const parentHeader = getParentHeader(f.erMor);
+        if (f.opplysningsKilde === opplysningsKilde.TPS && f.originalDodsdato) {
+          return (
+            <div key={`${f.aktorId}`}>
+              <Undertittel>{f.navn}</Undertittel>
+              {shouldShowAdress
+                && <Element>{f.adresse}</Element>}
+              <VerticalSpacer eightPx />
+              <Normaltekst><FormattedMessage id={parentHeader} /></Normaltekst>
+              {f.dodsdato
+                && <Element><DateLabel dateString={f.dodsdato} /></Element>}
+              {!f.dodsdato
+                && <Normaltekst> - </Normaltekst>}
+              <VerticalSpacer sixteenPx />
+            </div>
+          );
+        }
         return (
           <div key={`${f.aktorId}`}>
-            <Undertittel>{f.navn}</Undertittel>
-            {shouldShowAdress
-              && <Element>{f.adresse}</Element>}
+            <DatepickerField
+              name={`${foreldre}.dodsdato`}
+              label={f.navn ? { id: 'ForeldrePanel.DeathDate', args: { name: f.navn } } : { id: parentHeader }}
+              validate={[hasValidDate, dateBeforeOrEqualToToday]}
+              readOnly
+            />
             <VerticalSpacer eightPx />
-            <Normaltekst><FormattedMessage id={parentHeader} /></Normaltekst>
-            {f.dodsdato
-              && <Element><DateLabel dateString={f.dodsdato} /></Element>}
-            {!f.dodsdato
+            <Normaltekst><FormattedMessage id="ForeldrePanel.Address" /></Normaltekst>
+            {shouldShowAdress
+              && <Normaltekst>{f.adresse}</Normaltekst>}
+            {!shouldShowAdress
               && <Normaltekst> - </Normaltekst>}
             <VerticalSpacer sixteenPx />
           </div>
         );
-      }
-      return (
-        <div key={`${f.aktorId}`}>
-          <DatepickerField
-            name={`${foreldre}.dodsdato`}
-            label={f.navn ? { id: 'ForeldrePanel.DeathDate', args: { name: f.navn } } : { id: parentHeader }}
-            validate={[hasValidDate, dateBeforeOrEqualToToday]}
-            readOnly
-          />
-          <VerticalSpacer eightPx />
-          <Normaltekst><FormattedMessage id="ForeldrePanel.Address" /></Normaltekst>
-          {shouldShowAdress
-            && <Normaltekst>{f.adresse}</Normaltekst>}
-          {!shouldShowAdress
-            && <Normaltekst> - </Normaltekst>}
-          <VerticalSpacer sixteenPx />
-        </div>
-      );
-    })}
-  </FaktaGruppe>
-);
+      })}
+    </FaktaGruppe>
+  );
+};
 
 const buildSokerPersonopplysning = (sokerPersonopplysninger: Personopplysninger): CustomPersonopplysninger => {
   const addresses = getAddresses(sokerPersonopplysninger.adresser);

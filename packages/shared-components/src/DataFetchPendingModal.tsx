@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import NavFrontendSpinner from 'nav-frontend-spinner';
 import { Element } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
+
+import getPackageIntl from '../i18n/getPackageIntl';
 
 import styles from './dataFetchPendingModal.less';
 
@@ -54,6 +55,8 @@ export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
       return null;
     }
 
+    const intl = getPackageIntl();
+
     const { pendingMessage } = this.props;
 
     return (
@@ -72,7 +75,7 @@ export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
           </Column>
           <Column xs="10">
             <Element className={styles.modalText}>
-              <FormattedMessage id="DataFetchPendingModal.LosningenJobberMedBehandlingen" />
+              {intl.formatMessage({ id: 'DataFetchPendingModal.LosningenJobberMedBehandlingen' })}
             </Element>
           </Column>
         </Row>

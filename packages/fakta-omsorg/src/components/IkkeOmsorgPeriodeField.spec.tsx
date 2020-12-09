@@ -7,7 +7,7 @@ import { DatepickerField } from '@fpsak-frontend/form';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
 
 const getRemoveButton = () => <button id="avslutt" type="button" />;
 
@@ -15,7 +15,8 @@ describe('<IkkeOmsorgPeriodeField>', () => {
   it('Skal rendre IkkeOmsorgPeriodeField', () => {
     const fields = new MockFields('ikkeOmsorgPerioder', 1);
 
-    const wrapper = shallowWithIntl(<IkkeOmsorgPeriodeField
+    const wrapper = shallowWithIntl(<IkkeOmsorgPeriodeField.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       fields={fields}
       meta={{} as FieldArrayMetaProps}

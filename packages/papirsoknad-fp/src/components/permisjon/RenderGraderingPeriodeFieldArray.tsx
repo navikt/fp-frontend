@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FieldArrayFieldsProps, FieldArrayMetaProps, getFormValues } from 'redux-form';
 import moment from 'moment/moment';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -76,7 +76,8 @@ interface MappedOwnProps {
  * Presentasjonskomponent: Viser inputfelter for dato for bestemmelse av graderingperiode.
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-export const RenderGraderingPeriodeFieldArray: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
+export const RenderGraderingPeriodeFieldArray: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   meta,
   graderingKvoter,
@@ -88,7 +89,7 @@ export const RenderGraderingPeriodeFieldArray: FunctionComponent<PureOwnProps & 
     fields={fields}
     meta={meta}
     emptyPeriodTemplate={defaultGraderingPeriode}
-    textCode="Registrering.Permisjon.Gradering.LeggTilPeriode"
+    bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.LeggTilPeriode' })}
     readOnly={readOnly}
   >
     {(periodeElementFieldId, index, getRemoveButton) => {
@@ -232,4 +233,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   };
 };
 
-export default connect(mapStateToProps)(RenderGraderingPeriodeFieldArray);
+export default connect(mapStateToProps)(injectIntl(RenderGraderingPeriodeFieldArray));

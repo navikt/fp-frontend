@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -45,25 +45,28 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
   mannAdoptererAlene,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-}) => (
-  <FaktaGruppe
-    titleCode="MannAdoptererAleneFaktaForm.ApplicationInformation"
-    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
-  >
-    <Container className={styles.container}>
-      <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
-      <VerticalSpacer fourPx />
-      {farSokerType
-        && <Normaltekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(farSokerType)}</Normaltekst>}
-      <VerticalSpacer sixteenPx />
-      <hr className={styles.hr} />
-      <RadioGroupField name="mannAdoptererAlene" validate={[required]} bredde="XL" readOnly={readOnly} isEdited={mannAdoptererAlene}>
-        <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }} value />
-        <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }} value={false} />
-      </RadioGroupField>
-    </Container>
-  </FaktaGruppe>
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe
+      title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
+    >
+      <Container className={styles.container}>
+        <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
+        <VerticalSpacer fourPx />
+        {farSokerType
+          && <Normaltekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(farSokerType)}</Normaltekst>}
+        <VerticalSpacer sixteenPx />
+        <hr className={styles.hr} />
+        <RadioGroupField name="mannAdoptererAlene" validate={[required]} bredde="XL" readOnly={readOnly} isEdited={mannAdoptererAlene}>
+          <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }} value />
+          <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }} value={false} />
+        </RadioGroupField>
+      </Container>
+    </FaktaGruppe>
+  );
+};
 
 MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
   mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,

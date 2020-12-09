@@ -10,8 +10,6 @@
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",
   "ProsessStegBegrunnelseTextField.BegrunnVurdering": "Begrunn vurderingen din",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: ",
   "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

@@ -88,7 +88,7 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProp
   const intl = useIntl();
   return (
     <FaktaGruppe
-      titleCode="DokumentasjonFaktaForm.ApplicationInformation"
+      title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]}
     >
       <Container className={styles.container}>

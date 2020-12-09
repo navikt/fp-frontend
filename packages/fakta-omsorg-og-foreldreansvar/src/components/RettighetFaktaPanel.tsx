@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -46,29 +46,32 @@ const RettighetFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> 
   ytelser,
   relatertYtelseTypes,
   alleMerknaderFraBeslutter,
-}) => (
-  <FaktaGruppe
-    titleCode="OmsorgOgForeldreansvarFaktaForm.Rettighet"
-    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
-  >
-    <Normaltekst>{farSokerType || '-'}</Normaltekst>
-    <VerticalSpacer sixteenPx />
-    <FaktaGruppe withoutBorder titleCode="OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor">
-      {ytelser.map((ytelse) => getLopendeOrAvsluttetYtelser(ytelse).map((y) => (
-        <div className={styles.wrapper} key={`${relatertYtelseTypes[ytelse.relatertYtelseType]}-${y.periodeFraDato}`}>
-          <Normaltekst className={styles.iverksatt}>
-            <FormattedMessage
-              id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
-              values={{ ytelseType: relatertYtelseTypes.find((r) => r.kode === ytelse.relatertYtelseType).navn }}
-            />
-            <DateLabel dateString={y.periodeFraDato} />
-          </Normaltekst>
-        </div>
-      )))}
-      {!ytelser.some((y) => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
+}) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe
+      title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+    >
+      <Normaltekst>{farSokerType || '-'}</Normaltekst>
+      <VerticalSpacer sixteenPx />
+      <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor' })}>
+        {ytelser.map((ytelse) => getLopendeOrAvsluttetYtelser(ytelse).map((y) => (
+          <div className={styles.wrapper} key={`${relatertYtelseTypes[ytelse.relatertYtelseType]}-${y.periodeFraDato}`}>
+            <Normaltekst className={styles.iverksatt}>
+              <FormattedMessage
+                id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
+                values={{ ytelseType: relatertYtelseTypes.find((r) => r.kode === ytelse.relatertYtelseType).navn }}
+              />
+              <DateLabel dateString={y.periodeFraDato} />
+            </Normaltekst>
+          </div>
+        )))}
+        {!ytelser.some((y) => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
+      </FaktaGruppe>
     </FaktaGruppe>
-  </FaktaGruppe>
-);
+  );
+};
 
 const FORM_NAME = 'OmsorgOgForeldreansvarInfoPanel';
 

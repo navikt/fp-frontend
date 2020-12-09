@@ -127,7 +127,7 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<PureOwnProps & Ma
     >
       <Row>
         <Column xs="6">
-          <FaktaGruppe withoutBorder titleCode="OppholdINorgeOgAdresserFaktaPanel.OppholdINorge">
+          <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.OppholdINorge' })}>
             <Undertekst>
               <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorway" />
             </Undertekst>
@@ -152,7 +152,7 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<PureOwnProps & Ma
           </FaktaGruppe>
         </Column>
         <Column xs="6">
-          <FaktaGruppe withoutBorder titleCode="OppholdINorgeOgAdresserFaktaPanel.BosattAdresser">
+          <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.BosattAdresser' })}>
             {foreldre.map((f) => (
               <div key={f.personopplysning.navn}>
                 {f.isApplicant && (

@@ -1,6 +1,7 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
@@ -57,7 +58,7 @@ const getLagringSideeffekter = (toggleFatterVedtakModal, toggleOppdatereFagsakCo
   };
 };
 
-const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
+const TilbakekrevingProsess: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   data,
   fagsak,
   fagsakPerson,
@@ -71,6 +72,7 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
   opneSokeside,
   harApenRevurdering,
   setBehandling,
+  intl,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
@@ -101,8 +103,8 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
     <>
       {visApenRevurderingModal && (
         <AdvarselModal
-          headerTextCode="BehandlingTilbakekrevingIndex.ApenRevurderingHeader"
-          textCode="BehandlingTilbakekrevingIndex.ApenRevurdering"
+          headerText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurderingHeader' })}
+          bodyText={intl.formatMessage({ id: 'BehandlingTilbakekrevingIndex.ApenRevurdering' })}
           showModal
           submit={lukkApenRevurderingModal}
         />
@@ -131,4 +133,4 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default TilbakekrevingProsess;
+export default injectIntl(TilbakekrevingProsess);

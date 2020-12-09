@@ -90,7 +90,7 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
         </AksjonspunktHelpTextTemp>
       )}
       <FaktaGruppe
-        titleCode="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden"
+        title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN]}
       >
         <div className={styles.explanationTextarea}>

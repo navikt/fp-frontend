@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -89,11 +89,12 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps
   vurderingTypes,
   alleMerknaderFraBeslutter,
 }) => {
+  const intl = useIntl();
   const sorterteVurderingstyper = useMemo(() => vurderingTypes.sort((a, b) => a.navn.localeCompare(b.navn)), [vurderingTypes]);
 
   if (!fixedMedlemskapPerioder || fixedMedlemskapPerioder.length === 0) {
     return (
-      <FaktaGruppe titleCode="PerioderMedMedlemskapFaktaPanel.ApplicationInformation">
+      <FaktaGruppe title={intl.formatMessage({ id: 'PerioderMedMedlemskapFaktaPanel.ApplicationInformation' })}>
         <Normaltekst>
           <FormattedMessage id="PerioderMedMedlemskapFaktaPanel.NoInformation" />
         </Normaltekst>
@@ -103,7 +104,7 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps
 
   return (
     <FaktaGruppe
-      titleCode="PerioderMedMedlemskapFaktaPanel.ApplicationInformation"
+      title={intl.formatMessage({ id: 'PerioderMedMedlemskapFaktaPanel.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]}
     >
       <Table headerTextCodes={headerTextCodes}>
