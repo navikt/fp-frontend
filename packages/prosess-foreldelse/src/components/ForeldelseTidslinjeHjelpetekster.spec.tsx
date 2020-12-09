@@ -1,19 +1,21 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { Image } from '@fpsak-frontend/shared-components';
+import { LegendBox } from '@fpsak-frontend/tidslinje';
+import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock, mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import ForeldelseTidslinjeHjelpetekster from './ForeldelseTidslinjeHjelpetekster';
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-foreldelse';
 
 describe('<ForeldelseTidslinjeHjelpetekster>', () => {
   it('skal rendre komponent korrekt', () => {
-    const wrapper = mountWithIntl(
+    const wrapper = shallowWithIntl(
       <ForeldelseTidslinjeHjelpetekster.WrappedComponent
         intl={intlMock}
       />,
     );
 
-    expect(wrapper.find(Image)).has.length(4);
+    const box = wrapper.find(LegendBox);
+    expect(box.prop('legends')).has.length(3);
   });
 });

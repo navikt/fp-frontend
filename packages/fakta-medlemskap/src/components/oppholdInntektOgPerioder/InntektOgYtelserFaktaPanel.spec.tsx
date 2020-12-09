@@ -2,11 +2,10 @@ import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FagsakPerson } from '@fpsak-frontend/types';
 
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 import * as useIntl from '../../useIntl';
 
 describe('<InntektOgYtelserFaktaPanel>', () => {
