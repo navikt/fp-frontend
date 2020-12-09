@@ -51,7 +51,7 @@ const arbeidstakerAndel1 = {
 };
 
 const alleKodeverk = {
-  AKTIVITET_STATUS: [
+  AktivitetStatus: [
     {
       kode: 'AT',
       navn: 'Arbeidstaker',
@@ -217,8 +217,7 @@ describe('<BgFaktaUtils>', () => {
     expect(andelsInfo.inntektskategori).to.equal('ARBEIDSTAKER');
   });
 
-  // FIXME se på hvorfor denne feiler
-  xit('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
+  it('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
     const andelValueFromState = {
       aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'AKTIVITET_STATUS' },
       andelsnr: 2,

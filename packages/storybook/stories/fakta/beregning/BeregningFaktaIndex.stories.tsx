@@ -73,16 +73,41 @@ const lagBeregningsgrunnlag = (
 const mapTilKodeliste = (arrayOfCodes) => arrayOfCodes.map((kode) => ({ kode }));
 
 const lagAndel = (andelsnr, aktivitetStatus, inntektskategori) => (
-  { andelsnr, aktivitetStatus: { kode: aktivitetStatus }, inntektskategori: { kode: inntektskategori } }
+  {
+    andelsnr,
+    aktivitetStatus: { kode: aktivitetStatus, kodeverk: 'AKTIVITET_STATUS' },
+    inntektskategori: { kode: inntektskategori, kodeverk: 'INNTEKTSKATEGORI' },
+  }
 );
+
+const arbeidsgiverOpplysninger = {
+  12345678: {
+    identifikator: '12345678',
+    erPrivatPerson: false,
+    navn: 'Bedriften',
+  },
+  12345679: {
+    identifikator: '12345679',
+    erPrivatPerson: false,
+    navn: 'Bedriften2',
+  },
+  12345671: {
+    identifikator: '12345671',
+    erPrivatPerson: false,
+    navn: 'Bedriften3',
+  },
+  795349533: {
+    identifikator: '12345671',
+    erPrivatPerson: false,
+    navn: 'Bedriften4',
+  },
+};
 
 const standardFaktaArbeidstakerAndel = {
   ...lagAndel(1, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften (12345678)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
-    arbeidsgiverNavn: 'Bedriften',
     arbeidsgiverId: '12345678',
     arbeidsforholdId: null,
     startdato: '01.01.2019',
@@ -92,11 +117,9 @@ const standardFaktaArbeidstakerAndel = {
 };
 const standardFaktaArbeidstakerAndel2 = {
   ...lagAndel(4, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften2 (12345679)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
-    arbeidsgiverNavn: 'Bedriften2',
     arbeidsgiverId: '12345679',
     arbeidsforholdId: null,
     startdato: '01.01.2019',
@@ -106,11 +129,9 @@ const standardFaktaArbeidstakerAndel2 = {
 };
 const tidsbegrensetFaktaArbeidstakerAndel = {
   ...lagAndel(6, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften3 (12345671)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
-    arbeidsgiverNavn: 'Bedriften3',
     arbeidsgiverId: '12345671',
     arbeidsforholdId: null,
     startdato: '01.09.2019',
@@ -120,11 +141,9 @@ const tidsbegrensetFaktaArbeidstakerAndel = {
 };
 const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
   ...lagAndel(7, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften4 (795349533)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
-    arbeidsgiverNavn: 'Bedriften4',
     arbeidsgiverId: '795349533',
     arbeidsforholdId: null,
     startdato: '01.09.2019',
@@ -193,6 +212,7 @@ export const ArbeidOgDagpenger = () => (
     readOnly={boolean('readOnly', false)}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
   />
 );
 
@@ -239,6 +259,7 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -280,7 +301,6 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
   const refusjonskravSomKommerForSentListe = [
     {
       arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
-      arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
   const faktaOmBeregning = {
@@ -336,6 +356,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -400,6 +421,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -460,6 +482,7 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -519,6 +542,7 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -545,7 +569,6 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
   const refusjonskravSomKommerForSentListe = [
     {
       arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
-      arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
   const faktaOmBeregning = {
@@ -581,6 +604,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -645,6 +669,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -692,6 +717,7 @@ export const VurderingAvMilitær = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -757,6 +783,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -806,6 +833,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -854,6 +882,7 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -906,6 +935,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -953,6 +983,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1083,7 +1114,6 @@ export const KombinasjonstestForFaktapanel = () => {
   const refusjonskravSomKommerForSentListe = [
     {
       arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
-      arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
   const vurderMottarYtelse = {
@@ -1156,6 +1186,7 @@ export const KombinasjonstestForFaktapanel = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1236,6 +1267,7 @@ export const OverstyringAvInntekt = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1288,6 +1320,7 @@ export const VurderKunYtelseBesteberegning = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };

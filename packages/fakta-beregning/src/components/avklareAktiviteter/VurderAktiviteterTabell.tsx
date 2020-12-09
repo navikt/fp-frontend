@@ -9,7 +9,7 @@ import {
   getBehandlingFormName,
   RadioGroupField, RadioOption, DatepickerField,
 } from '@fpsak-frontend/form';
-import { required, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { required, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
@@ -17,8 +17,8 @@ import {
   Table, TableRow, TableColumn, PeriodLabel, EditedIcon, DateLabel,
 } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
-import { createVisningsnavnForAktivitet } from '../ArbeidsforholdHelper';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import styles from './vurderAktiviteterTabell.less';
 import BeregningAktivitetPropType from './beregningAktivitetTsType';
 
@@ -97,6 +97,16 @@ export const skalVurdereAktivitet = (aktivitet, skalOverstyre, harAksjonspunkt, 
 
 const isSameOrBefore = (dato1, dato2) => moment(dato1).isSameOrBefore(moment(dato2));
 
+const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const visningForAktivitetpanel = (aktivitet, alleKodeverk) => {
+  if (!aktivitet.arbeidsgiverNavn) {
+    return aktivitet.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitet.arbeidsforholdType) : '';
+  }
+  return aktivitet.arbeidsgiverIdVisning
+    ? `${aktivitet.arbeidsgiverNavn} (${aktivitet.arbeidsgiverIdVisning})${getEndCharFromId(aktivitet.eksternArbeidsforholdId)}`
+    : aktivitet.arbeidsgiverNavn;
+};
+
 const lagTableRow = (
   readOnly,
   isAksjonspunktClosed,
@@ -113,7 +123,7 @@ const lagTableRow = (
     <TableRow key={lagAktivitetFieldId(aktivitet)}>
       <TableColumn>
         <Normaltekst>
-          {createVisningsnavnForAktivitet(aktivitet, alleKodeverk)}
+          {visningForAktivitetpanel(aktivitet, alleKodeverk)}
         </Normaltekst>
       </TableColumn>
       <TableColumn className={styles.rowalign}>
@@ -217,7 +227,7 @@ const skalBrukesPretufylling = (aktivitet, erOverstyrt, harAksjonspunkt, erTomLi
 };
 
 const mapToInitialValues = (aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt) => ({
-  beregningAktivitetNavn: createVisningsnavnForAktivitet(aktivitet, alleKodeverk),
+  beregningAktivitetNavn: visningForAktivitetpanel(aktivitet, alleKodeverk),
   fom: aktivitet.fom,
   tom: aktivitet.tom,
   skalBrukes: skalBrukesPretufylling(aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt),

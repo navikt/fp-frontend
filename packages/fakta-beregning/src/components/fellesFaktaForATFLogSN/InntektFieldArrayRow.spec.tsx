@@ -93,6 +93,7 @@ it('skal vise komponent med arbeidsperiode og refusjonskrav', () => {
     andelElementFieldId="fieldArrayName[0]"
     removeAndel={() => {}}
     index={0}
+    arbeidsgiverOpplysningerPerId={{}}
     {...ownProps}
     {...props}
   />);
@@ -139,6 +140,7 @@ it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
     inntektskategoriKoder={[]}
     isAksjonspunktClosed={false}
     skalRedigereInntektskategori={false}
+    arbeidsgiverOpplysningerPerId={{}}
     {...ownProps}
   />);
   const row = wrapper.find(TableRow);
@@ -184,6 +186,7 @@ it('skal vise komponent med readOnly beløp', () => {
     inntektskategoriKoder={[]}
     isAksjonspunktClosed={false}
     skalRedigereInntektskategori={false}
+    arbeidsgiverOpplysningerPerId={{}}
     {...ownProps}
 
   />);
@@ -226,6 +229,7 @@ it('skal vise komponent med sletteknapp', () => {
     andelElementFieldId="fieldArrayName[0]"
     removeAndel={() => {}}
     index={0}
+    arbeidsgiverOpplysningerPerId={{}}
     {...ownProps}
     {...props}
   />);
