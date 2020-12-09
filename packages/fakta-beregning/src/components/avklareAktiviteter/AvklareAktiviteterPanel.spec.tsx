@@ -63,26 +63,8 @@ const lagStateMedAvklarAktitiveter = (avklarAktiviteter, values = {}, initial = 
   return lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, { faktaOmBeregning }, formNameAvklarAktiviteter, values, initial);
 };
 
-const arbeidsgiverOpplysninger = {
-  384723894723: {
-    navn: 'Arbeidsgiveren',
-    identifikator: '384723894723',
-    erPrivatPerson: false,
-  },
-  334534623342: {
-    identifikator: '334534623342',
-    navn: 'Arbeidsgiveren2',
-    erPrivatPerson: false,
-  },
-  324234234234: {
-    identifikator: '324234234234',
-    navn: 'Arbeidsgiveren3',
-    erPrivatPerson: true,
-    fødselsdato: '1960-01-01',
-  },
-};
-
 const aktivitet1 = {
+  arbeidsgiverNavn: 'Arbeidsgiveren',
   arbeidsgiverId: '384723894723',
   fom: '2019-01-01',
   tom: null,
@@ -91,6 +73,7 @@ const aktivitet1 = {
 };
 
 const aktivitet2 = {
+  arbeidsgiverNavn: 'Arbeidsgiveren2',
   arbeidsgiverId: '334534623342',
   arbeidsforholdId: 'efj8343f34f',
   fom: '2019-01-01',
@@ -100,8 +83,9 @@ const aktivitet2 = {
 };
 
 const aktivitet3 = {
+  arbeidsgiverNavn: 'Arbeidsgiveren3',
   aktørIdString: '324234234234',
-  arbeidsgiverId: '324234234234',
+  arbeidsgiverId: '1960-01-01',
   arbeidsforholdId: 'efj8343f34f',
   fom: '2019-01-01',
   tom: '2019-02-02',
@@ -163,7 +147,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       {...behandlingProps}
     />);
@@ -195,7 +178,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
       {...behandlingProps}
@@ -233,7 +215,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
       {...behandlingProps}
@@ -271,7 +252,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       erBgOverstyrt={false}
       behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       reduxFormInitialize={() => {}}
       {...behandlingProps}
     />);
@@ -296,7 +276,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
-      arbeidsgiverOpplysningerPerId: null,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
     expect(initialValues !== null).to.equal(true);
@@ -320,7 +299,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
-      arbeidsgiverOpplysningerPerId: arbeidsgiverOpplysninger,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
     expect(initialValues !== null).to.equal(true);
@@ -346,7 +324,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
-      arbeidsgiverOpplysningerPerId: arbeidsgiverOpplysninger,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
     expect(initialValues !== null).to.equal(true);
@@ -367,7 +344,7 @@ describe('<AvklareAktiviteterPanel>', () => {
     values[id2] = { skalBrukes: true };
     values[id3] = { skalBrukes: true };
     values[idAAP] = { skalBrukes: true };
-    const transformed = transformValues(values, arbeidsgiverOpplysninger);
+    const transformed = transformValues(values);
     expect(transformed[0].beregningsaktivitetLagreDtoList.length).to.equal(1);
     expect(transformed[0].beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).to.equal(aktivitet1.arbeidsgiverId);
   });
@@ -389,7 +366,7 @@ describe('<AvklareAktiviteterPanel>', () => {
     values[idAAP] = { skalBrukes: true };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'begrunnelse';
     values[MANUELL_OVERSTYRING_FIELD] = true;
-    const transformed = transformValues(values, arbeidsgiverOpplysninger);
+    const transformed = transformValues(values);
     expect(transformed[0].beregningsaktivitetLagreDtoList.length).to.equal(1);
     expect(transformed[0].beregningsaktivitetLagreDtoList[0].arbeidsgiverIdentifikator).to.equal(aktivitet3.aktørIdString);
     expect(transformed[0].begrunnelse).to.equal('begrunnelse');

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { ArbeidsgiverOpplysningerPerId, AvklarBeregningAktiviteter, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AvklarBeregningAktiviteter, KodeverkMedNavn } from '@fpsak-frontend/types';
 import VurderAktiviteterTabell, { lagAktivitetFieldId } from './VurderAktiviteterTabell';
 
 const harListeAktivitetSomSkalBrukes = (mapping, values) => mapping.aktiviteter
@@ -111,21 +111,16 @@ type OwnProps = {
     behandlingId: number;
     behandlingVersjon: number;
     values: any;
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
-  transformValues: (values: any,
-                    aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
-                    erOverstyrt: boolean,
-                    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
+  transformValues: (values: any, aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[], erOverstyrt: boolean) => any;
   validate: (values: any, aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[], erOverstyrt: boolean) => any;
   hasValueChangedFromInitial: (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[], values: any, initialValues: any, erOverstyrt: boolean) => any;
   buildInitialValues: (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
                        alleKodeverk: {[key: string]: KodeverkMedNavn[]},
                        erOverstyrt: boolean,
-                       harAksjonspunkt: boolean,
-                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
+                       harAksjonspunkt: boolean) => any;
 }
 
 /**
@@ -144,7 +139,6 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
   formNameAvklarAktiviteter,
   behandlingId,
   behandlingVersjon,
-  arbeidsgiverOpplysningerPerId,
 }) => {
   const listeSomSkalVurderes = finnListerSomSkalVurderes(aktiviteterTomDatoMapping, values, erOverstyrt);
   const gjeldendeSkjæringstidspunkt = utledGjeldendeSkjæringstidspunkt(values, listeSomSkalVurderes);
@@ -162,7 +156,6 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
       formNameAvklarAktiviteter={formNameAvklarAktiviteter}
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   ));
 };
@@ -195,16 +188,12 @@ VurderAktiviteterPanel.validate = (values, aktiviteterTomDatoMapping, erOverstyr
 
 const erLikEllerFør = (dato1, dato2) => moment(dato1).isSameOrBefore(moment(dato2));
 
-VurderAktiviteterPanel.transformValues = (values, aktiviteterTomDatoMapping, erOverstyrt, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
+VurderAktiviteterPanel.transformValues = (values, aktiviteterTomDatoMapping, erOverstyrt) => {
   const listerSomVurderes = finnListerSomSkalVurderes(aktiviteterTomDatoMapping, values, erOverstyrt);
   const gjeldendeSkjæringstidspunkt = utledGjeldendeSkjæringstidspunkt(values, listerSomVurderes);
   return ({
     beregningsaktivitetLagreDtoList: listerSomVurderes
-      .flatMap((liste) => VurderAktiviteterTabell.transformValues(values,
-        liste.aktiviteter,
-        gjeldendeSkjæringstidspunkt,
-        liste.tom,
-        arbeidsgiverOpplysningerPerId)),
+      .flatMap((liste) => VurderAktiviteterTabell.transformValues(values, liste.aktiviteter, gjeldendeSkjæringstidspunkt, liste.tom)),
   });
 };
 
@@ -247,7 +236,7 @@ const utledGjeldendeSkjæringstidspunktVedPreutfylling = (aktiviteterTomDatoMapp
   return undefined;
 };
 
-VurderAktiviteterPanel.buildInitialValues = (aktiviteterTomDatoMapping, alleKodeverk, erOverstyrt, harAksjonspunkt, arbeidsgiverOpplysningerPerId) => {
+VurderAktiviteterPanel.buildInitialValues = (aktiviteterTomDatoMapping, alleKodeverk, erOverstyrt, harAksjonspunkt) => {
   if (!aktiviteterTomDatoMapping || aktiviteterTomDatoMapping.length === 0) {
     return {};
   }
@@ -258,7 +247,7 @@ VurderAktiviteterPanel.buildInitialValues = (aktiviteterTomDatoMapping, alleKode
     initialValues = {
       ...initialValues,
       ...VurderAktiviteterTabell.buildInitialValues(liste.aktiviteter, alleKodeverk, erOverstyrt,
-        harAksjonspunkt, erLikEllerFør(gjeldendeSkjæringstidspunkt, liste.tom), arbeidsgiverOpplysningerPerId),
+        harAksjonspunkt, erLikEllerFør(gjeldendeSkjæringstidspunkt, liste.tom)),
     };
   });
   return initialValues;

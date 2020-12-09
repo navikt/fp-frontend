@@ -9,18 +9,18 @@ import {
   getBehandlingFormName,
   RadioGroupField, RadioOption, DatepickerField,
 } from '@fpsak-frontend/form';
-import { required, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { required, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
 import {
   Table, TableRow, TableColumn, PeriodLabel, EditedIcon, DateLabel,
 } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, BeregningAktivitet, KodeverkMedNavn } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createVisningsnavnForAktivitet } from '../ArbeidsforholdHelper';
 
 import styles from './vurderAktiviteterTabell.less';
+import BeregningAktivitetPropType from './beregningAktivitetTsType';
 
 /**
  * Lager en unik aktivitet-ID prefiks basert på idType for en aktivitet. Man prøver å legge på
@@ -97,16 +97,6 @@ export const skalVurdereAktivitet = (aktivitet, skalOverstyre, harAksjonspunkt, 
 
 const isSameOrBefore = (dato1, dato2) => moment(dato1).isSameOrBefore(moment(dato2));
 
-const lagVisningForAktivitet = (aktivitet: BeregningAktivitet,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverId];
-  if (!arbeidsgiverOpplysning) {
-    return aktivitet.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitet.arbeidsforholdType) : '';
-  }
-  return createVisningsnavnForAktivitet(arbeidsgiverOpplysning, aktivitet.eksternArbeidsforholdId);
-};
-
 const lagTableRow = (
   readOnly,
   isAksjonspunktClosed,
@@ -117,14 +107,13 @@ const lagTableRow = (
   tomDatoForAktivitetGruppe,
   valgtSkjæringstidspunkt,
   ingenAktiviterErBrukt,
-  arbeidsgiverOpplysningerPerId,
 ) => {
   const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
   return (
     <TableRow key={lagAktivitetFieldId(aktivitet)}>
       <TableColumn>
         <Normaltekst>
-          {lagVisningForAktivitet(aktivitet, alleKodeverk, arbeidsgiverOpplysningerPerId)}
+          {createVisningsnavnForAktivitet(aktivitet, alleKodeverk)}
         </Normaltekst>
       </TableColumn>
       <TableColumn className={styles.rowalign}>
@@ -227,33 +216,17 @@ const skalBrukesPretufylling = (aktivitet, erOverstyrt, harAksjonspunkt, erTomLi
   return aktivitet.skalBrukes === true || aktivitet.skalBrukes === null || aktivitet.skalBrukes === undefined;
 };
 
-const mapToInitialValues = (aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt, arbeidsgiverOpplysningerPerId) => ({
-  beregningAktivitetNavn: lagVisningForAktivitet(aktivitet, alleKodeverk, arbeidsgiverOpplysningerPerId),
+const mapToInitialValues = (aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt) => ({
+  beregningAktivitetNavn: createVisningsnavnForAktivitet(aktivitet, alleKodeverk),
   fom: aktivitet.fom,
   tom: aktivitet.tom,
   skalBrukes: skalBrukesPretufylling(aktivitet, erOverstyrt, harAksjonspunkt, erTomLikEllerFørSkjæringstidpunkt),
 });
 
-const finnOrgnr = (aktivitet: BeregningAktivitet, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string | undefined => {
-  const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverId];
-  if (arbeidsgiverOpplysning.erPrivatPerson) {
-    return null;
-  }
-  return arbeidsgiverOpplysning.identifikator;
-};
-
-const finnAktørId = (aktivitet: BeregningAktivitet, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string | undefined => {
-  const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverId];
-  if (!arbeidsgiverOpplysning.erPrivatPerson) {
-    return null;
-  }
-  return arbeidsgiverOpplysning.identifikator;
-};
-
 type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
-    aktiviteter: BeregningAktivitet[];
+    aktiviteter: BeregningAktivitetPropType[];
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     erOverstyrt: boolean;
     harAksjonspunkt: boolean;
@@ -261,7 +234,6 @@ type OwnProps = {
     valgtSkjæringstidspunkt: string;
     ingenAktiviterErBrukt: boolean;
     reduxChange: (behandlingFormName: string, fieldName: string, value: any) => void;
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 type InitialProps = {
@@ -280,7 +252,7 @@ type MappedOwnProps = {
  * Presentasjonskomponent.. Inneholder tabeller for avklaring av skjæringstidspunkt
  */
 export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps> {
-  static validate = (values: any, aktiviteter: BeregningAktivitet[]) => {
+  static validate = (values: any, aktiviteter: BeregningAktivitetPropType[]) => {
     const errors = {};
     let harError = false;
     aktiviteter
@@ -298,26 +270,22 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
     return null;
   };
 
-  static transformValues = (values: any,
-    aktiviteter: BeregningAktivitet[],
-    valgtSkjæringstidspunkt: string,
-    tomDatoForAktivitetGruppe: string,
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
+  static transformValues = (values: any, aktiviteter: BeregningAktivitetPropType[], valgtSkjæringstidspunkt: string, tomDatoForAktivitetGruppe: string) => {
     const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
     return aktiviteter
       .filter((aktivitet) => values[lagAktivitetFieldId(aktivitet)].skalBrukes === false || values[lagAktivitetFieldId(aktivitet)].tom != null)
       .map((aktivitet) => ({
-        oppdragsgiverOrg: finnOrgnr(aktivitet, arbeidsgiverOpplysningerPerId),
+        oppdragsgiverOrg: aktivitet.aktørIdString ? null : aktivitet.arbeidsgiverId,
         arbeidsforholdRef: aktivitet.arbeidsforholdId,
         fom: aktivitet.fom,
         tom: values[lagAktivitetFieldId(aktivitet)].tom != null ? values[lagAktivitetFieldId(aktivitet)].tom : aktivitet.tom,
         opptjeningAktivitetType: aktivitet.arbeidsforholdType ? aktivitet.arbeidsforholdType.kode : null,
-        arbeidsgiverIdentifikator: finnAktørId(aktivitet, arbeidsgiverOpplysningerPerId),
+        arbeidsgiverIdentifikator: aktivitet.aktørIdString ? aktivitet.aktørIdString : null,
         skalBrukes: erValgtSkjæringstidspunktLikEllerFørTomDato ? values[lagAktivitetFieldId(aktivitet)].skalBrukes : true,
       }));
   };
 
-  static hasValueChangedFromInitial = (aktiviteter: BeregningAktivitet[], values: any, initialValues: any) => {
+  static hasValueChangedFromInitial = (aktiviteter: BeregningAktivitetPropType[], values: any, initialValues: any) => {
     const changedAktiviteter = aktiviteter.map(lagAktivitetFieldId).find((fieldId) => {
       if (values[fieldId] && initialValues[fieldId]) {
         if (values[fieldId].skalBrukes !== initialValues[fieldId].skalBrukes) {
@@ -329,19 +297,18 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
     return changedAktiviteter !== undefined;
   };
 
-  static buildInitialValues = (aktiviteter: BeregningAktivitet[],
+  static buildInitialValues = (aktiviteter: BeregningAktivitetPropType[],
     alleKodeverk: {[key: string]: KodeverkMedNavn[]},
     erOverstyrt: boolean,
     harAksjonspunkt: boolean,
-    erTomLikEllerFørSkjæringstidpunkt: boolean,
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
+    erTomLikEllerFørSkjæringstidpunkt: boolean) => {
     if (!aktiviteter) {
       return {};
     }
     const initialValues = {};
     aktiviteter.forEach((aktivitet) => {
       initialValues[lagAktivitetFieldId(aktivitet)] = mapToInitialValues(aktivitet, alleKodeverk, erOverstyrt, harAksjonspunkt,
-        erTomLikEllerFørSkjæringstidpunkt, arbeidsgiverOpplysningerPerId);
+        erTomLikEllerFørSkjæringstidpunkt);
     });
     return initialValues;
   };
@@ -372,7 +339,6 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
       tomDatoForAktivitetGruppe,
       ingenAktiviterErBrukt,
       valgtSkjæringstidspunkt,
-      arbeidsgiverOpplysningerPerId,
     } = this.props;
 
     return (
@@ -383,7 +349,7 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
         <Table headerTextCodes={getHeaderTextCodes()} noHover>
           {aktiviteter.map((aktivitet) => (
             lagTableRow(readOnly, isAksjonspunktClosed, aktivitet, alleKodeverk, erOverstyrt,
-              harAksjonspunkt, tomDatoForAktivitetGruppe, valgtSkjæringstidspunkt, ingenAktiviterErBrukt, arbeidsgiverOpplysningerPerId)
+              harAksjonspunkt, tomDatoForAktivitetGruppe, valgtSkjæringstidspunkt, ingenAktiviterErBrukt)
           ))}
         </Table>
       </>
