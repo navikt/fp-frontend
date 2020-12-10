@@ -32,7 +32,7 @@
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@sentry/browser": "^5.28.0",
+    "@sentry/browser": "^5.29.0",
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
     "history": "^4.9.0",
