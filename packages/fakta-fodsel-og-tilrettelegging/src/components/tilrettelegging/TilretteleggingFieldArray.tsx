@@ -86,7 +86,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
   <PeriodFieldArray
     fields={fields}
     meta={meta}
-    textCode="TilretteleggingFieldArray.LeggTilTilretteleggingsbehov"
+    bodyText={intl.formatMessage({ id: 'TilretteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
     readOnly={readOnly}
   >
     {(fieldId: string, index, getRemoveButton: () => ReactNode) => {

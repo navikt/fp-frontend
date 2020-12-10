@@ -10,6 +10,8 @@ import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { FamilieHendelse, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import useIntl from '../useIntl';
+
 import styles from './mannAdoptererAleneFaktaForm.less';
 
 interface OwnProps {
@@ -45,25 +47,28 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
   mannAdoptererAlene,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-}) => (
-  <FaktaGruppe
-    titleCode="MannAdoptererAleneFaktaForm.ApplicationInformation"
-    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
-  >
-    <Container className={styles.container}>
-      <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
-      <VerticalSpacer fourPx />
-      {farSokerType
-        && <Normaltekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(farSokerType)}</Normaltekst>}
-      <VerticalSpacer sixteenPx />
-      <hr className={styles.hr} />
-      <RadioGroupField name="mannAdoptererAlene" validate={[required]} bredde="XL" readOnly={readOnly} isEdited={mannAdoptererAlene}>
-        <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }} value />
-        <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }} value={false} />
-      </RadioGroupField>
-    </Container>
-  </FaktaGruppe>
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe
+      title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
+    >
+      <Container className={styles.container}>
+        <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
+        <VerticalSpacer fourPx />
+        {farSokerType
+          && <Normaltekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(farSokerType)}</Normaltekst>}
+        <VerticalSpacer sixteenPx />
+        <hr className={styles.hr} />
+        <RadioGroupField name="mannAdoptererAlene" validate={[required]} bredde="XL" readOnly={readOnly} isEdited={mannAdoptererAlene}>
+          <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }} value />
+          <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }} value={false} />
+        </RadioGroupField>
+      </Container>
+    </FaktaGruppe>
+  );
+};
 
 MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
   mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,

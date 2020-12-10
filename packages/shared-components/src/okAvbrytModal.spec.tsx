@@ -1,18 +1,18 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { FormattedMessage } from 'react-intl';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
+import shallowWithIntl from '../i18n/intl-enzyme-test-helper-shared-components';
 
 import OkAvbrytModal from './OkAvbrytModal';
 
 describe('<OkAvbrytModal>', () => {
   it('skal rendre modal', () => {
     const wrapper = shallowWithIntl(
-      <OkAvbrytModal.WrappedComponent
-        intl={intlMock}
-        textCode="OkAvbrytModal.OpenBehandling"
+      <OkAvbrytModal
+        text="Åpen behandling"
         showModal
         cancel={sinon.spy()}
         submit={sinon.spy()}
@@ -22,10 +22,10 @@ describe('<OkAvbrytModal>', () => {
     const modal = wrapper.find(Modal);
     expect(modal).to.have.length(1);
     expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('OkAvbrytModal.OpenBehandling');
+    expect(modal.prop('contentLabel')).is.eql('Åpen behandling');
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).to.have.length(1);
-    expect(message.prop('id')).is.eql('OkAvbrytModal.OpenBehandling');
+    const knapp = wrapper.find(Hovedknapp);
+    expect(knapp).to.have.length(1);
+    expect(knapp.childAt(0).text()).is.eql('OK');
   });
 });

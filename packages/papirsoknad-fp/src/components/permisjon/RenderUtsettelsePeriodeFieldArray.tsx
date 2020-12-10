@@ -60,7 +60,7 @@ export const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps & Wra
     fields={fields}
     meta={meta}
     emptyPeriodTemplate={defaultUtsettelsePeriode}
-    textCode="Registrering.Permisjon.Utsettelse.LeggTilPeriode"
+    bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.LeggTilPeriode' })}
     readOnly={readOnly}
   >
     {(periodeElementFieldId, index, getRemoveButton) => (

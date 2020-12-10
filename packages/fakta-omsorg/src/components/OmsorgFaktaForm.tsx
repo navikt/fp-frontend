@@ -20,6 +20,7 @@ import { ArrowBox, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
+import useIntl from '../useIntl';
 
 import styles from './omsorgFaktaForm.less';
 
@@ -75,97 +76,99 @@ const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & Static
   oppgittOmsorgSoknad,
   oppgittAleneomsorgSoknad,
   alleMerknaderFraBeslutter,
-}) => (
-  <div className={className}>
-    {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)
-      && (
-      <FaktaGruppe
-        titleCode="OmsorgFaktaForm.Aleneomsorg"
-        withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]}
-      >
-        <Normaltekst className={styles.paddingBottom}>
-          {oppgittAleneomsorgSoknad
-            ? <FormattedMessage id="OmsorgFaktaForm.OppgittAleneomsorg" />
-            : (
-              <FormattedMessage
-                id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />
-            )}
-        </Normaltekst>
-        <RadioGroupField name="aleneomsorg" readOnly={readOnly} validate={[required]} isEdited={aleneomsorgIsEdited}>
-          <RadioOption label={{ id: 'OmsorgFaktaForm.HarAleneomsorg' }} value />
-          <RadioOption
-            label={(
-              <FormattedMessage
-                id="OmsorgFaktaForm.HarIkkeAleneomsorg"
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />
-            )}
-            value={false}
-          />
-        </RadioGroupField>
-      </FaktaGruppe>
-      )}
-    {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)
-      && (
-      <FaktaGruppe
-        titleCode="OmsorgFaktaForm.Omsorg"
-        withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
-      >
-        <Normaltekst className={styles.paddingBottom}>
-          {oppgittOmsorgSoknad
-            ? <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
-            : (
-              <FormattedMessage
-                id="OmsorgFaktaForm.OppgittIkkeOmsorg"
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />
-            )}
-        </Normaltekst>
-        <RadioGroupField name="omsorg" readOnly={readOnly} validate={[required]} isEdited={omsorgIsEdited}>
-          <RadioOption label={{ id: 'OmsorgFaktaForm.HarOmsorg' }} value />
-          <RadioOption
-            label={(
-              <FormattedMessage
-                id="OmsorgFaktaForm.HarIkkeOmsorg"
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />
-            )}
-            value={false}
-          />
-        </RadioGroupField>
-        {omsorg === false
-          ? (
-            <Row>
-              <Column xs="2" />
-              <Column xs="6">
-                <ArrowBox alignOffset={40}>
-                  <FieldArray
-                    name="ikkeOmsorgPerioder"
-                    component={IkkeOmsorgPeriodeField}
-                    readOnly={readOnly}
-                  />
-                </ArrowBox>
-              </Column>
-            </Row>
-          )
-          : null}
-      </FaktaGruppe>
-      )}
-  </div>
-);
-
+}) => {
+  const intl = useIntl();
+  return (
+    <div className={className}>
+      {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)
+        && (
+        <FaktaGruppe
+          title={intl.formatMessage({ id: 'OmsorgFaktaForm.Aleneomsorg' })}
+          withoutBorder
+          merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]}
+        >
+          <Normaltekst className={styles.paddingBottom}>
+            {oppgittAleneomsorgSoknad
+              ? <FormattedMessage id="OmsorgFaktaForm.OppgittAleneomsorg" />
+              : (
+                <FormattedMessage
+                  id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
+              )}
+          </Normaltekst>
+          <RadioGroupField name="aleneomsorg" readOnly={readOnly} validate={[required]} isEdited={aleneomsorgIsEdited}>
+            <RadioOption label={{ id: 'OmsorgFaktaForm.HarAleneomsorg' }} value />
+            <RadioOption
+              label={(
+                <FormattedMessage
+                  id="OmsorgFaktaForm.HarIkkeAleneomsorg"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
+              )}
+              value={false}
+            />
+          </RadioGroupField>
+        </FaktaGruppe>
+        )}
+      {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)
+        && (
+        <FaktaGruppe
+          title={intl.formatMessage({ id: 'OmsorgFaktaForm.Omsorg' })}
+          withoutBorder
+          merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
+        >
+          <Normaltekst className={styles.paddingBottom}>
+            {oppgittOmsorgSoknad
+              ? <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
+              : (
+                <FormattedMessage
+                  id="OmsorgFaktaForm.OppgittIkkeOmsorg"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
+              )}
+          </Normaltekst>
+          <RadioGroupField name="omsorg" readOnly={readOnly} validate={[required]} isEdited={omsorgIsEdited}>
+            <RadioOption label={{ id: 'OmsorgFaktaForm.HarOmsorg' }} value />
+            <RadioOption
+              label={(
+                <FormattedMessage
+                  id="OmsorgFaktaForm.HarIkkeOmsorg"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
+              )}
+              value={false}
+            />
+          </RadioGroupField>
+          {omsorg === false
+            ? (
+              <Row>
+                <Column xs="2" />
+                <Column xs="6">
+                  <ArrowBox alignOffset={40}>
+                    <FieldArray
+                      name="ikkeOmsorgPerioder"
+                      component={IkkeOmsorgPeriodeField}
+                      readOnly={readOnly}
+                    />
+                  </ArrowBox>
+                </Column>
+              </Row>
+            )
+            : null}
+        </FaktaGruppe>
+        )}
+    </div>
+  );
+};
 OmsorgFaktaForm.defaultProps = {
   aleneomsorgIsEdited: false,
   omsorgIsEdited: false,

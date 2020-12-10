@@ -1,8 +1,6 @@
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
-} from 'react-intl';
+import { IntlShape } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -11,6 +9,7 @@ import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
 
 import Image from './Image';
 import VerticalSpacer from './VerticalSpacer';
+import getPackageIntl from '../i18n/getPackageIntl';
 
 import styles from './periodFieldArray.less';
 
@@ -52,8 +51,8 @@ interface OwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta?: FieldArrayMetaProps;
   readOnly?: boolean;
-  titleTextCode?: string;
-  textCode?: string;
+  titleText?: string;
+  bodyText?: string;
   emptyPeriodTemplate?: any;
   shouldShowAddButton?: boolean;
   createAddButtonInsteadOfImageLink?: boolean;
@@ -64,13 +63,12 @@ interface OwnProps {
  *
  * Overbygg over FieldArray (Redux-form) som håndterer å legge til og fjerne perioder
  */
-const PeriodFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const PeriodFieldArray: FunctionComponent<OwnProps> = ({
   fields,
   readOnly = true,
   meta,
-  titleTextCode,
-  textCode = 'PeriodFieldArray.LeggTilPeriode',
+  titleText,
+  bodyText,
   emptyPeriodTemplate = {
     periodeFom: '',
     periodeTom: '',
@@ -78,45 +76,49 @@ const PeriodFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   shouldShowAddButton = true,
   createAddButtonInsteadOfImageLink = false,
   children,
-}) => (
-  <NavFieldGroup
-    title={titleTextCode ? intl.formatMessage({ id: titleTextCode }) : undefined}
-    errorMessage={showErrorMessage(meta) ? finnFeilmelding(intl, meta) : null}
-  >
-    {fields.map((periodeElementFieldId, index) => children(periodeElementFieldId, index, getRemoveButton(index, fields)))}
-    {shouldShowAddButton && (
-      <Row>
-        <Column xs="12">
-          {!createAddButtonInsteadOfImageLink && !readOnly
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-            && (
-            <div
-              onClick={onClick(fields, emptyPeriodTemplate)}
-              onKeyDown={onKeyDown(fields, emptyPeriodTemplate)}
-              className={styles.addPeriode}
-              role="button"
-              tabIndex={0}
-            >
-              <Image className={styles.addCircleIcon} src={addCircleIcon} alt={intl.formatMessage({ id: textCode })} />
-              <Undertekst className={styles.imageText}>
-                <FormattedMessage id={textCode} />
-              </Undertekst>
-            </div>
+}) => {
+  const intl = getPackageIntl();
+  const text = bodyText || intl.formatMessage({ id: 'PeriodFieldArray.LeggTilPeriode' });
+  return (
+    <NavFieldGroup
+      title={titleText}
+      errorMessage={showErrorMessage(meta) ? finnFeilmelding(intl, meta) : null}
+    >
+      {fields.map((periodeElementFieldId, index) => children(periodeElementFieldId, index, getRemoveButton(index, fields)))}
+      {shouldShowAddButton && (
+        <Row>
+          <Column xs="12">
+            {!createAddButtonInsteadOfImageLink && !readOnly
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+              && (
+              <div
+                onClick={onClick(fields, emptyPeriodTemplate)}
+                onKeyDown={onKeyDown(fields, emptyPeriodTemplate)}
+                className={styles.addPeriode}
+                role="button"
+                tabIndex={0}
+              >
+                <Image className={styles.addCircleIcon} src={addCircleIcon} alt={text} />
+                <Undertekst className={styles.imageText}>
+                  {text}
+                </Undertekst>
+              </div>
+              )}
+            {createAddButtonInsteadOfImageLink && !readOnly && (
+              <button
+                type="button"
+                onClick={onClick(fields, emptyPeriodTemplate)}
+                className={styles.buttonAdd}
+              >
+                {text}
+              </button>
             )}
-          {createAddButtonInsteadOfImageLink && !readOnly && (
-            <button
-              type="button"
-              onClick={onClick(fields, emptyPeriodTemplate)}
-              className={styles.buttonAdd}
-            >
-              <FormattedMessage id={textCode} />
-            </button>
-          )}
-          <VerticalSpacer sixteenPx />
-        </Column>
-      </Row>
-    )}
-  </NavFieldGroup>
-);
+            <VerticalSpacer sixteenPx />
+          </Column>
+        </Row>
+      )}
+    </NavFieldGroup>
+  );
+};
 
-export default injectIntl(PeriodFieldArray);
+export default PeriodFieldArray;

@@ -11,6 +11,7 @@ import {
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import styles from './utenlandsOppholdField.less';
 
 const classNames = classnames.bind(styles);
@@ -32,7 +33,8 @@ interface OwnProps {
   selectValues: ReactElement[];
 }
 
-const renderUtenlandsOppholdFieldArray: FunctionComponent<OwnProps> = ({
+const renderUtenlandsOppholdFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   fields,
   meta,
@@ -41,8 +43,8 @@ const renderUtenlandsOppholdFieldArray: FunctionComponent<OwnProps> = ({
   <PeriodFieldArray
     fields={fields}
     meta={meta}
-    titleTextCode="Registrering.RegistreringOpphold.AngiOpphold"
-    textCode="Registrering.RegistreringOpphold.Add"
+    titleText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.AngiOpphold' })}
+    bodyText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Add' })}
     emptyPeriodTemplate={defaultUtenlandsOpphold}
     createAddButtonInsteadOfImageLink
     readOnly={readOnly}
@@ -113,7 +115,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnPropsUtenlandsOppholdField> & 
 }) => (
   <FieldArray
     name={name}
-    component={renderUtenlandsOppholdFieldArray}
+    component={injectIntl(renderUtenlandsOppholdFieldArray)}
     selectValues={countrySelectValues(countryCodes)}
     readOnly={readOnly}
   />

@@ -11,6 +11,7 @@ import {
   Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
 import { buildInitialValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
 
 const soknad = {
@@ -29,6 +30,7 @@ describe('<SjekkFodselDokForm>', () => {
   it('skal rendre form', () => {
     const wrapper = shallow(<SjekkFodselDokForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       readOnly={false}
       initialValues={{ begrunnelse: 'test' }}
       submittable

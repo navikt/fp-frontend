@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -44,12 +44,13 @@ interface MappedOwnProps {
 /**
  * SykdomPanel
  */
-export const SykdomPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const SykdomPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   alleMerknaderFraBeslutter,
 }) => (
   <FaktaGruppe
-    titleCode="SykdomPanel.ApplicationInformation"
+    title={intl.formatMessage({ id: 'SykdomPanel.ApplicationInformation' })}
     merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]}
   >
     <TextAreaField
@@ -101,4 +102,4 @@ export const sykdomPanelName = 'SykdomPanel';
 
 export default connect(mapStateToProps)(behandlingForm({
   form: sykdomPanelName,
-})(SykdomPanel));
+})(injectIntl(SykdomPanel)));

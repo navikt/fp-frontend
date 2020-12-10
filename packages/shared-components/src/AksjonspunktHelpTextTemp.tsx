@@ -1,10 +1,10 @@
 import React, { ReactNode, FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { isObject } from '@fpsak-frontend/utils';
 
 import AksjonspunktHelpTextHTML from './AksjonspunktHelpTextHTML';
+import getPackageIntl from '../i18n/getPackageIntl';
 
 import styles from './AksjonspunktHelpTextTemp.less';
 
@@ -32,7 +32,7 @@ const AksjonspunktHelpTextTemp: FunctionComponent<OwnProps> = ({
           // @ts-ignore (Dette skal fjernast)
           <Normaltekst key={isObject(child) ? child.key : child} className={styles.wordwrap}>
             <strong>
-              <FormattedMessage id="HelpText.Aksjonspunkt.BehandletAksjonspunkt" />
+              {getPackageIntl().formatMessage({ id: 'HelpText.Aksjonspunkt.BehandletAksjonspunkt' })}
             </strong>
             {child}
           </Normaltekst>

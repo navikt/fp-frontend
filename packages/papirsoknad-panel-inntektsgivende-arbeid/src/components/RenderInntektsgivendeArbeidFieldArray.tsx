@@ -11,6 +11,7 @@ import {
 import { DatepickerField, InputField, SelectField } from '@fpsak-frontend/form';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import styles from './renderInntektsgivendeArbeidFieldArray.less';
 
 const maxLength50 = maxLength(50);
@@ -44,7 +45,8 @@ interface OwnProps {
  * Presentasjonskomponent: Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold.
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
+const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   meta,
   alleKodeverk,
@@ -57,7 +59,7 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
       fields={fields}
       meta={meta}
       emptyPeriodTemplate={defaultInntektsgivendeArbeid}
-      textCode="Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold"
+      bodyText={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold' })}
       readOnly={readOnly}
     >
       {(arbeidsforholdElementFieldId, index, getRemoveButton) => (
@@ -110,4 +112,4 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default RenderInntektsgivendeArbeidFieldArray;
+export default injectIntl(RenderInntektsgivendeArbeidFieldArray);

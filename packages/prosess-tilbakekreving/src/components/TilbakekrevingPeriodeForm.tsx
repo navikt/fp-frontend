@@ -391,7 +391,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
           </FlexColumn>
         </FlexRow>
         { showModal
-          && <AdvarselModal textCode="TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr" showModal submit={this.saveForm} />}
+          && <AdvarselModal bodyText={intl.formatMessage({ id: 'TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr' })} showModal submit={this.saveForm} />}
       </div>
     );
   }
