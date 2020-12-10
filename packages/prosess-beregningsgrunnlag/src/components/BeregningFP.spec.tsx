@@ -96,6 +96,7 @@ describe('<BeregningFP>', () => {
       alleKodeverk={{}}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningForm = wrapper.find(BeregningForm);
     expect(beregningForm.props().readOnly).to.have.equal(false);
@@ -116,6 +117,7 @@ describe('<BeregningFP>', () => {
       alleKodeverk={{}}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningForm = wrapper.find(BeregningForm);
     expect(beregningForm).to.be.lengthOf(0);
@@ -135,6 +137,7 @@ describe('<BeregningFP>', () => {
       behandling={behandling as Behandling}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningForm = wrapper.find(BeregningForm);
     expect(beregningForm).to.be.lengthOf(1);
@@ -151,6 +154,7 @@ describe('<BeregningFP>', () => {
       aksjonspunkter={graderingAP}
       alleKodeverk={{}}
       readOnlySubmitButton
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const graderingUtenBG = wrapper.find(GraderingUtenBG2);
     expect(graderingUtenBG).to.be.lengthOf(1);
@@ -165,6 +169,7 @@ describe('<BeregningFP>', () => {
       aksjonspunkter={gjeldendeAksjonspunkter}
       alleKodeverk={{}}
       readOnlySubmitButton
+      arbeidsgiverOpplysningerPerId={{}}
     />);
     const graderingUtenBG = wrapper.find(GraderingUtenBG2);
     expect(graderingUtenBG).to.be.lengthOf(0);

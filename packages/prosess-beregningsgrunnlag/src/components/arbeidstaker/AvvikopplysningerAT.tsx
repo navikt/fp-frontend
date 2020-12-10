@@ -9,7 +9,7 @@ import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvvikopplysningerATFL from '../fellesPaneler/AvvikopplysningerATFLSN';
 
-const viserIkkeAvviksvurdering = (erKombinasjonsstatusATSN, erKombinasjonsstatusATFLSN) => (
+const viserIkkeAvviksvurdering = (erKombinasjonsstatusATSN: boolean, erKombinasjonsstatusATFLSN: boolean) => (
   <FlexRow>
     <Column xs="12">
       <Normaltekst>
@@ -30,7 +30,11 @@ type OwnProps = {
     beregnetAarsinntekt?: number;
 };
 
-const AvviksopplysningerAT: FunctionComponent<OwnProps> = ({ relevanteStatuser, sammenligningsgrunnlagPrStatus, beregnetAarsinntekt }) => {
+const AvviksopplysningerAT: FunctionComponent<OwnProps> = ({
+  relevanteStatuser,
+  sammenligningsgrunnlagPrStatus,
+  beregnetAarsinntekt,
+}) => {
   const erKombinasjonsstatusATSN = relevanteStatuser.isKombinasjonsstatus
     && relevanteStatuser.isArbeidstaker
     && relevanteStatuser.isSelvstendigNaeringsdrivende

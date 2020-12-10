@@ -3,10 +3,8 @@ import React from 'react';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgrunnlag';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 const aksjonspunktKoder = [
   aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
@@ -18,36 +16,6 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.VURDER_DEKNINGSGRAD,
 ];
 
-/**
- * getStatusForBeregningsgrunnlag
- * @param bg beregningsgrunnlaget for behandlingen
- * @param aksjonspunkter aksjonspunkter for behandlingen
- * @param vilkarene vilkårene for behandlingen
- * Siden visning av prosesssteg bruker vilkårsresultat til å utlede status (om de skal vise informaskjon, hvilken farge de skal ha osv),
- * må vi returnere vilkarUtfallType selvom det ikke nødvendigvis er vilkåret som sjekkes.
- * vilkarUtfallType.IKKE_VURDERT = Grått steg uten innhold
- * vilkarUtfallType.OPPFYLT = Grønt steg med innhold
- * vilkarUtfallType.IKKE_OPPFYLT = Rødt steg med innhold
- */
-const getStatusForBeregningsgrunnlag = (bg, aksjonspunkter, vilkarene) => {
-  if (!bg) {
-    return vilkarUtfallType.IKKE_VURDERT;
-  }
-  const bgVilkar = vilkarene && vilkarene.find((vilkar) => vilkar && vilkar.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET);
-  if (bgVilkar && bgVilkar.vilkarStatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
-    return bgVilkar.vilkarStatus.kode;
-  }
-  const førstePeriode = bg.beregningsgrunnlagPeriode ? bg.beregningsgrunnlagPeriode[0] : undefined;
-  const andelerIFørstePeriode = førstePeriode && førstePeriode.beregningsgrunnlagPrStatusOgAndel ? førstePeriode.beregningsgrunnlagPrStatusOgAndel : [];
-  const finnesAndelMedBeregnet = andelerIFørstePeriode.some((andel) => andel.beregnetPrAar || andel.beregnetPrAar === 0);
-  const finnesAksjonspunkt = aksjonspunkter && aksjonspunkter.some((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)
-    && (ap.status.kode === aksjonspunktStatus.OPPRETTET || ap.status.kode === aksjonspunktStatus.UTFORT));
-  if (finnesAksjonspunkt || finnesAndelMedBeregnet) {
-    return vilkarUtfallType.OPPFYLT;
-  }
-  return vilkarUtfallType.IKKE_VURDERT;
-};
-
 class PanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <BeregningsgrunnlagProsessIndex {...props} />
 
@@ -57,12 +25,11 @@ class PanelDef extends ProsessStegPanelDef {
     vilkarType.BEREGNINGSGRUNNLAGVILKARET,
   ]
 
-  getOverstyrtStatus = ({ beregningsgrunnlag, aksjonspunkter, vilkar }) => getStatusForBeregningsgrunnlag(beregningsgrunnlag, aksjonspunkter, vilkar)
-
   getOverstyrVisningAvKomponent = () => true
 
-  getData = ({ beregningsgrunnlag }) => ({
+  getData = ({ beregningsgrunnlag, arbeidsgiverOpplysningerPerId }) => ({
     beregningsgrunnlag,
+    arbeidsgiverOpplysningerPerId,
   })
 }
 

@@ -69,9 +69,24 @@ const vilkarMedUtfall = (kode) => [{
   },
 } as Vilkar];
 
-const lagArbeidsforhold = (arbeidsgiverNavn, arbeidsgiverId, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, navn, prosent) => ({
-  arbeidsgiverNavn,
-  arbeidsgiverId,
+const arbeidsgiverOpplysninger = {
+  910909088: {
+    identifikator: '910909088',
+    navn: 'BEDRIFT AS',
+    erPrivatPerson: false,
+  },
+};
+
+const lagAG = (arbeidsgiverNavn, arbeidsgiverIdent, erPrivatPerson = false) => {
+  arbeidsgiverOpplysninger[arbeidsgiverIdent] = {
+    identifikator: arbeidsgiverIdent,
+    navn: arbeidsgiverNavn,
+    erPrivatPerson,
+  };
+};
+
+const lagArbeidsforhold = (arbeidsgiverIdent, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, navn, prosent) => ({
+  arbeidsgiverIdent,
   startdato: '2018-10-09',
   opphoersdato,
   arbeidsforholdId,
@@ -120,8 +135,7 @@ const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegr
     kodeverk: 'INNTEKTSKATEGORI',
   },
   arbeidsforhold: {
-    arbeidsgiverNavn: 'BEDRIFT AS',
-    arbeidsgiverId: '910909088',
+    arbeidsgiverIdent: '910909088',
     startdato: '2018-10-09',
     opphoersdato: null,
     arbeidsforholdId: '2a3c0f5c-3d70-447a-b0d7-cd242d5155bb',
@@ -370,6 +384,7 @@ export const arbeidstakerUtenAvvik = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -379,7 +394,6 @@ export const brukersAndelUtenAvvik = () => {
     lagAndel('BA', 34230, undefined, false, false),
     lagAndel('AT', 534230, undefined, false, false),
   ];
-
   const perioder = [lagPeriodeMedDagsats(andeler, 2340)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 564000;
   delete perioder[0].redusertPrAar;
@@ -402,6 +416,7 @@ export const brukersAndelUtenAvvik = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -428,6 +443,7 @@ export const arbeidstakerMedAvvik = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -457,6 +473,7 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -480,6 +497,7 @@ export const militær = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -542,6 +560,7 @@ export const selvstendigNæringsdrivende = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -552,14 +571,17 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
     lagAndel('AT', 132250, undefined, true, true),
     lagAndel('AT', 140250, undefined, true, true),
     lagAndel('FL', 133250, undefined, undefined)];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Andeby bank', '987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf', '100', null, null, null);
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS',
-    '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
+  lagAG('Andeby bank', '987654321', false);
+  lagAG('Gardslien transport og Gardiner AS', '9478541223', false);
+  lagAG('Svaneby sykehjem', '93178545', false);
+
+  andeler[0].arbeidsforhold = lagArbeidsforhold('987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf', '100', null, null, null);
+  andeler[1].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '200',
     '2019-11-11',
     'Butikkmedarbeider',
     '60');
-  andeler[2].arbeidsforhold = lagArbeidsforhold('Svaneby sykehjem', '93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '300', null, null, null);
+  andeler[2].arbeidsforhold = lagArbeidsforhold('93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '300', null, null, null);
   const perioder = [lagPeriode(andeler, undefined, '2019-09-16', '2019-09-29', []),
     lagTidsbegrensetPeriode(andeler, '2019-09-30', '2019-10-15'),
     lagPeriode(andeler, undefined, '2019-10-15', null, [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }])];
@@ -580,6 +602,7 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -610,6 +633,7 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -618,12 +642,13 @@ export const naturalYtelse = () => {
   const andel1 = lagAndel('AT', 240000, undefined, undefined, false);
   const andel2 = lagAndel('AT', 740000, 744000, undefined, false);
   const andel3 = lagAndel('AT', 750000, 755000, undefined, false);
-  andel1.arbeidsforhold.arbeidsgiverNavn = 'BEDRIFT AS 1';
-  andel1.arbeidsforhold.arbeidsgiverId = '9109090881';
-  andel2.arbeidsforhold.arbeidsgiverNavn = 'BEDRIFT AS 2';
-  andel2.arbeidsforhold.arbeidsgiverId = '9109090882';
-  andel3.arbeidsforhold.arbeidsgiverNavn = 'BEDRIFT AS 3';
-  andel3.arbeidsforhold.arbeidsgiverId = '9109090883';
+  lagAG('BEDRIFT AS 1', '9109090881', false);
+  lagAG('BEDRIFT AS 2', '9109090882', false);
+  lagAG('BEDRIFT AS 3', '9109090883', false);
+
+  andel1.arbeidsforhold.arbeidsgiverIdent = '9109090881';
+  andel2.arbeidsforhold.arbeidsgiverIdent = '9109090882';
+  andel3.arbeidsforhold.arbeidsgiverIdent = '9109090883';
   andel2.bortfaltNaturalytelse = 2231;
   andel3.bortfaltNaturalytelse = 3231;
   andel1.dekningsgrad = 100;
@@ -676,6 +701,7 @@ export const naturalYtelse = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -705,6 +731,7 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivende = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -737,6 +764,7 @@ export const graderingPåBeregningsgrunnlagUtenPenger = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -787,6 +815,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -842,6 +871,7 @@ export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBe
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -894,6 +924,7 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -904,10 +935,11 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
     lagAndel('AT', 78000, undefined, false, false),
     lagAndel('AT', 88084, undefined, false, false),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Garslien transport og Gardiner', '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', null, null, null, null);
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg', '9478541255', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100', null, 'Assistent', '30');
-  andeler[2].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg',
-    '9478541255',
+  lagAG('Garslien transport og Gardiner', '9478541223', false);
+  lagAG('Aldersheimen Omsorg', '9478541255', false);
+  andeler[0].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', null, null, null, null);
+  andeler[1].arbeidsforhold = lagArbeidsforhold('9478541255', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100', null, 'Assistent', '30');
+  andeler[2].arbeidsforhold = lagArbeidsforhold('9478541255',
     'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845',
     '200',
     '2019-11-11',
@@ -931,6 +963,7 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -939,8 +972,8 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
   const andeler = [
     lagAndel('AT', 32232, undefined, false, false),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner',
-    '123456789',
+  lagAG('Gardslien transport og Gardiner', '123456789', false);
+  andeler[0].arbeidsforhold = lagArbeidsforhold('123456789',
     'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '324243533',
     '',
@@ -948,7 +981,6 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
     '75');
   const perioder = [lagPeriodeMedDagsats(andeler, 1844)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 450326;
-
   const statuser = [lagStatus('AT')];
 
   const sammenligningsgrunnlagPrStatus = [
@@ -967,20 +999,20 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
 
 export const arbeidstakerMedAksjonspunktSide5 = () => {
   const andeler = [lagAndel('AT', 348576, undefined, false, true)];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Bedriften & Sønn AS',
-    '123456789',
+  andeler[0].arbeidsforhold = lagArbeidsforhold('123456789',
     'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     null,
     null,
     'Fabrikkmedarbeider',
     75);
+  lagAG('Bedriften & Sønn AS', '123456789', false);
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT')];
   const sammenligningsgrunnlagPrStatus = [
@@ -1000,7 +1032,7 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1017,11 +1049,11 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
   perioder[0].redusertPrAar = 441053;
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
-  ap[0].begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  ap.begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     + ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-  ap[0].status.kode = 'UTFO';
-  ap[0].endretAv = 'B123456';
-  ap[0].endretTidspunkt = '2020-01-20';
+  ap.status.kode = 'UTFO';
+  ap.endretAv = 'B123456';
+  ap.endretTidspunkt = '2020-01-20';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
@@ -1034,6 +1066,7 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1042,14 +1075,14 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
     lagAndel('AT', 395232, undefined, false, true),
     lagAndel('AT', 156084, undefined, true, true),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS',
-    '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
+  lagAG('Gardslien transport og Gardiner AS', '9478541223', false);
+  lagAG('Aldersheimen Omsorg', '93178545', false);
+  andeler[0].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '100',
     null,
     'Butikkmedarbeider',
     '60');
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg',
-    '93178545',
+  andeler[1].arbeidsforhold = lagArbeidsforhold('93178545',
     'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845',
     '200',
     '2019-11-11',
@@ -1075,7 +1108,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1084,14 +1117,14 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
     lagAndel('AT', 395232, undefined, false, true),
     lagAndel('AT', 156084, undefined, true, true),
   ];
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Gardslien transport og Gardiner AS',
-    '9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
+  lagAG('Gardslien transport og Gardiner AS', '9478541223', false);
+  lagAG('Aldersheimen Omsorg', '93178545', false);
+  andeler[0].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '100',
     null,
     'Butikkmedarbeider',
     '60');
-  andeler[1].arbeidsforhold = lagArbeidsforhold('Aldersheimen Omsorg',
-    '93178545',
+  andeler[1].arbeidsforhold = lagArbeidsforhold('93178545',
     'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845',
     '200',
     '2019-11-11', 'Assistent', '30');
@@ -1121,9 +1154,9 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 404257, 36.4, 147059)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD);
-  ap[0].begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  ap.begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     + ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-  ap[0].status.kode = 'UTFO';
+  ap.status.kode = 'UTFO';
 
   return (
     <BeregningsgrunnlagProsessIndex
@@ -1137,6 +1170,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1162,6 +1196,7 @@ export const FrilansSide8 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1188,6 +1223,7 @@ export const FrilansMedAksjonspunktSide9 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1216,7 +1252,7 @@ export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1234,9 +1270,9 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
   ];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
-  ap[0].begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  ap.begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     + ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-  ap[0].status.kode = 'UTFO';
+  ap.status.kode = 'UTFO';
   perioder[0].redusertPrAar = 479318;
   perioder[0].avkortetPrAar = 599148;
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 710316;
@@ -1252,6 +1288,7 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1303,6 +1340,7 @@ export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 =
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1371,6 +1409,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1424,6 +1463,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1465,9 +1505,9 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 100;
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
-  ap[0].begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  ap.begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     + ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-  ap[0].status.kode = 'UTFO';
+  ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
@@ -1480,6 +1520,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1533,6 +1574,7 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1587,6 +1629,7 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1638,6 +1681,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnStorreEnnAtOgStorreEnn6g
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1690,6 +1734,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1742,6 +1787,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1799,6 +1845,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1856,6 +1903,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1908,6 +1956,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -1956,9 +2005,9 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 80;
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
-  ap[0].begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  ap.begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     + ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-  ap[0].status.kode = 'UTFO';
+  ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
@@ -1971,6 +2020,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2019,9 +2069,9 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 80;
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
-  ap[0].begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  ap.begrunnelse = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     + ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-  ap[0].status.kode = 'UTFO';
+  ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
@@ -2034,6 +2084,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2047,12 +2098,11 @@ export const YtelseFraNavSide26 = () => {
   perioder[0].bruttoPrAar = 395232;
   const bg = lagBG(perioder, statuser, null);
   bg.dekningsgrad = 80;
-  const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
       beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      aksjonspunkter={object('aksjonspunkter', [])}
       submitCallback={action('button-click') as () => Promise<any>}
       isReadOnly={boolean('readOnly', false)}
       readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
@@ -2060,6 +2110,7 @@ export const YtelseFraNavSide26 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2086,6 +2137,7 @@ export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2094,8 +2146,8 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
     lagAndel('AT', 107232, undefined, false, true),
     lagAndel('AAP', 272304, undefined, false)];
   andeler[0].overstyrtPrAar = 167000;
-  andeler[0].arbeidsforhold = lagArbeidsforhold('Garslinen transport og Gardiner AS',
-    '987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf',
+  lagAG('Garslinen transport og Gardiner AS', '987654321', false);
+  andeler[0].arbeidsforhold = lagArbeidsforhold('987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf',
     null,
     null,
     null,
@@ -2109,8 +2161,8 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.dekningsgrad = 100;
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
-  ap[0].begrunnelse = 'Endring  begrunnelse';
-  ap[0].status.kode = 'UTFO';
+  ap.begrunnelse = 'Endring  begrunnelse';
+  ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}
@@ -2123,6 +2175,7 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2155,6 +2208,7 @@ export const arbeidstakerDagpengerMedBesteberegningSide28 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2187,6 +2241,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeSide29 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2219,6 +2274,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeFnOgDpOverstigerSNSide
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2251,6 +2307,7 @@ export const ArbeidstagerDagpengerOgSelvstendigNæringsdrivendeATOgDpOverstigerS
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2303,6 +2360,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
@@ -2330,6 +2388,7 @@ export const militærOgSiviltjenesteSide33 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
     />
   );
 };
