@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 import moment from 'moment';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -69,7 +69,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Viser panelet som håndterer avklaring av innsyn.
  */
-export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   readOnlySubmitButton,
   innsynResultatTyper,
@@ -145,7 +146,7 @@ export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & I
       formName={formProps.form}
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
-      textCode={sattPaVent ? 'SubmitButton.SettPåVent' : undefined}
+      text={sattPaVent ? intl.formatMessage({ id: 'SubmitButton.SettPåVent' }) : undefined}
       isReadOnly={readOnly}
       isSubmittable={!readOnlySubmitButton}
       isBehandlingFormSubmitting={isBehandlingFormSubmitting}
@@ -230,6 +231,6 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 const InnsynForm = connect(mapStateToProps)(behandlingForm({
   form: formName,
-})(InnsynFormImpl));
+})(injectIntl(InnsynFormImpl)));
 
 export default InnsynForm;

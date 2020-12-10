@@ -26,10 +26,6 @@
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
   "Messages.PreviewText": "Forhåndsvis varselbrev",
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
-  "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
-  "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",
-  "ProsessStegBegrunnelseTextField.BegrunnVurdering": "Begrunn vurderingen din",
   "SubmitButton.SettPåVent": "Sett behandling på vent",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",

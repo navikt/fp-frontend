@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -65,7 +65,8 @@ interface MappedOwnProps {
   onSubmit: (formValues: FormValues) => any;
 }
 
-export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   handleSubmit,
   readOnlySubmitButton,
@@ -180,7 +181,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
           isBehandlingFormSubmitting={isBehandlingFormSubmitting}
           isBehandlingFormDirty={isBehandlingFormDirty}
           hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-          textCode="Ankebehandling.Merknad.Merknader.LagreKommentarer"
+          text={intl.formatMessage({ id: 'Ankebehandling.Merknad.Merknader.LagreKommentarer' })}
         />
       </Column>
       {!readOnly && (
@@ -237,4 +238,4 @@ const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
 
 export default connect(mapStateToProps)(behandlingForm({
   form: ankeMerknaderFormName,
-})(TrygderettsbehandlingForm));
+})(injectIntl(TrygderettsbehandlingForm)));

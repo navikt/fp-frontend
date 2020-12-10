@@ -158,7 +158,6 @@ export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
         {!readOnly && (
         <Column xs="3">
           <ProsessStegSubmitButton
-            textCode="SubmitButton.ConfirmInformation"
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
             formName={formProps.form}

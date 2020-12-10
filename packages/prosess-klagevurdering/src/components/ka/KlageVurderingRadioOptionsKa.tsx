@@ -29,7 +29,7 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
     <div>
       <ProsessStegBegrunnelseTextField
         readOnly={readOnly}
-        textCode="KlageVurderingRadioOptionsKa.VurderingForKlage"
+        text={intl.formatMessage({ id: 'KlageVurderingRadioOptionsKa.VurderingForKlage' })}
       />
       <VerticalSpacer sixteenPx />
       <Row>

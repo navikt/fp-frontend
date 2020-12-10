@@ -10,11 +10,13 @@ import { FlexColumn } from '@fpsak-frontend/shared-components';
 import TilbakekrevingEditerVedtaksbrevPanel from './brev/TilbakekrevingEditerVedtaksbrevPanel';
 import { TilbakekrevingVedtakFormImpl as TilbakekrevingVedtakForm } from './TilbakekrevingVedtakForm';
 import underavsnittType from '../kodeverk/avsnittType';
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-vedtak-tilbakekreving';
 
 describe('<TilbakekrevingVedtakForm>', () => {
   it('skal vise tekstfelt for begrunnelse og godkjenningsknapp', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
       readOnly={false}
@@ -46,6 +48,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
     const fetchPreview = sinon.spy();
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
       readOnly={false}
@@ -97,6 +100,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
   it('skal ikke vise trykkbar godkjenningsknapp og forhåndsvisningslenke når obligatoriske verdier ikke er utfylt', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
       readOnly={false}
@@ -126,6 +130,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
   it('skal ikke vise trykkbar godkjenningsknapp og forhåndsvisningslenke når obligatorisk oppsummering for revurdering tilbakekreving ikke er utfylt', () => {
     const wrapper = shallow(<TilbakekrevingVedtakForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
       readOnly={false}

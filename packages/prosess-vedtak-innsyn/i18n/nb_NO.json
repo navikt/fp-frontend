@@ -18,7 +18,6 @@
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
   "Malform.Beskrivelse": "Foretrukket språk",
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
   "ValidationMessage.MaxLength": "Du kan skrive maksimalt {length} tegn",

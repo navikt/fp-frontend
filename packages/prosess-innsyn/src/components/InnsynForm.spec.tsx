@@ -5,12 +5,13 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 
 import { InnsynFormImpl } from './InnsynForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-innsyn';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-innsyn';
 
 describe('<InnsynForm>', () => {
   it('skal vise radioknapper for valg av sett på vent når innvilget', () => {
     const wrapper = shallowWithIntl(<InnsynFormImpl
       {...reduxFormPropsMock}
+      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
       innsynResultatTyper={[{ kode: innsynResultatTyperKV.INNVILGET, kodeverk: '', navn: 'navnTest' }]}
@@ -44,6 +45,7 @@ describe('<InnsynForm>', () => {
   it('skal ikke vise radioknapper for valg av sett på vent når innvilget', () => {
     const wrapper = shallowWithIntl(<InnsynFormImpl
       {...reduxFormPropsMock}
+      intl={intlMock}
       readOnly={false}
       readOnlySubmitButton={false}
       innsynResultatTyper={[{ kode: innsynResultatTyperKV.AVVIST, kodeverk: '', navn: 'navnTest' }]}

@@ -86,7 +86,6 @@
   "Person.Woman": "Kvinne",
   "Person.Man": "Mann",
   "Person.Unknown": "Ukjent",
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
   "SubmitButton.SettPåVent": "Sett behandling på vent",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
