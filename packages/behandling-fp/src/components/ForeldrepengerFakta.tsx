@@ -51,7 +51,7 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
   arbeidsgiverOpplysningerPerId,
 }) => {
   const {
-    aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, ytelsefordeling, beregningsgrunnlag,
+    aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, ytelsefordeling, beregningsgrunnlag, uttakKontrollerAktivitetskrav,
   } = data;
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
@@ -73,6 +73,7 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
     beregningsgrunnlag,
     hasFetchError,
     arbeidsgiverOpplysningerPerId,
+    uttakKontrollerAktivitetskrav,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

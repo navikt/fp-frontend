@@ -69,6 +69,7 @@ const kodeverkTyper = {
   HENDELSE_UNDERTYPE: 'HendelseUnderType',
   VURDER_AARSAK: 'VurderÅrsak',
   ANKE_OMGJOER_AARSAK: 'AnkeOmgjørÅrsak',
+  AKTIVITETSKRAV_AVKLARING: 'KontrollerAktivitetskravAvklaring',
 };
 
 export default kodeverkTyper;

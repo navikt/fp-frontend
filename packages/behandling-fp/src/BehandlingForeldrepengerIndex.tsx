@@ -27,6 +27,7 @@ const foreldrepengerData = [
   { key: FpBehandlingApiKeys.UTTAK_STONADSKONTOER },
   { key: FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER },
   { key: FpBehandlingApiKeys.SIMULERING_RESULTAT },
+  { key: FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV },
 ];
 
 interface OwnProps {
