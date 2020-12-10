@@ -16,6 +16,8 @@ import {
   Aksjonspunkt, Kodeverk, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 
+import useIntl from '../../useIntl';
+
 const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Period',
   'PerioderMedMedlemskapFaktaPanel.Coverage',
@@ -89,11 +91,12 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps
   vurderingTypes,
   alleMerknaderFraBeslutter,
 }) => {
+  const intl = useIntl();
   const sorterteVurderingstyper = useMemo(() => vurderingTypes.sort((a, b) => a.navn.localeCompare(b.navn)), [vurderingTypes]);
 
   if (!fixedMedlemskapPerioder || fixedMedlemskapPerioder.length === 0) {
     return (
-      <FaktaGruppe titleCode="PerioderMedMedlemskapFaktaPanel.ApplicationInformation">
+      <FaktaGruppe title={intl.formatMessage({ id: 'PerioderMedMedlemskapFaktaPanel.ApplicationInformation' })}>
         <Normaltekst>
           <FormattedMessage id="PerioderMedMedlemskapFaktaPanel.NoInformation" />
         </Normaltekst>
@@ -103,7 +106,7 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps
 
   return (
     <FaktaGruppe
-      titleCode="PerioderMedMedlemskapFaktaPanel.ApplicationInformation"
+      title={intl.formatMessage({ id: 'PerioderMedMedlemskapFaktaPanel.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]}
     >
       <Table headerTextCodes={headerTextCodes}>

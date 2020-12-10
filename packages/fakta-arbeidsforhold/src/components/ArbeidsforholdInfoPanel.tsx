@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -59,7 +59,8 @@ interface PureOwnProps {
  * Ansvarlig for å rendre aksjonspunktteksten, arbeidsforholdene, og
  * bekreft & fortsett knappen
  * */
-export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & InjectedFormProps> = ({
+export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   aksjonspunkter,
   readOnly,
   hasOpenAksjonspunkter,
@@ -82,6 +83,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
     )}
     <form onSubmit={formProps.handleSubmit}>
       <PersonArbeidsforholdPanel
+        intl={intl}
         readOnly={readOnly}
         hasAksjonspunkter={aksjonspunkter.length > 0}
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
@@ -138,4 +140,4 @@ const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({ form: formName })(ArbeidsforholdInfoPanelImpl));
+export default connect(mapStateToProps)(behandlingForm({ form: formName })(injectIntl(ArbeidsforholdInfoPanelImpl)));

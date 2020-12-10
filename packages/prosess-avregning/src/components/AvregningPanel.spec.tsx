@@ -10,12 +10,11 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { Fagsak, SimuleringResultat } from '@fpsak-frontend/types';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 import { AvregningPanelImpl, transformValues } from './AvregningPanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-avregning';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-avregning';
 
 const simuleringResultat = {
   simuleringResultat: {

@@ -8,6 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { Personopplysninger, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
+import BostedFaktaView from './BostedFaktaView';
 import OmsorgFaktaForm from './OmsorgFaktaForm';
 import { OmsorgInfoPanel } from './OmsorgInfoPanel';
 
@@ -163,7 +164,7 @@ describe('<OmsorgInfoPanel>', () => {
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
-    const bostedFaktaView = wrapper.find('BostedFaktaView');
+    const bostedFaktaView = wrapper.find(BostedFaktaView);
     expect(bostedFaktaView).has.length(1);
     expect(bostedFaktaView.at(0).prop('personopplysning')).is.eql(personopplysning);
   });

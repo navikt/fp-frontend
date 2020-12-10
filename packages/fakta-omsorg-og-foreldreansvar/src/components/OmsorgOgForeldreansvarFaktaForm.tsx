@@ -129,6 +129,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
           readOnly={readOnly}
           isFodselsdatoerEdited={editedStatus.fodselsdatoer}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          intl={intl}
         />
       </Column>
       <Column xs="6">
@@ -142,7 +143,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
     </Row>
     {!erAksjonspunktForeldreansvar && (
       <FaktaGruppe
-        titleCode="OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes"
+        title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
       >
         {!readOnly && (

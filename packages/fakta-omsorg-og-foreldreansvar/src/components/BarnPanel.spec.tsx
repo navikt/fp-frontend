@@ -4,9 +4,12 @@ import moment from 'moment';
 import { shallow } from 'enzyme';
 import { FieldArrayFieldsProps } from 'redux-form';
 
+import { DatepickerField } from '@fpsak-frontend/form';
 import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
+import { DateLabel } from '@fpsak-frontend/shared-components';
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 import BarnPanel from './BarnPanel';
 
 const getMockedFields = (fieldNames: any, children: any) => {
@@ -35,16 +38,17 @@ describe('<BarnPanel>', () => {
       opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
     const wrapper = shallow(<BarnPanel
+      intl={intlMock}
       readOnly
       fields={getMockedFields(fieldNames, children)}
       antallBarn={2}
       alleMerknaderFraBeslutter={{}}
     />);
 
-    const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).to.have.length(2);
-    const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).to.have.length(0);
+    const datepickerField = wrapper.find(DatepickerField);
+    expect(datepickerField).to.have.length(2);
+    const dateLabel = wrapper.find(DateLabel);
+    expect(dateLabel).to.have.length(0);
   });
 
   it('skal ikke kunne endre fødselsdatoer når barna er bekreftet av TPS', () => {
@@ -63,16 +67,17 @@ describe('<BarnPanel>', () => {
       opplysningsKilde: opplysningsKilde.TPS,
     }];
     const wrapper = shallow(<BarnPanel
+      intl={intlMock}
       readOnly
       fields={getMockedFields(fieldNames, children)}
       antallBarn={2}
       alleMerknaderFraBeslutter={{}}
     />);
 
-    const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).to.have.length(0);
-    const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).to.have.length(2);
+    const datepickerField = wrapper.find(DatepickerField);
+    expect(datepickerField).to.have.length(0);
+    const dateLabel = wrapper.find(DateLabel);
+    expect(dateLabel).to.have.length(2);
   });
 
   it('skal vise korrekt alder på barn', () => {
@@ -98,6 +103,7 @@ describe('<BarnPanel>', () => {
     ];
 
     const wrapper = shallow(<BarnPanel
+      intl={intlMock}
       readOnly={false}
       fields={getMockedFields(fieldNames, children)}
       antallBarn={2}

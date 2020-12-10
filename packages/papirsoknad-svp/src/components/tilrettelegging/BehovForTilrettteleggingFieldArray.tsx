@@ -47,7 +47,7 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
       fields={fields}
       meta={meta}
       emptyPeriodTemplate={defaultTilrettelegging}
-      textCode="BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov"
+      bodyText={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
       readOnly={readOnly}
     >
       {(tilretteleggingFieldId, index, getRemoveButton) => (

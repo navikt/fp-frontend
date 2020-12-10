@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
 import {
@@ -27,7 +27,8 @@ interface OwnProps {
  * Presentasjonskomponent: Viser inputfelter for dato for bestemmelse av overføring.
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
+export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   meta,
   selectValues,
@@ -37,7 +38,7 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = (
     fields={fields}
     meta={meta}
     emptyPeriodTemplate={defaultOverforingPeriode}
-    textCode="Registrering.Permisjon.Utsettelse.LeggTilPeriode"
+    bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.LeggTilPeriode' })}
     readOnly={readOnly}
   >
     {(periodeElementFieldId, index, getRemoveButton) => (
@@ -80,4 +81,4 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = (
   </PeriodFieldArray>
 );
 
-export default RenderOverforingAvKvoterFieldArray;
+export default injectIntl(RenderOverforingAvKvoterFieldArray);

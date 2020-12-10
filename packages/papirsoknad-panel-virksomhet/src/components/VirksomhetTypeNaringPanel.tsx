@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
@@ -49,10 +49,10 @@ export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedO
     <VerticalSpacer fourPx />
     {naringvirksomhetTyper.sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
       .map((nv) => (
-        <>
+        <Fragment key={nv.kode}>
           <VerticalSpacer fourPx />
           <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />
-        </>
+        </Fragment>
       ))}
   </>
 );

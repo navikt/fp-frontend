@@ -55,17 +55,12 @@
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 
-  "OkAvbrytModal.Ok": "OK",
-  "OkAvbrytModal.Avbryt": "Avbryt",
   "Malform.Beskrivelse": "Foretrukket språk",
   "Malform.Bokmal": "Bokmål",
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
   "Messages.PreviewText": "Forhåndsvis varselbrev",
   "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: ",
-  "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
   
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

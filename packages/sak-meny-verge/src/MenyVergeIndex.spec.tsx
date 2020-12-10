@@ -19,7 +19,7 @@ describe('<MenyVergeIndex>', () => {
 
     const modal = wrapper.find(OkAvbrytModal);
     expect(modal).to.have.length(1);
-    expect(modal.prop('textCode')).is.eql('MenyVergeIndex.OpprettVergeSporsmal');
+    expect(modal.prop('text')).is.eql('Opprett verge/fullmektig?');
 
     modal.prop('submit')();
 
@@ -41,7 +41,7 @@ describe('<MenyVergeIndex>', () => {
 
     const modal = wrapper.find(OkAvbrytModal);
     expect(modal).to.have.length(1);
-    expect(modal.prop('textCode')).is.eql('MenyVergeIndex.FjernVergeSporsmal');
+    expect(modal.prop('text')).is.eql('Fjern verge/fullmektig?');
 
     modal.prop('submit')();
 

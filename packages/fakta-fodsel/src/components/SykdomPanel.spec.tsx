@@ -7,12 +7,14 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { TextAreaField } from '@fpsak-frontend/form';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
 import { SykdomPanel } from './SykdomPanel';
 
 describe('<SykdomPanel>', () => {
   it('skal rendre Sykdomspanel', () => {
     const wrapper = shallow(<SykdomPanel
       {...reduxFormPropsMock}
+      intl={intlMock}
       readOnly={false}
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]: {},

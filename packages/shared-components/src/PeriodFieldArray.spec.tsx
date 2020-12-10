@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
-import { FormattedMessage } from 'react-intl';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import Image from './Image';
 import PeriodFieldArray from './PeriodFieldArray';
@@ -12,14 +11,13 @@ describe('<PeriodFieldArray>', () => {
   it('skal vise en rad og knapp for å legge til periode', () => {
     const fields = new MockFields('perioder', 1);
     const wrapper = shallowWithIntl(
-      <PeriodFieldArray.WrappedComponent
-        intl={intlMock}
+      <PeriodFieldArray
         fields={fields}
         meta={metaMock}
         readOnly={readOnly}
       >
         {() => <span>test</span>}
-      </PeriodFieldArray.WrappedComponent>,
+      </PeriodFieldArray>,
     );
 
     const span = wrapper.find('span');
@@ -28,15 +26,13 @@ describe('<PeriodFieldArray>', () => {
     const div = wrapper.find('div');
     expect(div).to.have.length(1);
     expect(div.find(Image)).to.have.length(1);
-    expect(div.find(FormattedMessage)).to.have.length(1);
   });
 
   it('skal vise to rader der kun rad nummer to har sletteknapp', () => {
     const fields = new MockFields('perioder', 2);
 
     const wrapper = shallowWithIntl(
-      <PeriodFieldArray.WrappedComponent
-        intl={intlMock}
+      <PeriodFieldArray
         fields={fields}
         meta={metaMock}
         readOnly={readOnly}
@@ -47,7 +43,7 @@ describe('<PeriodFieldArray>', () => {
             {getRemoveButton()}
           </div>
         )}
-      </PeriodFieldArray.WrappedComponent>,
+      </PeriodFieldArray>,
     );
     const row1 = wrapper.find('#id_0');
     expect(row1).has.length(1);
@@ -64,14 +60,13 @@ describe('<PeriodFieldArray>', () => {
     const fields = new MockFields('perioder', 1);
 
     const wrapper = shallowWithIntl(
-      <PeriodFieldArray.WrappedComponent
-        intl={intlMock}
+      <PeriodFieldArray
         fields={fields}
         meta={metaMock}
         readOnly={readOnly}
       >
         {() => <span>test</span>}
-      </PeriodFieldArray.WrappedComponent>,
+      </PeriodFieldArray>,
     );
 
     const addDiv = wrapper.find('div');
@@ -86,8 +81,7 @@ describe('<PeriodFieldArray>', () => {
     const fields = new MockFields('perioder', 2);
 
     const wrapper = shallowWithIntl(
-      <PeriodFieldArray.WrappedComponent
-        intl={intlMock}
+      <PeriodFieldArray
         fields={fields}
         meta={metaMock}
         readOnly={readOnly}
@@ -98,7 +92,7 @@ describe('<PeriodFieldArray>', () => {
             {getRemoveButton()}
           </div>
         )}
-      </PeriodFieldArray.WrappedComponent>,
+      </PeriodFieldArray>,
     );
 
     const btn = wrapper.find('button');
@@ -113,14 +107,13 @@ describe('<PeriodFieldArray>', () => {
     const fields = new MockFields('perioder', 1);
 
     const wrapper = shallowWithIntl(
-      <PeriodFieldArray.WrappedComponent
-        intl={intlMock}
+      <PeriodFieldArray
         fields={fields}
         shouldShowAddButton={false}
         readOnly={readOnly}
       >
         {() => <span>test</span>}
-      </PeriodFieldArray.WrappedComponent>,
+      </PeriodFieldArray>,
     );
 
     expect(wrapper.find(Image)).has.length(0);
@@ -131,14 +124,13 @@ describe('<PeriodFieldArray>', () => {
     const fields = new MockFields('perioder', 1);
 
     const wrapper = shallowWithIntl(
-      <PeriodFieldArray.WrappedComponent
-        intl={intlMock}
+      <PeriodFieldArray
         fields={fields}
         createAddButtonInsteadOfImageLink
         readOnly={readOnly}
       >
         {() => <span>test</span>}
-      </PeriodFieldArray.WrappedComponent>,
+      </PeriodFieldArray>,
     );
 
     expect(wrapper.find(Image)).has.length(0);

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
@@ -16,14 +17,15 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const BostedFaktaView: FunctionComponent<OwnProps> = ({
+const BostedFaktaView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   personopplysning,
   ektefellePersonopplysning,
   className,
   alleKodeverk,
+  intl,
 }) => (
   <div className={className}>
-    <FaktaGruppe titleCode="BostedFaktaView.BosattAdresser">
+    <FaktaGruppe title={intl.formatMessage({ id: 'BostedFaktaView.BosattAdresser' })}>
       <Row>
         <Column xs="6">
           {personopplysning.barn.map((b, index) => (
@@ -45,4 +47,4 @@ BostedFaktaView.defaultProps = {
   className: styles.defaultBostedFakta,
 };
 
-export default BostedFaktaView;
+export default injectIntl(BostedFaktaView);

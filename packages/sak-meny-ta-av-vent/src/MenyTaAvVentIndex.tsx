@@ -42,7 +42,7 @@ const MenyTaAvVentIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <OkAvbrytModal
-        textCode="MenyTaAvVentIndex.TaAvVent"
+        text={intl.formatMessage({ id: 'MenyTaAvVentIndex.TaAvVent' })}
         showModal
         submit={submit}
         cancel={lukkModal}
