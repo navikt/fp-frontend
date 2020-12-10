@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -13,7 +12,7 @@ import { Aksjonspunkt, Personopplysninger, Soknad } from '@fpsak-frontend/types'
 
 import OppholdINorgeOgAdresserFaktaPanel, { PeriodeMedId } from './OppholdINorgeOgAdresserFaktaPanel';
 import * as useIntl from '../../useIntl';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
   const opphold = {

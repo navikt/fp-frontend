@@ -5,8 +5,8 @@ import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
-import { RenderOppholdPeriodeFieldArray } from './RenderOppholdPeriodeFieldArray';
+import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import RenderOppholdPeriodeFieldArray from './RenderOppholdPeriodeFieldArray';
 
 const oppholdsReasons = [{ navn: 'Grunn1', kode: 'Grunn1', kodeverk: '' }];
 
@@ -16,7 +16,8 @@ const getRemoveButton = () => <button id="avslutt" type="button" />;
 
 describe('<RenderOppholdPeriodeFieldArray>', () => {
   it('skal vise 2 inputfelter for dato og 1 nedtrekkslister uten sletteknapp ved periodeliste med en eksisterende periode', () => {
-    const wrapper = shallowWithIntl(<RenderOppholdPeriodeFieldArray
+    const wrapper = shallowWithIntl(<RenderOppholdPeriodeFieldArray.WrappedComponent
+      intl={intlMock}
       fields={fields}
       meta={metaMock}
       oppholdsReasons={oppholdsReasons}

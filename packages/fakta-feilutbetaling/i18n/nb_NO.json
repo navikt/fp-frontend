@@ -18,9 +18,6 @@
   "FeilutbetalingInfoPanel.IkkeVarslet": "Ikke varslet",
   "FeilutbetalingInfoPanel.BehandlePerioderSamlet": "Behandle alle perioder samlet",
 
-  "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: ",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
   "ValidationMessage.MaxLength": "Du kan skrive maksimalt {length} tegn",

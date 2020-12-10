@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
@@ -8,7 +9,6 @@ import {
   hasValidDate,
   required,
 } from '@fpsak-frontend/utils';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
 type Periode = {
   periodeFom: string;
@@ -28,7 +28,8 @@ interface OwnProps {
   fields: FieldArrayFieldsProps<Periode>;
 }
 
-const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> = ({
+const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   meta,
   readOnly,
@@ -38,7 +39,7 @@ const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> = ({
     <PeriodFieldArray
       fields={fields}
       meta={meta}
-      textCode="IkkeOmsorgPeriodeField.Add"
+      bodyText={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.Add' })}
       shouldShowAddButton={!readOnly && showAddButton(fields)}
       createAddButtonInsteadOfImageLink
       readOnly={readOnly}
@@ -70,4 +71,4 @@ const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> = ({
   </div>
 );
 
-export default IkkeOmsorgPeriodeField;
+export default injectIntl(IkkeOmsorgPeriodeField);

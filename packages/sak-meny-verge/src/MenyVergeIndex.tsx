@@ -36,7 +36,7 @@ const MenyVergeIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <OkAvbrytModal
-        textCode={opprettVerge ? 'MenyVergeIndex.OpprettVergeSporsmal' : 'MenyVergeIndex.FjernVergeSporsmal'}
+        text={intl.formatMessage({ id: opprettVerge ? 'MenyVergeIndex.OpprettVergeSporsmal' : 'MenyVergeIndex.FjernVergeSporsmal' })}
         showModal
         submit={submit}
         cancel={lukkModal}

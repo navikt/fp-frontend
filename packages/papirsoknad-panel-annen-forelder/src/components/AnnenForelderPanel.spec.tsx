@@ -3,11 +3,11 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-papirsoknad-annen-forelder';
 import * as useIntl from '../useIntl';
 import AnnenForelderPanel, { AnnenForelderPanelImpl, KanIkkeOppgiBegrunnelsePanel } from './AnnenForelderPanel';
 

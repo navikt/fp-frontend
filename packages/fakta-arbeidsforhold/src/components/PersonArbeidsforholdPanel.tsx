@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { change as reduxFormChange, FormAction, initialize as reduxFormInitialize } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -212,6 +212,8 @@ interface StaticFunctions {
   isReadOnly?: (state: any, behandlingId: number, behandlingVersjon: number) => boolean,
 }
 
+type Props = PureOwnProps & MappedOwnProps & DispatchProps & StaticFunctions & WrappedComponentProps;
+
 /**
  * PersonArbeidsforholdPanelImpl:
  * - Håndterer staten for children-components.
@@ -219,7 +221,7 @@ interface StaticFunctions {
  * som har samme navn i GUI og PropTypen blir fylt inn 'automatisk', mens andre variabler som
  * ikke er med i PropTypen må håndteres f.eks. i UpdateArbeidsforhold metoden.
  */
-export class PersonArbeidsforholdPanelImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps & StaticFunctions, OwnState> {
+export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
   static buildInitialValues = (arbeidsforhold: Arbeidsforhold[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => ({
     arbeidsforhold: leggTilValuesForRendering(addReplaceableArbeidsforhold(arbeidsforhold), arbeidsgiverOpplysningerPerId),
   });
@@ -233,7 +235,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<PureOwnProps & Mapp
     return !arbeidsforhold || !!getUnresolvedArbeidsforhold(arbeidsforhold);
   };
 
-  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps & StaticFunctions) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       selectedArbeidsforhold: undefined,
@@ -382,6 +384,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<PureOwnProps & Mapp
       behandlingVersjon,
       alleKodeverk,
       arbeidsgiverOpplysningerPerId,
+      intl,
     } = this.props;
 
     const {
@@ -391,7 +394,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<PureOwnProps & Mapp
     return (
       <>
         <FaktaGruppe
-          titleCode="PersonArbeidsforholdPanel.ArbeidsforholdHeader"
+          title={intl.formatMessage({ id: 'PersonArbeidsforholdPanel.ArbeidsforholdHeader' })}
           merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]}
         >
           <PersonArbeidsforholdTable

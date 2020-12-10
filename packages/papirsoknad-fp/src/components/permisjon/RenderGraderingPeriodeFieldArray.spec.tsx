@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
 import { RenderGraderingPeriodeFieldArray } from './RenderGraderingPeriodeFieldArray';
 
 const graderingKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE', kodeverk: '' }];
@@ -20,6 +20,7 @@ const getRemoveButton = () => <button id="avslutt" type="button" />;
 describe('<RenderGraderingPeriodeFieldArray>', () => {
   it('skal vise felter for gradering, samtidig uttak ikke valgt', () => {
     const wrapper = shallowWithIntl(<RenderGraderingPeriodeFieldArray
+      intl={intlMock}
       fields={fields}
       meta={metaMock}
       graderingKvoter={graderingKvoter}
@@ -50,6 +51,7 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
 
   it('skal vise felter for gradering, samtidig uttak valgt', () => {
     const wrapper = shallowWithIntl(<RenderGraderingPeriodeFieldArray
+      intl={intlMock}
       fields={fields}
       meta={metaMock}
       graderingKvoter={graderingKvoter}

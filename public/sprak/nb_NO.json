@@ -78,7 +78,6 @@
   "Header.Rettskilde": "Rettskildene",
   "Header.Systemrutine": "Systemrutine",
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: ",
   "Malform.Bokmal": "Bokmål",
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
@@ -140,8 +139,6 @@
   "FatterVedtakStatusModal.KlagenErFerdigbehandlet": "Klagen er ferdigbehandlet",
   "FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver": "Forslag til klageresultat er sendt til medunderskriver",
 
-  "PeriodLabel.DateToday": "d.d.",
-
   "Registrering.RegistrereSoknad": "Registrere søknad",
   "Registrering.RegistrerAlleOpplysninger": "Registrer inn alle opplysninger fra papirsøknaden",
   "Registrering.Omsoknaden.Title": "Om søknaden",
@@ -156,8 +153,6 @@
 
   "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
   "PreviewAnkeLink.ForhandvisBrev": "Forhåndsvis brev",
-
-  "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
 
   "Calendar.Day.0": "søndag",
   "Calendar.Day.1": "mandag",
@@ -204,9 +199,6 @@
   "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
   "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
   "BehandlingTilbakekrevingIndex.ApenRevurderingHeader": "Åpen revurdering",
-  "DataFetchPendingModal.LosningenJobberMedBehandlingen": "Løsningen jobber med behandlingen...",
-
-  "AdvarselModal.Ok": "OK",
 
   "ProsessStegIkkeBehandletPanel.IkkeBehandlet": "Dette steget er ikke behandlet",
 

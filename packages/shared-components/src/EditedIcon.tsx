@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import classnames from 'classnames/bind';
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
-import { useIntl } from 'react-intl';
+
+import getPackageIntl from '../i18n/getPackageIntl';
 import Image from './Image';
 
 import styles from './editedIcon.less';
@@ -21,7 +22,7 @@ interface OwnProps {
 const EditedIcon: FunctionComponent<OwnProps> = ({
   className = '',
 }) => {
-  const intl = useIntl();
+  const intl = getPackageIntl();
   return (
     <span className={classNames('editedIcon', className)}>
       <Image

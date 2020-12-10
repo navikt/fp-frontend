@@ -21,7 +21,5 @@
   "InnhentDokOpptjeningUtlandPanel.Begrunnelse": "Begrunnelse",
   
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
-  "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: "
+  "ValidationMessage.MinLength": "Du må skrive minst {length} tegn"
 }

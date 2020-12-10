@@ -1,11 +1,11 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-tilbakekreving';
 import sarligGrunn from '../kodeverk/sarligGrunn';
 import Aktsomhet from '../kodeverk/aktsomhet';
 import ForeldetFormPanel from './tilbakekrevingPeriodePaneler/ForeldetFormPanel';
@@ -42,7 +42,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       erForeldet: true,
       ytelser: [],
     } as DataForPeriode;
-    const wrapper = shallow(<TilbakekrevingPeriodeFormImpl
+    const wrapper = shallowWithIntl(<TilbakekrevingPeriodeFormImpl
       data={periode}
       behandlingFormPrefix="behandling_V1"
       skjulPeriode={() => undefined}
@@ -115,7 +115,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
     }] as CustomVilkarsVurdertePeriode[];
 
     const changeValue = sinon.spy();
-    const wrapper = shallow(<TilbakekrevingPeriodeFormImpl
+    const wrapper = shallowWithIntl(<TilbakekrevingPeriodeFormImpl
       data={periode}
       behandlingFormPrefix="behandling_V1"
       skjulPeriode={() => undefined}

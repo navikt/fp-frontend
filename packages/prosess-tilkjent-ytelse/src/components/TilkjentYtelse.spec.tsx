@@ -1,8 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
+
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-tilkjent-ytelse';
 import { PeriodeMedId, TilkjentYtelse } from './TilkjentYtelse';
 
 describe('<TilkjentYtelse>', () => {
@@ -15,7 +17,7 @@ describe('<TilkjentYtelse>', () => {
   };
 
   it('skall innehålla korrekt antal felter', () => {
-    const wrapper = shallow(<TilkjentYtelse
+    const wrapper = shallowWithIntl(<TilkjentYtelse
       items={[{
         id: 1,
         tom: '2018-10-01',

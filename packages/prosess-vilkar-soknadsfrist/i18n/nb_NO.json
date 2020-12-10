@@ -16,7 +16,6 @@
   "ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt": "Vilkåret er oppfylt",
   "ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
   
-  "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
   "ShowVilkarStatus.Check": "Informasjonen er utfylt",
   "VilkarResultPicker.Arsak": "Avslagsårsak",
   "VilkarResultPicker.SelectArsak": "Velg årsak",
@@ -25,8 +24,6 @@
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",
   "ProsessStegBegrunnelseTextField.BegrunnVurdering": "Begrunn vurderingen din",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "HelpText.Aksjonspunkt.BehandletAksjonspunkt": "Behandlet aksjonspunkt: ",
   "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

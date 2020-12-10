@@ -7,6 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 import { ArbeidsforholdInfoPanelImpl, fjernIdFraArbeidsforholdLagtTilAvSaksbehandler } from './ArbeidsforholdInfoPanel';
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
 import BekreftOgForsettKnapp from './BekreftOgForsettKnapp';
@@ -37,6 +38,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
   it('Skal vise komponenten korrekt med aksjonspunkt hvor man ikke kan legge til nye arbeidsforhold', () => {
     const wrapper = shallow(
       <ArbeidsforholdInfoPanelImpl
+        intl={intlMock}
         aksjonspunkter={[ap5080]}
         readOnly={false}
         hasOpenAksjonspunkter
@@ -60,6 +62,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
   it('Skal vise komponenten korrekt med aksjonspunkt hvor man kan legge til nye arbeidsforhold', () => {
     const wrapper = shallow(
       <ArbeidsforholdInfoPanelImpl
+        intl={intlMock}
         aksjonspunkter={[ap5080]}
         readOnly={false}
         hasOpenAksjonspunkter
@@ -83,6 +86,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
   it('Skal vise komponenten korrekt uten aksjonspunkt hvor man kan legge til nye arbeidsforhold', () => {
     const wrapper = shallow(
       <ArbeidsforholdInfoPanelImpl
+        intl={intlMock}
         aksjonspunkter={[]}
         readOnly={false}
         hasOpenAksjonspunkter={false}

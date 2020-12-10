@@ -1,11 +1,11 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useState,
 } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import keyImage from '@fpsak-frontend/assets/images/key-1-rotert.svg';
 import keyUtgraetImage from '@fpsak-frontend/assets/images/key-1-rotert-utgraet.svg';
 
+import getPackageIntl from '../i18n/getPackageIntl';
 import Image from './Image';
 
 import styles from './overstyringKnapp.less';
@@ -18,8 +18,7 @@ interface OwnProps {
 /*
  * OverstyringKnapp
  */
-const OverstyringKnapp: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const OverstyringKnapp: FunctionComponent<OwnProps> = ({
   onClick = () => undefined,
   erOverstyrt = false,
 }) => {
@@ -35,6 +34,8 @@ const OverstyringKnapp: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     setOverstyrt(erOverstyrt);
   }, [erOverstyrt]);
 
+  const intl = getPackageIntl();
+
   return (
     <Image
       className={isOverstyrt ? styles.keyWithoutCursor : styles.key}
@@ -47,4 +48,4 @@ const OverstyringKnapp: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(OverstyringKnapp);
+export default OverstyringKnapp;

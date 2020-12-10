@@ -2,13 +2,12 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 
 import * as useIntl from '../useIntl';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
 
 describe('<DokumentasjonFaktaForm>', () => {
   const editedStatus = {
