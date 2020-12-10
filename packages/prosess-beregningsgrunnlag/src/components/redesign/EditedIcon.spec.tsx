@@ -1,7 +1,9 @@
 import React from 'react';
 import { expect } from 'chai';
-import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import Image from '@fpsak-frontend/shared-components/src/Image';
+
+import { mountWithIntl } from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import EditedIcon from './EditedIcon';
 
 describe('EditedIcon', () => {
