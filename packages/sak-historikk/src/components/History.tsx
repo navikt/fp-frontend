@@ -20,6 +20,7 @@ import HistorikkMalTypeFeilutbetaling from './maler/HistorikkMalTypeFeilutbetali
 import HistorikkMalTypeTilbakekreving from './maler/HistorikkMalTypeTilbakekreving';
 import HistorikkMalTypeForeldelse from './maler/HistorikkMalTypeForeldelse';
 import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
+import HistorikkMalTypeAktivitetskrav from './maler/HistorikkMalTypeAktivitetskrav';
 
 /*
  https://confluence.adeo.no/display/MODNAV/OMR-13+SF4+Sakshistorikk+-+UX+og+grafisk+design
@@ -179,6 +180,8 @@ const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
       return HistorikkMalTypeForeldelse;
     case historikkinnslagType.TILBAKEKREVING:
       return HistorikkMalTypeTilbakekreving;
+    case historikkinnslagType.AVKLART_AKTIVITETSKRAV:
+      return HistorikkMalTypeAktivitetskrav;
     default:
       return PlaceholderHistorikkMal;
   }

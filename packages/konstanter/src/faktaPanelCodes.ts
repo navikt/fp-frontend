@@ -17,6 +17,7 @@ const faktaPanelCodes = {
   UTTAK: 'uttak',
   VERGE: 'verge',
   YTELSER: 'ytelser',
+  AKTIVITETSKRAV: 'aktivitetskrav',
 };
 
 export default faktaPanelCodes;

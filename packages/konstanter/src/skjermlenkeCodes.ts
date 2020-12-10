@@ -62,6 +62,11 @@ const skjermlenkeCodes = {
     faktaNavn: faktaPanelCodes.ARBEIDSFORHOLD,
     punktNavn: '',
   },
+  FAKTA_OM_AKTIVITETSKRAV: {
+    kode: 'FAKTA_OM_AKTIVITETSKRAV',
+    faktaNavn: faktaPanelCodes.AKTIVITETSKRAV,
+    punktNavn: '',
+  },
   PUNKT_FOR_FORELDREANSVAR: {
     kode: 'PUNKT_FOR_FORELDREANSVAR',
     faktaNavn: faktaPanelCodes.DEFAULT,
