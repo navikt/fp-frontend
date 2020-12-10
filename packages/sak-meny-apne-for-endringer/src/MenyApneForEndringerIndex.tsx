@@ -43,7 +43,7 @@ const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <OkAvbrytModal
-        textCode="MenyApneForEndringerIndex.OpenBehandling"
+        text={intl.formatMessage({ id: 'MenyApneForEndringerIndex.OpenBehandling' })}
         showModal
         submit={submit}
         cancel={lukkModal}

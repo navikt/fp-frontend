@@ -4,13 +4,12 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { dateFormat } from '@fpsak-frontend/utils';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import CalendarOverlay from './CalendarOverlay';
 
 describe('<CalendarOverlay>', () => {
   it('skal ikke vise overlay når disabled', () => {
-    const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<CalendarOverlay
       onDayChange={sinon.spy()}
       className="test"
       dayPickerClassName="test"
@@ -24,8 +23,7 @@ describe('<CalendarOverlay>', () => {
   });
 
   it('skal vise overlay', () => {
-    const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<CalendarOverlay
       onDayChange={sinon.spy()}
       className="test"
       dayPickerClassName="test"
@@ -47,8 +45,7 @@ describe('<CalendarOverlay>', () => {
   it('skal ikke sette dato når denne ikke er korrekt', () => {
     const onDayChangeCallback = sinon.spy();
     const date = '21.sd.2017';
-    const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<CalendarOverlay
       onDayChange={onDayChangeCallback}
       className="test"
       dayPickerClassName="test"
@@ -68,8 +65,7 @@ describe('<CalendarOverlay>', () => {
       done();
     };
     const elementIsCalendarButton = () => false;
-    const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<CalendarOverlay
       onDayChange={sinon.spy()}
       className="test"
       dayPickerClassName="test"
@@ -84,8 +80,7 @@ describe('<CalendarOverlay>', () => {
 
   it('skal kjøre callback når en trykker escape-knappen', () => {
     const onCloseCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<CalendarOverlay
       onDayChange={sinon.spy()}
       className="test"
       dayPickerClassName="test"
@@ -102,8 +97,7 @@ describe('<CalendarOverlay>', () => {
 
   it('skal ikke kjøre callback når en trykker noe annet enn escape-knappen', () => {
     const onCloseCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<CalendarOverlay.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<CalendarOverlay
       onDayChange={sinon.spy()}
       className="test"
       dayPickerClassName="test"

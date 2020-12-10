@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
@@ -45,7 +46,8 @@ interface OwnProps {
  * Presentasjonskomponent: Viser inputfelter for dato for bestemmelse av oppholdsperiode.
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-export const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
+const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   meta,
   oppholdsReasons,
@@ -55,7 +57,7 @@ export const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     fields={fields}
     meta={meta}
     emptyPeriodTemplate={defaultOppholdPeriode}
-    textCode="Registrering.Permisjon.Opphold.LeggTilPeriode"
+    bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.LeggTilPeriode' })}
     readOnly={readOnly}
   >
     {(periodeElementFieldId, index, getRemoveButton) => (
@@ -94,4 +96,4 @@ export const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
   </PeriodFieldArray>
 );
 
-export default RenderOppholdPeriodeFieldArray;
+export default injectIntl(RenderOppholdPeriodeFieldArray);

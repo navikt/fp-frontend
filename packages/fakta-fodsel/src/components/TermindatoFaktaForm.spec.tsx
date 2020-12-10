@@ -11,12 +11,14 @@ import {
   Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
 import { buildInitialValues, TermindatoFaktaForm } from './TermindatoFaktaForm';
 
 describe('<TermindatoFaktaForm>', () => {
   it('skal rendre form som lar NAV-ansatt avklare fødselsdato og antall barn', () => {
     const wrapper = shallow(<TermindatoFaktaForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       initialValues={{ begrunnelse: 'test' }}
       readOnly={false}
       isForTidligTerminbekreftelse={false}
@@ -41,6 +43,7 @@ describe('<TermindatoFaktaForm>', () => {
   it('skal vise fødselsdato og antall barn fra TPS når fødselsdato er satt av TPS', () => {
     const wrapper = shallow(<TermindatoFaktaForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       initialValues={{ begrunnelse: 'test' }}
       readOnly={false}
       fodselsdatoTps="2018-01-01"

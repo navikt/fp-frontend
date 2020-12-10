@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
 import {
@@ -24,7 +25,8 @@ interface OwnProps {
   avklartBarn?: FamilieHendelse['avklartBarn'];
 }
 
-export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
+export const AvklartBarnFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   meta,
   readOnly,
@@ -35,7 +37,7 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
     meta={meta}
     emptyPeriodTemplate={defaultAntallBarn}
     readOnly={readOnly}
-    textCode="AvklartBarnFieldArray.LeggTilBarn"
+    bodyText={intl.formatMessage({ id: 'AvklartBarnFieldArray.LeggTilBarn' })}
     shouldShowAddButton={avklartBarn.length < 9}
   >
     {(periodeElementFieldId, index, getRemoveButton) => (
@@ -82,4 +84,4 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
   </PeriodFieldArray>
 );
 
-export default AvklartBarnFieldArray;
+export default injectIntl(AvklartBarnFieldArray);

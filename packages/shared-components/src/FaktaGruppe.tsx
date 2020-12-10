@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import BorderBox from './BorderBox';
@@ -30,7 +29,7 @@ interface OwnPropsFaktaGruppe {
     notAccepted?: boolean;
   };
   children: ReactNode;
-  titleCode?: string;
+  title?: string;
   withoutBorder?: boolean;
   className?: string;
 }
@@ -43,7 +42,7 @@ interface OwnPropsFaktaGruppe {
  */
 const FaktaGruppe: FunctionComponent<OwnPropsFaktaGruppe> = ({
   merknaderFraBeslutter,
-  titleCode = '',
+  title,
   children,
   withoutBorder = false,
   className = '',
@@ -51,12 +50,11 @@ const FaktaGruppe: FunctionComponent<OwnPropsFaktaGruppe> = ({
   const error = !!(merknaderFraBeslutter && merknaderFraBeslutter.notAccepted);
   return (
     <Wrapper withoutBorder={withoutBorder && !error} error={error} className={className}>
-      {titleCode
-      && (
-      <div>
-        <Element><FormattedMessage id={titleCode} /></Element>
-        <VerticalSpacer twentyPx />
-      </div>
+      {title && (
+        <>
+          <Element>{title}</Element>
+          <VerticalSpacer twentyPx />
+        </>
       )}
       {children}
     </Wrapper>

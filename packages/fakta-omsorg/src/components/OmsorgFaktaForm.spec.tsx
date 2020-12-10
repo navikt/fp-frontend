@@ -1,14 +1,25 @@
 import React from 'react';
 import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
-import { shallow } from 'enzyme';
+import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
+import * as useIntl from '../useIntl';
 import OmsorgFaktaForm from './OmsorgFaktaForm';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
 
 describe('<OmsorgFaktaForm>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   const aleneomsorgAp = {
     id: 1,
     definisjon: {
@@ -41,7 +52,7 @@ describe('<OmsorgFaktaForm>', () => {
   };
 
   it('skal vise tekst for aleneomsorg', () => {
-    const wrapper = shallow(<OmsorgFaktaForm.WrappedComponent
+    const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
       omsorg={false}
       className="defaultAleneOmsorgFakta"
@@ -59,7 +70,7 @@ describe('<OmsorgFaktaForm>', () => {
   });
 
   it('skal vise tekst for omsorg', () => {
-    const wrapper = shallow(<OmsorgFaktaForm.WrappedComponent
+    const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
       omsorg={false}
       className="defaultAleneOmsorgFakta"
@@ -77,7 +88,7 @@ describe('<OmsorgFaktaForm>', () => {
   });
 
   it('skal vise form - med <IkkeOmsorgPeriodeField>', () => {
-    const wrapper = shallow(<OmsorgFaktaForm.WrappedComponent
+    const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
       omsorg={false}
       className="defaultAleneOmsorgFakta"
@@ -115,7 +126,7 @@ describe('<OmsorgFaktaForm>', () => {
   });
 
   it('skal vise form - uten <IkkeOmsorgPeriodeField>', () => {
-    const wrapper = shallow(<OmsorgFaktaForm.WrappedComponent
+    const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
       omsorg
       aksjonspunkter={[aleneomsorgAp, omsorgAp]}

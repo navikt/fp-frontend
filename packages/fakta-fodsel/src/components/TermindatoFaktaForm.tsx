@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -75,7 +75,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
  */
-export const TermindatoFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const TermindatoFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   isTerminDatoEdited,
   isUtstedtDatoEdited,
@@ -90,7 +91,7 @@ export const TermindatoFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProp
 }) => (
   <>
     <FaktaGruppe
-      titleCode="TermindatoFaktaForm.ApplicationInformation"
+      title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.TERMINBEKREFTELSE]}
     >
       <Row>
@@ -129,7 +130,7 @@ export const TermindatoFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProp
       </Row>
     </FaktaGruppe>
     {fodselsdatoTps && !isOverridden && (
-      <FaktaGruppe titleCode="TermindatoFaktaForm.OpplysningerTPS">
+      <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
         <Row>
           <Column xs="6"><Normaltekst><FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" /></Normaltekst></Column>
           <Column xs="6"><Normaltekst><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Normaltekst></Column>
@@ -231,4 +232,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 export default connect(mapStateToProps)(behandlingForm({
   form: termindatoFaktaFormName,
-})(TermindatoFaktaForm));
+})(injectIntl(TermindatoFaktaForm)));

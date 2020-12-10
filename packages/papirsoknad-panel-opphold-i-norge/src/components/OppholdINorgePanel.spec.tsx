@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import {
@@ -18,6 +17,7 @@ import {
 
 import * as useIntl from '../useIntl';
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-papirsoknad-opphold-i-norge';
 
 describe('<OppholdINorgePanel>', () => {
   const countryCodes = [{

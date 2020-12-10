@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
 import DayPicker, { Modifier } from 'react-day-picker';
 
 import { DDMMYYYY_DATE_FORMAT, getRelatedTargetIE11, isIE11 } from '@fpsak-frontend/utils';
+
+import getPackageIntl from '../../i18n/getPackageIntl';
 
 const getRelatedTarget = (e: React.FocusEvent) => {
   if (isIE11()) {
@@ -25,7 +26,7 @@ interface OwnProps {
   disabledDays?: Modifier | Modifier[];
 }
 
-class CalendarOverlay extends Component<OwnProps & WrappedComponentProps> {
+class CalendarOverlay extends Component<OwnProps> {
   calendarRootRef: HTMLDivElement
 
   static defaultProps = {
@@ -35,12 +36,11 @@ class CalendarOverlay extends Component<OwnProps & WrappedComponentProps> {
     initialMonth: null,
   };
 
-  constructor(props: OwnProps & WrappedComponentProps) {
+  constructor(props: OwnProps) {
     super(props);
     this.onBlur = this.onBlur.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.setCalendarRootRef = this.setCalendarRootRef.bind(this);
-    this.getDayPickerLocalization = this.getDayPickerLocalization.bind(this);
     this.parseDateValue = this.parseDateValue.bind(this);
     this.targetIsCalendarOrCalendarButton = this.targetIsCalendarOrCalendarButton.bind(this);
   }
@@ -70,17 +70,6 @@ class CalendarOverlay extends Component<OwnProps & WrappedComponentProps> {
     }
   }
 
-  getDayPickerLocalization() {
-    const { intl: { formatMessage, locale } } = this.props;
-    return {
-      locale,
-      months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((monthNum) => formatMessage({ id: `Calendar.Month.${monthNum}` })),
-      weekdaysLong: [0, 1, 2, 3, 4, 5, 6].map((dayNum) => formatMessage({ id: `Calendar.Day.${dayNum}` })),
-      weekdaysShort: [0, 1, 2, 3, 4, 5, 6].map((dayName) => formatMessage({ id: `Calendar.Day.Short.${dayName}` })),
-      firstDayOfWeek: 1,
-    };
-  }
-
   parseDateValue(): Date {
     const { value } = this.props;
     const parsedValue = moment(value, DDMMYYYY_DATE_FORMAT, true);
@@ -105,6 +94,15 @@ class CalendarOverlay extends Component<OwnProps & WrappedComponentProps> {
       return null;
     }
 
+    const { formatMessage, locale } = getPackageIntl();
+    const dayPickerLocalization = {
+      locale,
+      months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((monthNum) => formatMessage({ id: `Calendar.Month.${monthNum}` })),
+      weekdaysLong: [0, 1, 2, 3, 4, 5, 6].map((dayNum) => formatMessage({ id: `Calendar.Day.${dayNum}` })),
+      weekdaysShort: [0, 1, 2, 3, 4, 5, 6].map((dayName) => formatMessage({ id: `Calendar.Day.Short.${dayName}` })),
+      firstDayOfWeek: 1,
+    };
+
     const {
       onDayChange, className, dayPickerClassName, initialMonth, numberOfMonths, disabledDays,
     } = this.props;
@@ -119,7 +117,7 @@ class CalendarOverlay extends Component<OwnProps & WrappedComponentProps> {
         role="link"
       >
         <DayPicker
-          {...this.getDayPickerLocalization()}
+          {...dayPickerLocalization}
           className={dayPickerClassName}
           month={selectedDay}
           selectedDays={selectedDay}
@@ -134,4 +132,4 @@ class CalendarOverlay extends Component<OwnProps & WrappedComponentProps> {
   }
 }
 
-export default injectIntl(CalendarOverlay);
+export default CalendarOverlay;
