@@ -8,7 +8,7 @@ const exposedProperties = ['window', 'document'];
 sinon.stub(console, 'error')
   .callsFake((warning) => {
     if (warning && warning.indexOf
-      && (warning.indexOf('Warning: Failed prop type:') > -1 || warning.indexOf('Warning: Each child in an array or iterator should have a unique "key" prop')
+      && (warning.indexOf('Warning: Each child in an array or iterator should have a unique "key" prop')
         > -1)) {
       throw new Error(warning);
     } else if (warning) {
@@ -33,11 +33,3 @@ Object.keys(document.defaultView)
 
 global.HTMLElement = dom.window.HTMLElement;
 global.Date = Date;
-// https://github.com/facebookincubator/create-react-app/issues/3199
-global.requestAnimationFrame = (cb) => {
-  setTimeout(cb, 0);
-};
-
-global.cancelAnimationFrame = (cb) => {
-  setTimeout(cb, 0);
-};
