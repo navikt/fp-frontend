@@ -41,6 +41,7 @@ export enum FpBehandlingApiKeys {
   VERGE_FJERN = 'VERGE_FJERN',
   UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
   ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
+  UTTAK_KONTROLLER_AKTIVITETSKRAV = 'UTTAK_KONTROLLER_AKTIVITETSKRAV',
 }
 
 const endpoints = new RestApiConfigBuilder()
@@ -72,6 +73,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('uttak-kontroller-fakta-perioder', FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER)
   .withRel('utland-dok-status', FpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
+  .withRel('uttak-kontroller-aktivitetskrav', FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV)
 
   // operasjoner
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)

@@ -107,6 +107,7 @@ const aksjonspunktCodes = {
   FODSELTILRETTELEGGING: '5091',
   SVANGERSKAPSVILKARET: '5092',
   VURDER_FARESIGNALER: '5095',
+  KONTROLLER_AKTIVITETSKRAV: '5099',
 };
 
 const klageAksjonspunkter = [
