@@ -90,7 +90,6 @@ const formatBehandlingType = (kode: string): string | null => {
     case behandlingType.KLAGE: return 'Klage';
     case behandlingType.ANKE: return 'Anke';
     case behandlingType.REVURDERING: return 'Revurdering';
-    case behandlingType.SOKNAD: return 'Søknad';
     case behandlingType.DOKUMENTINNSYN: return 'Dokumentinnsyn';
     case behandlingType.TILBAKEKREVING: return 'Tilbakekreving';
     default: return null;
