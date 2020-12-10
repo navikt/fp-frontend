@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -15,6 +15,8 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   Aksjonspunkt, Kodeverk, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
+
+import useIntl from '../../useIntl';
 
 const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Period',

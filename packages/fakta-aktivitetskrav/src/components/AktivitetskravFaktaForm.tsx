@@ -103,7 +103,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
       )}
       <form onSubmit={formProps.handleSubmit}>
         <FaktaGruppe
-          titleCode="AktivitetskravFaktaForm.Aktivitetskravperioder"
+          title={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aktivitetskravperioder' })}
           merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]}
         >
           {aktivitetskrav && (

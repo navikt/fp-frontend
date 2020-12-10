@@ -1,11 +1,13 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
 import { FieldArrayFieldsProps } from 'redux-form';
+import sinon from 'sinon';
 
 import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
 
+import * as useIntl from '../useIntl';
 import ForeldrePanel from './ForeldrePanel';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 const getMockedFields = (fieldNames: any, children: any) => {
   const field = {
@@ -17,6 +19,15 @@ const getMockedFields = (fieldNames: any, children: any) => {
 };
 
 describe('<ForeldrePanel>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal kunne endre dødsdatoer når foreldre ikke er bekreftet av TPS', () => {
     const fieldNames = ['foreldre[0]', 'foreldre[1]'];
     const parents = [{
@@ -35,7 +46,7 @@ describe('<ForeldrePanel>', () => {
       opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
 
-    const wrapper = shallow(<ForeldrePanel
+    const wrapper = shallowWithIntl(<ForeldrePanel
       fields={getMockedFields(fieldNames, parents)}
       alleMerknaderFraBeslutter={{}}
     />);
@@ -66,7 +77,7 @@ describe('<ForeldrePanel>', () => {
       opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
 
-    const wrapper = shallow(<ForeldrePanel
+    const wrapper = shallowWithIntl(<ForeldrePanel
       fields={getMockedFields(fieldNames, parents)}
       alleMerknaderFraBeslutter={{}}
     />);
@@ -97,7 +108,7 @@ describe('<ForeldrePanel>', () => {
       opplysningsKilde: opplysningsKilde.TPS,
     }];
 
-    const wrapper = shallow(<ForeldrePanel
+    const wrapper = shallowWithIntl(<ForeldrePanel
       fields={getMockedFields(fieldNames, parents)}
       alleMerknaderFraBeslutter={{}}
     />);

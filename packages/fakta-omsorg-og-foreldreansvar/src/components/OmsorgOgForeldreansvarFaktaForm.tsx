@@ -129,6 +129,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
           readOnly={readOnly}
           isFodselsdatoerEdited={editedStatus.fodselsdatoer}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          intl={intl}
         />
       </Column>
       <Column xs="6">

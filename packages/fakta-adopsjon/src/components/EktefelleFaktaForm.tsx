@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -8,6 +8,8 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
 import { FamilieHendelse } from '@fpsak-frontend/types';
+
+import useIntl from '../useIntl';
 
 import styles from './ektefelleFaktaForm.less';
 

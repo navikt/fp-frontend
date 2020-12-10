@@ -37,7 +37,7 @@ describe('<BarnPanel>', () => {
       adresse: undefined,
       opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
     }];
-    const wrapper = shallow(<BarnPanel.WrappedComponent
+    const wrapper = shallow(<BarnPanel
       intl={intlMock}
       readOnly
       fields={getMockedFields(fieldNames, children)}
@@ -66,7 +66,7 @@ describe('<BarnPanel>', () => {
       adresse: undefined,
       opplysningsKilde: opplysningsKilde.TPS,
     }];
-    const wrapper = shallow(<BarnPanel.WrappedComponent
+    const wrapper = shallow(<BarnPanel
       intl={intlMock}
       readOnly
       fields={getMockedFields(fieldNames, children)}
@@ -102,7 +102,7 @@ describe('<BarnPanel>', () => {
       },
     ];
 
-    const wrapper = shallow(<BarnPanel.WrappedComponent
+    const wrapper = shallow(<BarnPanel
       intl={intlMock}
       readOnly={false}
       fields={getMockedFields(fieldNames, children)}

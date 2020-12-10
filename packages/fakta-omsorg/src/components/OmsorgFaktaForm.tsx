@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { FieldArray } from 'redux-form';
 import moment from 'moment';
@@ -20,6 +20,7 @@ import { ArrowBox, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
+import useIntl from '../useIntl';
 
 import styles from './omsorgFaktaForm.less';
 

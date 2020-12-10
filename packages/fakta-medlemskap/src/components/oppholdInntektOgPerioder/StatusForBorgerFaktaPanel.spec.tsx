@@ -1,13 +1,24 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import StatusForBorgerFaktaPanel, { PeriodeMedId } from './StatusForBorgerFaktaPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import * as useIntl from '../../useIntl';
+import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<StatusForBorgerFaktaPanel>', () => {
+  let contextStub;
+  beforeEach(() => {
+    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
+  });
+
+  afterEach(() => {
+    contextStub.restore();
+  });
+
   it('skal vise radioknapper for vurdering av oppholdsrett', () => {
     const wrapper = shallowWithIntl(<StatusForBorgerFaktaPanel.WrappedComponent
       id="1"

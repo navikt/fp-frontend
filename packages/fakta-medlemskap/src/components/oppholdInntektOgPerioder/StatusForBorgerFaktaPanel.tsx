@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Undertekst } from 'nav-frontend-typografi';
 
@@ -9,6 +9,8 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
+
+import useIntl from '../../useIntl';
 
 export type PeriodeMedId = MedlemPeriode & { id: string; }
 

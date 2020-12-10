@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import moment from 'moment';
@@ -218,4 +218,4 @@ BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: So
   };
 };
 
-export default injectIntl(BarnPanel);
+export default BarnPanel;

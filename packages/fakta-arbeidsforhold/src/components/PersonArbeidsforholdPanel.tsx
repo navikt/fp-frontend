@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { change as reduxFormChange, FormAction, initialize as reduxFormInitialize } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -458,6 +458,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }, dispatch),
 });
 
-const PersonArbeidsforholdPanel = connect(mapStateToProps, mapDispatchToProps)(injectIntl(PersonArbeidsforholdPanelImpl));
+const PersonArbeidsforholdPanel = connect(mapStateToProps, mapDispatchToProps)(PersonArbeidsforholdPanelImpl);
 
 export default PersonArbeidsforholdPanel;
