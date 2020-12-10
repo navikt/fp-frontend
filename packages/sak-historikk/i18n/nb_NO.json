@@ -51,6 +51,8 @@
   "HistorikkAksjonpunktMapping.AnnenForeldersStonadGjelderSammeBarn": "Avklar om engangsstønad eller foreldrepenger utbetalt til annen forelder gjelder samme barn",
   "Historikk.Fodselsdato": "Når ble barnet født?",
   "Historikk.Vedtak.Fritekstbrev": "Fritekstbrev",
+  "Historikk.Template.Aktivitetskrav.sattFelt": "Perioden <b>{periodeFom} - {periodeTom}</b> er avklart til <b>{feltVerdi}</b>",
+  "Historikk.Template.Aktivitetskrav.endretFelt": "Perioden <b>{periodeFom} - {periodeTom}</b> er endret fra {fraVerdi} til <b>{tilVerdi}</b>",
 
   "HistorikkAarsak.AvvDok": "Avventer dokumentasjon",
   "HistorikkAarsak.AvvFodsel": "Avventer fødsel",

@@ -12,6 +12,7 @@ import BeregningFaktaPanelDef from './faktaPaneler/BeregningFaktaPanelDef';
 import FordelingFaktaPanelDef from './faktaPaneler/FordelingFaktaPanelDef';
 import OmsorgFaktaPanelDef from './faktaPaneler/OmsorgFaktaPanelDef';
 import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
+import AktivitetskravFaktaPanelDef from './faktaPaneler/AktivitetskravFaktaPanelDef';
 
 const faktaPanelDefinisjoner = [
   new SakenFaktaPanelDef(),
@@ -28,6 +29,7 @@ const faktaPanelDefinisjoner = [
   new FordelingFaktaPanelDef(),
   new OmsorgFaktaPanelDef(),
   new UttakFaktaPanelDef(),
+  new AktivitetskravFaktaPanelDef(),
 ];
 
 export default faktaPanelDefinisjoner;
