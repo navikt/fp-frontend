@@ -12,7 +12,7 @@ describe('<ProsessPanelTemplate>', () => {
     const wrapper = shallow(
       <ProsessPanelTemplate
         handleSubmit={sinon.spy()}
-        titleCode="FodselVilkarForm.Fodsel"
+        title="Fødsel"
         isAksjonspunktOpen
         formName="testnavn"
         readOnlySubmitButton={false}
@@ -33,7 +33,7 @@ describe('<ProsessPanelTemplate>', () => {
       <ProsessPanelTemplate
         handleSubmit={sinon.spy()}
         lovReferanse="test lovReferanse"
-        titleCode="FodselVilkarForm.Fodsel"
+        title="Fødsel"
         isAksjonspunktOpen
         formName="testnavn"
         readOnlySubmitButton={false}

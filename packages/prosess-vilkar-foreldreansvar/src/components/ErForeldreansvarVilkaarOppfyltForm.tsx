@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -49,7 +49,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunkter for avklaring av foreldreansvarvilkåret 2 eller 4 ledd.
  */
-export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   avslagsarsaker,
   readOnly,
   readOnlySubmitButton,
@@ -61,7 +62,7 @@ export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps 
   ...formProps
 }) => (
   <ProsessPanelTemplate
-    titleCode="ErForeldreansvarVilkaarOppfyltForm.Foreldreansvar"
+    title={intl.formatMessage({ id: 'ErForeldreansvarVilkaarOppfyltForm.Foreldreansvar' })}
     isAksjonspunktOpen={!readOnlySubmitButton}
     formName={formProps.form}
     handleSubmit={formProps.handleSubmit}
@@ -76,8 +77,14 @@ export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps 
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      customVilkarOppfyltText={{ id: isEngangsstonad ? 'FodselVilkarForm.OppfyltEs' : 'FodselVilkarForm.OppfyltFp' }}
-      customVilkarIkkeOppfyltText={{ id: isEngangsstonad ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp' }}
+      customVilkarOppfyltText={<FormattedMessage id={isEngangsstonad ? 'FodselVilkarForm.OppfyltEs' : 'FodselVilkarForm.OppfyltFp'} />}
+      customVilkarIkkeOppfyltText={(
+        <FormattedMessage
+          id={isEngangsstonad
+            ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp'}
+          values={{ b: (chunks) => <b>{chunks}</b> }}
+        />
+)}
     />
     <ProsessStegBegrunnelseTextField readOnly={readOnly} />
   </ProsessPanelTemplate>
@@ -135,4 +142,4 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
   validate,
-})(ErForeldreansvarVilkaarOppfyltForm));
+})(injectIntl(ErForeldreansvarVilkaarOppfyltForm)));

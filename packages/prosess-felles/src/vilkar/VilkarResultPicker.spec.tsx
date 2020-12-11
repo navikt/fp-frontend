@@ -30,6 +30,8 @@ describe('<VilkarResultPicker>', () => {
       avslagsarsaker={avslagsarsaker}
       erVilkarOk
       readOnly={false}
+      customVilkarIkkeOppfyltText="Ikke oppfylt"
+      customVilkarOppfyltText="Oppfylt"
     />);
     expect(wrapper.find('RadioOption')).to.have.length(2);
   });
@@ -39,12 +41,13 @@ describe('<VilkarResultPicker>', () => {
     const wrapper = shallow(<VilkarResultPicker
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={false}
-      customVilkarIkkeOppfyltText={{ id: textId, values: { test: 'testvalue' } }}
+      customVilkarIkkeOppfyltText={textId}
+      customVilkarOppfyltText="Oppfylt"
       readOnly={false}
     />);
 
     // @ts-ignore fiks
-    expect(wrapper.find('RadioOption').at(1).prop('label').props.id).to.equal(textId);
+    expect(wrapper.find('RadioOption').at(1).prop('label')).to.equal(textId);
   });
 
   it('skal ikke vise nedtrekksliste når vilkårsresultat ikke er valgt', () => {
@@ -52,6 +55,8 @@ describe('<VilkarResultPicker>', () => {
       avslagsarsaker={avslagsarsaker}
       erVilkarOk
       readOnly={false}
+      customVilkarIkkeOppfyltText="Ikke oppfylt"
+      customVilkarOppfyltText="Oppfylt"
     />);
 
     expect(wrapper.find('SelectField')).to.have.length(0);
@@ -62,6 +67,8 @@ describe('<VilkarResultPicker>', () => {
       avslagsarsaker={avslagsarsaker}
       erVilkarOk
       readOnly={false}
+      customVilkarIkkeOppfyltText="Ikke oppfylt"
+      customVilkarOppfyltText="Oppfylt"
     />);
 
     expect(wrapper.find('SelectField')).to.have.length(0);
@@ -72,12 +79,14 @@ describe('<VilkarResultPicker>', () => {
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={false}
       readOnly={false}
+      customVilkarIkkeOppfyltText="Ikke oppfylt"
+      customVilkarOppfyltText="Oppfylt"
     />);
 
     const select = wrapper.find('SelectField');
     expect(select).to.have.length(1);
-    expect(select.prop('label')).to.eql('VilkarResultPicker.Arsak');
-    expect(select.prop('placeholder')).to.eql('VilkarResultPicker.SelectArsak');
+    expect(select.prop('label')).to.eql('Avslagsårsak');
+    expect(select.prop('placeholder')).to.eql('Velg årsak');
     expect(select.prop('selectValues')).to.have.length(1);
   });
 

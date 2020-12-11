@@ -18,13 +18,7 @@
   "TimeLineData.prevPeriod": "Forrige periode",
   "Timeline.openData": "Åpne info om første periode",
   
-  "VilkarresultatMedOverstyringForm.ErOppfylt": "Vilkåret er oppfylt",
-  "VilkarresultatMedOverstyringForm.ErIkkeOppfylt": "Vilkåret er avslått",
-  "VilkarresultatMedOverstyringForm.IkkeBehandlet": "Ikke behandlet",
   "ShowVilkarStatus.Check": "Informasjonen er utfylt",
-  "VilkarResultPicker.Arsak": "Avslagsårsak",
-  "VilkarResultPicker.SelectArsak": "Velg årsak",
-  "VilkarResultPicker.VilkarOppfylt": "Vilkåret er oppfylt",
   "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

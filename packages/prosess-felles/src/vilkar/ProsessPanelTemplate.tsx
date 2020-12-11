@@ -1,5 +1,4 @@
 import React, { ReactNode, FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
   Undertittel, EtikettLiten, Element, Normaltekst,
 } from 'nav-frontend-typografi';
@@ -14,12 +13,13 @@ import {
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
 
+import getPackageIntl from '../../i18n/getPackageIntl';
 import ProsessStegSubmitButton from '../ProsessStegSubmitButton';
 
 import styles from './prosessPanelTemplate.less';
 
 interface OwnProps {
-  titleCode: string;
+  title: string;
   behandlingId: number;
   behandlingVersjon: number;
   lovReferanse?: string;
@@ -43,7 +43,7 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
   behandlingId,
   behandlingVersjon,
   lovReferanse,
-  titleCode,
+  title,
   originalErVilkarOk,
   isAksjonspunktOpen,
   handleSubmit,
@@ -53,74 +53,77 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
   rendreFakta,
   isDirty,
   children,
-}) => (
-  <>
-    <form onSubmit={handleSubmit}>
-      <FlexContainer>
-        <FlexRow>
-          {originalErVilkarOk !== undefined && (
+}) => {
+  const intl = getPackageIntl();
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <FlexContainer>
+          <FlexRow>
+            {originalErVilkarOk !== undefined && (
+              <FlexColumn>
+                <Image className={styles.status} src={originalErVilkarOk ? innvilgetImage : avslattImage} />
+              </FlexColumn>
+            )}
             <FlexColumn>
-              <Image className={styles.status} src={originalErVilkarOk ? innvilgetImage : avslattImage} />
+              <Undertittel>{title}</Undertittel>
             </FlexColumn>
-          )}
-          <FlexColumn>
-            <Undertittel><FormattedMessage id={titleCode} /></Undertittel>
-          </FlexColumn>
-          {lovReferanse && (
+            {lovReferanse && (
+              <FlexColumn>
+                <EtikettLiten className={styles.vilkar}>{lovReferanse}</EtikettLiten>
+              </FlexColumn>
+            )}
+          </FlexRow>
+
+          <FlexRow>
             <FlexColumn>
-              <EtikettLiten className={styles.vilkar}>{lovReferanse}</EtikettLiten>
+              {originalErVilkarOk && (
+                <>
+                  <VerticalSpacer eightPx />
+                  <Element>{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Element>
+                </>
+              )}
+              {originalErVilkarOk === false && (
+                <>
+                  <VerticalSpacer eightPx />
+                  <Element>{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Element>
+                </>
+              )}
+              {(!isAksjonspunktOpen && originalErVilkarOk === undefined) && (
+                <>
+                  <VerticalSpacer eightPx />
+                  <Normaltekst>{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</Normaltekst>
+                </>
+              )}
             </FlexColumn>
-          )}
-        </FlexRow>
+          </FlexRow>
+        </FlexContainer>
+        {isAksjonspunktOpen && <VerticalSpacer eightPx />}
+        <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={isAksjonspunktOpen}>
+          {children}
+          {!readOnly && <VerticalSpacer sixteenPx />}
+          <ProsessStegSubmitButton
+            formName={formName}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            isReadOnly={readOnly}
+            isSubmittable={!readOnlySubmitButton}
+            isDirty={isDirty}
+            isBehandlingFormSubmitting={isBehandlingFormSubmitting}
+            isBehandlingFormDirty={isBehandlingFormDirty}
+            hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
+          />
 
-        <FlexRow>
-          <FlexColumn>
-            {originalErVilkarOk && (
-              <>
-                <VerticalSpacer eightPx />
-                <Element><FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" /></Element>
-              </>
-            )}
-            {originalErVilkarOk === false && (
-              <>
-                <VerticalSpacer eightPx />
-                <Element><FormattedMessage id="VilkarresultatMedOverstyringForm.ErIkkeOppfylt" /></Element>
-              </>
-            )}
-            {(!isAksjonspunktOpen && originalErVilkarOk === undefined) && (
-              <>
-                <VerticalSpacer eightPx />
-                <Normaltekst><FormattedMessage id="VilkarresultatMedOverstyringForm.IkkeBehandlet" /></Normaltekst>
-              </>
-            )}
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      {isAksjonspunktOpen && <VerticalSpacer eightPx />}
-      <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={isAksjonspunktOpen}>
-        {children}
-        {!readOnly && <VerticalSpacer sixteenPx />}
-        <ProsessStegSubmitButton
-          formName={formName}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-          isReadOnly={readOnly}
-          isSubmittable={!readOnlySubmitButton}
-          isDirty={isDirty}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-        />
-
-      </AksjonspunktBox>
-      {rendreFakta && (
-        <>
-          <VerticalSpacer sixteenPx />
-          {rendreFakta()}
-        </>
-      )}
-    </form>
-  </>
-);
+        </AksjonspunktBox>
+        {rendreFakta && (
+          <>
+            <VerticalSpacer sixteenPx />
+            {rendreFakta()}
+          </>
+        )}
+      </form>
+    </>
+  );
+};
 
 export default ProsessPanelTemplate;

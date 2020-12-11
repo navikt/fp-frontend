@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -56,7 +56,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const FodselVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   isApOpen,
   avslagsarsaker,
   lovReferanse,
@@ -69,7 +70,7 @@ export const FodselVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
   ...formProps
 }) => (
   <ProsessPanelTemplate
-    titleCode="FodselVilkarForm.Fodsel"
+    title={intl.formatMessage({ id: 'FodselVilkarForm.Fodsel' })}
     isAksjonspunktOpen={isApOpen}
     formName={formProps.form}
     handleSubmit={formProps.handleSubmit}
@@ -86,8 +87,8 @@ export const FodselVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      customVilkarOppfyltText={{ id: 'FodselVilkarForm.Oppfylt' }}
-      customVilkarIkkeOppfyltText={{ id: 'FodselVilkarForm.IkkeOppfylt' }}
+      customVilkarOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
     />
     <ProsessStegBegrunnelseTextField useAllWidth readOnly={readOnly} />
   </ProsessPanelTemplate>
@@ -152,4 +153,4 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
   validate,
-})(FodselVilkarFormImpl));
+})(injectIntl(FodselVilkarFormImpl)));

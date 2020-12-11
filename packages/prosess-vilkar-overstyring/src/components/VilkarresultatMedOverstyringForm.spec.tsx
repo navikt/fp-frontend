@@ -6,8 +6,8 @@ import { FormattedMessage } from 'react-intl';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-
 import { VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
+
 import { VilkarresultatMedOverstyringForm } from './VilkarresultatMedOverstyringForm';
 
 describe('<VilkarresultatMedOverstyringForm>', () => {

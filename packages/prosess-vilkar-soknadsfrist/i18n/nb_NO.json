@@ -17,9 +17,6 @@
   "ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
   
   "ShowVilkarStatus.Check": "Informasjonen er utfylt",
-  "VilkarResultPicker.Arsak": "Avslagsårsak",
-  "VilkarResultPicker.SelectArsak": "Velg årsak",
-  "VilkarResultPicker.VilkarOppfylt": "Vilkåret er oppfylt",
   "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger",
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

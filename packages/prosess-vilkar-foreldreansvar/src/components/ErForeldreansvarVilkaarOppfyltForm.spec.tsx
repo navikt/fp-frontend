@@ -10,6 +10,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-foreldreansvar';
 import { buildInitialValues, ErForeldreansvarVilkaarOppfyltForm as UnwrappedForm } from './ErForeldreansvarVilkaarOppfyltForm';
 
 describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
@@ -34,6 +35,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
   it('skal vise readonly-form med utgråete knapper når readonly og vilkåret ikke er vurdert', () => {
     const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       isEngangsstonad
       avslagsarsaker={[{
         kode: 'TEST_KODE',
@@ -65,6 +67,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
   it('skal vise radioknapper og nedtrekksliste for å velge om vilkåret skal godkjennes eller avvises med avslagsgrunn når ikke readonly', () => {
     const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       isEngangsstonad
       avslagsarsaker={[{
         kode: 'TEST_KODE',
@@ -123,6 +126,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
 
     const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       isEngangsstonad
       avslagsarsaker={[]}
       aksjonspunkter={aksjonspunkter}

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -42,7 +42,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   isApOpen,
   erVilkarOk,
   originalErVilkarOk,
@@ -55,7 +56,7 @@ export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnPro
   ...formProps
 }) => (
   <ProsessPanelTemplate
-    titleCode="OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret"
+    title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
     isAksjonspunktOpen={isApOpen}
     formName={formProps.form}
     handleSubmit={formProps.handleSubmit}
@@ -83,8 +84,8 @@ export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnPro
     <VilkarResultPicker
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      customVilkarOppfyltText={{ id: 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt' }}
-      customVilkarIkkeOppfyltText={{ id: 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt' }}
+      customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
     />
     <VerticalSpacer sixteenPx />
     <ProsessStegBegrunnelseTextField readOnly={readOnly} />
@@ -132,6 +133,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 
 const OpptjeningVilkarAksjonspunktPanel = connect(mapStateToPropsFactory)(behandlingForm({
   form: FORM_NAME,
-})(OpptjeningVilkarAksjonspunktPanelImpl));
+})(injectIntl(OpptjeningVilkarAksjonspunktPanelImpl)));
 
 export default OpptjeningVilkarAksjonspunktPanel;

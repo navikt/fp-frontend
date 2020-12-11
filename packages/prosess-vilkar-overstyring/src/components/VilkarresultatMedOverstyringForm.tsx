@@ -188,8 +188,24 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
         >
           <VilkarResultPicker
             avslagsarsaker={avslagsarsaker}
-            customVilkarIkkeOppfyltText={customVilkarIkkeOppfyltText}
-            customVilkarOppfyltText={customVilkarOppfyltText}
+            customVilkarOppfyltText={(
+              <FormattedMessage
+                id={customVilkarOppfyltText ? customVilkarOppfyltText.id : 'VilkarresultatMedOverstyringForm.ErOppfylt'}
+                values={customVilkarOppfyltText ? {
+                  b: (chunks) => <b>{chunks}</b>,
+                  ...customVilkarIkkeOppfyltText.values,
+                } : { b: (chunks) => <b>{chunks}</b> }}
+              />
+            )}
+            customVilkarIkkeOppfyltText={(
+              <FormattedMessage
+                id={customVilkarIkkeOppfyltText ? customVilkarOppfyltText.id : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt'}
+                values={customVilkarIkkeOppfyltText ? {
+                  b: (chunks) => <b>{chunks}</b>,
+                  ...customVilkarIkkeOppfyltText.values,
+                } : { b: (chunks) => <b>{chunks}</b> }}
+              />
+            )}
             erVilkarOk={erVilkarOk}
             readOnly={overrideReadOnly || !erOverstyrt}
             erMedlemskapsPanel={erMedlemskapsPanel}
@@ -215,11 +231,11 @@ const buildInitialValues = createSelector(
   },
 );
 
-const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, erOppfylt: boolean): TextValues => {
+const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, erOppfylt: boolean): TextValues | undefined => {
   const isBehandlingRevurderingFortsattMedlemskap = behandlingType.kode === BehandlingType.REVURDERING && !!medlemskapFom;
   if (isBehandlingRevurderingFortsattMedlemskap) {
     return {
-      id: erOppfylt ? 'VilkarResultPicker.VilkarOppfyltRevurderingFom' : 'VilkarResultPicker.VilkarIkkeOppfyltRevurderingFom',
+      id: erOppfylt ? 'VilkarresultatMedOverstyringForm.VilkarOppfyltRevurderingFom' : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfyltRevurderingFom',
       values: { fom: moment(medlemskapFom).format(DDMMYYYY_DATE_FORMAT), b: (chunks) => <b>{chunks}</b> },
     };
   }
@@ -228,11 +244,11 @@ const getCustomVilkarText = (medlemskapFom: string, behandlingType: Kodeverk, er
 
 const getCustomVilkarTextForOppfylt = createSelector(
   [(ownProps: PureOwnProps) => ownProps.medlemskapFom, (ownProps: PureOwnProps) => ownProps.behandlingType],
-  (medlemskapFom, behandlingType): TextValues => getCustomVilkarText(medlemskapFom, behandlingType, true),
+  (medlemskapFom, behandlingType): TextValues | undefined => getCustomVilkarText(medlemskapFom, behandlingType, true),
 );
 const getCustomVilkarTextForIkkeOppfylt = createSelector(
   [(ownProps: PureOwnProps) => ownProps.medlemskapFom, (ownProps: PureOwnProps) => ownProps.behandlingType],
-  (medlemskapFom, behandlingType): TextValues => getCustomVilkarText(medlemskapFom, behandlingType, false),
+  (medlemskapFom, behandlingType): TextValues | undefined => getCustomVilkarText(medlemskapFom, behandlingType, false),
 );
 
 const transformValues = (values: FormValues, overstyringApKode: string): any => ({
