@@ -7,12 +7,13 @@ const exposedProperties = ['window', 'document'];
 
 sinon.stub(console, 'error')
   .callsFake((warning) => {
+    // TODO Fjern if/else
     if (warning && warning.indexOf
-      && (warning.indexOf('Warning: Each child in an array or iterator should have a unique "key" prop')
+      && (warning.indexOf('Not implemented: navigation (except hash changes)')
         > -1)) {
-      throw new Error(warning);
-    } else if (warning) {
       console.warn(warning); // NOSONAR Kun testkode
+    } else if (warning) {
+      throw new Error(warning);
     }
   });
 

@@ -209,8 +209,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     expect(result).is.eql({});
   });
 
-  // TODO (TOR) Fiks test
-  xit('skal sette opp initielle verdier når en ikke har avklarte data', () => {
+  it('skal sette opp initielle verdier når en ikke har avklarte data', () => {
     const soknad = {
       omsorgsovertakelseDato: '10-10-2017',
       farSokerType: {
@@ -270,7 +269,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         erDod: true,
         adresse: 'Vei 1, 1000 Oslo',
         navn: 'Petra Tester',
-        opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
+        opplysningsKilde: undefined,
         aktorId: '1',
       }],
       ytelser: undefined,
@@ -281,8 +280,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     });
   });
 
-  // TODO (TOR) Fiks test
-  xit('skal sette opp barn som en kombinasjon av bekreftet data fra TPS og data fra søknad', () => {
+  it('skal sette opp barn som en kombinasjon av bekreftet data fra TPS og data fra søknad', () => {
     const soknad = {
       omsorgsovertakelseDato: '10-10-2017',
       farSokerType: {
@@ -335,7 +333,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       foreldreansvarDato: undefined,
       barn: [{
         aktorId: '1',
-        opplysningsKilde: opplysningsKilde.TPS,
+        opplysningsKilde: undefined,
         fodselsdato: '10-10-2017',
         dodsdato: undefined,
         navn: 'Barn nr 1',
@@ -352,7 +350,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         erDod: true,
         adresse: undefined,
         navn: 'Petra Tester',
-        opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
+        opplysningsKilde: undefined,
         aktorId: '1',
       }],
       ytelser: undefined,
