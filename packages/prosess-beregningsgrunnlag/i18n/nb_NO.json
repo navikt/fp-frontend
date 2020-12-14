@@ -208,7 +208,6 @@
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
   "Messages.PreviewText": "Forhåndsvis varselbrev",
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
   "Behandling.EditedField": "Saksbehandler har endret feltets verdi",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",

@@ -84,7 +84,7 @@ export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
     <div className={styles.confirmVilkarForm}>
       <ProsessStegBegrunnelseTextField
         readOnly={readOnly}
-        textCode="BehandleKlageFormNfp.BegrunnelseForKlage"
+        text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
       />
       <VerticalSpacer sixteenPx />
       <FritekstBrevTextField

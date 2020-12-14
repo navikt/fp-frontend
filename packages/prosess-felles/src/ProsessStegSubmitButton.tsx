@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { ariaCheck, FormValidationError, isRequiredMessage } from '@fpsak-frontend/utils';
+
+import getPackageIntl from '../i18n/getPackageIntl';
 
 const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean): boolean => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
@@ -23,7 +24,7 @@ interface PureOwnProps {
   hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: FormValidationError) => (state: any) => boolean;
   isReadOnly: boolean;
   isSubmittable: boolean;
-  textCode?: string;
+  text?: string;
 }
 
 interface MappedOwnProps {
@@ -41,20 +42,19 @@ export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwn
   isSubmitting,
   isDirty,
   hasEmptyRequiredFields,
-  textCode = 'SubmitButton.ConfirmInformation',
+  text,
 }) => (
   <>
-    {!isReadOnly
-      && (
+    {!isReadOnly && (
       <Hovedknapp
         mini
         spinner={isSubmitting}
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields)}
         onClick={ariaCheck}
       >
-        <FormattedMessage id={textCode} />
+        {text || getPackageIntl().formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
       </Hovedknapp>
-      )}
+    )}
   </>
 );
 

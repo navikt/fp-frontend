@@ -16,7 +16,7 @@ describe('<PeriodFieldArray>', () => {
         meta={metaMock}
         readOnly={readOnly}
       >
-        {() => <span>test</span>}
+        {() => <span key="1">test</span>}
       </PeriodFieldArray>,
     );
 
@@ -65,7 +65,7 @@ describe('<PeriodFieldArray>', () => {
         meta={metaMock}
         readOnly={readOnly}
       >
-        {() => <span>test</span>}
+        {() => <span key="1">test</span>}
       </PeriodFieldArray>,
     );
 
@@ -112,7 +112,7 @@ describe('<PeriodFieldArray>', () => {
         shouldShowAddButton={false}
         readOnly={readOnly}
       >
-        {() => <span>test</span>}
+        {() => <span key="1">test</span>}
       </PeriodFieldArray>,
     );
 
@@ -129,7 +129,7 @@ describe('<PeriodFieldArray>', () => {
         createAddButtonInsteadOfImageLink
         readOnly={readOnly}
       >
-        {() => <span>test</span>}
+        {() => <span key="1">test</span>}
       </PeriodFieldArray>,
     );
 

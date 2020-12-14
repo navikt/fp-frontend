@@ -60,7 +60,6 @@
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
   "Messages.PreviewText": "Forhåndsvis varselbrev",
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
   
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

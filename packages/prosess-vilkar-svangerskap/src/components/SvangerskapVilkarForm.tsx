@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
@@ -51,7 +51,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent.
  */
-export const SvangerskapVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const SvangerskapVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   avslagsarsaker,
   readOnly,
   readOnlySubmitButton,
@@ -63,7 +64,7 @@ export const SvangerskapVilkarFormImpl: FunctionComponent<PureOwnProps & MappedO
   ...formProps
 }) => (
   <ProsessPanelTemplate
-    titleCode="SvangerskapVilkarForm.Svangerskap"
+    title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
     isAksjonspunktOpen={isApOpen}
     formName={formProps.form}
     handleSubmit={formProps.handleSubmit}
@@ -78,8 +79,8 @@ export const SvangerskapVilkarFormImpl: FunctionComponent<PureOwnProps & MappedO
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      customVilkarOppfyltText={{ id: 'SvangerskapVilkarForm.Oppfylt' }}
-      customVilkarIkkeOppfyltText={{ id: 'SvangerskapVilkarForm.IkkeOppfylt' }}
+      customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
     />
     {erVilkarOk === false
       && <ProsessStegBegrunnelseTextField readOnly={readOnly} />}
@@ -131,4 +132,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 export default connect(mapStateToProps)(behandlingForm({
   form: formName,
   validate,
-})(SvangerskapVilkarFormImpl));
+})(injectIntl(SvangerskapVilkarFormImpl)));

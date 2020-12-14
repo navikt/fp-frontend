@@ -11,12 +11,14 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-fodsel';
 import { buildInitialValues, FodselVilkarFormImpl as UnwrappedForm } from './FodselVilkarForm';
 
 describe('<FodselVilkarForm>', () => {
   it('skal vise readonly-form med utgråete knapper når readonly og vilkåret ikke er vurdert', () => {
     const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
@@ -50,6 +52,7 @@ describe('<FodselVilkarForm>', () => {
   it('skal vise radioknapper og nedtrekksliste for å velge om vilkåret skal godkjennes eller avvises med avslagsgrunn når ikke readonly', () => {
     const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       avslagsarsaker={[{
         kode: 'TEST_KODE',
         navn: 'testnavn',
@@ -91,6 +94,7 @@ describe('<FodselVilkarForm>', () => {
   it('skal vise readonly-form når status er readonly og status er ulik ikke vurdert', () => {
     const wrapper = shallow(<UnwrappedForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       avslagsarsaker={[]}
       lovReferanse="test"
       readOnly

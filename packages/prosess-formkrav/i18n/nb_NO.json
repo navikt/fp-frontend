@@ -14,15 +14,11 @@
   "Klage.Formkrav.Ja": "Ja",
   "Klage.Formkrav.Nei": "Nei",
 
-  "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
-  "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",
-  "ProsessStegBegrunnelseTextField.BegrunnVurdering": "Begrunn vurderingen din",
   "Malform.Beskrivelse": "Foretrukket språk",
   "Malform.Bokmal": "Bokmål",
   "Malform.Nynorsk": "Nynorsk",
   "Malform.Engelsk": "Engelsk",
   "Messages.PreviewText": "Forhåndsvis varselbrev",
-  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
 
   "ValidationMessage.NotEmpty": "Feltet må fylles ut",
   "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",

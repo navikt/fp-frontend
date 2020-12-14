@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import classNames from 'classnames';
 import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
@@ -94,7 +94,8 @@ interface MappedOwnProps {
   fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
 }
 
-export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   fetchPreviewVedtaksbrev,
   vedtaksbrevAvsnitt,
@@ -125,7 +126,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
       <FlexRow>
         <FlexColumn>
           <ProsessStegSubmitButton
-            textCode="TilbakekrevingVedtakForm.TilGodkjenning"
+            text={intl.formatMessage({ id: 'TilbakekrevingVedtakForm.TilGodkjenning' })}
             formName={formName}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
@@ -217,6 +218,6 @@ const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnPr
 
 const TilbakekrevingVedtakForm = connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
-})(TilbakekrevingVedtakFormImpl));
+})(injectIntl(TilbakekrevingVedtakFormImpl)));
 
 export default TilbakekrevingVedtakForm;

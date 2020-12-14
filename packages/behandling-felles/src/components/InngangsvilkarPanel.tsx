@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useMemo, useCallback,
+  FunctionComponent, useMemo, useCallback, Fragment,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -63,10 +63,10 @@ const InngangsvilkarPanel: FunctionComponent<OwnProps> = ({
           <AksjonspunktHelpTextHTML>
             {apentFaktaPanelInfo && erIkkeFerdigbehandlet
               ? [
-                <>
+                <Fragment key="1">
                   <FormattedMessage id="InngangsvilkarPanel.AvventerAvklaringAv" />
                   <a href="" onClick={oppdaterUrl}><FormattedMessage id={apentFaktaPanelInfo.textCode} /></a>
-                </>,
+                </Fragment>,
               ]
               : aksjonspunktTekstKoder.map((kode) => <FormattedMessage key={kode} id={kode} />)}
           </AksjonspunktHelpTextHTML>

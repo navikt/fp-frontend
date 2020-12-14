@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -52,7 +52,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   avslagsarsaker,
   lovReferanse,
   readOnly,
@@ -65,7 +66,7 @@ export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnP
   ...formProps
 }) => (
   <ProsessPanelTemplate
-    titleCode="AdopsjonVilkarForm.Adopsjon"
+    title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
     isAksjonspunktOpen={isApOpen}
     formName={formProps.form}
     handleSubmit={formProps.handleSubmit}
@@ -81,8 +82,8 @@ export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnP
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      customVilkarOppfyltText={{ id: 'AdopsjonVilkarForm.Oppfylt' }}
-      customVilkarIkkeOppfyltText={{ id: 'AdopsjonVilkarForm.IkkeOppfylt' }}
+      customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
     />
     <ProsessStegBegrunnelseTextField readOnly={readOnly} />
   </ProsessPanelTemplate>
@@ -138,4 +139,4 @@ const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => 
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
   validate,
-})(AdopsjonVilkarFormImpl));
+})(injectIntl(AdopsjonVilkarFormImpl)));

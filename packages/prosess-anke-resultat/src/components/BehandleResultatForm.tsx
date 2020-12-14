@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -169,7 +169,8 @@ interface MappedOwnProps {
   onSubmit: (formValues: FormValues) => any;
 }
 
-const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   handleSubmit,
   previewCallback,
   aksjonspunktCode,
@@ -203,7 +204,7 @@ const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inject
           isBehandlingFormSubmitting={isBehandlingFormSubmitting}
           isBehandlingFormDirty={isBehandlingFormDirty}
           hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-          textCode="Ankebehandling.Resultat.SendTilMedunderskriver"
+          text={intl.formatMessage({ id: 'Ankebehandling.Resultat.SendTilMedunderskriver' })}
         />
         <span>&nbsp;</span>
         <ProsessStegSubmitButton
@@ -215,7 +216,9 @@ const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inject
           isBehandlingFormSubmitting={isBehandlingFormSubmitting}
           isBehandlingFormDirty={isBehandlingFormDirty}
           hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
-          textCode={skalViseForhaandlenke(ankeVurderingVerdi) ? 'Ankebehandling.Resultat.FerdigstillAnke' : 'Ankebehandling.Resultat.VentMerknader'}
+          text={skalViseForhaandlenke(ankeVurderingVerdi)
+            ? intl.formatMessage({ id: 'Ankebehandling.Resultat.FerdigstillAnke' })
+            : intl.formatMessage({ id: 'Ankebehandling.Resultat.VentMerknader' })}
         />
         <span>&nbsp;</span>
         {skalViseForhaandlenke(ankeVurderingVerdi)
@@ -265,6 +268,6 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
 
 const BehandleResultatForm = connect(mapStateToProps)(behandlingForm({
   form: formName,
-})(AnkeResultatForm));
+})(injectIntl(AnkeResultatForm)));
 
 export default BehandleResultatForm;

@@ -134,7 +134,7 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
   ...formProps
 }) => (
   <ProsessPanelTemplate
-    titleCode="SokersOpplysningspliktForm.SokersOpplysningsplikt"
+    title={intl.formatMessage({ id: 'SokersOpplysningspliktForm.SokersOpplysningsplikt' })}
     isAksjonspunktOpen={!readOnlySubmitButton}
     formName={formProps.form}
     handleSubmit={formProps.handleSubmit}
