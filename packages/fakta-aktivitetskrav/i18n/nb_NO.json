@@ -15,20 +15,6 @@
   "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
  
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "ValidationMessage.InvalidDatesInPeriod": "Periode må skrives slik : dd.mm.åååå - dd.mm.åååå",
-  "ValidationMessage.InvalidDecimal": "Tallet kan ikke inneholde mer enn to desimaler",
-  "ValidationMessage.NotEmpty": "Feltet må fylles ut",
-  "ValidationMessage.MinLength": "Du må skrive minst {length} tegn",
-  "ValidationMessage.MaxLength": "Du kan skrive maksimalt {length} tegn",
-  "ValidationMessage.MinValue": "Feltet må være større eller lik {length}",
-  "ValidationMessage.MaxValue": "Feltet må være mindre eller lik {length}",
-  "ValidationMessage.DateNotBeforeOrEqual": "Dato må være før eller lik {limit}",
-  "ValidationMessage.DateNotAfterOrEqual": "Dato må være etter eller lik {limit}",
-  "ValidationMessage.DateRangesOverlapping": "Perioder kan ikke overlappe i tid",
-  "ValidationMessage.InvalidText": "Feltet inneholder ugyldige tegn: {text}",
-  "ValidationMessage.InvalidDate": "Dato må skrives slik : dd.mm.åååå",
-  "ValidationMessage.InvalidPeriod": "Startdato må være før eller lik sluttdato",
-  "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
   "PeriodFieldArray.LeggTilBarn": "Legg til barn",
   "Behandling.EditedField": "Saksbehandler har endret feltets verdi"
 }

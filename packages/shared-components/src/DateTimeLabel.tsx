@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
+import { FormattedDate, FormattedTime } from 'react-intl';
+
+import getPackageIntl from '../i18n/getPackageIntl';
 
 interface OwnProps {
   dateTimeString: string;
@@ -30,7 +32,7 @@ const DateTimeLabel: FunctionComponent<OwnProps> = ({
     )}
     {useNewFormat && (
       <>
-        <FormattedMessage id="DateTimeLabel.Kl" />
+        {getPackageIntl().formatMessage({ id: 'DateTimeLabel.Kl' })}
         <FormattedTime value={new Date(dateTimeString)} hour="numeric" minute="numeric" second="numeric" />
       </>
     )}

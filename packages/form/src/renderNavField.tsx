@@ -1,14 +1,12 @@
 import React from 'react';
 import { WrappedFieldProps } from 'redux-form';
-import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import Label from './Label';
 import LabelType from './LabelType';
 
-const formatError = (submitFailed: boolean, error: any, intl: IntlShape) => {
+const formatError = (submitFailed: boolean, error: string) => {
   if (submitFailed && error) {
-    // @ts-ignore
-    return intl.formatMessage(...error);
+    return error;
   }
   return undefined;
 };
@@ -21,9 +19,8 @@ interface FieldComponentProps {
 }
 
 const renderNavField = (WrappedNavFieldComponent) => {
-  const FieldComponent = (props: FieldComponentProps & WrappedFieldProps & WrappedComponentProps) => {
+  const FieldComponent = (props: FieldComponentProps & WrappedFieldProps) => {
     const {
-      intl,
       input,
       meta: { submitFailed, error },
       label,
@@ -38,7 +35,7 @@ const renderNavField = (WrappedNavFieldComponent) => {
     }
     const fieldProps = {
       id: input.name,
-      feil: formatError(submitFailed, error, intl),
+      feil: formatError(submitFailed, error),
       label: <Label input={label} readOnly={readOnly} />,
     };
 
@@ -53,11 +50,7 @@ const renderNavField = (WrappedNavFieldComponent) => {
     isEdited: false,
   };
 
-  const FieldComponentWithIntl = injectIntl(FieldComponent);
-
-  FieldComponentWithIntl.WrappedComponent = FieldComponent;
-
-  return FieldComponentWithIntl;
+  return FieldComponent;
 };
 
 export default renderNavField;
