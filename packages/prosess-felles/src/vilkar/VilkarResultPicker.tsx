@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import {
@@ -17,16 +16,9 @@ import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import useIntl from '../useIntl';
+import getPackageIntl from '../../i18n/getPackageIntl';
 
 import styles from './vilkarResultPicker.less';
-
-const findRadioButtonTextCode = (customVilkarText: { id: string; }, isVilkarOk: boolean): string => {
-  if (customVilkarText) {
-    return customVilkarText.id;
-  }
-  return isVilkarOk ? 'VilkarResultPicker.VilkarOppfylt' : 'VilkarResultPicker.VilkarIkkeOppfylt';
-};
 
 type FormValues = {
   erVilkarOk: boolean;
@@ -37,14 +29,8 @@ type FormValues = {
 interface OwnProps {
   avslagsarsaker?: KodeverkMedNavn[];
   erVilkarOk?: boolean;
-  customVilkarIkkeOppfyltText?: {
-    id: string;
-    values?: any;
-  };
-  customVilkarOppfyltText?: {
-    id: string;
-    values?: any;
-  };
+  customVilkarIkkeOppfyltText: string | ReactNode;
+  customVilkarOppfyltText: string | ReactNode;
   readOnly: boolean;
   erMedlemskapsPanel?: boolean;
 }
@@ -74,7 +60,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   erMedlemskapsPanel = false,
 }) => {
-  const intl = useIntl();
+  const intl = getPackageIntl();
   return (
     <div className={styles.container}>
       <VerticalSpacer sixteenPx />
@@ -85,17 +71,8 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
               <Image className={styles.image} src={erVilkarOk ? innvilgetImage : avslattImage} />
             </FlexColumn>
             <FlexColumn>
-              {erVilkarOk && <Normaltekst><FormattedMessage id={findRadioButtonTextCode(customVilkarOppfyltText, true)} /></Normaltekst>}
-              {!erVilkarOk && (
-              <Normaltekst>
-                <FormattedMessage
-                  id={findRadioButtonTextCode(customVilkarIkkeOppfyltText, false)}
-                  values={{
-                    b: (chunks) => <b>{chunks}</b>,
-                  }}
-                />
-              </Normaltekst>
-              )}
+              {erVilkarOk && <Normaltekst>{customVilkarOppfyltText}</Normaltekst>}
+              {!erVilkarOk && <Normaltekst>{customVilkarIkkeOppfyltText}</Normaltekst>}
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
@@ -110,27 +87,11 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
           readOnly={readOnly}
         >
           <RadioOption
-            label={(
-              <FormattedMessage
-                id={findRadioButtonTextCode(customVilkarOppfyltText, true)}
-                values={customVilkarOppfyltText ? {
-                  b: (chunks) => <b>{chunks}</b>,
-                  ...customVilkarIkkeOppfyltText.values,
-                } : { b: (chunks) => <b>{chunks}</b> }}
-              />
-            )}
+            label={customVilkarOppfyltText}
             value
           />
           <RadioOption
-            label={(
-              <FormattedMessage
-                id={findRadioButtonTextCode(customVilkarIkkeOppfyltText, false)}
-                values={customVilkarIkkeOppfyltText ? {
-                  b: (chunks) => <b>{chunks}</b>,
-                  ...customVilkarIkkeOppfyltText.values,
-                } : { b: (chunks) => <b>{chunks}</b> }}
-              />
-            )}
+            label={customVilkarIkkeOppfyltText}
             value={false}
           />
         </RadioGroupField>
@@ -150,7 +111,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
             {erMedlemskapsPanel && (
             <DatepickerField
               name="avslagDato"
-              label={{ id: 'VilkarResultPicker.VilkarDato' }}
+              label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
               readOnly={readOnly}
               validate={[required, hasValidDate]}
             />

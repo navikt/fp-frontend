@@ -10,6 +10,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { RadioGroupField, SelectField } from '@fpsak-frontend/form';
 
 import { TrygderettsbehandlingForm } from './TrygderettsbehandlingForm';
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-anke-trygderettsbehandling';
 
 describe('<TrygderettsbehandlingForm>', () => {
   const sprakkode = {
@@ -21,6 +22,7 @@ describe('<TrygderettsbehandlingForm>', () => {
     const wrapper = shallow(
       <TrygderettsbehandlingForm
         {...reduxFormPropsMock}
+        intl={intlMock}
         readOnly={false}
         readOnlySubmitButton={false}
         aksjonspunktCode={aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER}
@@ -50,6 +52,7 @@ describe('<TrygderettsbehandlingForm>', () => {
     const wrapper = shallow(
       <TrygderettsbehandlingForm
         {...reduxFormPropsMock}
+        intl={intlMock}
         readOnly={false}
         readOnlySubmitButton={false}
         aksjonspunktCode={aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER}

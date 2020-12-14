@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
-import useIntl from './useIntl';
+import getPackageIntl from '../i18n/getPackageIntl';
 
 import styles from './prosessStegBegrunnelseTextField.less';
 
@@ -23,7 +23,7 @@ type FormValues = {
 
 interface OwnProps {
   readOnly: boolean;
-  textCode?: string;
+  text?: string;
   useAllWidth?: boolean;
 }
 
@@ -41,15 +41,15 @@ interface StaticFunctions {
  */
 const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  textCode,
+  text,
   useAllWidth = false,
 }) => {
-  const intl = useIntl();
+  const intl = getPackageIntl();
   return (
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
       <TextAreaField
         name="begrunnelse"
-        label={intl.formatMessage({ id: textCode || getBegrunnelseTextCode(readOnly) })}
+        label={text || intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
         validate={[requiredIfNotPristine, minLength3, maxLength1500, hasValidText]}
         textareaClass={styles.explanationTextarea}
         maxLength={1500}

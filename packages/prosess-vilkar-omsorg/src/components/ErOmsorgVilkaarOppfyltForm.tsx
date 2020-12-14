@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -47,7 +47,8 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunkter for avklaring av omsorgsvilkåret.
  */
-export const ErOmsorgVilkaarOppfyltFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const ErOmsorgVilkaarOppfyltFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+  intl,
   avslagsarsaker,
   readOnly,
   readOnlySubmitButton,
@@ -58,8 +59,8 @@ export const ErOmsorgVilkaarOppfyltFormImpl: FunctionComponent<PureOwnProps & Ma
   ...formProps
 }) => (
   <ProsessPanelTemplate
+    title={intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Omsorg' })}
     handleSubmit={formProps.handleSubmit}
-    titleCode="ErOmsorgVilkaarOppfyltForm.Omsorg"
     isAksjonspunktOpen={!readOnlySubmitButton}
     formName={formProps.form}
     readOnlySubmitButton={readOnlySubmitButton}
@@ -73,8 +74,8 @@ export const ErOmsorgVilkaarOppfyltFormImpl: FunctionComponent<PureOwnProps & Ma
       avslagsarsaker={avslagsarsaker}
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
-      customVilkarOppfyltText={{ id: 'ErOmsorgVilkaarOppfyltForm.Oppfylt' }}
-      customVilkarIkkeOppfyltText={{ id: 'ErOmsorgVilkaarOppfyltForm.IkkeOppfylt' }}
+      customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
     />
     <ProsessStegBegrunnelseTextField readOnly={readOnly} />
   </ProsessPanelTemplate>
@@ -131,4 +132,4 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: formName,
   validate,
-})(ErOmsorgVilkaarOppfyltFormImpl));
+})(injectIntl(ErOmsorgVilkaarOppfyltFormImpl)));

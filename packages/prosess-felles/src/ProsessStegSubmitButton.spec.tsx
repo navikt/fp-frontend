@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { ProsessStegSubmitButton } from './ProsessStegSubmitButton';
@@ -40,11 +39,10 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(1);
+    const knapp = wrapper.find(Hovedknapp);
+    expect(knapp).to.have.length(1);
 
-    const text = wrapper.find(FormattedMessage);
-    expect(text).to.have.length(1);
-    expect(text.prop('id')).is.eql('SubmitButton.ConfirmInformation');
+    expect(knapp.childAt(0).text()).is.eql('Bekreft og fortsett');
   });
 
   it('skal vise submit-knapp med spesifikk tekst når behandlingspunkt ikke er readonly', () => {
@@ -60,14 +58,13 @@ describe('<ProsessStegSubmitButton>', () => {
       isSubmitting={false}
       isDirty={false}
       hasEmptyRequiredFields={false}
-      textCode="SubmitButton.SettPåVent"
+      text="Bekreft"
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(1);
+    const knapp = wrapper.find(Hovedknapp);
+    expect(knapp).to.have.length(1);
 
-    const text = wrapper.find(FormattedMessage);
-    expect(text).to.have.length(1);
-    expect(text.prop('id')).is.eql('SubmitButton.SettPåVent');
+    expect(knapp.childAt(0).text()).is.eql('Bekreft');
   });
 
   it('skal vise knapp som enabled når behandlingspunkt er dirty og submittable', () => {

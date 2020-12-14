@@ -46,17 +46,17 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField.prop('label')).is.eql('ProsessStegBegrunnelseTextField.ExplanationRequired');
+    expect(textField.prop('label')).is.eql('Vurdering');
   });
 
   it('skal vise gitt tekstkode', () => {
     const wrapper = shallow(<ProsessStegBegrunnelseTextField
       readOnly={false}
-      textCode="Klage.ResolveKlage.ExplanationRequiredBrev"
+      text="Beskrivelse"
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField.prop('label')).is.eql('Begrunnelse/tekst i brev');
+    expect(textField.prop('label')).is.eql('Beskrivelse');
   });
 
   it('skal hente begrunnelse fra første aksjonspunkt', () => {
