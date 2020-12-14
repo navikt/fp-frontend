@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  dateAfterOrEqual, hasValidDate, required, dateIsBefore, FormValidationError,
+  dateAfterOrEqual, hasValidDate, required, dateIsBefore,
 } from '@fpsak-frontend/utils';
 import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { ArrowBox } from '@fpsak-frontend/shared-components';
@@ -26,10 +28,10 @@ const AA_REGISTERET = 'aa-registeret';
 // METHODS
 // ----------------------------------------------------------------------------------
 
-const arbeidsforholdTomDatoPickerErrorMsg = (dato: string): FormValidationError => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
-const dateMustBeBeforeSkjaeringstidspunkt = (dato: string): FormValidationError => [
-  { id: 'PersonArbeidsforholdDetailForm.DateNotBeforeSkjaeringstidspunkt' }, { dato },
-];
+const getArbeidsforholdTomDatoPickerErrorMsg = (intl: IntlShape) => (dato: string): string => intl
+  .formatMessage({ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato });
+const getDateMustBeBeforeSkjaeringstidspunkt = (intl: IntlShape) => (dato: string): string => intl
+  .formatMessage({ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeSkjaeringstidspunkt' }, { dato });
 
 const isKildeAaRegisteret = (arbeidsforhold: CustomArbeidsforhold): boolean => arbeidsforhold.kilde
   && arbeidsforhold.kilde.navn.toLowerCase() === AA_REGISTERET;
@@ -53,6 +55,7 @@ const skalViseInntektIkkeMedTilBeregningsgrunnlagetValgmulighet = (arbeidsforhol
 const erFlerePermisjoner = (arbeidsforhold: CustomArbeidsforhold): boolean => arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 1;
 
 const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
+  intl: IntlShape,
   arbeidsforhold: CustomArbeidsforhold,
   hasReceivedInntektsmelding: boolean,
   formName: string,
@@ -87,8 +90,8 @@ const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
                 validate={[
                   required,
                   hasValidDate,
-                  dateAfterOrEqual(arbeidsforhold.fomDato, arbeidsforholdTomDatoPickerErrorMsg),
-                  dateIsBefore(arbeidsforhold.skjaeringstidspunkt, dateMustBeBeforeSkjaeringstidspunkt),
+                  dateAfterOrEqual(arbeidsforhold.fomDato, getArbeidsforholdTomDatoPickerErrorMsg(intl)),
+                  dateIsBefore(arbeidsforhold.skjaeringstidspunkt, getDateMustBeBeforeSkjaeringstidspunkt(intl)),
                 ]}
                 readOnly={readOnly}
               />
@@ -144,7 +147,7 @@ interface OwnProps {
  * Ansvarlig for å håndtere visning av RadioKnapper for arbeidsforhold
  * som står i aksjonspunktet 5080 i fakta om arbeidsforhold.
  */
-const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps> = ({
+const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   readOnly,
   formName,
   hasReceivedInntektsmelding,
@@ -153,6 +156,7 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps> = ({
   arbeidsforholdHandlingVerdi,
   behandlingId,
   behandlingVersjon,
+  intl,
 }) => (
   <RadioGroupField
     name="arbeidsforholdHandlingField"
@@ -205,6 +209,7 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps> = ({
       </BehandlingFormFieldCleaner>
     </RadioOption>
     { utledRadioOptionForArbeidsforholdSomIkkeErAktive(
+      intl,
       arbeidsforhold,
       hasReceivedInntektsmelding,
       formName,
@@ -216,4 +221,4 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps> = ({
   </RadioGroupField>
 );
 
-export default ArbeidsforholdRadioknapper;
+export default injectIntl(ArbeidsforholdRadioknapper);
