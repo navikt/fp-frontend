@@ -58,12 +58,5 @@
   "StatusForBorgerFaktaPanel.HarIkkeOppholdsrett": "Søker har <b>ikke</b> oppholdsrett",
   "StatusForBorgerFaktaPanel.LovligOpphold": "Lovlig opphold",
   "StatusForBorgerFaktaPanel.HarLovligOpphold": "Søker har lovlig opphold",
-  "StatusForBorgerFaktaPanel.HarIkkeLovligOpphold": "Søker har <b>ikke</b> lovlig opphold",
-
-  "BostedSokerView.ForeignAddresse": "Utenlandsadresse",
-  "BostedSokerFaktaIndex.Soker": "Søker",
-  "Personstatus.Hjelpetekst": "Personstatus",
-  "Personstatus.Ukjent": "Ukjent",
-  "Sivilstand.Hjelpetekst": "Sivilstand",
-  "BostedSokerView.Region": "Region"
+  "StatusForBorgerFaktaPanel.HarIkkeLovligOpphold": "Søker har <b>ikke</b> lovlig opphold"
 }

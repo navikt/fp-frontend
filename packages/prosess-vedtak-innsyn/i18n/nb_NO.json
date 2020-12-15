@@ -14,8 +14,5 @@
   "DocumentListVedtakInnsyn.InnsynsDok": "Innsynsdokumentasjon til søker",
   "DocumentListVedtakInnsyn.NoDocuments": "Det finnes ingen dokumenter på saken",
 
-  "Malform.Bokmal": "Bokmål",
-  "Malform.Nynorsk": "Nynorsk",
-  "Malform.Engelsk": "Engelsk",
   "Malform.Beskrivelse": "Foretrukket språk"
 }

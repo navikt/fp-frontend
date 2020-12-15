@@ -98,6 +98,5 @@
   "UttakInfoPanel.ManuellOverstyring": "Manuell overstyring",
   "UttakInfo.Uttaksdager": "Prosentandel samtidig uttak",
   "UttakInfo.SamtidigUttaksprosent": "Uttak",
-  "UttakInfo.Opphold.AnnenForelder": "Opphold i uttak grunnet annen foreldres uttak",
-  "PeriodFieldArray.LeggTilBarn": "Legg til barn"
+  "UttakInfo.Opphold.AnnenForelder": "Opphold i uttak grunnet annen foreldres uttak"
 }

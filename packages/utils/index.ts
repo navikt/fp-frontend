@@ -40,7 +40,7 @@ export {
 export { default as guid } from './src/guid';
 export {
   replaceNorwegianCharacters,
-  getLanguageCodeFromSprakkode,
+  getLanguageFromSprakkode,
 } from './src/languageUtils';
 export {
   notNull,

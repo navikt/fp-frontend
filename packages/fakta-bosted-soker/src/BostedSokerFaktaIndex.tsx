@@ -16,28 +16,24 @@ const intl = createIntl({
 
 interface OwnProps {
   personopplysninger: Personopplysninger;
-  sokerTypeTextId?: string;
+  sokerTypeText?: string;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const BostedSokerFaktaIndex: FunctionComponent<OwnProps> = ({
   personopplysninger,
-  sokerTypeTextId,
+  sokerTypeText,
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <BostedSokerView
       personopplysninger={personopplysninger}
-      sokerTypeTextId={sokerTypeTextId}
+      sokerTypeText={sokerTypeText || intl.formatMessage({ id: 'BostedSokerFaktaIndex.Soker' })}
       regionTypes={alleKodeverk[kodeverkTyper.REGION]}
       sivilstandTypes={alleKodeverk[kodeverkTyper.SIVILSTAND_TYPE]}
       personstatusTypes={alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]}
     />
   </RawIntlProvider>
 );
-
-BostedSokerFaktaIndex.defaultProps = {
-  sokerTypeTextId: 'BostedSokerFaktaIndex.Soker',
-};
 
 export default BostedSokerFaktaIndex;

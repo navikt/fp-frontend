@@ -15,7 +15,7 @@ import {
   isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import {
-  decodeHtmlEntity, getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine,
+  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine,
 } from '@fpsak-frontend/utils';
 import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import {
@@ -142,7 +142,7 @@ export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
             readOnly={readOnly}
             badges={[{
               type: 'fokus',
-              textId: getLanguageCodeFromSprakkode(sprakkode),
+              text: getLanguageFromSprakkode(sprakkode),
               title: 'Malform.Beskrivelse',
             }]}
           />

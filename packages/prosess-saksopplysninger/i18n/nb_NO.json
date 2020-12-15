@@ -4,7 +4,5 @@
   "CheckPersonStatusForm.HaltBehandling": "Henlegg behandlingen",
   "CheckPersonStatusForm.ContinueBehandling": "Fortsett behandlingen",
   "CheckPersonStatusForm.SetPersonStatus": "Fastsett personstatusen",
-  "CheckPersonStatusForm.GjeldendeFom": "Gjeldende f.o.m. {dato}",
-  
-  "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger"
+  "CheckPersonStatusForm.GjeldendeFom": "Gjeldende f.o.m. {dato}"
 }

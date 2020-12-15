@@ -36,9 +36,5 @@
   "VisittkortBarnInfoOmsorgPanel.ForeldreansvarAntallBarn": "Foreldreansvar({antall} barn) {dato}",
   "VisittkortBarnInfoOmsorgPanel.AdopsjonAntallBarn": "Adopsjon({antall} barn) {dato}",
 
-  "VisittkortPanel.Ukjent": "Ukjent navn, mangler norsk id-nr",
-
-  "Malform.Bokmal": "Bokmål",
-  "Malform.Nynorsk": "Nynorsk",
-  "Malform.Engelsk": "Engelsk"
+  "VisittkortPanel.Ukjent": "Ukjent navn, mangler norsk id-nr"
 }

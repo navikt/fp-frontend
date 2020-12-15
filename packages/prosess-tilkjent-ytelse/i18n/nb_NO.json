@@ -27,9 +27,6 @@
   
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
   "Malform.Beskrivelse": "Foretrukket språk",
-  "Malform.Bokmal": "Bokmål",
-  "Malform.Nynorsk": "Nynorsk",
-  "Malform.Engelsk": "Engelsk",
   "UttakInfoPanel.AntallEnDagOgEnUke": "{weeks} uke {days} dag",
   "UttakInfoPanel.AntallEnDagOgFlereUker": "{weeks} uker {days} dag",
   "UttakInfoPanel.AntallFlereDagerOgEnUke": "{weeks} uke {days} dager",

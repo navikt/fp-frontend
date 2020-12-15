@@ -4,6 +4,5 @@
   "SvangerskapVilkarForm.Oppfylt": "Mor har rett til svangerskapspenger, vilkåret er oppfylt",
   "SvangerskapVilkarForm.IkkeOppfylt": "Mor har ikke rett til svangerskapspenger, vilkåret er <b>ikke</b> oppfylt",
   
-  "ShowVilkarStatus.Check": "Informasjonen er utfylt",
-  "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger"
+  "ShowVilkarStatus.Check": "Informasjonen er utfylt"
 }

@@ -10,7 +10,5 @@
   "VurderSoknadsfristForeldrepengerForm.Punkt3": "Har søker åpenbart ikke vært i stand til å sette frem krav?",
   "VurderSoknadsfristForeldrepengerForm.GyldigGrunn": "Gyldig grunn for sen fremsetting av søknaden",
   "VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn": "Ingen gyldig grunn for sen fremsetting av søknaden",
-  "VurderSoknadsfristForeldrepengerForm.NyMottattDato": "Dato for når søknaden kan anses som mottatt",
-  
-  "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger"
+  "VurderSoknadsfristForeldrepengerForm.NyMottattDato": "Dato for når søknaden kan anses som mottatt"
 }

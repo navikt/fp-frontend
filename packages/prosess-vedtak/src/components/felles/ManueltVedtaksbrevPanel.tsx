@@ -12,7 +12,7 @@ import {
   FlexContainer, FlexRow, FlexColumn, AvsnittSkiller, VerticalSpacer, EditedIcon, Image,
 } from '@fpsak-frontend/shared-components';
 import {
-  getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, required,
+  getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 
 import styles from './manueltVedtaksbrevPanel.less';
@@ -47,7 +47,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
         </FlexColumn>
         <FlexColumn className={styles.space}>
           <EtikettLiten>
-            <FormattedMessage id={getLanguageCodeFromSprakkode(sprakkode)} />
+            {getLanguageFromSprakkode(sprakkode)}
           </EtikettLiten>
         </FlexColumn>
         <FlexColumn>

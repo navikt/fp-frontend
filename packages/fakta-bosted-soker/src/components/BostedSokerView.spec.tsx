@@ -89,7 +89,7 @@ describe('<BostedsokerView>', () => {
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
-      sokerTypeTextId="BostedSokerFaktaIndex.Soker"
+      sokerTypeText="Søker"
     />);
 
     expect(wrapper.find('Element').childAt(0).text()).to.eql('Espen Utvikler');
@@ -102,7 +102,7 @@ describe('<BostedsokerView>', () => {
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
-      sokerTypeTextId="BostedSokerFaktaIndex.Soker"
+      sokerTypeText="Søker"
     />);
     const adr = wrapper.find(Normaltekst);
     expect(adr).to.have.length(2);
@@ -117,7 +117,7 @@ describe('<BostedsokerView>', () => {
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
-      sokerTypeTextId="BostedSokerFaktaIndex.Soker"
+      sokerTypeText="Søker"
     />);
 
     const tooltips = wrapper.find(Tooltip);
@@ -145,7 +145,7 @@ describe('<BostedsokerView>', () => {
       regionTypes={regionTypes}
       sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
-      sokerTypeTextId="BostedSokerFaktaIndex.Soker"
+      sokerTypeText="Søker"
     />);
 
     const tooltips = wrapper.find(Tooltip);

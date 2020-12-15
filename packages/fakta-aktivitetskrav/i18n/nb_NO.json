@@ -12,9 +12,5 @@
   "AktivitetskravFaktaDetailForm.Avbryt": "Avbryt",
   "AktivitetskravFaktaDetailForm.Avklaring": "Avklaring",
   "AktivitetskravFaktaDetailForm.Periode": "Periode",
-  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
- 
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "PeriodFieldArray.LeggTilBarn": "Legg til barn",
-  "Behandling.EditedField": "Saksbehandler har endret feltets verdi"
+  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet"
 }

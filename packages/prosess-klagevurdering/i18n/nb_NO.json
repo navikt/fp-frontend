@@ -16,9 +16,5 @@
   "BehandleKlageFormNfp.BegrunnelseForKlage": "Begrunnelse",
   "PreviewKlageLink.ForhandvisBrev": "Forhåndsvis brev",
 
-  "Malform.Beskrivelse": "Foretrukket språk",
-  "Malform.Bokmal": "Bokmål",
-  "Malform.Nynorsk": "Nynorsk",
-  "Malform.Engelsk": "Engelsk",
-  "Messages.PreviewText": "Forhåndsvis varselbrev"
+  "Malform.Beskrivelse": "Foretrukket språk"
 }

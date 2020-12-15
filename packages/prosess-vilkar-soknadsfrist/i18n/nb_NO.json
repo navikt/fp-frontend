@@ -16,6 +16,5 @@
   "ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt": "Vilkåret er oppfylt",
   "ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
   
-  "ShowVilkarStatus.Check": "Informasjonen er utfylt",
-  "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger"
+  "ShowVilkarStatus.Check": "Informasjonen er utfylt"
 }

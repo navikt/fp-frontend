@@ -221,7 +221,7 @@ yarn add @fpsak-frontend/form
   className={styles.smallTextArea}
   badges={[{
     type: 'fokus',
-    textId: getLanguageCodeFromSprakkode(sprakkode),
+    text: getLanguageFromSprakkode(sprakkode),
     title: 'Malform.Beskrivelse',
   }]}
 />
