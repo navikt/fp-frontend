@@ -17,7 +17,7 @@ import {
   AksjonspunktHelpTextTemp, ArrowBox, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
-  getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, required,
+  getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
@@ -262,7 +262,7 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
                                   readOnly={readOnly}
                                   badges={[{
                                     type: 'fokus',
-                                    textId: getLanguageCodeFromSprakkode(sprakkode),
+                                    text: getLanguageFromSprakkode(sprakkode),
                                     title: 'Malform.Beskrivelse',
                                   }]}
                                 />

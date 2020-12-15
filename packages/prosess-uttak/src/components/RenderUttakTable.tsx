@@ -1,7 +1,9 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
@@ -10,7 +12,7 @@ import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import {
-  hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required, FormValidationError,
+  hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@fpsak-frontend/utils';
 import {
   ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
@@ -67,11 +69,10 @@ const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk): boolean => {
   return false;
 };
 
-const merEnNullMessage = (): FormValidationError => ([{ id: 'ValidationMessage.MerEnNullUtaksprosent' }]);
-const noMoreThanZeroIfRejectedAndNotUtsettelse = (value: string, elmnt: FormValues): FormValidationError | null => (utsettelse(
+const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (intl: IntlShape) => (value: string, elmnt: FormValues): string | null => (utsettelse(
   elmnt.erOppfylt, elmnt.utsettelseType,
 ) && parseFloat(value) > 0
-  ? merEnNullMessage() : null);
+  ? intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' }) : null);
 
 const createTextStrings = (fields: AktivitetFieldArray, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   const {
@@ -114,7 +115,8 @@ interface OwnProps {
  * Presentasjonskomponent: Viser felter for arbeidsforhold, stønadskonto, samtidig uttak, trakk uker og dager, andel i arbeid, utbetalingsgrad.
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-const RenderUttakTable: FunctionComponent<OwnProps> = ({
+const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   fields,
   periodeTyper,
   readOnly,
@@ -180,7 +182,7 @@ const RenderUttakTable: FunctionComponent<OwnProps> = ({
                   <Column xs="7">
                     <DecimalField
                       name={`${uttakElementFieldId}.utbetalingsgrad`}
-                      validate={[required, minValue0, maxProsentValue100, hasValidDecimal, noMoreThanZeroIfRejectedAndNotUtsettelse]}
+                      validate={[required, minValue0, maxProsentValue100, hasValidDecimal, getNoMoreThanZeroIfRejectedAndNotUtsettelse(intl)]}
                       readOnly={readOnly}
                       bredde="XS"
                       format={(value) => {
@@ -210,4 +212,4 @@ const RenderUttakTable: FunctionComponent<OwnProps> = ({
   </div>
 );
 
-export default RenderUttakTable;
+export default injectIntl(RenderUttakTable);

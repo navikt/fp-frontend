@@ -261,8 +261,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors[0].fastsattBelop).to.have.length(1);
-    expect(errors[0].fastsattBelop[0].id).to.equal(isRequiredMessage()[0].id);
+    expect(errors[0].fastsattBelop).to.equal(isRequiredMessage());
   });
 
   it('skal ikkje returnerer errors når man ikkje skal redigere inntekt', () => {
@@ -292,8 +291,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors[0].inntektskategori).to.have.length(1);
-    expect(errors[0].inntektskategori[0].id).to.equal(isRequiredMessage()[0].id);
+    expect(errors[0].inntektskategori).to.equal(isRequiredMessage());
   });
 
   it('skal gi error om andel ikkje er valgt for nye andeler', () => {
@@ -309,8 +307,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors[0].andel).to.have.length(1);
-    expect(errors[0].andel[0].id).to.equal(isRequiredMessage()[0].id);
+    expect(errors[0].andel).to.equal(isRequiredMessage());
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {

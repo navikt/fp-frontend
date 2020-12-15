@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
@@ -12,7 +11,7 @@ import { SelectField } from '@fpsak-frontend/form';
 import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/types';
 
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
   const relatertYtelseTypeListe = Object.values(relatertYtelseType).map((type) => ({
@@ -160,11 +159,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       antallBarn: 0,
     };
 
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(model);
+    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
     expect(result).is.eql({
-      antallBarn: [{
-        id: 'OmsorgOgForeldreansvarFaktaForm.AntallBarnValidation',
-      }],
+      antallBarn: 'Antall barn må være mindre eller lik antall barn det søkes for',
     });
   });
 
@@ -174,11 +171,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       antallBarn: 3,
     };
 
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(model);
+    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
     expect(result).is.eql({
-      antallBarn: [{
-        id: 'OmsorgOgForeldreansvarFaktaForm.AntallBarnValidation',
-      }],
+      antallBarn: 'Antall barn må være mindre eller lik antall barn det søkes for',
     });
   });
 
@@ -189,13 +184,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     };
 
     // @ts-ignore
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(model);
+    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
     expect(result).is.eql({
-      antallBarn: [{
-        id: 'ValidationMessage.InvalidNumber',
-      }, {
-        text: 'test',
-      }],
+      antallBarn: 'Feltet kan kun inneholde tall',
     });
   });
 
@@ -205,7 +196,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       antallBarn: 2,
     };
 
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(model);
+    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
     expect(result).is.eql({});
   });
 

@@ -160,7 +160,7 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<PureOwnProps & Ma
                 )}
                 {!f.isApplicant && (
                   <BostedSokerFaktaIndex
-                    sokerTypeTextId="OppholdINorgeOgAdresserFaktaPanel.Parent"
+                    sokerTypeText={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.Parent' })}
                     personopplysninger={f.personopplysning}
                     alleKodeverk={alleKodeverk}
                   />

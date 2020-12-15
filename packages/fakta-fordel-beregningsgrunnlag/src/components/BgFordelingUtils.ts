@@ -84,14 +84,6 @@ export const starterPaaEllerEtterStp = (bgAndel,
   skjaeringstidspunktBeregning) => (bgAndel && bgAndel.arbeidsforhold
     && bgAndel.arbeidsforhold.startdato && !moment(bgAndel.arbeidsforhold.startdato).isBefore(moment(skjaeringstidspunktBeregning)));
 
-const skalFlytteBeregningsgrunnlagFraAAP = (andel, andeler) => {
-  if (andel.refusjonskravFraInntektsmelding && andel.refusjonskravFraInntektsmelding > andel.belopFraInntektsmelding) {
-    return andeler
-      .some((a) => a.aktivitetStatus === aktivitetStatus.ARBEIDSAVKLARINGSPENGER);
-  }
-  return false;
-};
-
 const harAAPOgRefusjonskravOverstigerInntektsmelding = (andel, beregningsgrunnlag) => {
   if (andel.refusjonskravFraInntektsmelding && andel.refusjonskravFraInntektsmelding > andel.belopFraInntektsmelding) {
     return beregningsgrunnlag.beregningsgrunnlagPeriode.some((periode) => periode.beregningsgrunnlagPrStatusOgAndel
@@ -99,20 +91,6 @@ const harAAPOgRefusjonskravOverstigerInntektsmelding = (andel, beregningsgrunnla
   }
   return false;
 };
-
-const erAAPOgSkalFlytteTilArbeidsgiverSomRefunderer = (andel, andeler) => {
-  if (andel.aktivitetStatus !== aktivitetStatus.ARBEIDSAVKLARINGSPENGER) {
-    return false;
-  }
-  return andeler.some((a) => {
-    const bgPrAar = a.beregningsgrunnlagPrAar ? a.beregningsgrunnlagPrAar : 0;
-    return a.refusjonskravFraInntektsmelding && a.refusjonskravFraInntektsmelding > bgPrAar;
-  });
-};
-
-export const erAAPEllerArbeidsgiverOgSkalFlytteMellomAAPOgArbeidsgiver = (andel, andeler) => (
-  skalFlytteBeregningsgrunnlagFraAAP(andel, andeler) || erAAPOgSkalFlytteTilArbeidsgiverSomRefunderer(andel, andeler)
-);
 
 const erSNEllerFL = (andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE
 || andel.aktivitetStatus === aktivitetStatus.FRILANSER;

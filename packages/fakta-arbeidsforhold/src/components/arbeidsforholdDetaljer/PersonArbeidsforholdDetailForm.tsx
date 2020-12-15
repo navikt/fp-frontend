@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
@@ -62,12 +64,15 @@ interface MappedOwnProps {
   harErstattetEttEllerFlere?: boolean;
   isErstattArbeidsforhold: boolean;
   onSubmit: (formValues: FormValues) => void;
+  validate: (formValues: FormValues, props: any) => void;
 }
+
+type Props = PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps;
 
 // ----------------------------------------------------------------------------------
 // Component: PersonArbeidsforholdDetailForm
 // ----------------------------------------------------------------------------------
-export const PersonArbeidsforholdDetailForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
   cancelArbeidsforhold,
   isErstattArbeidsforhold,
   hasReceivedInntektsmelding,
@@ -170,8 +175,13 @@ PersonArbeidsforholdDetailForm.defaultProps = {
   harErstattetEttEllerFlere: false,
 };
 
+const validateForm = (values: FormValues, intl: IntlShape) => ({
+  ...LeggTilArbeidsforholdFelter.validate(values, intl),
+});
+
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: FormValues) => initialOwnProps.updateArbeidsforhold(values);
+  const validate = (values: FormValues, props: Props) => validateForm(values, props.intl);
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const {
       arbeidsforhold, readOnly, behandlingId, behandlingVersjon,
@@ -195,16 +205,12 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
         PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon,
       )(state, 'arbeidsforholdHandlingField'),
       onSubmit,
+      validate,
     };
   };
 };
 
-const validateForm = (values: FormValues) => ({
-  ...LeggTilArbeidsforholdFelter.validate(values),
-});
-
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: PERSON_ARBEIDSFORHOLD_DETAIL_FORM,
-  validate: (values: FormValues) => validateForm(values),
   enableReinitialize: true,
-})(PersonArbeidsforholdDetailForm));
+})(injectIntl(PersonArbeidsforholdDetailForm)));

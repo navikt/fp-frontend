@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { getLanguageCodeFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
+import { getLanguageFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form';
 import { Kodeverk } from '@fpsak-frontend/types';
 
@@ -20,14 +20,14 @@ const FritekstAnkeBrevTextField: FunctionComponent<OwnProps & WrappedComponentPr
   <div className={styles.fritekstTilBrevTextArea}>
     <TextAreaField
       name="fritekstTilBrev"
-      label={intl.formatMessage({ id: 'FritekstAnkeBrevTextField' })}
+      label={intl.formatMessage({ id: 'FritekstAnkeBrevTextField.Fritekst' })}
       validate={[required, hasValidText]}
       readOnly={readOnly}
       textareaClass={styles.explanationTextarea}
       maxLength={100000}
       badges={[{
         type: 'fokus',
-        textId: getLanguageCodeFromSprakkode(sprakkode),
+        text: getLanguageFromSprakkode(sprakkode),
         title: 'Malform.Beskrivelse',
       }]}
     />

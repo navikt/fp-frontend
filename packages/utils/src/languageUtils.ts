@@ -1,22 +1,26 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 
+import getPackageIntl from '../i18n/getPackageIntl';
+
+const intl = getPackageIntl();
+
 export const replaceNorwegianCharacters = (str: string): string => {
   let result = str.split('æ').join('ae');
   result = result.split('ø').join('oe');
   return result.split('å').join('aa');
 };
 
-export const getLanguageCodeFromSprakkode = (sprakkode?: Kodeverk): string => {
+export const getLanguageFromSprakkode = (sprakkode?: Kodeverk): string => {
   if (!sprakkode) {
-    return 'Malform.Bokmal';
+    return intl.formatMessage({ id: 'Malform.Bokmal' });
   }
 
   switch (sprakkode.kode) {
     case 'NN':
-      return 'Malform.Nynorsk';
+      return intl.formatMessage({ id: 'Malform.Nynorsk' });
     case 'EN':
-      return 'Malform.Engelsk';
+      return intl.formatMessage({ id: 'Malform.Engelsk' });
     default:
-      return 'Malform.Bokmal';
+      return intl.formatMessage({ id: 'Malform.Bokmal' });
   }
 };

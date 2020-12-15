@@ -35,7 +35,11 @@ const BostedFaktaView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
         <Column xs="6">
           <BostedSokerFaktaIndex personopplysninger={personopplysning} alleKodeverk={alleKodeverk} />
           {ektefellePersonopplysning && (
-            <BostedSokerFaktaIndex sokerTypeTextId="BostedFaktaView.ForelderTo" personopplysninger={ektefellePersonopplysning} alleKodeverk={alleKodeverk} />
+            <BostedSokerFaktaIndex
+              sokerTypeText={intl.formatMessage({ id: 'BostedFaktaView.ForelderTo' })}
+              personopplysninger={ektefellePersonopplysning}
+              alleKodeverk={alleKodeverk}
+            />
           )}
         </Column>
       </Row>

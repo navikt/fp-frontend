@@ -5,7 +5,7 @@ import { RadioOption } from '@fpsak-frontend/form';
 
 import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
 import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 
 const arbeidsforhold = {
   id: '1',
@@ -29,7 +29,8 @@ const arbeidsforhold = {
 
 describe('<ArbeidsforholdRadioknapper>', () => {
   it('Skal ikke vise radioknapper for aktivt arbeidsforhold når mottatt IM', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding
@@ -43,7 +44,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).has.length(0);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom etter stp', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -69,7 +71,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).to.eql(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom samtidig som stp', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -96,7 +99,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(3).props.disabled).to.eql(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom undefined', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -125,7 +129,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).to.eql(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom etter stp, tom undefined', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -153,7 +158,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(3).props.disabled).to.eql(true);
   });
   it('Skal vise enablet overstyrtTom picker, uten IM, tomDato lik stp, med brukJustertePerioder', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -177,7 +183,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.disabled).to.eql(false);
   });
   it('Skal vise disablet overstyrtTom picker, uten IM, tomDato lik stp, ikke med brukJustertPerioder', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -201,7 +208,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.disabled).to.eql(true);
   });
   it('Skal vise RadioOption for fjerning av arbeidsforhold når arbeidsforhold ikke fra AA-reg', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -225,7 +233,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(wrapper.find('[name=\'overstyrtTom\']')).has.length(0);
   });
   it('Skal vise RadioOption knapper som er enabled hvis lagt til av saksbehandler', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -254,7 +263,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).to.eql(true);
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon uten tom og ikke mottatt IM', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -287,7 +297,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).to.eql(false);
   });
   it('Skal ikke vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon uten tom og mottatt IM', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding
@@ -314,7 +325,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon med tom og ikke mottatt IM', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -347,7 +359,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).to.eql(false);
   });
   it('Skal ikke vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon med tom og mottatt IM', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding
@@ -375,7 +388,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har flere permisjoner uten mottatt IM, '
     + 'samt disable knapp hvor saksbehandler kan velge at soeker er i permisjon', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}
@@ -414,7 +428,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har flere permisjoner og mottatt IM, '
     + 'samt disable knapp hvor saksbehandler kan velge at soeker er i permisjon', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding
@@ -446,7 +461,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.disabled).to.eql(true);
   });
   it('skal kun vise to RadioOptions når arbeidsforholdhandling er undefined', () => {
-    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper
+    const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       formName=""
       hasReceivedInntektsmelding={false}

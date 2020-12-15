@@ -69,7 +69,7 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsValidDateThreeWeeksAndOneDayAgo = validate({ termindato: dateThreeWeeksAndOneDayAgo });
       const errorsValidDateThreeWeeksAgo = validate({ termindato: dateThreeWeeksAgo });
 
-      expect(errorsInvalidDate.termindato).to.be.an('array');
+      expect(errorsInvalidDate.termindato).to.eql('Dato må skrives slik : dd.mm.åååå');
       expect(errorsValidDateThreeWeeksAndOneDayAgo.termindato).to.be.null;
       expect(errorsValidDateThreeWeeksAgo.termindato).to.be.null;
     });
@@ -78,7 +78,7 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsInvalidDate = validate({ terminbekreftelseDato: 'blabla', termindato: dateStringNextYear });
       const errorsValidDateLastYear = validate({ terminbekreftelseDato: dateStringLastYear, termindato: dateStringNextYear });
 
-      expect(errorsInvalidDate.terminbekreftelseDato).to.be.an('array');
+      expect(errorsInvalidDate.terminbekreftelseDato).to.eql('Dato må skrives slik : dd.mm.åååå');
       expect(errorsValidDateLastYear.terminbekreftelseDato).to.be.null;
     });
 
@@ -86,7 +86,7 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsDateNextYear = validate({ terminbekreftelseDato: dateStringNextYear, termindato: dateStringNextYear });
       const errorsDateLastYear = validate({ terminbekreftelseDato: dateStringLastYear, termindato: dateStringNextYear });
 
-      expect(errorsDateNextYear.terminbekreftelseDato).to.be.an('array');
+      expect(errorsDateNextYear.terminbekreftelseDato).to.eql('Dato må være før eller lik 15.12.2020');
       expect(errorsDateLastYear.terminbekreftelseDato).to.be.null;
     });
 
@@ -98,8 +98,8 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsSameDateAsTermindato = validate({ termindato: yesterday, terminbekreftelseDato: yesterday });
       const errorsDateBeforeTermindato = validate({ termindato: yesterday, terminbekreftelseDato: dayBeforeYesterday });
 
-      expect(errorsDateAfterTermindato.terminbekreftelseDato).to.be.an('array');
-      expect(errorsSameDateAsTermindato.terminbekreftelseDato).to.be.an('array');
+      expect(errorsDateAfterTermindato.terminbekreftelseDato).to.eql('Dato må være før eller lik 13.12.2020');
+      expect(errorsSameDateAsTermindato.terminbekreftelseDato).to.eql('Dato må være før eller lik 13.12.2020');
       expect(errorsDateBeforeTermindato.terminbekreftelseDato).to.be.null;
     });
 
@@ -109,9 +109,9 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsAntallBarnLessThanOne = validate({ antallBarnFraTerminbekreftelse: 0, termindato: dateStringNextYear });
       const errorsValidAntallBarn = validate({ antallBarnFraTerminbekreftelse: 1, termindato: dateStringNextYear });
 
-      expect(errorsNoAntallBarn.antallBarnFraTerminbekreftelse).to.be.an('array');
-      expect(errorsInvalidAntallBarn.antallBarnFraTerminbekreftelse).to.be.an('array');
-      expect(errorsAntallBarnLessThanOne.antallBarnFraTerminbekreftelse).to.be.an('array');
+      expect(errorsNoAntallBarn.antallBarnFraTerminbekreftelse).to.eql('Feltet må fylles ut');
+      expect(errorsInvalidAntallBarn.antallBarnFraTerminbekreftelse).to.eql('Feltet må være mindre eller lik 9');
+      expect(errorsAntallBarnLessThanOne.antallBarnFraTerminbekreftelse).to.eql('Feltet må være større eller lik 1');
       expect(errorsValidAntallBarn.antallBarnFraTerminbekreftelse).to.be.null;
     });
 
@@ -121,9 +121,9 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsValidDateNextYear = validate({ erBarnetFodt: true, foedselsDato: dateStringTomorrow });
       const errorsValidDateToday = validate({ erBarnetFodt: true, foedselsDato: dateToday });
 
-      expect(errorsInvalidDate.foedselsDato).to.be.an('array');
-      expect(errorsValidDateNextYear.foedselsDato).to.be.an('array');
-      expect(errorsValidDateToday.foedselsDato).to.be.an('array');
+      expect(errorsInvalidDate.foedselsDato).to.eql('Dato må skrives slik : dd.mm.åååå');
+      expect(errorsValidDateNextYear.foedselsDato).to.eql('Dato må skrives slik : dd.mm.åååå');
+      expect(errorsValidDateToday.foedselsDato).to.eql('Dato må skrives slik : dd.mm.åååå');
     });
 
     it('skal validere at antall barn født er et gyldig heltall større enn 0', () => {
@@ -132,9 +132,9 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsAntallBarnLessThanOne = validate({ erBarnetFodt: true, antallBarn: 0, foedselsDato: dateStringNextYear });
       const errorsValidAntallBarn = validate({ erBarnetFodt: true, antallBarn: 1, foedselsDato: dateStringNextYear });
 
-      expect(errorsNoAntallBarn.antallBarn).to.be.an('array');
-      expect(errorsInvalidAntallBarn.antallBarn).to.be.an('array');
-      expect(errorsAntallBarnLessThanOne.antallBarn).to.be.an('array');
+      expect(errorsNoAntallBarn.antallBarn).to.eql('Feltet må fylles ut');
+      expect(errorsInvalidAntallBarn.antallBarn).to.eql('Feltet må være mindre eller lik 9');
+      expect(errorsAntallBarnLessThanOne.antallBarn).to.eql('Feltet må være større eller lik 1');
       expect(errorsValidAntallBarn.antallBarn).to.be.null;
     });
   });

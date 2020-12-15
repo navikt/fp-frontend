@@ -34,7 +34,6 @@ import {
   ukerOgDagerVidNullUtbetalningsgradMessage,
   utbetalingMerEnnNullUtsettelseMessage,
   utbetalingsgradErMerSamtidigUttaksprosentMessage,
-  FormValidationError,
 } from './messages';
 import {
   dateRangesAreSequential,
@@ -54,7 +53,7 @@ import {
 
 type InputValue = string | number | boolean;
 
-type FormValidationResult = FormValidationError | null | undefined;
+type FormValidationResult = string | null | undefined;
 
 export const maxLengthOrFodselsnr = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
   || text.toString().trim().length <= length ? null : maxLengthOrFodselsnrMessage(length));

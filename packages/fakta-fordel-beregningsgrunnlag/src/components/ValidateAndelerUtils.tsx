@@ -1,12 +1,12 @@
-import React from 'react';
+import { IntlShape } from 'react-intl';
+
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import AktivitetStatus, { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
   dateIsAfter, formatCurrencyNoKr, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
-import { FormValidationError } from '@fpsak-frontend/utils/src/validation/messages';
-import { erAAPEllerArbeidsgiverOgSkalFlytteMellomAAPOgArbeidsgiver, GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
-import TotalbelopPrArbeidsgiverError, { lagTotalInntektArbeidsforholdList } from './TotalbelopPrArbeidsgiverError';
+
+import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
 import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
 
 const convertToNumber = (n) => (n == null || undefined ? null : Number(removeSpacesFromNumber(n)));
@@ -115,11 +115,8 @@ export const skalVereLikFordelingMessage = (fordeling) => (
   [{ id: 'BeregningInfoPanel.FordelBG.Validation.LikFordeling' },
     { fordeling }]);
 
-export const kanIkkjeHaNullBeregningsgrunnlagError = (): FormValidationError => (
-  [{ id: 'FordelBeregningsgrunnlag.Validation.KanIkkeHaNullIBeregningsgrunnlag' }]);
-
-export const tomErrorMessage = () => (
-  [{ id: ' ' }]);
+export const kanIkkjeHaNullBeregningsgrunnlagError = (intl: IntlShape): string => intl
+  .formatMessage({ id: 'FordelBeregningsgrunnlag.Validation.KanIkkeHaNullIBeregningsgrunnlag' });
 
 export const totalRefusjonMåVereLavereEnn = (seksG) => (
   [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalRefusjonSkalIkkeOverstige' }, { seksG }]);
@@ -145,7 +142,7 @@ export const likFordeling = (
   value, fordeling,
 ) => ((value !== Math.round(fordeling)) ? skalVereLikFordelingMessage(formatCurrencyNoKr(Math.round(fordeling))) : null);
 
-export const validateRefusjonsbelop = (refusjonskrav, skalKunneEndreRefusjon) => {
+export const validateRefusjonsbelop = (refusjonskrav, skalKunneEndreRefusjon): string | undefined => {
   let refusjonskravError;
   if (skalKunneEndreRefusjon) {
     refusjonskravError = required(refusjonskrav);
@@ -153,7 +150,7 @@ export const validateRefusjonsbelop = (refusjonskrav, skalKunneEndreRefusjon) =>
   return refusjonskravError;
 };
 
-const validateFordelingForGradertAndel = (andel, periodeDato): FormValidationError => {
+const validateFordelingForGradertAndel = (intl: IntlShape, andel, periodeDato): string | null => {
   const arbeidsforholdIkkeOpphørt = !andel.arbeidsperiodeTom || dateIsAfter(andel.arbeidsperiodeTom, periodeDato.fom);
   if (!andel.andelIArbeid || !arbeidsforholdIkkeOpphørt) {
     return null;
@@ -161,21 +158,21 @@ const validateFordelingForGradertAndel = (andel, periodeDato): FormValidationErr
   if (!Number.isNaN(Number(andel.andelIArbeid))) {
     const arbeidsprosent = Number(andel.andelIArbeid);
     if (arbeidsprosent > 0 && Number(andel.fastsattBelop) === 0) {
-      return kanIkkjeHaNullBeregningsgrunnlagError();
+      return kanIkkjeHaNullBeregningsgrunnlagError(intl);
     }
   }
   const arbeidsprosenter = andel.andelIArbeid.split(GRADERING_RANGE_DENOMINATOR);
   const arbeidsprosenterOverNull = arbeidsprosenter.filter((val) => val > 0);
   if (arbeidsprosenterOverNull.length > 0 && Number(andel.fastsattBelop) === 0) {
-    return kanIkkjeHaNullBeregningsgrunnlagError();
+    return kanIkkjeHaNullBeregningsgrunnlagError(intl);
   }
   return null;
 };
 
-export const validateFastsattBelop = (andelFieldValues, periodeDato) => {
+export const validateFastsattBelop = (intl: IntlShape, andelFieldValues, periodeDato): string | null => {
   let fastsattBelopError = required(andelFieldValues.fastsattBelop);
   if (!fastsattBelopError) {
-    fastsattBelopError = validateFordelingForGradertAndel(andelFieldValues, periodeDato);
+    fastsattBelopError = validateFordelingForGradertAndel(intl, andelFieldValues, periodeDato);
   }
   return fastsattBelopError;
 };
@@ -183,7 +180,7 @@ export const validateFastsattBelop = (andelFieldValues, periodeDato) => {
 export const hasFieldErrors = (fieldErrors) => (fieldErrors.refusjonskrav || fieldErrors.andel
   || fieldErrors.fastsattBelop || fieldErrors.inntektskategori);
 
-export const validateAndelFields = (andelFieldValues, periodeDato) => {
+export const validateAndelFields = (intl: IntlShape, andelFieldValues, periodeDato) => {
   const {
     refusjonskrav, skalKunneEndreRefusjon,
     andel, inntektskategori,
@@ -195,32 +192,23 @@ export const validateAndelFields = (andelFieldValues, periodeDato) => {
     inntektskategori: undefined,
   };
   fieldErrors.refusjonskrav = validateRefusjonsbelop(refusjonskrav, skalKunneEndreRefusjon);
-  fieldErrors.fastsattBelop = validateFastsattBelop(andelFieldValues, periodeDato);
+  fieldErrors.fastsattBelop = validateFastsattBelop(intl, andelFieldValues, periodeDato);
   fieldErrors.andel = required(andel);
   fieldErrors.inntektskategori = required(inntektskategori);
   return hasFieldErrors(fieldErrors) ? fieldErrors : null;
 };
 
-export const validateAndeler = (values, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, periodeDato) => {
+export const validateAndeler = (intl: IntlShape, values, periodeDato) => {
   if (!values) {
     return null;
   }
-  const skalValidereMellomAAPOgArbeidsgiver = (andel) => erAAPEllerArbeidsgiverOgSkalFlytteMellomAAPOgArbeidsgiver(andel, values);
-  const totalInntektPrArbeidsforhold = lagTotalInntektArbeidsforholdList(values, skalValidereMotBeregningsgrunnlagPrAar,
-    skalValidereMellomAAPOgArbeidsgiver, getKodeverknavn);
   const arrayErrors = values.map((andelFieldValues) => {
     if (!andelFieldValues.skalRedigereInntekt) {
       return null;
     }
-    return validateAndelFields(andelFieldValues, periodeDato);
+    return validateAndelFields(intl, andelFieldValues, periodeDato);
   });
   if (arrayErrors.some((errors) => errors !== null)) {
-    if (arrayErrors.some((errors) => errors && errors.fastsattBelop && errors.fastsattBelop[0].id === tomErrorMessage()[0].id)) {
-      return {
-        ...arrayErrors,
-        _error: <TotalbelopPrArbeidsgiverError totalInntektPrArbeidsforhold={totalInntektPrArbeidsforhold} />,
-      };
-    }
     return arrayErrors;
   }
   return null;

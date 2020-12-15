@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
+
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
+
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
 import FordelingForm from './FordelingForm';
 
@@ -18,20 +21,20 @@ const harRefusjonInfo = (bg) => bg && bg.refusjonTilVurdering;
 
 const getAksjonspunkt = (aksjonspunkter, def) => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon.kode === def) : undefined);
 
-type OwnProps = {
-    readOnly: boolean;
-    aksjonspunkter: Aksjonspunkt[];
-    submitCallback: (...args: any[]) => any;
-    submittable: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
-    beregningsgrunnlag: Beregningsgrunnlag;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    alleMerknaderFraBeslutter: {
-        notAccepted?: boolean;
-    };
-    behandlingType: Kodeverk;
-};
+interface OwnProps {
+  readOnly: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (...args: any[]) => any;
+  submittable: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  beregningsgrunnlag: Beregningsgrunnlag;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleMerknaderFraBeslutter: {
+      notAccepted?: boolean;
+  };
+  behandlingType: Kodeverk;
+}
 
 interface OwnState {
   submitEnabled: boolean;
@@ -42,8 +45,8 @@ interface OwnState {
  *
  * Har ansvar for å sette opp Redux Formen for "avklar fakta om fordeling" panel.
  */
-export class FordelBeregningsgrunnlagPanel extends Component<OwnProps, OwnState> {
-  constructor(props: OwnProps) {
+export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedComponentProps, OwnState> {
+  constructor(props: OwnProps & WrappedComponentProps) {
     super(props);
     this.state = {
       submitEnabled: false,
@@ -62,6 +65,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps, OwnState>
   render() {
     const {
       props: {
+        intl,
         readOnly,
         aksjonspunkter,
         submitCallback,
@@ -96,25 +100,25 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps, OwnState>
         aksjonspunkter={aksjonspunkter}
       />
       )}
-        {skalViseFordeling
-        && (
-        <FordelingForm
-          submitEnabled={submitEnabled}
-          submittable={submittable}
-          readOnly={readOnly}
-          submitCallback={submitCallback}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-          alleKodeverk={alleKodeverk}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          beregningsgrunnlag={beregningsgrunnlag}
-          behandlingType={behandlingType}
-          aksjonspunkter={aksjonspunkter}
-        />
+        {skalViseFordeling && (
+          <FordelingForm
+            intl={intl}
+            submitEnabled={submitEnabled}
+            submittable={submittable}
+            readOnly={readOnly}
+            submitCallback={submitCallback}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            alleKodeverk={alleKodeverk}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            beregningsgrunnlag={beregningsgrunnlag}
+            behandlingType={behandlingType}
+            aksjonspunkter={aksjonspunkter}
+          />
         )}
       </>
     );
   }
 }
 
-export default FordelBeregningsgrunnlagPanel;
+export default injectIntl(FordelBeregningsgrunnlagPanel);
