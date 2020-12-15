@@ -16,7 +16,7 @@ describe('<VurderBesteberegning>', () => {
 
   it('skal validere om ikkje vurdert', () => {
     const error = VurderBesteberegningForm.validate({}, [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING]);
-    expect(error[besteberegningField][0].id).to.equal(isRequiredMessage()[0].id);
+    expect(error[besteberegningField]).to.equal(isRequiredMessage());
   });
 
   it('skal bygge initial values', () => {

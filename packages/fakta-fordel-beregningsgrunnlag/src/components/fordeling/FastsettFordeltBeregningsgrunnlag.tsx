@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
+import { IntlShape } from 'react-intl';
+
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import {
   BeregningsgrunnlagPeriodeProp,
@@ -7,6 +9,7 @@ import {
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+
 import FordelBeregningsgrunnlagForm from './FordelBeregningsgrunnlagForm';
 
 type OwnProps = {
@@ -22,7 +25,8 @@ type OwnProps = {
 interface StaticFunctions {
   buildInitialValues: (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bg: Beregningsgrunnlag, getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
   transformValues: (values: any, fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bgPerioder: BeregningsgrunnlagPeriodeProp[]) => any;
-  validate: (values: any,
+  validate: (intl: IntlShape,
+             values: any,
              fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
              beregningsgrunnlag: Beregningsgrunnlag,
              getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
@@ -53,9 +57,9 @@ FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues = (fordelBGPerioder, bg
 FastsettFordeltBeregningsgrunnlagImpl.transformValues = (values, fordelBGPerioder, bgPerioder) => FordelBeregningsgrunnlagForm.transformValues(values,
   fordelBGPerioder, bgPerioder);
 
-FastsettFordeltBeregningsgrunnlagImpl.validate = (values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn) => (
+FastsettFordeltBeregningsgrunnlagImpl.validate = (intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn) => (
   FordelBeregningsgrunnlagForm
-    .validate(values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn));
+    .validate(intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn));
 
 const emptyArray = [];
 

@@ -23,8 +23,8 @@ describe('<PermisjonOppholdPanel>', () => {
     const errorsWithValidDates = PermisjonOppholdPanel.validate([getPeriodDaysFromToday(-10, -5), getPeriodDaysFromToday(-20, -15)]);
 
     expect(errorsWithInvalidDates).to.be.an('array');
-    expect(errorsWithInvalidDates[0].periodeFom).to.be.an('array').that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[0].periodeTom).to.be.an('array').that.eql(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeFom).that.eql(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeTom).that.eql(invalidDateMessage());
     expect(errorsWithInvalidDates[1]).to.not.exist;
 
     expect(errorsWithValidDates).to.not.exist;
@@ -36,7 +36,7 @@ describe('<PermisjonOppholdPanel>', () => {
 
     expect(errorsWithInvalidDates).to.be.an('object');
     // eslint-disable-next-line no-underscore-dangle
-    expect(errorsWithInvalidDates._error).to.be.an('array').that.eql(dateRangesOverlappingMessage());
+    expect(errorsWithInvalidDates._error).that.eql(dateRangesOverlappingMessage());
 
     expect(errorsWithValidDates).to.not.exist;
   });

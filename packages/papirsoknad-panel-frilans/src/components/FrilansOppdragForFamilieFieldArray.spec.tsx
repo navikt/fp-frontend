@@ -81,11 +81,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
     expect(res).is.eql([{
-      tomDato: [{
-        id: 'ValidationMessage.DateNotAfterOrEqual',
-      }, {
-        limit: '10.10.2018',
-      }],
+      tomDato: 'Dato må være etter eller lik 10.10.2018',
     }]);
   });
 

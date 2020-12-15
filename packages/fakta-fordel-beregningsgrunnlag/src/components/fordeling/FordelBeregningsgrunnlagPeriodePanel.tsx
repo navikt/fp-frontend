@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FieldArray } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import classnames from 'classnames/bind';
 import { Element } from 'nav-frontend-typografi';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
@@ -63,7 +63,8 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  validate: (values: any,
+  validate: (intl: IntlShape,
+             values: any,
              sumIPeriode: number,
              skalValidereMotBeregningsgrunnlagPrAar: (andel: BeregningsgrunnlagAndel) => boolean,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
@@ -123,9 +124,9 @@ FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
   tom: null,
 };
 
-FordelBeregningsgrunnlagPeriodePanel.validate = (values, sumIPeriode, skalValidereMotRapportert,
+FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode, skalValidereMotRapportert,
   getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon) => RenderFordelBGFieldArrayImpl
-  .validate(values, sumIPeriode, skalValidereMotRapportert, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
+  .validate(intl, values, sumIPeriode, skalValidereMotRapportert, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
 
 const finnRiktigAndel = (andel, bgPeriode) => bgPeriode.beregningsgrunnlagPrStatusOgAndel.find((a) => a.andelsnr === andel.andelsnr);
 

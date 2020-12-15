@@ -117,7 +117,7 @@ export const hasBehandlingFormErrorsOfType = (
       return Object.keys(errors)
         .some((errorKey) => {
           const value = traverseAndFindValue({ [errorKey]: errors[errorKey] }, idParts);
-          return Array.isArray(value) ? value.some((eo) => eo && eo === errorMsg) : false;
+          return value === errorMsg;
         });
     });
   },

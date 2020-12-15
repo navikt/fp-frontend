@@ -1,7 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
@@ -11,7 +10,6 @@ import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/typ
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import { OmsorgOgForeldreansvarInfoPanelImpl } from './OmsorgOgForeldreansvarInfoPanel';
-import * as useIntl from '../useIntl';
 
 describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   const relatertYtelseTypeListe = Object.values(relatertYtelseType).map((type) => ({
@@ -20,18 +18,10 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
     navn: '',
   }));
 
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   it('skal vise faktapanel og form for omsorgsvilkåret', () => {
     const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
+      intl={intlMock}
       initialValues={{ begrunnelse: 'test' }}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
@@ -50,6 +40,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -64,6 +55,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   it('skal vise readonly form', () => {
     const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
+      intl={intlMock}
       initialValues={{ begrunnelse: 'test' }}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
@@ -82,6 +74,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -91,6 +84,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   it('skal vise readonly submit-knapp når det ikke er åpne aksjonspunkter', () => {
     const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
+      intl={intlMock}
       initialValues={{ begrunnelse: 'test' }}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter={false}
@@ -109,6 +103,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
     />);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
@@ -118,6 +113,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
   it('skal gi foreldreansvar lik true når aksjonspunkt er foreldreansvar', () => {
     const wrapper = shallow(<OmsorgOgForeldreansvarInfoPanelImpl
       {...reduxFormPropsMock}
+      intl={intlMock}
       initialValues={{ begrunnelse: 'test' }}
       erAksjonspunktForeldreansvar
       hasOpenAksjonspunkter={false}
@@ -136,6 +132,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
     />);
     const omsorgOgForeldreAnsvarFaktaForm = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).is.true;

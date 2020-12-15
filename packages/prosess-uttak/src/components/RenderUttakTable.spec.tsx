@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-proses-uttak';
 import RenderUttakTable from './RenderUttakTable';
 
 const uttakFields1 = [
@@ -42,7 +43,8 @@ const arbeidsgiverOpplysningerPerId = {
 describe('<RenderUttakTable>', () => {
   it('render uttakstable 1 rad', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields1);
-    const wrapper = shallow(<RenderUttakTable
+    const wrapper = shallow(<RenderUttakTable.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       fields={fields}
       periodeTyper={[]}
@@ -61,7 +63,8 @@ describe('<RenderUttakTable>', () => {
   });
   it('render uttakstable 2 rader', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields2);
-    const wrapper = shallow(<RenderUttakTable
+    const wrapper = shallow(<RenderUttakTable.WrappedComponent
+      intl={intlMock}
       readOnly={false}
       fields={fields}
       periodeTyper={[]}

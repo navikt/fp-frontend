@@ -29,7 +29,7 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithoutFornavn = validate({});
         const errorsWithFornavn = validate({ fornavn: 'Ola' });
 
-        expect(errorsWithoutFornavn.fornavn).to.be.an('array');
+        expect(errorsWithoutFornavn.fornavn).to.eql('Feltet må fylles ut');
         expect(errorsWithFornavn.fornavn).to.not.exist;
       });
 
@@ -37,7 +37,7 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithoutEtternavn = validate({});
         const errorsWithEtternavn = validate({ etternavn: 'Ola' });
 
-        expect(errorsWithoutEtternavn.etternavn).to.be.an('array');
+        expect(errorsWithoutEtternavn.etternavn).to.eql('Feltet må fylles ut');
         expect(errorsWithEtternavn.etternavn).to.not.exist;
       });
 
@@ -49,8 +49,8 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithInvalidFoedselsnummer = validate({ foedselsnummer: 'Ola' });
         const errorsWithValidFoedselsnummer = validate({ foedselsnummer: '08057949997' });
 
-        expect(errorsWithNoFoedselsnummer.foedselsnummer).to.be.an('array');
-        expect(errorsWithInvalidFoedselsnummer.foedselsnummer).to.be.an('array');
+        expect(errorsWithNoFoedselsnummer.foedselsnummer).to.eql('Feltet må fylles ut');
+        expect(errorsWithInvalidFoedselsnummer.foedselsnummer).to.eql('Feltet må være et fødselsnummer (11 siffer)');
         expect(errorsWithValidFoedselsnummer.foedselsnummer).to.not.exist;
       });
     });
@@ -63,7 +63,7 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithNoArsak = validateBegrunnelse({});
         const errorsWithArsak = validateBegrunnelse({ arsak: 'En årsak' });
 
-        expect(errorsWithNoArsak.kanIkkeOppgiBegrunnelse.arsak).to.be.an('array');
+        expect(errorsWithNoArsak.kanIkkeOppgiBegrunnelse.arsak).to.eql('Feltet må fylles ut');
         expect(errorsWithArsak.kanIkkeOppgiBegrunnelse.arsak).to.not.exist;
       });
     });
