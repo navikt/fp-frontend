@@ -41,6 +41,7 @@ const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps & StandardFak
 }) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgForeldreansvarInfoPanel
+      intl={intl}
       behandlingId={behandling.id}
       behandlingVersjon={behandling.versjon}
       gjeldendeFamiliehendelse={familiehendelse.gjeldende}

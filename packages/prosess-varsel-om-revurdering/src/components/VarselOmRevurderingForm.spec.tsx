@@ -42,7 +42,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       previewCallback={sinon.spy()}
       dispatchSubmitFailed={sinon.spy()}
       erAutomatiskRevurdering
-      languageCode="NN"
+      language="Nynorsk"
       readOnly={false}
       sendVarsel
       aksjonspunktStatus="OPPR"
@@ -80,7 +80,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       previewCallback={sinon.spy()}
       dispatchSubmitFailed={sinon.spy()}
       erAutomatiskRevurdering={false}
-      languageCode="NN"
+      language="Nynorsk"
       readOnly={false}
       sendVarsel
       aksjonspunktStatus="OPPR"
@@ -123,7 +123,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       previewCallback={sinon.spy()}
       dispatchSubmitFailed={sinon.spy()}
       erAutomatiskRevurdering={false}
-      languageCode="NN"
+      language="Nynorsk"
       readOnly={false}
       sendVarsel={false}
       aksjonspunktStatus="OPPR"
@@ -165,7 +165,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       previewCallback={sinon.spy()}
       dispatchSubmitFailed={sinon.spy()}
       erAutomatiskRevurdering={false}
-      languageCode="NN"
+      language="Nynorsk"
       readOnly={false}
       sendVarsel={false}
       aksjonspunktStatus="UTFRT"

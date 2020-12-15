@@ -12,6 +12,7 @@ import { PersonArbeidsforholdDetailForm } from './PersonArbeidsforholdDetailForm
 import LeggTilArbeidsforholdFelter from './LeggTilArbeidsforholdFelter';
 import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
+import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 
 describe('<PersonArbeidsforholdDetailForm>', () => {
   const arbeidsgiverOpplysningerPerId = {
@@ -41,6 +42,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise tekstfelt for begrunnelse når form ikke er dirty og begrunnelse ikke har verdi', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -61,6 +63,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find(TextAreaField)).has.length(0);
@@ -68,6 +71,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal vise panel for å velge nytt eller erstatte når behandling er i bruk og en har gamle arbeidsforhold for samme org', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -88,6 +92,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
@@ -96,6 +101,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise panel for å velge nytt eller erstatte når behandling ikke er i bruk', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -116,6 +122,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
@@ -124,6 +131,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise panel for å velge nytt eller erstatte når behandling ikke har gamle arbeidsforhold for samme org', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -144,6 +152,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
@@ -152,6 +161,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal vise tekst for å erstatte alle tidligere arbeidsforhold når behandling er i bruk og flagget harErstattetEttEllerFlere er satt', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -172,6 +182,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
@@ -180,6 +191,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise tekst for å erstatte alle tidligere arbeidsforhold når behandling ikke er i bruk', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -200,6 +212,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
@@ -208,6 +221,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise tekst for å erstatte alle tidligere arbeidsforhold når flagget harErstattetEttEllerFlere ikke er satt', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -228,6 +242,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
@@ -235,6 +250,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal vise LeggTilArbeidsforholdFelter ', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -255,6 +271,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
@@ -263,6 +280,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise LeggTilArbeidsforholdFelter ', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       isErstattArbeidsforhold
@@ -283,6 +301,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
@@ -291,6 +310,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
   it('skal ikke vise tekst for å erstatte alle tidligere arbeidsforhold eller NyttEllerErstattPanel når handlingen er undefined', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
+      intl={intlMock}
       cancelArbeidsforhold={sinon.spy()}
       arbeidsforholdHandlingVerdi={undefined}
       isErstattArbeidsforhold
@@ -311,6 +331,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { isRequiredMessage, merEn100ProsentMessage } from '@fpsak-frontend/utils';
 import { getBehandlingFormPrefix, getBehandlingFormRegisteredFields, hasBehandlingFormErrorsOfType } from './behandlingForm';
 
 describe('behandlingForm', () => {
@@ -37,9 +37,7 @@ describe('behandlingForm', () => {
       },
     };
     const errors = {
-      antallBarn: [{
-        id: 'ValidationMessage.NotEmpty',
-      }],
+      antallBarn: isRequiredMessage(),
     };
 
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
@@ -57,9 +55,7 @@ describe('behandlingForm', () => {
       },
     };
     const errors = {
-      antallBarn: [{
-        id: 'ValidationMessage.AnnenFeil',
-      }],
+      antallBarn: merEn100ProsentMessage(),
     };
 
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
@@ -77,9 +73,7 @@ describe('behandlingForm', () => {
       },
     };
     const errors = {
-      antallBarn: [{
-        id: 'ValidationMessage.NotEmpty',
-      }],
+      antallBarn: isRequiredMessage(),
     };
 
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
@@ -100,8 +94,7 @@ describe('behandlingForm', () => {
 
     const errors = {
       medlemskapManuellVurderingType: {
-        kode: [{ id: 'ValidationMessage.NotEmpty' },
-        ],
+        kode: isRequiredMessage(),
       },
     };
 
@@ -123,8 +116,7 @@ describe('behandlingForm', () => {
 
     const errors = {
       fordelingTYPeriode0: [{
-        andel: [{ id: 'ValidationMessage.NotEmpty' },
-        ],
+        andel: isRequiredMessage(),
       }],
     };
 

@@ -52,9 +52,8 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
     const errorsWithValidDates = RenderAndreYtelserPerioderFieldArray.validate([getPeriodDaysFromToday(-10, -5),
       getPeriodDaysFromToday(-20, -15)]);
 
-    expect(errorsWithInvalidDates).to.be.an('array');
-    expect(errorsWithInvalidDates[0].periodeFom).to.be.an('array').that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[0].periodeTom).to.be.an('array').that.eql(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeFom).that.eql(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeTom).that.eql(invalidDateMessage());
     expect(errorsWithInvalidDates[1]).to.not.exist;
 
     expect(errorsWithValidDates).to.not.exist;
@@ -66,8 +65,6 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
     const ytelse = 'LONN_UTDANNING';
 
     const errorsWithInvalidDates = RenderAndreYtelserPerioderFieldArray.transformValues(values, ytelse);
-
-    expect(errorsWithInvalidDates).to.be.an('array');
 
     expect(errorsWithInvalidDates[0].ytelseType).to.be.equal('LONN_UTDANNING');
     expect(errorsWithInvalidDates[0].periodeFom).to.be.equal('abc');

@@ -48,7 +48,7 @@ describe('<OppholdINorgePanel>', () => {
       const errorsWithOppholdINorgeTrue = OppholdINorgePanel.validate({ oppholdINorge: true });
       const errorsWithOppholdINorgeFalse = OppholdINorgePanel.validate({ oppholdINorge: false });
 
-      expect(errorsWithUndefinedOppholdINorge.oppholdINorge).to.be.an('array').that.eql(isRequiredMessage());
+      expect(errorsWithUndefinedOppholdINorge.oppholdINorge).that.eql(isRequiredMessage());
       expect(errorsWithOppholdINorgeTrue.oppholdINorge).to.not.exist;
       expect(errorsWithOppholdINorgeFalse.oppholdINorge).to.not.exist;
     });
@@ -58,7 +58,7 @@ describe('<OppholdINorgePanel>', () => {
       const errorsWithHarTidligereOppholdUtenlandsTrue = OppholdINorgePanel.validate({ harTidligereOppholdUtenlands: true });
       const errorsWithHarTidligereOppholdUtenlandsFalse = OppholdINorgePanel.validate({ harTidligereOppholdUtenlands: false });
 
-      expect(errorsWithUndefinedHarTidligereOppholdUtenlands.harTidligereOppholdUtenlands).to.be.an('array').that.eql(isRequiredMessage());
+      expect(errorsWithUndefinedHarTidligereOppholdUtenlands.harTidligereOppholdUtenlands).that.eql(isRequiredMessage());
       expect(errorsWithHarTidligereOppholdUtenlandsTrue.harTidligereOppholdUtenlands).to.not.exist;
       expect(errorsWithHarTidligereOppholdUtenlandsFalse.harTidligereOppholdUtenlands).to.not.exist;
     });
@@ -68,7 +68,7 @@ describe('<OppholdINorgePanel>', () => {
       const errorsWithHarFremtidigeOppholdUtenlandsTrue = OppholdINorgePanel.validate({ harFremtidigeOppholdUtenlands: true });
       const errorsWithHarFremtidigeOppholdUtenlandsFalse = OppholdINorgePanel.validate({ harFremtidigeOppholdUtenlands: false });
 
-      expect(errorsWithUndefinedHarFremtidigeOppholdUtenlands.harFremtidigeOppholdUtenlands).to.be.an('array').that.eql(isRequiredMessage());
+      expect(errorsWithUndefinedHarFremtidigeOppholdUtenlands.harFremtidigeOppholdUtenlands).that.eql(isRequiredMessage());
       expect(errorsWithHarFremtidigeOppholdUtenlandsTrue.harFremtidigeOppholdUtenlands).to.not.exist;
       expect(errorsWithHarFremtidigeOppholdUtenlandsFalse.harFremtidigeOppholdUtenlands).to.not.exist;
     });
@@ -94,9 +94,9 @@ describe('<OppholdINorgePanel>', () => {
           ],
         });
 
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).to.be.an('array');
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeFom).to.be.an('array').that.eql(invalidDateMessage());
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeTom).to.be.an('array').that.eql(invalidDateMessage());
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands);
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeFom).that.eql(invalidDateMessage());
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeTom).that.eql(invalidDateMessage());
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1]).to.not.exist;
 
         expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
@@ -115,10 +115,9 @@ describe('<OppholdINorgePanel>', () => {
           ],
         });
 
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).to.be.an('array');
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands);
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeFom).to.not.exist;
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.be.an('array');
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom[0].id).to.eql(dateNotBeforeOrEqualMessage('2020.01.01')[0].id);
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.eql(dateNotBeforeOrEqualMessage('15.12.2020'));
 
         expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
       });
@@ -135,7 +134,7 @@ describe('<OppholdINorgePanel>', () => {
 
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands).to.be.an('object');
         // eslint-disable-next-line no-underscore-dangle
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands._error).to.be.an('array').that.eql(dateRangesOverlappingMessage());
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands._error).that.eql(dateRangesOverlappingMessage());
 
         expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
       });
@@ -155,9 +154,9 @@ describe('<OppholdINorgePanel>', () => {
           ],
         });
 
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('array');
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.be.an('array').that.eql(invalidDateMessage());
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).to.be.an('array').that.eql(invalidDateMessage());
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands);
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).that.eql(invalidDateMessage());
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).that.eql(invalidDateMessage());
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[1]).to.not.exist;
 
         expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
@@ -180,10 +179,9 @@ describe('<OppholdINorgePanel>', () => {
           mottattDato: '2019-01-01',
         });
 
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('array');
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands);
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).to.not.exist;
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.be.an('array');
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom[0].id).to.eql(dateNotAfterOrEqualMessage('2020.01.01')[0].id);
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.eql(dateNotAfterOrEqualMessage('01.02.2019'));
 
         expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
       });
@@ -200,7 +198,7 @@ describe('<OppholdINorgePanel>', () => {
 
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('object');
         // eslint-disable-next-line no-underscore-dangle
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands._error).to.be.an('array').that.eql(dateRangesOverlappingMessage());
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands._error).that.eql(dateRangesOverlappingMessage());
 
         expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
       });

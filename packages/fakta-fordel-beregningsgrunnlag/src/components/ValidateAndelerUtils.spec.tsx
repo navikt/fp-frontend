@@ -1,5 +1,8 @@
 import { expect } from 'chai';
+
 import { isRequiredMessage } from '@fpsak-frontend/utils';
+
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
 import {
   compareAndeler,
   kanIkkjeHaNullBeregningsgrunnlagError,
@@ -654,8 +657,8 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
-    expect(fastsattError[0].id).to.equal(isRequiredMessage()[0].id);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    expect(fastsattError).to.equal(isRequiredMessage());
   });
 
   it('skal returnere error om det er satt 0 i beregningsgrunnlag for andel med gradering og arbeidsforhold ikke opphørt', () => {
@@ -669,8 +672,8 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
-    expect(fastsattError[0].id).to.equal(kanIkkjeHaNullBeregningsgrunnlagError()[0].id);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    expect(fastsattError).to.equal(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
   });
 
   it('skal returnere error om det er satt 0 i beregningsgrunnlag for andel med gradering i deler av perioden og arbeidsforhold ikke opphørt', () => {
@@ -684,8 +687,8 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
-    expect(fastsattError[0].id).to.equal(kanIkkjeHaNullBeregningsgrunnlagError()[0].id);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    expect(fastsattError).to.equal(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
   });
 
   it('skal ikkje returnere error om det er satt 0 i beregningsgrunnlag for andel med uten gradering og arbeidsforhold ikke opphørt', () => {
@@ -699,7 +702,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2015-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
     expect(fastsattError).to.equal(null);
   });
 
@@ -709,7 +712,7 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '0',
       andelIArbeid: '',
     };
-    const fastsattError = validateFastsattBelop(andelValue, null);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue, null);
     expect(fastsattError).to.equal(null);
   });
 
@@ -724,7 +727,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
     expect(fastsattError).to.equal(null);
   });
 });

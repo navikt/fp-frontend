@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import moment from 'moment';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '../formats';
-import { FormValidationError } from './messages';
+import { ISO_DATE_FORMAT } from '../formats';
 import {
   dateAfterOrEqual,
   dateAfterOrEqualToToday,
@@ -33,20 +32,17 @@ import {
 
 const today = moment();
 const todayAsISO = today.format(ISO_DATE_FORMAT);
-const todayAsDDMMYYYY = today.format(DDMMYYYY_DATE_FORMAT);
 
 describe('Validators', () => {
   describe('required', () => {
     it('skal gi feilmelding når verdi er lik null', () => {
       const result = required(null);
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.NotEmpty' });
+      expect(result).is.eql('Feltet må fylles ut');
     });
 
     it('skal gi feilmelding når verdi er lik undefined', () => {
       const result = required(undefined);
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.NotEmpty' });
+      expect(result).is.eql('Feltet må fylles ut');
     });
 
     it('skal ikke gi feilmelding når verdi er ulik null og undefined', () => {
@@ -63,14 +59,12 @@ describe('Validators', () => {
 
     it('skal gi feilmelding når formverdier er endret og verdi er null', () => {
       const result = requiredIfNotPristine(null, null, { pristine: false });
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.NotEmpty' });
+      expect(result).is.eql('Feltet må fylles ut');
     });
 
     it('skal gi feilmelding når formverdier er endret og verdi er undefined', () => {
       const result = requiredIfNotPristine(undefined, null, { pristine: false });
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.NotEmpty' });
+      expect(result).is.eql('Feltet må fylles ut');
     });
 
     it('skal ikke gi feilmelding når formverdier er endret men verdi er ulik null og undefined', () => {
@@ -89,14 +83,12 @@ describe('Validators', () => {
 
     it('skal gi feilmelding når formverdier er endret og verdi er null', () => {
       const result = requiredIfCustomFunctionIsTrue(isRequiredFunc)(null, null, { pristine: false });
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.NotEmpty' });
+      expect(result).is.eql('Feltet må fylles ut');
     });
 
     it('skal gi feilmelding når formverdier er endret og verdi er undefined', () => {
       const result = requiredIfCustomFunctionIsTrue(isRequiredFunc)(undefined, null, { pristine: false });
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.NotEmpty' });
+      expect(result).is.eql('Feltet må fylles ut');
     });
 
     it('skal ikke gi feilmelding når formverdier er endret men verdi er ulik null og undefined', () => {
@@ -109,9 +101,7 @@ describe('Validators', () => {
     it('skal feile når verdi er mindre enn minimum lengde', () => {
       const minLength2 = minLength(2);
       const result = minLength2('e');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.MinLength' });
-      expect(result[1]).is.eql({ length: 2 });
+      expect(result).is.eql('Du må skrive minst 2 tegn');
     });
 
     it('skal ikke feile når verdi er større eller lik minimum lengde', () => {
@@ -125,9 +115,7 @@ describe('Validators', () => {
     it('skal feile når verdi er større enn maksimum lengde', () => {
       const maxLength2 = maxLength(2);
       const result = maxLength2('ert');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.MaxLength' });
-      expect(result[1]).is.eql({ length: 2 });
+      expect(result).is.eql('Du kan skrive maksimalt 2 tegn');
     });
 
     it('skal ikke feile når verdi er mindre eller lik minimum lengde', () => {
@@ -141,9 +129,7 @@ describe('Validators', () => {
     it('skal feile når verdi er mindre enn 2', () => {
       const minValue2 = minValue(2);
       const result = minValue2(1);
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.MinValue' });
-      expect(result[1]).is.eql({ length: 2 });
+      expect(result).is.eql('Feltet må være større eller lik 2');
     });
 
     it('skal ikke feile når verdi er større eller lik 2', () => {
@@ -157,9 +143,7 @@ describe('Validators', () => {
     it('skal feile når verdi er større enn 2', () => {
       const maxValue2 = maxValue(2);
       const result = maxValue2(3);
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.MaxValue' });
-      expect(result[1]).is.eql({ length: 2 });
+      expect(result).is.eql('Feltet må være mindre eller lik 2');
     });
 
     it('skal ikke feile når verdi er mindre eller lik 2', () => {
@@ -177,16 +161,12 @@ describe('Validators', () => {
 
     it('skal feile når tallet er et desimaltall', () => {
       const result = hasValidInteger(2.2);
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidInteger' });
-      expect(result[1]).is.eql({ text: '2.2' });
+      expect(result).is.eql('Tallet kan ikke ha desimaler');
     });
 
     it('skal feile når input ikke er et gyldig tall', () => {
       const result = hasValidInteger('test');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidNumber' });
-      expect(result[1]).is.eql({ text: 'test' });
+      expect(result).is.eql('Feltet kan kun inneholde tall');
     });
   });
 
@@ -198,36 +178,29 @@ describe('Validators', () => {
 
     it('skal feile når tallet har mer enn to desimaler', () => {
       const result = hasValidDecimal(2.233);
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDecimal' });
-      expect(result[1]).is.eql({ text: '2.233' });
+      expect(result).is.eql('Tallet kan ikke inneholde mer enn to desimaler');
     });
 
     it('skal feile når input ikke er et gyldig tall', () => {
       const result = hasValidDecimal('test');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidNumber' });
-      expect(result[1]).is.eql({ text: 'test' });
+      expect(result).is.eql('Feltet kan kun inneholde tall');
     });
   });
 
   describe('hasValidDate', () => {
     it('skal feile når dag i dato er utenfor lovlig område', () => {
       const result = hasValidDate('2017-10-40');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDate' });
+      expect(result).is.eql('Dato må skrives slik : dd.mm.åååå');
     });
 
     it('skal feile når måned i dato er utenfor lovlig område', () => {
       const result = hasValidDate('2017-13-20');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDate' });
+      expect(result).is.eql('Dato må skrives slik : dd.mm.åååå');
     });
 
     it('skal feile når dato er på feil format', () => {
       const result = hasValidDate('10.10.2017');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDate' });
+      expect(result).is.eql('Dato må skrives slik : dd.mm.åååå');
     });
 
     it('skal ikke feile når dato er korrekt', () => {
@@ -238,12 +211,6 @@ describe('Validators', () => {
     it('skal ikke feile når dato er tom', () => {
       const result = hasValidDate(undefined);
       expect(result).is.null;
-    });
-
-    it('skal feile når dato er på feil format', () => {
-      const result = hasValidDate('10.10.2017');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDate' });
     });
   });
 
@@ -260,9 +227,7 @@ describe('Validators', () => {
 
     it('skal feile når dato ikke er før eller lik spesifisert dato', () => {
       const result = dateBeforeOrEqual(today)('2100-12-10');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateNotBeforeOrEqual' });
-      expect(result[1]).is.eql({ limit: todayAsDDMMYYYY });
+      expect(result).is.eql('Dato må være før eller lik 15.12.2020');
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -284,9 +249,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er før spesifisert dato', () => {
       const result = dateAfterOrEqual(today)('2000-12-10');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateNotAfterOrEqual' });
-      expect(result[1]).is.eql({ limit: todayAsDDMMYYYY });
+      expect(result).is.eql('Dato må være etter eller lik 15.12.2020');
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -299,8 +262,7 @@ describe('Validators', () => {
     it('skal feile når perioder overlapper', () => {
       const periods = [['2017-10-10', '2017-12-10'], ['2017-01-10', '2017-10-11']];
       const result = dateRangesNotOverlapping(periods);
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateRangesOverlapping' });
+      expect(result).is.eql('Perioder kan ikke overlappe i tid');
     });
 
     it('skal ikke feile når perioder ikke overlapper', () => {
@@ -318,8 +280,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er lik dagens dato', () => {
       const result = dateBeforeToday(todayAsISO);
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateNotBeforeOrEqual' });
+      expect(result).is.eql('Dato må være før eller lik 14.12.2020');
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -341,8 +302,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er etter dagens dato', () => {
       const result = dateBeforeOrEqualToToday('2100-10-10');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateNotBeforeOrEqual' });
+      expect(result).is.eql('Dato må være før eller lik 15.12.2020');
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -359,8 +319,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er i dag', () => {
       const result = dateAfterToday(todayAsISO);
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateNotAfterOrEqual' });
+      expect(result).is.eql('Dato må være etter eller lik 16.12.2020');
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -377,8 +336,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er historisk', () => {
       const result = dateAfterOrEqualToToday('2000-10-10');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.DateNotAfterOrEqual' });
+      expect(result).is.eql('Dato må være etter eller lik 15.12.2020');
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -395,8 +353,7 @@ describe('Validators', () => {
 
     it('skal feile når fødselsnummer-formatet er ugyldig', () => {
       const result = hasValidFodselsnummerFormat('0501851212');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidFodselsnummerFormat' });
+      expect(result).is.eql('Feltet må være et fødselsnummer (11 siffer)');
     });
   });
 
@@ -408,8 +365,7 @@ describe('Validators', () => {
 
     it('skal feile når fødselsnummer er ugyldig', () => {
       const result = hasValidFodselsnummer('0501851212');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidFodselsnummer' });
+      expect(result).is.eql('Ugyldig fødselsnummer');
     });
   });
 
@@ -423,9 +379,7 @@ describe('Validators', () => {
 
     it('skal feile når fødselsnummer har ugyldige tegn', () => {
       const result = hasValidText('Hei {}*');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidText' });
-      expect(result[1]).is.eql({ text: '{}*' });
+      expect(result).is.eql('Feltet inneholder ugyldige tegn: {}*');
     });
   });
 
@@ -439,9 +393,7 @@ describe('Validators', () => {
 
     it('skal feile når navn har ugyldige tegn', () => {
       const result = hasValidName('Navn _*');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidText' });
-      expect(result[1]).is.eql({ text: '_*' });
+      expect(result).is.eql('Feltet inneholder ugyldige tegn: _*');
     });
   });
 
@@ -453,8 +405,7 @@ describe('Validators', () => {
 
     it('skal feile når saksnummer eller fødselsnummer har ugyldig pattern', () => {
       const result = hasValidSaksnummerOrFodselsnummerFormat('0501851212-d');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidSaksnummerOrFodselsnummerFormat' });
+      expect(result).is.eql('Ugyldig saksnummer eller fødselsnummer');
     });
   });
 
@@ -465,14 +416,12 @@ describe('Validators', () => {
 
     it('skal feile når fomDato er på feil format', () => {
       const result = hasValidPeriod('2017-06-0', '2017-06-01');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDatesInPeriod' });
+      expect(result).is.eql('Periode må skrives slik : dd.mm.åååå - dd.mm.åååå');
     });
 
     it('skal feile når tomDato er på feil format', () => {
       const result = hasValidPeriod('2017-06-01', '2017-06-0');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidDatesInPeriod' });
+      expect(result).is.eql('Periode må skrives slik : dd.mm.åååå - dd.mm.åååå');
     });
 
     it('skal ikke feile når fomDato er før tomDato', () => {
@@ -485,8 +434,7 @@ describe('Validators', () => {
 
     it('skal feile når fomDato er etter tomDato', () => {
       const result = hasValidPeriod('2017-06-01', '2017-05-01');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidPeriod' });
+      expect(result).is.eql('Startdato må være før eller lik sluttdato');
     });
   });
 
@@ -501,19 +449,17 @@ describe('Validators', () => {
 
     it('skal feile når fom-dato er utenfor opptjeningsperiode', () => {
       const result = isWithinOpptjeningsperiode(opptjeningFom, opptjeningTom)('2016-02-01', '2017-03-01');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidPeriodRange' });
+      expect(result).is.eql('Periode er utenfor opptjeningsperioden');
     });
 
     it('skal feile når tom-dato er utenfor opptjeningsperiode', () => {
       const result = isWithinOpptjeningsperiode(opptjeningFom, opptjeningTom)('2017-02-01', '2018-03-01');
-      expect(result).has.length(1);
-      expect(result[0]).is.eql({ id: 'ValidationMessage.InvalidPeriodRange' });
+      expect(result).is.eql('Periode er utenfor opptjeningsperioden');
     });
   });
 
   describe('dateIsBefore', () => {
-    const errorMessageFunction = (dato: string) => ([{ id: 'ErrorMsg.Msg' }, { dato }]) as FormValidationError;
+    const errorMessageFunction = (): string => 'Dette er en feilmelding';
     const dateToCheckAgainst = '2019-08-05';
     it('skal ikke feile når input datoene er før datoen som blir sjekket mot', () => {
       const result = dateIsBefore(dateToCheckAgainst, errorMessageFunction)('2019-08-04');
@@ -521,15 +467,11 @@ describe('Validators', () => {
     });
     it('skal feile når input datoene er lik datoen som blir sjekket mot', () => {
       const result = dateIsBefore(dateToCheckAgainst, errorMessageFunction)('2019-08-05');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ErrorMsg.Msg' });
-      expect(result[1]).is.eql({ dato: '05.08.2019' });
+      expect(result).is.eql('Dette er en feilmelding');
     });
     it('skal feile når input datoene er etter datoen som blir sjekket mot', () => {
       const result = dateIsBefore(dateToCheckAgainst, errorMessageFunction)('2019-08-06');
-      expect(result).has.length(2);
-      expect(result[0]).is.eql({ id: 'ErrorMsg.Msg' });
-      expect(result[1]).is.eql({ dato: '05.08.2019' });
+      expect(result).is.eql('Dette er en feilmelding');
     });
   });
 });

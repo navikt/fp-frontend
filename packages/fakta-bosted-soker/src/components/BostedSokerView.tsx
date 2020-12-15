@@ -33,7 +33,7 @@ const getPersonstatus = (personopplysning: Personopplysninger): Kodeverk => (per
 
 interface OwnProps {
   personopplysninger: Personopplysninger;
-  sokerTypeTextId: string;
+  sokerTypeText: string;
   regionTypes: KodeverkMedNavn[];
   sivilstandTypes: KodeverkMedNavn[];
   personstatusTypes: KodeverkMedNavn[];
@@ -42,7 +42,7 @@ interface OwnProps {
 export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   personopplysninger,
-  sokerTypeTextId,
+  sokerTypeText,
   regionTypes,
   sivilstandTypes,
   personstatusTypes,
@@ -50,7 +50,7 @@ export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps
   <div className={styles.defaultBostedSoker}>
     <Row>
       <Column xs="8">
-        <Undertekst><FormattedMessage id={sokerTypeTextId} /></Undertekst>
+        <Undertekst>{sokerTypeText}</Undertekst>
         <Element>{personopplysninger.navn ? personopplysninger.navn : '-'}</Element>
         <Normaltekst className={styles.paddingBottom}>
           {getAdresse(personopplysninger.adresser)}

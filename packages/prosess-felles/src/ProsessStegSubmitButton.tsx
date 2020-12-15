@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck, FormValidationError, isRequiredMessage } from '@fpsak-frontend/utils';
+import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 
 import getPackageIntl from '../i18n/getPackageIntl';
 
@@ -21,7 +21,7 @@ interface PureOwnProps {
   isDirty?: boolean;
   isBehandlingFormSubmitting: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
   isBehandlingFormDirty: (formName: string, behandlingId: number, behandlingVersjon: number) => (state: any) => boolean;
-  hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: FormValidationError) => (state: any) => boolean;
+  hasBehandlingFormErrorsOfType: (formName: string, behandlingId: number, behandlingVersjon: number, message: string) => (state: any) => boolean;
   isReadOnly: boolean;
   isSubmittable: boolean;
   text?: string;

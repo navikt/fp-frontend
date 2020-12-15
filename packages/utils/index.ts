@@ -40,7 +40,7 @@ export {
 export { default as guid } from './src/guid';
 export {
   replaceNorwegianCharacters,
-  getLanguageCodeFromSprakkode,
+  getLanguageFromSprakkode,
 } from './src/languageUtils';
 export {
   notNull,
@@ -118,6 +118,5 @@ export {
   merEn100ProsentMessage,
   arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
 } from './src/validation/messages';
-export type { FormValidationError } from './src/validation/messages';
 
 export { getKodeverknavnFn } from './src/kodeverkUtils';

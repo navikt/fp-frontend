@@ -1,8 +1,10 @@
 import React from 'react';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
+
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
-import { shallow } from 'enzyme';
+
 import {
   FordelBeregningsgrunnlagForm,
   getFieldNameKey,
@@ -12,6 +14,7 @@ import {
   transformPerioder,
 } from './FordelBeregningsgrunnlagForm';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
+import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
 
 const getKodeverknavn = (kodeverk) => (kodeverk.kode === 'A' ? 'Arbeidstaker' : '');
 
@@ -194,7 +197,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const values = {};
     values[getFieldNameKey(0)] = initialValues[fieldName1];
     values[getFieldNameKey(1)] = initialValues[fieldName2];
-    const errors = FordelBeregningsgrunnlagForm.validate(values, perioder, bg, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, perioder, bg, getKodeverknavn);
     expect(errors[getFieldNameKey(0)]).to.equal(null);
     expect(errors[getFieldNameKey(1)]).to.not.be.empty;
   });
@@ -490,7 +493,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const values = {};
     const fordelBGPerioder = [];
     const beregningsgrunnlag = {};
-    const errors = FordelBeregningsgrunnlagForm.validate(values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
     expect(errors).to.be.empty;
   });
 
@@ -505,7 +508,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
     };
-    const errors = FordelBeregningsgrunnlagForm.validate(values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
     expect(errors[getFieldNameKey(0)]).to.not.be.empty;
   });
 
@@ -526,7 +529,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
     };
-    const errors = FordelBeregningsgrunnlagForm.validate(values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
     expect(errors[getFieldNameKey(0)]).to.not.be.empty;
     expect(errors[getFieldNameKey(1)]).to.not.be.empty;
   });

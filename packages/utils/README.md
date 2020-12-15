@@ -38,7 +38,7 @@ yarn add @fpsak-frontend/utils
 ### ACCEPTED_DATE_INPUT_FORMATS
 ### guid
 ### replaceNorwegianCharacters
-### getLanguageCodeFromSprakkode
+### getLanguageFromSprakkode
 ### notNull
 ### isObjectEmpty
 ### arrayToObject

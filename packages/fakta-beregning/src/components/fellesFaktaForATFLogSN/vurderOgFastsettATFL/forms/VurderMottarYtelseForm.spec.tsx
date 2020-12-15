@@ -18,7 +18,7 @@ import VurderMottarYtelseForm, {
 import { finnFrilansFieldName, utledArbeidsforholdFieldName } from './VurderMottarYtelseUtils';
 import { InntektTransformed } from '../../andelFieldValueTs';
 
-const requiredMessageId = isRequiredMessage()[0].id;
+const requiredMessage = isRequiredMessage();
 
 const beregningsgrunnlag = {
   beregningsgrunnlagPeriode: [{
@@ -157,10 +157,10 @@ describe('<VurderMottarYtelseForm>', () => {
     values[utledArbeidsforholdFieldName(andel2)] = null;
     values[utledArbeidsforholdFieldName(andel3)] = null;
     const errors = VurderMottarYtelseForm.validate(values, mottarYtelse);
-    expect(errors[finnFrilansFieldName()][0].id).to.equal(requiredMessageId);
-    expect(errors[utledArbeidsforholdFieldName(andel)][0].id).to.equal(requiredMessageId);
-    expect(errors[utledArbeidsforholdFieldName(andel2)][0].id).to.equal(requiredMessageId);
-    expect(errors[utledArbeidsforholdFieldName(andel3)][0].id).to.equal(requiredMessageId);
+    expect(errors[finnFrilansFieldName()]).to.equal(requiredMessage);
+    expect(errors[utledArbeidsforholdFieldName(andel)]).to.equal(requiredMessage);
+    expect(errors[utledArbeidsforholdFieldName(andel2)]).to.equal(requiredMessage);
+    expect(errors[utledArbeidsforholdFieldName(andel3)]).to.equal(requiredMessage);
   });
 
   it('skal vise radioknapp for frilans uten andre frilanstilfeller', () => {

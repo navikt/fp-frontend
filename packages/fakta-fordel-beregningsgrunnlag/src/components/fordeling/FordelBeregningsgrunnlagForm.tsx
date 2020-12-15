@@ -7,6 +7,7 @@ import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
+import { IntlShape } from 'react-intl';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 import { skalValidereMotBeregningsgrunnlag } from '../BgFordelingUtils';
 
@@ -145,10 +146,13 @@ interface OwnState {
  */
 
 export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> {
-  static validate = (values: any,
+  static validate = (
+    intl: IntlShape,
+    values: any,
     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     beregningsgrunnlag: Beregningsgrunnlag,
-    getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+    getKodeverknavn: (kodeverk: Kodeverk) => string,
+  ) => {
     const errors = {};
     if (fordelBGPerioder && fordelBGPerioder.length > 0) {
       const skalValidereMotBeregningsgrunnlagPrAar = (andel) => skalValidereMotBeregningsgrunnlag(beregningsgrunnlag)(andel);
@@ -160,7 +164,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
         const fordelPeriode = perioderSlattSammen[i];
         const skalValidereRefusjon = fordelPeriode && fordelPeriode.skalKunneEndreRefusjon;
         const periodeDato = { fom: fordelPeriode, tom: fordelPeriode };
-        errors[getFieldNameKey(i)] = FordelBeregningsgrunnlagPeriodePanel.validate(periode, sumIPeriode,
+        errors[getFieldNameKey(i)] = FordelBeregningsgrunnlagPeriodePanel.validate(intl, periode, sumIPeriode,
           skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
       }
     }

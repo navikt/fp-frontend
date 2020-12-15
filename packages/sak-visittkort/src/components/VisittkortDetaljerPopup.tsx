@@ -10,7 +10,7 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import {
-  getKodeverknavnFn, getLanguageCodeFromSprakkode, getAddresses, Adresser,
+  getKodeverknavnFn, getLanguageFromSprakkode, getAddresses, Adresser,
 } from '@fpsak-frontend/utils';
 
 import styles from './visittkortDetaljerPopup.less';
@@ -100,7 +100,7 @@ const VisittkortDetaljerPopup: FunctionComponent<OwnProps & WrappedComponentProp
                 className={styles.etikett}
                 typo="undertekst"
               >
-                <FormattedMessage id={getLanguageCodeFromSprakkode(sprakkode)} />
+                {getLanguageFromSprakkode(sprakkode)}
               </EtikettInfo>
             </Tooltip>
           </FlexColumn>

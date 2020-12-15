@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { BaseFieldProps, Field } from 'redux-form';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Textarea as NavTextarea, TextareaProps } from 'nav-frontend-skjema';
 import EtikettFokus from 'nav-frontend-etiketter';
 
@@ -13,7 +13,7 @@ import styles from './textAreaField.less';
 type BadgesType = 'suksess' | 'info' | 'advarsel' | 'fokus';
 
 interface Badges {
-  textId: string;
+  text: string;
   type: BadgesType;
   title: string;
 }
@@ -32,9 +32,9 @@ const TextAreaWithBadge: FunctionComponent<TextAreaWithBadgeProps & WrappedCompo
   <div className={badges ? styles.textAreaFieldWithBadges : null}>
     { badges && (
       <div className={styles.etikettWrapper}>
-        { badges.map(({ textId, type, title }) => (
-          <EtikettFokus key={textId} type={type} title={intl.formatMessage({ id: title })}>
-            <FormattedMessage id={textId} />
+        { badges.map(({ text, type, title }) => (
+          <EtikettFokus key={text} type={type} title={intl.formatMessage({ id: title })}>
+            {text}
           </EtikettFokus>
         ))}
       </div>
