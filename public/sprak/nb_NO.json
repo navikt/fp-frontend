@@ -16,7 +16,6 @@
   "YtelserFaktaIndex.Ytelser": "Ytelser",
   "SakenFaktaPanel.Title": "Saken",
 
-  "Messages.BrevErBestilt": "Brevet er bestilt. Du kan endre frist eller årsak før du fortsetter.",
   "Behandlingspunkt.Saksopplysninger": "Saksopplysninger",
   "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
   "Behandlingspunkt.CheckVarselRevurdering": "Varsel",
@@ -63,9 +62,6 @@
   "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
   "AdopsjonVilkarForm.VurderGjelderSammeBarn": "Vurder om tidligere utbetalte foreldrepenger eller engangsstønad gjelder for samme barn. Dersom det gjelder for samme barn er dette vilkåret ikke oppfylt.",
 
-  "NoSelectedBehandling.ZeroBehandlinger": "Ingen behandlinger er opprettet",
-  "FagsakGrid.PleaseSelectBehandling": "Velg behandling",
-
   "IverksetterVedtakStatusModal.VedtakAvslatt": "Vedtak er avslått.",
   "IverksetterVedtakStatusModal.VedtakInnvilet": "Vedtaket ble fattet og blir nå iverksatt",
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
@@ -73,20 +69,6 @@
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
   "IverksetterVedtakStatusModal.Ok": "OK",
 
-  "Header.Foreldrepenger": "Svangerskap, fødsel og adopsjon",
-  "Header.LinkToMainPage": "NAV, forsiden",
-  "Header.Rettskilde": "Rettskildene",
-  "Header.Systemrutine": "Systemrutine",
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
-  "Malform.Bokmal": "Bokmål",
-  "Malform.Nynorsk": "Nynorsk",
-  "Malform.Engelsk": "Engelsk",
-  "Malform.Beskrivelse": "Foretrukket språk",
-  "Person.ImageText": "Personinformasjon",
-  "Person.Woman": "Kvinne",
-  "Person.Man": "Mann",
-  "Person.Unknown": "Ukjent",
-  "SubmitButton.SettPåVent": "Sett behandling på vent",
   "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "FatterVedtakStatusModal.Ok": "OK",
   "FatterVedtakStatusModal.ModalDescription": "Forslag til vedtak er sendt til beslutter. Du kommer nå til forsiden.",
@@ -97,6 +79,8 @@
   "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
   "FatterVedtakStatusModal.KlagenErFerdigbehandlet": "Klagen er ferdigbehandlet",
   "FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver": "Forslag til klageresultat er sendt til medunderskriver",
+
+  "HelpText.Aksjonspunkt": "Aksjonspunkt",
 
   "Registrering.RegistrereSoknad": "Registrere søknad",
   "Registrering.RegistrerAlleOpplysninger": "Registrer inn alle opplysninger fra papirsøknaden",
@@ -110,24 +94,18 @@
   "SoknadRegistrertModal.InfoTextTwo": "Du kommer nå til forsiden",
   "SoknadRegistrertModal.OkButtonText": "OK",
 
-  "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
-  "PreviewAnkeLink.ForhandvisBrev": "Forhåndsvis brev",
-
-  "Skjermlenke.Klage.ResolveKlage.Title": "Behandle klage",
-  "Klage.ResolveKlage.ExplanationRequiredBrev": "Begrunnelse/tekst i brev",
-
   "KlageVurderingModal.VedtakOversendt": "Innstilling er sendt til NAV Klageinstans.",
   "KlageVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
   "KlageVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "KlageVurderingModal.Ok": "OK",
+
   "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
   "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
   "AnkeVurderingModal.SettVent": "Behandlingen er satt på vent.",
   "AnkeVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
   "AnkeVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "AnkeVurderingModal.Ok": "OK",
-  "OkAvbrytModal.Ok": "OK",
-  "OkAvbrytModal.Avbryt": "Avbryt",
+
   "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
   "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
   "BehandlingTilbakekrevingIndex.ApenRevurderingHeader": "Åpen revurdering",
@@ -138,6 +116,20 @@
 
   "TilbakekrevingFakta.FaktaFeilutbetaling": "Feilutbetaling",
   "FaktaPanel.FaktaOm": "Fakta om",
+
+
+  "NoSelectedBehandling.ZeroBehandlinger": "Ingen behandlinger er opprettet",
+  "FagsakGrid.PleaseSelectBehandling": "Velg behandling",
+  "Header.Foreldrepenger": "Svangerskap, fødsel og adopsjon",
+  "Header.Rettskilde": "Rettskildene",
+  "Header.Systemrutine": "Systemrutine",
+
+  "Person.ImageText": "Personinformasjon",
+  "Person.Woman": "Kvinne",
+  "Person.Man": "Mann",
+  "Person.Unknown": "Ukjent",
+
+  "Skjermlenke.Klage.ResolveKlage.Title": "Behandle klage",
 
   "AktoerGrid.IngenFagsaker": "Har ingen fagsaker i fpsak",
 
