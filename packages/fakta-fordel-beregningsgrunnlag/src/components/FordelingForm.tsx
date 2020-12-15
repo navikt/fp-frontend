@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
+import { IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { InjectedFormProps } from 'redux-form';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -9,12 +11,11 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { InjectedFormProps } from 'redux-form';
+
 import FordelingHelpText from './FordelingHelpText';
 import FastsettFordeltBeregningsgrunnlag, { FastsettFordeltBeregningsgrunnlagImpl } from './fordeling/FastsettFordeltBeregningsgrunnlag';
 
@@ -29,27 +30,34 @@ const findAksjonspunktMedBegrunnelse = (aksjonspunkter) => aksjonspunkter
 
 export const BEGRUNNELSE_FORDELING_NAME = 'begrunnelseFordeling';
 
-type OwnProps = {
-    submitCallback: (...args: any[]) => any;
-    readOnly: boolean;
-    submittable: boolean;
-    submitEnabled: boolean;
-    hasBegrunnelse: boolean;
-    isAksjonspunktClosed: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
-    beregningsgrunnlag: Beregningsgrunnlag;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    behandlingType: Kodeverk;
-    aksjonspunkter: Aksjonspunkt[];
-};
+interface PureOwnProps {
+  submitCallback: (...args: any[]) => any;
+  readOnly: boolean;
+  submittable: boolean;
+  submitEnabled: boolean;
+  behandlingId: number;
+  behandlingVersjon: number;
+  beregningsgrunnlag: Beregningsgrunnlag;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  behandlingType: Kodeverk;
+  aksjonspunkter: Aksjonspunkt[];
+  intl: IntlShape;
+}
+
+interface MappedOwnProps {
+  hasBegrunnelse: boolean;
+  isAksjonspunktClosed: boolean;
+  initialValues: any;
+  validate: any;
+  onSubmit: any;
+}
 
 /**
  * FordelingForm
  *
  * Container komponent. Har ansvar for å sette opp Redux Formen for "avklar fakta om fordeling" panel.
  */
-const FordelingFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   submittable,
   isAksjonspunktClosed,
@@ -100,8 +108,8 @@ const FordelingFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
 );
 
 export const transformValuesFordelBeregning = createSelector(
-  [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
-    (ownProps: OwnProps) => ownProps.aksjonspunkter],
+  [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag, aksjonspunkter) => (values) => {
     const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
@@ -119,9 +127,9 @@ export const transformValuesFordelBeregning = createSelector(
 );
 
 export const buildInitialValuesFordelBeregning = createSelector(
-  [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
-    (ownProps: OwnProps) => ownProps.alleKodeverk,
-    (ownProps: OwnProps) => ownProps.aksjonspunkter],
+  [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
+    (ownProps: PureOwnProps) => ownProps.alleKodeverk,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag, alleKodeverk, aksjonspunkter) => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (!hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
@@ -135,14 +143,15 @@ export const buildInitialValuesFordelBeregning = createSelector(
 );
 
 export const getValidationFordelBeregning = createSelector(
-  [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
-    (ownProps: OwnProps) => ownProps.alleKodeverk,
-    (ownProps: OwnProps) => ownProps.aksjonspunkter],
-  (beregningsgrunnlag, alleKodeverk, aksjonspunkter) => (values) => {
+  [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
+    (ownProps: PureOwnProps) => ownProps.alleKodeverk,
+    (ownProps: PureOwnProps) => ownProps.intl,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
+  (beregningsgrunnlag, alleKodeverk, intl, aksjonspunkter) => (values) => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
       return {
-        ...FastsettFordeltBeregningsgrunnlagImpl.validate(values, fordelBGPerioder,
+        ...FastsettFordeltBeregningsgrunnlagImpl.validate(intl, values, fordelBGPerioder,
           beregningsgrunnlag, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
       };
     }
@@ -151,10 +160,10 @@ export const getValidationFordelBeregning = createSelector(
 );
 
 const lagSubmitFn = createSelector([
-  (ownProps: OwnProps) => ownProps.submitCallback, transformValuesFordelBeregning],
+  (ownProps: PureOwnProps) => ownProps.submitCallback, transformValuesFordelBeregning],
 (submitCallback, transformValuesFordelBeregningFn) => (values) => submitCallback(transformValuesFordelBeregningFn(values)));
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
   const relevantAp = ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === FORDEL_BEREGNINGSGRUNNLAG);
   const isAksjonspunktClosed = !isAksjonspunktOpen(relevantAp.status.kode);
   const initialValues = buildInitialValuesFordelBeregning(ownProps);

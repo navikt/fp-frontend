@@ -3,7 +3,6 @@ import {
   BaseFieldsProps, Fields, Formatter, Parser, WrappedFieldsProps,
 } from 'redux-form';
 import moment from 'moment';
-import { injectIntl, IntlShape } from 'react-intl';
 import {
   ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, haystack, ISO_DATE_FORMAT,
 } from '@fpsak-frontend/utils';
@@ -28,19 +27,17 @@ interface PeriodpickerFieldProps {
   };
 }
 
-const formatError = (intl: IntlShape, otherProps: any, names: string[]): string => {
+const formatError = (otherProps: any, names: string[]): string => {
   const getField1 = haystack(otherProps, names[0]);
   const meta1 = getField1.meta;
 
   if (meta1.submitFailed && meta1.error) {
-    // @ts-ignore
-    return intl.formatMessage(...meta1.error);
+    return meta1.error;
   }
   const getField2 = haystack(otherProps, names[1]);
   const meta2 = getField2.meta;
   if (meta2.submitFailed && meta2.error) {
-    // @ts-ignore
-    return intl.formatMessage(...meta2.error);
+    return meta2.error;
   }
   return undefined;
 };
@@ -71,24 +68,23 @@ const renderReadOnly = (): FunctionComponent<Partial<PeriodpickerFieldProps> & W
 };
 
 interface PeriodePickerRenderProps {
-  intl: IntlShape;
   label: LabelType;
   isEdited: boolean;
   names: string[];
 }
 
-const renderPeriodpicker = (hideLabel?: boolean) => injectIntl(({
+const renderPeriodpicker = (hideLabel?: boolean) => ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  intl, label, isEdited, names, ...otherProps
+  label, isEdited, names, ...otherProps
 }: PeriodePickerRenderProps & WrappedFieldsProps) => {
   const fieldProps = {
     id: `${names[0]}-${names[1]}`,
-    feil: formatError(intl, otherProps, names),
+    feil: formatError(otherProps, names),
     label: <Label input={label} readOnly={false} />,
     names,
   };
   return <Periodpicker {...fieldProps} {...otherProps} hideLabel={hideLabel} />;
-});
+};
 
 const isoToDdMmYyyy = (string: string): string => {
   const parsedDate = moment(string, ISO_DATE_FORMAT, true);

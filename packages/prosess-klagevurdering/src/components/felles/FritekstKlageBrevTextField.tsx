@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { getLanguageCodeFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
+import { getLanguageFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form';
 import { Kodeverk } from '@fpsak-frontend/types';
 
@@ -27,7 +27,7 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps & WrappedComponentP
       maxLength={100000}
       badges={[{
         type: 'fokus',
-        textId: getLanguageCodeFromSprakkode(sprakkode),
+        text: getLanguageFromSprakkode(sprakkode),
         title: 'Malform.Beskrivelse',
       }]}
     />

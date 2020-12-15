@@ -19,7 +19,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  hasValidText, ISO_DATE_FORMAT, minLength, required, getLanguageCodeFromSprakkode,
+  hasValidText, ISO_DATE_FORMAT, minLength, required, getLanguageFromSprakkode,
 } from '@fpsak-frontend/utils';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
@@ -70,7 +70,7 @@ interface MappedOwnProps {
   avklartBarn?: AvklartBarn[];
   termindato?: string;
   vedtaksDatoSomSvangerskapsuke?: string;
-  languageCode: string;
+  language: string;
   ventearsaker: KodeverkMedNavn[];
   erAutomatiskRevurdering?: boolean;
   initialValues: FormValues;
@@ -166,7 +166,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     const {
       intl,
       erAutomatiskRevurdering = false,
-      languageCode,
+      language,
       readOnly,
       sendVarsel = false,
       aksjonspunktStatus,
@@ -214,7 +214,7 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
             {sendVarsel && (
               <ArrowBox>
                 <TextAreaField
-                  badges={[{ textId: languageCode, type: 'fokus', title: 'Malform.Beskrivelse' }]}
+                  badges={[{ text: language, type: 'fokus', title: 'Malform.Beskrivelse' }]}
                   name="fritekst"
                   label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
                   validate={[required, minLength3, hasValidText]}
@@ -289,7 +289,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
   const aksjonspunkt = aksjonspunkter[0];
   const ventearsaker = initialOwnProps.alleKodeverk[kodeverkTyper.VENT_AARSAK] || EMPTY_ARRAY;
-  const languageCode = getLanguageCodeFromSprakkode(sprakkode);
+  const language = getLanguageFromSprakkode(sprakkode);
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     initialValues: buildInitialValues(ownProps),
@@ -299,7 +299,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
     onSubmit: lagSubmitFn(ownProps),
-    languageCode,
+    language,
     ventearsaker,
     erAutomatiskRevurdering,
   });

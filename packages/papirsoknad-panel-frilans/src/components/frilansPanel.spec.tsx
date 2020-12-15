@@ -81,11 +81,7 @@ describe('<FrilansPanel>', () => {
         oppdragPerioder: null,
         perioder: [{
           periodeFom: null,
-          periodeTom: [{
-            id: 'ValidationMessage.DateNotAfterOrEqual',
-          }, {
-            limit: '10.12.2018',
-          }],
+          periodeTom: 'Dato må være etter eller lik 10.12.2018',
         }],
       },
     });

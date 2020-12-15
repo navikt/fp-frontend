@@ -11,7 +11,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { TextAreaField } from '@fpsak-frontend/form';
 import {
-  decodeHtmlEntity, getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine, getKodeverknavnFn,
+  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
@@ -79,7 +79,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
                 readOnly={readOnly}
                 badges={[{
                   type: 'fokus',
-                  textId: getLanguageCodeFromSprakkode(sprakkode),
+                  text: getLanguageFromSprakkode(sprakkode),
                   title: 'Malform.Beskrivelse',
                 }]}
               />

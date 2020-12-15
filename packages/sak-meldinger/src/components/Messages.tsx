@@ -9,7 +9,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
 import {
-  ariaCheck, getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, required,
+  ariaCheck, getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import {
@@ -101,7 +101,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
     e.preventDefault();
   };
 
-  const languageCode = getLanguageCodeFromSprakkode(sprakKode);
+  const language = getLanguageFromSprakkode(sprakKode);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -144,7 +144,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
               label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
               validate={[required, maxLength4000, minLength3, hasValidText]}
               maxLength={4000}
-              badges={[{ type: 'fokus', textId: languageCode, title: 'Messages.Beskrivelse' }]}
+              badges={[{ type: 'fokus', text: language, title: 'Messages.Beskrivelse' }]}
             />
           </div>
         </>

@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -384,7 +386,8 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  validate: (values: any,
+  validate: (intl: IntlShape,
+             values: any,
              sumIPeriode: number,
              skalValidereMotBeregningsgrunnlagPrAar: (andel: BeregningsgrunnlagAndel) => boolean,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
@@ -465,9 +468,9 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
 
 const RenderFordelBGFieldArray = injectIntl(RenderFordelBGFieldArrayImpl);
 
-RenderFordelBGFieldArrayImpl.validate = (values, sumIPeriode, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn,
+RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn,
   grunnbeløp, periodeDato, skalValidereRefusjon) => {
-  const fieldErrors = validateAndeler(values, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, periodeDato);
+  const fieldErrors = validateAndeler(intl, values, periodeDato);
   if (fieldErrors != null) {
     return fieldErrors;
   }

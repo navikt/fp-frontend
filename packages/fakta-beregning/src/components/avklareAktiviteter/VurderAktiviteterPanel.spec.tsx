@@ -199,7 +199,7 @@ describe('<VurderAktiviteterPanel>', () => {
       skjæringstidspunkt: '2019-02-02',
     };
     const errors = VurderAktiviteterPanel.validate(values, aktiviteterTomDatoMapping, false);
-    expect(errors[id3].skalBrukes[0].id).to.equal(isRequiredMessage()[0].id);
+    expect(errors[id3].skalBrukes).to.equal(isRequiredMessage());
   });
 
   it('skal kunne legge til aktivitet i tom mapping', () => {

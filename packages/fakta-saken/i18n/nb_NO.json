@@ -18,8 +18,5 @@
   "InnhentDokOpptjeningUtlandPanel.InnhentelseDok": "Innhentelse av dokumentasjon",
   "InnhentDokOpptjeningUtlandPanel.Innhentes": "Dokumentasjon vil bli innhentet",
   "InnhentDokOpptjeningUtlandPanel.InnhentesIkke": "Dokumentasjon vil <b>ikke</b> bli innhentet",
-  "InnhentDokOpptjeningUtlandPanel.Begrunnelse": "Begrunnelse",
-  
-  "ValidationMessage.NotEmpty": "Feltet må fylles ut",
-  "ValidationMessage.MinLength": "Du må skrive minst {length} tegn"
+  "InnhentDokOpptjeningUtlandPanel.Begrunnelse": "Begrunnelse" 
 }

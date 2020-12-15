@@ -7,7 +7,7 @@ import { Behandlingsresultat, Kodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form';
 import {
-  decodeHtmlEntity, getLanguageCodeFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrue,
+  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrue,
 } from '@fpsak-frontend/utils';
 
 import styles from './vedtakFritekstPanel.less';
@@ -50,7 +50,7 @@ const VedtakFritekstPanelImpl: FunctionComponent<OwnProps & WrappedComponentProp
             readOnly={readOnly}
             badges={[{
               type: 'fokus',
-              textId: getLanguageCodeFromSprakkode(sprakkode),
+              text: getLanguageFromSprakkode(sprakkode),
               title: 'Malform.Beskrivelse',
             }]}
           />

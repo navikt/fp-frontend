@@ -31,7 +31,7 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithValidNumber = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15)]);
 
     expect(errorsWithInvalidDecimal).to.be.an('array');
-    expect(errorsWithInvalidDecimal[0].prosentandelArbeid).to.be.an('array').that.eql(invalidDecimalMessage(invalidDecimal));
+    expect(errorsWithInvalidDecimal[0].prosentandelArbeid).that.eql(invalidDecimalMessage(invalidDecimal));
     expect(errorsWithInvalidDecimal[1]).to.not.exist;
 
     expect(errorsWithValidNumber).to.not.exist;
@@ -44,8 +44,8 @@ describe('<PermisjonGraderingPanel>', () => {
       getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15)]);
 
     expect(errorsWithInvalidDates).to.be.an('array');
-    expect(errorsWithInvalidDates[0].periodeFom).to.be.an('array').that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[0].periodeTom).to.be.an('array').that.eql(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeFom).that.eql(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeTom).that.eql(invalidDateMessage());
     expect(errorsWithInvalidDates[1]).to.not.exist;
 
     expect(errorsWithValidDates).to.not.exist;
@@ -59,7 +59,7 @@ describe('<PermisjonGraderingPanel>', () => {
 
     expect(errorsWithInvalidDates).to.be.an('object');
     // eslint-disable-next-line no-underscore-dangle
-    expect(errorsWithInvalidDates._error).to.be.an('array').that.eql(dateRangesOverlappingMessage());
+    expect(errorsWithInvalidDates._error).that.eql(dateRangesOverlappingMessage());
 
     expect(errorsWithValidDates).to.not.exist;
   });

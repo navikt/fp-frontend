@@ -12,7 +12,6 @@ import {
   RadioGroupField, RadioOption, SelectField, TextAreaField, behandlingFormValueSelector, behandlingForm,
 } from '@fpsak-frontend/form';
 import {
-  FormValidationError,
   merEn100ProsentMessage,
   arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
   hasValidText,
@@ -359,7 +358,7 @@ const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string): KodeverkM
   });
 };
 
-const isutbetalingPlusArbeidsprosentMerEn100 = (utbetalingsgrad: number, prosentArbeid: number): FormValidationError => {
+const isutbetalingPlusArbeidsprosentMerEn100 = (utbetalingsgrad: number, prosentArbeid: number): string => {
   if (utbetalingsgrad + prosentArbeid > 100) {
     return merEn100ProsentMessage();
   }
@@ -371,7 +370,7 @@ const getSum = (total: number, num: number): number => total + num;
 const isArbeidsProsentVidUtsettelse100 = (
   values: FormValues,
   aktivitetArray: AktivitetFieldArray[],
-): FormValidationError => {
+): string => {
   const andelIArbeid = [0];
   if (values.utsettelseType && values.erOppfylt && aktivitetArray) {
     aktivitetArray.forEach((aktivitet) => {

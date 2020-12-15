@@ -7,7 +7,7 @@ export default {
   component: VerticalSpacer,
 };
 
-export const visTidslabel = () => (
+export const visValgbareMellomrom = () => (
   <div>
     4 px spacing:
     <VerticalSpacer fourPx />

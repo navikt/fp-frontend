@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
@@ -72,7 +72,7 @@ interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, personopplysning: Personopplysninger,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues,
-  validate?: (values: FormValues) => any,
+  validate?: (intl: IntlShape, values: FormValues) => any,
   transformValues?: (values: FormValues, aksjonspunkt: Aksjonspunkt) => any,
 }
 
@@ -205,7 +205,7 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, familiehen
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });
 
-OmsorgOgForeldreansvarFaktaForm.validate = (values: FormValues): any => {
+OmsorgOgForeldreansvarFaktaForm.validate = (intl: IntlShape, values: FormValues): any => {
   const errors = {};
   if (!values) {
     return errors;
@@ -213,7 +213,7 @@ OmsorgOgForeldreansvarFaktaForm.validate = (values: FormValues): any => {
   const { originalAntallBarn, antallBarn } = values;
   if (antallBarn < 1 || antallBarn > originalAntallBarn) {
     return {
-      antallBarn: ([{ id: 'OmsorgOgForeldreansvarFaktaForm.AntallBarnValidation' }]),
+      antallBarn: intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AntallBarnValidation' }),
     };
   }
   if (isObjectEmpty(errors)) {
