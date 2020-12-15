@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
+import { IntlShape } from 'react-intl';
 import moment from 'moment';
 
 import {
-  DDMMYYYY_DATE_FORMAT, FormValidationError, hasValidDate, hasValidInteger, maxValue, minValue, required,
+  DDMMYYYY_DATE_FORMAT, hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
@@ -15,8 +16,12 @@ import styles from './leggTilArbeidsforholdFelter.less';
 // ----------------------------------------------------------------------------------
 // Methods
 // ----------------------------------------------------------------------------------
-const sluttdatoErrorMsg = (dato: string): FormValidationError => [{ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato }];
-const startdatoErrorMsg = (dato: string): FormValidationError => [{ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeOrEqual' }, { dato }];
+const sluttdatoErrorMsg = (intl: IntlShape, dato: string): string => intl
+  .formatMessage({ id: 'PersonArbeidsforholdDetailForm.DateNotAfterOrEqual' }, { dato });
+
+const startdatoErrorMsg = (intl: IntlShape, dato: string): string => intl
+  .formatMessage({ id: 'PersonArbeidsforholdDetailForm.DateNotBeforeOrEqual' }, { dato });
+
 const formatDate = (dato: string): string => moment(dato).format(DDMMYYYY_DATE_FORMAT);
 
 interface OwnProps {
@@ -27,9 +32,9 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  validate?: (values: CustomArbeidsforhold) => {
-    tomDato: FormValidationError;
-    fomDato: FormValidationError;
+  validate?: (values: CustomArbeidsforhold, intl: IntlShape) => {
+    tomDato: string;
+    fomDato: string;
   } | null;
 }
 
@@ -94,17 +99,17 @@ const LeggTilArbeidsforholdFelter: FunctionComponent<OwnProps> & StaticFunctions
   </BehandlingFormFieldCleaner>
 );
 
-LeggTilArbeidsforholdFelter.validate = (values: CustomArbeidsforhold): {
-  tomDato: FormValidationError;
-  fomDato: FormValidationError;
+LeggTilArbeidsforholdFelter.validate = (values: CustomArbeidsforhold, intl: IntlShape): {
+  tomDato: string;
+  fomDato: string;
 } | null => {
   if (values === undefined || values === null) {
     return null;
   }
   if (values.fomDato && values.tomDato && moment(values.fomDato).isAfter(moment(values.tomDato))) {
     return ({
-      tomDato: sluttdatoErrorMsg(formatDate(values.fomDato)),
-      fomDato: startdatoErrorMsg(formatDate(values.tomDato)),
+      tomDato: sluttdatoErrorMsg(intl, formatDate(values.fomDato)),
+      fomDato: startdatoErrorMsg(intl, formatDate(values.tomDato)),
     });
   }
   return null;

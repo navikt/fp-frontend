@@ -35,6 +35,7 @@
   "RenderUttakTable.PeriodeData.Trekk": "Trekk antall uker/dager",
   "RenderUttakTable.PeriodeData.Andel": "Andel i arbeid",
   "RenderUttakTable.PeriodeData.Utbetalingsgrad": "Utbetalingsgrad",
+  "RenderUttakTable.MerEnNullUtaksprosent" : "Uttak av foreldrepenger i denne perioden er avslått, utbetalingsgrad kan ikke være større enn 0.",
   "UttakTimeLineData.PeriodeData.Detaljer": "Detaljer for valgt periode",
   "UttakTimeLineData.PeriodeData.DelOppPerioden": "Del opp perioden",
   "TimeLineInfo.Aktivitet": "Aktivitet",

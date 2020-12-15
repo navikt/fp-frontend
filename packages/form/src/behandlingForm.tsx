@@ -13,7 +13,6 @@ import {
   ConfigProps,
 } from 'redux-form';
 
-import { FormValidationError } from '@fpsak-frontend/utils';
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 
 export const getBehandlingFormPrefix = (behandlingId: number, behandlingVersjon: number): string => `behandling_${behandlingId}_v${behandlingVersjon}`;
@@ -106,7 +105,7 @@ export const hasBehandlingFormErrorsOfType = (
   formName: string,
   behandlingId: number,
   behandlingVersjon: number,
-  errorMsg: FormValidationError,
+  errorMsg: string,
 ) => createSelector(
   [getBehandlingFormRegisteredFields(formName, behandlingId, behandlingVersjon),
     getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)],
@@ -118,7 +117,7 @@ export const hasBehandlingFormErrorsOfType = (
       return Object.keys(errors)
         .some((errorKey) => {
           const value = traverseAndFindValue({ [errorKey]: errors[errorKey] }, idParts);
-          return Array.isArray(value) ? value.some((eo) => eo && eo.id === errorMsg[0].id) : false;
+          return Array.isArray(value) ? value.some((eo) => eo && eo === errorMsg) : false;
         });
     });
   },

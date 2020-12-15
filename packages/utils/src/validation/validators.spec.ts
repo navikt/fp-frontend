@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import moment from 'moment';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '../formats';
-import { FormValidationError } from './messages';
 import {
   dateAfterOrEqual,
   dateAfterOrEqualToToday,
@@ -513,7 +512,7 @@ describe('Validators', () => {
   });
 
   describe('dateIsBefore', () => {
-    const errorMessageFunction = (dato: string) => ([{ id: 'ErrorMsg.Msg' }, { dato }]) as FormValidationError;
+    const errorMessageFunction = (): string => 'Dette er en feilmelding';
     const dateToCheckAgainst = '2019-08-05';
     it('skal ikke feile når input datoene er før datoen som blir sjekket mot', () => {
       const result = dateIsBefore(dateToCheckAgainst, errorMessageFunction)('2019-08-04');
