@@ -1,13 +1,9 @@
-const sinon = require('sinon');
+let numberOf = 0;
 
-sinon.stub(console, 'error')
-  .callsFake((warning) => {
-    // TODO Fjern if/else
-    if (warning && warning.indexOf
-      && (warning.indexOf('Not implemented: navigation (except hash changes)')
-        > -1)) {
-      console.warn(warning); // NOSONAR Kun testkode
-    } else if (warning) {
-      throw new Error(warning);
-    }
-  });
+jest.spyOn(global.console, 'warn').mockImplementationOnce((message) => {
+  if (message.includes('Please use the peer or standalone build instead')) {
+    global.console.warn(message);
+  } else {
+    throw new Error(message);
+  }
+});

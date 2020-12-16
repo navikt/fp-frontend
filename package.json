@@ -15,7 +15,6 @@
     "test:watch": "jest --watch --colors",
     "test:watch:all": "jest --watchAll --colors",
     "test:coverage": "jest --coverage --colors",
-    "test:lint": "yarn test && yarn lint:prod && yarn lint:test && yarn lint:less",
     "dev": "cross-env NODE_ENV=development NODE_ICU_DATA=./node_modules/full-icu node webpack/webpack.dev.server.js --config webpack/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --no-progress --colors --config webpack/webpack.prod.js",
     "lerna": "lerna",

@@ -1,5 +1,0 @@
---colors
---require @babel/polyfill
---require ./setup/setup.js
---include ./packages/utils-test/src/setup-mocha.ts
---include ./packages/utils-test/src/setup-mocha-hook.ts

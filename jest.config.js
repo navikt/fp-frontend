@@ -14,7 +14,6 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts', 'tsx', 'less', 'css'],
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   transformIgnorePatterns: ['<rootDir>.*(node_modules)(?!.*nav.*).*$'],
-  collectCoverage: true,
   cacheDirectory: '<rootDir>/jest_cache/',
   coverageDirectory: '<rootDir>/coverage/',
   coverageReporters: [

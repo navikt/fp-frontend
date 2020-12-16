@@ -40,6 +40,11 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
   ];
 
+  let assignMock = jest.fn();
+  delete window.location;
+  // @ts-ignore Dette er kun for å unngå warnings med window.location.reload(). (Denne blir brukt som en temp-fiks, så dette skal derfor fjernes)
+  window.location = { reload: assignMock };
+
   const push = sinon.spy();
   let contextStubHistory;
   beforeEach(() => {
@@ -50,6 +55,7 @@ describe('<MeldingIndex>', () => {
   afterEach(() => {
     contextStubHistory.restore();
     push.resetHistory();
+    assignMock.mockClear();
   });
 
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', () => {
