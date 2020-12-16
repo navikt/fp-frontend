@@ -8,7 +8,7 @@ import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { getPathToFplos } from '../paths';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
-const isDevelopment = () => process.env.NODE_ENV === 'development';
+const isDevelopment = () => process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
 
 /**
  * DashboardResolver
