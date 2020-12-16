@@ -117,7 +117,7 @@ describe('<OppholdINorgePanel>', () => {
 
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands);
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeFom).to.not.exist;
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.eql(dateNotBeforeOrEqualMessage('15.12.2020'));
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.eql(dateNotBeforeOrEqualMessage('16.12.2020'));
 
         expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
       });

@@ -9,7 +9,7 @@ module.exports = function (api) {
     [
       '@babel/preset-env',
       {
-        modules: false,
+        targets: { node: 'current', esmodules: true },
       },
     ],
     '@babel/preset-typescript',

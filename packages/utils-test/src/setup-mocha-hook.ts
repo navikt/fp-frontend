@@ -1,3 +1,4 @@
+import { afterEach } from '@jest/globals';
 import { requestApi } from '@fpsak-frontend/sak-app/src/data/fpsakApi';
 import { requestAnkeApi } from '@fpsak-frontend/behandling-anke/src/data/ankeBehandlingApi';
 import { requestEsApi } from '@fpsak-frontend/behandling-es/src/data/esBehandlingApi';

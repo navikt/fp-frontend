@@ -6,7 +6,6 @@ const config = {
   env: {
     es6: true,
     browser: true,
-    mocha: true,
   },
 
   globals: {
@@ -15,7 +14,7 @@ const config = {
 
   parser: '@typescript-eslint/parser',
 
-  plugins: ['@typescript-eslint'],
+  plugins: ['jest', '@typescript-eslint'],
 
   extends: [
     'airbnb',

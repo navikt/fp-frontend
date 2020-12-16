@@ -42,20 +42,18 @@ const arbeidstakerNavn = 'Hansens bil og brems AS';
 const siste4SifferIArbeidsforholdId = '4352';
 const arbeidstakerAndelsnr = 1;
 const arbeidsgiverId = '12338';
-const arbeidsforholdList = [
-  {
-    nyttArbeidsforhold: false,
-    beregningsperiodeTom: '2016-01-01',
-    beregningsperiodeFom: '2016-03-31',
-    arbeidsgiverNavn: arbeidstakerNavn,
-    arbeidsgiverId,
-    startDato: '2016-01-01',
-    opphoersdato: '2018-04-01',
-    arbeidsforholdId: '12142223323',
-    eksternArbeidsforholdId: `345${siste4SifferIArbeidsforholdId}`,
-    andelsnr: arbeidstakerAndelsnr,
-  },
-];
+const arbeidsforholdList = [{
+  nyttArbeidsforhold: false,
+  beregningsperiodeTom: '2016-01-01',
+  beregningsperiodeFom: '2016-03-31',
+  arbeidsgiverNavn: arbeidstakerNavn,
+  arbeidsgiverId,
+  startDato: '2016-01-01',
+  opphoersdato: '2018-04-01',
+  arbeidsforholdId: '12142223323',
+  eksternArbeidsforholdId: `345${siste4SifferIArbeidsforholdId}`,
+  andelsnr: arbeidstakerAndelsnr,
+}];
 
 describe('<RenderFordelBGFieldArray>', () => {
   it('skal ha selectvalues med Ytelse når kun ytelse', () => {
@@ -488,7 +486,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
   it('lagBelopKolonne skal ikkje gi readOnly beløp om andel ikke skal redigere inntekt og det er readOnly', () => {
     const belopKolonne = lagBelopKolonne('test', true, true, false);
-    expect(belopKolonne.props.className).to.equal(undefined);
+    expect(belopKolonne.props.className).to.equal('rightAlignInput');
     expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
     expect(belopKolonne.props.children.props.isEdited).to.equal(false);
     expect(belopKolonne.props.children.props.readOnly).to.equal(true);
@@ -496,7 +494,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
   it('lagBelopKolonne skal ikkje gi readOnly beløp om andel skal redigere inntekt i uten readOnly', () => {
     const belopKolonne = lagBelopKolonne('test', false, false, false);
-    expect(belopKolonne.props.className).to.equal(undefined);
+    expect(belopKolonne.props.className).to.equal('rightAlignInput');
     expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
     expect(belopKolonne.props.children.props.isEdited).to.equal(false);
     expect(belopKolonne.props.children.props.readOnly).to.equal(false);
@@ -504,7 +502,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
   it('lagBelopKolonne skal gi fastsattBeløp med isEdited true om andel skal redigere inntekt i readOnly med aksjonspunkt lukket', () => {
     const belopKolonne = lagBelopKolonne('test', true, false, true);
-    expect(belopKolonne.props.className).to.equal(undefined);
+    expect(belopKolonne.props.className).to.equal('rightAlignInput');
     expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
     expect(belopKolonne.props.children.props.isEdited).to.equal(true);
     expect(belopKolonne.props.children.props.readOnly).to.equal(true);
@@ -512,7 +510,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
   it('lagBelopKolonne skal gi fastsattBeløp versjon med isEdited false om andel ikkje skal redigere inntekt i readOnly med aksjonspunkt lukket', () => {
     const belopKolonne = lagBelopKolonne('test', true, true, true);
-    expect(belopKolonne.props.className).to.equal(undefined);
+    expect(belopKolonne.props.className).to.equal('rightAlignInput');
     expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
     expect(belopKolonne.props.children.props.isEdited).to.equal(false);
     expect(belopKolonne.props.children.props.readOnly).to.equal(true);
