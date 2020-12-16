@@ -19,6 +19,7 @@ const config = {
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
   ],
 
   parserOptions: {
@@ -51,6 +52,7 @@ const config = {
     'react/static-property-placement': OFF,
     'react/state-in-constructor': OFF,
     'react/prop-types': OFF,
+    'jest/valid-expect': OFF,
 
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': OFF,
