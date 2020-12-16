@@ -47,7 +47,7 @@ describe('access', () => {
 
     forEachFagsakAndBehandlingStatus((fagsakStatus, behandlingStatus) => {
       const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
-      it("" + getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus), () => {
+      it(`${getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus)}`, () => {
         const access = writeAccess(saksbehandlerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },
           validBehandlingTyper);
 
