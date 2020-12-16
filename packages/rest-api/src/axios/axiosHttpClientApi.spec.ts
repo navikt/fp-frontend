@@ -7,7 +7,7 @@ describe('axiosHttpClientApi', () => {
   const httpClientApi = getAxiosHttpClientApi();
   let mockAxios;
 
-  before(() => {
+  beforeAll(() => {
     mockAxios = new MockAdapter(httpClientApi.axiosInstance);
   });
 
@@ -15,7 +15,7 @@ describe('axiosHttpClientApi', () => {
     mockAxios.reset();
   });
 
-  after(() => {
+  afterAll(() => {
     mockAxios.restore();
   });
 

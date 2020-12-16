@@ -5,7 +5,7 @@
 /tmp/
 /.happypack/
 /.nyc_output/
-/.jest_cache/
+/jest_cache/
 /.static_storybook/
 /.eslint_loader_cache/
 /.uglify_plugin_cache/
