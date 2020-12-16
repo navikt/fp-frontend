@@ -12,3 +12,4 @@ lerna-debug.log
 .yarnrc
 ssh.exe.stackdump
 .DS_Store
+.eslintcache
