@@ -247,7 +247,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     />);
     expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
   });
-  it('skal vise LeggTilArbeidsforholdFelter ', () => {
+  it('skal vise LeggTilArbeidsforholdFelter', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       intl={intlMock}
@@ -277,7 +277,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
     expect(radiogroup).has.length(1);
   });
-  it('skal ikke vise LeggTilArbeidsforholdFelter ', () => {
+  it('skal ikke vise LeggTilArbeidsforholdFelter', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
       {...reduxFormPropsMock}
       intl={intlMock}

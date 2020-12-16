@@ -286,25 +286,6 @@ describe('<RenderFordelBGFieldArray>', () => {
     expect(errors).to.equal(null);
   });
 
-  it('skal returnerer ingen errors for ingen refusjonskrav når skalKunneEndreRefusjon er false', () => {
-    const values = [];
-    const andel1 = {
-      refusjonskrav: '0',
-      fastsattBelop: '100 000',
-      belopFraInntektsmelding: 100000,
-      skalKunneEndreRefusjon: false,
-      aktivitetstatus: 'ARBEIDSTAKER',
-      andel: 'Visningsnavn for virksomhet',
-      skalRedigereInntekt: true,
-      inntektskategori: 'ARBEIDSTAKER',
-      refusjonskravFraInntektsmelding: 10000,
-    };
-    values.push(andel1);
-    const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors).to.equal(null);
-  });
-
   it('skal returnerer errors for ingen refusjonskrav når skalKunneEndreRefusjon er true', () => {
     const values = [];
     const andel1 = {
@@ -317,25 +298,6 @@ describe('<RenderFordelBGFieldArray>', () => {
       skalRedigereInntekt: true,
       inntektskategori: 'ARBEIDSTAKER',
       refusjonskravFraInntektsmelding: 10000,
-    };
-    values.push(andel1);
-    const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors[0].refusjonskrav).to.equal(isRequiredMessage());
-  });
-
-  it('skal returnerer errors for ingen refusjonskrav når skalKunneEndreRefusjon er true', () => {
-    const values = [];
-    const andel1 = {
-      refusjonskrav: '',
-      fastsattBelop: '100 000',
-      belopFraInntektsmelding: 100000,
-      skalKunneEndreRefusjon: true,
-      aktivitetstatus: 'ARBEIDSTAKER',
-      andel: 'Visningsnavn for virksomhet',
-      skalRedigereInntekt: true,
-      inntektskategori: 'ARBEIDSTAKER',
-      refusjonskravFraInntektsmelding: null,
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,

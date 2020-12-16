@@ -40,7 +40,7 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
   ];
 
-  let assignMock = jest.fn();
+  const assignMock = jest.fn();
   delete window.location;
   // @ts-ignore Dette er kun for å unngå warnings med window.location.reload(). (Denne blir brukt som en temp-fiks, så dette skal derfor fjernes)
   window.location = { reload: assignMock };

@@ -262,7 +262,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
     const rows = wrapper.find('FlexRow');
     expect(rows).to.have.length(0);
   });
-  xit('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT_FL', () => {
+  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT_FL', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
@@ -307,7 +307,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
     expect(sumATAndeler.children().at(0).text()).to.equal(formatCurrencyNoKr(espectedSumATAndeler));
     expect(sumFLAndeler.children().at(0).text()).to.equal(formatCurrencyNoKr(espectedSumFLAndeler));
   });
-  xit('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og FL', () => {
+  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og FL', () => {
     const statuser = { ...relevanteStatuser };
     statuser.isArbeidstaker = false;
     statuser.isKombinasjonsstatus = false;
@@ -347,7 +347,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
     const sumFLAndeler = wrapper.find('Element').at(1);
     expect(sumFLAndeler.children().at(0).text()).to.equal(formatCurrencyNoKr(espectedSumFLAndeler));
   });
-  xit('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT', () => {
+  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT', () => {
     const statuser = { ...relevanteStatuser };
     statuser.isArbeidstaker = false;
     statuser.isKombinasjonsstatus = false;

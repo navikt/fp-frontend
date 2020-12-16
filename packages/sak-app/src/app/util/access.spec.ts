@@ -15,7 +15,7 @@ const forEachFagsakAndBehandlingStatus = (callback) => (
     .forEach((behandlingStatus) => callback(fagsakStatus, behandlingStatus)))
 );
 
-const getTestName = (accessName, expected, fagsakStatus, behandlingStatus) => (
+const getTestName = (accessName, expected, fagsakStatus, behandlingStatus): string => (
   `skal${expected ? '' : ' ikke'} ha ${accessName} når fagsakStatus er '${fagsakStatus}' og behandlingStatus er '${behandlingStatus}'`
 );
 
@@ -47,7 +47,7 @@ describe('access', () => {
 
     forEachFagsakAndBehandlingStatus((fagsakStatus, behandlingStatus) => {
       const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
-      it(getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus), () => {
+      it("" + getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus), () => {
         const access = writeAccess(saksbehandlerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },
           validBehandlingTyper);
 

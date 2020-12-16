@@ -310,39 +310,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     expect(errors).is.eql({});
   });
 
-  it('skal vise faktaform med fødelsedato', () => {
-    const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
-      behandlingId={1}
-      behandlingVersjon={1}
-      hasOpenAksjonspunkter={false}
-      readOnly
-      fødselsdato="20.10.2019"
-      submittable
-      arbeidsforhold={arbeidsforhold}
-      iayArbeidsforhold={[]}
-      erOverstyrer
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
-      aksjonspunkter={[]}
-      submitCallback={() => undefined}
-      validate={() => undefined}
-      onSubmit={() => undefined}
-      uttakArbeidTyper={uttakArbeidTyper}
-      {...reduxFormPropsMock}
-    />);
-
-    const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
-    expect(tilretteleggingArbeidsforholdSection).has.length(2);
-    const datepicker = wrapper.find(DatepickerField);
-    expect(datepicker).has.length(2);
-    const begrunnelsefelt = wrapper.find(TextAreaField);
-    expect(begrunnelsefelt).has.length(1);
-    const submitButton = wrapper.find(FaktaSubmitButton);
-    expect(submitButton).has.length(1);
-    const alertStripe = wrapper.find(AlertStripeFeil);
-    expect(alertStripe).has.length(0);
-  });
-
   it('skal vise alert-info når arbeidsgiver ikke finnes i arbeidsforhold i inntektArbeidYtelse', () => {
     const iayArbeidsforhold = [{
       id: '555864629-null',

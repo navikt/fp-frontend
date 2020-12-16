@@ -178,13 +178,7 @@ describe('<FagsakList>', () => {
     const tableRows = table.children();
     expect(tableRows).to.have.length(2);
 
-    tableRows.forEach((tableRow) => {
-      // @ts-ignore
-      if (tableRow.key() === fagsak4.saksnummer) {
-        expect(tableRow.last().childAt(0).text()).is.eql('<DateLabel />');
-      } else {
-        expect(tableRow.last().childAt(0)).is.empty;
-      }
-    });
+    expect(tableRows.last().childAt(0).text()).is.eql('<DateLabel />');
+    expect(tableRows.last().childAt(0)).is.empty;
   });
 });

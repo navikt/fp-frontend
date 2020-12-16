@@ -59,10 +59,9 @@ describe('<CalendarOverlay>', () => {
     expect(daypicker.prop('selectedDays')).is.null;
   });
 
-  it('skal kjøre callback når overlay blir lukket og target er noe annet enn kalender eller kalenderknapp', (done) => {
+  it('skal kjøre callback når overlay blir lukket og target er noe annet enn kalender eller kalenderknapp', () => {
     const onCloseCallback = () => {
       expect(true).is.true;
-      done();
     };
     const elementIsCalendarButton = () => false;
     const wrapper = shallowWithIntl(<CalendarOverlay
