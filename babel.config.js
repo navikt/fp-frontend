@@ -24,7 +24,6 @@ module.exports = function (api) {
   }
 
   if (NODE_ENV === 'coverage' || BABEL_ENV === 'coverage') {
-    plugins.push('istanbul');
     process.env.NODE_ENV = 'coverage';
     process.env.BABEL_ENV = 'coverage';
   }
