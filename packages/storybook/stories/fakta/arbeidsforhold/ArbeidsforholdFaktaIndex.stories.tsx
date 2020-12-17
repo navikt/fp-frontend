@@ -85,6 +85,7 @@ export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
         ...arbeidsforhold,
         navn: 'NSB',
         id: '2',
+        arbeidsforholdId: '999999998',
         tilVurdering: true,
         mottattDatoInntektsmelding: undefined,
       }],

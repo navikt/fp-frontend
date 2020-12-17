@@ -9,7 +9,7 @@ module.exports = function (api) {
     [
       '@babel/preset-env',
       {
-        modules: false,
+        targets: { node: 'current', esmodules: true },
       },
     ],
     '@babel/preset-typescript',
@@ -24,7 +24,6 @@ module.exports = function (api) {
   }
 
   if (NODE_ENV === 'coverage' || BABEL_ENV === 'coverage') {
-    plugins.push('istanbul');
     process.env.NODE_ENV = 'coverage';
     process.env.BABEL_ENV = 'coverage';
   }

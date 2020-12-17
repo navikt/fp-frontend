@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const PACKAGE = require('./../package.json');
 const VERSION = PACKAGE.version;
 
@@ -24,18 +25,6 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(tsx?|ts?)$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        options: {
-          failOnWarning: false,
-          failOnError: !isDevelopment,
-          configFile: path.resolve(__dirname, isDevelopment ? '../eslint/eslintrc.dev.js' : '../eslint/eslintrc.prod.js'),
-          fix: isDevelopment,
-          cache: true,
-        },
-        include: [PACKAGES_DIR],
-      }, {
         test: /\.(tsx?|ts?)$/,
         use: [
           { loader: 'cache-loader' },
@@ -146,6 +135,14 @@ const config = {
   },
 
   plugins: [
+    new ESLintPlugin({
+      context: PACKAGES_DIR,
+      extensions: ['tsx', 'ts'],
+      fix: isDevelopment,
+      failOnWarning: false,
+      failOnError: !isDevelopment,
+      overrideConfigFile: path.resolve(__dirname, isDevelopment ? '../eslint/eslintrc.dev.js' : '../eslint/eslintrc.prod.js'),
+    }),
     new MiniCssExtractPlugin({
       filename: isDevelopment ? 'style.css' : 'style_[contenthash].css',
       ignoreOrder: true,
