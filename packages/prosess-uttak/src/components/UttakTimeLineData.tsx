@@ -180,17 +180,18 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     const virkedagerForPeriode1 = calcDays(forstePeriode.fom, forstePeriode.tom);
     const virkedagerForPeriode2 = calcDays(andrePeriode.fom, andrePeriode.tom);
 
-    const { samtidigUttak, samtidigUttaksprosent } = periodeSomSkalSplittes;
-    const oppdaterteAktiviteterPeriode1 = periodeSomSkalSplittes.aktiviteter
+    const { samtidigUttak, samtidigUttaksprosent, aktiviteter } = periodeSomSkalSplittes;
+    const harAktivitetMedTrekkdager = aktiviteter.some((aktivitet) => aktivitet.trekkdagerDesimaler > 0);
+    const oppdaterteAktiviteterPeriode1 = harAktivitetMedTrekkdager ? aktiviteter
       .map((aktivitet) => ({
         ...aktivitet,
         ...kalkulerTrekkdager(aktivitet, virkedagerForPeriode1, samtidigUttak, samtidigUttaksprosent),
-      }));
-    const oppdaterteAktiviteterPeriode2 = periodeSomSkalSplittes.aktiviteter
+      })) : aktiviteter;
+    const oppdaterteAktiviteterPeriode2 = harAktivitetMedTrekkdager ? aktiviteter
       .map((aktivitet) => ({
         ...aktivitet,
         ...kalkulerTrekkdager(aktivitet, virkedagerForPeriode2, samtidigUttak, samtidigUttaksprosent),
-      }));
+      })) : aktiviteter;
 
     const nyPeriode1 = {
       ...periodeSomSkalSplittes,
