@@ -11,7 +11,7 @@ jobs:
       - name: Sette opp Node
         uses: actions/setup-node@v2.1.3
         with:
-          node-version: 12.x
+          node-version: 15.x
 
       - name: Get yarn cache
         id: yarn-cache
@@ -27,7 +27,7 @@ jobs:
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
 
       - name: Typescript and linting
-        run: yarn less:lint && yarn lint && yarn ts-check && yarn test:all:testonly
+        run: yarn less:lint && yarn lint && yarn ts-check
 
       - name: Run test and coverage
         run: yarn test:coverage
