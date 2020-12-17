@@ -1,6 +1,5 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { Arbeidsforhold } from '@fpsak-frontend/types';
@@ -13,7 +12,7 @@ import PersonArbeidsforholdPanel, {
   PersonArbeidsforholdPanelImpl,
   sortArbeidsforhold,
 } from './PersonArbeidsforholdPanel';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 
 describe('<PersonArbeidsforholdPanel>', () => {
   const arbeidsforhold = {
@@ -52,7 +51,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   };
 
   it('skal rendre komponent', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -79,7 +78,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       id: '2',
       erSlettet: true,
     };
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -102,7 +101,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal ikke vise arbeidsforhold-detaljer når ingen er valgt i tabell', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -126,7 +125,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal automatisk vise arbeidsforhold når det er til vurdering og ikke allerede er endret av saksbehandler', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -148,7 +147,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal ikke vise arbeidsforhold automatisk når det er endret', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -174,7 +173,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal ikke vise arbeidsforhold automatisk når saksbehandler har det ikke er aksjonspunkt på det', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -199,7 +198,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal fjerne detaljepanel ved avbryt', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -236,7 +235,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       erNyttArbeidsforhold: true,
     };
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -294,7 +293,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       mottattDatoInntektsmelding: '2018-10-01',
     };
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -494,7 +493,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt med når man skal fjerne arbeidsforholdet', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -542,7 +541,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt med når man skal fortsette uten inntektsmelding', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -590,7 +589,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt når nødvendig inntektsmelding ikke mottatt', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -638,7 +637,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt når overstyrtTom satt av saksbehandler', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -686,7 +685,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal lage nytt arbeidsforhold object', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -739,7 +738,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal vise knapp for å legge til arbeidsforhold', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -765,7 +764,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
   });
 
   it('skal ikke vise knapp for å legge til arbeidsforhold', () => {
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly
       hasAksjonspunkter
@@ -790,7 +789,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt når man skal bruke permisjon', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -841,7 +840,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt når man ikke skal bruke permisjon', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
@@ -898,7 +897,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
   it('skal oppdatere arbeidsforholdet korrekt når man ikke skal ha inntekt med til beregningsgrunnlaget', () => {
     const formChangeCallback = sinon.spy();
-    const wrapper = shallow(<PersonArbeidsforholdPanelImpl
+    const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
       hasAksjonspunkter
