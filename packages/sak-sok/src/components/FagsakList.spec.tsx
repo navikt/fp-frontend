@@ -6,7 +6,7 @@ import sinon from 'sinon';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Table } from '@fpsak-frontend/shared-components';
+import { Table, TableRow, DateLabel } from '@fpsak-frontend/shared-components';
 import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import FagsakList from './FagsakList';
@@ -173,12 +173,10 @@ describe('<FagsakList>', () => {
       selectFagsakCallback={clickFunction}
       alleKodeverk={alleKodeverk as {[key: string]: [KodeverkMedNavn]}}
     />);
-
-    const table = wrapper.find(Table);
-    const tableRows = table.children();
+    const tableRows = wrapper.find(TableRow);
     expect(tableRows).to.have.length(2);
 
-    expect(tableRows.last().childAt(0).text()).is.eql('<DateLabel />');
-    expect(tableRows.last().childAt(0)).is.empty;
+    expect(tableRows.first().find(DateLabel).prop('dateString')).is.eql('2019-02-18T13:49:18.645');
+    expect(tableRows.last().find(DateLabel)).has.length(0);
   });
 });

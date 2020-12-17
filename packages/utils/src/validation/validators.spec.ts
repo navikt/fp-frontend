@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import moment from 'moment';
 
-import { ISO_DATE_FORMAT } from '../formats';
+import { ISO_DATE_FORMAT, DDMMYYYY_DATE_FORMAT } from '../formats';
 import {
   dateAfterOrEqual,
   dateAfterOrEqualToToday,
@@ -227,7 +227,7 @@ describe('Validators', () => {
 
     it('skal feile når dato ikke er før eller lik spesifisert dato', () => {
       const result = dateBeforeOrEqual(today)('2100-12-10');
-      expect(result).is.eql('Dato må være før eller lik 16.12.2020');
+      expect(result).is.eql(`Dato må være før eller lik ${moment().format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -249,7 +249,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er før spesifisert dato', () => {
       const result = dateAfterOrEqual(today)('2000-12-10');
-      expect(result).is.eql('Dato må være etter eller lik 16.12.2020');
+      expect(result).is.eql(`Dato må være etter eller lik ${moment().format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -280,7 +280,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er lik dagens dato', () => {
       const result = dateBeforeToday(todayAsISO);
-      expect(result).is.eql('Dato må være før eller lik 15.12.2020');
+      expect(result).is.eql(`Dato må være før eller lik ${moment().subtract(1, 'days').format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -302,7 +302,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er etter dagens dato', () => {
       const result = dateBeforeOrEqualToToday('2100-10-10');
-      expect(result).is.eql('Dato må være før eller lik 16.12.2020');
+      expect(result).is.eql(`Dato må være før eller lik ${moment().format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -319,7 +319,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er i dag', () => {
       const result = dateAfterToday(todayAsISO);
-      expect(result).is.eql('Dato må være etter eller lik 17.12.2020');
+      expect(result).is.eql(`Dato må være etter eller lik ${moment().add(1, 'days').format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal ikke feile når dato er tom', () => {
@@ -336,7 +336,7 @@ describe('Validators', () => {
 
     it('skal feile når dato er historisk', () => {
       const result = dateAfterOrEqualToToday('2000-10-10');
-      expect(result).is.eql('Dato må være etter eller lik 16.12.2020');
+      expect(result).is.eql(`Dato må være etter eller lik ${moment().format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal ikke feile når dato er tom', () => {

@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
-import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { ISO_DATE_FORMAT, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 
 import TerminFodselDatoPanel, { TerminFodselDatoPanelImpl } from './TerminFodselDatoPanel';
 
@@ -86,7 +86,7 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsDateNextYear = validate({ terminbekreftelseDato: dateStringNextYear, termindato: dateStringNextYear });
       const errorsDateLastYear = validate({ terminbekreftelseDato: dateStringLastYear, termindato: dateStringNextYear });
 
-      expect(errorsDateNextYear.terminbekreftelseDato).to.eql('Dato må være før eller lik 16.12.2020');
+      expect(errorsDateNextYear.terminbekreftelseDato).to.eql(`Dato må være før eller lik ${moment().format(DDMMYYYY_DATE_FORMAT)}`);
       expect(errorsDateLastYear.terminbekreftelseDato).to.be.null;
     });
 
@@ -98,8 +98,9 @@ describe('<TerminFodselDatoPanel>', () => {
       const errorsSameDateAsTermindato = validate({ termindato: yesterday, terminbekreftelseDato: yesterday });
       const errorsDateBeforeTermindato = validate({ termindato: yesterday, terminbekreftelseDato: dayBeforeYesterday });
 
-      expect(errorsDateAfterTermindato.terminbekreftelseDato).to.eql('Dato må være før eller lik 14.12.2020');
-      expect(errorsSameDateAsTermindato.terminbekreftelseDato).to.eql('Dato må være før eller lik 14.12.2020');
+      expect(errorsDateAfterTermindato.terminbekreftelseDato).to.eql(`Dato må være før eller lik ${moment().subtract(2, 'days').format(DDMMYYYY_DATE_FORMAT)}`);
+      expect(errorsSameDateAsTermindato.terminbekreftelseDato).to.eql(`Dato må være før eller lik ${moment()
+        .subtract(2, 'days').format(DDMMYYYY_DATE_FORMAT)}`);
       expect(errorsDateBeforeTermindato.terminbekreftelseDato).to.be.null;
     });
 
