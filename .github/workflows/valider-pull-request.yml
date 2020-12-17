@@ -26,8 +26,8 @@ jobs:
       - name: Installere dependencies
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
 
-      - name: Tester og linting
-        run: yarn less:lint && yarn ts-check && yarn test:all
+      - name: Typescript and linting
+        run: yarn less:lint && yarn lint && yarn ts-check
 
       - name: Run test and coverage
         run: yarn test:coverage

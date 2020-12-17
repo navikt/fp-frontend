@@ -12,9 +12,10 @@
   "scripts": {
     "test": "jest -o --colors",
     "test:all": "jest --colors",
+    "test:all:testonly": "jest --colors --selectProjects test",
     "test:watch": "jest --watch --colors",
     "test:watch:all": "jest --watchAll --colors",
-    "test:coverage": "jest --coverage --colors",
+    "test:coverage": "jest --coverage --colors --selectProjects test",
     "ts-check": "tsc --pretty",
     "lint": "eslint --cache ./packages/**/*.ts*",
     "lint:fix": "eslint --fix --cache ./packages/**/*.ts*",
