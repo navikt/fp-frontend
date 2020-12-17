@@ -16,7 +16,7 @@
     "test:watch": "jest --watch --colors",
     "test:watch:all": "jest --watchAll --colors",
     "test:coverage": "jest --coverage --colors --selectProjects test",
-    "ts-check": "tsc --pretty",
+    "ts-check": "tsc  --pretty",
     "lint": "eslint --cache ./packages/**/*.ts*",
     "lint:fix": "eslint --fix --cache ./packages/**/*.ts*",
     "less:lint": "stylelint \"packages/**/*.less\"",
