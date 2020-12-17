@@ -264,7 +264,7 @@ const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonads
           _error: (
             <AlertStripe type="advarsel" className={styles.marginTop}>
               <FormattedMessage
-                id="ValidationMessage.NegativeSaldo"
+                id="UttakPanel.NegativeSaldo"
                 values={{
                   periode: uttakPeriodeNavn[value.konto],
                   days: minsteSaldo * -1,
@@ -285,7 +285,7 @@ const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskonto
       _error:
   <AlertStripe type="advarsel" className={styles.marginTop}>
     <FormattedMessage
-      id="ValidationMessage.InvalidTrekkDagerFlerbarnsdager"
+      id="UttakPanel.InvalidTrekkDagerFlerbarnsdager"
       values={{
         maxDays: stonadskonto.FLERBARNSDAGER.maxDager,
       }}
@@ -306,7 +306,7 @@ const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadsk
         _error:
   <AlertStripe type="advarsel" className={styles.marginTop}>
     <FormattedMessage
-      id="ValidationMessage.InvalidStonadskonto"
+      id="UttakPanel.InvalidStonadskonto"
       values={{
         konto: uttakPeriodeNavn[ikkeGyldigKonto[0].stønadskontoType.kode],
       }}
