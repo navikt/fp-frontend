@@ -93,33 +93,6 @@ describe('<RegistrerVirksomhetPanel>', () => {
     expect(wrapper.state().editIndex).to.equal(-1);
   });
 
-  it('skal sette valgt virksomhet til null når modal skjules', () => {
-    const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
-    const wrapper = shallow(<RegistrerVirksomhetPanel
-      fields={new MockFields('virksomhet', 2)}
-      dispatchArrayPush={sinon.spy()}
-      dispatchArraySplice={sinon.spy()}
-      meta={{} as FieldArrayMetaProps}
-      namePrefix="regvirk"
-      formatMessage={sinon.spy()}
-      virksomheter={virksomheter}
-      form="form"
-      alleKodeverk={{}}
-    />);
-
-    // @ts-ignore
-    wrapper.instance().showRegistrerVirksomhetModal(0);
-    // @ts-ignore
-    expect(wrapper.state().editVirksomhet).to.equal(virksomheter[0]);
-
-    // @ts-ignore
-    wrapper.instance().hideRegistrerVirksomhetModal(0);
-    // @ts-ignore
-    expect(wrapper.state().editVirksomhet).to.equal(null);
-    // @ts-ignore
-    expect(wrapper.state().editIndex).to.equal(-1);
-  });
-
   it('skal legge til ny virksomhet dersom editIndex ikke er satt', () => {
     const virksomheter = [{ familieEllerVennerTilknyttetNaringen: false }, { familieEllerVennerTilknyttetNaringen: false }];
     const dispatchPush = sinon.spy();

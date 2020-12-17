@@ -27,7 +27,7 @@ describe('<MargMarkering>', () => {
 
     const div = wrapper.find('div');
     expect(div).has.length(1);
-    expect(div.prop('className')).is.undefined;
+    expect(div.prop('className')).is.eql('prosesspunkt');
   });
 
   it('skal rendre rendre children med gul marg når det finnes åpne og løsbare aksjonspunkter', () => {

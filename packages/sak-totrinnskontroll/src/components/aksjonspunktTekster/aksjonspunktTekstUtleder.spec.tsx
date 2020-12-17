@@ -722,7 +722,7 @@ describe('<ApprovalTextUtils>', () => {
     // @ts-ignore
     expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
+  it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak stadfestet', () => {
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: stadfesteKlage,
     } as KlageVurdering;

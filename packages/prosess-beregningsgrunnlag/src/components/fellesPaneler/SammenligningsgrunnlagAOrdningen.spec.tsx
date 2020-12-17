@@ -262,7 +262,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
     const rows = wrapper.find('FlexRow');
     expect(rows).to.have.length(0);
   });
-  xit('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT_FL', () => {
+  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT_FL', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
@@ -289,9 +289,13 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expect(underTekster.at(teller + 1).children().at(0).text()).to.equal(formatCurrencyNoKr(expectedATverdier[expteller].belop));
       expect(underTekster.at(teller + 2).children().at(0).text()).to.equal(formatCurrencyNoKr(expectedFLverdier[expteller].belop));
       if (formattedMaaned === 'Jan') {
+        // Fiks denne!
+        // eslint-disable-next-line jest/no-conditional-expect
         expect(Number(underTekster.at(teller + 3).children().at(0).text())).to.equal(Number(skjeringstidspunktDato.split('-')[0]).toString());
         teller += 4;
       } else if (formattedMaaned === 'Des') {
+        // Fiks denne!
+        // eslint-disable-next-line jest/no-conditional-expect
         expect(Number(underTekster.at(teller + 3).children().at(0).text())).to.equal(Number(skjeringstidspunktDato.split('-')[0]) - 1).toString();
         teller += 4;
       } else {
@@ -307,7 +311,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
     expect(sumATAndeler.children().at(0).text()).to.equal(formatCurrencyNoKr(espectedSumATAndeler));
     expect(sumFLAndeler.children().at(0).text()).to.equal(formatCurrencyNoKr(espectedSumFLAndeler));
   });
-  xit('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og FL', () => {
+  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og FL', () => {
     const statuser = { ...relevanteStatuser };
     statuser.isArbeidstaker = false;
     statuser.isKombinasjonsstatus = false;
@@ -332,9 +336,13 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expect(underTekster.at(teller).children().at(0).text()).to.equal(formattedMaaned);
       expect(underTekster.at(teller + 1).children().at(0).text()).to.equal(formatCurrencyNoKr(expectedFLverdier[expTeller].belop));
       if (formattedMaaned === 'Jan') {
+        // Fiks denne!
+        // eslint-disable-next-line jest/no-conditional-expect
         expect(underTekster.at(teller + 2).children().at(0).text()).to.equal((skjeringstidspunktDato.split('-')[0]).toString());
         teller += 3;
       } else if (formattedMaaned === 'Des') {
+        // Fiks denne!
+        // eslint-disable-next-line jest/no-conditional-expect
         expect(underTekster.at(teller + 2).children().at(0).text()).to.equal(Number((skjeringstidspunktDato.split('-')[0])) - 1).toString();
         teller += 3;
       } else {
@@ -347,7 +355,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
     const sumFLAndeler = wrapper.find('Element').at(1);
     expect(sumFLAndeler.children().at(0).text()).to.equal(formatCurrencyNoKr(espectedSumFLAndeler));
   });
-  xit('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT', () => {
+  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT', () => {
     const statuser = { ...relevanteStatuser };
     statuser.isArbeidstaker = false;
     statuser.isKombinasjonsstatus = false;
@@ -375,9 +383,13 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expect(underTekster.at(teller).children().at(0).text()).to.equal(formattedMaaned);
       expect(underTekster.at(teller + 1).children().at(0).text()).to.equal(formatCurrencyNoKr(expectedATverdier[expTeller].belop));
       if (formattedMaaned === 'Jan') {
+        // Fiks denne!
+        // eslint-disable-next-line jest/no-conditional-expect
         expect(underTekster.at(teller + 2).children().at(0).text()).to.equal((skjeringstidspunktDato.split('-')[0]).toString());
         teller += 3;
       } else if (formattedMaaned === 'Des') {
+        // Fiks denne!
+        // eslint-disable-next-line jest/no-conditional-expect
         expect(underTekster.at(teller + 2).children().at(0).text()).to.equal(Number(skjeringstidspunktDato.split('-')[0]) - 1).toString();
         teller += 3;
       } else {

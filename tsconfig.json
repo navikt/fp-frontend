@@ -3,7 +3,7 @@
 		"target": "esnext",
 		"module": "es2020",
 		"moduleResolution": "node",
-		"types": [ "node", "mocha" ],
+		"types": [ "node", "jest" ],
 		"allowJs": true,
 		"noEmit": true,
 		"strict": false,

@@ -62,25 +62,6 @@ describe('<Periodpicker>', () => {
     expect(inputField.prop('value')).to.eql('30.08.2017 - 30.08.2017');
   });
 
-  it('skal lage periode med lik start- og sluttdato når en velger dato og det ikke finnes noe fra før', () => {
-    const onChangeCallback = sinon.spy();
-    const wrapper = shallow(<Periodpicker
-      names={['fromDate', 'toDate']}
-      // @ts-ignore
-      fromDate={{ input: { value: '', onChange: onChangeCallback } }}
-      toDate={{ input: { value: '', onChange: onChangeCallback } }}
-    />);
-
-    wrapper.setState({ showCalendar: true });
-
-    const overlay = wrapper.find(PeriodCalendarOverlay);
-    overlay.prop('onDayChange')(moment('30.08.2017', DDMMYYYY_DATE_FORMAT).toDate());
-    wrapper.update();
-
-    const inputField = wrapper.find(Input);
-    expect(inputField.prop('value')).to.eql('30.08.2017 - 30.08.2017');
-  });
-
   it('skal lage periode med ny startdato når en velger dato etter nåværende periode', () => {
     const onChangeCallback = sinon.spy();
     const wrapper = shallow(<Periodpicker
