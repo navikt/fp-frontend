@@ -150,7 +150,7 @@ describe('<prosessStegHooks>', () => {
     prosessStegVelger(0);
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(2);
+    expect(opppdaterKall).to.have.length(1);
     expect(opppdaterKall[0].args).to.have.length(2);
     expect(opppdaterKall[0].args[0]).to.eql('opplysningsplikt');
     expect(opppdaterKall[0].args[1]).to.eql('default');
