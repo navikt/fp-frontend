@@ -99,7 +99,7 @@ const checkForMonthsOrDays = (fieldName: string): boolean => {
   const weeksValue = document.getElementById(`${fieldName}.weeks`) ? document.getElementById(`${fieldName}.weeks`).value : null;
   // @ts-ignore Fiks
   const daysValue = document.getElementById(`${fieldName}.days`) ? document.getElementById(`${fieldName}.days`).value : null;
-  return (weeksValue !== '0' || daysValue !== '0');
+  return weeksValue !== '0' || (daysValue !== '0' && daysValue !== '0.0');
 };
 
 interface OwnProps {
