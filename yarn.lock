@@ -5082,9 +5082,9 @@
     "@types/reactcss" "*"
 
 "@types/react-redux@^7.1.11":
-  version "7.1.11"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.11.tgz#a18e8ab3651e8e8cc94798934927937c66021217"
-  integrity sha512-OjaFlmqy0CRbYKBoaWF84dub3impqnLJUrz4u8PRjDzaa4n1A2cVmjMV81shwXyAD5x767efhA8STFGJz/r1Zg==
+  version "7.1.12"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.12.tgz#148f2c768687346b556e29a322ca44cfa28cc3ac"
+  integrity sha512-xZj4/8oRZP5RlJPlC5XPnawPtMn+T2bV4Hxi38AcuoZzXlN/Il/ZPfgXuIq3WG37wVL6FP7suVfmE4BopuqtTg==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -5115,15 +5115,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
-  version "16.9.50"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.50.tgz#cb5f2c22d42de33ca1f5efc6a0959feb784a3a2d"
-  integrity sha512-kPx5YsNnKDJejTk1P+lqThwxN2PczrocwsvqXnjvVvKpFescoY62ZiM3TV7dH1T8lFhlHZF+PE5xUyimUwqEGA==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
-"@types/react@^16.14.2":
+"@types/react@*", "@types/react@^16.14.2":
   version "16.14.2"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.2.tgz#85dcc0947d0645349923c04ccef6018a1ab7538c"
   integrity sha512-BzzcAlyDxXl2nANlabtT4thtvbbnhee8hMmH/CcJrISDBVcJS1iOsP1f0OAgSdGE0MsY9tqcrb9YoZcOFv9dbQ==
