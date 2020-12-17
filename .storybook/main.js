@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const CORE_DIR = path.resolve(__dirname, '../node_modules');
 const IMAGE_DIR = path.join(PACKAGES_DIR, 'assets/images');
@@ -21,19 +22,7 @@ module.exports = {
 
     // Make whatever fine-grained changes you need
     config.module.rules = config.module.rules.concat({
-      test: /\.(tsx?|ts?|jsx?)$/,
-      enforce: 'pre',
-      loader: 'eslint-loader',
-      options: {
-        failOnWarning: false,
-        failOnError: false,
-        configFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
-        fix: true,
-        cache: true,
-      },
-      include: [PACKAGES_DIR],
-    }, {
-      test: /\.(jsx?|js?|tsx?|ts?)$/,
+      test: /\.(tsx?|ts?)$/,
       use: [
         { loader: 'cache-loader' },
         {
@@ -119,7 +108,7 @@ module.exports = {
     }, {
       test: /\.(svg)$/,
       issuer: {
-        test: /\.(jsx?|js?|tsx?|ts?)?$/
+        test: /\.(tsx?|ts?)?$/
       },
       use: [{
         loader: '@svgr/webpack',
@@ -144,6 +133,13 @@ module.exports = {
     config.plugins.push(new MiniCssExtractPlugin({
       filename: 'style.css',
       ignoreOrder: true,
+    }), new ESLintPlugin({
+      context: PACKAGES_DIR,
+      extensions: ['tsx', 'ts'],
+      fix: true,
+      failOnWarning: false,
+      failOnError: false,
+      overrideConfigFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
     }));
     
     config.resolve.extensions.push('.ts', '.tsx', '.less');

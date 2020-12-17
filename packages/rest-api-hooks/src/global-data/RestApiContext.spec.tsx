@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { act } from 'react-dom/test-utils';
 
 import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
@@ -61,13 +62,13 @@ describe('<RestApiContext>', () => {
   it('skal utføre restkall og så hente data inn i komponent', async () => {
     const setValue = sinon.spy();
 
-    await mount(
+    await act(async () => mount(
       <RestApiProvider>
         <RestApiErrorProvider>
           <TestGlobalData setValue={setValue} />
         </RestApiErrorProvider>
       </RestApiProvider>,
-    );
+    ));
 
     // Må sjekke resultatet via funksjon fordi per i dag blir ikke output fra TestGlobalData korrekt oppdatert
     expect(setValue.calledTwice).to.true;

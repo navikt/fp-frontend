@@ -62,7 +62,7 @@ describe('<UttakInfoPanel>', () => {
     expect(uttakFaktaForm).to.have.length(1);
   });
 
-  it('skal vise Avklar annen forelder har rett ', () => {
+  it('skal vise Avklar annen forelder har rett', () => {
     const wrapper = shallowWithIntl(<UttakInfoPanel
       submitCallback={sinon.spy()}
       readOnly
