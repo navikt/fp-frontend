@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import HistorikkDokumentLenke from './HistorikkDokumentLenke';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-sak-historikk';
@@ -19,6 +18,6 @@ describe('HistorikkDokumentLenke', () => {
       saksnummer={saksnummer}
     />);
 
-    expect(wrapper.find('FormattedMessage').at(0).prop('id')).to.eql('Historikk.Utgått');
+    expect(wrapper.find('FormattedMessage').at(0).prop('id')).toEqual('Historikk.Utgått');
   });
 });

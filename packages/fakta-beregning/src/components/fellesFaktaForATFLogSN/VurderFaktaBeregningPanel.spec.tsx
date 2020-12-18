@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
@@ -36,7 +35,7 @@ describe('<VurderFaktaBeregningPanel>', () => {
   it('skal bygge initial values', () => {
     const initialValuesFelles = () => ({ test: 'test' });
     const initialValues = buildInitialValuesVurderFaktaBeregning.resultFunc(aksjonspunkter, initialValuesFelles);
-    expect(initialValues.test).to.equal('test');
+    expect(initialValues.test).toBe('test');
   });
 
   it('skal ikkje transformValues uten aksjonspunkt', () => {
@@ -52,7 +51,7 @@ describe('<VurderFaktaBeregningPanel>', () => {
       faktaOmBeregning,
     };
     const transformed = transformValuesVurderFaktaBeregning(values);
-    expect(transformed).to.be.empty;
+    expect(Object.keys(transformed)).toHaveLength(0);
   });
 
   it('skal transformValues med aksjonspunkt', () => {
@@ -68,31 +67,31 @@ describe('<VurderFaktaBeregningPanel>', () => {
       [BEGRUNNELSE_FAKTA_TILFELLER_NAME]: 'begrunnelse', aksjonspunkter, faktaOmBeregning, tilfeller,
     };
     const transformed = transformValuesVurderFaktaBeregning(values);
-    expect(transformed[0].begrunnelse).to.equal('begrunnelse');
-    expect(transformed[0].kode).to.equal(VURDER_FAKTA_FOR_ATFL_SN);
+    expect(transformed[0].begrunnelse).toBe('begrunnelse');
+    expect(transformed[0].kode).toBe(VURDER_FAKTA_FOR_ATFL_SN);
   });
 
   it('skal returnere true for endring i avklar med kun avklar aksjonspunkt', () => {
     const aps = [{ definisjon: { kode: AVKLAR_AKTIVITETER } }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(true, aps);
-    expect(knappSkalKunneTrykkes).to.equal(true);
+    expect(knappSkalKunneTrykkes).toBe(true);
   });
 
   it('skal returnere false for endring i avklar med to aksjonspunkter', () => {
     const aps = [{ definisjon: { kode: AVKLAR_AKTIVITETER } }, { definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(true, aps);
-    expect(knappSkalKunneTrykkes).to.equal(false);
+    expect(knappSkalKunneTrykkes).toBe(false);
   });
 
   it('skal returnere true for ingen endring i avklar med VURDER_FAKTA_FOR_ATFL_SN', () => {
     const aps = [{ definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(false, aps);
-    expect(knappSkalKunneTrykkes).to.equal(true);
+    expect(knappSkalKunneTrykkes).toBe(true);
   });
 
   it('skal returnere true for ingen endring i avklar med to aksjonspunkter', () => {
     const aps = [{ definisjon: { kode: AVKLAR_AKTIVITETER } }, { definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(false, aps);
-    expect(knappSkalKunneTrykkes).to.equal(true);
+    expect(knappSkalKunneTrykkes).toBe(true);
   });
 });

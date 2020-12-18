@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { FieldArrayMetaProps } from 'redux-form';
@@ -24,10 +23,10 @@ describe('<RegistrerVirksomhetPanel>', () => {
     />);
 
     const image = wrapper.find(Image);
-    expect(image).to.have.length(1);
+    expect(image).toHaveLength(1);
 
     const undertekst = wrapper.find(Undertekst);
-    expect(undertekst).to.have.length(1);
+    expect(undertekst).toHaveLength(1);
   });
 
   it('skal rendre korrekt når antall virksomheter er større enn 0', () => {
@@ -43,7 +42,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
     />);
 
     const fields = wrapper.find('Field');
-    expect(fields).to.have.length(2);
+    expect(fields).toHaveLength(2);
   });
 
   it('skal vise korrekt virksomhet når virksomhet blir valgt', () => {
@@ -63,7 +62,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
     // @ts-ignore
     wrapper.instance().showRegistrerVirksomhetModal(0);
     // @ts-ignore
-    expect(wrapper.state().editVirksomhet).to.equal(virksomheter[0]);
+    expect(wrapper.state().editVirksomhet).toBe(virksomheter[0]);
   });
 
   it('skal sette valgt virksomhet til null når modal skjules', () => {
@@ -83,14 +82,14 @@ describe('<RegistrerVirksomhetPanel>', () => {
     // @ts-ignore
     wrapper.instance().showRegistrerVirksomhetModal(0);
     // @ts-ignore
-    expect(wrapper.state().editVirksomhet).to.equal(virksomheter[0]);
+    expect(wrapper.state().editVirksomhet).toBe(virksomheter[0]);
 
     // @ts-ignore
     wrapper.instance().hideRegistrerVirksomhetModal(0);
     // @ts-ignore
-    expect(wrapper.state().editVirksomhet).to.equal(null);
+    expect(wrapper.state().editVirksomhet).toBe(null);
     // @ts-ignore
-    expect(wrapper.state().editIndex).to.equal(-1);
+    expect(wrapper.state().editIndex).toBe(-1);
   });
 
   it('skal legge til ny virksomhet dersom editIndex ikke er satt', () => {
@@ -114,7 +113,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
         stillingsprosent: 50,
       },
     });
-    expect(dispatchPush.called).is.true;
+    expect(dispatchPush.called).toBe(true);
   });
 
   it('skal endre eksisterende virksomhet dersom editIndex er satt', () => {
@@ -141,6 +140,6 @@ describe('<RegistrerVirksomhetPanel>', () => {
         stillingsprosent: 50,
       },
     });
-    expect(dispatchSplice.called).is.true;
+    expect(dispatchSplice.called).toBe(true);
   });
 });

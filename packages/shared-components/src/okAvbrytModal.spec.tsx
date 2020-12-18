@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
@@ -20,12 +19,12 @@ describe('<OkAvbrytModal>', () => {
     );
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('Åpen behandling');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('contentLabel')).toEqual('Åpen behandling');
 
     const knapp = wrapper.find(Hovedknapp);
-    expect(knapp).to.have.length(1);
-    expect(knapp.childAt(0).text()).is.eql('OK');
+    expect(knapp).toHaveLength(1);
+    expect(knapp.childAt(0).text()).toEqual('OK');
   });
 });

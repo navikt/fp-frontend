@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import Panel from 'nav-frontend-paneler';
 
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -42,15 +41,15 @@ describe('BeregningsresultatPanel', () => {
     />);
     const panel = wrapper.find(Panel);
     const rows = panel.find('Row');
-    expect(rows).to.have.length(3);
+    expect(rows).toHaveLength(3);
     const andelRow = rows.first();
     const andelText = andelRow.find('Normaltekst').first().childAt(0).text();
     const andelVerdi = andelRow.find('FormattedMessage').props().id;
-    expect(andelText).to.equal(tableData.rowsAndeler[0].ledetekst);
-    expect(andelVerdi).to.equal('Beregningsgrunnlag.BeregningTable.MåFastsettes');
+    expect(andelText).toBe(tableData.rowsAndeler[0].ledetekst);
+    expect(andelVerdi).toBe('Beregningsgrunnlag.BeregningTable.MåFastsettes');
     const sumRow = rows.last();
     const sumText = sumRow.find('FormattedMessage').props().id;
-    expect(sumText).to.equal('Beregningsgrunnlag.BeregningTable.Dagsats.ikkeFastsatt');
+    expect(sumText).toBe('Beregningsgrunnlag.BeregningTable.Dagsats.ikkeFastsatt');
   });
   it('Skal teste om tabellen får korrekt antall rader ved vilkarStatus:OPPFYLT', () => {
     vilkaarBG.vilkarStatus.kode = vilkarUtfallType.OPPFYLT;
@@ -63,20 +62,20 @@ describe('BeregningsresultatPanel', () => {
     />);
     const panel = wrapper.find(Panel);
     const rows = panel.find('Row');
-    expect(rows).to.have.length(5);
+    expect(rows).toHaveLength(5);
     const andelRow = rows.first();
 
     const andelText = andelRow.find('Normaltekst').first().childAt(0).text();
     const andelVerdi = andelRow.find('Normaltekst').at(1).childAt(0).text();
-    expect(andelText).to.equal(tableData.rowsAndeler[0].ledetekst);
-    expect(formatCurrencyNoKr(andelVerdi)).to.equal(formatCurrencyNoKr(tableData.rowsAndeler[0].verdi));
+    expect(andelText).toBe(tableData.rowsAndeler[0].ledetekst);
+    expect(formatCurrencyNoKr(andelVerdi)).toBe(formatCurrencyNoKr(tableData.rowsAndeler[0].verdi));
     const sumRow = rows.last();
     const sumText = sumRow.find('FormattedMessage').props().id;
     // @ts-ignore
     const sumTextTall = sumRow.find(FormattedMessage).props().values.dagSats;
     const sumVerdi = sumRow.find('Normaltekst').last().childAt(0).text();
-    expect(sumText).to.equal('Beregningsgrunnlag.BeregningTable.DagsatsNy');
-    expect(sumTextTall).to.equal(formatCurrencyNoKr(400));
-    expect(sumVerdi).to.equal(formatCurrencyNoKr(tableData.dagsatser.verdi));
+    expect(sumText).toBe('Beregningsgrunnlag.BeregningTable.DagsatsNy');
+    expect(sumTextTall).toBe(formatCurrencyNoKr(400));
+    expect(sumVerdi).toBe(formatCurrencyNoKr(tableData.dagsatser.verdi));
   });
 });

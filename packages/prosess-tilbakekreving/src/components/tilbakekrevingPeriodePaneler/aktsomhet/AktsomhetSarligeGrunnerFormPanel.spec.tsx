@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { CheckboxField, TextAreaField } from '@fpsak-frontend/form';
@@ -28,7 +27,7 @@ describe('<AktsomhetSarligeGrunnerFormPanel>', () => {
       feilutbetalingBelop={10}
     />);
 
-    expect(wrapper.find(CheckboxField)).to.have.length(2);
+    expect(wrapper.find(CheckboxField)).toHaveLength(2);
   });
 
   it('skal vise tekstfelt for annet-begrunnelse når annet er valgt som særlig grunn', () => {
@@ -51,6 +50,6 @@ describe('<AktsomhetSarligeGrunnerFormPanel>', () => {
       feilutbetalingBelop={10}
     />);
 
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
@@ -51,7 +49,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
-    expect(error).to.equal(null);
+    expect(error).toBe(null);
   });
 
   it('skal ikkje gi error når total refusjon er lavere enn inntektsmelding for arbeidsforholdId lik null', () => {
@@ -82,7 +80,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
-    expect(error).to.equal(null);
+    expect(error).toBe(null);
   });
 
   it('skal ikkje gi error når total refusjon er lik inntektsmelding', () => {
@@ -113,7 +111,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
-    expect(error).to.equal(null);
+    expect(error).toBe(null);
   });
 
   it('skal gi error når total refusjon høyere enn inntektsmelding', () => {
@@ -148,9 +146,9 @@ describe('<ValidateAndelerUtils>', () => {
     const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
     // @ts-ignore TODO fiks denne
-    expect(error.id).to.equal(expected.id);
+    expect(error.id).toBe(expected.id);
     // @ts-ignore TODO fiks denne
-    expect(error.arbeidsgiver).to.equal(expected.arbeidsgiver);
+    expect(error.arbeidsgiver).toBe(expected.arbeidsgiver);
   });
 
   it('skal returnere 0 for lik andelsinfo og lik inntektskategori', () => {
@@ -162,7 +160,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(0);
+    expect(compare).toBe(0);
   });
 
   it('skal returnere -1 for lik andelsinfo og ulik inntektskategori', () => {
@@ -174,7 +172,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(-1);
+    expect(compare).toBe(-1);
   });
 
   it('skal returnere 1 for lik andelsinfo og ulik inntektskategori motsatt rekkefølge', () => {
@@ -186,7 +184,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[1], andeler[0]);
-    expect(compare).to.equal(1);
+    expect(compare).toBe(1);
   });
 
   it('skal returnere -1 for ulik andelsinfo og lik inntektskategori', () => {
@@ -198,7 +196,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(-1);
+    expect(compare).toBe(-1);
   });
 
   it('skal returnere 1 for ulik andelsinfo og lik inntektskategori motsatt rekkefølge', () => {
@@ -210,7 +208,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[1], andeler[0]);
-    expect(compare).to.equal(1);
+    expect(compare).toBe(1);
   });
 
   it('skal returnere -1 for ulik andelsinfo og ulik inntektskategori motsatt rekkefølge', () => {
@@ -222,7 +220,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(-1);
+    expect(compare).toBe(-1);
   });
 
   it('skal returnere 1 for ulik andelsinfo og ulik inntektskategori motsatt rekkefølge', () => {
@@ -234,7 +232,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[1], andeler[0]);
-    expect(compare).to.equal(1);
+    expect(compare).toBe(1);
   });
 
   it('skal ikkje gi error om det er ingen andeler lagt til av saksbehandler og ingen har lik inntektskategori og andelsnr', () => {
@@ -267,7 +265,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal ikkje gi error om det er andeler lagt til av saksbehandler og ingen har lik inntektskategori og andelsnr', () => {
@@ -294,7 +292,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler to har lik inntektskategori og andelsnr', () => {
@@ -321,8 +319,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal ikkje gi error om to andeler har lik inntektskategori men ulik arbeidsforholdId', () => {
@@ -346,7 +344,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler to har lik inntektskategori og andelsnr når det finnes to eksisterende andeler med samme virksomhet', () => {
@@ -379,8 +377,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal ikkje gi error om det er nye andeler der to har lik andelstype og ulik inntektskategori', () => {
@@ -408,7 +406,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler der to har lik inntektskategori og andelstype', () => {
@@ -436,8 +434,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ingen nye andeler, men andel lagt til av saksbehandler der to har lik inntektskategori og andelstype', () => {
@@ -465,8 +463,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ein ny brukers andel, og ein eksisterende der begge har lik inntektskategori', () => {
@@ -503,8 +501,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ein ny egen næring, og ein selvstendig næringsdrivende lagt til tidligere der begge har lik inntektskategori', () => {
@@ -522,8 +520,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ein ny egen næring, og ein eksisterende selvstendig næringsdrivende der begge har lik inntektskategori', () => {
@@ -541,8 +539,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om fastsatt beløp er ulik oppgitt sum', () => {
@@ -560,9 +558,9 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const fastsattError = validateSumFastsattBelop(values, 40000);
-    expect(fastsattError).to.have.length(2);
-    expect(fastsattError[0].id).to.equal(skalVereLikFordelingMessage(40000)[0].id);
-    expect(fastsattError[1].fordeling).to.equal('40 000');
+    expect(fastsattError).toHaveLength(2);
+    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage(40000)[0].id);
+    expect(fastsattError[1].fordeling).toBe('40 000');
   });
 
   it('skal ikkje gi error om fastsatt beløp er lik oppgitt sum', () => {
@@ -584,7 +582,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const fastsattError = validateSumFastsattBelop(values, 50000);
-    expect(fastsattError).to.equal(null);
+    expect(fastsattError).toBe(null);
   });
 
   it('skal ikkje gi error om fastsatt beløp og read only beløp er lik sum', () => {
@@ -614,7 +612,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const fastsattError = validateSumFastsattBelop(values, 50000);
-    expect(fastsattError).to.equal(null);
+    expect(fastsattError).toBe(null);
   });
 
   it('skal gi error om fastsatt beløp og read only beløp er ulik sum', () => {
@@ -640,9 +638,9 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const fastsattError = validateSumFastsattBelop(values, 50000);
-    expect(fastsattError).to.have.length(2);
-    expect(fastsattError[0].id).to.equal(skalVereLikFordelingMessage(50000)[0].id);
-    expect(fastsattError[1].fordeling).to.equal('50 000');
+    expect(fastsattError).toHaveLength(2);
+    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage(50000)[0].id);
+    expect(fastsattError[1].fordeling).toBe('50 000');
   });
 
   it('skal returnere required error om fastsatt beløp ikkje er satt', () => {
@@ -658,7 +656,7 @@ describe('<ValidateAndelerUtils>', () => {
       tom: null,
     };
     const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
-    expect(fastsattError).to.equal(isRequiredMessage());
+    expect(fastsattError).toBe(isRequiredMessage());
   });
 
   it('skal returnere error om det er satt 0 i beregningsgrunnlag for andel med gradering og arbeidsforhold ikke opphørt', () => {
@@ -673,7 +671,7 @@ describe('<ValidateAndelerUtils>', () => {
       tom: null,
     };
     const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
-    expect(fastsattError).to.equal(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
+    expect(fastsattError).toBe(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
   });
 
   it('skal returnere error om det er satt 0 i beregningsgrunnlag for andel med gradering i deler av perioden og arbeidsforhold ikke opphørt', () => {
@@ -688,7 +686,7 @@ describe('<ValidateAndelerUtils>', () => {
       tom: null,
     };
     const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
-    expect(fastsattError).to.equal(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
+    expect(fastsattError).toBe(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
   });
 
   it('skal ikkje returnere error om det er satt 0 i beregningsgrunnlag for andel med uten gradering og arbeidsforhold ikke opphørt', () => {
@@ -703,7 +701,7 @@ describe('<ValidateAndelerUtils>', () => {
       tom: null,
     };
     const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
-    expect(fastsattError).to.equal(null);
+    expect(fastsattError).toBe(null);
   });
 
   it('skal ikkje returnere error om det er satt 0 i beregningsgrunnlag for andel med tilgjengelig informasjon om gradering', () => {
@@ -713,7 +711,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelIArbeid: '',
     };
     const fastsattError = validateFastsattBelop(intlMock, andelValue, null);
-    expect(fastsattError).to.equal(null);
+    expect(fastsattError).toBe(null);
   });
 
   it('skal ikke returnere error om det er satt 0 i beregningsgrunnlag for andel med gradering i deler av perioden og arbeidsforhold er opphørt', () => {
@@ -728,6 +726,6 @@ describe('<ValidateAndelerUtils>', () => {
       tom: null,
     };
     const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
-    expect(fastsattError).to.equal(null);
+    expect(fastsattError).toBe(null);
   });
 });

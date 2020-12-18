@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
@@ -89,7 +88,7 @@ describe('<OmsorgInfoPanel>', () => {
       onSubmit={() => undefined}
     />);
     const panel = wrapper.find(OmsorgFaktaForm);
-    expect(panel).to.have.length(1);
+    expect(panel).toHaveLength(1);
   });
 
   it('skal vise helptext for omsorg og aleneomsorg aksjonspunkt', () => {
@@ -112,11 +111,11 @@ describe('<OmsorgInfoPanel>', () => {
       onSubmit={() => undefined}
     />);
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
+    expect(helpText).toHaveLength(1);
     const helpTextMessage = wrapper.find(FormattedMessage);
-    expect(helpTextMessage).has.length(2);
-    expect(helpTextMessage.at(0).prop('id')).is.eql('OmsorgInfoPanel.VurderAleneomsorg');
-    expect(helpTextMessage.at(1).prop('id')).is.eql('OmsorgInfoPanel.VurderOmsorg');
+    expect(helpTextMessage).toHaveLength(2);
+    expect(helpTextMessage.at(0).prop('id')).toEqual('OmsorgInfoPanel.VurderAleneomsorg');
+    expect(helpTextMessage.at(1).prop('id')).toEqual('OmsorgInfoPanel.VurderOmsorg');
   });
 
   it('skal vise helptext for omsorg aksjonspunkt', () => {
@@ -139,10 +138,10 @@ describe('<OmsorgInfoPanel>', () => {
       onSubmit={() => undefined}
     />);
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
+    expect(helpText).toHaveLength(1);
     const helpTextMessage = wrapper.find(FormattedMessage);
-    expect(helpTextMessage).has.length(1);
-    expect(helpTextMessage.at(0).prop('id')).is.eql('OmsorgInfoPanel.VurderOmsorg');
+    expect(helpTextMessage).toHaveLength(1);
+    expect(helpTextMessage.at(0).prop('id')).toEqual('OmsorgInfoPanel.VurderOmsorg');
   });
 
   it('skal vise BostedFakta', () => {
@@ -165,8 +164,8 @@ describe('<OmsorgInfoPanel>', () => {
       onSubmit={() => undefined}
     />);
     const bostedFaktaView = wrapper.find(BostedFaktaView);
-    expect(bostedFaktaView).has.length(1);
-    expect(bostedFaktaView.at(0).prop('personopplysning')).is.eql(personopplysning);
+    expect(bostedFaktaView).toHaveLength(1);
+    expect(bostedFaktaView.at(0).prop('personopplysning')).toEqual(personopplysning);
   });
 
   it('skal vise OmsorgFaktaForm', () => {
@@ -189,9 +188,9 @@ describe('<OmsorgInfoPanel>', () => {
       onSubmit={() => undefined}
     />);
     const omsorgFaktaForm = wrapper.find(OmsorgFaktaForm);
-    expect(omsorgFaktaForm).has.length(1);
-    expect(omsorgFaktaForm.at(0).prop('omsorg')).is.eql(false);
-    expect(omsorgFaktaForm.at(0).prop('aksjonspunkter')).is.eql([omsorgAp]);
-    expect(omsorgFaktaForm.at(0).prop('readOnly')).is.eql(false);
+    expect(omsorgFaktaForm).toHaveLength(1);
+    expect(omsorgFaktaForm.at(0).prop('omsorg')).toEqual(false);
+    expect(omsorgFaktaForm.at(0).prop('aksjonspunkter')).toEqual([omsorgAp]);
+    expect(omsorgFaktaForm.at(0).prop('readOnly')).toEqual(false);
   });
 });

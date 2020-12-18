@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import moment from 'moment';
 import { shallow } from 'enzyme';
 import { FieldArrayFieldsProps } from 'redux-form';
@@ -46,9 +45,9 @@ describe('<BarnPanel>', () => {
     />);
 
     const datepickerField = wrapper.find(DatepickerField);
-    expect(datepickerField).to.have.length(2);
+    expect(datepickerField).toHaveLength(2);
     const dateLabel = wrapper.find(DateLabel);
-    expect(dateLabel).to.have.length(0);
+    expect(dateLabel).toHaveLength(0);
   });
 
   it('skal ikke kunne endre fødselsdatoer når barna er bekreftet av TPS', () => {
@@ -75,9 +74,9 @@ describe('<BarnPanel>', () => {
     />);
 
     const datepickerField = wrapper.find(DatepickerField);
-    expect(datepickerField).to.have.length(0);
+    expect(datepickerField).toHaveLength(0);
     const dateLabel = wrapper.find(DateLabel);
-    expect(dateLabel).to.have.length(2);
+    expect(dateLabel).toHaveLength(2);
   });
 
   it('skal vise korrekt alder på barn', () => {
@@ -111,8 +110,8 @@ describe('<BarnPanel>', () => {
     />);
 
     const alderMessage = wrapper.find({ id: 'BarnPanel.Age' });
-    expect(alderMessage).to.have.length(2);
-    expect(alderMessage.at(0).props().values.age).to.eql('1');
-    expect(alderMessage.at(1).props().values.age).to.eql('2');
+    expect(alderMessage).toHaveLength(2);
+    expect(alderMessage.at(0).props().values.age).toEqual('1');
+    expect(alderMessage.at(1).props().values.age).toEqual('2');
   });
 });

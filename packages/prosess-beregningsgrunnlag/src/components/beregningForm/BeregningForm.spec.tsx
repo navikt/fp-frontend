@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme/build';
 
@@ -196,12 +195,12 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const avvikPanel = wrapper.find(AvviksopplysningerPanel);
-    expect(avvikPanel.props().harAksjonspunkter).to.have.equal(true);
-    expect(avvikPanel.props().gjelderBesteberegning).to.have.equal(false);
-    expect(avvikPanel.props().sammenligningsgrunnlagPrStatus[0]).to.have.equal(sammenligningsgrunnlagPrStatus);
-    expect(avvikPanel.props().relevanteStatuser).to.have.equal(relevanteStatuser);
+    expect(avvikPanel.props().harAksjonspunkter).toBe(true);
+    expect(avvikPanel.props().gjelderBesteberegning).toBe(false);
+    expect(avvikPanel.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(avvikPanel.props().relevanteStatuser).toBe(relevanteStatuser);
     const expectedPerioder = lagPeriode();
-    expect(avvikPanel.props().allePerioder[0]).to.eql(expectedPerioder);
+    expect(avvikPanel.props().allePerioder[0]).toEqual(expectedPerioder);
   });
   it('skal teste at AksjonspunktHjelp rendrer fra BeregningFP', () => {
     const wrapper = shallow(<BeregningFormImpl
@@ -219,7 +218,7 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const aksjonspunktHelpTextHTML = wrapper.find(AksjonspunktHelpTextHTML);
-    expect(aksjonspunktHelpTextHTML.length).to.equal(1);
+    expect(aksjonspunktHelpTextHTML.length).toBe(1);
   });
   it('skal teste at SkjeringspunktOgStatusPanel får korrekte props fra BeregningFP', () => {
     const wrapper = shallow(<BeregningFormImpl
@@ -237,7 +236,7 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const skjeringspunktOgStatusPanel = wrapper.find(SkjeringspunktOgStatusPanel2);
-    expect(skjeringspunktOgStatusPanel.props().gjeldendeAksjonspunkter).to.equal(apEttLukketOgEttApent);
+    expect(skjeringspunktOgStatusPanel.props().gjeldendeAksjonspunkter).toBe(apEttLukketOgEttApent);
   });
 
   it('skal teste at Aksjonspunktbehandler får korrekte props fra BeregningFP', () => {
@@ -256,11 +255,11 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const aksjonspunktBehandler = wrapper.find(AksjonspunktBehandler);
-    expect(aksjonspunktBehandler.props().readOnly).to.have.equal(false);
-    expect(aksjonspunktBehandler.props().tidsBegrensetInntekt).to.have.equal(false);
+    expect(aksjonspunktBehandler.props().readOnly).toBe(false);
+    expect(aksjonspunktBehandler.props().tidsBegrensetInntekt).toBe(false);
     const expectedPerioder = lagPeriode();
-    expect(aksjonspunktBehandler.props().allePerioder[0]).to.eql(expectedPerioder);
-    expect(aksjonspunktBehandler.props().aksjonspunkter).to.eql(apEttLukketOgEttApent);
+    expect(aksjonspunktBehandler.props().allePerioder[0]).toEqual(expectedPerioder);
+    expect(aksjonspunktBehandler.props().aksjonspunkter).toEqual(apEttLukketOgEttApent);
   });
 
   it('skal teste at Beregningsgrunnlag får korrekte props fra BeregningFP', () => {
@@ -280,11 +279,11 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const beregningsgrunnlag = wrapper.find(Beregningsgrunnlag);
-    expect(beregningsgrunnlag.props().relevanteStatuser).to.have.equal(relevanteStatuser);
-    expect(beregningsgrunnlag.props().readOnly).to.have.equal(false);
-    expect(beregningsgrunnlag.props().gjeldendeAksjonspunkter).to.have.equal(apEttLukketOgEttApent);
+    expect(beregningsgrunnlag.props().relevanteStatuser).toBe(relevanteStatuser);
+    expect(beregningsgrunnlag.props().readOnly).toBe(false);
+    expect(beregningsgrunnlag.props().gjeldendeAksjonspunkter).toBe(apEttLukketOgEttApent);
     const expectedPerioder = lagPeriode();
-    expect(beregningsgrunnlag.props().allePerioder[0]).to.eql(expectedPerioder);
+    expect(beregningsgrunnlag.props().allePerioder[0]).toEqual(expectedPerioder);
   });
 
   it('skal teste at Beregningsgrunnlag ikke blir vist', () => {
@@ -304,7 +303,7 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const beregningsgrunnlag = wrapper.find(Beregningsgrunnlag);
-    expect(beregningsgrunnlag).to.have.lengthOf(0);
+    expect(beregningsgrunnlag).toHaveLength(0);
   });
 
   it('skal teste at BeregningForm rendrer riktige komponenter', () => {
@@ -325,11 +324,11 @@ describe('<BeregningForm>', () => {
       {...reduxFormPropsMock}
     />);
     const avvikspanel = wrapper.find('AvviksopplysningerPanel');
-    expect(avvikspanel).to.have.lengthOf(1);
+    expect(avvikspanel).toHaveLength(1);
     const aksjonPunktPanel = wrapper.find(AksjonspunktBehandler);
-    expect(aksjonPunktPanel).to.have.lengthOf(1);
+    expect(aksjonPunktPanel).toHaveLength(1);
     const beregningsResultatPanel = wrapper.find(BeregningsresultatTable);
-    expect(beregningsResultatPanel).to.have.lengthOf(1);
+    expect(beregningsResultatPanel).toHaveLength(1);
   });
 
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5039, samt varigEndring', () => {
@@ -342,9 +341,9 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkter = [apVurderDekningsgrad, apVurderVarigEndretEllerNyoppstartetSN];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkter, allPerioder, false);
-    expect(result).to.have.lengthOf(2);
-    expect(result[0].kode).to.have.equal('5087');
-    expect(result[1].kode).to.have.equal('5039');
+    expect(result).toHaveLength(2);
+    expect(result[0].kode).toBe('5087');
+    expect(result[1].kode).toBe('5039');
   });
 
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5039, uten varigEndring', () => {
@@ -357,9 +356,9 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkter = [apVurderDekningsgrad, apVurderVarigEndretEllerNyoppstartetSN];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkter, allPerioder, false);
-    expect(result).to.have.lengthOf(2);
-    expect(result[0].kode).to.have.equal('5087');
-    expect(result[1].kode).to.have.equal('5039');
+    expect(result).toHaveLength(2);
+    expect(result[0].kode).toBe('5087');
+    expect(result[1].kode).toBe('5039');
   });
 
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5049', () => {
@@ -371,9 +370,9 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkter = [apVurderDekningsgrad, apFastsettBgSnNyIArbeidslivet];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkter, allPerioder, false);
-    expect(result).to.have.lengthOf(2);
-    expect(result[0].kode).to.have.equal('5087');
-    expect(result[1].kode).to.have.equal('5049');
+    expect(result).toHaveLength(2);
+    expect(result[0].kode).toBe('5087');
+    expect(result[1].kode).toBe('5049');
   });
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5038', () => {
     const values = {
@@ -384,9 +383,9 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkter = [apVurderDekningsgrad, apFastsettBgATFL];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkter, allPerioder, false);
-    expect(result).to.have.lengthOf(2);
-    expect(result[0].kode).to.have.equal('5087');
-    expect(result[1].kode).to.have.equal('5038');
+    expect(result).toHaveLength(2);
+    expect(result[0].kode).toBe('5087');
+    expect(result[1].kode).toBe('5038');
   });
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5039', () => {
     const values = {
@@ -397,9 +396,9 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkter = [apVurderDekningsgrad, apVurderVarigEndretEllerNyoppstartetSN];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkter, allPerioder, false);
-    expect(result).to.have.lengthOf(2);
-    expect(result[0].kode).to.have.equal('5087');
-    expect(result[1].kode).to.have.equal('5039');
+    expect(result).toHaveLength(2);
+    expect(result[0].kode).toBe('5087');
+    expect(result[1].kode).toBe('5039');
   });
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087', () => {
     const values = {
@@ -408,8 +407,8 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkt = [apVurderDekningsgrad];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkt, allPerioder, false);
-    expect(result).to.have.lengthOf(1);
-    expect(result[0].kode).to.have.equal('5087');
+    expect(result).toHaveLength(1);
+    expect(result[0].kode).toBe('5087');
   });
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5039', () => {
     const values = {
@@ -418,8 +417,8 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkt = [apVurderVarigEndretEllerNyoppstartetSN];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkt, allPerioder, false);
-    expect(result).to.have.lengthOf(1);
-    expect(result[0].kode).to.have.equal('5039');
+    expect(result).toHaveLength(1);
+    expect(result[0].kode).toBe('5039');
   });
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5049', () => {
     const values = {
@@ -428,15 +427,15 @@ describe('<BeregningForm>', () => {
     };
     const aksjonspunkt = [apFastsettBgSnNyIArbeidslivet];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkt, allPerioder, false);
-    expect(result).to.have.lengthOf(1);
-    expect(result[0].kode).to.have.equal('5049');
+    expect(result).toHaveLength(1);
+    expect(result[0].kode).toBe('5049');
   });
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5038', () => {
     const values = {};
     const aksjonspunkt = [apFastsettBgATFL];
     const result = transformValues(values, relevanteStatuser, allAndeler, aksjonspunkt, allPerioder, false);
-    expect(result).to.have.lengthOf(1);
-    expect(result[0].kode).to.have.equal('5038');
+    expect(result).toHaveLength(1);
+    expect(result[0].kode).toBe('5038');
   });
   it('skal teste buildInitialValues', () => {
     const gjeldendeAksjonspunkter = [apFastsettBgTidsbegrensetArbeidsforhold];
@@ -449,6 +448,6 @@ describe('<BeregningForm>', () => {
       undefined: '',
       dekningsgrad: undefined,
     };
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 });

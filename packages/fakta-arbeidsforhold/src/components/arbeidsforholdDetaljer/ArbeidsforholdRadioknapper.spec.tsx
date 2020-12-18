@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { RadioOption } from '@fpsak-frontend/form';
 
@@ -40,8 +39,8 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingId={1}
       behandlingVersjon={1}
     />);
-    expect(wrapper.find('[name=\'arbeidsforholdHandlingField\']')).has.length(1);
-    expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).has.length(0);
+    expect(wrapper.find('[name=\'arbeidsforholdHandlingField\']')).toHaveLength(1);
+    expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).toHaveLength(0);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom etter stp', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -55,20 +54,20 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingId={1}
       behandlingVersjon={1}
     />);
-    expect(wrapper.find('[name=\'arbeidsforholdHandlingField\']')).has.length(1);
-    expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).has.length(1);
+    expect(wrapper.find('[name=\'arbeidsforholdHandlingField\']')).toHaveLength(1);
+    expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
-    expect(radioOptions).has.length(5);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
-    expect(radioOptions.get(2).props.disabled).to.eql(false);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(3).props.disabled).to.eql(true);
-    expect(radioOptions.get(4).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(4).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(5);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
+    expect(radioOptions.get(2).props.disabled).toEqual(false);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(3).props.disabled).toEqual(true);
+    expect(radioOptions.get(4).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom samtidig som stp', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -86,17 +85,17 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
-    expect(radiogroup).has.length(1);
+    expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
-    expect(radioOptions).has.length(4);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(2).props.disabled).to.eql(true);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(3).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(4);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(2).props.disabled).toEqual(true);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(3).props.disabled).toEqual(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom undefined', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -114,19 +113,19 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
-    expect(radiogroup).has.length(1);
+    expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
-    expect(radioOptions).has.length(5);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
-    expect(radioOptions.get(2).props.disabled).to.eql(false);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(3).props.disabled).to.eql(true);
-    expect(radioOptions.get(4).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(4).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(5);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
+    expect(radioOptions.get(2).props.disabled).toEqual(false);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(3).props.disabled).toEqual(true);
+    expect(radioOptions.get(4).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom etter stp, tom undefined', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -145,17 +144,17 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
-    expect(radiogroup).has.length(1);
+    expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
-    expect(radioOptions).has.length(4);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(2).props.disabled).to.eql(true);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(3).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(4);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(2).props.disabled).toEqual(true);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(3).props.disabled).toEqual(true);
   });
   it('Skal vise enablet overstyrtTom picker, uten IM, tomDato lik stp, med brukJustertePerioder', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -174,13 +173,13 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const overstyrtTom = wrapper.find('[name=\'overstyrtTom\']');
-    expect(overstyrtTom).has.length(1);
+    expect(overstyrtTom).toHaveLength(1);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
   });
   it('Skal vise disablet overstyrtTom picker, uten IM, tomDato lik stp, ikke med brukJustertPerioder', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -199,13 +198,13 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const overstyrtTom = wrapper.find('[name=\'overstyrtTom\']');
-    expect(overstyrtTom).has.length(1);
+    expect(overstyrtTom).toHaveLength(1);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(1).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(1).props.disabled).toEqual(true);
   });
   it('Skal vise RadioOption for fjerning av arbeidsforhold når arbeidsforhold ikke fra AA-reg', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -225,12 +224,12 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.FjernArbeidsforholdet');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(wrapper.find('[name=\'overstyrtTom\']')).has.length(0);
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.FjernArbeidsforholdet');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(wrapper.find('[name=\'overstyrtTom\']')).toHaveLength(0);
   });
   it('Skal vise RadioOption knapper som er enabled hvis lagt til av saksbehandler', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -248,19 +247,19 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
-    expect(radiogroup).has.length(1);
+    expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
-    expect(radioOptions).has.length(5);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(true);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
-    expect(radioOptions.get(2).props.disabled).to.eql(true);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(3).props.disabled).to.eql(false);
-    expect(radioOptions.get(4).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(4).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(5);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(true);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
+    expect(radioOptions.get(2).props.disabled).toEqual(true);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(3).props.disabled).toEqual(false);
+    expect(radioOptions.get(4).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon uten tom og ikke mottatt IM', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -284,17 +283,19 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(5);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
-    expect(radioOptions.get(2).props.disabled).to.eql(false);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(3).props.disabled).to.eql(false);
-    expect(radioOptions.get(4).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
-    expect(radioOptions.get(4).props.disabled).to.eql(false);
+    expect(radioOptions).toHaveLength(5);
+    expect(radioOptions.get(0).props.label.id).toEqual(
+      'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon',
+    );
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
+    expect(radioOptions.get(2).props.disabled).toEqual(false);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(3).props.disabled).toEqual(false);
+    expect(radioOptions.get(4).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
+    expect(radioOptions.get(4).props.disabled).toEqual(false);
   });
   it('Skal ikke vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon uten tom og mottatt IM', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -318,11 +319,13 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(0).props.label.id).toEqual(
+      'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon',
+    );
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon med tom og ikke mottatt IM', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -346,17 +349,19 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(5);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
-    expect(radioOptions.get(2).props.disabled).to.eql(false);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(3).props.disabled).to.eql(false);
-    expect(radioOptions.get(4).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
-    expect(radioOptions.get(4).props.disabled).to.eql(false);
+    expect(radioOptions).toHaveLength(5);
+    expect(radioOptions.get(0).props.label.id).toEqual(
+      'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon',
+    );
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
+    expect(radioOptions.get(2).props.disabled).toEqual(false);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(3).props.disabled).toEqual(false);
+    expect(radioOptions.get(4).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
+    expect(radioOptions.get(4).props.disabled).toEqual(false);
   });
   it('Skal ikke vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon med tom og mottatt IM', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -380,11 +385,13 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.label.id).toEqual(
+      'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon',
+    );
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har flere permisjoner uten mottatt IM, '
     + 'samt disable knapp hvor saksbehandler kan velge at soeker er i permisjon', () => {
@@ -414,17 +421,19 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(5);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
-    expect(radioOptions.get(1).props.disabled).to.eql(false);
-    expect(radioOptions.get(2).props.label.id).to.eql('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
-    expect(radioOptions.get(2).props.disabled).to.eql(false);
-    expect(radioOptions.get(3).props.label.id).to.eql('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
-    expect(radioOptions.get(3).props.disabled).to.eql(false);
-    expect(radioOptions.get(4).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
-    expect(radioOptions.get(4).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(5);
+    expect(radioOptions.get(0).props.label.id).toEqual(
+      'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon',
+    );
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.AvslaYtelseManglendeOpplysninger');
+    expect(radioOptions.get(1).props.disabled).toEqual(false);
+    expect(radioOptions.get(2).props.label.id).toEqual('PersonArbeidsforholdDetailForm.InntektIkkeMedIBeregningsgrunnlaget');
+    expect(radioOptions.get(2).props.disabled).toEqual(false);
+    expect(radioOptions.get(3).props.label.id).toEqual('PersonArbeidsforholdDetailForm.BenyttAInntektIBeregningsgrunnlag');
+    expect(radioOptions.get(3).props.disabled).toEqual(false);
+    expect(radioOptions.get(4).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
+    expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har flere permisjoner og mottatt IM, '
     + 'samt disable knapp hvor saksbehandler kan velge at soeker er i permisjon', () => {
@@ -454,11 +463,13 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
-    expect(radioOptions.get(1).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.label.id).toEqual(
+      'PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon',
+    );
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
+    expect(radioOptions.get(1).props.disabled).toEqual(true);
   });
   it('skal kun vise to RadioOptions når arbeidsforholdhandling er undefined', () => {
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
@@ -475,10 +486,10 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       behandlingVersjon={1}
     />);
     const radioOptions = wrapper.find('RadioOption');
-    expect(radioOptions).has.length(2);
-    expect(radioOptions.get(0).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
-    expect(radioOptions.get(0).props.disabled).to.eql(false);
-    expect(radioOptions.get(1).props.label.id).to.eql('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
-    expect(radioOptions.get(1).props.disabled).to.eql(true);
+    expect(radioOptions).toHaveLength(2);
+    expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
+    expect(radioOptions.get(0).props.disabled).toEqual(false);
+    expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdetErIkkeAktivt');
+    expect(radioOptions.get(1).props.disabled).toEqual(true);
   });
 });

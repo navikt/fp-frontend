@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -28,12 +27,12 @@ describe('<UtlandPanel>', () => {
       />,
     );
 
-    expect(wrapper.find(Image)).to.have.length(1);
-    expect(wrapper.find(RadioGroupField)).to.have.length(0);
+    expect(wrapper.find(Image)).toHaveLength(1);
+    expect(wrapper.find(RadioGroupField)).toHaveLength(0);
 
     wrapper.find(Image).prop('onClick')({} as React.MouseEvent);
 
-    expect(wrapper.find(Image)).to.have.length(0);
-    expect(wrapper.find(RadioGroupField)).to.have.length(1);
+    expect(wrapper.find(Image)).toHaveLength(0);
+    expect(wrapper.find(RadioGroupField)).toHaveLength(1);
   });
 });

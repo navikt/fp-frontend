@@ -1,7 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import { intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -33,7 +32,7 @@ describe('<VilkarResultPicker>', () => {
       customVilkarIkkeOppfyltText="Ikke oppfylt"
       customVilkarOppfyltText="Oppfylt"
     />);
-    expect(wrapper.find('RadioOption')).to.have.length(2);
+    expect(wrapper.find('RadioOption')).toHaveLength(2);
   });
 
   it('skal kunne overstyre vilkårtekster', () => {
@@ -47,7 +46,7 @@ describe('<VilkarResultPicker>', () => {
     />);
 
     // @ts-ignore fiks
-    expect(wrapper.find('RadioOption').at(1).prop('label')).to.equal(textId);
+    expect(wrapper.find('RadioOption').at(1).prop('label')).toBe(textId);
   });
 
   it('skal ikke vise nedtrekksliste når vilkårsresultat ikke er valgt', () => {
@@ -59,7 +58,7 @@ describe('<VilkarResultPicker>', () => {
       customVilkarOppfyltText="Oppfylt"
     />);
 
-    expect(wrapper.find('SelectField')).to.have.length(0);
+    expect(wrapper.find('SelectField')).toHaveLength(0);
   });
 
   it('skal ikke vise nedtrekksliste når vilkårsresultat er OK', () => {
@@ -71,7 +70,7 @@ describe('<VilkarResultPicker>', () => {
       customVilkarOppfyltText="Oppfylt"
     />);
 
-    expect(wrapper.find('SelectField')).to.have.length(0);
+    expect(wrapper.find('SelectField')).toHaveLength(0);
   });
 
   it('skal vise nedtrekksliste når vilkårsresultat er valgt', () => {
@@ -84,10 +83,10 @@ describe('<VilkarResultPicker>', () => {
     />);
 
     const select = wrapper.find('SelectField');
-    expect(select).to.have.length(1);
-    expect(select.prop('label')).to.eql('Avslagsårsak');
-    expect(select.prop('placeholder')).to.eql('Velg årsak');
-    expect(select.prop('selectValues')).to.have.length(1);
+    expect(select).toHaveLength(1);
+    expect(select.prop('label')).toEqual('Avslagsårsak');
+    expect(select.prop('placeholder')).toEqual('Velg årsak');
+    expect(select.prop('selectValues')).toHaveLength(1);
   });
 
   it('skal feile validering når en har valgt å avvise vilkår men ikke valgt avslagsårsak', () => {
@@ -95,7 +94,7 @@ describe('<VilkarResultPicker>', () => {
     const avslagCode = undefined;
     const errors = VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
-    expect(errors.avslagCode).to.eql(isRequiredMessage());
+    expect(errors.avslagCode).toEqual(isRequiredMessage());
   });
 
   it('skal ikke feile validering når en har valgt både å avvise vilkår og avslagsårsak', () => {
@@ -103,7 +102,7 @@ describe('<VilkarResultPicker>', () => {
     const avslagCode = 'VALGT_KODE';
     const errors = VilkarResultPicker.validate(erVilkarOk, avslagCode);
 
-    expect(errors).to.eql({});
+    expect(errors).toEqual({});
   });
 
   it('skal sette opp initielle verdier', () => {
@@ -123,7 +122,7 @@ describe('<VilkarResultPicker>', () => {
     }] as Aksjonspunkt[];
     const intielleVerdier = VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 
-    expect(intielleVerdier).to.eql({
+    expect(intielleVerdier).toEqual({
       avslagCode: 'Avslagskoden',
       erVilkarOk: false,
     });

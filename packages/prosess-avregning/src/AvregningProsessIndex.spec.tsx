@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -48,6 +47,6 @@ describe('<AvregningProsessIndex>', () => {
       status=""
       vilkar={[]}
     />);
-    expect(wrapper.find(AvregningPanel)).has.length(1);
+    expect(wrapper.find(AvregningPanel)).toHaveLength(1);
   });
 });

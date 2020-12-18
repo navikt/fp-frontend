@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Element } from 'nav-frontend-typografi';
 
@@ -39,20 +38,20 @@ describe('<Tilbaketrekkpanel>', () => {
     />);
 
     const radioOption = wrapper.find(RadioOption);
-    expect(radioOption).to.have.length(2);
+    expect(radioOption).toHaveLength(2);
     const textfield = wrapper.find(TextAreaField);
-    expect(textfield).to.have.length(1);
+    expect(textfield).toHaveLength(1);
     const button = wrapper.find(ProsessStegSubmitButton);
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
     const element = wrapper.find(Element);
-    expect(element).to.have.length(1);
+    expect(element).toHaveLength(1);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom alle data mangler', () => {
     const expectedInitialValues = undefined;
 
     const actualInitialValues = buildInitialValues.resultFunc(undefined, undefined);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom aksjonspunkt ikke er løst før', () => {
@@ -64,7 +63,7 @@ describe('<Tilbaketrekkpanel>', () => {
       skalHindreTilbaketrekk: null,
     } as BeregningsresultatFp;
     const actualInitialValues = buildInitialValues.resultFunc(ownProps.vurderTilbaketrekkAP, tilkjentYtelse);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom aksjonspunkt er løst før og er satt til false', () => {
@@ -79,7 +78,7 @@ describe('<Tilbaketrekkpanel>', () => {
       skalHindreTilbaketrekk: false,
     } as BeregningsresultatFp;
     const actualInitialValues = buildInitialValues.resultFunc(ownProps.vurderTilbaketrekkAP, tilkjentYtelse);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom aksjonspunkt er løst før og er satt til true', () => {
@@ -94,7 +93,7 @@ describe('<Tilbaketrekkpanel>', () => {
       skalHindreTilbaketrekk: true,
     } as BeregningsresultatFp;
     const actualInitialValues = buildInitialValues.resultFunc(ownProps.vurderTilbaketrekkAP, tilkjentYtelse);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at transformvalues settes korrekt', () => {
@@ -108,6 +107,6 @@ describe('<Tilbaketrekkpanel>', () => {
       begrunnelseVurderTilbaketrekk: 'Test',
     };
     const actualTransformedValues = transformValues(values);
-    expect(actualTransformedValues).is.deep.equal(expectedTransformedValues);
+    expect(actualTransformedValues).toEqual(expectedTransformedValues);
   });
 });

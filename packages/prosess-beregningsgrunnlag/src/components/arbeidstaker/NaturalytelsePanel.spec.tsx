@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
@@ -199,7 +198,7 @@ describe('<NaturalytelsePanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.length).to.equal(7);
+    expect(rows.length).toBe(7);
   });
 
   it('Skal teste at innholdet i radene er korrekt fordelt', () => {
@@ -210,29 +209,29 @@ describe('<NaturalytelsePanel>', () => {
     const rows = wrapper.find('Row');
     // Header rad
     const formaterteTekster = rows.at(0).find('FormattedMessage');
-    expect(formaterteTekster.at(0).props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Maaned');
-    expect(formaterteTekster.at(1).props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Aar');
+    expect(formaterteTekster.at(0).props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Maaned');
+    expect(formaterteTekster.at(1).props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Aar');
 
     // Første firma
-    expect(rows.at(1).find('Element').childAt(0).text()).to.equal('arbeidsgiver1');
+    expect(rows.at(1).find('Element').childAt(0).text()).toBe('arbeidsgiver1');
     const normalTekster = rows.at(2).find('Normaltekst');
-    expect(normalTekster.at(0).childAt(0).text()).to.equal('01.09.2018 - 01.12.2018');
-    expect(normalTekster.at(1).childAt(0).text()).to.equal('4 167');
-    expect(rows.at(2).find('Element').childAt(0).text()).to.equal('50 000');
+    expect(normalTekster.at(0).childAt(0).text()).toBe('01.09.2018 - 01.12.2018');
+    expect(normalTekster.at(1).childAt(0).text()).toBe('4 167');
+    expect(rows.at(2).find('Element').childAt(0).text()).toBe('50 000');
 
     // Andre firma
-    expect(rows.at(3).find('Element').childAt(0).text()).to.equal('arbeidsgiver2');
+    expect(rows.at(3).find('Element').childAt(0).text()).toBe('arbeidsgiver2');
     const normalTekster2 = rows.at(4).find('Normaltekst');
-    expect(normalTekster2.at(0).childAt(0).text()).to.equal('01.07.2018');
-    expect(normalTekster2.at(1).childAt(0).text()).to.equal('833');
-    expect(rows.at(4).find('Element').childAt(0).text()).to.equal('10 000');
+    expect(normalTekster2.at(0).childAt(0).text()).toBe('01.07.2018');
+    expect(normalTekster2.at(1).childAt(0).text()).toBe('833');
+    expect(rows.at(4).find('Element').childAt(0).text()).toBe('10 000');
 
     // Tredje firma
-    expect(rows.at(5).find('Element').childAt(0).text()).to.equal('arbeidsgiver3');
+    expect(rows.at(5).find('Element').childAt(0).text()).toBe('arbeidsgiver3');
     const normalTekster3 = rows.at(6).find('Normaltekst');
-    expect(normalTekster3.at(0).childAt(0).text()).to.equal('01.07.2018');
-    expect(normalTekster3.at(1).childAt(0).text()).to.equal('5 833');
-    expect(rows.at(6).find('Element').childAt(0).text()).to.equal('70 000');
+    expect(normalTekster3.at(0).childAt(0).text()).toBe('01.07.2018');
+    expect(normalTekster3.at(1).childAt(0).text()).toBe('5 833');
+    expect(rows.at(6).find('Element').childAt(0).text()).toBe('70 000');
   });
 
   it('Skal teste at selector lager forventet objekt ut av en liste med '
@@ -246,6 +245,6 @@ describe('<NaturalytelsePanel>', () => {
       },
     };
     const selectorResult = createNaturalytelseTableData(bgPerioder, arbeidsgiverOpplysningerPerId);
-    expect(selectorResult).to.deep.equal(expectedReturnObject);
+    expect(selectorResult).toEqual(expectedReturnObject);
   });
 });

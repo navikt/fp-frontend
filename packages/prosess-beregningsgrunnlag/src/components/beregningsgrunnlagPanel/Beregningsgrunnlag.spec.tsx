@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -170,10 +169,10 @@ describe('<Beregningsgrunnlag>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const atPanel = wrapper.find(GrunnlagForAarsinntektPanelAT);
-    expect(atPanel).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
-    expect(atPanel.props().alleAndeler[0]).to.equal(arbeidstakerAndel);
+    expect(atPanel).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
+    expect(atPanel.props().alleAndeler[0]).toBe(arbeidstakerAndel);
   });
   it('Skal teste at korrekte komponenter vises for frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -188,10 +187,10 @@ describe('<Beregningsgrunnlag>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const flPanel = wrapper.find(GrunnlagForAarsinntektPanelFL);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(flPanel).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
-    expect(flPanel.props().alleAndeler[0]).to.equal(frilanserAndel);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(flPanel).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
+    expect(flPanel.props().alleAndeler[0]).toBe(frilanserAndel);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -206,10 +205,10 @@ describe('<Beregningsgrunnlag>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(snPanel).to.have.length(1);
-    expect(snPanel.props().alleAndeler[0]).to.equal(selvstedigNaeringsdrivendeAndel);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(snPanel).toHaveLength(1);
+    expect(snPanel.props().alleAndeler[0]).toBe(selvstedigNaeringsdrivendeAndel);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende med NyIArbeidslivet aksjonspunkt', () => {
     const ap = [selvstendigNyIArbAksjonspunkt as Aksjonspunkt];
@@ -225,11 +224,11 @@ describe('<Beregningsgrunnlag>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(snPanel).to.have.length(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(snPanel).toHaveLength(1);
 
-    expect(snPanel.props().alleAndeler[0]).to.equal(selvstedigNaeringsdrivendeAndel);
+    expect(snPanel.props().alleAndeler[0]).toBe(selvstedigNaeringsdrivendeAndel);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende / arbeidstaker med aksjonspunkt', () => {
     const ap = [selvstendigAksjonspunkt as Aksjonspunkt];
@@ -244,10 +243,10 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(1);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(1);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende / frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -265,10 +264,10 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(1);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(1);
   });
   it('Skal teste at korrekte komponenter vises for arbeidstaker / frilanser med aksjonspunkt', () => {
     const ap = [atflAksjonspunkt as Aksjonspunkt];
@@ -287,10 +286,10 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
   });
   it('Skal teste at korrekte komponenter vises for arbeidstaker / frilanser / selvstendig næringsdrivende med aksjonspunkt', () => {
     const ap = [selvstendigAksjonspunkt];
@@ -310,10 +309,10 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(1);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(1);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(1);
   });
   it('Skal teste at korrekte komponenter vises for dagpenger / aap uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -327,14 +326,14 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(0);
-    expect(wrapper.find(TilstotendeYtelser)).to.have.length(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
+    expect(wrapper.find(TilstotendeYtelser)).toHaveLength(1);
 
     const ytelsePanel = wrapper.find(TilstotendeYtelser);
-    expect(ytelsePanel.props().gjelderBesteberegning).to.equal(false);
+    expect(ytelsePanel.props().gjelderBesteberegning).toBe(false);
   });
   it('Skal teste at korrekte komponenter vises for andre tilstøtende ytelser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -348,12 +347,12 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
-    expect(wrapper.find(TilstotendeYtelser)).to.have.length(0);
-    expect(wrapper.find(YtelserFraInfotrygd)).to.have.length(1);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
+    expect(wrapper.find(TilstotendeYtelser)).toHaveLength(0);
+    expect(wrapper.find(YtelserFraInfotrygd)).toHaveLength(1);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
   });
   it('Skal teste at korrekte komponenter vises for militær uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -367,24 +366,24 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).to.have.length(0);
-    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).to.have.length(0);
-    expect(wrapper.find(TilstotendeYtelser)).to.have.length(0);
-    expect(wrapper.find(YtelserFraInfotrygd)).to.have.length(0);
-    expect(wrapper.find(MilitaerPanel)).to.have.length(1);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
+    expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
+    expect(wrapper.find(TilstotendeYtelser)).toHaveLength(0);
+    expect(wrapper.find(YtelserFraInfotrygd)).toHaveLength(0);
+    expect(wrapper.find(MilitaerPanel)).toHaveLength(1);
   });
   it('Skal teste buildInitialValues med ATFL og vurderDekningsgrad aksjonspunkt', () => {
     const aksjonspunkter = [vurderAksjonspunktDekningsgrad, atflAksjonspunkt];
     const values = Beregningsgrunnlag.buildInitialValues(aksjonspunkter);
-    expect(values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]).to.equal('begrunnelse dekningsgrad');
-    expect(values.ATFLVurdering).to.equal('begrunnelse arbeidstaker/frilans');
+    expect(values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]).toBe('begrunnelse dekningsgrad');
+    expect(values.ATFLVurdering).toBe('begrunnelse arbeidstaker/frilans');
   });
   it('Skal teste buildInitialValues uten aksjonspunkter', () => {
     const aksjonspunkter = [];
     const values = Beregningsgrunnlag.buildInitialValues(aksjonspunkter);
-    expect(values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]).to.equal('');
-    expect(values.ATFLVurdering).to.equal('');
+    expect(values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]).toBe('');
+    expect(values.ATFLVurdering).toBe('');
   });
   it('Skal teste at transformValues gir forventet resultat', () => {
     const values = {
@@ -392,10 +391,10 @@ describe('<Beregningsgrunnlag>', () => {
       inntektFrilanser: 100,
     };
     const transformedValues = Beregningsgrunnlag.transformValues(values, []);
-    expect(transformedValues.kode).to.equal('5047');
-    expect(transformedValues.begrunnelse).to.equal('aaa');
-    expect(transformedValues.fastsatteTidsbegrensedePerioder).to.lengthOf(0);
-    expect(transformedValues.frilansInntekt).to.equal(100);
+    expect(transformedValues.kode).toBe('5047');
+    expect(transformedValues.begrunnelse).toBe('aaa');
+    expect(transformedValues.fastsatteTidsbegrensedePerioder).toHaveLength(0);
+    expect(transformedValues.frilansInntekt).toBe(100);
   });
   it('Skal teste at transformValues gir forventet resultat med inntekt undefined', () => {
     const values = {
@@ -403,9 +402,9 @@ describe('<Beregningsgrunnlag>', () => {
       inntektFrilanser: null,
     };
     const transformedValues = Beregningsgrunnlag.transformValues(values, []);
-    expect(transformedValues.kode).to.equal('5047');
-    expect(transformedValues.begrunnelse).to.equal('aaa');
-    expect(transformedValues.fastsatteTidsbegrensedePerioder).to.lengthOf(0);
-    expect(transformedValues.frilansInntekt).to.equal(null);
+    expect(transformedValues.kode).toBe('5047');
+    expect(transformedValues.begrunnelse).toBe('aaa');
+    expect(transformedValues.fastsatteTidsbegrensedePerioder).toHaveLength(0);
+    expect(transformedValues.frilansInntekt).toBe(null);
   });
 });

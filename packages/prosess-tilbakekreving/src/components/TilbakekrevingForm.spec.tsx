@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import AlertStripe from 'nav-frontend-alertstriper';
 
@@ -47,8 +46,8 @@ describe('<TilbakekrevingForm>', () => {
 
     wrapper.setState({ valgtPeriode: perioder[0] });
 
-    expect(wrapper.find(TilbakekrevingPeriodeForm)).to.have.length(1);
-    expect(wrapper.find(TilbakekrevingTimelinePanel)).to.have.length(1);
+    expect(wrapper.find(TilbakekrevingPeriodeForm)).toHaveLength(1);
+    expect(wrapper.find(TilbakekrevingTimelinePanel)).toHaveLength(1);
   });
 
   it('skal ikke vise tidslinje når en har perioder', () => {
@@ -74,9 +73,9 @@ describe('<TilbakekrevingForm>', () => {
       beregnBelop={() => undefined}
     />);
 
-    expect(wrapper.find(TilbakekrevingPeriodeForm)).to.have.length(0);
-    expect(wrapper.find(TilbakekrevingTimelinePanel)).to.have.length(0);
-    expect(wrapper.find(AlertStripe)).to.have.length(0);
+    expect(wrapper.find(TilbakekrevingPeriodeForm)).toHaveLength(0);
+    expect(wrapper.find(TilbakekrevingTimelinePanel)).toHaveLength(0);
+    expect(wrapper.find(AlertStripe)).toHaveLength(0);
   });
 
   it('skal vise feilmelding når en har dette', () => {
@@ -103,7 +102,7 @@ describe('<TilbakekrevingForm>', () => {
       error="TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr"
     />);
 
-    expect(wrapper.find(AlertStripe)).to.have.length(1);
+    expect(wrapper.find(AlertStripe)).toHaveLength(1);
   });
 
   it('skal lage initial values til form der en har lagret en periode og den andre er foreldet', () => {
@@ -166,8 +165,8 @@ describe('<TilbakekrevingForm>', () => {
 
     const resultat = slaSammenOriginaleOgLagredePeriode.resultFunc(originalePerioder, lagredePerioder, rettsgebyr);
 
-    expect(resultat.perioder).to.have.length(2);
-    expect(resultat.perioder[0]).to.eql({
+    expect(resultat.perioder).toHaveLength(2);
+    expect(resultat.perioder[0]).toEqual({
       feilutbetaling: 32000,
       fom: '2016-03-16',
       tom: '2016-05-01',
@@ -179,7 +178,7 @@ describe('<TilbakekrevingForm>', () => {
       årsak: arsak,
       erTotalBelopUnder4Rettsgebyr: false,
     });
-    expect(resultat.perioder[1]).to.eql({
+    expect(resultat.perioder[1]).toEqual({
       feilutbetaling: 19000,
       fom: '2016-05-02',
       tom: '2016-05-26',
@@ -270,8 +269,8 @@ describe('<TilbakekrevingForm>', () => {
 
     const resultat = slaSammenOriginaleOgLagredePeriode.resultFunc(originalePerioder, lagredePerioder, rettsgebyr);
 
-    expect(resultat.perioder).to.have.length(2);
-    expect(resultat.perioder[0]).to.eql({
+    expect(resultat.perioder).toHaveLength(2);
+    expect(resultat.perioder[0]).toEqual({
       feilutbetaling: 10000,
       fom: '2016-03-16',
       tom: '2016-04-03',
@@ -294,7 +293,7 @@ describe('<TilbakekrevingForm>', () => {
       },
       erTotalBelopUnder4Rettsgebyr: false,
     });
-    expect(resultat.perioder[1]).to.eql({
+    expect(resultat.perioder[1]).toEqual({
       feilutbetaling: 22000,
       fom: '2016-04-04',
       tom: '2016-05-26',

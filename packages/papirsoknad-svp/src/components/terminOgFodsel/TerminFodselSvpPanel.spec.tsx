@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { DatepickerField } from '@fpsak-frontend/form';
@@ -14,6 +13,6 @@ describe('<TerminFodselSvpPanel>', () => {
       readOnly={false}
     />);
 
-    expect(wrapper.find(DatepickerField)).to.have.length(2);
+    expect(wrapper.find(DatepickerField)).toHaveLength(2);
   });
 });

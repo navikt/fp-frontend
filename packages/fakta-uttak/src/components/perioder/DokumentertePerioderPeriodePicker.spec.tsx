@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FieldArrayMetaProps } from 'redux-form';
 
@@ -28,13 +27,13 @@ describe('<DokumentertePerioderPeriodePicker>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     // @ts-ignore fiks
     const innerWrapper = shallow(comp);
 
-    expect(innerWrapper.find(PeriodpickerField)).to.have.length(1);
+    expect(innerWrapper.find(PeriodpickerField)).toHaveLength(1);
   });
 });

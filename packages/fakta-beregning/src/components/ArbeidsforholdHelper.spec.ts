@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { sortArbeidsforholdList } from './ArbeidsforholdHelper';
 
 const createArbeidsforhold = (arbeidsgiverNavn, arbeidsgiverId, startdato, opphoersdato, arbeidsforholdId) => ({
@@ -20,11 +19,11 @@ const aleneståendeArbeidsforholdList = [
 describe('<ArbeidsforholdHelper>', () => {
   it('skal sortere arbeidsforhold på startdato', () => {
     const sorted = sortArbeidsforholdList(aleneståendeArbeidsforholdList);
-    expect(sorted).has.length(aleneståendeArbeidsforholdList.length);
-    expect(sorted[0]).to.equal(aleneståendeArbeidsforholdList[3]);
-    expect(sorted[1]).to.equal(aleneståendeArbeidsforholdList[0]);
-    expect(sorted[2]).to.equal(aleneståendeArbeidsforholdList[1]);
-    expect(sorted[3]).to.equal(aleneståendeArbeidsforholdList[2]);
-    expect(sorted[4]).to.equal(aleneståendeArbeidsforholdList[4]);
+    expect(sorted).toHaveLength(aleneståendeArbeidsforholdList.length);
+    expect(sorted[0]).toBe(aleneståendeArbeidsforholdList[3]);
+    expect(sorted[1]).toBe(aleneståendeArbeidsforholdList[0]);
+    expect(sorted[2]).toBe(aleneståendeArbeidsforholdList[1]);
+    expect(sorted[3]).toBe(aleneståendeArbeidsforholdList[2]);
+    expect(sorted[4]).toBe(aleneståendeArbeidsforholdList[4]);
   });
 });

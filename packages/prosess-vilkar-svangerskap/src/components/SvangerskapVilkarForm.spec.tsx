@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
@@ -37,6 +36,6 @@ describe('<SvangerskapVilkarForm>', () => {
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
-    expect(readonlyForm).to.have.length(0);
+    expect(readonlyForm).toHaveLength(0);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -47,12 +46,13 @@ describe('<CheckPersonStatusForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).to.have.length(1);
-    expect(helpText.childAt(0).text())
-      .is.eql('Søker har personstatus: Ukjent. Vurder om behandlingen skal henlegges eller kan fortsette med endret personstatus');
+    expect(helpText).toHaveLength(1);
+    expect(helpText.childAt(0).text()).toEqual(
+      'Søker har personstatus: Ukjent. Vurder om behandlingen skal henlegges eller kan fortsette med endret personstatus',
+    );
 
     const submit = wrapper.find(ProsessStegBegrunnelseTextField);
-    expect(submit).to.have.length(1);
+    expect(submit).toHaveLength(1);
   });
 
   it('skal vise radioknapper for å velge om behandlingen skal fortsette eller henlegges', () => {
@@ -75,11 +75,11 @@ describe('<CheckPersonStatusForm>', () => {
     />);
 
     const radios = wrapper.find(RadioOption);
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
     // @ts-ignore
-    expect(radios.first().prop('label').id).is.eql('CheckPersonStatusForm.HaltBehandling');
+    expect(radios.first().prop('label').id).toEqual('CheckPersonStatusForm.HaltBehandling');
     // @ts-ignore
-    expect(radios.last().prop('label').id).is.eql('CheckPersonStatusForm.ContinueBehandling');
+    expect(radios.last().prop('label').id).toEqual('CheckPersonStatusForm.ContinueBehandling');
   });
 
   it('skal vise en radioknapp for alle personstatuser', () => {
@@ -111,11 +111,11 @@ describe('<CheckPersonStatusForm>', () => {
     />);
 
     const radios = wrapper.find(RadioOption);
-    expect(radios).to.have.length(4);
-    expect(radios.at(2).prop('value')).is.eql('BOSATT');
-    expect(radios.at(2).prop('label')).is.eql('Bosatt');
-    expect(radios.at(3).prop('value')).is.eql('ANNEN');
-    expect(radios.at(3).prop('label')).is.eql('Annen');
+    expect(radios).toHaveLength(4);
+    expect(radios.at(2).prop('value')).toEqual('BOSATT');
+    expect(radios.at(2).prop('label')).toEqual('Bosatt');
+    expect(radios.at(3).prop('value')).toEqual('ANNEN');
+    expect(radios.at(3).prop('label')).toEqual('Annen');
   });
 
   it('skal vise readonly-form når status er readonly', () => {
@@ -143,15 +143,15 @@ describe('<CheckPersonStatusForm>', () => {
     />);
 
     const radioGroupField = wrapper.find('RadioGroupField');
-    expect(radioGroupField).to.have.length(1);
-    expect(radioGroupField.prop('readOnly')).is.true;
+    expect(radioGroupField).toHaveLength(1);
+    expect(radioGroupField.prop('readOnly')).toBe(true);
 
     const info = wrapper.find(ProsessStegBegrunnelseTextField);
-    expect(info).to.have.length(1);
-    expect(info.prop('readOnly')).is.true;
+    expect(info).toHaveLength(1);
+    expect(info.prop('readOnly')).toBe(true);
     const button = wrapper.find(ProsessStegSubmitButton);
-    expect(button).to.have.length(1);
-    expect(button.prop('isReadOnly')).is.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('isReadOnly')).toBe(true);
   });
 
   it('skal sette opp initielle verdier gitt behandling og behandlingspunkt', () => {
@@ -184,7 +184,7 @@ describe('<CheckPersonStatusForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       originalPersonstatusName: 'Ukjent',
       fortsettBehandling: false,
       personstatus: personstatusType.BOSATT,
@@ -222,7 +222,7 @@ describe('<CheckPersonStatusForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       originalPersonstatusName: 'Ukjent',
       fortsettBehandling: true,
       personstatus: personstatusType.BOSATT,
@@ -250,7 +250,7 @@ describe('<CheckPersonStatusForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       originalPersonstatusName: 'Ukjent',
       fortsettBehandling: undefined,
       personstatus: undefined,

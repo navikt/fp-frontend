@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import Header from '@navikt/nap-header';
 
 import HeaderWithErrorPanel from './HeaderWithErrorPanel';
@@ -15,6 +14,6 @@ describe('<HeaderWithErrorPanel>', () => {
       setSiteHeight={() => undefined}
     />);
     const header = wrapper.find(Header);
-    expect(header.prop('title')).to.eq('My System');
+    expect(header.prop('title')).toBe('My System');
   });
 });

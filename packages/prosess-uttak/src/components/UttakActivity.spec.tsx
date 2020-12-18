@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -75,17 +74,17 @@ describe('<UttakActivity>', () => {
     />);
 
     const fieldArray = wrapper.find('FieldArray');
-    expect(fieldArray).to.have.length(1);
+    expect(fieldArray).toHaveLength(1);
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).to.have.length(1);
+    expect(radioGroup).toHaveLength(1);
     const selectAvslag = wrapper.find('SelectField');
-    expect(selectAvslag).to.have.length(1);
+    expect(selectAvslag).toHaveLength(1);
     const textArea = wrapper.find('TextAreaField');
-    expect(textArea).to.have.length(1);
+    expect(textArea).toHaveLength(1);
     const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).to.have.length(1);
+    expect(updateKnapp).toHaveLength(1);
     const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).to.have.length(1);
+    expect(cancelKnapp).toHaveLength(1);
   });
 
   it('skal rendre rows and columns', () => {
@@ -121,11 +120,11 @@ describe('<UttakActivity>', () => {
     />);
 
     const row = wrapper.find('Row');
-    expect(row).to.have.length(2);
+    expect(row).toHaveLength(2);
     const column = wrapper.find('Column');
-    expect(column).to.have.length(1);
+    expect(column).toHaveLength(1);
     const formattedMessage = wrapper.find('FormattedMessage');
-    expect(formattedMessage).to.have.length(2);
+    expect(formattedMessage).toHaveLength(2);
   });
 
   it('skal rendre uttakactivity med ikke oppfylt', () => {
@@ -161,17 +160,17 @@ describe('<UttakActivity>', () => {
     />);
 
     const fieldArray = wrapper.find('FieldArray');
-    expect(fieldArray).to.have.length(1);
+    expect(fieldArray).toHaveLength(1);
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).to.have.length(1);
+    expect(radioGroup).toHaveLength(1);
     const selectAvslag = wrapper.find('SelectField');
-    expect(selectAvslag).to.have.length(1);
+    expect(selectAvslag).toHaveLength(1);
     const textArea = wrapper.find('TextAreaField');
-    expect(textArea).to.have.length(1);
+    expect(textArea).toHaveLength(1);
     const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).to.have.length(1);
+    expect(updateKnapp).toHaveLength(1);
     const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).to.have.length(1);
+    expect(cancelKnapp).toHaveLength(1);
   });
 
   it('skal rendre uttakactivity med aksjonspunkt', () => {
@@ -207,17 +206,17 @@ describe('<UttakActivity>', () => {
     />);
 
     const fieldArray = wrapper.find('FieldArray');
-    expect(fieldArray).to.have.length(1);
+    expect(fieldArray).toHaveLength(1);
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).to.have.length(1);
+    expect(radioGroup).toHaveLength(1);
     const selectAvslag = wrapper.find('SelectField');
-    expect(selectAvslag).to.have.length(1);
+    expect(selectAvslag).toHaveLength(1);
     const textArea = wrapper.find('TextAreaField');
-    expect(textArea).to.have.length(1);
+    expect(textArea).toHaveLength(1);
     const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).to.have.length(1);
+    expect(updateKnapp).toHaveLength(1);
     const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).to.have.length(1);
+    expect(cancelKnapp).toHaveLength(1);
   });
 
   it('skal rendre uttakactivity readonly', () => {
@@ -253,22 +252,22 @@ describe('<UttakActivity>', () => {
     />);
 
     const fieldArray = wrapper.find('FieldArray');
-    expect(fieldArray).to.have.length(1);
+    expect(fieldArray).toHaveLength(1);
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).to.have.length(0);
+    expect(radioGroup).toHaveLength(0);
     const selectAvslag = wrapper.find('SelectField');
-    expect(selectAvslag).to.have.length(0);
+    expect(selectAvslag).toHaveLength(0);
     const textArea = wrapper.find('TextAreaField');
-    expect(textArea).to.have.length(1);
+    expect(textArea).toHaveLength(1);
     const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).to.have.length(0);
+    expect(updateKnapp).toHaveLength(0);
     const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).to.have.length(0);
+    expect(cancelKnapp).toHaveLength(0);
   });
 
   it('skal sette opp initial values for perioder', () => {
     const initialValues = lagAktiviteter(selectedItem, false);
-    expect(initialValues).to.eql([{
+    expect(initialValues).toEqual([{
       days: 3.5,
       fom: '2018-01-01',
       tom: '2018-02-01',

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
@@ -50,10 +49,10 @@ describe('<ForeldelseForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(TilbakekrevingTimelinePanel)).has.length(0);
+    expect(wrapper.find(TilbakekrevingTimelinePanel)).toHaveLength(0);
     const messages = wrapper.find(FormattedMessage);
-    expect(messages).has.length(3);
-    expect(messages.at(1).prop('id')).is.eql('ForeldelseForm.Foreldelsesloven');
+    expect(messages).toHaveLength(3);
+    expect(messages.at(1).prop('id')).toEqual('ForeldelseForm.Foreldelsesloven');
   });
 
   it('skal ikke vise informasjon om foreldelsesloven og vise tidslinje når en har aksjonspunkt', () => {
@@ -90,8 +89,8 @@ describe('<ForeldelseForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(TilbakekrevingTimelinePanel)).has.length(1);
-    expect(wrapper.find(FormattedMessage)).has.length(2);
+    expect(wrapper.find(TilbakekrevingTimelinePanel)).toHaveLength(1);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(2);
   });
 
   it('skal ikke vise default periode når periode er foreldet', () => {
@@ -128,6 +127,6 @@ describe('<ForeldelseForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(ForeldelsePeriodeForm)).has.length(0);
+    expect(wrapper.find(ForeldelsePeriodeForm)).toHaveLength(0);
   });
 });

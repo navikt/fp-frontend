@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { Soknad } from '@fpsak-frontend/types';
@@ -24,10 +23,10 @@ describe('<FodselSammenligningOtherPanel>', () => {
       termindato="2018-10-10"
     />);
 
-    expect(wrapper.find("[id='FodselsammenligningPanel.UstedtDato']")).to.have.length(1);
+    expect(wrapper.find("[id='FodselsammenligningPanel.UstedtDato']")).toHaveLength(1);
     const normaltekstFields = wrapper.find(Normaltekst);
-    expect(normaltekstFields).to.have.length(6);
-    expect(normaltekstFields.at(3).childAt(0).text()).to.eql('01.01.2019');
+    expect(normaltekstFields).toHaveLength(6);
+    expect(normaltekstFields.at(3).childAt(0).text()).toEqual('01.01.2019');
   });
 
   it('skal ikke vise utstedt dato når denne ikke finnes', () => {
@@ -42,9 +41,9 @@ describe('<FodselSammenligningOtherPanel>', () => {
       termindato="2018-10-10"
     />);
 
-    expect(wrapper.find("[id='FodselsammenligningPanel.UstedtDato']")).to.have.length(0);
+    expect(wrapper.find("[id='FodselsammenligningPanel.UstedtDato']")).toHaveLength(0);
     const normaltekstFields = wrapper.find(Normaltekst);
-    expect(normaltekstFields).to.have.length(4);
+    expect(normaltekstFields).toHaveLength(4);
   });
 
   it('skal returnere null når en ikke har familiehendelse og heller ikke søknad', () => {
@@ -54,7 +53,7 @@ describe('<FodselSammenligningOtherPanel>', () => {
     const termindato = undefined;
 
     const date = getTerminEllerFodselsdato(hasSoknad, termindatoSoknad, fodselsdatoerSoknad, termindato);
-    expect(date).is.null;
+    expect(date).toBeNull();
   });
 
   it('skal vise fødselsdato fra søknad når denne finnes og en ikke har familiehendelse', () => {
@@ -66,7 +65,7 @@ describe('<FodselSammenligningOtherPanel>', () => {
     const termindato = undefined;
 
     const date = getTerminEllerFodselsdato(hasSoknad, fodselsdatoerSoknad, termindatoSoknad, termindato);
-    expect(date).to.eql('10.10.2017');
+    expect(date).toEqual('10.10.2017');
   });
 
   it('skal vise termindato fra søknad når denne finnes og en ikke har familiehendelse', () => {
@@ -76,6 +75,6 @@ describe('<FodselSammenligningOtherPanel>', () => {
     const termindato = undefined;
 
     const date = getTerminEllerFodselsdato(hasSoknad, fodselsdatoerSoknad, termindatoSoknad, termindato);
-    expect(date).to.eql('01.02.2017');
+    expect(date).toEqual('01.02.2017');
   });
 });

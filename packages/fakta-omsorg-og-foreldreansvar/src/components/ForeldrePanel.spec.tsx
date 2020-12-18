@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FieldArrayFieldsProps } from 'redux-form';
 import sinon from 'sinon';
 
@@ -52,9 +51,9 @@ describe('<ForeldrePanel>', () => {
     />);
 
     const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).to.have.length(2);
+    expect(DatepickerField).toHaveLength(2);
     const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).to.have.length(0);
+    expect(DateLabel).toHaveLength(0);
   });
 
   it('skal kunne endre dødsdatoer når foreldre er bekreftet av TPS men dødsdato ikke er oppgitt', () => {
@@ -83,9 +82,9 @@ describe('<ForeldrePanel>', () => {
     />);
 
     const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).to.have.length(2);
+    expect(DatepickerField).toHaveLength(2);
     const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).to.have.length(0);
+    expect(DateLabel).toHaveLength(0);
   });
 
   it('skal ikke kunne endre dødsdatoer når foreldre er bekreftet av TPS og dødsdato er oppgitt', () => {
@@ -114,8 +113,8 @@ describe('<ForeldrePanel>', () => {
     />);
 
     const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).to.have.length(0);
+    expect(DatepickerField).toHaveLength(0);
     const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).to.have.length(2);
+    expect(DateLabel).toHaveLength(2);
   });
 });

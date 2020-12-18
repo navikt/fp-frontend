@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FieldArray } from 'redux-form';
 
@@ -26,7 +25,7 @@ describe('<AndreYtelserPanel>', () => {
     />);
 
     const checkboxes = wrapper.find(CheckboxField);
-    expect(checkboxes).to.have.length(4);
+    expect(checkboxes).toHaveLength(4);
   });
 
   it('skal kun vise checkbox for militær og siviltjeneste når prop er satt', () => {
@@ -40,7 +39,7 @@ describe('<AndreYtelserPanel>', () => {
     />);
 
     const checkboxes = wrapper.find(CheckboxField);
-    expect(checkboxes).to.have.length(1);
+    expect(checkboxes).toHaveLength(1);
   });
 
   it('skal vise andre ytelser panel med FieldArray når ytelse er valgt', () => {
@@ -58,10 +57,10 @@ describe('<AndreYtelserPanel>', () => {
     />);
 
     const checkboxes = wrapper.find(CheckboxField);
-    expect(checkboxes).to.have.length(4);
+    expect(checkboxes).toHaveLength(4);
 
     const fieldArray = wrapper.find(FieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
   });
 
   it('validering skal returnerer errors objekt på riktig format', () => {
@@ -76,10 +75,11 @@ describe('<AndreYtelserPanel>', () => {
     };
 
     const errorsWithInvalidDates = AndreYtelserPanel.validate(values, andreYtelser);
-    expect(errorsWithInvalidDates).to.be.an('object');
-    expect(errorsWithInvalidDates.andreYtelser).to.be.an('object');
-    expect(errorsWithInvalidDates.andreYtelser.LONN_UTDANNING_PERIODER).to.be.an('array');
-    expect(errorsWithInvalidDates.andreYtelser.ETTERLONN_ARBEIDSGIVER_PERIODER).to.not.exist;
+    expect(errorsWithInvalidDates.andreYtelser.LONN_UTDANNING_PERIODER).toEqual([{
+      periodeFom: 'Dato må skrives slik : dd.mm.åååå',
+      periodeTom: 'Dato må skrives slik : dd.mm.åååå',
+    }]);
+    expect(errorsWithInvalidDates.andreYtelser.ETTERLONN_ARBEIDSGIVER_PERIODER).toBeFalsy();
   });
 
   it('transformValues skal returnerer ytelser på riktig format', () => {
@@ -95,7 +95,24 @@ describe('<AndreYtelserPanel>', () => {
     };
 
     const errorsWithInvalidDates = AndreYtelserPanel.transformValues(values, andreYtelser);
-    expect(errorsWithInvalidDates).to.be.an('array');
-    expect(errorsWithInvalidDates).has.length(4);
+    expect(errorsWithInvalidDates).toEqual([{
+      periodeFom: 'abc',
+      periodeTom: 'ads',
+      ytelseType: 'LONN_UTDANNING',
+    }, {
+      periodeFom: 'abc',
+      periodeTom: 'ads',
+      ytelseType: 'LONN_UTDANNING',
+    }, {
+      periodeFom: 'ssa',
+      periodeTom: 'fesfes',
+      ytelseType: 'ETTERLONN_ARBEIDSGIVER',
+    }, {
+      periodeFom: 'ssa',
+      periodeTom: 'fesfes',
+      ytelseType: 'VENTELONN',
+    }]);
+
+    expect(errorsWithInvalidDates).toHaveLength(4);
   });
 });

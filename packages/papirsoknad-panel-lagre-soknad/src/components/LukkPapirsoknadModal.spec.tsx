@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import ModalWrapper from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
@@ -25,24 +24,24 @@ describe('<LukkPapirSoknadModal>', () => {
     />);
 
     const modal = wrapper.find(ModalWrapper);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('Registrering av søknaden avsluttes');
-    expect(modal.prop('onRequestClose')).to.eql(cancelEventCallback);
-    expect(modal.prop('onAfterOpen')).is.not.null;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('contentLabel')).toEqual('Registrering av søknaden avsluttes');
+    expect(modal.prop('onRequestClose')).toEqual(cancelEventCallback);
+    expect(modal.prop('onAfterOpen')).not.toBeNull();
 
     const image = modal.find(Image);
-    expect(image).to.have.length(1);
+    expect(image).toHaveLength(1);
 
     const okKnapp = modal.find(Hovedknapp);
-    expect(okKnapp).to.have.length(1);
-    expect(okKnapp.prop('mini')).is.true;
+    expect(okKnapp).toHaveLength(1);
+    expect(okKnapp.prop('mini')).toBe(true);
 
     const avbrytKnapp = modal.find(Knapp);
-    expect(avbrytKnapp).to.have.length(1);
-    expect(avbrytKnapp.prop('mini')).is.true;
-    expect(avbrytKnapp.prop('onClick')).is.eql(cancelEventCallback);
+    expect(avbrytKnapp).toHaveLength(1);
+    expect(avbrytKnapp.prop('mini')).toBe(true);
+    expect(avbrytKnapp.prop('onClick')).toEqual(cancelEventCallback);
   });
 
   it('skal kalle submit ved klikk på ok-knapp', () => {
@@ -55,7 +54,7 @@ describe('<LukkPapirSoknadModal>', () => {
     />);
 
     wrapper.find(Hovedknapp).simulate('click');
-    expect(submitEventCallback).to.have.property('callCount', 1);
+    expect(submitEventCallback).toHaveProperty('callCount', 1);
   });
 
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
@@ -68,6 +67,6 @@ describe('<LukkPapirSoknadModal>', () => {
     />);
 
     wrapper.find(Knapp).simulate('click');
-    expect(cancelEventCallback).to.have.property('callCount', 1);
+    expect(cancelEventCallback).toHaveProperty('callCount', 1);
   });
 });

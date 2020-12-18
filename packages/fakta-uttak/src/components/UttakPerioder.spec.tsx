@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -73,15 +72,15 @@ describe('<UttakPerioder>', () => {
     const formattedMessage = wrapper.find('FormattedMessage');
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
-    expect(fieldArray).to.have.length(1);
-    expect(verticalSpacer).to.have.length(3);
-    expect(flexContainer).to.have.length(2);
-    expect(flexRow).to.have.length(2);
-    expect(flexColumn).to.have.length(3);
-    expect(element).to.have.length(1);
-    expect(formattedMessage).to.have.length(3);
-    expect(uttakNyPeriode).to.have.length(0);
-    expect(uttakSlettPeriodeModal).to.have.length(0);
+    expect(fieldArray).toHaveLength(1);
+    expect(verticalSpacer).toHaveLength(3);
+    expect(flexContainer).toHaveLength(2);
+    expect(flexRow).toHaveLength(2);
+    expect(flexColumn).toHaveLength(3);
+    expect(element).toHaveLength(1);
+    expect(formattedMessage).toHaveLength(3);
+    expect(uttakNyPeriode).toHaveLength(0);
+    expect(uttakSlettPeriodeModal).toHaveLength(0);
   });
 
   it('skal vise UttakNyPeriode og disable knapper når isNyPeriodeFormOpen er true', () => {
@@ -120,12 +119,12 @@ describe('<UttakPerioder>', () => {
     const uttakNyPeriode = wrapper.find(UttakNyPeriode);
     const hovedknapp = wrapper.find(Hovedknapp);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).is.equal(true);
-    expect(knapp.prop('disabled')).is.equal(true);
-    expect(fieldArray).to.have.length(1);
-    expect(flexContainer).to.have.length(2);
-    expect(uttakSlettPeriodeModal).to.have.length(0);
-    expect(uttakNyPeriode).to.have.length(1);
+    expect(hovedknapp.prop('disabled')).toBe(true);
+    expect(knapp.prop('disabled')).toBe(true);
+    expect(fieldArray).toHaveLength(1);
+    expect(flexContainer).toHaveLength(2);
+    expect(uttakSlettPeriodeModal).toHaveLength(0);
+    expect(uttakNyPeriode).toHaveLength(1);
   });
 
   it('skal vise UttakSlettPeriodeModal når showModalSlettPeriode er true', () => {
@@ -162,10 +161,10 @@ describe('<UttakPerioder>', () => {
     const flexContainer = wrapper.find('FlexContainer');
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find(UttakSlettPeriodeModal);
-    expect(fieldArray).to.have.length(1);
-    expect(flexContainer).to.have.length(2);
-    expect(uttakNyPeriode).to.have.length(0);
-    expect(uttakSlettPeriodeModal).to.have.length(0);
+    expect(fieldArray).toHaveLength(1);
+    expect(flexContainer).toHaveLength(2);
+    expect(uttakNyPeriode).toHaveLength(0);
+    expect(uttakSlettPeriodeModal).toHaveLength(0);
   });
 
   it('skal disable knapper når disableButtons er true', () => {
@@ -199,8 +198,8 @@ describe('<UttakPerioder>', () => {
 
     const hovedknapp = wrapper.find(Hovedknapp);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).is.equal(true);
-    expect(knapp.prop('disabled')).is.equal(true);
+    expect(hovedknapp.prop('disabled')).toBe(true);
+    expect(knapp.prop('disabled')).toBe(true);
   });
 
   it('skal disable knapper når readOnly er true', () => {
@@ -234,8 +233,8 @@ describe('<UttakPerioder>', () => {
 
     const hovedknapp = wrapper.find(Hovedknapp);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).is.equal(true);
-    expect(knapp.prop('disabled')).is.equal(true);
+    expect(hovedknapp.prop('disabled')).toBe(true);
+    expect(knapp.prop('disabled')).toBe(true);
   });
 
   it('skal ikke disable knapper når openForms og readOnly er false', () => {
@@ -269,8 +268,8 @@ describe('<UttakPerioder>', () => {
 
     const hovedknapp = wrapper.find(Hovedknapp);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).is.equal(false);
-    expect(knapp.prop('disabled')).is.equal(false);
+    expect(hovedknapp.prop('disabled')).toBe(false);
+    expect(knapp.prop('disabled')).toBe(false);
   });
 
   it('skal vise AksjonspunktHelpText når readOnly er false', () => {
@@ -326,10 +325,10 @@ describe('<UttakPerioder>', () => {
     );
 
     const aksjonspunktHelpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(aksjonspunktHelpText).to.have.length(1);
+    expect(aksjonspunktHelpText).toHaveLength(1);
     const formattedMessage = aksjonspunktHelpText.find(FormattedMessage);
-    expect(formattedMessage.prop('id')).to.eql('UttakInfoPanel.Aksjonspunkt.5071');
-    expect(formattedMessage.prop('values')).to.eql({ value: '12.01.2018' });
+    expect(formattedMessage.prop('id')).toEqual('UttakInfoPanel.Aksjonspunkt.5071');
+    expect(formattedMessage.prop('values')).toEqual({ value: '12.01.2018' });
   });
 
   it('skal vise nyPeriode skjema onClick på knappen', () => {
@@ -362,10 +361,10 @@ describe('<UttakPerioder>', () => {
     );
 
     const knapp = wrapper.find(Knapp);
-    expect(knapp.length).to.equal(1);
+    expect(knapp.length).toBe(1);
     knapp.simulate('click');
     wrapper.update();
     const uttakNyPeriode = wrapper.find(UttakNyPeriode);
-    expect(uttakNyPeriode.length).to.equal(1);
+    expect(uttakNyPeriode.length).toBe(1);
   });
 });

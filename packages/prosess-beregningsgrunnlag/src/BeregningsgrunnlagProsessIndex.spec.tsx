@@ -1,5 +1,4 @@
 import sinon from 'sinon';
-import { expect } from 'chai';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import React from 'react';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
@@ -31,6 +30,6 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningFp = wrapper.find('BeregningFP');
-    expect(beregningFp.length).to.equal(1);
+    expect(beregningFp.length).toBe(1);
   });
 });

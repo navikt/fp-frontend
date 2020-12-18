@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
@@ -21,7 +20,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(0);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(0);
   });
 
   it('skal vise submit-knapp med standard tekst når behandlingspunkt ikke er readonly', () => {
@@ -40,9 +39,9 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const knapp = wrapper.find(Hovedknapp);
-    expect(knapp).to.have.length(1);
+    expect(knapp).toHaveLength(1);
 
-    expect(knapp.childAt(0).text()).is.eql('Bekreft og fortsett');
+    expect(knapp.childAt(0).text()).toEqual('Bekreft og fortsett');
   });
 
   it('skal vise submit-knapp med spesifikk tekst når behandlingspunkt ikke er readonly', () => {
@@ -62,9 +61,9 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const knapp = wrapper.find(Hovedknapp);
-    expect(knapp).to.have.length(1);
+    expect(knapp).toHaveLength(1);
 
-    expect(knapp.childAt(0).text()).is.eql('Bekreft');
+    expect(knapp.childAt(0).text()).toEqual('Bekreft');
   });
 
   it('skal vise knapp som enabled når behandlingspunkt er dirty og submittable', () => {
@@ -83,8 +82,8 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).to.false;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(false);
   });
 
   it('skal vise knapp som disabled når behandlingspunkt ikke er dirty eller submittable', () => {
@@ -103,8 +102,8 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).to.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal vise knapp som disabled når innsending av behandlingspunkt-data pågår', () => {
@@ -123,8 +122,8 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).to.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal vise knapp som disabled en ikke har fylt ut alle obligatoriske felter', () => {
@@ -143,8 +142,8 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).to.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal vise knapp som disabled når behandlingspunkt ikke er dirty og en ikke har fylt ut alle obligatoriske felter', () => {
@@ -163,7 +162,7 @@ describe('<ProsessStegSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).to.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
@@ -27,11 +26,11 @@ describe('<VurderRefusjonForm>', () => {
       faktaOmBeregning={fakta}
     />);
     const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).has.length(1);
+    expect(formattedMessage).toHaveLength(1);
     const radioGroup = wrapper.find(RadioGroupField);
-    expect(radioGroup).has.length(1);
+    expect(radioGroup).toHaveLength(1);
     const buttons = radioGroup.find(RadioOption);
-    expect(buttons).has.length(2);
+    expect(buttons).toHaveLength(2);
   });
 
   it('skal vise to sett med radioknapper om to arbeidsgivere', () => {
@@ -49,9 +48,9 @@ describe('<VurderRefusjonForm>', () => {
       faktaOmBeregning={fakta}
     />);
     const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).has.length(2);
+    expect(formattedMessage).toHaveLength(2);
     const radioGroup = wrapper.find(RadioGroupField);
-    expect(radioGroup).has.length(2);
+    expect(radioGroup).toHaveLength(2);
   });
 
   it('skal bygge initial values', () => {
@@ -60,8 +59,8 @@ describe('<VurderRefusjonForm>', () => {
       { arbeidsgiverVisningsnavn: 'Arbeidsgiverto (45345345345) AS', erRefusjonskravGyldig: false, arbeidsgiverId: '45345345345' },
     ];
     const initialValues = VurderRefusjonForm.buildInitialValues([VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT], senRefusjonkravListe);
-    expect(initialValues[lagFieldName('8279312213')]).to.equal(true);
-    expect(initialValues[lagFieldName('45345345345')]).to.equal(false);
+    expect(initialValues[lagFieldName('8279312213')]).toBe(true);
+    expect(initialValues[lagFieldName('45345345345')]).toBe(false);
   });
 
   it('skal bygge transform values', () => {
@@ -73,10 +72,10 @@ describe('<VurderRefusjonForm>', () => {
     values[lagFieldName('8279312213')] = false;
     values[lagFieldName('45345345345')] = true;
     const transformedValues = VurderRefusjonForm.transformValues(senRefusjonkravListe)(values);
-    expect(transformedValues.refusjonskravGyldighet.length).to.equal(2);
-    expect(transformedValues.refusjonskravGyldighet[0].arbeidsgiverId).to.equal('8279312213');
-    expect(transformedValues.refusjonskravGyldighet[0].skalUtvideGyldighet).to.equal(false);
-    expect(transformedValues.refusjonskravGyldighet[1].arbeidsgiverId).to.equal('45345345345');
-    expect(transformedValues.refusjonskravGyldighet[1].skalUtvideGyldighet).to.equal(true);
+    expect(transformedValues.refusjonskravGyldighet.length).toBe(2);
+    expect(transformedValues.refusjonskravGyldighet[0].arbeidsgiverId).toBe('8279312213');
+    expect(transformedValues.refusjonskravGyldighet[0].skalUtvideGyldighet).toBe(false);
+    expect(transformedValues.refusjonskravGyldighet[1].arbeidsgiverId).toBe('45345345345');
+    expect(transformedValues.refusjonskravGyldighet[1].skalUtvideGyldighet).toBe(true);
   });
 });

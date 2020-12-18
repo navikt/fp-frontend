@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -33,11 +32,11 @@ describe('<FeilutbetalingPerioderFormImpl>', () => {
     />);
 
     const tableRow = wrapper.find('TableRow');
-    expect(tableRow).has.length(1);
+    expect(tableRow).toHaveLength(1);
     const tableColumn = wrapper.find('TableColumn');
-    expect(tableColumn).has.length(3);
+    expect(tableColumn).toHaveLength(3);
     const selectField = wrapper.find('SelectField');
-    expect(selectField).has.length(1);
+    expect(selectField).toHaveLength(1);
   });
 
   it('skal rendre underÅrsak selectfield hvis årsak har underÅrsaker', () => {
@@ -62,10 +61,10 @@ describe('<FeilutbetalingPerioderFormImpl>', () => {
     />);
 
     const tableRow = wrapper.find('TableRow');
-    expect(tableRow).has.length(1);
+    expect(tableRow).toHaveLength(1);
     const tableColumn = wrapper.find('TableColumn');
-    expect(tableColumn).has.length(3);
+    expect(tableColumn).toHaveLength(3);
     const selectField = wrapper.find('SelectField');
-    expect(selectField).has.length(2);
+    expect(selectField).toHaveLength(2);
   });
 });

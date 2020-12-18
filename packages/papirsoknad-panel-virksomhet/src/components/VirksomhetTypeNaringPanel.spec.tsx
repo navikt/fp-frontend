@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { CheckboxField } from '@fpsak-frontend/form';
@@ -20,9 +19,9 @@ describe('<VirksomhetTypeNaringPanel>', () => {
     />);
 
     const undertekst = wrapper.find('Undertekst');
-    expect(undertekst).to.have.length(1);
+    expect(undertekst).toHaveLength(1);
 
     const checkboxes = wrapper.find(CheckboxField);
-    expect(checkboxes).to.have.length(2);
+    expect(checkboxes).toHaveLength(2);
   });
 });

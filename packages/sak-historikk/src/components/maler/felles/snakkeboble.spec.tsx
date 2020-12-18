@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { Undertekst } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 
@@ -29,7 +28,9 @@ describe('Snakkeboble', () => {
     );
 
     const panel = wrapper.find(Panel);
-    expect(panel.prop('className')).to.be.equal('snakkeboble__panel snakkeboble-panel snakkeboble__snakkebole-panel--saksbehandler');
+    expect(panel.prop('className')).toBe(
+      'snakkeboble__panel snakkeboble-panel snakkeboble__snakkebole-panel--saksbehandler',
+    );
   });
 
   it('skal innehalla korrekt type, id og tidpunkt', () => {
@@ -50,6 +51,6 @@ describe('Snakkeboble', () => {
     );
 
     const undertekst = wrapper.find(Undertekst);
-    expect(undertekst.childAt(0).text()).to.contain('10.12.2017 -  // Saksbehandler');
+    expect(undertekst.childAt(0).text()).toEqual('10.12.2017 -  // Saksbehandler test');
   });
 });

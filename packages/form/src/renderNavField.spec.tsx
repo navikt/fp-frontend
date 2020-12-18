@@ -1,6 +1,5 @@
 import React from 'react';
 import { WrappedFieldMetaProps } from 'redux-form';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { inputMock, metaMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -19,8 +18,8 @@ describe('renderNavField', () => {
     const wrapper = shallow(<RenderedMockField input={inputMock} meta={meta} label="" />);
     const mockField = wrapper.find(MockField);
 
-    expect(mockField).to.have.length(1);
-    expect(mockField.at(0).prop('feil')).to.be.undefined;
+    expect(mockField).toHaveLength(1);
+    expect(mockField.at(0).prop('feil')).toBeUndefined();
   });
 
   it('skal vise feil hvis submit har feilet', () => {
@@ -29,7 +28,7 @@ describe('renderNavField', () => {
     const wrapper = shallow(<RenderedMockField input={inputMock} meta={meta} label="" />);
     const mockField = wrapper.find(MockField);
 
-    expect(mockField).to.have.length(1);
-    expect(mockField.at(0).prop('feil')).to.eql(FORMATTED_MESSAGE);
+    expect(mockField).toHaveLength(1);
+    expect(mockField.at(0).prop('feil')).toEqual(FORMATTED_MESSAGE);
   });
 });

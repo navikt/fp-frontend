@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { compareAndeler, ulikeAndelerErrorMessage, validateUlikeAndeler } from './ValidateAndelerUtils';
 
 describe('<ValidateAndelerUtils>', () => {
@@ -11,7 +10,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(0);
+    expect(compare).toBe(0);
   });
 
   it('skal returnere -1 for lik andelsinfo og ulik inntektskategori', () => {
@@ -23,7 +22,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(-1);
+    expect(compare).toBe(-1);
   });
 
   it('skal returnere 1 for lik andelsinfo og ulik inntektskategori motsatt rekkefølge', () => {
@@ -35,7 +34,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[1], andeler[0]);
-    expect(compare).to.equal(1);
+    expect(compare).toBe(1);
   });
 
   it('skal returnere -1 for ulik andelsinfo og lik inntektskategori', () => {
@@ -47,7 +46,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(-1);
+    expect(compare).toBe(-1);
   });
 
   it('skal returnere 1 for ulik andelsinfo og lik inntektskategori motsatt rekkefølge', () => {
@@ -59,7 +58,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[1], andeler[0]);
-    expect(compare).to.equal(1);
+    expect(compare).toBe(1);
   });
 
   it('skal returnere -1 for ulik andelsinfo og ulik inntektskategori motsatt rekkefølge', () => {
@@ -71,7 +70,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[0], andeler[1]);
-    expect(compare).to.equal(-1);
+    expect(compare).toBe(-1);
   });
 
   it('skal returnere 1 for ulik andelsinfo og ulik inntektskategori motsatt rekkefølge', () => {
@@ -83,7 +82,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const compare = compareAndeler(andeler[1], andeler[0]);
-    expect(compare).to.equal(1);
+    expect(compare).toBe(1);
   });
 
   it('skal ikkje gi error om det er ingen andeler lagt til av saksbehandler og ingen har lik inntektskategori og andelsnr', () => {
@@ -98,7 +97,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal ikkje gi error om det er andeler lagt til av saksbehandler og ingen har lik inntektskategori og andelsnr', () => {
@@ -113,7 +112,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler to har lik inntektskategori og andelsnr', () => {
@@ -128,8 +127,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er nye andeler to har lik inntektskategori og andelsnr når det finnes to eksisterende andeler med samme virksomhet', () => {
@@ -162,8 +161,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal ikkje gi error om det er nye andeler der to har lik andelstype og ulik inntektskategori', () => {
@@ -181,7 +180,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.equal(null);
+    expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler der to har lik inntektskategori og andelstype', () => {
@@ -199,8 +198,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ingen nye andeler, men andel lagt til av saksbehandler der to har lik inntektskategori og andelstype', () => {
@@ -218,8 +217,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ein ny brukers andel, og ein eksisterende der begge har lik inntektskategori', () => {
@@ -237,8 +236,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ein ny egen næring, og ein selvstendig næringsdrivende lagt til tidligere der begge har lik inntektskategori', () => {
@@ -256,8 +255,8 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 
   it('skal gi error om det er ein ny egen næring, og ein eksisterende selvstendig næringsdrivende der begge har lik inntektskategori', () => {
@@ -275,7 +274,7 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
     const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).to.have.length(1);
-    expect(ulikeAndelerError[0].id).to.equal(ulikeAndelerErrorMessage()[0].id);
+    expect(ulikeAndelerError).toHaveLength(1);
+    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
 });

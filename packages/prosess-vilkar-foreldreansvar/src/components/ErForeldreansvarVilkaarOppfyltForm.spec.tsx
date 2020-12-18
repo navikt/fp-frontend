@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { ProsessStegBegrunnelseTextField, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
@@ -60,8 +59,8 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
-    expect(readonlyForm).to.have.length(1);
-    expect(readonlyForm.prop('readOnly')).is.true;
+    expect(readonlyForm).toHaveLength(1);
+    expect(readonlyForm.prop('readOnly')).toBe(true);
   });
 
   it('skal vise radioknapper og nedtrekksliste for å velge om vilkåret skal godkjennes eller avvises med avslagsgrunn når ikke readonly', () => {
@@ -92,16 +91,16 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
     />);
 
     const selector = wrapper.find(VilkarResultPicker);
-    expect(selector).to.have.length(1);
-    expect(selector.prop('avslagsarsaker')).to.eql([{
+    expect(selector).toHaveLength(1);
+    expect(selector.prop('avslagsarsaker')).toEqual([{
       kode: 'TEST_KODE',
       navn: 'testnavn',
       kodeverk: '',
     }]);
-    expect(selector.prop('erVilkarOk')).is.undefined;
+    expect(selector.prop('erVilkarOk')).toBeUndefined();
 
-    expect(wrapper.find(ProsessStegBegrunnelseTextField)).to.have.length(1);
-    expect(wrapper.find('ConfirmInformationVilkarFormReadOnly')).to.have.length(0);
+    expect(wrapper.find(ProsessStegBegrunnelseTextField)).toHaveLength(1);
+    expect(wrapper.find('ConfirmInformationVilkarFormReadOnly')).toHaveLength(0);
   });
 
   it('skal vise readonly-form når status er readonly og status er ulik ikke vurdert', () => {
@@ -147,8 +146,8 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
-    expect(readonlyForm).to.have.length(1);
-    expect(readonlyForm.prop('readOnly')).is.true;
+    expect(readonlyForm).toHaveLength(1);
+    expect(readonlyForm.prop('readOnly')).toBe(true);
   });
 
   it('skal sette opp initielle0  verdier for form gitt behandling og behandlingspunkt', () => {
@@ -173,7 +172,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: undefined,
       avslagCode: undefined,
       begrunnelse: aksjonspunkter[0].begrunnelse,
@@ -202,7 +201,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: true,
       avslagCode: undefined,
       begrunnelse: aksjonspunkter[0].begrunnelse,
@@ -231,7 +230,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(behandlingsresultat, aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: false,
       avslagCode: behandlingsresultat.avslagsarsak.kode,
       begrunnelse: aksjonspunkter[0].begrunnelse,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -21,7 +20,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
@@ -30,12 +29,12 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);
-    expect(dateFields).has.length(2);
-    expect(dateFields.first().prop('name')).is.eql('fieldId1.fomDato');
-    expect(dateFields.first().prop('label')).is.eql({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' });
-    expect(dateFields.last().prop('name')).is.eql('fieldId1.tomDato');
-    expect(dateFields.last().prop('label')).is.eql({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' });
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(dateFields).toHaveLength(2);
+    expect(dateFields.first().prop('name')).toEqual('fieldId1.fomDato');
+    expect(dateFields.first().prop('label')).toEqual({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' });
+    expect(dateFields.last().prop('name')).toEqual('fieldId1.tomDato');
+    expect(dateFields.last().prop('label')).toEqual({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' });
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 
   it('Skal ikke feile når fomDato er etter tomDato', () => {
@@ -50,7 +49,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     };
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
-    expect(res).is.null;
+    expect(res).toBeNull();
   });
 
   it('Skal ikke feile når fomDato er lik tomDato', () => {
@@ -65,7 +64,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     };
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
-    expect(res).is.null;
+    expect(res).toBeNull();
   });
 
   it('Skal feile når fomDato er før tomDato', () => {
@@ -80,7 +79,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     };
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
-    expect(res).is.eql([{
+    expect(res).toEqual([{
       tomDato: 'Dato må være etter eller lik 10.10.2018',
     }]);
   });
@@ -99,7 +98,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     };
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
-    expect(res).is.null;
+    expect(res).toBeNull();
   });
 
   it('Skal ikke feile når fomDato er lik første periodeFom', () => {
@@ -116,7 +115,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     };
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
-    expect(res).is.null;
+    expect(res).toBeNull();
   });
 
   it('Skal feile når fomDato er før første periodeFom', () => {
@@ -133,7 +132,7 @@ describe('<FrilansOppdragForFamilieFieldArray>', () => {
     };
 
     const res = FrilansOppdragForFamilieFieldArray.validate(values);
-    expect(res).is.eql([{
+    expect(res).toEqual([{
       fomDato: [{
         id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation',
       }],

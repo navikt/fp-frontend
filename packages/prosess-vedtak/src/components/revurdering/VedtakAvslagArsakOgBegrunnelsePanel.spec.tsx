@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
@@ -37,6 +36,6 @@ describe('<VedtakAvslagArsakOgBegrunnelsePanel>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message.at(1).prop('id')).is.eql('VedtakForm.UttaksperioderIkkeGyldig');
+    expect(message.at(1).prop('id')).toEqual('VedtakForm.UttaksperioderIkkeGyldig');
   });
 });

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { reducer as formReducer, reduxForm } from 'redux-form';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { messages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import InputField from './InputField';
 
@@ -22,14 +21,14 @@ const mountFieldInForm = (field, initialValues) => mount(
 describe('<InputField>', () => {
   it('Skal rendre input', () => {
     const wrapper = mountFieldInForm(<InputField label="text" name="text" type="text" />, { text: 'Jeg er Batman' });
-    expect(wrapper.find('input')).to.have.length(1);
-    expect(wrapper.find('input').prop('value')).to.eql('Jeg er Batman');
-    expect(wrapper.find('input').prop('type')).to.eql('text');
-    expect(wrapper.find('label').text()).to.eql('text');
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').prop('value')).toEqual('Jeg er Batman');
+    expect(wrapper.find('input').prop('type')).toEqual('text');
+    expect(wrapper.find('label').text()).toEqual('text');
   });
   it('Skal rendre Readonly hvis den er satt til true', () => {
     const wrapper = mountFieldInForm(<InputField readOnly name="text" />, { text: 'Jeg er Batman' });
-    expect(wrapper.find('Normaltekst')).to.have.length(1);
-    expect(wrapper.find('Normaltekst').text()).to.eql('Jeg er Batman');
+    expect(wrapper.find('Normaltekst')).toHaveLength(1);
+    expect(wrapper.find('Normaltekst').text()).toEqual('Jeg er Batman');
   });
 });

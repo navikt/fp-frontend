@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -49,13 +48,13 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
-    expect(helpText.prop('isAksjonspunktOpen')).is.true;
+    expect(helpText).toHaveLength(1);
+    expect(helpText.prop('isAksjonspunktOpen')).toBe(true);
 
     const button = wrapper.find(FaktaSubmitButton);
-    expect(button).has.length(1);
-    expect(button.prop('isReadOnly')).is.false;
-    expect(button.prop('formName')).is.eql('mockForm');
-    expect(button.prop('isSubmittable')).is.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('isReadOnly')).toBe(false);
+    expect(button.prop('formName')).toEqual('mockForm');
+    expect(button.prop('isSubmittable')).toBe(true);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -31,11 +30,11 @@ describe('<SettPaVentModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('Behandlingen er satt på vent');
-    expect(modal.prop('onRequestClose')).to.eql(cancelEventCallback);
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('contentLabel')).toEqual('Behandlingen er satt på vent');
+    expect(modal.prop('onRequestClose')).toEqual(cancelEventCallback);
   });
 
   it('skal ikke disable knapp for lagring når frist er en gyldig fremtidig dato', () => {
@@ -54,7 +53,7 @@ describe('<SettPaVentModal>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button.prop('disabled')).is.false;
+    expect(button.prop('disabled')).toBe(false);
   });
 
   it('skal disable knapp for lagring når frist er en ugyldig dato', () => {
@@ -73,7 +72,7 @@ describe('<SettPaVentModal>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button.prop('disabled')).is.true;
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal disable knapp for lagring når frist er en historisk dato', () => {
@@ -92,7 +91,7 @@ describe('<SettPaVentModal>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button.prop('disabled')).is.true;
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal være obligatorisk å velge årsak', () => {
@@ -110,7 +109,7 @@ describe('<SettPaVentModal>', () => {
       {...reduxFormPropsMock}
     />);
     const select = wrapper.find(SelectField);
-    expect(select.prop('validate')).to.have.length(1);
+    expect(select.prop('validate')).toHaveLength(1);
   });
 
   it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', () => {
@@ -126,7 +125,7 @@ describe('<SettPaVentModal>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(DatepickerField)).to.have.length(0);
+    expect(wrapper.find(DatepickerField)).toHaveLength(0);
   });
 
   it('skal vise frist-input når behandling automatisk er satt på vent med frist', () => {
@@ -141,7 +140,7 @@ describe('<SettPaVentModal>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(DatepickerField)).to.have.length(1);
+    expect(wrapper.find(DatepickerField)).toHaveLength(1);
   });
 
   it('skal vise årsak-input som readonly når behandling automatisk er satt på vent', () => {
@@ -156,7 +155,7 @@ describe('<SettPaVentModal>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(SelectField).prop('readOnly')).is.true;
+    expect(wrapper.find(SelectField).prop('readOnly')).toBe(true);
   });
 
   it('skal vise fristen tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', () => {
@@ -176,11 +175,11 @@ describe('<SettPaVentModal>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(SelectField).prop('readOnly')).is.true;
+    expect(wrapper.find(SelectField).prop('readOnly')).toBe(true);
     const label = wrapper.find(Normaltekst);
-    expect(label).to.have.length(2);
-    expect(label.first().childAt(0).prop('id')).is.eql('SettPaVentModal.SettesPaVent');
-    expect(label.at(1).childAt(0).prop('id')).is.eql('SettPaVentModal.UtløptFrist');
-    expect(label.at(1).childAt(2).prop('id')).is.eql('SettPaVentModal.HenleggeSaken');
+    expect(label).toHaveLength(2);
+    expect(label.first().childAt(0).prop('id')).toEqual('SettPaVentModal.SettesPaVent');
+    expect(label.at(1).childAt(0).prop('id')).toEqual('SettPaVentModal.UtløptFrist');
+    expect(label.at(1).childAt(2).prop('id')).toEqual('SettPaVentModal.HenleggeSaken');
   });
 });

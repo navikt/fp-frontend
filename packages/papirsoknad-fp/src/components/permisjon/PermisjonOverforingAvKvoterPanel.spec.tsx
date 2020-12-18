@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FieldArray } from 'redux-form';
 import sinon from 'sinon';
 
@@ -45,13 +44,13 @@ describe('<PermisjonOverforingAvKvoterPanel>', () => {
     />);
 
     const fieldArray = wrapper.find(FieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const values = fieldArray.prop('selectValues');
 
-    expect(values).has.length(overtaKvoteReasons.length);
-    expect(values[0].props.value).is.eql('INSTITUSJONSOPPHOLD_ANNEN_FORELDER');
-    expect(values[1].props.value).is.eql('SYKDOM_ANNEN_FORELDER');
+    expect(values).toHaveLength(overtaKvoteReasons.length);
+    expect(values[0].props.value).toEqual('INSTITUSJONSOPPHOLD_ANNEN_FORELDER');
+    expect(values[1].props.value).toEqual('SYKDOM_ANNEN_FORELDER');
   });
 
   it('skal ikke vise select når checkbox ikke er krysset av', () => {
@@ -67,6 +66,6 @@ describe('<PermisjonOverforingAvKvoterPanel>', () => {
     />);
 
     const selectField = wrapper.find(SelectField);
-    expect(selectField).has.length(0);
+    expect(selectField).toHaveLength(0);
   });
 });

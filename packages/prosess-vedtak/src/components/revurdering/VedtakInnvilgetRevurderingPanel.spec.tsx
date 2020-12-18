@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
@@ -28,9 +27,9 @@ describe('<VedtakInnvilgetRevurderingPanel>', () => {
     />);
 
     const elementFields = wrapper.find(Element);
-    expect(elementFields).to.have.length(2);
-    expect(elementFields.first().childAt(0).text()).to.eql('61 120 kr');
-    expect(elementFields.last().childAt(0).text()).to.eql('1');
+    expect(elementFields).toHaveLength(2);
+    expect(elementFields.first().childAt(0).text()).toEqual('61 120 kr');
+    expect(elementFields.last().childAt(0).text()).toEqual('1');
   });
 
   it('skal rendre vpanel med årsak og fritekstpanel', () => {
@@ -44,7 +43,7 @@ describe('<VedtakInnvilgetRevurderingPanel>', () => {
       revurderingsAarsakString="Endret til Avslag"
     />);
 
-    expect(wrapper.find(Normaltekst).childAt(0).text()).to.eql('Endret til Avslag');
-    expect(wrapper.find(VedtakFritekstPanel)).to.have.length(1);
+    expect(wrapper.find(Normaltekst).childAt(0).text()).toEqual('Endret til Avslag');
+    expect(wrapper.find(VedtakFritekstPanel)).toHaveLength(1);
   });
 });

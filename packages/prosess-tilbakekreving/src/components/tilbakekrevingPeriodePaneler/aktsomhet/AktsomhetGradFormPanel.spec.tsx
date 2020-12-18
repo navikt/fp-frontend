@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import sarligGrunn from '../../../kodeverk/sarligGrunn';
@@ -31,8 +30,8 @@ describe('<AktsomhetGradFormPanel>', () => {
       erTotalBelopUnder4Rettsgebyr={false}
     />);
 
-    expect(wrapper.find(AktsomhetGradForsettFormPanel)).to.have.length(1);
-    expect(wrapper.find(AktsomhetGradUaktsomhetFormPanel)).to.have.length(0);
+    expect(wrapper.find(AktsomhetGradForsettFormPanel)).toHaveLength(1);
+    expect(wrapper.find(AktsomhetGradUaktsomhetFormPanel)).toHaveLength(0);
   });
 
   it('skal vise panel for å grovt uaktsomt når denne radio-knappen er valgt', () => {
@@ -47,7 +46,7 @@ describe('<AktsomhetGradFormPanel>', () => {
       erTotalBelopUnder4Rettsgebyr={false}
     />);
 
-    expect(wrapper.find(AktsomhetGradForsettFormPanel)).to.have.length(0);
-    expect(wrapper.find(AktsomhetGradUaktsomhetFormPanel)).to.have.length(1);
+    expect(wrapper.find(AktsomhetGradForsettFormPanel)).toHaveLength(0);
+    expect(wrapper.find(AktsomhetGradUaktsomhetFormPanel)).toHaveLength(1);
   });
 });

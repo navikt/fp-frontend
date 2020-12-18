@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -119,22 +118,22 @@ describe('BehandlingMenuIndex', () => {
     />);
 
     const meny = wrapper.find(MenySakIndex);
-    expect(meny).to.have.length(1);
+    expect(meny).toHaveLength(1);
     const data = meny.prop('data');
-    expect(data).to.have.length(7);
-    expect(data[0].erSynlig).is.false;
-    expect(data[0].tekst).is.eql('Fortsett behandlingen');
-    expect(data[1].erSynlig).is.true;
-    expect(data[1].tekst).is.eql('Sett behandlingen på vent');
-    expect(data[2].erSynlig).is.true;
-    expect(data[2].tekst).is.eql('Henlegg behandlingen og avslutt');
-    expect(data[3].erSynlig).is.true;
-    expect(data[3].tekst).is.eql('Endre behandlende enhet');
-    expect(data[4].erSynlig).is.true;
-    expect(data[4].tekst).is.eql('Åpne behandling for endringer');
-    expect(data[5].erSynlig).is.true;
-    expect(data[5].tekst).is.eql('Opprett ny behandling');
-    expect(data[6].erSynlig).is.true;
-    expect(data[6].tekst).is.eql('Opprett verge/fullmektig');
+    expect(data).toHaveLength(7);
+    expect(data[0].erSynlig).toBe(false);
+    expect(data[0].tekst).toEqual('Fortsett behandlingen');
+    expect(data[1].erSynlig).toBe(true);
+    expect(data[1].tekst).toEqual('Sett behandlingen på vent');
+    expect(data[2].erSynlig).toBe(true);
+    expect(data[2].tekst).toEqual('Henlegg behandlingen og avslutt');
+    expect(data[3].erSynlig).toBe(true);
+    expect(data[3].tekst).toEqual('Endre behandlende enhet');
+    expect(data[4].erSynlig).toBe(true);
+    expect(data[4].tekst).toEqual('Åpne behandling for endringer');
+    expect(data[5].erSynlig).toBe(true);
+    expect(data[5].tekst).toEqual('Opprett ny behandling');
+    expect(data[6].erSynlig).toBe(true);
+    expect(data[6].tekst).toEqual('Opprett verge/fullmektig');
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -44,8 +43,8 @@ describe('<TilkjentYtelse>', () => {
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(TimeLineSokerEnsamSoker)).to.have.length(1);
-    expect(wrapper.find(TimeLineSokerEnsamSoker).props().hovedsokerKjonnKode).to.equal('K');
-    expect(wrapper.find(TimeLineControl)).to.have.length(1);
+    expect(wrapper.find(TimeLineSokerEnsamSoker)).toHaveLength(1);
+    expect(wrapper.find(TimeLineSokerEnsamSoker).props().hovedsokerKjonnKode).toBe('K');
+    expect(wrapper.find(TimeLineControl)).toHaveLength(1);
   });
 });

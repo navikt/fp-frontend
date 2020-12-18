@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -14,8 +13,8 @@ describe('<NyoppstartetFLForm>', () => {
       isAksjonspunktClosed={false}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
-    expect(radios.last().prop('disabled')).is.eql(false);
+    expect(radios).toHaveLength(2);
+    expect(radios.last().prop('disabled')).toEqual(false);
   });
 
   const faktaOmBeregning = {
@@ -27,7 +26,7 @@ describe('<NyoppstartetFLForm>', () => {
     const values = { };
     values[erNyoppstartetFLField] = true;
     const transformedObject = NyoppstartetFLForm.transformValues(values, null, faktaOmBeregning, []);
-    expect(transformedObject.vurderNyoppstartetFL.erNyoppstartetFL).to.equal(true);
+    expect(transformedObject.vurderNyoppstartetFL.erNyoppstartetFL).toBe(true);
   });
 
   const frilansAndelInntekt = {
@@ -57,12 +56,12 @@ describe('<NyoppstartetFLForm>', () => {
     ];
     const fastsatteAndeler = [];
     const transformedObject = NyoppstartetFLForm.transformValues(values, inntekterPrMnd, faktaOmBeregning, fastsatteAndeler);
-    expect(transformedObject.vurderNyoppstartetFL.erNyoppstartetFL).to.equal(true);
-    expect(transformedObject.faktaOmBeregningTilfeller.length).to.equal(2);
-    expect(transformedObject.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)).to.equal(true);
-    expect(transformedObject.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_MAANEDSINNTEKT_FL)).to.equal(true);
-    expect(transformedObject.fastsettMaanedsinntektFL.maanedsinntekt).to.equal(10000);
-    expect(fastsatteAndeler.length).to.equal(1);
+    expect(transformedObject.vurderNyoppstartetFL.erNyoppstartetFL).toBe(true);
+    expect(transformedObject.faktaOmBeregningTilfeller.length).toBe(2);
+    expect(transformedObject.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)).toBe(true);
+    expect(transformedObject.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_MAANEDSINNTEKT_FL)).toBe(true);
+    expect(transformedObject.fastsettMaanedsinntektFL.maanedsinntekt).toBe(10000);
+    expect(fastsatteAndeler.length).toBe(1);
   });
 
   it('skal teste at buildInitialValues gir korrekt output med gyldig beregningsgrunnlag', () => {
@@ -82,6 +81,6 @@ describe('<NyoppstartetFLForm>', () => {
       ],
     };
     const initialValues = NyoppstartetFLForm.buildInitialValues(gyldigBG);
-    expect(initialValues[erNyoppstartetFLField]).to.equal(true);
+    expect(initialValues[erNyoppstartetFLField]).toBe(true);
   });
 });

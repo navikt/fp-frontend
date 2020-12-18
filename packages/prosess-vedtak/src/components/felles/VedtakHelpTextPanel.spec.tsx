@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -23,8 +22,8 @@ describe('<VedtakHelpTextPanel>', () => {
     />);
 
     const helpTexts = wrapper.find('li');
-    expect(helpTexts).to.have.length(1);
-    expect(helpTexts.find(Normaltekst).childAt(0).text()).is.eql('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?');
+    expect(helpTexts).toHaveLength(1);
+    expect(helpTexts.find(Normaltekst).childAt(0).text()).toEqual('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?');
   });
 
   it('skal vise hjelpetekst for vurdering av dokument og vurdering av annen ytelse når en har disse aksjonspunktetene', () => {
@@ -45,9 +44,11 @@ describe('<VedtakHelpTextPanel>', () => {
     />);
 
     const helpTexts = wrapper.find('li');
-    expect(helpTexts).to.have.length(2);
-    expect(helpTexts.at(0).find(Normaltekst).childAt(0).text()).is.eql('Påvirker den åpne Gosys-oppgaven «Vurder konsekvens for ytelse» behandlingen?');
-    expect(helpTexts.at(1).find(Normaltekst).childAt(0).text()).is.eql('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?');
+    expect(helpTexts).toHaveLength(2);
+    expect(helpTexts.at(0).find(Normaltekst).childAt(0).text()).toEqual(
+      'Påvirker den åpne Gosys-oppgaven «Vurder konsekvens for ytelse» behandlingen?',
+    );
+    expect(helpTexts.at(1).find(Normaltekst).childAt(0).text()).toEqual('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?');
   });
 
   it('skal ikke vise hjelpetekst når en ikke har gitte aksjonspunkter', () => {
@@ -62,6 +63,6 @@ describe('<VedtakHelpTextPanel>', () => {
       readOnly={false}
     />);
 
-    expect(wrapper.find('HelpText')).to.have.length(0);
+    expect(wrapper.find('HelpText')).toHaveLength(0);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -13,7 +12,7 @@ describe('<DashboardResolver>', () => {
       intl={intlMock}
     />);
 
-    expect(wrapper.find(FagsakSearchIndex)).to.have.length(1);
-    expect(wrapper.find(LoadingPanel)).to.have.length(0);
+    expect(wrapper.find(FagsakSearchIndex)).toHaveLength(1);
+    expect(wrapper.find(LoadingPanel)).toHaveLength(0);
   });
 });

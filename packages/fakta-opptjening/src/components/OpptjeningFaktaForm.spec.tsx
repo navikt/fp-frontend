@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -75,19 +74,19 @@ describe('<OpptjeningFaktaForm>', () => {
     wrapper.setState({ selectedOpptjeningActivity: opptjeningActivities[0] });
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).to.have.length(1);
-    expect(helpText.prop('isAksjonspunktOpen')).is.true;
-    expect(helpText.childAt(0)).to.have.length(1);
-    expect(helpText.childAt(0).prop('id')).is.eql('OpptjeningFaktaForm.FlereArbeidKanGodkjennes');
+    expect(helpText).toHaveLength(1);
+    expect(helpText.prop('isAksjonspunktOpen')).toBe(true);
+    expect(helpText.childAt(0)).toHaveLength(1);
+    expect(helpText.childAt(0).prop('id')).toEqual('OpptjeningFaktaForm.FlereArbeidKanGodkjennes');
 
-    expect(wrapper.find(ActivityPanel)).to.have.length(1);
+    expect(wrapper.find(ActivityPanel)).toHaveLength(1);
     const oppdaterKnapp = wrapper.find(Hovedknapp);
-    expect(oppdaterKnapp).to.have.length(1);
-    expect(oppdaterKnapp.prop('disabled')).is.true;
+    expect(oppdaterKnapp).toHaveLength(1);
+    expect(oppdaterKnapp.prop('disabled')).toBe(true);
 
     const avbrytKnapp = wrapper.find(Knapp);
-    expect(avbrytKnapp).to.have.length(1);
-    expect(avbrytKnapp.prop('disabled')).is.false;
+    expect(avbrytKnapp).toHaveLength(1);
+    expect(avbrytKnapp.prop('disabled')).toBe(false);
   });
 
   it('skal ikke vise aksjonspunktinformasjon og knapper når aksjonspunkt ikke finnes', () => {
@@ -114,9 +113,9 @@ describe('<OpptjeningFaktaForm>', () => {
 
     wrapper.setState({ selectedOpptjeningActivity: opptjeningActivities[0] });
 
-    expect(wrapper.find(AksjonspunktHelpTextTemp)).to.have.length(0);
-    expect(wrapper.find(Hovedknapp)).to.have.length(0);
-    expect(wrapper.find(Knapp)).to.have.length(0);
+    expect(wrapper.find(AksjonspunktHelpTextTemp)).toHaveLength(0);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(0);
+    expect(wrapper.find(Knapp)).toHaveLength(0);
   });
 
   it('skal ikke vise informasjon om aktiviteten når det ikke er valgt aktivitetstype i dropdown', () => {
@@ -143,7 +142,7 @@ describe('<OpptjeningFaktaForm>', () => {
 
     wrapper.setState({ selectedOpptjeningActivity: undefined });
 
-    expect(wrapper.find(ActivityPanel)).to.have.length(0);
+    expect(wrapper.find(ActivityPanel)).toHaveLength(0);
   });
 
   it('skal kunne lagre og legge til når ingen aktivitet er valgt og alle aksjonspunkter er avklart', () => {
@@ -176,10 +175,10 @@ describe('<OpptjeningFaktaForm>', () => {
     wrapper.setState({ selectedOpptjeningActivity: undefined });
 
     const oppdaterKnapp = wrapper.find(Hovedknapp);
-    expect(oppdaterKnapp.prop('disabled')).is.false;
+    expect(oppdaterKnapp.prop('disabled')).toBe(false);
 
     const avbrytKnapp = wrapper.find(Knapp);
-    expect(avbrytKnapp.prop('disabled')).is.false;
+    expect(avbrytKnapp.prop('disabled')).toBe(false);
   });
 
   it('skal automatisk åpne aktivitet som må avklares', () => {
@@ -208,9 +207,9 @@ describe('<OpptjeningFaktaForm>', () => {
     />);
 
     // @ts-ignore Fiks
-    expect(wrapper.state().selectedOpptjeningActivity).to.eql(opptjeningActivities[1]);
+    expect(wrapper.state().selectedOpptjeningActivity).toEqual(opptjeningActivities[1]);
 
-    expect(formInitCallback.getCalls()).to.have.length(0);
+    expect(formInitCallback.getCalls()).toHaveLength(0);
   });
 
   it('skal oppdatere aktivitet etter editering', () => {
@@ -239,7 +238,7 @@ describe('<OpptjeningFaktaForm>', () => {
     />);
 
     const activityPanel = wrapper.find(ActivityPanel);
-    expect(activityPanel).to.have.length(1);
+    expect(activityPanel).toHaveLength(1);
 
     const editedActivity = {
       ...opptjeningActivities[1],
@@ -249,17 +248,17 @@ describe('<OpptjeningFaktaForm>', () => {
     activityPanel.prop('updateActivity')(editedActivity);
 
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('Behandling_123.OpptjeningFaktaForm');
-    expect(args[1]).to.eql('opptjeningActivities');
-    expect(args[2]).to.eql([opptjeningActivities[0], editedActivity]);
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('Behandling_123.OpptjeningFaktaForm');
+    expect(args[1]).toEqual('opptjeningActivities');
+    expect(args[2]).toEqual([opptjeningActivities[0], editedActivity]);
 
     // @ts-ignore Fiks
-    expect(wrapper.state().selectedOpptjeningActivity).is.undefined;
+    expect(wrapper.state().selectedOpptjeningActivity).toBeUndefined();
 
-    expect(formInitCallback.getCalls()).to.have.length(1);
+    expect(formInitCallback.getCalls()).toHaveLength(1);
   });
 
   it('skal legge til aktivitet', () => {
@@ -289,7 +288,7 @@ describe('<OpptjeningFaktaForm>', () => {
     wrapper.find(Knapp).simulate('click');
 
     // @ts-ignore Fiks
-    expect(wrapper.state().selectedOpptjeningActivity).is.eql({
+    expect(wrapper.state().selectedOpptjeningActivity).toEqual({
       id: 3,
       erGodkjent: true,
       erManueltOpprettet: true,
@@ -325,12 +324,12 @@ describe('<OpptjeningFaktaForm>', () => {
     activityPanel.prop('cancelSelectedOpptjeningActivity')();
 
     const initCalls = formInitCallback.getCalls();
-    expect(initCalls).to.have.length(1);
-    expect(initCalls[0].args).to.have.length(2);
-    expect(initCalls[0].args[0]).to.eql('Behandling_123.ActivityPanel');
-    expect(initCalls[0].args[1]).to.eql({});
+    expect(initCalls).toHaveLength(1);
+    expect(initCalls[0].args).toHaveLength(2);
+    expect(initCalls[0].args[0]).toEqual('Behandling_123.ActivityPanel');
+    expect(initCalls[0].args[1]).toEqual({});
 
     // @ts-ignore Fiks
-    expect(wrapper.state().selectedOpptjeningActivity).is.undefined;
+    expect(wrapper.state().selectedOpptjeningActivity).toBeUndefined();
   });
 });

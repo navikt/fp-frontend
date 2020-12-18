@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { EtikettLiten } from 'nav-frontend-typografi';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
@@ -47,14 +46,14 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
     />);
 
     const melding = wrapper.find(FormattedMessage);
-    expect(melding).to.have.length(2);
-    expect(melding.first().prop('id')).to.eql('Fødsel');
+    expect(melding).toHaveLength(2);
+    expect(melding.first().prop('id')).toEqual('Fødsel');
 
     const normaltekst = wrapper.find(EtikettLiten);
-    expect(normaltekst).to.have.length(1);
-    expect(normaltekst.childAt(0).text()).to.eql('§23');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.childAt(0).text()).toEqual('§23');
 
     const vilkarResultPicker = wrapper.find(VilkarResultPicker);
-    expect(vilkarResultPicker).to.have.length(1);
+    expect(vilkarResultPicker).toHaveLength(1);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -32,24 +31,24 @@ describe('<TilretteleggingFieldArray>', () => {
       velferdspermisjoner={[]}
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
     const selectField = innerWrapper.find(SelectField);
-    expect(selectField).has.length(1);
-    expect(selectField.props().placeholder).to.eql('- Velg tilretteleggingsbehov -');
-    expect(selectField.props().selectValues).has.length(3);
-    expect(selectField.props().selectValues[0].key).to.eql('HEL_TILRETTELEGGING');
-    expect(selectField.props().selectValues[1].key).to.eql('DELVIS_TILRETTELEGGING');
-    expect(selectField.props().selectValues[2].key).to.eql('INGEN_TILRETTELEGGING');
+    expect(selectField).toHaveLength(1);
+    expect(selectField.props().placeholder).toEqual('- Velg tilretteleggingsbehov -');
+    expect(selectField.props().selectValues).toHaveLength(3);
+    expect(selectField.props().selectValues[0].key).toEqual('HEL_TILRETTELEGGING');
+    expect(selectField.props().selectValues[1].key).toEqual('DELVIS_TILRETTELEGGING');
+    expect(selectField.props().selectValues[2].key).toEqual('INGEN_TILRETTELEGGING');
 
     const datepickerField = innerWrapper.find(DatepickerField);
-    expect(datepickerField).has.length(1);
+    expect(datepickerField).toHaveLength(1);
 
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 
   it('skal vise tilrettelegging fields uten tittel for index 1', () => {
@@ -71,27 +70,27 @@ describe('<TilretteleggingFieldArray>', () => {
       velferdspermisjoner={[]}
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 1, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
     const selectField = innerWrapper.find(SelectField);
-    expect(selectField).has.length(1);
-    expect(selectField.props().placeholder).to.eql('- Velg tilretteleggingsbehov -');
-    expect(selectField.props().selectValues).has.length(3);
-    expect(selectField.props().selectValues[0].key).to.eql('HEL_TILRETTELEGGING');
-    expect(selectField.props().selectValues[1].key).to.eql('DELVIS_TILRETTELEGGING');
-    expect(selectField.props().selectValues[2].key).to.eql('INGEN_TILRETTELEGGING');
+    expect(selectField).toHaveLength(1);
+    expect(selectField.props().placeholder).toEqual('- Velg tilretteleggingsbehov -');
+    expect(selectField.props().selectValues).toHaveLength(3);
+    expect(selectField.props().selectValues[0].key).toEqual('HEL_TILRETTELEGGING');
+    expect(selectField.props().selectValues[1].key).toEqual('DELVIS_TILRETTELEGGING');
+    expect(selectField.props().selectValues[2].key).toEqual('INGEN_TILRETTELEGGING');
 
     const datepickerField = innerWrapper.find(DatepickerField);
-    expect(datepickerField).has.length(1);
+    expect(datepickerField).toHaveLength(1);
 
     const formattedMessages = innerWrapper.find(FormattedMessage);
-    expect(formattedMessages).has.length(0);
+    expect(formattedMessages).toHaveLength(0);
 
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 
   it('skal ikke vise getRemoveButtno i readOnly modus', () => {
@@ -113,27 +112,27 @@ describe('<TilretteleggingFieldArray>', () => {
       velferdspermisjoner={[]}
     />);
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 1, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
     const selectField = innerWrapper.find(SelectField);
-    expect(selectField).has.length(1);
-    expect(selectField.props().placeholder).to.eql('- Velg tilretteleggingsbehov -');
-    expect(selectField.props().selectValues).has.length(3);
-    expect(selectField.props().selectValues[0].key).to.eql('HEL_TILRETTELEGGING');
-    expect(selectField.props().selectValues[1].key).to.eql('DELVIS_TILRETTELEGGING');
-    expect(selectField.props().selectValues[2].key).to.eql('INGEN_TILRETTELEGGING');
+    expect(selectField).toHaveLength(1);
+    expect(selectField.props().placeholder).toEqual('- Velg tilretteleggingsbehov -');
+    expect(selectField.props().selectValues).toHaveLength(3);
+    expect(selectField.props().selectValues[0].key).toEqual('HEL_TILRETTELEGGING');
+    expect(selectField.props().selectValues[1].key).toEqual('DELVIS_TILRETTELEGGING');
+    expect(selectField.props().selectValues[2].key).toEqual('INGEN_TILRETTELEGGING');
 
     const datepickerField = innerWrapper.find(DatepickerField);
-    expect(datepickerField).has.length(1);
+    expect(datepickerField).toHaveLength(1);
 
     const formattedMessages = innerWrapper.find(FormattedMessage);
-    expect(formattedMessages).has.length(0);
+    expect(formattedMessages).toHaveLength(0);
 
-    expect(innerWrapper.find('#avslutt')).has.length(0);
+    expect(innerWrapper.find('#avslutt')).toHaveLength(0);
   });
 
   it('skal finnne utbetalingsgrad for delvis tilrettelegging - eks. 1', () => {
@@ -142,7 +141,7 @@ describe('<TilretteleggingFieldArray>', () => {
 
     const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsgiver, stillingsprosent);
 
-    expect(utbetalingsgrad).is.eql('0');
+    expect(utbetalingsgrad).toEqual('0');
   });
 
   it('skal finnne utbetalingsgrad for delvis tilrettelegging - eks. 2', () => {
@@ -151,6 +150,6 @@ describe('<TilretteleggingFieldArray>', () => {
 
     const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsgiver, stillingsprosent);
 
-    expect(utbetalingsgrad).is.eql('0');
+    expect(utbetalingsgrad).toEqual('0');
   });
 });

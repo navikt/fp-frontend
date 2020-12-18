@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import EndreBehandlendeEnhetModal from './components/EndreBehandlendeEnhetModal';
 import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
@@ -28,7 +27,7 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     />);
 
     const modal = wrapper.find(EndreBehandlendeEnhetModal);
-    expect(modal).to.have.length(1);
+    expect(modal).toHaveLength(1);
 
     // @ts-ignore
     modal.prop('onSubmit')({
@@ -37,9 +36,9 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     });
 
     const kall = nyBehandlendeEnhetCallback.getCalls();
-    expect(kall).to.have.length(1);
-    expect(kall[0].args).to.have.length(1);
-    expect(kall[0].args[0]).to.eql({
+    expect(kall).toHaveLength(1);
+    expect(kall[0].args).toHaveLength(1);
+    expect(kall[0].args[0]).toEqual({
       behandlingId: 3,
       behandlingVersjon: 1,
       enhetNavn: 'TEST ENHET',
@@ -48,6 +47,6 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     });
 
     const lukkKall = lukkModalCallback.getCalls();
-    expect(lukkKall).to.have.length(1);
+    expect(lukkKall).toHaveLength(1);
   });
 });

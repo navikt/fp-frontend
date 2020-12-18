@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -46,8 +45,8 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
     />);
 
     const dateLabel = wrapper.find('DateLabel');
-    expect(dateLabel).has.length(3);
-    expect(dateLabel.first().prop('dateString')).to.eql('2017-10-06');
+    expect(dateLabel).toHaveLength(3);
+    expect(dateLabel.first().prop('dateString')).toEqual('2017-10-06');
   });
 
   it('skal rendre form og vise mottatt dato og fødselsdato', () => {
@@ -80,9 +79,9 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
     />);
 
     const dateLabel = wrapper.find('DateLabel');
-    expect(dateLabel).has.length(3);
-    expect(dateLabel.at(1).prop('dateString')).to.eql('2017-10-15');
-    expect(dateLabel.last().prop('dateString')).to.eql('2017-10-10');
+    expect(dateLabel).toHaveLength(3);
+    expect(dateLabel.at(1).prop('dateString')).toEqual('2017-10-15');
+    expect(dateLabel.last().prop('dateString')).toEqual('2017-10-10');
   });
 
   it('skal rendre form og vise begrunnelse for sen innsending', () => {
@@ -115,8 +114,8 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
     />);
 
     const dateLabel = wrapper.find('span');
-    expect(dateLabel).has.length(5);
-    expect(dateLabel.last().text()).to.eql('testbegrunnelse');
+    expect(dateLabel).toHaveLength(5);
+    expect(dateLabel.last().text()).toEqual('testbegrunnelse');
   });
 
   it('skal rendre form og vise en bindestrek når en ikke har begrunnelse for sen innsending', () => {
@@ -148,8 +147,8 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
     />);
 
     const dateLabel = wrapper.find('span');
-    expect(dateLabel).has.length(5);
-    expect(dateLabel.last().text()).to.eql('-');
+    expect(dateLabel).toHaveLength(5);
+    expect(dateLabel.last().text()).toEqual('-');
   });
 
   it('skal vise radioknapper og innsendingskomponent', () => {
@@ -181,9 +180,9 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
     />);
 
     const radioButtons = wrapper.find('RadioOption');
-    expect(radioButtons).has.length(2);
-    expect(wrapper.find(ProsessStegBegrunnelseTextField)).has.length(1);
-    expect(wrapper.find('injectIntl(ConfirmInformationVilkarFormReadOnly)')).has.length(0);
+    expect(radioButtons).toHaveLength(2);
+    expect(wrapper.find(ProsessStegBegrunnelseTextField)).toHaveLength(1);
+    expect(wrapper.find('injectIntl(ConfirmInformationVilkarFormReadOnly)')).toHaveLength(0);
   });
 
   it('skal ved readonly kun vise en radioknapp med valgt verdi', () => {
@@ -216,9 +215,9 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
     />);
 
     const confirm = wrapper.find(ProsessStegBegrunnelseTextField);
-    expect(confirm).has.length(1);
-    expect(confirm.prop('readOnly')).is.true;
-    expect(wrapper.find('RadioOption')).has.length(1);
+    expect(confirm).toHaveLength(1);
+    expect(confirm.prop('readOnly')).toBe(true);
+    expect(wrapper.find('RadioOption')).toHaveLength(1);
   });
 
   it('skal bruke info fra søknad når avklart data ikke finnes og søknadstype er FODSEL', () => {
@@ -233,7 +232,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: undefined,
       begrunnelse: '',
     });
@@ -251,7 +250,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: undefined,
       begrunnelse: '',
     });
@@ -269,7 +268,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: undefined,
       begrunnelse: '',
     });
@@ -288,7 +287,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: true,
       begrunnelse: 'har lagret',
     });
@@ -307,7 +306,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(aksjonspunkter, vilkarUtfallType.IKKE_OPPFYLT);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       erVilkarOk: false,
       begrunnelse: 'har lagret',
     });

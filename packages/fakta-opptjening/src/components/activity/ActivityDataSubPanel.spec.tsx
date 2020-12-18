@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -42,19 +41,19 @@ describe('<ActivityDataSubPanel>', () => {
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
-    expect(arbeidsgiverLabel).to.have.length(1);
-    expect(arbeidsgiverLabel.prop('id')).is.eql('ActivityPanel.Arbeidsgiver');
+    expect(arbeidsgiverLabel).toHaveLength(1);
+    expect(arbeidsgiverLabel.prop('id')).toEqual('ActivityPanel.Arbeidsgiver');
 
     const arbeidsgiverText = wrapper.find(Normaltekst);
-    expect(arbeidsgiverText).to.have.length(1);
-    expect(arbeidsgiverText.childAt(0).text()).is.eql('Svensen Eksos (123456789)');
+    expect(arbeidsgiverText).toHaveLength(1);
+    expect(arbeidsgiverText.childAt(0).text()).toEqual('Svensen Eksos (123456789)');
 
     const stillingsandelInput = wrapper.find(DecimalField);
-    expect(stillingsandelInput).to.have.length(1);
-    expect(stillingsandelInput.prop('name')).is.eql('stillingsandel');
-    expect(stillingsandelInput.prop('readOnly')).is.true;
+    expect(stillingsandelInput).toHaveLength(1);
+    expect(stillingsandelInput.prop('name')).toEqual('stillingsandel');
+    expect(stillingsandelInput.prop('readOnly')).toBe(true);
 
-    expect(wrapper.find(DatepickerField)).to.have.length(0);
+    expect(wrapper.find(DatepickerField)).toHaveLength(0);
   });
 
   it('skal vise "-" når arbeidsgiver ikke er oppgitt', () => {
@@ -67,19 +66,19 @@ describe('<ActivityDataSubPanel>', () => {
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
-    expect(arbeidsgiverLabel).to.have.length(1);
-    expect(arbeidsgiverLabel.prop('id')).is.eql('ActivityPanel.Arbeidsgiver');
+    expect(arbeidsgiverLabel).toHaveLength(1);
+    expect(arbeidsgiverLabel.prop('id')).toEqual('ActivityPanel.Arbeidsgiver');
 
     const arbeidsgiverText = wrapper.find(Normaltekst);
-    expect(arbeidsgiverText).to.have.length(1);
-    expect(arbeidsgiverText.childAt(0).text()).is.eql('-');
+    expect(arbeidsgiverText).toHaveLength(1);
+    expect(arbeidsgiverText.childAt(0).text()).toEqual('-');
 
     const stillingsandelInput = wrapper.find(DecimalField);
-    expect(stillingsandelInput).to.have.length(1);
-    expect(stillingsandelInput.prop('name')).is.eql('stillingsandel');
-    expect(stillingsandelInput.prop('readOnly')).is.true;
+    expect(stillingsandelInput).toHaveLength(1);
+    expect(stillingsandelInput.prop('name')).toEqual('stillingsandel');
+    expect(stillingsandelInput.prop('readOnly')).toBe(true);
 
-    expect(wrapper.find(DatepickerField)).to.have.length(0);
+    expect(wrapper.find(DatepickerField)).toHaveLength(0);
   });
 
   it('skal ikke vise label Oppdragsgiver for type Frilans', () => {
@@ -92,10 +91,10 @@ describe('<ActivityDataSubPanel>', () => {
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
-    expect(arbeidsgiverLabel).to.have.length(0);
+    expect(arbeidsgiverLabel).toHaveLength(0);
 
-    expect(wrapper.find(InputField)).to.have.length(0);
-    expect(wrapper.find(DatepickerField)).to.have.length(0);
+    expect(wrapper.find(InputField)).toHaveLength(0);
+    expect(wrapper.find(DatepickerField)).toHaveLength(0);
   });
 
   it('skal vise ikke vise stillingsandel for type Næring', () => {
@@ -108,11 +107,11 @@ describe('<ActivityDataSubPanel>', () => {
     />);
 
     const arbeidsgiverLabel = wrapper.find(FormattedMessage);
-    expect(arbeidsgiverLabel).to.have.length(1);
-    expect(arbeidsgiverLabel.prop('id')).is.eql('ActivityPanel.Arbeidsgiver');
+    expect(arbeidsgiverLabel).toHaveLength(1);
+    expect(arbeidsgiverLabel.prop('id')).toEqual('ActivityPanel.Arbeidsgiver');
 
-    expect(wrapper.find(InputField)).to.have.length(0);
-    expect(wrapper.find(DatepickerField)).to.have.length(1);
+    expect(wrapper.find(InputField)).toHaveLength(0);
+    expect(wrapper.find(DatepickerField)).toHaveLength(1);
   });
 
   it('skal ikke vise noen felter for type Vartpenger', () => {
@@ -124,9 +123,9 @@ describe('<ActivityDataSubPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(FormattedMessage)).to.have.length(0);
-    expect(wrapper.find(InputField)).to.have.length(0);
-    expect(wrapper.find(DatepickerField)).to.have.length(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
+    expect(wrapper.find(InputField)).toHaveLength(0);
+    expect(wrapper.find(DatepickerField)).toHaveLength(0);
   });
 
   it('skal vise inputfelt for organisasjonsnr når saksbehandler manuelt har lagt til aktivitet Arbeid', () => {
@@ -138,15 +137,15 @@ describe('<ActivityDataSubPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(FormattedMessage)).to.have.length(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
     const inputFields = wrapper.find(InputField);
-    expect(inputFields).to.have.length(1);
-    expect(inputFields.prop('name')).is.eql('oppdragsgiverOrg');
-    expect(inputFields.prop('readOnly')).is.false;
+    expect(inputFields).toHaveLength(1);
+    expect(inputFields.prop('name')).toEqual('oppdragsgiverOrg');
+    expect(inputFields.prop('readOnly')).toBe(false);
     const decimalField = wrapper.find(DecimalField);
-    expect(decimalField).to.have.length(1);
-    expect(decimalField.prop('name')).is.eql('stillingsandel');
-    expect(decimalField.prop('readOnly')).is.false;
+    expect(decimalField).toHaveLength(1);
+    expect(decimalField.prop('name')).toEqual('stillingsandel');
+    expect(decimalField.prop('readOnly')).toBe(false);
   });
 
   it('skal vise inputfelt som readOnly', () => {
@@ -158,14 +157,14 @@ describe('<ActivityDataSubPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(FormattedMessage)).to.have.length(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
     const inputFields = wrapper.find(InputField);
-    expect(inputFields).to.have.length(1);
-    expect(inputFields.prop('readOnly')).is.true;
+    expect(inputFields).toHaveLength(1);
+    expect(inputFields.prop('readOnly')).toBe(true);
     const decimalField = wrapper.find(DecimalField);
-    expect(decimalField).to.have.length(1);
-    expect(decimalField.prop('name')).is.eql('stillingsandel');
-    expect(decimalField.prop('readOnly')).is.true;
+    expect(decimalField).toHaveLength(1);
+    expect(decimalField.prop('name')).toEqual('stillingsandel');
+    expect(decimalField.prop('readOnly')).toBe(true);
   });
   it('skal vise arbeidsgiver som privatperson', () => {
     const wrapper = shallow(<ActivityDataSubPanel
@@ -176,8 +175,8 @@ describe('<ActivityDataSubPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tekst = wrapper.find(Normaltekst);
-    expect(tekst).to.have.length(1);
-    expect(tekst.props().children).to.equal('Tom Hansen (10.11.1992)');
+    expect(tekst).toHaveLength(1);
+    expect(tekst.props().children).toBe('Tom Hansen (10.11.1992)');
   });
   it('skal vise org når ikke privatperson', () => {
     const wrapper = shallow(<ActivityDataSubPanel
@@ -188,8 +187,8 @@ describe('<ActivityDataSubPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tekst = wrapper.find(Normaltekst);
-    expect(tekst).to.have.length(1);
-    expect(tekst.props().children).to.equal('Svensen Eksos (123456789)');
+    expect(tekst).toHaveLength(1);
+    expect(tekst.props().children).toBe('Svensen Eksos (123456789)');
   });
   it('skal vise - som arbeidsgiver når ikke arbeidsgiver eller privatperson', () => {
     const wrapper = shallow(<ActivityDataSubPanel
@@ -200,7 +199,7 @@ describe('<ActivityDataSubPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tekst = wrapper.find(Normaltekst);
-    expect(tekst).to.have.length(1);
-    expect(tekst.props().children).to.equal('-');
+    expect(tekst).toHaveLength(1);
+    expect(tekst.props().children).toBe('-');
   });
 });

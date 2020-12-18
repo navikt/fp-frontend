@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -14,7 +13,7 @@ describe('<BekreftelsePanel>', () => {
         readOnly={false}
         annenForelderInformertRequired
       />);
-      expect(wrapper.find({ name: 'annenForelderInformert' })).to.have.length(1);
+      expect(wrapper.find({ name: 'annenForelderInformert' })).toHaveLength(1);
     });
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -47,6 +46,6 @@ describe('<UttakPeriodeInnhold>', () => {
     />);
 
     const verticalSpacer = wrapper.find(VerticalSpacer);
-    expect(verticalSpacer).to.have.length(1);
+    expect(verticalSpacer).toHaveLength(1);
   });
 });

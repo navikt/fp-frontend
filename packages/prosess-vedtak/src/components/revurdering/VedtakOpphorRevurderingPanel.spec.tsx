@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -31,10 +30,10 @@ describe('<VedtakOpphorRevurderingPanel>', () => {
     />);
 
     const tekst = wrapper.find(Normaltekst);
-    expect(tekst).to.have.length(1);
-    expect(tekst.childAt(0).text()).to.eql('Test');
+    expect(tekst).toHaveLength(1);
+    expect(tekst.childAt(0).text()).toEqual('Test');
 
-    expect(wrapper.find(VedtakFritekstPanel)).to.have.length(0);
+    expect(wrapper.find(VedtakFritekstPanel)).toHaveLength(0);
   });
 
   it('skal rendre opphørpanel med uten avslagsårsak men med fritekstpanel', () => {
@@ -57,7 +56,7 @@ describe('<VedtakOpphorRevurderingPanel>', () => {
       skalBrukeOverstyrendeFritekstBrev={false}
     />);
 
-    expect(wrapper.find(Normaltekst)).to.have.length(0);
-    expect(wrapper.find(VedtakFritekstPanel)).to.have.length(1);
+    expect(wrapper.find(Normaltekst)).toHaveLength(0);
+    expect(wrapper.find(VedtakFritekstPanel)).toHaveLength(1);
   });
 });

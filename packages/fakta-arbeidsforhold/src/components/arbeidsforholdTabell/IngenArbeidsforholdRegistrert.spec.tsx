@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import TableColumn from '@fpsak-frontend/shared-components/src/table/TableColumn';
 import { FormattedMessage } from 'react-intl';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
@@ -20,8 +19,8 @@ describe('<IngenArbeidsforholdRegistrert>', () => {
         headerColumnContent={headerColumnContent}
       />,
     );
-    expect(wrapper.find(TableColumn)).has.length(6);
+    expect(wrapper.find(TableColumn)).toHaveLength(6);
     // @ts-ignore
-    expect(wrapper.find(FormattedMessage).props().id).to.eql('PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert');
+    expect(wrapper.find(FormattedMessage).props().id).toEqual('PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert');
   });
 });

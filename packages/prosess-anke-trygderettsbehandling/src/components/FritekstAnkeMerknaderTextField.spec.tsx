@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
@@ -22,6 +21,6 @@ describe('<TrygderettsbehandlingForm>', () => {
       />,
     );
 
-    expect(wrapper.find(TextAreaField)).has.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 });

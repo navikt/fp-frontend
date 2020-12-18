@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -67,8 +66,8 @@ describe('<MedlemskapInfoPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
-    expect(wrapper.find(OppholdInntektOgPerioderForm)).has.length(0);
+    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
+    expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(0);
   });
 
   it('skal vise form for startdato for foreldrepengerperioden når en har overstyr-aksjonspunktet for dette', () => {
@@ -115,8 +114,8 @@ describe('<MedlemskapInfoPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
-    expect(wrapper.find(OppholdInntektOgPerioderForm)).has.length(0);
+    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
+    expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(0);
   });
 
   it('skal vise begge medlemskapsformer når aksjonspunkt for startdato for foreldrepengerperioden er avklart', () => {
@@ -163,8 +162,8 @@ describe('<MedlemskapInfoPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
-    expect(wrapper.find(OppholdInntektOgPerioderForm)).has.length(1);
+    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
+    expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(1);
   });
 
   it('skal vise panel for avklaring av startdato for foreldrepengerperioden, for å tilate manuell korrigering selvom aksjonspunktet ikke finnes', () => {
@@ -195,7 +194,7 @@ describe('<MedlemskapInfoPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).has.length(1);
-    expect(wrapper.find(OppholdInntektOgPerioderForm)).has.length(1);
+    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
+    expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(1);
   });
 });

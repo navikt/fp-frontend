@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import createVisningsnavnForAktivitet from './visningsnavnHelper';
 
 const andelUtenArbeidsforholdId = {
@@ -30,12 +29,12 @@ describe('visningsnavnHelper', () => {
   it('skal lage visningsnavn når vi mangler arbeidsforholdId', () => {
     const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(arbeidsgiverOpplysningerPerId[andelUtenArbeidsforholdId.arbeidsgiverIdent],
       undefined);
-    expect(arbeidsgiverNavnOrgnr).to.equal('Andeby bank (321)');
+    expect(arbeidsgiverNavnOrgnr).toBe('Andeby bank (321)');
   });
 
   it('skal lage visningsnavn når vi ikke mangler noe', () => {
     const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(arbeidsgiverOpplysningerPerId[andelMedAlt.arbeidsgiverIdent],
       andelMedAlt.eksternArbeidsforholdId);
-    expect(arbeidsgiverNavnOrgnr).to.equal('Andeby bank (321)...6789');
+    expect(arbeidsgiverNavnOrgnr).toBe('Andeby bank (321)...6789');
   });
 });

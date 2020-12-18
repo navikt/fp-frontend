@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -43,16 +42,16 @@ describe('NaeringsopplysningsPanel', () => {
       intl={intlMock}
     />);
     const formattedMessages = wrapper.find('FormattedMessage');
-    expect(formattedMessages).to.be.lengthOf(3);
-    expect(formattedMessages.first().props().id).to.equal('Beregningsgrunnlag.NaeringsOpplysningsPanel.Overskrift');
-    expect(formattedMessages.at(1).props().id).to.equal('Beregningsgrunnlag.NaeringsOpplysningsPanel.OppgittAar');
-    expect(formattedMessages.at(2).props().id).to.equal('Beregningsgrunnlag.NaeringsOpplysningsPanel.VirksomhetsType.ANNEN');
+    expect(formattedMessages).toHaveLength(3);
+    expect(formattedMessages.first().props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.Overskrift');
+    expect(formattedMessages.at(1).props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.OppgittAar');
+    expect(formattedMessages.at(2).props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.VirksomhetsType.ANNEN');
 
     const messages = wrapper.find('Normaltekst');
-    expect(messages).to.be.lengthOf(5);
-    expect(messages.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(andelerForstePeriode.næringer[0].oppgittInntekt));
-    expect(messages.at(2).childAt(0).text()).to.equal(andelerForstePeriode.næringer[0].orgnr);
+    expect(messages).toHaveLength(5);
+    expect(messages.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(andelerForstePeriode.næringer[0].oppgittInntekt));
+    expect(messages.at(2).childAt(0).text()).toBe(andelerForstePeriode.næringer[0].orgnr);
     const lesMer = wrapper.find('Lesmerpanel');
-    expect(lesMer.length).to.equal(1);
+    expect(lesMer.length).toBe(1);
   });
 });

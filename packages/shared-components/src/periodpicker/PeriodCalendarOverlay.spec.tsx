@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -19,7 +18,7 @@ describe('<PeriodCalendarOverlay>', () => {
       disabled
     />);
 
-    expect(wrapper.find(DayPicker)).to.have.length(0);
+    expect(wrapper.find(DayPicker)).toHaveLength(0);
   });
 
   it('skal vise overlay', () => {
@@ -35,22 +34,22 @@ describe('<PeriodCalendarOverlay>', () => {
     />);
 
     const daypicker = wrapper.find(DayPicker);
-    expect(daypicker).to.have.length(1);
-    expect(daypicker.prop('months')).is.eql(['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli',
+    expect(daypicker).toHaveLength(1);
+    expect(daypicker.prop('months')).toEqual(['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli',
       'August', 'September', 'Oktober', 'November', 'Desember']);
-    expect(daypicker.prop('weekdaysLong')).is.eql(['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag']);
-    expect(daypicker.prop('weekdaysShort')).is.eql(['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør']);
-    expect(daypicker.prop('firstDayOfWeek')).is.eql(1);
-    expect(daypicker.prop('selectedDays')).is.eql([{
+    expect(daypicker.prop('weekdaysLong')).toEqual(['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag']);
+    expect(daypicker.prop('weekdaysShort')).toEqual(['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør']);
+    expect(daypicker.prop('firstDayOfWeek')).toEqual(1);
+    expect(daypicker.prop('selectedDays')).toEqual([{
       from: startDate,
       to: endDate,
     }]);
-    expect(daypicker.prop('initialMonth')).is.eql(endDate);
+    expect(daypicker.prop('initialMonth')).toEqual(endDate);
   });
 
   it('skal kjøre callback når overlay blir lukket og target er noe annet enn kalender eller kalenderknapp', () => {
     const onCloseCallback = () => {
-      expect(true).is.true;
+      expect(true).toBe(true);
     };
     const elementIsCalendarButton = () => false;
     const wrapper = shallowWithIntl(<PeriodCalendarOverlay
@@ -80,7 +79,7 @@ describe('<PeriodCalendarOverlay>', () => {
 
     wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent);
 
-    expect(onCloseCallback.called).is.true;
+    expect(onCloseCallback.called).toBe(true);
   });
 
   it('skal ikke kjøre callback når en trykker noe annet enn escape-knappen', () => {
@@ -97,7 +96,7 @@ describe('<PeriodCalendarOverlay>', () => {
 
     wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent);
 
-    expect(onCloseCallback.called).is.false;
+    expect(onCloseCallback.called).toBe(false);
   });
 
   it('skal sette input-dato når ingen dager er disabled', () => {
@@ -116,11 +115,11 @@ describe('<PeriodCalendarOverlay>', () => {
     // @ts-ignore
     wrapper.find(DayPicker).prop('onDayClick')(date);
 
-    expect(onDayChangeCallback.called).is.true;
-    expect(onDayChangeCallback.getCalls()).has.length(1);
+    expect(onDayChangeCallback.called).toBe(true);
+    expect(onDayChangeCallback.getCalls()).toHaveLength(1);
     const args1 = onDayChangeCallback.getCalls()[0].args;
-    expect(args1).has.length(1);
-    expect(args1[0]).is.eql(date);
+    expect(args1).toHaveLength(1);
+    expect(args1[0]).toEqual(date);
   });
 
   it('skal sette input-dato når denne er innenfor det gyldige intervallet', () => {
@@ -144,11 +143,11 @@ describe('<PeriodCalendarOverlay>', () => {
     // @ts-ignore
     wrapper.find(DayPicker).prop('onDayClick')(date);
 
-    expect(onDayChangeCallback.called).is.true;
-    expect(onDayChangeCallback.getCalls()).has.length(1);
+    expect(onDayChangeCallback.called).toBe(true);
+    expect(onDayChangeCallback.getCalls()).toHaveLength(1);
     const args1 = onDayChangeCallback.getCalls()[0].args;
-    expect(args1).has.length(1);
-    expect(args1[0]).is.eql(date);
+    expect(args1).toHaveLength(1);
+    expect(args1[0]).toEqual(date);
   });
 
   it('skal ikke sette input-dato når denne er utenfor startdato i intervallet', () => {
@@ -172,7 +171,7 @@ describe('<PeriodCalendarOverlay>', () => {
     // @ts-ignore
     wrapper.find(DayPicker).prop('onDayClick')(date);
 
-    expect(onDayChangeCallback.called).is.false;
+    expect(onDayChangeCallback.called).toBe(false);
   });
 
   it('skal ikke sette input-dato når denne er utenfor sluttdato i intervallet', () => {
@@ -196,6 +195,6 @@ describe('<PeriodCalendarOverlay>', () => {
     // @ts-ignore
     wrapper.find(DayPicker).prop('onDayClick')(date);
 
-    expect(onDayChangeCallback.called).is.false;
+    expect(onDayChangeCallback.called).toBe(false);
   });
 });

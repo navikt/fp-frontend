@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -54,10 +53,10 @@ describe('<ForeldelsePeriodeForm>', () => {
     );
 
     const options = wrapper.find(RadioOption);
-    expect(options).has.length(4);
-    expect(options.first().prop('value')).is.eql(foreldelseVurderingType.IKKE_VURDERT);
-    expect(options.at(1).prop('value')).is.eql(foreldelseVurderingType.FORELDET);
-    expect(options.at(2).prop('value')).is.eql(foreldelseVurderingType.IKKE_FORELDET);
-    expect(options.last().prop('value')).is.eql(foreldelseVurderingType.TILLEGGSFRIST);
+    expect(options).toHaveLength(4);
+    expect(options.first().prop('value')).toEqual(foreldelseVurderingType.IKKE_VURDERT);
+    expect(options.at(1).prop('value')).toEqual(foreldelseVurderingType.FORELDET);
+    expect(options.at(2).prop('value')).toEqual(foreldelseVurderingType.IKKE_FORELDET);
+    expect(options.last().prop('value')).toEqual(foreldelseVurderingType.TILLEGGSFRIST);
   });
 });

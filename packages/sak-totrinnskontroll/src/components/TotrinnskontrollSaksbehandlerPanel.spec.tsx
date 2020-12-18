@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -121,14 +120,8 @@ describe('<TotrinnskontrollSaksbehandlerPanel>', () => {
       lagLenke={() => location}
     />);
     const navFieldGroup = wrapper.find('NavLink');
-    expect(navFieldGroup)
-      .to
-      .have
-      .length(3);
+    expect(navFieldGroup).toHaveLength(3);
     const normaltekst = wrapper.find('pre');
-    expect(normaltekst)
-      .to
-      .have
-      .length(7);
+    expect(normaltekst).toHaveLength(7);
   });
 });

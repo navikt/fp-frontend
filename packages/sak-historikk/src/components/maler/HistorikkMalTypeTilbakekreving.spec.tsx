@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { omit } from '@fpsak-frontend/utils';
@@ -80,13 +79,13 @@ describe('HistorikkMalTypeTilbakekreving', () => {
     />);
 
     const messages = wrapper.find(FormattedMessage);
-    expect(messages).to.have.length(3);
-    expect(omit(messages.at(1).prop('values'), 'b')).to.eql({
+    expect(messages).toHaveLength(3);
+    expect(omit(messages.at(1).prop('values'), 'b')).toEqual({
       navn: 'testing',
       fraVerdi: 'gammel verdi',
       tilVerdi: 'ny verdi',
     });
-    expect(omit(messages.at(2).prop('values'), 'b')).to.eql({
+    expect(omit(messages.at(2).prop('values'), 'b')).toEqual({
       navn: 'testing 2',
       fraVerdi: undefined,
       tilVerdi: 'ny verdi 2',

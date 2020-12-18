@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
@@ -21,20 +20,20 @@ describe('<RegistrerVirksomhetModalForm>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal.prop('isOpen')).is.true;
+    expect(modal.prop('isOpen')).toBe(true);
 
-    expect(wrapper.find('form')).to.have.length(1);
-    expect(wrapper.find('Connect(VirksomhetIdentifikasjonPanel)')).to.have.length(1);
-    expect(wrapper.find('Connect(VirksomhetIdentifikasjonPanel)')).to.have.length(1);
-    expect(wrapper.find('Connect(VirksomhetTypeNaringPanel)')).to.have.length(1);
-    expect(wrapper.find('Connect(VirksomhetStartetEndretPanel)')).to.have.length(1);
-    expect(wrapper.find('VirksomhetRelasjonPanel')).to.have.length(1);
+    expect(wrapper.find('form')).toHaveLength(1);
+    expect(wrapper.find('Connect(VirksomhetIdentifikasjonPanel)')).toHaveLength(1);
+    expect(wrapper.find('Connect(VirksomhetIdentifikasjonPanel)')).toHaveLength(1);
+    expect(wrapper.find('Connect(VirksomhetTypeNaringPanel)')).toHaveLength(1);
+    expect(wrapper.find('Connect(VirksomhetStartetEndretPanel)')).toHaveLength(1);
+    expect(wrapper.find('VirksomhetRelasjonPanel')).toHaveLength(1);
 
     const hovedknapp = wrapper.find('Hovedknapp');
-    expect(hovedknapp).to.have.length(1);
+    expect(hovedknapp).toHaveLength(1);
 
     const knapp = wrapper.find('Knapp');
-    expect(knapp).to.have.length(1);
+    expect(knapp).toHaveLength(1);
   });
 
   it('skal rendre lukket modal', () => {
@@ -48,7 +47,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal.prop('isOpen')).is.false;
+    expect(modal.prop('isOpen')).toBe(false);
   });
 
   it('skal kalle submit ved trykk på hovedknapp', () => {
@@ -64,7 +63,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
 
     const hovedknapp = wrapper.find('Hovedknapp');
     hovedknapp.simulate('click');
-    expect(handleSubmit.called).is.true;
+    expect(handleSubmit.called).toBe(true);
   });
 
   it('skal kalle close ved trykk på knapp', () => {
@@ -80,6 +79,6 @@ describe('<RegistrerVirksomhetModalForm>', () => {
 
     const knapp = wrapper.find('Knapp');
     knapp.simulate('click');
-    expect(closeEvent.called).is.true;
+    expect(closeEvent.called).toBe(true);
   });
 });

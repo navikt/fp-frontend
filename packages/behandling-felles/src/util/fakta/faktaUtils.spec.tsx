@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { Behandling, Fagsak } from '@fpsak-frontend/types';
@@ -84,10 +83,10 @@ describe('<faktaUtils>', () => {
 
     const faktaPaneler = utledFaktaPaneler([panelDef], ekstraPanelData, behandling as Behandling, rettigheter, aksjonspunkter);
 
-    expect(faktaPaneler).to.have.length(1);
-    expect(faktaPaneler[0].getPanelDef()).to.eql(panelDef);
-    expect(faktaPaneler[0].getHarApneAksjonspunkter()).is.true;
-    expect(faktaPaneler[0].getKomponentData(rettigheter, ekstraPanelData, false)).to.eql({
+    expect(faktaPaneler).toHaveLength(1);
+    expect(faktaPaneler[0].getPanelDef()).toEqual(panelDef);
+    expect(faktaPaneler[0].getHarApneAksjonspunkter()).toBe(true);
+    expect(faktaPaneler[0].getKomponentData(rettigheter, ekstraPanelData, false)).toEqual({
       aksjonspunkter: [aksjonspunkter[0]],
       readOnly: false,
       submittable: true,
@@ -119,7 +118,7 @@ describe('<faktaUtils>', () => {
 
     const valgtPanel = finnValgtPanel(paneler, valgtFaktaPanelKode);
 
-    expect(valgtPanel.getUrlKode()).to.eql(paneler[1].getUrlKode());
+    expect(valgtPanel.getUrlKode()).toEqual(paneler[1].getUrlKode());
   });
 
   it('skal finne ut at valgt faktapanel er første panel når det ikke finnes åpne aksjonspunkter', () => {
@@ -134,7 +133,7 @@ describe('<faktaUtils>', () => {
 
     const valgtPanel = finnValgtPanel(paneler, valgtFaktaPanelKode);
 
-    expect(valgtPanel.getUrlKode()).to.eql(paneler[0].getUrlKode());
+    expect(valgtPanel.getUrlKode()).toEqual(paneler[0].getUrlKode());
   });
 
   it('skal finne faktapanel som er satt i URL', () => {
@@ -149,7 +148,7 @@ describe('<faktaUtils>', () => {
 
     const valgtPanel = finnValgtPanel(paneler, valgtFaktaPanelKode);
 
-    expect(valgtPanel.getUrlKode()).to.eql(paneler[1].getUrlKode());
+    expect(valgtPanel.getUrlKode()).toEqual(paneler[1].getUrlKode());
   });
 
   it('skal formatere paneler for sidemeny', () => {
@@ -172,7 +171,7 @@ describe('<faktaUtils>', () => {
 
     const formatertePaneler = formaterPanelerForSidemeny(intl, paneler, valgtFaktaPanelKode);
 
-    expect(formatertePaneler).to.eql([{
+    expect(formatertePaneler).toEqual([{
       tekst: paneler[0].getTekstKode(),
       erAktiv: true,
       harAksjonspunkt: true,
@@ -200,9 +199,9 @@ describe('<faktaUtils>', () => {
     await callback(aksjonspunkter);
 
     const requestKall = lagreAksjonspunkter.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
@@ -213,10 +212,10 @@ describe('<faktaUtils>', () => {
     });
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql(DEFAULT_FAKTA_KODE);
-    expect(opppdaterKall[0].args[0]).to.eql(DEFAULT_PROSESS_STEG_KODE);
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual(DEFAULT_FAKTA_KODE);
+    expect(opppdaterKall[0].args[0]).toEqual(DEFAULT_PROSESS_STEG_KODE);
   });
 
   it('skal lagre overstyrt aksjonspunkt', async () => {
@@ -236,9 +235,9 @@ describe('<faktaUtils>', () => {
     await callback(aksjonspunkter);
 
     const requestKall = lagreOverstyrteAksjonspunkter.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
@@ -249,9 +248,9 @@ describe('<faktaUtils>', () => {
     });
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql(DEFAULT_FAKTA_KODE);
-    expect(opppdaterKall[0].args[0]).to.eql(DEFAULT_PROSESS_STEG_KODE);
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual(DEFAULT_FAKTA_KODE);
+    expect(opppdaterKall[0].args[0]).toEqual(DEFAULT_PROSESS_STEG_KODE);
   });
 });

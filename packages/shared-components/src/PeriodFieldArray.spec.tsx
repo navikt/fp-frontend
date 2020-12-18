@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import Image from './Image';
@@ -21,11 +20,11 @@ describe('<PeriodFieldArray>', () => {
     );
 
     const span = wrapper.find('span');
-    expect(span).to.have.length(1);
+    expect(span).toHaveLength(1);
 
     const div = wrapper.find('div');
-    expect(div).to.have.length(1);
-    expect(div.find(Image)).to.have.length(1);
+    expect(div).toHaveLength(1);
+    expect(div.find(Image)).toHaveLength(1);
   });
 
   it('skal vise to rader der kun rad nummer to har sletteknapp', () => {
@@ -46,14 +45,14 @@ describe('<PeriodFieldArray>', () => {
       </PeriodFieldArray>,
     );
     const row1 = wrapper.find('#id_0');
-    expect(row1).has.length(1);
-    expect(row1.childAt(0).text()).is.eql('test');
+    expect(row1).toHaveLength(1);
+    expect(row1.childAt(0).text()).toEqual('test');
 
     const row2 = wrapper.find('#id_1');
-    expect(row2).has.length(1);
-    expect(row2.find('button')).has.length(1);
+    expect(row2).toHaveLength(1);
+    expect(row2.find('button')).toHaveLength(1);
 
-    expect(wrapper.find('#id_2')).has.length(0);
+    expect(wrapper.find('#id_2')).toHaveLength(0);
   });
 
   it('skal legge til periode ved klikk på legg til periode', () => {
@@ -70,11 +69,11 @@ describe('<PeriodFieldArray>', () => {
     );
 
     const addDiv = wrapper.find('div');
-    expect(addDiv).has.length(1);
+    expect(addDiv).toHaveLength(1);
 
     addDiv.simulate('click');
 
-    expect(fields).has.length(2);
+    expect(fields).toHaveLength(2);
   });
 
   it('skal slette periode ved klikk på sletteknapp', () => {
@@ -96,11 +95,11 @@ describe('<PeriodFieldArray>', () => {
     );
 
     const btn = wrapper.find('button');
-    expect(btn).has.length(1);
+    expect(btn).toHaveLength(1);
 
     btn.simulate('click');
 
-    expect(fields).has.length(1);
+    expect(fields).toHaveLength(1);
   });
 
   it('skal ikke vise knapp for å legge til rad', () => {
@@ -116,8 +115,8 @@ describe('<PeriodFieldArray>', () => {
       </PeriodFieldArray>,
     );
 
-    expect(wrapper.find(Image)).has.length(0);
-    expect(wrapper.find('button')).has.length(0);
+    expect(wrapper.find(Image)).toHaveLength(0);
+    expect(wrapper.find('button')).toHaveLength(0);
   });
 
   it('skal vise knapp for å legge til i steden for bildelenke', () => {
@@ -133,7 +132,7 @@ describe('<PeriodFieldArray>', () => {
       </PeriodFieldArray>,
     );
 
-    expect(wrapper.find(Image)).has.length(0);
-    expect(wrapper.find('button')).has.length(1);
+    expect(wrapper.find(Image)).toHaveLength(0);
+    expect(wrapper.find('button')).toHaveLength(1);
   });
 });

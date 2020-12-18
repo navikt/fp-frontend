@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField, InputField } from '@fpsak-frontend/form';
@@ -27,8 +26,8 @@ describe('<RegistrereVergeFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
     />);
 
-    expect(wrapper.find(SelectField)).to.have.length(1);
-    expect(wrapper.find(InputField)).to.have.length(0);
+    expect(wrapper.find(SelectField)).toHaveLength(1);
+    expect(wrapper.find(InputField)).toHaveLength(0);
   });
 
   it('skal vise alle felter når dette vergetype er valgt', () => {
@@ -40,8 +39,8 @@ describe('<RegistrereVergeFaktaForm>', () => {
       valgtVergeType={VergeType.BARN}
     />);
 
-    expect(wrapper.find(SelectField)).to.have.length(1);
-    expect(wrapper.find(InputField)).to.have.length(2);
+    expect(wrapper.find(SelectField)).toHaveLength(1);
+    expect(wrapper.find(InputField)).toHaveLength(2);
   });
 
   it('skal sette opp initielle verdier fra behandling', () => {
@@ -55,7 +54,7 @@ describe('<RegistrereVergeFaktaForm>', () => {
 
     const initialValues = RegistrereVergeFaktaForm.buildInitialValues(verge);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       navn: 'Tester',
       gyldigFom: '2017',
       gyldigTom: '2018',

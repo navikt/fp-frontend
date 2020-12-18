@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -12,8 +11,8 @@ describe('<LonnsendringForm>', () => {
       isAksjonspunktClosed={false}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
-    expect(radios.last().prop('disabled')).is.eql(false);
+    expect(radios).toHaveLength(2);
+    expect(radios.last().prop('disabled')).toEqual(false);
   });
 
   const faktaOmBeregning = {
@@ -26,14 +25,14 @@ describe('<LonnsendringForm>', () => {
     const values = { };
     values[lonnsendringField] = true;
     const transformedObject = LonnsendringForm.transformValues(values, faktaOmBeregning);
-    expect(transformedObject.vurdertLonnsendring.erLønnsendringIBeregningsperioden).to.equal(true);
+    expect(transformedObject.vurdertLonnsendring.erLønnsendringIBeregningsperioden).toBe(true);
   });
 
   it('skal ikkje submitte inntekt uten lønnsendring', () => {
     const values = { };
     values[lonnsendringField] = false;
     const transformedObject = LonnsendringForm.transformValues(values, faktaOmBeregning);
-    expect(transformedObject.vurdertLonnsendring.erLønnsendringIBeregningsperioden).to.equal(false);
+    expect(transformedObject.vurdertLonnsendring.erLønnsendringIBeregningsperioden).toBe(false);
   });
 
   it('skal teste at buildInitialValues gir korrekt output med gyldig beregningsgrunnlag', () => {
@@ -53,6 +52,6 @@ describe('<LonnsendringForm>', () => {
       ],
     };
     const initialValues = LonnsendringForm.buildInitialValues(gyldigBG);
-    expect(initialValues[lonnsendringField]).to.equal(true);
+    expect(initialValues[lonnsendringField]).toBe(true);
   });
 });

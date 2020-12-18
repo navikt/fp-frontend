@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import { StepType } from '@navikt/nap-process-menu/dist/Step';
@@ -119,10 +118,10 @@ describe('<prosessStegHooks>', () => {
       // @ts-ignore
     }).reduce((acc, value) => [...acc, value], []);
 
-    expect(prosessStegPaneler).has.length(1);
+    expect(prosessStegPaneler).toHaveLength(1);
     const panel = prosessStegPaneler[0];
-    expect(valgtPanel).to.eql(panel);
-    expect(formaterteProsessStegPaneler).to.eql([{
+    expect(valgtPanel).toEqual(panel);
+    expect(formaterteProsessStegPaneler).toEqual([{
       isActive: true,
       isDisabled: false,
       isFinished: false,
@@ -150,10 +149,10 @@ describe('<prosessStegHooks>', () => {
     prosessStegVelger(0);
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql('opplysningsplikt');
-    expect(opppdaterKall[0].args[1]).to.eql('default');
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual('opplysningsplikt');
+    expect(opppdaterKall[0].args[1]).toEqual('default');
   });
 
   it('skal skjule prosess-steg når en velger steg som allerede vises', () => {
@@ -175,10 +174,10 @@ describe('<prosessStegHooks>', () => {
     prosessStegVelger(0);
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.undefined;
-    expect(opppdaterKall[0].args[1]).to.eql('default');
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toBeUndefined();
+    expect(opppdaterKall[0].args[1]).toEqual('default');
   });
 
   it('skal bekrefte aksjonspunkt', () => {
@@ -200,9 +199,9 @@ describe('<prosessStegHooks>', () => {
     bekreftAksjonspunkt([{ kode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU }]);
 
     const requestKall = lagreAksjonspunkter.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,

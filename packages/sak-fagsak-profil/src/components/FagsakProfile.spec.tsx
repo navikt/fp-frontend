@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import { EtikettInfo } from 'nav-frontend-etiketter';
@@ -33,12 +32,12 @@ describe('<FagsakProfile>', () => {
     />);
 
     const systemtittel = wrapper.find(Systemtittel);
-    expect(systemtittel).to.have.length(1);
-    expect(systemtittel.childAt(0).text()).is.eql('Engangsstønad');
+    expect(systemtittel).toHaveLength(1);
+    expect(systemtittel.childAt(0).text()).toEqual('Engangsstønad');
 
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).to.have.length(1);
-    expect(normaltekst.childAt(0).text()).is.eql('12345 - Opprettet');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.childAt(0).text()).toEqual('12345 - Opprettet');
   });
 
   it('skal vise dekningsgrad for foreldrepenger om den eksisterer', () => {
@@ -63,17 +62,17 @@ describe('<FagsakProfile>', () => {
     />);
 
     const systemtittel = wrapper.find(Systemtittel);
-    expect(systemtittel).to.have.length(1);
-    expect(systemtittel.childAt(0).text()).is.eql('Foreldrepenger');
+    expect(systemtittel).toHaveLength(1);
+    expect(systemtittel.childAt(0).text()).toEqual('Foreldrepenger');
 
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).to.have.length(1);
-    expect(normaltekst.childAt(0).text()).is.eql('12345 - Opprettet');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.childAt(0).text()).toEqual('12345 - Opprettet');
 
-    expect(wrapper.find(EtikettInfo)).to.have.length(1);
+    expect(wrapper.find(EtikettInfo)).toHaveLength(1);
     const tooltip = wrapper.find(Tooltip);
-    expect(tooltip).to.have.length(1);
-    expect(tooltip.prop('content')).is.eql('Dekningsgraden er 100%');
+    expect(tooltip).toHaveLength(1);
+    expect(tooltip.prop('content')).toEqual('Dekningsgraden er 100%');
   });
 
   it('skal ikke vise dekningsgrad for foreldrepenger om den ikke eksisterer', () => {
@@ -97,15 +96,15 @@ describe('<FagsakProfile>', () => {
     />);
 
     const systemtittel = wrapper.find(Systemtittel);
-    expect(systemtittel).to.have.length(1);
-    expect(systemtittel.childAt(0).text()).is.eql('Foreldrepenger');
+    expect(systemtittel).toHaveLength(1);
+    expect(systemtittel.childAt(0).text()).toEqual('Foreldrepenger');
 
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).to.have.length(1);
-    expect(normaltekst.childAt(0).text()).is.eql('12345 - Opprettet');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.childAt(0).text()).toEqual('12345 - Opprettet');
 
     const etikettinfo = wrapper.find(EtikettInfo);
-    expect(etikettinfo).to.have.length(0);
+    expect(etikettinfo).toHaveLength(0);
   });
 
   it('skal ikke vise ugyldig dekningsgrad for foreldrepenger', () => {
@@ -130,14 +129,14 @@ describe('<FagsakProfile>', () => {
     />);
 
     const systemtittel = wrapper.find(Systemtittel);
-    expect(systemtittel).to.have.length(1);
-    expect(systemtittel.childAt(0).text()).is.eql('Foreldrepenger');
+    expect(systemtittel).toHaveLength(1);
+    expect(systemtittel.childAt(0).text()).toEqual('Foreldrepenger');
 
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).to.have.length(1);
-    expect(normaltekst.childAt(0).text()).is.eql('12345 - Opprettet');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.childAt(0).text()).toEqual('12345 - Opprettet');
 
     const etikettinfo = wrapper.find(EtikettInfo);
-    expect(etikettinfo).to.have.length(0);
+    expect(etikettinfo).toHaveLength(0);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { Stonadskonto } from '@fpsak-frontend/types';
@@ -23,12 +22,12 @@ describe('<TimeLineTab>', () => {
     />);
 
     const formattedMessage = wrapper.find('FormattedMessage');
-    expect(formattedMessage.at(0).props().id).to.equal('TimeLineTab.Stonadinfo.ForeldrepengerFF');
+    expect(formattedMessage.at(0).props().id).toBe('TimeLineTab.Stonadinfo.ForeldrepengerFF');
 
     const FormattedMessage = wrapper.find('FormattedMessage');
     // @ts-ignore
-    expect(FormattedMessage.at(1).props().values.ukerVerdi).to.equal(6);
+    expect(FormattedMessage.at(1).props().values.ukerVerdi).toBe(6);
     // @ts-ignore
-    expect(FormattedMessage.at(1).props().values.dagerVerdi).to.equal(0);
+    expect(FormattedMessage.at(1).props().values.dagerVerdi).toBe(0);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -152,6 +151,6 @@ describe('<UttakProsessIndex>', () => {
       vilkar={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(UttakPanel)).has.length(1);
+    expect(wrapper.find(UttakPanel)).toHaveLength(1);
   });
 });

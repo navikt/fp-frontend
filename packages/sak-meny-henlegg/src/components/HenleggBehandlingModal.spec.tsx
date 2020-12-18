@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -73,17 +72,17 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('Behandlingen henlegges');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('contentLabel')).toEqual('Behandlingen henlegges');
 
     const button = wrapper.find('Hovedknapp');
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.false;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(false);
 
     const previewLink = wrapper.find('a');
-    expect(previewLink).to.have.length(0);
+    expect(previewLink).toHaveLength(0);
   });
 
   it('skal vise nedtrekksliste med behandlingsresultat-typer', () => {
@@ -107,52 +106,62 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const selectField = wrapper.find('SelectField');
-    expect(selectField).to.have.length(1);
-    expect(selectField.prop('placeholder')).is.eql('Velg årsak til henleggelse');
+    expect(selectField).toHaveLength(1);
+    expect(selectField.prop('placeholder')).toEqual('Velg årsak til henleggelse');
     const values = selectField.prop('selectValues');
-    expect(values).to.have.length(4);
-    expect(values[0].props.value).is.eql(behandlingResultatType.HENLAGT_SOKNAD_TRUKKET);
-    expect(values[1].props.value).is.eql(behandlingResultatType.HENLAGT_FEILOPPRETTET);
-    expect(values[2].props.value).is.eql(behandlingResultatType.HENLAGT_SOKNAD_MANGLER);
-    expect(values[3].props.value).is.eql(behandlingResultatType.MANGLER_BEREGNINGSREGLER);
+    expect(values).toHaveLength(4);
+    expect(values[0].props.value).toEqual(behandlingResultatType.HENLAGT_SOKNAD_TRUKKET);
+    expect(values[1].props.value).toEqual(behandlingResultatType.HENLAGT_FEILOPPRETTET);
+    expect(values[2].props.value).toEqual(behandlingResultatType.HENLAGT_SOKNAD_MANGLER);
+    expect(values[3].props.value).toEqual(behandlingResultatType.MANGLER_BEREGNINGSREGLER);
   });
 
   it('skal bruke behandlingsresultat-typer for klage', () => {
     const behandlingsType = { kode: behandlingType.KLAGE, kodeverk: 'BEHANDLING_TYPE' };
     const resultat = getHenleggArsaker(behandlingResultatTyper, behandlingsType, ytelseType);
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_KLAGE_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET]);
+    expect(resultat.map((r) => r.kode)).toEqual(
+      [behandlingResultatType.HENLAGT_KLAGE_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
+    );
   });
 
   it('skal bruke behandlingsresultat-typer for innsyn', () => {
     const behandlingsType = { kode: behandlingType.DOKUMENTINNSYN, kodeverk: 'BEHANDLING_TYPE' };
     const resultat = getHenleggArsaker(behandlingResultatTyper, behandlingsType, ytelseType);
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_INNSYN_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET]);
+    expect(resultat.map((r) => r.kode)).toEqual(
+      [behandlingResultatType.HENLAGT_INNSYN_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
+    );
   });
 
   it('skal bruke behandlingsresultat-typer for tilbakekreving', () => {
     const behandlingsType = { kode: behandlingType.TILBAKEKREVING, kodeverk: 'BEHANDLING_TYPE' };
     const resultat = getHenleggArsaker(behandlingResultatTyper, behandlingsType, ytelseType);
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_FEILOPPRETTET]);
+    expect(resultat.map((r) => r.kode)).toEqual([behandlingResultatType.HENLAGT_FEILOPPRETTET]);
   });
 
   it('skal bruke behandlingsresultat-typer for tilbakekreving revurdering', () => {
     const behandlingsType = { kode: behandlingType.TILBAKEKREVING_REVURDERING, kodeverk: 'BEHANDLING_TYPE' };
     const resultat = getHenleggArsaker(behandlingResultatTyper, behandlingsType, ytelseType);
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV, behandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV]);
+    expect(resultat.map((r) => r.kode)).toEqual(
+      [behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV, behandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV],
+    );
   });
 
   it('skal bruke behandlingsresultat-typer for revudering', () => {
     const behandlingsType = { kode: behandlingType.REVURDERING, kodeverk: 'BEHANDLING_TYPE' };
     const resultat = getHenleggArsaker(behandlingResultatTyper, behandlingsType, ytelseType);
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
-      behandlingResultatType.HENLAGT_SOKNAD_MANGLER]);
+    expect(resultat.map((r) => r.kode)).toEqual(
+      [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
+        behandlingResultatType.HENLAGT_SOKNAD_MANGLER],
+    );
   });
 
   it('skal bruke behandlingsresultat-typer for førstegangsbehandling', () => {
     const behandlingsType = { kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: 'BEHANDLING_TYPE' };
     const resultat = getHenleggArsaker(behandlingResultatTyper, behandlingsType, ytelseType);
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
-      behandlingResultatType.HENLAGT_SOKNAD_MANGLER, behandlingResultatType.MANGLER_BEREGNINGSREGLER]);
+    expect(resultat.map((r) => r.kode)).toEqual(
+      [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
+        behandlingResultatType.HENLAGT_SOKNAD_MANGLER, behandlingResultatType.MANGLER_BEREGNINGSREGLER],
+    );
   });
 
   it('skal bruke behandlingsresultat-typer for førstegangsbehandling når ytelsestype er Engangsstønad', () => {
@@ -161,7 +170,9 @@ describe('<HenleggBehandlingModal>', () => {
       kode: fagsakYtelseType.ENGANGSSTONAD,
       kodeverk: 'FAGSAK_YTELSE_TYPE',
     });
-    expect(resultat.map((r) => r.kode)).is.eql([behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET]);
+    expect(resultat.map((r) => r.kode)).toEqual(
+      [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
+    );
   });
 
   it('skal disable knapp for lagring når behandlingsresultat-type og begrunnnelse ikke er valgt', () => {
@@ -183,7 +194,7 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const button = wrapper.find('Hovedknapp');
-    expect(button.prop('disabled')).is.true;
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal disable knapp for lagring når behandlingsresultat-type, begrunnnelse og fritekst ikke er valgt for tilbakekreving revurdering', () => {
@@ -205,7 +216,7 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const button = wrapper.find('Hovedknapp');
-    expect(button.prop('disabled')).is.true;
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal bruke submit-callback når en trykker lagre', () => {
@@ -231,7 +242,7 @@ describe('<HenleggBehandlingModal>', () => {
 
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });
-    expect(submitEventCallback.called).is.true;
+    expect(submitEventCallback.called).toBe(true);
   });
 
   it('skal avbryte redigering ved trykk på avbryt-knapp', () => {
@@ -256,11 +267,11 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const avbrytKnapp = wrapper.find('Knapp');
-    expect(avbrytKnapp).to.have.length(1);
-    expect(avbrytKnapp.prop('mini')).is.true;
+    expect(avbrytKnapp).toHaveLength(1);
+    expect(avbrytKnapp.prop('mini')).toBe(true);
 
     avbrytKnapp.simulate('click');
-    expect(cancelEventCallback.called).is.true;
+    expect(cancelEventCallback.called).toBe(true);
   });
 
   it('skal vise forhåndvisningslenke når søknad om henleggelse er trukket', () => {
@@ -285,12 +296,12 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const previewLink = wrapper.find('a');
-    expect(previewLink).to.have.length(1);
-    expect(previewLink.text()).to.eql('Forhåndsvis brev');
+    expect(previewLink).toHaveLength(1);
+    expect(previewLink.text()).toEqual('Forhåndsvis brev');
 
-    expect(previewEventCallback.called).is.false;
+    expect(previewEventCallback.called).toBe(false);
     previewLink.simulate('click', { preventDefault: sinon.spy() });
-    expect(previewEventCallback.called).is.true;
+    expect(previewEventCallback.called).toBe(true);
   });
 
   it('skal vise forhåndvisningslenke når tilbakekreving revurdering henlagt ved feilaktig opprettet med henleggelsesbrev', () => {
@@ -316,11 +327,11 @@ describe('<HenleggBehandlingModal>', () => {
     />);
 
     const previewLink = wrapper.find('a');
-    expect(previewLink).to.have.length(1);
-    expect(previewLink.text()).to.eql('Forhåndsvis brev');
+    expect(previewLink).toHaveLength(1);
+    expect(previewLink.text()).toEqual('Forhåndsvis brev');
 
-    expect(previewEventCallback.called).is.false;
+    expect(previewEventCallback.called).toBe(false);
     previewLink.simulate('click', { preventDefault: sinon.spy() });
-    expect(previewEventCallback.called).is.true;
+    expect(previewEventCallback.called).toBe(true);
   });
 });

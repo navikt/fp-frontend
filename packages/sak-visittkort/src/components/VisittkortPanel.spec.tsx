@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { PersonCard, Gender, EmptyPersonCard } from '@navikt/nap-person-card';
 
 import { FlexContainer } from '@fpsak-frontend/shared-components';
@@ -189,12 +188,12 @@ describe('<VisittkortPanel>', () => {
       sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
-    expect(wrapper.find(FlexContainer)).has.length(0);
+    expect(wrapper.find(FlexContainer)).toHaveLength(0);
     const visittkort = wrapper.find(PersonCard);
-    expect(visittkort).has.length(1);
-    expect(visittkort.prop('name')).is.eql(fagsakPerson.navn);
-    expect(visittkort.prop('fodselsnummer')).is.eql(fagsakPerson.personnummer);
-    expect(visittkort.prop('gender')).is.eql(Gender.female);
+    expect(visittkort).toHaveLength(1);
+    expect(visittkort.prop('name')).toEqual(fagsakPerson.navn);
+    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
+    expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
   it('skal vise visittkort når en har harTilbakekrevingVerge', () => {
@@ -209,12 +208,12 @@ describe('<VisittkortPanel>', () => {
       harTilbakekrevingVerge
     />);
 
-    expect(wrapper.find(FlexContainer)).has.length(0);
+    expect(wrapper.find(FlexContainer)).toHaveLength(0);
     const visittkort = wrapper.find(PersonCard);
-    expect(visittkort).has.length(1);
-    expect(visittkort.prop('name')).is.eql(fagsakPerson.navn);
-    expect(visittkort.prop('fodselsnummer')).is.eql(fagsakPerson.personnummer);
-    expect(visittkort.prop('gender')).is.eql(Gender.female);
+    expect(visittkort).toHaveLength(1);
+    expect(visittkort.prop('name')).toEqual(fagsakPerson.navn);
+    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
+    expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
   it('skal vise visittkort når en har personopplysninger', () => {
@@ -229,13 +228,13 @@ describe('<VisittkortPanel>', () => {
       sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
-    expect(wrapper.find(FlexContainer)).has.length(1);
-    expect(wrapper.find(VisittkortBarnInfoPanel)).has.length(1);
+    expect(wrapper.find(FlexContainer)).toHaveLength(1);
+    expect(wrapper.find(VisittkortBarnInfoPanel)).toHaveLength(1);
     const visittkort = wrapper.find(PersonCard);
-    expect(visittkort).has.length(1);
-    expect(visittkort.prop('name')).is.eql(personopplysningerSoker.navn);
-    expect(visittkort.prop('fodselsnummer')).is.eql(personopplysningerSoker.fnr);
-    expect(visittkort.prop('gender')).is.eql(Gender.female);
+    expect(visittkort).toHaveLength(1);
+    expect(visittkort.prop('name')).toEqual(personopplysningerSoker.navn);
+    expect(visittkort.prop('fodselsnummer')).toEqual(personopplysningerSoker.fnr);
+    expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
   it('skal vise visittkort for annen part', () => {
@@ -253,17 +252,17 @@ describe('<VisittkortPanel>', () => {
       sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
-    expect(wrapper.find(FlexContainer)).has.length(1);
-    expect(wrapper.find(VisittkortBarnInfoPanel)).has.length(1);
+    expect(wrapper.find(FlexContainer)).toHaveLength(1);
+    expect(wrapper.find(VisittkortBarnInfoPanel)).toHaveLength(1);
     const visittkort = wrapper.find(PersonCard);
-    expect(visittkort).has.length(2);
-    expect(visittkort.first().prop('name')).is.eql(personopplysningerSoker.navn);
-    expect(visittkort.first().prop('fodselsnummer')).is.eql(personopplysningerSoker.fnr);
-    expect(visittkort.first().prop('gender')).is.eql(Gender.female);
+    expect(visittkort).toHaveLength(2);
+    expect(visittkort.first().prop('name')).toEqual(personopplysningerSoker.navn);
+    expect(visittkort.first().prop('fodselsnummer')).toEqual(personopplysningerSoker.fnr);
+    expect(visittkort.first().prop('gender')).toEqual(Gender.female);
 
-    expect(visittkort.last().prop('name')).is.eql(personopplysningerAnnenPart.navn);
-    expect(visittkort.last().prop('fodselsnummer')).is.eql(personopplysningerAnnenPart.fnr);
-    expect(visittkort.last().prop('gender')).is.eql(Gender.male);
+    expect(visittkort.last().prop('name')).toEqual(personopplysningerAnnenPart.navn);
+    expect(visittkort.last().prop('fodselsnummer')).toEqual(personopplysningerAnnenPart.fnr);
+    expect(visittkort.last().prop('gender')).toEqual(Gender.male);
   });
 
   it('skal vise visittkort for ukjent søker når annen part mangler aktør-id', () => {
@@ -284,11 +283,11 @@ describe('<VisittkortPanel>', () => {
       sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
-    expect(wrapper.find(FlexContainer)).has.length(1);
-    expect(wrapper.find(VisittkortBarnInfoPanel)).has.length(1);
-    expect(wrapper.find(PersonCard)).has.length(1);
+    expect(wrapper.find(FlexContainer)).toHaveLength(1);
+    expect(wrapper.find(VisittkortBarnInfoPanel)).toHaveLength(1);
+    expect(wrapper.find(PersonCard)).toHaveLength(1);
     const tomtVisittkort = wrapper.find(EmptyPersonCard);
-    expect(tomtVisittkort).has.length(1);
-    expect(tomtVisittkort.prop('namePlaceholder')).is.eql('Ukjent navn, mangler norsk id-nr');
+    expect(tomtVisittkort).toHaveLength(1);
+    expect(tomtVisittkort.prop('namePlaceholder')).toEqual('Ukjent navn, mangler norsk id-nr');
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -68,6 +67,6 @@ describe('<UttakFaktaIndex>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    expect(wrapper.find(UttakInfoPanel)).has.length(1);
+    expect(wrapper.find(UttakInfoPanel)).toHaveLength(1);
   });
 });

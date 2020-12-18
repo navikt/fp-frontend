@@ -1,6 +1,5 @@
 import React from 'react';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { expect } from 'chai';
 
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
@@ -22,11 +21,11 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
       intl={intlMock}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
     // @ts-ignore
-    expect(radios.at(0).prop('label').id).to.equal('Klage.ResolveKlage.ChangeVedtak');
+    expect(radios.at(0).prop('label').id).toBe('Klage.ResolveKlage.ChangeVedtak');
     // @ts-ignore
-    expect(radios.at(1).prop('label').id).to.equal('Klage.ResolveKlage.KeepVedtakNfp');
+    expect(radios.at(1).prop('label').id).toBe('Klage.ResolveKlage.KeepVedtakNfp');
   });
 
   it('skal vise fem options når klage medhold', () => {
@@ -37,16 +36,16 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
       intl={intlMock}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(5);
+    expect(radios).toHaveLength(5);
     // @ts-ignore
-    expect(radios.at(0).prop('label').id).to.equal('Klage.ResolveKlage.ChangeVedtak');
+    expect(radios.at(0).prop('label').id).toBe('Klage.ResolveKlage.ChangeVedtak');
     // @ts-ignore
-    expect(radios.at(1).prop('label').id).to.equal('Klage.ResolveKlage.KeepVedtakNfp');
+    expect(radios.at(1).prop('label').id).toBe('Klage.ResolveKlage.KeepVedtakNfp');
     // @ts-ignore
-    expect(radios.at(2).prop('label').id).to.equal('Klage.Behandle.Omgjort');
+    expect(radios.at(2).prop('label').id).toBe('Klage.Behandle.Omgjort');
     // @ts-ignore
-    expect(radios.at(3).prop('label').id).to.equal('Klage.Behandle.Ugunst');
+    expect(radios.at(3).prop('label').id).toBe('Klage.Behandle.Ugunst');
     // @ts-ignore
-    expect(radios.at(4).prop('label').id).to.equal('Klage.Behandle.DelvisOmgjort');
+    expect(radios.at(4).prop('label').id).toBe('Klage.Behandle.DelvisOmgjort');
   });
 });

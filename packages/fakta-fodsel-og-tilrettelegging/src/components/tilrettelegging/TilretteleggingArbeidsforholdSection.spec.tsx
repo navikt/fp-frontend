@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FieldArray } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -54,14 +53,14 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       uttakArbeidTyper={uttakArbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).has.length(2);
-    expect(normaltekst.at(0).props().children).to.eq('ARB_NAVN_1 (111222333)....-001');
+    expect(normaltekst).toHaveLength(2);
+    expect(normaltekst.at(0).props().children).toBe('ARB_NAVN_1 (111222333)....-001');
     const checkboxField = wrapper.find(CheckboxField);
-    expect(checkboxField).has.length(1);
+    expect(checkboxField).toHaveLength(1);
     const datepickerField = wrapper.find(DatepickerField);
-    expect(datepickerField).has.length(1);
+    expect(datepickerField).toHaveLength(1);
     const fieldArray = wrapper.find(FieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
   });
 
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er false', () => {
@@ -89,14 +88,14 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       uttakArbeidTyper={uttakArbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).has.length(1);
-    expect(normaltekst.props().children).to.eq('FRILANSER (23)');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.props().children).toBe('FRILANSER (23)');
     const checkboxField = wrapper.find(CheckboxField);
-    expect(checkboxField).has.length(1);
+    expect(checkboxField).toHaveLength(1);
     const datepickerField = wrapper.find(DatepickerField);
-    expect(datepickerField).has.length(0);
+    expect(datepickerField).toHaveLength(0);
     const fieldArray = wrapper.find(FieldArray);
-    expect(fieldArray).has.length(0);
+    expect(fieldArray).toHaveLength(0);
   });
 
   it('skal vise arbeidstype når arbeidsforholdReferanse ikke finnes', () => {
@@ -123,7 +122,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       uttakArbeidTyper={uttakArbeidTyper}
     />);
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).has.length(1);
-    expect(normaltekst.props().children).to.eq('Frilans');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.props().children).toBe('Frilans');
   });
 });

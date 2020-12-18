@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -31,8 +30,8 @@ describe('<SakenFaktaPanel>', () => {
       readOnly={false}
       submittable
     />);
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).to.have.length(1);
-    expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).to.have.length(1);
+    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(1);
+    expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).toHaveLength(1);
   });
 
   it('skal vise ikke vise aksjonspunkt-hjelpetekst når en har lukket aksjonspunkt for markering av utenlandssak', () => {
@@ -56,8 +55,8 @@ describe('<SakenFaktaPanel>', () => {
       readOnly={false}
       submittable
     />);
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).to.have.length(0);
-    expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).to.have.length(1);
+    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(0);
+    expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).toHaveLength(1);
   });
 
   it('skal ikke vise aksjonspunkt-hjelpetekst eller innhent-panel når en ikke har aksjonspunkt for markering av utenlandssak', () => {
@@ -70,7 +69,7 @@ describe('<SakenFaktaPanel>', () => {
       readOnly={false}
       submittable
     />);
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).to.have.length(0);
-    expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).to.have.length(0);
+    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(0);
+    expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).toHaveLength(0);
   });
 });

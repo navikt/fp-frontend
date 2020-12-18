@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { KlageVurdering } from '@fpsak-frontend/types';
@@ -22,6 +21,6 @@ describe('<FormkravKlageFormNfp>', () => {
       onSubmit={() => undefined}
       {...reduxFormPropsMock}
     />);
-    expect(wrapper.find(FormkravKlageForm)).has.length(1);
+    expect(wrapper.find(FormkravKlageForm)).toHaveLength(1);
   });
 });

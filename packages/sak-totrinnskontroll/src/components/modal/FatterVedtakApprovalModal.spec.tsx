@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
@@ -30,12 +29,12 @@ describe('<FatterVedtakApprovalModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('Returneres til saksbehandler for iverksettelse');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('contentLabel')).toEqual('Returneres til saksbehandler for iverksettelse');
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
   });
 
   it('skal rendre modal for iverksetter vedtak', () => {
@@ -54,12 +53,14 @@ describe('<FatterVedtakApprovalModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('Engangsstønad er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('contentLabel')).toEqual(
+      'Engangsstønad er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.',
+    );
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
   });
 
   it('skal rendre modal for iverksetter vedtak foreldrepenger', () => {
@@ -78,11 +79,13 @@ describe('<FatterVedtakApprovalModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('Foreldrepenger er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('contentLabel')).toEqual(
+      'Foreldrepenger er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.',
+    );
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
   });
 });

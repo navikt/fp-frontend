@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -54,8 +53,8 @@ describe('<OppholdInntektOgPerioderForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
-    expect(wrapper.find(Hovedknapp).prop('disabled')).is.true;
+    expect(helpText).toHaveLength(1);
+    expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(true);
   });
 
   it('skal avklare bosatt data når en har dette aksjonspunktet', () => {
@@ -103,11 +102,11 @@ describe('<OppholdInntektOgPerioderForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
-    expect(helpText.children()).has.length(1);
-    expect(helpText.childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.ErSokerBosattINorge');
+    expect(helpText).toHaveLength(1);
+    expect(helpText.children()).toHaveLength(1);
+    expect(helpText.childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.ErSokerBosattINorge');
 
-    expect(wrapper.find(Hovedknapp)).has.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 
   it('skal avklare perioder når en har dette aksjonspunktet', () => {
@@ -154,9 +153,9 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.GyldigMedlemFolketrygden');
+    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.GyldigMedlemFolketrygden');
 
-    expect(wrapper.find(Hovedknapp)).has.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 
   it('skal avklare oppholdsrett når en har dette aksjonspunktet', () => {
@@ -203,9 +202,9 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.EOSBorgerMedOppholdsrett');
+    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.EOSBorgerMedOppholdsrett');
 
-    expect(wrapper.find(Hovedknapp)).has.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 
   it('skal avklare lovlig opphold når en har dette aksjonspunktet', () => {
@@ -252,9 +251,9 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold');
+    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold');
 
-    expect(wrapper.find(Hovedknapp)).has.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 
   it('skal avklare fortsatt medlemskap når en har dette aksjonspunktet', () => {
@@ -301,9 +300,9 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).is.eql('MedlemskapInfoPanel.HarFortsattMedlemskap');
+    expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.HarFortsattMedlemskap');
 
-    expect(wrapper.find(Hovedknapp)).has.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 
   it('skal kun avklare aksjonspunkt som er aktive', () => {
@@ -353,7 +352,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
 
     const transformed = transformValues(perioder2, [lovligOppholdAksjonspunkt, fortsattMedlemskapAksjonspunkt]);
 
-    expect(transformed).has.length(1);
-    expect(transformed[0].kode).is.eql(aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
+    expect(transformed).toHaveLength(1);
+    expect(transformed[0].kode).toEqual(aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -81,19 +80,19 @@ describe('<SokersOpplysningspliktForm>', () => {
     />);
 
     const table = wrapper.find(Table);
-    expect(table).to.have.length(1);
+    expect(table).toHaveLength(1);
     const rows = table.find(TableRow);
-    expect(rows).to.have.length(2);
+    expect(rows).toHaveLength(2);
 
     const columnsAtRow1 = rows.first().children();
-    expect(columnsAtRow1).to.have.length(2);
-    expect(columnsAtRow1.first().childAt(0).text()).to.eql('Inntektsmelding');
-    expect(columnsAtRow1.at(1).childAt(0).text()).to.eql('Statoil Asaavd Statoil Sokkelvirksomhet (973861778)');
+    expect(columnsAtRow1).toHaveLength(2);
+    expect(columnsAtRow1.first().childAt(0).text()).toEqual('Inntektsmelding');
+    expect(columnsAtRow1.at(1).childAt(0).text()).toEqual('Statoil Asaavd Statoil Sokkelvirksomhet (973861778)');
 
     const columnsAtRow2 = rows.last().children();
-    expect(columnsAtRow2).to.have.length(2);
-    expect(columnsAtRow2.first().childAt(0).text()).to.eql('terminbekreftelse');
-    expect(columnsAtRow2.at(1).childAt(0)).is.empty;
+    expect(columnsAtRow2).toHaveLength(2);
+    expect(columnsAtRow2.first().childAt(0).text()).toEqual('terminbekreftelse');
+    expect(columnsAtRow2.at(1).childAt(0)).toEqual({});
   });
 
   it('skal ikke vise tabell når ingen vedlegg mangler', () => {
@@ -123,7 +122,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(Table)).to.have.length(0);
+    expect(wrapper.find(Table)).toHaveLength(0);
   });
 
   describe('selectors', () => {
@@ -148,7 +147,7 @@ describe('<SokersOpplysningspliktForm>', () => {
         manglendeVedlegg,
       } as Soknad);
 
-      expect(smv).to.eql([manglendeVedlegg[1], manglendeVedlegg[0]]);
+      expect(smv).toEqual([manglendeVedlegg[1], manglendeVedlegg[0]]);
     });
 
     it('skal sette opp formens initielle verdier', () => {
@@ -164,7 +163,7 @@ describe('<SokersOpplysningspliktForm>', () => {
 
       const intitialValues = buildInitialValues.resultFunc(manglendeVedlegg, true, vilkarUtfallType.OPPFYLT, aksjonspunkter, arbeidsgiverOpplysningerPerId);
 
-      expect(intitialValues).to.eql({
+      expect(intitialValues).toEqual({
         aksjonspunktKode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
         begrunnelse: '',
         erVilkarOk: true,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -31,20 +30,20 @@ describe('<StatusForBorgerFaktaPanel>', () => {
       alleMerknaderFraBeslutter={{}}
     />);
     const groups = wrapper.find('RadioGroupField');
-    expect(groups).to.have.length(2);
+    expect(groups).toHaveLength(2);
 
     const radioFieldsGroup1 = groups.first().find('RadioOption');
-    expect(radioFieldsGroup1).to.have.length(2);
+    expect(radioFieldsGroup1).toHaveLength(2);
     // @ts-ignore
-    expect(radioFieldsGroup1.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenEEA');
+    expect(radioFieldsGroup1.first().prop('label').id).toEqual('StatusForBorgerFaktaPanel.CitizenEEA');
     // @ts-ignore
-    expect(radioFieldsGroup1.last().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenOutsideEEA');
+    expect(radioFieldsGroup1.last().prop('label').id).toEqual('StatusForBorgerFaktaPanel.CitizenOutsideEEA');
     const radioFieldsGroup2 = groups.last().find('RadioOption');
-    expect(radioFieldsGroup2).to.have.length(2);
+    expect(radioFieldsGroup2).toHaveLength(2);
     // @ts-ignore
-    expect(radioFieldsGroup2.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.HarOppholdsrett');
+    expect(radioFieldsGroup2.first().prop('label').id).toEqual('StatusForBorgerFaktaPanel.HarOppholdsrett');
     // @ts-ignore
-    expect(radioFieldsGroup2.last().prop('label').props.id).to.eql('StatusForBorgerFaktaPanel.HarIkkeOppholdsrett');
+    expect(radioFieldsGroup2.last().prop('label').props.id).toEqual('StatusForBorgerFaktaPanel.HarIkkeOppholdsrett');
   });
 
   it('skal vise radioknapper for vurdering av lovlig opphold', () => {
@@ -60,17 +59,17 @@ describe('<StatusForBorgerFaktaPanel>', () => {
     />);
 
     const groups = wrapper.find('RadioGroupField');
-    expect(groups).to.have.length(2);
+    expect(groups).toHaveLength(2);
     const radioFieldsGroup1 = groups.first().find('RadioOption');
-    expect(radioFieldsGroup1).to.have.length(2);
+    expect(radioFieldsGroup1).toHaveLength(2);
     // @ts-ignore
-    expect(radioFieldsGroup1.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenEEA');
+    expect(radioFieldsGroup1.first().prop('label').id).toEqual('StatusForBorgerFaktaPanel.CitizenEEA');
     // @ts-ignore
-    expect(radioFieldsGroup1.last().prop('label').id).to.eql('StatusForBorgerFaktaPanel.CitizenOutsideEEA');
+    expect(radioFieldsGroup1.last().prop('label').id).toEqual('StatusForBorgerFaktaPanel.CitizenOutsideEEA');
     const radioFieldsGroup2 = groups.last().find('RadioOption');
-    expect(radioFieldsGroup2).to.have.length(2);
+    expect(radioFieldsGroup2).toHaveLength(2);
     // @ts-ignore
-    expect(radioFieldsGroup2.first().prop('label').id).to.eql('StatusForBorgerFaktaPanel.HarLovligOpphold');
+    expect(radioFieldsGroup2.first().prop('label').id).toEqual('StatusForBorgerFaktaPanel.HarLovligOpphold');
   });
 
   it('skal sette initielle verdi når det er EØS borger og ingen vurdering er lagret', () => {
@@ -89,7 +88,7 @@ describe('<StatusForBorgerFaktaPanel>', () => {
     } as Aksjonspunkt;
     const initialValues = StatusForBorgerFaktaPanel.buildInitialValues(periode as PeriodeMedId, [aksjonspunkt]);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       apKode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
       erEosBorger: true,
       oppholdsrettVurdering: undefined,
@@ -109,7 +108,7 @@ describe('<StatusForBorgerFaktaPanel>', () => {
 
     const initialValues = StatusForBorgerFaktaPanel.buildInitialValues(periode as PeriodeMedId, aksjonspunkter);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       apKode: undefined,
       erEosBorger: true,
       oppholdsrettVurdering: true,
@@ -135,7 +134,7 @@ describe('<StatusForBorgerFaktaPanel>', () => {
 
     const initialValues = StatusForBorgerFaktaPanel.buildInitialValues(periode as PeriodeMedId, [aksjonspunkt]);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       apKode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
       erEosBorger: true,
       oppholdsrettVurdering: undefined,
@@ -154,7 +153,7 @@ describe('<StatusForBorgerFaktaPanel>', () => {
 
     const initialValues = StatusForBorgerFaktaPanel.buildInitialValues(periode as PeriodeMedId, aksjonspunkter);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       apKode: undefined,
       erEosBorger: false,
       oppholdsrettVurdering: undefined,

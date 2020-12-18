@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -15,8 +14,8 @@ describe('<PermisjonRettigheterPanel>', () => {
       intl={intlMock}
       sokerHarAleneomsorg
     />);
-    expect(wrapper.find({ name: 'sokerHarAleneomsorg' })).to.have.length(1);
-    expect(wrapper.find({ name: 'denAndreForelderenHarRettPaForeldrepenger' })).to.have.length(0);
+    expect(wrapper.find({ name: 'sokerHarAleneomsorg' })).toHaveLength(1);
+    expect(wrapper.find({ name: 'denAndreForelderenHarRettPaForeldrepenger' })).toHaveLength(0);
   });
 
   it('skal vise radioknapper for "andre forelder har rett på foreldrepenger" hvis søker velger har ikke aleneomsorg', () => {
@@ -25,7 +24,7 @@ describe('<PermisjonRettigheterPanel>', () => {
       intl={intlMock}
       sokerHarAleneomsorg={false}
     />);
-    expect(wrapper.find({ name: 'sokerHarAleneomsorg' })).to.have.length(1);
-    expect(wrapper.find({ name: 'denAndreForelderenHarRettPaForeldrepenger' })).to.have.length(1);
+    expect(wrapper.find({ name: 'sokerHarAleneomsorg' })).toHaveLength(1);
+    expect(wrapper.find({ name: 'denAndreForelderenHarRettPaForeldrepenger' })).toHaveLength(1);
   });
 });

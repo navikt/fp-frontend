@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -44,8 +43,8 @@ describe('<BeslutterModalIndex>', () => {
     />);
 
     const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('harSammeResultatSomOriginalBehandling')).is.true;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBe(true);
   });
 
   it('skal vise modal men ikke hente data når en ikke har url', () => {
@@ -66,7 +65,7 @@ describe('<BeslutterModalIndex>', () => {
     />);
 
     const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('harSammeResultatSomOriginalBehandling')).is.undefined;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBeUndefined();
   });
 });

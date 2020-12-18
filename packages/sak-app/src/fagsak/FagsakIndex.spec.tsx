@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -59,11 +58,11 @@ describe('<FagsakIndex>', () => {
     const wrapper = shallow(<FagsakIndex />);
 
     const grid = wrapper.find(FagsakGrid);
-    expect(grid).to.have.length(1);
+    expect(grid).toHaveLength(1);
 
     const fagsakProfileIndex = grid.prop('profileAndNavigationContent');
 
     // @ts-ignore
-    expect(fagsakProfileIndex.props.alleBehandlinger).to.eql([behandling, behandling2]);
+    expect(fagsakProfileIndex.props.alleBehandlinger).toEqual([behandling, behandling2]);
   });
 });

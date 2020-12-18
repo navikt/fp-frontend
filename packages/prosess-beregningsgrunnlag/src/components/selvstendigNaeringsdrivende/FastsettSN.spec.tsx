@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import React from 'react';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -47,7 +46,7 @@ describe('<FastsettSN>', () => {
     />);
 
     const rows = wrapper.find('Row');
-    expect(rows.length).to.equal(2);
+    expect(rows.length).toBe(2);
   });
   it('Skal teste at buildInitialValues bygges korrekt når tidligere fastsatt', () => {
     const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, 300000), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
@@ -61,7 +60,7 @@ describe('<FastsettSN>', () => {
       [begrunnelseFieldname]: 'Ok.',
     };
 
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere fastsatt', () => {
@@ -76,7 +75,7 @@ describe('<FastsettSN>', () => {
       [begrunnelseFieldname]: '',
     };
 
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere fastsatt på sn ny i arbliv', () => {
@@ -90,7 +89,7 @@ describe('<FastsettSN>', () => {
       [begrunnelseFieldname]: '',
     };
 
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere fastsatt på sn ny i arbliv - OK', () => {
@@ -105,6 +104,6 @@ describe('<FastsettSN>', () => {
       [begrunnelseFieldname]: 'Ok!!!',
     };
 
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 });

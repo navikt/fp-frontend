@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import AvregningSummary from './AvregningSummary';
 
 describe('<AvregningSummary>', () => {
@@ -22,13 +21,13 @@ describe('<AvregningSummary>', () => {
     />);
 
     const element = wrapper.find('Element');
-    expect(element).to.have.length(1);
+    expect(element).toHaveLength(1);
     const normaltekst = wrapper.find('Normaltekst');
-    expect(normaltekst).to.have.length(4);
+    expect(normaltekst).toHaveLength(4);
     const row = wrapper.find('Row');
-    expect(row).has.length(3);
+    expect(row).toHaveLength(3);
     const column = wrapper.find('Column');
-    expect(column).has.length(6);
+    expect(column).toHaveLength(6);
   });
 
   it('skal vise melding ingen perioder med avvik', () => {
@@ -41,7 +40,7 @@ describe('<AvregningSummary>', () => {
     />);
 
     const message = wrapper.find('FormattedMessage');
-    expect(message.at(0).prop('id')).is.eql('Avregning.bruker');
-    expect(message.at(1).prop('id')).is.eql('Avregning.ingenPerioder');
+    expect(message.at(0).prop('id')).toEqual('Avregning.bruker');
+    expect(message.at(1).prop('id')).toEqual('Avregning.ingenPerioder');
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { Element } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat, BeregningsresultatEs } from '@fpsak-frontend/types';
@@ -33,9 +32,9 @@ describe('<VedtakInnvilgetPanel>', () => {
     />);
 
     const elementFields = wrapper.find(Element);
-    expect(elementFields).to.have.length(2);
-    expect(elementFields.first().childAt(0).text()).to.eql('100 kr');
-    expect(elementFields.last().childAt(0).text()).to.eql('1');
+    expect(elementFields).toHaveLength(2);
+    expect(elementFields.first().childAt(0).text()).toEqual('100 kr');
+    expect(elementFields.last().childAt(0).text()).toEqual('1');
   });
 
   it('skal rendre fritekstpanel for foreldrepenger', () => {
@@ -48,6 +47,6 @@ describe('<VedtakInnvilgetPanel>', () => {
       beregningErManueltFastsatt
     />);
 
-    expect(wrapper.find(VedtakFritekstPanel)).to.have.length(1);
+    expect(wrapper.find(VedtakFritekstPanel)).toHaveLength(1);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -35,8 +34,8 @@ describe('<MenyHenleggIndex>', () => {
     />);
 
     const modal = wrapper.find(HenleggBehandlingModal);
-    expect(modal).to.have.length(1);
-    expect(wrapper.find(HenlagtBehandlingModal)).to.have.length(0);
+    expect(modal).toHaveLength(1);
+    expect(wrapper.find(HenlagtBehandlingModal)).toHaveLength(0);
     // @ts-ignore fiks denne
     modal.prop('onSubmit')({
       årsakKode: 'test',
@@ -45,9 +44,9 @@ describe('<MenyHenleggIndex>', () => {
     });
 
     const kall = henleggBehandlingCallback.getCalls();
-    expect(kall).to.have.length(1);
-    expect(kall[0].args).to.have.length(1);
-    expect(kall[0].args[0]).to.eql({
+    expect(kall).toHaveLength(1);
+    expect(kall[0].args).toHaveLength(1);
+    expect(kall[0].args[0]).toEqual({
       behandlingId: 3,
       behandlingVersjon: 1,
       årsakKode: 'test',

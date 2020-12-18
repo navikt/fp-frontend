@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
@@ -19,7 +18,7 @@ describe('<ATFLSammeOrg>', () => {
       }}
       manglerInntektsmelding
     />);
-    expect(wrapper.find(Normaltekst).length).to.equal(0);
+    expect(wrapper.find(Normaltekst).length).toBe(0);
   });
 
   it('skal vise tekst når man har tilfelle uten inntektsmelding', () => {
@@ -36,8 +35,8 @@ describe('<ATFLSammeOrg>', () => {
       manglerInntektsmelding
     />);
     const msg = wrapper.find(FormattedMessage);
-    expect(msg.length).to.equal(1);
-    expect(msg.prop('id')).to.equal('BeregningInfoPanel.VurderOgFastsettATFL.ATFLSammeOrgUtenIM');
+    expect(msg.length).toBe(1);
+    expect(msg.prop('id')).toBe('BeregningInfoPanel.VurderOgFastsettATFL.ATFLSammeOrgUtenIM');
   });
 
   it('skal vise tekst når man har tilfelle med inntektsmelding', () => {
@@ -54,8 +53,8 @@ describe('<ATFLSammeOrg>', () => {
       manglerInntektsmelding={false}
     />);
     const msg = wrapper.find(FormattedMessage);
-    expect(msg.length).to.equal(1);
-    expect(msg.prop('id')).to.equal('BeregningInfoPanel.VurderOgFastsettATFL.ATFLSammeOrg');
+    expect(msg.length).toBe(1);
+    expect(msg.prop('id')).toBe('BeregningInfoPanel.VurderOgFastsettATFL.ATFLSammeOrg');
   });
 
   const arbeidsforhold = {
@@ -111,7 +110,7 @@ describe('<ATFLSammeOrg>', () => {
     };
 
     const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning, []);
-    expect(transformed.faktaOmBeregningTilfeller.length).to.equal(0);
+    expect(transformed.faktaOmBeregningTilfeller.length).toBe(0);
   });
 
   it('skal transform values', () => {
@@ -123,16 +122,16 @@ describe('<ATFLSammeOrg>', () => {
 
     const fastsatteAndeler = [];
     const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning, fastsatteAndeler);
-    expect(transformed.faktaOmBeregningTilfeller.length).to.equal(1);
-    expect(transformed.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON)).to.equal(true);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe.length).to.equal(2);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[1].andelsnr).to.equal(1);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[1].arbeidsinntekt).to.equal(10000);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].andelsnr).to.equal(2);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].arbeidsinntekt).to.equal(20000);
-    expect(fastsatteAndeler.length).to.equal(2);
-    expect(fastsatteAndeler.includes(1)).to.equal(true);
-    expect(fastsatteAndeler.includes(2)).to.equal(true);
+    expect(transformed.faktaOmBeregningTilfeller.length).toBe(1);
+    expect(transformed.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON)).toBe(true);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe.length).toBe(2);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[1].andelsnr).toBe(1);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[1].arbeidsinntekt).toBe(10000);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].andelsnr).toBe(2);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].arbeidsinntekt).toBe(20000);
+    expect(fastsatteAndeler.length).toBe(2);
+    expect(fastsatteAndeler.includes(1)).toBe(true);
+    expect(fastsatteAndeler.includes(2)).toBe(true);
   });
 
   it('skal ikkje transform values når andelsnr har blitt submittet fra før', () => {
@@ -144,13 +143,13 @@ describe('<ATFLSammeOrg>', () => {
 
     const fastsatteAndeler = [1];
     const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning, fastsatteAndeler);
-    expect(transformed.faktaOmBeregningTilfeller.length).to.equal(1);
-    expect(transformed.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON)).to.equal(true);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe.length).to.equal(1);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].andelsnr).to.equal(2);
-    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].arbeidsinntekt).to.equal(20000);
-    expect(fastsatteAndeler.length).to.equal(2);
-    expect(fastsatteAndeler.includes(1)).to.equal(true);
-    expect(fastsatteAndeler.includes(2)).to.equal(true);
+    expect(transformed.faktaOmBeregningTilfeller.length).toBe(1);
+    expect(transformed.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON)).toBe(true);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe.length).toBe(1);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].andelsnr).toBe(2);
+    expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe[0].arbeidsinntekt).toBe(20000);
+    expect(fastsatteAndeler.length).toBe(2);
+    expect(fastsatteAndeler.includes(1)).toBe(true);
+    expect(fastsatteAndeler.includes(2)).toBe(true);
   });
 });

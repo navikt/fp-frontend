@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -42,9 +41,9 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).has.length(1);
-    expect(message.prop('id')).is.eql('VisittkortBarnInfoFodselPanel.Termin');
-    expect(message.prop('values')).is.eql({
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Termin');
+    expect(message.prop('values')).toEqual({
       dato: '21.01.2020',
     });
   });
@@ -68,9 +67,9 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     />);
 
     const messages = wrapper.find(FormattedMessage);
-    expect(messages).has.length(2);
-    expect(messages.first().prop('id')).is.eql('VisittkortBarnInfoFodselPanel.Fodt');
-    expect(messages.first().prop('values')).is.eql({
+    expect(messages).toHaveLength(2);
+    expect(messages.first().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Fodt');
+    expect(messages.first().prop('values')).toEqual({
       dato: '02.02.2020',
     });
   });
@@ -95,7 +94,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).has.length(3);
-    expect(message.last().prop('id')).is.eql('VisittkortBarnInfoFodselPanel.Dod');
+    expect(message).toHaveLength(3);
+    expect(message.last().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Dod');
   });
 });

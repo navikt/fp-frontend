@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
@@ -19,10 +18,10 @@ describe('<UtlandEndretModal>', () => {
     />);
 
     const knapp = wrapper.find(Hovedknapp);
-    expect(knapp).to.have.length(1);
+    expect(knapp).toHaveLength(1);
 
     knapp.prop('onClick')({} as React.MouseEvent<any>);
 
-    expect(lagreOgLukk.getCalls()).to.have.length(1);
+    expect(lagreOgLukk.getCalls()).toHaveLength(1);
   });
 });

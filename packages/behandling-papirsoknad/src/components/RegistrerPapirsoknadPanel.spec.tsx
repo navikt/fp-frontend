@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -52,11 +51,11 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
     />);
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).to.have.length(1);
-    expect(wrapper.find(SoknadTypePickerForm)).to.have.length(1);
-    expect(wrapper.find(EngangsstonadPapirsoknadIndex)).to.have.length(1);
-    expect(wrapper.find(ForeldrepengerPapirsoknadIndex)).to.have.length(0);
-    expect(wrapper.find(SvangerskapspengerPapirsoknadIndex)).to.have.length(0);
+    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(1);
+    expect(wrapper.find(SoknadTypePickerForm)).toHaveLength(1);
+    expect(wrapper.find(EngangsstonadPapirsoknadIndex)).toHaveLength(1);
+    expect(wrapper.find(ForeldrepengerPapirsoknadIndex)).toHaveLength(0);
+    expect(wrapper.find(SvangerskapspengerPapirsoknadIndex)).toHaveLength(0);
   });
 
   it('skal vise foreldrepenger-form', () => {
@@ -70,9 +69,9 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
     />);
-    expect(wrapper.find(ForeldrepengerPapirsoknadIndex)).to.have.length(1);
-    expect(wrapper.find(EngangsstonadPapirsoknadIndex)).to.have.length(0);
-    expect(wrapper.find(SvangerskapspengerPapirsoknadIndex)).to.have.length(0);
+    expect(wrapper.find(ForeldrepengerPapirsoknadIndex)).toHaveLength(1);
+    expect(wrapper.find(EngangsstonadPapirsoknadIndex)).toHaveLength(0);
+    expect(wrapper.find(SvangerskapspengerPapirsoknadIndex)).toHaveLength(0);
   });
 
   it('skal vise svangerskapspenger-form', () => {
@@ -92,8 +91,8 @@ describe('<RegistrerPapirsoknadPanel>', () => {
       lagreUfullstendig={sinon.spy()}
       lagreFullstendig={sinon.spy()}
     />);
-    expect(wrapper.find(ForeldrepengerPapirsoknadIndex)).to.have.length(0);
-    expect(wrapper.find(EngangsstonadPapirsoknadIndex)).to.have.length(0);
-    expect(wrapper.find(SvangerskapspengerPapirsoknadIndex)).to.have.length(1);
+    expect(wrapper.find(ForeldrepengerPapirsoknadIndex)).toHaveLength(0);
+    expect(wrapper.find(EngangsstonadPapirsoknadIndex)).toHaveLength(0);
+    expect(wrapper.find(SvangerskapspengerPapirsoknadIndex)).toHaveLength(1);
   });
 });

@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 import VurderAktiviteterPanel, { leggTilAktivitet, finnPlasseringIListe } from './VurderAktiviteterPanel';
 import { lagAktivitetFieldId } from './VurderAktiviteterTabell';
@@ -77,7 +76,7 @@ describe('<VurderAktiviteterPanel>', () => {
     };
     const errors = VurderAktiviteterPanel.validate(values, aktiviteterTomDatoMapping, false);
     // eslint-disable-next-line no-underscore-dangle
-    expect(errors._error).to.equal('VurderAktiviteterTabell.Validation.MåHaMinstEnAktivitet');
+    expect(errors._error).toBe('VurderAktiviteterTabell.Validation.MåHaMinstEnAktivitet');
   });
 
   it('skal ikkje validere om ingen aktiviteter skal brukes og det finnes fleire aktiviteter i opptjeningsperioden', () => {
@@ -117,7 +116,7 @@ describe('<VurderAktiviteterPanel>', () => {
     };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     const errors = VurderAktiviteterPanel.validate(values, aktiviteterTomDatoMapping, false);
-    expect(errors).to.be.empty;
+    expect(Object.keys(errors)).toHaveLength(0);
   });
 
   it('skal validere om ingen aktiviteter er valgt i stp nr 2', () => {
@@ -160,7 +159,7 @@ describe('<VurderAktiviteterPanel>', () => {
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     const errors = VurderAktiviteterPanel.validate(values, aktiviteterTomDatoMapping, false);
     // eslint-disable-next-line no-underscore-dangle
-    expect(errors._error).to.equal('VurderAktiviteterTabell.Validation.MåHaMinstEnAktivitet');
+    expect(errors._error).toBe('VurderAktiviteterTabell.Validation.MåHaMinstEnAktivitet');
   });
 
   it('skal validere ubesvart radio', () => {
@@ -199,14 +198,14 @@ describe('<VurderAktiviteterPanel>', () => {
       skjæringstidspunkt: '2019-02-02',
     };
     const errors = VurderAktiviteterPanel.validate(values, aktiviteterTomDatoMapping, false);
-    expect(errors[id3].skalBrukes).to.equal(isRequiredMessage());
+    expect(errors[id3].skalBrukes).toBe(isRequiredMessage());
   });
 
   it('skal kunne legge til aktivitet i tom mapping', () => {
     const aktiviteterTomDatoMapping = [];
     leggTilAktivitet(aktiviteterTomDatoMapping, aktivitet1, '2020-02-08');
-    expect(aktiviteterTomDatoMapping.length).to.equal(1);
-    expect(aktiviteterTomDatoMapping[0].aktiviteter.length).to.equal(1);
+    expect(aktiviteterTomDatoMapping.length).toBe(1);
+    expect(aktiviteterTomDatoMapping[0].aktiviteter.length).toBe(1);
   });
 
   it('skal kunne legge til aktivitet i mapping med eksisterende dato som er ulik gitt dato', () => {
@@ -215,40 +214,40 @@ describe('<VurderAktiviteterPanel>', () => {
     ];
     leggTilAktivitet(aktiviteterTomDatoMapping, aktivitet1, '2019-02-08');
     leggTilAktivitet(aktiviteterTomDatoMapping, aktivitet1, '2017-02-08');
-    expect(aktiviteterTomDatoMapping.length).to.equal(3);
-    expect(aktiviteterTomDatoMapping[0].aktiviteter.length).to.equal(1);
-    expect(aktiviteterTomDatoMapping[1].aktiviteter.length).to.equal(1);
-    expect(aktiviteterTomDatoMapping[2].aktiviteter.length).to.equal(1);
-    expect(aktiviteterTomDatoMapping[0].tom).to.equal('2019-02-08');
-    expect(aktiviteterTomDatoMapping[1].tom).to.equal('2018-02-02');
-    expect(aktiviteterTomDatoMapping[2].tom).to.equal('2017-02-08');
+    expect(aktiviteterTomDatoMapping.length).toBe(3);
+    expect(aktiviteterTomDatoMapping[0].aktiviteter.length).toBe(1);
+    expect(aktiviteterTomDatoMapping[1].aktiviteter.length).toBe(1);
+    expect(aktiviteterTomDatoMapping[2].aktiviteter.length).toBe(1);
+    expect(aktiviteterTomDatoMapping[0].tom).toBe('2019-02-08');
+    expect(aktiviteterTomDatoMapping[1].tom).toBe('2018-02-02');
+    expect(aktiviteterTomDatoMapping[2].tom).toBe('2017-02-08');
   });
 
   it('skal finne ny index i tom liste', () => {
     const dato = '2019-02-08';
     const liste = [];
     const index = finnPlasseringIListe(liste, dato);
-    expect(index).to.equal(0);
+    expect(index).toBe(0);
   });
 
   it('skal finne ny index i liste med 1 element som ligger før', () => {
     const dato = '2019-02-08';
     const liste = [{ tom: '2019-02-09' }];
     const index = finnPlasseringIListe(liste, dato);
-    expect(index).to.equal(1);
+    expect(index).toBe(1);
   });
 
   it('skal finne ny index i liste med 1 element som ligger etter', () => {
     const dato = '2019-02-08';
     const liste = [{ tom: '2019-02-07' }];
     const index = finnPlasseringIListe(liste, dato);
-    expect(index).to.equal(0);
+    expect(index).toBe(0);
   });
 
   it('skal finne ny index i liste med 2 elementer der ny index er mellom', () => {
     const dato = '2019-02-08';
     const liste = [{ tom: '2019-02-09' }, { tom: '2019-02-07' }];
     const index = finnPlasseringIListe(liste, dato);
-    expect(index).to.equal(1);
+    expect(index).toBe(1);
   });
 });

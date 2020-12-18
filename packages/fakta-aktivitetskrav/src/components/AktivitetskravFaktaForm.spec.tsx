@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -72,10 +71,10 @@ describe('<AktivitetskravFaktaForm>', () => {
     />);
 
     const hjelpetekst = wrapper.find(AksjonspunktHelpTextHTML);
-    expect(hjelpetekst).to.have.length(1);
-    expect(hjelpetekst.childAt(0).text()).to.eql('Kontroller kravet til mors aktivitet');
+    expect(hjelpetekst).toHaveLength(1);
+    expect(hjelpetekst.childAt(0).text()).toEqual('Kontroller kravet til mors aktivitet');
 
-    expect(wrapper.find(AktivitetskravFaktaTabell)).to.have.length(1);
+    expect(wrapper.find(AktivitetskravFaktaTabell)).toHaveLength(1);
   });
 
   it('skal vise detaljvindu når en velger periode i tabell og så lagre periode', () => {
@@ -123,13 +122,13 @@ describe('<AktivitetskravFaktaForm>', () => {
       formChange={formChange}
     />);
 
-    expect(wrapper.find(AktivitetskravFaktaDetailForm)).to.have.length(0);
+    expect(wrapper.find(AktivitetskravFaktaDetailForm)).toHaveLength(0);
 
     const velgAktivitetskrav = wrapper.find(AktivitetskravFaktaTabell).prop('velgAktivitetskrav');
     velgAktivitetskrav(undefined, undefined, sorterteAktivitetskrav[1]);
 
     const detaljeform = wrapper.find(AktivitetskravFaktaDetailForm);
-    expect(detaljeform).to.have.length(1);
+    expect(detaljeform).toHaveLength(1);
 
     const endretPeriode = {
       fom: '2021-01-08',
@@ -148,9 +147,9 @@ describe('<AktivitetskravFaktaForm>', () => {
 
     detaljeform.prop('oppdaterAktivitetskrav')(endretPeriode);
 
-    expect(formChange.called).is.true;
+    expect(formChange.called).toBe(true);
     const { args } = formChange.getCalls()[0];
-    expect(args).has.length(3);
-    expect(args[2]).is.eql([sorterteAktivitetskrav[0], endretPeriode]);
+    expect(args).toHaveLength(3);
+    expect(args[2]).toEqual([sorterteAktivitetskrav[0], endretPeriode]);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import sinon from 'sinon';
 
@@ -96,9 +95,9 @@ describe('<UttakPeriode>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const uttakPeriodeType = wrapper.find(UttakPeriodeType);
-    expect(uttakPeriodeType).to.have.length(2);
+    expect(uttakPeriodeType).toHaveLength(2);
     const uttakPeriodeInnhold = wrapper.find(UttakPeriodeInnhold);
-    expect(uttakPeriodeInnhold).to.have.length(2);
+    expect(uttakPeriodeInnhold).toHaveLength(2);
   });
 
   it('skal ikke gi class active til perioder som er bekreftet,', () => {
@@ -129,7 +128,7 @@ describe('<UttakPeriode>', () => {
     />);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
-    expect(periodeContainer.at(0).hasClass('active')).to.equal(false);
+    expect(periodeContainer.at(0).hasClass('active')).toBe(false);
   });
 
   it('skal gi class active til perioder som er ikke bekreftet og ikke readOnly,', () => {
@@ -160,7 +159,7 @@ describe('<UttakPeriode>', () => {
     />);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
-    expect(periodeContainer.at(1).hasClass('active')).to.equal(true);
+    expect(periodeContainer.at(1).hasClass('active')).toBe(true);
   });
 
   it('skal vise alert hvis det er noe error', () => {
@@ -197,7 +196,7 @@ describe('<UttakPeriode>', () => {
 
     const periodeContainer = wrapper.find('div.periodeContainer');
     const alertStripe = wrapper.find('AlertStripe');
-    expect(periodeContainer.at(1).hasClass('active')).to.equal(true);
-    expect(alertStripe).to.have.length(1);
+    expect(periodeContainer.at(1).hasClass('active')).toBe(true);
+    expect(alertStripe).toHaveLength(1);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { VirksomhetRegnskapPanel } from './VirksomhetRegnskapPanel';
@@ -9,25 +8,25 @@ describe('<VirksomhetRegnskapPanel>', () => {
     const wrapper = shallow(<VirksomhetRegnskapPanel form="test" />);
 
     const undertekst = wrapper.find('Undertekst');
-    expect(undertekst).to.have.length(1);
+    expect(undertekst).toHaveLength(1);
 
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
 
     const inputs = wrapper.find('InputField');
-    expect(inputs).to.have.length(0);
+    expect(inputs).toHaveLength(0);
   });
 
   it('skal rendre visning korrekt når virksomhet har regnskapsfører', () => {
     const wrapper = shallow(<VirksomhetRegnskapPanel form="test" harRegnskapsforer />);
 
     const undertekst = wrapper.find('Undertekst');
-    expect(undertekst).to.have.length(1);
+    expect(undertekst).toHaveLength(1);
 
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
 
     const inputs = wrapper.find('InputField');
-    expect(inputs).to.have.length(2);
+    expect(inputs).toHaveLength(2);
   });
 });

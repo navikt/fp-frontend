@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import {
   addDaysToDate,
   calcDaysAndWeeks,
@@ -19,7 +17,7 @@ describe('dateutils', () => {
         weeks: 6,
         days: 5,
       };
-      expect(calcDaysAndWeeksWithWeekends(fom, tom)).is.deep.equal(formatedMessage);
+      expect(calcDaysAndWeeksWithWeekends(fom, tom)).toEqual(formatedMessage);
     });
   });
 
@@ -32,21 +30,21 @@ describe('dateutils', () => {
         weeks: 6,
         days: 4,
       };
-      expect(calcDaysAndWeeks(fom, tom)).is.deep.equal(formatedMessage);
+      expect(calcDaysAndWeeks(fom, tom)).toEqual(formatedMessage);
     });
   });
 
   describe('dateFormat', () => {
     it('Skal formatere en dato til ISO', () => {
       const dateTime = '2017-08-02T01:54:25.455';
-      expect(dateFormat(dateTime)).is.eql('02.08.2017');
+      expect(dateFormat(dateTime)).toEqual('02.08.2017');
     });
   });
 
   describe('timeFormat', () => {
     it('Skal formatere et dato til å vise kun klokkeslett', () => {
       const dateTime = '2017-08-02T01:54:25.455';
-      expect(timeFormat(dateTime)).is.eql('01:54');
+      expect(timeFormat(dateTime)).toEqual('01:54');
     });
   });
 
@@ -54,7 +52,7 @@ describe('dateutils', () => {
     it('Skal legge til dager på et timestamp og returnere dato', () => {
       const dateTime = '2017-08-02T01:54:25.455';
       const daysToAdd = 6;
-      expect(addDaysToDate(dateTime, daysToAdd)).is.eql('2017-08-08');
+      expect(addDaysToDate(dateTime, daysToAdd)).toEqual('2017-08-08');
     });
   });
 
@@ -62,7 +60,7 @@ describe('dateutils', () => {
     it('skal vise at perioden mellom to datoer er på 5 måneder og 0 dager', () => {
       const fomDate = '2017-12-01';
       const tomDate = '2018-04-30';
-      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).is.eql({
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
         months: 5,
         days: 0,
       });
@@ -71,7 +69,7 @@ describe('dateutils', () => {
     it('skal vise at perioden mellom to datoer er på 11 dager', () => {
       const fomDate = '2018-04-20';
       const tomDate = '2018-04-30';
-      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).is.eql({
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
         months: 0,
         days: 11,
       });
@@ -80,7 +78,7 @@ describe('dateutils', () => {
     it('skal returnere undefined når periode ikke er gyldig fordi fomDato er etter tomDato', () => {
       const fomDate = '2018-04-30';
       const tomDate = '2018-04-10';
-      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).is.undefined;
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toBeUndefined();
     });
   });
 });

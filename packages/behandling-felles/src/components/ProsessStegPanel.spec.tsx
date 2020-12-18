@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -109,9 +108,9 @@ describe('<ProsessStegPanel>', () => {
       />,
     );
 
-    expect(wrapper.find(BehandlingHenlagtPanel)).to.have.length(1);
-    expect(wrapper.find(MargMarkering)).to.have.length(0);
-    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).to.have.length(0);
+    expect(wrapper.find(BehandlingHenlagtPanel)).toHaveLength(1);
+    expect(wrapper.find(MargMarkering)).toHaveLength(0);
+    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).toHaveLength(0);
   });
 
   it('skal vise panel for steg ikke behandlet når steget ikke er behandlet og saken ikke er henlagt', () => {
@@ -134,9 +133,9 @@ describe('<ProsessStegPanel>', () => {
       />,
     );
 
-    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).to.have.length(1);
-    expect(wrapper.find(BehandlingHenlagtPanel)).to.have.length(0);
-    expect(wrapper.find(MargMarkering)).to.have.length(0);
+    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).toHaveLength(1);
+    expect(wrapper.find(BehandlingHenlagtPanel)).toHaveLength(0);
+    expect(wrapper.find(MargMarkering)).toHaveLength(0);
   });
 
   it('skal vise panel for inngangsvilkår når det er data for flere panel', () => {
@@ -169,12 +168,12 @@ describe('<ProsessStegPanel>', () => {
       />,
     );
 
-    expect(wrapper.find(MargMarkering)).to.have.length(1);
-    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).to.have.length(0);
-    expect(wrapper.find(BehandlingHenlagtPanel)).to.have.length(0);
+    expect(wrapper.find(MargMarkering)).toHaveLength(1);
+    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).toHaveLength(0);
+    expect(wrapper.find(BehandlingHenlagtPanel)).toHaveLength(0);
 
-    expect(wrapper.find(InngangsvilkarPanel)).to.have.length(1);
-    expect(wrapper.find('DataFetcher')).to.have.length(0);
+    expect(wrapper.find(InngangsvilkarPanel)).toHaveLength(1);
+    expect(wrapper.find('DataFetcher')).toHaveLength(0);
   });
 
   it('skal vise kun vise ett panel', () => {
@@ -204,17 +203,17 @@ describe('<ProsessStegPanel>', () => {
       />,
     );
 
-    expect(wrapper.find(MargMarkering)).to.have.length(1);
-    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).to.have.length(0);
-    expect(wrapper.find(BehandlingHenlagtPanel)).to.have.length(0);
+    expect(wrapper.find(MargMarkering)).toHaveLength(1);
+    expect(wrapper.find(ProsessStegIkkeBehandletPanel)).toHaveLength(0);
+    expect(wrapper.find(BehandlingHenlagtPanel)).toHaveLength(0);
 
     const komponent = wrapper.find('div');
-    expect(komponent).to.have.length(1);
-    expect(komponent.prop('status')).is.eql(vilkarUtfallType.IKKE_VURDERT);
-    expect(komponent.prop('isReadOnly')).is.false;
-    expect(komponent.prop('readOnlySubmitButton')).is.false;
-    expect(komponent.prop('isAksjonspunktOpen')).is.true;
-    expect(wrapper.find(InngangsvilkarPanel)).to.have.length(0);
+    expect(komponent).toHaveLength(1);
+    expect(komponent.prop('status')).toEqual(vilkarUtfallType.IKKE_VURDERT);
+    expect(komponent.prop('isReadOnly')).toBe(false);
+    expect(komponent.prop('readOnlySubmitButton')).toBe(false);
+    expect(komponent.prop('isAksjonspunktOpen')).toBe(true);
+    expect(wrapper.find(InngangsvilkarPanel)).toHaveLength(0);
   });
 
   it('skal lagre aksjonspunkt', () => {
@@ -258,12 +257,12 @@ describe('<ProsessStegPanel>', () => {
     }];
     panel.prop('submitCallback')(aksjonspunktModels);
 
-    expect(lagringSideeffekterCallback.getCalls()).to.have.length(1);
+    expect(lagringSideeffekterCallback.getCalls()).toHaveLength(1);
 
     const requestKall = makeRestApiRequest.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,

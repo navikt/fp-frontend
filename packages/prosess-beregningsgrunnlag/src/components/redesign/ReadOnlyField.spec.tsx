@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Label from '@fpsak-frontend/form/src/Label';
@@ -10,27 +9,27 @@ describe('ReadOnlyField', () => {
     const wrapper = shallow(<ReadOnlyField label="Dette er en test" input={{ value: '123' }} />);
 
     const label = wrapper.find(Label);
-    expect(label).to.have.length(1);
-    expect(label.prop('input')).to.eql('Dette er en test');
+    expect(label).toHaveLength(1);
+    expect(label.prop('input')).toEqual('Dette er en test');
 
     const value = wrapper.find(Normaltekst);
-    expect(value).to.have.length(1);
-    expect(value.childAt(0).text()).to.eql('123');
+    expect(value).toHaveLength(1);
+    expect(value.childAt(0).text()).toEqual('123');
   });
 
   it('skal vise feltverdi som editert med endret info', () => {
     const wrapper = shallow(<ReadOnlyField label="Dette er en test" input={{ value: '123' }} endrettekst="EndretText" />);
     const flexContainer = wrapper.find('FlexContainer');
-    expect(flexContainer).to.have.length(1);
-    expect(flexContainer.find('EditedIcon')).to.have.length(1);
+    expect(flexContainer).toHaveLength(1);
+    expect(flexContainer.find('EditedIcon')).toHaveLength(1);
 
     const endretTekst = wrapper.find('Undertekst');
-    expect(endretTekst).to.have.length(1);
-    expect(endretTekst.childAt(0).text()).to.eql('EndretText');
+    expect(endretTekst).toHaveLength(1);
+    expect(endretTekst.childAt(0).text()).toEqual('EndretText');
   });
 
   it('skal ikke vise label når verdi er tom', () => {
     const wrapper = shallow(<ReadOnlyField label="Dette er en test" input={{ value: '' }} />);
-    expect(wrapper.children()).to.have.length(0);
+    expect(wrapper.children()).toHaveLength(0);
   });
 });
