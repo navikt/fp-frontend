@@ -1,3 +1,4 @@
+import { Besteberegninggrunnlag } from 'types/src/besteberegningTsTypes';
 import Kodeverk from './kodeverkTsType';
 import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
@@ -71,8 +72,9 @@ export type RelevanteStatuserProp = Readonly<{
   isMilitaer: boolean;
 }>;
 
-type YtelseGrunnlag = Readonly<{
+export type YtelseGrunnlag = Readonly<{
   ytelsetype: string;
+  besteberegninggrunnlag?: Besteberegninggrunnlag;
 }>;
 
 export type SammenligningsgrunlagProp = Readonly<{

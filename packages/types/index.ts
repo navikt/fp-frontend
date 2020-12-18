@@ -23,6 +23,10 @@ export {
   ArbeidstakerUtenIMAndel,
   ATFLSammeOrgAndel,
   RefusjonskravSomKommerForSentListe,
+  BeregningsgrunnlagArbeidsforhold,
+  YtelseGrunnlag,
+} from './src/beregningsgrunnlagTsType';
+export { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';
 } from './src/beregningsgrunnlagFaktaTsType';
 export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export {

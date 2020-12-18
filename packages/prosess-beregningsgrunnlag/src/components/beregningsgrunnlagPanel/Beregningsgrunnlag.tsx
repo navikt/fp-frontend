@@ -8,6 +8,7 @@ import {
   BeregningsgrunnlagPeriodeProp,
   KodeverkMedNavn,
   RelevanteStatuserProp,
+  BeregningsgrunnlagAndel,
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
@@ -54,18 +55,18 @@ const finnAlleAndelerIFørstePeriode = (allePerioder) => {
   return undefined;
 };
 
-const createRelevantePaneler = (alleAndelerIForstePeriode,
-  gjeldendeAksjonspunkter,
-  relevanteStatuser,
-  allePerioder,
-  readOnly,
-  gjelderBesteberegning,
-  behandlingId,
-  behandlingVersjon,
-  alleKodeverk,
+const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAndel[],
+  gjeldendeAksjonspunkter: Aksjonspunkt[],
+  relevanteStatuser: RelevanteStatuserProp,
+  allePerioder: BeregningsgrunnlagPeriodeProp[],
+  readOnly: boolean,
+  gjelderBesteberegning: boolean,
+  behandlingId: number,
+  behandlingVersjon: number,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   sammenligningsGrunnlagInntekter,
-  skjeringstidspunktDato,
-  arbeidsgiverOpplysningerPerId) => (
+  skjeringstidspunktDato: string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
     <div className={beregningStyles.panelLeft}>
       { relevanteStatuser.isArbeidstaker
       && (

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Aksjonspunkt, Vilkar, Behandling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 /**
@@ -74,11 +74,13 @@ export abstract class ProsessStegPanelDef {
   public skalBrukeOverstyringspanel = (aksjonspunkter: Aksjonspunkt[]) => this.getOverstyringspanelDef()
     && !this.getAksjonspunktKoder().some((ac) => aksjonspunkter.some((a) => a.definisjon.kode === ac))
 
-  public skalVisePanel = (behandling: Behandling, aksjonspunkter: Aksjonspunkt[], vilkar: Vilkar[]) => {
+  public skalVisePanel = (aksjonspunkter: Aksjonspunkt[], dataTilUtledning: any) => {
+    const { behandling, vilkar, beregningsgrunnlag } = dataTilUtledning;
     const panelDef = this.skalBrukeOverstyringspanel(aksjonspunkter) ? this.getOverstyringspanelDef() : this;
 
     const data = {
       behandling,
+      beregningsgrunnlag,
       aksjonspunktDefKoderForSteg: panelDef.getAksjonspunktKoder(),
       aksjonspunkterForSteg: this.finnAksjonspunkterForSteg(aksjonspunkter),
       vilkarForSteg: this.finnVilkarForSteg(vilkar),
@@ -127,8 +129,8 @@ export abstract class ProsessStegDef {
    */
   public abstract getPanelDefinisjoner(): ProsessStegPanelDef[]
 
-  public skalViseProsessSteg = (behandling: Behandling, aksjonspunkter: Aksjonspunkt[], vilkar: Vilkar[]) => this.getPanelDefinisjoner()
-    .some((panelDef) => panelDef.skalVisePanel(behandling, aksjonspunkter, vilkar))
+  public skalViseProsessSteg = (aksjonspunkter: Aksjonspunkt[], dataTilUtledning: any) => this.getPanelDefinisjoner()
+    .some((panelDef) => panelDef.skalVisePanel(aksjonspunkter, dataTilUtledning))
 
   public harMinstEttApentAksjonspunkt = (aksjonspunkter, overstyrteAksjonspunktKoder) => this.getPanelDefinisjoner()
     .some((panelDef) => panelDef.harApentAksjonspunkt(aksjonspunkter, overstyrteAksjonspunktKoder))

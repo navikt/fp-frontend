@@ -1,0 +1,19 @@
+{
+  "name": "@fpsak-frontend/prosess-besteberegning",
+  "version": "1.0.0",
+  "module": "index.ts",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@fpsak-frontend/kodeverk": "1.0.0",
+    "@fpsak-frontend/shared-components": "1.0.0",
+    "@fpsak-frontend/types": "1.0.0",
+    "@fpsak-frontend/utils": "1.0.0",
+    "moment": "^2.29.1",
+    "nav-frontend-core": "5.0.10",
+    "nav-frontend-grid": "1.0.44",
+    "nav-frontend-typografi": "2.0.37",
+    "react": "^16.13.1",
+    "react-intl": "^5.10.0"
+  }
+}

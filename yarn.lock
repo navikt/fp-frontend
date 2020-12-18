@@ -13700,6 +13700,11 @@ nav-frontend-core@5.0.11, nav-frontend-core@^5.0.11:
   resolved "https://registry.yarnpkg.com/nav-frontend-core/-/nav-frontend-core-5.0.11.tgz#d2611a79f5f5372166a467a5f6e5eaccb8725086"
   integrity sha512-5b1FMK1mPfnpsXgHMDLY8Tj4SiPXVFg9hXj//qTaO3W2lwMY4Df3dKh4R595OiuVu7IRutAIuocPtXv3ysmsag==
 
+nav-frontend-core@5.0.8:
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/nav-frontend-core/-/nav-frontend-core-5.0.8.tgz#ee735886dce11f6ba2f56f0147881eed5b18af47"
+  integrity sha512-2NsEnm+vnMVhXO8Jo4RsGLGJUHpfOziTaUtCWJqaQt0gCscRSTkPkFSBQGlR0bxs9QFkO4TEW514EVBOBsmR1g==
+
 nav-frontend-core@^4.0.11:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/nav-frontend-core/-/nav-frontend-core-4.0.13.tgz#0f1917d914279c9f6555ccd1f7709c67b0316233"
@@ -13734,6 +13739,11 @@ nav-frontend-grid-style@0.2.25:
   version "0.2.25"
   resolved "https://registry.yarnpkg.com/nav-frontend-grid-style/-/nav-frontend-grid-style-0.2.25.tgz#da60b74ead24bfe3dd7f1afbaad39243250e7225"
   integrity sha512-Phult4nlWloPs2JXqRofWNX6aaUKHjZG087pLbf1D/K9dcSwdV+jT7fcitb0TYaWAqC4BdsPBiCQkTMNoZBb3w==
+
+nav-frontend-grid@1.0.41:
+  version "1.0.41"
+  resolved "https://registry.yarnpkg.com/nav-frontend-grid/-/nav-frontend-grid-1.0.41.tgz#54226ae3fa3398f694c4f706549b7bc3ced58fb0"
+  integrity sha512-b9TE5ai8EC1bZKQ7/2EBdixTtYqzZGqzxHZJPFpk6i4usQyUdmVNWA4003Ig+vOYb3eeN9udx9PQsv6EAKAEZA==
 
 nav-frontend-grid@1.0.46:
   version "1.0.46"
@@ -13875,6 +13885,11 @@ nav-frontend-typografi-style@^1.0.17, nav-frontend-typografi-style@^1.0.18:
   integrity sha512-MZ7AdSQjQuZz7e/zkfihJFBMSzyolpcmdYSAmHGQTQmtFdvxAAx1WAef8D6BwxKS8aEj2/86CX7cRMS5dXMAnw==
   dependencies:
     nav-frontend-core "^5.0.1"
+
+nav-frontend-typografi@2.0.34:
+  version "2.0.34"
+  resolved "https://registry.yarnpkg.com/nav-frontend-typografi/-/nav-frontend-typografi-2.0.34.tgz#74a7b474ddae944bff20b22bd3bc553ac59bcb72"
+  integrity sha512-UXFBJCUfQu+OQmBD1CH6uQg9PRIc5Qrmv5Nk2UYXTBqGXoUfSR3QAcZEv772ii5m/st2/dNqYgG3YJrPzBVFng==
 
 nav-frontend-typografi@2.0.39:
   version "2.0.39"

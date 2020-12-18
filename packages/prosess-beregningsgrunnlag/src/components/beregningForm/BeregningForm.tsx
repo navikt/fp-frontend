@@ -20,8 +20,10 @@ import {
   KodeverkMedNavn,
   RelevanteStatuserProp,
   Vilkar,
+  YtelseGrunnlag,
 } from '@fpsak-frontend/types';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
 import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN } from '../fellesPaneler/SkjeringspunktOgStatusPanel';
 import VurderOgFastsettSN from '../selvstendigNaeringsdrivende/VurderOgFastsettSN';
@@ -55,6 +57,11 @@ const {
 const gjelderBehandlingenBesteberegning = (faktaOmBeregning) => (faktaOmBeregning && faktaOmBeregning.faktaOmBeregningTilfeller
   ? faktaOmBeregning.faktaOmBeregningTilfeller.some((tilfelle) => tilfelle.kode === faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE)
   : false);
+
+const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag) => {
+  const { besteberegninggrunnlag } = ytelsesspesifiktGrunnlag;
+  return !!besteberegninggrunnlag;
+};
 
 const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder) => allePerioder.some(({ periodeAarsaker }) => periodeAarsaker
   && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
@@ -262,8 +269,11 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
 }) => {
   const {
     dekningsgrad, skjaeringstidspunktBeregning, beregningsgrunnlagPeriode, faktaOmBeregning,
+    ytelsesspesifiktGrunnlag,
   } = beregningsgrunnlag;
   const gjelderBesteberegning = gjelderBehandlingenBesteberegning(faktaOmBeregning);
+  const gjelderAutomatiskBesteberegning = erAutomatiskBesteberegnet(ytelsesspesifiktGrunnlag);
+
   const sammenligningsgrunnlagPrStatus = getSammenligningsgrunnlagsPrStatus(beregningsgrunnlag);
   const avvikProsent = getAvviksprosent(sammenligningsgrunnlagPrStatus);
   const aktivitetStatusList = getStatusList(beregningsgrunnlagPeriode);
@@ -310,6 +320,13 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
             </>
+          )}
+          <VerticalSpacer twentyPx />
+          {gjelderAutomatiskBesteberegning && (
+            <BesteberegningResultatGrunnlagPanel
+              besteMåneder={ytelsesspesifiktGrunnlag.besteberegninggrunnlag.besteMåneder}
+              periode={beregningsgrunnlagPeriode[0]}
+            />
           )}
         </Column>
         <Column xs="12" md="6">
