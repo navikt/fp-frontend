@@ -51,6 +51,6 @@ describe('Snakkeboble', () => {
     );
 
     const undertekst = wrapper.find(Undertekst);
-    expect(undertekst.childAt(0).text()).toEqual(expect.arrayContaining(['10.12.2017 -  // Saksbehandler']));
+    expect(undertekst.childAt(0).text()).toEqual('10.12.2017 -  // Saksbehandler test');
   });
 });

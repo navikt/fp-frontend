@@ -81,7 +81,7 @@ describe('<FagsakList>', () => {
     expect(tableColumns.first().childAt(0).text()).toEqual('12345');
     expect(tableColumns.at(1).childAt(0).text()).toEqual('Engangsstønad');
     expect(tableColumns.at(2).childAt(0).text()).toEqual('Under behandling');
-    expect(tableColumns.last().childAt(0)).is.empty;
+    expect(tableColumns.last().childAt(0)).toBeUndefined;
   });
 
   it('skal sortere søkeresultat der avsluttede skal vises sist, mens sist endrede skal vises først', () => {
@@ -132,21 +132,21 @@ describe('<FagsakList>', () => {
     expect(tableColumnsRow1.first().childAt(0).text()).toEqual('23456');
     expect(tableColumnsRow1.at(1).childAt(0).text()).toEqual('Engangsstønad');
     expect(tableColumnsRow1.at(2).childAt(0).text()).toEqual('Under behandling');
-    expect(tableColumnsRow1.last().childAt(0)).is.empty;
+    expect(tableColumnsRow1.last().childAt(0)).toBeUndefined;
 
     const tableColumnsRow2 = tableRows.at(1).children();
     expect(tableColumnsRow2).toHaveLength(4);
     expect(tableColumnsRow2.first().childAt(0).text()).toEqual('12345');
     expect(tableColumnsRow2.at(1).childAt(0).text()).toEqual('Engangsstønad');
     expect(tableColumnsRow2.at(2).childAt(0).text()).toEqual('Under behandling');
-    expect(tableColumnsRow2.last().childAt(0)).is.empty;
+    expect(tableColumnsRow2.last().childAt(0)).toBeUndefined;
 
     const tableColumnsRow3 = tableRows.last().children();
     expect(tableColumnsRow3).toHaveLength(4);
     expect(tableColumnsRow3.first().childAt(0).text()).toEqual('34567');
     expect(tableColumnsRow3.at(1).childAt(0).text()).toEqual('Engangsstønad');
     expect(tableColumnsRow3.at(2).childAt(0).text()).toEqual('Avsluttet');
-    expect(tableColumnsRow3.last().childAt(0)).is.empty;
+    expect(tableColumnsRow3.last().childAt(0)).toBeUndefined;
   });
 
   it('skal vise DateLabel i tabell kun om barn er født', () => {

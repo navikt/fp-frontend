@@ -132,7 +132,9 @@ describe('<OppholdINorgePanel>', () => {
           tidligereOppholdUtenlands: [getPeriodDaysFromToday(-20, -15), getPeriodDaysFromToday(-14, -10)],
         });
 
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).toBeInstanceOf('object');
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).toEqual({
+          _error: 'Perioder kan ikke overlappe i tid',
+        });
         // eslint-disable-next-line no-underscore-dangle
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands._error).toEqual(dateRangesOverlappingMessage());
 
@@ -196,7 +198,7 @@ describe('<OppholdINorgePanel>', () => {
           fremtidigeOppholdUtenlands: [getPeriodDaysFromToday(15, 20), getPeriodDaysFromToday(10, 14)],
         });
 
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).toBeInstanceOf('object');
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).toEqual(undefined);
         // eslint-disable-next-line no-underscore-dangle
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands._error).toEqual(dateRangesOverlappingMessage());
 

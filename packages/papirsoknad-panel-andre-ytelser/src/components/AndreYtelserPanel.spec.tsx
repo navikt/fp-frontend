@@ -75,9 +75,10 @@ describe('<AndreYtelserPanel>', () => {
     };
 
     const errorsWithInvalidDates = AndreYtelserPanel.validate(values, andreYtelser);
-    expect(errorsWithInvalidDates).toBeInstanceOf('object');
-    expect(errorsWithInvalidDates.andreYtelser).toBeInstanceOf('object');
-    expect(errorsWithInvalidDates.andreYtelser.LONN_UTDANNING_PERIODER).toBeInstanceOf('array');
+    expect(errorsWithInvalidDates.andreYtelser.LONN_UTDANNING_PERIODER).toEqual([{
+      periodeFom: 'Dato må skrives slik : dd.mm.åååå',
+      periodeTom: 'Dato må skrives slik : dd.mm.åååå',
+    }]);
     expect(errorsWithInvalidDates.andreYtelser.ETTERLONN_ARBEIDSGIVER_PERIODER).toBeFalsy();
   });
 
@@ -94,7 +95,24 @@ describe('<AndreYtelserPanel>', () => {
     };
 
     const errorsWithInvalidDates = AndreYtelserPanel.transformValues(values, andreYtelser);
-    expect(errorsWithInvalidDates).toBeInstanceOf('array');
+    expect(errorsWithInvalidDates).toEqual([{
+      periodeFom: 'abc',
+      periodeTom: 'ads',
+      ytelseType: 'LONN_UTDANNING',
+    }, {
+      periodeFom: 'abc',
+      periodeTom: 'ads',
+      ytelseType: 'LONN_UTDANNING',
+    }, {
+      periodeFom: 'ssa',
+      periodeTom: 'fesfes',
+      ytelseType: 'ETTERLONN_ARBEIDSGIVER',
+    }, {
+      periodeFom: 'ssa',
+      periodeTom: 'fesfes',
+      ytelseType: 'VENTELONN',
+    }]);
+
     expect(errorsWithInvalidDates).toHaveLength(4);
   });
 });

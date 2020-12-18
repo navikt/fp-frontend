@@ -206,7 +206,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     const errorsWithValidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -10, -5),
       getPeriodDaysFromToday('FELLESPERIODE', -20, -15)]);
 
-    expect(errorsWithInvalidDates).toBeInstanceOf('array');
+    expect(errorsWithInvalidDates).toHaveLength(2);
     expect(errorsWithInvalidDates[0].periodeFom).toEqual(invalidDateMessage());
     expect(errorsWithInvalidDates[0].periodeTom).toEqual(invalidDateMessage());
     expect(errorsWithInvalidDates[1]).toBeFalsy();
@@ -220,7 +220,9 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     const errorsWithValidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -20, -15),
       getPeriodDaysFromToday('FELLESPERIODE', -14, -10)]);
 
-    expect(errorsWithInvalidDates).toBeInstanceOf('object');
+    expect(errorsWithInvalidDates).toEqual({
+      _error: 'Perioder kan ikke overlappe i tid',
+    });
     // eslint-disable-next-line no-underscore-dangle
     expect(errorsWithInvalidDates._error).toEqual(dateRangesOverlappingMessage());
 

@@ -29,7 +29,7 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithInvalidDecimal = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, invalidDecimal, -20, -15)]);
     const errorsWithValidNumber = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15)]);
 
-    expect(errorsWithInvalidDecimal).toBeInstanceOf('array');
+    expect(errorsWithInvalidDecimal).toHaveLength(1);
     expect(errorsWithInvalidDecimal[0].prosentandelArbeid).toEqual(invalidDecimalMessage(invalidDecimal));
     expect(errorsWithInvalidDecimal[1]).toBeFalsy();
 
@@ -42,7 +42,7 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithValidDates = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -10, -5),
       getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15)]);
 
-    expect(errorsWithInvalidDates).toBeInstanceOf('array');
+    expect(errorsWithInvalidDates).toHaveLength(2);
     expect(errorsWithInvalidDates[0].periodeFom).toEqual(invalidDateMessage());
     expect(errorsWithInvalidDates[0].periodeTom).toEqual(invalidDateMessage());
     expect(errorsWithInvalidDates[1]).toBeFalsy();
@@ -56,7 +56,9 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithValidDates = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15),
       getPeriodDaysFromToday(periodeForGradering, validDecimal, -14, -10)]);
 
-    expect(errorsWithInvalidDates).toBeInstanceOf('object');
+    expect(errorsWithInvalidDates).toEqual({
+      _error: 'Perioder kan ikke overlappe i tid',
+    });
     // eslint-disable-next-line no-underscore-dangle
     expect(errorsWithInvalidDates._error).toEqual(dateRangesOverlappingMessage());
 
