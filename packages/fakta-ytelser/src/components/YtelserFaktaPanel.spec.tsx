@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import YtelserFaktaPanel from './YtelserFaktaPanel';
@@ -39,7 +38,7 @@ describe('<YtelserFaktaPanel>', () => {
       relatertYtelseStatus={[]}
     />);
     const table = wrapper.find(PersonYtelserTable);
-    expect(table).to.have.length(1);
+    expect(table).toHaveLength(1);
   });
 
   it('skal vise tabell for søker og annen part', () => {
@@ -97,6 +96,6 @@ describe('<YtelserFaktaPanel>', () => {
       relatertYtelseStatus={[]}
     />);
     const table = wrapper.find(PersonYtelserTable);
-    expect(table).to.have.length(2);
+    expect(table).toHaveLength(2);
   });
 });

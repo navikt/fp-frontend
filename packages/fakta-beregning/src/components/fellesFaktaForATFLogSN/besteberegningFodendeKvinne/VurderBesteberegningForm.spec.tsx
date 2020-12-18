@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -11,12 +10,12 @@ const {
 describe('<VurderBesteberegning>', () => {
   it('skal ikkje validere om man ikkje har tilfelle', () => {
     const error = VurderBesteberegningForm.validate({}, [faktaOmBeregningTilfelle.VURDER_LONNSENDRING]);
-    expect(error).to.be.empty;
+    expect(Object.keys(error)).toHaveLength(0);
   });
 
   it('skal validere om ikkje vurdert', () => {
     const error = VurderBesteberegningForm.validate({}, [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING]);
-    expect(error[besteberegningField]).to.equal(isRequiredMessage());
+    expect(error[besteberegningField]).toBe(isRequiredMessage());
   });
 
   it('skal bygge initial values', () => {
@@ -26,7 +25,7 @@ describe('<VurderBesteberegning>', () => {
     };
     const initialValues = VurderBesteberegningForm.buildInitialValues([],
       vurderBesteberegning, [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING], false);
-    expect(initialValues[besteberegningField]).to.equal(false);
+    expect(initialValues[besteberegningField]).toBe(false);
   });
 
   it('skal bygge initial values med overstyrt aksjonspunkt', () => {
@@ -36,7 +35,7 @@ describe('<VurderBesteberegning>', () => {
     };
     const initialValues = VurderBesteberegningForm.buildInitialValues([{ definisjon: { kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG } }],
       vurderBesteberegning, [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING], false);
-    expect(initialValues[besteberegningField]).to.equal(false);
+    expect(initialValues[besteberegningField]).toBe(false);
   });
 
   it('skal bygge initial values om det er overstyrt', () => {
@@ -46,14 +45,14 @@ describe('<VurderBesteberegning>', () => {
     };
     const initialValues = VurderBesteberegningForm.buildInitialValues([], vurderBesteberegning,
       [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING], true);
-    expect(initialValues[besteberegningField]).to.equal(false);
+    expect(initialValues[besteberegningField]).toBe(false);
   });
 
   it('skal transform values', () => {
     const values = {};
     values[besteberegningField] = false;
     const transformed = VurderBesteberegningForm.transformValues(values, { vurderBesteberegning: {}, andelerForFaktaOmBeregning: [] }, []);
-    expect(transformed.besteberegningAndeler.besteberegningAndelListe.length).to.equal(0);
+    expect(transformed.besteberegningAndeler.besteberegningAndelListe.length).toBe(0);
   });
 
   it('skal transform values om besteberegning', () => {
@@ -66,11 +65,11 @@ describe('<VurderBesteberegning>', () => {
       },
     ];
     const transformed = VurderBesteberegningForm.transformValues(values, { vurderBesteberegning: {}, andelerForFaktaOmBeregning: [] }, inntektPrMnd);
-    expect(transformed.besteberegningAndeler.besteberegningAndelListe.length).to.equal(1);
-    expect(transformed.besteberegningAndeler.besteberegningAndelListe[0].andelsnr).to.equal(1);
-    expect(transformed.besteberegningAndeler.besteberegningAndelListe[0].fastsatteVerdier.fastsattBeløp).to.equal(10000);
-    expect(transformed.besteberegningAndeler.besteberegningAndelListe[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(transformed.besteberegningAndeler.nyDagpengeAndel.fastsatteVerdier.inntektskategori).to.equal('DAGPENGER');
-    expect(transformed.besteberegningAndeler.nyDagpengeAndel.fastsatteVerdier.fastsattBeløp).to.equal(20000);
+    expect(transformed.besteberegningAndeler.besteberegningAndelListe.length).toBe(1);
+    expect(transformed.besteberegningAndeler.besteberegningAndelListe[0].andelsnr).toBe(1);
+    expect(transformed.besteberegningAndeler.besteberegningAndelListe[0].fastsatteVerdier.fastsattBeløp).toBe(10000);
+    expect(transformed.besteberegningAndeler.besteberegningAndelListe[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(transformed.besteberegningAndeler.nyDagpengeAndel.fastsatteVerdier.inntektskategori).toBe('DAGPENGER');
+    expect(transformed.besteberegningAndeler.nyDagpengeAndel.fastsatteVerdier.fastsattBeløp).toBe(20000);
   });
 });

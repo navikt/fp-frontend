@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
@@ -92,7 +91,7 @@ describe('<BostedsokerView>', () => {
       sokerTypeText="Søker"
     />);
 
-    expect(wrapper.find('Element').childAt(0).text()).to.eql('Espen Utvikler');
+    expect(wrapper.find('Element').childAt(0).text()).toEqual('Espen Utvikler');
   });
 
   it('skal vise  adresse informasjon', () => {
@@ -105,9 +104,9 @@ describe('<BostedsokerView>', () => {
       sokerTypeText="Søker"
     />);
     const adr = wrapper.find(Normaltekst);
-    expect(adr).to.have.length(2);
-    expect(adr.first().childAt(0).text()).to.eql('Vei 1, 1000 Oslo');
-    expect(adr.last().childAt(0).text()).to.eql('-');
+    expect(adr).toHaveLength(2);
+    expect(adr.first().childAt(0).text()).toEqual('Vei 1, 1000 Oslo');
+    expect(adr.last().childAt(0).text()).toEqual('-');
   });
 
   it('skal vise etiketter', () => {
@@ -121,15 +120,15 @@ describe('<BostedsokerView>', () => {
     />);
 
     const tooltips = wrapper.find(Tooltip);
-    expect(tooltips).to.have.length(3);
+    expect(tooltips).toHaveLength(3);
     const etikettfokus = wrapper.find(EtikettBase);
-    expect(etikettfokus).to.have.length(3);
-    expect(tooltips.at(0).prop('content')).to.equal('Personstatus');
-    expect(etikettfokus.at(0).childAt(0).text()).to.equal('Bosatt');
-    expect(tooltips.at(1).prop('content')).to.equal('Sivilstand');
-    expect(etikettfokus.at(1).childAt(0).text()).to.equal('Ugift');
-    expect(tooltips.at(2).prop('content')).to.equal('Region');
-    expect(etikettfokus.at(2).childAt(0).text()).to.equal('Norden');
+    expect(etikettfokus).toHaveLength(3);
+    expect(tooltips.at(0).prop('content')).toBe('Personstatus');
+    expect(etikettfokus.at(0).childAt(0).text()).toBe('Bosatt');
+    expect(tooltips.at(1).prop('content')).toBe('Sivilstand');
+    expect(etikettfokus.at(1).childAt(0).text()).toBe('Ugift');
+    expect(tooltips.at(2).prop('content')).toBe('Region');
+    expect(etikettfokus.at(2).childAt(0).text()).toBe('Norden');
   });
 
   it('skal vise ukjent når personstatus ukjent', () => {
@@ -149,14 +148,14 @@ describe('<BostedsokerView>', () => {
     />);
 
     const tooltips = wrapper.find(Tooltip);
-    expect(tooltips).to.have.length(3);
+    expect(tooltips).toHaveLength(3);
     const etikettfokus = wrapper.find(EtikettBase);
-    expect(etikettfokus).to.have.length(3);
-    expect(tooltips.at(0).prop('content')).to.equal('Personstatus');
-    expect(etikettfokus.at(0).childAt(0).text()).to.equal('Ukjent');
-    expect(tooltips.at(1).prop('content')).to.equal('Sivilstand');
-    expect(etikettfokus.at(1).childAt(0).text()).to.equal('Ugift');
-    expect(tooltips.at(2).prop('content')).to.equal('Region');
-    expect(etikettfokus.at(2).childAt(0).text()).to.equal('Norden');
+    expect(etikettfokus).toHaveLength(3);
+    expect(tooltips.at(0).prop('content')).toBe('Personstatus');
+    expect(etikettfokus.at(0).childAt(0).text()).toBe('Ukjent');
+    expect(tooltips.at(1).prop('content')).toBe('Sivilstand');
+    expect(etikettfokus.at(1).childAt(0).text()).toBe('Ugift');
+    expect(tooltips.at(2).prop('content')).toBe('Region');
+    expect(etikettfokus.at(2).childAt(0).text()).toBe('Norden');
   });
 });

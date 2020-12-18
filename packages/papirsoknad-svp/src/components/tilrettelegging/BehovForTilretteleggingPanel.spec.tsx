@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-svp';
 import { BehovForTilretteleggingPanelImpl } from './BehovForTilretteleggingPanel';
@@ -15,9 +14,9 @@ describe('<BehovForTilretteleggingPanel>', () => {
       namePrefix=""
     />);
 
-    expect(wrapper.find('[name="behovsdatoSN"]')).has.length(1);
-    expect(wrapper.find('[name="behovsdatoFrilans"]')).has.length(0);
-    expect(wrapper.find('[name="tilretteleggingForArbeidsgiver"]')).has.length(0);
+    expect(wrapper.find('[name="behovsdatoSN"]')).toHaveLength(1);
+    expect(wrapper.find('[name="behovsdatoFrilans"]')).toHaveLength(0);
+    expect(wrapper.find('[name="tilretteleggingForArbeidsgiver"]')).toHaveLength(0);
   });
 
   it('skal vise felt for kun frilans når dette er valgt i radioknapp', () => {
@@ -30,9 +29,9 @@ describe('<BehovForTilretteleggingPanel>', () => {
       namePrefix=""
     />);
 
-    expect(wrapper.find('[name="behovsdatoSN"]')).has.length(0);
-    expect(wrapper.find('[name="behovsdatoFrilans"]')).has.length(1);
-    expect(wrapper.find('[name="tilretteleggingForArbeidsgiver"]')).has.length(0);
+    expect(wrapper.find('[name="behovsdatoSN"]')).toHaveLength(0);
+    expect(wrapper.find('[name="behovsdatoFrilans"]')).toHaveLength(1);
+    expect(wrapper.find('[name="tilretteleggingForArbeidsgiver"]')).toHaveLength(0);
   });
 
   it('skal vise felt for kun arbeidsgiver når dette er valgt i radioknapp', () => {
@@ -45,8 +44,8 @@ describe('<BehovForTilretteleggingPanel>', () => {
       namePrefix=""
     />);
 
-    expect(wrapper.find('[name="behovsdatoSN"]')).has.length(0);
-    expect(wrapper.find('[name="behovsdatoFrilans"]')).has.length(0);
-    expect(wrapper.find('[name="tilretteleggingForArbeidsgiver"]')).has.length(1);
+    expect(wrapper.find('[name="behovsdatoSN"]')).toHaveLength(0);
+    expect(wrapper.find('[name="behovsdatoFrilans"]')).toHaveLength(0);
+    expect(wrapper.find('[name="tilretteleggingForArbeidsgiver"]')).toHaveLength(1);
   });
 });

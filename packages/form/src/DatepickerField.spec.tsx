@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { reducer as formReducer, reduxForm } from 'redux-form';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { messages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import DatepickerField from './DatepickerField';
@@ -25,7 +24,7 @@ describe('<DatepickerField>', () => {
     const wrapper = mountFieldInForm(<DatepickerField name="testDato" />, { testDato: '2017-02-01' });
 
     const input = wrapper.find('Input');
-    expect(input).to.have.length(1);
-    expect(input.props().value).to.eql('01.02.2017');
+    expect(input).toHaveLength(1);
+    expect(input.props().value).toEqual('01.02.2017');
   });
 });

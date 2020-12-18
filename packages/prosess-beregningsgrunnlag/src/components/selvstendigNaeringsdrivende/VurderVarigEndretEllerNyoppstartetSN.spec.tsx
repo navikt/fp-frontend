@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -52,7 +51,7 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
     />);
 
     const rows = wrapper.find('Row');
-    expect(rows.length).to.equal(2);
+    expect(rows.length).toBe(2);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når tidligere vurdert ingen varig endring', () => {
@@ -66,7 +65,7 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
       [begrunnelseFieldname]: 'Ok.',
       [fastsettInntektFieldname]: undefined,
     };
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når tidligere vurdert til ingen varig endring med fastsatt belop', () => {
@@ -81,7 +80,7 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
       [begrunnelseFieldname]: 'Ok.',
     };
 
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere vurdert', () => {
@@ -96,6 +95,6 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
       [begrunnelseFieldname]: '',
     };
 
-    expect(actualValues).to.deep.equal(expectedValues);
+    expect(actualValues).toEqual(expectedValues);
   });
 });

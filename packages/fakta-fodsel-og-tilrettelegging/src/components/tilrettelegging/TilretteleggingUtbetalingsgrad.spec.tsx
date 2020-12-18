@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { DecimalField } from '@fpsak-frontend/form';
 import { Image } from '@fpsak-frontend/shared-components';
@@ -25,11 +24,11 @@ describe('<TilretteleggingUtbetalingsgrad>', () => {
       formName="test"
     />);
 
-    expect(wrapper.find(DecimalField).prop('readOnly')).is.true;
+    expect(wrapper.find(DecimalField).prop('readOnly')).toBe(true);
 
     const image = wrapper.find(Image);
     image.prop('onClick')({} as React.MouseEvent);
 
-    expect(wrapper.find(DecimalField).prop('readOnly')).is.false;
+    expect(wrapper.find(DecimalField).prop('readOnly')).toBe(false);
   });
 });

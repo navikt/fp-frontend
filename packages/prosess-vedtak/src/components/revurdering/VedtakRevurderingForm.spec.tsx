@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -99,9 +98,9 @@ describe('<VedtakRevurderingForm>', () => {
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
-    expect(fellesPanel).to.have.length(1);
+    expect(fellesPanel).toHaveLength(1);
     const avslattPanel = fellesPanel.renderProp('renderPanel')(false, false, true, false).find(VedtakAvslagArsakOgBegrunnelsePanel);
-    expect(avslattPanel).to.have.length(1);
+    expect(avslattPanel).toHaveLength(1);
   });
 
   it('Revurdering, skal vise resultat ved endret belop, hovedknappen for totrinnskontroll og link for å forhåndsvise brev', () => {
@@ -149,9 +148,9 @@ describe('<VedtakRevurderingForm>', () => {
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
-    expect(fellesPanel).to.have.length(1);
+    expect(fellesPanel).toHaveLength(1);
     const avslattPanel = fellesPanel.renderProp('renderPanel')(false, true, false, false).find(VedtakInnvilgetRevurderingPanel);
-    expect(avslattPanel).to.have.length(1);
+    expect(avslattPanel).toHaveLength(1);
   });
 
   it('skal vise opphørspanel når behandlingsresultat er opphør', () => {
@@ -177,8 +176,8 @@ describe('<VedtakRevurderingForm>', () => {
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
-    expect(fellesPanel).to.have.length(1);
+    expect(fellesPanel).toHaveLength(1);
     const opphorPanel = fellesPanel.renderProp('renderPanel')(false, false, false, true).find(VedtakOpphorRevurderingPanel);
-    expect(opphorPanel).to.have.length(1);
+    expect(opphorPanel).toHaveLength(1);
   });
 });

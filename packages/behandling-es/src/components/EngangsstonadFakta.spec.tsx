@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
@@ -101,7 +100,7 @@ describe('<EngangsstonadFakta>', () => {
     );
 
     const panel = wrapper.find(SideMenuWrapper);
-    expect(panel.prop('paneler')).is.eql([{
+    expect(panel.prop('paneler')).toEqual([{
       erAktiv: false,
       harAksjonspunkt: false,
       tekst: 'Saken',
@@ -138,11 +137,11 @@ describe('<EngangsstonadFakta>', () => {
     panel.prop('onClick')(0);
 
     const calls = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(2);
-    expect(args[0]).to.eql('default');
-    expect(args[1]).to.eql('saken');
+    expect(args).toHaveLength(2);
+    expect(args[0]).toEqual('default');
+    expect(args[1]).toEqual('saken');
   });
 
   it('skal rendre faktapanel korrekt', () => {
@@ -166,8 +165,8 @@ describe('<EngangsstonadFakta>', () => {
     );
 
     const arbeidsforholdPanel = wrapper.find(ArbeidsforholdFaktaIndex);
-    expect(arbeidsforholdPanel.prop('readOnly')).is.false;
-    expect(arbeidsforholdPanel.prop('submittable')).is.true;
-    expect(arbeidsforholdPanel.prop('harApneAksjonspunkter')).is.true;
+    expect(arbeidsforholdPanel.prop('readOnly')).toBe(false);
+    expect(arbeidsforholdPanel.prop('submittable')).toBe(true);
+    expect(arbeidsforholdPanel.prop('harApneAksjonspunkter')).toBe(true);
   });
 });

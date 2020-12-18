@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -25,7 +24,7 @@ describe('<SvangerskapspengerForm>', () => {
       validate={sinon.spy()}
       valuesForRegisteredFieldsOnly={{}}
     />);
-    expect(wrapper.find(MottattDatoPapirsoknadIndex)).has.length(1);
+    expect(wrapper.find(MottattDatoPapirsoknadIndex)).toHaveLength(1);
   });
 
   it('skal transformere tilretteleggingsdata for arbeidsgiver før lagring', () => {
@@ -61,7 +60,7 @@ describe('<SvangerskapspengerForm>', () => {
       },
     };
 
-    expect(transformValues(values)).is.eql({
+    expect(transformValues(values)).toEqual({
       foedselsDato: ['2019-09-18'],
       tilretteleggingArbeidsforhold: [{
         '@type': 'VI',
@@ -109,7 +108,7 @@ describe('<SvangerskapspengerForm>', () => {
       },
     };
 
-    expect(transformValues(values)).is.eql({
+    expect(transformValues(values)).toEqual({
       foedselsDato: ['2019-09-18'],
       tilretteleggingArbeidsforhold: [{
         '@type': 'FR',
@@ -147,7 +146,7 @@ describe('<SvangerskapspengerForm>', () => {
       },
     };
 
-    expect(transformValues(values)).is.eql({
+    expect(transformValues(values)).toEqual({
       foedselsDato: ['2019-09-18'],
       tilretteleggingArbeidsforhold: [{
         '@type': 'SN',

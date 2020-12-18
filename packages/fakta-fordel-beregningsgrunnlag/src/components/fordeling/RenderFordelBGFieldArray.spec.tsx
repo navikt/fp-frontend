@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
@@ -73,12 +72,12 @@ describe('<RenderFordelBGFieldArray>', () => {
     />);
 
     const selectFields = wrapper.find(SelectField);
-    expect(selectFields).has.length(2);
+    expect(selectFields).toHaveLength(2);
     const selectValuesArbeidsforhold = selectFields.first().prop('selectValues');
-    expect(selectValuesArbeidsforhold).has.length(2);
-    expect(selectValuesArbeidsforhold[0].props.value).to.equal(arbeidstakerAndelsnr.toString());
-    expect(selectValuesArbeidsforhold[0].props.children).to.equal(forventetArbeidstakerString);
-    expect(selectValuesArbeidsforhold[1].props.value).to.equal(beregningsgrunnlagAndeltyper.BRUKERS_ANDEL);
+    expect(selectValuesArbeidsforhold).toHaveLength(2);
+    expect(selectValuesArbeidsforhold[0].props.value).toBe(arbeidstakerAndelsnr.toString());
+    expect(selectValuesArbeidsforhold[0].props.children).toBe(forventetArbeidstakerString);
+    expect(selectValuesArbeidsforhold[1].props.value).toBe(beregningsgrunnlagAndeltyper.BRUKERS_ANDEL);
   });
 
   it('skal ikkje selectvalues med Ytelse når ikkje kun ytelse', () => {
@@ -98,11 +97,11 @@ describe('<RenderFordelBGFieldArray>', () => {
     />);
 
     const selectFields = wrapper.find(SelectField);
-    expect(selectFields).has.length(2);
+    expect(selectFields).toHaveLength(2);
     const selectValuesArbeidsforhold = selectFields.first().prop('selectValues');
-    expect(selectValuesArbeidsforhold).has.length(1);
-    expect(selectValuesArbeidsforhold[0].props.value).to.equal(arbeidstakerAndelsnr.toString());
-    expect(selectValuesArbeidsforhold[0].props.children).to.equal(forventetArbeidstakerString);
+    expect(selectValuesArbeidsforhold).toHaveLength(1);
+    expect(selectValuesArbeidsforhold[0].props.value).toBe(arbeidstakerAndelsnr.toString());
+    expect(selectValuesArbeidsforhold[0].props.children).toBe(forventetArbeidstakerString);
   });
 
   it('skal ikkje vise rapportert inntekt om minst en andel som tilkommer før stp ikkje har register opplysning tilgjengelig', () => {
@@ -145,7 +144,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
     const rows = wrapper.find(TableRow);
     const elements = rows.find(Element);
-    expect(elements.first().props().children).to.equal('');
+    expect(elements.first().props().children).toBe('');
   });
 
   it('skal vise beregningsgrunnlagPrAar', () => {
@@ -188,7 +187,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
     const rows = wrapper.find(TableRow);
     const elements = rows.find(Element);
-    expect(elements.first().props().children).to.equal('30 000');
+    expect(elements.first().props().children).toBe('30 000');
   });
 
   it('skal vise sum av beregningsgrunnlagPrAar', () => {
@@ -245,7 +244,7 @@ describe('<RenderFordelBGFieldArray>', () => {
 
     const rows = wrapper.find(TableRow);
     const elements = rows.find(Element);
-    expect(elements.first().props().children).to.equal('30 000');
+    expect(elements.first().props().children).toBe('30 000');
   });
 
   it('skal validere eksisterende andeler uten errors', () => {
@@ -264,7 +263,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors).to.equal(null);
+    expect(errors).toBe(null);
   });
 
   it('skal returnerer ingen errors for ingen refusjonskrav når skalKunneEndreRefusjon er false', () => {
@@ -283,7 +282,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors).to.equal(null);
+    expect(errors).toBe(null);
   });
 
   it('skal returnerer errors for ingen refusjonskrav når skalKunneEndreRefusjon er true', () => {
@@ -302,7 +301,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors[0].refusjonskrav).to.equal(isRequiredMessage());
+    expect(errors[0].refusjonskrav).toBe(isRequiredMessage());
   });
 
   const arbeidsgiverInfo = {
@@ -333,8 +332,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, true);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
-    expect(errors._error.props.id).to.equal(expected[0].id);
-    expect(errors._error.props.values.arbeidsgiver).to.equal(arbeidsgiverstring);
+    expect(errors._error.props.id).toBe(expected[0].id);
+    expect(errors._error.props.values.arbeidsgiver).toBe(arbeidsgiverstring);
   });
 
   it('skal returnerer errors for refusjonskrav når refusjonskrav er 0 i inntektsmelding', () => {
@@ -356,8 +355,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, true);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
-    expect(errors._error.props.id).to.equal(expected[0].id);
-    expect(errors._error.props.values.arbeidsgiver).to.equal(arbeidsgiverstring);
+    expect(errors._error.props.id).toBe(expected[0].id);
+    expect(errors._error.props.values.arbeidsgiver).toBe(arbeidsgiverstring);
   });
 
   it('skal returnerer errors for fastsattbeløp når ikkje oppgitt', () => {
@@ -377,7 +376,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors[0].fastsattBelop).to.equal(isRequiredMessage());
+    expect(errors[0].fastsattBelop).toBe(isRequiredMessage());
   });
 
   it('skal gi error om inntektkategori ikkje er oppgitt', () => {
@@ -396,7 +395,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors[0].inntektskategori).to.equal(isRequiredMessage());
+    expect(errors[0].inntektskategori).toBe(isRequiredMessage());
   });
 
   it('skal gi error om andel ikkje er valgt for nye andeler', () => {
@@ -416,7 +415,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors[0].andel).to.equal(isRequiredMessage());
+    expect(errors[0].andel).toBe(isRequiredMessage());
   });
 
   it('skal ikkje gi error for perioder som ikkje krever manuell behandling', () => {
@@ -436,45 +435,45 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
-    expect(errors).to.equal(null);
+    expect(errors).toBe(null);
   });
 
   it('lagBelopKolonne skal gi readOnly beløp om andel ikke skal redigere inntekt og det er ikkje er readOnly', () => {
     const belopKolonne = lagBelopKolonne('test', false, true, false);
-    expect(belopKolonne.props.className).to.equal(undefined);
-    expect(belopKolonne.props.children.props.name).to.equal('test.readOnlyBelop');
-    expect(belopKolonne.props.children.props.isEdited).to.equal(false);
+    expect(belopKolonne.props.className).toBeUndefined();
+    expect(belopKolonne.props.children.props.name).toBe('test.readOnlyBelop');
+    expect(belopKolonne.props.children.props.isEdited).toBe(false);
   });
 
   it('lagBelopKolonne skal ikkje gi readOnly beløp om andel ikke skal redigere inntekt og det er readOnly', () => {
     const belopKolonne = lagBelopKolonne('test', true, true, false);
-    expect(belopKolonne.props.className).to.equal('rightAlignInput');
-    expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
-    expect(belopKolonne.props.children.props.isEdited).to.equal(false);
-    expect(belopKolonne.props.children.props.readOnly).to.equal(true);
+    expect(belopKolonne.props.className).toBe('rightAlignInput');
+    expect(belopKolonne.props.children.props.name).toBe('test.fastsattBelop');
+    expect(belopKolonne.props.children.props.isEdited).toBe(false);
+    expect(belopKolonne.props.children.props.readOnly).toBe(true);
   });
 
   it('lagBelopKolonne skal ikkje gi readOnly beløp om andel skal redigere inntekt i uten readOnly', () => {
     const belopKolonne = lagBelopKolonne('test', false, false, false);
-    expect(belopKolonne.props.className).to.equal('rightAlignInput');
-    expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
-    expect(belopKolonne.props.children.props.isEdited).to.equal(false);
-    expect(belopKolonne.props.children.props.readOnly).to.equal(false);
+    expect(belopKolonne.props.className).toBe('rightAlignInput');
+    expect(belopKolonne.props.children.props.name).toBe('test.fastsattBelop');
+    expect(belopKolonne.props.children.props.isEdited).toBe(false);
+    expect(belopKolonne.props.children.props.readOnly).toBe(false);
   });
 
   it('lagBelopKolonne skal gi fastsattBeløp med isEdited true om andel skal redigere inntekt i readOnly med aksjonspunkt lukket', () => {
     const belopKolonne = lagBelopKolonne('test', true, false, true);
-    expect(belopKolonne.props.className).to.equal('rightAlignInput');
-    expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
-    expect(belopKolonne.props.children.props.isEdited).to.equal(true);
-    expect(belopKolonne.props.children.props.readOnly).to.equal(true);
+    expect(belopKolonne.props.className).toBe('rightAlignInput');
+    expect(belopKolonne.props.children.props.name).toBe('test.fastsattBelop');
+    expect(belopKolonne.props.children.props.isEdited).toBe(true);
+    expect(belopKolonne.props.children.props.readOnly).toBe(true);
   });
 
   it('lagBelopKolonne skal gi fastsattBeløp versjon med isEdited false om andel ikkje skal redigere inntekt i readOnly med aksjonspunkt lukket', () => {
     const belopKolonne = lagBelopKolonne('test', true, true, true);
-    expect(belopKolonne.props.className).to.equal('rightAlignInput');
-    expect(belopKolonne.props.children.props.name).to.equal('test.fastsattBelop');
-    expect(belopKolonne.props.children.props.isEdited).to.equal(false);
-    expect(belopKolonne.props.children.props.readOnly).to.equal(true);
+    expect(belopKolonne.props.className).toBe('rightAlignInput');
+    expect(belopKolonne.props.children.props.name).toBe('test.fastsattBelop');
+    expect(belopKolonne.props.children.props.isEdited).toBe(false);
+    expect(belopKolonne.props.children.props.readOnly).toBe(true);
   });
 });

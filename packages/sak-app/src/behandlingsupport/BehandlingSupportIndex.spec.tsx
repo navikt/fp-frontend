@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -68,7 +67,7 @@ describe('<BehandlingSupportIndex>', () => {
       behandlingVersjon={2}
     />);
 
-    expect(wrapper.find(SupportMenySakIndex)).to.have.length(1);
+    expect(wrapper.find(SupportMenySakIndex)).toHaveLength(1);
   });
 
   describe('hentSynligePaneler', () => {
@@ -87,7 +86,7 @@ describe('<BehandlingSupportIndex>', () => {
 
       const accessiblePanels = hentSynligePaneler(behandlingRettigheter);
 
-      expect(accessiblePanels).is.eql([
+      expect(accessiblePanels).toEqual([
         'TIL_BESLUTTER',
         'FRA_BESLUTTER',
         'HISTORIKK',
@@ -111,7 +110,7 @@ describe('<BehandlingSupportIndex>', () => {
 
       const accessiblePanels = hentSynligePaneler(behandlingRettigheter);
 
-      expect(accessiblePanels).is.eql([
+      expect(accessiblePanels).toEqual([
         'HISTORIKK',
         'MELDINGER',
         'DOKUMENTER',
@@ -144,7 +143,7 @@ describe('<BehandlingSupportIndex>', () => {
 
       const enabledPanels = hentValgbarePaneler(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
 
-      expect(enabledPanels).is.eql([
+      expect(enabledPanels).toEqual([
         'TIL_BESLUTTER',
         'FRA_BESLUTTER',
         'HISTORIKK',
@@ -176,7 +175,7 @@ describe('<BehandlingSupportIndex>', () => {
 
       const enabledPanels = hentValgbarePaneler(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
 
-      expect(enabledPanels).is.eql([
+      expect(enabledPanels).toEqual([
         'TIL_BESLUTTER',
         'FRA_BESLUTTER',
         'HISTORIKK',

@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -17,15 +16,15 @@ describe('<HenlagtBehandlingModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('Behandlingen er henlagt');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('contentLabel')).toEqual('Behandlingen er henlagt');
 
     const okKnapp = modal.find('Hovedknapp');
-    expect(okKnapp).to.have.length(1);
-    expect(okKnapp.prop('mini')).is.true;
-    expect(okKnapp.childAt(0).text()).is.eql('OK');
+    expect(okKnapp).toHaveLength(1);
+    expect(okKnapp.prop('mini')).toBe(true);
+    expect(okKnapp.childAt(0).text()).toEqual('OK');
   });
 
   it('skal rendre lukket modal', () => {
@@ -36,7 +35,7 @@ describe('<HenlagtBehandlingModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.false;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(false);
   });
 });

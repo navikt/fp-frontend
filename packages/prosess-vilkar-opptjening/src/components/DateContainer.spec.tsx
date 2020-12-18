@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import DateContainer from './DateContainer';
@@ -12,7 +11,7 @@ describe('<DateContainer>', () => {
     />);
     const Column = wrapper.find('Column').first();
     const Column2 = wrapper.find('Column').at(2);
-    expect(Column.childAt(0).text()).to.eql('2017-10-02');
-    expect(Column2.childAt(0).text()).to.eql('2018-02-02');
+    expect(Column.childAt(0).text()).toEqual('2017-10-02');
+    expect(Column2.childAt(0).text()).toEqual('2018-02-02');
   });
 });

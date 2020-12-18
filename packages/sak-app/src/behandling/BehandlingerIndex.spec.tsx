@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
@@ -25,7 +24,7 @@ describe('BehandlingerIndex', () => {
     />);
 
     const noBehandling = wrapper.find(NoSelectedBehandling);
-    expect(noBehandling).to.have.length(1);
-    expect(noBehandling.prop('numBehandlinger')).to.eql(1);
+    expect(noBehandling).toHaveLength(1);
+    expect(noBehandling.prop('numBehandlinger')).toEqual(1);
   });
 });

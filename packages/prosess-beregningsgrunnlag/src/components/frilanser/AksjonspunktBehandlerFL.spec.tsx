@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import AksjonspunktBehandlerFL from './AksjonspunktBehandlerFL';
@@ -11,9 +10,9 @@ describe('<AksjonspunktBehandlerFL>', () => {
     />);
     const rows = wrapper.find('Row');
     const lblTekst = rows.first().find('FormattedMessage');
-    expect(lblTekst.props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandlerFL');
+    expect(lblTekst.props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandlerFL');
     const inputField = rows.first().find('InputField');
-    expect(inputField).to.have.length(1);
-    expect(inputField.props().readOnly).to.equal(false);
+    expect(inputField).toHaveLength(1);
+    expect(inputField.props().readOnly).toBe(false);
   });
 });

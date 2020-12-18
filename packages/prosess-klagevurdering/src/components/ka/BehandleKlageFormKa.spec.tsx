@@ -1,6 +1,5 @@
 import React from 'react';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
@@ -41,7 +40,7 @@ describe('<BehandleKlageFormKaImpl>', () => {
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
-    expect(wrapper.find('PreviewKlageLink')).to.have.length(1);
+    expect(wrapper.find('PreviewKlageLink')).toHaveLength(1);
   });
   const formValues2 = {
     fritekstTilBrev: '123',
@@ -64,7 +63,7 @@ describe('<BehandleKlageFormKaImpl>', () => {
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
-    expect(wrapper.find(PreviewKlageLink)).to.have.length(0);
+    expect(wrapper.find(PreviewKlageLink)).toHaveLength(0);
   });
 
   it('skal ikke vise lenke til forhåndsvis brev når fritekst ikke fylt, og klagevurdering valgt', () => {
@@ -91,6 +90,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
-    expect(wrapper.find(PreviewKlageLink)).to.have.length(0);
+    expect(wrapper.find(PreviewKlageLink)).toHaveLength(0);
   });
 });

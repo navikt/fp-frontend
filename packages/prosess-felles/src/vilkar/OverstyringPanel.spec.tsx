@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
@@ -25,9 +24,9 @@ describe('<OverstyringPanel>', () => {
       </OverstyringPanel>,
     );
 
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
-    expect(wrapper.find(Knapp)).to.have.length(1);
-    expect(wrapper.find(Hovedknapp)).to.have.length(1);
-    expect(wrapper.find(EditedIcon)).to.have.length(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
+    expect(wrapper.find(Knapp)).toHaveLength(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
+    expect(wrapper.find(EditedIcon)).toHaveLength(0);
   });
 });

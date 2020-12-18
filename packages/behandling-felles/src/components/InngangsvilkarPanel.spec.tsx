@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
@@ -100,17 +99,17 @@ describe('<InngangsvilkarPanel>', () => {
     );
 
     const helpText = wrapper.find(AksjonspunktHelpTextHTML);
-    expect(helpText).to.have.length(1);
+    expect(helpText).toHaveLength(1);
     const text = wrapper.find(FormattedMessage);
-    expect(text).to.have.length(1);
-    expect(text.prop('id')).to.eql(['FODSEL.TEKST']);
+    expect(text).toHaveLength(1);
+    expect(text.prop('id')).toEqual(['FODSEL.TEKST']);
 
     const columns = wrapper.find(Column);
-    expect(columns).to.have.length(2);
+    expect(columns).toHaveLength(2);
     const column1children = columns.first().children();
-    expect(column1children).to.have.length(2);
+    expect(column1children).toHaveLength(2);
     const column2children = columns.last().children();
-    expect(column2children).to.have.length(1);
+    expect(column2children).toHaveLength(1);
   });
 
   it('skal vise aksjonspunkt-hjelpetekst med lenke for avventing av fakta-aksjonspunkt', () => {
@@ -140,19 +139,19 @@ describe('<InngangsvilkarPanel>', () => {
     );
 
     const helpText = wrapper.find(AksjonspunktHelpTextHTML);
-    expect(helpText).to.have.length(1);
+    expect(helpText).toHaveLength(1);
     const text = wrapper.find(FormattedMessage);
-    expect(text).to.have.length(2);
-    expect(text.first().prop('id')).to.eql('InngangsvilkarPanel.AvventerAvklaringAv');
-    expect(text.last().prop('id')).to.eql('FAKTA_APENT');
+    expect(text).toHaveLength(2);
+    expect(text.first().prop('id')).toEqual('InngangsvilkarPanel.AvventerAvklaringAv');
+    expect(text.last().prop('id')).toEqual('FAKTA_APENT');
 
     const lenke = wrapper.find('a');
     lenke.simulate('click', { preventDefault: () => undefined });
 
     const oppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(oppdaterKall).to.have.length(1);
-    expect(oppdaterKall[0].args).to.have.length(2);
-    expect(oppdaterKall[0].args[0]).is.undefined;
-    expect(oppdaterKall[0].args[1]).to.eql('MEDLEMSKAP');
+    expect(oppdaterKall).toHaveLength(1);
+    expect(oppdaterKall[0].args).toHaveLength(2);
+    expect(oppdaterKall[0].args[0]).toBeUndefined();
+    expect(oppdaterKall[0].args[1]).toEqual('MEDLEMSKAP');
   });
 });

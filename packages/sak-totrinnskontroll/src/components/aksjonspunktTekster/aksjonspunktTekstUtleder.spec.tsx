@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -37,7 +35,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5005', () => {
     const aksjonspunkt = {
@@ -47,7 +45,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5006', () => {
     const aksjonspunkt = {
@@ -57,7 +55,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6004', () => {
     const aksjonspunkt = {
@@ -67,7 +65,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5008', () => {
@@ -78,7 +76,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5011', () => {
     const aksjonspunkt = {
@@ -88,7 +86,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 7002', () => {
@@ -99,7 +97,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5001', () => {
     const aksjonspunkt = {
@@ -109,7 +107,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Fødsel.KontrollerOpplysningerTermin');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.KontrollerOpplysningerTermin');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5027', () => {
     const aksjonspunkt = {
@@ -119,7 +117,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
     const aksjonspunkt = {
@@ -129,7 +127,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Fødsel.VilkarOverstyrt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5014', () => {
@@ -140,7 +138,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5013 engangsstønad', () => {
     const aksjonspunkt = {
@@ -150,7 +148,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(false, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5013 foreldrepenger', () => {
     const aksjonspunkt = {
@@ -160,7 +158,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5031', () => {
     const aksjonspunkt = {
@@ -170,7 +168,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5038', () => {
@@ -181,7 +179,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Beregning.InntektFastsatt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5042', () => {
     const aksjonspunkt = {
@@ -191,7 +189,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Beregning.InntektFastsatt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6007', () => {
     const aksjonspunkt = {
@@ -201,7 +199,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Beregning.VilkarOverstyrt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VilkarOverstyrt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
     const aksjonspunkt = {
@@ -211,7 +209,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Beregning.InntektFastsatt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5007', () => {
@@ -222,7 +220,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5043', () => {
     const aksjonspunkt = {
@@ -232,7 +230,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
     const aksjonspunkt = {
@@ -242,7 +240,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5045', () => {
@@ -253,7 +251,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Medlemskap.FastsettStartdato');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.FastsettStartdato');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5021', () => {
     const aksjonspunkt = {
@@ -263,7 +261,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5019', () => {
     const aksjonspunkt = {
@@ -273,7 +271,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5020', () => {
     const aksjonspunkt = {
@@ -283,7 +281,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5023', () => {
     const aksjonspunkt = {
@@ -293,7 +291,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
     const aksjonspunkt = {
@@ -303,7 +301,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5081', () => {
@@ -314,7 +312,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('TotrinnsForm.Uttak.AvklarManglendeUttaksperiode');
+    expect(message[0].props.id).toEqual('TotrinnsForm.Uttak.AvklarManglendeUttaksperiode');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
@@ -326,7 +324,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Beregning.VarigEndring');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VarigEndring');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
     const aksjonspunkt = {
@@ -337,7 +335,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Beregning.IkkeVarigEndring');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5070 slettet', () => {
@@ -359,7 +357,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6008 slettet', () => {
     const uttakPeriode = {
@@ -380,7 +378,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 slettet', () => {
     const uttakPeriode = {
@@ -401,7 +399,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5070 lagt til', () => {
@@ -423,7 +421,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6008 lagt til', () => {
     const uttakPeriode = {
@@ -444,7 +442,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 lagt til', () => {
     const uttakPeriode = {
@@ -465,7 +463,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5070 endret', () => {
@@ -487,7 +485,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeEndret');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeEndret');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6008 endret', () => {
     const uttakPeriode = {
@@ -508,7 +506,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 endret', () => {
     const uttakPeriode = {
@@ -529,7 +527,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5070 avklart', () => {
@@ -551,7 +549,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6008 avklart', () => {
     const uttakPeriode = {
@@ -572,7 +570,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 avklart', () => {
     const uttakPeriode = {
@@ -593,7 +591,7 @@ describe('<ApprovalTextUtils>', () => {
 
     const message = getAksjonspunkttekst(true, null, null, null, null, null, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5080 når søker er i permisjon, skal kun vise tekst om permisjon', () => {
     const arbeidforholdDto = {
@@ -601,8 +599,8 @@ describe('<ApprovalTextUtils>', () => {
       brukPermisjon: true,
     } as TotrinnskontrollArbeidsforhold;
     const messages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    expect(messages).to.be.length(1);
-    expect(messages[0].props.id).to.eql('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon');
+    expect(messages).toHaveLength(1);
+    expect(messages[0].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5080 når søker ikke er i permisjon, skal ikke vise tekst for bruk', () => {
     const arbeidforholdDto = {
@@ -610,8 +608,8 @@ describe('<ApprovalTextUtils>', () => {
       brukPermisjon: false,
     } as TotrinnskontrollArbeidsforhold;
     const messages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    expect(messages).to.be.length(1);
-    expect(messages[0].props.id).to.eql('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon');
+    expect(messages).toHaveLength(1);
+    expect(messages[0].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5080 når søker ikke er i permisjon sammen med en annen handling som ikke er bruk', () => {
     const arbeidforholdDto = {
@@ -619,10 +617,10 @@ describe('<ApprovalTextUtils>', () => {
       brukPermisjon: false,
     } as TotrinnskontrollArbeidsforhold;
     const messages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    expect(messages).to.be.length(2);
-    expect(messages[0].props.id).to.eql('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon');
-    expect(messages[1].props.id).to.eql('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');
-    expect(messages[1].props.values.melding).to.eql('ccc');
+    expect(messages).toHaveLength(2);
+    expect(messages[0].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon');
+    expect(messages[1].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');
+    expect(messages[1].props.values.melding).toEqual('ccc');
   });
 
   // Klage
@@ -638,7 +636,7 @@ describe('<ApprovalTextUtils>', () => {
     } as KlageVurdering;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], [], false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OmgjortTilGunst');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 medhold', () => {
     const aksjonspunkt = {
@@ -651,7 +649,7 @@ describe('<ApprovalTextUtils>', () => {
     } as KlageVurdering;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], null, false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OmgjortTilGunst');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
   // Ytelsesvedtak opphevet
@@ -666,7 +664,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], null, false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
     const klagebehandlingVurdering = {
@@ -679,7 +677,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], null, false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   // Klage avvist
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
@@ -693,7 +691,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], [], false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.Avvist');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag klage avvist', () => {
     const klagebehandlingVurdering = {
@@ -706,7 +704,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], [], false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.Avvist');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   // Ikke fastsatt Engangsstønad
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ikke fastsatt', () => {
@@ -720,7 +718,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], [], false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak stadfestet', () => {
     const klagebehandlingVurdering = {
@@ -733,7 +731,7 @@ describe('<ApprovalTextUtils>', () => {
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, klagebehandlingVurdering, behandlingStatusFVED, [], [], false, aksjonspunkt);
     // @ts-ignore
-    expect(message[0].props.id).to.eql('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5058 vurder tidsbegrenset', () => {
@@ -750,7 +748,7 @@ describe('<ApprovalTextUtils>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, beregningTilfeller, null, aksjonspunkt);
-    expect(message[0]).to.eql('Vurder tidsbegrenset arbeidsforhold');
+    expect(message[0]).toEqual('Vurder tidsbegrenset arbeidsforhold');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5058 ATFL i samme org', () => {
     const beregningTilfeller = [{
@@ -766,7 +764,7 @@ describe('<ApprovalTextUtils>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, beregningTilfeller, null, aksjonspunkt);
-    expect(message[0]).to.eql('Vurder at og fl');
+    expect(message[0]).toEqual('Vurder at og fl');
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
     const beregningTilfeller = [{
@@ -789,8 +787,8 @@ describe('<ApprovalTextUtils>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, null, null, null, beregningTilfeller, null, aksjonspunkt);
-    expect(message[0]).to.eql('Vurder besteberegning');
-    expect(message[1]).to.eql('Vurder tidsbegrenset arbeidsforhold');
+    expect(message[0]).toEqual('Vurder besteberegning');
+    expect(message[1]).toEqual('Vurder tidsbegrenset arbeidsforhold');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5080', () => {
@@ -820,8 +818,8 @@ describe('<ApprovalTextUtils>', () => {
 
     const messages = getAksjonspunkttekst(true, null, null, [], [], false, aksjonspunkt);
     // @ts-ignore
-    expect(messages[0].props.children[0].props.id).to.eql('ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold');
+    expect(messages[0].props.children[0].props.id).toEqual('ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold');
     // @ts-ignore
-    expect(messages[0].props.children[1][0].key).to.eql('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');
+    expect(messages[0].props.children[1][0].key).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');
   });
 });

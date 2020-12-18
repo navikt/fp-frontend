@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -57,7 +56,7 @@ describe('<MenyNyBehandlingIndex>', () => {
     />);
 
     const modal = wrapper.find(NyBehandlingModal);
-    expect(modal).to.have.length(1);
+    expect(modal).toHaveLength(1);
     modal.prop('submitCallback')({
       behandlingType: behandlingType.FORSTEGANGSSOKNAD,
       fagsakYtelseType: {
@@ -67,10 +66,10 @@ describe('<MenyNyBehandlingIndex>', () => {
     });
 
     const kall = lagNyBehandlingCallback.getCalls();
-    expect(kall).to.have.length(1);
-    expect(kall[0].args).to.have.length(2);
-    expect(kall[0].args[0]).to.false;
-    expect(kall[0].args[1]).to.eql({
+    expect(kall).toHaveLength(1);
+    expect(kall[0].args).toHaveLength(2);
+    expect(kall[0].args[0]).toBe(false);
+    expect(kall[0].args[1]).toEqual({
       saksnummer: '123',
       behandlingType: behandlingType.FORSTEGANGSSOKNAD,
       fagsakYtelseType: {
@@ -79,6 +78,6 @@ describe('<MenyNyBehandlingIndex>', () => {
       },
     });
 
-    expect(lukkModalCallback.getCalls()).to.have.length(1);
+    expect(lukkModalCallback.getCalls()).toHaveLength(1);
   });
 });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import DefaultFormatter from './DefaultFormatter';
 import ErrorMessage from './ErrorMessage';
 
@@ -9,7 +7,7 @@ describe('DefaultFormatter', () => {
       feilmelding: 'Dette er feil',
       type: 'test',
     };
-    expect(new DefaultFormatter().format(errorData)).to.eql(ErrorMessage.withMessage(errorData.feilmelding, errorData.type));
+    expect(new DefaultFormatter().format(errorData)).toEqual(ErrorMessage.withMessage(errorData.feilmelding, errorData.type));
   });
 
   it('skal formatere feil der en har message i et objekt', () => {
@@ -17,11 +15,11 @@ describe('DefaultFormatter', () => {
       message: 'Dette er feil',
       type: 'test',
     };
-    expect(new DefaultFormatter().format(errorData)).to.eql(ErrorMessage.withMessage(errorData.message, errorData.type));
+    expect(new DefaultFormatter().format(errorData)).toEqual(ErrorMessage.withMessage(errorData.message, errorData.type));
   });
 
   it('skal formatere feil der data er en streng', () => {
     const errorData = 'Dette er feil';
-    expect(new DefaultFormatter().formatString(errorData)).to.eql(ErrorMessage.withMessage(errorData));
+    expect(new DefaultFormatter().formatString(errorData)).toEqual(ErrorMessage.withMessage(errorData));
   });
 });

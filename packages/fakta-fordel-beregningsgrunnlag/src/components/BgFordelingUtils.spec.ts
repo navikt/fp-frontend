@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
@@ -39,7 +38,7 @@ describe('<BgFordelingUtils>', () => {
     const bruttoPrAar = 50000;
     const skalPreutfylleMedBeregningsgrunnlag = true;
     const fastsattBelop = settFastsattBelop(fordeltPrAar, bruttoPrAar, skalPreutfylleMedBeregningsgrunnlag);
-    expect(fastsattBelop).to.equal(formatCurrencyNoKr(fordeltPrAar));
+    expect(fastsattBelop).toBe(formatCurrencyNoKr(fordeltPrAar));
   });
 
   it('skal sette riktig fastsatt beløp for andel i periode uten fordeltBeløp og med brutto', () => {
@@ -47,22 +46,22 @@ describe('<BgFordelingUtils>', () => {
     const bruttoPrAar = 50000;
     const skalPreutfylleMedBeregningsgrunnlag = true;
     const fastsattBelop = settFastsattBelop(fordeltPrAar, bruttoPrAar, skalPreutfylleMedBeregningsgrunnlag);
-    expect(fastsattBelop).to.equal(formatCurrencyNoKr(bruttoPrAar));
+    expect(fastsattBelop).toBe(formatCurrencyNoKr(bruttoPrAar));
   });
 
   it('skal returnere tom streng om ingen andeler i arbeid', () => {
     const andelIArbeid = settAndelIArbeid([]);
-    expect(andelIArbeid).to.equal('');
+    expect(andelIArbeid).toBe('');
   });
 
   it('skal returnere ein andel i arbeid om det finnes ein andel', () => {
     const andelIArbeid = settAndelIArbeid([50]);
-    expect(andelIArbeid).to.equal('50.00');
+    expect(andelIArbeid).toBe('50.00');
   });
 
   it('skal returnere min - max om fleire andeler i arbeid', () => {
     const andelIArbeid = settAndelIArbeid([20, 30, 40, 60, 10]);
-    expect(andelIArbeid).to.equal('10 - 60');
+    expect(andelIArbeid).toBe('10 - 60');
   });
 
   it('skal sette initial values for generell andelinfo med arbeidsforhold', () => {
@@ -81,13 +80,13 @@ describe('<BgFordelingUtils>', () => {
     };
 
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn);
-    expect(andelsInfo.andel).to.equal('Virksomheten (3284788923)...5678');
-    expect(andelsInfo.aktivitetStatus).to.equal('AT');
-    expect(andelsInfo.andelsnr).to.equal(3);
-    expect(andelsInfo.nyAndel).to.equal(false);
-    expect(andelsInfo.kilde).to.equal('PROSESS_START');
-    expect(andelsInfo.lagtTilAvSaksbehandler).to.equal(false);
-    expect(andelsInfo.inntektskategori).to.equal('ARBEIDSTAKER');
+    expect(andelsInfo.andel).toBe('Virksomheten (3284788923)...5678');
+    expect(andelsInfo.aktivitetStatus).toBe('AT');
+    expect(andelsInfo.andelsnr).toBe(3);
+    expect(andelsInfo.nyAndel).toBe(false);
+    expect(andelsInfo.kilde).toBe('PROSESS_START');
+    expect(andelsInfo.lagtTilAvSaksbehandler).toBe(false);
+    expect(andelsInfo.inntektskategori).toBe('ARBEIDSTAKER');
   });
 
   it('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
@@ -98,12 +97,12 @@ describe('<BgFordelingUtils>', () => {
       inntektskategori: { kode: 'SN' },
     };
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn);
-    expect(andelsInfo.andel).to.equal('Selvstendig næringsdrivende');
-    expect(andelsInfo.aktivitetStatus).to.equal('SN');
-    expect(andelsInfo.andelsnr).to.equal(2);
-    expect(andelsInfo.nyAndel).to.equal(false);
-    expect(andelsInfo.lagtTilAvSaksbehandler).to.equal(true);
-    expect(andelsInfo.inntektskategori).to.equal('SN');
+    expect(andelsInfo.andel).toBe('Selvstendig næringsdrivende');
+    expect(andelsInfo.aktivitetStatus).toBe('SN');
+    expect(andelsInfo.andelsnr).toBe(2);
+    expect(andelsInfo.nyAndel).toBe(false);
+    expect(andelsInfo.lagtTilAvSaksbehandler).toBe(true);
+    expect(andelsInfo.inntektskategori).toBe('SN');
   });
 
   it('skal ikkje sette arbeidsforhold initial values for andel uten arbeidsforhold', () => {
@@ -114,9 +113,9 @@ describe('<BgFordelingUtils>', () => {
       inntektskategori: { kode: 'SN' },
     };
     const arbeidsforholdIV = setArbeidsforholdInitialValues(andelValueFromState);
-    expect(arbeidsforholdIV.arbeidsforholdId).to.equal('');
-    expect(arbeidsforholdIV.arbeidsperiodeFom).to.equal('');
-    expect(arbeidsforholdIV.arbeidsperiodeTom).to.equal('');
+    expect(arbeidsforholdIV.arbeidsforholdId).toBe('');
+    expect(arbeidsforholdIV.arbeidsperiodeFom).toBe('');
+    expect(arbeidsforholdIV.arbeidsperiodeTom).toBe('');
   });
 
   const arbeidstakerAndel3 = {
@@ -130,9 +129,9 @@ describe('<BgFordelingUtils>', () => {
 
   it('skal sette arbeidsforhold initial values for andel med arbeidsforhold', () => {
     const arbeidsforholdIV = setArbeidsforholdInitialValues(arbeidstakerAndel3);
-    expect(arbeidsforholdIV.arbeidsforholdId).to.equal('321378huda7e2');
-    expect(arbeidsforholdIV.arbeidsperiodeFom).to.equal('2017-01-01');
-    expect(arbeidsforholdIV.arbeidsperiodeTom).to.equal('2018-01-01');
+    expect(arbeidsforholdIV.arbeidsforholdId).toBe('321378huda7e2');
+    expect(arbeidsforholdIV.arbeidsperiodeFom).toBe('2017-01-01');
+    expect(arbeidsforholdIV.arbeidsperiodeTom).toBe('2018-01-01');
   });
 
   const andelValuesMedInntektsmelding = {
@@ -161,7 +160,7 @@ describe('<BgFordelingUtils>', () => {
       ],
     };
     const skalValidereMotBg = skalValidereMotBeregningsgrunnlag(bg)(andelFieldValue);
-    expect(skalValidereMotBg).to.equal(false);
+    expect(skalValidereMotBg).toBe(false);
   });
 
   it('skal kunne overstyre beregningsgrunnlag om andel er frilans', () => {
@@ -180,7 +179,7 @@ describe('<BgFordelingUtils>', () => {
       ],
     };
     const skalValidereMotBg = skalValidereMotBeregningsgrunnlag(bg)(andelFieldValue);
-    expect(skalValidereMotBg).to.equal(false);
+    expect(skalValidereMotBg).toBe(false);
   });
 
   it('skal mappe fastsattBeløp til beløp om inntekt skal redigeres', () => {
@@ -190,7 +189,7 @@ describe('<BgFordelingUtils>', () => {
       readOnlyBelop: '20 000',
     };
     const belop = mapToBelop(andel);
-    expect(belop).to.equal(10000);
+    expect(belop).toBe(10000);
   });
 
   it('skal mappe readOnlyBelop til beløp om inntekt ikke skal redigeres', () => {
@@ -200,6 +199,6 @@ describe('<BgFordelingUtils>', () => {
       readOnlyBelop: '20 000',
     };
     const belop = mapToBelop(andel);
-    expect(belop).to.equal(20000);
+    expect(belop).toBe(20000);
   });
 });

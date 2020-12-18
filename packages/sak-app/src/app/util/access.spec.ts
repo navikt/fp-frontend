@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import fagsakStatusCode from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -34,15 +32,15 @@ describe('access', () => {
     it('saksbehandler skal ha skrivetilgang', () => {
       const accessForSaksbehandler = writeAccess(saksbehandlerAnsatt, validFagsakStatus, validBehandlingStatus, validBehandlingTyper);
 
-      expect(accessForSaksbehandler).to.have.property('employeeHasAccess', true);
-      expect(accessForSaksbehandler).to.have.property('isEnabled', true);
+      expect(accessForSaksbehandler).toHaveProperty('employeeHasAccess', true);
+      expect(accessForSaksbehandler).toHaveProperty('isEnabled', true);
     });
 
     it('veileder skal ikke ha aktivert skrivetilgang', () => {
       const accessForVeileder = writeAccess(veilederAnsatt, validFagsakStatus, validBehandlingStatus, validBehandlingTyper);
 
-      expect(accessForVeileder).to.have.property('employeeHasAccess', true);
-      expect(accessForVeileder).to.have.property('isEnabled', false);
+      expect(accessForVeileder).toHaveProperty('employeeHasAccess', true);
+      expect(accessForVeileder).toHaveProperty('isEnabled', false);
     });
 
     forEachFagsakAndBehandlingStatus((fagsakStatus, behandlingStatus) => {
@@ -51,7 +49,7 @@ describe('access', () => {
         const access = writeAccess(saksbehandlerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },
           validBehandlingTyper);
 
-        expect(access).to.have.property('isEnabled', expected);
+        expect(access).toHaveProperty('isEnabled', expected);
       });
     });
   });
@@ -71,28 +69,28 @@ describe('access', () => {
       const accessForSaksbehandler = kanOverstyreAccess(saksbehandlerOgOverstyrerAnsatt, validFagsakStatus, validBehandlingStatus,
         validBehandlingTyper);
 
-      expect(accessForSaksbehandler).to.have.property('employeeHasAccess', true);
-      expect(accessForSaksbehandler).to.have.property('isEnabled', true);
+      expect(accessForSaksbehandler).toHaveProperty('employeeHasAccess', true);
+      expect(accessForSaksbehandler).toHaveProperty('isEnabled', true);
     });
 
     it('saksbehandler uten overstyrer-rolle skal ikke ha tilgang til å overstyre', () => {
       const accessForSaksbehandler = kanOverstyreAccess(saksbehandlerAnsatt, validFagsakStatus, validBehandlingStatus, validBehandlingTyper);
 
-      expect(accessForSaksbehandler).to.have.property('employeeHasAccess', false);
-      expect(accessForSaksbehandler).to.have.property('isEnabled', false);
+      expect(accessForSaksbehandler).toHaveProperty('employeeHasAccess', false);
+      expect(accessForSaksbehandler).toHaveProperty('isEnabled', false);
     });
 
     it('veileder skal ikke ha aktivert tilgang til å overstyre', () => {
       const accessForVeileder = kanOverstyreAccess(veilederAnsatt, validFagsakStatus, validBehandlingStatus, validBehandlingTyper);
 
-      expect(accessForVeileder).to.have.property('employeeHasAccess', true);
-      expect(accessForVeileder).to.have.property('isEnabled', false);
+      expect(accessForVeileder).toHaveProperty('employeeHasAccess', true);
+      expect(accessForVeileder).toHaveProperty('isEnabled', false);
 
       const accessForVeilederOverstyrer = kanOverstyreAccess(veilederOgOverstyrerAnsatt, validFagsakStatus, validBehandlingStatus,
         validBehandlingTyper);
 
-      expect(accessForVeilederOverstyrer).to.have.property('employeeHasAccess', true);
-      expect(accessForVeilederOverstyrer).to.have.property('isEnabled', false);
+      expect(accessForVeilederOverstyrer).toHaveProperty('employeeHasAccess', true);
+      expect(accessForVeilederOverstyrer).toHaveProperty('isEnabled', false);
     });
 
     forEachFagsakAndBehandlingStatus((fagsakStatus, behandlingStatus) => {
@@ -102,7 +100,7 @@ describe('access', () => {
         const access = kanOverstyreAccess(saksbehandlerOgOverstyrerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },
           validBehandlingTyper);
 
-        expect(access).to.have.property('isEnabled', expected);
+        expect(access).toHaveProperty('isEnabled', expected);
       });
     });
   });

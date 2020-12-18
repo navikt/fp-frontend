@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -51,15 +50,15 @@ describe('<RenderUttakTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find('TableRow');
-    expect(tableRow).to.have.length(1);
+    expect(tableRow).toHaveLength(1);
     const tableColumn = wrapper.find('TableColumn');
-    expect(tableColumn).to.have.length(5);
+    expect(tableColumn).toHaveLength(5);
     const selectField = wrapper.find('SelectField');
-    expect(selectField).to.have.length(1);
+    expect(selectField).toHaveLength(1);
     const inputField = wrapper.find('InputField');
-    expect(inputField).to.have.length(1);
+    expect(inputField).toHaveLength(1);
     const decimalField = wrapper.find('DecimalField');
-    expect(decimalField).to.have.length(2);
+    expect(decimalField).toHaveLength(2);
   });
   it('render uttakstable 2 rader', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields2);
@@ -71,14 +70,14 @@ describe('<RenderUttakTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find('TableRow');
-    expect(tableRow).to.have.length(2);
+    expect(tableRow).toHaveLength(2);
     const tableColumn = wrapper.find('TableColumn');
-    expect(tableColumn).to.have.length(10);
+    expect(tableColumn).toHaveLength(10);
     const selectField = wrapper.find('SelectField');
-    expect(selectField).to.have.length(2);
+    expect(selectField).toHaveLength(2);
     const inputField = wrapper.find('InputField');
-    expect(inputField).to.have.length(2);
+    expect(inputField).toHaveLength(2);
     const decimalField = wrapper.find('DecimalField');
-    expect(decimalField).to.have.length(4);
+    expect(decimalField).toHaveLength(4);
   });
 });

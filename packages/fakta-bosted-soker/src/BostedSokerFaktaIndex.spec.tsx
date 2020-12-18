@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
@@ -28,6 +27,6 @@ describe('<BostedSokerFaktaIndex>', () => {
       alleKodeverk={{}}
     />);
 
-    expect(wrapper.find(BostedSokerView)).has.length(1);
+    expect(wrapper.find(BostedSokerView)).toHaveLength(1);
   });
 });

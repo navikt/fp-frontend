@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { PeriodeSokerAktivitet } from '@fpsak-frontend/types';
@@ -49,9 +48,9 @@ describe('<UttakInfo>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
-    expect(checkboxField).to.have.length(2);
+    expect(checkboxField).toHaveLength(2);
     const formattedMessage = wrapper.find('FormattedMessage');
-    expect(formattedMessage).to.have.length(3);
+    expect(formattedMessage).toHaveLength(3);
   });
 
   it('skal rendre uttakinfo med to checkboxes disabled vid read only', () => {
@@ -64,12 +63,12 @@ describe('<UttakInfo>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
-    expect(checkboxField).to.have.length(2);
+    expect(checkboxField).toHaveLength(2);
     expect(wrapper.contains(
       <input type="checkbox" disabled />,
     ));
     const formattedMessage = wrapper.find('FormattedMessage');
-    expect(formattedMessage).to.have.length(4);
+    expect(formattedMessage).toHaveLength(4);
   });
 
   it('skal rendre uttakinfo uten flerbarns checkbox når ett barn', () => {
@@ -82,7 +81,7 @@ describe('<UttakInfo>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
-    expect(checkboxField).to.have.length(1);
-    expect(checkboxField.at(0).prop('name')).to.eql('samtidigUttak');
+    expect(checkboxField).toHaveLength(1);
+    expect(checkboxField.at(0).prop('name')).toEqual('samtidigUttak');
   });
 });

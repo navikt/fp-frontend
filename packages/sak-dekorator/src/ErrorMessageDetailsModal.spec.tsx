@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -21,13 +20,13 @@ describe('<ErrorMessageDetailsModal>', () => {
     />);
 
     const undertekst = wrapper.find(Undertekst);
-    expect(undertekst).to.have.length(2);
-    expect(undertekst.first().childAt(0).text()).is.eql('Feilmelding:');
-    expect(undertekst.last().childAt(0).text()).is.eql('Url:');
+    expect(undertekst).toHaveLength(2);
+    expect(undertekst.first().childAt(0).text()).toEqual('Feilmelding:');
+    expect(undertekst.last().childAt(0).text()).toEqual('Url:');
 
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).to.have.length(2);
-    expect(normaltekst.first().childAt(0).text()).is.eql('Dette er feil');
-    expect(normaltekst.last().childAt(0).text()).is.eql('test');
+    expect(normaltekst).toHaveLength(2);
+    expect(normaltekst.first().childAt(0).text()).toEqual('Dette er feil');
+    expect(normaltekst.last().childAt(0).text()).toEqual('test');
   });
 });

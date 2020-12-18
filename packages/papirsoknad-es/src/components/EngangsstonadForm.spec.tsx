@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -26,7 +25,7 @@ describe('<EngangsstonadForm>', () => {
       validate={sinon.spy()}
     />);
     const form = wrapper.find(RegistreringFodselGrid);
-    expect(form).to.have.length(1);
+    expect(form).toHaveLength(1);
   });
 
   it('skal vise adopsjonspaneler når familieHendelseType er lik adopsjon', () => {
@@ -40,6 +39,6 @@ describe('<EngangsstonadForm>', () => {
       validate={sinon.spy()}
     />);
     const form = wrapper.find(RegistreringAdopsjonOgOmsorgGrid);
-    expect(form).to.have.length(1);
+    expect(form).toHaveLength(1);
   });
 });

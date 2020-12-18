@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -53,10 +52,10 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       aksjonspunkter={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(Undertittel)).to.have.length(1);
+    expect(wrapper.find(Undertittel)).toHaveLength(1);
     // @ts-ignore
-    expect(wrapper.find(Undertittel).props().children.props.id).to.equal('TilkjentYtelse.Title');
-    expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(0);
+    expect(wrapper.find(Undertittel).props().children.props.id).toBe('TilkjentYtelse.Title');
+    expect(wrapper.find(Tilbaketrekkpanel)).toHaveLength(0);
   });
 
   it('Skal vise tilbaketrekkpanel gitt tilbaketrekkaksjonspunkt', () => {
@@ -81,6 +80,6 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       aksjonspunkter={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(Tilbaketrekkpanel)).to.have.length(1);
+    expect(wrapper.find(Tilbaketrekkpanel)).toHaveLength(1);
   });
 });

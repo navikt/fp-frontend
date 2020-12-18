@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { RadioGroupField } from '@fpsak-frontend/form';
@@ -45,10 +44,10 @@ describe('<FerieOgArbeidsPeriode>', () => {
     const textAreaField = wrapper.find('TextAreaField');
     const inntektsmeldinginfo = wrapper.find('inntektsmeldinginfo');
     const radioGroupFieldComponent = wrapper.find(RadioGroupField).dive();
-    expect(radioGroupFieldComponent.children()).to.have.length(3);
-    expect(textAreaField).to.have.length(1);
-    expect(undertekst).to.have.length(1);
-    expect(radioGroupField).to.have.length(1);
-    expect(inntektsmeldinginfo).to.have.length(0);
+    expect(radioGroupFieldComponent.children()).toHaveLength(3);
+    expect(textAreaField).toHaveLength(1);
+    expect(undertekst).toHaveLength(1);
+    expect(radioGroupField).toHaveLength(1);
+    expect(inntektsmeldinginfo).toHaveLength(0);
   });
 });

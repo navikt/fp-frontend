@@ -1,6 +1,5 @@
 import sinon from 'sinon';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { expect } from 'chai';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import React from 'react';
 import { shallow } from 'enzyme/build';
@@ -20,6 +19,6 @@ describe('<TempsaveKlageButton>', () => {
       klageMedholdArsak={undefined}
       klageVurderingOmgjoer={undefined}
     />);
-    expect(wrapper.find(Hovedknapp)).has.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 });

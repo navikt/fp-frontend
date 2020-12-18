@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -18,7 +17,7 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(FormattedMessage).prop('id')).is.equal('DocumentListInnsyn.NoDocuments');
+    expect(wrapper.find(FormattedMessage).prop('id')).toBe('DocumentListInnsyn.NoDocuments');
   });
 
   it('skal inneholde ett document, med tittel Dok1', () => {
@@ -35,9 +34,9 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(FormattedMessage).prop('id')).is.equal('DocumentListInnsyn.VelgInnsynsDok');
-    expect(wrapper.find('a').text()).is.equal('Dok1');
-    expect(wrapper.find(Table)).to.have.length(1);
+    expect(wrapper.find(FormattedMessage).prop('id')).toBe('DocumentListInnsyn.VelgInnsynsDok');
+    expect(wrapper.find('a').text()).toBe('Dok1');
+    expect(wrapper.find(Table)).toHaveLength(1);
   });
 
   it('skal inneholde to documenter', () => {
@@ -60,7 +59,7 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(TableRow)).to.have.length(2);
+    expect(wrapper.find(TableRow)).toHaveLength(2);
   });
 
   it('skal inneholde document med riktig kommunikasjonsretining: Send -> Ut', () => {
@@ -78,7 +77,7 @@ describe('<DocumentListInnsyn>', () => {
       readOnly={false}
     />);
 
-    expect(wrapper.find(Image).prop('tooltip')).to.have.length.above(1);
+    expect(wrapper.find(Image).prop('tooltip').length).toBeGreaterThan(1);
   });
 
   it('skal inneholde document med riktig kommunikasjonsretining: Motta -> INN', () => {
@@ -95,7 +94,7 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(Image).prop('tooltip')).to.have.length.above(1);
+    expect(wrapper.find(Image).prop('tooltip').length).toBeGreaterThan(1);
   });
 
   it('skal ikke inneholde dato', () => {
@@ -112,7 +111,7 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('DocumentListInnsyn.IProduksjon');
+    expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('DocumentListInnsyn.IProduksjon');
   });
 
   it('skal inneholde dato', () => {
@@ -129,6 +128,6 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(DateTimeLabel).prop('dateTimeString')).is.equal('22.12.2017 - 09:00');
+    expect(wrapper.find(DateTimeLabel).prop('dateTimeString')).toBe('22.12.2017 - 09:00');
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -25,7 +24,7 @@ describe('<ProsessPanelTemplate>', () => {
       </ProsessPanelTemplate>,
     );
 
-    expect(wrapper.find(EtikettLiten)).to.have.length(0);
+    expect(wrapper.find(EtikettLiten)).toHaveLength(0);
   });
 
   it('skal vise lovreferanse når dette finnes', () => {
@@ -46,6 +45,6 @@ describe('<ProsessPanelTemplate>', () => {
       </ProsessPanelTemplate>,
     );
 
-    expect(wrapper.find(EtikettLiten)).to.have.length(1);
+    expect(wrapper.find(EtikettLiten)).toHaveLength(1);
   });
 });

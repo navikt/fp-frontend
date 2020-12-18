@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { transformValues } from './VurderEndringRefusjonForm';
 import { lagNøkkelDelvisRefusjon, lagNøkkelRefusjonsstart } from './VurderEndringRefusjonRad';
 
@@ -44,7 +43,7 @@ describe('<VurderEndringRefusjonForm>', () => {
         },
       ],
     };
-    expect(transformed).to.deep.equal(expected);
+    expect(transformed).toEqual(expected);
   });
 
   it('Skal utføre transformeValues korrekt med to ref.krav hos en AG', () => {
@@ -75,7 +74,7 @@ describe('<VurderEndringRefusjonForm>', () => {
         },
       ],
     };
-    expect(transformed).to.deep.equal(expected);
+    expect(transformed).toEqual(expected);
   });
   it('Skal utføre transformeValues korrekt med to ref.krav hos forskjellig AG', () => {
     const andel1 = lagAndel('Biri bakeri og saueoppdrett', '999999999', 'REF-1', '01.09.2018');
@@ -105,7 +104,7 @@ describe('<VurderEndringRefusjonForm>', () => {
         },
       ],
     };
-    expect(transformed).to.deep.equal(expected);
+    expect(transformed).toEqual(expected);
   });
   it('Skal utføre transformeValues korrekt når delvis refusjon skal kunne fastsettes', () => {
     const andel1 = lagAndel('Biri bakeri og saueoppdrett', '999999999', 'REF-1', '01.09.2018');
@@ -137,6 +136,6 @@ describe('<VurderEndringRefusjonForm>', () => {
         },
       ],
     };
-    expect(transformed).to.deep.equal(expected);
+    expect(transformed).toEqual(expected);
   });
 });

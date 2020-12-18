@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -60,7 +59,7 @@ describe('<BeregningInfoPanel>', () => {
       erOverstyrer={false}
     />);
     const panel = wrapper.find(VurderFaktaBeregningPanel);
-    expect(panel).has.length(1);
+    expect(panel).toHaveLength(1);
   });
 
   it('skal vise VurderFaktaBeregning panel med readonly for vanlig saksbehandler uten overstyrerrolle med overstyringsaksjonspunkt', () => {
@@ -92,8 +91,8 @@ describe('<BeregningInfoPanel>', () => {
       erOverstyrer={false}
     />);
     const panel = wrapper.find(VurderFaktaBeregningPanel);
-    expect(panel).has.length(1);
-    expect(panel.prop('readOnly')).to.equal(true);
+    expect(panel).toHaveLength(1);
+    expect(panel.prop('readOnly')).toBe(true);
   });
 
   it('skal vise AvklareAktiviteterPanel panel med readonly for vanlig saksbehandler uten overstyrerrolle med overstyringsaksjonspunkt', () => {
@@ -125,8 +124,8 @@ describe('<BeregningInfoPanel>', () => {
       erOverstyrer={false}
     />);
     const panel = wrapper.find(AvklareAktiviteterPanel);
-    expect(panel).has.length(1);
-    expect(panel.prop('readOnly')).to.equal(true);
+    expect(panel).toHaveLength(1);
+    expect(panel.prop('readOnly')).toBe(true);
   });
 
   it('skal vise AvklareAktiviteterPanel panel', () => {
@@ -158,6 +157,6 @@ describe('<BeregningInfoPanel>', () => {
       erOverstyrer={false}
     />);
     const panel = wrapper.find(AvklareAktiviteterPanel);
-    expect(panel).has.length(1);
+    expect(panel).toHaveLength(1);
   });
 });

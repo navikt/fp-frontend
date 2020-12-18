@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -151,7 +150,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       {...behandlingProps}
     />);
     const vurderAktivitetPanel = wrapper.find(VurderAktiviteterPanel);
-    expect(vurderAktivitetPanel).has.length(1);
+    expect(vurderAktivitetPanel).toHaveLength(1);
   });
 
   it('skal ikkje vise VurderAktiviteterPanel panel', () => {
@@ -183,7 +182,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       {...behandlingProps}
     />);
     const radio = wrapper.find(VurderAktiviteterPanel);
-    expect(radio).has.length(0);
+    expect(radio).toHaveLength(0);
   });
 
   it('skal vise overstyringsknapp', () => {
@@ -219,7 +218,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize={() => {}}
       {...behandlingProps}
     />);
-    expect(wrapper.find(OverstyringKnapp)).has.length(1);
+    expect(wrapper.find(OverstyringKnapp)).toHaveLength(1);
   });
 
   it('skal ikkje vise AksjonspunktHelpText ved overstyring', () => {
@@ -256,7 +255,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       {...behandlingProps}
     />);
     const helptext = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helptext).has.length(0);
+    expect(helptext).toHaveLength(0);
   });
 
   it('skal teste at initial values blir bygget', () => {
@@ -278,8 +277,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize: null,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
-    expect(initialValues !== null).to.equal(true);
-    expect(initialValues[MANUELL_OVERSTYRING_FIELD]).to.equal(false);
+    expect(initialValues !== null).toBe(true);
+    expect(initialValues[MANUELL_OVERSTYRING_FIELD]).toBe(false);
   });
 
   it('skal teste at initial values blir bygget uten aksjonspunkt', () => {
@@ -301,8 +300,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize: null,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
-    expect(initialValues !== null).to.equal(true);
-    expect(initialValues[MANUELL_OVERSTYRING_FIELD]).to.equal(false);
+    expect(initialValues !== null).toBe(true);
+    expect(initialValues[MANUELL_OVERSTYRING_FIELD]).toBe(false);
   });
 
   it('skal teste at initial values blir bygget med overstyrt aksjonspunkt', () => {
@@ -326,8 +325,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize: null,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
-    expect(initialValues !== null).to.equal(true);
-    expect(initialValues[MANUELL_OVERSTYRING_FIELD]).to.equal(true);
+    expect(initialValues !== null).toBe(true);
+    expect(initialValues[MANUELL_OVERSTYRING_FIELD]).toBe(true);
   });
 
   it('skal transform values for avklar aktiviteter aksjonspunkt', () => {
@@ -345,8 +344,8 @@ describe('<AvklareAktiviteterPanel>', () => {
     values[id3] = { skalBrukes: true };
     values[idAAP] = { skalBrukes: true };
     const transformed = transformValues(values);
-    expect(transformed[0].beregningsaktivitetLagreDtoList.length).to.equal(1);
-    expect(transformed[0].beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).to.equal(aktivitet1.arbeidsgiverId);
+    expect(transformed[0].beregningsaktivitetLagreDtoList.length).toBe(1);
+    expect(transformed[0].beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).toBe(aktivitet1.arbeidsgiverId);
   });
 
   it('skal transform values om for valgt overstyring', () => {
@@ -367,10 +366,10 @@ describe('<AvklareAktiviteterPanel>', () => {
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'begrunnelse';
     values[MANUELL_OVERSTYRING_FIELD] = true;
     const transformed = transformValues(values);
-    expect(transformed[0].beregningsaktivitetLagreDtoList.length).to.equal(1);
-    expect(transformed[0].beregningsaktivitetLagreDtoList[0].arbeidsgiverIdentifikator).to.equal(aktivitet3.aktørIdString);
-    expect(transformed[0].begrunnelse).to.equal('begrunnelse');
-    expect(transformed[0].kode).to.equal(OVERSTYRING_AV_BEREGNINGSAKTIVITETER);
+    expect(transformed[0].beregningsaktivitetLagreDtoList.length).toBe(1);
+    expect(transformed[0].beregningsaktivitetLagreDtoList[0].arbeidsgiverIdentifikator).toBe(aktivitet3.aktørIdString);
+    expect(transformed[0].begrunnelse).toBe('begrunnelse');
+    expect(transformed[0].kode).toBe(OVERSTYRING_AV_BEREGNINGSAKTIVITETER);
   });
 
   it('skal returnere true for endret begrunnelse', () => {
@@ -404,7 +403,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: apsAvklarAktiviteter,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
     });
-    expect(erAvklartOgIkkeEndret).to.equal(true);
+    expect(erAvklartOgIkkeEndret).toBe(true);
   });
 
   it('skal returnere true for ikkje endret begrunnelse og endret verdi', () => {
@@ -438,7 +437,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: apsAvklarAktiviteter,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
     });
-    expect(erAvklartOgIkkeEndret).to.equal(true);
+    expect(erAvklartOgIkkeEndret).toBe(true);
   });
 
   it('skal returnere true for endret begrunnelse og endret verdi', () => {
@@ -472,7 +471,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: apsAvklarAktiviteter,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
     });
-    expect(erAvklartOgIkkeEndret).to.equal(true);
+    expect(erAvklartOgIkkeEndret).toBe(true);
   });
 
   it('skal returnere false for ikkje endret begrunnelse og ikkje endret verdi', () => {
@@ -496,6 +495,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: apsAvklarAktiviteter,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
     });
-    expect(erAvklartOgIkkeEndret).to.equal(false);
+    expect(erAvklartOgIkkeEndret).toBe(false);
   });
 });

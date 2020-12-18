@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -55,15 +54,15 @@ describe('<BgFordelingUtils>', () => {
   const dagpengeField = mapAndelToField(dagpengerAndel);
 
   it('skal mappe dagpengerandel til feltverdier', () => {
-    expect(dagpengeField.aktivitetStatus).to.equal('DP');
-    expect(dagpengeField.andelsnr).to.equal(1);
-    expect(dagpengeField.nyAndel).to.equal(false);
-    expect(dagpengeField.lagtTilAvSaksbehandler).to.equal(true);
-    expect(dagpengeField.skalKunneEndreAktivitet).to.equal(false);
-    expect(dagpengeField.inntektskategori).to.equal('DAGPENGER');
-    expect(dagpengeField.fastsattBelop).to.equal('20 000');
-    expect(dagpengeField.belopReadOnly).to.equal('0');
-    expect(dagpengeField.refusjonskrav).to.equal('');
+    expect(dagpengeField.aktivitetStatus).toBe('DP');
+    expect(dagpengeField.andelsnr).toBe(1);
+    expect(dagpengeField.nyAndel).toBe(false);
+    expect(dagpengeField.lagtTilAvSaksbehandler).toBe(true);
+    expect(dagpengeField.skalKunneEndreAktivitet).toBe(false);
+    expect(dagpengeField.inntektskategori).toBe('DAGPENGER');
+    expect(dagpengeField.fastsattBelop).toBe('20 000');
+    expect(dagpengeField.belopReadOnly).toBe('0');
+    expect(dagpengeField.refusjonskrav).toBe('');
   });
 
   it('skal mappe AAP-andel til feltverdier', () => {
@@ -79,15 +78,15 @@ describe('<BgFordelingUtils>', () => {
       belopFraMeldekortPrMnd: 10000,
     };
     const aapField = mapAndelToField(AAPAndel);
-    expect(aapField.aktivitetStatus).to.equal('AAP');
-    expect(aapField.andelsnr).to.equal(1);
-    expect(aapField.nyAndel).to.equal(false);
-    expect(aapField.lagtTilAvSaksbehandler).to.equal(false);
-    expect(aapField.skalKunneEndreAktivitet).to.equal(false);
-    expect(aapField.inntektskategori).to.equal('AAP');
-    expect(aapField.fastsattBelop).to.equal('');
-    expect(aapField.belopReadOnly).to.equal('10 000');
-    expect(aapField.refusjonskrav).to.equal('');
+    expect(aapField.aktivitetStatus).toBe('AAP');
+    expect(aapField.andelsnr).toBe(1);
+    expect(aapField.nyAndel).toBe(false);
+    expect(aapField.lagtTilAvSaksbehandler).toBe(false);
+    expect(aapField.skalKunneEndreAktivitet).toBe(false);
+    expect(aapField.inntektskategori).toBe('AAP');
+    expect(aapField.fastsattBelop).toBe('');
+    expect(aapField.belopReadOnly).toBe('10 000');
+    expect(aapField.refusjonskrav).toBe('');
   });
 
   it('skal mappe AT uten inntektsmelding med FL i samme org til feltverdier', () => {
@@ -101,15 +100,15 @@ describe('<BgFordelingUtils>', () => {
       belopFraMeldekortPrMnd: null,
     };
     const atField = mapAndelToField(ATAndel);
-    expect(atField.aktivitetStatus).to.equal('AT');
-    expect(atField.andelsnr).to.equal(1);
-    expect(atField.nyAndel).to.equal(false);
-    expect(atField.lagtTilAvSaksbehandler).to.equal(false);
-    expect(atField.skalKunneEndreAktivitet).to.equal(false);
-    expect(atField.inntektskategori).to.equal('AT');
-    expect(atField.fastsattBelop).to.equal('');
-    expect(atField.belopReadOnly).to.equal('');
-    expect(atField.refusjonskrav).to.equal('');
+    expect(atField.aktivitetStatus).toBe('AT');
+    expect(atField.andelsnr).toBe(1);
+    expect(atField.nyAndel).toBe(false);
+    expect(atField.lagtTilAvSaksbehandler).toBe(false);
+    expect(atField.skalKunneEndreAktivitet).toBe(false);
+    expect(atField.inntektskategori).toBe('AT');
+    expect(atField.fastsattBelop).toBe('');
+    expect(atField.belopReadOnly).toBe('');
+    expect(atField.refusjonskrav).toBe('');
   });
 
   it('skal mappe FL med AT i samme org til feltverdier', () => {
@@ -123,15 +122,15 @@ describe('<BgFordelingUtils>', () => {
       belopFraMeldekortPrMnd: null,
     };
     const atField = mapAndelToField(ATAndel);
-    expect(atField.aktivitetStatus).to.equal('FL');
-    expect(atField.andelsnr).to.equal(1);
-    expect(atField.nyAndel).to.equal(false);
-    expect(atField.lagtTilAvSaksbehandler).to.equal(false);
-    expect(atField.skalKunneEndreAktivitet).to.equal(false);
-    expect(atField.inntektskategori).to.equal('FL');
-    expect(atField.fastsattBelop).to.equal('');
-    expect(atField.belopReadOnly).to.equal('');
-    expect(atField.refusjonskrav).to.equal('');
+    expect(atField.aktivitetStatus).toBe('FL');
+    expect(atField.andelsnr).toBe(1);
+    expect(atField.nyAndel).toBe(false);
+    expect(atField.lagtTilAvSaksbehandler).toBe(false);
+    expect(atField.skalKunneEndreAktivitet).toBe(false);
+    expect(atField.inntektskategori).toBe('FL');
+    expect(atField.fastsattBelop).toBe('');
+    expect(atField.belopReadOnly).toBe('');
+    expect(atField.refusjonskrav).toBe('');
   });
 
   it('skal mappe AT med inntektsmelding til feltverdier', () => {
@@ -148,15 +147,15 @@ describe('<BgFordelingUtils>', () => {
       arbeidsforhold: { belopFraInntektsmeldingPrMnd: 20000 },
     };
     const atField = mapAndelToField(ATAndel);
-    expect(atField.aktivitetStatus).to.equal('AT');
-    expect(atField.andelsnr).to.equal(1);
-    expect(atField.nyAndel).to.equal(false);
-    expect(atField.lagtTilAvSaksbehandler).to.equal(false);
-    expect(atField.skalKunneEndreAktivitet).to.equal(false);
-    expect(atField.inntektskategori).to.equal('AT');
-    expect(atField.fastsattBelop).to.equal('');
-    expect(atField.belopReadOnly).to.equal('20 000');
-    expect(atField.refusjonskrav).to.equal('');
+    expect(atField.aktivitetStatus).toBe('AT');
+    expect(atField.andelsnr).toBe(1);
+    expect(atField.nyAndel).toBe(false);
+    expect(atField.lagtTilAvSaksbehandler).toBe(false);
+    expect(atField.skalKunneEndreAktivitet).toBe(false);
+    expect(atField.inntektskategori).toBe('AT');
+    expect(atField.fastsattBelop).toBe('');
+    expect(atField.belopReadOnly).toBe('20 000');
+    expect(atField.refusjonskrav).toBe('');
   });
 
   it('skal sette initial values for generell andelinfo med arbeidsforhold', () => {
@@ -174,12 +173,12 @@ describe('<BgFordelingUtils>', () => {
     };
 
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState);
-    expect(andelsInfo.andel).to.equal('Virksomheten (3284788923) ...a7e2');
-    expect(andelsInfo.aktivitetStatus).to.equal('AT');
-    expect(andelsInfo.andelsnr).to.equal(3);
-    expect(andelsInfo.nyAndel).to.equal(false);
-    expect(andelsInfo.lagtTilAvSaksbehandler).to.equal(false);
-    expect(andelsInfo.inntektskategori).to.equal('ARBEIDSTAKER');
+    expect(andelsInfo.andel).toBe('Virksomheten (3284788923) ...a7e2');
+    expect(andelsInfo.aktivitetStatus).toBe('AT');
+    expect(andelsInfo.andelsnr).toBe(3);
+    expect(andelsInfo.nyAndel).toBe(false);
+    expect(andelsInfo.lagtTilAvSaksbehandler).toBe(false);
+    expect(andelsInfo.inntektskategori).toBe('ARBEIDSTAKER');
   });
 
   it('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
@@ -191,12 +190,12 @@ describe('<BgFordelingUtils>', () => {
       visningsnavn: 'Selvstendig næringsdrivende',
     };
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState);
-    expect(andelsInfo.andel).to.equal('Selvstendig næringsdrivende');
-    expect(andelsInfo.aktivitetStatus).to.equal('SN');
-    expect(andelsInfo.andelsnr).to.equal(2);
-    expect(andelsInfo.nyAndel).to.equal(false);
-    expect(andelsInfo.lagtTilAvSaksbehandler).to.equal(true);
-    expect(andelsInfo.inntektskategori).to.equal('SN');
+    expect(andelsInfo.andel).toBe('Selvstendig næringsdrivende');
+    expect(andelsInfo.aktivitetStatus).toBe('SN');
+    expect(andelsInfo.andelsnr).toBe(2);
+    expect(andelsInfo.nyAndel).toBe(false);
+    expect(andelsInfo.lagtTilAvSaksbehandler).toBe(true);
+    expect(andelsInfo.inntektskategori).toBe('SN');
   });
 
   it('skal ikkje sette arbeidsforhold initial values for andel uten arbeidsforhold', () => {
@@ -207,9 +206,9 @@ describe('<BgFordelingUtils>', () => {
       inntektskategori: { kode: 'SN' },
     };
     const arbeidsforholdIV = setArbeidsforholdInitialValues(andelValueFromState);
-    expect(arbeidsforholdIV.arbeidsforholdId).to.equal(null);
-    expect(arbeidsforholdIV.arbeidsperiodeFom).to.equal('');
-    expect(arbeidsforholdIV.arbeidsperiodeTom).to.equal('');
+    expect(arbeidsforholdIV.arbeidsforholdId).toBe(null);
+    expect(arbeidsforholdIV.arbeidsperiodeFom).toBe('');
+    expect(arbeidsforholdIV.arbeidsperiodeTom).toBe('');
   });
 
   const andelsnrKunstigArbeid = 241;
@@ -242,9 +241,9 @@ describe('<BgFordelingUtils>', () => {
 
   it('skal sette arbeidsforhold initial values for andel med arbeidsforhold', () => {
     const arbeidsforholdIV = setArbeidsforholdInitialValues(arbeidstakerAndel3);
-    expect(arbeidsforholdIV.arbeidsforholdId).to.equal('321378huda7e2');
-    expect(arbeidsforholdIV.arbeidsperiodeFom).to.equal('2017-01-01');
-    expect(arbeidsforholdIV.arbeidsperiodeTom).to.equal('2018-01-01');
+    expect(arbeidsforholdIV.arbeidsforholdId).toBe('321378huda7e2');
+    expect(arbeidsforholdIV.arbeidsperiodeFom).toBe('2017-01-01');
+    expect(arbeidsforholdIV.arbeidsperiodeTom).toBe('2018-01-01');
   });
 
   const arbeidstakerAndel4 = {
@@ -317,7 +316,7 @@ describe('<BgFordelingUtils>', () => {
       [besteberegningField]: true,
     };
     const skalRedigereInntektskategori = skalRedigereInntektskategoriForAndel(vals, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntektskategori).to.equal(true);
+    expect(skalRedigereInntektskategori).toBe(true);
   });
 
   it('skal redigere inntektskategori for kunstig arbeid', () => {
@@ -328,7 +327,7 @@ describe('<BgFordelingUtils>', () => {
     };
     const vals = {};
     const skalRedigereInntektskategori = skalRedigereInntektskategoriForAndel(vals, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntektskategori).to.equal(true);
+    expect(skalRedigereInntektskategori).toBe(true);
   });
 
   it('skal redigere inntekt ved overstyring', () => {
@@ -339,7 +338,7 @@ describe('<BgFordelingUtils>', () => {
     const copyValues = { ...values };
     copyValues[MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD] = true;
     const skalRedigereInntekt = kanRedigereInntektForAndel(copyValues, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal redigere inntekt for arbeidstakerandel som mottar ytelse', () => {
@@ -348,7 +347,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(arbeidstakerAndel3),
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal redigere inntekt for arbeidstakerandel som ikke mottar ytelse, men har lonnsendring', () => {
@@ -358,7 +357,7 @@ describe('<BgFordelingUtils>', () => {
     };
     faktaOmBeregning.arbeidsforholdMedLønnsendringUtenIM = [arbeidstakerAndel1];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal redigere inntekt for kun ytelse', () => {
@@ -371,7 +370,7 @@ describe('<BgFordelingUtils>', () => {
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE }],
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, fakta, beregningsgrunnlag)(brukersAndel);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal ikkje redigere inntekt for arbeidstakerandel med inntektsmelding i samme org som frilans', () => {
@@ -383,7 +382,7 @@ describe('<BgFordelingUtils>', () => {
     arbeidstakerAndel4.inntektPrMnd = 30000;
     faktaOmBeregningCopy.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(false);
+    expect(skalRedigereInntekt).toBe(false);
   });
 
   it('skal redigere inntekt for arbeidstakerandel uten inntektsmelding i samme org som frilans', () => {
@@ -395,7 +394,7 @@ describe('<BgFordelingUtils>', () => {
     arbeidstakerAndel4.inntektPrMnd = null;
     faktaOmBeregningCopy.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregningCopy, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal redigere inntekt for frilansandel som mottar ytelse', () => {
@@ -404,7 +403,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(frilansAndel),
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal redigere inntekt for frilansandel som ikke mottar ytelse, men er nyoppstartet', () => {
@@ -416,7 +415,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(frilansAndel),
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(valuesLocalCopy, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal ikke redigere inntekt for frilansandel som ikke mottar ytelse og ikke er nyoppstartet', () => {
@@ -428,7 +427,7 @@ describe('<BgFordelingUtils>', () => {
       ...setGenerellAndelsinfo(frilansAndel),
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(valuesLocalCopy, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(false);
+    expect(skalRedigereInntekt).toBe(false);
   });
   it('skal redigere inntekt for frilansandel i samme org som arbeidstaker', () => {
     const andelFieldValue = {
@@ -437,7 +436,7 @@ describe('<BgFordelingUtils>', () => {
     };
     faktaOmBeregning.arbeidstakerOgFrilanserISammeOrganisasjonListe = [arbeidstakerAndel4];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntekt).to.equal(true);
+    expect(skalRedigereInntekt).toBe(true);
   });
 
   it('skal mappe fastsattBeløp til beløp om skalRedigereInntekt er udefinert', () => {
@@ -446,7 +445,7 @@ describe('<BgFordelingUtils>', () => {
       readOnlyBelop: '20 000',
     };
     const belop = mapToBelop(undefined)(andel);
-    expect(belop).to.equal(10000);
+    expect(belop).toBe(10000);
   });
 
   it('skal mappe fastsattBeløp til beløp om skalRedigereInntekt returnerer true', () => {
@@ -455,7 +454,7 @@ describe('<BgFordelingUtils>', () => {
       readOnlyBelop: '20 000',
     };
     const belop = mapToBelop(() => true)(andel);
-    expect(belop).to.equal(10000);
+    expect(belop).toBe(10000);
   });
 
   it('skal mappe readOnlyBelop til beløp om skalRedigereInntekt returnerer false', () => {
@@ -464,6 +463,6 @@ describe('<BgFordelingUtils>', () => {
       readOnlyBelop: '20 000',
     };
     const belop = mapToBelop(() => false)(andel);
-    expect(belop).to.equal(20000);
+    expect(belop).toBe(20000);
   });
 });

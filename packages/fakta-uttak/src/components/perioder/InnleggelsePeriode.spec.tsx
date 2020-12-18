@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import sinon from 'sinon';
@@ -36,9 +35,9 @@ describe('<InnleggelsePeriode>', () => {
     const undertekst = wrapper.find('Undertekst');
     const radioGroupField = wrapper.find('RadioGroupField');
     const radioGroupFieldComponent = wrapper.find(RadioGroupField).dive();
-    expect(radioGroupFieldComponent.children()).to.have.length(2);
-    expect(undertekst).to.have.length(1);
-    expect(radioGroupField).to.have.length(1);
+    expect(radioGroupFieldComponent.children()).toHaveLength(2);
+    expect(undertekst).toHaveLength(1);
+    expect(radioGroupField).toHaveLength(1);
   });
 
   it('Skal vise tekstfelt hvis resultat er true', () => {
@@ -61,6 +60,6 @@ describe('<InnleggelsePeriode>', () => {
     />);
 
     const textAreaField = wrapper.find('TextAreaField');
-    expect(textAreaField).to.have.length(1);
+    expect(textAreaField).toHaveLength(1);
   });
 });

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { reducer as formReducer, reduxForm } from 'redux-form';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { messages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import DecimalField from './DecimalField';
 
@@ -34,10 +33,10 @@ describe('<DecimalField>', () => {
       />,
       { prosent: 10 },
     );
-    expect(wrapper.find('input')).to.have.length(1);
+    expect(wrapper.find('input')).toHaveLength(1);
     wrapper.find('input').simulate('blur');
     wrapper.update();
-    expect(wrapper.find('input').prop('value')).to.eql('10.00');
+    expect(wrapper.find('input').prop('value')).toEqual('10.00');
   });
 
   it('skal ikke legge til desimaler på onBlur hvis bruker skriver inn desimal', () => {
@@ -54,11 +53,11 @@ describe('<DecimalField>', () => {
       />,
       { prosent: 10 },
     );
-    expect(wrapper.find('input')).to.have.length(1);
+    expect(wrapper.find('input')).toHaveLength(1);
     wrapper.find('input').simulate('change', { target: { value: 10.32 } });
     wrapper.find('input').simulate('blur');
     wrapper.update();
-    expect(wrapper.find('input').prop('value')).to.eql('10.32');
+    expect(wrapper.find('input').prop('value')).toEqual('10.32');
   });
 
   it('skal tilpasse tallet til 2 desimaler', () => {
@@ -75,10 +74,10 @@ describe('<DecimalField>', () => {
       />,
       { prosent: 10 },
     );
-    expect(wrapper.find('input')).to.have.length(1);
+    expect(wrapper.find('input')).toHaveLength(1);
     wrapper.find('input').simulate('change', { target: { value: 10.322843578934758934758934758934758943 } });
     wrapper.find('input').simulate('blur');
     wrapper.update();
-    expect(wrapper.find('input').prop('value')).to.eql('10.32');
+    expect(wrapper.find('input').prop('value')).toEqual('10.32');
   });
 });

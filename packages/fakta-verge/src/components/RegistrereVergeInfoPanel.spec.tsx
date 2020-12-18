@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -34,6 +33,6 @@ describe('<RegistrereVergeInfoPanel>', () => {
     />);
 
     const panel = wrapper.find(RegistrereVergeFaktaForm);
-    expect(panel).to.have.length(1);
+    expect(panel).toHaveLength(1);
   });
 });

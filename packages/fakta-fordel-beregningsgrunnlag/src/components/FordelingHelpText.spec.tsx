@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { createFordelArbeidsforholdString, textCase } from './FordelingHelpText';
 
 const fn = () => {};
@@ -33,8 +32,8 @@ const arbeidsforholdListe = [arbeidsforhold];
 describe('<FordelingHelpText>', () => {
   it('skal lage endret arbeidsforhold for permisjon', () => {
     const string = createFordelArbeidsforholdString(arbeidsforholdListe, textCase.PERMISJON, fn);
-    expect(string.navnOgOrgnr).to.eql('Sopra Steria (123456789)...6789');
-    expect(string.dato).to.eql('01.10.2018');
+    expect(string.navnOgOrgnr).toEqual('Sopra Steria (123456789)...6789');
+    expect(string.dato).toEqual('01.10.2018');
   });
   it('skal lage endret arbeidsforhold for permisjon når permisjonTom er undefined', () => {
     const string = createFordelArbeidsforholdString(
@@ -46,16 +45,16 @@ describe('<FordelingHelpText>', () => {
         },
       }], textCase.PERMISJON, fn,
     );
-    expect(string.navnOgOrgnr).to.eql('Sopra Steria (123456789)...6789');
-    expect(string.dato).to.eql('-');
+    expect(string.navnOgOrgnr).toEqual('Sopra Steria (123456789)...6789');
+    expect(string.dato).toEqual('-');
   });
   it('skal lage endret arbeidsforhold for gradering', () => {
     const string = createFordelArbeidsforholdString(arbeidsforholdListe, textCase.GRADERING, fn);
-    expect(string).to.eql('Sopra Steria (123456789)...6789 f.o.m. 01.01.2015 - t.o.m. 01.01.2025');
+    expect(string).toEqual('Sopra Steria (123456789)...6789 f.o.m. 01.01.2015 - t.o.m. 01.01.2025');
   });
   it('skal lage endret arbeidsforhold for refusjon', () => {
     const string = createFordelArbeidsforholdString(arbeidsforholdListe, textCase.REFUSJON, fn);
-    expect(string).to.eql('Sopra Steria (123456789)...6789 f.o.m. 01.01.2016 - t.o.m. 01.01.2026');
+    expect(string).toEqual('Sopra Steria (123456789)...6789 f.o.m. 01.01.2016 - t.o.m. 01.01.2026');
   });
 
   const arbeidsforholdMedEndringISøktYtelse = {
@@ -80,6 +79,6 @@ describe('<FordelingHelpText>', () => {
 
   it('skal lage endret arbeidsforhold for endring i ytelse', () => {
     const string = createFordelArbeidsforholdString([arbeidsforholdMedEndringISøktYtelse], textCase.ENDRING_YTELSE, fn);
-    expect(string).to.eql('Sopra Steria (123456789)...6789 f.o.m. 01.01.2016 - t.o.m. 01.01.2026');
+    expect(string).toEqual('Sopra Steria (123456789)...6789 f.o.m. 01.01.2016 - t.o.m. 01.01.2026');
   });
 });

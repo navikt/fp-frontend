@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { LegendBox } from '@fpsak-frontend/tidslinje';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -16,6 +15,6 @@ describe('<ForeldelseTidslinjeHjelpetekster>', () => {
     );
 
     const box = wrapper.find(LegendBox);
-    expect(box.prop('legends')).has.length(3);
+    expect(box.prop('legends')).toHaveLength(3);
   });
 });

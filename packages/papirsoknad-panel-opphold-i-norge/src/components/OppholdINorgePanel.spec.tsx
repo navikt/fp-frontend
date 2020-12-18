@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -49,9 +48,9 @@ describe('<OppholdINorgePanel>', () => {
       const errorsWithOppholdINorgeTrue = OppholdINorgePanel.validate({ oppholdINorge: true });
       const errorsWithOppholdINorgeFalse = OppholdINorgePanel.validate({ oppholdINorge: false });
 
-      expect(errorsWithUndefinedOppholdINorge.oppholdINorge).that.eql(isRequiredMessage());
-      expect(errorsWithOppholdINorgeTrue.oppholdINorge).to.not.exist;
-      expect(errorsWithOppholdINorgeFalse.oppholdINorge).to.not.exist;
+      expect(errorsWithUndefinedOppholdINorge.oppholdINorge).toEqual(isRequiredMessage());
+      expect(errorsWithOppholdINorgeTrue.oppholdINorge).toBeFalsy();
+      expect(errorsWithOppholdINorgeFalse.oppholdINorge).toBeFalsy();
     });
 
     it('skal validere at tidligere opphold utenlands er besvart', () => {
@@ -59,9 +58,9 @@ describe('<OppholdINorgePanel>', () => {
       const errorsWithHarTidligereOppholdUtenlandsTrue = OppholdINorgePanel.validate({ harTidligereOppholdUtenlands: true });
       const errorsWithHarTidligereOppholdUtenlandsFalse = OppholdINorgePanel.validate({ harTidligereOppholdUtenlands: false });
 
-      expect(errorsWithUndefinedHarTidligereOppholdUtenlands.harTidligereOppholdUtenlands).that.eql(isRequiredMessage());
-      expect(errorsWithHarTidligereOppholdUtenlandsTrue.harTidligereOppholdUtenlands).to.not.exist;
-      expect(errorsWithHarTidligereOppholdUtenlandsFalse.harTidligereOppholdUtenlands).to.not.exist;
+      expect(errorsWithUndefinedHarTidligereOppholdUtenlands.harTidligereOppholdUtenlands).toEqual(isRequiredMessage());
+      expect(errorsWithHarTidligereOppholdUtenlandsTrue.harTidligereOppholdUtenlands).toBeFalsy();
+      expect(errorsWithHarTidligereOppholdUtenlandsFalse.harTidligereOppholdUtenlands).toBeFalsy();
     });
 
     it('skal validere at fremtidige opphold utenlands er besvart', () => {
@@ -69,9 +68,9 @@ describe('<OppholdINorgePanel>', () => {
       const errorsWithHarFremtidigeOppholdUtenlandsTrue = OppholdINorgePanel.validate({ harFremtidigeOppholdUtenlands: true });
       const errorsWithHarFremtidigeOppholdUtenlandsFalse = OppholdINorgePanel.validate({ harFremtidigeOppholdUtenlands: false });
 
-      expect(errorsWithUndefinedHarFremtidigeOppholdUtenlands.harFremtidigeOppholdUtenlands).that.eql(isRequiredMessage());
-      expect(errorsWithHarFremtidigeOppholdUtenlandsTrue.harFremtidigeOppholdUtenlands).to.not.exist;
-      expect(errorsWithHarFremtidigeOppholdUtenlandsFalse.harFremtidigeOppholdUtenlands).to.not.exist;
+      expect(errorsWithUndefinedHarFremtidigeOppholdUtenlands.harFremtidigeOppholdUtenlands).toEqual(isRequiredMessage());
+      expect(errorsWithHarFremtidigeOppholdUtenlandsTrue.harFremtidigeOppholdUtenlands).toBeFalsy();
+      expect(errorsWithHarFremtidigeOppholdUtenlandsFalse.harFremtidigeOppholdUtenlands).toBeFalsy();
     });
 
     const getPeriodDaysFromToday = (startDaysFromToday, endDaysFromToday) => ({
@@ -96,11 +95,11 @@ describe('<OppholdINorgePanel>', () => {
         });
 
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands);
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeFom).that.eql(invalidDateMessage());
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeTom).that.eql(invalidDateMessage());
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1]).to.not.exist;
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeFom).toEqual(invalidDateMessage());
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[0].periodeTom).toEqual(invalidDateMessage());
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1]).toBeFalsy();
 
-        expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
+        expect(errorsWithValidDates.tidligereOppholdUtenlands).toBeFalsy();
       });
 
       it('skal validere at alle datoer er før eller lik dagens dato', () => {
@@ -117,10 +116,10 @@ describe('<OppholdINorgePanel>', () => {
         });
 
         expect(errorsWithInvalidDates.tidligereOppholdUtenlands);
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeFom).to.not.exist;
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).to.eql(dateNotBeforeOrEqualMessage(moment().format(DDMMYYYY_DATE_FORMAT)));
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeFom).toBeFalsy();
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands[1].periodeTom).toEqual(dateNotBeforeOrEqualMessage(moment().format(DDMMYYYY_DATE_FORMAT)));
 
-        expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
+        expect(errorsWithValidDates.tidligereOppholdUtenlands).toBeFalsy();
       });
 
       it('skal validere at ingen perioder overlapper', () => {
@@ -133,11 +132,11 @@ describe('<OppholdINorgePanel>', () => {
           tidligereOppholdUtenlands: [getPeriodDaysFromToday(-20, -15), getPeriodDaysFromToday(-14, -10)],
         });
 
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).to.be.an('object');
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands).toBeInstanceOf('object');
         // eslint-disable-next-line no-underscore-dangle
-        expect(errorsWithInvalidDates.tidligereOppholdUtenlands._error).that.eql(dateRangesOverlappingMessage());
+        expect(errorsWithInvalidDates.tidligereOppholdUtenlands._error).toEqual(dateRangesOverlappingMessage());
 
-        expect(errorsWithValidDates.tidligereOppholdUtenlands).to.not.exist;
+        expect(errorsWithValidDates.tidligereOppholdUtenlands).toBeFalsy();
       });
     });
 
@@ -156,11 +155,11 @@ describe('<OppholdINorgePanel>', () => {
         });
 
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands);
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).that.eql(invalidDateMessage());
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).that.eql(invalidDateMessage());
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[1]).to.not.exist;
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).toEqual(invalidDateMessage());
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).toEqual(invalidDateMessage());
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[1]).toBeFalsy();
 
-        expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
+        expect(errorsWithValidDates.fremtidigeOppholdUtenlands).toBeFalsy();
       });
 
       it('skal validere at alle datoer er lik eller etter mottatt dato', () => {
@@ -181,10 +180,10 @@ describe('<OppholdINorgePanel>', () => {
         });
 
         expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands);
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).to.not.exist;
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).to.eql(dateNotAfterOrEqualMessage('01.02.2019'));
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeTom).toBeFalsy();
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands[0].periodeFom).toEqual(dateNotAfterOrEqualMessage('01.02.2019'));
 
-        expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
+        expect(errorsWithValidDates.fremtidigeOppholdUtenlands).toBeFalsy();
       });
 
       it('skal validere at ingen perioder overlapper', () => {
@@ -197,11 +196,11 @@ describe('<OppholdINorgePanel>', () => {
           fremtidigeOppholdUtenlands: [getPeriodDaysFromToday(15, 20), getPeriodDaysFromToday(10, 14)],
         });
 
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).to.be.an('object');
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands).toBeInstanceOf('object');
         // eslint-disable-next-line no-underscore-dangle
-        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands._error).that.eql(dateRangesOverlappingMessage());
+        expect(errorsWithInvalidDates.fremtidigeOppholdUtenlands._error).toEqual(dateRangesOverlappingMessage());
 
-        expect(errorsWithValidDates.fremtidigeOppholdUtenlands).to.not.exist;
+        expect(errorsWithValidDates.fremtidigeOppholdUtenlands).toBeFalsy();
       });
     });
   });
@@ -215,13 +214,13 @@ describe('<OppholdINorgePanel>', () => {
     />);
 
     let tidligreOppholdUtenlands = wrapper.find({ name: 'tidligereOppholdUtenlands' });
-    expect(tidligreOppholdUtenlands).to.have.length(0);
+    expect(tidligreOppholdUtenlands).toHaveLength(0);
 
     wrapper.setProps({ harTidligereOppholdUtenlands: true });
     wrapper.update();
 
     tidligreOppholdUtenlands = wrapper.find({ name: 'tidligereOppholdUtenlands' });
-    expect(tidligreOppholdUtenlands).to.have.length(1);
+    expect(tidligreOppholdUtenlands).toHaveLength(1);
   });
 
   it('skal vise land dropdown, datepicker og knappen hvis harFremtidigeOppholdUtenlands er valgt', () => {
@@ -233,12 +232,12 @@ describe('<OppholdINorgePanel>', () => {
     />);
 
     let fremtidigeOppholdUtenlands = wrapper.find({ name: 'fremtidigeOppholdUtenlands' });
-    expect(fremtidigeOppholdUtenlands).to.have.length(0);
+    expect(fremtidigeOppholdUtenlands).toHaveLength(0);
 
     wrapper.setProps({ harFremtidigeOppholdUtenlands: true });
     wrapper.update();
 
     fremtidigeOppholdUtenlands = wrapper.find({ name: 'fremtidigeOppholdUtenlands' });
-    expect(fremtidigeOppholdUtenlands).to.have.length(1);
+    expect(fremtidigeOppholdUtenlands).toHaveLength(1);
   });
 });

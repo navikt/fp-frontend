@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import TilbakekrevingTimeline from './TilbakekrevingTimeline';
@@ -42,7 +41,7 @@ describe('<TilbakekrevingTimelinePanel>', () => {
     );
 
     const tidslinje = wrapper.find(TilbakekrevingTimeline);
-    expect(tidslinje).has.length(1);
+    expect(tidslinje).toHaveLength(1);
 
     const event = {
       event: {
@@ -52,9 +51,9 @@ describe('<TilbakekrevingTimelinePanel>', () => {
     };
     tidslinje.prop('selectPeriodCallback')(event);
 
-    expect(setPeriode.called).is.true;
+    expect(setPeriode.called).toBe(true);
     const { args } = setPeriode.getCalls()[0];
-    expect(args).has.length(1);
-    expect(args[0]).is.eql(perioder[1]);
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual(perioder[1]);
   });
 });

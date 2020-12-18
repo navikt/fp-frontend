@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { ArrowBox } from '@fpsak-frontend/shared-components';
@@ -13,7 +12,7 @@ describe('<FrilansOppdragForFamiliePanelImpl>', () => {
       formName="test"
       namePrefix="test"
     />);
-    expect(wrapper.find(ArrowBox)).has.length(0);
+    expect(wrapper.find(ArrowBox)).toHaveLength(0);
   });
 
   it('Skal rendre perioder når checkbox er valgt', () => {
@@ -23,6 +22,6 @@ describe('<FrilansOppdragForFamiliePanelImpl>', () => {
       formName="test"
       namePrefix="test"
     />);
-    expect(wrapper.find(ArrowBox)).has.length(1);
+    expect(wrapper.find(ArrowBox)).toHaveLength(1);
   });
 });

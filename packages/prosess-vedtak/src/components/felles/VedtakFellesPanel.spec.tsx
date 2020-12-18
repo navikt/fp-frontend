@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import Lenke from 'nav-frontend-lenker';
 import { FormattedMessage } from 'react-intl';
@@ -53,15 +52,15 @@ describe('<VedtakFellesPanel>', () => {
     />);
 
     const lenker = wrapper.find(Lenke);
-    expect(lenker).to.have.length(2);
+    expect(lenker).toHaveLength(2);
 
     const message1 = lenker.first().find(FormattedMessage);
-    expect(message1).to.have.length(1);
-    expect(message1.prop('id')).to.eql('VedtakFellesPanel.AutomatiskVedtaksbrev');
+    expect(message1).toHaveLength(1);
+    expect(message1.prop('id')).toEqual('VedtakFellesPanel.AutomatiskVedtaksbrev');
 
     const message2 = lenker.last().find(FormattedMessage);
-    expect(message2).to.have.length(1);
-    expect(message2.prop('id')).to.eql('VedtakFellesPanel.RedigerVedtaksbrev');
+    expect(message2).toHaveLength(1);
+    expect(message2.prop('id')).toEqual('VedtakFellesPanel.RedigerVedtaksbrev');
   });
 
   it('skal vise panel for editering av vedtaksbrevet etter at saksbehandler har trykket på lenke', () => {
@@ -79,14 +78,14 @@ describe('<VedtakFellesPanel>', () => {
       submitting={false}
     />);
 
-    expect(wrapper.find(ManueltVedtaksbrevPanel)).to.have.length(0);
+    expect(wrapper.find(ManueltVedtaksbrevPanel)).toHaveLength(0);
 
     const lenker = wrapper.find(Lenke);
-    expect(lenker).to.have.length(2);
+    expect(lenker).toHaveLength(2);
 
     lenker.last().prop('onClick')({} as React.MouseEvent<any>);
 
-    expect(wrapper.find(ManueltVedtaksbrevPanel)).to.have.length(1);
+    expect(wrapper.find(ManueltVedtaksbrevPanel)).toHaveLength(1);
   });
 
   it('skal rendre input-panel', () => {
@@ -104,6 +103,6 @@ describe('<VedtakFellesPanel>', () => {
       submitting={false}
     />);
 
-    expect(wrapper.find('span')).to.have.length(3);
+    expect(wrapper.find('span')).toHaveLength(3);
   });
 });

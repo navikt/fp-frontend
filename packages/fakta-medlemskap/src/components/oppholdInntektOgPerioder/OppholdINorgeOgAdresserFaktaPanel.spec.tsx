@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -72,11 +71,11 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       alleMerknaderFraBeslutter={{}}
     />);
     const felter = wrapper.find(Normaltekst);
-    expect(felter).to.have.length(5);
-    expect(felter.first().childAt(0).find(FormattedMessage).prop('id')).to.eql('OppholdINorgeOgAdresserFaktaPanel.Yes');
-    expect(felter.at(1).childAt(0).find(FormattedMessage).prop('id')).to.eql('OppholdINorgeOgAdresserFaktaPanel.Yes');
-    expect(felter.at(2).childAt(0).text()).to.eql('Sverige');
-    expect(felter.at(4).childAt(0).find(FormattedMessage).prop('id')).to.eql('OppholdINorgeOgAdresserFaktaPanel.No');
+    expect(felter).toHaveLength(5);
+    expect(felter.first().childAt(0).find(FormattedMessage).prop('id')).toEqual('OppholdINorgeOgAdresserFaktaPanel.Yes');
+    expect(felter.at(1).childAt(0).find(FormattedMessage).prop('id')).toEqual('OppholdINorgeOgAdresserFaktaPanel.Yes');
+    expect(felter.at(2).childAt(0).text()).toEqual('Sverige');
+    expect(felter.at(4).childAt(0).find(FormattedMessage).prop('id')).toEqual('OppholdINorgeOgAdresserFaktaPanel.No');
   });
 
   it('skal rendre form som viser bosatt informasjon', () => {
@@ -93,7 +92,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       alleMerknaderFraBeslutter={{}}
     />);
     const foreldreDivs = wrapper.find('div');
-    expect(foreldreDivs).to.have.length(3);
+    expect(foreldreDivs).toHaveLength(3);
   });
 
   it('skal rendre form som lar NAV-ansatt velge om barnet er ektefelles barn eller ei', () => {
@@ -133,9 +132,9 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
     />);
 
     const radioFields = wrapper.find('RadioOption');
-    expect(radioFields).to.have.length(2);
+    expect(radioFields).toHaveLength(2);
     // @ts-ignore
-    expect(radioFields.first().prop('label').id).to.eql('OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway');
+    expect(radioFields.first().prop('label').id).toEqual('OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway');
   });
 
   it('skal sette initielle verdier', () => {
@@ -203,7 +202,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
     } as Soknad;
 
     const initialValues = OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, periode, [aksjonspunkt]);
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       foreldre: [{
         isApplicant: true,
         personopplysning: {

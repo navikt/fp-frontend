@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -12,7 +11,7 @@ describe('<AktsomhetGradForsettFormPanel>', () => {
       readOnly={false}
     />);
 
-    expect(wrapper.find(Normaltekst)).to.have.length(2);
+    expect(wrapper.find(Normaltekst)).toHaveLength(2);
   });
 
   it('skal vise valg for om det skal tillegges renter når forsett er valgt og det er forsto eller burde forstått', () => {
@@ -21,7 +20,7 @@ describe('<AktsomhetGradForsettFormPanel>', () => {
       erValgtResultatTypeForstoBurdeForstaatt
     />);
 
-    expect(wrapper.find(Normaltekst)).to.have.length(1);
-    expect(wrapper.find(RadioOption)).to.have.length(2);
+    expect(wrapper.find(Normaltekst)).toHaveLength(1);
+    expect(wrapper.find(RadioOption)).toHaveLength(2);
   });
 });

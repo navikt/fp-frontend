@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme/build';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -99,13 +98,13 @@ describe('<BeregningFP>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningForm = wrapper.find(BeregningForm);
-    expect(beregningForm.props().readOnly).to.have.equal(false);
-    expect(beregningForm.props().gjeldendeAksjonspunkter).to.eql(gjeldendeAksjonspunkter);
-    expect(beregningForm.props().relevanteStatuser.isArbeidstaker).to.eql(true, 'isArbeidstaker');
-    expect(beregningForm.props().relevanteStatuser.isSelvstendigNaeringsdrivende).to.eql(true, 'isSelvstendigNaeringsdrivende');
-    expect(beregningForm.props().relevanteStatuser.isKombinasjonsstatus).to.eql(true, 'isKombinasjonsstatus');
-    expect(beregningForm.props().relevanteStatuser.skalViseBeregningsgrunnlag).to.eql(true, 'skalViseBeregningsgrunnlag');
-    expect(beregningForm.props().submitCallback).to.have.equal(sinon.spy);
+    expect(beregningForm.props().readOnly).toBe(false);
+    expect(beregningForm.props().gjeldendeAksjonspunkter).toEqual(gjeldendeAksjonspunkter);
+    expect(beregningForm.props().relevanteStatuser.isArbeidstaker).toEqual(true);
+    expect(beregningForm.props().relevanteStatuser.isSelvstendigNaeringsdrivende).toEqual(true);
+    expect(beregningForm.props().relevanteStatuser.isKombinasjonsstatus).toEqual(true);
+    expect(beregningForm.props().relevanteStatuser.skalViseBeregningsgrunnlag).toEqual(true);
+    expect(beregningForm.props().submitCallback).toBe(sinon.spy);
   });
   it('skal teste visning av komponenter når beregningsgrunnlag er lik null', () => {
     const wrapper = shallow(<BeregningFP
@@ -120,12 +119,12 @@ describe('<BeregningFP>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningForm = wrapper.find(BeregningForm);
-    expect(beregningForm).to.be.lengthOf(0);
+    expect(beregningForm).toHaveLength(0);
     const messages = wrapper.find(FormattedMessage);
-    expect(messages).to.be.lengthOf(3);
-    expect(messages.get(0).props.id).to.equal('Beregningsgrunnlag.Title');
-    expect(messages.get(1).props.id).to.equal('Beregningsgrunnlag.HarIkkeBeregningsregler');
-    expect(messages.get(2).props.id).to.equal('Beregningsgrunnlag.SakTilInfo');
+    expect(messages).toHaveLength(3);
+    expect(messages.get(0).props.id).toBe('Beregningsgrunnlag.Title');
+    expect(messages.get(1).props.id).toBe('Beregningsgrunnlag.HarIkkeBeregningsregler');
+    expect(messages.get(2).props.id).toBe('Beregningsgrunnlag.SakTilInfo');
   });
   it('skal teste visning av komponenter når beregningsgrunnlag ikke er null', () => {
     const wrapper = shallow(<BeregningFP
@@ -140,9 +139,9 @@ describe('<BeregningFP>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const beregningForm = wrapper.find(BeregningForm);
-    expect(beregningForm).to.be.lengthOf(1);
+    expect(beregningForm).toHaveLength(1);
     const messages = wrapper.find(FormattedMessage);
-    expect(messages).to.be.lengthOf(0);
+    expect(messages).toHaveLength(0);
   });
   it('skal teste at GraderingUtenBG vises når sokerHarGraderingPaaAndelUtenBG er true', () => {
     const wrapper = shallow(<BeregningFP
@@ -157,7 +156,7 @@ describe('<BeregningFP>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const graderingUtenBG = wrapper.find(GraderingUtenBG2);
-    expect(graderingUtenBG).to.be.lengthOf(1);
+    expect(graderingUtenBG).toHaveLength(1);
   });
   it('skal teste at GraderingUtenBG ikke vises når sokerHarGraderingPaaAndelUtenBG er false', () => {
     const wrapper = shallow(<BeregningFP
@@ -172,6 +171,6 @@ describe('<BeregningFP>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const graderingUtenBG = wrapper.find(GraderingUtenBG2);
-    expect(graderingUtenBG).to.be.lengthOf(0);
+    expect(graderingUtenBG).toHaveLength(0);
   });
 });

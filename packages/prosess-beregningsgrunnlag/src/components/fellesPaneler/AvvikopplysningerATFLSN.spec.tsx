@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { expect } from 'chai';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import { FormattedMessage } from 'react-intl';
@@ -38,29 +37,29 @@ describe('<AvviksOpplysningerATFLSN>', () => {
     />);
 
     const rows = wrapper.find('FlexRow');
-    expect(rows).to.have.length(4);
+    expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find('FormattedMessage');
-    expect(omregnetAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Frilans');
+    expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Frilans');
     const omregnetAarsinntektVerdi = rows.first().find('Normaltekst');
-    expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(beregnetAarsinntekt));
+    expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
 
     const rapportertAarsinntektText = rows.at(1).find('FormattedMessage');
-    expect(rapportertAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt.Frilans');
+    expect(rapportertAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt.Frilans');
     const rapportertAarsinntektVerdi = rows.at(1).find('Normaltekst');
-    expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(sammenligningsgrunnlagSum));
+    expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(sammenligningsgrunnlagSum));
 
     const avvikText = rows.at(3).find('FormattedMessage');
-    expect(avvikText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Frilans');
+    expect(avvikText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Frilans');
     const avvikVerdi = rows.at(3).find('Normaltekst');
-    expect(avvikVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
+    expect(avvikVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
     const avvikProsentText = rows.at(3).find(FormattedMessage).at(1);
-    expect(avvikProsentText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
+    expect(avvikProsentText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
 
     type ValueProp = {
       avvik: number;
     }
     const avvikProsentValue = avvikProsentText.first().prop('values') as ValueProp;
-    expect(avvikProsentValue.avvik).to.eql(avvikRounded);
+    expect(avvikProsentValue.avvik).toEqual(avvikRounded);
   });
 
   it('Skal teste tabellen får korrekte rader med innhold med status:SAMMENLIGNING_ATFL_SN', () => {
@@ -76,30 +75,30 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
     />);
     const rows = wrapper.find('FlexRow');
-    expect(rows).to.have.length(4);
+    expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find('FormattedMessage');
-    expect(omregnetAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Arbeid');
+    expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Arbeid');
     const omregnetAarsinntektVerdi = rows.first().find('Normaltekst');
-    expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(beregnetAarsinntekt));
+    expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
 
     const rapportertAarsinntektText = rows.at(1).find('FormattedMessage');
-    expect(rapportertAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt.Arbeid');
+    expect(rapportertAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt.Arbeid');
     const rapportertAarsinntektVerdi = rows.at(1).find('Normaltekst');
-    expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(sammenligningsgrunnlagSum));
+    expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(sammenligningsgrunnlagSum));
 
     const avvikText = rows.at(3).find('FormattedMessage');
-    expect(avvikText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Arbeid');
+    expect(avvikText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Arbeid');
     const avvikVerdi = rows.at(3).find('Normaltekst');
-    expect(avvikVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
+    expect(avvikVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
 
     const avvikProsentText = rows.at(3).find(FormattedMessage).at(1);
-    expect(avvikProsentText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
+    expect(avvikProsentText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
 
     type ValueProp = {
       avvik: number;
     }
     const avvikProsentValue = avvikProsentText.first().prop('values') as ValueProp;
-    expect(avvikProsentValue.avvik).to.eql(avvikRounded);
+    expect(avvikProsentValue.avvik).toEqual(avvikRounded);
   });
   // fra SNtester
   it('Skal teste tabellen får korrekte rader med innhold vd SN', () => {
@@ -117,28 +116,28 @@ describe('<AvviksOpplysningerATFLSN>', () => {
     />);
 
     const rows = wrapper.find('FlexRow');
-    expect(rows).to.have.length(4);
+    expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find('FormattedMessage');
-    expect(omregnetAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt');
+    expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt');
     const omregnetAarsinntektVerdi = rows.first().find('Normaltekst');
-    expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(beregnetAarsinntekt));
+    expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
 
     const rapportertAarsinntektText = rows.at(1).find('FormattedMessage');
-    expect(rapportertAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt');
+    expect(rapportertAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt');
     const rapportertAarsinntektVerdi = rows.at(1).find('Normaltekst');
-    expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(sammenligningsgrunnlagSum));
+    expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(sammenligningsgrunnlagSum));
 
     const avvikText = rows.at(3).find('FormattedMessage');
-    expect(avvikText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik');
+    expect(avvikText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik');
     const avvikVerdi = rows.at(3).find('Normaltekst');
-    expect(avvikVerdi.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
+    expect(avvikVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
     const avvikProsentText = rows.at(3).find(FormattedMessage).at(1);
-    expect(avvikProsentText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
+    expect(avvikProsentText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AvvikProsent');
 
     type ValueProp = {
       avvik: number;
     }
     const avvikProsentValue = avvikProsentText.first().prop('values') as ValueProp;
-    expect(avvikProsentValue.avvik).to.eql(avvikRounded);
+    expect(avvikProsentValue.avvik).toEqual(avvikRounded);
   });
 });

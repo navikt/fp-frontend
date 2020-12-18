@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { Personopplysninger } from '@fpsak-frontend/types';
@@ -65,9 +64,9 @@ describe('<BostedBarnView>', () => {
     />);
     const undertekst = wrapper.find('Undertekst');
     const barnNr = undertekst.first();
-    expect(barnNr.find('FormattedMessage').prop('id')).to.equal('BostedBarnView.Barn');
+    expect(barnNr.find('FormattedMessage').prop('id')).toBe('BostedBarnView.Barn');
     // @ts-ignore Fiks
-    expect(barnNr.find('FormattedMessage').prop('values').barnNr).to.equal(3);
+    expect(barnNr.find('FormattedMessage').prop('values').barnNr).toBe(3);
   });
 
   it('skal vise navn', () => {
@@ -75,7 +74,7 @@ describe('<BostedBarnView>', () => {
       barn={barn as Personopplysninger}
       barnNr={3}
     />);
-    expect(wrapper.find('Element').childAt(0).text()).to.eql('Espen Barn');
+    expect(wrapper.find('Element').childAt(0).text()).toEqual('Espen Barn');
   });
 
   it('skal vise fodselsdato', () => {
@@ -84,11 +83,11 @@ describe('<BostedBarnView>', () => {
       barnNr={3}
     />);
     const normalTekst = wrapper.find('Normaltekst');
-    expect(normalTekst).to.have.length(2);
+    expect(normalTekst).toHaveLength(2);
     const fodselsWrapper = normalTekst.first();
-    expect(fodselsWrapper.find('FormattedMessage').prop('id')).to.eql('BostedBarnView.Age');
+    expect(fodselsWrapper.find('FormattedMessage').prop('id')).toEqual('BostedBarnView.Age');
     // @ts-ignore Fiks
-    expect(fodselsWrapper.find('FormattedMessage').prop('values').fodselsdato).to.eql('03.02.2016');
+    expect(fodselsWrapper.find('FormattedMessage').prop('values').fodselsdato).toEqual('03.02.2016');
   });
 
   it('skal vise adresse', () => {
@@ -98,6 +97,6 @@ describe('<BostedBarnView>', () => {
     />);
     const normalTekst = wrapper.find('Normaltekst');
     const adresseWrapper = normalTekst.last();
-    expect(adresseWrapper.childAt(0).text()).to.eql('Ringeriksveien 182, 1339 Vøyenenga');
+    expect(adresseWrapper.childAt(0).text()).toEqual('Ringeriksveien 182, 1339 Vøyenenga');
   });
 });

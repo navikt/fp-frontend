@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { InjectedFormProps } from 'redux-form';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -64,11 +63,11 @@ describe('<FormkravKlageForm>', () => {
       }}
     />);
     const vedtakSelect = wrapper.find('SelectField');
-    expect(vedtakSelect).to.have.length(1);
-    expect(vedtakSelect.prop('selectValues')).to.have.length(4);
-    expect(vedtakSelect.prop('selectValues')[0].props.children).to.equal('Ikke påklagd et vedtak');
-    expect(vedtakSelect.prop('selectValues')[1].props.children).to.equal('Førstegangssøknad 25.10.2018');
-    expect(vedtakSelect.prop('selectValues')[2].props.children).to.equal('Revurdering 25.10.2018');
-    expect(vedtakSelect.prop('selectValues')[3].props.children).to.equal('Tilbakekreving 06.02.2020');
+    expect(vedtakSelect).toHaveLength(1);
+    expect(vedtakSelect.prop('selectValues')).toHaveLength(4);
+    expect(vedtakSelect.prop('selectValues')[0].props.children).toBe('Ikke påklagd et vedtak');
+    expect(vedtakSelect.prop('selectValues')[1].props.children).toBe('Førstegangssøknad 25.10.2018');
+    expect(vedtakSelect.prop('selectValues')[2].props.children).toBe('Revurdering 25.10.2018');
+    expect(vedtakSelect.prop('selectValues')[3].props.children).toBe('Tilbakekreving 06.02.2020');
   });
 });

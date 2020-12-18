@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -26,8 +25,8 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
-    expect(textField.prop('readOnly')).is.false;
+    expect(textField).toHaveLength(1);
+    expect(textField.prop('readOnly')).toBe(false);
   });
 
   it('skal vise tekstfelt som readOnly', () => {
@@ -36,8 +35,8 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
-    expect(textField.prop('readOnly')).is.true;
+    expect(textField).toHaveLength(1);
+    expect(textField.prop('readOnly')).toBe(true);
   });
 
   it('skal vise default tekstkode', () => {
@@ -46,7 +45,7 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField.prop('label')).is.eql('Vurdering');
+    expect(textField.prop('label')).toEqual('Vurdering');
   });
 
   it('skal vise gitt tekstkode', () => {
@@ -56,7 +55,7 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField.prop('label')).is.eql('Beskrivelse');
+    expect(textField.prop('label')).toEqual('Beskrivelse');
   });
 
   it('skal hente begrunnelse fra første aksjonspunkt', () => {
@@ -64,6 +63,6 @@ describe('<ProsessStegBegrunnelseTextField>', () => {
       begrunnelse: 'test &amp;',
     }] as Aksjonspunkt[];
     const initalValues = ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter);
-    expect(initalValues).is.eql({ begrunnelse: 'test &' });
+    expect(initalValues).toEqual({ begrunnelse: 'test &' });
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioOption } from '@fpsak-frontend/form';
@@ -13,13 +12,13 @@ describe('<RettigheterPanel>', () => {
     const soknad = new SoknadData('FORELDREPENGER', 'FØDSEL', 'MOR');
     const wrapper = shallowWithIntl(<RettigheterPanel intl={intlMock} soknadData={soknad} />);
     const radio = wrapper.find(RadioOption);
-    expect(radio).to.have.length(3);
+    expect(radio).toHaveLength(3);
   });
 
   it('skal vise komponent med ekstra valg for adopsjon', () => {
     const soknad = new SoknadData('FORELDREPENGER', 'FØDSEL', 'FAR');
     const wrapper = shallowWithIntl(<RettigheterPanel intl={intlMock} soknadData={soknad} />);
     const radio = wrapper.find(RadioOption);
-    expect(radio).to.have.length(4);
+    expect(radio).toHaveLength(4);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import SupportMenySakIndex from './SupportMenySakIndex';
 import SupportTabs from './supportTabs';
@@ -16,18 +15,18 @@ describe('<SupportMenySakIndex>', () => {
     />);
 
     const tabMeny = wrapper.find(TabMeny);
-    expect(tabMeny).has.length(1);
+    expect(tabMeny).toHaveLength(1);
 
     const tabs = tabMeny.prop('tabs');
-    expect(tabs[0].isActive).is.false;
-    expect(tabs[0].isDisabled).is.false;
-    expect(tabs[0].tooltip).is.eql('Historikk');
-    expect(tabs[1].isActive).is.true;
-    expect(tabs[1].isDisabled).is.false;
-    expect(tabs[1].tooltip).is.eql('Send melding');
-    expect(tabs[2].isActive).is.false;
-    expect(tabs[2].isDisabled).is.false;
-    expect(tabs[2].tooltip).is.eql('Dokumenter');
+    expect(tabs[0].isActive).toBe(false);
+    expect(tabs[0].isDisabled).toBe(false);
+    expect(tabs[0].tooltip).toEqual('Historikk');
+    expect(tabs[1].isActive).toBe(true);
+    expect(tabs[1].isDisabled).toBe(false);
+    expect(tabs[1].tooltip).toEqual('Send melding');
+    expect(tabs[2].isActive).toBe(false);
+    expect(tabs[2].isDisabled).toBe(false);
+    expect(tabs[2].tooltip).toEqual('Dokumenter');
   });
 
   it('skal lage tabs og sette Send Melding til disablet', () => {
@@ -38,14 +37,14 @@ describe('<SupportMenySakIndex>', () => {
     />);
 
     const tabMeny = wrapper.find(TabMeny);
-    expect(tabMeny).has.length(1);
+    expect(tabMeny).toHaveLength(1);
 
     const tabs = tabMeny.prop('tabs');
-    expect(tabs[0].isActive).is.false;
-    expect(tabs[0].isDisabled).is.false;
-    expect(tabs[0].tooltip).is.eql('Historikk');
-    expect(tabs[1].isActive).is.false;
-    expect(tabs[1].isDisabled).is.true;
-    expect(tabs[1].tooltip).is.eql('Send melding');
+    expect(tabs[0].isActive).toBe(false);
+    expect(tabs[0].isDisabled).toBe(false);
+    expect(tabs[0].tooltip).toEqual('Historikk');
+    expect(tabs[1].isActive).toBe(false);
+    expect(tabs[1].isDisabled).toBe(true);
+    expect(tabs[1].tooltip).toEqual('Send melding');
   });
 });

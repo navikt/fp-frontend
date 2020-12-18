@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import kontrollresultatKode from './kodeverk/kontrollresultatKode';
@@ -29,9 +28,9 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
     />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).has.length(1);
-    expect(wrapper.find(IngenRisikoPanel)).has.length(0);
-    expect(wrapper.find(HoyRisikoTittel)).has.length(0);
+    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
+    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
+    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(0);
   });
 
   it('skal rendere korrekt komponent når det ikke er utfør klassifisering', () => {
@@ -44,9 +43,9 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
     />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).has.length(1);
-    expect(wrapper.find(IngenRisikoPanel)).has.length(0);
-    expect(wrapper.find(HoyRisikoTittel)).has.length(0);
+    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
+    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
+    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(0);
   });
 
   it('skal rendere korrekt komponent når det er ikke_hoy resultat', () => {
@@ -59,9 +58,9 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
     />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).has.length(0);
-    expect(wrapper.find(IngenRisikoPanel)).has.length(1);
-    expect(wrapper.find(HoyRisikoTittel)).has.length(0);
+    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
+    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(1);
+    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(0);
   });
 
   it('skal rendere korrekt komponent når det er hoy resultat', () => {
@@ -74,8 +73,8 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
     />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).has.length(0);
-    expect(wrapper.find(IngenRisikoPanel)).has.length(0);
-    expect(wrapper.find(HoyRisikoTittel)).has.length(1);
+    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
+    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
+    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(1);
   });
 });

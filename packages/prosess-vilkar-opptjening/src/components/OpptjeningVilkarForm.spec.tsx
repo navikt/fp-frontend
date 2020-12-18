@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -53,7 +52,7 @@ describe('<OpptjeningVilkarForm>', () => {
     />);
 
     const aksjonspunktPanel = wrapper.find(OpptjeningVilkarAksjonspunktPanel);
-    expect(aksjonspunktPanel).to.have.length(1);
+    expect(aksjonspunktPanel).toHaveLength(1);
   });
 
   it('skal vise OpptjeningVilkarView når en ikke har aksjonspunkt', () => {
@@ -71,6 +70,6 @@ describe('<OpptjeningVilkarForm>', () => {
       fastsattOpptjening={fastsattOpptjening}
     />);
     const vilkarView = wrapper.find(OpptjeningVilkarView);
-    expect(vilkarView).to.have.length(1);
+    expect(vilkarView).toHaveLength(1);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -21,11 +20,11 @@ describe('<VedtakKlageSubmitPanel>', () => {
     />);
 
     const hovedknapp = wrapper.find('Hovedknapp');
-    expect(hovedknapp).to.have.length(1);
-    expect(hovedknapp.childAt(0).text()).to.eql('Til godkjenning');
+    expect(hovedknapp).toHaveLength(1);
+    expect(hovedknapp.childAt(0).text()).toEqual('Til godkjenning');
     const a = wrapper.find('a');
-    expect(a).to.have.length(1);
-    expect(wrapper.find('FormattedMessage').first().prop('id')).to.eql('VedtakKlageForm.ForhandvisBrev');
+    expect(a).toHaveLength(1);
+    expect(wrapper.find('FormattedMessage').first().prop('id')).toEqual('VedtakKlageForm.ForhandvisBrev');
   });
 
   it('skal rendre submit panel med behandling på vent', () => {
@@ -38,11 +37,11 @@ describe('<VedtakKlageSubmitPanel>', () => {
     />);
 
     const hovedknapp = wrapper.find('Hovedknapp');
-    expect(hovedknapp).to.have.length(1);
-    expect(hovedknapp.childAt(0).text()).to.eql('Til godkjenning');
-    expect(hovedknapp.prop('disabled')).is.true;
+    expect(hovedknapp).toHaveLength(1);
+    expect(hovedknapp.childAt(0).text()).toEqual('Til godkjenning');
+    expect(hovedknapp.prop('disabled')).toBe(true);
 
     const a = wrapper.find('a');
-    expect(a).to.have.length(1);
+    expect(a).toHaveLength(1);
   });
 });

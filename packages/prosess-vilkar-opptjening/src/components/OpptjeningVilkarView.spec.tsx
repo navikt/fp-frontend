@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { shallow } from 'enzyme';
 
@@ -18,6 +17,6 @@ describe('<OpptjeningVilkarView>', () => {
       opptjeningTomDate="2018-02-02"
     />);
 
-    expect(wrapper.find(OpptjeningTimeLineLight)).to.have.length(1);
+    expect(wrapper.find(OpptjeningTimeLineLight)).toHaveLength(1);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
@@ -154,15 +153,15 @@ describe('<UttakTimeLineData>', () => {
     />);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
-    expect(modal).to.have.length(0);
+    expect(modal).toHaveLength(0);
     const message = wrapper.find(FormattedMessage);
-    expect(message).to.have.length(2);
-    expect(message.first().prop('id')).to.eql('UttakTimeLineData.PeriodeData.Detaljer');
-    expect(message.at(1).prop('id')).to.eql('UttakTimeLineData.PeriodeData.DelOppPerioden');
-    expect(wrapper.find(UttakActivity)).to.have.length(1);
-    expect(wrapper.find(TimeLineButton)).to.have.length(2);
-    expect(wrapper.find(TimeLineDataContainer)).to.have.length(1);
-    expect(wrapper.find(Column)).to.have.length(3);
+    expect(message).toHaveLength(2);
+    expect(message.first().prop('id')).toEqual('UttakTimeLineData.PeriodeData.Detaljer');
+    expect(message.at(1).prop('id')).toEqual('UttakTimeLineData.PeriodeData.DelOppPerioden');
+    expect(wrapper.find(UttakActivity)).toHaveLength(1);
+    expect(wrapper.find(TimeLineButton)).toHaveLength(2);
+    expect(wrapper.find(TimeLineDataContainer)).toHaveLength(1);
+    expect(wrapper.find(Column)).toHaveLength(3);
   });
 
   it('skal rendre UttakTimeLineData med modal og lukke modal', () => {
@@ -187,15 +186,15 @@ describe('<UttakTimeLineData>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     wrapper.setState({ showDelPeriodeModal: true });
-    expect(wrapper.state('showDelPeriodeModal')).is.true;
+    expect(wrapper.state('showDelPeriodeModal')).toBe(true);
     const modal = wrapper.find(DelOppPeriodeModal);
-    expect(modal).to.have.length(1);
-    expect(modal.first().prop('showModal')).to.eql(true);
+    expect(modal).toHaveLength(1);
+    expect(modal.first().prop('showModal')).toEqual(true);
 
     modal.prop('cancelEvent')();
     wrapper.update();
-    expect(wrapper.state('showDelPeriodeModal')).is.false;
-    expect(modal.prop('periodeData')).to.eql(selectedItem);
+    expect(wrapper.state('showDelPeriodeModal')).toBe(false);
+    expect(modal.prop('periodeData')).toEqual(selectedItem);
   });
 
   it('skal rendre UttakTimeLineData readOnly', () => {
@@ -221,14 +220,14 @@ describe('<UttakTimeLineData>', () => {
     />);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
-    expect(modal).to.have.length(0);
+    expect(modal).toHaveLength(0);
     const message = wrapper.find(FormattedMessage);
-    expect(message).to.have.length(1);
-    expect(message.first().prop('id')).to.eql('UttakTimeLineData.PeriodeData.Detaljer');
+    expect(message).toHaveLength(1);
+    expect(message.first().prop('id')).toEqual('UttakTimeLineData.PeriodeData.Detaljer');
     const uttakActivity = wrapper.find(UttakActivity);
-    expect(uttakActivity).to.have.length(1);
+    expect(uttakActivity).toHaveLength(1);
     const image = wrapper.find(TimeLineButton);
-    expect(image).to.have.length(2);
+    expect(image).toHaveLength(2);
   });
 
   it('skal rendre naviagtion', () => {
@@ -255,11 +254,11 @@ describe('<UttakTimeLineData>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const buttons = wrapper.find(TimeLineButton);
-    expect(buttons).to.have.length(2);
-    expect(buttons.at(0).prop('callback')).to.eql(callbackBackward);
-    expect(buttons.at(0).prop('text')).to.have.length.above(3);
-    expect(buttons.at(1).prop('callback')).to.eql(callbackForward);
-    expect(buttons.at(1).prop('text')).to.have.length.above(3);
+    expect(buttons).toHaveLength(2);
+    expect(buttons.at(0).prop('callback')).toEqual(callbackBackward);
+    expect(buttons.at(0).prop('text').length).toBeGreaterThan(3);
+    expect(buttons.at(1).prop('callback')).toEqual(callbackForward);
+    expect(buttons.at(1).prop('text').length).toBeGreaterThan(3);
   });
 
   it('skal rendre UttakActivity i UttakTimeLineData', () => {
@@ -287,11 +286,11 @@ describe('<UttakTimeLineData>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttakActivity = wrapper.find(UttakActivity);
-    expect(uttakActivity).to.have.length(1);
-    expect(uttakActivity.first().prop('cancelSelectedActivity')).to.eql(callbackCancelSelectedActivity);
-    expect(uttakActivity.first().prop('updateActivity')).to.eql(callbackUpdateActivity);
-    expect(uttakActivity.first().prop('selectedItemData')).to.eql(selectedItem);
-    expect(uttakActivity.first().prop('readOnly')).to.eql(false);
+    expect(uttakActivity).toHaveLength(1);
+    expect(uttakActivity.first().prop('cancelSelectedActivity')).toEqual(callbackCancelSelectedActivity);
+    expect(uttakActivity.first().prop('updateActivity')).toEqual(callbackUpdateActivity);
+    expect(uttakActivity.first().prop('selectedItemData')).toEqual(selectedItem);
+    expect(uttakActivity.first().prop('readOnly')).toEqual(false);
   });
 
   it('skal rendre uttakpanel med aksjonspunkt og korrekt tekst om man går tom för en aktivitets dager', () => {
@@ -320,11 +319,11 @@ describe('<UttakTimeLineData>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(uttak).has.length(1);
+    expect(uttak).toHaveLength(1);
     const formattedMessage = uttak.find(FormattedMessage);
-    expect(formattedMessage).has.length(1);
-    expect(formattedMessage.prop('id')).to.eql('UttakPanel.manuellBehandlingÅrsakEnskiltArbeidsforhold');
-    expect(formattedMessage).has.length(1);
+    expect(formattedMessage).toHaveLength(1);
+    expect(formattedMessage.prop('id')).toEqual('UttakPanel.manuellBehandlingÅrsakEnskiltArbeidsforhold');
+    expect(formattedMessage).toHaveLength(1);
   });
 
   it('skal rendre uttakpanel med aksjonspunkt og korrekt tekst om man går tom för flere aktiviteters dager', () => {
@@ -353,10 +352,10 @@ describe('<UttakTimeLineData>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(uttak).has.length(1);
+    expect(uttak).toHaveLength(1);
     const formattedMessage = uttak.find(FormattedMessage);
-    expect(formattedMessage.prop('id')).to.eql('UttakPanel.manuellBehandlingÅrsakArbeidsforhold');
-    expect(formattedMessage).has.length(1);
+    expect(formattedMessage.prop('id')).toEqual('UttakPanel.manuellBehandlingÅrsakArbeidsforhold');
+    expect(formattedMessage).toHaveLength(1);
   });
 
   it('skal sette trekkdagene lik virkedagene for periode som ikke har gradering eller samtidig uttak', () => {
@@ -370,7 +369,7 @@ describe('<UttakTimeLineData>', () => {
 
     const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent);
 
-    expect(trekkdagerForAktivitet).is.eql({
+    expect(trekkdagerForAktivitet).toEqual({
       weeks: 1,
       days: 3.0,
       trekkdagerDesimaler: 8,
@@ -388,7 +387,7 @@ describe('<UttakTimeLineData>', () => {
 
     const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent);
 
-    expect(trekkdagerForAktivitet).is.eql({
+    expect(trekkdagerForAktivitet).toEqual({
       weeks: 0,
       days: 4.8,
       trekkdagerDesimaler: 4.8,
@@ -406,7 +405,7 @@ describe('<UttakTimeLineData>', () => {
 
     const trekkdagerForAktivitet = kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent);
 
-    expect(trekkdagerForAktivitet).is.eql({
+    expect(trekkdagerForAktivitet).toEqual({
       weeks: 0,
       days: 4.0,
       trekkdagerDesimaler: 4,

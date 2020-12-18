@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import VurderMilitaer, { vurderMilitaerField } from './VurderMilitaer';
@@ -18,7 +17,7 @@ describe('<VurderMilitaer>', () => {
       isAksjonspunktClosed={false}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
   });
 
   it('Skal teste at buildInitialvalues bygges korrekt når vi ikke har satt verdi i fakta om beregning', () => {
@@ -26,7 +25,7 @@ describe('<VurderMilitaer>', () => {
       vurderMilitaer: null,
     };
     const acutalValues = VurderMilitaer.buildInitialValues(faktaBg as FaktaOmBeregning);
-    expect(acutalValues).to.eql({});
+    expect(acutalValues).toEqual({});
   });
 
   it('Skal teste at buildInitialvalues bygges korrekt når militær er satt til true', () => {
@@ -34,7 +33,7 @@ describe('<VurderMilitaer>', () => {
     const testobj = {
       [vurderMilitaerField]: true,
     };
-    expect(values).to.deep.equal(testobj);
+    expect(values).toEqual(testobj);
   });
 
   it('Skal teste at buildInitialvalues bygges korrekt når aksjonspunktet er løst og militær er satt til false', () => {
@@ -42,7 +41,7 @@ describe('<VurderMilitaer>', () => {
     const testobj = {
       [vurderMilitaerField]: false,
     };
-    expect(values).to.deep.equal(testobj);
+    expect(values).toEqual(testobj);
   });
 
   it('Skal teste at transformValues bygger korrekt objekt gitt at vurderMilitaerField er true', () => {
@@ -55,7 +54,7 @@ describe('<VurderMilitaer>', () => {
         harMilitaer: true,
       },
     };
-    expect(transformedValues).to.deep.equal(expectedValues);
+    expect(transformedValues).toEqual(expectedValues);
   });
 
   it('Skal teste at transformValues bygger korrekt objekt gitt at vurderMilitaerField er false', () => {
@@ -68,6 +67,6 @@ describe('<VurderMilitaer>', () => {
         harMilitaer: false,
       },
     };
-    expect(transformedValues).to.deep.equal(expectedValues);
+    expect(transformedValues).toEqual(expectedValues);
   });
 });

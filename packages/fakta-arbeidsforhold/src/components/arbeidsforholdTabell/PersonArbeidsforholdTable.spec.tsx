@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import {
@@ -68,22 +67,22 @@ describe('<PersonArbeidsforholdTable>', () => {
     />);
 
     const table = wrapper.find(Table);
-    expect(table).has.length(1);
+    expect(table).toHaveLength(1);
 
     const rows = table.find(TableRow);
 
-    expect(rows).has.length(3);
+    expect(rows).toHaveLength(3);
 
     const row1 = rows.at(1);
-    expect(row1.prop('isSelected')).is.true;
+    expect(row1.prop('isSelected')).toBe(true);
     const colsRow1 = row1.find(TableColumn);
-    expect(colsRow1).has.length(6);
-    expect(colsRow1.first().childAt(0).childAt(0).text()).is.eql('Svendsen Eksos(1234567)...6789');
-    expect(colsRow1.at(1).find(PeriodLabel)).has.length(1);
-    expect(colsRow1.at(3).childAt(0).childAt(0).text()).is.eql('80.00 %');
+    expect(colsRow1).toHaveLength(6);
+    expect(colsRow1.first().childAt(0).childAt(0).text()).toEqual('Svendsen Eksos(1234567)...6789');
+    expect(colsRow1.at(1).find(PeriodLabel)).toHaveLength(1);
+    expect(colsRow1.at(3).childAt(0).childAt(0).text()).toEqual('80.00 %');
 
     const row2 = rows.last();
-    expect(row2.prop('isSelected')).is.false;
+    expect(row2.prop('isSelected')).toBe(false);
   });
 
   it('skal ikke vise mottatt dato for inntektsmelding når denne ikke finnes', () => {
@@ -96,8 +95,8 @@ describe('<PersonArbeidsforholdTable>', () => {
 
     const cols = wrapper.find(TableColumn);
 
-    expect(cols).has.length(12);
-    expect(cols.at(10).children()).has.length(1);
+    expect(cols).toHaveLength(12);
+    expect(cols.at(10).children()).toHaveLength(1);
   });
 
   it('skal vise mottatt dato for inntektsmelding når denne finnes', () => {
@@ -114,8 +113,8 @@ describe('<PersonArbeidsforholdTable>', () => {
     />);
 
     const cols = wrapper.find(TableColumn);
-    expect(cols).has.length(12);
-    expect(wrapper.find(DateLabel).prop('dateString')).to.eql('2018-05-05');
+    expect(cols).toHaveLength(12);
+    expect(wrapper.find(DateLabel).prop('dateString')).toEqual('2018-05-05');
   });
 
   it('skal ikke vise ikon for at arbeidsforholdet er i bruk', () => {
@@ -127,8 +126,8 @@ describe('<PersonArbeidsforholdTable>', () => {
     />);
 
     const cols = wrapper.find(TableColumn);
-    expect(cols).has.length(12);
-    expect(cols.last().children()).has.length(1);
+    expect(cols).toHaveLength(12);
+    expect(cols.last().children()).toHaveLength(1);
   });
 
   it('skal vise ikon for at arbeidsforholdet er i bruk', () => {
@@ -145,8 +144,8 @@ describe('<PersonArbeidsforholdTable>', () => {
     />);
 
     const cols = wrapper.find(TableColumn);
-    expect(cols).has.length(12);
-    expect(cols.last().find(Image)).has.length(1);
+    expect(cols).toHaveLength(12);
+    expect(cols.last().find(Image)).toHaveLength(1);
   });
 
   it('skal vise IngenArbeidsforholdRegistrert komponent når ingen arbeidsforhold', () => {
@@ -157,7 +156,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const element = wrapper.find(IngenArbeidsforholdRegistrert);
-    expect(element).has.length(1);
+    expect(element).toHaveLength(1);
   });
 
   it('skal vise stillingsprosent selv når den er 0', () => {
@@ -172,7 +171,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const tableRow = wrapper.find(TableRow).at(1);
-    expect(tableRow.props().model.stillingsprosent).to.eql(0);
+    expect(tableRow.props().model.stillingsprosent).toEqual(0);
   });
 
   it('skal vise riktig utledet navn når lagt til av saksbehandler', () => {
@@ -188,7 +187,7 @@ describe('<PersonArbeidsforholdTable>', () => {
     />);
     const tableRow = wrapper.find(TableRow).at(1);
     const tekst = tableRow.find(Normaltekst).at(0);
-    expect(tekst.childAt(0).text()).to.eql('Svendsen Eksos');
+    expect(tekst.childAt(0).text()).toEqual('Svendsen Eksos');
   });
 
   it('skal vise overstyrt tom dato', () => {
@@ -203,7 +202,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const periodeLabel = wrapper.find(PeriodLabel);
-    expect(periodeLabel.props().dateStringTom).to.eql('2025-01-01');
+    expect(periodeLabel.props().dateStringTom).toEqual('2025-01-01');
   });
   it('skal vise tom dato', () => {
     const endretArbeidsforhold = {
@@ -216,7 +215,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const periodeLabel = wrapper.find(PeriodLabel);
-    expect(periodeLabel.props().dateStringTom).to.eql('2018-10-10');
+    expect(periodeLabel.props().dateStringTom).toEqual('2018-10-10');
   });
   it('arbeidsforhold med samme navn og orgnr, en med arbeidsforholdId og en uten, skal få ulik nøkkel', () => {
     const arbfor1 = { ...arbeidsforhold };
@@ -229,6 +228,6 @@ describe('<PersonArbeidsforholdTable>', () => {
 
     const nøkkel1 = utledNøkkel(arbfor1, arbeidsgiverOpplysningerPerId);
     const nøkkel2 = utledNøkkel(arbfor2, arbeidsgiverOpplysningerPerId);
-    expect(nøkkel1).to.not.eql(nøkkel2);
+    expect(nøkkel1).not.toEqual(nøkkel2);
   });
 });

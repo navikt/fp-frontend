@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VurderOgFastsettSN, { VurderOgFastsettSNImpl } from './VurderOgFastsettSN';
@@ -40,8 +39,8 @@ describe('<VurderOgFastsettSN>', () => {
       erNyoppstartet={false}
       gjeldendeAksjonspunkter={[mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, undefined, 'OPPR')]}
     />);
-    expect(wrapper.find(FastsettSN2)).to.have.length(1);
-    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).to.have.length(0);
+    expect(wrapper.find(FastsettSN2)).toHaveLength(1);
+    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(0);
   });
 
   it('Skal vise korrekte komponenter når det er aksjonspunkt for å vurdere varig endring uten at varig endring er bestemt', () => {
@@ -55,8 +54,8 @@ describe('<VurderOgFastsettSN>', () => {
       erVarigEndring
       erNyoppstartet={false}
     />);
-    expect(wrapper.find(FastsettSN2)).to.have.length(0);
-    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).to.have.length(1);
+    expect(wrapper.find(FastsettSN2)).toHaveLength(0);
+    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(1);
   });
 
   it('Skal vise korrekte komponenter når det er aksjonspunkt for å vurdere varig endring og det er vurdert at det ikke er varig endring', () => {
@@ -70,8 +69,8 @@ describe('<VurderOgFastsettSN>', () => {
       erVarigEndring
       erNyoppstartet={false}
     />);
-    expect(wrapper.find(FastsettSN2)).to.have.length(0);
-    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).to.have.length(1);
+    expect(wrapper.find(FastsettSN2)).toHaveLength(0);
+    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(1);
   });
 
   it('Skal vise korrekte komponenter når det er aksjonspunkt for å vurdere varig endring og det er vurdert at det er varig endring', () => {
@@ -85,8 +84,8 @@ describe('<VurderOgFastsettSN>', () => {
       erVarigEndring
       erNyoppstartet={false}
     />);
-    expect(wrapper.find(FastsettSN2)).to.have.length(1);
-    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).to.have.length(1);
+    expect(wrapper.find(FastsettSN2)).toHaveLength(1);
+    expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(1);
   });
 
   it('Skal teste at transformValues setter korrekte values når det kun skal fastsettes inntekt for søker ny i arbeidslivet', () => {
@@ -101,7 +100,7 @@ describe('<VurderOgFastsettSN>', () => {
       begrunnelse: 'Ok.',
       bruttoBeregningsgrunnlag: 360000,
     };
-    expect(transformedValues).to.deep.equal([expectedTransformedValues]);
+    expect(transformedValues).toEqual([expectedTransformedValues]);
   });
 
   it('Skal teste at transformValues setter korrekte values når det er vurdert at det ikke er varig endret næring', () => {
@@ -117,7 +116,7 @@ describe('<VurderOgFastsettSN>', () => {
       erVarigEndretNaering: false,
       [fastsettInntektFieldname]: undefined,
     };
-    expect(transformedValues).to.deep.equal([expectedTransformedValues]);
+    expect(transformedValues).toEqual([expectedTransformedValues]);
   });
 
   it('Skal teste at transformValues setter korrekte values når det er vurdert at det er varig endret næring og inntekt er fastsatt', () => {
@@ -137,6 +136,6 @@ describe('<VurderOgFastsettSN>', () => {
         bruttoBeregningsgrunnlag: 650000,
       },
     ];
-    expect(transformedValues).to.deep.equal(expectedTransformedValues);
+    expect(transformedValues).toEqual(expectedTransformedValues);
   });
 });

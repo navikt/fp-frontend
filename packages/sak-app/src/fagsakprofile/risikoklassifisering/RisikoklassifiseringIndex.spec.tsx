@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
@@ -69,6 +68,6 @@ describe('<RisikoklassifiseringIndex>', () => {
       behandlingVersjon={1}
       behandlingId={1}
     />);
-    expect(wrapper.find(RisikoklassifiseringSakIndex)).has.length(1);
+    expect(wrapper.find(RisikoklassifiseringSakIndex)).toHaveLength(1);
   });
 });

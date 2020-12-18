@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -25,6 +24,6 @@ describe('<SykdomPanel>', () => {
       onSubmit={() => undefined}
     />);
 
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 });

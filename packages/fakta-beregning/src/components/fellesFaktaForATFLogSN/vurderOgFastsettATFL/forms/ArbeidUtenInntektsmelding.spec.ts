@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { lonnsendringField } from './LonnsendringForm';
@@ -13,7 +12,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE }],
     };
     const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, {}, []);
-    expect(transformed).to.be.empty;
+    expect(Object.keys(transformed)).toHaveLength(0);
   });
 
   it('skal ikke transform values når inntektverdier er null', () => {
@@ -22,7 +21,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
         { kode: faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING }],
     };
     const transformed = transformValues({}, null, faktaOmBeregning, {}, []);
-    expect(transformed).to.be.empty;
+    expect(Object.keys(transformed)).toHaveLength(0);
   });
 
   it('skal ikke transform values når andel allerede er fastsatt', () => {
@@ -44,7 +43,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
     };
     const fastsatteAndeler = [1];
     const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, bg, fastsatteAndeler);
-    expect(transformed).to.be.empty;
+    expect(Object.keys(transformed)).toHaveLength(0);
   });
 
   it('skal transform values for kunstig arbeidsforhold', () => {
@@ -66,11 +65,13 @@ describe('<ArbeidUtenInntektsmelding>', () => {
     };
     const fastsatteAndeler = [];
     const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, bg, fastsatteAndeler);
-    expect(transformed.faktaOmBeregningTilfeller[0]).to.equal(faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING);
-    expect(transformed.fastsattUtenInntektsmelding.andelListe[0].andelsnr).to.equal(1);
-    expect(transformed.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).to.equal(10000);
-    expect(transformed.fastsattUtenInntektsmelding.andelListe[0].inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(fastsatteAndeler[0]).to.equal(1);
+    expect(transformed.faktaOmBeregningTilfeller[0]).toBe(
+      faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING,
+    );
+    expect(transformed.fastsattUtenInntektsmelding.andelListe[0].andelsnr).toBe(1);
+    expect(transformed.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).toBe(10000);
+    expect(transformed.fastsattUtenInntektsmelding.andelListe[0].inntektskategori).toBe('ARBEIDSTAKER');
+    expect(fastsatteAndeler[0]).toBe(1);
   });
 
   it('skal teste at transformValues gir korrekt output når lønnsendring', () => {
@@ -93,9 +94,9 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       ],
     };
     const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg, []);
-    expect(transformedObject.fastsattUtenInntektsmelding.andelListe.length).to.equal(1);
-    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].andelsnr).to.equal(1);
-    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).to.equal(10000);
+    expect(transformedObject.fastsattUtenInntektsmelding.andelListe.length).toBe(1);
+    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].andelsnr).toBe(1);
+    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).toBe(10000);
   });
 
   it('skal ikkje submitte inntekt uten lønnsendring', () => {
@@ -118,7 +119,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       ],
     };
     const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg, []);
-    expect(transformedObject).to.be.empty;
+    expect(Object.keys(transformedObject)).toHaveLength(0);
   });
 
   it('skal transform values når ved avsluttet arbeidsforhold dagen før skjæringstidspunktet '
@@ -144,8 +145,8 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       ],
     };
     const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg, []);
-    expect(transformedObject.fastsattUtenInntektsmelding.andelListe.length).to.equal(1);
-    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].andelsnr).to.equal(1);
-    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).to.equal(10000);
+    expect(transformedObject.fastsattUtenInntektsmelding.andelListe.length).toBe(1);
+    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].andelsnr).toBe(1);
+    expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).toBe(10000);
   });
 });

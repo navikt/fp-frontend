@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -28,8 +27,8 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />);
 
-    expect(wrapper.find(FodselSammenligningOtherPanel)).to.have.length(1);
-    expect(wrapper.find(FodselSammenligningRevurderingPanel)).to.have.length(0);
+    expect(wrapper.find(FodselSammenligningOtherPanel)).toHaveLength(1);
+    expect(wrapper.find(FodselSammenligningRevurderingPanel)).toHaveLength(0);
   });
 
   it('skal rendre korrekt ved revurdering', () => {
@@ -42,8 +41,8 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />);
 
-    expect(wrapper.find(FodselSammenligningOtherPanel)).to.have.length(0);
-    expect(wrapper.find(FodselSammenligningRevurderingPanel)).to.have.length(1);
+    expect(wrapper.find(FodselSammenligningOtherPanel)).toHaveLength(0);
+    expect(wrapper.find(FodselSammenligningRevurderingPanel)).toHaveLength(1);
   });
 
   it('skal rendre fødsel fra tps', () => {
@@ -56,7 +55,7 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />);
 
-    expect(wrapper.find('Normaltekst').at(2).children().text()).to.equal('15.05.2017');
+    expect(wrapper.find('Normaltekst').at(2).children().text()).toBe('15.05.2017');
   });
 
   it('skal rendre default verdier når tpsfodsel ikke finnes', () => {
@@ -69,7 +68,7 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />);
 
-    expect(wrapper.find('Normaltekst')).to.have.length(3);
+    expect(wrapper.find('Normaltekst')).toHaveLength(3);
   });
 
   it('skal vise etikkett når minst ett av barna er dødfødte', () => {
@@ -82,7 +81,7 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />);
 
-    expect(wrapper.find(EtikettInfo)).to.have.length(1);
+    expect(wrapper.find(EtikettInfo)).toHaveLength(1);
   });
 
   it('skal ikke vise etikkett når ingen av barna er dødfødte', () => {
@@ -95,6 +94,6 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />);
 
-    expect(wrapper.find(EtikettInfo)).to.have.length(0);
+    expect(wrapper.find(EtikettInfo)).toHaveLength(0);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
@@ -238,13 +237,13 @@ describe('<AksjonspunktBehandlerTB>', () => {
     />);
     const dataRows = wrapper.findWhere((node) => node.key() === 'arbeidsgiver1');
     const arbeidsgiverNavn = dataRows.first().find('Normaltekst');
-    expect(arbeidsgiverNavn.first().childAt(0).text()).to.equal(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1[0].tabellInnhold);
+    expect(arbeidsgiverNavn.first().childAt(0).text()).toBe(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1[0].tabellInnhold);
     const editableFields = mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.filter((periode) => periode.isEditable === true);
-    expect(editableFields).to.have.length(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length - 1);
+    expect(editableFields).toHaveLength(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length - 1);
     const sumRows = wrapper.find('#bruttoPrPeriodeRad');
     const sumCols = sumRows.first().find('td');
-    expect(sumCols).to.have.length(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length);
-    expect(sumCols.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandlerTB.SumPeriode');
+    expect(sumCols).toHaveLength(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length);
+    expect(sumCols.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandlerTB.SumPeriode');
   });
   it('Skal teste at initial values bygges korrekt', () => {
     const expectedInitialValues = {};
@@ -258,7 +257,7 @@ describe('<AksjonspunktBehandlerTB>', () => {
     expectedInitialValues[keyForPeriodeOgAndel(2, 0)] = formatCurrencyNoKr(overstyrtPrAarAndelEn);
     expectedInitialValues[keyForPeriodeOgAndel(2, 1)] = formatCurrencyNoKr(overstyrtPrAarAndelTo);
     const initialValues = UnwrappedForm.buildInitialValues(beregningsgrunnlagPerioder);
-    expect(initialValues).to.eql(expectedInitialValues);
+    expect(initialValues).toEqual(expectedInitialValues);
   });
   it('Skal teste at selector lager forventet objekt ut av en liste med beregningsgrunnlagperioder '
     + 'som inneholder kortvarige arbeidsforhold når vi har aksjonspunkt', () => {
@@ -319,7 +318,7 @@ describe('<AksjonspunktBehandlerTB>', () => {
       },
     };
     const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, alleKodeverk, arbeidsgiverOpplysningerPerId);
-    expect(selectorData).to.deep.equal(expectedResultObjectWhenWeHaveAksjonspunkt);
+    expect(selectorData).toEqual(expectedResultObjectWhenWeHaveAksjonspunkt);
   });
   it('Skal teste at selector henter ut om aksjonspunktet er lukket eller ikke', () => {
     const korrektApLukket = [{
@@ -339,9 +338,9 @@ describe('<AksjonspunktBehandlerTB>', () => {
       },
     }];
     const selectorDataLukket = getIsAksjonspunktClosed.resultFunc(korrektApLukket);
-    expect(selectorDataLukket).to.equal(true);
+    expect(selectorDataLukket).toBe(true);
     const selectorDataApent = getIsAksjonspunktClosed.resultFunc(korrektApApent);
-    expect(selectorDataApent).to.equal(false);
+    expect(selectorDataApent).toBe(false);
   });
   it('Skal teste transformValues metode', () => {
     const formValues = {};
@@ -402,7 +401,7 @@ describe('<AksjonspunktBehandlerTB>', () => {
       },
     ];
     const transformedValues = UnwrappedForm.transformValues(formValues, beregningsgrunnlagPerioder);
-    expect(transformedValues).is.deep.equal(expectedTransformedValues);
+    expect(transformedValues).toEqual(expectedTransformedValues);
   });
 
   it('Skal teste buildInitialValues metode', () => {
@@ -418,6 +417,6 @@ describe('<AksjonspunktBehandlerTB>', () => {
     expectedInitialValues[keyForPeriodeOgAndel(2, 1)] = formatCurrencyNoKr(overstyrtPrAarAndelTo);
 
     const initialValues = UnwrappedForm.buildInitialValues(beregningsgrunnlagPerioder);
-    expect(initialValues).is.deep.equal(expectedInitialValues);
+    expect(initialValues).toEqual(expectedInitialValues);
   });
 });

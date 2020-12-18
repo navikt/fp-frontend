@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
@@ -46,21 +45,21 @@ describe('<TilstotendeYtelser>', () => {
       gjelderBesteberegning={false}
     />);
     const formattedMessage = wrapper.find('FormattedMessage');
-    expect(formattedMessage).to.have.length(4);
-    expect(formattedMessage.at(0).prop('id')).to.equal('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Maaned');
-    expect(formattedMessage.at(1).prop('id')).to.equal('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Aar');
-    expect(formattedMessage.at(2).prop('id')).to.equal(dagpengerNavn);
-    expect(formattedMessage.at(3).prop('id')).to.equal(aapNavn);
+    expect(formattedMessage).toHaveLength(4);
+    expect(formattedMessage.at(0).prop('id')).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Maaned');
+    expect(formattedMessage.at(1).prop('id')).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Aar');
+    expect(formattedMessage.at(2).prop('id')).toBe(dagpengerNavn);
+    expect(formattedMessage.at(3).prop('id')).toBe(aapNavn);
     const summer = wrapper.find('Normaltekst');
-    expect(summer).to.have.length(4);
-    expect(summer.children().at(0).text()).to.equal(formatCurrencyNoKr(dagpengerInntekt / 12));
-    expect(summer.children().at(1).text()).to.equal(formatCurrencyNoKr(dagpengerInntekt));
-    expect(summer.children().at(2).text()).to.equal(formatCurrencyNoKr(aapInntekt / 12));
-    expect(summer.children().at(3).text()).to.equal(formatCurrencyNoKr(aapInntekt));
+    expect(summer).toHaveLength(4);
+    expect(summer.children().at(0).text()).toBe(formatCurrencyNoKr(dagpengerInntekt / 12));
+    expect(summer.children().at(1).text()).toBe(formatCurrencyNoKr(dagpengerInntekt));
+    expect(summer.children().at(2).text()).toBe(formatCurrencyNoKr(aapInntekt / 12));
+    expect(summer.children().at(3).text()).toBe(formatCurrencyNoKr(aapInntekt));
   });
 
   it('Skal hente riktig tekst for andel brukt i beregning', () => {
-    expect(getTekstForAndelBruktIBeregning(aapAndel)).to.equal('Beregningsgrunnlag.TilstottendeYtelse.AAP');
-    expect(getTekstForAndelBruktIBeregning(dpAndel)).to.equal('Beregningsgrunnlag.TilstottendeYtelse.Dagpenger');
+    expect(getTekstForAndelBruktIBeregning(aapAndel)).toBe('Beregningsgrunnlag.TilstottendeYtelse.AAP');
+    expect(getTekstForAndelBruktIBeregning(dpAndel)).toBe('Beregningsgrunnlag.TilstottendeYtelse.Dagpenger');
   });
 });

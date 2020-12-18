@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
@@ -80,10 +79,10 @@ describe('<BostedFaktaView>', () => {
       alleKodeverk={{}}
     />);
     const bostedBarnView = wrapper.find('BostedBarnView');
-    expect(bostedBarnView).to.have.length(2);
-    expect(bostedBarnView.first().prop('barn')).to.eql(barn);
-    expect(bostedBarnView.first().prop('barnNr')).to.eql(1);
-    expect(bostedBarnView.last().prop('barnNr')).to.eql(2);
+    expect(bostedBarnView).toHaveLength(2);
+    expect(bostedBarnView.first().prop('barn')).toEqual(barn);
+    expect(bostedBarnView.first().prop('barnNr')).toEqual(1);
+    expect(bostedBarnView.last().prop('barnNr')).toEqual(2);
   });
 
   it('vise bostedSoker for søker', () => {
@@ -93,8 +92,8 @@ describe('<BostedFaktaView>', () => {
       alleKodeverk={{}}
     />);
     const bostedSokerView = wrapper.find(BostedSokerFaktaIndex);
-    expect(bostedSokerView).to.have.length(1);
-    expect(bostedSokerView.first().prop('personopplysninger')).to.eql(soker);
+    expect(bostedSokerView).toHaveLength(1);
+    expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker);
   });
 
   it('vise bostedSoker for søker og annenpart/ektefelle?', () => {
@@ -134,8 +133,8 @@ describe('<BostedFaktaView>', () => {
       alleKodeverk={{}}
     />);
     const bostedSokerView = wrapper.find(BostedSokerFaktaIndex);
-    expect(bostedSokerView).to.have.length(2);
-    expect(bostedSokerView.first().prop('personopplysninger')).to.eql(soker);
-    expect(bostedSokerView.last().prop('personopplysninger')).to.eql(ektefelle);
+    expect(bostedSokerView).toHaveLength(2);
+    expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker);
+    expect(bostedSokerView.last().prop('personopplysninger')).toEqual(ektefelle);
   });
 });

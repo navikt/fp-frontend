@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -85,11 +84,11 @@ describe('<RegistrerPapirsoknad>', () => {
       lagreAksjonspunkt={sinon.spy()}
       erAksjonspunktLagret={false}
     />);
-    expect(wrapper.find(BehandlingPaVent)).to.have.length(1);
-    expect(wrapper.find(SoknadRegistrertModal)).to.have.length(1);
+    expect(wrapper.find(BehandlingPaVent)).toHaveLength(1);
+    expect(wrapper.find(SoknadRegistrertModal)).toHaveLength(1);
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
-    expect(panel).to.have.length(1);
-    expect(panel.prop('readOnly')).to.be.false;
+    expect(panel).toHaveLength(1);
+    expect(panel.prop('readOnly')).toBe(false);
   });
 
   it('skal rendre komponenter som readonly når veileder', () => {
@@ -112,7 +111,7 @@ describe('<RegistrerPapirsoknad>', () => {
       erAksjonspunktLagret={false}
     />);
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
-    expect(panel.prop('readOnly')).to.be.true;
+    expect(panel.prop('readOnly')).toBe(true);
   });
 
   it('skal rendre komponenter som readonly når behandling er satt på vent', () => {
@@ -131,11 +130,11 @@ describe('<RegistrerPapirsoknad>', () => {
       lagreAksjonspunkt={sinon.spy()}
       erAksjonspunktLagret={false}
     />);
-    expect(wrapper.find(BehandlingPaVent)).to.have.length(1);
-    expect(wrapper.find(SoknadRegistrertModal)).to.have.length(1);
+    expect(wrapper.find(BehandlingPaVent)).toHaveLength(1);
+    expect(wrapper.find(SoknadRegistrertModal)).toHaveLength(1);
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
-    expect(panel).to.have.length(1);
-    expect(panel.prop('readOnly')).to.be.true;
+    expect(panel).toHaveLength(1);
+    expect(panel.prop('readOnly')).toBe(true);
   });
 
   it('skal sette nye søknadsdata', () => {
@@ -153,13 +152,13 @@ describe('<RegistrerPapirsoknad>', () => {
     />);
 
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
-    expect(panel.prop('soknadData')).is.undefined;
+    expect(panel.prop('soknadData')).toBeUndefined();
 
     const nyeSoknadsdata = new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR);
     panel.prop('setSoknadData')(nyeSoknadsdata);
 
     const panelV2 = wrapper.find(RegistrerPapirsoknadPanel);
-    expect(panelV2.prop('soknadData')).is.eql(nyeSoknadsdata);
+    expect(panelV2.prop('soknadData')).toEqual(nyeSoknadsdata);
   });
 
   it('skal lagre aksjonspunkt', () => {
@@ -197,10 +196,10 @@ describe('<RegistrerPapirsoknad>', () => {
     panelV2.prop('lagreFullstendig')(undefined, undefined, { valuesForRegisteredFieldsOnly: { data: 'test' } });
 
     const calls = lagreAksjonspunkt.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(1);
-    expect(args[0]).to.eql({
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
@@ -62,7 +61,7 @@ describe('<FodselInfoPanel>', () => {
       personopplysninger={personopplysninger as Personopplysninger}
     />);
 
-    expect(wrapper.find(SjekkFodselDokForm)).has.length(1);
+    expect(wrapper.find(SjekkFodselDokForm)).toHaveLength(1);
   });
 
   it('skal vise termindato-form når en har dette aksjonspunktet', () => {
@@ -99,7 +98,7 @@ describe('<FodselInfoPanel>', () => {
       personopplysninger={personopplysninger as Personopplysninger}
     />);
 
-    expect(wrapper.find(TermindatoFaktaForm)).has.length(1);
+    expect(wrapper.find(TermindatoFaktaForm)).toHaveLength(1);
   });
 
   it('skal vise infoview når det ikke finnes aksjonspunkter', () => {
@@ -120,8 +119,8 @@ describe('<FodselInfoPanel>', () => {
       personopplysninger={personopplysninger as Personopplysninger}
     />);
 
-    expect(wrapper.find(FodselSammenligningIndex)).has.length(1);
-    expect(wrapper.find(SjekkFodselDokForm)).has.length(0);
-    expect(wrapper.find(TermindatoFaktaForm)).has.length(0);
+    expect(wrapper.find(FodselSammenligningIndex)).toHaveLength(1);
+    expect(wrapper.find(SjekkFodselDokForm)).toHaveLength(0);
+    expect(wrapper.find(TermindatoFaktaForm)).toHaveLength(0);
   });
 });

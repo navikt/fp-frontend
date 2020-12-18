@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -36,20 +35,20 @@ describe('<DocumentList>', () => {
     />);
 
     const label = wrapper.find(Label);
-    expect(label).to.have.length(0);
+    expect(label).toHaveLength(0);
 
     const table = wrapper.find(Table);
-    expect(table).to.have.length(1);
+    expect(table).toHaveLength(1);
     const tableRows = table.find(TableRow);
-    expect(tableRows).to.have.length(2);
+    expect(tableRows).toHaveLength(2);
 
     const tableColumnsRow1 = tableRows.first().find(TableColumn);
-    expect(tableColumnsRow1.children()).to.have.length(3);
-    expect(tableColumnsRow1.at(1).html()).to.eql('<td class="columnStyle">Terminbekreftelse</td>');
+    expect(tableColumnsRow1.children()).toHaveLength(3);
+    expect(tableColumnsRow1.at(1).html()).toEqual('<td class="columnStyle">Terminbekreftelse</td>');
 
     const tableColumnsRow2 = tableRows.last().find(TableColumn);
-    expect(tableColumnsRow2.children()).to.have.length(3);
-    expect(tableColumnsRow2.at(1).html()).to.eql('<td class="columnStyle">Førstegangssøknad</td>');
+    expect(tableColumnsRow2.children()).toHaveLength(3);
+    expect(tableColumnsRow2.at(1).html()).toEqual('<td class="columnStyle">Førstegangssøknad</td>');
   });
 
   it('skal vise korrekt tekst om ikke tidspunkt finnes', () => {
@@ -69,8 +68,8 @@ describe('<DocumentList>', () => {
     />);
 
     const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).to.have.length(1);
-    expect(formattedMessage.prop('id')).to.eql('DocumentList.IProduksjon');
+    expect(formattedMessage).toHaveLength(1);
+    expect(formattedMessage.prop('id')).toEqual('DocumentList.IProduksjon');
   });
 
   it('skal ikke vise tabell når det ikke finnes dokumenter', () => {
@@ -82,8 +81,8 @@ describe('<DocumentList>', () => {
     />);
 
     const label = wrapper.find(Normaltekst);
-    expect(label).to.have.length(1);
+    expect(label).toHaveLength(1);
     const table = wrapper.find(Table);
-    expect(table).to.have.length(0);
+    expect(table).toHaveLength(0);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -15,10 +14,10 @@ describe('<EgenVirksomhetPanel>', () => {
     />);
 
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
 
     const fieldarray = wrapper.find('FieldArray');
-    expect(fieldarray).to.have.length(0);
+    expect(fieldarray).toHaveLength(0);
   });
 
   it('skal rendre korrekt når har arbeidet i egen virksomhet', () => {
@@ -30,6 +29,6 @@ describe('<EgenVirksomhetPanel>', () => {
     />);
 
     const fieldarray = wrapper.find('FieldArray');
-    expect(fieldarray).to.have.length(1);
+    expect(fieldarray).toHaveLength(1);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
@@ -55,10 +54,10 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
-    expect(helpText.children()).has.length(2);
-    expect(helpText.childAt(0).props().id).is.eql('OmsorgOgForeldreansvarFaktaForm.CheckInformation');
-    expect(helpText.childAt(1).props().id).is.eql('OmsorgOgForeldreansvarFaktaForm.ChooseVilkar');
+    expect(helpText).toHaveLength(1);
+    expect(helpText.children()).toHaveLength(2);
+    expect(helpText.childAt(0).props().id).toEqual('OmsorgOgForeldreansvarFaktaForm.CheckInformation');
+    expect(helpText.childAt(1).props().id).toEqual('OmsorgOgForeldreansvarFaktaForm.ChooseVilkar');
   });
 
   it('skal vise vilkår i select', () => {
@@ -86,10 +85,10 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     />);
 
     const select = wrapper.find(SelectField);
-    expect(select).has.length(1);
-    expect(select.prop('selectValues')).has.length(1);
-    expect(select.prop('selectValues')[0].props.value).to.eql('kode1');
-    expect(select.prop('selectValues')[0].props.children).to.eql('navn1');
+    expect(select).toHaveLength(1);
+    expect(select.prop('selectValues')).toHaveLength(1);
+    expect(select.prop('selectValues')[0].props.value).toEqual('kode1');
+    expect(select.prop('selectValues')[0].props.children).toEqual('navn1');
   });
 
   it('skal ikke vise vilkår i select ved readonly', () => {
@@ -117,10 +116,10 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     />);
 
     const select = wrapper.find(SelectField);
-    expect(select).has.length(0);
+    expect(select).toHaveLength(0);
     const element = wrapper.find('Element');
-    expect(element).has.length(1);
-    expect(element.childAt(0).text()).is.eql('navn1');
+    expect(element).toHaveLength(1);
+    expect(element.childAt(0).text()).toEqual('navn1');
   });
 
   it('skal vise riktig hjelpetekster for foreldreansvar', () => {
@@ -148,9 +147,9 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).has.length(1);
-    expect(helpText.children()).has.length(1);
-    expect(helpText.childAt(0).props().id).is.eql('OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar');
+    expect(helpText).toHaveLength(1);
+    expect(helpText.children()).toHaveLength(1);
+    expect(helpText.childAt(0).props().id).toEqual('OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar');
   });
 
   it('skal gi feilmelding når antall barn er mindre enn 1', () => {
@@ -160,7 +159,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     };
 
     const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).is.eql({
+    expect(result).toEqual({
       antallBarn: 'Antall barn må være mindre eller lik antall barn det søkes for',
     });
   });
@@ -172,7 +171,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     };
 
     const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).is.eql({
+    expect(result).toEqual({
       antallBarn: 'Antall barn må være mindre eller lik antall barn det søkes for',
     });
   });
@@ -185,7 +184,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
 
     // @ts-ignore
     const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).is.eql({
+    expect(result).toEqual({
       antallBarn: 'Feltet kan kun inneholde tall',
     });
   });
@@ -197,7 +196,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     };
 
     const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).is.eql({});
+    expect(result).toEqual({});
   });
 
   it('skal sette opp initielle verdier når en ikke har avklarte data', () => {
@@ -241,7 +240,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     } as Personopplysninger;
 
     const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       omsorgsovertakelseDato: '10-10-2017',
       foreldreansvarDato: undefined,
       barn: [{
@@ -319,7 +318,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
 
     const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
 
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       omsorgsovertakelseDato: '10-10-2017',
       foreldreansvarDato: undefined,
       barn: [{

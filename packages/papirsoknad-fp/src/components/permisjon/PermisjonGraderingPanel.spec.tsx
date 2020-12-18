@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import moment from 'moment';
 
 import {
@@ -30,11 +29,11 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithInvalidDecimal = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, invalidDecimal, -20, -15)]);
     const errorsWithValidNumber = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15)]);
 
-    expect(errorsWithInvalidDecimal).to.be.an('array');
-    expect(errorsWithInvalidDecimal[0].prosentandelArbeid).that.eql(invalidDecimalMessage(invalidDecimal));
-    expect(errorsWithInvalidDecimal[1]).to.not.exist;
+    expect(errorsWithInvalidDecimal).toBeInstanceOf('array');
+    expect(errorsWithInvalidDecimal[0].prosentandelArbeid).toEqual(invalidDecimalMessage(invalidDecimal));
+    expect(errorsWithInvalidDecimal[1]).toBeFalsy();
 
-    expect(errorsWithValidNumber).to.not.exist;
+    expect(errorsWithValidNumber).toBeFalsy();
   });
 
   it('skal validere at alle perioder har gyldige datoer', () => {
@@ -43,12 +42,12 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithValidDates = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -10, -5),
       getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15)]);
 
-    expect(errorsWithInvalidDates).to.be.an('array');
-    expect(errorsWithInvalidDates[0].periodeFom).that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[0].periodeTom).that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[1]).to.not.exist;
+    expect(errorsWithInvalidDates).toBeInstanceOf('array');
+    expect(errorsWithInvalidDates[0].periodeFom).toEqual(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeTom).toEqual(invalidDateMessage());
+    expect(errorsWithInvalidDates[1]).toBeFalsy();
 
-    expect(errorsWithValidDates).to.not.exist;
+    expect(errorsWithValidDates).toBeFalsy();
   });
 
   it('skal validere at ingen perioder overlapper', () => {
@@ -57,10 +56,10 @@ describe('<PermisjonGraderingPanel>', () => {
     const errorsWithValidDates = PermisjonGraderingPanel.validate([getPeriodDaysFromToday(periodeForGradering, validDecimal, -20, -15),
       getPeriodDaysFromToday(periodeForGradering, validDecimal, -14, -10)]);
 
-    expect(errorsWithInvalidDates).to.be.an('object');
+    expect(errorsWithInvalidDates).toBeInstanceOf('object');
     // eslint-disable-next-line no-underscore-dangle
-    expect(errorsWithInvalidDates._error).that.eql(dateRangesOverlappingMessage());
+    expect(errorsWithInvalidDates._error).toEqual(dateRangesOverlappingMessage());
 
-    expect(errorsWithValidDates).to.not.exist;
+    expect(errorsWithValidDates).toBeFalsy();
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import { expect } from 'chai';
 
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -35,20 +34,20 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0);
     const innerWrapper = shallowWithIntl(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);
-    expect(dateFields).has.length(2);
-    expect(dateFields.first().prop('name')).is.eql('fieldId1.periodeFom');
-    expect(dateFields.first().prop('label')).is.eql({ id: 'Registrering.Permisjon.periodeFom' });
-    expect(dateFields.last().prop('name')).is.eql('fieldId1.periodeTom');
-    expect(dateFields.last().prop('label')).is.eql({ id: 'Registrering.Permisjon.periodeTom' });
+    expect(dateFields).toHaveLength(2);
+    expect(dateFields.first().prop('name')).toEqual('fieldId1.periodeFom');
+    expect(dateFields.first().prop('label')).toEqual({ id: 'Registrering.Permisjon.periodeFom' });
+    expect(dateFields.last().prop('name')).toEqual('fieldId1.periodeTom');
+    expect(dateFields.last().prop('label')).toEqual({ id: 'Registrering.Permisjon.periodeTom' });
 
-    expect(innerWrapper.find(SelectField)).has.length(1);
+    expect(innerWrapper.find(SelectField)).toHaveLength(1);
   });
 
   it('skal vise felter med mors aktivitet med en eksisterende periode når søker er far', () => {
@@ -66,15 +65,15 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
-    expect(innerWrapper.find(SelectField)).has.length(2);
+    expect(innerWrapper.find(SelectField)).toHaveLength(2);
   });
 
   it('skal vise felter med mors aktivitet disbaled søker er far og fedrekvote er valgt', () => {
@@ -92,18 +91,18 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
     const selectFields = innerWrapper.find(SelectField);
-    expect(selectFields).has.length(2);
+    expect(selectFields).toHaveLength(2);
 
-    expect(selectFields.last().prop('disabled')).is.true;
+    expect(selectFields.last().prop('disabled')).toBe(true);
   });
 
   it('skal vise felter med mors aktivitet disbaled søker er far og mødrekvote er valgt', () => {
@@ -121,18 +120,18 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
     const selectFields = innerWrapper.find(SelectField);
-    expect(selectFields).has.length(2);
+    expect(selectFields).toHaveLength(2);
 
-    expect(selectFields.last().prop('disabled')).is.true;
+    expect(selectFields.last().prop('disabled')).toBe(true);
   });
 
   it('skal vise felter med mors aktivitet disbaled søker er far og ingen periode er valgt', () => {
@@ -150,18 +149,18 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
     const selectFields = innerWrapper.find(SelectField);
-    expect(selectFields).has.length(2);
+    expect(selectFields).toHaveLength(2);
 
-    expect(selectFields.last().prop('disabled')).is.true;
+    expect(selectFields.last().prop('disabled')).toBe(true);
   });
 
   it('skal vise felter med mors aktivitet disbaled søker er far og foreldrepenger før fødsel er valgt', () => {
@@ -179,18 +178,18 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
     const selectFields = innerWrapper.find(SelectField);
-    expect(selectFields).has.length(2);
+    expect(selectFields).toHaveLength(2);
 
-    expect(selectFields.last().prop('disabled')).is.true;
+    expect(selectFields.last().prop('disabled')).toBe(true);
   });
 
   const getPeriodDaysFromToday = (periodeType: string, startDaysFromToday: number, endDaysFromToday: number) => ({
@@ -207,12 +206,12 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     const errorsWithValidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -10, -5),
       getPeriodDaysFromToday('FELLESPERIODE', -20, -15)]);
 
-    expect(errorsWithInvalidDates).to.be.an('array');
-    expect(errorsWithInvalidDates[0].periodeFom).that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[0].periodeTom).that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[1]).to.not.exist;
+    expect(errorsWithInvalidDates).toBeInstanceOf('array');
+    expect(errorsWithInvalidDates[0].periodeFom).toEqual(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeTom).toEqual(invalidDateMessage());
+    expect(errorsWithInvalidDates[1]).toBeFalsy();
 
-    expect(errorsWithValidDates).to.not.exist;
+    expect(errorsWithValidDates).toBeFalsy();
   });
 
   it('skal validere at ingen perioder overlapper', () => {
@@ -221,10 +220,10 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
     const errorsWithValidDates = RenderPermisjonPeriodeFieldArray.validate([getPeriodDaysFromToday('FELLESPERIODE', -20, -15),
       getPeriodDaysFromToday('FELLESPERIODE', -14, -10)]);
 
-    expect(errorsWithInvalidDates).to.be.an('object');
+    expect(errorsWithInvalidDates).toBeInstanceOf('object');
     // eslint-disable-next-line no-underscore-dangle
-    expect(errorsWithInvalidDates._error).is.eql(dateRangesOverlappingMessage());
+    expect(errorsWithInvalidDates._error).toEqual(dateRangesOverlappingMessage());
 
-    expect(errorsWithValidDates).to.not.exist;
+    expect(errorsWithValidDates).toBeFalsy();
   });
 });

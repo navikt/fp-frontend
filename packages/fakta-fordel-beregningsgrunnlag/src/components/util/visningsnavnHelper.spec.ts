@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import createVisningsnavnForAktivitet from './visningsnavnHelper';
 
 const andelUtenNavn = {
@@ -33,16 +32,16 @@ const getKodeverknavn = (kodeverk) => (kodeverk.kode === 'A' ? 'Arbeidstaker' : 
 describe('visningsnavnHelper', () => {
   it('skal lage visningsnavn når vi mangler navn på bedrift', () => {
     const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(andelUtenNavn, getKodeverknavn);
-    expect(arbeidsgiverNavnOrgnr).to.equal('Arbeidstaker');
+    expect(arbeidsgiverNavnOrgnr).toBe('Arbeidstaker');
   });
 
   it('skal lage visningsnavn når vi mangler arbeidsforholdId', () => {
     const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(andelUtenArbeidsforholdId, getKodeverknavn);
-    expect(arbeidsgiverNavnOrgnr).to.equal('Andeby bank (321)');
+    expect(arbeidsgiverNavnOrgnr).toBe('Andeby bank (321)');
   });
 
   it('skal lage visningsnavn når vi ikke mangler noe', () => {
     const arbeidsgiverNavnOrgnr = createVisningsnavnForAktivitet(andelMedAlt, getKodeverknavn);
-    expect(arbeidsgiverNavnOrgnr).to.equal('Andeby bank (321)...6789');
+    expect(arbeidsgiverNavnOrgnr).toBe('Andeby bank (321)...6789');
   });
 });

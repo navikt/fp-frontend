@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 import sinon from 'sinon';
@@ -124,15 +123,16 @@ describe('<FeilutbetalingInfoPanel>', () => {
     />);
 
     const normaltekstfelter = wrapper.find(Normaltekst);
-    expect(normaltekstfelter).length(8);
+    expect(normaltekstfelter).toHaveLength(8);
 
-    expect(normaltekstfelter.first().childAt(0).text()).is.eql('01.01.2019 - 02.01.2019');
-    expect(normaltekstfelter.at(1).childAt(0).text()).is.eql('10000');
-    expect(normaltekstfelter.at(2).childAt(0).text()).is.eql('5000');
-    expect(normaltekstfelter.at(3).childAt(0).text()).is.eql('Feil i lovanvendelse');
-    expect(normaltekstfelter.at(4).childAt(0).text()).is.eql('01.01.2019');
-    expect(normaltekstfelter.at(5).childAt(0).text()).is.eql('Innvilget');
-    expect(normaltekstfelter.at(6).childAt(0).text()).is.eql('Foreldrepenger opphører, Endring i beregning');
-    expect(normaltekstfelter.at(7).childAt(0).text(), 'valg?').is.eql('Tilbakekreving inntrekk');
+    expect(normaltekstfelter.first().childAt(0).text()).toEqual('01.01.2019 - 02.01.2019');
+    expect(normaltekstfelter.at(1).childAt(0).text()).toEqual('10000');
+    expect(normaltekstfelter.at(2).childAt(0).text()).toEqual('5000');
+    expect(normaltekstfelter.at(3).childAt(0).text()).toEqual('Feil i lovanvendelse');
+    expect(normaltekstfelter.at(4).childAt(0).text()).toEqual('01.01.2019');
+    expect(normaltekstfelter.at(5).childAt(0).text()).toEqual('Innvilget');
+    expect(normaltekstfelter.at(6).childAt(0).text()).toEqual('Foreldrepenger opphører, Endring i beregning');
+    // 'valg?'
+    expect(normaltekstfelter.at(7).childAt(0).text()).toEqual('Tilbakekreving inntrekk');
   });
 });

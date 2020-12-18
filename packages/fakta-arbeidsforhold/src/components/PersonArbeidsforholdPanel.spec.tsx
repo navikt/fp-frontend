@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { Arbeidsforhold } from '@fpsak-frontend/types';
@@ -68,8 +67,8 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(PersonArbeidsforholdTable)).has.length(1);
-    expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(1);
+    expect(wrapper.find(PersonArbeidsforholdTable)).toHaveLength(1);
+    expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(1);
   });
 
   it('skal ikke gi arbeidsforhold som er erstattet til tabell', () => {
@@ -97,7 +96,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     />);
 
     const table = wrapper.find(PersonArbeidsforholdTable);
-    expect(table.prop('alleArbeidsforhold')).is.eql([arbeidsforhold]);
+    expect(table.prop('alleArbeidsforhold')).toEqual([arbeidsforhold]);
   });
 
   it('skal ikke vise arbeidsforhold-detaljer når ingen er valgt i tabell', () => {
@@ -121,7 +120,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     wrapper.setState({ selectedArbeidsforhold: undefined });
 
-    expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(0);
+    expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(0);
   });
 
   it('skal automatisk vise arbeidsforhold når det er til vurdering og ikke allerede er endret av saksbehandler', () => {
@@ -143,7 +142,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(1);
+    expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(1);
   });
 
   it('skal ikke vise arbeidsforhold automatisk når det er endret', () => {
@@ -169,7 +168,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(0);
+    expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(0);
   });
 
   it('skal ikke vise arbeidsforhold automatisk når saksbehandler har det ikke er aksjonspunkt på det', () => {
@@ -194,7 +193,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(0);
+    expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(0);
   });
 
   it('skal fjerne detaljepanel ved avbryt', () => {
@@ -217,16 +216,16 @@ describe('<PersonArbeidsforholdPanel>', () => {
     />);
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.eql(arbeidsforhold);
+    expect(wrapper.state().selectedArbeidsforhold).toEqual(arbeidsforhold);
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
-    expect(detailForm).has.length(1);
+    expect(detailForm).toHaveLength(1);
 
     detailForm.prop('cancelArbeidsforhold')({} as React.MouseEvent);
     wrapper.update();
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
-    expect(wrapper.find(PersonArbeidsforholdDetailForm)).has.length(0);
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
+    expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(0);
   });
 
   it('skal rulle tilbake markering av nytt arbeidsforhold når det ikke lenger skal brukes', () => {
@@ -259,12 +258,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erNyttArbeidsforhold: undefined,
       brukArbeidsforholdet: false,
@@ -275,7 +274,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       inntektMedTilBeregningsgrunnlag: undefined,
     }]);
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
   });
 
   it('skal rulle tilbake arbeidsforholdet som skal erstattes ved valg av nytt arbeidsforhold', () => {
@@ -321,14 +320,14 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
 
     // FIXME (TOR) fomDato skal ikkje vera undefined her
-    expect(args[2]).to.eql([{
+    expect(args[2]).toEqual([{
       ...oldArbeidsforhold,
       erSlettet: false,
     }, {
@@ -343,7 +342,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }]);
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
   });
 
   it('skal sortere arbeidsforhold etter navn og mottakstidspunkt for inntektsmelding', () => {
@@ -368,7 +367,9 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const arbeidsforholdListe = [arbeidsforhold, arbeidsforhold2, arbeidsforhold3, arbeidsforhold4, arbeidsforhold5];
     const sorterteArbeidsforhol = sortArbeidsforhold(arbeidsforholdListe, arbeidsgiverOpplysningerPerId);
 
-    expect(sorterteArbeidsforhol).is.eql([arbeidsforhold5, arbeidsforhold4, arbeidsforhold2, arbeidsforhold3, arbeidsforhold]);
+    expect(sorterteArbeidsforhol).toEqual(
+      [arbeidsforhold5, arbeidsforhold4, arbeidsforhold2, arbeidsforhold3, arbeidsforhold],
+    );
   });
 
   it('skal legge gamle arbeidsforhold med samme orgnr på nytt arbeidsforhold', () => {
@@ -391,7 +392,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
 
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold, oldArbeidsforhold], arbeidsgiverOpplysningerPerId);
 
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -447,7 +448,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }];
     const isAllowed = erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(toArbeidsforhold as Arbeidsforhold[], '1234567');
 
-    expect(isAllowed).is.false;
+    expect(isAllowed).toBe(false);
   });
 
   it('skal kunne fortsette uten inntekstmelding når en har to arbeidsforhold fra samme arbeidsgiver der begge har inntektsmelding', () => {
@@ -488,7 +489,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }];
     const isAllowed = erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(toArbeidsforhold as Arbeidsforhold[], '1234567');
 
-    expect(isAllowed).is.true;
+    expect(isAllowed).toBe(true);
   });
 
   it('skal oppdatere arbeidsforholdet korrekt med når man skal fjerne arbeidsforholdet', () => {
@@ -520,12 +521,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
 
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       brukArbeidsforholdet: false,
@@ -536,7 +537,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }]);
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
   });
 
   it('skal oppdatere arbeidsforholdet korrekt med når man skal fortsette uten inntektsmelding', () => {
@@ -569,12 +570,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
 
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       fortsettBehandlingUtenInntektsmelding: true,
@@ -584,7 +585,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }]);
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
   });
 
   it('skal oppdatere arbeidsforholdet korrekt når nødvendig inntektsmelding ikke mottatt', () => {
@@ -617,12 +618,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
 
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       fortsettBehandlingUtenInntektsmelding: false,
@@ -632,7 +633,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }]);
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
   });
 
   it('skal oppdatere arbeidsforholdet korrekt når overstyrtTom satt av saksbehandler', () => {
@@ -666,12 +667,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
 
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       fortsettBehandlingUtenInntektsmelding: true,
@@ -681,7 +682,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     }]);
 
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).is.undefined;
+    expect(wrapper.state().selectedArbeidsforhold).toBeUndefined();
   });
 
   it('skal lage nytt arbeidsforhold object', () => {
@@ -705,36 +706,36 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const instance = wrapper.instance();
     // @ts-ignore
     const valgtArbeidsforholdForLagtTil = wrapper.state().selectedArbeidsforhold as Arbeidsforhold;
-    expect(valgtArbeidsforholdForLagtTil).to.eql(undefined);
+    expect(valgtArbeidsforholdForLagtTil).toEqual(undefined);
 
     // @ts-ignore
     instance.leggTilArbeidsforhold();
 
     // @ts-ignore
     const valgtArbeidsforhold = wrapper.state().selectedArbeidsforhold as Arbeidsforhold;
-    expect(valgtArbeidsforhold).to.not.eql(undefined);
-    expect(valgtArbeidsforhold.id).to.not.eql(undefined);
-    expect(valgtArbeidsforhold.lagtTilAvSaksbehandler).to.eql(true);
-    expect(valgtArbeidsforhold.tilVurdering).to.eql(true);
-    expect(valgtArbeidsforhold.kilde.navn).to.eql('Saksbehandler');
-    expect(valgtArbeidsforhold.brukArbeidsforholdet).to.eql(true);
+    expect(valgtArbeidsforhold).not.toEqual(undefined);
+    expect(valgtArbeidsforhold.id).not.toEqual(undefined);
+    expect(valgtArbeidsforhold.lagtTilAvSaksbehandler).toEqual(true);
+    expect(valgtArbeidsforhold.tilVurdering).toEqual(true);
+    expect(valgtArbeidsforhold.kilde.navn).toEqual('Saksbehandler');
+    expect(valgtArbeidsforhold.brukArbeidsforholdet).toEqual(true);
     // @ts-ignore
-    expect(valgtArbeidsforhold.arbeidsforholdHandlingField).to.eql(ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD);
-    expect(valgtArbeidsforhold.erEndret).to.eql(undefined);
-    expect(valgtArbeidsforhold.vurderOmSkalErstattes).to.eql(undefined);
-    expect(valgtArbeidsforhold.ikkeRegistrertIAaRegister).to.eql(undefined);
-    expect(valgtArbeidsforhold.harErsattetEttEllerFlere).to.eql(undefined);
-    expect(valgtArbeidsforhold.erstatterArbeidsforholdId).to.eql(undefined);
-    expect(valgtArbeidsforhold.erSlettet).to.eql(undefined);
-    expect(valgtArbeidsforhold.erNyttArbeidsforhold).to.eql(undefined);
-    expect(valgtArbeidsforhold.fortsettBehandlingUtenInntektsmelding).to.eql(undefined);
-    expect(valgtArbeidsforhold.stillingsprosent).to.eql(undefined);
-    expect(valgtArbeidsforhold.begrunnelse).to.eql(undefined);
-    expect(valgtArbeidsforhold.mottattDatoInntektsmelding).to.eql(undefined);
-    expect(valgtArbeidsforhold.fomDato).to.eql(undefined);
-    expect(valgtArbeidsforhold.tomDato).to.eql(undefined);
-    expect(valgtArbeidsforhold.arbeidsforholdId).to.eql(undefined);
-    expect(valgtArbeidsforhold.arbeidsgiverReferanse).to.eql(undefined);
+    expect(valgtArbeidsforhold.arbeidsforholdHandlingField).toEqual(ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD);
+    expect(valgtArbeidsforhold.erEndret).toEqual(undefined);
+    expect(valgtArbeidsforhold.vurderOmSkalErstattes).toEqual(undefined);
+    expect(valgtArbeidsforhold.ikkeRegistrertIAaRegister).toEqual(undefined);
+    expect(valgtArbeidsforhold.harErsattetEttEllerFlere).toEqual(undefined);
+    expect(valgtArbeidsforhold.erstatterArbeidsforholdId).toEqual(undefined);
+    expect(valgtArbeidsforhold.erSlettet).toEqual(undefined);
+    expect(valgtArbeidsforhold.erNyttArbeidsforhold).toEqual(undefined);
+    expect(valgtArbeidsforhold.fortsettBehandlingUtenInntektsmelding).toEqual(undefined);
+    expect(valgtArbeidsforhold.stillingsprosent).toEqual(undefined);
+    expect(valgtArbeidsforhold.begrunnelse).toEqual(undefined);
+    expect(valgtArbeidsforhold.mottattDatoInntektsmelding).toEqual(undefined);
+    expect(valgtArbeidsforhold.fomDato).toEqual(undefined);
+    expect(valgtArbeidsforhold.tomDato).toEqual(undefined);
+    expect(valgtArbeidsforhold.arbeidsforholdId).toEqual(undefined);
+    expect(valgtArbeidsforhold.arbeidsgiverReferanse).toEqual(undefined);
   });
 
   it('skal vise knapp for å legge til arbeidsforhold', () => {
@@ -756,11 +757,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const btn = wrapper.find('button');
-    expect(btn).to.have.length(1);
+    expect(btn).toHaveLength(1);
     // @ts-ignore
-    expect(btn.props().children.props.id).to.eql('PersonArbeidsforholdTable.LeggTilArbeidsforhold');
+    expect(btn.props().children.props.id).toEqual('PersonArbeidsforholdTable.LeggTilArbeidsforhold');
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).to.eql(undefined);
+    expect(wrapper.state().selectedArbeidsforhold).toEqual(undefined);
   });
 
   it('skal ikke vise knapp for å legge til arbeidsforhold', () => {
@@ -782,9 +783,9 @@ describe('<PersonArbeidsforholdPanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const btn = wrapper.find('button');
-    expect(btn).to.have.length(0);
+    expect(btn).toHaveLength(0);
     // @ts-ignore
-    expect(wrapper.state().selectedArbeidsforhold).to.eql(undefined);
+    expect(wrapper.state().selectedArbeidsforhold).toEqual(undefined);
   });
 
   it('skal oppdatere arbeidsforholdet korrekt når man skal bruke permisjon', () => {
@@ -822,12 +823,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       brukArbeidsforholdet: true,
@@ -879,12 +880,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       brukArbeidsforholdet: true,
@@ -923,12 +924,12 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const detailForm = wrapper.find(PersonArbeidsforholdDetailForm);
     detailForm.prop('updateArbeidsforhold')(editedArbeidsforhold);
     const calls = formChangeCallback.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(3);
-    expect(args[0]).to.eql('panel.ArbeidsforholdInfoPanel');
-    expect(args[1]).to.eql('arbeidsforhold');
-    expect(args[2]).to.eql([{
+    expect(args).toHaveLength(3);
+    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[1]).toEqual('arbeidsforhold');
+    expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
       erEndret: true,
       brukArbeidsforholdet: true,
@@ -952,7 +953,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       erEndret: false,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold, oldArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -979,7 +980,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukMedJustertPeriode: true,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -1004,7 +1005,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukPermisjon: true,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -1023,7 +1024,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       brukArbeidsforholdet: false,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -1043,7 +1044,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       fortsettBehandlingUtenInntektsmelding: false,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -1063,7 +1064,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       inntektMedTilBeregningsgrunnlag: false,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -1083,7 +1084,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       fortsettBehandlingUtenInntektsmelding: true,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',
@@ -1109,7 +1110,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       fortsettBehandlingUtenInntektsmelding: true,
     };
     const initialValues = PersonArbeidsforholdPanel.buildInitialValues([newArbeidsforhold], arbeidsgiverOpplysningerPerId);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       arbeidsforhold: [{
         ...newArbeidsforhold,
         originalFomDato: '2018-01-01',

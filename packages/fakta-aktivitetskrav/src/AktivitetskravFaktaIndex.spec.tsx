@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { Behandling } from '@fpsak-frontend/types';
@@ -35,7 +34,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
       aksjonspunkter={[]}
     />);
 
-    expect(wrapper.find(AktivitetskravFaktaForm).prop('sorterteAktivitetskrav')).to.eql([{
+    expect(wrapper.find(AktivitetskravFaktaForm).prop('sorterteAktivitetskrav')).toEqual([{
       fom: '2021-01-01',
       tom: '2021-01-07',
       endret: false,

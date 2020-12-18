@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Knapp } from 'nav-frontend-knapper';
 
@@ -17,13 +16,13 @@ describe('<TilretteleggingForArbeidsgiverFieldArray>', () => {
     />);
 
     const containers = wrapper.find('div');
-    expect(containers).to.have.length(2);
+    expect(containers).toHaveLength(2);
     const arbeidsgiverRad1 = containers.first();
-    expect(arbeidsgiverRad1.find(Knapp)).to.have.length(0);
-    expect(arbeidsgiverRad1.find(VerticalSpacer)).to.have.length(1);
+    expect(arbeidsgiverRad1.find(Knapp)).toHaveLength(0);
+    expect(arbeidsgiverRad1.find(VerticalSpacer)).toHaveLength(1);
 
     const arbeidsgiverRad2 = containers.last();
-    expect(arbeidsgiverRad2.find(Knapp)).to.have.length(1);
-    expect(arbeidsgiverRad2.find(VerticalSpacer)).to.have.length(0);
+    expect(arbeidsgiverRad2.find(Knapp)).toHaveLength(1);
+    expect(arbeidsgiverRad2.find(VerticalSpacer)).toHaveLength(0);
   });
 });

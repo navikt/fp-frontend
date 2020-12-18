@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import {
@@ -59,7 +58,7 @@ describe('<UttakInfoPanel>', () => {
     />);
 
     const uttakFaktaForm = wrapper.find(UttakFaktaForm);
-    expect(uttakFaktaForm).to.have.length(1);
+    expect(uttakFaktaForm).toHaveLength(1);
   });
 
   it('skal vise Avklar annen forelder har rett', () => {
@@ -83,6 +82,6 @@ describe('<UttakInfoPanel>', () => {
     />);
 
     const annenForelderHarRettForm = wrapper.find(AnnenForelderHarRettForm);
-    expect(annenForelderHarRettForm).to.have.length(1);
+    expect(annenForelderHarRettForm).toHaveLength(1);
   });
 });

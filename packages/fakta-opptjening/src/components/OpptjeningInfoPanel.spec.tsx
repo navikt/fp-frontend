@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -34,8 +33,8 @@ describe('<OpptjeningInfoPanel>', () => {
     />);
 
     const opptjeningForm = wrapper.find(OpptjeningFaktaForm);
-    expect(opptjeningForm).to.have.length(1);
-    expect(opptjeningForm.prop('readOnly')).is.false;
+    expect(opptjeningForm).toHaveLength(1);
+    expect(opptjeningForm.prop('readOnly')).toBe(false);
   });
 
   it('skal ikke bruke aktiviteter som er utenfor opptjeningperioden', () => {
@@ -67,7 +66,7 @@ describe('<OpptjeningInfoPanel>', () => {
     const aksjonspunkter = { definisjon: { kode: '5058' }, erAktivt: true, toTrinnsBehandling: false } as Aksjonspunkt;
 
     const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, [aksjonspunkter]);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       aksjonspunkt: [],
       fastsattOpptjening: {
         opptjeningFom: '2018-01-01',
@@ -127,7 +126,7 @@ describe('<OpptjeningInfoPanel>', () => {
       { definisjon: { kode: '5080' }, erAktivt: true, toTrinnsBehandling: false }];
 
     const initialValues = buildInitialValues.resultFunc(opptjeningActivities, fastsattOpptjening, aksjonspunkter as Aksjonspunkt[]);
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       aksjonspunkt: [{
         definisjon: {
           kode: '5051',

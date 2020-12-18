@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { DetaljertSimuleringResultat } from '@fpsak-frontend/types';
@@ -53,7 +52,7 @@ describe('<AvregningTable>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(0);
+    expect(table).toHaveLength(0);
   });
 
   it('skal vise så mange tabeller som det er mottakere i perioderPerMottaker array', () => {
@@ -68,7 +67,7 @@ describe('<AvregningTable>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(2);
+    expect(table).toHaveLength(2);
   });
 
   it('skal vise så mange rader i tabele som det er rader i resultatPerFagområde og resultatOgMotregningRader arrays', () => {
@@ -83,7 +82,7 @@ describe('<AvregningTable>', () => {
     />);
 
     const tableRow = wrapper.find('TableRow');
-    expect(tableRow).to.have.length(3);
+    expect(tableRow).toHaveLength(3);
   });
 
   it('skal vise mottaker navn og nummer hvis mottaker er arbeidsgiver', () => {
@@ -105,7 +104,7 @@ describe('<AvregningTable>', () => {
     />);
 
     const normaltekst = wrapper.find('Normaltekst');
-    expect(normaltekst).to.have.length(1);
-    expect(normaltekst.html()).to.equal('<p class="typo-normal tableTitle">Statoil (1234567)</p>');
+    expect(normaltekst).toHaveLength(1);
+    expect(normaltekst.html()).toBe('<p class="typo-normal tableTitle">Statoil (1234567)</p>');
   });
 });

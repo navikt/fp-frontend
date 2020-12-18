@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -51,14 +50,14 @@ describe('<FagsakSearchIndex>', () => {
     const wrapper = shallow(<FagsakSearchIndex />);
 
     const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
-    expect(fagsakSearchIndex).to.have.length(1);
+    expect(fagsakSearchIndex).toHaveLength(1);
 
-    expect(fagsakSearchIndex.prop('fagsaker')).to.eql([]);
+    expect(fagsakSearchIndex.prop('fagsaker')).toEqual([]);
 
     const sok = fagsakSearchIndex.prop('searchFagsakCallback');
     sok();
 
-    expect(wrapper.find(FagsakSokSakIndex).prop('fagsaker')).to.eql(fagsaker);
+    expect(wrapper.find(FagsakSokSakIndex).prop('fagsaker')).toEqual(fagsaker);
   });
 
   it('skal gå til valgt fagsak', () => {
@@ -71,9 +70,9 @@ describe('<FagsakSearchIndex>', () => {
     const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: number) => undefined;
     velgFagsak('', fagsak.saksnummer);
 
-    expect(push.calledOnce).to.be.true;
+    expect(push.calledOnce).toBe(true);
     const { args } = push.getCalls()[0];
-    expect(args).to.have.length(1);
-    expect(args[0]).to.eql(`/fagsak/${fagsak.saksnummer}/`);
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual(`/fagsak/${fagsak.saksnummer}/`);
   });
 });

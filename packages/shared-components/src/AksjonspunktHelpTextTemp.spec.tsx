@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -14,8 +13,8 @@ describe('<AksjonspunktHelpTextTemp>', () => {
         {[<FormattedMessage key="1" id="HelpText.Aksjonspunkt" />]}
       </AksjonspunktHelpTextTemp>,
     );
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).to.have.length(1);
-    expect(wrapper.find(Normaltekst)).to.have.length(0);
+    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(1);
+    expect(wrapper.find(Normaltekst)).toHaveLength(0);
   });
 
   it('skal tekst når aksjonspunkt er lukket', () => {
@@ -24,7 +23,7 @@ describe('<AksjonspunktHelpTextTemp>', () => {
         {[<FormattedMessage key="1" id="HelpText.Aksjonspunkt" />]}
       </AksjonspunktHelpTextTemp>,
     );
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).to.have.length(0);
-    expect(wrapper.find(Normaltekst)).to.have.length(1);
+    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(0);
+    expect(wrapper.find(Normaltekst)).toHaveLength(1);
   });
 });

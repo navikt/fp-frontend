@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -36,8 +35,8 @@ describe('<TermindatoFaktaForm>', () => {
       onSubmit={() => undefined}
     />);
 
-    expect(wrapper.find(DatepickerField)).has.length(2);
-    expect(wrapper.find(InputField)).has.length(1);
+    expect(wrapper.find(DatepickerField)).toHaveLength(2);
+    expect(wrapper.find(InputField)).toHaveLength(1);
   });
 
   it('skal vise fødselsdato og antall barn fra TPS når fødselsdato er satt av TPS', () => {
@@ -64,9 +63,9 @@ describe('<TermindatoFaktaForm>', () => {
       onSubmit={() => undefined}
     />);
 
-    expect(wrapper.find(FaktaGruppe)).has.length(2);
-    expect(wrapper.find(DateLabel).prop('dateString')).to.eql('2018-01-01');
-    expect(wrapper.find(Normaltekst).at(3).childAt(0).text()).to.eql('1');
+    expect(wrapper.find(FaktaGruppe)).toHaveLength(2);
+    expect(wrapper.find(DateLabel).prop('dateString')).toEqual('2018-01-01');
+    expect(wrapper.find(Normaltekst).at(3).childAt(0).text()).toEqual('1');
   });
 
   it('skal sette initielle verdier når en ikke har avklarte data', () => {
@@ -85,7 +84,7 @@ describe('<TermindatoFaktaForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(soknad as Soknad, familiehendelse as FamilieHendelse, aksjonspunkt);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       utstedtdato: '2016-01-15',
       termindato: '2016-09-15',
       antallBarn: 2,
@@ -114,7 +113,7 @@ describe('<TermindatoFaktaForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(soknad as Soknad, familiehendelse as FamilieHendelse, aksjonspunkt);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       utstedtdato: '2015-01-15',
       termindato: '2015-09-15',
       antallBarn: 5,

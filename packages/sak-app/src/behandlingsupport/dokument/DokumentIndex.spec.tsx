@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
@@ -38,12 +37,12 @@ describe('<DokumentIndex>', () => {
     />);
 
     const index = wrapper.find(DokumenterSakIndex);
-    expect(index).to.have.length(1);
+    expect(index).toHaveLength(1);
 
     const dokumenter = index.prop('documents');
 
-    expect(dokumenter[0].journalpostId).to.eql('2');
-    expect(dokumenter[1].journalpostId).to.eql('3');
-    expect(dokumenter[2].journalpostId).to.eql('1');
+    expect(dokumenter[0].journalpostId).toEqual('2');
+    expect(dokumenter[1].journalpostId).toEqual('3');
+    expect(dokumenter[2].journalpostId).toEqual('1');
   });
 });

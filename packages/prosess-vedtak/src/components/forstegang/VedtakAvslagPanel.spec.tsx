@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -59,10 +58,10 @@ describe('<VedtakAvslagPanel>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).to.have.length(1);
-    expect(message.prop('id')).to.eql('VedtakForm.UttaksperioderIkkeGyldig');
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('VedtakForm.UttaksperioderIkkeGyldig');
 
-    expect(wrapper.find(VedtakFritekstPanel)).to.have.length(0);
+    expect(wrapper.find(VedtakFritekstPanel)).toHaveLength(0);
   });
 
   it('skal rendre avslagspanel med fritekstpanel for engangsstønad', () => {
@@ -79,6 +78,6 @@ describe('<VedtakAvslagPanel>', () => {
       skalBrukeOverstyrendeFritekstBrev={false}
     />);
 
-    expect(wrapper.find(VedtakFritekstPanel)).to.have.length(1);
+    expect(wrapper.find(VedtakFritekstPanel)).toHaveLength(1);
   });
 });

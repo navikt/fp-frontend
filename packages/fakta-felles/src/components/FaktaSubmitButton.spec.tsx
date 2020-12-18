@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -18,7 +17,7 @@ describe('<FaktaSubmitButton>', () => {
       behandlingVersjon={2}
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(0);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(0);
   });
 
   it('skal vise knapp som trykkbar når en kan avklare aksjonspunkt og en har gjort endringer', () => {
@@ -34,8 +33,8 @@ describe('<FaktaSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.false;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(false);
   });
 
   it('skal vise knapp som utgrået når en ikke kan avklare aksjonspunkt', () => {
@@ -51,8 +50,8 @@ describe('<FaktaSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal vise knapp som utgrået når en har trykket på knapp', () => {
@@ -68,8 +67,8 @@ describe('<FaktaSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal vise knapp som utgrået når en ikke har gjort endringer og det er tomme obligatoriske felter', () => {
@@ -85,8 +84,8 @@ describe('<FaktaSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 
   it('skal vise knapp som trykkbar når en ikke har gjort endringer men alle obligatoriske felter er utfylte', () => {
@@ -102,8 +101,8 @@ describe('<FaktaSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.false;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(false);
   });
 
   it('skal vise knapp som utgrået når en ikke har gjort endringer og aksjonspunktet er løst tidligere', () => {
@@ -119,7 +118,7 @@ describe('<FaktaSubmitButton>', () => {
     />);
 
     const button = wrapper.find(Hovedknapp);
-    expect(button).to.have.length(1);
-    expect(button.prop('disabled')).is.true;
+    expect(button).toHaveLength(1);
+    expect(button.prop('disabled')).toBe(true);
   });
 });

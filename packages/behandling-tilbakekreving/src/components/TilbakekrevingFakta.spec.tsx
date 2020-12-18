@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
@@ -117,7 +116,7 @@ describe('<TilbakekrevingFakta>', () => {
     );
 
     const panel = wrapper.find(SideMenuWrapper);
-    expect(panel.prop('paneler')).is.eql([{
+    expect(panel.prop('paneler')).toEqual([{
       erAktiv: true,
       harAksjonspunkt: true,
       tekst: 'Feilutbetaling',
@@ -149,10 +148,10 @@ describe('<TilbakekrevingFakta>', () => {
     panel.prop('onClick')(0);
 
     const calls = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(calls).to.have.length(1);
+    expect(calls).toHaveLength(1);
     const { args } = calls[0];
-    expect(args).to.have.length(2);
-    expect(args[0]).to.eql('default');
-    expect(args[1]).to.eql('feilutbetaling');
+    expect(args).toHaveLength(2);
+    expect(args[0]).toEqual('default');
+    expect(args[1]).toEqual('feilutbetaling');
   });
 });

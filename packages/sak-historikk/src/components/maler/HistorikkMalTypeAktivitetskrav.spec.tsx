@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { omit } from '@fpsak-frontend/utils';
@@ -67,8 +66,8 @@ describe('HistorikkMalTypeAktivitetskrav', () => {
     />);
 
     const messages = wrapper.find(FormattedMessage);
-    expect(messages).to.have.length(1);
-    expect(omit(messages.first().prop('values'), 'b')).to.eql({
+    expect(messages).toHaveLength(1);
+    expect(omit(messages.first().prop('values'), 'b')).toEqual({
       periodeFom: '05.01.2021',
       periodeTom: '19.01.2021',
       feltVerdi: 'Mor er i aktivitet',

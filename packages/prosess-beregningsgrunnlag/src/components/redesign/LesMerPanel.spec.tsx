@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import Lesmerpanel from './LesmerPanel';
@@ -19,14 +18,14 @@ describe('Lesmerpanel', () => {
       </Lesmerpanel>,
     );
 
-    expect(wrapper.children()).to.have.length(2);
+    expect(wrapper.children()).toHaveLength(2);
     const divs = wrapper.find('div');
 
     const lesmertoggle = wrapper.find('LesMerToggle');
-    expect(lesmertoggle.length).to.equal(1);
+    expect(lesmertoggle.length).toBe(1);
     const intro = divs.at(2);
-    expect(intro.childAt(0).text()).to.eql('Dette er intro');
+    expect(intro.childAt(0).text()).toEqual('Dette er intro');
     const innhold = divs.at(5);
-    expect(innhold.childAt(0).text()).to.eql('innholdstekst');
+    expect(innhold.childAt(0).text()).toEqual('innholdstekst');
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import Timeline from 'react-visjs-timeline';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -45,13 +44,13 @@ describe('<TilbakekrevingTimeline>', () => {
       />,
     );
 
-    expect(wrapper.find(TimeLineControl)).has.length(1);
+    expect(wrapper.find(TimeLineControl)).toHaveLength(1);
 
     const tidslinje = wrapper.find(Timeline);
     const options = tidslinje.prop('options') as { min: moment.Moment; max: moment.Moment };
-    expect(options.min.format(ISO_DATE_FORMAT)).is.eql('2019-09-12');
-    expect(options.max.format(ISO_DATE_FORMAT)).is.eql('2023-10-10');
+    expect(options.min.format(ISO_DATE_FORMAT)).toEqual('2019-09-12');
+    expect(options.max.format(ISO_DATE_FORMAT)).toEqual('2023-10-10');
 
-    expect(tidslinje.prop('groups')).is.eql([{ id: 1, content: '' }]);
+    expect(tidslinje.prop('groups')).toEqual([{ id: 1, content: '' }]);
   });
 });

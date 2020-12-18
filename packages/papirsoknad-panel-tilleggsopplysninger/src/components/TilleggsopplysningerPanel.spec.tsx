@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
@@ -11,6 +10,6 @@ describe('<TilleggsopplysningerPanel>', () => {
   it('skal vise komponent som default', () => {
     const wrapper = shallowWithIntl(<TilleggsopplysningerPanel intl={intlMock} readOnly={false} />);
     const additionalInfo = wrapper.find(TextAreaField);
-    expect(additionalInfo).to.have.length(1);
+    expect(additionalInfo).toHaveLength(1);
   });
 });

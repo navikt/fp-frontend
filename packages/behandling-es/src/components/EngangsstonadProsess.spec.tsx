@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -120,7 +119,7 @@ describe('<EngangsstonadProsess>', () => {
     );
 
     const meny = wrapper.find(ProsessStegContainer);
-    expect(meny.prop('formaterteProsessStegPaneler')).is.eql([{
+    expect(meny.prop('formaterteProsessStegPaneler')).toEqual([{
       isActive: true,
       isDisabled: false,
       isFinished: false,
@@ -173,10 +172,10 @@ describe('<EngangsstonadProsess>', () => {
     meny.prop('velgProsessStegPanelCallback')(3);
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql('vedtak');
-    expect(opppdaterKall[0].args[1]).to.eql('default');
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual('vedtak');
+    expect(opppdaterKall[0].args[1]).toEqual('default');
   });
 
   it('skal vise prosesspanel for inngangsvilkår siden det er et åpent aksjonspunkt for adopsjon', () => {
@@ -201,10 +200,10 @@ describe('<EngangsstonadProsess>', () => {
 
     const panel = wrapper.find(ProsessStegPanel);
     const utledetPanel = panel.prop('valgtProsessSteg');
-    expect(utledetPanel.getUrlKode()).is.eql('inngangsvilkar');
-    expect(utledetPanel.getErAksjonspunktOpen()).is.true;
-    expect(utledetPanel.getErReadOnly()).is.false;
-    expect(utledetPanel.getStatus()).is.eql(vilkarUtfallType.IKKE_VURDERT);
+    expect(utledetPanel.getUrlKode()).toEqual('inngangsvilkar');
+    expect(utledetPanel.getErAksjonspunktOpen()).toBe(true);
+    expect(utledetPanel.getErReadOnly()).toBe(false);
+    expect(utledetPanel.getStatus()).toEqual(vilkarUtfallType.IKKE_VURDERT);
   });
 
   it('skal vise fatter vedtak modal etter lagring når aksjonspunkt er FORESLA_VEDTAK og så lukke denne og gå til søkeside', () => {
@@ -249,18 +248,18 @@ describe('<EngangsstonadProsess>', () => {
     );
 
     const modal = wrapper.find(FatterVedtakStatusModal);
-    expect(modal.prop('visModal')).is.false;
+    expect(modal.prop('visModal')).toBe(false);
 
     const panel = wrapper.find(ProsessStegPanel);
     panel.prop('lagringSideeffekterCallback')([{ kode: aksjonspunktCodes.FORESLA_VEDTAK, isVedtakSubmission: true }])();
 
     const oppdatertModal = wrapper.find(FatterVedtakStatusModal);
-    expect(oppdatertModal.prop('visModal')).is.true;
+    expect(oppdatertModal.prop('visModal')).toBe(true);
 
     oppdatertModal.prop('lukkModal')();
 
     const opppdaterKall = opneSokeside.getCalls();
-    expect(opppdaterKall).to.have.length(1);
+    expect(opppdaterKall).toHaveLength(1);
   });
 
   it('skal vise iverksetter vedtak modal etter lagring når aksjonspunkt er FATTER_VEDTAK og så lukke denne og gå til søkeside', () => {
@@ -301,18 +300,18 @@ describe('<EngangsstonadProsess>', () => {
     );
 
     const modal = wrapper.find(IverksetterVedtakStatusModal);
-    expect(modal.prop('visModal')).is.false;
+    expect(modal.prop('visModal')).toBe(false);
 
     const panel = wrapper.find(ProsessStegPanel);
     panel.prop('lagringSideeffekterCallback')([{ kode: aksjonspunktCodes.FATTER_VEDTAK, isVedtakSubmission: true }])();
 
     const oppdatertModal = wrapper.find(IverksetterVedtakStatusModal);
-    expect(oppdatertModal.prop('visModal')).is.true;
+    expect(oppdatertModal.prop('visModal')).toBe(true);
 
     oppdatertModal.prop('lukkModal')();
 
     const opppdaterKall = opneSokeside.getCalls();
-    expect(opppdaterKall).to.have.length(1);
+    expect(opppdaterKall).toHaveLength(1);
   });
 
   it('skal gå til søkeside når en har revurderingsaksjonspunkt', () => {
@@ -356,7 +355,7 @@ describe('<EngangsstonadProsess>', () => {
     panel.prop('lagringSideeffekterCallback')([{ kode: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL, sendVarsel: true }])();
 
     const opppdaterKall = opneSokeside.getCalls();
-    expect(opppdaterKall).to.have.length(1);
+    expect(opppdaterKall).toHaveLength(1);
   });
 
   it('skal gå til neste panel i prosess etter løst aksjonspunkt', () => {
@@ -384,10 +383,10 @@ describe('<EngangsstonadProsess>', () => {
     panel.prop('lagringSideeffekterCallback')([{ kode: aksjonspunktCodes.SVANGERSKAPSVILKARET, sendVarsel: true }])();
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql('default');
-    expect(opppdaterKall[0].args[1]).to.eql('default');
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual('default');
+    expect(opppdaterKall[0].args[1]).toEqual('default');
   });
 
   it('skal legge til forhåndsvisningsfunksjon i prosess-steget til vedtak', () => {
@@ -412,15 +411,15 @@ describe('<EngangsstonadProsess>', () => {
     );
 
     const panel = wrapper.find(ProsessStegPanel);
-    expect(panel.prop('valgtProsessSteg').getUrlKode()).is.eql('vedtak');
+    expect(panel.prop('valgtProsessSteg').getUrlKode()).toEqual('vedtak');
     const forhandsvisCallback = panel.prop('valgtProsessSteg').getDelPaneler()[0].getKomponentData().previewCallback;
-    expect(forhandsvisCallback).is.not.null;
+    expect(forhandsvisCallback).not.toBeNull();
 
     forhandsvisCallback({ param: 'test' });
 
     const requestData = requestEsApi.getRequestMockData(EsBehandlingApiKeys.PREVIEW_MESSAGE);
-    expect(requestData).to.have.length(1);
-    expect(requestData[0].params).to.eql({
+    expect(requestData).toHaveLength(1);
+    expect(requestData[0].params).toEqual({
       param: 'test',
       behandlingUuid: 'uuid-test',
       ytelseType: fagsak.sakstype,
@@ -449,15 +448,15 @@ describe('<EngangsstonadProsess>', () => {
     );
 
     const panel = wrapper.find(ProsessStegPanel);
-    expect(panel.prop('valgtProsessSteg').getUrlKode()).is.eql('simulering');
+    expect(panel.prop('valgtProsessSteg').getUrlKode()).toEqual('simulering');
     const forhandsvisCallback = panel.prop('valgtProsessSteg').getDelPaneler()[0].getKomponentData().previewFptilbakeCallback;
-    expect(forhandsvisCallback).is.not.null;
+    expect(forhandsvisCallback).not.toBeNull();
 
     forhandsvisCallback({ param: 'test' });
 
     const requestData = requestEsApi.getRequestMockData(EsBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
-    expect(requestData).to.have.length(1);
-    expect(requestData[0].params).to.eql({
+    expect(requestData).toHaveLength(1);
+    expect(requestData[0].params).toEqual({
       behandlingUuid: 'uuid-test',
       brevmalkode: undefined,
       fagsakYtelseType: fagsak.sakstype,

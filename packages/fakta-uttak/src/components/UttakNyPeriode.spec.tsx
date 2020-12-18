@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import {
   CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
@@ -96,33 +95,33 @@ describe('<UttakNyPeriode>', () => {
     />);
 
     const title = wrapper.find('FormattedMessage').first();
-    expect(title.prop('id')).to.equal('UttakInfoPanel.NyPeriode');
+    expect(title.prop('id')).toBe('UttakInfoPanel.NyPeriode');
 
     const periodpicker = wrapper.find(PeriodpickerField);
-    expect(periodpicker).to.have.length(1);
+    expect(periodpicker).toHaveLength(1);
 
     const select = wrapper.find(SelectField);
-    expect(select).to.have.length(1);
+    expect(select).toHaveLength(1);
 
     const checkbox = wrapper.find(CheckboxField);
-    expect(checkbox).to.have.length(2);
+    expect(checkbox).toHaveLength(2);
 
     const textAreaField = wrapper.find(TextAreaField);
-    expect(textAreaField).to.have.length(1);
+    expect(textAreaField).toHaveLength(1);
 
     const okKnapp = wrapper.find('Hovedknapp');
-    expect(okKnapp).to.have.length(1);
-    expect(okKnapp.prop('mini')).is.true;
-    expect(okKnapp.prop('htmlType')).is.eql('button');
-    expect(okKnapp.prop('onClick')).is.eql(reduxFormPropsMock.handleSubmit);
-    expect(okKnapp.find('FormattedMessage').prop('id')).to.equal('UttakInfoPanel.Oppdater');
+    expect(okKnapp).toHaveLength(1);
+    expect(okKnapp.prop('mini')).toBe(true);
+    expect(okKnapp.prop('htmlType')).toEqual('button');
+    expect(okKnapp.prop('onClick')).toEqual(reduxFormPropsMock.handleSubmit);
+    expect(okKnapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Oppdater');
 
     const avbrytKnapp = wrapper.find(Knapp);
-    expect(avbrytKnapp).to.have.length(1);
-    expect(avbrytKnapp.prop('mini')).is.true;
+    expect(avbrytKnapp).toHaveLength(1);
+    expect(avbrytKnapp.prop('mini')).toBe(true);
 
-    expect(avbrytKnapp.prop('onClick')).is.eql(newPeriodeResetCallback);
-    expect(avbrytKnapp.find('FormattedMessage').prop('id')).to.equal('UttakInfoPanel.Avbryt');
+    expect(avbrytKnapp.prop('onClick')).toEqual(newPeriodeResetCallback);
+    expect(avbrytKnapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Avbryt');
   });
 
   it('Skal regne ut og vise antall dager i valgt periode', () => {
@@ -149,8 +148,8 @@ describe('<UttakNyPeriode>', () => {
     />);
 
     const weeksAndDays = wrapper.find('FormattedMessage').at(1);
-    expect(weeksAndDays.prop('id')).to.eql('UttakInfoPanel.AntallFlereDagerOgFlereUker');
-    expect(weeksAndDays.prop('values')).to.eql({
+    expect(weeksAndDays.prop('id')).toEqual('UttakInfoPanel.AntallFlereDagerOgFlereUker');
+    expect(weeksAndDays.prop('values')).toEqual({
       weeks: '4',
       days: '3',
     });
@@ -185,7 +184,7 @@ describe('<UttakNyPeriode>', () => {
       } as NyPeriode,
     });
     const input = wrapper.find(SelectField);
-    expect(input).to.have.length(2);
+    expect(input).toHaveLength(2);
   });
 
   it('skal vise dropdown for årsak for utsettelsen hvis type uttak er satt til utsettelse', () => {
@@ -217,7 +216,7 @@ describe('<UttakNyPeriode>', () => {
       },
     });
     const select = wrapper.find(SelectField);
-    expect(select).to.have.length(2);
+    expect(select).toHaveLength(2);
   });
 
   it('skal vise graderingandel hvis type uttak er gradert for og validere at graderingen er et heltall', () => {
@@ -249,7 +248,7 @@ describe('<UttakNyPeriode>', () => {
       },
     });
     const input = wrapper.find(DecimalField);
-    expect(input).to.have.length(1);
+    expect(input).toHaveLength(1);
   });
 
   it('skal vise prosentandel for samtidig uttak hvis samtidig uttak er valgt og validere at det er et heltall', () => {
@@ -281,7 +280,7 @@ describe('<UttakNyPeriode>', () => {
       },
     });
     const input = wrapper.find(DecimalField);
-    expect(input).to.have.length(1);
+    expect(input).toHaveLength(1);
   });
 
   it('Skal sende inn ny periode når man klikker på Oppdater', () => {
@@ -314,6 +313,6 @@ describe('<UttakNyPeriode>', () => {
     });
     const okKnapp = wrapper.find(Hovedknapp);
     okKnapp.simulate('click');
-    expect(reduxFormPropsMock.handleSubmit.called).is.true;
+    expect(reduxFormPropsMock.handleSubmit.called).toBe(true);
   });
 });

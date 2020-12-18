@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -49,9 +48,9 @@ describe('<AnnenForelderHarRettForm>', () => {
       onSubmit={() => undefined}
     />);
 
-    expect(wrapper.find('[id="UttakInfoPanel.Aksjonspunkt.5086"]')).to.have.lengthOf(1);
+    expect(wrapper.find('[id="UttakInfoPanel.Aksjonspunkt.5086"]')).toHaveLength(1);
 
     const panel = wrapper.find('div').first();
-    expect(panel.find(FaktaSubmitButton)).has.length(1);
+    expect(panel.find(FaktaSubmitButton)).toHaveLength(1);
   });
 });

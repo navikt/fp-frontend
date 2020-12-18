@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -34,7 +33,7 @@ describe('<PersonAksjonspunktText>', () => {
       arbeidsforhold={undefined}
       alleKodeverk={alleKodeverk}
     />);
-    expect(wrapper.find('FormattedMessage')).to.have.length(0);
+    expect(wrapper.find('FormattedMessage')).toHaveLength(0);
   });
 
   it('skal ikke vise hjelpetekst når arbeidsforholdet ikke skal vurderes', () => {
@@ -45,7 +44,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    expect(wrapper.find('FormattedMessage')).to.have.length(0);
+    expect(wrapper.find('FormattedMessage')).toHaveLength(0);
   });
 
   it('skal vise hjelpetekst når det ikke er mottatt inntekstmelding for arbeidsforholdet', () => {
@@ -57,7 +56,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.AvklarManglendeInntektsmelding');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarManglendeInntektsmelding');
   });
 
   it('skal vise hjelpetekst når en kan erstatte gamle arbeidsforhold eller markere arbeidsforholdet som nytt', () => {
@@ -73,7 +72,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.AvklarErstatteTidligere');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarErstatteTidligere');
   });
 
   it('skal vise hjelpetekst når flagget harErstattetEttEllerFlere er satt', () => {
@@ -87,7 +86,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.AvklarErstatteAlle');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarErstatteAlle');
   });
 
   it('skal vise hjelpetekst når flagget ikkeRegistrertIAaRegister er satt', () => {
@@ -103,7 +102,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.AvklarIkkeRegistrertIAa');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarIkkeRegistrertIAa');
   });
 
   it('skal ikke vise hjelpetekst når inntektsmelding er mottatt og det ikke er gamle arbeidsforhold og flagg ikke er satt', () => {
@@ -119,7 +118,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component).to.be.empty;
+    expect(Object.keys(component)).toHaveLength(0);
   });
 
   it('skal vise hjelpetekst for å legge til arbeidsforhold', () => {
@@ -136,7 +135,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.LeggTilArbeidsforhold');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.LeggTilArbeidsforhold');
   });
 
   it('skal vise hjelpetekst for arbeidsforhold med en permisjon og ikke mottat IM', () => {
@@ -159,11 +158,11 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.SokerHarPermisjonOgIkkeMottattIM');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.SokerHarPermisjonOgIkkeMottattIM');
     // @ts-ignore
-    expect(component.props().values.permisjonFom).to.eql('01.10.2018');
+    expect(component.props().values.permisjonFom).toEqual('01.10.2018');
     // @ts-ignore
-    expect(component.props().values.permisjonTom).to.eql('');
+    expect(component.props().values.permisjonTom).toEqual('');
   });
 
   it('skal vise hjelpetekst for arbeidsforhold med en permisjon og mottat IM', () => {
@@ -186,11 +185,11 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.SokerHarPermisjonOgMottattIM');
+    expect(component.props().id).toEqual('PersonAksjonspunktText.SokerHarPermisjonOgMottattIM');
     // @ts-ignore
-    expect(component.props().values.permisjonFom).to.eql('01.10.2018');
+    expect(component.props().values.permisjonFom).toEqual('01.10.2018');
     // @ts-ignore
-    expect(component.props().values.permisjonTom).to.eql('');
+    expect(component.props().values.permisjonTom).toEqual('');
   });
 
   it('skal vise hjelpetekst for arbeidsforhold med flere permisjoner', () => {
@@ -223,7 +222,7 @@ describe('<PersonAksjonspunktText>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const component = wrapper.find('FormattedMessage');
-    expect(component.props().id).to.eql('PersonAksjonspunktText.SokerHarFlerePermisjoner');
-    expect(component.props().values).is.undefined;
+    expect(component.props().id).toEqual('PersonAksjonspunktText.SokerHarFlerePermisjoner');
+    expect(component.props().values).toBeUndefined();
   });
 });

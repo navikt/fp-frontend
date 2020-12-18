@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
@@ -14,6 +13,6 @@ describe('<MigreringFraInfotrygdPanel>', () => {
       readOnly={false}
     />);
 
-    expect(wrapper.find(RadioGroupField)).to.have.length(1);
+    expect(wrapper.find(RadioGroupField)).toHaveLength(1);
   });
 });

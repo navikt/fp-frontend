@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FieldArrayMetaProps } from 'redux-form';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -23,16 +22,16 @@ describe('<IkkeOmsorgPeriodeField>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);
-    expect(dateFields).has.length(2);
-    expect(dateFields.first().prop('name')).is.eql('fieldId1.periodeFom');
-    expect(dateFields.last().prop('name')).is.eql('fieldId1.periodeTom');
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(dateFields).toHaveLength(2);
+    expect(dateFields.first().prop('name')).toEqual('fieldId1.periodeFom');
+    expect(dateFields.last().prop('name')).toEqual('fieldId1.periodeTom');
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 });

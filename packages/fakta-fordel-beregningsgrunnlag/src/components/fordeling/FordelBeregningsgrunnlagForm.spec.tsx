@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -176,7 +175,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     />);
 
     const periodePanel = wrapper.find(FordelBeregningsgrunnlagPeriodePanel);
-    expect(periodePanel.length).to.equal(2);
+    expect(periodePanel.length).toBe(2);
     const fieldName1 = periodePanel.get(0).props.fordelBGFieldArrayName;
     const fom1 = periodePanel.get(0).props.fom;
     const andeler1 = perioder.find(({ fom }) => fom === fom1).fordelBeregningsgrunnlagAndeler;
@@ -191,15 +190,15 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     };
 
     const initialValues = FordelBeregningsgrunnlagForm.buildInitialValues(perioder, bg, getKodeverknavn);
-    expect(initialValues[fieldName1].length).to.equal(andeler1.length);
-    expect(initialValues[fieldName2].length).to.equal(andeler2.length);
+    expect(initialValues[fieldName1].length).toBe(andeler1.length);
+    expect(initialValues[fieldName2].length).toBe(andeler2.length);
 
     const values = {};
     values[getFieldNameKey(0)] = initialValues[fieldName1];
     values[getFieldNameKey(1)] = initialValues[fieldName2];
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, perioder, bg, getKodeverknavn);
-    expect(errors[getFieldNameKey(0)]).to.equal(null);
-    expect(errors[getFieldNameKey(1)]).to.not.be.empty;
+    expect(errors[getFieldNameKey(0)]).toBe(null);
+    expect(errors[getFieldNameKey(1)]).not.toHaveLength(0);
   });
 
   it('skal returnere liste med en periode om kun en periode i grunnlag', () => {
@@ -214,9 +213,9 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '01-01-2019', beregningsgrunnlagPeriodeTom: null, periodeAarsaker: [periodeAarsak.ENDRING_I_REFUSJONSKRAV],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(1);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(1);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe(null);
   });
 
   it('skal returnere liste med en periode om andre periode har naturalytelse tilkommet', () => {
@@ -245,9 +244,9 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.NATURALYTELSE_TILKOMMER }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(1);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(1);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe(null);
   });
 
   it('skal returnere liste med en periode om andre periode har naturalytelse bortfalt', () => {
@@ -276,9 +275,9 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(1);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(1);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe(null);
   });
 
   it('skal returnere liste med en periode om andre periode har avsluttet arbeidsforhold uten endring i bruttoPrÅr', () => {
@@ -309,9 +308,9 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(1);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(1);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe(null);
   });
 
   it('skal returnere liste med to perioder om andre periode har avsluttet arbeidsforhold med endring i bruttoPrÅr', () => {
@@ -342,11 +341,11 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(2);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal('01-02-2019');
-    expect(nyePerioder[1].fom).to.equal('02-02-2019');
-    expect(nyePerioder[1].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(2);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe('01-02-2019');
+    expect(nyePerioder[1].fom).toBe('02-02-2019');
+    expect(nyePerioder[1].tom).toBe(null);
   });
 
   it('skal returnere liste med to perioder om andre periode har opphør av gradering', () => {
@@ -377,11 +376,11 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.GRADERING_OPPHOERER }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(2);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal('01-02-2019');
-    expect(nyePerioder[1].fom).to.equal('02-02-2019');
-    expect(nyePerioder[1].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(2);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe('01-02-2019');
+    expect(nyePerioder[1].fom).toBe('02-02-2019');
+    expect(nyePerioder[1].tom).toBe(null);
   });
 
   it('skal returnere liste med to perioder om andre periode har opphør av refusjon', () => {
@@ -412,11 +411,11 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.REFUSJON_OPPHOERER }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(2);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal('01-02-2019');
-    expect(nyePerioder[1].fom).to.equal('02-02-2019');
-    expect(nyePerioder[1].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(2);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe('01-02-2019');
+    expect(nyePerioder[1].fom).toBe('02-02-2019');
+    expect(nyePerioder[1].tom).toBe(null);
   });
 
   it('skal returnere liste med to perioder om andre periode har endring i refusjon', () => {
@@ -447,11 +446,11 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(2);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal('01-02-2019');
-    expect(nyePerioder[1].fom).to.equal('02-02-2019');
-    expect(nyePerioder[1].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(2);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe('01-02-2019');
+    expect(nyePerioder[1].fom).toBe('02-02-2019');
+    expect(nyePerioder[1].tom).toBe(null);
   });
 
   it('skal returnere liste med to perioder om andre periode har gradering', () => {
@@ -482,11 +481,11 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       periodeAarsaker: [{ kode: periodeAarsak.GRADERING }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
-    expect(nyePerioder.length).to.equal(2);
-    expect(nyePerioder[0].fom).to.equal('01-01-2019');
-    expect(nyePerioder[0].tom).to.equal('01-02-2019');
-    expect(nyePerioder[1].fom).to.equal('02-02-2019');
-    expect(nyePerioder[1].tom).to.equal(null);
+    expect(nyePerioder.length).toBe(2);
+    expect(nyePerioder[0].fom).toBe('01-01-2019');
+    expect(nyePerioder[0].tom).toBe('01-02-2019');
+    expect(nyePerioder[1].fom).toBe('02-02-2019');
+    expect(nyePerioder[1].tom).toBe(null);
   });
 
   it('skal ikkje validere om det ikkje finnes perioder', () => {
@@ -494,7 +493,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const fordelBGPerioder = [];
     const beregningsgrunnlag = {};
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
-    expect(errors).to.be.empty;
+    expect(Object.keys(errors)).toHaveLength(0);
   });
 
   it('skal validere 1 periode', () => {
@@ -509,7 +508,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       }],
     };
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
-    expect(errors[getFieldNameKey(0)]).to.not.be.empty;
+    expect(errors[getFieldNameKey(0)]).not.toHaveLength(0);
   });
 
   it('skal validere 2 perioder', () => {
@@ -530,36 +529,36 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       }],
     };
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
-    expect(errors[getFieldNameKey(0)]).to.not.be.empty;
-    expect(errors[getFieldNameKey(1)]).to.not.be.empty;
+    expect(errors[getFieldNameKey(0)]).not.toHaveLength(0);
+    expect(errors[getFieldNameKey(1)]).not.toHaveLength(0);
   });
 
   it('skal mappe andel til fastsatte verdier uten endring i refusjon', () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const fastsatteVerdier = mapTilFastsatteVerdier(andel2);
-    expect(fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
+    expect(fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
   });
 
   it('skal mappe andel til fastsatte verdier med endring i refusjon', () => {
     const andel = { ...andel2, skalKunneEndreRefusjon: true };
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const fastsatteVerdier = mapTilFastsatteVerdier(andel);
-    expect(fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(fastsatteVerdier.refusjonPrÅr).to.equal(10000);
-    expect(fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
+    expect(fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(fastsatteVerdier.refusjonPrÅr).toBe(10000);
+    expect(fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
   });
 
   it('skal mappe verdier fra andel', () => {
     const verdier = mapAndel(andel2);
-    expect(verdier.fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(verdier.fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(verdier.fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(verdier.lagtTilAvSaksbehandler).to.equal(false);
-    expect(verdier.nyAndel).to.equal(false);
-    expect(verdier.andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(verdier.arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(verdier.fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(verdier.fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(verdier.fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(verdier.lagtTilAvSaksbehandler).toBe(false);
+    expect(verdier.nyAndel).toBe(false);
+    expect(verdier.andel).toBe('Sopra Steria AS (2342342348)');
+    expect(verdier.arbeidsforholdId).toBe('ri4j3f34rt3144');
   });
 
   it('skal transforme perioder for submit', () => {
@@ -591,26 +590,26 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     values[getFieldNameKey(0)] = [{ ...andel1 }, { ...andel2 }];
     values[getFieldNameKey(1)] = [{ ...andel1, fastsattBelop: '10 000' }, andel2];
     const perioder = transformPerioder(fordelBGPerioder, values, bgPerioder);
-    expect(perioder.length).to.equal(1);
-    expect(perioder[0].fom).to.equal('2018-06-02');
-    expect(perioder[0].tom).to.equal(null);
-    expect(perioder[0].andeler.length).to.equal(2);
+    expect(perioder.length).toBe(1);
+    expect(perioder[0].fom).toBe('2018-06-02');
+    expect(perioder[0].tom).toBe(null);
+    expect(perioder[0].andeler.length).toBe(2);
 
-    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[0].nyAndel).toBe(false);
+    expect(perioder[0].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[1].nyAndel).toBe(false);
+    expect(perioder[0].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
   });
 
   it('skal transforme perioder for submit når perioder er slått sammen', () => {
@@ -655,46 +654,46 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     values[getFieldNameKey(1)] = [{ ...andel1 }, { ...andel2 }];
 
     const perioder = transformPerioder(fordelBGPerioder, values, bgPerioder);
-    expect(perioder.length).to.equal(2);
-    expect(perioder[0].fom).to.equal('2018-01-01');
-    expect(perioder[0].tom).to.equal('2018-06-01');
-    expect(perioder[0].andeler.length).to.equal(2);
+    expect(perioder.length).toBe(2);
+    expect(perioder[0].fom).toBe('2018-01-01');
+    expect(perioder[0].tom).toBe('2018-06-01');
+    expect(perioder[0].andeler.length).toBe(2);
 
-    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[0].nyAndel).toBe(false);
+    expect(perioder[0].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[1].nyAndel).toBe(false);
+    expect(perioder[0].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
 
-    expect(perioder[1].fom).to.equal('2018-06-02');
-    expect(perioder[1].tom).to.equal('2018-10-01');
-    expect(perioder[1].andeler.length).to.equal(2);
+    expect(perioder[1].fom).toBe('2018-06-02');
+    expect(perioder[1].tom).toBe('2018-10-01');
+    expect(perioder[1].andeler.length).toBe(2);
 
-    expect(perioder[1].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[1].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[1].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[1].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[1].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[1].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[1].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[1].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[1].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[1].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[1].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[1].andeler[0].nyAndel).toBe(false);
+    expect(perioder[1].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[1].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[1].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[1].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[1].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[1].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[1].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[1].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[1].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[1].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[1].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[1].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[1].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[1].andeler[1].nyAndel).toBe(false);
+    expect(perioder[1].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[1].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
   });
 
   it('skal transforme perioder for submit når periode er slått sammen og inkluderer siste periode', () => {
@@ -740,46 +739,46 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
 
     const perioder = transformPerioder(fordelBGPerioder, values, bgPerioder);
 
-    expect(perioder.length).to.equal(2);
-    expect(perioder[0].fom).to.equal('2018-06-02');
-    expect(perioder[0].tom).to.equal('2018-10-01');
-    expect(perioder[0].andeler.length).to.equal(2);
+    expect(perioder.length).toBe(2);
+    expect(perioder[0].fom).toBe('2018-06-02');
+    expect(perioder[0].tom).toBe('2018-10-01');
+    expect(perioder[0].andeler.length).toBe(2);
 
-    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[0].nyAndel).toBe(false);
+    expect(perioder[0].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[1].nyAndel).toBe(false);
+    expect(perioder[0].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
 
-    expect(perioder[1].fom).to.equal('2018-10-02');
-    expect(perioder[1].tom).to.equal(null);
-    expect(perioder[1].andeler.length).to.equal(2);
+    expect(perioder[1].fom).toBe('2018-10-02');
+    expect(perioder[1].tom).toBe(null);
+    expect(perioder[1].andeler.length).toBe(2);
 
-    expect(perioder[1].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[1].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[1].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[1].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[1].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[1].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[1].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[1].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[1].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[1].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[1].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[1].andeler[0].nyAndel).toBe(false);
+    expect(perioder[1].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[1].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[1].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[1].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[1].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[1].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[1].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[1].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[1].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[1].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[1].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[1].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[1].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[1].andeler[1].nyAndel).toBe(false);
+    expect(perioder[1].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[1].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
   });
 
   it('skal transforme perioder for submit når 2 perioder i midten er slått sammen, totalt 4 perioder', () => {
@@ -835,45 +834,45 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
 
     const perioder = transformPerioder(fordelBGPerioder, values, bgPerioder);
 
-    expect(perioder.length).to.equal(2);
-    expect(perioder[0].fom).to.equal('2018-06-02');
-    expect(perioder[0].tom).to.equal('2018-10-01');
-    expect(perioder[0].andeler.length).to.equal(2);
+    expect(perioder.length).toBe(2);
+    expect(perioder[0].fom).toBe('2018-06-02');
+    expect(perioder[0].tom).toBe('2018-10-01');
+    expect(perioder[0].andeler.length).toBe(2);
 
-    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[0].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[0].nyAndel).toBe(false);
+    expect(perioder[0].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[0].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[0].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[0].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[0].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[0].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[0].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[0].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[0].andeler[1].nyAndel).toBe(false);
+    expect(perioder[0].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[0].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
 
-    expect(perioder[1].fom).to.equal('2018-10-02');
-    expect(perioder[1].tom).to.equal('2018-11-01');
-    expect(perioder[1].andeler.length).to.equal(2);
+    expect(perioder[1].fom).toBe('2018-10-02');
+    expect(perioder[1].tom).toBe('2018-11-01');
+    expect(perioder[1].andeler.length).toBe(2);
 
-    expect(perioder[1].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).to.equal(10000);
-    expect(perioder[1].andeler[0].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[1].andeler[0].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[1].andeler[0].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[1].andeler[0].nyAndel).to.equal(false);
-    expect(perioder[1].andeler[0].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[1].andeler[0].arbeidsforholdId).to.equal(null);
+    expect(perioder[1].andeler[0].fastsatteVerdier.fastsattÅrsbeløp).toBe(10000);
+    expect(perioder[1].andeler[0].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[1].andeler[0].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[1].andeler[0].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[1].andeler[0].nyAndel).toBe(false);
+    expect(perioder[1].andeler[0].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[1].andeler[0].arbeidsforholdId).toBe(null);
 
-    expect(perioder[1].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).to.equal(20000);
-    expect(perioder[1].andeler[1].fastsatteVerdier.refusjonPrÅr).to.equal(null);
-    expect(perioder[1].andeler[1].fastsatteVerdier.inntektskategori).to.equal('ARBEIDSTAKER');
-    expect(perioder[1].andeler[1].lagtTilAvSaksbehandler).to.equal(false);
-    expect(perioder[1].andeler[1].nyAndel).to.equal(false);
-    expect(perioder[1].andeler[1].andel).to.equal('Sopra Steria AS (2342342348)');
-    expect(perioder[1].andeler[1].arbeidsforholdId).to.equal('ri4j3f34rt3144');
+    expect(perioder[1].andeler[1].fastsatteVerdier.fastsattÅrsbeløp).toBe(20000);
+    expect(perioder[1].andeler[1].fastsatteVerdier.refusjonPrÅr).toBe(null);
+    expect(perioder[1].andeler[1].fastsatteVerdier.inntektskategori).toBe('ARBEIDSTAKER');
+    expect(perioder[1].andeler[1].lagtTilAvSaksbehandler).toBe(false);
+    expect(perioder[1].andeler[1].nyAndel).toBe(false);
+    expect(perioder[1].andeler[1].andel).toBe('Sopra Steria AS (2342342348)');
+    expect(perioder[1].andeler[1].arbeidsforholdId).toBe('ri4j3f34rt3144');
   });
 });

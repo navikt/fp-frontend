@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -18,9 +17,9 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
     />);
 
     const form = wrapper.find(TilleggsopplysningerFaktaForm);
-    expect(form).to.have.length(1);
-    expect(form.prop('readOnly')).is.false;
-    expect(form.prop('submitting')).is.false;
+    expect(form).toHaveLength(1);
+    expect(form.prop('readOnly')).toBe(false);
+    expect(form.prop('submitting')).toBe(false);
   });
 
   it('skal vise readonly form når ingen åpne aksjonspunkter', () => {
@@ -33,7 +32,7 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
     />);
 
     const form = wrapper.find(TilleggsopplysningerFaktaForm);
-    expect(form.prop('readOnly')).is.true;
+    expect(form.prop('readOnly')).toBe(true);
   });
 
   it('skal vise readonly form når ikke rettigheter', () => {
@@ -46,6 +45,6 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
     />);
 
     const form = wrapper.find(TilleggsopplysningerFaktaForm);
-    expect(form.prop('readOnly')).is.true;
+    expect(form.prop('readOnly')).toBe(true);
   });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -31,12 +30,12 @@ describe('<DelOppPeriodeModal>', () => {
       onSubmit={sinon.spy()}
     />);
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('onRequestClose')).to.eql(cancelEvent);
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('onRequestClose')).toEqual(cancelEvent);
     const datepicker = wrapper.find('DatepickerField');
-    expect(datepicker).to.have.length(1);
+    expect(datepicker).toHaveLength(1);
   });
 
   it('skal rendre lukket modal', () => {
@@ -53,7 +52,7 @@ describe('<DelOppPeriodeModal>', () => {
       onSubmit={sinon.spy()}
     />);
     const modal = wrapper.find(Modal);
-    expect(modal.prop('isOpen')).is.false;
+    expect(modal.prop('isOpen')).toBe(false);
   });
 
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
@@ -70,6 +69,6 @@ describe('<DelOppPeriodeModal>', () => {
       onSubmit={sinon.spy()}
     />);
     wrapper.find('Knapp').simulate('click');
-    expect(cancelEvent).to.have.property('callCount', 1);
+    expect(cancelEvent).toHaveProperty('callCount', 1);
   });
 });

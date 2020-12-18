@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import Image from '@fpsak-frontend/shared-components/src/Image';
 
@@ -12,9 +11,9 @@ describe('EditedIcon', () => {
       <EditedIcon />,
     );
     const komponent = wrapper.find('EditedIcon');
-    expect(komponent.length).to.equal(1);
+    expect(komponent.length).toBe(1);
     const image = komponent.find(Image);
-    expect(image.props().alt).to.have.length.above(10);
-    expect(image.props().tooltip).to.have.length.above(10);
+    expect(image.props().alt.length).toBeGreaterThan(10);
+    expect(image.props().tooltip.length).toBeGreaterThan(10);
   });
 });

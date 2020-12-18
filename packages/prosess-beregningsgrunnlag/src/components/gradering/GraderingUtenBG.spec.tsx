@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioOption, TextAreaField } from '@fpsak-frontend/form';
@@ -105,17 +104,17 @@ describe('<GraderingUtenBG>', () => {
       {...reduxFormPropsMock}
     />);
     const radioOption = wrapper.find(RadioOption);
-    expect(radioOption).to.have.length(2);
+    expect(radioOption).toHaveLength(2);
     const textfield = wrapper.find(TextAreaField);
-    expect(textfield).to.have.length(1);
+    expect(textfield).toHaveLength(1);
     const button = wrapper.find(ProsessStegSubmitButton);
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
     const hjelpetekst = wrapper.find('FormattedMessage');
     const formattedMessages = wrapper.find('FormattedMessage');
-    expect(formattedMessages.at(1).prop('id')).to.eql('Beregningsgrunnlag.Gradering.Tittel');
-    expect(hjelpetekst.at(0).prop('values')).to.eql({ arbeidsforholdTekst: 'arbeidsgiver (123) og arbeidsgiver (456)' });
+    expect(formattedMessages.at(1).prop('id')).toEqual('Beregningsgrunnlag.Gradering.Tittel');
+    expect(hjelpetekst.at(0).prop('values')).toEqual({ arbeidsforholdTekst: 'arbeidsgiver (123) og arbeidsgiver (456)' });
     const element = wrapper.find(Element);
-    expect(element).to.have.length(1);
+    expect(element).toHaveLength(1);
   });
 
   it('skal teste at komponent vises riktig gitt en liste arbeidsforhold der et eller flere er sn / fl', () => {
@@ -131,31 +130,33 @@ describe('<GraderingUtenBG>', () => {
       {...reduxFormPropsMock}
     />);
     const radioOption = wrapper.find(RadioOption);
-    expect(radioOption).to.have.length(2);
+    expect(radioOption).toHaveLength(2);
     const textfield = wrapper.find(TextAreaField);
-    expect(textfield).to.have.length(1);
+    expect(textfield).toHaveLength(1);
     const button = wrapper.find(ProsessStegSubmitButton);
-    expect(button).to.have.length(1);
+    expect(button).toHaveLength(1);
     const hjelpetekst = wrapper.find('FormattedMessage');
     const formattedMessages = wrapper.find('FormattedMessage');
-    expect(formattedMessages.at(1).prop('id')).to.eql('Beregningsgrunnlag.Gradering.Tittel');
-    expect(hjelpetekst.at(0).prop('values')).to.eql({ arbeidsforholdTekst: 'arbeidsgiver (123), selvstendig næringsdrivende og frilanser' });
+    expect(formattedMessages.at(1).prop('id')).toEqual('Beregningsgrunnlag.Gradering.Tittel');
+    expect(hjelpetekst.at(0).prop('values')).toEqual(
+      { arbeidsforholdTekst: 'arbeidsgiver (123), selvstendig næringsdrivende og frilanser' },
+    );
     const element = wrapper.find(Element);
-    expect(element).to.have.length(1);
+    expect(element).toHaveLength(1);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom aksjonspunktet ikke finnes', () => {
     const expectedInitialValues = undefined;
 
     const actualInitialValues = buildInitialValues.resultFunc(undefined, []);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom aksjonspunktet ikke før er løst finnes', () => {
     const expectedInitialValues = undefined;
     const actualInitialValues = buildInitialValues.resultFunc(undefined, []);
 
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom behandling er på vent', () => {
@@ -166,7 +167,7 @@ describe('<GraderingUtenBG>', () => {
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus('5050', 'UTFO'), mockAksjonspunktMedKodeOgStatus('7019', 'OPPR')];
 
     const actualInitialValues = buildInitialValues.resultFunc(venteArsakType.VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG, aksjonspunkter);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom behandling ikke er på vent', () => {
@@ -176,7 +177,7 @@ describe('<GraderingUtenBG>', () => {
     };
 
     const actualInitialValues = buildInitialValues.resultFunc(undefined, [mockAksjonspunktMedKodeOgStatus('5050', 'UTFO')]);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 
   it('skal teste at komponent bygger korrekte initial values dersom behandling er på vent mrd ventekode', () => {
@@ -187,6 +188,6 @@ describe('<GraderingUtenBG>', () => {
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus('5050', 'UTFO'), mockAksjonspunktMedKodeOgStatus('7019', 'OPPR')];
 
     const actualInitialValues = buildInitialValues.resultFunc(venteArsakType.VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG, aksjonspunkter);
-    expect(actualInitialValues).is.deep.equal(expectedInitialValues);
+    expect(actualInitialValues).toEqual(expectedInitialValues);
   });
 });

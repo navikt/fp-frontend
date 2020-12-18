@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
@@ -38,20 +37,20 @@ describe('<DokumentasjonFaktaForm>', () => {
       behandlingVersjon={2}
     />);
     const datepickers = wrapper.find('DatepickerField');
-    expect(datepickers).to.have.length(3);
+    expect(datepickers).toHaveLength(3);
 
     const omsorgsDatepicker = datepickers.first();
-    expect(omsorgsDatepicker.prop('name')).to.eql('omsorgsovertakelseDato');
+    expect(omsorgsDatepicker.prop('name')).toEqual('omsorgsovertakelseDato');
 
     const fodsel1Datepicker = datepickers.at(1);
-    expect(fodsel1Datepicker.prop('name')).to.eql('fodselsdatoer.1');
+    expect(fodsel1Datepicker.prop('name')).toEqual('fodselsdatoer.1');
 
     const fodsel2Datepicker = datepickers.last();
-    expect(fodsel2Datepicker.prop('name')).to.eql('fodselsdatoer.2');
+    expect(fodsel2Datepicker.prop('name')).toEqual('fodselsdatoer.2');
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
-    expect(antallBarnUnder15Ar).to.have.length(1);
-    expect(antallBarnUnder15Ar.childAt(0).text()).to.eql('2');
+    expect(antallBarnUnder15Ar).toHaveLength(1);
+    expect(antallBarnUnder15Ar.childAt(0).text()).toEqual('2');
   });
 
   it('skal ikke vise verdi for antall_barn_som_fyller_vilkåret når omsorgsovertakelseDato er tom', () => {
@@ -68,8 +67,8 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
-    expect(antallBarnUnder15Ar).to.have.length(1);
-    expect(antallBarnUnder15Ar.childAt(0).text()).to.eql('-');
+    expect(antallBarnUnder15Ar).toHaveLength(1);
+    expect(antallBarnUnder15Ar.childAt(0).text()).toEqual('-');
   });
 
   it('skal ikke vise verdi for antall_barn_som_fyller_vilkåret når alle fødselsdatoer er tomme', () => {
@@ -86,8 +85,8 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
-    expect(antallBarnUnder15Ar).to.have.length(1);
-    expect(antallBarnUnder15Ar.childAt(0).text()).to.eql('-');
+    expect(antallBarnUnder15Ar).toHaveLength(1);
+    expect(antallBarnUnder15Ar.childAt(0).text()).toEqual('-');
   });
 
   it('skal vise verdi for antall_barn_som_fyller_vilkåret når minst en fødselsdato ikke er tomme', () => {
@@ -104,8 +103,8 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
-    expect(antallBarnUnder15Ar).to.have.length(1);
-    expect(antallBarnUnder15Ar.childAt(0).text()).to.eql('1');
+    expect(antallBarnUnder15Ar).toHaveLength(1);
+    expect(antallBarnUnder15Ar.childAt(0).text()).toEqual('1');
   });
 
   it('skal sette opp initielle verdier fra søknad når det ikke finnes avklarte data', () => {
@@ -116,7 +115,7 @@ describe('<DokumentasjonFaktaForm>', () => {
 
     const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad as Soknad, {} as FamilieHendelse);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       barnetsAnkomstTilNorgeDato: undefined,
       omsorgsovertakelseDato: '2016-10-15',
       fodselsdatoer: { 1: '2016-03-15' },
@@ -137,7 +136,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const dateField = wrapper.find('[name="barnetsAnkomstTilNorgeDato"]');
-    expect(dateField).to.have.length(0);
+    expect(dateField).toHaveLength(0);
   });
 
   it('skal ikke vise datofelt for barnets ankomst til norge når foreldrepenger hvis ikke oppgitt i søknad', () => {
@@ -154,7 +153,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const dateField = wrapper.find('[name="barnetsAnkomstTilNorgeDato"]');
-    expect(dateField).to.have.length(0);
+    expect(dateField).toHaveLength(0);
   });
 
   it('skal vise tekst stebarnsadopsjon når det er en foreldrepengersak og en har aksjonspunkt for ektefelles/samboers barn', () => {
@@ -171,7 +170,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
-    expect(dateField.prop('label')).to.eql({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' });
+    expect(dateField.prop('label')).toEqual({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' });
   });
 
   it('skal vise tekst omsorgsovertakelse når det ikke er en foreldrepengersak og en har aksjonspunkt for ektefelles/samboers barn', () => {
@@ -188,7 +187,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
-    expect(dateField.prop('label')).to.eql({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' });
+    expect(dateField.prop('label')).toEqual({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' });
   });
 
   it('skal vise tekst omsorgsovertakelse når det en foreldrepengersak og en ikke har aksjonspunkt for ektefelles/samboers barn', () => {
@@ -205,7 +204,7 @@ describe('<DokumentasjonFaktaForm>', () => {
     />);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
-    expect(dateField.prop('label')).to.eql({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' });
+    expect(dateField.prop('label')).toEqual({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' });
   });
 
   it('skal sette opp initielle verdier fra avklarte data når dette finnes', () => {
@@ -220,7 +219,7 @@ describe('<DokumentasjonFaktaForm>', () => {
 
     const initialValues = DokumentasjonFaktaForm.buildInitialValues(soknad as Soknad, familiehendelse);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       barnetsAnkomstTilNorgeDato: undefined,
       omsorgsovertakelseDato: '2015-10-15',
       fodselsdatoer: { 1: '2015-03-15' },

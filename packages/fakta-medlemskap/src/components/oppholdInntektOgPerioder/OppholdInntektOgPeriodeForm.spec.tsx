@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -45,11 +44,11 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(OppholdINorgeOgAdresserFaktaPanel)).has.length(1);
-    expect(wrapper.find(InntektOgYtelserFaktaPanel)).has.length(1);
-    expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).has.length(1);
-    expect(wrapper.find(FaktaBegrunnelseTextField)).has.length(0);
-    expect(wrapper.find(Hovedknapp).prop('disabled')).is.false;
+    expect(wrapper.find(OppholdINorgeOgAdresserFaktaPanel)).toHaveLength(1);
+    expect(wrapper.find(InntektOgYtelserFaktaPanel)).toHaveLength(1);
+    expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).toHaveLength(1);
+    expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(0);
+    expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(false);
   });
 
   it('skal avklare bosatt data når en har dette aksjonspunktet', () => {
@@ -91,8 +90,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(FaktaBegrunnelseTextField)).has.length(1);
-    expect(wrapper.find(Hovedknapp).prop('disabled')).is.false;
+    expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(1);
+    expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(false);
   });
 
   it('skal avklare perioder når en har dette aksjonspunktet', () => {
@@ -134,9 +133,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).has.length(1);
-    expect(wrapper.find(FaktaBegrunnelseTextField)).has.length(1);
-    expect(wrapper.find(Hovedknapp).prop('disabled')).is.false;
+    expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).toHaveLength(1);
+    expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(1);
+    expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(false);
   });
 
   it('skal avklare oppholdsrett når en har dette aksjonspunktet', () => {
@@ -178,9 +177,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(StatusForBorgerFaktaPanel)).has.length(1);
-    expect(wrapper.find(FaktaBegrunnelseTextField)).has.length(1);
-    expect(wrapper.find(Hovedknapp).prop('disabled')).is.false;
+    expect(wrapper.find(StatusForBorgerFaktaPanel)).toHaveLength(1);
+    expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(1);
+    expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(false);
   });
 
   it('skal avklare lovlig opphold når en har dette aksjonspunktet', () => {
@@ -222,8 +221,8 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(StatusForBorgerFaktaPanel)).has.length(1);
-    expect(wrapper.find(FaktaBegrunnelseTextField)).has.length(1);
-    expect(wrapper.find(Hovedknapp).prop('disabled')).is.false;
+    expect(wrapper.find(StatusForBorgerFaktaPanel)).toHaveLength(1);
+    expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(1);
+    expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(false);
   });
 });
