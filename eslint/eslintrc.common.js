@@ -33,7 +33,7 @@ const config = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: resolve(__dirname, '../webpack/webpack.common.dev_and_prod.js'),
+        config: resolve(__dirname, '../webpack/webpack.common.js'),
       },
     },
   },
