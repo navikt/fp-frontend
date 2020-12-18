@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import NyIArbeidslivetSNForm from './NyIArbeidslivetSNForm';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
@@ -11,7 +10,7 @@ describe('<NyIArbeidslivetSNForm>', () => {
       isAksjonspunktClosed={false}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
-    expect(radios.last().prop('disabled')).is.eql(false);
+    expect(radios).toHaveLength(2);
+    expect(radios.last().prop('disabled')).toEqual(false);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
@@ -42,9 +41,9 @@ describe('<VisittkortBarnInfoOmsorgPanel>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).has.length(1);
-    expect(message.prop('id')).is.eql('VisittkortBarnInfoOmsorgPanel.Adopsjon');
-    expect(message.prop('values')).is.eql({
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('VisittkortBarnInfoOmsorgPanel.Adopsjon');
+    expect(message.prop('values')).toEqual({
       antall: 1,
       dato: '21.01.2020',
     });
@@ -67,9 +66,9 @@ describe('<VisittkortBarnInfoOmsorgPanel>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).has.length(1);
-    expect(message.prop('id')).is.eql('VisittkortBarnInfoOmsorgPanel.Foreldreansvar');
-    expect(message.prop('values')).is.eql({
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('VisittkortBarnInfoOmsorgPanel.Foreldreansvar');
+    expect(message.prop('values')).toEqual({
       antall: 1,
       dato: '21.01.2020',
     });

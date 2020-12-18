@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { BekreftOgForsettKnapp } from './BekreftOgForsettKnapp';
@@ -17,8 +16,8 @@ describe('<BekreftOgForsettKnapp>', () => {
       />,
     );
     const hovedKnapp = wrapper.find(Hovedknapp);
-    expect(hovedKnapp).has.length(1);
-    expect(hovedKnapp.props().disabled).to.eql(false);
+    expect(hovedKnapp).toHaveLength(1);
+    expect(hovedKnapp.props().disabled).toEqual(false);
   });
   it('Skal vise en disablet hovedknapp hvis readOnly er true', () => {
     const wrapper = shallow(
@@ -31,8 +30,8 @@ describe('<BekreftOgForsettKnapp>', () => {
       />,
     );
     const hovedKnapp = wrapper.find(Hovedknapp);
-    expect(hovedKnapp).has.length(1);
-    expect(hovedKnapp.props().disabled).to.eql(true);
+    expect(hovedKnapp).toHaveLength(1);
+    expect(hovedKnapp.props().disabled).toEqual(true);
   });
   it('Skal vise en disablet hovedknapp hvis isBekreftButtonReadOnly er true', () => {
     const wrapper = shallow(
@@ -45,8 +44,8 @@ describe('<BekreftOgForsettKnapp>', () => {
       />,
     );
     const hovedKnapp = wrapper.find(Hovedknapp);
-    expect(hovedKnapp).has.length(1);
-    expect(hovedKnapp.props().disabled).to.eql(true);
+    expect(hovedKnapp).toHaveLength(1);
+    expect(hovedKnapp.props().disabled).toEqual(true);
   });
   it('Skal vise en disablet hovedknapp hvis isSubmitting er true', () => {
     const wrapper = shallow(
@@ -59,7 +58,7 @@ describe('<BekreftOgForsettKnapp>', () => {
       />,
     );
     const hovedKnapp = wrapper.find(Hovedknapp);
-    expect(hovedKnapp).has.length(1);
-    expect(hovedKnapp.props().disabled).to.eql(true);
+    expect(hovedKnapp).toHaveLength(1);
+    expect(hovedKnapp.props().disabled).toEqual(true);
   });
 });

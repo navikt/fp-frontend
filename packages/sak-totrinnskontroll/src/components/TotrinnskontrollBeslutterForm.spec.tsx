@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -50,9 +49,9 @@ describe('<TotrinnskontrollBeslutterForm>', () => {
     />);
 
     const form = wrapper.find('form');
-    expect(form).to.have.length(1);
+    expect(form).toHaveLength(1);
 
     const button = wrapper.find('button');
-    expect(button).to.have.length(0);
+    expect(button).toHaveLength(0);
   });
 });

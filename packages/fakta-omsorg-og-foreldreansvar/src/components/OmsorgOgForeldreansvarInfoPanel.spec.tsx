@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
@@ -44,12 +43,12 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
-    expect(form).to.have.length(1);
-    expect(form.prop('readOnly')).is.false;
+    expect(form).toHaveLength(1);
+    expect(form.prop('readOnly')).toBe(false);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
-    expect(begrunnelseForm).to.have.length(1);
-    expect(begrunnelseForm.prop('isReadOnly')).is.false;
+    expect(begrunnelseForm).toHaveLength(1);
+    expect(begrunnelseForm.prop('isReadOnly')).toBe(false);
   });
 
   it('skal vise readonly form', () => {
@@ -78,7 +77,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
-    expect(form.prop('readOnly')).is.true;
+    expect(form.prop('readOnly')).toBe(true);
   });
 
   it('skal vise readonly submit-knapp når det ikke er åpne aksjonspunkter', () => {
@@ -107,7 +106,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
     />);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
-    expect(begrunnelseForm.prop('isReadOnly')).is.false;
+    expect(begrunnelseForm.prop('isReadOnly')).toBe(false);
   });
 
   it('skal gi foreldreansvar lik true når aksjonspunkt er foreldreansvar', () => {
@@ -135,6 +134,6 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       validate={() => undefined}
     />);
     const omsorgOgForeldreAnsvarFaktaForm = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
-    expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).is.true;
+    expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).toBe(true);
   });
 });

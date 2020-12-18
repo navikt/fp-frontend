@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -52,20 +51,20 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(1);
+    expect(table).toHaveLength(1);
     const tableRows = table.find('TableRow');
-    expect(tableRows).to.have.length(1);
+    expect(tableRows).toHaveLength(1);
     const tableColumns = table.find('TableColumn');
-    expect(tableColumns).to.have.length(4);
-    expect(tableColumns.at(1).html()).to.eql('<td class="columnStyle">testdekning</td>');
-    expect(tableColumns.at(2).html()).to.eql('<td class="columnStyle">testStatus</td>');
+    expect(tableColumns).toHaveLength(4);
+    expect(tableColumns.at(1).html()).toEqual('<td class="columnStyle">testdekning</td>');
+    expect(tableColumns.at(2).html()).toEqual('<td class="columnStyle">testStatus</td>');
 
     const radiofields = wrapper.find('RadioOption');
-    expect(radiofields).to.have.length(2);
-    expect(radiofields.first().prop('value')).to.eql('test1');
-    expect(radiofields.first().prop('label')).to.eql('navn1');
-    expect(radiofields.last().prop('value')).to.eql('test2');
-    expect(radiofields.last().prop('label')).to.eql('navn2');
+    expect(radiofields).toHaveLength(2);
+    expect(radiofields.first().prop('value')).toEqual('test1');
+    expect(radiofields.first().prop('label')).toEqual('navn1');
+    expect(radiofields.last().prop('value')).toEqual('test2');
+    expect(radiofields.last().prop('label')).toEqual('navn2');
   });
 
   it('skal vise fødselsdato når en har dette', () => {
@@ -92,9 +91,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     />);
 
     const message = wrapper.find('FormattedMessage');
-    expect(message).to.have.length(1);
-    expect(message.prop('id')).to.eql('PerioderMedMedlemskapFaktaPanel.Fodselsdato');
-    expect(message.prop('values')).to.eql({ dato: '16.10.2016' });
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('PerioderMedMedlemskapFaktaPanel.Fodselsdato');
+    expect(message.prop('values')).toEqual({ dato: '16.10.2016' });
   });
 
   it('skal vise termindato når en har dette', () => {
@@ -121,9 +120,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     />);
 
     const message = wrapper.find('FormattedMessage');
-    expect(message).to.have.length(1);
-    expect(message.prop('id')).to.eql('PerioderMedMedlemskapFaktaPanel.Termindato');
-    expect(message.prop('values')).to.eql({ dato: '16.10.2016' });
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('PerioderMedMedlemskapFaktaPanel.Termindato');
+    expect(message.prop('values')).toEqual({ dato: '16.10.2016' });
   });
 
   it('skal vise omsorgsovertakelsedato når en har dette', () => {
@@ -150,9 +149,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     />);
 
     const message = wrapper.find('FormattedMessage');
-    expect(message).to.have.length(1);
-    expect(message.prop('id')).to.eql('PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse');
-    expect(message.prop('values')).to.eql({ dato: '16.10.2016' });
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse');
+    expect(message.prop('values')).toEqual({ dato: '16.10.2016' });
   });
 
   it('skal vise tabell med medlemskapsperioder', () => {
@@ -178,8 +177,8 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(1);
-    expect(table.find('TableRow')).to.length(1);
+    expect(table).toHaveLength(1);
+    expect(table.find('TableRow')).toHaveLength(1);
   });
 
   it('skal ikke vise tabell når det ikke finnes medlemskapsperioder', () => {
@@ -199,7 +198,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(0);
+    expect(table).toHaveLength(0);
   });
 
   it('skal sette opp initielle verdier og sorterte perioder etter periodestart', () => {
@@ -278,7 +277,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       getKodeverknavn,
     );
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       fixedMedlemskapPerioder: [{
         fom: '2016-01-15',
         tom: '2016-10-15',

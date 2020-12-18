@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { VirksomhetRelasjonPanel } from './VirksomhetRelasjonPanel';
@@ -9,9 +8,9 @@ describe('<VirksomhetRelasjonPanel>', () => {
     const wrapper = shallow(<VirksomhetRelasjonPanel />);
 
     const undertekst = wrapper.find('Undertekst');
-    expect(undertekst).to.have.length(1);
+    expect(undertekst).toHaveLength(1);
 
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
   });
 });

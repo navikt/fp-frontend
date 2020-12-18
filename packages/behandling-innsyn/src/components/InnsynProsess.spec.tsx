@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -91,7 +90,7 @@ describe('<InnsynProsess>', () => {
     );
 
     const meny = wrapper.find(ProsessStegContainer);
-    expect(meny.prop('formaterteProsessStegPaneler')).is.eql([{
+    expect(meny.prop('formaterteProsessStegPaneler')).toEqual([{
       isActive: false,
       isDisabled: false,
       isFinished: false,
@@ -130,8 +129,8 @@ describe('<InnsynProsess>', () => {
     meny.prop('velgProsessStegPanelCallback')(1);
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql('vedtak');
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual('vedtak');
   });
 });

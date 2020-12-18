@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -42,9 +41,9 @@ describe('<AvviksopplysningerSN>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />);
     const rows = wrapper.find('FlexRow');
-    expect(rows).to.have.length(1);
+    expect(rows).toHaveLength(1);
     const omregnetAarsinntektText = rows.first().find('FormattedMessage');
-    expect(omregnetAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.SN.NyIArbeidslivet');
+    expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.SN.NyIArbeidslivet');
   });
   it('Skal teste komponenten ved !erVarigEndring && !erNyoppstartet', () => {
     andel.erNyIArbeidslivet = false;
@@ -57,9 +56,9 @@ describe('<AvviksopplysningerSN>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />);
     const rows = wrapper.find('FlexRow');
-    expect(rows).to.have.length(1);
+    expect(rows).toHaveLength(1);
     const omregnetAarsinntektText = rows.first().find('FormattedMessage');
-    expect(omregnetAarsinntektText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.SN.IkkeVarigEndring');
+    expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.SN.IkkeVarigEndring');
   });
   it('Skal teste at komponenten render avvikstabell', () => {
     andel.erNyIArbeidslivet = false;
@@ -71,6 +70,6 @@ describe('<AvviksopplysningerSN>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />);
     const avviksTabell = wrapper.find('AvvikopplysningerATFLSN');
-    expect(avviksTabell).to.have.length(1);
+    expect(avviksTabell).toHaveLength(1);
   });
 });

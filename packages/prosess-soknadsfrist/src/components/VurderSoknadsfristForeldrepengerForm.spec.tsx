@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -28,8 +27,8 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText.childAt(0).prop('id')).to.eql('VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText');
-    expect(helpText.childAt(0).prop('values')).to.eql({ numberOfDays: 9, soknadsfristdato: '30.09.2017' });
+    expect(helpText.childAt(0).prop('id')).toEqual('VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText');
+    expect(helpText.childAt(0).prop('values')).toEqual({ numberOfDays: 9, soknadsfristdato: '30.09.2017' });
   });
 
   it('skal rendre form og vise mottatt dato, periode og begrunnelse', () => {
@@ -51,12 +50,12 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       onSubmit={() => undefined}
     />);
     const normalTekst = wrapper.find('Normaltekst');
-    expect(normalTekst).has.length(2);
+    expect(normalTekst).toHaveLength(2);
     // Mottattdato
-    expect(normalTekst.first().childAt(0).text()).to.eql('15.10.2017');
+    expect(normalTekst.first().childAt(0).text()).toEqual('15.10.2017');
 
     // Periode
-    expect(normalTekst.at(1).childAt(0).text()).to.eql('05.06.2017 - 01.11.2017');
+    expect(normalTekst.at(1).childAt(0).text()).toEqual('05.06.2017 - 01.11.2017');
   });
 
   it('skal rendre radiobuttons', () => {
@@ -79,10 +78,10 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       onSubmit={() => undefined}
     />);
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).has.length(1);
-    expect(radioGroup.first().prop('name')).to.eql('gyldigSenFremsetting');
+    expect(radioGroup).toHaveLength(1);
+    expect(radioGroup.first().prop('name')).toEqual('gyldigSenFremsetting');
     const radioFieldsGroup = radioGroup.first().find('RadioOption');
-    expect(radioFieldsGroup).to.have.length(2);
+    expect(radioFieldsGroup).toHaveLength(2);
   });
 
   it('skal ikke vise datepicker når gyldigSenFremsetting er false', () => {
@@ -105,7 +104,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       onSubmit={() => undefined}
     />);
     const datepicker = wrapper.find('DatepickerField');
-    expect(datepicker).has.length(0);
+    expect(datepicker).toHaveLength(0);
   });
 
   it('skal vise datepicker når gyldigSenFremsetting er true', () => {
@@ -128,7 +127,7 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       onSubmit={() => undefined}
     />);
     const datepicker = wrapper.find('DatepickerField');
-    expect(datepicker).has.length(1);
-    expect(datepicker.prop('name')).to.eql('ansesMottatt');
+    expect(datepicker).toHaveLength(1);
+    expect(datepicker.prop('name')).toEqual('ansesMottatt');
   });
 });

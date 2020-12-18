@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Image } from '@fpsak-frontend/shared-components';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -48,7 +47,7 @@ describe('<UttakPeriodeType>', () => {
     />);
 
     const image = wrapper.find(Image);
-    expect(image).to.have.length(2);
+    expect(image).toHaveLength(2);
   });
 
   it('skal ikke vise redigere og slett periode hvis det er readonly', () => {
@@ -74,7 +73,7 @@ describe('<UttakPeriodeType>', () => {
     />);
 
     const image = wrapper.find(Image);
-    expect(image).to.have.length(0);
+    expect(image).toHaveLength(0);
   });
 
   it('skal vise frilans når erFrilans er true', () => {
@@ -102,6 +101,6 @@ describe('<UttakPeriodeType>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
-    expect(wrapper.find('FormattedMessage').last().prop('id')).to.eql('UttakInfoPanel.Frilans');
+    expect(wrapper.find('FormattedMessage').last().prop('id')).toEqual('UttakInfoPanel.Frilans');
   });
 });

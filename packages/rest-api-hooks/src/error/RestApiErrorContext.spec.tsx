@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 
 import { RestApiErrorProvider } from './RestApiErrorContext';
 import useRestApiErrorDispatcher from './useRestApiErrorDispatcher';
@@ -30,9 +29,9 @@ describe('<RestApiErrorContext>', () => {
     );
 
     const spans = wrapper.find('span');
-    expect(spans).to.have.length(2);
-    expect(spans.first().text()).to.eql('Feilmeldingstest 1');
-    expect(spans.last().text()).to.eql('Feilmeldingstest 2');
+    expect(spans).toHaveLength(2);
+    expect(spans.first().text()).toEqual('Feilmeldingstest 1');
+    expect(spans.last().text()).toEqual('Feilmeldingstest 2');
   });
 
   it('skal legge til feilmelding og så fjerne alle i kontekst', () => {
@@ -43,6 +42,6 @@ describe('<RestApiErrorContext>', () => {
     );
 
     const spans = wrapper.find('span');
-    expect(spans).to.have.length(0);
+    expect(spans).toHaveLength(0);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -57,6 +56,6 @@ describe('<FodselOgTilretteleggingInfoPanel>', () => {
     />);
 
     const faktaForm = wrapper.find(FodselOgTilretteleggingFaktaForm);
-    expect(faktaForm).to.have.length(1);
+    expect(faktaForm).toHaveLength(1);
   });
 });

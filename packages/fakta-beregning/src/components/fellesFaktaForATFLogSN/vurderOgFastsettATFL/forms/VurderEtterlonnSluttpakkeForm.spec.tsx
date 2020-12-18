@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import VurderEtterlonnSluttpakkeForm from './VurderEtterlonnSluttpakkeForm';
 import shallowWithIntl from '../../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
@@ -13,7 +12,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
       isAksjonspunktClosed={false}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
   });
   it('Skal teste at buildInitialvalues bygges korrekt når det er tidligere fastsatt etterlønn eller sluttpakke', () => {
     const ap = {
@@ -49,7 +48,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
     const testobj = {
       vurderEtterlønnSluttpakke: true,
     };
-    expect(values).to.deep.equal(testobj);
+    expect(values).toEqual(testobj);
   });
 
   it('Skal teste at buildInitialvalues bygges korrekt når det ikke er tidligere fastsatt etterlønn eller sluttpakke', () => {
@@ -87,6 +86,6 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
     const testobj = {
       vurderEtterlønnSluttpakke: false,
     };
-    expect(values).to.deep.equal(testobj);
+    expect(values).toEqual(testobj);
   });
 });

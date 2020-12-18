@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AksjonspunktBox } from '@fpsak-frontend/shared-components';
@@ -26,6 +25,6 @@ describe('<InnhentDokOpptjeningUtlandPanel>', () => {
       onSubmit={() => undefined}
       aksjonspunkt={{} as Aksjonspunkt}
     />);
-    expect(wrapper.find(AksjonspunktBox)).to.have.length(1);
+    expect(wrapper.find(AksjonspunktBox)).toHaveLength(1);
   });
 });

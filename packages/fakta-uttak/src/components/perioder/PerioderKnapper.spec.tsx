@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { PerioderKnapper } from './PerioderKnapper';
@@ -20,8 +19,8 @@ describe('<PerioderKnapper>', () => {
 
     const hovedknapp = wrapper.find('Hovedknapp');
     const knapp = wrapper.find('Knapp');
-    expect(hovedknapp).to.have.length(0);
-    expect(knapp).to.have.length(0);
+    expect(hovedknapp).toHaveLength(0);
+    expect(knapp).toHaveLength(0);
   });
 
   it('skal vise perioder knapper', () => {
@@ -38,8 +37,8 @@ describe('<PerioderKnapper>', () => {
 
     const hovedknapp = wrapper.find('Hovedknapp');
     const knapp = wrapper.find('Knapp');
-    expect(hovedknapp).to.have.length(1);
-    expect(knapp).to.have.length(1);
+    expect(hovedknapp).toHaveLength(1);
+    expect(knapp).toHaveLength(1);
   });
 
   it('skal vise nullstil knappen når bekreftet og updated er false', () => {
@@ -55,8 +54,8 @@ describe('<PerioderKnapper>', () => {
     />);
 
     const knapp = wrapper.find('Knapp');
-    expect(knapp).to.have.length(1);
-    expect(knapp.find('FormattedMessage').prop('id')).to.equal('UttakInfoPanel.Nullstill');
+    expect(knapp).toHaveLength(1);
+    expect(knapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Nullstill');
   });
 
   it('skal vise avbryt knappen når bekreftet er true', () => {
@@ -72,8 +71,8 @@ describe('<PerioderKnapper>', () => {
     />);
 
     const knapp = wrapper.find('Knapp');
-    expect(knapp).to.have.length(1);
-    expect(knapp.find('FormattedMessage').prop('id')).to.equal('UttakInfoPanel.Avbryt');
+    expect(knapp).toHaveLength(1);
+    expect(knapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Avbryt');
   });
 
   it('skal vise avbryt knappen når bekreftet er false og updated er true', () => {
@@ -89,7 +88,7 @@ describe('<PerioderKnapper>', () => {
     />);
 
     const knapp = wrapper.find('Knapp');
-    expect(knapp).to.have.length(1);
-    expect(knapp.find('FormattedMessage').prop('id')).to.equal('UttakInfoPanel.Avbryt');
+    expect(knapp).toHaveLength(1);
+    expect(knapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Avbryt');
   });
 });

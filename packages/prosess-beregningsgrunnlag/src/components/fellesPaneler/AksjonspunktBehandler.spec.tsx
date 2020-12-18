@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -70,19 +69,19 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
-    expect(rows.at(1).find('TextAreaField').first().props().name).to.equal('ATFLVurdering');
-    expect(rows.at(1).find('TextAreaField').first().props().readOnly).to.equal(readOnly);
+    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
+    expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find('AksjonspunktBehandlerTB');
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
     const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
 
-    expect(aksjonspunktBehandlerAT).to.have.length(0);
-    expect(aksjonspunktBehandlerTB).to.have.length(0);
-    expect(aksjonspunktBehandlerFL).to.have.length(1);
-    expect(aksjonspunktBehandlerSN).to.have.length(0);
-    expect(wrapper.find('ProsessStegSubmitButton')).to.have.length(0);
+    expect(aksjonspunktBehandlerAT).toHaveLength(0);
+    expect(aksjonspunktBehandlerTB).toHaveLength(0);
+    expect(aksjonspunktBehandlerFL).toHaveLength(1);
+    expect(aksjonspunktBehandlerSN).toHaveLength(0);
+    expect(wrapper.find('ProsessStegSubmitButton')).toHaveLength(0);
   });
 
   it('Skal teste at submitButton blir rendret riktig når readOnly=false', () => {
@@ -104,19 +103,19 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
-    expect(rows.at(1).find('TextAreaField').first().props().name).to.equal('ATFLVurdering');
-    expect(rows.at(1).find('TextAreaField').first().props().readOnly).to.equal(readOnly);
+    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
+    expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find('AksjonspunktBehandlerTB');
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
     const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
-    expect(aksjonspunktBehandlerAT).to.have.length(0);
-    expect(aksjonspunktBehandlerTB).to.have.length(0);
-    expect(aksjonspunktBehandlerFL).to.have.length(1);
-    expect(aksjonspunktBehandlerSN).to.have.length(0);
+    expect(aksjonspunktBehandlerAT).toHaveLength(0);
+    expect(aksjonspunktBehandlerTB).toHaveLength(0);
+    expect(aksjonspunktBehandlerFL).toHaveLength(1);
+    expect(aksjonspunktBehandlerSN).toHaveLength(0);
     const submitButton = rows.at(2).first().childAt(0);
-    expect(submitButton).to.have.length(1);
+    expect(submitButton).toHaveLength(1);
   });
   it('Skal teste at riktig componenter blir renderet for AT readOnly false', () => {
     relevanteStatuser.isFrilanser = false;
@@ -139,19 +138,19 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
-    expect(rows.at(1).find('TextAreaField').first().props().name).to.equal('ATFLVurdering');
-    expect(rows.at(1).find('TextAreaField').first().props().readOnly).to.equal(readOnly);
+    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
+    expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find('AksjonspunktBehandlerTB');
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
     const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
-    expect(aksjonspunktBehandlerAT).to.have.length(1);
-    expect(aksjonspunktBehandlerTB).to.have.length(0);
-    expect(aksjonspunktBehandlerFL).to.have.length(0);
-    expect(aksjonspunktBehandlerSN).to.have.length(0);
+    expect(aksjonspunktBehandlerAT).toHaveLength(1);
+    expect(aksjonspunktBehandlerTB).toHaveLength(0);
+    expect(aksjonspunktBehandlerFL).toHaveLength(0);
+    expect(aksjonspunktBehandlerSN).toHaveLength(0);
     const submitButton = rows.at(2).first().childAt(0);
-    expect(submitButton).to.have.length(1);
+    expect(submitButton).toHaveLength(1);
   });
   it('Skal teste at riktig componenter blir renderet for AT tidsbegrenset readOnly false', () => {
     relevanteStatuser.isFrilanser = false;
@@ -174,19 +173,19 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
-    expect(rows.at(1).find('TextAreaField').first().props().name).to.equal('ATFLVurdering');
-    expect(rows.at(1).find('TextAreaField').first().props().readOnly).to.equal(readOnly);
+    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
+    expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find(AksjonspunktBehandlerTB);
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
     const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
-    expect(aksjonspunktBehandlerAT).to.have.length(0);
-    expect(aksjonspunktBehandlerTB).to.have.length(1);
-    expect(aksjonspunktBehandlerFL).to.have.length(0);
-    expect(aksjonspunktBehandlerSN).to.have.length(0);
+    expect(aksjonspunktBehandlerAT).toHaveLength(0);
+    expect(aksjonspunktBehandlerTB).toHaveLength(1);
+    expect(aksjonspunktBehandlerFL).toHaveLength(0);
+    expect(aksjonspunktBehandlerSN).toHaveLength(0);
     const submitButton = rows.at(2).first().childAt(0);
-    expect(submitButton).to.have.length(1);
+    expect(submitButton).toHaveLength(1);
   });
   it('Skal teste at riktig componenter blir renderet for SN NyIArbeidslivet==true', () => {
     relevanteStatuser.isFrilanser = false;
@@ -226,14 +225,16 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).to.equal('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet');
+    expect(rows.first().find('FormattedMessage').first().props().id).toBe(
+      'Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet',
+    );
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find(AksjonspunktBehandlerTB);
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
     const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
-    expect(aksjonspunktBehandlerAT).to.have.length(0);
-    expect(aksjonspunktBehandlerTB).to.have.length(0);
-    expect(aksjonspunktBehandlerFL).to.have.length(0);
-    expect(aksjonspunktBehandlerSN).to.have.length(1);
+    expect(aksjonspunktBehandlerAT).toHaveLength(0);
+    expect(aksjonspunktBehandlerTB).toHaveLength(0);
+    expect(aksjonspunktBehandlerFL).toHaveLength(0);
+    expect(aksjonspunktBehandlerSN).toHaveLength(1);
   });
 });

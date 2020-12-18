@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -124,8 +123,8 @@ describe('<UttakFaktaForm>', () => {
     );
 
     const span = wrapper.find('span');
-    expect(span).to.have.length(1);
-    expect(span.text()).to.equal('Perioder overlapper');
+    expect(span).toHaveLength(1);
+    expect(span.text()).toBe('Perioder overlapper');
   });
 
   it('skal kun sende 5070 når man har både 5070 og 6070', () => {
@@ -134,7 +133,7 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, [ap6070, ap5070]);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.AVKLAR_UTTAK)).has.length(1);
+    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.AVKLAR_UTTAK)).toHaveLength(1);
   });
 
   it('skal sende 6013 hvis ingen andre aksjonspunkter og manuelloverstyrt', () => {
@@ -144,7 +143,7 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, []);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).has.length(1);
+    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
   });
 
   it('skal sende 6013 hvis 6013 er OPPR og ikke 5070', () => {
@@ -154,6 +153,6 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, [ap6013]);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).has.length(1);
+    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
   });
 });

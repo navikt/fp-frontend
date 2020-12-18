@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
   andelsnrMottarYtelseMap,
@@ -83,7 +82,7 @@ describe('<VurderMottarYtelseUtils>', () => {
     const values = {};
     values[finnFrilansFieldName()] = null;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
-    expect(harVurdert).to.equal(false);
+    expect(harVurdert).toBe(false);
   });
 
   it('skal returnere true når man har vurdert alle punktene i mottar ytelse for frilans', () => {
@@ -94,7 +93,7 @@ describe('<VurderMottarYtelseUtils>', () => {
     const values = {};
     values[finnFrilansFieldName()] = true;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
-    expect(harVurdert).to.equal(true);
+    expect(harVurdert).toBe(true);
   });
 
   it('skal returnere true når man har vurdert alle punktene i mottar ytelse for arbeidstaker uten inntektsmelding', () => {
@@ -107,7 +106,7 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = false;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
-    expect(harVurdert).to.equal(true);
+    expect(harVurdert).toBe(true);
   });
 
   it('skal returnere false når man har ikkje vurdert alle punktene i mottar ytelse for arbeidstaker uten inntektsmelding', () => {
@@ -120,12 +119,12 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = null;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
-    expect(harVurdert).to.equal(false);
+    expect(harVurdert).toBe(false);
   });
 
   it('skal returnere tomt objekt om vurderMottarYtelseDto ikkje er tilstades', () => {
     const mottarYtelseMap = andelsnrMottarYtelseMap({}, undefined, undefined);
-    expect(mottarYtelseMap).to.be.empty;
+    expect(Object.keys(mottarYtelseMap)).toHaveLength(0);
   });
 
   it('skal vurdering av mottar ytelse for arbeidstakerandeler', () => {
@@ -137,9 +136,9 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel2)] = false;
     values[utledArbeidsforholdFieldName(andel3)] = null;
     const mottarYtelseMap = andelsnrMottarYtelseMap(values, vurderMottarYtelse, beregningsgrunnlag);
-    expect(mottarYtelseMap[1]).to.equal(true);
-    expect(mottarYtelseMap[2]).to.equal(false);
-    expect(mottarYtelseMap[3]).to.equal(null);
+    expect(mottarYtelseMap[1]).toBe(true);
+    expect(mottarYtelseMap[2]).toBe(false);
+    expect(mottarYtelseMap[3]).toBe(null);
   });
 
   it('skal vurdering av mottar ytelse for arbeidstakerandeler og frilans', () => {
@@ -152,10 +151,10 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel3)] = null;
     values[finnFrilansFieldName()] = true;
     const mottarYtelseMap = andelsnrMottarYtelseMap(values, vurderMottarYtelse, beregningsgrunnlag);
-    expect(mottarYtelseMap[1]).to.equal(true);
-    expect(mottarYtelseMap[2]).to.equal(false);
-    expect(mottarYtelseMap[3]).to.equal(null);
-    expect(mottarYtelseMap[4]).to.equal(true);
+    expect(mottarYtelseMap[1]).toBe(true);
+    expect(mottarYtelseMap[2]).toBe(false);
+    expect(mottarYtelseMap[3]).toBe(null);
+    expect(mottarYtelseMap[4]).toBe(true);
   });
 
   it('skalFastsetteInntektATUtenInntektsmelding skal returnere true om det er minst ein AT-andel som skal fastsett inntekt', () => {
@@ -168,7 +167,7 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel3)] = null;
     values[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
-    expect(skalFastsetteAT).to.equal(true);
+    expect(skalFastsetteAT).toBe(true);
   });
 
   it('skalFastsetteInntektATUtenInntektsmelding skal returnere false om ingen AT andeler eksisterer i values', () => {
@@ -178,7 +177,7 @@ describe('<VurderMottarYtelseUtils>', () => {
     const values = {};
     values[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
-    expect(skalFastsetteAT).to.equal(false);
+    expect(skalFastsetteAT).toBe(false);
   });
 
   it('skalFastsetteInntektATUtenInntektsmelding skal returnere false om mottarYtelse for alle AT-andeler i values er satt til null', () => {
@@ -191,7 +190,7 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel3)] = null;
     values[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
-    expect(skalFastsetteAT).to.equal(false);
+    expect(skalFastsetteAT).toBe(false);
   });
 
   it('skalFastsetteInntektATUtenInntektsmelding skal returnere false om mottarYtelse for alle AT-andeler i values er satt til false', () => {
@@ -204,6 +203,6 @@ describe('<VurderMottarYtelseUtils>', () => {
     values[utledArbeidsforholdFieldName(andel3)] = false;
     values[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
-    expect(skalFastsetteAT).to.equal(false);
+    expect(skalFastsetteAT).toBe(false);
   });
 });

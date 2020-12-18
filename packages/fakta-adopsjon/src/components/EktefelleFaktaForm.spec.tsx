@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { FamilieHendelse } from '@fpsak-frontend/types';
@@ -25,15 +24,15 @@ describe('<EktefelleFaktaForm>', () => {
     />);
 
     const radioFields = wrapper.find('RadioOption');
-    expect(radioFields).to.have.length(2);
-    expect(radioFields.first().prop('label')).to.eql({ id: 'EktefelleFaktaForm.ErIkkeValg' });
-    expect(radioFields.last().prop('label')).to.eql({ id: 'EktefelleFaktaForm.ErValg' });
+    expect(radioFields).toHaveLength(2);
+    expect(radioFields.first().prop('label')).toEqual({ id: 'EktefelleFaktaForm.ErIkkeValg' });
+    expect(radioFields.last().prop('label')).toEqual({ id: 'EktefelleFaktaForm.ErValg' });
   });
 
   it('skal sette initielle verdi for ektefellesBarn til undefined når ingen data finnes i avklarte data', () => {
     const initialValues = EktefelleFaktaForm.buildInitialValues({} as FamilieHendelse);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       ektefellesBarn: undefined,
     });
   });
@@ -45,7 +44,7 @@ describe('<EktefelleFaktaForm>', () => {
 
     const initialValues = EktefelleFaktaForm.buildInitialValues(familiehendelse as FamilieHendelse);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       ektefellesBarn: true,
     });
   });

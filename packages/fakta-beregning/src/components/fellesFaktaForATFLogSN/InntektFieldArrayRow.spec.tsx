@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -97,16 +96,16 @@ it('skal vise komponent med arbeidsperiode og refusjonskrav', () => {
     {...props}
   />);
   const rows = wrapper.find(TableRow);
-  expect(rows.length).to.eql(1);
+  expect(rows.length).toEqual(1);
   const columns = rows.first().find(TableColumn);
-  expect(columns.length).to.eql(6);
-  expect(columns.first().find(ArbeidsforholdField).length).to.eql(1);
-  expect(columns.at(1).find(PeriodpickerField).length).to.eql(1);
-  expect(columns.at(2).find(InputField).length).to.eql(1);
-  expect(columns.at(3).find(InputField).length).to.eql(1);
-  expect(columns.at(4).find(SelectField).length).to.eql(1);
+  expect(columns.length).toEqual(6);
+  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
+  expect(columns.at(1).find(PeriodpickerField).length).toEqual(1);
+  expect(columns.at(2).find(InputField).length).toEqual(1);
+  expect(columns.at(3).find(InputField).length).toEqual(1);
+  expect(columns.at(4).find(SelectField).length).toEqual(1);
   const btn = columns.at(3).find('button');
-  expect(btn.length).to.eql(0);
+  expect(btn.length).toEqual(0);
 });
 
 it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
@@ -142,16 +141,16 @@ it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
     {...ownProps}
   />);
   const row = wrapper.find(TableRow);
-  expect(row.length).to.eql(1);
+  expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
-  expect(columns.length).to.eql(4);
-  expect(columns.first().find(ArbeidsforholdField).length).to.eql(1);
+  expect(columns.length).toEqual(4);
+  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
   const inputField = columns.at(1).find(InputField);
-  expect(inputField.length).to.eql(1);
-  expect(inputField.props().name).to.eql('fieldArrayName[0].fastsattBelop');
-  expect(columns.at(2).find(SelectField).length).to.eql(1);
+  expect(inputField.length).toEqual(1);
+  expect(inputField.props().name).toEqual('fieldArrayName[0].fastsattBelop');
+  expect(columns.at(2).find(SelectField).length).toEqual(1);
   const btn = columns.at(3).find('button');
-  expect(btn.length).to.eql(0);
+  expect(btn.length).toEqual(0);
 });
 
 it('skal vise komponent med readOnly beløp', () => {
@@ -188,16 +187,16 @@ it('skal vise komponent med readOnly beløp', () => {
 
   />);
   const row = wrapper.find(TableRow);
-  expect(row.length).to.eql(1);
+  expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
-  expect(columns.length).to.eql(4);
-  expect(columns.first().find(ArbeidsforholdField).length).to.eql(1);
+  expect(columns.length).toEqual(4);
+  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
   const inputField = columns.at(1).find(InputField);
-  expect(inputField.length).to.eql(1);
-  expect(inputField.props().name).to.eql('fieldArrayName[0].belopReadOnly');
-  expect(columns.at(2).find(SelectField).length).to.eql(1);
+  expect(inputField.length).toEqual(1);
+  expect(inputField.props().name).toEqual('fieldArrayName[0].belopReadOnly');
+  expect(columns.at(2).find(SelectField).length).toEqual(1);
   const btn = columns.at(3).find('button');
-  expect(btn.length).to.eql(0);
+  expect(btn.length).toEqual(0);
 });
 
 it('skal vise komponent med sletteknapp', () => {
@@ -230,12 +229,12 @@ it('skal vise komponent med sletteknapp', () => {
     {...props}
   />);
   const row = wrapper.find(TableRow);
-  expect(row.length).to.eql(1);
+  expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
-  expect(columns.length).to.eql(4);
-  expect(columns.first().find(ArbeidsforholdField).length).to.eql(1);
-  expect(columns.at(1).find(InputField).length).to.eql(1);
-  expect(columns.at(2).find(SelectField).length).to.eql(1);
+  expect(columns.length).toEqual(4);
+  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
+  expect(columns.at(1).find(InputField).length).toEqual(1);
+  expect(columns.at(2).find(SelectField).length).toEqual(1);
   const btn = columns.at(3).find('button');
-  expect(btn.length).to.eql(1);
+  expect(btn.length).toEqual(1);
 });

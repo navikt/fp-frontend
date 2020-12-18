@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { FamilieHendelse } from '@fpsak-frontend/types';
@@ -29,9 +28,9 @@ describe('<MannAdoptererAleneFaktaForm>', () => {
     );
 
     const radioFields = wrapper.find('RadioOption');
-    expect(radioFields).to.have.length(2);
-    expect(radioFields.first().prop('label')).to.eql({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' });
-    expect(radioFields.last().prop('label')).to.eql({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' });
+    expect(radioFields).toHaveLength(2);
+    expect(radioFields.first().prop('label')).toEqual({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' });
+    expect(radioFields.last().prop('label')).toEqual({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' });
   });
 
   it('skal sette initielle verdi for mannAdoptererAlene til verdi i avklarte data', () => {
@@ -41,7 +40,7 @@ describe('<MannAdoptererAleneFaktaForm>', () => {
 
     const initialValues = MannAdoptererAleneFaktaForm.buildInitialValues(familiehendelse as FamilieHendelse);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       mannAdoptererAlene: true,
     });
   });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
@@ -28,10 +27,10 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
       } as FamilieHendelse}
     />);
 
-    expect(wrapper.find("[id='FodselsammenligningPanel.Vedtaksdato']")).to.have.length(1);
+    expect(wrapper.find("[id='FodselsammenligningPanel.Vedtaksdato']")).toHaveLength(1);
     const normaltekstFields = wrapper.find(Normaltekst);
-    expect(normaltekstFields).to.have.length(6);
-    expect(normaltekstFields.at(3).childAt(0).text()).to.eql('2018-08-10');
+    expect(normaltekstFields).toHaveLength(6);
+    expect(normaltekstFields.at(3).childAt(0).text()).toEqual('2018-08-10');
   });
 
   it('skal ikke vise vedtaksdato', () => {
@@ -40,9 +39,9 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
       vedtaksDatoSomSvangerskapsuke="2018-08-10"
     />);
 
-    expect(wrapper.find("[id='FodselsammenligningPanel.Vedtaksdato']")).to.have.length(0);
+    expect(wrapper.find("[id='FodselsammenligningPanel.Vedtaksdato']")).toHaveLength(0);
     const normaltekstFields = wrapper.find(Normaltekst);
-    expect(normaltekstFields).to.have.length(4);
+    expect(normaltekstFields).toHaveLength(4);
   });
 
   it('skal hente tom streng når en ikke har søknad eller familehendelse', () => {
@@ -52,7 +51,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const date = getTermindatoEllerFodselsdato(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(date).to.eql('');
+    expect(date).toEqual('');
   });
 
   it('skal hente termindato fra familehendelse når denne finnes', () => {
@@ -66,7 +65,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const date = getTermindatoEllerFodselsdato(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(date).to.eql('02.02.2017');
+    expect(date).toEqual('02.02.2017');
   });
 
   it('skal hente termindato fra søknad når familiehendelse ikke finnes', () => {
@@ -78,7 +77,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const date = getTermindatoEllerFodselsdato(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(date).to.eql('01.01.2017');
+    expect(date).toEqual('01.01.2017');
   });
 
   it('skal hente fødselsdato fra familehendelse når denne finnes', () => {
@@ -96,7 +95,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const date = getTermindatoEllerFodselsdato(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(date).to.eql('02.02.2017');
+    expect(date).toEqual('02.02.2017');
   });
 
   it('skal hente fødselsdato fra søknad når familiehendelse ikke finnes', () => {
@@ -110,7 +109,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const date = getTermindatoEllerFodselsdato(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(date).to.eql('01.01.2017');
+    expect(date).toEqual('01.01.2017');
   });
 
   it('skal hente antall barn 0 når en ikke har søknad eller familehendelse', () => {
@@ -120,7 +119,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const antallBarn = getAntallBarn(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(antallBarn).to.eql(0);
+    expect(antallBarn).toEqual(0);
   });
 
   it('skal hente antall barn termin fra familiehendelse når denne finnes', () => {
@@ -135,7 +134,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const antallBarn = getAntallBarn(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(antallBarn).to.eql(2);
+    expect(antallBarn).toEqual(2);
   });
 
   it('skal hente antall barn termin fra soknad når familiehendelse ikke finnes', () => {
@@ -147,7 +146,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const antallBarn = getAntallBarn(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(antallBarn).to.eql(1);
+    expect(antallBarn).toEqual(1);
   });
 
   it('skal hente antall barn fødsel fra familiehendelse når denne finnes', () => {
@@ -165,7 +164,7 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const antallBarn = getAntallBarn(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(antallBarn).to.eql(2);
+    expect(antallBarn).toEqual(2);
   });
 
   it('skal hente antall barn fødsel fra soknad når familiehendelse ikke finnes', () => {
@@ -177,6 +176,6 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
 
     const antallBarn = getAntallBarn(isTermin, originalSoknad, orginalFamiliehendelse);
 
-    expect(antallBarn).to.eql(1);
+    expect(antallBarn).toEqual(1);
   });
 });

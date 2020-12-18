@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { TidsbegrensetArbeidsforholdForm } from './TidsbegrensetArbeidsforholdForm';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
@@ -40,7 +39,7 @@ describe('<TidsbegrensetArbeidsforholdForm>', () => {
       alleKodeverk={{}}
     />);
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(4);
+    expect(radios).toHaveLength(4);
   });
   it('skal teste at korrekte overskrifter vises', () => {
     const wrapper = shallowWithIntl(<TidsbegrensetArbeidsforholdForm
@@ -50,15 +49,15 @@ describe('<TidsbegrensetArbeidsforholdForm>', () => {
       alleKodeverk={{}}
     />);
     const message = wrapper.find('FormattedMessage');
-    expect(message).to.have.length(2);
-    expect(message.first().prop('id')).to.equal('BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold');
-    expect(message.first().prop('values')).is.eql({
+    expect(message).toHaveLength(2);
+    expect(message.first().prop('id')).toBe('BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold');
+    expect(message.first().prop('values')).toEqual({
       navn: 'arbeidsgiver 1 (123456789)',
       fom: '01.01.2017',
       tom: '02.02.2017',
     });
-    expect(message.last().prop('id')).to.equal('BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold');
-    expect(message.last().prop('values')).is.eql({
+    expect(message.last().prop('id')).toBe('BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold');
+    expect(message.last().prop('values')).toEqual({
       navn: 'arbeidsgiver 2 (987654321)',
       fom: '02.02.2017',
       tom: '03.03.2017',

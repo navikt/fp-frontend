@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -55,8 +54,8 @@ describe('<AktivitetskravFaktaDetailForm>', () => {
     />);
 
     const options = wrapper.find(RadioOption);
-    expect(options).to.have.length(2);
-    expect(options.first().prop('label')).to.eql(aktivitetskravAvklaringer[0].navn);
-    expect(options.last().prop('label')).to.eql(aktivitetskravAvklaringer[1].navn);
+    expect(options).toHaveLength(2);
+    expect(options.first().prop('label')).toEqual(aktivitetskravAvklaringer[0].navn);
+    expect(options.last().prop('label')).toEqual(aktivitetskravAvklaringer[1].navn);
   });
 });

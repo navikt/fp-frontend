@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
@@ -48,9 +47,9 @@ describe('<AvklarFaresignalerForm>', () => {
       risikoklassifisering={{} as Risikoklassifisering}
       {...reduxFormPropsMock}
     />);
-    expect(wrapper.find(TextAreaField)).has.length(1);
-    expect(wrapper.find(RadioOption)).has.length(2);
-    expect(wrapper.find(RadioGroupField)).has.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
+    expect(wrapper.find(RadioOption)).toHaveLength(2);
+    expect(wrapper.find(RadioGroupField)).toHaveLength(1);
   });
 
   it('skal teste at komponent gir inputfelter korrekte verdier', () => {
@@ -62,11 +61,11 @@ describe('<AvklarFaresignalerForm>', () => {
       {...reduxFormPropsMock}
     />);
     const textArea = wrapper.find('TextAreaField');
-    expect(textArea.props().readOnly).to.equal(true);
+    expect(textArea.props().readOnly).toBe(true);
 
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup.props().readOnly).to.equal(true);
-    expect(radioGroup.prop('isEdited')).to.equal(true);
+    expect(radioGroup.props().readOnly).toBe(true);
+    expect(radioGroup.prop('isEdited')).toBe(true);
   });
 
   it('skal teste at buildInitialValues gir korrekte verdier', () => {
@@ -77,6 +76,6 @@ describe('<AvklarFaresignalerForm>', () => {
     const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering(faresignalVurdering.INNVIRKNING),
       mockAksjonspunkt('UTFO', 'Dette er en begrunnelse'));
 
-    expect(actualValues).to.deep.equal(expectedInitialValues);
+    expect(actualValues).toEqual(expectedInitialValues);
   });
 });

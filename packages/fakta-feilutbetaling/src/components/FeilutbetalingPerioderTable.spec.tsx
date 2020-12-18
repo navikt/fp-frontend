@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import FeilutbetalingPerioderTable from './FeilutbetalingPerioderTable';
@@ -41,7 +40,7 @@ describe('<FeilutbetalingPerioderTable>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).has.length(1);
-    expect(table.prop('headerTextCodes')).to.eql(headerTextCodes);
+    expect(table).toHaveLength(1);
+    expect(table.prop('headerTextCodes')).toEqual(headerTextCodes);
   });
 });

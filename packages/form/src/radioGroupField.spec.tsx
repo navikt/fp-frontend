@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { reducer as formReducer, reduxForm } from 'redux-form';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import { messages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import RadioGroupField from './RadioGroupField';
 import RadioOption from './RadioOption';
@@ -28,8 +27,8 @@ describe('<RadioGroupField>', () => {
         <RadioOption label="label" value={false} />
       </RadioGroupField>,
     );
-    expect(wrapper.find('input')).to.have.length(2);
-    expect(wrapper.find('input[type="radio"]')).to.have.length(2);
+    expect(wrapper.find('input')).toHaveLength(2);
+    expect(wrapper.find('input[type="radio"]')).toHaveLength(2);
   });
 
   it('Skal rendre med fullbredde', () => {
@@ -39,6 +38,6 @@ describe('<RadioGroupField>', () => {
         <RadioOption label="label" value={false} />
       </RadioGroupField>,
     );
-    expect(wrapper.find('[className="skjemagruppe input--fullbredde radioGroup"]')).to.have.length(1);
+    expect(wrapper.find('[className="skjemagruppe input--fullbredde radioGroup"]')).toHaveLength(1);
   });
 });

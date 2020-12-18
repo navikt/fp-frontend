@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
@@ -85,11 +84,11 @@ describe('<FagsakProfileIndex>', () => {
     />);
 
     const fagsakProfile = wrapper.find(FagsakProfilSakIndex);
-    expect(fagsakProfile).has.length(1);
+    expect(fagsakProfile).toHaveLength(1);
 
     const behandlingVelger = fagsakProfile.renderProp('renderBehandlingVelger')().find(BehandlingVelgerSakIndex);
-    expect(behandlingVelger).has.length(1);
-    expect(behandlingVelger.prop('showAll')).is.true;
+    expect(behandlingVelger).toHaveLength(1);
+    expect(behandlingVelger.prop('showAll')).toBe(true);
   });
 
   it('skal ikke vise alle behandlinger når behandling er valgt', () => {
@@ -108,10 +107,10 @@ describe('<FagsakProfileIndex>', () => {
     />);
 
     const fagsakProfile = wrapper.find(FagsakProfilSakIndex);
-    expect(fagsakProfile).has.length(1);
+    expect(fagsakProfile).toHaveLength(1);
 
     const behandlingVelger = fagsakProfile.renderProp('renderBehandlingVelger')().find(BehandlingVelgerSakIndex);
-    expect(behandlingVelger).has.length(1);
-    expect(behandlingVelger.prop('showAll')).is.false;
+    expect(behandlingVelger).toHaveLength(1);
+    expect(behandlingVelger.prop('showAll')).toBe(false);
   });
 });

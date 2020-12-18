@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -17,8 +16,8 @@ describe('<Search>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find('InputField')).to.have.length(1);
-    expect(wrapper.find('Hovedknapp')).to.have.length(1);
+    expect(wrapper.find('InputField')).toHaveLength(1);
+    expect(wrapper.find('Hovedknapp')).toHaveLength(1);
   });
 
   it('skal utføre søk når en trykker på søkeknapp', () => {
@@ -35,6 +34,6 @@ describe('<Search>', () => {
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });
 
-    expect(onButtonClick).to.have.property('callCount', 1);
+    expect(onButtonClick).toHaveProperty('callCount', 1);
   });
 });

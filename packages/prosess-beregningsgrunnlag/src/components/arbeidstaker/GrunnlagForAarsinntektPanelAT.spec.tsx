@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -56,9 +55,9 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
-    expect(rows).to.have.length(7);
+    expect(rows).toHaveLength(7);
     const rowsFlex = wrapper.find('FlexRow');
-    expect(rowsFlex).to.have.length(3);
+    expect(rowsFlex).toHaveLength(3);
   });
 
   it('Skal teste at korrekte verdier settes i tabellen med EN arbeidsandel med opphørsdato', () => {
@@ -72,19 +71,22 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     />);
     const rows = wrapper.find('Row');
     const rowsFlex = wrapper.find('FlexRow');
-    expect(rows).to.have.length(3);
+    expect(rows).toHaveLength(3);
     let rowNr = 1;
     let rowNrFlex = 1;
     andeler.forEach((andel) => {
       const teksterAndel = rows.at(rowNr).find('Normaltekst');
       const arbeidsgiverInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
-      expect(teksterAndel.at(0).childAt(0).text()).to.equal(createVisningsnavnForAktivitet(arbeidsgiverInfo, andel.arbeidsforhold.eksternArbeidsforholdId));
-      expect(teksterAndel.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar / 12));
-      expect(teksterAndel.at(2).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar));
+      expect(teksterAndel.at(0).childAt(0).text()).toBe(
+        createVisningsnavnForAktivitet(arbeidsgiverInfo, andel.arbeidsforhold.eksternArbeidsforholdId),
+      );
+      expect(teksterAndel.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar / 12));
+      expect(teksterAndel.at(2).childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar));
 
       const teksterArbForholdTid = rowsFlex.at(rowNrFlex).find('Undertekst');
-      expect(teksterArbForholdTid.at(0).childAt(0).text()).to
-        .equal(`${dateFormat(andel.arbeidsforhold.startdato)} - ${dateFormat(andel.arbeidsforhold.opphoersdato)}`);
+      expect(teksterArbForholdTid.at(0).childAt(0).text()).toBe(
+        `${dateFormat(andel.arbeidsforhold.startdato)} - ${dateFormat(andel.arbeidsforhold.opphoersdato)}`,
+      );
       rowNr += 1;
       rowNrFlex += 1;
     });
@@ -108,9 +110,11 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     andeler.forEach((andel) => {
       const teksterAndel = rows.at(rowNr).find('Normaltekst');
       const arbeidsgiverInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
-      expect(teksterAndel.at(0).childAt(0).text()).to.equal(createVisningsnavnForAktivitet(arbeidsgiverInfo, andel.arbeidsforhold.eksternArbeidsforholdId));
-      expect(teksterAndel.at(1).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar / 12));
-      expect(teksterAndel.at(2).childAt(0).text()).to.equal(formatCurrencyNoKr(andel.beregnetPrAar));
+      expect(teksterAndel.at(0).childAt(0).text()).toBe(
+        createVisningsnavnForAktivitet(arbeidsgiverInfo, andel.arbeidsforhold.eksternArbeidsforholdId),
+      );
+      expect(teksterAndel.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar / 12));
+      expect(teksterAndel.at(2).childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar));
       const teksterArbForholdTid = rowsFlex.at(rowNrFlex).find('Undertekst');
       let expectedDato;
       const { arbeidsforhold } = andel;
@@ -119,7 +123,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       } else {
         expectedDato = dateFormat(arbeidsforhold.startdato);
       }
-      expect(teksterArbForholdTid.at(0).childAt(0).text()).to.equal(expectedDato);
+      expect(teksterArbForholdTid.at(0).childAt(0).text()).toBe(expectedDato);
       rowNr += 2;
       rowNrFlex += 1;
     });
@@ -129,15 +133,15 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     const ledetextSum = rows.at(rowNr).find('FormattedMessage');
     const beregnetAarsinntekt = andeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
     const beregnetMaanedsinntekt = beregnetAarsinntekt / 12;
-    expect(ledetextSum.get(0).props.id).to.equal('Beregningsgrunnlag.AarsinntektPanel.TotaltArbeidsinntekt');
-    expect(mndSum.childAt(0).text()).to.equal(formatCurrencyNoKr(beregnetMaanedsinntekt));
-    expect(aarSum.childAt(0).text()).to.equal(formatCurrencyNoKr(beregnetAarsinntekt));
+    expect(ledetextSum.get(0).props.id).toBe('Beregningsgrunnlag.AarsinntektPanel.TotaltArbeidsinntekt');
+    expect(mndSum.childAt(0).text()).toBe(formatCurrencyNoKr(beregnetMaanedsinntekt));
+    expect(aarSum.childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
   });
 
   it('Skal teste at initial values bygges korrekt', () => {
     const andeler = [mockAndel('Arbeidsgiver 1', 100, 100, false), mockAndel('Arbeidsgiver 2', 200, 200, false)];
     const initialValues = UnwrappedForm.buildInitialValues(andeler);
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       inntekt0: '100',
       inntekt1: '200',
     });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
@@ -30,7 +29,7 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
@@ -38,12 +37,12 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
     const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);
-    expect(dateFields).has.length(2);
-    expect(dateFields.first().prop('name')).is.eql('fieldId1.periodeFom');
-    expect(dateFields.first().prop('label')).is.eql({ id: 'Registrering.AndreYtelser.periodeFom' });
-    expect(dateFields.last().prop('name')).is.eql('fieldId1.periodeTom');
-    expect(dateFields.last().prop('label')).is.eql({ id: 'Registrering.AndreYtelser.periodeTom' });
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(dateFields).toHaveLength(2);
+    expect(dateFields.first().prop('name')).toEqual('fieldId1.periodeFom');
+    expect(dateFields.first().prop('label')).toEqual({ id: 'Registrering.AndreYtelser.periodeFom' });
+    expect(dateFields.last().prop('name')).toEqual('fieldId1.periodeTom');
+    expect(dateFields.last().prop('label')).toEqual({ id: 'Registrering.AndreYtelser.periodeTom' });
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 
   it('skal validere at alle perioder har gyldige datoer', () => {
@@ -52,11 +51,11 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
     const errorsWithValidDates = RenderAndreYtelserPerioderFieldArray.validate([getPeriodDaysFromToday(-10, -5),
       getPeriodDaysFromToday(-20, -15)]);
 
-    expect(errorsWithInvalidDates[0].periodeFom).that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[0].periodeTom).that.eql(invalidDateMessage());
-    expect(errorsWithInvalidDates[1]).to.not.exist;
+    expect(errorsWithInvalidDates[0].periodeFom).toEqual(invalidDateMessage());
+    expect(errorsWithInvalidDates[0].periodeTom).toEqual(invalidDateMessage());
+    expect(errorsWithInvalidDates[1]).toBeFalsy();
 
-    expect(errorsWithValidDates).to.not.exist;
+    expect(errorsWithValidDates).toBeFalsy();
   });
 
   it('transformValues skal returnerer ytelser på riktig format', () => {
@@ -66,12 +65,12 @@ describe('<RenderAndreYtelserPerioderFieldArray>', () => {
 
     const errorsWithInvalidDates = RenderAndreYtelserPerioderFieldArray.transformValues(values, ytelse);
 
-    expect(errorsWithInvalidDates[0].ytelseType).to.be.equal('LONN_UTDANNING');
-    expect(errorsWithInvalidDates[0].periodeFom).to.be.equal('abc');
-    expect(errorsWithInvalidDates[0].periodeTom).to.be.equal('ads');
+    expect(errorsWithInvalidDates[0].ytelseType).toBe('LONN_UTDANNING');
+    expect(errorsWithInvalidDates[0].periodeFom).toBe('abc');
+    expect(errorsWithInvalidDates[0].periodeTom).toBe('ads');
 
-    expect(errorsWithInvalidDates[1].ytelseType).to.be.equal('LONN_UTDANNING');
-    expect(errorsWithInvalidDates[1].periodeFom).to.be.equal('c');
-    expect(errorsWithInvalidDates[1].periodeTom).to.be.equal('s');
+    expect(errorsWithInvalidDates[1].ytelseType).toBe('LONN_UTDANNING');
+    expect(errorsWithInvalidDates[1].periodeFom).toBe('c');
+    expect(errorsWithInvalidDates[1].periodeTom).toBe('s');
   });
 });

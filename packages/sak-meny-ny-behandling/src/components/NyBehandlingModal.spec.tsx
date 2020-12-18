@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
 
@@ -60,11 +59,11 @@ describe('<NyBehandlingModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).to.eql('Ny behandling');
-    expect(modal.prop('onRequestClose')).to.eql(cancelEventCallback);
-    expect(modal.prop('onAfterOpen')).is.not.null;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('contentLabel')).toEqual('Ny behandling');
+    expect(modal.prop('onRequestClose')).toEqual(cancelEventCallback);
+    expect(modal.prop('onAfterOpen')).not.toBeNull();
   });
 
   it('skal bruke submit-callback når en trykker lagre', () => {
@@ -103,7 +102,7 @@ describe('<NyBehandlingModal>', () => {
 
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });
-    expect(submitEventCallback.called).is.true;
+    expect(submitEventCallback.called).toBe(true);
   });
 
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
@@ -141,7 +140,7 @@ describe('<NyBehandlingModal>', () => {
     />);
 
     wrapper.find(Knapp).simulate('click');
-    expect(cancelEventCallback).to.have.property('callCount', 1);
+    expect(cancelEventCallback).toHaveProperty('callCount', 1);
   });
 
   it('skal vise checkbox for behandling etter klage når førstegangsbehandling er valgt', () => {
@@ -178,7 +177,7 @@ describe('<NyBehandlingModal>', () => {
       erTilbakekreving={false}
     />);
 
-    expect(wrapper.find(CheckboxField)).to.have.length(1);
+    expect(wrapper.find(CheckboxField)).toHaveLength(1);
   });
 
   it('skal ikke vise checkbox for behandling etter klage når dokumentinnsyn er valgt', () => {
@@ -215,7 +214,7 @@ describe('<NyBehandlingModal>', () => {
       erTilbakekreving={false}
     />);
 
-    expect(wrapper.find(CheckboxField)).to.have.length(0);
+    expect(wrapper.find(CheckboxField)).toHaveLength(0);
   });
 
   it('skal vise dropdown for revuderingsårsaker når revurdering er valgt', () => {
@@ -252,7 +251,7 @@ describe('<NyBehandlingModal>', () => {
       erTilbakekreving={false}
     />);
 
-    expect(wrapper.find(SelectField)).to.have.length(2);
+    expect(wrapper.find(SelectField)).toHaveLength(2);
   });
 
   it('skal ikke vise dropdown for revuderingsårsaker når dokumentinnsyn er valgt', () => {
@@ -289,7 +288,7 @@ describe('<NyBehandlingModal>', () => {
       erTilbakekreving={false}
     />);
 
-    expect(wrapper.find(SelectField)).to.have.length(1);
+    expect(wrapper.find(SelectField)).toHaveLength(1);
   });
 
   it('skal finne filtrerte behandlingsårsaker når det er valgt behandlingstype TILBAKEKREVING_REVURDERING', () => {
@@ -320,9 +319,9 @@ describe('<NyBehandlingModal>', () => {
 
     const res = getBehandlingAarsaker.resultFunc(ytelseType, behandlingArsakerFpSak, behandlingArsakerFpTilbake, bType);
 
-    expect(res).to.deep.include.members([
+    expect(res).toEqual(expect.arrayContaining([
       behandlingArsakerFpTilbake[3],
-      behandlingArsakerFpTilbake[2]]);
+      behandlingArsakerFpTilbake[2]]));
   });
 
   it('skal finne filtrerte behandlingsårsaker når det er valgt behandlingstype REVURDERING', () => {
@@ -356,13 +355,13 @@ describe('<NyBehandlingModal>', () => {
 
     const res = getBehandlingAarsaker.resultFunc(ytelseTypeRevudering, behandlingArsakerFpSak, behandlingArsakerFpTilbake, bType);
 
-    expect(res).to.deep.include.members([
+    expect(res).toEqual(expect.arrayContaining([
       behandlingArsakerFpSak[0],
       behandlingArsakerFpSak[2],
       behandlingArsakerFpSak[1],
       behandlingArsakerFpSak[4],
       behandlingArsakerFpSak[3],
-    ]);
+    ]));
   });
 
   it('skal finne filtrere behandlingstyper for kun fpsak', () => {
@@ -382,10 +381,10 @@ describe('<NyBehandlingModal>', () => {
 
     const res = getBehandlingTyper.resultFunc(kodeverkFpSak);
 
-    expect(res).to.deep.include.members([
+    expect(res).toEqual(expect.arrayContaining([
       kodeverkFpSak[2],
       kodeverkFpSak[1],
-    ]);
+    ]));
   });
 
   it('skal filtrere bort tilbakekreving når denne ikke kan lages', () => {
@@ -429,7 +428,7 @@ describe('<NyBehandlingModal>', () => {
       behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
-    expect(res).is.eql([
+    expect(res).toEqual([
       behandlingstyper[1],
       behandlingstyper[2],
       behandlingstyper[3],
@@ -477,7 +476,7 @@ describe('<NyBehandlingModal>', () => {
       behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
-    expect(res).is.eql([
+    expect(res).toEqual([
       behandlingstyper[0],
       behandlingstyper[2],
       behandlingstyper[3],
@@ -525,7 +524,7 @@ describe('<NyBehandlingModal>', () => {
       behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
-    expect(res).is.eql([
+    expect(res).toEqual([
       behandlingstyper[0],
       behandlingstyper[1],
       behandlingstyper[3],
@@ -574,7 +573,7 @@ describe('<NyBehandlingModal>', () => {
       behandlingstyper, behandlingOppretting, kanTilbakekrevingOpprettes,
     );
 
-    expect(res).is.eql([
+    expect(res).toEqual([
       behandlingstyper[0],
       behandlingstyper[1],
       behandlingstyper[2],

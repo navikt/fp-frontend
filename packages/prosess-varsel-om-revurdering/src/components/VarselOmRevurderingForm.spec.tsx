@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
@@ -70,7 +69,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       ventearsaker={[]}
     />);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
-    expect(fodselPanel).to.have.length(1);
+    expect(fodselPanel).toHaveLength(1);
   });
 
   it('skal vise fritekst og forhåndsvis av brev når varsel skal sendes', () => {
@@ -108,12 +107,12 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       ventearsaker={[]}
     />);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
-    expect(fodselPanel).to.have.length(0);
+    expect(fodselPanel).toHaveLength(0);
 
     const textarea = wrapper.find('TextAreaField');
     const forhandsvis = wrapper.find('a');
-    expect(textarea).to.have.length(2);
-    expect(forhandsvis).to.have.length(1);
+    expect(textarea).toHaveLength(2);
+    expect(forhandsvis).toHaveLength(1);
   });
 
   it('skal ikke vise fritekst og forhåndsvis av brev når varsel ikke skal sendes', () => {
@@ -153,8 +152,8 @@ describe('<VarselOmRevurderingFormImpl>', () => {
 
     const textarea = wrapper.find('TextAreaField');
     const forhandsvis = wrapper.find('a');
-    expect(textarea).to.have.length(1);
-    expect(forhandsvis).to.have.length(0);
+    expect(textarea).toHaveLength(1);
+    expect(forhandsvis).toHaveLength(0);
   });
 
   it('skal vises i readonly visning', () => {
@@ -193,8 +192,8 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       ventearsaker={[]}
     />);
 
-    expect(wrapper.find('Undertekst')).to.have.length(1);
-    expect(wrapper.find('Normaltekst')).to.have.length(1);
-    expect(wrapper.find('Normaltekst').children().text()).to.equal(begrunnelse);
+    expect(wrapper.find('Undertekst')).toHaveLength(1);
+    expect(wrapper.find('Normaltekst')).toHaveLength(1);
+    expect(wrapper.find('Normaltekst').children().text()).toBe(begrunnelse);
   });
 });

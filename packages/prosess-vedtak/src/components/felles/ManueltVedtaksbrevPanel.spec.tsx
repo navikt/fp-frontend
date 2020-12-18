@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -20,8 +19,8 @@ describe('<ManueltVedtaksbrevPanel>', () => {
     />);
 
     const overskrift = wrapper.find('TextAreaField');
-    expect(overskrift).to.have.length(2);
-    expect(overskrift.at(0).prop('readOnly')).to.equal(true);
-    expect(overskrift.at(1).prop('readOnly')).to.equal(true);
+    expect(overskrift).toHaveLength(2);
+    expect(overskrift.at(0).prop('readOnly')).toBe(true);
+    expect(overskrift.at(1).prop('readOnly')).toBe(true);
   });
 });

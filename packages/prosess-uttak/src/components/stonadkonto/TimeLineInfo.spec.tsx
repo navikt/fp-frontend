@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { UttakStonadskontoer, Stonadskonto } from '@fpsak-frontend/types';
 
@@ -50,9 +49,9 @@ describe('<TimeLineInfo>', () => {
     />);
 
     const messages = wrapper.find('FormattedMessage');
-    expect(messages).to.have.length(3);
+    expect(messages).toHaveLength(3);
     // @ts-ignore
-    expect(messages.at(1).props().values.ukerVerdi).to.equal(24);
+    expect(messages.at(1).props().values.ukerVerdi).toBe(24);
   });
 
   it('skal vise tabell med disponible dager', () => {
@@ -86,11 +85,11 @@ describe('<TimeLineInfo>', () => {
 
     wrapper.setState({ aktiv: 1, visKonto: konto });
     const messages = wrapper.find('FormattedMessage');
-    expect(messages).to.have.length(3);
+    expect(messages).toHaveLength(3);
     // @ts-ignore
-    expect(messages.at(2).prop('values').dato).to.equal('01.12.2018');
+    expect(messages.at(2).prop('values').dato).toBe('01.12.2018');
     // @ts-ignore
-    expect(messages.at(1).prop('values').ukerVerdi).to.equal(24);
+    expect(messages.at(1).prop('values').ukerVerdi).toBe(24);
   });
 
   it('skal vise tabs', () => {
@@ -101,10 +100,10 @@ describe('<TimeLineInfo>', () => {
     />);
     wrapper.setState({ aktiv: 1 });
     const timelineTab = wrapper.find('TimeLineTab');
-    expect(timelineTab).to.have.length(4);
-    expect(timelineTab.at(0).prop('aktiv')).to.equal(false);
-    expect(timelineTab.at(1).prop('aktiv')).to.equal(true);
-    expect(timelineTab.at(2).prop('aktiv')).to.equal(false);
-    expect(timelineTab.at(3).prop('aktiv')).to.equal(false);
+    expect(timelineTab).toHaveLength(4);
+    expect(timelineTab.at(0).prop('aktiv')).toBe(false);
+    expect(timelineTab.at(1).prop('aktiv')).toBe(true);
+    expect(timelineTab.at(2).prop('aktiv')).toBe(false);
+    expect(timelineTab.at(3).prop('aktiv')).toBe(false);
   });
 });

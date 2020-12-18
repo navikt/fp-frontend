@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -34,7 +33,7 @@ describe('<AksjonspunktsbehandlerSN>', () => {
       behandlingVersjon={1}
     />);
     const compVurderOgFastsettSN2 = wrapper.find(VurderOgFastsettSN);
-    expect(compVurderOgFastsettSN2).to.have.length(1);
+    expect(compVurderOgFastsettSN2).toHaveLength(1);
   });
   it('Skal teste at kompoenten IKKE renderes med manglende props', () => {
     const snNyIArb = mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD, undefined, 'OPPR');
@@ -46,6 +45,6 @@ describe('<AksjonspunktsbehandlerSN>', () => {
       behandlingVersjon={1}
     />);
     const compVurderOgFastsettSN2 = wrapper.find(VurderOgFastsettSN);
-    expect(compVurderOgFastsettSN2).to.have.length(0);
+    expect(compVurderOgFastsettSN2).toHaveLength(0);
   });
 });

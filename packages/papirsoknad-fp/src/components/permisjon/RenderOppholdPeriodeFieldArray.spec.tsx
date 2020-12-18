@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
@@ -25,20 +24,20 @@ describe('<RenderOppholdPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);
-    expect(dateFields).has.length(2);
-    expect(dateFields.first().prop('name')).is.eql('fieldId1.periodeFom');
-    expect(dateFields.first().prop('label')).is.eql({ id: 'Registrering.Permisjon.periodeFom' });
-    expect(dateFields.last().prop('name')).is.eql('fieldId1.periodeTom');
-    expect(dateFields.last().prop('label')).is.eql({ id: 'Registrering.Permisjon.periodeTom' });
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(dateFields).toHaveLength(2);
+    expect(dateFields.first().prop('name')).toEqual('fieldId1.periodeFom');
+    expect(dateFields.first().prop('label')).toEqual({ id: 'Registrering.Permisjon.periodeFom' });
+    expect(dateFields.last().prop('name')).toEqual('fieldId1.periodeTom');
+    expect(dateFields.last().prop('label')).toEqual({ id: 'Registrering.Permisjon.periodeTom' });
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
 
-    expect(innerWrapper.find(SelectField)).has.length(1);
+    expect(innerWrapper.find(SelectField)).toHaveLength(1);
   });
 });

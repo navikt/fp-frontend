@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { shallow } from 'enzyme';
 
@@ -18,7 +17,7 @@ describe('<VedtakDocuments>', () => {
       vedtaksdokumenter={vedtaksdokumenter}
     />);
 
-    expect(wrapper.find('a')).to.have.length(1);
+    expect(wrapper.find('a')).toHaveLength(1);
   });
 
   it('skal vise dokumentlisten etter at lenke er trykket', () => {
@@ -34,6 +33,6 @@ describe('<VedtakDocuments>', () => {
     />);
 
     wrapper.find('a').simulate('click', { preventDefault: () => undefined });
-    expect(wrapper.find('a')).to.have.length(2);
+    expect(wrapper.find('a')).toHaveLength(2);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Image } from '@fpsak-frontend/shared-components';
@@ -21,8 +20,8 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       behandlingVersjon={3}
     />);
 
-    expect(wrapper.find(Image)).to.have.length(1);
-    expect(wrapper.find(TextAreaField)).to.have.length(0);
+    expect(wrapper.find(Image)).toHaveLength(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
 
   it('skal vise textarea når en har trykket på lenke', () => {
@@ -37,8 +36,8 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       behandlingVersjon={3}
     />);
 
-    expect(wrapper.find(Image)).to.have.length(0);
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(Image)).toHaveLength(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
   it('skal vise textarea når fritekst er påkrevet', () => {
@@ -53,8 +52,8 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       behandlingVersjon={3}
     />);
 
-    expect(wrapper.find(Image)).to.have.length(0);
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(Image)).toHaveLength(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
   it('skal ikke vise lenke eller textarea når verdi ikke finnes og en er i readonly-modus', () => {
@@ -69,7 +68,7 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       behandlingVersjon={3}
     />);
 
-    expect(wrapper.find(Image)).to.have.length(0);
-    expect(wrapper.find(TextAreaField)).to.have.length(0);
+    expect(wrapper.find(Image)).toHaveLength(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
 });

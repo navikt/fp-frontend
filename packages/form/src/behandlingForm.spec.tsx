@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import { isRequiredMessage, merEn100ProsentMessage } from '@fpsak-frontend/utils';
 import { getBehandlingFormPrefix, getBehandlingFormRegisteredFields, hasBehandlingFormErrorsOfType } from './behandlingForm';
 
@@ -9,7 +7,7 @@ describe('behandlingForm', () => {
 
   it('skal hente formens behandlingsprefix', () => {
     const prefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
-    expect(prefix).is.eql('behandling_1_v2');
+    expect(prefix).toEqual('behandling_1_v2');
   });
 
   it('skal hente formens registrerte felter', () => {
@@ -25,7 +23,7 @@ describe('behandlingForm', () => {
     const registeredFields = getBehandlingFormRegisteredFields(formName, behandlingId, behandlingVersjon)
       .resultFunc(formState);
 
-    expect(registeredFields).is.eql('test');
+    expect(registeredFields).toEqual('test');
   });
 
   it('skal sjekke at formen har minst ett felt som mangler obligatorisk verdi', () => {
@@ -43,7 +41,7 @@ describe('behandlingForm', () => {
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
       .resultFunc(registeredFields, errors);
 
-    expect(hasError).is.true;
+    expect(hasError).toBe(true);
   });
 
   it('skal sjekke at formen ikke har felter som mangler obligatorisk verdi', () => {
@@ -61,7 +59,7 @@ describe('behandlingForm', () => {
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
       .resultFunc(registeredFields, errors);
 
-    expect(hasError).is.false;
+    expect(hasError).toBe(false);
   });
 
   it('skal sjekke at formen ikke skal sjekke felter som er skjulte for obligatoriske felter', () => {
@@ -79,7 +77,7 @@ describe('behandlingForm', () => {
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
       .resultFunc(registeredFields, errors);
 
-    expect(hasError).is.false;
+    expect(hasError).toBe(false);
   });
 
   it('skal kunne se at obligatorisk felt ikke er utfylt selv når felt-id er nestet', () => {
@@ -101,7 +99,7 @@ describe('behandlingForm', () => {
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
       .resultFunc(registeredFields, errors);
 
-    expect(hasError).is.true;
+    expect(hasError).toBe(true);
   });
 
   it('skal kunne se at obligatorisk felt ikke er utfylt når feil-objektet er en array-struktur', () => {
@@ -123,6 +121,6 @@ describe('behandlingForm', () => {
     const hasError = hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())
       .resultFunc(registeredFields, errors);
 
-    expect(hasError).is.true;
+    expect(hasError).toBe(true);
   });
 });

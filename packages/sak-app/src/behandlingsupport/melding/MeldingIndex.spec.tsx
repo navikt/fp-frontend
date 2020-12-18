@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -71,8 +70,8 @@ describe('<MeldingIndex>', () => {
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
-    expect(index.prop('recipients')).to.eql(recipients);
-    expect(index.prop('templates')).to.eql(templates);
+    expect(index.prop('recipients')).toEqual(recipients);
+    expect(index.prop('templates')).toEqual(templates);
   });
 
   it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', () => {
@@ -93,8 +92,8 @@ describe('<MeldingIndex>', () => {
     previewCallback({ mottaker: 'Søker', brevmalkode: 'Mal1' });
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING);
-    expect(reqData).to.have.length(1);
-    expect(reqData[0].params.fritekst).to.equal(' ');
+    expect(reqData).toHaveLength(1);
+    expect(reqData[0].params.fritekst).toBe(' ');
   });
 
   it('skal lukke av modal', async () => {
@@ -120,17 +119,17 @@ describe('<MeldingIndex>', () => {
     const index = wrapper.find(MeldingerSakIndex);
     const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
 
     await submitCallback(message);
 
     const modal = wrapper.find(MessagesModalSakIndex);
-    expect(modal).to.have.length(1);
+    expect(modal).toHaveLength(1);
 
     const closeEvent = modal.prop('closeEvent') as () => void;
     closeEvent();
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
   });
 
   it('skal sende melding', async () => {
@@ -158,8 +157,8 @@ describe('<MeldingIndex>', () => {
     await submitCallback(message);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
-    expect(reqData).to.have.length(1);
-    expect(reqData[0].params).is.eql({
+    expect(reqData).toHaveLength(1);
+    expect(reqData[0].params).toEqual({
       behandlingId: 1,
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
@@ -191,17 +190,17 @@ describe('<MeldingIndex>', () => {
     const index = wrapper.find(MeldingerSakIndex);
     const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
     await submitCallback(message);
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(1);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(1);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
-    expect(reqData).to.have.length(1);
-    expect(reqData[0].params).is.eql({
+    expect(reqData).toHaveLength(1);
+    expect(reqData[0].params).toEqual({
       behandlingId: 1,
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
@@ -233,17 +232,17 @@ describe('<MeldingIndex>', () => {
     const index = wrapper.find(MeldingerSakIndex);
     const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
     await submitCallback(message);
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(1);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
-    expect(reqData).to.have.length(1);
-    expect(reqData[0].params).is.eql({
+    expect(reqData).toHaveLength(1);
+    expect(reqData[0].params).toEqual({
       behandlingId: 1,
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
@@ -275,17 +274,17 @@ describe('<MeldingIndex>', () => {
     const index = wrapper.find(MeldingerSakIndex);
     const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
     await submitCallback(message);
 
-    expect(wrapper.find(MessagesModalSakIndex)).to.have.length(0);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(1);
+    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
-    expect(reqData).to.have.length(1);
-    expect(reqData[0].params).is.eql({
+    expect(reqData).toHaveLength(1);
+    expect(reqData[0].params).toEqual({
       behandlingId: 1,
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
@@ -322,9 +321,9 @@ describe('<MeldingIndex>', () => {
     const index = wrapper.find(MeldingerSakIndex);
     const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
 
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
     await submitCallback(message);
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(1);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
 
     const formValues = {
       frist: '2017-10-10',
@@ -332,21 +331,21 @@ describe('<MeldingIndex>', () => {
     };
     wrapper.find(SettPaVentModalIndex).prop('submitCallback')(formValues);
 
-    expect(setBehandlingOnHoldCallback).to.have.property('callCount', 1);
+    expect(setBehandlingOnHoldCallback).toHaveProperty('callCount', 1);
     const { args } = setBehandlingOnHoldCallback.getCalls()[0];
-    expect(args).to.have.length(1);
-    expect(args[0]).to.eql({
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual({
       behandlingId: 1,
       behandlingVersjon: 123,
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
     });
 
-    expect(push).to.have.property('callCount', 1);
-    expect(push.getCalls()[0].args).to.have.length(1);
-    expect(push.getCalls()[0].args[0]).to.eql('/');
+    expect(push).toHaveProperty('callCount', 1);
+    expect(push.getCalls()[0].args).toHaveLength(1);
+    expect(push.getCalls()[0].args[0]).toEqual('/');
 
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
     behandlingEventHandler.clear();
   });

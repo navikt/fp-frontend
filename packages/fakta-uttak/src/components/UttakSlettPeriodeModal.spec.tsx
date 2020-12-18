@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -45,23 +44,23 @@ describe('<UttakSlettPeriodeModal>', () => {
       getKodeverknavn={getKodeverknavn}
     />);
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('Perioden slettes');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('contentLabel')).toEqual('Perioden slettes');
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
+    expect(textField).toHaveLength(1);
 
     const okKnapp = wrapper.find(Hovedknapp);
-    expect(okKnapp).to.have.length(1);
-    expect(okKnapp.prop('mini')).is.true;
-    expect(okKnapp.childAt(0).text()).is.eql('OK');
+    expect(okKnapp).toHaveLength(1);
+    expect(okKnapp.prop('mini')).toBe(true);
+    expect(okKnapp.childAt(0).text()).toEqual('OK');
 
     const avbrytKnapp = wrapper.find(Knapp);
-    expect(avbrytKnapp).to.have.length(1);
-    expect(avbrytKnapp.prop('mini')).is.true;
-    expect(avbrytKnapp.childAt(0).text()).is.eql('Avbryt');
+    expect(avbrytKnapp).toHaveLength(1);
+    expect(avbrytKnapp.prop('mini')).toBe(true);
+    expect(avbrytKnapp.childAt(0).text()).toEqual('Avbryt');
   });
   it('skal rendre lukket modal', () => {
     const wrapper = shallowWithIntl(<UttakSlettPeriodeModalImpl
@@ -74,7 +73,7 @@ describe('<UttakSlettPeriodeModal>', () => {
       getKodeverknavn={getKodeverknavn}
     />);
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.false;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(false);
   });
 });

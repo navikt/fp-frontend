@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { NavLink } from 'react-router-dom';
 
 import { Behandling } from '@fpsak-frontend/types';
@@ -56,8 +55,8 @@ describe('<BehandlingPickerItem>', () => {
       getKodeverkFn={getKodeverkFn}
     />);
 
-    expect(wrapper.find(BehandlingPickerItemContent)).has.length(1);
-    expect(wrapper.find(NavLink)).has.length(0);
+    expect(wrapper.find(BehandlingPickerItemContent)).toHaveLength(1);
+    expect(wrapper.find(NavLink)).toHaveLength(0);
   });
 
   it('skal vise behandling med lenke når det kun finnes en behandling og denne ikke er valgt', () => {
@@ -71,8 +70,8 @@ describe('<BehandlingPickerItem>', () => {
       getKodeverkFn={getKodeverkFn}
     />);
 
-    expect(wrapper.find(BehandlingPickerItemContent)).has.length(1);
-    expect(wrapper.find(NavLink)).has.length(1);
+    expect(wrapper.find(BehandlingPickerItemContent)).toHaveLength(1);
+    expect(wrapper.find(NavLink)).toHaveLength(1);
   });
 
   it('skal vise behandling med knapp for visning av alle behandlinger når ingen behandlinger er valgt og innslag er aktivt', () => {
@@ -86,7 +85,7 @@ describe('<BehandlingPickerItem>', () => {
       getKodeverkFn={getKodeverkFn}
     />);
 
-    expect(wrapper.find(BehandlingPickerItemContent)).has.length(1);
-    expect(wrapper.find('button')).has.length(1);
+    expect(wrapper.find(BehandlingPickerItemContent)).toHaveLength(1);
+    expect(wrapper.find('button')).toHaveLength(1);
   });
 });

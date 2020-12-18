@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { History } from 'history';
 import { match } from 'react-router-dom';
@@ -24,8 +23,8 @@ describe('<AppIndex>', () => {
       history={{} as History}
       match={{} as match}
     />);
-    expect(wrapper.find(Dekorator)).to.have.length(1);
-    expect(wrapper.find(Home)).to.have.length(1);
+    expect(wrapper.find(Dekorator)).toHaveLength(1);
+    expect(wrapper.find(Home)).toHaveLength(1);
   });
 
   it('skal vise query-feilmelding', () => {
@@ -41,6 +40,6 @@ describe('<AppIndex>', () => {
     />);
 
     const headerComp = wrapper.find(Dekorator);
-    expect(headerComp.prop('queryStrings')).to.eql({ errormessage: 'Det finnes ingen sak med denne referansen: 266' });
+    expect(headerComp.prop('queryStrings')).toEqual({ errormessage: 'Det finnes ingen sak med denne referansen: 266' });
   });
 });

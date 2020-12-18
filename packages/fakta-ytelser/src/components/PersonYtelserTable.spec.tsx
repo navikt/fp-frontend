@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -59,7 +58,7 @@ describe('<PersonYtelserTable>', () => {
       relatertYtelseStatus={relatertYtelseStatus}
     />);
     const rows = wrapper.find('TableRow');
-    expect(rows).to.have.length(4);
+    expect(rows).toHaveLength(4);
   });
 
   it('skal sjekke visning av ikke eksisterende ytelse', () => {
@@ -70,8 +69,8 @@ describe('<PersonYtelserTable>', () => {
       relatertYtelseStatus={relatertYtelseStatus}
     />);
     const rows = wrapper.find('TableRow');
-    expect(rows.find('Normaltekst').first().childAt(0).text()).to.equal('Foreldrepenger');
-    expect(rows.find('Normaltekst').at(1).childAt(0).text()).to.equal('Ingen');
+    expect(rows.find('Normaltekst').first().childAt(0).text()).toBe('Foreldrepenger');
+    expect(rows.find('Normaltekst').at(1).childAt(0).text()).toBe('Ingen');
   });
 
   it('skal sjekke at viser ytelse informasjon', () => {
@@ -82,15 +81,15 @@ describe('<PersonYtelserTable>', () => {
       relatertYtelseStatus={relatertYtelseStatus}
     />);
     const rows = wrapper.find('TableRow');
-    expect(rows.length).to.equal(4);
+    expect(rows.length).toBe(4);
     expect(rows.at(2).find(Normaltekst).at(0).childAt(0)
-      .text()).to.equal('Sykepenger');
+      .text()).toBe('Sykepenger');
     expect(rows.at(2).find(Normaltekst).at(1).childAt(0)
-      .text()).to.equal('27.05.2018 - ');
+      .text()).toBe('27.05.2018 - ');
     expect(rows.at(2).find(Normaltekst).at(2).childAt(0)
-      .text()).to.equal('Løpende vedtak');
+      .text()).toBe('Løpende vedtak');
     expect(rows.at(2).find(Normaltekst).at(3).childAt(0)
-      .text()).to.equal('1312880731100');
+      .text()).toBe('1312880731100');
   });
 
   it('skal sjekke at ytelse navn ikke vises hvis det ligger mer enn en ytelse av samme type', () => {
@@ -101,12 +100,12 @@ describe('<PersonYtelserTable>', () => {
       relatertYtelseStatus={relatertYtelseStatus}
     />);
     const rows = wrapper.find('TableRow');
-    expect(rows.length).to.equal(4);
+    expect(rows.length).toBe(4);
     expect(rows.at(3).find(Normaltekst).at(0).childAt(0)
-      .text()).to.equal('27.12.2017 - 27.09.2017');
+      .text()).toBe('27.12.2017 - 27.09.2017');
     expect(rows.at(3).find(Normaltekst).at(1).childAt(0)
-      .text()).to.equal('Lukket sak');
+      .text()).toBe('Lukket sak');
     expect(rows.at(3).find(Normaltekst).at(2).childAt(0)
-      .text()).to.equal('1312880731101');
+      .text()).toBe('1312880731101');
   });
 });

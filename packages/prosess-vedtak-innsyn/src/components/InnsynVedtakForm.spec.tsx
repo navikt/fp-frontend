@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -39,7 +38,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(ProsessStegSubmitButton)).to.have.length(1);
+    expect(wrapper.find(ProsessStegSubmitButton)).toHaveLength(1);
   });
 
   it('skal ikke vise bekreft vedtak-knapp når readonly', () => {
@@ -67,7 +66,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(ProsessStegSubmitButton)).to.have.length(0);
+    expect(wrapper.find(ProsessStegSubmitButton)).toHaveLength(0);
   });
 
   //  Tester for readOnly betingelse se-documenter lenke
@@ -96,7 +95,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('InnsynVedtakForm.ForhåndsvisBrev');
+    expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('InnsynVedtakForm.ForhåndsvisBrev');
   });
 
   it('skal vise lenke med tekst InnsynVedtakForm.VisVedtaksbrev ved ikke readOnly', () => {
@@ -124,7 +123,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(FormattedMessage).last().prop('id')).is.equal('InnsynVedtakForm.VisVedtaksbrev');
+    expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('InnsynVedtakForm.VisVedtaksbrev');
   });
 
   // Tester for når TextAreaField skal vises
@@ -153,7 +152,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
   it('skal vise TextAreaField når resultat lik DELVISTINNVILGET', () => {
@@ -181,7 +180,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
   it('skal ikke vise TextAreaField når resultat lik INNVILGET', () => {
@@ -209,7 +208,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(TextAreaField)).to.have.length(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
 
   // Tester for når DocumentListVedtakInnsyn skal vises
@@ -238,7 +237,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(1);
+    expect(wrapper.find('DocumentListVedtakInnsyn')).toHaveLength(1);
   });
 
   it('skal vise DocumentListVedtakInnsyn når resultat lik DELVISTINNVILGET', () => {
@@ -266,7 +265,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(1);
+    expect(wrapper.find('DocumentListVedtakInnsyn')).toHaveLength(1);
   });
 
   it('skal ikke vise DocumentListVedtakInnsyn når resultat lik AVVIST', () => {
@@ -294,7 +293,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find('DocumentListVedtakInnsyn')).to.have.length(0);
+    expect(wrapper.find('DocumentListVedtakInnsyn')).toHaveLength(0);
   });
 
   // Tester for riktig resultat-tekst
@@ -323,7 +322,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Innvilget');
+    expect(wrapper.find(FormattedMessage).at(2).prop('id')).toBe('InnsynVedtakForm.Innvilget');
   });
 
   it('skal vise resultattekst for delvis innvilget når resultat = DELVISINNVILGET', () => {
@@ -351,7 +350,7 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Delvis');
+    expect(wrapper.find(FormattedMessage).at(2).prop('id')).toBe('InnsynVedtakForm.Delvis');
   });
 
   it('skal vise resultattekst for avvist når resultat = AVVIST', () => {
@@ -379,6 +378,6 @@ describe('<InnsynVedtakForm>', () => {
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
     />);
-    expect(wrapper.find(FormattedMessage).at(2).prop('id')).is.equal('InnsynVedtakForm.Avslatt');
+    expect(wrapper.find(FormattedMessage).at(2).prop('id')).toBe('InnsynVedtakForm.Avslatt');
   });
 });

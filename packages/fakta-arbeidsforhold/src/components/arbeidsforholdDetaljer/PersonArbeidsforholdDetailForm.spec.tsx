@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -66,7 +65,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(TextAreaField)).has.length(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
   it('skal vise panel for å velge nytt eller erstatte når behandling er i bruk og en har gamle arbeidsforhold for samme org', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -96,7 +95,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
-    expect(panel).to.be.length(1);
+    expect(panel).toHaveLength(1);
   });
   it('skal ikke vise panel for å velge nytt eller erstatte når behandling ikke er i bruk', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -126,7 +125,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
-    expect(panel).to.be.length(0);
+    expect(panel).toHaveLength(0);
   });
   it('skal ikke vise panel for å velge nytt eller erstatte når behandling ikke har gamle arbeidsforhold for samme org', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -156,7 +155,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const panel = wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel);
-    expect(panel).to.be.length(0);
+    expect(panel).toHaveLength(0);
   });
   it('skal vise tekst for å erstatte alle tidligere arbeidsforhold når behandling er i bruk og flagget harErstattetEttEllerFlere er satt', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -186,7 +185,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(1);
+    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).toHaveLength(1);
   });
   it('skal ikke vise tekst for å erstatte alle tidligere arbeidsforhold når behandling ikke er i bruk', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -216,7 +215,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
+    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).toHaveLength(0);
   });
   it('skal ikke vise tekst for å erstatte alle tidligere arbeidsforhold når flagget harErstattetEttEllerFlere ikke er satt', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -245,7 +244,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
+    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).toHaveLength(0);
   });
   it('skal vise LeggTilArbeidsforholdFelter', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -275,7 +274,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
-    expect(radiogroup).has.length(1);
+    expect(radiogroup).toHaveLength(1);
   });
   it('skal ikke vise LeggTilArbeidsforholdFelter', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -305,7 +304,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const radiogroup = wrapper.find(LeggTilArbeidsforholdFelter);
-    expect(radiogroup).has.length(0);
+    expect(radiogroup).toHaveLength(0);
   });
   it('skal ikke vise tekst for å erstatte alle tidligere arbeidsforhold eller NyttEllerErstattPanel når handlingen er undefined', () => {
     const wrapper = shallow(<PersonArbeidsforholdDetailForm
@@ -334,7 +333,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
       validate={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).has.length(0);
-    expect(wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel)).has.length(0);
+    expect(wrapper.find('[id="PersonArbeidsforholdDetailForm.ErstatteTidligereArbeidsforhod"]')).toHaveLength(0);
+    expect(wrapper.find(PersonNyttEllerErstattArbeidsforholdPanel)).toHaveLength(0);
   });
 });

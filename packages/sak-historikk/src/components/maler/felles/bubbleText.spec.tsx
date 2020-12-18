@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -17,7 +16,7 @@ describe('<BubbleText>', () => {
       bodyText={bodyText}
       cutOffLength={cutOffLength}
     />);
-    expect(wrapper.find('div').text()).is.eql('My body...');
+    expect(wrapper.find('div').text()).toEqual('My body...');
   });
 
   it('skal vise chevron ned om teksten er cutoff', () => {
@@ -29,7 +28,7 @@ describe('<BubbleText>', () => {
       cutOffLength={cutOffLength}
     />);
     const nedChevron = wrapper.find(NedChevron);
-    expect(nedChevron).to.have.length(1);
+    expect(nedChevron).toHaveLength(1);
   });
 
   it('skal vise chevron opp om man klikker på chevron', () => {
@@ -43,7 +42,7 @@ describe('<BubbleText>', () => {
     const x = wrapper.find('a');
     x.simulate('click');
     const oppChevron = wrapper.find(OppChevron);
-    expect(oppChevron).to.have.length(1);
+    expect(oppChevron).toHaveLength(1);
   });
 
   it('skal vise hele teksten om cutoffpointen vi sender er størren en teksten', () => {
@@ -55,6 +54,6 @@ describe('<BubbleText>', () => {
       cutOffLength={cutOffLength}
     />);
 
-    expect(wrapper.find('div').text()).is.eql('My bodytekst is the only thing tha keeps me awa...');
+    expect(wrapper.find('div').text()).toEqual('My bodytekst is the only thing tha keeps me awa...');
   });
 });

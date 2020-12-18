@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
@@ -19,8 +18,8 @@ describe('<PreviewAnkeLink>', () => {
       />,
     );
 
-    expect(wrapper.find('span')).has.length(0);
-    expect(wrapper.find('a')).has.length(1);
+    expect(wrapper.find('span')).toHaveLength(0);
+    expect(wrapper.find('a')).toHaveLength(1);
   });
 
   it('skal ikke vise trykkbar lenke ved readonly', () => {
@@ -32,8 +31,8 @@ describe('<PreviewAnkeLink>', () => {
       />,
     );
 
-    expect(wrapper.find('span')).has.length(1);
-    expect(wrapper.find('a')).has.length(0);
+    expect(wrapper.find('span')).toHaveLength(1);
+    expect(wrapper.find('a')).toHaveLength(0);
   });
 
   it('skal forhåndsvise data ved klikk på lenke', () => {
@@ -54,10 +53,10 @@ describe('<PreviewAnkeLink>', () => {
     const lenke = wrapper.find('a');
     lenke.prop('onClick')({ preventDefault: () => undefined } as React.MouseEvent);
 
-    expect(forhandsvis.called).is.true;
+    expect(forhandsvis.called).toBe(true);
     const { args } = forhandsvis.getCalls()[0];
-    expect(args).has.length(1);
-    expect(args[0]).is.eql({
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual({
       dokumentMal: dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING,
       fritekst: 'Dette er en fritekst',
       mottaker: '',

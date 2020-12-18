@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -28,7 +27,7 @@ describe('<ForeldrepengerForm>', () => {
       sokerHarAleneomsorg
       validate={sinon.spy()}
     />);
-    expect(wrapper.find(FodselPapirsoknadIndex)).has.length(1);
+    expect(wrapper.find(FodselPapirsoknadIndex)).toHaveLength(1);
   });
 
   it('skal vise adopsjonspaneler når familieHendelseType er lik adopsjon', () => {
@@ -44,6 +43,6 @@ describe('<ForeldrepengerForm>', () => {
       sokerHarAleneomsorg
       validate={sinon.spy()}
     />);
-    expect(wrapper.find(OmsorgOgAdopsjonPapirsoknadIndex)).has.length(1);
+    expect(wrapper.find(OmsorgOgAdopsjonPapirsoknadIndex)).toHaveLength(1);
   });
 });

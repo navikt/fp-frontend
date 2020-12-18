@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { FieldArrayMetaProps } from 'redux-form';
 
@@ -23,13 +22,13 @@ describe('<TilretteleggingForArbeidsgiverFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     // @ts-ignore
     const innerWrapper = shallow(comp);
 
-    expect(innerWrapper.find(SelectField)).has.length(1);
+    expect(innerWrapper.find(SelectField)).toHaveLength(1);
   });
 });

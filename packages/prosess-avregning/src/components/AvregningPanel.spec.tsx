@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -62,20 +61,20 @@ describe('<AvregningPanelImpl>', () => {
     />);
 
     const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).to.have.length(2);
-    expect(formattedMessage.first().prop('id')).is.eql('Avregning.Title');
+    expect(formattedMessage).toHaveLength(2);
+    expect(formattedMessage.first().prop('id')).toEqual('Avregning.Title');
     const undertittel = wrapper.find(Undertittel);
-    expect(undertittel).has.length(1);
+    expect(undertittel).toHaveLength(1);
     const avregningSummary = wrapper.find(AvregningSummary);
-    expect(avregningSummary).has.length(1);
+    expect(avregningSummary).toHaveLength(1);
     const avregningTable = wrapper.find(AvregningTable);
-    expect(avregningTable).has.length(1);
+    expect(avregningTable).toHaveLength(1);
     const row = wrapper.find(Row);
-    expect(row).has.length(1);
+    expect(row).toHaveLength(1);
     const column = wrapper.find(Column);
-    expect(column).has.length(1);
+    expect(column).toHaveLength(1);
     const form = wrapper.find('form');
-    expect(form).has.length(0);
+    expect(form).toHaveLength(0);
   });
 
   it('skal rendre form med RadioGroup med to valg når aksjonspunkt 5084 er aktivt', () => {
@@ -88,18 +87,18 @@ describe('<AvregningPanelImpl>', () => {
     />);
 
     const form = wrapper.find('form');
-    expect(form).has.length(1);
+    expect(form).toHaveLength(1);
     const radioGroupField = wrapper.find(RadioGroupField);
-    expect(radioGroupField).has.length(1);
-    expect(radioGroupField.at(0).prop('name')).is.eql('videreBehandling');
+    expect(radioGroupField).toHaveLength(1);
+    expect(radioGroupField.at(0).prop('name')).toEqual('videreBehandling');
     const radioOption = wrapper.find(RadioOption);
-    expect(radioOption).has.length(3);
+    expect(radioOption).toHaveLength(3);
     const radioOptionGjennomfør = radioOption.at(0);
-    expect(radioOptionGjennomfør.prop('label')).is.eql(<FormattedMessage id="Avregning.gjennomfør" />);
+    expect(radioOptionGjennomfør.prop('label')).toEqual(<FormattedMessage id="Avregning.gjennomfør" />);
     const radioOptionOpprett = radioOption.at(1);
-    expect(radioOptionOpprett.prop('label')).is.eql(<FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />);
+    expect(radioOptionOpprett.prop('label')).toEqual(<FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />);
     const radioOptionAvvent = radioOption.at(2);
-    expect(radioOptionAvvent.prop('label')).is.eql(<FormattedMessage id="Avregning.avvent" />);
+    expect(radioOptionAvvent.prop('label')).toEqual(<FormattedMessage id="Avregning.avvent" />);
   });
 
   it('method toggleDetails skal oppdatere og toggle tabeler med showDetails state', () => {
@@ -108,13 +107,13 @@ describe('<AvregningPanelImpl>', () => {
       {...mockProps}
     />);
 
-    expect(wrapper.state('showDetails')).is.eql([]);
+    expect(wrapper.state('showDetails')).toEqual([]);
     // @ts-ignore
     wrapper.instance().toggleDetails(id);
-    expect(wrapper.state('showDetails')).is.eql([{ id, show: true }]);
+    expect(wrapper.state('showDetails')).toEqual([{ id, show: true }]);
     // @ts-ignore
     wrapper.instance().toggleDetails(id);
-    expect(wrapper.state('showDetails')).is.eql([{ id, show: false }]);
+    expect(wrapper.state('showDetails')).toEqual([{ id, show: false }]);
   });
 
   it('feilutbetaling oppdateres ikke når aksjonspunkt er ikke 5085', () => {
@@ -127,9 +126,9 @@ describe('<AvregningPanelImpl>', () => {
       {...props}
     />);
 
-    expect(wrapper.state('feilutbetaling')).is.eql(undefined);
+    expect(wrapper.state('feilutbetaling')).toEqual(undefined);
     wrapper.setProps({ erTilbakekrevingVilkårOppfylt: true });
-    expect(wrapper.state('feilutbetaling')).is.eql(undefined);
+    expect(wrapper.state('feilutbetaling')).toEqual(undefined);
   });
 
   it('skal vise tekst for åpen tilbakekrevingsbehandling', () => {
@@ -143,7 +142,7 @@ describe('<AvregningPanelImpl>', () => {
       {...props}
     />);
 
-    expect(wrapper.find('[id="Avregning.ApenTilbakekrevingsbehandling"]')).has.length(1);
+    expect(wrapper.find('[id="Avregning.ApenTilbakekrevingsbehandling"]')).toHaveLength(1);
   });
 
   it('skal ikke vise tekst for åpen tilbakekrevingsbehandling', () => {
@@ -157,7 +156,7 @@ describe('<AvregningPanelImpl>', () => {
       {...props}
     />);
 
-    expect(wrapper.find('[id="Avregning.ApenTilbakekrevingsbehandling"]')).has.length(0);
+    expect(wrapper.find('[id="Avregning.ApenTilbakekrevingsbehandling"]')).toHaveLength(0);
   });
 
   it('transform values skal returnere inntrekk som videre behandling gitt at vilkår er oppfylt og grunnerTilReduksjon er false', () => {
@@ -169,8 +168,8 @@ describe('<AvregningPanelImpl>', () => {
     const apCode = '5084';
 
     const transformedValues = transformValues(values, apCode);
-    expect(transformedValues.kode).is.eql(apCode);
-    expect(transformedValues.videreBehandling).is.eql(tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
+    expect(transformedValues.kode).toEqual(apCode);
+    expect(transformedValues.videreBehandling).toEqual(tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
   });
 
   it('transform values skal returnere verdi av videre behandling gitt at vilkår er oppfylt og grunnerTilReduksjon er true', () => {
@@ -181,9 +180,9 @@ describe('<AvregningPanelImpl>', () => {
     const apCode = '5084';
 
     const transformedValuesInfotrygd = transformValues({ ...values, videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD }, apCode);
-    expect(transformedValuesInfotrygd.kode).is.eql(apCode);
-    expect(transformedValuesInfotrygd.videreBehandling).is.eql(tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
+    expect(transformedValuesInfotrygd.kode).toEqual(apCode);
+    expect(transformedValuesInfotrygd.videreBehandling).toEqual(tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
     const transformedValuesIgnorer = transformValues({ ...values, videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER }, apCode);
-    expect(transformedValuesIgnorer.videreBehandling).is.eql(tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER);
+    expect(transformedValuesIgnorer.videreBehandling).toEqual(tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER);
   });
 });

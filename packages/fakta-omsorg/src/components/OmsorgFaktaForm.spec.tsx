@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
 
@@ -65,8 +64,8 @@ describe('<OmsorgFaktaForm>', () => {
     />);
 
     const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).to.have.length(1);
-    expect(formattedMessage.first().prop('id')).to.eql('OmsorgFaktaForm.OppgittAleneomsorg');
+    expect(formattedMessage).toHaveLength(1);
+    expect(formattedMessage.first().prop('id')).toEqual('OmsorgFaktaForm.OppgittAleneomsorg');
   });
 
   it('skal vise tekst for omsorg', () => {
@@ -83,8 +82,8 @@ describe('<OmsorgFaktaForm>', () => {
     />);
 
     const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).to.have.length(1);
-    expect(formattedMessage.first().prop('id')).to.eql('OmsorgFaktaForm.OppgittIkkeOmsorg');
+    expect(formattedMessage).toHaveLength(1);
+    expect(formattedMessage.first().prop('id')).toEqual('OmsorgFaktaForm.OppgittIkkeOmsorg');
   });
 
   it('skal vise form - med <IkkeOmsorgPeriodeField>', () => {
@@ -101,28 +100,28 @@ describe('<OmsorgFaktaForm>', () => {
     />);
 
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).to.have.length(2);
-    expect(radioGroup.first().prop('name')).is.eql('aleneomsorg');
-    expect(radioGroup.last().prop('name')).is.eql('omsorg');
+    expect(radioGroup).toHaveLength(2);
+    expect(radioGroup.first().prop('name')).toEqual('aleneomsorg');
+    expect(radioGroup.last().prop('name')).toEqual('omsorg');
 
     const radioFieldsGroup1 = radioGroup.first().find('RadioOption');
-    expect(radioFieldsGroup1).to.have.length(2);
-    expect(radioFieldsGroup1.first().prop('value')).to.eql(true);
+    expect(radioFieldsGroup1).toHaveLength(2);
+    expect(radioFieldsGroup1.first().prop('value')).toEqual(true);
     // @ts-ignore Fiks
-    expect(radioFieldsGroup1.first().prop('label').id).to.eql('OmsorgFaktaForm.HarAleneomsorg');
-    expect(radioFieldsGroup1.last().prop('value')).to.eql(false);
+    expect(radioFieldsGroup1.first().prop('label').id).toEqual('OmsorgFaktaForm.HarAleneomsorg');
+    expect(radioFieldsGroup1.last().prop('value')).toEqual(false);
     // @ts-ignore Fiks
-    expect(radioFieldsGroup1.last().prop('label').props.id).to.eql('OmsorgFaktaForm.HarIkkeAleneomsorg');
+    expect(radioFieldsGroup1.last().prop('label').props.id).toEqual('OmsorgFaktaForm.HarIkkeAleneomsorg');
 
     const radioFieldsGroup2 = radioGroup.last().find('RadioOption');
-    expect(radioFieldsGroup2).to.have.length(2);
-    expect(radioFieldsGroup2.first().prop('value')).to.eql(true);
+    expect(radioFieldsGroup2).toHaveLength(2);
+    expect(radioFieldsGroup2.first().prop('value')).toEqual(true);
     // @ts-ignore Fiks
-    expect(radioFieldsGroup2.first().prop('label').id).to.eql('OmsorgFaktaForm.HarOmsorg');
-    expect(radioFieldsGroup2.last().prop('value')).to.eql(false);
+    expect(radioFieldsGroup2.first().prop('label').id).toEqual('OmsorgFaktaForm.HarOmsorg');
+    expect(radioFieldsGroup2.last().prop('value')).toEqual(false);
     // @ts-ignore Fiks
-    expect(radioFieldsGroup2.last().prop('label').props.id).to.eql('OmsorgFaktaForm.HarIkkeOmsorg');
-    expect(wrapper.find('FieldArray')).to.have.length(1);
+    expect(radioFieldsGroup2.last().prop('label').props.id).toEqual('OmsorgFaktaForm.HarIkkeOmsorg');
+    expect(wrapper.find('FieldArray')).toHaveLength(1);
   });
 
   it('skal vise form - uten <IkkeOmsorgPeriodeField>', () => {
@@ -137,8 +136,8 @@ describe('<OmsorgFaktaForm>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
     />);
-    expect(wrapper.find('RadioGroupField')).to.have.length(2);
-    expect(wrapper.find('FieldArray')).to.have.length(0);
+    expect(wrapper.find('RadioGroupField')).toHaveLength(2);
+    expect(wrapper.find('FieldArray')).toHaveLength(0);
   });
 
   it('skal sette opp initielle verdier fra behandling', () => {
@@ -152,7 +151,7 @@ describe('<OmsorgFaktaForm>', () => {
     ];
     const initialValues = OmsorgFaktaForm.buildInitialValues(ytelseFordeling, aksjonspunkter);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       aleneomsorg: null,
       omsorg: null,
       ikkeOmsorgPerioder: [{

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { mount } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { act } from 'react-dom/test-utils';
 
@@ -71,9 +70,9 @@ describe('<RestApiContext>', () => {
     ));
 
     // Må sjekke resultatet via funksjon fordi per i dag blir ikke output fra TestGlobalData korrekt oppdatert
-    expect(setValue.calledTwice).to.true;
+    expect(setValue.calledTwice).toBe(true);
     const { args } = setValue.getCalls()[1];
-    expect(args).has.length(1);
-    expect(args[0]).is.eql(dataHentetFraBackend);
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual(dataHentetFraBackend);
   });
 });

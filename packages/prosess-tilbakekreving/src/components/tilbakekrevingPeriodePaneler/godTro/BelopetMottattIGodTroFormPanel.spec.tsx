@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { InputField } from '@fpsak-frontend/form';
@@ -13,7 +12,7 @@ describe('<BelopetMottattIGodTroFormPanel>', () => {
       erBelopetIBehold
     />);
 
-    expect(wrapper.find(InputField)).to.have.length(1);
+    expect(wrapper.find(InputField)).toHaveLength(1);
   });
 
   it('skal ikke måtte oppgi beløp som skal tilbakekreves når beløpet ikke er i behold', () => {
@@ -22,6 +21,6 @@ describe('<BelopetMottattIGodTroFormPanel>', () => {
       erBelopetIBehold={false}
     />);
 
-    expect(wrapper.find(InputField)).to.have.length(0);
+    expect(wrapper.find(InputField)).toHaveLength(0);
   });
 });

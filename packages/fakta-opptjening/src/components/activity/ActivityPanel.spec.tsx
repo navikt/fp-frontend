@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -58,8 +57,8 @@ describe('<ActivityPanel>', () => {
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
-    expect(periodevelger).to.have.length(1);
-    expect(periodevelger.prop('readOnly')).is.false;
+    expect(periodevelger).toHaveLength(1);
+    expect(periodevelger.prop('readOnly')).toBe(false);
   });
 
   it('skal vise periodevelger som aktiv når aktivitet er manuelt lagt til', () => {
@@ -95,8 +94,8 @@ describe('<ActivityPanel>', () => {
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
-    expect(periodevelger).to.have.length(1);
-    expect(periodevelger.prop('readOnly')).is.false;
+    expect(periodevelger).toHaveLength(1);
+    expect(periodevelger.prop('readOnly')).toBe(false);
   });
 
   it('skal vise periodevelger som aktiv når aktivitet er markert med erEndret', () => {
@@ -132,8 +131,8 @@ describe('<ActivityPanel>', () => {
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
-    expect(periodevelger).to.have.length(1);
-    expect(periodevelger.prop('readOnly')).is.false;
+    expect(periodevelger).toHaveLength(1);
+    expect(periodevelger.prop('readOnly')).toBe(false);
   });
 
   it('skal vise periodevelger som disablet når aktivitet er godkjent automatisk og en ikke har aksjonspunkt', () => {
@@ -169,8 +168,8 @@ describe('<ActivityPanel>', () => {
     />);
 
     const periodevelger = wrapper.find(PeriodpickerField);
-    expect(periodevelger).to.have.length(1);
-    expect(periodevelger.prop('readOnly')).is.true;
+    expect(periodevelger).toHaveLength(1);
+    expect(periodevelger.prop('readOnly')).toBe(true);
   });
 
   it('skal vise antall månder og dager i valgt periode', () => {
@@ -206,8 +205,8 @@ describe('<ActivityPanel>', () => {
     />);
 
     const daysInPeriodLabel = wrapper.find(FormattedMessage);
-    expect(daysInPeriodLabel).to.have.length(2);
-    expect(daysInPeriodLabel.at(1).prop('values')).is.eql({
+    expect(daysInPeriodLabel).toHaveLength(2);
+    expect(daysInPeriodLabel.at(1).prop('values')).toEqual({
       days: 17,
       months: 4,
     });
@@ -246,9 +245,9 @@ describe('<ActivityPanel>', () => {
     />);
 
     const select = wrapper.find(SelectField);
-    expect(select).to.have.length(1);
-    expect(select.prop('selectValues').map((sv: any) => sv.key)).is.eql([OAType.ARBEID, OAType.NARING]);
-    expect(select.prop('readOnly')).is.false;
+    expect(select).toHaveLength(1);
+    expect(select.prop('selectValues').map((sv: any) => sv.key)).toEqual([OAType.ARBEID, OAType.NARING]);
+    expect(select.prop('readOnly')).toBe(false);
   });
 
   it('skal kun vise valgt opptjeningsaktivitet når aktivitet ikke manuelt er lagt til', () => {
@@ -284,8 +283,8 @@ describe('<ActivityPanel>', () => {
     />);
 
     const select = wrapper.find(SelectField);
-    expect(select).to.have.length(1);
-    expect(select.prop('readOnly')).is.true;
+    expect(select).toHaveLength(1);
+    expect(select.prop('readOnly')).toBe(true);
   });
 
   it('skal kunne oppdatere aktivitet når den er del av aksjonspunktet', () => {
@@ -320,8 +319,8 @@ describe('<ActivityPanel>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(1);
-    expect(wrapper.find(RadioGroupField)).to.have.length(1);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
+    expect(wrapper.find(RadioGroupField)).toHaveLength(1);
   });
 
   it('skal ikke kunne oppdatere aktivitet når den ikke er manuelt lagt til eller del av aksjonspunkt', () => {
@@ -356,7 +355,7 @@ describe('<ActivityPanel>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(0);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(0);
   });
 
   it('skal ikke kunne godkjenne eller avvise aksjonspunkt når aktivitet manuelt er lagt til', () => {
@@ -391,8 +390,8 @@ describe('<ActivityPanel>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(Hovedknapp)).to.have.length(1);
-    expect(wrapper.find(RadioGroupField)).to.have.length(0);
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
+    expect(wrapper.find(RadioGroupField)).toHaveLength(0);
   });
 
   it('skal vise uredigerbar begrunnelse hvis readOnly er true', () => {
@@ -428,10 +427,10 @@ describe('<ActivityPanel>', () => {
       onSubmit={sinon.spy()}
     />);
     const tekstFelt = wrapper.find(TextAreaField);
-    expect(tekstFelt).to.have.length(1);
-    expect(tekstFelt.props().readOnly).to.eql(true);
+    expect(tekstFelt).toHaveLength(1);
+    expect(tekstFelt.props().readOnly).toEqual(true);
     // @ts-ignore
-    expect(tekstFelt.props().label.props.id).to.eql('ActivityPanel.Begrunnelse');
+    expect(tekstFelt.props().label.props.id).toEqual('ActivityPanel.Begrunnelse');
   });
 
   it('skal vise uredigerbar begrunnelse hvis man skal disable perioder picker', () => {
@@ -467,10 +466,10 @@ describe('<ActivityPanel>', () => {
       onSubmit={sinon.spy()}
     />);
     const tekstFelt = wrapper.find(TextAreaField);
-    expect(tekstFelt).to.have.length(1);
-    expect(tekstFelt.props().readOnly).to.eql(true);
+    expect(tekstFelt).toHaveLength(1);
+    expect(tekstFelt.props().readOnly).toEqual(true);
     // @ts-ignore
-    expect(tekstFelt.props().label.props.id).to.eql('ActivityPanel.Begrunnelse');
+    expect(tekstFelt.props().label.props.id).toEqual('ActivityPanel.Begrunnelse');
   });
 
   it('skal vise redigerbar begrunnelse hvis man ikke skal disable perioder picker og ikke readOnly', () => {
@@ -506,9 +505,9 @@ describe('<ActivityPanel>', () => {
       onSubmit={sinon.spy()}
     />);
     const tekstFelt = wrapper.find(TextAreaField);
-    expect(tekstFelt).to.have.length(1);
-    expect(tekstFelt.props().readOnly).to.eql(false);
+    expect(tekstFelt).toHaveLength(1);
+    expect(tekstFelt.props().readOnly).toEqual(false);
     // @ts-ignore
-    expect(tekstFelt.props().label.props.id).to.eql('ActivityPanel.BegrunnEndringene');
+    expect(tekstFelt.props().label.props.id).toEqual('ActivityPanel.BegrunnEndringene');
   });
 });

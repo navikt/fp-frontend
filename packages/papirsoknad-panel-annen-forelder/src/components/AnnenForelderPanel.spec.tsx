@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -29,16 +28,16 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithoutFornavn = validate({});
         const errorsWithFornavn = validate({ fornavn: 'Ola' });
 
-        expect(errorsWithoutFornavn.fornavn).to.eql('Feltet må fylles ut');
-        expect(errorsWithFornavn.fornavn).to.not.exist;
+        expect(errorsWithoutFornavn.fornavn).toEqual('Feltet må fylles ut');
+        expect(errorsWithFornavn.fornavn).toBeFalsy();
       });
 
       it('skal validere etternavn', () => {
         const errorsWithoutEtternavn = validate({});
         const errorsWithEtternavn = validate({ etternavn: 'Ola' });
 
-        expect(errorsWithoutEtternavn.etternavn).to.eql('Feltet må fylles ut');
-        expect(errorsWithEtternavn.etternavn).to.not.exist;
+        expect(errorsWithoutEtternavn.etternavn).toEqual('Feltet må fylles ut');
+        expect(errorsWithEtternavn.etternavn).toBeFalsy();
       });
 
       /**
@@ -49,9 +48,9 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithInvalidFoedselsnummer = validate({ foedselsnummer: 'Ola' });
         const errorsWithValidFoedselsnummer = validate({ foedselsnummer: '08057949997' });
 
-        expect(errorsWithNoFoedselsnummer.foedselsnummer).to.eql('Feltet må fylles ut');
-        expect(errorsWithInvalidFoedselsnummer.foedselsnummer).to.eql('Feltet må være et fødselsnummer (11 siffer)');
-        expect(errorsWithValidFoedselsnummer.foedselsnummer).to.not.exist;
+        expect(errorsWithNoFoedselsnummer.foedselsnummer).toEqual('Feltet må fylles ut');
+        expect(errorsWithInvalidFoedselsnummer.foedselsnummer).toEqual('Feltet må være et fødselsnummer (11 siffer)');
+        expect(errorsWithValidFoedselsnummer.foedselsnummer).toBeFalsy();
       });
     });
 
@@ -63,8 +62,8 @@ describe('<AnnenForelderPanel>', () => {
         const errorsWithNoArsak = validateBegrunnelse({});
         const errorsWithArsak = validateBegrunnelse({ arsak: 'En årsak' });
 
-        expect(errorsWithNoArsak.kanIkkeOppgiBegrunnelse.arsak).to.eql('Feltet må fylles ut');
-        expect(errorsWithArsak.kanIkkeOppgiBegrunnelse.arsak).to.not.exist;
+        expect(errorsWithNoArsak.kanIkkeOppgiBegrunnelse.arsak).toEqual('Feltet må fylles ut');
+        expect(errorsWithArsak.kanIkkeOppgiBegrunnelse.arsak).toBeFalsy();
       });
     });
   });
@@ -93,13 +92,13 @@ describe('<AnnenForelderPanel>', () => {
     />);
 
     let begrunnelse = wrapper.find({ name: 'kanIkkeOppgiBegrunnelse' });
-    expect(begrunnelse).to.have.length(0);
+    expect(begrunnelse).toHaveLength(0);
 
     wrapper.setProps({ kanIkkeOppgiAnnenForelder: true });
     wrapper.update();
 
     begrunnelse = wrapper.find({ name: 'kanIkkeOppgiBegrunnelse' });
-    expect(begrunnelse).to.have.length(1);
+    expect(begrunnelse).toHaveLength(1);
   });
 
   describe('<KanIkkeOppgiBegrunnelseForm>', () => {
@@ -113,16 +112,16 @@ describe('<AnnenForelderPanel>', () => {
 
       let land = wrapper.find({ name: 'land' });
       let utenlandskFoedselsnummer = wrapper.find({ name: 'utenlandskFoedselsnummer' });
-      expect(land).to.have.length(0);
-      expect(utenlandskFoedselsnummer).to.have.length(0);
+      expect(land).toHaveLength(0);
+      expect(utenlandskFoedselsnummer).toHaveLength(0);
 
       wrapper.setProps({ kanIkkeOppgiBegrunnelse: { arsak: kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR } });
       wrapper.update();
       land = wrapper.find({ name: 'land' });
       utenlandskFoedselsnummer = wrapper.find({ name: 'utenlandskFoedselsnummer' });
 
-      expect(land).to.have.length(1);
-      expect(utenlandskFoedselsnummer).to.have.length(1);
+      expect(land).toHaveLength(1);
+      expect(utenlandskFoedselsnummer).toHaveLength(1);
     });
   });
 });

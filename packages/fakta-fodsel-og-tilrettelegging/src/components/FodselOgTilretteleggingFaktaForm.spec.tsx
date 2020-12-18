@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { AlertStripeFeil, AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -80,15 +79,15 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     />);
 
     const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
-    expect(tilretteleggingArbeidsforholdSection).has.length(2);
+    expect(tilretteleggingArbeidsforholdSection).toHaveLength(2);
     const datepicker = wrapper.find(DatepickerField);
-    expect(datepicker).has.length(1);
+    expect(datepicker).toHaveLength(1);
     const begrunnelsefelt = wrapper.find(TextAreaField);
-    expect(begrunnelsefelt).has.length(1);
+    expect(begrunnelsefelt).toHaveLength(1);
     const submitButton = wrapper.find(FaktaSubmitButton);
-    expect(submitButton).has.length(1);
+    expect(submitButton).toHaveLength(1);
     const alertStripe = wrapper.find(AlertStripeFeil);
-    expect(alertStripe).has.length(0);
+    expect(alertStripe).toHaveLength(0);
   });
 
   it('skal vise faktaform med fødelsedato', () => {
@@ -113,15 +112,15 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     />);
 
     const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
-    expect(tilretteleggingArbeidsforholdSection).has.length(2);
+    expect(tilretteleggingArbeidsforholdSection).toHaveLength(2);
     const datepicker = wrapper.find(DatepickerField);
-    expect(datepicker).has.length(2);
+    expect(datepicker).toHaveLength(2);
     const begrunnelsefelt = wrapper.find(TextAreaField);
-    expect(begrunnelsefelt).has.length(1);
+    expect(begrunnelsefelt).toHaveLength(1);
     const submitButton = wrapper.find(FaktaSubmitButton);
-    expect(submitButton).has.length(1);
+    expect(submitButton).toHaveLength(1);
     const alertStripe = wrapper.find(AlertStripeFeil);
-    expect(alertStripe).has.length(0);
+    expect(alertStripe).toHaveLength(0);
   });
 
   it('skal vise AlertStripe når formprops.error er satt', () => {
@@ -147,15 +146,15 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     />);
 
     const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
-    expect(tilretteleggingArbeidsforholdSection).has.length(2);
+    expect(tilretteleggingArbeidsforholdSection).toHaveLength(2);
     const datepicker = wrapper.find(DatepickerField);
-    expect(datepicker).has.length(2);
+    expect(datepicker).toHaveLength(2);
     const begrunnelsefelt = wrapper.find(TextAreaField);
-    expect(begrunnelsefelt).has.length(1);
+    expect(begrunnelsefelt).toHaveLength(1);
     const submitButton = wrapper.find(FaktaSubmitButton);
-    expect(submitButton).has.length(1);
+    expect(submitButton).toHaveLength(1);
     const alertStripe = wrapper.find(AlertStripeFeil);
-    expect(alertStripe).has.length(1);
+    expect(alertStripe).toHaveLength(1);
   });
 
   it('skal validere OK', () => {
@@ -178,7 +177,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     };
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
-    expect(errors).is.eql({});
+    expect(errors).toEqual({});
   });
 
   it('skal vise feilmelding når ingen arbeidsforhold skal brukes', () => {
@@ -202,7 +201,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
 
     // @ts-ignore
     // eslint-disable-next-line no-underscore-dangle
-    expect(errors._error).is.eql('FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes');
+    expect(errors._error).toEqual('FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes');
   });
 
   it('skal finne duplikate datoer innenfor et arbeidsforhold', () => {
@@ -229,7 +228,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     };
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
-    expect(errors).is.eql({
+    expect(errors).toEqual({
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
         tilretteleggingDatoer: [{
           fom: [{
@@ -257,7 +256,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     };
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
-    expect(errors).is.eql({
+    expect(errors).toEqual({
       termindato: [{
         id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato',
       }],
@@ -282,7 +281,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     };
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
-    expect(errors).is.eql({
+    expect(errors).toEqual({
       termindato: [{
         id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato',
       }],
@@ -307,7 +306,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     };
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
 
-    expect(errors).is.eql({});
+    expect(errors).toEqual({});
   });
 
   it('skal vise alert-info når arbeidsgiver ikke finnes i arbeidsforhold i inntektArbeidYtelse', () => {
@@ -354,7 +353,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(AlertStripeInfo)).has.length(1);
+    expect(wrapper.find(AlertStripeInfo)).toHaveLength(1);
   });
 
   it('skal vise alert-info når arbeidsgiver finnes i arbeidsforhold men arbeidsforholdet er før tilretteleggingBehovFom', () => {
@@ -402,7 +401,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(AlertStripeInfo)).has.length(1);
+    expect(wrapper.find(AlertStripeInfo)).toHaveLength(1);
   });
 
   it('skal ikke vise alert-info når arbeidsgiver finnes i arbeidsforhold i inntektArbeidYtelse og er innenfor intervall', () => {
@@ -450,6 +449,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       {...reduxFormPropsMock}
     />);
 
-    expect(wrapper.find(AlertStripeInfo)).has.length(0);
+    expect(wrapper.find(AlertStripeInfo)).toHaveLength(0);
   });
 });

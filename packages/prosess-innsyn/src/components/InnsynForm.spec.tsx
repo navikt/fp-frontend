@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
@@ -39,7 +38,7 @@ describe('<InnsynForm>', () => {
     />);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');
-    expect(settPaVentRadio).to.have.length(1);
+    expect(settPaVentRadio).toHaveLength(1);
   });
 
   it('skal ikke vise radioknapper for valg av sett på vent når innvilget', () => {
@@ -73,6 +72,6 @@ describe('<InnsynForm>', () => {
     />);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');
-    expect(settPaVentRadio).to.have.length(0);
+    expect(settPaVentRadio).toHaveLength(0);
   });
 });

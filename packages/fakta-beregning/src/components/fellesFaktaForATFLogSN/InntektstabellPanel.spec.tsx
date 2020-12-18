@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { OverstyringKnapp } from '@fpsak-frontend/shared-components';
@@ -31,7 +30,7 @@ describe('<InntektstabellPanel>', () => {
         <span>test2</span>
       </InntektstabellPanelImpl>,
     );
-    expect(wrapper.find(OverstyringKnapp)).has.length(1);
+    expect(wrapper.find(OverstyringKnapp)).toHaveLength(1);
   });
 
   it('checkbox skal vere readOnly når man har overstyring aksjonspunkt', () => {
@@ -56,7 +55,7 @@ describe('<InntektstabellPanel>', () => {
       </InntektstabellPanelImpl>,
     );
     const knapp = wrapper.find(OverstyringKnapp);
-    expect(knapp).has.length(1);
-    expect(knapp.first().prop('erOverstyrt')).to.equal(true);
+    expect(knapp).toHaveLength(1);
+    expect(knapp.first().prop('erOverstyrt')).toBe(true);
   });
 });

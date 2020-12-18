@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -133,27 +132,27 @@ describe('<prosessStegUtils>', () => {
     const prosessStegPaneler = utledProsessStegPaneler([new OpplysningspliktProsessStegPanelDef()], ekstraPanelData,
       toggleOverstyring, overstyrteAksjonspunktKoder, behandling as Behandling, aksjonspunkter, vilkar, rettigheter, hasFetchError);
 
-    expect(prosessStegPaneler).to.have.length(1);
+    expect(prosessStegPaneler).toHaveLength(1);
     const panel = prosessStegPaneler[0];
-    expect(panel.getUrlKode()).to.eql('opplysningsplikt');
-    expect(panel.getTekstKode()).to.eql('Behandlingspunkt.Opplysningsplikt');
-    expect(panel.getErReadOnly()).is.true;
-    expect(panel.getErAksjonspunktOpen()).is.true;
-    expect(panel.getAksjonspunkter()).to.eql(aksjonspunkter);
-    expect(panel.getErStegBehandlet()).is.true;
-    expect(panel.getStatus()).to.eql(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.getUrlKode()).toEqual('opplysningsplikt');
+    expect(panel.getTekstKode()).toEqual('Behandlingspunkt.Opplysningsplikt');
+    expect(panel.getErReadOnly()).toBe(true);
+    expect(panel.getErAksjonspunktOpen()).toBe(true);
+    expect(panel.getAksjonspunkter()).toEqual(aksjonspunkter);
+    expect(panel.getErStegBehandlet()).toBe(true);
+    expect(panel.getStatus()).toEqual(vilkarUtfallType.IKKE_VURDERT);
 
-    expect(panel.getDelPaneler()).to.have.length(1);
+    expect(panel.getDelPaneler()).toHaveLength(1);
     const delPanel = panel.getDelPaneler()[0];
-    expect(delPanel.getAksjonspunktHjelpetekster()).to.eql(['SokersOpplysningspliktForm.UtfyllendeOpplysninger']);
-    expect(delPanel.getAksjonspunkterForPanel()).to.eql(aksjonspunkter);
-    expect(delPanel.getErAksjonspunktOpen()).is.true;
-    expect(delPanel.getErReadOnly()).is.true;
-    expect(delPanel.getStatus()).to.eql(vilkarUtfallType.IKKE_VURDERT);
-    expect(delPanel.getProsessStegDelPanelDef().getEndepunkter()).to.eql([]);
-    expect(delPanel.getProsessStegDelPanelDef().getKomponent).to.eql(panelDef.getKomponent);
+    expect(delPanel.getAksjonspunktHjelpetekster()).toEqual(['SokersOpplysningspliktForm.UtfyllendeOpplysninger']);
+    expect(delPanel.getAksjonspunkterForPanel()).toEqual(aksjonspunkter);
+    expect(delPanel.getErAksjonspunktOpen()).toBe(true);
+    expect(delPanel.getErReadOnly()).toBe(true);
+    expect(delPanel.getStatus()).toEqual(vilkarUtfallType.IKKE_VURDERT);
+    expect(delPanel.getProsessStegDelPanelDef().getEndepunkter()).toEqual([]);
+    expect(delPanel.getProsessStegDelPanelDef().getKomponent).toEqual(panelDef.getKomponent);
 
-    expect(delPanel.getKomponentData()).to.eql({
+    expect(delPanel.getKomponentData()).toEqual({
       aksjonspunkter,
       isAksjonspunktOpen: true,
       isReadOnly: true,
@@ -175,7 +174,7 @@ describe('<prosessStegUtils>', () => {
 
     const valgtPanel = finnValgtPanel([utledetTestPanel, utledetPanel], erBehandlingHenlagt, 'opplysningsplikt', apentFaktaPanelInfo);
 
-    expect(valgtPanel).to.eql(utledetPanel);
+    expect(valgtPanel).toEqual(utledetPanel);
   });
 
   it('skal vise ikke vise prosess-steg panel når ingen er spesifikt valgt og en har åpent fakta-aksjonspunkt', () => {
@@ -184,7 +183,7 @@ describe('<prosessStegUtils>', () => {
 
     const valgtPanel = finnValgtPanel([utledetTestPanel], erBehandlingHenlagt, 'default', apentFaktaPanelInfo);
 
-    expect(valgtPanel).is.undefined;
+    expect(valgtPanel).toBeUndefined();
   });
 
   it('skal vise panel som har åpent aksjonspunkt', () => {
@@ -197,7 +196,7 @@ describe('<prosessStegUtils>', () => {
 
     const valgtPanel = finnValgtPanel([utledetTestPanel, utledetPanel], erBehandlingHenlagt, 'default', apentFaktaPanelInfo);
 
-    expect(valgtPanel).is.eql(utledetPanel);
+    expect(valgtPanel).toEqual(utledetPanel);
   });
 
   it('skal formatere paneler for prosessmeny', () => {
@@ -207,7 +206,7 @@ describe('<prosessStegUtils>', () => {
     const utledetPanel = new ProsessStegUtledet(stegDef, [utledetDelPanel]);
 
     const formatertePaneler = formaterPanelerForProsessmeny([utledetTestPanel, utledetPanel], 'opplysningsplikt');
-    expect(formatertePaneler).to.eql([{
+    expect(formatertePaneler).toEqual([{
       isActive: false,
       isDisabled: false,
       isFinished: false,
@@ -237,9 +236,9 @@ describe('<prosessStegUtils>', () => {
     callback(aksjonspunktModeller);
 
     const requestKall = lagreAksjonspunkter.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
@@ -266,9 +265,9 @@ describe('<prosessStegUtils>', () => {
     callback(aksjonspunktModeller);
 
     const requestKall = lagreOverstyrteAksjonspunkter.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -42,7 +41,7 @@ describe('<VisittkortBarnInfoPanel>', () => {
       familieHendelse={familieHendelse}
     />);
 
-    expect(wrapper.find(VisittkortBarnInfoFodselPanel)).has.length(1);
+    expect(wrapper.find(VisittkortBarnInfoFodselPanel)).toHaveLength(1);
   });
 
   it('skal vise panel for omsorg', () => {
@@ -59,6 +58,6 @@ describe('<VisittkortBarnInfoPanel>', () => {
       }}
     />);
 
-    expect(wrapper.find(VisittkortBarnInfoOmsorgPanel)).has.length(1);
+    expect(wrapper.find(VisittkortBarnInfoOmsorgPanel)).toHaveLength(1);
   });
 });

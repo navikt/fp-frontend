@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -54,10 +53,10 @@ describe('<ArbeidsforholdInfoPanel>', () => {
       />,
     );
     const apMsg = wrapper.find('FormattedMessage');
-    expect(apMsg).has.length(1);
-    expect(apMsg.props().id).has.eql('ArbeidsforholdInfoPanel.AvklarArbeidsforhold');
-    expect(wrapper.find(PersonArbeidsforholdPanel)).has.length(1);
-    expect(wrapper.find(BekreftOgForsettKnapp)).has.length(1);
+    expect(apMsg).toHaveLength(1);
+    expect(apMsg.props().id).toEqual('ArbeidsforholdInfoPanel.AvklarArbeidsforhold');
+    expect(wrapper.find(PersonArbeidsforholdPanel)).toHaveLength(1);
+    expect(wrapper.find(BekreftOgForsettKnapp)).toHaveLength(1);
   });
   it('Skal vise komponenten korrekt med aksjonspunkt hvor man kan legge til nye arbeidsforhold', () => {
     const wrapper = shallow(
@@ -78,10 +77,10 @@ describe('<ArbeidsforholdInfoPanel>', () => {
       />,
     );
     const apMsg = wrapper.find('FormattedMessage');
-    expect(apMsg).has.length(1);
-    expect(apMsg.props().id).has.eql('ArbeidsforholdInfoPanel.IngenArbeidsforholdRegistrert');
-    expect(wrapper.find(PersonArbeidsforholdPanel)).has.length(1);
-    expect(wrapper.find(BekreftOgForsettKnapp)).has.length(1);
+    expect(apMsg).toHaveLength(1);
+    expect(apMsg.props().id).toEqual('ArbeidsforholdInfoPanel.IngenArbeidsforholdRegistrert');
+    expect(wrapper.find(PersonArbeidsforholdPanel)).toHaveLength(1);
+    expect(wrapper.find(BekreftOgForsettKnapp)).toHaveLength(1);
   });
   it('Skal vise komponenten korrekt uten aksjonspunkt hvor man kan legge til nye arbeidsforhold', () => {
     const wrapper = shallow(
@@ -101,9 +100,9 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         {...reduxFormPropsMock}
       />,
     );
-    expect(wrapper.find(PersonArbeidsforholdPanel)).has.length(1);
-    expect(wrapper.find(BekreftOgForsettKnapp)).has.length(0);
-    expect(wrapper.find(AksjonspunktHelpTextTemp)).has.length(0);
+    expect(wrapper.find(PersonArbeidsforholdPanel)).toHaveLength(1);
+    expect(wrapper.find(BekreftOgForsettKnapp)).toHaveLength(0);
+    expect(wrapper.find(AksjonspunktHelpTextTemp)).toHaveLength(0);
   });
   it('skal fjerne ID fra arbeidsforhold som er lagt til av saksbehandler, men ikke fra andre', () => {
     const arbeidsforhold = [
@@ -117,9 +116,9 @@ describe('<ArbeidsforholdInfoPanel>', () => {
       },
     ];
     const result = fjernIdFraArbeidsforholdLagtTilAvSaksbehandler(arbeidsforhold as Arbeidsforhold[]);
-    expect(result[0].id).to.eql(null);
-    expect(result[0].lagtTilAvSaksbehandler).to.eql(true);
-    expect(result[1].id).to.eql('2');
-    expect(result[1].lagtTilAvSaksbehandler).to.eql(false);
+    expect(result[0].id).toEqual(null);
+    expect(result[0].lagtTilAvSaksbehandler).toEqual(true);
+    expect(result[1].id).toEqual('2');
+    expect(result[1].lagtTilAvSaksbehandler).toEqual(false);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField } from '@fpsak-frontend/form';
@@ -35,8 +34,8 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
     />);
 
     const select = wrapper.find(SelectField);
-    expect(select).has.length(1);
-    expect(select.prop('selectValues').map((v: any) => v.props.children)).to.eql(['Svendsen Eksos(123456789)...1232']);
+    expect(select).toHaveLength(1);
+    expect(select.prop('selectValues').map((v: any) => v.props.children)).toEqual(['Svendsen Eksos(123456789)...1232']);
   });
 
   it('skal ikke vise dropdown når en ikke har valgt å erstatte gammelt med nytt', () => {
@@ -55,6 +54,6 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    expect(wrapper.find(SelectField)).has.length(0);
+    expect(wrapper.find(SelectField)).toHaveLength(0);
   });
 });

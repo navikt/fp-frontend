@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -18,20 +17,20 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
     />);
 
     const undertekst = wrapper.find('Undertekst');
-    expect(undertekst).to.have.length(1);
+    expect(undertekst).toHaveLength(1);
 
     const inputs = wrapper.find('InputField');
-    expect(inputs).to.have.length(1);
-    expect(inputs.at(0).prop('name')).to.equal('navn');
+    expect(inputs).toHaveLength(1);
+    expect(inputs.at(0).prop('name')).toBe('navn');
 
     const select = wrapper.find('SelectField');
-    expect(select).to.have.length(0);
+    expect(select).toHaveLength(0);
 
     const radios = wrapper.find('RadioOption');
-    expect(radios).to.have.length(2);
+    expect(radios).toHaveLength(2);
 
     const datepicker = wrapper.find('DatepickerField');
-    expect(datepicker).to.have.length(0);
+    expect(datepicker).toHaveLength(0);
   });
 
   it('skal rendre korrekt når virksomhet er registrert i Norge', () => {
@@ -45,9 +44,9 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
     />);
 
     const inputs = wrapper.find('InputField');
-    expect(inputs).to.have.length(2);
-    expect(inputs.at(0).prop('name')).to.equal('navn');
-    expect(inputs.at(1).prop('name')).to.equal('organisasjonsnummer');
+    expect(inputs).toHaveLength(2);
+    expect(inputs.at(0).prop('name')).toBe('navn');
+    expect(inputs.at(1).prop('name')).toBe('organisasjonsnummer');
   });
 
   it('skal rendre korrekt når virksomhet ikke er registrert i Norge', () => {
@@ -61,9 +60,9 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
     />);
 
     const select = wrapper.find('SelectField');
-    expect(select).to.have.length(1);
+    expect(select).toHaveLength(1);
 
     const datepicker = wrapper.find('DatepickerField');
-    expect(datepicker).to.have.length(2);
+    expect(datepicker).toHaveLength(2);
   });
 });

@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import RequestApi from './RequestApi';
 import RequestConfig from '../RequestConfig';
 
@@ -39,6 +37,6 @@ describe('RequestApi', () => {
 
     const result = await api.startRequest(requestConfig.name, params);
 
-    expect(result.payload).to.eql('data');
+    expect(result.payload).toEqual('data');
   });
 });

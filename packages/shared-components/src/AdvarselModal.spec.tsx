@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
@@ -20,16 +19,16 @@ describe('<AdvarselModal>', () => {
     );
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('contentLabel')).is.eql('Åpne behandling');
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('contentLabel')).toEqual('Åpne behandling');
 
     const image = wrapper.find(Image);
-    expect(image).to.have.length(1);
-    expect(image.prop('alt')).to.have.length.above(3);
+    expect(image).toHaveLength(1);
+    expect(image.prop('alt').length).toBeGreaterThan(3);
 
     const knapp = wrapper.find(Hovedknapp);
-    expect(knapp).to.have.length(1);
-    expect(knapp.childAt(0).text()).is.eql('OK');
+    expect(knapp).toHaveLength(1);
+    expect(knapp.childAt(0).text()).toEqual('OK');
   });
 });

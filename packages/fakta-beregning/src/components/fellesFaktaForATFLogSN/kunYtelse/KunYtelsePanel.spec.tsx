@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import KunYtelsePanel, { brukersAndelFieldArrayName } from './KunYtelsePanel';
 import { besteberegningField } from './KunYtelseBesteberegningPanel';
@@ -35,19 +34,19 @@ describe('<KunYtelsePanel>', () => {
     const values = {};
     values[`${brukersAndelFieldArrayName}`] = [andel1, andel2];
     const transformedValues = KunYtelsePanel.transformValues(values, kunYtelse);
-    expect(transformedValues.kunYtelseFordeling.skalBrukeBesteberegning).to.equal(null);
-    expect(transformedValues.kunYtelseFordeling.andeler).to.have.length(2);
-    expect(transformedValues.kunYtelseFordeling.andeler[0].andelsnr).to.equal(1);
-    expect(transformedValues.kunYtelseFordeling.andeler[0].fastsattBeløp).to.equal(10000);
-    expect(transformedValues.kunYtelseFordeling.andeler[0].inntektskategori).to.equal(inntektskategorier.ARBEIDSTAKER);
-    expect(transformedValues.kunYtelseFordeling.andeler[0].nyAndel).to.equal(false);
-    expect(transformedValues.kunYtelseFordeling.andeler[0].lagtTilAvSaksbehandler).to.equal(false);
+    expect(transformedValues.kunYtelseFordeling.skalBrukeBesteberegning).toBe(null);
+    expect(transformedValues.kunYtelseFordeling.andeler).toHaveLength(2);
+    expect(transformedValues.kunYtelseFordeling.andeler[0].andelsnr).toBe(1);
+    expect(transformedValues.kunYtelseFordeling.andeler[0].fastsattBeløp).toBe(10000);
+    expect(transformedValues.kunYtelseFordeling.andeler[0].inntektskategori).toBe(inntektskategorier.ARBEIDSTAKER);
+    expect(transformedValues.kunYtelseFordeling.andeler[0].nyAndel).toBe(false);
+    expect(transformedValues.kunYtelseFordeling.andeler[0].lagtTilAvSaksbehandler).toBe(false);
 
-    expect(transformedValues.kunYtelseFordeling.andeler[1].andelsnr).to.equal(null);
-    expect(transformedValues.kunYtelseFordeling.andeler[1].fastsattBeløp).to.equal(20000);
-    expect(transformedValues.kunYtelseFordeling.andeler[1].inntektskategori).to.equal(inntektskategorier.SJØMANN);
-    expect(transformedValues.kunYtelseFordeling.andeler[1].nyAndel).to.equal(true);
-    expect(transformedValues.kunYtelseFordeling.andeler[1].lagtTilAvSaksbehandler).to.equal(true);
+    expect(transformedValues.kunYtelseFordeling.andeler[1].andelsnr).toBe(null);
+    expect(transformedValues.kunYtelseFordeling.andeler[1].fastsattBeløp).toBe(20000);
+    expect(transformedValues.kunYtelseFordeling.andeler[1].inntektskategori).toBe(inntektskategorier.SJØMANN);
+    expect(transformedValues.kunYtelseFordeling.andeler[1].nyAndel).toBe(true);
+    expect(transformedValues.kunYtelseFordeling.andeler[1].lagtTilAvSaksbehandler).toBe(true);
   });
 
   it('skal bygge initial values', () => {
@@ -72,22 +71,22 @@ describe('<KunYtelsePanel>', () => {
 
     const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
     const andeler = initialValues[`${brukersAndelFieldArrayName}`];
-    expect(andeler).to.have.length(2);
-    expect(andeler[0].andelsnr).to.equal(1);
-    expect(andeler[0].andel).to.equal('Brukers andel');
-    expect(andeler[0].aktivitetStatus).to.equal('BA');
-    expect(andeler[0].fastsattBelop).to.equal('');
-    expect(andeler[0].inntektskategori).to.equal('');
-    expect(andeler[0].nyAndel).to.equal(false);
-    expect(andeler[0].lagtTilAvSaksbehandler).to.equal(false);
+    expect(andeler).toHaveLength(2);
+    expect(andeler[0].andelsnr).toBe(1);
+    expect(andeler[0].andel).toBe('Brukers andel');
+    expect(andeler[0].aktivitetStatus).toBe('BA');
+    expect(andeler[0].fastsattBelop).toBe('');
+    expect(andeler[0].inntektskategori).toBe('');
+    expect(andeler[0].nyAndel).toBe(false);
+    expect(andeler[0].lagtTilAvSaksbehandler).toBe(false);
 
-    expect(andeler[1].andelsnr).to.equal(2);
-    expect(andeler[1].andel).to.equal('Brukers andel');
-    expect(andeler[1].fastsattBelop).to.equal('10 000');
-    expect(andeler[1].aktivitetStatus).to.equal('BA');
-    expect(andeler[1].inntektskategori).to.equal(inntektskategorier.ARBEIDSTAKER);
-    expect(andeler[1].nyAndel).to.equal(false);
-    expect(andeler[1].lagtTilAvSaksbehandler).to.equal(true);
+    expect(andeler[1].andelsnr).toBe(2);
+    expect(andeler[1].andel).toBe('Brukers andel');
+    expect(andeler[1].fastsattBelop).toBe('10 000');
+    expect(andeler[1].aktivitetStatus).toBe('BA');
+    expect(andeler[1].inntektskategori).toBe(inntektskategorier.ARBEIDSTAKER);
+    expect(andeler[1].nyAndel).toBe(false);
+    expect(andeler[1].lagtTilAvSaksbehandler).toBe(true);
   });
 
   it('skal bygge initial values med besteberegning', () => {
@@ -112,25 +111,25 @@ describe('<KunYtelsePanel>', () => {
     };
     const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
     const andeler = initialValues[`${brukersAndelFieldArrayName}`];
-    expect(andeler).to.have.length(2);
-    expect(andeler[0].andelsnr).to.equal(1);
-    expect(andeler[0].andel).to.equal('Brukers andel');
-    expect(andeler[0].aktivitetStatus).to.equal('BA');
-    expect(andeler[0].fastsattBelop).to.equal('');
-    expect(andeler[0].inntektskategori).to.equal('');
-    expect(andeler[0].nyAndel).to.equal(false);
-    expect(andeler[0].lagtTilAvSaksbehandler).to.equal(false);
+    expect(andeler).toHaveLength(2);
+    expect(andeler[0].andelsnr).toBe(1);
+    expect(andeler[0].andel).toBe('Brukers andel');
+    expect(andeler[0].aktivitetStatus).toBe('BA');
+    expect(andeler[0].fastsattBelop).toBe('');
+    expect(andeler[0].inntektskategori).toBe('');
+    expect(andeler[0].nyAndel).toBe(false);
+    expect(andeler[0].lagtTilAvSaksbehandler).toBe(false);
 
-    expect(andeler[1].andelsnr).to.equal(2);
-    expect(andeler[1].andel).to.equal('Brukers andel');
-    expect(andeler[1].fastsattBelop).to.equal('10 000');
-    expect(andeler[1].aktivitetStatus).to.equal('BA');
-    expect(andeler[1].inntektskategori).to.equal(inntektskategorier.ARBEIDSTAKER);
-    expect(andeler[1].nyAndel).to.equal(false);
-    expect(andeler[1].lagtTilAvSaksbehandler).to.equal(true);
+    expect(andeler[1].andelsnr).toBe(2);
+    expect(andeler[1].andel).toBe('Brukers andel');
+    expect(andeler[1].fastsattBelop).toBe('10 000');
+    expect(andeler[1].aktivitetStatus).toBe('BA');
+    expect(andeler[1].inntektskategori).toBe(inntektskategorier.ARBEIDSTAKER);
+    expect(andeler[1].nyAndel).toBe(false);
+    expect(andeler[1].lagtTilAvSaksbehandler).toBe(true);
 
     const erBesteberegning = initialValues[`${besteberegningField}`];
-    expect(erBesteberegning).to.equal(true);
+    expect(erBesteberegning).toBe(true);
   });
 
   it('skal bygge initial values uten besteberegning', () => {
@@ -155,24 +154,24 @@ describe('<KunYtelsePanel>', () => {
     };
     const initialValues = KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
     const andeler = initialValues[`${brukersAndelFieldArrayName}`];
-    expect(andeler).to.have.length(2);
-    expect(andeler[0].andelsnr).to.equal(1);
-    expect(andeler[0].andel).to.equal('Brukers andel');
-    expect(andeler[0].aktivitetStatus).to.equal('BA');
-    expect(andeler[0].fastsattBelop).to.equal('');
-    expect(andeler[0].inntektskategori).to.equal('');
-    expect(andeler[0].nyAndel).to.equal(false);
-    expect(andeler[0].lagtTilAvSaksbehandler).to.equal(false);
+    expect(andeler).toHaveLength(2);
+    expect(andeler[0].andelsnr).toBe(1);
+    expect(andeler[0].andel).toBe('Brukers andel');
+    expect(andeler[0].aktivitetStatus).toBe('BA');
+    expect(andeler[0].fastsattBelop).toBe('');
+    expect(andeler[0].inntektskategori).toBe('');
+    expect(andeler[0].nyAndel).toBe(false);
+    expect(andeler[0].lagtTilAvSaksbehandler).toBe(false);
 
-    expect(andeler[1].andelsnr).to.equal(2);
-    expect(andeler[1].andel).to.equal('Brukers andel');
-    expect(andeler[1].fastsattBelop).to.equal('10 000');
-    expect(andeler[1].aktivitetStatus).to.equal('BA');
-    expect(andeler[1].inntektskategori).to.equal(inntektskategorier.ARBEIDSTAKER);
-    expect(andeler[1].nyAndel).to.equal(false);
-    expect(andeler[1].lagtTilAvSaksbehandler).to.equal(true);
+    expect(andeler[1].andelsnr).toBe(2);
+    expect(andeler[1].andel).toBe('Brukers andel');
+    expect(andeler[1].fastsattBelop).toBe('10 000');
+    expect(andeler[1].aktivitetStatus).toBe('BA');
+    expect(andeler[1].inntektskategori).toBe(inntektskategorier.ARBEIDSTAKER);
+    expect(andeler[1].nyAndel).toBe(false);
+    expect(andeler[1].lagtTilAvSaksbehandler).toBe(true);
 
     const erBesteberegning = initialValues[`${besteberegningField}`];
-    expect(erBesteberegning).to.equal(false);
+    expect(erBesteberegning).toBe(false);
   });
 });

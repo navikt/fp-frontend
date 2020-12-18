@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -73,8 +72,8 @@ describe('<InntektFieldArray>', () => {
     };
     const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning);
     const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
-    expect(props.isBeregningFormDirty).to.eql(false);
-    expect(props.erKunYtelse).to.eql(false);
+    expect(props.isBeregningFormDirty).toEqual(false);
+    expect(props.erKunYtelse).toEqual(false);
   });
 
   it('skal mappe state til props for kun ytelse', () => {
@@ -90,7 +89,7 @@ describe('<InntektFieldArray>', () => {
     };
     const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning);
     const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
-    expect(props.erKunYtelse).to.eql(true);
+    expect(props.erKunYtelse).toEqual(true);
   });
 
   const andelField = {
@@ -137,11 +136,11 @@ describe('<InntektFieldArray>', () => {
       {...props}
     />);
     const table = wrapper.find(Table);
-    expect(table.length).to.eql(1);
+    expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
-    expect(andelRows.length).to.eql(1);
+    expect(andelRows.length).toEqual(1);
     const summaryRow = table.find(SummaryRow);
-    expect(summaryRow.length).to.eql(1);
+    expect(summaryRow.length).toEqual(1);
   });
 
   it('skal ikkje vise SN om den ikkje skal redigeres', () => {
@@ -164,11 +163,11 @@ describe('<InntektFieldArray>', () => {
       {...props}
     />);
     const table = wrapper.find(Table);
-    expect(table.length).to.eql(1);
+    expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
-    expect(andelRows.length).to.eql(2);
+    expect(andelRows.length).toEqual(2);
     const summaryRow = table.find(SummaryRow);
-    expect(summaryRow.length).to.eql(1);
+    expect(summaryRow.length).toEqual(1);
   });
 
   it('skal vise SN om den skal redigeres', () => {
@@ -191,11 +190,11 @@ describe('<InntektFieldArray>', () => {
       {...ownProps}
     />);
     const table = wrapper.find(Table);
-    expect(table.length).to.eql(1);
+    expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
-    expect(andelRows.length).to.eql(2);
+    expect(andelRows.length).toEqual(2);
     const summaryRow = table.find(SummaryRow);
-    expect(summaryRow.length).to.eql(1);
+    expect(summaryRow.length).toEqual(1);
   });
 
   it('skal legge til dagpengeandel', () => {
@@ -216,23 +215,23 @@ describe('<InntektFieldArray>', () => {
       {...newprops}
     />);
     const table = wrapper.find(Table);
-    expect(table.length).to.eql(1);
+    expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
-    expect(andelRows.length).to.eql(2);
+    expect(andelRows.length).toEqual(2);
     const summaryRow = table.find(SummaryRow);
-    expect(summaryRow.length).to.eql(1);
+    expect(summaryRow.length).toEqual(1);
   });
 
   it('skal fjerne dagpengeandel om dagpenger og lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: true }]);
     leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER]);
-    expect(newfields.length).to.equal(0);
+    expect(newfields.length).toBe(0);
   });
 
   it('skal ikkje fjerne dagpengeandel om dagpenger og ikkje lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: false }]);
     leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER]);
-    expect(newfields.length).to.equal(1);
+    expect(newfields.length).toBe(1);
   });
 
   it('skal validere eksisterende andeler uten errors', () => {
@@ -246,7 +245,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors).to.equal(null);
+    expect(errors).toBe(null);
   });
 
   it('skal returnerer errors for fastsattbeløp når ikkje oppgitt', () => {
@@ -261,7 +260,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors[0].fastsattBelop).to.equal(isRequiredMessage());
+    expect(errors[0].fastsattBelop).toBe(isRequiredMessage());
   });
 
   it('skal ikkje returnerer errors når man ikkje skal redigere inntekt', () => {
@@ -276,7 +275,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors).to.equal(null);
+    expect(errors).toBe(null);
   });
 
   it('skal gi error om inntektkategori ikkje er oppgitt', () => {
@@ -291,7 +290,7 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors[0].inntektskategori).to.equal(isRequiredMessage());
+    expect(errors[0].inntektskategori).toBe(isRequiredMessage());
   });
 
   it('skal gi error om andel ikkje er valgt for nye andeler', () => {
@@ -307,11 +306,11 @@ describe('<InntektFieldArray>', () => {
     };
     values.push(andel2);
     const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
-    expect(errors[0].andel).to.equal(isRequiredMessage());
+    expect(errors[0].andel).toBe(isRequiredMessage());
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {
     const iv = InntektFieldArrayImpl.buildInitialValues([]);
-    expect(iv).to.be.empty;
+    expect(Object.keys(iv)).toHaveLength(0);
   });
 });

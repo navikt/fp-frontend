@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import {
@@ -35,18 +34,18 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
-    expect(innerWrapper.find(SelectField)).has.length(2);
-    expect(innerWrapper.find(InputField)).has.length(1);
-    expect(innerWrapper.find(DecimalField)).has.length(1);
-    expect(innerWrapper.find(CheckboxField)).has.length(3);
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
+    expect(innerWrapper.find(SelectField)).toHaveLength(2);
+    expect(innerWrapper.find(InputField)).toHaveLength(1);
+    expect(innerWrapper.find(DecimalField)).toHaveLength(1);
+    expect(innerWrapper.find(CheckboxField)).toHaveLength(3);
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 
   it('skal vise felter for gradering, samtidig uttak valgt', () => {
@@ -66,17 +65,17 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
     />);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton);
     const innerWrapper = shallowWithIntl(comp);
 
-    expect(innerWrapper.find(DatepickerField)).has.length(2);
-    expect(innerWrapper.find(SelectField)).has.length(2);
-    expect(innerWrapper.find(InputField)).has.length(1);
-    expect(innerWrapper.find(DecimalField)).has.length(2);
-    expect(innerWrapper.find(CheckboxField)).has.length(3);
-    expect(innerWrapper.find('#avslutt')).has.length(1);
+    expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
+    expect(innerWrapper.find(SelectField)).toHaveLength(2);
+    expect(innerWrapper.find(InputField)).toHaveLength(1);
+    expect(innerWrapper.find(DecimalField)).toHaveLength(2);
+    expect(innerWrapper.find(CheckboxField)).toHaveLength(3);
+    expect(innerWrapper.find('#avslutt')).toHaveLength(1);
   });
 });

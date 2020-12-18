@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { FieldArray } from 'redux-form';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
@@ -25,7 +24,7 @@ describe('<PermisjonPanel>', () => {
       submitFailed={false}
     />);
     const fieldArray = wrapper.find(FieldArray);
-    expect(fieldArray).has.length(1);
+    expect(fieldArray).toHaveLength(1);
   });
 
   it('skal vise alle paneler ved overføring av kvoter, utsettelse og gradering', () => {
@@ -40,12 +39,12 @@ describe('<PermisjonPanel>', () => {
     />);
 
     const permisjonOverforingAvKvoterPanel = wrapper.find(PermisjonOverforingAvKvoterPanel);
-    expect(permisjonOverforingAvKvoterPanel).has.length(1);
+    expect(permisjonOverforingAvKvoterPanel).toHaveLength(1);
 
     const permisjonUtsettelsePanel = wrapper.find(PermisjonUtsettelsePanel);
-    expect(permisjonUtsettelsePanel).has.length(1);
+    expect(permisjonUtsettelsePanel).toHaveLength(1);
 
     const permisjonGraderingPanel = wrapper.find(PermisjonGraderingPanel);
-    expect(permisjonGraderingPanel).has.length(1);
+    expect(permisjonGraderingPanel).toHaveLength(1);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Undertekst } from 'nav-frontend-typografi';
 
@@ -20,10 +19,10 @@ describe('<ErrorMessagePanel>', () => {
     />);
 
     const div = wrapper.find(Undertekst);
-    expect(div).to.have.length(1);
-    expect(div.childAt(0).text()).to.eql('Error! ');
+    expect(div).toHaveLength(1);
+    expect(div.childAt(0).text()).toEqual('Error! ');
 
-    expect(wrapper.find('a')).to.have.length(0);
+    expect(wrapper.find('a')).toHaveLength(0);
   });
 
   it('skal erstatte spesialtegn i feilmelding', () => {
@@ -37,8 +36,8 @@ describe('<ErrorMessagePanel>', () => {
     />);
 
     const div = wrapper.find(Undertekst);
-    expect(div).to.have.length(1);
-    expect(div.childAt(0).text()).to.eql('Høna & egget og "test1" og \'test2\' ');
+    expect(div).toHaveLength(1);
+    expect(div.childAt(0).text()).toEqual('Høna & egget og "test1" og \'test2\' ');
   });
 
   it('skal vise lenke for å se feildetaljer når dette er konfigurert og en har info', () => {
@@ -54,8 +53,8 @@ describe('<ErrorMessagePanel>', () => {
       removeErrorMessage={() => undefined}
     />);
 
-    expect(wrapper.find('a')).to.have.length(1);
-    expect(wrapper.find(ErrorMessageDetailsModal)).to.have.length(0);
+    expect(wrapper.find('a')).toHaveLength(1);
+    expect(wrapper.find(ErrorMessageDetailsModal)).toHaveLength(0);
   });
 
   it('skal åpne, og så lukke, modal for visning av feildetaljer ved klikk på lenke', () => {
@@ -75,15 +74,15 @@ describe('<ErrorMessagePanel>', () => {
     link.simulate('click', { preventDefault: sinon.spy() });
 
     const modal = wrapper.find(ErrorMessageDetailsModal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('showModal')).is.true;
-    expect(modal.prop('errorDetails')).is.eql({
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('showModal')).toBe(true);
+    expect(modal.prop('errorDetails')).toEqual({
       feilmelding: 'Dette er ein feilmelding',
       url: 'www.test.no',
     });
 
     modal.prop('closeModalFn')();
 
-    expect(wrapper.find(ErrorMessageDetailsModal)).to.have.length(0);
+    expect(wrapper.find(ErrorMessageDetailsModal)).toHaveLength(0);
   });
 });

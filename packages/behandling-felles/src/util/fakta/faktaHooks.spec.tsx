@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -84,9 +83,9 @@ describe('<faktaHooks>', () => {
       aksjonspunkter, valgtFaktaSteg, intl));
     const [faktaPaneler, valgtPanel, formaterteFaktaPaneler] = Object.values(wrapper.find('div').props()).reduce((acc, value) => [...acc, value], []);
 
-    expect(faktaPaneler[0].getPanelDef()).to.eql(panelDef);
-    expect(faktaPaneler[0].getHarApneAksjonspunkter()).is.true;
-    expect(faktaPaneler[0].getKomponentData(rettigheter, ekstraPanelData, false)).to.eql({
+    expect(faktaPaneler[0].getPanelDef()).toEqual(panelDef);
+    expect(faktaPaneler[0].getHarApneAksjonspunkter()).toBe(true);
+    expect(faktaPaneler[0].getKomponentData(rettigheter, ekstraPanelData, false)).toEqual({
       aksjonspunkter: [aksjonspunkter[0]],
       readOnly: false,
       submittable: true,
@@ -98,8 +97,8 @@ describe('<faktaHooks>', () => {
       inntektArbeidYtelse: ekstraPanelData.inntektArbeidYtelse,
     });
 
-    expect(valgtPanel.getUrlKode()).to.eql(faktaPaneler[0].getUrlKode());
-    expect(formaterteFaktaPaneler).to.eql([{
+    expect(valgtPanel.getUrlKode()).toEqual(faktaPaneler[0].getUrlKode());
+    expect(formaterteFaktaPaneler).toEqual([{
       erAktiv: true,
       harAksjonspunkt: true,
       tekst: 'ArbeidsforholdInfoPanel.Title',
@@ -131,10 +130,10 @@ describe('<faktaHooks>', () => {
     velgFaktaPanelCallback(0);
 
     const opppdaterKall = oppdaterProsessStegOgFaktaPanelIUrl.getCalls();
-    expect(opppdaterKall).to.have.length(1);
-    expect(opppdaterKall[0].args).to.have.length(2);
-    expect(opppdaterKall[0].args[0]).to.eql(DEFAULT_FAKTA_KODE);
-    expect(opppdaterKall[0].args[1]).to.eql('arbeidsforhold');
+    expect(opppdaterKall).toHaveLength(1);
+    expect(opppdaterKall[0].args).toHaveLength(2);
+    expect(opppdaterKall[0].args[0]).toEqual(DEFAULT_FAKTA_KODE);
+    expect(opppdaterKall[0].args[1]).toEqual('arbeidsforhold');
 
     const aksjonspunkterSomSkalLagres = [{
       kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
@@ -142,9 +141,9 @@ describe('<faktaHooks>', () => {
     bekreftAksjonspunktCallback(aksjonspunkterSomSkalLagres);
 
     const requestKall = lagreAksjonspunkter.getCalls();
-    expect(requestKall).to.have.length(1);
-    expect(requestKall[0].args).to.have.length(2);
-    expect(requestKall[0].args[0]).to.eql({
+    expect(requestKall).toHaveLength(1);
+    expect(requestKall[0].args).toHaveLength(2);
+    expect(requestKall[0].args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,

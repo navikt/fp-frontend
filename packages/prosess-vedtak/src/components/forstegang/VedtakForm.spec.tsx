@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -74,9 +73,9 @@ describe('<VedtakForm>', () => {
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
-    expect(fellesPanel).to.have.length(1);
+    expect(fellesPanel).toHaveLength(1);
     const avslattPanel = fellesPanel.renderProp('renderPanel')(false, true, false).find(VedtakInnvilgetPanel);
-    expect(avslattPanel).to.have.length(1);
+    expect(avslattPanel).toHaveLength(1);
   });
 
   it('skal vise at vedtak er avslått', () => {
@@ -127,8 +126,8 @@ describe('<VedtakForm>', () => {
     />);
 
     const fellesPanel = wrapper.find(VedtakFellesPanel);
-    expect(fellesPanel).to.have.length(1);
+    expect(fellesPanel).toHaveLength(1);
     const avslattPanel = fellesPanel.renderProp('renderPanel')(false, false, true).find(VedtakAvslagPanel);
-    expect(avslattPanel).to.have.length(1);
+    expect(avslattPanel).toHaveLength(1);
   });
 });

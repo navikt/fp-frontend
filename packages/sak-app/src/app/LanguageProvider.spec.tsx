@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { FormattedMessage } from 'react-intl';
 
 import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -19,10 +18,10 @@ describe('<LanguageProvider>', () => {
       </LanguageProvider>
     ));
     const intlProvider = wrapper.find('IntlProvider');
-    expect(intlProvider).to.have.length(1);
-    expect(intlProvider.prop('messages')).to.eql({ 'Header.Foreldrepenger': 'Foreldrepenger' });
+    expect(intlProvider).toHaveLength(1);
+    expect(intlProvider.prop('messages')).toEqual({ 'Header.Foreldrepenger': 'Foreldrepenger' });
     const span = wrapper.find('span');
-    expect(span).to.have.length(1);
-    expect(span.text()).to.eql('Foreldrepenger');
+    expect(span).toHaveLength(1);
+    expect(span.text()).toEqual('Foreldrepenger');
   });
 });

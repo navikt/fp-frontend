@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { TextAreaField } from '@fpsak-frontend/form';
 
@@ -14,7 +13,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       hasBegrunnelse={false}
     />);
 
-    expect(wrapper.find(TextAreaField)).to.have.length(0);
+    expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
 
   it('skal vise tekstfelt når en har lov til å løse aksjonspunkt og en har gjort endringer', () => {
@@ -24,7 +23,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       hasBegrunnelse={false}
     />);
 
-    expect(wrapper.find(TextAreaField)).to.have.length(1);
+    expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
   it('skal ikke vise label når readOnly', () => {
@@ -35,8 +34,8 @@ describe('<FaktaBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
-    expect(textField.prop('label')).to.eql('');
+    expect(textField).toHaveLength(1);
+    expect(textField.prop('label')).toEqual('');
   });
 
   it('skal vise standard-label når en ikke har valgt å vise vurderingstekst eller sende med tekstkode', () => {
@@ -47,8 +46,8 @@ describe('<FaktaBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
-    expect(textField.prop('label')).to.eql({ id: 'FaktaBegrunnelseTextField.BegrunnEndringene' });
+    expect(textField).toHaveLength(1);
+    expect(textField.prop('label')).toEqual({ id: 'FaktaBegrunnelseTextField.BegrunnEndringene' });
   });
 
   it('skal vise label for vurdering når dette er markert av prop', () => {
@@ -60,8 +59,8 @@ describe('<FaktaBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
-    expect(textField.prop('label')).to.eql({ id: 'FaktaBegrunnelseTextField.Vurdering' });
+    expect(textField).toHaveLength(1);
+    expect(textField.prop('label')).toEqual({ id: 'FaktaBegrunnelseTextField.Vurdering' });
   });
 
   it('skal vise medsendt label', () => {
@@ -73,7 +72,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
     />);
 
     const textField = wrapper.find(TextAreaField);
-    expect(textField).to.have.length(1);
-    expect(textField.prop('label')).to.eql('Test');
+    expect(textField).toHaveLength(1);
+    expect(textField.prop('label')).toEqual('Test');
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
@@ -133,7 +132,7 @@ describe('<TotrinnskontrollIndex>', () => {
 
     const index = wrapper.find(TotrinnskontrollSakIndex);
 
-    expect(wrapper.find(BeslutterModalIndex)).to.have.length(0);
+    expect(wrapper.find(BeslutterModalIndex)).toHaveLength(0);
 
     const submit = index.prop('onSubmit') as (params: any) => void;
     submit({
@@ -145,8 +144,8 @@ describe('<TotrinnskontrollIndex>', () => {
     });
 
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
-    expect(reqData).to.have.length(1);
-    expect(reqData[0].params).is.eql({
+    expect(reqData).toHaveLength(1);
+    expect(reqData[0].params).toEqual({
       behandlingId: 1234,
       saksnummer: 1,
       behandlingVersjon: 123,
@@ -157,6 +156,6 @@ describe('<TotrinnskontrollIndex>', () => {
       }],
     });
 
-    expect(wrapper.find(BeslutterModalIndex)).to.have.length(1);
+    expect(wrapper.find(BeslutterModalIndex)).toHaveLength(1);
   });
 });

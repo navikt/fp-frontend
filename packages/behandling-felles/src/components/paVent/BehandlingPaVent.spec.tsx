@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -40,7 +39,7 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={sinon.spy()}
     />);
 
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
   });
 
   it('skal vise modal når behandling er på vent', () => {
@@ -56,8 +55,8 @@ describe('<BehandlingPaVent>', () => {
     />);
 
     const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('hasManualPaVent')).to.false;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('hasManualPaVent')).toBe(false);
   });
 
   it('skal vise modal og så skjule den ved trykk på knapp', () => {
@@ -73,11 +72,11 @@ describe('<BehandlingPaVent>', () => {
     />);
 
     const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).to.have.length(1);
+    expect(modal).toHaveLength(1);
 
     modal.prop('cancelEvent')();
 
-    expect(wrapper.find(SettPaVentModalIndex)).to.have.length(0);
+    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
   });
 
   it('skal markeres som automatisk satt på vent når en har åpent aksjonspunkt for auto-manuelt satt på vent', () => {
@@ -104,8 +103,8 @@ describe('<BehandlingPaVent>', () => {
     />);
 
     const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('hasManualPaVent')).to.true;
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('hasManualPaVent')).toBe(true);
   });
 
   it('skal oppdatere på-vent-informasjon og så hente behandling på nytt', async () => {
@@ -129,20 +128,20 @@ describe('<BehandlingPaVent>', () => {
     await modal.prop('submitCallback')({ dato: '10.10.2019' });
 
     const calls = settPaVentCallback.getCalls();
-    expect(calls).to.have.length(1);
-    expect(calls[0].args).to.have.length(1);
-    expect(calls[0].args[0]).to.eql({
+    expect(calls).toHaveLength(1);
+    expect(calls[0].args).toHaveLength(1);
+    expect(calls[0].args[0]).toEqual({
       behandlingId: 1,
       behandlingVersjon: 1,
       dato: '10.10.2019',
     });
 
     const calls2 = hentBehandlingCallback.getCalls();
-    expect(calls2).to.have.length(1);
-    expect(calls2[0].args).to.have.length(2);
-    expect(calls2[0].args[0]).to.eql({
+    expect(calls2).toHaveLength(1);
+    expect(calls2[0].args).toHaveLength(2);
+    expect(calls2[0].args[0]).toEqual({
       behandlingId: 1,
     });
-    expect(calls2[0].args[1]).to.false;
+    expect(calls2[0].args[1]).toBe(false);
   });
 });

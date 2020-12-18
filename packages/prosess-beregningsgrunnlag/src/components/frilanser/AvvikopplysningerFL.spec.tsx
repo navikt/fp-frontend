@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
@@ -34,9 +33,9 @@ describe('<AvviksopplysningerFL>', () => {
       }
     />);
     const rows = wrapper.find('FlexRow');
-    expect(rows.length).to.be.equal(1);
+    expect(rows.length).toBe(1);
     const text = rows.first().find('FormattedMessage');
-    expect(text.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.FL.KobinasjonsStatusFLSN');
+    expect(text.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.FL.KobinasjonsStatusFLSN');
   });
 
   it('Skal teste at avvikoplysningerATFL rendres', () => {
@@ -47,7 +46,7 @@ describe('<AvviksopplysningerFL>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />);
     const panel = wrapper.find('AvvikopplysningerATFLSN');
-    expect(panel.length).to.be.equal(1);
+    expect(panel.length).toBe(1);
     const expectedProps = {
       beregnetAarsinntekt,
       avvikProsentAvrundet: 27.5,
@@ -56,7 +55,7 @@ describe('<AvviksopplysningerFL>', () => {
       visPanel: { visAT: false, visFL: true, visSN: false },
       sammenligningsgrunnlagSum: 330000,
     };
-    expect(panel.props()).to.deep.equal(expectedProps);
+    expect(panel.props()).toEqual(expectedProps);
   });
 
   it('Skal teste tabellen IKKE renderes status:SAMMENLIGNING_ATFL_SN', () => {
@@ -67,7 +66,7 @@ describe('<AvviksopplysningerFL>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />);
     const rows = wrapper.find('FlexRow');
-    expect(rows.length).to.be.equal(0);
+    expect(rows.length).toBe(0);
   });
   it('Skal teste tabellen IKKE rendres med feil status:SAMMENLIGNING_AT', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_AT') as SammenligningsgrunlagProp;
@@ -77,6 +76,6 @@ describe('<AvviksopplysningerFL>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />);
     const rows = wrapper.find('FlexRow');
-    expect(rows.length).to.be.equal(0);
+    expect(rows.length).toBe(0);
   });
 });

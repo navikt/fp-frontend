@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
@@ -11,24 +10,24 @@ describe('<FrilansPanel>', () => {
     const wrapper = shallow(<FrilansPanel readOnly={false} formName="test" />);
 
     const radioGroupField = wrapper.find(RadioGroupField);
-    expect(radioGroupField).has.length(3);
-    expect(radioGroupField.first().prop('readOnly')).is.false;
+    expect(radioGroupField).toHaveLength(3);
+    expect(radioGroupField.first().prop('readOnly')).toBe(false);
 
     const options = wrapper.find(RadioOption);
-    expect(options).has.length(6);
+    expect(options).toHaveLength(6);
   });
 
   it('Skal rendre panel ved readOnly', () => {
     const wrapper = shallow(<FrilansPanel readOnly formName="test" />);
 
     const radioGroupField = wrapper.find(RadioGroupField);
-    expect(radioGroupField).has.length(3);
-    expect(radioGroupField.first().prop('readOnly')).is.true;
+    expect(radioGroupField).toHaveLength(3);
+    expect(radioGroupField.first().prop('readOnly')).toBe(true);
   });
 
   it('Skal lage defaultperiode', () => {
     const initialValues = FrilansPanel.buildInitialValues();
-    expect(initialValues).is.eql({
+    expect(initialValues).toEqual({
       frilans: {
         oppdragPerioder: [{
           fomDato: '',
@@ -55,7 +54,7 @@ describe('<FrilansPanel>', () => {
 
     const validationResult = FrilansPanel.validate(values);
 
-    expect(validationResult).is.eql({
+    expect(validationResult).toEqual({
       frilans: {
         oppdragPerioder: null,
         perioder: null,
@@ -76,7 +75,7 @@ describe('<FrilansPanel>', () => {
 
     const validationResult = FrilansPanel.validate(values);
 
-    expect(validationResult).is.eql({
+    expect(validationResult).toEqual({
       frilans: {
         oppdragPerioder: null,
         perioder: [{

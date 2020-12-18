@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -59,9 +58,9 @@ describe('<HistorikkIndex>', () => {
     />);
 
     const index = wrapper.find(HistorikkSakIndex);
-    expect(index).to.have.length(3);
-    expect((index.at(0).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).to.eql('2019-01-06');
-    expect((index.at(1).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).to.eql('2019-01-04');
-    expect((index.at(2).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).to.eql('2019-01-01');
+    expect(index).toHaveLength(3);
+    expect((index.at(0).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).toEqual('2019-01-06');
+    expect((index.at(1).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).toEqual('2019-01-04');
+    expect((index.at(2).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).toEqual('2019-01-01');
   });
 });

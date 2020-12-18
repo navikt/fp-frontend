@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import { FagsakPerson } from '@fpsak-frontend/types';
 
@@ -41,8 +40,8 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(1);
-    expect(table.find('TableRow')).to.length(2);
+    expect(table).toHaveLength(1);
+    expect(table.find('TableRow')).toHaveLength(2);
   });
 
   it('skal ikke vise tabell når det ikke finnes inntekter', () => {
@@ -56,7 +55,7 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
     />);
 
     const table = wrapper.find('Table');
-    expect(table).to.have.length(0);
+    expect(table).toHaveLength(0);
   });
 
   it('skal sette opp initielle verdier med visning av søker først og så sortert etter startdato', () => {
@@ -100,7 +99,7 @@ describe('<InntektOgYtelserFaktaPanel>', () => {
 
     const initialValues = InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekt, arbeidsgiverOpplysningerPerId);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       inntekter: [{
         person: 'Espen Utvikler',
         employer: 'Steria',

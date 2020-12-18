@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -23,8 +22,8 @@ describe('<VedtakFritekstbrevModal>', () => {
     />);
     const modal = wrapper.find(Modal);
     const isOpen = modal.prop('isOpen');
-    expect(modal).to.have.length(1);
-    expect(isOpen).to.eql(true);
+    expect(modal).toHaveLength(1);
+    expect(isOpen).toEqual(true);
   });
 
   it('skal vise modal når behandlingsresultat er OPPHOR', () => {
@@ -40,8 +39,8 @@ describe('<VedtakFritekstbrevModal>', () => {
     />);
     const modal = wrapper.find(Modal);
     const isOpen = modal.prop('isOpen');
-    expect(modal).to.have.length(1);
-    expect(isOpen).to.eql(true);
+    expect(modal).toHaveLength(1);
+    expect(isOpen).toEqual(true);
   });
 
   it('skal ikke vise modal når behandlingsresultat er noe annet en OPPHOR og AVSLATT', () => {
@@ -56,7 +55,7 @@ describe('<VedtakFritekstbrevModal>', () => {
       } as Behandlingsresultat}
     />);
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(0);
+    expect(modal).toHaveLength(0);
   });
 
   it('skal ikke vise modal når readOnly er true', () => {
@@ -71,6 +70,6 @@ describe('<VedtakFritekstbrevModal>', () => {
       } as Behandlingsresultat}
     />);
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(0);
+    expect(modal).toHaveLength(0);
   });
 });

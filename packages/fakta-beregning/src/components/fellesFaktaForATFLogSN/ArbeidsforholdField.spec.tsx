@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -59,7 +58,7 @@ describe('<ArbeidsforholdField>', () => {
       index={0}
       alleKodeverk={alleKodeverk}
     />);
-    expect(wrapper.find(InputField).length).to.eql(1);
+    expect(wrapper.find(InputField).length).toEqual(1);
   });
 
   it('skal render ArbeidsforholdField med selectField', () => {
@@ -74,11 +73,11 @@ describe('<ArbeidsforholdField>', () => {
       alleKodeverk={alleKodeverk}
     />);
     const select = wrapper.find(SelectField);
-    expect(select.length).to.eql(1);
+    expect(select.length).toEqual(1);
     const { selectValues } = select.first().props();
-    expect(selectValues.length).to.eql(1);
-    expect(selectValues[0].key).to.eql('1');
-    expect(selectValues[0].props.value).to.eql('1');
-    expect(selectValues[0].props.children).to.eql('Sopra Steria AS (233647823)');
+    expect(selectValues.length).toEqual(1);
+    expect(selectValues[0].key).toEqual('1');
+    expect(selectValues[0].props.value).toEqual('1');
+    expect(selectValues[0].props.children).toEqual('Sopra Steria AS (233647823)');
   });
 });

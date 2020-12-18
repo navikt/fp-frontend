@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import Panel from 'nav-frontend-paneler';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -54,11 +53,11 @@ describe('<Avviksopplysninger>', () => {
     />);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelAT = wrapper.find(AvviksopplysningerAT);
-    expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
+    expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når AT', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag(sammenligningType.AT) as SammenligningsgrunlagProp;
@@ -70,11 +69,11 @@ describe('<Avviksopplysninger>', () => {
     />);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelAT = wrapper.find(AvviksopplysningerAT);
-    expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
+    expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når SN', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag(sammenligningType.SN) as SammenligningsgrunlagProp;
@@ -105,11 +104,11 @@ describe('<Avviksopplysninger>', () => {
     />);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelSN = wrapper.find(AvviksopplysningerSN);
-    expect(avvikPanelSN.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
-    expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
+    expect(avvikPanelSN.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når FL', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag(sammenligningType.FL) as SammenligningsgrunlagProp;
@@ -124,11 +123,11 @@ describe('<Avviksopplysninger>', () => {
     />);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelFL = wrapper.find(AvviksopplysningerFL);
-    expect(avvikPanelFL.props().sammenligningsgrunnlagPrStatus[0]).to.equal(sammenligningsgrunnlagPrStatus);
-    expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
+    expect(avvikPanelFL.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når isAAP', () => {
     relevanteStatuser.isArbeidstaker = false;
@@ -143,14 +142,14 @@ describe('<Avviksopplysninger>', () => {
     />);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const rows = wrapper.find('Row');
-    expect(rows).to.have.length(1);
+    expect(rows).toHaveLength(1);
     const formatedText = rows.first().find('FormattedMessage');
-    expect(formatedText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.AAP');
-    expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
+    expect(formatedText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AAP');
+    expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når isDagpenger', () => {
     relevanteStatuser.isArbeidstaker = false;
@@ -166,14 +165,14 @@ describe('<Avviksopplysninger>', () => {
     />);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find('FormattedMessage').first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const rows = wrapper.find('Row');
-    expect(rows).to.have.length(1);
+    expect(rows).toHaveLength(1);
     const formatedText = rows.first().find('FormattedMessage');
-    expect(formatedText.first().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.Dagpenger');
-    expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
+    expect(formatedText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.Dagpenger');
+    expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når isMilitaer', () => {
     relevanteStatuser.isArbeidstaker = false;
@@ -190,11 +189,11 @@ describe('<Avviksopplysninger>', () => {
     const panel = wrapper.find(Panel);
     const formatedText = panel.find('FormattedMessage');
     const headerTitle = formatedText.first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
-    expect(formatedText.last().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.Miletar');
-    expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(formatedText.last().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.Miletar');
+    expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
   });
   it('Skal teste at riktig componenter blir renderet når besteberegning', () => {
     relevanteStatuser.isArbeidstaker = false;
@@ -211,10 +210,10 @@ describe('<Avviksopplysninger>', () => {
     const panel = wrapper.find(Panel);
     const formatedText = panel.find('FormattedMessage');
     const headerTitle = formatedText.first();
-    expect(headerTitle.props().id).to.equal('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
-    expect(formatedText.last().prop('id')).to.eql('Beregningsgrunnlag.Avviksopplysninger.Besteberegning');
-    expect(wrapper.find('AvviksopplysningerAT')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerSN')).to.have.length(0);
-    expect(wrapper.find('AvviksopplysningerFL')).to.have.length(0);
+    expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
+    expect(formatedText.last().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.Besteberegning');
+    expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
+    expect(wrapper.find('AvviksopplysningerFL')).toHaveLength(0);
   });
 });

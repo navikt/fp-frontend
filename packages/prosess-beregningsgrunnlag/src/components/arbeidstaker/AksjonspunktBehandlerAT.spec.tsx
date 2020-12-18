@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -46,14 +45,15 @@ describe('<AksjonspunktBehandlerAT>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
-    expect(rows).to.have.length(andeler.length);
+    expect(rows).toHaveLength(andeler.length);
     andeler.forEach((andel, index) => {
       const arbeidsgiverNavn = rows.at(index).find('Normaltekst');
-      expect(arbeidsgiverNavn.at(0).childAt(0).text())
-        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent].navn} (${andel.arbeidsforhold.arbeidsgiverIdent})...5678`);
+      expect(arbeidsgiverNavn.at(0).childAt(0).text()).toBe(
+        `${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent].navn} (${andel.arbeidsforhold.arbeidsgiverIdent})...5678`,
+      );
       const inputField = rows.first().find('InputField');
-      expect(inputField).to.have.length(1);
-      expect(inputField.props().readOnly).to.equal(false);
+      expect(inputField).toHaveLength(1);
+      expect(inputField.props().readOnly).toBe(false);
     });
   });
 
@@ -67,14 +67,15 @@ describe('<AksjonspunktBehandlerAT>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
     const rows = wrapper.find('Row');
-    expect(rows).to.have.length(andeler.length);
+    expect(rows).toHaveLength(andeler.length);
     andeler.forEach((andel, index) => {
       const arbeidsgiverNavn = rows.at(index).find('Normaltekst');
-      expect(arbeidsgiverNavn.at(0).childAt(0).text())
-        .to.equal(`${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent].navn} (${andel.arbeidsforhold.arbeidsgiverIdent})...5678`);
+      expect(arbeidsgiverNavn.at(0).childAt(0).text()).toBe(
+        `${arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent].navn} (${andel.arbeidsforhold.arbeidsgiverIdent})...5678`,
+      );
       const inputField = rows.first().find('InputField');
-      expect(inputField).to.have.length(1);
-      expect(inputField.props().readOnly).to.equal(true);
+      expect(inputField).toHaveLength(1);
+      expect(inputField.props().readOnly).toBe(true);
     });
   });
 
@@ -103,7 +104,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
       }],
     };
     const transformedValues = AksjonspunktBehandlerAT.transformValues(values, relevanteStatuser, andeler);
-    expect(transformedValues).is.deep.equal(expectedInitialValues);
+    expect(transformedValues).toEqual(expectedInitialValues);
   });
   it('Skal teste transformValuesATFlhver for seg metode', () => {
     const andeler = [
@@ -121,6 +122,6 @@ describe('<AksjonspunktBehandlerAT>', () => {
       inntekt: 242000,
     }];
     const transformedValues = AksjonspunktBehandlerAT.transformValuesForAT(values, andeler);
-    expect(transformedValues).is.deep.equal(expectedInitialValues);
+    expect(transformedValues).toEqual(expectedInitialValues);
   });
 });

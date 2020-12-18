@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Element } from 'nav-frontend-typografi';
@@ -32,10 +31,10 @@ describe('<BeregningsresultatEngangsstonadForm>', () => {
 
     const texts = wrapper.find(Element);
 
-    expect(texts).to.have.length(3);
-    expect(texts.first().childAt(0).text()).to.eql('60 000 kr');
-    expect(texts.at(1).childAt(0).text()).to.eql('2');
-    expect(texts.last().childAt(0).text()).to.eql('120 000 kr');
+    expect(texts).toHaveLength(3);
+    expect(texts.first().childAt(0).text()).toEqual('60 000 kr');
+    expect(texts.at(1).childAt(0).text()).toEqual('2');
+    expect(texts.last().childAt(0).text()).toEqual('120 000 kr');
   });
 
   it('skal ved valg av overstyr vise tekstfelter', () => {
@@ -57,10 +56,10 @@ describe('<BeregningsresultatEngangsstonadForm>', () => {
       onSubmit={sinon.spy()}
     />);
 
-    expect(wrapper.find(OverstyringPanel)).to.have.length(0);
+    expect(wrapper.find(OverstyringPanel)).toHaveLength(0);
 
     wrapper.find(OverstyringKnapp).prop('onClick')(true);
 
-    expect(wrapper.find(OverstyringPanel)).to.have.length(1);
+    expect(wrapper.find(OverstyringPanel)).toHaveLength(1);
   });
 });

@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
@@ -12,7 +11,7 @@ describe('<DocumentListVedtakInnsyn>', () => {
       documents={[]}
       saksNr={123}
     />);
-    expect(wrapper.find('FormattedMessage').prop('id')).is.equal('DocumentListVedtakInnsyn.NoDocuments');
+    expect(wrapper.find('FormattedMessage').prop('id')).toBe('DocumentListVedtakInnsyn.NoDocuments');
   });
 
   it('skal inneholde ett document, med tittel Dok1', () => {
@@ -28,8 +27,8 @@ describe('<DocumentListVedtakInnsyn>', () => {
       saksNr={123}
       documents={documents}
     />);
-    expect(wrapper.find('FormattedMessage').prop('id')).is.equal('DocumentListVedtakInnsyn.InnsynsDok');
-    expect(wrapper.find('a').text()).is.equal('Dok1');
-    expect(wrapper.find('Table')).to.have.length(1);
+    expect(wrapper.find('FormattedMessage').prop('id')).toBe('DocumentListVedtakInnsyn.InnsynsDok');
+    expect(wrapper.find('a').text()).toBe('Dok1');
+    expect(wrapper.find('Table')).toHaveLength(1);
   });
 });

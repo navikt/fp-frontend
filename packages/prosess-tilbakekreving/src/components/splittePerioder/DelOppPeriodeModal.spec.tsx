@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import Modal from 'nav-frontend-modal';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -30,16 +29,16 @@ describe('<DelOppPeriodeModal>', () => {
     />);
 
     const modal = wrapper.find(Modal);
-    expect(modal).to.have.length(1);
-    expect(modal.prop('isOpen')).is.true;
-    expect(modal.prop('closeButton')).is.false;
-    expect(modal.prop('contentLabel')).to.eql('Periode er splittet');
-    expect(modal.prop('onRequestClose')).to.eql(cancelEvent);
+    expect(modal).toHaveLength(1);
+    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('closeButton')).toBe(false);
+    expect(modal.prop('contentLabel')).toEqual('Periode er splittet');
+    expect(modal.prop('onRequestClose')).toEqual(cancelEvent);
 
     const datepicker = wrapper.find(DatepickerField);
-    expect(datepicker).to.have.length(1);
+    expect(datepicker).toHaveLength(1);
 
-    expect(wrapper.find(Normaltekst).childAt(0).text()).to.eql('01.01.2018 - 01.03.2018');
+    expect(wrapper.find(Normaltekst).childAt(0).text()).toEqual('01.01.2018 - 01.03.2018');
   });
 
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
@@ -52,7 +51,7 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi={false}
     />);
     wrapper.find(Knapp).simulate('click');
-    expect(cancelEvent).to.have.property('callCount', 1);
+    expect(cancelEvent).toHaveProperty('callCount', 1);
   });
 
   it('skal validere ok når valgt dato er innenfor periode', () => {
@@ -71,7 +70,7 @@ describe('<DelOppPeriodeModal>', () => {
       ForstePeriodeTomDato: '2019-10-20',
     };
     const result = validateAndOnSubmit.validate(values);
-    expect(result).to.eql(null);
+    expect(result).toEqual(null);
   });
 
   it('skal gi feilmelding når valgt dato er før periode', () => {
@@ -90,7 +89,7 @@ describe('<DelOppPeriodeModal>', () => {
       ForstePeriodeTomDato: '2019-10-09',
     };
     const result = validateAndOnSubmit.validate(values);
-    expect(result).to.eql({
+    expect(result).toEqual({
       ForstePeriodeTomDato: [{ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }],
     });
   });
@@ -111,7 +110,7 @@ describe('<DelOppPeriodeModal>', () => {
       ForstePeriodeTomDato: '2019-11-11',
     };
     const result = validateAndOnSubmit.validate(values);
-    expect(result).to.eql({
+    expect(result).toEqual({
       ForstePeriodeTomDato: [{ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }],
     });
   });
@@ -132,7 +131,7 @@ describe('<DelOppPeriodeModal>', () => {
       ForstePeriodeTomDato: '2019-10-20',
     };
     const result = validateAndOnSubmit.onSubmit(values);
-    expect(result).to.eql({
+    expect(result).toEqual({
       forstePeriode: {
         fom: '2019-10-10',
         tom: '2019-10-20',

@@ -1,8 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import chai, { expect } from 'chai';
 import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
@@ -10,8 +8,6 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon';
 import * as useIntl from '../useIntl';
 import { FodselsDatoFields, OmsorgOgAdopsjonPanelImpl } from './OmsorgOgAdopsjonPanel';
-
-chai.use(sinonChai);
 
 describe('<OmsorgOgAdopsjonPanel>', () => {
   let contextStub;
@@ -33,8 +29,8 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
     />);
     const overtakelseDatepicker = wrapper.find('DatepickerField');
     const fodselsDatepickers = wrapper.find({ component: FodselsDatoFields });
-    expect(overtakelseDatepicker).to.have.length(2);
-    expect(fodselsDatepickers).to.have.length(1);
+    expect(overtakelseDatepicker).toHaveLength(2);
+    expect(fodselsDatepickers).toHaveLength(1);
   });
 
   it('skal vise komponent med en datepicker når årsakstype er omsorg', () => {
@@ -46,7 +42,7 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       isForeldrepenger
     />);
     const overtakelseDatepicker = wrapper.find('DatepickerField');
-    expect(overtakelseDatepicker).to.have.length(1);
+    expect(overtakelseDatepicker).toHaveLength(1);
   });
 
   describe('<FodselsDatoFields>', () => {
@@ -57,7 +53,7 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       />);
 
       const datepicker = wrapper.find('DatepickerField');
-      expect(datepicker).to.have.length(2);
+      expect(datepicker).toHaveLength(2);
     });
 
     it('skal legge til korrekt antall fields utifra input fra antallBarn', () => {
@@ -69,23 +65,20 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       const pushSpy = sinon.spy(props.fields, 'push');
       const wrapper = shallow(<FodselsDatoFields {...props} />);
 
-      // @ts-ignore
-      expect(pushSpy).to.have.been.calledOnce;
-      expect(props.fields.length).to.eql(1);
+      expect(pushSpy.callCount).toEqual(1);
+      expect(props.fields).toHaveLength(1);
 
       wrapper.instance().UNSAFE_componentWillReceiveProps(props, {});
       wrapper.update();
 
-      // @ts-ignore
-      expect(pushSpy).to.have.been.calledTwice;
-      expect(props.fields.length).to.eql(2);
+      expect(pushSpy.callCount).toEqual(2);
+      expect(props.fields).toHaveLength(2);
 
       wrapper.instance().UNSAFE_componentWillReceiveProps(props, {});
       wrapper.update();
 
-      // @ts-ignore
-      expect(pushSpy).to.have.been.calledTwice;
-      expect(props.fields.length).to.eql(2);
+      expect(pushSpy.callCount).toEqual(2);
+      expect(props.fields).toHaveLength(2);
     });
   });
 });

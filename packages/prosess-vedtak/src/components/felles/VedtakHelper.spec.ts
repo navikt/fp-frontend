@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Vilkar } from '@fpsak-frontend/types';
@@ -22,6 +20,6 @@ describe('<VedtakHelper>', () => {
 
     const hasIkkeOppfylt = hasIkkeOppfyltSoknadsfristvilkar(vilkarListe);
 
-    expect(hasIkkeOppfylt).to.eql(true);
+    expect(hasIkkeOppfylt).toEqual(true);
   });
 });

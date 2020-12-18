@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -46,7 +45,7 @@ describe('<SjekkFodselDokForm>', () => {
       submitHandler={() => undefined}
       onSubmit={() => undefined}
     />);
-    expect(wrapper.find(FodselSammenligningIndex)).has.length(1);
+    expect(wrapper.find(FodselSammenligningIndex)).toHaveLength(1);
   });
 
   it('skal sette korrekte initielle verdier når vi har avklarte data', () => {
@@ -65,7 +64,7 @@ describe('<SjekkFodselDokForm>', () => {
 
     const initialValues = buildInitialValues.resultFunc(familiehendelse as FamilieHendelse, aksjonspunkter, 1);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       avklartBarn: [{
         dodsdato: '',
         fodselsdato: '',
@@ -89,7 +88,7 @@ describe('<SjekkFodselDokForm>', () => {
     } as Aksjonspunkt;
     const initialValues = buildInitialValues.resultFunc(familiehendelse as FamilieHendelse, aksjonspunkter, 1);
 
-    expect(initialValues).to.eql({
+    expect(initialValues).toEqual({
       avklartBarn: [{
         dodsdato: '',
         fodselsdato: '',

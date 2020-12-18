@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import PeriodeController from './PeriodeController';
@@ -26,7 +25,7 @@ describe('<TilbakekrevingTimelineData>', () => {
       beregnBelop={() => undefined}
     />);
 
-    expect(wrapper.find(PeriodeController)).to.have.length(1);
-    expect(wrapper.find(PeriodeInformasjon)).to.have.length(1);
+    expect(wrapper.find(PeriodeController)).toHaveLength(1);
+    expect(wrapper.find(PeriodeInformasjon)).toHaveLength(1);
   });
 });

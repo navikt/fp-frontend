@@ -1,5 +1,4 @@
 import React from 'react';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -52,9 +51,9 @@ describe('<VedtakKlageForm>', () => {
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
-    expect(wrapper.find(Undertekst).at(1).childAt(0).text()).equal('Årsak til avvisning');
-    expect(wrapper.find(Normaltekst).at(1).childAt(0).text()).equal('Bruker har klaget for sent');
-    expect(wrapper.find(Normaltekst).at(2).childAt(0).text()).equal('Klager er ikke part');
+    expect(wrapper.find(Undertekst).at(1).childAt(0).text()).toBe('Årsak til avvisning');
+    expect(wrapper.find(Normaltekst).at(1).childAt(0).text()).toBe('Bruker har klaget for sent');
+    expect(wrapper.find(Normaltekst).at(2).childAt(0).text()).toBe('Klager er ikke part');
   });
 
   describe('Klage vedtak Selectors', () => {
@@ -62,7 +61,7 @@ describe('<VedtakKlageForm>', () => {
       it('should return true', () => {
         const brt = { type: { kode: behandlingResultatType.KLAGE_AVVIST } } as Behandling['behandlingsresultat'];
         const selected = getIsAvvist.resultFunc(brt);
-        expect(selected).equal(true);
+        expect(selected).toBe(true);
       });
     });
 
@@ -73,7 +72,7 @@ describe('<VedtakKlageForm>', () => {
           klageVurderingResultatNFP: { klageVurdertAv: '' },
         } as KlageVurdering;
         const selected = getAvvisningsAarsaker.resultFunc(klageVurdering);
-        expect(selected).to.have.length(2);
+        expect(selected).toHaveLength(2);
       });
     });
   });

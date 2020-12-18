@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
@@ -50,8 +49,8 @@ describe('<BehandlingPicker>', () => {
     />);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).has.length(1);
-    expect(message.prop('id')).is.eql('BehandlingList.ZeroBehandlinger');
+    expect(message).toHaveLength(1);
+    expect(message.prop('id')).toEqual('BehandlingList.ZeroBehandlinger');
   });
 
   it('skal vise alle behandlinger sortert med sist opprettet først i listen', () => {
@@ -78,10 +77,10 @@ describe('<BehandlingPicker>', () => {
     />);
 
     const item = wrapper.find(BehandlingPickerItem);
-    expect(item).has.length(3);
-    expect(item.first().prop('behandling').id).is.eql(2);
-    expect(item.at(1).prop('behandling').id).is.eql(1);
-    expect(item.last().prop('behandling').id).is.eql(3);
+    expect(item).toHaveLength(3);
+    expect(item.first().prop('behandling').id).toEqual(2);
+    expect(item.at(1).prop('behandling').id).toEqual(1);
+    expect(item.last().prop('behandling').id).toEqual(3);
   });
 
   it('skal vise alle behandlinger sortert med valgt behandling først i listen', () => {
@@ -109,10 +108,10 @@ describe('<BehandlingPicker>', () => {
     />);
 
     const item = wrapper.find(BehandlingPickerItem);
-    expect(item).has.length(3);
-    expect(item.first().prop('behandling').id).is.eql(2);
-    expect(item.at(1).prop('behandling').id).is.eql(1);
-    expect(item.last().prop('behandling').id).is.eql(3);
+    expect(item).toHaveLength(3);
+    expect(item.first().prop('behandling').id).toEqual(2);
+    expect(item.at(1).prop('behandling').id).toEqual(1);
+    expect(item.last().prop('behandling').id).toEqual(3);
   });
 
   it('skal sortere behandlingene gitt avsluttet og opprettet datoer', () => {
@@ -130,7 +129,7 @@ describe('<BehandlingPicker>', () => {
 
     const sorterteBehandlinger = sortBehandlinger(behandlinger);
 
-    expect(sorterteBehandlinger).is.eql([{
+    expect(sorterteBehandlinger).toEqual([{
       opprettet: '2019-08-14T13:32:57',
     }, {
       opprettet: '2019-08-13T13:32:57',

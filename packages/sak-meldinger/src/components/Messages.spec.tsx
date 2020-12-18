@@ -1,6 +1,5 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -53,15 +52,15 @@ describe('<Messages>', () => {
 
     const form = wrapper.find('form');
     const selectFields = form.find('SelectField');
-    expect(selectFields).to.have.length(2);
+    expect(selectFields).toHaveLength(2);
 
     const recipientSelect = selectFields.findWhere((selectField) => selectField.prop('name') === 'mottaker');
-    expect(recipientSelect).to.have.length(1);
-    expect(recipientSelect.prop('selectValues')).to.have.length(2);
+    expect(recipientSelect).toHaveLength(1);
+    expect(recipientSelect.prop('selectValues')).toHaveLength(2);
 
     const templateSelect = selectFields.findWhere((selectField) => selectField.prop('name') === 'brevmalkode');
-    expect(templateSelect).to.have.length(1);
-    expect(templateSelect.prop('selectValues')).to.have.length(3);
+    expect(templateSelect).toHaveLength(1);
+    expect(templateSelect.prop('selectValues')).toHaveLength(3);
   });
 
   it('skal vise forhåndvisningslenke når fritekst er gyldig', () => {
@@ -80,12 +79,12 @@ describe('<Messages>', () => {
     />);
 
     const previewLink = wrapper.find('a');
-    expect(previewLink).to.have.length(1);
-    expect(previewLink.text()).to.eql('Forhåndsvis');
+    expect(previewLink).toHaveLength(1);
+    expect(previewLink.text()).toEqual('Forhåndsvis');
 
-    expect(previewEventCallback.called).is.false;
+    expect(previewEventCallback.called).toBe(false);
     previewLink.simulate('click', { preventDefault: sinon.spy() });
-    expect(previewEventCallback.called).is.true;
+    expect(previewEventCallback.called).toBe(true);
   });
 
   it('skal vise tre select-bokser når varsel om revurdering', () => {
@@ -106,14 +105,14 @@ describe('<Messages>', () => {
 
     const form = wrapper.find('form');
     const selectFields = form.find('SelectField');
-    expect(selectFields).to.have.length(3);
+    expect(selectFields).toHaveLength(3);
 
     const recipientSelect = selectFields.findWhere((selectField) => selectField.prop('name') === 'mottaker');
-    expect(recipientSelect).to.have.length(1);
-    expect(recipientSelect.prop('selectValues')).to.have.length(2);
+    expect(recipientSelect).toHaveLength(1);
+    expect(recipientSelect.prop('selectValues')).toHaveLength(2);
 
     const templateSelect = selectFields.findWhere((selectField) => selectField.prop('name') === 'brevmalkode');
-    expect(templateSelect).to.have.length(1);
-    expect(templateSelect.prop('selectValues')).to.have.length(3);
+    expect(templateSelect).toHaveLength(1);
+    expect(templateSelect.prop('selectValues')).toHaveLength(3);
   });
 });
