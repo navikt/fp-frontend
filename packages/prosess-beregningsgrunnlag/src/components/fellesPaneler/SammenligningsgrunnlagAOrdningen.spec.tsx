@@ -295,7 +295,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       } else if (formattedMaaned === 'Des') {
         // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
-        expect(Number(underTekster.at(teller + 3).children().at(0).text())).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1).toString();
+        expect(Number(underTekster.at(teller + 3).children().at(0).text())).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1);
         teller += 4;
       } else {
         teller += 3;
@@ -342,7 +342,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       } else if (formattedMaaned === 'Des') {
         // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
-        expect(underTekster.at(teller + 2).children().at(0).text()).toBe(Number((skjeringstidspunktDato.split('-')[0])) - 1).toString();
+        expect(underTekster.at(teller + 2).children().at(0).text()).toBe(Number((skjeringstidspunktDato.split('-')[0])) - 1);
         teller += 3;
       } else {
         teller += 2;
@@ -389,7 +389,7 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       } else if (formattedMaaned === 'Des') {
         // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
-        expect(underTekster.at(teller + 2).children().at(0).text()).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1).toString();
+        expect(underTekster.at(teller + 2).children().at(0).text()).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1);
         teller += 3;
       } else {
         teller += 2;

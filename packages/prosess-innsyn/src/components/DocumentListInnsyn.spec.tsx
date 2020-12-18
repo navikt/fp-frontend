@@ -77,7 +77,7 @@ describe('<DocumentListInnsyn>', () => {
       readOnly={false}
     />);
 
-    expect(wrapper.find(Image).prop('tooltip').length).toBeGreaterThan(1);
+    expect(wrapper.find(Image).prop('tooltip')).toEqual('Ut');
   });
 
   it('skal inneholde document med riktig kommunikasjonsretining: Motta -> INN', () => {
@@ -94,7 +94,7 @@ describe('<DocumentListInnsyn>', () => {
       saksNr={123}
       readOnly={false}
     />);
-    expect(wrapper.find(Image).prop('tooltip').length).toBeGreaterThan(1);
+    expect(wrapper.find(Image).prop('tooltip')).toEqual('Inn');
   });
 
   it('skal ikke inneholde dato', () => {
