@@ -9,7 +9,6 @@ import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsTy
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { IntlShape } from 'react-intl';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
-import { skalValidereMotBeregningsgrunnlag } from '../BgFordelingUtils';
 
 import styles from './fordelBeregningsgrunnlagForm.less';
 
@@ -155,7 +154,6 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
   ) => {
     const errors = {};
     if (fordelBGPerioder && fordelBGPerioder.length > 0) {
-      const skalValidereMotBeregningsgrunnlagPrAar = (andel) => skalValidereMotBeregningsgrunnlag(beregningsgrunnlag)(andel);
       const perioderSlattSammen = slaaSammenPerioder(fordelBGPerioder, beregningsgrunnlag.beregningsgrunnlagPeriode);
       const grunnbeløp = Number(beregningsgrunnlag.grunnbeløp);
       for (let i = 0; i < perioderSlattSammen.length; i += 1) {
@@ -163,9 +161,9 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
         const periode = values[getFieldNameKey(i)];
         const fordelPeriode = perioderSlattSammen[i];
         const skalValidereRefusjon = fordelPeriode && fordelPeriode.skalKunneEndreRefusjon;
-        const periodeDato = { fom: fordelPeriode, tom: fordelPeriode };
+        const periodeDato = { fom: fordelPeriode.fom, tom: fordelPeriode.tom };
         errors[getFieldNameKey(i)] = FordelBeregningsgrunnlagPeriodePanel.validate(intl, periode, sumIPeriode,
-          skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
+          getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
       }
     }
     return errors;
