@@ -1,4 +1,4 @@
-// import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import { requestApi } from '@fpsak-frontend/sak-app/src/data/fpsakApi';
 import { requestAnkeApi } from '@fpsak-frontend/behandling-anke/src/data/ankeBehandlingApi';
 import { requestEsApi } from '@fpsak-frontend/behandling-es/src/data/esBehandlingApi';
@@ -9,10 +9,10 @@ import { requestPapirsoknadApi } from '@fpsak-frontend/behandling-papirsoknad/sr
 import { requestSvpApi } from '@fpsak-frontend/behandling-svp/src/data/svpBehandlingApi';
 import { requestTilbakekrevingApi } from '@fpsak-frontend/behandling-tilbakekreving/src/data/tilbakekrevingBehandlingApi';
 
-/* beforeAll(() => {
+beforeAll(() => {
   // Denne trengs for snapshot-testing
   ReactDOM.createPortal = jest.fn((element) => element);
-}); */
+});
 
 afterEach(() => {
   requestApi.clearAllMockData();
@@ -26,5 +26,5 @@ afterEach(() => {
   requestTilbakekrevingApi.clearAllMockData();
 
   // Denne trengs for snapshot-testing
-  // ReactDOM.createPortal.mockClear();
+  ReactDOM.createPortal.mockClear();
 });

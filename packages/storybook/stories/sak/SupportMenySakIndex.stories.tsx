@@ -7,6 +7,9 @@ export default {
   title: 'sak/sak-support-meny',
   component: SupportMenySakIndex,
   decorators: [withKnobs],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 export const visMenyUtenBeslutterGodkjenningOgTilbakesending = () => {

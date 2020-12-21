@@ -86,6 +86,9 @@ export default {
   title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 export const visForFørstegangsbehandling = () => (

@@ -184,6 +184,9 @@ export default {
   title: 'prosess/tilbakekreving/prosess-vedtak-tilbakekreving',
   component: VedtakTilbakekrevingProsessIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 export const visVedtakspanel = () => (

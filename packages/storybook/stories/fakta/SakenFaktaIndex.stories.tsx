@@ -40,6 +40,9 @@ export default {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 export const visEndringAvUtland = () => (

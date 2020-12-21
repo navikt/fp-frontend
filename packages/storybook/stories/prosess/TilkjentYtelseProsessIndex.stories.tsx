@@ -107,6 +107,9 @@ export default {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 export const visUtenAksjonspunkt = () => (

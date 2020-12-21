@@ -134,6 +134,9 @@ export default {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 export const visAksjonspunktForOpptjeningsvilkåret = () => (

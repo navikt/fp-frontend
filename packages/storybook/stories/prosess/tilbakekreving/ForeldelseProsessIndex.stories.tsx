@@ -98,6 +98,9 @@ export default {
   title: 'prosess/tilbakekreving/prosess-foreldelse',
   component: ForeldelseProsessIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 const beregnBelop = (params) => {

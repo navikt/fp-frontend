@@ -15,6 +15,9 @@ export default {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 const aksjonspunkter = [

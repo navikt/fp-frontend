@@ -88,6 +88,9 @@ export default {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
   decorators: [withKnobs, withReduxProvider],
+  parameters: {
+    storyshots: { disable: true },
+  },
 };
 
 /*
