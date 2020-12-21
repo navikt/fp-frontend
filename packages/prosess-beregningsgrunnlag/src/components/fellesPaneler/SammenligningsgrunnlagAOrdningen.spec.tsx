@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
@@ -10,13 +9,13 @@ import shallowWithIntl, { mountWithIntl } from '../../../i18n/intl-enzyme-test-h
 import SammenligningsgrunnlagAOrdningen from './SammenligningsgrunnlagAOrdningen';
 import Lesmerpanel2 from '../redesign/LesmerPanel';
 
-// TODO Se på hvorfor tester her feiler, er ikke nødvendig å fikse nå da denne komponenten ikke brukes enda
 const relevanteStatuser = {
   isArbeidstaker: true,
   isFrilanser: true,
   isSelvstendigNaeringsdrivende: false,
   isKombinasjonsstatus: true,
 };
+
 const mockSammenligningsgrunnlagInntekt = [
   {
     aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
@@ -241,33 +240,30 @@ const skjeringstidspunktDato = '2019-09-16';
 
 describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
   it('Skal se at panelet ikke rendrer ved manglende SammenligningsgrunnlagInntekt', () => {
-    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
+    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningen
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={[]}
       skjeringstidspunktDato={skjeringstidspunktDato}
-      intl={intlMock}
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(0);
   });
   it('Skal se at panelet ikke rendrer ved SammenligningsgrunnlagInntekt og SN', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = true;
-    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
+    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningen
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={mockSammenligningsgrunnlagInntekt}
       skjeringstidspunktDato={skjeringstidspunktDato}
-      intl={intlMock}
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(0);
   });
-  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT_FL', () => {
+  it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT_FL', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
-    const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
+    const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={mockSammenligningsgrunnlagInntekt}
       skjeringstidspunktDato={skjeringstidspunktDato}
-      intl={intlMock}
     />);
     const lesmer = wrapper.find(Lesmerpanel2);
     const rows = lesmer.find('FlexRow');
@@ -288,12 +284,10 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expect(underTekster.at(teller + 1).children().at(0).text()).toBe(formatCurrencyNoKr(expectedATverdier[expteller].belop));
       expect(underTekster.at(teller + 2).children().at(0).text()).toBe(formatCurrencyNoKr(expectedFLverdier[expteller].belop));
       if (formattedMaaned === 'Jan') {
-        // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
         expect(Number(underTekster.at(teller + 3).children().at(0).text())).toBe(Number(skjeringstidspunktDato.split('-')[0]).toString());
         teller += 4;
       } else if (formattedMaaned === 'Des') {
-        // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
         expect(Number(underTekster.at(teller + 3).children().at(0).text())).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1);
         teller += 4;
@@ -303,22 +297,20 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expteller += 1;
     }
 
-    const sumTitle = wrapper.find('FormattedMessage').at(2);
+    const sumTitle = wrapper.find('FormattedMessage').at(3);
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
     const sumATAndeler = wrapper.find('Element').at(1);
     const sumFLAndeler = wrapper.find('Element').at(2);
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(espectedSumATAndeler));
     expect(sumFLAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(espectedSumFLAndeler));
   });
-  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og FL', () => {
-    const statuser = { ...relevanteStatuser };
-    statuser.isArbeidstaker = false;
-    statuser.isKombinasjonsstatus = false;
-    const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
+  it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og FL', () => {
+    relevanteStatuser.isArbeidstaker = false;
+    relevanteStatuser.isKombinasjonsstatus = false;
+    const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={mockSammenligningsgrunnlagInntekt}
       skjeringstidspunktDato={skjeringstidspunktDato}
-      intl={intlMock}
     />);
     const lesmer = wrapper.find(Lesmerpanel2);
     const rows = lesmer.find('FlexRow');
@@ -335,36 +327,32 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expect(underTekster.at(teller).children().at(0).text()).toBe(formattedMaaned);
       expect(underTekster.at(teller + 1).children().at(0).text()).toBe(formatCurrencyNoKr(expectedFLverdier[expTeller].belop));
       if (formattedMaaned === 'Jan') {
-        // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
         expect(underTekster.at(teller + 2).children().at(0).text()).toBe((skjeringstidspunktDato.split('-')[0]).toString());
         teller += 3;
       } else if (formattedMaaned === 'Des') {
-        // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
-        expect(underTekster.at(teller + 2).children().at(0).text()).toBe(Number((skjeringstidspunktDato.split('-')[0])) - 1);
+        expect(Number(underTekster.at(teller + 2).children().at(0).text())).toBe(Number((skjeringstidspunktDato.split('-')[0])) - 1);
         teller += 3;
       } else {
         teller += 2;
       }
       expTeller += 1;
     }
-    const sumTitle = wrapper.find('FormattedMessage').at(2);
+    const sumTitle = wrapper.find('FormattedMessage').at(3);
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
     const sumFLAndeler = wrapper.find('Element').at(1);
     expect(sumFLAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(espectedSumFLAndeler));
   });
-  it.skip('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT', () => {
-    const statuser = { ...relevanteStatuser };
-    statuser.isArbeidstaker = false;
-    statuser.isKombinasjonsstatus = false;
-    statuser.isArbeidstaker = true;
-    statuser.isFrilanser = false;
-    const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen.WrappedComponent
+  it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt og AT', () => {
+    relevanteStatuser.isKombinasjonsstatus = false;
+    relevanteStatuser.isArbeidstaker = true;
+    relevanteStatuser.isFrilanser = false;
+    relevanteStatuser.isSelvstendigNaeringsdrivende = false;
+    const wrapper = mountWithIntl(<SammenligningsgrunnlagAOrdningen
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={mockSammenligningsgrunnlagInntekt}
       skjeringstidspunktDato={skjeringstidspunktDato}
-      intl={intlMock}
     />);
     const lesmer = wrapper.find(Lesmerpanel2);
     const rows = lesmer.find('FlexRow');
@@ -382,21 +370,19 @@ describe('<SammenligningsgrunnlagFraA-Ordningen>', () => {
       expect(underTekster.at(teller).children().at(0).text()).toBe(formattedMaaned);
       expect(underTekster.at(teller + 1).children().at(0).text()).toBe(formatCurrencyNoKr(expectedATverdier[expTeller].belop));
       if (formattedMaaned === 'Jan') {
-        // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
         expect(underTekster.at(teller + 2).children().at(0).text()).toBe((skjeringstidspunktDato.split('-')[0]).toString());
         teller += 3;
       } else if (formattedMaaned === 'Des') {
-        // Fiks denne!
         // eslint-disable-next-line jest/no-conditional-expect
-        expect(underTekster.at(teller + 2).children().at(0).text()).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1);
+        expect(Number(underTekster.at(teller + 2).children().at(0).text())).toBe(Number(skjeringstidspunktDato.split('-')[0]) - 1);
         teller += 3;
       } else {
         teller += 2;
       }
       expTeller += 1;
     }
-    const sumTitle = wrapper.find('FormattedMessage').at(2);
+    const sumTitle = wrapper.find('FormattedMessage').at(3);
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
     const sumATAndeler = wrapper.find('Element').at(1);
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(espectedSumATAndeler));

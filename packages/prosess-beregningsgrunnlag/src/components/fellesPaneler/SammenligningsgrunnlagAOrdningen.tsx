@@ -5,7 +5,7 @@ import {
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexRow, VerticalSpacer,
@@ -25,8 +25,6 @@ const grafFargeFL = '#c1b5d0';
 const grafBorderFarge = '#0c5472';
 
 const finnAndelerStatus = (relevanteStatuser) => {
-  /* eslint-disable no-console */
-  console.log('RELEVANTE_STATUSER', relevanteStatuser);
   if (relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) return aktivitetStatus.KOMBINERT_AT_FL;
   if (relevanteStatuser.isFrilanser) return aktivitetStatus.FRILANSER;
   if (relevanteStatuser.isArbeidstaker) return aktivitetStatus.ARBEIDSTAKER;
@@ -202,8 +200,8 @@ type OwnProps = {
     skjeringstidspunktDato: string;
 };
 
-const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  sammenligningsGrunnlagInntekter, relevanteStatuser, skjeringstidspunktDato, intl,
+const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps> = ({
+  sammenligningsGrunnlagInntekter, relevanteStatuser, skjeringstidspunktDato,
 }) => {
   const andeler = sammenligningsGrunnlagInntekter;
   if ((!andeler || andeler.length === 0) || !skjeringstidspunktDato || relevanteStatuser.isSelvstendigNaeringsdrivende) return null;
@@ -215,8 +213,8 @@ const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComp
       <Lesmerpanel
         className={styles.lesMer}
         intro={lagOverskrift(andelStatus, userIdent)}
-        lukkTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SkjulMaaneder' })}
-        apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder' })}
+        lukkTekst={<FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SkjulMaaneder" />}
+        apneTekst={<FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder" />}
         defaultApen
       >
         {relevanteStatuser.isArbeidstaker && relevanteStatuser.isFrilanser && (
@@ -240,4 +238,4 @@ const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComp
   );
 };
 
-export default injectIntl(SammenligningsgrunnlagAOrdningen);
+export default SammenligningsgrunnlagAOrdningen;

@@ -14,8 +14,8 @@ type OwnProps = {
     onClose?: (...args: any[]) => any;
     intro?: React.ReactNode;
     id?: string;
-    lukkTekst: string;
-    apneTekst: string;
+    lukkTekst: React.ReactNode;
+    apneTekst: React.ReactNode;
     className?: string;
     border?: boolean;
 };
