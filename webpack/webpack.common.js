@@ -98,7 +98,7 @@ const config = {
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.less?$/
+          or: [/\.less?$/],
         },
         loader: 'file-loader',
         options: {
@@ -109,7 +109,7 @@ const config = {
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.(tsx)?$/
+          or: [/\.(tsx)?$/],
         },
         use: [{
           loader: '@svgr/webpack',
@@ -140,7 +140,7 @@ const config = {
     canvas: 'commonjs canvas',
     cheerio: 'window',
     'react/addons': 'react',
-    'react/lib/ExecutionEnvironment': 'react',
+    'react/lib/Executinvironment': 'react',
     'react/lib/ReactContext': 'react',
     bufferutil: 'bufferutil',
     'utf-8-validate': 'utf-8-validate',
@@ -156,7 +156,7 @@ const config = {
       overrideConfigFile: path.resolve(__dirname, isDevelopment ? '../eslint/eslintrc.dev.js' : '../eslint/eslintrc.prod.js'),
     }),
     new MiniCssExtractPlugin({
-      filename: isDevelopment ? 'style.css' : 'style_[contenthash].css',
+      filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
       ignoreOrder: true,
     }),
     new HtmlWebpackPlugin({
@@ -173,11 +173,13 @@ const config = {
         from: LANG_DIR,
         to: PUBLIC_PATH + 'sprak/[name].[ext]',
         force: true,
-        cacheTransform: {
-          keys: {
-            key: '[hash]',
-          }
-        }
+        transform: {
+          cache: {
+            keys: {
+              key: '[hash]',
+            }
+          },
+        },
       }]
     }),
     new webpack.ContextReplacementPlugin(
