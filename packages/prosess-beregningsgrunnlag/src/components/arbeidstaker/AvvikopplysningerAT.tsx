@@ -30,7 +30,7 @@ type OwnProps = {
     beregnetAarsinntekt?: number;
 };
 
-const AvviksopplysningerAT: FunctionComponent<OwnProps> = ({
+const AvvikopplysningerAT: FunctionComponent<OwnProps> = ({
   relevanteStatuser,
   sammenligningsgrunnlagPrStatus,
   beregnetAarsinntekt,
@@ -73,8 +73,8 @@ const AvviksopplysningerAT: FunctionComponent<OwnProps> = ({
     />
   );
 };
-AvviksopplysningerAT.defaultProps = {
+AvvikopplysningerAT.defaultProps = {
   beregnetAarsinntekt: undefined,
 };
 
-export default AvviksopplysningerAT;
+export default AvvikopplysningerAT;

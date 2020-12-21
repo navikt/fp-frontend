@@ -41,7 +41,8 @@ const finnAndelerFraFordelingperioder = (fordelPerioder) => (fordelPerioder.leng
 const finnAndelerFraBgperioder = (bgPerioder) => (bgPerioder.length > 0
   ? bgPerioder.flatMap((p) => p.beregningsgrunnlagPrStatusOgAndel) : emptyList);
 
-const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder, bgPerioder) => getUniqueListOfArbeidsforholdFromAndeler(
+// TODO Fjern export og rename fil
+export const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder, bgPerioder) => getUniqueListOfArbeidsforholdFromAndeler(
   finnAndelerFraFordelingperioder(fordelPerioder),
   finnAndelerFraBgperioder(bgPerioder),
 );

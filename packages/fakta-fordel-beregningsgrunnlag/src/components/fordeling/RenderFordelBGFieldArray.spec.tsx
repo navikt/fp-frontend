@@ -259,7 +259,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000, 
+    const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       getKodeverknavn, 97000, undefined, false);
     expect(errors).toBe(null);
   });

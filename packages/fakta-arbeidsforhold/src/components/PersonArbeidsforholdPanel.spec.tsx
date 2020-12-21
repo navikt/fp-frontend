@@ -9,7 +9,7 @@ import PersonArbeidsforholdDetailForm from './arbeidsforholdDetaljer/PersonArbei
 import PersonArbeidsforholdPanel, {
   erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM,
   PersonArbeidsforholdPanelImpl,
-  sortArbeidsforhold,
+  getSortArbeidsforholdFn,
 } from './PersonArbeidsforholdPanel';
 import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
 
@@ -365,7 +365,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     };
 
     const arbeidsforholdListe = [arbeidsforhold, arbeidsforhold2, arbeidsforhold3, arbeidsforhold4, arbeidsforhold5];
-    const sorterteArbeidsforhol = sortArbeidsforhold(arbeidsforholdListe, arbeidsgiverOpplysningerPerId);
+    const sorterteArbeidsforhol = arbeidsforholdListe.sort(getSortArbeidsforholdFn(arbeidsgiverOpplysningerPerId));
 
     expect(sorterteArbeidsforhol).toEqual(
       [arbeidsforhold5, arbeidsforhold4, arbeidsforhold2, arbeidsforhold3, arbeidsforhold],
