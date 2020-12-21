@@ -20,7 +20,7 @@ export const getTermindatoEllerFodselsdato = (isTermin: boolean, originalSoknad?
     return formatDate(famHendelse.termindato ? famHendelse.termindato : originalSoknad.termindato);
   }
 
-  return formatDate(famHendelse.avklartBarn.length > 0
+  return formatDate(famHendelse.avklartBarn !== null && famHendelse.avklartBarn.length > 0
     ? famHendelse.avklartBarn[0].fodselsdato : Object.values(originalSoknad.fodselsdatoer)[0]);
 };
 
