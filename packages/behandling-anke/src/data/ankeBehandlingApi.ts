@@ -22,7 +22,7 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', AnkeBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', AnkeBehandlingApiKeys.VILKAR)
-  .withRel('anke-vurdering', AnkeBehandlingApiKeys.ANKE_VURDERING )
+  .withRel('anke-vurdering', AnkeBehandlingApiKeys.ANKE_VURDERING)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', AnkeBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)
