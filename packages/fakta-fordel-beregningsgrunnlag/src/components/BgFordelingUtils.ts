@@ -84,27 +84,6 @@ export const starterPaaEllerEtterStp = (bgAndel,
   skjaeringstidspunktBeregning) => (bgAndel && bgAndel.arbeidsforhold
     && bgAndel.arbeidsforhold.startdato && !moment(bgAndel.arbeidsforhold.startdato).isBefore(moment(skjaeringstidspunktBeregning)));
 
-const harAAPOgRefusjonskravOverstigerInntektsmelding = (andel, beregningsgrunnlag) => {
-  if (andel.refusjonskravFraInntektsmelding && andel.refusjonskravFraInntektsmelding > andel.belopFraInntektsmelding) {
-    return beregningsgrunnlag.beregningsgrunnlagPeriode.some((periode) => periode.beregningsgrunnlagPrStatusOgAndel
-      .some((a) => a.aktivitetStatus.kode === aktivitetStatus.ARBEIDSAVKLARINGSPENGER));
-  }
-  return false;
-};
-
-const erSNEllerFL = (andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE
-|| andel.aktivitetStatus === aktivitetStatus.FRILANSER;
-
-export const skalValidereMotBeregningsgrunnlag = (beregningsgrunnlag) => (andel) => {
-  if (harAAPOgRefusjonskravOverstigerInntektsmelding(andel, beregningsgrunnlag)) {
-    return false;
-  }
-  if (erSNEllerFL(andel)) {
-    return false;
-  }
-  return !andel.nyttArbeidsforhold;
-};
-
 export const mapToBelop = (andel) => {
   const { fastsattBelop, readOnlyBelop } = andel;
   if (andel.skalRedigereInntekt) {

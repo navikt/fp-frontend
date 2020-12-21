@@ -25,8 +25,6 @@ const inntektskategorier = [
 
 const getKodeverknavn = () => undefined;
 
-const skalValidereMotBeregningsgrunnlagPrAar = () => true;
-
 const andel = {
   nyAndel: true,
   fordelingForrigeBehandling: 0,
@@ -261,8 +259,8 @@ describe('<RenderFordelBGFieldArray>', () => {
       refusjonskravFraInntektsmelding: 10000,
     };
     values.push(andel1);
-    const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+    const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000, 
+      getKodeverknavn, 97000, undefined, false);
     expect(errors).toBe(null);
   });
 
@@ -281,7 +279,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false);
     expect(errors).toBe(null);
   });
 
@@ -300,7 +298,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false);
     expect(errors[0].refusjonskrav).toBe(isRequiredMessage());
   });
 
@@ -329,7 +327,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, true);
+      getKodeverknavn, 97000, undefined, true);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
     expect(errors._error.props.id).toBe(expected[0].id);
@@ -352,7 +350,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, true);
+      getKodeverknavn, 97000, undefined, true);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
     expect(errors._error.props.id).toBe(expected[0].id);
@@ -375,7 +373,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false);
     expect(errors[0].fastsattBelop).toBe(isRequiredMessage());
   });
 
@@ -394,7 +392,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false);
     expect(errors[0].inntektskategori).toBe(isRequiredMessage());
   });
 
@@ -414,7 +412,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false);
     expect(errors[0].andel).toBe(isRequiredMessage());
   });
 
@@ -434,7 +432,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false);
     expect(errors).toBe(null);
   });
 

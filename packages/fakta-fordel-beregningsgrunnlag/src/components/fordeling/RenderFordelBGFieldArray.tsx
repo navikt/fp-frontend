@@ -25,7 +25,7 @@ import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import 'core-js/features/array/flat-map';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { BeregningsgrunnlagAndel, Kodeverk } from '@fpsak-frontend/types';
+import { Kodeverk } from '@fpsak-frontend/types';
 import getUniqueListOfArbeidsforhold from '../ArbeidsforholdHelper';
 import {
   validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
@@ -389,7 +389,6 @@ interface StaticFunctions {
   validate: (intl: IntlShape,
              values: any,
              sumIPeriode: number,
-             skalValidereMotBeregningsgrunnlagPrAar: (andel: BeregningsgrunnlagAndel) => boolean,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
              grunnbeløp: number,
              periodeDato: {
@@ -468,7 +467,7 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
 
 const RenderFordelBGFieldArray = injectIntl(RenderFordelBGFieldArrayImpl);
 
-RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, skalValidereMotBeregningsgrunnlagPrAar, getKodeverknavn,
+RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverknavn,
   grunnbeløp, periodeDato, skalValidereRefusjon) => {
   const fieldErrors = validateAndeler(intl, values, periodeDato);
   if (fieldErrors != null) {
