@@ -33,7 +33,7 @@ export const getAntallBarn = (isTermin: boolean, originalSoknad?: Soknad, orgina
   if (isTermin) {
     return famHendelse.termindato ? famHendelse.antallBarnTermin : originalSoknad.antallBarn;
   }
-  return famHendelse.avklartBarn.length > 0 ? famHendelse.avklartBarn.length : originalSoknad.antallBarn;
+  return famHendelse.avklartBarn?.length > 0 ? famHendelse.avklartBarn.length : originalSoknad.antallBarn;
 };
 
 interface OwnProps {
