@@ -17,7 +17,7 @@
     "test:watch:all": "jest --watchAll --colors",
     "test:coverage": "jest --coverage --colors --selectProjects test",
     "ts-check": "tsc  --pretty",
-    "lint": "eslint --cache ./packages/**/*.ts*",
+    "lint": "eslint ./packages/**/*.ts*",
     "lint:fix": "eslint --fix --cache ./packages/**/*.ts*",
     "less:lint": "stylelint \"packages/**/*.less\"",
     "dev": "cross-env NODE_ENV=development node webpack/webpack.dev.server.js --config webpack/webpack.dev.js",
