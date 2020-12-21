@@ -231,7 +231,7 @@ describe('<UnwrappedForm>', () => {
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find(AksjonspunktBehandlerTB);
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
-    const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
+    const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktsBehandlerSN');
     expect(aksjonspunktBehandlerAT).toHaveLength(0);
     expect(aksjonspunktBehandlerTB).toHaveLength(0);
     expect(aksjonspunktBehandlerFL).toHaveLength(0);

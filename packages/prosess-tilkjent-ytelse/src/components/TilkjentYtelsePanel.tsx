@@ -139,7 +139,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   const { soknad } = ownProps;
   const isSVP = ownProps.fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER;
   return {
-    hovedsokerKjonn: person ? person.navBrukerKjonn.kode as Kjønnkode : undefined,
+    hovedsokerKjonn: person ? person.navBrukerKjonn.kode as Kjønnkode : undefined, // nosonar
     soknadDato: soknad.mottattDato,
     isSoknadSvangerskapspenger: isSVP,
     familiehendelseDato: getCurrentFamiliehendelseDato(

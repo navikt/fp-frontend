@@ -163,7 +163,7 @@ const prepChildObj = (child: CustomPersonopplysninger): { isTps: boolean; navn: 
   fdato: new Date(child.fodselsdato),
 });
 
-const sortChildren = (children: CustomPersonopplysninger[]): CustomPersonopplysninger[] => children.sort((child1, child2) => {
+const sortChildren = (child1: CustomPersonopplysninger, child2: CustomPersonopplysninger): number => {
   const a = prepChildObj(child1);
   const b = prepChildObj(child2);
   if (a.isTps && !b.isTps) { return -1; }
@@ -173,7 +173,7 @@ const sortChildren = (children: CustomPersonopplysninger[]): CustomPersonopplysn
   if (a.fdato > b.fdato) { return -1; }
   if (a.fdato < b.fdato) { return 1; }
   return 0;
-});
+};
 
 BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: Soknad): FormValues => {
   const confirmedChildren = personopplysning.barnSoktFor
@@ -214,7 +214,7 @@ BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: So
   });
 
   return {
-    barn: sortChildren([...confirmedChildren, ...applicationChildren]),
+    barn: [...confirmedChildren, ...applicationChildren].sort(sortChildren),
   };
 };
 
