@@ -24,7 +24,7 @@ type OwnProps = {
     relevanteStatuser: RelevanteStatuserProp
 };
 
-const AvviksopplysningerSN: FunctionComponent<OwnProps> = ({
+const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
   sammenligningsgrunnlagPrStatus,
   alleAndelerIForstePeriode,
   relevanteStatuser,
@@ -67,8 +67,8 @@ const AvviksopplysningerSN: FunctionComponent<OwnProps> = ({
     />
   );
 };
-AvviksopplysningerSN.defaultProps = {
+AvvikopplysningerSN.defaultProps = {
   sammenligningsgrunnlagPrStatus: undefined,
 };
 
-export default AvviksopplysningerSN;
+export default AvvikopplysningerSN;

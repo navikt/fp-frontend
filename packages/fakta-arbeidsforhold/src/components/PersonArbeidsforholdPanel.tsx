@@ -52,31 +52,32 @@ const getUnresolvedArbeidsforhold = (arbeidsforholdList: CustomArbeidsforhold[])
 
 const hasArbeidsforholdAksjonspunkt = (arbeidsforhold: Arbeidsforhold): boolean => arbeidsforhold && (arbeidsforhold.tilVurdering || arbeidsforhold.erEndret);
 
-export const sortArbeidsforhold = (
-  arbeidsforhold: CustomArbeidsforhold[],
+export const getSortArbeidsforholdFn = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): CustomArbeidsforhold[] => arbeidsforhold
-  .sort((a1, a2) => {
-    const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a1.arbeidsgiverReferanse];
-    const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[a2.arbeidsgiverReferanse];
-    if (arbeidsgiverOpplysningerA1 && arbeidsgiverOpplysningerA2) {
-      const i = arbeidsgiverOpplysningerA1.navn.localeCompare(arbeidsgiverOpplysningerA2.navn);
-      if (i !== 0) {
-        return i;
-      }
+) => (
+  a1: CustomArbeidsforhold,
+  a2: CustomArbeidsforhold,
+): number => {
+  const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a1.arbeidsgiverReferanse];
+  const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[a2.arbeidsgiverReferanse];
+  if (arbeidsgiverOpplysningerA1 && arbeidsgiverOpplysningerA2) {
+    const i = arbeidsgiverOpplysningerA1.navn.localeCompare(arbeidsgiverOpplysningerA2.navn);
+    if (i !== 0) {
+      return i;
     }
+  }
 
-    if (a1.mottattDatoInntektsmelding && a2.mottattDatoInntektsmelding) {
-      return moment(a2.mottattDatoInntektsmelding, ISO_DATE_FORMAT).diff(moment(a1.mottattDatoInntektsmelding, ISO_DATE_FORMAT));
-    }
-    if (a1.mottattDatoInntektsmelding) {
-      return -1;
-    }
-    if (a2.mottattDatoInntektsmelding) {
-      return 1;
-    }
-    return a1.id.localeCompare(a2.id);
-  });
+  if (a1.mottattDatoInntektsmelding && a2.mottattDatoInntektsmelding) {
+    return moment(a2.mottattDatoInntektsmelding, ISO_DATE_FORMAT).diff(moment(a1.mottattDatoInntektsmelding, ISO_DATE_FORMAT));
+  }
+  if (a1.mottattDatoInntektsmelding) {
+    return -1;
+  }
+  if (a2.mottattDatoInntektsmelding) {
+    return 1;
+  }
+  return a1.id.localeCompare(a2.id);
+};
 
 export const erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM = (arbeidsforhold: Arbeidsforhold[], arbeidsgiverIdentifikator: string): boolean => {
   let isAllowed = true;
@@ -441,7 +442,7 @@ const FORM_NAVN = 'ArbeidsforholdInfoPanel';
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const arbeidsforhold = behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'arbeidsforhold');
-  const sorterteArbeidsforhold = sortArbeidsforhold(arbeidsforhold, ownProps.arbeidsgiverOpplysningerPerId);
+  const sorterteArbeidsforhold = arbeidsforhold.sort(getSortArbeidsforholdFn(ownProps.arbeidsgiverOpplysningerPerId));
   const arbeidsgiverIdentifikator = behandlingFormValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM, ownProps.behandlingId,
     ownProps.behandlingVersjon)(state, 'arbeidsgiverIdentifikator');
   return {

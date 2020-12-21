@@ -13,7 +13,7 @@ type OwnProps = {
     relevanteStatuser: RelevanteStatuserProp;
 };
 
-const AvviksopplysningerFL: FunctionComponent<OwnProps> = ({ relevanteStatuser, sammenligningsgrunnlagPrStatus, beregnetAarsinntekt }) => {
+const AvvikopplysningerFL: FunctionComponent<OwnProps> = ({ relevanteStatuser, sammenligningsgrunnlagPrStatus, beregnetAarsinntekt }) => {
   const kombinasjonsstatusFNSN = relevanteStatuser.isKombinasjonsstatus
     && !relevanteStatuser.isArbeidstaker
     && relevanteStatuser.isSelvstendigNaeringsdrivende
@@ -63,8 +63,8 @@ const AvviksopplysningerFL: FunctionComponent<OwnProps> = ({ relevanteStatuser, 
   );
 };
 
-AvviksopplysningerFL.defaultProps = {
+AvvikopplysningerFL.defaultProps = {
   beregnetAarsinntekt: undefined,
   sammenligningsgrunnlagPrStatus: undefined,
 };
-export default AvviksopplysningerFL;
+export default AvvikopplysningerFL;

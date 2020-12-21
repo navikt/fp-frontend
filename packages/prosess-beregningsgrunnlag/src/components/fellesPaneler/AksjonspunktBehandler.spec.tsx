@@ -9,6 +9,7 @@ import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import { AksjonspunktBehandlerImpl as UnwrappedForm } from './AksjonspunktBehandler';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
+import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
 
 const relevanteStatuser = {
   isFrilanser: false,
@@ -231,7 +232,7 @@ describe('<UnwrappedForm>', () => {
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
     const aksjonspunktBehandlerTB = wrapper.find(AksjonspunktBehandlerTB);
     const aksjonspunktBehandlerFL = wrapper.find('AksjonspunktBehandlerFL');
-    const aksjonspunktBehandlerSN = wrapper.find('AksjonspunktBehandlerSN');
+    const aksjonspunktBehandlerSN = wrapper.find(AksjonspunktBehandlerSN);
     expect(aksjonspunktBehandlerAT).toHaveLength(0);
     expect(aksjonspunktBehandlerTB).toHaveLength(0);
     expect(aksjonspunktBehandlerFL).toHaveLength(0);

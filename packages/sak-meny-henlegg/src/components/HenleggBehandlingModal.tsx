@@ -216,7 +216,8 @@ const getShowLink = createSelector([
 (arsakKode: string, fritekst: string, type): boolean => {
   if (type.kode === BehandlingType.TILBAKEKREVING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
-  } if (type.kode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  }
+  if (type.kode === BehandlingType.TILBAKEKREVING_REVURDERING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
   }
 

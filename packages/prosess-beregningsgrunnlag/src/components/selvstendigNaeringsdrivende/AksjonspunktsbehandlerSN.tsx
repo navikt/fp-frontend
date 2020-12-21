@@ -24,7 +24,7 @@ type OwnProps = {
     endretTekst?: React.ReactNode;
 };
 
-const AksjonspunktBehandlerSN: FunctionComponent<OwnProps> = ({
+const AksjonspunktsbehandlerSN: FunctionComponent<OwnProps> = ({
   readOnly,
   aksjonspunkter,
   behandlingId,
@@ -50,10 +50,10 @@ const AksjonspunktBehandlerSN: FunctionComponent<OwnProps> = ({
       )}
   </>
 );
-AksjonspunktBehandlerSN.defaultProps = {
+AksjonspunktsbehandlerSN.defaultProps = {
   erNyArbLivet: false,
   erVarigEndring: false,
   erNyoppstartet: false,
 };
 
-export default AksjonspunktBehandlerSN;
+export default AksjonspunktsbehandlerSN;
