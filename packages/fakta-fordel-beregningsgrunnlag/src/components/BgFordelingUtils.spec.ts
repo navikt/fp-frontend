@@ -6,7 +6,6 @@ import {
   setGenerellAndelsinfo,
   settAndelIArbeid,
   settFastsattBelop,
-  skalValidereMotBeregningsgrunnlag,
 } from './BgFordelingUtils';
 
 const arbeidsgiver = {
@@ -132,54 +131,6 @@ describe('<BgFordelingUtils>', () => {
     expect(arbeidsforholdIV.arbeidsforholdId).toBe('321378huda7e2');
     expect(arbeidsforholdIV.arbeidsperiodeFom).toBe('2017-01-01');
     expect(arbeidsforholdIV.arbeidsperiodeTom).toBe('2018-01-01');
-  });
-
-  const andelValuesMedInntektsmelding = {
-    fordelingForrigeBehandling: 25000,
-    fastsattBelop: 25000,
-    readOnlyBelop: 25000,
-    refusjonskrav: '',
-    skalKunneEndreRefusjon: false,
-    belopFraInntektsmelding: 25000,
-    refusjonskravFraInntektsmelding: null,
-  };
-
-  it('skal kunne overstyre rapportert inntekt om andel med refusjon som overstiger inntekt og AAP i BG', () => {
-    const andelFieldValue = {
-      ...andelValuesMedInntektsmelding,
-      refusjonskravFraInntektsmelding: 30000,
-      kanRedigereInntekt: true,
-    };
-    const bg = {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            { aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSAVKLARINGSPENGER } },
-          ],
-        },
-      ],
-    };
-    const skalValidereMotBg = skalValidereMotBeregningsgrunnlag(bg)(andelFieldValue);
-    expect(skalValidereMotBg).toBe(false);
-  });
-
-  it('skal kunne overstyre beregningsgrunnlag om andel er frilans', () => {
-    const andelFieldValue = {
-      fastsattBelop: 25000,
-      readOnlyBelop: 25000,
-      aktivitetStatus: aktivitetStatuser.FRILANSER,
-    };
-    const bg = {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            { aktivitetStatus: { kode: aktivitetStatuser.FRILANSER } },
-          ],
-        },
-      ],
-    };
-    const skalValidereMotBg = skalValidereMotBeregningsgrunnlag(bg)(andelFieldValue);
-    expect(skalValidereMotBg).toBe(false);
   });
 
   it('skal mappe fastsattBeløp til beløp om inntekt skal redigeres', () => {

@@ -10,7 +10,7 @@ import {
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import {
-  BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp,
+  BeregningsgrunnlagPeriodeProp,
   FordelBeregningsgrunnlagPeriode,
   Kodeverk,
   KodeverkMedNavn,
@@ -66,7 +66,6 @@ interface StaticFunctions {
   validate: (intl: IntlShape,
              values: any,
              sumIPeriode: number,
-             skalValidereMotBeregningsgrunnlagPrAar: (andel: BeregningsgrunnlagAndel) => boolean,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
              grunnbeløp: number,
              periodeDato: {
@@ -124,9 +123,9 @@ FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
   tom: null,
 };
 
-FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode, skalValidereMotRapportert,
+FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode,
   getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon) => RenderFordelBGFieldArrayImpl
-  .validate(intl, values, sumIPeriode, skalValidereMotRapportert, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
+  .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
 
 const finnRiktigAndel = (andel, bgPeriode) => bgPeriode.beregningsgrunnlagPrStatusOgAndel.find((a) => a.andelsnr === andel.andelsnr);
 
