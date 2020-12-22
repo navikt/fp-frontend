@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
@@ -9,11 +8,22 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { Fagsak, TotrinnskontrollAksjonspunkt, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
-import * as useHistory from '../../app/useHistory';
-import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 import BeslutterModalIndex from './BeslutterModalIndex';
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+  useLocation: () => ({
+    pathname: 'test',
+    search: 'test',
+    state: {},
+    hash: 'test',
+  }),
+}));
 
 describe('<TotrinnskontrollIndex>', () => {
   const fagsak = {
@@ -40,26 +50,6 @@ describe('<TotrinnskontrollIndex>', () => {
     ansvarligSaksbehandler: 'Espen Utvikler',
     behandlingArsaker: [],
   }];
-
-  const locationMock = {
-    pathname: 'test',
-    search: 'test',
-    state: {},
-    hash: 'test',
-  };
-
-  let contextStubHistory;
-  let contextStubLocation;
-  beforeEach(() => {
-    // @ts-ignore
-    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push: sinon.spy() }));
-    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
-  });
-
-  afterEach(() => {
-    contextStubHistory.restore();
-    contextStubLocation.restore();
-  });
 
   const kodeverk = {
     [kodeverkTyper.SKJERMLENKE_TYPE]: [],

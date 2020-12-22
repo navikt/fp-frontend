@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { formValueSelector } from 'redux-form';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Undertekst } from 'nav-frontend-typografi';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
@@ -12,7 +13,6 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import useIntl from '../useIntl';
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 import styles from './oppholdINorgePanel.less';

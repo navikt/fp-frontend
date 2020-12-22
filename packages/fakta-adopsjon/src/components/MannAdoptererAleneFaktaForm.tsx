@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -9,8 +9,6 @@ import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { FamilieHendelse, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-
-import useIntl from '../useIntl';
 
 import styles from './mannAdoptererAleneFaktaForm.less';
 

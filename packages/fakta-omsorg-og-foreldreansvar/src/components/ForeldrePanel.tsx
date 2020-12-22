@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
@@ -12,8 +12,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { Personopplysninger } from '@fpsak-frontend/types';
-
-import useIntl from '../useIntl';
 
 const getParentHeader = (erMor: boolean): string => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
 

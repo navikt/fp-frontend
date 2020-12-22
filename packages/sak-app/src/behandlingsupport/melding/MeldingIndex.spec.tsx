@@ -9,9 +9,17 @@ import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
-import * as useHistory from '../../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 describe('<MeldingIndex>', () => {
   const recipients = ['Søker'];
@@ -44,16 +52,7 @@ describe('<MeldingIndex>', () => {
   // @ts-ignore Dette er kun for å unngå warnings med window.location.reload(). (Denne blir brukt som en temp-fiks, så dette skal derfor fjernes)
   window.location = { reload: assignMock };
 
-  const push = sinon.spy();
-  let contextStubHistory;
-  beforeEach(() => {
-    // @ts-ignore
-    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push }));
-  });
-
   afterEach(() => {
-    contextStubHistory.restore();
-    push.resetHistory();
     assignMock.mockClear();
   });
 
@@ -341,9 +340,7 @@ describe('<MeldingIndex>', () => {
       ventearsak: formValues.ventearsak,
     });
 
-    expect(push).toHaveProperty('callCount', 1);
-    expect(push.getCalls()[0].args).toHaveLength(1);
-    expect(push.getCalls()[0].args[0]).toEqual('/');
+    expect(mockHistoryPush).toHaveBeenCalledWith('/');
 
     expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
