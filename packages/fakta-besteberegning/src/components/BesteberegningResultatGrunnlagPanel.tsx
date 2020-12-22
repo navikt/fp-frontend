@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
-import { Normaltekst, Element, Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
@@ -51,16 +51,6 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
   besteMåneder,
 }) => (
   <div>
-    <Row>
-      <Column>
-        <Undertittel>
-          {' '}
-          <FormattedMessage id="ResultatGrunnlag.Overskrift" />
-          {' '}
-        </Undertittel>
-      </Column>
-    </Row>
-    <VerticalSpacer twentyPx />
     <Row>
       <Column xs="12">
         <Table headerColumnContent={headerColumnContent} noHover>

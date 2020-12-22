@@ -1,9 +1,8 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import BesteberegningProsessIndex from '@fpsak-frontend/prosess-besteberegning';
-import withReduxProvider from '../../../decorators/withRedux';
+import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
-import { beregningsgrunnlag } from './scenario/ArbeidMedDagpengerIOpptjeningsperioden';
+import { beregningsgrunnlag } from './scenario/BesteberegningScenario';
 
 const arbeidsgiverOpplysninger = {
   910909088: {
@@ -20,13 +19,13 @@ const arbeidsgiverOpplysninger = {
 };
 
 export default {
-  title: 'prosess/prosess-besteberegning',
-  component: BesteberegningProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  title: 'fakta/fakta-besteberegning',
+  component: BesteberegningFaktaIndex,
+  decorators: [withKnobs],
 };
 
 export const besteberegningMedDagpengerOgArbeid = () => (
-  <BesteberegningProsessIndex
+  <BesteberegningFaktaIndex
     beregningsgrunnlag={beregningsgrunnlag}
     alleKodeverk={alleKodeverk as any}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}

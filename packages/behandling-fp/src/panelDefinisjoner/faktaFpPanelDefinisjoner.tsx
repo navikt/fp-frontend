@@ -9,6 +9,7 @@ import FodselvilkaretFaktaPanelDef from './faktaPaneler/FodselvilkaretFaktaPanel
 import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/MedlemskapsvilkaretFaktaPanelDef';
 import OpptjeningsvilkaretFaktaPanelDef from './faktaPaneler/OpptjeningsvilkaretFaktaPanelDef';
 import BeregningFaktaPanelDef from './faktaPaneler/BeregningFaktaPanelDef';
+import BesteberegningFaktaPanelDef from './faktaPaneler/BesteberegningFaktaPanelDef';
 import FordelingFaktaPanelDef from './faktaPaneler/FordelingFaktaPanelDef';
 import OmsorgFaktaPanelDef from './faktaPaneler/OmsorgFaktaPanelDef';
 import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
@@ -26,6 +27,7 @@ const faktaPanelDefinisjoner = [
   new MedlemskapsvilkaretFaktaPanelDef(),
   new OpptjeningsvilkaretFaktaPanelDef(),
   new BeregningFaktaPanelDef(),
+  new BesteberegningFaktaPanelDef(),
   new FordelingFaktaPanelDef(),
   new OmsorgFaktaPanelDef(),
   new UttakFaktaPanelDef(),

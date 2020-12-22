@@ -1,15 +1,16 @@
 {
   "BesteberegningProsessPanel.Måned.Inntekt.Aktivitet": "Aktivitet",
   "BesteberegningProsessPanel.Måned.Inntekt.Inntekt": "Inntekt",
+  "Inntekttabell.Tittel": "Inntektsgrunnlag for besteberegning",
   "Inntekttabell.Sum": "Total for måned",
   "Inntekttabell.GjennomsnittligMånedsinntekt": "Gjennomsnittlig månedsinntekt",
   "Inntekttabell.BeregnetÅrsinntekt": "Beregnet årsinntekt",
   "ResultatGrunnlag.BruttoBeregningsgrunnlag": "Brutto beregningsgrunnlag",
   "ResultatGrunnlag.BeregningEtterBesteberegning": "Beregning etter §14-7, 3. ledd",
-  "ResultatGrunnlag.BeregningEtterKap8": "Beregning etter kapittel 8",
-  "ResultatGrunnlag.Overskrift": "Sammenligning av besteberegning og beregning etter kapittel 8",
-  "ResultatGrunnlag.Kap8GirBesteBeregning": "Beregning etter kapittel 8 gir beste beregning",
-  "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd, gir beste beregning"
+  "ResultatGrunnlag.BeregningEtterKap8": "Beregning etter §14-7, 1. ledd",
+  "ResultatGrunnlag.Overskrift": "Sammenligning av besteberegning og beregning etter §14-7, 1. ledd",
+  "ResultatGrunnlag.Kap8GirBesteBeregning": "Beregning etter §14-7, 1. ledd gir beste beregning.",
+  "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd gir beste beregning."
 
 
 }

@@ -9,7 +9,6 @@ import UttakProsessStegPanelDef from './prosessStegPaneler/UttakProsessStegPanel
 import TilkjentYtelseProsessStegPanelDef from './prosessStegPaneler/TilkjentYtelseProsessStegPanelDef';
 import SimuleringProsessStegPanelDef from './prosessStegPaneler/SimuleringProsessStegPanelDef';
 import VedtakProsessStegPanelDef from './prosessStegPaneler/VedtakProsessStegPanelDef';
-import BesteberegningProsessStegPanelDef from './prosessStegPaneler/BesteberegningProsessStegPanelDef';
 
 const prosessStegPanelDefinisjoner = [
   new VarselProsessStegPanelDef(),
@@ -17,7 +16,6 @@ const prosessStegPanelDefinisjoner = [
   new OpplysningspliktProsessStegPanelDef(),
   new InngangsvilkarProsessStegPanelDef(),
   new BeregningsgrunnlagProsessStegPanelDef(),
-  new BesteberegningProsessStegPanelDef(),
   new SoknadsfristProsessStegPanelDef(),
   new FortsattMedlemskapProsessStegPanelDef(),
   new UttakProsessStegPanelDef(),

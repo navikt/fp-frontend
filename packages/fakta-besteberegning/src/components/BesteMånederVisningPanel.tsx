@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import {
-  Element, Normaltekst, Undertittel,
+  Element, Normaltekst,
 } from 'nav-frontend-typografi';
 import { Row, Column } from 'nav-frontend-grid';
 import {
@@ -142,10 +142,10 @@ const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
       {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
         const key = månedsgrunnlag.fom;
         return (
-          <Column key={key} xs="4">
-            <Undertittel>
+          <Column key={key} xs="6">
+            <Normaltekst>
               {formatDate(månedsgrunnlag.fom)}
-            </Undertittel>
+            </Normaltekst>
             <Inntekttabell
               inntekter={månedsgrunnlag.inntekter}
               arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
@@ -181,15 +181,22 @@ const BesteMånederVisningPanel: FunctionComponent<BesteMånederProps> = ({
   <div>
     <Row>
       <Column>
-        <Undertittel> Inntektsgrunnlag for besteberegning </Undertittel>
+        <Element>
+          {' '}
+          <FormattedMessage id="Inntekttabell.Tittel" />
+          {' '}
+        </Element>
       </Column>
     </Row>
     <VerticalSpacer twentyPx />
-    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(0, 3), arbeidsgiverOpplysninger, getKodeverkNavn)}
-    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(3, 6), arbeidsgiverOpplysninger, getKodeverkNavn)}
+    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(0, 2), arbeidsgiverOpplysninger, getKodeverkNavn)}
+    <VerticalSpacer twentyPx />
+    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(2, 4), arbeidsgiverOpplysninger, getKodeverkNavn)}
+    <VerticalSpacer twentyPx />
+    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(4, 6), arbeidsgiverOpplysninger, getKodeverkNavn)}
     <VerticalSpacer twentyPx />
     <Row>
-      <Column xs="4">
+      <Column xs="6">
         <Table noHover>
           <TableRow>
             <TableColumn>
@@ -218,7 +225,6 @@ const BesteMånederVisningPanel: FunctionComponent<BesteMånederProps> = ({
         </Table>
       </Column>
     </Row>
-    <VerticalSpacer twentyPx />
   </div>
 );
 

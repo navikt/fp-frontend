@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import BesteMånederVisningPanel from './BesteMånederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 
@@ -28,16 +28,20 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   const førstePeriode = beregningsgrunnlagPeriode[0];
   return (
     <div>
-      <BesteberegningResultatGrunnlagPanel
-        periode={førstePeriode}
-        besteMåneder={besteberegninggrunnlag.besteMåneder}
-      />
+      <BorderBox>
+        <BesteberegningResultatGrunnlagPanel
+          periode={førstePeriode}
+          besteMåneder={besteberegninggrunnlag.besteMåneder}
+        />
+      </BorderBox>
       <VerticalSpacer twentyPx />
-      <BesteMånederVisningPanel
-        besteMåneder={besteberegninggrunnlag.besteMåneder}
-        arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-        getKodeverkNavn={getKodeverkNavn}
-      />
+      <BorderBox>
+        <BesteMånederVisningPanel
+          besteMåneder={besteberegninggrunnlag.besteMåneder}
+          arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
+          getKodeverkNavn={getKodeverkNavn}
+        />
+      </BorderBox>
     </div>
   );
 };

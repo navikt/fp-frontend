@@ -22,7 +22,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]}
 }
 
-const BesteberegningProsessIndex: FunctionComponent<OwnProps> = ({
+const BesteberegningFaktaIndex: FunctionComponent<OwnProps> = ({
   beregningsgrunnlag,
   arbeidsgiverOpplysninger,
   alleKodeverk,
@@ -36,4 +36,4 @@ const BesteberegningProsessIndex: FunctionComponent<OwnProps> = ({
   </RawIntlProvider>
 );
 
-export default BesteberegningProsessIndex;
+export default BesteberegningFaktaIndex;
