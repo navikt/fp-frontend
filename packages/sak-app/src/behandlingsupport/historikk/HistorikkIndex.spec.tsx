@@ -1,31 +1,22 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 
-import * as useLocation from '../../app/useLocation';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import HistorikkIndex from './HistorikkIndex';
 
-describe('<HistorikkIndex>', () => {
-  const locationMock = {
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
     pathname: 'test',
     search: 'test',
     state: {},
     hash: 'test',
-  };
+  }),
+}));
 
-  let contextStubLocation;
-
-  beforeEach(() => {
-    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
-  });
-
-  afterEach(() => {
-    contextStubLocation.restore();
-  });
-
+describe('<HistorikkIndex>', () => {
   it('skal slå sammen og sortere historikk for fpsak og fptilbake', () => {
     requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.KODEVERK, {});

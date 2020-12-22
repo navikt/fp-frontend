@@ -1,6 +1,7 @@
 import React, {
   FunctionComponent, useCallback, useMemo,
 } from 'react';
+import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -8,7 +9,6 @@ import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 import { KodeverkMedNavn, Historikkinnslag } from '@fpsak-frontend/types';
 import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
 
-import useLocation from '../../app/useLocation';
 import useBehandlingEndret from '../../behandling/useBehandligEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths';

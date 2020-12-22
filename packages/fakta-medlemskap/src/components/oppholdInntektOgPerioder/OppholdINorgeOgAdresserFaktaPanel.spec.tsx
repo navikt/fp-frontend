@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -10,8 +9,16 @@ import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdress
 import { Aksjonspunkt, Personopplysninger, Soknad } from '@fpsak-frontend/types';
 
 import OppholdINorgeOgAdresserFaktaPanel, { PeriodeMedId } from './OppholdINorgeOgAdresserFaktaPanel';
-import * as useIntl from '../../useIntl';
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-fakta-medlemskap');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
   const opphold = {
@@ -47,15 +54,6 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       },
     } as Personopplysninger,
   }];
-
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
 
   it('skal vise info om opphold', () => {
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent

@@ -2,18 +2,23 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import * as useLocation from '../app/useLocation';
 import FagsakGrid from './components/FagsakGrid';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
 import FagsakIndex from './FagsakIndex';
 
-describe('<FagsakIndex>', () => {
-  const location = {
-    pathname: '', search: '', state: {}, hash: '',
-  };
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    pathname: 'test',
+    search: 'test',
+    state: {},
+    hash: 'test',
+  }),
+}));
 
+describe('<FagsakIndex>', () => {
   const fagsak = {
     saksnummer: 123456,
   };
@@ -25,18 +30,20 @@ describe('<FagsakIndex>', () => {
     id: 2,
   };
 
-  let contextStubLocation;
   let contextStub;
   beforeEach(() => {
-    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => location);
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: 123456,
-      location,
+      location: {
+        pathname: 'test',
+        search: 'test',
+        state: {},
+        hash: 'test',
+      },
     }));
   });
 
   afterEach(() => {
-    contextStubLocation.restore();
     contextStub.restore();
   });
 

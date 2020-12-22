@@ -1,24 +1,22 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
-import * as useIntl from '../useIntl';
 import OmsorgFaktaForm from './OmsorgFaktaForm';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-omsorg');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<OmsorgFaktaForm>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   const aleneomsorgAp = {
     id: 1,
     definisjon: {

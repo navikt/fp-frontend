@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { connect } from 'react-redux';
+import { useIntl } from 'react-intl';
 import { FormSection, formValueSelector } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
@@ -15,8 +16,6 @@ import { ArrowBox, BorderBox } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
-
-import useIntl from '../useIntl';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .filter(({

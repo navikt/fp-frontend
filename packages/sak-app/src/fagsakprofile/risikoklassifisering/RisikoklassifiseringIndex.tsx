@@ -1,6 +1,7 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import {
   Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst,
@@ -8,8 +9,6 @@ import {
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
 
-import useHistory from '../../app/useHistory';
-import useLocation from '../../app/useLocation';
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';

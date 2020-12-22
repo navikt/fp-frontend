@@ -1,6 +1,7 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -11,8 +12,6 @@ import {
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 
-import useHistory from '../../app/useHistory';
-import useLocation from '../../app/useLocation';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';

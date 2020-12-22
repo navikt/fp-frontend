@@ -1,25 +1,22 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-papirsoknad-annen-forelder';
-import * as useIntl from '../useIntl';
 import AnnenForelderPanel, { AnnenForelderPanelImpl, KanIkkeOppgiBegrunnelsePanel } from './AnnenForelderPanel';
 
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-papirsoknad-annen-forelder');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
+
 describe('<AnnenForelderPanel>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   describe('validate', () => {
     describe('hvis kan oppgi annen forelder', () => {
       const sokersPersonnummer = '12345678910';

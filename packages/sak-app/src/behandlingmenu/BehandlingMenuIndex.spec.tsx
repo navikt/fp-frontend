@@ -9,8 +9,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import MenySakIndex from '@fpsak-frontend/sak-meny';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
-import * as useHistory from '../app/useHistory';
-import * as useLocation from '../app/useLocation';
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -60,27 +58,20 @@ const alleBehandlinger = [{
   erAktivPapirsoknad: false,
 }];
 
-const locationMock = {
-  pathname: 'test',
-  search: 'test',
-  state: {},
-  hash: 'test',
-};
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+  useLocation: () => ({
+    pathname: 'test',
+    search: 'test',
+    state: {},
+    hash: 'test',
+  }),
+}));
 
 describe('BehandlingMenuIndex', () => {
-  let contextStubHistory;
-  let contextStubLocation;
-  beforeEach(() => {
-    // @ts-ignore
-    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push: sinon.spy() }));
-    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
-  });
-
-  afterEach(() => {
-    contextStubHistory.restore();
-    contextStubLocation.restore();
-  });
-
   it('skal vise meny der alle menyhandlinger er synlige', () => {
     requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);

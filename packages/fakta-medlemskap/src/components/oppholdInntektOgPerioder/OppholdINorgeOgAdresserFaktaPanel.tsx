@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage, IntlShape } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -17,8 +17,6 @@ import {
 } from '@fpsak-frontend/types';
 import checkImage from '@fpsak-frontend/assets/images/check.svg';
 import avslaattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
-
-import useIntl from '../../useIntl';
 
 import styles from './oppholdINorgeOgAdresserFaktaPanel.less';
 

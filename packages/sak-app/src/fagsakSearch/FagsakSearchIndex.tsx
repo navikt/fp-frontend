@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   errorOfType, ErrorTypes, getErrorResponseData,
@@ -8,7 +9,6 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
 import { pathToFagsak } from '../app/paths';
-import useHistory from '../app/useHistory';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 
 const EMPTY_ARRAY = [];
