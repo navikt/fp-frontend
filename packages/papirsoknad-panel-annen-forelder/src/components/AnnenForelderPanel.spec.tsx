@@ -9,7 +9,7 @@ import AnnenForelderPanel, { AnnenForelderPanelImpl, KanIkkeOppgiBegrunnelsePane
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-papirsoknad-annen-forelder');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-papirsoknad-annen-forelder');
   return {
     ...reactIntl,
     useIntl: () => mockIntl.intlMock,

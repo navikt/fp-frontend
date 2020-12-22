@@ -10,7 +10,7 @@ import { FodselsDatoFields, OmsorgOgAdopsjonPanelImpl } from './OmsorgOgAdopsjon
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon');
   return {
     ...reactIntl,
     useIntl: () => mockIntl.intlMock,

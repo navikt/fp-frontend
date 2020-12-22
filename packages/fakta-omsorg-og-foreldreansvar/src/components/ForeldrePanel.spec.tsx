@@ -17,7 +17,7 @@ const getMockedFields = (fieldNames: any, children: any) => {
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar');
   return {
     ...reactIntl,
     useIntl: () => mockIntl.intlMock,

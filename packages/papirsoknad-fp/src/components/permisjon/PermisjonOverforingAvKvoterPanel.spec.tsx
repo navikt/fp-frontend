@@ -21,7 +21,7 @@ const readOnly = false;
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../../../i18n/intl-enzyme-test-helper-papirsoknad-fp');
+  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-papirsoknad-fp');
   return {
     ...reactIntl,
     useIntl: () => mockIntl.intlMock,

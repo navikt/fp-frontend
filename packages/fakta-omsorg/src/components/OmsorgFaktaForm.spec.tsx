@@ -9,7 +9,7 @@ import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-fakta-omsorg');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-omsorg');
   return {
     ...reactIntl,
     useIntl: () => mockIntl.intlMock,

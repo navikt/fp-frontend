@@ -8,7 +8,7 @@ import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../i18n/intl-enzyme-test-helper-prosess-felles');
+  const mockIntl = jest.requireMock('../i18n/intl-enzyme-test-helper-prosess-felles');
   return {
     ...reactIntl,
     useIntl: () => mockIntl.intlMock,
