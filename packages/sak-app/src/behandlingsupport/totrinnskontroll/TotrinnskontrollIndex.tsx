@@ -81,13 +81,13 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
       updateTriggers: [behandlingId, behandling.status.kode],
-      suspendRequest: !!erInnsynBehandling || !(behandling.status.kode === BehandlingStatus.FATTER_VEDTAK),
+      suspendRequest: !!erInnsynBehandling || behandling.status.kode !== BehandlingStatus.FATTER_VEDTAK,
     },
   );
   const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
       updateTriggers: [behandlingId, behandling.status.kode],
-      suspendRequest: !!erInnsynBehandling || !(behandling.status.kode === BehandlingStatus.BEHANDLING_UTREDES),
+      suspendRequest: !!erInnsynBehandling || behandling.status.kode !== BehandlingStatus.BEHANDLING_UTREDES,
     },
   );
 

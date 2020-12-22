@@ -3,7 +3,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
-import useBehandlingEndret from '../behandling/useBehandligEndret';
+import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';
 
