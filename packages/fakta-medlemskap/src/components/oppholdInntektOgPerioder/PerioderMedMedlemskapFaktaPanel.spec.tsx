@@ -1,24 +1,22 @@
 import React from 'react';
-import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
 
 import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
-import * as useIntl from '../../useIntl';
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-fakta-medlemskap');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<PerioderMedMedlemskapFaktaPanel>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   it('skal vise periode og manuelle-vurderingstyper i form', () => {
     const periods = [{
       fom: '2016-01-15',

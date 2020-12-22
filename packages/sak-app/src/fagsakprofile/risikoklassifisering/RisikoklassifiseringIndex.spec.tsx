@@ -6,8 +6,6 @@ import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifiseri
 import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
 import { Fagsak, Behandling } from '@fpsak-frontend/types';
 
-import * as useHistory from '../../app/useHistory';
-import * as useLocation from '../../app/useLocation';
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
@@ -38,25 +36,31 @@ const location = {
 
 const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+  useLocation: () => ({
+    hash: '23',
+    pathname: '/test/',
+    state: {},
+    search: '',
+  }),
+}));
+
 describe('<RisikoklassifiseringIndex>', () => {
   let contextStub;
-  let contextStubHistory;
-  let contextStubLocation;
 
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: true,
       location,
     }));
-    // @ts-ignore
-    contextStubHistory = sinon.stub(useHistory, 'default').callsFake(() => ({ push: sinon.spy() }));
-    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => location);
   });
 
   afterEach(() => {
     contextStub.restore();
-    contextStubHistory.restore();
-    contextStubLocation.restore();
   });
 
   it('skal rendere komponent', () => {

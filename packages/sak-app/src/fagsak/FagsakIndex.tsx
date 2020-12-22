@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
@@ -15,7 +15,6 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
 import useBehandlingEndret from '../behandling/useBehandligEndret';
 import useTrackRouteParam from '../app/useTrackRouteParam';
-import useLocation from '../app/useLocation';
 import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
 import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';
 import {

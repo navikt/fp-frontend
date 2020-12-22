@@ -1,8 +1,6 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -10,19 +8,18 @@ import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
 
 import VilkarResultPicker from './VilkarResultPicker';
-import * as useIntl from '../useIntl';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-prosess-felles');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<VilkarResultPicker>', () => {
   const avslagsarsaker = [{ kode: 'TEST', navn: 'test', kodeverk: '' }];
-
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlWithMessages());
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
 
   it('skal vise komponent med radioknapper', () => {
     const wrapper = shallow(<VilkarResultPicker

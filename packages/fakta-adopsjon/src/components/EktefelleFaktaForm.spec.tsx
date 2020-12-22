@@ -1,22 +1,20 @@
 import React from 'react';
-import sinon from 'sinon';
 
 import { FamilieHendelse } from '@fpsak-frontend/types';
 
-import * as useIntl from '../useIntl';
 import { EktefelleFaktaForm } from './EktefelleFaktaForm';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-adopsjon');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<EktefelleFaktaForm>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   it('skal rendre form som lar NAV-ansatt velge om barnet er ektefelles barn eller ei', () => {
     const wrapper = shallowWithIntl(<EktefelleFaktaForm
       readOnly={false}

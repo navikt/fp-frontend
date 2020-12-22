@@ -2,6 +2,7 @@ import React, {
   FunctionComponent, useCallback, useMemo, useEffect, useRef,
 } from 'react';
 import moment from 'moment';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -18,8 +19,6 @@ import {
   NavAnsatt, Fagsak, BehandlingAppKontekst, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 
-import useHistory from '../app/useHistory';
-import useLocation from '../app/useLocation';
 import {
   fjernVerge, opprettVerge,
   nyBehandlendeEnhet, resumeBehandling, shelveBehandling, setBehandlingOnHold, openBehandlingForChanges,

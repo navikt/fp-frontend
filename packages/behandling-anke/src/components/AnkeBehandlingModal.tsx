@@ -20,7 +20,8 @@ interface OwnProps {
 const tekstTilMelding = (erFerdigbehandlet, venterTrygderett) => {
   if (erFerdigbehandlet && venterTrygderett) {
     return 'AnkeVurderingModal.SettVent';
-  } if (erFerdigbehandlet && !venterTrygderett) {
+  }
+  if (erFerdigbehandlet && !venterTrygderett) {
     return 'AnkeVurderingModal.Ferdigbehandlet';
   }
   return 'AnkeVurderingModal.VedtakOversendt';

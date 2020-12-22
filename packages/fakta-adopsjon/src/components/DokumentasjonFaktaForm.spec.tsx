@@ -1,12 +1,19 @@
 import React from 'react';
-import sinon from 'sinon';
 
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 
-import * as useIntl from '../useIntl';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-adopsjon');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<DokumentasjonFaktaForm>', () => {
   const editedStatus = {
@@ -14,15 +21,6 @@ describe('<DokumentasjonFaktaForm>', () => {
     omsorgsovertakelseDato: false,
     barnetsAnkomstTilNorgeDato: false,
   } as FieldEditedInfo;
-
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
 
   it('skal vise alle fodselsdatoer i datepickers', () => {
     const wrapper = shallowWithIntl(<DokumentasjonFaktaForm.WrappedComponent
