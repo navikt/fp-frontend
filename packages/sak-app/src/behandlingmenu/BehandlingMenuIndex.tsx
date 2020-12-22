@@ -43,9 +43,8 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
 ];
 
 const findNewBehandlingId = (alleBehandlinger: BehandlingAppKontekst[]): number => {
-  const sortedBehandlinger = alleBehandlinger
-    .sort((b1, b2) => moment(b2.opprettet).diff(moment(b1.opprettet)));
-  return sortedBehandlinger[0].id;
+  alleBehandlinger.sort((b1, b2) => moment(b2.opprettet).diff(moment(b1.opprettet)));
+  return alleBehandlinger[0].id;
 };
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string => {
