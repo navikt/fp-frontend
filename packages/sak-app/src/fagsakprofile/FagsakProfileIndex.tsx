@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation, useRouteMatch } from 'react-router-dom';
 import { Location } from 'history';
 
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
@@ -12,8 +12,6 @@ import {
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import useLocation from '../app/useLocation';
-import useRouteMatch from '../app/useRouteMatch';
 import {
   getLocationWithDefaultProsessStegAndFakta,
   pathToBehandling,

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { useIntl } from 'react-intl';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { connect } from 'react-redux';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -11,8 +12,6 @@ import { Image, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-compo
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
-
-import useIntl from '../useIntl';
 
 import styles from './dokumentasjonFaktaForm.less';
 

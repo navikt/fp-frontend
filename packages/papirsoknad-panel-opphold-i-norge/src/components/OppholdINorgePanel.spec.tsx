@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
@@ -15,9 +14,16 @@ import {
   isRequiredMessage,
 } from '@fpsak-frontend/utils';
 
-import * as useIntl from '../useIntl';
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-papirsoknad-opphold-i-norge';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-papirsoknad-opphold-i-norge');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<OppholdINorgePanel>', () => {
   const countryCodes = [{
@@ -32,15 +38,6 @@ describe('<OppholdINorgePanel>', () => {
   const alleKodeverk = {
     [kodeverkTyper.LANDKODER]: countryCodes,
   };
-
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
 
   describe('validate', () => {
     it('skal validere at opphold i Norge nå er besvart', () => {

@@ -1,24 +1,21 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
-import * as useIntl from './useIntl';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireActual('../i18n/intl-enzyme-test-helper-prosess-felles');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<ProsessStegBegrunnelseTextField>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlWithMessages());
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   it('skal vise tekstfelt som ikke readOnly', () => {
     const wrapper = shallow(<ProsessStegBegrunnelseTextField
       readOnly={false}

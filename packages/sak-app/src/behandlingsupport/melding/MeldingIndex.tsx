@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
@@ -10,7 +11,6 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { BehandlingAppKontekst, Fagsak, Kodeverk } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
-import useHistory from '../../app/useHistory';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { setBehandlingOnHold } from '../../behandlingmenu/behandlingMenuOperations';

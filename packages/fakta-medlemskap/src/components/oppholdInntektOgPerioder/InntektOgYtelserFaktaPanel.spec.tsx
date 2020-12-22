@@ -1,22 +1,20 @@
 import React from 'react';
-import sinon from 'sinon';
 
 import { FagsakPerson } from '@fpsak-frontend/types';
 
 import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
-import * as useIntl from '../../useIntl';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireActual('../../../i18n/intl-enzyme-test-helper-fakta-medlemskap');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
 
 describe('<InntektOgYtelserFaktaPanel>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   it('skal vise tabell med inntekter', () => {
     const inntekter = [{
       person: 'Espen Utvikler',

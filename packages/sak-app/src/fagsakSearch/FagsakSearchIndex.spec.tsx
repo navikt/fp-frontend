@@ -1,13 +1,20 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import { Fagsak } from '@fpsak-frontend/types';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
-import * as useHistory from '../app/useHistory';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakSearchIndex from './FagsakSearchIndex';
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 describe('<FagsakSearchIndex>', () => {
   const fagsak: Partial<Fagsak> = {
@@ -30,18 +37,6 @@ describe('<FagsakSearchIndex>', () => {
     saksnummer: 23456,
   };
   const fagsaker = [fagsak, fagsak2];
-
-  const push = sinon.spy();
-  let contextStub;
-  beforeEach(() => {
-    // @ts-ignore
-    contextStub = sinon.stub(useHistory, 'default').callsFake(() => ({ push }));
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-    push.resetHistory();
-  });
 
   it('skal søke opp fagsaker', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
@@ -70,9 +65,6 @@ describe('<FagsakSearchIndex>', () => {
     const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: number) => undefined;
     velgFagsak('', fagsak.saksnummer);
 
-    expect(push.calledOnce).toBe(true);
-    const { args } = push.getCalls()[0];
-    expect(args).toHaveLength(1);
-    expect(args[0]).toEqual(`/fagsak/${fagsak.saksnummer}/`);
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`);
   });
 });

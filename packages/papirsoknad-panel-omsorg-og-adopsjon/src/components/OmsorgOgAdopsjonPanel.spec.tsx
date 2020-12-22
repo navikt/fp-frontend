@@ -5,20 +5,19 @@ import sinon from 'sinon';
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon';
-import * as useIntl from '../useIntl';
+import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon';
 import { FodselsDatoFields, OmsorgOgAdopsjonPanelImpl } from './OmsorgOgAdopsjonPanel';
 
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl');
+  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon');
+  return {
+    ...reactIntl,
+    useIntl: () => mockIntl.intlMock,
+  };
+});
+
 describe('<OmsorgOgAdopsjonPanel>', () => {
-  let contextStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useIntl, 'default').callsFake(() => intlMock);
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
-
   it('skal vise komponent med to datepickers når årsakstype er adopsjon', () => {
     const wrapper = shallowWithIntl(<OmsorgOgAdopsjonPanelImpl
       form="form"

@@ -9,19 +9,21 @@ import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
-import * as useLocation from '../app/useLocation';
-import * as useRouteMatch from '../app/useRouteMatch';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
 
-describe('<FagsakProfileIndex>', () => {
-  const locationMock = {
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useRouteMatch: () => ({ isExact: false }),
+  useLocation: () => ({
     pathname: 'test',
     search: 'test',
     state: {},
     hash: 'test',
-  };
+  }),
+}));
 
+describe('<FagsakProfileIndex>', () => {
   const fagsak = {
     saksnummer: 123,
     sakstype: {
@@ -55,19 +57,6 @@ describe('<FagsakProfileIndex>', () => {
     sakSkalTilInfotrygd: true,
     behandlingTypeKanOpprettes: [],
   };
-
-  let contextStubLocation;
-  let contextStubMatch;
-  beforeEach(() => {
-    contextStubLocation = sinon.stub(useLocation, 'default').callsFake(() => locationMock);
-    // @ts-ignore
-    contextStubMatch = sinon.stub(useRouteMatch, 'default').callsFake(() => ({ isExact: false }));
-  });
-
-  afterEach(() => {
-    contextStubLocation.restore();
-    contextStubMatch.restore();
-  });
 
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, alleKodeverk);
