@@ -5,7 +5,7 @@ import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import { Dokument } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import useBehandlingEndret from '../../behandling/useBehandligEndret';
+import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
 // TODO (hb) lag linker, ikke callback
@@ -14,17 +14,16 @@ const selectDocument = (saksNr: number) => (_e, _id, document: Dokument): void =
   window.open(`/fpsak/api/dokument/hent-dokument?saksnummer=${saksNr}&journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`, '_blank');
 };
 
-const hentSorterteDokumenter = (alleDokumenter: Dokument[] = []): Dokument[] => alleDokumenter
-  .sort((a, b) => {
-    if (!a.tidspunkt) {
-      return +1;
-    }
+const sorterDokumenter = ((dok1: Dokument, dok2: Dokument): number => {
+  if (!dok1.tidspunkt) {
+    return +1;
+  }
 
-    if (!b.tidspunkt) {
-      return -1;
-    }
-    return b.tidspunkt.localeCompare(a.tidspunkt);
-  });
+  if (!dok2.tidspunkt) {
+    return -1;
+  }
+  return dok2.tidspunkt.localeCompare(dok1.tidspunkt);
+});
 
 interface OwnProps {
   saksnummer: number;
@@ -50,7 +49,7 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
     keepData: true,
   });
 
-  const sorterteDokumenter = useMemo(() => hentSorterteDokumenter(alleDokumenter), [alleDokumenter]);
+  const sorterteDokumenter = useMemo(() => alleDokumenter.sort(sorterDokumenter), [alleDokumenter]);
 
   if (state === RestApiState.LOADING) {
     return <LoadingPanel />;

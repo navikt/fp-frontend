@@ -67,7 +67,8 @@ class RequestApi extends AbstractRequestApi {
   private doCaching = async (endpointName: string): Promise<any> => {
     if (this.cache.hasFetched(endpointName)) {
       return this.cache.getData(endpointName);
-    } if (this.cache.isFetching(endpointName)) {
+    }
+    if (this.cache.isFetching(endpointName)) {
       await waitUntilFinished(this.cache, endpointName);
       return this.cache.getData(endpointName);
     }

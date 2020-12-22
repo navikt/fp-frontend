@@ -4,7 +4,7 @@ import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
-import useBehandlingEndret from '../behandling/useBehandligEndret';
+import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 
 const useHentAlleBehandlinger = (saksnummer: number, behandlingId: number, behandlingVersjon: number, oppfriskIndikator: number):

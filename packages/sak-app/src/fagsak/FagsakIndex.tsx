@@ -13,7 +13,7 @@ import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-comp
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
-import useBehandlingEndret from '../behandling/useBehandligEndret';
+import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
 import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';

@@ -29,12 +29,10 @@ export const hentValgbarePaneler = (
   synligePaneler: string[], sendMeldingErRelevant: boolean, behandlingRettigheter?: BehandlingRettigheter,
 ): string[] => synligePaneler
   .filter((supportPanel) => {
-    switch (supportPanel) {
-      case SupportTabs.MELDINGER:
-        return behandlingRettigheter && sendMeldingErRelevant ? behandlingRettigheter.behandlingKanSendeMelding : false;
-      default:
-        return true;
+    if (supportPanel === SupportTabs.MELDINGER) {
+      return behandlingRettigheter && sendMeldingErRelevant ? behandlingRettigheter.behandlingKanSendeMelding : false;
     }
+    return true;
   });
 
 interface OwnProps {
