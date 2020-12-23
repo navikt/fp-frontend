@@ -27,7 +27,7 @@ const utledKjonn = (kjonn: Kodeverk): Gender => {
 interface OwnProps {
   fagsak: Fagsak;
   fagsakPerson: FagsakPerson;
-  alleKodeverk: { [key: string]: [KodeverkMedNavn] };
+  alleKodeverk: { [key: string]: KodeverkMedNavn[] };
   sprakkode?: Kodeverk;
   personopplysninger?: Personopplysninger;
   familieHendelse?: FamilieHendelseSamling;
