@@ -423,28 +423,33 @@ const getInitialArbeidsforholdValues = createSelector([
   if (arbeidsforhold === undefined || arbeidsforhold === null) {
     return EMPTY_LIST;
   }
-  const arbeidsforholdValues = [];
-  arbeidsforhold.forEach((a) => {
+  return arbeidsforhold.reduce((res, a) => {
     const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
     const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => p.erGyldig)
       .map((p) => p.permisjonsprosent)
       .reduce((sum, prosent) => sum + prosent, 0);
-    arbeidsforholdValues[utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)] = {
-      ...a,
-      tilretteleggingDatoer: a.tilretteleggingDatoer.map((tilretteleggingsdato) => ({
-        ...tilretteleggingsdato,
-        stillingsprosent: tilretteleggingsdato.stillingsprosent,
-        oldOverstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad,
-        overstyrtUtbetalingsgrad: utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
-      })),
+
+    const permisjoner = a.velferdspermisjoner.reduce((acc, permisjon) => ({
+      ...acc,
+      [finnPermisjonFieldName(permisjon)]: permisjon.erGyldig,
+    }), {});
+
+    return {
+      ...res,
+      [utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)]: {
+        ...a,
+        tilretteleggingDatoer: a.tilretteleggingDatoer.map((tilretteleggingsdato) => ({
+          ...tilretteleggingsdato,
+          stillingsprosent: tilretteleggingsdato.stillingsprosent,
+          oldOverstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad,
+          overstyrtUtbetalingsgrad: utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
+        })),
+        ...permisjoner,
+      },
     };
-    a.velferdspermisjoner.forEach((p) => {
-      arbeidsforholdValues[utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)][finnPermisjonFieldName(p)] = p.erGyldig;
-    });
-  });
-  return arbeidsforholdValues;
+  }, {});
 });
 
 const getFødselsdato = createSelector([
