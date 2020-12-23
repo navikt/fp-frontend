@@ -6,42 +6,40 @@ import Lenkepanel from 'nav-frontend-lenkepanel';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
-import {
-  KodeverkMedNavn, Fagsak, FagsakPerson,
-} from '@fpsak-frontend/types';
+import { Fagsak, FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
-
-import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
-import { pathToFagsak } from '../../app/paths';
 
 import styles from './aktoerGrid.less';
 
 interface OwnProps {
-  data: {
+  aktorInfo: {
     fagsaker: Fagsak[];
     person: FagsakPerson;
   };
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  finnPathToFagsak: (saksnummer: number) => string;
 }
 
 const AktoerGrid: FunctionComponent<OwnProps> = ({
-  data,
+  aktorInfo,
+  alleKodeverk,
+  finnPathToFagsak,
 }) => {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
-  const vFagsak = data.fagsaker.length > 0 ? data.fagsaker[0] : { relasjonsRolleType: { kode: relasjonsRolleType.MOR } };
+  const vFagsak = aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: { kode: relasjonsRolleType.MOR } };
 
   return (
     <>
       <VisittkortSakIndex
         alleKodeverk={alleKodeverk}
         fagsak={vFagsak as Fagsak}
-        fagsakPerson={data.person}
+        fagsakPerson={aktorInfo.person}
       />
       <div className={styles.list}>
-        {data.fagsaker.length ? data.fagsaker.map((fagsak) => (
+        {aktorInfo.fagsaker.length ? aktorInfo.fagsaker.map((fagsak) => (
           <Lenkepanel
             linkCreator={(props) => (
-              <Link to={pathToFagsak(fagsak.saksnummer)} className={props.className}>
+              <Link to={finnPathToFagsak(fagsak.saksnummer)} className={props.className}>
                 {props.children}
               </Link>
             )}

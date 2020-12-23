@@ -27,7 +27,7 @@ const findPersonStatus = (personopplysning: Personopplysninger): Kodeverk => {
 
 interface OwnProps {
   personopplysninger: Personopplysninger;
-  alleKodeverk: {[key: string]: [KodeverkMedNavn]};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   sprakkode?: Kodeverk;
 }
 

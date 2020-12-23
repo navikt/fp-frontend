@@ -19,7 +19,7 @@ interface OwnProps {
   fagsak: Fagsak;
   fagsakPerson: FagsakPerson;
   sprakkode?: Kodeverk;
-  alleKodeverk: {[key: string]: [KodeverkMedNavn]};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   personopplysninger?: Personopplysninger;
   familieHendelse?: FamilieHendelseSamling;
   lenkeTilAnnenPart?: string;
