@@ -3,9 +3,6 @@ import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import HeaderWithErrorPanel, { Feilmelding } from '@fpsak-frontend/sak-dekorator';
 import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
-import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg';
-import systemrutineIkonUrl from '@fpsak-frontend/assets/images/rutine.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { NavAnsatt } from '@fpsak-frontend/types';
 
@@ -65,20 +62,8 @@ const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 
   const { removeErrorMessages } = useRestApiErrorDispatcher();
 
-  const iconLinks = useMemo(() => [{
-    url: RETTSKILDE_URL,
-    icon: rettskildeneIkonUrl,
-    text: intl.formatMessage({ id: 'Header.Rettskilde' }),
-  }, {
-    url: SYSTEMRUTINE_URL,
-    icon: systemrutineIkonUrl,
-    text: intl.formatMessage({ id: 'Header.Systemrutine' }),
-  }], []);
-
   return (
     <HeaderWithErrorPanel
-      systemTittel={intl.formatMessage({ id: 'Header.Foreldrepenger' })}
-      iconLinks={iconLinks}
       navAnsattName={navAnsatt?.navn}
       removeErrorMessage={removeErrorMessages}
       errorMessages={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
