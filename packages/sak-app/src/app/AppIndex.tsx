@@ -8,7 +8,7 @@ import { configureScope } from '@sentry/browser';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
-import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-feilsider';
+import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-infosider';
 import { parseQueryString } from '@fpsak-frontend/utils';
 import { NavAnsatt } from '@fpsak-frontend/types';
 

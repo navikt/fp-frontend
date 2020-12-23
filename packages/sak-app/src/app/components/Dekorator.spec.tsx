@@ -39,11 +39,6 @@ describe('<Dekorator>', () => {
     />);
     const header = wrapper.find(HeaderWithErrorPanel);
     expect(header.length).toBe(1);
-    const links = header.prop('iconLinks');
-    expect(links).toHaveLength(2);
-    expect(links[0].url).toEqual('https://lovdata.no/pro/sso/login/nav');
-    expect(links[1].url).toEqual('https://navno.sharepoint.com/sites/fag-og-ytelser-'
-      + 'fagsystemer/SitePages/Saksbehandlingsl%C3%B8sningen-for-foreldrepenger-og-engangst%C3%B8nad.aspx');
   });
 
   it('skal vise feilmeldinger', () => {
