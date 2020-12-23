@@ -1,18 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
 
-import { Fagsak, FagsakPerson } from '@fpsak-frontend/types';
+import { Aktor, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import AktorSakIndex from '@fpsak-frontend/sak-aktor';
 
-import AktoerGrid from './components/AktoerGrid';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import { restApiHooks, FpsakApiKeys } from '../data/fpsakApi';
-
-type Aktoer = {
-  fagsaker: Fagsak[];
-  person: FagsakPerson;
-};
+import { pathToFagsak } from '../app/paths';
 
 /**
  * AktoerIndex
@@ -23,18 +18,16 @@ const AktoerIndex: FunctionComponent = () => {
     parse: (aktoerIdFromUrl) => Number.parseInt(aktoerIdFromUrl, 10),
   });
 
-  const { data, state } = restApiHooks.useRestApi<Aktoer>(FpsakApiKeys.AKTOER_INFO, { aktoerId: selectedAktoerId },
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
+
+  const { data, state } = restApiHooks.useRestApi<Aktor>(FpsakApiKeys.AKTOER_INFO, { aktoerId: selectedAktoerId },
     { keepData: true, suspendRequest: !selectedAktoerId, updateTriggers: [selectedAktoerId] });
 
   if (state === RestApiState.NOT_STARTED || state === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
 
-  if (data.person) {
-    return <AktoerGrid data={data} />;
-  }
-
-  return <Normaltekst>{`Ugyldig aktoerId: ${selectedAktoerId}`}</Normaltekst>;
+  return <AktorSakIndex valgtAktorId={selectedAktoerId} aktorInfo={data} alleKodeverk={alleKodeverk} finnPathToFagsak={pathToFagsak} />;
 };
 
 export default AktoerIndex;

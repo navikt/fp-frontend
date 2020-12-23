@@ -72,3 +72,4 @@ export { default as BeregningsresultatTilbakekreving, BeregningResultatPeriode }
 export { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from './src/feilutbetalingPerioderTsType';
 export { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';
 export { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
+export { default as Aktor } from './src/aktorTsType';
