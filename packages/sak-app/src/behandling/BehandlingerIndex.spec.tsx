@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
+import { IngenBehandlingValgtPanel } from '@fpsak-frontend/sak-infosider';
 
-import NoSelectedBehandling from './components/NoSelectedBehandling';
 import { BehandlingerIndex } from './BehandlingerIndex';
 
 describe('BehandlingerIndex', () => {
@@ -23,7 +23,7 @@ describe('BehandlingerIndex', () => {
       setRequestPendingMessage={sinon.spy()}
     />);
 
-    const noBehandling = wrapper.find(NoSelectedBehandling);
+    const noBehandling = wrapper.find(IngenBehandlingValgtPanel);
     expect(noBehandling).toHaveLength(1);
     expect(noBehandling.prop('numBehandlinger')).toEqual(1);
   });

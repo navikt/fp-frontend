@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
+import { IngenBehandlingValgtPanel } from '@fpsak-frontend/sak-infosider';
 
 import { behandlingPath } from '../app/paths';
-import NoSelectedBehandling from './components/NoSelectedBehandling';
 import BehandlingIndex from './BehandlingIndex';
 
 interface OwnProps {
@@ -35,7 +35,7 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
       )}
     />
     <Route>
-      <NoSelectedBehandling numBehandlinger={alleBehandlinger.length} />
+      <IngenBehandlingValgtPanel numBehandlinger={alleBehandlinger.length} />
     </Route>
   </Switch>
 );
