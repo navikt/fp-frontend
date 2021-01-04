@@ -11,7 +11,7 @@ import {
 import MedlemskapInfoPanel from './MedlemskapInfoPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
 import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<MedlemskapInfoPanel>', () => {
   const arbeidsgiverOpplysningerPerId = {
@@ -39,7 +39,8 @@ describe('<MedlemskapInfoPanel>', () => {
       erAktivt: true,
     };
 
-    const wrapper = shallowWithIntl(<MedlemskapInfoPanel
+    const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
+      intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
       hasOpenAksjonspunkter={false}
       submittable
@@ -87,7 +88,8 @@ describe('<MedlemskapInfoPanel>', () => {
       erAktivt: true,
     };
 
-    const wrapper = shallowWithIntl(<MedlemskapInfoPanel
+    const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
+      intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
       hasOpenAksjonspunkter={false}
       submittable
@@ -135,7 +137,8 @@ describe('<MedlemskapInfoPanel>', () => {
       erAktivt: true,
     };
 
-    const wrapper = shallowWithIntl(<MedlemskapInfoPanel
+    const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
+      intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
       hasOpenAksjonspunkter={false}
       submittable
@@ -167,7 +170,8 @@ describe('<MedlemskapInfoPanel>', () => {
   });
 
   it('skal vise panel for avklaring av startdato for foreldrepengerperioden, for å tilate manuell korrigering selvom aksjonspunktet ikke finnes', () => {
-    const wrapper = shallowWithIntl(<MedlemskapInfoPanel
+    const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
+      intl={intlMock}
       aksjonspunkter={[]}
       hasOpenAksjonspunkter={false}
       submittable
