@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
@@ -41,6 +41,7 @@ type TransformedValues = {
 }
 
 interface PureOwnProps {
+  intl: IntlShape;
   aksjonspunkter: Aksjonspunkt[];
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
@@ -61,6 +62,7 @@ interface MappedOwnProps {
   hasOpenAksjonspunkt: boolean;
   overstyringDisabled?: boolean;
   onSubmit: (values: FormValues) => any;
+  validate: (values: FormValues) => any;
   initialValues: FormValues;
 }
 
@@ -69,7 +71,7 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for vurdering av om startdato for foreldrepengerperioden er korrekt.
  */
-export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   intl,
   hasAksjonspunkt,
   hasOpenAksjonspunkt,
@@ -167,22 +169,9 @@ const lagSubmitFn = createSelector([
   return (values: FormValues) => submitCallback([transformValues(values, isOverstyring)]);
 });
 
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
-  const { aksjonspunkt } = ownProps;
-  const hasAksjonspunkt = aksjonspunkt !== undefined;
-  const hasOpenAksjonspunkt = hasAksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
-  return {
-    hasAksjonspunkt,
-    hasOpenAksjonspunkt,
-    onSubmit: lagSubmitFn(ownProps),
-    overstyringDisabled: ownProps.readOnlyForStartdatoForForeldrepenger || ownProps.behandlingStatus.kode !== behandlingStatus.BEHANDLING_UTREDES,
-    initialValues: buildInitialValues(ownProps),
-  };
-};
-
 const isBefore2019 = (startdato: string): boolean => moment(startdato).isBefore(moment('2019-01-01'));
 
-const validateDates = (values: FormValues): any => {
+const validateDates = (values: FormValues, intl: IntlShape): any => {
   const errors = {};
   if (!values) {
     return errors;
@@ -195,19 +184,34 @@ const validateDates = (values: FormValues): any => {
 
   if (isStartdatoEtterArbeidsgiverdato) {
     return {
-      startdatoFraSoknad: [{ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoEtterArbeidsgiverdato' }],
+      startdatoFraSoknad: intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoEtterArbeidsgiverdato' }),
     };
   }
   if (isBefore2019(startdatoFraSoknad)) {
     return {
-      startdatoFraSoknad: [{ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoFør2019' }],
+      startdatoFraSoknad: intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoFør2019' }),
     };
   }
 
   return errors;
 };
 
+const lagValidateFn = createSelector([(ownProps: PureOwnProps) => ownProps.intl], (intl) => (values: FormValues) => validateDates(values, intl));
+
+const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
+  const { aksjonspunkt } = ownProps;
+  const hasAksjonspunkt = aksjonspunkt !== undefined;
+  const hasOpenAksjonspunkt = hasAksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
+  return {
+    hasAksjonspunkt,
+    hasOpenAksjonspunkt,
+    onSubmit: lagSubmitFn(ownProps),
+    validate: lagValidateFn(ownProps),
+    overstyringDisabled: ownProps.readOnlyForStartdatoForForeldrepenger || ownProps.behandlingStatus.kode !== behandlingStatus.BEHANDLING_UTREDES,
+    initialValues: buildInitialValues(ownProps),
+  };
+};
+
 export default connect(mapStateToProps)(behandlingForm({
   form: 'StartdatoForForeldrepengerperiodenForm',
-  validate: validateDates,
-})(injectIntl(StartdatoForForeldrepengerperiodenForm)));
+})(StartdatoForForeldrepengerperiodenForm));

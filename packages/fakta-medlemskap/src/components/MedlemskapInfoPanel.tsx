@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -62,7 +63,8 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å vise faktapanelene for medlemskap.
  */
-const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
+const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
   hasOpenAksjonspunkter,
   submittable,
   aksjonspunkter,
@@ -93,6 +95,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
       {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger) && (
         <>
           <StartdatoForForeldrepengerperiodenForm
+            intl={intl}
             readOnly={readOnly}
             aksjonspunkt={avklarStartdatoAksjonspunkt || avklarStartdatoOverstyring}
             submitCallback={submitCallback}
@@ -137,4 +140,4 @@ MedlemskapInfoPanel.defaultProps = {
   isForeldrepenger: true,
 };
 
-export default MedlemskapInfoPanel;
+export default injectIntl(MedlemskapInfoPanel);

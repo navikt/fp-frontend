@@ -1,7 +1,7 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
@@ -9,7 +9,7 @@ import {
   Aksjonspunkt, InntektArbeidYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 import { StartdatoForForeldrepengerperiodenForm } from './StartdatoForForeldrepengerperiodenForm';
 
 describe('<StartdatoForForeldrepengerperiodenForm>', () => {
@@ -22,7 +22,7 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
   };
 
   it('skal vise form for avklaring av startdato', () => {
-    const wrapper = shallowWithIntl(<StartdatoForForeldrepengerperiodenForm
+    const wrapper = shallow(<StartdatoForForeldrepengerperiodenForm
       {...reduxFormPropsMock}
       intl={intlMock}
       hasAksjonspunkt
@@ -40,6 +40,7 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
+      validate={() => undefined}
       readOnlyForStartdatoForForeldrepenger={false}
       behandlingStatus={{
         kode: behandlingStatus.BEHANDLING_UTREDES,
