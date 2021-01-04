@@ -1,7 +1,7 @@
 type AndelFieldValue = {
   andel: string;
   aktivitetStatus: string;
-  andelsnr: number;
+  andelsnr?: number;
   nyAndel?: boolean;
   inntektskategori: string;
   lagtTilAvSaksbehandler?: boolean;
@@ -11,9 +11,9 @@ type AndelFieldValue = {
   arbeidsperiodeTom?: string;
   arbeidsforholdType?: string;
   skalKunneEndreAktivitet?: boolean
-  fastsattBelop?: number;
-  belopReadOnly?: number;
-  refusjonskrav?: number;
+  fastsattBelop?: string;
+  belopReadOnly?: string;
+  refusjonskrav?: string;
 }
 
 export type InntektTransformed = {

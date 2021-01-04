@@ -73,18 +73,20 @@ export const findInstruksjonForFastsetting = (skalHaBesteberegning, skalFastsett
   return ' ';
 };
 
-const finnInntektstabell = (readOnly, behandlingId, behandlingVersjon, beregningsgrunnlag, isAksjonspunktClosed, alleKodeverk) => (
-  <FieldArray
-    name={INNTEKT_FIELD_ARRAY_NAME}
-    component={InntektFieldArray}
-    readOnly={readOnly}
-    skalKunneLeggeTilAndel={false}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
-    beregningsgrunnlag={beregningsgrunnlag}
-    alleKodeverk={alleKodeverk}
-    isAksjonspunktClosed={isAksjonspunktClosed}
-  />
+const finnInntektstabell = (readOnly, behandlingId,
+  behandlingVersjon, beregningsgrunnlag,
+  isAksjonspunktClosed, alleKodeverk, erOverstyrt) => (
+    <FieldArray
+      name={INNTEKT_FIELD_ARRAY_NAME}
+      component={InntektFieldArray}
+      readOnly={readOnly}
+      skalKunneLeggeTilDagpengerManuelt={erOverstyrt}
+      behandlingId={behandlingId}
+      behandlingVersjon={behandlingVersjon}
+      beregningsgrunnlag={beregningsgrunnlag}
+      alleKodeverk={alleKodeverk}
+      isAksjonspunktClosed={isAksjonspunktClosed}
+    />
 );
 
 type OwnProps = {
@@ -104,6 +106,7 @@ type OwnProps = {
     aksjonspunkter: Aksjonspunkt[];
     beregningsgrunnlag: Beregningsgrunnlag;
     erOverstyrt: boolean;
+    skalHaMilitær: boolean;
 };
 
 interface StaticFunctions {
@@ -142,7 +145,7 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
   <div>
     <InntektstabellPanel
       key="inntektstabell"
-      tabell={finnInntektstabell(readOnly, behandlingId, behandlingVersjon, beregningsgrunnlag, isAksjonspunktClosed, alleKodeverk)}
+      tabell={finnInntektstabell(readOnly, behandlingId, behandlingVersjon, beregningsgrunnlag, isAksjonspunktClosed, alleKodeverk, erOverstyrt)}
       skalViseTabell={skalViseTabell}
       hjelpeTekstId={findInstruksjonForFastsetting(skalHaBesteberegning, skalFastsetteFL, skalFastsetteAT, harKunstigArbeid)}
       readOnly={readOnly}
@@ -250,6 +253,7 @@ const transformValuesForOverstyring = (values, transformed, inntektVerdier, fast
       .map((verdi) => ({
         andelsnr: verdi.andelsnr,
         nyAndel: verdi.nyAndel,
+        aktivitetStatus: verdi.aktivitetStatus,
         lagtTilAvSaksbehandler: verdi.lagtTilAvSaksbehandler,
         fastsatteVerdier: {
           fastsattBeløp: verdi.fastsattBelop,

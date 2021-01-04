@@ -45,7 +45,7 @@ VurderMilitaer.buildInitialValues = (faktaOmBeregning) => {
   if (!faktaOmBeregning || !faktaOmBeregning.vurderMilitaer) {
     return initialValues;
   }
-  initialValues[vurderMilitaerField] = faktaOmBeregning.vurderMilitaer.harMilitaer === true;
+  initialValues[vurderMilitaerField] = faktaOmBeregning.vurderMilitaer.harMilitaer;
   return initialValues;
 };
 

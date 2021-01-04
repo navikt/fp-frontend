@@ -14,7 +14,6 @@ import {
 } from './BgFaktaUtils';
 import { finnFrilansFieldName, utledArbeidsforholdFieldName } from './vurderOgFastsettATFL/forms/VurderMottarYtelseUtils';
 import { MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD } from './InntektstabellPanel';
-import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 
 const arbeidsgiver = {
   arbeidsgiverNavn: 'Virksomheten',
@@ -307,26 +306,13 @@ describe('<BgFordelingUtils>', () => {
     refusjonskravFraInntektsmelding: null,
   };
 
-  it('skal redigere inntektskategori for arbeidstakerandel som skalhaBesteberegning', () => {
-    const andelFieldValue = {
-      ...andelValuesUtenInntektsmelding,
-      ...setGenerellAndelsinfo(arbeidstakerAndel3),
-    };
-    const vals = {
-      [besteberegningField]: true,
-    };
-    const skalRedigereInntektskategori = skalRedigereInntektskategoriForAndel(vals, beregningsgrunnlag)(andelFieldValue);
-    expect(skalRedigereInntektskategori).toBe(true);
-  });
-
   it('skal redigere inntektskategori for kunstig arbeid', () => {
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
       ...setArbeidsforholdInitialValues(kunstigArbeidstakerAndel),
       ...setGenerellAndelsinfo(kunstigArbeidstakerAndel),
     };
-    const vals = {};
-    const skalRedigereInntektskategori = skalRedigereInntektskategoriForAndel(vals, beregningsgrunnlag)(andelFieldValue);
+    const skalRedigereInntektskategori = skalRedigereInntektskategoriForAndel(beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntektskategori).toBe(true);
   });
 

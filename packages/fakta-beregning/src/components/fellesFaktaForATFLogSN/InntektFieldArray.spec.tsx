@@ -56,7 +56,7 @@ const alleKodeverk = {
 };
 
 const ownProps = {
-  behandlingId, behandlingVersjon, alleKodeverk, isAksjonspunktClosed: false,
+  behandlingId, behandlingVersjon, alleKodeverk, isAksjonspunktClosed: false, skalKunneLeggeTilDagpengerManuelt: false,
 };
 
 describe('<InntektFieldArray>', () => {
@@ -224,13 +224,13 @@ describe('<InntektFieldArray>', () => {
 
   it('skal fjerne dagpengeandel om dagpenger og lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: true }]);
-    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER]);
+    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER], true);
     expect(newfields.length).toBe(0);
   });
 
   it('skal ikkje fjerne dagpengeandel om dagpenger og ikkje lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: false }]);
-    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER]);
+    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER], true);
     expect(newfields.length).toBe(1);
   });
 

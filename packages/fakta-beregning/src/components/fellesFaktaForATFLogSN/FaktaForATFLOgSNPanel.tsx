@@ -23,7 +23,7 @@ import VurderEtterlonnSluttpakkeForm from './vurderOgFastsettATFL/forms/VurderEt
 import VurderMottarYtelseForm from './vurderOgFastsettATFL/forms/VurderMottarYtelseForm';
 import VurderBesteberegningForm from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import VurderRefusjonForm from './vurderrefusjon/VurderRefusjonForm';
-import { erOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
+import { erInitialOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -353,7 +353,7 @@ const mapStateToBuildInitialValuesProps = createStructuredSelector({
   aksjonspunkter: (state, ownProps) => ownProps.aksjonspunkter,
   faktaOmBeregning: (state, ownProps) => getFaktaOmBeregning(ownProps),
   refusjonskravSomKommerForSentListe: (state, ownProps) => getArbeidsgiverInfoForRefusjonskravSomKommerForSent(ownProps),
-  erOverstyrt: erOverstyringAvBeregningsgrunnlag,
+  erOverstyrt: erInitialOverstyringAvBeregningsgrunnlag,
 });
 
 export const getBuildInitialValuesFaktaForATFLOgSN = createSelector(

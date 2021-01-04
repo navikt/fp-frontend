@@ -10,7 +10,6 @@ import { FieldArrayFieldsProps } from 'redux-form';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './inntektFieldArray.less';
-import ArbeidsforholdField from './ArbeidsforholdField';
 import { getKanRedigereInntekt, getSkalRedigereInntektskategori } from './BgFaktaUtils';
 
 export const getHeaderTextCodes = (skalVisePeriode, skalViseRefusjon) => {
@@ -48,6 +47,7 @@ type OwnProps = {
     removeAndel: (...args: any[]) => any;
     index: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    skalHaMilitær?: boolean;
 };
 
 /**
@@ -68,19 +68,16 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
   readOnly,
   isAksjonspunktClosed,
   removeAndel,
-  alleKodeverk,
 }) => {
   const field = fields.get(index);
   field.kanRedigereInntekt = kanRedigereInntekt;
   return (
     <TableRow>
       <TableColumn>
-        <ArbeidsforholdField
-          fields={fields}
-          index={index}
+        <InputField
           name={`${andelElementFieldId}.andel`}
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
+          bredde="L"
+          readOnly
         />
       </TableColumn>
       {skalVisePeriode
@@ -144,7 +141,7 @@ export const AndelRowImpl:FunctionComponent<OwnProps & WrappedComponentProps> = 
         className={styles.buttonRemove}
         type="button"
         onClick={() => removeAndel()}
-        title={intl.formatMessage({ id: 'BeregningInfoPanel.FordelingBG.FjernAndel' })}
+        title={intl.formatMessage({ id: 'BeregningInfoPanel.FordelingBG.FjernDagpenger' })}
       />
     )}
       </TableColumn>

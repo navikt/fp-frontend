@@ -37,8 +37,8 @@
   "BeregningInfoPanel.FordelingBG.Refusjonskrav": "Refusjonskrav",
   "BeregningInfoPanel.FordelingBG.Fordeling": "Månedsinntekt",
   "BeregningInfoPanel.FordelingBG.Inntektskategori": "Inntektskategori",
-  "BeregningInfoPanel.FordelingBG.LeggTilAndel": "Legg til aktivitet",
-  "BeregningInfoPanel.FordelingBG.FjernAndel": "Fjern aktivitet",
+  "BeregningInfoPanel.FordelingBG.LeggTilDagpengerAndel": "Legg til dagpenger",
+  "BeregningInfoPanel.FordelingBG.FjernDagpenger": "Fjern dagpenger",
   "BeregningInfoPanel.FordelingBG.Ytelse": "Ytelse",
 
   "AvklareAktiviteter.OverstyrerAktivitetAdvarsel": "Overstyr hvilke aktiviteter og eventuelle inntektsmeldinger som skal benyttes i beregning.",
