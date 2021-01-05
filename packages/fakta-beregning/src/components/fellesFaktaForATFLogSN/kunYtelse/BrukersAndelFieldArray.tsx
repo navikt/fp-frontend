@@ -227,7 +227,7 @@ BrukersAndelFieldArrayImpl.validate = (values) => {
   return null;
 };
 
-export const getInntektskategorierAlfabetiskSortert = createSelector(
+const getInntektskategorierAlfabetiskSortert = createSelector(
   [(ownProps: OwnProps) => ownProps.alleKodeverk[kodeverkTyper.INNTEKTSKATEGORI]],
   (kodeverkListe) => kodeverkListe.slice().sort((a, b) => a.navn.localeCompare(b.navn)),
 );

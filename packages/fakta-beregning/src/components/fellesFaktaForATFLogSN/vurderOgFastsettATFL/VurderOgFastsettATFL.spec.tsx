@@ -168,6 +168,7 @@ describe('<VurderOgFastsettATFL>', () => {
       erOverstyrer={false}
       beregningsgrunnlag={beregningsgrunnlag}
       erOverstyrt={false}
+      skalHaMilitær={null}
     />);
     const inntektstabellPanel = wrapper.find(InntektstabellPanel);
     const lonnsendringForm = inntektstabellPanel.find(LonnsendringForm);

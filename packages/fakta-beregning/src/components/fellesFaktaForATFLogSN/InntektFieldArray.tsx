@@ -16,21 +16,31 @@ import {
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
 import { validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
-import { isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
+import { getFormValuesForBeregning, isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
 import { AndelRow, getHeaderTextCodes } from './InntektFieldArrayRow';
-import AddAndelButton from './AddAndelButton';
+import AddDagpengerAndelButton from './AddDagpengerAndelButton';
 import SummaryRow from './SummaryRow';
 import AndelFieldValue, { InntektTransformed } from './andelFieldValueTs';
+import { vurderMilitaerField } from './vurderMilitaer/VurderMilitaer';
 
-const dagpenger = (aktivitetStatuser) => ({
-  andel: aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.DAGPENGER)[0].navn,
+const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
+  andel: aktivitetStatuser.find(({ kode }) => kode === aktivitetStatus.DAGPENGER).navn,
   aktivitetStatus: aktivitetStatus.DAGPENGER,
   fastsattBelop: '',
   inntektskategori: inntektskategorier.DAGPENGER,
+  nyAndel: true,
+  skalKunneEndreAktivitet: false,
+  lagtTilAvSaksbehandler: true,
+});
+
+const lagNyMS = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
+  andel: aktivitetStatuser.find(({ kode }) => kode === aktivitetStatus.MILITAER_ELLER_SIVIL).navn,
+  aktivitetStatus: aktivitetStatus.MILITAER_ELLER_SIVIL,
+  fastsattBelop: '',
+  inntektskategori: inntektskategorier.ARBEIDSTAKER,
   nyAndel: true,
   skalKunneEndreAktivitet: false,
   lagtTilAvSaksbehandler: true,
@@ -109,43 +119,72 @@ const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag, behandli
   />
 );
 
-const findDagpengerIndex = (fields) => {
-  let dagpengerIndex = -1;
-  fields.forEach((id, index) => {
-    const field = fields.get(index);
-    if (field.aktivitetStatus === aktivitetStatus.DAGPENGER) {
-      dagpengerIndex = index;
+const findAktivitetStatusIndex = (fields: FieldArrayFieldsProps<AndelFieldValue>, aktivitetStatusKode: string) => {
+  let index = -1;
+  fields.forEach((id, nyIndex) => {
+    const field = fields.get(nyIndex);
+    if (field.aktivitetStatus === aktivitetStatusKode) {
+      index = nyIndex;
     }
   });
-  return dagpengerIndex;
+  return index;
 };
 
-export const leggTilDagpengerOmBesteberegning = (fields, skalHaBesteberegning, aktivitetStatuser) => {
-  const dpIndex = findDagpengerIndex(fields);
-  if (!skalHaBesteberegning) {
-    if (dpIndex !== -1) {
-      const field = fields.get(dpIndex);
-      if (field.lagtTilAvSaksbehandler) {
-        fields.remove(dpIndex);
-      }
+const harDagpenger = (fields: FieldArrayFieldsProps<AndelFieldValue>) => findAktivitetStatusIndex(fields, aktivitetStatus.DAGPENGER) !== -1;
+
+const fjernEllerLeggTilAktivitetStatus = (fields: FieldArrayFieldsProps<AndelFieldValue>,
+  aktivitetStatusKode: string,
+  skalHaAndelMedAktivitetstatus: boolean,
+  skalFjerne: (field: AndelFieldValue) => boolean,
+  nyStatusAndel: AndelFieldValue) => {
+  const statusIndex = findAktivitetStatusIndex(fields, aktivitetStatusKode);
+  if (statusIndex !== -1) {
+    const field = fields.get(statusIndex);
+    if (skalFjerne(field)) {
+      fields.remove(statusIndex);
     }
+  }
+  if (statusIndex !== -1) {
     return;
   }
-  if (dpIndex !== -1) {
-    return;
+  if (skalHaAndelMedAktivitetstatus) {
+    fields.push(nyStatusAndel);
   }
-  fields.push(dagpenger(aktivitetStatuser));
+};
+
+export const leggTilDagpengerOmBesteberegning = (fields: FieldArrayFieldsProps<AndelFieldValue>,
+  skalHaBesteberegning: boolean,
+  aktivitetStatuser: KodeverkMedNavn[],
+  skalKunneLeggeTilDagpenger: boolean) => {
+  fjernEllerLeggTilAktivitetStatus(
+    fields,
+    aktivitetStatus.DAGPENGER,
+    skalHaBesteberegning,
+    (andel: AndelFieldValue) => !skalHaBesteberegning && !skalKunneLeggeTilDagpenger && andel.lagtTilAvSaksbehandler,
+    dagpenger(aktivitetStatuser),
+  );
+};
+
+const fjernEllerLeggTilMilitær = (fields: FieldArrayFieldsProps<AndelFieldValue>,
+  skalHaMilitær: boolean,
+  aktivitetStatuser: KodeverkMedNavn[]) => {
+  fjernEllerLeggTilAktivitetStatus(
+    fields,
+    aktivitetStatus.MILITAER_ELLER_SIVIL,
+    skalHaMilitær === true,
+    () => skalHaMilitær === false,
+    lagNyMS(aktivitetStatuser),
+  );
 };
 
 type OwnProps = {
     readOnly: boolean;
-    fields: FieldArrayFieldsProps<any>;
+    fields: FieldArrayFieldsProps<AndelFieldValue>;
     meta: FieldArrayMetaProps;
     isBeregningFormDirty: boolean;
-    erKunYtelse: boolean;
-    skalKunneLeggeTilAndel?: boolean;
-    aktivitetStatuser: Kodeverk[];
+    skalKunneLeggeTilDagpengerManuelt: boolean;
     skalHaBesteberegning: boolean;
+    skalHaMilitær?: boolean,
     behandlingId: number;
     behandlingVersjon: number;
     beregningsgrunnlag: Beregningsgrunnlag;
@@ -172,10 +211,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
   meta,
   intl, readOnly,
   isBeregningFormDirty,
-  erKunYtelse,
-  skalKunneLeggeTilAndel,
-  aktivitetStatuser,
-  skalHaBesteberegning,
+  skalKunneLeggeTilDagpengerManuelt,
   behandlingId,
   behandlingVersjon,
   beregningsgrunnlag,
@@ -191,8 +227,21 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
     isAksjonspunktClosed,
     alleKodeverk,
   );
-  leggTilDagpengerOmBesteberegning(fields, skalHaBesteberegning, aktivitetStatuser);
   if (tablerows.length === 0) {
+    if (skalKunneLeggeTilDagpengerManuelt) {
+      return (
+        <NavFieldGroup errorMessage={getErrorMessage(meta, intl, isBeregningFormDirty)}>
+          {!readOnly && !harDagpenger(fields)
+      && (
+        <AddDagpengerAndelButton
+          fields={fields}
+          alleKodeverk={alleKodeverk}
+        />
+      )}
+          <VerticalSpacer eightPx />
+        </NavFieldGroup>
+      );
+    }
     return null;
   }
   tablerows.push(createBruttoBGSummaryRow(fields, readOnly, beregningsgrunnlag, behandlingId, behandlingVersjon));
@@ -201,10 +250,9 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
       <Table headerTextCodes={getHeaderTextCodes(skalVisePeriode(fields), skalViseRefusjon(fields))} noHover classNameTable={styles.inntektTable}>
         {tablerows}
       </Table>
-      {!readOnly && skalKunneLeggeTilAndel
+      {!readOnly && skalKunneLeggeTilDagpengerManuelt && !harDagpenger(fields)
       && (
-        <AddAndelButton
-          erKunYtelse={erKunYtelse}
+        <AddDagpengerAndelButton
           fields={fields}
           alleKodeverk={alleKodeverk}
         />
@@ -215,7 +263,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
 };
 
 InntektFieldArrayImpl.defaultProps = {
-  skalKunneLeggeTilAndel: true,
+  skalKunneLeggeTilDagpengerManuelt: false,
 };
 
 InntektFieldArrayImpl.transformValues = (values): InntektTransformed => (values
@@ -275,12 +323,15 @@ export const mapStateToProps = (state, ownProps) => {
   const isBeregningFormDirty = isFormDirty(state, ownProps);
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
   const skalHaBesteberegning = skalHaBesteberegningSelector(state, ownProps) === true;
+  const skalHaMilitær = getFormValuesForBeregning(state, ownProps)[vurderMilitaerField];
   const tilfeller = ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller
     ? ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : [];
+  fjernEllerLeggTilMilitær(ownProps.fields, skalHaMilitær, aktivitetStatuser);
+  leggTilDagpengerOmBesteberegning(ownProps.fields, skalHaBesteberegning, aktivitetStatuser, ownProps.skalKunneLeggeTilDagpengerManuelt);
   return {
     isBeregningFormDirty,
     skalHaBesteberegning,
-    aktivitetStatuser,
+    skalHaMilitær,
     erKunYtelse: tilfeller && tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE),
   };
 };

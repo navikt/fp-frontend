@@ -10,7 +10,6 @@ import { InputField, PeriodpickerField, SelectField } from '@fpsak-frontend/form
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import { AndelRowImpl, mapStateToProps } from './InntektFieldArrayRow';
-import ArbeidsforholdField from './ArbeidsforholdField';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
 
@@ -99,7 +98,7 @@ it('skal vise komponent med arbeidsperiode og refusjonskrav', () => {
   expect(rows.length).toEqual(1);
   const columns = rows.first().find(TableColumn);
   expect(columns.length).toEqual(6);
-  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
+  expect(columns.first().find(InputField).length).toEqual(1);
   expect(columns.at(1).find(PeriodpickerField).length).toEqual(1);
   expect(columns.at(2).find(InputField).length).toEqual(1);
   expect(columns.at(3).find(InputField).length).toEqual(1);
@@ -144,7 +143,7 @@ it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
   expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
   expect(columns.length).toEqual(4);
-  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
+  expect(columns.first().find(InputField).length).toEqual(1);
   const inputField = columns.at(1).find(InputField);
   expect(inputField.length).toEqual(1);
   expect(inputField.props().name).toEqual('fieldArrayName[0].fastsattBelop');
@@ -190,7 +189,7 @@ it('skal vise komponent med readOnly beløp', () => {
   expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
   expect(columns.length).toEqual(4);
-  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
+  expect(columns.first().find(InputField).length).toEqual(1);
   const inputField = columns.at(1).find(InputField);
   expect(inputField.length).toEqual(1);
   expect(inputField.props().name).toEqual('fieldArrayName[0].belopReadOnly');
@@ -232,7 +231,7 @@ it('skal vise komponent med sletteknapp', () => {
   expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
   expect(columns.length).toEqual(4);
-  expect(columns.first().find(ArbeidsforholdField).length).toEqual(1);
+  expect(columns.first().find(InputField).length).toEqual(1);
   expect(columns.at(1).find(InputField).length).toEqual(1);
   expect(columns.at(2).find(SelectField).length).toEqual(1);
   const btn = columns.at(3).find('button');

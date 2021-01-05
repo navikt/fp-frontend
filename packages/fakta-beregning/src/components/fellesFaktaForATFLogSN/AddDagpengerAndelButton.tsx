@@ -6,34 +6,36 @@ import { Column, Row } from 'nav-frontend-grid';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import { Image } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps } from 'redux-form';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './addAndelButton.less';
 
-const defaultAndel = (aktivitetStatuser, erKunYtelse) => ({
-  andel: erKunYtelse ? aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.BRUKERS_ANDEL)[0].navn : undefined,
+const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) => ({
+  andel: aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.DAGPENGER)[0].navn,
+  aktivitetStatus: aktivitetStatus.DAGPENGER,
   fastsattBelop: '',
-  inntektskategori: '',
+  inntektskategori: inntektskategorier.DAGPENGER,
   nyAndel: true,
   skalKunneEndreAktivitet: true,
   lagtTilAvSaksbehandler: true,
 });
 
-const onKeyDown = (fields, aktivitetStatuser, erKunYtelse) => ({ keyCode }) => {
+const onKeyDown = (fields, aktivitetStatuser) => ({ keyCode }) => {
   if (keyCode === 13) {
-    fields.push(defaultAndel(aktivitetStatuser, erKunYtelse));
+    fields.push(dagpenger(aktivitetStatuser));
   }
 };
 
 type OwnProps = {
     fields: FieldArrayFieldsProps<any>;
-    aktivitetStatuser: Kodeverk[];
+    aktivitetStatuser: KodeverkMedNavn[];
     erKunYtelse: boolean;
 };
 
-export const AddAndelButtonImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  erKunYtelse, intl, fields, aktivitetStatuser,
+export const AddDagpengerAndelButtonImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl, fields, aktivitetStatuser,
 }) => (
   <Row className={styles.buttonRow}>
     <Column xs="3">
@@ -42,9 +44,9 @@ export const AddAndelButtonImpl: FunctionComponent<OwnProps & WrappedComponentPr
       <div
         id="leggTilAndelDiv"
         onClick={() => {
-          fields.push(defaultAndel(aktivitetStatuser, erKunYtelse));
+          fields.push(dagpenger(aktivitetStatuser));
         }}
-        onKeyDown={onKeyDown(fields, aktivitetStatuser, erKunYtelse)}
+        onKeyDown={onKeyDown(fields, aktivitetStatuser)}
         className={styles.addPeriode}
         role="button"
         tabIndex={0}
@@ -52,11 +54,11 @@ export const AddAndelButtonImpl: FunctionComponent<OwnProps & WrappedComponentPr
         <Image
           className={styles.addCircleIcon}
           src={addCircleIcon}
-          tooltip={intl.formatMessage({ id: 'BeregningInfoPanel.FordelingBG.LeggTilAndel' })}
+          tooltip={intl.formatMessage({ id: 'BeregningInfoPanel.FordelingBG.LeggTilDagpengerAndel' })}
         />
         <Undertekst className={styles.imageText}>
           <FormattedMessage
-            id="BeregningInfoPanel.FordelingBG.LeggTilAndel"
+            id="BeregningInfoPanel.FordelingBG.LeggTilDagpengerAndel"
           />
         </Undertekst>
       </div>
@@ -64,7 +66,7 @@ export const AddAndelButtonImpl: FunctionComponent<OwnProps & WrappedComponentPr
   </Row>
 );
 
-const AddAndelButton = injectIntl(AddAndelButtonImpl);
+const AddDagpengerAndelButton = injectIntl(AddDagpengerAndelButtonImpl);
 
 export const mapStateToProps = (state, ownProps) => {
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
@@ -73,4 +75,4 @@ export const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(AddAndelButton);
+export default connect(mapStateToProps)(AddDagpengerAndelButton);
