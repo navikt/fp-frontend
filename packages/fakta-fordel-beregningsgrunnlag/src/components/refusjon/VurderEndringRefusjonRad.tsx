@@ -15,35 +15,28 @@ import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import styles from './vurderEndringRefusjonRad.less';
-
-const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const visningsnavn = (andel) => {
-  const arbeidsgiverId = andel.arbeidsgiver.arbeidsgiverOrgnr || andel.arbeidsgiver.arbeidsgiverAktørId;
-  return arbeidsgiverId
-    ? `${andel.arbeidsgiverNavn} (${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`
-    : andel.arbeidsgiverNavn;
-};
+import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
 
 const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
 const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';
 
-const lagNøkkel = (prefix, andel) => {
+const lagNøkkel = (prefix: string, andel: RefusjonTilVurderingAndel): string => {
   if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
     return `${prefix}${andel.arbeidsgiver.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef}`;
   }
   return `${prefix}${andel.arbeidsgiver.arbeidsgiverAktørId}${andel.internArbeidsforholdRef}`;
 };
 
-export const lagNøkkelRefusjonsstart = (andel) => lagNøkkel(FIELD_KEY_REFUSJONSTART, andel);
-export const lagNøkkelDelvisRefusjon = (andel) => lagNøkkel(FIELD_KEY_DELVIS_REF, andel);
+export const lagNøkkelRefusjonsstart = (andel: RefusjonTilVurderingAndel): string => lagNøkkel(FIELD_KEY_REFUSJONSTART, andel);
+export const lagNøkkelDelvisRefusjon = (andel: RefusjonTilVurderingAndel) : string => lagNøkkel(FIELD_KEY_DELVIS_REF, andel);
 
 type OwnProps = {
     refusjonAndel?: RefusjonTilVurderingAndel;
     readOnly: boolean;
     erAksjonspunktÅpent: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 type TransformedValues = {
@@ -59,11 +52,16 @@ interface StaticFunctions {
   transformValues: (values: any, andel: RefusjonTilVurderingAndel) => TransformedValues;
 }
 
-export const VurderEndringRefusjonRad: FunctionComponent<OwnProps> & StaticFunctions = ({ refusjonAndel, readOnly, erAksjonspunktÅpent }) => {
+export const VurderEndringRefusjonRad: FunctionComponent<OwnProps> & StaticFunctions = ({
+  refusjonAndel,
+  readOnly,
+  erAksjonspunktÅpent,
+  arbeidsgiverOpplysningerPerId,
+}) => {
   if (!refusjonAndel) {
     return null;
   }
-  const navn = visningsnavn(refusjonAndel);
+  const navn = createVisningsnavnForAktivitetRefusjon(refusjonAndel, arbeidsgiverOpplysningerPerId);
   const andelTekst = refusjonAndel.skalKunneFastsetteDelvisRefusjon
     ? 'BeregningInfoPanel.RefusjonBG.TidligereRefusjon'
     : 'BeregningInfoPanel.RefusjonBG.IngenTidligereRefusjon';

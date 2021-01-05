@@ -151,6 +151,40 @@ const lagArbforTilFordeling = (arbGiverNavn, arbGiverId, arbId, refKrav, refKrav
   startdato: '2019-11-27',
 });
 
+const agOpplysninger = {
+  123456789: {
+    navn: 'Arbeidsgiveren',
+    identifikator: '123456789',
+    erPrivatPerson: false,
+  },
+  922745943: {
+    navn: 'Arbeidsgiveren',
+    identifikator: '922745943',
+    erPrivatPerson: false,
+  },
+  883551222: {
+    navn: 'Arbeidsgiveren',
+    identifikator: '883551222',
+    erPrivatPerson: false,
+  },
+  999999999: {
+    navn: 'KATOLSK KEBAB A/S',
+    identifikator: '999999999',
+    erPrivatPerson: false,
+  },
+  999999998: {
+    navn: 'JENS MAGNE',
+    identifikator: '999999998',
+    erPrivatPerson: true,
+    fødselsdato: '2000-01-01',
+  },
+  910909088: {
+    navn: 'BEDRIFT AS',
+    identifikator: '910909088',
+    erPrivatPerson: false,
+  },
+};
+
 const mapIKKode = (bgStatus) => {
   switch (bgStatus) {
     case 'AT':
@@ -233,6 +267,7 @@ export const arbeidOgGradertNæringUtenBeregningsgrunnlag = () => (
     aksjonspunkter={apArbeidOgGradertNæring}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
+    arbeidsgiverOpplysningerPerId={agOpplysninger}
   />
 );
 
@@ -249,6 +284,7 @@ export const tilkommetArbeidMedFlyttingAvNaturalytelse = () => (
     aksjonspunkter={apMedNaturalytelse}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
+    arbeidsgiverOpplysningerPerId={agOpplysninger}
   />
 );
 
@@ -281,6 +317,7 @@ export const aapOgRefusjon = () => {
       aksjonspunkter={fordelAP}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -314,6 +351,7 @@ export const kanEndreRefusjonskrav = () => {
       aksjonspunkter={fordelAP}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -366,6 +404,7 @@ export const skalSlåSammenNaturalytelseperioder = () => {
       aksjonspunkter={fordelAP}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -383,6 +422,7 @@ export const viseVurderTilkommetRefusjonskrav = () => (
     aksjonspunkter={vurderRefusjonAP}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
+    arbeidsgiverOpplysningerPerId={agOpplysninger}
   />
 );
 
@@ -399,5 +439,6 @@ export const skalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon
     aksjonspunkter={vurderRefusjonAP}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
+    arbeidsgiverOpplysningerPerId={agOpplysninger}
   />
 );

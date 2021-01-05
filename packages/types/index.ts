@@ -10,7 +10,6 @@ export {
   RelevanteStatuserProp,
   SammenligningsgrunlagProp,
   BeregningsgrunnlagPeriodeProp,
-  RefusjonTilVurderingAndel,
   FordelBeregningsgrunnlagPeriode,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
@@ -24,6 +23,11 @@ export {
   RefusjonskravSomKommerForSentListe,
   BeregningsgrunnlagArbeidsforhold,
 } from './src/beregningsgrunnlagTsType';
+export {
+  RefusjonTilVurderingAndel,
+  TidligereUtbetaliger,
+} from './src/beregningsgrunnlagFordelingTsType';
+
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export { default as BeregningsresultatFp, BeregningsresultatPeriode, BeregningsresultatPeriodeAndel } from './src/beregningsresultatFpTsType';
 export { default as Dokument } from './src/dokumentTsType';

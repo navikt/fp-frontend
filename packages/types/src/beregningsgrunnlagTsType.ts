@@ -1,4 +1,5 @@
 import Kodeverk from './kodeverkTsType';
+import RefusjonTilVurdering from './beregningsgrunnlagFordelingTsType';
 
 export type BeregningsgrunnlagArbeidsforhold = Readonly<{
   arbeidsgiverNavn?: string;
@@ -280,32 +281,6 @@ export type BeregningsgrunnlagPeriodeProp = Readonly<{
   redusertPrAar?: number;
   periodeAarsaker?: Kodeverk[];
   beregningsgrunnlagPrStatusOgAndel?: BeregningsgrunnlagAndel[];
-}>
-
-export type RefusjonTilVurderingAndel = Readonly<{
-  aktivitetStatus: Kodeverk;
-  tidligereUtbetalinger?: {
-    fom: string;
-    tom?: string;
-    erTildeltRefusjon: boolean;
-  }[];
-  nyttRefusjonskravFom: string;
-  fastsattNyttRefusjonskravFom?: string;
-  tidligsteMuligeRefusjonsdato: string;
-  arbeidsgiver?: {
-    arbeidsgiverOrgnr?: string;
-    arbeidsgiverAktørId?: string;
-  }
-  arbeidsgiverNavn?: string;
-  internArbeidsforholdRef?: string;
-  eksternArbeidsforholdRef?: string;
-  skalKunneFastsetteDelvisRefusjon: boolean;
-  fastsattDelvisRefusjonPrMnd?: number;
-  maksTillattDelvisRefusjonPrMnd?: number;
-}>
-
-type RefusjonTilVurdering = Readonly<{
-  andeler: RefusjonTilVurderingAndel[];
 }>
 
 type Beregningsgrunnlag = Readonly<{
