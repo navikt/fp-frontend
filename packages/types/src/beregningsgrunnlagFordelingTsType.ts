@@ -1,6 +1,6 @@
 import Kodeverk from './kodeverkTsType';
 
-export type TidligereUtbetaliger = Readonly<{
+export type TidligereUtbetalinger = Readonly<{
   fom: string;
   tom?: string;
   erTildeltRefusjon: boolean;
@@ -8,7 +8,7 @@ export type TidligereUtbetaliger = Readonly<{
 
 export type RefusjonTilVurderingAndel = Readonly<{
   aktivitetStatus: Kodeverk;
-  tidligereUtbetalinger?: TidligereUtbetaliger[];
+  tidligereUtbetalinger?: TidligereUtbetalinger[];
   nyttRefusjonskravFom: string;
   fastsattNyttRefusjonskravFom?: string;
   tidligsteMuligeRefusjonsdato: string;

@@ -5,11 +5,11 @@ import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { dateFormat, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel, TidligereUtbetaliger } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel, TidligereUtbetalinger } from '@fpsak-frontend/types';
 import styles from './tidligereUtbetalinger.less';
 import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
 
-const utbetalingTil = (utbetalinger: TidligereUtbetaliger[], andelsnavn: string): React.ReactNode[] => utbetalinger.map((utbetaling) => (
+const utbetalingTil = (utbetalinger: TidligereUtbetalinger[], andelsnavn: string): React.ReactNode[] => utbetalinger.map((utbetaling) => (
   <Row className={styles.correctPadding} key={`${andelsnavn}_(${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {utbetaling && utbetaling.erTildeltRefusjon
@@ -19,7 +19,7 @@ const utbetalingTil = (utbetalinger: TidligereUtbetaliger[], andelsnavn: string)
   </Row>
 ));
 
-const lagPeriode = (utbetaling: TidligereUtbetaliger): React.ReactNode | undefined => {
+const lagPeriode = (utbetaling: TidligereUtbetalinger): React.ReactNode | undefined => {
   if (!utbetaling) {
     return undefined;
   }
@@ -32,7 +32,7 @@ const lagPeriode = (utbetaling: TidligereUtbetaliger): React.ReactNode | undefin
   );
 };
 
-const perioder = (utbetalinger: TidligereUtbetaliger[]): React.ReactNode[] => utbetalinger.map((utbetaling) => (
+const perioder = (utbetalinger: TidligereUtbetalinger[]): React.ReactNode[] => utbetalinger.map((utbetaling) => (
   <Row className={styles.correctPadding} key={`${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {lagPeriode(utbetaling)}

@@ -25,7 +25,7 @@ export {
 } from './src/beregningsgrunnlagTsType';
 export {
   RefusjonTilVurderingAndel,
-  TidligereUtbetaliger,
+  TidligereUtbetalinger,
 } from './src/beregningsgrunnlagFordelingTsType';
 
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';

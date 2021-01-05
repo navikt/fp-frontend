@@ -26,7 +26,7 @@ export const createVisningsnavnForAktivitetRefusjon = (andel: RefusjonTilVurderi
     }
     return `${agOpplysning.navn}${getEndCharFromId(andel.eksternArbeidsforholdRef)}`;
   }
-  return `${agOpplysning.navn}(${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`;
+  return `${agOpplysning.navn} (${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`;
 };
 
 export default createVisningsnavnForAktivitet;
