@@ -14,6 +14,7 @@ import { andelsnrMottarYtelseMap } from './vurderOgFastsettATFL/forms/VurderMott
 import { getFormValuesForBeregning } from '../BeregningFormUtils';
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD } from './InntektstabellPanel';
+import AndelFieldValue from './andelFieldValueTs';
 
 export const INNTEKT_FIELD_ARRAY_NAME = 'inntektFieldArray';
 
@@ -166,6 +167,11 @@ export const erOverstyringAvBeregningsgrunnlag = createSelector([
   (state, ownProps) => ownProps.aksjonspunkter], (values, beregningsgrunnlag, aksjonspunkter) => erOverstyring(values)
   || beregningsgrunnlag.erOverstyrtInntekt || harOverstyringsAP(aksjonspunkter));
 
+export const erInitialOverstyringAvBeregningsgrunnlag = createSelector([
+  (state, ownProps) => ownProps.beregningsgrunnlag,
+  (state, ownProps) => ownProps.aksjonspunkter], (beregningsgrunnlag, aksjonspunkter) => beregningsgrunnlag.erOverstyrtInntekt
+  || harOverstyringsAP(aksjonspunkter));
+
 export const skalFastsetteInntektForAndel = (values, faktaOmBeregning, beregningsgrunnlag) => (andel) => harKunYtelse(faktaOmBeregning)
 || skalKunneEndreTotaltBeregningsgrunnlag(values, faktaOmBeregning, beregningsgrunnlag)(andel);
 
@@ -178,18 +184,9 @@ export const getKanRedigereInntekt = createSelector([
   (state, ownProps) => ownProps.beregningsgrunnlag], kanRedigereInntektForAndel);
 
 // Skal redigere inntektskategori
-export const skalRedigereInntektskategoriForAndel = (values, beregningsgrunnlag) => (andel) => {
-  if (skalHaBesteberegning(values)) {
-    return true;
-  }
-  if (erAndelKunstigArbeidsforhold(andel, beregningsgrunnlag)) {
-    return true;
-  }
-  return false;
-};
+export const skalRedigereInntektskategoriForAndel = (beregningsgrunnlag) => (andel) => erAndelKunstigArbeidsforhold(andel, beregningsgrunnlag);
 
 export const getSkalRedigereInntektskategori = createSelector([
-  getFormValuesForBeregning,
   (state, ownProps) => ownProps.beregningsgrunnlag],
 skalRedigereInntektskategoriForAndel);
 
@@ -201,7 +198,7 @@ export const mapToBelop = (skalRedigereInntekt) => (andel) => {
   return readOnlyBelop ? removeSpacesFromNumber(readOnlyBelop) : 0;
 };
 
-export const mapAndelToField = (andel) => ({
+export const mapAndelToField = (andel): AndelFieldValue => ({
   ...setGenerellAndelsinfo(andel),
   ...setArbeidsforholdInitialValues(andel),
   skalKunneEndreAktivitet: andel.skalKunneEndreAktivitet,
