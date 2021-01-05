@@ -1,19 +1,23 @@
 import React, {
   FunctionComponent, useState, useMemo, useCallback, useEffect, useRef, RefObject,
 } from 'react';
+import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import BoxedListWithLinks from '@navikt/boxed-list-with-links';
 import Header from '@navikt/nap-header';
 import Popover from '@navikt/nap-popover';
 import SystemButton from '@navikt/nap-system-button';
 import UserPanel from '@navikt/nap-user-panel';
 
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
+import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg';
+import systemrutineIkonUrl from '@fpsak-frontend/assets/images/rutine.svg';
+
 import ErrorMessagePanel from './ErrorMessagePanel';
+import Feilmelding from './feilmeldingTsType';
 
 import messages from '../i18n/nb_NO.json';
 
 import styles from './headerWithErrorPanel.less';
-import Feilmelding from './feilmeldingTsType';
 
 const cache = createIntlCache();
 
@@ -45,11 +49,6 @@ const useOutsideClickEvent = (erLenkepanelApent: boolean, setLenkePanelApent: (e
 };
 
 interface OwnProps {
-  iconLinks: {
-    text: string;
-    url: string;
-  }[];
-  systemTittel: string;
   navAnsattName?: string;
   removeErrorMessage: () => void;
   errorMessages?: Feilmelding[];
@@ -64,8 +63,6 @@ interface OwnProps {
  * I tillegg vil den vise potensielle feilmeldinger i ErrorMessagePanel.
  */
 const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
-  iconLinks,
-  systemTittel,
   navAnsattName = '',
   removeErrorMessage,
   errorMessages = [],
@@ -78,6 +75,16 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     setSiteHeight(fixedHeaderRef.current.clientHeight);
   }, [errorMessages.length]);
+
+  const iconLinks = useMemo(() => [{
+    url: RETTSKILDE_URL,
+    icon: rettskildeneIkonUrl,
+    text: intl.formatMessage({ id: 'HeaderWithErrorPanel.Rettskilde' }),
+  }, {
+    url: SYSTEMRUTINE_URL,
+    icon: systemrutineIkonUrl,
+    text: intl.formatMessage({ id: 'HeaderWithErrorPanel.Systemrutine' }),
+  }], []);
 
   const lenkerFormatertForBoxedList = useMemo(() => iconLinks.map((link) => ({
     name: link.text,
@@ -107,7 +114,7 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
     <header ref={fixedHeaderRef} className={styles.container}>
       <RawIntlProvider value={intl}>
         <div ref={wrapperRef}>
-          <Header title={systemTittel} titleHref="/fpsak">
+          <Header title={intl.formatMessage({ id: 'HeaderWithErrorPanel.Foreldrepenger' })} titleHref="/fpsak">
             <Popover
               popperIsVisible={erLenkepanelApent}
               renderArrowElement

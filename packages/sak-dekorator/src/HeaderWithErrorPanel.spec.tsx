@@ -7,13 +7,11 @@ import HeaderWithErrorPanel from './HeaderWithErrorPanel';
 describe('<HeaderWithErrorPanel>', () => {
   it('skal sjekke at navn blir vist', () => {
     const wrapper = shallow(<HeaderWithErrorPanel
-      iconLinks={[]}
       navAnsattName="Per"
-      systemTittel="My System"
       removeErrorMessage={() => undefined}
       setSiteHeight={() => undefined}
     />);
     const header = wrapper.find(Header);
-    expect(header.prop('title')).toBe('My System');
+    expect(header.prop('title')).toBe('Svangerskap, fødsel og adopsjon');
   });
 });
