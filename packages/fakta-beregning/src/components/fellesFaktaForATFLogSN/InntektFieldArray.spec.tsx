@@ -28,31 +28,49 @@ const behandlingId = 1000051;
 const behandlingVersjon = 1;
 
 const alleKodeverk = {
-  [kodeverkTyper.AKTIVITET_STATUS]: [{
-    kode: aktivitetStatuser.ARBEIDSTAKER,
-    navn: 'Arbeidstaker',
-    kodeverk: 'test',
-  }, {
-    kode: aktivitetStatuser.FRILANSER,
-    navn: 'Frilanser',
-    kodeverk: 'test',
-  },
-  {
-    kode: aktivitetStatuser.DAGPENGER,
-    navn: 'Dagpenger',
-    kodeverk: 'test',
-  },
-  {
-    kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
-    navn: 'Selvstendig næringsdrivende',
-    kodeverk: 'test',
-  },
-  {
-    kode: aktivitetStatuser.BRUKERS_ANDEL,
-    navn: 'Brukers andel',
-    kodeverk: 'test',
-  },
+  [kodeverkTyper.AKTIVITET_STATUS]: [
+    {
+      kode: aktivitetStatuser.MILITAER_ELLER_SIVIL,
+      navn: 'Militær og siviltjeneste',
+      kodeverk: 'test',
+    }, {
+      kode: aktivitetStatuser.ARBEIDSTAKER,
+      navn: 'Arbeidstaker',
+      kodeverk: 'test',
+    }, {
+      kode: aktivitetStatuser.FRILANSER,
+      navn: 'Frilanser',
+      kodeverk: 'test',
+    },
+    {
+      kode: aktivitetStatuser.DAGPENGER,
+      navn: 'Dagpenger',
+      kodeverk: 'test',
+    },
+    {
+      kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
+      navn: 'Selvstendig næringsdrivende',
+      kodeverk: 'test',
+    },
+    {
+      kode: aktivitetStatuser.BRUKERS_ANDEL,
+      navn: 'Brukers andel',
+      kodeverk: 'test',
+    },
   ],
+};
+
+const andelField = {
+  nyAndel: false,
+  andel: 'Sopra Steria AS (233647823)',
+  andelsnr: 1,
+  fastsattBelop: '0',
+  lagtTilAvSaksbehandler: false,
+  inntektskategori: 'ARBEIDSTAKER',
+  arbeidsgiverId: '233647823',
+  arbeidsperiodeFom: '01.01.2018',
+  arbeidsperiodeTom: null,
+  refusjonskrav: '10 000',
 };
 
 const ownProps = {
@@ -61,6 +79,8 @@ const ownProps = {
 
 describe('<InntektFieldArray>', () => {
   it('skal mappe state til props for ikkje kun ytelse', () => {
+    const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
+
     const faktaOmBeregning = {
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING }],
     };
@@ -71,12 +91,14 @@ describe('<InntektFieldArray>', () => {
       faktaOmBeregning,
     };
     const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning);
-    const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
+    const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg, fields });
     expect(props.isBeregningFormDirty).toEqual(false);
     expect(props.erKunYtelse).toEqual(false);
   });
 
   it('skal mappe state til props for kun ytelse', () => {
+    const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
+
     const faktaOmBeregning = {
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE, kodeverk: 'test' }],
       andelerForFaktaOmBeregning: [],
@@ -88,24 +110,9 @@ describe('<InntektFieldArray>', () => {
       faktaOmBeregning,
     };
     const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning);
-    const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
+    const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg, fields });
     expect(props.erKunYtelse).toEqual(true);
   });
-
-  const andelField = {
-    nyAndel: false,
-    andel: 'Sopra Steria AS (233647823)',
-    andelsnr: 1,
-    fastsattBelop: '0',
-    lagtTilAvSaksbehandler: false,
-    inntektskategori: 'ARBEIDSTAKER',
-    arbeidsgiverId: '233647823',
-    arbeidsperiodeFom: '01.01.2018',
-    arbeidsperiodeTom: null,
-    refusjonskrav: '10 000',
-  };
-
-  const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
 
   const faktaOmBeregning = {
     faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING, kodeverk: 'test' }],
@@ -123,9 +130,10 @@ describe('<InntektFieldArray>', () => {
     faktaOmBeregning,
   };
   const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning, initial, initial);
-  const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg });
+  const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg, fields: new MockFieldsWithContent('fieldArrayName', [andelField]) });
 
   it('skal vise komponent', () => {
+    const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
     const wrapper = shallowWithIntl(<InntektFieldArrayImpl
       intl={intlMock}
       fields={fields}
@@ -152,10 +160,10 @@ describe('<InntektFieldArray>', () => {
       lagtTilAvSaksbehandler: false,
       aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
     };
-    const newFields = new MockFieldsWithContent('fieldArrayName', [andelField, SNandel]);
+    const fields = new MockFieldsWithContent('fieldArrayName', [andelField, SNandel]);
     const wrapper = shallowWithIntl(<InntektFieldArrayImpl
       intl={intlMock}
-      fields={newFields}
+      fields={fields}
       meta={metaMock}
       readOnly={false}
       beregningsgrunnlag={bg}
@@ -179,10 +187,10 @@ describe('<InntektFieldArray>', () => {
       lagtTilAvSaksbehandler: false,
       aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
     };
-    const newFields = new MockFieldsWithContent('fieldArrayName', [andelField, SNandel]);
+    const fields = new MockFieldsWithContent('fieldArrayName', [andelField, SNandel]);
     const wrapper = shallowWithIntl(<InntektFieldArrayImpl
       intl={intlMock}
-      fields={newFields}
+      fields={fields}
       meta={metaMock}
       readOnly={false}
       beregningsgrunnlag={bg}
@@ -202,9 +210,10 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlagPeriode: [],
       faktaOmBeregning,
     } as Beregningsgrunnlag;
+    const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
     const values = { [besteberegningField]: true };
     const newstate = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, newbg, formNameVurderFaktaBeregning, values);
-    const newprops = mapStateToProps(newstate, { ...ownProps, beregningsgrunnlag: newbg });
+    const newprops = mapStateToProps(newstate, { ...ownProps, beregningsgrunnlag: newbg, fields });
     const wrapper = shallowWithIntl(<InntektFieldArrayImpl
       intl={intlMock}
       fields={fields}
@@ -224,13 +233,13 @@ describe('<InntektFieldArray>', () => {
 
   it('skal fjerne dagpengeandel om dagpenger og lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: true }]);
-    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER], true);
+    leggTilDagpengerOmBesteberegning(newfields, false, alleKodeverk[kodeverkTyper.AKTIVITET_STATUS], false);
     expect(newfields.length).toBe(0);
   });
 
   it('skal ikkje fjerne dagpengeandel om dagpenger og ikkje lagt til manuelt', () => {
     const newfields = new MockFieldsWithContent('fieldArrayName', [{ aktivitetStatus: aktivitetStatuser.DAGPENGER, lagtTilAvSaksbehandler: false }]);
-    leggTilDagpengerOmBesteberegning(newfields, false, [aktivitetStatuser.DAGPENGER], true);
+    leggTilDagpengerOmBesteberegning(newfields, false, alleKodeverk[kodeverkTyper.AKTIVITET_STATUS], false);
     expect(newfields.length).toBe(1);
   });
 

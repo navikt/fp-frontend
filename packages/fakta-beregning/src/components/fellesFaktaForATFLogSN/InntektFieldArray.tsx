@@ -16,7 +16,6 @@ import {
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
 import { validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
@@ -27,8 +26,8 @@ import SummaryRow from './SummaryRow';
 import AndelFieldValue, { InntektTransformed } from './andelFieldValueTs';
 import { vurderMilitaerField } from './vurderMilitaer/VurderMilitaer';
 
-const dagpenger = (aktivitetStatuser) : AndelFieldValue => ({
-  andel: aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.DAGPENGER)[0].navn,
+const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
+  andel: aktivitetStatuser.find(({ kode }) => kode === aktivitetStatus.DAGPENGER).navn,
   aktivitetStatus: aktivitetStatus.DAGPENGER,
   fastsattBelop: '',
   inntektskategori: inntektskategorier.DAGPENGER,
@@ -37,8 +36,8 @@ const dagpenger = (aktivitetStatuser) : AndelFieldValue => ({
   lagtTilAvSaksbehandler: true,
 });
 
-const lagNyMS = (aktivitetStatuser) : AndelFieldValue => ({
-  andel: aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.MILITAER_ELLER_SIVIL)[0].navn,
+const lagNyMS = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
+  andel: aktivitetStatuser.find(({ kode }) => kode === aktivitetStatus.MILITAER_ELLER_SIVIL).navn,
   aktivitetStatus: aktivitetStatus.MILITAER_ELLER_SIVIL,
   fastsattBelop: '',
   inntektskategori: inntektskategorier.ARBEIDSTAKER,
@@ -136,7 +135,7 @@ const harDagpenger = (fields: FieldArrayFieldsProps<AndelFieldValue>) => findAkt
 const fjernEllerLeggTilAktivitetStatus = (fields: FieldArrayFieldsProps<AndelFieldValue>,
   aktivitetStatusKode: string,
   skalHaAndelMedAktivitetstatus: boolean,
-  skalFjerne: (AndelFieldValue) => boolean,
+  skalFjerne: (field: AndelFieldValue) => boolean,
   nyStatusAndel: AndelFieldValue) => {
   const statusIndex = findAktivitetStatusIndex(fields, aktivitetStatusKode);
   if (statusIndex !== -1) {
@@ -153,7 +152,10 @@ const fjernEllerLeggTilAktivitetStatus = (fields: FieldArrayFieldsProps<AndelFie
   }
 };
 
-export const leggTilDagpengerOmBesteberegning = (fields, skalHaBesteberegning, aktivitetStatuser, skalKunneLeggeTilDagpenger) => {
+export const leggTilDagpengerOmBesteberegning = (fields: FieldArrayFieldsProps<AndelFieldValue>,
+  skalHaBesteberegning: boolean,
+  aktivitetStatuser: KodeverkMedNavn[],
+  skalKunneLeggeTilDagpenger: boolean) => {
   fjernEllerLeggTilAktivitetStatus(
     fields,
     aktivitetStatus.DAGPENGER,
@@ -163,7 +165,9 @@ export const leggTilDagpengerOmBesteberegning = (fields, skalHaBesteberegning, a
   );
 };
 
-const fjernEllerLeggTilMilitær = (fields, skalHaMilitær: boolean, aktivitetStatuser) => {
+const fjernEllerLeggTilMilitær = (fields: FieldArrayFieldsProps<AndelFieldValue>,
+  skalHaMilitær: boolean,
+  aktivitetStatuser: KodeverkMedNavn[]) => {
   fjernEllerLeggTilAktivitetStatus(
     fields,
     aktivitetStatus.MILITAER_ELLER_SIVIL,
@@ -179,7 +183,6 @@ type OwnProps = {
     meta: FieldArrayMetaProps;
     isBeregningFormDirty: boolean;
     skalKunneLeggeTilDagpengerManuelt: boolean;
-    aktivitetStatuser: Kodeverk[];
     skalHaBesteberegning: boolean;
     skalHaMilitær?: boolean,
     behandlingId: number;
@@ -329,7 +332,6 @@ export const mapStateToProps = (state, ownProps) => {
     isBeregningFormDirty,
     skalHaBesteberegning,
     skalHaMilitær,
-    aktivitetStatuser,
     erKunYtelse: tilfeller && tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE),
   };
 };
