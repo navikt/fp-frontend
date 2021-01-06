@@ -4,7 +4,12 @@ import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
-import { BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsgrunnlagPeriodeProp,
+  FordelBeregningsgrunnlagPeriode,
+  KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { IntlShape } from 'react-intl';
@@ -132,6 +137,7 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     behandlingType: Kodeverk;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface OwnState {
@@ -151,6 +157,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     beregningsgrunnlag: Beregningsgrunnlag,
     getKodeverknavn: (kodeverk: Kodeverk) => string,
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   ) => {
     const errors = {};
     if (fordelBGPerioder && fordelBGPerioder.length > 0) {
@@ -163,7 +170,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
         const skalValidereRefusjon = fordelPeriode && fordelPeriode.skalKunneEndreRefusjon;
         const periodeDato = { fom: fordelPeriode.fom, tom: fordelPeriode.tom };
         errors[getFieldNameKey(i)] = FordelBeregningsgrunnlagPeriodePanel.validate(intl, periode, sumIPeriode,
-          getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
+          getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
       }
     }
     return errors;
@@ -177,7 +184,8 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
 
   static buildInitialValues = (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     bg: Beregningsgrunnlag,
-    getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+    getKodeverknavn: (kodeverk: Kodeverk) => string,
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
     const initialValues = {};
     if (!fordelBGPerioder) {
       return initialValues;
@@ -187,7 +195,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     slaaSammenPerioder(fordelBGPerioder, bgPerioder).forEach((periode, index) => {
       const bgPeriode = finnRiktigBgPeriode(periode, bgPerioder);
       initialValues[getFieldNameKey(index)] = FordelBeregningsgrunnlagPeriodePanel
-        .buildInitialValues(periode, bgPeriode, bg.skjaeringstidspunktBeregning, harKunYtelse, getKodeverknavn);
+        .buildInitialValues(periode, bgPeriode, bg.skjaeringstidspunktBeregning, harKunYtelse, getKodeverknavn, arbeidsgiverOpplysningerPerId);
     });
     return initialValues;
   };
@@ -219,6 +227,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
       beregningsgrunnlag,
       alleKodeverk,
       behandlingType,
+      arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { openPanels } = this.state;
     return (
@@ -238,6 +247,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
               beregningsgrunnlag={beregningsgrunnlag}
               alleKodeverk={alleKodeverk}
               behandlingType={behandlingType}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
             <VerticalSpacer eightPx />
           </React.Fragment>

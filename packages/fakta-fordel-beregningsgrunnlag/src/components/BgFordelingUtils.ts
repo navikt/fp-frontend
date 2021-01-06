@@ -4,7 +4,8 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 
-import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
+import { ArbeidsgiverOpplysningerPerId, FordelBeregningsgrunnlagAndel, Kodeverk } from '@fpsak-frontend/types';
+import createVisningsnavnForAktivitet, { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
 const nullOrUndefined = (value) => value === null || value === undefined;
 
@@ -25,12 +26,19 @@ export const settAndelIArbeid = (andelerIArbeid) => {
 const finnnInntektskategorikode = (andel) => (andel.inntektskategori
 && andel.inntektskategori.kode !== inntektskategorier.UDEFINERT ? andel.inntektskategori.kode : '');
 
-const createAndelnavn = (andel, harKunYtelse, getKodeverknavn) => {
+const createAndelnavn = (andel: FordelBeregningsgrunnlagAndel,
+  harKunYtelse: boolean,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   if (!andel.aktivitetStatus || andel.aktivitetStatus.kode === aktivitetStatus.UDEFINERT) {
     return '';
   }
   if (andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold) {
-    return createVisningsnavnForAktivitet(andel.arbeidsforhold, getKodeverknavn);
+    const agOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
+    if (!agOpplysninger) {
+      return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
+    }
+    return createVisningsnavnForAktivitetFordeling(agOpplysninger, andel.arbeidsforhold.eksternArbeidsforholdId);
   }
   if (harKunYtelse && andel.aktivitetStatus.kode === aktivitetStatus.BRUKERS_ANDEL) {
     return 'Ytelse';
@@ -69,8 +77,11 @@ export const setArbeidsforholdInitialValues = (andel) => ({
   arbeidsforholdType: andel.arbeidsforholdType,
 });
 
-export const setGenerellAndelsinfo = (andel, harKunYtelse, getKodeverknavn) => ({
-  andel: createAndelnavn(andel, harKunYtelse, getKodeverknavn),
+export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
+  harKunYtelse: boolean,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => ({
+  andel: createAndelnavn(andel, harKunYtelse, getKodeverknavn, arbeidsgiverOpplysningerPerId),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
   nyAndel: false,

@@ -25,14 +25,14 @@ import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import 'core-js/features/array/flat-map';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 import getUniqueListOfArbeidsforhold from '../ArbeidsforholdHelper';
 import {
   validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
 } from '../ValidateAndelerUtils';
 import styles from './renderFordelBGFieldArray.less';
-import createVisningsnavnForAktivitet from '../util/visningsnavnHelper';
+import createVisningsnavnForAktivitet, { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 
 const ENTER_KEY_CODE = 13;
 
@@ -47,6 +47,26 @@ const defaultBGFordeling = (periodeUtenAarsak) => ({
   skalRedigereInntekt: !periodeUtenAarsak,
 });
 
+type Arbeidsforhold = {
+  andelsnr: number;
+  nyttArbeidsforhold: boolean;
+  beregningsperiodeTom: string;
+  beregningsperiodeFom: string;
+  arbeidsgiverNavn?: string;
+  arbeidsgiverId?: string;
+  arbeidsgiverIdVisning?: string;
+  eksternArbeidsforholdId?: string;
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: Kodeverk;
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  arbeidsforholdType?: Kodeverk;
+}
+
 const fieldLabel = (index, labelId) => {
   if (index === 0) {
     return { id: labelId };
@@ -54,18 +74,33 @@ const fieldLabel = (index, labelId) => {
   return '';
 };
 
-const arbeidsgiverSelectValues = (arbeidsforholdList, getKodeverknavn) => (arbeidsforholdList
+const lagVisningsnavn = (arbeidsforhold: Arbeidsforhold,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  if (!agOpplysninger) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
+};
+
+const arbeidsgiverSelectValues = (arbeidsforholdList: Arbeidsforhold[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): React.ReactNode[] => (arbeidsforholdList
   .map((arbeidsforhold) => (
     <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
-      {createVisningsnavnForAktivitet(arbeidsforhold, getKodeverknavn)}
+      {lagVisningsnavn(arbeidsforhold, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
     </option>
   )));
 
-const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList, intl, getKodeverknavn) => {
+const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList: Arbeidsforhold[],
+  intl: IntlShape,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): React.ReactNode[] => {
   const nedtrekksvalgListe = arbeidsforholdList
     .map((arbeidsforhold) => (
       <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
-        {createVisningsnavnForAktivitet(arbeidsforhold, getKodeverknavn)}
+        {lagVisningsnavn(arbeidsforhold, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
       </option>
     ));
   nedtrekksvalgListe.push(
@@ -350,25 +385,6 @@ const getHeaderTextCodes = (erRevurdering) => {
   return headerCodes;
 };
 
-type Arbeidsforhold = {
-  andelsnr: number;
-  nyttArbeidsforhold: boolean;
-  beregningsperiodeTom: string;
-  beregningsperiodeFom: string;
-  arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
-  arbeidsgiverIdVisning?: string;
-  eksternArbeidsforholdId?: string;
-  refusjonPrAar?: number;
-  belopFraInntektsmeldingPrMnd?: number;
-  organisasjonstype?: Kodeverk;
-  naturalytelseBortfaltPrÅr?: number;
-  naturalytelseTilkommetPrÅr?: number;
-  startdato?: string;
-  opphoersdato?: string;
-  arbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
-}
 type MappedOwnProps = {
   erRevurdering: boolean;
   inntektskategoriKoder: Kodeverk[];
@@ -383,6 +399,7 @@ type OwnProps = {
     meta?: FieldArrayMetaProps;
     isAksjonspunktClosed: boolean;
     periodeUtenAarsak: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
 
 interface StaticFunctions {
@@ -395,7 +412,8 @@ interface StaticFunctions {
               fom: string;
               tom: string;
              },
-             skalValidereRefusjon: boolean) => any;
+             skalValidereRefusjon: boolean,
+             arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
 }
 
 /**
@@ -416,13 +434,14 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
   harKunYtelse,
   erRevurdering,
   getKodeverknavn,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const sumFordelingForrigeBehandling = summerFordelingForrigeBehandlingFraFields(fields);
   const sumFordeling = summerFordeling(fields);
   const sumBeregningsgrunnlagPrAar = summerBeregningsgrunnlagPrAar(fields);
   const selectVals = harKunYtelse
-    ? arbeidsgiverSelectValuesForKunYtelse(arbeidsforholdList, intl, getKodeverknavn)
-    : arbeidsgiverSelectValues(arbeidsforholdList, getKodeverknavn);
+    ? arbeidsgiverSelectValuesForKunYtelse(arbeidsforholdList, intl, getKodeverknavn, arbeidsgiverOpplysningerPerId)
+    : arbeidsgiverSelectValues(arbeidsforholdList, getKodeverknavn, arbeidsgiverOpplysningerPerId);
   const tablerows = createAndelerTableRows(fields, isAksjonspunktClosed, readOnly, inntektskategoriKoder, periodeUtenAarsak,
     arbeidsforholdList, selectVals, erRevurdering);
   tablerows.push(createBruttoBGSummaryRow(sumFordelingForrigeBehandling, sumFordeling, sumBeregningsgrunnlagPrAar, erRevurdering));
@@ -468,7 +487,7 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
 const RenderFordelBGFieldArray = injectIntl(RenderFordelBGFieldArrayImpl);
 
 RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverknavn,
-  grunnbeløp, periodeDato, skalValidereRefusjon) => {
+  grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => {
   const fieldErrors = validateAndeler(intl, values, periodeDato);
   if (fieldErrors != null) {
     return fieldErrors;
@@ -489,7 +508,7 @@ RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverkn
     if (totalRefusjonError) {
       return { _error: <FormattedMessage id={totalRefusjonError[0].id} values={totalRefusjonError[1]} /> };
     }
-    const refusjonPrArbeidsforholdError = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn);
+    const refusjonPrArbeidsforholdError = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn, arbeidsgiverOpplysningerPerId);
     if (refusjonPrArbeidsforholdError) {
       return { _error: <FormattedMessage id={refusjonPrArbeidsforholdError[0].id} values={refusjonPrArbeidsforholdError[1]} /> };
     }

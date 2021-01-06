@@ -1,16 +1,26 @@
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysninger,
+  ArbeidsgiverOpplysningerPerId,
+  RefusjonTilVurderingAndel,
+} from '@fpsak-frontend/types';
 
-const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id?: string) : string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const createVisningsnavnForAktivitet = (aktivitet, getKodeverknavn) => {
-  if (!aktivitet.arbeidsgiverNavn) {
-    return aktivitet.arbeidsforholdType ? getKodeverknavn(aktivitet.arbeidsforholdType) : '';
+export const createVisningsnavnForAktivitetFordeling = (agOpplysninger: ArbeidsgiverOpplysninger,
+  eksternArbeidsgiverId?: string): string => {
+  const {
+    navn, fødselsdato, erPrivatPerson, identifikator,
+  } = agOpplysninger;
+  if (erPrivatPerson) {
+    return fødselsdato
+      ? `${navn} (${moment(fødselsdato).format(DDMMYYYY_DATE_FORMAT)})${getEndCharFromId(eksternArbeidsgiverId)}`
+      : navn;
   }
-  return aktivitet.arbeidsgiverId
-    ? `${aktivitet.arbeidsgiverNavn} (${aktivitet.arbeidsgiverId})${getEndCharFromId(aktivitet.eksternArbeidsforholdId)}`
-    : aktivitet.arbeidsgiverNavn;
+  return identifikator
+    ? `${navn} (${identifikator})${getEndCharFromId(eksternArbeidsgiverId)}`
+    : navn;
 };
 
 export const createVisningsnavnForAktivitetRefusjon = (andel: RefusjonTilVurderingAndel,
@@ -28,5 +38,3 @@ export const createVisningsnavnForAktivitetRefusjon = (andel: RefusjonTilVurderi
   }
   return `${agOpplysning.navn} (${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`;
 };
-
-export default createVisningsnavnForAktivitet;

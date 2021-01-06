@@ -10,7 +10,6 @@ export {
   RelevanteStatuserProp,
   SammenligningsgrunlagProp,
   BeregningsgrunnlagPeriodeProp,
-  FordelBeregningsgrunnlagPeriode,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
   BeregningAktivitet,
@@ -21,11 +20,14 @@ export {
   VurderMottarYtelse,
   ArbeidstakerUtenIMAndel,
   RefusjonskravSomKommerForSentListe,
-  BeregningsgrunnlagArbeidsforhold,
 } from './src/beregningsgrunnlagTsType';
+export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export {
   RefusjonTilVurderingAndel,
   TidligereUtbetalinger,
+  FordelBeregningsgrunnlagPeriode,
+  ArbeidsforholdTilFordeling,
+  FordelBeregningsgrunnlagAndel,
 } from './src/beregningsgrunnlagFordelingTsType';
 
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';

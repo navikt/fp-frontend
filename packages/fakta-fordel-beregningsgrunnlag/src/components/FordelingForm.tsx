@@ -12,7 +12,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 
@@ -42,6 +42,7 @@ interface PureOwnProps {
   behandlingType: Kodeverk;
   aksjonspunkter: Aksjonspunkt[];
   intl: IntlShape;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -69,6 +70,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
   alleKodeverk,
   behandlingType,
   aksjonspunkter,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
@@ -77,6 +79,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       alleKodeverk={alleKodeverk}
       aksjonspunkter={aksjonspunkter}
       beregningsgrunnlag={beregningsgrunnlag}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer twentyPx />
     <FastsettFordeltBeregningsgrunnlag
@@ -85,6 +88,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       beregningsgrunnlag={beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
       behandlingType={behandlingType}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer twentyPx />
     <FaktaBegrunnelseTextField
@@ -128,31 +132,40 @@ export const transformValuesFordelBeregning = createSelector(
 
 export const buildInitialValuesFordelBeregning = createSelector(
   [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
+    (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-  (beregningsgrunnlag, alleKodeverk, aksjonspunkter) => {
+  (beregningsgrunnlag, arbeidsgiverOpplysningerPerId, alleKodeverk, aksjonspunkter) => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (!hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
       return {};
     }
     return ({
       ...FaktaBegrunnelseTextField.buildInitialValues(findAksjonspunktMedBegrunnelse(aksjonspunkter), BEGRUNNELSE_FORDELING_NAME),
-      ...FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues(fordelBGPerioder, beregningsgrunnlag, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
+      ...FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues(fordelBGPerioder,
+        beregningsgrunnlag,
+        getKodeverknavnFn(alleKodeverk, kodeverkTyper),
+        arbeidsgiverOpplysningerPerId),
     });
   },
 );
 
 export const getValidationFordelBeregning = createSelector(
   [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
+    (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk,
     (ownProps: PureOwnProps) => ownProps.intl,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-  (beregningsgrunnlag, alleKodeverk, intl, aksjonspunkter) => (values) => {
+  (beregningsgrunnlag,
+    arbeidsgiverOpplysningerPerId,
+    alleKodeverk,
+    intl,
+    aksjonspunkter) => (values) => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
       return {
         ...FastsettFordeltBeregningsgrunnlagImpl.validate(intl, values, fordelBGPerioder,
-          beregningsgrunnlag, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
+          beregningsgrunnlag, getKodeverknavnFn(alleKodeverk, kodeverkTyper), arbeidsgiverOpplysningerPerId),
       };
     }
     return null;

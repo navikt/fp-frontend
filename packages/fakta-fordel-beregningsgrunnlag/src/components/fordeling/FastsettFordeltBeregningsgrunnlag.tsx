@@ -4,6 +4,7 @@ import { IntlShape } from 'react-intl';
 
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import {
+  ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagPeriodeProp,
   FordelBeregningsgrunnlagPeriode,
   KodeverkMedNavn,
@@ -20,16 +21,21 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     behandlingType: Kodeverk;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
-  buildInitialValues: (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bg: Beregningsgrunnlag, getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
+  buildInitialValues: (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+                       bg: Beregningsgrunnlag,
+                       getKodeverknavn: (kodeverk: Kodeverk) => string,
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
   transformValues: (values: any, fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bgPerioder: BeregningsgrunnlagPeriodeProp[]) => any;
   validate: (intl: IntlShape,
              values: any,
              fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
              beregningsgrunnlag: Beregningsgrunnlag,
-             getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
+             getKodeverknavn: (kodeverk: Kodeverk) => string,
+             arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
 }
 
 export const FastsettFordeltBeregningsgrunnlagImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -39,6 +45,7 @@ export const FastsettFordeltBeregningsgrunnlagImpl: FunctionComponent<OwnProps> 
   beregningsgrunnlag,
   alleKodeverk,
   behandlingType,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <FordelBeregningsgrunnlagForm
     perioder={perioder}
@@ -48,18 +55,27 @@ export const FastsettFordeltBeregningsgrunnlagImpl: FunctionComponent<OwnProps> 
     beregningsgrunnlag={beregningsgrunnlag}
     alleKodeverk={alleKodeverk}
     behandlingType={behandlingType}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
-FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues = (fordelBGPerioder, bg, getKodeverknavn) => (FordelBeregningsgrunnlagForm
-  .buildInitialValues(fordelBGPerioder, bg, getKodeverknavn));
+FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues = (fordelBGPerioder,
+  bg,
+  getKodeverknavn,
+  arbeidsgiverOpplysningerPerId) => (FordelBeregningsgrunnlagForm
+  .buildInitialValues(fordelBGPerioder, bg, getKodeverknavn, arbeidsgiverOpplysningerPerId));
 
 FastsettFordeltBeregningsgrunnlagImpl.transformValues = (values, fordelBGPerioder, bgPerioder) => FordelBeregningsgrunnlagForm.transformValues(values,
   fordelBGPerioder, bgPerioder);
 
-FastsettFordeltBeregningsgrunnlagImpl.validate = (intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn) => (
+FastsettFordeltBeregningsgrunnlagImpl.validate = (intl,
+  values,
+  fordelBGPerioder,
+  beregningsgrunnlag,
+  getKodeverknavn,
+  arbeidsgiverOpplysningerPerId) => (
   FordelBeregningsgrunnlagForm
-    .validate(intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn));
+    .validate(intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, arbeidsgiverOpplysningerPerId));
 
 const emptyArray = [];
 
