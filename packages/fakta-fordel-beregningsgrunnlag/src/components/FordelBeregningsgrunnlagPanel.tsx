@@ -4,7 +4,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
@@ -34,6 +34,7 @@ interface OwnProps {
       notAccepted?: boolean;
   };
   behandlingType: Kodeverk;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface OwnState {
@@ -76,6 +77,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         alleMerknaderFraBeslutter,
         behandlingType,
         submittable,
+        arbeidsgiverOpplysningerPerId,
       },
       state: {
         submitEnabled,
@@ -98,6 +100,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         behandlingVersjon={behandlingVersjon}
         beregningsgrunnlag={beregningsgrunnlag}
         aksjonspunkter={aksjonspunkter}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       )}
         {skalViseFordeling && (

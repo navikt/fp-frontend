@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm } from '@fpsak-frontend/form';
-import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { RefusjonTilVurderingAndel, Beregningsgrunnlag, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
 import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
@@ -20,7 +20,15 @@ const {
   VURDER_REFUSJON_BERGRUNN,
 } = aksjonspunktCodes;
 
-const finnAksjonspunkt = (aksjonspunkter) => (aksjonspunkter ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_REFUSJON_BERGRUNN) : undefined);
+const finnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]) : Aksjonspunkt | undefined => (aksjonspunkter
+  ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_REFUSJON_BERGRUNN) : undefined);
+
+const lagRadNøkkel = (andel: RefusjonTilVurderingAndel): string => {
+  if (andel.arbeidsgiver.arbeidsgiverAktørId) {
+    return `${andel.arbeidsgiver.arbeidsgiverAktørId}${andel.internArbeidsforholdRef})`;
+  }
+  return `${andel.arbeidsgiver.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef})`;
+};
 
 interface MappedOwnProps {
   initialValues: any;
@@ -36,6 +44,7 @@ type OwnProps = {
     behandlingVersjon: number;
     beregningsgrunnlag?: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -46,6 +55,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
   behandlingVersjon,
   beregningsgrunnlag,
   aksjonspunkter,
+  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
@@ -60,13 +70,14 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
       <form onSubmit={formProps.handleSubmit}>
         <Undertittel><FormattedMessage id="BeregningInfoPanel.RefusjonBG.Tittel" /></Undertittel>
         <VerticalSpacer sixteenPx />
-        <TidligereUtbetalinger beregningsgrunnlag={beregningsgrunnlag} />
+        <TidligereUtbetalinger beregningsgrunnlag={beregningsgrunnlag} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />
         { andeler.map((andel) => (
           <VurderEndringRefusjonRad
             refusjonAndel={andel}
             readOnly={readOnly}
             erAksjonspunktÅpent={erAksjonspunktÅpent}
-            key={andel.arbeidsgiverNavn}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            key={lagRadNøkkel(andel)}
           />
         ))}
         <>

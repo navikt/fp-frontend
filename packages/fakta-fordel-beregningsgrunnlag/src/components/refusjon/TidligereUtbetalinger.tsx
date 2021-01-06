@@ -2,15 +2,24 @@ import React, { FunctionComponent } from 'react';
 import { Table } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 
-import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { Beregningsgrunnlag, RefusjonTilVurderingAndel, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types/';
+
 import styles from './tidligereUtbetalinger.less';
 import TidligereUtbetalingRad from './TidligereUtbetalingRad';
 
 type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-export const TidligereUtbetalinger: FunctionComponent<OwnProps> = ({ beregningsgrunnlag }) => {
+const lagRadNøkkel = (andel: RefusjonTilVurderingAndel): string => {
+  if (andel.arbeidsgiver.arbeidsgiverAktørId) {
+    return `${andel.arbeidsgiver.arbeidsgiverAktørId}${andel.internArbeidsforholdRef})`;
+  }
+  return `${andel.arbeidsgiver.arbeidsgiverOrgnr}${andel.internArbeidsforholdRef})`;
+};
+
+export const TidligereUtbetalinger: FunctionComponent<OwnProps> = ({ beregningsgrunnlag, arbeidsgiverOpplysningerPerId }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
   return (
     <>
@@ -24,8 +33,9 @@ export const TidligereUtbetalinger: FunctionComponent<OwnProps> = ({ beregningsg
           >
             { andeler.map((andel) => (
               <TidligereUtbetalingRad
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 refusjonAndel={andel}
-                key={andel.arbeidsgiverNavn}
+                key={lagRadNøkkel(andel)}
               />
             ))}
           </Table>
