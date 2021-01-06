@@ -19,9 +19,8 @@ export const bgUtenDelvisRefusjon = {
         tidligsteMuligeRefusjonsdato: '2020-06-01',
         skalKunneFastsetteDelvisRefusjon: false,
         arbeidsgiver: {
-          arbeidsgiverOrgnr: '999999999',
+          arbeidsgiverAktørId: '999999998',
         },
-        arbeidsgiverNavn: 'JENS OLE KÅRES FRANSKE BAKEVARER',
       },
     ],
   },
@@ -51,7 +50,6 @@ export const bgMedDelvisRefusjon = {
         arbeidsgiver: {
           arbeidsgiverOrgnr: '999999999',
         },
-        arbeidsgiverNavn: 'KATOLSK KEBAB A/S',
       },
     ],
   },

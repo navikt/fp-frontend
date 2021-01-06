@@ -5,19 +5,11 @@ import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { dateFormat, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel, TidligereUtbetalinger } from '@fpsak-frontend/types';
 import styles from './tidligereUtbetalinger.less';
+import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
 
-const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const visningsnavn = (andel) => {
-  const arbeidsgiverId = andel.arbeidsgiver.arbeidsgiverOrgnr || andel.arbeidsgiver.arbeidsgiverAktørId;
-  return arbeidsgiverId
-    ? `${andel.arbeidsgiverNavn} (${arbeidsgiverId})${getEndCharFromId(andel.eksternArbeidsforholdRef)}`
-    : andel.arbeidsgiverNavn;
-};
-
-const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling) => (
+const utbetalingTil = (utbetalinger: TidligereUtbetalinger[], andelsnavn: string): React.ReactNode[] => utbetalinger.map((utbetaling) => (
   <Row className={styles.correctPadding} key={`${andelsnavn}_(${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {utbetaling && utbetaling.erTildeltRefusjon
@@ -27,7 +19,7 @@ const utbetalingTil = (utbetalinger, andelsnavn) => utbetalinger.map((utbetaling
   </Row>
 ));
 
-const lagPeriode = (utbetaling) => {
+const lagPeriode = (utbetaling: TidligereUtbetalinger): React.ReactNode | undefined => {
   if (!utbetaling) {
     return undefined;
   }
@@ -40,7 +32,7 @@ const lagPeriode = (utbetaling) => {
   );
 };
 
-const perioder = (utbetalinger) => utbetalinger.map((utbetaling) => (
+const perioder = (utbetalinger: TidligereUtbetalinger[]): React.ReactNode[] => utbetalinger.map((utbetaling) => (
   <Row className={styles.correctPadding} key={`${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {lagPeriode(utbetaling)}
@@ -50,15 +42,19 @@ const perioder = (utbetalinger) => utbetalinger.map((utbetaling) => (
 
 type OwnProps = {
     refusjonAndel?: RefusjonTilVurderingAndel;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-export const TidligereUtbetalingRad: FunctionComponent<OwnProps> = ({ refusjonAndel }) => (
+export const TidligereUtbetalingRad: FunctionComponent<OwnProps> = ({
+  refusjonAndel,
+  arbeidsgiverOpplysningerPerId,
+}) => (
   <TableRow>
     <TableColumn>
-      {visningsnavn(refusjonAndel)}
+      {createVisningsnavnForAktivitetRefusjon(refusjonAndel, arbeidsgiverOpplysningerPerId)}
     </TableColumn>
     <TableColumn>
-      {utbetalingTil(refusjonAndel.tidligereUtbetalinger, visningsnavn(refusjonAndel))}
+      {utbetalingTil(refusjonAndel.tidligereUtbetalinger, createVisningsnavnForAktivitetRefusjon(refusjonAndel, arbeidsgiverOpplysningerPerId))}
     </TableColumn>
     <TableColumn>
       {perioder(refusjonAndel.tidligereUtbetalinger)}

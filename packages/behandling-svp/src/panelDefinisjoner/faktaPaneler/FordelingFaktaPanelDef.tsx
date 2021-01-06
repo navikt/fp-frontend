@@ -14,7 +14,10 @@ class FordelingFaktaPanelDef extends FaktaPanelDef {
 
   getKomponent = (props) => <FordelBeregningsgrunnlagFaktaIndex {...props} />
 
-  getData = ({ beregningsgrunnlag }) => ({ beregningsgrunnlag })
+  getData = ({ beregningsgrunnlag, arbeidsgiverOpplysningerPerId }) => ({
+    beregningsgrunnlag,
+    arbeidsgiverOpplysningerPerId,
+  })
 }
 
 export default FordelingFaktaPanelDef;
