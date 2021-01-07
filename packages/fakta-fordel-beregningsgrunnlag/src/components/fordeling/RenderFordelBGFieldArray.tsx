@@ -32,7 +32,7 @@ import {
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
 } from '../ValidateAndelerUtils';
 import styles from './renderFordelBGFieldArray.less';
-import createVisningsnavnForAktivitet, { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 
 const ENTER_KEY_CODE = 13;
 

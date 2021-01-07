@@ -43,7 +43,6 @@ const arbeidsforholdList = [{
   nyttArbeidsforhold: false,
   beregningsperiodeTom: '2016-01-01',
   beregningsperiodeFom: '2016-03-31',
-  arbeidsgiverNavn: arbeidstakerNavn,
   arbeidsgiverId,
   startDato: '2016-01-01',
   opphoersdato: '2018-04-01',
@@ -51,6 +50,14 @@ const arbeidsforholdList = [{
   eksternArbeidsforholdId: `345${siste4SifferIArbeidsforholdId}`,
   andelsnr: arbeidstakerAndelsnr,
 }];
+
+const agOplysninger = {
+  12338: {
+    identifikator: arbeidsgiverId,
+    navn: arbeidstakerNavn,
+    erPrivatPerson: false,
+  },
+};
 
 describe('<RenderFordelBGFieldArray>', () => {
   it('skal ha selectvalues med Ytelse når kun ytelse', () => {
@@ -67,6 +74,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       harKunYtelse
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
+      arbeidsgiverOpplysningerPerId={agOplysninger}
     />);
 
     const selectFields = wrapper.find(SelectField);
@@ -92,6 +100,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       periodeUtenAarsak={false}
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
+      arbeidsgiverOpplysningerPerId={agOplysninger}
     />);
 
     const selectFields = wrapper.find(SelectField);
@@ -138,6 +147,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       periodeUtenAarsak={false}
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
+      arbeidsgiverOpplysningerPerId={agOplysninger}
     />);
 
     const rows = wrapper.find(TableRow);
@@ -181,6 +191,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       periodeUtenAarsak={false}
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
+      arbeidsgiverOpplysningerPerId={agOplysninger}
     />);
 
     const rows = wrapper.find(TableRow);
@@ -238,6 +249,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       periodeUtenAarsak={false}
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
+      arbeidsgiverOpplysningerPerId={agOplysninger}
     />);
 
     const rows = wrapper.find(TableRow);
@@ -260,7 +272,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors).toBe(null);
   });
 
@@ -279,7 +291,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors).toBe(null);
   });
 
@@ -298,7 +310,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors[0].refusjonskrav).toBe(isRequiredMessage());
   });
 
@@ -327,7 +339,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, true);
+      getKodeverknavn, 97000, undefined, true, agOplysninger);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
     expect(errors._error.props.id).toBe(expected[0].id);
@@ -350,7 +362,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, true);
+      getKodeverknavn, 97000, undefined, true, agOplysninger);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
     expect(errors._error.props.id).toBe(expected[0].id);
@@ -373,7 +385,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors[0].fastsattBelop).toBe(isRequiredMessage());
   });
 
@@ -392,7 +404,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors[0].inntektskategori).toBe(isRequiredMessage());
   });
 
@@ -412,7 +424,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors[0].andel).toBe(isRequiredMessage());
   });
 
@@ -432,7 +444,7 @@ describe('<RenderFordelBGFieldArray>', () => {
     };
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
-      getKodeverknavn, 97000, undefined, false);
+      getKodeverknavn, 97000, undefined, false, agOplysninger);
     expect(errors).toBe(null);
   });
 

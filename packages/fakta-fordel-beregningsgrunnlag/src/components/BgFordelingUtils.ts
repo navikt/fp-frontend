@@ -5,7 +5,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 
 import { ArbeidsgiverOpplysningerPerId, FordelBeregningsgrunnlagAndel, Kodeverk } from '@fpsak-frontend/types';
-import createVisningsnavnForAktivitet, { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
 const nullOrUndefined = (value) => value === null || value === undefined;
 

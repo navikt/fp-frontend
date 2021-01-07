@@ -15,6 +15,14 @@ const arbeidsgiver = {
   opphoersdato: '2018-01-01',
 };
 
+const agOpplysninger = {
+  3284788923: {
+    identifikator: '3284788923',
+    erPrivatPerson: false,
+    navn: 'Virksomheten',
+  },
+};
+
 const arbeidstakerIkkeFastsatt = {
   lagtTilAvSaksbehandler: false,
   aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
@@ -71,14 +79,14 @@ describe('<BgFordelingUtils>', () => {
         arbeidsforholdId: '321378huda7e2',
         eksternArbeidsforholdId: '345678',
       },
-      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
+      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
       andelsnr: 3,
-      kilde: { kode: 'PROSESS_START' },
+      kilde: { kode: 'PROSESS_START', kodeverk: 'test' },
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'ARBEIDSTAKER' },
+      inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
     };
 
-    const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn);
+    const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn, agOpplysninger);
     expect(andelsInfo.andel).toBe('Virksomheten (3284788923)...5678');
     expect(andelsInfo.aktivitetStatus).toBe('AT');
     expect(andelsInfo.andelsnr).toBe(3);
@@ -90,12 +98,12 @@ describe('<BgFordelingUtils>', () => {
 
   it('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
     const andelValueFromState = {
-      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE },
+      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'test' },
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: 'SN' },
+      inntektskategori: { kode: 'SN', kodeverk: 'test' },
     };
-    const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn);
+    const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn, agOpplysninger);
     expect(andelsInfo.andel).toBe('Selvstendig næringsdrivende');
     expect(andelsInfo.aktivitetStatus).toBe('SN');
     expect(andelsInfo.andelsnr).toBe(2);

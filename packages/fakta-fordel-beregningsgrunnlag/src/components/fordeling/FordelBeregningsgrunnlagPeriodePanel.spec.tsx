@@ -199,8 +199,19 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
       ],
     };
-
-    const initialValues = FordelBeregningsgrunnlagPeriodePanel.buildInitialValues(periode, bgPeriode, stpBeregning, false, getKodeverknavn);
+    const agOpplysninger = {
+      3284788923: {
+        navn: 'Virksomheten',
+        identifikator: '3284788923',
+        erPrivatPerson: false,
+      },
+      32847889234234233: {
+        navn: 'Virksomheten 2',
+        identifikator: '3284788923',
+        erPrivatPerson: false,
+      },
+    };
+    const initialValues = FordelBeregningsgrunnlagPeriodePanel.buildInitialValues(periode, bgPeriode, stpBeregning, false, getKodeverknavn, agOpplysninger);
     expect(initialValues).toHaveLength(9);
     const arbeidstakerAndelerBeforeStp = initialValues.filter(({ arbeidsperiodeFom }) => arbeidsperiodeFom !== ''
     && moment(arbeidsperiodeFom).isBefore(moment(stpBeregning)))
