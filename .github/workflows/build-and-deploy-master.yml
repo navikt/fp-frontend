@@ -49,7 +49,7 @@ jobs:
         run: yarn less:lint && yarn lint && yarn ts-check && yarn test:all:testonly
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@
+        uses: SonarSource/sonarcloud-github-action@v1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
