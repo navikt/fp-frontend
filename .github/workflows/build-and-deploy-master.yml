@@ -68,6 +68,7 @@ jobs:
           LC_MEASUREMENT: "nb_NO.UTF-8"
           LC_IDENTIFICATION: "nb_NO.UTF-8"
           LC_ALL: ""
+          JAVA_OPTS: "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8"
         with:
           args: >
             -Dsun.jnu.encoding=UTF-8
