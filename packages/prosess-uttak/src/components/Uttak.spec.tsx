@@ -11,7 +11,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { Tidslinje } from '@fpsak-frontend/tidslinje';
-import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjønnkode';
+import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personopplysninger,
   UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,

@@ -12,7 +12,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode, FamilieHendelse, KodeverkMedNavn, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
+import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
 import TilkjentYtelse, { PeriodeMedId } from './TilkjentYtelse';

@@ -14,7 +14,7 @@ import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
 import GrunnlagForAarsinntektPanelSN from '../selvstendigNaeringsdrivende/GrunnlagForAarsinntektPanelSN';
 import TilstotendeYtelser from '../tilstotendeYtelser/TilstotendeYtelser';
 
-import MilitaerPanel from '../militær/MilitaerPanel';
+import MilitaerPanel from '../militar/MilitaerPanel';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
 import SammenlignsgrunnlagAOrdningen from '../fellesPaneler/SammenligningsgrunnlagAOrdningen';

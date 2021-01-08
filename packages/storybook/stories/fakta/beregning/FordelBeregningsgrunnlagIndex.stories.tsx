@@ -14,7 +14,7 @@ import withReduxProvider from '../../../decorators/withRedux';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturalytelse } from './scenario/NyttArbeidOgNaturalytelse';
-import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from './scenario/ArbeidOgGradertNæring';
+import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from './scenario/ArbeidOgGradertNaring';
 import {
   bgUtenDelvisRefusjon as vurderRefusjonBG,
   bgMedDelvisRefusjon as vurderDelvisRefBG,

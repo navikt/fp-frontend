@@ -10,7 +10,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
+import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
 

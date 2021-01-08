@@ -16,21 +16,21 @@ import faktaArbeidsforholdVurderAnnenPartHarRett from './mocks/uttak/vurder-anne
 import personopplysningerVurderAnnenPartHarRett from './mocks/uttak/vurder-annen-part-har-rett/personopplysninger.json';
 import familiehendelseVurderAnnenPartHarRett from './mocks/uttak/vurder-annen-part-har-rett/familiehendelse.json';
 
-import aksjonspunkterFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/aksjonspunkter.json';
-import behandlingFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/behandling.json';
-import uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/kontrollerFaktaPerioder.json';
-import ytelsefordelingFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/ytelsefordeling.json';
-import faktaArbeidsforholdFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/faktaArbeidsforhold.json';
-import personopplysningerFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/personopplysninger.json';
-import familiehendelseFarSøkerFørsteSeksUker from './mocks/uttak/far-søker-første-seks-uker/familiehendelse.json';
+import aksjonspunkterFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/aksjonspunkter.json';
+import behandlingFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/behandling.json';
+import uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/kontrollerFaktaPerioder.json';
+import ytelsefordelingFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/ytelsefordeling.json';
+import faktaArbeidsforholdFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/faktaArbeidsforhold.json';
+import personopplysningerFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/personopplysninger.json';
+import familiehendelseFarSøkerFørsteSeksUker from './mocks/uttak/far-soker-forste-seks-uker/familiehendelse.json';
 
-import aksjonspunkterOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/aksjonspunkter.json';
-import behandlingOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/behandling.json';
-import uttakKontrollerFaktaPerioderOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/kontrollerFaktaPerioder.json';
-import ytelsefordelingOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/ytelsefordeling.json';
-import faktaArbeidsforholdOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/faktaArbeidsforhold.json';
-import personopplysningerOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/personopplysninger.json';
-import familiehendelseOverføringAvPerioder from './mocks/uttak/overføring-av-perioder/familiehendelse.json';
+import aksjonspunkterOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/aksjonspunkter.json';
+import behandlingOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/behandling.json';
+import uttakKontrollerFaktaPerioderOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/kontrollerFaktaPerioder.json';
+import ytelsefordelingOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/ytelsefordeling.json';
+import faktaArbeidsforholdOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/faktaArbeidsforhold.json';
+import personopplysningerOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/personopplysninger.json';
+import familiehendelseOverføringAvPerioder from './mocks/uttak/overforing-av-perioder/familiehendelse.json';
 
 const arbeidsgiverOpplysningerPerId = {
   910909088: {
