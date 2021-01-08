@@ -30,7 +30,7 @@ import {
   Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
+import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
 
 import TimeLineInfo from './stonadkonto/TimeLineInfo';

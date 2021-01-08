@@ -12,7 +12,7 @@ import GrunnlagForAarsinntektPanelSN from '../selvstendigNaeringsdrivende/Grunnl
 
 import TilstotendeYtelser from '../tilstotendeYtelser/TilstotendeYtelser';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
-import MilitaerPanel from '../militær/MilitaerPanel';
+import MilitaerPanel from '../militar/MilitaerPanel';
 
 const arbeidstakerAndel = {
   aktivitetStatus: {
