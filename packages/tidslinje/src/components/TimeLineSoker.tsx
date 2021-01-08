@@ -7,7 +7,7 @@ import { Image } from '@fpsak-frontend/shared-components';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
 import urlUkjent from '@fpsak-frontend/assets/images/ukjent.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjønnkode';
+import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import styles from './timeLineSoker.less';
 
