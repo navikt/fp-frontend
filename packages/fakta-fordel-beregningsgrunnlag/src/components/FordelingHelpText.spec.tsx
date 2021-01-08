@@ -8,9 +8,8 @@ const fn = (kodeverk) => {
 };
 
 const arbeidsforhold = {
-  arbeidsgiverNavn: 'Sopra Steria',
   arbeidsforholdId: '987654321',
-  arbeidsgiverId: '123456789',
+  arbeidsgiverIdent: '123456789',
   eksternArbeidsforholdId: '56789',
   permisjon: {
     permisjonFom: '2016-01-01',
@@ -73,9 +72,8 @@ describe('<FordelingHelpText>', () => {
   });
 
   const arbeidsforholdMedEndringISøktYtelse = {
-    arbeidsgiverNavn: 'Sopra Steria',
     arbeidsforholdId: '987654321',
-    arbeidsgiverId: '123456789',
+    arbeidsgiverIdent: '123456789',
     eksternArbeidsforholdId: '56789',
     permisjon: {
       permisjonFom: '2016-01-01',

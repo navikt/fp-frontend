@@ -12,11 +12,10 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
   ArbeidsforholdTilFordeling,
   ArbeidsgiverOpplysningerPerId,
-  BeregningsgrunnlagArbeidsforhold,
   Kodeverk,
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
-import createVisningsnavnForAktivitet, { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
 const {
   FORDEL_BEREGNINGSGRUNNLAG,

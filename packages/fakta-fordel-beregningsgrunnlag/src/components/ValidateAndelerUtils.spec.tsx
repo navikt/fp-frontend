@@ -20,6 +20,19 @@ const getKodeverknavn = (kodeverk) => {
   return '';
 };
 
+const arbeidsgiverOppysninger = {
+  36363463463: {
+    identifikator: '36363463463',
+    navn: 'Andersen flyttebyrå',
+    erPrivatPerson: false,
+  },
+  658568568: {
+    identifikator: '658568568',
+    navn: 'Torgersen flyttebyrå',
+    erPrivatPerson: false,
+  },
+};
+
 describe('<ValidateAndelerUtils>', () => {
   it('skal ikkje gi error når total refusjon er lavere enn inntektsmelding', () => {
     const arbeidsgiverAndersen = {
@@ -48,7 +61,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
     expect(error).toBe(null);
   });
 
@@ -79,7 +92,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
     expect(error).toBe(null);
   });
 
@@ -110,7 +123,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
     expect(error).toBe(null);
   });
 
@@ -143,7 +156,7 @@ describe('<ValidateAndelerUtils>', () => {
     ];
 
     const arbeidsgiverString = 'Andersen flyttebyrå (36363463463) ...f923';
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
     // @ts-ignore TODO fiks denne
     expect(error.id).toBe(expected.id);

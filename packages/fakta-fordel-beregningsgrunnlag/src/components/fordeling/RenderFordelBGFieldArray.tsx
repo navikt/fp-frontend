@@ -26,7 +26,7 @@ import 'core-js/features/array/flat-map';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
-import getUniqueListOfArbeidsforhold from '../ArbeidsforholdHelper';
+import getUniqueListOfArbeidsforhold, { Arbeidsforhold } from '../ArbeidsforholdHelper';
 import {
   validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
@@ -46,26 +46,6 @@ const defaultBGFordeling = (periodeUtenAarsak) => ({
   belopFraInntektsmelding: null,
   skalRedigereInntekt: !periodeUtenAarsak,
 });
-
-type Arbeidsforhold = {
-  andelsnr: number;
-  nyttArbeidsforhold: boolean;
-  beregningsperiodeTom: string;
-  beregningsperiodeFom: string;
-  arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
-  arbeidsgiverIdVisning?: string;
-  eksternArbeidsforholdId?: string;
-  refusjonPrAar?: number;
-  belopFraInntektsmeldingPrMnd?: number;
-  organisasjonstype?: Kodeverk;
-  naturalytelseBortfaltPrÅr?: number;
-  naturalytelseTilkommetPrÅr?: number;
-  startdato?: string;
-  opphoersdato?: string;
-  arbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
-}
 
 const fieldLabel = (index, labelId) => {
   if (index === 0) {

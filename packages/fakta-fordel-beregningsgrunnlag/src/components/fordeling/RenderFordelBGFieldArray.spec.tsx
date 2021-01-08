@@ -57,6 +57,11 @@ const agOplysninger = {
     navn: arbeidstakerNavn,
     erPrivatPerson: false,
   },
+  14235235235: {
+    navn: 'Test',
+    identifikator: '14235235235',
+    erPrivatPerson: false,
+  },
 };
 
 describe('<RenderFordelBGFieldArray>', () => {

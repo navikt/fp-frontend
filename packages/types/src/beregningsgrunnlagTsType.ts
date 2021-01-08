@@ -130,8 +130,8 @@ export type BeregningsgrunnlagAndel = Readonly <{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   avkortetPrAar?: number;
   beregnetPrAar?: number;
-  beregningsgrunnlagFom?: string;
-  beregningsgrunnlagTom?: string;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
   bruttoPrAar?: number;
   arbeidsforholdId?: string;
   overstyrtPrAar?: number;
@@ -143,6 +143,7 @@ export type BeregningsgrunnlagAndel = Readonly <{
   pgiVerdier?: PgiVerdier[],
   aarsbeloepFraTilstoetendeYtelse?: number;
   bortfaltNaturalytelse?: number;
+  tilkommetNaturalytelse?: number;
   erNyIArbeidslivet?: boolean;
   erTidsbegrensetArbeidsforhold?: boolean;
   erNyoppstartet?: boolean;

@@ -10,8 +10,8 @@ import {
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import {
-  ArbeidsgiverOpplysningerPerId,
-  BeregningsgrunnlagPeriodeProp,
+  ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagAndel,
   FordelBeregningsgrunnlagPeriode,
   Kodeverk,
   KodeverkMedNavn,
@@ -134,9 +134,11 @@ FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode,
   getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => RenderFordelBGFieldArrayImpl
   .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
 
-const finnRiktigAndel = (andel, bgPeriode) => bgPeriode.beregningsgrunnlagPrStatusOgAndel.find((a) => a.andelsnr === andel.andelsnr);
+const finnRiktigAndel = (andel: FordelBeregningsgrunnlagAndel,
+  bgPeriode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel => bgPeriode.beregningsgrunnlagPrStatusOgAndel
+  .find((a) => a.andelsnr === andel.andelsnr);
 
-const finnBeregningsgrunnlagPrAar = (bgAndel) => {
+const finnBeregningsgrunnlagPrAar = (bgAndel: BeregningsgrunnlagAndel): string | undefined => {
   if (!bgAndel) {
     return null;
   }

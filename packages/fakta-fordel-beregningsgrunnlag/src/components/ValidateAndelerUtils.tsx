@@ -8,7 +8,7 @@ import {
 
 import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
-import createVisningsnavnForAktivitet, { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
 const convertToNumber = (n) => (n == null || undefined ? null : Number(removeSpacesFromNumber(n)));
 

@@ -9,8 +9,7 @@ import {
 } from './BgFordelingUtils';
 
 const arbeidsgiver = {
-  arbeidsgiverNavn: 'Virksomheten',
-  arbeidsgiverId: '3284788923',
+  arbeidsgiverIdent: '3284788923',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
 };
@@ -25,8 +24,8 @@ const agOpplysninger = {
 
 const arbeidstakerIkkeFastsatt = {
   lagtTilAvSaksbehandler: false,
-  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER },
-  inntektskategori: { kode: 'ARBEIDSTAKER' },
+  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
+  inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
 };
 
 const getKodeverknavn = (kodeverk) => {
@@ -74,8 +73,7 @@ describe('<BgFordelingUtils>', () => {
   it('skal sette initial values for generell andelinfo med arbeidsforhold', () => {
     const andelValueFromState = {
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Virksomheten',
-        arbeidsgiverId: '3284788923',
+        arbeidsgiverIdent: '3284788923',
         arbeidsforholdId: '321378huda7e2',
         eksternArbeidsforholdId: '345678',
       },
@@ -114,10 +112,10 @@ describe('<BgFordelingUtils>', () => {
 
   it('skal ikkje sette arbeidsforhold initial values for andel uten arbeidsforhold', () => {
     const andelValueFromState = {
-      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE },
+      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'test' },
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: 'SN' },
+      inntektskategori: { kode: 'SN', kodeverk: 'test' },
     };
     const arbeidsforholdIV = setArbeidsforholdInitialValues(andelValueFromState);
     expect(arbeidsforholdIV.arbeidsforholdId).toBe('');

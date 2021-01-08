@@ -57,20 +57,10 @@ export const settFastsattBelop = (fordeltPrAar, bruttoPrAar,
   return skalPreutfyllesMedBeregningsgrunnlag && !nullOrUndefined(bruttoPrAar) ? formatCurrencyNoKr(bruttoPrAar) : '';
 };
 
-const finnArbeidsgiverId = (arbeidsforhold) => {
-  if (!arbeidsforhold) {
-    return '';
-  }
-  if (arbeidsforhold.aktørId) {
-    return arbeidsforhold.aktørId;
-  }
-  return arbeidsforhold.arbeidsgiverId ? arbeidsforhold.arbeidsgiverId : '';
-};
-
-export const setArbeidsforholdInitialValues = (andel) => ({
-  arbeidsgiverNavn: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverNavn !== 0 ? andel.arbeidsforhold.arbeidsgiverNavn : '',
-  arbeidsgiverId: finnArbeidsgiverId(andel.arbeidsforhold),
-  arbeidsforholdId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdId !== 0 ? andel.arbeidsforhold.arbeidsforholdId : '',
+export const setArbeidsforholdInitialValues = (andel: FordelBeregningsgrunnlagAndel) => ({
+  arbeidsgiverNavn: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverNavn ? andel.arbeidsforhold.arbeidsgiverNavn : '',
+  arbeidsgiverId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverIdent ? andel.arbeidsforhold.arbeidsgiverIdent : '',
+  arbeidsforholdId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdId ? andel.arbeidsforhold.arbeidsforholdId : '',
   arbeidsperiodeFom: andel.arbeidsforhold ? andel.arbeidsforhold.startdato : '',
   arbeidsperiodeTom: andel.arbeidsforhold && andel.arbeidsforhold.opphoersdato !== null
     ? andel.arbeidsforhold.opphoersdato : '',
@@ -92,7 +82,7 @@ export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
 });
 
 export const starterPaaEllerEtterStp = (bgAndel,
-  skjaeringstidspunktBeregning) => (bgAndel && bgAndel.arbeidsforhold
+  skjaeringstidspunktBeregning): boolean => (bgAndel && bgAndel.arbeidsforhold
     && bgAndel.arbeidsforhold.startdato && !moment(bgAndel.arbeidsforhold.startdato).isBefore(moment(skjaeringstidspunktBeregning)));
 
 export const mapToBelop = (andel) => {
