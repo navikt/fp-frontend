@@ -53,26 +53,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          LANG: "nb_NO.UTF-8"
-          LANGUAGE: ""
-          LC_CTYPE: "nb_NO.UTF-8"
-          LC_NUMERIC: "nb_NO.UTF-8"
-          LC_TIME: "nb_NO.UTF-8"
-          LC_COLLATE: "nb_NO.UTF-8"
-          LC_MONETARY: "nb_NO.UTF-8"
-          LC_MESSAGES: "nb_NO.UTF-8"
-          LC_PAPER: "nb_NO.UTF-8"
-          LC_NAME: "nb_NO.UTF-8"
-          LC_ADDRESS: "nb_NO.UTF-8"
-          LC_TELEPHONE: "nb_NO.UTF-8"
-          LC_MEASUREMENT: "nb_NO.UTF-8"
-          LC_IDENTIFICATION: "nb_NO.UTF-8"
-          LC_ALL: ""
-          JAVA_OPTS: "-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8"
-        with:
-          args: >
-            -Dsun.jnu.encoding=UTF-8
-            -Dfile.encoding=UTF-8
 
       - name: Build
         run: |
