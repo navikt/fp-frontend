@@ -49,11 +49,14 @@ jobs:
         run: yarn less:lint && yarn lint && yarn ts-check && yarn test:all:testonly
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          LANG: en_US.UTF-8
+        with:
+          args: >
+            -Dsun.jnu.encoding=UTF-8
+            -Dfile.encoding=UTF-8
 
       - name: Build
         run: |
