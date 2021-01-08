@@ -3,6 +3,7 @@ Monorepo for Frontend kode for vl-foreldrepenger.
 [![Build](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
 [![Known Vulnerabilities](https://snyk.io/test/github/navikt/fp-frontend/badge.svg)](https://snyk.io/test/github/navikt/fp-frontend)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
