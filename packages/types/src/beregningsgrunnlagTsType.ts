@@ -16,7 +16,7 @@ export type AndelForFaktaOmBeregning = Readonly<{
   aktivitetStatus?: Kodeverk;
   belopReadOnly?: number;
   fastsattBelop?: number;
-  visningsnavn: string;
+  visningsnavn?: string;
   skalKunneEndreAktivitet?: boolean;
   lagtTilAvSaksbehandler: boolean;
 }>
