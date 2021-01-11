@@ -87,6 +87,19 @@ const fordelAndel2 = {
   nyttArbeidsforhold: true,
 };
 
+const agOpplysninger = {
+  996607852: {
+    identifikator: '996607852',
+    navn: 'ARBEIDSGIVER2 AS',
+    erPrivatPerson: false,
+  },
+  914555825: {
+    navn: 'ARBEIDSGIVER1 AS',
+    identifikator: '914555825',
+    erPrivatPerson: false,
+  },
+};
+
 describe('<FordelBeregningsgrunnlagForm>', () => {
   it('skal vise 2 perioder', () => {
     const bgAndel1 = {
@@ -172,6 +185,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlag={{}}
       alleKodeverk={{}}
       behandlingType={bt}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
 
     const periodePanel = wrapper.find(FordelBeregningsgrunnlagPeriodePanel);
@@ -189,14 +203,14 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       skjaeringstidspunktBeregning: '2019-03-30',
     };
 
-    const initialValues = FordelBeregningsgrunnlagForm.buildInitialValues(perioder, bg, getKodeverknavn);
+    const initialValues = FordelBeregningsgrunnlagForm.buildInitialValues(perioder, bg, getKodeverknavn, agOpplysninger);
     expect(initialValues[fieldName1].length).toBe(andeler1.length);
     expect(initialValues[fieldName2].length).toBe(andeler2.length);
 
     const values = {};
     values[getFieldNameKey(0)] = initialValues[fieldName1];
     values[getFieldNameKey(1)] = initialValues[fieldName2];
-    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, perioder, bg, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, perioder, bg, getKodeverknavn, agOpplysninger);
     expect(errors[getFieldNameKey(0)]).toBe(null);
     expect(errors[getFieldNameKey(1)]).not.toHaveLength(0);
   });
@@ -492,7 +506,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const values = {};
     const fordelBGPerioder = [];
     const beregningsgrunnlag = {};
-    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, agOpplysninger);
     expect(Object.keys(errors)).toHaveLength(0);
   });
 
@@ -507,7 +521,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
     };
-    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, agOpplysninger);
     expect(errors[getFieldNameKey(0)]).not.toHaveLength(0);
   });
 
@@ -528,7 +542,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
     };
-    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn);
+    const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, agOpplysninger);
     expect(errors[getFieldNameKey(0)]).not.toHaveLength(0);
     expect(errors[getFieldNameKey(1)]).not.toHaveLength(0);
   });

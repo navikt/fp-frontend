@@ -1,26 +1,6 @@
 import Kodeverk from './kodeverkTsType';
-import RefusjonTilVurdering from './beregningsgrunnlagFordelingTsType';
-
-export type BeregningsgrunnlagArbeidsforhold = Readonly<{
-  arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
-  arbeidsgiverIdVisning?: string;
-  arbeidsgiverIdent?: string;
-  eksternArbeidsforholdId?: string;
-  refusjonPrAar?: number;
-  belopFraInntektsmeldingPrMnd?: number;
-  organisasjonstype?: Kodeverk;
-  naturalytelseBortfaltPrÅr?: number;
-  naturalytelseTilkommetPrÅr?: number;
-  startdato?: string;
-  opphoersdato?: string;
-  arbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
-
-  // Felter som brukes hvis de er satt men mappes ikke backend, løses i TFP-2044
-  stillingsNavn?: string;
-  stillingsProsent?: number;
-}>
+import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
+import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 
 type FaktaOmBeregningAndel = Readonly<{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
@@ -36,7 +16,7 @@ export type AndelForFaktaOmBeregning = Readonly<{
   aktivitetStatus?: Kodeverk;
   belopReadOnly?: number;
   fastsattBelop?: number;
-  visningsnavn: string;
+  visningsnavn?: string;
   skalKunneEndreAktivitet?: boolean;
   lagtTilAvSaksbehandler: boolean;
 }>
@@ -123,68 +103,6 @@ export type FaktaOmBeregning = Readonly<{
   arbeidstakerOgFrilanserISammeOrganisasjonListe?: ATFLSammeOrgAndel[];
 }>
 
-type PerioderMedGraderingEllerRefusjon = Readonly<{
-  erRefusjon?: boolean;
-  erGradering?: boolean;
-  fom?: string;
-  tom?: string;
-}>
-
-type ArbeidsforholdTilFordeling = Readonly<{
-  aktørId?: number;
-  arbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
-  arbeidsgiverId?: string;
-  arbeidsgiverNavn?: string;
-  belopFraInntektsmeldingPrMnd?: number;
-  eksternArbeidsforholdId?: string;
-  naturalytelseBortfaltPrÅr?: number;
-  naturalytelseTilkommetPrÅr?: number;
-  opphoersdato?: number;
-  organisasjonstype?: Kodeverk;
-  perioderMedGraderingEllerRefusjon?: PerioderMedGraderingEllerRefusjon[];
-  permisjon?: {
-    permisjonFom?: string;
-    permisjonTom?: string;
-  };
-  refusjonPrAar?: number;
-  startdato?: string;
-}>
-
-type FordelBeregningsgrunnlagAndel = Readonly<{
-  aktivitetStatus?: Kodeverk;
-  andelIArbeid?: number[];
-  andelsnr?: number;
-  arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
-  arbeidsforholdType?: Kodeverk;
-  belopFraInntektsmeldingPrAar?: number;
-  fordelingForrigeBehandlingPrAar?: number;
-  fordeltPrAar?: number;
-  inntektskategori?: Kodeverk;
-  lagtTilAvSaksbehandler?: boolean;
-  nyttArbeidsforhold?: boolean;
-  refusjonskravFraInntektsmeldingPrAar?: number;
-  refusjonskravPrAar?: number;
-}>
-
-export type FordelBeregningsgrunnlagPeriode = Readonly<{
-  fom?: string;
-  fordelBeregningsgrunnlagAndeler?: FordelBeregningsgrunnlagAndel[];
-  skalRedigereInntekt?: boolean;
-  skalPreutfyllesMedBeregningsgrunnlag?: boolean;
-  skalKunneEndreRefusjon?: boolean;
-  tom?: string;
-}>
-
-type FordelBeregningsgrunnlag = Readonly<{
-  arbeidsforholdTilFordeling?: ArbeidsforholdTilFordeling[];
-  fordelBeregningsgrunnlagPerioder?: FordelBeregningsgrunnlagPeriode[];
-}>
-
-type FaktaOmFordeling = Readonly<{
-  fordelBeregningsgrunnlag?: FordelBeregningsgrunnlag;
-}>
-
 type Næring = Readonly <{
   orgnr: string;
   virksomhetType: Kodeverk;
@@ -212,8 +130,8 @@ export type BeregningsgrunnlagAndel = Readonly <{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   avkortetPrAar?: number;
   beregnetPrAar?: number;
-  beregningsgrunnlagFom?: string;
-  beregningsgrunnlagTom?: string;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
   bruttoPrAar?: number;
   arbeidsforholdId?: string;
   overstyrtPrAar?: number;
@@ -225,6 +143,7 @@ export type BeregningsgrunnlagAndel = Readonly <{
   pgiVerdier?: PgiVerdier[],
   aarsbeloepFraTilstoetendeYtelse?: number;
   bortfaltNaturalytelse?: number;
+  tilkommetNaturalytelse?: number;
   erNyIArbeidslivet?: boolean;
   erTidsbegrensetArbeidsforhold?: boolean;
   erNyoppstartet?: boolean;

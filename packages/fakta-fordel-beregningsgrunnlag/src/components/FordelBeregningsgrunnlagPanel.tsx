@@ -117,6 +117,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
             beregningsgrunnlag={beregningsgrunnlag}
             behandlingType={behandlingType}
             aksjonspunkter={aksjonspunkter}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         )}
       </>

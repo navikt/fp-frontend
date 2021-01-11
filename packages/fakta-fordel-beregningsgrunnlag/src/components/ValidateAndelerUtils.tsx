@@ -6,8 +6,9 @@ import {
   dateIsAfter, formatCurrencyNoKr, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
 
+import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
-import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
 const convertToNumber = (n) => (n == null || undefined ? null : Number(removeSpacesFromNumber(n)));
 
@@ -100,12 +101,20 @@ export const skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding = (arbeidsgiver) 
   [{ id: 'BeregningInfoPanel.FordelBG.Validation.IkkjeHogereRefusjonEnnInntektsmelding' },
     { arbeidsgiver }]);
 
-export const validateTotalRefusjonPrArbeidsforhold = (andelList, getKodeverknavn) => {
+export const validateTotalRefusjonPrArbeidsforhold = (andelList,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   const arbeidsforholdRefusjonsinfo = finnArbeidsforholdRefusjonsinfoListe(andelList);
   const arbeidsforholdMedForHogRefusjon = arbeidsforholdRefusjonsinfo
     .filter((refusjonsInfo) => refusjonsInfo.totalRefusjon > refusjonsInfo.refusjonskravFraInntektsmelding);
   if (arbeidsforholdMedForHogRefusjon.length > 0) {
-    const arbeidsgiverString = createVisningsnavnForAktivitet(arbeidsforholdMedForHogRefusjon[0], getKodeverknavn);
+    const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforholdMedForHogRefusjon[0].arbeidsgiverId];
+    let arbeidsgiverString;
+    if (!agOpplysninger) {
+      arbeidsgiverString = arbeidsforholdMedForHogRefusjon[0].arbeidsforholdType ? getKodeverknavn(arbeidsforholdMedForHogRefusjon[0].arbeidsforholdType) : '';
+    } else {
+      arbeidsgiverString = createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforholdMedForHogRefusjon[0].eksternArbeidsforholdId);
+    }
     return skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
   }
   return null;

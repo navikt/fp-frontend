@@ -10,7 +10,8 @@ import {
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import {
-  BeregningsgrunnlagPeriodeProp,
+  ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagAndel,
   FordelBeregningsgrunnlagPeriode,
   Kodeverk,
   KodeverkMedNavn,
@@ -60,6 +61,7 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     behandlingType: Kodeverk;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
 
 interface StaticFunctions {
@@ -72,12 +74,15 @@ interface StaticFunctions {
               fom: string;
               tom: string;
              },
-             skalValidereRefusjon: boolean) => any;
+             skalValidereRefusjon: boolean,
+             arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
+
   buildInitialValues: (periode: FordelBeregningsgrunnlagPeriode,
                        bgPeriode: BeregningsgrunnlagPeriodeProp,
                        skjaeringstidspunktBeregning: string,
                        harKunYtelse: boolean,
-                       getKodeverknavn: (kodeverk: Kodeverk) => string) => any;
+                       getKodeverknavn: (kodeverk: Kodeverk) => string,
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
 }
 
 /**
@@ -98,6 +103,7 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
   beregningsgrunnlag,
   alleKodeverk,
   behandlingType,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <EkspanderbartpanelBase
     className={readOnly ? styles.statusOk : classNames(`fordelBeregningsgrunnlagPeriode--${fom}`)}
@@ -114,6 +120,7 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
       alleKodeverk={alleKodeverk}
       beregningsgrunnlag={beregningsgrunnlag}
       behandlingType={behandlingType}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </EkspanderbartpanelBase>
 );
@@ -124,12 +131,14 @@ FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
 };
 
 FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode,
-  getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon) => RenderFordelBGFieldArrayImpl
-  .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon);
+  getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => RenderFordelBGFieldArrayImpl
+  .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
 
-const finnRiktigAndel = (andel, bgPeriode) => bgPeriode.beregningsgrunnlagPrStatusOgAndel.find((a) => a.andelsnr === andel.andelsnr);
+const finnRiktigAndel = (andel: FordelBeregningsgrunnlagAndel,
+  bgPeriode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel => bgPeriode.beregningsgrunnlagPrStatusOgAndel
+  .find((a) => a.andelsnr === andel.andelsnr);
 
-const finnBeregningsgrunnlagPrAar = (bgAndel) => {
+const finnBeregningsgrunnlagPrAar = (bgAndel: BeregningsgrunnlagAndel): string | undefined => {
   if (!bgAndel) {
     return null;
   }
@@ -144,7 +153,12 @@ const finnBeregningsgrunnlagPrAar = (bgAndel) => {
   return null;
 };
 
-FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode, bgPeriode, skjaeringstidspunktBeregning, harKunYtelse, getKodeverknavn) => {
+FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode,
+  bgPeriode,
+  skjaeringstidspunktBeregning,
+  harKunYtelse,
+  getKodeverknavn,
+  arbeidsgiverOpplysningerPerId) => {
   if (!periode || !periode.fordelBeregningsgrunnlagAndeler) {
     return {};
   }
@@ -153,7 +167,7 @@ FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode, bgPeriode, s
       .map((andel) => {
         const bgAndel = finnRiktigAndel(andel, bgPeriode);
         return ({
-          ...setGenerellAndelsinfo(andel, harKunYtelse, getKodeverknavn),
+          ...setGenerellAndelsinfo(andel, harKunYtelse, getKodeverknavn, arbeidsgiverOpplysningerPerId),
           ...setArbeidsforholdInitialValues(andel),
           andelIArbeid: settAndelIArbeid(andel.andelIArbeid),
           fordelingForrigeBehandling: andel.fordelingForrigeBehandlingPrAar || andel.fordelingForrigeBehandlingPrAar === 0
