@@ -30,8 +30,7 @@ export const beregningsgrunnlag = {
         kode: 'ARBEIDSTAKER',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '922745943',
+        arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
@@ -105,8 +104,7 @@ export const beregningsgrunnlag = {
         kode: 'ARBEIDSTAKER',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '922745943',
+        arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
@@ -182,8 +180,7 @@ export const beregningsgrunnlag = {
         kode: 'ARBEIDSTAKER',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '922745943',
+        arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
@@ -218,8 +215,7 @@ export const beregningsgrunnlag = {
         kode: '-',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '883551222',
+        arbeidsgiverIdent: '883551222',
         arbeidsgiverIdVisning: '883551222',
         startdato: '2020-01-01',
         arbeidsforholdType: {
@@ -339,8 +335,7 @@ export const beregningsgrunnlag = {
             kode: 'SYKEPENGER',
           },
         }, {
-          arbeidsgiverNavn: 'Arbeidsgiveren',
-          arbeidsgiverId: '922745943',
+          arbeidsgiverIdent: '922745943',
           fom: '2019-08-01',
           tom: '2020-01-31',
           arbeidsforholdType: {
@@ -351,8 +346,7 @@ export const beregningsgrunnlag = {
       }, {
         tom: '2019-08-01',
         aktiviteter: [{
-          arbeidsgiverNavn: 'Arbeidsgiveren',
-          arbeidsgiverId: '991945970',
+          arbeidsgiverIdent: '991945970',
           fom: '2018-02-01',
           tom: '2019-07-31',
           arbeidsforholdType: {
@@ -373,7 +367,6 @@ export const beregningsgrunnlag = {
         kodeverk: 'AKTIVITET_STATUS',
         kode: 'FL',
       },
-      visningsnavn: 'Frilans',
       arbeidsforhold: {
         arbeidsforholdType: {
           kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
@@ -394,10 +387,8 @@ export const beregningsgrunnlag = {
         kodeverk: 'AKTIVITET_STATUS',
         kode: 'AT',
       },
-      visningsnavn: 'Arbeidsgiveren (922745943)',
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '922745943',
+        arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
@@ -453,8 +444,7 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 2,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '922745943',
+            arbeidsgiverIdent: '922745943',
             arbeidsgiverIdVisning: '922745943',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
@@ -518,8 +508,7 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 2,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '922745943',
+            arbeidsgiverIdent: '922745943',
             arbeidsgiverIdVisning: '922745943',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
@@ -584,8 +573,7 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 2,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '922745943',
+            arbeidsgiverIdent: '922745943',
             arbeidsgiverIdVisning: '922745943',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
@@ -618,8 +606,7 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 3,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '883551222',
+            arbeidsgiverIdent: '883551222',
             arbeidsgiverIdVisning: '883551222',
             startdato: '2020-01-01',
             arbeidsforholdType: {
@@ -653,8 +640,7 @@ export const beregningsgrunnlag = {
         skalKunneEndreRefusjon: false,
       }],
       arbeidsforholdTilFordeling: [{
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '883551222',
+        arbeidsgiverIdent: '883551222',
         arbeidsgiverIdVisning: '883551222',
         startdato: '2020-01-01',
         arbeidsforholdType: {

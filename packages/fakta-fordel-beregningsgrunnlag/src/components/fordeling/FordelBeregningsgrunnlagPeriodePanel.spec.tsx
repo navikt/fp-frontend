@@ -5,8 +5,7 @@ import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeri
 const stpBeregning = '2018-01-01';
 
 const arbeidsforhold = {
-  arbeidsgiverNavn: 'Virksomheten',
-  arbeidsgiverId: '3284788923',
+  arbeidsgiverIdent: '3284788923',
   arbeidsforholdId: '321378huda7e2',
   eksternArbeidsforholdId: '12345',
   startdato: '2017-01-01',
@@ -14,8 +13,7 @@ const arbeidsforhold = {
 };
 
 const arbeidsforhold2 = {
-  arbeidsgiverNavn: 'Virksomheten 2',
-  arbeidsgiverId: '32847889234234233',
+  arbeidsgiverIdent: '32847889234234233',
   arbeidsforholdId: '3534gggg4g45',
   eksternArbeidsforholdId: '234567',
   startdato: '2017-01-01',
@@ -23,8 +21,7 @@ const arbeidsforhold2 = {
 };
 
 const arbeidsforholdEtterStp = {
-  arbeidsgiverNavn: 'Virksomheten',
-  arbeidsgiverId: '3284788923',
+  arbeidsgiverIdent: '3284788923',
   arbeidsforholdId: '321378huda7e2',
   eksternArbeidsforholdId: '345678',
   startdato: '2018-05-01',
@@ -199,8 +196,19 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         },
       ],
     };
-
-    const initialValues = FordelBeregningsgrunnlagPeriodePanel.buildInitialValues(periode, bgPeriode, stpBeregning, false, getKodeverknavn);
+    const agOpplysninger = {
+      3284788923: {
+        navn: 'Virksomheten',
+        identifikator: '3284788923',
+        erPrivatPerson: false,
+      },
+      32847889234234233: {
+        navn: 'Virksomheten 2',
+        identifikator: '3284788923',
+        erPrivatPerson: false,
+      },
+    };
+    const initialValues = FordelBeregningsgrunnlagPeriodePanel.buildInitialValues(periode, bgPeriode, stpBeregning, false, getKodeverknavn, agOpplysninger);
     expect(initialValues).toHaveLength(9);
     const arbeidstakerAndelerBeforeStp = initialValues.filter(({ arbeidsperiodeFom }) => arbeidsperiodeFom !== ''
     && moment(arbeidsperiodeFom).isBefore(moment(stpBeregning)))

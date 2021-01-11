@@ -4,7 +4,8 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 
-import createVisningsnavnForAktivitet from './util/visningsnavnHelper';
+import { ArbeidsgiverOpplysningerPerId, FordelBeregningsgrunnlagAndel, Kodeverk } from '@fpsak-frontend/types';
+import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
 const nullOrUndefined = (value) => value === null || value === undefined;
 
@@ -25,12 +26,19 @@ export const settAndelIArbeid = (andelerIArbeid) => {
 const finnnInntektskategorikode = (andel) => (andel.inntektskategori
 && andel.inntektskategori.kode !== inntektskategorier.UDEFINERT ? andel.inntektskategori.kode : '');
 
-const createAndelnavn = (andel, harKunYtelse, getKodeverknavn) => {
+const createAndelnavn = (andel: FordelBeregningsgrunnlagAndel,
+  harKunYtelse: boolean,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
   if (!andel.aktivitetStatus || andel.aktivitetStatus.kode === aktivitetStatus.UDEFINERT) {
     return '';
   }
   if (andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold) {
-    return createVisningsnavnForAktivitet(andel.arbeidsforhold, getKodeverknavn);
+    const agOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
+    if (!agOpplysninger) {
+      return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
+    }
+    return createVisningsnavnForAktivitetFordeling(agOpplysninger, andel.arbeidsforhold.eksternArbeidsforholdId);
   }
   if (harKunYtelse && andel.aktivitetStatus.kode === aktivitetStatus.BRUKERS_ANDEL) {
     return 'Ytelse';
@@ -49,28 +57,21 @@ export const settFastsattBelop = (fordeltPrAar, bruttoPrAar,
   return skalPreutfyllesMedBeregningsgrunnlag && !nullOrUndefined(bruttoPrAar) ? formatCurrencyNoKr(bruttoPrAar) : '';
 };
 
-const finnArbeidsgiverId = (arbeidsforhold) => {
-  if (!arbeidsforhold) {
-    return '';
-  }
-  if (arbeidsforhold.aktørId) {
-    return arbeidsforhold.aktørId;
-  }
-  return arbeidsforhold.arbeidsgiverId ? arbeidsforhold.arbeidsgiverId : '';
-};
-
-export const setArbeidsforholdInitialValues = (andel) => ({
-  arbeidsgiverNavn: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverNavn !== 0 ? andel.arbeidsforhold.arbeidsgiverNavn : '',
-  arbeidsgiverId: finnArbeidsgiverId(andel.arbeidsforhold),
-  arbeidsforholdId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdId !== 0 ? andel.arbeidsforhold.arbeidsforholdId : '',
+export const setArbeidsforholdInitialValues = (andel: FordelBeregningsgrunnlagAndel) => ({
+  arbeidsgiverNavn: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverNavn ? andel.arbeidsforhold.arbeidsgiverNavn : '',
+  arbeidsgiverId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverIdent ? andel.arbeidsforhold.arbeidsgiverIdent : '',
+  arbeidsforholdId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdId ? andel.arbeidsforhold.arbeidsforholdId : '',
   arbeidsperiodeFom: andel.arbeidsforhold ? andel.arbeidsforhold.startdato : '',
   arbeidsperiodeTom: andel.arbeidsforhold && andel.arbeidsforhold.opphoersdato !== null
     ? andel.arbeidsforhold.opphoersdato : '',
   arbeidsforholdType: andel.arbeidsforholdType,
 });
 
-export const setGenerellAndelsinfo = (andel, harKunYtelse, getKodeverknavn) => ({
-  andel: createAndelnavn(andel, harKunYtelse, getKodeverknavn),
+export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
+  harKunYtelse: boolean,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => ({
+  andel: createAndelnavn(andel, harKunYtelse, getKodeverknavn, arbeidsgiverOpplysningerPerId),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
   nyAndel: false,
@@ -81,7 +82,7 @@ export const setGenerellAndelsinfo = (andel, harKunYtelse, getKodeverknavn) => (
 });
 
 export const starterPaaEllerEtterStp = (bgAndel,
-  skjaeringstidspunktBeregning) => (bgAndel && bgAndel.arbeidsforhold
+  skjaeringstidspunktBeregning): boolean => (bgAndel && bgAndel.arbeidsforhold
     && bgAndel.arbeidsforhold.startdato && !moment(bgAndel.arbeidsforhold.startdato).isBefore(moment(skjaeringstidspunktBeregning)));
 
 export const mapToBelop = (andel) => {

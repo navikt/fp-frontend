@@ -31,8 +31,7 @@ export const beregningsgrunnlag = {
         kode: 'ARBEIDSTAKER',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '123456789',
+        arbeidsgiverIdent: '123456789',
         arbeidsgiverIdVisning: '123456789',
         startdato: '2017-03-01',
         arbeidsforholdType: {
@@ -131,8 +130,7 @@ export const beregningsgrunnlag = {
         kode: 'ARBEIDSTAKER',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '123456789',
+        arbeidsgiverIdent: '123456789',
         arbeidsgiverIdVisning: '123456789',
         startdato: '2017-03-01',
         arbeidsforholdType: {
@@ -231,8 +229,7 @@ export const beregningsgrunnlag = {
         kode: 'ARBEIDSTAKER',
       },
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '123456789',
+        arbeidsgiverIdent: '123456789',
         arbeidsgiverIdVisning: '123456789',
         startdato: '2017-03-01',
         arbeidsforholdType: {
@@ -344,8 +341,7 @@ export const beregningsgrunnlag = {
             kode: 'NÆRING',
           },
         }, {
-          arbeidsgiverNavn: 'Arbeidsgiveren',
-          arbeidsgiverId: '123456789',
+          arbeidsgiverIdent: '123456789',
           fom: '2017-03-01',
           tom: '9999-12-31',
           arbeidsforholdType: {
@@ -363,8 +359,7 @@ export const beregningsgrunnlag = {
       }, {
         tom: '2018-09-02',
         aktiviteter: [{
-          arbeidsgiverNavn: 'Arbeidsgiveren',
-          arbeidsgiverId: '123456700',
+          arbeidsgiverIdent: '123456700',
           fom: '2018-01-10',
           tom: '2018-09-01',
           arbeidsforholdType: {
@@ -385,10 +380,8 @@ export const beregningsgrunnlag = {
         kodeverk: 'AKTIVITET_STATUS',
         kode: 'AT',
       },
-      visningsnavn: 'Arbeidsgiveren (123456789)',
       arbeidsforhold: {
-        arbeidsgiverNavn: 'Arbeidsgiveren',
-        arbeidsgiverId: '123456789',
+        arbeidsgiverIdent: '123456789',
         arbeidsgiverIdVisning: '123456789',
         startdato: '2017-03-01',
         arbeidsforholdType: {
@@ -435,8 +428,7 @@ export const beregningsgrunnlag = {
         fordelBeregningsgrunnlagAndeler: [{
           andelsnr: 1,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '123456789',
+            arbeidsgiverIdent: '123456789',
             arbeidsgiverIdVisning: '123456789',
             startdato: '2017-03-01',
             arbeidsforholdType: {
@@ -499,8 +491,7 @@ export const beregningsgrunnlag = {
         fordelBeregningsgrunnlagAndeler: [{
           andelsnr: 1,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '123456789',
+            arbeidsgiverIdent: '123456789',
             arbeidsgiverIdVisning: '123456789',
             startdato: '2017-03-01',
             arbeidsforholdType: {
@@ -563,8 +554,7 @@ export const beregningsgrunnlag = {
         fordelBeregningsgrunnlagAndeler: [{
           andelsnr: 1,
           arbeidsforhold: {
-            arbeidsgiverNavn: 'Arbeidsgiveren',
-            arbeidsgiverId: '123456789',
+            arbeidsgiverIdent: '123456789',
             arbeidsgiverIdVisning: '123456789',
             startdato: '2017-03-01',
             arbeidsforholdType: {
