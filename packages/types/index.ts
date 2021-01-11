@@ -10,17 +10,19 @@ export {
   RelevanteStatuserProp,
   SammenligningsgrunlagProp,
   BeregningsgrunnlagPeriodeProp,
+} from './src/beregningsgrunnlagTsType';
+export {
+  default as FaktaOmBeregning,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
   BeregningAktivitet,
-  FaktaOmBeregning,
   KunYtelse,
   AndelForFaktaOmBeregning,
   KortvarigAndel,
   VurderMottarYtelse,
   ArbeidstakerUtenIMAndel,
   RefusjonskravSomKommerForSentListe,
-} from './src/beregningsgrunnlagTsType';
+} from './src/beregningsgrunnlagFaktaTsType';
 export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export {
   RefusjonTilVurderingAndel,

@@ -11,7 +11,6 @@ import {
 import { VurderAktiviteterTabell, lagAktivitetFieldId, skalVurdereAktivitet } from './VurderAktiviteterTabell';
 
 const aktivitet1 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren',
   arbeidsgiverId: '384723894723',
   arbeidsgiverIdVisning: '384723894723',
   fom: '2019-01-01',
@@ -21,7 +20,6 @@ const aktivitet1 = {
 };
 
 const aktivitet2 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren2',
   arbeidsgiverId: '334534623342',
   arbeidsgiverIdVisning: '334534623342',
   arbeidsforholdId: 'efj8343f34f',
@@ -33,10 +31,8 @@ const aktivitet2 = {
 };
 
 const aktivitet3 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren3',
   aktørIdString: '324234234234',
-  arbeidsgiverId: '1960-01-01',
-  arbeidsgiverIdVisning: '1960-01-01',
+  arbeidsgiverId: '324234234234',
   arbeidsforholdId: 'efj8343f34f',
   eksternArbeidsforholdId: '56789',
   fom: '2019-01-01',
@@ -69,6 +65,25 @@ const aktiviteter = [
   aktivitet3,
   aktivitetAAP,
 ];
+
+const agOpplysninger = {
+  324234234234: {
+    identifikator: '324234234234',
+    navn: 'Arbeidsgiveren3',
+    erPrivatPerson: true,
+    fødselsdato: '1960-01-01',
+  },
+  334534623342: {
+    identifikator: '334534623342',
+    navn: 'Arbeidsgiveren2',
+    erPrivatPerson: false,
+  },
+  384723894723: {
+    identifikator: '384723894723',
+    navn: 'Arbeidsgiveren',
+    erPrivatPerson: false,
+  },
+};
 
 const alleKodeverk = {
   [kodeverkTyper.OPPTJENING_AKTIVITET_TYPE]: [{
@@ -110,6 +125,7 @@ describe('<VurderAktiviteterTabell>', () => {
       tomDatoForAktivitetGruppe="2019-02-01"
       reduxChange={changeCallback}
       behandlingFormName="formname"
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
 
     const heading = wrapper.find(FormattedMessage).first();
@@ -163,6 +179,7 @@ describe('<VurderAktiviteterTabell>', () => {
       tomDatoForAktivitetGruppe="2019-02-01"
       reduxChange={changeCallback}
       behandlingFormName="formname"
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
 
     const heading = wrapper.find(FormattedMessage).first();
@@ -195,6 +212,7 @@ describe('<VurderAktiviteterTabell>', () => {
       tomDatoForAktivitetGruppe="2019-02-01"
       reduxChange={changeCallback}
       behandlingFormName="formname"
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
 
     const heading = wrapper.find(FormattedMessage).first();
@@ -261,7 +279,7 @@ describe('<VurderAktiviteterTabell>', () => {
   });
 
   it('skal bygge initial values', () => {
-    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter, alleKodeverk, false, true, true);
+    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter, alleKodeverk, false, true, true, agOpplysninger);
     expect(initialValues[id1].beregningAktivitetNavn).toBe('Arbeidsgiveren (384723894723)');
     expect(initialValues[id1].fom).toBe('2019-01-01');
     expect(initialValues[id1].tom).toBe(null);
@@ -284,7 +302,7 @@ describe('<VurderAktiviteterTabell>', () => {
   });
 
   it('skal bygge initial values for overstyrer', () => {
-    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter, alleKodeverk, false, false, true);
+    const initialValues = VurderAktiviteterTabell.buildInitialValues(aktiviteter, alleKodeverk, false, false, true, agOpplysninger);
     expect(initialValues[id1].beregningAktivitetNavn).toBe('Arbeidsgiveren (384723894723)');
     expect(initialValues[id1].fom).toBe('2019-01-01');
     expect(initialValues[id1].tom).toBe(null);

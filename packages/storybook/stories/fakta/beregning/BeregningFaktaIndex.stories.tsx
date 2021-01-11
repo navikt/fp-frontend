@@ -179,6 +179,24 @@ export default {
   decorators: [withKnobs, withReduxProvider],
 };
 
+const agOpplysninger = {
+  12345678: {
+    navn: 'Bedriften',
+    identifikator: '12345678',
+    erPrivatPerson: false,
+  },
+  12345679: {
+    navn: 'Bedriften2',
+    identifikator: '12345679',
+    erPrivatPerson: false,
+  },
+  12345671: {
+    navn: 'Bedriften3',
+    identifikator: '12345671',
+    erPrivatPerson: false,
+  },
+};
+
 export const ArbeidOgDagpenger = () => (
   <BeregningFaktaIndex
     behandling={behandling}
