@@ -84,6 +84,7 @@ const standardFaktaArbeidstakerAndel = {
   arbeidsforhold: {
     arbeidsgiverNavn: 'Bedriften',
     arbeidsgiverId: '12345678',
+    arbeidsgiverIdent: '12345678',
     arbeidsforholdId: null,
     startdato: '01.01.2019',
     opphoersdato: null,
@@ -98,6 +99,7 @@ const standardFaktaArbeidstakerAndel2 = {
   arbeidsforhold: {
     arbeidsgiverNavn: 'Bedriften2',
     arbeidsgiverId: '12345679',
+    arbeidsgiverIdent: '12345679',
     arbeidsforholdId: null,
     startdato: '01.01.2019',
     opphoersdato: '01.01.2020',
@@ -112,6 +114,7 @@ const tidsbegrensetFaktaArbeidstakerAndel = {
   arbeidsforhold: {
     arbeidsgiverNavn: 'Bedriften3',
     arbeidsgiverId: '12345671',
+    arbeidsgiverIdent: '12345671',
     arbeidsforholdId: null,
     startdato: '01.09.2019',
     opphoersdato: '01.01.2020',
@@ -126,6 +129,7 @@ const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
   arbeidsforhold: {
     arbeidsgiverNavn: 'Bedriften4',
     arbeidsgiverId: '795349533',
+    arbeidsgiverIdent: '795349533',
     arbeidsforholdId: null,
     startdato: '01.09.2019',
     opphoersdato: null,
@@ -195,6 +199,16 @@ const agOpplysninger = {
     identifikator: '12345671',
     erPrivatPerson: false,
   },
+  795349533: {
+    navn: 'Bedriften4',
+    identifikator: '795349533',
+    erPrivatPerson: false,
+  },
+  910909088: {
+    navn: 'BEDRIFT AS',
+    identifikator: '910909088',
+    erPrivatPerson: false,
+  },
 };
 
 export const ArbeidOgDagpenger = () => (
@@ -211,6 +225,7 @@ export const ArbeidOgDagpenger = () => (
     readOnly={boolean('readOnly', false)}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
+    arbeidsgiverOpplysningerPerId={agOpplysninger}
   />
 );
 
@@ -257,6 +272,7 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -354,6 +370,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -418,6 +435,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -478,6 +496,7 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -537,6 +556,7 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -599,6 +619,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -663,6 +684,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -710,6 +732,7 @@ export const VurderingAvMilitær = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -775,6 +798,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -824,6 +848,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -872,6 +897,7 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -924,6 +950,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -971,6 +998,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -1174,6 +1202,7 @@ export const KombinasjonstestForFaktapanel = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -1254,6 +1283,7 @@ export const OverstyringAvInntekt = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };
@@ -1306,6 +1336,7 @@ export const VurderKunYtelseBesteberegning = () => {
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />
   );
 };

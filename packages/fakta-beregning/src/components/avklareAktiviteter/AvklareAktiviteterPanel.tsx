@@ -78,7 +78,7 @@ const getHelpTextsAvklarAktiviteter = createSelector(
 
 const skalViseSubmitKnappEllerBegrunnelse = (aksjonspunkter, erOverstyrt) => hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || erOverstyrt;
 
-const buildInitialValues = (aksjonspunkter, avklarAktiviteter, alleKodeverk, harOverstyrt = false, arbeidsgiverOpplysningerPerId) => {
+const buildInitialValues = (aksjonspunkter, avklarAktiviteter, alleKodeverk, arbeidsgiverOpplysningerPerId, harOverstyrt = false) => {
   const harAvklarAksjonspunkt = hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter);
   const erOverstyrt = hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter);
   let initialValues = {};
@@ -175,7 +175,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
       erOverstyrtKnappTrykket: !erOverstyrtKnappTrykket,
     }));
     formInitialize(`${behandlingFormPrefix}.${formNameAvklarAktiviteter}`, buildInitialValues(aksjonspunkter, avklarAktiviteter,
-      alleKodeverk, !erOverstyrtKnappTrykket, arbeidsgiverOpplysningerPerId));
+      alleKodeverk, arbeidsgiverOpplysningerPerId, !erOverstyrtKnappTrykket));
   }
 
   render() {

@@ -147,23 +147,28 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
 }) => {
   const listeSomSkalVurderes = finnListerSomSkalVurderes(aktiviteterTomDatoMapping, values, erOverstyrt);
   const gjeldendeSkjæringstidspunkt = utledGjeldendeSkjæringstidspunkt(values, listeSomSkalVurderes);
-  return listeSomSkalVurderes.map((aktivitetMap) => (
-    <VurderAktiviteterTabell
-      readOnly={readOnly}
-      isAksjonspunktClosed={isAksjonspunktClosed}
-      aktiviteter={aktivitetMap.aktiviteter}
-      erOverstyrt={erOverstyrt}
-      harAksjonspunkt={harAksjonspunkt}
-      alleKodeverk={alleKodeverk}
-      tomDatoForAktivitetGruppe={aktivitetMap.tom}
-      valgtSkjæringstidspunkt={gjeldendeSkjæringstidspunkt}
-      ingenAktiviterErBrukt={gjeldendeSkjæringstidspunkt === undefined}
-      formNameAvklarAktiviteter={formNameAvklarAktiviteter}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
-  ));
+  return (
+    <>
+      {listeSomSkalVurderes.map((aktivitetMap) => (
+        <VurderAktiviteterTabell
+          readOnly={readOnly}
+          isAksjonspunktClosed={isAksjonspunktClosed}
+          aktiviteter={aktivitetMap.aktiviteter}
+          erOverstyrt={erOverstyrt}
+          harAksjonspunkt={harAksjonspunkt}
+          alleKodeverk={alleKodeverk}
+          tomDatoForAktivitetGruppe={aktivitetMap.tom}
+          valgtSkjæringstidspunkt={gjeldendeSkjæringstidspunkt}
+          ingenAktiviterErBrukt={gjeldendeSkjæringstidspunkt === undefined}
+          formNameAvklarAktiviteter={formNameAvklarAktiviteter}
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        />
+      ))}
+      ;
+    </>
+  );
 };
 
 VurderAktiviteterPanel.validate = (values, aktiviteterTomDatoMapping, erOverstyrt) => {
