@@ -1,5 +1,5 @@
 import Kodeverk from './kodeverkTsType';
-import RefusjonTilVurdering, {FaktaOmFordeling} from './beregningsgrunnlagFordelingTsType';
+import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 
 type FaktaOmBeregningAndel = Readonly<{

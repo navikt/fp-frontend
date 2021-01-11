@@ -1,5 +1,5 @@
 import Kodeverk from './kodeverkTsType';
-import BeregningsgrunnlagArbeidsforhold from "./beregningsgrunnlagArbeidsforholdTsType";
+import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 
 export type TidligereUtbetalinger = Readonly<{
   fom: string;
