@@ -166,7 +166,6 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       ))}
-      ;
     </>
   );
 };
