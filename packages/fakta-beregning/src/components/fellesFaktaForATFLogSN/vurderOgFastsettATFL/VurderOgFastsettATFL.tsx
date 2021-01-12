@@ -153,7 +153,14 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
   <div>
     <InntektstabellPanel
       key="inntektstabell"
-      tabell={finnInntektstabell(readOnly, behandlingId, behandlingVersjon, beregningsgrunnlag, isAksjonspunktClosed, alleKodeverk, erOverstyrt, arbeidsgiverOpplysningerPerId)}
+      tabell={finnInntektstabell(readOnly,
+        behandlingId,
+        behandlingVersjon,
+        beregningsgrunnlag,
+        isAksjonspunktClosed,
+        alleKodeverk,
+        erOverstyrt,
+        arbeidsgiverOpplysningerPerId)}
       skalViseTabell={skalViseTabell}
       hjelpeTekstId={findInstruksjonForFastsetting(skalHaBesteberegning, skalFastsetteFL, skalFastsetteAT, harKunstigArbeid)}
       readOnly={readOnly}

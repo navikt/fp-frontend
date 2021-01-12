@@ -28,19 +28,6 @@ const arbeidsforhold3 = {
   opphoersdato: '2018-01-01',
 };
 
-const agOpplysninger = {
-  843597943435: {
-    identifikator: '843597943435',
-    navn: 'Virksomheten2',
-    erPrivatPerson: false,
-  },
-  3284788923: {
-    identifikator: '3284788923',
-    navn: 'Virksomheten',
-    erPrivatPerson: false,
-  },
-};
-
 const andel = {
   aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
   andelsnr: 1,

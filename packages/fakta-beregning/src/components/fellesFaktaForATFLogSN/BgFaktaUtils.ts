@@ -9,8 +9,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   AndelForFaktaOmBeregning,
   ArbeidsgiverOpplysningerPerId,
-  Beregningsgrunnlag,
-  KodeverkMedNavn
+  KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';

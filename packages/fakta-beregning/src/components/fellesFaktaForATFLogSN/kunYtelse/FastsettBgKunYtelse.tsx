@@ -4,7 +4,7 @@ import {
   AndelForFaktaOmBeregning,
   ArbeidsgiverOpplysningerPerId,
   KodeverkMedNavn,
-  KunYtelse
+  KunYtelse,
 } from '@fpsak-frontend/types';
 import KunYtelsePanel from './KunYtelsePanel';
 
