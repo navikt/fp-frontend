@@ -3,9 +3,16 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, getKodeverknavnFn, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import { createSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  AndelForFaktaOmBeregning,
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  KodeverkMedNavn
+} from '@fpsak-frontend/types';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
 import { erNyoppstartetFLField } from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
 import { harEtterlonnSluttpakkeField } from './vurderOgFastsettATFL/forms/VurderEtterlonnSluttpakkeForm';
@@ -15,22 +22,40 @@ import { getFormValuesForBeregning } from '../BeregningFormUtils';
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD } from './InntektstabellPanel';
 import AndelFieldValue from './andelFieldValueTs';
+import { createVisningsnavnFakta } from '../ArbeidsforholdHelper';
 
 export const INNTEKT_FIELD_ARRAY_NAME = 'inntektFieldArray';
 
 const preutfyllInntektskategori = (andel) => (andel.inntektskategori
 && andel.inntektskategori.kode !== inntektskategorier.UDEFINERT ? andel.inntektskategori.kode : '');
 
-export const setArbeidsforholdInitialValues = (andel) => ({
-  arbeidsgiverId: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsgiverId : null,
+export const setArbeidsforholdInitialValues = (andel: AndelForFaktaOmBeregning) => ({
+  arbeidsgiverId: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsgiverIdent : null,
   arbeidsforholdId: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsforholdId : null,
   arbeidsperiodeFom: andel.arbeidsforhold ? andel.arbeidsforhold.startdato : '',
   arbeidsperiodeTom: andel.arbeidsforhold ? andel.arbeidsforhold.opphoersdato : '',
-  arbeidsforholdType: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsforholdType : '',
+  arbeidsforholdType: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsforholdType : null,
 });
 
-export const setGenerellAndelsinfo = (andel) => ({
-  andel: andel.visningsnavn,
+const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
+  arbeidsgiverOpplysningerPerId?: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk?: {[key: string]: KodeverkMedNavn[]}): string => {
+  if (!alleKodeverk && !arbeidsgiverOpplysningerPerId) {
+    return andel.aktivitetStatus.kode;
+  }
+  const agOpplysning = andel.arbeidsforhold ? arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent] : undefined;
+  if (!agOpplysning) {
+    return andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdType
+      ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(andel.arbeidsforhold.arbeidsforholdType)
+      : getKodeverknavnFn(alleKodeverk, kodeverkTyper)(andel.aktivitetStatus);
+  }
+  return createVisningsnavnFakta(agOpplysning, andel.arbeidsforhold.eksternArbeidsforholdId);
+};
+
+export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
+  arbeidsgiverOpplysningerPerId?: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk?: {[key: string]: KodeverkMedNavn[]}) => ({
+  andel: lagVisningsnavn(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
   nyAndel: false,
@@ -106,7 +131,7 @@ const andelErEtterlønnSluttpakkeOgSkalFastsettes = (andel, values) => {
 const erAndelKunstigArbeidsforhold = (andel, beregningsgrunnlag) => {
   const firstBgPeriod = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
   const lagtTilAvBruker = firstBgPeriod.beregningsgrunnlagPrStatusOgAndel.find((a) => a.arbeidsforhold
-  && a.arbeidsforhold.arbeidsgiverId === andel.arbeidsgiverId
+  && a.arbeidsforhold.arbeidsgiverIdent === andel.arbeidsgiverId
   && a.arbeidsforhold.organisasjonstype
   && a.arbeidsforhold.organisasjonstype.kode === organisasjonstyper.KUNSTIG);
   return lagtTilAvBruker !== undefined;
@@ -198,8 +223,10 @@ export const mapToBelop = (skalRedigereInntekt) => (andel) => {
   return readOnlyBelop ? removeSpacesFromNumber(readOnlyBelop) : 0;
 };
 
-export const mapAndelToField = (andel): AndelFieldValue => ({
-  ...setGenerellAndelsinfo(andel),
+export const mapAndelToField = (andel: AndelForFaktaOmBeregning,
+  arbeidsgiverOpplysningerPerId?: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk?: {[key: string]: KodeverkMedNavn[]}): AndelFieldValue => ({
+  ...setGenerellAndelsinfo(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   ...setArbeidsforholdInitialValues(andel),
   skalKunneEndreAktivitet: andel.skalKunneEndreAktivitet,
   fastsattBelop: andel.fastsattBelop || andel.fastsattBelop === 0 ? formatCurrencyNoKr(andel.fastsattBelop) : '',

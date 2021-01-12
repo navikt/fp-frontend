@@ -11,6 +11,7 @@ type FaktaOmBeregningAndel = Readonly<{
 export type AndelForFaktaOmBeregning = Readonly<{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   andelsnr?: number;
+  refusjonskrav?: number;
   inntektskategori?: Kodeverk;
   aktivitetStatus?: Kodeverk;
   belopReadOnly?: number;

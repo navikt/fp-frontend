@@ -6,11 +6,9 @@ import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-bere
 const andeler = [
   {
     erTidsbegrensetArbeidsforhold: true,
-    visningsnavn: 'arbeidsgiver 1',
     lagtTilAvSaksbehandler: false,
     arbeidsforhold: {
-      arbeidsgiverNavn: 'arbeidsgiver 1',
-      arbeidsgiverId: '123456789',
+      arbeidsgiverIdent: '123456789',
       arbeidsgiverIdVisning: '123456789',
       startdato: '2017-01-01',
       opphoersdato: '2017-02-02',
@@ -18,11 +16,9 @@ const andeler = [
   },
   {
     erTidsbegrensetArbeidsforhold: true,
-    visningsnavn: 'arbeidsgiver 2',
     lagtTilAvSaksbehandler: false,
     arbeidsforhold: {
-      arbeidsgiverNavn: 'arbeidsgiver 2',
-      arbeidsgiverId: '987654321',
+      arbeidsgiverIdent: '987654321',
       arbeidsgiverIdVisning: '987654321',
       startdato: '2017-02-02',
       opphoersdato: '2017-03-03',
@@ -30,13 +26,26 @@ const andeler = [
   },
 ];
 
+const agOpplysning = {
+  987654321: {
+    navn: 'arbeidsgiver 2',
+    identifikator: '987654321',
+    erPrivatPerson: false,
+  },
+  123456789: {
+    navn: 'arbeidsgiver 1',
+    identifikator: '123456789',
+    erPrivatPerson: false,
+  },
+};
+
 describe('<TidsbegrensetArbeidsforholdForm>', () => {
   it('skal teste at korrekt antall radioknapper vises', () => {
     const wrapper = shallowWithIntl(<TidsbegrensetArbeidsforholdForm
       readOnly={false}
       faktaOmBeregning={{ kortvarigeArbeidsforhold: andeler, andelerForFaktaOmBeregning: [] }}
       isAksjonspunktClosed={false}
-      alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={agOpplysning}
     />);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(4);
@@ -46,7 +55,7 @@ describe('<TidsbegrensetArbeidsforholdForm>', () => {
       readOnly={false}
       faktaOmBeregning={{ kortvarigeArbeidsforhold: andeler, andelerForFaktaOmBeregning: [] }}
       isAksjonspunktClosed={false}
-      alleKodeverk={{}}
+      arbeidsgiverOpplysningerPerId={agOpplysning}
     />);
     const message = wrapper.find('FormattedMessage');
     expect(message).toHaveLength(2);

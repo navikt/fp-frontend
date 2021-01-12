@@ -12,7 +12,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
-  AndelForFaktaOmBeregning,
+  AndelForFaktaOmBeregning, ArbeidsgiverOpplysningerPerId,
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -196,7 +196,9 @@ interface StaticFunctions {
   validate: (values: any,
              erKunYtelse: boolean,
              skalFastsetteInntekt: (andel) => boolean) => any;
-  buildInitialValues: (andeler: AndelForFaktaOmBeregning[]) => any;
+  buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
   transformValues: (values: any) => InntektTransformed;
 }
 
@@ -312,11 +314,13 @@ InntektFieldArrayImpl.validate = (values: AndelFieldValue[], erKunYtelse, skalFa
   return null;
 };
 
-InntektFieldArrayImpl.buildInitialValues = (andeler) => {
+InntektFieldArrayImpl.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
   if (!andeler || andeler.length === 0) {
     return {};
   }
-  return andeler.map((a) => mapAndelToField(a));
+  return andeler.map((a) => mapAndelToField(a, arbeidsgiverOpplysningerPerId, alleKodeverk));
 };
 
 export const mapStateToProps = (state, ownProps) => {

@@ -1,3 +1,5 @@
+import { Kodeverk } from '@fpsak-frontend/types';
+
 type AndelFieldValue = {
   andel: string;
   aktivitetStatus: string;
@@ -9,7 +11,7 @@ type AndelFieldValue = {
   arbeidsforholdId?: string;
   arbeidsperiodeFom?: string;
   arbeidsperiodeTom?: string;
-  arbeidsforholdType?: string;
+  arbeidsforholdType?: Kodeverk;
   skalKunneEndreAktivitet?: boolean
   fastsattBelop?: string;
   belopReadOnly?: string;

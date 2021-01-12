@@ -8,7 +8,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 
 import { ArbeidstakerUtenIMAndel, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { createVisningsnavnForAktivitet } from '../../../ArbeidsforholdHelper';
+import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
 import VurderMottarYtelseForm, {
   frilansMedAndreFrilanstilfeller,
   frilansUtenAndreFrilanstilfeller,
@@ -31,24 +31,21 @@ const beregningsgrunnlag = {
 };
 
 const arbeidsforhold = {
-  arbeidsgiverNavn: 'Virksomheten',
-  arbeidsgiverId: '3284788923',
+  arbeidsgiverIdent: '3284788923',
   arbeidsforholdId: '321378huda7e2',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
 };
 
 const arbeidsforhold2 = {
-  arbeidsgiverNavn: 'Virksomheten2',
-  arbeidsgiverId: '843597943435',
+  arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: 'jjisefoosfe',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
 };
 
 const arbeidsforhold3 = {
-  arbeidsgiverNavn: 'Virksomheten2',
-  arbeidsgiverId: '843597943435',
+  arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: '5465465464',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
@@ -57,18 +54,21 @@ const arbeidsforhold3 = {
 const andel = {
   andelsnr: 1,
   inntektPrMnd: 25000,
+  lagtTilAvSaksbehandler: false,
   arbeidsforhold,
 };
 
 const andel2 = {
   andelsnr: 2,
   inntektPrMnd: 25000,
+  lagtTilAvSaksbehandler: false,
   arbeidsforhold: arbeidsforhold2,
 };
 
 const andel3 = {
   andelsnr: 3,
   inntektPrMnd: 25000,
+  lagtTilAvSaksbehandler: false,
   arbeidsforhold: arbeidsforhold3,
 };
 
@@ -77,6 +77,19 @@ const arbeidstakerAndelerUtenIM = [
   { ...andel2, mottarYtelse: false } as ArbeidstakerUtenIMAndel,
   { ...andel3, mottarYtelse: true } as ArbeidstakerUtenIMAndel,
 ];
+
+const agOpplysninger = {
+  843597943435: {
+    navn: 'Virksomheten2',
+    identifikator: '843597943435',
+    erPrivatPerson: false,
+  },
+  3284788923: {
+    navn: 'Virksomheten',
+    identifikator: '3284788923',
+    erPrivatPerson: false,
+  },
+};
 
 const alleKodeverk = {};
 
@@ -175,6 +188,7 @@ describe('<VurderMottarYtelseForm>', () => {
       tilfeller={[]}
       alleKodeverk={alleKodeverk}
       beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).toHaveLength(1);
@@ -197,6 +211,7 @@ describe('<VurderMottarYtelseForm>', () => {
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
       beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).toHaveLength(1);
@@ -221,6 +236,7 @@ describe('<VurderMottarYtelseForm>', () => {
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
       beregningsgrunnlag={bg as Beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
     const atRadio = wrapper.find(RadioGroupField);
     expect(atRadio).toHaveLength(3);
@@ -230,7 +246,10 @@ describe('<VurderMottarYtelseForm>', () => {
     formattedMsg.forEach((msg, index) => {
       expect(msg.prop('id')).toBe(mottarYtelseForArbeidMsg());
       expect(msg.prop('values')).toEqual(
-        { arbeid: createVisningsnavnForAktivitet(arbeidstakerAndelerUtenIM[index].arbeidsforhold, alleKodeverk) },
+        {
+          arbeid: createVisningsnavnFakta(agOpplysninger[arbeidstakerAndelerUtenIM[index].arbeidsforhold.arbeidsgiverIdent],
+            arbeidstakerAndelerUtenIM[index].arbeidsforhold.eksternArbeidsforholdId),
+        },
       );
     });
   });
