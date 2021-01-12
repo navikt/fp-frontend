@@ -1,7 +1,7 @@
 import Kodeverk from './kodeverkTsType';
 import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
-import FaktaOmBeregning from "./beregningsgrunnlagFaktaTsType";
+import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 
 type Næring = Readonly <{
   orgnr: string;
