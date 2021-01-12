@@ -6,7 +6,7 @@ import { required } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import Beregningsgrunnlag, { FaktaOmBeregning } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 
 /**
  * LonnsendringForm
