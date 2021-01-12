@@ -266,7 +266,7 @@ describe('<VurderAktiviteterTabell>', () => {
     expect(idArbeid).toBe(id2);
   });
 
-  const id3 = '1960-01-01efj8343f34f2019-01-01';
+  const id3 = '324234234234efj8343f34f2019-01-01';
   it('skal lage id for arbeid med aktørId', () => {
     const idArbeid = lagAktivitetFieldId(aktivitet3);
     expect(idArbeid).toBe(id3);
@@ -290,7 +290,7 @@ describe('<VurderAktiviteterTabell>', () => {
     expect(initialValues[id2].tom).toBe('2019-02-02');
     expect(initialValues[id2].skalBrukes).toBe(true);
 
-    expect(initialValues[id3].beregningAktivitetNavn).toBe('Arbeidsgiveren3 (1960-01-01)...6789');
+    expect(initialValues[id3].beregningAktivitetNavn).toBe('Arbeidsgiveren3 (01.01.1960)...6789');
     expect(initialValues[id3].fom).toBe('2019-01-01');
     expect(initialValues[id3].tom).toBe('2019-02-02');
     expect(initialValues[id3].skalBrukes).toBe(false);
@@ -313,7 +313,7 @@ describe('<VurderAktiviteterTabell>', () => {
     expect(initialValues[id2].tom).toBe('2019-02-02');
     expect(initialValues[id2].skalBrukes).toBe(true);
 
-    expect(initialValues[id3].beregningAktivitetNavn).toBe('Arbeidsgiveren3 (1960-01-01)...6789');
+    expect(initialValues[id3].beregningAktivitetNavn).toBe('Arbeidsgiveren3 (01.01.1960)...6789');
     expect(initialValues[id3].fom).toBe('2019-01-01');
     expect(initialValues[id3].tom).toBe('2019-02-02');
     expect(initialValues[id3].skalBrukes).toBe(false);
