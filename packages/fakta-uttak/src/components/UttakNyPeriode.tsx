@@ -118,10 +118,10 @@ const mapArbeidsforhold = (
     periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
   }
 
-  const identifikator = arbeidsgiverOpplysninger.identifikator || '-';
-  const navn = arbeidsgiverOpplysninger.navn || getKodeverknavn(arbeidType);
-  const fixedAktørId = arbeidsgiverOpplysninger.referanse || '-';
-  const virksomhet = !arbeidsgiverOpplysninger.erPrivatPerson || '-';
+  const identifikator = arbeidsgiverOpplysninger?.identifikator || '-';
+  const navn = arbeidsgiverOpplysninger?.navn || getKodeverknavn(arbeidType);
+  const fixedAktørId = arbeidsgiverOpplysninger?.referanse || '-';
+  const virksomhet = !arbeidsgiverOpplysninger?.erPrivatPerson || '-';
 
   return (
     <option value={`${identifikator}|${navn}|${fixedAktørId}|${virksomhet}|${arbeidType.kode}`} key={guid()}>
