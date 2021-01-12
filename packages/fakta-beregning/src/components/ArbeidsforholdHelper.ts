@@ -1,7 +1,9 @@
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { ArbeidsgiverOpplysninger } from '@fpsak-frontend/types';
+import moment from 'moment';
 
-const getEndCharFromId = (id) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
 export const createVisningsnavnForAktivitet = (aktivitet, alleKodeverk) => {
   if (!aktivitet.arbeidsgiverNavn) {
@@ -10,6 +12,16 @@ export const createVisningsnavnForAktivitet = (aktivitet, alleKodeverk) => {
   return aktivitet.arbeidsgiverIdVisning
     ? `${aktivitet.arbeidsgiverNavn} (${aktivitet.arbeidsgiverIdVisning})${getEndCharFromId(aktivitet.eksternArbeidsforholdId)}`
     : aktivitet.arbeidsgiverNavn;
+};
+
+export const createVisningsnavnFakta = (agOpplysning: ArbeidsgiverOpplysninger, eksternArbeidsforholdId: string): string => {
+  if (agOpplysning.erPrivatPerson) {
+    if (agOpplysning.fødselsdato) {
+      return `${agOpplysning.navn} (${moment(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})${getEndCharFromId(eksternArbeidsforholdId)}`;
+    }
+    return `${agOpplysning.navn}${getEndCharFromId(eksternArbeidsforholdId)}`;
+  }
+  return `${agOpplysning.navn} (${agOpplysning.identifikator})${getEndCharFromId(eksternArbeidsforholdId)}`;
 };
 
 export const sortArbeidsforholdList = (arbeidsforhold) => {

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
@@ -28,6 +28,7 @@ type OwnProps = {
     harApneAksjonspunkter: boolean;
     submittable: boolean;
     erOverstyrer: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 const BeregningFaktaIndex: FunctionComponent<OwnProps> = ({
@@ -40,6 +41,7 @@ const BeregningFaktaIndex: FunctionComponent<OwnProps> = ({
   harApneAksjonspunkter,
   submittable,
   erOverstyrer,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <BeregningInfoPanel
@@ -53,6 +55,7 @@ const BeregningFaktaIndex: FunctionComponent<OwnProps> = ({
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submittable={submittable}
       erOverstyrer={erOverstyrer}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>
 );

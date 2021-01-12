@@ -32,6 +32,7 @@ export const beregningsgrunnlag = {
       arbeidsforhold: {
         arbeidsgiverNavn: 'BEDRIFT AS',
         arbeidsgiverId: '910909088',
+        arbeidsgiverIdent: '910909088',
         startdato: '2019-02-03',
         opphoersdato: '2020-02-03',
         arbeidsforholdId: null,
@@ -112,6 +113,7 @@ export const beregningsgrunnlag = {
       arbeidsforhold: {
         arbeidsgiverNavn: 'BEDRIFT AS',
         arbeidsgiverId: '910909088',
+        arbeidsgiverIdent: '910909088',
         startdato: '2019-02-03',
         opphoersdato: '2020-02-03',
         arbeidsforholdId: null,

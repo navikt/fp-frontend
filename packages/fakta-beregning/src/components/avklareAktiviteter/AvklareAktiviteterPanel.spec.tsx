@@ -113,6 +113,25 @@ const id2 = '334534623342efj8343f34f2019-01-01';
 const id3 = '1960-01-01efj8343f34f2019-01-01';
 const idAAP = 'AAP2019-01-01';
 
+const agOpplysninger = {
+  324234234234: {
+    identifikator: '324234234234',
+    navn: 'Arbeidsgiveren3',
+    erPrivatPerson: true,
+    fødselsdato: '1960-01-01',
+  },
+  334534623342: {
+    identifikator: '334534623342',
+    navn: 'Arbeidsgiveren2',
+    erPrivatPerson: false,
+  },
+  384723894723: {
+    identifikator: '384723894723',
+    navn: 'Arbeidsgiveren',
+    erPrivatPerson: false,
+  },
+};
+
 describe('<AvklareAktiviteterPanel>', () => {
   it('skal vise VurderAktiviteterPanel panel', () => {
     const avklarAktiviteter = {
@@ -147,6 +166,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
     />);
     const vurderAktivitetPanel = wrapper.find(VurderAktiviteterPanel);
@@ -179,6 +199,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
     />);
     const radio = wrapper.find(VurderAktiviteterPanel);
@@ -216,6 +237,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
     />);
     expect(wrapper.find(OverstyringKnapp)).toHaveLength(1);
@@ -252,6 +274,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
     />);
     const helptext = wrapper.find(AksjonspunktHelpTextTemp);
@@ -267,6 +290,7 @@ describe('<AvklareAktiviteterPanel>', () => {
 
     const initialValues = buildInitialValuesAvklarAktiviteter({
       alleKodeverk,
+      arbeidsgiverOpplysningerPerId: agOpplysninger,
       aksjonspunkter: apsAvklarAktiviteter,
       readOnly: false,
       submittable: true,
@@ -290,6 +314,7 @@ describe('<AvklareAktiviteterPanel>', () => {
     const aps = [];
     const initialValues = buildInitialValuesAvklarAktiviteter({
       alleKodeverk,
+      arbeidsgiverOpplysningerPerId: agOpplysninger,
       aksjonspunkter: aps,
       readOnly: false,
       submittable: true,
@@ -315,6 +340,7 @@ describe('<AvklareAktiviteterPanel>', () => {
     }];
     const initialValues = buildInitialValuesAvklarAktiviteter({
       alleKodeverk,
+      arbeidsgiverOpplysningerPerId: agOpplysninger,
       aksjonspunkter: aps,
       readOnly: false,
       submittable: true,
