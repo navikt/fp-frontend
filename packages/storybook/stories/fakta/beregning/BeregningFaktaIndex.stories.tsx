@@ -73,7 +73,17 @@ const lagBeregningsgrunnlag = (
 const mapTilKodeliste = (arrayOfCodes) => arrayOfCodes.map((kode) => ({ kode }));
 
 const lagAndel = (andelsnr, aktivitetStatus, inntektskategori) => (
-  { andelsnr, aktivitetStatus: { kode: aktivitetStatus }, inntektskategori: { kode: inntektskategori } }
+  {
+    andelsnr,
+    aktivitetStatus: {
+      kode: aktivitetStatus,
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    inntektskategori: {
+      kode: inntektskategori,
+      kodeverk: 'INNTEKTSKATEGORI',
+    },
+  }
 );
 
 const standardFaktaArbeidstakerAndel = {
@@ -448,8 +458,14 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
   };
   const dagpengerBeregningsgrunnlagAndel = {
     andelsnr: standardFaktaDagpengerAndel.andelsnr,
-    aktivitetStatus: standardFaktaDagpengerAndel.aktivitetStatus,
-    inntektskategori: standardFaktaDagpengerAndel.inntektskategori,
+    aktivitetStatus: {
+      kode: standardFaktaDagpengerAndel.aktivitetStatus,
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    inntektskategori: {
+      kode: standardFaktaDagpengerAndel.inntektskategori,
+      kodeverk: 'INNTEKTSKATEGORI',
+    },
   };
   const andeler = [
     arbeidstakerBeregningsgrunnlagAndel,
