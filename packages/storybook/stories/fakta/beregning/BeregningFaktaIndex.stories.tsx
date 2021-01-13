@@ -60,8 +60,8 @@ const lagBeregningsgrunnlag = (
       beregningsgrunnlagPrStatusOgAndel: andeler.map((andel) => (
         {
           andelsnr: andel.andelsnr,
-          aktivitetStatus: { kode: andel.aktivitetStatus },
-          inntektskategori: { kode: andel.inntektskategori },
+          aktivitetStatus: andel.aktivitetStatus,
+          inntektskategori: andel.inntektskategori,
           erNyoppstartet: andel.erNyoppstartet,
         }
       )),
