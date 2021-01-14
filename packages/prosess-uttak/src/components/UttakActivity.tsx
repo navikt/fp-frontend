@@ -429,7 +429,7 @@ const warningUttakActivity = (values: FormValues): any => {
           _warning:
   <AlertStripe type="advarsel" className={styles.advarsel}>
     <FormattedMessage
-      id="ValidationMessage.MerEn100ProsentOgOgyldigUtsettlse"
+      id="UttakActivity.MerEn100ProsentOgOgyldigUtsettlse"
     />
   </AlertStripe>,
         };
@@ -439,7 +439,7 @@ const warningUttakActivity = (values: FormValues): any => {
           _warning:
   <AlertStripe type="advarsel" className={styles.advarsel}>
     <FormattedMessage
-      id="ValidationMessage.MerEn100Prosent"
+      id="UttakActivity.MerEn100Prosent"
     />
   </AlertStripe>,
         };
