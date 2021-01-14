@@ -22,6 +22,7 @@ const svangerskapspengerData = [
   { key: SvpBehandlingApiKeys.SOKNAD },
   { key: SvpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
   { key: SvpBehandlingApiKeys.BEREGNINGSGRUNNLAG },
+  { key: SvpBehandlingApiKeys.FERIEPENGEGRUNNLAG },
   { key: SvpBehandlingApiKeys.SIMULERING_RESULTAT },
   { key: SvpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER }];
 

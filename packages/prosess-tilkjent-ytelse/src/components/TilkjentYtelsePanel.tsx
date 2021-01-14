@@ -10,11 +10,20 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode, FamilieHendelse, KodeverkMedNavn, Personopplysninger, Soknad,
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsresultatFp,
+  BeregningsresultatPeriode,
+  FamilieHendelse,
+  Feriepengegrunnlag,
+  KodeverkMedNavn,
+  Personopplysninger,
+  Soknad,
 } from '@fpsak-frontend/types';
 import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
+import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse, { PeriodeMedId } from './TilkjentYtelse';
 
 const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] => perioder
@@ -40,6 +49,7 @@ interface PureOwnProps {
   submitCallback: (data: any) => Promise<any>;
   readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  feriepengegrunnlag?: Feriepengegrunnlag;
 }
 
 interface MappedOwnProps {
@@ -64,6 +74,7 @@ export const TilkjentYtelsePanelImpl: FunctionComponent<PureOwnProps & MappedOwn
   behandlingId,
   behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
+  feriepengegrunnlag,
 }) => (
   <>
     <Undertittel>
@@ -82,6 +93,10 @@ export const TilkjentYtelsePanelImpl: FunctionComponent<PureOwnProps & MappedOwn
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       )}
+    { feriepengegrunnlag
+    && (
+      <FeriepengerIndex feriepengegrunnlag={feriepengegrunnlag} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} alleKodeverk={alleKodeverk} />
+    )}
     { vurderTilbaketrekkAP
     && (
     <Tilbaketrekkpanel

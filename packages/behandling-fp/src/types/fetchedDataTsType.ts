@@ -1,6 +1,17 @@
 import {
-  BeregningsresultatFp, Aksjonspunkt, Vilkar, Personopplysninger, Ytelsefordeling, Soknad, InntektArbeidYtelse,
-  Beregningsgrunnlag, UttakStonadskontoer, UttaksresultatPeriode, SimuleringResultat, UttakKontrollerAktivitetskrav,
+  BeregningsresultatFp,
+  Aksjonspunkt,
+  Vilkar,
+  Personopplysninger,
+  Ytelsefordeling,
+  Soknad,
+  InntektArbeidYtelse,
+  Beregningsgrunnlag,
+  UttakStonadskontoer,
+  UttaksresultatPeriode,
+  SimuleringResultat,
+  UttakKontrollerAktivitetskrav,
+  Feriepengegrunnlag,
 } from '@fpsak-frontend/types';
 
 interface FetchedData {
@@ -16,6 +27,7 @@ interface FetchedData {
   uttaksresultatPerioder: UttaksresultatPeriode[];
   simuleringResultat: SimuleringResultat;
   uttakKontrollerAktivitetskrav?: UttakKontrollerAktivitetskrav[];
+  feriepengegrunnlag: Feriepengegrunnlag;
 }
 
 export default FetchedData;

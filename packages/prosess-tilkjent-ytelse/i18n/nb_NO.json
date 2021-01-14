@@ -24,7 +24,13 @@
   "TilkjentYtelse.PeriodeData.Dagpenger": "Dagpenger",
   "TilkjentYtelse.PeriodeData.AAP": "Arbeidsavklaringspenger",
   "TilkjentYtelse.PeriodeData.BrukersAndel": "Brukers andel",
-  
+
+  "TilkjentYtelse.Feriepenger.Tittel": "Feriepengegrunnlag",
+  "TilkjentYtelse.Feriepenger.Opptjeningsår": "Opptjent i {år}",
+  "TilkjentYtelse.Feriepenger.AndelNavn": "Andel",
+  "TilkjentYtelse.Feriepenger.GrunnlagSøker": "Beløp til søker",
+  "TilkjentYtelse.Feriepenger.GrunnlagRefusjon": "Beløp til arbeidsgiver",
+
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
   "Malform.Beskrivelse": "Foretrukket språk",
   "UttakInfoPanel.AntallEnDagOgEnUke": "{weeks} uke {days} dag",

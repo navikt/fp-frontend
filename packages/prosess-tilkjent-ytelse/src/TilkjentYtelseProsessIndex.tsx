@@ -2,7 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad,
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsresultatFp,
+  Fagsak,
+  FamilieHendelseSamling,
+  Feriepengegrunnlag,
+  Personopplysninger,
+  Soknad,
 } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
@@ -23,6 +29,7 @@ interface OwnProps {
   soknad: Soknad;
   fagsak: Fagsak;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  feriepengegrunnlag?: Feriepengegrunnlag;
 }
 
 const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
@@ -38,6 +45,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFo
   submitCallback,
   readOnlySubmitButton,
   arbeidsgiverOpplysningerPerId,
+  feriepengegrunnlag,
 }) => (
   <RawIntlProvider value={intl}>
     <TilkjentYtelsePanel
@@ -54,6 +62,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFo
       submitCallback={submitCallback}
       readOnlySubmitButton={readOnlySubmitButton}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      feriepengegrunnlag={feriepengegrunnlag}
     />
   </RawIntlProvider>
 );
