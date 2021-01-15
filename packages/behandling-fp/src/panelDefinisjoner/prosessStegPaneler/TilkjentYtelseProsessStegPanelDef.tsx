@@ -60,6 +60,7 @@ class PanelDef extends ProsessStegPanelDef {
 
   getEndepunkter = () => [
     FpBehandlingApiKeys.FAMILIEHENDELSE,
+    FpBehandlingApiKeys.FERIEPENGEGRUNNLAG,
   ]
 
   getOverstyrVisningAvKomponent = () => true
@@ -69,13 +70,12 @@ class PanelDef extends ProsessStegPanelDef {
   )
 
   getData = ({
-    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId, feriepengegrunnlag,
+    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId,
   }: Data) => ({
     fagsak,
     personopplysninger,
     soknad,
     arbeidsgiverOpplysningerPerId,
-    feriepengegrunnlag,
     beregningresultat: beregningresultatForeldrepenger,
   })
 }

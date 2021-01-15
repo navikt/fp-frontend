@@ -42,6 +42,7 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
+    SvpBehandlingApiKeys.FERIEPENGEGRUNNLAG,
     SvpBehandlingApiKeys.FAMILIEHENDELSE,
   ]
 
@@ -52,13 +53,12 @@ class PanelDef extends ProsessStegPanelDef {
   )
 
   getData = ({
-    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId, feriepengegrunnlag,
+    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId,
   }: Data) => ({
     fagsak,
     personopplysninger,
     soknad,
     arbeidsgiverOpplysningerPerId,
-    feriepengegrunnlag,
     beregningresultat: beregningresultatForeldrepenger,
   })
 }

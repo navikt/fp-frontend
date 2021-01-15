@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -88,8 +88,10 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
   if (!alleAndeler || alleAndeler.length < 1) {
     return null;
   }
-  const alleAndelerForÅret = finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår);
-  const andelerPrId = lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk);
+  const alleAndelerForÅret = useMemo(() => finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår),
+    [alleAndeler, opptjeningsår]);
+  const andelerPrId = useMemo(() => lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk),
+    [alleAndelerForÅret]);
 
   return (
     <>

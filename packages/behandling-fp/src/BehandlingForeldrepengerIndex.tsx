@@ -24,7 +24,6 @@ const foreldrepengerData = [
   { key: FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
   { key: FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER },
   { key: FpBehandlingApiKeys.BEREGNINGSGRUNNLAG },
-  { key: FpBehandlingApiKeys.FERIEPENGEGRUNNLAG },
   { key: FpBehandlingApiKeys.UTTAK_STONADSKONTOER },
   { key: FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER },
   { key: FpBehandlingApiKeys.SIMULERING_RESULTAT },

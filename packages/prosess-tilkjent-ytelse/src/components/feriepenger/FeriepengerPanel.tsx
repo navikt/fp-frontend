@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
@@ -28,7 +28,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   erPanelÅpent: boolean;
-  togglePanel: any;
+  togglePanel: () => void;
 }
 
 export const FeriepengerPanel: FunctionComponent<OwnProps> = ({
@@ -38,7 +38,7 @@ export const FeriepengerPanel: FunctionComponent<OwnProps> = ({
   if (!andeler || andeler.length < 1) {
     return null;
   }
-  const opptjeningsår = finnListeMedOpptjeningsår(andeler);
+  const opptjeningsår = useMemo(() => finnListeMedOpptjeningsår(andeler), [andeler]);
   return (
     <>
       <Row>
