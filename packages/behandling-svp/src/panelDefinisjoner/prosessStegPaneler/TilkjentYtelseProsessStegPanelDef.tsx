@@ -6,9 +6,8 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Personopplysninger, Soknad,
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Feriepengegrunnlag, Personopplysninger, Soknad,
 } from '@fpsak-frontend/types';
-
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
 const harPeriodeMedUtbetaling = (perioder) => {
@@ -31,6 +30,7 @@ type Data = {
   beregningresultatForeldrepenger: BeregningsresultatFp;
   personopplysninger: Personopplysninger;
   soknad: Soknad;
+  feriepengegrunnlag: Feriepengegrunnlag;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -42,6 +42,7 @@ class PanelDef extends ProsessStegPanelDef {
   ]
 
   getEndepunkter = () => [
+    SvpBehandlingApiKeys.FERIEPENGEGRUNNLAG,
     SvpBehandlingApiKeys.FAMILIEHENDELSE,
   ]
 
