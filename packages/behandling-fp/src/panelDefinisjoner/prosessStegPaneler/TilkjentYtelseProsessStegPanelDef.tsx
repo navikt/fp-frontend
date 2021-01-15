@@ -7,7 +7,14 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Personopplysninger, Soknad, UttaksresultatPeriode, BeregningsresultatPeriode,
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsresultatFp,
+  Fagsak,
+  Personopplysninger,
+  Soknad,
+  UttaksresultatPeriode,
+  BeregningsresultatPeriode,
+  Feriepengegrunnlag,
 } from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
@@ -41,6 +48,7 @@ type Data = {
   soknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttaksresultatPerioder: UttaksresultatPeriode;
+  feriepengegrunnlag: Feriepengegrunnlag;
 }
 
 class PanelDef extends ProsessStegPanelDef {
@@ -52,6 +60,7 @@ class PanelDef extends ProsessStegPanelDef {
 
   getEndepunkter = () => [
     FpBehandlingApiKeys.FAMILIEHENDELSE,
+    FpBehandlingApiKeys.FERIEPENGEGRUNNLAG,
   ]
 
   getOverstyrVisningAvKomponent = () => true
