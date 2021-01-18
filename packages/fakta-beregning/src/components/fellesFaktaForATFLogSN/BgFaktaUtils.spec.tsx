@@ -1,6 +1,7 @@
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
 import { erNyoppstartetFLField } from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
 import {
@@ -36,6 +37,29 @@ const arbeidstakerAndel1 = {
   ...arbeidstakerIkkeFastsatt,
 };
 
+const alleKodeverk = {
+  [kodeverkTyper.AKTIVITET_STATUS]: [{
+    kode: aktivitetStatuser.ARBEIDSAVKLARINGSPENGER,
+    kodeverk: 'AKTIVITET_STATUS',
+    navn: 'Arbeidsavklaringspenger',
+  },
+  {
+    kode: aktivitetStatuser.DAGPENGER,
+    kodeverk: 'AKTIVITET_STATUS',
+    navn: 'Dagpenger',
+  },
+  {
+    kode: aktivitetStatuser.FRILANSER,
+    kodeverk: 'AKTIVITET_STATUS',
+    navn: 'Frilans',
+  },
+  {
+    kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
+    kodeverk: 'AKTIVITET_STATUS',
+    navn: 'Selvstendig næringsdrivende',
+  }],
+};
+
 describe('<BgFaktaUtils>', () => {
   const dagpengerAndel = {
     aktivitetStatus: { kode: aktivitetStatuser.DAGPENGER, kodeverk: 'test' },
@@ -49,7 +73,7 @@ describe('<BgFaktaUtils>', () => {
     belopFraMeldekortPrMnd: 0,
   };
 
-  const dagpengeField = mapAndelToField(dagpengerAndel);
+  const dagpengeField = mapAndelToField(dagpengerAndel, {}, alleKodeverk);
 
   it('skal mappe dagpengerandel til feltverdier', () => {
     expect(dagpengeField.aktivitetStatus).toBe('DP');
@@ -75,7 +99,7 @@ describe('<BgFaktaUtils>', () => {
       belopReadOnly: 10000,
       belopFraMeldekortPrMnd: 10000,
     };
-    const aapField = mapAndelToField(AAPAndel);
+    const aapField = mapAndelToField(AAPAndel, {}, alleKodeverk);
     expect(aapField.aktivitetStatus).toBe('AAP');
     expect(aapField.andelsnr).toBe(1);
     expect(aapField.nyAndel).toBe(false);
@@ -97,7 +121,7 @@ describe('<BgFaktaUtils>', () => {
       beregnetPrAar: null,
       belopFraMeldekortPrMnd: null,
     };
-    const atField = mapAndelToField(ATAndel);
+    const atField = mapAndelToField(ATAndel, {}, alleKodeverk);
     expect(atField.aktivitetStatus).toBe('AT');
     expect(atField.andelsnr).toBe(1);
     expect(atField.nyAndel).toBe(false);
@@ -119,7 +143,7 @@ describe('<BgFaktaUtils>', () => {
       beregnetPrAar: null,
       belopFraMeldekortPrMnd: null,
     };
-    const atField = mapAndelToField(ATAndel);
+    const atField = mapAndelToField(ATAndel, {}, alleKodeverk);
     expect(atField.aktivitetStatus).toBe('FL');
     expect(atField.andelsnr).toBe(1);
     expect(atField.nyAndel).toBe(false);
@@ -144,7 +168,7 @@ describe('<BgFaktaUtils>', () => {
       belopReadOnly: 20000,
       arbeidsforhold: { belopFraInntektsmeldingPrMnd: 20000 },
     };
-    const atField = mapAndelToField(ATAndel);
+    const atField = mapAndelToField(ATAndel, {}, alleKodeverk);
     expect(atField.aktivitetStatus).toBe('AT');
     expect(atField.andelsnr).toBe(1);
     expect(atField.nyAndel).toBe(false);
@@ -192,15 +216,6 @@ describe('<BgFaktaUtils>', () => {
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
       inntektskategori: { kode: 'SN', kodeverk: 'test' },
-    };
-    const alleKodeverk = {
-      AktivitetStatus: [
-        {
-          kode: 'SN',
-          navn: 'Selvstendig næringsdrivende',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-      ],
     };
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState, {}, alleKodeverk);
     expect(andelsInfo.andel).toBe('Selvstendig næringsdrivende');
@@ -321,15 +336,6 @@ describe('<BgFaktaUtils>', () => {
   };
 
   it('skal redigere inntektskategori for kunstig arbeid', () => {
-    const alleKodeverk = {
-      AktivitetStatus: [
-        {
-          kode: 'SN',
-          navn: 'Selvstendig næringsdrivende',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-      ],
-    };
     const agOpplysning = {
       3284788923: {
         identifikator: '3284788923',
@@ -449,15 +455,6 @@ describe('<BgFaktaUtils>', () => {
   });
 
   it('skal redigere inntekt for frilansandel som mottar ytelse', () => {
-    const alleKodeverk = {
-      AktivitetStatus: [
-        {
-          kode: 'FL',
-          navn: 'Frilans',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-      ],
-    };
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(frilansAndel, {}, alleKodeverk),
@@ -468,15 +465,6 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal redigere inntekt for frilansandel som ikke mottar ytelse, men er nyoppstartet', () => {
     const valuesLocalCopy = { ...values };
-    const alleKodeverk = {
-      AktivitetStatus: [
-        {
-          kode: 'FL',
-          navn: 'Frilans',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-      ],
-    };
     valuesLocalCopy[finnFrilansFieldName()] = false;
     valuesLocalCopy[erNyoppstartetFLField] = true;
     const andelFieldValue = {
@@ -489,15 +477,6 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal ikke redigere inntekt for frilansandel som ikke mottar ytelse og ikke er nyoppstartet', () => {
     const valuesLocalCopy = { ...values };
-    const alleKodeverk = {
-      AktivitetStatus: [
-        {
-          kode: 'FL',
-          navn: 'Frilans',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-      ],
-    };
     valuesLocalCopy[finnFrilansFieldName()] = false;
     valuesLocalCopy[erNyoppstartetFLField] = false;
     const andelFieldValue = {
@@ -508,15 +487,6 @@ describe('<BgFaktaUtils>', () => {
     expect(skalRedigereInntekt).toBe(false);
   });
   it('skal redigere inntekt for frilansandel i samme org som arbeidstaker', () => {
-    const alleKodeverk = {
-      AktivitetStatus: [
-        {
-          kode: 'FL',
-          navn: 'Frilans',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-      ],
-    };
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
       ...setGenerellAndelsinfo(frilansAndel, {}, alleKodeverk),

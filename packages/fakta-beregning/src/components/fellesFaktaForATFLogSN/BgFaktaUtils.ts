@@ -39,11 +39,8 @@ export const setArbeidsforholdInitialValues = (andel: AndelForFaktaOmBeregning) 
 });
 
 const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
-  arbeidsgiverOpplysningerPerId?: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk?: {[key: string]: KodeverkMedNavn[]}): string => {
-  if (!alleKodeverk && !arbeidsgiverOpplysningerPerId) {
-    return andel.aktivitetStatus.kode;
-  }
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): string => {
   const agOpplysning = andel.arbeidsforhold ? arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent] : undefined;
   if (!agOpplysning) {
     return andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdType
@@ -54,8 +51,8 @@ const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
 };
 
 export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
-  arbeidsgiverOpplysningerPerId?: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk?: {[key: string]: KodeverkMedNavn[]}) => ({
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => ({
   andel: lagVisningsnavn(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
@@ -246,8 +243,8 @@ export const mapToBelop = (skalRedigereInntekt) => (andel) => {
 };
 
 export const mapAndelToField = (andel: AndelForFaktaOmBeregning,
-  arbeidsgiverOpplysningerPerId?: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk?: {[key: string]: KodeverkMedNavn[]}): AndelFieldValue => ({
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): AndelFieldValue => ({
   ...setGenerellAndelsinfo(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   ...setArbeidsforholdInitialValues(andel),
   ...mapAndelFieldIdentifikator(andel),
