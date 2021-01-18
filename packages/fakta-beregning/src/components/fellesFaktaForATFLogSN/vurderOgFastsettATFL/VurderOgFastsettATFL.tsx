@@ -20,8 +20,8 @@ import VurderMottarYtelseForm from './forms/VurderMottarYtelseForm';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 import { validateMinstEnFastsatt } from '../ValidateAndelerUtils';
 import {
-  skalFastsetteInntektForAndel, mapAndelToField, erOverstyring, erOverstyringAvBeregningsgrunnlag,
-  getKanRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME,
+  skalFastsetteInntektForAndel, erOverstyring, erOverstyringAvBeregningsgrunnlag,
+  getKanRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME, mapAndelFieldIdentifikator,
 } from '../BgFaktaUtils';
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
 import InntektFieldArray, { InntektFieldArrayImpl } from '../InntektFieldArray';
@@ -52,8 +52,7 @@ const harVurdert = (tilfeller, values, faktaOmBeregning) => (
 
 const skalFastsetteInntekt = (values: any, faktaOmBeregning: FaktaOmBeregning,
   beregningsgrunnlag: Beregningsgrunnlag) => faktaOmBeregning.andelerForFaktaOmBeregning
-  // TODO fjern mapAndelToField. Trenger endel data for å sette visningsnavn som ikke trengs for å kjøre skalFastsetteInntektForAndel
-  .map((andel) => mapAndelToField(andel))
+  .map((andel) => mapAndelFieldIdentifikator(andel))
   .find(skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)) !== undefined;
 
 export const findInstruksjonForFastsetting = (skalHaBesteberegning, skalFastsetteFL, skalFastsetteAT, harKunstigArbeid) => {

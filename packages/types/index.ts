@@ -21,6 +21,7 @@ export {
   KortvarigAndel,
   VurderMottarYtelse,
   ArbeidstakerUtenIMAndel,
+  ATFLSammeOrgAndel,
   RefusjonskravSomKommerForSentListe,
 } from './src/beregningsgrunnlagFaktaTsType';
 export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';

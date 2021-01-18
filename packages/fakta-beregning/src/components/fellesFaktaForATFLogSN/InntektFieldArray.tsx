@@ -23,7 +23,7 @@ import { getFormValuesForBeregning, isBeregningFormDirty as isFormDirty } from '
 import { AndelRow, getHeaderTextCodes } from './InntektFieldArrayRow';
 import AddDagpengerAndelButton from './AddDagpengerAndelButton';
 import SummaryRow from './SummaryRow';
-import AndelFieldValue, { InntektTransformed } from './andelFieldValueTs';
+import AndelFieldValue, { InntektTransformed } from '../../typer/FieldValues';
 import { vurderMilitaerField } from './vurderMilitaer/VurderMilitaer';
 
 const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({

@@ -82,7 +82,7 @@ export type VurderMottarYtelse = Readonly<{
   arbeidstakerAndelerUtenIM?: ArbeidstakerUtenIMAndel[];
 }>
 
-interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
+export interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
   inntektPrMnd: number;
 }
 

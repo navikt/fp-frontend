@@ -15,7 +15,7 @@ import VurderMottarYtelseForm, {
   mottarYtelseForArbeidMsg,
 } from './VurderMottarYtelseForm';
 import { finnFrilansFieldName, utledArbeidsforholdFieldName } from './VurderMottarYtelseUtils';
-import { InntektTransformed } from '../../andelFieldValueTs';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
 const requiredMessage = isRequiredMessage();
 

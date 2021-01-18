@@ -21,7 +21,7 @@ import {
   utledArbeidsforholdFieldName,
 } from './VurderMottarYtelseUtils';
 import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
-import { InntektTransformed } from '../../andelFieldValueTs';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
 const andreFrilansTilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON];
 
