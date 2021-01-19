@@ -9,14 +9,14 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "moment": "^2.29.1",
-    "nav-frontend-core": "5.0.10",
-    "nav-frontend-grid": "1.0.44",
-    "nav-frontend-lenker": "1.0.53",
-    "nav-frontend-lenker-style": "0.2.39",
-    "nav-frontend-typografi": "2.0.37",
+    "nav-frontend-core": "5.0.11",
+    "nav-frontend-grid": "1.0.46",
+    "nav-frontend-lenker": "1.0.56",
+    "nav-frontend-lenker-style": "0.2.41",
+    "nav-frontend-typografi": "2.0.39",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-intl": "^5.10.11",
+    "react-intl": "^5.10.16",
     "react-redux": "^7.2.2",
     "react-visjs-timeline": "^1.6.0",
     "redux": "^4.0.5",
@@ -26,6 +26,6 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "enzyme": "^3.11.0",
-    "sinon": "^9.2.2"
+    "sinon": "^9.2.3"
   }
 }

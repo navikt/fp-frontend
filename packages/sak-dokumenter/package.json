@@ -9,11 +9,11 @@
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "nav-frontend-core": "5.0.10",
-    "nav-frontend-typografi": "2.0.37",
-    "nav-frontend-typografi-style": "1.0.31",
+    "nav-frontend-core": "5.0.11",
+    "nav-frontend-typografi": "2.0.39",
+    "nav-frontend-typografi-style": "1.0.32",
     "react": "^16.14.0",
-    "react-intl": "^5.10.11",
+    "react-intl": "^5.10.16",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
@@ -22,6 +22,6 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "enzyme": "^3.11.0",
-    "sinon": "^9.2.2"
+    "sinon": "^9.2.3"
   }
 }
