@@ -31,7 +31,7 @@
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "react": "^16.14.0",
-    "react-intl": "^5.10.11",
+    "react-intl": "^5.10.16",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
@@ -41,6 +41,6 @@
     "axios-mock-adapter": "^1.19.0",
     "enzyme": "^3.11.0",
     "redux-mock-store": "^1.5.4",
-    "sinon": "^9.2.2"
+    "sinon": "^9.2.3"
   }
 }

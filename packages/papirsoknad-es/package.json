@@ -6,10 +6,10 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/kodeverk": "1.0.0",
-    "nav-frontend-grid": "1.0.44",
+    "nav-frontend-grid": "1.0.46",
     "nav-frontend-grid-style": "0.2.25",
     "react": "^16.14.0",
-    "react-intl": "^5.10.11",
+    "react-intl": "^5.10.16",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "sinon": "^9.2.2"
+    "sinon": "^9.2.3"
   }
 }
