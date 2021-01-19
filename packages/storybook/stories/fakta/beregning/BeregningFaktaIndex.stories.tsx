@@ -323,7 +323,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
+      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
       arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
@@ -598,7 +598,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
+      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
       arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
@@ -1144,7 +1144,7 @@ export const KombinasjonstestForFaktapanel = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
+      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
       arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
