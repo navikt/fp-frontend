@@ -13,7 +13,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { getFormValuesForBeregning } from '../../../BeregningFormUtils';
-import { InntektTransformed } from '../../andelFieldValueTs';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
 /**
  * VurderEtterlønnSluttpakkeForm

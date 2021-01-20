@@ -1,15 +1,20 @@
-type AndelFieldValue = {
-  andel: string;
+import { Kodeverk } from '@fpsak-frontend/types';
+
+export type AndelFieldIdentifikator = {
   aktivitetStatus: string;
   andelsnr?: number;
+  arbeidsgiverId?: string;
+  arbeidsforholdType?: Kodeverk;
+}
+
+type AndelFieldValue = AndelFieldIdentifikator & {
+  andel: string;
   nyAndel?: boolean;
   inntektskategori: string;
   lagtTilAvSaksbehandler?: boolean;
-  arbeidsgiverId?: string;
   arbeidsforholdId?: string;
   arbeidsperiodeFom?: string;
   arbeidsperiodeTom?: string;
-  arbeidsforholdType?: string;
   skalKunneEndreAktivitet?: boolean
   fastsattBelop?: string;
   belopReadOnly?: string;

@@ -1,9 +1,11 @@
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { ArbeidstakerUtenIMAndel, Beregningsgrunnlag, VurderMottarYtelse } from '@fpsak-frontend/types';
+import { AndelMottarYtelseMap } from '../../../../typer/AndelMottarYtelseMap';
 
 export const mottarYtelseFieldPrefix = 'mottarYtelseField';
 export const frilansSuffix = '_frilans';
-export const utledArbeidsforholdFieldName = (andel) => mottarYtelseFieldPrefix + andel.andelsnr;
-export const finnFrilansFieldName = () => (mottarYtelseFieldPrefix + frilansSuffix);
+export const utledArbeidsforholdFieldName = (andel: ArbeidstakerUtenIMAndel): string => mottarYtelseFieldPrefix + andel.andelsnr;
+export const finnFrilansFieldName = (): string => (mottarYtelseFieldPrefix + frilansSuffix);
 
 export const skalFastsetteInntektATUtenInntektsmelding = (values, vurderMottarYtelse) => {
   const atAndelerUtenIM = vurderMottarYtelse && vurderMottarYtelse.arbeidstakerAndelerUtenIM ? vurderMottarYtelse.arbeidstakerAndelerUtenIM : [];
@@ -13,7 +15,9 @@ export const skalFastsetteInntektATUtenInntektsmelding = (values, vurderMottarYt
 
 export const frilansMottarYtelse = (values) => (values[finnFrilansFieldName()]);
 
-export const andelsnrMottarYtelseMap = (values, vurderMottarYtelse, beregningsgrunnlag) => {
+export const andelsnrMottarYtelseMap = (values: any,
+  vurderMottarYtelse: VurderMottarYtelse,
+  beregningsgrunnlag: Beregningsgrunnlag): AndelMottarYtelseMap => {
   if (!vurderMottarYtelse) {
     return {};
   }

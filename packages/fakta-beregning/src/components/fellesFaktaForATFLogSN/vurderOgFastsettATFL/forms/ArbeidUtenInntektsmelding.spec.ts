@@ -138,8 +138,8 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, aktivitetStatus: { kode: 'AT' }, arbeidsforhold: { arbeidsgiverId: '2134567', arbeidsforholdId: null } },
-            { andelsnr: 2, aktivitetStatus: { kode: 'AT' }, arbeidsforhold: { arbeidsgiverId: '2134567', arbeidsforholdId: '8u328ru9h34' } },
+            { andelsnr: 1, aktivitetStatus: { kode: 'AT' }, arbeidsforhold: { arbeidsgiverIdent: '2134567', arbeidsforholdId: null } },
+            { andelsnr: 2, aktivitetStatus: { kode: 'AT' }, arbeidsforhold: { arbeidsgiverIdent: '2134567', arbeidsforholdId: '8u328ru9h34' } },
           ],
         },
       ],

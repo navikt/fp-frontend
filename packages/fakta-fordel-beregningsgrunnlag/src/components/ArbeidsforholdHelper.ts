@@ -8,14 +8,14 @@ import BeregningsgrunnlagArbeidsforhold from '@fpsak-frontend/types/src/beregnin
 
 const arbeidsforholdEksistererIListen = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverList: Arbeidsforhold[]): boolean => {
   if (arbeidsforhold.arbeidsforholdId === null) {
-    return arbeidsgiverList.map(({ arbeidsgiverId }) => (arbeidsgiverId)).includes(arbeidsforhold.arbeidsgiverId);
+    return arbeidsgiverList.map(({ arbeidsgiverId }) => (arbeidsgiverId)).includes(arbeidsforhold.arbeidsgiverIdent);
   }
   return arbeidsgiverList.map(({ arbeidsforholdId }) => (arbeidsforholdId)).includes(arbeidsforhold.arbeidsforholdId);
 };
 
 const finnBgAndelMedSammeArbeidsforhold = (bgAndeler: BeregningsgrunnlagAndel[],
   andel: FordelBeregningsgrunnlagAndel): BeregningsgrunnlagAndel => bgAndeler.find(({ arbeidsforhold }) => !!arbeidsforhold
-&& arbeidsforhold.arbeidsgiverId === andel.arbeidsforhold.arbeidsgiverId
+&& arbeidsforhold.arbeidsgiverIdent === andel.arbeidsforhold.arbeidsgiverIdent
 && arbeidsforhold.arbeidsforholdId === andel.arbeidsforhold.arbeidsforholdId);
 
 export type Arbeidsforhold = {

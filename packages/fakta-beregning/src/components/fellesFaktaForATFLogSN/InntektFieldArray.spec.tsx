@@ -319,7 +319,7 @@ describe('<InntektFieldArray>', () => {
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {
-    const iv = InntektFieldArrayImpl.buildInitialValues([]);
+    const iv = InntektFieldArrayImpl.buildInitialValues([], {}, {});
     expect(Object.keys(iv)).toHaveLength(0);
   });
 });

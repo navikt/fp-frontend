@@ -4,7 +4,7 @@ import { FieldArray } from 'redux-form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { createSelector } from 'reselect';
-import { FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import LonnsendringForm, { lonnsendringField }
@@ -20,8 +20,8 @@ import VurderMottarYtelseForm from './forms/VurderMottarYtelseForm';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 import { validateMinstEnFastsatt } from '../ValidateAndelerUtils';
 import {
-  skalFastsetteInntektForAndel, mapAndelToField, erOverstyring, erOverstyringAvBeregningsgrunnlag,
-  getKanRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME,
+  skalFastsetteInntektForAndel, erOverstyring, erOverstyringAvBeregningsgrunnlag,
+  getKanRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME, mapAndelFieldIdentifikator,
 } from '../BgFaktaUtils';
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
 import InntektFieldArray, { InntektFieldArrayImpl } from '../InntektFieldArray';
@@ -50,8 +50,9 @@ const harVurdert = (tilfeller, values, faktaOmBeregning) => (
     && besteberegningErVurdertEllerIkkjeTilstede(tilfeller, values)
 );
 
-const skalFastsetteInntekt = (values, faktaOmBeregning, beregningsgrunnlag) => faktaOmBeregning.andelerForFaktaOmBeregning
-  .map((andel) => mapAndelToField(andel))
+const skalFastsetteInntekt = (values: any, faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag) => faktaOmBeregning.andelerForFaktaOmBeregning
+  .map((andel) => mapAndelFieldIdentifikator(andel))
   .find(skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)) !== undefined;
 
 export const findInstruksjonForFastsetting = (skalHaBesteberegning, skalFastsetteFL, skalFastsetteAT, harKunstigArbeid) => {
@@ -75,7 +76,7 @@ export const findInstruksjonForFastsetting = (skalHaBesteberegning, skalFastsett
 
 const finnInntektstabell = (readOnly, behandlingId,
   behandlingVersjon, beregningsgrunnlag,
-  isAksjonspunktClosed, alleKodeverk, erOverstyrt) => (
+  isAksjonspunktClosed, alleKodeverk, erOverstyrt, arbeidsgiverOpplysningerPerId) => (
     <FieldArray
       name={INNTEKT_FIELD_ARRAY_NAME}
       component={InntektFieldArray}
@@ -86,6 +87,7 @@ const finnInntektstabell = (readOnly, behandlingId,
       beregningsgrunnlag={beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
       isAksjonspunktClosed={isAksjonspunktClosed}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
 );
 
@@ -107,10 +109,14 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     erOverstyrt: boolean;
     skalHaMilitær: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
-  buildInitialValues: (faktaOmBeregning: FaktaOmBeregning, erOverstyrt: boolean) => any;
+  buildInitialValues: (faktaOmBeregning: FaktaOmBeregning,
+                       erOverstyrt: boolean,
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
   validate: (values: any, tilfeller: string[], faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
   transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
 }
@@ -141,11 +147,19 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
   alleKodeverk,
   erOverstyrer,
   erOverstyrt,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
     <InntektstabellPanel
       key="inntektstabell"
-      tabell={finnInntektstabell(readOnly, behandlingId, behandlingVersjon, beregningsgrunnlag, isAksjonspunktClosed, alleKodeverk, erOverstyrt)}
+      tabell={finnInntektstabell(readOnly,
+        behandlingId,
+        behandlingVersjon,
+        beregningsgrunnlag,
+        isAksjonspunktClosed,
+        alleKodeverk,
+        erOverstyrt,
+        arbeidsgiverOpplysningerPerId)}
       skalViseTabell={skalViseTabell}
       hjelpeTekstId={findInstruksjonForFastsetting(skalHaBesteberegning, skalFastsetteFL, skalFastsetteAT, harKunstigArbeid)}
       readOnly={readOnly}
@@ -189,6 +203,7 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
           tilfeller={tilfeller}
           beregningsgrunnlag={beregningsgrunnlag}
           alleKodeverk={alleKodeverk}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       )}
       {tilfeller.includes(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING) && !tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)
@@ -205,7 +220,10 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
   </div>
 );
 
-VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning, erOverstyrt) => {
+VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning: FaktaOmBeregning,
+  erOverstyrt: boolean,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
   if (!faktaOmBeregning) {
     return {};
   }
@@ -214,7 +232,7 @@ VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning, erOverstyrt) => {
     return {};
   }
   return {
-    [INNTEKT_FIELD_ARRAY_NAME]: InntektFieldArrayImpl.buildInitialValues(andeler),
+    [INNTEKT_FIELD_ARRAY_NAME]: InntektFieldArrayImpl.buildInitialValues(andeler, arbeidsgiverOpplysningerPerId, alleKodeverk),
     ...InntektstabellPanel.buildInitialValues(erOverstyrt),
   };
 };

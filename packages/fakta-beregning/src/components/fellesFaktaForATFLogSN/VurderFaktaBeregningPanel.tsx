@@ -12,7 +12,7 @@ import { behandlingForm } from '@fpsak-frontend/form';
 
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import FaktaForATFLOgSNPanel, {
   getBuildInitialValuesFaktaForATFLOgSN,
   transformValuesFaktaForATFLOgSN,
@@ -75,6 +75,7 @@ type OwnProps = {
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     erOverstyrer: boolean;
     submitCallback: (data: any) => Promise<any>;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 type OwnState = {
@@ -117,6 +118,7 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
         behandlingVersjon,
         alleKodeverk,
         erOverstyrer,
+        arbeidsgiverOpplysningerPerId,
         ...formProps
       },
       state: {
@@ -142,6 +144,7 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
             beregningsgrunnlag={beregningsgrunnlag}
             alleKodeverk={alleKodeverk}
             erOverstyrer={erOverstyrer}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
           <VerticalSpacer twentyPx />
           {(hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) || erOverstyrt) && (
