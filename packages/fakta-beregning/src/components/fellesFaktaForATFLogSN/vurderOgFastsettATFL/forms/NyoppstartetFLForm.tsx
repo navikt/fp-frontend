@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
-import { InntektTransformed } from '../../andelFieldValueTs';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
 /**
  * NyOppstartetFLForm

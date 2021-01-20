@@ -18,7 +18,7 @@ const transformValuesArbeidUtenInntektsmelding = (values, inntektVerdier, faktaO
   }
   const arbeidUtenInntektsmelding = inntektVerdier
     .filter((field) => !fastsatteAndelsnr.includes(field.andelsnr) && !fastsatteAndelsnr.includes(field.andelsnrRef))
-    .filter((field) => erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse(field, bg)
+    .filter((field) => erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse(field, bg, field.arbeidsforholdId)
       || harFieldKunstigArbeidsforhold(field, bg)
       || harFieldLønnsendring(field, faktaOmBeregning, values));
 

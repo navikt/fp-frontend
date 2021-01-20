@@ -11,6 +11,7 @@ type FaktaOmBeregningAndel = Readonly<{
 export type AndelForFaktaOmBeregning = Readonly<{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   andelsnr?: number;
+  refusjonskrav?: number;
   inntektskategori?: Kodeverk;
   aktivitetStatus?: Kodeverk;
   belopReadOnly?: number;
@@ -81,7 +82,7 @@ export type VurderMottarYtelse = Readonly<{
   arbeidstakerAndelerUtenIM?: ArbeidstakerUtenIMAndel[];
 }>
 
-interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
+export interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
   inntektPrMnd: number;
 }
 

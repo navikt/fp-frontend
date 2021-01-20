@@ -4,7 +4,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import NyoppstartetFLForm, { erNyoppstartetFLField } from './NyoppstartetFLForm';
-import { InntektTransformed } from '../../andelFieldValueTs';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
 describe('<NyoppstartetFLForm>', () => {
   it('skal teste at korrekt antall radioknapper vises med korrekte props', () => {

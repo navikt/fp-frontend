@@ -1,5 +1,11 @@
 import React from 'react';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import {
+  AndelForFaktaOmBeregning,
+  ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
+  KunYtelse,
+} from '@fpsak-frontend/types';
 import KunYtelsePanel from './KunYtelsePanel';
 
 const { FASTSETT_BG_KUN_YTELSE, VURDER_BESTEBEREGNING } = faktaOmBeregningTilfelle;
@@ -50,9 +56,13 @@ export const getKunYtelseValidation = (values, kunYtelse, aktivertePaneler) => {
   return {};
 };
 
-export const buildInitialValuesKunYtelse = (kunYtelse, tilfeller, faktaOmBeregningAndeler) => {
+export const buildInitialValuesKunYtelse = (kunYtelse: KunYtelse,
+  tilfeller: string[],
+  faktaOmBeregningAndeler: AndelForFaktaOmBeregning[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
   if (tilfeller && tilfeller.includes(FASTSETT_BG_KUN_YTELSE)) {
-    return KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler);
+    return KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler, arbeidsgiverOpplysningerPerId, alleKodeverk);
   }
   return {};
 };

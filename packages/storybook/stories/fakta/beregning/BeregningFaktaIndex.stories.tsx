@@ -60,8 +60,8 @@ const lagBeregningsgrunnlag = (
       beregningsgrunnlagPrStatusOgAndel: andeler.map((andel) => (
         {
           andelsnr: andel.andelsnr,
-          aktivitetStatus: { kode: andel.aktivitetStatus },
-          inntektskategori: { kode: andel.inntektskategori },
+          aktivitetStatus: andel.aktivitetStatus,
+          inntektskategori: andel.inntektskategori,
           erNyoppstartet: andel.erNyoppstartet,
         }
       )),
@@ -73,7 +73,17 @@ const lagBeregningsgrunnlag = (
 const mapTilKodeliste = (arrayOfCodes) => arrayOfCodes.map((kode) => ({ kode }));
 
 const lagAndel = (andelsnr, aktivitetStatus, inntektskategori) => (
-  { andelsnr, aktivitetStatus: { kode: aktivitetStatus }, inntektskategori: { kode: inntektskategori } }
+  {
+    andelsnr,
+    aktivitetStatus: {
+      kode: aktivitetStatus,
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    inntektskategori: {
+      kode: inntektskategori,
+      kodeverk: 'INNTEKTSKATEGORI',
+    },
+  }
 );
 
 const standardFaktaArbeidstakerAndel = {
@@ -313,7 +323,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
+      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
       arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
@@ -448,8 +458,14 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
   };
   const dagpengerBeregningsgrunnlagAndel = {
     andelsnr: standardFaktaDagpengerAndel.andelsnr,
-    aktivitetStatus: standardFaktaDagpengerAndel.aktivitetStatus,
-    inntektskategori: standardFaktaDagpengerAndel.inntektskategori,
+    aktivitetStatus: {
+      kode: standardFaktaDagpengerAndel.aktivitetStatus,
+      kodeverk: 'AKTIVITET_STATUS',
+    },
+    inntektskategori: {
+      kode: standardFaktaDagpengerAndel.inntektskategori,
+      kodeverk: 'INNTEKTSKATEGORI',
+    },
   };
   const andeler = [
     arbeidstakerBeregningsgrunnlagAndel,
@@ -582,7 +598,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
+      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
       arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];
@@ -1128,7 +1144,7 @@ export const KombinasjonstestForFaktapanel = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsforholdId,
+      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
       arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
     },
   ];

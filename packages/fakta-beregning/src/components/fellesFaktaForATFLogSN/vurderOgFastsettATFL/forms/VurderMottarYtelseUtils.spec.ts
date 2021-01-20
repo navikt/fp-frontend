@@ -8,52 +8,52 @@ import {
 } from './VurderMottarYtelseUtils';
 
 const arbeidsforhold = {
-  arbeidsgiverNavn: 'Virksomheten',
-  arbeidsgiverId: '3284788923',
+  arbeidsgiverIdent: '3284788923',
   arbeidsforholdId: '321378huda7e2',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
 };
 
 const arbeidsforhold2 = {
-  arbeidsgiverNavn: 'Virksomheten2',
-  arbeidsgiverId: '843597943435',
+  arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: 'jjisefoosfe',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
 };
 
 const arbeidsforhold3 = {
-  arbeidsgiverNavn: 'Virksomheten2',
-  arbeidsgiverId: '843597943435',
+  arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: '5465465464',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
 };
 
 const andel = {
-  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, navn: 'Arbeidstaker' },
+  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
   andelsnr: 1,
   inntektPrMnd: 25000,
+  lagtTilAvSaksbehandler: false,
   arbeidsforhold,
 };
 
 const andel2 = {
-  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, navn: 'Arbeidstaker' },
+  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
   andelsnr: 2,
   inntektPrMnd: 25000,
+  lagtTilAvSaksbehandler: false,
   arbeidsforhold: arbeidsforhold2,
 };
 
 const andel3 = {
-  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, navn: 'Arbeidstaker' },
+  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
   andelsnr: 3,
   inntektPrMnd: 25000,
+  lagtTilAvSaksbehandler: false,
   arbeidsforhold: arbeidsforhold3,
 };
 
 const frilansAndel = {
-  aktivitetStatus: { kode: aktivitetStatus.FRILANSER, navn: 'Frilans' },
+  aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
   andelsnr: 4,
 };
 
