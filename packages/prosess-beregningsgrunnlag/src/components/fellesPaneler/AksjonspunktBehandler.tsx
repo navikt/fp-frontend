@@ -10,7 +10,9 @@ import {
 } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting } from '@fpsak-frontend/form';
+import {
+  hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting, TextAreaField,
+} from '@fpsak-frontend/form';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -27,7 +29,6 @@ import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
-import TextAreaField from '../redesign/TextAreaField';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

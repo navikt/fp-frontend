@@ -12,7 +12,7 @@ import {
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import {
-  InputField,
+  InputField, TextAreaField,
 } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -20,7 +20,6 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
-import TextAreaField from '../redesign/TextAreaField';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 
 const maxLength1500 = maxLength(1500);

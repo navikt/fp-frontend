@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import { EditedIcon } from '@fpsak-frontend/shared-components';
+import {
+  EditedIcon, FlexColumn, FlexContainer, FlexRow,
+} from '@fpsak-frontend/shared-components';
 
 import Label from './Label';
 import LabelType from './LabelType';
@@ -15,6 +17,7 @@ export interface ReadOnlyFieldProps {
   type?: string;
   renderReadOnlyValue?: (value: any) => any;
   alignRightCenterOnReadOnly?: boolean;
+  endrettekst?: React.ReactNode;
 }
 
 const hasValue = (value: string | number): boolean => value !== undefined && value !== null && value !== '';
@@ -25,6 +28,7 @@ export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
   isEdited,
   type,
   alignRightCenterOnReadOnly,
+  endrettekst,
 }): JSX.Element => {
   if (!hasValue(input.value)) {
     return null;
@@ -39,6 +43,20 @@ export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
           {isEdited && <EditedIcon className={styles.space} />}
         </Normaltekst>
       </div>
+      {endrettekst && (
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <EditedIcon />
+            </FlexColumn>
+            <FlexColumn className={styles.endretAvContent}>
+              <Undertekst>
+                {endrettekst}
+              </Undertekst>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      )}
     </div>
   );
 };

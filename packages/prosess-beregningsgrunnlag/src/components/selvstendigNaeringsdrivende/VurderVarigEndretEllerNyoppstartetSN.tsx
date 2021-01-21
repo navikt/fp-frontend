@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/utils';
 import {
   InputField,
-  RadioGroupField, RadioOption,
+  RadioGroupField, RadioOption, TextAreaField,
 } from '@fpsak-frontend/form';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -24,7 +24,6 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
-import TextAreaField from '../redesign/TextAreaField';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
