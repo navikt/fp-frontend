@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 
 import classnames from 'classnames/bind';
 import { Column, Row } from 'nav-frontend-grid';
+import VerticalSpacer from './VerticalSpacer';
 import styles from './avsnittSkiller.less';
-import { VerticalSpacer } from '../index';
 
 const classNames = classnames.bind(styles);
 
