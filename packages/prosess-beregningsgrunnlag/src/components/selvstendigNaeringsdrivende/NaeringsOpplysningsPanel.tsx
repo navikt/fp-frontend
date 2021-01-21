@@ -4,7 +4,7 @@ import {
 } from 'nav-frontend-typografi';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import {
-  FlexColumn, FlexRow, VerticalSpacer,
+  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -14,7 +14,6 @@ import Lesmerpanel from '../redesign/LesmerPanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import styles from './naeringsOpplysningsPanel.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const finnvirksomhetsTypeKode = (naring) => {
   const { virksomhetType } = naring;

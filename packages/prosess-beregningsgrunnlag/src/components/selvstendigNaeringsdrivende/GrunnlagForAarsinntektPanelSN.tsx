@@ -4,14 +4,13 @@ import {
   Element, Normaltekst, EtikettLiten,
 } from 'nav-frontend-typografi';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import { Column, Row } from 'nav-frontend-grid';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const createHeaderRow = () => (
   <Row key="SNInntektHeader">

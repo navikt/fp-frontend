@@ -12,7 +12,9 @@ import {
 } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { FlexColumn, FlexRow, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import {
+  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
+} from '@fpsak-frontend/shared-components';
 
 import {
   ArbeidsgiverOpplysningerPerId,
@@ -23,7 +25,6 @@ import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import NaturalytelsePanel from './NaturalytelsePanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const formName = 'BeregningForm';
 
