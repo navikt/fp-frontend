@@ -15,14 +15,13 @@ import {
   hasValidText, maxLength, minLength, required, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 import styles from './graderingUtenBG.less';
 
@@ -114,7 +113,7 @@ export const GraderingUtenBG: FunctionComponent<OwnProps & InjectedFormProps> = 
   return (
     <form onSubmit={formProps.handleSubmit} className={styles.graderingForm}>
 
-      <AvsnittSkiller luftOver luftUnder dividerParagraf />
+      <AvsnittSkiller spaceAbove spaceUnder dividerParagraf />
 
       <>
         { lagAksjonspunktViser(aksjonspunktTekstId, andelerMedGraderingUtenBG, getKodeverknavn, arbeidsgiverOpplysningerPerId)}

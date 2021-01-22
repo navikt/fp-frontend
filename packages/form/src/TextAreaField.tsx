@@ -54,6 +54,7 @@ interface TextAreaFieldProps {
   badges?: Badges[];
   placeholder?: string;
   autoFocus?: boolean;
+  endrettekst?: React.ReactNode;
 }
 
 const TextAreaField: FunctionComponent<BaseFieldProps & TextAreaFieldProps> = ({

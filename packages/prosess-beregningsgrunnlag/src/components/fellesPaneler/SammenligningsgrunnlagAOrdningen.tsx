@@ -8,7 +8,7 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexRow, VerticalSpacer,
+  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 import moment from 'moment';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -17,7 +17,6 @@ import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import styles from './sammenligningsgrunnlagAOrdningen.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 import Lesmerpanel from '../redesign/LesmerPanel';
 
 const grafFargeAT = '#99bdcd';
@@ -211,7 +210,7 @@ const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComp
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Lesmerpanel
         className={styles.lesMer}
         intro={lagOverskrift(andelStatus, userIdent)}

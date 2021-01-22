@@ -3,12 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import { Column, Row } from 'nav-frontend-grid';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus, { isStatusDagpengerOrAAP } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 export const getTekstForAndelBruktIBeregning = (andel) => {
   if (andel.aktivitetStatus.kode === aktivitetStatus.DAGPENGER) {
@@ -36,7 +35,7 @@ const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevant
       {relevanteStatuser.isKombinasjonsstatus
       && (
         <>
-          <AvsnittSkiller luftOver luftUnder />
+          <AvsnittSkiller spaceAbove spaceUnder />
           <Element className={beregningStyles.avsnittOverskrift}>
             <FormattedMessage id="Beregningsgrunnlag.TilstottendeYtelse.TittelNav" />
           </Element>

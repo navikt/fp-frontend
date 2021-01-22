@@ -12,7 +12,9 @@ import {
 } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { FlexColumn, FlexRow, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import {
+  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
+} from '@fpsak-frontend/shared-components';
 
 import {
   ArbeidsgiverOpplysningerPerId,
@@ -23,7 +25,6 @@ import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import NaturalytelsePanel from './NaturalytelsePanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const formName = 'BeregningForm';
 
@@ -213,7 +214,7 @@ export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps> & St
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <FlexRow>
         <FlexColumn>
           <Element className={beregningStyles.avsnittOverskrift}>
