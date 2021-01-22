@@ -160,7 +160,7 @@ const NaturalytelsePanel: FunctionComponent<OwnProps> = ({ allePerioder, arbeids
   }
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Element className={beregningStyles.avsnittOverskrift}>
         <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.Naturalytelse2" />
       </Element>

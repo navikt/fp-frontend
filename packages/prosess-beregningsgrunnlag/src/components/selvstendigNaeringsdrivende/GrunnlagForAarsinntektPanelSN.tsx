@@ -91,7 +91,7 @@ export const GrunnlagForAarsinntektPanelSN: FunctionComponent<OwnProps> = ({ all
   const { pgiVerdier, pgiSnitt } = snAndel;
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Element className={beregningStyles.avsnittOverskrift}>
         <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.Pensjonsgivendeinntekt" />
       </Element>

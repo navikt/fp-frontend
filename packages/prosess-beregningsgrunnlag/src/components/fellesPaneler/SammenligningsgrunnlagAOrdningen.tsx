@@ -210,7 +210,7 @@ const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComp
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Lesmerpanel
         className={styles.lesMer}
         intro={lagOverskrift(andelStatus, userIdent)}

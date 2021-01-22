@@ -23,7 +23,7 @@ export const MilitaerPanel: FunctionComponent<OwnProps> = ({ alleAndeler }) => {
   const beregnetAarsinntekt = relevanteAndeler && relevanteAndeler.length > 0 ? relevanteAndeler[0].beregnetPrAar : '';
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Row>
         <Column xs="12">
           <Element className={beregningStyles.avsnittOverskrift}>

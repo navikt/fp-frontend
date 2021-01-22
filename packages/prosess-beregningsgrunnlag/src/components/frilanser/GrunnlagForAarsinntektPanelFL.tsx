@@ -28,7 +28,7 @@ const GrunnlagForAarsinntektPanelFL: FunctionComponent<OwnProps> = ({ alleAndele
   return (
     <>
       <>
-        <AvsnittSkiller luftOver luftUnder />
+        <AvsnittSkiller spaceAbove spaceUnder />
         <Element className={beregningStyles.avsnittOverskrift}>
           <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.Frilansinntekt" />
         </Element>

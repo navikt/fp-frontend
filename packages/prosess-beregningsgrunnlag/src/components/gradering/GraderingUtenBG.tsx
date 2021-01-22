@@ -113,7 +113,7 @@ export const GraderingUtenBG: FunctionComponent<OwnProps & InjectedFormProps> = 
   return (
     <form onSubmit={formProps.handleSubmit} className={styles.graderingForm}>
 
-      <AvsnittSkiller luftOver luftUnder dividerParagraf />
+      <AvsnittSkiller spaceAbove spaceUnder dividerParagraf />
 
       <>
         { lagAksjonspunktViser(aksjonspunktTekstId, andelerMedGraderingUtenBG, getKodeverknavn, arbeidsgiverOpplysningerPerId)}

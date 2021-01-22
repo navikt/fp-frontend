@@ -17,7 +17,7 @@ type Props = {
  */
 const YtelserFraInfotrygd = ({ bruttoPrAar }: Props) => (
   <>
-    <AvsnittSkiller luftOver luftUnder />
+    <AvsnittSkiller spaceAbove spaceUnder />
     <Row>
       <Column xs="12">
         <Element className={beregningStyles.avsnittOverskrift}>

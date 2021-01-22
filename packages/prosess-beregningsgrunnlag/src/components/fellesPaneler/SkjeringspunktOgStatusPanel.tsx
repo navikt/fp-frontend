@@ -61,7 +61,7 @@ export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps> & Stat
   getKodeverknavn,
 }) => (
   <>
-    <AvsnittSkiller luftUnder leftPanel />
+    <AvsnittSkiller spaceUnder leftPanel />
     <div className={beregningStyles.panelLeft}>
       {createStatusEtiketter(aktivitetStatusList, getKodeverknavn)}
       <VerticalSpacer sixteenPx />

@@ -35,7 +35,7 @@ const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevant
       {relevanteStatuser.isKombinasjonsstatus
       && (
         <>
-          <AvsnittSkiller luftOver luftUnder />
+          <AvsnittSkiller spaceAbove spaceUnder />
           <Element className={beregningStyles.avsnittOverskrift}>
             <FormattedMessage id="Beregningsgrunnlag.TilstottendeYtelse.TittelNav" />
           </Element>

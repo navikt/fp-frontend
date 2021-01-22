@@ -8,18 +8,18 @@ import styles from './avsnittSkiller.less';
 const classNames = classnames.bind(styles);
 
 type OwnProps = {
-  luftUnder?: boolean;
-  luftOver?: boolean;
+  spaceUnder?: boolean;
+  spaceAbove?: boolean;
   leftPanel?: boolean;
   rightPanel?: boolean;
   dividerParagraf?: boolean;
 };
 
 const AvsnittSkiller:FunctionComponent<OwnProps> = ({
-  luftUnder, luftOver, leftPanel, rightPanel, dividerParagraf,
+  spaceUnder, spaceAbove, leftPanel, rightPanel, dividerParagraf,
 }) => (
   <>
-    {luftOver && (
+    {spaceAbove && (
     <VerticalSpacer thirtyTwoPx />
     )}
     <Row>
@@ -35,14 +35,14 @@ const AvsnittSkiller:FunctionComponent<OwnProps> = ({
         </div>
       </Column>
     </Row>
-    {luftUnder && (
+    {spaceUnder && (
     <VerticalSpacer thirtyTwoPx />
     )}
   </>
 );
 AvsnittSkiller.defaultProps = {
-  luftUnder: false,
-  luftOver: false,
+  spaceUnder: false,
+  spaceAbove: false,
   leftPanel: false,
   rightPanel: false,
   dividerParagraf: false,

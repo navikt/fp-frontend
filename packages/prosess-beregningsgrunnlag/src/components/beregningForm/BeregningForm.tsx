@@ -314,7 +314,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
         </Column>
         <Column xs="12" md="6">
           <div className={beregningStyles.paragrafSkiller}>
-            <AvsnittSkiller luftOver luftUnder dividerParagraf />
+            <AvsnittSkiller spaceAbove spaceUnder dividerParagraf />
           </div>
           <Undertittel className={beregningStyles.panelRight}>
             <FormattedMessage id="Beregningsgrunnlag.Title.Fastsettelse" />
@@ -331,7 +331,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
           {harAksjonspunkter
           && (
             <>
-              <AvsnittSkiller luftOver luftUnder rightPanel />
+              <AvsnittSkiller spaceAbove spaceUnder rightPanel />
               <AksjonspunktBehandler
                 readOnly={readOnly}
                 readOnlySubmitButton={readOnlySubmitButton}
@@ -348,7 +348,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
             </>
           )}
           <>
-            <AvsnittSkiller luftOver luftUnder rightPanel />
+            <AvsnittSkiller spaceAbove spaceUnder rightPanel />
             <BeregningsresultatTable
               beregningsgrunnlagPerioder={beregningsgrunnlag.beregningsgrunnlagPeriode}
               dekningsgrad={dekningsgrad}

@@ -214,7 +214,7 @@ export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps> & St
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <FlexRow>
         <FlexColumn>
           <Element className={beregningStyles.avsnittOverskrift}>

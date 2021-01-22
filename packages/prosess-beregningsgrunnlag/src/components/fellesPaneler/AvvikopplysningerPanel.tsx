@@ -138,7 +138,7 @@ const AvviksopplysningerPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <Panel className={beregningStyles.panelRight}>
-      <AvsnittSkiller luftUnder />
+      <AvsnittSkiller spaceUnder />
       <Element className={beregningStyles.avsnittOverskrift}>
         <FormattedMessage id="Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation" />
       </Element>

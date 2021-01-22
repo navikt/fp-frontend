@@ -104,7 +104,7 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
 
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <FlexRow key="SNNareingOverskrift">
         <FlexColumn>
           <Element className={beregningStyles.avsnittOverskrift}>
