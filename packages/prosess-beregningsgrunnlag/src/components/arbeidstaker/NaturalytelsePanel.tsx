@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagArbeidsforhold,
@@ -13,7 +13,6 @@ import {
 } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const createArbeidsforholdKey = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
@@ -161,7 +160,7 @@ const NaturalytelsePanel: FunctionComponent<OwnProps> = ({ allePerioder, arbeids
   }
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Element className={beregningStyles.avsnittOverskrift}>
         <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.Naturalytelse2" />
       </Element>

@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
-  DateLabel, FlexContainer, FlexColumn, FlexRow, VerticalSpacer,
+  DateLabel, FlexContainer, FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -18,7 +18,6 @@ import { Kodeverk } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from './skjeringspunktOgStatusPanel.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 export const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
 
@@ -62,7 +61,7 @@ export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps> & Stat
   getKodeverknavn,
 }) => (
   <>
-    <AvsnittSkiller luftUnder leftPanel />
+    <AvsnittSkiller spaceUnder leftPanel />
     <div className={beregningStyles.panelLeft}>
       {createStatusEtiketter(aktivitetStatusList, getKodeverknavn)}
       <VerticalSpacer sixteenPx />

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { VerticalSpacer, FlexContainer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, FlexContainer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -11,7 +11,6 @@ import AvviksopplysningerSN from '../selvstendigNaeringsdrivende/Avvikopplysning
 import AvviksopplysningerAT from '../arbeidstaker/AvvikopplysningerAT';
 import AvviksopplysningerFL from '../frilanser/AvvikopplysningerFL';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 
 const finnAlleAndelerIFørstePeriode = (allePerioder) => {
   if (allePerioder && allePerioder.length > 0) {
@@ -139,7 +138,7 @@ const AvviksopplysningerPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <Panel className={beregningStyles.panelRight}>
-      <AvsnittSkiller luftUnder />
+      <AvsnittSkiller spaceUnder />
       <Element className={beregningStyles.avsnittOverskrift}>
         <FormattedMessage id="Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation" />
       </Element>

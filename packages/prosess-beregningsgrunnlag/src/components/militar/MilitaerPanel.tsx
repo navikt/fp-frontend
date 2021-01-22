@@ -6,8 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
+import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 type OwnProps = {
@@ -24,7 +23,7 @@ export const MilitaerPanel: FunctionComponent<OwnProps> = ({ alleAndeler }) => {
   const beregnetAarsinntekt = relevanteAndeler && relevanteAndeler.length > 0 ? relevanteAndeler[0].beregnetPrAar : '';
   return (
     <>
-      <AvsnittSkiller luftOver luftUnder />
+      <AvsnittSkiller spaceAbove spaceUnder />
       <Row>
         <Column xs="12">
           <Element className={beregningStyles.avsnittOverskrift}>

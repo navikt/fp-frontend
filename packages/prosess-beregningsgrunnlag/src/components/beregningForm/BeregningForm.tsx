@@ -6,7 +6,7 @@ import { InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 import { behandlingForm } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -33,7 +33,6 @@ import BeregningsresultatTable from '../beregningsresultatPanel/Beregningsresult
 
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
-import AvsnittSkiller from '../redesign/AvsnittSkiller';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 // ------------------------------------------------------------------------------------------ //
@@ -315,7 +314,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
         </Column>
         <Column xs="12" md="6">
           <div className={beregningStyles.paragrafSkiller}>
-            <AvsnittSkiller luftOver luftUnder dividerParagraf />
+            <AvsnittSkiller spaceAbove spaceUnder dividerParagraf />
           </div>
           <Undertittel className={beregningStyles.panelRight}>
             <FormattedMessage id="Beregningsgrunnlag.Title.Fastsettelse" />
@@ -332,7 +331,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
           {harAksjonspunkter
           && (
             <>
-              <AvsnittSkiller luftOver luftUnder rightPanel />
+              <AvsnittSkiller spaceAbove spaceUnder rightPanel />
               <AksjonspunktBehandler
                 readOnly={readOnly}
                 readOnlySubmitButton={readOnlySubmitButton}
@@ -349,7 +348,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
             </>
           )}
           <>
-            <AvsnittSkiller luftOver luftUnder rightPanel />
+            <AvsnittSkiller spaceAbove spaceUnder rightPanel />
             <BeregningsresultatTable
               beregningsgrunnlagPerioder={beregningsgrunnlag.beregningsgrunnlagPeriode}
               dekningsgrad={dekningsgrad}
