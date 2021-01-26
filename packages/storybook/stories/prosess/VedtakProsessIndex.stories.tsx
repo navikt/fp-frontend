@@ -45,7 +45,7 @@ const behandling = {
   },
   behandlingPaaVent: false,
   behandlingHenlagt: false,
-  behandlingArsaker: [{
+  behandlingÅrsaker: [{
     behandlingArsakType: {
       kode: behandlingArsakType.ANNET,
       kodeverk: 'BEHANDLING_AARSAK',

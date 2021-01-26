@@ -14,7 +14,7 @@ import {
 import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
 import UttakFaktaForm from './UttakFaktaForm';
 
-const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingArsaker']): Kodeverk[] | undefined => {
+const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingÅrsaker']): Kodeverk[] | undefined => {
   if (behandlingArsaker) {
     return behandlingArsaker.map(({
       behandlingArsakType,
@@ -24,7 +24,7 @@ const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingArsake
   return undefined;
 };
 
-const getErManueltOpprettet = (behandlingArsaker: Behandling['behandlingArsaker'] = []): boolean => behandlingArsaker
+const getErManueltOpprettet = (behandlingArsaker: Behandling['behandlingÅrsaker'] = []): boolean => behandlingArsaker
   .some((ba) => ba.manueltOpprettet === true);
 
 const getErArsakTypeHendelseFodsel = (behandlingArsakTyper: Kodeverk[] = []): boolean => behandlingArsakTyper.some((bt) => bt.kode === 'RE-HENDELSE-FØDSEL');
@@ -36,7 +36,7 @@ interface OwnProps {
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
   behandlingType: Kodeverk;
-  behandlingArsaker: Behandling['behandlingArsaker'];
+  behandlingArsaker: Behandling['behandlingÅrsaker'];
   behandlingStatus: Kodeverk;
   behandlingId: number;
   behandlingVersjon: number;

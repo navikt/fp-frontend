@@ -63,7 +63,7 @@ const getPreviewManueltBrevCallback = (
   e.preventDefault();
 };
 
-const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingArsaker'] = []): boolean => behandlingArsakTyper
+const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingÅrsaker'] = []): boolean => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
   .some((bt) => bt.kode === BehandlingArsakType.ETTER_KLAGE
     || bt.kode === BehandlingArsakType.KLAGE_U_INNTK
@@ -271,12 +271,12 @@ export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnPr
   ...formProps
 }) => {
   const {
-    behandlingsresultat, sprakkode, status, behandlingArsaker,
+    behandlingsresultat, sprakkode, status, behandlingÅrsaker,
   } = behandling;
 
-  const erBehandlingEtterKlage = useMemo(() => erArsakTypeBehandlingEtterKlage(behandling.behandlingArsaker), [behandling.behandlingArsaker]);
-  const revurderingsAarsakString = useMemo(() => createAarsakString(behandlingArsaker
-    .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, kodeverkTyper)), [behandlingArsaker]);
+  const erBehandlingEtterKlage = useMemo(() => erArsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker), [behandling.behandlingÅrsaker]);
+  const revurderingsAarsakString = useMemo(() => createAarsakString(behandlingÅrsaker
+    .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, kodeverkTyper)), [behandlingÅrsaker]);
   const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
 

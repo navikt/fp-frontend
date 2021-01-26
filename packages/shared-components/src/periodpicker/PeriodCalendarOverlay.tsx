@@ -122,8 +122,6 @@ class PeriodCalendarOverlay extends Component<OwnProps> {
         onKeyDown={this.onKeyDown}
         role="link"
       >
-        {/*
-          // @ts-ignore https://github.com/gpbl/react-day-picker/issues/1009 */}
         <DayPicker
           {...dayPickerLocalization}
           className={dayPickerClassName}

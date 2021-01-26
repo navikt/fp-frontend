@@ -47,7 +47,7 @@ type FormValues = {
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  behandlingArsaker: Behandling['behandlingArsaker'];
+  behandlingArsaker: Behandling['behandlingÅrsaker'];
   sprakkode: Kodeverk;
   behandlingType: Kodeverk;
   familiehendelse: FamilieHendelseSamling;

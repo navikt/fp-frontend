@@ -74,7 +74,7 @@ const behandling = {
     kode: behandlingType.FORSTEGANGSSOKNAD,
     kodeverk: '',
   },
-  behandlingArsaker: [],
+  behandlingÅrsaker: [],
   toTrinnsBehandling: true,
 } as Behandling;
 
