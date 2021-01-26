@@ -5,6 +5,7 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -44,6 +45,10 @@ export const visMeldingerPanel = () => (
       behandlingId={1}
       behandlingVersjon={1}
       isKontrollerRevurderingApOpen={false}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
       revurderingVarslingArsak={[{
         kode: ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
         navn: 'Barn ikke registrert i folkeregisteret',

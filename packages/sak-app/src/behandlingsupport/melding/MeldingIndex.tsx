@@ -188,6 +188,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         revurderingVarslingArsak={revurderingVarslingArsak}
         templates={brevmaler}
         isKontrollerRevurderingApOpen={harApentKontrollerRevAp}
+        fagsakYtelseType={fagsak.sakstype}
       />
 
       {submitFinished && showSettPaVentModal && (

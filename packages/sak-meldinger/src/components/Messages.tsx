@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from 'react';
-import { createSelector } from 'reselect';
+import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
@@ -16,6 +15,7 @@ import {
   SelectField, TextAreaField, behandlingForm, behandlingFormValueSelector,
 } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import styles from './messages.less';
 
@@ -46,6 +46,17 @@ const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (br
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
   || ((brevmalkode === dokumentMalType.REVURDERING_DOK || brevmalkode === dokumentMalType.VARREV) && arsakskode === ugunstAarsakTyper.ANNET));
 
+const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: KodeverkMedNavn[], fagsakYtelseType: Kodeverk): KodeverkMedNavn[] => {
+  if (fagsakYtelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
+    return revurderingVarslingArsaker.filter((arsak) => arsak.kode === ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER
+      || arsak.kode === ugunstAarsakTyper.ANNET);
+  }
+  if (fagsakYtelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
+    return revurderingVarslingArsaker.filter((arsak) => arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER);
+  }
+  return revurderingVarslingArsaker;
+};
+
 interface PureOwnProps {
   submitCallback: (values: FormValues) => void;
   behandlingId: number;
@@ -56,10 +67,10 @@ interface PureOwnProps {
   sprakKode?: Kodeverk;
   revurderingVarslingArsak: KodeverkMedNavn[];
   isKontrollerRevurderingApOpen?: boolean;
+  fagsakYtelseType: Kodeverk;
 }
 
 interface MappedOwnProps {
-  causes: KodeverkMedNavn[];
   mottaker?: string;
   brevmalkode?: string;
   fritekst?: string;
@@ -76,7 +87,6 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
   intl,
   recipients,
   templates,
-  causes,
   previewCallback,
   handleSubmit,
   sprakKode,
@@ -84,6 +94,8 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
   brevmalkode,
   fritekst,
   arsakskode,
+  revurderingVarslingArsak,
+  fagsakYtelseType,
   ...formProps
 }) => {
   if (!sprakKode) {
@@ -100,6 +112,8 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
     }
     e.preventDefault();
   };
+
+  const filtrerteRevurderingVarslingArsaker = useMemo(() => getfiltrerteRevurderingVarslingArsaker(revurderingVarslingArsak, fagsakYtelseType), []);
 
   const language = getLanguageFromSprakkode(sprakKode);
 
@@ -130,7 +144,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
             validate={[required]}
             placeholder={intl.formatMessage({ id: 'Messages.VelgÅrsak' })}
-            selectValues={causes.map((cause) => <option key={cause.kode} value={cause.kode}>{cause.navn}</option>)}
+            selectValues={filtrerteRevurderingVarslingArsaker.map((cause) => <option key={cause.kode} value={cause.kode}>{cause.navn}</option>)}
             bredde="xxl"
           />
         </>
@@ -166,8 +180,6 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
   );
 };
 
-const formName = 'Messages';
-
 const buildInitalValues = (recipients: string[], templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
   const initialValues = {
     mottaker: recipients[0] ? recipients[0] : null,
@@ -191,16 +203,13 @@ const transformValues = (values: FormValues) => {
   }
   return newValues;
 };
-const getfilteredCauses = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.revurderingVarslingArsak],
-  (causes) => causes.filter((cause) => cause.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER),
-);
+
+const formName = 'Messages';
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: FormValues) => initialOwnProps.submitCallback(transformValues(values));
   return (state, ownProps: PureOwnProps) => ({
     ...behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'mottaker', 'brevmalkode', 'fritekst', 'arsakskode'),
-    causes: getfilteredCauses(ownProps),
     initialValues: buildInitalValues(ownProps.recipients, ownProps.templates, ownProps.isKontrollerRevurderingApOpen),
     onSubmit,
   });
