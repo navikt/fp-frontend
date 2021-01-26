@@ -50,7 +50,7 @@ const behandlinger = [{
       kodeverk: 'BEHANDLING_RESULTAT_TYPE',
     },
   },
-  behandlingArsaker: [],
+  behandlingÅrsaker: [],
 }, {
   id: 2,
   versjon: 2,
@@ -85,7 +85,7 @@ const behandlinger = [{
       kodeverk: 'BEHANDLING_RESULTAT_TYPE',
     },
   },
-  behandlingArsaker: [],
+  behandlingÅrsaker: [],
 }, {
   id: 3,
   versjon: 2,
@@ -112,7 +112,7 @@ const behandlinger = [{
   behandlingHenlagt: false,
   behandlingKoet: false,
   toTrinnsBehandling: false,
-  behandlingArsaker: [],
+  behandlingÅrsaker: [],
 }, {
   id: 4,
   versjon: 2,
@@ -141,7 +141,7 @@ const behandlinger = [{
   behandlingHenlagt: false,
   behandlingKoet: false,
   toTrinnsBehandling: false,
-  behandlingArsaker: [],
+  behandlingÅrsaker: [],
   behandlingsresultat: {
     type: {
       kode: 'HENLAGT_SØKNAD_TRUKKET',

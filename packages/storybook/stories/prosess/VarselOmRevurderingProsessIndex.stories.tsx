@@ -17,7 +17,7 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 const behandling = {
   id: 1,
   versjon: 1,
-  behandlingArsaker: [{
+  behandlingÅrsaker: [{
     erAutomatiskRevurdering: true,
   }],
   sprakkode: {

@@ -16,8 +16,6 @@ const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
   const agOpplysning = arbeidsgiverOpplysningerPerId[ferieAndel.arbeidsgiverId];
-  // eslint-disable-next-line no-console
-  console.log(agOpplysning);
   if (agOpplysning) {
     if (agOpplysning.erPrivatPerson) {
       return agOpplysning.fødselsdato

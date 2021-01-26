@@ -99,7 +99,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     });
   }, [erTilbakekreving]);
 
-  const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingArsaker
+  const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingÅrsaker
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some((bt: Kodeverk) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
     || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false),

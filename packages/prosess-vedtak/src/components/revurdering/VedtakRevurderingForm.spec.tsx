@@ -45,7 +45,7 @@ const createBehandling = (behandlingResultatType) => ({
     kodeverk: '',
   },
   opprettet: '16‎.‎07‎.‎2004‎ ‎17‎:‎35‎:‎21',
-  behandlingArsaker: [],
+  behandlingÅrsaker: [],
 });
 
 const resultatstruktur = {
