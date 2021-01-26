@@ -24,8 +24,6 @@ const grafFargeFL = '#c1b5d0';
 const grafBorderFarge = '#0c5472';
 
 const finnAndelerStatus = (relevanteStatuser) => {
-  /* eslint-disable no-console */
-  console.log('RELEVANTE_STATUSER', relevanteStatuser);
   if (relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) return aktivitetStatus.KOMBINERT_AT_FL;
   if (relevanteStatuser.isFrilanser) return aktivitetStatus.FRILANSER;
   if (relevanteStatuser.isArbeidstaker) return aktivitetStatus.ARBEIDSTAKER;

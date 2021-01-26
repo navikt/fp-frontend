@@ -26,7 +26,7 @@ describe('<UttakFaktaIndex>', () => {
       kode: '1',
       kodeverk: '1',
     },
-    behandlingArsaker: [],
+    behandlingÅrsaker: [],
   };
 
   const aksjonspunkter = [{
