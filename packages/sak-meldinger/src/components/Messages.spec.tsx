@@ -3,7 +3,9 @@ import sinon from 'sinon';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { MessagesImpl as Messages } from './Messages';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meldinger';
@@ -34,9 +36,19 @@ describe('<Messages>', () => {
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
   ];
 
-  const causes = [
-    { kode: 'kode', navn: 'Årsak 1', kodeverk: 'kode' },
-  ];
+  const revurderingVarslingArsaker = [{
+    kode: ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
+    navn: 'Ikke registrert',
+    kodeverk: '',
+  }, {
+    kode: ugunstAarsakTyper.ANNET,
+    navn: 'Annet',
+    kodeverk: '',
+  }, {
+    kode: 'TEST',
+    navn: 'test',
+    kodeverk: '',
+  }];
 
   it('skal vise to select-bokser', () => {
     const wrapper = shallowWithIntl(<Messages
@@ -44,10 +56,13 @@ describe('<Messages>', () => {
       recipients={recipients}
       templates={templates}
       sprakKode={sprakkode}
-      causes={causes}
       behandlingId={1}
       behandlingVersjon={2}
-      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
+      revurderingVarslingArsak={revurderingVarslingArsaker}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
     />);
 
     const form = wrapper.find('form');
@@ -70,12 +85,15 @@ describe('<Messages>', () => {
       recipients={recipients}
       templates={templates}
       sprakKode={sprakkode}
-      causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
       behandlingId={1}
       behandlingVersjon={2}
-      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
+      revurderingVarslingArsak={revurderingVarslingArsaker}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
     />);
 
     const previewLink = wrapper.find('a');
@@ -95,12 +113,15 @@ describe('<Messages>', () => {
       templates={templates}
       sprakKode={sprakkode}
       brevmalkode="REVURD"
-      causes={causes}
       previewCallback={previewEventCallback}
       fritekst="Dokument"
       behandlingId={1}
       behandlingVersjon={2}
-      revurderingVarslingArsak={[{} as KodeverkMedNavn]}
+      revurderingVarslingArsak={revurderingVarslingArsaker}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
     />);
 
     const form = wrapper.find('form');
@@ -114,5 +135,74 @@ describe('<Messages>', () => {
     const templateSelect = selectFields.findWhere((selectField) => selectField.prop('name') === 'brevmalkode');
     expect(templateSelect).toHaveLength(1);
     expect(templateSelect.prop('selectValues')).toHaveLength(3);
+  });
+
+  it('skal vise alle revuderingsvarslingsårsaker for sakstype foreldeprenger', () => {
+    const wrapper = shallowWithIntl(<Messages
+      {...mockProps}
+      recipients={recipients}
+      templates={templates}
+      sprakKode={sprakkode}
+      behandlingId={1}
+      behandlingVersjon={2}
+      brevmalkode={dokumentMalType.REVURDERING_DOK}
+      revurderingVarslingArsak={revurderingVarslingArsaker}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: '',
+      }}
+    />);
+
+    const form = wrapper.find('form');
+    const selectField = form.find('SelectField').last();
+    expect(selectField.prop('selectValues')).toHaveLength(3);
+  });
+
+  it('skal vise alle revuderingsvarslingsårsaker utenom Barn ikke registrert for sakstype svangerskapspenger', () => {
+    const wrapper = shallowWithIntl(<Messages
+      {...mockProps}
+      recipients={recipients}
+      templates={templates}
+      sprakKode={sprakkode}
+      behandlingId={1}
+      behandlingVersjon={2}
+      brevmalkode={dokumentMalType.REVURDERING_DOK}
+      revurderingVarslingArsak={revurderingVarslingArsaker}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.SVANGERSKAPSPENGER,
+        kodeverk: '',
+      }}
+    />);
+
+    const form = wrapper.find('form');
+    const selectField = form.find('SelectField').last();
+    const options = selectField.prop('selectValues');
+    expect(options).toHaveLength(2);
+    expect(options[0].props.value).toEqual(ugunstAarsakTyper.ANNET);
+    expect(options[1].props.value).toEqual('TEST');
+  });
+
+  it('skal vise revuderingsvarslingsårsaker (Annet og Barn ikke registrert) for sakstype engangsstønad', () => {
+    const wrapper = shallowWithIntl(<Messages
+      {...mockProps}
+      recipients={recipients}
+      templates={templates}
+      sprakKode={sprakkode}
+      behandlingId={1}
+      behandlingVersjon={2}
+      brevmalkode={dokumentMalType.REVURDERING_DOK}
+      revurderingVarslingArsak={revurderingVarslingArsaker}
+      fagsakYtelseType={{
+        kode: fagsakYtelseType.ENGANGSSTONAD,
+        kodeverk: '',
+      }}
+    />);
+
+    const form = wrapper.find('form');
+    const selectField = form.find('SelectField').last();
+    const options = selectField.prop('selectValues');
+    expect(options).toHaveLength(2);
+    expect(options[0].props.value).toEqual(ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER);
+    expect(options[1].props.value).toEqual(ugunstAarsakTyper.ANNET);
   });
 });
