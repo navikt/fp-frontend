@@ -39,6 +39,7 @@ describe('<VurderEndringRefusjonRad>', () => {
       valgtDatoErLikSTP={false}
       skjæringstidspunkt={stp}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      formName="test"
     />);
 
     const datepicker = wrapper.find('DatepickerField');
@@ -59,6 +60,7 @@ describe('<VurderEndringRefusjonRad>', () => {
       valgtDatoErLikSTP
       skjæringstidspunkt={stp}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      formName="test"
     />);
 
     const datepicker = wrapper.find('DatepickerField');

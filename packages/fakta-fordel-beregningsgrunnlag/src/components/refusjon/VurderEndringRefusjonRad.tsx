@@ -20,8 +20,6 @@ import { connect } from 'react-redux';
 import styles from './vurderEndringRefusjonRad.less';
 import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
 
-export const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
-
 const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
 const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';
 
@@ -43,6 +41,7 @@ type OwnProps = {
     behandlingId: number;
     behandlingVersjon: number;
     skjæringstidspunkt: string;
+    formName: string;
 };
 
 type TransformedValues = {
@@ -165,7 +164,7 @@ const erValgtDatoLikSTP = (stp: string, verdiFraForm?: string): boolean => {
 
 const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => ({
   valgtDatoErLikSTP: (erValgtDatoLikSTP(ownProps.skjæringstidspunkt,
-    behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, lagNøkkelRefusjonsstart(ownProps.refusjonAndel)))),
+    behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, lagNøkkelRefusjonsstart(ownProps.refusjonAndel)))),
 });
 
 const VurderEndringRefusjonRad = connect(mapStateToProps)(VurderEndringRefusjonRadImpl);

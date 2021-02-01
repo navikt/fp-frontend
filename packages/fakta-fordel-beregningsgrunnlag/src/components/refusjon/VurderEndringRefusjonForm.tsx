@@ -11,9 +11,10 @@ import { behandlingForm } from '@fpsak-frontend/form';
 import { RefusjonTilVurderingAndel, Beregningsgrunnlag, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
-import VurderEndringRefusjonRad, { FORM_NAME } from './VurderEndringRefusjonRad';
+import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
 
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
+const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
 
 const {
   VURDER_REFUSJON_BERGRUNN,
@@ -80,6 +81,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
             skjæringstidspunkt={beregningsgrunnlag.skjaeringstidspunktBeregning}
+            formName={FORM_NAME}
           />
         ))}
         <>
