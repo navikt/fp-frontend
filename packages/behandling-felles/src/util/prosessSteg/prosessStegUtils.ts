@@ -31,10 +31,10 @@ export const utledProsessStegPaneler = (
   );
 
   return prosessStegPanelDefinisjoner
-    .filter((prosessStegDef: ProsessStegDef) => prosessStegDef.skalViseProsessSteg(aksjonspunkter, dataForUtledingAvPaneler))
+    .filter((prosessStegDef: ProsessStegDef) => prosessStegDef.skalViseProsessSteg(behandling, aksjonspunkter, vilkar))
     .map((prosessStegDef: ProsessStegDef) => {
       const delPaneler = prosessStegDef.getPanelDefinisjoner()
-        .filter((panelDef: ProsessStegPanelDef) => panelDef.skalVisePanel(aksjonspunkter, dataForUtledingAvPaneler))
+        .filter((panelDef: ProsessStegPanelDef) => panelDef.skalVisePanel(behandling, aksjonspunkter, vilkar))
         .map((panelDef: ProsessStegPanelDef) => {
           const pDef = panelDef.skalBrukeOverstyringspanel(aksjonspunkter) ? panelDef.getOverstyringspanelDef() : panelDef;
           return new ProsessStegPanelUtledet(prosessStegDef, pDef, isReadOnlyCheck, aksjonspunkter, vilkar,

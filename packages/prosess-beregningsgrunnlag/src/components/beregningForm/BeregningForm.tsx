@@ -58,10 +58,7 @@ const gjelderBehandlingenBesteberegning = (faktaOmBeregning) => (faktaOmBeregnin
   ? faktaOmBeregning.faktaOmBeregningTilfeller.some((tilfelle) => tilfelle.kode === faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE)
   : false);
 
-const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag) => {
-  const { besteberegninggrunnlag } = ytelsesspesifiktGrunnlag;
-  return !!besteberegninggrunnlag;
-};
+const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag) => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
 
 const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder) => allePerioder.some(({ periodeAarsaker }) => periodeAarsaker
   && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
