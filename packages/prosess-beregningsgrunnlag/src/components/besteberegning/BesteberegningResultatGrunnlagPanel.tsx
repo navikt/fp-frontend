@@ -26,13 +26,14 @@ const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]) => (
 const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number) => (kap8Beregning > kap1473Beregning);
 
 const headerColumnContent = [
-  <></>,
-  <Element>
+  // For å lage tom kolonne først
+  <div key="TomKolNøkkel" />,
+  <Element key="Kap8Nøkkel">
     {' '}
     <FormattedMessage id="Besteberegning.ResultatGrunnlag.BeregningEtterKap8" />
     {' '}
   </Element>,
-  <Element>
+  <Element key="BBNøkkel">
     {' '}
     <FormattedMessage id="Besteberegning.ResultatGrunnlag.BeregningEtterBesteberegning" />
     {' '}

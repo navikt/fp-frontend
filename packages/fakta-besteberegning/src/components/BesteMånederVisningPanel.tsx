@@ -45,12 +45,12 @@ interface BesteMånederProps {
 }
 
 const headerColumnContent = [
-  <Element>
+  <Element key="AktivitetNøkkel">
     {' '}
     <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Aktivitet" />
     {' '}
   </Element>,
-  <Element>
+  <Element key="InntektNøkkel">
     {' '}
     <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Inntekt" />
     {' '}
