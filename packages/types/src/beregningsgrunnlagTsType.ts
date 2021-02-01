@@ -1,6 +1,6 @@
-import { Besteberegninggrunnlag } from 'types/src/besteberegningTsTypes';
 import Kodeverk from './kodeverkTsType';
 import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
+import { Besteberegninggrunnlag } from './besteberegningTsTypes';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 

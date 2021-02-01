@@ -1,6 +1,4 @@
-
 import { Kodeverk } from '@fpsak-frontend/types';
-
 
 export type Månedsgrunnlag = Readonly<{
   fom: string;
@@ -18,5 +16,3 @@ export type BesteberegningInntekt = Readonly<{
 export type Besteberegninggrunnlag = Readonly<{
   besteMåneder: Månedsgrunnlag[];
 }>
-
-
