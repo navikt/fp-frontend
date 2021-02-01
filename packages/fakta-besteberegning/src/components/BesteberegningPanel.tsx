@@ -21,10 +21,10 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   getKodeverkNavn,
 }) => {
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
-  if (ytelsesspesifiktGrunnlag == null || ytelsesspesifiktGrunnlag.besteberegninggrunnlag == null) {
+  const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
+  if (!besteberegninggrunnlag) {
     return null;
   }
-  const { besteberegninggrunnlag } = ytelsesspesifiktGrunnlag;
   const førstePeriode = beregningsgrunnlagPeriode[0];
   return (
     <div>

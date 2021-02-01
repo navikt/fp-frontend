@@ -161,12 +161,7 @@ const finnGjennomsnittligMånedsinntekt = (besteMåneder : Månedsgrunnlag[]) =>
   besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) / 6
 );
 
-const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => besteMåneder.sort((m1, m2) => {
-  if (moment(m1.fom).isBefore(moment(m2.fom))) {
-    return -1;
-  }
-  return 1;
-});
+const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => besteMåneder.sort((a, b) => moment(a.fom).diff(moment(b.fom)));
 
 /**
  * BesteMånederVisningPanel

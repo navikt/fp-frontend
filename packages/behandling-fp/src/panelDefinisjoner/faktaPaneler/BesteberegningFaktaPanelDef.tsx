@@ -4,7 +4,7 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
 import { FaktaPanelDef } from '@fpsak-frontend/behandling-felles';
 
-class BeregningFaktaPanelDef extends FaktaPanelDef {
+class BesteberegningFaktaPanelDef extends FaktaPanelDef {
   getUrlKode = () => faktaPanelCodes.BESTEBEREGNING
 
   getTekstKode = () => 'BesteberegningInfoPanel.Title'
@@ -26,4 +26,4 @@ class BeregningFaktaPanelDef extends FaktaPanelDef {
   })
 }
 
-export default BeregningFaktaPanelDef;
+export default BesteberegningFaktaPanelDef;
