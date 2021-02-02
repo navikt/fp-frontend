@@ -203,6 +203,14 @@
   "Beregningsgrunnlag.Gradering.FordelingMåVurderes": "Nei, fordelingen av inntekt må vurderes på nytt. Behandlingen settes på vent",
 
 
+  "Besteberegning.ResultatGrunnlag.BruttoBeregningsgrunnlag": "Beregnet",
+  "Besteberegning.ResultatGrunnlag.BeregningEtterBesteberegning": "§14-7, 3. ledd",
+  "Besteberegning.ResultatGrunnlag.BrukerOmfattesAvBesteberegning": "Søker omfattes av §14-7, 3. ledd.",
+  "Besteberegning.ResultatGrunnlag.BeregningEtterKap8": "§14-7, 1. ledd",
+  "Besteberegning.ResultatGrunnlag.Overskrift": "Beregnet etter §14-7, 3. ledd",
+  "Besteberegning.ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd gir beste beregning.",
+
+
   "Malform.Beskrivelse": "Foretrukket språk",
   "Behandling.EditedField": "Saksbehandler har endret feltets verdi"
 }
