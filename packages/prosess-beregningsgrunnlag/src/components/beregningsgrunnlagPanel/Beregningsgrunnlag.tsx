@@ -127,6 +127,7 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
           />
           <NaeringsopplysningsPanel
             alleAndelerIForstePeriode={alleAndelerIForstePeriode}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         </>
       )}

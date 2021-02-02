@@ -10,6 +10,8 @@ export {
   SammenligningsgrunlagProp,
   YtelseGrunnlag,
   BeregningsgrunnlagPeriodeProp,
+  PgiVerdier,
+  Næring,
 } from './src/beregningsgrunnlagTsType';
 export {
   default as FaktaOmBeregning,
