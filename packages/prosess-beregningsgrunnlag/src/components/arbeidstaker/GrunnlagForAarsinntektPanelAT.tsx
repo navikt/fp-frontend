@@ -193,7 +193,7 @@ interface StaticFunctions {
 type OwnProps = {
     alleAndeler: BeregningsgrunnlagAndel[];
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
-    getKodeverknavn: (...args: any[]) => any;
+    getKodeverknavn: (kodeverk: Kodeverk) => string;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 

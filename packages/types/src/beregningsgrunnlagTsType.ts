@@ -1,5 +1,6 @@
 import Kodeverk from './kodeverkTsType';
 import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
+import { Besteberegninggrunnlag } from './besteberegningTsTypes';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 
@@ -71,8 +72,9 @@ export type RelevanteStatuserProp = Readonly<{
   isMilitaer: boolean;
 }>;
 
-type YtelseGrunnlag = Readonly<{
+export type YtelseGrunnlag = Readonly<{
   ytelsetype: string;
+  besteberegninggrunnlag?: Besteberegninggrunnlag;
 }>;
 
 export type SammenligningsgrunlagProp = Readonly<{

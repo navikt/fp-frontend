@@ -3,12 +3,12 @@ export { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeid
 export { default as Behandling } from './src/behandlingTsType';
 export { default as BehandlingAppKontekst } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
-// TODO Denne må brytes opp, kan brytes inn i beregningsgrunnlag, fakta og fordel?
 export {
   default as Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
   RelevanteStatuserProp,
   SammenligningsgrunlagProp,
+  YtelseGrunnlag,
   BeregningsgrunnlagPeriodeProp,
 } from './src/beregningsgrunnlagTsType';
 export {
@@ -24,6 +24,7 @@ export {
   ATFLSammeOrgAndel,
   RefusjonskravSomKommerForSentListe,
 } from './src/beregningsgrunnlagFaktaTsType';
+export { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';
 export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export {
   RefusjonTilVurderingAndel,
