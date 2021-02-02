@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
@@ -18,7 +18,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
-  ArbeidsgiverOpplysningerPerId,
+  ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
   KodeverkMedNavn,
   RelevanteStatuserProp,
@@ -33,20 +33,20 @@ import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/Aksjonspunkt
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const finnAlleAndelerIFørstePeriode = (allePerioder) => {
+const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
   if (allePerioder && allePerioder.length > 0) {
     return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
   }
   return undefined;
 };
-const harFlereAksjonspunkter = (gjeldendeAksjonspunkter) => !!gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 1;
-const finnATFLVurderingLabel = (gjeldendeAksjonspunkter) => {
+const harFlereAksjonspunkter = (gjeldendeAksjonspunkter: Aksjonspunkt[]): boolean => !!gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 1;
+const finnATFLVurderingLabel = (gjeldendeAksjonspunkter: Aksjonspunkt[]): ReactElement => {
   if (harFlereAksjonspunkter(gjeldendeAksjonspunkter)) {
     return <FormattedMessage id="Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag" />;
   }
   return <FormattedMessage id="Beregningsgrunnlag.Forms.Vurdering" />;
 };
-const finnGjeldeneAksjonsPunkt = (aksjonspunkter, erNyiArbeidslivet, readOnly, erSNellerFL) => {
+const finnGjeldeneAksjonsPunkt = (aksjonspunkter: Aksjonspunkt[], erNyiArbeidslivet: boolean, readOnly: boolean, erSNellerFL: boolean): Aksjonspunkt => {
   if (erSNellerFL) {
     return aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   }
@@ -56,7 +56,7 @@ const finnGjeldeneAksjonsPunkt = (aksjonspunkter, erNyiArbeidslivet, readOnly, e
   return aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
 };
 
-const lagEndretTekst = (aksjonspunkter, erNyiArbeidslivet, readOnly, erSNellerFL) => {
+const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], erNyiArbeidslivet: boolean, readOnly: boolean, erSNellerFL: boolean): ReactElement => {
   if (!aksjonspunkter || !readOnly) return null;
   const aksjonspunkt = finnGjeldeneAksjonsPunkt(aksjonspunkter, erNyiArbeidslivet, readOnly, erSNellerFL);
   if (!aksjonspunkt) return null;
