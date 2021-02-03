@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Column } from 'nav-frontend-grid';
@@ -8,7 +8,7 @@ import { FlexRow } from '@fpsak-frontend/shared-components';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvvikopplysningerATFLSN from '../fellesPaneler/AvvikopplysningerATFLSN';
 
-const ingenAvviksvurdering = (forklarendeTekst) => (
+const ingenAvviksvurdering = (forklarendeTekst: string): ReactElement => (
   <FlexRow>
     <Column xs="12">
       <Normaltekst>

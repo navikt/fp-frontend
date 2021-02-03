@@ -35,10 +35,19 @@ const andelerForstePeriode = {
   }],
 } as BeregningsgrunnlagAndel;
 
+const agOpp = {
+  910909088: {
+    identifikator: '910909088',
+    navn: 'Test',
+    erPrivatPerson: false,
+  },
+};
+
 describe('NaeringsopplysningsPanel', () => {
   it('Skal teste at komponenten renderer riktige verdier', () => {
     const wrapper = shallowWithIntl(<NaeringsopplysningsPanel.WrappedComponent
       alleAndelerIForstePeriode={[andelerForstePeriode]}
+      arbeidsgiverOpplysningerPerId={agOpp}
       intl={intlMock}
     />);
     const formattedMessages = wrapper.find('FormattedMessage');

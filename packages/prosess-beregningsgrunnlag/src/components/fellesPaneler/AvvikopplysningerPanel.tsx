@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
@@ -6,19 +6,24 @@ import { VerticalSpacer, FlexContainer, AvsnittSkiller } from '@fpsak-frontend/s
 import { Column, Row } from 'nav-frontend-grid';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BeregningsgrunnlagPeriodeProp, RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import {
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp,
+  RelevanteStatuserProp,
+  SammenligningsgrunlagProp,
+} from '@fpsak-frontend/types';
 import AvviksopplysningerSN from '../selvstendigNaeringsdrivende/AvvikopplysningerSN';
 import AvviksopplysningerAT from '../arbeidstaker/AvvikopplysningerAT';
 import AvviksopplysningerFL from '../frilanser/AvvikopplysningerFL';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
-const finnAlleAndelerIFørstePeriode = (allePerioder) => {
+const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
   if (allePerioder && allePerioder.length > 0) {
     return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
   }
   return undefined;
 };
-const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel) => {
+const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
   // Andelen er fastsatt før og må kunne fastsettes igjen
   if (andel.overstyrtPrAar !== null && andel.overstyrtPrAar !== undefined) {
     return true;
@@ -26,7 +31,7 @@ const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel) => {
   // Andeler som er lagt til av sbh eller tilkom før stp skal ikke kunne endres på
   return andel.erTilkommetAndel === false && andel.lagtTilAvSaksbehandler === false;
 };
-const finnAndelerSomSkalVises = (andeler, status) => {
+const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[], status: string): BeregningsgrunnlagAndel[] => {
   if (!andeler) {
     return [];
   }
@@ -35,7 +40,7 @@ const finnAndelerSomSkalVises = (andeler, status) => {
     .filter((andel) => andel.aktivitetStatus.kode === status)
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
-const beregnAarsintektForAktivitetStatus = (alleAndelerIForstePeriode, status) => {
+const beregnAarsintektForAktivitetStatus = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], status: string): number => {
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIForstePeriode, status);
   if (relevanteAndeler) {
     return relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
@@ -44,13 +49,13 @@ const beregnAarsintektForAktivitetStatus = (alleAndelerIForstePeriode, status) =
 };
 
 const lagRelevantePaneler = (
-  alleAndelerIForstePeriode,
-  relevanteStatuser,
-  allePerioder,
-  harAksjonspunkter,
-  sammenligningsgrunnlagPrStatus,
-  gjelderBesteberegning,
-) => {
+  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],
+  relevanteStatuser: RelevanteStatuserProp,
+  allePerioder: BeregningsgrunnlagPeriodeProp[],
+  harAksjonspunkter: boolean,
+  sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[],
+  gjelderBesteberegning: boolean,
+): ReactElement => {
   if (gjelderBesteberegning) {
     return (<Normaltekst><FormattedMessage id="Beregningsgrunnlag.Avviksopplysninger.Besteberegning" /></Normaltekst>);
   }
@@ -110,13 +115,9 @@ const lagRelevantePaneler = (
   );
 };
 
-const harRelevanteStatuserSatt = (relevanteStatuser) => {
-  const statuser = relevanteStatuser;
-  delete statuser.skalViseBeregningsgrunnlag;
-  delete statuser.harAndreTilstotendeYtelser;
-  const statusVerdier = Object.values(statuser);
-  return statusVerdier.some((verdi) => verdi === true);
-};
+const harRelevanteStatuserSatt = (statuser: RelevanteStatuserProp): boolean => (statuser.isArbeidstaker
+  || statuser.isFrilanser || statuser.isSelvstendigNaeringsdrivende || statuser.harDagpengerEllerAAP
+  || statuser.isAAP || statuser.isDagpenger || statuser.isKombinasjonsstatus || statuser.isMilitaer);
 
 type OwnProps = {
     relevanteStatuser: RelevanteStatuserProp;

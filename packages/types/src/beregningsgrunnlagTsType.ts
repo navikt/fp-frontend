@@ -4,7 +4,7 @@ import { Besteberegninggrunnlag } from './besteberegningTsTypes';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 
-type Næring = Readonly <{
+export type Næring = Readonly <{
   orgnr: string;
   virksomhetType: Kodeverk;
   utenlandskvirksomhetsnavn?: string;
@@ -12,6 +12,7 @@ type Næring = Readonly <{
   erNyoppstartet?: boolean;
   begrunnelse?: string;
   endringsdato?: string;
+  opphørsdato?: string;
   oppstartsdato?: string;
   regnskapsførerNavn?: string;
   regnskapsførerTlf?: string;
@@ -20,7 +21,7 @@ type Næring = Readonly <{
   oppgittInntekt?: number;
 }>
 
-type PgiVerdier = Readonly <{
+export type PgiVerdier = Readonly <{
   beløp: number;
   årstall: number,
 }>
