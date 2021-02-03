@@ -52,7 +52,8 @@ const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: Kode
       || arsak.kode === ugunstAarsakTyper.ANNET);
   }
   if (fagsakYtelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return revurderingVarslingArsaker.filter((arsak) => arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER);
+    return revurderingVarslingArsaker.filter((arsak) => arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER
+      && arsak.kode !== ugunstAarsakTyper.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT);
   }
   return revurderingVarslingArsaker;
 };
