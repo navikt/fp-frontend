@@ -2,55 +2,50 @@ import React, { FunctionComponent } from 'react';
 import {
   Element, Normaltekst, Undertekst, EtikettLiten,
 } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import {
   FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel, Næring } from '@fpsak-frontend/types';
 import Lesmerpanel from '../redesign/LesmerPanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import styles from './naeringsOpplysningsPanel.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 
-const finnvirksomhetsTypeKode = (naring) => {
-  const { virksomhetType } = naring;
-  if (!virksomhetType) {
-    return 'UDEFINERT';
-  }
-  const { kode } = virksomhetType;
-  if (!kode) {
-    return 'UDEFINERT';
-  }
-  return kode;
+const finnvirksomhetsTypeKode = (næring: Næring): string => {
+  const kode = næring?.virksomhetType?.kode;
+  return kode || 'UDEFINERT';
 };
-const virksomhetsDatoer = (naringsAndel) => {
-  const { oppstartsdato, opphoersdato } = naringsAndel;
+const virksomhetsDatoer = (næring: Næring): string => {
+  const { oppstartsdato, opphørsdato } = næring;
   if (!oppstartsdato) {
     return undefined;
   }
-  return opphoersdato ? `${dateFormat(oppstartsdato)}-${dateFormat(opphoersdato)} ` : `${dateFormat(oppstartsdato)}-`;
+  return opphørsdato ? `${dateFormat(oppstartsdato)}-${dateFormat(opphørsdato)} ` : `${dateFormat(oppstartsdato)}-`;
 };
 
-const revisorDetaljer = (naring) => {
-  const { regnskapsførerNavn, regnskapsførerTlf } = naring;
+const revisorDetaljer = (næring: Næring): string => {
+  const { regnskapsførerNavn, regnskapsførerTlf } = næring;
   if (!regnskapsførerNavn) {
     return null;
   }
   return regnskapsførerTlf ? `${regnskapsførerNavn}-${regnskapsførerTlf} ` : `${regnskapsførerNavn}-`;
 };
 
-const finnBedriftsnavn = (naring) => {
-  const { virksomhetNavn } = naring;
-  return virksomhetNavn || 'Ukjent bedriftsnavn';
+const finnBedriftsnavn = (næring: Næring, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const agOpplysning = arbeidsgiverOpplysningerPerId[næring.orgnr];
+  return agOpplysning ? agOpplysning.navn : 'Ukjent bedriftsnavn';
 };
 
-const lagIntroTilEndringspanel = (naring) => {
+const lagIntroTilEndringspanel = (næring: Næring): React.ReactNode => {
   const {
     oppstartsdato, erVarigEndret, endringsdato,
-  } = naring;
+  } = næring;
   const hendelseTekst = erVarigEndret ? 'Beregningsgrunnlag.NaeringsOpplysningsPanel.VarigEndret' : 'Beregningsgrunnlag.NaeringsOpplysningsPanel.Nyoppstaret';
   const hendelseDato = erVarigEndret ? endringsdato : oppstartsdato;
   if (!hendelseDato) {
@@ -63,39 +58,44 @@ const lagIntroTilEndringspanel = (naring) => {
   );
 };
 
-const erNæringNyoppstartetEllerVarigEndret = (naring) => {
+const erNæringNyoppstartetEllerVarigEndret = (næring): boolean => {
   const {
     erNyoppstartet, erVarigEndret,
-  } = naring;
+  } = næring;
   return erVarigEndret || erNyoppstartet;
 };
 
-const lagBeskrivelsePanel = (naringsAndel, intl) => (
+const lagBeskrivelsePanel = (næringsAndel: Næring, intl: IntlShape): React.ReactNode => (
   <>
     <VerticalSpacer fourPx />
     <Lesmerpanel
       className={styles.lesMer}
-      intro={lagIntroTilEndringspanel(naringsAndel)}
+      intro={lagIntroTilEndringspanel(næringsAndel)}
       lukkTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.NaeringsOpplysningsPanel.SkjulBegrunnelse' })}
       apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.NaeringsOpplysningsPanel.VisBegrunnelse' })}
       defaultApen
     >
-      {naringsAndel.begrunnelse && naringsAndel.begrunnelse !== '' && (
+      {næringsAndel.begrunnelse && næringsAndel.begrunnelse !== '' && (
       <Normaltekst className={styles.merTekstBorder}>
-        {naringsAndel.begrunnelse}
+        {næringsAndel.begrunnelse}
       </Normaltekst>
       )}
     </Lesmerpanel>
   </>
 );
 
-const søkerHarOppgittInntekt = (naring) => naring.oppgittInntekt || naring.oppgittInntekt === 0;
+const søkerHarOppgittInntekt = (næring: Næring): boolean => !!næring.oppgittInntekt || næring.oppgittInntekt === 0;
 
 type OwnProps = {
     alleAndelerIForstePeriode?: BeregningsgrunnlagAndel[];
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({ alleAndelerIForstePeriode, intl }) => {
+export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  alleAndelerIForstePeriode,
+  arbeidsgiverOpplysningerPerId,
+  intl,
+}) => {
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   if (!snAndel.næringer) {
@@ -133,7 +133,7 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
           <Row key={`NaringsNavn${naring.orgnr}`}>
             <Column xs="6">
               <Normaltekst className={beregningStyles.semiBoldText}>
-                {finnBedriftsnavn(naring)}
+                {finnBedriftsnavn(naring, arbeidsgiverOpplysningerPerId)}
               </Normaltekst>
             </Column>
             <Column xs="4">

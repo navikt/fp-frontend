@@ -7,7 +7,7 @@ import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import styles from './avvikopplysningerPanel.less';
 
-const lagFormatertetekster = (kriterie, visPanel, relevanteStatuser, isBold) => (
+const lagFormatertetekster = (kriterie: string, visPanel: VisPanelProp, relevanteStatuser: RelevanteStatuserProp, isBold: boolean) => (
   <FlexColumn className={styles.colLable}>
     <Normaltekst className={isBold ? beregningStyles.semiBoldText : ''}>
       {!relevanteStatuser.isKombinasjonsstatus && (

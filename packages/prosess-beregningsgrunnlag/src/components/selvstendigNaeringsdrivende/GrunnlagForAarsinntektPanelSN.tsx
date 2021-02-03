@@ -9,10 +9,10 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import { Column, Row } from 'nav-frontend-grid';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, PgiVerdier } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
-const createHeaderRow = () => (
+const createHeaderRow = (): React.ReactNode => (
   <Row key="SNInntektHeader">
     <Column xs="10">
       <EtikettLiten className={beregningStyles.etikettLiten}>
@@ -27,7 +27,7 @@ const createHeaderRow = () => (
     </Column>
   </Row>
 );
-const createSumRow = (pgiSnitt) => (
+const createSumRow = (pgiSnitt: number): React.ReactNode => (
   <>
     {pgiSnitt !== undefined && (
       <>
@@ -54,7 +54,7 @@ const createSumRow = (pgiSnitt) => (
     )}
   </>
 );
-const createInntektRows = (pgiVerdier) => (
+const createInntektRows = (pgiVerdier: PgiVerdier[]): React.ReactNode => (
   <>
     {pgiVerdier.map((element) => (
       <Row key={element.årstall}>
@@ -107,7 +107,6 @@ export const GrunnlagForAarsinntektPanelSN: FunctionComponent<OwnProps> = ({ all
       {createHeaderRow()}
       {createInntektRows(pgiVerdier)}
       {createSumRow(pgiSnitt)}
-
     </>
   );
 };

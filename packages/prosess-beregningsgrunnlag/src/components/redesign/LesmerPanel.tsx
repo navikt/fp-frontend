@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import LesMerToggle from './LesMerToggle';
 import styles from './lesMerPanel.less';
 
-const lesMerPanelCls = (props) => classNames(styles.lesMerPanel, props.className, props.border ? styles['lesMerPanel--border'] : '');
-
 type OwnProps = {
     defaultApen?: boolean;
     onOpen?: (...args: any[]) => any;
@@ -23,6 +21,8 @@ type OwnProps = {
 type StateProps = {
   erApen: boolean;
 };
+
+const lesMerPanelCls = (props: OwnProps): string => classNames(styles.lesMerPanel, props.className, props.border ? styles['lesMerPanel--border'] : '');
 
 /**
  * Lesmerpanel

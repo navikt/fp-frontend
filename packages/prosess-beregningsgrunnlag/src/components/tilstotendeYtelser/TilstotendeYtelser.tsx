@@ -9,7 +9,7 @@ import aktivitetStatus, { isStatusDagpengerOrAAP } from '@fpsak-frontend/kodever
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
-export const getTekstForAndelBruktIBeregning = (andel) => {
+export const getTekstForAndelBruktIBeregning = (andel: BeregningsgrunnlagAndel): string => {
   if (andel.aktivitetStatus.kode === aktivitetStatus.DAGPENGER) {
     return 'Beregningsgrunnlag.TilstottendeYtelse.Dagpenger';
   }
@@ -18,7 +18,7 @@ export const getTekstForAndelBruktIBeregning = (andel) => {
   }
   return '';
 };
-const isAktivitetKodeDagpenger = (aktivitetStatusKode) => aktivitetStatusKode === aktivitetStatus.DAGPENGER;
+const isAktivitetKodeDagpenger = (aktivitetStatusKode: string): boolean => aktivitetStatusKode === aktivitetStatus.DAGPENGER;
 
 type OwnProps = {
     alleAndeler: BeregningsgrunnlagAndel[];

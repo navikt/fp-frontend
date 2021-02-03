@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -21,7 +21,7 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 
 export const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
 
-const createStatusEtiketter = (listeMedStatuser, getKodeverknavn) => {
+const createStatusEtiketter = (listeMedStatuser: Kodeverk[], getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement => {
   const statusList = [];
   const unikeStatuser = listeMedStatuser.filter((status, index, self) => index === self.findIndex((t) => (
     t.kode === status.kode)));
@@ -46,7 +46,7 @@ interface StaticFunctions {
 type OwnProps = {
     skjeringstidspunktDato: string;
     aktivitetStatusList: Kodeverk[];
-    getKodeverknavn: (...args: any[]) => any;
+    getKodeverknavn: (kodeverk: Kodeverk) => string;
 };
 
 /**
