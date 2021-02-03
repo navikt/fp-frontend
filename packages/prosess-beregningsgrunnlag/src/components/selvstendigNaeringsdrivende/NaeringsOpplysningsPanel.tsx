@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import {
-  Element, Normaltekst, Undertekst, EtikettLiten,
+  Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
@@ -137,9 +137,9 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
               </Normaltekst>
             </Column>
             <Column xs="4">
-              <EtikettLiten className={styles.naringsType}>
+              <Undertekst className={styles.naringsType}>
                 <FormattedMessage id={`Beregningsgrunnlag.NaeringsOpplysningsPanel.VirksomhetsType.${finnvirksomhetsTypeKode(naring)}`} />
-              </EtikettLiten>
+              </Undertekst>
             </Column>
             <Column xs="2" className={beregningStyles.colAarText}>
               {søkerHarOppgittInntekt(naring)
