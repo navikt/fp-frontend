@@ -1,4 +1,6 @@
 import React from 'react';
+import { Undertekst } from 'nav-frontend-typografi';
+
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -53,7 +55,7 @@ describe('<GrunnlagForAarsinntektPanelSN>', () => {
     expect(formattedMessage.at(3).prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.TotalPensjonsGivende');
 
     andel.pgiVerdier.forEach((pgi, index) => {
-      const etikettLiten = rows.at(index + 2).find('EtikettLiten');
+      const etikettLiten = rows.at(index + 2).find(Undertekst);
       const expectedBelop = formatCurrencyNoKr(pgi.beløp);
       const expectedAar = pgi.årstall.toString();
       expect(etikettLiten.at(0).childAt(0).text()).toBe(expectedAar);

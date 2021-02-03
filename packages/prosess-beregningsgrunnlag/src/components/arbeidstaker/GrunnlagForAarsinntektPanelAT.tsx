@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
-  Element, Normaltekst, Undertekst, EtikettLiten,
+  Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -141,9 +141,9 @@ const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
         )}
         {andel.erTidsbegrensetArbeidsforhold && (
         <FlexColumn>
-          <EtikettLiten>
+          <Undertekst>
             <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.Tidsbegrenset" />
-          </EtikettLiten>
+          </Undertekst>
         </FlexColumn>
         )}
       </FlexRow>
