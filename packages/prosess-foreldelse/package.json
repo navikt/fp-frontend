@@ -12,18 +12,18 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "moment": "^2.29.1",
-    "nav-frontend-alertstriper": "3.0.42",
+    "nav-frontend-alertstriper": "3.0.48",
     "nav-frontend-core": "5.0.11",
-    "nav-frontend-grid": "1.0.46",
-    "nav-frontend-grid-style": "0.2.25",
-    "nav-frontend-knapper": "2.0.27",
-    "nav-frontend-knapper-style": "1.0.13",
-    "nav-frontend-modal": "1.0.58",
-    "nav-frontend-typografi": "2.0.39",
-    "nav-frontend-typografi-style": "1.0.32",
+    "nav-frontend-grid": "1.0.49",
+    "nav-frontend-grid-style": "1.0.1",
+    "nav-frontend-knapper": "2.0.30",
+    "nav-frontend-knapper-style": "1.0.15",
+    "nav-frontend-modal": "1.0.62",
+    "nav-frontend-typografi": "3.0.2",
+    "nav-frontend-typografi-style": "1.0.33",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-intl": "^5.10.16",
+    "react-intl": "^5.12.0",
     "react-redux": "^7.2.2",
     "react-visjs-timeline": "^1.6.0",
     "redux": "^4.0.5",
@@ -33,6 +33,6 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "enzyme": "^3.11.0",
-    "sinon": "^9.2.3"
+    "sinon": "^9.2.4"
   }
 }
