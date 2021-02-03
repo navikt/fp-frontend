@@ -51,7 +51,7 @@ const lagAPMedKode = (kode) => ({
     kode: 'OPPR',
     kodeverk: 'test',
   },
-  begrunnelse: null,
+  begrunnelse: 'Dette er en begrunnelse',
   kanLoses: true,
   erAktivt: true,
   endretAv: 'B123456',
@@ -460,7 +460,7 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
   ];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   bg.andelerMedGraderingUtenBG = andeler;
-  const ap = lagAPMedKode(aksjonspunktCodes.AUTO_VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
+  const ap = lagAPMedKode(aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
   return (
     <BeregningsgrunnlagProsessIndex
       behandling={object('behandling', behandling)}

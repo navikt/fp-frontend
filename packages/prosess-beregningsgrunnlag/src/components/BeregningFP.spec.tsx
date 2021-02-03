@@ -9,7 +9,7 @@ import {
 } from '@fpsak-frontend/types';
 import BeregningFP from './BeregningFP';
 import BeregningForm from './beregningForm/BeregningForm';
-import GraderingUtenBG2 from './gradering/GraderingUtenBG';
+import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 
 const lagBeregningsgrunnlag = (ferdigstilt, beregnetPrAar, sammenligningSum, avvikPromille, gradering) => {
   const beregningsgrunnlag = {
@@ -155,7 +155,7 @@ describe('<BeregningFP>', () => {
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    const graderingUtenBG = wrapper.find(GraderingUtenBG2);
+    const graderingUtenBG = wrapper.find(GraderingUtenBGReadOnly);
     expect(graderingUtenBG).toHaveLength(1);
   });
   it('skal teste at GraderingUtenBG ikke vises når sokerHarGraderingPaaAndelUtenBG er false', () => {
@@ -170,7 +170,7 @@ describe('<BeregningFP>', () => {
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
     />);
-    const graderingUtenBG = wrapper.find(GraderingUtenBG2);
+    const graderingUtenBG = wrapper.find(GraderingUtenBGReadOnly);
     expect(graderingUtenBG).toHaveLength(0);
   });
 });

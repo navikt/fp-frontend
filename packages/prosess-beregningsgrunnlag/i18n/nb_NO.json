@@ -201,6 +201,7 @@
   "Beregningsgrunnlag.Gradering.AksjonspunkttekstFlereForhold": "Søker skal gradere hos {arbeidsforholdTekst} og det vil ikke bli utbetaling for disse aktivitetene. Vurder om fordeling av beregningsgrunnlag er riktig.",
   "Beregningsgrunnlag.Gradering.FordelingErRiktig": "Ja, fordelingen av inntekt er riktig. Fortsett behandlingen",
   "Beregningsgrunnlag.Gradering.FordelingMåVurderes": "Nei, fordelingen av inntekt må vurderes på nytt. Behandlingen settes på vent",
+  "Beregningsgrunnlag.Gradering.Beskrivelse": "Saksbehandler har tidligere vurdert om fordeling av inntekt er korrekt grunnet en andel uten utbetaling som skal graderes.",
 
 
   "Besteberegning.ResultatGrunnlag.BruttoBeregningsgrunnlag": "Beregnet",
