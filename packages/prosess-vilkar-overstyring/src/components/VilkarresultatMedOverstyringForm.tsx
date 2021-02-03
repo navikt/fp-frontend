@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 import {
-  Undertittel, Element, EtikettLiten, Normaltekst,
+  Undertittel, Element, Undertekst, Normaltekst,
 } from 'nav-frontend-typografi';
 
 import {
@@ -131,7 +131,7 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
           </FlexColumn>
           {lovReferanse && (
             <FlexColumn>
-              <EtikettLiten className={styles.vilkar}>{lovReferanse}</EtikettLiten>
+              <Undertekst className={styles.vilkar}>{lovReferanse}</Undertekst>
             </FlexColumn>
           )}
         </FlexRow>

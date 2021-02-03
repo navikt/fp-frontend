@@ -1,7 +1,7 @@
 import React, { FunctionComponent, MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Alertstripe from 'nav-frontend-alertstriper';
 
@@ -46,9 +46,9 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
           </Element>
         </FlexColumn>
         <FlexColumn className={styles.space}>
-          <EtikettLiten>
+          <Undertekst>
             {getLanguageFromSprakkode(sprakkode)}
-          </EtikettLiten>
+          </Undertekst>
         </FlexColumn>
         <FlexColumn>
           {!readOnly && skalViseLink && (

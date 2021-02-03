@@ -1,5 +1,5 @@
 import React from 'react';
-import { EtikettLiten } from 'nav-frontend-typografi';
+import { Undertekst } from 'nav-frontend-typografi';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
@@ -49,7 +49,7 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
     expect(melding).toHaveLength(2);
     expect(melding.first().prop('id')).toEqual('Fødsel');
 
-    const normaltekst = wrapper.find(EtikettLiten);
+    const normaltekst = wrapper.find(Undertekst);
     expect(normaltekst).toHaveLength(1);
     expect(normaltekst.childAt(0).text()).toEqual('§23');
 

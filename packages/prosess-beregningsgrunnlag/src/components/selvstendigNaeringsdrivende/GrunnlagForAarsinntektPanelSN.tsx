@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Element, Normaltekst, EtikettLiten,
+  Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 
 import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
@@ -15,15 +15,15 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 const createHeaderRow = (): React.ReactNode => (
   <Row key="SNInntektHeader">
     <Column xs="10">
-      <EtikettLiten className={beregningStyles.etikettLiten}>
+      <Undertekst className={beregningStyles.etikettLiten}>
         <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AarHeader" />
-      </EtikettLiten>
+      </Undertekst>
     </Column>
     <Column xs="2" className={beregningStyles.colAarText}>
 
-      <EtikettLiten className={beregningStyles.etikettLiten}>
+      <Undertekst className={beregningStyles.etikettLiten}>
         <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.TotalPensjonsGivende" />
-      </EtikettLiten>
+      </Undertekst>
     </Column>
   </Row>
 );
@@ -59,14 +59,14 @@ const createInntektRows = (pgiVerdier: PgiVerdier[]): React.ReactNode => (
     {pgiVerdier.map((element) => (
       <Row key={element.årstall}>
         <Column xs="7">
-          <EtikettLiten>
+          <Undertekst>
             {element.årstall}
-          </EtikettLiten>
+          </Undertekst>
         </Column>
         <Column xs="5" className={beregningStyles.colAarText}>
-          <EtikettLiten>
+          <Undertekst>
             {formatCurrencyNoKr(element.beløp)}
-          </EtikettLiten>
+          </Undertekst>
         </Column>
       </Row>
     ))}

@@ -1,6 +1,6 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import {
-  Undertittel, EtikettLiten, Element, Normaltekst,
+  Undertittel, Undertekst, Element, Normaltekst,
 } from 'nav-frontend-typografi';
 
 import {
@@ -70,7 +70,7 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             {lovReferanse && (
               <FlexColumn>
-                <EtikettLiten className={styles.vilkar}>{lovReferanse}</EtikettLiten>
+                <Undertekst className={styles.vilkar}>{lovReferanse}</Undertekst>
               </FlexColumn>
             )}
           </FlexRow>
