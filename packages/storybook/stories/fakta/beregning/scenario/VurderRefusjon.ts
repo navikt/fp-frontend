@@ -27,8 +27,8 @@ export const bgUtenDelvisRefusjon = {
 };
 
 export const bgMedDelvisRefusjon = {
-  skjaeringstidspunktBeregning: '2020-05-15',
-  skjæringstidspunkt: '2020-05-15',
+  skjaeringstidspunktBeregning: '2020-06-01',
+  skjæringstidspunkt: '2020-06-01',
   refusjonTilVurdering: {
     andeler: [
       {

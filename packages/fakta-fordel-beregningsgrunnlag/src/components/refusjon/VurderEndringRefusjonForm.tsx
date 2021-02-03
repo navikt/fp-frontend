@@ -13,8 +13,8 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
 import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
 
-const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
+const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
 
 const {
   VURDER_REFUSJON_BERGRUNN,
@@ -78,6 +78,10 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
             erAksjonspunktÅpent={erAksjonspunktÅpent}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             key={lagRadNøkkel(andel)}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            skjæringstidspunkt={beregningsgrunnlag.skjaeringstidspunktBeregning}
+            formName={FORM_NAME}
           />
         ))}
         <>
@@ -121,7 +125,7 @@ export const buildInitialValues = (bg, aksjonspunkter) => {
 
 export const transformValues = (values, bg) => {
   const { andeler } = bg.refusjonTilVurdering;
-  const transformedAndeler = andeler.map((andel) => VurderEndringRefusjonRad.transformValues(values, andel));
+  const transformedAndeler = andeler.map((andel) => VurderEndringRefusjonRad.transformValues(values, andel, bg.skjaeringstidspunktBeregning));
   return {
     begrunnelse: values[BEGRUNNELSE_FIELD],
     kode: VURDER_REFUSJON_BERGRUNN,
