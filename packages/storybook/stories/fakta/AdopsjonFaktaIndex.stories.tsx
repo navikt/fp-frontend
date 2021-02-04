@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
 import {
-  Behandling, FamilieHendelseSamling, Personopplysninger, Soknad,
+  Behandling, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -43,9 +43,6 @@ const soknad = {
   },
 } as Soknad;
 
-const personopplysninger = {
-  barnSoktFor: [],
-} as Personopplysninger;
 const merknaderFraBeslutter = {
   notAccepted: false,
 };
@@ -84,7 +81,6 @@ export const visAksjonspunktForAdopsjonsvilkåret = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    personopplysninger={personopplysninger}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -112,7 +108,6 @@ export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    personopplysninger={personopplysninger}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
@@ -140,7 +135,6 @@ export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    personopplysninger={personopplysninger}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}

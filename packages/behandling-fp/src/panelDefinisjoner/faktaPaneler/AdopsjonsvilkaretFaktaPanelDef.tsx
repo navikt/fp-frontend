@@ -25,10 +25,9 @@ class AdopsjonsvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getOverstyrVisningAvKomponent = ({ vilkar }) => vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode))
 
-  getData = ({ soknad, personopplysninger }) => ({
+  getData = ({ soknad }) => ({
     isForeldrepengerFagsak: true,
     soknad,
-    personopplysninger,
   })
 }
 

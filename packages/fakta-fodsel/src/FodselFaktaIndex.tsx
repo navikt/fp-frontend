@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, FamilieHendelse, FamilieHendelseSamling, Personopplysninger, Soknad,
+  Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
@@ -20,7 +20,6 @@ interface OwnProps {
   behandling: Behandling;
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;
-  personopplysninger: Personopplysninger;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
 }
@@ -29,7 +28,6 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   soknad,
   familiehendelse,
-  personopplysninger,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
   aksjonspunkter,
@@ -48,7 +46,6 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
       familiehendelse={familiehendelse}
       soknadOriginalBehandling={soknadOriginalBehandling}
       familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-      personopplysninger={personopplysninger}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       aksjonspunkter={aksjonspunkter}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
