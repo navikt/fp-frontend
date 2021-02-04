@@ -14,11 +14,10 @@ import {
   BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, MedlemPeriode,
+  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode,
 } from '@fpsak-frontend/types';
 
 import OppholdINorgeOgAdresserFaktaPanel, { FormValues as OppholdFormValues } from './OppholdINorgeOgAdresserFaktaPanel';
-import InntektOgYtelserFaktaPanel, { FormValues as IOYFormValues } from './InntektOgYtelserFaktaPanel';
 import PerioderMedMedlemskapFaktaPanel, { FormValues as PerioderFormValues } from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel, { FormValues as StatusFormValues } from './StatusForBorgerFaktaPanel';
 
@@ -31,11 +30,11 @@ const hasAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: string[]): bo
 
 export type PeriodeMedId = MedlemPeriode & { id: string; }
 
-export type FormValues = PeriodeMedId & IOYFormValues & OppholdFormValues & StatusFormValues & PerioderFormValues & {
+export type FormValues = PeriodeMedId & OppholdFormValues & StatusFormValues & PerioderFormValues & {
   begrunnelse?: string;
 }
 
-type TransformedValues = IOYFormValues & {
+type TransformedValues = {
   begrunnelse?: string;
 }
 
@@ -51,7 +50,6 @@ interface PureOwnProps {
   periodeResetCallback: (...args: any[]) => any;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submittable: boolean;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -82,11 +80,6 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     />
     <VerticalSpacer twentyPx />
-    <InntektOgYtelserFaktaPanel
-      id={valgtPeriode.id}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
-    />
     <PerioderMedMedlemskapFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
@@ -148,18 +141,13 @@ const transformValues = (values: FormValues): TransformedValues => ({
 const buildInitialValues = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.valgtPeriode,
   (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter,
-  (_state, ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'soknad'),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'person'),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'inntekter'),
   (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
     ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'medlemskapPerioder'),
   (_state, ownProps: PureOwnProps) => ownProps.alleKodeverk,
 ],
-(valgtPeriode, alleAksjonspunkter, arbeidsgiverOpplysningerPerId, soknad, person, inntekter, medlemskapPerioder, alleKodeverk): FormValues => {
+(valgtPeriode, alleAksjonspunkter, soknad, medlemskapPerioder, alleKodeverk): FormValues => {
   const aksjonspunkter = alleAksjonspunkter
     .filter((ap) => valgtPeriode.aksjonspunkter
       .includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)
@@ -176,7 +164,6 @@ const buildInitialValues = createSelector([
   const kodeverkFn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   return {
     ...valgtPeriode,
-    ...InntektOgYtelserFaktaPanel.buildInitialValues(person, inntekter, arbeidsgiverOpplysningerPerId),
     ...OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, valgtPeriode, aksjonspunkter),
     ...PerioderMedMedlemskapFaktaPanel.buildInitialValues(valgtPeriode, medlemskapPerioder, soknad, aksjonspunkter, kodeverkFn),
     ...oppholdValues,

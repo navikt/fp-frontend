@@ -129,7 +129,6 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
           alleKodeverk={alleKodeverk}
           medlemskap={medlemskap}
           fagsakPerson={fagsakPerson}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
       )}
     </>
