@@ -15,11 +15,11 @@ import aktivitetStatus, {
   isStatusTilstotendeYtelse,
 } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
-import GraderingUtenBG from './gradering/GraderingUtenBG';
+import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
 
 const visningForManglendeBG = () => (
@@ -41,8 +41,11 @@ const visningForManglendeBG = () => (
   </>
 );
 
-const getAksjonspunkterForBeregning = (aksjonspunkter) => (aksjonspunkter ? aksjonspunkter.filter((ap) => isBeregningAksjonspunkt(ap.definisjon.kode)) : []);
-const getRelevanteStatuser = (bg) => (bg.aktivitetStatus ? ({
+const getAksjonspunkterForBeregning = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => (aksjonspunkter
+  ? aksjonspunkter.filter((ap) => isBeregningAksjonspunkt(ap.definisjon.kode))
+  : []);
+
+const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => (bg.aktivitetStatus ? ({
   isArbeidstaker: bg.aktivitetStatus.some(({ kode }) => isStatusArbeidstakerOrKombinasjon(kode)),
   isFrilanser: bg.aktivitetStatus.some(({ kode }) => isStatusFrilanserOrKombinasjon(kode)),
   isSelvstendigNaeringsdrivende: bg.aktivitetStatus.some(({ kode }) => isStatusSNOrKombinasjon(kode)),
@@ -55,9 +58,11 @@ const getRelevanteStatuser = (bg) => (bg.aktivitetStatus ? ({
   isMilitaer: bg.aktivitetStatus.some(({ kode }) => isStatusMilitaer(kode)),
 }) : null);
 
-const getBGVilkar = (vilkar) => (vilkar ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET) : undefined);
+const getBGVilkar = (vilkar: Vilkar[]): Vilkar => (vilkar
+  ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET)
+  : undefined);
 
-const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter) => (aksjonspunkter
+const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => (aksjonspunkter
   ? aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG)
   : undefined);
 
@@ -96,7 +101,7 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
   const gjeldendeAksjonspunkter = getAksjonspunkterForBeregning(aksjonspunkter);
   const relevanteStatuser = getRelevanteStatuser(beregningsgrunnlag);
   const vilkaarBG = getBGVilkar(vilkar);
-  const sokerHarGraderingPaaAndelUtenBG = getAksjonspunktForGraderingPaaAndelUtenBG(aksjonspunkter);
+  const aksjonspunktGraderingPaaAndelUtenBG = getAksjonspunktForGraderingPaaAndelUtenBG(aksjonspunkter);
   return (
     <>
       <BeregningForm
@@ -113,18 +118,10 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
 
-      {sokerHarGraderingPaaAndelUtenBG
+      {aksjonspunktGraderingPaaAndelUtenBG
           && (
-          <GraderingUtenBG
-            submitCallback={submitCallback}
-            readOnly={readOnly}
-            behandlingId={behandling.id}
-            behandlingVersjon={behandling.versjon}
-            aksjonspunkter={aksjonspunkter}
-            andelerMedGraderingUtenBG={beregningsgrunnlag.andelerMedGraderingUtenBG}
-            alleKodeverk={alleKodeverk}
-            venteaarsakKode={behandling.venteArsakKode}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          <GraderingUtenBGReadOnly
+            aksjonspunkt={aksjonspunktGraderingPaaAndelUtenBG}
           />
           )}
     </>
