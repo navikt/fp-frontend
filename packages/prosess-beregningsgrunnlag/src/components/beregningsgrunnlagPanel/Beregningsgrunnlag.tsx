@@ -8,7 +8,7 @@ import {
   BeregningsgrunnlagPeriodeProp,
   KodeverkMedNavn,
   RelevanteStatuserProp,
-  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagAndel, Inntektsgrunnlag,
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
@@ -64,7 +64,7 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
   behandlingId: number,
   behandlingVersjon: number,
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
-  sammenligningsGrunnlagInntekter,
+  sammenligningsGrunnlagInntekter: Inntektsgrunnlag,
   skjeringstidspunktDato: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
     <div className={beregningStyles.panelLeft}>
@@ -161,7 +161,7 @@ type OwnProps = {
     behandlingId: number;
     behandlingVersjon: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    sammenligningsGrunnlagInntekter?: any[];
+    sammenligningsGrunnlagInntekter?: Inntektsgrunnlag;
     skjeringstidspunktDato?: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };

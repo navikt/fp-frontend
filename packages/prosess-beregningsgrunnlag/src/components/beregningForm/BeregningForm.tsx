@@ -315,6 +315,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 alleKodeverk={alleKodeverk}
                 skjeringstidspunktDato={skjaeringstidspunktBeregning}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                sammenligningsGrunnlagInntekter={beregningsgrunnlag.inntektsgrunnlag}
               />
             </>
           )}
