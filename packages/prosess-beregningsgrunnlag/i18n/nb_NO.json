@@ -196,11 +196,7 @@
   "Beregningsgrunnlag.BeregningTable.Omberegnet.ForklaringAT_FLoverstigerSN":"Ettersom beregnet årsinntekt for arbeid og frilans overstiger fastsatt næringsinntekt, er det disse som brukes som beregningsgrunnlag.",
   "Beregningsgrunnlag.BeregningTable.Omberegnet.ForklaringDP_FLoverstigerSN":"Ettersom beregnet årsinntekt for frilans og dagpenger overstiger pensjonsgivende inntekt, er det kun denne som brukes som beregningsgrunnlag. Næringsinntekten blir satt til 0 kroner.",
   "Beregningsgrunnlag.BeregningTable.Omberegnet.ForklaringAT_DPoverstigerSN":"Ettersom beregnet årsinntekt for arbeidstaker og dagpenger overstiger pensjonsgivende inntekt, er det kun denne som brukes som beregningsgrunnlag. Næringsinntekten blir satt til 0 kroner.",
-  "Beregningsgrunnlag.Gradering.Tittel": "Kontroller fordeling av inntekt ved gradering",
-  "Beregningsgrunnlag.Gradering.AksjonspunkttekstEtForhold": "Søker skal gradere hos {arbeidsforholdTekst} og det vil ikke bli utbetaling for denne aktiviteten. Vurder om fordeling av beregningsgrunnlag er riktig.",
-  "Beregningsgrunnlag.Gradering.AksjonspunkttekstFlereForhold": "Søker skal gradere hos {arbeidsforholdTekst} og det vil ikke bli utbetaling for disse aktivitetene. Vurder om fordeling av beregningsgrunnlag er riktig.",
-  "Beregningsgrunnlag.Gradering.FordelingErRiktig": "Ja, fordelingen av inntekt er riktig. Fortsett behandlingen",
-  "Beregningsgrunnlag.Gradering.FordelingMåVurderes": "Nei, fordelingen av inntekt må vurderes på nytt. Behandlingen settes på vent",
+  "Beregningsgrunnlag.Gradering.Beskrivelse": "Saksbehandler har tidligere vurdert om fordeling av inntekt er korrekt grunnet en andel uten utbetaling som skal graderes.",
 
 
   "Besteberegning.ResultatGrunnlag.BruttoBeregningsgrunnlag": "Beregnet",
