@@ -62,18 +62,19 @@ const inntektArbeidYtelse = {
 } as InntektArbeidYtelse;
 
 const medlemskap = {
-  inntekt: [{
-    utbetaler: '973861778',
-    fom: '2018-09-01',
-    tom: '2018-09-30',
-    ytelse: false,
-    belop: 35000,
+  opphold: [{
+    fom: '2019-01-01',
+    tom: '2021-10-13',
+    oppholdstillatelseType: {
+      kode: 'MIDLERTIDIG',
+      kodeverk: '',
+    },
   }, {
-    utbetaler: '973861778',
-    fom: '2019-02-01',
-    tom: '2019-02-28',
-    ytelse: false,
-    belop: 35000,
+    tom: '2021-01-13',
+    oppholdstillatelseType: {
+      kode: 'MIDLERTIDIG',
+      kodeverk: '',
+    },
   }],
   medlemskapPerioder: [{
     fom: '2019-01-01',

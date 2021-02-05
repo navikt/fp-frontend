@@ -51,5 +51,10 @@
   "StatusForBorgerFaktaPanel.HarIkkeOppholdsrett": "Søker har <b>ikke</b> oppholdsrett",
   "StatusForBorgerFaktaPanel.LovligOpphold": "Lovlig opphold",
   "StatusForBorgerFaktaPanel.HarLovligOpphold": "Søker har lovlig opphold",
-  "StatusForBorgerFaktaPanel.HarIkkeLovligOpphold": "Søker har <b>ikke</b> lovlig opphold"
+  "StatusForBorgerFaktaPanel.HarIkkeLovligOpphold": "Søker har <b>ikke</b> lovlig opphold",
+
+  "OppholdstillatelseTabell.Overskrift": "Oppholdstillatelser",
+  "OppholdstillatelseTabell.Periode": "Periode",
+  "OppholdstillatelseTabell.Type": "Type",
+  "OppholdstillatelseTabell.Ukjent": "UKJENT"
 }

@@ -61,7 +61,7 @@ export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/fami
 export { default as Fagsak } from './src/fagsakTsType';
 export { default as FagsakPerson } from './src/fagsakPersonTsType';
 export {
-  default as Medlemskap, MedlemPeriode, MedlemskapPeriode, MedlemInntekt,
+  default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse,
 } from './src/medlemskapTsType';
 export { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export { default as AnkeVurdering } from './src/ankeVurderingTsType';
