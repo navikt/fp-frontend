@@ -23,19 +23,17 @@ export type MedlemPeriode = Readonly<{
   begrunnelse: string;
 }>
 
-export type MedlemInntekt = Readonly<{
-  utbetaler: string;
-  fom: string;
+export type Oppholdstillatelse = Readonly<{
+  fom?: string;
   tom: string;
-  ytelse: boolean;
-  belop: number;
+  oppholdstillatelseType: Kodeverk;
 }>
 
 type Medlemskap = Readonly<{
   fom?: string;
   medlemskapPerioder: MedlemskapPeriode[];
-  inntekt: MedlemInntekt[];
   perioder: MedlemPeriode[];
+  opphold: Oppholdstillatelse[];
 }>
 
 export default Medlemskap;

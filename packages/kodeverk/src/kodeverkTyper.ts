@@ -70,6 +70,7 @@ const kodeverkTyper = {
   VURDER_AARSAK: 'VurderÅrsak',
   ANKE_OMGJOER_AARSAK: 'AnkeOmgjørÅrsak',
   AKTIVITETSKRAV_AVKLARING: 'KontrollerAktivitetskravAvklaring',
+  OPPHOLDSTILLATELSE_TYPE: 'OppholdstillatelseType',
 };
 
 export default kodeverkTyper;

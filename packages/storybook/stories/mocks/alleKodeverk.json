@@ -7140,5 +7140,17 @@
       "navn": "Andre",
       "kodeverk": "FORELDRE_TYPE"
     }
+  ],
+  "OppholdstillatelseType": [
+    {
+      "kode": "MIDLERTIDIG",
+      "navn": "Midlertidig",
+      "kodeverk": "OPPHOLDSTILLATELSE_TYPE"
+    },
+    {
+      "kode": "PERMANENT",
+      "navn": "Permanent",
+      "kodeverk": "OPPHOLDSTILLATELSE_TYPE"
+    }
   ]
 }
