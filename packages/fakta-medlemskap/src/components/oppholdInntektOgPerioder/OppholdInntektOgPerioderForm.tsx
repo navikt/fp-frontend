@@ -205,6 +205,7 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
       behandlingVersjon,
       alleKodeverk,
       alleMerknaderFraBeslutter,
+      medlemskap,
       ...formProps
     } = this.props;
 
@@ -224,7 +225,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
           behandlingVersjon={behandlingVersjon}
         />
         )}
-
         {valgtPeriode && (
         <OppholdInntektOgPeriodeForm
           readOnly={readOnly}
@@ -237,6 +237,7 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
           behandlingVersjon={behandlingVersjon}
           alleKodeverk={alleKodeverk}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          medlemskap={medlemskap}
         />
         )}
 

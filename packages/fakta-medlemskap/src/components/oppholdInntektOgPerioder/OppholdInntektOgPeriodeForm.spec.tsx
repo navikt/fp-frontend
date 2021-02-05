@@ -1,10 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Medlemskap } from '@fpsak-frontend/types';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { OppholdInntektOgPeriodeForm, PeriodeMedId, FormValues } from './OppholdInntektOgPeriodeForm';
 import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
@@ -32,6 +33,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       onSubmit={sinon.spy()}
+      medlemskap={{
+        opphold: [],
+      } as Medlemskap}
     />);
 
     expect(wrapper.find(OppholdINorgeOgAdresserFaktaPanel)).toHaveLength(1);
@@ -76,6 +80,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       onSubmit={sinon.spy()}
+      medlemskap={{
+        opphold: [],
+      } as Medlemskap}
     />);
 
     expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(1);
@@ -118,6 +125,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       onSubmit={sinon.spy()}
+      medlemskap={{
+        opphold: [],
+      } as Medlemskap}
     />);
 
     expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).toHaveLength(1);
@@ -161,6 +171,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       onSubmit={sinon.spy()}
+      medlemskap={{
+        opphold: [],
+      } as Medlemskap}
     />);
 
     expect(wrapper.find(StatusForBorgerFaktaPanel)).toHaveLength(1);
@@ -204,6 +217,9 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       onSubmit={sinon.spy()}
+      medlemskap={{
+        opphold: [],
+      } as Medlemskap}
     />);
 
     expect(wrapper.find(StatusForBorgerFaktaPanel)).toHaveLength(1);

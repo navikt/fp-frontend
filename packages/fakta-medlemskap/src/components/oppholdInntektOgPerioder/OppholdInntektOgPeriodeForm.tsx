@@ -14,9 +14,10 @@ import {
   BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode,
+  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Medlemskap,
 } from '@fpsak-frontend/types';
 
+import OppholdstillatelseTabell from './OppholdstillatelseTabell';
 import OppholdINorgeOgAdresserFaktaPanel, { FormValues as OppholdFormValues } from './OppholdINorgeOgAdresserFaktaPanel';
 import PerioderMedMedlemskapFaktaPanel, { FormValues as PerioderFormValues } from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel, { FormValues as StatusFormValues } from './StatusForBorgerFaktaPanel';
@@ -43,6 +44,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   valgtPeriode: PeriodeMedId;
   aksjonspunkter: Aksjonspunkt[];
+  medlemskap: Medlemskap;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   updateOppholdInntektPeriode: (values: TransformedValues) => void;
   selectedId?: string;
@@ -68,6 +70,7 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
   alleMerknaderFraBeslutter,
   behandlingId,
   behandlingVersjon,
+  medlemskap,
   ...formProps
 }) => (
   <BorderBox>
@@ -80,6 +83,12 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     />
     <VerticalSpacer twentyPx />
+    {medlemskap.opphold.length > 0 && (
+      <>
+        <OppholdstillatelseTabell oppholdstillatelse={medlemskap.opphold} alleKodeverk={alleKodeverk} />
+        <VerticalSpacer twentyPx />
+      </>
+    )}
     <PerioderMedMedlemskapFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
