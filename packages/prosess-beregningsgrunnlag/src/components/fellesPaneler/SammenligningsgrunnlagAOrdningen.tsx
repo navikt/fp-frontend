@@ -45,8 +45,10 @@ const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: strin
   return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
 };
 
-const finnMaksVerdienFraRelevanteAndeler = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: RelevanteStatuserProp, skjeringstidspunktDato: string): number => {
-  if (andeler && relevanteStatuser.isFrilanser || relevanteStatuser.isArbeidstaker) {
+const finnMaksVerdienFraRelevanteAndeler = (andeler: InntektsgrunnlagMåned[],
+  relevanteStatuser: RelevanteStatuserProp,
+  skjeringstidspunktDato: string): number => {
+  if (andeler && (relevanteStatuser.isFrilanser || relevanteStatuser.isArbeidstaker)) {
     let radMax = 0;
     for (let step = 12; step > 0; step -= 1) {
       const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
@@ -207,11 +209,13 @@ type OwnProps = {
     skjeringstidspunktDato: string;
 };
 
-const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   sammenligningsGrunnlagInntekter, relevanteStatuser, skjeringstidspunktDato, intl,
 }) => {
-  if ((!sammenligningsGrunnlagInntekter || sammenligningsGrunnlagInntekter.måneder.length === 0) || !skjeringstidspunktDato || relevanteStatuser.isSelvstendigNaeringsdrivende) return null;
-  const { måneder } = sammenligningsGrunnlagInntekter;
+  const måneder = sammenligningsGrunnlagInntekter?.måneder;
+  if (!måneder || måneder.length === 0 || !skjeringstidspunktDato || relevanteStatuser.isSelvstendigNaeringsdrivende) {
+    return null;
+  }
   const andelStatus = finnAndelerStatus(relevanteStatuser);
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
@@ -245,4 +249,4 @@ const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComp
   );
 };
 
-export default injectIntl(SammenligningsgrunnlagAOrdningen);
+export default injectIntl(SammenligningsgrunnlagAOrdningenImpl);
