@@ -29,7 +29,7 @@ class FodselvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getOverstyrVisningAvKomponent = ({ vilkar }) => vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))
 
-  getData = ({ soknad, personopplysninger }) => ({ soknad, personopplysninger })
+  getData = ({ soknad }) => ({ soknad })
 }
 
 export default FodselvilkaretFaktaPanelDef;

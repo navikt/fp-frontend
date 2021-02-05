@@ -7,7 +7,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
@@ -40,7 +40,6 @@ describe('<SjekkFodselDokForm>', () => {
       behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       aksjonspunkt={{} as Aksjonspunkt}
-      personopplysninger={{} as Personopplysninger}
       avklartBarn={[]}
       submitHandler={() => undefined}
       onSubmit={() => undefined}

@@ -5,7 +5,7 @@ import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-samme
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import { FamilieHendelseSamling, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelseSamling, Soknad } from '@fpsak-frontend/types';
 
 import { FodselInfoPanelImpl } from './FodselInfoPanel';
 import SjekkFodselDokForm from './SjekkFodselDokForm';
@@ -22,9 +22,6 @@ const soknad = {
 };
 const alleMerknaderFraBeslutter = {};
 const familiehendelse = {};
-const personopplysninger = {
-  barnSoktFor: [],
-};
 
 describe('<FodselInfoPanel>', () => {
   it('skal vise sjekkFodselDok-form når en har dette aksjonspunktet', () => {
@@ -58,7 +55,6 @@ describe('<FodselInfoPanel>', () => {
       familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-      personopplysninger={personopplysninger as Personopplysninger}
     />);
 
     expect(wrapper.find(SjekkFodselDokForm)).toHaveLength(1);
@@ -95,7 +91,6 @@ describe('<FodselInfoPanel>', () => {
       familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-      personopplysninger={personopplysninger as Personopplysninger}
     />);
 
     expect(wrapper.find(TermindatoFaktaForm)).toHaveLength(1);
@@ -116,7 +111,6 @@ describe('<FodselInfoPanel>', () => {
       familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-      personopplysninger={personopplysninger as Personopplysninger}
     />);
 
     expect(wrapper.find(FodselSammenligningIndex)).toHaveLength(1);

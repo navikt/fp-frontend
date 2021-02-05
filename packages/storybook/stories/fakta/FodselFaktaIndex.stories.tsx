@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
 import {
-  Behandling, FamilieHendelse, FamilieHendelseSamling, Personopplysninger, Soknad,
+  Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -80,9 +80,6 @@ const aksjonspunkter = [{
   erAktivt: true,
 }];
 
-const personopplysninger = {
-  barnSoktFor: [],
-} as Personopplysninger;
 const merknaderFraBeslutter = {
   notAccepted: false,
 };
@@ -108,7 +105,6 @@ export const visAksjonspunktTerminbekreftelse = () => (
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
-    personopplysninger={personopplysninger}
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
     aksjonspunkter={aksjonspunkter}
@@ -124,7 +120,6 @@ export const visAksjonspunktSjekkManglendeFødsel = () => (
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
-    personopplysninger={personopplysninger}
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
     aksjonspunkter={aksjonspunkter.map((a) => ({
@@ -146,7 +141,6 @@ export const visAksjonspunktVurderOmVilkårForSykdomErOppfylt = () => (
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
-    personopplysninger={personopplysninger}
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
     aksjonspunkter={aksjonspunkter.map((a) => ({
@@ -168,7 +162,6 @@ export const visPanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter = (
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
-    personopplysninger={personopplysninger}
     soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
     aksjonspunkter={[]}

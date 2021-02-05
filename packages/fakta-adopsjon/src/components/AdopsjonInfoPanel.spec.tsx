@@ -5,7 +5,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import { AdopsjonInfoPanelImpl } from './AdopsjonInfoPanel';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
@@ -68,7 +68,6 @@ describe('<AdopsjonInfoPanel>', () => {
       behandlingVersjon={1}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
@@ -117,7 +116,6 @@ describe('<AdopsjonInfoPanel>', () => {
       behandlingVersjon={1}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
@@ -152,7 +150,6 @@ describe('<AdopsjonInfoPanel>', () => {
       behandlingVersjon={1}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
