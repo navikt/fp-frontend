@@ -5,6 +5,7 @@ import ProsessMeny from './ProsessMeny';
 
 interface OwnProps {
   paneler?: ((props: any) => ReactElement)[];
+  oppdaterProsessPanelIUrl: (faktanavn: string) => void;
 }
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({

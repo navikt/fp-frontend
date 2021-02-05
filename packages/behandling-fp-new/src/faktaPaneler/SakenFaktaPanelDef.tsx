@@ -40,8 +40,6 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
 }) => {
   const vises = true;
 
-  leggFaktaPanelTilMeny(faktaPanelCodes.SAKEN, 'SakenFaktaPanel.Title');
-
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !vises });
 
@@ -52,6 +50,8 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
   if (!vises) {
     return null;
   }
+
+  leggFaktaPanelTilMeny(faktaPanelCodes.SAKEN, 'SakenFaktaPanel.Title');
 
   if (state === RestApiState.LOADING) {
     return <LoadingPanel />;

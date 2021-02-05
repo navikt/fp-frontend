@@ -7,7 +7,7 @@ interface OwnProps {
 const FaktaInnhold: FunctionComponent<OwnProps> = ({
   children,
 }) => (
-  <div>{children}</div>
+  <>{children}</>
 );
 
 export default FaktaInnhold;

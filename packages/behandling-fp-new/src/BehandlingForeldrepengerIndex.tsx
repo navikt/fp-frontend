@@ -96,9 +96,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     fagsak,
     fagsakPerson,
     rettigheter,
-    valgtProsessSteg,
-    oppdaterProsessStegOgFaktaPanelIUrl,
-    valgtFaktaSteg,
     oppdaterBehandlingVersjon,
     settPaVent,
     hentBehandling,
@@ -112,7 +109,10 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
 
   return (
     <StandardPropsProvider initialProps={standardProps}>
-      <BehandlingContainer 
+      <BehandlingContainer
+        valgtProsessSteg={valgtProsessSteg}
+        valgtFaktaSteg={valgtFaktaSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         faktaPaneler={[
           (props) => <SakenFaktaPanelDef props={props} />,
         ]}
