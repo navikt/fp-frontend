@@ -100,6 +100,12 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       </Column>
     </Row>
 
+    <VerticalSpacer sixteenPx />
+    <FritekstAnkeMerknaderTextField
+      sprakkode={sprakkode}
+      readOnly={readOnly}
+    />
+    <VerticalSpacer sixteenPx />
     <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
     <VerticalSpacer fourPx />
     <RadioGroupField
@@ -115,34 +121,34 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
     </RadioGroupField>
     {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering?.kode && (
-    <Row>
-      <Column xs="7">
-        <ArrowBox>
-          <SelectField
-            readOnly={readOnly}
-            name="trygderettOmgjoerArsak.kode"
-            selectValues={ankeOmgjorArsakRekkefolge
-              .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
-            className={readOnly ? styles.selectReadOnly : null}
-            label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
-            validate={[required]}
-            bredde="xl"
-          />
-          <VerticalSpacer sixteenPx />
-          <RadioGroupField
-            name="trygderettVurderingOmgjoer.kode"
-            validate={[required]}
-            readOnly={readOnly}
-            className={readOnly ? styles.selectReadOnly : null}
-            direction="horizontal"
-          >
-            <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Gunst' }} />
-            <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_UGUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Ugunst' }} />
-            <RadioOption value={ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Delvis' }} />
-          </RadioGroupField>
-        </ArrowBox>
-      </Column>
-    </Row>
+      <Row>
+        <Column xs="7">
+          <ArrowBox>
+            <SelectField
+              readOnly={readOnly}
+              name="trygderettOmgjoerArsak.kode"
+              selectValues={ankeOmgjorArsakRekkefolge
+                .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
+              className={readOnly ? styles.selectReadOnly : null}
+              label={<FormattedMessage id="Ankebehandling.OmgjoeringArsak" />}
+              validate={[required]}
+              bredde="xl"
+            />
+            <VerticalSpacer sixteenPx />
+            <RadioGroupField
+              name="trygderettVurderingOmgjoer.kode"
+              validate={[required]}
+              readOnly={readOnly}
+              className={readOnly ? styles.selectReadOnly : null}
+              direction="horizontal"
+            >
+              <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Gunst' }} />
+              <RadioOption value={ankeVurderingOmgjoer.ANKE_TIL_UGUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Ugunst' }} />
+              <RadioOption value={ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST} label={{ id: 'Ankebehandling.VurderingOmgjoer.Delvis' }} />
+            </RadioGroupField>
+          </ArrowBox>
+        </Column>
+      </Row>
     )}
     {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === valgtTrygderettVurdering?.kode
       || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === valgtTrygderettVurdering?.kode) && (
@@ -163,12 +169,6 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
         </Column>
       </Row>
     )}
-
-    <VerticalSpacer sixteenPx />
-    <FritekstAnkeMerknaderTextField
-      sprakkode={sprakkode}
-      readOnly={readOnly}
-    />
     <VerticalSpacer sixteenPx />
     <Row>
       <Column xs="8">
