@@ -1,17 +1,9 @@
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatusCode from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { NavAnsatt, Kodeverk } from '@fpsak-frontend/types';
-
-type Aksess = {
-  employeeHasAccess: boolean;
-  isEnabled: boolean;
-}
-
-export type AksessRettigheter = {
-  writeAccess: Aksess;
-  kanOverstyreAccess: Aksess;
-}
+import {
+  NavAnsatt, Kodeverk, AksessRettigheter, Aksess,
+} from '@fpsak-frontend/types';
 
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;
