@@ -9,7 +9,7 @@ import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import {
-  Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Kodeverk, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Kodeverk, Soknad,
 } from '@fpsak-frontend/types';
 
 import { Dispatch } from 'redux';
@@ -51,7 +51,6 @@ interface PureOwnProps {
   familiehendelseOriginalBehandling?: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingType: Kodeverk;
-  personopplysninger: Personopplysninger;
 }
 
 interface MappedOwnProps {
@@ -119,7 +118,6 @@ export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps
       familiehendelseOriginalBehandling,
       familiehendelse,
       alleMerknaderFraBeslutter,
-      personopplysninger,
       behandlingId,
       behandlingVersjon,
       behandlingType,
@@ -151,7 +149,6 @@ export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               soknad={soknad}
               gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-              personopplysninger={personopplysninger}
             />
           )}
           {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter) && (
@@ -170,7 +167,6 @@ export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps
               soknad={soknad}
               avklartBarn={avklartBarn}
               gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-              personopplysninger={personopplysninger}
             />
           )}
           {aksjonspunkter.length !== 0 && !readOnly

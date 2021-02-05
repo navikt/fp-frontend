@@ -14,7 +14,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import { guid, omit } from '@fpsak-frontend/utils';
 import { getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Aksjonspunkt, FagsakPerson, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode, MedlemInntekt, ArbeidsgiverOpplysningerPerId,
+  Aksjonspunkt, FagsakPerson, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';
 
 import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
@@ -70,7 +70,6 @@ export type FormValues = {
   soknad: Soknad;
   gjeldendeFom: string;
   medlemskapPerioder: MedlemskapPeriode[];
-  inntekter: MedlemInntekt[];
   perioder: PeriodeMedId[];
 }
 
@@ -87,7 +86,6 @@ interface PureOwnProps {
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -207,7 +205,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
       behandlingVersjon,
       alleKodeverk,
       alleMerknaderFraBeslutter,
-      arbeidsgiverOpplysningerPerId,
       ...formProps
     } = this.props;
 
@@ -240,7 +237,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
           behandlingVersjon={behandlingVersjon}
           alleKodeverk={alleKodeverk}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
         )}
 
@@ -280,7 +276,6 @@ export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: A
         'id',
         'fixedMedlemskapPerioder',
         'foreldre',
-        'inntekter',
         'manuellVurderingType',
         'hasBosattAksjonspunkt',
         'hasPeriodeAksjonspunkt',
@@ -307,7 +302,6 @@ const buildInitalValues = createSelector([
   person,
   gjeldendeFom: medlem.fom,
   medlemskapPerioder: medlem.medlemskapPerioder || [],
-  inntekter: medlem.inntekt,
   perioder: (medlem.perioder || []).map((periode) => ({
     ...periode,
     id: guid(),

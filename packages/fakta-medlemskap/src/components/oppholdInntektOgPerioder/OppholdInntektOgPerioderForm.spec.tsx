@@ -15,14 +15,6 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlems
 const perioder: any = [];
 
 describe('<OppholdInntektOgPerioderForm>', () => {
-  const arbeidsgiverOpplysningerPerId = {
-    973861778: {
-      erPrivatPerson: false,
-      identifikator: '973861778',
-      navn: 'MYGG ROBUST',
-    },
-  };
-
   it('skal vise informasjon uten editeringsmuligheter når det ikke finnes aksjonspunkter', () => {
     const wrapper = shallowWithIntl(<OppholdInntektOgPerioderForm
       {...reduxFormPropsMock}
@@ -49,7 +41,6 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -98,7 +89,6 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -150,7 +140,6 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.GyldigMedlemFolketrygden');
@@ -199,7 +188,6 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.EOSBorgerMedOppholdsrett');
@@ -248,7 +236,6 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold');
@@ -297,7 +284,6 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.HarFortsattMedlemskap');

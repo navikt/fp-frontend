@@ -8,17 +8,8 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { OppholdInntektOgPeriodeForm, PeriodeMedId, FormValues } from './OppholdInntektOgPeriodeForm';
 import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
-import InntektOgYtelserFaktaPanel from './InntektOgYtelserFaktaPanel';
 import PerioderMedMedlemskapFaktaPanel from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel from './StatusForBorgerFaktaPanel';
-
-const arbeidsgiverOpplysningerPerId = {
-  973861778: {
-    erPrivatPerson: false,
-    identifikator: '973861778',
-    navn: 'MYGG ROBUST',
-  },
-};
 
 const valgtPeriode = {
   aksjonspunkter: [],
@@ -40,12 +31,10 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       onSubmit={sinon.spy()}
     />);
 
     expect(wrapper.find(OppholdINorgeOgAdresserFaktaPanel)).toHaveLength(1);
-    expect(wrapper.find(InntektOgYtelserFaktaPanel)).toHaveLength(1);
     expect(wrapper.find(PerioderMedMedlemskapFaktaPanel)).toHaveLength(1);
     expect(wrapper.find(FaktaBegrunnelseTextField)).toHaveLength(0);
     expect(wrapper.find(Hovedknapp).prop('disabled')).toBe(false);
@@ -86,7 +75,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       onSubmit={sinon.spy()}
     />);
 
@@ -129,7 +117,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       onSubmit={sinon.spy()}
     />);
 
@@ -173,7 +160,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       onSubmit={sinon.spy()}
     />);
 
@@ -217,7 +203,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       alleMerknaderFraBeslutter={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       onSubmit={sinon.spy()}
     />);
 

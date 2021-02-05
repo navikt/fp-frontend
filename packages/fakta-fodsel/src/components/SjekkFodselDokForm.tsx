@@ -16,7 +16,7 @@ import {
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, Kodeverk, Personopplysninger, Soknad, AvklartBarn,
+  Aksjonspunkt, FamilieHendelse, Kodeverk, Soknad, AvklartBarn,
 } from '@fpsak-frontend/types';
 
 import avklartBarnFieldArray from './AvklartBarnFieldArray';
@@ -61,7 +61,6 @@ interface PureOwnProps {
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
-  personopplysninger: Personopplysninger;
   avklartBarn: AvklartBarn[];
   submitHandler: (values: FormValues) => any;
   readOnly: boolean;
@@ -189,10 +188,9 @@ export const buildInitialValues = createSelector([
 
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
-    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger],
-  (soknad, familiehendelse, personopplysning): FieldEditedInfo => (
-    isFieldEdited(soknad, familiehendelse, personopplysning)
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
+  (soknad, familiehendelse): FieldEditedInfo => (
+    isFieldEdited(soknad, familiehendelse)
   ),
 );
 

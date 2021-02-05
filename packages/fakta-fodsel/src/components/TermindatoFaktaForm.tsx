@@ -20,7 +20,7 @@ import {
 import { FaktaBegrunnelseTextField, isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import styles from './termindatoFaktaForm.less';
@@ -49,7 +49,6 @@ interface PureOwnProps {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkt: Aksjonspunkt;
-  personopplysninger: Personopplysninger;
   submitHandler: (values: FormValues) => any;
   readOnly: boolean;
   submittable: boolean;
@@ -200,10 +199,9 @@ export const termindatoFaktaFormName = 'TermindatoFaktaForm';
 
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
-    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger],
-  (soknad, familiehendelse, personopplysning): FieldEditedInfo => (
-    isFieldEdited(soknad, familiehendelse, personopplysning)
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
+  (soknad, familiehendelse): FieldEditedInfo => (
+    isFieldEdited(soknad, familiehendelse)
   ),
 );
 

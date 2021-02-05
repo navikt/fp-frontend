@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, FamilieHendelseSamling, KodeverkMedNavn, Personopplysninger, Soknad,
+  Behandling, FamilieHendelseSamling, KodeverkMedNavn, Soknad,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
@@ -20,7 +20,6 @@ interface OwnProps {
   behandling: Behandling;
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;
-  personopplysninger: Personopplysninger;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   isForeldrepengerFagsak: boolean;
 }
@@ -30,7 +29,6 @@ const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   soknad,
   familiehendelse,
   aksjonspunkter,
-  personopplysninger,
   alleMerknaderFraBeslutter,
   alleKodeverk,
   submitCallback,
@@ -46,7 +44,6 @@ const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
       soknad={soknad}
       gjeldendeFamiliehendelse={familiehendelse.gjeldende}
       aksjonspunkter={aksjonspunkter}
-      personopplysninger={personopplysninger}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       alleKodeverk={alleKodeverk}
       submitCallback={submitCallback}

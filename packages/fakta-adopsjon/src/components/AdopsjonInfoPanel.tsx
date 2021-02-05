@@ -10,7 +10,7 @@ import {
   FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
 } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, FamilieHendelse, Kodeverk, KodeverkMedNavn, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, Kodeverk, KodeverkMedNavn, Soknad,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextTemp,
@@ -54,7 +54,6 @@ interface PureOwnProps {
   isForeldrepengerFagsak: boolean;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  personopplysninger: Personopplysninger;
   submitCallback: (aksjonspunktData: any) => Promise<any>;
 }
 
@@ -193,10 +192,9 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): an
 
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
-    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger],
-  (soknad, familiehendelse, personopplysning): FieldEditedInfo => (
-    isFieldEdited(soknad, familiehendelse, personopplysning)
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
+  (soknad, familiehendelse): FieldEditedInfo => (
+    isFieldEdited(soknad, familiehendelse)
   ),
 );
 

@@ -7,7 +7,7 @@ import { DateLabel, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import {
-  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
@@ -29,7 +29,6 @@ describe('<TermindatoFaktaForm>', () => {
       behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       aksjonspunkt={{} as Aksjonspunkt}
-      personopplysninger={{} as Personopplysninger}
       soknad={{} as Soknad}
       submitHandler={() => undefined}
       onSubmit={() => undefined}
@@ -57,7 +56,6 @@ describe('<TermindatoFaktaForm>', () => {
       behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       aksjonspunkt={{} as Aksjonspunkt}
-      personopplysninger={{} as Personopplysninger}
       soknad={{} as Soknad}
       submitHandler={() => undefined}
       onSubmit={() => undefined}

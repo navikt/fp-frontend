@@ -71,7 +71,7 @@ export type FieldEditedInfo = {
 const isFieldEdited = (
   soknad: Soknad = {} as Soknad,
   familiehendelse: FamilieHendelse = {} as FamilieHendelse,
-  personopplysning: Personopplysninger = {} as Personopplysninger,
+  personopplysning?: Personopplysninger,
 ): FieldEditedInfo => ({
   termindato: getIsTerminDatoEdited(soknad, familiehendelse),
   antallBarn: getIsAntallBarnEdited(soknad, familiehendelse),
@@ -80,7 +80,7 @@ const isFieldEdited = (
   omsorgsovertakelseDato: getIsOmsorgsovertakelseDatoEdited(soknad, familiehendelse),
   barnetsAnkomstTilNorgeDato: getIsBarnetsAnkomstTilNorgeDatoEdited(soknad, familiehendelse),
   antallBarnOmsorgOgForeldreansvar: getIsAntallBarnOmsorgOgForeldreansvarEdited(soknad, familiehendelse),
-  fodselsdatoer: getIsFodselsdatoerEdited(soknad, personopplysning),
+  fodselsdatoer: personopplysning ? getIsFodselsdatoerEdited(soknad, personopplysning) : undefined,
   vilkarType: getIsVilkarTypeEdited(familiehendelse),
   ektefellesBarn: getIsEktefellesBarnEdited(familiehendelse),
   mannAdoptererAlene: getIsMannAdoptererAleneEdited(familiehendelse),
