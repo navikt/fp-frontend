@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import {
   HorizontalRectSeries, FlexibleWidthXYPlot,
 } from 'react-vis';
@@ -13,7 +13,12 @@ import {
 import moment from 'moment';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
-import { RelevanteStatuserProp } from '@fpsak-frontend/types';
+import {
+  Inntektsgrunnlag,
+  InntektsgrunnlagInntekt,
+  InntektsgrunnlagMåned,
+  RelevanteStatuserProp,
+} from '@fpsak-frontend/types';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import styles from './sammenligningsgrunnlagAOrdningen.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
@@ -23,37 +28,39 @@ const grafFargeAT = '#99bdcd';
 const grafFargeFL = '#c1b5d0';
 const grafBorderFarge = '#0c5472';
 
-const finnAndelerStatus = (relevanteStatuser) => {
+const finnAndelerStatus = (relevanteStatuser: RelevanteStatuserProp): string => {
   if (relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) return aktivitetStatus.KOMBINERT_AT_FL;
   if (relevanteStatuser.isFrilanser) return aktivitetStatus.FRILANSER;
   if (relevanteStatuser.isArbeidstaker) return aktivitetStatus.ARBEIDSTAKER;
   return null;
 };
-const finnMaksVerdienFraRelevanteAndeler = (andeler, relevanteStatuser, skjeringstidspunktDato) => {
-  if (andeler && relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) {
+
+const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: string): number => {
+  if (!andeler || andeler.length === 0) {
+    return 0;
+  }
+  if (status) {
+    return andeler.filter((andel) => andel.aktivitetStatus.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+  }
+  return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+};
+
+const finnMaksVerdienFraRelevanteAndeler = (andeler: InntektsgrunnlagMåned[],
+  relevanteStatuser: RelevanteStatuserProp,
+  skjeringstidspunktDato: string): number => {
+  if (andeler && (relevanteStatuser.isFrilanser || relevanteStatuser.isArbeidstaker)) {
     let radMax = 0;
     for (let step = 12; step > 0; step -= 1) {
       const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
-      const atAndel = andeler.find((andel) => moment(andel.dato, ISO_DATE_FORMAT).format('YYYYMM')
-        === yearMont && andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
-      const flAndel = andeler.find((andel) => moment(andel.dato, ISO_DATE_FORMAT).format('YYYYMM')
-        === yearMont && andel.aktivitetStatus === aktivitetStatus.FRILANSER);
-      const radSum = (atAndel && atAndel.beløp ? atAndel.beløp : 0) + (flAndel && flAndel.beløp ? flAndel.beløp : 0);
-      radMax = radMax < radSum ? radSum : radMax;
+      const korrektMåned = andeler.find((andel) => moment(andel.fom, ISO_DATE_FORMAT).format('YYYYMM') === yearMont);
+      const sumMåned = korrektMåned ? finnInntektForStatus(korrektMåned.inntekter) : 0;
+      radMax = radMax < sumMåned ? sumMåned : radMax;
     }
     return radMax;
   }
-  if (relevanteStatuser.isArbeidstaker) {
-    const atAndeler = [...andeler].filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
-    return Math.max(...atAndeler.map((andel) => andel.beløp), 0);
-  }
-  if (relevanteStatuser.isFrilanser) {
-    const flAndeler = [...andeler].filter((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
-    return Math.max(...flAndeler.map((andel) => andel.beløp), 0);
-  }
   return null;
 };
-const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser, maks, atBelop, flBelop) => {
+const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser: RelevanteStatuserProp, maks: number, atBelop: number, flBelop: number): number => {
   if (relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) {
     return maks - (atBelop) - (flBelop);
   }
@@ -62,15 +69,20 @@ const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser, maks, atBelop, fl
   return null;
 };
 
-const lagSumRad = (andeler, relevanteStatuser) => {
-  const atAndeler = [...andeler].filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
-  const flAndeler = [...andeler].filter((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
-  const sumATAndeler = atAndeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
-  const sumFLAndeler = flAndeler.reduce((acc, flAndel) => acc + flAndel.beløp, 0);
+const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: RelevanteStatuserProp): ReactElement => {
+  const sumATAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
+    .filter((innt) => innt.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
+    .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
+  const sumFLAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
+    .filter((innt) => innt.aktivitetStatus.kode === aktivitetStatus.FRILANSER)
+    .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   return (
     <>
       <Row>
-        <Column xs={relevanteStatuser.isArbeidstaker && relevanteStatuser.isFrilanser ? '11' : '9'} className={beregningStyles.noPaddingRight}>
+        <Column
+          xs={relevanteStatuser.isArbeidstaker && relevanteStatuser.isFrilanser ? '11' : '9'}
+          className={beregningStyles.noPaddingRight}
+        >
           <div className={beregningStyles.colDevider} />
         </Column>
       </Row>
@@ -81,28 +93,29 @@ const lagSumRad = (andeler, relevanteStatuser) => {
           </Normaltekst>
         </Column>
         {relevanteStatuser.isArbeidstaker && (
-        <Column xs="2" className={beregningStyles.colMaanedText}>
-          <Element className={beregningStyles.semiBoldText}>{formatCurrencyNoKr(sumATAndeler)}</Element>
-        </Column>
+          <Column xs="2" className={beregningStyles.colMaanedText}>
+            <Element className={beregningStyles.semiBoldText}>{formatCurrencyNoKr(sumATAndeler)}</Element>
+          </Column>
         )}
         {relevanteStatuser.isFrilanser && (
-        <Column xs="2" className={beregningStyles.colMaanedText}>
-          <Element>{formatCurrencyNoKr(sumFLAndeler)}</Element>
-        </Column>
+          <Column xs="2" className={beregningStyles.colMaanedText}>
+            <Element>{formatCurrencyNoKr(sumFLAndeler)}</Element>
+          </Column>
         )}
         <Column xs="1" className={beregningStyles.rightAlignElementNoWrap} />
       </Row>
     </>
   );
 };
-const lagRad = (relevanteStatuser, atAndel, flAndel, maksVerdi, aarMaaned) => {
+
+const lagRad = (relevanteStatuser: RelevanteStatuserProp, månedMedInntekter: InntektsgrunnlagMåned, maksVerdi: number, aarMaaned: string): ReactElement => {
   const dato = `${aarMaaned}01`;
   const maanedNavn = moment(dato, ISO_DATE_FORMAT).format('MMM');
   const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1, 3);
   const maaned = moment(dato, ISO_DATE_FORMAT).format('MM');
   const aar = moment(dato, ISO_DATE_FORMAT).format('YYYY');
-  const atBelop = atAndel && atAndel.beløp ? atAndel.beløp : 0;
-  const flBelop = flAndel && flAndel.beløp ? flAndel.beløp : 0;
+  const atBelop = finnInntektForStatus(månedMedInntekter?.inntekter, aktivitetStatus.ARBEIDSTAKER);
+  const flBelop = finnInntektForStatus(månedMedInntekter?.inntekter, aktivitetStatus.FRILANSER);
   const rest = finnRestVerdienFraRelevanteAndeler(relevanteStatuser, maksVerdi, atBelop, flBelop);
   return (
     <React.Fragment key={`${dato}wrapper`}>
@@ -158,16 +171,13 @@ const lagRad = (relevanteStatuser, atAndel, flAndel, maksVerdi, aarMaaned) => {
     </React.Fragment>
   );
 };
-const lagRader = (andeler, relevanteStatuser, skjeringstidspunktDato) => {
+const lagRader = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: RelevanteStatuserProp, skjeringstidspunktDato: string): ReactElement[] => {
   const rows = [];
   const maksVerdi = finnMaksVerdienFraRelevanteAndeler(andeler, relevanteStatuser, skjeringstidspunktDato);
   for (let step = 12; step > 0; step -= 1) {
     const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
-    const atAndel = andeler.find((andel) => moment(andel.dato, ISO_DATE_FORMAT).format('YYYYMM')
-      === yearMont && andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
-    const flAndel = andeler.find((andel) => moment(andel.dato, ISO_DATE_FORMAT).format('YYYYMM')
-      === yearMont && andel.aktivitetStatus === aktivitetStatus.FRILANSER);
-    rows.push(lagRad(relevanteStatuser, atAndel, flAndel, maksVerdi, yearMont));
+    const månedMedInntekter = andeler.find((andel) => moment(andel.fom, ISO_DATE_FORMAT).format('YYYYMM') === yearMont);
+    rows.push(lagRad(relevanteStatuser, månedMedInntekter, maksVerdi, yearMont));
   }
   return rows;
 };
@@ -194,16 +204,18 @@ const lagOverskrift = (andelStatus, userIdent) => (
 );
 
 type OwnProps = {
-    sammenligningsGrunnlagInntekter: any[];
+    sammenligningsGrunnlagInntekter: Inntektsgrunnlag;
     relevanteStatuser: RelevanteStatuserProp;
     skjeringstidspunktDato: string;
 };
 
-const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   sammenligningsGrunnlagInntekter, relevanteStatuser, skjeringstidspunktDato, intl,
 }) => {
-  const andeler = sammenligningsGrunnlagInntekter;
-  if ((!andeler || andeler.length === 0) || !skjeringstidspunktDato || relevanteStatuser.isSelvstendigNaeringsdrivende) return null;
+  const måneder = sammenligningsGrunnlagInntekter?.måneder;
+  if (!måneder || måneder.length === 0 || !skjeringstidspunktDato || relevanteStatuser.isSelvstendigNaeringsdrivende) {
+    return null;
+  }
   const andelStatus = finnAndelerStatus(relevanteStatuser);
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
@@ -229,12 +241,12 @@ const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps & WrappedComp
           <Column xs="1" />
         </Row>
         )}
-        {lagRader(andeler, relevanteStatuser, skjeringstidspunktDato)}
+        {lagRader(måneder, relevanteStatuser, skjeringstidspunktDato)}
 
       </Lesmerpanel>
-      {lagSumRad(andeler, relevanteStatuser)}
+      {lagSumRad(måneder, relevanteStatuser)}
     </>
   );
 };
 
-export default injectIntl(SammenligningsgrunnlagAOrdningen);
+export default injectIntl(SammenligningsgrunnlagAOrdningenImpl);
