@@ -1,5 +1,9 @@
-import React, { FunctionComponent, ReactElement, useCallback } from 'react';
+import React, {
+  FunctionComponent, ReactElement, useCallback,
+} from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+
+import { Behandling } from '@fpsak-frontend/types';
 
 import ProsessContainer from './ProsessContainer';
 import FaktaContainer from './FaktaContainer';
@@ -14,6 +18,7 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
+  behandling: Behandling;
   faktaPaneler?: ((props: any) => ReactElement)[];
   prosessPaneler?: ((props: any) => ReactElement)[];
   valgtProsessSteg?: string;
@@ -22,6 +27,7 @@ interface OwnProps {
 }
 
 const BehandlingContainer: FunctionComponent<OwnProps> = ({
+  behandling,
   faktaPaneler,
   prosessPaneler,
   valgtProsessSteg,
@@ -39,12 +45,15 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
     <RawIntlProvider value={intl}>
       <ProsessContainer
         paneler={prosessPaneler}
+        valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessPanelIUrl={oppdaterProsessPanelIUrl}
+        behandling={behandling}
       />
       <FaktaContainer
         paneler={faktaPaneler}
         valgtFaktaSteg={valgtFaktaSteg}
         oppdaterFaktaPanelIUrl={oppdaterFaktaPanelIUrl}
+        behandling={behandling}
       />
     </RawIntlProvider>
   );

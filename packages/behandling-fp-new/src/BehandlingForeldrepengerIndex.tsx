@@ -6,10 +6,10 @@ import { useSetBehandlingVedEndring } from '@fpsak-frontend/behandling-felles';
 import { Behandling } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { StandardBehandlingProps, StandardPropsProvider } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingContainer, StandardBehandlingProps, StandardPropsProvider } from '@fpsak-frontend/behandling-felles-ny';
 
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
-import './faktaPaneler/SakenFaktaPanelDef';
+import SakenFaktaPanelDef from './faktaPaneler/SakenFaktaPanelDef';
 
 const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
@@ -27,7 +27,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
 }) => {
   const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
   const behandling = nyOgForrigeBehandling.current;
-  const forrigeBehandling = nyOgForrigeBehandling.previous;
+  // const forrigeBehandling = nyOgForrigeBehandling.previous;
 
   const setBehandling = useCallback((nyBehandling) => {
     requestFpApi.resetCache();
@@ -86,7 +86,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
-
   if (!behandling) {
     return <LoadingPanel />;
   }
@@ -110,6 +109,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   return (
     <StandardPropsProvider initialProps={standardProps}>
       <BehandlingContainer
+        behandling={behandling}
         valgtProsessSteg={valgtProsessSteg}
         valgtFaktaSteg={valgtFaktaSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}

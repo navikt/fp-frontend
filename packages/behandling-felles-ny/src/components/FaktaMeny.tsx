@@ -24,7 +24,7 @@ const FaktaMeny: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   <SideMenu
     heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
     links={menyData.map((data) => ({
-      label: data.tekst,
+      label: intl.formatMessage({ id: data.tekst }),
       active: data.erAktiv,
       iconSrc: data.harAksjonspunkt ? advarselIkonUrl : undefined,
       iconAltText: data.harAksjonspunkt ? intl.formatMessage({ id: 'HelpText.Aksjonspunkt' }) : undefined,

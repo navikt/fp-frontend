@@ -1,31 +1,68 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
+import React, {
+  FunctionComponent, ReactElement, useCallback, useState,
+} from 'react';
+
+import { Behandling } from '@fpsak-frontend/types';
 
 import ProsessInnhold from './ProsessInnhold';
-import ProsessMeny from './ProsessMeny';
+import ProsessMeny, { ProsessMenyData } from './ProsessMeny';
+
+import styles from './faktaContainer.less';
+
+const DEFAULT_PROSESS_KODE = 'default';
 
 interface OwnProps {
+  behandling: Behandling;
   paneler?: ((props: any) => ReactElement)[];
-  oppdaterProsessPanelIUrl: (faktanavn: string) => void;
+  valgtProsessSteg?: string;
+  oppdaterProsessPanelIUrl: (prosessnavn: string) => void;
 }
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({
+  behandling,
   paneler,
+  valgtProsessSteg,
+  oppdaterProsessPanelIUrl,
 }) => {
-  const [menyData, leggFaktaPanelTilMeny] = useState({});
+  const [menyData, setMenyData] = useState<ProsessMenyData[]>([]);
+  const leggProsessPanelTilMeny = useCallback((nyData: ProsessMenyData) => {
+    if (nyData.harAksjonspunkt && valgtProsessSteg === DEFAULT_PROSESS_KODE) {
+      oppdaterProsessPanelIUrl(nyData.id);
+    }
+    setMenyData((oldData) => {
+      const newData = [...oldData];
+      const index = newData.findIndex((d) => d.id === nyData.id);
+      if (index >= 0) {
+        newData.splice(index, 1, nyData);
+      } else {
+        newData.push(nyData);
+      }
+      return newData;
+    });
+  }, [menyData]);
+
+  const oppdaterMenyValg = useCallback((index: number) => {
+    const panel = menyData[index];
+    oppdaterProsessPanelIUrl(panel.id);
+  }, [menyData]);
 
   if (!paneler) {
     return null;
   }
 
   return (
-    <>
-      <ProsessMeny data={menyData} />
+    <div className={styles.container}>
+      <div className={styles.meny}>
+        <ProsessMeny menyData={menyData} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
+      </div>
       <ProsessInnhold>
         {paneler.map((p) => p({
-          leggFaktaPanelTilMeny,
+          behandling,
+          valgtProsessSteg,
+          leggProsessPanelTilMeny,
         }))}
       </ProsessInnhold>
-    </>
+    </div>
   );
 };
 
