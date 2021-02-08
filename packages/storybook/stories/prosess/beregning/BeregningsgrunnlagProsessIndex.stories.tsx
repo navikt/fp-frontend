@@ -225,14 +225,14 @@ const lagATInntektsgrunnlag = (fom, tom, inntekt) => {
 
 const lagKunATInntektsgrunnlag = () => {
   lagATInntektsgrunnlag('2020-01-01', '2020-01-31', 35000);
-  lagATInntektsgrunnlag('2020-02-01', '2020-02-28', 30000);
-  lagATInntektsgrunnlag('2020-03-01', '2020-03-31', 15000);
+  lagATInntektsgrunnlag('2020-02-01', '2020-02-28', 70000);
+  lagATInntektsgrunnlag('2020-03-01', '2020-03-31', 40000);
   lagATInntektsgrunnlag('2020-04-01', '2020-04-30', 50000);
-  lagATInntektsgrunnlag('2020-05-01', '2020-05-31', 13000);
-  lagATInntektsgrunnlag('2020-06-01', '2020-06-30', 22000);
+  lagATInntektsgrunnlag('2020-05-01', '2020-05-31', 37000);
+  lagATInntektsgrunnlag('2020-06-01', '2020-06-30', 45000);
   lagATInntektsgrunnlag('2020-07-01', '2020-07-31', 24000);
   lagATInntektsgrunnlag('2020-08-01', '2020-08-31', 33000);
-  lagATInntektsgrunnlag('2020-09-01', '2020-09-30', 21000);
+  lagATInntektsgrunnlag('2020-09-01', '2020-09-30', 25000);
   lagATInntektsgrunnlag('2020-10-01', '2020-10-31', 8000);
   lagATInntektsgrunnlag('2020-11-01', '2020-11-30', 51000);
   lagATInntektsgrunnlag('2020-12-01', '2020-12-31', 47000);
@@ -272,7 +272,7 @@ const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
     },
     faktaOmFordeling: null,
     årsinntektVisningstall: 360000,
-    sammenligningsgrunnlagInntekter: inntektsgrunnlag,
+    inntektsgrunnlag,
   };
   return beregningsgrunnlag;
 };
@@ -346,9 +346,9 @@ export const arbeidstakerMedAvvik = () => {
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT')];
   const sammenligningsgrunnlagPrStatus = [
-    lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 25.009999999, -79059)];
+    lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 465000, 35.48, -165000)];
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
-  delete bg.sammenligningsgrunnlagInntekter;
+  bg.skjaeringstidspunktBeregning = '2021-01-01';
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex

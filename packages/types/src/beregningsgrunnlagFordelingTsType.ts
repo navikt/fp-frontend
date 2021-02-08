@@ -17,7 +17,6 @@ export type RefusjonTilVurderingAndel = Readonly<{
     arbeidsgiverOrgnr?: string;
     arbeidsgiverAktørId?: string;
   }
-  arbeidsgiverNavn?: string;
   internArbeidsforholdRef?: string;
   eksternArbeidsforholdRef?: string;
   skalKunneFastsetteDelvisRefusjon: boolean;
