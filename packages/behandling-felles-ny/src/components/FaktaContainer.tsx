@@ -63,11 +63,15 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn className={styles.content}>
             <FaktaInnhold>
-              {paneler.map((p) => p({
-                behandling,
-                valgtFaktaSteg,
-                leggFaktaPanelTilMeny,
-              }))}
+              {paneler.map((p, index) => (
+                <React.Fragment key={index}>
+                  {p({
+                    behandling,
+                    valgtFaktaSteg,
+                    leggFaktaPanelTilMeny,
+                  })}
+                </React.Fragment>
+              ))}
             </FaktaInnhold>
           </FlexColumn>
         </FlexRow>

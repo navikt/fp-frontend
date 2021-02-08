@@ -51,6 +51,13 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   const { startRequest: fjernVerge } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.VERGE_FJERN);
   const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
 
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiFpHooks
+    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
+
   useEffect(() => {
     behandlingEventHandler.setHandler({
       endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
@@ -79,13 +86,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     };
   }, []);
 
-  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
-  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
-
-  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiFpHooks
-    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
-  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
-
   if (!behandling) {
     return <LoadingPanel />;
   }
@@ -104,17 +104,18 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     alleKodeverk: kodeverk,
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
+    oppdaterProsessStegOgFaktaPanelIUrl,
   };
 
   return (
-    <StandardPropsProvider initialProps={standardProps}>
+    <StandardPropsProvider initialState={standardProps}>
       <BehandlingContainer
         behandling={behandling}
         valgtProsessSteg={valgtProsessSteg}
         valgtFaktaSteg={valgtFaktaSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         faktaPaneler={[
-          (props) => <SakenFaktaPanelDef props={props} />,
+          (props) => <SakenFaktaPanelDef {...props} />,
         ]}
         prosessPaneler={[]}
       />

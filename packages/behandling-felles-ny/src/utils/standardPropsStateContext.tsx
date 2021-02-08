@@ -13,6 +13,7 @@ type InputValues = {
   hasFetchError: boolean;
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
   lagreOverstyrteAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
 }
 
 type OwnProps = {

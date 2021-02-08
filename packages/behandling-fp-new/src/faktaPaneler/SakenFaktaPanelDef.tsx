@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent,
+  FunctionComponent, useEffect,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -8,8 +8,9 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
-import { useStandardProps } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardFaktaProps } from '@fpsak-frontend/behandling-felles-ny';
 
+import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const aksjonspunktKoder = [
@@ -19,17 +20,11 @@ const aksjonspunktKoder = [
 
 const endepunkter = [
   { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-];
-
-const endepunkterVedVisning = [
   { key: FpBehandlingApiKeys.UTLAND_DOK_STATUS },
 ];
 
 type EndepunktData = {
   aksjonspunkter: Aksjonspunkt[];
-}
-
-type EndepunktDataVedVisning = {
   utlandDokStatus?: {
     dokStatus: string;
   };
@@ -46,39 +41,43 @@ interface OwnProps {
   }) => void;
 }
 
+/**
+ * SakenFaktaPanelDef
+ *
+ * Dette faktapanelet skal alltid vises
+ */
 const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   behandling,
   leggFaktaPanelTilMeny,
 }) => {
-  const { data } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter,
-    { keepData: true, updateTriggers: [behandling?.versjon] });
+  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.SAKEN;
+
+  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter,
+    { keepData: true, updateTriggers: [erPanelValgt, behandling?.versjon], suspendRequest: !erPanelValgt });
 
   const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
 
-  const skalVises = filtrerteAksjonspunkter.length > 0;
+  const standardProps = useStandardFaktaProps(filtrerteAksjonspunkter);
 
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning,
-    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !skalVises });
+  useEffect(() => {
+    leggFaktaPanelTilMeny({
+      id: faktaPanelCodes.SAKEN,
+      tekst: getPackageIntl().formatMessage({ id: 'SakenFaktaPanel.Title' }),
+      erAktiv: valgtFaktaSteg === faktaPanelCodes.SAKEN,
+      harAksjonspunkt: standardProps.harApneAksjonspunkter,
+    });
+  }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter]);
 
-  const standardProps = useStandardProps(filtrerteAksjonspunkter);
-
-  if (!skalVises) {
+  if (!erPanelValgt) {
     return null;
   }
 
-  leggFaktaPanelTilMeny({
-    id: faktaPanelCodes.SAKEN,
-    tekst: 'SakenFaktaPanel.Title',
-    erAktiv: valgtFaktaSteg === faktaPanelCodes.SAKEN,
-    harAksjonspunkt: standardProps.harApneAksjonspunkter,
-  });
-
-  if (stateEtterVisning === RestApiState.LOADING) {
+  if (state === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
 
-  return <SakenFaktaIndex behandling={behandling} {...data} {...standardProps} {...dataEtterVisning} />;
+  return <SakenFaktaIndex behandling={behandling} {...data} {...standardProps} />;
 };
 
 export default SakenFaktaPanelDef;

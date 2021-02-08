@@ -4,7 +4,7 @@ import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
 import { erReadOnly } from './readOnlyUtils';
 import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
-import getBekreftAksjonspunktCallback from './getBekreftAksjonspunktCallback';
+import { getBekreftAksjonspunktProsessCallback } from './getBekreftAksjonspunktCallback';
 import { StandardPropsStateContext } from './standardPropsStateContext';
 
 type Standard = {
@@ -21,7 +21,7 @@ const useStandardProsessPanelProps = (aksjonspunkter: Aksjonspunkt[], vilkar: Vi
   const readOnly = erReadOnly(value.behandling, aksjonspunkter, vilkar, value.rettigheter, value.hasFetchError);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkter);
 
-  const submitCallback = getBekreftAksjonspunktCallback(
+  const submitCallback = getBekreftAksjonspunktProsessCallback(
     () => undefined,
     value.fagsak,
     value.behandling,

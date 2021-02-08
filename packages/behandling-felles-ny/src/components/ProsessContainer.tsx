@@ -7,7 +7,7 @@ import { Behandling } from '@fpsak-frontend/types';
 import ProsessInnhold from './ProsessInnhold';
 import ProsessMeny, { ProsessMenyData } from './ProsessMeny';
 
-import styles from './faktaContainer.less';
+import styles from './prosessContainer.less';
 
 const DEFAULT_PROSESS_KODE = 'default';
 
