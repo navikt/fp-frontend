@@ -11,7 +11,6 @@ import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -203,6 +202,42 @@ const lagStatus = (kode) => ({
   kodeverk: 'AKTIVITET_STATUS',
 });
 
+const inntektsgrunnlag = {
+  måneder: [],
+};
+
+const lagATInntektsgrunnlag = (fom, tom, inntekt) => {
+  const obj = {
+    fom,
+    tom,
+    inntekter: [
+      {
+        aktivitetStatus: {
+          kode: 'AT',
+          kodeverk: 'AKTIVITET_STATUS',
+        },
+        beløp: inntekt,
+      },
+    ],
+  };
+  inntektsgrunnlag.måneder.push(obj);
+};
+
+const lagKunATInntektsgrunnlag = () => {
+  lagATInntektsgrunnlag('2020-01-01', '2020-01-31', 35000);
+  lagATInntektsgrunnlag('2020-02-01', '2020-02-28', 30000);
+  lagATInntektsgrunnlag('2020-03-01', '2020-03-31', 15000);
+  lagATInntektsgrunnlag('2020-04-01', '2020-04-30', 50000);
+  lagATInntektsgrunnlag('2020-05-01', '2020-05-31', 13000);
+  lagATInntektsgrunnlag('2020-06-01', '2020-06-30', 22000);
+  lagATInntektsgrunnlag('2020-07-01', '2020-07-31', 24000);
+  lagATInntektsgrunnlag('2020-08-01', '2020-08-31', 33000);
+  lagATInntektsgrunnlag('2020-09-01', '2020-09-30', 21000);
+  lagATInntektsgrunnlag('2020-10-01', '2020-10-31', 8000);
+  lagATInntektsgrunnlag('2020-11-01', '2020-11-30', 51000);
+  lagATInntektsgrunnlag('2020-12-01', '2020-12-31', 47000);
+};
+
 const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
   const beregningsgrunnlag = {
     skjaeringstidspunktBeregning: '2019-09-16',
@@ -237,124 +272,7 @@ const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
     },
     faktaOmFordeling: null,
     årsinntektVisningstall: 360000,
-    sammenligningsgrunnlagInntekter: [
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 31800,
-        dato: '2018-09-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2018-09-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 33450,
-        dato: '2018-10-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2018-10-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 33559,
-        dato: '2018-11-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 10000,
-        dato: '2018-11-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 41800,
-        dato: '2018-12-01',
-      },
-
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 39450,
-        dato: '2019-01-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2019-01-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 39559,
-        dato: '2019-02-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2019-02-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 38800,
-        dato: '2019-03-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2019-03-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 39450,
-        dato: '2019-04-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2019-04-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 38559,
-        dato: '2019-05-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 0,
-        dato: '2019-05-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 39600,
-        dato: '2019-06-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 64000,
-        dato: '2019-06-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 49993,
-        dato: '2019-07-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 55000,
-        dato: '2019-07-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-        beløp: 48237,
-        dato: '2019-08-01',
-      },
-      {
-        aktivitetStatus: aktivitetStatus.FRILANSER,
-        beløp: 30000,
-        dato: '2019-08-01',
-      },
-    ],
+    sammenligningsgrunnlagInntekter: inntektsgrunnlag,
   };
   return beregningsgrunnlag;
 };
@@ -422,6 +340,7 @@ export const brukersAndelUtenAvvik = () => {
 };
 
 export const arbeidstakerMedAvvik = () => {
+  lagKunATInntektsgrunnlag();
   const andeler = [lagAndel('AT', 300000, undefined, false, false)];
   andeler[0].skalFastsetteGrunnlag = true;
   const perioder = [lagStandardPeriode(andeler)];
