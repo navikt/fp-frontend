@@ -12,6 +12,9 @@ export {
   BeregningsgrunnlagPeriodeProp,
   PgiVerdier,
   Næring,
+  InntektsgrunnlagMåned,
+  Inntektsgrunnlag,
+  InntektsgrunnlagInntekt,
 } from './src/beregningsgrunnlagTsType';
 export {
   default as FaktaOmBeregning,

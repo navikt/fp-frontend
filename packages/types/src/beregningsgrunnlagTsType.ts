@@ -4,6 +4,21 @@ import { Besteberegninggrunnlag } from './besteberegningTsTypes';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 
+export type InntektsgrunnlagInntekt = Readonly<{
+  aktivitetStatus: Kodeverk,
+  beløp: number;
+}>
+
+export type InntektsgrunnlagMåned = Readonly<{
+  fom: string;
+  tom: string;
+  inntekter: InntektsgrunnlagInntekt[];
+}>
+
+export type Inntektsgrunnlag = Readonly<{
+  måneder?: InntektsgrunnlagMåned[];
+}>
+
 export type Næring = Readonly <{
   orgnr: string;
   virksomhetType: Kodeverk;
@@ -119,6 +134,7 @@ type Beregningsgrunnlag = Readonly<{
   ytelsesspesifiktGrunnlag?: YtelseGrunnlag;
   refusjonTilVurdering?: RefusjonTilVurdering;
   erOverstyrtInntekt?: boolean;
+  inntektsgrunnlag?: Inntektsgrunnlag;
 }>
 
 export default Beregningsgrunnlag;
