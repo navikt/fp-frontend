@@ -10,7 +10,7 @@ import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vi
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Behandling, Soknad, Vilkar,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import { useStandardProsessPanelProps, useSkalViseProsessPanel, MargMarkering } from '@fpsak-frontend/behandling-felles-ny';
 
@@ -52,12 +52,14 @@ interface OwnProps {
     harAksjonspunkt?: boolean;
     status?: string;
   }) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   useEffect(() => {
     registrerFaktaPanel({
@@ -119,6 +121,7 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       <FadingPanel>
         <SokersOpplysningspliktVilkarProsessIndex
           behandling={behandling}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           {...dataEtterVisning}
           {...standardProps}
         />

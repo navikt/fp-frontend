@@ -23,11 +23,11 @@ const aksjonspunktKoder = [
 ];
 
 const endepunkter = [
+  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: FpBehandlingApiKeys.VILKAR },
 ];
 
 const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: FpBehandlingApiKeys.FAMILIEHENDELSE },
   { key: FpBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING },
   { key: FpBehandlingApiKeys.SOKNAD },
@@ -36,11 +36,11 @@ const endepunkterVedVisning = [
 ];
 
 type EndepunktData = {
+  aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
 type EndepunktDataVedVisning = {
-  aksjonspunkter: Aksjonspunkt[];
   familiehendelse: FamilieHendelseSamling;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   soknad: Soknad;
@@ -87,7 +87,7 @@ const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
     isCachingOn: true,
   });
 
-  const filtrerteAksjonspunkter = dataEtterVisning ? dataEtterVisning.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
+  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
 
   const standardProps = useStandardFaktaProps(filtrerteAksjonspunkter);
 

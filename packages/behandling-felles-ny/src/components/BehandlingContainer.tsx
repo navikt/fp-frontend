@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useCallback,
+  FunctionComponent, ReactElement, useCallback, useState,
 } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
@@ -16,6 +16,11 @@ const intl = createIntl({
   locale: 'nb-NO',
   messages,
 }, cache);
+
+interface FaktaPanelInfo {
+  urlCode: string;
+  textCode: string;
+}
 
 interface OwnProps {
   behandling: Behandling;
@@ -34,6 +39,8 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
 }) => {
+  const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
+
   const oppdaterProsessPanelIUrl = useCallback((nyttProsessSteg: string) => {
     oppdaterProsessStegOgFaktaPanelIUrl(nyttProsessSteg, valgtFaktaSteg);
   }, [valgtProsessSteg]);
@@ -47,13 +54,17 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         paneler={prosessPaneler}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessPanelIUrl={oppdaterProsessPanelIUrl}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandling={behandling}
+        apentFaktaPanelInfo={apentFaktaPanelInfo}
       />
       <FaktaContainer
         paneler={faktaPaneler}
         valgtFaktaSteg={valgtFaktaSteg}
         oppdaterFaktaPanelIUrl={oppdaterFaktaPanelIUrl}
         behandling={behandling}
+        setApentFaktaPanel={setApentFaktaPanel}
+        apentFaktaPanelInfo={apentFaktaPanelInfo}
       />
     </RawIntlProvider>
   );

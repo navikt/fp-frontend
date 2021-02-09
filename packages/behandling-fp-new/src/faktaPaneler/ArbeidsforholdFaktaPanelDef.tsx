@@ -21,11 +21,17 @@ const aksjonspunktKoder = [
 
 const endepunkter = [
   { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
+];
+
+const endepunkterVedVisning = [
   { key: FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
 ];
 
 type EndepunktData = {
   aksjonspunkter: Aksjonspunkt[];
+}
+
+type EndepunktDataVedVisning = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
@@ -59,7 +65,13 @@ const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
   }, []);
   const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD;
 
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
+  const { data } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
+    keepData: true,
+    updateTriggers: [behandling?.versjon],
+    isCachingOn: true,
+  });
+
+  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
     keepData: true,
     updateTriggers: [erPanelValgt, behandling?.versjon],
     suspendRequest: !erPanelValgt,
@@ -83,7 +95,7 @@ const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (state !== RestApiState.SUCCESS) {
+  if (stateEtterVisning !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
 
@@ -92,6 +104,7 @@ const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
       behandling={behandling}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       {...data}
+      {...dataEtterVisning}
       {...standardProps}
     />
   );

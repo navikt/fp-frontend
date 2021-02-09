@@ -16,6 +16,7 @@ import FodselvilkaretFaktaPanelDef from './faktaPaneler/FodselvilkaretFaktaPanel
 import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/MedlemskapsvilkaretFaktaPanelDef';
 import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
 import OpplysningspliktProsessStegPanelDef from './prosessPaneler/OpplysningspliktProsessStegPanelDef';
+import InngangsvilkarProsessStegPanelDef from './prosessPaneler/InngangsvilkarProsessStegPanelDef';
 
 const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
@@ -147,6 +148,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
         ]}
         prosessPaneler={[
           (props) => <OpplysningspliktProsessStegPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
+          (props) => <InngangsvilkarProsessStegPanelDef {...props} />,
         ]}
       />
     </StandardPropsProvider>

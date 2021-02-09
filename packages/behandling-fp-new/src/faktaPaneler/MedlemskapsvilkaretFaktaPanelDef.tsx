@@ -27,21 +27,21 @@ const aksjonspunktKoder = [
 ];
 
 const endepunkter = [
+  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: FpBehandlingApiKeys.SOKNAD },
 ];
 
 const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
   { key: FpBehandlingApiKeys.MEDLEMSKAP },
 ];
 
 type EndepunktData = {
+  aksjonspunkter: Aksjonspunkt[];
   soknad: Soknad;
 }
 
 type EndepunktDataVedVisning = {
-  aksjonspunkter: Aksjonspunkt[];
   inntektArbeidYtelse: InntektArbeidYtelse;
   medlemskap: Medlemskap;
 }
@@ -93,7 +93,7 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
     isCachingOn: true,
   });
 
-  const filtrerteAksjonspunkter = dataEtterVisning ? dataEtterVisning.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
+  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
 
   const standardProps = useStandardFaktaProps(filtrerteAksjonspunkter);
 

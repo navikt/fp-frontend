@@ -14,7 +14,7 @@ type Standard = {
   submittable: boolean;
   isAksjonspunktOpen: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback?: (aksjonspunktData: any) => Promise<any>;
+  submitCallback: (aksjonspunktData: any) => Promise<any>;
   status: string;
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];

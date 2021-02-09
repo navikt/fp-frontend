@@ -20,11 +20,17 @@ const aksjonspunktKoder = [
 
 const endepunkter = [
   { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
+];
+
+const endepunkterVedVisning = [
   { key: FpBehandlingApiKeys.UTLAND_DOK_STATUS },
 ];
 
 type EndepunktData = {
   aksjonspunkter: Aksjonspunkt[];
+}
+
+type EndepunktDataVedVisning = {
   utlandDokStatus?: {
     dokStatus: string;
   };
@@ -60,6 +66,12 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
+    updateTriggers: [behandling?.versjon],
+    isCachingOn: true,
+  });
+
+  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
+    keepData: true,
     updateTriggers: [erPanelValgt, behandling?.versjon],
     suspendRequest: !erPanelValgt,
     isCachingOn: true,
@@ -76,17 +88,17 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
       erAktiv: valgtFaktaSteg === faktaPanelCodes.SAKEN,
       harAksjonspunkt: standardProps.harApneAksjonspunkter,
     });
-  }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter]);
+  }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter, state]);
 
   if (!erPanelValgt) {
     return null;
   }
 
-  if (state !== RestApiState.SUCCESS) {
+  if (stateEtterVisning !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
 
-  return <SakenFaktaIndex behandling={behandling} {...data} {...standardProps} />;
+  return <SakenFaktaIndex behandling={behandling} {...data} {...dataEtterVisning} {...standardProps} />;
 };
 
 export default SakenFaktaPanelDef;

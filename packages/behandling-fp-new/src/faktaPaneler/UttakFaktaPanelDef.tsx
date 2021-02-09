@@ -28,24 +28,24 @@ const aksjonspunktKoder = [
 ];
 
 const endepunkter = [
+  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: FpBehandlingApiKeys.PERSONOPPLYSNINGER },
   { key: FpBehandlingApiKeys.YTELSEFORDELING },
 ];
 
 const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER },
   { key: FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD },
   { key: FpBehandlingApiKeys.FAMILIEHENDELSE },
 ];
 
 type EndepunktData = {
+  aksjonspunkter: Aksjonspunkt[];
   personopplysninger: Personopplysninger;
   ytelsefordeling: Ytelsefordeling;
 }
 
 type EndepunktDataVedVisning = {
-  aksjonspunkter: Aksjonspunkt[];
   familiehendelse: FamilieHendelseSamling;
   uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
@@ -94,7 +94,7 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
     isCachingOn: true,
   });
 
-  const filtrerteAksjonspunkter = dataEtterVisning ? dataEtterVisning.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
+  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
 
   const standardProps = useStandardFaktaProps(filtrerteAksjonspunkter);
 
