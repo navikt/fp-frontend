@@ -1,4 +1,5 @@
 export { default as BehandlingContainer } from './src/components/BehandlingContainer';
+export { default as MargMarkering } from './src/components/MargMarkering';
 export { default as StandardBehandlingProps } from './src/types/StandardBehandlingProps';
 export { default as useStandardFaktaProps } from './src/utils/useStandardFaktaProps';
 export { default as StandardPropsProvider } from './src/utils/standardPropsStateContext';

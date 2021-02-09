@@ -25,7 +25,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   oppdaterProsessPanelIUrl,
 }) => {
   const [menyData, setMenyData] = useState<ProsessMenyData[]>([]);
-  const leggProsessPanelTilMeny = useCallback((nyData: ProsessMenyData) => {
+  const registrerFaktaPanel = useCallback((nyData: ProsessMenyData) => {
     if (nyData.harAksjonspunkt && valgtProsessSteg === DEFAULT_PROSESS_KODE) {
       oppdaterProsessPanelIUrl(nyData.id);
     }
@@ -53,14 +53,19 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.meny}>
-        <ProsessMeny menyData={menyData} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
+        <ProsessMeny menyData={menyData.filter((d) => !!d.tekst)} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
       </div>
       <ProsessInnhold>
-        {paneler.map((p) => p({
-          behandling,
-          valgtProsessSteg,
-          leggProsessPanelTilMeny,
-        }))}
+        {paneler.map((panel, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <React.Fragment key={index}>
+            {panel({
+              behandling,
+              valgtProsessSteg,
+              registrerFaktaPanel,
+            })}
+          </React.Fragment>
+        ))}
       </ProsessInnhold>
     </div>
   );

@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { StepType } from '@navikt/nap-process-menu/dist/Step';
 import ProcessMenu from '@navikt/nap-process-menu';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+
+import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
 const finnProsessmenyType = (
   status: string,
@@ -34,15 +35,14 @@ interface OwnProps {
   oppdaterProsessPanelIUrl: (index: number) => void;
 }
 
-const ProsessMeny: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const ProsessMeny: FunctionComponent<OwnProps> = ({
   menyData,
   oppdaterProsessPanelIUrl,
 }) => {
   const steg = menyData.map((data) => {
     const type = finnProsessmenyType(data.status, data.harApentAksjonspunkt);
     return {
-      label: intl.formatMessage({ id: data.tekst }),
+      label: data.tekst,
       isActive: data.erAktiv,
       isDisabled: false,
       isFinished: type === StepType.success,
@@ -55,4 +55,4 @@ const ProsessMeny: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(ProsessMeny);
+export default ProsessMeny;

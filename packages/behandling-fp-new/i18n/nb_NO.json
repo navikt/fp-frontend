@@ -5,5 +5,7 @@
   "FodselInfoPanel.Fodsel": "Fødsel",
   "MedlemskapInfoPanel.Medlemskap": "Medlemskap",
   "UttakInfoPanel.FaktaUttak": "Uttak",
-  "AktivitetskravInfoPanel.FaktaAktivitetskrav": "Aktivitetskrav"
+  "AktivitetskravInfoPanel.FaktaAktivitetskrav": "Aktivitetskrav",
+
+  "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt"
 }
