@@ -17,7 +17,7 @@ type StandardBehandlingProps = {
   };
   opneSokeside: () => void;
   setRequestPendingMessage: (message: string) => void;
-  kodeverk?: {[key: string]: KodeverkMedNavn[]};
+  kodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 export default StandardBehandlingProps;

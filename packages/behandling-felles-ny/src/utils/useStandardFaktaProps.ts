@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 
-import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, KodeverkMedNavn, Vilkar,
+} from '@fpsak-frontend/types';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import { erReadOnly } from './readOnlyUtils';
@@ -15,6 +17,7 @@ type Standard = {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submitCallback?: (aksjonspunktData: any) => Promise<any>;
   aksjonspunkter: Aksjonspunkt[];
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const useStandardProps = (aksjonspunkter: Aksjonspunkt[] = [], vilkar: Vilkar[] = [], overstyringApCodes: string[] = []): Standard => {
@@ -39,6 +42,7 @@ const useStandardProps = (aksjonspunkter: Aksjonspunkt[] = [], vilkar: Vilkar[] 
     alleMerknaderFraBeslutter,
     submitCallback,
     aksjonspunkter,
+    alleKodeverk: value.alleKodeverk,
   };
 };
 

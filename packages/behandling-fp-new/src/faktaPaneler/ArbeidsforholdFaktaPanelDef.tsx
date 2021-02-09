@@ -3,31 +3,30 @@ import React, {
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
+import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse,
+} from '@fpsak-frontend/types';
 import { useStandardFaktaProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const aksjonspunktKoder = [
-  aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
+  aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
 ];
 
 const endepunkter = [
   { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.UTLAND_DOK_STATUS },
+  { key: FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
 ];
 
 type EndepunktData = {
   aksjonspunkter: Aksjonspunkt[];
-  utlandDokStatus?: {
-    dokStatus: string;
-  };
+  inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
 interface OwnProps {
@@ -40,23 +39,25 @@ interface OwnProps {
     erAktiv: boolean;
     harAksjonspunkt: boolean;
   }) => void;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
- * SakenFaktaPanelDef
+ * ArbeidsforholdFaktaPanelDef
  *
  * Dette faktapanelet skal alltid vises
  */
-const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
-  valgtFaktaSteg,
+const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
-  registrerFaktaPanel,
+  valgtFaktaSteg,
   leggFaktaPanelTilMeny,
+  arbeidsgiverOpplysningerPerId,
+  registrerFaktaPanel,
 }) => {
   useEffect(() => {
-    registrerFaktaPanel(faktaPanelCodes.SAKEN);
+    registrerFaktaPanel(faktaPanelCodes.ARBEIDSFORHOLD);
   }, []);
-  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.SAKEN;
+  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -71,9 +72,9 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     leggFaktaPanelTilMeny({
-      id: faktaPanelCodes.SAKEN,
-      tekst: getPackageIntl().formatMessage({ id: 'SakenFaktaPanel.Title' }),
-      erAktiv: valgtFaktaSteg === faktaPanelCodes.SAKEN,
+      id: faktaPanelCodes.ARBEIDSFORHOLD,
+      tekst: getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' }),
+      erAktiv: valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD,
       harAksjonspunkt: standardProps.harApneAksjonspunkter,
     });
   }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter]);
@@ -86,7 +87,14 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
     return <LoadingPanel />;
   }
 
-  return <SakenFaktaIndex behandling={behandling} {...data} {...standardProps} />;
+  return (
+    <ArbeidsforholdFaktaIndex
+      behandling={behandling}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      {...data}
+      {...standardProps}
+    />
+  );
 };
 
-export default SakenFaktaPanelDef;
+export default ArbeidsforholdFaktaPanelDef;

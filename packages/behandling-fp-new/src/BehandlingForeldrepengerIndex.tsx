@@ -3,13 +3,18 @@ import React, {
 } from 'react';
 
 import { useSetBehandlingVedEndring } from '@fpsak-frontend/behandling-felles';
-import { Behandling } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerWrapper, Behandling } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { BehandlingContainer, StandardBehandlingProps, StandardPropsProvider } from '@fpsak-frontend/behandling-felles-ny';
 
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
 import SakenFaktaPanelDef from './faktaPaneler/SakenFaktaPanelDef';
+import ArbeidsforholdFaktaPanelDef from './faktaPaneler/ArbeidsforholdFaktaPanelDef';
+import YtelserFaktaPanelDef from './faktaPaneler/YtelserFaktaPanelDef';
+import FodselvilkaretFaktaPanelDef from './faktaPaneler/FodselvilkaretFaktaPanelDef';
+import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/MedlemskapsvilkaretFaktaPanelDef';
+import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
 
 const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
@@ -86,7 +91,16 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     };
   }, []);
 
-  if (!behandling) {
+  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiFpHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
+    FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
+      updateTriggers: [!behandling],
+      suspendRequest: !behandling,
+    },
+  );
+
+  const harIkkeHentetArbeidsgiverOpplysninger = arbeidOppState === RestApiState.LOADING || arbeidOppState === RestApiState.NOT_STARTED;
+
+  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger) {
     return <LoadingPanel />;
   }
 
@@ -116,6 +130,19 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         faktaPaneler={[
           (props) => <SakenFaktaPanelDef {...props} />,
+          (props) => <ArbeidsforholdFaktaPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
+          (props) => <YtelserFaktaPanelDef {...props} />,
+          (props) => <FodselvilkaretFaktaPanelDef {...props} />,
+          (props) => (
+            <MedlemskapsvilkaretFaktaPanelDef
+              {...props}
+              fagsakPerson={fagsakPerson}
+              rettigheter={rettigheter}
+              hasFetchError={behandlingState === RestApiState.ERROR}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
+            />
+          ),
+          (props) => <UttakFaktaPanelDef {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
         ]}
         prosessPaneler={[]}
       />

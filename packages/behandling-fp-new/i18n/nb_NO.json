@@ -1,3 +1,9 @@
 {
-  "SakenFaktaPanel.Title": "Saken"
+  "SakenFaktaPanel.Title": "Saken",
+  "ArbeidsforholdInfoPanel.Title": "Arbeidsforhold",
+  "YtelserFaktaIndex.Ytelser": "Ytelser",
+  "FodselInfoPanel.Fodsel": "Fødsel",
+  "MedlemskapInfoPanel.Medlemskap": "Medlemskap",
+  "UttakInfoPanel.FaktaUttak": "Uttak",
+  "AktivitetskravInfoPanel.FaktaAktivitetskrav": "Aktivitetskrav"
 }

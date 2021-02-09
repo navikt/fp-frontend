@@ -21,12 +21,22 @@ interface OwnProps {
   oppdaterFaktaPanelIUrl: (faktanavn: string) => void;
 }
 
+const finnForrigeIndex = (index: number, faktaPaneler: string[], menyDataSomErLagtTil: MenyData[]) => {
+  const forrigeIndex = menyDataSomErLagtTil.findIndex((p) => p.id === faktaPaneler[index - 1]);
+  if (forrigeIndex === -1) {
+    return finnForrigeIndex(index - 1, faktaPaneler, menyDataSomErLagtTil);
+  }
+  return forrigeIndex;
+};
+
 const FaktaContainer: FunctionComponent<OwnProps> = ({
   behandling,
   paneler,
   valgtFaktaSteg,
   oppdaterFaktaPanelIUrl,
 }) => {
+  const [faktaPaneler, setFaktaPaneler] = useState<string[]>([]);
+  const registrerFaktaPanel = useCallback((panelId: string) => setFaktaPaneler((oldData) => oldData.concat([panelId])), []);
   const [menyData, setMenyData] = useState<MenyData[]>([]);
   const leggFaktaPanelTilMeny = useCallback((nyData: MenyData) => {
     if (nyData.harAksjonspunkt && valgtFaktaSteg === DEFAULT_FAKTA_KODE) {
@@ -39,11 +49,13 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       if (index >= 0) {
         newData.splice(index, 1, nyData);
       } else {
-        newData.push(nyData);
+        const tempIndex = faktaPaneler.findIndex((panelId) => panelId === nyData.id);
+        const finalIndex = finnForrigeIndex(tempIndex, faktaPaneler, oldData);
+        newData.splice(finalIndex + 1, 0, nyData);
       }
       return newData;
     });
-  }, [menyData]);
+  }, [faktaPaneler, menyData]);
 
   const oppdaterMenyValg = useCallback((index: number) => {
     const panel = menyData[index];
@@ -63,11 +75,13 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn className={styles.content}>
             <FaktaInnhold>
-              {paneler.map((p, index) => (
+              {paneler.map((panel, index) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <React.Fragment key={index}>
-                  {p({
+                  {panel({
                     behandling,
                     valgtFaktaSteg,
+                    registrerFaktaPanel,
                     leggFaktaPanelTilMeny,
                   })}
                 </React.Fragment>
