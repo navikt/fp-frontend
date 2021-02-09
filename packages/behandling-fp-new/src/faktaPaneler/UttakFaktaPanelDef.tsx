@@ -54,12 +54,11 @@ type EndepunktDataVedVisning = {
 interface OwnProps {
   valgtFaktaSteg: string;
   behandling: Behandling;
-  registrerFaktaPanel: (id: string) => void;
-  leggFaktaPanelTilMeny: (data: {
+  registrerFaktaPanel: (data: {
     id: string;
-    tekst: string;
-    erAktiv: boolean;
-    harAksjonspunkt: boolean;
+    tekst?: string;
+    erAktiv?: boolean;
+    harAksjonspunkt?: boolean;
   }) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
@@ -71,13 +70,14 @@ interface OwnProps {
 const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   behandling,
-  leggFaktaPanelTilMeny,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   registrerFaktaPanel,
 }) => {
   useEffect(() => {
-    registrerFaktaPanel(faktaPanelCodes.UTTAK);
+    registrerFaktaPanel({
+      id: faktaPanelCodes.UTTAK,
+    });
   }, []);
   const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.UTTAK;
 
@@ -103,7 +103,7 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
       && data.ytelsefordeling.endringsdato !== undefined
       && data.personopplysninger !== null
       && data.personopplysninger !== undefined) {
-      leggFaktaPanelTilMeny({
+      registrerFaktaPanel({
         id: faktaPanelCodes.UTTAK,
         tekst: getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' }),
         erAktiv: valgtFaktaSteg === faktaPanelCodes.UTTAK,

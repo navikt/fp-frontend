@@ -49,12 +49,11 @@ type EndepunktDataVedVisning = {
 interface OwnProps {
   valgtFaktaSteg: string;
   behandling: Behandling;
-  registrerFaktaPanel: (id: string) => void;
-  leggFaktaPanelTilMeny: (data: {
+  registrerFaktaPanel: (data: {
     id: string;
-    tekst: string;
-    erAktiv: boolean;
-    harAksjonspunkt: boolean;
+    tekst?: string;
+    erAktiv?: boolean;
+    harAksjonspunkt?: boolean;
   }) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsakPerson: FagsakPerson;
@@ -68,7 +67,6 @@ interface OwnProps {
 const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   behandling,
-  leggFaktaPanelTilMeny,
   arbeidsgiverOpplysningerPerId,
   fagsakPerson,
   rettigheter,
@@ -76,7 +74,9 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   registrerFaktaPanel,
 }) => {
   useEffect(() => {
-    registrerFaktaPanel(faktaPanelCodes.MEDLEMSKAPSVILKARET);
+    registrerFaktaPanel({
+      id: faktaPanelCodes.MEDLEMSKAPSVILKARET,
+    });
   }, []);
   const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET;
 
@@ -99,7 +99,7 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (data && data.soknad) {
-      leggFaktaPanelTilMeny({
+      registrerFaktaPanel({
         id: faktaPanelCodes.MEDLEMSKAPSVILKARET,
         tekst: getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
         erAktiv: valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET,

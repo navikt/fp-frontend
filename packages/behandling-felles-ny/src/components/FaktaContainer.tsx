@@ -21,24 +21,14 @@ interface OwnProps {
   oppdaterFaktaPanelIUrl: (faktanavn: string) => void;
 }
 
-const finnForrigeIndex = (index: number, faktaPaneler: string[], menyDataSomErLagtTil: MenyData[]) => {
-  const forrigeIndex = menyDataSomErLagtTil.findIndex((p) => p.id === faktaPaneler[index - 1]);
-  if (forrigeIndex === -1) {
-    return finnForrigeIndex(index - 1, faktaPaneler, menyDataSomErLagtTil);
-  }
-  return forrigeIndex;
-};
-
 const FaktaContainer: FunctionComponent<OwnProps> = ({
   behandling,
   paneler,
   valgtFaktaSteg,
   oppdaterFaktaPanelIUrl,
 }) => {
-  const [faktaPaneler, setFaktaPaneler] = useState<string[]>([]);
-  const registrerFaktaPanel = useCallback((panelId: string) => setFaktaPaneler((oldData) => oldData.concat([panelId])), []);
   const [menyData, setMenyData] = useState<MenyData[]>([]);
-  const leggFaktaPanelTilMeny = useCallback((nyData: MenyData) => {
+  const registrerFaktaPanel = useCallback((nyData: MenyData) => {
     if (nyData.harAksjonspunkt && valgtFaktaSteg === DEFAULT_FAKTA_KODE) {
       oppdaterFaktaPanelIUrl(nyData.id);
     }
@@ -49,13 +39,11 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       if (index >= 0) {
         newData.splice(index, 1, nyData);
       } else {
-        const tempIndex = faktaPaneler.findIndex((panelId) => panelId === nyData.id);
-        const finalIndex = finnForrigeIndex(tempIndex, faktaPaneler, oldData);
-        newData.splice(finalIndex + 1, 0, nyData);
+        newData.push(nyData);
       }
       return newData;
     });
-  }, [faktaPaneler, menyData]);
+  }, [menyData]);
 
   const oppdaterMenyValg = useCallback((index: number) => {
     const panel = menyData[index];
@@ -71,7 +59,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       <FlexContainer fullHeight>
         <FlexRow>
           <FlexColumn className={styles.sideMenu}>
-            <FaktaMeny menyData={menyData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
+            <FaktaMeny menyData={menyData.filter((d) => !!d.tekst)} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
           </FlexColumn>
           <FlexColumn className={styles.content}>
             <FaktaInnhold>
@@ -82,7 +70,6 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
                     behandling,
                     valgtFaktaSteg,
                     registrerFaktaPanel,
-                    leggFaktaPanelTilMeny,
                   })}
                 </React.Fragment>
               ))}

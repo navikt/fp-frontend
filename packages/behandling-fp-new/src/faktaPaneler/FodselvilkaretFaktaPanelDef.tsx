@@ -51,12 +51,11 @@ type EndepunktDataVedVisning = {
 interface OwnProps {
   valgtFaktaSteg: string;
   behandling: Behandling;
-  registrerFaktaPanel: (id: string) => void;
-  leggFaktaPanelTilMeny: (data: {
+  registrerFaktaPanel: (data: {
     id: string;
-    tekst: string;
-    erAktiv: boolean;
-    harAksjonspunkt: boolean;
+    tekst?: string;
+    erAktiv?: boolean;
+    harAksjonspunkt?: boolean;
   }) => void;
 }
 
@@ -66,11 +65,12 @@ interface OwnProps {
 const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   behandling,
-  leggFaktaPanelTilMeny,
   registrerFaktaPanel,
 }) => {
   useEffect(() => {
-    registrerFaktaPanel(faktaPanelCodes.FODSELSVILKARET);
+    registrerFaktaPanel({
+      id: faktaPanelCodes.FODSELSVILKARET,
+    });
   }, []);
   const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.FODSELSVILKARET;
 
@@ -93,7 +93,7 @@ const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (data && data.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))) {
-      leggFaktaPanelTilMeny({
+      registrerFaktaPanel({
         id: faktaPanelCodes.FODSELSVILKARET,
         tekst: getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' }),
         erAktiv: valgtFaktaSteg === faktaPanelCodes.FODSELSVILKARET,
