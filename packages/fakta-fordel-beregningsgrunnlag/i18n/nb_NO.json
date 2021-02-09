@@ -73,5 +73,7 @@
   "BeregningInfoPanel.RefusjonBG.RefusjonFra": "Refusjonsbeløpet skal gjelde fra og med",
   "BeregningInfoPanel.RefusjonBG.Begrunnelse": "Begrunnelse",
   "BeregningInfoPanel.RefusjonBG.Aksjonspunkt": "Nytt refusjonskrav overlapper tidligere utbetalinger. Sett endringsdato for ny refusjon.",
-  "BeregningInfoPanel.RefusjonBG.DelvisPrMnd": "Før denne datoen skal refusjonsbeløpet per måned være"
+  "BeregningInfoPanel.RefusjonBG.DelvisPrMnd": "Før denne datoen skal refusjonsbeløpet per måned være",
+  "BeregningInfoPanel.RefusjonBG.MåSetteSlutt": "Det er nødvendig å sette en sluttdato for refusjon",
+  "BeregningInfoPanel.RefusjonBG.RefusjonTil": "Siste dag med refusjon skal være"
 }

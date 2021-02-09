@@ -51,6 +51,26 @@ export const bgMedDelvisRefusjon = {
           arbeidsgiverOrgnr: '999999999',
         },
       },
+      {
+        aktivitetStatus: {
+          kodeverk: 'AKTIVITET_STATUS',
+          kode: 'AT',
+        },
+        tidligereUtbetalinger: [
+          {
+            fom: '2020-05-15',
+            tom: '9999-12-31',
+            erTildeltRefusjon: true,
+          },
+        ],
+        nyttRefusjonskravFom: '2020-06-01',
+        tidligsteMuligeRefusjonsdato: '2020-06-01',
+        skalKunneFastsetteDelvisRefusjon: true,
+        maksTillattDelvisRefusjonPrMnd: 12000,
+        arbeidsgiver: {
+          arbeidsgiverOrgnr: '123456789',
+        },
+      },
     ],
   },
 };

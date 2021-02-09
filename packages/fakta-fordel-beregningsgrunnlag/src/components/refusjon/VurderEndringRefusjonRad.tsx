@@ -11,7 +11,9 @@ import {
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
-import { behandlingFormValueSelector, DatepickerField, InputField } from '@fpsak-frontend/form';
+import {
+  behandlingFormValueSelector, CheckboxField, DatepickerField, InputField,
+} from '@fpsak-frontend/form';
 import { FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -22,6 +24,8 @@ import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelp
 
 const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
 const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';
+const FIELD_KEY_MÅ_SETTE_REFUSJON_SLUTT = 'MA_SETTE_REFUSJON_SLUTT';
+const FIELD_KEY_REFUSJON_SLUTT = 'REFUSJON_SLUTT_DATO';
 
 const lagNøkkel = (prefix: string, andel: RefusjonTilVurderingAndel): string => {
   if (andel.arbeidsgiver.arbeidsgiverOrgnr) {
@@ -32,6 +36,8 @@ const lagNøkkel = (prefix: string, andel: RefusjonTilVurderingAndel): string =>
 
 export const lagNøkkelRefusjonsstart = (andel: RefusjonTilVurderingAndel): string => lagNøkkel(FIELD_KEY_REFUSJONSTART, andel);
 export const lagNøkkelDelvisRefusjon = (andel: RefusjonTilVurderingAndel) : string => lagNøkkel(FIELD_KEY_DELVIS_REF, andel);
+export const lagNøkkelMåSetteRefusjonsslutt = (andel: RefusjonTilVurderingAndel) : string => lagNøkkel(FIELD_KEY_MÅ_SETTE_REFUSJON_SLUTT, andel);
+export const lagNøkkelRefusjonsslutt = (andel: RefusjonTilVurderingAndel) : string => lagNøkkel(FIELD_KEY_REFUSJON_SLUTT, andel);
 
 type OwnProps = {
     refusjonAndel?: RefusjonTilVurderingAndel;
@@ -54,6 +60,7 @@ type TransformedValues = {
 
 type MappedOwnProps = {
   valgtDatoErLikSTP?: boolean;
+  skalSetteTOM?: boolean;
 }
 
 interface StaticFunctions {
@@ -67,6 +74,7 @@ export const VurderEndringRefusjonRadImpl: FunctionComponent<OwnProps & MappedOw
   erAksjonspunktÅpent,
   arbeidsgiverOpplysningerPerId,
   valgtDatoErLikSTP,
+  skalSetteTOM,
 }) => {
   if (!refusjonAndel) {
     return null;
@@ -127,6 +135,34 @@ export const VurderEndringRefusjonRadImpl: FunctionComponent<OwnProps & MappedOw
           </Column>
         </Row>
       )}
+      <Row>
+        <Column xs="6">
+          <CheckboxField
+            readOnly={readOnly}
+            name={lagNøkkelMåSetteRefusjonsslutt(refusjonAndel)}
+            label={<FormattedMessage id="BeregningInfoPanel.RefusjonBG.MåSetteSlutt" />}
+          />
+        </Column>
+      </Row>
+      {skalSetteTOM && (
+        <Row>
+          <Column xs="4">
+            <Normaltekst className={styles.marginTopp}>
+              <FormattedMessage
+                id="BeregningInfoPanel.RefusjonBG.RefusjonTil"
+              />
+            </Normaltekst>
+          </Column>
+          <Column xs="4">
+            <DatepickerField
+              name={lagNøkkelRefusjonsslutt(refusjonAndel)}
+              readOnly={readOnly}
+              validate={[required, hasValidDate, dateAfterOrEqual(refusjonAndel.tidligsteMuligeRefusjonsdato)]}
+              isEdited={!!refusjonAndel.fastsattNyttRefusjonskravFom && !erAksjonspunktÅpent}
+            />
+          </Column>
+        </Row>
+      )}
     </>
   );
 };
@@ -165,6 +201,9 @@ const erValgtDatoLikSTP = (stp: string, verdiFraForm?: string): boolean => {
 const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => ({
   valgtDatoErLikSTP: (erValgtDatoLikSTP(ownProps.skjæringstidspunkt,
     behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, lagNøkkelRefusjonsstart(ownProps.refusjonAndel)))),
+  skalSetteTOM: behandlingFormValueSelector(ownProps.formName,
+    ownProps.behandlingId,
+    ownProps.behandlingVersjon)(state, lagNøkkelMåSetteRefusjonsslutt(ownProps.refusjonAndel)),
 });
 
 const VurderEndringRefusjonRad = connect(mapStateToProps)(VurderEndringRefusjonRadImpl);
