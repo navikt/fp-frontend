@@ -30,7 +30,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
 }) => {
   const [menyData, setMenyData] = useState<ProsessMenyData[]>([]);
   const registrerFaktaPanel = useCallback((nyData: ProsessMenyData) => {
-    if (nyData.harAksjonspunkt && valgtProsessSteg === DEFAULT_PROSESS_KODE) {
+    if (nyData.harApentAksjonspunkt && valgtProsessSteg === DEFAULT_PROSESS_KODE) {
       oppdaterProsessPanelIUrl(nyData.id);
     }
     setMenyData((oldData) => {

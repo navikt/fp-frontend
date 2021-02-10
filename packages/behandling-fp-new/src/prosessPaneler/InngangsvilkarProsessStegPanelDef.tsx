@@ -10,12 +10,17 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
+  AksessRettigheter,
   Behandling,
 } from '@fpsak-frontend/types';
 import { MargMarkering } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import FodselPanelDef from './inngangsvilkarPaneler/FodselPanelDef';
+import MedlemskapPanelDef from './inngangsvilkarPaneler/MedlemskapPanelDef';
+import OpptjeningPanelDef from './inngangsvilkarPaneler/OpptjeningPanelDef';
+
+import styles from './inngangsvilkarProsessStegPanelDef.less';
 
 const harMinstEttDelPanelStatus = (paneler: PanelInfo[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
 
@@ -40,11 +45,12 @@ interface OwnProps {
     id: string;
     tekst?: string;
     erAktiv?: boolean;
-    harAksjonspunkt?: boolean;
+    harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  rettigheter: AksessRettigheter;
 }
 
 type PanelInfo = {
@@ -60,6 +66,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   registrerFaktaPanel,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
+  rettigheter,
 }) => {
   useEffect(() => {
     registrerFaktaPanel({
@@ -90,11 +97,16 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     evt.preventDefault();
   }, [apentFaktaPanelInfo]);
 
-  const leftPanels = [
-    <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} />,
-  ];
-  const rightPanels = [
-  ];
+  const leftPanels = (
+    <>
+      <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} />
+      <VerticalSpacer thirtyTwoPx />
+      <MedlemskapPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
+    </>
+  );
+  const rightPanels = (
+    <OpptjeningPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
+  );
 
   useEffect(() => {
     if (panelInfo.length > 0) {
@@ -102,7 +114,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         id: prosessStegCodes.INNGANGSVILKAR,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
         erAktiv: valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR,
-        harAksjonspunkt: getErAksjonspunktOpen(panelInfo),
+        harApentAksjonspunkt: getErAksjonspunktOpen(panelInfo),
         status: getStatus(panelInfo),
       });
     }
@@ -143,10 +155,14 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
             )}
             <Row className="">
               <Column xs="6">
-                {leftPanels}
+                <div className={styles.panelLeft}>
+                  {leftPanels}
+                </div>
               </Column>
               <Column xs="6">
-                {rightPanels}
+                <div className={styles.panelRight}>
+                  {rightPanels}
+                </div>
               </Column>
             </Row>
           </FadingPanel>

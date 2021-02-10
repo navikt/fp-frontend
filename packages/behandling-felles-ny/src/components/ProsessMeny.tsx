@@ -26,7 +26,6 @@ export type ProsessMenyData = {
   tekst: string;
   erAktiv: boolean;
   status: string;
-  harAksjonspunkt: boolean;
   harApentAksjonspunkt: boolean;
 };
 

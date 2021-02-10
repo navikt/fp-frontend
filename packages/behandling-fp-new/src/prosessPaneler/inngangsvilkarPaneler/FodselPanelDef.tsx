@@ -44,11 +44,13 @@ interface OwnProps {
     harApentAksjonspunkt: boolean;
     status: string;
   }) => void;
+  erPanelValgt: boolean;
 }
 
 const FodselPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   setPanelInfo,
+  erPanelValgt,
 }) => {
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -68,14 +70,14 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
     if (erDataFerdighentet && skalVises) {
       setPanelInfo({
         id: 'FODSEL',
-        aksjonspunktTekst: getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' }),
+        aksjonspunktTekst: standardProps.isAksjonspunktOpen ? getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' }) : undefined,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: standardProps.status,
       });
     }
   }, [standardProps.isAksjonspunktOpen, skalVises, erDataFerdighentet]);
 
-  if (skalVises) {
+  if (!erPanelValgt || !skalVises) {
     return null;
   }
 

@@ -49,7 +49,7 @@ interface OwnProps {
     id: string;
     tekst?: string;
     erAktiv?: boolean;
-    harAksjonspunkt?: boolean;
+    harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -97,7 +97,7 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         id: prosessStegCodes.OPPLYSNINGSPLIKT,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
         erAktiv: valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT,
-        harAksjonspunkt: standardProps.isAksjonspunktOpen,
+        harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: standardProps.status,
       });
     }

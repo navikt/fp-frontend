@@ -148,7 +148,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
         ]}
         prosessPaneler={[
           (props) => <OpplysningspliktProsessStegPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
-          (props) => <InngangsvilkarProsessStegPanelDef {...props} />,
+          (props) => <InngangsvilkarProsessStegPanelDef {...props} rettigheter={rettigheter} />,
         ]}
       />
     </StandardPropsProvider>
