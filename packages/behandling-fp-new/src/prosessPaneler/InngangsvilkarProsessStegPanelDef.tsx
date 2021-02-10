@@ -2,8 +2,9 @@ import React, {
   FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-
 import { Column, Row } from 'nav-frontend-grid';
+
+import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
   FadingPanel, VerticalSpacer, AksjonspunktHelpTextHTML,
 } from '@fpsak-frontend/shared-components';
@@ -11,6 +12,26 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
   Behandling,
 } from '@fpsak-frontend/types';
+import { MargMarkering } from '@fpsak-frontend/behandling-felles-ny';
+
+import getPackageIntl from '../../i18n/getPackageIntl';
+import FodselPanelDef from './inngangsvilkarPaneler/FodselPanelDef';
+
+const harMinstEttDelPanelStatus = (paneler: PanelInfo[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
+
+const getStatus = (paneler: PanelInfo[]): string => {
+  const harStatusIkkeVurdert = harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_VURDERT);
+  const harStatusOppfylt = harMinstEttDelPanelStatus(paneler, vilkarUtfallType.OPPFYLT);
+  const tempStatus = harStatusOppfylt && !harStatusIkkeVurdert ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
+  return harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT) ? vilkarUtfallType.IKKE_OPPFYLT : tempStatus;
+};
+
+const getErAksjonspunktOpen = (paneler: PanelInfo[]): boolean => {
+  const harUlikeStatuserIPanelene = harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_VURDERT)
+    && harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT)
+    && !harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT);
+  return harUlikeStatuserIPanelene || paneler.some((p) => p.harApentAksjonspunkt);
+};
 
 interface OwnProps {
   behandling: Behandling;
@@ -24,6 +45,13 @@ interface OwnProps {
   }) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+}
+
+type PanelInfo = {
+  id: string;
+  aksjonspunktTekst: string;
+  harApentAksjonspunkt: boolean;
+  status: string;
 }
 
 const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
@@ -41,44 +69,90 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const erPanelValgt = valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR;
 
-  const [aksjonspunktTekstKoder, setAksjonspunktTekstKode] = useState([]);
-  const [erIkkeFerdigbehandlet, setFerdigBehandlet] = useState(false);
+  const [panelInfo, setPanelInfo] = useState<PanelInfo[]>([]);
+  const visProsessPanel = useCallback((nyData: PanelInfo) => {
+    setPanelInfo((oldData) => {
+      const newData = [...oldData];
+      const index = newData.findIndex((d) => d.id === nyData.id);
+      if (index >= 0) {
+        newData.splice(index, 1, nyData);
+      } else {
+        newData.push(nyData);
+      }
+      return newData;
+    });
+  }, []);
+
+  const erIkkeFerdigbehandlet = panelInfo.some((p) => p.status === vilkarUtfallType.IKKE_VURDERT);
 
   const oppdaterUrl = useCallback((evt) => {
     oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo.urlCode);
     evt.preventDefault();
   }, [apentFaktaPanelInfo]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
+  const leftPanels = [
+    <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} />,
+  ];
+  const rightPanels = [
+  ];
+
+  useEffect(() => {
+    if (panelInfo.length > 0) {
+      registrerFaktaPanel({
+        id: prosessStegCodes.INNGANGSVILKAR,
+        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
+        erAktiv: valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR,
+        harAksjonspunkt: getErAksjonspunktOpen(panelInfo),
+        status: getStatus(panelInfo),
+      });
+    }
+  }, [panelInfo]);
+
+  const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst);
 
   return (
-    <FadingPanel>
-      {((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekstKoder.length > 0) && (
+    <>
+      {!erPanelValgt && (
         <>
-          <AksjonspunktHelpTextHTML>
-            {apentFaktaPanelInfo && erIkkeFerdigbehandlet
-              ? [
-                <React.Fragment key="1">
-                  <FormattedMessage id="InngangsvilkarPanel.AvventerAvklaringAv" />
-                  <a href="" onClick={oppdaterUrl}><FormattedMessage id={apentFaktaPanelInfo.textCode} /></a>
-                </React.Fragment>,
-              ]
-              : aksjonspunktTekstKoder.map((kode) => <FormattedMessage key={kode} id={kode} />)}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
+          {leftPanels}
+          {rightPanels}
         </>
       )}
-      <Row className="">
-        <Column xs="6">
-          test
-        </Column>
-        <Column xs="6">
-          test
-        </Column>
-      </Row>
-    </FadingPanel>
+      {erPanelValgt && (
+        <MargMarkering
+          behandlingStatus={behandling.status}
+          aksjonspunkter={[]}
+          isReadOnly={false}
+          visAksjonspunktMarkering={false}
+        >
+          <FadingPanel>
+            {((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+              <>
+                <AksjonspunktHelpTextHTML>
+                  {apentFaktaPanelInfo && erIkkeFerdigbehandlet
+                    ? [
+                      <React.Fragment key="1">
+                        <FormattedMessage id="InngangsvilkarPanel.AvventerAvklaringAv" />
+                        <a href="" onClick={oppdaterUrl}><FormattedMessage id={apentFaktaPanelInfo.textCode} /></a>
+                      </React.Fragment>,
+                    ]
+                    : aksjonspunktTekster.map((tekst) => tekst)}
+                </AksjonspunktHelpTextHTML>
+                <VerticalSpacer thirtyTwoPx />
+              </>
+            )}
+            <Row className="">
+              <Column xs="6">
+                {leftPanels}
+              </Column>
+              <Column xs="6">
+                {rightPanels}
+              </Column>
+            </Row>
+          </FadingPanel>
+        </MargMarkering>
+      )}
+    </>
   );
 };
 

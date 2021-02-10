@@ -7,5 +7,8 @@
   "UttakInfoPanel.FaktaUttak": "Uttak",
   "AktivitetskravInfoPanel.FaktaAktivitetskrav": "Aktivitetskrav",
 
-  "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt"
+  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
+  "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt",
+
+  "FodselVilkarForm.VurderGjelderSammeBarn": "Vurder om tidligere utbetalte foreldrepenger eller engangsstønad gjelder for samme barn. Dersom det gjelder for samme barn er dette vilkåret ikke oppfylt."
 }
