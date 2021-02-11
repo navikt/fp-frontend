@@ -97,16 +97,13 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     evt.preventDefault();
   }, [apentFaktaPanelInfo]);
 
-  const leftPanels = (
-    <>
-      <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} />
-      <VerticalSpacer thirtyTwoPx />
-      <MedlemskapPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
-    </>
-  );
-  const rightPanels = (
-    <OpptjeningPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
-  );
+  const leftPanels = [
+    <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} />,
+    <MedlemskapPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
+  ];
+  const rightPanels = [
+    <OpptjeningPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
+  ];
 
   useEffect(() => {
     if (panelInfo.length > 0) {
@@ -156,12 +153,26 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
             <Row className="">
               <Column xs="6">
                 <div className={styles.panelLeft}>
-                  {leftPanels}
+                  {leftPanels.map((p, index) => (
+                    <>
+                      {p}
+                      {index + 1 !== leftPanels.length && (
+                        <VerticalSpacer thirtyTwoPx />
+                      )}
+                    </>
+                  ))}
                 </div>
               </Column>
               <Column xs="6">
                 <div className={styles.panelRight}>
-                  {rightPanels}
+                  {rightPanels.map((p, index) => (
+                    <>
+                      {p}
+                      {index + 1 !== rightPanels.length && (
+                      <VerticalSpacer thirtyTwoPx />
+                      )}
+                    </>
+                  ))}
                 </div>
               </Column>
             </Row>

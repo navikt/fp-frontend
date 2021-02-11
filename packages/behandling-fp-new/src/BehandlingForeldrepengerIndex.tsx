@@ -17,6 +17,11 @@ import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/Medlemskapsvilkaret
 import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
 import OpplysningspliktProsessStegPanelDef from './prosessPaneler/OpplysningspliktProsessStegPanelDef';
 import InngangsvilkarProsessStegPanelDef from './prosessPaneler/InngangsvilkarProsessStegPanelDef';
+import BeregningsgrunnlagProsessStegPanelDef from './prosessPaneler/BeregningsgrunnlagProsessStegPanelDef';
+import UttakProsessStegPanelDef from './prosessPaneler/UttakProsessStegPanelDef';
+import TilkjentYtelseProsessStegPanelDef from './prosessPaneler/TilkjentYtelseProsessStegPanelDef';
+import SimuleringProsessStegPanelDef from './prosessPaneler/SimuleringProsessStegPanelDef';
+import VedtakProsessStegPanelDef from './prosessPaneler/VedtakProsessStegPanelDef';
 
 const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
@@ -64,6 +69,13 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiFpHooks
     .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
+
+  const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
+
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks
+    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+
+  const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
 
   useEffect(() => {
     behandlingEventHandler.setHandler({
@@ -149,6 +161,19 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
         prosessPaneler={[
           (props) => <OpplysningspliktProsessStegPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
           (props) => <InngangsvilkarProsessStegPanelDef {...props} rettigheter={rettigheter} />,
+          (props) => <BeregningsgrunnlagProsessStegPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
+          (props) => (
+            <UttakProsessStegPanelDef
+              {...props}
+              fagsak={fagsak}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
+              rettigheter={rettigheter}
+              tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+            />
+          ),
+          (props) => <TilkjentYtelseProsessStegPanelDef {...props} fagsak={fagsak} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
+          (props) => <SimuleringProsessStegPanelDef {...props} fagsak={fagsak} forhandsvisTilbakekrevingMelding={forhandsvisTilbakekrevingMelding} />,
+          (props) => <VedtakProsessStegPanelDef {...props} fagsak={fagsak} forhandsvisMelding={forhandsvisMelding} />,
         ]}
       />
     </StandardPropsProvider>

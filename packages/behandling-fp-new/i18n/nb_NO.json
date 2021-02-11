@@ -9,6 +9,11 @@
 
   "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
   "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt",
+  "Behandlingspunkt.Beregning": "Beregning",
+  "Behandlingspunkt.Uttak": "Uttak",
+  "Behandlingspunkt.TilkjentYtelse": "Tilkjent ytelse",
+  "Behandlingspunkt.Avregning": "Simulering",
+  "Behandlingspunkt.Vedtak": "Vedtak",
 
   "OpptjeningVilkarView.VurderOmSøkerHarRett": "Vurder om søker har opptjent rett til foreldrepenger",
   "FodselVilkarForm.VurderGjelderSammeBarn": "Vurder om tidligere utbetalte foreldrepenger eller engangsstønad gjelder for samme barn. Dersom det gjelder for samme barn er dette vilkåret ikke oppfylt."
