@@ -1,7 +1,8 @@
 import React, {
-  FunctionComponent, useCallback, useEffect,
+  FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { isAvslag } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -13,7 +14,9 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal,
+} from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -75,6 +78,33 @@ const getForhandsvisCallback = (
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
+const getLagringSideeffekter = (
+  toggleIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
+  toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
+  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void,
+) => (aksjonspunktModels: any) => {
+  const visIverksetterVedtakModal = aksjonspunktModels[0].isVedtakSubmission
+    && [aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL, aksjonspunktCodes.FATTER_VEDTAK].includes(aksjonspunktModels[0].kode);
+  const visFatterVedtakModal = aksjonspunktModels[0].isVedtakSubmission && aksjonspunktModels[0].kode === aksjonspunktCodes.FORESLA_VEDTAK;
+  const isVedtakAp = aksjonspunktModels.some((a) => a.isVedtakSubmission);
+
+  if (visIverksetterVedtakModal || visFatterVedtakModal || isVedtakAp) {
+    toggleOppdatereFagsakContext(false);
+  }
+
+  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
+  return () => {
+    if (visFatterVedtakModal) {
+      toggleFatterVedtakModal(true);
+    } else if (visIverksetterVedtakModal) {
+      toggleIverksetterVedtakModal(true);
+    } else {
+      oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
+    }
+  };
+};
+
 const aksjonspunktKoder = [
   aksjonspunktCodes.FORESLA_VEDTAK,
   aksjonspunktCodes.FATTER_VEDTAK,
@@ -93,7 +123,6 @@ const endepunkter = [
 
 const endepunkterVedVisning = [
   { key: FpBehandlingApiKeys.TILBAKEKREVINGVALG },
-  { key: FpBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING },
   { key: FpBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING },
   { key: FpBehandlingApiKeys.MEDLEMSKAP },
   { key: FpBehandlingApiKeys.SIMULERING_RESULTAT },
@@ -127,22 +156,35 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
+  oppdaterBehandlingVersjon: (versjon: number) => void;
+  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   fagsak: Fagsak;
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>;
+  opneSokeside: () => void;
 }
 
 const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  oppdaterBehandlingVersjon,
+  oppdaterProsessStegOgFaktaPanelIUrl,
   fagsak,
   forhandsvisMelding,
+  opneSokeside,
 }) => {
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.VEDTAK,
     });
   }, []);
+
+  const [skalOppdatereFagsakKontekst, toggleSkalOppdatereFagsakContext] = useState(true);
+  useEffect(() => {
+    if (skalOppdatereFagsakKontekst) {
+      oppdaterBehandlingVersjon(behandling.versjon);
+    }
+  }, [behandling.versjon]);
 
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]);
 
@@ -163,7 +205,12 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
 
-  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
+  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
+  const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
+  const lagringSideEffekter = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleFatterVedtakModal,
+    toggleSkalOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
+
+  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter, [], lagringSideEffekter);
 
   const skalVises = state === RestApiState.SUCCESS;
 
@@ -195,22 +242,34 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <MargMarkering
-      behandlingStatus={behandling.status}
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
-    >
-      <FadingPanel>
-        <VedtakProsessIndex
-          behandling={behandling}
-          ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-          previewCallback={previewCallback}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+    <>
+      <IverksetterVedtakStatusModal
+        visModal={visIverksetterVedtakModal}
+        lukkModal={useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, [])}
+        behandlingsresultat={behandling.behandlingsresultat}
+      />
+      <FatterVedtakStatusModal
+        visModal={visFatterVedtakModal && behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
+        lukkModal={useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, [])}
+        tekstkode="FatterVedtakStatusModal.SendtBeslutter"
+      />
+      <MargMarkering
+        behandlingStatus={behandling.status}
+        aksjonspunkter={filtrerteAksjonspunkter}
+        isReadOnly={standardProps.isReadOnly}
+        visAksjonspunktMarkering
+      >
+        <FadingPanel>
+          <VedtakProsessIndex
+            behandling={behandling}
+            ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+            previewCallback={previewCallback}
+            {...dataEtterVisning}
+            {...standardProps}
+          />
+        </FadingPanel>
+      </MargMarkering>
+    </>
   );
 };
 

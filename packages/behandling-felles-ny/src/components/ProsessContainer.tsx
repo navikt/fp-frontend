@@ -18,6 +18,7 @@ interface OwnProps {
   oppdaterProsessPanelIUrl: (prosessnavn: string) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
+  oppdaterBehandlingVersjon: (versjon: number) => void;
 }
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({
@@ -27,6 +28,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   oppdaterProsessPanelIUrl,
   oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
+  oppdaterBehandlingVersjon,
 }) => {
   const [menyData, setMenyData] = useState<ProsessMenyData[]>([]);
   const registrerFaktaPanel = useCallback((nyData: ProsessMenyData) => {
@@ -69,6 +71,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
               registrerFaktaPanel,
               apentFaktaPanelInfo,
               oppdaterProsessStegOgFaktaPanelIUrl,
+              oppdaterBehandlingVersjon,
             })}
           </React.Fragment>
         ))}

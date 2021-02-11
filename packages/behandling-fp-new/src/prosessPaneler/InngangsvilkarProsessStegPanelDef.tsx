@@ -48,6 +48,7 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
+  oppdaterBehandlingVersjon: (versjon: number) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
@@ -64,6 +65,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  oppdaterBehandlingVersjon,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
@@ -73,6 +75,10 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       id: prosessStegCodes.INNGANGSVILKAR,
     });
   }, []);
+
+  useEffect(() => {
+    oppdaterBehandlingVersjon(behandling.versjon);
+  }, [behandling.versjon]);
 
   const erPanelValgt = valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR;
 

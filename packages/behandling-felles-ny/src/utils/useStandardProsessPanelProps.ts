@@ -37,7 +37,11 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   return vilkarUtfallType.IKKE_VURDERT;
 };
 
-const useStandardProsessPanelProps = (aksjonspunkter: Aksjonspunkt[], vilkar: Vilkar[] = []): Standard => {
+const useStandardProsessPanelProps = (
+  aksjonspunkter: Aksjonspunkt[],
+  vilkar: Vilkar[] = [],
+  lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
+): Standard => {
   const value = useContext(StandardPropsStateContext);
 
   const isReadOnly = erReadOnly(value.behandling, aksjonspunkter, vilkar, value.rettigheter, value.hasFetchError);
@@ -48,8 +52,12 @@ const useStandardProsessPanelProps = (aksjonspunkter: Aksjonspunkt[], vilkar: Vi
   const status = finnStatus(vilkar, aksjonspunkter);
   const readOnlySubmitButton = (!(aksjonspunkter.some((ap) => ap.kanLoses)) || vilkarUtfallType.OPPFYLT === status);
 
+  const standardlagringSideEffekter = () => () => {
+    value.oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
+  };
+
   const submitCallback = getBekreftAksjonspunktProsessCallback(
-    () => undefined,
+    lagringSideEffekter || standardlagringSideEffekter,
     value.fagsak,
     value.behandling,
     aksjonspunkter,

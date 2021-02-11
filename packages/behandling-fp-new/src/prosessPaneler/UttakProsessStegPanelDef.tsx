@@ -92,6 +92,7 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
+  oppdaterBehandlingVersjon: (versjon: number) => void;
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
@@ -102,6 +103,7 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  oppdaterBehandlingVersjon,
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   fagsak,
@@ -112,6 +114,10 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       id: prosessStegCodes.UTTAK,
     });
   }, []);
+
+  useEffect(() => {
+    oppdaterBehandlingVersjon(behandling.versjon);
+  }, [behandling.versjon]);
 
   const erPanelValgt = valgtProsessSteg === prosessStegCodes.UTTAK;
 

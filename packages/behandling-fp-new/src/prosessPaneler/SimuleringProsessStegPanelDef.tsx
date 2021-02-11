@@ -74,6 +74,7 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
+  oppdaterBehandlingVersjon: (versjon: number) => void;
   fagsak: Fagsak;
   forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling>;
 }
@@ -82,6 +83,7 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  oppdaterBehandlingVersjon,
   fagsak,
   forhandsvisTilbakekrevingMelding,
 }) => {
@@ -90,6 +92,10 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       id: prosessStegCodes.AVREGNING,
     });
   }, []);
+
+  useEffect(() => {
+    oppdaterBehandlingVersjon(behandling.versjon);
+  }, [behandling.versjon]);
 
   const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]);
 

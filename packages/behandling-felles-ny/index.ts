@@ -2,6 +2,9 @@ export { default as BehandlingContainer } from './src/components/BehandlingConta
 export { default as OverstyringPanelDef } from './src/components/OverstyringPanelDef';
 export { default as MargMarkering } from './src/components/MargMarkering';
 export { default as ProsessStegIkkeBehandletPanel } from './src/components/ProsessStegIkkeBehandletPanel';
+export { default as FatterVedtakStatusModal } from './src/components/vedtak/FatterVedtakStatusModal';
+export { default as IverksetterVedtakStatusModal } from './src/components/vedtak/IverksetterVedtakStatusModal';
+export { default as BehandlingPaVent } from './src/components/paVent/BehandlingPaVent';
 export { default as StandardBehandlingProps } from './src/types/StandardBehandlingProps';
 export { default as useStandardFaktaProps } from './src/utils/useStandardFaktaProps';
 export { default as StandardPropsProvider } from './src/utils/standardPropsStateContext';
