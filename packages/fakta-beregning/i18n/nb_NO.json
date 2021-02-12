@@ -29,7 +29,8 @@
   "BeregningInfoPanel.VurderBestebergning.HarBesteberegning" : "Søker har hatt dagpenger i opptjeningsperioden. Skal dette fordeles etter besteberegning?",
   
   "InntektstabellPanel.Avbryt": "Avbryt overstyring",
-
+  
+  "BeregningInfoPanel.FordelingBG.LeggTilAndel": "Legg til aktivitet",
   "BeregningInfoPanel.FastsettBBFodendeKvinne.RegnarkNavet": "Finn regneark på navet",
   "BeregningInfoPanel.FordelingBG.Sum": "Sum",
   "BeregningInfoPanel.FordelingBG.Andel": "Aktivitet",

@@ -16,6 +16,8 @@ import ArbeidsforholdFaktaPanelDef from './faktaPaneler/ArbeidsforholdFaktaPanel
 import YtelserFaktaPanelDef from './faktaPaneler/YtelserFaktaPanelDef';
 import FodselvilkaretFaktaPanelDef from './faktaPaneler/FodselvilkaretFaktaPanelDef';
 import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/MedlemskapsvilkaretFaktaPanelDef';
+import OpptjeningsvilkaretFaktaPanelDef from './faktaPaneler/OpptjeningsvilkaretFaktaPanelDef';
+import BeregningFaktaPanelDef from './faktaPaneler/BeregningFaktaPanelDef';
 import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
 import VarselProsessStegPanelDef from './prosessPaneler/VarselProsessStegPanelDef';
 import OpplysningspliktProsessStegPanelDef from './prosessPaneler/OpplysningspliktProsessStegPanelDef';
@@ -168,6 +170,8 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
               />
             ),
+            (props) => <OpptjeningsvilkaretFaktaPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
+            (props) => <BeregningFaktaPanelDef {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
             (props) => <UttakFaktaPanelDef {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere} />,
           ]}
           prosessPaneler={[

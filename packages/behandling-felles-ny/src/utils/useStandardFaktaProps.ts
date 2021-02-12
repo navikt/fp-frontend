@@ -15,7 +15,7 @@ type Standard = {
   submittable: boolean;
   harApneAksjonspunkter: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback?: (aksjonspunktData: any) => Promise<any>;
+  submitCallback: (aksjonspunktData: any) => Promise<any>;
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
