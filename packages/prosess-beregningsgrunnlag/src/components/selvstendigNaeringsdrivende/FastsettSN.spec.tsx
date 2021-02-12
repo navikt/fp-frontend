@@ -53,7 +53,7 @@ describe('<FastsettSN>', () => {
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
       'Ok.') as Aksjonspunkt];
 
-    const actualValues = FastsettSNImpl.buildInitialValues(andeler, aksjonspunkter);
+    const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
 
     const expectedValues = {
       [fastsettInntektFieldname]: '300 000',
@@ -68,7 +68,7 @@ describe('<FastsettSN>', () => {
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE, null)];
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
-    const actualValues = FastsettSNImpl.buildInitialValues(andeler, aksjonspunkter);
+    const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
 
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
@@ -83,7 +83,7 @@ describe('<FastsettSN>', () => {
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, null)];
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
-    const actualValues = FastsettSNImpl.buildInitialValues(andeler, aksjonspunkter);
+    const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
       [begrunnelseFieldname]: '',
@@ -97,7 +97,7 @@ describe('<FastsettSN>', () => {
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, 'Ok!!!')];
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
-    const actualValues = FastsettSNImpl.buildInitialValues(andeler, aksjonspunkter);
+    const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
 
     const expectedValues = {
       [fastsettInntektFieldname]: '500 000',
