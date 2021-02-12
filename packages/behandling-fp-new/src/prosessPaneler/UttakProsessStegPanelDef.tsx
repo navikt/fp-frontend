@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -93,6 +93,7 @@ interface OwnProps {
     status?: string;
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
@@ -104,11 +105,14 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   registrerFaktaPanel,
   oppdaterBehandlingVersjon,
+  apentFaktaPanelInfo,
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   fagsak,
   tempUpdateStonadskontoer,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.UTTAK,
@@ -118,8 +122,6 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     oppdaterBehandlingVersjon(behandling.versjon);
   }, [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.UTTAK;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -142,13 +144,16 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (skalVises) {
+      const erValgt = !apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.UTTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.UTTAK,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.UTTAK,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: getStatusFromUttakresultat(data.uttaksresultatPerioder, data.aksjonspunkter),
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -167,7 +172,6 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <MargMarkering
-      behandlingStatus={behandling.status}
       aksjonspunkter={filtrerteAksjonspunkter}
       isReadOnly={standardProps.isReadOnly}
       visAksjonspunktMarkering

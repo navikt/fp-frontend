@@ -158,6 +158,7 @@ interface OwnProps {
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>;
   opneSokeside: () => void;
@@ -169,10 +170,13 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   registrerFaktaPanel,
   oppdaterBehandlingVersjon,
   oppdaterProsessStegOgFaktaPanelIUrl,
+  apentFaktaPanelInfo,
   fagsak,
   forhandsvisMelding,
   opneSokeside,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.VEDTAK,
@@ -187,8 +191,6 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   }, [behandling.versjon]);
 
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.VEDTAK;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -216,15 +218,19 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (skalVises) {
+      const status = findStatusForVedtak(
+        data.vilkar, data.aksjonspunkter, filtrerteAksjonspunkter, behandling.behandlingsresultat,
+      );
+      const erValgt = status !== vilkarUtfallType.IKKE_VURDERT || (!apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default')));
       registrerFaktaPanel({
         id: prosessStegCodes.VEDTAK,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.VEDTAK,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status: findStatusForVedtak(
-          data.vilkar, data.aksjonspunkter, filtrerteAksjonspunkter, behandling.behandlingsresultat,
-        ),
+        status,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -254,7 +260,6 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         tekstkode="FatterVedtakStatusModal.SendtBeslutter"
       />
       <MargMarkering
-        behandlingStatus={behandling.status}
         aksjonspunkter={filtrerteAksjonspunkter}
         isReadOnly={standardProps.isReadOnly}
         visAksjonspunktMarkering

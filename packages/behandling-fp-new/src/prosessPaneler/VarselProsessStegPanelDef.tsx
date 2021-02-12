@@ -103,6 +103,7 @@ interface OwnProps {
   }) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>;
   opneSokeside: () => void;
@@ -113,11 +114,14 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   registrerFaktaPanel,
   oppdaterBehandlingVersjon,
+  apentFaktaPanelInfo,
   fagsak,
   forhandsvisMelding,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.VARSEL,
@@ -132,8 +136,6 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   }, [behandling.versjon]);
 
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.VARSEL;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -157,13 +159,16 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (skalVises) {
+      const erValgt = !apentFaktaPanelInfo
+      && (valgtProsessSteg === prosessStegCodes.VARSEL || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.VARSEL,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.VARSEL,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: standardProps.status,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -182,7 +187,6 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <MargMarkering
-      behandlingStatus={behandling.status}
       aksjonspunkter={filtrerteAksjonspunkter}
       isReadOnly={standardProps.isReadOnly}
       visAksjonspunktMarkering

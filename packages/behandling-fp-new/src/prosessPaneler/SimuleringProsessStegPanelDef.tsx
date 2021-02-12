@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect,
+  FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -75,6 +75,7 @@ interface OwnProps {
     status?: string;
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
   forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling>;
 }
@@ -84,9 +85,12 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   registrerFaktaPanel,
   oppdaterBehandlingVersjon,
+  apentFaktaPanelInfo,
   fagsak,
   forhandsvisTilbakekrevingMelding,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.AVREGNING,
@@ -98,8 +102,6 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   }, [behandling.versjon]);
 
   const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.AVREGNING;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -122,13 +124,16 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (skalVises) {
+      const erValgt = !apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.AVREGNING || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.AVREGNING,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.AVREGNING,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: data.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -147,7 +152,6 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <MargMarkering
-      behandlingStatus={behandling.status}
       aksjonspunkter={filtrerteAksjonspunkter}
       isReadOnly={standardProps.isReadOnly}
       visAksjonspunktMarkering

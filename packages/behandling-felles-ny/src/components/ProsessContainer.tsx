@@ -5,11 +5,10 @@ import React, {
 import { Behandling } from '@fpsak-frontend/types';
 
 import ProsessInnhold from './ProsessInnhold';
+import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny, { ProsessMenyData } from './ProsessMeny';
 
 import styles from './prosessContainer.less';
-
-const DEFAULT_PROSESS_KODE = 'default';
 
 interface OwnProps {
   behandling: Behandling;
@@ -32,9 +31,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
 }) => {
   const [menyData, setMenyData] = useState<ProsessMenyData[]>([]);
   const registrerFaktaPanel = useCallback((nyData: ProsessMenyData) => {
-    if (nyData.harApentAksjonspunkt && valgtProsessSteg === DEFAULT_PROSESS_KODE) {
-      oppdaterProsessPanelIUrl(nyData.id);
-    }
     setMenyData((oldData) => {
       const newData = [...oldData];
       const index = newData.findIndex((d) => d.id === nyData.id);
@@ -48,12 +44,17 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   }, [menyData]);
 
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = menyData[index];
-    oppdaterProsessPanelIUrl(panel.id);
+    const panel = menyData.filter((d) => !!d.tekst)[index];
+    const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
+    oppdaterProsessPanelIUrl(nyvalgtProsessSteg);
   }, [menyData]);
 
   if (!paneler) {
     return null;
+  }
+
+  if (behandling.behandlingHenlagt) {
+    paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
   }
 
   return (

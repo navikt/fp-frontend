@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -59,15 +59,19 @@ interface OwnProps {
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
 }
 
 const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  apentFaktaPanelInfo,
   oppdaterBehandlingVersjon,
   arbeidsgiverOpplysningerPerId,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.BEREGNINGSGRUNNLAG,
@@ -77,8 +81,6 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     oppdaterBehandlingVersjon(behandling.versjon);
   }, [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.BEREGNINGSGRUNNLAG;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -102,13 +104,16 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (skalVises) {
+      const erValgt = !apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.BEREGNINGSGRUNNLAG || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.BEREGNINGSGRUNNLAG,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.BEREGNINGSGRUNNLAG,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: standardProps.status,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -127,7 +132,6 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <MargMarkering
-      behandlingStatus={behandling.status}
       aksjonspunkter={filtrerteAksjonspunkter}
       isReadOnly={standardProps.isReadOnly}
       visAksjonspunktMarkering

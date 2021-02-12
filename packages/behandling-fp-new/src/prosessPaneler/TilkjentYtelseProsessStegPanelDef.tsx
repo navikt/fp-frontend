@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -78,6 +78,7 @@ interface OwnProps {
     status?: string;
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
 }
@@ -86,10 +87,13 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   registrerFaktaPanel,
+  apentFaktaPanelInfo,
   oppdaterBehandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   fagsak,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.TILKJENT_YTELSE,
@@ -99,8 +103,6 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     oppdaterBehandlingVersjon(behandling.versjon);
   }, [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.TILKJENT_YTELSE;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -123,13 +125,16 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (skalVises) {
+      const erValgt = !apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.TILKJENT_YTELSE || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.TILKJENT_YTELSE,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.TILKJENT_YTELSE,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: getStatusFromResultatstruktur(data.beregningresultatForeldrepenger, data.uttaksresultatPerioder),
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -148,7 +153,6 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <MargMarkering
-      behandlingStatus={behandling.status}
       aksjonspunkter={filtrerteAksjonspunkter}
       isReadOnly={standardProps.isReadOnly}
       visAksjonspunktMarkering

@@ -2,15 +2,13 @@ import React, { FunctionComponent, useMemo } from 'react';
 import classnames from 'classnames/bind';
 
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { Aksjonspunkt, Kodeverk } from '@fpsak-frontend/types';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import styles from './margMarkering.less';
 
 const classNames = classnames.bind(styles);
 
 interface OwnProps {
-  behandlingStatus: Kodeverk;
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
   visAksjonspunktMarkering?: boolean;
@@ -18,7 +16,6 @@ interface OwnProps {
 }
 
 const MargMarkering: FunctionComponent<OwnProps> = ({
-  behandlingStatus,
   aksjonspunkter,
   isReadOnly,
   visAksjonspunktMarkering = true,
@@ -32,14 +29,11 @@ const MargMarkering: FunctionComponent<OwnProps> = ({
     );
   }
 
-  const ikkeAkseptertAvBeslutter = behandlingStatus.kode === BehandlingStatus.BEHANDLING_UTREDES
-    && aksjonspunkter[0].toTrinnsBehandling && aksjonspunkter[0].toTrinnsBehandlingGodkjent === false;
-
   const harApnentAksjonspunktSomKanLoses = useMemo(() => aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode) && ap.kanLoses), [aksjonspunkter]);
   const visAksjonspunkt = visAksjonspunktMarkering && harApnentAksjonspunktSomKanLoses && !isReadOnly;
 
   return (
-    <div className={classNames('prosesspunkt', { ikkeAkseptertAvBeslutter, visAksjonspunkt })}>
+    <div className={classNames('prosesspunkt', { visAksjonspunkt })}>
       {children}
     </div>
   );

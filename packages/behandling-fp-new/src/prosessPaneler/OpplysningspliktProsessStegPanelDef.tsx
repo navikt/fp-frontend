@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -53,6 +53,7 @@ interface OwnProps {
     status?: string;
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
+  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -61,8 +62,11 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   registrerFaktaPanel,
   oppdaterBehandlingVersjon,
+  apentFaktaPanelInfo,
   arbeidsgiverOpplysningerPerId,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.OPPLYSNINGSPLIKT,
@@ -72,8 +76,6 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     oppdaterBehandlingVersjon(behandling.versjon);
   }, [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -99,13 +101,16 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     const isRevurdering = behandlingType.REVURDERING === behandling.type.kode;
     const hasAp = filtrerteAksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
     if (!(isRevurdering && !hasAp) || skalVises) {
+      const erValgt = !apentFaktaPanelInfo
+      && (valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.OPPLYSNINGSPLIKT,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT,
+        erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
         status: standardProps.status,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
@@ -119,7 +124,6 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <MargMarkering
-      behandlingStatus={behandling.status}
       aksjonspunkter={filtrerteAksjonspunkter}
       isReadOnly={standardProps.isReadOnly}
       visAksjonspunktMarkering

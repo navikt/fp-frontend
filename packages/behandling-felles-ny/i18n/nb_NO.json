@@ -1,6 +1,7 @@
 {
   "ProsessStegIkkeBehandletPanel.IkkeBehandlet": "Dette steget er ikke behandlet",
-
+  "BehandlingHenlagtPanel.Header": "Henlagt",
+  "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
   "FaktaPanel.FaktaOm": "Fakta om",
   "HelpText.Aksjonspunkt": "Aksjonspunkt"
 }

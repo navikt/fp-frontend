@@ -70,6 +70,8 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: prosessStegCodes.INNGANGSVILKAR,
@@ -79,8 +81,6 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     oppdaterBehandlingVersjon(behandling.versjon);
   }, [behandling.versjon]);
-
-  const erPanelValgt = valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR;
 
   const [panelInfo, setPanelInfo] = useState<PanelInfo[]>([]);
   const visProsessPanel = useCallback((nyData: PanelInfo) => {
@@ -113,15 +113,19 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (panelInfo.length > 0) {
+      const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo);
+      const erValgt = !apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.INNGANGSVILKAR,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
-        erAktiv: valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR,
-        harApentAksjonspunkt: getErAksjonspunktOpen(panelInfo),
+        erAktiv: erValgt,
+        harApentAksjonspunkt,
         status: getStatus(panelInfo),
       });
+      setPanelValgt(erValgt);
     }
-  }, [panelInfo]);
+  }, [panelInfo, valgtProsessSteg]);
 
   const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst);
 
@@ -135,7 +139,6 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       )}
       {erPanelValgt && (
         <MargMarkering
-          behandlingStatus={behandling.status}
           aksjonspunkter={[]}
           isReadOnly={false}
           visAksjonspunktMarkering={false}
