@@ -100,7 +100,7 @@ describe('<VurderOgFastsettSN>', () => {
       begrunnelse: 'Ok.',
       bruttoBeregningsgrunnlag: 360000,
     };
-    expect(transformedValues).toEqual([expectedTransformedValues]);
+    expect(transformedValues).toEqual(expectedTransformedValues);
   });
 
   it('Skal teste at transformValues setter korrekte values når det er vurdert at det ikke er varig endret næring', () => {
@@ -116,7 +116,7 @@ describe('<VurderOgFastsettSN>', () => {
       erVarigEndretNaering: false,
       [fastsettInntektFieldname]: undefined,
     };
-    expect(transformedValues).toEqual([expectedTransformedValues]);
+    expect(transformedValues).toEqual(expectedTransformedValues);
   });
 
   it('Skal teste at transformValues setter korrekte values når det er vurdert at det er varig endret næring og inntekt er fastsatt', () => {
@@ -128,14 +128,12 @@ describe('<VurderOgFastsettSN>', () => {
       [fastsettInntektFieldname]: '650 000',
     };
     const transformedValues = VurderOgFastsettSN.transformValues(values, [vurderEndring]);
-    const expectedTransformedValues = [
-      {
-        kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-        begrunnelse: 'Ok varig endring.',
-        erVarigEndretNaering: true,
-        bruttoBeregningsgrunnlag: 650000,
-      },
-    ];
+    const expectedTransformedValues = {
+      kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      begrunnelse: 'Ok varig endring.',
+      erVarigEndretNaering: true,
+      bruttoBeregningsgrunnlag: 650000,
+    };
     expect(transformedValues).toEqual(expectedTransformedValues);
   });
 });

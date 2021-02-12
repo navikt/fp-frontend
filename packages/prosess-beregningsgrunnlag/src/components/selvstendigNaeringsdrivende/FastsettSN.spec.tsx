@@ -12,10 +12,14 @@ import { FastsettSNImpl, begrunnelseFieldname, fastsettInntektFieldname } from '
 const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse) => ({
   definisjon: {
     kode: apKode,
+    kodeverk: 'AKSJONSPUNKT_DEFINISJON',
   },
   status: {
     kode: 'OPPR',
+    kodeverk: 'AKSJONSPUNKT_STATUS',
   },
+  kanLoses: true,
+  erAktivt: true,
   begrunnelse,
 });
 
@@ -50,7 +54,7 @@ describe('<FastsettSN>', () => {
   });
   it('Skal teste at buildInitialValues bygges korrekt når tidligere fastsatt', () => {
     const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, 300000), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
-    const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
+    const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
       'Ok.') as Aksjonspunkt];
 
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
@@ -67,7 +71,6 @@ describe('<FastsettSN>', () => {
     const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, null), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE, null)];
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
 
     const expectedValues = {
@@ -82,7 +85,6 @@ describe('<FastsettSN>', () => {
     const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, null), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, null)];
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
@@ -96,7 +98,6 @@ describe('<FastsettSN>', () => {
     const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, 500000), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, 'Ok!!!')];
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'buildInitialValues' does not exist on ty... Remove this comment to see the full error message
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
 
     const expectedValues = {

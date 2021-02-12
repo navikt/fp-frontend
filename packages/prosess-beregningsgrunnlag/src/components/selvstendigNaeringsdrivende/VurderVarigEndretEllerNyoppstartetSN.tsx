@@ -178,7 +178,7 @@ VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: VurderOgFast
     kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
     begrunnelse: values[begrunnelseFieldname],
     erVarigEndretNaering: erVarigEndring,
-    bruttoBeregningsgrunnlag: erVarigEndring ? removeSpacesFromNumber(values[fastsettInntektFieldname]) : null,
+    bruttoBeregningsgrunnlag: erVarigEndring ? removeSpacesFromNumber(values[fastsettInntektFieldname]) : undefined,
   };
 };
 
