@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
@@ -39,12 +39,12 @@ const YtelserFaktaPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   registrerFaktaPanel,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {
     registrerFaktaPanel({
       id: faktaPanelCodes.YTELSER,
     });
   }, []);
-  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.YTELSER;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -57,12 +57,15 @@ const YtelserFaktaPanelDef: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     if (data && data.inntektArbeidYtelse && data.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker
       && data.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0) {
+      const erValgt = valgtFaktaSteg === faktaPanelCodes.YTELSER
+        || (standardProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
       registrerFaktaPanel({
         id: faktaPanelCodes.YTELSER,
         tekst: getPackageIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' }),
-        erAktiv: valgtFaktaSteg === faktaPanelCodes.YTELSER,
+        erAktiv: erValgt,
         harAksjonspunkt: standardProps.harApneAksjonspunkter,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtFaktaSteg, state]);
 

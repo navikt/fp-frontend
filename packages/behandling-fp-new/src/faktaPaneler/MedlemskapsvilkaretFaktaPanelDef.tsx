@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -73,12 +73,13 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   hasFetchError,
   registrerFaktaPanel,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: faktaPanelCodes.MEDLEMSKAPSVILKARET,
     });
   }, []);
-  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -99,12 +100,15 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (data && data.soknad) {
+      const erValgt = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET
+        || (standardProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
       registrerFaktaPanel({
         id: faktaPanelCodes.MEDLEMSKAPSVILKARET,
         tekst: getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
-        erAktiv: valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET,
+        erAktiv: erValgt,
         harAksjonspunkt: standardProps.harApneAksjonspunkter,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter, state]);
 

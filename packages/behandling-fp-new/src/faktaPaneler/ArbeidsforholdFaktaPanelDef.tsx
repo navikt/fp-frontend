@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -58,12 +58,13 @@ const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   registrerFaktaPanel,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: faktaPanelCodes.ARBEIDSFORHOLD,
     });
   }, []);
-  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD;
 
   const { data } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -83,12 +84,15 @@ const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
   const standardProps = useStandardFaktaProps(filtrerteAksjonspunkter);
 
   useEffect(() => {
+    const erValgt = valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD
+      || (standardProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
     registrerFaktaPanel({
       id: faktaPanelCodes.ARBEIDSFORHOLD,
       tekst: getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' }),
-      erAktiv: valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD,
+      erAktiv: erValgt,
       harAksjonspunkt: standardProps.harApneAksjonspunkter,
     });
+    setPanelValgt(erValgt);
   }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter]);
 
   if (!erPanelValgt) {

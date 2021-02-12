@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -67,12 +67,13 @@ const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   registrerFaktaPanel,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: faktaPanelCodes.FODSELSVILKARET,
     });
   }, []);
-  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.FODSELSVILKARET;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -93,12 +94,15 @@ const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (data && data.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))) {
+      const erValgt = valgtFaktaSteg === faktaPanelCodes.FODSELSVILKARET
+      || (standardProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
       registrerFaktaPanel({
         id: faktaPanelCodes.FODSELSVILKARET,
         tekst: getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' }),
-        erAktiv: valgtFaktaSteg === faktaPanelCodes.FODSELSVILKARET,
+        erAktiv: erValgt,
         harAksjonspunkt: standardProps.harApneAksjonspunkter,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter, state]);
 

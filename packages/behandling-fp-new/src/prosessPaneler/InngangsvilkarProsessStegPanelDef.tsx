@@ -13,7 +13,7 @@ import {
   AksessRettigheter,
   Behandling,
 } from '@fpsak-frontend/types';
-import { MargMarkering } from '@fpsak-frontend/behandling-felles-ny';
+import { MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import FodselPanelDef from './inngangsvilkarPaneler/FodselPanelDef';
@@ -111,9 +111,11 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     <OpptjeningPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
   ];
 
+  const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo);
+  const status = getStatus(panelInfo);
+
   useEffect(() => {
     if (panelInfo.length > 0) {
-      const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo);
       const erValgt = !apentFaktaPanelInfo
         && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
@@ -121,7 +123,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
         erAktiv: erValgt,
         harApentAksjonspunkt,
-        status: getStatus(panelInfo),
+        status,
       });
       setPanelValgt(erValgt);
     }
@@ -137,7 +139,10 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
           {rightPanels}
         </>
       )}
-      {erPanelValgt && (
+      {erPanelValgt && status === vilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt && (
+        <ProsessStegIkkeBehandletPanel />
+      )}
+      {erPanelValgt && (status !== vilkarUtfallType.IKKE_VURDERT || harApentAksjonspunkt) && (
         <MargMarkering
           aksjonspunkter={[]}
           isReadOnly={false}

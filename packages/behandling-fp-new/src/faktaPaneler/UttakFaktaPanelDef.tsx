@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useEffect, useState,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -74,12 +74,13 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
   rettigheter,
   registrerFaktaPanel,
 }) => {
+  const [erPanelValgt, setPanelValgt] = useState(false);
+
   useEffect(() => {
     registrerFaktaPanel({
       id: faktaPanelCodes.UTTAK,
     });
   }, []);
-  const erPanelValgt = valgtFaktaSteg === faktaPanelCodes.UTTAK;
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -103,12 +104,15 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
       && data.ytelsefordeling.endringsdato !== undefined
       && data.personopplysninger !== null
       && data.personopplysninger !== undefined) {
+      const erValgt = valgtFaktaSteg === faktaPanelCodes.UTTAK
+        || (standardProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
       registrerFaktaPanel({
         id: faktaPanelCodes.UTTAK,
         tekst: getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' }),
-        erAktiv: valgtFaktaSteg === faktaPanelCodes.UTTAK,
+        erAktiv: erValgt,
         harAksjonspunkt: standardProps.harApneAksjonspunkter,
       });
+      setPanelValgt(erValgt);
     }
   }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter, state]);
 

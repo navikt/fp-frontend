@@ -33,9 +33,6 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
 }) => {
   const [menyData, setMenyData] = useState<MenyData[]>([]);
   const registrerFaktaPanel = useCallback((nyData: MenyData) => {
-    if (nyData.harAksjonspunkt && valgtFaktaSteg === DEFAULT_FAKTA_KODE) {
-      oppdaterFaktaPanelIUrl(nyData.id);
-    }
     if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
       setApentFaktaPanel({ urlCode: nyData.id, textCode: nyData.tekst });
     }
