@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useCallback, useState,
+  FunctionComponent, ReactElement, useCallback, useEffect, useState,
 } from 'react';
 
 import { Behandling } from '@fpsak-frontend/types';
@@ -53,9 +53,11 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (behandling.behandlingHenlagt) {
-    paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
-  }
+  useEffect(() => {
+    if (behandling.behandlingHenlagt) {
+      paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
+    }
+  }, [paneler]);
 
   return (
     <div className={styles.container}>

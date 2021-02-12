@@ -20,7 +20,7 @@ interface OwnProps {
   }) => void;
 }
 
-const ID = 'HENLAGT';
+const ID = 'henlagt';
 
 const BehandlingHenlagtPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
