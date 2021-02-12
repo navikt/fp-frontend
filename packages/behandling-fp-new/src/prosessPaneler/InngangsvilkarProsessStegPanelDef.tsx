@@ -129,7 +129,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [panelInfo, valgtProsessSteg]);
 
-  const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst);
+  const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst).filter((tekst) => !!tekst);
 
   return (
     <>
@@ -170,7 +170,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
                   {leftPanels.map((p, index) => (
                     <>
                       {p}
-                      {index + 1 !== leftPanels.length && (
+                      {index < leftPanels.length && (
                         <VerticalSpacer thirtyTwoPx />
                       )}
                     </>
@@ -182,7 +182,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
                   {rightPanels.map((p, index) => (
                     <>
                       {p}
-                      {index + 1 !== rightPanels.length && (
+                      {index < rightPanels.length && (
                       <VerticalSpacer thirtyTwoPx />
                       )}
                     </>

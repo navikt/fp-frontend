@@ -65,6 +65,10 @@ const endepunkter = [
 const endepunkterVedVisning = [
   { key: FpBehandlingApiKeys.FAMILIEHENDELSE },
   { key: FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE },
+  { key: FpBehandlingApiKeys.UTTAK_STONADSKONTOER },
+  { key: FpBehandlingApiKeys.SOKNAD },
+  { key: FpBehandlingApiKeys.PERSONOPPLYSNINGER },
+  { key: FpBehandlingApiKeys.YTELSEFORDELING },
 ];
 
 type EndepunktData = {
@@ -77,7 +81,6 @@ type EndepunktDataVedVisning = {
   uttakPeriodeGrense: UttakPeriodeGrense;
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
-  uttaksresultatPerioder: UttaksresultatPeriode;
   personopplysninger: Personopplysninger;
   ytelsefordeling: Ytelsefordeling;
 }
@@ -141,6 +144,7 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
 
   const skalVises = state === RestApiState.SUCCESS;
+  const status = getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter);
 
   useEffect(() => {
     if (skalVises) {
@@ -151,7 +155,7 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
         erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status: getStatusFromUttakresultat(data.uttaksresultatPerioder, data.aksjonspunkter),
+        status,
       });
       setPanelValgt(erValgt);
     }
@@ -161,7 +165,7 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT) {
+  if (status === vilkarUtfallType.IKKE_VURDERT && !standardProps.isAksjonspunktOpen) {
     // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
     return <ProsessStegIkkeBehandletPanel />;
   }

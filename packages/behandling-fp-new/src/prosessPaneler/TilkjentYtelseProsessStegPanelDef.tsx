@@ -46,10 +46,14 @@ const aksjonspunktKoder = [
 
 const endepunkter = [
   { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
+  { key: FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER },
+  { key: FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER },
 ];
 
 const endepunkterVedVisning = [
   { key: FpBehandlingApiKeys.FAMILIEHENDELSE },
+  { key: FpBehandlingApiKeys.PERSONOPPLYSNINGER },
+  { key: FpBehandlingApiKeys.SOKNAD },
   { key: FpBehandlingApiKeys.FERIEPENGEGRUNNLAG },
 ];
 
@@ -63,7 +67,6 @@ type EndepunktDataVedVisning = {
   familiehendelse: FamilieHendelseSamling;
   personopplysninger: Personopplysninger;
   soknad: Soknad;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag: Feriepengegrunnlag;
 }
 
@@ -122,6 +125,7 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
 
   const skalVises = state === RestApiState.SUCCESS;
+  const status = getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder);
 
   useEffect(() => {
     if (skalVises) {
@@ -132,7 +136,7 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
         erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status: getStatusFromResultatstruktur(data.beregningresultatForeldrepenger, data.uttaksresultatPerioder),
+        status,
       });
       setPanelValgt(erValgt);
     }
@@ -142,7 +146,7 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT) {
+  if (status === vilkarUtfallType.IKKE_VURDERT && !standardProps.isAksjonspunktOpen) {
     // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
     return <ProsessStegIkkeBehandletPanel />;
   }

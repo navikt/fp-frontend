@@ -221,8 +221,8 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       const status = findStatusForVedtak(
         data.vilkar, data.aksjonspunkter, filtrerteAksjonspunkter, behandling.behandlingsresultat,
       );
-      const erValgt = status !== vilkarUtfallType.IKKE_VURDERT || (!apentFaktaPanelInfo
-        && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default')));
+      const erValgt = !apentFaktaPanelInfo
+        && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
         id: prosessStegCodes.VEDTAK,
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
@@ -234,11 +234,14 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
+  const lukkIverksetterModal = useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, []);
+  const lukkFatterModal = useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, []);
+
   if (!erPanelValgt) {
     return null;
   }
 
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT) {
+  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT && !standardProps.isAksjonspunktOpen) {
     // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
     return <ProsessStegIkkeBehandletPanel />;
   }
@@ -251,12 +254,12 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     <>
       <IverksetterVedtakStatusModal
         visModal={visIverksetterVedtakModal}
-        lukkModal={useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, [])}
+        lukkModal={lukkIverksetterModal}
         behandlingsresultat={behandling.behandlingsresultat}
       />
       <FatterVedtakStatusModal
         visModal={visFatterVedtakModal && behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
-        lukkModal={useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, [])}
+        lukkModal={lukkFatterModal}
         tekstkode="FatterVedtakStatusModal.SendtBeslutter"
       />
       <MargMarkering
