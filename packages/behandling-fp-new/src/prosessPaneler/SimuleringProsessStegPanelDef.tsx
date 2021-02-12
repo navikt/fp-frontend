@@ -75,6 +75,13 @@ interface OwnProps {
     status?: string;
   }) => void;
   oppdaterBehandlingVersjon: (versjon: number) => void;
+  allMenyData: {
+    id: string;
+    tekst?: string;
+    erAktiv?: boolean;
+    harApentAksjonspunkt?: boolean;
+    status?: string;
+  }[];
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
   forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling>;
@@ -86,6 +93,7 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   registrerFaktaPanel,
   oppdaterBehandlingVersjon,
   apentFaktaPanelInfo,
+  allMenyData,
   fagsak,
   forhandsvisTilbakekrevingMelding,
 }) => {
@@ -120,7 +128,10 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
 
-  const skalVises = state === RestApiState.SUCCESS;
+  const harAktivtVedtakspanel = allMenyData.some((d) => d.id === prosessStegCodes.VEDTAK
+    && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
+
+  const skalVises = state === RestApiState.SUCCESS && !harAktivtVedtakspanel;
 
   useEffect(() => {
     if (skalVises) {
@@ -134,8 +145,12 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         status: data.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT,
       });
       setPanelValgt(erValgt);
+    } else {
+      registrerFaktaPanel({
+        id: prosessStegCodes.AVREGNING,
+      });
     }
-  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
+  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state, harAktivtVedtakspanel]);
 
   if (!erPanelValgt) {
     return null;

@@ -62,7 +62,7 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
   rettigheter,
 }) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
-  const toggleOverstyring = useCallback(() => setOverstyrt(erOverstyrt), [erOverstyrt]);
+  const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
@@ -95,7 +95,7 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
         status: standardProps.status,
       });
     }
-  }, [standardProps.isAksjonspunktOpen, skalVises, erDataFerdighentet]);
+  }, [standardProps.isAksjonspunktOpen, skalVises, erDataFerdighentet, erOverstyrt]);
 
   if (!erPanelValgt || !skalVises) {
     return null;
@@ -112,8 +112,8 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
     return (
       <OverstyringPanelDef
         behandling={behandling}
-        aksjonspunkter={filtrerteAksjonspunkter}
-        aksjonspunktKode={aksjonspunktKoder[0]}
+        aksjonspunkter={data.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET)}
+        aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
         vilkar={filtrerteVilkar}
         vilkarKoder={vilkarKoder}
         panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"

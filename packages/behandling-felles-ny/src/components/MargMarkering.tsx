@@ -12,6 +12,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
   visAksjonspunktMarkering?: boolean;
+  skalSkjulePanel?: boolean;
   children: any;
 }
 
@@ -19,21 +20,14 @@ const MargMarkering: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   isReadOnly,
   visAksjonspunktMarkering = true,
+  skalSkjulePanel = false,
   children,
 }) => {
-  if (aksjonspunkter.length === 0) {
-    return (
-      <div className={styles.prosesspunkt}>
-        {children}
-      </div>
-    );
-  }
-
   const harApnentAksjonspunktSomKanLoses = useMemo(() => aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode) && ap.kanLoses), [aksjonspunkter]);
   const visAksjonspunkt = visAksjonspunktMarkering && harApnentAksjonspunktSomKanLoses && !isReadOnly;
 
   return (
-    <div className={classNames('prosesspunkt', { visAksjonspunkt })}>
+    <div className={classNames('prosesspunkt', { visAksjonspunkt, skalSkjulePanel })}>
       {children}
     </div>
   );

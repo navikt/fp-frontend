@@ -104,7 +104,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   }, [apentFaktaPanelInfo]);
 
   const leftPanels = [
-    <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} />,
+    <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
     <MedlemskapPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
   ];
   const rightPanels = [
@@ -133,20 +133,15 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {!erPanelValgt && (
-        <>
-          {leftPanels}
-          {rightPanels}
-        </>
-      )}
       {erPanelValgt && status === vilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt && (
         <ProsessStegIkkeBehandletPanel />
       )}
-      {erPanelValgt && (status !== vilkarUtfallType.IKKE_VURDERT || harApentAksjonspunkt) && (
+      {(!erPanelValgt || (erPanelValgt && (status !== vilkarUtfallType.IKKE_VURDERT || harApentAksjonspunkt))) && (
         <MargMarkering
           aksjonspunkter={[]}
           isReadOnly={false}
           visAksjonspunktMarkering={false}
+          skalSkjulePanel={!erPanelValgt}
         >
           <FadingPanel>
             {((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (

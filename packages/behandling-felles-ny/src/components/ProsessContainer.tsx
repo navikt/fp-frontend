@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useCallback, useEffect, useState,
+  FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState,
 } from 'react';
 
 import { Behandling } from '@fpsak-frontend/types';
@@ -43,8 +43,10 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     });
   }, [menyData]);
 
+  const menyDataSomVises = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
+
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = menyData.filter((d) => !!d.tekst)[index];
+    const panel = menyDataSomVises[index];
     const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
     oppdaterProsessPanelIUrl(nyvalgtProsessSteg);
   }, [menyData]);
@@ -62,7 +64,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.meny}>
-        <ProsessMeny menyData={menyData.filter((d) => !!d.tekst)} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
+        <ProsessMeny menyData={menyDataSomVises} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
       </div>
       <ProsessInnhold>
         {paneler.map((panel, index) => (
@@ -75,6 +77,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
               apentFaktaPanelInfo,
               oppdaterProsessStegOgFaktaPanelIUrl,
               oppdaterBehandlingVersjon,
+              allMenyData: menyDataSomVises,
             })}
           </React.Fragment>
         ))}

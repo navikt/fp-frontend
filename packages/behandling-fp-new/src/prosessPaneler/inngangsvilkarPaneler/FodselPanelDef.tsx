@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -8,9 +8,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-fodsel';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
+  AksessRettigheter,
   Aksjonspunkt, Behandling, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, useSkalViseProsessPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
@@ -45,13 +46,18 @@ interface OwnProps {
     status: string;
   }) => void;
   erPanelValgt: boolean;
+  rettigheter: AksessRettigheter;
 }
 
 const FodselPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   setPanelInfo,
   erPanelValgt,
+  rettigheter,
 }) => {
+  const [erOverstyrt, setOverstyrt] = useState(false);
+  const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
+
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
     updateTriggers: [behandling?.versjon],
@@ -83,6 +89,29 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
 
   if (!erDataFerdighentet) {
     return <LoadingPanel />;
+  }
+
+  // FIXME Korleis sette denne?
+  const harMinstEttPanelApentAksjonspunkt = false;
+
+  if (filtrerteAksjonspunkter.length === 0) {
+    return (
+      <OverstyringPanelDef
+        behandling={behandling}
+        aksjonspunkter={data.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_FODSELSVILKAR
+          || ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR)}
+        // FIXME Dette må vel vera feil? Kan vera ein kode
+        aksjonspunktKode={aksjonspunktCodes.OVERSTYR_FODSELSVILKAR}
+        vilkar={filtrerteVilkar}
+        vilkarKoder={vilkarKoder}
+        panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
+        erMedlemskapsPanel={false}
+        toggleOverstyring={toggleOverstyring}
+        erOverstyrt={erOverstyrt}
+        overrideReadOnly={standardProps.isReadOnly || (harMinstEttPanelApentAksjonspunkt && !(standardProps.isAksjonspunktOpen || erOverstyrt))}
+        kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+      />
+    );
   }
 
   return (

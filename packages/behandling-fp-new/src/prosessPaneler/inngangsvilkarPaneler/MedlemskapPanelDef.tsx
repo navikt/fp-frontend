@@ -59,7 +59,7 @@ const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
   rettigheter,
 }) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
-  const toggleOverstyring = useCallback(() => setOverstyrt(erOverstyrt), [erOverstyrt]);
+  const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
     updateTriggers: [behandling?.versjon],
