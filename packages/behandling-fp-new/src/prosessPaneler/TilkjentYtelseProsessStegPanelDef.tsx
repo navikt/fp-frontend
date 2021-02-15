@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useState,
+  FunctionComponent,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -8,10 +8,10 @@ import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse'
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, BeregningsresultatFp, BeregningsresultatPeriode,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode,
   Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personopplysninger, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -70,7 +70,7 @@ type EndepunktDataVedVisning = {
 }
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerFaktaPanel: (data: {
     id: string;
@@ -79,82 +79,62 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
 }
 
 const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   valgtProsessSteg,
   registrerFaktaPanel,
   apentFaktaPanelInfo,
-  oppdaterBehandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   fagsak,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: prosessStegCodes.TILKJENT_YTELSE,
-    });
-  }, []);
-
-  useEffect(() => {
-    oppdaterBehandlingVersjon(behandling.versjon);
-  }, [behandling.versjon]);
-
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
-    updateTriggers: [behandling?.versjon],
+    updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
 
+  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder);
+
+  const skalVises = state === RestApiState.SUCCESS;
+  const erAktiv = !apentFaktaPanelInfo
+    && (valgtProsessSteg === prosessStegCodes.TILKJENT_YTELSE || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+  const status = getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder);
+
+  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    prosessStegCodes.TILKJENT_YTELSE,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
+    skalVises,
+    erAktiv,
+    standardPanelProps.isAksjonspunktOpen,
+    status,
+  );
+
   const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
     keepData: true,
-    updateTriggers: [erPanelValgt, behandling?.versjon],
+    updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt,
     isCachingOn: true,
   });
 
-  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-
-  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
-
-  const skalVises = state === RestApiState.SUCCESS;
-  const status = getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder);
-
-  useEffect(() => {
-    if (skalVises) {
-      const erValgt = !apentFaktaPanelInfo
-        && (valgtProsessSteg === prosessStegCodes.TILKJENT_YTELSE || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
-      registrerFaktaPanel({
-        id: prosessStegCodes.TILKJENT_YTELSE,
-        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
-        erAktiv: erValgt,
-        harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status,
-      });
-      setPanelValgt(erValgt);
-    }
-  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
-
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
       loadingState={stateEtterVisning}
     >
       <TilkjentYtelseProsessIndex
-        behandling={behandling}
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         beregningresultat={data?.beregningresultatForeldrepenger}
         {...dataEtterVisning}
-        {...standardProps}
+        {...standardPanelProps}
       />
     </ProsessPanelWrapper>
   );

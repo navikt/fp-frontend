@@ -45,7 +45,10 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   kanOverstyreAccess,
   overrideReadOnly,
 }) => {
-  const standardProps = useStandardProsessPanelProps(aksjonspunkter, vilkar);
+  const standardProps = useStandardProsessPanelProps({
+    aksjonspunkter,
+    vilkar,
+  }, [aksjonspunktKode], vilkarKoder);
 
   const skalVises = useSkalViseProsessPanel(aksjonspunkter, vilkarKoder, vilkar);
 

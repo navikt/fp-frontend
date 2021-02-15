@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect, useState,
+  FunctionComponent, useCallback, useState,
 } from 'react';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -11,28 +11,33 @@ import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Behandling, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
+  Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, IverksetterVedtakStatusModal, FatterVedtakStatusModal,
+  useStandardProsessPanelProps, ProsessPanelWrapper, IverksetterVedtakStatusModal, FatterVedtakStatusModal, prosessPanelHooks,
 } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
-const hasOnlyClosedAps = (aksjonspunkter, vedtakAksjonspunkter) => aksjonspunkter
+const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
   .every((ap) => !isAksjonspunktOpen(ap.status.kode));
 
-const hasAksjonspunkt = (ap) => (ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_BEREGNING
+const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_BEREGNING
   || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
   || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
   || ap.definisjon.kode === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
 
 const isAksjonspunktOpenAndOfType = (ap) => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status.kode);
 
-const findStatusForVedtak = (vilkar, aksjonspunkter, vedtakAksjonspunkter, behandlingsresultat) => {
+const findStatusForVedtak = (
+  vilkar: Vilkar[],
+  aksjonspunkter: Aksjonspunkt[],
+  vedtakAksjonspunkter: Aksjonspunkt[],
+  behandlingsresultat: Behandlingsresultat,
+): string => {
   if (vilkar.length === 0) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -55,7 +60,7 @@ const findStatusForVedtak = (vilkar, aksjonspunkter, vedtakAksjonspunkter, behan
   return vilkarUtfallType.OPPFYLT;
 };
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -146,7 +151,7 @@ type EndepunktDataVedVisning = {
 }
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerFaktaPanel: (data: {
     id: string;
@@ -155,7 +160,7 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
+  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
@@ -164,75 +169,54 @@ interface OwnProps {
 }
 
 const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   valgtProsessSteg,
   registrerFaktaPanel,
-  oppdaterBehandlingVersjon,
+  toggleOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
   fagsak,
   forhandsvisMelding,
   opneSokeside,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: prosessStegCodes.VEDTAK,
-    });
-  }, []);
-
-  const [skalOppdatereFagsakKontekst, toggleSkalOppdatereFagsakContext] = useState(true);
-  useEffect(() => {
-    if (skalOppdatereFagsakKontekst) {
-      oppdaterBehandlingVersjon(behandling.versjon);
-    }
-  }, [behandling.versjon]);
-
-  const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]);
-
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
-    updateTriggers: [behandling?.versjon],
+    updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
-
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
-    keepData: true,
-    updateTriggers: [erPanelValgt, behandling?.versjon],
-    suspendRequest: !erPanelValgt,
-    isCachingOn: true,
-  });
-
-  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
 
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
   const lagringSideEffekter = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleFatterVedtakModal,
-    toggleSkalOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
-
-  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter, [], lagringSideEffekter);
+    toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
+  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder, [], lagringSideEffekter);
 
   const skalVises = state === RestApiState.SUCCESS;
-
+  const erAktiv = !apentFaktaPanelInfo
+    && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
   const status = findStatusForVedtak(
-    data?.vilkar || [], data?.aksjonspunkter || [], filtrerteAksjonspunkter, behandling.behandlingsresultat,
+    data?.vilkar || [], data?.aksjonspunkter || [], standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat,
   );
 
-  useEffect(() => {
-    if (skalVises) {
-      const erValgt = !apentFaktaPanelInfo
-        && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
-      registrerFaktaPanel({
-        id: prosessStegCodes.VEDTAK,
-        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
-        erAktiv: erValgt,
-        harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status,
-      });
-      setPanelValgt(erValgt);
-    }
-  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
+  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    prosessStegCodes.VEDTAK,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
+    skalVises,
+    erAktiv,
+    standardPanelProps.isAksjonspunktOpen,
+    status,
+  );
+
+  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
+    keepData: true,
+    updateTriggers: [erPanelValgt, behandlingVersjon],
+    suspendRequest: !erPanelValgt,
+    isCachingOn: true,
+  });
+
+  const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
+    [standardPanelProps.behandling.versjon]);
 
   const lukkIverksetterModal = useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, []);
   const lukkFatterModal = useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, []);
@@ -240,26 +224,25 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
       loadingState={stateEtterVisning}
     >
       <IverksetterVedtakStatusModal
         visModal={visIverksetterVedtakModal}
         lukkModal={lukkIverksetterModal}
-        behandlingsresultat={behandling.behandlingsresultat}
+        behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
       />
       <FatterVedtakStatusModal
-        visModal={visFatterVedtakModal && behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
+        visModal={visFatterVedtakModal && standardPanelProps.behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
         lukkModal={lukkFatterModal}
         tekstkode="FatterVedtakStatusModal.SendtBeslutter"
       />
       <VedtakProsessIndex
-        behandling={behandling}
         ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
         previewCallback={previewCallback}
         {...dataEtterVisning}
-        {...standardProps}
+        {...standardPanelProps}
       />
     </ProsessPanelWrapper>
   );

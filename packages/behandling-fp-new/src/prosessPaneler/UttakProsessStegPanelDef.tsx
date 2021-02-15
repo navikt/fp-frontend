@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useState,
+  FunctionComponent,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -10,10 +10,10 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter,
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, FamilieHendelseSamling,
   Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
@@ -85,7 +85,7 @@ type EndepunktDataVedVisning = {
 }
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerFaktaPanel: (data: {
     id: string;
@@ -94,7 +94,6 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -103,79 +102,60 @@ interface OwnProps {
 }
 
 const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   valgtProsessSteg,
   registrerFaktaPanel,
-  oppdaterBehandlingVersjon,
   apentFaktaPanelInfo,
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   fagsak,
   tempUpdateStonadskontoer,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: prosessStegCodes.UTTAK,
-    });
-  }, []);
-
-  useEffect(() => {
-    oppdaterBehandlingVersjon(behandling.versjon);
-  }, [behandling.versjon]);
-
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
-    updateTriggers: [behandling?.versjon],
+    updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
 
+  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder);
+
+  const skalVises = state === RestApiState.SUCCESS;
+  const erAktiv = !apentFaktaPanelInfo
+    && (valgtProsessSteg === prosessStegCodes.UTTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+  const status = getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter);
+
+  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    prosessStegCodes.UTTAK,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
+    skalVises,
+    erAktiv,
+    standardPanelProps.isAksjonspunktOpen,
+    status,
+  );
+
   const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
     keepData: true,
-    updateTriggers: [erPanelValgt, behandling?.versjon],
+    updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt,
     isCachingOn: true,
   });
 
-  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-
-  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
-
-  const skalVises = state === RestApiState.SUCCESS;
-  const status = getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter);
-
-  useEffect(() => {
-    if (skalVises) {
-      const erValgt = !apentFaktaPanelInfo
-        && (valgtProsessSteg === prosessStegCodes.UTTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
-      registrerFaktaPanel({
-        id: prosessStegCodes.UTTAK,
-        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
-        erAktiv: erValgt,
-        harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status,
-      });
-      setPanelValgt(erValgt);
-    }
-  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
-
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
       loadingState={stateEtterVisning}
     >
       <UttakProsessIndex
-        behandling={behandling}
         fagsak={fagsak}
         employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         tempUpdateStonadskontoer={tempUpdateStonadskontoer}
         {...data}
         {...dataEtterVisning}
-        {...standardProps}
+        {...standardPanelProps}
       />
     </ProsessPanelWrapper>
   );

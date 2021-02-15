@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect, useState,
+  FunctionComponent, useCallback, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -9,11 +9,8 @@ import {
   VerticalSpacer, AksjonspunktHelpTextHTML,
 } from '@fpsak-frontend/shared-components';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
-import {
-  AksessRettigheter,
-  Behandling,
-} from '@fpsak-frontend/types';
-import { ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import { AksessRettigheter } from '@fpsak-frontend/types';
+import { ProsessPanelWrapper, prosessPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -40,7 +37,7 @@ const getErAksjonspunktOpen = (paneler: PanelInfo[]): boolean => {
 };
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerFaktaPanel: (data: {
     id: string;
@@ -49,7 +46,6 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
@@ -63,26 +59,13 @@ type PanelInfo = {
 }
 
 const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   valgtProsessSteg,
   registrerFaktaPanel,
-  oppdaterBehandlingVersjon,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: prosessStegCodes.INNGANGSVILKAR,
-    });
-  }, []);
-
-  useEffect(() => {
-    oppdaterBehandlingVersjon(behandling.versjon);
-  }, [behandling.versjon]);
-
   const [panelInfo, setPanelInfo] = useState<PanelInfo[]>([]);
   const visProsessPanel = useCallback((nyData: PanelInfo) => {
     setPanelInfo((oldData) => {
@@ -104,31 +87,22 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     evt.preventDefault();
   }, [apentFaktaPanelInfo]);
 
-  const leftPanels = [
-    <FodselPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
-    <MedlemskapPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
-  ];
-  const rightPanels = [
-    <OpptjeningPanelDef behandling={behandling} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />,
-  ];
-
   const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo);
   const status = getStatus(panelInfo);
 
-  useEffect(() => {
-    if (panelInfo.length > 0) {
-      const erValgt = !apentFaktaPanelInfo
-        && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
-      registrerFaktaPanel({
-        id: prosessStegCodes.INNGANGSVILKAR,
-        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
-        erAktiv: erValgt,
-        harApentAksjonspunkt,
-        status,
-      });
-      setPanelValgt(erValgt);
-    }
-  }, [panelInfo, valgtProsessSteg]);
+  const skalVises = panelInfo.length > 0;
+  const erAktiv = !apentFaktaPanelInfo
+    && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
+
+  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    prosessStegCodes.INNGANGSVILKAR,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
+    skalVises,
+    erAktiv,
+    harApentAksjonspunkt,
+    status,
+  );
 
   const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst).filter((tekst) => !!tekst);
 
@@ -158,26 +132,14 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       <Row className="">
         <Column xs="6">
           <div className={styles.panelLeft}>
-            {leftPanels.map((p, index) => (
-              <>
-                {p}
-                {index < leftPanels.length && (
-                  <VerticalSpacer thirtyTwoPx />
-                )}
-              </>
-            ))}
+            <FodselPanelDef behandlingVersjon={behandlingVersjon} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
+            <VerticalSpacer thirtyTwoPx />
+            <MedlemskapPanelDef behandlingVersjon={behandlingVersjon} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
           </div>
         </Column>
         <Column xs="6">
           <div className={styles.panelRight}>
-            {rightPanels.map((p, index) => (
-              <>
-                {p}
-                {index < rightPanels.length && (
-                <VerticalSpacer thirtyTwoPx />
-                )}
-              </>
-            ))}
+            <OpptjeningPanelDef behandlingVersjon={behandlingVersjon} setPanelInfo={visProsessPanel} erPanelValgt={erPanelValgt} rettigheter={rettigheter} />
           </div>
         </Column>
       </Row>

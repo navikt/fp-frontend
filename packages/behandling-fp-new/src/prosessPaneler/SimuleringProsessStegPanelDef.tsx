@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect, useState,
+  FunctionComponent, useCallback,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -9,7 +9,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -64,7 +64,7 @@ type EndepunktDataVedVisning = {
 }
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerFaktaPanel: (data: {
     id: string;
@@ -73,7 +73,6 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
   allMenyData: {
     id: string;
     tekst?: string;
@@ -87,86 +86,63 @@ interface OwnProps {
 }
 
 const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   valgtProsessSteg,
   registrerFaktaPanel,
-  oppdaterBehandlingVersjon,
   apentFaktaPanelInfo,
   allMenyData,
   fagsak,
   forhandsvisTilbakekrevingMelding,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: prosessStegCodes.AVREGNING,
-    });
-  }, []);
-
-  useEffect(() => {
-    oppdaterBehandlingVersjon(behandling.versjon);
-  }, [behandling.versjon]);
-
-  const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]);
-
   const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
-    updateTriggers: [behandling?.versjon],
+    updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
 
+  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder);
+
+  const harAktivtVedtakspanel = allMenyData.some((d) => d.id === prosessStegCodes.VEDTAK
+    && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
+  const skalVises = state === RestApiState.SUCCESS && !harAktivtVedtakspanel;
+  const erAktiv = !apentFaktaPanelInfo
+    && (valgtProsessSteg === prosessStegCodes.AVREGNING || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+
+  const status = data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
+
+  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    prosessStegCodes.AVREGNING,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
+    skalVises,
+    erAktiv,
+    standardPanelProps.isAksjonspunktOpen,
+    status,
+  );
+
   const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
     keepData: true,
-    updateTriggers: [erPanelValgt, behandling?.versjon],
+    updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt,
     isCachingOn: true,
   });
 
-  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-
-  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter);
-
-  const harAktivtVedtakspanel = allMenyData.some((d) => d.id === prosessStegCodes.VEDTAK
-    && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
-
-  const skalVises = state === RestApiState.SUCCESS && !harAktivtVedtakspanel;
-
-  const status = data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
-
-  useEffect(() => {
-    if (skalVises) {
-      const erValgt = !apentFaktaPanelInfo
-        && (valgtProsessSteg === prosessStegCodes.AVREGNING || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
-      registrerFaktaPanel({
-        id: prosessStegCodes.AVREGNING,
-        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
-        erAktiv: erValgt,
-        harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status,
-      });
-      setPanelValgt(erValgt);
-    } else {
-      registrerFaktaPanel({
-        id: prosessStegCodes.AVREGNING,
-      });
-    }
-  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state, harAktivtVedtakspanel]);
+  const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, standardPanelProps.behandling),
+    [standardPanelProps.behandling.versjon]);
 
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
       loadingState={stateEtterVisning}
     >
       <AvregningProsessIndex
-        behandling={behandling}
         fagsak={fagsak}
         previewFptilbakeCallback={previewFptilbakeCallback}
         simuleringResultat={data?.simuleringResultat}
         {...dataEtterVisning}
-        {...standardProps}
+        {...standardPanelProps}
       />
     </ProsessPanelWrapper>
   );

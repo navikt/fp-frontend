@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 
-import { Aksjonspunkt, KodeverkMedNavn, Vilkar } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
+} from '@fpsak-frontend/types';
 
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -10,6 +12,7 @@ import { getBekreftAksjonspunktProsessCallback } from './getBekreftAksjonspunktC
 import { StandardPropsStateContext } from './standardPropsStateContext';
 
 type Standard = {
+  behandling: Behandling;
   isReadOnly: boolean;
   submittable: boolean;
   isAksjonspunktOpen: boolean;
@@ -42,16 +45,16 @@ type Data = {
   vilkar?: Vilkar[];
 }
 
-export const useStandardProsessPanelPropsNew = (
+const useStandardProsessPanelProps = (
   data: Data,
-  aksjonspunktKoder: string[],
-  vilkarKoder: string[],
+  aksjonspunktKoder?: string[],
+  vilkarKoder?: string[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
 ): Standard => {
   const value = useContext(StandardPropsStateContext);
 
-  const aksjonspunkterForSteg = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-  const vilkarForSteg = data ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
+  const aksjonspunkterForSteg = data && aksjonspunktKoder ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
+  const vilkarForSteg = data && vilkarKoder ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
 
   const isReadOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, vilkarForSteg, value.rettigheter, value.hasFetchError);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
@@ -75,6 +78,7 @@ export const useStandardProsessPanelPropsNew = (
   );
 
   return {
+    behandling: value.behandling,
     isReadOnly,
     readOnlySubmitButton,
     submittable: true,
@@ -84,48 +88,6 @@ export const useStandardProsessPanelPropsNew = (
     status,
     aksjonspunkter: aksjonspunkterForSteg,
     vilkar: vilkarForSteg,
-    alleKodeverk: value.alleKodeverk,
-  };
-};
-
-const useStandardProsessPanelProps = (
-  aksjonspunkter: Aksjonspunkt[],
-  vilkar: Vilkar[] = [],
-  lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
-): Standard => {
-  const value = useContext(StandardPropsStateContext);
-
-  const isReadOnly = erReadOnly(value.behandling, aksjonspunkter, vilkar, value.rettigheter, value.hasFetchError);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkter);
-
-  const harApneAksjonspunkter = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET && ap.kanLoses);
-
-  const status = finnStatus(vilkar, aksjonspunkter);
-  const readOnlySubmitButton = (!(aksjonspunkter.some((ap) => ap.kanLoses)) || vilkarUtfallType.OPPFYLT === status);
-
-  const standardlagringSideEffekter = () => () => {
-    value.oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
-  };
-
-  const submitCallback = getBekreftAksjonspunktProsessCallback(
-    lagringSideEffekter || standardlagringSideEffekter,
-    value.fagsak,
-    value.behandling,
-    aksjonspunkter,
-    value.lagreAksjonspunkter,
-    value.lagreOverstyrteAksjonspunkter,
-  );
-
-  return {
-    isReadOnly,
-    readOnlySubmitButton,
-    submittable: true,
-    isAksjonspunktOpen: harApneAksjonspunkter,
-    alleMerknaderFraBeslutter,
-    submitCallback,
-    status,
-    aksjonspunkter,
-    vilkar,
     alleKodeverk: value.alleKodeverk,
   };
 };

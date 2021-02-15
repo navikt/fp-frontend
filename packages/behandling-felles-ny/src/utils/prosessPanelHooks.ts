@@ -34,6 +34,10 @@ const useMenyRegistrerer = (
         status,
       });
       setPanelValgt(erAktiv);
+    } else {
+      registrerFaktaPanel({
+        id,
+      });
     }
   }, [skalVises, erAktiv, harApentAksjonspunkt, status]);
 

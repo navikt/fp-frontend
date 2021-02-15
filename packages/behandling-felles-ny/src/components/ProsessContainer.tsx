@@ -51,15 +51,22 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     oppdaterProsessPanelIUrl(nyvalgtProsessSteg);
   }, [menyData]);
 
-  if (!paneler) {
-    return null;
-  }
+  const [skalOppdatereFagsakKontekst, toggleSkalOppdatereFagsakContext] = useState(true);
+  useEffect(() => {
+    if (skalOppdatereFagsakKontekst) {
+      oppdaterBehandlingVersjon(behandling.versjon);
+    }
+  }, [behandling.versjon]);
 
   useEffect(() => {
     if (behandling.behandlingHenlagt) {
       paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
     }
   }, [paneler]);
+
+  if (!paneler) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>
@@ -71,12 +78,12 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
           // eslint-disable-next-line react/no-array-index-key
           <React.Fragment key={index}>
             {panel({
-              behandling,
+              behandlingVersjon: behandling?.versjon,
               valgtProsessSteg,
               registrerFaktaPanel,
               apentFaktaPanelInfo,
               oppdaterProsessStegOgFaktaPanelIUrl,
-              oppdaterBehandlingVersjon,
+              toggleSkalOppdatereFagsakContext,
               allMenyData: menyDataSomVises,
             })}
           </React.Fragment>

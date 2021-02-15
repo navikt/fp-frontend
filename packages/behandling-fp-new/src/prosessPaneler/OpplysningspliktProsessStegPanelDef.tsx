@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect,
+  FunctionComponent,
 } from 'react';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -8,13 +8,14 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-sokers-opplysningsplikt';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Soknad, Vilkar,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelPropsNew, useSkalViseProsessPanel, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper, prosessPanelHooks,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
-import prosessPanelHooks from '../prosessPanelHooks';
 
 const aksjonspunktKoder = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -42,7 +43,7 @@ type EndepunktDataVedVisning = {
 }
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerFaktaPanel: (data: {
     id: string;
@@ -51,38 +52,31 @@ interface OwnProps {
     harApentAksjonspunkt?: boolean;
     status?: string;
   }) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   valgtProsessSteg,
   registrerFaktaPanel,
-  oppdaterBehandlingVersjon,
   apentFaktaPanelInfo,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  useEffect(() => {
-    oppdaterBehandlingVersjon(behandling.versjon);
-  }, [behandling.versjon]);
-
   const { data } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
-    updateTriggers: [behandling?.versjon],
+    updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
 
-  const standardProps = useStandardProsessPanelPropsNew(data, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder, vilkarKoder);
 
-  const defaultSkalVises = useSkalViseProsessPanel(standardProps.aksjonspunkter, vilkarKoder, standardProps.vilkar);
-
-  const isRevurdering = behandlingType.REVURDERING === behandling.type.kode;
-  const hasAp = standardProps.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
+  const defaultSkalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
+  const isRevurdering = behandlingType.REVURDERING === standardPanelProps.behandling.type.kode;
+  const hasAp = standardPanelProps.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
   const skalVises = !(isRevurdering && !hasAp) || defaultSkalVises;
   const erAktiv = !apentFaktaPanelInfo
-    && (valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+    && (valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
     registrerFaktaPanel,
@@ -90,13 +84,13 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
     skalVises,
     erAktiv,
-    standardProps.isAksjonspunktOpen,
-    standardProps.status,
+    standardPanelProps.isAksjonspunktOpen,
+    standardPanelProps.status,
   );
 
   const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
     keepData: true,
-    updateTriggers: [erPanelValgt, behandling?.versjon],
+    updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt,
     isCachingOn: true,
   });
@@ -104,15 +98,14 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
-      status={standardProps.status}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
+      status={standardPanelProps.status}
       loadingState={stateEtterVisning}
     >
       <SokersOpplysningspliktVilkarProsessIndex
-        behandling={behandling}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...dataEtterVisning}
-        {...standardProps}
+        {...standardPanelProps}
       />
     </ProsessPanelWrapper>
   );
