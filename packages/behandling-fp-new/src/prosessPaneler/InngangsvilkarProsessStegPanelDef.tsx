@@ -6,14 +6,15 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FadingPanel, VerticalSpacer, AksjonspunktHelpTextHTML,
+  VerticalSpacer, AksjonspunktHelpTextHTML,
 } from '@fpsak-frontend/shared-components';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter,
   Behandling,
 } from '@fpsak-frontend/types';
-import { MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import FodselPanelDef from './inngangsvilkarPaneler/FodselPanelDef';
@@ -132,63 +133,55 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst).filter((tekst) => !!tekst);
 
   return (
-    <>
-      {erPanelValgt && status === vilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt && (
-        <ProsessStegIkkeBehandletPanel />
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={harApentAksjonspunkt}
+      status={status}
+      loadingState={RestApiState.SUCCESS}
+      skalSkjulePanel={!erPanelValgt}
+    >
+      {((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+        <>
+          <AksjonspunktHelpTextHTML>
+            {apentFaktaPanelInfo && erIkkeFerdigbehandlet
+              ? [
+                <React.Fragment key="1">
+                  <FormattedMessage id="InngangsvilkarPanel.AvventerAvklaringAv" />
+                  <a href="" onClick={oppdaterUrl}><FormattedMessage id={apentFaktaPanelInfo.textCode} /></a>
+                </React.Fragment>,
+              ]
+              : aksjonspunktTekster.map((tekst) => tekst)}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer thirtyTwoPx />
+        </>
       )}
-      {(!erPanelValgt || (erPanelValgt && (status !== vilkarUtfallType.IKKE_VURDERT || harApentAksjonspunkt))) && (
-        <MargMarkering
-          aksjonspunkter={[]}
-          isReadOnly={false}
-          visAksjonspunktMarkering={false}
-          skalSkjulePanel={!erPanelValgt}
-        >
-          <FadingPanel>
-            {((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+      <Row className="">
+        <Column xs="6">
+          <div className={styles.panelLeft}>
+            {leftPanels.map((p, index) => (
               <>
-                <AksjonspunktHelpTextHTML>
-                  {apentFaktaPanelInfo && erIkkeFerdigbehandlet
-                    ? [
-                      <React.Fragment key="1">
-                        <FormattedMessage id="InngangsvilkarPanel.AvventerAvklaringAv" />
-                        <a href="" onClick={oppdaterUrl}><FormattedMessage id={apentFaktaPanelInfo.textCode} /></a>
-                      </React.Fragment>,
-                    ]
-                    : aksjonspunktTekster.map((tekst) => tekst)}
-                </AksjonspunktHelpTextHTML>
-                <VerticalSpacer thirtyTwoPx />
+                {p}
+                {index < leftPanels.length && (
+                  <VerticalSpacer thirtyTwoPx />
+                )}
               </>
-            )}
-            <Row className="">
-              <Column xs="6">
-                <div className={styles.panelLeft}>
-                  {leftPanels.map((p, index) => (
-                    <>
-                      {p}
-                      {index < leftPanels.length && (
-                        <VerticalSpacer thirtyTwoPx />
-                      )}
-                    </>
-                  ))}
-                </div>
-              </Column>
-              <Column xs="6">
-                <div className={styles.panelRight}>
-                  {rightPanels.map((p, index) => (
-                    <>
-                      {p}
-                      {index < rightPanels.length && (
-                      <VerticalSpacer thirtyTwoPx />
-                      )}
-                    </>
-                  ))}
-                </div>
-              </Column>
-            </Row>
-          </FadingPanel>
-        </MargMarkering>
-      )}
-    </>
+            ))}
+          </div>
+        </Column>
+        <Column xs="6">
+          <div className={styles.panelRight}>
+            {rightPanels.map((p, index) => (
+              <>
+                {p}
+                {index < rightPanels.length && (
+                <VerticalSpacer thirtyTwoPx />
+                )}
+              </>
+            ))}
+          </div>
+        </Column>
+      </Row>
+    </ProsessPanelWrapper>
   );
 };
 

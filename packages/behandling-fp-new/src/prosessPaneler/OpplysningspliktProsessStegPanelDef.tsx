@@ -2,17 +2,15 @@ import React, {
   FunctionComponent, useEffect, useState,
 } from 'react';
 
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-sokers-opplysningsplikt';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, useSkalViseProsessPanel, MargMarkering } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
@@ -114,29 +112,20 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={standardProps.status}
+      loadingState={stateEtterVisning}
     >
-      <FadingPanel>
-        <SokersOpplysningspliktVilkarProsessIndex
-          behandling={behandling}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+      <SokersOpplysningspliktVilkarProsessIndex
+        behandling={behandling}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 

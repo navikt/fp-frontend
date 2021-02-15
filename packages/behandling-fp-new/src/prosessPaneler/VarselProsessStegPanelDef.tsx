@@ -2,18 +2,15 @@ import React, {
   FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VarselOmRevurderingProsessIndex from '@fpsak-frontend/prosess-varsel-om-revurdering';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useSkalViseProsessPanel, useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel,
+  useSkalViseProsessPanel, useStandardProsessPanelProps, ProsessPanelWrapper,
 } from '@fpsak-frontend/behandling-felles-ny';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
@@ -172,34 +169,20 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT) {
-    // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
-    return <ProsessStegIkkeBehandletPanel />;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={standardProps.status}
+      loadingState={stateEtterVisning}
     >
-      <FadingPanel>
-        <VarselOmRevurderingProsessIndex
-          behandling={behandling}
-          previewCallback={previewCallback}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+      <VarselOmRevurderingProsessIndex
+        behandling={behandling}
+        previewCallback={previewCallback}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 

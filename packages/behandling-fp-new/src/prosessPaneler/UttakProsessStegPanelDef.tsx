@@ -4,7 +4,6 @@ import React, {
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
@@ -14,7 +13,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling,
   Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
@@ -161,38 +160,24 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (status === vilkarUtfallType.IKKE_VURDERT && !standardProps.isAksjonspunktOpen) {
-    // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
-    return <ProsessStegIkkeBehandletPanel />;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={status}
+      loadingState={stateEtterVisning}
     >
-      <FadingPanel>
-        <UttakProsessIndex
-          behandling={behandling}
-          fagsak={fagsak}
-          employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          tempUpdateStonadskontoer={tempUpdateStonadskontoer}
-          {...data}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+      <UttakProsessIndex
+        behandling={behandling}
+        fagsak={fagsak}
+        employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+        {...data}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 

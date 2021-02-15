@@ -2,7 +2,6 @@ import React, {
   FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
@@ -10,7 +9,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -133,6 +132,8 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const skalVises = state === RestApiState.SUCCESS && !harAktivtVedtakspanel;
 
+  const status = data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
+
   useEffect(() => {
     if (skalVises) {
       const erValgt = !apentFaktaPanelInfo
@@ -142,7 +143,7 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
         erAktiv: erValgt,
         harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status: data.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT,
+        status,
       });
       setPanelValgt(erValgt);
     } else {
@@ -152,36 +153,22 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state, harAktivtVedtakspanel]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT) {
-    // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
-    return <ProsessStegIkkeBehandletPanel />;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={status}
+      loadingState={stateEtterVisning}
     >
-      <FadingPanel>
-        <AvregningProsessIndex
-          behandling={behandling}
-          fagsak={fagsak}
-          previewFptilbakeCallback={previewFptilbakeCallback}
-          simuleringResultat={data.simuleringResultat}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+      <AvregningProsessIndex
+        behandling={behandling}
+        fagsak={fagsak}
+        previewFptilbakeCallback={previewFptilbakeCallback}
+        simuleringResultat={data?.simuleringResultat}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 

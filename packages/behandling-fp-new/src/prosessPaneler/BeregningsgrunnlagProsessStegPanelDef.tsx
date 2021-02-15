@@ -2,7 +2,6 @@ import React, {
   FunctionComponent, useEffect, useState,
 } from 'react';
 
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgrunnlag';
@@ -11,8 +10,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Beregningsgrunnlag, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
@@ -117,34 +115,20 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT) {
-    // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
-    return <ProsessStegIkkeBehandletPanel />;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={standardProps.status}
+      loadingState={stateEtterVisning}
     >
-      <FadingPanel>
-        <BeregningsgrunnlagProsessIndex
-          behandling={behandling}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+      <BeregningsgrunnlagProsessIndex
+        behandling={behandling}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 

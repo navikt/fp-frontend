@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
@@ -12,7 +11,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, BeregningsresultatFp, BeregningsresultatPeriode,
   Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personopplysninger, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelProps, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -142,36 +141,22 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     }
   }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (status === vilkarUtfallType.IKKE_VURDERT && !standardProps.isAksjonspunktOpen) {
-    // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
-    return <ProsessStegIkkeBehandletPanel />;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={filtrerteAksjonspunkter}
-      isReadOnly={standardProps.isReadOnly}
-      visAksjonspunktMarkering
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={status}
+      loadingState={stateEtterVisning}
     >
-      <FadingPanel>
-        <TilkjentYtelseProsessIndex
-          behandling={behandling}
-          fagsak={fagsak}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          beregningresultat={data.beregningresultatForeldrepenger}
-          {...dataEtterVisning}
-          {...standardProps}
-        />
-      </FadingPanel>
-    </MargMarkering>
+      <TilkjentYtelseProsessIndex
+        behandling={behandling}
+        fagsak={fagsak}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        beregningresultat={data?.beregningresultatForeldrepenger}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 

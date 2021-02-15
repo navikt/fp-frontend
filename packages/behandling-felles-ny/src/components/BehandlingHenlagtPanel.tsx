@@ -4,10 +4,10 @@ import React, {
 import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { FadingPanel } from '@fpsak-frontend/shared-components';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import MargMarkering from './MargMarkering';
+import ProsessPanelWrapper from './ProsessPanelWrapper';
 
 interface OwnProps {
   valgtProsessSteg: string;
@@ -41,22 +41,17 @@ const BehandlingHenlagtPanel: FunctionComponent<OwnProps & WrappedComponentProps
     setPanelValgt(erValgt);
   }, [valgtProsessSteg]);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
   return (
-    <MargMarkering
-      aksjonspunkter={[]}
-      isReadOnly
-      visAksjonspunktMarkering={false}
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={false}
+      status={vilkarUtfallType.IKKE_VURDERT}
+      loadingState={RestApiState.SUCCESS}
     >
-      <FadingPanel>
-        <Normaltekst>
-          <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
-        </Normaltekst>
-      </FadingPanel>
-    </MargMarkering>
+      <Normaltekst>
+        <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
+      </Normaltekst>
+    </ProsessPanelWrapper>
   );
 };
 

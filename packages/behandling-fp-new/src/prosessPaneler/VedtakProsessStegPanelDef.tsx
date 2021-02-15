@@ -6,7 +6,6 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { isAvslag } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { FadingPanel, LoadingPanel } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
@@ -15,7 +14,7 @@ import {
   Aksjonspunkt, Behandling, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, MargMarkering, ProsessStegIkkeBehandletPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal,
+  useStandardProsessPanelProps, ProsessPanelWrapper, IverksetterVedtakStatusModal, FatterVedtakStatusModal,
 } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
@@ -216,11 +215,12 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const skalVises = state === RestApiState.SUCCESS;
 
+  const status = findStatusForVedtak(
+    data?.vilkar || [], data?.aksjonspunkter || [], filtrerteAksjonspunkter, behandling.behandlingsresultat,
+  );
+
   useEffect(() => {
     if (skalVises) {
-      const status = findStatusForVedtak(
-        data.vilkar, data.aksjonspunkter, filtrerteAksjonspunkter, behandling.behandlingsresultat,
-      );
       const erValgt = !apentFaktaPanelInfo
         && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
       registrerFaktaPanel({
@@ -237,21 +237,13 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const lukkIverksetterModal = useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, []);
   const lukkFatterModal = useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, []);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-
-  if (standardProps.status === vilkarUtfallType.IKKE_VURDERT && !standardProps.isAksjonspunktOpen) {
-    // FIXME Lag ein wrapper med style rundt denne. Samme som MargMarkering?
-    return <ProsessStegIkkeBehandletPanel />;
-  }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
-    <>
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardProps.isAksjonspunktOpen}
+      status={status}
+      loadingState={stateEtterVisning}
+    >
       <IverksetterVedtakStatusModal
         visModal={visIverksetterVedtakModal}
         lukkModal={lukkIverksetterModal}
@@ -262,22 +254,14 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         lukkModal={lukkFatterModal}
         tekstkode="FatterVedtakStatusModal.SendtBeslutter"
       />
-      <MargMarkering
-        aksjonspunkter={filtrerteAksjonspunkter}
-        isReadOnly={standardProps.isReadOnly}
-        visAksjonspunktMarkering
-      >
-        <FadingPanel>
-          <VedtakProsessIndex
-            behandling={behandling}
-            ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-            previewCallback={previewCallback}
-            {...dataEtterVisning}
-            {...standardProps}
-          />
-        </FadingPanel>
-      </MargMarkering>
-    </>
+      <VedtakProsessIndex
+        behandling={behandling}
+        ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+        previewCallback={previewCallback}
+        {...dataEtterVisning}
+        {...standardProps}
+      />
+    </ProsessPanelWrapper>
   );
 };
 
