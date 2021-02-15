@@ -15,7 +15,9 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import {
+  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
+} from '../data/fpBehandlingApi';
 
 const forhandsvis = (data) => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -63,7 +65,6 @@ interface OwnProps {
   menyData: ProsessPanelMenyData[];
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
-  forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling>;
 }
 
 const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
@@ -73,7 +74,6 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   apentFaktaPanelInfo,
   menyData,
   fagsak,
-  forhandsvisTilbakekrevingMelding,
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
@@ -98,6 +98,9 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks
+    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
 
   const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);

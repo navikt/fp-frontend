@@ -79,16 +79,16 @@ const useStandardProsessPanelProps = (
 
   return {
     behandling: value.behandling,
-    isReadOnly,
-    readOnlySubmitButton,
     submittable: true,
     isAksjonspunktOpen: harApneAksjonspunkter,
-    alleMerknaderFraBeslutter,
-    submitCallback,
-    status,
     aksjonspunkter: aksjonspunkterForSteg,
     vilkar: vilkarForSteg,
     alleKodeverk: value.alleKodeverk,
+    isReadOnly,
+    readOnlySubmitButton,
+    alleMerknaderFraBeslutter,
+    submitCallback,
+    status,
   };
 };
 

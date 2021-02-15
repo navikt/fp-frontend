@@ -18,7 +18,9 @@ import {
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import {
+  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
+} from '../data/fpBehandlingApi';
 
 // TODO Er dette mogleg å fjerna?
 const faktaUttakAp = [
@@ -93,7 +95,6 @@ interface OwnProps {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
-  tempUpdateStonadskontoer: (params?: any, keepData?: boolean) => Promise<unknown>;
 }
 
 const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
@@ -104,7 +105,6 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   fagsak,
-  tempUpdateStonadskontoer,
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
@@ -126,6 +126,8 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+
+  const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
 
   return (
     <ProsessPanelWrapper

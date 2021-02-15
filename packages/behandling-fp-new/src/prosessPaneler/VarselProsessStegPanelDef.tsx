@@ -13,7 +13,9 @@ import {
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import {
+  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
+} from '../data/fpBehandlingApi';
 
 const forhandsvis = (data) => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -91,7 +93,6 @@ interface OwnProps {
   toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>;
   opneSokeside: () => void;
 }
 
@@ -102,7 +103,6 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   toggleSkalOppdatereFagsakContext,
   apentFaktaPanelInfo,
   fagsak,
-  forhandsvisMelding,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
 }) => {
@@ -126,6 +126,8 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+
+  const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
 
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
