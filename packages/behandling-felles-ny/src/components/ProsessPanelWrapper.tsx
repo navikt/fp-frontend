@@ -2,12 +2,12 @@ import React, {
   FunctionComponent, ReactElement,
 } from 'react';
 import classnames from 'classnames/bind';
+import { FormattedMessage } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 import { LoadingPanel, FadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-
-import ProsessStegIkkeBehandletPanel from './ProsessStegIkkeBehandletPanel';
 
 import styles from './prosessPanelWrapper.less';
 
@@ -53,7 +53,9 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
   if (erPanelValgt && status === vilkarUtfallType.IKKE_VURDERT && !erAksjonspunktOpent) {
     return (
       <PanelContainer>
-        <ProsessStegIkkeBehandletPanel />
+        <Normaltekst>
+          <FormattedMessage id="ProsessPanelWrapper.IkkeBehandlet" />
+        </Normaltekst>
       </PanelContainer>
     );
   }

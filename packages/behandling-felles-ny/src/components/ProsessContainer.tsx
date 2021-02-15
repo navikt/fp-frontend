@@ -4,11 +4,11 @@ import React, {
 
 import { Behandling } from '@fpsak-frontend/types';
 
-import ProsessInnhold from './ProsessInnhold';
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
-import ProsessMeny, { ProsessMenyData } from './ProsessMeny';
+import ProsessMeny from './ProsessMeny';
 
 import styles from './prosessContainer.less';
+import ProsessPanelMenyData from '../types/ProsessPanelMenyData';
 
 interface OwnProps {
   behandling: Behandling;
@@ -29,8 +29,9 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   apentFaktaPanelInfo,
   oppdaterBehandlingVersjon,
 }) => {
-  const [menyData, setMenyData] = useState<ProsessMenyData[]>([]);
-  const registrerFaktaPanel = useCallback((nyData: ProsessMenyData) => {
+  const [menyData, setMenyData] = useState<ProsessPanelMenyData[]>([]);
+
+  const registrerProsessPanel = useCallback((nyData: ProsessPanelMenyData) => {
     setMenyData((oldData) => {
       const newData = [...oldData];
       const index = newData.findIndex((d) => d.id === nyData.id);
@@ -59,7 +60,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   }, [behandling.versjon]);
 
   useEffect(() => {
-    if (behandling.behandlingHenlagt) {
+    if (paneler && behandling.behandlingHenlagt) {
       paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
     }
   }, [paneler]);
@@ -73,22 +74,20 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
       <div className={styles.meny}>
         <ProsessMeny menyData={menyDataSomVises} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
       </div>
-      <ProsessInnhold>
-        {paneler.map((panel, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <React.Fragment key={index}>
-            {panel({
-              behandlingVersjon: behandling?.versjon,
-              valgtProsessSteg,
-              registrerFaktaPanel,
-              apentFaktaPanelInfo,
-              oppdaterProsessStegOgFaktaPanelIUrl,
-              toggleSkalOppdatereFagsakContext,
-              allMenyData: menyDataSomVises,
-            })}
-          </React.Fragment>
-        ))}
-      </ProsessInnhold>
+      {paneler.map((panel, index) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <React.Fragment key={index}>
+          {panel({
+            behandlingVersjon: behandling?.versjon,
+            valgtProsessSteg,
+            registrerProsessPanel,
+            apentFaktaPanelInfo,
+            oppdaterProsessStegOgFaktaPanelIUrl,
+            toggleSkalOppdatereFagsakContext,
+            menyData: menyDataSomVises,
+          })}
+        </React.Fragment>
+      ))}
     </div>
   );
 };

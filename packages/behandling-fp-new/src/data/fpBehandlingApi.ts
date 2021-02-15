@@ -1,5 +1,5 @@
 import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 export enum FpBehandlingApiKeys {
   BEHANDLING_FP = 'BEHANDLING_FP',
@@ -99,3 +99,39 @@ const endpoints = new RestApiConfigBuilder()
 export const requestFpApi = createRequestApi(endpoints);
 
 export const restApiFpHooks = RestApiHooks.initHooks(requestFpApi);
+
+export function useHentInitPanelData<T>(
+  endepunkter: string[],
+  behandlingVersjon?: number,
+): { initData: T; initState: RestApiState } {
+  const formaterteEndepunkter = endepunkter.map((e) => ({ key: e }));
+  const { data, state } = restApiFpHooks.useMultipleRestApi<T>(formaterteEndepunkter, {
+    keepData: true,
+    updateTriggers: [behandlingVersjon],
+    isCachingOn: true,
+  });
+
+  return {
+    initData: data,
+    initState: state,
+  };
+}
+
+export function useHentInputDataTilPanel<T>(
+  endepunkter: string[],
+  erPanelValgt: boolean,
+  behandlingVersjon?: number,
+): { panelData: T; panelDataState: RestApiState } {
+  const formaterteEndepunkter = endepunkter.map((e) => ({ key: e }));
+  const { data, state } = restApiFpHooks.useMultipleRestApi<T>(formaterteEndepunkter, {
+    keepData: true,
+    updateTriggers: [erPanelValgt, behandlingVersjon],
+    suspendRequest: !erPanelValgt,
+    isCachingOn: true,
+  });
+
+  return {
+    panelData: data,
+    panelDataState: state,
+  };
+}

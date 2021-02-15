@@ -14,7 +14,7 @@ import { useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanel
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, useHentInitPanelData } from '../../data/fpBehandlingApi';
 
 const aksjonspunktKoder = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -26,12 +26,8 @@ const vilkarKoder = [
   vilkarType.FODSELSVILKARET_FAR,
 ];
 
-const endepunkter = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.VILKAR },
-];
-
-type EndepunktData = {
+const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
@@ -57,16 +53,12 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
-    keepData: true,
-    updateTriggers: [behandlingVersjon],
-    isCachingOn: true,
-  });
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
 
   const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
-  const erDataFerdighentet = state === RestApiState.SUCCESS;
+  const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
   useEffect(() => {
     if (erDataFerdighentet && skalVises) {
@@ -95,7 +87,7 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
     return (
       <OverstyringPanelDef
         behandling={standardPanelProps.behandling}
-        aksjonspunkter={data.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_FODSELSVILKAR
+        aksjonspunkter={initData.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_FODSELSVILKAR
           || ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR)}
         // FIXME Dette må vel vera feil? Kan vera ein kode
         aksjonspunktKode={aksjonspunktCodes.OVERSTYR_FODSELSVILKAR}

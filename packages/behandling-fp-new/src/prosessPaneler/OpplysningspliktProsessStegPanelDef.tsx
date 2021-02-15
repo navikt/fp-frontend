@@ -11,11 +11,11 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper, prosessPanelHooks,
+  useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
 const aksjonspunktKoder = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -24,34 +24,21 @@ const aksjonspunktKoder = [
 
 const vilkarKoder = [vilkarType.SOKERSOPPLYSNINGSPLIKT];
 
-const endepunkter = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.VILKAR },
-];
-
-const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.SOKNAD },
-];
-
-type EndepunktData = {
+const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-type EndepunktDataVedVisning = {
+const endepunkterPanelData = [FpBehandlingApiKeys.SOKNAD];
+type EndepunktPanelData = {
   soknad: Soknad;
 }
 
 interface OwnProps {
   behandlingVersjon?: number;
   valgtProsessSteg: string;
-  registrerFaktaPanel: (data: {
-    id: string;
-    tekst?: string;
-    erAktiv?: boolean;
-    harApentAksjonspunkt?: boolean;
-    status?: string;
-  }) => void;
+  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -59,17 +46,13 @@ interface OwnProps {
 const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
-  registrerFaktaPanel,
+  registrerProsessPanel,
   apentFaktaPanelInfo,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const { data } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
-    keepData: true,
-    updateTriggers: [behandlingVersjon],
-    isCachingOn: true,
-  });
+  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
 
   const defaultSkalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
   const isRevurdering = behandlingType.REVURDERING === standardPanelProps.behandling.type.kode;
@@ -79,7 +62,7 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     && (valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
-    registrerFaktaPanel,
+    registrerProsessPanel,
     prosessStegCodes.OPPLYSNINGSPLIKT,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
     skalVises,
@@ -88,23 +71,18 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     standardPanelProps.status,
   );
 
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
-    keepData: true,
-    updateTriggers: [erPanelValgt, behandlingVersjon],
-    suspendRequest: !erPanelValgt,
-    isCachingOn: true,
-  });
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={standardPanelProps.status}
-      loadingState={stateEtterVisning}
+      loadingState={panelDataState}
     >
       <SokersOpplysningspliktVilkarProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...dataEtterVisning}
+        {...panelData}
         {...standardPanelProps}
       />
     </ProsessPanelWrapper>

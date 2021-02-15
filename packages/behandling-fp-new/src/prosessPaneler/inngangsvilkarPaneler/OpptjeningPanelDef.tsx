@@ -13,32 +13,20 @@ import {
 import { useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
-  aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET,
-];
+const aksjonspunktKoder = [aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET];
 
-const vilkarKoder = [
-  vilkarType.OPPTJENINGSPERIODE,
-  vilkarType.OPPTJENINGSVILKARET,
-];
+const vilkarKoder = [vilkarType.OPPTJENINGSPERIODE, vilkarType.OPPTJENINGSVILKARET];
 
-const endepunkter = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.VILKAR },
-];
-
-const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.OPPTJENING },
-];
-
-type EndepunktData = {
+const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-type EndepunktDataVedVisning = {
+const endepunkterPanelData = [FpBehandlingApiKeys.OPPTJENING];
+type EndepunktPanelData = {
   opptjening: Opptjening;
 }
 
@@ -63,21 +51,12 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
-    keepData: true,
-    updateTriggers: [behandlingVersjon],
-    isCachingOn: true,
-  });
-  const erDataFerdighentet = state === RestApiState.SUCCESS;
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
-    keepData: true,
-    updateTriggers: [erPanelValgt, behandlingVersjon],
-    suspendRequest: !erPanelValgt,
-    isCachingOn: true,
-  });
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
 
   const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 
@@ -97,7 +76,7 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (!erDataFerdighentet || stateEtterVisning !== RestApiState.SUCCESS) {
+  if (!erDataFerdighentet || panelDataState !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
 
@@ -108,7 +87,7 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
     return (
       <OverstyringPanelDef
         behandling={standardPanelProps.behandling}
-        aksjonspunkter={data.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET)}
+        aksjonspunkter={initData.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET)}
         aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
         vilkar={standardPanelProps.vilkar}
         vilkarKoder={vilkarKoder}
@@ -125,7 +104,7 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
   return (
     <OpptjeningVilkarProsessIndex
       lovReferanse={standardPanelProps.vilkar[0].lovReferanse}
-      {...dataEtterVisning}
+      {...panelData}
       {...standardPanelProps}
     />
   );

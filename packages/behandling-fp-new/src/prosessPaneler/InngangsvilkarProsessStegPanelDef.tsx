@@ -10,7 +10,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { AksessRettigheter } from '@fpsak-frontend/types';
-import { ProsessPanelWrapper, prosessPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -39,13 +39,7 @@ const getErAksjonspunktOpen = (paneler: PanelInfo[]): boolean => {
 interface OwnProps {
   behandlingVersjon?: number;
   valgtProsessSteg: string;
-  registrerFaktaPanel: (data: {
-    id: string;
-    tekst?: string;
-    erAktiv?: boolean;
-    harApentAksjonspunkt?: boolean;
-    status?: string;
-  }) => void;
+  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
@@ -61,7 +55,7 @@ type PanelInfo = {
 const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
-  registrerFaktaPanel,
+  registrerProsessPanel,
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
@@ -95,7 +89,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
-    registrerFaktaPanel,
+    registrerProsessPanel,
     prosessStegCodes.INNGANGSVILKAR,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     skalVises,

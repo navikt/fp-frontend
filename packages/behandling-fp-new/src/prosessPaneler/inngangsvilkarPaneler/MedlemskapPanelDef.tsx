@@ -11,31 +11,20 @@ import {
 } from '@fpsak-frontend/types';
 import { useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
 
-import { restApiFpHooks, FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
-  aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR,
-];
+const aksjonspunktKoder = [aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR];
 
-const vilkarKoder = [
-  vilkarType.MEDLEMSKAPSVILKARET,
-];
+const vilkarKoder = [vilkarType.MEDLEMSKAPSVILKARET];
 
-const endepunkter = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.VILKAR },
-];
-
-const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.MEDLEMSKAP },
-];
-
-type EndepunktData = {
+const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-type EndepunktDataVedVisning = {
+const endepunkterPanelData = [FpBehandlingApiKeys.MEDLEMSKAP];
+type EndepunktPanelData = {
   medlemskap: Medlemskap;
 }
 
@@ -59,22 +48,13 @@ const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
 }) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
-    keepData: true,
-    updateTriggers: [behandlingVersjon],
-    isCachingOn: true,
-  });
 
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
-    keepData: true,
-    updateTriggers: [erPanelValgt, behandlingVersjon],
-    suspendRequest: !erPanelValgt,
-    isCachingOn: true,
-  });
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  const erDataFerdighentet = state === RestApiState.SUCCESS;
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
 
   const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 
@@ -96,7 +76,7 @@ const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (!erDataFerdighentet || stateEtterVisning !== RestApiState.SUCCESS) {
+  if (!erDataFerdighentet || panelDataState !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
 
@@ -109,7 +89,7 @@ const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
       vilkarKoder={vilkarKoder}
       panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
       erMedlemskapsPanel
-      medlemskap={dataEtterVisning.medlemskap}
+      medlemskap={panelData.medlemskap}
       toggleOverstyring={toggleOverstyring}
       erOverstyrt={erOverstyrt}
       overrideReadOnly={standardPanelProps.isReadOnly || (harMinstEttPanelApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}

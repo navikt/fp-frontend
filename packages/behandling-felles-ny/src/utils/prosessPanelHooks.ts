@@ -2,17 +2,13 @@ import {
   useEffect, useState,
 } from 'react';
 
+import ProsessPanelMenyData from '../types/ProsessPanelMenyData';
+
 const useMenyRegistrerer = (
-  registrerFaktaPanel: (data: {
-    id: string;
-    tekst?: string;
-    erAktiv?: boolean;
-    harApentAksjonspunkt?: boolean;
-    status?: string;
-  }) => void,
+  registrerFaktaPanel: (data: ProsessPanelMenyData) => void,
   id: string,
   tekst: string,
-  skalVises: boolean,
+  skalVisesImeny: boolean,
   erAktiv: boolean,
   harApentAksjonspunkt: boolean,
   status: string,
@@ -25,7 +21,7 @@ const useMenyRegistrerer = (
   }, []);
 
   useEffect(() => {
-    if (skalVises) {
+    if (skalVisesImeny) {
       registrerFaktaPanel({
         id,
         tekst,
@@ -39,7 +35,7 @@ const useMenyRegistrerer = (
         id,
       });
     }
-  }, [skalVises, erAktiv, harApentAksjonspunkt, status]);
+  }, [skalVisesImeny, erAktiv, harApentAksjonspunkt, status]);
 
   return erPanelValgt;
 };

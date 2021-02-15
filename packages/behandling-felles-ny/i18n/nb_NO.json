@@ -10,7 +10,7 @@
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
 
-  "ProsessStegIkkeBehandletPanel.IkkeBehandlet": "Dette steget er ikke behandlet",
+  "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
   "BehandlingHenlagtPanel.Header": "Henlagt",
   "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
   "FaktaPanel.FaktaOm": "Fakta om",

@@ -11,11 +11,13 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode,
   Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personopplysninger, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
+} from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
 const harPeriodeMedUtbetaling = (perioder: BeregningsresultatPeriode[]): boolean => {
   const periode = perioder.find((p) => p.dagsats > 0);
@@ -39,30 +41,26 @@ const getStatusFromResultatstruktur = (resultatstruktur: BeregningsresultatFp, u
   return vilkarUtfallType.IKKE_VURDERT;
 };
 
-const aksjonspunktKoder = [
-  aksjonspunktCodes.VURDER_TILBAKETREKK,
-];
+const aksjonspunktKoder = [aksjonspunktCodes.VURDER_TILBAKETREKK];
 
-const endepunkter = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER },
-  { key: FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER },
+const endepunkterInit = [
+  FpBehandlingApiKeys.AKSJONSPUNKTER,
+  FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
+  FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
 ];
-
-const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.FAMILIEHENDELSE },
-  { key: FpBehandlingApiKeys.PERSONOPPLYSNINGER },
-  { key: FpBehandlingApiKeys.SOKNAD },
-  { key: FpBehandlingApiKeys.FERIEPENGEGRUNNLAG },
-];
-
-type EndepunktData = {
+type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   beregningresultatForeldrepenger: BeregningsresultatFp;
   uttaksresultatPerioder: UttaksresultatPeriode;
 }
 
-type EndepunktDataVedVisning = {
+const endepunkterPanelData = [
+  FpBehandlingApiKeys.FAMILIEHENDELSE,
+  FpBehandlingApiKeys.PERSONOPPLYSNINGER,
+  FpBehandlingApiKeys.SOKNAD,
+  FpBehandlingApiKeys.FERIEPENGEGRUNNLAG,
+];
+type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   personopplysninger: Personopplysninger;
   soknad: Soknad;
@@ -72,13 +70,7 @@ type EndepunktDataVedVisning = {
 interface OwnProps {
   behandlingVersjon?: number;
   valgtProsessSteg: string;
-  registrerFaktaPanel: (data: {
-    id: string;
-    tekst?: string;
-    erAktiv?: boolean;
-    harApentAksjonspunkt?: boolean;
-    status?: string;
-  }) => void;
+  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
@@ -87,26 +79,22 @@ interface OwnProps {
 const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
-  registrerFaktaPanel,
+  registrerProsessPanel,
   apentFaktaPanelInfo,
   arbeidsgiverOpplysningerPerId,
   fagsak,
 }) => {
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
-    keepData: true,
-    updateTriggers: [behandlingVersjon],
-    isCachingOn: true,
-  });
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(data, aksjonspunktKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder);
 
-  const skalVises = state === RestApiState.SUCCESS;
+  const skalVises = initState === RestApiState.SUCCESS;
   const erAktiv = !apentFaktaPanelInfo
     && (valgtProsessSteg === prosessStegCodes.TILKJENT_YTELSE || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
-  const status = getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder);
+  const status = getStatusFromResultatstruktur(initData?.beregningresultatForeldrepenger, initData?.uttaksresultatPerioder);
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
-    registrerFaktaPanel,
+    registrerProsessPanel,
     prosessStegCodes.TILKJENT_YTELSE,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
     skalVises,
@@ -115,25 +103,20 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     status,
   );
 
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
-    keepData: true,
-    updateTriggers: [erPanelValgt, behandlingVersjon],
-    suspendRequest: !erPanelValgt,
-    isCachingOn: true,
-  });
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      loadingState={stateEtterVisning}
+      loadingState={panelDataState}
     >
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        beregningresultat={data?.beregningresultatForeldrepenger}
-        {...dataEtterVisning}
+        beregningresultat={initData?.beregningresultatForeldrepenger}
+        {...panelData}
         {...standardPanelProps}
       />
     </ProsessPanelWrapper>
