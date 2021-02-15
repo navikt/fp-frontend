@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useState,
+  FunctionComponent, useEffect,
 } from 'react';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -10,10 +10,11 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
+import { useStandardProsessPanelPropsNew, useSkalViseProsessPanel, ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import prosessPanelHooks from '../prosessPanelHooks';
 
 const aksjonspunktKoder = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -63,23 +64,35 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   apentFaktaPanelInfo,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
-
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: prosessStegCodes.OPPLYSNINGSPLIKT,
-    });
-  }, []);
-
   useEffect(() => {
     oppdaterBehandlingVersjon(behandling.versjon);
   }, [behandling.versjon]);
 
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
+  const { data } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
     keepData: true,
     updateTriggers: [behandling?.versjon],
     isCachingOn: true,
   });
+
+  const standardProps = useStandardProsessPanelPropsNew(data, aksjonspunktKoder, vilkarKoder);
+
+  const defaultSkalVises = useSkalViseProsessPanel(standardProps.aksjonspunkter, vilkarKoder, standardProps.vilkar);
+
+  const isRevurdering = behandlingType.REVURDERING === behandling.type.kode;
+  const hasAp = standardProps.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
+  const skalVises = !(isRevurdering && !hasAp) || defaultSkalVises;
+  const erAktiv = !apentFaktaPanelInfo
+    && (valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+
+  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    prosessStegCodes.OPPLYSNINGSPLIKT,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
+    skalVises,
+    erAktiv,
+    standardProps.isAksjonspunktOpen,
+    standardProps.status,
+  );
 
   const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
     keepData: true,
@@ -87,30 +100,6 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
     suspendRequest: !erPanelValgt,
     isCachingOn: true,
   });
-
-  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-  const filtrerteVilkar = data ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
-
-  const standardProps = useStandardProsessPanelProps(filtrerteAksjonspunkter, filtrerteVilkar);
-
-  const skalVises = useSkalViseProsessPanel(filtrerteAksjonspunkter, vilkarKoder, filtrerteVilkar);
-
-  useEffect(() => {
-    const isRevurdering = behandlingType.REVURDERING === behandling.type.kode;
-    const hasAp = filtrerteAksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
-    if (!(isRevurdering && !hasAp) || skalVises) {
-      const erValgt = !apentFaktaPanelInfo
-      && (valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
-      registrerFaktaPanel({
-        id: prosessStegCodes.OPPLYSNINGSPLIKT,
-        tekst: getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
-        erAktiv: erValgt,
-        harApentAksjonspunkt: standardProps.isAksjonspunktOpen,
-        status: standardProps.status,
-      });
-      setPanelValgt(erValgt);
-    }
-  }, [valgtProsessSteg, standardProps.isAksjonspunktOpen, state]);
 
   return (
     <ProsessPanelWrapper
