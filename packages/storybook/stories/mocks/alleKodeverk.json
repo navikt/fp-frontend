@@ -3246,6 +3246,38 @@
       "kodeverk": "FAR_SOEKER_TYPE"
     }
   ],
+  "FaresignalVurdering": [
+    {
+      "kode": "AVSLAG_ANNET",
+      "navn": "Saken er avslått av andre årsaker",
+      "kodeverk": "FARESIGNAL_VURDERING"
+    },
+    {
+      "kode": "INGEN_INNVIRKNING",
+      "navn": "Faresignalene vurderes ikke som reelle",
+      "kodeverk": "FARESIGNAL_VURDERING"
+    },
+    {
+      "kode": "INNVIRKNING",
+      "navn": "Faresignalene vurderes som reelle",
+      "kodeverk": "FARESIGNAL_VURDERING"
+    },
+    {
+      "kode": "INNVILGET_REDUSERT",
+      "navn": "Saken er innvilget med redusert beregningsgrunnlag",
+      "kodeverk": "FARESIGNAL_VURDERING"
+    },
+    {
+      "kode": "INNVILGET_UENDRET",
+      "navn": "Saken er innvilget uten at faresignalene påvirket utfallet",
+      "kodeverk": "FARESIGNAL_VURDERING"
+    },
+    {
+      "kode": "AVSLAG_FARESIGNAL",
+      "navn": "Saken er avslått på grunn av faresignalene",
+      "kodeverk": "FARESIGNAL_VURDERING"
+    }
+  ],
   "ArbeidType": [
     {
       "kode": "ETTERLØNN_SLUTTPAKKE",

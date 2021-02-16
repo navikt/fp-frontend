@@ -4,7 +4,7 @@ import Panel from 'nav-frontend-paneler';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { Risikoklassifisering, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import Faresignaler from './Faresignaler';
 import AvklarFaresignalerForm, { VuderFaresignalerAp } from './AvklarFaresignalerForm';
@@ -16,6 +16,7 @@ interface OwnProps {
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
+  faresignalVurderinger: KodeverkMedNavn[];
 }
 
 /**
@@ -30,6 +31,7 @@ const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
   aksjonspunkt,
   readOnly,
   submitCallback,
+  faresignalVurderinger,
 }) => (
   <Panel>
     {aksjonspunkt && aksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && (
@@ -50,6 +52,7 @@ const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         submitCallback={submitCallback}
         risikoklassifisering={risikoklassifisering}
+        faresignalVurderinger={faresignalVurderinger}
       />
       )}
   </Panel>

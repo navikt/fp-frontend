@@ -9,6 +9,7 @@ import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/k
 
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import withReduxProvider from '../../decorators/withRedux';
+import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const withWidthProvider = (story) => (
   <div style={{ width: '600px' }}>
@@ -30,6 +31,7 @@ export const visPanelUtenInformasjon = () => (
     readOnly={boolean('readOnly', false)}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
     toggleRiskPanel={action('button-click')}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -47,6 +49,7 @@ export const visPanelForLavRisikoklassifisering = () => (
     readOnly={boolean('readOnly', false)}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
     toggleRiskPanel={action('button-click')}
+    alleKodeverk={alleKodeverk as any}
   />
 );
 
@@ -81,5 +84,6 @@ export const visPanelForHøyRisikoklassifisering = () => (
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
     isPanelOpen
     toggleRiskPanel={action('button-click')}
+    alleKodeverk={alleKodeverk as any}
   />
 );

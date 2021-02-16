@@ -8,7 +8,7 @@ import { Risikoklassifisering } from '@fpsak-frontend/types';
 import faresignalVurdering from '../kodeverk/faresignalVurdering';
 
 import {
-  AvklarFaresignalerForm, begrunnelseFieldName, buildInitialValues, radioFieldName,
+  AvklarFaresignalerForm, begrunnelseFieldName, buildInitialValues, vurderingerHovedkategori,
 } from './AvklarFaresignalerForm';
 
 const mockAksjonspunkt = (status, begrunnelse) => ({
@@ -45,6 +45,11 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
+      behandlingId={1}
+      behandlingVersjon={2}
+      faresignalVurderinger={[]}
+      onSubmit={() => undefined}
+      harValgtIkkeReelle
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
@@ -58,6 +63,11 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
+      behandlingId={1}
+      behandlingVersjon={2}
+      faresignalVurderinger={[]}
+      onSubmit={() => undefined}
+      harValgtIkkeReelle
       {...reduxFormPropsMock}
     />);
     const textArea = wrapper.find('TextAreaField');
@@ -71,7 +81,7 @@ describe('<AvklarFaresignalerForm>', () => {
   it('skal teste at buildInitialValues gir korrekte verdier', () => {
     const expectedInitialValues = {
       [begrunnelseFieldName]: 'Dette er en begrunnelse',
-      [radioFieldName]: true,
+      [vurderingerHovedkategori]: true,
     };
     const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering(faresignalVurdering.INNVIRKNING),
       mockAksjonspunkt('UTFO', 'Dette er en begrunnelse'));

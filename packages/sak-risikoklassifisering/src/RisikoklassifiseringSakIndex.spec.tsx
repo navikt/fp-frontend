@@ -27,6 +27,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
+      alleKodeverk={{}}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
@@ -42,6 +43,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
+      alleKodeverk={{}}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
@@ -57,6 +59,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
+      alleKodeverk={{}}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(1);
@@ -72,6 +75,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
+      alleKodeverk={{}}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
