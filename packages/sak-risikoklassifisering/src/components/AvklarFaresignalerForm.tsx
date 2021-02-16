@@ -127,6 +127,7 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
                 >
                   {underkategoriFaresignalVurderinger.map((vurdering) => (
                     <RadioOption
+                      key={vurdering.kode}
                       label={vurdering.navn}
                       value={vurdering.kode}
                     />
