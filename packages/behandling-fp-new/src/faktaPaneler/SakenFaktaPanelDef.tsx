@@ -5,10 +5,10 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
-import { FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks, FaktaPanelWrapper,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -64,13 +64,11 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-  if (panelDataState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-  return <SakenFaktaIndex {...initData} {...panelData} {...standardPanelProps} />;
+  return (
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+      <SakenFaktaIndex {...initData} {...panelData} {...standardPanelProps} />
+    </FaktaPanelWrapper>
+  );
 };
 
 export default SakenFaktaPanelDef;

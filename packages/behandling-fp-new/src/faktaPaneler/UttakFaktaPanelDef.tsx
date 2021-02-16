@@ -5,13 +5,13 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   Personopplysninger, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { FaktaPanelMenyData, faktaPanelHooks, useStandardFaktaProps } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  FaktaPanelMenyData, faktaPanelHooks, useStandardFaktaProps, FaktaPanelWrapper,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import {
@@ -87,20 +87,16 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-  if (panelDataState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
   return (
-    <UttakFaktaIndex
-      kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      {...initData}
-      {...panelData}
-      {...standardPanelProps}
-    />
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+      <UttakFaktaIndex
+        kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...initData}
+        {...panelData}
+        {...standardPanelProps}
+      />
+    </FaktaPanelWrapper>
   );
 };
 

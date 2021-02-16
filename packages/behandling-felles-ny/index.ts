@@ -4,6 +4,7 @@ export { default as FatterVedtakStatusModal } from './src/components/vedtak/Fatt
 export { default as IverksetterVedtakStatusModal } from './src/components/vedtak/IverksetterVedtakStatusModal';
 export { default as BehandlingPaVent } from './src/components/paVent/BehandlingPaVent';
 export { default as ProsessPanelWrapper } from './src/components/ProsessPanelWrapper';
+export { default as FaktaPanelWrapper } from './src/components/FaktaPanelWrapper';
 export { default as StandardBehandlingProps } from './src/types/StandardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/ProsessPanelMenyData';
 export { default as FaktaPanelMenyData } from './src/types/FaktaPanelMenyData';

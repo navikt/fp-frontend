@@ -5,12 +5,12 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
-import { FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks, FaktaPanelWrapper,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
@@ -63,19 +63,15 @@ const BeregningFaktaPanelDef: FunctionComponent<OwnProps> = ({
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  if (!erPanelValgt) {
-    return null;
-  }
-  if (initState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
   return (
-    <BeregningFaktaIndex
-      erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      {...initState}
-      {...standardPanelProps}
-    />
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={initState}>
+      <BeregningFaktaIndex
+        erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...initState}
+        {...standardPanelProps}
+      />
+    </FaktaPanelWrapper>
   );
 };
 

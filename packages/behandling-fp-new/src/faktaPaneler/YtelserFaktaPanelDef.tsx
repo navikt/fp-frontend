@@ -4,10 +4,10 @@ import React, {
 
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
-import { useStandardFaktaProps, faktaPanelHooks, FaktaPanelMenyData } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  useStandardFaktaProps, faktaPanelHooks, FaktaPanelMenyData, FaktaPanelWrapper,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
@@ -38,7 +38,7 @@ const YtelserFaktaPanelDef: FunctionComponent<OwnProps> = ({
   const skalVises = initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
     && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0;
   const erAktiv = valgtFaktaSteg === faktaPanelCodes.YTELSER
-      || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
+    || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
   const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
     registrerFaktaPanel,
@@ -49,13 +49,11 @@ const YtelserFaktaPanelDef: FunctionComponent<OwnProps> = ({
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  if (!erPanelValgt) {
-    return null;
-  }
-  if (initState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-  return <YtelserFaktaIndex {...initData} {...standardPanelProps} />;
+  return (
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={initState}>
+      <YtelserFaktaIndex {...initData} {...standardPanelProps} />
+    </FaktaPanelWrapper>
+  );
 };
 
 export default YtelserFaktaPanelDef;

@@ -5,14 +5,12 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
   AksessRettigheter,
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FagsakPerson, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, harBehandlingReadOnlyStatus, FaktaPanelMenyData, faktaPanelHooks,
+  useStandardFaktaProps, harBehandlingReadOnlyStatus, FaktaPanelMenyData, faktaPanelHooks, FaktaPanelWrapper,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -81,25 +79,21 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
 
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
-  if (!erPanelValgt) {
-    return null;
-  }
-  if (panelDataState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
   return (
-    <MedlemskapFaktaIndex
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      isForeldrepengerFagsak
-      fagsakPerson={fagsakPerson}
-      readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
-        || hasFetchError
-        || standardPanelProps.behandling.behandlingPaaVent
-        || harBehandlingReadOnlyStatus(standardPanelProps.behandling)}
-      {...initData}
-      {...panelData}
-      {...standardPanelProps}
-    />
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+      <MedlemskapFaktaIndex
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        isForeldrepengerFagsak
+        fagsakPerson={fagsakPerson}
+        readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
+          || hasFetchError
+          || standardPanelProps.behandling.behandlingPaaVent
+          || harBehandlingReadOnlyStatus(standardPanelProps.behandling)}
+        {...initData}
+        {...panelData}
+        {...standardPanelProps}
+      />
+    </FaktaPanelWrapper>
   );
 };
 
