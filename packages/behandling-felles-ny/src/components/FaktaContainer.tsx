@@ -5,17 +5,17 @@ import React, {
 import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { Behandling } from '@fpsak-frontend/types';
 
 import FaktaInnhold from './FaktaInnhold';
-import FaktaMeny, { MenyData } from './FaktaMeny';
+import FaktaMeny from './FaktaMeny';
+import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
 
 import styles from './faktaContainer.less';
 
 export const DEFAULT_FAKTA_KODE = 'default';
 
 interface OwnProps {
-  behandling: Behandling;
+  behandlingVersjon?: number;
   paneler?: ((props: any) => ReactElement)[];
   valgtFaktaSteg?: string;
   oppdaterFaktaPanelIUrl: (faktanavn: string) => void;
@@ -24,15 +24,15 @@ interface OwnProps {
 }
 
 const FaktaContainer: FunctionComponent<OwnProps> = ({
-  behandling,
+  behandlingVersjon,
   paneler,
   valgtFaktaSteg,
   oppdaterFaktaPanelIUrl,
   setApentFaktaPanel,
   apentFaktaPanelInfo,
 }) => {
-  const [menyData, setMenyData] = useState<MenyData[]>([]);
-  const registrerFaktaPanel = useCallback((nyData: MenyData) => {
+  const [menyData, setMenyData] = useState<FaktaPanelMenyData[]>([]);
+  const registrerFaktaPanel = useCallback((nyData: FaktaPanelMenyData) => {
     if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
       setApentFaktaPanel({ urlCode: nyData.id, textCode: nyData.tekst });
     }
@@ -76,7 +76,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
                 // eslint-disable-next-line react/no-array-index-key
                 <React.Fragment key={index}>
                   {panel({
-                    behandling,
+                    behandlingVersjon,
                     valgtFaktaSteg,
                     registrerFaktaPanel,
                   })}

@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useEffect, useState,
+  FunctionComponent,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -9,12 +9,14 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
   AksessRettigheter,
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FagsakPerson, InntektArbeidYtelse, Medlemskap, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FagsakPerson, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
-import { useStandardFaktaProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  useStandardFaktaProps, harBehandlingReadOnlyStatus, FaktaPanelMenyData, faktaPanelHooks,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
 const aksjonspunktKoder = [
   aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
@@ -26,35 +28,22 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
 ];
 
-const endepunkter = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.SOKNAD },
-];
-
-const endepunkterVedVisning = [
-  { key: FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
-  { key: FpBehandlingApiKeys.MEDLEMSKAP },
-];
-
-type EndepunktData = {
+const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SOKNAD];
+type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   soknad: Soknad;
 }
 
-type EndepunktDataVedVisning = {
+const endepunkterPanelData = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE, FpBehandlingApiKeys.MEDLEMSKAP];
+type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
   medlemskap: Medlemskap;
 }
 
 interface OwnProps {
   valgtFaktaSteg: string;
-  behandling: Behandling;
-  registrerFaktaPanel: (data: {
-    id: string;
-    tekst?: string;
-    erAktiv?: boolean;
-    harAksjonspunkt?: boolean;
-  }) => void;
+  behandlingVersjon?: number;
+  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsakPerson: FagsakPerson;
   rettigheter: AksessRettigheter;
@@ -66,73 +55,50 @@ interface OwnProps {
  */
 const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
-  behandling,
+  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   fagsakPerson,
   rettigheter,
   hasFetchError,
   registrerFaktaPanel,
 }) => {
-  const [erPanelValgt, setPanelValgt] = useState(false);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  useEffect(() => {
-    registrerFaktaPanel({
-      id: faktaPanelCodes.MEDLEMSKAPSVILKARET,
-    });
-  }, []);
+  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
 
-  const { data, state } = restApiFpHooks.useMultipleRestApi<EndepunktData>(endepunkter, {
-    keepData: true,
-    updateTriggers: [behandling?.versjon],
-    isCachingOn: true,
-  });
+  const skalVises = !!initData?.soknad;
+  const erAktiv = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET
+  || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
-  const { data: dataEtterVisning, state: stateEtterVisning } = restApiFpHooks.useMultipleRestApi<EndepunktDataVedVisning>(endepunkterVedVisning, {
-    keepData: true,
-    updateTriggers: [erPanelValgt, behandling?.versjon],
-    suspendRequest: !erPanelValgt,
-    isCachingOn: true,
-  });
+  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+    registrerFaktaPanel,
+    faktaPanelCodes.MEDLEMSKAPSVILKARET,
+    getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
+    skalVises,
+    erAktiv,
+    standardPanelProps.harApneAksjonspunkter,
+  );
 
-  const filtrerteAksjonspunkter = data ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-
-  const standardProps = useStandardFaktaProps(filtrerteAksjonspunkter);
-
-  useEffect(() => {
-    if (data && data.soknad) {
-      const erValgt = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET
-        || (standardProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
-      registrerFaktaPanel({
-        id: faktaPanelCodes.MEDLEMSKAPSVILKARET,
-        tekst: getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
-        erAktiv: erValgt,
-        harAksjonspunkt: standardProps.harApneAksjonspunkter,
-      });
-      setPanelValgt(erValgt);
-    }
-  }, [valgtFaktaSteg, standardProps.harApneAksjonspunkter, state]);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
 
   if (!erPanelValgt) {
     return null;
   }
-
-  if (stateEtterVisning !== RestApiState.SUCCESS) {
+  if (panelDataState !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
-
   return (
     <MedlemskapFaktaIndex
-      behandling={behandling}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       isForeldrepengerFagsak
       fagsakPerson={fagsakPerson}
       readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
         || hasFetchError
-        || behandling.behandlingPaaVent
-        || harBehandlingReadOnlyStatus(behandling)}
-      {...data}
-      {...dataEtterVisning}
-      {...standardProps}
+        || standardPanelProps.behandling.behandlingPaaVent
+        || harBehandlingReadOnlyStatus(standardPanelProps.behandling)}
+      {...initData}
+      {...panelData}
+      {...standardPanelProps}
     />
   );
 };

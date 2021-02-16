@@ -2,40 +2,38 @@ import {
   useEffect, useState,
 } from 'react';
 
-import ProsessPanelMenyData from '../types/ProsessPanelMenyData';
+import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
 
 const useMenyRegistrerer = (
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void,
+  registrerFaktaPanel: (data: FaktaPanelMenyData) => void,
   id: string,
   tekst: string,
   skalVisesImeny: boolean,
   erAktiv: boolean,
-  harApentAksjonspunkt: boolean,
-  status: string,
+  harAksjonspunkt: boolean,
 ) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {
-    registrerProsessPanel({
+    registrerFaktaPanel({
       id,
     });
   }, []);
 
   useEffect(() => {
     if (skalVisesImeny) {
-      registrerProsessPanel({
+      registrerFaktaPanel({
         id,
         tekst,
         erAktiv,
-        harApentAksjonspunkt,
-        status,
+        harAksjonspunkt,
       });
       setPanelValgt(erAktiv);
     } else {
-      registrerProsessPanel({
+      registrerFaktaPanel({
         id,
       });
     }
-  }, [skalVisesImeny, erAktiv, harApentAksjonspunkt, status]);
+  }, [skalVisesImeny, erAktiv, harAksjonspunkt]);
 
   return erPanelValgt;
 };

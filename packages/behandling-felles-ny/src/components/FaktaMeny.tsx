@@ -3,16 +3,10 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import SideMenu from '@navikt/nap-side-menu';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
-
-export type MenyData = {
-  id: string;
-  tekst: string;
-  erAktiv: boolean;
-  harAksjonspunkt: boolean;
-};
+import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
 
 interface OwnProps {
-  menyData: MenyData[];
+  menyData: FaktaPanelMenyData[];
   oppdaterFaktaPanelIUrl: (index: number) => void;
 }
 
