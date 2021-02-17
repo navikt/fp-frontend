@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 import risikoIkon from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
-import { Risikoklassifisering, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import HoyRisikoPanel from './HoyRisikoPanel';
 import TittelMedDivider from './TittelMedDivider';
@@ -19,6 +19,7 @@ interface OwnProps {
   toggleRiskPanel: () => void;
   behandlingId: number;
   behandlingVersjon: number;
+  faresignalVurderinger: KodeverkMedNavn[];
 }
 
 /**
@@ -35,6 +36,7 @@ const HoyRisikoTittel: FunctionComponent<OwnProps> = ({
   toggleRiskPanel,
   behandlingId,
   behandlingVersjon,
+  faresignalVurderinger,
 }) => (
   <EkspanderbartpanelBase
     className={styles.hoyRisikoPanelTittel}
@@ -55,6 +57,7 @@ const HoyRisikoTittel: FunctionComponent<OwnProps> = ({
       submitCallback={submitCallback}
       behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
+      faresignalVurderinger={faresignalVurderinger}
     />
   </EkspanderbartpanelBase>
 );

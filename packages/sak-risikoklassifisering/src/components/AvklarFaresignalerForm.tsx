@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
@@ -7,17 +7,20 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
+  ArrowBox,
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm,
+  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
 } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Risikoklassifisering, Aksjonspunkt } from '@fpsak-frontend/types';
+import {
+  Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 
 import faresignalVurdering from '../kodeverk/faresignalVurdering';
 
@@ -28,19 +31,35 @@ const minLength3 = minLength(3);
 
 const formName = 'avklarFaresignalerForm';
 export const begrunnelseFieldName = 'begrunnelse';
-export const radioFieldName = 'avklarFaresignalerRadio';
+export const vurderingerHovedkategori = 'vurderingerHovedkategori';
+export const ikkeReelleVurderingerUnderkategori = 'ikkeReelleVurderingerUnderkategori';
 
 export type VuderFaresignalerAp = {
   kode: string;
-  harInnvirketBehandlingen: boolean;
+  faresignalVurdering: string;
   begrunnelse: string;
 }
 
+type Values = {
+  [begrunnelseFieldName]?: string;
+  [vurderingerHovedkategori]?: string;
+  [ikkeReelleVurderingerUnderkategori]?: string;
+}
+
 interface PureOwnProps {
+  behandlingId: number;
+  behandlingVersjon: number;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering: Risikoklassifisering;
   submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
+  faresignalVurderinger: KodeverkMedNavn[];
+}
+
+interface MappedOwnProps {
+  initialValues: Values;
+  onSubmit: (values: Values) => void;
+  harValgtReelle: boolean;
 }
 
 /**
@@ -48,90 +67,128 @@ interface PureOwnProps {
  *
  * Presentasjonskomponent. Statisk visning av panel som tilsier ingen faresignaler funnet i behandlingen.
  */
-export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & InjectedFormProps> = ({
+export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   readOnly,
   aksjonspunkt,
+  faresignalVurderinger,
+  harValgtReelle,
   ...formProps
-}) => (
-  <FlexContainer>
-    <form onSubmit={formProps.handleSubmit}>
-      <FlexRow>
-        <FlexColumn className={styles.fullWidth}>
-          <TextAreaField
-            name={begrunnelseFieldName}
-            label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}
-            validate={[required, maxLength1500, minLength3, hasValidText]}
-            maxLength={1500}
-            readOnly={readOnly}
-          />
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer sixteenPx />
-      <FlexRow>
-        <FlexColumn>
-          <Normaltekst><FormattedMessage id="Risikopanel.Form.Resultat" /></Normaltekst>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      <FlexRow>
-        <FlexColumn>
-          <RadioGroupField
-            name={radioFieldName}
-            validate={[required]}
-            direction="vertical"
-            readOnly={readOnly}
-            isEdited={!isAksjonspunktOpen(aksjonspunkt.status.kode)}
-          >
-            <RadioOption
-              label={<FormattedMessage id="Risikopanel.Form.Innvirkning" />}
-              value
+}) => {
+  const underkategoriFaresignalVurderinger = useMemo(() => faresignalVurderinger
+    .filter((vurdering) => vurdering.kode !== faresignalVurdering.INNVIRKNING && vurdering.kode !== faresignalVurdering.INGEN_INNVIRKNING),
+  []);
+
+  return (
+    <FlexContainer>
+      <form onSubmit={formProps.handleSubmit}>
+        <FlexRow>
+          <FlexColumn className={styles.fullWidth}>
+            <TextAreaField
+              name={begrunnelseFieldName}
+              label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}
+              validate={[required, maxLength1500, minLength3, hasValidText]}
+              maxLength={1500}
+              readOnly={readOnly}
             />
-            <RadioOption
-              label={<FormattedMessage id="Risikopanel.Form.IngenInnvirkning" />}
-              value={false}
-            />
-          </RadioGroupField>
-        </FlexColumn>
-      </FlexRow>
-      <FlexRow>
-        <FlexColumn>
-          <Hovedknapp
-            mini
-            spinner={formProps.submitting}
-            disabled={!formProps.dirty || readOnly || formProps.submitting}
-            onClick={ariaCheck}
-          >
-            <FormattedMessage id="Risikopanel.Form.Bekreft" />
-          </Hovedknapp>
-        </FlexColumn>
-      </FlexRow>
-    </form>
-  </FlexContainer>
-);
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer sixteenPx />
+        <FlexRow>
+          <FlexColumn>
+            <Normaltekst><FormattedMessage id="Risikopanel.Form.Resultat" /></Normaltekst>
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer eightPx />
+        <FlexRow>
+          <FlexColumn>
+            <RadioGroupField
+              name={vurderingerHovedkategori}
+              validate={[required]}
+              direction="vertical"
+              readOnly={readOnly}
+              isEdited={!isAksjonspunktOpen(aksjonspunkt.status.kode)}
+            >
+              <RadioOption
+                label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INNVIRKNING)?.navn}
+                value={faresignalVurdering.INNVIRKNING}
+              >
+                <>
+                  {harValgtReelle && (
+                  <ArrowBox alignOffset={20}>
+                    <RadioGroupField
+                      name={ikkeReelleVurderingerUnderkategori}
+                      validate={[required]}
+                      direction="vertical"
+                      readOnly={readOnly}
+                    >
+                      {underkategoriFaresignalVurderinger.map((vurdering) => (
+                        <RadioOption
+                          key={vurdering.kode}
+                          label={vurdering.navn}
+                          value={vurdering.kode}
+                        />
+                      ))}
+                    </RadioGroupField>
+                  </ArrowBox>
+                  )}
+                </>
+              </RadioOption>
+              <RadioOption
+                label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INGEN_INNVIRKNING)?.navn}
+                value={faresignalVurdering.INGEN_INNVIRKNING}
+              />
+            </RadioGroupField>
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer sixteenPx />
+        <FlexRow>
+          <FlexColumn>
+            <Hovedknapp
+              mini
+              spinner={formProps.submitting}
+              disabled={!formProps.dirty || readOnly || formProps.submitting}
+              onClick={ariaCheck}
+            >
+              <FormattedMessage id="Risikopanel.Form.Bekreft" />
+            </Hovedknapp>
+          </FlexColumn>
+        </FlexRow>
+      </form>
+    </FlexContainer>
+  );
+};
 
 export const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.risikoklassifisering, (ownProps: PureOwnProps) => ownProps.aksjonspunkt], (risikoklassifisering, aksjonspunkt) => {
+  (ownProps: PureOwnProps) => ownProps.risikoklassifisering,
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkt], (risikoklassifisering, aksjonspunkt): Values => {
   if (aksjonspunkt && aksjonspunkt.begrunnelse && risikoklassifisering && risikoklassifisering.faresignalVurdering) {
+    const { kode } = risikoklassifisering.faresignalVurdering;
     return {
       [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
-      [radioFieldName]: risikoklassifisering.faresignalVurdering.kode === faresignalVurdering.INNVIRKNING,
+      [vurderingerHovedkategori]: kode === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : faresignalVurdering.INNVIRKNING,
+      [ikkeReelleVurderingerUnderkategori]: kode === faresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
     };
   }
   return undefined;
 });
 
-const transformValues = (values): VuderFaresignalerAp => ({
+const utledFaresignalVurderingVerdi = (vurderingHovedkategori: string, vurderingUnderkategori: string): string => (
+  vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : vurderingUnderkategori);
+
+const transformValues = (values: Values): VuderFaresignalerAp => ({
   kode: aksjonspunktCodes.VURDER_FARESIGNALER,
-  harInnvirketBehandlingen: values[radioFieldName],
+  faresignalVurdering: utledFaresignalVurderingVerdi(values[vurderingerHovedkategori], values[ikkeReelleVurderingerUnderkategori]),
   begrunnelse: values[begrunnelseFieldName],
 });
 
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   const onSubmit = (values) => ownProps.submitCallback(transformValues(values));
   const initialValues = buildInitialValues(ownProps);
-  return () => ({
+  return (state: any): MappedOwnProps => ({
     initialValues,
     onSubmit,
+    harValgtReelle: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, vurderingerHovedkategori)
+      === faresignalVurdering.INNVIRKNING,
   });
 };
 

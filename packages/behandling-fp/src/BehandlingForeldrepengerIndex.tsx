@@ -103,7 +103,8 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps> = ({
         .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
       fjernVerge: (params) => fjernVerge(params)
         .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
-      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params),
+      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params)
+        .then((behandlingEtterRisikoAp) => setBehandling(behandlingEtterRisikoAp)),
     });
 
     requestFpApi.setRequestPendingHandler(setRequestPendingMessage);

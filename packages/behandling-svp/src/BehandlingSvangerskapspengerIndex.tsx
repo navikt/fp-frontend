@@ -98,7 +98,8 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
       fjernVerge: (params) => fjernVerge(params)
         .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
-      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params),
+      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params)
+        .then((behandlingEtterRisikoAp) => setBehandling(behandlingEtterRisikoAp)),
     });
 
     requestSvpApi.setRequestPendingHandler(setRequestPendingMessage);

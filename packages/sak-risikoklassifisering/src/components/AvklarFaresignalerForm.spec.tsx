@@ -8,7 +8,7 @@ import { Risikoklassifisering } from '@fpsak-frontend/types';
 import faresignalVurdering from '../kodeverk/faresignalVurdering';
 
 import {
-  AvklarFaresignalerForm, begrunnelseFieldName, buildInitialValues, radioFieldName,
+  AvklarFaresignalerForm, begrunnelseFieldName, buildInitialValues, vurderingerHovedkategori, ikkeReelleVurderingerUnderkategori,
 } from './AvklarFaresignalerForm';
 
 const mockAksjonspunkt = (status, begrunnelse) => ({
@@ -38,6 +38,20 @@ const mockRisikoklassifisering = (kode) => ({
   iayFaresignaler: undefined,
 });
 
+const faresignalVurderinger = [{
+  kode: faresignalVurdering.INNVIRKNING,
+  navn: 'Innvirkning',
+  kodeverk: 'FARESIGNAL',
+}, {
+  kode: faresignalVurdering.INGEN_INNVIRKNING,
+  navn: 'Ingen innvirkning',
+  kodeverk: 'FARESIGNAL',
+}, {
+  kode: 'UNDERARSAK',
+  navn: 'Eksempel på underårsak',
+  kodeverk: 'FARESIGNAL',
+}];
+
 describe('<AvklarFaresignalerForm>', () => {
   it('skal teste at komponent mountes korrekt med inputfelter', () => {
     const wrapper = shallow(<AvklarFaresignalerForm
@@ -45,6 +59,11 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
+      behandlingId={1}
+      behandlingVersjon={2}
+      faresignalVurderinger={faresignalVurderinger}
+      onSubmit={() => undefined}
+      harValgtReelle={false}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
@@ -58,22 +77,68 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
+      behandlingId={1}
+      behandlingVersjon={2}
+      faresignalVurderinger={faresignalVurderinger}
+      onSubmit={() => undefined}
+      harValgtReelle={false}
       {...reduxFormPropsMock}
     />);
-    const textArea = wrapper.find('TextAreaField');
+
+    const textArea = wrapper.find(TextAreaField);
     expect(textArea.props().readOnly).toBe(true);
 
-    const radioGroup = wrapper.find('RadioGroupField');
+    const radioGroup = wrapper.find(RadioGroupField);
     expect(radioGroup.props().readOnly).toBe(true);
     expect(radioGroup.prop('isEdited')).toBe(true);
   });
 
-  it('skal teste at buildInitialValues gir korrekte verdier', () => {
+  it('skal vise ekstra radioknapper når en har valgt faresignal ikke reell', () => {
+    const wrapper = shallow(<AvklarFaresignalerForm
+      readOnly
+      aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
+      submitCallback={() => undefined}
+      risikoklassifisering={{} as Risikoklassifisering}
+      behandlingId={1}
+      behandlingVersjon={2}
+      faresignalVurderinger={faresignalVurderinger}
+      onSubmit={() => undefined}
+      harValgtReelle
+      {...reduxFormPropsMock}
+    />);
+
+    const radioGroup = wrapper.find(RadioGroupField);
+    expect(radioGroup).toHaveLength(2);
+
+    const radioOptionsGroup1 = radioGroup.at(0).find(RadioOption);
+    expect(radioOptionsGroup1).toHaveLength(3);
+    expect(radioOptionsGroup1.at(0).prop('label')).toBe('Innvirkning');
+    expect(radioOptionsGroup1.at(2).prop('label')).toBe('Ingen innvirkning');
+
+    const radioOptionsGroup2 = radioGroup.at(1).find(RadioOption);
+    expect(radioOptionsGroup2).toHaveLength(1);
+    expect(radioOptionsGroup2.prop('label')).toBe('Eksempel på underårsak');
+  });
+
+  it('skal teste at buildInitialValues gir korrekte verdier når vurdering er en underårsak til Innvirkning', () => {
     const expectedInitialValues = {
       [begrunnelseFieldName]: 'Dette er en begrunnelse',
-      [radioFieldName]: true,
+      [vurderingerHovedkategori]: faresignalVurdering.INNVIRKNING,
+      [ikkeReelleVurderingerUnderkategori]: 'EKSEMPEL_PA_UNDERARSAK',
     };
-    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering(faresignalVurdering.INNVIRKNING),
+    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering('EKSEMPEL_PA_UNDERARSAK'),
+      mockAksjonspunkt('UTFO', 'Dette er en begrunnelse'));
+
+    expect(actualValues).toEqual(expectedInitialValues);
+  });
+
+  it('skal teste at buildInitialValues gir korrekte verdier når vurdering er Ingen Innvirkning', () => {
+    const expectedInitialValues = {
+      [begrunnelseFieldName]: 'Dette er en begrunnelse',
+      [vurderingerHovedkategori]: faresignalVurdering.INGEN_INNVIRKNING,
+      [ikkeReelleVurderingerUnderkategori]: undefined,
+    };
+    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering(faresignalVurdering.INGEN_INNVIRKNING),
       mockAksjonspunkt('UTFO', 'Dette er en begrunnelse'));
 
     expect(actualValues).toEqual(expectedInitialValues);
