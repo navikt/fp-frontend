@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Risikoklassifisering, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import kontrollresultatKode from './kodeverk/kontrollresultatKode';
 import ManglendeKlassifiseringPanel from './components/ManglendeKlassifiseringPanel';
@@ -33,6 +34,7 @@ interface OwnProps {
   readOnly: boolean;
   submitAksjonspunkt: (verdier: VuderFaresignalerAp) => Promise<any>;
   toggleRiskPanel: () => void;
+  alleKodeverk: {[key: string]: [KodeverkMedNavn]};
 }
 
 /**
@@ -51,9 +53,12 @@ const RisikoklassifiseringSakIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   submitAksjonspunkt,
   toggleRiskPanel,
+  alleKodeverk,
 }) => {
   const harIkkeHoyRisikoklassifisering = harResultatkode(kontrollresultatKode.IKKE_HOY, risikoklassifisering);
   const harHoyRisikoklassifisering = harResultatkode(kontrollresultatKode.HOY, risikoklassifisering);
+  const faresignalVurderinger = alleKodeverk[kodeverkTyper.FARESIGNAL_VURDERING];
+
   return (
     <RawIntlProvider value={intl}>
       { harIkkeHoyRisikoklassifisering && (
@@ -69,6 +74,7 @@ const RisikoklassifiseringSakIndex: FunctionComponent<OwnProps> = ({
           isRiskPanelOpen={isPanelOpen}
           submitCallback={submitAksjonspunkt}
           toggleRiskPanel={toggleRiskPanel}
+          faresignalVurderinger={faresignalVurderinger}
         />
       )}
       {(!harIkkeHoyRisikoklassifisering && !harHoyRisikoklassifisering) && (
