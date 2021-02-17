@@ -37,6 +37,12 @@ export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function us
   };
 };
 
+const DEFAULT_STATE = {
+  state: RestApiState.NOT_STARTED,
+  error: undefined,
+  data: undefined,
+};
+
 /**
   * Hook som utfører et restkall ved mount. En kan i tillegg legge ved en dependencies-liste som kan trigge ny henting når data
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
@@ -46,11 +52,7 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
 ):RestApiData<T> {
   const allOptions = { ...defaultOptions, ...options };
 
-  const [data, setData] = useState({
-    state: RestApiState.NOT_STARTED,
-    error: undefined,
-    data: undefined,
-  });
+  const [data, setData] = useState(DEFAULT_STATE);
 
   useEffect(() => {
     if (requestApi.hasPath(key) && !allOptions.suspendRequest) {
@@ -78,14 +80,13 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
           });
         });
     } else if (!requestApi.hasPath(key)) {
-      setData({
-        state: RestApiState.NOT_STARTED,
-        error: undefined,
-        data: undefined,
-      });
+      setData(DEFAULT_STATE);
     }
   }, [...allOptions.updateTriggers]);
 
+  if (!requestApi.hasPath(key) && allOptions.suspendRequest) {
+    return DEFAULT_STATE;
+  }
   return data;
 };
 
