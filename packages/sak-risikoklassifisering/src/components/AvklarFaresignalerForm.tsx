@@ -173,7 +173,7 @@ export const buildInitialValues = createSelector([
 });
 
 const utledFaresignalVurderingVerdi = (vurderingHovedkategori: string, vurderingUnderkategori: string): string => (
-  vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INNVIRKNING : vurderingUnderkategori);
+  vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : vurderingUnderkategori);
 
 const transformValues = (values: Values): VuderFaresignalerAp => ({
   kode: aksjonspunktCodes.VURDER_FARESIGNALER,
