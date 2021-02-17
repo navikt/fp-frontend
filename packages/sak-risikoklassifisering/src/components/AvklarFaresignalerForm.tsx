@@ -59,7 +59,7 @@ interface PureOwnProps {
 interface MappedOwnProps {
   initialValues: Values;
   onSubmit: (values: Values) => void;
-  harValgtIkkeReelle: boolean;
+  harValgtReelle: boolean;
 }
 
 /**
@@ -71,7 +71,7 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
   readOnly,
   aksjonspunkt,
   faresignalVurderinger,
-  harValgtIkkeReelle,
+  harValgtReelle,
   ...formProps
 }) => {
   const underkategoriFaresignalVurderinger = useMemo(() => faresignalVurderinger
@@ -111,30 +111,33 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
               <RadioOption
                 label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INNVIRKNING)?.navn}
                 value={faresignalVurdering.INNVIRKNING}
-              />
+              >
+                <>
+                  {harValgtReelle && (
+                  <ArrowBox alignOffset={20}>
+                    <RadioGroupField
+                      name={ikkeReelleVurderingerUnderkategori}
+                      validate={[required]}
+                      direction="vertical"
+                      readOnly={readOnly}
+                    >
+                      {underkategoriFaresignalVurderinger.map((vurdering) => (
+                        <RadioOption
+                          key={vurdering.kode}
+                          label={vurdering.navn}
+                          value={vurdering.kode}
+                        />
+                      ))}
+                    </RadioGroupField>
+                  </ArrowBox>
+                  )}
+                </>
+              </RadioOption>
               <RadioOption
                 label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INGEN_INNVIRKNING)?.navn}
                 value={faresignalVurdering.INGEN_INNVIRKNING}
               />
             </RadioGroupField>
-            {harValgtIkkeReelle && (
-              <ArrowBox alignOffset={20}>
-                <RadioGroupField
-                  name={ikkeReelleVurderingerUnderkategori}
-                  validate={[required]}
-                  direction="vertical"
-                  readOnly={readOnly}
-                >
-                  {underkategoriFaresignalVurderinger.map((vurdering) => (
-                    <RadioOption
-                      key={vurdering.kode}
-                      label={vurdering.navn}
-                      value={vurdering.kode}
-                    />
-                  ))}
-                </RadioGroupField>
-              </ArrowBox>
-            )}
           </FlexColumn>
         </FlexRow>
         <VerticalSpacer sixteenPx />
@@ -162,15 +165,15 @@ export const buildInitialValues = createSelector([
     const { kode } = risikoklassifisering.faresignalVurdering;
     return {
       [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
-      [vurderingerHovedkategori]: kode === faresignalVurdering.INNVIRKNING ? faresignalVurdering.INNVIRKNING : faresignalVurdering.INGEN_INNVIRKNING,
-      [ikkeReelleVurderingerUnderkategori]: kode === faresignalVurdering.INNVIRKNING ? undefined : kode,
+      [vurderingerHovedkategori]: kode === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : faresignalVurdering.INNVIRKNING,
+      [ikkeReelleVurderingerUnderkategori]: kode === faresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
     };
   }
   return undefined;
 });
 
 const utledFaresignalVurderingVerdi = (vurderingHovedkategori: string, vurderingUnderkategori: string): string => (
-  vurderingHovedkategori === faresignalVurdering.INNVIRKNING ? faresignalVurdering.INNVIRKNING : vurderingUnderkategori);
+  vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INNVIRKNING : vurderingUnderkategori);
 
 const transformValues = (values: Values): VuderFaresignalerAp => ({
   kode: aksjonspunktCodes.VURDER_FARESIGNALER,
@@ -184,8 +187,8 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   return (state: any): MappedOwnProps => ({
     initialValues,
     onSubmit,
-    harValgtIkkeReelle: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, vurderingerHovedkategori)
-      === faresignalVurdering.INGEN_INNVIRKNING,
+    harValgtReelle: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, vurderingerHovedkategori)
+      === faresignalVurdering.INNVIRKNING,
   });
 };
 

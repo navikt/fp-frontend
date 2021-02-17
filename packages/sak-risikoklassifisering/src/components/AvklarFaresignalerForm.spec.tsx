@@ -63,7 +63,7 @@ describe('<AvklarFaresignalerForm>', () => {
       behandlingVersjon={2}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
-      harValgtIkkeReelle={false}
+      harValgtReelle={false}
       {...reduxFormPropsMock}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
@@ -81,7 +81,7 @@ describe('<AvklarFaresignalerForm>', () => {
       behandlingVersjon={2}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
-      harValgtIkkeReelle={false}
+      harValgtReelle={false}
       {...reduxFormPropsMock}
     />);
 
@@ -103,7 +103,7 @@ describe('<AvklarFaresignalerForm>', () => {
       behandlingVersjon={2}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
-      harValgtIkkeReelle
+      harValgtReelle
       {...reduxFormPropsMock}
     />);
 
@@ -111,34 +111,34 @@ describe('<AvklarFaresignalerForm>', () => {
     expect(radioGroup).toHaveLength(2);
 
     const radioOptionsGroup1 = radioGroup.at(0).find(RadioOption);
-    expect(radioOptionsGroup1).toHaveLength(2);
+    expect(radioOptionsGroup1).toHaveLength(3);
     expect(radioOptionsGroup1.at(0).prop('label')).toBe('Innvirkning');
-    expect(radioOptionsGroup1.at(1).prop('label')).toBe('Ingen innvirkning');
+    expect(radioOptionsGroup1.at(2).prop('label')).toBe('Ingen innvirkning');
 
     const radioOptionsGroup2 = radioGroup.at(1).find(RadioOption);
     expect(radioOptionsGroup2).toHaveLength(1);
     expect(radioOptionsGroup2.prop('label')).toBe('Eksempel på underårsak');
   });
 
-  it('skal teste at buildInitialValues gir korrekte verdier når vurdering er Innvirkning', () => {
+  it('skal teste at buildInitialValues gir korrekte verdier når vurdering er en underårsak til Innvirkning', () => {
     const expectedInitialValues = {
       [begrunnelseFieldName]: 'Dette er en begrunnelse',
       [vurderingerHovedkategori]: faresignalVurdering.INNVIRKNING,
-      [ikkeReelleVurderingerUnderkategori]: undefined,
+      [ikkeReelleVurderingerUnderkategori]: 'EKSEMPEL_PA_UNDERARSAK',
     };
-    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering(faresignalVurdering.INNVIRKNING),
+    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering('EKSEMPEL_PA_UNDERARSAK'),
       mockAksjonspunkt('UTFO', 'Dette er en begrunnelse'));
 
     expect(actualValues).toEqual(expectedInitialValues);
   });
 
-  it('skal teste at buildInitialValues gir korrekte verdier når vurdering er en underårsak til Ingen innvirkning', () => {
+  it('skal teste at buildInitialValues gir korrekte verdier når vurdering er Ingen Innvirkning', () => {
     const expectedInitialValues = {
       [begrunnelseFieldName]: 'Dette er en begrunnelse',
       [vurderingerHovedkategori]: faresignalVurdering.INGEN_INNVIRKNING,
-      [ikkeReelleVurderingerUnderkategori]: 'EKSEMPEL_PA_UNDERARSAK',
+      [ikkeReelleVurderingerUnderkategori]: undefined,
     };
-    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering('EKSEMPEL_PA_UNDERARSAK'),
+    const actualValues = buildInitialValues.resultFunc(mockRisikoklassifisering(faresignalVurdering.INGEN_INNVIRKNING),
       mockAksjonspunkt('UTFO', 'Dette er en begrunnelse'));
 
     expect(actualValues).toEqual(expectedInitialValues);
