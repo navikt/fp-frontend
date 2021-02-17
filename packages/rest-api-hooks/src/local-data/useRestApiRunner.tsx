@@ -14,15 +14,17 @@ interface RestApiData<T> {
   data?: T;
 }
 
+const DEFAULT_STATE = {
+  state: RestApiState.NOT_STARTED,
+  error: undefined,
+  data: undefined,
+};
+
 /**
  * For mocking i unit-test
  */
 export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
-  const [data, setData] = useState({
-    state: RestApiState.NOT_STARTED,
-    data: undefined,
-    error: undefined,
-  });
+  const [data, setData] = useState(DEFAULT_STATE);
 
   const startRequest = (params?: any):Promise<T> => {
     const response = requestApi.startRequest(key, params);
@@ -45,11 +47,7 @@ export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => funct
  * Hook som gir deg ein funksjon til å starte restkall, i tillegg til kallets status/resultat/feil
  */
 const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
-  const [data, setData] = useState({
-    state: RestApiState.NOT_STARTED,
-    data: undefined,
-    error: undefined,
-  });
+  const [data, setData] = useState(DEFAULT_STATE);
 
   const startRequest = useCallback((params?: any, keepData = false):Promise<T> => {
     if (requestApi.hasPath(key)) {
@@ -79,20 +77,12 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
           throw error;
         });
     }
-    setData({
-      state: RestApiState.NOT_STARTED,
-      error: undefined,
-      data: undefined,
-    });
+    setData(DEFAULT_STATE);
     return undefined;
   }, []);
 
   const resetRequestData = useCallback(() => {
-    setData({
-      state: RestApiState.NOT_STARTED,
-      data: undefined,
-      error: undefined,
-    });
+    setData(DEFAULT_STATE);
   }, []);
 
   return {
