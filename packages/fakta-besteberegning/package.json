@@ -11,9 +11,9 @@
     "@fpsak-frontend/utils": "1.0.0",
     "moment": "^2.29.1",
     "nav-frontend-core": "5.0.11",
-    "nav-frontend-grid": "1.0.49",
-    "nav-frontend-typografi": "3.0.2",
+    "nav-frontend-grid": "1.0.50",
+    "nav-frontend-typografi": "3.0.3",
     "react": "^16.14.0",
-    "react-intl": "^5.12.0"
+    "react-intl": "^5.12.3"
   }
 }
