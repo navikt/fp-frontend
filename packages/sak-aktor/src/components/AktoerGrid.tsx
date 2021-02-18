@@ -31,7 +31,6 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VisittkortSakIndex
-        alleKodeverk={alleKodeverk}
         fagsak={vFagsak as Fagsak}
         fagsakPerson={aktorInfo.person}
       />
