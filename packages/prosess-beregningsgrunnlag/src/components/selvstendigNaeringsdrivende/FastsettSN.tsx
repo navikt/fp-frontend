@@ -21,6 +21,10 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
+import {
+  NyIArbeidslivetruttoNæringTransformed,
+  NyIArbeidslivetValues,
+} from '../../types/NæringAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -40,14 +44,8 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
-  transformValuesMedBegrunnelse?: (values: any) => {
-    begrunnelse: string;
-    bruttoBeregningsgrunnlag: number;
-  }
-  transformValuesUtenBegrunnelse?: (values: any) => {
-    bruttoBeregningsgrunnlag: number;
-  }
+  buildInitialValuesNyIArbeidslivet: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => NyIArbeidslivetValues;
+  transformValuesNyIArbeidslivet: (values: NyIArbeidslivetValues) => NyIArbeidslivetruttoNæringTransformed
 }
 
 /**
@@ -121,34 +119,23 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
   );
 };
 
-FastsettSNImpl.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter) => {
+FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
+  gjeldendeAksjonspunkter: Aksjonspunkt[]): NyIArbeidslivetValues => {
   if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
     return undefined;
   }
-
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-
-  // Vi vil kun ha et av disse aksjonspunktene om gangen
-  const fastsettBruttoEtterVarigEndring = gjeldendeAksjonspunkter
-    .find((ap) => ap.definisjon.kode === FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE);
-  const fastsettBruttoNyIArbeidslivet = gjeldendeAksjonspunkter
+  const nyIArbeidslivetAP = gjeldendeAksjonspunkter
     .find((ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
-  const gjeldendeAP = fastsettBruttoEtterVarigEndring || fastsettBruttoNyIArbeidslivet;
-
-  if (gjeldendeAP || (snAndel.overstyrtPrAar || snAndel.overstyrtPrAar === 0)) {
-    return {
-      [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
-      [begrunnelseFieldname]: gjeldendeAP && gjeldendeAP.begrunnelse ? gjeldendeAP.begrunnelse : '',
-    };
-  }
-  return undefined;
+  return {
+    [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
+    [begrunnelseFieldname]: nyIArbeidslivetAP && nyIArbeidslivetAP.begrunnelse ? nyIArbeidslivetAP.begrunnelse : '',
+  } as NyIArbeidslivetValues;
 };
 
-FastsettSNImpl.transformValuesMedBegrunnelse = (values) => ({
+FastsettSNImpl.transformValuesNyIArbeidslivet = (values: NyIArbeidslivetValues): NyIArbeidslivetruttoNæringTransformed => ({
+  kode: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   begrunnelse: values[begrunnelseFieldname],
-  bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),
-});
-FastsettSNImpl.transformValuesUtenBegrunnelse = (values) => ({
   bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),
 });
 

@@ -24,6 +24,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
+import VurderVarigEndretTransformed, { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -41,8 +42,8 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
-  transformValues?: (values: any) => any;
+  buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => VurderOgFastsettValues;
+  transformValues: (values: VurderOgFastsettValues) => VurderVarigEndretTransformed;
 }
 
 /**
@@ -152,7 +153,8 @@ VurderVarigEndretEllerNyoppstartetSNImpl.defaultProps = {
   erVarigEndretNaering: false,
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter) => {
+VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler: BeregningsgrunnlagAndel[],
+  gjeldendeAksjonspunkter: Aksjonspunkt[]): VurderOgFastsettValues => {
   if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
     return undefined;
   }
@@ -170,10 +172,14 @@ VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler,
   return undefined;
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values) => ({
-  begrunnelse: values[begrunnelseFieldname],
-  erVarigEndretNaering: values[varigEndringRadioname],
-  bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),
-});
+VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: VurderOgFastsettValues): VurderVarigEndretTransformed => {
+  const erVarigEndring = values[varigEndringRadioname];
+  return {
+    kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+    begrunnelse: values[begrunnelseFieldname],
+    erVarigEndretNaering: erVarigEndring,
+    bruttoBeregningsgrunnlag: erVarigEndring ? removeSpacesFromNumber(values[fastsettInntektFieldname]) : undefined,
+  };
+};
 
 export default injectIntl(VurderVarigEndretEllerNyoppstartetSNImpl);
