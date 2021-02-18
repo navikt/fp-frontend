@@ -13,7 +13,7 @@
     "@fpsak-frontend/utils": "1.0.0",
     "nav-frontend-skjema": "3.0.51",
     "nav-frontend-skjema-style": "2.0.31",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-intl": "^5.12.3",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
