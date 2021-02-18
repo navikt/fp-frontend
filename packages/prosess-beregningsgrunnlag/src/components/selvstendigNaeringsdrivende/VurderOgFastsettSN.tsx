@@ -7,14 +7,18 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
-import VurderVarigEndretEllerNyoppstartetSN, { varigEndringRadioname, VurderVarigEndretEllerNyoppstartetSNImpl } from './VurderVarigEndretEllerNyoppstartetSN';
+import VurderVarigEndretEllerNyoppstartetSN, { VurderVarigEndretEllerNyoppstartetSNImpl } from './VurderVarigEndretEllerNyoppstartetSN';
 import FastsettSN, { FastsettSNImpl } from './FastsettSN';
+import VurderVarigEndretTransformed, {
+  NyIArbeidslivetruttoNæringTransformed,
+  NyIArbeidslivetValues,
+  VurderOgFastsettValues,
+} from '../../types/NæringAksjonspunktTsType';
 
 const FORM_NAME = 'BeregningForm';
 const {
   FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-  FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
 } = aksjonspunktCodes;
 
 const finnSnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => aksjonspunkter && aksjonspunkter.find(
@@ -34,8 +38,9 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
-  transformValues?: (values: any, gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
+  buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => VurderOgFastsettValues | NyIArbeidslivetValues;
+  transformValues: (values: VurderOgFastsettValues | NyIArbeidslivetValues, gjeldendeAksjonspunkter: Aksjonspunkt[])
+    => VurderVarigEndretTransformed | NyIArbeidslivetruttoNæringTransformed;
 }
 
 /**
@@ -100,46 +105,24 @@ const mapStateToPropsFactory = (initialState, ownPropsStatic) => {
   });
 };
 
-const VurderOgFastsettSN = connect(mapStateToPropsFactory)(VurderOgFastsettSNImpl);
-
-VurderOgFastsettSN.buildInitialValues = (relevanteAndeler, gjeldendeAksjonspunkter) => ({
-  ...VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues(relevanteAndeler, gjeldendeAksjonspunkter),
-  ...FastsettSNImpl.buildInitialValues(relevanteAndeler, gjeldendeAksjonspunkter),
-});
-
-const transformValuesMedVarigEndretNyoppstartet = (values, gjeldendeAksjonspunkter) => {
-  // Utgått aksjonspunkt som må håndteres intill data er migrert
-  if (hasAksjonspunkt(FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE, gjeldendeAksjonspunkter)) {
-    const aksjonspunkter = [{
-      kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-      ...VurderVarigEndretEllerNyoppstartetSNImpl.transformValues(values),
-    }];
-    aksjonspunkter.push({
-      kode: FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
-      ...FastsettSNImpl.transformValuesMedBegrunnelse(values),
-    });
-    return aksjonspunkter;
-  }
-  return [{
-    kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-    ...VurderVarigEndretEllerNyoppstartetSNImpl.transformValues(values),
-  }];
-};
-
-VurderOgFastsettSN.transformValues = (values, gjeldendeAksjonspunkter) => {
+VurderOgFastsettSNImpl.buildInitialValues = (relevanteAndeler: BeregningsgrunnlagAndel[],
+  gjeldendeAksjonspunkter: Aksjonspunkt[]): VurderOgFastsettValues | NyIArbeidslivetValues => {
   if (hasAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, gjeldendeAksjonspunkter)) {
-    return [{
-      kode: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-      ...FastsettSNImpl.transformValuesMedBegrunnelse(values),
-    }];
+    return FastsettSNImpl.buildInitialValuesNyIArbeidslivet(relevanteAndeler, gjeldendeAksjonspunkter);
   }
-  if (values[varigEndringRadioname]) {
-    return transformValuesMedVarigEndretNyoppstartet(values, gjeldendeAksjonspunkter);
-  }
-  return [{
-    kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-    ...VurderVarigEndretEllerNyoppstartetSNImpl.transformValues(values),
-  }];
+  return {
+    ...VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues(relevanteAndeler, gjeldendeAksjonspunkter),
+  };
 };
+
+VurderOgFastsettSNImpl.transformValues = (values: VurderOgFastsettValues | NyIArbeidslivetValues, gjeldendeAksjonspunkter: Aksjonspunkt[]):
+  VurderVarigEndretTransformed | NyIArbeidslivetruttoNæringTransformed => {
+  if (hasAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, gjeldendeAksjonspunkter)) {
+    return FastsettSNImpl.transformValuesNyIArbeidslivet(values as NyIArbeidslivetValues);
+  }
+  return VurderVarigEndretEllerNyoppstartetSNImpl.transformValues(values as VurderOgFastsettValues);
+};
+
+const VurderOgFastsettSN = connect(mapStateToPropsFactory)(VurderOgFastsettSNImpl);
 
 export default VurderOgFastsettSN;
