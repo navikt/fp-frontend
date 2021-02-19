@@ -19,8 +19,8 @@ interface OwnProps {
   paneler?: ((props: any) => ReactElement)[];
   valgtFaktaSteg?: string;
   oppdaterFaktaPanelIUrl: (faktanavn: string) => void;
-  setApentFaktaPanel: (panelData: { urlCode: string, textCode: string }) => void,
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
+  setApentFaktaPanel: (panelData: { urlCode: string, text: string }) => void,
+  apentFaktaPanelInfo?: {urlCode: string, text: string };
 }
 
 const FaktaContainer: FunctionComponent<OwnProps> = ({
@@ -34,7 +34,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
   const [menyData, setMenyData] = useState<FaktaPanelMenyData[]>([]);
   const registrerFaktaPanel = useCallback((nyData: FaktaPanelMenyData) => {
     if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
-      setApentFaktaPanel({ urlCode: nyData.id, textCode: nyData.tekst });
+      setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst });
     }
 
     setMenyData((oldData) => {

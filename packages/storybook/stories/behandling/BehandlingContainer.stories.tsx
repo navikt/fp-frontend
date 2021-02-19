@@ -131,6 +131,7 @@ export const visKunFaktaPaneler = () => {
       valgtFaktaSteg={valgtFaktaPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel, faktaPanel) => setValgtFaktaPanel(faktaPanel)}
       faktaPaneler={faktaPaneler}
+      oppdaterBehandlingVersjon={() => undefined}
     />
   );
 };
@@ -143,6 +144,7 @@ export const visKunProsessPaneler = () => {
       valgtProsessSteg={valgtProsessPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel) => setValgtProsessPanel(prosessPanel)}
       prosessPaneler={prosessPaneler}
+      oppdaterBehandlingVersjon={() => undefined}
     />
   );
 };

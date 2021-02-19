@@ -19,7 +19,7 @@ const intl = createIntl({
 
 interface FaktaPanelInfo {
   urlCode: string;
-  textCode: string;
+  text: string;
 }
 
 interface OwnProps {

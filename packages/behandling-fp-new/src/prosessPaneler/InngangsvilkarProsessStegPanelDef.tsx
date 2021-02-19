@@ -1,7 +1,6 @@
 import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -40,7 +39,7 @@ interface OwnProps {
   behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
+  apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
 }
@@ -88,10 +87,12 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const erAktiv = !apentFaktaPanelInfo
     && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
 
+  const intl = getPackageIntl();
+
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.INNGANGSVILKAR,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
+    intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     skalVises,
     erAktiv,
     harApentAksjonspunkt,
@@ -114,8 +115,8 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
             {apentFaktaPanelInfo && erIkkeFerdigbehandlet
               ? [
                 <React.Fragment key="1">
-                  <FormattedMessage id="InngangsvilkarPanel.AvventerAvklaringAv" />
-                  <a href="" onClick={oppdaterUrl}><FormattedMessage id={apentFaktaPanelInfo.textCode} /></a>
+                  {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
+                  <a href="" onClick={oppdaterUrl}>{apentFaktaPanelInfo.text}</a>
                 </React.Fragment>,
               ]
               : aksjonspunktTekster.map((tekst) => tekst)}

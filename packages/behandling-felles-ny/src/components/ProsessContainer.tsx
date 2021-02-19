@@ -16,7 +16,7 @@ interface OwnProps {
   valgtProsessSteg?: string;
   oppdaterProsessPanelIUrl: (prosessnavn: string) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
+  apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterBehandlingVersjon: (versjon: number) => void;
 }
 
