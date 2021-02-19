@@ -184,8 +184,6 @@ describe('<VisittkortPanel>', () => {
       fagsakPerson={fagsakPerson}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
-      alleKodeverk={{}}
-      sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(0);
@@ -203,8 +201,6 @@ describe('<VisittkortPanel>', () => {
       fagsakPerson={fagsakPerson}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
-      alleKodeverk={{}}
-      sprakkode={{ kode: 'NN', kodeverk: '' }}
       harTilbakekrevingVerge
     />);
 
@@ -224,8 +220,6 @@ describe('<VisittkortPanel>', () => {
       personopplysninger={personopplysningerSoker}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
-      alleKodeverk={{}}
-      sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(1);
@@ -248,8 +242,6 @@ describe('<VisittkortPanel>', () => {
       }}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
-      alleKodeverk={{}}
-      sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(1);
@@ -279,8 +271,6 @@ describe('<VisittkortPanel>', () => {
       }}
       familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
-      alleKodeverk={{}}
-      sprakkode={{ kode: 'NN', kodeverk: '' }}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(1);

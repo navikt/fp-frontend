@@ -13,8 +13,6 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 
-import alleKodeverk from '../mocks/alleKodeverk.json';
-
 export default {
   title: 'sak/sak-visittkort',
   component: VisittkortSakIndex,
@@ -184,8 +182,6 @@ export const visVisittkortNårEnHarBegrensetMedInformasjon = () => (
     fagsakPerson={fagsakPerson}
     familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
-    alleKodeverk={alleKodeverk as any}
-    sprakkode={{ kode: 'NN', kodeverk: 'SPRAK' }}
   />
 );
 
@@ -196,8 +192,6 @@ export const visVisittkortNårEnHarPersonopplysninger = () => (
     personopplysninger={personopplysningerSoker}
     familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
-    alleKodeverk={alleKodeverk as any}
-    sprakkode={{ kode: 'NN', kodeverk: 'SPRAK' }}
   />
 );
 
@@ -211,8 +205,6 @@ export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
     }}
     familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
-    alleKodeverk={alleKodeverk as any}
-    sprakkode={{ kode: 'NN', kodeverk: 'SPRAK' }}
   />
 );
 
@@ -229,7 +221,5 @@ export const visVisittkortForAnnenPartDerAktørIdErUkjent = () => (
     }}
     familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
-    alleKodeverk={alleKodeverk as any}
-    sprakkode={{ kode: 'NN', kodeverk: 'SPRAK' }}
   />
 );

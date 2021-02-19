@@ -6,7 +6,7 @@ import { Route, Redirect, useLocation } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson, Kodeverk,
+  Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson, Kodeverk,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -59,8 +59,6 @@ const FagsakIndex: FunctionComponent = () => {
     paramName: 'saksnummer',
     parse: (saksnummerFromUrl) => Number.parseInt(saksnummerFromUrl, 10),
   });
-
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
 
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
@@ -178,8 +176,6 @@ const FagsakIndex: FunctionComponent = () => {
               personopplysninger={behandlingPersonopplysninger}
               familieHendelse={behandlingFamilieHendelse}
               lenkeTilAnnenPart={annenPartBehandling ? finnLenkeTilAnnenPart(annenPartBehandling) : undefined}
-              alleKodeverk={alleKodeverk}
-              sprakkode={behandling?.sprakkode}
               fagsak={fagsak}
               fagsakPerson={fagsakPerson}
               harTilbakekrevingVerge={erTilbakekreving(behandling?.type) && harVerge}

@@ -7,11 +7,10 @@ import {
 } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  Kodeverk, KodeverkMedNavn, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
+  Kodeverk, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
 } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
-import VisittkortDetaljerPopup from './VisittkortDetaljerPopup';
 import VisittkortLabels from './VisittkortLabels';
 import VisittkortBarnInfoPanel from './VisittkortBarnInfoPanel';
 
@@ -27,8 +26,6 @@ const utledKjonn = (kjonn: Kodeverk): Gender => {
 interface OwnProps {
   fagsak: Fagsak;
   fagsakPerson: FagsakPerson;
-  alleKodeverk: { [key: string]: KodeverkMedNavn[] };
-  sprakkode?: Kodeverk;
   personopplysninger?: Personopplysninger;
   familieHendelse?: FamilieHendelseSamling;
   lenkeTilAnnenPart?: string;
@@ -42,8 +39,6 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   personopplysninger,
   familieHendelse,
   lenkeTilAnnenPart,
-  alleKodeverk,
-  sprakkode,
   harTilbakekrevingVerge,
 }) => {
   const erMor = fagsak.relasjonsRolleType.kode === relasjonsRolleType.MOR;
@@ -83,13 +78,6 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
               fodselsnummer={soker.fnr}
               gender={utledKjonn(soker.navBrukerKjonn)}
               url={lenkeTilAnnenPart}
-              renderMenuContent={(): JSX.Element => (
-                <VisittkortDetaljerPopup
-                  personopplysninger={soker}
-                  alleKodeverk={alleKodeverk}
-                  sprakkode={sprakkode}
-                />
-              )}
               renderLabelContent={(): JSX.Element => <VisittkortLabels personopplysninger={soker} />}
               isActive={erMor}
             />
@@ -101,13 +89,6 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                 fodselsnummer={annenPart.fnr}
                 gender={utledKjonn(annenPart.navBrukerKjonn)}
                 url={lenkeTilAnnenPart}
-                renderMenuContent={(): JSX.Element => (
-                  <VisittkortDetaljerPopup
-                    personopplysninger={annenPart}
-                    alleKodeverk={alleKodeverk}
-                    sprakkode={sprakkode}
-                  />
-                )}
                 isActive={!erMor}
               />
             </FlexColumn>
