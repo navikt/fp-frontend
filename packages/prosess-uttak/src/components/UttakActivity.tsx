@@ -519,7 +519,9 @@ const transformValues = (
   }
   const aktiviteter = nyeVerdier.UttakFieldArray.map((a) => {
     const { ...bekreftetAktivitet } = a;
-    bekreftetAktivitet.stønadskontoType.navn = uttakPeriodeNavn[a.stønadskontoType.kode];
+    const kode = a.stønadskontoType.kode === '' ? uttakPeriodeNavn.UDEFINERT : a.stønadskontoType.kode;
+    bekreftetAktivitet.stønadskontoType.kode = kode;
+    bekreftetAktivitet.stønadskontoType.navn = uttakPeriodeNavn[kode];
     return bekreftetAktivitet;
   });
 
