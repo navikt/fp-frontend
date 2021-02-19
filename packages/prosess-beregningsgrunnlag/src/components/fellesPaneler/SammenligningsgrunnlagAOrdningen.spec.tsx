@@ -4,7 +4,7 @@ import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import { RelevanteStatuserProp } from '@fpsak-frontend/types';
-import { shallow } from 'enzyme';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import { SammenligningsgrunnlagAOrdningenImpl } from './SammenligningsgrunnlagAOrdningen';
 
 const relevanteStatuser = {
@@ -80,7 +80,7 @@ const skjeringstidspunktDato = '2019-09-16';
 
 describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
   it('Skal se at panelet ikke rendrer ved manglende SammenligningsgrunnlagInntekt', () => {
-    const wrapper = shallow(<SammenligningsgrunnlagAOrdningenImpl
+    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={{}}
       skjeringstidspunktDato={skjeringstidspunktDato}
@@ -91,7 +91,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
   });
   it('Skal se at panelet ikke rendrer ved SammenligningsgrunnlagInntekt og SN', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = true;
-    const wrapper = shallow(<SammenligningsgrunnlagAOrdningenImpl
+    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
@@ -102,7 +102,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
   });
   it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt ved kun AT', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
-    const wrapper = shallow(<SammenligningsgrunnlagAOrdningenImpl
+    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
@@ -125,7 +125,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
 
   it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt ved kun AT_FL', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
-    const wrapper = shallow(<SammenligningsgrunnlagAOrdningenImpl
+    const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={inntektsgrunnlagATFL}
       skjeringstidspunktDato={skjeringstidspunktDato}
