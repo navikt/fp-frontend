@@ -115,9 +115,10 @@ const config = {
         loader: 'file-loader',
         options: {
           esModule: false,
-          name: isDevelopment ? '[name]_[hash].[ext]' : '/[name]_[hash].[ext]',
+          name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
         },
         include: [IMAGE_DIR],
+        type: 'javascript/auto',
       }, {
         test: /\.(svg)$/,
         issuer: {
@@ -129,18 +130,20 @@ const config = {
           loader: 'file-loader',
           options: {
             esModule: false,
-            name: isDevelopment ? '[name]_[hash].[ext]' : '/[name]_[hash].[ext]',
+            name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
           },
         }],
         include: [IMAGE_DIR],
+        type: 'javascript/auto',
       },{
         test: /\.(svg)$/,
         loader: 'file-loader',
         options: {
           esModule: false,
-          name: isDevelopment ? '[name]_[hash].[ext]' : '/[name]_[hash].[ext]',
+          name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
         },
         include: [CORE_DIR],
+        type: 'javascript/auto',
       }],
   },
 
@@ -179,7 +182,7 @@ const config = {
         transform: {
           cache: {
             keys: {
-              key: '[hash]',
+              key: '[contenthash]',
             }
           },
         },
