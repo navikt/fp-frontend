@@ -52,7 +52,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     oppdaterProsessPanelIUrl(nyvalgtProsessSteg);
   }, [menyData]);
 
-  const [skalOppdatereFagsakKontekst, toggleSkalOppdatereFagsakContext] = useState(true);
+  const [skalOppdatereFagsakKontekst, toggleOppdatereFagsakContext] = useState(true);
   useEffect(() => {
     if (skalOppdatereFagsakKontekst) {
       oppdaterBehandlingVersjon(behandling.versjon);
@@ -83,7 +83,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
             registrerProsessPanel,
             apentFaktaPanelInfo,
             oppdaterProsessStegOgFaktaPanelIUrl,
-            toggleSkalOppdatereFagsakContext,
+            toggleOppdatereFagsakContext,
             menyData: menyDataSomVises,
           })}
         </React.Fragment>

@@ -68,7 +68,7 @@ const BeregningFaktaPanelDef: FunctionComponent<OwnProps> = ({
       <BeregningFaktaIndex
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...initState}
+        {...initData}
         {...standardPanelProps}
       />
     </FaktaPanelWrapper>

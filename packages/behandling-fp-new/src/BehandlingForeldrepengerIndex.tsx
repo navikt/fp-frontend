@@ -7,7 +7,7 @@ import { ArbeidsgiverOpplysningerWrapper, Behandling } from '@fpsak-frontend/typ
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import {
-  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent,
+  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
@@ -42,14 +42,12 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   opneSokeside,
   setRequestPendingMessage,
 }) => {
-  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
-  const behandling = nyOgForrigeBehandling.current;
-  // const forrigeBehandling = nyOgForrigeBehandling.previous;
+  const [behandling, setNyBehandling] = useState<Behandling>();
 
   const setBehandling = useCallback((nyBehandling) => {
     requestFpApi.resetCache();
     requestFpApi.setLinks(nyBehandling.links);
-    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
+    setNyBehandling(nyBehandling);
   }, []);
 
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiFpHooks
@@ -132,6 +130,10 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   // FIXME BehandlingPaVent
   return (
     <>
+      <ReduxFormStateCleaner
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+      />
       <BehandlingPaVent
         behandling={behandling}
         aksjonspunkter={[] /* fetchedData.aksjonspunkter */}

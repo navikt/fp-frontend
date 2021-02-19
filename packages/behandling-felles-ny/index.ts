@@ -5,6 +5,7 @@ export { default as IverksetterVedtakStatusModal } from './src/components/vedtak
 export { default as BehandlingPaVent } from './src/components/paVent/BehandlingPaVent';
 export { default as ProsessPanelWrapper } from './src/components/ProsessPanelWrapper';
 export { default as FaktaPanelWrapper } from './src/components/FaktaPanelWrapper';
+export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStateCleaner';
 export { default as StandardBehandlingProps } from './src/types/StandardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/ProsessPanelMenyData';
 export { default as FaktaPanelMenyData } from './src/types/FaktaPanelMenyData';
