@@ -44,7 +44,6 @@ interface OwnProps {
   behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -52,7 +51,6 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
-  apentFaktaPanelInfo,
   arbeidsgiverOpplysningerPerId,
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
@@ -60,8 +58,7 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
 
   const skalVises = initState === RestApiState.SUCCESS;
-  const erAktiv = !apentFaktaPanelInfo
-    && (valgtProsessSteg === prosessStegCodes.BEREGNINGSGRUNNLAG || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+  const erAktiv = valgtProsessSteg === prosessStegCodes.BEREGNINGSGRUNNLAG || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
     registrerProsessPanel,

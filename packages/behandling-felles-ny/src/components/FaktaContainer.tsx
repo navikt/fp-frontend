@@ -33,10 +33,6 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
 }) => {
   const [menyData, setMenyData] = useState<FaktaPanelMenyData[]>([]);
   const registrerFaktaPanel = useCallback((nyData: FaktaPanelMenyData) => {
-    if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
-      setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst });
-    }
-
     setMenyData((oldData) => {
       const newData = [...oldData];
       const index = newData.findIndex((d) => d.id === nyData.id);
@@ -45,14 +41,16 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       } else {
         newData.push(nyData);
       }
-
-      if (apentFaktaPanelInfo && newData.some((d) => !d.harAksjonspunkt)) {
-        setApentFaktaPanel(undefined);
-      }
-
       return newData;
     });
-  }, [menyData]);
+
+    if (!nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode === nyData.id) {
+      setApentFaktaPanel(undefined);
+    }
+    if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
+      setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst });
+    }
+  }, []);
 
   const oppdaterMenyValg = useCallback((index: number) => {
     const panel = menyData[index];

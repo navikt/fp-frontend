@@ -153,7 +153,6 @@ interface OwnProps {
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
@@ -164,7 +163,6 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   registrerProsessPanel,
   toggleOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl,
-  apentFaktaPanelInfo,
   fagsak,
   opneSokeside,
 }) => {
@@ -177,8 +175,7 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, [], lagringSideEffekter);
 
   const skalVises = initState === RestApiState.SUCCESS;
-  const erAktiv = !apentFaktaPanelInfo
-    && (valgtProsessSteg === prosessStegCodes.VEDTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+  const erAktiv = valgtProsessSteg === prosessStegCodes.VEDTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
   const status = findStatusForVedtak(
     initData?.vilkar || [], initData?.aksjonspunkter || [], standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat,
   );

@@ -42,7 +42,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
       }
       return newData;
     });
-  }, [menyData]);
+  }, []);
 
   const menyDataSomVises = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
 
@@ -50,7 +50,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     const panel = menyDataSomVises[index];
     const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
     oppdaterProsessPanelIUrl(nyvalgtProsessSteg);
-  }, [menyData]);
+  }, [menyDataSomVises]);
 
   const [skalOppdatereFagsakKontekst, toggleOppdatereFagsakContext] = useState(true);
   useEffect(() => {
@@ -63,7 +63,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     if (paneler && behandling.behandlingHenlagt) {
       paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
     }
-  }, [paneler]);
+  }, [paneler && behandling.behandlingHenlagt]);
 
   if (!paneler) {
     return null;
@@ -84,6 +84,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
             apentFaktaPanelInfo,
             oppdaterProsessStegOgFaktaPanelIUrl,
             toggleOppdatereFagsakContext,
+            // TODO endre verdi som sendes inn her
             menyData: menyDataSomVises,
           })}
         </React.Fragment>

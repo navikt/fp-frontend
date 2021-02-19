@@ -29,10 +29,13 @@ const getStatus = (paneler: PanelInfo[]): string => {
 };
 
 const getErAksjonspunktOpen = (paneler: PanelInfo[]): boolean => {
-  const harUlikeStatuserIPanelene = harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_VURDERT)
-    && harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT)
-    && !harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT);
-  return harUlikeStatuserIPanelene || paneler.some((p) => p.harApentAksjonspunkt);
+  if (paneler.some((p) => p.harApentAksjonspunkt)) {
+    return true;
+  }
+
+  return !(paneler.every((p) => p.status === vilkarUtfallType.IKKE_VURDERT)
+   || paneler.every((p) => p.status === vilkarUtfallType.IKKE_OPPFYLT)
+   || paneler.every((p) => p.status === vilkarUtfallType.OPPFYLT));
 };
 
 interface OwnProps {
@@ -84,8 +87,8 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const status = getStatus(panelInfo);
 
   const skalVises = panelInfo.length > 0;
-  const erAktiv = !apentFaktaPanelInfo
-    && (valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR || (harApentAksjonspunkt && valgtProsessSteg === 'default'));
+  const erAktiv = valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR
+    || (!apentFaktaPanelInfo && harApentAksjonspunkt && valgtProsessSteg === 'default');
 
   const intl = getPackageIntl();
 

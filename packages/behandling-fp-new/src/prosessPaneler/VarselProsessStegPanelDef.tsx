@@ -91,7 +91,6 @@ interface OwnProps {
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
@@ -101,7 +100,6 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   registrerProsessPanel,
   toggleSkalOppdatereFagsakContext,
-  apentFaktaPanelInfo,
   fagsak,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
@@ -112,8 +110,7 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, [], lagringSideEffekter);
 
   const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter);
-  const erAktiv = !apentFaktaPanelInfo
-    && (valgtProsessSteg === prosessStegCodes.VARSEL || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+  const erAktiv = valgtProsessSteg === prosessStegCodes.VARSEL || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
     registrerProsessPanel,

@@ -63,7 +63,6 @@ interface OwnProps {
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   menyData: ProsessPanelMenyData[];
-  apentFaktaPanelInfo?: {urlCode: string, textCode: string };
   fagsak: Fagsak;
 }
 
@@ -71,7 +70,6 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
-  apentFaktaPanelInfo,
   menyData,
   fagsak,
 }) => {
@@ -82,8 +80,7 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
     && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
   const skalVises = initState === RestApiState.SUCCESS && !harVedtakspanel;
-  const erAktiv = !apentFaktaPanelInfo
-    && (valgtProsessSteg === prosessStegCodes.AVREGNING || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default'));
+  const erAktiv = valgtProsessSteg === prosessStegCodes.AVREGNING || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
   const status = initData?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
 
