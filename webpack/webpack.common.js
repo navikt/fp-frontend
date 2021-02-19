@@ -110,7 +110,7 @@ const config = {
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.less?$/
+          or: [/\.less?$/],
         },
         loader: 'file-loader',
         options: {
@@ -121,7 +121,7 @@ const config = {
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.(tsx)?$/
+          or: [/\.(tsx)?$/],
         },
         use: [{
           loader: '@svgr/webpack',
@@ -160,14 +160,13 @@ const config = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: isDevelopment ? 'style.css' : 'style_[contenthash].css',
+      filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
       ignoreOrder: true,
     }),
     new HtmlWebpackPlugin({
       filename: isDevelopment ? 'index.html' : '../index.html',
       favicon: path.join(ROOT_DIR, 'favicon.ico'),
       template: path.join(ROOT_DIR, 'index.html'),
-      version: VERSION,
     }),
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(VERSION),
@@ -177,11 +176,13 @@ const config = {
         from: LANG_DIR,
         to: PUBLIC_PATH + 'sprak/[name].[ext]',
         force: true,
-        cacheTransform: {
-          keys: {
-            key: '[hash]',
-          }
-        }
+        transform: {
+          cache: {
+            keys: {
+              key: '[hash]',
+            }
+          },
+        },
       }]
     }),
     new webpack.ContextReplacementPlugin(

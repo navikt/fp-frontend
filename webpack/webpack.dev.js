@@ -9,7 +9,7 @@ const APP_DIR = path.resolve(PACKAGES_DIR, 'sak-app/src');
 
 const config = {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-source-map',
   entry: [
     '@babel/polyfill',
     'webpack-dev-server/client?http://localhost:9000',
@@ -25,7 +25,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   optimization: {
-    namedModules: true,
+    moduleIds: 'named',
     splitChunks: {
       chunks: 'all',
     },
