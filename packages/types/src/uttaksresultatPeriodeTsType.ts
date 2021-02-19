@@ -28,6 +28,7 @@ export type PeriodeSoker = Readonly<{
   begrunnelse?: string;
   periodeResultatÅrsak: ArsakKodeverk;
   periodeResultatÅrsakLovhjemmel?: string;
+  mottattDato?: string;
   manuellBehandlingÅrsak: Kodeverk;
   graderingAvslagÅrsak: ArsakKodeverk;
   flerbarnsdager: boolean;
