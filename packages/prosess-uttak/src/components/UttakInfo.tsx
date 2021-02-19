@@ -159,9 +159,8 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
 
   return (
-    <Column xs="12">
-      <div className={periodeStatusClassName(selectedItemData)}>
-        {selectedItemData.oppholdÅrsak.kode === '-'
+    <div className={periodeStatusClassName(selectedItemData)}>
+      {selectedItemData.oppholdÅrsak.kode === '-'
           && (
             <Row>
               <Column xs="4">
@@ -241,24 +240,24 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
               </Column>
             </Row>
           )}
-        <Row>
-          <Column xs="4">
-            <Row>
-              <Column xs="12">
-                <Element>
-                  <FormattedMessage
-                    id="UttakActivity.PeriodeData.Periode"
-                    values={{
-                      fomVerdi: moment(selectedItemData.fom.toString())
-                        .format(DDMMYYYY_DATE_FORMAT),
-                      tomVerdi: moment(selectedItemData.tom.toString())
-                        .format(DDMMYYYY_DATE_FORMAT),
-                    }}
-                  />
-                </Element>
-              </Column>
-            </Row>
-            {selectedItemData.oppholdÅrsak.kode === '-'
+      <Row>
+        <Column xs="4">
+          <Row>
+            <Column xs="12">
+              <Element>
+                <FormattedMessage
+                  id="UttakActivity.PeriodeData.Periode"
+                  values={{
+                    fomVerdi: moment(selectedItemData.fom.toString())
+                      .format(DDMMYYYY_DATE_FORMAT),
+                    tomVerdi: moment(selectedItemData.tom.toString())
+                      .format(DDMMYYYY_DATE_FORMAT),
+                  }}
+                />
+              </Element>
+            </Column>
+          </Row>
+          {selectedItemData.oppholdÅrsak.kode === '-'
               && (
                 <Row>
                   <Column xs="12">
@@ -272,17 +271,17 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                   </Column>
                 </Row>
               )}
-          </Column>
-          <Column xs="6">
-            <Row>
-              <Column xs="12">
-                {selectedItemData.gradertAktivitet
+        </Column>
+        <Column xs="6">
+          <Row>
+            <Column xs="12">
+              {selectedItemData.gradertAktivitet
                   && (
                     <Undertekst>
                       <FormattedMessage id="UttakActivity.Gradering" />
                     </Undertekst>
                   )}
-                {selectedItemData.oppholdÅrsak.kode !== '-'
+              {selectedItemData.oppholdÅrsak.kode !== '-'
                   && (
                     <FormattedMessage
                       id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
@@ -292,51 +291,52 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                       }}
                     />
                   )}
-              </Column>
-            </Row>
-            <Row>
-              <Column xs="12">
-                {gradertArbforhold(selectedItemData, arbeidsgiverOpplysningerPerId)}
-              </Column>
-            </Row>
-            {visGraderingIkkeInnvilget(selectedItemData, readOnly, graderingInnvilget) && (
-              <Row>
-                <Column xs="12">
-                  <b>
-                    <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
-                    :
-                  </b>
-                  {getKodeverknavn(selectedItemData.graderingAvslagÅrsak)}
-                </Column>
-              </Row>
-            )}
-          </Column>
-        </Row>
-        {selectedItemData.oppholdÅrsak.kode !== '-'
-          && (
-            <div>
-              <Row>
-                <Column xs="12">
-                  <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
-                </Column>
-              </Row>
-              <Row>
-                <Column xs="12">
-                  <SelectField
-                    name="oppholdArsak"
-                    selectValues={mapPeriodeTyper(oppholdArsakTyper)}
-                    label=""
-                    bredde="m"
-                    readOnly={readOnly}
-                    value={selectedItemData.oppholdÅrsak.kode}
-                    validate={[required, notDash]}
-                  />
-                </Column>
-              </Row>
-            </div>
+            </Column>
+          </Row>
+          <Row>
+            <Column xs="12">
+              {gradertArbforhold(selectedItemData, arbeidsgiverOpplysningerPerId)}
+            </Column>
+          </Row>
+          {visGraderingIkkeInnvilget(selectedItemData, readOnly, graderingInnvilget) && (
+          <Row>
+            <Column xs="12">
+              <b>
+                <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
+                :
+              </b>
+              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak)}
+            </Column>
+          </Row>
           )}
-      </div>
-    </Column>
+        </Column>
+      </Row>
+      {selectedItemData.oppholdÅrsak.kode !== '-' && (
+        <div>
+          <Row>
+            <Column xs="12">
+              <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
+            </Column>
+          </Row>
+          <Row>
+            <Column xs="12">
+              <SelectField
+                name="oppholdArsak"
+                selectValues={mapPeriodeTyper(oppholdArsakTyper)}
+                label=""
+                bredde="m"
+                readOnly={readOnly}
+                value={selectedItemData.oppholdÅrsak.kode}
+                validate={[required, notDash]}
+              />
+            </Column>
+          </Row>
+        </div>
+      )}
+      {selectedItemData.mottattDato && (
+        <FormattedMessage id="UttakInfo.MottattDato" values={{ dato: moment(selectedItemData.mottattDato).format(DDMMYYYY_DATE_FORMAT) }} />
+      )}
+    </div>
   );
 };
 

@@ -72,6 +72,7 @@
   "UttakActivity.Uttak": "Uttak",
   "UttakActivity.IngenKonto": "Ingen stønadskonto",
   "UttakActivity.Utsettelse": "Utsettelse - {utsettelseType}",
+  "UttakInfo.MottattDato": "Mottatt dato: {dato}",
   "UttakInfoPanel.FaktaUttak": "Fakta om uttak",
   "UttakInfoPanel.Aksjonspunkt.5070": "Kontakt søker ved behov. Fastsett korrekt og dokumentert søknadsperiode og andel i arbeid.",
   "UttakInfoPanel.Aksjonspunkt.5081": "Første dato for uttak er {value}. Rediger søknadsperiodene så de stemmer overens med startdato. Kontakt søker ved behov.",
