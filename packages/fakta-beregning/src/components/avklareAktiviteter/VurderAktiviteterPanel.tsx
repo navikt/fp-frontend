@@ -164,6 +164,7 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
           behandlingId={behandlingId}
           behandlingVersjon={behandlingVersjon}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          key={aktivitetMap.tom}
         />
       ))}
     </>

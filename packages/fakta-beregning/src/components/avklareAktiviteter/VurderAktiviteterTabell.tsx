@@ -223,7 +223,7 @@ const finnHeading = (aktiviteter, erOverstyrt, skjaeringstidspunkt) => {
       />
     );
   }
-  return null;
+  return '';
 };
 
 const skalBrukesPretufylling = (aktivitet: BeregningAktivitet,
