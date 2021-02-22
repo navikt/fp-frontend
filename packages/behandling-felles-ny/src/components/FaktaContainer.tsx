@@ -6,7 +6,6 @@ import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 
-import FaktaInnhold from './FaktaInnhold';
 import FaktaMeny from './FaktaMeny';
 import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
 
@@ -69,18 +68,16 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
             <FaktaMeny menyData={menyData.filter((d) => !!d.tekst)} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
           </FlexColumn>
           <FlexColumn className={styles.content}>
-            <FaktaInnhold>
-              {paneler.map((panel, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <React.Fragment key={index}>
-                  {panel({
-                    behandlingVersjon,
-                    valgtFaktaSteg,
-                    registrerFaktaPanel,
-                  })}
-                </React.Fragment>
-              ))}
-            </FaktaInnhold>
+            {paneler.map((panel, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <React.Fragment key={index}>
+                {panel({
+                  behandlingVersjon,
+                  valgtFaktaSteg,
+                  registrerFaktaPanel,
+                })}
+              </React.Fragment>
+            ))}
           </FlexColumn>
         </FlexRow>
       </FlexContainer>

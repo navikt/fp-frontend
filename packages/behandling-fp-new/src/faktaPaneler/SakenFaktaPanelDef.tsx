@@ -18,6 +18,8 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
 ];
 
+const overstyringApCodes = [aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE];
+
 const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
@@ -48,7 +50,7 @@ const SakenFaktaPanelDef: FunctionComponent<OwnProps> = ({
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
 
   const erAktiv = valgtFaktaSteg === faktaPanelCodes.SAKEN
     || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');

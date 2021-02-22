@@ -22,6 +22,8 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
+const overstyringApCodes = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
+
 const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
@@ -48,7 +50,7 @@ const BeregningFaktaPanelDef: FunctionComponent<OwnProps> = ({
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
 
   const skalVises = !!initData?.beregningsgrunnlag;
   const erAktiv = valgtFaktaSteg === faktaPanelCodes.BEREGNING

@@ -26,6 +26,8 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
 ];
 
+const overstyringApCodes = [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
+
 const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SOKNAD];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
@@ -62,7 +64,7 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
 
   const skalVises = !!initData?.soknad;
   const erAktiv = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET

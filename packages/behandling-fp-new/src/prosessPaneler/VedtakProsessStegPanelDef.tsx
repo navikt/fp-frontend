@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useState,
+  FunctionComponent, useCallback, useMemo, useState,
 } from 'react';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -32,7 +32,7 @@ const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon.kode === a
   || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
   || ap.definisjon.kode === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
 
-const isAksjonspunktOpenAndOfType = (ap) => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status.kode);
+const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status.kode);
 
 const findStatusForVedtak = (
   vilkar: Vilkar[],
@@ -176,9 +176,9 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const skalVises = initState === RestApiState.SUCCESS;
   const erAktiv = valgtProsessSteg === prosessStegCodes.VEDTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
-  const status = findStatusForVedtak(
+  const status = useMemo(() => findStatusForVedtak(
     initData?.vilkar || [], initData?.aksjonspunkter || [], standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat,
-  );
+  ), [initData, standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat]);
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
     registrerProsessPanel,

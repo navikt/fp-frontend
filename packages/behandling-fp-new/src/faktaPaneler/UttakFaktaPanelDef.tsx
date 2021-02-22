@@ -29,6 +29,8 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
 ];
 
+const overstyringApCodes = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
+
 const endepunkterInit = [
   FpBehandlingApiKeys.AKSJONSPUNKTER,
   FpBehandlingApiKeys.PERSONOPPLYSNINGER,
@@ -71,7 +73,7 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
 
   const skalVises = !!initData?.ytelsefordeling?.endringsdato && !!initData?.personopplysninger;
   const erAktiv = valgtFaktaSteg === faktaPanelCodes.UTTAK || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');

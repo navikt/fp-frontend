@@ -11,6 +11,7 @@ import {
 import useSkalViseProsessPanel from '../utils/useSkalViseProsessPanel';
 import useStandardProsessPanelProps from '../utils/useStandardProsessPanelProps';
 
+// TODO Spesifikk ES-kodar bør ikkje ligga her
 const avslagsarsakerES = ['1002', '1003', '1032'];
 const filtrerAvslagsarsaker = (avslagsarsaker, vilkarTypeKode) => (vilkarTypeKode === vilkarType.FODSELSVILKARET_MOR
   ? avslagsarsaker[vilkarTypeKode].filter((arsak) => !avslagsarsakerES.includes(arsak.kode))

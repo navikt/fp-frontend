@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent,
+  FunctionComponent, useMemo,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -110,7 +110,9 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
 
   const skalVises = initState === RestApiState.SUCCESS;
   const erAktiv = valgtProsessSteg === prosessStegCodes.UTTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
-  const status = getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter);
+  const status = useMemo(() => getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter), [
+    initData?.uttaksresultatPerioder, initData?.aksjonspunkter,
+  ]);
 
   const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
     registrerProsessPanel,

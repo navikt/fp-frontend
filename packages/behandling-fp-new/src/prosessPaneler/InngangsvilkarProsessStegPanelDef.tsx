@@ -112,7 +112,7 @@ const InngangsvilkarProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       loadingState={RestApiState.SUCCESS}
       skalSkjulePanel={!erPanelValgt}
     >
-      {((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+      {(erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0)) && (
         <>
           <AksjonspunktHelpTextHTML>
             {apentFaktaPanelInfo && erIkkeFerdigbehandlet

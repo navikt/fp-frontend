@@ -26,7 +26,7 @@ type Data = {
   vilkar?: Vilkar[];
 }
 
-const useStandardProps = (
+const useStandardFaktaProps = (
   data?: Data,
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
@@ -34,8 +34,9 @@ const useStandardProps = (
 ): Standard => {
   const value = useContext(StandardPropsStateContext);
 
-  const aksjonspunkterForSteg = data && aksjonspunktKoder ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-  const vilkarForSteg = data && vilkarKoder ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
+  const aksjonspunkterForSteg = data?.aksjonspunkter && aksjonspunktKoder
+    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
+  const vilkarForSteg = data?.vilkar && vilkarKoder ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
 
   const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, vilkarForSteg, value.rettigheter, value.hasFetchError);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
@@ -61,4 +62,4 @@ const useStandardProps = (
   };
 };
 
-export default useStandardProps;
+export default useStandardFaktaProps;
