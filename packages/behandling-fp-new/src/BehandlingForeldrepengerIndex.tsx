@@ -1,13 +1,11 @@
-import React, {
-  FunctionComponent, useEffect, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
-import { useSetBehandlingVedEndring } from '@fpsak-frontend/behandling-felles';
-import { ArbeidsgiverOpplysningerWrapper, Behandling } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerWrapper } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
+  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
@@ -42,66 +40,21 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   opneSokeside,
   setRequestPendingMessage,
 }) => {
-  const [behandling, setNyBehandling] = useState<Behandling>();
+  useInitRequestApi(requestFpApi, setRequestPendingMessage);
 
-  const setBehandling = useCallback((nyBehandling) => {
-    requestFpApi.resetCache();
-    requestFpApi.setLinks(nyBehandling.links);
-    setNyBehandling(nyBehandling);
-  }, []);
+  const { useRestApiRunner, useRestApi } = restApiFpHooks;
 
-  const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiFpHooks
-    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.BEHANDLING_FP);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
+  const {
+    behandling, behandlingState, hentBehandling, setBehandling,
+  } = useBehandling(
+    requestFpApi, useRestApiRunner, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId,
+  );
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(useRestApiRunner, FpBehandlingApiKeys, setBehandling);
 
-  const { startRequest: nyBehandlendeEnhet } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.HENLEGG_BEHANDLING);
-  const { startRequest: settPaVent } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.UPDATE_ON_HOLD);
-  const { startRequest: opneBehandlingForEndringer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES);
-  const { startRequest: opprettVerge } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.VERGE_OPPRETT);
-  const { startRequest: fjernVerge } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.VERGE_FJERN);
-  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+  useInitBehandlingHandlinger(useRestApiRunner, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
-  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
-  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
-
-  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = restApiFpHooks
-    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
-  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
-
-  useEffect(() => {
-    behandlingEventHandler.setHandler({
-      endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
-        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
-      henleggBehandling: (params) => henleggBehandling(params),
-      opneBehandlingForEndringer: (params) => opneBehandlingForEndringer(params)
-        .then((behandlingResOpneForEndring) => setBehandling(behandlingResOpneForEndring)),
-      opprettVerge: (params) => opprettVerge(params)
-        .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
-      fjernVerge: (params) => fjernVerge(params)
-        .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
-      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params),
-    });
-
-    requestFpApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestFpApi.setAddErrorMessageHandler(addErrorMessage);
-
-    hentBehandling({ behandlingId }, false);
-
-    return () => {
-      behandlingEventHandler.clear();
-    };
-  }, []);
-
-  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiFpHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
+  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = useRestApi<ArbeidsgiverOpplysningerWrapper>(
     FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
       updateTriggers: [!behandling],
       suspendRequest: !behandling,
@@ -127,7 +80,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
 
   const { arbeidsgivere } = arbeidsgiverOpplysninger;
 
-  // FIXME BehandlingPaVent
   return (
     <>
       <ReduxFormStateCleaner
@@ -136,10 +88,12 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
       />
       <BehandlingPaVent
         behandling={behandling}
-        aksjonspunkter={[] /* fetchedData.aksjonspunkter */}
         kodeverk={kodeverk}
-        settPaVent={settPaVent}
         hentBehandling={hentBehandling}
+        useRestApiRunner={useRestApiRunner}
+        useRestApi={useRestApi}
+        oppdaterPaVentKey={FpBehandlingApiKeys.UPDATE_ON_HOLD}
+        aksjonspunktKey={FpBehandlingApiKeys.AKSJONSPUNKTER}
       />
       <StandardPropsProvider initialState={standardProps}>
         <BehandlingContainer

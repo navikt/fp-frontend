@@ -6,7 +6,7 @@ import {
 
 import RestApiState from '../RestApiState';
 
-interface RestApiData<T> {
+export interface RestApiData<T> {
   startRequest: (params?: any, keepData?: boolean) => Promise<T>;
   resetRequestData: () => void;
   state: RestApiState;

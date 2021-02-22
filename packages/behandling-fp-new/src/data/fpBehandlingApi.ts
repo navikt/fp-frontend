@@ -100,6 +100,9 @@ export const requestFpApi = createRequestApi(endpoints);
 
 export const restApiFpHooks = RestApiHooks.initHooks(requestFpApi);
 
+/**
+ ' Henter data som er nødvendig for å utlede om et panel skal vises.
+ */
 export function useHentInitPanelData<T>(
   endepunkter: string[],
   behandlingVersjon?: number,
@@ -117,6 +120,9 @@ export function useHentInitPanelData<T>(
   };
 }
 
+/**
+ ' Henter data som skal brukes av et panel. Skal kalles først når det er avgjort at panelet skal vises.
+ */
 export function useHentInputDataTilPanel<T>(
   endepunkter: string[],
   erPanelValgt: boolean,

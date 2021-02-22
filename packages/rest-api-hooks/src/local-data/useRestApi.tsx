@@ -6,13 +6,13 @@ import { REQUEST_POLLING_CANCELLED, AbstractRequestApi } from '@fpsak-frontend/r
 
 import RestApiState from '../RestApiState';
 
-interface RestApiData<T> {
+export interface RestApiData<T> {
   state: RestApiState;
   error?: Error;
   data?: T;
 }
 
-interface Options {
+export interface Options {
   updateTriggers?: DependencyList;
   keepData?: boolean;
   suspendRequest?: boolean;

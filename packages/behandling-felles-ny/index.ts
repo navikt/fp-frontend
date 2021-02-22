@@ -6,7 +6,7 @@ export { default as BehandlingPaVent } from './src/components/paVent/BehandlingP
 export { default as ProsessPanelWrapper } from './src/components/ProsessPanelWrapper';
 export { default as FaktaPanelWrapper } from './src/components/FaktaPanelWrapper';
 export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStateCleaner';
-export { default as StandardBehandlingProps } from './src/types/StandardBehandlingProps';
+export { default as StandardBehandlingProps, BehandlingEventHandler } from './src/types/StandardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/ProsessPanelMenyData';
 export { default as FaktaPanelMenyData } from './src/types/FaktaPanelMenyData';
 export { default as useStandardFaktaProps } from './src/utils/useStandardFaktaProps';
@@ -16,3 +16,6 @@ export { default as useSkalViseProsessPanel } from './src/utils/useSkalViseProse
 export { harBehandlingReadOnlyStatus } from './src/utils/readOnlyUtils';
 export { default as prosessPanelHooks } from './src/utils/prosessPanelHooks';
 export { default as faktaPanelHooks } from './src/utils/faktaPanelHooks';
+export {
+  useInitRequestApi, useBehandling, useLagreAksjonspunkt, useInitBehandlingHandlinger,
+} from './src/utils/indexHooks';
