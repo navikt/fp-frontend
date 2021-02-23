@@ -27,7 +27,7 @@ jobs:
         run: echo "TAG=1.1_$(git log -1 --pretty='%ad' --date=format:'%Y.%m.%d.%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Sette opp Node
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: 15.x
 
