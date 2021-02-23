@@ -6,7 +6,7 @@ import { Route, Redirect, useLocation } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson, Kodeverk,
+  Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson, Kodeverk, FagsakPersoner,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -62,8 +62,8 @@ const FagsakIndex: FunctionComponent = () => {
 
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
-  const { data: fagsakPerson, state: fagsakPersonState } = restApiHooks.useGlobalStateRestApi<FagsakPerson>(FpsakApiKeys.SAK_BRUKER,
-    { saksnummer: selectedSaksnummer }, {
+  const { data: fagsakPersoner, state: fagsakPersonerState } = restApiHooks.useGlobalStateRestApi<FagsakPersoner>(FpsakApiKeys.SAK_PERSONER,
+    undefined, {
       updateTriggers: [selectedSaksnummer],
       suspendRequest: !selectedSaksnummer,
     });
@@ -92,9 +92,6 @@ const FagsakIndex: FunctionComponent = () => {
   };
 
   const {
-    data: behandlingPersonopplysninger, state: personopplysningerState,
-  } = restApiHooks.useRestApi<Personopplysninger>(FpsakApiKeys.BEHANDLING_PERSONOPPLYSNINGER, undefined, options);
-  const {
     data: behandlingFamilieHendelse, state: familieHendelseState,
   } = restApiHooks.useRestApi<FamilieHendelseSamling>(FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE, undefined, options);
   const {
@@ -113,7 +110,7 @@ const FagsakIndex: FunctionComponent = () => {
     }
     return <Redirect to={pathToMissingPage()} />;
   }
-  if (fagsakPersonState === RestApiState.NOT_STARTED || fagsakPersonState === RestApiState.LOADING || !harFerdighentetfagsakRettigheter) {
+  if (fagsakPersonerState === RestApiState.NOT_STARTED || fagsakPersonerState === RestApiState.LOADING || !harFerdighentetfagsakRettigheter) {
     return <LoadingPanel />;
   }
 
@@ -167,18 +164,18 @@ const FagsakIndex: FunctionComponent = () => {
             return null;
           }
 
-          if (personopplysningerState === RestApiState.LOADING || familieHendelseState === RestApiState.LOADING || annenPartState === RestApiState.LOADING) {
+          if (familieHendelseState === RestApiState.LOADING || annenPartState === RestApiState.LOADING) {
             return <LoadingPanel />;
           }
 
           return (
             <VisittkortSakIndex
-              personopplysninger={behandlingPersonopplysninger}
               familieHendelse={behandlingFamilieHendelse}
               lenkeTilAnnenPart={annenPartBehandling ? finnLenkeTilAnnenPart(annenPartBehandling) : undefined}
               fagsak={fagsak}
-              fagsakPerson={fagsakPerson}
-              harTilbakekrevingVerge={erTilbakekreving(behandling?.type) && harVerge}
+              fagsakPersoner={fagsakPersoner}
+              harVerge={harVerge}
+              erTilbakekreving={erTilbakekreving(behandling?.type)}
             />
           );
         }}

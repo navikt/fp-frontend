@@ -10,7 +10,7 @@ import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
-import { Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
@@ -28,9 +28,8 @@ const fagsak = {
 } as Fagsak;
 
 const fagsakPerson = {
-  alder: 30,
-  erDod: false,
-  erKvinne: true,
+  fodselsdato: '1990-01-01',
+  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
   navn: 'Petra',
   personnummer: '12343541',
   personstatusType: {

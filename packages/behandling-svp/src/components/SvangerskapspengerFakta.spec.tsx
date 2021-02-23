@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Fagsak } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, KjønnkodeEnum } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -23,10 +23,9 @@ describe('<SvangerskapspengerFakta>', () => {
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
   const fagsakPerson = {
-    alder: 30,
+    fodselsdato: '1990-01-01',
     personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    erDod: false,
-    erKvinne: true,
+    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     navn: 'Espen Utvikler',
     personnummer: '12345',
   };

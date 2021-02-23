@@ -13,7 +13,7 @@ import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { Behandling, Fagsak } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknad from './RegistrerPapirsoknad';
 import SoknadRegistrertModal from './SoknadRegistrertModal';
@@ -32,9 +32,8 @@ const fagsak = {
 } as Fagsak;
 
 const fagsakPerson = {
-  alder: 30,
-  erDod: false,
-  erKvinne: true,
+  fodselsdato: '1990-01-01',
+  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
   navn: 'Petra',
   personnummer: '12343541',
   personstatusType: {

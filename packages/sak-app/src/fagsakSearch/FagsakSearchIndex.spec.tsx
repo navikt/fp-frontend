@@ -28,7 +28,6 @@ describe('<FagsakSearchIndex>', () => {
       kodeverk: 'test',
     },
     barnFodt: '10.10.2017',
-    antallBarn: 1,
     opprettet: '13‎.‎02‎.‎2017‎ ‎09‎:‎54‎:‎22',
     dekningsgrad: 100,
   };

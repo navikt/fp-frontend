@@ -1,6 +1,5 @@
 import React from 'react';
 
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { getAlleMerknaderFraBeslutter, ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
@@ -38,7 +37,7 @@ class PanelDef extends ProsessStegPanelDef {
   }: Data) => ({
     perioderForeldelse,
     beregnBelop,
-    navBrukerKjonn: fagsakPerson.erKvinne ? navBrukerKjonn.KVINNE : navBrukerKjonn.MANN,
+    navBrukerKjonn: fagsakPerson.kjønn.kode,
     alleMerknaderFraBeslutter: getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForSteg),
   })
 }

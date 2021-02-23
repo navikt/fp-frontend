@@ -6,6 +6,7 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
+import { KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 import withRouterProvider from '../../decorators/withRouter';
@@ -48,11 +49,10 @@ export const visSakerOpprettetPaAktor = () => (
         ...fagsak,
       }],
       person: {
-        erDod: false,
         navn: 'Espen Utvikler',
-        alder: 41,
+        kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+        fodselsdato: '1979-01-01',
         personnummer: '123456233',
-        erKvinne: false,
         personstatusType: {
           kode: personstatusType.BOSATT,
           kodeverk: '',

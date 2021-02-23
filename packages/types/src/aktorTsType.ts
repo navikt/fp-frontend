@@ -1,5 +1,5 @@
 import Fagsak from './fagsakTsType';
-import FagsakPerson from './fagsakPersonTsType';
+import { FagsakPerson } from './fagsakPersonerTsType';
 
 type Aktor = Readonly<{
   fagsaker: Fagsak[];

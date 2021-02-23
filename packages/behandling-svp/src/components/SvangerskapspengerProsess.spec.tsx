@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { Behandling, Fagsak, Soknad } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, KjønnkodeEnum, Soknad } from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -28,10 +28,9 @@ describe('<SvangerskapspengerProsess>', () => {
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
   const fagsakPerson = {
-    alder: 30,
+    fodselsdato: '1990-01-01',
     personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    erDod: false,
-    erKvinne: true,
+    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     navn: 'Espen Utvikler',
     personnummer: '12345',
   };

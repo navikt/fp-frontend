@@ -27,17 +27,6 @@ describe('<FagsakSearch>', () => {
     antallBarn: 1,
     kanRevurderingOpprettes: false,
     skalBehandlesAvInfotrygd: false,
-    person: {
-      erDod: false,
-      navn: 'Frida',
-      alder: 44,
-      personnummer: '0405198632231',
-      erKvinne: true,
-      personstatusType: {
-        kode: 'TEST',
-        kodeverk: '',
-      },
-    },
     dekningsgrad: 100,
   };
 

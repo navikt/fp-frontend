@@ -8,7 +8,6 @@ type Fagsak = Readonly<{
   barnFodt: string;
   opprettet: string;
   endret: string;
-  antallBarn: number;
   kanRevurderingOpprettes: boolean;
   skalBehandlesAvInfotrygd: boolean;
   dekningsgrad: number;

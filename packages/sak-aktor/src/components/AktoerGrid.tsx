@@ -32,7 +32,9 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
     <>
       <VisittkortSakIndex
         fagsak={vFagsak as Fagsak}
-        fagsakPerson={aktorInfo.person}
+        fagsakPersoner={{
+          bruker: aktorInfo.person,
+        }}
       />
       <div className={styles.list}>
         {aktorInfo.fagsaker.length ? aktorInfo.fagsaker.map((fagsak) => (

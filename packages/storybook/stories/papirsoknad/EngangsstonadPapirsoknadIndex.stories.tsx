@@ -8,7 +8,7 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { FagsakPerson } from '@fpsak-frontend/types';
+import { FagsakPerson, KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
@@ -21,9 +21,8 @@ export default {
 };
 
 const fagsakPerson = {
-  alder: 30,
-  erDod: false,
-  erKvinne: true,
+  fodselsdato: '1990-01-01',
+  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
   navn: 'Petra',
   personnummer: '1234567',
   personstatusType: {
@@ -62,7 +61,7 @@ export const visPapirsoknadForFarVedFødsel = () => (
     alleKodeverk={alleKodeverk as any}
     fagsakPerson={{
       ...fagsakPerson,
-      erKvinne: false,
+      kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
     }}
   />
 );

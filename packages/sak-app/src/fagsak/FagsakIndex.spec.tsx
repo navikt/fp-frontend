@@ -50,7 +50,7 @@ describe('<FagsakIndex>', () => {
   it('skal hente alle behandlinger fra fpsak og fptilbake', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.FETCH_FAGSAK, fagsak);
-    requestApi.mock(FpsakApiKeys.SAK_BRUKER, {});
+    requestApi.mock(FpsakApiKeys.SAK_PERSONER, {});
     requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER, {
       behandlingTypeKanOpprettes: [],
     });

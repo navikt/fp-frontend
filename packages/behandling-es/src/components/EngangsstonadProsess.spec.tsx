@@ -3,7 +3,9 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Behandling, Fagsak, Soknad } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, Soknad, KjønnkodeEnum,
+} from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -17,9 +19,9 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+
 import FetchedData from '../types/fetchedDataTsType';
 import { requestEsApi, EsBehandlingApiKeys } from '../data/esBehandlingApi';
-
 import EngangsstonadProsess from './EngangsstonadProsess';
 
 describe('<EngangsstonadProsess>', () => {
@@ -30,10 +32,9 @@ describe('<EngangsstonadProsess>', () => {
   } as Fagsak;
 
   const fagsakPerson = {
-    alder: 30,
+    fodselsdato: '1990-01-01',
     personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    erDod: false,
-    erKvinne: true,
+    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     navn: 'Espen Utvikler',
     personnummer: '12345',
   };

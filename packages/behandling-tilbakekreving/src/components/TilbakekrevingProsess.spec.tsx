@@ -4,7 +4,9 @@ import { shallow } from 'enzyme';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { ProsessStegContainer } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Fagsak, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, FeilutbetalingPerioderWrapper, KjønnkodeEnum,
+} from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -25,10 +27,9 @@ describe('<TilbakekrevingProsess>', () => {
   } as Fagsak;
 
   const fagsakPerson = {
-    alder: 30,
+    fodselsdato: '1990-01-01',
     personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    erDod: false,
-    erKvinne: true,
+    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     navn: 'Espen Utvikler',
     personnummer: '12345',
   };

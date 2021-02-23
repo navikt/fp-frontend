@@ -62,7 +62,7 @@ export { default as Vilkar } from './src/vilkarTsType';
 export { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export { default as Fagsak } from './src/fagsakTsType';
-export { default as FagsakPerson } from './src/fagsakPersonTsType';
+export { default as FagsakPersoner, FagsakPerson, FagsakHendelse } from './src/fagsakPersonerTsType';
 export {
   default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse,
 } from './src/medlemskapTsType';
@@ -88,3 +88,4 @@ export { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from 
 export { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';
 export { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
 export { default as Aktor } from './src/aktorTsType';
+export { default as Kjønnkode, KjønnkodeEnum } from './src/Kjonnkode';
