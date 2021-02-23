@@ -20,7 +20,7 @@ import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 
 const fagsak = {
-  saksnummer: 123456,
+  saksnummerString: '123456',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
@@ -199,7 +199,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const { args } = calls[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual({
-      saksnummer: fagsak.saksnummer,
+      saksnummer: fagsak.saksnummerString,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{

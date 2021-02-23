@@ -16,7 +16,7 @@ import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
 const fagsak = {
-  saksnummer: 123456,
+  saksnummerString: '123456',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',

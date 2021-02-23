@@ -12,7 +12,7 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 import withRouterProvider from '../../decorators/withRouter';
 
 const fagsak = {
-  saksnummer: 35425245,
+  saksnummerString: '35425245',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: '',
@@ -45,7 +45,7 @@ export const visSakerOpprettetPaAktor = () => (
     valgtAktorId="123"
     aktorInfo={{
       fagsaker: [fagsak, {
-        saksnummer: 123,
+        saksnummerString: '123',
         ...fagsak,
       }],
       person: {

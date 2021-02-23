@@ -81,7 +81,7 @@ export const visPanelForInnvilgetVedtak = () => (
       },
       innsynMottattDato: '2019-01-01',
     })}
-    saksnummer={123434}
+    saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',
       dokumentId: '3',
@@ -113,7 +113,7 @@ export const visPanelForAvvistVedtak = () => (
       },
       innsynMottattDato: '2019-01-01',
     })}
-    saksnummer={123434}
+    saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',
       dokumentId: '3',

@@ -18,7 +18,7 @@ import SvangerskapspengerFakta from './SvangerskapspengerFakta';
 
 describe('<SvangerskapspengerFakta>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;

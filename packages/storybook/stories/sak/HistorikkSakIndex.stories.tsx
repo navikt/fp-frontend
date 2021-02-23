@@ -157,7 +157,7 @@ export const visHistorikk = () => (
       <HistorikkSakIndex
         key={h.behandlingId}
         historikkinnslag={h}
-        saksnummer={2}
+        saksnummer="2"
         getBehandlingLocation={() => locationMock}
         alleKodeverk={alleKodeverk as any}
         createLocationForSkjermlenke={() => locationMock}

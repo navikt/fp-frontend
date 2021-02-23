@@ -16,7 +16,7 @@ const intl = createIntl({
 
 interface OwnProps {
   innsyn: Innsyn;
-  saksnummer: number;
+  saksnummer: string;
   alleDokumenter: Dokument[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import HistorikkDokumentLenke from './HistorikkDokumentLenke';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-sak-historikk';
 
-const saksnummer = 123;
+const saksnummer = '123';
 const dokumentLenke = {
   tag: 'Inntektsmelding',
   journalpostId: '123456',

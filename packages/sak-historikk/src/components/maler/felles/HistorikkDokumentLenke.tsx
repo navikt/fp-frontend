@@ -9,7 +9,7 @@ const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
 
 interface OwnProps {
   dokumentLenke: HistorikkInnslagDokumentLink;
-  saksnummer: number;
+  saksnummer: string;
 }
 
 const HistorikkDokumentLenke: FunctionComponent<OwnProps> = ({

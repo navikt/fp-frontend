@@ -27,7 +27,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('<TotrinnskontrollIndex>', () => {
   const fagsak = {
-    saksnummer: 1,
+    saksnummerString: '1',
     sakstype: {
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: '',
@@ -137,7 +137,7 @@ describe('<TotrinnskontrollIndex>', () => {
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
       behandlingId: 1234,
-      saksnummer: 1,
+      saksnummer: '1',
       behandlingVersjon: 123,
       bekreftedeAksjonspunktDtoer: [{
         '@type': '5016',

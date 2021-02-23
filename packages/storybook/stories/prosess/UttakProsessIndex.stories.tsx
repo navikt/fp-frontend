@@ -44,7 +44,7 @@ const aksjonspunkter = [
 ];
 
 const fagsak = {
-  saksnummer: 1,
+  saksnummerString: '1',
 } as Fagsak;
 
 const familiehendelse = {

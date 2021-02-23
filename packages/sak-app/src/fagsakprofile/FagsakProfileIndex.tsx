@@ -26,7 +26,7 @@ import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
-const findPathToBehandling = (saksnummer: number, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
+const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
     return getLocationWithDefaultProsessStegAndFakta({
       ...location,
@@ -84,8 +84,8 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
   const getBehandlingLocation = useCallback((valgtBehandlingId) => getLocationWithDefaultProsessStegAndFakta({
     ...location,
-    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingId),
-  }), [fagsak.saksnummer]);
+    pathname: pathToBehandling(fagsak.saksnummerString, valgtBehandlingId),
+  }), [fagsak.saksnummerString]);
 
   return (
     <div className={styles.panelPadding}>
@@ -93,11 +93,11 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
         <LoadingPanel />
       )}
       {harHentetBehandlinger && shouldRedirectToBehandlinger && (
-        <Redirect to={findPathToBehandling(fagsak.saksnummer, location, alleBehandlinger)} />
+        <Redirect to={findPathToBehandling(fagsak.saksnummerString, location, alleBehandlinger)} />
       )}
       {harHentetBehandlinger && !shouldRedirectToBehandlinger && (
         <FagsakProfilSakIndex
-          saksnummer={fagsak.saksnummer}
+          saksnummer={fagsak.saksnummerString}
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}

@@ -30,7 +30,7 @@ const getAktivtPapirsoknadApKode = (aksjonspunkter) => aksjonspunkter.filter((a)
       || kode === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
       || kode === aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER)[0];
 
-const lagLagreFunksjon = (soknadData, behandling, aksjonspunkter, fagsak, lagreAksjonspunkt) => (valuesForRegisteredFieldsOnly) => {
+const lagLagreFunksjon = (soknadData, behandling, aksjonspunkter, fagsak: Fagsak, lagreAksjonspunkt) => (valuesForRegisteredFieldsOnly) => {
   const manuellRegistreringDtoList = [{
     '@type': getAktivtPapirsoknadApKode(aksjonspunkter),
     tema: soknadData.getFamilieHendelseType(),
@@ -41,7 +41,7 @@ const lagLagreFunksjon = (soknadData, behandling, aksjonspunkter, fagsak, lagreA
   ];
 
   const params = {
-    saksnummer: fagsak.saksnummer,
+    saksnummer: fagsak.saksnummerString,
     behandlingId: behandling.id,
     behandlingVersjon: behandling.versjon,
     bekreftedeAksjonspunktDtoer: manuellRegistreringDtoList,

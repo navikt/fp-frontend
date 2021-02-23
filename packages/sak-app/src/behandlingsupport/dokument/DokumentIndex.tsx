@@ -10,7 +10,7 @@ import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
 // TODO (hb) lag linker, ikke callback
 // TODO (hb) Kan implementeres med spesialisert selector som genererer hrefs til bruk i mapStateToProps
-const selectDocument = (saksNr: number) => (_e, _id, document: Dokument): void => {
+const selectDocument = (saksNr: string) => (_e, _id, document: Dokument): void => {
   window.open(`/fpsak/api/dokument/hent-dokument?saksnummer=${saksNr}&journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`, '_blank');
 };
 
@@ -26,7 +26,7 @@ const sorterDokumenter = ((dok1: Dokument, dok2: Dokument): number => {
 });
 
 interface OwnProps {
-  saksnummer: number;
+  saksnummer: string;
   behandlingId?: number;
   behandlingVersjon?: number;
 }

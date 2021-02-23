@@ -44,7 +44,7 @@ export type FormValues = {
 
 interface PureOwnProps {
   ytelseType: Kodeverk;
-  saksnummer: number;
+  saksnummer: string;
   cancelEvent: () => void;
   submitCallback: (data: {
     eksternUuid?: string,
@@ -64,7 +64,7 @@ interface PureOwnProps {
   uuidForSistLukkede?: string;
   erTilbakekrevingAktivert: boolean;
   sjekkOmTilbakekrevingKanOpprettes: (params: {
-    saksnummer: number;
+    saksnummer: string;
     uuid: string;
   }) => void;
   sjekkOmTilbakekrevingRevurderingKanOpprettes: (params: {

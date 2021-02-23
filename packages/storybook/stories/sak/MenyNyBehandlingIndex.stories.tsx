@@ -65,7 +65,7 @@ export const visMenyForÅLageNyBehandling = () => (
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: 'YTELSE_TYPE',
     }}
-    saksnummer={123}
+    saksnummer="123"
     behandlingId={1}
     behandlingVersjon={2}
     behandlingType={{
@@ -102,7 +102,7 @@ export const visMenyForÅLageNyTilbakekrevingsbehandling = () => (
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: 'YTELSE_TYPE',
     }}
-    saksnummer={123}
+    saksnummer="123"
     behandlingId={1}
     behandlingVersjon={2}
     behandlingType={{

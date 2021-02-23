@@ -8,7 +8,7 @@ import SearchForm from './SearchForm';
 
 describe('<FagsakSearch>', () => {
   const fagsak = {
-    saksnummer: 12345,
+    saksnummerString: '12345',
     sakstype: {
       kode: 'TEST',
       kodeverk: '',

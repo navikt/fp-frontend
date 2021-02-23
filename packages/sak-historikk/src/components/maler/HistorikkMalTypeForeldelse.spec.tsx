@@ -63,7 +63,7 @@ describe('HistorikkMalTypeForeldelse', () => {
       getKodeverknavn={getKodeverknavn}
       createLocationForSkjermlenke={() => locationMock}
       erTilbakekreving={false}
-      saksnummer={123}
+      saksnummer="123"
     />);
 
     const messages = wrapper.find(FormattedMessage);

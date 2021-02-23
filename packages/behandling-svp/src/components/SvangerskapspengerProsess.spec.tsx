@@ -23,7 +23,7 @@ import SvangerskapspengerProsess from './SvangerskapspengerProsess';
 
 describe('<SvangerskapspengerProsess>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: { kode: fagsakYtelseType.SVANGERSKAPSPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;

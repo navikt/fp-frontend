@@ -16,7 +16,7 @@ export default {
 };
 
 const fagsak = {
-  saksnummer: 123456,
+  saksnummerString: '123456',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'SAKSTYPE',

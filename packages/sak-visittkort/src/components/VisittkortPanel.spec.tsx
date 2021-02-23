@@ -16,7 +16,7 @@ import VisittkortPanel from './VisittkortPanel';
 
 describe('<VisittkortPanel>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: {
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: 'SAKSTYPE',

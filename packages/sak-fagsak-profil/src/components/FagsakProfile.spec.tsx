@@ -22,7 +22,7 @@ describe('<FagsakProfile>', () => {
       navn: 'Opprettet',
     };
     const wrapper = shallowWithIntl(<FagsakProfile
-      saksnummer={12345}
+      saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
       renderBehandlingMeny={sinon.spy()}
@@ -52,7 +52,7 @@ describe('<FagsakProfile>', () => {
       navn: 'Opprettet',
     };
     const wrapper = shallowWithIntl(<FagsakProfile
-      saksnummer={12345}
+      saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
       renderBehandlingMeny={sinon.spy()}
@@ -87,7 +87,7 @@ describe('<FagsakProfile>', () => {
       navn: 'Opprettet',
     };
     const wrapper = shallowWithIntl(<FagsakProfile
-      saksnummer={12345}
+      saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
       renderBehandlingMeny={sinon.spy()}
@@ -119,7 +119,7 @@ describe('<FagsakProfile>', () => {
       navn: 'Opprettet',
     };
     const wrapper = shallowWithIntl(<FagsakProfile
-      saksnummer={12345}
+      saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
       renderBehandlingMeny={sinon.spy()}

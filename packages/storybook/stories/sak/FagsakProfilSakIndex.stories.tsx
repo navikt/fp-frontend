@@ -20,7 +20,7 @@ const FAGSAK_YTELSE_KODEVERK = 'FAGSAK_YTELSE';
 export const visPanelForValgAvBehandlinger = () => (
   <div style={{ width: '600px', backgroundColor: 'white', padding: '30px' }}>
     <FagsakProfilSakIndex
-      saksnummer={232341251}
+      saksnummer="232341251"
       fagsakYtelseType={{ kode: fagsakYtelseType.FORELDREPENGER, kodeverk: FAGSAK_YTELSE_KODEVERK, navn: 'Foreldrepenger' }}
       fagsakStatus={{ kode: fagsakStatus.OPPRETTET, kodeverk: FAGSAK_STATUS_KODEVERK, navn: 'Opprettet' }}
       renderBehandlingMeny={() => (

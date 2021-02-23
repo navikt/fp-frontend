@@ -158,7 +158,7 @@ interface MappedOwnProps {
   hovedsokerKjonnKode?: Kjønnkode;
   isRevurdering: boolean;
   medsokerKjonnKode: Kjønnkode;
-  saksnummer: number;
+  saksnummer: string;
   soknadDate: string;
   stonadskonto: UttakStonadskontoer;
   uttakPerioder: PeriodeMedClassName[];
@@ -840,7 +840,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     isRevurdering: props.behandlingType.kode === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
-    saksnummer: fagsak.saksnummer,
+    saksnummer: fagsak.saksnummerString,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
     stonadskonto: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'stonadskonto'),
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),

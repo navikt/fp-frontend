@@ -31,7 +31,7 @@ const sortAndTagTilbakekreving = (
 };
 
 interface OwnProps {
-  saksnummer: number;
+  saksnummer: string;
   behandlingId?: number;
   behandlingVersjon?: number;
 }

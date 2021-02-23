@@ -43,7 +43,7 @@ describe('<HistorikkIndex>', () => {
     }]);
 
     const wrapper = shallow(<HistorikkIndex
-      saksnummer={12345}
+      saksnummer="12345"
       behandlingId={1}
       behandlingVersjon={2}
     />);

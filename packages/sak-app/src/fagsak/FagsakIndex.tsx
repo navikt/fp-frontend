@@ -6,7 +6,7 @@ import { Route, Redirect, useLocation } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson, Kodeverk, FagsakPersoner,
+  FamilieHendelseSamling, Fagsak, Kodeverk, FagsakPersoner,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -28,7 +28,7 @@ import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 type AnnenPartBehandling = {
   saksnr: {
-    verdi: number;
+    verdi: string;
   };
   behandlingId: number;
 };
@@ -55,9 +55,8 @@ const FagsakIndex: FunctionComponent = () => {
 
   const oppfriskBehandlinger = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
 
-  const { selected: selectedSaksnummer } = useTrackRouteParam<number>({
+  const { selected: selectedSaksnummer } = useTrackRouteParam<string>({
     paramName: 'saksnummer',
-    parse: (saksnummerFromUrl) => Number.parseInt(saksnummerFromUrl, 10),
   });
 
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
@@ -114,7 +113,7 @@ const FagsakIndex: FunctionComponent = () => {
     return <LoadingPanel />;
   }
 
-  if (fagsak.saksnummer !== selectedSaksnummer) {
+  if (fagsak.saksnummerString !== selectedSaksnummer) {
     return <Redirect to={pathToMissingPage()} />;
   }
 

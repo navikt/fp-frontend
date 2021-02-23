@@ -14,7 +14,7 @@ import UttakProsessIndex from './UttakProsessIndex';
 
 describe('<UttakProsessIndex>', () => {
   const fagsak = {
-    saksnummer: 123,
+    saksnummerString: '123',
     sakstype: {
       kode: fagsakYtelseType.FORELDREPENGER,
     },

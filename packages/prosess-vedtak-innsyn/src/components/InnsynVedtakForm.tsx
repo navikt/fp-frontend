@@ -83,7 +83,7 @@ interface PureOwnProps {
   innsynMottattDato: string;
   innsynResultatType: Kodeverk;
   alleDokumenter: Dokument[];
-  saksNr: number;
+  saksNr: string;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: any) => Promise<any>;
   previewCallback: (data: ForhandsvisData) => Promise<any>;
