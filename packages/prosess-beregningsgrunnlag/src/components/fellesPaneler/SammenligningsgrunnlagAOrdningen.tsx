@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import {
   HorizontalRectSeries, FlexibleWidthXYPlot,
 } from 'react-vis';
@@ -11,14 +11,13 @@ import {
   FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 import moment from 'moment';
-import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import {
   Inntektsgrunnlag,
   InntektsgrunnlagInntekt,
   InntektsgrunnlagMåned,
-  RelevanteStatuserProp,
 } from '@fpsak-frontend/types';
+import inntektTyper from '@fpsak-frontend/kodeverk/src/inntektTyper';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import styles from './sammenligningsgrunnlagAOrdningen.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
@@ -26,29 +25,22 @@ import Lesmerpanel from '../redesign/LesmerPanel';
 
 const grafFargeAT = '#99bdcd';
 const grafFargeFL = '#c1b5d0';
+const grafFargeYtelse = '#C6C2BF';
 const grafBorderFarge = '#0c5472';
-
-const finnAndelerStatus = (relevanteStatuser: RelevanteStatuserProp): string => {
-  if (relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) return aktivitetStatus.KOMBINERT_AT_FL;
-  if (relevanteStatuser.isFrilanser) return aktivitetStatus.FRILANSER;
-  if (relevanteStatuser.isArbeidstaker) return aktivitetStatus.ARBEIDSTAKER;
-  return null;
-};
 
 const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: string): number => {
   if (!andeler || andeler.length === 0) {
     return 0;
   }
   if (status) {
-    return andeler.filter((andel) => andel.aktivitetStatus.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+    return andeler.filter((andel) => andel.inntektType.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
   }
   return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
 };
 
-const finnMaksVerdienFraRelevanteAndeler = (andeler: InntektsgrunnlagMåned[],
-  relevanteStatuser: RelevanteStatuserProp,
+const finnMaksVerdien = (andeler: InntektsgrunnlagMåned[],
   skjeringstidspunktDato: string): number => {
-  if (andeler && (relevanteStatuser.isFrilanser || relevanteStatuser.isArbeidstaker)) {
+  if (andeler) {
     let radMax = 0;
     for (let step = 12; step > 0; step -= 1) {
       const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
@@ -60,46 +52,55 @@ const finnMaksVerdienFraRelevanteAndeler = (andeler: InntektsgrunnlagMåned[],
   }
   return null;
 };
-const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser: RelevanteStatuserProp, maks: number, atBelop: number, flBelop: number): number => {
-  if (relevanteStatuser.isFrilanser && relevanteStatuser.isArbeidstaker) {
+const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser: Inntektstyper, maks: number, atBelop: number, flBelop: number): number => {
+  if (relevanteStatuser.harFrilansinntekt && relevanteStatuser.harArbeidsinntekt) {
     return maks - (atBelop) - (flBelop);
   }
-  if (relevanteStatuser.isArbeidstaker) return maks - atBelop;
-  if (relevanteStatuser.isFrilanser) return maks - flBelop;
+  if (relevanteStatuser.harArbeidsinntekt) return maks - atBelop;
+  if (relevanteStatuser.harFrilansinntekt) return maks - flBelop;
   return null;
 };
 
-const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: RelevanteStatuserProp): ReactElement => {
+const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper): ReactElement => {
   const sumATAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
+    .filter((innt) => innt.inntektType.kode === inntektTyper.ARBEID)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   const sumFLAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.aktivitetStatus.kode === aktivitetStatus.FRILANSER)
+    .filter((innt) => innt.inntektType.kode === inntektTyper.FRILANS)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
+  const sumYtelseAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
+    .filter((innt) => innt.inntektType.kode === inntektTyper.YTELSE)
+    .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
+
   return (
     <>
       <Row>
         <Column
-          xs={relevanteStatuser.isArbeidstaker && relevanteStatuser.isFrilanser ? '11' : '9'}
+          xs={relevanteStatuser.harArbeidsinntekt && relevanteStatuser.harFrilansinntekt ? '11' : '9'}
           className={beregningStyles.noPaddingRight}
         >
           <div className={beregningStyles.colDevider} />
         </Column>
       </Row>
       <Row>
-        <Column xs="7">
+        <Column xs="8">
           <Normaltekst className={beregningStyles.semiBoldText}>
             <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel" />
           </Normaltekst>
         </Column>
-        {relevanteStatuser.isArbeidstaker && (
-          <Column xs="2" className={beregningStyles.colMaanedText}>
+        {relevanteStatuser.harArbeidsinntekt && (
+          <Column xs="1" className={beregningStyles.colMaanedText}>
             <Element className={beregningStyles.semiBoldText}>{formatCurrencyNoKr(sumATAndeler)}</Element>
           </Column>
         )}
-        {relevanteStatuser.isFrilanser && (
-          <Column xs="2" className={beregningStyles.colMaanedText}>
+        {relevanteStatuser.harFrilansinntekt && (
+          <Column xs="1" className={beregningStyles.colMaanedText}>
             <Element>{formatCurrencyNoKr(sumFLAndeler)}</Element>
+          </Column>
+        )}
+        {relevanteStatuser.harYtelseinntekt && (
+          <Column xs="1" className={beregningStyles.colMaanedText}>
+            <Element>{formatCurrencyNoKr(sumYtelseAndeler)}</Element>
           </Column>
         )}
         <Column xs="1" className={beregningStyles.rightAlignElementNoWrap} />
@@ -108,39 +109,47 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
   );
 };
 
-const lagRad = (relevanteStatuser: RelevanteStatuserProp, månedMedInntekter: InntektsgrunnlagMåned, maksVerdi: number, aarMaaned: string): ReactElement => {
+const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: InntektsgrunnlagMåned, maksVerdi: number, aarMaaned: string): ReactElement => {
   const dato = `${aarMaaned}01`;
   const maanedNavn = moment(dato, ISO_DATE_FORMAT).format('MMM');
   const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1, 3);
   const maaned = moment(dato, ISO_DATE_FORMAT).format('MM');
   const aar = moment(dato, ISO_DATE_FORMAT).format('YYYY');
-  const atBelop = finnInntektForStatus(månedMedInntekter?.inntekter, aktivitetStatus.ARBEIDSTAKER);
-  const flBelop = finnInntektForStatus(månedMedInntekter?.inntekter, aktivitetStatus.FRILANSER);
-  const rest = finnRestVerdienFraRelevanteAndeler(relevanteStatuser, maksVerdi, atBelop, flBelop);
+  const atBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektTyper.ARBEID);
+  const flBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektTyper.FRILANS);
+  const ytelseBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektTyper.YTELSE);
+  const rest = finnRestVerdienFraRelevanteAndeler(relevanteStatuser, maksVerdi, atBeløp, flBeløp);
   return (
     <React.Fragment key={`${dato}wrapper`}>
       { maaned === '01' && (
         <Row className={styles.aarDeviderRow}>
-          <Column xs={relevanteStatuser.isArbeidstaker && relevanteStatuser.isFrilanser ? '12' : '10'} className={styles.aarDevider} />
+          <Column xs={relevanteStatuser.harArbeidsinntekt && relevanteStatuser.harFrilansinntekt ? '12' : '10'} className={styles.aarDevider} />
         </Row>
       )}
       <Row>
         <Column xs="1" className={styles.maanedColumn}>
           <Undertekst>{formattedMaaned}</Undertekst>
         </Column>
-        <Column xs="6" className={styles.chartColumn}>
+        <Column xs="7" className={styles.chartColumn}>
           <FlexibleWidthXYPlot height={10} stackBy="x" yDomain={[1, 1]}>
-            {relevanteStatuser.isArbeidstaker && (
+            {relevanteStatuser.harArbeidsinntekt && (
               <HorizontalRectSeries
-                data={[{ y0: 0.5, y: 1, x: atBelop }]}
+                data={[{ y0: 0.5, y: 1, x: atBeløp }]}
                 fill={grafFargeAT}
                 stroke={grafBorderFarge}
               />
             )}
-            {relevanteStatuser.isFrilanser && (
+            {relevanteStatuser.harFrilansinntekt && (
               <HorizontalRectSeries
-                data={[{ y0: 0.5, y: 1, x: flBelop }]}
+                data={[{ y0: 0.5, y: 1, x: flBeløp }]}
                 fill={grafFargeFL}
+                stroke={grafBorderFarge}
+              />
+            )}
+            {relevanteStatuser.harYtelseinntekt && (
+              <HorizontalRectSeries
+                data={[{ y0: 0.5, y: 1, x: ytelseBeløp }]}
+                fill={grafFargeYtelse}
                 stroke={grafBorderFarge}
               />
             )}
@@ -152,14 +161,19 @@ const lagRad = (relevanteStatuser: RelevanteStatuserProp, månedMedInntekter: In
           </FlexibleWidthXYPlot>
 
         </Column>
-        {relevanteStatuser.isArbeidstaker && (
-          <Column xs="2" className={beregningStyles.colMaanedText}>
-            <Undertekst>{formatCurrencyNoKr(atBelop)}</Undertekst>
+        {relevanteStatuser.harArbeidsinntekt && (
+          <Column xs="1" className={beregningStyles.colMaanedText}>
+            <Undertekst>{formatCurrencyNoKr(atBeløp)}</Undertekst>
           </Column>
         )}
-        {relevanteStatuser.isFrilanser && (
-          <Column xs="2" className={relevanteStatuser.isArbeidstaker ? beregningStyles.colAarText : beregningStyles.colMaanedText}>
-            <Undertekst>{formatCurrencyNoKr(flBelop)}</Undertekst>
+        {relevanteStatuser.harFrilansinntekt && (
+          <Column xs="1" className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}>
+            <Undertekst>{formatCurrencyNoKr(flBeløp)}</Undertekst>
+          </Column>
+        )}
+        {relevanteStatuser.harYtelseinntekt && (
+          <Column xs="1" className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}>
+            <Undertekst>{formatCurrencyNoKr(ytelseBeløp)}</Undertekst>
           </Column>
         )}
         <Column xs="1" className={beregningStyles.rightAlignElementNoWrap}>
@@ -171,9 +185,9 @@ const lagRad = (relevanteStatuser: RelevanteStatuserProp, månedMedInntekter: In
     </React.Fragment>
   );
 };
-const lagRader = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: RelevanteStatuserProp, skjeringstidspunktDato: string): ReactElement[] => {
+const lagRader = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper, skjeringstidspunktDato: string): ReactElement[] => {
   const rows = [];
-  const maksVerdi = finnMaksVerdienFraRelevanteAndeler(andeler, relevanteStatuser, skjeringstidspunktDato);
+  const maksVerdi = finnMaksVerdien(andeler, skjeringstidspunktDato);
   for (let step = 12; step > 0; step -= 1) {
     const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
     const månedMedInntekter = andeler.find((andel) => moment(andel.fom, ISO_DATE_FORMAT).format('YYYYMM') === yearMont);
@@ -182,7 +196,7 @@ const lagRader = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: Relevant
   return rows;
 };
 
-const lagOverskrift = (andelStatus, userIdent) => (
+const lagOverskrift = (userIdent?: string): ReactElement => (
   <>
     <FlexRow key="SamenenligningsGrunnlagOverskrift">
       <FlexColumn>
@@ -197,54 +211,76 @@ const lagOverskrift = (andelStatus, userIdent) => (
     <VerticalSpacer eightPx />
     <FlexRow>
       <FlexColumn>
-        <FormattedMessage id={`Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ingress.${andelStatus}`} />
+        <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ingress" />
       </FlexColumn>
     </FlexRow>
   </>
 );
 
+const finnesInntektAvType = (måneder: InntektsgrunnlagMåned[], status: string): boolean => måneder.flatMap(((p) => p.inntekter))
+  .some((innt) => innt.inntektType.kode === status);
+
 type OwnProps = {
     sammenligningsGrunnlagInntekter: Inntektsgrunnlag;
-    relevanteStatuser: RelevanteStatuserProp;
     skjeringstidspunktDato: string;
 };
 
+type Inntektstyper = {
+  harFrilansinntekt: boolean;
+  harArbeidsinntekt: boolean;
+  harYtelseinntekt: boolean;
+}
+
 export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  sammenligningsGrunnlagInntekter, relevanteStatuser, skjeringstidspunktDato, intl,
+  sammenligningsGrunnlagInntekter, skjeringstidspunktDato, intl,
 }) => {
   const måneder = sammenligningsGrunnlagInntekter?.måneder;
-  if (!måneder || måneder.length === 0 || !skjeringstidspunktDato || relevanteStatuser.isSelvstendigNaeringsdrivende) {
+  if (!måneder || måneder.length === 0 || !skjeringstidspunktDato) {
     return null;
   }
-  const andelStatus = finnAndelerStatus(relevanteStatuser);
+  const inntektstyper = {
+    harFrilansinntekt: useMemo(() => finnesInntektAvType(måneder, inntektTyper.FRILANS), [måneder]),
+    harArbeidsinntekt: useMemo(() => finnesInntektAvType(måneder, inntektTyper.ARBEID), [måneder]),
+    harYtelseinntekt: useMemo(() => finnesInntektAvType(måneder, inntektTyper.YTELSE), [måneder]),
+  } as Inntektstyper;
+
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
       <AvsnittSkiller spaceAbove spaceUnder />
       <Lesmerpanel
-        className={styles.lesMer}
-        intro={lagOverskrift(andelStatus, userIdent)}
+        intro={lagOverskrift(userIdent)}
         lukkTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SkjulMaaneder' })}
         apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder' })}
         defaultApen
       >
-        {relevanteStatuser.isArbeidstaker && relevanteStatuser.isFrilanser && (
         <Row>
           <Column xs="1" className={styles.maanedColumn} />
-          <Column xs="6" />
-          <Column xs="2" className={beregningStyles.colMaanedText}>
+          <Column xs="7" />
+          {inntektstyper.harArbeidsinntekt
+          && (
+          <Column xs="1" className={beregningStyles.colMaanedText}>
             <Undertekst className={beregningStyles.semiBoldText}>Arbeid</Undertekst>
           </Column>
-          <Column xs="2" className={beregningStyles.colAarText}>
-            <Undertekst className={beregningStyles.semiBoldText}>Frilans</Undertekst>
-          </Column>
+          )}
+          {inntektstyper.harFrilansinntekt
+          && (
+            <Column xs="1" className={beregningStyles.colAarText}>
+              <Undertekst className={beregningStyles.semiBoldText}>Frilans</Undertekst>
+            </Column>
+          )}
+          {inntektstyper.harYtelseinntekt
+          && (
+            <Column xs="1" className={beregningStyles.colMaanedText}>
+              <Undertekst className={beregningStyles.semiBoldText}>Ytelse</Undertekst>
+            </Column>
+          )}
           <Column xs="1" />
         </Row>
-        )}
-        {lagRader(måneder, relevanteStatuser, skjeringstidspunktDato)}
+        {lagRader(måneder, inntektstyper, skjeringstidspunktDato)}
 
       </Lesmerpanel>
-      {lagSumRad(måneder, relevanteStatuser)}
+      {lagSumRad(måneder, inntektstyper)}
     </>
   );
 };

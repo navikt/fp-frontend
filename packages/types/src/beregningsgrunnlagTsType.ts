@@ -5,7 +5,7 @@ import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforhold
 import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 
 export type InntektsgrunnlagInntekt = Readonly<{
-  aktivitetStatus: Kodeverk,
+  inntektType: Kodeverk,
   beløp: number;
 }>
 

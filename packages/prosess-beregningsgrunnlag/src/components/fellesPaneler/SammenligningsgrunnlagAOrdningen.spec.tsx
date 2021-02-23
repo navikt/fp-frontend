@@ -3,7 +3,6 @@ import React from 'react';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
-import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import { SammenligningsgrunnlagAOrdningenImpl } from './SammenligningsgrunnlagAOrdningen';
 
@@ -21,9 +20,9 @@ const inntektsgrunnlagAT = {
       tom: '2020-01-31',
       inntekter: [
         {
-          aktivitetStatus: {
-            kode: 'AT',
-            kodeverk: 'AKTIVITET_STATUS',
+          inntektType: {
+            kode: 'ARBEID',
+            kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
         },
@@ -34,9 +33,9 @@ const inntektsgrunnlagAT = {
       tom: '2020-02-28',
       inntekter: [
         {
-          aktivitetStatus: {
-            kode: 'AT',
-            kodeverk: 'AKTIVITET_STATUS',
+          inntektType: {
+            kode: 'ARBEID',
+            kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
         },
@@ -52,9 +51,9 @@ const inntektsgrunnlagATFL = {
       tom: '2020-01-31',
       inntekter: [
         {
-          aktivitetStatus: {
-            kode: 'AT',
-            kodeverk: 'AKTIVITET_STATUS',
+          inntektType: {
+            kode: 'ARBEID',
+            kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
         },
@@ -65,9 +64,9 @@ const inntektsgrunnlagATFL = {
       tom: '2020-02-28',
       inntekter: [
         {
-          aktivitetStatus: {
-            kode: 'FL',
-            kodeverk: 'AKTIVITET_STATUS',
+          inntektType: {
+            kode: 'FRILANS',
+            kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
         },
@@ -81,7 +80,6 @@ const skjeringstidspunktDato = '2019-09-16';
 describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
   it('Skal se at panelet ikke rendrer ved manglende SammenligningsgrunnlagInntekt', () => {
     const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
-      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={{}}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
@@ -92,7 +90,6 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
   it('Skal se at panelet ikke rendrer ved SammenligningsgrunnlagInntekt og SN', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = true;
     const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
-      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
@@ -103,7 +100,6 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
   it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt ved kun AT', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
-      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
@@ -117,16 +113,12 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
     const sumATAndeler = wrapper.find('Element').at(0);
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(10000));
-    const sumFLAndeler = wrapper.find('Element').at(1);
-    expect(sumFLAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(0));
     const xyz = wrapper.find('FlexibleXYPlot');
     expect(xyz).toHaveLength(12);
   });
 
   it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt ved kun AT_FL', () => {
-    relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
-      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       sammenligningsGrunnlagInntekter={inntektsgrunnlagATFL}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
