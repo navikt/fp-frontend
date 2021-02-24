@@ -11,7 +11,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk,
-  KodeverkMedNavn, Personopplysninger, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  KodeverkMedNavn, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import UttakPerioder from './UttakPerioder';
@@ -43,7 +43,7 @@ interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   behandlingStatus: Kodeverk;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
@@ -69,7 +69,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
   kanOverstyre,
   faktaArbeidsforhold,
   alleKodeverk,
-  personopplysninger,
+  personoversikt,
   behandlingStatus,
   familiehendelse,
   vilkarForSykdomExists,
@@ -98,7 +98,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
         kanOverstyre={kanOverstyre}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={faktaArbeidsforhold}
-        personopplysninger={personopplysninger}
+        personoversikt={personoversikt}
         behandlingStatus={behandlingStatus}
         familiehendelse={familiehendelse}
         vilkarForSykdomExists={vilkarForSykdomExists}

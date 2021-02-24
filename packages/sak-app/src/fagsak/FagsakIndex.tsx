@@ -6,7 +6,7 @@ import { Route, Redirect, useLocation } from 'react-router-dom';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import {
-  FamilieHendelseSamling, Fagsak, Kodeverk, FagsakPersoner,
+  Fagsak, Kodeverk, FagsakPersoner,
 } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
@@ -37,7 +37,7 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
   annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId,
 );
 
-const erTilbakekreving = (behandlingType: Kodeverk): boolean => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
+const erTilbakekreving = (behandlingType?: Kodeverk): boolean => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
   || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
 /**
@@ -62,7 +62,7 @@ const FagsakIndex: FunctionComponent = () => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
 
   const { data: fagsakPersoner, state: fagsakPersonerState } = restApiHooks.useGlobalStateRestApi<FagsakPersoner>(FpsakApiKeys.SAK_PERSONER,
-    undefined, {
+    { saksnummer: selectedSaksnummer }, {
       updateTriggers: [selectedSaksnummer],
       suspendRequest: !selectedSaksnummer,
     });
@@ -90,9 +90,6 @@ const FagsakIndex: FunctionComponent = () => {
     keepData: true,
   };
 
-  const {
-    data: behandlingFamilieHendelse, state: familieHendelseState,
-  } = restApiHooks.useRestApi<FamilieHendelseSamling>(FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE, undefined, options);
   const {
     data: annenPartBehandling, state: annenPartState,
   } = restApiHooks.useRestApi<AnnenPartBehandling>(FpsakApiKeys.ANNEN_PART_BEHANDLING, { saksnummer: selectedSaksnummer }, options);
@@ -163,13 +160,12 @@ const FagsakIndex: FunctionComponent = () => {
             return null;
           }
 
-          if (familieHendelseState === RestApiState.LOADING || annenPartState === RestApiState.LOADING) {
+          if (annenPartState === RestApiState.LOADING) {
             return <LoadingPanel />;
           }
 
           return (
             <VisittkortSakIndex
-              familieHendelse={behandlingFamilieHendelse}
               lenkeTilAnnenPart={annenPartBehandling ? finnLenkeTilAnnenPart(annenPartBehandling) : undefined}
               fagsak={fagsak}
               fagsakPersoner={fagsakPersoner}

@@ -4,7 +4,7 @@ import {
   Rettigheter, BehandlingPaVent, SettPaVentParams,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import EngangsstonadProsess from './EngangsstonadProsess';
@@ -28,6 +28,7 @@ interface OwnProps {
   hasFetchError: boolean;
   setBehandling: (behandling: Behandling) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  personoversikt: Personoversikt;
 }
 
 interface FaktaPanelInfo {
@@ -52,6 +53,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   hasFetchError,
   setBehandling,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
@@ -80,6 +82,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         setBehandling={setBehandling}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />
       <EngangsstonadFakta
         behandling={behandling}
@@ -95,6 +98,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         setApentFaktaPanel={setApentFaktaPanel}
         setBehandling={setBehandling}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />
     </>
   );

@@ -51,7 +51,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   arbeidsgiverOpplysningerPerId,
 }) => {
   const {
-    aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag,
+    aksjonspunkter, soknad, vilkar, inntektArbeidYtelse, beregningsgrunnlag,
   } = data;
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiSvpHooks.useRestApiRunner<Behandling>(SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
@@ -62,7 +62,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvSvpPaneler = {
-    fagsak, fagsakPerson, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError, arbeidsgiverOpplysningerPerId,
+    fagsak, fagsakPerson, behandling, soknad, vilkar, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError, arbeidsgiverOpplysningerPerId,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

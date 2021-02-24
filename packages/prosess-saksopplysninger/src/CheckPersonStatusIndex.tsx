@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-import { Medlemskap, Personopplysninger } from '@fpsak-frontend/types';
+import { Medlemskap, Personoversikt } from '@fpsak-frontend/types';
 
 import CheckPersonStatusForm from './components/CheckPersonStatusForm';
 import messages from '../i18n/nb_NO.json';
@@ -16,13 +16,13 @@ const intl = createIntl({
 
 interface OwnProps {
   medlemskap: Medlemskap;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
 }
 
 const CheckPersonStatusIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
   behandling,
   medlemskap,
-  personopplysninger,
+  personoversikt,
   aksjonspunkter,
   alleKodeverk,
   submitCallback,
@@ -35,7 +35,7 @@ const CheckPersonStatusIndex: FunctionComponent<OwnProps & StandardProsessFormPr
       behandlingVersjon={behandling.versjon}
       behandlingHenlagt={behandling.behandlingHenlagt}
       gjeldeneFom={medlemskap.fom}
-      personopplysninger={personopplysninger}
+      personoversikt={personoversikt}
       alleKodeverk={alleKodeverk}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}

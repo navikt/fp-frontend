@@ -22,7 +22,7 @@ const VisittkortLabels: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   fagsakPerson,
   harVerge,
 }) => {
-  const erSokerUnder18 = useMemo(() => moment().diff(fagsakPerson.fodselsdato, 'years') < 18, [fagsakPerson]);
+  const erSokerUnder18 = useMemo(() => moment().diff(fagsakPerson.fødselsdato, 'years') < 18, [fagsakPerson]);
   return (
     <>
       {fagsakPerson.dodsdato && (

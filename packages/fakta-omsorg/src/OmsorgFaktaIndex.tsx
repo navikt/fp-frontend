@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, KodeverkMedNavn, Personopplysninger, Soknad, Ytelsefordeling,
+  Behandling, KodeverkMedNavn, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
@@ -20,7 +20,7 @@ interface OwnProps {
   behandling: Behandling;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
@@ -28,7 +28,7 @@ const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
   behandling,
   ytelsefordeling,
   soknad,
-  personopplysninger,
+  personoversikt,
   aksjonspunkter,
   alleKodeverk,
   alleMerknaderFraBeslutter,
@@ -43,7 +43,7 @@ const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
       behandlingVersjon={behandling.versjon}
       aksjonspunkter={aksjonspunkter}
       ytelsefordeling={ytelsefordeling}
-      personopplysninger={personopplysninger}
+      personoversikt={personoversikt}
       soknad={soknad}
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

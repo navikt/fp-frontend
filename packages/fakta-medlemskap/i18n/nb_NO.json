@@ -56,5 +56,13 @@
   "OppholdstillatelseTabell.Overskrift": "Oppholdstillatelser",
   "OppholdstillatelseTabell.Periode": "Periode",
   "OppholdstillatelseTabell.Type": "Type",
-  "OppholdstillatelseTabell.Ukjent": "UKJENT"
+  "OppholdstillatelseTabell.Ukjent": "UKJENT",
+
+  "BostedSokerView.ForeignAddresse": "Utenlandsadresse",
+  "BostedSokerView.Region": "Region",
+
+  "BostedSokerFaktaIndex.Soker": "Søker",
+
+  "Personstatus.Hjelpetekst": "Personstatus",
+  "Personstatus.Ukjent": "Ukjent"
 }

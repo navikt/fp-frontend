@@ -1,6 +1,6 @@
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import {
-  FamilieHendelse, Kodeverk, Personopplysninger, Soknad,
+  FamilieHendelse, Kodeverk, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { diff } from '@fpsak-frontend/utils';
 
@@ -30,7 +30,7 @@ const getIsBarnetsAnkomstTilNorgeDatoEdited = (
 const getIsAntallBarnOmsorgOgForeldreansvarEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean => isNotEqual(soknad.antallBarn,
   familiehendelse.antallBarnTilBeregning);
 
-const getIsFodselsdatoerEdited = (soknad: Soknad, personopplysning: Personopplysninger): Record<number, boolean> => {
+const getIsFodselsdatoerEdited = (soknad: Soknad, personopplysning: Personoversikt): Record<number, boolean> => {
   const soknadFodselsdatoer = soknad.soknadType.kode === soknadType.FODSEL
     ? soknad.fodselsdatoer
     : soknad.adopsjonFodelsedatoer;
@@ -38,7 +38,7 @@ const getIsFodselsdatoerEdited = (soknad: Soknad, personopplysning: Personopplys
   const barn = personopplysning.barnSoktFor;
 
   const fodselsdatoerEdited = Object.keys(soknadFodselsdatoer)
-    .filter((barnNummer) => barn.some((b: Personopplysninger) => `${b.nummer}` === barnNummer))
+    .filter((barnNummer) => barn.some((b: Personoversikt) => `${b.nummer}` === barnNummer))
     .map((barnNummer) => ({
       [barnNummer]: barn.find((b) => `${b.nummer}` === barnNummer).fodselsdato !== soknadFodselsdatoer[barnNummer],
     }))
@@ -71,7 +71,7 @@ export type FieldEditedInfo = {
 const isFieldEdited = (
   soknad: Soknad = {} as Soknad,
   familiehendelse: FamilieHendelse = {} as FamilieHendelse,
-  personopplysning?: Personopplysninger,
+  personopplysning?: Personoversikt,
 ): FieldEditedInfo => ({
   termindato: getIsTerminDatoEdited(soknad, familiehendelse),
   antallBarn: getIsAntallBarnEdited(soknad, familiehendelse),

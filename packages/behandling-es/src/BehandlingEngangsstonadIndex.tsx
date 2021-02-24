@@ -4,7 +4,7 @@ import React, {
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
-  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson, ArbeidsgiverOpplysningerWrapper,
+  Fagsak, Behandling, KodeverkMedNavn, FagsakPerson, ArbeidsgiverOpplysningerWrapper, Personoversikt,
 } from '@fpsak-frontend/types';
 import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
@@ -18,11 +18,15 @@ import FetchedData from './types/fetchedDataTsType';
 const engansstonadData = [
   { key: EsBehandlingApiKeys.AKSJONSPUNKTER },
   { key: EsBehandlingApiKeys.VILKAR },
-  { key: EsBehandlingApiKeys.PERSONOPPLYSNINGER },
   { key: EsBehandlingApiKeys.SOKNAD },
   { key: EsBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
   { key: EsBehandlingApiKeys.SIMULERING_RESULTAT },
   { key: EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD }];
+
+const endepunkterSomSkalHentesEnGang = [
+  { key: EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
+  { key: EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT },
+];
 
 interface OwnProps {
   behandlingId: number;
@@ -114,16 +118,17 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
   const { data, state } = restApiEsHooks.useMultipleRestApi<FetchedData>(engansstonadData,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
-  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiEsHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
-    EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
-      updateTriggers: [!behandling],
-      suspendRequest: !behandling,
-    },
-  );
+  const { data: opplysningsdata, state: opplysningsdataState } = restApiEsHooks.useMultipleRestApi<{
+    arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerWrapper,
+    behandlingPersonoversikt: Personoversikt,
+  }>(endepunkterSomSkalHentesEnGang, {
+    updateTriggers: [!behandling],
+    suspendRequest: !behandling,
+  });
 
   const harIkkeHentetBehandlingsdata = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  const harIkkeHentetArbeidsgiverOpplysninger = arbeidOppState === RestApiState.LOADING || arbeidOppState === RestApiState.NOT_STARTED;
-  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || (harIkkeHentetBehandlingsdata && data === undefined)) {
+  const harIkkeHentetOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
+  if (!behandling || harIkkeHentetOpplysninger || (harIkkeHentetBehandlingsdata && data === undefined)) {
     return <LoadingPanel />;
   }
 
@@ -149,7 +154,8 @@ const BehandlingEngangsstonadIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
+        arbeidsgiverOpplysningerPerId={opplysningsdata.arbeidsgiverOpplysninger.arbeidsgivere}
+        personoversikt={opplysningsdata.behandlingPersonoversikt}
       />
     </>
   );

@@ -10,41 +10,39 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import Region from '@fpsak-frontend/kodeverk/src/region';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import {
-  Kodeverk, KodeverkMedNavn, PersonopplysningAdresse, Personopplysninger,
+  Kodeverk, KodeverkMedNavn, Personadresse, PersonopplysningMedlem,
 } from '@fpsak-frontend/types';
 
-import styles from './bostedSokerView.less';
+import styles from './medlemskapBostedSokerView.less';
 
-const getAdresse = (adresser: PersonopplysningAdresse[]): string => {
+const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
   return adresse || '-';
 };
 
-const getUtlandsadresse = (adresser: PersonopplysningAdresse[]): string => {
+const getUtlandsadresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const utlandsAdresse = adresseListe[opplysningAdresseType.UTENLANDSK_POSTADRESSE] || adresseListe[opplysningAdresseType.UTENLANDSK_NAV_TILLEGSADRESSE];
   return utlandsAdresse || '-';
 };
 
-const getPersonstatus = (personopplysning: Personopplysninger): Kodeverk => (personopplysning.avklartPersonstatus
-  && personopplysning.avklartPersonstatus.overstyrtPersonstatus ? personopplysning.avklartPersonstatus.overstyrtPersonstatus
-  : personopplysning.personstatus);
+const getPersonstatus = (personoversikt: PersonopplysningMedlem): Kodeverk => (personoversikt.avklartPersonstatus
+  && personoversikt.avklartPersonstatus.overstyrtPersonstatus ? personoversikt.avklartPersonstatus.overstyrtPersonstatus
+  : personoversikt.personstatus);
 
 interface OwnProps {
-  personopplysninger: Personopplysninger;
+  personopplysninger: PersonopplysningMedlem;
   sokerTypeText: string;
   regionTypes: KodeverkMedNavn[];
-  sivilstandTypes: KodeverkMedNavn[];
   personstatusTypes: KodeverkMedNavn[];
 }
 
-export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const MedlemskapBostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   personopplysninger,
   sokerTypeText,
   regionTypes,
-  sivilstandTypes,
   personstatusTypes,
 }) => (
   <div className={styles.defaultBostedSoker}>
@@ -76,19 +74,6 @@ export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps
             </Tooltip>
           </div>
           )}
-        {personopplysninger.sivilstand
-          && (
-          <div className={styles.etikettMargin}>
-            <Tooltip content={intl.formatMessage({ id: 'Sivilstand.Hjelpetekst' })} alignBottom>
-              <Etikettfokus
-                type="fokus"
-                typo="undertekst"
-              >
-                {sivilstandTypes.find((s) => s.kode === personopplysninger.sivilstand.kode).navn}
-              </Etikettfokus>
-            </Tooltip>
-          </div>
-          )}
         {(personopplysninger.region && personopplysninger.region.kode !== Region.UDEFINERT)
           && (
           <div className={styles.etikettMargin}>
@@ -107,4 +92,4 @@ export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps
   </div>
 );
 
-export default injectIntl(BostedSokerView);
+export default injectIntl(MedlemskapBostedSokerView);

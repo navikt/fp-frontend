@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import { FamilieHendelseSamling } from '@fpsak-frontend/types';
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+import { FagsakHendelse } from '@fpsak-frontend/types';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
@@ -13,13 +13,14 @@ import VisittkortBarnInfoOmsorgPanel from './VisittkortBarnInfoOmsorgPanel';
 import styles from './visittkortBarnInfoPanel.less';
 
 interface OwnProps {
-  familieHendelse: FamilieHendelseSamling;
+  familiehendelse: FagsakHendelse;
 }
 
 const VisittkortBarnInfoPanel: FunctionComponent<OwnProps> = ({
-  familieHendelse,
+  familiehendelse,
 }) => {
-  const erFodselSoknad = familieHendelse.oppgitt.soknadType.kode === soknadType.FODSEL;
+  const erFodselEllerTerminSoknad = familiehendelse.hendelseType.kode === familieHendelseType.FODSEL
+    || familiehendelse.hendelseType.kode === familieHendelseType.TERMIN;
 
   return (
     <div className={styles.container}>
@@ -28,8 +29,8 @@ const VisittkortBarnInfoPanel: FunctionComponent<OwnProps> = ({
           <FlexColumn className={styles.image}>
             <Image src={barnevognImage} />
           </FlexColumn>
-          {erFodselSoknad && <VisittkortBarnInfoFodselPanel familieHendelse={familieHendelse} />}
-          {!erFodselSoknad && <VisittkortBarnInfoOmsorgPanel familieHendelse={familieHendelse} />}
+          {erFodselEllerTerminSoknad && <VisittkortBarnInfoFodselPanel familiehendelse={familiehendelse} />}
+          {!erFodselEllerTerminSoknad && <VisittkortBarnInfoOmsorgPanel familiehendelse={familiehendelse} />}
         </FlexRow>
       </FlexContainer>
     </div>

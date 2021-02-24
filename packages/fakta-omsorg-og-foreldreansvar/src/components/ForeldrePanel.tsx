@@ -11,7 +11,7 @@ import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-c
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { FieldArrayFieldsProps } from 'redux-form';
-import { Personopplysninger } from '@fpsak-frontend/types';
+import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
 
 const getParentHeader = (erMor: boolean): string => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
 
@@ -36,7 +36,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (sokerPersonopplysninger: Personopplysninger) => FormValues;
+  buildInitialValues?: (personoversikt: Personoversikt) => FormValues;
 }
 
 /**
@@ -97,7 +97,7 @@ export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   );
 };
 
-const buildSokerPersonopplysning = (sokerPersonopplysninger: Personopplysninger): CustomPersonopplysninger => {
+const buildSokerPersonopplysning = (sokerPersonopplysninger: PersonopplysningerBasis): CustomPersonopplysninger => {
   const addresses = getAddresses(sokerPersonopplysninger.adresser);
   const { avklartPersonstatus } = sokerPersonopplysninger;
   const isAvklartPersonstatusDod = avklartPersonstatus
@@ -115,7 +115,7 @@ const buildSokerPersonopplysning = (sokerPersonopplysninger: Personopplysninger)
   };
 };
 
-const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: Personopplysninger): CustomPersonopplysninger => {
+const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: PersonopplysningerBasis): CustomPersonopplysninger => {
   const secondaryParentAddresses = getAddresses(annenPartPersonopplysninger.adresser);
   const { avklartPersonstatus } = annenPartPersonopplysninger;
   const isAvklartPersonstatusDod = avklartPersonstatus
@@ -133,13 +133,13 @@ const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: Personopply
   };
 };
 
-ForeldrePanel.buildInitialValues = (sokerPersonopplysninger: Personopplysninger): FormValues => {
+ForeldrePanel.buildInitialValues = (personoversikt: Personoversikt): FormValues => {
   const parents = [];
 
-  const sokerOppl = buildSokerPersonopplysning(sokerPersonopplysninger);
+  const sokerOppl = buildSokerPersonopplysning(personoversikt.bruker);
   parents.push(sokerOppl);
 
-  const annenPartPersonopplysninger = sokerPersonopplysninger.annenPart;
+  const annenPartPersonopplysninger = personoversikt.annenPart;
 
   if (annenPartPersonopplysninger) {
     const annenPartOppl = buildAnnenPartPersonopplysning(annenPartPersonopplysninger);

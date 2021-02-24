@@ -1,5 +1,4 @@
 import SakenFaktaPanelDef from './faktaPaneler/SakenFaktaPanelDef';
-import ArbeidsforholdFaktaPanelDef from './faktaPaneler/ArbeidsforholdFaktaPanelDef';
 import YtelserFaktaPanelDef from './faktaPaneler/YtelserFaktaPanelDef';
 import VergeFaktaPanelDef from './faktaPaneler/VergeFaktaPanelDef';
 import TilleggsopplysningerFaktaPanelDef from './faktaPaneler/TilleggsopplysningerFaktaPanelDef';
@@ -10,7 +9,6 @@ import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/Medlemskapsvilkaret
 
 const faktaPanelDefinisjoner = [
   new SakenFaktaPanelDef(),
-  new ArbeidsforholdFaktaPanelDef(),
   new YtelserFaktaPanelDef(),
   new VergeFaktaPanelDef(),
   new TilleggsopplysningerFaktaPanelDef(),

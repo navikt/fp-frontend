@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  Kodeverk, FamilieHendelseSamling, Fagsak, KjønnkodeEnum, FagsakPersoner,
+  Kodeverk, Fagsak, KjønnkodeEnum, FagsakPersoner,
 } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
@@ -26,7 +26,6 @@ const utledKjonn = (kjonn: Kodeverk): Gender => {
 interface OwnProps {
   fagsak: Fagsak;
   fagsakPersoner: FagsakPersoner;
-  familieHendelse?: FamilieHendelseSamling;
   lenkeTilAnnenPart?: string;
   harVerge: boolean;
   erTilbakekreving: boolean;
@@ -36,7 +35,6 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   fagsak,
   fagsakPersoner,
-  familieHendelse,
   lenkeTilAnnenPart,
   harVerge,
   erTilbakekreving,
@@ -72,7 +70,7 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
               isActive={erMor}
             />
           </FlexColumn>
-          {annenPart && (
+          {annenPart && annenPart.aktørId && (
             <FlexColumn>
               <PersonCard
                 name={annenPart.navn}
@@ -83,14 +81,14 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
               />
             </FlexColumn>
           )}
-          {!annenPart && (
+          {annenPart && !annenPart.aktørId && (
             <FlexColumn>
               <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />
             </FlexColumn>
           )}
-          {familieHendelse && (
+          {fagsakPersoner.familiehendelse && (
             <FlexColumn className={styles.pushRight}>
-              <VisittkortBarnInfoPanel familieHendelse={familieHendelse} />
+              <VisittkortBarnInfoPanel familiehendelse={fagsakPersoner.familiehendelse} />
             </FlexColumn>
           )}
         </FlexRow>

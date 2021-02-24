@@ -9,10 +9,10 @@ import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { Personopplysninger } from '@fpsak-frontend/types';
 
-import { BostedSokerView } from './BostedSokerView';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-bosted-soker';
+import { MedlemskapBostedSokerView } from './MedlemskapBostedSokerView';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
-describe('<BostedsokerView>', () => {
+describe('<MedlemskapBostedSokerView>', () => {
   const soker = {
     navn: 'Espen Utvikler',
     aktoerId: '1',
@@ -82,7 +82,7 @@ describe('<BostedsokerView>', () => {
   }];
 
   it('vise navn', () => {
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
       personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
@@ -95,7 +95,7 @@ describe('<BostedsokerView>', () => {
   });
 
   it('skal vise  adresse informasjon', () => {
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
       personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
@@ -110,7 +110,7 @@ describe('<BostedsokerView>', () => {
   });
 
   it('skal vise etiketter', () => {
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
       personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}
@@ -138,7 +138,7 @@ describe('<BostedsokerView>', () => {
       kodeverk: '',
     };
 
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
       personopplysninger={soker as Personopplysninger}
       regionTypes={regionTypes}

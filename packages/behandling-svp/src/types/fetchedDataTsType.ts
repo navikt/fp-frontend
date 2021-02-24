@@ -1,12 +1,11 @@
 import {
-  BeregningsresultatFp, Aksjonspunkt, Vilkar, Personopplysninger, Soknad, InntektArbeidYtelse,
+  BeregningsresultatFp, Aksjonspunkt, Vilkar, Soknad, InntektArbeidYtelse,
   Beregningsgrunnlag, SimuleringResultat,
 } from '@fpsak-frontend/types';
 
 interface FetchedData {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
-  personopplysninger: Personopplysninger;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
   beregningresultatForeldrepenger: BeregningsresultatFp;

@@ -7,7 +7,8 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
+  Personoversikt,
   UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -45,7 +46,7 @@ interface OwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   familiehendelse: FamilieHendelseSamling;
   behandlingPaaVent?: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -64,7 +65,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   uttakPerioder,
   alleKodeverk,
   faktaArbeidsforhold,
-  personopplysninger,
+  personoversikt,
   familiehendelse,
   kanOverstyre,
   submitCallback,
@@ -115,7 +116,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           kanOverstyre={kanOverstyre && ytelsefordeling.endringsdato !== null}
           faktaArbeidsforhold={faktaArbeidsforhold}
-          personopplysninger={personopplysninger}
+          personoversikt={personoversikt}
           familiehendelse={familiehendelse}
           vilkarForSykdomExists={vilkarForSykdomExists}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

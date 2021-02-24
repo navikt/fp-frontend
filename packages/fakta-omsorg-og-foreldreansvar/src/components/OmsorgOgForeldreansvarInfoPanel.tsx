@@ -11,7 +11,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Aksjonspunkt, FamilieHendelse, KodeverkMedNavn, Personopplysninger, RelatertTilgrensedYtelse, Soknad,
+  Aksjonspunkt, FamilieHendelse, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
@@ -23,7 +23,7 @@ type FormValues = OmsorgFormValues & {
 interface PureOwnProps {
   intl: IntlShape;
   soknad: Soknad;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   gjeldendeFamiliehendelse: FamilieHendelse;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
   aksjonspunkter: Aksjonspunkt[];
@@ -65,7 +65,7 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
   alleMerknaderFraBeslutter,
   soknad,
   gjeldendeFamiliehendelse,
-  personopplysninger,
+  personoversikt,
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
@@ -81,7 +81,7 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       soknad={soknad}
       gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
-      personopplysninger={personopplysninger}
+      personoversikt={personoversikt}
     />
     <VerticalSpacer twentyPx />
     <FaktaBegrunnelseTextField
@@ -108,15 +108,15 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger,
+    (ownProps: PureOwnProps) => ownProps.personoversikt,
     (ownProps: PureOwnProps) => ownProps.innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (soknad, familiehendelse, personopplysning, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
+  (soknad, familiehendelse, personoversikt, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
       || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
     return {
-      ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning,
+      ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personoversikt,
         innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
       ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkt),
     };

@@ -18,9 +18,9 @@ class OmsorgvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getKomponent = (props) => <OmsorgOgForeldreansvarFaktaIndex {...props} />
 
-  getData = ({ soknad, personopplysninger, inntektArbeidYtelse }) => ({
+  getData = ({ soknad, personoversikt, inntektArbeidYtelse }) => ({
     soknad,
-    personopplysninger,
+    personoversikt,
     inntektArbeidYtelse,
   })
 }

@@ -22,5 +22,14 @@
   "BostedBarnView.DodsDato" : "Barnets dødsdato",
 
   "IkkeOmsorgPeriodeField.Periode": "Periode f.o.m. - t.o.m. dato",
-  "IkkeOmsorgPeriodeField.Add": "Legg til"
+  "IkkeOmsorgPeriodeField.Add": "Legg til",
+
+  "BostedSokerView.ForeignAddresse": "Utenlandsadresse",
+  "BostedSokerView.Region": "Region",
+
+  "BostedSokerFaktaIndex.Soker": "Søker",
+
+  "Personstatus.Hjelpetekst": "Personstatus",
+  "Personstatus.Ukjent": "Ukjent",
+  "Sivilstand.Hjelpetekst": "Sivilstand"
 }

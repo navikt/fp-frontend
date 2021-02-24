@@ -15,7 +15,7 @@ import { hasValidInteger, isObjectEmpty, required } from '@fpsak-frontend/utils'
 import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Personopplysninger, RelatertTilgrensedYtelse, Soknad,
+  Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
@@ -53,7 +53,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn[];
   hasOpenAksjonspunkter: boolean;
@@ -69,7 +69,7 @@ interface MappedOwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, personopplysning: Personopplysninger,
+  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, personoversikt: Personoversikt,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues,
   validate?: (intl: IntlShape, values: FormValues) => any,
@@ -179,9 +179,9 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger],
-  (soknad, familiehendelse, personopplysning): FieldEditedInfo => (
-    isFieldEdited(soknad, familiehendelse, personopplysning)
+    (ownProps: PureOwnProps) => ownProps.personoversikt],
+  (soknad, familiehendelse, personoversikt): FieldEditedInfo => (
+    isFieldEdited(soknad, familiehendelse, personoversikt)
   ),
 );
 
@@ -194,13 +194,13 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 const OmsorgOgForeldreansvarFaktaForm = connect(mapStateToProps)(OmsorgOgForeldreansvarFaktaFormImpl);
 
-OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse, personopplysning: Personopplysninger,
+OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse, personoversikt: Personoversikt,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
   vilkarType: familiehendelse.vilkarType ? familiehendelse.vilkarType.kode : '',
   originalAntallBarn: soknad.antallBarn,
-  ...ForeldrePanel.buildInitialValues(personopplysning),
-  ...BarnPanel.buildInitialValues(personopplysning, soknad),
+  ...ForeldrePanel.buildInitialValues(personoversikt),
+  ...BarnPanel.buildInitialValues(personoversikt, soknad),
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, familiehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });

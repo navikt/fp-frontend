@@ -18,8 +18,8 @@ class PanelDef extends ProsessStegPanelDef {
     SvpBehandlingApiKeys.MEDLEMSKAP,
   ]
 
-  getData = ({ personopplysninger }) => ({
-    personopplysninger,
+  getData = ({ personoversikt }) => ({
+    personoversikt,
   })
 }
 

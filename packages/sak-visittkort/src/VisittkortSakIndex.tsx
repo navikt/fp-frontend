@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import {
-  FamilieHendelseSamling, Fagsak, FagsakPersoner,
-} from '@fpsak-frontend/types';
+import { Fagsak, FagsakPersoner } from '@fpsak-frontend/types';
 
 import VisittkortPanel from './components/VisittkortPanel';
 import messages from '../i18n/nb_NO.json';
@@ -18,7 +16,6 @@ const intl = createIntl({
 interface OwnProps {
   fagsak: Fagsak;
   fagsakPersoner: FagsakPersoner;
-  familieHendelse?: FamilieHendelseSamling;
   lenkeTilAnnenPart?: string;
   harVerge?: boolean;
   erTilbakekreving?: boolean;
@@ -27,14 +24,12 @@ interface OwnProps {
 const VisittkortSakIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   fagsakPersoner,
-  familieHendelse,
   lenkeTilAnnenPart,
   harVerge = false,
   erTilbakekreving = false,
 }) => (
   <RawIntlProvider value={intl}>
     <VisittkortPanel
-      familieHendelse={familieHendelse}
       lenkeTilAnnenPart={lenkeTilAnnenPart}
       fagsak={fagsak}
       fagsakPersoner={fagsakPersoner}

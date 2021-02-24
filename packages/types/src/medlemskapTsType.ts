@@ -1,5 +1,5 @@
 import Kodeverk from './kodeverkTsType';
-import Personopplysninger from './personopplysningerTsType';
+import Personadresse from './personadresseTsType';
 
 export type MedlemskapPeriode = Readonly<{
   fom: string;
@@ -10,9 +10,27 @@ export type MedlemskapPeriode = Readonly<{
   beslutningsdato: string;
 }>
 
+export type PersonopplysningMedlem = Readonly<{
+  fnr: string;
+  navn: string;
+  aktoerId: string;
+  diskresjonskode: Kodeverk
+  navBrukerKjonn: Kodeverk;
+  personstatus: Kodeverk;
+  avklartPersonstatus: {
+    orginalPersonstatus: Kodeverk;
+    overstyrtPersonstatus: Kodeverk;
+  };
+  region: Kodeverk;
+  dodsdato?: string;
+  fodselsdato: string;
+  adresser: Personadresse[];
+}>
+
 export type MedlemPeriode = Readonly<{
   vurderingsdato: string;
-  personopplysninger: Personopplysninger;
+  personopplysningBruker: PersonopplysningMedlem;
+  personopplysningAnnenPart?: PersonopplysningMedlem;
   aksjonspunkter: string[];
   årsaker: string[];
   oppholdsrettVurdering: boolean;

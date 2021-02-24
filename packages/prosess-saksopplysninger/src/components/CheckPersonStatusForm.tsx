@@ -18,7 +18,7 @@ import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Aksjonspunkt, KodeverkMedNavn, Personopplysninger } from '@fpsak-frontend/types';
+import { Aksjonspunkt, KodeverkMedNavn, Personoversikt } from '@fpsak-frontend/types';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 
 import styles from './checkPersonStatusForm.less';
@@ -35,7 +35,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   behandlingHenlagt: boolean;
   gjeldeneFom?: string;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
@@ -130,11 +130,11 @@ const getValgtOpplysning = (avklartPersonstatus: Personopplysninger['avklartPers
 export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.behandlingHenlagt,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger,
+    (ownProps: PureOwnProps) => ownProps.personoversikt,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (behandlingHenlagt, aksjonspunkter, personopplysning, alleKodeverk): FormValues => {
+  (behandlingHenlagt, aksjonspunkter, personoversikt, alleKodeverk): FormValues => {
     const shouldContinueBehandling = !behandlingHenlagt;
-    const { avklartPersonstatus, personstatus } = personopplysning;
+    const { avklartPersonstatus, personstatus } = personoversikt;
     const aksjonspunkt = aksjonspunkter[0];
     const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
     return {

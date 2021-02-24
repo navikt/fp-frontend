@@ -11,7 +11,7 @@ import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { MerkePanel } from '@fpsak-frontend/fakta-felles';
-import { Personopplysninger, Soknad } from '@fpsak-frontend/types';
+import { Personoversikt, Soknad } from '@fpsak-frontend/types';
 
 import styles from './barnPanel.less';
 
@@ -70,7 +70,7 @@ export class BarnPanel extends Component<OwnProps & WrappedComponentProps> {
     isFodselsdatoerEdited: {},
   };
 
-  static buildInitialValues: (personopplysning: Personopplysninger, soknad: Soknad) => FormValues;
+  static buildInitialValues: (personoversikt: Personoversikt, soknad: Soknad) => FormValues;
 
   originalFields: FieldArrayFieldsProps<CustomPersonopplysninger>;
 
@@ -175,7 +175,7 @@ const sortChildren = (child1: CustomPersonopplysninger, child2: CustomPersonoppl
   return 0;
 };
 
-BarnPanel.buildInitialValues = (personopplysning: Personopplysninger, soknad: Soknad): FormValues => {
+BarnPanel.buildInitialValues = (personoversikt: Personoversikt, soknad: Soknad): FormValues => {
   const confirmedChildren = personopplysning.barnSoktFor
     ? personopplysning.barnSoktFor.map((b) => ({
       aktorId: b.aktoerId,
