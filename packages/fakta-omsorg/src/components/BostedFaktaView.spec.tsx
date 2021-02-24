@@ -71,7 +71,7 @@ describe('<BostedFaktaView>', () => {
     />);
     const bostedSokerView = wrapper.find(BostedSokerView);
     expect(bostedSokerView).toHaveLength(1);
-    expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker);
+    expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker.bruker);
   });
 
   it('vise bostedSoker for søker og annenpart/ektefelle?', () => {
@@ -102,7 +102,7 @@ describe('<BostedFaktaView>', () => {
     />);
     const bostedSokerView = wrapper.find(BostedSokerView);
     expect(bostedSokerView).toHaveLength(2);
-    expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker);
+    expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker.bruker);
     expect(bostedSokerView.last().prop('personopplysninger')).toEqual(ektefelle);
   });
 });

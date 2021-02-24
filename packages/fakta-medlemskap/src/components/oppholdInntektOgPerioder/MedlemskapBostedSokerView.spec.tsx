@@ -104,15 +104,13 @@ describe('<MedlemskapBostedSokerView>', () => {
     />);
 
     const tooltips = wrapper.find(Tooltip);
-    expect(tooltips).toHaveLength(3);
+    expect(tooltips).toHaveLength(2);
     const etikettfokus = wrapper.find(EtikettBase);
-    expect(etikettfokus).toHaveLength(3);
+    expect(etikettfokus).toHaveLength(2);
     expect(tooltips.at(0).prop('content')).toBe('Personstatus');
     expect(etikettfokus.at(0).childAt(0).text()).toBe('Bosatt');
-    expect(tooltips.at(1).prop('content')).toBe('Sivilstand');
-    expect(etikettfokus.at(1).childAt(0).text()).toBe('Ugift');
-    expect(tooltips.at(2).prop('content')).toBe('Region');
-    expect(etikettfokus.at(2).childAt(0).text()).toBe('Norden');
+    expect(tooltips.at(1).prop('content')).toBe('Region');
+    expect(etikettfokus.at(1).childAt(0).text()).toBe('Norden');
   });
 
   it('skal vise ukjent når personstatus ukjent', () => {
@@ -132,14 +130,12 @@ describe('<MedlemskapBostedSokerView>', () => {
     />);
 
     const tooltips = wrapper.find(Tooltip);
-    expect(tooltips).toHaveLength(3);
+    expect(tooltips).toHaveLength(2);
     const etikettfokus = wrapper.find(EtikettBase);
-    expect(etikettfokus).toHaveLength(3);
+    expect(etikettfokus).toHaveLength(2);
     expect(tooltips.at(0).prop('content')).toBe('Personstatus');
     expect(etikettfokus.at(0).childAt(0).text()).toBe('Ukjent');
-    expect(tooltips.at(1).prop('content')).toBe('Sivilstand');
-    expect(etikettfokus.at(1).childAt(0).text()).toBe('Ugift');
-    expect(tooltips.at(2).prop('content')).toBe('Region');
-    expect(etikettfokus.at(2).childAt(0).text()).toBe('Norden');
+    expect(tooltips.at(1).prop('content')).toBe('Region');
+    expect(etikettfokus.at(1).childAt(0).text()).toBe('Norden');
   });
 });

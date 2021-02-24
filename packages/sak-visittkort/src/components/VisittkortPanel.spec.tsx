@@ -1,6 +1,7 @@
 import React from 'react';
 import { PersonCard, Gender, EmptyPersonCard } from '@navikt/nap-person-card';
 
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { FlexContainer } from '@fpsak-frontend/shared-components';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -93,7 +94,18 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPersoner={fagsakPersonerUtenAnnenPart}
+      fagsakPersoner={{
+        ...fagsakPersonerUtenAnnenPart,
+        familiehendelse: {
+          hendelseType: {
+            kode: familieHendelseType.FODSEL,
+            kodeverk: '',
+          },
+          hendelseDato: '2021-01-01',
+          antallBarn: 1,
+          dødfødsel: false,
+        },
+      }}
       harVerge={false}
       erTilbakekreving={false}
     />);
@@ -111,7 +123,18 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPersoner={fagsakPersonerMedAnnenPart}
+      fagsakPersoner={{
+        ...fagsakPersonerMedAnnenPart,
+        familiehendelse: {
+          hendelseType: {
+            kode: familieHendelseType.FODSEL,
+            kodeverk: '',
+          },
+          hendelseDato: '2021-01-01',
+          antallBarn: 1,
+          dødfødsel: false,
+        },
+      }}
       lenkeTilAnnenPart="testlenke"
       harVerge={false}
       erTilbakekreving={false}
@@ -134,7 +157,18 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPersoner={fagsakPersonerMedAnnenPartUtenAktørId}
+      fagsakPersoner={{
+        ...fagsakPersonerMedAnnenPartUtenAktørId,
+        familiehendelse: {
+          hendelseType: {
+            kode: familieHendelseType.FODSEL,
+            kodeverk: '',
+          },
+          hendelseDato: '2021-01-01',
+          antallBarn: 1,
+          dødfødsel: false,
+        },
+      }}
       lenkeTilAnnenPart="testlenke"
       harVerge={false}
       erTilbakekreving={false}

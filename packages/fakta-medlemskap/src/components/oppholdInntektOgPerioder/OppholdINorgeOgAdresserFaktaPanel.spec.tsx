@@ -237,66 +237,10 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
     expect(initialValues).toEqual({
       foreldre: [{
         isApplicant: true,
-        personopplysning: {
-          navn: 'Espen Utvikler',
-          personstatus: {
-            kode: 'UTVANDRET',
-            kodeverk: '',
-          },
-          avklartPersonstatus: {
-            overstyrtPersonstatus: {
-              kode: personstatusType.BOSATT,
-              kodeverk: '',
-            },
-            orginalPersonstatus: {
-              kode: personstatusType.BOSATT,
-              kodeverk: '',
-            },
-          },
-          adresser: [{
-            adresselinje1: 'Vei 1',
-            postNummer: '1000',
-            poststed: 'Oslo',
-            adresseType: {
-              kode: opplysningAdresseType.POSTADRESSE,
-              kodeverk: '',
-            },
-          }],
-          annenPart: {
-            navn: 'Petra Tester',
-            personstatus: {
-              kode: 'UTVANDRET',
-              kodeverk: '',
-            },
-            adresser: [{
-              adresselinje1: 'Vei 2',
-              postNummer: '2000',
-              poststed: 'Stockholm',
-              adresseType: {
-                kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-                kodeverk: '',
-              },
-            }],
-          },
-        },
+        personopplysning: personopplysningBruker,
       }, {
         isApplicant: false,
-        personopplysning: {
-          navn: 'Petra Tester',
-          personstatus: {
-            kode: 'UTVANDRET',
-            kodeverk: '',
-          },
-          adresser: [{
-            adresselinje1: 'Vei 2',
-            postNummer: '2000',
-            poststed: 'Stockholm',
-            adresseType: {
-              kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-              kodeverk: '',
-            },
-          }],
-        },
+        personopplysning: personopplysningAnnenPart,
       }],
       bosattVurdering: true,
       hasBosattAksjonspunkt: true,

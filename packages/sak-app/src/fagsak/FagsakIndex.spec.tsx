@@ -33,7 +33,7 @@ describe('<FagsakIndex>', () => {
   let contextStub;
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
-      selected: 123456,
+      selected: '123456',
       location: {
         pathname: 'test',
         search: 'test',

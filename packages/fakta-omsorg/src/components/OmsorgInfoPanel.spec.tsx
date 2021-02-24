@@ -156,7 +156,7 @@ describe('<OmsorgInfoPanel>', () => {
     />);
     const bostedFaktaView = wrapper.find(BostedFaktaView);
     expect(bostedFaktaView).toHaveLength(1);
-    expect(bostedFaktaView.at(0).prop('personopplysning')).toEqual(personoversikt);
+    expect(bostedFaktaView.at(0).prop('personoversikt')).toEqual(personoversikt);
   });
 
   it('skal vise OmsorgFaktaForm', () => {

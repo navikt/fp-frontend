@@ -102,7 +102,7 @@ const getCustomTimes = (
     soknad: soknadDate,
     fodsel: fodselsdato(soknadsType, omsorgsOvertagelseDato, endredFodselsDato, familiehendelseDate),
     revurdering: isRevurdering ? endringsdato : '1950-01-01',
-    dodSoker: person && person.bruker.dødsdato ? person.bruker.dødsdato : '1950-01-01',
+    dodSoker: person?.bruker?.dødsdato ? person.bruker.dødsdato : '1950-01-01',
   };
 
   dodeBarn.forEach((barn, index: number) => {

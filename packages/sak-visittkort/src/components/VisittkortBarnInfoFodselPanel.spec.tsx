@@ -48,7 +48,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     expect(messages).toHaveLength(2);
     expect(messages.first().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Fodt');
     expect(messages.first().prop('values')).toEqual({
-      dato: '02.02.2020',
+      dato: '21.01.2020',
     });
   });
 

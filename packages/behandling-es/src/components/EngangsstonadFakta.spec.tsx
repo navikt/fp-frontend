@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
+import TilleggsopplysningerFaktaIndex from '@fpsak-frontend/fakta-tilleggsopplysninger';
 import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
 import { Behandling, Fagsak, Personoversikt } from '@fpsak-frontend/types';
@@ -45,7 +45,7 @@ describe('<EngangsstonadFakta>', () => {
     },
   };
   const aksjonspunkter = [{
-    definisjon: { kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD, kodeverk: 'test' },
+    definisjon: { kode: aksjonspunktCodes.TILLEGGSOPPLYSNINGER, kodeverk: 'test' },
     status: { kode: aksjonspunktStatus.OPPRETTET, kodeverk: 'test' },
     kanLoses: true,
     erAktivt: true,
@@ -100,7 +100,7 @@ describe('<EngangsstonadFakta>', () => {
     }, {
       erAktiv: true,
       harAksjonspunkt: true,
-      tekst: 'Arbeidsforhold',
+      tekst: 'Tilleggsopplysninger',
     }]);
   });
 
@@ -157,9 +157,9 @@ describe('<EngangsstonadFakta>', () => {
       />,
     );
 
-    const arbeidsforholdPanel = wrapper.find(ArbeidsforholdFaktaIndex);
-    expect(arbeidsforholdPanel.prop('readOnly')).toBe(false);
-    expect(arbeidsforholdPanel.prop('submittable')).toBe(true);
-    expect(arbeidsforholdPanel.prop('harApneAksjonspunkter')).toBe(true);
+    const tilleggsopplysningerPanel = wrapper.find(TilleggsopplysningerFaktaIndex);
+    expect(tilleggsopplysningerPanel.prop('readOnly')).toBe(false);
+    expect(tilleggsopplysningerPanel.prop('submittable')).toBe(true);
+    expect(tilleggsopplysningerPanel.prop('harApneAksjonspunkter')).toBe(true);
   });
 });
