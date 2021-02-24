@@ -16,6 +16,7 @@ class PanelDef extends ProsessStegPanelDef {
 
   getEndepunkter = () => [
     EsBehandlingApiKeys.MEDLEMSKAP,
+    EsBehandlingApiKeys.PERSONOPPLYSNINGER,
   ]
 
   getData = ({ personoversikt }) => ({

@@ -16,6 +16,7 @@ class PanelDef extends ProsessStegPanelDef {
 
   getEndepunkter = () => [
     SvpBehandlingApiKeys.MEDLEMSKAP,
+    SvpBehandlingApiKeys.PERSONOPPLYSNINGER,
   ]
 
   getData = ({ personoversikt }) => ({
