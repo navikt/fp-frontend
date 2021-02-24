@@ -1,85 +1,40 @@
 {
-    "fnr": "13079726804",
-    "aktoerId": "9913079726804",
-    "diskresjonskode": {
-        "kode": "UDEF",
-        "kodeverk": "DISKRESJONSKODE"
-    },
-    "nummer": null,
-    "navBrukerKjonn": {
-        "kode": "M",
-        "kodeverk": "BRUKER_KJOENN"
-    },
-    "statsborgerskap": {
-        "kode": "NOR",
-        "kodeverk": "LANDKODER",
-        "navn": "Norge"
-    },
-    "avklartPersonstatus": {
-        "orginalPersonstatus": {
-            "kode": "BOSA",
-            "kodeverk": "PERSONSTATUS_TYPE"
+    "bruker": {
+        "fnr": "13079726804",
+        "aktoerId": "9913079726804",
+        "diskresjonskode": {
+            "kode": "UDEF",
+            "kodeverk": "DISKRESJONSKODE"
         },
-        "overstyrtPersonstatus": {
-            "kode": "BOSA",
-            "kodeverk": "PERSONSTATUS_TYPE"
-        }
+        "kjønn": {
+            "kode": "M",
+            "kodeverk": "BRUKER_KJOENN"
+        },
+        "sivilstand": {
+            "kode": "UGIF",
+            "kodeverk": "SIVILSTAND_TYPE"
+        },
+        "navn": "Påfugl Pawel",
+        "fødselsdato": "1969-12-04",
+        "adresser": []
     },
-    "personstatus": {
-        "kode": "BOSA",
-        "kodeverk": "PERSONSTATUS_TYPE"
-    },
-    "sivilstand": {
-        "kode": "UGIF",
-        "kodeverk": "SIVILSTAND_TYPE"
-    },
-    "navn": "Påfugl Pawel",
-    "dodsdato": null,
-    "fodselsdato": "1969-12-04",
-    "adresser": [],
-    "region": {
-        "kode": "NORDEN",
-        "kodeverk": "REGION"
-    },
-    "annenPart": null,
-    "ektefelle": {
+    "annenPart": {
         "fnr": "31019446487",
         "aktoerId": "9931019446487",
         "diskresjonskode": {
             "kode": "UDEF",
             "kodeverk": "DISKRESJONSKODE"
         },
-        "nummer": null,
-        "navBrukerKjonn": {
+        "kjønn": {
             "kode": "K",
             "kodeverk": "BRUKER_KJOENN"
-        },
-        "statsborgerskap": {
-            "kode": "NOR",
-            "kodeverk": "LANDKODER",
-            "navn": "Norge"
-        },
-        "avklartPersonstatus": {
-            "orginalPersonstatus": {
-                "kode": "BOSA",
-                "kodeverk": "PERSONSTATUS_TYPE"
-            },
-            "overstyrtPersonstatus": {
-                "kode": "BOSA",
-                "kodeverk": "PERSONSTATUS_TYPE"
-            }
-        },
-        "personstatus": {
-            "kode": "BOSA",
-            "kodeverk": "PERSONSTATUS_TYPE"
         },
         "sivilstand": {
             "kode": "GIFT",
             "kodeverk": "SIVILSTAND_TYPE"
         },
         "navn": "Harepus Hjørdis",
-        "dodsdato": null,
-        "fodselsdato": "1969-12-04",
+        "fødselsdato": "1969-12-04",
         "adresser": [
             {
                 "adresseType": {
@@ -94,17 +49,7 @@
                 "poststed": "Tynset",
                 "land": "NOR"
             }
-        ],
-        "region": {
-            "kode": "NORDEN",
-            "kodeverk": "REGION"
-        },
-        "annenPart": null,
-        "ektefelle": null,
-        "barn": [],
-        "barnSoktFor": [],
-        "barnFraTpsRelatertTilSoknad": [],
-        "harVerge": false
+        ]
     },
     "barn": [
         {
@@ -114,37 +59,16 @@
                 "kode": "UDEF",
                 "kodeverk": "DISKRESJONSKODE"
             },
-            "nummer": null,
-            "navBrukerKjonn": {
+            "kjønn": {
                 "kode": "K",
                 "kodeverk": "BRUKER_KJOENN"
-            },
-            "statsborgerskap": {
-                "kode": "NOR",
-                "kodeverk": "LANDKODER",
-                "navn": "Norge"
-            },
-            "avklartPersonstatus": {
-                "orginalPersonstatus": {
-                    "kode": "BOSA",
-                    "kodeverk": "PERSONSTATUS_TYPE"
-                },
-                "overstyrtPersonstatus": {
-                    "kode": "BOSA",
-                    "kodeverk": "PERSONSTATUS_TYPE"
-                }
-            },
-            "personstatus": {
-                "kode": "BOSA",
-                "kodeverk": "PERSONSTATUS_TYPE"
             },
             "sivilstand": {
                 "kode": "UGIF",
                 "kodeverk": "SIVILSTAND_TYPE"
             },
             "navn": "Duck Dole",
-            "dodsdato": null,
-            "fodselsdato": "2019-10-09",
+            "fødselsdato": "2019-10-09",
             "adresser": [
                 {
                     "adresseType": {
@@ -159,43 +83,7 @@
                     "poststed": null,
                     "land": null
                 }
-            ],
-            "region": {
-                "kode": "NORDEN",
-                "kodeverk": "REGION"
-            },
-            "annenPart": null,
-            "ektefelle": null,
-            "barn": [],
-            "barnSoktFor": [],
-            "barnFraTpsRelatertTilSoknad": [],
-            "harVerge": false
+            ]
         }
-    ],
-    "barnSoktFor": [
-        {
-            "fnr": null,
-            "aktoerId": null,
-            "diskresjonskode": null,
-            "nummer": 1,
-            "navBrukerKjonn": null,
-            "statsborgerskap": null,
-            "avklartPersonstatus": null,
-            "personstatus": null,
-            "sivilstand": null,
-            "navn": null,
-            "dodsdato": null,
-            "fodselsdato": "2019-10-09",
-            "adresser": [],
-            "region": null,
-            "annenPart": null,
-            "ektefelle": null,
-            "barn": [],
-            "barnSoktFor": [],
-            "barnFraTpsRelatertTilSoknad": [],
-            "harVerge": false
-        }
-    ],
-    "barnFraTpsRelatertTilSoknad": [],
-    "harVerge": false
+    ]
 }

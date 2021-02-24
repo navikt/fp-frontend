@@ -5,15 +5,15 @@ import EtikettBase from 'nav-frontend-etiketter';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
-import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { Personopplysninger } from '@fpsak-frontend/types';
+import { PersonopplysningMedlem } from '@fpsak-frontend/types';
 
 import { MedlemskapBostedSokerView } from './MedlemskapBostedSokerView';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
 describe('<MedlemskapBostedSokerView>', () => {
   const soker = {
+    fnr: '',
     navn: 'Espen Utvikler',
     aktoerId: '1',
     personstatus: {
@@ -34,16 +34,8 @@ describe('<MedlemskapBostedSokerView>', () => {
       kode: '',
       kodeverk: '',
     },
-    statsborgerskap: {
-      kode: '',
-      kodeverk: '',
-    },
     diskresjonskode: {
       kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: sivilstandType.UGIFT,
       kodeverk: '',
     },
     region: {
@@ -59,16 +51,11 @@ describe('<MedlemskapBostedSokerView>', () => {
         kodeverk: '',
       },
     }],
-  };
+  } as PersonopplysningMedlem;
 
   const regionTypes = [{
     kode: 'NORDEN',
     navn: 'Norden',
-    kodeverk: '',
-  }];
-  const sivilstandTypes = [{
-    kode: sivilstandType.UGIFT,
-    navn: 'Ugift',
     kodeverk: '',
   }];
   const personstatusTypes = [{
@@ -84,9 +71,8 @@ describe('<MedlemskapBostedSokerView>', () => {
   it('vise navn', () => {
     const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={soker}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
@@ -97,9 +83,8 @@ describe('<MedlemskapBostedSokerView>', () => {
   it('skal vise  adresse informasjon', () => {
     const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={soker}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
@@ -112,9 +97,8 @@ describe('<MedlemskapBostedSokerView>', () => {
   it('skal vise etiketter', () => {
     const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={soker}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
@@ -132,17 +116,17 @@ describe('<MedlemskapBostedSokerView>', () => {
   });
 
   it('skal vise ukjent når personstatus ukjent', () => {
-    soker.avklartPersonstatus = null;
-    soker.personstatus = {
-      kode: '-',
-      kodeverk: '',
-    };
-
     const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={{
+        ...soker,
+        avklartPersonstatus: null,
+        personstatus: {
+          kode: '-',
+          kodeverk: '',
+        },
+      }}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);

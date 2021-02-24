@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 

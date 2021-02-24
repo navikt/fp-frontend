@@ -14,7 +14,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse';
 import {
   Aksjonspunkt,
-  Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Personopplysninger, Soknad,
+  Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -41,11 +41,13 @@ const familiehendelse = {
   } as FamilieHendelse,
 } as FamilieHendelseSamling;
 
-const personopplysninger = {
-  navBrukerKjonn: {
-    kode: navBrukerKjonn.KVINNE,
+const personoversikt = {
+  bruker: {
+    kjønn: {
+      kode: navBrukerKjonn.KVINNE,
+    },
   },
-} as Personopplysninger;
+} as Personoversikt;
 
 const beregningresultat = {
   sokerErMor: true,
@@ -114,7 +116,7 @@ export const visUtenAksjonspunkt = () => (
     {...standardProsessProps}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
-    personopplysninger={object('personopplysninger', personopplysninger)}
+    personoversikt={object('personoversikt', personoversikt)}
     soknad={soknad}
     fagsak={fagsak}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -126,7 +128,7 @@ export const visÅpentAksjonspunkt = () => (
     {...standardProsessProps}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
-    personopplysninger={object('personopplysninger', personopplysninger)}
+    personoversikt={object('personoversikt', personoversikt)}
     soknad={soknad}
     fagsak={fagsak}
     aksjonspunkter={[{

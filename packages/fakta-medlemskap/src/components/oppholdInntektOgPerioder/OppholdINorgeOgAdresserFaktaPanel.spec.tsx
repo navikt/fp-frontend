@@ -6,7 +6,7 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { Aksjonspunkt, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+import { Aksjonspunkt, PersonopplysningMedlem, Soknad } from '@fpsak-frontend/types';
 
 import OppholdINorgeOgAdresserFaktaPanel, { PeriodeMedId } from './OppholdINorgeOgAdresserFaktaPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
@@ -42,7 +42,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
         kode: 'UTVANDRET',
         kodeverk: '',
       },
-    } as Personopplysninger,
+    } as PersonopplysningMedlem,
   }, {
     isApplicant: false,
     personopplysning: {
@@ -52,7 +52,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
         kode: 'UTVANDRET',
         kodeverk: 'Utvandret',
       },
-    } as Personopplysninger,
+    } as PersonopplysningMedlem,
   }];
 
   it('skal vise info om opphold', () => {
@@ -103,7 +103,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
           kode: 'UTVANDRET',
           kodeverk: '',
         },
-      } as Personopplysninger,
+      } as PersonopplysningMedlem,
     }, {
       isApplicant: false,
       personopplysning: {
@@ -113,7 +113,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
           kode: 'UTVANDRET',
           kodeverk: '',
         },
-      } as Personopplysninger,
+      } as PersonopplysningMedlem,
     }];
 
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
@@ -136,8 +136,23 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
   });
 
   it('skal sette initielle verdier', () => {
-    const personopplysninger = {
+    const personopplysningBruker = {
+      fnr: '',
       navn: 'Espen Utvikler',
+      aktoerId: '',
+      diskresjonskode: {
+        kode: '',
+        kodeverk: '',
+      },
+      navBrukerKjonn: {
+        kode: '',
+        kodeverk: '',
+      },
+      region: {
+        kode: '',
+        kodeverk: '',
+      },
+      fodselsdato: '1979-01-01',
       personstatus: {
         kode: 'UTVANDRET',
         kodeverk: '',
@@ -162,7 +177,9 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
         },
       }],
       annenPart: {
+        fnr: '',
         navn: 'Petra Tester',
+        aktoerId: '',
         personstatus: {
           kode: 'UTVANDRET',
           kodeverk: '',
@@ -177,12 +194,29 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
           },
         }],
       },
-    } as Personopplysninger;
+    } as PersonopplysningMedlem;
+    const personopplysningAnnenPart = {
+      navn: 'Petra Tester',
+      personstatus: {
+        kode: 'UTVANDRET',
+        kodeverk: '',
+      },
+      adresser: [{
+        adresselinje1: 'Vei 2',
+        postNummer: '2000',
+        poststed: 'Stockholm',
+        adresseType: {
+          kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
+          kodeverk: '',
+        },
+      }],
+    } as PersonopplysningMedlem;
 
     const periode = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT],
       bosattVurdering: true,
-      personopplysninger,
+      personopplysningBruker,
+      personopplysningAnnenPart,
     } as PeriodeMedId;
 
     const aksjonspunkt = {

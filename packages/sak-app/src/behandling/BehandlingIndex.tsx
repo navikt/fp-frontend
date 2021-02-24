@@ -151,7 +151,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingPapirsoknadIndex
             {...defaultProps}
-            fagsakPerson={fagsakPersoner.bruker}
+            fagsakPersonnummer={fagsakPersoner.bruker.personnummer}
           />
         </ErrorBoundary>
       </Suspense>

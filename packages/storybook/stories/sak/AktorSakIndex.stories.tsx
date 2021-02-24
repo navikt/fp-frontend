@@ -2,7 +2,6 @@ import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import AktorSakIndex from '@fpsak-frontend/sak-aktor';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -51,12 +50,8 @@ export const visSakerOpprettetPaAktor = () => (
       person: {
         navn: 'Espen Utvikler',
         kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
-        fodselsdato: '1979-01-01',
+        fødselsdato: '1979-01-01',
         personnummer: '123456233',
-        personstatusType: {
-          kode: personstatusType.BOSATT,
-          kodeverk: '',
-        },
       },
     }}
     alleKodeverk={alleKodeverk as any}

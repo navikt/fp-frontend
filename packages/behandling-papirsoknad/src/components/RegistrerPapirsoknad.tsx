@@ -5,7 +5,7 @@ import {
   Rettigheter, BehandlingPaVent, SettPaVentParams,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  Behandling, Aksjonspunkt, KodeverkMedNavn, Fagsak, FagsakPerson,
+  Behandling, Aksjonspunkt, KodeverkMedNavn, Fagsak,
 } from '@fpsak-frontend/types';
 
 import SoknadRegistrertModal from './SoknadRegistrertModal';
@@ -13,7 +13,7 @@ import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 
 interface OwnProps {
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   kodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -58,7 +58,7 @@ const lagLagreFunksjon = (soknadData, behandling, aksjonspunkter, fagsak: Fagsak
  */
 export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   fagsak,
-  fagsakPerson,
+  fagsakPersonnummer,
   behandling,
   aksjonspunkter,
   kodeverk,
@@ -87,7 +87,7 @@ export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
       <SoknadRegistrertModal isOpen={erAksjonspunktLagret} />
       <RegistrerPapirsoknadPanel
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
+        fagsakPersonnummer={fagsakPersonnummer}
         kodeverk={kodeverk}
         readOnly={readOnly}
         // @ts-ignore Flytt ut RegistrerPapirsoknadPanel i ny pakke og flytt soknadData setState dit

@@ -7,7 +7,6 @@ export type FagsakPerson = Readonly<{
   diskresjonskode?: Kodeverk;
   fødselsdato: string;
   dodsdato?: string;
-  språkkode: Kodeverk;
   aktørId?: string;
 }>
 

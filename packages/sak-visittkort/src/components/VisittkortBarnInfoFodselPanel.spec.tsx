@@ -1,43 +1,27 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-visittkort';
 import VisittkortBarnInfoFodselPanel from './VisittkortBarnInfoFodselPanel';
 
 describe('<VisittkortBarnInfoFodselPanel>', () => {
-  const familieHendelse = {
-    oppgitt: {
-      skjaringstidspunkt: '2020-01-01',
-      avklartBarn: [],
-      termindato: '2020-01-21',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
+  const familiehendelse = {
+    hendelseType: {
+      kode: familieHendelseType.TERMIN,
+      kodeverk: '',
     },
-    gjeldende: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
-    register: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
+    hendelseDato: '2020-01-21',
+    antallBarn: 1,
+    dødfødsel: false,
   };
 
   it('skal vise termindato', () => {
     const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
       intl={intlMock}
-      familieHendelse={familieHendelse}
+      familiehendelse={familiehendelse}
     />);
 
     const message = wrapper.find(FormattedMessage);
@@ -51,17 +35,11 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
   it('skal vise fødselsdato', () => {
     const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
       intl={intlMock}
-      familieHendelse={{
-        ...familieHendelse,
-        oppgitt: {
-          skjaringstidspunkt: '2020-01-01',
-          avklartBarn: [{
-            fodselsdato: '2020-02-02',
-          }],
-          soknadType: {
-            kode: soknadType.FODSEL,
-            kodeverk: 'SOKNAD_TYPE',
-          },
+      familiehendelse={{
+        ...familiehendelse,
+        hendelseType: {
+          kode: familieHendelseType.FODSEL,
+          kodeverk: '',
         },
       }}
     />);
@@ -77,19 +55,13 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
   it('skal etikett for dødfødt barn', () => {
     const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
       intl={intlMock}
-      familieHendelse={{
-        ...familieHendelse,
-        oppgitt: {
-          skjaringstidspunkt: '2020-01-01',
-          avklartBarn: [{
-            fodselsdato: '2020-02-02',
-            dodsdato: '2020-02-02',
-          }],
-          soknadType: {
-            kode: soknadType.FODSEL,
-            kodeverk: 'SOKNAD_TYPE',
-          },
+      familiehendelse={{
+        ...familiehendelse,
+        hendelseType: {
+          kode: familieHendelseType.FODSEL,
+          kodeverk: '',
         },
+        dødfødsel: true,
       }}
     />);
 

@@ -4,8 +4,6 @@ import { PersonCard, Gender, EmptyPersonCard } from '@navikt/nap-person-card';
 import { FlexContainer } from '@fpsak-frontend/shared-components';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import { KjønnkodeEnum } from '@fpsak-frontend/types';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -41,23 +39,23 @@ describe('<VisittkortPanel>', () => {
   const fagsakPerson = {
     navn: 'Olga Utvikler',
     kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-    fodselsdato: '1979-01-01',
+    fødselsdato: '1979-01-01',
     personnummer: '1234567',
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
   };
 
   const fagsakPersonAnnenPart = {
     navn: 'Espen Utvikler',
-    fodselsdato: '1979-01-01',
+    fødselsdato: '1979-01-01',
     personnummer: '1234567',
     kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
+    aktørId: 'test',
+  };
+
+  const fagsakPersonAnnenPartUtenAktørId = {
+    navn: 'Espen Utvikler',
+    fødselsdato: '1979-01-01',
+    personnummer: '1234567',
+    kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
   };
 
   const fagsakPersonerUtenAnnenPart = {
@@ -69,30 +67,9 @@ describe('<VisittkortPanel>', () => {
     annenPart: fagsakPersonAnnenPart,
   };
 
-  const familieHendelse = {
-    oppgitt: {
-      skjaringstidspunkt: '2020-01-01',
-      avklartBarn: [],
-      termindato: '2020-01-21',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
-    gjeldende: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
-    register: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
+  const fagsakPersonerMedAnnenPartUtenAktørId = {
+    bruker: fagsakPerson,
+    annenPart: fagsakPersonAnnenPartUtenAktørId,
   };
 
   it('skal vise visittkort når en har harTilbakekrevingVerge', () => {
@@ -100,7 +77,6 @@ describe('<VisittkortPanel>', () => {
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={fagsakPersonerUtenAnnenPart}
-      familieHendelse={familieHendelse}
       harVerge
       erTilbakekreving
     />);
@@ -118,7 +94,6 @@ describe('<VisittkortPanel>', () => {
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={fagsakPersonerUtenAnnenPart}
-      familieHendelse={familieHendelse}
       harVerge={false}
       erTilbakekreving={false}
     />);
@@ -137,7 +112,6 @@ describe('<VisittkortPanel>', () => {
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={fagsakPersonerMedAnnenPart}
-      familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
       harVerge={false}
       erTilbakekreving={false}
@@ -160,8 +134,7 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPersoner={fagsakPersonerMedAnnenPart}
-      familieHendelse={familieHendelse}
+      fagsakPersoner={fagsakPersonerMedAnnenPartUtenAktørId}
       lenkeTilAnnenPart="testlenke"
       harVerge={false}
       erTilbakekreving={false}

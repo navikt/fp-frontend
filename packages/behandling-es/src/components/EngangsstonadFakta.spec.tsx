@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Fagsak } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, Personoversikt } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -64,6 +64,8 @@ describe('<EngangsstonadFakta>', () => {
     },
   };
 
+  const personoversikt = {} as Personoversikt;
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -86,6 +88,7 @@ describe('<EngangsstonadFakta>', () => {
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -118,6 +121,7 @@ describe('<EngangsstonadFakta>', () => {
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -149,6 +153,7 @@ describe('<EngangsstonadFakta>', () => {
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 

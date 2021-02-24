@@ -1,25 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
-import { Personopplysninger } from '@fpsak-frontend/types';
+import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
 
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
 import BostedFaktaView from './BostedFaktaView';
+import BostedSokerView from './BostedSokerView';
 
 describe('<BostedFaktaView>', () => {
   const barn = {
     navn: 'Barn Utvikler',
     aktoerId: '1',
-    personstatus: {
-      kode: 'BOSA',
-      kodeverk: '',
-    },
-    navBrukerKjonn: {
-      kode: '',
-      kodeverk: '',
-    },
-    statsborgerskap: {
+    kjønn: {
       kode: '',
       kodeverk: '',
     },
@@ -31,51 +23,37 @@ describe('<BostedFaktaView>', () => {
       kode: 'UGIF',
       kodeverk: '',
     },
-    region: {
-      kode: '',
-      kodeverk: '',
-    },
     adresser: [],
-  };
+  } as PersonopplysningerBasis;
 
   const soker = {
-    navn: 'Kari Utvikler',
-    aktoerId: '1',
+    bruker: {
+      navn: 'Kari Utvikler',
+      aktoerId: '1',
+      kjønn: {
+        kode: '',
+        kodeverk: '',
+      },
+      diskresjonskode: {
+        kode: '',
+        kodeverk: '',
+      },
+      sivilstand: {
+        kode: 'UGIF',
+        kodeverk: 'Ugift',
+      },
+      adresser: [],
+    },
     barn: [
       barn,
       barn,
     ],
-    personstatus: {
-      kode: 'BOSA',
-      kodeverk: 'Bosatt',
-    },
-    navBrukerKjonn: {
-      kode: '',
-      kodeverk: '',
-    },
-    statsborgerskap: {
-      kode: '',
-      kodeverk: '',
-    },
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: 'UGIF',
-      kodeverk: 'Ugift',
-    },
-    region: {
-      kode: '',
-      kodeverk: '',
-    },
-    adresser: [],
-  };
+  } as Personoversikt;
 
   it('vise bostedBarn for hvert barn', () => {
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
-      personopplysning={soker as Personopplysninger}
+      personoversikt={soker}
       alleKodeverk={{}}
     />);
     const bostedBarnView = wrapper.find('BostedBarnView');
@@ -88,10 +66,10 @@ describe('<BostedFaktaView>', () => {
   it('vise bostedSoker for søker', () => {
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
-      personopplysning={soker as Personopplysninger}
+      personoversikt={soker}
       alleKodeverk={{}}
     />);
-    const bostedSokerView = wrapper.find(BostedSokerFaktaIndex);
+    const bostedSokerView = wrapper.find(BostedSokerView);
     expect(bostedSokerView).toHaveLength(1);
     expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker);
   });
@@ -100,15 +78,7 @@ describe('<BostedFaktaView>', () => {
     const ektefelle = {
       navn: 'Ola Utvikler',
       aktoerId: '1',
-      personstatus: {
-        kode: 'BOSA',
-        kodeverk: '',
-      },
-      navBrukerKjonn: {
-        kode: '',
-        kodeverk: '',
-      },
-      statsborgerskap: {
+      kjønn: {
         kode: '',
         kodeverk: '',
       },
@@ -120,19 +90,17 @@ describe('<BostedFaktaView>', () => {
         kode: 'UGIF',
         kodeverk: '',
       },
-      region: {
-        kode: '',
-        kodeverk: '',
-      },
       adresser: [],
-    };
+    } as PersonopplysningerBasis;
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
-      personopplysning={soker as Personopplysninger}
-      ektefellePersonopplysning={ektefelle as Personopplysninger}
+      personoversikt={{
+        ...soker,
+        annenPart: ektefelle,
+      }}
       alleKodeverk={{}}
     />);
-    const bostedSokerView = wrapper.find(BostedSokerFaktaIndex);
+    const bostedSokerView = wrapper.find(BostedSokerView);
     expect(bostedSokerView).toHaveLength(2);
     expect(bostedSokerView.first().prop('personopplysninger')).toEqual(soker);
     expect(bostedSokerView.last().prop('personopplysninger')).toEqual(ektefelle);

@@ -2,7 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { Behandling, Fagsak, Soknad } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, Personoversikt, Soknad,
+} from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -81,6 +83,8 @@ describe('<SvangerskapspengerProsess>', () => {
     },
   };
 
+  const personoversikt = {} as Personoversikt;
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -103,6 +107,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -163,6 +168,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -193,6 +199,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -239,6 +246,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -288,6 +296,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -337,6 +346,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -364,6 +374,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -394,6 +405,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -430,6 +442,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 

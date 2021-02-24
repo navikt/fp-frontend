@@ -20,7 +20,7 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
 }
 
 const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
@@ -29,7 +29,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   soknadData,
   alleKodeverk,
-  fagsakPerson,
+  fagsakPersonnummer,
 }) => (
   <RawIntlProvider value={intl}>
     <ForeldrepengerForm
@@ -38,7 +38,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
       readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer={fagsakPersonnummer}
     />
   </RawIntlProvider>
 );

@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 import { isEqual, omit } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 import { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
@@ -33,7 +33,7 @@ interface PureOwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
 }
 
 interface MappedOwnProps {
@@ -122,7 +122,7 @@ const buildInitialValuesSelector = createSelector([(ownProps: PureOwnProps) => o
 });
 
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
-  const sokerPersonnummer = ownProps.fagsakPerson.personnummer;
+  const sokerPersonnummer = ownProps.fagsakPersonnummer;
   const validate = getValidation(ownProps.soknadData, sokerPersonnummer);
   return (state: any): MappedOwnProps => {
     const registeredFields = getRegisteredFields(ENGANGSSTONAD_FORM_NAME)(state);

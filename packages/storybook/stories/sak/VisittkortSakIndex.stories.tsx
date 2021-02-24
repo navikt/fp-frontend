@@ -1,7 +1,6 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -40,7 +39,7 @@ const fagsak = {
 
 const fagsakPerson = {
   navn: 'Espen Utvikler',
-  fodselsdato: '1979-01-01',
+  fødselsdato: '1979-01-01',
   personnummer: '1234567',
   kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
   personstatusType: {
@@ -51,7 +50,19 @@ const fagsakPerson = {
 
 const fagsakPersonAnnenPart = {
   navn: 'Klara Ku',
-  fodselsdato: '1980-01-01',
+  fødselsdato: '1980-01-01',
+  personnummer: '6565656',
+  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
+  personstatusType: {
+    kode: personstatusType.BOSATT,
+    kodeverk: 'PERSONSTATUS_TYPE',
+  },
+  aktørId: 'test',
+};
+
+const fagsakPersonAnnenPartUkjent = {
+  navn: 'Klara Ku',
+  fødselsdato: '1980-01-01',
   personnummer: '6565656',
   kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
   personstatusType: {
@@ -69,37 +80,15 @@ const fagsakPersonerMedAnnenPart = {
   annenPart: fagsakPersonAnnenPart,
 };
 
-const familieHendelse = {
-  oppgitt: {
-    skjaringstidspunkt: '2020-01-01',
-    avklartBarn: [],
-    termindato: '2020-01-21',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: 'SOKNAD_TYPE',
-    },
-  },
-  gjeldende: {
-    skjaringstidspunkt: '2020-01-01',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: 'SOKNAD_TYPE',
-    },
-  },
-  register: {
-    skjaringstidspunkt: '2020-01-01',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: 'SOKNAD_TYPE',
-    },
-  },
+const fagsakPersonerMedAnnenPartUkjent = {
+  bruker: fagsakPerson,
+  annenPart: fagsakPersonAnnenPartUkjent,
 };
 
 export const visVisittkortDerEnIkkeHarAnnenPart = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
     fagsakPersoner={fagsakPersonerUtenAnnenPart}
-    familieHendelse={familieHendelse}
   />
 );
 
@@ -107,7 +96,6 @@ export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
     fagsakPersoner={fagsakPersonerMedAnnenPart}
-    familieHendelse={familieHendelse}
     lenkeTilAnnenPart="testlenke til annen part"
   />
 );
@@ -115,8 +103,7 @@ export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
 export const visVisittkortForAnnenPartDerAktørIdErUkjent = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
-    fagsakPersoner={fagsakPersonerMedAnnenPart}
-    familieHendelse={familieHendelse}
+    fagsakPersoner={fagsakPersonerMedAnnenPartUkjent}
     lenkeTilAnnenPart="testlenke til annen part"
   />
 );

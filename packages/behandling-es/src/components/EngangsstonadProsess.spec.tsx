@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Behandling, Fagsak, Soknad,
+  Behandling, Fagsak, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
@@ -84,6 +84,8 @@ describe('<EngangsstonadProsess>', () => {
     },
   };
 
+  const personoversikt = {} as Personoversikt;
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -106,6 +108,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -154,6 +157,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -184,6 +188,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -232,6 +237,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -283,6 +289,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -334,6 +341,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -361,6 +369,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -391,6 +400,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -427,6 +437,7 @@ describe('<EngangsstonadProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 

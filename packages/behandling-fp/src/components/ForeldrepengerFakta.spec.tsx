@@ -4,13 +4,12 @@ import sinon from 'sinon';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { shallowWithIntl, intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SideMenuWrapper } from '@fpsak-frontend/behandling-felles';
-import { Behandling, Fagsak, KjønnkodeEnum } from '@fpsak-frontend/types';
+import { Behandling, Fagsak, Personoversikt } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import FetchedData from '../types/fetchedDataTsType';
 
@@ -65,6 +64,8 @@ describe('<ForeldrepengerFakta>', () => {
     },
   };
 
+  const personoversikt = {} as Personoversikt;
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -87,6 +88,7 @@ describe('<ForeldrepengerFakta>', () => {
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -119,6 +121,7 @@ describe('<ForeldrepengerFakta>', () => {
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -150,6 +153,7 @@ describe('<ForeldrepengerFakta>', () => {
         setApentFaktaPanel={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 

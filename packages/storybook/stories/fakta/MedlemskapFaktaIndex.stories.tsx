@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import {
-  Behandling, FagsakPerson, InntektArbeidYtelse, Soknad,
+  Behandling, InntektArbeidYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -95,19 +95,13 @@ const medlemskap = {
   }],
   perioder: [{
     vurderingsdato: '2019-11-07',
-    personopplysninger: {
+    personopplysningBruker: {
       fnr: null,
       aktoerId: '1615078487209',
       diskresjonskode: null,
-      nummer: null,
       navBrukerKjonn: {
         kode: 'K',
         kodeverk: 'BRUKER_KJOENN',
-      },
-      statsborgerskap: {
-        kode: 'NOR',
-        kodeverk: 'LANDKODER',
-        navn: 'Norge',
       },
       avklartPersonstatus: {
         orginalPersonstatus: {
@@ -122,10 +116,6 @@ const medlemskap = {
       personstatus: {
         kode: 'BOSA',
         kodeverk: 'PERSONSTATUS_TYPE',
-      },
-      sivilstand: {
-        kode: 'UGIF',
-        kodeverk: 'SIVILSTAND_TYPE',
       },
       navn: 'Mygg Robust',
       dodsdato: null,
@@ -147,12 +137,6 @@ const medlemskap = {
         kode: 'NORDEN',
         kodeverk: 'REGION',
       },
-      annenPart: null,
-      ektefelle: null,
-      barn: [],
-      barnSoktFor: [],
-      barnFraTpsRelatertTilSoknad: [],
-      harVerge: false,
     },
     aksjonspunkter: [
       '5021',
@@ -168,19 +152,13 @@ const medlemskap = {
     begrunnelse: null,
   }, {
     vurderingsdato: '2018-11-07',
-    personopplysninger: {
+    personopplysningBruker: {
       fnr: null,
       aktoerId: '1615078487209',
       diskresjonskode: null,
-      nummer: null,
       navBrukerKjonn: {
         kode: 'K',
         kodeverk: 'BRUKER_KJOENN',
-      },
-      statsborgerskap: {
-        kode: 'NOR',
-        kodeverk: 'LANDKODER',
-        navn: 'Norge',
       },
       avklartPersonstatus: {
         orginalPersonstatus: {
@@ -196,10 +174,6 @@ const medlemskap = {
         kode: 'BOSA',
         kodeverk: 'PERSONSTATUS_TYPE',
       },
-      sivilstand: {
-        kode: 'UGIF',
-        kodeverk: 'SIVILSTAND_TYPE',
-      },
       navn: 'Mygg Robust',
       dodsdato: null,
       fodselsdato: '1966-08-02',
@@ -208,12 +182,6 @@ const medlemskap = {
         kode: 'NORDEN',
         kodeverk: 'REGION',
       },
-      annenPart: null,
-      ektefelle: null,
-      barn: [],
-      barnSoktFor: [],
-      barnFraTpsRelatertTilSoknad: [],
-      harVerge: false,
     },
     aksjonspunkter: [
       '5021',
@@ -229,7 +197,6 @@ const medlemskap = {
     begrunnelse: null,
   }],
 };
-const fagsakPerson = {} as FagsakPerson;
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -278,7 +245,6 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
       kanLoses: true,
       erAktivt: true,
     }]}
-    fagsakPerson={object('fagsakPerson', fagsakPerson)}
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
@@ -345,7 +311,6 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    fagsakPerson={object('fagsakPerson', fagsakPerson)}
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{

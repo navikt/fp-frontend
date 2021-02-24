@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import EngangsstonadForm from './components/EngangsstonadForm';
 
@@ -11,7 +11,7 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
 }
 
 const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
@@ -20,7 +20,7 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   soknadData,
   alleKodeverk,
-  fagsakPerson,
+  fagsakPersonnummer,
 }) => (
   <EngangsstonadForm
     onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
@@ -28,7 +28,7 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     readOnly={readOnly}
     soknadData={soknadData}
     alleKodeverk={alleKodeverk}
-    fagsakPerson={fagsakPerson}
+    fagsakPersonnummer={fagsakPersonnummer}
   />
 );
 

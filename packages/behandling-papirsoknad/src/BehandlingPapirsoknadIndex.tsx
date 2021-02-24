@@ -6,7 +6,7 @@ import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Aksjonspunkt, Behandling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Aksjonspunkt, Behandling, Fagsak,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -24,7 +24,7 @@ interface DataProps {
 interface OwnProps {
   behandlingId: number;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
   behandlingEventHandler: {
@@ -39,7 +39,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   behandlingId,
   kodeverk,
   fagsak,
-  fagsakPerson,
+  fagsakPersonnummer,
   rettigheter,
   setRequestPendingMessage,
 }) => {
@@ -107,7 +107,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
         behandling={hasNotFinished ? forrigeBehandling : behandling}
         aksjonspunkter={data.aksjonspunkter}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
+        fagsakPersonnummer={fagsakPersonnummer}
         kodeverk={kodeverk}
         rettigheter={rettigheter}
         settPaVent={settPaVent}

@@ -4,7 +4,6 @@ import {
 } from 'nav-frontend-etiketter';
 
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import { KjønnkodeEnum } from '@fpsak-frontend/types';
@@ -16,12 +15,8 @@ describe('<VisittkortLabels>', () => {
   const fagsakPerson = {
     navn: 'Olga Utvikler',
     kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-    fodselsdato: '1979-01-01',
+    fødselsdato: '1979-01-01',
     personnummer: '1234567',
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
   };
 
   it('skal ikke vise noen etiketter', () => {
@@ -106,7 +101,7 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       fagsakPerson={{
         ...fagsakPerson,
-        fodselsdato: '2019-01-01',
+        fødselsdato: '2019-01-01',
       }}
       harVerge={false}
     />);

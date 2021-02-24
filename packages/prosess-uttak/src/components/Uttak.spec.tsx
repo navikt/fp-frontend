@@ -13,7 +13,7 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import { Tidslinje } from '@fpsak-frontend/tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personopplysninger,
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
   UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -84,7 +84,7 @@ describe('<Uttak>', () => {
       alleKodeverk={{}}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
@@ -145,7 +145,7 @@ describe('<Uttak>', () => {
       alleKodeverk={{}}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
@@ -212,7 +212,7 @@ describe('<Uttak>', () => {
       alleKodeverk={{}}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
@@ -293,7 +293,7 @@ describe('<Uttak>', () => {
       alleKodeverk={{}}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
@@ -374,7 +374,7 @@ describe('<Uttak>', () => {
       alleKodeverk={{}}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}

@@ -4,7 +4,7 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import {
-  Behandling, Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad, UttakStonadskontoer,
+  Behandling, Fagsak, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -468,14 +468,14 @@ const soknad = {
   } as {[key: number]: string},
 } as Soknad;
 
-const personopplysninger = {
-  navBrukerKjonn: {
-    kode: 'K',
-    kodeverk: 'BRUKER_KJOENN',
+const personoversikt = {
+  bruker: {
+    kjønn: {
+      kode: 'K',
+      kodeverk: 'BRUKER_KJOENN',
+    },
   },
-  dodsdato: null,
-  annenPart: null,
-} as Personopplysninger;
+} as Personoversikt;
 
 const ytelsefordeling = {
   ikkeOmsorgPerioder: null,
@@ -507,7 +507,7 @@ export const visProsessUttak = () => (
     aksjonspunkter={aksjonspunkter}
     familiehendelse={familiehendelse}
     soknad={soknad}
-    personopplysninger={personopplysninger}
+    personoversikt={personoversikt}
     uttakPeriodeGrense={uttakPeriodeGrense}
     ytelsefordeling={ytelsefordeling}
     alleKodeverk={alleKodeverk as any}

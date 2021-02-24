@@ -5,42 +5,33 @@ import { FormattedMessage } from 'react-intl';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { Personopplysninger, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
+import { Personoversikt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import BostedFaktaView from './BostedFaktaView';
 import OmsorgFaktaForm from './OmsorgFaktaForm';
 import { OmsorgInfoPanel } from './OmsorgInfoPanel';
 
 describe('<OmsorgInfoPanel>', () => {
-  const personopplysning = {
-    navn: 'Espen Utvikler',
-    aktoerId: '1',
-    personstatus: {
-      kode: 'BOSA',
-      kodeverk: '',
+  const personoversikt = {
+    bruker: {
+      navn: 'Espen Utvikler',
+      aktoerId: '1',
+      kjønn: {
+        kode: '',
+        kodeverk: '',
+      },
+      diskresjonskode: {
+        kode: '',
+        kodeverk: '',
+      },
+      sivilstand: {
+        kode: 'UGIF',
+        kodeverk: '',
+      },
+      adresser: [],
     },
-    navBrukerKjonn: {
-      kode: '',
-      kodeverk: '',
-    },
-    statsborgerskap: {
-      kode: '',
-      kodeverk: '',
-    },
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: 'UGIF',
-      kodeverk: '',
-    },
-    region: {
-      kode: '',
-      kodeverk: '',
-    },
-    adresser: [],
-  } as Personopplysninger;
+  } as Personoversikt;
+
   const aleneomsorgAp = {
     id: 1,
     definisjon: {
@@ -83,7 +74,7 @@ describe('<OmsorgInfoPanel>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
-      personopplysninger={personopplysning}
+      personoversikt={personoversikt}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
@@ -100,7 +91,7 @@ describe('<OmsorgInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      personopplysninger={personopplysning}
+      personoversikt={personoversikt}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
@@ -127,7 +118,7 @@ describe('<OmsorgInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      personopplysninger={personopplysning}
+      personoversikt={personoversikt}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
@@ -153,7 +144,7 @@ describe('<OmsorgInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      personopplysninger={personopplysning}
+      personoversikt={personoversikt}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
@@ -165,7 +156,7 @@ describe('<OmsorgInfoPanel>', () => {
     />);
     const bostedFaktaView = wrapper.find(BostedFaktaView);
     expect(bostedFaktaView).toHaveLength(1);
-    expect(bostedFaktaView.at(0).prop('personopplysning')).toEqual(personopplysning);
+    expect(bostedFaktaView.at(0).prop('personopplysning')).toEqual(personoversikt);
   });
 
   it('skal vise OmsorgFaktaForm', () => {
@@ -177,7 +168,7 @@ describe('<OmsorgInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      personopplysninger={personopplysning}
+      personoversikt={personoversikt}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
