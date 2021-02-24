@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Behandling, Fagsak, KjønnkodeEnum, Soknad,
+  Behandling, Fagsak, Soknad,
 } from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
@@ -16,7 +16,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import FetchedData from '../types/fetchedDataTsType';
@@ -30,14 +29,6 @@ describe('<ForeldrepengerProsess>', () => {
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
-
-  const fagsakPerson = {
-    fodselsdato: '1990-01-01',
-    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-    navn: 'Espen Utvikler',
-    personnummer: '12345',
-  };
 
   const behandling = {
     id: 1,
@@ -104,7 +95,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -171,7 +161,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -202,7 +191,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -249,7 +237,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={vedtakBehandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -301,7 +288,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -353,7 +339,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -383,7 +368,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -415,7 +399,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -453,7 +436,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}

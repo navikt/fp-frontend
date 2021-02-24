@@ -22,13 +22,6 @@ describe('<ForeldrepengerFakta>', () => {
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
-  const fagsakPerson = {
-    fodselsdato: '1990-01-01',
-    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-    navn: 'Espen Utvikler',
-    personnummer: '12345',
-  };
 
   const behandling = {
     id: 1,
@@ -85,7 +78,6 @@ describe('<ForeldrepengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}
@@ -118,7 +110,6 @@ describe('<ForeldrepengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -150,7 +141,6 @@ describe('<ForeldrepengerFakta>', () => {
         data={fetchedData as FetchedData}
         behandling={behandling as Behandling}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         rettigheter={rettigheter}
         alleKodeverk={{}}
         oppdaterProsessStegOgFaktaPanelIUrl={sinon.spy()}

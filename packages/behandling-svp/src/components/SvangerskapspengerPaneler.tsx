@@ -4,7 +4,7 @@ import {
   BehandlingPaVent, SettPaVentParams, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId, Personoversikt,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import SvangerskapspengerProsess from './SvangerskapspengerProsess';
@@ -14,7 +14,6 @@ import FetchedData from '../types/fetchedDataTsType';
 interface OwnProps {
   fetchedData: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -39,7 +38,6 @@ interface FaktaPanelInfo {
 const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
   fetchedData,
   fagsak,
-  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -70,7 +68,6 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         data={fetchedData}
         behandling={behandling}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         valgtProsessSteg={valgtProsessSteg}
@@ -88,7 +85,6 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         behandling={behandling}
         data={fetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         hasFetchError={hasFetchError}

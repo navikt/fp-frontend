@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson, ArbeidsgiverOpplysningerPerId, Personoversikt,
+  Fagsak, KodeverkMedNavn, Behandling, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -20,7 +20,6 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STA
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -38,7 +37,6 @@ const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = 
   intl,
   data,
   fagsak,
-  fagsakPerson,
   behandling,
   rettigheter,
   alleKodeverk,
@@ -63,7 +61,7 @@ const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = 
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvEsPaneler = {
-    fagsak, fagsakPerson, behandling, soknad, vilkar, personoversikt, inntektArbeidYtelse, hasFetchError, arbeidsgiverOpplysningerPerId,
+    fagsak, behandling, soknad, vilkar, personoversikt, inntektArbeidYtelse, hasFetchError, arbeidsgiverOpplysningerPerId,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

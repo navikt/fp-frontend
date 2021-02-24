@@ -14,7 +14,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import { guid, omit } from '@fpsak-frontend/utils';
 import { getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Aksjonspunkt, FagsakPerson, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
+  Aksjonspunkt, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';
 
 import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
@@ -66,7 +66,6 @@ const createNewPerioder = (perioder: PeriodeMedId[], id: string, values: Opphold
 };
 
 export type FormValues = {
-  person,
   soknad: Soknad;
   gjeldendeFom: string;
   medlemskapPerioder: MedlemskapPeriode[];
@@ -75,7 +74,6 @@ export type FormValues = {
 
 interface PureOwnProps {
   soknad: Soknad;
-  fagsakPerson: FagsakPerson;
   medlemskap: Medlemskap;
   aksjonspunkter: Aksjonspunkt[];
   behandlingType: Kodeverk;
@@ -296,11 +294,9 @@ export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: A
 
 const buildInitalValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.soknad,
-  (ownProps: PureOwnProps) => ownProps.fagsakPerson,
   (ownProps: PureOwnProps) => ownProps.medlemskap],
-(soknad, person, medlem = {} as Medlemskap): FormValues => ({
+(soknad, medlem = {} as Medlemskap): FormValues => ({
   soknad,
-  person,
   gjeldendeFom: medlem.fom,
   medlemskapPerioder: medlem.medlemskapPerioder || [],
   perioder: (medlem.perioder || []).map((periode) => ({

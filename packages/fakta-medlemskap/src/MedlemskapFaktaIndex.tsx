@@ -21,7 +21,6 @@ interface OwnProps {
   medlemskap: Medlemskap;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  fagsakPerson: FagsakPerson;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   isForeldrepengerFagsak: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
@@ -36,7 +35,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = (
   aksjonspunkter,
   harApneAksjonspunkter,
   submittable,
-  fagsakPerson,
   isForeldrepengerFagsak,
   alleMerknaderFraBeslutter,
   alleKodeverk,
@@ -55,7 +53,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = (
       soknad={soknad}
       inntektArbeidYtelse={inntektArbeidYtelse}
       medlemskap={medlemskap}
-      fagsakPerson={fagsakPerson}
       aksjonspunkter={aksjonspunkter}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submittable={submittable}

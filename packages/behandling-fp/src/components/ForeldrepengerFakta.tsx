@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId, Personoversikt,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -21,7 +21,6 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_FAK
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -40,7 +39,6 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
   data,
   behandling,
   fagsak,
-  fagsakPerson,
   rettigheter,
   alleKodeverk,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -65,7 +63,6 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
 
   const dataTilUtledingAvFpPaneler = {
     fagsak,
-    fagsakPerson,
     behandling,
     soknad,
     vilkar,

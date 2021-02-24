@@ -49,7 +49,9 @@ const VisittkortBarnInfoFodselPanel: FunctionComponent<OwnProps & WrappedCompone
   intl,
   familiehendelse,
 }) => {
-  const { hendelseType, hendelseDato, antallBarn } = familiehendelse;
+  const {
+    hendelseType, hendelseDato, antallBarn, dødfødsel,
+  } = familiehendelse;
 
   const visFødselsdato = hendelseType.kode === familieHendelseType.FODSEL;
 
@@ -66,7 +68,7 @@ const VisittkortBarnInfoFodselPanel: FunctionComponent<OwnProps & WrappedCompone
           {!visFødselsdato && <FormattedMessage id="VisittkortBarnInfoFodselPanel.Termin" values={{ dato: dateFormat(hendelseDato) }} />}
         </Normaltekst>
       </FlexColumn>
-      {visDodfodtEtikett && (
+      {dødfødsel && (
         <FlexColumn>
           <EtikettInfo className={styles.etikett} title={intl.formatMessage({ id: 'VisittkortBarnInfoFodselPanel.DodTittel' })}>
             <FormattedMessage id="VisittkortBarnInfoFodselPanel.Dod" />

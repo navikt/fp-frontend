@@ -6,7 +6,7 @@ import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerWrapper, Personoversikt,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerWrapper, Personoversikt,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -32,7 +32,6 @@ const endepunkterSomSkalHentesEnGang = [
 interface OwnProps {
   behandlingId: number;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;
@@ -53,7 +52,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
-  fagsakPerson,
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
@@ -143,7 +141,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         behandling={harIkkeHentetBehandlingsdata ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={kodeverk}
         rettigheter={rettigheter}
         valgtProsessSteg={valgtProsessSteg}

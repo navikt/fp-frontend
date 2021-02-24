@@ -208,7 +208,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
             harApenRevurdering={fagsakBehandlingerInfo
               .some((b) => b.type.kode === BehandlingType.REVURDERING && b.status.kode !== BehandlingStatus.AVSLUTTET)}
             valgtFaktaSteg={query.fakta}
-            fagsakPerson={fagsakPersoner.bruker}
+            fagsakKjønn={fagsakPersoner.bruker.kjønn}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -223,7 +223,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingEngangsstonadIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
-            fagsakPerson={fagsakPersoner.bruker}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -238,7 +237,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingForeldrepengerIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
-            fagsakPerson={fagsakPersoner.bruker}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -253,7 +251,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingSvangerskapspengerIndex
             oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
-            fagsakPerson={fagsakPersoner.bruker}
             {...defaultProps}
           />
         </ErrorBoundary>

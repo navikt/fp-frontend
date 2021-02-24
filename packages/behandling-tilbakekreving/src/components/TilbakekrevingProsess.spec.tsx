@@ -14,7 +14,6 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 
 import TilbakekrevingProsess from './TilbakekrevingProsess';
 import vedtakResultatType from '../kodeverk/vedtakResultatType';
@@ -25,14 +24,6 @@ describe('<TilbakekrevingProsess>', () => {
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
-
-  const fagsakPerson = {
-    fodselsdato: '1990-01-01',
-    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-    navn: 'Espen Utvikler',
-    personnummer: '12345',
-  };
 
   const behandling: Partial<Behandling> = {
     id: 1,
@@ -115,7 +106,10 @@ describe('<TilbakekrevingProsess>', () => {
           aksjonspunkter, perioderForeldelse, beregningsresultat, feilutbetalingFakta,
         }}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
+        fagsakKjønn={{
+          kode: KjønnkodeEnum.KVINNE,
+          kodeverk: '',
+        }}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -160,7 +154,10 @@ describe('<TilbakekrevingProsess>', () => {
           aksjonspunkter, perioderForeldelse, beregningsresultat, feilutbetalingFakta,
         }}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
+        fagsakKjønn={{
+          kode: KjønnkodeEnum.KVINNE,
+          kodeverk: '',
+        }}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}

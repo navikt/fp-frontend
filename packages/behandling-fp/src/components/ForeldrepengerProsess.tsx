@@ -9,7 +9,7 @@ import {
   FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId, Personoversikt,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import prosessStegPanelDefinisjoner from '../panelDefinisjoner/prosessStegFpPanelDefinisjoner';
@@ -29,7 +29,6 @@ const forhandsvis = (data) => {
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -99,7 +98,6 @@ const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleFatterVedtak
 const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
   data,
   fagsak,
-  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -133,7 +131,6 @@ const ForeldrepengerProsess: FunctionComponent<OwnProps> = ({
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
     tempUpdateStonadskontoer,
     alleKodeverk,
-    fagsakPerson,
     arbeidsgiverOpplysningerPerId,
     personoversikt,
     ...data,

@@ -9,7 +9,7 @@ import {
   prosessStegHooks, FatterVedtakStatusModal, ProsessStegPanel, ProsessStegContainer, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Behandling, Fagsak, Kodeverk,
 } from '@fpsak-frontend/types';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
@@ -29,7 +29,7 @@ const forhandsvis = (data) => {
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
+  fagsakKjønn: Kodeverk;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -61,7 +61,7 @@ const getLagringSideeffekter = (toggleFatterVedtakModal, toggleOppdatereFagsakCo
 const TilbakekrevingProsess: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   data,
   fagsak,
-  fagsakPerson,
+  fagsakKjønn,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -86,7 +86,7 @@ const TilbakekrevingProsess: FunctionComponent<OwnProps & WrappedComponentProps>
   const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvis(response)), []);
 
   const dataTilUtledingAvTilbakekrevingPaneler = {
-    fagsakPerson, beregnBelop, fetchPreviewVedtaksbrev, ...data,
+    fagsakKjønn, beregnBelop, fetchPreviewVedtaksbrev, ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,
     dataTilUtledingAvTilbakekrevingPaneler, fagsak, rettigheter, behandling, data.aksjonspunkter, [], hasFetchError, valgtProsessSteg);
