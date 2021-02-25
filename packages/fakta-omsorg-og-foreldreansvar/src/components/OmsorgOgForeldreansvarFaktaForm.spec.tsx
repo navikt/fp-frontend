@@ -7,7 +7,7 @@ import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { SelectField } from '@fpsak-frontend/form';
-import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
@@ -50,7 +50,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
+      personopplysninger={{}}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -81,7 +81,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
+      personopplysninger={{}}
     />);
 
     const select = wrapper.find(SelectField);
@@ -112,7 +112,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
+      personopplysninger={{}}
     />);
 
     const select = wrapper.find(SelectField);
@@ -143,7 +143,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
+      personopplysninger={{}}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -237,7 +237,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         kode: 'DØD',
         kodeverk: '',
       },
-    } as Personopplysninger;
+    };
 
     const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
     expect(initialValues).toEqual({
@@ -314,7 +314,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
           kodeverk: '',
         },
       }],
-    } as Personopplysninger;
+    };
 
     const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
 

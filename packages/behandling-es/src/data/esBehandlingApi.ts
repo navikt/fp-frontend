@@ -10,7 +10,6 @@ export enum EsBehandlingApiKeys {
   PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
   VILKAR = 'VILKAR',
-  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
   SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
   TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
   BEREGNINGRESULTAT_ENGANGSSTONAD = 'BEREGNINGRESULTAT_ENGANGSSTONAD',
@@ -41,7 +40,6 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', EsBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', EsBehandlingApiKeys.VILKAR)
-  .withRel('soeker-personopplysninger', EsBehandlingApiKeys.PERSONOPPLYSNINGER)
   .withRel('simuleringResultat', EsBehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', EsBehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('beregningsresultat-engangsstonad', EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD)

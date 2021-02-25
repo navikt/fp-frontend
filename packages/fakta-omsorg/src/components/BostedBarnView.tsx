@@ -7,14 +7,14 @@ import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, getAddresses, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { MerkePanel } from '@fpsak-frontend/fakta-felles';
-import { PersonopplysningAdresse, PersonopplysningerBasis } from '@fpsak-frontend/types';
+import { Personadresse, PersonopplysningerBasis } from '@fpsak-frontend/types';
 
 import styles from './bostedBarnView.less';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 const getAgeFromDate = (birthDate?: string): number => moment().diff(moment(birthDate), 'years');
 
-const getAdresse = (adresser: PersonopplysningAdresse[]): string => {
+const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
   return adresse || '-';

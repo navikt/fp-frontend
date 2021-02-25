@@ -10,7 +10,6 @@ export enum SvpBehandlingApiKeys {
   PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
   VILKAR = 'VILKAR',
-  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
   SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
   TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
   BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
@@ -45,7 +44,6 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', SvpBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', SvpBehandlingApiKeys.VILKAR)
-  .withRel('soeker-personopplysninger', SvpBehandlingApiKeys.PERSONOPPLYSNINGER)
   .withRel('simuleringResultat', SvpBehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', SvpBehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('beregningsresultat-foreldrepenger', SvpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER)

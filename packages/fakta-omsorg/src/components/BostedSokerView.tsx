@@ -8,18 +8,18 @@ import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdress
 import { getAddresses } from '@fpsak-frontend/utils';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import {
-  KodeverkMedNavn, PersonopplysningAdresse, PersonopplysningerBasis,
+  KodeverkMedNavn, Personadresse, PersonopplysningerBasis,
 } from '@fpsak-frontend/types';
 
 import styles from './bostedSokerView.less';
 
-const getAdresse = (adresser: PersonopplysningAdresse[]): string => {
+const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
   return adresse || '-';
 };
 
-const getUtlandsadresse = (adresser: PersonopplysningAdresse[]): string => {
+const getUtlandsadresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const utlandsAdresse = adresseListe[opplysningAdresseType.UTENLANDSK_POSTADRESSE] || adresseListe[opplysningAdresseType.UTENLANDSK_NAV_TILLEGSADRESSE];
   return utlandsAdresse || '-';

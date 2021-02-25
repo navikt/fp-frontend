@@ -11,7 +11,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OmsorgOgForeldreansvarFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-foreldreansvar';
 import {
-  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Personopplysninger, Soknad,
+  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -58,7 +58,7 @@ const personopplysninger = {
     kodeverk: '',
   },
   barnSoktFor: [],
-} as Personopplysninger;
+};
 
 const inntektArbeidYtelse = {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [{

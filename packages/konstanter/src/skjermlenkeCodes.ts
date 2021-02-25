@@ -98,11 +98,6 @@ const skjermlenkeCodes = {
     faktaNavn: faktaPanelCodes.DEFAULT,
     punktNavn: prosessStegCodes.ANKEBEHANDLING,
   },
-  KONTROLL_AV_SAKSOPPLYSNINGER: {
-    kode: 'KONTROLL_AV_SAKSOPPLYSNINGER',
-    faktaNavn: faktaPanelCodes.DEFAULT,
-    punktNavn: prosessStegCodes.SAKSOPPLYSNINGER,
-  },
   OPPLYSNINGSPLIKT: {
     kode: 'OPPLYSNINGSPLIKT',
     faktaNavn: faktaPanelCodes.DEFAULT,

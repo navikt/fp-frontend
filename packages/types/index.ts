@@ -47,7 +47,6 @@ export { default as InntektArbeidYtelse, IAYInntektsmelding, RelatertTilgrensedY
 export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';
-export { default as Personopplysninger, PersonopplysningAdresse } from './src/personopplysningerTsType';
 export {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
 } from './src/simuleringResultatTsType';

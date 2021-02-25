@@ -11,7 +11,6 @@ export enum FpBehandlingApiKeys {
   STONADSKONTOER_GITT_UTTAKSPERIODER = 'STONADSKONTOER_GITT_UTTAKSPERIODER',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
   VILKAR = 'VILKAR',
-  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
   SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
   TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
   BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
@@ -52,7 +51,6 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', FpBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', FpBehandlingApiKeys.VILKAR)
-  .withRel('soeker-personopplysninger', FpBehandlingApiKeys.PERSONOPPLYSNINGER)
   .withRel('simuleringResultat', FpBehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', FpBehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('beregningsresultat-foreldrepenger', FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER)
