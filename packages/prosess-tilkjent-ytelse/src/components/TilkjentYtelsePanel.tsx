@@ -19,8 +19,8 @@ import {
   KodeverkMedNavn,
   Personoversikt,
   Soknad,
+  Kjønnkode,
 } from '@fpsak-frontend/types';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';

@@ -87,6 +87,7 @@ export { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from 
 export { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';
 export { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
 export { default as Aktor } from './src/aktorTsType';
-export { default as Kjønnkode, KjønnkodeEnum } from './src/Kjonnkode';
+export type { Kjønnkode } from './src/Kjonnkode';
+export { KjønnkodeEnum } from './src/Kjonnkode';
 export { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
 export { default as Personadresse } from './src/personadresseTsType';

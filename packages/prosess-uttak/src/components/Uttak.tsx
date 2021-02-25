@@ -27,10 +27,9 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
 
 import TimeLineInfo from './stonadkonto/TimeLineInfo';

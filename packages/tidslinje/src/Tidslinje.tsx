@@ -5,7 +5,7 @@ import Timeline from 'react-visjs-timeline';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
+import { Kjønnkode } from '@fpsak-frontend/types';
 
 import TimeLineControl from './components/TimeLineControl';
 import TimeLineSoker from './components/TimeLineSoker';

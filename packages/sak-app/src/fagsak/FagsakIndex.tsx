@@ -91,7 +91,7 @@ const FagsakIndex: FunctionComponent = () => {
   };
 
   const {
-    data: annenPartBehandling, state: annenPartState,
+    data: annenPartBehandling,
   } = restApiHooks.useRestApi<AnnenPartBehandling>(FpsakApiKeys.ANNEN_PART_BEHANDLING, { saksnummer: selectedSaksnummer }, options);
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
@@ -158,10 +158,6 @@ const FagsakIndex: FunctionComponent = () => {
         visittkortContent={() => {
           if (skalIkkeHenteData) {
             return null;
-          }
-
-          if (annenPartState === RestApiState.LOADING) {
-            return <LoadingPanel />;
           }
 
           return (

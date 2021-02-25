@@ -118,7 +118,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiSvpHooks.useMultipleRestApi<{
-    arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerWrapper,
+    arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
   }>(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [!behandling],
@@ -152,7 +152,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
-        arbeidsgiverOpplysningerPerId={opplysningsdata.arbeidsgiverOpplysninger.arbeidsgivere}
+        arbeidsgiverOpplysningerPerId={opplysningsdata.arbeidsgivereOversikt.arbeidsgivere}
         personoversikt={opplysningsdata.behandlingPersonoversikt}
       />
     </>
