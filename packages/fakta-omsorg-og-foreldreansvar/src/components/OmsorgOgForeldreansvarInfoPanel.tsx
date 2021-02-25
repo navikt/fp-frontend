@@ -108,15 +108,14 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personoversikt,
     (ownProps: PureOwnProps) => ownProps.innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (soknad, familiehendelse, personoversikt, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
+  (soknad, gjeldendeFamiliehendelse, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
       || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
     return {
-      ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personoversikt,
+      ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, gjeldendeFamiliehendelse,
         innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
       ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkt),
     };

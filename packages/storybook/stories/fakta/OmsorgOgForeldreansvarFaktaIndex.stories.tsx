@@ -2,8 +2,8 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
+import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -33,11 +33,11 @@ const familieHendelse = {
 } as FamilieHendelseSamling;
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
+  adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' } as { [key: number]: string },
   utstedtdato: '2019-01-02',
-  antallBarn: 1,
+  antallBarn: 2,
   soknadType: {
-    kode: soknadType.FODSEL,
+    kode: soknadType.ADOPSJON,
     kodeverk: '',
   },
   farSokerType: {
@@ -46,18 +46,56 @@ const soknad = {
   },
 } as Soknad;
 
-const personopplysninger = {
-  aktoerId: '1',
-  navn: 'Espen Utvikler',
-  navBrukerKjonn: {
-    kode: navBrukerKjonn.KVINNE,
-    kodeverk: '',
+const personoversikt = {
+  bruker: {
+    fnr: '',
+    navn: 'Olga Utvikler',
+    aktoerId: '2',
+    diskresjonskode: {
+      kode: '',
+      kodeverk: '',
+    },
+    kjønn: {
+      kode: navBrukerKjonn.KVINNE,
+      kodeverk: '',
+    },
+    sivilstand: {
+      kode: '',
+      kodeverk: '',
+    },
+    fødselsdato: '1979-01-01',
+    adresser: [{
+      adresseType: {
+        kode: opplysningAdresseType.POSTADRESSE,
+        kodeverk: '',
+      },
+      adresselinje1: 'Gateadresse 1',
+      postNummer: '1000',
+      poststed: 'Oslo',
+      land: 'Norge',
+    }],
   },
-  personstatus: {
-    kode: personstatusType.BOSATT,
-    kodeverk: '',
+  annenPart: {
+    fnr: '',
+    navn: 'Espen Utvikler',
+    aktoerId: '1',
+    diskresjonskode: {
+      kode: '',
+      kodeverk: '',
+    },
+    kjønn: {
+      kode: navBrukerKjonn.MANN,
+      kodeverk: '',
+    },
+    sivilstand: {
+      kode: '',
+      kodeverk: '',
+    },
+    fødselsdato: '1989-01-01',
+    dødsdato: '2021-01-01',
+    adresser: [],
   },
-  barnSoktFor: [],
+  barn: [],
 };
 
 const inntektArbeidYtelse = {
@@ -97,7 +135,7 @@ export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
-    personopplysninger={object('personopplysninger', personopplysninger)}
+    personoversikt={object('personoversikt', personoversikt)}
     inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
     aksjonspunkter={[{
       definisjon: {
@@ -125,7 +163,7 @@ export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
     behandling={behandling}
     soknad={object('soknad', soknad)}
     familiehendelse={object('familiehendelse', familieHendelse)}
-    personopplysninger={object('personopplysninger', personopplysninger)}
+    personoversikt={object('personoversikt', personoversikt)}
     inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
     aksjonspunkter={[{
       definisjon: {

@@ -1,6 +1,5 @@
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import {
-  FamilieHendelse, Kodeverk, Personoversikt, Soknad,
+  FamilieHendelse, Kodeverk, Soknad,
 } from '@fpsak-frontend/types';
 import { diff } from '@fpsak-frontend/utils';
 
@@ -30,23 +29,6 @@ const getIsBarnetsAnkomstTilNorgeDatoEdited = (
 const getIsAntallBarnOmsorgOgForeldreansvarEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean => isNotEqual(soknad.antallBarn,
   familiehendelse.antallBarnTilBeregning);
 
-const getIsFodselsdatoerEdited = (soknad: Soknad, personopplysning: Personoversikt): Record<number, boolean> => {
-  const soknadFodselsdatoer = soknad.soknadType.kode === soknadType.FODSEL
-    ? soknad.fodselsdatoer
-    : soknad.adopsjonFodelsedatoer;
-
-  const barn = personopplysning.barnSoktFor;
-
-  const fodselsdatoerEdited = Object.keys(soknadFodselsdatoer)
-    .filter((barnNummer) => barn.some((b: Personoversikt) => `${b.nummer}` === barnNummer))
-    .map((barnNummer) => ({
-      [barnNummer]: barn.find((b) => `${b.nummer}` === barnNummer).fodselsdato !== soknadFodselsdatoer[barnNummer],
-    }))
-    .reduce((a, b) => ({ ...a, ...b }), {});
-
-  return fodselsdatoerEdited;
-};
-
 const getIsEktefellesBarnEdited = (familiehendelse: FamilieHendelse): boolean => hasValue(familiehendelse.ektefellesBarn);
 
 const getIsMannAdoptererAleneEdited = (familiehendelse: FamilieHendelse): boolean => hasValue(familiehendelse.mannAdoptererAlene);
@@ -61,7 +43,6 @@ export type FieldEditedInfo = {
   omsorgsovertakelseDato?: boolean;
   barnetsAnkomstTilNorgeDato?: boolean;
   antallBarnOmsorgOgForeldreansvar?: boolean;
-  fodselsdatoer?: boolean | Record<string, boolean>;
   vilkarType?: boolean;
   ektefellesBarn?: boolean;
   mannAdoptererAlene?: boolean;
@@ -70,21 +51,19 @@ export type FieldEditedInfo = {
 
 const isFieldEdited = (
   soknad: Soknad = {} as Soknad,
-  familiehendelse: FamilieHendelse = {} as FamilieHendelse,
-  personopplysning?: Personoversikt,
+  gjeldendeFamiliehendelse: FamilieHendelse = {} as FamilieHendelse,
 ): FieldEditedInfo => ({
-  termindato: getIsTerminDatoEdited(soknad, familiehendelse),
-  antallBarn: getIsAntallBarnEdited(soknad, familiehendelse),
-  utstedtdato: getIsUtstedtDatoEdited(soknad, familiehendelse),
-  adopsjonFodelsedatoer: getIsAdopsjonFodelsedatoerEdited(soknad, familiehendelse),
-  omsorgsovertakelseDato: getIsOmsorgsovertakelseDatoEdited(soknad, familiehendelse),
-  barnetsAnkomstTilNorgeDato: getIsBarnetsAnkomstTilNorgeDatoEdited(soknad, familiehendelse),
-  antallBarnOmsorgOgForeldreansvar: getIsAntallBarnOmsorgOgForeldreansvarEdited(soknad, familiehendelse),
-  fodselsdatoer: personopplysning ? getIsFodselsdatoerEdited(soknad, personopplysning) : undefined,
-  vilkarType: getIsVilkarTypeEdited(familiehendelse),
-  ektefellesBarn: getIsEktefellesBarnEdited(familiehendelse),
-  mannAdoptererAlene: getIsMannAdoptererAleneEdited(familiehendelse),
-  dokumentasjonForeligger: getIsDokumentasjonForeliggerEdited(familiehendelse),
+  termindato: getIsTerminDatoEdited(soknad, gjeldendeFamiliehendelse),
+  antallBarn: getIsAntallBarnEdited(soknad, gjeldendeFamiliehendelse),
+  utstedtdato: getIsUtstedtDatoEdited(soknad, gjeldendeFamiliehendelse),
+  adopsjonFodelsedatoer: getIsAdopsjonFodelsedatoerEdited(soknad, gjeldendeFamiliehendelse),
+  omsorgsovertakelseDato: getIsOmsorgsovertakelseDatoEdited(soknad, gjeldendeFamiliehendelse),
+  barnetsAnkomstTilNorgeDato: getIsBarnetsAnkomstTilNorgeDatoEdited(soknad, gjeldendeFamiliehendelse),
+  antallBarnOmsorgOgForeldreansvar: getIsAntallBarnOmsorgOgForeldreansvarEdited(soknad, gjeldendeFamiliehendelse),
+  vilkarType: getIsVilkarTypeEdited(gjeldendeFamiliehendelse),
+  ektefellesBarn: getIsEktefellesBarnEdited(gjeldendeFamiliehendelse),
+  mannAdoptererAlene: getIsMannAdoptererAleneEdited(gjeldendeFamiliehendelse),
+  dokumentasjonForeligger: getIsDokumentasjonForeliggerEdited(gjeldendeFamiliehendelse),
 });
 
 export default isFieldEdited;

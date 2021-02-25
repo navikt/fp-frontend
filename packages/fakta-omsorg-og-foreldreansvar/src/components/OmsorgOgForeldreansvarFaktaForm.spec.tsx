@@ -1,13 +1,11 @@
 import React from 'react';
 
-import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { SelectField } from '@fpsak-frontend/form';
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Personoversikt, Soknad } from '@fpsak-frontend/types';
 
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
 import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
@@ -43,14 +41,13 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
-        fodselsdatoer: {},
       }}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{}}
+      personoversikt={{} as Personoversikt}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -74,14 +71,13 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
-        fodselsdatoer: {},
       }}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{}}
+      personoversikt={{} as Personoversikt}
     />);
 
     const select = wrapper.find(SelectField);
@@ -105,14 +101,13 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
-        fodselsdatoer: {},
       }}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{}}
+      personoversikt={{} as Personoversikt}
     />);
 
     const select = wrapper.find(SelectField);
@@ -136,14 +131,13 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         omsorgsovertakelseDato: false,
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
-        fodselsdatoer: {},
       }}
       behandlingId={1}
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{}}
+      personoversikt={{} as Personoversikt}
     />);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
@@ -217,132 +211,11 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       },
     } as Soknad;
     const familiehendelse = {} as FamilieHendelse;
-    const personopplysning = {
-      aktoerId: '1',
-      navn: 'Petra Tester',
-      adresser: [{
-        adresselinje1: 'Vei 1',
-        postNummer: '1000',
-        poststed: 'Oslo',
-        adresseType: {
-          kode: opplysningAdresseType.POSTADRESSE,
-          kodeverk: '',
-        },
-      }],
-      navBrukerKjonn: {
-        kode: navBrukerKjonn.KVINNE,
-        kodeverk: '',
-      },
-      personstatus: {
-        kode: 'DØD',
-        kodeverk: '',
-      },
-    };
 
-    const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
+    const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, undefined, getKodeverknavn);
     expect(initialValues).toEqual({
       omsorgsovertakelseDato: '10-10-2017',
       foreldreansvarDato: undefined,
-      barn: [{
-        opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-        fodselsdato: '10-10-2017',
-        nummer: 1,
-      }, {
-        opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-        fodselsdato: '10-10-2017',
-        nummer: 2,
-      }],
-      foreldre: [{
-        dodsdato: undefined,
-        originalDodsdato: undefined,
-        erMor: true,
-        erDod: true,
-        adresse: 'Vei 1, 1000 Oslo',
-        navn: 'Petra Tester',
-        opplysningsKilde: undefined,
-        aktorId: '1',
-      }],
-      ytelser: undefined,
-      antallBarn: 2,
-      vilkarType: '',
-      farSokerType: 'far søker type',
-      originalAntallBarn: 2,
-    });
-  });
-
-  it('skal sette opp barn som en kombinasjon av bekreftet data fra TPS og data fra søknad', () => {
-    const soknad = {
-      omsorgsovertakelseDato: '10-10-2017',
-      farSokerType: {
-        kode: 'FAR_SOKER_TYPE',
-      },
-      antallBarn: 2,
-      soknadType: {
-        kode: soknadType.FODSEL,
-      },
-      fodselsdatoer: {
-        1: '10-10-2017',
-        3: '10-10-2017',
-      } as { [key: number]: string },
-    } as Soknad;
-    const familiehendelse = {} as FamilieHendelse;
-    const personopplysning = {
-      aktoerId: '1',
-      navn: 'Petra Tester',
-      navBrukerKjonn: {
-        kode: navBrukerKjonn.KVINNE,
-        kodeverk: '',
-      },
-      personstatus: {
-        kode: 'DØD',
-        kodeverk: '',
-      },
-      barnSoktFor: [{
-        aktoerId: '1',
-        nummer: 1,
-        navn: 'Barn nr 1',
-        fodselsdato: '10-10-2017',
-        dodsdato: undefined,
-      }, {
-        aktoerId: '2',
-        nummer: 2,
-        navn: 'Barn nr 2',
-        fodselsdato: '05-05-2011',
-        dodsdato: undefined,
-        opplysningsKilde: {
-          kode: opplysningsKilde.TPS,
-          kodeverk: '',
-        },
-      }],
-    };
-
-    const initialValues = OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning, undefined, getKodeverknavn);
-
-    expect(initialValues).toEqual({
-      omsorgsovertakelseDato: '10-10-2017',
-      foreldreansvarDato: undefined,
-      barn: [{
-        aktorId: '1',
-        opplysningsKilde: undefined,
-        fodselsdato: '10-10-2017',
-        dodsdato: undefined,
-        navn: 'Barn nr 1',
-        nummer: 1,
-      }, {
-        opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-        fodselsdato: '10-10-2017',
-        nummer: 3,
-      }],
-      foreldre: [{
-        dodsdato: undefined,
-        originalDodsdato: undefined,
-        erMor: true,
-        erDod: true,
-        adresse: undefined,
-        navn: 'Petra Tester',
-        opplysningsKilde: undefined,
-        aktorId: '1',
-      }],
       ytelser: undefined,
       antallBarn: 2,
       vilkarType: '',

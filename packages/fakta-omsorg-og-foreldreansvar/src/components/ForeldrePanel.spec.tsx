@@ -1,118 +1,97 @@
 import React from 'react';
-import { FieldArrayFieldsProps } from 'redux-form';
+import { shallow } from 'enzyme';
 
-import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
+import { Undertittel } from 'nav-frontend-typografi';
+import { KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import ForeldrePanel from './ForeldrePanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
-
-const getMockedFields = (fieldNames: any, children: any) => {
-  const field = {
-    get: (idx: any) => children[idx],
-  };
-  return {
-    map: (callback: any) => fieldNames.map((fieldname: any, idx: any) => callback(fieldname, idx, field)),
-  } as FieldArrayFieldsProps<any>;
-};
-
-jest.mock('react-intl', () => {
-  const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar');
-  return {
-    ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
-  };
-});
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 
 describe('<ForeldrePanel>', () => {
-  it('skal kunne endre dødsdatoer når foreldre ikke er bekreftet av TPS', () => {
-    const fieldNames = ['foreldre[0]', 'foreldre[1]'];
-    const parents = [{
-      erMor: true,
-      id: 1,
-      navn: 'Petra Utvikler',
-      adresse: undefined,
-      dodsdato: '10-01-2017',
-      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-    }, {
-      erMor: false,
-      id: 2,
-      navn: 'Espen Utvikler',
-      adresse: undefined,
-      dodsdato: '10-01-2017',
-      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-    }];
+  it('skal vise søker', () => {
+    const personoversikt = {
+      bruker: {
+        fnr: '',
+        navn: 'Olga Utvikler',
+        aktoerId: '1',
+        diskresjonskode: {
+          kode: '',
+          kodeverk: '',
+        },
+        kjønn: {
+          kode: KjønnkodeEnum.KVINNE,
+          kodeverk: '',
+        },
+        sivilstand: {
+          kode: '',
+          kodeverk: '',
+        },
+        fødselsdato: '1989-01-01',
+        adresser: [],
+      },
+      barn: [],
+    };
 
-    const wrapper = shallowWithIntl(<ForeldrePanel
-      fields={getMockedFields(fieldNames, parents)}
+    const wrapper = shallow(<ForeldrePanel
+      intl={intlMock}
       alleMerknaderFraBeslutter={{}}
+      personoversikt={personoversikt}
     />);
 
-    const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).toHaveLength(2);
-    const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).toHaveLength(0);
+    const undertittel = wrapper.find(Undertittel);
+    expect(undertittel).toHaveLength(1);
   });
 
-  it('skal kunne endre dødsdatoer når foreldre er bekreftet av TPS men dødsdato ikke er oppgitt', () => {
-    const fieldNames = ['foreldre[0]', 'foreldre[1]'];
-    const parents = [{
-      erMor: true,
-      id: 1,
-      navn: 'Petra Utvikler',
-      adresse: undefined,
-      dodsdato: '10-01-2017',
-      originalDodsdato: undefined,
-      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-    }, {
-      erMor: false,
-      id: 2,
-      navn: 'Espen Utvikler',
-      adresse: undefined,
-      dodsdato: '10-01-2017',
-      originalDodsdato: undefined,
-      opplysningsKilde: opplysningsKilde.SAKSBEHANDLER,
-    }];
+  it('skal vise søker og annen part', () => {
+    const personoversikt = {
+      bruker: {
+        fnr: '',
+        navn: 'Olga Utvikler',
+        aktoerId: '1',
+        diskresjonskode: {
+          kode: '',
+          kodeverk: '',
+        },
+        kjønn: {
+          kode: KjønnkodeEnum.KVINNE,
+          kodeverk: '',
+        },
+        sivilstand: {
+          kode: '',
+          kodeverk: '',
+        },
+        fødselsdato: '1989-01-01',
+        adresser: [],
+      },
+      annenPart: {
+        fnr: '',
+        navn: 'Espen Utvikler',
+        aktoerId: '1',
+        diskresjonskode: {
+          kode: '',
+          kodeverk: '',
+        },
+        kjønn: {
+          kode: KjønnkodeEnum.MANN,
+          kodeverk: '',
+        },
+        sivilstand: {
+          kode: '',
+          kodeverk: '',
+        },
+        fødselsdato: '1979-01-01',
+        adresser: [],
+      },
+      barn: [],
+    };
 
-    const wrapper = shallowWithIntl(<ForeldrePanel
-      fields={getMockedFields(fieldNames, parents)}
+    const wrapper = shallow(<ForeldrePanel
+      intl={intlMock}
       alleMerknaderFraBeslutter={{}}
+      personoversikt={personoversikt}
     />);
 
-    const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).toHaveLength(2);
-    const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).toHaveLength(0);
-  });
-
-  it('skal ikke kunne endre dødsdatoer når foreldre er bekreftet av TPS og dødsdato er oppgitt', () => {
-    const fieldNames = ['foreldre[0]', 'foreldre[1]'];
-    const parents = [{
-      erMor: true,
-      id: 1,
-      navn: 'Petra Utvikler',
-      adresse: undefined,
-      dodsdato: '10-01-2017',
-      originalDodsdato: '10-01-2017',
-      opplysningsKilde: opplysningsKilde.TPS,
-    }, {
-      erMor: false,
-      id: 1,
-      navn: 'Espen Utvikler',
-      adresse: undefined,
-      dodsdato: '10-01-2017',
-      originalDodsdato: '10-01-2017',
-      opplysningsKilde: opplysningsKilde.TPS,
-    }];
-
-    const wrapper = shallowWithIntl(<ForeldrePanel
-      fields={getMockedFields(fieldNames, parents)}
-      alleMerknaderFraBeslutter={{}}
-    />);
-
-    const DatepickerField = wrapper.find('DatepickerField');
-    expect(DatepickerField).toHaveLength(0);
-    const DateLabel = wrapper.find('DateLabel');
-    expect(DateLabel).toHaveLength(2);
+    const undertittel = wrapper.find(Undertittel);
+    expect(undertittel).toHaveLength(2);
   });
 });

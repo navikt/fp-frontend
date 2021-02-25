@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -20,8 +19,8 @@ import {
 
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
 import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
-import BarnPanel, { FormValues as BarnFormValues } from './BarnPanel';
-import ForeldrePanel, { FormValues as ForeldreFormValues } from './ForeldrePanel';
+import BarnPanel from './BarnPanel';
+import ForeldrePanel from './ForeldrePanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.less';
 
@@ -43,7 +42,7 @@ const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean): React
   : [<FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarFaktaForm.CheckInformation" />,
     <FormattedMessage key="ChooseVilkar" id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkar" />]);
 
-export type FormValues = OmsorgFormValues & RettighetFormValues & BarnFormValues & ForeldreFormValues & {
+export type FormValues = OmsorgFormValues & RettighetFormValues & {
   originalAntallBarn?: number;
   vilkarType?: string;
 }
@@ -53,13 +52,13 @@ interface PureOwnProps {
   behandlingVersjon: number;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  personoversikt: Personoversikt;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn[];
   hasOpenAksjonspunkter: boolean;
   relatertYtelseTypes: KodeverkMedNavn[];
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  personoversikt: Personoversikt;
 }
 
 interface MappedOwnProps {
@@ -69,7 +68,7 @@ interface MappedOwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, personoversikt: Personoversikt,
+  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues,
   validate?: (intl: IntlShape, values: FormValues) => any,
@@ -86,7 +85,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
   readOnly,
   vilkarTypes,
   hasOpenAksjonspunkter,
-  antallBarn,
+  soknad,
   vilkarType,
   relatertYtelseTypes,
   editedStatus,
@@ -94,6 +93,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
   behandlingId,
   behandlingVersjon,
   alleMerknaderFraBeslutter,
+  personoversikt,
 }) => (
   <>
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
@@ -121,23 +121,17 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
     </Row>
     <Row>
       <Column xs="6">
-        <FieldArray
-          name="barn"
-          // @ts-ignore Fiks
-          component={BarnPanel}
-          antallBarn={antallBarn}
-          readOnly={readOnly}
-          isFodselsdatoerEdited={editedStatus.fodselsdatoer}
+        <BarnPanel
+          soknad={soknad}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           intl={intl}
         />
       </Column>
       <Column xs="6">
-        <FieldArray
-          name="foreldre"
-          component={ForeldrePanel}
-          readOnly={readOnly}
+        <ForeldrePanel
+          personoversikt={personoversikt}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          intl={intl}
         />
       </Column>
     </Row>
@@ -178,10 +172,9 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
 
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
-    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personoversikt],
-  (soknad, familiehendelse, personoversikt): FieldEditedInfo => (
-    isFieldEdited(soknad, familiehendelse, personoversikt)
+    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
+  (soknad, gjeldendeFamiliehendelse): FieldEditedInfo => (
+    isFieldEdited(soknad, gjeldendeFamiliehendelse)
   ),
 );
 
@@ -194,14 +187,12 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 const OmsorgOgForeldreansvarFaktaForm = connect(mapStateToProps)(OmsorgOgForeldreansvarFaktaFormImpl);
 
-OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse, personoversikt: Personoversikt,
+OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
-  vilkarType: familiehendelse.vilkarType ? familiehendelse.vilkarType.kode : '',
+  vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType.kode : '',
   originalAntallBarn: soknad.antallBarn,
-  ...ForeldrePanel.buildInitialValues(personoversikt),
-  ...BarnPanel.buildInitialValues(personoversikt, soknad),
-  ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, familiehendelse),
+  ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });
 
@@ -231,8 +222,6 @@ OmsorgOgForeldreansvarFaktaForm.transformValues = (values: FormValues, aksjonspu
   const newValues = {
     omsorgsovertakelseDato: values.omsorgsovertakelseDato,
     antallBarn: values.antallBarn,
-    barn: values.barn,
-    foreldre: values.foreldre,
   };
   if (aksjonspunkt.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR) {
     return {

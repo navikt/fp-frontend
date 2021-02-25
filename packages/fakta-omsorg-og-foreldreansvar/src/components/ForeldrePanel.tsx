@@ -1,42 +1,31 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { FunctionComponent, useMemo } from 'react';
+import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import opplysningsKilde from '@fpsak-frontend/kodeverk/src/opplysningsKilde';
-import { DatepickerField } from '@fpsak-frontend/form';
-import { dateBeforeOrEqualToToday, getAddresses, hasValidDate } from '@fpsak-frontend/utils';
+import { getAddresses } from '@fpsak-frontend/utils';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
-import { FieldArrayFieldsProps } from 'redux-form';
 import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
 
 const getParentHeader = (erMor: boolean): string => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
 
-type CustomPersonopplysninger = {
-  aktorId?: string;
-  navn: string;
-  dodsdato?: string;
-  originalDodsdato?: string;
-  adresse: string;
-  opplysningsKilde?: string;
-  erMor: boolean;
-  erDod: boolean;
-}
+const lagSøkerdata = (personopplysninger: PersonopplysningerBasis) => {
+  const addresses = getAddresses(personopplysninger.adresser);
 
-export type FormValues = {
-  foreldre?: CustomPersonopplysninger[],
-}
+  return {
+    aktorId: personopplysninger.aktoerId,
+    navn: personopplysninger.navn,
+    dodsdato: personopplysninger.dødsdato,
+    adresse: addresses[opplysningAdresseType.POSTADRESSE] || addresses[opplysningAdresseType.BOSTEDSADRESSE],
+    erMor: personopplysninger.kjønn.kode === navBrukerKjonn.KVINNE,
+  };
+};
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<CustomPersonopplysninger>;
+  personoversikt: Personoversikt;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-}
-
-interface StaticFunctions {
-  buildInitialValues?: (personoversikt: Personoversikt) => FormValues;
 }
 
 /**
@@ -44,50 +33,41 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
  */
-export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  fields,
+const ForeldrePanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
+  personoversikt,
   alleMerknaderFraBeslutter,
 }) => {
-  const intl = useIntl();
+  const beggeForeldre = useMemo(() => {
+    const f = [lagSøkerdata(personoversikt.bruker)];
+    if (personoversikt.annenPart) {
+      f.push(lagSøkerdata(personoversikt.annenPart));
+    }
+    return f;
+  }, []);
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
     >
-      {fields.map((foreldre, index, field) => {
-        const f = field.get(index);
-        const shouldShowAdress = f.adresse && !f.erDod;
-
-        const parentHeader = getParentHeader(f.erMor);
-        if (f.opplysningsKilde === opplysningsKilde.TPS && f.originalDodsdato) {
-          return (
-            <div key={`${f.aktorId}`}>
-              <Undertittel>{f.navn}</Undertittel>
-              {shouldShowAdress
-                && <Element>{f.adresse}</Element>}
-              <VerticalSpacer eightPx />
-              <Normaltekst><FormattedMessage id={parentHeader} /></Normaltekst>
-              {f.dodsdato
-                && <Element><DateLabel dateString={f.dodsdato} /></Element>}
-              {!f.dodsdato
-                && <Normaltekst> - </Normaltekst>}
-              <VerticalSpacer sixteenPx />
-            </div>
-          );
-        }
+      {beggeForeldre.map((foreldre) => {
+        const shouldShowAdress = foreldre.adresse && !foreldre.dodsdato;
+        const parentHeader = getParentHeader(foreldre.erMor);
         return (
-          <div key={`${f.aktorId}`}>
-            <DatepickerField
-              name={`${foreldre}.dodsdato`}
-              label={f.navn ? { id: 'ForeldrePanel.DeathDate', args: { name: f.navn } } : { id: parentHeader }}
-              validate={[hasValidDate, dateBeforeOrEqualToToday]}
-              readOnly
-            />
+          <div key={`${foreldre.aktorId}`}>
+            <Undertittel>{foreldre.navn}</Undertittel>
             <VerticalSpacer eightPx />
             <Normaltekst><FormattedMessage id="ForeldrePanel.Address" /></Normaltekst>
             {shouldShowAdress
-              && <Normaltekst>{f.adresse}</Normaltekst>}
+              && <Element>{foreldre.adresse}</Element>}
             {!shouldShowAdress
+              && <Normaltekst> - </Normaltekst>}
+            <VerticalSpacer eightPx />
+            <Normaltekst><FormattedMessage id={parentHeader} /></Normaltekst>
+            {foreldre.dodsdato
+              && <Element><DateLabel dateString={foreldre.dodsdato} /></Element>}
+            {!foreldre.dodsdato
               && <Normaltekst> - </Normaltekst>}
             <VerticalSpacer sixteenPx />
           </div>
@@ -95,57 +75,6 @@ export const ForeldrePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
       })}
     </FaktaGruppe>
   );
-};
-
-const buildSokerPersonopplysning = (sokerPersonopplysninger: PersonopplysningerBasis): CustomPersonopplysninger => {
-  const addresses = getAddresses(sokerPersonopplysninger.adresser);
-  const { avklartPersonstatus } = sokerPersonopplysninger;
-  const isAvklartPersonstatusDod = avklartPersonstatus
-      && avklartPersonstatus.overstyrtPersonstatus && avklartPersonstatus.overstyrtPersonstatus.kode === personstatusType.DOD;
-
-  return {
-    aktorId: sokerPersonopplysninger.aktoerId,
-    navn: sokerPersonopplysninger.navn,
-    dodsdato: sokerPersonopplysninger.dodsdato,
-    originalDodsdato: sokerPersonopplysninger.dodsdato,
-    adresse: addresses[opplysningAdresseType.POSTADRESSE] || addresses[opplysningAdresseType.BOSTEDSADRESSE],
-    opplysningsKilde: undefined,
-    erMor: sokerPersonopplysninger.navBrukerKjonn.kode === navBrukerKjonn.KVINNE,
-    erDod: sokerPersonopplysninger.personstatus.kode === personstatusType.DOD || isAvklartPersonstatusDod,
-  };
-};
-
-const buildAnnenPartPersonopplysning = (annenPartPersonopplysninger: PersonopplysningerBasis): CustomPersonopplysninger => {
-  const secondaryParentAddresses = getAddresses(annenPartPersonopplysninger.adresser);
-  const { avklartPersonstatus } = annenPartPersonopplysninger;
-  const isAvklartPersonstatusDod = avklartPersonstatus
-    && avklartPersonstatus.overstyrtPersonstatus && avklartPersonstatus.overstyrtPersonstatus.kode === personstatusType.DOD;
-
-  return {
-    aktorId: annenPartPersonopplysninger.aktoerId,
-    navn: annenPartPersonopplysninger.navn,
-    dodsdato: annenPartPersonopplysninger.dodsdato,
-    originalDodsdato: annenPartPersonopplysninger.dodsdato,
-    adresse: secondaryParentAddresses[opplysningAdresseType.POSTADRESSE] || secondaryParentAddresses[opplysningAdresseType.BOSTEDSADRESSE],
-    opplysningsKilde: undefined,
-    erMor: annenPartPersonopplysninger.navBrukerKjonn.kode === navBrukerKjonn.KVINNE,
-    erDod: annenPartPersonopplysninger.personstatus.kode === personstatusType.DOD || isAvklartPersonstatusDod,
-  };
-};
-
-ForeldrePanel.buildInitialValues = (personoversikt: Personoversikt): FormValues => {
-  const parents = [];
-
-  const sokerOppl = buildSokerPersonopplysning(personoversikt.bruker);
-  parents.push(sokerOppl);
-
-  const annenPartPersonopplysninger = personoversikt.annenPart;
-
-  if (annenPartPersonopplysninger) {
-    const annenPartOppl = buildAnnenPartPersonopplysning(annenPartPersonopplysninger);
-    parents.push(annenPartOppl);
-  }
-  return { foreldre: parents };
 };
 
 export default ForeldrePanel;
