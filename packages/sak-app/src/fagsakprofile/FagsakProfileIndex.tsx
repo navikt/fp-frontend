@@ -10,7 +10,6 @@ import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import {
   KodeverkMedNavn, Fagsak, Aksjonspunkt, Risikoklassifisering, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import {
   getLocationWithDefaultProsessStegAndFakta,
@@ -65,11 +64,11 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.status);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.sakstype);
 
-  const { data: risikoAksjonspunkt, state: risikoAksjonspunktState } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
+  const { data: risikoAksjonspunkt } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT),
   });
-  const { data: kontrollresultat, state: kontrollresultatState } = restApiHooks.useRestApi<Risikoklassifisering>(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
+  const { data: kontrollresultat } = restApiHooks.useRestApi<Risikoklassifisering>(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT),
   });
@@ -130,19 +129,14 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           )}
         />
       )}
-      {(kontrollresultatState === RestApiState.LOADING || risikoAksjonspunktState === RestApiState.LOADING) && (
-        <LoadingPanel />
-      )}
-      {(kontrollresultatState === RestApiState.SUCCESS && risikoAksjonspunktState === RestApiState.SUCCESS) && (
-        <RisikoklassifiseringIndex
-          fagsak={fagsak}
-          alleBehandlinger={alleBehandlinger}
-          risikoAksjonspunkt={risikoAksjonspunkt}
-          kontrollresultat={kontrollresultat}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-        />
-      )}
+      <RisikoklassifiseringIndex
+        fagsak={fagsak}
+        alleBehandlinger={alleBehandlinger}
+        risikoAksjonspunkt={risikoAksjonspunkt}
+        kontrollresultat={kontrollresultat}
+        behandlingId={behandlingId}
+        behandlingVersjon={behandlingVersjon}
+      />
     </div>
   );
 };

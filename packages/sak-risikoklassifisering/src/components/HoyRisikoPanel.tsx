@@ -12,7 +12,7 @@ import AvklarFaresignalerForm, { VuderFaresignalerAp } from './AvklarFaresignale
 interface OwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  risikoklassifisering: Risikoklassifisering;
+  risikoklassifisering?: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;

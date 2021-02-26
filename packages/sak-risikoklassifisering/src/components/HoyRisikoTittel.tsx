@@ -11,7 +11,7 @@ import { VuderFaresignalerAp } from './AvklarFaresignalerForm';
 import styles from './hoyRisikoTittel.less';
 
 interface OwnProps {
-  risikoklassifisering: Risikoklassifisering;
+  risikoklassifisering?: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
