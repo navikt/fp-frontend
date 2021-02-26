@@ -43,7 +43,6 @@ interface MappedOwnProps {
   relatertYtelseTypes: KodeverkMedNavn[];
   erAksjonspunktForeldreansvar: boolean;
   onSubmit: (formValues: FormValues) => any;
-  validate: (formValues: FormValues) => any;
 }
 
 /**
@@ -132,11 +131,10 @@ const lagSubmitFn = createSelector([
 (submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0])]));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const { aksjonspunkter, alleKodeverk, intl } = initialOwnProps;
+  const { aksjonspunkter, alleKodeverk } = initialOwnProps;
   const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
   const vilkarTypes = alleKodeverk[kodeverkTyper.OMSORGSOVERTAKELSE_VILKAR_TYPE];
   const relatertYtelseTypes = alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE];
-  const validate = (values: FormValues) => OmsorgOgForeldreansvarFaktaForm.validate(intl, values);
 
   return (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     initialValues: buildInitialValues(ownProps),
@@ -144,7 +142,6 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
     relatertYtelseTypes,
     erAksjonspunktForeldreansvar,
     onSubmit: lagSubmitFn(ownProps),
-    validate,
   });
 };
 

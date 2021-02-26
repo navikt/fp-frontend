@@ -39,7 +39,6 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -73,7 +72,6 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -102,7 +100,6 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
@@ -131,7 +128,6 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
     const omsorgOgForeldreAnsvarFaktaForm = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).toBe(true);

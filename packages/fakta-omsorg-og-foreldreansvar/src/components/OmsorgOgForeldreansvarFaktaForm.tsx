@@ -10,7 +10,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { SelectField, behandlingFormValueSelector } from '@fpsak-frontend/form';
-import { hasValidInteger, isObjectEmpty, required } from '@fpsak-frontend/utils';
+import { required } from '@fpsak-frontend/utils';
 import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import {
@@ -43,7 +43,6 @@ const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean): React
     <FormattedMessage key="ChooseVilkar" id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkar" />]);
 
 export type FormValues = OmsorgFormValues & RettighetFormValues & {
-  originalAntallBarn?: number;
   vilkarType?: string;
 }
 
@@ -62,7 +61,6 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  antallBarn: number;
   vilkarType: string;
   editedStatus: FieldEditedInfo;
 }
@@ -94,6 +92,7 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
   behandlingVersjon,
   alleMerknaderFraBeslutter,
   personoversikt,
+  gjeldendeFamiliehendelse,
 }) => (
   <>
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
@@ -106,6 +105,8 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
           editedStatus={editedStatus}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          soknad={soknad}
+          familiehendelse={gjeldendeFamiliehendelse}
         />
       </Column>
       {!erAksjonspunktForeldreansvar && (
@@ -181,7 +182,7 @@ const getEditedStatus = createSelector(
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   editedStatus: getEditedStatus(ownProps),
   ...behandlingFormValueSelector('OmsorgOgForeldreansvarInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(
-    state, 'antallBarn', 'vilkarType',
+    state, 'vilkarType',
   ),
 });
 
@@ -191,50 +192,21 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, gjeldendeF
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
   vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType.kode : '',
-  originalAntallBarn: soknad.antallBarn,
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });
 
-OmsorgOgForeldreansvarFaktaForm.validate = (intl: IntlShape, values: FormValues): any => {
-  const errors = {};
-  if (!values) {
-    return errors;
-  }
-  const { originalAntallBarn, antallBarn } = values;
-  if (antallBarn < 1 || antallBarn > originalAntallBarn) {
-    return {
-      antallBarn: intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AntallBarnValidation' }),
-    };
-  }
-  if (isObjectEmpty(errors)) {
-    const res = hasValidInteger(antallBarn);
-    if (res !== null) {
-      return {
-        antallBarn: res,
-      };
-    }
-  }
-  return errors;
-};
-
-OmsorgOgForeldreansvarFaktaForm.transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): any => {
-  const newValues = {
-    omsorgsovertakelseDato: values.omsorgsovertakelseDato,
-    antallBarn: values.antallBarn,
-  };
-  if (aksjonspunkt.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR) {
-    return {
-      ...newValues,
+OmsorgOgForeldreansvarFaktaForm.transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): any => (
+  aksjonspunkt.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR
+    ? {
+      omsorgsovertakelseDato: values.omsorgsovertakelseDato,
       foreldreansvarDato: values.foreldreansvarDato,
       kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-    };
-  }
-  return {
-    ...newValues,
-    vilkarType: values.vilkarType,
-    kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
-  };
-};
+    }
+    : {
+      omsorgsovertakelseDato: values.omsorgsovertakelseDato,
+      vilkarType: values.vilkarType,
+      kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
+    });
 
 export default OmsorgOgForeldreansvarFaktaForm;

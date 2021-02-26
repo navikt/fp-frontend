@@ -34,7 +34,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       vilkarTypes={[]}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
-      antallBarn={1}
       vilkarType="test"
       relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
@@ -64,7 +63,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       vilkarTypes={[{ kode: 'kode1', navn: 'navn1', kodeverk: '' }]}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
-      antallBarn={1}
       vilkarType="test"
       relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
@@ -94,7 +92,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       vilkarTypes={[{ kode: 'kode1', navn: 'navn1', kodeverk: '' }]}
       erAksjonspunktForeldreansvar={false}
       hasOpenAksjonspunkter
-      antallBarn={1}
       vilkarType="kode1"
       relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
@@ -124,7 +121,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       vilkarTypes={[]}
       erAksjonspunktForeldreansvar
       hasOpenAksjonspunkter
-      antallBarn={1}
       vilkarType="test"
       relatertYtelseTypes={relatertYtelseTypeListe}
       editedStatus={{
@@ -144,53 +140,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
     expect(helpText).toHaveLength(1);
     expect(helpText.children()).toHaveLength(1);
     expect(helpText.childAt(0).props().id).toEqual('OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar');
-  });
-
-  it('skal gi feilmelding når antall barn er mindre enn 1', () => {
-    const model = {
-      originalAntallBarn: 1,
-      antallBarn: 0,
-    };
-
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).toEqual({
-      antallBarn: 'Antall barn må være mindre eller lik antall barn det søkes for',
-    });
-  });
-
-  it('skal gi feilmelding når antall barn er større enn originalt antall barn', () => {
-    const model = {
-      originalAntallBarn: 2,
-      antallBarn: 3,
-    };
-
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).toEqual({
-      antallBarn: 'Antall barn må være mindre eller lik antall barn det søkes for',
-    });
-  });
-
-  it('skal gi feilmelding når antall barn ikke er et gyldig tall', () => {
-    const model = {
-      originalAntallBarn: 2,
-      antallBarn: 'test',
-    };
-
-    // @ts-ignore
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).toEqual({
-      antallBarn: 'Feltet kan kun inneholde tall',
-    });
-  });
-
-  it('skal ikke gi feilmelding når antall barn og originalt antall er likt', () => {
-    const model = {
-      originalAntallBarn: 2,
-      antallBarn: 2,
-    };
-
-    const result = OmsorgOgForeldreansvarFaktaForm.validate(intlMock, model);
-    expect(result).toEqual({});
   });
 
   it('skal sette opp initielle verdier når en ikke har avklarte data', () => {
@@ -217,10 +166,8 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       omsorgsovertakelseDato: '10-10-2017',
       foreldreansvarDato: undefined,
       ytelser: undefined,
-      antallBarn: 2,
       vilkarType: '',
       farSokerType: 'far søker type',
-      originalAntallBarn: 2,
     });
   });
 });
