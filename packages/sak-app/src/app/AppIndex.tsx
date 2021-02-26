@@ -5,6 +5,7 @@ import { withRouter, match } from 'react-router-dom';
 import moment from 'moment';
 import { Location, History } from 'history';
 import { configureScope } from '@sentry/browser';
+import Modal from 'nav-frontend-modal';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
@@ -75,6 +76,11 @@ const AppIndex: FunctionComponent<OwnProps> = ({
     addErrorMessage(error);
     setCrashed(true);
   };
+
+  if (process.env.NODE_ENV !== 'test') {
+    // For å unngå feilmelding ved åpning av modaler
+    Modal.setAppElement('div#app');
+  }
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
   const queryStrings = parseQueryString(location.search);
