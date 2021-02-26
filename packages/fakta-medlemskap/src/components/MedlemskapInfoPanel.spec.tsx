@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
-  FagsakPerson, InntektArbeidYtelse, Medlemskap, Soknad,
+  InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 
 import MedlemskapInfoPanel from './MedlemskapInfoPanel';
@@ -61,7 +61,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -110,7 +109,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -159,7 +157,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -192,7 +189,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      fagsakPerson={{} as FagsakPerson}
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

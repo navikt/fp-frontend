@@ -39,7 +39,7 @@ const FagsakSearchIndex: FunctionComponent = () => {
 
   useEffect(() => {
     if (sokFerdig && fagsaker.length === 1) {
-      goToFagsak(fagsaker[0].saksnummer);
+      goToFagsak(fagsaker[0].saksnummerString);
     }
   }, [sokFerdig, fagsaker]);
 
@@ -48,7 +48,7 @@ const FagsakSearchIndex: FunctionComponent = () => {
       fagsaker={fagsaker}
       searchFagsakCallback={searchFagsaker}
       searchResultReceived={sokFerdig}
-      selectFagsakCallback={(e, saksnummer) => goToFagsak(saksnummer)}
+      selectFagsakCallback={(e, saksnummer: string) => goToFagsak(saksnummer)}
       searchStarted={sokeStatus === RestApiState.LOADING}
       searchResultAccessDenied={searchResultAccessDenied}
       alleKodeverk={alleKodeverk}

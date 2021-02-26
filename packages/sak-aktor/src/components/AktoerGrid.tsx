@@ -17,7 +17,7 @@ interface OwnProps {
     person: FagsakPerson;
   };
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  finnPathToFagsak: (saksnummer: number) => string;
+  finnPathToFagsak: (saksnummer: string) => string;
 }
 
 const AktoerGrid: FunctionComponent<OwnProps> = ({
@@ -32,22 +32,24 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
     <>
       <VisittkortSakIndex
         fagsak={vFagsak as Fagsak}
-        fagsakPerson={aktorInfo.person}
+        fagsakPersoner={{
+          bruker: aktorInfo.person,
+        }}
       />
       <div className={styles.list}>
         {aktorInfo.fagsaker.length ? aktorInfo.fagsaker.map((fagsak) => (
           <Lenkepanel
             linkCreator={(props) => (
-              <Link to={finnPathToFagsak(fagsak.saksnummer)} className={props.className}>
+              <Link to={finnPathToFagsak(fagsak.saksnummerString)} className={props.className}>
                 {props.children}
               </Link>
             )}
-            key={fagsak.saksnummer}
+            key={fagsak.saksnummerString}
             href="#"
             tittelProps="normaltekst"
           >
             {getKodeverknavn(fagsak.sakstype)}
-            {` (${fagsak.saksnummer}) `}
+            {` (${fagsak.saksnummerString}) `}
             {getKodeverknavn(fagsak.status)}
           </Lenkepanel>
         )) : <FormattedMessage id="AktoerGrid.IngenFagsaker" />}

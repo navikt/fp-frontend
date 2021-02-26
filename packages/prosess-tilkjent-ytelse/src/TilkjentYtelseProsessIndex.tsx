@@ -7,7 +7,7 @@ import {
   Fagsak,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
-  Personopplysninger,
+  Personoversikt,
   Soknad,
 } from '@fpsak-frontend/types';
 import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
@@ -25,7 +25,7 @@ const intl = createIntl({
 interface OwnProps {
   beregningresultat: BeregningsresultatFp;
   familiehendelse: FamilieHendelseSamling;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   soknad: Soknad;
   fagsak: Fagsak;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -36,7 +36,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFo
   behandling,
   beregningresultat,
   familiehendelse,
-  personopplysninger,
+  personoversikt,
   soknad,
   fagsak,
   aksjonspunkter,
@@ -53,7 +53,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFo
       behandlingVersjon={behandling.versjon}
       beregningresultat={beregningresultat}
       gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-      personopplysninger={personopplysninger}
+      personoversikt={personoversikt}
       soknad={soknad}
       fagsakYtelseTypeKode={fagsak.sakstype.kode}
       aksjonspunkter={aksjonspunkter}

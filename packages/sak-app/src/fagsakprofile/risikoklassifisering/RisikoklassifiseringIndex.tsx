@@ -85,7 +85,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const submitAksjonspunkt = useCallback((aksjonspunkt) => {
     const params = {
       behandlingId,
-      saksnummer: fagsak.saksnummer,
+      saksnummer: fagsak.saksnummerString,
       behandlingVersjon,
       bekreftedeAksjonspunktDtoer: [{
         '@type': aksjonspunkt.kode,

@@ -1,17 +1,12 @@
 import React from 'react';
 import { PersonCard, Gender, EmptyPersonCard } from '@navikt/nap-person-card';
 
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { FlexContainer } from '@fpsak-frontend/shared-components';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
-import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
-import region from '@fpsak-frontend/kodeverk/src/region';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
+import { KjønnkodeEnum } from '@fpsak-frontend/types';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-visittkort';
@@ -20,7 +15,7 @@ import VisittkortPanel from './VisittkortPanel';
 
 describe('<VisittkortPanel>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: {
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: 'SAKSTYPE',
@@ -43,165 +38,48 @@ describe('<VisittkortPanel>', () => {
   };
 
   const fagsakPerson = {
-    erDod: false,
     navn: 'Olga Utvikler',
-    alder: 41,
+    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
+    fødselsdato: '1979-01-01',
     personnummer: '1234567',
-    erKvinne: true,
-    personstatusType: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
   };
 
-  const familieHendelse = {
-    oppgitt: {
-      skjaringstidspunkt: '2020-01-01',
-      avklartBarn: [],
-      termindato: '2020-01-21',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
-    gjeldende: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
-    register: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
+  const fagsakPersonAnnenPart = {
+    navn: 'Espen Utvikler',
+    fødselsdato: '1979-01-01',
+    personnummer: '1234567',
+    kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+    aktørId: 'test',
   };
 
-  const personopplysningerSoker = {
-    fodselsdato: '1990-01-01',
-    navBrukerKjonn: {
-      kode: navBrukerKjonn.KVINNE,
-      kodeverk: 'NAV_BRUKER_KJONN',
-    },
-    statsborgerskap: {
-      kode: 'NORSK',
-      kodeverk: 'STATSBORGERSKAP',
-    },
-    avklartPersonstatus: {
-      orginalPersonstatus: {
-        kode: personstatusType.BOSATT,
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
-      overstyrtPersonstatus: {
-        kode: personstatusType.BOSATT,
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
-    },
-    personstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-    diskresjonskode: {
-      kode: diskresjonskodeType.KLIENT_ADRESSE,
-      kodeverk: 'DISKRESJONSKODE_TYPE',
-    },
-    sivilstand: {
-      kode: sivilstandType.SAMBOER,
-      kodeverk: 'SIVILSTAND_TYPE',
-    },
-    aktoerId: '24sedfs32',
-    navn: 'Olga Utvikler',
-    adresser: [{
-      adresseType: {
-        kode: opplysningAdresseType.BOSTEDSADRESSE,
-        kodeverk: 'ADRESSE_TYPE',
-      },
-      adresselinje1: 'Oslo',
-    }],
-    fnr: '98773895',
-    region: {
-      kode: region.NORDEN,
-      kodeverk: 'REGION',
-    },
-    barn: [],
+  const fagsakPersonAnnenPartUtenAktørId = {
+    navn: 'Espen Utvikler',
+    fødselsdato: '1979-01-01',
+    personnummer: '1234567',
+    kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
   };
 
-  const personopplysningerAnnenPart = {
-    navBrukerKjonn: {
-      kode: navBrukerKjonn.MANN,
-      kodeverk: 'NAV_BRUKER_KJONN',
-    },
-    statsborgerskap: {
-      kode: 'NORSK',
-      kodeverk: 'STATSBORGERSKAP',
-    },
-    avklartPersonstatus: {
-      orginalPersonstatus: {
-        kode: personstatusType.BOSATT,
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
-      overstyrtPersonstatus: {
-        kode: personstatusType.BOSATT,
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
-    },
-    personstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-    diskresjonskode: {
-      kode: diskresjonskodeType.KLIENT_ADRESSE,
-      kodeverk: 'DISKRESJONSKODE_TYPE',
-    },
-    sivilstand: {
-      kode: sivilstandType.SAMBOER,
-      kodeverk: 'SIVILSTAND_TYPE',
-    },
-    aktoerId: '23rwerfwegwerg',
-    navn: 'Tusse Trolls Gasse Avle Sønvis Eggert Offer Tønne Sjønning',
-    adresser: [{
-      adresseType: {
-        kode: opplysningAdresseType.BOSTEDSADRESSE,
-        kodeverk: 'ADRESSE_TYPE',
-      },
-      adresselinje1: 'Oslo',
-    }],
-    fnr: '1234567',
-    region: {
-      kode: region.NORDEN,
-      kodeverk: 'REGION',
-    },
-    barn: [],
+  const fagsakPersonerUtenAnnenPart = {
+    bruker: fagsakPerson,
   };
 
-  it('skal vise enkelt visittkort når en ikke har personopplysninger', () => {
-    const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
-      intl={intlMock}
-      fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
-      familieHendelse={familieHendelse}
-      lenkeTilAnnenPart="testlenke"
-    />);
+  const fagsakPersonerMedAnnenPart = {
+    bruker: fagsakPerson,
+    annenPart: fagsakPersonAnnenPart,
+  };
 
-    expect(wrapper.find(FlexContainer)).toHaveLength(0);
-    const visittkort = wrapper.find(PersonCard);
-    expect(visittkort).toHaveLength(1);
-    expect(visittkort.prop('name')).toEqual(fagsakPerson.navn);
-    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
-    expect(visittkort.prop('gender')).toEqual(Gender.female);
-  });
+  const fagsakPersonerMedAnnenPartUtenAktørId = {
+    bruker: fagsakPerson,
+    annenPart: fagsakPersonAnnenPartUtenAktørId,
+  };
 
   it('skal vise visittkort når en har harTilbakekrevingVerge', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
-      familieHendelse={familieHendelse}
-      lenkeTilAnnenPart="testlenke"
-      harTilbakekrevingVerge
+      fagsakPersoner={fagsakPersonerUtenAnnenPart}
+      harVerge
+      erTilbakekreving
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(0);
@@ -212,22 +90,32 @@ describe('<VisittkortPanel>', () => {
     expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
-  it('skal vise visittkort når en har personopplysninger', () => {
+  it('skal vise visittkort med brukerinformasjon', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
-      personopplysninger={personopplysningerSoker}
-      familieHendelse={familieHendelse}
-      lenkeTilAnnenPart="testlenke"
+      fagsakPersoner={{
+        ...fagsakPersonerUtenAnnenPart,
+        familiehendelse: {
+          hendelseType: {
+            kode: familieHendelseType.FODSEL,
+            kodeverk: '',
+          },
+          hendelseDato: '2021-01-01',
+          antallBarn: 1,
+          dødfødsel: false,
+        },
+      }}
+      harVerge={false}
+      erTilbakekreving={false}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(1);
     expect(wrapper.find(VisittkortBarnInfoPanel)).toHaveLength(1);
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).toHaveLength(1);
-    expect(visittkort.prop('name')).toEqual(personopplysningerSoker.navn);
-    expect(visittkort.prop('fodselsnummer')).toEqual(personopplysningerSoker.fnr);
+    expect(visittkort.prop('name')).toEqual(fagsakPerson.navn);
+    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
     expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
@@ -235,25 +123,33 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
-      personopplysninger={{
-        ...personopplysningerSoker,
-        annenPart: personopplysningerAnnenPart,
+      fagsakPersoner={{
+        ...fagsakPersonerMedAnnenPart,
+        familiehendelse: {
+          hendelseType: {
+            kode: familieHendelseType.FODSEL,
+            kodeverk: '',
+          },
+          hendelseDato: '2021-01-01',
+          antallBarn: 1,
+          dødfødsel: false,
+        },
       }}
-      familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
+      harVerge={false}
+      erTilbakekreving={false}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(1);
     expect(wrapper.find(VisittkortBarnInfoPanel)).toHaveLength(1);
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).toHaveLength(2);
-    expect(visittkort.first().prop('name')).toEqual(personopplysningerSoker.navn);
-    expect(visittkort.first().prop('fodselsnummer')).toEqual(personopplysningerSoker.fnr);
+    expect(visittkort.first().prop('name')).toEqual(fagsakPerson.navn);
+    expect(visittkort.first().prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
     expect(visittkort.first().prop('gender')).toEqual(Gender.female);
 
-    expect(visittkort.last().prop('name')).toEqual(personopplysningerAnnenPart.navn);
-    expect(visittkort.last().prop('fodselsnummer')).toEqual(personopplysningerAnnenPart.fnr);
+    expect(visittkort.last().prop('name')).toEqual(fagsakPersonAnnenPart.navn);
+    expect(visittkort.last().prop('fodselsnummer')).toEqual(fagsakPersonAnnenPart.personnummer);
     expect(visittkort.last().prop('gender')).toEqual(Gender.male);
   });
 
@@ -261,16 +157,21 @@ describe('<VisittkortPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
-      personopplysninger={{
-        ...personopplysningerSoker,
-        annenPart: {
-          ...personopplysningerAnnenPart,
-          aktoerId: undefined,
+      fagsakPersoner={{
+        ...fagsakPersonerMedAnnenPartUtenAktørId,
+        familiehendelse: {
+          hendelseType: {
+            kode: familieHendelseType.FODSEL,
+            kodeverk: '',
+          },
+          hendelseDato: '2021-01-01',
+          antallBarn: 1,
+          dødfødsel: false,
         },
       }}
-      familieHendelse={familieHendelse}
       lenkeTilAnnenPart="testlenke"
+      harVerge={false}
+      erTilbakekreving={false}
     />);
 
     expect(wrapper.find(FlexContainer)).toHaveLength(1);

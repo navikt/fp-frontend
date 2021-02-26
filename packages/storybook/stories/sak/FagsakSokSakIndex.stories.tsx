@@ -15,7 +15,7 @@ const FAGSAK_STATUS_KODEVERK = 'FAGSAK_STATUS';
 const FAGSAK_YTELSE_KODEVERK = 'FAGSAK_YTELSE';
 
 const fagsaker = [{
-  saksnummer: 1,
+  saksnummerString: '1',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: FAGSAK_YTELSE_KODEVERK,
@@ -31,7 +31,7 @@ const fagsaker = [{
   barnFodt: '2019-01-01',
   opprettet: '2017-08-02T00:54:25.455',
 }, {
-  saksnummer: 2,
+  saksnummerString: '2',
   sakstype: {
     kode: fagsakYtelseType.ENGANGSSTONAD,
     kodeverk: FAGSAK_YTELSE_KODEVERK,

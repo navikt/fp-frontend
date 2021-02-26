@@ -10,7 +10,6 @@ export enum SvpBehandlingApiKeys {
   PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
   VILKAR = 'VILKAR',
-  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
   SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
   TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
   BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
@@ -36,6 +35,7 @@ export enum SvpBehandlingApiKeys {
   VERGE_FJERN = 'VERGE_FJERN',
   UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
   ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
+  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
 }
 
 const endpoints = new RestApiConfigBuilder()
@@ -44,7 +44,6 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', SvpBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', SvpBehandlingApiKeys.VILKAR)
-  .withRel('soeker-personopplysninger', SvpBehandlingApiKeys.PERSONOPPLYSNINGER)
   .withRel('simuleringResultat', SvpBehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', SvpBehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('beregningsresultat-foreldrepenger', SvpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER)
@@ -63,6 +62,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('svangerskapspenger-tilrettelegging', SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING)
   .withRel('utland-dok-status', SvpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
+  .withRel('behandling-personoversikt', SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', SvpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)

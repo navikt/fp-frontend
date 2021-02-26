@@ -10,7 +10,7 @@ import { BehandlingerIndex } from './BehandlingerIndex';
 describe('BehandlingerIndex', () => {
   it('skal rendre komponent korrekt', () => {
     const fagsak = {
-      saksnummer: 123,
+      saksnummerString: '123',
     };
     const alleBehandlinger = [{
       id: 1,

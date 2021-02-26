@@ -10,7 +10,7 @@ import styles from './documentListVedtakInnsyn.less';
 
 // TODO (TOR) Flytt url ut av komponent
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document: Dokument, saksNr: number) => `${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
+const getLink = (document: Dokument, saksNr: string) => `${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
   .journalpostId}&dokumentId=${document.dokumentId}`;
 
 const headerTextCodes = [
@@ -18,7 +18,7 @@ const headerTextCodes = [
 ];
 
 interface OwnProps {
-  saksNr: number;
+  saksNr: string;
   documents: ({
     fikkInnsyn: boolean;
   } & Dokument)[];

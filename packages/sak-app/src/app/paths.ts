@@ -23,12 +23,12 @@ export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
 export const behandlingerPath = `${fagsakPath}behandling/`;
 export const behandlingPath = `${behandlingerPath}:behandlingId(\\d+)/`;
 
-export const pathToFagsak = (saksnummer: number): string => buildPath(fagsakPath, { saksnummer });
-export const pathToBehandlinger = (saksnummer: number): string => buildPath(behandlingerPath, { saksnummer });
-export const pathToBehandling = (saksnummer: number, behandlingId: number): string => buildPath(behandlingPath, { saksnummer, behandlingId });
+export const pathToFagsak = (saksnummer: string): string => buildPath(fagsakPath, { saksnummer });
+export const pathToBehandlinger = (saksnummer: string): string => buildPath(behandlingerPath, { saksnummer });
+export const pathToBehandling = (saksnummer: string, behandlingId: number): string => buildPath(behandlingPath, { saksnummer, behandlingId });
 export const pathToMissingPage = (): string => '/404';
 
-export const pathToAnnenPart = (saksnummer: number, behandlingId: number): string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/`;
+export const pathToAnnenPart = (saksnummer: string, behandlingId: number): string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/`;
 
 const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 

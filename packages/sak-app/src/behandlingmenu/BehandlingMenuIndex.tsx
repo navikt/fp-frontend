@@ -88,7 +88,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     // Når antallet har endret seg er det laget en ny behandling og denne må da velges
     if (ref.current > 0) {
-      const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingId(alleBehandlinger));
+      const pathname = pathToBehandling(fagsak.saksnummerString, findNewBehandlingId(alleBehandlinger));
       pushLocation(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
     }
 
@@ -134,9 +134,9 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
 
   const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
   const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN
-    ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
+    ? fjernVerge(location, pushLocation, fagsak.saksnummerString, behandlingId, behandlingVersjon) : undefined;
   const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT
-    ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
+    ? opprettVerge(location, pushLocation, fagsak.saksnummerString, behandlingId, behandlingVersjon) : undefined;
   return (
     <MenySakIndex
       data={[
@@ -199,7 +199,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
         new MenyData(!sakRettigheter.sakSkalTilInfotrygd, getNyBehandlingMenytekst())
           .medModal((lukkModal) => (
             <MenyNyBehandlingIndex
-              saksnummer={fagsak.saksnummer}
+              saksnummer={fagsak.saksnummerString}
               behandlingId={behandlingId}
               behandlingUuid={behandling?.uuid}
               behandlingVersjon={behandlingVersjon}

@@ -7,7 +7,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, Fagsak, FamilieHendelseSamling, Kodeverk, Personopplysninger,
+  Aksjonspunkt, Fagsak, FamilieHendelseSamling, Kodeverk, Personoversikt,
   Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -145,7 +145,7 @@ describe('<UttakPanel>', () => {
       stonadskonto={{} as UttakStonadskontoer}
       soknad={soknad}
       familiehendelse={{} as FamilieHendelseSamling}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={{} as Kodeverk}
@@ -199,7 +199,7 @@ describe('<UttakPanel>', () => {
       stonadskonto={{} as UttakStonadskontoer}
       soknad={soknad}
       familiehendelse={{} as FamilieHendelseSamling}
-      person={{} as Personopplysninger}
+      person={{} as Personoversikt}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={{} as Kodeverk}

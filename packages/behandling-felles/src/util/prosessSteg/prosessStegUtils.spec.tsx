@@ -21,7 +21,7 @@ import { ProsessStegDef, ProsessStegPanelDef } from './ProsessStegDef';
 
 describe('<prosessStegUtils>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
@@ -239,7 +239,7 @@ describe('<prosessStegUtils>', () => {
     expect(requestKall).toHaveLength(1);
     expect(requestKall[0].args).toHaveLength(2);
     expect(requestKall[0].args[0]).toEqual({
-      saksnummer: fagsak.saksnummer,
+      saksnummer: fagsak.saksnummerString,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{
@@ -268,7 +268,7 @@ describe('<prosessStegUtils>', () => {
     expect(requestKall).toHaveLength(1);
     expect(requestKall[0].args).toHaveLength(2);
     expect(requestKall[0].args[0]).toEqual({
-      saksnummer: fagsak.saksnummer,
+      saksnummer: fagsak.saksnummerString,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       overstyrteAksjonspunktDtoer: [{

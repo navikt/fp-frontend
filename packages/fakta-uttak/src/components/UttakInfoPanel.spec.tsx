@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 
 import {
-  FamilieHendelseSamling, Kodeverk, Personopplysninger, Ytelsefordeling,
+  FamilieHendelseSamling, Kodeverk, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import UttakFaktaForm from './UttakFaktaForm';
@@ -52,7 +52,7 @@ describe('<UttakInfoPanel>', () => {
       alleKodeverk={{}}
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       arbeidsgiverOpplysningerPerId={{}}
     />);
@@ -76,7 +76,7 @@ describe('<UttakInfoPanel>', () => {
       alleKodeverk={{}}
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       arbeidsgiverOpplysningerPerId={{}}
     />);

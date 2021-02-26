@@ -4,7 +4,7 @@ import {
   BehandlingPaVent, SettPaVentParams, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  Behandling, Fagsak, FagsakPerson, KodeverkMedNavn,
+  Behandling, Fagsak, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 
 import TilbakekrevingProsess from './TilbakekrevingProsess';
@@ -14,7 +14,7 @@ import FetchedData from '../types/fetchedDataTsType';
 interface OwnProps {
   fetchedData: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
+  fagsakKjønn: Kodeverk;
   behandling: Behandling;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -34,7 +34,7 @@ interface OwnProps {
 const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   fetchedData,
   fagsak,
-  fagsakPerson,
+  fagsakKjønn,
   behandling,
   kodeverk,
   fpsakKodeverk,
@@ -62,7 +62,7 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
     <TilbakekrevingProsess
       data={fetchedData}
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
+      fagsakKjønn={fagsakKjønn}
       behandling={behandling}
       alleKodeverk={kodeverk}
       valgtProsessSteg={valgtProsessSteg}

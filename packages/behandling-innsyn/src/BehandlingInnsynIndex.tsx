@@ -13,7 +13,7 @@ import InnsynPaneler from './components/InnsynPaneler';
 import FetchedData from './types/fetchedDataTsType';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from './data/innsynBehandlingApi';
 
-const getInnsynData = (saksnummer) => [
+const getInnsynData = (saksnummer: string) => [
   { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER },
   { key: InnsynBehandlingApiKeys.VILKAR },
   { key: InnsynBehandlingApiKeys.INNSYN },
@@ -90,7 +90,7 @@ const BehandlingInnsynIndex: FunctionComponent<OwnProps> = ({
     };
   }, []);
 
-  const innsynEndepunkter = useMemo(() => getInnsynData(fagsak.saksnummer), [fagsak.saksnummer]);
+  const innsynEndepunkter = useMemo(() => getInnsynData(fagsak.saksnummerString), [fagsak.saksnummerString]);
   const { data, state } = restApiInnsynHooks.useMultipleRestApi<FetchedData>(innsynEndepunkter,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 

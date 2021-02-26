@@ -10,7 +10,6 @@ export enum EsBehandlingApiKeys {
   PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
   VILKAR = 'VILKAR',
-  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
   SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
   TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
   BEREGNINGRESULTAT_ENGANGSSTONAD = 'BEREGNINGRESULTAT_ENGANGSSTONAD',
@@ -32,6 +31,7 @@ export enum EsBehandlingApiKeys {
   VERGE_FJERN = 'VERGE_FJERN',
   UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
   ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
+  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
 }
 
 const endpoints = new RestApiConfigBuilder()
@@ -40,7 +40,6 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', EsBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', EsBehandlingApiKeys.VILKAR)
-  .withRel('soeker-personopplysninger', EsBehandlingApiKeys.PERSONOPPLYSNINGER)
   .withRel('simuleringResultat', EsBehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', EsBehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('beregningsresultat-engangsstonad', EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD)
@@ -55,6 +54,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('sendt-varsel-om-revurdering', EsBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('utland-dok-status', EsBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
+  .withRel('behandling-personoversikt', EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', EsBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)

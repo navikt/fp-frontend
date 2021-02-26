@@ -6,7 +6,7 @@ import {
   Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerWrapper,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerWrapper, Personoversikt,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -18,17 +18,20 @@ import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from './data/svp
 const svangerskapspengerData = [
   { key: SvpBehandlingApiKeys.AKSJONSPUNKTER },
   { key: SvpBehandlingApiKeys.VILKAR },
-  { key: SvpBehandlingApiKeys.PERSONOPPLYSNINGER },
   { key: SvpBehandlingApiKeys.SOKNAD },
   { key: SvpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
   { key: SvpBehandlingApiKeys.BEREGNINGSGRUNNLAG },
   { key: SvpBehandlingApiKeys.SIMULERING_RESULTAT },
   { key: SvpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER }];
 
+const endepunkterSomSkalHentesEnGang = [
+  { key: SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
+  { key: SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT },
+];
+
 interface OwnProps {
   behandlingId: number;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;
@@ -49,7 +52,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
-  fagsakPerson,
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
@@ -115,15 +117,16 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
   const { data, state } = restApiSvpHooks.useMultipleRestApi<FetchedData>(svangerskapspengerData,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 
-  const { data: arbeidsgiverOpplysninger, state: arbeidOppState } = restApiSvpHooks.useRestApi<ArbeidsgiverOpplysningerWrapper>(
-    SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {}, {
-      updateTriggers: [!behandling],
-      suspendRequest: !behandling,
-    },
-  );
+  const { data: opplysningsdata, state: opplysningsdataState } = restApiSvpHooks.useMultipleRestApi<{
+    arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
+    behandlingPersonoversikt: Personoversikt,
+  }>(endepunkterSomSkalHentesEnGang, {
+    updateTriggers: [!behandling],
+    suspendRequest: !behandling,
+  });
 
   const harIkkeHentetBehandlingsdata = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  const harIkkeHentetArbeidsgiverOpplysninger = arbeidOppState === RestApiState.LOADING || arbeidOppState === RestApiState.NOT_STARTED;
+  const harIkkeHentetArbeidsgiverOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
   if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || (harIkkeHentetBehandlingsdata && data === undefined)) {
     return <LoadingPanel />;
   }
@@ -138,7 +141,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         behandling={harIkkeHentetBehandlingsdata ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={kodeverk}
         rettigheter={rettigheter}
         valgtProsessSteg={valgtProsessSteg}
@@ -150,7 +152,8 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<OwnProps> = ({
         opneSokeside={opneSokeside}
         hasFetchError={behandlingState === RestApiState.ERROR}
         setBehandling={setBehandling}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger.arbeidsgivere}
+        arbeidsgiverOpplysningerPerId={opplysningsdata.arbeidsgivereOversikt.arbeidsgivere}
+        personoversikt={opplysningsdata.behandlingPersonoversikt}
       />
     </>
   );

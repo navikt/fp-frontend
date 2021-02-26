@@ -5,7 +5,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FagsakPerson, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
@@ -46,7 +46,6 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
   behandlingVersjon: number;
-  fagsakPerson: FagsakPerson;
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
   soknad: Soknad;
@@ -80,7 +79,6 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   inntektArbeidYtelse,
   alleKodeverk,
   medlemskap,
-  fagsakPerson,
   behandlingPaaVent,
   readOnlyForStartdatoForForeldrepenger,
   arbeidsgiverOpplysningerPerId,
@@ -128,7 +126,6 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
           behandlingType={behandlingType}
           alleKodeverk={alleKodeverk}
           medlemskap={medlemskap}
-          fagsakPerson={fagsakPerson}
         />
       )}
     </>

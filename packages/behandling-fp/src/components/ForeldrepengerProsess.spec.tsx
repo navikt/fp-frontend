@@ -3,7 +3,9 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Behandling, Fagsak, Soknad } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, Personoversikt, Soknad,
+} from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -14,7 +16,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import FetchedData from '../types/fetchedDataTsType';
@@ -24,19 +25,10 @@ import ForeldrepengerProsess from './ForeldrepengerProsess';
 
 describe('<ForeldrepengerProsess>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
-
-  const fagsakPerson = {
-    alder: 30,
-    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    erDod: false,
-    erKvinne: true,
-    navn: 'Espen Utvikler',
-    personnummer: '12345',
-  };
 
   const behandling = {
     id: 1,
@@ -92,6 +84,8 @@ describe('<ForeldrepengerProsess>', () => {
     },
   };
 
+  const personoversikt = {} as Personoversikt;
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -103,7 +97,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -115,6 +108,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -170,7 +164,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -182,6 +175,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -201,7 +195,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -213,6 +206,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -248,7 +242,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={vedtakBehandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -262,6 +255,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -300,7 +294,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -314,6 +307,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -352,7 +346,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{
           [kodeverkTyper.AVSLAGSARSAK]: [],
@@ -366,6 +359,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -382,7 +376,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -394,6 +387,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -414,7 +408,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -426,6 +419,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={dispatch}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -452,7 +446,6 @@ describe('<ForeldrepengerProsess>', () => {
       <ForeldrepengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -464,6 +457,7 @@ describe('<ForeldrepengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={dispatch}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 

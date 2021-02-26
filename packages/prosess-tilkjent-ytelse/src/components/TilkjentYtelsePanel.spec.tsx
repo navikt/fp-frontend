@@ -5,7 +5,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, Personopplysninger, Soknad,
+  Aksjonspunkt, FamilieHendelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 
 import { TilkjentYtelsePanelImpl } from './TilkjentYtelsePanel';
@@ -46,7 +46,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
@@ -74,7 +74,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}

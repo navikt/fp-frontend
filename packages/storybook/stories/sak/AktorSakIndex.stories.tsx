@@ -2,16 +2,16 @@ import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import AktorSakIndex from '@fpsak-frontend/sak-aktor';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
+import { KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 import withRouterProvider from '../../decorators/withRouter';
 
 const fagsak = {
-  saksnummer: 35425245,
+  saksnummerString: '35425245',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: '',
@@ -44,19 +44,14 @@ export const visSakerOpprettetPaAktor = () => (
     valgtAktorId="123"
     aktorInfo={{
       fagsaker: [fagsak, {
-        saksnummer: 123,
+        saksnummerString: '123',
         ...fagsak,
       }],
       person: {
-        erDod: false,
         navn: 'Espen Utvikler',
-        alder: 41,
+        kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+        fødselsdato: '1979-01-01',
         personnummer: '123456233',
-        erKvinne: false,
-        personstatusType: {
-          kode: personstatusType.BOSATT,
-          kodeverk: '',
-        },
       },
     }}
     alleKodeverk={alleKodeverk as any}

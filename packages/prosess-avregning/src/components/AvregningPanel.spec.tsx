@@ -45,7 +45,7 @@ const mockProps = {
     kode: 'NB',
     kodeverk: '',
   },
-  saksnummer: 123,
+  saksnummer: '123',
   aksjonspunkter: [],
   submitCallback: sinon.spy(),
   onSubmit: sinon.spy(),

@@ -11,7 +11,7 @@ import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
 interface Data {
   fagsak: Fagsak;
-  previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
+  previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string) => Promise<any>;
   simuleringResultat?: SimuleringResultat;
 }
 

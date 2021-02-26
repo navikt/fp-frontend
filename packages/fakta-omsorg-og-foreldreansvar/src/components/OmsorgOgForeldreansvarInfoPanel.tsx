@@ -11,7 +11,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Aksjonspunkt, FamilieHendelse, KodeverkMedNavn, Personopplysninger, RelatertTilgrensedYtelse, Soknad,
+  Aksjonspunkt, FamilieHendelse, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
@@ -23,7 +23,7 @@ type FormValues = OmsorgFormValues & {
 interface PureOwnProps {
   intl: IntlShape;
   soknad: Soknad;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   gjeldendeFamiliehendelse: FamilieHendelse;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
   aksjonspunkter: Aksjonspunkt[];
@@ -43,7 +43,6 @@ interface MappedOwnProps {
   relatertYtelseTypes: KodeverkMedNavn[];
   erAksjonspunktForeldreansvar: boolean;
   onSubmit: (formValues: FormValues) => any;
-  validate: (formValues: FormValues) => any;
 }
 
 /**
@@ -65,7 +64,7 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
   alleMerknaderFraBeslutter,
   soknad,
   gjeldendeFamiliehendelse,
-  personopplysninger,
+  personoversikt,
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
@@ -81,7 +80,7 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       soknad={soknad}
       gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
-      personopplysninger={personopplysninger}
+      personoversikt={personoversikt}
     />
     <VerticalSpacer twentyPx />
     <FaktaBegrunnelseTextField
@@ -108,15 +107,14 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-    (ownProps: PureOwnProps) => ownProps.personopplysninger,
     (ownProps: PureOwnProps) => ownProps.innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.alleKodeverk],
-  (soknad, familiehendelse, personopplysning, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
+  (soknad, gjeldendeFamiliehendelse, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, aksjonspunkter, alleKodeverk): FormValues => {
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
       || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
     return {
-      ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, familiehendelse, personopplysning,
+      ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, gjeldendeFamiliehendelse,
         innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
       ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkt),
     };
@@ -133,11 +131,10 @@ const lagSubmitFn = createSelector([
 (submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0])]));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const { aksjonspunkter, alleKodeverk, intl } = initialOwnProps;
+  const { aksjonspunkter, alleKodeverk } = initialOwnProps;
   const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
   const vilkarTypes = alleKodeverk[kodeverkTyper.OMSORGSOVERTAKELSE_VILKAR_TYPE];
   const relatertYtelseTypes = alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE];
-  const validate = (values: FormValues) => OmsorgOgForeldreansvarFaktaForm.validate(intl, values);
 
   return (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     initialValues: buildInitialValues(ownProps),
@@ -145,7 +142,6 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
     relatertYtelseTypes,
     erAksjonspunktForeldreansvar,
     onSubmit: lagSubmitFn(ownProps),
-    validate,
   });
 };
 

@@ -2,12 +2,11 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
 import {
-  Behandling, Personopplysninger, Soknad, Ytelsefordeling,
+  Behandling, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
@@ -26,32 +25,21 @@ const soknad = {
   },
 } as Soknad;
 
-const personopplysninger = {
-  navn: 'Espen Utvikler',
-  ektefelle: {
-    navn: 'Petra Utvikler',
-    personstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-    adresser: [],
+const personoversikt = {
+  bruker: {
+    navn: 'Espen Utvikler',
   },
-  personstatus: {
-    kode: personstatusType.BOSATT,
-    kodeverk: 'PERSONSTATUS_TYPE',
+  annenPart: {
+    navn: 'Petra Utvikler',
+    adresser: [],
   },
   barn: [{
     navn: 'Tutta Utvikler',
-    dodsdato: '2019-01-01',
-    fodselsdato: '2018-01-01',
+    dødsdato: '2019-01-01',
+    fødselsdato: '2018-01-01',
     adresser: [],
-    personstatus: {
-      kode: personstatusType.DOD,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
   }],
-  adresser: [],
-} as Personopplysninger;
+} as Personoversikt;
 
 const ytelsefordeling = {} as Ytelsefordeling;
 
@@ -80,7 +68,7 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
     soknad={object('soknad', soknad)}
-    personopplysninger={object('personopplysninger', personopplysninger)}
+    personoversikt={object('personoversikt', personoversikt)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
@@ -107,7 +95,7 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
     soknad={object('soknad', soknad)}
-    personopplysninger={object('personopplysninger', personopplysninger)}
+    personoversikt={object('personoversikt', personoversikt)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,

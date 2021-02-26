@@ -11,7 +11,7 @@ const requestConfigs: [
 const requestApi = createRequestApi(requestConfigs);
 
 //Utfør kall (responsen vil være et Promise med data på formatet {payload: responsdata})
-const params = {saksnummer: 1};
+const params = {saksnummer: '1'};
 const payload = requestApi.startRequest('FAGSAK_SOK', params);
 ```
 

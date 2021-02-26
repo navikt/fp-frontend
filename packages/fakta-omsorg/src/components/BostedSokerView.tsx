@@ -6,46 +6,36 @@ import Etikettfokus from 'nav-frontend-etiketter';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { getAddresses } from '@fpsak-frontend/utils';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
-import Region from '@fpsak-frontend/kodeverk/src/region';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import {
-  Kodeverk, KodeverkMedNavn, PersonopplysningAdresse, Personopplysninger,
+  KodeverkMedNavn, Personadresse, PersonopplysningerBasis,
 } from '@fpsak-frontend/types';
 
 import styles from './bostedSokerView.less';
 
-const getAdresse = (adresser: PersonopplysningAdresse[]): string => {
+const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
   return adresse || '-';
 };
 
-const getUtlandsadresse = (adresser: PersonopplysningAdresse[]): string => {
+const getUtlandsadresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const utlandsAdresse = adresseListe[opplysningAdresseType.UTENLANDSK_POSTADRESSE] || adresseListe[opplysningAdresseType.UTENLANDSK_NAV_TILLEGSADRESSE];
   return utlandsAdresse || '-';
 };
 
-const getPersonstatus = (personopplysning: Personopplysninger): Kodeverk => (personopplysning.avklartPersonstatus
-  && personopplysning.avklartPersonstatus.overstyrtPersonstatus ? personopplysning.avklartPersonstatus.overstyrtPersonstatus
-  : personopplysning.personstatus);
-
 interface OwnProps {
-  personopplysninger: Personopplysninger;
+  personopplysninger: PersonopplysningerBasis;
   sokerTypeText: string;
-  regionTypes: KodeverkMedNavn[];
   sivilstandTypes: KodeverkMedNavn[];
-  personstatusTypes: KodeverkMedNavn[];
 }
 
 export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   personopplysninger,
   sokerTypeText,
-  regionTypes,
   sivilstandTypes,
-  personstatusTypes,
 }) => (
   <div className={styles.defaultBostedSoker}>
     <Row>
@@ -61,21 +51,6 @@ export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps
         <Normaltekst>{getUtlandsadresse(personopplysninger.adresser)}</Normaltekst>
       </Column>
       <Column xs="4">
-        {getPersonstatus(personopplysninger)
-          && (
-          <div className={styles.etikettMargin}>
-            <Tooltip content={intl.formatMessage({ id: 'Personstatus.Hjelpetekst' })} alignBottom>
-              <Etikettfokus
-                className={getPersonstatus(personopplysninger).kode === personstatusType.DOD ? styles.dodEtikett : ''}
-                type="fokus"
-                typo="undertekst"
-              >
-                {getPersonstatus(personopplysninger).kode === personstatusType.UDEFINERT ? intl.formatMessage({ id: 'Personstatus.Ukjent' })
-                  : personstatusTypes.find((s) => s.kode === getPersonstatus(personopplysninger).kode).navn}
-              </Etikettfokus>
-            </Tooltip>
-          </div>
-          )}
         {personopplysninger.sivilstand
           && (
           <div className={styles.etikettMargin}>
@@ -85,19 +60,6 @@ export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps
                 typo="undertekst"
               >
                 {sivilstandTypes.find((s) => s.kode === personopplysninger.sivilstand.kode).navn}
-              </Etikettfokus>
-            </Tooltip>
-          </div>
-          )}
-        {(personopplysninger.region && personopplysninger.region.kode !== Region.UDEFINERT)
-          && (
-          <div className={styles.etikettMargin}>
-            <Tooltip content={intl.formatMessage({ id: 'BostedSokerView.Region' })} alignBottom>
-              <Etikettfokus
-                type="fokus"
-                typo="undertekst"
-              >
-                {regionTypes.find((r) => r.kode === personopplysninger.region.kode).navn}
               </Etikettfokus>
             </Tooltip>
           </div>

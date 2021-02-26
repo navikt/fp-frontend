@@ -8,15 +8,17 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { required } from '@fpsak-frontend/utils';
-import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Image, PeriodLabel, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Soknad, UtlandsoppholdPeriode,
+  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, PersonopplysningMedlem, Soknad, UtlandsoppholdPeriode,
 } from '@fpsak-frontend/types';
 import checkImage from '@fpsak-frontend/assets/images/check.svg';
 import avslaattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
+
+import MedlemskapBostedSokerView from './MedlemskapBostedSokerView';
 
 import styles from './oppholdINorgeOgAdresserFaktaPanel.less';
 
@@ -67,7 +69,7 @@ export type FormValues = {
   opphold?: Soknad['oppgittTilknytning'];
   foreldre?: {
     isApplicant: boolean;
-    personopplysning: MedlemPeriode['personopplysninger'];
+    personopplysning: PersonopplysningMedlem;
   }[];
   hasBosattAksjonspunkt?: boolean;
   isBosattAksjonspunktClosed?: boolean;
@@ -92,7 +94,7 @@ interface MappedOwnProps {
   opphold?: Soknad['oppgittTilknytning'];
   foreldre?: {
     isApplicant: boolean;
-    personopplysning: MedlemPeriode['personopplysninger'];
+    personopplysning: PersonopplysningMedlem;
   }[];
   hasBosattAksjonspunkt: boolean;
   isBosattAksjonspunktClosed: boolean;
@@ -154,13 +156,19 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<PureOwnProps & Ma
             {foreldre.map((f) => (
               <div key={f.personopplysning.navn}>
                 {f.isApplicant && (
-                  <BostedSokerFaktaIndex personopplysninger={f.personopplysning} alleKodeverk={alleKodeverk} />
+                  <MedlemskapBostedSokerView
+                    sokerTypeText={intl.formatMessage({ id: 'BostedSokerFaktaIndex.Soker' })}
+                    personopplysninger={f.personopplysning}
+                    regionTypes={alleKodeverk[kodeverkTyper.REGION]}
+                    personstatusTypes={alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]}
+                  />
                 )}
                 {!f.isApplicant && (
-                  <BostedSokerFaktaIndex
+                  <MedlemskapBostedSokerView
                     sokerTypeText={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.Parent' })}
                     personopplysninger={f.personopplysning}
-                    alleKodeverk={alleKodeverk}
+                    regionTypes={alleKodeverk[kodeverkTyper.REGION]}
+                    personstatusTypes={alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]}
                   />
                 )}
               </div>
@@ -203,7 +211,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 const OppholdINorgeOgAdresserFaktaPanel = connect(mapStateToProps)(OppholdINorgeOgAdresserFaktaPanelImpl);
 
-const createParent = (isApplicant: boolean, personopplysning: MedlemPeriode['personopplysninger']): any => ({
+const createParent = (isApplicant: boolean, personopplysning: PersonopplysningMedlem): any => ({
   isApplicant,
   personopplysning,
 });
@@ -222,10 +230,10 @@ OppholdINorgeOgAdresserFaktaPanel.buildInitialValues = (soknad: Soknad, periode:
     };
   }
 
-  const { personopplysninger } = periode;
-  const parents = [createParent(true, personopplysninger)];
-  if (personopplysninger.annenPart) {
-    parents.push(createParent(false, personopplysninger.annenPart));
+  const { personopplysningBruker, personopplysningAnnenPart } = periode;
+  const parents = [createParent(true, personopplysningBruker)];
+  if (personopplysningAnnenPart) {
+    parents.push(createParent(false, personopplysningAnnenPart));
   }
 
   const filteredAp = aksjonspunkter

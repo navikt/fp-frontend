@@ -18,7 +18,7 @@ const intl = createIntl({
 
 interface OwnProps {
   historikkinnslag: Historikkinnslag;
-  saksnummer?: number;
+  saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;

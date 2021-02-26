@@ -5,7 +5,7 @@ import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import {
   ArbeidsgiverOpplysningerPerId,
-  Fagsak, FamilieHendelseSamling, Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Fagsak, FamilieHendelseSamling, Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import UttakPanel from './components/UttakPanel';
 import messages from '../i18n/nb_NO.json';
@@ -23,7 +23,7 @@ interface OwnProps {
   soknad: Soknad;
   uttaksresultatPerioder: UttaksresultatPeriode;
   familiehendelse: FamilieHendelseSamling;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
@@ -39,7 +39,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> 
   aksjonspunkter,
   familiehendelse,
   soknad,
-  personopplysninger,
+  personoversikt,
   uttakPeriodeGrense,
   ytelsefordeling,
   alleKodeverk,
@@ -65,7 +65,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> 
       aksjonspunkter={aksjonspunkter}
       employeeHasAccess={employeeHasAccess}
       soknad={soknad}
-      person={personopplysninger}
+      person={personoversikt}
       familiehendelse={familiehendelse}
       uttakPeriodeGrense={uttakPeriodeGrense}
       alleKodeverk={alleKodeverk}

@@ -14,7 +14,7 @@ import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
 describe('<BehandlingSupportIndex>', () => {
   const fagsak = {
-    saksnummer: 123,
+    saksnummerString: '123',
   };
 
   const navAnsatt = {

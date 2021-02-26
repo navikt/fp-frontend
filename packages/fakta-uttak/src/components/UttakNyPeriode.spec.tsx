@@ -3,7 +3,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import {
   CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
-import { FaktaArbeidsforhold, Personopplysninger } from '@fpsak-frontend/types';
+import { FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
 
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
@@ -90,7 +90,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
 
@@ -143,7 +143,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
 
@@ -174,7 +174,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -206,7 +206,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -238,7 +238,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -270,7 +270,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({
@@ -302,7 +302,7 @@ describe('<UttakNyPeriode>', () => {
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
       behandlingId={1}
       behandlingVersjon={2}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />);
     wrapper.setProps({

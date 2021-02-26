@@ -17,7 +17,7 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 import withReduxProvider from '../../decorators/withRedux';
 
 const fagsak = {
-  saksnummer: 123,
+  saksnummerString: '123',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
   },

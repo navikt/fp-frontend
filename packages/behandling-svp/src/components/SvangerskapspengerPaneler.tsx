@@ -4,7 +4,7 @@ import {
   BehandlingPaVent, SettPaVentParams, Rettigheter,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import SvangerskapspengerProsess from './SvangerskapspengerProsess';
@@ -14,7 +14,6 @@ import FetchedData from '../types/fetchedDataTsType';
 interface OwnProps {
   fetchedData: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -28,6 +27,7 @@ interface OwnProps {
   hasFetchError: boolean;
   setBehandling: (behandling: Behandling) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  personoversikt: Personoversikt;
 }
 
 interface FaktaPanelInfo {
@@ -38,7 +38,6 @@ interface FaktaPanelInfo {
 const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
   fetchedData,
   fagsak,
-  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -52,6 +51,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
   hasFetchError,
   setBehandling,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
@@ -68,7 +68,6 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         data={fetchedData}
         behandling={behandling}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         valgtProsessSteg={valgtProsessSteg}
@@ -80,12 +79,12 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         setBehandling={setBehandling}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />
       <SvangerskapspengerFakta
         behandling={behandling}
         data={fetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         hasFetchError={hasFetchError}

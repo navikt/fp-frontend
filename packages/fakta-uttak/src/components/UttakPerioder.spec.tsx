@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { FamilieHendelseSamling, Kodeverk, Personopplysninger } from '@fpsak-frontend/types';
+import { FamilieHendelseSamling, Kodeverk, Personoversikt } from '@fpsak-frontend/types';
 
 import { UttakPerioder } from './UttakPerioder';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
@@ -46,7 +46,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -95,7 +95,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -139,7 +139,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -179,7 +179,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -214,7 +214,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -249,7 +249,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
@@ -284,7 +284,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[
           {
@@ -343,7 +343,7 @@ describe('<UttakPerioder>', () => {
         reduxFormReset={reduxFormReset}
         submitting={false}
         initialValues={{}}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}

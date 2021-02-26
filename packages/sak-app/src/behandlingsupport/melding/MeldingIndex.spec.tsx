@@ -25,7 +25,7 @@ describe('<MeldingIndex>', () => {
   const recipients = ['Søker'];
 
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
   };
 
   const alleBehandlinger = [{

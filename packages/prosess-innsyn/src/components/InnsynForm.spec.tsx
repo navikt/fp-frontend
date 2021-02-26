@@ -16,7 +16,7 @@ describe('<InnsynForm>', () => {
       innsynResultatTyper={[{ kode: innsynResultatTyperKV.INNVILGET, kodeverk: '', navn: 'navnTest' }]}
       innsynResultatTypeKode={innsynResultatTyperKV.INNVILGET}
       behandlingTypes={[{ kode: 'kodeTest', kodeverk: '', navn: 'navnTest' }]}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       vedtaksdokumenter={[]}
       isApOpen
@@ -50,7 +50,7 @@ describe('<InnsynForm>', () => {
       innsynResultatTyper={[{ kode: innsynResultatTyperKV.AVVIST, kodeverk: '', navn: 'navnTest' }]}
       innsynResultatTypeKode={innsynResultatTyperKV.AVVIST}
       behandlingTypes={[{ kode: 'kodeTest', kodeverk: '', navn: 'navnTest' }]}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       vedtaksdokumenter={[]}
       isApOpen

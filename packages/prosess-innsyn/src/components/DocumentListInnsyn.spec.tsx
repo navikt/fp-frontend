@@ -14,7 +14,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={[]}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
     expect(wrapper.find(FormattedMessage).prop('id')).toBe('DocumentListInnsyn.NoDocuments');
@@ -31,7 +31,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={documents}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
     expect(wrapper.find(FormattedMessage).prop('id')).toBe('DocumentListInnsyn.VelgInnsynsDok');
@@ -56,7 +56,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={documents}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
     expect(wrapper.find(TableRow)).toHaveLength(2);
@@ -73,7 +73,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={documents}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
 
@@ -91,7 +91,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={documents}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
     expect(wrapper.find(Image).prop('tooltip')).toEqual('Inn');
@@ -108,7 +108,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={documents}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
     expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('DocumentListInnsyn.IProduksjon');
@@ -125,7 +125,7 @@ describe('<DocumentListInnsyn>', () => {
     const wrapper = shallowWithIntl(<DocumentListInnsyn.WrappedComponent
       intl={intlMock}
       documents={documents}
-      saksNr={123}
+      saksNr="123"
       readOnly={false}
     />);
     expect(wrapper.find(DateTimeLabel).prop('dateTimeString')).toBe('22.12.2017 - 09:00');

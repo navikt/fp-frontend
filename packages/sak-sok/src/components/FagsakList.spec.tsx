@@ -32,7 +32,7 @@ const alleKodeverk = {
 
 describe('<FagsakList>', () => {
   const fagsak = {
-    saksnummer: 12345,
+    saksnummerString: '12345',
     sakstype: {
       kode: 'ES',
       kodeverk: FAGSAK_YTELSE_KODEVERK,
@@ -86,7 +86,7 @@ describe('<FagsakList>', () => {
 
   it('skal sortere søkeresultat der avsluttede skal vises sist, mens sist endrede skal vises først', () => {
     const fagsak2 = {
-      saksnummer: 23456,
+      saksnummerString: '23456',
       sakstype: {
         kode: 'ES',
         kodeverk: FAGSAK_YTELSE_KODEVERK,
@@ -101,7 +101,7 @@ describe('<FagsakList>', () => {
       dekningsgrad: 100,
     };
     const fagsak3 = {
-      saksnummer: 34567,
+      saksnummerString: '34567',
       sakstype: {
         kode: 'ES',
         kodeverk: FAGSAK_YTELSE_KODEVERK,
@@ -151,7 +151,7 @@ describe('<FagsakList>', () => {
 
   it('skal vise DateLabel i tabell kun om barn er født', () => {
     const fagsak4 = {
-      saksnummer: 23456,
+      saksnummerString: '23456',
       sakstype: {
         kode: 'ES',
         kodeverk: FAGSAK_YTELSE_KODEVERK,

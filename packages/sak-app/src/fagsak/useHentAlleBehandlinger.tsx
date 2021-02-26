@@ -7,7 +7,7 @@ import ApplicationContextPath from '../app/ApplicationContextPath';
 import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 
-const useHentAlleBehandlinger = (saksnummer: number, behandlingId: number, behandlingVersjon: number, oppfriskIndikator: number):
+const useHentAlleBehandlinger = (saksnummer: string, behandlingId: number, behandlingVersjon: number, oppfriskIndikator: number):
 [ alleBehandlinger: BehandlingAppKontekst[], harHentet: boolean ] => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();

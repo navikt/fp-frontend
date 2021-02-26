@@ -1,17 +1,12 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
-import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import region from '@fpsak-frontend/kodeverk/src/region';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
+import { KjønnkodeEnum } from '@fpsak-frontend/types';
 
 export default {
   title: 'sak/sak-visittkort',
@@ -20,7 +15,7 @@ export default {
 };
 
 const fagsak = {
-  saksnummer: 123456,
+  saksnummerString: '123456',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'SAKSTYPE',
@@ -43,167 +38,64 @@ const fagsak = {
 };
 
 const fagsakPerson = {
-  erDod: false,
   navn: 'Espen Utvikler',
-  alder: 41,
+  fødselsdato: '1979-01-01',
   personnummer: '1234567',
-  erKvinne: false,
+  kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
   personstatusType: {
     kode: personstatusType.BOSATT,
     kodeverk: 'PERSONSTATUS_TYPE',
   },
 };
 
-const familieHendelse = {
-  oppgitt: {
-    skjaringstidspunkt: '2020-01-01',
-    avklartBarn: [],
-    termindato: '2020-01-21',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: 'SOKNAD_TYPE',
-    },
-  },
-  gjeldende: {
-    skjaringstidspunkt: '2020-01-01',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: 'SOKNAD_TYPE',
-    },
-  },
-  register: {
-    skjaringstidspunkt: '2020-01-01',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: 'SOKNAD_TYPE',
-    },
-  },
-};
-
-const personopplysningerSoker = {
-  navBrukerKjonn: {
-    kode: navBrukerKjonn.KVINNE,
-    kodeverk: 'NAV_BRUKER_KJONN',
-  },
-  statsborgerskap: {
-    kode: 'NORSK',
-    kodeverk: 'STATSBORGERSKAP',
-  },
-  avklartPersonstatus: {
-    orginalPersonstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-    overstyrtPersonstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-  },
-  personstatus: {
+const fagsakPersonAnnenPart = {
+  navn: 'Klara Ku',
+  fødselsdato: '1980-01-01',
+  personnummer: '6565656',
+  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
+  personstatusType: {
     kode: personstatusType.BOSATT,
     kodeverk: 'PERSONSTATUS_TYPE',
   },
-  diskresjonskode: {
-    kode: diskresjonskodeType.KLIENT_ADRESSE,
-    kodeverk: 'DISKRESJONSKODE_TYPE',
-  },
-  sivilstand: {
-    kode: sivilstandType.SAMBOER,
-    kodeverk: 'SIVILSTAND_TYPE',
-  },
-  aktoerId: '24sedfs32',
-  navn: 'Olga Utvikler',
-  adresser: [{
-    adresseType: {
-      kode: opplysningAdresseType.BOSTEDSADRESSE,
-      kodeverk: 'ADRESSE_TYPE',
-    },
-    adresselinje1: 'Oslo',
-  }],
-  fnr: '98773895',
-  region: {
-    kode: region.NORDEN,
-    kodeverk: 'REGION',
-  },
-  barn: [],
+  aktørId: 'test',
 };
 
-const personopplysningerAnnenPart = {
-  navBrukerKjonn: {
-    kode: navBrukerKjonn.MANN,
-    kodeverk: 'NAV_BRUKER_KJONN',
-  },
-  statsborgerskap: {
-    kode: 'NORSK',
-    kodeverk: 'STATSBORGERSKAP',
-  },
-  avklartPersonstatus: {
-    orginalPersonstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-    overstyrtPersonstatus: {
-      kode: personstatusType.BOSATT,
-      kodeverk: 'PERSONSTATUS_TYPE',
-    },
-  },
-  personstatus: {
+const fagsakPersonAnnenPartUkjent = {
+  navn: 'Klara Ku',
+  fødselsdato: '1980-01-01',
+  personnummer: '6565656',
+  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
+  personstatusType: {
     kode: personstatusType.BOSATT,
     kodeverk: 'PERSONSTATUS_TYPE',
   },
-  diskresjonskode: {
-    kode: diskresjonskodeType.KLIENT_ADRESSE,
-    kodeverk: 'DISKRESJONSKODE_TYPE',
-  },
-  sivilstand: {
-    kode: sivilstandType.SAMBOER,
-    kodeverk: 'SIVILSTAND_TYPE',
-  },
-  aktoerId: '23rwerfwegwerg',
-  navn: 'Tusse Trolls Gasse Avle Sønvis Eggert Offer Tønne Sjønning',
-  adresser: [{
-    adresseType: {
-      kode: opplysningAdresseType.BOSTEDSADRESSE,
-      kodeverk: 'ADRESSE_TYPE',
-    },
-    adresselinje1: 'Oslo',
-  }],
-  fnr: '1234567',
-  region: {
-    kode: region.NORDEN,
-    kodeverk: 'REGION',
-  },
-  barn: [],
 };
 
-export const visVisittkortNårEnHarBegrensetMedInformasjon = () => (
-  <VisittkortSakIndex
-    fagsak={fagsak}
-    fagsakPerson={fagsakPerson}
-    familieHendelse={familieHendelse}
-    lenkeTilAnnenPart="testlenke til annen part"
-  />
-);
+const fagsakPersonerUtenAnnenPart = {
+  bruker: fagsakPerson,
+};
 
-export const visVisittkortNårEnHarPersonopplysninger = () => (
+const fagsakPersonerMedAnnenPart = {
+  bruker: fagsakPerson,
+  annenPart: fagsakPersonAnnenPart,
+};
+
+const fagsakPersonerMedAnnenPartUkjent = {
+  bruker: fagsakPerson,
+  annenPart: fagsakPersonAnnenPartUkjent,
+};
+
+export const visVisittkortDerEnIkkeHarAnnenPart = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
-    fagsakPerson={fagsakPerson}
-    personopplysninger={personopplysningerSoker}
-    familieHendelse={familieHendelse}
-    lenkeTilAnnenPart="testlenke til annen part"
+    fagsakPersoner={fagsakPersonerUtenAnnenPart}
   />
 );
 
 export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
-    fagsakPerson={fagsakPerson}
-    personopplysninger={{
-      ...personopplysningerSoker,
-      annenPart: personopplysningerAnnenPart,
-    }}
-    familieHendelse={familieHendelse}
+    fagsakPersoner={fagsakPersonerMedAnnenPart}
     lenkeTilAnnenPart="testlenke til annen part"
   />
 );
@@ -211,15 +103,7 @@ export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
 export const visVisittkortForAnnenPartDerAktørIdErUkjent = () => (
   <VisittkortSakIndex
     fagsak={fagsak}
-    fagsakPerson={fagsakPerson}
-    personopplysninger={{
-      ...personopplysningerSoker,
-      annenPart: {
-        ...personopplysningerAnnenPart,
-        aktoerId: undefined,
-      },
-    }}
-    familieHendelse={familieHendelse}
+    fagsakPersoner={fagsakPersonerMedAnnenPartUkjent}
     lenkeTilAnnenPart="testlenke til annen part"
   />
 );

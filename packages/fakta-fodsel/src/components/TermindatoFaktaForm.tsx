@@ -200,8 +200,8 @@ export const termindatoFaktaFormName = 'TermindatoFaktaForm';
 const getEditedStatus = createSelector(
   [(ownProps: PureOwnProps) => ownProps.soknad,
     (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
-  (soknad, familiehendelse): FieldEditedInfo => (
-    isFieldEdited(soknad, familiehendelse)
+  (soknad, gjeldendeFamiliehendelse): FieldEditedInfo => (
+    isFieldEdited(soknad, gjeldendeFamiliehendelse)
   ),
 );
 

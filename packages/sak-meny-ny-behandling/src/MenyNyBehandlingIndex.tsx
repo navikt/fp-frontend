@@ -21,7 +21,7 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehand
 
 interface OwnProps {
   ytelseType: Kodeverk;
-  saksnummer: number;
+  saksnummer: string;
   behandlingId?: number;
   behandlingUuid?: string;
   behandlingVersjon?: number;
@@ -38,7 +38,7 @@ interface OwnProps {
   uuidForSistLukkede?: string;
   erTilbakekrevingAktivert: boolean;
   sjekkOmTilbakekrevingKanOpprettes: (params: {
-    saksnummer: number;
+    saksnummer: string;
     uuid: string;
   }) => void;
   sjekkOmTilbakekrevingRevurderingKanOpprettes: (params: {
@@ -70,7 +70,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
     const isTilbakekreving = TILBAKEKREVING_BEHANDLINGSTYPER.includes(formValues.behandlingType);
     const tilbakekrevingBehandlingId = behandlingId && isTilbakekreving ? { behandlingId } : {};
     const params = {
-      saksnummer: saksnummer.toString(),
+      saksnummer,
       ...tilbakekrevingBehandlingId,
       ...formValues,
     };

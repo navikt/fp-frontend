@@ -60,7 +60,7 @@ export const visPanelForVurderingAvInnsyn = () => (
         opprettetDato: '2019-01-01',
       }],
     } as Innsyn)}
-    saksnummer={123434}
+    saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',
       dokumentId: '3',

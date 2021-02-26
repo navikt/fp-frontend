@@ -23,7 +23,7 @@ const lagFagsakSortObj = (fagsak: Fagsak) => ({
 
 interface OwnProps {
   fagsaker: Fagsak[];
-  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer: number) => void;
+  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer: string) => void;
   alleKodeverk: {[key: string]: [KodeverkMedNavn]};
 }
 
@@ -51,8 +51,14 @@ const FagsakList: FunctionComponent<OwnProps> = ({
   return (
     <Table headerTextCodes={headerTextCodes} classNameTable={styles.table}>
       {sortedFagsaker.map((fagsak) => (
-        <TableRow key={fagsak.saksnummer} id={fagsak.saksnummer} model={document} onMouseDown={selectFagsakCallback} onKeyDown={selectFagsakCallback}>
-          <TableColumn>{fagsak.saksnummer}</TableColumn>
+        <TableRow
+          key={fagsak.saksnummerString}
+          id={fagsak.saksnummerString}
+          model={document}
+          onMouseDown={selectFagsakCallback}
+          onKeyDown={selectFagsakCallback}
+        >
+          <TableColumn>{fagsak.saksnummerString}</TableColumn>
           <TableColumn>{getKodeverknavn(fagsak.sakstype)}</TableColumn>
           <TableColumn>{getKodeverknavn(fagsak.status)}</TableColumn>
           <TableColumn>{fagsak.barnFodt ? <DateLabel dateString={fagsak.barnFodt} /> : null}</TableColumn>

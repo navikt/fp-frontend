@@ -1,8 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Personopplysninger } from '@fpsak-frontend/types';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
+import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 
 import BostedBarnView from './BostedBarnView';
@@ -11,26 +10,8 @@ describe('<BostedBarnView>', () => {
   const barn = {
     navn: 'Espen Barn',
     aktoerId: '1',
-    fodselsdato: '2016-02-03',
-    personstatus: {
-      kode: 'BOSA',
-      kodeverk: '',
-    },
-    avklartPersonstatus: {
-      overstyrtPersonstatus: {
-        kode: personstatusType.BOSATT,
-        kodeverk: '',
-      },
-      orginalPersonstatus: {
-        kode: personstatusType.DOD,
-        kodeverk: '',
-      },
-    },
-    navBrukerKjonn: {
-      kode: '',
-      kodeverk: '',
-    },
-    statsborgerskap: {
+    fødselsdato: '2016-02-03',
+    kjønn: {
       kode: '',
       kodeverk: '',
     },
@@ -42,10 +23,6 @@ describe('<BostedBarnView>', () => {
       kode: 'UGIF',
       kodeverk: '',
     },
-    region: {
-      kode: '',
-      kodeverk: '',
-    },
     adresser: [{
       adresselinje1: 'Ringeriksveien 182',
       postNummer: '1339',
@@ -55,7 +32,7 @@ describe('<BostedBarnView>', () => {
         kodeverk: '',
       },
     }],
-  };
+  } as PersonopplysningerBasis;
 
   it('skal vise barn nr', () => {
     const wrapper = shallow(<BostedBarnView
@@ -71,7 +48,7 @@ describe('<BostedBarnView>', () => {
 
   it('skal vise navn', () => {
     const wrapper = shallow(<BostedBarnView
-      barn={barn as Personopplysninger}
+      barn={barn}
       barnNr={3}
     />);
     expect(wrapper.find('Element').childAt(0).text()).toEqual('Espen Barn');
@@ -79,7 +56,7 @@ describe('<BostedBarnView>', () => {
 
   it('skal vise fodselsdato', () => {
     const wrapper = shallow(<BostedBarnView
-      barn={barn as Personopplysninger}
+      barn={barn}
       barnNr={3}
     />);
     const normalTekst = wrapper.find('Normaltekst');
@@ -92,7 +69,7 @@ describe('<BostedBarnView>', () => {
 
   it('skal vise adresse', () => {
     const wrapper = shallow(<BostedBarnView
-      barn={barn as Personopplysninger}
+      barn={barn}
       barnNr={3}
     />);
     const normalTekst = wrapper.find('Normaltekst');

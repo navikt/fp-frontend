@@ -17,7 +17,7 @@ const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean =>
 };
 
 interface OwnProps {
-  saksnummer: number;
+  saksnummer: string;
   fagsakYtelseType: KodeverkMedNavn;
   fagsakStatus: KodeverkMedNavn;
   renderBehandlingMeny: () => ReactNode;

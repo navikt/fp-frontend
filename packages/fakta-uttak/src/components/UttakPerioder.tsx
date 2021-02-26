@@ -10,7 +10,7 @@ import { Element } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personopplysninger,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 import { getBehandlingFormPrefix, behandlingFormValueSelector, CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
@@ -61,7 +61,7 @@ interface PureOwnProps {
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   submitting: boolean;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   aksjonspunkter: Aksjonspunkt[];
   hasRevurderingOvertyringAp: boolean;
   kanOverstyre: boolean;
@@ -358,7 +358,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       behandlingId,
       behandlingVersjon,
       behandlingStatus,
-      personopplysninger,
+      personoversikt,
       familiehendelse,
       alleKodeverk,
       vilkarForSykdomExists,
@@ -468,7 +468,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
               faktaArbeidsforhold={faktaArbeidsforhold}
               behandlingId={behandlingId}
               behandlingVersjon={behandlingVersjon}
-              personopplysninger={personopplysninger}
+              personoversikt={personoversikt}
               alleKodeverk={alleKodeverk}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />

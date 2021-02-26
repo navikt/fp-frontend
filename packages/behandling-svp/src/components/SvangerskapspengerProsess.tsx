@@ -9,7 +9,7 @@ import {
   FatterVedtakStatusModal, ProsessStegContainer, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import { restApiSvpHooks, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
@@ -29,7 +29,6 @@ const forhandsvis = (data) => {
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -42,6 +41,7 @@ interface OwnProps {
   apentFaktaPanelInfo?: { urlCode: string; textCode: string};
   setBehandling: (behandling: Behandling) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  personoversikt: Personoversikt;
 }
 
 const getForhandsvisCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
@@ -98,7 +98,6 @@ const getLagringSideeffekter = (toggleIverksetterVedtakModal, toggleFatterVedtak
 const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
   data,
   fagsak,
-  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -111,6 +110,7 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
   apentFaktaPanelInfo,
   setBehandling,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
 }) => {
   const toggleSkalOppdatereFagsakContext = prosessStegHooks.useOppdateringAvBehandlingsversjon(behandling.versjon, oppdaterBehandlingVersjon);
 
@@ -129,8 +129,8 @@ const SvangerskapspengerProsess: FunctionComponent<OwnProps> = ({
     previewCallback: useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, behandling), [behandling.versjon]),
     previewFptilbakeCallback: useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, behandling), [behandling.versjon]),
     alleKodeverk,
-    fagsakPerson,
     arbeidsgiverOpplysningerPerId,
+    personoversikt,
     ...data,
   };
   const [prosessStegPaneler, valgtPanel, formaterteProsessStegPaneler] = prosessStegHooks.useProsessStegPaneler(prosessStegPanelDefinisjoner,

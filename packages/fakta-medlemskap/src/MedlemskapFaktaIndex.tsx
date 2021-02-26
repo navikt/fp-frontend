@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
@@ -21,7 +21,6 @@ interface OwnProps {
   medlemskap: Medlemskap;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  fagsakPerson: FagsakPerson;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   isForeldrepengerFagsak: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
@@ -36,7 +35,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = (
   aksjonspunkter,
   harApneAksjonspunkter,
   submittable,
-  fagsakPerson,
   isForeldrepengerFagsak,
   alleMerknaderFraBeslutter,
   alleKodeverk,
@@ -55,7 +53,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = (
       soknad={soknad}
       inntektArbeidYtelse={inntektArbeidYtelse}
       medlemskap={medlemskap}
-      fagsakPerson={fagsakPerson}
       aksjonspunkter={aksjonspunkter}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submittable={submittable}

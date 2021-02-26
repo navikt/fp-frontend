@@ -9,7 +9,6 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import OmsorgOgAdopsjonPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
 import FodselPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-fodsel';
-import { FagsakPerson } from '@fpsak-frontend/types';
 
 import { ForeldrepengerForm } from './ForeldrepengerForm';
 
@@ -21,7 +20,7 @@ describe('<ForeldrepengerForm>', () => {
       readOnly={false}
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
       alleKodeverk={{}}
-      fagsakPerson={{} as FagsakPerson}
+      fagsakPersonnummer="12121212"
       valuesForRegisteredFieldsOnly={{}}
       annenForelderInformertRequired
       sokerHarAleneomsorg
@@ -37,7 +36,7 @@ describe('<ForeldrepengerForm>', () => {
       readOnly={false}
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR)}
       alleKodeverk={{}}
-      fagsakPerson={{} as FagsakPerson}
+      fagsakPersonnummer="12121212"
       valuesForRegisteredFieldsOnly={{}}
       annenForelderInformertRequired
       sokerHarAleneomsorg

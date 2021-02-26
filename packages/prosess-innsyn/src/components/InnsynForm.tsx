@@ -36,7 +36,7 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  saksNr: number;
+  saksNr: string;
   behandlingId: number;
   behandlingVersjon: number;
   behandlingPaaVent: boolean;

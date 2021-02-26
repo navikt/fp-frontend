@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import ForeldrepengerForm from './components/ForeldrepengerForm';
 import messages from '../i18n/nb_NO.json';
@@ -20,7 +20,7 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
 }
 
 const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
@@ -29,7 +29,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   soknadData,
   alleKodeverk,
-  fagsakPerson,
+  fagsakPersonnummer,
 }) => (
   <RawIntlProvider value={intl}>
     <ForeldrepengerForm
@@ -38,7 +38,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
       readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer={fagsakPersonnummer}
     />
   </RawIntlProvider>
 );

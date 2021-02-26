@@ -6,7 +6,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Feriepengegrunnlag, Personopplysninger, Soknad,
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, Feriepengegrunnlag, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
@@ -28,7 +28,7 @@ const getStatusFromResultatstruktur = (resultatstruktur) => {
 type Data = {
   fagsak: Fagsak;
   beregningresultatForeldrepenger: BeregningsresultatFp;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -53,10 +53,10 @@ class PanelDef extends ProsessStegPanelDef {
   )
 
   getData = ({
-    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId,
+    fagsak, beregningresultatForeldrepenger, personoversikt, soknad, arbeidsgiverOpplysningerPerId,
   }: Data) => ({
     fagsak,
-    personopplysninger,
+    personoversikt,
     soknad,
     arbeidsgiverOpplysningerPerId,
     beregningresultat: beregningresultatForeldrepenger,

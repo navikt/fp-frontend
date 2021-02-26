@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegDef, ProsessStegPanelDef, Rettigheter } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, Personopplysninger, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
@@ -39,7 +39,7 @@ const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjo
 type Data = {
   fagsak: Fagsak;
   rettigheter: Rettigheter;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   soknad: Soknad;
   uttaksresultatPerioder: UttaksresultatPeriode;
   aksjonspunkter: Aksjonspunkt[];
@@ -80,7 +80,7 @@ class PanelDef extends ProsessStegPanelDef {
     uttaksresultatPerioder,
     uttakStonadskontoer,
     soknad,
-    personopplysninger,
+    personoversikt,
     ytelsefordeling,
     arbeidsgiverOpplysningerPerId,
   }: Data) => ({
@@ -90,7 +90,7 @@ class PanelDef extends ProsessStegPanelDef {
     uttaksresultatPerioder,
     uttakStonadskontoer,
     soknad,
-    personopplysninger,
+    personoversikt,
     ytelsefordeling,
     arbeidsgiverOpplysningerPerId,
   })

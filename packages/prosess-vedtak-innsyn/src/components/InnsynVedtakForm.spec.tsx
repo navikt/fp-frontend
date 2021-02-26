@@ -21,7 +21,7 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      saksNr={123}
+      saksNr="123"
       sprakkode={{
         kode: 'NN',
         kodeverk: '',
@@ -53,7 +53,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -78,7 +78,7 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.INNVILGET}
-      saksNr={123}
+      saksNr="123"
       sprakkode={{
         kode: 'NN',
         kodeverk: '',
@@ -110,7 +110,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -135,7 +135,7 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.AVVIST}
-      saksNr={123}
+      saksNr="123"
       sprakkode={{
         kode: 'NN',
         kodeverk: '',
@@ -163,7 +163,7 @@ describe('<InnsynVedtakForm>', () => {
       apBegrunnelse="Dette er en test"
       begrunnelse="Dette er en test"
       resultat={innsynResultatType.DELVISTINNVILGET}
-      saksNr={123}
+      saksNr="123"
       sprakkode={{
         kode: 'NN',
         kodeverk: '',
@@ -195,7 +195,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -224,7 +224,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -252,7 +252,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -280,7 +280,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -309,7 +309,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -337,7 +337,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}
@@ -365,7 +365,7 @@ describe('<InnsynVedtakForm>', () => {
         kode: 'NN',
         kodeverk: '',
       }}
-      saksNr={123}
+      saksNr="123"
       documents={[]}
       behandlingId={1}
       behandlingVersjon={2}

@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -21,7 +21,6 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_FAK
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -32,6 +31,7 @@ interface OwnProps {
   setApentFaktaPanel: (faktaPanelInfo: { urlCode: string; textCode: string}) => void;
   setBehandling: (behandling: Behandling) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  personoversikt: Personoversikt;
 }
 
 const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -39,7 +39,6 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
   data,
   behandling,
   fagsak,
-  fagsakPerson,
   rettigheter,
   alleKodeverk,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -49,9 +48,10 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
   setApentFaktaPanel,
   setBehandling,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
 }) => {
   const {
-    aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, ytelsefordeling, beregningsgrunnlag, uttakKontrollerAktivitetskrav,
+    aksjonspunkter, soknad, vilkar, inntektArbeidYtelse, ytelsefordeling, beregningsgrunnlag, uttakKontrollerAktivitetskrav,
   } = data;
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
@@ -63,17 +63,16 @@ const ForeldrepengerFakta: FunctionComponent<OwnProps & WrappedComponentProps> =
 
   const dataTilUtledingAvFpPaneler = {
     fagsak,
-    fagsakPerson,
     behandling,
     soknad,
     vilkar,
-    personopplysninger,
     inntektArbeidYtelse,
     ytelsefordeling,
     beregningsgrunnlag,
     hasFetchError,
     arbeidsgiverOpplysningerPerId,
     uttakKontrollerAktivitetskrav,
+    personoversikt,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

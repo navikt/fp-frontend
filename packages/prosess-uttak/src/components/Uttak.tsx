@@ -27,10 +27,9 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
-  Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling,
-  AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode,
+  AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
 
 import TimeLineInfo from './stonadkonto/TimeLineInfo';
@@ -80,7 +79,7 @@ const getCustomTimes = (
   barnFraTps: AvklartBarn[],
   familiehendelse: FamilieHendelseSamling,
   isRevurdering: boolean,
-  person: Personopplysninger,
+  person: Personoversikt,
   soknadDate: string,
   soknadsType: string,
   endredFodselsDato?: string,
@@ -102,7 +101,7 @@ const getCustomTimes = (
     soknad: soknadDate,
     fodsel: fodselsdato(soknadsType, omsorgsOvertagelseDato, endredFodselsDato, familiehendelseDate),
     revurdering: isRevurdering ? endringsdato : '1950-01-01',
-    dodSoker: person && person.dodsdato ? person.dodsdato : '1950-01-01',
+    dodSoker: person?.bruker?.dødsdato ? person.bruker.dødsdato : '1950-01-01',
   };
 
   dodeBarn.forEach((barn, index: number) => {
@@ -122,7 +121,7 @@ interface PureOwnProps {
   isDirty: boolean;
   formName: string;
   manuellOverstyring: boolean;
-  person: Personopplysninger;
+  person: Personoversikt;
   familiehendelse: FamilieHendelseSamling;
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
@@ -158,7 +157,7 @@ interface MappedOwnProps {
   hovedsokerKjonnKode?: Kjønnkode;
   isRevurdering: boolean;
   medsokerKjonnKode: Kjønnkode;
-  saksnummer: number;
+  saksnummer: string;
   soknadDate: string;
   stonadskonto: UttakStonadskontoer;
   uttakPerioder: PeriodeMedClassName[];
@@ -803,10 +802,10 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     fagsak,
   } = props;
   const periodeGrenseMottatDato = uttakPeriodeGrense.mottattDato;
-  const hovedsokerKjonnKode = person ? person.navBrukerKjonn.kode : undefined;
+  const hovedsokerKjonnKode = person ? person.bruker.kjønn.kode : undefined;
   const annenForelderUttak = uttaksresultat.perioderAnnenpart;
   const viseUttakMedsoker = annenForelderUttak.length > 0;
-  const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart.navBrukerKjonn.kode : undefined;
+  const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart.kjønn.kode : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
   const medsokerKjonnKode = viseUttakMedsoker && getMedsokerKjonnKode === undefined ? navBrukerKjonn.UDEFINERT : getMedsokerKjonnKode;
   const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
@@ -840,7 +839,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     isRevurdering: props.behandlingType.kode === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
-    saksnummer: fagsak.saksnummer,
+    saksnummer: fagsak.saksnummerString,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
     stonadskonto: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'stonadskonto'),
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),

@@ -42,7 +42,7 @@ export const visÅpentAksjonspunkt = () => (
     {...standardProsessProps}
     aksjonspunkter={[{
       definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_PERSONSTATUS,
+        kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
@@ -67,7 +67,7 @@ export const visOppfyltVilkår = () => (
     } as Behandling}
     aksjonspunkter={[{
       definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_PERSONSTATUS,
+        kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
       },
       status: {
         kode: aksjonspunktStatus.UTFORT,
@@ -99,7 +99,7 @@ export const visAvslåttVilkår = () => (
     } as Behandling}
     aksjonspunkter={[{
       definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_PERSONSTATUS,
+        kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
       },
       status: {
         kode: aksjonspunktStatus.UTFORT,

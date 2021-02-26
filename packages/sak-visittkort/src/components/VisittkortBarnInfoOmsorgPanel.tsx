@@ -3,39 +3,33 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { FamilieHendelseSamling } from '@fpsak-frontend/types';
+import { FagsakHendelse } from '@fpsak-frontend/types';
 import { FlexColumn } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 import styles from './visittkortBarnInfoOmsorgPanel.less';
 
 interface OwnProps {
-  familieHendelse: FamilieHendelseSamling;
+  familiehendelse: FagsakHendelse;
 }
 
 const VisittkortBarnInfoOmsorgPanel: FunctionComponent<OwnProps> = ({
-  familieHendelse,
+  familiehendelse,
 }) => {
-  const { oppgitt, gjeldende } = familieHendelse;
+  const { hendelseType, hendelseDato, antallBarn } = familiehendelse;
 
-  const omsorgovertakelseDato = gjeldende.omsorgsovertakelseDato ? gjeldende.omsorgsovertakelseDato : oppgitt.omsorgsovertakelseDato;
+  const erAdopsjon = hendelseType.kode === familieHendelseType.ADOPSJON;
 
-  let antall = gjeldende.antallBarnTilBeregning ? gjeldende.antallBarnTilBeregning : oppgitt.antallBarnTilBeregning;
-  const erForeldreansvar = !!antall;
-
-  if (!antall) {
-    antall = gjeldende.adopsjonFodelsedatoer ? Object.keys(gjeldende.adopsjonFodelsedatoer).length : Object.keys(oppgitt.adopsjonFodelsedatoer).length;
-  }
-
-  const foreldreansvarTekstkode = antall === 1 ? 'VisittkortBarnInfoOmsorgPanel.Foreldreansvar' : 'VisittkortBarnInfoOmsorgPanel.ForeldreansvarAntallBarn';
-  const adopsjonTekstkode = antall === 1 ? 'VisittkortBarnInfoOmsorgPanel.Adopsjon' : 'VisittkortBarnInfoOmsorgPanel.AdopsjonAntallBarn';
+  const foreldreansvarTekstkode = antallBarn === 1 ? 'VisittkortBarnInfoOmsorgPanel.Foreldreansvar' : 'VisittkortBarnInfoOmsorgPanel.ForeldreansvarAntallBarn';
+  const adopsjonTekstkode = antallBarn === 1 ? 'VisittkortBarnInfoOmsorgPanel.Adopsjon' : 'VisittkortBarnInfoOmsorgPanel.AdopsjonAntallBarn';
 
   return (
     <FlexColumn className={styles.text}>
       <Normaltekst>
         <FormattedMessage
-          id={erForeldreansvar ? foreldreansvarTekstkode : adopsjonTekstkode}
-          values={{ antall, dato: moment(omsorgovertakelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+          id={erAdopsjon ? adopsjonTekstkode : foreldreansvarTekstkode}
+          values={{ antall: antallBarn, dato: moment(hendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
         />
       </Normaltekst>
     </FlexColumn>

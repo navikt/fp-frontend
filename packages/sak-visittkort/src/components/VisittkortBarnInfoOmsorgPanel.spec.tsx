@@ -2,42 +2,24 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 import VisittkortBarnInfoOmsorgPanel from './VisittkortBarnInfoOmsorgPanel';
 
 describe('<VisittkortBarnInfoOmsorgPanel>', () => {
-  const familieHendelse = {
-    oppgitt: {
-      skjaringstidspunkt: '2020-01-01',
-      omsorgsovertakelseDato: '2020-01-21',
-      adopsjonFodelsedatoer: {
-        1: '2019-01-01',
-      },
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
+  const familiehendelse = {
+    hendelseType: {
+      kode: familieHendelseType.ADOPSJON,
+      kodeverk: '',
     },
-    gjeldende: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
-    register: {
-      skjaringstidspunkt: '2020-01-01',
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: 'SOKNAD_TYPE',
-      },
-    },
+    hendelseDato: '2020-01-21',
+    antallBarn: 1,
+    dødfødsel: false,
   };
 
   it('skal vise adopsjonsinformasjon', () => {
     const wrapper = shallow(<VisittkortBarnInfoOmsorgPanel
-      familieHendelse={familieHendelse}
+      familiehendelse={familiehendelse}
     />);
 
     const message = wrapper.find(FormattedMessage);
@@ -51,16 +33,11 @@ describe('<VisittkortBarnInfoOmsorgPanel>', () => {
 
   it('skal vise foreldreansvarsinformasjon', () => {
     const wrapper = shallow(<VisittkortBarnInfoOmsorgPanel
-      familieHendelse={{
-        ...familieHendelse,
-        oppgitt: {
-          skjaringstidspunkt: '2020-01-01',
-          omsorgsovertakelseDato: '2020-01-21',
-          antallBarnTilBeregning: 1,
-          soknadType: {
-            kode: soknadType.FODSEL,
-            kodeverk: 'SOKNAD_TYPE',
-          },
+      familiehendelse={{
+        ...familiehendelse,
+        hendelseType: {
+          kode: familieHendelseType.OMSORG,
+          kodeverk: '',
         },
       }}
     />);

@@ -74,7 +74,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   apCodes: string[];
   isApOpen: boolean;
-  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
+  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string) => Promise<any>;
 }
 
 interface MappedOwnProps {
@@ -82,7 +82,7 @@ interface MappedOwnProps {
   isForeldrepenger: boolean;
   behandlingFormPrefix: string;
   varseltekst?: string;
-  saksnummer: number;
+  saksnummer: string;
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;
 }
@@ -370,7 +370,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     varseltekst: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'varseltekst'),
     initialValues: buildInitialValues(state, ownProps),
     behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
-    saksnummer: fagsak.saksnummer,
+    saksnummer: fagsak.saksnummerString,
     isForeldrepenger: fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER,
     hasOpenTilbakekrevingsbehandling,
     onSubmit: lagSubmitFn(ownProps),

@@ -189,7 +189,7 @@ const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
 
 interface OwnProps {
   historikkinnslag: Historikkinnslag;
-  saksnummer?: number;
+  saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
@@ -203,7 +203,7 @@ interface OwnProps {
  */
 const History: FunctionComponent<OwnProps> = ({
   historikkinnslag,
-  saksnummer = 0,
+  saksnummer = '0',
   getBehandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,

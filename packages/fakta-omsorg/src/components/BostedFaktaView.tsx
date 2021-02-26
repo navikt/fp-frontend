@@ -2,24 +2,23 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
-import BostedSokerFaktaIndex from '@fpsak-frontend/fakta-bosted-soker';
-import { KodeverkMedNavn, Personopplysninger } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Personoversikt } from '@fpsak-frontend/types';
 
 import BostedBarnView from './BostedBarnView';
+import BostedSokerView from './BostedSokerView';
 
 import styles from './bostedFaktaView.less';
 
 interface OwnProps {
-  personopplysning: Personopplysninger;
-  ektefellePersonopplysning?: Personopplysninger;
+  personoversikt: Personoversikt;
   className?: string;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 const BostedFaktaView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  personopplysning,
-  ektefellePersonopplysning,
+  personoversikt,
   className,
   alleKodeverk,
   intl,
@@ -28,17 +27,21 @@ const BostedFaktaView: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     <FaktaGruppe title={intl.formatMessage({ id: 'BostedFaktaView.BosattAdresser' })}>
       <Row>
         <Column xs="6">
-          {personopplysning.barn.map((b, index) => (
+          {personoversikt.barn.map((b, index) => (
             <BostedBarnView key={b.navn} barn={b} barnNr={index + 1} />
           ))}
         </Column>
         <Column xs="6">
-          <BostedSokerFaktaIndex personopplysninger={personopplysning} alleKodeverk={alleKodeverk} />
-          {ektefellePersonopplysning && (
-            <BostedSokerFaktaIndex
+          <BostedSokerView
+            sokerTypeText={intl.formatMessage({ id: 'BostedSokerFaktaIndex.Soker' })}
+            personopplysninger={personoversikt.bruker}
+            sivilstandTypes={alleKodeverk[kodeverkTyper.SIVILSTAND_TYPE]}
+          />
+          {personoversikt.annenPart && (
+            <BostedSokerView
               sokerTypeText={intl.formatMessage({ id: 'BostedFaktaView.ForelderTo' })}
-              personopplysninger={ektefellePersonopplysning}
-              alleKodeverk={alleKodeverk}
+              personopplysninger={personoversikt.annenPart}
+              sivilstandTypes={alleKodeverk[kodeverkTyper.SIVILSTAND_TYPE]}
             />
           )}
         </Column>
