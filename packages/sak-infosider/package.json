@@ -8,7 +8,7 @@
     "nav-frontend-typografi": "3.0.3",
     "nav-frontend-typografi-style": "1.0.34",
     "react": "^17.0.1",
-    "react-intl": "^5.12.5",
+    "react-intl": "^5.13.1",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {}
