@@ -7,7 +7,6 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../decorators/withRedux';
 
