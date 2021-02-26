@@ -5,11 +5,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   NavAnsatt, Fagsak, KlageVurdering, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
 } from '@fpsak-frontend/types';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
@@ -91,7 +89,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     },
   );
 
-  const { data: totrinnsKlageVurdering, state: totrinnsKlageVurderingState } = restApiHooks.useRestApi<KlageVurdering>(
+  const { data: totrinnsKlageVurdering } = restApiHooks.useRestApi<KlageVurdering>(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
       updateTriggers: [behandlingId, behandlingVersjon],
@@ -116,10 +114,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
 
   if (!totrinnArsaker && !totrinnArsakerReadOnly) {
     return null;
-  }
-
-  if (totrinnsKlageVurderingState === RestApiState.LOADING) {
-    return <LoadingPanel />;
   }
 
   return (
