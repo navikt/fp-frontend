@@ -244,7 +244,8 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
         <VerticalSpacer twentyPx />
         <Hovedknapp
           mini
-          disabled={this.isConfirmButtonDisabled()}
+          disabled={formProps.submitting || this.isConfirmButtonDisabled()}
+          spinner={formProps.submitting}
         >
           <FormattedMessage id="OppholdInntektOgPerioder.Bekreft" />
         </Hovedknapp>
