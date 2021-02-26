@@ -6,7 +6,6 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { BehandlingAppKontekst, Fagsak, Kodeverk } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
@@ -158,18 +157,16 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP);
-  const { data: harApentKontrollerRevAp, state: stateRevAp } = restApiHooks.useRestApi<boolean>(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
+  const { data: harApentKontrollerRevAp } = restApiHooks.useRestApi<boolean>(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
     suspendRequest: !skalHenteRevAp,
+    keepData: true,
   });
 
-  const { data: brevmaler, state: stateBrevmaler } = restApiHooks.useRestApi<Brevmal[]>(FpsakApiKeys.BREVMALER, undefined, {
+  const { data: brevmaler } = restApiHooks.useRestApi<Brevmal[]>(FpsakApiKeys.BREVMALER, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
+    keepData: true,
   });
-
-  if (stateBrevmaler === RestApiState.LOADING || (skalHenteRevAp && stateRevAp === RestApiState.LOADING)) {
-    return <LoadingPanel />;
-  }
 
   const submitFinished = submitState === RestApiState.SUCCESS;
   return (
