@@ -7,7 +7,7 @@ import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';
 
-const useHentFagsakRettigheter = (saksnummer: number, behandlingId: number, behandlingVersjon: number):
+const useHentFagsakRettigheter = (saksnummer: string, behandlingId: number, behandlingVersjon: number):
 [ rettigheter: SakRettigheter, harHentet: boolean ] => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();

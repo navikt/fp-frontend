@@ -6,7 +6,7 @@ interface HistorikkMal {
   behandlingLocation: Location;
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
-  saksnummer: number;
+  saksnummer: string;
   erTilbakekreving: boolean;
 }
 

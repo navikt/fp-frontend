@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { FamilieHendelse, Personopplysninger, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Personoversikt, Soknad } from '@fpsak-frontend/types';
 
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
@@ -32,14 +32,13 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -66,14 +65,13 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
 
     const form = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
@@ -95,14 +93,13 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
 
     const begrunnelseForm = wrapper.find(FaktaBegrunnelseTextField);
@@ -124,14 +121,13 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
-      personopplysninger={{} as Personopplysninger}
+      personoversikt={{} as Personoversikt}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-      validate={() => undefined}
     />);
     const omsorgOgForeldreAnsvarFaktaForm = wrapper.find(OmsorgOgForeldreansvarFaktaForm);
     expect(omsorgOgForeldreAnsvarFaktaForm.prop('erAksjonspunktForeldreansvar')).toBe(true);

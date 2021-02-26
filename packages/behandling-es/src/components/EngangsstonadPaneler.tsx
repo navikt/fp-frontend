@@ -4,7 +4,7 @@ import {
   Rettigheter, BehandlingPaVent, SettPaVentParams,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  Fagsak, KodeverkMedNavn, Behandling, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import EngangsstonadProsess from './EngangsstonadProsess';
@@ -14,7 +14,6 @@ import FetchedData from '../types/fetchedDataTsType';
 interface OwnProps {
   fetchedData: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -28,6 +27,7 @@ interface OwnProps {
   hasFetchError: boolean;
   setBehandling: (behandling: Behandling) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  personoversikt: Personoversikt;
 }
 
 interface FaktaPanelInfo {
@@ -38,7 +38,6 @@ interface FaktaPanelInfo {
 const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   fetchedData,
   fagsak,
-  fagsakPerson,
   behandling,
   alleKodeverk,
   rettigheter,
@@ -52,6 +51,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   hasFetchError,
   setBehandling,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
@@ -67,7 +67,6 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
       <EngangsstonadProsess
         data={fetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
@@ -80,12 +79,12 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         setBehandling={setBehandling}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />
       <EngangsstonadFakta
         behandling={behandling}
         data={fetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         alleKodeverk={alleKodeverk}
         rettigheter={rettigheter}
         hasFetchError={hasFetchError}
@@ -95,6 +94,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         setApentFaktaPanel={setApentFaktaPanel}
         setBehandling={setBehandling}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />
     </>
   );

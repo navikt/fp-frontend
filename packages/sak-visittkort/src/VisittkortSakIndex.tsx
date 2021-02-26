@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import {
-  Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
-} from '@fpsak-frontend/types';
+import { Fagsak, FagsakPersoner } from '@fpsak-frontend/types';
 
 import VisittkortPanel from './components/VisittkortPanel';
 import messages from '../i18n/nb_NO.json';
@@ -17,29 +15,26 @@ const intl = createIntl({
 
 interface OwnProps {
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
-  personopplysninger?: Personopplysninger;
-  familieHendelse?: FamilieHendelseSamling;
+  fagsakPersoner: FagsakPersoner;
   lenkeTilAnnenPart?: string;
-  harTilbakekrevingVerge?: boolean;
+  harVerge?: boolean;
+  erTilbakekreving?: boolean;
 }
 
 const VisittkortSakIndex: FunctionComponent<OwnProps> = ({
   fagsak,
-  fagsakPerson,
-  personopplysninger,
-  familieHendelse,
+  fagsakPersoner,
   lenkeTilAnnenPart,
-  harTilbakekrevingVerge,
+  harVerge = false,
+  erTilbakekreving = false,
 }) => (
   <RawIntlProvider value={intl}>
     <VisittkortPanel
-      personopplysninger={personopplysninger}
-      familieHendelse={familieHendelse}
       lenkeTilAnnenPart={lenkeTilAnnenPart}
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
-      harTilbakekrevingVerge={harTilbakekrevingVerge}
+      fagsakPersoner={fagsakPersoner}
+      harVerge={harVerge}
+      erTilbakekreving={erTilbakekreving}
     />
   </RawIntlProvider>
 );

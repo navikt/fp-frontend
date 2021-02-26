@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn, Behandling, Fagsak, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -21,7 +21,6 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STA
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -39,7 +38,6 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   data,
   behandling,
   fagsak,
-  fagsakPerson,
   rettigheter,
   alleKodeverk,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -51,7 +49,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   arbeidsgiverOpplysningerPerId,
 }) => {
   const {
-    aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag,
+    aksjonspunkter, soknad, vilkar, inntektArbeidYtelse, beregningsgrunnlag,
   } = data;
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiSvpHooks.useRestApiRunner<Behandling>(SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
@@ -62,7 +60,7 @@ const SvangerskapspengerFakta: FunctionComponent<OwnProps & WrappedComponentProp
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvSvpPaneler = {
-    fagsak, fagsakPerson, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError, arbeidsgiverOpplysningerPerId,
+    fagsak, behandling, soknad, vilkar, inntektArbeidYtelse, beregningsgrunnlag, hasFetchError, arbeidsgiverOpplysningerPerId,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

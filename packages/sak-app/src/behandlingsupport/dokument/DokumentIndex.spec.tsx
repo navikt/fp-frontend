@@ -33,7 +33,7 @@ describe('<DokumentIndex>', () => {
     const wrapper = shallow(<DokumentIndex
       behandlingId={1}
       behandlingVersjon={2}
-      saksnummer={123}
+      saksnummer="123"
     />);
 
     const index = wrapper.find(DokumenterSakIndex);

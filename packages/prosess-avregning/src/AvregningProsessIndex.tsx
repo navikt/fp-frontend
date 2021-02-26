@@ -20,7 +20,7 @@ interface OwnProps {
   fagsak: Fagsak;
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number) => Promise<any>;
+  previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string) => Promise<any>;
 }
 
 const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({

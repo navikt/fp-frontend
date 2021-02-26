@@ -6,7 +6,7 @@ import {
   ReduxFormStateCleaner, Rettigheter, useSetBehandlingVedEndring,
 } from '@fpsak-frontend/behandling-felles';
 import {
-  KodeverkMedNavn, Behandling, Fagsak, FagsakPerson,
+  KodeverkMedNavn, Behandling, Fagsak, Kodeverk,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
@@ -24,7 +24,7 @@ const tilbakekrevingData = [
 interface OwnProps {
   behandlingId: number;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
+  fagsakKjønn: Kodeverk;
   rettigheter: Rettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;
@@ -46,7 +46,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps> = ({
   oppdaterBehandlingVersjon,
   kodeverk: fpsakKodeverk,
   fagsak,
-  fagsakPerson,
+  fagsakKjønn,
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
@@ -125,7 +125,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps> = ({
         behandling={hasNotFinished ? forrigeBehandling : behandling}
         fetchedData={data}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
+        fagsakKjønn={fagsakKjønn}
         kodeverk={tilbakekrevingKodeverk}
         fpsakKodeverk={fpsakKodeverk}
         rettigheter={rettigheter}

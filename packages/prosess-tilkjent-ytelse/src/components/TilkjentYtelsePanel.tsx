@@ -17,10 +17,10 @@ import {
   FamilieHendelse,
   Feriepengegrunnlag,
   KodeverkMedNavn,
-  Personopplysninger,
+  Personoversikt,
   Soknad,
+  Kjønnkode,
 } from '@fpsak-frontend/types';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
@@ -40,7 +40,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   beregningresultat: BeregningsresultatFp;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   soknad: Soknad;
   fagsakYtelseTypeKode: string;
   aksjonspunkter: Aksjonspunkt[];
@@ -149,12 +149,12 @@ const finnTilbaketrekkAksjonspunkt = createSelector([
 });
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const person = ownProps.personopplysninger;
+  const person = ownProps.personoversikt;
   const familiehendelse = ownProps.gjeldendeFamiliehendelse;
   const { soknad } = ownProps;
   const isSVP = ownProps.fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER;
   return {
-    hovedsokerKjonn: person ? person.navBrukerKjonn.kode as Kjønnkode : undefined, // nosonar
+    hovedsokerKjonn: person?.bruker ? person.bruker.kjønn.kode as Kjønnkode : undefined, // nosonar
     soknadDato: soknad.mottattDato,
     isSoknadSvangerskapspenger: isSVP,
     familiehendelseDato: getCurrentFamiliehendelseDato(

@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('<FagsakSearchIndex>', () => {
   const fagsak: Partial<Fagsak> = {
-    saksnummer: 12345,
+    saksnummerString: '12345',
     sakstype: {
       kode: 'ES',
       kodeverk: 'test',
@@ -28,13 +28,12 @@ describe('<FagsakSearchIndex>', () => {
       kodeverk: 'test',
     },
     barnFodt: '10.10.2017',
-    antallBarn: 1,
     opprettet: '13‎.‎02‎.‎2017‎ ‎09‎:‎54‎:‎22',
     dekningsgrad: 100,
   };
   const fagsak2: Partial<Fagsak> = {
     ...fagsak,
-    saksnummer: 23456,
+    saksnummerString: '23456',
   };
   const fagsaker = [fagsak, fagsak2];
 
@@ -62,9 +61,9 @@ describe('<FagsakSearchIndex>', () => {
     const wrapper = shallow(<FagsakSearchIndex />);
 
     const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
-    const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: number) => undefined;
-    velgFagsak('', fagsak.saksnummer);
+    const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: string) => undefined;
+    velgFagsak('', fagsak.saksnummerString);
 
-    expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`);
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummerString}/`);
   });
 });

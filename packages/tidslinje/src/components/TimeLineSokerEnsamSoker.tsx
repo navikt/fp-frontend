@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Row } from 'nav-frontend-grid';
 
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
+import { Kjønnkode } from '@fpsak-frontend/types';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { Image } from '@fpsak-frontend/shared-components';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';

@@ -26,7 +26,7 @@ type Values = {
 };
 
 const getLagreFunksjon = (
-  saksnummer: number,
+  saksnummer: string,
   behandlingId: number,
   behandlingVersjon: number,
   setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
@@ -110,7 +110,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, behandlingId, behandlingVersjon,
+  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummerString, behandlingId, behandlingVersjon,
     setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
   [behandlingId, behandlingVersjon]);
 

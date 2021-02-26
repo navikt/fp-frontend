@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('<FagsakIndex>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
   };
 
   const behandling = {
@@ -33,7 +33,7 @@ describe('<FagsakIndex>', () => {
   let contextStub;
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
-      selected: 123456,
+      selected: '123456',
       location: {
         pathname: 'test',
         search: 'test',
@@ -50,7 +50,7 @@ describe('<FagsakIndex>', () => {
   it('skal hente alle behandlinger fra fpsak og fptilbake', () => {
     requestApi.mock(FpsakApiKeys.KODEVERK, {});
     requestApi.mock(FpsakApiKeys.FETCH_FAGSAK, fagsak);
-    requestApi.mock(FpsakApiKeys.SAK_BRUKER, {});
+    requestApi.mock(FpsakApiKeys.SAK_PERSONER, {});
     requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER, {
       behandlingTypeKanOpprettes: [],
     });
@@ -58,6 +58,7 @@ describe('<FagsakIndex>', () => {
       behandlingTypeKanOpprettes: [],
     });
     requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
+    requestApi.mock(FpsakApiKeys.ANNEN_PART_BEHANDLING, {});
     requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK, [behandling]);
     requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE, [behandling2]);

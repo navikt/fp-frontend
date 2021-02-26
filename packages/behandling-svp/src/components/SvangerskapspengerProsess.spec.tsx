@@ -2,7 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { Behandling, Fagsak, Soknad } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, Personoversikt, Soknad,
+} from '@fpsak-frontend/types';
 import {
   ProsessStegPanel, FatterVedtakStatusModal, IverksetterVedtakStatusModal, ProsessStegContainer,
 } from '@fpsak-frontend/behandling-felles';
@@ -13,7 +15,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import FetchedData from '../types/fetchedDataTsType';
@@ -23,18 +24,10 @@ import SvangerskapspengerProsess from './SvangerskapspengerProsess';
 
 describe('<SvangerskapspengerProsess>', () => {
   const fagsak = {
-    saksnummer: 123456,
+    saksnummerString: '123456',
     sakstype: { kode: fagsakYtelseType.SVANGERSKAPSPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
-  const fagsakPerson = {
-    alder: 30,
-    personstatusType: { kode: personstatusType.BOSATT, kodeverk: 'test' },
-    erDod: false,
-    erKvinne: true,
-    navn: 'Espen Utvikler',
-    personnummer: '12345',
-  };
 
   const behandling = {
     id: 1,
@@ -90,6 +83,8 @@ describe('<SvangerskapspengerProsess>', () => {
     },
   };
 
+  const personoversikt = {} as Personoversikt;
+
   const fetchedData: Partial<FetchedData> = {
     aksjonspunkter,
     vilkar,
@@ -101,7 +96,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -113,6 +107,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -162,7 +157,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -174,6 +168,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -193,7 +188,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -205,6 +199,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -240,7 +235,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={vedtakBehandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -252,6 +246,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -290,7 +285,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -302,6 +296,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -340,7 +335,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedDataLocal as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -352,6 +346,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={opneSokeside}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -368,7 +363,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -380,6 +374,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -399,7 +394,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -411,6 +405,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 
@@ -436,7 +431,6 @@ describe('<SvangerskapspengerProsess>', () => {
       <SvangerskapspengerProsess
         data={fetchedData as FetchedData}
         fagsak={fagsak}
-        fagsakPerson={fagsakPerson}
         behandling={behandling as Behandling}
         alleKodeverk={{}}
         rettigheter={rettigheter}
@@ -448,6 +442,7 @@ describe('<SvangerskapspengerProsess>', () => {
         opneSokeside={sinon.spy()}
         setBehandling={sinon.spy()}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
       />,
     );
 

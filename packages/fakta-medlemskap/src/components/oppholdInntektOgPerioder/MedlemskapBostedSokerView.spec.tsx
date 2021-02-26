@@ -5,15 +5,15 @@ import EtikettBase from 'nav-frontend-etiketter';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
-import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { Personopplysninger } from '@fpsak-frontend/types';
+import { PersonopplysningMedlem } from '@fpsak-frontend/types';
 
-import { BostedSokerView } from './BostedSokerView';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-bosted-soker';
+import { MedlemskapBostedSokerView } from './MedlemskapBostedSokerView';
+import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 
-describe('<BostedsokerView>', () => {
+describe('<MedlemskapBostedSokerView>', () => {
   const soker = {
+    fnr: '',
     navn: 'Espen Utvikler',
     aktoerId: '1',
     personstatus: {
@@ -34,16 +34,8 @@ describe('<BostedsokerView>', () => {
       kode: '',
       kodeverk: '',
     },
-    statsborgerskap: {
-      kode: '',
-      kodeverk: '',
-    },
     diskresjonskode: {
       kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: sivilstandType.UGIFT,
       kodeverk: '',
     },
     region: {
@@ -59,16 +51,11 @@ describe('<BostedsokerView>', () => {
         kodeverk: '',
       },
     }],
-  };
+  } as PersonopplysningMedlem;
 
   const regionTypes = [{
     kode: 'NORDEN',
     navn: 'Norden',
-    kodeverk: '',
-  }];
-  const sivilstandTypes = [{
-    kode: sivilstandType.UGIFT,
-    navn: 'Ugift',
     kodeverk: '',
   }];
   const personstatusTypes = [{
@@ -82,11 +69,10 @@ describe('<BostedsokerView>', () => {
   }];
 
   it('vise navn', () => {
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={soker}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
@@ -95,11 +81,10 @@ describe('<BostedsokerView>', () => {
   });
 
   it('skal vise  adresse informasjon', () => {
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={soker}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
@@ -110,52 +95,47 @@ describe('<BostedsokerView>', () => {
   });
 
   it('skal vise etiketter', () => {
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={soker}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
 
     const tooltips = wrapper.find(Tooltip);
-    expect(tooltips).toHaveLength(3);
+    expect(tooltips).toHaveLength(2);
     const etikettfokus = wrapper.find(EtikettBase);
-    expect(etikettfokus).toHaveLength(3);
+    expect(etikettfokus).toHaveLength(2);
     expect(tooltips.at(0).prop('content')).toBe('Personstatus');
     expect(etikettfokus.at(0).childAt(0).text()).toBe('Bosatt');
-    expect(tooltips.at(1).prop('content')).toBe('Sivilstand');
-    expect(etikettfokus.at(1).childAt(0).text()).toBe('Ugift');
-    expect(tooltips.at(2).prop('content')).toBe('Region');
-    expect(etikettfokus.at(2).childAt(0).text()).toBe('Norden');
+    expect(tooltips.at(1).prop('content')).toBe('Region');
+    expect(etikettfokus.at(1).childAt(0).text()).toBe('Norden');
   });
 
   it('skal vise ukjent når personstatus ukjent', () => {
-    soker.avklartPersonstatus = null;
-    soker.personstatus = {
-      kode: '-',
-      kodeverk: '',
-    };
-
-    const wrapper = shallowWithIntl(<BostedSokerView
+    const wrapper = shallowWithIntl(<MedlemskapBostedSokerView
       intl={intlMock}
-      personopplysninger={soker as Personopplysninger}
+      personopplysninger={{
+        ...soker,
+        avklartPersonstatus: null,
+        personstatus: {
+          kode: '-',
+          kodeverk: '',
+        },
+      }}
       regionTypes={regionTypes}
-      sivilstandTypes={sivilstandTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
     />);
 
     const tooltips = wrapper.find(Tooltip);
-    expect(tooltips).toHaveLength(3);
+    expect(tooltips).toHaveLength(2);
     const etikettfokus = wrapper.find(EtikettBase);
-    expect(etikettfokus).toHaveLength(3);
+    expect(etikettfokus).toHaveLength(2);
     expect(tooltips.at(0).prop('content')).toBe('Personstatus');
     expect(etikettfokus.at(0).childAt(0).text()).toBe('Ukjent');
-    expect(tooltips.at(1).prop('content')).toBe('Sivilstand');
-    expect(etikettfokus.at(1).childAt(0).text()).toBe('Ugift');
-    expect(tooltips.at(2).prop('content')).toBe('Region');
-    expect(etikettfokus.at(2).childAt(0).text()).toBe('Norden');
+    expect(tooltips.at(1).prop('content')).toBe('Region');
+    expect(etikettfokus.at(1).childAt(0).text()).toBe('Norden');
   });
 });

@@ -47,7 +47,6 @@ export { default as InntektArbeidYtelse, IAYInntektsmelding, RelatertTilgrensedY
 export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';
-export { default as Personopplysninger, PersonopplysningAdresse } from './src/personopplysningerTsType';
 export {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
 } from './src/simuleringResultatTsType';
@@ -62,9 +61,9 @@ export { default as Vilkar } from './src/vilkarTsType';
 export { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export { default as Fagsak } from './src/fagsakTsType';
-export { default as FagsakPerson } from './src/fagsakPersonTsType';
+export { default as FagsakPersoner, FagsakPerson, FagsakHendelse } from './src/fagsakPersonerTsType';
 export {
-  default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse,
+  default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse, PersonopplysningMedlem,
 } from './src/medlemskapTsType';
 export { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export { default as AnkeVurdering } from './src/ankeVurderingTsType';
@@ -88,3 +87,7 @@ export { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from 
 export { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';
 export { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
 export { default as Aktor } from './src/aktorTsType';
+export type { Kjønnkode } from './src/Kjonnkode';
+export { KjønnkodeEnum } from './src/Kjonnkode';
+export { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
+export { default as Personadresse } from './src/personadresseTsType';

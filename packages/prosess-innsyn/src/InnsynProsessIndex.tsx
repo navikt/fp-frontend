@@ -17,7 +17,7 @@ const intl = createIntl({
 interface OwnProps {
   innsyn?: Innsyn;
   alleDokumenter: Dokument[];
-  saksnummer: number;
+  saksnummer: string;
 }
 
 const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({

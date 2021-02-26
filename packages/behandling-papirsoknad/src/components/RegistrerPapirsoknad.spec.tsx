@@ -10,7 +10,6 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { Behandling, Fagsak } from '@fpsak-frontend/types';
@@ -20,7 +19,7 @@ import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 
 const fagsak = {
-  saksnummer: 123456,
+  saksnummerString: '123456',
   sakstype: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
@@ -30,18 +29,6 @@ const fagsak = {
     kodeverk: 'FAGSAK_STATUS',
   },
 } as Fagsak;
-
-const fagsakPerson = {
-  alder: 30,
-  erDod: false,
-  erKvinne: true,
-  navn: 'Petra',
-  personnummer: '12343541',
-  personstatusType: {
-    kode: personstatusType.BOSATT,
-    kodeverk: 'PERSONSTATUS_TYPE',
-  },
-};
 
 const behandling = {
   id: 1,
@@ -74,7 +61,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
       aksjonspunkter={[]}
       kodeverk={{}}
@@ -94,7 +81,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter som readonly når veileder', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
       aksjonspunkter={[]}
       kodeverk={{}}
@@ -117,7 +104,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter som readonly når behandling er satt på vent', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer="12343541"
       behandling={{
         ...behandling,
         behandlingPaaVent: true,
@@ -140,7 +127,7 @@ describe('<RegistrerPapirsoknad>', () => {
   it('skal sette nye søknadsdata', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
       aksjonspunkter={[]}
       kodeverk={{}}
@@ -165,7 +152,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const lagreAksjonspunkt = sinon.spy();
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
-      fagsakPerson={fagsakPerson}
+      fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
       aksjonspunkter={[{
         definisjon: {
@@ -200,7 +187,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const { args } = calls[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual({
-      saksnummer: fagsak.saksnummer,
+      saksnummer: fagsak.saksnummerString,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{

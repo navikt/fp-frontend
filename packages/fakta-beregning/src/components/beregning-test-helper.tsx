@@ -46,7 +46,7 @@ export const lagStateMedAksjonspunkterOgBeregningsgrunnlag = (aksjonspunkter, be
       // @ts-ignore
       ...dataState.default,
       fagsak: {
-        selectedSaksnummer: 1,
+        selectedSaksnummer: '1',
       },
       forstegangOgRevurderingBehandling: {
         behandlingId: 1000051,

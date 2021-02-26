@@ -10,11 +10,11 @@ import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatFp,
   Fagsak,
-  Personopplysninger,
   Soknad,
   UttaksresultatPeriode,
   BeregningsresultatPeriode,
   Feriepengegrunnlag,
+  Personoversikt,
 } from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
@@ -44,7 +44,7 @@ const getStatusFromResultatstruktur = (resultatstruktur: BeregningsresultatFp, u
 type Data = {
   fagsak: Fagsak;
   beregningresultatForeldrepenger: BeregningsresultatFp;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   soknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttaksresultatPerioder: UttaksresultatPeriode;
@@ -70,10 +70,10 @@ class PanelDef extends ProsessStegPanelDef {
   )
 
   getData = ({
-    fagsak, beregningresultatForeldrepenger, personopplysninger, soknad, arbeidsgiverOpplysningerPerId,
+    fagsak, beregningresultatForeldrepenger, personoversikt, soknad, arbeidsgiverOpplysningerPerId,
   }: Data) => ({
     fagsak,
-    personopplysninger,
+    personoversikt,
     soknad,
     arbeidsgiverOpplysningerPerId,
     beregningresultat: beregningresultatForeldrepenger,

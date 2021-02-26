@@ -110,7 +110,7 @@ export const getBekreftAksjonspunktCallback = (
   }));
 
   const params = {
-    saksnummer: fagsak.saksnummer,
+    saksnummer: fagsak.saksnummerString,
     behandlingId: behandling.id,
     behandlingVersjon: behandling.versjon,
   };

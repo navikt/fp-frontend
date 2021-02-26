@@ -51,7 +51,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  risikoklassifisering: Risikoklassifisering;
+  risikoklassifisering?: Risikoklassifisering;
   submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
   faresignalVurderinger: KodeverkMedNavn[];
 }

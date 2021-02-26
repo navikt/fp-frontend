@@ -1,6 +1,6 @@
 import OpplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
-import { PersonopplysningAdresse } from '@fpsak-frontend/types';
+import { Personadresse } from '@fpsak-frontend/types';
 
 // TODO (TOR) Flytt ut av util-folder
 
@@ -21,7 +21,7 @@ const constructAddress = (
 
 export type Adresser = {[key in OpplysningAdresseType]?: string}
 
-const getAddresses = (addresses: PersonopplysningAdresse[] = []): Adresser => addresses.reduce<Adresser>((acc, address) => {
+const getAddresses = (addresses: Personadresse[] = []): Adresser => addresses.reduce<Adresser>((acc, address) => {
   if (!address.adresseType || address.adresseType.kode === OpplysningAdresseType.UKJENT) {
     return {
       ...acc,

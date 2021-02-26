@@ -3,7 +3,7 @@ import React from 'react';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FamilieHendelseSamling, Kodeverk, Personopplysninger, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  FamilieHendelseSamling, Kodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
@@ -107,7 +107,7 @@ describe('<UttakFaktaForm>', () => {
         alleKodeverk={{}}
         kanOverstyre={false}
         faktaArbeidsforhold={[]}
-        personopplysninger={{} as Personopplysninger}
+        personoversikt={{} as Personoversikt}
         behandlingStatus={{} as Kodeverk}
         familiehendelse={{} as FamilieHendelseSamling}
         vilkarForSykdomExists

@@ -17,7 +17,7 @@ class OmsorgFaktaPanelDef extends FaktaPanelDef {
 
   getKomponent = (props) => <OmsorgFaktaIndex {...props} />
 
-  getData = ({ ytelsefordeling, personopplysninger, soknad }) => ({ ytelsefordeling, personopplysninger, soknad })
+  getData = ({ ytelsefordeling, personoversikt, soknad }) => ({ ytelsefordeling, personoversikt, soknad })
 }
 
 export default OmsorgFaktaPanelDef;

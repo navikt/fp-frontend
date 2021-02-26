@@ -7,21 +7,21 @@ import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, getAddresses, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { MerkePanel } from '@fpsak-frontend/fakta-felles';
-import { PersonopplysningAdresse, Personopplysninger } from '@fpsak-frontend/types';
+import { Personadresse, PersonopplysningerBasis } from '@fpsak-frontend/types';
 
 import styles from './bostedBarnView.less';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 const getAgeFromDate = (birthDate?: string): number => moment().diff(moment(birthDate), 'years');
 
-const getAdresse = (adresser: PersonopplysningAdresse[]): string => {
+const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);
   const adresse = adresseListe[opplysningAdresseType.POSTADRESSE] || adresseListe[opplysningAdresseType.BOSTEDSADRESSE];
   return adresse || '-';
 };
 
 interface OwnProps {
-  barn: Personopplysninger;
+  barn: PersonopplysningerBasis;
   barnNr: number;
   className?: string;
 }
@@ -34,10 +34,10 @@ const BostedBarnView: FunctionComponent<OwnProps> = ({
   <div className={className}>
     <Undertekst>
       <FormattedMessage id="BostedBarnView.Barn" values={{ barnNr }} />
-      {barn.dodsdato
-              && <div className={styles.inline}><MerkePanel erDod /></div>}
+      {barn.dødsdato && (
+        <div className={styles.inline}><MerkePanel erDod /></div>
+      )}
     </Undertekst>
-
     <Element>
       {barn.navn ? barn.navn : '-' }
     </Element>
@@ -45,18 +45,17 @@ const BostedBarnView: FunctionComponent<OwnProps> = ({
       <FormattedMessage
         id="BostedBarnView.Age"
         values={{
-          fodselsdato: formatDate(barn.fodselsdato) ? formatDate(barn.fodselsdato) : '-',
-          age: getAgeFromDate(barn.fodselsdato),
+          fodselsdato: formatDate(barn.fødselsdato) ? formatDate(barn.fødselsdato) : '-',
+          age: getAgeFromDate(barn.fødselsdato),
         }}
       />
     </Normaltekst>
-    {barn.dodsdato
-    && (
-    <div>
-      <FormattedMessage id="BostedBarnView.DodsDato" />
-      <Element><DateLabel dateString={barn.dodsdato} /></Element>
-      <VerticalSpacer eightPx />
-    </div>
+    {barn.dødsdato && (
+      <div>
+        <FormattedMessage id="BostedBarnView.DodsDato" />
+        <Element><DateLabel dateString={barn.dødsdato} /></Element>
+        <VerticalSpacer eightPx />
+      </div>
     )}
     <Undertekst>
       <FormattedMessage id="BostedBarnView.Adresse" />

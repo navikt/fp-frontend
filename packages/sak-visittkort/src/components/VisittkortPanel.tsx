@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  Kodeverk, Personopplysninger, FamilieHendelseSamling, Fagsak, FagsakPerson,
+  Kodeverk, Fagsak, KjønnkodeEnum, FagsakPersoner,
 } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
@@ -25,48 +25,36 @@ const utledKjonn = (kjonn: Kodeverk): Gender => {
 
 interface OwnProps {
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
-  personopplysninger?: Personopplysninger;
-  familieHendelse?: FamilieHendelseSamling;
+  fagsakPersoner: FagsakPersoner;
   lenkeTilAnnenPart?: string;
-  harTilbakekrevingVerge?: boolean;
+  harVerge: boolean;
+  erTilbakekreving: boolean;
 }
 
 const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   fagsak,
-  fagsakPerson,
-  personopplysninger,
-  familieHendelse,
+  fagsakPersoner,
   lenkeTilAnnenPart,
-  harTilbakekrevingVerge,
+  harVerge,
+  erTilbakekreving,
 }) => {
+  const fagsakPerson = fagsakPersoner.bruker;
   const erMor = fagsak.relasjonsRolleType.kode === relasjonsRolleType.MOR;
-  if (!personopplysninger && !harTilbakekrevingVerge) {
+  if (erTilbakekreving && harVerge) {
     return (
       <div className={styles.container}>
         <PersonCard
           name={fagsakPerson.navn}
           fodselsnummer={fagsakPerson.personnummer}
-          gender={fagsakPerson.erKvinne ? Gender.female : Gender.male}
+          gender={fagsakPerson.kjønn.kode === KjønnkodeEnum.KVINNE ? Gender.female : Gender.male}
+          renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={fagsakPerson} harVerge={harVerge} />}
         />
       </div>
     );
   }
-  if (harTilbakekrevingVerge) {
-    return (
-      <div className={styles.container}>
-        <PersonCard
-          name={fagsakPerson.navn}
-          fodselsnummer={fagsakPerson.personnummer}
-          gender={fagsakPerson.erKvinne ? Gender.female : Gender.male}
-          renderLabelContent={(): JSX.Element => <VisittkortLabels personopplysninger={personopplysninger} harTilbakekrevingVerge={harTilbakekrevingVerge} />}
-        />
-      </div>
-    );
-  }
-  const soker = erMor || !personopplysninger.annenPart ? personopplysninger : personopplysninger.annenPart;
-  const annenPart = !erMor && personopplysninger.annenPart ? personopplysninger : personopplysninger.annenPart;
+  const soker = erMor || !fagsakPersoner.annenPart ? fagsakPerson : fagsakPersoner.annenPart;
+  const annenPart = !erMor && fagsakPersoner.annenPart ? fagsakPerson : fagsakPersoner.annenPart;
 
   return (
     <div className={styles.container}>
@@ -75,32 +63,32 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
           <FlexColumn>
             <PersonCard
               name={soker.navn}
-              fodselsnummer={soker.fnr}
-              gender={utledKjonn(soker.navBrukerKjonn)}
+              fodselsnummer={soker.personnummer}
+              gender={utledKjonn(soker.kjønn)}
               url={lenkeTilAnnenPart}
-              renderLabelContent={(): JSX.Element => <VisittkortLabels personopplysninger={soker} />}
+              renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={soker} harVerge={harVerge} />}
               isActive={erMor}
             />
           </FlexColumn>
-          {annenPart && annenPart.aktoerId && (
+          {annenPart && annenPart.aktørId && (
             <FlexColumn>
               <PersonCard
                 name={annenPart.navn}
-                fodselsnummer={annenPart.fnr}
-                gender={utledKjonn(annenPart.navBrukerKjonn)}
+                fodselsnummer={annenPart.personnummer}
+                gender={utledKjonn(annenPart.kjønn)}
                 url={lenkeTilAnnenPart}
                 isActive={!erMor}
               />
             </FlexColumn>
           )}
-          {annenPart && !annenPart.aktoerId && (
+          {annenPart && !annenPart.aktørId && (
             <FlexColumn>
               <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />
             </FlexColumn>
           )}
-          {familieHendelse && (
+          {fagsakPersoner.familiehendelse && (
             <FlexColumn className={styles.pushRight}>
-              <VisittkortBarnInfoPanel familieHendelse={familieHendelse} />
+              <VisittkortBarnInfoPanel familiehendelse={fagsakPersoner.familiehendelse} />
             </FlexColumn>
           )}
         </FlexRow>

@@ -4,14 +4,14 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { FaktaPanelDef, Rettigheter } from '@fpsak-frontend/behandling-felles';
-import { ArbeidsgiverOpplysningerPerId, Personopplysninger, Ytelsefordeling } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Personoversikt, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 type Data = {
   rettigheter: Rettigheter;
   ytelsefordeling: Ytelsefordeling;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -39,17 +39,14 @@ class UttakFaktaPanelDef extends FaktaPanelDef {
 
   getKomponent = (props) => <UttakFaktaIndex {...props} />
 
-  getOverstyrVisningAvKomponent = ({ personopplysninger, ytelsefordeling }) => ytelsefordeling
-    && ytelsefordeling.endringsdato !== undefined
-    && personopplysninger !== null
-    && personopplysninger !== undefined
+  getOverstyrVisningAvKomponent = ({ ytelsefordeling }) => ytelsefordeling && ytelsefordeling.endringsdato !== undefined
 
   getData = ({
-    rettigheter, ytelsefordeling, personopplysninger, arbeidsgiverOpplysningerPerId,
+    rettigheter, ytelsefordeling, personoversikt, arbeidsgiverOpplysningerPerId,
   }: Data) => ({
     kanOverstyre: rettigheter.kanOverstyreAccess.isEnabled,
     ytelsefordeling,
-    personopplysninger,
+    personoversikt,
     arbeidsgiverOpplysningerPerId,
   })
 }

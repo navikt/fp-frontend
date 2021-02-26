@@ -9,7 +9,7 @@ import { omit } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 import FrilansPapirsoknadIndex, { FormValues as FrilansFormValues } from '@fpsak-frontend/papirsoknad-panel-frilans';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
@@ -41,7 +41,7 @@ interface PureOwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  fagsakPerson: FagsakPerson;
+  fagsakPersonnummer: string;
 }
 
 type FormValues = {
@@ -187,7 +187,7 @@ const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMe
 }));
 
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
-  const sokerPersonnummer = ownProps.fagsakPerson.personnummer;
+  const sokerPersonnummer = ownProps.fagsakPersonnummer;
   const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
   const validate = getValidation(ownProps.soknadData, andreYtelserObject.andreYtelser, sokerPersonnummer);
   return (state: any): MappedOwnProps => {

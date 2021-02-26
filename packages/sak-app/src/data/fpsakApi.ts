@@ -19,13 +19,11 @@ export enum FpsakApiKeys {
   FEATURE_TOGGLE = 'FEATURE_TOGGLE',
   SEARCH_FAGSAK = 'SEARCH_FAGSAK',
   FETCH_FAGSAK = 'FETCH_FAGSAK',
-  SAK_BRUKER = 'SAK_BRUKER',
+  SAK_PERSONER = 'SAK_PERSONER',
   BEHANDLINGER_FPSAK = 'BEHANDLINGER_FPSAK',
   BEHANDLINGER_FPTILBAKE = 'BEHANDLINGER_FPTILBAKE',
-  BEHANDLING_PERSONOPPLYSNINGER = 'BEHANDLING_PERSONOPPLYSNINGER',
   NEW_BEHANDLING_FPSAK = 'NEW_BEHANDLING_FPSAK',
   NEW_BEHANDLING_FPTILBAKE = 'NEW_BEHANDLING_FPTILBAKE',
-  BEHANDLING_FAMILIE_HENDELSE = 'BEHANDLING_FAMILIE_HENDELSE',
   ANNEN_PART_BEHANDLING = 'ANNEN_PART_BEHANDLING',
   HISTORY_FPSAK = 'HISTORY_FPSAK',
   HISTORY_FPTILBAKE = 'HISTORY_FPTILBAKE',
@@ -66,7 +64,7 @@ const endpoints = new RestApiConfigBuilder()
 
   // Fagsak
   .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
-  .withRel('sak-bruker', FpsakApiKeys.SAK_BRUKER)
+  .withRel('sak-personer', FpsakApiKeys.SAK_PERSONER)
   .withRel('sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER)
   .withRel('tilbake-sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE)
   .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
@@ -79,8 +77,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
 
   // Behandling
-  .withRel('soeker-personopplysninger', FpsakApiKeys.BEHANDLING_PERSONOPPLYSNINGER)
-  .withRel('familiehendelse-v2', FpsakApiKeys.BEHANDLING_FAMILIE_HENDELSE)
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)
   .withRel('risikoklassifisering-aksjonspunkt', FpsakApiKeys.RISIKO_AKSJONSPUNKT)
   .withRel('klage-vurdering', FpsakApiKeys.TOTRINNS_KLAGE_VURDERING)

@@ -1,18 +1,23 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
+import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { DatepickerField, InputField } from '@fpsak-frontend/form';
+import { DatepickerField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 
+const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
+  const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
+  return familiehendelse.antallBarnTilBeregning ? familiehendelse.antallBarnTilBeregning : antallBarn;
+};
+
 export type FormValues = {
   omsorgsovertakelseDato?: string;
   foreldreansvarDato?: string;
-  antallBarn?: number;
 }
 
 interface OwnProps {
@@ -20,6 +25,8 @@ interface OwnProps {
   erAksjonspunktForeldreansvar: boolean;
   editedStatus: FieldEditedInfo;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  soknad: Soknad;
+  familiehendelse: FamilieHendelse;
 }
 
 interface StaticFunctions {
@@ -34,8 +41,12 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
   erAksjonspunktForeldreansvar,
   editedStatus,
   alleMerknaderFraBeslutter,
+  soknad,
+  familiehendelse,
 }) => {
   const intl = useIntl();
+  const antallBarn = getAntallBarn(soknad, familiehendelse);
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({
@@ -65,32 +76,17 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
           </Column>
           )}
         <Column xs="4">
-          <InputField
-            name="antallBarn"
-            label={{ id: 'OmsorgOgForeldreansvarFaktaForm.NrOfChildren' }}
-            bredde="XS"
-            parse={(value) => {
-              const parsedValue = parseInt(value, 10);
-              return Number.isNaN(parsedValue) ? value : parsedValue;
-            }}
-            readOnly={readOnly}
-            isEdited={editedStatus.antallBarnOmsorgOgForeldreansvar}
-          />
+          <Undertekst><FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" /></Undertekst>
+          <Normaltekst>{antallBarn}</Normaltekst>
         </Column>
       </Row>
     </FaktaGruppe>
   );
 };
 
-const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
-  const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
-  return familiehendelse.antallBarnTilBeregning ? familiehendelse.antallBarnTilBeregning : antallBarn;
-};
-
 OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse && familiehendelse.omsorgsovertakelseDato ? familiehendelse.omsorgsovertakelseDato : soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
-  antallBarn: getAntallBarn(soknad, familiehendelse),
 });
 
 export default OmsorgsovertakelseFaktaPanel;

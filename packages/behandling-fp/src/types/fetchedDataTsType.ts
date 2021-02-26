@@ -2,7 +2,6 @@ import {
   BeregningsresultatFp,
   Aksjonspunkt,
   Vilkar,
-  Personopplysninger,
   Ytelsefordeling,
   Soknad,
   InntektArbeidYtelse,
@@ -17,7 +16,6 @@ import {
 interface FetchedData {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
-  personopplysninger: Personopplysninger;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;

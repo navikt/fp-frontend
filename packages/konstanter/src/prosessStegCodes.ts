@@ -12,7 +12,6 @@ const prosessStegCodes = {
   FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON: 'formkrav_klage_nav_familie_og_pensjon',
   FORTSATTMEDLEMSKAP: 'fortsattmedlemskap',
   OPPLYSNINGSPLIKT: 'opplysningsplikt',
-  SAKSOPPLYSNINGER: 'saksopplysninger',
   SOEKNADSFRIST: 'soeknadsfrist',
   TILBAKEKREVING: 'tilbakekreving',
   FORELDELSE: 'foreldelse',

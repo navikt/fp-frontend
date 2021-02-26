@@ -42,7 +42,7 @@ import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import {
   ArbeidsgiverOpplysningerPerId,
-  FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personopplysninger,
+  FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from './utils/uttakVisningsnavnHelper';
@@ -167,7 +167,7 @@ interface PureOwnProps {
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   behandlingId: number;
   behandlingVersjon: number;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   newPeriodeResetCallback: (...args: any[]) => any;
   nyPeriodeDisabledDaysFom: string;
@@ -502,7 +502,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
     faktaArbeidsforhold,
     behandlingId,
     behandlingVersjon,
-    personopplysninger,
+    personoversikt,
     alleKodeverk,
   } = ownProps;
 
@@ -525,7 +525,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
     utsettelseÅrsaker,
     overføringÅrsaker,
     andeler: faktaArbeidsforhold || EMPTY_ARRAY,
-    sokerKjonn: personopplysninger.navBrukerKjonn.kode,
+    sokerKjonn: personoversikt.bruker.kjønn.kode,
     initialValues: {
       fom: null,
       tom: null,

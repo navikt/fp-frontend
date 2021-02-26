@@ -38,7 +38,7 @@ class PanelDef extends ProsessStegPanelDef {
     alleDokumenter,
     previewCallback,
     aksjonspunkter,
-    saksnummer: fagsak.saksnummer,
+    saksnummer: fagsak.saksnummerString,
   })
 }
 

@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/behandling-felles';
 import ac from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Fagsak, KodeverkMedNavn, Behandling, FagsakPerson, ArbeidsgiverOpplysningerPerId,
+  Fagsak, KodeverkMedNavn, Behandling, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -20,7 +20,6 @@ const overstyringApCodes = [ac.OVERSTYR_AVKLAR_STARTDATO, ac.OVERSTYR_AVKLAR_STA
 interface OwnProps {
   data: FetchedData;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   rettigheter: Rettigheter;
@@ -31,13 +30,13 @@ interface OwnProps {
   setApentFaktaPanel: (faktaPanelInfo: { urlCode: string; textCode: string}) => void;
   setBehandling: (behandling: Behandling) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  personoversikt: Personoversikt;
 }
 
 const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   data,
   fagsak,
-  fagsakPerson,
   behandling,
   rettigheter,
   alleKodeverk,
@@ -48,9 +47,10 @@ const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = 
   setApentFaktaPanel,
   setBehandling,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
 }) => {
   const {
-    aksjonspunkter, soknad, vilkar, personopplysninger, inntektArbeidYtelse,
+    aksjonspunkter, soknad, vilkar, inntektArbeidYtelse,
   } = data;
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiEsHooks.useRestApiRunner<Behandling>(EsBehandlingApiKeys.SAVE_AKSJONSPUNKT);
@@ -61,7 +61,7 @@ const EngangsstonadFakta: FunctionComponent<OwnProps & WrappedComponentProps> = 
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   const dataTilUtledingAvEsPaneler = {
-    fagsak, fagsakPerson, behandling, soknad, vilkar, personopplysninger, inntektArbeidYtelse, hasFetchError, arbeidsgiverOpplysningerPerId,
+    fagsak, behandling, soknad, vilkar, personoversikt, inntektArbeidYtelse, hasFetchError, arbeidsgiverOpplysningerPerId,
   };
 
   const [faktaPaneler, valgtPanel, sidemenyPaneler] = faktaHooks

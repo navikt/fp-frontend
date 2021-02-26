@@ -8,9 +8,10 @@ import { Column, Row } from 'nav-frontend-grid';
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, KodeverkMedNavn, Kjønnkode,
+} from '@fpsak-frontend/types';
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
-import Kjønnkode from '@fpsak-frontend/types/src/Kjonnkode';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
 

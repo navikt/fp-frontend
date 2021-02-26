@@ -9,7 +9,7 @@ describe('<DocumentListVedtakInnsyn>', () => {
   it('skal vise tekst ved tom dokumentliste', () => {
     const wrapper = shallow(<DocumentListVedtakInnsyn
       documents={[]}
-      saksNr={123}
+      saksNr="123"
     />);
     expect(wrapper.find('FormattedMessage').prop('id')).toBe('DocumentListVedtakInnsyn.NoDocuments');
   });
@@ -24,7 +24,7 @@ describe('<DocumentListVedtakInnsyn>', () => {
       fikkInnsyn: false,
     }];
     const wrapper = shallow(<DocumentListVedtakInnsyn
-      saksNr={123}
+      saksNr="123"
       documents={documents}
     />);
     expect(wrapper.find('FormattedMessage').prop('id')).toBe('DocumentListVedtakInnsyn.InnsynsDok');

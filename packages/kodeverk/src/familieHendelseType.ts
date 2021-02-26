@@ -1,7 +1,8 @@
 const familieHendelseType = {
   ADOPSJON: 'ADPSJN',
-  FODSEL: 'FODSL',
   OMSORG: 'OMSRGO',
+  FODSEL: 'FODSL',
+  TERMIN: 'TERM',
 };
 
 export default familieHendelseType;

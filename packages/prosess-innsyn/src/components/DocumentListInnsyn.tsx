@@ -19,7 +19,7 @@ import styles from './documentListInnsyn.less';
 
 // TODO (TOR) Flytt url ut av komponent
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document: Dokument, saksNr: number): string => (`${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
+const getLink = (document: Dokument, saksNr: string): string => (`${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
   .journalpostId}&dokumentId=${document.dokumentId}`);
 
 const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement => {
@@ -56,7 +56,7 @@ const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement =>
 const noLabelHack = (): ReactElement => <span className={styles.hidden}>-</span>;
 
 interface OwnProps {
-  saksNr: number;
+  saksNr: string;
   documents: Dokument[];
   readOnly?: boolean;
 }

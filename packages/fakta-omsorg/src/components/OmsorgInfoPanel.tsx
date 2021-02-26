@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  Aksjonspunkt, KodeverkMedNavn, Personopplysninger, Soknad, Ytelsefordeling,
+  Aksjonspunkt, KodeverkMedNavn, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
@@ -43,7 +43,7 @@ interface PureOwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
   behandlingVersjon: number;
-  personopplysninger: Personopplysninger;
+  personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
   submitCallback: (...args: any[]) => any;
@@ -56,7 +56,7 @@ interface MappedOwnProps {
 }
 
 export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
-  personopplysninger,
+  personoversikt,
   readOnly,
   hasOpenAksjonspunkter,
   submittable,
@@ -76,7 +76,7 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
         {getHelpTexts(aksjonspunkter)}
       </AksjonspunktHelpTextTemp>
     )}
-    <BostedFaktaView personopplysning={personopplysninger} ektefellePersonopplysning={personopplysninger.ektefelle} alleKodeverk={alleKodeverk} />
+    <BostedFaktaView personoversikt={personoversikt} alleKodeverk={alleKodeverk} />
     <form onSubmit={formProps.handleSubmit}>
       <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
       <OmsorgFaktaForm
