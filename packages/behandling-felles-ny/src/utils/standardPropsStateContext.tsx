@@ -19,16 +19,32 @@ type InputValues = {
 
 type OwnProps = {
   children: ReactElement;
-  initialState: InputValues;
-}
+} & InputValues;
 
-export const StandardPropsStateContext = createContext<InputValues>({});
+export const StandardPropsStateContext = createContext<InputValues>({} as InputValues);
 
 const StandardPropsProvider: FunctionComponent<OwnProps> = ({
   children,
-  initialState,
+  behandling,
+  fagsak,
+  rettigheter,
+  hasFetchError,
+  lagreAksjonspunkter,
+  lagreOverstyrteAksjonspunkter,
+  oppdaterProsessStegOgFaktaPanelIUrl,
+  alleKodeverk,
 }): JSX.Element => (
-  <StandardPropsStateContext.Provider value={initialState}>
+  <StandardPropsStateContext.Provider value={{
+    behandling,
+    fagsak,
+    rettigheter,
+    hasFetchError,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+    alleKodeverk,
+  }}
+  >
     {children}
   </StandardPropsStateContext.Provider>
 );

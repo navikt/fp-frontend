@@ -11,7 +11,6 @@ export enum FpBehandlingApiKeys {
   STONADSKONTOER_GITT_UTTAKSPERIODER = 'STONADSKONTOER_GITT_UTTAKSPERIODER',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
   VILKAR = 'VILKAR',
-  PERSONOPPLYSNINGER = 'PERSONOPPLYSNINGER',
   SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
   TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
   BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
@@ -42,6 +41,7 @@ export enum FpBehandlingApiKeys {
   UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
   ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
   UTTAK_KONTROLLER_AKTIVITETSKRAV = 'UTTAK_KONTROLLER_AKTIVITETSKRAV',
+  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
 }
 
 const endpoints = new RestApiConfigBuilder()
@@ -50,7 +50,6 @@ const endpoints = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('aksjonspunkter', FpBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', FpBehandlingApiKeys.VILKAR)
-  .withRel('soeker-personopplysninger', FpBehandlingApiKeys.PERSONOPPLYSNINGER)
   .withRel('simuleringResultat', FpBehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', FpBehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('beregningsresultat-foreldrepenger', FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER)
@@ -74,6 +73,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('utland-dok-status', FpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('uttak-kontroller-aktivitetskrav', FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV)
+  .withRel('behandling-personoversikt', FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
 
   // operasjoner
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)

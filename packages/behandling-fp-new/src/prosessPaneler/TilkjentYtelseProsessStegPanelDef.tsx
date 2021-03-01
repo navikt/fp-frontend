@@ -9,7 +9,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode,
-  Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personopplysninger, Soknad, UttaksresultatPeriode,
+  Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
 import {
   useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
@@ -56,13 +56,11 @@ type EndepunktInitData = {
 
 const endepunkterPanelData = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
-  FpBehandlingApiKeys.PERSONOPPLYSNINGER,
   FpBehandlingApiKeys.SOKNAD,
   FpBehandlingApiKeys.FERIEPENGEGRUNNLAG,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
-  personopplysninger: Personopplysninger;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
 }
@@ -73,6 +71,7 @@ interface OwnProps {
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
+  personoversikt: Personoversikt;
 }
 
 const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
@@ -81,6 +80,7 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   registrerProsessPanel,
   arbeidsgiverOpplysningerPerId,
   fagsak,
+  personoversikt,
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
@@ -113,6 +113,7 @@ const TilkjentYtelseProsessStegPanelDef: FunctionComponent<OwnProps> = ({
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
         beregningresultat={initData?.beregningresultatForeldrepenger}
         {...panelData}
         {...standardPanelProps}

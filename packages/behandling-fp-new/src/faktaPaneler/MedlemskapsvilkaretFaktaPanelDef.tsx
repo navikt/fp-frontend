@@ -7,7 +7,7 @@ import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter,
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FagsakPerson, InntektArbeidYtelse, Medlemskap, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
   useStandardFaktaProps, harBehandlingReadOnlyStatus, FaktaPanelMenyData, faktaPanelHooks, FaktaPanelWrapper,
@@ -45,7 +45,6 @@ interface OwnProps {
   behandlingVersjon?: number;
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  fagsakPerson: FagsakPerson;
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
 }
@@ -57,7 +56,6 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
-  fagsakPerson,
   rettigheter,
   hasFetchError,
   registrerFaktaPanel,
@@ -86,7 +84,6 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
       <MedlemskapFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         isForeldrepengerFagsak
-        fagsakPerson={fagsakPerson}
         readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
           || hasFetchError
           || standardPanelProps.behandling.behandlingPaaVent

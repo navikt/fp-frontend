@@ -7,7 +7,8 @@ import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
-  Personopplysninger, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  Personoversikt,
+  UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import {
   FaktaPanelMenyData, faktaPanelHooks, useStandardFaktaProps, FaktaPanelWrapper,
@@ -33,12 +34,10 @@ const overstyringApCodes = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjon
 
 const endepunkterInit = [
   FpBehandlingApiKeys.AKSJONSPUNKTER,
-  FpBehandlingApiKeys.PERSONOPPLYSNINGER,
   FpBehandlingApiKeys.YTELSEFORDELING,
 ];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
-  personopplysninger: Personopplysninger;
   ytelsefordeling: Ytelsefordeling;
 }
 
@@ -59,6 +58,7 @@ interface OwnProps {
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
+  personoversikt: Personoversikt;
 }
 
 /**
@@ -70,12 +70,13 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   registrerFaktaPanel,
+  personoversikt,
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
 
-  const skalVises = !!initData?.ytelsefordeling?.endringsdato && !!initData?.personopplysninger;
+  const skalVises = !!initData?.ytelsefordeling?.endringsdato;
   const erAktiv = valgtFaktaSteg === faktaPanelCodes.UTTAK || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
   const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
@@ -94,6 +95,7 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
         {...initData}
         {...panelData}
         {...standardPanelProps}

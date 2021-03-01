@@ -10,6 +10,8 @@
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
 
+  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
+  "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
   "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
   "BehandlingHenlagtPanel.Header": "Henlagt",
   "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",

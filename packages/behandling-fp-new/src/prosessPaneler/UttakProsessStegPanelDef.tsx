@@ -11,7 +11,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter,
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, FamilieHendelseSamling,
-  Personopplysninger, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
+  Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import {
   useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
@@ -75,7 +75,6 @@ const endepunkterPanelData = [
   FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE,
   FpBehandlingApiKeys.UTTAK_STONADSKONTOER,
   FpBehandlingApiKeys.SOKNAD,
-  FpBehandlingApiKeys.PERSONOPPLYSNINGER,
   FpBehandlingApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
@@ -83,7 +82,6 @@ type EndepunktPanelData = {
   uttakPeriodeGrense: UttakPeriodeGrense;
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
-  personopplysninger: Personopplysninger;
   ytelsefordeling: Ytelsefordeling;
 }
 
@@ -94,6 +92,7 @@ interface OwnProps {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
+  personoversikt: Personoversikt;
 }
 
 const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
@@ -102,6 +101,7 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   registrerProsessPanel,
   rettigheter,
   arbeidsgiverOpplysningerPerId,
+  personoversikt,
   fagsak,
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
@@ -139,6 +139,7 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
         fagsak={fagsak}
         employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        personoversikt={personoversikt}
         tempUpdateStonadskontoer={tempUpdateStonadskontoer}
         uttaksresultatPerioder={initData?.uttaksresultatPerioder}
         {...panelData}

@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect, useState,
+  FunctionComponent,
 } from 'react';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -10,7 +10,9 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
-import { useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
+} from '@fpsak-frontend/behandling-felles-ny';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
@@ -34,43 +36,34 @@ type EndepunktInitData = {
 
 interface OwnProps {
   behandlingVersjon?: number;
-  setPanelInfo: (data: {
-    id: string;
-    aksjonspunktTekst: string;
-    harApentAksjonspunkt: boolean;
-    status: string;
-  }) => void;
-  erPanelValgt: boolean;
   rettigheter: AksessRettigheter;
+  setPanelInfo: (data: InngangsvilkarPanelData) => void;
+  erPanelValgt: boolean;
+  harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
 const FodselPanelDef: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
+  rettigheter,
   setPanelInfo,
   erPanelValgt,
-  rettigheter,
+  harInngangsvilkarApentAksjonspunkt,
 }) => {
-  const [erOverstyrt, setOverstyrt] = useState(false);
-  const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
-
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
   const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
 
   const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
-  const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  useEffect(() => {
-    if (erDataFerdighentet && skalVises) {
-      setPanelInfo({
-        id: 'FODSEL',
-        aksjonspunktTekst: standardPanelProps.isAksjonspunktOpen
-          ? getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' }) : undefined,
-        harApentAksjonspunkt: standardPanelProps.isAksjonspunktOpen,
-        status: standardPanelProps.status,
-      });
-    }
-  }, [standardPanelProps.isAksjonspunktOpen, skalVises, erDataFerdighentet]);
+  const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
+    setPanelInfo,
+    'FODSEL',
+    getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' }),
+    erDataFerdighentet && skalVises,
+    standardPanelProps.isAksjonspunktOpen,
+    standardPanelProps.status,
+  );
 
   if (!erPanelValgt || !skalVises) {
     return null;
@@ -79,9 +72,6 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
   if (!erDataFerdighentet) {
     return <LoadingPanel />;
   }
-
-  // FIXME Korleis sette denne?
-  const harMinstEttPanelApentAksjonspunkt = false;
 
   if (standardPanelProps.aksjonspunkter.length === 0) {
     return (
@@ -97,7 +87,7 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
         erMedlemskapsPanel={false}
         toggleOverstyring={toggleOverstyring}
         erOverstyrt={erOverstyrt}
-        overrideReadOnly={standardPanelProps.isReadOnly || (harMinstEttPanelApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}
+        overrideReadOnly={standardPanelProps.isReadOnly || (harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}
         kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       />
     );
