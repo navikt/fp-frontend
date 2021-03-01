@@ -139,7 +139,6 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
         <>
           <SammenlignsgrunnlagAOrdningen
             sammenligningsGrunnlagInntekter={sammenligningsGrunnlagInntekter}
-            relevanteStatuser={relevanteStatuser}
             skjeringstidspunktDato={skjeringstidspunktDato}
           />
         </>

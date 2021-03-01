@@ -16,6 +16,7 @@ import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { Vilkar } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -207,25 +208,25 @@ const inntektsgrunnlag = {
 };
 
 const lagATInntektsgrunnlag = (inntekt) => ({
-  inntektType: {
-    kode: 'ARBEID',
-    kodeverk: 'INNTEKTTYPE',
+  inntektAktivitetType: {
+    kode: inntektAktivitetType.ARBEID,
+    kodeverk: 'INNTEKT_AKTIVITET_TYPE',
   },
   beløp: inntekt,
 });
 
 const lagYtelseInntektsgrunnlag = (inntekt) => ({
-  inntektType: {
-    kode: 'YTELSE',
-    kodeverk: 'INNTEKTTYPE',
+  inntektAktivitetType: {
+    kode: inntektAktivitetType.YTELSE,
+    kodeverk: 'INNTEKT_AKTIVITET_TYPE',
   },
   beløp: inntekt,
 });
 
 const lagFLInntektsgrunnlag = (inntekt) => ({
-  inntektType: {
-    kode: 'FRILANS',
-    kodeverk: 'INNTEKTTYPE',
+  inntektAktivitetType: {
+    kode: inntektAktivitetType.FRILANS,
+    kodeverk: 'INNTEKT_AKTIVITET_TYPE',
   },
   beløp: inntekt,
 });

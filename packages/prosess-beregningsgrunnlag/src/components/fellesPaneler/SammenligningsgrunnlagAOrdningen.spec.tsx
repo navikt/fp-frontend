@@ -3,15 +3,9 @@ import React from 'react';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
+import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import { SammenligningsgrunnlagAOrdningenImpl } from './SammenligningsgrunnlagAOrdningen';
-
-const relevanteStatuser = {
-  isArbeidstaker: true,
-  isFrilanser: true,
-  isSelvstendigNaeringsdrivende: false,
-  isKombinasjonsstatus: true,
-};
 
 const inntektsgrunnlagAT = {
   måneder: [
@@ -20,8 +14,8 @@ const inntektsgrunnlagAT = {
       tom: '2020-01-31',
       inntekter: [
         {
-          inntektType: {
-            kode: 'ARBEID',
+          inntektAktivitetType: {
+            kode: inntektAktivitetType.ARBEID,
             kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
@@ -33,8 +27,8 @@ const inntektsgrunnlagAT = {
       tom: '2020-02-28',
       inntekter: [
         {
-          inntektType: {
-            kode: 'ARBEID',
+          inntektAktivitetType: {
+            kode: inntektAktivitetType.ARBEID,
             kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
@@ -51,8 +45,8 @@ const inntektsgrunnlagATFL = {
       tom: '2020-01-31',
       inntekter: [
         {
-          inntektType: {
-            kode: 'ARBEID',
+          inntektAktivitetType: {
+            kode: inntektAktivitetType.ARBEID,
             kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
@@ -64,8 +58,8 @@ const inntektsgrunnlagATFL = {
       tom: '2020-02-28',
       inntekter: [
         {
-          inntektType: {
-            kode: 'FRILANS',
+          inntektAktivitetType: {
+            kode: inntektAktivitetType.FRILANS,
             kodeverk: 'INNTEKTTYPE',
           },
           beløp: 5000,
@@ -88,7 +82,6 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
     expect(rows).toHaveLength(0);
   });
   it('Skal se at panelet ikke rendrer ved SammenligningsgrunnlagInntekt og SN', () => {
-    relevanteStatuser.isSelvstendigNaeringsdrivende = true;
     const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
@@ -98,7 +91,6 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
     expect(rows).toHaveLength(0);
   });
   it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt ved kun AT', () => {
-    relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     const wrapper = shallowWithIntl(<SammenligningsgrunnlagAOrdningenImpl
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}

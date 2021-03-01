@@ -17,7 +17,7 @@ import {
   InntektsgrunnlagInntekt,
   InntektsgrunnlagMåned,
 } from '@fpsak-frontend/types';
-import inntektTyper from '@fpsak-frontend/kodeverk/src/inntektTyper';
+import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import styles from './sammenligningsgrunnlagAOrdningen.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
@@ -33,7 +33,7 @@ const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: strin
     return 0;
   }
   if (status) {
-    return andeler.filter((andel) => andel.inntektType.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+    return andeler.filter((andel) => andel.inntektAktivitetType.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
   }
   return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
 };
@@ -63,13 +63,13 @@ const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser: Inntektstyper, ma
 
 const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper): ReactElement => {
   const sumATAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.inntektType.kode === inntektTyper.ARBEID)
+    .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.ARBEID)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   const sumFLAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.inntektType.kode === inntektTyper.FRILANS)
+    .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.FRILANS)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   const sumYtelseAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.inntektType.kode === inntektTyper.YTELSE)
+    .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.YTELSE)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
 
   return (
@@ -115,9 +115,9 @@ const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: Inntektsgr
   const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1, 3);
   const maaned = moment(dato, ISO_DATE_FORMAT).format('MM');
   const aar = moment(dato, ISO_DATE_FORMAT).format('YYYY');
-  const atBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektTyper.ARBEID);
-  const flBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektTyper.FRILANS);
-  const ytelseBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektTyper.YTELSE);
+  const atBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.ARBEID);
+  const flBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.FRILANS);
+  const ytelseBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.YTELSE);
   const rest = finnRestVerdienFraRelevanteAndeler(relevanteStatuser, maksVerdi, atBeløp, flBeløp);
   return (
     <React.Fragment key={`${dato}wrapper`}>
@@ -218,7 +218,7 @@ const lagOverskrift = (userIdent?: string): ReactElement => (
 );
 
 const finnesInntektAvType = (måneder: InntektsgrunnlagMåned[], status: string): boolean => måneder.flatMap(((p) => p.inntekter))
-  .some((innt) => innt.inntektType.kode === status);
+  .some((innt) => innt.inntektAktivitetType.kode === status);
 
 type OwnProps = {
     sammenligningsGrunnlagInntekter: Inntektsgrunnlag;
@@ -239,9 +239,9 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
     return null;
   }
   const inntektstyper = {
-    harFrilansinntekt: useMemo(() => finnesInntektAvType(måneder, inntektTyper.FRILANS), [måneder]),
-    harArbeidsinntekt: useMemo(() => finnesInntektAvType(måneder, inntektTyper.ARBEID), [måneder]),
-    harYtelseinntekt: useMemo(() => finnesInntektAvType(måneder, inntektTyper.YTELSE), [måneder]),
+    harFrilansinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.FRILANS), [måneder]),
+    harArbeidsinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.ARBEID), [måneder]),
+    harYtelseinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.YTELSE), [måneder]),
   } as Inntektstyper;
 
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
