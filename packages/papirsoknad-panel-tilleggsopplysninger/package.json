@@ -11,7 +11,7 @@
     "nav-frontend-skjema": "3.0.52",
     "nav-frontend-skjema-style": "2.0.32",
     "react": "^17.0.1",
-    "react-intl": "^5.13.1"
+    "react-intl": "^5.13.2"
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
