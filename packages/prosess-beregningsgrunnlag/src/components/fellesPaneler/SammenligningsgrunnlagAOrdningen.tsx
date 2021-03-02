@@ -52,14 +52,6 @@ const finnMaksVerdien = (andeler: InntektsgrunnlagMåned[],
   }
   return null;
 };
-const finnRestVerdienFraRelevanteAndeler = (relevanteStatuser: Inntektstyper, maks: number, atBelop: number, flBelop: number): number => {
-  if (relevanteStatuser.harFrilansinntekt && relevanteStatuser.harArbeidsinntekt) {
-    return maks - (atBelop) - (flBelop);
-  }
-  if (relevanteStatuser.harArbeidsinntekt) return maks - atBelop;
-  if (relevanteStatuser.harFrilansinntekt) return maks - flBelop;
-  return null;
-};
 
 const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper): ReactElement => {
   const sumATAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
@@ -118,7 +110,7 @@ const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: Inntektsgr
   const atBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.ARBEID);
   const flBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.FRILANS);
   const ytelseBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.YTELSE);
-  const rest = finnRestVerdienFraRelevanteAndeler(relevanteStatuser, maksVerdi, atBeløp, flBeløp);
+  const rest = Math.max(maksVerdi - atBeløp - flBeløp - ytelseBeløp, 0);
   return (
     <React.Fragment key={`${dato}wrapper`}>
       { maaned === '01' && (
