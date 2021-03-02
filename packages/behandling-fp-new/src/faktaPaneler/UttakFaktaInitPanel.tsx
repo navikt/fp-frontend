@@ -73,7 +73,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
 
   const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
-  const skalVises = !!initData?.ytelsefordeling?.endringsdato;
+  const skalVises = !!initData?.ytelsefordeling?.endringsdato !== undefined;
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,

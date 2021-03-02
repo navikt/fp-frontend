@@ -47,7 +47,7 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
 
   const oppdaterProsessPanelIUrl = useCallback((nyttProsessSteg: string) => {
     oppdaterProsessStegOgFaktaPanelIUrl(nyttProsessSteg, valgtFaktaSteg);
-  }, [valgtProsessSteg]);
+  }, [valgtFaktaSteg]);
   const oppdaterFaktaPanelIUrl = useCallback((nyttFaktaSteg: string) => {
     oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyttFaktaSteg);
   }, [valgtProsessSteg]);

@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useState, useCallback,
+  FunctionComponent, ReactElement, useState, useCallback, useMemo,
 } from 'react';
 
 import {
@@ -52,10 +52,12 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
     }
   }, []);
 
+  const vistMenyData = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
+
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = menyData[index];
+    const panel = vistMenyData[index];
     oppdaterFaktaPanelIUrl(panel.id);
-  }, [menyData]);
+  }, [vistMenyData]);
 
   if (!paneler) {
     return null;
@@ -66,7 +68,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       <FlexContainer fullHeight>
         <FlexRow>
           <FlexColumn className={styles.sideMenu}>
-            <FaktaMeny menyData={menyData.filter((d) => !!d.tekst)} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
+            <FaktaMeny menyData={vistMenyData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
           </FlexColumn>
           <FlexColumn className={styles.content}>
             {paneler.map((panel, index) => (

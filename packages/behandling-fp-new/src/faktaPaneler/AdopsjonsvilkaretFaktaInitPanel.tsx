@@ -3,23 +3,24 @@ import React, {
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
+import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
-import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
+import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
-  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
+  Aksjonspunkt, Fagsak, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
   FaktaPanelInitProps, useStandardFaktaProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.TERMINBEKREFTELSE,
-  aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
-  aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
+  aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
+  aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
@@ -30,35 +31,36 @@ type EndepunktInitData = {
 
 const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
-  FpBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
   FpBehandlingApiKeys.SOKNAD,
-  FpBehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
-  familiehendelseOriginalBehandling?: FamilieHendelse;
   soknad: Soknad;
-  soknadOriginalBehandling?: Soknad;
+}
+
+interface OwnProps {
+  fagsak: Fagsak;
 }
 
 /**
- * FodselvilkaretFaktaInitPanel
+ * AdopsjonsvilkaretFaktaInitPanel
  */
-const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
+const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
   registrerFaktaPanel,
+  fagsak,
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
 
-  const skalVises = initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode));
+  const skalVises = initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode));
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
-    faktaPanelCodes.FODSELSVILKARET,
-    getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' }),
+    faktaPanelCodes.ADOPSJONSVILKARET,
+    getPackageIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' }),
     valgtFaktaSteg,
     skalVises,
     standardPanelProps.harApneAksjonspunkter,
@@ -68,9 +70,13 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 
   return (
     <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
-      <FodselFaktaIndex {...panelData} {...standardPanelProps} />
+      <AdopsjonFaktaIndex
+        isForeldrepengerFagsak={fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER}
+        {...panelData}
+        {...standardPanelProps}
+      />
     </FaktaPanelWrapper>
   );
 };
 
-export default FodselvilkaretFaktaInitPanel;
+export default AdopsjonsvilkaretFaktaInitPanel;
