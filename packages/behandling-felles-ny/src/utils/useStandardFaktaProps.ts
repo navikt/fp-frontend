@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
+  Aksjonspunkt, StandardFaktaPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
@@ -9,17 +9,6 @@ import { erReadOnly } from './readOnlyUtils';
 import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
 import { StandardPropsStateContext } from './standardPropsStateContext';
 import { getBekreftAksjonspunktFaktaCallback } from './getBekreftAksjonspunktCallback';
-
-type Standard = {
-  behandling: Behandling;
-  readOnly: boolean;
-  submittable: boolean;
-  harApneAksjonspunkter: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback: (aksjonspunktData: any) => Promise<any>;
-  aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-}
 
 type Data = {
   aksjonspunkter?: Aksjonspunkt[];
@@ -31,7 +20,7 @@ const useStandardFaktaProps = (
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
   overstyringApCodes: string[] = [],
-): Standard => {
+): StandardFaktaPanelProps => {
   const value = useContext(StandardPropsStateContext);
 
   const aksjonspunkterForSteg = data?.aksjonspunkter && aksjonspunktKoder

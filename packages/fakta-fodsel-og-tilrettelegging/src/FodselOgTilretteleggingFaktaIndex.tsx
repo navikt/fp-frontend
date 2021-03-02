@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, Behandling, InntektArbeidYtelse, KodeverkMedNavn,
+  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import FodselOgTilretteleggingInfoPanel from './components/FodselOgTilretteleggingInfoPanel';
@@ -20,15 +19,13 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   inntektArbeidYtelse: InntektArbeidYtelse;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   svangerskapspengerTilrettelegging,
   inntektArbeidYtelse,

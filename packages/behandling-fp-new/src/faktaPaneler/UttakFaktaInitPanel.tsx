@@ -11,7 +11,7 @@ import {
   UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import {
-  FaktaPanelMenyData, faktaPanelHooks, useStandardFaktaProps, FaktaPanelWrapper,
+  FaktaPanelInitProps, useStandardFaktaProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -19,7 +19,7 @@ import {
   FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
 } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_UTTAK,
   aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
   aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK,
@@ -30,9 +30,9 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
 ];
 
-const overstyringApCodes = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
+const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
 
-const endepunkterInit = [
+const ENDEPUNKTER_INIT_DATA = [
   FpBehandlingApiKeys.AKSJONSPUNKTER,
   FpBehandlingApiKeys.YTELSEFORDELING,
 ];
@@ -41,7 +41,7 @@ type EndepunktInitData = {
   ytelsefordeling: Ytelsefordeling;
 }
 
-const endepunkterPanelData = [
+const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER,
   FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
   FpBehandlingApiKeys.FAMILIEHENDELSE,
@@ -53,18 +53,15 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  valgtFaktaSteg: string;
-  behandlingVersjon?: number;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
   personoversikt: Personoversikt;
 }
 
 /**
- * UttakFaktaPanelDef
+ * UttakFaktaInitPanel
  */
-const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
+const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
@@ -72,23 +69,22 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
   registrerFaktaPanel,
   personoversikt,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
+  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const skalVises = !!initData?.ytelsefordeling?.endringsdato;
-  const erAktiv = valgtFaktaSteg === faktaPanelCodes.UTTAK || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
-  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelCodes.UTTAK,
     getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' }),
+    valgtFaktaSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
     <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
@@ -104,4 +100,4 @@ const UttakFaktaPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default UttakFaktaPanelDef;
+export default UttakFaktaInitPanel;

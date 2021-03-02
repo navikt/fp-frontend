@@ -4,13 +4,15 @@ import {
 
 import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
 
-const useMenyRegistrerer = (
+const DEFAULT_PANEL_VALGT = 'default';
+
+const useFaktaMenyRegistrerer = (
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void,
   id: string,
   tekst: string,
+  valgtFaktaSteg: string,
   skalVisesImeny: boolean,
-  erAktiv: boolean,
-  harAksjonspunkt: boolean,
+  harApneAksjonspunkter: boolean,
 ) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {
@@ -19,13 +21,16 @@ const useMenyRegistrerer = (
     });
   }, []);
 
+  const erAktiv = valgtFaktaSteg === id
+    || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT);
+
   useEffect(() => {
     if (skalVisesImeny) {
       registrerFaktaPanel({
         id,
         tekst,
         erAktiv,
-        harAksjonspunkt,
+        harAksjonspunkt: harApneAksjonspunkter,
       });
       setPanelValgt(erAktiv);
     } else {
@@ -33,13 +38,9 @@ const useMenyRegistrerer = (
         id,
       });
     }
-  }, [skalVisesImeny, erAktiv, harAksjonspunkt]);
+  }, [skalVisesImeny, erAktiv, harApneAksjonspunkter]);
 
   return erPanelValgt;
 };
 
-const prosessPanelHooks = {
-  useMenyRegistrerer,
-};
-
-export default prosessPanelHooks;
+export default useFaktaMenyRegistrerer;

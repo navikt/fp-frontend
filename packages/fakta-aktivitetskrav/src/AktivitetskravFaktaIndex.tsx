@@ -2,8 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import moment from 'moment';
 
-import { Behandling, KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
+import { StandardFaktaPanelProps, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';
@@ -17,13 +16,11 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   harApneAksjonspunkter: boolean;
   uttakKontrollerAktivitetskrav: UttakKontrollerAktivitetskrav[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   harApneAksjonspunkter,
   uttakKontrollerAktivitetskrav,

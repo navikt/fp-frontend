@@ -9,59 +9,54 @@ import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
 import {
-  FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks, FaktaPanelWrapper,
+  useFaktaMenyRegistrerer, useStandardFaktaProps, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
   aksjonspunktCodes.AVKLAR_AKTIVITETER,
   aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
   aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
-const overstyringApCodes = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
+const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   beregningsgrunnlag: Beregningsgrunnlag;
 }
 
 interface OwnProps {
-  valgtFaktaSteg: string;
-  behandlingVersjon?: number;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
 }
 
 /**
- * BeregningFaktaPanelDef
+ * BeregningFaktaInitPanel
  */
-const BeregningFaktaPanelDef: FunctionComponent<OwnProps> = ({
+const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
   registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
+  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const skalVises = !!initData?.beregningsgrunnlag;
-  const erAktiv = valgtFaktaSteg === faktaPanelCodes.BEREGNING
-    || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
-  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelCodes.BEREGNING,
     getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' }),
+    valgtFaktaSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.harApneAksjonspunkter,
   );
 
@@ -77,4 +72,4 @@ const BeregningFaktaPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BeregningFaktaPanelDef;
+export default BeregningFaktaInitPanel;

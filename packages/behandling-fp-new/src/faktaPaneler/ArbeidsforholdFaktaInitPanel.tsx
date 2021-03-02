@@ -9,67 +9,58 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
 import {
-  FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks, FaktaPanelWrapper,
+  useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
-  aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
 interface OwnProps {
-  valgtFaktaSteg: string;
-  behandlingVersjon?: number;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
- * ArbeidsforholdFaktaPanelDef
+ * ArbeidsforholdFaktaInitPanel
  *
  * Dette faktapanelet skal alltid vises
  */
-const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
+const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   behandlingVersjon,
   valgtFaktaSteg,
-  arbeidsgiverOpplysningerPerId,
   registrerFaktaPanel,
+  arbeidsgiverOpplysningerPerId,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
 
-  const erAktiv = valgtFaktaSteg === faktaPanelCodes.ARBEIDSFORHOLD
-  || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
-
-  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelCodes.ARBEIDSFORHOLD,
     getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' }),
+    valgtFaktaSteg,
     true,
-    erAktiv,
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
     <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
       <ArbeidsforholdFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...initData}
         {...panelData}
         {...standardPanelProps}
       />
@@ -77,4 +68,4 @@ const ArbeidsforholdFaktaPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default ArbeidsforholdFaktaPanelDef;
+export default ArbeidsforholdFaktaInitPanel;

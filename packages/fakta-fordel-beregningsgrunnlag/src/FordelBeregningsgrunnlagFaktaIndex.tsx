@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
-import StandardFaktaProps from '@fpsak-frontend/fakta-felles/src/standardFaktaPropsTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
-import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import {
+  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Beregningsgrunnlag,
+} from '@fpsak-frontend/types';
+
 import FordelBeregningsgrunnlagPanel from './components/FordelBeregningsgrunnlagPanel';
 import messages from '../i18n/nb_NO.json';
 
@@ -16,13 +16,11 @@ const intl = createIntl({
 }, cache);
 
 type OwnProps = {
-  behandling: Behandling,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-const FordelBeregningsgrunnlagFaktaIndex:FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const FordelBeregningsgrunnlagFaktaIndex:FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   beregningsgrunnlag,
   alleKodeverk,

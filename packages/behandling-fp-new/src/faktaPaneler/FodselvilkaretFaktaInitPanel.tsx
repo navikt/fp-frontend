@@ -7,74 +7,64 @@ import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
-  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Personopplysninger, Soknad, Vilkar,
+  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  FaktaPanelMenyData, useStandardFaktaProps, faktaPanelHooks, FaktaPanelWrapper,
+  FaktaPanelInitProps, useStandardFaktaProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.TERMINBEKREFTELSE,
   aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
   aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
 ];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [
+const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
   FpBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
   FpBehandlingApiKeys.SOKNAD,
   FpBehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
-  FpBehandlingApiKeys.PERSONOPPLYSNINGER,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
-  personopplysninger: Personopplysninger;
-}
-
-interface OwnProps {
-  valgtFaktaSteg: string;
-  behandlingVersjon?: number;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
 }
 
 /**
- * FodselvilkaretFaktaPanelDef
+ * FodselvilkaretFaktaInitPanel
  */
-const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
+const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
   registrerFaktaPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
 
   const skalVises = initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode));
-  const erAktiv = valgtFaktaSteg === faktaPanelCodes.FODSELSVILKARET
-    || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
-  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelCodes.FODSELSVILKARET,
     getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' }),
+    valgtFaktaSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
     <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
@@ -83,4 +73,4 @@ const FodselvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default FodselvilkaretFaktaPanelDef;
+export default FodselvilkaretFaktaInitPanel;

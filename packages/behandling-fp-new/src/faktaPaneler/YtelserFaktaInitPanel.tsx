@@ -6,46 +6,38 @@ import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, faktaPanelHooks, FaktaPanelMenyData, FaktaPanelWrapper,
+  useStandardFaktaProps, FaktaPanelInitProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
 
-const endepunkterInit = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktInitData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
-interface OwnProps {
-  valgtFaktaSteg: string;
-  behandlingVersjon?: number;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
-}
-
 /**
- * YtelserFaktaPanelDef
+ * YtelserFaktaInitPanel
  */
-const YtelserFaktaPanelDef: FunctionComponent<OwnProps> = ({
+const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
   registrerFaktaPanel,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaProps();
 
   const skalVises = initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
     && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0;
-  const erAktiv = valgtFaktaSteg === faktaPanelCodes.YTELSER
-    || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
-  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelCodes.YTELSER,
     getPackageIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' }),
+    valgtFaktaSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.harApneAksjonspunkter,
   );
 
@@ -56,4 +48,4 @@ const YtelserFaktaPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default YtelserFaktaPanelDef;
+export default YtelserFaktaInitPanel;

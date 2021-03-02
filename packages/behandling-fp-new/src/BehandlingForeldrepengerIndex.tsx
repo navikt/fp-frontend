@@ -9,14 +9,14 @@ import {
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
-import SakenFaktaPanelDef from './faktaPaneler/SakenFaktaPanelDef';
-import ArbeidsforholdFaktaPanelDef from './faktaPaneler/ArbeidsforholdFaktaPanelDef';
-import YtelserFaktaPanelDef from './faktaPaneler/YtelserFaktaPanelDef';
-import FodselvilkaretFaktaPanelDef from './faktaPaneler/FodselvilkaretFaktaPanelDef';
-import MedlemskapsvilkaretFaktaPanelDef from './faktaPaneler/MedlemskapsvilkaretFaktaPanelDef';
-import OpptjeningsvilkaretFaktaPanelDef from './faktaPaneler/OpptjeningsvilkaretFaktaPanelDef';
-import BeregningFaktaPanelDef from './faktaPaneler/BeregningFaktaPanelDef';
-import UttakFaktaPanelDef from './faktaPaneler/UttakFaktaPanelDef';
+import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
+import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
+import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
+import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
+import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/MedlemskapsvilkaretFaktaInitPanel';
+import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/OpptjeningsvilkaretFaktaInitPanel';
+import BeregningFaktaInitPanel from './faktaPaneler/BeregningFaktaInitPanel';
+import UttakFaktaInitPanel from './faktaPaneler/UttakFaktaInitPanel';
 import VarselProsessStegPanelDef from './prosessPaneler/VarselProsessStegPanelDef';
 import OpplysningspliktProsessStegPanelDef from './prosessPaneler/OpplysningspliktProsessStegPanelDef';
 import InngangsvilkarProsessStegPanelDef from './prosessPaneler/InngangsvilkarProsessStegPanelDef';
@@ -107,12 +107,12 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
           faktaPaneler={[
-            (props) => <SakenFaktaPanelDef {...props} />,
-            (props) => <ArbeidsforholdFaktaPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <YtelserFaktaPanelDef {...props} />,
-            (props) => <FodselvilkaretFaktaPanelDef {...props} />,
+            (props) => <SakenFaktaInitPanel {...props} />,
+            (props) => <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <YtelserFaktaInitPanel {...props} />,
+            (props) => <FodselvilkaretFaktaInitPanel {...props} />,
             (props) => (
-              <MedlemskapsvilkaretFaktaPanelDef
+              <MedlemskapsvilkaretFaktaInitPanel
                 {...props}
                 fagsakPerson={fagsakPerson}
                 rettigheter={rettigheter}
@@ -120,10 +120,10 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 arbeidsgiverOpplysningerPerId={arbeidsgivere}
               />
             ),
-            (props) => <OpptjeningsvilkaretFaktaPanelDef {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <BeregningFaktaPanelDef {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
             (props) => (
-              <UttakFaktaPanelDef {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
+              <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
             ),
           ]}
           prosessPaneler={[

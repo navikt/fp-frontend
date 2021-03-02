@@ -10,13 +10,13 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, harBehandlingReadOnlyStatus, FaktaPanelMenyData, faktaPanelHooks, FaktaPanelWrapper,
+  useStandardFaktaProps, harBehandlingReadOnlyStatus, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
   aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
   aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
@@ -26,58 +26,53 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
 ];
 
-const overstyringApCodes = [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
+const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SOKNAD];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SOKNAD];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   soknad: Soknad;
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE, FpBehandlingApiKeys.MEDLEMSKAP];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE, FpBehandlingApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
   medlemskap: Medlemskap;
 }
 
 interface OwnProps {
-  valgtFaktaSteg: string;
-  behandlingVersjon?: number;
-  registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
 }
 
 /**
- * MedlemskapsvilkaretFaktaPanelDef
+ * MedlemskapsvilkaretFaktaInitPanel
  */
-const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
+const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   valgtFaktaSteg,
   behandlingVersjon,
+  registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   hasFetchError,
-  registrerFaktaPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, aksjonspunktKoder, [], overstyringApCodes);
+  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const skalVises = !!initData?.soknad;
-  const erAktiv = valgtFaktaSteg === faktaPanelCodes.MEDLEMSKAPSVILKARET
-  || (standardPanelProps.harApneAksjonspunkter && valgtFaktaSteg === 'default');
 
-  const erPanelValgt = faktaPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
     faktaPanelCodes.MEDLEMSKAPSVILKARET,
     getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
+    valgtFaktaSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
     <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
@@ -96,4 +91,4 @@ const MedlemskapsvilkaretFaktaPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default MedlemskapsvilkaretFaktaPanelDef;
+export default MedlemskapsvilkaretFaktaInitPanel;

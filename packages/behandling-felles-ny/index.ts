@@ -10,6 +10,7 @@ export { default as InngangsvilkarDefaultProsessStegPanel } from './src/componen
 export { default as StandardBehandlingProps, BehandlingEventHandler } from './src/types/StandardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/ProsessPanelMenyData';
 export { default as FaktaPanelMenyData } from './src/types/FaktaPanelMenyData';
+export { default as FaktaPanelInitProps } from './src/types/faktaPanelInitProps';
 export { default as InngangsvilkarPanelData } from './src/types/InngangsvilkarPanelData';
 export { default as useStandardFaktaProps } from './src/utils/useStandardFaktaProps';
 export { default as StandardPropsProvider } from './src/utils/standardPropsStateContext';
@@ -17,7 +18,7 @@ export { default as useStandardProsessPanelProps } from './src/utils/useStandard
 export { default as useSkalViseProsessPanel } from './src/utils/useSkalViseProsessPanel';
 export { harBehandlingReadOnlyStatus } from './src/utils/readOnlyUtils';
 export { default as prosessPanelHooks } from './src/utils/prosessPanelHooks';
-export { default as faktaPanelHooks } from './src/utils/faktaPanelHooks';
+export { default as useFaktaMenyRegistrerer } from './src/utils/useFaktaMenyRegistrerer';
 export { default as useInngangsvilkarRegistrerer } from './src/utils/useInngangsvilkarRegistrerer';
 export {
   useInitRequestApi, useBehandling, useLagreAksjonspunkt, useInitBehandlingHandlinger,
