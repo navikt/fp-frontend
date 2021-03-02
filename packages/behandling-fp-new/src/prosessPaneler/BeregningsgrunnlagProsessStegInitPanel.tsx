@@ -11,13 +11,13 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
+  useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
   aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
   aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -27,50 +27,46 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.VURDER_DEKNINGSGRAD,
 ];
 
-const vilkarKoder = [vilkarType.BEREGNINGSGRUNNLAGVILKARET];
+const VILKAR_KODER = [vilkarType.BEREGNINGSGRUNNLAGVILKARET];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
+const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 
   const skalVises = initState === RestApiState.SUCCESS;
-  const erAktiv = valgtProsessSteg === prosessStegCodes.BEREGNINGSGRUNNLAG || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.BEREGNINGSGRUNNLAG,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
     <ProsessPanelWrapper
@@ -88,4 +84,4 @@ const BeregningsgrunnlagProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BeregningsgrunnlagProsessStegPanelDef;
+export default BeregningsgrunnlagProsessStegInitPanel;

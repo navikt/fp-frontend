@@ -17,17 +17,17 @@ import {
 import getPackageIntl from '../../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET];
 
-const vilkarKoder = [vilkarType.OPPTJENINGSPERIODE, vilkarType.OPPTJENINGSVILKARET];
+const VILKAR_KODER = [vilkarType.OPPTJENINGSPERIODE, vilkarType.OPPTJENINGSVILKARET];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.OPPTJENING];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.OPPTJENING];
 type EndepunktPanelData = {
   opptjening: Opptjening;
 }
@@ -40,21 +40,21 @@ interface OwnProps {
   harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
-const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
+const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   rettigheter,
   setPanelInfo,
   erPanelValgt,
   harInngangsvilkarApentAksjonspunkt,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
   const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
+  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
@@ -77,10 +77,10 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
     return (
       <OverstyringPanelDef
         behandling={standardPanelProps.behandling}
-        aksjonspunkter={initData.aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET)}
+        aksjonspunkter={initData.aksjonspunkter}
         aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
         vilkar={standardPanelProps.vilkar}
-        vilkarKoder={vilkarKoder}
+        vilkarKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
         erMedlemskapsPanel={false}
         toggleOverstyring={toggleOverstyring}
@@ -100,4 +100,4 @@ const OpptjeningPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default OpptjeningPanelDef;
+export default OpptjeningInngangsvilkarInitPanel;

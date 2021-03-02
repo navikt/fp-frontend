@@ -14,7 +14,8 @@ import {
   Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, IverksetterVedtakStatusModal, FatterVedtakStatusModal, prosessPanelHooks, ProsessPanelMenyData,
+  useStandardProsessPanelProps, ProsessPanelWrapper, IverksetterVedtakStatusModal,
+  FatterVedtakStatusModal, useProsessMenyRegistrerer, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
@@ -111,7 +112,7 @@ const getLagringSideeffekter = (
   };
 };
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FORESLA_VEDTAK,
   aksjonspunktCodes.FATTER_VEDTAK,
   aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
@@ -122,13 +123,13 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
 ];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [
+const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.TILBAKEKREVINGVALG,
   FpBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
   FpBehandlingApiKeys.MEDLEMSKAP,
@@ -148,16 +149,13 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
-const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
+const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
@@ -166,31 +164,30 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   fagsak,
   opneSokeside,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
   const lagringSideEffekter = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleFatterVedtakModal,
     toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, [], lagringSideEffekter);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
   const skalVises = initState === RestApiState.SUCCESS;
-  const erAktiv = valgtProsessSteg === prosessStegCodes.VEDTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
   const status = useMemo(() => findStatusForVedtak(
     initData?.vilkar || [], initData?.aksjonspunkter || [], standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat,
   ), [initData, standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat]);
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.VEDTAK,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.isAksjonspunktOpen,
     status,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
@@ -226,4 +223,4 @@ const VedtakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default VedtakProsessStegPanelDef;
+export default VedtakProsessStegInitPanel;

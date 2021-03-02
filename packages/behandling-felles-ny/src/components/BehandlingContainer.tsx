@@ -9,6 +9,8 @@ import ProsessContainer from './ProsessContainer';
 import FaktaContainer from './FaktaContainer';
 
 import messages from '../../i18n/nb_NO.json';
+import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../types/prosessPanelInitProps';
+import FaktaPanelInitProps from '../types/faktaPanelInitProps';
 
 const cache = createIntlCache();
 
@@ -24,8 +26,8 @@ interface FaktaPanelInfo {
 
 interface OwnProps {
   behandling: Behandling;
-  faktaPaneler?: ((props: any) => ReactElement)[];
-  prosessPaneler?: ((props: any) => ReactElement)[];
+  faktaPaneler?: ((props: FaktaPanelInitProps) => ReactElement)[];
+  prosessPaneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement)[];
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
@@ -56,7 +58,6 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         paneler={prosessPaneler}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessPanelIUrl={oppdaterProsessPanelIUrl}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandling={behandling}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}

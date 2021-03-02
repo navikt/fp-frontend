@@ -15,17 +15,17 @@ import {
 
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR];
 
-const vilkarKoder = [vilkarType.MEDLEMSKAPSVILKARET];
+const VILKAR_KODER = [vilkarType.MEDLEMSKAPSVILKARET];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.MEDLEMSKAP];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
 }
@@ -38,21 +38,21 @@ interface OwnProps {
   harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
-const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
+const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   rettigheter,
   setPanelInfo,
   erPanelValgt,
   harInngangsvilkarApentAksjonspunkt,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
   const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
+  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
@@ -75,9 +75,9 @@ const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
     <OverstyringPanelDef
       behandling={standardPanelProps.behandling}
       aksjonspunkter={standardPanelProps.aksjonspunkter}
-      aksjonspunktKode={aksjonspunktKoder[0]}
+      aksjonspunktKode={AKSJONSPUNKT_KODER[0]}
       vilkar={standardPanelProps.vilkar}
-      vilkarKoder={vilkarKoder}
+      vilkarKoder={VILKAR_KODER}
       panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
       erMedlemskapsPanel
       medlemskap={panelData.medlemskap}
@@ -89,4 +89,4 @@ const MedlemskapPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default MedlemskapPanelDef;
+export default MedlemskapInngangsvilkarInitPanel;

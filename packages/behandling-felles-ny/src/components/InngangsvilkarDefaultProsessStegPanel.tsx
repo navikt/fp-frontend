@@ -11,12 +11,12 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
-import prosessPanelHooks from '../utils/prosessPanelHooks';
-import ProsessPanelMenyData from '../types/ProsessPanelMenyData';
-import InngangsvilkarPanelData from '../types/InngangsvilkarPanelData';
+import useProsessMenyRegistrerer from '../utils/useProsessMenyRegistrerer';
+import InngangsvilkarPanelData from '../types/inngangsvilkarPanelData';
 import getPackageIntl from '../../i18n/getPackageIntl';
 
 import styles from './inngangsvilkarDefaultProsessStegPanel.less';
+import ProsessPanelInitProps from '../types/prosessPanelInitProps';
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
 
@@ -44,15 +44,13 @@ type InngangsvilkarUnderpanelProps = {
 }
 
 interface OwnProps {
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   leftPanels: (props: InngangsvilkarUnderpanelProps) => ReactElement;
   rightPanels: (props: InngangsvilkarUnderpanelProps) => ReactElement;
 }
 
-const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps> = ({
+const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
@@ -85,19 +83,18 @@ const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps> = ({
   const status = getStatus(panelInfo);
 
   const skalVises = panelInfo.length > 0;
-  const erAktiv = valgtProsessSteg === prosessStegCodes.INNGANGSVILKAR
-    || (!apentFaktaPanelInfo && harApentAksjonspunkt && valgtProsessSteg === 'default');
 
   const intl = getPackageIntl();
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     harApentAksjonspunkt,
     status,
+    !apentFaktaPanelInfo,
   );
 
   const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst).filter((tekst) => !!tekst);

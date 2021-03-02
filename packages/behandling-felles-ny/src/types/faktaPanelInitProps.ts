@@ -1,4 +1,4 @@
-import FaktaPanelMenyData from './FaktaPanelMenyData';
+import FaktaPanelMenyData from './faktaPanelMenyData';
 
 type FaktaPanelInitProps = {
   valgtFaktaSteg: string;

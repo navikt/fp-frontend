@@ -11,64 +11,60 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
+  useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
 ];
 
-const vilkarKoder = [vilkarType.SOKERSOPPLYSNINGSPLIKT];
+const VILKAR_KODER = [vilkarType.SOKERSOPPLYSNINGSPLIKT];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
   soknad: Soknad;
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
+const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const defaultSkalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
+  const defaultSkalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
   const isRevurdering = behandlingType.REVURDERING === standardPanelProps.behandling.type.kode;
   const hasAp = standardPanelProps.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
   const skalVises = !(isRevurdering && !hasAp) || defaultSkalVises;
-  const erAktiv = valgtProsessSteg === prosessStegCodes.OPPLYSNINGSPLIKT || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.OPPLYSNINGSPLIKT,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
     <ProsessPanelWrapper
@@ -86,4 +82,4 @@ const OpplysningspliktProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default OpplysningspliktProsessStegPanelDef;
+export default OpplysningspliktProsessStegInitPanel;

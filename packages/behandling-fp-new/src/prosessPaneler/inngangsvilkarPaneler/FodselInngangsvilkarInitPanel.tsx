@@ -18,17 +18,17 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import getPackageIntl from '../../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../../data/fpBehandlingApi';
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
   aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
-const vilkarKoder = [
+const VILKAR_KODER = [
   vilkarType.FODSELSVILKARET_MOR,
   vilkarType.FODSELSVILKARET_FAR,
 ];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
@@ -42,19 +42,19 @@ interface OwnProps {
   harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
-const FodselPanelDef: FunctionComponent<OwnProps> = ({
+const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   rettigheter,
   setPanelInfo,
   erPanelValgt,
   harInngangsvilkarApentAksjonspunkt,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
   const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
+  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
@@ -82,7 +82,7 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
         // FIXME Dette må vel vera feil? Kan vera ein kode
         aksjonspunktKode={aksjonspunktCodes.OVERSTYR_FODSELSVILKAR}
         vilkar={standardPanelProps.vilkar}
-        vilkarKoder={vilkarKoder}
+        vilkarKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
         erMedlemskapsPanel={false}
         toggleOverstyring={toggleOverstyring}
@@ -101,4 +101,4 @@ const FodselPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default FodselPanelDef;
+export default FodselInngangsvilkarInitPanel;

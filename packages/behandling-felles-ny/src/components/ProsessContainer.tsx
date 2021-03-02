@@ -8,14 +8,14 @@ import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny from './ProsessMeny';
 
 import styles from './prosessContainer.less';
-import ProsessPanelMenyData from '../types/ProsessPanelMenyData';
+import ProsessPanelMenyData from '../types/prosessPanelMenyData';
+import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../types/prosessPanelInitProps';
 
 interface OwnProps {
   behandling: Behandling;
-  paneler?: ((props: any) => ReactElement)[];
+  paneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement)[];
   valgtProsessSteg?: string;
   oppdaterProsessPanelIUrl: (prosessnavn: string) => void;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterBehandlingVersjon: (versjon: number) => void;
 }
@@ -25,7 +25,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   paneler,
   valgtProsessSteg,
   oppdaterProsessPanelIUrl,
-  oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
   oppdaterBehandlingVersjon,
 }) => {
@@ -81,11 +80,10 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
             behandlingVersjon: behandling?.versjon,
             valgtProsessSteg,
             registrerProsessPanel,
+          }, {
             apentFaktaPanelInfo,
-            oppdaterProsessStegOgFaktaPanelIUrl,
             toggleOppdatereFagsakContext,
-            // TODO endre verdi som sendes inn her
-            menyData: menyDataSomVises,
+            allMenyData: menyDataSomVises,
           })}
         </React.Fragment>
       ))}

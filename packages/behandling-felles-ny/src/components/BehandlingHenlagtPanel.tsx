@@ -8,30 +8,20 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
-
-interface OwnProps {
-  valgtProsessSteg: string;
-  registrerFaktaPanel: (data: {
-    id: string;
-    tekst?: string;
-    erAktiv?: boolean;
-    harApentAksjonspunkt?: boolean;
-    status?: string;
-  }) => void;
-}
+import ProsessPanelInitProps from '../types/prosessPanelInitProps';
 
 const ID = 'henlagt';
 
-const BehandlingHenlagtPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedComponentProps> = ({
   intl,
   valgtProsessSteg,
-  registrerFaktaPanel,
+  registrerProsessPanel,
 }) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
 
   useEffect(() => {
     const erValgt = valgtProsessSteg === ID || valgtProsessSteg === 'default';
-    registrerFaktaPanel({
+    registrerProsessPanel({
       id: ID,
       tekst: intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' }),
       erAktiv: erValgt,

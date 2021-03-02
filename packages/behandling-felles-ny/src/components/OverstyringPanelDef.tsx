@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent,
+  FunctionComponent, useMemo,
 } from 'react';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -46,12 +46,14 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   kanOverstyreAccess,
   overrideReadOnly,
 }) => {
+  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktKode), [aksjonspunkter]);
+
   const standardProps = useStandardProsessPanelProps({
-    aksjonspunkter,
+    aksjonspunkter: overstyrteAksjonspunkter,
     vilkar,
   }, [aksjonspunktKode], vilkarKoder);
 
-  const skalVises = useSkalViseProsessPanel(aksjonspunkter, vilkarKoder, vilkar);
+  const skalVises = useSkalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
   const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[kodeverkTyper.AVSLAGSARSAK], vilkar[0].vilkarType.kode);
 

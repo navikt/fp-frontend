@@ -14,7 +14,7 @@ import {
   Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
+  useStandardProsessPanelProps, ProsessPanelWrapper, ProsessPanelInitProps, useProsessMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -23,7 +23,7 @@ import {
 } from '../data/fpBehandlingApi';
 
 // TODO Er dette mogleg å fjerna?
-const faktaUttakAp = [
+const FAKTA_UTTAK_AP = [
   aksjonspunktCodes.AVKLAR_UTTAK,
   aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK,
   aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
@@ -33,7 +33,7 @@ const faktaUttakAp = [
 ];
 
 const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): string => {
-  if (!uttaksresultat || aksjonspunkter.some((ap) => faktaUttakAp.includes(ap.definisjon.kode) && ap.status.kode === 'OPPR')) {
+  if (!uttaksresultat || aksjonspunkter.some((ap) => FAKTA_UTTAK_AP.includes(ap.definisjon.kode) && ap.status.kode === 'OPPR')) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
   if (uttaksresultat.perioderSøker && uttaksresultat.perioderSøker.length > 0) {
@@ -47,7 +47,7 @@ const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjo
   return vilkarUtfallType.IKKE_OPPFYLT;
 };
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
   aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER,
   aksjonspunktCodes.TILKNYTTET_STORTINGET,
@@ -59,7 +59,7 @@ const aksjonspunktKoder = [
   aksjonspunktCodes.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
 ];
 
-const endepunkterInit = [
+const ENDEPUNKTER_INIT_DATA = [
   FpBehandlingApiKeys.AKSJONSPUNKTER,
   FpBehandlingApiKeys.VILKAR,
   FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
@@ -70,7 +70,7 @@ type EndepunktInitData = {
   uttaksresultatPerioder: UttaksresultatPeriode;
 }
 
-const endepunkterPanelData = [
+const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
   FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE,
   FpBehandlingApiKeys.UTTAK_STONADSKONTOER,
@@ -86,16 +86,13 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
   personoversikt: Personoversikt;
 }
 
-const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
+const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
@@ -104,27 +101,26 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   personoversikt,
   fagsak,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const skalVises = initState === RestApiState.SUCCESS;
-  const erAktiv = valgtProsessSteg === prosessStegCodes.UTTAK || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
   const status = useMemo(() => getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter), [
     initData?.uttaksresultatPerioder, initData?.aksjonspunkter,
   ]);
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.UTTAK,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.isAksjonspunktOpen,
     status,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
 
@@ -149,4 +145,4 @@ const UttakProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default UttakProsessStegPanelDef;
+export default UttakProsessStegInitPanel;

@@ -10,7 +10,7 @@ import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
+  useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelMenyData, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
@@ -19,7 +19,7 @@ import {
   restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
 } from '../data/fpBehandlingApi';
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -32,7 +32,7 @@ const getForhandsvisFptilbakeCallback = (
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (
-  mottaker: string, brevmalkode: string, fritekst: string, saksnummer: number,
+  mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string,
 ) => {
   const data = {
     behandlingUuid: behandling.uuid,
@@ -45,59 +45,54 @@ const getForhandsvisFptilbakeCallback = (
   return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
 };
 
-const aksjonspunktKoder = [aksjonspunktCodes.VURDER_FEILUTBETALING];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_FEILUTBETALING];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SIMULERING_RESULTAT];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SIMULERING_RESULTAT];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
 }
 
-const endepunkterPanelData = [FpBehandlingApiKeys.TILBAKEKREVINGVALG];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.TILBAKEKREVINGVALG];
 type EndepunktPanelData = {
   tilbakekrevingvalg?: TilbakekrevingValg;
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   menyData: ProsessPanelMenyData[];
   fagsak: Fagsak;
 }
 
-const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
+const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
   menyData,
   fagsak,
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
     && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
   const skalVises = initState === RestApiState.SUCCESS && !harVedtakspanel;
-  const erAktiv = valgtProsessSteg === prosessStegCodes.AVREGNING || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
   const status = initData?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.AVREGNING,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.isAksjonspunktOpen,
     status,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
-  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks
-    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
 
   const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
@@ -120,4 +115,4 @@ const SimuleringProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default SimuleringProsessStegPanelDef;
+export default SimuleringProsessStegInitPanel;

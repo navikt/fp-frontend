@@ -3,7 +3,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import SideMenu from '@navikt/nap-side-menu';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
-import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
+import FaktaPanelMenyData from '../types/faktaPanelMenyData';
 
 interface OwnProps {
   menyData: FaktaPanelMenyData[];

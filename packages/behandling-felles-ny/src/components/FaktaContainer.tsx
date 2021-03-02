@@ -7,7 +7,8 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import FaktaMeny from './FaktaMeny';
-import FaktaPanelMenyData from '../types/FaktaPanelMenyData';
+import FaktaPanelMenyData from '../types/faktaPanelMenyData';
+import FaktaPanelInitProps from '../types/faktaPanelInitProps';
 
 import styles from './faktaContainer.less';
 
@@ -15,7 +16,7 @@ export const DEFAULT_FAKTA_KODE = 'default';
 
 interface OwnProps {
   behandlingVersjon?: number;
-  paneler?: ((props: any) => ReactElement)[];
+  paneler?: ((props: FaktaPanelInitProps) => ReactElement)[];
   valgtFaktaSteg?: string;
   oppdaterFaktaPanelIUrl: (faktanavn: string) => void;
   setApentFaktaPanel: (panelData: { urlCode: string, text: string }) => void,

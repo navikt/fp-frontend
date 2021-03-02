@@ -9,7 +9,7 @@ import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useSkalViseProsessPanel, useStandardProsessPanelProps, ProsessPanelWrapper, prosessPanelHooks, ProsessPanelMenyData,
+  useSkalViseProsessPanel, useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -17,7 +17,7 @@ import {
   restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
 } from '../data/fpBehandlingApi';
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -61,18 +61,18 @@ const getLagringSideeffekter = (
   };
 };
 
-const aksjonspunktKoder = [
+const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
   aksjonspunktCodes.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
-const endepunkterInit = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
 }
 
-const endepunkterPanelData = [
+const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
   FpBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
   FpBehandlingApiKeys.SOKNAD,
@@ -86,16 +86,13 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
-  valgtProsessSteg: string;
-  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
-const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
+const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   behandlingVersjon,
   valgtProsessSteg,
   registrerProsessPanel,
@@ -104,25 +101,24 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(endepunkterInit, behandlingVersjon);
+  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl, opneSokeside);
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, [], lagringSideEffekter);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
   const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter);
-  const erAktiv = valgtProsessSteg === prosessStegCodes.VARSEL || (standardPanelProps.isAksjonspunktOpen && valgtProsessSteg === 'default');
 
-  const erPanelValgt = prosessPanelHooks.useMenyRegistrerer(
+  const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     prosessStegCodes.VARSEL,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' }),
+    valgtProsessSteg,
     skalVises,
-    erAktiv,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
   );
 
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(endepunkterPanelData, erPanelValgt, behandlingVersjon);
+  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
 
@@ -145,4 +141,4 @@ const VarselProsessStegPanelDef: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default VarselProsessStegPanelDef;
+export default VarselProsessStegInitPanel;

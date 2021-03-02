@@ -1,5 +1,5 @@
 import {
-  Fagsak, FagsakPerson, KodeverkMedNavn, AksessRettigheter,
+  Fagsak, KodeverkMedNavn, AksessRettigheter,
 } from '@fpsak-frontend/types';
 
 export type BehandlingEventHandler = {
@@ -10,7 +10,6 @@ export type BehandlingEventHandler = {
 type StandardBehandlingProps = {
   behandlingId: number;
   fagsak: Fagsak;
-  fagsakPerson: FagsakPerson;
   rettigheter: AksessRettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   valgtProsessSteg?: string;
