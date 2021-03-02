@@ -16,6 +16,7 @@ import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { Vilkar } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 import withReduxProvider from '../../../decorators/withRedux';
 
@@ -206,36 +207,52 @@ const inntektsgrunnlag = {
   måneder: [],
 };
 
-const lagATInntektsgrunnlag = (fom, tom, inntekt) => {
+const lagATInntektsgrunnlag = (inntekt) => ({
+  inntektAktivitetType: {
+    kode: inntektAktivitetType.ARBEID,
+    kodeverk: 'INNTEKT_AKTIVITET_TYPE',
+  },
+  beløp: inntekt,
+});
+
+const lagYtelseInntektsgrunnlag = (inntekt) => ({
+  inntektAktivitetType: {
+    kode: inntektAktivitetType.YTELSE,
+    kodeverk: 'INNTEKT_AKTIVITET_TYPE',
+  },
+  beløp: inntekt,
+});
+
+const lagFLInntektsgrunnlag = (inntekt) => ({
+  inntektAktivitetType: {
+    kode: inntektAktivitetType.FRILANS,
+    kodeverk: 'INNTEKT_AKTIVITET_TYPE',
+  },
+  beløp: inntekt,
+});
+
+const lagMånedInntekt = (fom, tom, inntekter) => {
   const obj = {
     fom,
     tom,
-    inntekter: [
-      {
-        aktivitetStatus: {
-          kode: 'AT',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
-        beløp: inntekt,
-      },
-    ],
+    inntekter,
   };
   inntektsgrunnlag.måneder.push(obj);
 };
 
 const lagKunATInntektsgrunnlag = () => {
-  lagATInntektsgrunnlag('2020-01-01', '2020-01-31', 35000);
-  lagATInntektsgrunnlag('2020-02-01', '2020-02-28', 70000);
-  lagATInntektsgrunnlag('2020-03-01', '2020-03-31', 40000);
-  lagATInntektsgrunnlag('2020-04-01', '2020-04-30', 50000);
-  lagATInntektsgrunnlag('2020-05-01', '2020-05-31', 37000);
-  lagATInntektsgrunnlag('2020-06-01', '2020-06-30', 45000);
-  lagATInntektsgrunnlag('2020-07-01', '2020-07-31', 24000);
-  lagATInntektsgrunnlag('2020-08-01', '2020-08-31', 33000);
-  lagATInntektsgrunnlag('2020-09-01', '2020-09-30', 25000);
-  lagATInntektsgrunnlag('2020-10-01', '2020-10-31', 8000);
-  lagATInntektsgrunnlag('2020-11-01', '2020-11-30', 51000);
-  lagATInntektsgrunnlag('2020-12-01', '2020-12-31', 47000);
+  lagMånedInntekt('2020-01-01', '2020-01-31', [lagATInntektsgrunnlag(35000), lagYtelseInntektsgrunnlag(4000), lagFLInntektsgrunnlag(0)]);
+  lagMånedInntekt('2020-02-01', '2020-02-28', [lagATInntektsgrunnlag(70000), lagYtelseInntektsgrunnlag(6000), lagFLInntektsgrunnlag(5000)]);
+  lagMånedInntekt('2020-03-01', '2020-03-31', [lagATInntektsgrunnlag(40000), lagYtelseInntektsgrunnlag(7000), lagFLInntektsgrunnlag(12000)]);
+  lagMånedInntekt('2020-04-01', '2020-04-30', [lagATInntektsgrunnlag(50000), lagYtelseInntektsgrunnlag(20000), lagFLInntektsgrunnlag(45000)]);
+  lagMånedInntekt('2020-05-01', '2020-05-31', [lagATInntektsgrunnlag(37000), lagYtelseInntektsgrunnlag(10000), lagFLInntektsgrunnlag(30000)]);
+  lagMånedInntekt('2020-06-01', '2020-06-30', [lagATInntektsgrunnlag(45000), lagYtelseInntektsgrunnlag(5000), lagFLInntektsgrunnlag(20000)]);
+  lagMånedInntekt('2020-07-01', '2020-07-31', [lagATInntektsgrunnlag(25000), lagYtelseInntektsgrunnlag(3000), lagFLInntektsgrunnlag(25000)]);
+  lagMånedInntekt('2020-08-01', '2020-08-31', [lagATInntektsgrunnlag(33000), lagYtelseInntektsgrunnlag(7000), lagFLInntektsgrunnlag(0)]);
+  lagMånedInntekt('2020-09-01', '2020-09-30', [lagATInntektsgrunnlag(25000), lagYtelseInntektsgrunnlag(6000), lagFLInntektsgrunnlag(33000)]);
+  lagMånedInntekt('2020-10-01', '2020-10-31', [lagATInntektsgrunnlag(8000), lagYtelseInntektsgrunnlag(20000), lagFLInntektsgrunnlag(1000)]);
+  lagMånedInntekt('2020-11-01', '2020-11-30', [lagATInntektsgrunnlag(54000), lagYtelseInntektsgrunnlag(1000), lagFLInntektsgrunnlag(25000)]);
+  lagMånedInntekt('2020-12-01', '2020-12-31', [lagATInntektsgrunnlag(47000), lagYtelseInntektsgrunnlag(0), lagFLInntektsgrunnlag(10000)]);
 };
 
 const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
