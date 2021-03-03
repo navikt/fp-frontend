@@ -1,5 +1,5 @@
 type FaktaPanelMenyData = {
-  id: string;
+  id:string;
   tekst?: string;
   erAktiv?: boolean;
   harAksjonspunkt?: boolean;

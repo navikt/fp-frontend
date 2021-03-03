@@ -1,7 +1,7 @@
 import FaktaPanelMenyData from './faktaPanelMenyData';
 
 type FaktaPanelInitProps = {
-  valgtFaktaSteg: string;
+  valgtFaktaSteg:string;
   behandlingVersjon?: number;
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
 }
