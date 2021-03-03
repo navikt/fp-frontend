@@ -1,5 +1,5 @@
 type ProsessPanelMenyData = {
-  id:string;
+  id: string;
   tekst?: string;
   erAktiv?: boolean;
   harApentAksjonspunkt?: boolean;

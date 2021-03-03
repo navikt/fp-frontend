@@ -7,7 +7,7 @@ export type ProsessPanelExtraInitProps = {
 }
 
 type ProsessPanelInitProps = {
-  behandlingVersjon?:number;
+  behandlingVersjon?: number;
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
 }

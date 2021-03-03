@@ -4,7 +4,7 @@ import { Behandling } from '@fpsak-frontend/types';
 import { useRestApiErrorDispatcher, RequestRunnerApiData, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
-import { BehandlingEventHandler } from '../types/StandardBehandlingProps';
+import { BehandlingEventHandler } from '../types/standardBehandlingProps';
 
 export const useInitRequestApi = (
   api: AbstractRequestApi,

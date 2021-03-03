@@ -1,5 +1,5 @@
 type InngangsvilkarPanelData = {
-  id:string;
+  id: string;
   aksjonspunktTekst: string;
   harApentAksjonspunkt: boolean;
   status: string;

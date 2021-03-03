@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-import InngangsvilkarPanelData from '../types/InngangsvilkarPanelData';
+import InngangsvilkarPanelData from '../types/inngangsvilkarPanelData';
 
 const useInngangsvilkarRegistrerer = (
   setPanelInfo: (data: InngangsvilkarPanelData) => void,
