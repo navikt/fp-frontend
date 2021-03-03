@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useCallback, useState,
+  FunctionComponent, ReactElement, useState,
 } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
@@ -45,19 +45,13 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
-  const oppdaterProsessPanelIUrl = useCallback((nyttProsessSteg: string) => {
-    oppdaterProsessStegOgFaktaPanelIUrl(nyttProsessSteg, valgtFaktaSteg);
-  }, [valgtFaktaSteg]);
-  const oppdaterFaktaPanelIUrl = useCallback((nyttFaktaSteg: string) => {
-    oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyttFaktaSteg);
-  }, [valgtProsessSteg]);
-
   return (
     <RawIntlProvider value={intl}>
       <ProsessContainer
         paneler={prosessPaneler}
         valgtProsessSteg={valgtProsessSteg}
-        oppdaterProsessPanelIUrl={oppdaterProsessPanelIUrl}
+        valgtFaktaSteg={valgtFaktaSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandling={behandling}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
@@ -65,7 +59,8 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
       <FaktaContainer
         paneler={faktaPaneler}
         valgtFaktaSteg={valgtFaktaSteg}
-        oppdaterFaktaPanelIUrl={oppdaterFaktaPanelIUrl}
+        valgtProsessSteg={valgtProsessSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandlingVersjon={behandling?.versjon}
         setApentFaktaPanel={setApentFaktaPanel}
         apentFaktaPanelInfo={apentFaktaPanelInfo}

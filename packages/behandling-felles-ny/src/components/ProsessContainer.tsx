@@ -15,7 +15,8 @@ interface OwnProps {
   behandling: Behandling;
   paneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement)[];
   valgtProsessSteg?: string;
-  oppdaterProsessPanelIUrl: (prosessnavn: string) => void;
+  valgtFaktaSteg?: string;
+  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterBehandlingVersjon: (versjon: number) => void;
 }
@@ -24,7 +25,8 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   behandling,
   paneler,
   valgtProsessSteg,
-  oppdaterProsessPanelIUrl,
+  valgtFaktaSteg,
+  oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
   oppdaterBehandlingVersjon,
 }) => {
@@ -48,8 +50,8 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   const oppdaterMenyValg = useCallback((index: number) => {
     const panel = menyDataSomVises[index];
     const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
-    oppdaterProsessPanelIUrl(nyvalgtProsessSteg);
-  }, [menyDataSomVises]);
+    oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
+  }, [menyDataSomVises, valgtFaktaSteg]);
 
   const [skalOppdatereFagsakKontekst, toggleOppdatereFagsakContext] = useState(true);
   useEffect(() => {

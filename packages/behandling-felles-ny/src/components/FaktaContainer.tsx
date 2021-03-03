@@ -17,8 +17,9 @@ export const DEFAULT_FAKTA_KODE = 'default';
 interface OwnProps {
   behandlingVersjon?: number;
   paneler?: ((props: FaktaPanelInitProps) => ReactElement)[];
+  valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
-  oppdaterFaktaPanelIUrl: (faktanavn: string) => void;
+  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   setApentFaktaPanel: (panelData: { urlCode: string, text: string }) => void,
   apentFaktaPanelInfo?: {urlCode: string, text: string };
 }
@@ -27,7 +28,8 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   paneler,
   valgtFaktaSteg,
-  oppdaterFaktaPanelIUrl,
+  valgtProsessSteg,
+  oppdaterProsessStegOgFaktaPanelIUrl,
   setApentFaktaPanel,
   apentFaktaPanelInfo,
 }) => {
@@ -56,8 +58,8 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
 
   const oppdaterMenyValg = useCallback((index: number) => {
     const panel = vistMenyData[index];
-    oppdaterFaktaPanelIUrl(panel.id);
-  }, [vistMenyData]);
+    oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
+  }, [vistMenyData, valgtProsessSteg]);
 
   if (!paneler) {
     return null;
