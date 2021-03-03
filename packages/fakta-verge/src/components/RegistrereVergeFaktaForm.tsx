@@ -12,10 +12,9 @@ import {
   DatepickerField, InputField, SelectField,
 } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
 
 import VergeType from '../kodeverk/vergeType';
-import Verge from '../types/VergeTsType';
 
 export type FormValues = {
   navn?: string;

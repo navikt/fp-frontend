@@ -12,7 +12,7 @@ class OmsorgvilkaretFaktaPanelDef extends FaktaPanelDef {
 
   getTekstKode = () => 'OmsorgOgForeldreansvarInfoPanel.Omsorg'
 
-  getAksjonspunktKoder = () => [aksjonspunktCodes.OMSORGSOVERTAKELSE, aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]
+  getAksjonspunktKoder = () => [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]
 
   getEndepunkter = () => [FpBehandlingApiKeys.FAMILIEHENDELSE]
 

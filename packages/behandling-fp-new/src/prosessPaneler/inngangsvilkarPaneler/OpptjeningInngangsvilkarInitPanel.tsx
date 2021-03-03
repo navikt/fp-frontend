@@ -2,7 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-opptjening';
@@ -78,7 +78,7 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
       <OverstyringPanelDef
         behandling={standardPanelProps.behandling}
         aksjonspunkter={initData.aksjonspunkter}
-        aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+        aksjonspunktKoder={[aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET]}
         vilkar={standardPanelProps.vilkar}
         vilkarKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
@@ -92,11 +92,14 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <OpptjeningVilkarProsessIndex
-      lovReferanse={standardPanelProps.vilkar[0].lovReferanse}
-      {...panelData}
-      {...standardPanelProps}
-    />
+    <>
+      <OpptjeningVilkarProsessIndex
+        lovReferanse={standardPanelProps.vilkar[0].lovReferanse}
+        {...panelData}
+        {...standardPanelProps}
+      />
+      <VerticalSpacer thirtyTwoPx />
+    </>
   );
 };
 

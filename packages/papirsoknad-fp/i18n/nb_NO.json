@@ -62,6 +62,9 @@
   "Registrering.TheOtherParent.Yes": "Ja",
   "Registrering.TheOtherParent.No": "Nei",
 
+  "PermisjonPanel.MinstEnPeriodeRequired": "Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering",
+  "PermisjonPanel.DateRangesOverlappingPeriodTypes" : "Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)",
+
   "Registrering.Permisjon.SøkerHarAleneomsorg": "Har søker aleneomsorg for barnet?",
   "Registrering.Permisjon.SøkerHarAleneomsorg.Yes": "Ja",
   "Registrering.Permisjon.SøkerHarAleneomsorg.No": "Nei",

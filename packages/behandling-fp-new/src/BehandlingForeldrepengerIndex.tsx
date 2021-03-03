@@ -12,12 +12,17 @@ import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBeha
 import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
 import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
+import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
+import TilleggsopplysningerFaktaInitPanel from './faktaPaneler/TilleggsopplysningerFaktaInitPanel';
+import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInitPanel';
 import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
 import AdopsjonsvilkaretFaktaInitPanel from './faktaPaneler/AdopsjonsvilkaretFaktaInitPanel';
 import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/MedlemskapsvilkaretFaktaInitPanel';
 import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/OpptjeningsvilkaretFaktaInitPanel';
 import BeregningFaktaInitPanel from './faktaPaneler/BeregningFaktaInitPanel';
+import OmsorgFaktaInitPanel from './faktaPaneler/OmsorgFaktaInitPanel';
 import UttakFaktaInitPanel from './faktaPaneler/UttakFaktaInitPanel';
+import AktivitetskravFaktaInitPanel from './faktaPaneler/AktivitetskravFaktaInitPanel';
 import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
 import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
 import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarProsessStegInitPanel';
@@ -110,8 +115,11 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
             (props) => <SakenFaktaInitPanel {...props} />,
             (props) => <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
             (props) => <YtelserFaktaInitPanel {...props} />,
-            (props) => <FodselvilkaretFaktaInitPanel {...props} />,
+            (props) => <VergeFaktaInitPanel {...props} />,
+            (props) => <TilleggsopplysningerFaktaInitPanel {...props} />,
+            (props) => <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />,
             (props) => <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />,
+            (props) => <FodselvilkaretFaktaInitPanel {...props} />,
             (props) => (
               <MedlemskapsvilkaretFaktaInitPanel
                 {...props}
@@ -122,9 +130,11 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
             ),
             (props) => <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
             (props) => <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />,
             (props) => (
               <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
             ),
+            (props) => <AktivitetskravFaktaInitPanel {...props} />,
           ]}
           prosessPaneler={[
             (props, ekstraProps) => (
@@ -137,11 +147,12 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
               />
             ),
             (props) => <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => (
+            (props, ekstraProps) => (
               <InngangsvilkarProsessStegInitPanel
                 {...props}
                 rettigheter={rettigheter}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
               />
             ),
             (props) => <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,

@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { StandardFaktaPanelProps } from '@fpsak-frontend/types';
+import { StandardFaktaPanelProps, Verge } from '@fpsak-frontend/types';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';
-import Verge from './types/VergeTsType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();

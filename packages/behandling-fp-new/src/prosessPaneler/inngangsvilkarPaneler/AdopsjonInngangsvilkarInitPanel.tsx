@@ -5,7 +5,7 @@ import React, {
 import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import FodselVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-fodsel';
+import AdopsjonVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-adopsjon';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter, Aksjonspunkt, Vilkar,
@@ -13,7 +13,6 @@ import {
 import {
   useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../../data/fpBehandlingApi';
@@ -24,8 +23,7 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const VILKAR_KODER = [
-  vilkarType.FODSELSVILKARET_MOR,
-  vilkarType.FODSELSVILKARET_FAR,
+  vilkarType.ADOPSJONSVILKARET_FORELDREPENGER,
 ];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
@@ -42,7 +40,7 @@ interface OwnProps {
   harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
-const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
+const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   rettigheter,
   setPanelInfo,
@@ -58,8 +56,8 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
-    'FODSEL',
-    getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' }),
+    'ADOPSJON',
+    getPackageIntl().formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' }),
     erDataFerdighentet && skalVises,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
@@ -78,10 +76,10 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
       <OverstyringPanelDef
         behandling={standardPanelProps.behandling}
         aksjonspunkter={initData.aksjonspunkter}
-        aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_FODSELSVILKAR, aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR]}
+        aksjonspunktKoder={[aksjonspunktCodes.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP]}
         vilkar={standardPanelProps.vilkar}
         vilkarKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
+        panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
         erMedlemskapsPanel={false}
         toggleOverstyring={toggleOverstyring}
         erOverstyrt={erOverstyrt}
@@ -93,8 +91,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <FodselVilkarProsessIndex
-        ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      <AdopsjonVilkarProsessIndex
         {...standardPanelProps}
       />
       <VerticalSpacer thirtyTwoPx />
@@ -102,4 +99,4 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default FodselInngangsvilkarInitPanel;
+export default AdopsjonInngangsvilkarInitPanel;

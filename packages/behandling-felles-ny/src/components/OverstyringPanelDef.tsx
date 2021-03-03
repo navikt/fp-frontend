@@ -8,6 +8,8 @@ import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vi
 import {
   Aksjonspunkt, Behandling, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+
 import useSkalViseProsessPanel from '../utils/useSkalViseProsessPanel';
 import useStandardProsessPanelProps from '../utils/useStandardProsessPanelProps';
 
@@ -20,7 +22,7 @@ const filtrerAvslagsarsaker = (avslagsarsaker, vilkarTypeKode) => (vilkarTypeKod
 interface OwnProps {
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
-  aksjonspunktKode: string;
+  aksjonspunktKoder: string[];
   vilkar: Vilkar[];
   vilkarKoder: string[];
   erMedlemskapsPanel: boolean;
@@ -35,7 +37,7 @@ interface OwnProps {
 const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   aksjonspunkter,
-  aksjonspunktKode,
+  aksjonspunktKoder,
   vilkar,
   vilkarKoder,
   panelTekstKode,
@@ -46,12 +48,13 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   kanOverstyreAccess,
   overrideReadOnly,
 }) => {
-  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => ap.definisjon.kode === aksjonspunktKode), [aksjonspunkter]);
+  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => aksjonspunktKoder.some((kode) => kode === ap.definisjon.kode)),
+    [aksjonspunkter]);
 
   const standardProps = useStandardProsessPanelProps({
     aksjonspunkter: overstyrteAksjonspunkter,
     vilkar,
-  }, [aksjonspunktKode], vilkarKoder);
+  }, aksjonspunktKoder, vilkarKoder);
 
   const skalVises = useSkalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
@@ -62,20 +65,24 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <VilkarresultatMedOverstyringProsessIndex
-      behandling={behandling}
-      medlemskap={medlemskap}
-      overrideReadOnly={overrideReadOnly}
-      kanOverstyreAccess={kanOverstyreAccess}
-      toggleOverstyring={toggleOverstyring}
-      avslagsarsaker={avslagsarsaker}
-      erOverstyrt={erOverstyrt}
-      panelTittelKode={panelTekstKode}
-      overstyringApKode={aksjonspunktKode}
-      lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
-      erMedlemskapsPanel={erMedlemskapsPanel}
-      {...standardProps}
-    />
+    <>
+      <VilkarresultatMedOverstyringProsessIndex
+        behandling={behandling}
+        medlemskap={medlemskap}
+        overrideReadOnly={overrideReadOnly}
+        kanOverstyreAccess={kanOverstyreAccess}
+        toggleOverstyring={toggleOverstyring}
+        avslagsarsaker={avslagsarsaker}
+        erOverstyrt={erOverstyrt}
+        panelTittelKode={panelTekstKode}
+      // TODO (TOR) Dette må vera feil. Send inn fleire koder
+        overstyringApKode={aksjonspunktKoder[0]}
+        lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
+        erMedlemskapsPanel={erMedlemskapsPanel}
+        {...standardProps}
+      />
+      <VerticalSpacer thirtyTwoPx />
+    </>
   );
 };
 

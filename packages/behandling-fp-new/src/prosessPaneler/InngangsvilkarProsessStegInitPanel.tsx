@@ -2,13 +2,14 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { AksessRettigheter } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultProsessStegPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import FodselInngangsvilkarInitPanel from './inngangsvilkarPaneler/FodselInngangsvilkarInitPanel';
+import AdopsjonInngangsvilkarInitPanel from './inngangsvilkarPaneler/AdopsjonInngangsvilkarInitPanel';
 import MedlemskapInngangsvilkarInitPanel from './inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import OpptjeningInngangsvilkarInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
+import ForeldreansvarInngangsvilkarInitPanel from './inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
 
 interface OwnProps {
   apentFaktaPanelInfo?: {urlCode: string, text: string };
@@ -32,8 +33,9 @@ const InngangsvilkarProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     leftPanels={(props) => (
       <>
         <FodselInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
-        <VerticalSpacer thirtyTwoPx />
+        <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
         <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
+        <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} {...props} />
       </>
     )}
     rightPanels={(props) => (

@@ -2,7 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -72,20 +72,23 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <OverstyringPanelDef
-      behandling={standardPanelProps.behandling}
-      aksjonspunkter={standardPanelProps.aksjonspunkter}
-      aksjonspunktKode={AKSJONSPUNKT_KODER[0]}
-      vilkar={standardPanelProps.vilkar}
-      vilkarKoder={VILKAR_KODER}
-      panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-      erMedlemskapsPanel
-      medlemskap={panelData.medlemskap}
-      toggleOverstyring={toggleOverstyring}
-      erOverstyrt={erOverstyrt}
-      overrideReadOnly={standardPanelProps.isReadOnly || (harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}
-      kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-    />
+    <>
+      <OverstyringPanelDef
+        behandling={standardPanelProps.behandling}
+        aksjonspunkter={standardPanelProps.aksjonspunkter}
+        aksjonspunktKoder={AKSJONSPUNKT_KODER}
+        vilkar={standardPanelProps.vilkar}
+        vilkarKoder={VILKAR_KODER}
+        panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+        erMedlemskapsPanel
+        medlemskap={panelData.medlemskap}
+        toggleOverstyring={toggleOverstyring}
+        erOverstyrt={erOverstyrt}
+        overrideReadOnly={standardPanelProps.isReadOnly || (harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}
+        kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+      />
+      <VerticalSpacer thirtyTwoPx />
+    </>
   );
 };
 
