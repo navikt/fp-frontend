@@ -69,4 +69,22 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     expect(message).toHaveLength(3);
     expect(message.last().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Dod');
   });
+
+  it('skal vise manglende fødselsopplysninger når antall barn er 0 og det mangler fødselsdato', () => {
+    const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
+      intl={intlMock}
+      familiehendelse={{
+        hendelseType: {
+          kode: familieHendelseType.FODSEL,
+          kodeverk: '',
+        },
+        antallBarn: 0,
+        dødfødsel: false,
+      }}
+    />);
+
+    const message = wrapper.find(FormattedMessage);
+    expect(message).toHaveLength(1);
+    expect(message.last().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.ManglerFodselOpplysninger');
+  });
 });

@@ -12,7 +12,7 @@ export type FagsakPerson = Readonly<{
 
 export type FagsakHendelse = Readonly<{
   hendelseType: Kodeverk;
-  hendelseDato: string;
+  hendelseDato?: string;
   antallBarn: number;
   dødfødsel: boolean;
 }>
