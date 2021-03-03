@@ -181,9 +181,7 @@ const getEditedStatus = createSelector(
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   editedStatus: getEditedStatus(ownProps),
-  ...behandlingFormValueSelector('OmsorgOgForeldreansvarInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(
-    state, 'vilkarType',
-  ),
+  vilkarType: behandlingFormValueSelector('OmsorgOgForeldreansvarInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vilkarType'),
 });
 
 const OmsorgOgForeldreansvarFaktaForm = connect(mapStateToProps)(OmsorgOgForeldreansvarFaktaFormImpl);

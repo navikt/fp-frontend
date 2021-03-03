@@ -59,11 +59,14 @@ const VisittkortBarnInfoFodselPanel: FunctionComponent<OwnProps & WrappedCompone
     <>
       <FlexColumn className={styles.text}>
         <Normaltekst>
-          {visFødselsdato && (
+          {visFødselsdato && !!hendelseDato && antallBarn > 0 && (
             <>
               <FormattedMessage id={finnFodselsdatoTekstkode(antallBarn)} values={{ dato: moment(hendelseDato).format(DDMMYYYY_DATE_FORMAT) }} />
               <FormattedMessage {...finnAlderTekstProps(hendelseDato)} />
             </>
+          )}
+          {visFødselsdato && (!hendelseDato || antallBarn === 0) && (
+            <FormattedMessage id="VisittkortBarnInfoFodselPanel.ManglerFodselOpplysninger" />
           )}
           {!visFødselsdato && <FormattedMessage id="VisittkortBarnInfoFodselPanel.Termin" values={{ dato: dateFormat(hendelseDato) }} />}
         </Normaltekst>
