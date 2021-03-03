@@ -9,10 +9,10 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@fpsak-frontend/sak-visittkort": "1.0.0",
-    "nav-frontend-lenkepanel": "^1.0.74",
+    "nav-frontend-lenkepanel": "^1.0.75",
     "nav-frontend-lenkepanel-style": "^1.0.2",
-    "nav-frontend-typografi": "3.0.3",
-    "nav-frontend-typografi-style": "1.0.34",
+    "nav-frontend-typografi": "3.0.4",
+    "nav-frontend-typografi-style": "1.0.35",
     "react": "^17.0.1",
     "react-intl": "^5.13.2",
     "react-router-dom": "^5.2.0"

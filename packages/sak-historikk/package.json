@@ -13,10 +13,10 @@
     "nav-frontend-chevron": "1.0.28",
     "nav-frontend-chevron-style": "1.0.4",
     "nav-frontend-core": "5.0.11",
-    "nav-frontend-paneler": "2.0.31",
+    "nav-frontend-paneler": "2.0.32",
     "nav-frontend-paneler-style": "1.0.2",
-    "nav-frontend-typografi": "3.0.3",
-    "nav-frontend-typografi-style": "1.0.34",
+    "nav-frontend-typografi": "3.0.4",
+    "nav-frontend-typografi-style": "1.0.35",
     "react": "^17.0.1",
     "react-intl": "^5.13.2",
     "react-router-dom": "^5.2.0"

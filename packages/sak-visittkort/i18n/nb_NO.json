@@ -20,6 +20,7 @@
   "VisittkortBarnInfoFodselPanel.Maned.Fodt": " ({value} mnd)",
   "VisittkortBarnInfoFodselPanel.Dag.Fodt": " ({value} dag)",
   "VisittkortBarnInfoFodselPanel.Dager.Fodt": " ({value} dager)",
+  "VisittkortBarnInfoFodselPanel.ManglerFodselOpplysninger": "Har ikke opplysninger om fødsel",
 
   "VisittkortBarnInfoOmsorgPanel.Foreldreansvar": "Foreldreansvar {dato}",
   "VisittkortBarnInfoOmsorgPanel.Adopsjon": "Adopsjon {dato}",

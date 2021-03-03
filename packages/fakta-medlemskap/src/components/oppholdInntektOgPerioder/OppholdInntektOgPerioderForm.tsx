@@ -67,7 +67,6 @@ const createNewPerioder = (perioder: PeriodeMedId[], id: string, values: Opphold
 
 export type FormValues = {
   soknad: Soknad;
-  gjeldendeFom: string;
   medlemskapPerioder: MedlemskapPeriode[];
   perioder: PeriodeMedId[];
 }
@@ -298,7 +297,6 @@ const buildInitalValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.medlemskap],
 (soknad, medlem = {} as Medlemskap): FormValues => ({
   soknad,
-  gjeldendeFom: medlem.fom,
   medlemskapPerioder: medlem.medlemskapPerioder || [],
   perioder: (medlem.perioder || []).map((periode) => ({
     ...periode,
