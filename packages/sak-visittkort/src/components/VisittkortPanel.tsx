@@ -60,16 +60,23 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     <div className={styles.container}>
       <FlexContainer>
         <FlexRow>
-          <FlexColumn>
-            <PersonCard
-              name={soker.navn}
-              fodselsnummer={soker.personnummer}
-              gender={utledKjonn(soker.kjønn)}
-              url={lenkeTilAnnenPart}
-              renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={soker} harVerge={harVerge} />}
-              isActive={erMor}
-            />
-          </FlexColumn>
+          {soker.aktørId && (
+            <FlexColumn>
+              <PersonCard
+                name={soker.navn}
+                fodselsnummer={soker.personnummer}
+                gender={utledKjonn(soker.kjønn)}
+                url={lenkeTilAnnenPart}
+                renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={soker} harVerge={harVerge} />}
+                isActive={erMor}
+              />
+            </FlexColumn>
+          )}
+          {!soker.aktørId && (
+            <FlexColumn>
+              <EmptyPersonCard namePlaceholder={intl.formatMessage({ id: 'VisittkortPanel.Ukjent' })} />
+            </FlexColumn>
+          )}
           {annenPart && annenPart.aktørId && (
             <FlexColumn>
               <PersonCard
