@@ -31,10 +31,12 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[]): boolean => {
   if (paneler.some((p) => p.harApentAksjonspunkt)) {
     return true;
   }
+  if (paneler.some((p) => p.status === vilkarUtfallType.IKKE_OPPFYLT)) {
+    return false;
+  }
 
   return !(paneler.every((p) => p.status === vilkarUtfallType.IKKE_VURDERT)
-   || paneler.every((p) => p.status === vilkarUtfallType.IKKE_OPPFYLT)
-   || paneler.every((p) => p.status === vilkarUtfallType.OPPFYLT));
+    || paneler.every((p) => p.status === vilkarUtfallType.OPPFYLT));
 };
 
 type InngangsvilkarUnderpanelProps = {

@@ -52,7 +52,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
     if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
       setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst });
     }
-  }, []);
+  }, [apentFaktaPanelInfo]);
 
   const vistMenyData = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
 
