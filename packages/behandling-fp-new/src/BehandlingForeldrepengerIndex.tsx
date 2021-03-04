@@ -34,6 +34,7 @@ import UttakProsessStegInitPanel from './prosessPaneler/UttakProsessStegInitPane
 import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
 import SimuleringProsessStegInitPanel from './prosessPaneler/SimuleringProsessStegInitPanel';
 import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
+import SoknadsfristProsessStegInitPanel from './prosessPaneler/SoknadsfristProsessStegInitPanel';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -160,8 +161,9 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
               />
             ),
-            (props) => <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />,
             (props) => <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <SoknadsfristProsessStegInitPanel {...props} />,
+            (props) => <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />,
             (props) => (
               <UttakProsessStegInitPanel
                 {...props}
