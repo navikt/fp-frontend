@@ -28,6 +28,40 @@ const grafFargeFL = '#c1b5d0';
 const grafFargeYtelse = '#C6C2BF';
 const grafBorderFarge = '#0c5472';
 
+const finnAntallStatuser = (statuser: Inntektstyper): number => Object.values(statuser).reduce((a, status) => a + (status === true ? 1 : 0), 0);
+
+type InntektKolonneBredde = '1' | '2' | '3';
+
+const arbeidsinntektBredde = (statuser: Inntektstyper): InntektKolonneBredde => {
+  const unikeStatuser = finnAntallStatuser(statuser);
+  if (unikeStatuser === 1) {
+    return '3';
+  }
+  if (unikeStatuser === 2) {
+    return '2';
+  }
+  return '1';
+};
+
+const frilansInntektBredde = (statuser: Inntektstyper): InntektKolonneBredde => {
+  const unikeStatuser = finnAntallStatuser(statuser);
+  if (unikeStatuser === 1) {
+    return '3';
+  }
+  if (unikeStatuser === 3) {
+    return '1';
+  }
+  return statuser.harArbeidsinntekt ? '1' : '2';
+};
+
+const ytelseInntektBredde = (statuser: Inntektstyper): InntektKolonneBredde => {
+  const unikeStatuser = finnAntallStatuser(statuser);
+  if (unikeStatuser === 1) {
+    return '3';
+  }
+  return '1';
+};
+
 const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: string): number => {
   if (!andeler || andeler.length === 0) {
     return 0;
@@ -63,16 +97,10 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
   const sumYtelseAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
     .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.YTELSE)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
-
   return (
     <>
       <Row>
-        <Column
-          xs={relevanteStatuser.harArbeidsinntekt && relevanteStatuser.harFrilansinntekt ? '11' : '9'}
-          className={beregningStyles.noPaddingRight}
-        >
-          <div className={beregningStyles.colDevider} />
-        </Column>
+        <Column xs="12" className={styles.aarDevider} />
       </Row>
       <Row>
         <Column xs="8">
@@ -81,17 +109,17 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
           </Normaltekst>
         </Column>
         {relevanteStatuser.harArbeidsinntekt && (
-          <Column xs="1" className={beregningStyles.colMaanedText}>
+          <Column xs={arbeidsinntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
             <Element className={beregningStyles.semiBoldText}>{formatCurrencyNoKr(sumATAndeler)}</Element>
           </Column>
         )}
         {relevanteStatuser.harFrilansinntekt && (
-          <Column xs="1" className={beregningStyles.colMaanedText}>
+          <Column xs={frilansInntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
             <Element>{formatCurrencyNoKr(sumFLAndeler)}</Element>
           </Column>
         )}
         {relevanteStatuser.harYtelseinntekt && (
-          <Column xs="1" className={beregningStyles.colMaanedText}>
+          <Column xs={ytelseInntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
             <Element>{formatCurrencyNoKr(sumYtelseAndeler)}</Element>
           </Column>
         )}
@@ -100,7 +128,6 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
     </>
   );
 };
-
 const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: InntektsgrunnlagMåned, maksVerdi: number, aarMaaned: string): ReactElement => {
   const dato = `${aarMaaned}01`;
   const maanedNavn = moment(dato, ISO_DATE_FORMAT).format('MMM');
@@ -114,8 +141,8 @@ const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: Inntektsgr
   return (
     <React.Fragment key={`${dato}wrapper`}>
       { maaned === '01' && (
-        <Row className={styles.aarDeviderRow}>
-          <Column xs={relevanteStatuser.harArbeidsinntekt && relevanteStatuser.harFrilansinntekt ? '12' : '10'} className={styles.aarDevider} />
+        <Row>
+          <Column xs="12" className={styles.aarDevider} />
         </Row>
       )}
       <Row>
@@ -154,17 +181,23 @@ const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: Inntektsgr
 
         </Column>
         {relevanteStatuser.harArbeidsinntekt && (
-          <Column xs="1" className={beregningStyles.colMaanedText}>
+          <Column xs={arbeidsinntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
             <Undertekst>{formatCurrencyNoKr(atBeløp)}</Undertekst>
           </Column>
         )}
         {relevanteStatuser.harFrilansinntekt && (
-          <Column xs="1" className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}>
+          <Column
+            xs={frilansInntektBredde(relevanteStatuser)}
+            className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}
+          >
             <Undertekst>{formatCurrencyNoKr(flBeløp)}</Undertekst>
           </Column>
         )}
         {relevanteStatuser.harYtelseinntekt && (
-          <Column xs="1" className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}>
+          <Column
+            xs={ytelseInntektBredde(relevanteStatuser)}
+            className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}
+          >
             <Undertekst>{formatCurrencyNoKr(ytelseBeløp)}</Undertekst>
           </Column>
         )}
@@ -213,8 +246,8 @@ const finnesInntektAvType = (måneder: InntektsgrunnlagMåned[], status: string)
   .some((innt) => innt.inntektAktivitetType.kode === status);
 
 type OwnProps = {
-    sammenligningsGrunnlagInntekter: Inntektsgrunnlag;
-    skjeringstidspunktDato: string;
+  sammenligningsGrunnlagInntekter: Inntektsgrunnlag;
+  skjeringstidspunktDato: string;
 };
 
 type Inntektstyper = {
@@ -230,7 +263,7 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
   if (!måneder || måneder.length === 0 || !skjeringstidspunktDato) {
     return null;
   }
-  const inntektstyper = {
+  const relevanteStatuser = {
     harFrilansinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.FRILANS), [måneder]),
     harArbeidsinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.ARBEID), [måneder]),
     harYtelseinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.YTELSE), [måneder]),
@@ -241,6 +274,7 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
     <>
       <AvsnittSkiller spaceAbove spaceUnder />
       <Lesmerpanel
+        className={styles.lesMer}
         intro={lagOverskrift(userIdent)}
         lukkTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SkjulMaaneder' })}
         apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder' })}
@@ -249,25 +283,25 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
         <Row>
           <Column xs="1" className={styles.maanedColumn} />
           <Column xs="7" />
-          {inntektstyper.harArbeidsinntekt
+          {relevanteStatuser.harArbeidsinntekt
           && (
-          <Column xs="1" className={beregningStyles.colMaanedText}>
-            <Undertekst className={beregningStyles.semiBoldText}>
-              <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid" />
-            </Undertekst>
-          </Column>
+            <Column xs={arbeidsinntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
+              <Undertekst className={beregningStyles.semiBoldText}>
+                <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid" />
+              </Undertekst>
+            </Column>
           )}
-          {inntektstyper.harFrilansinntekt
+          {relevanteStatuser.harFrilansinntekt
           && (
-            <Column xs="1" className={beregningStyles.colAarText}>
+            <Column xs={frilansInntektBredde(relevanteStatuser)} className={beregningStyles.colAarText}>
               <Undertekst className={beregningStyles.semiBoldText}>
                 <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans" />
               </Undertekst>
             </Column>
           )}
-          {inntektstyper.harYtelseinntekt
+          {relevanteStatuser.harYtelseinntekt
           && (
-            <Column xs="1" className={beregningStyles.colMaanedText}>
+            <Column xs={ytelseInntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
               <Undertekst className={beregningStyles.semiBoldText}>
                 <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ytelse" />
               </Undertekst>
@@ -275,10 +309,10 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
           )}
           <Column xs="1" />
         </Row>
-        {lagRader(måneder, inntektstyper, skjeringstidspunktDato)}
+        {lagRader(måneder, relevanteStatuser, skjeringstidspunktDato)}
 
       </Lesmerpanel>
-      {lagSumRad(måneder, inntektstyper)}
+      {lagSumRad(måneder, relevanteStatuser)}
     </>
   );
 };
