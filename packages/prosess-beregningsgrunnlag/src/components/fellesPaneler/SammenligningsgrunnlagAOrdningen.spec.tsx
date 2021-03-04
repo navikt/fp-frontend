@@ -99,9 +99,9 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
 
     const lesmer = wrapper.find('Lesmerpanel');
     expect(lesmer).toHaveLength(1);
-    const underTekster = wrapper.find('Undertekst');
-    expect(underTekster.at(0).children().at(0).text()).toBe('Arbeid');
-    const sumTitle = wrapper.find('FormattedMessage').first();
+    const arbeidTittel = wrapper.find('FormattedMessage').first();
+    expect(arbeidTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid');
+    const sumTitle = wrapper.find('FormattedMessage').at(1);
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
     const sumATAndeler = wrapper.find('Element').at(0);
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(10000));
@@ -118,9 +118,11 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
 
     const lesmer = wrapper.find('Lesmerpanel');
     expect(lesmer).toHaveLength(1);
-    const underTekster = wrapper.find('Undertekst');
-    expect(underTekster.at(0).children().at(0).text()).toBe('Arbeid');
-    const sumTitle = wrapper.find('FormattedMessage').first();
+    const ArbeidTittel = wrapper.find('FormattedMessage').first();
+    expect(ArbeidTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid');
+    const frilansTittel = wrapper.find('FormattedMessage').at(1);
+    expect(frilansTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans');
+    const sumTitle = wrapper.find('FormattedMessage').at(2);
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
     const sumATAndeler = wrapper.find('Element').at(0);
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(5000));
