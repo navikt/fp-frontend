@@ -64,6 +64,7 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   useInngangsvilkarRegistrerer(
     setPanelInfo,
+    behandlingVersjon,
     'FORELDREANSVARSVILKARET',
     hentAksjonspunktTekst(standardPanelProps?.aksjonspunkter),
     erDataFerdighentet && skalVises,

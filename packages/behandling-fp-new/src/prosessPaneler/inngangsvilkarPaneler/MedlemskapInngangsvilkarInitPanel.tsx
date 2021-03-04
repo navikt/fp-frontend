@@ -56,6 +56,7 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
+    behandlingVersjon,
     'MEDLEMSKAP',
     '',
     erDataFerdighentet && skalVises,

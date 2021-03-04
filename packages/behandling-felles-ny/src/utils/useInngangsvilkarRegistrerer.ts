@@ -4,6 +4,7 @@ import InngangsvilkarPanelData from '../types/inngangsvilkarPanelData';
 
 const useInngangsvilkarRegistrerer = (
   setPanelInfo: (data: InngangsvilkarPanelData) => void,
+  behandlingVersjon: number,
   id: string,
   aksjonspunktTekst: string,
   skalVises: boolean,
@@ -12,6 +13,10 @@ const useInngangsvilkarRegistrerer = (
 ) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
+
+  useEffect(() => {
+    setOverstyrt(false);
+  }, [behandlingVersjon]);
 
   useEffect(() => {
     if (skalVises) {

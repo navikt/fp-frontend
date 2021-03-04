@@ -58,6 +58,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
+    behandlingVersjon,
     'FODSEL',
     getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' }),
     erDataFerdighentet && skalVises,

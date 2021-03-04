@@ -58,6 +58,7 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
+    behandlingVersjon,
     'OPPTJENINGSVILKARET',
     getPackageIntl().formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' }),
     erDataFerdighentet && skalVises,

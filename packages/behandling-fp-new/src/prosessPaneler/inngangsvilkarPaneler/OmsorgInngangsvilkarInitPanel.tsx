@@ -50,6 +50,7 @@ const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   useInngangsvilkarRegistrerer(
     setPanelInfo,
+    behandlingVersjon,
     'OMSORG',
     getPackageIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' }),
     erDataFerdighentet && skalVises,

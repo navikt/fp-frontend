@@ -9,7 +9,6 @@ import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import {
   useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps, OverstyringPanelDef, useSkalViseProsessPanel,
 } from '@fpsak-frontend/behandling-felles-ny';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
@@ -36,14 +35,11 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
 }) => {
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
+  useEffect(() => {
+    setOverstyrt(false);
+  }, [behandlingVersjon]);
 
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  useEffect(() => {
-    if (initState === RestApiState.SUCCESS) {
-      setOverstyrt(false);
-    }
-  }, [initState]);
 
   const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 

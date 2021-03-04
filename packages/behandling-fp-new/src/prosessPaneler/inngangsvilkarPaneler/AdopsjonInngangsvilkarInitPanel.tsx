@@ -56,6 +56,7 @@ const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
     setPanelInfo,
+    behandlingVersjon,
     'ADOPSJON',
     getPackageIntl().formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' }),
     erDataFerdighentet && skalVises,
