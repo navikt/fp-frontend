@@ -252,19 +252,25 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
           {inntektstyper.harArbeidsinntekt
           && (
           <Column xs="1" className={beregningStyles.colMaanedText}>
-            <Undertekst className={beregningStyles.semiBoldText}>Arbeid</Undertekst>
+            <Undertekst className={beregningStyles.semiBoldText}>
+              <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid" />
+            </Undertekst>
           </Column>
           )}
           {inntektstyper.harFrilansinntekt
           && (
             <Column xs="1" className={beregningStyles.colAarText}>
-              <Undertekst className={beregningStyles.semiBoldText}>Frilans</Undertekst>
+              <Undertekst className={beregningStyles.semiBoldText}>
+                <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans" />
+              </Undertekst>
             </Column>
           )}
           {inntektstyper.harYtelseinntekt
           && (
             <Column xs="1" className={beregningStyles.colMaanedText}>
-              <Undertekst className={beregningStyles.semiBoldText}>Ytelse</Undertekst>
+              <Undertekst className={beregningStyles.semiBoldText}>
+                <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ytelse" />
+              </Undertekst>
             </Column>
           )}
           <Column xs="1" />
