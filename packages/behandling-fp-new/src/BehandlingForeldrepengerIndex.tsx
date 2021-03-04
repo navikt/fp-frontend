@@ -15,7 +15,9 @@ import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
 import TilleggsopplysningerFaktaInitPanel from './faktaPaneler/TilleggsopplysningerFaktaInitPanel';
 import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInitPanel';
+import FordelingFaktaInitPanel from './faktaPaneler/FordelingFaktaInitPanel';
 import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
+import BesteberegningFaktaInitPanel from './faktaPaneler/BesteberegningFaktaInitPanel';
 import AdopsjonsvilkaretFaktaInitPanel from './faktaPaneler/AdopsjonsvilkaretFaktaInitPanel';
 import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/MedlemskapsvilkaretFaktaInitPanel';
 import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/OpptjeningsvilkaretFaktaInitPanel';
@@ -26,6 +28,7 @@ import AktivitetskravFaktaInitPanel from './faktaPaneler/AktivitetskravFaktaInit
 import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
 import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
 import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarProsessStegInitPanel';
+import FortsattMedlemskapProsessStegInitPanel from './prosessPaneler/FortsattMedlemskapProsessStegInitPanel';
 import BeregningsgrunnlagProsessStegInitPanel from './prosessPaneler/BeregningsgrunnlagProsessStegInitPanel';
 import UttakProsessStegInitPanel from './prosessPaneler/UttakProsessStegInitPanel';
 import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
@@ -130,6 +133,8 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
             ),
             (props) => <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
             (props) => <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
+            (props) => <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
             (props) => <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />,
             (props) => (
               <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
@@ -155,6 +160,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
               />
             ),
+            (props) => <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />,
             (props) => <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
             (props) => (
               <UttakProsessStegInitPanel

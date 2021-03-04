@@ -10,6 +10,7 @@ import AdopsjonInngangsvilkarInitPanel from './inngangsvilkarPaneler/AdopsjonInn
 import MedlemskapInngangsvilkarInitPanel from './inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import OpptjeningInngangsvilkarInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
 import ForeldreansvarInngangsvilkarInitPanel from './inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
+import OmsorgInngangsvilkarInitPanel from './inngangsvilkarPaneler/OmsorgInngangsvilkarInitPanel';
 
 interface OwnProps {
   apentFaktaPanelInfo?: {urlCode: string, text: string };
@@ -34,6 +35,7 @@ const InngangsvilkarProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       <>
         <FodselInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
         <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
+        <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} {...props} />
         <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
         <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} {...props} />
       </>

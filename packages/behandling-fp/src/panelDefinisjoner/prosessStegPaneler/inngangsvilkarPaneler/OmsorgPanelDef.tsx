@@ -13,7 +13,6 @@ class OmsorgPanelDef extends ProsessStegPanelDef {
   getKomponent = (props) => <OmsorgVilkarProsessIndex {...props} />
 
   getAksjonspunktKoder = () => [
-    aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
     aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
   ]
