@@ -42,6 +42,7 @@ describe('<VisittkortPanel>', () => {
     kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     fødselsdato: '1979-01-01',
     personnummer: '1234567',
+    aktørId: 'test1',
   };
 
   const fagsakPersonAnnenPart = {
