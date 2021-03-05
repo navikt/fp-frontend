@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
-import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -9,6 +8,7 @@ import { HistorikkInnslagAksjonspunkt } from '@fpsak-frontend/types';
 
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { findHendelseText } from './felles/historikkUtils';
+import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
 const aksjonspunktCodesToTextCode = {
@@ -84,10 +84,6 @@ const aksjonspunktCodesToTextCode = {
 
 const tilbakekrevingsAksjonspunktCodesToTextCode = {};
 
-const scrollUp = () => {
-  window.scroll(0, 0);
-};
-
 const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: IntlShape, erTilbakekreving: boolean): ReactNode => {
   const aksjonspktText = erTilbakekreving
     ? tilbakekrevingsAksjonspunktCodesToTextCode[aksjonspunkt.aksjonspunktKode]
@@ -130,18 +126,13 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps>
             <VerticalSpacer fourPx />
           </>
         )}
-        {historikkinnslagDel.skjermlenke
-          ? (
-            <Element>
-              <NavLink
-                to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDel.skjermlenke.kode)}
-                onClick={scrollUp}
-              >
-                {getKodeverknavn(historikkinnslagDel.skjermlenke)}
-              </NavLink>
-            </Element>
-          )
-          : null}
+        <Skjermlenke
+          skjermlenke={historikkinnslagDel.skjermlenke}
+          behandlingLocation={behandlingLocation}
+          getKodeverknavn={getKodeverknavn}
+          scrollUpOnClick
+          createLocationForSkjermlenke={createLocationForSkjermlenke}
+        />
         {historikkinnslagDel.aksjonspunkter && historikkinnslagDel.aksjonspunkter.map((aksjonspunkt) => (
           <div key={aksjonspunkt.aksjonspunktKode}>
             {formaterAksjonspunkt(aksjonspunkt, intl, erTilbakekreving)}

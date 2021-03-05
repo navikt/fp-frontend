@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { NavLink } from 'react-router-dom';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
@@ -9,11 +8,8 @@ import { HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import BubbleText from './felles/bubbleText';
+import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
-
-const scrollUp = () => {
-  window.scroll(0, 0);
-};
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
@@ -69,14 +65,13 @@ const HistorikkMalTypeAktivitetskrav: FunctionComponent<HistorikkMal> = ({
   const { historikkinnslagDeler } = historikkinnslag;
   return (
     <>
-      <Element>
-        <NavLink
-          to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDeler[0].skjermlenke.kode)}
-          onClick={scrollUp}
-        >
-          {getKodeverknavn(historikkinnslagDeler[0].skjermlenke)}
-        </NavLink>
-      </Element>
+      <Skjermlenke
+        skjermlenke={historikkinnslagDeler[0].skjermlenke}
+        behandlingLocation={behandlingLocation}
+        getKodeverknavn={getKodeverknavn}
+        scrollUpOnClick
+        createLocationForSkjermlenke={createLocationForSkjermlenke}
+      />
       {historikkinnslagDeler.map((historikkinnslagDel, index) => (historikkinnslagDel.endredeFelter ? (
         <div key={`historikkinnslagDel${index + 1}`}>
           <VerticalSpacer fourPx />
