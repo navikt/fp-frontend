@@ -65,6 +65,9 @@ export const getPathToFplos = (href: string): string => {
 
 export const createLocationForSkjermlenke = (behandlingLocation: Location, skjermlenkeCode: string): Location => {
   const skjermlenke = skjermlenkeCodes[skjermlenkeCode];
+  if (!skjermlenke) {
+    return undefined;
+  }
   return getLocationWithQueryParams(behandlingLocation, { punkt: skjermlenke.punktNavn, fakta: skjermlenke.faktaNavn });
 };
 
