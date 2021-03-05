@@ -11,7 +11,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
+  useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -49,7 +49,7 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const skalVises = initData
     && initData.vilkar.some((v) => v.vilkarType.kode === vilkarType.OPPTJENINGSVILKARET)

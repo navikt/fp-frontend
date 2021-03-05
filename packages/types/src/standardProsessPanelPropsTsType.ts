@@ -2,9 +2,10 @@ import {
   Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
 
-interface StandardProsessFormProps {
+interface StandardProsessPanelProps {
   behandling: Behandling;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
   status: string;
   isReadOnly: boolean;
@@ -14,4 +15,4 @@ interface StandardProsessFormProps {
   isAksjonspunktOpen: boolean;
 }
 
-export default StandardProsessFormProps;
+export default StandardProsessPanelProps;

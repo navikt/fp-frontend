@@ -10,7 +10,7 @@ import {
   Aksjonspunkt, Fagsak, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  FaktaPanelInitProps, useStandardFaktaProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
+  FaktaPanelInitProps, useStandardFaktaPanelProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -54,7 +54,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const skalVises = initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode));
 

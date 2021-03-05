@@ -9,7 +9,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
+  useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -45,7 +45,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,

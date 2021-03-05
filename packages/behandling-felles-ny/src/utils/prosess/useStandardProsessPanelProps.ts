@@ -1,29 +1,59 @@
 import { useContext } from 'react';
 
 import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
+  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { erReadOnly } from './readOnlyUtils';
-import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
-import { getBekreftAksjonspunktProsessCallback } from './getBekreftAksjonspunktCallback';
-import { StandardPropsStateContext } from './standardPropsStateContext';
+import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
 
-type Standard = {
-  behandling: Behandling;
-  isReadOnly: boolean;
-  submittable: boolean;
-  isAksjonspunktOpen: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback: (aksjonspunktData: any) => Promise<any>;
-  status: string;
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  readOnlySubmitButton: boolean;
-}
+import { erReadOnly } from '../readOnlyPanelUtils';
+import getAlleMerknaderFraBeslutter from '../getAlleMerknaderFraBeslutter';
+import { StandardPropsStateContext } from '../standardPropsStateContext';
+
+export const DEFAULT_FAKTA_KODE = 'default';
+export const DEFAULT_PROSESS_STEG_KODE = 'default';
+
+const getBekreftAksjonspunktProsessCallback = (
+  lagringSideEffectsCallback: (aksjonspunktModeller: any) => () => void,
+  fagsak: Fagsak,
+  behandling: Behandling,
+  aksjonspunkter: Aksjonspunkt[],
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
+) => (aksjonspunktModels) => {
+  const models = aksjonspunktModels.map((ap) => ({
+    '@type': ap.kode,
+    ...ap,
+  }));
+
+  const params = {
+    saksnummer: fagsak.saksnummerString,
+    behandlingId: behandling.id,
+    behandlingVersjon: behandling.versjon,
+  };
+
+  const etterLagringCallback = lagringSideEffectsCallback(aksjonspunktModels);
+
+  if (lagreOverstyrteAksjonspunkter) {
+    const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => aksjonspunktModels.some((apModel) => apModel.kode === ap.definisjon.kode));
+    const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring
+      .some((ap) => ap.aksjonspunktType.kode === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType.kode === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
+
+    if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
+      return lagreOverstyrteAksjonspunkter({
+        ...params,
+        overstyrteAksjonspunktDtoer: models,
+      }, true).then(etterLagringCallback);
+    }
+  }
+
+  return lagreAksjonspunkter({
+    ...params,
+    bekreftedeAksjonspunktDtoer: models,
+  }, true).then(etterLagringCallback);
+};
 
 const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   if (vilkar.length > 0) {
@@ -50,7 +80,7 @@ const useStandardProsessPanelProps = (
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
-): Standard => {
+): StandardProsessPanelProps => {
   const value = useContext(StandardPropsStateContext);
 
   const aksjonspunkterForSteg = data && aksjonspunktKoder ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
@@ -65,7 +95,7 @@ const useStandardProsessPanelProps = (
   const readOnlySubmitButton = (!(aksjonspunkterForSteg.some((ap) => ap.kanLoses)) || vilkarUtfallType.OPPFYLT === status);
 
   const standardlagringSideEffekter = () => () => {
-    value.oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
+    value.oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
   };
 
   const submitCallback = getBekreftAksjonspunktProsessCallback(
@@ -79,14 +109,13 @@ const useStandardProsessPanelProps = (
 
   return {
     behandling: value.behandling,
-    submittable: true,
     isAksjonspunktOpen: harApneAksjonspunkter,
     aksjonspunkter: aksjonspunkterForSteg,
     vilkar: vilkarForSteg,
     alleKodeverk: value.alleKodeverk,
+    alleMerknaderFraBeslutter,
     isReadOnly,
     readOnlySubmitButton,
-    alleMerknaderFraBeslutter,
     submitCallback,
     status,
   };

@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
-import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 import BeregningFP from './components/BeregningFP';
 import messages from '../i18n/nb_NO.json';
 
@@ -18,7 +17,7 @@ type OwnProps = {
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   beregningsgrunnlag,
   aksjonspunkter,

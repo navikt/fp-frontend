@@ -6,7 +6,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling } from '@fpsak-frontend/types';
 
-import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyUtils';
+import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 
 describe('<readOnlyUtils>', () => {
   const behandling = {

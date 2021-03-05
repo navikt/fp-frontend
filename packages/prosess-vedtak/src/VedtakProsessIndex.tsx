@@ -6,10 +6,9 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   BeregningsresultatFp, BeregningsresultatEs, Vilkar, TilbakekrevingValg,
-  SimuleringResultat, Beregningsgrunnlag, Medlemskap, Aksjonspunkt,
+  SimuleringResultat, Beregningsgrunnlag, Medlemskap, Aksjonspunkt, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
@@ -49,7 +48,7 @@ interface OwnProps {
   ytelseTypeKode: string;
 }
 
-const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   beregningresultatForeldrepenger,
   beregningresultatEngangsstonad,

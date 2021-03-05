@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Dokument, Innsyn } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { Dokument, Innsyn, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import InnsynForm from './components/InnsynForm';
 import messages from '../i18n/nb_NO.json';
@@ -20,7 +19,7 @@ interface OwnProps {
   saksnummer: string;
 }
 
-const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   innsyn = {},
   alleDokumenter,

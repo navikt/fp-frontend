@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KlageVurdering } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { KlageVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import messages from '../i18n/nb_NO.json';
 import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
@@ -24,7 +23,7 @@ interface OwnProps {
   saveKlage: (data: TransformedValues) => Promise<any>;
 }
 
-const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   klageVurdering,
   alleKodeverk,

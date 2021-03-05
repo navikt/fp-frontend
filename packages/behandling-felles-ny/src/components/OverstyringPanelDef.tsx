@@ -10,8 +10,8 @@ import {
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-import useSkalViseProsessPanel from '../utils/useSkalViseProsessPanel';
-import useStandardProsessPanelProps from '../utils/useStandardProsessPanelProps';
+import useSkalViseProsessPanel from '../utils/prosess/useSkalViseProsessPanel';
+import useStandardProsessPanelProps from '../utils/prosess/useStandardProsessPanelProps';
 
 // TODO Spesifikk ES-kodar bør ikkje ligga her
 const avslagsarsakerES = ['1002', '1003', '1032'];

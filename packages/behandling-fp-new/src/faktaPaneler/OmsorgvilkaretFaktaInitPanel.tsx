@@ -9,7 +9,7 @@ import {
   Aksjonspunkt, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import {
-  FaktaPanelInitProps, useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
+  FaktaPanelInitProps, useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -45,7 +45,7 @@ const OmsorgvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const skalVises = !!initData?.aksjonspunkter.some((ap) => ap.definisjon.kode === AKSJONSPUNKT_KODER[0]);
 

@@ -9,7 +9,7 @@ import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
 import {
-  useFaktaMenyRegistrerer, useStandardFaktaProps, FaktaPanelWrapper, FaktaPanelInitProps,
+  useFaktaMenyRegistrerer, useStandardFaktaPanelProps, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -48,7 +48,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const skalVises = !!initData?.beregningsgrunnlag;
 

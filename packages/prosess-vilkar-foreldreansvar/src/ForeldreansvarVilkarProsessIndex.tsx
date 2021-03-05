@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import ErForeldreansvarVilkaarOppfyltForm from './components/ErForeldreansvarVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
@@ -18,7 +18,7 @@ interface OwnProps {
   isEngangsstonad: boolean;
 }
 
-const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   aksjonspunkter,
   isEngangsstonad,

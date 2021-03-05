@@ -2,7 +2,7 @@ import {
   useEffect, useState,
 } from 'react';
 
-import FaktaPanelMenyData from '../types/faktaPanelMenyData';
+import FaktaPanelMenyData from '../../types/faktaPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
 

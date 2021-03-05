@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-import { Opptjening } from '@fpsak-frontend/types';
+import { StandardProsessPanelProps, Opptjening } from '@fpsak-frontend/types';
 
 import OpptjeningVilkarForm from './components/OpptjeningVilkarForm';
 import messages from '../i18n/nb_NO.json';
@@ -19,7 +18,7 @@ interface OwnProps {
   lovReferanse?: string;
 }
 
-const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   opptjening,
   aksjonspunkter,

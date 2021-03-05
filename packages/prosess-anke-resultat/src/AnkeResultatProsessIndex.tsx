@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { AnkeVurdering } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import BehandleResultatForm from './components/BehandleResultatForm';
 import { BrevData } from './components/PreviewAnkeLink';
@@ -20,7 +19,7 @@ interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
 }
 
-const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   ankeVurdering,
   aksjonspunkter,

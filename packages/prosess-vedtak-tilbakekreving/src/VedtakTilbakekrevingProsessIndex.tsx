@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-import { BeregningsresultatTilbakekreving, Kodeverk } from '@fpsak-frontend/types';
+import { BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import { ForhandsvisData } from './components/TilbakekrevingVedtakForm';
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
@@ -31,7 +30,7 @@ interface OwnProps {
   aksjonspunktKodeForeslaVedtak: string;
 }
 
-const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   beregningsresultat,
   vedtaksbrev,

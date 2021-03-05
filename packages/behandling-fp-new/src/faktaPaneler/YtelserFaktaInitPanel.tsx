@@ -6,7 +6,7 @@ import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, FaktaPanelInitProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
+  useStandardFaktaPanelProps, FaktaPanelInitProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -28,7 +28,7 @@ const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 }) => {
   const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps();
+  const standardPanelProps = useStandardFaktaPanelProps();
 
   const skalVises = initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
     && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0;

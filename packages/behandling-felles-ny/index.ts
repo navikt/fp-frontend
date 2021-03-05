@@ -13,14 +13,14 @@ export { default as FaktaPanelMenyData } from './src/types/faktaPanelMenyData';
 export { default as FaktaPanelInitProps } from './src/types/faktaPanelInitProps';
 export { default as ProsessPanelInitProps } from './src/types/prosessPanelInitProps';
 export { default as InngangsvilkarPanelData } from './src/types/inngangsvilkarPanelData';
-export { default as useStandardFaktaProps } from './src/utils/useStandardFaktaProps';
+export { default as useStandardFaktaPanelProps } from './src/utils/fakta/useStandardFaktaPanelProps';
 export { default as StandardPropsProvider } from './src/utils/standardPropsStateContext';
-export { default as useStandardProsessPanelProps } from './src/utils/useStandardProsessPanelProps';
-export { default as useSkalViseProsessPanel } from './src/utils/useSkalViseProsessPanel';
-export { harBehandlingReadOnlyStatus } from './src/utils/readOnlyUtils';
-export { default as useProsessMenyRegistrerer } from './src/utils/useProsessMenyRegistrerer';
-export { default as useFaktaMenyRegistrerer } from './src/utils/useFaktaMenyRegistrerer';
-export { default as useInngangsvilkarRegistrerer } from './src/utils/useInngangsvilkarRegistrerer';
+export { default as useStandardProsessPanelProps } from './src/utils/prosess/useStandardProsessPanelProps';
+export { default as useSkalViseProsessPanel } from './src/utils/prosess/useSkalViseProsessPanel';
+export { harBehandlingReadOnlyStatus } from './src/utils/readOnlyPanelUtils';
+export { default as useProsessMenyRegistrerer } from './src/utils/prosess/useProsessMenyRegistrerer';
+export { default as useFaktaMenyRegistrerer } from './src/utils/fakta/useFaktaMenyRegistrerer';
+export { default as useInngangsvilkarRegistrerer } from './src/utils/prosess/useInngangsvilkarRegistrerer';
 export {
   useInitRequestApi, useBehandling, useLagreAksjonspunkt, useInitBehandlingHandlinger,
 } from './src/utils/indexHooks';

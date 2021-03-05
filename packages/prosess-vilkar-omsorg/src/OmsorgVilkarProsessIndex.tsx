@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import ErOmsorgVilkaarOppfyltForm from './components/ErOmsorgVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
@@ -13,7 +13,7 @@ const intl = createIntl({
   messages,
 }, cache);
 
-const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessFormProps> = ({
+const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = ({
   behandling,
   aksjonspunkter,
   status,

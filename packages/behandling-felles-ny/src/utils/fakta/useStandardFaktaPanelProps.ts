@@ -1,21 +1,55 @@
 import { useContext } from 'react';
 
 import {
-  Aksjonspunkt, StandardFaktaPanelProps, Vilkar,
+  Aksjonspunkt, Behandling, Fagsak, StandardFaktaPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
-import { erReadOnly } from './readOnlyUtils';
-import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
-import { StandardPropsStateContext } from './standardPropsStateContext';
-import { getBekreftAksjonspunktFaktaCallback } from './getBekreftAksjonspunktCallback';
+import { erReadOnly } from '../readOnlyPanelUtils';
+import getAlleMerknaderFraBeslutter from '../getAlleMerknaderFraBeslutter';
+import { StandardPropsStateContext } from '../standardPropsStateContext';
+
+export const DEFAULT_FAKTA_KODE = 'default';
+export const DEFAULT_PROSESS_STEG_KODE = 'default';
 
 type Data = {
   aksjonspunkter?: Aksjonspunkt[];
   vilkar?: Vilkar[];
 }
 
-const useStandardFaktaProps = (
+const getBekreftAksjonspunktFaktaCallback = (
+  fagsak: Fagsak,
+  behandling: Behandling,
+  oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
+  overstyringApCodes?: string[],
+) => (aksjonspunkter) => {
+  const model = aksjonspunkter.map((ap) => ({
+    '@type': ap.kode,
+    ...ap,
+  }));
+
+  const params = {
+    saksnummer: fagsak.saksnummerString,
+    behandlingId: behandling.id,
+    behandlingVersjon: behandling.versjon,
+  };
+
+  if (model && overstyringApCodes && overstyringApCodes.includes(model[0].kode)) {
+    return lagreOverstyrteAksjonspunkter({
+      ...params,
+      overstyrteAksjonspunktDtoer: model,
+    }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+  }
+
+  return lagreAksjonspunkter({
+    ...params,
+    bekreftedeAksjonspunktDtoer: model,
+  }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+};
+
+const useStandardFaktaPanelProps = (
   data?: Data,
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
@@ -51,4 +85,4 @@ const useStandardFaktaProps = (
   };
 };
 
-export default useStandardFaktaProps;
+export default useStandardFaktaPanelProps;

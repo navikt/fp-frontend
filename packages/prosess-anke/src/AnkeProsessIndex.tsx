@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AnkeVurdering } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
 import { AnkeData } from './components/TempsaveAnkeButton';
@@ -24,7 +23,7 @@ interface OwnProps {
   behandlinger: BehandlingInfo[];
 }
 
-const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   ankeVurdering,
   behandlinger,

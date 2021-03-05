@@ -10,7 +10,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
-  useStandardFaktaProps, harBehandlingReadOnlyStatus, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
+  useStandardFaktaPanelProps, harBehandlingReadOnlyStatus, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -60,7 +60,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const skalVises = !!initData?.soknad;
 

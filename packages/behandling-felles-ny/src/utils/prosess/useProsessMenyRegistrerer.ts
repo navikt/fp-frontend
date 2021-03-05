@@ -2,7 +2,7 @@ import {
   useEffect, useState,
 } from 'react';
 
-import ProsessPanelMenyData from '../types/prosessPanelMenyData';
+import ProsessPanelMenyData from '../../types/prosessPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
 

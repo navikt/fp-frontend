@@ -7,7 +7,7 @@ import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {
-  FaktaPanelInitProps, useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
+  FaktaPanelInitProps, useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
 } from '@fpsak-frontend/behandling-felles-ny';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -45,7 +45,7 @@ const SakenFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 }) => {
   const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
-  const standardPanelProps = useStandardFaktaProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
