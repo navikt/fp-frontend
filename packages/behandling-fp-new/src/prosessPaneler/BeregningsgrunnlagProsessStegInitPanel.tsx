@@ -73,7 +73,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={standardPanelProps.status}
-      loadingState={panelDataState}
+      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
     >
       <BeregningsgrunnlagProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

@@ -13,6 +13,7 @@ import {
 import {
   useStandardProsessPanelProps, useSkalViseProsessPanel, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -71,7 +72,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={standardPanelProps.status}
-      loadingState={panelDataState}
+      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
     >
       <SokersOpplysningspliktVilkarProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

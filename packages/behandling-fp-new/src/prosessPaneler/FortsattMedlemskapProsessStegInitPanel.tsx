@@ -9,6 +9,7 @@ import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import {
   useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps, OverstyringPanelDef, useSkalViseProsessPanel,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
@@ -60,7 +61,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={standardPanelProps.status}
-      loadingState={initState}
+      isLoading={!initData && initState !== RestApiState.SUCCESS}
     >
       <OverstyringPanelDef
         behandling={standardPanelProps.behandling}

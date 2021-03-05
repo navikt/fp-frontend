@@ -129,7 +129,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      loadingState={panelDataState}
+      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
     >
       <UttakProsessIndex
         fagsak={fagsak}

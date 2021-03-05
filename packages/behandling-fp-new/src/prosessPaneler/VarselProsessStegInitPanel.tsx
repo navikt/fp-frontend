@@ -11,6 +11,7 @@ import {
 import {
   useSkalViseProsessPanel, useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import {
@@ -130,7 +131,7 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={standardPanelProps.status}
-      loadingState={panelDataState}
+      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
     >
       <VarselOmRevurderingProsessIndex
         previewCallback={previewCallback}

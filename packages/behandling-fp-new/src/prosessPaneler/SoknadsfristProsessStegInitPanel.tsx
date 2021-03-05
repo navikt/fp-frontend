@@ -9,6 +9,7 @@ import { Aksjonspunkt, Soknad, UttakPeriodeGrense } from '@fpsak-frontend/types'
 import {
   useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps, useSkalViseProsessPanel,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -54,7 +55,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={standardPanelProps.status}
-      loadingState={panelDataState}
+      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
     >
       <VurderSoknadsfristForeldrepengerIndex
         {...panelData}

@@ -8,7 +8,6 @@ import {
   VerticalSpacer, AksjonspunktHelpTextHTML,
 } from '@fpsak-frontend/shared-components';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistrerer';
@@ -106,7 +105,7 @@ const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & Proses
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={harApentAksjonspunkt}
       status={status}
-      loadingState={RestApiState.SUCCESS}
+      isLoading={false}
       skalSkjulePanel={!erPanelValgt}
     >
       {(erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0)) && (
