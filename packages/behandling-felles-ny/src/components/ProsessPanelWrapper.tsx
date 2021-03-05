@@ -60,13 +60,12 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (loadingState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
   return (
     <PanelContainer skalSkjulePanel={skalSkjulePanel}>
-      {children}
+      {loadingState !== RestApiState.SUCCESS && (
+        <LoadingPanel />
+      )}
+      {loadingState === RestApiState.SUCCESS && children}
     </PanelContainer>
   );
 };

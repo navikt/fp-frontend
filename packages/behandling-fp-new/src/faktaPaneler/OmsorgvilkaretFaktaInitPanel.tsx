@@ -11,6 +11,7 @@ import {
 import {
   FaktaPanelInitProps, useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -60,7 +61,7 @@ const OmsorgvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}>
       <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...panelData} {...standardPanelProps} />
     </FaktaPanelWrapper>
   );

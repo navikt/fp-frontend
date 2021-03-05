@@ -12,6 +12,7 @@ import {
 import {
   FaktaPanelInitProps, useStandardFaktaProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -67,7 +68,7 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}>
       <FodselFaktaIndex {...panelData} {...standardPanelProps} />
     </FaktaPanelWrapper>
   );

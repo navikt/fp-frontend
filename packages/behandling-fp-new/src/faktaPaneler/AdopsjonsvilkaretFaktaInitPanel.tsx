@@ -13,6 +13,7 @@ import {
   FaktaPanelInitProps, useStandardFaktaProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -69,7 +70,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}>
       <AdopsjonFaktaIndex
         isForeldrepengerFagsak={fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER}
         {...panelData}

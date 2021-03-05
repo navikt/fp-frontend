@@ -8,6 +8,7 @@ import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-fronte
 import {
   FaktaPanelInitProps, useStandardFaktaProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
@@ -46,7 +47,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   );
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={initState}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} isLoading={!initData && initState !== RestApiState.SUCCESS}>
       <BesteberegningFaktaIndex arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId} {...initData} {...standardPanelProps} />
     </FaktaPanelWrapper>
   );
