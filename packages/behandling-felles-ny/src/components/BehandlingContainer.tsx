@@ -5,8 +5,8 @@ import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import { Behandling } from '@fpsak-frontend/types';
 
-import ProsessContainer from './ProsessContainer';
-import FaktaContainer from './FaktaContainer';
+import ProsessContainer from './prosess/ProsessContainer';
+import FaktaContainer from './fakta/FaktaContainer';
 
 import messages from '../../i18n/nb_NO.json';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../types/prosessPanelInitProps';

@@ -6,7 +6,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import '@fpsak-frontend/assets/styles/arrowForProcessMenu.less';
 
-import ProsessPanelMenyData from '../types/prosessPanelMenyData';
+import ProsessPanelMenyData from '../../types/prosessPanelMenyData';
 
 const finnProsessmenyType = (
   status: string,

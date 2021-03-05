@@ -7,8 +7,8 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import FaktaMeny from './FaktaMeny';
-import FaktaPanelMenyData from '../types/faktaPanelMenyData';
-import FaktaPanelInitProps from '../types/faktaPanelInitProps';
+import FaktaPanelMenyData from '../../types/faktaPanelMenyData';
+import FaktaPanelInitProps from '../../types/faktaPanelInitProps';
 
 import styles from './faktaContainer.less';
 

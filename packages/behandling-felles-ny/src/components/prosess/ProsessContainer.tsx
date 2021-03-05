@@ -6,10 +6,10 @@ import { Behandling } from '@fpsak-frontend/types';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny from './ProsessMeny';
+import ProsessPanelMenyData from '../../types/prosessPanelMenyData';
+import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../../types/prosessPanelInitProps';
 
 import styles from './prosessContainer.less';
-import ProsessPanelMenyData from '../types/prosessPanelMenyData';
-import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../types/prosessPanelInitProps';
 
 interface OwnProps {
   behandling: Behandling;
