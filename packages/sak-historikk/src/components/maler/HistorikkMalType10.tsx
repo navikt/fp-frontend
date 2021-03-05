@@ -2,8 +2,6 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { NavLink } from 'react-router-dom';
-import { Element } from 'nav-frontend-typografi';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 
@@ -12,12 +10,9 @@ import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltType
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import { findEndretFeltNavn, findEndretFeltVerdi } from './felles/historikkUtils';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
+import Skjermlenke from './felles/Skjermlenke';
 import BubbleText from './felles/bubbleText';
 import HistorikkMal from '../HistorikkMalTsType';
-
-const scrollUp = () => {
-  window.scroll(0, 0);
-};
 
 const historikkFromToValues = (endretFelt: HistorikkinnslagEndretFelt, fieldName: string, intl: IntlShape): ReactNode => {
   const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
@@ -122,16 +117,13 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps
           `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
         }
         >
-          {historikkinnslagDel.skjermlenke && (
-            <Element>
-              <NavLink
-                to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDel.skjermlenke.kode)}
-                onClick={scrollUp}
-              >
-                {getKodeverknavn(historikkinnslagDeler[0].skjermlenke)}
-              </NavLink>
-            </Element>
-          )}
+          <Skjermlenke
+            skjermlenke={historikkinnslagDel.skjermlenke}
+            behandlingLocation={behandlingLocation}
+            getKodeverknavn={getKodeverknavn}
+            scrollUpOnClick
+            createLocationForSkjermlenke={createLocationForSkjermlenke}
+          />
 
           {historikkinnslagDel.opplysninger && originType.kode === historikkinnslagType.OVST_UTTAK && (
             <FormattedMessage

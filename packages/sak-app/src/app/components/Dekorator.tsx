@@ -45,18 +45,20 @@ interface OwnProps {
   queryStrings: QueryStrings;
   hideErrorMessages?: boolean;
   setSiteHeight: (headerHeight: number) => void;
+  crashMessage?: string;
 }
 
 const Dekorator: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   queryStrings,
   setSiteHeight,
+  crashMessage,
   hideErrorMessages = false,
 }) => {
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
-  const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, undefined), [errorMessages]);
+  const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, crashMessage), [errorMessages]);
 
   const resolvedErrorMessages = useMemo(() => lagFeilmeldinger(intl, formaterteFeilmeldinger, queryStrings), [formaterteFeilmeldinger, queryStrings]);
 

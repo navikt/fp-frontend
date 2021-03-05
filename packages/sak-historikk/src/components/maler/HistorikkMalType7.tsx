@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
@@ -12,6 +11,7 @@ import {
 } from './felles/historikkUtils';
 import BubbleText from './felles/bubbleText';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
+import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
 const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): ReactNode => {
@@ -57,15 +57,13 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal & WrappedComponentProps>
           }
           >
             <>
-              {historikkinnslagDel.skjermlenke && (
-                <Element>
-                  <NavLink
-                    to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDel.skjermlenke.kode)}
-                  >
-                    {getKodeverknavn(historikkinnslagDel.skjermlenke)}
-                  </NavLink>
-                </Element>
-              )}
+              <Skjermlenke
+                skjermlenke={historikkinnslagDel.skjermlenke}
+                behandlingLocation={behandlingLocation}
+                getKodeverknavn={getKodeverknavn}
+                scrollUpOnClick
+                createLocationForSkjermlenke={createLocationForSkjermlenke}
+              />
 
               {historikkinnslagDel.hendelse && <Element>{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Element>}
 

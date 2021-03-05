@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { NavLink } from 'react-router-dom';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt, Kodeverk } from '@fpsak-frontend/types';
@@ -20,11 +19,8 @@ import {
 } from './felles/historikkUtils';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
 import BubbleText from './felles/bubbleText';
+import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
-
-const scrollUp = () => {
-  window.scroll(0, 0);
-};
 
 function isGjeldendeFraUtenEndredeFelter(historikkinnslagDel: HistorikkinnslagDel): boolean {
   return (historikkinnslagDel.gjeldendeFra && !historikkinnslagDel.endredeFelter);
@@ -158,16 +154,13 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
         `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
       }
       >
-        {historikkinnslagDel.skjermlenke && (
-          <Element>
-            <NavLink
-              to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDel.skjermlenke.kode)}
-              onClick={scrollUp}
-            >
-              {getKodeverknavn(historikkinnslagDel.skjermlenke)}
-            </NavLink>
-          </Element>
-        )}
+        <Skjermlenke
+          skjermlenke={historikkinnslagDel.skjermlenke}
+          behandlingLocation={behandlingLocation}
+          getKodeverknavn={getKodeverknavn}
+          scrollUpOnClick
+          createLocationForSkjermlenke={createLocationForSkjermlenke}
+        />
 
         {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
           <div key={tekst}><Element>{tekst}</Element></div>
