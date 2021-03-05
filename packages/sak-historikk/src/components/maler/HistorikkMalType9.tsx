@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { NavLink } from 'react-router-dom';
-import { Element } from 'nav-frontend-typografi';
 
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
 import { findEndretFeltVerdi } from './felles/historikkUtils';
+import Skjermlenke from './felles/Skjermlenke';
 import BubbleText from './felles/bubbleText';
 import HistorikkMal from '../HistorikkMalTsType';
 
@@ -41,13 +40,13 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
       }
       >
         <div>
-          {historikkinnslagDel.skjermlenke && (
-            <Element>
-              <NavLink to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDel.skjermlenke.kode)}>
-                {getKodeverknavn(historikkinnslag.historikkinnslagDeler[0].skjermlenke)}
-              </NavLink>
-            </Element>
-          )}
+          <Skjermlenke
+            skjermlenke={historikkinnslagDel.skjermlenke}
+            behandlingLocation={behandlingLocation}
+            getKodeverknavn={getKodeverknavn}
+            scrollUpOnClick
+            createLocationForSkjermlenke={createLocationForSkjermlenke}
+          />
           {historikkinnslagDel.endredeFelter && historikkinnslag.type.kode === historikkinnslagType.OVST_UTTAK_SPLITT && (
             <FormattedMessage
               id="Historikk.Template.9"

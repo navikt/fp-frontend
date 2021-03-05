@@ -7,7 +7,7 @@ import { Location, History } from 'history';
 import { configureScope } from '@sentry/browser';
 import Modal from 'nav-frontend-modal';
 
-import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
 import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-infosider';
 import { parseQueryString } from '@fpsak-frontend/utils';
@@ -41,7 +41,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   location,
 }) => {
   const [headerHeight, setHeaderHeight] = useState(0);
-  const [hasCrashed, setCrashed] = useState(false);
+  const [crashMessage, setCrashMessage] = useState<string>();
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
 
@@ -71,10 +71,8 @@ const AppIndex: FunctionComponent<OwnProps> = ({
     setHeaderHeight(newHeaderHeight);
   }, []);
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
   const addErrorMessageAndSetAsCrashed = (error) => {
-    addErrorMessage(error);
-    setCrashed(true);
+    setCrashMessage(error);
   };
 
   if (process.env.NODE_ENV !== 'test') {
@@ -87,7 +85,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   const forbiddenErrors = errorMessages.filter((o) => o.type === EventType.REQUEST_FORBIDDEN);
   const unauthorizedErrors = errorMessages.filter((o) => o.type === EventType.REQUEST_UNAUTHORIZED);
   const hasForbiddenOrUnauthorizedErrors = forbiddenErrors.length > 0 || unauthorizedErrors.length > 0;
-  const shouldRenderHome = (!hasCrashed && !hasForbiddenOrUnauthorizedErrors);
+  const shouldRenderHome = (!crashMessage && !hasForbiddenOrUnauthorizedErrors);
 
   return (
     <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} doNotShowErrorPage>
@@ -97,6 +95,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
             hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
             queryStrings={queryStrings}
             setSiteHeight={setSiteHeight}
+            crashMessage={crashMessage}
           />
           {shouldRenderHome && (<Home headerHeight={headerHeight} />)}
           {forbiddenErrors.length > 0 && (<ForbiddenPage />)}

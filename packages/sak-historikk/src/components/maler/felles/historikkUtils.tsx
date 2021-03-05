@@ -87,3 +87,10 @@ export const findEndretFeltNavn = (endretFelt: HistorikkinnslagEndretFelt, intl:
     value: endretFelt.navnVerdi,
   }) : intl.formatMessage({ id: fieldId });
 };
+
+export const scrollUp = () => {
+  if (window.innerWidth < 1305) {
+    window.scroll(0, 0);
+  }
+  return false;
+};

@@ -193,10 +193,10 @@ const getTextForKlageHelper = (klageVurderingResultat: KlageVurdering['klageVurd
 
 const getTextForKlage = (klagebehandlingVurdering: KlageVurdering, behandlingStaus: Kodeverk) => {
   if (behandlingStaus.kode === behandlingStatusCode.FATTER_VEDTAK) {
-    if (klagebehandlingVurdering.klageVurderingResultatNK) {
+    if (klagebehandlingVurdering?.klageVurderingResultatNK) {
       return getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNK);
     }
-    if (klagebehandlingVurdering.klageVurderingResultatNFP) {
+    if (klagebehandlingVurdering?.klageVurderingResultatNFP) {
       return getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNFP);
     }
   }

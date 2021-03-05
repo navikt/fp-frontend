@@ -1,17 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { NavLink } from 'react-router-dom';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import HistorikkMal from '../HistorikkMalTsType';
-
-const scrollUp = () => {
-  window.scroll(0, 0);
-};
+import Skjermlenke from './felles/Skjermlenke';
 
 const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
@@ -25,14 +21,13 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
   }
   return (
     <div>
-      <Element>
-        <NavLink
-          to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDeler[0].skjermlenke.kode)}
-          onClick={scrollUp}
-        >
-          {getKodeverknavn(historikkinnslagDeler[0].skjermlenke)}
-        </NavLink>
-      </Element>
+      <Skjermlenke
+        skjermlenke={historikkinnslagDeler[0].skjermlenke}
+        behandlingLocation={behandlingLocation}
+        getKodeverknavn={getKodeverknavn}
+        scrollUpOnClick
+        createLocationForSkjermlenke={createLocationForSkjermlenke}
+      />
       {historikkinnslagDeler.map((historikkinnslagDel) => {
         const { begrunnelseFritekst, opplysninger, endredeFelter } = historikkinnslagDel;
         const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode).tilVerdi;

@@ -1,14 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { NavLink } from 'react-router-dom';
 import { Element } from 'nav-frontend-typografi';
 
 import { findHendelseText, findResultatText } from './felles/historikkUtils';
+import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
-
-const scrollUp = () => {
-  window.scroll(0, 0);
-};
 
 const HistorikkMalType2: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
   intl,
@@ -20,16 +16,13 @@ const HistorikkMalType2: FunctionComponent<HistorikkMal & WrappedComponentProps>
   const { historikkinnslagDeler } = historikkinnslag;
   return (
     <>
-      {historikkinnslagDeler[0].skjermlenke && (
-        <Element className="snakkeboble-panel__tekst">
-          <NavLink
-            to={createLocationForSkjermlenke(behandlingLocation, historikkinnslagDeler[0].skjermlenke.kode)}
-            onClick={scrollUp}
-          >
-            {getKodeverknavn(historikkinnslagDeler[0].skjermlenke)}
-          </NavLink>
-        </Element>
-      )}
+      <Skjermlenke
+        skjermlenke={historikkinnslagDeler[0].skjermlenke}
+        behandlingLocation={behandlingLocation}
+        getKodeverknavn={getKodeverknavn}
+        scrollUpOnClick
+        createLocationForSkjermlenke={createLocationForSkjermlenke}
+      />
       {historikkinnslagDeler[0].resultat && historikkinnslagDeler[0].hendelse && (
         <Element className="snakkeboble-panel__tekst">
           {`${findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}: ${findResultatText(historikkinnslagDeler[0].resultat, intl)}`}
