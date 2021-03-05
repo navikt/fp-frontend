@@ -115,35 +115,33 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-          faktaPaneler={[
-            (props) => <SakenFaktaInitPanel {...props} />,
-            (props) => <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <YtelserFaktaInitPanel {...props} />,
-            (props) => <VergeFaktaInitPanel {...props} />,
-            (props) => <TilleggsopplysningerFaktaInitPanel {...props} />,
-            (props) => <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />,
-            (props) => <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />,
-            (props) => <FodselvilkaretFaktaInitPanel {...props} />,
-            (props) => (
+          hentFaktaPaneler={(props) => (
+            <>
+              <SakenFaktaInitPanel {...props} />
+              <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <YtelserFaktaInitPanel {...props} />
+              <VergeFaktaInitPanel {...props} />
+              <TilleggsopplysningerFaktaInitPanel {...props} />
+              <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
+              <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+              <FodselvilkaretFaktaInitPanel {...props} />
               <MedlemskapsvilkaretFaktaInitPanel
                 {...props}
                 rettigheter={rettigheter}
                 hasFetchError={behandlingState === RestApiState.ERROR}
                 arbeidsgiverOpplysningerPerId={arbeidsgivere}
               />
-            ),
-            (props) => <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />,
-            (props) => (
+              <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
               <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
-            ),
-            (props) => <AktivitetskravFaktaInitPanel {...props} />,
-          ]}
-          prosessPaneler={[
-            (props, ekstraProps) => (
+              <AktivitetskravFaktaInitPanel {...props} />
+            </>
+          )}
+          hentProsessPaneler={(props, ekstraProps) => (
+            <>
               <VarselProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
@@ -151,20 +149,16 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                 toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
               />
-            ),
-            (props) => <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props, ekstraProps) => (
+              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <InngangsvilkarProsessStegInitPanel
                 {...props}
                 rettigheter={rettigheter}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                 apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
               />
-            ),
-            (props) => <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />,
-            (props) => <SoknadsfristProsessStegInitPanel {...props} />,
-            (props) => <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />,
-            (props) => (
+              <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <SoknadsfristProsessStegInitPanel {...props} />
+              <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
               <UttakProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
@@ -172,17 +166,13 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 personoversikt={personoversikt}
                 rettigheter={rettigheter}
               />
-            ),
-            (props) => (
               <TilkjentYtelseProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
                 arbeidsgiverOpplysningerPerId={arbeidsgivere}
                 personoversikt={personoversikt}
               />
-            ),
-            (props, ekstraProps) => <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />,
-            (props, ekstraProps) => (
+              <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
               <VedtakProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
@@ -190,8 +180,8 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                 toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
               />
-            ),
-          ]}
+            </>
+          )}
         />
       </StandardPropsProvider>
     </>

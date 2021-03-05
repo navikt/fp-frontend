@@ -26,8 +26,8 @@ interface FaktaPanelInfo {
 
 interface OwnProps {
   behandling: Behandling;
-  faktaPaneler?: ((props: FaktaPanelInitProps) => ReactElement)[];
-  prosessPaneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement)[];
+  hentFaktaPaneler?: ((props: FaktaPanelInitProps) => ReactElement);
+  hentProsessPaneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement);
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
@@ -36,8 +36,8 @@ interface OwnProps {
 
 const BehandlingContainer: FunctionComponent<OwnProps> = ({
   behandling,
-  faktaPaneler,
-  prosessPaneler,
+  hentFaktaPaneler,
+  hentProsessPaneler,
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -48,7 +48,7 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <ProsessContainer
-        paneler={prosessPaneler}
+        hentPaneler={hentProsessPaneler}
         valgtProsessSteg={valgtProsessSteg}
         valgtFaktaSteg={valgtFaktaSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
@@ -57,7 +57,7 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
       />
       <FaktaContainer
-        paneler={faktaPaneler}
+        hentPaneler={hentFaktaPaneler}
         valgtFaktaSteg={valgtFaktaSteg}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}

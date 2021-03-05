@@ -35,7 +35,7 @@ const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedC
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={false}
-      status={vilkarUtfallType.IKKE_VURDERT}
+      status={vilkarUtfallType.OPPFYLT}
       loadingState={RestApiState.SUCCESS}
     >
       <Normaltekst>

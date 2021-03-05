@@ -13,7 +13,7 @@ import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../types/pros
 
 interface OwnProps {
   behandling: Behandling;
-  paneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement)[];
+  hentPaneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement);
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
@@ -23,7 +23,7 @@ interface OwnProps {
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({
   behandling,
-  paneler,
+  hentPaneler,
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -60,13 +60,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     }
   }, [behandling.versjon]);
 
-  useEffect(() => {
-    if (paneler && behandling.behandlingHenlagt) {
-      paneler.push((props) => <BehandlingHenlagtPanel {...props} />);
-    }
-  }, [paneler && behandling.behandlingHenlagt]);
-
-  if (!paneler) {
+  if (!hentPaneler) {
     return null;
   }
 
@@ -75,20 +69,18 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
       <div className={styles.meny}>
         <ProsessMeny menyData={menyDataSomVises} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
       </div>
-      {paneler.map((panel, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <React.Fragment key={index}>
-          {panel({
-            behandlingVersjon: behandling?.versjon,
-            valgtProsessSteg,
-            registrerProsessPanel,
-          }, {
-            apentFaktaPanelInfo,
-            toggleOppdatereFagsakContext,
-            allMenyData: menyDataSomVises,
-          })}
-        </React.Fragment>
-      ))}
+      {hentPaneler({
+        behandlingVersjon: behandling?.versjon,
+        valgtProsessSteg,
+        registrerProsessPanel,
+      }, {
+        apentFaktaPanelInfo,
+        toggleOppdatereFagsakContext,
+        allMenyData: menyDataSomVises,
+      })}
+      {behandling.behandlingHenlagt && (
+        <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} />
+      )}
     </div>
   );
 };

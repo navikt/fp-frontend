@@ -16,7 +16,7 @@ export const DEFAULT_FAKTA_KODE = 'default';
 
 interface OwnProps {
   behandlingVersjon?: number;
-  paneler?: ((props: FaktaPanelInitProps) => ReactElement)[];
+  hentPaneler?: ((props: FaktaPanelInitProps) => ReactElement);
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
@@ -26,7 +26,7 @@ interface OwnProps {
 
 const FaktaContainer: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
-  paneler,
+  hentPaneler,
   valgtFaktaSteg,
   valgtProsessSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
@@ -61,7 +61,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
     oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
   }, [vistMenyData, valgtProsessSteg]);
 
-  if (!paneler) {
+  if (!hentPaneler) {
     return null;
   }
 
@@ -73,16 +73,11 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
             <FaktaMeny menyData={vistMenyData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
           </FlexColumn>
           <FlexColumn className={styles.content}>
-            {paneler.map((panel, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <React.Fragment key={index}>
-                {panel({
-                  behandlingVersjon,
-                  valgtFaktaSteg,
-                  registrerFaktaPanel,
-                })}
-              </React.Fragment>
-            ))}
+            {hentPaneler({
+              behandlingVersjon,
+              valgtFaktaSteg,
+              registrerFaktaPanel,
+            })}
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
