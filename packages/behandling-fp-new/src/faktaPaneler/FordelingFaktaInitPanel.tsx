@@ -6,12 +6,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FordelBeregningsgrunnlagFaktaIndex from '@fpsak-frontend/fakta-fordel-beregningsgrunnlag';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
-import {
-  FaktaPanelInitProps, useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG, aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN];
 
@@ -33,34 +31,22 @@ interface OwnProps {
  * FordelingFaktaInitPanel
  */
 const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  valgtFaktaSteg,
-  behandlingVersjon,
-  registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const skalVises = !!initData?.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.includes(ap.definisjon.kode));
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.FORDELING,
-    getPackageIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' }),
-    valgtFaktaSteg,
-    skalVises,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
-      <FordelBeregningsgrunnlagFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...panelData} {...standardPanelProps} />
-    </FaktaPanelWrapper>
-  );
-};
+  ...props
+}) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    faktaPanelKode={faktaPanelCodes.FORDELING}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' })}
+    skalVisesFn={(initData) => !!initData?.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.includes(ap.definisjon.kode))}
+    render={(data) => (
+      <FordelBeregningsgrunnlagFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />
+    )}
+  />
+);
 
 export default FordelingFaktaInitPanel;

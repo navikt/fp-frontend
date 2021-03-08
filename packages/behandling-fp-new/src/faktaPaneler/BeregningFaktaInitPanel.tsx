@@ -8,12 +8,10 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
-import {
-  useFaktaMenyRegistrerer, useStandardFaktaPanelProps, FaktaPanelWrapper, FaktaPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaVanligOppforselInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -39,38 +37,27 @@ interface OwnProps {
  * BeregningFaktaInitPanel
  */
 const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  valgtFaktaSteg,
-  behandlingVersjon,
-  registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
-
-  const skalVises = !!initData?.beregningsgrunnlag;
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.BEREGNING,
-    getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' }),
-    valgtFaktaSteg,
-    skalVises,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={initState}>
+  ...props
+}) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    overstyringApKoder={OVERSTYRING_AP_CODES}
+    faktaPanelKode={faktaPanelCodes.BEREGNING}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+    skalVisesFn={(initData) => !!initData?.beregningsgrunnlag}
+    render={(data) => (
       <BeregningFaktaIndex
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...initData}
-        {...standardPanelProps}
+        {...data}
       />
-    </FaktaPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default BeregningFaktaInitPanel;

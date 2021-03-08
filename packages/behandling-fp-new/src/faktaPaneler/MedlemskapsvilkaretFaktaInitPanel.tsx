@@ -9,12 +9,10 @@ import {
   AksessRettigheter,
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
-import {
-  useStandardFaktaPanelProps, harBehandlingReadOnlyStatus, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaVanligOppforselInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
@@ -50,46 +48,33 @@ interface OwnProps {
  * MedlemskapsvilkaretFaktaInitPanel
  */
 const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  valgtFaktaSteg,
-  behandlingVersjon,
-  registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   hasFetchError,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
-
-  const skalVises = !!initData?.soknad;
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.MEDLEMSKAPSVILKARET,
-    getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
-    valgtFaktaSteg,
-    skalVises,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+  ...props
+}) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    overstyringApKoder={OVERSTYRING_AP_CODES}
+    faktaPanelKode={faktaPanelCodes.MEDLEMSKAPSVILKARET}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
+    skalVisesFn={(initData) => !!initData?.soknad}
+    render={(data) => (
       <MedlemskapFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         isForeldrepengerFagsak
         readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
           || hasFetchError
-          || standardPanelProps.behandling.behandlingPaaVent
-          || harBehandlingReadOnlyStatus(standardPanelProps.behandling)}
-        {...initData}
-        {...panelData}
-        {...standardPanelProps}
+          || data.behandling.behandlingPaaVent
+          || harBehandlingReadOnlyStatus(data.behandling)}
+        {...data}
       />
-    </FaktaPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default MedlemskapsvilkaretFaktaInitPanel;

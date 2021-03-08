@@ -10,14 +10,10 @@ import {
   Personoversikt,
   UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import {
-  FaktaPanelInitProps, useStandardFaktaPanelProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import {
-  FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
-} from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_UTTAK,
@@ -62,43 +58,30 @@ interface OwnProps {
  * UttakFaktaInitPanel
  */
 const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  valgtFaktaSteg,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
-  registrerFaktaPanel,
   personoversikt,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
-
-  const skalVises = !!initData?.ytelsefordeling?.endringsdato !== undefined;
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.UTTAK,
-    getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' }),
-    valgtFaktaSteg,
-    skalVises,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+  ...props
+}) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    overstyringApKoder={OVERSTYRING_AP_CODES}
+    faktaPanelKode={faktaPanelCodes.UTTAK}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
+    skalVisesFn={(initData) => !!initData?.ytelsefordeling?.endringsdato !== undefined}
+    render={(data) => (
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}
-        {...initData}
-        {...panelData}
-        {...standardPanelProps}
+        {...data}
       />
-    </FaktaPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default UttakFaktaInitPanel;

@@ -8,12 +8,10 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
-import {
-  useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaVanligOppforselInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
 
@@ -37,36 +35,25 @@ interface OwnProps {
  * Dette faktapanelet skal alltid vises
  */
 const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  behandlingVersjon,
-  valgtFaktaSteg,
-  registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.ARBEIDSFORHOLD,
-    getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' }),
-    valgtFaktaSteg,
-    true,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+  ...props
+}) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    faktaPanelKode={faktaPanelCodes.ARBEIDSFORHOLD}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
+    skalVisesFn={() => true}
+    render={(data) => (
       <ArbeidsforholdFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...panelData}
-        {...standardPanelProps}
+        {...data}
       />
-    </FaktaPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default ArbeidsforholdFaktaInitPanel;

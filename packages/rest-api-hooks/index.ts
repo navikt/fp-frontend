@@ -8,4 +8,5 @@ export { default as useRestApiErrorDispatcher } from './src/error/useRestApiErro
 
 export type { RestApiData as RequestRunnerApiData } from './src/local-data/useRestApiRunner';
 export type { RestApiData as RequestApiData, Options as RequestApiOptions } from './src/local-data/useRestApi';
+export type { MulipleRestApiInterface } from './src/local-data/useMultipleRestApi';
 export { default as RestApiHooks } from './src/RestApiHooks';

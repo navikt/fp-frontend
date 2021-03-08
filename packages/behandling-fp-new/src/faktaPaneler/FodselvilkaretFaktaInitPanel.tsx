@@ -9,12 +9,10 @@ import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import {
-  FaktaPanelInitProps, useStandardFaktaPanelProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.TERMINBEKREFTELSE,
@@ -44,34 +42,18 @@ type EndepunktPanelData = {
 /**
  * FodselvilkaretFaktaInitPanel
  */
-const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
-  valgtFaktaSteg,
-  behandlingVersjon,
-  registrerFaktaPanel,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const skalVises = initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode));
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.FODSELSVILKARET,
-    getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' }),
-    valgtFaktaSteg,
-    skalVises,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
-      <FodselFaktaIndex {...panelData} {...standardPanelProps} />
-    </FaktaPanelWrapper>
-  );
-};
+const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    faktaPanelKode={faktaPanelCodes.FODSELSVILKARET}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
+    skalVisesFn={(initData) => initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))}
+    render={(data) => <FodselFaktaIndex {...data} />}
+  />
+);
 
 export default FodselvilkaretFaktaInitPanel;

@@ -9,13 +9,11 @@ import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, Fagsak, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import {
-  FaktaPanelInitProps, useStandardFaktaPanelProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
@@ -46,38 +44,25 @@ interface OwnProps {
  * AdopsjonsvilkaretFaktaInitPanel
  */
 const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  valgtFaktaSteg,
-  behandlingVersjon,
-  registrerFaktaPanel,
   fagsak,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const skalVises = initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode));
-
-  const erPanelValgt = useFaktaMenyRegistrerer(
-    registrerFaktaPanel,
-    initState,
-    faktaPanelCodes.ADOPSJONSVILKARET,
-    getPackageIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' }),
-    valgtFaktaSteg,
-    skalVises,
-    standardPanelProps.harApneAksjonspunkter,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
+  ...props
+}) => (
+  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    faktaPanelKode={faktaPanelCodes.ADOPSJONSVILKARET}
+    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
+    skalVisesFn={(initData) => initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode))}
+    render={(data) => (
       <AdopsjonFaktaIndex
         isForeldrepengerFagsak={fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER}
-        {...panelData}
-        {...standardPanelProps}
+        {...data}
       />
-    </FaktaPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default AdopsjonsvilkaretFaktaInitPanel;

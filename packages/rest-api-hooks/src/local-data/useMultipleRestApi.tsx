@@ -27,6 +27,10 @@ export interface Options {
   isCachingOn?: boolean;
 }
 
+export interface MulipleRestApiInterface<T> {
+  (endpoints: EndpointData[], options: Options): RestApiData<T>
+}
+
 const defaultOptions = {
   updateTriggers: [],
   keepData: false,

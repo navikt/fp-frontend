@@ -52,16 +52,14 @@ const getBekreftAksjonspunktFaktaCallback = (
 const useStandardFaktaPanelProps = (
   data?: Data,
   aksjonspunktKoder?: string[],
-  vilkarKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {
   const value = useContext(StandardPropsStateContext);
 
   const aksjonspunkterForSteg = data?.aksjonspunkter && aksjonspunktKoder
     ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-  const vilkarForSteg = data?.vilkar && vilkarKoder ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
 
-  const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, vilkarForSteg, value.rettigheter, value.hasFetchError);
+  const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, [], value.rettigheter, value.hasFetchError);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
 
   const submitCallback = getBekreftAksjonspunktFaktaCallback(
