@@ -3,23 +3,24 @@ import React, {
 } from 'react';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 interface OwnProps {
   erPanelValgt: boolean;
-  isLoading: boolean;
+  dataState: RestApiState;
   children: ReactElement;
 }
 
 const FaktaPanelWrapper: FunctionComponent<OwnProps> = ({
   erPanelValgt,
-  isLoading,
+  dataState,
   children,
 }) => {
   if (!erPanelValgt) {
     return null;
   }
 
-  if (isLoading) {
+  if (dataState !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
 

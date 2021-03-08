@@ -201,7 +201,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
+      dataState={panelDataState}
     >
       <IverksetterVedtakStatusModal
         visModal={visIverksetterVedtakModal}

@@ -13,7 +13,6 @@ import {
 import {
   FaktaPanelInitProps, useStandardFaktaPanelProps, FaktaPanelWrapper, useFaktaMenyRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import {
@@ -88,7 +87,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

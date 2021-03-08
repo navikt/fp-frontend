@@ -102,7 +102,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
+      dataState={panelDataState}
     >
       <AvregningProsessIndex
         fagsak={fagsak}

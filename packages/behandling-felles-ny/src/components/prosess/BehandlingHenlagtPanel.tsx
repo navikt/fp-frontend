@@ -5,6 +5,7 @@ import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl'
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
@@ -35,7 +36,7 @@ const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedC
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={false}
       status={vilkarUtfallType.OPPFYLT}
-      isLoading={false}
+      dataState={RestApiState.SUCCESS}
     >
       <Normaltekst>
         <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />

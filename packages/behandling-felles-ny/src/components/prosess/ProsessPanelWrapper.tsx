@@ -7,6 +7,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { LoadingPanel, FadingPanel } from '@fpsak-frontend/shared-components';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import styles from './prosessPanelWrapper.less';
 
@@ -32,7 +33,7 @@ interface OwnProps {
   erPanelValgt: boolean;
   erAksjonspunktOpent: boolean;
   status: string;
-  isLoading: boolean;
+  dataState: RestApiState;
   skalSkjulePanel?: boolean;
   children: ReactElement | ReactElement[];
 }
@@ -41,7 +42,7 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
   erPanelValgt,
   erAksjonspunktOpent,
   status,
-  isLoading,
+  dataState,
   skalSkjulePanel = false,
   children,
 }) => {
@@ -61,10 +62,10 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
 
   return (
     <PanelContainer skalSkjulePanel={skalSkjulePanel}>
-      {isLoading && (
+      {dataState !== RestApiState.SUCCESS && (
         <LoadingPanel />
       )}
-      {!isLoading && children}
+      {dataState === RestApiState.SUCCESS && children}
     </PanelContainer>
   );
 };

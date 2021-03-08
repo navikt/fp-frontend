@@ -11,7 +11,6 @@ import {
 import {
   useStandardFaktaPanelProps, useFaktaMenyRegistrerer, FaktaPanelWrapper, FaktaPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
@@ -59,7 +58,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={panelDataState}>
       <ArbeidsforholdFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...panelData}

@@ -104,7 +104,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      isLoading={!panelData && panelDataState !== RestApiState.SUCCESS}
+      dataState={panelDataState}
     >
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}
