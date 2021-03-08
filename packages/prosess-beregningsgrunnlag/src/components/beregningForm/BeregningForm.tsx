@@ -36,6 +36,7 @@ import BeregningsresultatTable from '../beregningsresultatPanel/Beregningsresult
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
+import DekningsgradTransformedValues, { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -174,7 +175,7 @@ export const transformValues = (values, relevanteStatuser, alleAndelerIForstePer
     kode: VURDER_DEKNINGSGRAD,
     begrunnelse: values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING],
     dekningsgrad: values[RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN],
-  };
+  } as DekningsgradTransformedValues;
   if (harAksjonspunkt(VURDER_DEKNINGSGRAD, gjeldendeAksjonspunkter)) {
     aksjonspunkter.push(vurderDekningsgradAksjonspunkt);
   }
