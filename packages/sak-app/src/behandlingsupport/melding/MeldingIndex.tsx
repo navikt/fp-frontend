@@ -30,7 +30,9 @@ const getSubmitCallback = (
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
     || values.brevmalkode === dokumentMalType.INNOPP
     || values.brevmalkode === dokumentMalType.FORLENGET_DOK
-    || values.brevmalkode === dokumentMalType.FORLENGET_MEDL_DOK;
+    || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID
+    || values.brevmalkode === dokumentMalType.FORLENGET_MEDL_DOK
+    || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID_MEDL;
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
 
   setShowMessageModal(!isInnhentEllerForlenget);
