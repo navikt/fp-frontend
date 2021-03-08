@@ -34,6 +34,7 @@ const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.YTELSER,
     getPackageIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' }),
     valgtFaktaSteg,

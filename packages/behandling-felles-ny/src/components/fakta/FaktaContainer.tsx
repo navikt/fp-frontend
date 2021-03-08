@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useState, useCallback, useMemo,
+  FunctionComponent, ReactElement, useState, useCallback, useMemo, useRef, useEffect,
 } from 'react';
 
 import {
@@ -54,12 +54,23 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
     }
   }, [apentFaktaPanelInfo]);
 
-  const vistMenyData = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
+  const ikkeKlar = menyData.some((d) => !d.harHentetInitData);
+
+  const menyDataSomVises = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
+
+  const forrige = useRef<FaktaPanelMenyData[]>();
+  useEffect(() => {
+    if (!ikkeKlar) {
+      forrige.current = menyDataSomVises;
+    }
+  }, [menyDataSomVises]);
+
+  const currentData = ikkeKlar ? forrige.current : menyDataSomVises;
 
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = vistMenyData[index];
+    const panel = currentData[index];
     oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
-  }, [vistMenyData, valgtProsessSteg]);
+  }, [currentData, valgtProsessSteg]);
 
   if (!hentPaneler) {
     return null;
@@ -70,7 +81,9 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       <FlexContainer fullHeight>
         <FlexRow>
           <FlexColumn className={styles.sideMenu}>
-            <FaktaMeny menyData={vistMenyData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
+            {currentData.length > 0 && (
+              <FaktaMeny menyData={currentData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
+            )}
           </FlexColumn>
           <FlexColumn className={styles.content}>
             {hentPaneler({

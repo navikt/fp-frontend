@@ -51,7 +51,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
   registrerFaktaPanel,
   fagsak,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -59,6 +59,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.ADOPSJONSVILKARET,
     getPackageIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' }),
     valgtFaktaSteg,

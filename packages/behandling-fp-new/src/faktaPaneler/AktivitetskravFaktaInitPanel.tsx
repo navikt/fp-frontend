@@ -37,6 +37,7 @@ const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.AKTIVITETSKRAV,
     getPackageIntl().formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' }),
     valgtFaktaSteg,

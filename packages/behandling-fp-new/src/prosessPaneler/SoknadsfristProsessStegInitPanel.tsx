@@ -31,7 +31,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
   valgtProsessSteg,
   registrerProsessPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -39,6 +39,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.SOEKNADSFRIST,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' }),
     valgtProsessSteg,

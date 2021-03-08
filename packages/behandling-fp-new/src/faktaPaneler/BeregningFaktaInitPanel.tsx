@@ -53,6 +53,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.BEREGNING,
     getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' }),
     valgtFaktaSteg,

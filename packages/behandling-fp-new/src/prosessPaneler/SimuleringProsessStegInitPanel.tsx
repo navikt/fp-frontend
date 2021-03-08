@@ -82,6 +82,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.AVREGNING,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
     valgtProsessSteg,

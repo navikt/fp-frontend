@@ -38,6 +38,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.BESTEBEREGNING,
     getPackageIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' }),
     valgtFaktaSteg,

@@ -38,7 +38,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -46,6 +46,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.FORDELING,
     getPackageIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' }),
     valgtFaktaSteg,

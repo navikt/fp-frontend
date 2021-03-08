@@ -33,7 +33,7 @@ const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   behandlingVersjon,
   registrerFaktaPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -41,6 +41,7 @@ const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.VERGE,
     getPackageIntl().formatMessage({ id: 'RegistrereVergeInfoPanel.Info' }),
     valgtFaktaSteg,

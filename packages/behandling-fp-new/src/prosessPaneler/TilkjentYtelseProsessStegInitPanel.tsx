@@ -89,6 +89,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.TILKJENT_YTELSE,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
     valgtProsessSteg,

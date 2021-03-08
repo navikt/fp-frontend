@@ -101,7 +101,7 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl, opneSokeside);
   const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, [], lagringSideEffekter);
@@ -110,6 +110,7 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.VARSEL,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' }),
     valgtProsessSteg,

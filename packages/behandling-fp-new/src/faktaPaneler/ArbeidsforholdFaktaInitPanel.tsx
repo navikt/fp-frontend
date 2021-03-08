@@ -42,12 +42,13 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   registrerFaktaPanel,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.ARBEIDSFORHOLD,
     getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' }),
     valgtFaktaSteg,

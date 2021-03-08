@@ -47,6 +47,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.FORTSATTMEDLEMSKAP,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' }),
     valgtProsessSteg,

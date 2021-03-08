@@ -45,7 +45,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
   registrerProsessPanel,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
 
@@ -56,6 +56,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.OPPLYSNINGSPLIKT,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' }),
     valgtProsessSteg,

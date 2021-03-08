@@ -112,6 +112,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.UTTAK,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
     valgtProsessSteg,

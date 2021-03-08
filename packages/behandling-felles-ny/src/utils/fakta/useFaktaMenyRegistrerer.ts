@@ -2,12 +2,16 @@ import {
   useEffect, useState,
 } from 'react';
 
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { usePrevious } from '@fpsak-frontend/shared-components';
+
 import FaktaPanelMenyData from '../../types/faktaPanelMenyData';
 
 const DEFAULT_PANEL_VALGT = 'default';
 
 const useFaktaMenyRegistrerer = (
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void,
+  dataState: RestApiState,
   id: string,
   tekst: string,
   valgtFaktaSteg: string,
@@ -18,27 +22,34 @@ const useFaktaMenyRegistrerer = (
   useEffect(() => {
     registrerFaktaPanel({
       id,
+      harHentetInitData: dataState === RestApiState.SUCCESS,
     });
-  }, []);
+  }, [dataState]);
 
   const erAktiv = valgtFaktaSteg === id
     || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT);
 
+  const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
+
   useEffect(() => {
-    if (skalVisesImeny) {
-      registrerFaktaPanel({
-        id,
-        tekst,
-        erAktiv,
-        harAksjonspunkt: harApneAksjonspunkter,
-      });
-      setPanelValgt(erAktiv);
-    } else {
-      registrerFaktaPanel({
-        id,
-      });
+    if (dataState === RestApiState.SUCCESS) {
+      if (skalVisesImeny) {
+        registrerFaktaPanel({
+          id,
+          tekst,
+          erAktiv,
+          harAksjonspunkt: harApneAksjonspunkter,
+          harHentetInitData: true,
+        });
+        setPanelValgt(erAktiv);
+      } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
+        registrerFaktaPanel({
+          id,
+          harHentetInitData: true,
+        });
+      }
     }
-  }, [skalVisesImeny, erAktiv, harApneAksjonspunkter]);
+  }, [dataState, forrigeSkalVisesIMeny, skalVisesImeny, erAktiv, harApneAksjonspunkter]);
 
   return erPanelValgt;
 };

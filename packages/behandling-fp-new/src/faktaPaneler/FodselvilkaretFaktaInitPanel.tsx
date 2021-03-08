@@ -49,7 +49,7 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   behandlingVersjon,
   registrerFaktaPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -57,6 +57,7 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.FODSELSVILKARET,
     getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' }),
     valgtFaktaSteg,

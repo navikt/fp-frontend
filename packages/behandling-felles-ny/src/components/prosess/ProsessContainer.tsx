@@ -1,8 +1,9 @@
 import React, {
-  FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState,
+  FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState, useRef,
 } from 'react';
 
 import { Behandling } from '@fpsak-frontend/types';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny from './ProsessMeny';
@@ -45,13 +46,24 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     });
   }, []);
 
+  const ikkeKlar = menyData.some((d) => !d.harHentetInitData);
+
   const menyDataSomVises = useMemo(() => menyData.filter((d) => !!d.tekst), [menyData]);
 
+  const forrige = useRef<ProsessPanelMenyData[]>();
+  useEffect(() => {
+    if (!ikkeKlar) {
+      forrige.current = menyDataSomVises;
+    }
+  }, [menyDataSomVises]);
+
+  const currentData = ikkeKlar ? forrige.current : menyDataSomVises;
+
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = menyDataSomVises[index];
+    const panel = currentData[index];
     const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
     oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
-  }, [menyDataSomVises, valgtFaktaSteg]);
+  }, [currentData, valgtFaktaSteg]);
 
   const [skalOppdatereFagsakKontekst, toggleOppdatereFagsakContext] = useState(true);
   useEffect(() => {
@@ -65,10 +77,15 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.meny}>
-        <ProsessMeny menyData={menyDataSomVises} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
-      </div>
+    <div className={currentData.length > 0 ? styles.container : undefined}>
+      {currentData.length > 0 && (
+        <div className={styles.meny}>
+          <ProsessMeny menyData={currentData} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
+        </div>
+      )}
+      {currentData.length === 0 && (
+        <LoadingPanel />
+      )}
       {hentPaneler({
         behandlingVersjon: behandling?.versjon,
         valgtProsessSteg,
@@ -76,7 +93,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
       }, {
         apentFaktaPanelInfo,
         toggleOppdatereFagsakContext,
-        allMenyData: menyDataSomVises,
+        allMenyData: currentData,
       })}
       {behandling.behandlingHenlagt && (
         <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} />

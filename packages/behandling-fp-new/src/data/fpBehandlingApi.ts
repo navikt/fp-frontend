@@ -109,7 +109,6 @@ export function useHentInitPanelData<T>(
 ): { initData: T; initState: RestApiState } {
   const formaterteEndepunkter = endepunkter.map((e) => ({ key: e }));
   const { data, state } = restApiFpHooks.useMultipleRestApi<T>(formaterteEndepunkter, {
-    keepData: true,
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -130,7 +129,6 @@ export function useHentInputDataTilPanel<T>(
 ): { panelData: T; panelDataState: RestApiState } {
   const formaterteEndepunkter = endepunkter.map((e) => ({ key: e }));
   const { data, state } = restApiFpHooks.useMultipleRestApi<T>(formaterteEndepunkter, {
-    keepData: true,
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt,
     isCachingOn: true,

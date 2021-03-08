@@ -42,12 +42,13 @@ const SakenFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   behandlingVersjon,
   registrerFaktaPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.SAKEN,
     getPackageIntl().formatMessage({ id: 'SakenFaktaPanel.Title' }),
     valgtFaktaSteg,

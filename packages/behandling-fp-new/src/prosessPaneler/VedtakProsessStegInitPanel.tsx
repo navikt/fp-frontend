@@ -179,6 +179,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.VEDTAK,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
     valgtProsessSteg,

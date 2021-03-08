@@ -33,7 +33,7 @@ const TilleggsopplysningerFaktaInitPanel: FunctionComponent<FaktaPanelInitProps>
   behandlingVersjon,
   registrerFaktaPanel,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -41,6 +41,7 @@ const TilleggsopplysningerFaktaInitPanel: FunctionComponent<FaktaPanelInitProps>
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.TILLEGGSOPPLYSNINGER,
     getPackageIntl().formatMessage({ id: 'TilleggsopplysningerInfoPanel.Tilleggsopplysninger' }),
     valgtFaktaSteg,

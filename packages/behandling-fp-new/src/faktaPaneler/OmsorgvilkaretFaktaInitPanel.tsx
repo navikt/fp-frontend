@@ -42,7 +42,7 @@ const OmsorgvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   registrerFaktaPanel,
   personoversikt,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER);
 
@@ -50,6 +50,7 @@ const OmsorgvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.OMSORGSVILKARET,
     getPackageIntl().formatMessage({ id: 'OmsorgOgForeldreansvarInfoPanel.Omsorg' }),
     valgtFaktaSteg,

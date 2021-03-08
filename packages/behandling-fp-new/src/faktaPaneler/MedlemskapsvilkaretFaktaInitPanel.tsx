@@ -57,7 +57,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
   rettigheter,
   hasFetchError,
 }) => {
-  const { initData } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
+  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, AKSJONSPUNKT_KODER, [], OVERSTYRING_AP_CODES);
 
@@ -65,6 +65,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
+    initState,
     faktaPanelCodes.MEDLEMSKAPSVILKARET,
     getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' }),
     valgtFaktaSteg,

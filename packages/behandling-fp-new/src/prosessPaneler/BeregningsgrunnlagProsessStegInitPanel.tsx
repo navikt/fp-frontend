@@ -58,6 +58,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
+    initState,
     prosessStegCodes.BEREGNINGSGRUNNLAG,
     getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' }),
     valgtProsessSteg,
