@@ -9,7 +9,7 @@ import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
@@ -43,7 +43,7 @@ type EndepunktPanelData = {
  * FodselvilkaretFaktaInitPanel
  */
 const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}

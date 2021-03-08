@@ -9,7 +9,7 @@ import {
   AksessRettigheter,
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
-import { FaktaVanligOppforselInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaDefaultInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
@@ -53,7 +53,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
   hasFetchError,
   ...props
 }) => (
-  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}

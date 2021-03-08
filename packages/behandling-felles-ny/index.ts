@@ -6,7 +6,7 @@ export { default as BehandlingPaVent } from './src/components/modaler/paVent/Beh
 export { default as ProsessPanelWrapper } from './src/components/prosess/ProsessPanelWrapper';
 export { default as FaktaPanelWrapper } from './src/components/fakta/FaktaPanelWrapper';
 export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStateCleaner';
-export { default as FaktaVanligOppforselInitPanel } from './src/components/fakta/FaktaVanligOppforselInitPanel';
+export { default as FaktaDefaultInitPanel } from './src/components/fakta/FaktaDefaultInitPanel';
 export { default as InngangsvilkarDefaultProsessStegPanel } from './src/components/prosess/InngangsvilkarDefaultProsessStegPanel';
 export { default as StandardBehandlingProps, BehandlingEventHandler } from './src/types/standardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/prosessPanelMenyData';

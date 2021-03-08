@@ -5,7 +5,7 @@ import React, {
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
@@ -19,7 +19,7 @@ type EndepunktInitData = {
  * YtelserFaktaInitPanel
  */
 const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaVanligOppforselInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
     useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}

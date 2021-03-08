@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
 import { Aksjonspunkt, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaVanligOppforselInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import getPackageIntl from '../../i18n/getPackageIntl';
@@ -23,7 +23,7 @@ type EndepunktInitData = {
  * AktivitetskravFaktaInitPanel
  */
 const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaVanligOppforselInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
     useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}

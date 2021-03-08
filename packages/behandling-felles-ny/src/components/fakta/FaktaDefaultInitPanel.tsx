@@ -22,7 +22,7 @@ type OwnProps<INIT_DATA, PANEL_DATA> = {
   faktaPanelTekst: string;
 }
 
-const FaktaVanligOppforselInitPanel = <INIT_DATA, PANEL_DATA = void, >({
+const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   valgtFaktaSteg,
   behandlingVersjon,
   registrerFaktaPanel,
@@ -72,4 +72,4 @@ const FaktaVanligOppforselInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   );
 };
 
-export default FaktaVanligOppforselInitPanel;
+export default FaktaDefaultInitPanel;

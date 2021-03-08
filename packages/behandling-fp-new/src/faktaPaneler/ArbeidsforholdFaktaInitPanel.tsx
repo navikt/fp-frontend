@@ -8,7 +8,7 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
-import { FaktaVanligOppforselInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
@@ -38,7 +38,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaVanligOppforselInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
