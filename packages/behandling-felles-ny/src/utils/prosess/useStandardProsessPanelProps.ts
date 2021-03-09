@@ -76,7 +76,7 @@ type Data = {
 }
 
 const useStandardProsessPanelProps = (
-  data: Data,
+  data?: Data,
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,

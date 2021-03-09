@@ -11,11 +11,11 @@ import {
   AksessRettigheter, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
+  useStandardProsessPanelProps, OverstyringPanelDef, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,

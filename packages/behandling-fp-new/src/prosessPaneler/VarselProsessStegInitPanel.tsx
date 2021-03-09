@@ -9,13 +9,11 @@ import {
   Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useSkalViseProsessPanel, useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
+  ProsessDefaultInitPanel, skalViseProsessPanel, ProsessPanelInitProps, useStandardProsessPanelProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import {
-  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
-} from '../data/fpBehandlingApi';
+import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -93,52 +91,39 @@ interface OwnProps {
 }
 
 const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   toggleSkalOppdatereFagsakContext,
   fagsak,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
+  ...props
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
   const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl, opneSokeside);
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, [], lagringSideEffekter);
-
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter);
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.VARSEL,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' }),
-    valgtProsessSteg,
-    skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
 
   const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
+
+  const standardPanelProps = useStandardProsessPanelProps();
 
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={standardPanelProps.status}
-      dataState={panelDataState}
-    >
-      <VarselOmRevurderingProsessIndex
-        previewCallback={previewCallback}
-        {...panelData}
-        {...standardPanelProps}
-      />
-    </ProsessPanelWrapper>
+    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+      {...props}
+      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      prosessPanelKode={prosessStegCodes.VARSEL}
+      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
+      skalVisesFn={(data) => skalViseProsessPanel(data.aksjonspunkter)}
+      lagringSideEffekter={lagringSideEffekter}
+      render={(data) => (
+        <VarselOmRevurderingProsessIndex
+          previewCallback={previewCallback}
+          {...data}
+        />
+      )}
+    />
   );
 };
 

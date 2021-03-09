@@ -1,6 +1,6 @@
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
-const useSkalViseProsessPanel = (aksjonspunkter: Aksjonspunkt[], vilkarKoder: string[] = [], vilkar: Vilkar[] = []): boolean => {
+const skalViseProsessPanel = (aksjonspunkter: Aksjonspunkt[], vilkarKoder: string[] = [], vilkar: Vilkar[] = []): boolean => {
   const harAksjonspunkter = aksjonspunkter.length > 0;
   if (vilkarKoder.length === 0) {
     return harAksjonspunkter;
@@ -14,4 +14,4 @@ const useSkalViseProsessPanel = (aksjonspunkter: Aksjonspunkt[], vilkarKoder: st
   return harAksjonspunkter && harVilkar;
 };
 
-export default useSkalViseProsessPanel;
+export default skalViseProsessPanel;

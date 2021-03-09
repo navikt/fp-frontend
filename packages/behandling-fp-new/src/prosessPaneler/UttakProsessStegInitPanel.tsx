@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useMemo,
+  FunctionComponent,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -9,18 +9,13 @@ import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  AksessRettigheter,
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, FamilieHendelseSamling,
+  AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, FamilieHendelseSamling,
   Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, ProsessPanelInitProps, useProsessMenyRegistrerer,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import {
-  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
-} from '../data/fpBehandlingApi';
+import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 // TODO Er dette mogleg å fjerna?
 const FAKTA_UTTAK_AP = [
@@ -93,56 +88,35 @@ interface OwnProps {
 }
 
 const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   personoversikt,
   fagsak,
+  ...props
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const skalVises = initState === RestApiState.SUCCESS;
-  const status = useMemo(() => getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter), [
-    initData?.uttaksresultatPerioder, initData?.aksjonspunkter,
-  ]);
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.UTTAK,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' }),
-    valgtProsessSteg,
-    skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    status,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
   const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
-
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={status}
-      dataState={panelDataState}
-    >
-      <UttakProsessIndex
-        fagsak={fagsak}
-        employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        personoversikt={personoversikt}
-        tempUpdateStonadskontoer={tempUpdateStonadskontoer}
-        uttaksresultatPerioder={initData?.uttaksresultatPerioder}
-        {...panelData}
-        {...standardPanelProps}
-      />
-    </ProsessPanelWrapper>
+    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+      {...props}
+      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      prosessPanelKode={prosessStegCodes.UTTAK}
+      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' })}
+      skalVisesFn={(_data, initState) => initState === RestApiState.SUCCESS}
+      overrideStatusFn={(data) => getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter)}
+      render={(data) => (
+        <UttakProsessIndex
+          fagsak={fagsak}
+          employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          personoversikt={personoversikt}
+          tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+          {...data}
+        />
+      )}
+    />
   );
 };
 

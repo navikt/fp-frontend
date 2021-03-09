@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useMemo,
+  FunctionComponent,
 } from 'react';
 
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -11,13 +11,11 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode,
   Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
-import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const harPeriodeMedUtbetaling = (perioder: BeregningsresultatPeriode[]): boolean => {
   const periode = perioder.find((p) => p.dagsats > 0);
@@ -72,51 +70,31 @@ interface OwnProps {
 }
 
 const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   arbeidsgiverOpplysningerPerId,
   fagsak,
   personoversikt,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const skalVises = initState === RestApiState.SUCCESS;
-  const status = useMemo(() => getStatusFromResultatstruktur(initData?.beregningresultatForeldrepenger, initData?.uttaksresultatPerioder), [
-    initData?.beregningresultatForeldrepenger, initData?.uttaksresultatPerioder]);
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.TILKJENT_YTELSE,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' }),
-    valgtProsessSteg,
-    skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    status,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={status}
-      dataState={panelDataState}
-    >
+  ...props
+}) => (
+  <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    prosessPanelKode={prosessStegCodes.TILKJENT_YTELSE}
+    prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
+    skalVisesFn={(_data, initState) => initState === RestApiState.SUCCESS}
+    overrideStatusFn={(data) => getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder)}
+    render={(data) => (
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}
-        beregningresultat={initData?.beregningresultatForeldrepenger}
-        {...panelData}
-        {...standardPanelProps}
+        beregningresultat={data?.beregningresultatForeldrepenger}
+        {...data}
       />
-    </ProsessPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default TilkjentYtelseProsessStegInitPanel;

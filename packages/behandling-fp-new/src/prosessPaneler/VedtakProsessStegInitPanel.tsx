@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useMemo, useState,
+  FunctionComponent, useCallback, useState,
 } from 'react';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -14,15 +14,12 @@ import {
   Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, IverksetterVedtakStatusModal,
-  FatterVedtakStatusModal, useProsessMenyRegistrerer, ProsessPanelInitProps,
+  ProsessDefaultInitPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import {
-  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
-} from '../data/fpBehandlingApi';
+import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
@@ -156,39 +153,18 @@ interface OwnProps {
 }
 
 const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   toggleOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl,
   fagsak,
   opneSokeside,
+  ...props
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
   const lagringSideEffekter = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleFatterVedtakModal,
     toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
-  const skalVises = initState === RestApiState.SUCCESS;
-  const status = useMemo(() => findStatusForVedtak(
-    initData?.vilkar || [], initData?.aksjonspunkter || [], standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat,
-  ), [initData, standardPanelProps.aksjonspunkter, standardPanelProps.behandling.behandlingsresultat]);
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.VEDTAK,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
-    valgtProsessSteg,
-    skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    status,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
+  const standardPanelProps = useStandardProsessPanelProps();
 
   const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
@@ -198,29 +174,39 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
   const lukkFatterModal = useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, []);
 
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={status}
-      dataState={panelDataState}
-    >
-      <IverksetterVedtakStatusModal
-        visModal={visIverksetterVedtakModal}
-        lukkModal={lukkIverksetterModal}
-        behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
-      />
-      <FatterVedtakStatusModal
-        visModal={visFatterVedtakModal && standardPanelProps.behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
-        lukkModal={lukkFatterModal}
-        tekstkode="FatterVedtakStatusModal.SendtBeslutter"
-      />
-      <VedtakProsessIndex
-        ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-        previewCallback={previewCallback}
-        {...panelData}
-        {...standardPanelProps}
-      />
-    </ProsessPanelWrapper>
+    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+      {...props}
+      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      prosessPanelKode={prosessStegCodes.VEDTAK}
+      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+      skalVisesFn={(_data, initState) => initState === RestApiState.SUCCESS}
+      overrideStatusFn={(data) => findStatusForVedtak(
+        data?.vilkar || [], data?.aksjonspunkter || [], data.aksjonspunkter, data.behandling.behandlingsresultat,
+      )}
+      lagringSideEffekter={lagringSideEffekter}
+      render={(data) => (
+        <>
+          <IverksetterVedtakStatusModal
+            visModal={visIverksetterVedtakModal}
+            lukkModal={lukkIverksetterModal}
+            behandlingsresultat={data.behandling.behandlingsresultat}
+          />
+          <FatterVedtakStatusModal
+            visModal={visFatterVedtakModal && data.behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
+            lukkModal={lukkFatterModal}
+            tekstkode="FatterVedtakStatusModal.SendtBeslutter"
+          />
+          <VedtakProsessIndex
+            ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+            previewCallback={previewCallback}
+            {...data}
+          />
+        </>
+      )}
+    />
   );
 };
 

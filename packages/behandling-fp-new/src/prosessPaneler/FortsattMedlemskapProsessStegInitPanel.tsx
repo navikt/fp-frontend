@@ -7,11 +7,11 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps, OverstyringPanelDef, useSkalViseProsessPanel,
+  skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps, OverstyringPanelDef,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR];
 
@@ -28,55 +28,43 @@ interface OwnProps {
 }
 
 const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   rettigheter,
+  ...props
 }) => {
+  const { behandlingVersjon } = props;
   const [erOverstyrt, setOverstyrt] = useState(false);
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
   useEffect(() => {
     setOverstyrt(false);
   }, [behandlingVersjon]);
 
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
-
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.FORTSATTMEDLEMSKAP,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' }),
-    valgtProsessSteg,
-    skalVises,
-    erOverstyrt || standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={standardPanelProps.status}
-      dataState={initState}
-    >
-      <OverstyringPanelDef
-        behandling={standardPanelProps.behandling}
-        aksjonspunkter={initData?.aksjonspunkter}
-        aksjonspunktKoder={AKSJONSPUNKT_KODER}
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
-        panelTekstKode="Behandlingspunkt.FortsattMedlemskap"
-        erMedlemskapsPanel={false}
-        toggleOverstyring={toggleOverstyring}
-        erOverstyrt={erOverstyrt}
-        overrideReadOnly={standardPanelProps.isReadOnly}
-        kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-      />
-    </ProsessPanelWrapper>
+    <ProsessDefaultInitPanel<EndepunktInitData>
+      {...props}
+      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      vilkarKoder={VILKAR_KODER}
+      prosessPanelKode={prosessStegCodes.FORTSATTMEDLEMSKAP}
+      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
+      skalVisesFn={(initData) => skalViseProsessPanel(initData.aksjonspunkter, VILKAR_KODER, initData.vilkar)}
+      erOverstyrt={erOverstyrt}
+      render={(data) => (
+        <OverstyringPanelDef
+          behandling={data.behandling}
+          aksjonspunkter={data?.aksjonspunkter}
+          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          vilkar={data.vilkar}
+          vilkarKoder={VILKAR_KODER}
+          panelTekstKode="Behandlingspunkt.FortsattMedlemskap"
+          erMedlemskapsPanel={false}
+          toggleOverstyring={toggleOverstyring}
+          erOverstyrt={erOverstyrt}
+          overrideReadOnly={data.isReadOnly}
+          kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+        />
+      )}
+    />
   );
 };
 

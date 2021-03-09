@@ -10,12 +10,10 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar,
 } from '@fpsak-frontend/types';
-import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
@@ -45,44 +43,26 @@ interface OwnProps {
 }
 
 const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   arbeidsgiverOpplysningerPerId,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
-
-  const skalVises = initState === RestApiState.SUCCESS;
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.BEREGNINGSGRUNNLAG,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' }),
-    valgtProsessSteg,
-    skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={standardPanelProps.status}
-      dataState={panelDataState}
-    >
+  ...props
+}) => (
+  <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    vilkarKoder={VILKAR_KODER}
+    prosessPanelKode={prosessStegCodes.BEREGNINGSGRUNNLAG}
+    prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
+    skalVisesFn={(_initData, initState) => initState === RestApiState.SUCCESS}
+    render={(data) => (
       <BeregningsgrunnlagProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...panelData}
-        {...standardPanelProps}
+        {...data}
       />
-    </ProsessPanelWrapper>
-  );
-};
+    )}
+  />
+);
 
 export default BeregningsgrunnlagProsessStegInitPanel;

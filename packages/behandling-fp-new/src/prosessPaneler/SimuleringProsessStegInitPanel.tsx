@@ -10,14 +10,12 @@ import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, ProsessPanelWrapper, useProsessMenyRegistrerer, ProsessPanelMenyData, ProsessPanelInitProps,
+  ProsessDefaultInitPanel, useStandardProsessPanelProps, ProsessPanelMenyData, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import {
-  restApiFpHooks, FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel,
-} from '../data/fpBehandlingApi';
+import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -64,55 +62,40 @@ interface OwnProps {
 }
 
 const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
-  valgtProsessSteg,
-  registrerProsessPanel,
   menyData,
   fagsak,
+  ...props
 }) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER);
-
-  const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
-    && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
-  const skalVises = initState === RestApiState.SUCCESS && !harVedtakspanel;
-
-  const status = initData?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT;
-
-  const erPanelValgt = useProsessMenyRegistrerer(
-    registrerProsessPanel,
-    initState,
-    prosessStegCodes.AVREGNING,
-    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' }),
-    valgtProsessSteg,
-    skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    status,
-  );
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
   const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+
+  const standardPanelProps = useStandardProsessPanelProps();
 
   const previewFptilbakeCallback = useCallback(getForhandsvisFptilbakeCallback(forhandsvisTilbakekrevingMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
   return (
-    <ProsessPanelWrapper
-      erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
-      status={status}
-      dataState={panelDataState}
-    >
-      <AvregningProsessIndex
-        fagsak={fagsak}
-        previewFptilbakeCallback={previewFptilbakeCallback}
-        simuleringResultat={initData?.simuleringResultat}
-        {...panelData}
-        {...standardPanelProps}
-      />
-    </ProsessPanelWrapper>
+    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+      {...props}
+      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      prosessPanelKode={prosessStegCodes.AVREGNING}
+      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
+      skalVisesFn={(_data, initState) => {
+        const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
+        && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
+        return initState === RestApiState.SUCCESS && !harVedtakspanel;
+      }}
+      overrideStatusFn={(data) => (data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      render={(data) => (
+        <AvregningProsessIndex
+          fagsak={fagsak}
+          previewFptilbakeCallback={previewFptilbakeCallback}
+          {...data}
+        />
+      )}
+    />
   );
 };
 
