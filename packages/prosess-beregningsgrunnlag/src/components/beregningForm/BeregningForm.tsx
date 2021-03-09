@@ -36,7 +36,7 @@ import BeregningsresultatTable from '../beregningsresultatPanel/Beregningsresult
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import DekningsgradTransformedValues, { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
+import DekningsgradTransformedValues from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -369,7 +369,6 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
               beregningsgrunnlagPerioder={beregningsgrunnlag.beregningsgrunnlagPeriode}
               dekningsgrad={dekningsgrad}
               vilkaarBG={vilkaarBG}
-              aksjonspunkter={gjeldendeAksjonspunkter}
               aktivitetStatusList={aktivitetStatusList}
               grunnbelop={beregningsgrunnlag.grunnbeløp}
               ytelseGrunnlag={beregningsgrunnlag.ytelsesspesifiktGrunnlag}

@@ -19,7 +19,7 @@ import BeregningsresutatPanel from './BeregningsResultatPanel';
 import BeregningsresultatPeriodeTabellType, {
   AvkortetRadType,
   BeregningsresultatAndelElementType,
-  BruttoRadType, RedusertRadType
+  BruttoRadType, RedusertRadType,
 } from '../../types/BeregningsresultatPeriodeTabellType';
 
 const VIRKEDAGER_PR_AAR = 260;
@@ -398,13 +398,18 @@ const sjekkHarBortfaltNaturalYtelse = (periode: BeregningsgrunnlagPeriodeProp): 
 };
 
 export const createBeregningTableData = createSelector(
-  [(state, ownProps) => ownProps.beregningsgrunnlagPerioder,
-    (state, ownProps) => ownProps.aktivitetStatusList,
-    (state, ownProps) => ownProps.dekningsgrad,
-    (state, ownProps) => ownProps.grunnbelop,
-    (state, ownProps) => ownProps.vilkaarBG.vilkarStatus,
-    (state, ownProps) => ownProps.ytelseGrunnlag],
-  (allePerioder, aktivitetStatusList, dekningsgrad, grunnbelop, vilkarStatus, ytelseGrunnlag): BeregningsresultatPeriodeTabellType[] => {
+  [(ownProps: OwnProps) => ownProps.beregningsgrunnlagPerioder,
+    (ownProps: OwnProps) => ownProps.aktivitetStatusList,
+    (ownProps: OwnProps) => ownProps.dekningsgrad,
+    (ownProps: OwnProps) => ownProps.grunnbelop,
+    (ownProps: OwnProps) => ownProps.vilkaarBG.vilkarStatus,
+    (ownProps: OwnProps) => ownProps.ytelseGrunnlag],
+  (allePerioder: BeregningsgrunnlagPeriodeProp[],
+    aktivitetStatusList: Kodeverk[],
+    dekningsgrad: number,
+    grunnbelop: number,
+    vilkarStatus: Kodeverk,
+    ytelseGrunnlag: YtelseGrunnlag): BeregningsresultatPeriodeTabellType[] => {
     const perioderSomSkalVises = allePerioder.filter((periode) => periodeHarAarsakSomTilsierVisning(periode.periodeAarsaker));
     if (perioderSomSkalVises.length < 1) {
       // Alle perioder har periodeårsak som egentlig ikke trengs vises, velger første periode som den eneste som blir vist.
@@ -497,10 +502,17 @@ export const createBeregningTableData = createSelector(
   },
 );
 
+type MappedOwnProps = {
+  periodeResultatTabeller: BeregningsresultatPeriodeTabellType[];
+};
+
 type OwnProps = {
-    halvGVerdi: number;
     vilkaarBG: Vilkar;
-    periodeResultatTabeller: BeregningsresultatPeriodeTabellType[];
+    beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[];
+    aktivitetStatusList: Kodeverk[];
+    dekningsgrad: number;
+    grunnbelop: number;
+    ytelseGrunnlag: YtelseGrunnlag;
 };
 
 /**
@@ -510,14 +522,14 @@ type OwnProps = {
  * beregningen og hva dagsatsen ble.
  * Dersom vilkåret ble avslått vil grunnen til dette vises istedenfor tabellen
  */
-const BeregningsresultatTable: FunctionComponent<OwnProps> = ({
-  vilkaarBG, periodeResultatTabeller, halvGVerdi,
+const BeregningsresultatTable: FunctionComponent<OwnProps & MappedOwnProps> = ({
+  vilkaarBG, periodeResultatTabeller, grunnbelop,
 }) => (
-  <BeregningsresutatPanel halvGVerdi={halvGVerdi} periodeResultatTabeller={periodeResultatTabeller} vilkaarBG={vilkaarBG} />
+  <BeregningsresutatPanel grunnbeløp={grunnbelop} periodeResultatTabeller={periodeResultatTabeller} vilkaarBG={vilkaarBG} />
 );
 
-const mapStateToProps = (state, ownProps) => ({
-  periodeResultatTabeller: createBeregningTableData(state, ownProps),
+const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => ({
+  periodeResultatTabeller: createBeregningTableData(ownProps),
 });
 
 export default connect(mapStateToProps)(BeregningsresultatTable);

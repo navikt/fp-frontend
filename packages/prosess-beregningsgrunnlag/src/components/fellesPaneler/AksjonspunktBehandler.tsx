@@ -29,7 +29,7 @@ import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
-import ArbeidstakerFrilansValues from "../../types/ATFLAksjonspunktTsType";
+import ArbeidstakerFrilansValues from '../../types/ATFLAksjonspunktTsType';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

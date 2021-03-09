@@ -3,25 +3,26 @@ import { ReactElement } from 'react';
 export type AvkortetRadType = {
   ledetekst: ReactElement;
   verdi: string;
-  display: boolean;
+  display?: boolean;
 }
 
 export type RedusertRadType = {
   ledetekst: ReactElement;
   verdi: string;
-  display: boolean;
+  display?: boolean;
 }
 
 export type BruttoRadType = {
   ledetekst: ReactElement;
   verdi: string;
-  display: boolean;
+  display?: boolean;
   grunnlag: string;
 }
 
 export type DagsatsRadType = {
   verdi: string;
-  display: boolean;
+  display?: boolean;
+  grunnlag: string;
 }
 
 export type BeregningsresultatAndelElementType = {
@@ -38,7 +39,7 @@ export type BeregningsresultatPeriodeTabellType = {
   avkortetRad: AvkortetRadType;
   redusertRad: RedusertRadType;
   bruttoRad: BruttoRadType;
-  dagsatser: DagsatsRadType[];
+  dagsatser: DagsatsRadType;
   rowsForklaringer: ReactElement[];
 };
 

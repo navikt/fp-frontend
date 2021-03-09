@@ -760,7 +760,7 @@ describe('<BeregningsresultatTable>', () => {
       aktivitetStatusList,
       dekningsgrad,
       grunnbelop,
-      vilkaarBG,
+      vilkaarBG.vilkarStatus,
       ytelseGrunnlag,
     );
     selectorData.forEach((periode) => {
@@ -805,7 +805,7 @@ describe('<BeregningsresultatTable>', () => {
       aktivitetStatusList,
       dekningsgrad,
       grunnbelop,
-      vilkaarBG,
+      vilkaarBG.vilkarStatus,
       ytelseGrunnlag,
     );
     selectorData.forEach((periode) => {
