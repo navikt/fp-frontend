@@ -6,7 +6,9 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { hasValidDate, hasValidInteger, required } from '@fpsak-frontend/utils';
+import {
+  hasValidDate, hasValidInteger, required, hasValidText,
+} from '@fpsak-frontend/utils';
 import {
   CheckboxField, DatepickerField, InputField, RadioGroupField, RadioOption, TextAreaField,
 } from '@fpsak-frontend/form';
@@ -85,6 +87,7 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<PureOwnProps & Mapp
           <TextAreaField
             name="beskrivelseAvEndring"
             label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
+            validate={[hasValidText]}
           />
           <InputField
             name="inntekt"
