@@ -2,18 +2,17 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter, Aksjonspunkt, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, useSkalViseProsessPanel, OverstyringPanelDef, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
+  InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelData, InngangsvilkarPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
-import { FpBehandlingApiKeys, useHentInitPanelData, useHentInputDataTilPanel } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR];
 
@@ -38,59 +37,41 @@ interface OwnProps {
   harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
-const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
+const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
   rettigheter,
-  setPanelInfo,
-  erPanelValgt,
-  harInngangsvilkarApentAksjonspunkt,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-  const erDataFerdighentet = initState === RestApiState.SUCCESS;
-
-  const { panelData, panelDataState } = useHentInputDataTilPanel<EndepunktPanelData>(ENDEPUNKTER_PANEL_DATA, erPanelValgt, behandlingVersjon);
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
-
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
-
-  const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
-    setPanelInfo,
-    behandlingVersjon,
-    'MEDLEMSKAP',
-    '',
-    erDataFerdighentet && skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
-  if (!erPanelValgt || !skalVises) {
-    return null;
-  }
-
-  if (!erDataFerdighentet || panelDataState !== RestApiState.SUCCESS) {
-    return <LoadingPanel />;
-  }
-
-  return (
-    <>
-      <OverstyringPanelDef
-        behandling={standardPanelProps.behandling}
-        aksjonspunkter={standardPanelProps.aksjonspunkter}
-        aksjonspunktKoder={AKSJONSPUNKT_KODER}
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
-        erMedlemskapsPanel
-        medlemskap={panelData.medlemskap}
-        toggleOverstyring={toggleOverstyring}
-        erOverstyrt={erOverstyrt}
-        overrideReadOnly={standardPanelProps.isReadOnly || (harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}
-        kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-      />
-      <VerticalSpacer thirtyTwoPx />
-    </>
-  );
-};
+  ...props
+}) => (
+  <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    behandlingVersjon={behandlingVersjon}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    vilkarKoder={VILKAR_KODER}
+    inngangsvilkarPanelKode="MEDLEMSKAP"
+    inngangsvilkarPanelTekstFn={() => ''}
+    render={(data, erOverstyrt, toggleOverstyring) => (
+      <>
+        <OverstyringPanelDef
+          behandling={data.behandling}
+          aksjonspunkter={data.aksjonspunkter}
+          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          vilkar={data.vilkar}
+          vilkarKoder={VILKAR_KODER}
+          panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
+          erMedlemskapsPanel
+          medlemskap={data.medlemskap}
+          toggleOverstyring={toggleOverstyring}
+          erOverstyrt={erOverstyrt}
+          overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+          kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+        />
+        <VerticalSpacer thirtyTwoPx />
+      </>
+    )}
+  />
+);
 
 export default MedlemskapInngangsvilkarInitPanel;

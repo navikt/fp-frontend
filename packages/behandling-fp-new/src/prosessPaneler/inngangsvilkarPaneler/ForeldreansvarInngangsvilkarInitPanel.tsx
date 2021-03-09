@@ -2,18 +2,15 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ForeldreansvarVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-foreldreansvar';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
-import {
-  useStandardProsessPanelProps, useSkalViseProsessPanel, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
@@ -46,50 +43,32 @@ type EndepunktInitData = {
 
 interface OwnProps {
   behandlingVersjon?: number;
-  setPanelInfo: (data: InngangsvilkarPanelData) => void;
-  erPanelValgt: boolean;
 }
 
-const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
+const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
-  setPanelInfo,
-  erPanelValgt,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-  const erDataFerdighentet = initState === RestApiState.SUCCESS;
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
-
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
-
-  useInngangsvilkarRegistrerer(
-    setPanelInfo,
-    behandlingVersjon,
-    'FORELDREANSVARSVILKARET',
-    hentAksjonspunktTekst(standardPanelProps?.aksjonspunkter),
-    erDataFerdighentet && skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
-  if (!erPanelValgt || !skalVises) {
-    return null;
-  }
-
-  if (!erDataFerdighentet) {
-    return <LoadingPanel />;
-  }
-
-  return (
-    <>
-      <ForeldreansvarVilkarProsessIndex
-        isEngangsstonad={false}
-        isForeldreansvar2Ledd={standardPanelProps.vilkar.map((v) => v.vilkarType.kode).includes(vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
-        {...standardPanelProps}
-      />
-      <VerticalSpacer thirtyTwoPx />
-    </>
-  );
-};
+  ...props
+}) => (
+  <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+    {...props}
+    behandlingVersjon={behandlingVersjon}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    vilkarKoder={VILKAR_KODER}
+    inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
+    inngangsvilkarPanelTekstFn={(data) => hentAksjonspunktTekst(data?.aksjonspunkter)}
+    render={(data) => (
+      <>
+        <ForeldreansvarVilkarProsessIndex
+          isEngangsstonad={false}
+          isForeldreansvar2Ledd={data.vilkar.map((v) => v.vilkarType.kode).includes(vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
+          {...data}
+        />
+        <VerticalSpacer thirtyTwoPx />
+      </>
+    )}
+  />
+);
 
 export default ForeldreansvarInngangsvilkarInitPanel;

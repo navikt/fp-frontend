@@ -10,7 +10,7 @@ import {
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-import useSkalViseProsessPanel from '../../utils/prosess/useSkalViseProsessPanel';
+import skalViseProsessPanel from '../../utils/prosess/skalViseProsessPanel';
 import useStandardProsessPanelProps from '../../utils/prosess/useStandardProsessPanelProps';
 
 // TODO Spesifikk ES-kodar bør ikkje ligga her
@@ -56,7 +56,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
     vilkar,
   }, aksjonspunktKoder, vilkarKoder);
 
-  const skalVises = useSkalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
+  const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
   const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[kodeverkTyper.AVSLAGSARSAK], vilkar[0].vilkarType.kode);
 

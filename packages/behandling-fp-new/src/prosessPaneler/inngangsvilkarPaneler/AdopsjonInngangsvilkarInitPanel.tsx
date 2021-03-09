@@ -2,20 +2,19 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AdopsjonVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-adopsjon';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  useStandardProsessPanelProps, OverstyringPanelDef, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
+  InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -35,69 +34,50 @@ type EndepunktInitData = {
 interface OwnProps {
   behandlingVersjon?: number;
   rettigheter: AksessRettigheter;
-  setPanelInfo: (data: InngangsvilkarPanelData) => void;
-  erPanelValgt: boolean;
-  harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
-const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
+const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
   rettigheter,
-  setPanelInfo,
-  erPanelValgt,
-  harInngangsvilkarApentAksjonspunkt,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-  const erDataFerdighentet = initState === RestApiState.SUCCESS;
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
-
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
-
-  const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
-    setPanelInfo,
-    behandlingVersjon,
-    'ADOPSJON',
-    getPackageIntl().formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' }),
-    erDataFerdighentet && skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
-  if (!erPanelValgt || !skalVises) {
-    return null;
-  }
-
-  if (!erDataFerdighentet) {
-    return <LoadingPanel />;
-  }
-
-  if (standardPanelProps.aksjonspunkter.length === 0) {
-    return (
-      <OverstyringPanelDef
-        behandling={standardPanelProps.behandling}
-        aksjonspunkter={initData.aksjonspunkter}
-        aksjonspunktKoder={[aksjonspunktCodes.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP]}
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-        erMedlemskapsPanel={false}
-        toggleOverstyring={toggleOverstyring}
-        erOverstyrt={erOverstyrt}
-        overrideReadOnly={standardPanelProps.isReadOnly || (harInngangsvilkarApentAksjonspunkt && !(standardPanelProps.isAksjonspunktOpen || erOverstyrt))}
-        kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-      />
-    );
-  }
-
-  return (
-    <>
-      <AdopsjonVilkarProsessIndex
-        {...standardPanelProps}
-      />
-      <VerticalSpacer thirtyTwoPx />
-    </>
-  );
-};
+  ...props
+}) => (
+  <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+    {...props}
+    behandlingVersjon={behandlingVersjon}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    vilkarKoder={VILKAR_KODER}
+    inngangsvilkarPanelKode="ADOPSJON"
+    inngangsvilkarPanelTekstFn={() => getPackageIntl().formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' })}
+    render={(data, erOverstyrt, toggleOverstyring) => (
+      <>
+        {data.aksjonspunkter.length === 0 && (
+          <OverstyringPanelDef
+            behandling={data.behandling}
+            aksjonspunkter={data.aksjonspunkter}
+            aksjonspunktKoder={[aksjonspunktCodes.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP]}
+            vilkar={data.vilkar}
+            vilkarKoder={VILKAR_KODER}
+            panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
+            erMedlemskapsPanel={false}
+            toggleOverstyring={toggleOverstyring}
+            erOverstyrt={erOverstyrt}
+            overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+            kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+          />
+        )}
+        {data.aksjonspunkter.length > 0 && (
+          <>
+            <AdopsjonVilkarProsessIndex
+              {...data}
+            />
+            <VerticalSpacer thirtyTwoPx />
+          </>
+        )}
+      </>
+    )}
+  />
+);
 
 export default AdopsjonInngangsvilkarInitPanel;

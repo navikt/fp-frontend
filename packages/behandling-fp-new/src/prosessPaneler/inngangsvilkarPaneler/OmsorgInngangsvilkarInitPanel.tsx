@@ -2,18 +2,15 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { LoadingPanel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
-import {
-  useStandardProsessPanelProps, useSkalViseProsessPanel, InngangsvilkarPanelData, useInngangsvilkarRegistrerer,
-} from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelData, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, useHentInitPanelData } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -36,42 +33,26 @@ interface OwnProps {
   erPanelValgt: boolean;
 }
 
-const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps> = ({
+const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
-  setPanelInfo,
-  erPanelValgt,
-}) => {
-  const { initData, initState } = useHentInitPanelData<EndepunktInitData>(ENDEPUNKTER_INIT_DATA, behandlingVersjon);
-  const erDataFerdighentet = initState === RestApiState.SUCCESS;
-
-  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, VILKAR_KODER);
-
-  const skalVises = useSkalViseProsessPanel(standardPanelProps.aksjonspunkter, VILKAR_KODER, standardPanelProps.vilkar);
-
-  useInngangsvilkarRegistrerer(
-    setPanelInfo,
-    behandlingVersjon,
-    'OMSORG',
-    getPackageIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' }),
-    erDataFerdighentet && skalVises,
-    standardPanelProps.isAksjonspunktOpen,
-    standardPanelProps.status,
-  );
-
-  if (!erPanelValgt || !skalVises) {
-    return null;
-  }
-
-  if (!erDataFerdighentet) {
-    return <LoadingPanel />;
-  }
-
-  return (
-    <>
-      <OmsorgVilkarProsessIndex {...standardPanelProps} />
-      <VerticalSpacer thirtyTwoPx />
-    </>
-  );
-};
+  ...props
+}) => (
+  <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+    {...props}
+    behandlingVersjon={behandlingVersjon}
+    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    vilkarKoder={VILKAR_KODER}
+    inngangsvilkarPanelKode="OMSORG"
+    inngangsvilkarPanelTekstFn={() => getPackageIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
+    render={(data) => (
+      <>
+        <OmsorgVilkarProsessIndex {...data} />
+        <VerticalSpacer thirtyTwoPx />
+      </>
+    )}
+  />
+);
 
 export default OmsorgInngangsvilkarInitPanel;

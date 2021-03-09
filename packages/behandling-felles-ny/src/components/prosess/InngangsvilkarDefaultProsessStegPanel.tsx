@@ -15,6 +15,7 @@ import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistr
 import InngangsvilkarPanelData from '../../types/inngangsvilkarPanelData';
 import getPackageIntl from '../../../i18n/getPackageIntl';
 import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
+import InngangsvilkarPanelInitProps from '../../types/inngangsvilkarPanelInitProps';
 
 import styles from './inngangsvilkarDefaultProsessStegPanel.less';
 
@@ -39,17 +40,11 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[]): boolean => {
     || paneler.every((p) => p.status === vilkarUtfallType.OPPFYLT));
 };
 
-type InngangsvilkarUnderpanelProps = {
-  setPanelInfo: (data: InngangsvilkarPanelData) => void;
-  erPanelValgt: boolean;
-  harInngangsvilkarApentAksjonspunkt: boolean;
-}
-
 interface OwnProps {
   apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  leftPanels: (props: InngangsvilkarUnderpanelProps) => ReactElement;
-  rightPanels: (props: InngangsvilkarUnderpanelProps) => ReactElement;
+  leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
+  rightPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
 const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({

@@ -9,12 +9,14 @@ export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStat
 export { default as FaktaDefaultInitPanel } from './src/components/fakta/FaktaDefaultInitPanel';
 export { default as ProsessDefaultInitPanel } from './src/components/prosess/ProsessDefaultInitPanel';
 export { default as InngangsvilkarDefaultProsessStegPanel } from './src/components/prosess/InngangsvilkarDefaultProsessStegPanel';
+export { default as InngangsvilkarDefaultInitPanel } from './src/components/prosess/InngangsvilkarDefaultInitPanel';
 export { default as StandardBehandlingProps, BehandlingEventHandler } from './src/types/standardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/prosessPanelMenyData';
 export { default as FaktaPanelMenyData } from './src/types/faktaPanelMenyData';
 export { default as FaktaPanelInitProps } from './src/types/faktaPanelInitProps';
 export { default as ProsessPanelInitProps } from './src/types/prosessPanelInitProps';
 export { default as InngangsvilkarPanelData } from './src/types/inngangsvilkarPanelData';
+export { default as InngangsvilkarPanelInitProps } from './src/types/inngangsvilkarPanelInitProps';
 export { default as useStandardFaktaPanelProps } from './src/utils/fakta/useStandardFaktaPanelProps';
 export { default as StandardPropsProvider } from './src/utils/standardPropsStateContext';
 export { default as useStandardProsessPanelProps } from './src/utils/prosess/useStandardProsessPanelProps';
