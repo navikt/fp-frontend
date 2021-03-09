@@ -1,11 +1,11 @@
 {
-  "name": "@fpsak-frontend/behandling-fp-new",
+  "name": "@fpsak-frontend/behandling-fp-ny",
   "version": "1.0.0",
-  "module": "index.jsx",
+  "module": "index.ts",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@fpsak-frontend/behandling-felles": "1.0.0",
+    "@fpsak-frontend/behandling-felles-ny": "1.0.0",
     "@fpsak-frontend/fakta-adopsjon": "1.0.0",
     "@fpsak-frontend/fakta-arbeidsforhold": "1.0.0",
     "@fpsak-frontend/fakta-besteberegning": "1.0.0",
@@ -33,16 +33,9 @@
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "react": "^17.0.1",
-    "react-intl": "^5.12.3",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
-    "redux-form": "^8.3.7",
-    "reselect": "^4.0.0"
+    "react-intl": "^5.12.3"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.19.0",
-    "enzyme": "^3.11.0",
-    "redux-mock-store": "^1.5.4",
-    "sinon": "^9.2.4"
+    "enzyme": "^3.11.0"
   }
 }
