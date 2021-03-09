@@ -1,121 +1,111 @@
-import React, { useEffect } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { useState } from '@storybook/addons';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling } from '@fpsak-frontend/types';
-import { BehandlingContainer } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingContainer, FaktaPanelInitProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
-type PanelDataFakta = {
-  leggFaktaPanelTilMeny: (info: {
-    id: string;
-    tekst: string;
-    erAktiv: boolean;
-    harAksjonspunkt: boolean;
-  }) => void;
-  valgtFaktaSteg?: string;
-}
-type PanelDataProsess = {
-  leggProsessPanelTilMeny: (info: {
-    id: string;
-    tekst: string;
-    erAktiv: boolean;
-    status: string;
-    harAksjonspunkt: boolean;
-    harApentAksjonspunkt: boolean;
-  }) => void;
-  valgtProsessSteg?: string;
-}
+const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({
+  registrerFaktaPanel,
+  valgtFaktaSteg,
+}) => {
+  useEffect(() => {
+    registrerFaktaPanel({
+      id: '1',
+      tekst: 'Dette er en paneltittel',
+      erAktiv: valgtFaktaSteg === '1',
+      harAksjonspunkt: true,
+      harHentetInitData: true,
+    });
+  }, []);
 
-const faktaPaneler = [
-  (props: PanelDataFakta) => {
-    useEffect(() => {
-      props.leggFaktaPanelTilMeny({
-        id: '1',
-        tekst: 'Dette er en paneltittel',
-        erAktiv: props.valgtFaktaSteg === '1',
-        harAksjonspunkt: true,
-      });
-    }, []);
+  if (valgtFaktaSteg !== '1') {
+    return null;
+  }
 
-    if (props.valgtFaktaSteg !== '1') {
-      return null;
-    }
+  return (
+    <div>
+      Dette er et testpanel
+    </div>
+  );
+};
+const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({
+  registrerFaktaPanel,
+  valgtFaktaSteg,
+}) => {
+  useEffect(() => {
+    registrerFaktaPanel({
+      id: '2',
+      tekst: 'Annet panel',
+      erAktiv: valgtFaktaSteg === '2',
+      harAksjonspunkt: false,
+      harHentetInitData: true,
+    });
+  }, [valgtFaktaSteg]);
 
-    return (
-      <div>
-        Dette er et testpanel
-      </div>
-    );
-  },
-  (props: PanelDataFakta) => {
-    useEffect(() => {
-      props.leggFaktaPanelTilMeny({
-        id: '2',
-        tekst: 'Annet panel',
-        erAktiv: props.valgtFaktaSteg === '2',
-        harAksjonspunkt: false,
-      });
-    }, [props.valgtFaktaSteg]);
+  if (valgtFaktaSteg !== '2') {
+    return null;
+  }
 
-    if (props.valgtFaktaSteg !== '2') {
-      return null;
-    }
+  return (
+    <div>
+      Dette er et annet panel
+    </div>
+  );
+};
 
-    return (
-      <div>
-        Dette er et annet panel
-      </div>
-    );
-  },
-];
+const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({
+  registrerProsessPanel,
+  valgtProsessSteg,
+}) => {
+  useEffect(() => {
+    registrerProsessPanel({
+      id: '1',
+      tekst: 'Adopsjon',
+      erAktiv: valgtProsessSteg === '1',
+      harApentAksjonspunkt: false,
+      status: vilkarUtfallType.OPPFYLT,
+      harHentetInitData: true,
+    });
+  }, []);
 
-const prosessPaneler = [
-  (props: PanelDataProsess) => {
-    useEffect(() => {
-      props.leggProsessPanelTilMeny({
-        id: '1',
-        tekst: 'Adopsjon',
-        erAktiv: props.valgtProsessSteg === '1',
-        harAksjonspunkt: true,
-        harApentAksjonspunkt: false,
-        status: vilkarUtfallType.OPPFYLT,
-      });
-    }, []);
+  if (valgtProsessSteg !== '1') {
+    return null;
+  }
 
-    if (props.valgtProsessSteg !== '1') {
-      return null;
-    }
+  return (
+    <div>
+      Dette er et testpanel for adopsjon
+    </div>
+  );
+};
 
-    return (
-      <div>
-        Dette er et testpanel for adopsjon
-      </div>
-    );
-  },
-  (props: PanelDataProsess) => {
-    useEffect(() => {
-      props.leggProsessPanelTilMeny({
-        id: '2',
-        tekst: 'Fødsel',
-        erAktiv: props.valgtProsessSteg === '2',
-        harAksjonspunkt: true,
-        harApentAksjonspunkt: true,
-        status: vilkarUtfallType.IKKE_OPPFYLT,
-      });
-    }, []);
+const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({
+  registrerProsessPanel,
+  valgtProsessSteg,
+}) => {
+  useEffect(() => {
+    registrerProsessPanel({
+      id: '2',
+      tekst: 'Fødsel',
+      erAktiv: valgtProsessSteg === '2',
+      harApentAksjonspunkt: true,
+      status: vilkarUtfallType.IKKE_OPPFYLT,
+      harHentetInitData: true,
+    });
+  }, []);
 
-    if (props.valgtProsessSteg !== '2') {
-      return null;
-    }
+  if (valgtProsessSteg !== '2') {
+    return null;
+  }
 
-    return (
-      <div>
-        Dette er et testpanel for fødsel
-      </div>
-    );
-  },
-];
+  return (
+    <div>
+      Dette er et testpanel for fødsel
+    </div>
+  );
+};
 
 export default {
   title: 'behandling/behandling-container',
@@ -130,7 +120,12 @@ export const visKunFaktaPaneler = () => {
       behandling={{} as Behandling}
       valgtFaktaSteg={valgtFaktaPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel, faktaPanel) => setValgtFaktaPanel(faktaPanel)}
-      faktaPaneler={faktaPaneler}
+      hentFaktaPaneler={(props) => (
+        <>
+          <FaktaPanelTest1 {...props} />
+          <FaktaPanelTest2 {...props} />
+        </>
+      )}
       oppdaterBehandlingVersjon={() => undefined}
     />
   );
@@ -143,7 +138,12 @@ export const visKunProsessPaneler = () => {
       behandling={{} as Behandling}
       valgtProsessSteg={valgtProsessPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel) => setValgtProsessPanel(prosessPanel)}
-      prosessPaneler={prosessPaneler}
+      hentProsessPaneler={(props) => (
+        <>
+          <ProsessPanelTest1 {...props} />
+          <ProsessPanelTest2 {...props} />
+        </>
+      )}
       oppdaterBehandlingVersjon={() => undefined}
     />
   );

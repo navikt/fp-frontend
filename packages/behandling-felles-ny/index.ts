@@ -9,6 +9,7 @@ export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStat
 export { default as FaktaDefaultInitPanel } from './src/components/fakta/FaktaDefaultInitPanel';
 export { default as ProsessDefaultInitPanel } from './src/components/prosess/ProsessDefaultInitPanel';
 export { default as InngangsvilkarDefaultProsessStegPanel } from './src/components/prosess/InngangsvilkarDefaultProsessStegPanel';
+export { default as BehandlingHenlagtPanel } from './src/components/prosess/BehandlingHenlagtPanel';
 export { default as InngangsvilkarDefaultInitPanel } from './src/components/prosess/InngangsvilkarDefaultInitPanel';
 export { default as StandardBehandlingProps, BehandlingEventHandler } from './src/types/standardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/prosessPanelMenyData';

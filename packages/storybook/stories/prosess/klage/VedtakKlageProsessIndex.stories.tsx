@@ -46,6 +46,7 @@ const standardProsessProps = {
   readOnlySubmitButton: boolean('readOnly', false),
   status: '',
   vilkar: [],
+  alleMerknaderFraBeslutter: {},
 };
 
 export default {

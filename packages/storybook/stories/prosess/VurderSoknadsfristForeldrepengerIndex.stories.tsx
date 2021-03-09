@@ -37,6 +37,7 @@ const standardProsessProps = {
   readOnlySubmitButton: boolean('readOnly', true),
   status: '',
   vilkar: [],
+  alleMerknaderFraBeslutter: {},
 };
 
 export default {
@@ -44,7 +45,6 @@ export default {
   component: VurderSoknadsfristForeldrepengerIndex,
   decorators: [withKnobs, withReduxProvider],
 };
-
 export const visPanelForSoknadsfrist = () => (
   <VurderSoknadsfristForeldrepengerIndex
     {...standardProsessProps}

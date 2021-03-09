@@ -7,6 +7,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import TilleggsopplysningerFaktaIndex from '@fpsak-frontend/fakta-tilleggsopplysninger';
 import { Behandling, Soknad } from '@fpsak-frontend/types';
 
+import alleKodeverk from '../mocks/alleKodeverk.json';
 import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
@@ -52,5 +53,6 @@ export const visAksjonspunktForTilleggsopplysninger = () => (
     behandling={behandling as Behandling}
     soknad={object('soknad', soknad as Soknad)}
     aksjonspunkter={aksjonspunkter}
+    alleKodeverk={alleKodeverk as any}
   />
 );

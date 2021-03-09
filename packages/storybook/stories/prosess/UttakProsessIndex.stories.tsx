@@ -520,5 +520,6 @@ export const visProsessUttak = () => (
     status="test"
     vilkar={[]}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    alleMerknaderFraBeslutter={{}}
   />
 );

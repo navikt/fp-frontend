@@ -320,6 +320,7 @@ export const arbeidstakerUtenAvvik = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -352,6 +353,7 @@ export const brukersAndelUtenAvvik = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -380,6 +382,7 @@ export const arbeidstakerMedAvvik = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -410,6 +413,7 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -434,6 +438,7 @@ export const militær = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -497,6 +502,7 @@ export const selvstendigNæringsdrivende = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -539,6 +545,7 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -570,6 +577,7 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -638,6 +646,7 @@ export const naturalYtelse = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -668,6 +677,7 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivende = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -701,6 +711,7 @@ export const graderingPåBeregningsgrunnlagUtenPenger = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -752,6 +763,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -808,6 +820,7 @@ export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBe
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -861,6 +874,7 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -900,6 +914,7 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -936,6 +951,7 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -969,6 +985,7 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1003,6 +1020,7 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1045,6 +1063,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1107,6 +1126,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1133,6 +1153,7 @@ export const FrilansSide8 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1160,6 +1181,7 @@ export const FrilansMedAksjonspunktSide9 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1189,6 +1211,7 @@ export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1225,6 +1248,7 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1277,6 +1301,7 @@ export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 =
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1346,6 +1371,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1400,6 +1426,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1457,6 +1484,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1511,6 +1539,7 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1566,6 +1595,7 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1618,6 +1648,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnStorreEnnAtOgStorreEnn6g
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1671,6 +1702,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1724,6 +1756,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1782,6 +1815,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1840,6 +1874,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1893,6 +1928,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -1957,6 +1993,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2021,6 +2058,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2047,6 +2085,7 @@ export const YtelseFraNavSide26 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2074,6 +2113,7 @@ export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2112,6 +2152,7 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2145,6 +2186,7 @@ export const arbeidstakerDagpengerMedBesteberegningSide28 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2178,6 +2220,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeSide29 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2211,6 +2254,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeFnOgDpOverstigerSNSide
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2244,6 +2288,7 @@ export const ArbeidstagerDagpengerOgSelvstendigNæringsdrivendeATOgDpOverstigerS
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2297,6 +2342,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
@@ -2325,6 +2371,7 @@ export const militærOgSiviltjenesteSide33 = () => {
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
     />
   );
 };
