@@ -8,7 +8,7 @@ import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-fronte
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {
@@ -28,12 +28,12 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     faktaPanelKode={faktaPanelCodes.BESTEBEREGNING}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
-    skalVisesFn={(initData) => !!initData?.beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.besteberegninggrunnlag}
-    render={(data) => <BesteberegningFaktaIndex arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId} {...data} />}
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
+    skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.besteberegninggrunnlag}
+    renderPanel={(data) => <BesteberegningFaktaIndex arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId} {...data} />}
   />
 );
 

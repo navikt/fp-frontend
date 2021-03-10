@@ -9,7 +9,7 @@ import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/beha
 
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV];
 
@@ -25,13 +25,13 @@ type EndepunktInitData = {
 const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
   <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.AKTIVITETSKRAV}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' })}
-    skalVisesFn={(initData) => !!initData?.uttakKontrollerAktivitetskrav}
-    render={(data) => <AktivitetskravFaktaIndex {...data} />}
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' })}
+    skalPanelVisesIMeny={(initData) => !!initData?.uttakKontrollerAktivitetskrav}
+    renderPanel={(data) => <AktivitetskravFaktaIndex {...data} />}
   />
 );
 

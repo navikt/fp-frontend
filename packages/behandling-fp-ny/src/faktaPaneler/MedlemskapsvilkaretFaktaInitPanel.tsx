@@ -12,7 +12,7 @@ import {
 import { FaktaDefaultInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
@@ -55,15 +55,15 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.MEDLEMSKAPSVILKARET}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
-    skalVisesFn={(initData) => !!initData?.soknad}
-    render={(data) => (
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
+    skalPanelVisesIMeny={(initData) => !!initData?.soknad}
+    renderPanel={(data) => (
       <MedlemskapFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         isForeldrepengerFagsak

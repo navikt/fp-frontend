@@ -1,9 +1,10 @@
 import React, {
-  ReactElement,
+  ReactElement, useMemo,
 } from 'react';
 
-import { MulipleRestApiInterface } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import StandardFaktaPanelProps from '@fpsak-frontend/types/src/standardFaktaPanelPropsTsType';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 
 import FaktaPanelInitProps from '../../types/faktaPanelInitProps';
 import useStandardFaktaPanelProps from '../../utils/fakta/useStandardFaktaPanelProps';
@@ -11,33 +12,35 @@ import useFaktaMenyRegistrerer from '../../utils/fakta/useFaktaMenyRegistrerer';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 
 type OwnProps<INIT_DATA, PANEL_DATA> = {
-  useMultipleRestApi: MulipleRestApiInterface<INIT_DATA | PANEL_DATA>;
+  requestApi: AbstractRequestApi;
   initEndepunkter: string[];
   panelEndepunkter?: string[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
-  skalVisesFn: (data: INIT_DATA) => boolean;
-  render: (data: INIT_DATA & PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
+  skalPanelVisesIMeny: (data: INIT_DATA) => boolean;
+  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
   faktaPanelKode: string;
-  faktaPanelTekst: string;
+  faktaPanelMenyTekst: string;
 }
 
 const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   valgtFaktaSteg,
   behandlingVersjon,
   registrerFaktaPanel,
-  useMultipleRestApi,
+  requestApi,
   initEndepunkter,
   panelEndepunkter = [],
   aksjonspunktKoder,
   overstyringApKoder,
-  skalVisesFn,
-  render,
+  skalPanelVisesIMeny,
+  renderPanel,
   faktaPanelKode,
-  faktaPanelTekst,
+  faktaPanelMenyTekst,
 }: OwnProps<INIT_DATA, PANEL_DATA> & FaktaPanelInitProps) => {
+  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
+
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = useMultipleRestApi(formaterteEndepunkter, {
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -48,14 +51,14 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     registrerFaktaPanel,
     initState,
     faktaPanelKode,
-    faktaPanelTekst,
+    faktaPanelMenyTekst,
     valgtFaktaSteg,
-    skalVisesFn(initData as INIT_DATA),
+    skalPanelVisesIMeny(initData),
     standardPanelProps.harApneAksjonspunkter,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = useMultipleRestApi(formatertePanelEndepunkter, {
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA>(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
@@ -63,9 +66,9 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 
   return (
     <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : initState}>
-      {render({
-        ...initData as INIT_DATA,
-        ...panelData as PANEL_DATA,
+      {renderPanel({
+        ...initData,
+        ...panelData,
         ...standardPanelProps,
       })}
     </FaktaPanelWrapper>

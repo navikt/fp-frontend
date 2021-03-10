@@ -8,7 +8,7 @@ import { InntektArbeidYtelse } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktInitData = {
@@ -21,13 +21,13 @@ type EndepunktInitData = {
 const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
   <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     faktaPanelKode={faktaPanelCodes.YTELSER}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
-    skalVisesFn={(initData) => initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
+    skalPanelVisesIMeny={(initData) => initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
       && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0}
-    render={(data) => <YtelserFaktaIndex {...data} />}
+    renderPanel={(data) => <YtelserFaktaIndex {...data} />}
   />
 );
 

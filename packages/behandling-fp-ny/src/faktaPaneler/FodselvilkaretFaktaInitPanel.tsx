@@ -12,7 +12,7 @@ import {
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.TERMINBEKREFTELSE,
@@ -45,14 +45,14 @@ type EndepunktPanelData = {
 const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
   <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.FODSELSVILKARET}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
-    skalVisesFn={(initData) => initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))}
-    render={(data) => <FodselFaktaIndex {...data} />}
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
+    skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))}
+    renderPanel={(data) => <FodselFaktaIndex {...data} />}
   />
 );
 

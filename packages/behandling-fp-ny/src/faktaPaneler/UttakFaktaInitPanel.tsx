@@ -13,7 +13,7 @@ import {
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_UTTAK,
@@ -65,15 +65,15 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.UTTAK}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
-    skalVisesFn={(initData) => !!initData?.ytelsefordeling?.endringsdato !== undefined}
-    render={(data) => (
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
+    skalPanelVisesIMeny={(initData) => !!initData?.ytelsefordeling?.endringsdato !== undefined}
+    renderPanel={(data) => (
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

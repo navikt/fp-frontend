@@ -11,7 +11,7 @@ import {
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -43,14 +43,14 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.BEREGNING}
-    faktaPanelTekst={getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
-    skalVisesFn={(initData) => !!initData?.beregningsgrunnlag}
-    render={(data) => (
+    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+    skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag}
+    renderPanel={(data) => (
       <BeregningFaktaIndex
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
