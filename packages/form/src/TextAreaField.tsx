@@ -74,6 +74,8 @@ const TextAreaField: FunctionComponent<BaseFieldProps & TextAreaFieldProps> = ({
     readOnlyHideEmpty
     autoComplete="off"
     type="textarea"
+    // Desse to bindestrekane er ikkje like. Den første er kopiert fra PDF og må endrast før lagring
+    parse={(value: string) => value.replace('‑', '-')}
   />
 );
 
