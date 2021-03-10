@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -143,8 +143,8 @@ const lagPeriodeTekst = (endring: NaturalytelseEndring): string => {
 };
 
 const lagTabell = (data: NaturalytelseTabellData): ReactElement[] => data.rader.map((rad) => (
-  <>
-    <Row key={rad.nøkkel}>
+  <div key={rad.nøkkel}>
+    <Row>
       <Column xs="11" className={beregningStyles.noPaddingRight}>
         <Element>{rad.visningsnavn}</Element>
       </Column>
@@ -162,7 +162,7 @@ const lagTabell = (data: NaturalytelseTabellData): ReactElement[] => data.rader.
         </Column>
       </Row>
     ))}
-  </>
+  </div>
 ));
 
 /**
@@ -172,7 +172,7 @@ const lagTabell = (data: NaturalytelseTabellData): ReactElement[] => data.rader.
  * av naturalytelse og for hvilke perioder det gjelder.
  */
 const NaturalytelsePanel: FunctionComponent<OwnProps> = ({ allePerioder, arbeidsgiverOpplysningerPerId }) => {
-  const tableData = lagNaturalytelseTabelldata(allePerioder, arbeidsgiverOpplysningerPerId);
+  const tableData = useMemo(() => lagNaturalytelseTabelldata(allePerioder, arbeidsgiverOpplysningerPerId), [allePerioder]);
   if (!tableData) {
     return null;
   }
