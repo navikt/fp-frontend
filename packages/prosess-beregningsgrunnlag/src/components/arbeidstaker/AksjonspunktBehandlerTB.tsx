@@ -284,7 +284,7 @@ type OwnProps = {
 };
 
 type MappedOwnProps = {
-  tableData: any;
+  tableData: TidsbegrenseArbeidsforholdTabellData;
   isAksjonspunktClosed: boolean;
   bruttoPrPeriodeList: BruttoPrPeriode[],
 }
@@ -296,7 +296,7 @@ export const AksjonspunktBehandlerTidsbegrensetImpl: FunctionComponent<OwnProps 
   return (
     <table className={styles.inntektTableTB}>
       <tbody>
-        {createRows(tableData.arbeidsforholdPeriodeMap, readOnly, isAksjonspunktClosed, perioder)}
+        {createRows(tableData, readOnly, isAksjonspunktClosed, perioder)}
       </tbody>
     </table>
   );
