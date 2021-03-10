@@ -1,4 +1,4 @@
-import React, {FunctionComponent, ReactElement} from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { FlexRow } from '@fpsak-frontend/shared-components';

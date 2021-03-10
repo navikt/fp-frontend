@@ -7,7 +7,6 @@ import {
   getKodeverknavnFn, parseCurrencyInput, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import {
@@ -21,8 +20,7 @@ import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import {
   ArbeidsinntektTransformedValues,
-  ATFLTransformedValues,
-  ArbeidstakerInntektValues
+  ArbeidstakerInntektValues,
 } from '../../types/ATFLAksjonspunktTsType';
 
 const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {

@@ -1,4 +1,4 @@
-import React, {FunctionComponent, ReactElement} from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -6,9 +6,8 @@ import {
 } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
-  getKodeverknavnFn, dateFormat, formatCurrencyNoKr, removeSpacesFromNumber,
+  getKodeverknavnFn, dateFormat, formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -25,7 +24,7 @@ import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import NaturalytelsePanel from './NaturalytelsePanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
-import {ArbeidstakerInntektValues} from "../../types/ATFLAksjonspunktTsType";
+import { ArbeidstakerInntektValues } from '../../types/ATFLAksjonspunktTsType';
 
 const formName = 'BeregningForm';
 
