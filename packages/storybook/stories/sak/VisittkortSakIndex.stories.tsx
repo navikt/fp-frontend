@@ -40,7 +40,7 @@ const fagsak = {
 const fagsakPerson = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
-  personnummer: '1234567',
+  fødselsnummer: '1234567',
   kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
   personstatusType: {
     kode: personstatusType.BOSATT,
@@ -51,7 +51,7 @@ const fagsakPerson = {
 const fagsakPersonAnnenPart = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
-  personnummer: '6565656',
+  fødselsnummer: '6565656',
   kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
   personstatusType: {
     kode: personstatusType.BOSATT,
@@ -63,7 +63,7 @@ const fagsakPersonAnnenPart = {
 const fagsakPersonAnnenPartUkjent = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
-  personnummer: '6565656',
+  fødselsnummer: '6565656',
   kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
   personstatusType: {
     kode: personstatusType.BOSATT,

@@ -46,7 +46,7 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       <div className={styles.container}>
         <PersonCard
           name={fagsakPerson.navn}
-          fodselsnummer={fagsakPerson.personnummer}
+          fodselsnummer={fagsakPerson.fødselsnummer}
           gender={fagsakPerson.kjønn.kode === KjønnkodeEnum.KVINNE ? Gender.female : Gender.male}
           renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={fagsakPerson} harVerge={harVerge} />}
         />
@@ -64,7 +64,7 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             <FlexColumn>
               <PersonCard
                 name={soker.navn}
-                fodselsnummer={soker.personnummer}
+                fodselsnummer={soker.fødselsnummer}
                 gender={utledKjonn(soker.kjønn)}
                 url={lenkeTilAnnenPart}
                 renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={soker} harVerge={harVerge} />}
@@ -81,7 +81,7 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             <FlexColumn>
               <PersonCard
                 name={annenPart.navn}
-                fodselsnummer={annenPart.personnummer}
+                fodselsnummer={annenPart.fødselsnummer}
                 gender={utledKjonn(annenPart.kjønn)}
                 url={lenkeTilAnnenPart}
                 isActive={!erMor}

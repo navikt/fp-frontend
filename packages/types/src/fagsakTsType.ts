@@ -5,11 +5,6 @@ type Fagsak = Readonly<{
   sakstype: Kodeverk;
   relasjonsRolleType: Kodeverk;
   status: Kodeverk;
-  barnFodt: string;
-  opprettet: string;
-  endret: string;
-  kanRevurderingOpprettes: boolean;
-  skalBehandlesAvInfotrygd: boolean;
   dekningsgrad: number;
 }>
 

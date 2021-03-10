@@ -19,10 +19,6 @@ describe('<BostedsokerView>', () => {
       kode: '',
       kodeverk: '',
     },
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
     sivilstand: {
       kode: sivilstandType.UGIFT,
       kodeverk: '',

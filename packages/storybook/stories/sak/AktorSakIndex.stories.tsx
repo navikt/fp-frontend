@@ -51,7 +51,7 @@ export const visSakerOpprettetPaAktor = () => (
         navn: 'Espen Utvikler',
         kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
         fødselsdato: '1979-01-01',
-        personnummer: '123456233',
+        fødselsnummer: '123456233',
       },
     }}
     alleKodeverk={alleKodeverk as any}

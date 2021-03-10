@@ -13,29 +13,9 @@ import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlems
 
 describe('<MedlemskapBostedSokerView>', () => {
   const soker = {
-    fnr: '',
     navn: 'Espen Utvikler',
-    aktoerId: '1',
     personstatus: {
       kode: 'BOSA',
-      kodeverk: '',
-    },
-    avklartPersonstatus: {
-      overstyrtPersonstatus: {
-        kode: personstatusType.BOSATT,
-        kodeverk: '',
-      },
-      orginalPersonstatus: {
-        kode: personstatusType.DOD,
-        kodeverk: '',
-      },
-    },
-    navBrukerKjonn: {
-      kode: '',
-      kodeverk: '',
-    },
-    diskresjonskode: {
-      kode: '',
       kodeverk: '',
     },
     region: {
@@ -118,7 +98,6 @@ describe('<MedlemskapBostedSokerView>', () => {
       intl={intlMock}
       personopplysninger={{
         ...soker,
-        avklartPersonstatus: null,
         personstatus: {
           kode: '-',
           kodeverk: '',
