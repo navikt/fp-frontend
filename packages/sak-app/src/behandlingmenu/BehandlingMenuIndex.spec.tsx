@@ -35,7 +35,6 @@ const fagsak = {
     kode: fagsakStatus.UNDER_BEHANDLING,
     kodeverk: '',
   },
-  skalBehandlesAvInfotrygd: false,
 };
 
 const alleBehandlinger = [{

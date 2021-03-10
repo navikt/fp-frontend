@@ -28,8 +28,6 @@ const fagsaker = [{
     kode: fagsakStatus.OPPRETTET,
     kodeverk: FAGSAK_STATUS_KODEVERK,
   },
-  barnFodt: '2019-01-01',
-  opprettet: '2017-08-02T00:54:25.455',
 }, {
   saksnummerString: '2',
   sakstype: {
@@ -40,8 +38,6 @@ const fagsaker = [{
     kode: fagsakStatus.OPPRETTET,
     kodeverk: FAGSAK_STATUS_KODEVERK,
   },
-  barnFodt: '2019-01-01',
-  opprettet: '2017-08-02T00:54:25.455',
 }];
 
 export default {

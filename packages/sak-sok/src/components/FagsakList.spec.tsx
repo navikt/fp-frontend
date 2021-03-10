@@ -45,12 +45,6 @@ describe('<FagsakList>', () => {
       kode: 'UBEH',
       kodeverk: FAGSAK_STATUS_KODEVERK,
     },
-    barnFodt: null,
-    opprettet: '2019-02-17T13:49:18.645',
-    endret: '2019-02-17T13:49:18.645',
-    antallBarn: 1,
-    kanRevurderingOpprettes: false,
-    skalBehandlesAvInfotrygd: false,
     dekningsgrad: 100,
   };
 
@@ -95,9 +89,6 @@ describe('<FagsakList>', () => {
         kode: 'UBEH',
         kodeverk: FAGSAK_STATUS_KODEVERK,
       },
-      barnFodt: null,
-      opprettet: '2019-02-18T13:49:18.645',
-      endret: '2019-02-18T13:49:18.645',
       dekningsgrad: 100,
     };
     const fagsak3 = {
@@ -110,9 +101,6 @@ describe('<FagsakList>', () => {
         kode: 'AVSLU',
         kodeverk: FAGSAK_STATUS_KODEVERK,
       },
-      barnFodt: null,
-      opprettet: '2019-02-18T13:49:18.645',
-      endret: '2019-02-18T13:49:18.645',
       dekningsgrad: 100,
     };
 
@@ -147,35 +135,5 @@ describe('<FagsakList>', () => {
     expect(tableColumnsRow3.at(1).childAt(0).text()).toEqual('Engangsstønad');
     expect(tableColumnsRow3.at(2).childAt(0).text()).toEqual('Avsluttet');
     expect(tableColumnsRow3.last().childAt(0)).toBeUndefined;
-  });
-
-  it('skal vise DateLabel i tabell kun om barn er født', () => {
-    const fagsak4 = {
-      saksnummerString: '23456',
-      sakstype: {
-        kode: 'ES',
-        kodeverk: FAGSAK_YTELSE_KODEVERK,
-      },
-      status: {
-        kode: 'UBEH',
-        kodeverk: FAGSAK_STATUS_KODEVERK,
-      },
-      barnFodt: '2019-02-18T13:49:18.645',
-      opprettet: '2019-02-18T13:49:18.645',
-      endret: '2019-02-18T13:49:18.645',
-      dekningsgrad: 100,
-    };
-
-    const clickFunction = sinon.spy();
-    const wrapper = shallow(<FagsakList
-      fagsaker={[fagsak, fagsak4 as Fagsak]}
-      selectFagsakCallback={clickFunction}
-      alleKodeverk={alleKodeverk as {[key: string]: [KodeverkMedNavn]}}
-    />);
-    const tableRows = wrapper.find(TableRow);
-    expect(tableRows).toHaveLength(2);
-
-    expect(tableRows.first().find(DateLabel).prop('dateString')).toEqual('2019-02-18T13:49:18.645');
-    expect(tableRows.last().find(DateLabel)).toHaveLength(0);
   });
 });
