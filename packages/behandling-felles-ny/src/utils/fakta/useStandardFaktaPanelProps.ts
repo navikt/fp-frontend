@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardFaktaPanelProps, Vilkar,
@@ -56,20 +56,22 @@ const useStandardFaktaPanelProps = (
 ): StandardFaktaPanelProps => {
   const value = useContext(StandardPropsStateContext);
 
-  const aksjonspunkterForSteg = data?.aksjonspunkter && aksjonspunktKoder
-    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
+  const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
+    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
+  [data?.aksjonspunkter, aksjonspunktKoder]);
 
   const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, [], value.rettigheter, value.hasFetchError);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
+  const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
+    [value.behandling.versjon, aksjonspunkterForSteg]);
 
-  const submitCallback = getBekreftAksjonspunktFaktaCallback(
+  const submitCallback = useMemo(() => getBekreftAksjonspunktFaktaCallback(
     value.fagsak,
     value.behandling,
     value.oppdaterProsessStegOgFaktaPanelIUrl,
     value.lagreAksjonspunkter,
     value.lagreOverstyrteAksjonspunkter,
     overstyringApCodes,
-  );
+  ), [value.behandling.versjon, overstyringApCodes]);
 
   return {
     behandling: value.behandling,

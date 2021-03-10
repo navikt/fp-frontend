@@ -1,8 +1,9 @@
 import React, {
-  ReactElement,
+  ReactElement, useMemo,
 } from 'react';
 
-import { MulipleRestApiInterface, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 import StandardProsessPanelProps from '@fpsak-frontend/types/src/standardProsessPanelPropsTsType';
 
 import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
@@ -11,16 +12,16 @@ import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistr
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 
 type OwnProps<INIT_DATA, PANEL_DATA> = {
-  useMultipleRestApi: MulipleRestApiInterface<INIT_DATA | PANEL_DATA>;
+  requestApi: AbstractRequestApi;
   initEndepunkter: string[];
   panelEndepunkter?: string[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
-  skalVisesFn: (data: INIT_DATA & StandardProsessPanelProps, state: RestApiState) => boolean;
-  overrideStatusFn?: (data: INIT_DATA & StandardProsessPanelProps) => string;
-  render: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps) => ReactElement;
+  skalPanelVisesIMeny: (data: INIT_DATA & StandardProsessPanelProps, state: RestApiState) => boolean;
+  hentOverstyrtStatus?: (data: INIT_DATA & StandardProsessPanelProps) => string;
+  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps) => ReactElement;
   prosessPanelKode: string;
-  prosessPanelTekst: string;
+  prosessPanelMenyTekst: string;
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
   erOverstyrt?: boolean;
 }
@@ -29,21 +30,23 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   valgtProsessSteg,
   behandlingVersjon,
   registrerProsessPanel,
-  useMultipleRestApi,
+  requestApi,
   initEndepunkter,
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
-  skalVisesFn,
-  render,
+  skalPanelVisesIMeny,
+  renderPanel,
   prosessPanelKode,
-  prosessPanelTekst,
+  prosessPanelMenyTekst,
   lagringSideEffekter,
-  overrideStatusFn,
+  hentOverstyrtStatus,
   erOverstyrt = false,
 }: OwnProps<INIT_DATA, PANEL_DATA> & ProsessPanelInitProps) => {
+  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
+
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = useMultipleRestApi(formaterteEndepunkter, {
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -51,25 +54,25 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder, lagringSideEffekter) as StandardProsessPanelProps;
 
   const data = {
-    ...initData as INIT_DATA,
-    ...standardPanelProps as StandardProsessPanelProps,
+    ...initData,
+    ...standardPanelProps,
   };
 
-  const status = overrideStatusFn ? overrideStatusFn(data) : standardPanelProps.status;
+  const status = hentOverstyrtStatus ? hentOverstyrtStatus(data) : standardPanelProps.status;
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     initState,
     prosessPanelKode,
-    prosessPanelTekst,
+    prosessPanelMenyTekst,
     valgtProsessSteg,
-    skalVisesFn(data, initState),
+    skalPanelVisesIMeny(data, initState),
     erOverstyrt || standardPanelProps.isAksjonspunktOpen,
     status,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = useMultipleRestApi(formatertePanelEndepunkter, {
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA>(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
@@ -82,9 +85,9 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
       status={status}
       dataState={panelDataState}
     >
-      {render({
-        ...initData as INIT_DATA,
-        ...panelData as PANEL_DATA,
+      {renderPanel({
+        ...initData,
+        ...panelData,
         ...standardPanelProps,
       })}
     </ProsessPanelWrapper>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar,
@@ -83,29 +83,37 @@ const useStandardProsessPanelProps = (
 ): StandardProsessPanelProps => {
   const value = useContext(StandardPropsStateContext);
 
-  const aksjonspunkterForSteg = data && aksjonspunktKoder ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : [];
-  const vilkarForSteg = data && vilkarKoder ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : [];
+  const aksjonspunkterForSteg = useMemo(() => (data && aksjonspunktKoder
+    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
+  [data?.aksjonspunkter, aksjonspunktKoder]);
+
+  const vilkarForSteg = useMemo(() => (data && vilkarKoder
+    ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : []),
+  [data?.vilkar, vilkarKoder]);
 
   const isReadOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, vilkarForSteg, value.rettigheter, value.hasFetchError);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg);
+
+  const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
+    [value.behandling.versjon, aksjonspunkterForSteg]);
 
   const harApneAksjonspunkter = aksjonspunkterForSteg.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET && ap.kanLoses);
 
-  const status = finnStatus(vilkarForSteg, aksjonspunkterForSteg);
+  const status = useMemo(() => finnStatus(vilkarForSteg, aksjonspunkterForSteg), [vilkarForSteg, aksjonspunkterForSteg]);
+
   const readOnlySubmitButton = (!(aksjonspunkterForSteg.some((ap) => ap.kanLoses)) || vilkarUtfallType.OPPFYLT === status);
 
-  const standardlagringSideEffekter = () => () => {
+  const standardlagringSideEffekter = useCallback(() => () => {
     value.oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
-  };
+  }, []);
 
-  const submitCallback = getBekreftAksjonspunktProsessCallback(
+  const submitCallback = useMemo(() => getBekreftAksjonspunktProsessCallback(
     lagringSideEffekter || standardlagringSideEffekter,
     value.fagsak,
     value.behandling,
     aksjonspunkterForSteg,
     value.lagreAksjonspunkter,
     value.lagreOverstyrteAksjonspunkter,
-  );
+  ), [value.behandling.versjon, aksjonspunkterForSteg]);
 
   return {
     behandling: value.behandling,

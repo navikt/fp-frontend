@@ -15,7 +15,7 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -76,19 +76,19 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
-      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      requestApi={requestFpApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.AVREGNING}
-      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalVisesFn={(_data, initState) => {
+      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
+      skalPanelVisesIMeny={(_data, initState) => {
         const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
         && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
         return initState === RestApiState.SUCCESS && !harVedtakspanel;
       }}
-      overrideStatusFn={(data) => (data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
-      render={(data) => (
+      hentOverstyrtStatus={(data) => (data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      renderPanel={(data) => (
         <AvregningProsessIndex
           fagsak={fagsak}
           previewFptilbakeCallback={previewFptilbakeCallback}

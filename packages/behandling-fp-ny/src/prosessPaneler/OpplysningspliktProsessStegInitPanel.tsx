@@ -13,7 +13,7 @@ import {
 import { skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -43,20 +43,20 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
 }) => (
   <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={prosessStegCodes.OPPLYSNINGSPLIKT}
-    prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
-    skalVisesFn={(data) => {
+    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
+    skalPanelVisesIMeny={(data) => {
       const defaultSkalVises = skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar);
       const isRevurdering = behandlingType.REVURDERING === data.behandling.type.kode;
       const hasAp = data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
       return !(isRevurdering && !hasAp) || defaultSkalVises;
     }}
-    render={(data) => (
+    renderPanel={(data) => (
       <SokersOpplysningspliktVilkarProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}

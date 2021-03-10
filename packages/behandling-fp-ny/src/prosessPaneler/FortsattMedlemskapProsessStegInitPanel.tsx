@@ -11,7 +11,7 @@ import {
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR];
 
@@ -41,15 +41,15 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
   return (
     <ProsessDefaultInitPanel<EndepunktInitData>
       {...props}
-      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      requestApi={requestFpApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       prosessPanelKode={prosessStegCodes.FORTSATTMEDLEMSKAP}
-      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
-      skalVisesFn={(initData) => skalViseProsessPanel(initData.aksjonspunkter, VILKAR_KODER, initData.vilkar)}
+      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
+      skalPanelVisesIMeny={(initData) => skalViseProsessPanel(initData.aksjonspunkter, VILKAR_KODER, initData.vilkar)}
       erOverstyrt={erOverstyrt}
-      render={(data) => (
+      renderPanel={(data) => (
         <OverstyringPanelDef
           behandling={data.behandling}
           aksjonspunkter={data?.aksjonspunkter}

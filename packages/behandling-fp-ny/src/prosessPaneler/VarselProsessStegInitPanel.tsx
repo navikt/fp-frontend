@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const forhandsvis = (data: any): void => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -109,15 +109,15 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
-      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      requestApi={requestFpApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.VARSEL}
-      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
-      skalVisesFn={(data) => skalViseProsessPanel(data.aksjonspunkter)}
+      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
+      skalPanelVisesIMeny={(data) => skalViseProsessPanel(data.aksjonspunkter)}
       lagringSideEffekter={lagringSideEffekter}
-      render={(data) => (
+      renderPanel={(data) => (
         <VarselOmRevurderingProsessIndex
           previewCallback={previewCallback}
           {...data}

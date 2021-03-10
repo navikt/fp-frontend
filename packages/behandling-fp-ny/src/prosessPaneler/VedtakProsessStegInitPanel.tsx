@@ -19,7 +19,7 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
@@ -176,18 +176,18 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
-      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      requestApi={requestFpApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.VEDTAK}
-      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-      skalVisesFn={(_data, initState) => initState === RestApiState.SUCCESS}
-      overrideStatusFn={(data) => findStatusForVedtak(
+      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+      skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
+      hentOverstyrtStatus={(data) => findStatusForVedtak(
         data?.vilkar || [], data?.aksjonspunkter || [], data.aksjonspunkter, data.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
-      render={(data) => (
+      renderPanel={(data) => (
         <>
           <IverksetterVedtakStatusModal
             visModal={visIverksetterVedtakModal}

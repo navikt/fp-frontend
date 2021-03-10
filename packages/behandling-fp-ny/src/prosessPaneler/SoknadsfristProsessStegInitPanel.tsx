@@ -9,7 +9,7 @@ import { Aksjonspunkt, Soknad, UttakPeriodeGrense } from '@fpsak-frontend/types'
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, skalViseProsessPanel } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER];
 
@@ -27,14 +27,14 @@ type EndepunktPanelData = {
 const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = (props) => (
   <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={prosessStegCodes.SOEKNADSFRIST}
-    prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-    skalVisesFn={(data) => skalViseProsessPanel(data.aksjonspunkter)}
-    render={(data) => (
+    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
+    skalPanelVisesIMeny={(data) => skalViseProsessPanel(data.aksjonspunkter)}
+    renderPanel={(data) => (
       <VurderSoknadsfristForeldrepengerIndex
         {...data}
       />

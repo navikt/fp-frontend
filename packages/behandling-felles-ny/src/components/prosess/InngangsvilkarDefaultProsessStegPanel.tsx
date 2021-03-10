@@ -56,7 +56,7 @@ const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & Proses
   rightPanels,
 }) => {
   const [panelInfo, setPanelInfo] = useState<InngangsvilkarPanelData[]>([]);
-  const visProsessPanel = useCallback((nyData: InngangsvilkarPanelData) => {
+  const registrerInngangsvilkarPanel = useCallback((nyData: InngangsvilkarPanelData) => {
     setPanelInfo((oldData) => {
       const newData = [...oldData];
       const index = newData.findIndex((d) => d.id === nyData.id);
@@ -123,12 +123,20 @@ const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & Proses
       <Row className="">
         <Column xs="6">
           <div className={styles.panelLeft}>
-            {leftPanels({ setPanelInfo: visProsessPanel, erPanelValgt, harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt })}
+            {leftPanels({
+              registrerInngangsvilkarPanel,
+              erPanelValgt,
+              harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+            })}
           </div>
         </Column>
         <Column xs="6">
           <div className={styles.panelRight}>
-            {rightPanels({ setPanelInfo: visProsessPanel, erPanelValgt, harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt })}
+            {rightPanels({
+              registrerInngangsvilkarPanel,
+              erPanelValgt,
+              harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+            })}
           </div>
         </Column>
       </Row>

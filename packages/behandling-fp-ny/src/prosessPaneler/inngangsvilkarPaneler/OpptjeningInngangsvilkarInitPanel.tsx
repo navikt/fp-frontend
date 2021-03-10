@@ -12,7 +12,7 @@ import {
 import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET];
 
@@ -42,14 +42,14 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
   <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     behandlingVersjon={behandlingVersjon}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-    inngangsvilkarPanelTekstFn={() => getPackageIntl().formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
-    render={(data, erOverstyrt, toggleOverstyring) => (
+    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+    renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         {data.aksjonspunkter.length === 0 && (
           <OverstyringPanelDef

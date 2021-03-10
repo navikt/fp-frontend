@@ -13,7 +13,7 @@ import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPane
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -44,13 +44,13 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
   <InngangsvilkarDefaultInitPanel<EndepunktInitData>
     {...props}
     behandlingVersjon={behandlingVersjon}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="FODSEL"
-    inngangsvilkarPanelTekstFn={() => getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' })}
-    render={(data, erOverstyrt, toggleOverstyring) => (
+    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' })}
+    renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         {data.aksjonspunkter.length === 0 && (
           <OverstyringPanelDef

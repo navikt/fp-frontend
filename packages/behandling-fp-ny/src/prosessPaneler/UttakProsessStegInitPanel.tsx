@@ -15,7 +15,7 @@ import {
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 // TODO Er dette mogleg å fjerna?
 const FAKTA_UTTAK_AP = [
@@ -98,15 +98,15 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
-      useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+      requestApi={requestFpApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.UTTAK}
-      prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' })}
-      skalVisesFn={(_data, initState) => initState === RestApiState.SUCCESS}
-      overrideStatusFn={(data) => getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter)}
-      render={(data) => (
+      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' })}
+      skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
+      hentOverstyrtStatus={(data) => getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter)}
+      renderPanel={(data) => (
         <UttakProsessIndex
           fagsak={fagsak}
           employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}

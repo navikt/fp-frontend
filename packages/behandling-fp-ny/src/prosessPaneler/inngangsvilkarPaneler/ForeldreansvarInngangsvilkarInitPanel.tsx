@@ -10,7 +10,7 @@ import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
@@ -52,13 +52,13 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
   <InngangsvilkarDefaultInitPanel<EndepunktInitData>
     {...props}
     behandlingVersjon={behandlingVersjon}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
-    inngangsvilkarPanelTekstFn={(data) => hentAksjonspunktTekst(data?.aksjonspunkter)}
-    render={(data) => (
+    hentInngangsvilkarPanelTekst={(data) => hentAksjonspunktTekst(data?.aksjonspunkter)}
+    renderPanel={(data) => (
       <>
         <ForeldreansvarVilkarProsessIndex
           isEngangsstonad={false}

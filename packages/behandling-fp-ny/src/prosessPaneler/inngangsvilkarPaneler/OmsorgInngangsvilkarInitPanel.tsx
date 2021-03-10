@@ -7,10 +7,10 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
-import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelData, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -29,8 +29,6 @@ type EndepunktInitData = {
 
 interface OwnProps {
   behandlingVersjon?: number;
-  setPanelInfo: (data: InngangsvilkarPanelData) => void;
-  erPanelValgt: boolean;
 }
 
 const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
@@ -40,13 +38,13 @@ const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
   <InngangsvilkarDefaultInitPanel<EndepunktInitData>
     {...props}
     behandlingVersjon={behandlingVersjon}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="OMSORG"
-    inngangsvilkarPanelTekstFn={() => getPackageIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
-    render={(data) => (
+    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
+    renderPanel={(data) => (
       <>
         <OmsorgVilkarProsessIndex {...data} />
         <VerticalSpacer thirtyTwoPx />

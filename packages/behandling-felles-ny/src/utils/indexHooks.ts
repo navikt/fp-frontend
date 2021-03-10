@@ -1,4 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import {
+  useEffect, useState, useCallback, useMemo,
+} from 'react';
 
 import { Behandling } from '@fpsak-frontend/types';
 import { RestApiHooks, useRestApiErrorDispatcher, RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -48,7 +50,7 @@ export const useBehandling = (
     setNyBehandling(nyBehandling);
   }, []);
 
-  const { useRestApiRunner } = RestApiHooks.initHooks(requestApi);
+  const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner<Behandling>(behandlingKey);
   useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
@@ -75,7 +77,7 @@ export const useLagreAksjonspunkt = (
   lagreOverstyrteAksjonspunkter: (params: any, keepData?: boolean
 ) => Promise<any>,
 } => {
-  const { useRestApiRunner } = RestApiHooks.initHooks(requestApi);
+  const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner<Behandling>(keys.SAVE_AKSJONSPUNKT);
   useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
@@ -96,7 +98,7 @@ export const useInitBehandlingHandlinger = (
   hentBehandling: (keepData: boolean) => Promise<Behandling>,
   setBehandling: (behandling: Behandling) => void,
 ): void => {
-  const { useRestApiRunner } = RestApiHooks.initHooks(requestApi);
+  const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const { startRequest: nyBehandlendeEnhet } = useRestApiRunner(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
   const { startRequest: settBehandlingPaVent } = useRestApiRunner(keys.BEHANDLING_ON_HOLD);

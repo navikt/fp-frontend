@@ -15,7 +15,7 @@ import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const harPeriodeMedUtbetaling = (perioder: BeregningsresultatPeriode[]): boolean => {
   const periode = perioder.find((p) => p.dagsats > 0);
@@ -77,15 +77,15 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
 }) => (
   <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={prosessStegCodes.TILKJENT_YTELSE}
-    prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
-    skalVisesFn={(_data, initState) => initState === RestApiState.SUCCESS}
-    overrideStatusFn={(data) => getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder)}
-    render={(data) => (
+    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
+    skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
+    hentOverstyrtStatus={(data) => getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder)}
+    renderPanel={(data) => (
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 import InngangsvilkarPanelData from '../../types/inngangsvilkarPanelData';
 
 const useInngangsvilkarRegistrerer = (
-  setPanelInfo: (data: InngangsvilkarPanelData) => void,
+  registrerInngangsvilkarPanel: (data: InngangsvilkarPanelData) => void,
   behandlingVersjon: number,
   id: string,
   aksjonspunktTekst: string,
@@ -20,7 +20,7 @@ const useInngangsvilkarRegistrerer = (
 
   useEffect(() => {
     if (skalVises) {
-      setPanelInfo({
+      registrerInngangsvilkarPanel({
         id,
         status,
         harApentAksjonspunkt: erOverstyrt || erAksjonspunktApent,

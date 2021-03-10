@@ -13,7 +13,7 @@ import {
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { FpBehandlingApiKeys, restApiFpHooks } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
@@ -48,15 +48,15 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
 }) => (
   <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={prosessStegCodes.BEREGNINGSGRUNNLAG}
-    prosessPanelTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
-    skalVisesFn={(_initData, initState) => initState === RestApiState.SUCCESS}
-    render={(data) => (
+    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
+    skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
+    renderPanel={(data) => (
       <BeregningsgrunnlagProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}

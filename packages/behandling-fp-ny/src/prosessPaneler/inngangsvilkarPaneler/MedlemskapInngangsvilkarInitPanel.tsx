@@ -9,10 +9,10 @@ import {
   AksessRettigheter, Aksjonspunkt, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelData, InngangsvilkarPanelInitProps,
+  InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps,
 } from '@fpsak-frontend/behandling-felles-ny';
 
-import { FpBehandlingApiKeys, restApiFpHooks } from '../../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR];
 
@@ -32,9 +32,6 @@ type EndepunktPanelData = {
 interface OwnProps {
   behandlingVersjon?: number;
   rettigheter: AksessRettigheter;
-  setPanelInfo: (data: InngangsvilkarPanelData) => void;
-  erPanelValgt: boolean;
-  harInngangsvilkarApentAksjonspunkt: boolean;
 }
 
 const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
@@ -45,14 +42,14 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
   <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     behandlingVersjon={behandlingVersjon}
-    useMultipleRestApi={restApiFpHooks.useMultipleRestApi}
+    requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="MEDLEMSKAP"
-    inngangsvilkarPanelTekstFn={() => ''}
-    render={(data, erOverstyrt, toggleOverstyring) => (
+    hentInngangsvilkarPanelTekst={() => ''}
+    renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         <OverstyringPanelDef
           behandling={data.behandling}

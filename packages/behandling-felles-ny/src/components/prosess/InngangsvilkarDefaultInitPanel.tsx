@@ -1,8 +1,9 @@
 import React, {
-  ReactElement,
+  ReactElement, useMemo,
 } from 'react';
 
-import { MulipleRestApiInterface, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 
@@ -13,31 +14,33 @@ import useInngangsvilkarRegistrerer from '../../utils/prosess/useInngangsvilkarR
 
 type OwnProps<INIT_DATA, PANEL_DATA> = {
   behandlingVersjon: number;
-  useMultipleRestApi: MulipleRestApiInterface<INIT_DATA | PANEL_DATA>;
+  requestApi: AbstractRequestApi;
   initEndepunkter: string[];
   panelEndepunkter?: string[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
-  render: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, erOverstyrt: boolean, toggleOverstyring: () => void) => ReactElement;
+  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, erOverstyrt: boolean, toggleOverstyring: () => void) => ReactElement;
   inngangsvilkarPanelKode: string;
-  inngangsvilkarPanelTekstFn: (data: StandardProsessPanelProps) => string;
+  hentInngangsvilkarPanelTekst: (data: StandardProsessPanelProps) => string;
 }
 
 const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   erPanelValgt,
   behandlingVersjon,
-  setPanelInfo,
-  useMultipleRestApi,
+  registrerInngangsvilkarPanel,
+  requestApi,
   initEndepunkter,
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
-  render,
+  renderPanel,
   inngangsvilkarPanelKode,
-  inngangsvilkarPanelTekstFn,
+  hentInngangsvilkarPanelTekst,
 }: OwnProps<INIT_DATA, PANEL_DATA> & InngangsvilkarPanelInitProps) => {
+  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
+
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = useMultipleRestApi(formaterteEndepunkter, {
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -48,17 +51,17 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 
   const { erOverstyrt, toggleOverstyring } = useInngangsvilkarRegistrerer(
-    setPanelInfo,
+    registrerInngangsvilkarPanel,
     behandlingVersjon,
     inngangsvilkarPanelKode,
-    inngangsvilkarPanelTekstFn(standardPanelProps),
+    hentInngangsvilkarPanelTekst(standardPanelProps),
     erDataFerdighentet && skalVises,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = useMultipleRestApi(formatertePanelEndepunkter, {
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA>(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
@@ -72,9 +75,9 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     return <LoadingPanel />;
   }
 
-  return render({
-    ...initData as INIT_DATA,
-    ...panelData as PANEL_DATA,
+  return renderPanel({
+    ...initData,
+    ...panelData,
     ...standardPanelProps,
   }, erOverstyrt, toggleOverstyring);
 };
