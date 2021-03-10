@@ -9,9 +9,7 @@ import { getAddresses } from '@fpsak-frontend/utils';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import Region from '@fpsak-frontend/kodeverk/src/region';
 import { Tooltip } from '@fpsak-frontend/shared-components';
-import {
-  Kodeverk, KodeverkMedNavn, Personadresse, PersonopplysningMedlem,
-} from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Personadresse, PersonopplysningMedlem } from '@fpsak-frontend/types';
 
 import styles from './medlemskapBostedSokerView.less';
 
@@ -26,10 +24,6 @@ const getUtlandsadresse = (adresser: Personadresse[]): string => {
   const utlandsAdresse = adresseListe[opplysningAdresseType.UTENLANDSK_POSTADRESSE] || adresseListe[opplysningAdresseType.UTENLANDSK_NAV_TILLEGSADRESSE];
   return utlandsAdresse || '-';
 };
-
-const getPersonstatus = (personoversikt: PersonopplysningMedlem): Kodeverk => (personoversikt.avklartPersonstatus
-  && personoversikt.avklartPersonstatus.overstyrtPersonstatus ? personoversikt.avklartPersonstatus.overstyrtPersonstatus
-  : personoversikt.personstatus);
 
 interface OwnProps {
   personopplysninger: PersonopplysningMedlem;
@@ -59,21 +53,21 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps & WrappedComp
         <Normaltekst>{getUtlandsadresse(personopplysninger.adresser)}</Normaltekst>
       </Column>
       <Column xs="4">
-        {getPersonstatus(personopplysninger)
-          && (
+        {personopplysninger.personstatus && (
           <div className={styles.etikettMargin}>
             <Tooltip content={intl.formatMessage({ id: 'Personstatus.Hjelpetekst' })} alignBottom>
               <Etikettfokus
-                className={getPersonstatus(personopplysninger).kode === personstatusType.DOD ? styles.dodEtikett : ''}
+                className={personopplysninger.personstatus.kode === personstatusType.DOD ? styles.dodEtikett : ''}
                 type="fokus"
                 typo="undertekst"
               >
-                {getPersonstatus(personopplysninger).kode === personstatusType.UDEFINERT ? intl.formatMessage({ id: 'Personstatus.Ukjent' })
-                  : personstatusTypes.find((s) => s.kode === getPersonstatus(personopplysninger).kode).navn}
+                {personopplysninger.personstatus.kode === personstatusType.UDEFINERT
+                  ? intl.formatMessage({ id: 'Personstatus.Ukjent' })
+                  : personstatusTypes.find((s) => s.kode === personopplysninger.personstatus.kode)?.navn}
               </Etikettfokus>
             </Tooltip>
           </div>
-          )}
+        )}
         {(personopplysninger.region && personopplysninger.region.kode !== Region.UDEFINERT)
           && (
           <div className={styles.etikettMargin}>

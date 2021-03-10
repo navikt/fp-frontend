@@ -16,7 +16,7 @@ describe('<VisittkortLabels>', () => {
     navn: 'Olga Utvikler',
     kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     fødselsdato: '1979-01-01',
-    personnummer: '1234567',
+    fødselsnummer: '1234567',
   };
 
   it('skal ikke vise noen etiketter', () => {

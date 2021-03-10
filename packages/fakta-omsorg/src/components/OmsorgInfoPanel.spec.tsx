@@ -20,10 +20,6 @@ describe('<OmsorgInfoPanel>', () => {
         kode: '',
         kodeverk: '',
       },
-      diskresjonskode: {
-        kode: '',
-        kodeverk: '',
-      },
       sivilstand: {
         kode: 'UGIF',
         kodeverk: '',

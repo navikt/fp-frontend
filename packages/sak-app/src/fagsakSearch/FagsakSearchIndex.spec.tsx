@@ -27,8 +27,6 @@ describe('<FagsakSearchIndex>', () => {
       kode: 'OPPR',
       kodeverk: 'test',
     },
-    barnFodt: '10.10.2017',
-    opprettet: '13‎.‎02‎.‎2017‎ ‎09‎:‎54‎:‎22',
     dekningsgrad: 100,
   };
   const fagsak2: Partial<Fagsak> = {

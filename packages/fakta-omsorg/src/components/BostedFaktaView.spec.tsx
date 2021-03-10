@@ -15,10 +15,6 @@ describe('<BostedFaktaView>', () => {
       kode: '',
       kodeverk: '',
     },
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
     sivilstand: {
       kode: 'UGIF',
       kodeverk: '',
@@ -31,10 +27,6 @@ describe('<BostedFaktaView>', () => {
       navn: 'Kari Utvikler',
       aktoerId: '1',
       kjønn: {
-        kode: '',
-        kodeverk: '',
-      },
-      diskresjonskode: {
         kode: '',
         kodeverk: '',
       },
@@ -79,10 +71,6 @@ describe('<BostedFaktaView>', () => {
       navn: 'Ola Utvikler',
       aktoerId: '1',
       kjønn: {
-        kode: '',
-        kodeverk: '',
-      },
-      diskresjonskode: {
         kode: '',
         kodeverk: '',
       },
