@@ -179,9 +179,15 @@ describe('RequestRunner', () => {
     mapper.addUpdatePollingMessageEventHandler(() => { process.cancel(); return Promise.resolve(''); });
     process.setNotificationEmitter(mapper.getNotificationEmitter());
 
-    const resResponse = await process.start(params);
+    let errorMessage = '';
 
-    expect(resResponse).toStrictEqual({ payload: REQUEST_POLLING_CANCELLED });
+    try {
+      await process.start(params);
+    } catch (error) {
+      errorMessage = error.message;
+    }
+
+    expect(errorMessage).toStrictEqual(REQUEST_POLLING_CANCELLED);
   });
 
   it('skal hente data med nullverdi', async () => {

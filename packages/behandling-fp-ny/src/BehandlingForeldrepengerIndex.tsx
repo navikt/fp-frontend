@@ -56,17 +56,15 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
 }) => {
   useInitRequestApi(requestFpApi, setRequestPendingMessage);
 
-  const { useRestApiRunner, useRestApi } = restApiFpHooks;
-
   const {
     behandling, behandlingState, hentBehandling, setBehandling,
   } = useBehandling(
-    requestFpApi, useRestApiRunner, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId,
+    requestFpApi, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId,
   );
 
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(useRestApiRunner, FpBehandlingApiKeys, setBehandling);
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(requestFpApi, FpBehandlingApiKeys, setBehandling);
 
-  useInitBehandlingHandlinger(useRestApiRunner, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
+  useInitBehandlingHandlinger(requestFpApi, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
@@ -92,10 +90,9 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
       />
       <BehandlingPaVent
         behandling={behandling}
-        kodeverk={kodeverk}
         hentBehandling={hentBehandling}
-        useRestApiRunner={useRestApiRunner}
-        useRestApi={useRestApi}
+        kodeverk={kodeverk}
+        requestApi={requestFpApi}
         oppdaterPaVentKey={FpBehandlingApiKeys.UPDATE_ON_HOLD}
         aksjonspunktKey={FpBehandlingApiKeys.AKSJONSPUNKTER}
       />

@@ -2,9 +2,8 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
-import {
-  RequestRunnerApiData, RequestApiOptions, RequestApiData, RestApiState,
-} from '@fpsak-frontend/rest-api-hooks';
+import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -25,8 +24,7 @@ interface SettPaVentParams {
 interface BehandlingPaVentProps {
   behandling: Behandling;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
-  useRestApiRunner: <T>(key: string) => RequestRunnerApiData<T>,
-  useRestApi: <T>(key: string, params?: any, options?: RequestApiOptions) => RequestApiData<T>;
+  requestApi: AbstractRequestApi;
   oppdaterPaVentKey: string;
   aksjonspunktKey: string;
   hentBehandling: (keepData: boolean) => Promise<any>;
@@ -36,22 +34,23 @@ interface BehandlingPaVentProps {
 const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   behandling,
   kodeverk,
-  useRestApiRunner,
-  useRestApi,
+  requestApi,
   oppdaterPaVentKey,
   aksjonspunktKey,
   hentBehandling,
   erTilbakekreving = false,
 }) => {
+  const restApiHooks = RestApiHooks.initHooks(requestApi);
+
   const [skalViseModal, setVisModal] = useState(behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { data: aksjonspunkter = EMPTY_ARRAY, state: aksjonspunkterState } = useRestApi<Aksjonspunkt[]>(aksjonspunktKey, {}, {
+  const { data: aksjonspunkter = EMPTY_ARRAY, state: aksjonspunkterState } = restApiHooks.useRestApi<Aksjonspunkt[]>(aksjonspunktKey, {}, {
     updateTriggers: [skalViseModal],
     suspendRequest: !skalViseModal,
   });
 
-  const { startRequest: settPaVent } = useRestApiRunner<SettPaVentParams>(oppdaterPaVentKey);
+  const { startRequest: settPaVent } = restApiHooks.useRestApiRunner<SettPaVentParams>(oppdaterPaVentKey);
 
   useEffect(() => {
     setVisModal(behandling.behandlingPaaVent);

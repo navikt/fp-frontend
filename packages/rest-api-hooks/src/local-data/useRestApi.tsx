@@ -72,7 +72,7 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
           });
         })
         .catch((error) => {
-          if (error !== REQUEST_POLLING_CANCELLED) {
+          if (error?.message !== REQUEST_POLLING_CANCELLED) {
             setData({
               state: RestApiState.ERROR,
               data: undefined,

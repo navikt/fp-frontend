@@ -8,6 +8,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Behandling } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
 
 import BehandlingPaVent from './BehandlingPaVent';
 
@@ -30,12 +31,28 @@ describe('<BehandlingPaVent>', () => {
   const aksjonspunkter = [];
   const kodeverk = {};
 
+  const AKSJONSPUNKT_KEY = 'AP';
+  const PA_VENT_KEY = 'PA_VENT';
+
+  const endpoints = new RestApiConfigBuilder()
+    .withRel('test', AKSJONSPUNKT_KEY)
+    .build();
+
+  const requestMock = createRequestApi(endpoints);
+
+  afterEach(() => {
+    requestMock.clearAllMockData();
+  });
+
   it('skal ikke vise modal når behandling ikke er på vent', () => {
+    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+
     const wrapper = shallow(<BehandlingPaVent
       behandling={behandling as Behandling}
-      aksjonspunkter={aksjonspunkter}
+      requestApi={requestMock}
+      oppdaterPaVentKey={PA_VENT_KEY}
+      aksjonspunktKey={AKSJONSPUNKT_KEY}
       kodeverk={kodeverk}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
     />);
 
@@ -43,14 +60,17 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal vise modal når behandling er på vent', () => {
+    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+
     const wrapper = shallow(<BehandlingPaVent
       behandling={{
         ...behandling,
         behandlingPaaVent: true,
       } as Behandling}
-      aksjonspunkter={aksjonspunkter}
+      requestApi={requestMock}
+      oppdaterPaVentKey={PA_VENT_KEY}
+      aksjonspunktKey={AKSJONSPUNKT_KEY}
       kodeverk={kodeverk}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
     />);
 
@@ -60,14 +80,17 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal vise modal og så skjule den ved trykk på knapp', () => {
+    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+
     const wrapper = shallow(<BehandlingPaVent
       behandling={{
         ...behandling,
         behandlingPaaVent: true,
       } as Behandling}
-      aksjonspunkter={aksjonspunkter}
+      requestApi={requestMock}
+      oppdaterPaVentKey={PA_VENT_KEY}
+      aksjonspunktKey={AKSJONSPUNKT_KEY}
       kodeverk={kodeverk}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
     />);
 
@@ -80,25 +103,28 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal markeres som automatisk satt på vent når en har åpent aksjonspunkt for auto-manuelt satt på vent', () => {
+    requestMock.mock(AKSJONSPUNKT_KEY, [{
+      status: {
+        kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: 'AKSJONSPUNKT_STATUS',
+      },
+      definisjon: {
+        kode: aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT,
+        kodeverk: 'AKSJONSPUNKT_KODE',
+      },
+      kanLoses: true,
+      erAktivt: true,
+    }]);
+
     const wrapper = shallow(<BehandlingPaVent
       behandling={{
         ...behandling,
         behandlingPaaVent: true,
       } as Behandling}
-      aksjonspunkter={[{
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'AKSJONSPUNKT_STATUS',
-        },
-        definisjon: {
-          kode: aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT,
-          kodeverk: 'AKSJONSPUNKT_KODE',
-        },
-        kanLoses: true,
-        erAktivt: true,
-      }]}
+      requestApi={requestMock}
+      oppdaterPaVentKey={PA_VENT_KEY}
+      aksjonspunktKey={AKSJONSPUNKT_KEY}
       kodeverk={kodeverk}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
     />);
 
@@ -108,8 +134,9 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal oppdatere på-vent-informasjon og så hente behandling på nytt', async () => {
-    const settPaVentCallback = sinon.stub();
-    settPaVentCallback.returns(Promise.resolve());
+    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+    requestMock.mock(PA_VENT_KEY);
+
     const hentBehandlingCallback = sinon.spy();
 
     const wrapper = shallow(<BehandlingPaVent
@@ -117,9 +144,10 @@ describe('<BehandlingPaVent>', () => {
         ...behandling,
         behandlingPaaVent: true,
       } as Behandling}
-      aksjonspunkter={aksjonspunkter}
+      requestApi={requestMock}
+      oppdaterPaVentKey={PA_VENT_KEY}
+      aksjonspunktKey={AKSJONSPUNKT_KEY}
       kodeverk={kodeverk}
-      settPaVent={settPaVentCallback}
       hentBehandling={hentBehandlingCallback}
     />);
 
@@ -127,21 +155,17 @@ describe('<BehandlingPaVent>', () => {
 
     await modal.prop('submitCallback')({ dato: '10.10.2019' });
 
-    const calls = settPaVentCallback.getCalls();
-    expect(calls).toHaveLength(1);
-    expect(calls[0].args).toHaveLength(1);
-    expect(calls[0].args[0]).toEqual({
+    const requestData = requestMock.getRequestMockData(PA_VENT_KEY);
+    expect(requestData).toHaveLength(1);
+    expect(requestData[0].params).toEqual({
       behandlingId: 1,
       behandlingVersjon: 1,
       dato: '10.10.2019',
     });
 
-    const calls2 = hentBehandlingCallback.getCalls();
-    expect(calls2).toHaveLength(1);
-    expect(calls2[0].args).toHaveLength(2);
-    expect(calls2[0].args[0]).toEqual({
-      behandlingId: 1,
-    });
-    expect(calls2[0].args[1]).toBe(false);
+    const calls = hentBehandlingCallback.getCalls();
+    expect(calls).toHaveLength(1);
+    expect(calls[0].args).toHaveLength(1);
+    expect(calls[0].args[0]).toBe(false);
   });
 });
