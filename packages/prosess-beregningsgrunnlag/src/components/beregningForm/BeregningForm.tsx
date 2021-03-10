@@ -13,7 +13,6 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { Undertittel } from 'nav-frontend-typografi';
-import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId,
   Beregningsgrunnlag as BeregningsgrunnlagProp, BeregningsgrunnlagAndel,
@@ -21,6 +20,7 @@ import {
   RelevanteStatuserProp,
   Vilkar,
   YtelseGrunnlag,
+  FaktaOmBeregning, BeregningsgrunnlagPeriodeProp, SammenligningsgrunlagProp, Kodeverk,
 } from '@fpsak-frontend/types';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
@@ -32,11 +32,12 @@ import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/Aksjonsp
 import Beregningsgrunnlag, { TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING } from '../beregningsgrunnlagPanel/Beregningsgrunnlag';
 import AksjonspunktBehandler from '../fellesPaneler/AksjonspunktBehandler';
 import BeregningsresultatTable from '../beregningsresultatPanel/BeregningsresultatTable';
-
-import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import DekningsgradTransformedValues from '../../types/DekningsgradAksjonspunktTsType';
+import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
+import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunktTsType';
+import { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -55,13 +56,14 @@ const {
 // Methods
 // ------------------------------------------------------------------------------------------ //
 
-const gjelderBehandlingenBesteberegning = (faktaOmBeregning) => (faktaOmBeregning && faktaOmBeregning.faktaOmBeregningTilfeller
+const gjelderBehandlingenBesteberegning = (faktaOmBeregning: FaktaOmBeregning): boolean => (faktaOmBeregning && faktaOmBeregning.faktaOmBeregningTilfeller
   ? faktaOmBeregning.faktaOmBeregningTilfeller.some((tilfelle) => tilfelle.kode === faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE)
   : false);
 
-const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag) => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
+const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag): boolean => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
 
-const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder) => allePerioder.some(({ periodeAarsaker }) => periodeAarsaker
+const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder: BeregningsgrunnlagPeriodeProp[]): boolean => allePerioder
+  .some(({ periodeAarsaker }) => periodeAarsaker
   && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
 
 const findAksjonspunktHelpTekst = (gjeldendeAksjonspunkt: Aksjonspunkt, erVarigEndring: boolean, erNyArbLivet: boolean, erNyoppstartet: boolean): string => {
@@ -125,9 +127,9 @@ const lagAksjonspunktHelpText = (gjeldendeAksjonspunkter: Aksjonspunkt[],
 };
 
 export const buildInitialValues = createSelector(
-  [(state, ownProps) => ownProps.beregningsgrunnlag,
-    (state, ownProps) => ownProps.gjeldendeAksjonspunkter],
-  (beregningsgrunnlag, gjeldendeAksjonspunkter) => {
+  [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
+    (ownProps: OwnProps) => ownProps.gjeldendeAksjonspunkter],
+  (beregningsgrunnlag: BeregningsgrunnlagProp, gjeldendeAksjonspunkter: Aksjonspunkt[]): BeregningsgrunnlagValues => {
     if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
       return undefined;
     }
@@ -153,8 +155,11 @@ const harAksjonspunkt = (aksjonspunktKode: string, gjeldendeAksjonspunkter: Aksj
   && gjeldendeAksjonspunkter !== null
   && gjeldendeAksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktKode);
 
-export const transformValues = (values, relevanteStatuser, alleAndelerIForstePeriode,
-  gjeldendeAksjonspunkter, allePerioder) => {
+export const transformValues = (values: BeregningsgrunnlagValues,
+  relevanteStatuser: RelevanteStatuserProp,
+  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],
+  gjeldendeAksjonspunkter: Aksjonspunkt[],
+  allePerioder: BeregningsgrunnlagPeriodeProp[]) => {
   const aksjonspunkter = [];
   const vurderDekningsgradAksjonspunkt = {
     kode: VURDER_DEKNINGSGRAD,
@@ -165,27 +170,30 @@ export const transformValues = (values, relevanteStatuser, alleAndelerIForstePer
     aksjonspunkter.push(vurderDekningsgradAksjonspunkt);
   }
   if (harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS, gjeldendeAksjonspunkter)) {
-    return aksjonspunkter.concat(AksjonspunktBehandlerAT.transformValues(values, relevanteStatuser, alleAndelerIForstePeriode));
+    return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLValues(values as ATFLValues, relevanteStatuser, alleAndelerIForstePeriode));
   }
   if (harAksjonspunkt(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, gjeldendeAksjonspunkter)
     || harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, gjeldendeAksjonspunkter)) {
-    return aksjonspunkter.concat([VurderOgFastsettSN.transformValues(values, gjeldendeAksjonspunkter)]);
+    return aksjonspunkter.concat([VurderOgFastsettSN.transformValues(values as VurderOgFastsettValues, gjeldendeAksjonspunkter)]);
   }
   if (harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD, gjeldendeAksjonspunkter)) {
-    return aksjonspunkter.concat(Beregningsgrunnlag.transformValues(values, allePerioder));
+    return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLTidsbegrensetValues(values as ATFLTidsbegrensetValues, allePerioder));
   }
   return aksjonspunkter;
 };
 
-const getSammenligningsgrunnlagsPrStatus = (bg) => (bg.sammenligningsgrunnlagPrStatus ? bg.sammenligningsgrunnlagPrStatus : undefined);
-const finnAlleAndelerIFørstePeriode = (allePerioder) => {
+const getSammenligningsgrunnlagsPrStatus = (bg: BeregningsgrunnlagProp): SammenligningsgrunlagProp[] => (bg.sammenligningsgrunnlagPrStatus
+  ? bg.sammenligningsgrunnlagPrStatus
+  : undefined);
+
+const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
   if (allePerioder && allePerioder.length > 0) {
     return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
   }
   return undefined;
 };
 
-const getAvviksprosent = (sammenligningsgrunnlagPrStatus) => {
+const getAvviksprosent = (sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[]): number => {
   if (!sammenligningsgrunnlagPrStatus) {
     return undefined;
   }
@@ -197,8 +205,8 @@ const getAvviksprosent = (sammenligningsgrunnlagPrStatus) => {
   return undefined;
 };
 
-const getStatusList = (beregningsgrunnlagPeriode) => {
-  const statusList = beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel
+const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): Kodeverk[] => {
+  const statusList = beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel
     .filter((statusAndel) => statusAndel.erTilkommetAndel !== true)
     .map((statusAndel) => statusAndel.aktivitetStatus);
   return statusList;
@@ -273,12 +281,9 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
           </Undertittel>
           <VerticalSpacer twentyPx />
           <SkjeringspunktOgStatusPanel
-            readOnly={readOnly}
-            gjeldendeAksjonspunkter={gjeldendeAksjonspunkter}
             alleKodeverk={alleKodeverk}
             aktivitetStatusList={aktivitetStatusList}
             skjeringstidspunktDato={skjaeringstidspunktBeregning}
-            gjeldendeDekningsgrad={dekningsgrad}
           />
           { relevanteStatuser.skalViseBeregningsgrunnlag && (
             <>
@@ -374,7 +379,7 @@ const lagSubmitFn = createSelector([
 
 const mapStateToProps = (state, ownProps) => ({
   onSubmit: lagSubmitFn(ownProps),
-  initialValues: buildInitialValues(state, ownProps),
+  initialValues: buildInitialValues(ownProps),
 });
 
 const BeregningForm = connect(mapStateToProps)(behandlingForm({

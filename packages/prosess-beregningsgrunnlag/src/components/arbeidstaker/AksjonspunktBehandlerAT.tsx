@@ -19,7 +19,11 @@ import {
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
-import { ArbeidstakerFrilansTransformedValues, ArbeidstakerInntektValues } from '../../types/ATFLAksjonspunktTsType';
+import {
+  ArbeidsinntektTransformedValues,
+  ATFLTransformedValues,
+  ArbeidstakerInntektValues
+} from '../../types/ATFLAksjonspunktTsType';
 
 const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
   if (andel.overstyrtPrAar !== null && andel.overstyrtPrAar !== undefined) {
@@ -75,7 +79,7 @@ const createRows = (relevanteAndelerAT: BeregningsgrunnlagAndel[],
 
 interface StaticFunctions {
   transformValues?: (values: ArbeidstakerInntektValues, relevanteStatuser: RelevanteStatuserProp,
-                     alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],) => ArbeidstakerFrilansTransformedValues;
+                     alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],) => ArbeidsinntektTransformedValues[];
 }
 
 type OwnProps = {
@@ -101,9 +105,8 @@ const AksjonspunktBehandlerAT: FunctionComponent<OwnProps> & StaticFunctions = (
 
 AksjonspunktBehandlerAT.transformValues = (values: ArbeidstakerInntektValues,
   relevanteStatuser: RelevanteStatuserProp,
-  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ArbeidstakerFrilansTransformedValues => {
+  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ArbeidsinntektTransformedValues[] => {
   let inntektPrAndelList = null;
-  let frilansInntekt = null;
   if (relevanteStatuser.isArbeidstaker) {
     inntektPrAndelList = finnAndelerSomSkalVisesAT(alleAndelerIForstePeriode)
       .map(({ andelsnr }, index) => {
@@ -114,15 +117,7 @@ AksjonspunktBehandlerAT.transformValues = (values: ArbeidstakerInntektValues,
         };
       });
   }
-  if (relevanteStatuser.isFrilanser) {
-    frilansInntekt = removeSpacesFromNumber(values.inntektFrilanser);
-  }
-  return {
-    kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-    begrunnelse: values.ATFLVurdering,
-    inntektFrilanser: frilansInntekt,
-    inntektPrAndelList,
-  };
+  return inntektPrAndelList;
 };
 
 export default AksjonspunktBehandlerAT;

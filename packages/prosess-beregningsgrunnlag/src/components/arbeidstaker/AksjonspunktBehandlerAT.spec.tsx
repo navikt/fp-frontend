@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
 import AksjonspunktBehandlerAT from './AksjonspunktBehandlerAT';
 
@@ -93,16 +92,10 @@ describe('<AksjonspunktBehandlerAT>', () => {
       inntekt0: '242 000',
       dekningsgrad: undefined,
     };
-    values;
-    const expectedInitialValues = {
-      kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-      begrunnelse: values.ATFLVurdering,
-      inntektFrilanser: null,
-      inntektPrAndelList: [{
-        inntekt: 242000,
-        andelsnr: undefined,
-      }],
-    };
+    const expectedInitialValues = [{
+      inntekt: 242000,
+      andelsnr: undefined,
+    }];
     const transformedValues = AksjonspunktBehandlerAT.transformValues(values, relevanteStatuser, andeler);
     expect(transformedValues).toEqual(expectedInitialValues);
   });
