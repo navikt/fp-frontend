@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
@@ -40,15 +40,15 @@ const {
 // Methods
 // ------------------------------------------------------------------------------------------ //
 
-const finnAksjonspunktForATFL = (gjeldendeAksjonspunkter) => gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find(
+const finnAksjonspunktForATFL = (gjeldendeAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find(
   (ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
   || ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
 );
 
-const finnAksjonspunktForVurderDekningsgrad = (gjeldendeAksjonspunkter) => gjeldendeAksjonspunkter
+const finnAksjonspunktForVurderDekningsgrad = (gjeldendeAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => gjeldendeAksjonspunkter
   && gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_DEKNINGSGRAD);
 
-const finnAlleAndelerIFørstePeriode = (allePerioder) => {
+const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
   if (allePerioder && allePerioder.length > 0) {
     return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
   }
@@ -66,7 +66,7 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   sammenligningsGrunnlagInntekter: Inntektsgrunnlag,
   skjeringstidspunktDato: string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement => (
     <div className={beregningStyles.panelLeft}>
       { relevanteStatuser.isArbeidstaker
       && (

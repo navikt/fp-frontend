@@ -1,250 +1,91 @@
-import React from 'react';
-
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import NaturalytelsePanel, { createNaturalytelseTableData } from './NaturalytelsePanel';
+import { lagNaturalytelseTabelldata } from './NaturalytelsePanel';
 
-const bgPerioder = [
-  {
-    periodeAarsaker: [{
-      kode: periodeAarsak.UDEFINERT,
-      kodeverk: 'test',
-    }],
-    beregningsgrunnlagPeriodeFom: '2018-06-01',
-    beregningsgrunnlagPrStatusOgAndel: [
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '123',
-          arbeidsforholdId: '123',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '456',
-          arbeidsforholdId: '456',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '789',
-          arbeidsforholdId: '789',
-        },
-      },
-    ],
-  },
-  {
-    periodeAarsaker: [{
-      kode: periodeAarsak.NATURALYTELSE_BORTFALT,
-      kodeverk: 'test',
-    }],
-    beregningsgrunnlagPeriodeFom: '2018-07-01',
-    beregningsgrunnlagPrStatusOgAndel: [
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '123',
-          arbeidsforholdId: '123',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        bortfaltNaturalytelse: 10000,
-        arbeidsforhold: {
-          arbeidsgiverIdent: '456',
-          arbeidsforholdId: '456',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        bortfaltNaturalytelse: 70000,
-        arbeidsforhold: {
-          arbeidsgiverIdent: '789',
-          arbeidsforholdId: '789',
-        },
-      },
-    ],
-  },
-  {
-    periodeAarsaker: [{
-      kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET,
-      kodeverk: 'test',
-    }],
-    beregningsgrunnlagPeriodeFom: '2018-08-01',
-    beregningsgrunnlagPrStatusOgAndel: [
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '123',
-          arbeidsforholdId: '123',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        bortfaltNaturalytelse: 70000,
-        arbeidsforhold: {
-          arbeidsgiverIdent: '456',
-          arbeidsforholdId: '456',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        bortfaltNaturalytelse: 10000,
-        arbeidsforhold: {
-          arbeidsgiverIdent: '789',
-          arbeidsforholdId: '789',
-        },
-      },
-    ],
-  },
-  {
-    periodeAarsaker: [{
-      kode: periodeAarsak.NATURALYTELSE_BORTFALT,
-      kodeverk: 'test',
-    }],
-    beregningsgrunnlagPeriodeFom: '2018-09-01',
-    beregningsgrunnlagPeriodeTom: '2018-12-01',
-    beregningsgrunnlagPrStatusOgAndel: [
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        bortfaltNaturalytelse: 50000,
-        arbeidsforhold: {
-          arbeidsgiverIdent: '123',
-          arbeidsforholdId: '123',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '456',
-          arbeidsforholdId: '456',
-        },
-      },
-      {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-          kodeverk: 'test',
-        },
-        arbeidsforhold: {
-          arbeidsgiverIdent: '789',
-          arbeidsforholdId: '789',
-        },
-      },
-    ],
-  },
-];
+const lagBGPeriode = (fom, tom, andeler) => ({
+  beregningsgrunnlagPeriodeFom: fom,
+  beregningsgrunnlagPeriodeTom: tom,
+  beregningsgrunnlagPrStatusOgAndel: andeler,
+});
 
-const arbeidsgiverOpplysningerPerId = {
-  123: {
-    erPrivatPerson: false,
-    identifikator: '123',
-    referanse: '123',
-    navn: 'arbeidsgiver1',
+const lagAndel = (orgnr, natYtelse) => ({
+  aktivitetStatus: {
+    kode: aktivitetStatus.ARBEIDSTAKER,
+    kodeverk: 'AKTIVITET_STATUS',
   },
-  456: {
-    erPrivatPerson: false,
-    identifikator: '456',
-    referanse: '456',
-    navn: 'arbeidsgiver2',
+  arbeidsforhold: {
+    arbeidsgiverIdent: orgnr,
+    naturalytelseBortfaltPrÅr: natYtelse,
   },
-  789: {
+});
+
+const agOpplysninger = {
+  999: {
+    identifikator: '999',
     erPrivatPerson: false,
-    identifikator: '789',
-    referanse: '789',
-    navn: 'arbeidsgiver3',
+    navn: 'Bedrift 1',
+  },
+  998: {
+    identifikator: '998',
+    erPrivatPerson: false,
+    navn: 'Bedrift 2',
   },
 };
 
 describe('<NaturalytelsePanel>', () => {
-  it('Skal teste for riktig antall rader', () => {
-    const wrapper = shallowWithIntl(<NaturalytelsePanel
-      allePerioder={bgPerioder}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
-    const rows = wrapper.find('Row');
-    expect(rows.length).toBe(7);
+  it('Skal teste at naturalytelsemap lages korrekt ved et arbeidsforhold', () => {
+    const perioder = [lagBGPeriode('2020-01-01', '2020-01-30', [lagAndel('999', 500)])];
+    const { rader } = lagNaturalytelseTabelldata(perioder, agOpplysninger);
+    expect(rader).toHaveLength(1);
+    expect(rader[0].visningsnavn).toBe('Bedrift 1 (999)');
+    expect(rader[0].naturalytelseEndringer).toHaveLength(1);
+    expect(rader[0].naturalytelseEndringer[0].fom).toBe('2020-01-01');
+    expect(rader[0].naturalytelseEndringer[0].tom).toBe('2020-01-30');
+    expect(rader[0].naturalytelseEndringer[0].beløpPrÅr).toBe(500);
   });
 
-  it('Skal teste at innholdet i radene er korrekt fordelt', () => {
-    const wrapper = shallowWithIntl(<NaturalytelsePanel
-      allePerioder={bgPerioder}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
-    const rows = wrapper.find('Row');
-    // Header rad
-    const formaterteTekster = rows.at(0).find('FormattedMessage');
-    expect(formaterteTekster.at(0).props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Maaned');
-    expect(formaterteTekster.at(1).props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Aar');
-
-    // Første firma
-    expect(rows.at(1).find('Element').childAt(0).text()).toBe('arbeidsgiver1');
-    const normalTekster = rows.at(2).find('Normaltekst');
-    expect(normalTekster.at(0).childAt(0).text()).toBe('01.09.2018 - 01.12.2018');
-    expect(normalTekster.at(1).childAt(0).text()).toBe('4 167');
-    expect(rows.at(2).find('Element').childAt(0).text()).toBe('50 000');
-
-    // Andre firma
-    expect(rows.at(3).find('Element').childAt(0).text()).toBe('arbeidsgiver2');
-    const normalTekster2 = rows.at(4).find('Normaltekst');
-    expect(normalTekster2.at(0).childAt(0).text()).toBe('01.07.2018');
-    expect(normalTekster2.at(1).childAt(0).text()).toBe('833');
-    expect(rows.at(4).find('Element').childAt(0).text()).toBe('10 000');
-
-    // Tredje firma
-    expect(rows.at(5).find('Element').childAt(0).text()).toBe('arbeidsgiver3');
-    const normalTekster3 = rows.at(6).find('Normaltekst');
-    expect(normalTekster3.at(0).childAt(0).text()).toBe('01.07.2018');
-    expect(normalTekster3.at(1).childAt(0).text()).toBe('5 833');
-    expect(rows.at(6).find('Element').childAt(0).text()).toBe('70 000');
+  it('Skal teste at naturalytelsemap lages korrekt ved et arbeidsforhold med og et uten bortfalt ytelse', () => {
+    const perioder = [lagBGPeriode('2020-01-01', '2020-01-30', [lagAndel('999', 500), lagAndel('998', null)])];
+    const { rader } = lagNaturalytelseTabelldata(perioder, agOpplysninger);
+    expect(rader).toHaveLength(1);
+    expect(rader[0].visningsnavn).toBe('Bedrift 1 (999)');
+    expect(rader[0].naturalytelseEndringer).toHaveLength(1);
+    expect(rader[0].naturalytelseEndringer[0].fom).toBe('2020-01-01');
+    expect(rader[0].naturalytelseEndringer[0].tom).toBe('2020-01-30');
+    expect(rader[0].naturalytelseEndringer[0].beløpPrÅr).toBe(500);
   });
 
-  it('Skal teste at selector lager forventet objekt ut av en liste med '
-    + 'beregningsgrunnlagperioder som inneholder naturalytelser', () => {
-    const expectedReturnObject = {
-      arbeidsforholdPeriodeMap: {
-        arbeidsgiver1123: ['arbeidsgiver1', { periodeTekst: '01.09.2018 - 01.12.2018', aar: 50000, maaned: 50000 / 12 }],
-        arbeidsgiver2456: ['arbeidsgiver2', { periodeTekst: '01.07.2018', aar: 10000, maaned: 10000 / 12 }],
-        arbeidsgiver3789: ['arbeidsgiver3', { periodeTekst: '01.07.2018', aar: 70000, maaned: 70000 / 12 }],
+  it('Skal teste at naturalytelsemap lages korrekt ved to arbeidsforhold med bortfalt ytelse', () => {
+    const perioder = [lagBGPeriode('2020-01-01', '2020-01-30', [lagAndel('999', 500), lagAndel('998', 300)])];
+    const { rader } = lagNaturalytelseTabelldata(perioder, agOpplysninger);
+    expect(rader).toHaveLength(2);
 
-      },
-    };
-    const selectorResult = createNaturalytelseTableData(bgPerioder, arbeidsgiverOpplysningerPerId);
-    expect(selectorResult).toEqual(expectedReturnObject);
+    const førsteAndel = rader.find((rad) => rad.visningsnavn === 'Bedrift 1 (999)');
+    expect(førsteAndel.naturalytelseEndringer).toHaveLength(1);
+    expect(førsteAndel.naturalytelseEndringer[0].fom).toBe('2020-01-01');
+    expect(førsteAndel.naturalytelseEndringer[0].tom).toBe('2020-01-30');
+    expect(førsteAndel.naturalytelseEndringer[0].beløpPrÅr).toBe(500);
+
+    const andreAndel = rader.find((rad) => rad.visningsnavn === 'Bedrift 2 (998)');
+    expect(andreAndel.naturalytelseEndringer).toHaveLength(1);
+    expect(andreAndel.naturalytelseEndringer[0].fom).toBe('2020-01-01');
+    expect(andreAndel.naturalytelseEndringer[0].tom).toBe('2020-01-30');
+    expect(andreAndel.naturalytelseEndringer[0].beløpPrÅr).toBe(300);
+  });
+
+  it('Skal teste at naturalytelsemap lages korrekt ved to arbeidsforhold med bortfalt ytelse i to perioder', () => {
+    const perioder = [lagBGPeriode('2020-01-01', '2020-01-31', [lagAndel('999', 500), lagAndel('998', 300)]),
+      lagBGPeriode('2020-02-01', '2020-02-27', [lagAndel('999', 400), lagAndel('998', 200)])];
+    const { rader } = lagNaturalytelseTabelldata(perioder, agOpplysninger);
+    expect(rader).toHaveLength(2);
+
+    const førsteAndel = rader.find((rad) => rad.visningsnavn === 'Bedrift 1 (999)');
+    expect(førsteAndel.naturalytelseEndringer).toHaveLength(2);
+    expect(førsteAndel.naturalytelseEndringer.some((e) => e.fom === '2020-01-01' && e.tom === '2020-01-31' && e.beløpPrÅr === 500)).toBeTruthy();
+    expect(førsteAndel.naturalytelseEndringer.some((e) => e.fom === '2020-02-01' && e.tom === null && e.beløpPrÅr === 400)).toBeTruthy();
+
+    const andreAndel = rader.find((rad) => rad.visningsnavn === 'Bedrift 2 (998)');
+    expect(andreAndel.naturalytelseEndringer).toHaveLength(2);
+    expect(andreAndel.naturalytelseEndringer.some((e) => e.fom === '2020-01-01' && e.tom === '2020-01-31' && e.beløpPrÅr === 300)).toBeTruthy();
+    expect(andreAndel.naturalytelseEndringer.some((e) => e.fom === '2020-02-01' && e.tom === null && e.beløpPrÅr === 200)).toBeTruthy();
   });
 });
