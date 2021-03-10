@@ -53,6 +53,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       allePerioder={perioder}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(7);
@@ -68,6 +69,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       alleAndelerIFørstePeriode={andeler}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
     const rows = wrapper.find('Row');
     const rowsFlex = wrapper.find('FlexRow');
@@ -101,6 +103,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       alleAndelerIFørstePeriode={andeler}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
 
     const rows = wrapper.find('Row');
