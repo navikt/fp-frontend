@@ -261,60 +261,58 @@ describe('<AksjonspunktBehandlerTB>', () => {
   it('Skal teste at selector lager forventet objekt ut av en liste med beregningsgrunnlagperioder '
     + 'som inneholder kortvarige arbeidsforhold når vi har aksjonspunkt', () => {
     const expectedResultObjectWhenWeHaveAksjonspunkt = {
-      arbeidsforholdPeriodeMap: {
-        arbeidsgiver123: [
-          {
-            erTidsbegrenset: true,
-            isEditable: false,
-            tabellInnhold: 'arbeidsgiver (123)...5678',
-            inputfieldKey: '',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
-            inputfieldKey: 'inntektField_123_1_2018-06-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
-            inputfieldKey: 'inntektField_123_1_2018-07-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
-            inputfieldKey: 'inntektField_123_1_2018-08-01',
-          },
-        ],
-        arbeidsgiver456: [
-          {
-            erTidsbegrenset: true,
-            isEditable: false,
-            tabellInnhold: 'arbeidsgiver (456)...7890',
-            inputfieldKey: '',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
-            inputfieldKey: 'inntektField_456_2_2018-06-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
-            inputfieldKey: 'inntektField_456_2_2018-07-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
-            inputfieldKey: 'inntektField_456_2_2018-08-01',
-          },
-        ],
-      },
+      arbeidsgiver123: [
+        {
+          erTidsbegrenset: true,
+          isEditable: false,
+          tabellInnhold: 'arbeidsgiver (123)...5678',
+          inputfieldKey: '',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
+          inputfieldKey: 'inntektField_123_1_2018-06-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
+          inputfieldKey: 'inntektField_123_1_2018-07-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
+          inputfieldKey: 'inntektField_123_1_2018-08-01',
+        },
+      ],
+      arbeidsgiver456: [
+        {
+          erTidsbegrenset: true,
+          isEditable: false,
+          tabellInnhold: 'arbeidsgiver (456)...7890',
+          inputfieldKey: '',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
+          inputfieldKey: 'inntektField_456_2_2018-06-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
+          inputfieldKey: 'inntektField_456_2_2018-07-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
+          inputfieldKey: 'inntektField_456_2_2018-08-01',
+        },
+      ],
     };
     const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, {}, arbeidsgiverOpplysningerPerId);
     expect(selectorData).toEqual(expectedResultObjectWhenWeHaveAksjonspunkt);

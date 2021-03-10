@@ -172,7 +172,7 @@ describe('<Beregningsgrunnlag>', () => {
     expect(atPanel).toHaveLength(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
-    expect(atPanel.props().alleAndeler[0]).toBe(arbeidstakerAndel);
+    expect(atPanel.props().alleAndelerIFørstePeriode[0]).toBe(arbeidstakerAndel);
   });
   it('Skal teste at korrekte komponenter vises for frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
