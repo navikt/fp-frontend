@@ -25,7 +25,7 @@ const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) =>
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     faktaPanelKode={faktaPanelCodes.YTELSER}
     faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
-    skalPanelVisesIMeny={(initData) => initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
+    skalPanelVisesIMeny={(initData) => !!initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
       && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0}
     renderPanel={(data) => <YtelserFaktaIndex {...data} />}
   />

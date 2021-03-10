@@ -11,13 +11,13 @@ import useStandardFaktaPanelProps from '../../utils/fakta/useStandardFaktaPanelP
 import useFaktaMenyRegistrerer from '../../utils/fakta/useFaktaMenyRegistrerer';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 
-type OwnProps<INIT_DATA, PANEL_DATA> = {
+export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: AbstractRequestApi;
   initEndepunkter: string[];
   panelEndepunkter?: string[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
-  skalPanelVisesIMeny: (data: INIT_DATA) => boolean;
+  skalPanelVisesIMeny: (data: Partial<INIT_DATA>) => boolean;
   renderPanel: (data: INIT_DATA & PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
   faktaPanelKode: string;
   faktaPanelMenyTekst: string;

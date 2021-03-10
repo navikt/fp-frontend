@@ -12,11 +12,6 @@ import { StandardPropsStateContext } from '../standardPropsStateContext';
 export const DEFAULT_FAKTA_KODE = 'default';
 export const DEFAULT_PROSESS_STEG_KODE = 'default';
 
-type Data = {
-  aksjonspunkter?: Aksjonspunkt[];
-  vilkar?: Vilkar[];
-}
-
 const getBekreftAksjonspunktFaktaCallback = (
   fagsak: Fagsak,
   behandling: Behandling,
@@ -49,8 +44,13 @@ const getBekreftAksjonspunktFaktaCallback = (
   }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
 };
 
+type InputData = {
+  aksjonspunkter?: Aksjonspunkt[];
+  vilkar?: Vilkar[];
+}
+
 const useStandardFaktaPanelProps = (
-  data?: Data,
+  data?: InputData,
   aksjonspunktKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {

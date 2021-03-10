@@ -35,7 +35,7 @@ const TilleggsopplysningerFaktaInitPanel: FunctionComponent<FaktaPanelInitProps>
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.TILLEGGSOPPLYSNINGER}
     faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'TilleggsopplysningerInfoPanel.Tilleggsopplysninger' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter.some((ap) => ap.definisjon.kode === AKSJONSPUNKT_KODER[0])}
+    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon.kode === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => <TilleggsopplysningerFaktaIndex {...data} />}
   />
 );

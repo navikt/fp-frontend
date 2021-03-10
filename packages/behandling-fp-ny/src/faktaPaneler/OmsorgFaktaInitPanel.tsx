@@ -48,7 +48,7 @@ const OmsorgFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = 
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.OMSORG}
     faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'OmsorgInfoPanel.Omsorg' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.includes(ap.definisjon.kode))}
+    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => AKSJONSPUNKT_KODER.includes(ap.definisjon.kode))}
     renderPanel={(data) => <OmsorgFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );
