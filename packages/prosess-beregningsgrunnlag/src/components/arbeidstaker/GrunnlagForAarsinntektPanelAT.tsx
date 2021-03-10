@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent, ReactElement} from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -19,16 +19,17 @@ import {
 import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
-  BeregningsgrunnlagPeriodeProp, Kodeverk,
+  BeregningsgrunnlagPeriodeProp, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import NaturalytelsePanel from './NaturalytelsePanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
+import {ArbeidstakerInntektValues} from "../../types/ATFLAksjonspunktTsType";
 
 const formName = 'BeregningForm';
 
-export const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel) => {
+export const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
   // Andelen er fastsatt før og må kunne fastsettes igjen
   if (andel.overstyrtPrAar !== null && andel.overstyrtPrAar !== undefined) {
     return true;
@@ -38,11 +39,10 @@ export const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagA
   return andel.erTilkommetAndel === false && andel.lagtTilAvSaksbehandler === false;
 };
 
-const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[]) => {
+const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[]): BeregningsgrunnlagAndel[] => {
   if (!andeler) {
     return [];
   }
-
   return andeler
     .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
@@ -52,6 +52,7 @@ const beregnbruttoFastsattInntekt = (overstyrteInntekter: number[]): number => {
   if (!overstyrteInntekter || overstyrteInntekter.length === 0) return null;
   return overstyrteInntekter.reduce((sum, andel) => sum + andel, 0);
 };
+
 const createArbeidsPeriodeText = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold): string => {
   const periodeArr = [];
 
@@ -93,7 +94,7 @@ const lagVisningForAndel = (andel: BeregningsgrunnlagAndel,
 const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   userIdent: string | undefined,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): React.ReactNode => {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const beregnetAarsinntekt = relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
   const beregnetMaanedsinntekt = beregnetAarsinntekt ? beregnetAarsinntekt / 12 : 0;
   const harFlereArbeidsforhold = relevanteAndeler.length > 1;
@@ -187,14 +188,18 @@ const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (alleAndeler: BeregningsgrunnlagAndel[]) => any;
+  buildInitialValues?: (alleAndeler: BeregningsgrunnlagAndel[]) => ArbeidstakerInntektValues;
+}
+
+type MappedOwnProps = {
+  getKodeverknavn: (kodeverk: Kodeverk) => string;
 }
 
 type OwnProps = {
-    alleAndeler: BeregningsgrunnlagAndel[];
+    alleAndelerIFørstePeriode: BeregningsgrunnlagAndel[];
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
-    getKodeverknavn: (kodeverk: Kodeverk) => string;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 };
 
 /**
@@ -203,13 +208,13 @@ type OwnProps = {
  * Presentasjonskomponent. Viser beregningsgrunnlagstabellen for arbeidstakere.
  * Vises også hvis status er en kombinasjonsstatus som inkluderer arbeidstaker.
  */
-export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
-  alleAndeler,
+export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
+  alleAndelerIFørstePeriode,
   allePerioder,
   getKodeverknavn,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const relevanteAndeler = finnAndelerSomSkalVises(alleAndeler);
+  const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIFørstePeriode);
   if (!relevanteAndeler || relevanteAndeler.length === 0) return null;
   const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
@@ -255,27 +260,14 @@ GrunnlagForAarsinntektPanelATImpl.defaultProps = {
   allePerioder: undefined,
 };
 
-const mapStateToProps = (state, initialProps) => {
+const mapStateToProps = (state: any, initialProps: OwnProps): MappedOwnProps => {
   const getKodeverknavn = getKodeverknavnFn(initialProps.alleKodeverk, kodeverkTyper);
-  const {
-    alleAndeler, behandlingId, behandlingVersjon, readOnlySubmitButton,
-  } = initialProps;
-  const relevanteAndeler = finnAndelerSomSkalVises(alleAndeler);
-  const overstyrteInntekter = relevanteAndeler.map((inntekt, index) => {
-    const overstyrtInntekt = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(
-      state, `inntekt${index}`,
-    );
-    return (overstyrtInntekt === undefined || overstyrtInntekt === '') ? 0 : removeSpacesFromNumber(overstyrtInntekt);
-  });
-  const bruttoFastsattInntekt = beregnbruttoFastsattInntekt(overstyrteInntekter);
   return {
-    bruttoFastsattInntekt,
     getKodeverknavn,
-    readOnlySubmitButton,
   };
 };
 
-GrunnlagForAarsinntektPanelATImpl.buildInitialValues = (alleAndeler) => {
+GrunnlagForAarsinntektPanelATImpl.buildInitialValues = (alleAndeler: BeregningsgrunnlagAndel[]): ArbeidstakerInntektValues => {
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndeler);
   const initialValues = { };
   relevanteAndeler.forEach((inntekt, index) => {

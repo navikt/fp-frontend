@@ -106,22 +106,4 @@ describe('<AksjonspunktBehandlerAT>', () => {
     const transformedValues = AksjonspunktBehandlerAT.transformValues(values, relevanteStatuser, andeler);
     expect(transformedValues).toEqual(expectedInitialValues);
   });
-  it('Skal teste transformValuesATFlhver for seg metode', () => {
-    const andeler = [
-      mockAndel('123', 100, 200000, true),
-    ];
-    const values = {
-      ATFLVurdering: 'Vurdering',
-      begrunnDekningsgradEndring: '',
-      inntekt0: '242 000',
-      dekningsgrad: undefined,
-    };
-    values;
-    const expectedInitialValues = [{
-      andelsnr: undefined,
-      inntekt: 242000,
-    }];
-    const transformedValues = AksjonspunktBehandlerAT.transformValuesForAT(values, andeler);
-    expect(transformedValues).toEqual(expectedInitialValues);
-  });
 });

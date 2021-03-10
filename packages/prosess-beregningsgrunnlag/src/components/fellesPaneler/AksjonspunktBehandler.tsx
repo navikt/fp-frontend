@@ -148,7 +148,6 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
           {tidsBegrensetInntekt && (
           <AksjonspunktBehandlerTB
             readOnly={readOnly}
-            readOnlySubmitButton={readOnlySubmitButton}
             formName={formName}
             allePerioder={allePerioder}
             behandlingId={behandlingId}

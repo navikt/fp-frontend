@@ -72,14 +72,9 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
       && (
         <>
           <GrunnlagForAarsinntektPanelAT
-            alleAndeler={alleAndelerIForstePeriode}
-            aksjonspunkter={gjeldendeAksjonspunkter}
+            alleAndelerIFørstePeriode={alleAndelerIForstePeriode}
             allePerioder={allePerioder}
-            readOnly={readOnly}
-            isKombinasjonsstatus={relevanteStatuser.isKombinasjonsstatus}
             alleKodeverk={alleKodeverk}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         </>

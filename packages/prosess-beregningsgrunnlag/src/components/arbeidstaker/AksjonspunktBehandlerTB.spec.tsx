@@ -203,9 +203,6 @@ const keyForPeriodeOgAndel = (periodeNr, andelNr) => createInputFieldKey(
   beregningsgrunnlagPerioder[periodeNr].beregningsgrunnlagPrStatusOgAndel[andelNr],
   beregningsgrunnlagPerioder[periodeNr],
 );
-const alleKodeverk = {
-  test: 'test',
-};
 
 const arbeidsgiverOpplysningerPerId = {
   123: {
@@ -232,6 +229,8 @@ describe('<AksjonspunktBehandlerTB>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       behandlingVersjon={1}
       behandlingId={1}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
       allePerioder={[]}
       formName="test"
     />);
@@ -317,24 +316,32 @@ describe('<AksjonspunktBehandlerTB>', () => {
         ],
       },
     };
-    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, alleKodeverk, arbeidsgiverOpplysningerPerId);
+    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, {}, arbeidsgiverOpplysningerPerId);
     expect(selectorData).toEqual(expectedResultObjectWhenWeHaveAksjonspunkt);
   });
   it('Skal teste at selector henter ut om aksjonspunktet er lukket eller ikke', () => {
     const korrektApLukket = [{
+      kanLoses: false,
+      erAktivt: true,
       definisjon: {
         kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+        kodeverk: 'test',
       },
       status: {
         kode: aksjonspunktStatus.UTFORT,
+        kodeverk: 'test',
       },
     }];
     const korrektApApent = [{
+      kanLoses: true,
+      erAktivt: true,
       definisjon: {
         kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+        kodeverk: 'test',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: 'test',
       },
     }];
     const selectorDataLukket = getIsAksjonspunktClosed.resultFunc(korrektApLukket);
