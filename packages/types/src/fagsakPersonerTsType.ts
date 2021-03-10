@@ -2,7 +2,7 @@ import Kodeverk from './kodeverkTsType';
 
 export type FagsakPerson = Readonly<{
   navn: string;
-  personnummer: string;
+  fødselsnummer: string;
   kjønn: Kodeverk;
   diskresjonskode?: Kodeverk;
   fødselsdato: string;

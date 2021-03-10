@@ -11,19 +11,9 @@ export type MedlemskapPeriode = Readonly<{
 }>
 
 export type PersonopplysningMedlem = Readonly<{
-  fnr: string;
   navn: string;
-  aktoerId: string;
-  diskresjonskode: Kodeverk
-  navBrukerKjonn: Kodeverk;
   personstatus: Kodeverk;
-  avklartPersonstatus: {
-    orginalPersonstatus: Kodeverk;
-    overstyrtPersonstatus: Kodeverk;
-  };
   region: Kodeverk;
-  dodsdato?: string;
-  fodselsdato: string;
   adresser: Personadresse[];
 }>
 

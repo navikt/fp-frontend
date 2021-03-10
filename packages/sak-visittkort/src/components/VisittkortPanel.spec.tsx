@@ -41,14 +41,14 @@ describe('<VisittkortPanel>', () => {
     navn: 'Olga Utvikler',
     kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
     fødselsdato: '1979-01-01',
-    personnummer: '1234567',
+    fødselsnummer: '1234567',
     aktørId: 'test1',
   };
 
   const fagsakPersonAnnenPart = {
     navn: 'Espen Utvikler',
     fødselsdato: '1979-01-01',
-    personnummer: '1234567',
+    fødselsnummer: '1234567',
     kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
     aktørId: 'test',
   };
@@ -56,7 +56,7 @@ describe('<VisittkortPanel>', () => {
   const fagsakPersonAnnenPartUtenAktørId = {
     navn: 'Espen Utvikler',
     fødselsdato: '1979-01-01',
-    personnummer: '1234567',
+    fødselsnummer: '1234567',
     kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
   };
 
@@ -87,7 +87,7 @@ describe('<VisittkortPanel>', () => {
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).toHaveLength(1);
     expect(visittkort.prop('name')).toEqual(fagsakPerson.navn);
-    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
+    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.fødselsnummer);
     expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
@@ -116,7 +116,7 @@ describe('<VisittkortPanel>', () => {
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).toHaveLength(1);
     expect(visittkort.prop('name')).toEqual(fagsakPerson.navn);
-    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
+    expect(visittkort.prop('fodselsnummer')).toEqual(fagsakPerson.fødselsnummer);
     expect(visittkort.prop('gender')).toEqual(Gender.female);
   });
 
@@ -146,11 +146,11 @@ describe('<VisittkortPanel>', () => {
     const visittkort = wrapper.find(PersonCard);
     expect(visittkort).toHaveLength(2);
     expect(visittkort.first().prop('name')).toEqual(fagsakPerson.navn);
-    expect(visittkort.first().prop('fodselsnummer')).toEqual(fagsakPerson.personnummer);
+    expect(visittkort.first().prop('fodselsnummer')).toEqual(fagsakPerson.fødselsnummer);
     expect(visittkort.first().prop('gender')).toEqual(Gender.female);
 
     expect(visittkort.last().prop('name')).toEqual(fagsakPersonAnnenPart.navn);
-    expect(visittkort.last().prop('fodselsnummer')).toEqual(fagsakPersonAnnenPart.personnummer);
+    expect(visittkort.last().prop('fodselsnummer')).toEqual(fagsakPersonAnnenPart.fødselsnummer);
     expect(visittkort.last().prop('gender')).toEqual(Gender.male);
   });
 

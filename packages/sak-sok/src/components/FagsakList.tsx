@@ -11,7 +11,6 @@ const headerTextCodes = [
   'FagsakList.Saksnummer',
   'FagsakList.Sakstype',
   'FagsakList.Status',
-  'FagsakList.BarnFodt',
 ];
 
 interface OwnProps {
