@@ -370,7 +370,6 @@ const transformValues = (values: FormValues): any => values.aksjonspunktKoder.ma
   fritekstBrev: values.brødtekst,
   skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,
   overskrift: values.overskrift,
-  isVedtakSubmission: true,
 }));
 
 export const VEDTAK_REVURDERING_FORM_NAME = 'VEDTAK_REVURDERING_FORM';

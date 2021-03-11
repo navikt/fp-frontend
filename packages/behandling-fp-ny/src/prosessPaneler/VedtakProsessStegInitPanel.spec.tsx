@@ -2,70 +2,79 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import VarselOmRevurderingProsessIndex from '@fpsak-frontend/prosess-varsel-om-revurdering';
+import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
 import {
   Aksjonspunkt, Fagsak, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
-import { requestFpApi, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
-import VarselProsessStegInitPanel from './VarselProsessStegInitPanel';
+import VedtakProsessStegInitPanel from './VedtakProsessStegInitPanel';
 
 type INIT_DATA = {
   aksjonspunkter: Aksjonspunkt[];
 }
+
+const behandling = {
+  uuid: 'test-uuid',
+  versjon: 1,
+};
 
 jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
   const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
   return {
     ...felles,
     useStandardProsessPanelProps: () => ({
-      behandling: {
-        uuid: 'test-uuid',
-        versjon: 1,
-      },
+      behandling,
     }),
   };
 });
 
-describe('<VarselProsessStegInitPanel>', () => {
+describe('<VedtakProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
-    const wrapper = shallow(<VarselProsessStegInitPanel
+    const wrapper = shallow(<VedtakProsessStegInitPanel
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
-      toggleSkalOppdatereFagsakContext={() => {}}
+      toggleOppdatereFagsakContext={() => {}}
       fagsak={{} as Fagsak}
       opneSokeside={() => {}}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
-        kodeverk: '',
-      },
-    }] as Aksjonspunkt[];
-
-    expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
+    expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.LOADING)).toBe(false);
 
-    expect(panel.props().renderPanel({}).type).toEqual(VarselOmRevurderingProsessIndex);
+    const innerElement = panel.renderProp('renderPanel')({ behandling });
+
+    expect(innerElement.find(VedtakProsessIndex)).toHaveLength(1);
   });
 
-  it('skal åpne søkeside og ikke oppdatere fagsak-kontekst etter lagring', () => {
-    const toggleSkalOppdatereFagsakContext = sinon.spy();
-    const opneSokeside = sinon.spy();
-
-    const wrapper = shallow(<VarselProsessStegInitPanel
+  it('skal ha status ikke vurdert når det ikke finnes vilkar', () => {
+    const wrapper = shallow(<VedtakProsessStegInitPanel
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
-      toggleSkalOppdatereFagsakContext={toggleSkalOppdatereFagsakContext}
+      toggleOppdatereFagsakContext={() => {}}
       fagsak={{} as Fagsak}
-      opneSokeside={opneSokeside}
+      opneSokeside={() => {}}
+    />);
+
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+
+    expect(panel.props().hentOverstyrtStatus({ behandling } as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
+  });
+
+  it('skal ikke oppdatere fagsak-kontekst etter lagring', () => {
+    const toggleSkalOppdatereFagsakContext = sinon.spy();
+
+    const wrapper = shallow(<VedtakProsessStegInitPanel
+      valgtProsessSteg="default"
+      registrerProsessPanel={() => {}}
+      toggleOppdatereFagsakContext={toggleSkalOppdatereFagsakContext}
+      fagsak={{} as Fagsak}
+      opneSokeside={() => {}}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -75,55 +84,11 @@ describe('<VarselProsessStegInitPanel>', () => {
       sendVarsel: true,
     }];
 
-    const callback = panel.props().lagringSideEffekter(aksjonspunktModels);
+    panel.props().lagringSideEffekter(aksjonspunktModels);
 
     expect(toggleSkalOppdatereFagsakContext.getCalls()).toHaveLength(1);
     const { args } = toggleSkalOppdatereFagsakContext.getCalls()[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual(false);
-
-    callback();
-
-    expect(opneSokeside.getCalls()).toHaveLength(1);
-    const args1 = opneSokeside.getCalls()[0].args;
-    expect(args1).toHaveLength(0);
-  });
-
-  it('skal vise forhåndsvisning av melding', () => {
-    requestFpApi.mock(FpBehandlingApiKeys.PREVIEW_MESSAGE, {});
-
-    const wrapper = shallow(<VarselProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      toggleSkalOppdatereFagsakContext={() => {}}
-      fagsak={{
-        sakstype: {
-          kode: fagsakYtelseType.FORELDREPENGER,
-          kodeverk: '',
-        },
-      } as Fagsak}
-      opneSokeside={() => {}}
-    />);
-
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
-
-    panel.props().renderPanel({}).props.previewCallback({
-      mottaker: 'testMottaker',
-      dokumentMal: 'testDokumentMal',
-      fritekst: 'testFritekst',
-    });
-
-    const response = requestFpApi.getRequestMockData(FpBehandlingApiKeys.PREVIEW_MESSAGE);
-    expect(response).toHaveLength(1);
-    expect(response[0].params).toEqual({
-      behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
-      mottaker: 'testMottaker',
-      dokumentMal: 'testDokumentMal',
-      fritekst: 'testFritekst',
-    });
   });
 });

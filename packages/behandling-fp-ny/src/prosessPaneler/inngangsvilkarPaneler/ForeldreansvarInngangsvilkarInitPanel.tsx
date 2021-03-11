@@ -62,7 +62,7 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
       <>
         <ForeldreansvarVilkarProsessIndex
           isEngangsstonad={false}
-          isForeldreansvar2Ledd={data.vilkar.map((v) => v.vilkarType.kode).includes(vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
+          isForeldreansvar2Ledd={data.vilkar.some((v) => v.vilkarType.kode === vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
           {...data}
         />
         <VerticalSpacer thirtyTwoPx />

@@ -12,7 +12,7 @@ import useStandardProsessPanelProps from '../../utils/prosess/useStandardProsess
 import skalViseProsessPanel from '../../utils/prosess/skalViseProsessPanel';
 import useInngangsvilkarRegistrerer from '../../utils/prosess/useInngangsvilkarRegistrerer';
 
-type OwnProps<INIT_DATA, PANEL_DATA> = {
+export type OwnProps<INIT_DATA, PANEL_DATA> = {
   behandlingVersjon: number;
   requestApi: AbstractRequestApi;
   initEndepunkter: string[];

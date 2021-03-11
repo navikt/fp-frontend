@@ -10,7 +10,9 @@ export { default as FaktaDefaultInitPanel, OwnProps as FaktaDefaultInitPanelProp
 export { default as ProsessDefaultInitPanel, OwnProps as ProsessDefaultInitPanelProps } from './src/components/prosess/ProsessDefaultInitPanel';
 export { default as InngangsvilkarDefaultProsessStegPanel } from './src/components/prosess/InngangsvilkarDefaultProsessStegPanel';
 export { default as BehandlingHenlagtPanel } from './src/components/prosess/BehandlingHenlagtPanel';
-export { default as InngangsvilkarDefaultInitPanel } from './src/components/prosess/InngangsvilkarDefaultInitPanel';
+export {
+  default as InngangsvilkarDefaultInitPanel, OwnProps as InngangsvilkarDefaultInitPanelProps,
+} from './src/components/prosess/InngangsvilkarDefaultInitPanel';
 export { default as StandardBehandlingProps, BehandlingEventHandler } from './src/types/standardBehandlingProps';
 export { default as ProsessPanelMenyData } from './src/types/prosessPanelMenyData';
 export { default as FaktaPanelMenyData } from './src/types/faktaPanelMenyData';

@@ -82,42 +82,39 @@ const getForhandsvisCallback = (
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getLagringSideeffekter = (
-  toggleIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
-  toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void,
-) => (aksjonspunktModels: any) => {
-  const visIverksetterVedtakModal = aksjonspunktModels[0].isVedtakSubmission
-    && [aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL, aksjonspunktCodes.FATTER_VEDTAK].includes(aksjonspunktModels[0].kode);
-  const visFatterVedtakModal = aksjonspunktModels[0].isVedtakSubmission && aksjonspunktModels[0].kode === aksjonspunktCodes.FORESLA_VEDTAK;
-  const isVedtakAp = aksjonspunktModels.some((a) => a.isVedtakSubmission);
-
-  if (visIverksetterVedtakModal || visFatterVedtakModal || isVedtakAp) {
-    toggleOppdatereFagsakContext(false);
-  }
-
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
-  return () => {
-    if (visFatterVedtakModal) {
-      toggleFatterVedtakModal(true);
-    } else if (visIverksetterVedtakModal) {
-      toggleIverksetterVedtakModal(true);
-    } else {
-      oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
-    }
-  };
-};
-
-const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.FORESLA_VEDTAK,
+const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FATTER_VEDTAK,
-  aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
   aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL,
   aksjonspunktCodes.VURDERE_ANNEN_YTELSE,
   aksjonspunktCodes.VURDERE_DOKUMENT,
   aksjonspunktCodes.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   aksjonspunktCodes.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+];
+const FATTER_VEDTAK_AKSJONSPUNKT_KODER = [
+  aksjonspunktCodes.FORESLA_VEDTAK,
+  aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
+];
+
+const getLagringSideeffekter = (
+  toggleIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
+  toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
+  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+) => (aksjonspunktModels: { kode: string }[]) => {
+  toggleOppdatereFagsakContext(false);
+
+  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
+  return () => {
+    if (FATTER_VEDTAK_AKSJONSPUNKT_KODER.includes(aksjonspunktModels[0].kode)) {
+      toggleFatterVedtakModal(true);
+    } else {
+      toggleIverksetterVedtakModal(true);
+    }
+  };
+};
+
+const AKSJONSPUNKT_KODER = [
+  ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
+  ...FATTER_VEDTAK_AKSJONSPUNKT_KODER,
 ];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
@@ -147,14 +144,12 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
 const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   toggleOppdatereFagsakContext,
-  oppdaterProsessStegOgFaktaPanelIUrl,
   fagsak,
   opneSokeside,
   ...props
@@ -162,7 +157,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
   const lagringSideEffekter = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleFatterVedtakModal,
-    toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
+    toggleOppdatereFagsakContext);
 
   const standardPanelProps = useStandardProsessPanelProps();
 
