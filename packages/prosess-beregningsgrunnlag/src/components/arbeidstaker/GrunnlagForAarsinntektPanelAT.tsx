@@ -26,8 +26,6 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import { ArbeidstakerInntektValues } from '../../types/ATFLAksjonspunktTsType';
 
-const formName = 'BeregningForm';
-
 export const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
   // Andelen er fastsatt før og må kunne fastsettes igjen
   if (andel.overstyrtPrAar !== null && andel.overstyrtPrAar !== undefined) {
@@ -45,11 +43,6 @@ const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[]): Beregnings
   return andeler
     .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
-};
-
-const beregnbruttoFastsattInntekt = (overstyrteInntekter: number[]): number => {
-  if (!overstyrteInntekter || overstyrteInntekter.length === 0) return null;
-  return overstyrteInntekter.reduce((sum, andel) => sum + andel, 0);
 };
 
 const createArbeidsPeriodeText = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold): string => {
