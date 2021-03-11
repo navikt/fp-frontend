@@ -134,6 +134,7 @@ const opprettAndelElement = (periode: BeregningsgrunnlagPeriodeProp, andelType: 
       andelElement.pgiSnitt = førsteAndel.pgiSnitt || førsteAndel.pgiSnitt === 0 ? førsteAndel.pgiSnitt : undefined;
       break;
     default:
+      skalFastsetteGrunnlag = førsteAndel.skalFastsetteGrunnlag;
       if (skalFastsetteGrunnlag && vilkarStatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
         if (førsteAndel.overstyrtPrAar || førsteAndel.overstyrtPrAar === 0) {
           inntekt = førsteAndel.overstyrtPrAar;
