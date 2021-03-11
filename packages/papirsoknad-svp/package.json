@@ -24,7 +24,7 @@
     "nav-frontend-knapper": "2.0.32",
     "nav-frontend-knapper-style": "1.0.17",
     "nav-frontend-skjema": "3.0.53",
-    "nav-frontend-skjema-style": "2.0.33",
+    "nav-frontend-skjema-style": "2.1.0",
     "react": "^17.0.1",
     "react-intl": "^5.13.2",
     "react-redux": "^7.2.2",
