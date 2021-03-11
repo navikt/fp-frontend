@@ -143,7 +143,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                 toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
               />
               <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />

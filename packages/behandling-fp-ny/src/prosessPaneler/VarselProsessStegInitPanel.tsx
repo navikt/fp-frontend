@@ -27,7 +27,11 @@ const getForhandsvisCallback = (
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
   behandling: Behandling,
-) => (data: any) => {
+) => (data: {
+  mottaker: string;
+  dokumentMal: string;
+  fritekst: string;
+}) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
@@ -39,23 +43,13 @@ const getForhandsvisCallback = (
 
 const getLagringSideeffekter = (
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void,
   opneSokeside: () => void,
-) => (aksjonspunktModels: any) => {
-  const erRevurderingsaksjonspunkt = aksjonspunktModels.some((apModel) => ((apModel.kode === aksjonspunktCodes.VARSEL_REVURDERING_MANUELL
-    || apModel.kode === aksjonspunktCodes.VARSEL_REVURDERING_ETTERKONTROLL) && apModel.sendVarsel));
+) => () => {
+  toggleOppdatereFagsakContext(false);
 
-  if (erRevurderingsaksjonspunkt) {
-    toggleOppdatereFagsakContext(false);
-  }
-
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
+  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt
   return () => {
-    if (erRevurderingsaksjonspunkt) {
-      opneSokeside();
-    } else {
-      oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
-    }
+    opneSokeside();
   };
 };
 
@@ -84,7 +78,6 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   fagsak: Fagsak;
   opneSokeside: () => void;
@@ -93,11 +86,10 @@ interface OwnProps {
 const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   toggleSkalOppdatereFagsakContext,
   fagsak,
-  oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   ...props
 }) => {
-  const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl, opneSokeside);
+  const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, opneSokeside);
 
   const { startRequest: forhandsvisMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_MESSAGE);
 

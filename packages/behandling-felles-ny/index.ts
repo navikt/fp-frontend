@@ -7,7 +7,7 @@ export { default as ProsessPanelWrapper } from './src/components/prosess/Prosess
 export { default as FaktaPanelWrapper } from './src/components/fakta/FaktaPanelWrapper';
 export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStateCleaner';
 export { default as FaktaDefaultInitPanel, OwnProps as FaktaDefaultInitPanelProps } from './src/components/fakta/FaktaDefaultInitPanel';
-export { default as ProsessDefaultInitPanel } from './src/components/prosess/ProsessDefaultInitPanel';
+export { default as ProsessDefaultInitPanel, OwnProps as ProsessDefaultInitPanelProps } from './src/components/prosess/ProsessDefaultInitPanel';
 export { default as InngangsvilkarDefaultProsessStegPanel } from './src/components/prosess/InngangsvilkarDefaultProsessStegPanel';
 export { default as BehandlingHenlagtPanel } from './src/components/prosess/BehandlingHenlagtPanel';
 export { default as InngangsvilkarDefaultInitPanel } from './src/components/prosess/InngangsvilkarDefaultInitPanel';

@@ -30,15 +30,15 @@ const getForhandsvisFptilbakeCallback = (
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (
-  mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string,
+  mottaker: string, brevmalkode: string, fritekst: string,
 ) => {
   const data = {
     behandlingUuid: behandling.uuid,
     fagsakYtelseType: fagsak.sakstype,
+    saksnummer: fagsak.saksnummerString,
     varseltekst: fritekst,
     mottaker,
     brevmalkode,
-    saksnummer,
   };
   return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
 };

@@ -11,14 +11,14 @@ import useStandardProsessPanelProps from '../../utils/prosess/useStandardProsess
 import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistrerer';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 
-type OwnProps<INIT_DATA, PANEL_DATA> = {
+export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: AbstractRequestApi;
   initEndepunkter: string[];
   panelEndepunkter?: string[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
-  skalPanelVisesIMeny: (data: INIT_DATA & StandardProsessPanelProps, state: RestApiState) => boolean;
-  hentOverstyrtStatus?: (data: INIT_DATA & StandardProsessPanelProps) => string;
+  skalPanelVisesIMeny: (data: Partial<INIT_DATA> & StandardProsessPanelProps, state: RestApiState) => boolean;
+  hentOverstyrtStatus?: (data: Partial<INIT_DATA> & StandardProsessPanelProps) => string;
   renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps) => ReactElement;
   prosessPanelKode: string;
   prosessPanelMenyTekst: string;

@@ -74,7 +74,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   apCodes: string[];
   isApOpen: boolean;
-  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string) => Promise<any>;
+  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string) => Promise<any>;
 }
 
 interface MappedOwnProps {
@@ -82,7 +82,6 @@ interface MappedOwnProps {
   isForeldrepenger: boolean;
   behandlingFormPrefix: string;
   varseltekst?: string;
-  saksnummer: string;
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;
 }
@@ -152,8 +151,8 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
   }
 
   previewMessage(e: React.MouseEvent): void {
-    const { varseltekst, saksnummer, previewCallback } = this.props;
-    previewCallback('', dokumentMalType.TBKVAR, varseltekst || ' ', saksnummer);
+    const { varseltekst, previewCallback } = this.props;
+    previewCallback('', dokumentMalType.TBKVAR, varseltekst || ' ');
     e.preventDefault();
   }
 
@@ -370,7 +369,6 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     varseltekst: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'varseltekst'),
     initialValues: buildInitialValues(state, ownProps),
     behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
-    saksnummer: fagsak.saksnummer,
     isForeldrepenger: fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER,
     hasOpenTilbakekrevingsbehandling,
     onSubmit: lagSubmitFn(ownProps),

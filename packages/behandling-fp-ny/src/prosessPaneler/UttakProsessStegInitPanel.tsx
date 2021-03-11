@@ -13,6 +13,7 @@ import {
   Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
@@ -28,7 +29,7 @@ const FAKTA_UTTAK_AP = [
 ];
 
 const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): string => {
-  if (!uttaksresultat || aksjonspunkter.some((ap) => FAKTA_UTTAK_AP.includes(ap.definisjon.kode) && ap.status.kode === 'OPPR')) {
+  if (!uttaksresultat || aksjonspunkter.some((ap) => FAKTA_UTTAK_AP.includes(ap.definisjon.kode) && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
   if (uttaksresultat.perioderSøker && uttaksresultat.perioderSøker.length > 0) {

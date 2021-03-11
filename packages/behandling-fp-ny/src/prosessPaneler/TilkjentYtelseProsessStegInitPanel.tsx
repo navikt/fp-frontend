@@ -8,7 +8,7 @@ import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse'
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, BeregningsresultatPeriode,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp,
   Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
@@ -17,14 +17,9 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
-const harPeriodeMedUtbetaling = (perioder: BeregningsresultatPeriode[]): boolean => {
-  const periode = perioder.find((p) => p.dagsats > 0);
-  return !!periode;
-};
-
 const getStatusFromResultatstruktur = (resultatstruktur: BeregningsresultatFp, uttaksresultat: UttaksresultatPeriode): string => {
   if (resultatstruktur && resultatstruktur.perioder.length > 0) {
-    if (!harPeriodeMedUtbetaling(resultatstruktur.perioder)) {
+    if (!resultatstruktur.perioder.some((p) => p.dagsats > 0)) {
       return vilkarUtfallType.IKKE_VURDERT;
     }
     if (uttaksresultat && uttaksresultat.perioderSøker.length > 0) {

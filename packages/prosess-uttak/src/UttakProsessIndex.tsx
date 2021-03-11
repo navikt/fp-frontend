@@ -26,7 +26,13 @@ interface OwnProps {
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
-  tempUpdateStonadskontoer: (...args: any[]) => any;
+  tempUpdateStonadskontoer: (params: {
+    behandlingId: {
+      saksnummer: string;
+      behandlingId: number;
+    };
+    perioder: any;
+  }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
