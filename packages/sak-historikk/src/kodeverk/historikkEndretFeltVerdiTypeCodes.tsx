@@ -549,6 +549,10 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'UTTAK_PERIODE_AVSLAG_ÅRSAK',
     verdiId: 'HistorikkEndretFelt.AvslagOverforingKvoteSykdomIkkeDok',
   },
+  4076: {
+    kode: 'UTTAK_PERIODE_AVSLAG_ÅRSAK',
+    verdiId: 'HistorikkEndretFelt.AvslagOverforingAnnenForelderRett',
+  },
   4077: {
     kode: 'UTTAK_PERIODE_AVSLAG_ÅRSAK',
     verdiId: 'HistorikkEndretFelt.FratrekkPleiepenger',
