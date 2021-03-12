@@ -6,7 +6,7 @@ import { InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextHTML, VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 import { behandlingForm } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -14,13 +14,18 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId,
-  Beregningsgrunnlag as BeregningsgrunnlagProp, BeregningsgrunnlagAndel,
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag as BeregningsgrunnlagProp,
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp,
+  FaktaOmBeregning,
+  Kodeverk,
   KodeverkMedNavn,
   RelevanteStatuserProp,
+  SammenligningsgrunlagProp,
   Vilkar,
   YtelseGrunnlag,
-  FaktaOmBeregning, BeregningsgrunnlagPeriodeProp, SammenligningsgrunlagProp, Kodeverk,
 } from '@fpsak-frontend/types';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
@@ -205,12 +210,10 @@ const getAvviksprosent = (sammenligningsgrunnlagPrStatus: SammenligningsgrunlagP
   return undefined;
 };
 
-const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): Kodeverk[] => {
-  const statusList = beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel
-    .filter((statusAndel) => statusAndel.erTilkommetAndel !== true)
-    .map((statusAndel) => statusAndel.aktivitetStatus);
-  return statusList;
-};
+const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): Kodeverk[] => beregningsgrunnlagPerioder[0]
+  .beregningsgrunnlagPrStatusOgAndel
+  .filter((statusAndel) => statusAndel.erTilkommetAndel !== true)
+  .map((statusAndel) => statusAndel.aktivitetStatus);
 
 type OwnProps = {
     readOnly: boolean;

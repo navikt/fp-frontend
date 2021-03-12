@@ -64,7 +64,7 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   sammenligningsGrunnlagInntekter: Inntektsgrunnlag,
   skjeringstidspunktDato: string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement => (
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement => ( // NOSONAR TODO splitte i flere komponenter?
     <div className={beregningStyles.panelLeft}>
       { relevanteStatuser.isArbeidstaker
       && (

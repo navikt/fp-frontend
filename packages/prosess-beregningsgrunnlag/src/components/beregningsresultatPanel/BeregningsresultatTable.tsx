@@ -343,7 +343,7 @@ const settVisningsRaderForDefault = (periode: BeregningsgrunnlagPeriodeProp,
   rowsAndeler: BeregningsresultatAndelElementType[],
   rowsForklaringer: ReactElement[],
   vilkarStatus: Kodeverk,
-  harBortfallNaturalYtelse: boolean): void => {
+  harBortfallNaturalYtelse: boolean): void => { // NOSONAR ikke vanskelig å lese, men kunne vært splittet?
   const atElement = opprettAndelElement(
     periode,
     aktivitetStatus.ARBEIDSTAKER,
