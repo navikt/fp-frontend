@@ -57,7 +57,7 @@ interface MappedOwnProps {
   formPrefix: string;
   avklartBarn?: FamilieHendelse['avklartBarn'];
   termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
 }
 
 interface DispatchProps {

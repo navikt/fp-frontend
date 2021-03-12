@@ -28,7 +28,7 @@ interface OwnProps {
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
 }
 
 /**

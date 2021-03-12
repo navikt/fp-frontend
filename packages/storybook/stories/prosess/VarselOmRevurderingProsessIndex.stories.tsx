@@ -37,7 +37,7 @@ const familieHendelse = {
   },
   gjeldende: {
     termindato: '2019-01-01',
-    vedtaksDatoSomSvangerskapsuke: '2019-01-01',
+    vedtaksDatoSomSvangerskapsuke: 43,
   },
 } as FamilieHendelseSamling;
 

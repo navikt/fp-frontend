@@ -41,7 +41,6 @@ export const visPanelForNårBehandlingstypeErRevurdering = () => (
     behandlingsTypeKode={behandlingType.REVURDERING}
     avklartBarn={object('avklartBarn', avklartBarn)}
     termindato={text('termindato', '2019-01-01')}
-    vedtaksDatoSomSvangerskapsuke={text('vedtaksDatoSomSvangerskapsuke', '2019-01-01')}
     soknad={object('soknad', soknad)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelse)}
   />
@@ -52,8 +51,22 @@ export const visPanelForNårBehandlingstypeErFørstegangssoknad = () => (
     behandlingsTypeKode={behandlingType.FORSTEGANGSSOKNAD}
     avklartBarn={object('avklartBarn', avklartBarn)}
     termindato={text('termindato', '2019-01-01')}
-    vedtaksDatoSomSvangerskapsuke={text('vedtaksDatoSomSvangerskapsuke', '2019-01-01')}
     soknad={object('soknad', soknad)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelse)}
+  />
+);
+
+export const visPanelForMedVisningAvSvangerskapsuke = () => (
+  <FodselSammenligningIndex
+    behandlingsTypeKode={behandlingType.REVURDERING}
+    avklartBarn={object('avklartBarn', avklartBarn)}
+    termindato={text('termindato', '2019-01-01')}
+    vedtaksDatoSomSvangerskapsuke={43}
+    soknad={object('soknad', soknad)}
+    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', {
+      avklartBarn: [],
+      termindato: '2019-01-01',
+      antallBarnTermin: 1,
+    } as FamilieHendelse)}
   />
 );
