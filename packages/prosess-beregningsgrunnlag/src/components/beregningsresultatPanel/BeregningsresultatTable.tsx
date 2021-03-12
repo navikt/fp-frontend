@@ -450,8 +450,8 @@ export const createBeregningTableData = createSelector(
       dagsatserRad.verdi = formatCurrencyNoKr(finnDagsats(periode, ytelseGrunnlag));
       const rowsAndeler = [];
       const rowsForklaringer = [];
-      const sortedStatusList = aktivitetStatusList.sort((a, b) => ((a.kode > b.kode) ? 1 : -1)); // sorter alfabetisk
-      const aktivitetStatusKodeKombo = sortedStatusList.map((andelKode) => andelKode.kode).join('_');
+      aktivitetStatusList.sort((a, b) => ((a.kode > b.kode) ? 1 : -1)); // sorter alfabetisk
+      const aktivitetStatusKodeKombo = aktivitetStatusList.map((andelKode) => andelKode.kode).join('_');
       switch (aktivitetStatusKodeKombo) {
         case 'AT_SN': {
           settVisningsRaderForATSN(periode, rowsAndeler, rowsForklaringer, vilkarStatus);

@@ -93,12 +93,12 @@ const slåSammenEndringerSomHengerSammen = (endringer: NaturalytelseEndring[]): 
   if (!endringer || endringer.length < 2) {
     return endringer;
   }
-  const sortert = endringer.sort((a, b) => moment(a.fom).diff(moment(b.fom)));
+  endringer.sort((a, b) => moment(a.fom).diff(moment(b.fom)));
   const sammenslåtteEndringer = [];
-  let kontrollertTom = moment(sortert[0].fom);
-  sortert.forEach((end) => {
+  let kontrollertTom = moment(endringer[0].fom);
+  endringer.forEach((end) => {
     if (!moment(end.fom).isBefore(kontrollertTom)) {
-      const førsteEndredePeriode = sortert.find((end2) => moment(end2.fom).isAfter(end.fom) && end2.beløpPrÅr !== end.beløpPrÅr);
+      const førsteEndredePeriode = endringer.find((end2) => moment(end2.fom).isAfter(end.fom) && end2.beløpPrÅr !== end.beløpPrÅr);
       if (førsteEndredePeriode) {
         const tom = moment(førsteEndredePeriode.fom).subtract(1, 'd');
         sammenslåtteEndringer.push({
