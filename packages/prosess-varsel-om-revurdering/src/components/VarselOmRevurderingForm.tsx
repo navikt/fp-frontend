@@ -69,7 +69,7 @@ interface MappedOwnProps {
   aksjonspunktStatus: string;
   avklartBarn?: AvklartBarn[];
   termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
   language: string;
   ventearsaker: KodeverkMedNavn[];
   erAutomatiskRevurdering?: boolean;

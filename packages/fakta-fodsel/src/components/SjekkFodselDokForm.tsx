@@ -77,7 +77,7 @@ interface MappedOwnProps {
   dokumentasjonForeligger?: boolean;
   dokumentasjonForeliggerIsEdited?: boolean;
   termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
   onSubmit: (values: FormValues) => any;
 }
 
