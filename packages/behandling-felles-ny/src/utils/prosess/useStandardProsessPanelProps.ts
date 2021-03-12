@@ -22,7 +22,7 @@ const getBekreftAksjonspunktProsessCallback = (
   aksjonspunkter: Aksjonspunkt[],
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
   lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
-) => (aksjonspunktModels) => {
+) => (aksjonspunktModels:{ kode: string }[]) => {
   const models = aksjonspunktModels.map((ap) => ({
     '@type': ap.kode,
     ...ap,
