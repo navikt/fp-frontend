@@ -30,7 +30,8 @@ export type BeregningsresultatAndelElementType = {
   erOverstyrt?: boolean;
   pgiSnitt?: number;
   skalFastsetteGrunnlag: boolean;
-  verdi: number;
+  verdi?: number;
+  inntekt: number;
 }
 
 export type BeregningsresultatPeriodeTabellType = {

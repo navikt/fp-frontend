@@ -39,10 +39,9 @@ const fourthCol = {
 };
 
 const mockTableData = {
-  arbeidsforholdPeriodeMap: {
-    arbeidsgiver1: [firstCol, secondCol, thirdCol, fourthCol],
-  },
+  arbeidsgiver1: [firstCol, secondCol, thirdCol, fourthCol],
 };
+
 const mockbruttoPerodeList = [
   {
     brutto: 560500,
@@ -236,12 +235,12 @@ describe('<AksjonspunktBehandlerTB>', () => {
     />);
     const dataRows = wrapper.findWhere((node) => node.key() === 'arbeidsgiver1');
     const arbeidsgiverNavn = dataRows.first().find('Normaltekst');
-    expect(arbeidsgiverNavn.first().childAt(0).text()).toBe(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1[0].tabellInnhold);
-    const editableFields = mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.filter((periode) => periode.isEditable === true);
-    expect(editableFields).toHaveLength(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length - 1);
+    expect(arbeidsgiverNavn.first().childAt(0).text()).toBe(mockTableData.arbeidsgiver1[0].tabellInnhold);
+    const editableFields = mockTableData.arbeidsgiver1.filter((periode) => periode.isEditable === true);
+    expect(editableFields).toHaveLength(mockTableData.arbeidsgiver1.length - 1);
     const sumRows = wrapper.find('#bruttoPrPeriodeRad');
     const sumCols = sumRows.first().find('td');
-    expect(sumCols).toHaveLength(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length);
+    expect(sumCols).toHaveLength(mockTableData.arbeidsgiver1.length);
     expect(sumCols.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandlerTB.SumPeriode');
   });
   it('Skal teste at initial values bygges korrekt', () => {

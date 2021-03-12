@@ -83,77 +83,114 @@ const summertVerdiFraListeProp = (andeler: BeregningsgrunnlagAndel[], propNavn: 
   return sum;
 };
 
-const opprettAndelElement = (periode: BeregningsgrunnlagPeriodeProp, andelType: string, vilkarStatus: Kodeverk): BeregningsresultatAndelElementType => {
+const opprettSNElement = (andel: BeregningsgrunnlagAndel, vilkårstatus: Kodeverk): BeregningsresultatAndelElementType => {
+  let erOverstyrt = false;
   let inntekt;
+  const { skalFastsetteGrunnlag } = andel;
+  if (skalFastsetteGrunnlag && vilkårstatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
+    if (andel.overstyrtPrAar || andel.overstyrtPrAar === 0) {
+      inntekt = andel.overstyrtPrAar;
+      erOverstyrt = true;
+    } else {
+      inntekt = andel.beregnetPrAar;
+    }
+  } else if (skalFastsetteGrunnlag && vilkårstatus.kode === vilkarUtfallType.IKKE_VURDERT) {
+    inntekt = 'fastsett';
+  } else {
+    inntekt = andel.bruttoPrAar || andel.bruttoPrAar === 0 ? andel.bruttoPrAar : undefined;
+  }
+  const pgiSnitt = andel.pgiSnitt || andel.pgiSnitt === 0 ? andel.pgiSnitt : undefined;
+  return {
+    erOverstyrt,
+    skalFastsetteGrunnlag,
+    inntekt,
+    pgiSnitt,
+  };
+};
+
+const opprettATElement = (andeler: BeregningsgrunnlagAndel[], vilkårstatus: Kodeverk): BeregningsresultatAndelElementType => {
+  let inntekt;
+  let erOverstyrt = false;
+  const skalFastsetteGrunnlag = andeler.some((atAndel) => atAndel.skalFastsetteGrunnlag === true);
+  if (skalFastsetteGrunnlag && vilkårstatus.kode !== vilkarUtfallType.IKKE_VURDERT) { // denne testen kan brukes på alle
+    erOverstyrt = andeler.some((atAndel) => (atAndel.overstyrtPrAar !== undefined && atAndel.overstyrtPrAar !== null));
+    if (erOverstyrt) {
+      inntekt = summertVerdiFraListeProp(andeler, 'overstyrtPrAar');
+    } else {
+      inntekt = summertVerdiFraListeProp(andeler, 'beregnetPrAar');
+    }
+  } else if (skalFastsetteGrunnlag && vilkårstatus.kode === vilkarUtfallType.IKKE_VURDERT) {
+    inntekt = 'fastsett';
+  } else {
+    inntekt = summertVerdiFraListeProp(andeler, 'bruttoPrAar');
+  }
+  return {
+    erOverstyrt,
+    skalFastsetteGrunnlag,
+    inntekt,
+  };
+};
+
+const opprettDefaultElement = (førsteAndel: BeregningsgrunnlagAndel, vilkårstatus: Kodeverk): BeregningsresultatAndelElementType => {
+  let inntekt;
+  let erOverstyrt = false;
+  let { skalFastsetteGrunnlag } = førsteAndel;
+  if (skalFastsetteGrunnlag && vilkårstatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
+    if (førsteAndel.overstyrtPrAar || førsteAndel.overstyrtPrAar === 0) {
+      inntekt = førsteAndel.overstyrtPrAar;
+      erOverstyrt = true;
+    } else {
+      inntekt = førsteAndel.beregnetPrAar;
+    }
+  } else if (skalFastsetteGrunnlag && vilkårstatus.kode === vilkarUtfallType.IKKE_VURDERT) {
+    inntekt = 'fastsett';
+  } else {
+    inntekt = førsteAndel.bruttoPrAar || førsteAndel.bruttoPrAar === 0 ? førsteAndel.bruttoPrAar : undefined;
+  }
+  skalFastsetteGrunnlag = førsteAndel.skalFastsetteGrunnlag;
+  return {
+    erOverstyrt,
+    skalFastsetteGrunnlag,
+    inntekt,
+  };
+};
+
+const opprettAndelElement = (periode: BeregningsgrunnlagPeriodeProp, andelType: string, vilkarStatus: Kodeverk): BeregningsresultatAndelElementType => {
   const andelElement = {
     ledetekst: null,
     erOverstyrt: false,
     pgiSnitt: null,
     skalFastsetteGrunnlag: false,
     verdi: null,
+    inntekt: null,
   };
   andelElement.ledetekst = 'Beregningsgrunnlag -';
-  let skalFastsetteGrunnlag = false;
   const andeler = hentAndelFraPeriode(periode, andelType);
   if (!andeler || andeler.length < 1) {
     return null;
   }
   const førsteAndel = andeler[0]; // Vil kun være en for statuser som ikke er ARBEIDSTAKER så drar for bruk i switch her
-  switch (andelType) {
-    case aktivitetStatus.ARBEIDSTAKER:
-      skalFastsetteGrunnlag = andeler.some((atAndel) => atAndel.skalFastsetteGrunnlag === true);
-      if (skalFastsetteGrunnlag && vilkarStatus.kode !== vilkarUtfallType.IKKE_VURDERT) { // denne testen kan brukes på alle
-        const erOverstyrt = andeler.some((atAndel) => (atAndel.overstyrtPrAar !== undefined && atAndel.overstyrtPrAar !== null));
-        if (erOverstyrt) {
-          inntekt = summertVerdiFraListeProp(andeler, 'overstyrtPrAar');
-          andelElement.erOverstyrt = true;
-        } else {
-          inntekt = summertVerdiFraListeProp(andeler, 'beregnetPrAar');
-        }
-      } else if (skalFastsetteGrunnlag && vilkarStatus.kode === vilkarUtfallType.IKKE_VURDERT) {
-        inntekt = 'fastsett';
-      } else {
-        inntekt = summertVerdiFraListeProp(andeler, 'bruttoPrAar');
-      }
-      break;
-    case aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
-      skalFastsetteGrunnlag = førsteAndel.skalFastsetteGrunnlag;
-      if (skalFastsetteGrunnlag && vilkarStatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
-        if (førsteAndel.overstyrtPrAar || førsteAndel.overstyrtPrAar === 0) {
-          inntekt = andeler[0].overstyrtPrAar;
-          andelElement.erOverstyrt = true;
-        } else {
-          inntekt = førsteAndel.beregnetPrAar;
-        }
-      } else if (skalFastsetteGrunnlag && vilkarStatus.kode === vilkarUtfallType.IKKE_VURDERT) {
-        inntekt = 'fastsett';
-      } else {
-        inntekt = førsteAndel.bruttoPrAar || førsteAndel.bruttoPrAar === 0 ? førsteAndel.bruttoPrAar : undefined;
-      }
-      // brukes for å sammeligne mot pensjonsgivende inntekt senere
-      andelElement.pgiSnitt = førsteAndel.pgiSnitt || førsteAndel.pgiSnitt === 0 ? førsteAndel.pgiSnitt : undefined;
-      break;
-    default:
-      skalFastsetteGrunnlag = førsteAndel.skalFastsetteGrunnlag;
-      if (skalFastsetteGrunnlag && vilkarStatus.kode !== vilkarUtfallType.IKKE_VURDERT) {
-        if (førsteAndel.overstyrtPrAar || førsteAndel.overstyrtPrAar === 0) {
-          inntekt = førsteAndel.overstyrtPrAar;
-          andelElement.erOverstyrt = true;
-        } else {
-          inntekt = førsteAndel.beregnetPrAar;
-        }
-      } else if (skalFastsetteGrunnlag && vilkarStatus.kode === vilkarUtfallType.IKKE_VURDERT) {
-        inntekt = 'fastsett';
-      } else {
-        inntekt = førsteAndel.bruttoPrAar || førsteAndel.bruttoPrAar === 0 ? førsteAndel.bruttoPrAar : undefined;
-      }
-      skalFastsetteGrunnlag = førsteAndel.skalFastsetteGrunnlag;
+  if (andelType === aktivitetStatus.ARBEIDSTAKER) {
+    const atElement = opprettATElement(andeler, vilkarStatus);
+    andelElement.inntekt = atElement.inntekt;
+    andelElement.erOverstyrt = atElement.erOverstyrt;
+    andelElement.skalFastsetteGrunnlag = atElement.skalFastsetteGrunnlag;
+  } else if (andelType === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE) {
+    const snElement = opprettSNElement(førsteAndel, vilkarStatus);
+    andelElement.inntekt = snElement.inntekt;
+    andelElement.erOverstyrt = snElement.erOverstyrt;
+    andelElement.skalFastsetteGrunnlag = snElement.skalFastsetteGrunnlag;
+    andelElement.pgiSnitt = snElement.pgiSnitt;
+  } else {
+    const defaultElement = opprettDefaultElement(førsteAndel, vilkarStatus);
+    andelElement.inntekt = defaultElement.inntekt;
+    andelElement.erOverstyrt = defaultElement.erOverstyrt;
+    andelElement.skalFastsetteGrunnlag = defaultElement.skalFastsetteGrunnlag;
   }
-  andelElement.skalFastsetteGrunnlag = skalFastsetteGrunnlag;
-  if ((inntekt || inntekt === 0) && inntekt !== -1) {
-    andelElement.verdi = inntekt;
+  if ((andelElement.inntekt || andelElement.inntekt === 0) && andelElement.inntekt !== -1) {
+    andelElement.verdi = andelElement.inntekt;
   }
-  const strKey = setTekstStrengKeyPavilkaarUtfallType(vilkarStatus, skalFastsetteGrunnlag);
+  const strKey = setTekstStrengKeyPavilkaarUtfallType(vilkarStatus, andelElement.skalFastsetteGrunnlag);
   andelElement.ledetekst = <FormattedMessage id={`Beregningsgrunnlag.BeregningTable.${strKey}.${andelType}`} />;
   return andelElement;
 };
@@ -362,6 +399,7 @@ const settVisningsRaderForDefault = (periode: BeregningsgrunnlagPeriodeProp,
       verdi: null,
       skalFastsetteGrunnlag: null,
       ledetekst: null,
+      inntekt: null,
     };
     const atAndel = periode.beregningsgrunnlagPrStatusOgAndel.filter(
       (andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.bortfaltNaturalytelse,
