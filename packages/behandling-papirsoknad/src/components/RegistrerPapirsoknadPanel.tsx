@@ -52,7 +52,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
         <SoknadTypePickerForm
           setSoknadData={setSoknadData}
           soknadData={soknadData}
-          fagsakYtelseType={fagsak.sakstype}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={kodeverk}
         />
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.ENGANGSSTONAD && (

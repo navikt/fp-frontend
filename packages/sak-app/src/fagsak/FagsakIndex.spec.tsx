@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('<FagsakIndex>', () => {
   const fagsak = {
-    saksnummerString: '123456',
+    saksnummer: '123456',
   };
 
   const behandling = {

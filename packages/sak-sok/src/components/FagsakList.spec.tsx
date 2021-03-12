@@ -32,8 +32,8 @@ const alleKodeverk = {
 
 describe('<FagsakList>', () => {
   const fagsak = {
-    saksnummerString: '12345',
-    sakstype: {
+    saksnummer: '12345',
+    fagsakYtelseType: {
       kode: 'ES',
       kodeverk: FAGSAK_YTELSE_KODEVERK,
     },
@@ -49,8 +49,8 @@ describe('<FagsakList>', () => {
   };
 
   const fagsak2 = {
-    saksnummerString: '23456',
-    sakstype: {
+    saksnummer: '23456',
+    fagsakYtelseType: {
       kode: 'ES',
       kodeverk: FAGSAK_YTELSE_KODEVERK,
     },

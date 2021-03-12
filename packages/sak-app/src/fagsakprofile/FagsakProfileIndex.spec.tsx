@@ -25,8 +25,8 @@ jest.mock('react-router-dom', () => ({
 
 describe('<FagsakProfileIndex>', () => {
   const fagsak = {
-    saksnummerString: '123',
-    sakstype: {
+    saksnummer: '123',
+    fagsakYtelseType: {
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: 'FAGSAK_YTELSE',
     },

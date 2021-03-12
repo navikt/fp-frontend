@@ -17,7 +17,7 @@ class PanelDef extends ProsessStegPanelDef {
   getData = ({ innsyn, alleDokumenter, fagsak }) => ({
     innsyn,
     alleDokumenter,
-    saksnummer: fagsak.saksnummerString,
+    saksnummer: fagsak.saksnummer,
   })
 }
 

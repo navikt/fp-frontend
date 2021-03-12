@@ -17,8 +17,8 @@ import ForeldrepengerFakta from './ForeldrepengerFakta';
 
 describe('<ForeldrepengerFakta>', () => {
   const fagsak = {
-    saksnummerString: '123456',
-    sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
+    saksnummer: '123456',
+    fagsakYtelseType: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
 

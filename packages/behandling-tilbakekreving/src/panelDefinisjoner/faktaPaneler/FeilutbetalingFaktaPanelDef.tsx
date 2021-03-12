@@ -28,7 +28,7 @@ class FeilutbetalingFaktaPanelDef extends FaktaPanelDef {
   getOverstyrVisningAvKomponent = ({ feilutbetalingFakta }) => !!feilutbetalingFakta
 
   getData = ({ feilutbetalingFakta, fagsak, fpsakKodeverk }: Data) => (
-    { feilutbetalingFakta, fagsakYtelseTypeKode: fagsak.sakstype.kode, fpsakKodeverk }
+    { feilutbetalingFakta, fagsakYtelseTypeKode: fagsak.fagsakYtelseType.kode, fpsakKodeverk }
   )
 }
 

@@ -148,7 +148,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const fetchPreview = useVisForhandsvisningAvMelding(behandling.type);
 
-  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandling.uuid, fagsak.sakstype, fetchPreview),
+  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
     [behandlingId, behandlingVersjon]);
 
   const afterSubmit = useCallback(() => {
@@ -185,7 +185,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         revurderingVarslingArsak={revurderingVarslingArsak}
         templates={brevmaler}
         isKontrollerRevurderingApOpen={harApentKontrollerRevAp}
-        fagsakYtelseType={fagsak.sakstype}
+        fagsakYtelseType={fagsak.fagsakYtelseType}
       />
 
       {submitFinished && showSettPaVentModal && (

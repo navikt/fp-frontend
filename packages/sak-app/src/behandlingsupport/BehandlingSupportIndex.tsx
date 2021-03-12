@@ -103,7 +103,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         )}
         {aktivtSupportPanel === SupportTabs.HISTORIKK && (
           <HistorikkIndex
-            saksnummer={fagsak.saksnummerString}
+            saksnummer={fagsak.saksnummer}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
           />
@@ -118,7 +118,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         )}
         {aktivtSupportPanel === SupportTabs.DOKUMENTER && (
           <DokumentIndex
-            saksnummer={fagsak.saksnummerString}
+            saksnummer={fagsak.saksnummer}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
           />

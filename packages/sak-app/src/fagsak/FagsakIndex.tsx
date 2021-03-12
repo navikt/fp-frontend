@@ -107,7 +107,7 @@ const FagsakIndex: FunctionComponent = () => {
     return <LoadingPanel />;
   }
 
-  if (fagsak.saksnummerString !== selectedSaksnummer) {
+  if (fagsak.saksnummer !== selectedSaksnummer) {
     return <Redirect to={pathToMissingPage()} />;
   }
 

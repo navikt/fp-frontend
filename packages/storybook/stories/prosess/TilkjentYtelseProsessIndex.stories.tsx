@@ -22,7 +22,7 @@ import withReduxProvider from '../../decorators/withRedux';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const fagsak = {
-  sakstype: {
+  fagsakYtelseType: {
     kode: fagsakYtelseType.FORELDREPENGER,
   },
 } as Fagsak;

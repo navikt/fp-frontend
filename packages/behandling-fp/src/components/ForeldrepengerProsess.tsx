@@ -48,7 +48,7 @@ const getForhandsvisCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: 
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.sakstype,
+    ytelseType: fagsak.fagsakYtelseType,
   };
 
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
@@ -59,7 +59,7 @@ const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsa
 ) => {
   const data = {
     behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.sakstype,
+    fagsakYtelseType: fagsak.fagsakYtelseType,
     varseltekst: fritekst || '',
     mottaker,
     brevmalkode,

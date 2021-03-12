@@ -15,10 +15,10 @@ export default {
 };
 
 const fagsak = {
-  saksnummerString: '123456',
-  sakstype: {
+  saksnummer: '123456',
+  fagsakYtelseType: {
     kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: 'SAKSTYPE',
+    kodeverk: 'FAGSAK_YTELSE_TYPE',
   },
   relasjonsRolleType: {
     kode: relasjonsRolleType.MOR,
@@ -28,12 +28,6 @@ const fagsak = {
     kode: fagsakStatus.LOPENDE,
     kodeverk: 'STATUS',
   },
-  barnFodt: '20120-01-01',
-  opprettet: '20120-01-01',
-  endret: '20120-01-01',
-  antallBarn: 1,
-  kanRevurderingOpprettes: false,
-  skalBehandlesAvInfotrygd: false,
   dekningsgrad: 100,
 };
 

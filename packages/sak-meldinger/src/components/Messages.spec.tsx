@@ -137,7 +137,7 @@ describe('<Messages>', () => {
     expect(templateSelect.prop('selectValues')).toHaveLength(3);
   });
 
-  it('skal vise alle revuderingsvarslingsårsaker for sakstype foreldeprenger', () => {
+  it('skal vise alle revuderingsvarslingsårsaker for fagsakYtelseType foreldeprenger', () => {
     const wrapper = shallowWithIntl(<Messages
       {...mockProps}
       recipients={recipients}
@@ -158,7 +158,7 @@ describe('<Messages>', () => {
     expect(selectField.prop('selectValues')).toHaveLength(3);
   });
 
-  it('skal vise alle revuderingsvarslingsårsaker utenom Barn ikke registrert for sakstype svangerskapspenger', () => {
+  it('skal vise alle revuderingsvarslingsårsaker utenom Barn ikke registrert for fagsakYtelseType svangerskapspenger', () => {
     const wrapper = shallowWithIntl(<Messages
       {...mockProps}
       recipients={recipients}
@@ -182,7 +182,7 @@ describe('<Messages>', () => {
     expect(options[1].props.value).toEqual('TEST');
   });
 
-  it('skal vise revuderingsvarslingsårsaker (Annet og Barn ikke registrert) for sakstype engangsstønad', () => {
+  it('skal vise revuderingsvarslingsårsaker (Annet og Barn ikke registrert) for fagsakYtelseType engangsstønad', () => {
     const wrapper = shallowWithIntl(<Messages
       {...mockProps}
       recipients={recipients}
