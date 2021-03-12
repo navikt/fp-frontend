@@ -17,7 +17,7 @@ interface OwnProps {
   behandlingsTypeKode: string;
   avklartBarn?: AvklartBarn[];
   termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;

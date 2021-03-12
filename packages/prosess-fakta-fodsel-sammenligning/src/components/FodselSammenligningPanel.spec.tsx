@@ -23,7 +23,7 @@ describe('<FodselSammenligningPanel>', () => {
       avklartBarn={[{ fodselsdato: '2017-05-15' }]}
       nrOfDodfodteBarn={0}
       soknad={soknad}
-      vedtaksDatoSomSvangerskapsuke="2019-02-02"
+      vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
     />);
 
@@ -37,7 +37,7 @@ describe('<FodselSammenligningPanel>', () => {
       avklartBarn={[{ fodselsdato: '2017-05-15' }]}
       nrOfDodfodteBarn={0}
       soknad={soknad}
-      vedtaksDatoSomSvangerskapsuke="2019-02-02"
+      vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
     />);
 
@@ -51,7 +51,7 @@ describe('<FodselSammenligningPanel>', () => {
       avklartBarn={[{ fodselsdato: '2017-05-15' }]}
       nrOfDodfodteBarn={0}
       soknad={soknad}
-      vedtaksDatoSomSvangerskapsuke="2019-02-02"
+      vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
     />);
 
@@ -64,7 +64,7 @@ describe('<FodselSammenligningPanel>', () => {
       avklartBarn={[]}
       nrOfDodfodteBarn={0}
       soknad={soknad}
-      vedtaksDatoSomSvangerskapsuke="2019-02-02"
+      vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
     />);
 
@@ -77,7 +77,7 @@ describe('<FodselSammenligningPanel>', () => {
       avklartBarn={[{ fodselsdato: '2017-05-15' }, { fodselsdato: '2017-05-15' }]}
       nrOfDodfodteBarn={1}
       soknad={soknad}
-      vedtaksDatoSomSvangerskapsuke="2019-02-02"
+      vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
     />);
 
@@ -90,7 +90,7 @@ describe('<FodselSammenligningPanel>', () => {
       avklartBarn={[{ fodselsdato: '2017-05-15' }, { fodselsdato: '2017-05-15' }]}
       nrOfDodfodteBarn={0}
       soknad={soknad}
-      vedtaksDatoSomSvangerskapsuke="2019-02-02"
+      vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
     />);
 

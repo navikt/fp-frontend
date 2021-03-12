@@ -39,7 +39,7 @@ export const getAntallBarn = (isTermin: boolean, originalSoknad?: Soknad, orgina
 interface OwnProps {
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
-  vedtaksDatoSomSvangerskapsuke?: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
 }
 
 /**
@@ -67,19 +67,19 @@ export const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = 
       <Element><FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" /></Element>
       <Row>
         {shouldShowVedtaksdatoAsSvangerskapsuke && (
-          <Column xs="4">
-            <Normaltekst><FormattedMessage id="FodselsammenligningPanel.Vedtaksdato" /></Normaltekst>
+          <Column xs="6">
+            <Normaltekst><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Normaltekst>
           </Column>
         )}
-        <Column xs="4"><Normaltekst><FormattedMessage id={terminOrFodselLabel} /></Normaltekst></Column>
-        <Column xs="4"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Normaltekst></Column>
+        <Column xs="3"><Normaltekst><FormattedMessage id={terminOrFodselLabel} /></Normaltekst></Column>
+        <Column xs="3"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Normaltekst></Column>
       </Row>
       <Row>
         {shouldShowVedtaksdatoAsSvangerskapsuke && (
-          <Column xs="4"><Normaltekst>{vedtaksDatoSomSvangerskapsuke}</Normaltekst></Column>
+          <Column xs="6"><Normaltekst>{vedtaksDatoSomSvangerskapsuke}</Normaltekst></Column>
         )}
-        <Column xs="4"><Normaltekst>{terminOrFodselDate}</Normaltekst></Column>
-        <Column xs="4"><Normaltekst>{antallBarn}</Normaltekst></Column>
+        <Column xs="3"><Normaltekst>{terminOrFodselDate}</Normaltekst></Column>
+        <Column xs="3"><Normaltekst>{antallBarn}</Normaltekst></Column>
       </Row>
     </>
   );

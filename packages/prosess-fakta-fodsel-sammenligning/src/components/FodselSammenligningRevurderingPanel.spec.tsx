@@ -21,25 +21,25 @@ describe('<FodselSammenligningRevurderingPanel>', () => {
   it('skal vise vedtaksdato', () => {
     const wrapper = shallow(<FodselSammenligningRevurderingPanel
       soknadOriginalBehandling={soknadOriginalBehandling}
-      vedtaksDatoSomSvangerskapsuke="2018-08-10"
+      vedtaksDatoSomSvangerskapsuke={43}
       familiehendelseOriginalBehandling={{
         avklartBarn: [],
       } as FamilieHendelse}
     />);
 
-    expect(wrapper.find("[id='FodselsammenligningPanel.Vedtaksdato']")).toHaveLength(1);
+    expect(wrapper.find("[id='FodselsammenligningPanel.FodtISvangerskapsuke']")).toHaveLength(1);
     const normaltekstFields = wrapper.find(Normaltekst);
     expect(normaltekstFields).toHaveLength(6);
-    expect(normaltekstFields.at(3).childAt(0).text()).toEqual('2018-08-10');
+    expect(normaltekstFields.at(3).childAt(0).text()).toEqual('43');
   });
 
   it('skal ikke vise vedtaksdato', () => {
     const wrapper = shallow(<FodselSammenligningRevurderingPanel
       soknadOriginalBehandling={soknadOriginalBehandling}
-      vedtaksDatoSomSvangerskapsuke="2018-08-10"
+      vedtaksDatoSomSvangerskapsuke={43}
     />);
 
-    expect(wrapper.find("[id='FodselsammenligningPanel.Vedtaksdato']")).toHaveLength(0);
+    expect(wrapper.find("[id='FodselsammenligningPanel.FodtISvangerskapsuke']")).toHaveLength(0);
     const normaltekstFields = wrapper.find(Normaltekst);
     expect(normaltekstFields).toHaveLength(4);
   });
