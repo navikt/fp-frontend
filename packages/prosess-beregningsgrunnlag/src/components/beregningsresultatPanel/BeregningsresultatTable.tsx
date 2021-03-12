@@ -555,7 +555,7 @@ type OwnProps = {
 };
 
 /**
- * BeregningsresultatTable2
+ * BeregningsresultatTable
  *
  * Presentasjonskomponent. Viser faktagruppe med beregningstabellen som viser inntekter brukt i
  * beregningen og hva dagsatsen ble.
