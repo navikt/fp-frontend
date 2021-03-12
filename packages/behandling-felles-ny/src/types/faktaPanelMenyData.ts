@@ -3,7 +3,7 @@ type FaktaPanelMenyData = {
   harHentetInitData: boolean;
   tekst?: string;
   erAktiv?: boolean;
-  harAksjonspunkt?: boolean;
+  harApneAksjonspunkter?: boolean;
 }
 
 export default FaktaPanelMenyData;

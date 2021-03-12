@@ -20,8 +20,8 @@ const FaktaMeny: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     links={menyData.map((data) => ({
       label: data.tekst,
       active: data.erAktiv,
-      iconSrc: data.harAksjonspunkt ? advarselIkonUrl : undefined,
-      iconAltText: data.harAksjonspunkt ? intl.formatMessage({ id: 'HelpText.Aksjonspunkt' }) : undefined,
+      iconSrc: data.harApneAksjonspunkter ? advarselIkonUrl : undefined,
+      iconAltText: data.harApneAksjonspunkter ? intl.formatMessage({ id: 'HelpText.Aksjonspunkt' }) : undefined,
     }))}
     onClick={oppdaterFaktaPanelIUrl}
   />

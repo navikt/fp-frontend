@@ -46,10 +46,10 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       return newData;
     });
 
-    if (!nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode === nyData.id) {
+    if (!nyData.harApneAksjonspunkter && apentFaktaPanelInfo?.urlCode === nyData.id) {
       setApentFaktaPanel(undefined);
     }
-    if (nyData.harAksjonspunkt && apentFaktaPanelInfo?.urlCode !== nyData.id) {
+    if (nyData.harApneAksjonspunkter && apentFaktaPanelInfo?.urlCode !== nyData.id) {
       setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst });
     }
   }, [apentFaktaPanelInfo]);

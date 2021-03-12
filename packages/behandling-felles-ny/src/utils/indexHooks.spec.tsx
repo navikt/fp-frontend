@@ -49,7 +49,7 @@ describe('indexHooks', () => {
     expect(hook.behandlingState).toEqual(RestApiState.SUCCESS);
   });
 
-  it('skal', () => {
+  it('skal lagre aksjonspunkt og så oppdatere behandling', () => {
     const LAGRE_AKSJONSPUNKT_KEY = 'LAGRE_AKSJONSPUNKT_KEY';
     const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = 'LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY';
 
@@ -59,16 +59,20 @@ describe('indexHooks', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
+
     requestMock.mock(LAGRE_AKSJONSPUNKT_KEY, behandlingSomHentes);
     requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY);
 
     const setBehandling = sinon.spy();
 
     const wrapper = shallow(
-      <HookWrapper hook={() => useLagreAksjonspunkt(requestMock, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY, setBehandling)} />);
+      <HookWrapper hook={() => useLagreAksjonspunkt(requestMock, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY, setBehandling)} />,
+    );
 
     // @ts-ignore
     const { hook } = wrapper.find('div').props();
+
+    mockUseEffect();
 
     hook.lagreAksjonspunkter();
 
@@ -76,7 +80,37 @@ describe('indexHooks', () => {
     const { args } = setBehandling.getCalls()[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual(behandlingSomHentes);
+  });
 
-    expect(hook.behandlingState).toEqual(RestApiState.SUCCESS);
+  it('skal lagre overstyrt aksjonspunkt og så oppdatere behandling', () => {
+    const LAGRE_AKSJONSPUNKT_KEY = 'LAGRE_AKSJONSPUNKT_KEY';
+    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = 'LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY';
+
+    const endpoints = new RestApiConfigBuilder()
+      .withRel('test2', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
+      .build();
+
+    const requestMock = createRequestApi(endpoints);
+
+    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY, behandlingSomHentes);
+
+    const setBehandling = sinon.spy();
+
+    const wrapper = shallow(
+      <HookWrapper hook={() => useLagreAksjonspunkt(requestMock, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY, setBehandling)} />,
+    );
+
+    // @ts-ignore
+    const { hook } = wrapper.find('div').props();
+
+    mockUseEffect();
+    mockUseEffect();
+
+    hook.lagreOverstyrteAksjonspunkter();
+
+    expect(setBehandling.called).toBe(true);
+    const { args } = setBehandling.getCalls()[0];
+    expect(args).toHaveLength(1);
+    expect(args[0]).toEqual(behandlingSomHentes);
   });
 });

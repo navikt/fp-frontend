@@ -38,7 +38,7 @@ const useFaktaMenyRegistrerer = (
           id,
           tekst,
           erAktiv,
-          harAksjonspunkt: harApneAksjonspunkter,
+          harApneAksjonspunkter,
           harHentetInitData: true,
         });
         setPanelValgt(erAktiv);
