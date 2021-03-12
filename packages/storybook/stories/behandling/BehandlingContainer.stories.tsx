@@ -15,7 +15,7 @@ const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({
       id: '1',
       tekst: 'Dette er en paneltittel',
       erAktiv: valgtFaktaSteg === '1',
-      harAksjonspunkt: true,
+      harApneAksjonspunkter: true,
       harHentetInitData: true,
     });
   }, []);
@@ -39,7 +39,7 @@ const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({
       id: '2',
       tekst: 'Annet panel',
       erAktiv: valgtFaktaSteg === '2',
-      harAksjonspunkt: false,
+      harApneAksjonspunkter: false,
       harHentetInitData: true,
     });
   }, [valgtFaktaSteg]);
