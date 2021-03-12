@@ -72,5 +72,4 @@ export type ATFLTidsbegrensetTransformedValues = {
   frilansInntekt: number;
 };
 
-
 export default ArbeidstakerFrilansValues;
