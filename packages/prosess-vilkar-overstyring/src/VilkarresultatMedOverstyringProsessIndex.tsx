@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Medlemskap, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { Medlemskap, KodeverkMedNavn, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
 import messages from '../i18n/nb_NO.json';
@@ -29,7 +28,7 @@ interface OwnProps {
   erMedlemskapsPanel: boolean;
 }
 
-const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   medlemskap = {},
   aksjonspunkter,

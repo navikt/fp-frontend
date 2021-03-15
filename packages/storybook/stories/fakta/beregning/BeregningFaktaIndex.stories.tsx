@@ -231,7 +231,7 @@ export const ArbeidOgDagpenger = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
-    submitCallback={action('button-click')}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={boolean('readOnly', false)}
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
@@ -278,7 +278,7 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -376,7 +376,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -441,7 +441,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -508,7 +508,7 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -568,7 +568,7 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -631,7 +631,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -696,7 +696,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -744,7 +744,7 @@ export const VurderingAvMilitær = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -810,7 +810,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -860,7 +860,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -909,7 +909,7 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -962,7 +962,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -1010,7 +1010,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -1214,7 +1214,7 @@ export const KombinasjonstestForFaktapanel = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -1295,7 +1295,7 @@ export const OverstyringAvInntekt = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
@@ -1348,7 +1348,7 @@ export const VurderKunYtelseBesteberegning = () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
       }}
-      submitCallback={action('button-click')}
+      submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={boolean('readOnly', false)}
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}

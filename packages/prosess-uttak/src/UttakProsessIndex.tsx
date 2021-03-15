@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-
 import {
-  ArbeidsgiverOpplysningerPerId,
-  Fagsak, FamilieHendelseSamling, Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, Fagsak, FamilieHendelseSamling, Personoversikt,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+
 import UttakPanel from './components/UttakPanel';
 import messages from '../i18n/nb_NO.json';
 
@@ -27,11 +26,17 @@ interface OwnProps {
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
-  tempUpdateStonadskontoer: (...args: any[]) => any;
+  tempUpdateStonadskontoer: (params: {
+    behandlingId: {
+      saksnummer: string;
+      behandlingId: number;
+    };
+    perioder: any;
+  }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   fagsak,
   behandling,
   uttaksresultatPerioder,

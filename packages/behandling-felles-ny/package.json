@@ -1,0 +1,35 @@
+{
+  "name": "@fpsak-frontend/behandling-felles-ny",
+  "version": "1.0.0",
+  "module": "index.jsx",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@fpsak-frontend/kodeverk": "1.0.0",
+    "@fpsak-frontend/shared-components": "1.0.0",
+    "@fpsak-frontend/utils": "1.0.0",
+    "@navikt/nap-process-menu": "1.1.0",
+    "@navikt/nap-side-menu": "1.0.7",
+    "classnames": "^2.2.6",
+    "moment": "^2.29.1",
+    "nav-frontend-core": "5.0.11",
+    "nav-frontend-grid": "1.0.50",
+    "nav-frontend-grid-style": "1.0.2",
+    "nav-frontend-knapper": "2.0.32",
+    "nav-frontend-knapper-style": "1.0.17",
+    "nav-frontend-modal": "1.0.63",
+    "nav-frontend-modal-style": "1.0.2",
+    "nav-frontend-typografi": "3.0.4",
+    "nav-frontend-typografi-style": "1.0.35",
+    "react": "^17.0.1",
+    "react-intl": "^5.12.3",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.7",
+    "reselect": "^4.0.0"
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "sinon": "^9.2.4"
+  }
+}

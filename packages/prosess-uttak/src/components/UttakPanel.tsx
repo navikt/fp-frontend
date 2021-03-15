@@ -97,7 +97,13 @@ interface PureOwnProps {
   uttakPeriodeGrense: UttakPeriodeGrense;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   ytelsefordeling: Ytelsefordeling;
-  tempUpdateStonadskontoer: (...args: any[]) => any;
+  tempUpdateStonadskontoer: (params: {
+    behandlingId: {
+      saksnummer: string;
+      behandlingId: number;
+    };
+    perioder: any;
+  }) => Promise<any>;
   submitCallback: (...args: any[]) => any;
   readOnly: boolean;
   readOnlySubmitButton: boolean;

@@ -215,7 +215,7 @@ PermisjonPanel.validate = (values: FormValues) => {
   if (permisjonsError) {
     errors = {
       _error: {
-        permisjonsError: 'ValidationMessage.MinstEnPeriodeRequired',
+        permisjonsError: 'PermisjonPanel.MinstEnPeriodeRequired',
       },
     };
   }
@@ -224,7 +224,7 @@ PermisjonPanel.validate = (values: FormValues) => {
   if (overLappingError(permisjonValues)) {
     errors = {
       _error: {
-        permisjonsError: 'ValidationMessage.DateRangesOverlappingPeriodTypes',
+        permisjonsError: 'PermisjonPanel.DateRangesOverlappingPeriodTypes',
       },
     };
   }

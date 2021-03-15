@@ -515,10 +515,17 @@ export const visProsessUttak = () => (
     submitCallback={action('button-click') as () => Promise<any>}
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
-    tempUpdateStonadskontoer={action('button-click')}
+    tempUpdateStonadskontoer={action('button-click') as (params: {
+      behandlingId: {
+        saksnummer: string;
+        behandlingId: number;
+      };
+      perioder: any;
+    }) => Promise<any>}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
     status="test"
     vilkar={[]}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    alleMerknaderFraBeslutter={{}}
   />
 );

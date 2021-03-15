@@ -11,6 +11,7 @@ import {
   Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 
+import alleKodeverk from '../mocks/alleKodeverk.json';
 import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
@@ -91,6 +92,7 @@ const standardFaktaProps = {
   harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
   submittable: boolean('submittable', true),
   alleMerknaderFraBeslutter: {},
+  alleKodeverk: alleKodeverk as any,
 };
 
 export default {

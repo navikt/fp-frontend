@@ -21,6 +21,7 @@ const standardProsessProps = {
   isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
   readOnlySubmitButton: boolean('readOnly', false),
   status: '',
+  alleMerknaderFraBeslutter: {},
 };
 
 export default {

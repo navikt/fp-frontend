@@ -42,7 +42,7 @@ export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => fun
 ):RestApiData<T> {
   const endpointData = endpoints.reduce((acc, endpoint) => ({
     ...acc,
-    [format(endpoint.key)]: requestApi.startRequest(endpoint.key, endpoint.params),
+    [format(endpoint.key)]: requestApi.startRequest<T>(endpoint.key, endpoint.params),
   }), {});
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
@@ -65,7 +65,7 @@ const DEFAULT_STATE = {
 const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
   endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
-  const [data, setData] = useState(DEFAULT_STATE);
+  const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
   const ref = useRef<DependencyList>();
   useEffect(() => {
@@ -83,14 +83,14 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
 
       const filteredEndpoints = endpoints.filter((e) => requestApi.hasPath(e.key));
 
-      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest(e.key, e.params, options.isCachingOn)))
+      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest<T>(e.key, e.params, options.isCachingOn)))
         .then((dataRes) => {
           setData({
             state: RestApiState.SUCCESS,
             data: dataRes.reduce((acc, result, index) => ({
               ...acc,
               [format(filteredEndpoints[index].key)]: result.payload,
-            }), {}),
+            }), {} as T),
             error: undefined,
           });
         })

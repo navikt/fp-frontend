@@ -61,6 +61,10 @@ export const visFormkravPanelForAksjonspunktNfp = () => (
         kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
       },
     }] as Aksjonspunkt[]}
+    alleMerknaderFraBeslutter={{}}
+    status=""
+    vilkar={[]}
+    isAksjonspunktOpen={false}
   />
 );
 
@@ -90,5 +94,9 @@ export const visFormkravPanelForAksjonspunktKa = () => (
         kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
       },
     }] as Aksjonspunkt[]}
+    alleMerknaderFraBeslutter={{}}
+    status=""
+    vilkar={[]}
+    isAksjonspunktOpen={false}
   />
 );

@@ -253,7 +253,6 @@ const transformValues = (values: FormValues): any => values.aksjonspunktKoder.ma
   fritekstBrev: values.brødtekst,
   skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,
   overskrift: values.overskrift,
-  isVedtakSubmission: true,
 }));
 
 const formName = 'VedtakForm';

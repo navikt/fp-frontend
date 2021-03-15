@@ -1,0 +1,20 @@
+{
+  "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
+  "FatterVedtakStatusModal.Ok": "OK",
+  "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
+
+  "IverksetterVedtakStatusModal.VedtakAvslatt": "Vedtak er avslått.",
+  "IverksetterVedtakStatusModal.VedtakInnvilet": "Vedtaket ble fattet og blir nå iverksatt",
+  "IverksetterVedtakStatusModal.Ok": "OK",
+  "IverksetterVedtakStatusModal.Avslatt": "Avslått",
+  "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
+  "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
+
+  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
+  "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
+  "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
+  "BehandlingHenlagtPanel.Header": "Henlagt",
+  "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
+  "FaktaPanel.FaktaOm": "Fakta om",
+  "HelpText.Aksjonspunkt": "Aksjonspunkt"
+}

@@ -5,5 +5,3 @@ export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/
 
 export { default as isFieldEdited } from './src/utils/isFieldEdited';
 export type { FieldEditedInfo } from './src/utils/isFieldEdited';
-
-export { default as StandardFaktaProps } from './src/standardFaktaPropsTsType';

@@ -91,3 +91,7 @@ export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
 export { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
 export { default as Personadresse } from './src/personadresseTsType';
+export { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
+export { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
+export { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
+export { default as Verge } from './src/vergeTsType';

@@ -2,10 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling,
-  KodeverkMedNavn, Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, FaktaArbeidsforhold, FamilieHendelseSamling,
+  Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import UttakInfoPanel from './components/UttakInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -18,18 +17,16 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   ytelsefordeling: Ytelsefordeling;
   personoversikt: Personoversikt;
   familiehendelse: FamilieHendelseSamling;
   uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   kanOverstyre: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   aksjonspunkter,
   submitCallback,

@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, FeilutbetalingFakta, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
+import { StandardFaktaPanelProps, FeilutbetalingFakta, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import FeilutbetalingInfoPanel from './components/FeilutbetalingInfoPanel';
 import FeilutbetalingAarsak from './types/feilutbetalingAarsakTsType';
@@ -16,15 +15,13 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   feilutbetalingFakta: FeilutbetalingFakta;
   feilutbetalingAarsak: FeilutbetalingAarsak[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
   fagsakYtelseTypeKode: string;
 }
 
-const FeilutbetalingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const FeilutbetalingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   feilutbetalingFakta,
   feilutbetalingAarsak,

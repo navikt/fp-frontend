@@ -46,6 +46,7 @@ describe('<AvregningProsessIndex>', () => {
       alleKodeverk={{}}
       status=""
       vilkar={[]}
+      alleMerknaderFraBeslutter={{}}
     />);
     expect(wrapper.find(AvregningPanel)).toHaveLength(1);
   });

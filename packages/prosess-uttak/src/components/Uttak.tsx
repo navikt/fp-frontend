@@ -143,7 +143,13 @@ interface PureOwnProps {
   adopsjonFodelsedatoer?: Soknad['adopsjonFodelsedatoer'];
   soknadsType: string;
   omsorgsovertakelseDato?: string;
-  tempUpdateStonadskontoer: (...args: any[]) => any;
+  tempUpdateStonadskontoer: (params: {
+    behandlingId: {
+      saksnummer: string;
+      behandlingId: number;
+    };
+    perioder: any;
+  }) => Promise<any>;
 }
 
 interface MappedOwnProps {

@@ -434,6 +434,7 @@ describe('<ForeldrepengerProsess>', () => {
     expect(requestData).toHaveLength(1);
     expect(requestData[0].params).toEqual({
       param: 'test',
+      saksnummer: '123456',
       behandlingUuid: 'uuid-test',
       ytelseType: fagsak.fagsakYtelseType,
     });
@@ -477,7 +478,7 @@ describe('<ForeldrepengerProsess>', () => {
       mottaker: {
         param: 'test',
       },
-      saksnummer: undefined,
+      saksnummer: '123456',
       varseltekst: '',
     });
   });

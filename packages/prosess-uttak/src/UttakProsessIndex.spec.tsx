@@ -150,6 +150,7 @@ describe('<UttakProsessIndex>', () => {
       status=""
       vilkar={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleMerknaderFraBeslutter={{}}
     />);
     expect(wrapper.find(UttakPanel)).toHaveLength(1);
   });

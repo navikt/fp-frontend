@@ -4,7 +4,7 @@ import React, {
 import { useHistory, useLocation } from 'react-router-dom';
 
 import {
-  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst, KodeverkMedNavn,
+  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst, KodeverkMedNavn, AksessRettigheter,
 } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
@@ -13,7 +13,7 @@ import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
-import getAccessRights, { AksessRettigheter } from '../../app/util/access';
+import getAccessRights from '../../app/util/access';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {

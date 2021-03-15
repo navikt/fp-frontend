@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { KlageVurdering } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { KlageVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import VedtakKlageForm, { ForhandsvisData } from './components/VedtakKlageForm';
 import messages from '../i18n/nb_NO.json';
@@ -19,7 +18,7 @@ interface OwnProps {
   previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
-const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   klageVurdering,
   aksjonspunkter,
