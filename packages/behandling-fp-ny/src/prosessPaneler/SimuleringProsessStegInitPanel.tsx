@@ -82,10 +82,10 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.AVREGNING}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={(_data, initState) => {
+      skalPanelVisesIMeny={(data, initState) => {
         const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
         && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
-        return initState === RestApiState.SUCCESS && !harVedtakspanel;
+        return !!data?.simuleringResultat || (initState === RestApiState.SUCCESS && !harVedtakspanel);
       }}
       hentOverstyrtStatus={(data) => (data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data) => (
