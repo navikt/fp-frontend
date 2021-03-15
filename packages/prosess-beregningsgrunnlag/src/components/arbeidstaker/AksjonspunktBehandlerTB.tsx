@@ -71,7 +71,7 @@ export const createInputFieldKey = (andel: BeregningsgrunnlagAndel, periode: Ber
   return `${formPrefix}_${andel.arbeidsforhold.arbeidsforholdId}_${andel.andelsnr}_${periode.beregningsgrunnlagPeriodeFom}`;
 };
 
-const findArbeidstakerAndeler = (periode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel[] => periode.beregningsgrunnlagPrStatusOgAndel
+const findRelevanteArbeidstakerAndeler = (periode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel[] => periode.beregningsgrunnlagPrStatusOgAndel
   .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
   .filter((andel) => !andel.erTilkommetAndel);
 
