@@ -72,7 +72,7 @@ export const useLagreAksjonspunkt = (
   requestApi: AbstractRequestApi,
   setBehandling: (behandling: Behandling) => void,
   lagreAksjonspunktKey: string,
-  lagreOverstyrtyAksjonspunktKey: string,
+  lagreOverstyrtyAksjonspunktKey?: string,
 ): {
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
   lagreOverstyrteAksjonspunkter: (params: any, keepData?: boolean
