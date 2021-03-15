@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React, { FunctionComponent, ReactElement } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -14,11 +14,23 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
-import { ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
+  BeregningsgrunnlagPeriodeProp, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
+import {
+  TidsbegrenseArbeidsforholdInntektMap,
+  TidsbegrenseArbeidsforholdTabellCelle,
+  TidsbegrenseArbeidsforholdTabellData,
+  TidsbegrenseArbeidsforholdValues,
+  TidsbegrensetArbeidsforholdPeriodeTransformedValues,
+} from '../../types/ATFLAksjonspunktTsType';
 
 const formPrefix = 'inntektField';
 
@@ -28,15 +40,15 @@ const {
   FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
 } = aksjonspunktCodes;
 
-const finnAksjonspunktForFastsettBgTidsbegrensetAT = (gjeldendeAksjonspunkter) => gjeldendeAksjonspunkter
+const finnAksjonspunktForFastsettBgTidsbegrensetAT = (gjeldendeAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => gjeldendeAksjonspunkter
   && (gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD
   || ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS));
 
-const harPeriodeArbeidsforholdAvsluttet = (periode) => periode.periodeAarsaker !== null
+const harPeriodeArbeidsforholdAvsluttet = (periode: BeregningsgrunnlagPeriodeProp): boolean => periode.periodeAarsaker !== null
 && periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET);
 
 // Kombinerer perioder mellom avsluttede arbeidsforhold
-const finnPerioderMedAvsluttetArbeidsforhold = (allePerioder) => {
+const finnPerioderMedAvsluttetArbeidsforhold = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagPeriodeProp[] => {
   const perioderMellomSluttdatoForArbeidsforhold = [];
   let k = 0;
   while (k < allePerioder.length) {
@@ -50,29 +62,30 @@ const finnPerioderMedAvsluttetArbeidsforhold = (allePerioder) => {
   }
   return perioderMellomSluttdatoForArbeidsforhold;
 };
+
 // Nøkkelen til et inputfield konstrueres utifra navnet på andelen og perioden den er i samt en fast prefix
-export const createInputFieldKey = (andel, periode) => {
+export const createInputFieldKey = (andel: BeregningsgrunnlagAndel, periode: BeregningsgrunnlagPeriodeProp): string => {
   if (!andel.arbeidsforhold) {
     return undefined;
   }
   return `${formPrefix}_${andel.arbeidsforhold.arbeidsforholdId}_${andel.andelsnr}_${periode.beregningsgrunnlagPeriodeFom}`;
 };
-// Lager en liste med FormattedMessages som skal brukes som overskrifter i tabellen
 
-const findRelevanteArbeidstakerAndeler = (periode) => periode.beregningsgrunnlagPrStatusOgAndel
+const findRelevanteArbeidstakerAndeler = (periode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel[] => periode.beregningsgrunnlagPrStatusOgAndel
   .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
   .filter((andel) => !andel.erTilkommetAndel);
 
-const createArbeidsforholdMapKey = (arbeidsforhold, arbeidsgiverOpplysningerPerId) => {
+const createArbeidsforholdMapKey = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInformasjon) {
-    return arbeidsforhold.arbeidsforholdType ? arbeidsforhold.arbeidsforholdType : '';
+    return arbeidsforhold.arbeidsforholdType ? arbeidsforhold.arbeidsforholdType.kode : '';
   }
   return `${arbeidsforholdInformasjon.navn}${arbeidsforhold.arbeidsforholdId}`;
 };
 
 // Finner beregnetPrAar for alle andeler, basert på data fra den første perioden
-const createBeregnetInntektForAlleAndeler = (perioder, arbeidsgiverOpplysningerPerId) => {
+const createBeregnetInntektForAlleAndeler = (perioder: BeregningsgrunnlagPeriodeProp[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): TidsbegrenseArbeidsforholdInntektMap => {
   const mapMedInnteker = {};
   const arbeidstakerAndeler = perioder[0].beregningsgrunnlagPrStatusOgAndel.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
   arbeidstakerAndeler.forEach((andel) => {
@@ -82,14 +95,16 @@ const createBeregnetInntektForAlleAndeler = (perioder, arbeidsgiverOpplysningerP
 };
 
 // Dette er objektet hver key i mappen vil ha en liste med
-const createMapValueObject = () => ({
+const createMapValueObject = (): TidsbegrenseArbeidsforholdTabellCelle => ({
   erTidsbegrenset: true,
   isEditable: false,
   tabellInnhold: '',
   inputfieldKey: '',
 });
 
-const lagVisningsnavnForAktivitet = (arbeidsforhold, getKodeverknavn, arbeidsgiverOpplysningerPerId) => {
+const lagVisningsnavnForAktivitet = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInfo) {
     return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
@@ -100,7 +115,9 @@ const lagVisningsnavnForAktivitet = (arbeidsforhold, getKodeverknavn, arbeidsgiv
 // Initialiserer arbeidsforholdet mappet med data som skal vises uansett hva slags data vi har.
 // Dette innebærer at første kolonne i raden skal inneholde andelsnavn og andre kolonne skal inneholde beregnetPrAar.
 // Vi antar at alle andeler ligger i alle perioder, henter derfor kun ut andeler fra den første perioden.
-const initializeMap = (perioder, getKodeverknavn, arbeidsgiverOpplysningerPerId) => {
+const initializeMap = (perioder: BeregningsgrunnlagPeriodeProp[],
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): TidsbegrenseArbeidsforholdTabellData => {
   const inntektMap = createBeregnetInntektForAlleAndeler(perioder, arbeidsgiverOpplysningerPerId);
   const alleAndeler = findRelevanteArbeidstakerAndeler(perioder[0]);
   const mapMedAndeler = {};
@@ -113,17 +130,18 @@ const initializeMap = (perioder, getKodeverknavn, arbeidsgiverOpplysningerPerId)
     const mapValueMedBeregnetForstePeriode = createMapValueObject();
     mapValueMedBeregnetForstePeriode.erTidsbegrenset = false;
     mapValueMedBeregnetForstePeriode.tabellInnhold = inntektMap[andelMapNavn];
-    // mapMedAndeler[andelMapNavn] = [mapValueMedAndelNavn, mapValueMedBeregnetForstePeriode];
     mapMedAndeler[andelMapNavn] = [mapValueMedAndelNavn];
   });
   return mapMedAndeler;
 };
 
 export const createTableData = createSelector(
-  [(state, ownProps) => ownProps.allePerioder,
-    (state, ownProps) => ownProps.alleKodeverk,
-    (state, ownProps) => ownProps.arbeidsgiverOpplysningerPerId],
-  (allePerioder, alleKodeverk, arbeidsgiverOpplysningerPerId) => {
+  [(ownProps: OwnProps) => ownProps.allePerioder,
+    (ownProps: OwnProps) => ownProps.alleKodeverk,
+    (ownProps: OwnProps) => ownProps.arbeidsgiverOpplysningerPerId],
+  (allePerioder: BeregningsgrunnlagPeriodeProp[],
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): TidsbegrenseArbeidsforholdTabellData => {
     // Vi er ikke interessert i perioder som oppstår grunnet naturalytelse
     const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(allePerioder);
     const kopiAvPerioder = relevantePerioder.slice(0);
@@ -144,13 +162,11 @@ export const createTableData = createSelector(
         arbeidsforholdPeriodeMap[mapKey] = mapValue;
       });
     });
-    return {
-      arbeidsforholdPeriodeMap,
-    };
+    return arbeidsforholdPeriodeMap;
   },
 );
 
-const createSummaryTableRow = (listOfBruttoPrPeriode) => (
+const createSummaryTableRow = (listOfBruttoPrPeriode: BruttoPrPeriode[]): ReactElement => (
   <tr id="bruttoPrPeriodeRad" key="bruttoPrPeriodeRad">
     <td key="bruttoTittel" colSpan={2}>
       <Normaltekst>
@@ -165,7 +181,7 @@ const createSummaryTableRow = (listOfBruttoPrPeriode) => (
   </tr>
 );
 
-const createPerioderRow = (relevantePerioder) => (
+const createPerioderRow = (relevantePerioder: BruttoPrPeriode[]): ReactElement => (
   <tr key="PeriodeHeaderRad">
     <td />
     {relevantePerioder.map((element) => {
@@ -180,7 +196,10 @@ const createPerioderRow = (relevantePerioder) => (
   </tr>
 
 );
-const createRows = (tableData, readOnly, isAksjonspunktClosed, perioder) => {
+const createRows = (tableData: TidsbegrenseArbeidsforholdTabellData,
+  readOnly: boolean,
+  isAksjonspunktClosed: boolean,
+  perioder: BruttoPrPeriode[]): ReactElement[] => {
   const rows = [];
   rows.push(createPerioderRow(perioder));
   rows.push(
@@ -243,25 +262,29 @@ const createRows = (tableData, readOnly, isAksjonspunktClosed, perioder) => {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (allePerioder: BeregningsgrunnlagPeriodeProp[]) => any;
-  transformValues?: (values: any, perioder: BeregningsgrunnlagPeriodeProp[]) => any;
+  buildInitialValues?: (allePerioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrenseArbeidsforholdValues;
+  transformValues?: (values: TidsbegrenseArbeidsforholdValues,
+                     perioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrensetArbeidsforholdPeriodeTransformedValues[];
 }
-type OwnProps = {
-    readOnly: boolean;
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-    behandlingId: number;
-    behandlingVersjon: number;
-    formName: string;
-    allePerioder: BeregningsgrunnlagPeriodeProp[];
-};
 
 type BruttoPrPeriode = {
   brutto: number;
   periode: string;
 }
 
+type OwnProps = {
+    readOnly: boolean;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+    behandlingId: number;
+    behandlingVersjon: number;
+    formName: string;
+    aksjonspunkter: Aksjonspunkt[];
+    allePerioder: BeregningsgrunnlagPeriodeProp[];
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+};
+
 type MappedOwnProps = {
-  tableData: any;
+  tableData: TidsbegrenseArbeidsforholdTabellData;
   isAksjonspunktClosed: boolean;
   bruttoPrPeriodeList: BruttoPrPeriode[],
 }
@@ -273,7 +296,7 @@ export const AksjonspunktBehandlerTidsbegrensetImpl: FunctionComponent<OwnProps 
   return (
     <table className={styles.inntektTableTB}>
       <tbody>
-        {createRows(tableData.arbeidsforholdPeriodeMap, readOnly, isAksjonspunktClosed, perioder)}
+        {createRows(tableData, readOnly, isAksjonspunktClosed, perioder)}
       </tbody>
     </table>
   );
@@ -285,14 +308,14 @@ AksjonspunktBehandlerTidsbegrensetImpl.defaultProps = {
 };
 
 export const getIsAksjonspunktClosed = createSelector(
-  [(state, ownProps) => ownProps.aksjonspunkter],
-  (gjeldendeAksjonspunkter) => {
+  [(ownProps: OwnProps) => ownProps.aksjonspunkter],
+  (gjeldendeAksjonspunkter: Aksjonspunkt[]): boolean => {
     const aksjonspunkt = finnAksjonspunktForFastsettBgTidsbegrensetAT(gjeldendeAksjonspunkter);
     return aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status.kode) : false;
   },
 );
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => {
   const {
     allePerioder, behandlingId,
     behandlingVersjon, formName,
@@ -324,15 +347,13 @@ const mapStateToProps = (state, ownProps) => {
     });
   });
   return {
-    tableData: createTableData(state, ownProps),
-    isAksjonspunktClosed: getIsAksjonspunktClosed(state, ownProps),
+    tableData: createTableData(ownProps),
+    isAksjonspunktClosed: getIsAksjonspunktClosed(ownProps),
     bruttoPrPeriodeList,
   };
 };
 
-const AksjonspunktBehandlerTidsbegrenset = connect(mapStateToProps)(AksjonspunktBehandlerTidsbegrensetImpl);
-
-AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues = (allePerioder) => {
+AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues = (allePerioder: BeregningsgrunnlagPeriodeProp[]): TidsbegrenseArbeidsforholdValues => {
   const initialValues = {};
   const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(allePerioder);
   relevantePerioder.forEach((periode) => {
@@ -345,7 +366,8 @@ AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues = (allePerioder) => {
   return initialValues;
 };
 
-AksjonspunktBehandlerTidsbegrensetImpl.transformValues = (values, perioder) => {
+AksjonspunktBehandlerTidsbegrensetImpl.transformValues = (values: TidsbegrenseArbeidsforholdValues,
+  perioder: BeregningsgrunnlagPeriodeProp[]): TidsbegrensetArbeidsforholdPeriodeTransformedValues[] => {
   const fastsattePerioder = [];
   const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(perioder);
   relevantePerioder.forEach((periode) => {
@@ -367,4 +389,6 @@ AksjonspunktBehandlerTidsbegrensetImpl.transformValues = (values, perioder) => {
   return fastsattePerioder;
 };
 
-export default injectIntl(AksjonspunktBehandlerTidsbegrenset);
+const AksjonspunktBehandlerTidsbegrenset = connect(mapStateToProps)(AksjonspunktBehandlerTidsbegrensetImpl);
+
+export default AksjonspunktBehandlerTidsbegrenset;

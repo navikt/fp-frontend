@@ -39,10 +39,9 @@ const fourthCol = {
 };
 
 const mockTableData = {
-  arbeidsforholdPeriodeMap: {
-    arbeidsgiver1: [firstCol, secondCol, thirdCol, fourthCol],
-  },
+  arbeidsgiver1: [firstCol, secondCol, thirdCol, fourthCol],
 };
+
 const mockbruttoPerodeList = [
   {
     brutto: 560500,
@@ -203,9 +202,6 @@ const keyForPeriodeOgAndel = (periodeNr, andelNr) => createInputFieldKey(
   beregningsgrunnlagPerioder[periodeNr].beregningsgrunnlagPrStatusOgAndel[andelNr],
   beregningsgrunnlagPerioder[periodeNr],
 );
-const alleKodeverk = {
-  test: 'test',
-};
 
 const arbeidsgiverOpplysningerPerId = {
   123: {
@@ -232,17 +228,19 @@ describe('<AksjonspunktBehandlerTB>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       behandlingVersjon={1}
       behandlingId={1}
+      aksjonspunkter={[]}
+      alleKodeverk={{}}
       allePerioder={[]}
       formName="test"
     />);
     const dataRows = wrapper.findWhere((node) => node.key() === 'arbeidsgiver1');
     const arbeidsgiverNavn = dataRows.first().find('Normaltekst');
-    expect(arbeidsgiverNavn.first().childAt(0).text()).toBe(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1[0].tabellInnhold);
-    const editableFields = mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.filter((periode) => periode.isEditable === true);
-    expect(editableFields).toHaveLength(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length - 1);
+    expect(arbeidsgiverNavn.first().childAt(0).text()).toBe(mockTableData.arbeidsgiver1[0].tabellInnhold);
+    const editableFields = mockTableData.arbeidsgiver1.filter((periode) => periode.isEditable === true);
+    expect(editableFields).toHaveLength(mockTableData.arbeidsgiver1.length - 1);
     const sumRows = wrapper.find('#bruttoPrPeriodeRad');
     const sumCols = sumRows.first().find('td');
-    expect(sumCols).toHaveLength(mockTableData.arbeidsforholdPeriodeMap.arbeidsgiver1.length);
+    expect(sumCols).toHaveLength(mockTableData.arbeidsgiver1.length);
     expect(sumCols.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandlerTB.SumPeriode');
   });
   it('Skal teste at initial values bygges korrekt', () => {
@@ -262,79 +260,85 @@ describe('<AksjonspunktBehandlerTB>', () => {
   it('Skal teste at selector lager forventet objekt ut av en liste med beregningsgrunnlagperioder '
     + 'som inneholder kortvarige arbeidsforhold når vi har aksjonspunkt', () => {
     const expectedResultObjectWhenWeHaveAksjonspunkt = {
-      arbeidsforholdPeriodeMap: {
-        arbeidsgiver123: [
-          {
-            erTidsbegrenset: true,
-            isEditable: false,
-            tabellInnhold: 'arbeidsgiver (123)...5678',
-            inputfieldKey: '',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
-            inputfieldKey: 'inntektField_123_1_2018-06-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
-            inputfieldKey: 'inntektField_123_1_2018-07-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
-            inputfieldKey: 'inntektField_123_1_2018-08-01',
-          },
-        ],
-        arbeidsgiver456: [
-          {
-            erTidsbegrenset: true,
-            isEditable: false,
-            tabellInnhold: 'arbeidsgiver (456)...7890',
-            inputfieldKey: '',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
-            inputfieldKey: 'inntektField_456_2_2018-06-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
-            inputfieldKey: 'inntektField_456_2_2018-07-01',
-          },
-          {
-            erTidsbegrenset: false,
-            isEditable: true,
-            tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
-            inputfieldKey: 'inntektField_456_2_2018-08-01',
-          },
-        ],
-      },
+      arbeidsgiver123: [
+        {
+          erTidsbegrenset: true,
+          isEditable: false,
+          tabellInnhold: 'arbeidsgiver (123)...5678',
+          inputfieldKey: '',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
+          inputfieldKey: 'inntektField_123_1_2018-06-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
+          inputfieldKey: 'inntektField_123_1_2018-07-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelEn),
+          inputfieldKey: 'inntektField_123_1_2018-08-01',
+        },
+      ],
+      arbeidsgiver456: [
+        {
+          erTidsbegrenset: true,
+          isEditable: false,
+          tabellInnhold: 'arbeidsgiver (456)...7890',
+          inputfieldKey: '',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
+          inputfieldKey: 'inntektField_456_2_2018-06-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
+          inputfieldKey: 'inntektField_456_2_2018-07-01',
+        },
+        {
+          erTidsbegrenset: false,
+          isEditable: true,
+          tabellInnhold: formatCurrencyNoKr(overstyrtPrAarAndelTo),
+          inputfieldKey: 'inntektField_456_2_2018-08-01',
+        },
+      ],
     };
-    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, alleKodeverk, arbeidsgiverOpplysningerPerId);
+    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, {}, arbeidsgiverOpplysningerPerId);
     expect(selectorData).toEqual(expectedResultObjectWhenWeHaveAksjonspunkt);
   });
   it('Skal teste at selector henter ut om aksjonspunktet er lukket eller ikke', () => {
     const korrektApLukket = [{
+      kanLoses: false,
+      erAktivt: true,
       definisjon: {
         kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+        kodeverk: 'test',
       },
       status: {
         kode: aksjonspunktStatus.UTFORT,
+        kodeverk: 'test',
       },
     }];
     const korrektApApent = [{
+      kanLoses: true,
+      erAktivt: true,
       definisjon: {
         kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+        kodeverk: 'test',
       },
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: 'test',
       },
     }];
     const selectorDataLukket = getIsAksjonspunktClosed.resultFunc(korrektApLukket);

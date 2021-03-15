@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { FlexRow } from '@fpsak-frontend/shared-components';
@@ -9,7 +9,7 @@ import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvvikopplysningerATFL from '../fellesPaneler/AvvikopplysningerATFLSN';
 
-const viserIkkeAvviksvurdering = (erKombinasjonsstatusATSN: boolean, erKombinasjonsstatusATFLSN: boolean) => (
+const viserIkkeAvviksvurdering = (erKombinasjonsstatusATSN: boolean, erKombinasjonsstatusATFLSN: boolean): ReactElement => (
   <FlexRow>
     <Column xs="12">
       <Normaltekst>
