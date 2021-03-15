@@ -34,8 +34,8 @@ const getForhandsvisFptilbakeCallback = (
 ) => {
   const data = {
     behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.sakstype,
-    saksnummer: fagsak.saksnummerString,
+    fagsakYtelseType: fagsak.fagsakYtelseType,
+    saksnummer: fagsak.saksnummer,
     varseltekst: fritekst,
     mottaker,
     brevmalkode,

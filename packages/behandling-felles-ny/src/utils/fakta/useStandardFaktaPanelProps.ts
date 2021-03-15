@@ -26,7 +26,7 @@ const getBekreftAksjonspunktFaktaCallback = (
   }));
 
   const params = {
-    saksnummer: fagsak.saksnummerString,
+    saksnummer: fagsak.saksnummer,
     behandlingId: behandling.id,
     behandlingVersjon: behandling.versjon,
   };

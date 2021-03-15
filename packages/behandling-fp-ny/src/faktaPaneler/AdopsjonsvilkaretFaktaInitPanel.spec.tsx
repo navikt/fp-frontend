@@ -16,7 +16,7 @@ type INIT_DATA = {
 describe('<AdopsjonsvilkaretFaktaInitPanel>', () => {
   it('skal rendre komponent', () => {
     const fagsak = {
-      sakstype: {
+      fagsakYtelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
       },

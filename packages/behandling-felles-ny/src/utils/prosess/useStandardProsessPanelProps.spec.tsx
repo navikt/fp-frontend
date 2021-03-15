@@ -23,7 +23,7 @@ let realUseContext;
 let useContextMock;
 
 const fagsak = {
-  saksnummerString: '1234',
+  saksnummer: '1234',
 };
 const behandling = {
   id: 1,
@@ -233,7 +233,7 @@ describe('useProsessMenyRegistrerer', () => {
     const { args } = lagreAksjonspunkter.getCalls()[0];
     expect(args).toHaveLength(2);
     expect(args[0]).toEqual({
-      saksnummer: fagsak.saksnummerString,
+      saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{
@@ -306,7 +306,7 @@ describe('useProsessMenyRegistrerer', () => {
     const { args } = lagreOverstyrteAksjonspunkter.getCalls()[0];
     expect(args).toHaveLength(2);
     expect(args[0]).toEqual({
-      saksnummer: fagsak.saksnummerString,
+      saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       overstyrteAksjonspunktDtoer: [{

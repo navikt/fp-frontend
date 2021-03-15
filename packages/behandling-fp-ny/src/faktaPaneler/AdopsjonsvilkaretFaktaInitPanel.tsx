@@ -58,7 +58,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
     skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode))}
     renderPanel={(data) => (
       <AdopsjonFaktaIndex
-        isForeldrepengerFagsak={fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER}
+        isForeldrepengerFagsak={fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER}
         {...data}
       />
     )}

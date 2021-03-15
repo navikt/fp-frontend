@@ -97,7 +97,7 @@ describe('<VarselProsessStegInitPanel>', () => {
       registrerProsessPanel={() => {}}
       toggleSkalOppdatereFagsakContext={() => {}}
       fagsak={{
-        sakstype: {
+        fagsakYtelseType: {
           kode: fagsakYtelseType.FORELDREPENGER,
           kodeverk: '',
         },

@@ -14,7 +14,7 @@ let realUseContext;
 let useContextMock;
 
 const fagsak = {
-  saksnummerString: '1234',
+  saksnummer: '1234',
 };
 const behandling = {
   id: 1,
