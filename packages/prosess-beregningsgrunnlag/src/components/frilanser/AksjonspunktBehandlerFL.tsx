@@ -8,10 +8,11 @@ import {
 } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
+import ArbeidstakerFrilansValues, { FrilansInntektValues } from '../../types/ATFLAksjonspunktTsType';
 
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[]) => any;
-  transformValuesForFL?: (values: any) => number;
+  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[]) => FrilansInntektValues;
+  transformValuesForFL?: (values: ArbeidstakerFrilansValues) => number;
 }
 
 type OwnProps = {
@@ -39,7 +40,10 @@ const AksjonspunktBehandlerFL: FunctionComponent<OwnProps> & StaticFunctions = (
   </Row>
 );
 
-AksjonspunktBehandlerFL.transformValuesForFL = (values) => (values.inntektFrilanser !== undefined ? removeSpacesFromNumber(values.inntektFrilanser) : null);
+AksjonspunktBehandlerFL.transformValuesForFL = (values: ArbeidstakerFrilansValues): number => (values.inntektFrilanser !== undefined
+  ? removeSpacesFromNumber(values.inntektFrilanser)
+  : null);
+
 AksjonspunktBehandlerFL.buildInitialValues = (relevanteAndeler) => {
   if (relevanteAndeler.length === 0) {
     return undefined;

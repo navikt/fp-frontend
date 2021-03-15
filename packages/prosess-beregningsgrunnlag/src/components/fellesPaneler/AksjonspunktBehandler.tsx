@@ -29,6 +29,7 @@ import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
+import ArbeidstakerFrilansValues from '../../types/ATFLAksjonspunktTsType';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -72,7 +73,7 @@ const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], erNyiArbeidslivet: boole
 };
 
 interface StaticFunctions {
-  transformValues?: (values: any) => string;
+  transformValues?: (values: ArbeidstakerFrilansValues) => string;
 }
 
 type OwnProps = {
@@ -147,7 +148,6 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
           {tidsBegrensetInntekt && (
           <AksjonspunktBehandlerTB
             readOnly={readOnly}
-            readOnlySubmitButton={readOnlySubmitButton}
             formName={formName}
             allePerioder={allePerioder}
             behandlingId={behandlingId}
@@ -264,6 +264,6 @@ AksjonspunktBehandlerImpl.defaultProps = {
   allePerioder: undefined,
 };
 
-AksjonspunktBehandlerImpl.transformValues = (values) => values.ATFLVurdering;
+AksjonspunktBehandlerImpl.transformValues = (values: ArbeidstakerFrilansValues): string => values.ATFLVurdering;
 
 export default injectIntl(AksjonspunktBehandlerImpl);

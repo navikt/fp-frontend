@@ -49,10 +49,11 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       mockAndel('123', 100, 200000, false) as BeregningsgrunnlagAndel,
       mockAndel('321', 200000, 100, false) as BeregningsgrunnlagAndel];
     const wrapper = shallowWithIntl(<UnwrappedForm
-      alleAndeler={andeler}
+      alleAndelerIFørstePeriode={andeler}
       allePerioder={perioder}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(7);
@@ -65,9 +66,10 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     andeler[0].arbeidsforhold.opphoersdato = '2019-11-11';
     const wrapper = shallowWithIntl(<UnwrappedForm
       allePerioder={perioder}
-      alleAndeler={andeler}
+      alleAndelerIFørstePeriode={andeler}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
     const rows = wrapper.find('Row');
     const rowsFlex = wrapper.find('FlexRow');
@@ -98,9 +100,10 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       mockAndel('321', 100, 100000, false) as BeregningsgrunnlagAndel];
     const wrapper = shallowWithIntl(<UnwrappedForm
       allePerioder={perioder}
-      alleAndeler={andeler}
+      alleAndelerIFørstePeriode={andeler}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={{}}
     />);
 
     const rows = wrapper.find('Row');

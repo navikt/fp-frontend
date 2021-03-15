@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
@@ -17,16 +17,18 @@ import TilstotendeYtelser from '../tilstotendeYtelser/TilstotendeYtelser';
 
 import MilitaerPanel from '../militar/MilitaerPanel';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
+import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
+
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
 import SammenlignsgrunnlagAOrdningen from '../fellesPaneler/SammenligningsgrunnlagAOrdningen';
 import GrunnlagForAarsinntektPanelAT from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 
 import NaeringsopplysningsPanel from '../selvstendigNaeringsdrivende/NaeringsOpplysningsPanel';
 import beregningStyles from './beregningsgrunnlag.less';
-
-// ------------------------------------------------------------------------------------------ //
-// Variables
-// ------------------------------------------------------------------------------------------ //
+import {
+  ATFLTransformedValues,
+  ATFLDekningsgradBegrunnelseValues, ATFLTidsbegrensetValues, ATFLValues, ATFLTidsbegrensetTransformedValues,
+} from '../../types/ATFLAksjonspunktTsType';
 
 export const TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING = 'begrunnDekningsgradEndring';
 
@@ -36,19 +38,15 @@ const {
   VURDER_DEKNINGSGRAD,
 } = aksjonspunktCodes;
 
-// ------------------------------------------------------------------------------------------ //
-// Methods
-// ------------------------------------------------------------------------------------------ //
-
-const finnAksjonspunktForATFL = (gjeldendeAksjonspunkter) => gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find(
+const finnAksjonspunktForATFL = (gjeldendeAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find(
   (ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
   || ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
 );
 
-const finnAksjonspunktForVurderDekningsgrad = (gjeldendeAksjonspunkter) => gjeldendeAksjonspunkter
+const finnAksjonspunktForVurderDekningsgrad = (gjeldendeAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => gjeldendeAksjonspunkter
   && gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_DEKNINGSGRAD);
 
-const finnAlleAndelerIFørstePeriode = (allePerioder) => {
+const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
   if (allePerioder && allePerioder.length > 0) {
     return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
   }
@@ -66,20 +64,15 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   sammenligningsGrunnlagInntekter: Inntektsgrunnlag,
   skjeringstidspunktDato: string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement => ( // NOSONAR TODO splitte i flere komponenter?
     <div className={beregningStyles.panelLeft}>
       { relevanteStatuser.isArbeidstaker
       && (
         <>
           <GrunnlagForAarsinntektPanelAT
-            alleAndeler={alleAndelerIForstePeriode}
-            aksjonspunkter={gjeldendeAksjonspunkter}
+            alleAndelerIFørstePeriode={alleAndelerIForstePeriode}
             allePerioder={allePerioder}
-            readOnly={readOnly}
-            isKombinasjonsstatus={relevanteStatuser.isKombinasjonsstatus}
             alleKodeverk={alleKodeverk}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         </>
@@ -147,8 +140,11 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
 );
 
 interface StaticFunctions {
-  buildInitialValues?: (gjeldendeAksjonspunkter: Aksjonspunkt[]) => any;
-  transformValues: (values: any, allePerioder: BeregningsgrunnlagPeriodeProp[]) => any;
+  buildInitialValues?: (gjeldendeAksjonspunkter: Aksjonspunkt[]) => ATFLDekningsgradBegrunnelseValues;
+  transformATFLValues: (values: ATFLValues,
+                        relevanteStatuser: RelevanteStatuserProp,
+                        alleAndelerIFørstePeriode: BeregningsgrunnlagAndel[]) => ATFLTransformedValues;
+  transformATFLTidsbegrensetValues: (values: ATFLTidsbegrensetValues, allePerioder: BeregningsgrunnlagPeriodeProp[]) => ATFLTidsbegrensetTransformedValues;
 }
 
 type OwnProps = {
@@ -162,7 +158,7 @@ type OwnProps = {
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     sammenligningsGrunnlagInntekter?: Inntektsgrunnlag;
     skjeringstidspunktDato?: string;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 // ------------------------------------------------------------------------------------------ //
@@ -212,7 +208,7 @@ Beregningsgrunnlag.defaultProps = {
   skjeringstidspunktDato: undefined,
 };
 
-Beregningsgrunnlag.buildInitialValues = (gjeldendeAksjonspunkter) => {
+Beregningsgrunnlag.buildInitialValues = (gjeldendeAksjonspunkter: Aksjonspunkt[]): ATFLDekningsgradBegrunnelseValues => {
   const aksjonspunktATFL = finnAksjonspunktForATFL(gjeldendeAksjonspunkter);
   const aksjonspunktVurderDekninsgrad = finnAksjonspunktForVurderDekningsgrad(gjeldendeAksjonspunkter);
   return {
@@ -220,7 +216,18 @@ Beregningsgrunnlag.buildInitialValues = (gjeldendeAksjonspunkter) => {
     [TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]: (aksjonspunktVurderDekninsgrad) ? aksjonspunktVurderDekninsgrad.begrunnelse : '',
   };
 };
-Beregningsgrunnlag.transformValues = (values, allePerioder) => ({
+
+Beregningsgrunnlag.transformATFLValues = (values: ATFLValues,
+  relevanteStatuser: RelevanteStatuserProp,
+  alleAndelerIFørstePeriode: BeregningsgrunnlagAndel[]): ATFLTransformedValues => ({
+  kode: FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+  begrunnelse: values.ATFLVurdering,
+  inntektPrAndelList: AksjonspunktBehandlerAT.transformValues(values, relevanteStatuser, alleAndelerIFørstePeriode),
+  inntektFrilanser: values.inntektFrilanser !== undefined ? removeSpacesFromNumber(values.inntektFrilanser) : null,
+});
+
+Beregningsgrunnlag.transformATFLTidsbegrensetValues = (values: ATFLTidsbegrensetValues,
+  allePerioder: BeregningsgrunnlagPeriodeProp[]): ATFLTidsbegrensetTransformedValues => ({
   kode: FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
   begrunnelse: values.ATFLVurdering,
   fastsatteTidsbegrensedePerioder: AksjonspunktBehandlerTidsbegrensetImpl.transformValues(values, allePerioder),

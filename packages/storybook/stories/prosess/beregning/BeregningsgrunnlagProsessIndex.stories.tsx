@@ -583,46 +583,58 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
 };
 
 export const naturalYtelse = () => {
-  const andel1 = lagAndel('AT', 240000, undefined, undefined, false);
-  const andel2 = lagAndel('AT', 740000, 744000, undefined, false);
-  const andel3 = lagAndel('AT', 750000, 755000, undefined, false);
+  const andel1MedFrafall = lagAndel('AT', 240000, undefined, undefined, false);
+  const andel1MedMerFrafall = lagAndel('AT', 240000, undefined, undefined, false);
+  const andel2UtenFrafall = lagAndel('AT', 740000, 744000, undefined, false);
+  const andel2MedFrafall = lagAndel('AT', 740000, 744000, undefined, false);
+  const andel3UtenFrafall = lagAndel('AT', 750000, 755000, undefined, false);
+  const andel3MedFrafall = lagAndel('AT', 750000, 755000, undefined, false);
   lagAG('BEDRIFT AS 1', '9109090881', false);
   lagAG('BEDRIFT AS 2', '9109090882', false);
   lagAG('BEDRIFT AS 3', '9109090883', false);
 
-  andel1.arbeidsforhold.arbeidsgiverIdent = '9109090881';
-  andel2.arbeidsforhold.arbeidsgiverIdent = '9109090882';
-  andel3.arbeidsforhold.arbeidsgiverIdent = '9109090883';
-  andel2.bortfaltNaturalytelse = 2231;
-  andel3.bortfaltNaturalytelse = 3231;
-  andel1.dekningsgrad = 100;
-  andel2.dekningsgrad = 80;
-  andel3.dekningsgrad = 80;
-  delete andel1.bortfaltNaturalytelse;
+  andel1MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
+  andel1MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 1231;
+  andel1MedMerFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
+  andel1MedMerFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 5000;
+
+  andel2UtenFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090882';
+  andel2UtenFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = null;
+  andel2MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090882';
+  andel2MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 2321;
+
+  andel3UtenFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090883';
+  andel3UtenFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = null;
+  andel3MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090883';
+  andel3MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 3231;
+
   const statuser = [lagStatus('AT')];
-  const periode1 = lagPeriode([{ ...andel1 }, { ...andel2 }, { ...andel3 }],
+  const periode1 = lagPeriode([{ ...andel1MedFrafall }, { ...andel2UtenFrafall }, { ...andel3UtenFrafall }],
     4432,
     '2019-03-21',
     '2019-05-31',
     [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
-  andel1.bortfaltNaturalytelse = 1231;
-  delete andel2.bortfaltNaturalytelse;
-  delete andel3.bortfaltNaturalytelse;
-  const periode2 = lagPeriode([{ ...andel1 }, { ...andel2 }, { ...andel3 }],
+  const periode2 = lagPeriode([{ ...andel1MedFrafall }, { ...andel2MedFrafall }, { ...andel3UtenFrafall }],
     2432,
     '2019-06-01',
     '2019-07-30',
     [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
-  const periode3 = lagPeriode([{ ...andel1 }, { ...andel2 }, { ...andel3 }],
+  const periode3 = lagPeriode([{ ...andel1MedFrafall }, { ...andel2MedFrafall }, { ...andel3MedFrafall }],
     3432,
     '2019-08-01',
     '2019-09-30',
-    [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }]);
+    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
+  const periode4 = lagPeriode([{ ...andel1MedMerFrafall }, { ...andel2MedFrafall }, { ...andel3MedFrafall }],
+    3432,
+    '2019-10-01',
+    '9999-12-31',
+    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
 
   const perioder = [
     periode1,
     periode2,
     periode3,
+    periode4,
   ];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 432000;
   perioder[0].redusertPrAar = 399148;

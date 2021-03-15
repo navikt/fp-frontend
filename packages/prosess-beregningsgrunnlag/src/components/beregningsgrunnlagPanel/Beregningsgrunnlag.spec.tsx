@@ -172,7 +172,7 @@ describe('<Beregningsgrunnlag>', () => {
     expect(atPanel).toHaveLength(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
-    expect(atPanel.props().alleAndeler[0]).toBe(arbeidstakerAndel);
+    expect(atPanel.props().alleAndelerIFørstePeriode[0]).toBe(arbeidstakerAndel);
   });
   it('Skal teste at korrekte komponenter vises for frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
@@ -388,9 +388,9 @@ describe('<Beregningsgrunnlag>', () => {
   it('Skal teste at transformValues gir forventet resultat', () => {
     const values = {
       ATFLVurdering: 'aaa',
-      inntektFrilanser: 100,
+      inntektFrilanser: '100',
     };
-    const transformedValues = Beregningsgrunnlag.transformValues(values, []);
+    const transformedValues = Beregningsgrunnlag.transformATFLTidsbegrensetValues(values, []);
     expect(transformedValues.kode).toBe('5047');
     expect(transformedValues.begrunnelse).toBe('aaa');
     expect(transformedValues.fastsatteTidsbegrensedePerioder).toHaveLength(0);
@@ -401,7 +401,7 @@ describe('<Beregningsgrunnlag>', () => {
       ATFLVurdering: 'aaa',
       inntektFrilanser: null,
     };
-    const transformedValues = Beregningsgrunnlag.transformValues(values, []);
+    const transformedValues = Beregningsgrunnlag.transformATFLTidsbegrensetValues(values, []);
     expect(transformedValues.kode).toBe('5047');
     expect(transformedValues.begrunnelse).toBe('aaa');
     expect(transformedValues.fastsatteTidsbegrensedePerioder).toHaveLength(0);

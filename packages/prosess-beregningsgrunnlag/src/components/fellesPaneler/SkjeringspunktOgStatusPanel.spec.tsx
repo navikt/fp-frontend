@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { DateLabel } from '@fpsak-frontend/shared-components';
 import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN, SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
 
 const skjeringstidspunktDato = '2017-12-12';
@@ -31,13 +32,13 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
       aktivitetStatusList={aktivitetstatusList}
       skjeringstidspunktDato={skjeringstidspunktDato}
       getKodeverknavn={getKodeverknavn}
+      alleKodeverk={{}}
     />);
 
     const messages = wrapper.find('FormattedMessage');
     expect(messages).toHaveLength(1);
     expect(messages.first().props().id).toBe('Beregningsgrunnlag.Skjeringstidspunkt.SkjeringForBeregning');
-    const dato = wrapper.find('DateLabel');
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dateString' does not exist on type 'HTML... Remove this comment to see the full error message
+    const dato = wrapper.find(DateLabel);
     expect(dato.first().props().dateString).toBe(skjeringstidspunktDato);
   });
 
