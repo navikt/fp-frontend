@@ -59,8 +59,9 @@ export const createInputFieldKey = (andel, periode) => {
 };
 // Lager en liste med FormattedMessages som skal brukes som overskrifter i tabellen
 
-const findArbeidstakerAndeler = (periode) => periode.beregningsgrunnlagPrStatusOgAndel
-  .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
+const findRelevanteArbeidstakerAndeler = (periode) => periode.beregningsgrunnlagPrStatusOgAndel
+  .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
+  .filter((andel) => !andel.erTilkommetAndel);
 
 const createArbeidsforholdMapKey = (arbeidsforhold, arbeidsgiverOpplysningerPerId) => {
   const arbeidsforholdInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
@@ -101,7 +102,7 @@ const lagVisningsnavnForAktivitet = (arbeidsforhold, getKodeverknavn, arbeidsgiv
 // Vi antar at alle andeler ligger i alle perioder, henter derfor kun ut andeler fra den første perioden.
 const initializeMap = (perioder, getKodeverknavn, arbeidsgiverOpplysningerPerId) => {
   const inntektMap = createBeregnetInntektForAlleAndeler(perioder, arbeidsgiverOpplysningerPerId);
-  const alleAndeler = findArbeidstakerAndeler(perioder[0]);
+  const alleAndeler = findRelevanteArbeidstakerAndeler(perioder[0]);
   const mapMedAndeler = {};
   alleAndeler.forEach((andel) => {
     const andelMapNavn = createArbeidsforholdMapKey(andel.arbeidsforhold, arbeidsgiverOpplysningerPerId);
@@ -130,7 +131,7 @@ export const createTableData = createSelector(
     // Etter å ha initialiser mappet med faste bokser kan vi fjerne første element fra lista, da
     // denne ikke skal være en av de redigerbare feltene i tabellen, og det er disse vi skal lage nå
     kopiAvPerioder.forEach((periode) => {
-      const arbeidstakerAndeler = findArbeidstakerAndeler(periode);
+      const arbeidstakerAndeler = findRelevanteArbeidstakerAndeler(periode);
       arbeidstakerAndeler.forEach((andel) => {
         const mapKey = createArbeidsforholdMapKey(andel.arbeidsforhold, arbeidsgiverOpplysningerPerId);
         const mapValue = arbeidsforholdPeriodeMap[mapKey];
@@ -348,8 +349,7 @@ AksjonspunktBehandlerTidsbegrensetImpl.transformValues = (values, perioder) => {
   const fastsattePerioder = [];
   const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(perioder);
   relevantePerioder.forEach((periode) => {
-    const arbeidstakerAndeler = periode.beregningsgrunnlagPrStatusOgAndel
-      .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
+    const arbeidstakerAndeler = findRelevanteArbeidstakerAndeler(periode);
     const fastsatteTidsbegrensedeAndeler = [];
     arbeidstakerAndeler.forEach((andel) => {
       const overstyrtInntekt = removeSpacesFromNumber(values[createInputFieldKey(andel, periode)]);
