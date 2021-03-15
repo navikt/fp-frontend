@@ -47,6 +47,7 @@ interface OwnProps {
 const getForhandsvisCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandling) => (data) => {
   const brevData = {
     ...data,
+    saksnummer: fagsak.saksnummer,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
@@ -63,7 +64,7 @@ const getForhandsvisFptilbakeCallback = (forhandsvisTilbakekrevingMelding, fagsa
     varseltekst: fritekst || '',
     mottaker,
     brevmalkode,
-    saksnummer,
+    saksnummer: saksnummer || fagsak.saksnummer,
   };
   return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
 };

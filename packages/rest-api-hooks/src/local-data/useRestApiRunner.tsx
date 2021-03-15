@@ -6,13 +6,16 @@ import {
 
 import RestApiState from '../RestApiState';
 
-interface RestApiData<T> {
-  startRequest: (params?: any, keepData?: boolean) => Promise<T>;
-  resetRequestData: () => void;
+export type RestApiData<T> = {
   state: RestApiState;
   error?: ErrorType;
   data?: T;
 }
+
+export type RunnerOutput<T> = {
+  startRequest: (params?: any, keepData?: boolean) => Promise<T>;
+  resetRequestData: () => void;
+} & RestApiData<T>;
 
 const DEFAULT_STATE = {
   state: RestApiState.NOT_STARTED,
@@ -23,16 +26,18 @@ const DEFAULT_STATE = {
 /**
  * For mocking i unit-test
  */
-export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
-  const [data, setData] = useState(DEFAULT_STATE);
+export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RunnerOutput<T> {
+  const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
   const startRequest = (params?: any):Promise<T> => {
-    const response = requestApi.startRequest(key, params);
+    const response = requestApi.startRequest<T>(key, params);
     setData({
       state: RestApiState.SUCCESS,
+      // @ts-ignore
       data: response,
       error: undefined,
     });
+    // @ts-ignore
     return Promise.resolve(response);
   };
 
@@ -46,10 +51,10 @@ export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => funct
 /**
  * Hook som gir deg ein funksjon til å starte restkall, i tillegg til kallets status/resultat/feil
  */
-const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string):RestApiData<T> {
-  const [data, setData] = useState(DEFAULT_STATE);
+const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRestApiRunner<T>(key: string): RunnerOutput<T> {
+  const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
-  const startRequest = useCallback((params?: any, keepData = false):Promise<T> => {
+  const startRequest = useCallback((params?: any, keepData = false): Promise<T> => {
     if (requestApi.hasPath(key)) {
       setData((oldState) => ({
         state: RestApiState.LOADING,
@@ -57,24 +62,25 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
         error: undefined,
       }));
 
-      return requestApi.startRequest(key, params)
+      return requestApi.startRequest<T>(key, params)
         .then((dataRes) => {
-          if (dataRes.payload !== REQUEST_POLLING_CANCELLED) {
-            setData({
-              state: RestApiState.SUCCESS,
-              data: dataRes.payload,
-              error: undefined,
-            });
-          }
+          setData({
+            state: RestApiState.SUCCESS,
+            data: dataRes.payload,
+            error: undefined,
+          });
           return Promise.resolve(dataRes.payload);
         })
         .catch((error) => {
-          setData({
-            state: RestApiState.ERROR,
-            data: undefined,
-            error,
-          });
-          throw error;
+          if (error?.message !== REQUEST_POLLING_CANCELLED) {
+            setData({
+              state: RestApiState.ERROR,
+              data: undefined,
+              error,
+            });
+            throw error;
+          }
+          return undefined;
         });
     }
     setData(DEFAULT_STATE);

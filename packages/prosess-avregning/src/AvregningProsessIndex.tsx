@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Fagsak, SimuleringResultat, TilbakekrevingValg,
+  Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import AvregningPanel from './components/AvregningPanel';
 import messages from '../i18n/nb_NO.json';
@@ -20,10 +19,10 @@ interface OwnProps {
   fagsak: Fagsak;
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string, saksnummer: string) => Promise<any>;
+  previewFptilbakeCallback: (mottaker: string, brevmalkode: string, fritekst: string) => Promise<any>;
 }
 
-const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   fagsak,
   behandling,
   aksjonspunkter,

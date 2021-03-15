@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, KodeverkMedNavn, Personoversikt, Soknad, Ytelsefordeling,
+  StandardFaktaPanelProps, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import OmsorgInfoPanel from './components/OmsorgInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -17,14 +16,12 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
   personoversikt: Personoversikt;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
-const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   ytelsefordeling,
   soknad,

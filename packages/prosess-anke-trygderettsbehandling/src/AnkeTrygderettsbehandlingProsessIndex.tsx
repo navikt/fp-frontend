@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AnkeVurdering } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import TrygderettsbehandlingForm from './components/TrygderettsbehandlingForm';
 import { BrevData } from './components/PreviewAnkeLink';
@@ -21,7 +20,7 @@ interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
 }
 
-const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   ankeVurdering,
   aksjonspunkter,

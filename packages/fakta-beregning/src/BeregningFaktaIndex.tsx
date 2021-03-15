@@ -1,10 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
-import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
+import { ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Beregningsgrunnlag } from '@fpsak-frontend/types';
+
 import BeregningInfoPanel from './components/BeregningInfoPanel';
 import messages from '../i18n/nb_NO.json';
 
@@ -16,22 +14,12 @@ const intl = createIntl({
 }, cache);
 
 type OwnProps = {
-    behandling: Behandling;
-    beregningsgrunnlag?: Beregningsgrunnlag;
-    alleMerknaderFraBeslutter: {
-        notAccepted?: boolean;
-    };
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    aksjonspunkter: Aksjonspunkt[];
-    submitCallback: (...args: any[]) => any;
-    readOnly: boolean;
-    harApneAksjonspunkter: boolean;
-    submittable: boolean;
-    erOverstyrer: boolean;
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  beregningsgrunnlag?: Beregningsgrunnlag;
+  erOverstyrer: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-const BeregningFaktaIndex: FunctionComponent<OwnProps> = ({
+const BeregningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   beregningsgrunnlag,
   alleKodeverk,
@@ -59,9 +47,5 @@ const BeregningFaktaIndex: FunctionComponent<OwnProps> = ({
     />
   </RawIntlProvider>
 );
-
-BeregningFaktaIndex.defaultProps = {
-  beregningsgrunnlag: undefined,
-};
 
 export default BeregningFaktaIndex;

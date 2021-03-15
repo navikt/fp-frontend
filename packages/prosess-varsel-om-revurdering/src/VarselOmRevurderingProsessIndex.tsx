@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad,
+  FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';
 import messages from '../i18n/nb_NO.json';
@@ -21,11 +20,10 @@ interface OwnProps {
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling: FamilieHendelse;
-  aksjonspunkter: Aksjonspunkt[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
-const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   familiehendelse,
   soknad,

@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { BeregningsresultatEs } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
+import { BeregningsresultatEs, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import BeregningsresultatEngangsstonadForm from './components/BeregningsresultatEngangsstonadForm';
 import messages from '../i18n/nb_NO.json';
@@ -23,7 +22,7 @@ interface OwnProps {
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
 }
 
-const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   beregningresultatEngangsstonad,
   aksjonspunkter,

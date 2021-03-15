@@ -32,7 +32,8 @@ export const getUseGlobalStateRestApiMock = (requestApi: AbstractRequestApi) => 
   return {
     state: RestApiState.SUCCESS,
     error: undefined,
-    data: requestApi.startRequest(key, params),
+    // @ts-ignore
+    data: requestApi.startRequest<T>(key, params),
   };
 };
 
@@ -60,7 +61,7 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
         data: undefined,
       });
 
-      requestApi.startRequest(key, params)
+      requestApi.startRequest<T>(key, params)
         .then((dataRes) => {
           dispatch({ type: 'success', key, data: dataRes.payload });
           setData({

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Aksjonspunkt, KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
@@ -12,7 +12,6 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import RegistrereVergeFaktaForm, { FormValues as RegistrereFormValues } from './RegistrereVergeFaktaForm';
-import Verge from '../types/VergeTsType';
 
 type FormValues = RegistrereFormValues & {
   begrunnelse?: string,

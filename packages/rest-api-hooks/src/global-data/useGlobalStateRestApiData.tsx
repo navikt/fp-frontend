@@ -10,7 +10,8 @@ import { RestApiStateContext } from './RestApiContext';
 export const useGlobalStateRestApiDataMock = (requestApi: AbstractRequestApi) => function useGlobalStateRestApiDataa<T>(
   key: string,
 ): T {
-  return requestApi.startRequest(key, {});
+  // @ts-ignore
+  return requestApi.startRequest<T>(key, {});
 };
 
 /**

@@ -9,8 +9,8 @@ import {
   Feriepengegrunnlag,
   Personoversikt,
   Soknad,
+  StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
 
 import TilkjentYtelsePanel from './components/TilkjentYtelsePanel';
 import messages from '../i18n/nb_NO.json';
@@ -32,7 +32,7 @@ interface OwnProps {
   feriepengegrunnlag?: Feriepengegrunnlag;
 }
 
-const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   beregningresultat,
   familiehendelse,

@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { StandardProsessFormProps } from '@fpsak-frontend/prosess-felles';
-import { ArbeidsgiverOpplysningerPerId, Soknad } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Soknad, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import SokersOpplysningspliktForm from './components/SokersOpplysningspliktForm';
 import messages from '../i18n/nb_NO.json';
@@ -19,7 +18,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessFormProps> = ({
+const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   soknad,
   aksjonspunkter,

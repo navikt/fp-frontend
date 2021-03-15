@@ -6,13 +6,13 @@ import { REQUEST_POLLING_CANCELLED, AbstractRequestApi } from '@fpsak-frontend/r
 
 import RestApiState from '../RestApiState';
 
-interface RestApiData<T> {
+export interface RestApiData<T> {
   state: RestApiState;
   error?: Error;
   data?: T;
 }
 
-interface Options {
+export interface Options {
   updateTriggers?: DependencyList;
   keepData?: boolean;
   suspendRequest?: boolean;
@@ -29,11 +29,12 @@ const defaultOptions = {
  */
 export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function useRestApi<T>(
   key: string, params?: any, options: Options = defaultOptions,
-):RestApiData<T> {
+): RestApiData<T> {
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
     error: undefined,
-    data: options.suspendRequest ? undefined : requestApi.startRequest(key, params),
+    // @ts-ignore
+    data: options.suspendRequest ? undefined : requestApi.startRequest<T>(key, params),
   };
 };
 
@@ -49,10 +50,10 @@ const DEFAULT_STATE = {
   */
 const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>(
   key: string, params?: any, options?: Options,
-):RestApiData<T> {
+): RestApiData<T> {
   const allOptions = { ...defaultOptions, ...options };
 
-  const [data, setData] = useState(DEFAULT_STATE);
+  const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
   useEffect(() => {
     if (requestApi.hasPath(key) && !allOptions.suspendRequest) {
@@ -62,22 +63,22 @@ const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T>
         data: allOptions.keepData ? oldState.data : undefined,
       }));
 
-      requestApi.startRequest(key, params)
+      requestApi.startRequest<T>(key, params)
         .then((dataRes) => {
-          if (dataRes.payload !== REQUEST_POLLING_CANCELLED) {
-            setData({
-              state: RestApiState.SUCCESS,
-              data: dataRes.payload,
-              error: undefined,
-            });
-          }
+          setData({
+            state: RestApiState.SUCCESS,
+            data: dataRes.payload,
+            error: undefined,
+          });
         })
         .catch((error) => {
-          setData({
-            state: RestApiState.ERROR,
-            data: undefined,
-            error,
-          });
+          if (error?.message !== REQUEST_POLLING_CANCELLED) {
+            setData({
+              state: RestApiState.ERROR,
+              data: undefined,
+              error,
+            });
+          }
         });
     } else if (!requestApi.hasPath(key)) {
       setData(DEFAULT_STATE);

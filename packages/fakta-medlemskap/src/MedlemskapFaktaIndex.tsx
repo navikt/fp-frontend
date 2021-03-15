@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  Behandling, InntektArbeidYtelse, Soknad, KodeverkMedNavn, Medlemskap, ArbeidsgiverOpplysningerPerId,
+  StandardFaktaPanelProps, InntektArbeidYtelse, Soknad, Medlemskap, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
 
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -17,17 +16,15 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  behandling: Behandling;
   medlemskap: Medlemskap;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   isForeldrepengerFagsak: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   soknad,
   inntektArbeidYtelse,

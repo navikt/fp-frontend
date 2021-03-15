@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { StandardFaktaProps } from '@fpsak-frontend/fakta-felles';
+import { StandardFaktaPanelProps, Verge } from '@fpsak-frontend/types';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';
-import Verge from './types/VergeTsType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();
@@ -16,12 +14,10 @@ const intl = createIntl({
 }, cache);
 
 type OwnProps = {
-  behandling: Behandling;
   verge?: Verge;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 };
 
-const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaProps> = ({
+const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   verge,
   aksjonspunkter,
