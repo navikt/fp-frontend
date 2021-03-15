@@ -45,7 +45,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     isCachingOn: true,
   });
 
-  const standardPanelProps = useStandardFaktaPanelProps(initData, aksjonspunktKoder, overstyringApKoder) as StandardFaktaPanelProps;
+  const standardPanelProps = useStandardFaktaPanelProps(initData, aksjonspunktKoder, overstyringApKoder);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,

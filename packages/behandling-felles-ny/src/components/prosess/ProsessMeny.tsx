@@ -17,7 +17,8 @@ const finnProsessmenyType = (
   }
   if (status === vilkarUtfallType.OPPFYLT) {
     return StepType.success;
-  } if (status === vilkarUtfallType.IKKE_OPPFYLT) {
+  }
+  if (status === vilkarUtfallType.IKKE_OPPFYLT) {
     return StepType.danger;
   }
   return StepType.default;

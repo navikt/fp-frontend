@@ -31,7 +31,7 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   submittable,
   aksjonspunkter,
 }) => {
-  const sorterteAktivitetskrav = useMemo(() => uttakKontrollerAktivitetskrav
+  const sorterteAktivitetskrav = useMemo(() => [...uttakKontrollerAktivitetskrav]
     .sort((krav1, krav2) => moment(krav1.fom).diff(moment(krav2.fom))), [uttakKontrollerAktivitetskrav]);
   return (
     <RawIntlProvider value={intl}>

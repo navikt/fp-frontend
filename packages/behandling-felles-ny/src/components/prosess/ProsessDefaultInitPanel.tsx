@@ -51,7 +51,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     isCachingOn: true,
   });
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder, lagringSideEffekter) as StandardProsessPanelProps;
+  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
 
   const data = {
     ...initData,
