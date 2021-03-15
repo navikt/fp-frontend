@@ -35,14 +35,14 @@ const FagsakList: FunctionComponent<OwnProps> = ({
     <Table headerTextCodes={headerTextCodes} classNameTable={styles.table}>
       {fagsaker.map((fagsak) => (
         <TableRow
-          key={fagsak.saksnummerString}
-          id={fagsak.saksnummerString}
+          key={fagsak.saksnummer}
+          id={fagsak.saksnummer}
           model={document}
           onMouseDown={selectFagsakCallback}
           onKeyDown={selectFagsakCallback}
         >
-          <TableColumn>{fagsak.saksnummerString}</TableColumn>
-          <TableColumn>{getKodeverknavn(fagsak.sakstype)}</TableColumn>
+          <TableColumn>{fagsak.saksnummer}</TableColumn>
+          <TableColumn>{getKodeverknavn(fagsak.fagsakYtelseType)}</TableColumn>
           <TableColumn>{getKodeverknavn(fagsak.status)}</TableColumn>
         </TableRow>
       ))}

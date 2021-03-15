@@ -39,7 +39,7 @@ const FagsakSearchIndex: FunctionComponent = () => {
 
   useEffect(() => {
     if (sokFerdig && fagsaker.length === 1) {
-      goToFagsak(fagsaker[0].saksnummerString);
+      goToFagsak(fagsaker[0].saksnummer);
     }
   }, [sokFerdig, fagsaker]);
 

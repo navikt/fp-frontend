@@ -62,7 +62,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const getKodeverkFn = useGetKodeverkFn();
 
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.status);
-  const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.sakstype);
+  const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.fagsakYtelseType);
 
   const { data: risikoAksjonspunkt } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
@@ -83,8 +83,8 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
   const getBehandlingLocation = useCallback((valgtBehandlingId) => getLocationWithDefaultProsessStegAndFakta({
     ...location,
-    pathname: pathToBehandling(fagsak.saksnummerString, valgtBehandlingId),
-  }), [fagsak.saksnummerString]);
+    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingId),
+  }), [fagsak.saksnummer]);
 
   return (
     <div className={styles.panelPadding}>
@@ -92,11 +92,11 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
         <LoadingPanel />
       )}
       {harHentetBehandlinger && shouldRedirectToBehandlinger && (
-        <Redirect to={findPathToBehandling(fagsak.saksnummerString, location, alleBehandlinger)} />
+        <Redirect to={findPathToBehandling(fagsak.saksnummer, location, alleBehandlinger)} />
       )}
       {harHentetBehandlinger && !shouldRedirectToBehandlinger && (
         <FagsakProfilSakIndex
-          saksnummer={fagsak.saksnummerString}
+          saksnummer={fagsak.saksnummer}
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}

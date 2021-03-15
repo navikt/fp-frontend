@@ -40,16 +40,16 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
         {aktorInfo.fagsaker.length ? aktorInfo.fagsaker.map((fagsak) => (
           <Lenkepanel
             linkCreator={(props) => (
-              <Link to={finnPathToFagsak(fagsak.saksnummerString)} className={props.className}>
+              <Link to={finnPathToFagsak(fagsak.saksnummer)} className={props.className}>
                 {props.children}
               </Link>
             )}
-            key={fagsak.saksnummerString}
+            key={fagsak.saksnummer}
             href="#"
             tittelProps="normaltekst"
           >
-            {getKodeverknavn(fagsak.sakstype)}
-            {` (${fagsak.saksnummerString}) `}
+            {getKodeverknavn(fagsak.fagsakYtelseType)}
+            {` (${fagsak.saksnummer}) `}
             {getKodeverknavn(fagsak.status)}
           </Lenkepanel>
         )) : <FormattedMessage id="AktoerGrid.IngenFagsaker" />}

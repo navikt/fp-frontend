@@ -8,8 +8,8 @@ import SearchForm from './SearchForm';
 
 describe('<FagsakSearch>', () => {
   const fagsak = {
-    saksnummerString: '12345',
-    sakstype: {
+    saksnummer: '12345',
+    fagsakYtelseType: {
       kode: 'TEST',
       kodeverk: '',
     },
@@ -21,12 +21,6 @@ describe('<FagsakSearch>', () => {
       kode: 'UBEH',
       kodeverk: '',
     },
-    barnFodt: '13‎.‎02‎.‎2017‎',
-    opprettet: '13‎.‎02‎.‎2017‎ ‎09‎:‎54‎:‎22',
-    endret: '13‎.‎02‎.‎2017‎',
-    antallBarn: 1,
-    kanRevurderingOpprettes: false,
-    skalBehandlesAvInfotrygd: false,
     dekningsgrad: 100,
   };
 

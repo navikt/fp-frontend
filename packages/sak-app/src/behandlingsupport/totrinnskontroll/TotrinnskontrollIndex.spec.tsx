@@ -27,8 +27,8 @@ jest.mock('react-router-dom', () => ({
 
 describe('<TotrinnskontrollIndex>', () => {
   const fagsak = {
-    saksnummerString: '1',
-    sakstype: {
+    saksnummer: '1',
+    fagsakYtelseType: {
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: '',
     },

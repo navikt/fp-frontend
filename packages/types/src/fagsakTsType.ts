@@ -1,8 +1,8 @@
 import Kodeverk from './kodeverkTsType';
 
 type Fagsak = Readonly<{
-  saksnummerString: string;
-  sakstype: Kodeverk;
+  saksnummer: string;
+  fagsakYtelseType: Kodeverk;
   relasjonsRolleType: Kodeverk;
   status: Kodeverk;
   dekningsgrad: number;

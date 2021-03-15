@@ -90,7 +90,7 @@ const BehandlingInnsynIndex: FunctionComponent<OwnProps> = ({
     };
   }, []);
 
-  const innsynEndepunkter = useMemo(() => getInnsynData(fagsak.saksnummerString), [fagsak.saksnummerString]);
+  const innsynEndepunkter = useMemo(() => getInnsynData(fagsak.saksnummer), [fagsak.saksnummer]);
   const { data, state } = restApiInnsynHooks.useMultipleRestApi<FetchedData>(innsynEndepunkter,
     { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
 

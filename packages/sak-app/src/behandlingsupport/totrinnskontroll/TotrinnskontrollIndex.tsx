@@ -104,11 +104,11 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const forhandsvisVedtaksbrev = useCallback(() => {
     forhandsvisMelding(false, {
       behandlingUuid: behandling.uuid,
-      ytelseType: fagsak.sakstype,
+      ytelseType: fagsak.fagsakYtelseType,
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummerString, behandlingId, behandlingVersjon,
+  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, behandlingId, behandlingVersjon,
     setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
   [behandlingId, behandlingVersjon]);
 
@@ -125,7 +125,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
         readOnly={brukernavn === behandling.ansvarligSaksbehandler || kanVeilede}
         onSubmit={onSubmit}
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        fagsakYtelseType={fagsak.sakstype}
+        fagsakYtelseType={fagsak.fagsakYtelseType}
         alleKodeverk={alleKodeverk}
         behandlingKlageVurdering={totrinnsKlageVurdering}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
@@ -133,7 +133,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       {visBeslutterModal && (
         <BeslutterModalIndex
           behandling={behandling}
-          fagsakYtelseType={fagsak.sakstype}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
           pushLocation={history.push}
           allAksjonspunktApproved={erAlleAksjonspunktGodkjent}
           erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}

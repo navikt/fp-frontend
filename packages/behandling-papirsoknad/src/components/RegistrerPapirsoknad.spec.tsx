@@ -19,8 +19,8 @@ import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 
 const fagsak = {
-  saksnummerString: '123456',
-  sakstype: {
+  saksnummer: '123456',
+  fagsakYtelseType: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
@@ -187,7 +187,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const { args } = calls[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual({
-      saksnummer: fagsak.saksnummerString,
+      saksnummer: fagsak.saksnummer,
       behandlingId: behandling.id,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{

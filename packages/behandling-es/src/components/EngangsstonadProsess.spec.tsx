@@ -25,8 +25,8 @@ import EngangsstonadProsess from './EngangsstonadProsess';
 
 describe('<EngangsstonadProsess>', () => {
   const fagsak = {
-    saksnummerString: '123456',
-    sakstype: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
+    saksnummer: '123456',
+    fagsakYtelseType: { kode: fagsakYtelseType.FORELDREPENGER, kodeverk: 'test' },
     status: { kode: fagsakStatus.UNDER_BEHANDLING, kodeverk: 'test' },
   } as Fagsak;
 
@@ -416,7 +416,7 @@ describe('<EngangsstonadProsess>', () => {
     expect(requestData[0].params).toEqual({
       param: 'test',
       behandlingUuid: 'uuid-test',
-      ytelseType: fagsak.sakstype,
+      ytelseType: fagsak.fagsakYtelseType,
     });
   });
 
@@ -453,7 +453,7 @@ describe('<EngangsstonadProsess>', () => {
     expect(requestData[0].params).toEqual({
       behandlingUuid: 'uuid-test',
       brevmalkode: undefined,
-      fagsakYtelseType: fagsak.sakstype,
+      fagsakYtelseType: fagsak.fagsakYtelseType,
       mottaker: {
         param: 'test',
       },
