@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { AksessRettigheter } from '@fpsak-frontend/types';
-import { InngangsvilkarDefaultProsessStegPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitWrapper, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import FodselInngangsvilkarInitPanel from './inngangsvilkarPaneler/FodselInngangsvilkarInitPanel';
 import AdopsjonInngangsvilkarInitPanel from './inngangsvilkarPaneler/AdopsjonInngangsvilkarInitPanel';
@@ -26,7 +26,7 @@ const InngangsvilkarProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
 }) => (
-  <InngangsvilkarDefaultProsessStegPanel
+  <InngangsvilkarDefaultInitWrapper
     valgtProsessSteg={valgtProsessSteg}
     registrerProsessPanel={registrerProsessPanel}
     apentFaktaPanelInfo={apentFaktaPanelInfo}

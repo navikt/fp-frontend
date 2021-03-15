@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { InngangsvilkarDefaultProsessStegPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitWrapper } from '@fpsak-frontend/behandling-felles-ny';
 import { AksessRettigheter } from '@fpsak-frontend/types';
 
 import InngangsvilkarProsessStegInitPanel from './InngangsvilkarProsessStegInitPanel';
@@ -16,7 +16,7 @@ describe('<InngangsvilkarProsessStegInitPanel>', () => {
       rettigheter={{} as AksessRettigheter}
     />);
 
-    const panel = wrapper.find(InngangsvilkarDefaultProsessStegPanel);
+    const panel = wrapper.find(InngangsvilkarDefaultInitWrapper);
 
     expect(panel).toHaveLength(1);
   });

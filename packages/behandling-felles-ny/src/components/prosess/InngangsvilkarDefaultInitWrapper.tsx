@@ -17,7 +17,7 @@ import getPackageIntl from '../../../i18n/getPackageIntl';
 import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
 import InngangsvilkarPanelInitProps from '../../types/inngangsvilkarPanelInitProps';
 
-import styles from './inngangsvilkarDefaultProsessStegPanel.less';
+import styles from './inngangsvilkarDefaultInitWrapper.less';
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
 
@@ -47,7 +47,7 @@ interface OwnProps {
   rightPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
-const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
@@ -144,4 +144,4 @@ const InngangsvilkarDefaultProsessStegPanel: FunctionComponent<OwnProps & Proses
   );
 };
 
-export default InngangsvilkarDefaultProsessStegPanel;
+export default InngangsvilkarDefaultInitWrapper;

@@ -41,7 +41,6 @@ describe('<FaktaContainer>', () => {
     useEffect = jest.spyOn(React, 'useEffect');
     mockUseEffect();
     mockUseEffect();
-    mockUseEffect();
 
     const wrapper = shallow(<FaktaContainer
       behandlingVersjon={1}
@@ -54,6 +53,6 @@ describe('<FaktaContainer>', () => {
 
     const meny = wrapper.find(FaktaMeny);
 
-    expect(meny).toHaveLength(1);
+    expect(meny).toHaveLength(0);
   });
 });
