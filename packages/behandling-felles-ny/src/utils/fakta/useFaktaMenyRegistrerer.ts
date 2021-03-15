@@ -26,8 +26,8 @@ const useFaktaMenyRegistrerer = (
     });
   }, [dataState]);
 
-  const erAktiv = valgtFaktaSteg === id
-    || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT);
+  const erAktiv = skalVisesImeny && (valgtFaktaSteg === id
+    || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT));
 
   const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
 
@@ -41,17 +41,17 @@ const useFaktaMenyRegistrerer = (
           harApneAksjonspunkter,
           harHentetInitData: true,
         });
-        setPanelValgt(erAktiv);
       } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
         registrerFaktaPanel({
           id,
           harHentetInitData: true,
         });
       }
+      setPanelValgt(erAktiv);
     }
   }, [dataState, forrigeSkalVisesIMeny, skalVisesImeny, erAktiv, harApneAksjonspunkter]);
 
-  return erPanelValgt;
+  return skalVisesImeny && erPanelValgt;
 };
 
 export default useFaktaMenyRegistrerer;

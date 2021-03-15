@@ -27,8 +27,8 @@ const useProsessMenyRegistrerer = (
     });
   }, [dataState]);
 
-  const erAktiv = valgtProsessSteg === id
-    || (erAktivTillegg && harApentAksjonspunkt && valgtProsessSteg === DEFAULT_PANEL_VALGT);
+  const erAktiv = skalVisesImeny && (valgtProsessSteg === id
+    || (erAktivTillegg && harApentAksjonspunkt && valgtProsessSteg === DEFAULT_PANEL_VALGT));
 
   const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
 
@@ -43,17 +43,17 @@ const useProsessMenyRegistrerer = (
           status,
           harHentetInitData: true,
         });
-        setPanelValgt(erAktiv);
       } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
         registrerProsessPanel({
           id,
           harHentetInitData: true,
         });
       }
+      setPanelValgt(erAktiv);
     }
   }, [dataState, skalVisesImeny, forrigeSkalVisesIMeny, erAktiv, harApentAksjonspunkt, status]);
 
-  return erPanelValgt;
+  return skalVisesImeny && erPanelValgt;
 };
 
 export default useProsessMenyRegistrerer;
