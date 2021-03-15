@@ -839,7 +839,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     isRevurdering: props.behandlingType.kode === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
-    saksnummer: fagsak.saksnummerString,
+    saksnummer: fagsak.saksnummer,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
     stonadskonto: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'stonadskonto'),
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),

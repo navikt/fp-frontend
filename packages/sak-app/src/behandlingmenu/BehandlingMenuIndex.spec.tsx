@@ -26,8 +26,8 @@ const navAnsatt = {
 };
 
 const fagsak = {
-  saksnummerString: '123',
-  sakstype: {
+  saksnummer: '123',
+  fagsakYtelseType: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'BEHANDLING_TYPE',
   },

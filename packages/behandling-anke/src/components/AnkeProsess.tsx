@@ -57,7 +57,7 @@ const previewCallback = (forhandsvisMelding, fagsak: Fagsak, behandling: Behandl
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.sakstype,
+    ytelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };

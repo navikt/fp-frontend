@@ -15,8 +15,8 @@ import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
 const fagsak = {
-  saksnummerString: '123456',
-  sakstype: {
+  saksnummer: '123456',
+  fagsakYtelseType: {
     kode: fagsakYtelseType.FORELDREPENGER,
     kodeverk: 'YTELSE_TYPE',
   },
@@ -65,7 +65,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={{
         ...fagsak,
-        sakstype: {
+        fagsakYtelseType: {
           kode: fagsakYtelseType.SVANGERSKAPSPENGER,
           kodeverk: 'YTELSE_TYPE',
         },

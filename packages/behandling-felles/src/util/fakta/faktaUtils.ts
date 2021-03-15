@@ -54,7 +54,7 @@ export const getBekreftAksjonspunktCallback = (
   }));
 
   const params = {
-    saksnummer: fagsak.saksnummerString,
+    saksnummer: fagsak.saksnummer,
     behandlingId: behandling.id,
     behandlingVersjon: behandling.versjon,
   };

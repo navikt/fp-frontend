@@ -370,8 +370,8 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     varseltekst: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'varseltekst'),
     initialValues: buildInitialValues(state, ownProps),
     behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
-    saksnummer: fagsak.saksnummerString,
-    isForeldrepenger: fagsak.sakstype.kode === fagsakYtelseType.FORELDREPENGER,
+    saksnummer: fagsak.saksnummer,
+    isForeldrepenger: fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER,
     hasOpenTilbakekrevingsbehandling,
     onSubmit: lagSubmitFn(ownProps),
   };
