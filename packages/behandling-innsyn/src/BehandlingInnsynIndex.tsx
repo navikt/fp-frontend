@@ -1,41 +1,17 @@
-import React, {
-  FunctionComponent, useEffect, useState, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
-import {
-  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
-} from '@fpsak-frontend/behandling-felles';
-import { Behandling, Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import {
+  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
+  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
+} from '@fpsak-frontend/behandling-felles-ny';
 
-import InnsynPaneler from './components/InnsynPaneler';
-import FetchedData from './types/fetchedDataTsType';
-import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from './data/innsynBehandlingApi';
+import { requestInnsynApi, InnsynBehandlingApiKeys } from './data/innsynBehandlingApi';
+import BehandleInnsynProsessStegInitPanel from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
+import InnsynVedtakProsessStegInitPanel from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 
-const getInnsynData = (saksnummer: string) => [
-  { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: InnsynBehandlingApiKeys.VILKAR },
-  { key: InnsynBehandlingApiKeys.INNSYN },
-  { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } }];
-
-interface OwnProps {
-  behandlingId: number;
-  fagsak: Fagsak;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
-  rettigheter: Rettigheter;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  valgtProsessSteg?: string;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
-  behandlingEventHandler: {
-    setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;
-    clear: () => void;
-  };
-  opneSokeside: () => void;
-  setRequestPendingMessage: (message: string) => void;
-}
-
-const BehandlingInnsynIndex: FunctionComponent<OwnProps> = ({
+const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
   behandlingId,
   oppdaterBehandlingVersjon,
@@ -44,58 +20,25 @@ const BehandlingInnsynIndex: FunctionComponent<OwnProps> = ({
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
+  valgtFaktaSteg,
   opneSokeside,
   setRequestPendingMessage,
 }) => {
-  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
-  const behandling = nyOgForrigeBehandling.current;
-  const forrigeBehandling = nyOgForrigeBehandling.previous;
+  useInitRequestApi(requestInnsynApi, setRequestPendingMessage);
 
-  const setBehandling = useCallback((nyBehandling) => {
-    requestInnsynApi.resetCache();
-    requestInnsynApi.setLinks(nyBehandling.links);
-    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
-  }, []);
+  const {
+    behandling, behandlingState, hentBehandling, setBehandling,
+  } = useBehandling(
+    requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingId,
+  );
 
-  const { startRequest: hentBehandling, data: behandlingRes } = restApiInnsynHooks
-    .useRestApiRunner<Behandling>(InnsynBehandlingApiKeys.BEHANDLING_INNSYN);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  );
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
+  useInitBehandlingHandlinger(requestInnsynApi, InnsynBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
-  const { startRequest: nyBehandlendeEnhet } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = restApiInnsynHooks.useRestApiRunner<Behandling>(InnsynBehandlingApiKeys.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.HENLEGG_BEHANDLING);
-  const { startRequest: settPaVent } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.UPDATE_ON_HOLD);
-
-  useEffect(() => {
-    behandlingEventHandler.setHandler({
-      endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
-        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
-      henleggBehandling: (params) => henleggBehandling(params),
-    });
-
-    requestInnsynApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestInnsynApi.setAddErrorMessageHandler(addErrorMessage);
-
-    hentBehandling({ behandlingId }, false);
-
-    return () => {
-      behandlingEventHandler.clear();
-    };
-  }, []);
-
-  const innsynEndepunkter = useMemo(() => getInnsynData(fagsak.saksnummer), [fagsak.saksnummer]);
-  const { data, state } = restApiInnsynHooks.useMultipleRestApi<FetchedData>(innsynEndepunkter,
-    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
-
-  const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  if (!behandling || (hasNotFinished && data === undefined)) {
+  if (!behandling) {
     return <LoadingPanel />;
   }
 
@@ -103,22 +46,44 @@ const BehandlingInnsynIndex: FunctionComponent<OwnProps> = ({
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={hasNotFinished ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={behandling.versjon}
       />
-      <InnsynPaneler
-        behandling={hasNotFinished ? forrigeBehandling : behandling}
-        fetchedData={data}
-        fagsak={fagsak}
-        kodeverk={kodeverk}
-        rettigheter={rettigheter}
-        valgtProsessSteg={valgtProsessSteg}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-        settPaVent={settPaVent}
+      <BehandlingPaVent
+        behandling={behandling}
         hentBehandling={hentBehandling}
-        opneSokeside={opneSokeside}
-        setBehandling={setBehandling}
+        kodeverk={kodeverk}
+        requestApi={requestInnsynApi}
+        oppdaterPaVentKey={InnsynBehandlingApiKeys.UPDATE_ON_HOLD}
+        aksjonspunktKey={InnsynBehandlingApiKeys.AKSJONSPUNKTER}
       />
+      <StandardPropsProvider
+        behandling={behandling}
+        fagsak={fagsak}
+        rettigheter={rettigheter}
+        hasFetchError={behandlingState === RestApiState.ERROR}
+        alleKodeverk={kodeverk}
+        lagreAksjonspunkter={lagreAksjonspunkter}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      >
+        <BehandlingContainer
+          behandling={behandling}
+          valgtProsessSteg={valgtProsessSteg}
+          valgtFaktaSteg={valgtFaktaSteg}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+          hentProsessPaneler={(props, ekstraProps) => (
+            <>
+              <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
+              <InnsynVedtakProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                opneSokeside={opneSokeside}
+                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+              />
+            </>
+          )}
+        />
+      </StandardPropsProvider>
     </>
   );
 };

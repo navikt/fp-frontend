@@ -4,7 +4,6 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 export enum InnsynBehandlingApiKeys {
   BEHANDLING_INNSYN = 'BEHANDLING_INNSYN',
   AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  VILKAR = 'VILKAR',
   INNSYN = 'INNSYN',
   BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
   HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
@@ -21,7 +20,6 @@ const endpoints = new RestApiConfigBuilder()
 
   // behandlingsdata
   .withRel('aksjonspunkter', InnsynBehandlingApiKeys.AKSJONSPUNKTER)
-  .withRel('vilkar', InnsynBehandlingApiKeys.VILKAR)
   .withRel('innsyn', InnsynBehandlingApiKeys.INNSYN)
   .withRel('dokumenter', InnsynBehandlingApiKeys.INNSYN_DOKUMENTER)
 
