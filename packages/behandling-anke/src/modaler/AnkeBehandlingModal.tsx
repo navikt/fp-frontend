@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -8,16 +7,13 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
+import getPackageIntl from '../../i18n/getPackageIntl';
+
 import styles from './ankeBehandlingModal.less';
 
-interface OwnProps {
-  visModal?: boolean;
-  lukkModal: () => void;
-  erFerdigbehandlet: boolean;
-  venterTrygderett: boolean;
-}
+const intl = getPackageIntl();
 
-const tekstTilMelding = (erFerdigbehandlet, venterTrygderett) => {
+const tekstTilMelding = (erFerdigbehandlet: boolean, venterTrygderett: boolean): string => {
   if (erFerdigbehandlet && venterTrygderett) {
     return 'AnkeVurderingModal.SettVent';
   }
@@ -27,6 +23,13 @@ const tekstTilMelding = (erFerdigbehandlet, venterTrygderett) => {
   return 'AnkeVurderingModal.VedtakOversendt';
 };
 
+interface OwnProps {
+  visModal?: boolean;
+  lukkModal: () => void;
+  erFerdigbehandlet: boolean;
+  venterTrygderett: boolean;
+}
+
 /**
  * AnkeVurderingModal
  *
@@ -34,12 +37,11 @@ const tekstTilMelding = (erFerdigbehandlet, venterTrygderett) => {
  * i aksjonspunkt '' velger at ytelsesvedtaket skal stadfestes. Ved å trykke på knapp blir saksbehandler
  * tatt tilbake til sokesiden.
  */
-const AnkeVurderingModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const AnkeVurderingModal: FunctionComponent<OwnProps> = ({
   visModal = false,
   lukkModal,
   erFerdigbehandlet,
   venterTrygderett,
-  intl,
 }) => (
   <Modal
     className={styles.modal}
@@ -55,8 +57,8 @@ const AnkeVurderingModal: FunctionComponent<OwnProps & WrappedComponentProps> = 
         <div className={styles.divider} />
       </Column>
       <Column xs="9">
-        <Normaltekst><FormattedMessage id={tekstTilMelding(erFerdigbehandlet, venterTrygderett)} /></Normaltekst>
-        <Normaltekst><FormattedMessage id="AnkeVurderingModal.GoToSearchPage" /></Normaltekst>
+        <Normaltekst>{intl.formatMessage({ id: tekstTilMelding(erFerdigbehandlet, venterTrygderett) })}</Normaltekst>
+        <Normaltekst>{intl.formatMessage({ id: 'AnkeVurderingModal.GoToSearchPage' })}</Normaltekst>
       </Column>
       <Column xs="2">
         <Hovedknapp
@@ -72,4 +74,4 @@ const AnkeVurderingModal: FunctionComponent<OwnProps & WrappedComponentProps> = 
   </Modal>
 );
 
-export default injectIntl(AnkeVurderingModal);
+export default AnkeVurderingModal;
