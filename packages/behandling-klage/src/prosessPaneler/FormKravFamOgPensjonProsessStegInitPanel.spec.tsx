@@ -47,6 +47,11 @@ describe('<FormKravFamOgPensjonProsessStegInitPanel>', () => {
     const panel = wrapper.find<ProsessDefaultInitPanelProps<any, any>>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
-    expect(panel.props().renderPanel({}).type).toEqual(FormkravProsessIndex);
+
+    const innerElement = panel.renderProp('renderPanel')({});
+
+    const prosessPanel = innerElement.find(FormkravProsessIndex);
+    expect(prosessPanel).toHaveLength(1);
+    expect(prosessPanel.props().avsluttedeBehandlinger).toEqual([alleBehandlinger[0]]);
   });
 });
