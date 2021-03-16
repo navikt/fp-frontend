@@ -1,89 +1,16 @@
 import React, {
-  FunctionComponent, useCallback, useState,
+  FunctionComponent,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
-import {
-  Aksjonspunkt, Behandling, Fagsak, KlageVurdering, Kodeverk,
-} from '@fpsak-frontend/types';
-import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { Fagsak } from '@fpsak-frontend/types';
+import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
-import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
-import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
-
-const forhandsvis = (data) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
-
-const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
-  fagsak: Fagsak,
-  behandling: Behandling,
-) => (
-  data: KlageVurderingBrevData,
-) => {
-  const brevData = {
-    ...data,
-    behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
-  };
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
-};
-
-const lagKlageCallback = (
-  lagreKlageVurdering: (params?: any, keepData?: boolean) => Promise<any>,
-  behandling: Behandling,
-) => (aksjonspunktModel: AksjonspunktVerdier) => {
-  const data = {
-    behandlingId: behandling.id,
-    ...aksjonspunktModel,
-  };
-
-  return lagreKlageVurdering(data);
-};
-
-const getLagringSideeffekter = (
-  toggleKlageModal: (skalViseModal: boolean) => void,
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void,
-) => (aksjonspunktModels: { kode: string, klageVurdering?: Kodeverk }[]) => {
-  const skalByttTilKlageinstans = aksjonspunktModels
-    .some((apValue) => apValue.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
-    && apValue.klageVurdering?.kode === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
-
-  if (skalByttTilKlageinstans) {
-    toggleOppdatereFagsakContext(false);
-  }
-
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
-  return () => {
-    if (skalByttTilKlageinstans) {
-      toggleKlageModal(true);
-    } else {
-      oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
-    }
-  };
-};
+import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.BEHANDLE_KLAGE_NFP];
-
-const ENDEPUNKTER_INIT_DATA = [KlageBehandlingApiKeys.AKSJONSPUNKTER];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-}
-
-const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
-type EndepunktPanelData = {
-  klageVurdering: KlageVurdering;
-}
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -98,47 +25,17 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
   opneSokeside,
   oppdaterProsessStegOgFaktaPanelIUrl,
   ...props
-}) => {
-  const [visModalKlageBehandling, toggleKlageModal] = useState(false);
-
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const lagringSideEffekter = getLagringSideeffekter(toggleKlageModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl);
-
-  const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(KlageBehandlingApiKeys.PREVIEW_MESSAGE);
-  const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
-
-  const { startRequest: lagreKlageVurdering } = restApiKlageHooks.useRestApiRunner(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING);
-  const lagreKlage = useCallback(lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
-
-  return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
-      {...props}
-      requestApi={requestKlageApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.KLAGE_NAV_FAMILIE_OG_PENSJON}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
-      skalPanelVisesIMeny={() => true}
-      lagringSideEffekter={lagringSideEffekter}
-      renderPanel={(data) => (
-        <>
-          <KlageBehandlingModal
-            visModal={visModalKlageBehandling}
-            lukkModal={useCallback(() => { toggleKlageModal(false); opneSokeside(); }, [])}
-          />
-          <KlagevurderingProsessIndex
-            previewCallback={previewCallback}
-            saveKlage={lagreKlage}
-            {...data}
-          />
-        </>
-      )}
-    />
-  );
-};
+}) => (
+  <VurderingFellesProsessStegInitPanel
+    {...props}
+    fagsak={fagsak}
+    toggleOppdatereFagsakContext={toggleOppdatereFagsakContext}
+    opneSokeside={opneSokeside}
+    oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    prosessPanelKode={prosessStegCodes.KLAGE_NAV_FAMILIE_OG_PENSJON}
+    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
+  />
+);
 
 export default VurderingFamOgPensjonProsessStegInitPanel;
