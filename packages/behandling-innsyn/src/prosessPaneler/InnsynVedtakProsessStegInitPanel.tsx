@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useState,
+  FunctionComponent, useCallback, useMemo, useState,
 } from 'react';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -12,8 +12,9 @@ import {
   Aksjonspunkt, Behandling, Dokument, Fagsak, Innsyn,
 } from '@fpsak-frontend/types';
 import {
-  IverksetterVedtakStatusModal, ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps,
+  IverksetterVedtakStatusModal, ProsessPanelInitProps, ProsessPanelWrapper, useProsessMenyRegistrerer, useStandardProsessPanelProps,
 } from '@fpsak-frontend/behandling-felles-ny';
+import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
@@ -61,7 +62,7 @@ const getLagringSideeffekter = (
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORESLA_VEDTAK];
 
-const ENDEPUNKTER_INIT_DATA = [InnsynBehandlingApiKeys.AKSJONSPUNKTER];
+const ENDEPUNKTER_INIT_DATA = [InnsynBehandlingApiKeys.AKSJONSPUNKTER, InnsynBehandlingApiKeys.INNSYN];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   innsyn: Innsyn;
@@ -69,7 +70,7 @@ type EndepunktInitData = {
 
 const getEndepunkterPanelData = (saksnummer: string) => [
   { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
-  { key: InnsynBehandlingApiKeys.INNSYN }];
+];
 
 type EndepunktPanelData = {
   innsynDokumenter?: Dokument[];
@@ -81,49 +82,73 @@ interface OwnProps {
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
 }
 
+/**
+ * Bruker ikke @ProsessDefaultInitPanel fordi en har behov for å sende alle aksjonspunkter til @VedtakInnsynProsessIndex
+ */
 const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
   opneSokeside,
   toggleOppdatereFagsakContext,
-  ...props
+  behandlingVersjon,
+  valgtProsessSteg,
+  registrerProsessPanel,
 }) => {
-  const standardPanelProps = useStandardProsessPanelProps();
+  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestInnsynApi), [requestInnsynApi]);
+
+  const formaterteEndepunkter = ENDEPUNKTER_INIT_DATA.map((e) => ({ key: e }));
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<EndepunktInitData>(formaterteEndepunkter, {
+    updateTriggers: [behandlingVersjon],
+    isCachingOn: true,
+  });
+
+  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
+  const lagringSideeffekterCallback = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleOppdatereFagsakContext);
+  const standardPanelProps = useStandardProsessPanelProps(initData, AKSJONSPUNKT_KODER, undefined, lagringSideeffekterCallback);
 
   const { startRequest: forhandsvisMelding } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
-  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
-  const lagringSideeffekterCallback = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleOppdatereFagsakContext);
+  const status = initData?.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT;
+
+  const erPanelValgt = useProsessMenyRegistrerer(
+    registrerProsessPanel,
+    initState,
+    prosessStegCodes.VEDTAK,
+    getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
+    valgtProsessSteg,
+    true,
+    standardPanelProps.isAksjonspunktOpen,
+    status,
+  );
+
+  const formatertePanelEndepunkter = getEndepunkterPanelData(fagsak.saksnummer);
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<EndepunktPanelData>(formatertePanelEndepunkter, {
+    updateTriggers: [erPanelValgt, behandlingVersjon],
+    suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
+    isCachingOn: true,
+  });
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
-      {...props}
-      requestApi={requestInnsynApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
-      panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.VEDTAK}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-      skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => (data?.innsyn ? getVedtakStatus(data.innsyn, data.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT)}
-      lagringSideEffekter={lagringSideeffekterCallback}
-      renderPanel={(data) => (
-        <>
-          <IverksetterVedtakStatusModal
-            visModal={visIverksetterVedtakModal}
-            lukkModal={() => { toggleIverksetterVedtakModal(false); opneSokeside(); }}
-            behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
-          />
-          <VedtakInnsynProsessIndex
-            saksnummer={fagsak.saksnummer}
-            alleDokumenter={data.innsynDokumenter}
-            previewCallback={previewCallback}
-            {...data}
-          />
-        </>
-      )}
-    />
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
+      status={status}
+      dataState={panelDataState}
+    >
+      <IverksetterVedtakStatusModal
+        visModal={visIverksetterVedtakModal}
+        lukkModal={() => { toggleIverksetterVedtakModal(false); opneSokeside(); }}
+        behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
+      />
+      <VedtakInnsynProsessIndex
+        saksnummer={fagsak.saksnummer}
+        previewCallback={previewCallback}
+        alleDokumenter={panelData?.innsynDokumenter}
+        {...standardPanelProps}
+        {...initData}
+      />
+    </ProsessPanelWrapper>
   );
 };
 
