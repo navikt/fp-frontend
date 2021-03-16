@@ -1,36 +1,31 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles-ny';
 import {
-  Rettigheter, BehandlingPaVent, SettPaVentParams,
-} from '@fpsak-frontend/behandling-felles';
-import {
-  Behandling, Aksjonspunkt, KodeverkMedNavn, Fagsak,
+  Behandling, KodeverkMedNavn, Fagsak, AksessRettigheter, Aksjonspunkt,
 } from '@fpsak-frontend/types';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
+import { restApiPapirsoknadHooks, requestPapirsoknadApi, PapirsoknadApiKeys } from '../data/papirsoknadApi';
 
-interface OwnProps {
-  fagsak: Fagsak;
-  fagsakPersonnummer: string;
-  behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
-  rettigheter: Rettigheter;
-  settPaVent: (params: SettPaVentParams) => Promise<any>;
-  hentBehandling: ({ behandlingId: number }, keepData: boolean) => Promise<any>;
-  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>;
-  erAksjonspunktLagret: boolean;
-}
-
-const getAktivtPapirsoknadApKode = (aksjonspunkter) => aksjonspunkter.filter((a) => a.erAktivt).map((ap) => ap.definisjon.kode)
+const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
+  .filter((a) => a.erAktivt).map((ap) => ap.definisjon.kode)
   .filter((kode) => kode === aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD
       || kode === aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_FORELDREPENGER
       || kode === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
       || kode === aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER)[0];
 
-const lagLagreFunksjon = (soknadData, behandling, aksjonspunkter, fagsak: Fagsak, lagreAksjonspunkt) => (valuesForRegisteredFieldsOnly) => {
+const lagLagreFunksjon = (
+  soknadData,
+  behandling: Behandling,
+  aksjonspunkter: Aksjonspunkt[],
+  fagsak: Fagsak,
+  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>,
+  setAksjonspunktLagret: (erApLagret: boolean) => void,
+) => (valuesForRegisteredFieldsOnly) => {
   const manuellRegistreringDtoList = [{
     '@type': getAktivtPapirsoknadApKode(aksjonspunkter),
     tema: soknadData.getFamilieHendelseType(),
@@ -46,8 +41,20 @@ const lagLagreFunksjon = (soknadData, behandling, aksjonspunkter, fagsak: Fagsak
     behandlingVersjon: behandling.versjon,
     bekreftedeAksjonspunktDtoer: manuellRegistreringDtoList,
   };
-  return lagreAksjonspunkt(params);
+  return lagreAksjonspunkt(params).then(() => setAksjonspunktLagret(true));
 };
+
+const EMPTY_ARRAY = [];
+
+interface OwnProps {
+  fagsak: Fagsak;
+  fagsakPersonnummer: string;
+  behandling: Behandling;
+  kodeverk: {[key: string]: KodeverkMedNavn[]};
+  rettigheter: AksessRettigheter;
+  hentBehandling: (keepData: boolean) => Promise<Behandling>
+  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>;
+}
 
 /**
  * RegisterPapirsoknad
@@ -60,29 +67,34 @@ export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   fagsak,
   fagsakPersonnummer,
   behandling,
-  aksjonspunkter,
   kodeverk,
   rettigheter,
-  settPaVent,
   hentBehandling,
   lagreAksjonspunkt,
-  erAksjonspunktLagret,
 }) => {
   const [soknadData, setSoknadData] = useState();
+  const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
   const readOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
 
-  const lagre = lagLagreFunksjon(soknadData, behandling, aksjonspunkter, fagsak, lagreAksjonspunkt);
+  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiPapirsoknadHooks.useRestApi<Aksjonspunkt[]>(PapirsoknadApiKeys.AKSJONSPUNKTER);
+
+  const lagre = lagLagreFunksjon(soknadData, behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret);
   const lagreFullstendig = useCallback((_formValues, _dispatch, { valuesForRegisteredFieldsOnly }) => lagre(valuesForRegisteredFieldsOnly), [soknadData]);
   const lagreUfullstendig = useCallback(() => lagre({ ufullstendigSoeknad: true }), [soknadData]);
+
+  if (!aksjonspunkter) {
+    return <LoadingPanel />;
+  }
 
   return (
     <>
       <BehandlingPaVent
         behandling={behandling}
-        aksjonspunkter={aksjonspunkter}
-        kodeverk={kodeverk}
-        settPaVent={settPaVent}
         hentBehandling={hentBehandling}
+        kodeverk={kodeverk}
+        requestApi={requestPapirsoknadApi}
+        oppdaterPaVentKey={PapirsoknadApiKeys.UPDATE_ON_HOLD}
+        aksjonspunktKey={PapirsoknadApiKeys.AKSJONSPUNKTER}
       />
       <SoknadRegistrertModal isOpen={erAksjonspunktLagret} />
       <RegistrerPapirsoknadPanel

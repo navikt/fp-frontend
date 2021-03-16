@@ -10,13 +10,14 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
+import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles-ny';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknad from './RegistrerPapirsoknad';
 import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
+import { requestPapirsoknadApi, PapirsoknadApiKeys } from '../data/papirsoknadApi';
 
 const fagsak = {
   saksnummer: '123456',
@@ -59,17 +60,16 @@ const rettigheter = {
 
 describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter', () => {
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      aksjonspunkter={[]}
       kodeverk={{}}
       rettigheter={rettigheter}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
-      erAksjonspunktLagret={false}
     />);
     expect(wrapper.find(BehandlingPaVent)).toHaveLength(1);
     expect(wrapper.find(SoknadRegistrertModal)).toHaveLength(1);
@@ -79,11 +79,12 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal rendre komponenter som readonly når veileder', () => {
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      aksjonspunkter={[]}
       kodeverk={{}}
       rettigheter={{
         ...rettigheter,
@@ -92,16 +93,16 @@ describe('<RegistrerPapirsoknad>', () => {
           employeeHasAccess: false,
         },
       }}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
-      erAksjonspunktLagret={false}
     />);
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
     expect(panel.prop('readOnly')).toBe(true);
   });
 
   it('skal rendre komponenter som readonly når behandling er satt på vent', () => {
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
@@ -109,13 +110,10 @@ describe('<RegistrerPapirsoknad>', () => {
         ...behandling,
         behandlingPaaVent: true,
       } as Behandling}
-      aksjonspunkter={[]}
       kodeverk={{}}
       rettigheter={rettigheter}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
-      erAksjonspunktLagret={false}
     />);
     expect(wrapper.find(BehandlingPaVent)).toHaveLength(1);
     expect(wrapper.find(SoknadRegistrertModal)).toHaveLength(1);
@@ -125,17 +123,16 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal sette nye søknadsdata', () => {
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      aksjonspunkter={[]}
       kodeverk={{}}
       rettigheter={rettigheter}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
-      erAksjonspunktLagret={false}
     />);
 
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
@@ -149,29 +146,30 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal lagre aksjonspunkt', () => {
-    const lagreAksjonspunkt = sinon.spy();
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, [{
+      definisjon: {
+        kode: aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_FORELDREPENGER,
+        kodeverk: 'DEF',
+      },
+      status: {
+        kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: 'STATUS',
+      },
+      kanLoses: true,
+      erAktivt: true,
+    }]);
+
+    const lagreAksjonspunkt = sinon.stub();
+    lagreAksjonspunkt.returns(Promise.resolve());
+
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_FORELDREPENGER,
-          kodeverk: 'DEF',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'STATUS',
-        },
-        kanLoses: true,
-        erAktivt: true,
-      }]}
       kodeverk={{}}
       rettigheter={rettigheter}
-      settPaVent={sinon.spy()}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={lagreAksjonspunkt}
-      erAksjonspunktLagret={false}
     />);
 
     const panel = wrapper.find(RegistrerPapirsoknadPanel);
