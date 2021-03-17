@@ -21,7 +21,6 @@ export enum EsBehandlingApiKeys {
   MEDLEMSKAP = 'MEDLEMSKAP',
   INNTEKT_ARBEID_YTELSE = 'INNTEKT_ARBEID_YTELSE',
   VERGE = 'VERGE',
-  SEND_VARSEL_OM_REVURDERING = 'SEND_VARSEL_OM_REVURDERING',
   BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
   HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
   RESUME_BEHANDLING = 'RESUME_BEHANDLING',
@@ -51,7 +50,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soeker-medlemskap-v2', EsBehandlingApiKeys.MEDLEMSKAP)
   .withRel('inntekt-arbeid-ytelse', EsBehandlingApiKeys.INNTEKT_ARBEID_YTELSE)
   .withRel('soeker-verge', EsBehandlingApiKeys.VERGE)
-  .withRel('sendt-varsel-om-revurdering', EsBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('utland-dok-status', EsBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('behandling-personoversikt', EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)

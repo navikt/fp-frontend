@@ -18,6 +18,11 @@ import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInit
 import AdopsjonsvilkaretFaktaInitPanel from './faktaPaneler/AdopsjonsvilkaretFaktaInitPanel';
 import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
 import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/MedlemskapsvilkaretFaktaInitPanel';
+import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
+import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarProsessStegInitPanel';
+import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
+import SimuleringProsessStegInitPanel from './prosessPaneler/SimuleringProsessStegInitPanel';
+import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -121,6 +126,20 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
                 toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+              />
+              <InngangsvilkarProsessStegInitPanel
+                {...props}
+                rettigheter={rettigheter}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
+              />
+              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
+              <VedtakProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                opneSokeside={opneSokeside}
+                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
               />
             </>
           )}
