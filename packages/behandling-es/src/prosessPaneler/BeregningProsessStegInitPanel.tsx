@@ -17,7 +17,7 @@ import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_BEREGNING];
 
-const ENDEPUNKTER_INIT_DATA = [EsBehandlingApiKeys.AKSJONSPUNKTER, EsBehandlingApiKeys.VILKAR];
+const ENDEPUNKTER_INIT_DATA = [EsBehandlingApiKeys.AKSJONSPUNKTER, EsBehandlingApiKeys.VILKAR, EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];

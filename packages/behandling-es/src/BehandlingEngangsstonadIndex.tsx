@@ -129,13 +129,13 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
                 opneSokeside={opneSokeside}
                 toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
               />
+              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <InngangsvilkarProsessStegInitPanel
                 {...props}
                 rettigheter={rettigheter}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                 apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
               />
-              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <SoknadsfristProsessStegInitPanel {...props} rettigheter={rettigheter} />
               <BeregningProsessStegInitPanel {...props} rettigheter={rettigheter} />
               <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
