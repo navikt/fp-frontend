@@ -9,7 +9,9 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, Aksjonspunkt, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  ProsessDefaultInitPanel, ProsessPanelInitProps, OverstyringPanelDef, skalViseProsessPanel,
+} from '@fpsak-frontend/behandling-felles-ny';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
@@ -51,9 +53,10 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      vilkarKoder={VILKAR_KODER}
       prosessPanelKode={prosessStegCodes.SOEKNADSFRIST}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-      skalPanelVisesIMeny={() => true}
+      skalPanelVisesIMeny={(data) => skalViseProsessPanel(data?.aksjonspunkter, VILKAR_KODER, data?.vilkar)}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => {
         const harSoknadsfristAp = data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKNADSFRISTVILKARET);
