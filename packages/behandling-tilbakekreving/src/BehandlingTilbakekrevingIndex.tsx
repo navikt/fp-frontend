@@ -1,46 +1,26 @@
-import React, {
-  FunctionComponent, useEffect, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
-import {
-  ReduxFormStateCleaner, Rettigheter, useSetBehandlingVedEndring,
-} from '@fpsak-frontend/behandling-felles';
-import {
-  KodeverkMedNavn, Behandling, Fagsak, Kodeverk,
-} from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import {
+  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
+  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
+} from '@fpsak-frontend/behandling-felles-ny';
+import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import TilbakekrevingPaneler from './components/TilbakekrevingPaneler';
-import FetchedData from './types/fetchedDataTsType';
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
-
-const tilbakekrevingData = [
-  { key: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA },
-  { key: TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE },
-  { key: TilbakekrevingBehandlingApiKeys.BEREGNINGSRESULTAT }];
+import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';
+import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
+import ForeldelseProsessStegInitPanel from './prosessPaneler/ForeldelseProsessStegInitPanel';
+import TilbakekrevingProsessStegInitPanel from './prosessPaneler/TilbakekrevingProsessStegInitPanel';
+import VedtakTilbakekrevingProsessStegInitPanel from './prosessPaneler/VedtakTilbakekrevingProsessStegInitPanel';
 
 interface OwnProps {
-  behandlingId: number;
-  fagsak: Fagsak;
   fagsakKjønn: Kodeverk;
-  rettigheter: Rettigheter;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  valgtProsessSteg?: string;
-  valgtFaktaSteg?: string;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
-  behandlingEventHandler: {
-    setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;
-    clear: () => void;
-  };
-  opneSokeside: () => void;
   harApenRevurdering: boolean;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
-  setRequestPendingMessage: (message: string) => void;
 }
 
-const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps> = ({
+const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
   behandlingEventHandler,
   behandlingId,
   oppdaterBehandlingVersjon,
@@ -50,68 +30,29 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps> = ({
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
-  opneSokeside,
   valgtFaktaSteg,
+  opneSokeside,
   harApenRevurdering,
   setRequestPendingMessage,
 }) => {
-  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
-  const behandling = nyOgForrigeBehandling.current;
-  const forrigeBehandling = nyOgForrigeBehandling.previous;
+  useInitRequestApi(requestTilbakekrevingApi, setRequestPendingMessage);
 
-  const setBehandling = useCallback((nyBehandling) => {
-    requestTilbakekrevingApi.resetCache();
-    requestTilbakekrevingApi.setLinks(nyBehandling.links);
-    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
-  }, []);
+  const {
+    behandling, behandlingState, hentBehandling, setBehandling,
+  } = useBehandling(
+    requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE, behandlingId,
+  );
+
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestTilbakekrevingApi, setBehandling, TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  );
+
+  useInitBehandlingHandlinger(requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
   const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks
     .useRestApi<{[key: string]: KodeverkMedNavn[]}>(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK);
 
-  const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiTilbakekrevingHooks
-    .useRestApiRunner<Behandling>(TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
-
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  const { startRequest: nyBehandlendeEnhet } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = restApiTilbakekrevingHooks.useRestApiRunner<Behandling>(TilbakekrevingBehandlingApiKeys.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.HENLEGG_BEHANDLING);
-  const { startRequest: settPaVent } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.UPDATE_ON_HOLD);
-  const { startRequest: opprettVerge } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.VERGE_OPPRETT);
-  const { startRequest: fjernVerge } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.VERGE_FJERN);
-
-  useEffect(() => {
-    behandlingEventHandler.setHandler({
-      endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
-        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
-      henleggBehandling: (params) => henleggBehandling(params),
-      opprettVerge: (params) => opprettVerge(params)
-        .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
-      fjernVerge: (params) => fjernVerge(params)
-        .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
-    });
-
-    requestTilbakekrevingApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestTilbakekrevingApi.setAddErrorMessageHandler(addErrorMessage);
-
-    hentBehandling({ behandlingId }, false);
-
-    return () => {
-      behandlingEventHandler.clear();
-    };
-  }, []);
-
-  const { data, state } = restApiTilbakekrevingHooks.useMultipleRestApi<FetchedData>(tilbakekrevingData,
-    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
-
-  const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  if (!behandling || !tilbakekrevingKodeverk || (hasNotFinished && data === undefined)) {
+  if (!behandling || !tilbakekrevingKodeverk) {
     return <LoadingPanel />;
   }
 
@@ -119,27 +60,51 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps> = ({
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={hasNotFinished ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={behandling.versjon}
       />
-      <TilbakekrevingPaneler
-        behandling={hasNotFinished ? forrigeBehandling : behandling}
-        fetchedData={data}
-        fagsak={fagsak}
-        fagsakKjønn={fagsakKjønn}
-        kodeverk={tilbakekrevingKodeverk}
-        fpsakKodeverk={fpsakKodeverk}
-        rettigheter={rettigheter}
-        valgtProsessSteg={valgtProsessSteg}
-        valgtFaktaSteg={valgtFaktaSteg}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-        settPaVent={settPaVent}
+      <BehandlingPaVent
+        behandling={behandling}
         hentBehandling={hentBehandling}
-        opneSokeside={opneSokeside}
-        harApenRevurdering={harApenRevurdering}
-        hasFetchError={behandlingState === RestApiState.ERROR}
-        setBehandling={setBehandling}
+        kodeverk={tilbakekrevingKodeverk}
+        requestApi={requestTilbakekrevingApi}
+        oppdaterPaVentKey={TilbakekrevingBehandlingApiKeys.UPDATE_ON_HOLD}
+        aksjonspunktKey={TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER}
       />
+      <StandardPropsProvider
+        behandling={behandling}
+        fagsak={fagsak}
+        rettigheter={rettigheter}
+        hasFetchError={behandlingState === RestApiState.ERROR}
+        alleKodeverk={tilbakekrevingKodeverk}
+        lagreAksjonspunkter={lagreAksjonspunkter}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      >
+        <BehandlingContainer
+          behandling={behandling}
+          valgtProsessSteg={valgtProsessSteg}
+          valgtFaktaSteg={valgtFaktaSteg}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+          hentFaktaPaneler={(props) => (
+            <>
+              <FeilutbetalingFaktaInitPanel {...props} fpsakKodeverk={fpsakKodeverk} fagsak={fagsak} />
+              <VergeFaktaInitPanel {...props} />
+            </>
+          )}
+          hentProsessPaneler={(props, ekstraProps) => (
+            <>
+              <ForeldelseProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} />
+              <TilbakekrevingProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} />
+              <VedtakTilbakekrevingProsessStegInitPanel
+                {...props}
+                harApenRevurdering={harApenRevurdering}
+                opneSokeside={opneSokeside}
+                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+              />
+            </>
+          )}
+        />
+      </StandardPropsProvider>
     </>
   );
 };

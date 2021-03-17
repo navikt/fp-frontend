@@ -2,11 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import { BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelProps, Vedtaksbrev,
+} from '@fpsak-frontend/types';
 
 import { ForhandsvisData } from './components/TilbakekrevingVedtakForm';
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
-import Vedtaksbrev from './types/vedtaksbrevTsType';
 import messages from '../i18n/nb_NO.json';
 
 const cache = createIntlCache();

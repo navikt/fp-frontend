@@ -11,8 +11,7 @@ import NavBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
-import { Behandling, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
-import DetaljerteFeilutbetalingsperioder from '@fpsak-frontend/prosess-tilbakekreving/src/types/detaljerteFeilutbetalingsperioderTsType';
+import { Behandling, FeilutbetalingPerioderWrapper, DetaljerteFeilutbetalingsperioder } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 

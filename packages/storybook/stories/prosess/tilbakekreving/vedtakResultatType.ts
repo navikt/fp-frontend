@@ -1,6 +1,0 @@
-const vedtakResultatType = {
-  INGEN_TILBAKEBETALING: 'INGEN_TILBAKEBETALING',
-  DELVIS_TILBAKEBETALING: 'DELVIS_TILBAKEBETALING',
-};
-
-export default vedtakResultatType;

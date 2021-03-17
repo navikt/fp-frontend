@@ -4,11 +4,11 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { VedtaksbrevAvsnitt } from '@fpsak-frontend/types';
+
 import TilbakekrevingVedtakUtdypendeTekstPanel from './TilbakekrevingVedtakUtdypendeTekstPanel';
 import underavsnittType from '../../kodeverk/avsnittType';
-import VedtaksbrevAvsnitt from '../../types/vedtaksbrevAvsnittTsType';
 
 import styles from './tilbakekrevingEditerVedtaksbrevPanel.less';
 

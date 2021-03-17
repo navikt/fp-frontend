@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { FeilutbetalingPerioderWrapper, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  FeilutbetalingPerioderWrapper, StandardProsessPanelProps, VilkarsVurdertePerioderWrapper, DetaljerteFeilutbetalingsperioder,
+} from '@fpsak-frontend/types';
 
 import TilbakekrevingForm from './components/TilbakekrevingForm';
-import VilkarsVurdertePerioderWrapper from './types/vilkarsVurdertePerioderTsType';
-import DetaljerteFeilutbetalingsperioder from './types/detaljerteFeilutbetalingsperioderTsType';
 
 import messages from '../i18n/nb_NO.json';
 

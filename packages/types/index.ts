@@ -94,3 +94,8 @@ export { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsT
 export { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
 export { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
 export { default as Verge } from './src/vergeTsType';
+export { default as FeilutbetalingAarsak } from './src/feilutbetalingAarsakTsType';
+export { default as DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode } from './src/detaljerteFeilutbetalingsperioderTsType';
+export { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
+export { default as Vedtaksbrev } from './src/vedtaksbrevTsType';
+export { default as VedtaksbrevAvsnitt } from './src/vedtaksbrevAvsnittTsType';
