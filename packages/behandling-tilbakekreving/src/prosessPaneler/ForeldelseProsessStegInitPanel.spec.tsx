@@ -35,7 +35,7 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
 
     const perioderForeldelse = {} as FeilutbetalingPerioderWrapper;
 
-    expect(panel.props().hentOverstyrtStatus({} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
     // @ts-ignore
     expect(panel.props().hentOverstyrtStatus({ perioderForeldelse })).toEqual(vilkarUtfallType.OPPFYLT);
 

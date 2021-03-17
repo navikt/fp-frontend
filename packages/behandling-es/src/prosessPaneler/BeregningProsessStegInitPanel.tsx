@@ -44,7 +44,7 @@ const BeregningProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
       prosessPanelKode={prosessStegCodes.BEREGNING}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => (data?.beregningresultatEngangsstonad ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData?.beregningresultatEngangsstonad ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => (
         <BeregningsresultatProsessIndex

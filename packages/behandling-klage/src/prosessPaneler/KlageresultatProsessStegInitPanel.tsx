@@ -115,7 +115,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       prosessPanelKode={prosessStegCodes.KLAGE_RESULTAT}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => getVedtakStatus(data?.aksjonspunkter, data.behandling.behandlingsresultat)}
+      hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)}
       lagringSideEffekter={lagringSideEffekter}
       renderPanel={(data) => (
         <>

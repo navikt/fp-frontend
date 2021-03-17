@@ -176,8 +176,8 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       prosessPanelKode={prosessStegCodes.VEDTAK}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-      hentOverstyrtStatus={(data) => findStatusForVedtak(
-        data?.vilkar || [], data?.aksjonspunkter || [], data.aksjonspunkter, data.behandling.behandlingsresultat,
+      hentOverstyrtStatus={(initData, standardData) => findStatusForVedtak(
+        initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
       renderPanel={(data) => (

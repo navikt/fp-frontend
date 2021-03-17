@@ -83,7 +83,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    expect(panel.props().hentOverstyrtStatus({} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
   });
 
   it('skal vise status IKKE_OPPFYLT når en har beregningsresultat men det er ingen tilbakebetaling', () => {

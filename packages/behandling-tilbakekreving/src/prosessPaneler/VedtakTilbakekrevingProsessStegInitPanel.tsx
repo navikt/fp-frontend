@@ -92,7 +92,7 @@ const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       prosessPanelKode={prosessStegCodes.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => getOverstyrtStatus(data?.beregningsresultat)}
+      hentOverstyrtStatus={(initData) => getOverstyrtStatus(initData?.beregningsresultat)}
       lagringSideEffekter={lagringSideeffekterCallback}
       renderPanel={(data) => (
         <>

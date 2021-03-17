@@ -30,7 +30,7 @@ describe('<BeregningProsessStegInitPanel>', () => {
 
     const beregningresultatEngangsstonad = {} as BeregningsresultatEs;
 
-    expect(panel.props().hentOverstyrtStatus({} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
     // @ts-ignore fiks
     expect(panel.props().hentOverstyrtStatus({ beregningresultatEngangsstonad })).toEqual(vilkarUtfallType.OPPFYLT);
 

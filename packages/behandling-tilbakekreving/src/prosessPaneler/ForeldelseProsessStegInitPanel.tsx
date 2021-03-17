@@ -39,7 +39,7 @@ const ForeldelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       prosessPanelKode={prosessStegCodes.FORELDELSE}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => (data?.perioderForeldelse ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData?.perioderForeldelse ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data) => (
         <ForeldelseProsessIndex
           navBrukerKjonn={fagsakKjønn.kode}

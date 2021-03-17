@@ -73,7 +73,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
 
     const aksjonspunkter = [];
 
-    expect(panel.props().hentOverstyrtStatus({
+    expect(panel.props().hentOverstyrtStatus({}, {
       aksjonspunkter,
       behandling,
     } as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
@@ -107,7 +107,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       },
     };
 
-    expect(panel.props().hentOverstyrtStatus({
+    expect(panel.props().hentOverstyrtStatus({}, {
       aksjonspunkter,
       behandling: behandlingMedBeregningsresultat,
     } as StandardProsessPanelProps)).toBe(vilkarUtfallType.OPPFYLT);
@@ -141,7 +141,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       },
     };
 
-    expect(panel.props().hentOverstyrtStatus({
+    expect(panel.props().hentOverstyrtStatus({}, {
       aksjonspunkter,
       behandling: behandlingMedBeregningsresultat,
     } as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_OPPFYLT);
