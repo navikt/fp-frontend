@@ -24,7 +24,7 @@ describe('<OmsorgvilkaretFaktaInitPanel>', () => {
 
     const aksjonspunkter = [{
       definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
         kodeverk: '',
       },
     }] as Aksjonspunkt[];

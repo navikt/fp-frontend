@@ -21,6 +21,8 @@ import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/Medlemskapsvilkare
 import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
 import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarProsessStegInitPanel';
 import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
+import SoknadsfristProsessStegInitPanel from './prosessPaneler/SoknadsfristProsessStegInitPanel';
+import BeregningProsessStegInitPanel from './prosessPaneler/BeregningProsessStegInitPanel';
 import SimuleringProsessStegInitPanel from './prosessPaneler/SimuleringProsessStegInitPanel';
 import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
 
@@ -134,6 +136,8 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
                 apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
               />
               <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <SoknadsfristProsessStegInitPanel {...props} rettigheter={rettigheter} />
+              <BeregningProsessStegInitPanel {...props} rettigheter={rettigheter} />
               <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
               <VedtakProsessStegInitPanel
                 {...props}
