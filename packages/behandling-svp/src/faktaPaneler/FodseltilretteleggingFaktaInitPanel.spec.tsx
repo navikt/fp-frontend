@@ -19,7 +19,7 @@ describe('<FodseltilretteleggingFaktaInitPanel>', () => {
       registrerFaktaPanel={() => {}}
       arbeidsgiverOpplysningerPerId={{}}
       rettigheter={{
-        writeAccess: {
+        kanOverstyreAccess: {
           isEnabled: true,
         },
       } as AksessRettigheter}
@@ -35,7 +35,7 @@ describe('<FodseltilretteleggingFaktaInitPanel>', () => {
     }] as Aksjonspunkt[];
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter })).toBe(true);
-    expect(panel.props().skalPanelVisesIMeny({})).toBe(false);
+    expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter: [] })).toBe(false);
     const rendretPanel = panel.props().renderPanel({
       behandling: {
         behandlingPaVent: false,

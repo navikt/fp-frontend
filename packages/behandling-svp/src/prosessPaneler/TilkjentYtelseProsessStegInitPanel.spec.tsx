@@ -97,8 +97,7 @@ describe('<TilkjentYtelseProsessStegInitPanel>', () => {
       }],
     } as UttaksresultatPeriode;
 
-    expect(panel.props().hentOverstyrtStatus({}, {
-      beregningresultatForeldrepenger,
+    expect(panel.props().hentOverstyrtStatus({ beregningresultatForeldrepenger }, {
       uttaksresultatPerioder,
     } as StandardProsessPanelProps & INIT_DATA)).toBe(vilkarUtfallType.OPPFYLT);
   });
