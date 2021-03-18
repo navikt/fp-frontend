@@ -11,6 +11,8 @@ import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@f
 
 import { requestSvpApi, SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
+import getPackageIntl from '../../../i18n/getPackageIntl';
+
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.SVANGERSKAPSVILKARET];
 
 const VILKAR_KODER = [vilkarType.SVANGERSKAPVILKARET];
@@ -37,7 +39,7 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="SVANGERSKAP"
-    hentInngangsvilkarPanelTekst={() => 'SvangerskapVilkarForm.FyllerVilkår'}
+    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
     renderPanel={(data) => (
       <>
         <SvangerskapVilkarProsessIndex {...data} />

@@ -25,6 +25,7 @@ import BeregningsgrunnlagProsessStegInitPanel from './prosessPaneler/Beregningsg
 import SoknadsfristProsessStegInitPanel from './prosessPaneler/SoknadsfristProsessStegInitPanel';
 import FortsattMedlemskapProsessStegInitPanel from './prosessPaneler/FortsattMedlemskapProsessStegInitPanel';
 import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
+import SimuleringProsessStegInitPanel from './prosessPaneler/SimuleringProsessStegInitPanel';
 import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
 
 const endepunkterSomSkalHentesEnGang = [
@@ -141,6 +142,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
                 arbeidsgiverOpplysningerPerId={arbeidsgivere}
                 personoversikt={personoversikt}
               />
+              <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
               <VedtakProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
