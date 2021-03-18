@@ -3,14 +3,20 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import VedtakInnsynProsessIndex from '@fpsak-frontend/prosess-vedtak-innsyn';
-import { ProsessPanelWrapper } from '@fpsak-frontend/behandling-felles-ny';
-import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import {
+  Aksjonspunkt, Fagsak, StandardProsessPanelProps,
+} from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
+
+type INIT_DATA = {
+  aksjonspunkter: Aksjonspunkt[];
+}
 
 const fagsak = {
   fagsakYtelseType: {
@@ -19,45 +25,27 @@ const fagsak = {
   },
 } as Fagsak;
 
-const behandling = {
-  uuid: 'test-uuid',
-  versjon: 1,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
-  behandlingPaaVent: false,
-};
+jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
+  const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
+  const behandlingStatus = jest.requireActual('@fpsak-frontend/kodeverk/src/behandlingStatus');
+  return {
+    ...felles,
+    useStandardProsessPanelProps: () => ({
+      behandling: {
+        uuid: 'test-uuid',
+        versjon: 1,
+        status: {
+          kode: behandlingStatus.OPPRETTET,
+          kodeverk: '',
+        },
+        behandlingPaaVent: false,
+      },
+    }),
+  };
+});
 
-const rettigheter = {
-  writeAccess: {
-    isEnabled: true,
-  },
-} as AksessRettigheter;
-
-let realUseContext;
-let useContextMock;
-
-describe('<InnsynVedtakFormImpl>', () => {
-  beforeEach(() => {
-    realUseContext = React.useContext;
-    useContextMock = jest.fn();
-    React.useContext = useContextMock;
-  });
-
-  afterEach(() => {
-    React.useContext = realUseContext;
-  });
-
+describe('<InnsynVedtakProsessStegInitPanel>', () => {
   it('skal rendre komponent korrekt', () => {
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.AKSJONSPUNKTER, []);
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.INNSYN, {});
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, []);
-
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
-    });
-
     const wrapper = shallow(<InnsynVedtakProsessStegInitPanel
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
@@ -66,22 +54,19 @@ describe('<InnsynVedtakFormImpl>', () => {
       opneSokeside={() => {}}
     />);
 
-    expect(wrapper.find(ProsessPanelWrapper)).toHaveLength(1);
-    expect(wrapper.find(VedtakInnsynProsessIndex)).toHaveLength(1);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+
+    expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
+
+    const innerElement = panel.renderProp('renderPanel')({});
+
+    expect(innerElement.find(VedtakInnsynProsessIndex)).toHaveLength(1);
   });
 
   it('skal ikke oppdatere fagsak-kontekst etter lagring', () => {
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.AKSJONSPUNKTER, []);
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.INNSYN, {});
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, []);
-
     const toggleSkalOppdatereFagsakContext = sinon.spy();
     const lagreAksjonspunkter = sinon.stub();
     lagreAksjonspunkter.returns(Promise.resolve());
-
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false, lagreAksjonspunkter,
-    });
 
     const wrapper = shallow(<InnsynVedtakProsessStegInitPanel
       valgtProsessSteg="default"
@@ -91,13 +76,13 @@ describe('<InnsynVedtakFormImpl>', () => {
       opneSokeside={() => {}}
     />);
 
-    const panel = wrapper.find(VedtakInnsynProsessIndex);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodes.FORESLA_VEDTAK,
     }];
 
-    panel.props().submitCallback(aksjonspunktModels);
+    panel.props().lagringSideEffekter(aksjonspunktModels);
 
     expect(toggleSkalOppdatereFagsakContext.getCalls()).toHaveLength(1);
     const { args } = toggleSkalOppdatereFagsakContext.getCalls()[0];
@@ -106,14 +91,7 @@ describe('<InnsynVedtakFormImpl>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.AKSJONSPUNKTER, []);
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.INNSYN, {});
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, []);
     requestInnsynApi.mock(InnsynBehandlingApiKeys.PREVIEW_MESSAGE, {});
-
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
-    });
 
     const wrapper = shallow(<InnsynVedtakProsessStegInitPanel
       valgtProsessSteg="default"
@@ -123,9 +101,13 @@ describe('<InnsynVedtakFormImpl>', () => {
       opneSokeside={() => {}}
     />);
 
-    const panel = wrapper.find(VedtakInnsynProsessIndex);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    panel.props().previewCallback({
+    const innerElement = panel.renderProp('renderPanel')({});
+
+    const innnerPanel = innerElement.find(VedtakInnsynProsessIndex);
+
+    innnerPanel.props().previewCallback({
       fritekst: 'Fritekst',
       mottaker: 'Mottaker',
       dokumentMal: 'Mal',
