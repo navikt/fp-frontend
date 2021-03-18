@@ -21,6 +21,8 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
+const intl = getPackageIntl();
+
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
   .every((ap) => !isAksjonspunktOpen(ap.status.kode));
@@ -176,12 +178,15 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.VEDTAK}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
       hentOverstyrtStatus={(initData, standardData) => findStatusForVedtak(
         initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
+      hentSkalMarkeresSomAktiv={(initData, standardData) => findStatusForVedtak(
+        initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+      ) === vilkarUtfallType.OPPFYLT}
       renderPanel={(data) => (
         <>
           <IverksetterVedtakStatusModal
@@ -192,7 +197,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
           <FatterVedtakStatusModal
             visModal={visFatterVedtakModal && data.behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
             lukkModal={lukkFatterModal}
-            tekst={getPackageIntl().formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
+            tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
           />
           <VedtakProsessIndex
             ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}

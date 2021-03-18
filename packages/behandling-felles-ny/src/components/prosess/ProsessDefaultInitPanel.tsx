@@ -24,6 +24,7 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
   prosessPanelMenyTekst: string;
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
   erOverstyrt?: boolean;
+  hentSkalMarkeresSomAktiv?: (initData: Partial<INIT_DATA>, standardData: StandardProsessPanelProps) => boolean;
 }
 
 const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
@@ -42,6 +43,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   lagringSideEffekter,
   hentOverstyrtStatus,
   erOverstyrt = false,
+  hentSkalMarkeresSomAktiv,
 }: OwnProps<INIT_DATA, PANEL_DATA> & ProsessPanelInitProps) => {
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
@@ -60,6 +62,8 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     ...standardPanelProps,
   };
 
+  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv ? hentSkalMarkeresSomAktiv(initData, standardPanelProps) : undefined;
+
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     initState,
@@ -69,6 +73,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     skalPanelVisesIMeny(data, initState),
     erOverstyrt || standardPanelProps.isAksjonspunktOpen,
     status,
+    skalMarkeresSomAktiv,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => (typeof e === 'string' ? ({ key: e }) : e));

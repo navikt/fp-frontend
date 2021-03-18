@@ -92,7 +92,7 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     skalVises,
     harApentAksjonspunkt,
     status,
-    !apentFaktaPanelInfo,
+    !apentFaktaPanelInfo && harApentAksjonspunkt,
   );
 
   const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst).filter((tekst) => !!tekst);
