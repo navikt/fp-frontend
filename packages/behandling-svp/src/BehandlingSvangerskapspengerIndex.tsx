@@ -19,7 +19,13 @@ import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/Medlemskapsvilkare
 import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/OpptjeningsvilkaretFaktaInitPanel';
 import BeregningFaktaInitPanel from './faktaPaneler/BeregningFaktaInitPanel';
 import FordelingFaktaInitPanel from './faktaPaneler/FordelingFaktaInitPanel';
-import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
+import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
+import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarProsessStegInitPanel';
+import BeregningsgrunnlagProsessStegInitPanel from './prosessPaneler/BeregningsgrunnlagProsessStegInitPanel';
+import SoknadsfristProsessStegInitPanel from './prosessPaneler/SoknadsfristProsessStegInitPanel';
+import FortsattMedlemskapProsessStegInitPanel from './prosessPaneler/FortsattMedlemskapProsessStegInitPanel';
+import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
+import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -120,11 +126,26 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
           )}
           hentProsessPaneler={(props, ekstraProps) => (
             <>
-              <VarselProsessStegInitPanel
+              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <InngangsvilkarProsessStegInitPanel
+                {...props}
+                rettigheter={rettigheter}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+              />
+              <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <SoknadsfristProsessStegInitPanel {...props} />
+              <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
+              <TilkjentYtelseProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                arbeidsgiverOpplysningerPerId={arbeidsgivere}
+                personoversikt={personoversikt}
+              />
+              <VedtakProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
               />
             </>
           )}

@@ -24,7 +24,6 @@ export enum SvpBehandlingApiKeys {
   VERGE = 'VERGE',
   YTELSEFORDELING = 'YTELSEFORDELING',
   OPPTJENING = 'OPPTJENING',
-  SEND_VARSEL_OM_REVURDERING = 'SEND_VARSEL_OM_REVURDERING',
   SVANGERSKAPSPENGER_TILRETTELEGGING = 'SVANGERSKAPSPENGER_TILRETTELEGGING',
   BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
   HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
@@ -58,7 +57,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soeker-verge', SvpBehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', SvpBehandlingApiKeys.YTELSEFORDELING)
   .withRel('opptjening', SvpBehandlingApiKeys.OPPTJENING)
-  .withRel('sendt-varsel-om-revurdering', SvpBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('svangerskapspenger-tilrettelegging', SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING)
   .withRel('utland-dok-status', SvpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
