@@ -12,7 +12,7 @@ type InputValues = {
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
-  lagreOverstyrteAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }

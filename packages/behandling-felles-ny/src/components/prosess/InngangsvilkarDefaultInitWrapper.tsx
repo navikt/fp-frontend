@@ -44,7 +44,7 @@ interface OwnProps {
   apentFaktaPanelInfo?: {urlCode: string, text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
-  rightPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
+  rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
 }
 
 const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
@@ -130,15 +130,17 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
             })}
           </div>
         </Column>
-        <Column xs="6">
-          <div className={styles.panelRight}>
-            {rightPanels({
-              registrerInngangsvilkarPanel,
-              erPanelValgt,
-              harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-            })}
-          </div>
-        </Column>
+        {rightPanels && (
+          <Column xs="6">
+            <div className={styles.panelRight}>
+              {rightPanels({
+                registrerInngangsvilkarPanel,
+                erPanelValgt,
+                harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+              })}
+            </div>
+          </Column>
+        )}
       </Row>
     </ProsessPanelWrapper>
   );

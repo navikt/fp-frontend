@@ -46,7 +46,7 @@ describe('<TilkjentYtelseProsessStegInitPanel>', () => {
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    expect(panel.props().hentOverstyrtStatus({} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
 
   it('skal vise at panelet ikke er vurdert når alle perioder har dagsats 0', () => {
@@ -66,7 +66,7 @@ describe('<TilkjentYtelseProsessStegInitPanel>', () => {
       }],
     } as BeregningsresultatFp;
 
-    expect(panel.props().hentOverstyrtStatus({
+    expect(panel.props().hentOverstyrtStatus({}, {
       beregningresultatForeldrepenger,
     } as StandardProsessPanelProps & INIT_DATA)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
@@ -100,6 +100,7 @@ describe('<TilkjentYtelseProsessStegInitPanel>', () => {
     expect(panel.props().hentOverstyrtStatus({
       beregningresultatForeldrepenger,
       uttaksresultatPerioder,
+    }, {
     } as StandardProsessPanelProps & INIT_DATA)).toBe(vilkarUtfallType.OPPFYLT);
   });
 });

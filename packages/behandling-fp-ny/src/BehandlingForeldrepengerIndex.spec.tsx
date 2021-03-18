@@ -21,7 +21,7 @@ jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
 });
 
 describe('<BehandlingForeldrepengerIndex>', () => {
-  it('skal rendre overstyringspanel når det ikke finnes aksjonpunkt', () => {
+  it('skal rendre korrekt', () => {
     requestFpApi.mock(FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {});
     requestFpApi.mock(FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT, {});
 

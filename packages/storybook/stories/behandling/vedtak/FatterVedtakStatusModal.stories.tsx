@@ -9,7 +9,6 @@ const intl = createIntl({
   messages: {
     'FatterVedtakStatusModal.GoToSearchPage': 'Gå til søkeside',
     'FatterVedtakStatusModal.Ok': 'OK',
-    'Eksempel.Tekstkode': 'Forslag til vedtak er sendt til beslutter',
   },
 }, createIntlCache());
 
@@ -24,7 +23,7 @@ export const visFatterVedtakModal = () => (
     <FatterVedtakStatusModal
       visModal
       lukkModal={() => undefined}
-      tekstkode="Eksempel.Tekstkode"
+      tekst="Forslag til vedtak er sendt til beslutter"
     />
   </RawIntlProvider>
 );
