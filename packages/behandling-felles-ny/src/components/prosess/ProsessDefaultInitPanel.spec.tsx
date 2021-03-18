@@ -74,7 +74,7 @@ describe('<ProsessDefaultInitPanel>', () => {
     expect(prosessWrapper.props().erPanelValgt).toBe(false);
     expect(prosessWrapper.props().erAksjonspunktOpent).toBe(false);
     expect(prosessWrapper.props().status).toBe(vilkarUtfallType.IKKE_VURDERT);
-    expect(prosessWrapper.props().dataState).toEqual(RestApiState.NOT_STARTED);
+    expect(prosessWrapper.props().dataState).toEqual(RestApiState.SUCCESS);
 
     const div = wrapper.find('div');
     expect(div).toHaveLength(1);

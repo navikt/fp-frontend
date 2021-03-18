@@ -1,9 +1,8 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
-
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import FatterVedtakStatusModal from './FatterVedtakStatusModal';
 
@@ -11,10 +10,9 @@ describe('<FatterVedtakStatusModal>', () => {
   const closeEventCallback = sinon.spy();
 
   it('skal rendre modal for fatter vedtak', () => {
-    const wrapper = shallowWithIntl(<FatterVedtakStatusModal.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<FatterVedtakStatusModal
       visModal
-      tekstkode="FatterVedtakStatusModal.KlagenErFerdigbehandlet"
+      tekst="Klagen er ferdigbehandlet"
       lukkModal={closeEventCallback}
     />);
 

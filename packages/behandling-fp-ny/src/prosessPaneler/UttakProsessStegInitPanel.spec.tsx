@@ -59,7 +59,7 @@ describe('<UttakProsessStegInitPanel>', () => {
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    expect(panel.props().hentOverstyrtStatus({} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
 
   it('skal vise at panelet ikke er vurdert når det finnes uttaktsresultatperioder men ap for fakta uttak ikke er løst', () => {
@@ -98,8 +98,7 @@ describe('<UttakProsessStegInitPanel>', () => {
       },
     }] as Aksjonspunkt[];
 
-    expect(panel.props().hentOverstyrtStatus({
-      aksjonspunkter,
+    expect(panel.props().hentOverstyrtStatus({ aksjonspunkter }, {
       uttaksresultatPerioder,
     } as INIT_DATA & StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
@@ -140,9 +139,7 @@ describe('<UttakProsessStegInitPanel>', () => {
       },
     }] as Aksjonspunkt[];
 
-    expect(panel.props().hentOverstyrtStatus({
-      aksjonspunkter,
-      uttaksresultatPerioder,
+    expect(panel.props().hentOverstyrtStatus({ aksjonspunkter, uttaksresultatPerioder }, {
     } as INIT_DATA & StandardProsessPanelProps)).toBe(vilkarUtfallType.OPPFYLT);
   });
 

@@ -106,7 +106,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       prosessPanelKode={prosessStegCodes.UTTAK}
       prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-      hentOverstyrtStatus={(data) => getStatusFromUttakresultat(data?.uttaksresultatPerioder, data?.aksjonspunkter)}
+      hentOverstyrtStatus={(initData) => getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter)}
       renderPanel={(data) => (
         <UttakProsessIndex
           fagsak={fagsak}
