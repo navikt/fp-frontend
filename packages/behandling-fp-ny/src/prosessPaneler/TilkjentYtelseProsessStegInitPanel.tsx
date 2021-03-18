@@ -79,7 +79,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     prosessPanelKode={prosessStegCodes.TILKJENT_YTELSE}
     prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-    hentOverstyrtStatus={(data) => getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger, data?.uttaksresultatPerioder)}
+    hentOverstyrtStatus={(initData) => getStatusFromResultatstruktur(initData?.beregningresultatForeldrepenger, initData?.uttaksresultatPerioder)}
     renderPanel={(data) => (
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}

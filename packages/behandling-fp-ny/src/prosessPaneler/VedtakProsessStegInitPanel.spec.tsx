@@ -63,7 +63,7 @@ describe('<VedtakProsessStegInitPanel>', () => {
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    expect(panel.props().hentOverstyrtStatus({ behandling } as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, { behandling } as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
 
   it('skal ikke oppdatere fagsak-kontekst etter lagring', () => {

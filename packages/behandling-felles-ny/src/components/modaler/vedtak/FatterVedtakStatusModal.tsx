@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -8,12 +7,15 @@ import Modal from 'nav-frontend-modal';
 import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
+import getPackageIntl from '../../../../i18n/getPackageIntl';
 import styles from './fatterVedtakStatusModal.less';
+
+const intl = getPackageIntl();
 
 interface OwnProps {
   visModal?: boolean;
   lukkModal: () => void;
-  tekstkode: string;
+  tekst: string;
 }
 
 /**
@@ -22,17 +24,16 @@ interface OwnProps {
  * Presentasjonskomponent. Denne modalen viser en lightbox etter at en saksbehandler har sendt et forslag på vedtak til beslutter
  * ved totrinnskontroll. Ved å trykke på knapp blir saksbehandler tatt tilbake til søkesiden.
  */
-const FatterVedtakStatusModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({
   visModal = false,
   lukkModal,
-  tekstkode,
+  tekst,
 }) => (
   <Modal
     className={styles.modal}
     isOpen={visModal}
     closeButton={false}
-    contentLabel={intl.formatMessage({ id: tekstkode })}
+    contentLabel={tekst}
     onRequestClose={lukkModal}
     shouldCloseOnOverlayClick={false}
   >
@@ -40,16 +41,16 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps & WrappedComponentProp
       <Column xs="1">
         <Image
           className={styles.image}
-          alt={intl.formatMessage({ id: tekstkode })}
+          alt={tekst}
           src={innvilgetImageUrl}
         />
         <div className={styles.divider} />
       </Column>
       <Column xs="9">
         <Normaltekst>
-          <FormattedMessage id={tekstkode} />
+          {tekst}
         </Normaltekst>
-        <Normaltekst><FormattedMessage id="FatterVedtakStatusModal.GoToSearchPage" /></Normaltekst>
+        <Normaltekst>{intl.formatMessage({ id: 'FatterVedtakStatusModal.GoToSearchPage' })}</Normaltekst>
       </Column>
       <Column xs="2">
         <Hovedknapp
@@ -65,4 +66,4 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps & WrappedComponentProp
   </Modal>
 );
 
-export default injectIntl(FatterVedtakStatusModal);
+export default FatterVedtakStatusModal;
