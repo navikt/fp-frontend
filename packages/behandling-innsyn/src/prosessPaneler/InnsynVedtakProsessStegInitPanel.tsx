@@ -108,6 +108,8 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData) => (initData?.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}
+      hentSkalMarkeresSomAktiv={(initData) => (initData?.innsyn
+        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter) === vilkarUtfallType.OPPFYLT)}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

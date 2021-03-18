@@ -41,8 +41,8 @@ const lagForhandsvisCallback = (
   return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
 };
 
-const getVedtakStatus = (aksjonspunkter?: Aksjonspunkt[], behandlingsresultat?: Behandlingsresultat) => {
-  const harApentAksjonpunkt = aksjonspunkter ? aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET) : [];
+const getVedtakStatus = (aksjonspunkter: Aksjonspunkt[] = [], behandlingsresultat?: Behandlingsresultat) => {
+  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -117,6 +117,8 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)}
       lagringSideEffekter={lagringSideEffekter}
+      hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)
+        === vilkarUtfallType.OPPFYLT}
       renderPanel={(data) => (
         <>
           <FatterVedtakStatusModal

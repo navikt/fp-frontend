@@ -17,7 +17,7 @@ const useProsessMenyRegistrerer = (
   skalVisesImeny: boolean,
   harApentAksjonspunkt: boolean,
   status: string,
-  skalMarkeresSomAktiv?: boolean,
+  skalMarkeresSomAktiv = false,
 ) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {
@@ -27,8 +27,7 @@ const useProsessMenyRegistrerer = (
     });
   }, [dataState]);
 
-  const harApentApEllerSkalVereAktiv = skalMarkeresSomAktiv !== undefined ? skalMarkeresSomAktiv : harApentAksjonspunkt;
-
+  const harApentApEllerSkalVereAktiv = skalMarkeresSomAktiv || harApentAksjonspunkt;
   const erAktiv = skalVisesImeny && (valgtProsessSteg === id || (harApentApEllerSkalVereAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
 
   const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
