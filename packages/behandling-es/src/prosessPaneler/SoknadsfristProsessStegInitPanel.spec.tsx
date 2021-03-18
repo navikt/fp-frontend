@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
 import {
@@ -26,11 +27,18 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
-
     const aksjonspunkter = [];
 
-    const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter });
+    const vilkar = [{
+      vilkarType: {
+        kode: vilkarType.SOKNADFRISTVILKARET,
+        kodeverk: '',
+      },
+    }] as Vilkar[];
+
+    expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter, vilkar } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
+
+    const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter, vilkar });
     expect(innerElement.find(OverstyringPanelDef)).toHaveLength(1);
     expect(innerElement.find(SoknadsfristVilkarProsessIndex)).toHaveLength(0);
   });
