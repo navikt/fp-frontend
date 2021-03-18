@@ -1,5 +1,12 @@
 import { Kodeverk } from '@fpsak-frontend/types';
-import Permisjon from './permisjonTsType';
+
+export type Permisjon = Readonly<{
+  permisjonFom: string;
+  permisjonTom: string;
+  permisjonsprosent: number;
+  erGyldig: boolean;
+  type: Kodeverk;
+}>
 
 export type ArbeidsforholdTilretteleggingDato = Readonly<{
   fom: string;
@@ -8,7 +15,7 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   overstyrtUtbetalingsgrad?: number;
 }>
 
-type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
+export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingId: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[];
@@ -23,4 +30,11 @@ type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   velferdspermisjoner: Permisjon[];
 }>
 
-export default ArbeidsforholdFodselOgTilrettelegging;
+type FodselOgTilrettelegging = Readonly<{
+  termindato?: string;
+  fødselsdato?: string;
+  arbeidsforholdListe: ArbeidsforholdFodselOgTilrettelegging[];
+  saksbehandlet: boolean;
+}>
+
+export default FodselOgTilrettelegging;

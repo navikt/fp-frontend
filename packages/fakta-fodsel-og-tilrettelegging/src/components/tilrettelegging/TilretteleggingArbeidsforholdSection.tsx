@@ -9,9 +9,8 @@ import { hasValidDate, required } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
 
-import ArbeidsforholdFodselOgTilrettelegging from '../../types/arbeidsforholdFodselOgTilretteleggingTsType';
 import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection from './VelferdspermisjonSection';
 

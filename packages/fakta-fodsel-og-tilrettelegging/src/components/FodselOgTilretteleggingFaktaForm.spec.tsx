@@ -4,13 +4,11 @@ import { AlertStripeFeil, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { Arbeidsforhold as IayArbeidsforhold } from '@fpsak-frontend/types';
+import { Arbeidsforhold as IayArbeidsforhold, FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
 
 import { FodselOgTilretteleggingFaktaForm, validateForm } from './FodselOgTilretteleggingFaktaForm';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
-import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
-import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
 
 const arbeidsgiverOpplysningerPerId = {
   910909088: {

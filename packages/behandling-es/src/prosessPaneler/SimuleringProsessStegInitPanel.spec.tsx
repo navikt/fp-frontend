@@ -48,7 +48,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     const simuleringResultat = {} as SimuleringResultat;
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
-    expect(panel.props().hentOverstyrtStatus({ simuleringResultat } as INIT_DATA & StandardProsessPanelProps)).toBe(vilkarUtfallType.OPPFYLT);
+    expect(panel.props().hentOverstyrtStatus({}, { simuleringResultat } as INIT_DATA & StandardProsessPanelProps)).toBe(vilkarUtfallType.OPPFYLT);
     expect(panel.props().renderPanel({}).type).toEqual(AvregningProsessIndex);
   });
 
@@ -68,7 +68,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(false);
-    expect(panel.props().hentOverstyrtStatus({} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
     expect(panel.props().renderPanel({}).type).toEqual(AvregningProsessIndex);
   });
 

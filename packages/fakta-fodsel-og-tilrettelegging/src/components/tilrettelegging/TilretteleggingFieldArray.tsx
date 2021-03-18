@@ -16,8 +16,7 @@ import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
 } from '@fpsak-frontend/utils';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
-import { Kodeverk } from '@fpsak-frontend/types';
-import Permisjon from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging/src/types/permisjonTsType';
+import { Kodeverk, Permisjon } from '@fpsak-frontend/types';
 
 import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
 import { skalTaHensynTilPermisjon, finnPermisjonFieldName } from './VelferdspermisjonSection';

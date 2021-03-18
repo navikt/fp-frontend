@@ -3,8 +3,8 @@ import { FieldArray } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { CheckboxField, DatepickerField } from '@fpsak-frontend/form';
+import { ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
 
-import ArbeidsforholdFodselOgTilrettelegging from '../../types/arbeidsforholdFodselOgTilretteleggingTsType';
 import { TilretteleggingArbeidsforholdSection } from './TilretteleggingArbeidsforholdSection';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 

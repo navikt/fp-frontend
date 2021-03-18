@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse,
+  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse, FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import FodselOgTilretteleggingInfoPanel from './components/FodselOgTilretteleggingInfoPanel';
-import FodselOgTilrettelegging from './types/fodselOgTilretteleggingTsType';
 
 import messages from '../i18n/nb_NO.json';
 

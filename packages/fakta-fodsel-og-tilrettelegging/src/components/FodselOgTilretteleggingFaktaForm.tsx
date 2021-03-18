@@ -18,15 +18,14 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn,
+  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, FodselOgTilrettelegging,
+  ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
-import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
-import ArbeidsforholdFodselOgTilrettelegging, { ArbeidsforholdTilretteleggingDato } from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
 
 import styles from './fodselOgTilretteleggingFaktaForm.less';
 
