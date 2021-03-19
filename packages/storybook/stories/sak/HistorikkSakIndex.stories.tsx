@@ -48,7 +48,7 @@ const history = [{
   ],
 },
 {
-  behandlingId: null,
+  behandlingId: 999951,
   type: {
     kode: 'INNSYN_OPPR',
     kodeverk: 'HISTORIKKINNSLAG_TYPE',
@@ -148,21 +148,37 @@ export default {
   component: HistorikkSakIndex,
 };
 
-export const visHistorikk = () => (
+export const visHistorikkNårBehandlingIkkeErValgt = () => (
   <div style={{
     width: '600px', backgroundColor: 'white', padding: '30px',
   }}
   >
-    {history.map((h) => (
-      <HistorikkSakIndex
-        key={h.behandlingId}
-        historikkinnslag={h}
-        saksnummer="2"
-        getBehandlingLocation={() => locationMock}
-        alleKodeverk={alleKodeverk as any}
-        createLocationForSkjermlenke={() => locationMock}
-        erTilbakekreving={false}
-      />
-    ))}
+    <HistorikkSakIndex
+      historikkFpSak={history}
+      historikkFpTilbake={[]}
+      alleKodeverkFpTilbake={{}}
+      alleKodeverkFpSak={alleKodeverk as any}
+      saksnummer="2"
+      getBehandlingLocation={() => locationMock}
+      createLocationForSkjermlenke={() => locationMock}
+    />
+  </div>
+);
+
+export const visHistorikkNårBehandlingErValgt = () => (
+  <div style={{
+    width: '600px', backgroundColor: 'white', padding: '30px',
+  }}
+  >
+    <HistorikkSakIndex
+      historikkFpSak={history}
+      historikkFpTilbake={[]}
+      alleKodeverkFpTilbake={{}}
+      alleKodeverkFpSak={alleKodeverk as any}
+      saksnummer="2"
+      getBehandlingLocation={() => locationMock}
+      createLocationForSkjermlenke={() => locationMock}
+      valgtBehandlingId={999951}
+    />
   </div>
 );

@@ -1,8 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo, useState } from 'react';
 import { Location } from 'history';
+import moment from 'moment';
+import { WrappedComponentProps } from 'react-intl';
+import { Checkbox } from 'nav-frontend-skjema';
 
-import { Historikkinnslag, Kodeverk } from '@fpsak-frontend/types';
+import { Historikkinnslag, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import {
+  FlexContainer, FlexRow, FlexColumn, VerticalSpacer,
+} from '@fpsak-frontend/shared-components';
 
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
 import Snakkeboble from './maler/felles/snakkeboble';
@@ -21,6 +29,8 @@ import HistorikkMalTypeTilbakekreving from './maler/HistorikkMalTypeTilbakekrevi
 import HistorikkMalTypeForeldelse from './maler/HistorikkMalTypeForeldelse';
 import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
 import HistorikkMalTypeAktivitetskrav from './maler/HistorikkMalTypeAktivitetskrav';
+
+import styles from './history.less';
 
 /*
  https://confluence.adeo.no/display/MODNAV/OMR-13+SF4+Sakshistorikk+-+UX+og+grafisk+design
@@ -187,13 +197,30 @@ const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
   }
 };
 
+type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
+  erTilbakekreving?: boolean;
+}
+
+const sortAndTagTilbakekreving = (
+  historikkFpsak: Historikkinnslag[] = [],
+  historikkFptilbake: Historikkinnslag[] = [],
+): HistorikkMedTilbakekrevingIndikator[] => {
+  const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map((ht) => ({
+    ...ht,
+    erTilbakekreving: true,
+  }));
+  return historikkFpsak.concat(historikkFraTilbakekrevingMedMarkor).sort((a, b) => moment(b.opprettetTidspunkt).diff(moment(a.opprettetTidspunkt)));
+};
+
 interface OwnProps {
-  historikkinnslag: Historikkinnslag;
+  historikkFpSak: Historikkinnslag[];
+  historikkFpTilbake: Historikkinnslag[];
+  alleKodeverkFpTilbake?: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverkFpSak: {[key: string]: KodeverkMedNavn[]};
   saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
-  erTilbakekreving: boolean;
+  valgtBehandlingId?: number;
 }
 
 /**
@@ -201,36 +228,72 @@ interface OwnProps {
  *
  * Historikken for en behandling
  */
-const History: FunctionComponent<OwnProps> = ({
-  historikkinnslag,
+const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+  intl,
+  historikkFpSak,
+  historikkFpTilbake,
+  alleKodeverkFpTilbake,
+  alleKodeverkFpSak,
   saksnummer = '0',
   getBehandlingLocation,
-  getKodeverknavn,
   createLocationForSkjermlenke,
-  erTilbakekreving,
+  valgtBehandlingId,
 }) => {
-  const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
-  const aktorIsVL = historikkinnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
-  const aktorIsSOKER = historikkinnslag.aktoer.kode === HistorikkAktor.SOKER;
-  const aktorIsArbeidsgiver = historikkinnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
+  const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
+
+  const alleHistorikkInnslag = useMemo(() => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake), [historikkFpSak, historikkFpTilbake]);
+
+  const filtrerteInnslag = useMemo(() => (valgtBehandlingId && skalSortertePaValgtBehandling
+    ? alleHistorikkInnslag.filter((i) => i.behandlingId === valgtBehandlingId) : alleHistorikkInnslag),
+  [alleHistorikkInnslag, valgtBehandlingId, skalSortertePaValgtBehandling]);
+
+  const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak, kodeverkTyper), [alleKodeverkFpSak]);
+  const getKodeverknavnFpTilbake = useMemo(() => getKodeverknavnFn(alleKodeverkFpTilbake, kodeverkTyper), [alleKodeverkFpTilbake]);
 
   return (
-    <Snakkeboble
-      aktoer={historikkinnslag.aktoer}
-      rolleNavn={getKodeverknavn(historikkinnslag.aktoer)}
-      dato={historikkinnslag.opprettetTidspunkt}
-      kjoenn={historikkinnslag.kjoenn}
-      opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historikkinnslag.opprettetAv}
-    >
-      <HistorikkMal
-        historikkinnslag={historikkinnslag}
-        behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingId)}
-        saksnummer={saksnummer}
-        getKodeverknavn={getKodeverknavn}
-        createLocationForSkjermlenke={createLocationForSkjermlenke}
-        erTilbakekreving={erTilbakekreving}
-      />
-    </Snakkeboble>
+    <>
+      {valgtBehandlingId && (
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn className={styles.pushRight}>
+              <Checkbox
+                label={intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
+                onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}
+              />
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      )}
+      <VerticalSpacer sixteenPx />
+      {filtrerteInnslag.map((historikkinnslag) => {
+        const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
+        const aktorIsVL = historikkinnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
+        const aktorIsSOKER = historikkinnslag.aktoer.kode === HistorikkAktor.SOKER;
+        const aktorIsArbeidsgiver = historikkinnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
+
+        const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
+
+        return (
+          <Snakkeboble
+            key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type.kode}
+            aktoer={historikkinnslag.aktoer}
+            rolleNavn={getKodeverknavn(historikkinnslag.aktoer)}
+            dato={historikkinnslag.opprettetTidspunkt}
+            kjoenn={historikkinnslag.kjoenn}
+            opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historikkinnslag.opprettetAv}
+          >
+            <HistorikkMal
+              historikkinnslag={historikkinnslag}
+              behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingId)}
+              saksnummer={saksnummer}
+              getKodeverknavn={getKodeverknavn}
+              createLocationForSkjermlenke={createLocationForSkjermlenke}
+              erTilbakekreving={!!historikkinnslag.erTilbakekreving}
+            />
+          </Snakkeboble>
+        );
+      })}
+    </>
   );
 };
 
