@@ -9,10 +9,10 @@
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/papirsoknad-felles": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
-    "nav-frontend-skjema": "3.0.53",
-    "nav-frontend-skjema-style": "2.0.33",
+    "nav-frontend-skjema": "3.1.0",
+    "nav-frontend-skjema-style": "2.1.0",
     "react": "^17.0.1",
-    "react-intl": "^5.13.2"
+    "react-intl": "^5.13.4"
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
