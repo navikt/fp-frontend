@@ -130,6 +130,7 @@
     "webpack-merge": "^5.7.3"
   },
   "resolutions": {
+    "prismjs": "1.23.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-test-renderer": "^17.0.1"
