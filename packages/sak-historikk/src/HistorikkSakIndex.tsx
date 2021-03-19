@@ -2,8 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { Historikkinnslag, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import History from './components/History';
@@ -17,30 +15,37 @@ const intl = createIntl({
 }, cache);
 
 interface OwnProps {
-  historikkinnslag: Historikkinnslag;
+  historikkFpSak: Historikkinnslag[];
+  historikkFpTilbake: Historikkinnslag[];
+  alleKodeverkFpTilbake?: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverkFpSak: {[key: string]: KodeverkMedNavn[]};
   saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
-  erTilbakekreving: boolean;
+  valgtBehandlingId?: number;
 }
 
 const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
-  historikkinnslag,
+  historikkFpSak,
+  historikkFpTilbake,
+  alleKodeverkFpTilbake,
+  alleKodeverkFpSak,
   saksnummer,
   getBehandlingLocation,
-  alleKodeverk,
   createLocationForSkjermlenke,
-  erTilbakekreving,
+  valgtBehandlingId,
 }) => (
   <RawIntlProvider value={intl}>
     <History
-      historikkinnslag={historikkinnslag}
+      intl={intl}
+      historikkFpSak={historikkFpSak}
+      historikkFpTilbake={historikkFpTilbake}
+      alleKodeverkFpTilbake={alleKodeverkFpTilbake}
+      alleKodeverkFpSak={alleKodeverkFpSak}
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
-      getKodeverknavn={getKodeverknavnFn(alleKodeverk, kodeverkTyper)}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
-      erTilbakekreving={erTilbakekreving}
+      valgtBehandlingId={valgtBehandlingId}
     />
   </RawIntlProvider>
 );
