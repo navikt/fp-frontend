@@ -62,7 +62,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     ...standardPanelProps,
   };
 
-  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv ? hentSkalMarkeresSomAktiv(initData, standardPanelProps) : undefined;
+  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(initData, standardPanelProps) ? true : undefined;
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
