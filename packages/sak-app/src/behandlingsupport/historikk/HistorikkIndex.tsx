@@ -1,8 +1,7 @@
 import React, {
-  FunctionComponent, useCallback, useMemo,
+  FunctionComponent, useCallback,
 } from 'react';
 import { useLocation } from 'react-router-dom';
-import moment from 'moment';
 
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 import { KodeverkMedNavn, Historikkinnslag } from '@fpsak-frontend/types';
@@ -14,20 +13,7 @@ import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths'
 import ApplicationContextPath from '../../app/ApplicationContextPath';
 import useGetEnabledApplikasjonContext from '../../app/useGetEnabledApplikasjonContext';
 
-type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
-  erTilbakekreving?: boolean;
-}
-
-const sortAndTagTilbakekreving = (
-  historikkFpsak: Historikkinnslag[] = [],
-  historikkFptilbake: Historikkinnslag[] = [],
-): HistorikkMedTilbakekrevingIndikator[] => {
-  const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map((ht) => ({
-    ...ht,
-    erTilbakekreving: true,
-  }));
-  return historikkFpsak.concat(historikkFraTilbakekrevingMedMarkor).sort((a, b) => moment(b.opprettetTidspunkt).diff(moment(a.opprettetTidspunkt)));
-};
+const EMPTY_ARRAY = [];
 
 interface OwnProps {
   saksnummer: string;
@@ -61,34 +47,29 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndret = forrigeSaksnummer && erBehandlingEndretFraUndefined;
 
-  const { data: historikkFpSak } = restApiHooks.useRestApi<Historikkinnslag[]>(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
+  const { data: historikkFpSak = EMPTY_ARRAY } = restApiHooks.useRestApi<Historikkinnslag[]>(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: erBehandlingEndret,
     keepData: true,
   });
-  const { data: historikkFpTilbake } = restApiHooks
+  const { data: historikkFpTilbake = EMPTY_ARRAY } = restApiHooks
     .useRestApi<Historikkinnslag[]>(FpsakApiKeys.HISTORY_FPTILBAKE, { saksnummer }, {
       updateTriggers: [behandlingId, behandlingVersjon],
       suspendRequest: !skalBrukeFpTilbakeHistorikk || erBehandlingEndret,
       keepData: true,
     });
 
-  const historikkInnslag = useMemo(() => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake), [historikkFpSak, historikkFpTilbake]);
-
   return (
-    <>
-      {historikkInnslag.map((innslag) => (
-        <HistorikkSakIndex
-          key={innslag.opprettetTidspunkt + innslag.type.kode}
-          historikkinnslag={innslag}
-          saksnummer={saksnummer}
-          alleKodeverk={innslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak}
-          erTilbakekreving={!!innslag.erTilbakekreving}
-          getBehandlingLocation={getBehandlingLocation}
-          createLocationForSkjermlenke={createLocationForSkjermlenke}
-        />
-      ))}
-    </>
+    <HistorikkSakIndex
+      historikkFpSak={historikkFpSak}
+      historikkFpTilbake={historikkFpTilbake}
+      alleKodeverkFpTilbake={alleKodeverkFpTilbake}
+      alleKodeverkFpSak={alleKodeverkFpSak}
+      saksnummer={saksnummer}
+      getBehandlingLocation={getBehandlingLocation}
+      createLocationForSkjermlenke={createLocationForSkjermlenke}
+      valgtBehandlingId={behandlingId}
+    />
   );
 };
 

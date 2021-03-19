@@ -49,9 +49,11 @@ describe('<HistorikkIndex>', () => {
     />);
 
     const index = wrapper.find(HistorikkSakIndex);
-    expect(index).toHaveLength(3);
-    expect((index.at(0).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).toEqual('2019-01-06');
-    expect((index.at(1).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).toEqual('2019-01-04');
-    expect((index.at(2).prop('historikkinnslag') as { opprettetTidspunkt: string }).opprettetTidspunkt).toEqual('2019-01-01');
+    expect(index).toHaveLength(1);
+
+    const { historikkFpSak, historikkFpTilbake } = index.props();
+
+    expect(historikkFpSak).toHaveLength(2);
+    expect(historikkFpTilbake).toHaveLength(1);
   });
 });
