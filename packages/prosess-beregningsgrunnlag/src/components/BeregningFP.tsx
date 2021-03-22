@@ -15,12 +15,13 @@ import aktivitetStatus, {
   isStatusTilstotendeYtelse,
 } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, RelevanteStatuserProp } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
+import RelevanteStatuserProp from '../types/RelevanteStatuserTsType';
 
 const visningForManglendeBG = () => (
   <>

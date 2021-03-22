@@ -3,9 +3,9 @@ import { VerticalSpacer, FlexColumn, FlexRow } from '@fpsak-frontend/shared-comp
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import styles from './avvikopplysningerPanel.less';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const lagFormatertetekster = (kriterie: string, visPanel: VisPanelProp, relevanteStatuser: RelevanteStatuserProp, isBold: boolean) => (
   <FlexColumn className={styles.colLable}>

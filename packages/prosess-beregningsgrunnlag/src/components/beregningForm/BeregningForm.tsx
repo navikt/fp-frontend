@@ -22,7 +22,6 @@ import {
   FaktaOmBeregning,
   Kodeverk,
   KodeverkMedNavn,
-  RelevanteStatuserProp,
   SammenligningsgrunlagProp,
   Vilkar,
   YtelseGrunnlag,
@@ -43,6 +42,7 @@ import DekningsgradTransformedValues from '../../types/DekningsgradAksjonspunktT
 import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
 import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunktTsType';
 import { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables

@@ -4,11 +4,12 @@ import Panel from 'nav-frontend-paneler';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
-import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvviksopplysningerPanel from './AvvikopplysningerPanel';
 import AvviksopplysningerSN from '../selvstendigNaeringsdrivende/AvvikopplysningerSN';
 import AvviksopplysningerFL from '../frilanser/AvvikopplysningerFL';
 import AvviksopplysningerAT from '../arbeidstaker/AvvikopplysningerAT';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const sammenligningsgrunnlag = (kode) => ({
   sammenligningsgrunnlagFom: '2018-09-01',

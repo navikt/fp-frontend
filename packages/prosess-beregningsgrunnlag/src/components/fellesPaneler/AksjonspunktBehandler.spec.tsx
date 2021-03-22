@@ -5,11 +5,11 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import { AksjonspunktBehandlerImpl as UnwrappedForm } from './AksjonspunktBehandler';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const relevanteStatuser = {
   isFrilanser: false,

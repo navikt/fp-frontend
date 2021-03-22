@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { RelevanteStatuserProp } from '@fpsak-frontend/types';
 import { FormattedMessage } from 'react-intl';
 import AvvikopplysningerATFLSN from './AvvikopplysningerATFLSN';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const beregnetAarsinntekt = 360000;
 const sammenligningsgrunnlag = (kode) => ({

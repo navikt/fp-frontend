@@ -6,7 +6,8 @@ import { FlexRow } from '@fpsak-frontend/shared-components';
 import { Column } from 'nav-frontend-grid';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 
-import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AvvikopplysningerATFL from '../fellesPaneler/AvvikopplysningerATFLSN';
 
 const viserIkkeAvviksvurdering = (erKombinasjonsstatusATSN: boolean, erKombinasjonsstatusATFLSN: boolean): ReactElement => (

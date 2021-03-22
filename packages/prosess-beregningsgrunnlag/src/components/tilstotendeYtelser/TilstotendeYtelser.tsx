@@ -6,8 +6,9 @@ import { Column, Row } from 'nav-frontend-grid';
 import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus, { isStatusDagpengerOrAAP } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 export const getTekstForAndelBruktIBeregning = (andel: BeregningsgrunnlagAndel): string => {
   if (andel.aktivitetStatus.kode === aktivitetStatus.DAGPENGER) {
