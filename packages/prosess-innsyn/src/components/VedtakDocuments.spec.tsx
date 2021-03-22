@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { shallow } from 'enzyme';
+import Lenke from 'nav-frontend-lenker';
 
 import VedtakDocuments from './VedtakDocuments';
 
@@ -17,7 +17,7 @@ describe('<VedtakDocuments>', () => {
       vedtaksdokumenter={vedtaksdokumenter}
     />);
 
-    expect(wrapper.find('a')).toHaveLength(1);
+    expect(wrapper.find(Lenke)).toHaveLength(1);
   });
 
   it('skal vise dokumentlisten etter at lenke er trykket', () => {
@@ -32,7 +32,7 @@ describe('<VedtakDocuments>', () => {
       vedtaksdokumenter={vedtaksdokumenter}
     />);
 
-    wrapper.find('a').simulate('click', { preventDefault: () => undefined });
-    expect(wrapper.find('a')).toHaveLength(2);
+    wrapper.find(Lenke).simulate('click', { preventDefault: () => undefined });
+    expect(wrapper.find(Lenke)).toHaveLength(2);
   });
 });
