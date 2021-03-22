@@ -112,7 +112,10 @@ export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & I
       label={<FormattedMessage id="InnsynForm.Resultat" key="1" />}
       isEdited={!isApOpen}
     >
-      {innsynResultatTyper.filter((irt) => irt.kode !== '-')
+      {innsynResultatTyper
+        .filter((irt) => irt.kode !== '-')
+        .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
+        .reverse()
         .map((irt) => <RadioOption key={irt.kode} value={irt.kode} label={irt.navn} />)}
     </RadioGroupField>
     {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET || innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
