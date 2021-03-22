@@ -7,11 +7,10 @@ import Modal from 'nav-frontend-modal';
 
 import { Image } from '@fpsak-frontend/shared-components';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { Behandling, Kodeverk } from '@fpsak-frontend/types';
+import { Behandling } from '@fpsak-frontend/types';
 
 import styles from './fatterVedtakApprovalModal.less';
 
@@ -19,7 +18,6 @@ const getInfoTextCode = (
   behandlingtypeKode: string,
   behandlingsresultat: Behandling['behandlingsresultat'],
   harSammeResultatSomOriginalBehandling: boolean,
-  ytelseType: Kodeverk,
   erKlageWithKA: boolean,
   isOpphor: boolean,
 ) => {
@@ -42,29 +40,16 @@ const getInfoTextCode = (
     return 'FatterVedtakApprovalModal.UendretUtfall';
   }
   if (behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.AVSLATT) {
-    if (ytelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
-      return 'FatterVedtakApprovalModal.IkkeInnvilgetES';
-    }
-    if (ytelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
-      return 'FatterVedtakApprovalModal.IkkeInnvilgetSVP';
-    }
-    return 'FatterVedtakApprovalModal.IkkeInnvilgetFP';
+    return 'FatterVedtakApprovalModal.IkkeInnvilget';
   }
   if (isOpphor) {
-    return 'FatterVedtakApprovalModal.OpphortForeldrepenger';
+    return 'FatterVedtakApprovalModal.OpphortVedtak';
   }
-  if (ytelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
-    return 'FatterVedtakApprovalModal.InnvilgetEngangsstonad';
-  }
-  if (ytelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return 'FatterVedtakApprovalModal.InnvilgetSvangerskapspenger';
-  }
-  return 'FatterVedtakApprovalModal.InnvilgetForeldrepenger';
+  return 'FatterVedtakApprovalModal.InnvilgetVedtak';
 };
 
 const getModalDescriptionTextCode = (
   isOpphor: boolean,
-  ytelseType: Kodeverk,
   erKlageWithKA: boolean,
   behandlingTypeKode: string,
 ) => {
@@ -80,13 +65,7 @@ const getModalDescriptionTextCode = (
   if (isOpphor) {
     return 'FatterVedtakApprovalModal.ModalDescriptionOpphort';
   }
-  if (ytelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
-    return 'FatterVedtakApprovalModal.ModalDescriptionESApproval';
-  }
-  if (ytelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return 'FatterVedtakApprovalModal.ModalDescriptionSVPApproval';
-  }
-  return 'FatterVedtakApprovalModal.ModalDescriptionFPApproval';
+  return 'FatterVedtakApprovalModal.ModalDescriptionApproval';
 };
 
 const isStatusFatterVedtak = (behandlingStatusKode: string) => behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
@@ -97,41 +76,34 @@ const utledInfoTextCode = (
   behandlingTypeKode: string,
   behandlingsresultat: Behandling['behandlingsresultat'],
   harSammeResultatSomOriginalBehandling: boolean,
-  fagsakYtelseType: Kodeverk,
   erKlageWithKA: boolean,
   isBehandlingsresultatOpphor: boolean,
 ) => {
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
-      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, harSammeResultatSomOriginalBehandling, fagsakYtelseType,
+      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, harSammeResultatSomOriginalBehandling,
         erKlageWithKA, isBehandlingsresultatOpphor)
       : '';
   }
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
 };
 
-const getAltImgTextCode = (ytelseType: Kodeverk) => (ytelseType.kode === FagsakYtelseType.ENGANGSSTONAD
-  ? 'FatterVedtakApprovalModal.InnvilgetES' : 'FatterVedtakApprovalModal.InnvilgetFP');
-
 const utledAltImgTextCode = (
   behandlingStatusKode: string,
-  fagsakYtelseType: Kodeverk,
-) => (isStatusFatterVedtak(behandlingStatusKode) ? getAltImgTextCode(fagsakYtelseType) : '');
+) => (isStatusFatterVedtak(behandlingStatusKode) ? 'FatterVedtakApprovalModal.Innvilget' : '');
 
 const utledModalDescriptionTextCode = (
   behandlingStatusKode: string,
-  fagsakYtelseType: Kodeverk,
   erKlageWithKA: boolean,
   behandlingTypeKode: string,
   isBehandlingsresultatOpphor: boolean,
 ) => (isStatusFatterVedtak(behandlingStatusKode)
-  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, fagsakYtelseType, erKlageWithKA, behandlingTypeKode)
+  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, erKlageWithKA, behandlingTypeKode)
   : 'FatterVedtakApprovalModal.ModalDescription');
 
 interface OwnProps {
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
-  fagsakYtelseType: Kodeverk;
   erKlageWithKA?: boolean;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   behandlingId: number;
@@ -154,17 +126,15 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
   behandlingTypeKode,
   behandlingsresultat,
   harSammeResultatSomOriginalBehandling,
-  fagsakYtelseType,
   erKlageWithKA,
 }) => {
   const isBehandlingsresultatOpphor = behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.OPPHOR;
   const infoTextCode = utledInfoTextCode(allAksjonspunktApproved, behandlingStatusKode, behandlingTypeKode, behandlingsresultat,
-    harSammeResultatSomOriginalBehandling, fagsakYtelseType, erKlageWithKA, isBehandlingsresultatOpphor);
+    harSammeResultatSomOriginalBehandling, erKlageWithKA, isBehandlingsresultatOpphor);
 
-  const altImgTextCode = utledAltImgTextCode(behandlingStatusKode, fagsakYtelseType);
+  const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);
 
-  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, fagsakYtelseType, erKlageWithKA,
-    behandlingTypeKode, isBehandlingsresultatOpphor);
+  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, erKlageWithKA, behandlingTypeKode, isBehandlingsresultatOpphor);
 
   return (
     <Modal

@@ -133,7 +133,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       {visBeslutterModal && (
         <BeslutterModalIndex
           behandling={behandling}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
           pushLocation={history.push}
           allAksjonspunktApproved={erAlleAksjonspunktGodkjent}
           erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}

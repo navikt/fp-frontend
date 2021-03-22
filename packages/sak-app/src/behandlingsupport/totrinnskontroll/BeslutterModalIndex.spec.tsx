@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 import { Behandling } from '@fpsak-frontend/types';
 
@@ -33,10 +32,6 @@ describe('<BeslutterModalIndex>', () => {
 
     const wrapper = shallow(<BeslutterModalIndex
       behandling={behandling}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      }}
       pushLocation={sinon.spy()}
       allAksjonspunktApproved={false}
       erKlageWithKA={false}
@@ -55,10 +50,6 @@ describe('<BeslutterModalIndex>', () => {
 
     const wrapper = shallow(<BeslutterModalIndex
       behandling={behandling}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      }}
       pushLocation={sinon.spy()}
       allAksjonspunktApproved={false}
       erKlageWithKA={false}
