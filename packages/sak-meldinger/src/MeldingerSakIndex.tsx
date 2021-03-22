@@ -24,6 +24,7 @@ interface OwnProps {
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: Kodeverk;
+  kanVeilede: boolean;
 }
 
 const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
@@ -37,6 +38,7 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   isKontrollerRevurderingApOpen = false,
   revurderingVarslingArsak,
   fagsakYtelseType,
+  kanVeilede,
 }) => (
   <RawIntlProvider value={intl}>
     <Messages
@@ -50,6 +52,7 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
       isKontrollerRevurderingApOpen={isKontrollerRevurderingApOpen}
       revurderingVarslingArsak={revurderingVarslingArsak}
       fagsakYtelseType={fagsakYtelseType}
+      kanVeilede={kanVeilede}
     />
   </RawIntlProvider>
 );
