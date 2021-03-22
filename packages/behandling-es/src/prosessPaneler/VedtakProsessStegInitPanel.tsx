@@ -183,7 +183,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       hentSkalMarkeresSomAktiv={(initData, standardData) => findStatusForVedtak(
         initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       ) === vilkarUtfallType.OPPFYLT}
-      renderPanel={(data) => (
+      renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal
             visModal={visIverksetterVedtakModal}
@@ -199,6 +199,8 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
             ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
             previewCallback={previewCallback}
             {...data}
+            aksjonspunkter={initData?.aksjonspunkter}
+            vilkar={initData?.vilkar}
           />
         </>
       )}
