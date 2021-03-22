@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, IntlShape, WrappedComponentProps,
 } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
@@ -213,4 +213,4 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
 export default connect(mapStateToPropsFactory)(behandlingForm({
   form: PERSON_ARBEIDSFORHOLD_DETAIL_FORM,
   enableReinitialize: true,
-})(injectIntl(PersonArbeidsforholdDetailForm)));
+})(PersonArbeidsforholdDetailForm));
