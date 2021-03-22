@@ -11,7 +11,6 @@ import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
-  fagsakYtelseType: Kodeverk;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
   erKlageWithKA: boolean,
@@ -19,7 +18,6 @@ interface OwnProps {
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   behandling,
-  fagsakYtelseType,
   pushLocation,
   allAksjonspunktApproved,
   erKlageWithKA,
@@ -43,7 +41,6 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
       behandling={behandling}
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
-      fagsakYtelseType={fagsakYtelseType}
       erKlageWithKA={erKlageWithKA}
       harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />
