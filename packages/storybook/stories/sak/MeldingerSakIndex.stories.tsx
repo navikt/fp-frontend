@@ -45,6 +45,7 @@ export const visMeldingerPanel = () => (
       behandlingId={1}
       behandlingVersjon={1}
       isKontrollerRevurderingApOpen={false}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',

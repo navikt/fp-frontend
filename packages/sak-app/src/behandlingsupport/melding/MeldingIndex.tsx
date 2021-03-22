@@ -7,7 +7,9 @@ import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { BehandlingAppKontekst, Fagsak, Kodeverk } from '@fpsak-frontend/types';
+import {
+  BehandlingAppKontekst, Fagsak, Kodeverk, NavAnsatt,
+} from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import { useFpSakKodeverk } from '../../data/useKodeverk';
@@ -118,6 +120,8 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const history = useHistory();
 
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+
   const ventearsaker = useFpSakKodeverk(kodeverkTyper.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(kodeverkTyper.REVURDERING_VARSLING_ÅRSAK);
 
@@ -188,6 +192,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         templates={brevmaler}
         isKontrollerRevurderingApOpen={harApentKontrollerRevAp}
         fagsakYtelseType={fagsak.fagsakYtelseType}
+        kanVeilede={navAnsatt.kanVeilede}
       />
 
       {submitFinished && showSettPaVentModal && (
