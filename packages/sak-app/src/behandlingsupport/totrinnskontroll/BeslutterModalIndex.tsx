@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { Kodeverk, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
@@ -11,7 +11,6 @@ import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
-  fagsakYtelseType: Kodeverk;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
   erKlageWithKA: boolean,
@@ -19,7 +18,6 @@ interface OwnProps {
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   behandling,
-  fagsakYtelseType,
   pushLocation,
   allAksjonspunktApproved,
   erKlageWithKA,
@@ -43,7 +41,6 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
       behandling={behandling}
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
-      fagsakYtelseType={fagsakYtelseType}
       erKlageWithKA={erKlageWithKA}
       harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />

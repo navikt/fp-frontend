@@ -4,7 +4,6 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -21,10 +20,6 @@ describe('<FatterVedtakApprovalModal>', () => {
       behandlingId={1}
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.KLAGE}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      }}
       erKlageWithKA
     />);
 
@@ -45,10 +40,6 @@ describe('<FatterVedtakApprovalModal>', () => {
       behandlingId={1}
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.ENGANGSSTONAD,
-        kodeverk: '',
-      }}
       erKlageWithKA
     />);
 
@@ -56,7 +47,7 @@ describe('<FatterVedtakApprovalModal>', () => {
     expect(modal).toHaveLength(1);
     expect(modal.prop('isOpen')).toBe(true);
     expect(modal.prop('contentLabel')).toEqual(
-      'Engangsstønad er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.',
+      'Vedtaket er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.',
     );
 
     const button = wrapper.find(Hovedknapp);
@@ -71,10 +62,6 @@ describe('<FatterVedtakApprovalModal>', () => {
       behandlingId={1}
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      }}
       erKlageWithKA
     />);
 
@@ -82,7 +69,7 @@ describe('<FatterVedtakApprovalModal>', () => {
     expect(modal).toHaveLength(1);
     expect(modal.prop('isOpen')).toBe(true);
     expect(modal.prop('contentLabel')).toEqual(
-      'Foreldrepenger er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.',
+      'Vedtaket er innvilget og vedtaket blir iverksatt. Du kommer nå til forsiden.',
     );
 
     const button = wrapper.find(Hovedknapp);
