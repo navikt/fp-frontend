@@ -2,8 +2,9 @@ import React from 'react';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BeregningsgrunnlagAndel, RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvviksopplysningerSN from './AvvikopplysningerSN';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const sammenligningsgrunnlag = (kode) => ({
   sammenligningsgrunnlagFom: '2018-09-01',

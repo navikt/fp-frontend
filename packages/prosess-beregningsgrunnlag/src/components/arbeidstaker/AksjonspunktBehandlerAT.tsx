@@ -13,8 +13,8 @@ import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold, Kodeverk,
   KodeverkMedNavn,
-  RelevanteStatuserProp,
 } from '@fpsak-frontend/types';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';

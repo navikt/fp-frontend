@@ -12,9 +12,9 @@ import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import shallowWithIntl from '@fpsak-frontend/prosess-vedtak/i18n/intl-enzyme-test-helper-prosess-vedtak';
 import {
   Beregningsgrunnlag as BeregningsgrunnlagProp,
-  RelevanteStatuserProp,
   SammenligningsgrunlagProp,
 } from '@fpsak-frontend/types';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import { BeregningFormImpl, transformValues, buildInitialValues } from './BeregningForm';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
 import SkjeringspunktOgStatusPanel2 from '../fellesPaneler/SkjeringspunktOgStatusPanel';

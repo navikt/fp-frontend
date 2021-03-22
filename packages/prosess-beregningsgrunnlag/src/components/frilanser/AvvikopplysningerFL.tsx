@@ -4,8 +4,9 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { FlexRow } from '@fpsak-frontend/shared-components';
 import { Column } from 'nav-frontend-grid';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
-import { RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvvikopplysningerATFL from '../fellesPaneler/AvvikopplysningerATFLSN';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 type OwnProps = {
     beregnetAarsinntekt?: number;

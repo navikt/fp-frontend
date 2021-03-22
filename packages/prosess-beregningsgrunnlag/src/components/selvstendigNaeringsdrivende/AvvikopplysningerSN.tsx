@@ -5,8 +5,9 @@ import { Column } from 'nav-frontend-grid';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import { FlexRow } from '@fpsak-frontend/shared-components';
-import { BeregningsgrunnlagAndel, RelevanteStatuserProp, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvvikopplysningerATFLSN from '../fellesPaneler/AvvikopplysningerATFLSN';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const ingenAvviksvurdering = (forklarendeTekst: string): ReactElement => (
   <FlexRow>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BeregningsgrunnlagAndel, RelevanteStatuserProp } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import TilstotendeYtelser, { getTekstForAndelBruktIBeregning } from './TilstotendeYtelser';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const dagpengerInntekt = 200000;
 const aapInntekt = 300000;
