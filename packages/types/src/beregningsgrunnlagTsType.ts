@@ -75,19 +75,6 @@ export type BeregningsgrunnlagAndel = Readonly <{
   næringer?: Næring[];
 }>;
 
-export type RelevanteStatuserProp = Readonly<{
-  isArbeidstaker: boolean;
-  isFrilanser: boolean;
-  isSelvstendigNaeringsdrivende: boolean;
-  harAndreTilstotendeYtelser: boolean;
-  harDagpengerEllerAAP: boolean;
-  isAAP: boolean;
-  isDagpenger: boolean;
-  skalViseBeregningsgrunnlag: boolean;
-  isKombinasjonsstatus: boolean;
-  isMilitaer: boolean;
-}>;
-
 export type YtelseGrunnlag = Readonly<{
   ytelsetype: string;
   besteberegninggrunnlag?: Besteberegninggrunnlag;

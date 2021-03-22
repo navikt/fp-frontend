@@ -21,7 +21,6 @@ import {
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
   KodeverkMedNavn,
-  RelevanteStatuserProp,
 } from '@fpsak-frontend/types';
 import styles from './aksjonspunktBehandler.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
@@ -30,6 +29,7 @@ import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
 import ArbeidstakerFrilansValues from '../../types/ATFLAksjonspunktTsType';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -180,6 +180,7 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
                 validate={[required, maxLength1500, minLength3, hasValidText]}
                 maxLength={1500}
                 readOnly={readOnly}
+                textareaClass={styles.textAreaStyle}
                 placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
                 endrettekst={lagEndretTekst(aksjonspunkter, erNyArbLivet, readOnly, true)}
               />

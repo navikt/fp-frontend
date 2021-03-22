@@ -6,7 +6,6 @@ export { default as Behandlingsresultat } from './src/behandlingsresultatTsType'
 export {
   default as Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
-  RelevanteStatuserProp,
   SammenligningsgrunlagProp,
   YtelseGrunnlag,
   BeregningsgrunnlagPeriodeProp,

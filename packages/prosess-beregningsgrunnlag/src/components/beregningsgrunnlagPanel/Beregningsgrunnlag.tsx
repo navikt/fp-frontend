@@ -7,13 +7,13 @@ import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagPeriodeProp,
   KodeverkMedNavn,
-  RelevanteStatuserProp,
   BeregningsgrunnlagAndel, Inntektsgrunnlag,
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
 import GrunnlagForAarsinntektPanelSN from '../selvstendigNaeringsdrivende/GrunnlagForAarsinntektPanelSN';
 import TilstotendeYtelser from '../tilstotendeYtelser/TilstotendeYtelser';
+import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 import MilitaerPanel from '../militar/MilitaerPanel';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
