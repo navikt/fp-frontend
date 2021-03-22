@@ -57,6 +57,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -74,6 +75,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -96,6 +98,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal lukke av modal', async () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -132,6 +135,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding', async () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -167,6 +171,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og ikke sette saken på vent hvis ikke Innhent eller forlenget', async () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -209,6 +214,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -251,6 +257,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og sette saken på vent hvis FORLEN', async () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);
@@ -293,6 +300,7 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal håndtere melding fra modal', async () => {
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
     requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
     requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
     requestApi.mock(FpsakApiKeys.BREVMALER, templates);

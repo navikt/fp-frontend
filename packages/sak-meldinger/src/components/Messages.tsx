@@ -69,6 +69,7 @@ interface PureOwnProps {
   revurderingVarslingArsak: KodeverkMedNavn[];
   isKontrollerRevurderingApOpen?: boolean;
   fagsakYtelseType: Kodeverk;
+  kanVeilede: boolean;
 }
 
 interface MappedOwnProps {
@@ -97,6 +98,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
   arsakskode,
   revurderingVarslingArsak,
   fagsakYtelseType,
+  kanVeilede,
   ...formProps
 }) => {
   if (!sprakKode) {
@@ -165,7 +167,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
         </>
       )}
       <div className={styles.buttonRow}>
-        <Hovedknapp mini spinner={formProps.submitting} disabled={formProps.submitting} onClick={ariaCheck}>
+        <Hovedknapp mini spinner={formProps.submitting} disabled={formProps.submitting || kanVeilede} onClick={ariaCheck}>
           {intl.formatMessage({ id: 'Messages.Submit' })}
         </Hovedknapp>
         <a

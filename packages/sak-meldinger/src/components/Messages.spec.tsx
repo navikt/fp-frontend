@@ -59,6 +59,7 @@ describe('<Messages>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       revurderingVarslingArsak={revurderingVarslingArsaker}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
@@ -90,6 +91,7 @@ describe('<Messages>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       revurderingVarslingArsak={revurderingVarslingArsaker}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
@@ -118,6 +120,7 @@ describe('<Messages>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       revurderingVarslingArsak={revurderingVarslingArsaker}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
@@ -147,6 +150,7 @@ describe('<Messages>', () => {
       behandlingVersjon={2}
       brevmalkode={dokumentMalType.REVURDERING_DOK}
       revurderingVarslingArsak={revurderingVarslingArsaker}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
@@ -168,6 +172,7 @@ describe('<Messages>', () => {
       behandlingVersjon={2}
       brevmalkode={dokumentMalType.REVURDERING_DOK}
       revurderingVarslingArsak={revurderingVarslingArsaker}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.SVANGERSKAPSPENGER,
         kodeverk: '',
@@ -192,6 +197,7 @@ describe('<Messages>', () => {
       behandlingVersjon={2}
       brevmalkode={dokumentMalType.REVURDERING_DOK}
       revurderingVarslingArsak={revurderingVarslingArsaker}
+      kanVeilede={false}
       fagsakYtelseType={{
         kode: fagsakYtelseType.ENGANGSSTONAD,
         kodeverk: '',
