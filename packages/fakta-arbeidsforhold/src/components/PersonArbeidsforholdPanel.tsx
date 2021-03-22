@@ -417,6 +417,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
           { hasArbeidsforholdAksjonspunkt(selectedArbeidsforhold) && (
             <PersonArbeidsforholdDetailForm
               key={selectedArbeidsforhold.id}
+              intl={intl}
               arbeidsforhold={selectedArbeidsforhold}
               readOnly={readOnly}
               hasAksjonspunkter={hasAksjonspunkter}
