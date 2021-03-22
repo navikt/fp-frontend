@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent, useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
-import classNames from 'classnames';
+import Lenke from 'nav-frontend-lenker';
 
 import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -16,63 +17,52 @@ interface OwnProps {
   vedtaksdokumenter: InnsynVedtaksdokument[];
 }
 
-interface OwnState {
-  showDocuments: boolean;
-}
-
 /**
  * VedtakDocuments
  *
  * Presentasjonskomponent.
  */
-class VedtakDocuments extends Component<OwnProps, OwnState> {
-  constructor(props: OwnProps) {
-    super(props);
-
-    this.toggleDocuments = this.toggleDocuments.bind(this);
-    this.state = {
-      showDocuments: false,
-    };
-  }
-
-  toggleDocuments(evt: React.MouseEvent): void {
-    this.setState((prevState: OwnState) => ({
-      showDocuments: !prevState.showDocuments,
-    }));
+const VedtakDocuments: FunctionComponent<OwnProps> = ({
+  vedtaksdokumenter,
+  behandlingTypes,
+}) => {
+  const [showDocuments, setShowDocuments] = useState(false);
+  const toggleDocuments = useCallback((evt) => {
+    setShowDocuments(!showDocuments);
     evt.preventDefault();
+  }, [showDocuments]);
+
+  if (vedtaksdokumenter.length === 0) {
+    return <FormattedMessage id="DocumentListInnsyn.Vedtaksdokumentasjon" values={{ numberOfDocuments: 0 }} />;
   }
 
-  render() {
-    const { vedtaksdokumenter, behandlingTypes } = this.props;
-    const { showDocuments } = this.state;
-    return (
-      <>
-        <a href="" onClick={this.toggleDocuments} className="lenke lenke--frittstaende">
-          <Normaltekst>
-            <FormattedMessage id="DocumentListInnsyn.Vedtaksdokumentasjon" values={{ numberOfDocuments: vedtaksdokumenter.length }} />
-            <i className={classNames('nav-frontend-chevron chevronboks ', showDocuments ? 'chevron--ned' : 'chevron--opp')} />
-          </Normaltekst>
-        </a>
-        {showDocuments && (
-          <>
-            <VerticalSpacer fourPx />
-            {vedtaksdokumenter.map((document) => (
-              <Row key={document.dokumentId}>
-                <Column xs="2">
-                  <DateLabel dateString={document.opprettetDato} />
-                </Column>
-                <Column xs="10">
-                  <a href={getLink(document)} className="lenke lenke--frittstaende" target="_blank" rel="noopener noreferrer">
-                    {behandlingTypes.find((bt) => bt.kode === document.tittel).navn}
-                  </a>
-                </Column>
-              </Row>
-            ))}
-          </>
-        )}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Lenke href="#" onClick={toggleDocuments}>
+        <Normaltekst>
+          <FormattedMessage id="DocumentListInnsyn.Vedtaksdokumentasjon" values={{ numberOfDocuments: vedtaksdokumenter.length }} />
+          <i className={classNames('nav-frontend-chevron chevronboks ', showDocuments ? 'chevron--ned' : 'chevron--opp')} />
+        </Normaltekst>
+      </Lenke>
+      {showDocuments && (
+        <>
+          <VerticalSpacer fourPx />
+          {vedtaksdokumenter.map((document) => (
+            <Row key={document.dokumentId}>
+              <Column xs="2">
+                <DateLabel dateString={document.opprettetDato} />
+              </Column>
+              <Column xs="10">
+                <Lenke href={getLink(document)} target="_blank">
+                  {behandlingTypes.find((bt) => bt.kode === document.tittel).navn}
+                </Lenke>
+              </Column>
+            </Row>
+          ))}
+        </>
+      )}
+    </>
+  );
+};
 
 export default VedtakDocuments;
