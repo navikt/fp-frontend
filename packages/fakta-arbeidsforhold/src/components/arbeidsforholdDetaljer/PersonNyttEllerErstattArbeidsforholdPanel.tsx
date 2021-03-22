@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { required } from '@fpsak-frontend/utils';
-import { ArrowBox } from '@fpsak-frontend/shared-components';
+import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
@@ -41,7 +41,8 @@ const PersonNyttEllerErstattArbeidsforholdPanel: FunctionComponent<OwnProps & Wr
     behandlingId={behandlingId}
     behandlingVersjon={behandlingVersjon}
   >
-    <ArrowBox alignLeft>
+    <VerticalSpacer sixteenPx />
+    <ArrowBox alignLeft alignOffset={50}>
       <RadioGroupField
         name="erNyttArbeidsforhold"
         validate={[required]}
