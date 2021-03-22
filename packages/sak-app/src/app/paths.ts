@@ -28,7 +28,8 @@ export const pathToBehandlinger = (saksnummer: string): string => buildPath(beha
 export const pathToBehandling = (saksnummer: string, behandlingId: number): string => buildPath(behandlingPath, { saksnummer, behandlingId });
 export const pathToMissingPage = (): string => '/404';
 
-export const pathToAnnenPart = (saksnummer: string, behandlingId: number): string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/`;
+export const pathToAnnenPart = (saksnummer: string, behandlingId: number)
+  : string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
 
 const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 
