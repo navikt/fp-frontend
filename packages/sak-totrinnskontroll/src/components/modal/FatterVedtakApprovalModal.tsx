@@ -10,7 +10,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { Behandling, Kodeverk } from '@fpsak-frontend/types';
+import { Behandling } from '@fpsak-frontend/types';
 
 import styles from './fatterVedtakApprovalModal.less';
 
