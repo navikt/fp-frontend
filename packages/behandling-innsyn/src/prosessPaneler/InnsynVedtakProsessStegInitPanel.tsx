@@ -23,7 +23,8 @@ const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
-  return innsyn.innsynResultatType.kode === innsynResultatTypeKV.INNVILGET ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
+  return innsyn.innsynResultatType.kode === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType.kode === innsynResultatTypeKV.DELVISTINNVILGET
+    ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
 };
 
 const forhandsvis = (data) => {
@@ -109,7 +110,7 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       hentOverstyrtStatus={(initData) => (initData?.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}
       hentSkalMarkeresSomAktiv={(initData) => (initData?.innsyn
-        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter) === vilkarUtfallType.OPPFYLT)}
+        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter) !== vilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

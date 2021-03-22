@@ -183,7 +183,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       lagringSideEffekter={lagringSideEffekter}
       hentSkalMarkeresSomAktiv={(initData, standardData) => findStatusForVedtak(
         initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
-      ) === vilkarUtfallType.OPPFYLT}
+      ) !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

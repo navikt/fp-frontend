@@ -118,7 +118,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)}
       lagringSideEffekter={lagringSideEffekter}
       hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)
-        === vilkarUtfallType.OPPFYLT}
+        !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>
           <FatterVedtakStatusModal
