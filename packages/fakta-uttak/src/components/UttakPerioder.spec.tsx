@@ -1,9 +1,10 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { FamilieHendelseSamling, Kodeverk, Personoversikt } from '@fpsak-frontend/types';
 
 import { UttakPerioder } from './UttakPerioder';
@@ -60,25 +61,22 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
     const fieldArray = wrapper.find('FieldArray');
-    const verticalSpacer = wrapper.find('VerticalSpacer');
     const flexContainer = wrapper.find('FlexContainer');
     const flexRow = wrapper.find('FlexRow');
     const flexColumn = wrapper.find('FlexColumn');
     const element = wrapper.find('Element');
-    const formattedMessage = wrapper.find('FormattedMessage');
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
     expect(fieldArray).toHaveLength(1);
-    expect(verticalSpacer).toHaveLength(3);
     expect(flexContainer).toHaveLength(2);
     expect(flexRow).toHaveLength(2);
     expect(flexColumn).toHaveLength(3);
     expect(element).toHaveLength(1);
-    expect(formattedMessage).toHaveLength(3);
     expect(uttakNyPeriode).toHaveLength(0);
     expect(uttakSlettPeriodeModal).toHaveLength(0);
   });
@@ -109,6 +107,7 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
@@ -117,9 +116,9 @@ describe('<UttakPerioder>', () => {
     const flexContainer = wrapper.find('FlexContainer');
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
     const uttakNyPeriode = wrapper.find(UttakNyPeriode);
-    const hovedknapp = wrapper.find(Hovedknapp);
+    const hovedknapp = wrapper.find(FaktaSubmitButton);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).toBe(true);
+    expect(hovedknapp.prop('isReadOnly')).toBe(true);
     expect(knapp.prop('disabled')).toBe(true);
     expect(fieldArray).toHaveLength(1);
     expect(flexContainer).toHaveLength(2);
@@ -153,6 +152,7 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
@@ -193,12 +193,13 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
-    const hovedknapp = wrapper.find(Hovedknapp);
+    const hovedknapp = wrapper.find(FaktaSubmitButton);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).toBe(true);
+    expect(hovedknapp.prop('isReadOnly')).toBe(true);
     expect(knapp.prop('disabled')).toBe(true);
   });
 
@@ -228,12 +229,13 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
-    const hovedknapp = wrapper.find(Hovedknapp);
+    const hovedknapp = wrapper.find(FaktaSubmitButton);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).toBe(true);
+    expect(hovedknapp.prop('isReadOnly')).toBe(true);
     expect(knapp.prop('disabled')).toBe(true);
   });
 
@@ -263,12 +265,13 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
-    const hovedknapp = wrapper.find(Hovedknapp);
+    const hovedknapp = wrapper.find(FaktaSubmitButton);
     const knapp = wrapper.find(Knapp);
-    expect(hovedknapp.prop('disabled')).toBe(false);
+    expect(hovedknapp.prop('isReadOnly')).toBe(false);
     expect(knapp.prop('disabled')).toBe(false);
   });
 
@@ -321,10 +324,11 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 
-    const aksjonspunktHelpText = wrapper.find(AksjonspunktHelpTextTemp);
+    const aksjonspunktHelpText = wrapper.find(AksjonspunktHelpTextHTML);
     expect(aksjonspunktHelpText).toHaveLength(1);
     const formattedMessage = aksjonspunktHelpText.find(FormattedMessage);
     expect(formattedMessage.prop('id')).toEqual('UttakInfoPanel.Aksjonspunkt.5071');
@@ -357,6 +361,7 @@ describe('<UttakPerioder>', () => {
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
       />,
     );
 

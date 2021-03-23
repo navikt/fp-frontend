@@ -50,6 +50,7 @@ interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
   behandlingPaaVent?: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  submittable: boolean;
 }
 
 const UttakInfoPanel: FunctionComponent<OwnProps> = ({
@@ -70,6 +71,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   kanOverstyre,
   submitCallback,
   arbeidsgiverOpplysningerPerId,
+  submittable,
 }) => {
   const avklarAnnenForelderRettAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
   const uttakAp = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
@@ -120,6 +122,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
           familiehendelse={familiehendelse}
           vilkarForSykdomExists={vilkarForSykdomExists}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          submittable={submittable}
         />
       )}
 

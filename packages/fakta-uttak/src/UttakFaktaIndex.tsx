@@ -39,6 +39,7 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   readOnly,
   kanOverstyre,
   arbeidsgiverOpplysningerPerId,
+  submittable,
 }) => (
   <RawIntlProvider value={intl}>
     <UttakInfoPanel
@@ -59,6 +60,7 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
       personoversikt={personoversikt}
       familiehendelse={familiehendelse}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      submittable={submittable}
     />
   </RawIntlProvider>
 );

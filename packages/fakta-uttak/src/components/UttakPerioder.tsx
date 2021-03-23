@@ -7,23 +7,25 @@ import { FormattedMessage } from 'react-intl';
 import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Element } from 'nav-frontend-typografi';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 
+import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 import { getBehandlingFormPrefix, behandlingFormValueSelector, CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
-import { ariaCheck, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
-  AksjonspunktHelpTextTemp,
   FlexColumn,
   FlexContainer,
   FlexRow,
   VerticalSpacer,
+  AksjonspunktHelpTextHTML,
 } from '@fpsak-frontend/shared-components';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import UttakPeriode from './UttakPeriode';
 import UttakNyPeriode from './UttakNyPeriode';
@@ -71,6 +73,7 @@ interface PureOwnProps {
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists?: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  submittable: boolean;
 }
 
 interface MappedOwnProps {
@@ -99,8 +102,6 @@ interface OwnState {
 }
 
 export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps & DispatchProps, OwnState> {
-  nyPeriodeFormRef: any;
-
   constructor(props: PureOwnProps & MappedOwnProps & DispatchProps) {
     super(props);
 
@@ -121,14 +122,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     this.editPeriode = this.editPeriode.bind(this);
     this.cancelEditPeriode = this.cancelEditPeriode.bind(this);
     this.isAnyFormOpen = this.isAnyFormOpen.bind(this);
-    this.setNyPeriodeFormRef = this.setNyPeriodeFormRef.bind(this);
-  }
-
-  setNyPeriodeFormRef(element: any): void {
-    if (element) {
-      this.nyPeriodeFormRef = element;
-      this.nyPeriodeFormRef.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    }
   }
 
   overrideResultat = (resultat: any) => {
@@ -347,7 +340,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       aksjonspunkter,
       førsteUttaksdato,
       endringsdato,
-      submitting,
       hasOpenAksjonspunkter,
       kanOverstyre,
       hasRevurderingOvertyringAp,
@@ -363,6 +355,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       alleKodeverk,
       vilkarForSykdomExists,
       arbeidsgiverOpplysningerPerId,
+      submittable,
     } = this.props;
     const {
       periodeSlett, isNyPeriodeFormOpen, showModalSlettPeriode,
@@ -373,29 +366,32 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       && (perioder[0] || {}).uttakPeriodeType.kode === 'FEDREKVOTE'
       && moment((perioder[0] || {}).fom).isBefore(sisteUttakdatoFørsteSeksUker);
 
+    const aksjonspunktTekster = aksjonspunkter
+      .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
+      .map((ap) => {
+        const førsteUttak = {
+          value: moment(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
+        };
+
+        return (
+          <FormattedMessage
+            key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
+            id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
+            values={førsteUttak}
+          />
+        );
+      });
+
+    if (farSøkerFør6Uker) {
+      aksjonspunktTekster.push(<FormattedMessage id="UttakInfoPanel.Aksjonspunkt.FarSøkerFør6Uker" />);
+    }
+
     return (
       <>
-        {!readOnly && (
-          <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-            {aksjonspunkter.map((ap) => {
-              const førsteUttak = {
-                value: moment(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
-              };
-
-              return (
-                <FormattedMessage
-                  key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
-                  id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
-                  values={førsteUttak}
-                />
-              );
-            })}
-            <VerticalSpacer eightPx />
-            {farSøkerFør6Uker && <FormattedMessage id="UttakInfoPanel.Aksjonspunkt.FarSøkerFør6Uker" />}
-          </AksjonspunktHelpTextTemp>
-        )}
-        <VerticalSpacer twentyPx />
-
+        <AksjonspunktHelpTextHTML>
+          {aksjonspunktTekster}
+        </AksjonspunktHelpTextHTML>
+        {aksjonspunktTekster.length > 0 && <VerticalSpacer twentyPx />}
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -444,9 +440,14 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <FlexContainer wrap>
           <FlexRow>
             <FlexColumn>
-              <Hovedknapp mini disabled={this.disableButtons()} onClick={ariaCheck} spinner={submitting}>
-                <FormattedMessage id="UttakInfoPanel.BekreftOgFortsett" />
-              </Hovedknapp>
+              <FaktaSubmitButton
+                behandlingId={behandlingId}
+                behandlingVersjon={behandlingVersjon}
+                formName="UttakFaktaForm"
+                isSubmittable={submittable}
+                isReadOnly={this.disableButtons()}
+                hasOpenAksjonspunkter={hasOpenAksjonspunkter}
+              />
             </FlexColumn>
             <FlexColumn>
               <Knapp mini htmlType="button" onClick={this.addNewPeriod} disabled={this.disableButtons()}>
@@ -458,21 +459,19 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <VerticalSpacer eightPx />
 
         {isNyPeriodeFormOpen && (
-          <div ref={this.setNyPeriodeFormRef}>
-            <UttakNyPeriode
-              newPeriodeCallback={this.newPeriodeCallback}
-              newPeriodeResetCallback={this.newPeriodeResetCallback}
-              nyPeriodeDisabledDaysFom={nyPeriodeDisabledDaysFom}
-              uttakPeriodeVurderingTyper={uttakPeriodeVurderingTyper}
-              getKodeverknavn={getKodeverknavn}
-              faktaArbeidsforhold={faktaArbeidsforhold}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              personoversikt={personoversikt}
-              alleKodeverk={alleKodeverk}
-              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            />
-          </div>
+          <UttakNyPeriode
+            newPeriodeCallback={this.newPeriodeCallback}
+            newPeriodeResetCallback={this.newPeriodeResetCallback}
+            nyPeriodeDisabledDaysFom={nyPeriodeDisabledDaysFom}
+            uttakPeriodeVurderingTyper={uttakPeriodeVurderingTyper}
+            getKodeverknavn={getKodeverknavn}
+            faktaArbeidsforhold={faktaArbeidsforhold}
+            behandlingId={behandlingId}
+            behandlingVersjon={behandlingVersjon}
+            personoversikt={personoversikt}
+            alleKodeverk={alleKodeverk}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          />
         )}
         {periodeSlett && (
           <UttakSlettPeriodeModal
