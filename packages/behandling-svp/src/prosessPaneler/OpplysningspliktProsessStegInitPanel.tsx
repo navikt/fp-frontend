@@ -10,7 +10,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';

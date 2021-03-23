@@ -6,8 +6,8 @@ import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
 import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
 import BehandlingPapirsoknadIndex from './BehandlingPapirsoknadIndex';
 
-jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
+jest.mock('@fpsak-frontend/behandling-felles', () => {
+  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
   return {
     ...felles,
     useBehandling: () => ({

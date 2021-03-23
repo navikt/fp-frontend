@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Aksjonspunkt } from '@fpsak-frontend/types';
 
 import FodseltilretteleggingFaktaInitPanel from './FodseltilretteleggingFaktaInitPanel';

@@ -5,7 +5,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
   useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
 import { Kodeverk } from '@fpsak-frontend/types';
 
 import { requestKlageApi, KlageBehandlingApiKeys } from './data/klageBehandlingApi';

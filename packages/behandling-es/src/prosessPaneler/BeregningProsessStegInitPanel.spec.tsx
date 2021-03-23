@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import {
   AksessRettigheter, Aksjonspunkt, BeregningsresultatEs, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';

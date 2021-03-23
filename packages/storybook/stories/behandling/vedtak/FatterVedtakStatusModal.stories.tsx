@@ -1,7 +1,7 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 
-import { FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles-ny';
+import { FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
 
 export default {
   title: 'behandling/vedtak/FatterVedtakStatusModal',

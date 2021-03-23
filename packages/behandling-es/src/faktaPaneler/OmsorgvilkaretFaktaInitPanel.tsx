@@ -8,7 +8,7 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';

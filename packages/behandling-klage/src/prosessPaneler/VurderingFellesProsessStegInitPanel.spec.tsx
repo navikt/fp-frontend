@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import KlagevurderingProsessIndex from '@fpsak-frontend/prosess-klagevurdering';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt, Fagsak, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -30,8 +30,8 @@ const behandling = {
   versjon: 1,
 };
 
-jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
+jest.mock('@fpsak-frontend/behandling-felles', () => {
+  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
   return {
     ...felles,
     useStandardProsessPanelProps: () => ({

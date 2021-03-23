@@ -8,7 +8,7 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import {
   Aksjonspunkt, DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper, Kodeverk, VilkarsVurdertePerioderWrapper,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';

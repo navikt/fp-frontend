@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
   AksessRettigheter, Aksjonspunkt, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';

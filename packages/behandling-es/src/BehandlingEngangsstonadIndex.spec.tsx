@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { BehandlingContainer } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingContainer } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
 
 import BehandlingEngangsstonadIndex from './BehandlingEngangsstonadIndex';
 import { requestEsApi, EsBehandlingApiKeys } from './data/esBehandlingApi';
 
-jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
+jest.mock('@fpsak-frontend/behandling-felles', () => {
+  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
   return {
     ...felles,
     useBehandling: () => ({

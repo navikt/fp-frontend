@@ -2,7 +2,7 @@ import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import { BehandlingHenlagtPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingHenlagtPanel } from '@fpsak-frontend/behandling-felles';
 
 const intl = createIntl({
   locale: 'nb-NO',

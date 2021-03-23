@@ -8,7 +8,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, Dokument, Fagsak, Innsyn,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';

@@ -10,7 +10,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp,
   Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import getPackageIntl from '../../i18n/getPackageIntl';

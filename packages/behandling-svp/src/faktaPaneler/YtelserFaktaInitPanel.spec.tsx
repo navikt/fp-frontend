@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
 
 import YtelserFaktaInitPanel from './YtelserFaktaInitPanel';

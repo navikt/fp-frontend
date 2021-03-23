@@ -7,7 +7,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ForeldreansvarVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
-import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';
 import { EsBehandlingApiKeys, requestEsApi } from '../../data/esBehandlingApi';

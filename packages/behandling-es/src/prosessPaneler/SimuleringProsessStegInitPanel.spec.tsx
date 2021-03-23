@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { Fagsak, SimuleringResultat, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -12,8 +12,8 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 import SimuleringProsessStegInitPanel from './SimuleringProsessStegInitPanel';
 
-jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
+jest.mock('@fpsak-frontend/behandling-felles', () => {
+  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
   return {
     ...felles,
     useStandardProsessPanelProps: () => ({

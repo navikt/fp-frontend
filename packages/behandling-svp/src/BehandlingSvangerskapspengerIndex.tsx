@@ -6,7 +6,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
   useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
 
 import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from './data/svpBehandlingApi';
 import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';

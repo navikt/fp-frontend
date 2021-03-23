@@ -8,7 +8,7 @@ import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, Fagsak, FeilutbetalingAarsak, FeilutbetalingFakta, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';

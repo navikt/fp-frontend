@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { Fagsak } from '@fpsak-frontend/types';
-import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';

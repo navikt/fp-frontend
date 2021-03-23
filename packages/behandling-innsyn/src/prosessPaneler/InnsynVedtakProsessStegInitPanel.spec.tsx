@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import VedtakInnsynProsessIndex from '@fpsak-frontend/prosess-vedtak-innsyn';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import {
   Aksjonspunkt, Fagsak, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
@@ -25,8 +25,8 @@ const fagsak = {
   },
 } as Fagsak;
 
-jest.mock('@fpsak-frontend/behandling-felles-ny', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles-ny');
+jest.mock('@fpsak-frontend/behandling-felles', () => {
+  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
   const behandlingStatus = jest.requireActual('@fpsak-frontend/kodeverk/src/behandlingStatus');
   return {
     ...felles,

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Soknad } from '@fpsak-frontend/types';
 
 import MedlemskapsvilkaretFaktaInitPanel from './MedlemskapsvilkaretFaktaInitPanel';

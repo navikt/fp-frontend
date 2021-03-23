@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { IverksetterVedtakStatusModal } from '@fpsak-frontend/behandling-felles-ny';
+import { IverksetterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
 
 const intl = createIntl({
   locale: 'nb-NO',

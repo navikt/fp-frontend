@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
-import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 

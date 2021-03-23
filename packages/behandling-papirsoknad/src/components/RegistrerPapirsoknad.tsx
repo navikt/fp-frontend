@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import {
   Behandling, KodeverkMedNavn, Fagsak, AksessRettigheter, Aksjonspunkt,
 } from '@fpsak-frontend/types';

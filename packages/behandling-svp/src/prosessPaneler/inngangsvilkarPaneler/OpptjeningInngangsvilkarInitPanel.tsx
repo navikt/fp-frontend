@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   AksessRettigheter, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
-import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import { requestSvpApi, SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';

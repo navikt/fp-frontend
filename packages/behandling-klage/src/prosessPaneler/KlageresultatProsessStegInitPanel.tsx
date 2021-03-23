@@ -10,7 +10,7 @@ import {
 } from '@fpsak-frontend/types';
 import {
   FatterVedtakStatusModal, useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';

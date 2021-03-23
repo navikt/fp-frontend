@@ -5,7 +5,7 @@ import React, {
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';

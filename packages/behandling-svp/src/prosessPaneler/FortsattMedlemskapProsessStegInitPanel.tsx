@@ -8,7 +8,7 @@ import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import {
   skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps, OverstyringPanelDef,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';

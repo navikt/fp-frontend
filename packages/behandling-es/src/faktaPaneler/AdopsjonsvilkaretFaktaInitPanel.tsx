@@ -9,7 +9,7 @@ import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
-import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';

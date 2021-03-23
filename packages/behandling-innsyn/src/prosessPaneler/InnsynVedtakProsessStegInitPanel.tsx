@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/types';
 import {
   IverksetterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps, ProsessDefaultInitPanel,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';

@@ -27,7 +27,6 @@ export enum FpBehandlingApiKeys {
   VERGE = 'VERGE',
   YTELSEFORDELING = 'YTELSEFORDELING',
   OPPTJENING = 'OPPTJENING',
-  SEND_VARSEL_OM_REVURDERING = 'SEND_VARSEL_OM_REVURDERING',
   FAKTA_ARBEIDSFORHOLD = 'FAKTA_ARBEIDSFORHOLD',
   UTTAKSRESULTAT_PERIODER = 'UTTAKSRESULTAT_PERIODER',
   UTTAK_STONADSKONTOER = 'UTTAK_STONADSKONTOER',
@@ -67,7 +66,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soeker-verge', FpBehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', FpBehandlingApiKeys.YTELSEFORDELING)
   .withRel('opptjening', FpBehandlingApiKeys.OPPTJENING)
-  .withRel('sendt-varsel-om-revurdering', FpBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('fakta-arbeidsforhold', FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD)
   .withRel('uttaksresultat-perioder', FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER)
   .withRel('uttak-stonadskontoer', FpBehandlingApiKeys.UTTAK_STONADSKONTOER)

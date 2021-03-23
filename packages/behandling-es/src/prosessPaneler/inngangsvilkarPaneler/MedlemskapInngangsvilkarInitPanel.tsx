@@ -10,7 +10,7 @@ import {
 } from '@fpsak-frontend/types';
 import {
   InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
 
 import { EsBehandlingApiKeys, requestEsApi } from '../../data/esBehandlingApi';
 

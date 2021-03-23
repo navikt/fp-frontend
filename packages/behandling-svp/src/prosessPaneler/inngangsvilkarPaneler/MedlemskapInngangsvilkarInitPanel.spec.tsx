@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
 import MedlemskapInngangsvilkarInitPanel from './MedlemskapInngangsvilkarInitPanel';

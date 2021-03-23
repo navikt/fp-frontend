@@ -9,7 +9,7 @@ import FodselVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-fodsel';
 import {
   AksessRettigheter, Aksjonspunkt, Vilkar,
 } from '@fpsak-frontend/types';
-import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import getPackageIntl from '../../../i18n/getPackageIntl';

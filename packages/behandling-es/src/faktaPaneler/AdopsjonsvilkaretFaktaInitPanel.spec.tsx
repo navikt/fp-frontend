@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles-ny';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { Vilkar } from '@fpsak-frontend/types';
 

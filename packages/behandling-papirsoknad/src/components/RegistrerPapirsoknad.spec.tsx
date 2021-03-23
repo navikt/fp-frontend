@@ -10,7 +10,7 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { Behandling, Fagsak } from '@fpsak-frontend/types';
 

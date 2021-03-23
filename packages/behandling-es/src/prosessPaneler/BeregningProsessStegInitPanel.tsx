@@ -10,7 +10,7 @@ import {
   AksessRettigheter,
   Aksjonspunkt, BeregningsresultatEs, Vilkar,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import getPackageIntl from '../../i18n/getPackageIntl';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';

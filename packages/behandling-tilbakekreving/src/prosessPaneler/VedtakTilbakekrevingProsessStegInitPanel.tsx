@@ -10,7 +10,7 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import {
   Aksjonspunkt, BeregningsresultatTilbakekreving, Vedtaksbrev,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps, FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles-ny';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps, FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
 
 import getPackageIntl from '../../i18n/getPackageIntl';

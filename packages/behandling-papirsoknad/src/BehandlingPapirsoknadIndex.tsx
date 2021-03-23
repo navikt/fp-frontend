@@ -2,11 +2,11 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { ReduxFormStateCleaner } from '@fpsak-frontend/behandling-felles';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import {
+  ReduxFormStateCleaner,
   StandardBehandlingProps, useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
-} from '@fpsak-frontend/behandling-felles-ny';
+} from '@fpsak-frontend/behandling-felles';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
 import { requestPapirsoknadApi, PapirsoknadApiKeys } from './data/papirsoknadApi';
