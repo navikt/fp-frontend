@@ -118,6 +118,7 @@ describe('<UttakFaktaForm>', () => {
         warn={() => undefined}
         onSubmit={() => undefined}
         arbeidsgiverOpplysningerPerId={{}}
+        submittable
         {...formProps}
       />,
     );

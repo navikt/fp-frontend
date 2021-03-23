@@ -368,6 +368,7 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
                   label={{ id: 'UttakInfoPanel.BegrunnEndringene' }}
                   validate={[required, minLength3, maxLength4000, hasValidText]}
                   maxLength={4000}
+                  autoFocus
                 />
               </div>
             </FlexColumn>
