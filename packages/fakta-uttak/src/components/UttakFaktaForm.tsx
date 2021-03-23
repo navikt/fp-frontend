@@ -48,6 +48,7 @@ interface PureOwnProps {
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  submittable: boolean;
 }
 
 interface MappedOwnProps {
@@ -74,6 +75,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
   familiehendelse,
   vilkarForSykdomExists,
   arbeidsgiverOpplysningerPerId,
+  submittable,
   ...formProps
 }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
@@ -103,6 +105,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
         familiehendelse={familiehendelse}
         vilkarForSykdomExists={vilkarForSykdomExists}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        submittable={submittable}
       />
       {formProps.error
         && (

@@ -55,6 +55,7 @@ describe('<UttakInfoPanel>', () => {
       personoversikt={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       arbeidsgiverOpplysningerPerId={{}}
+      submittable
     />);
 
     const uttakFaktaForm = wrapper.find(UttakFaktaForm);
@@ -79,6 +80,7 @@ describe('<UttakInfoPanel>', () => {
       personoversikt={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
       arbeidsgiverOpplysningerPerId={{}}
+      submittable
     />);
 
     const annenForelderHarRettForm = wrapper.find(AnnenForelderHarRettForm);
