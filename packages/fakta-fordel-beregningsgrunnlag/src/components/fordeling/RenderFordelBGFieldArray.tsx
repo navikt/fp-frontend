@@ -479,7 +479,7 @@ RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverkn
   if (ulikeAndelerError) {
     return { _error: <FormattedMessage id={ulikeAndelerError[0].id} /> };
   }
-  const fastsattForUgraderteAktiviteterError = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp);
+  const fastsattForUgraderteAktiviteterError = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp, getKodeverknavn);
   if (fastsattForUgraderteAktiviteterError) {
     return { _error: <FormattedMessage id={fastsattForUgraderteAktiviteterError[0].id} values={fastsattForUgraderteAktiviteterError[1]} /> };
   }

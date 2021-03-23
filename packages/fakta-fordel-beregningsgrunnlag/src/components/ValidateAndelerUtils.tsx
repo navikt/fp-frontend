@@ -134,18 +134,12 @@ const totalRefusjonSkalVereLavereEnn = (
   value, seksG,
 ) => ((value >= Math.round(seksG)) ? totalRefusjonMåVereLavereEnn(formatCurrencyNoKr(seksG)) : undefined);
 
-export const totalFordelingForArbeidstakerMåVereLavereEnn = (seksG) => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalFordelingForArbeidstakerLavereEnn' }, { seksG }]);
-
-export const totalFordelingForArbeidstakerOgFrilanserMåVereLavereEnn = (seksG) => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalFordelingForArbeidstakerOgFrilanserLavereEnn' }, { seksG }]);
-
-export const totalFordelingForFrilanserMåVereLavereEnn = (seksG) => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalFordelingForFrilanserLavereEnn' }, { seksG }]);
+export const totalFordelingForMåVæreLavereEnn = (seksG: number, andelsliste: string) => (
+  [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalFordelingLavereEnn' }, { seksG, andelsliste }]);
 
 const totalFordelingSkalVereLavereEnn = (
-  value, seksG, errorMessage,
-) => ((value >= Math.round(seksG)) ? errorMessage(formatCurrencyNoKr(seksG)) : undefined);
+  value, seksG, beskrivendeString, errorMessage,
+) => ((value >= Math.round(seksG)) ? errorMessage(formatCurrencyNoKr(seksG), beskrivendeString) : undefined);
 
 export const likFordeling = (
   value, fordeling,
@@ -237,42 +231,44 @@ export const validateSumRefusjon = (values, grunnbeløp) => {
   return harGraderingUtenRefusjon ? totalRefusjonSkalVereLavereEnn(sumRefusjon, seksG) : null;
 };
 
-export const validateSumFastsattArbeidstaker = (values, seksG) => {
-  const sumFastsattBelop = values.filter((v) => v.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER).map(mapToBelop)
-    .reduce((sum, fastsattBelop) => sum + fastsattBelop, 0);
-  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, totalFordelingForArbeidstakerMåVereLavereEnn);
+const lagBeskrivendeStringAvStatuser = (statuser: string[], getKodeverknavn) => {
+  const liste = statuser.map((status) => getKodeverknavn({ kode: status, kodeverk: 'AKTIVITET_STATUS' }));
+  liste.sort((a, b) => a.localeCompare(b));
+  const unikListe = [...new Set(liste)];
+  return unikListe.join(', ');
 };
 
-const finnRiktigErrorMessage = (values) => {
-  const harFrilans = !!values.find((v) => v.aktivitetStatus === AktivitetStatus.FRILANSER);
-  const harArbeidstaker = !!values.find((v) => v.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER);
-  if (harArbeidstaker && harFrilans) {
-    return totalFordelingForArbeidstakerOgFrilanserMåVereLavereEnn;
-  } if (harArbeidstaker && !harFrilans) {
-    return totalFordelingForArbeidstakerMåVereLavereEnn;
-  } if (harFrilans && !harArbeidstaker) {
-    return totalFordelingForFrilanserMåVereLavereEnn;
-  }
-  return totalFordelingForArbeidstakerOgFrilanserMåVereLavereEnn;
+const finnFastsattBeløpForStatus = (values: any, statuser: string[]): number => values.filter((v) => statuser.includes(v.aktivitetStatus))
+  .map(mapToBelop)
+  .reduce((sum, fastsattBelop) => sum + fastsattBelop, 0);
+
+const validateSumFastsattArbeidstaker = (values: any, seksG: number, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+  const statuserSomValideres = [AktivitetStatus.ARBEIDSTAKER];
+  const sumFastsattBelop = finnFastsattBeløpForStatus(values, statuserSomValideres);
+  const beskrivendeString = lagBeskrivendeStringAvStatuser(statuserSomValideres, getKodeverknavn);
+  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, beskrivendeString, totalFordelingForMåVæreLavereEnn);
 };
 
-export const validateSumFastsattArbeidstakerOgFrilanser = (values, seksG) => {
-  const sumFastsattBelop = values.filter((v) => v.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER || v.aktivitetStatus === AktivitetStatus.FRILANSER)
-    .map(mapToBelop)
-    .reduce((sum, fastsattBelop) => sum + fastsattBelop, 0);
-  const errorMessageFunc = finnRiktigErrorMessage(values);
-  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, errorMessageFunc);
+const validateSumFastsattArbeidstakerOgFrilanser = (values, seksG, getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+  const statuserSomPrioriteresOverSN = [AktivitetStatus.ARBEIDSTAKER,
+    AktivitetStatus.FRILANSER,
+    AktivitetStatus.DAGPENGER,
+    AktivitetStatus.ARBEIDSAVKLARINGSPENGER];
+  const statuserSomValideres = values.filter((v) => statuserSomPrioriteresOverSN.includes(v.aktivitetStatus)).map((v) => v.aktivitetStatus);
+  const sumFastsattBelop = finnFastsattBeløpForStatus(values, statuserSomValideres);
+  const beskrivendeString = lagBeskrivendeStringAvStatuser(statuserSomValideres, getKodeverknavn);
+  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, beskrivendeString, totalFordelingForMåVæreLavereEnn);
 };
 
-export const validateSumFastsattForUgraderteAktiviteter = (values, grunnbeløp) => {
+export const validateSumFastsattForUgraderteAktiviteter = (values, grunnbeløp, getKodeverknavn) => {
   const skalGradereFL = !!values.find((v) => v.andelIArbeid !== '0.00' && v.aktivitetStatus === AktivitetStatus.FRILANSER);
   const seksG = 6 * grunnbeløp;
   if (skalGradereFL) {
-    return validateSumFastsattArbeidstaker(values, seksG);
+    return validateSumFastsattArbeidstaker(values, seksG, getKodeverknavn);
   }
   const skalGradereSN = !!values.find((v) => v.andelIArbeid !== '0.00' && v.aktivitetStatus === AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   if (skalGradereSN) {
-    return validateSumFastsattArbeidstakerOgFrilanser(values, seksG);
+    return validateSumFastsattArbeidstakerOgFrilanser(values, seksG, getKodeverknavn);
   }
   return null;
 };
