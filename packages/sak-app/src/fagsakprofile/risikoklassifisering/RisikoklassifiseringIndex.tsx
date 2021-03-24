@@ -4,7 +4,7 @@ import React, {
 import { useHistory, useLocation } from 'react-router-dom';
 
 import {
-  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst, KodeverkMedNavn, AksessRettigheter,
+  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst, AksessRettigheter,
 } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
@@ -61,8 +61,8 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const history = useHistory();
   const location = useLocation();
 
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
     [fagsak.status, behandlingStatus, behandlingType]);
   const readOnly = useMemo(() => getReadOnly(navAnsatt, rettigheter, erPaaVent),

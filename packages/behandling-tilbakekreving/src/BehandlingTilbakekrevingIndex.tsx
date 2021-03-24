@@ -49,8 +49,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
 
   useInitBehandlingHandlinger(requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
-  const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks
-    .useRestApi<{[key: string]: KodeverkMedNavn[]}>(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK);
+  const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK);
 
   if (!behandling || !tilbakekrevingKodeverk) {
     return <LoadingPanel />;

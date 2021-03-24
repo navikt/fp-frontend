@@ -2,11 +2,19 @@ import {
   useEffect, useState, useCallback, useMemo,
 } from 'react';
 
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 import { RestApiHooks, useRestApiErrorDispatcher, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import { BehandlingEventHandler } from '../types/standardBehandlingProps';
+
+export type NyBehandlendeEnhetParams = {
+  behandlingId: number;
+  enhetNavn: string;
+  enhetId: string;
+  begrunnelse: string;
+  behandlingVersjon: string;
+}
 
 export const useInitRequestApi = (
   requestApi: AbstractRequestApi,
@@ -33,7 +41,7 @@ const useSetBehandlingVedEndring = (
 
 export const useBehandling = (
   requestApi: AbstractRequestApi,
-  behandlingKey: string,
+  behandlingKey: RestKey<Behandling, { behandlingId: number }>,
   behandlingId: number,
 ): {
   behandling: Behandling;
@@ -51,7 +59,7 @@ export const useBehandling = (
   }, []);
 
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-  const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner<Behandling>(behandlingKey);
+  const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner(behandlingKey);
   useSetBehandlingVedEndring(behandlingRes, setBehandling);
 
   const hentBehandlingInklId = useCallback((keepData: boolean) => hentBehandling({ behandlingId }, keepData), []);
@@ -71,8 +79,8 @@ export const useBehandling = (
 export const useLagreAksjonspunkt = (
   requestApi: AbstractRequestApi,
   setBehandling: (behandling: Behandling) => void,
-  lagreAksjonspunktKey: string,
-  lagreOverstyrtyAksjonspunktKey?: string,
+  lagreAksjonspunktKey: RestKey<Behandling, any>,
+  lagreOverstyrtyAksjonspunktKey?: RestKey<Behandling, any>,
 ): {
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
   lagreOverstyrteAksjonspunkter: (params: any, keepData?: boolean
@@ -80,10 +88,10 @@ export const useLagreAksjonspunkt = (
 } => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
-  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner<Behandling>(lagreAksjonspunktKey);
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner(lagreAksjonspunktKey);
   useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
 
-  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = useRestApiRunner<Behandling>(lagreOverstyrtyAksjonspunktKey);
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = useRestApiRunner(lagreOverstyrtyAksjonspunktKey);
   useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   return {
@@ -94,21 +102,24 @@ export const useLagreAksjonspunkt = (
 
 export const useInitBehandlingHandlinger = (
   requestApi: AbstractRequestApi,
-  keys: Record<string, string>,
+  keys: Record<string, RestKey<any, any>>,
   behandlingEventHandler: BehandlingEventHandler,
   hentBehandling: (keepData: boolean) => Promise<Behandling>,
   setBehandling: (behandling: Behandling) => void,
 ): void => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
-  const { startRequest: nyBehandlendeEnhet } = useRestApiRunner(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = useRestApiRunner(keys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = useRestApiRunner<Behandling>(keys.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = useRestApiRunner(keys.HENLEGG_BEHANDLING);
-  const { startRequest: opneBehandlingForEndringer } = useRestApiRunner<Behandling>(keys.OPEN_BEHANDLING_FOR_CHANGES);
-  const { startRequest: opprettVerge } = useRestApiRunner<Behandling>(keys.VERGE_OPPRETT);
-  const { startRequest: fjernVerge } = useRestApiRunner<Behandling>(keys.VERGE_FJERN);
-  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useRestApiRunner<Behandling>(keys.SAVE_AKSJONSPUNKT);
+  const { startRequest: nyBehandlendeEnhet } = useRestApiRunner<void, NyBehandlendeEnhetParams>(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
+  const { startRequest: settBehandlingPaVent } = useRestApiRunner<void,
+    { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>(keys.BEHANDLING_ON_HOLD);
+  const { startRequest: taBehandlingAvVent } = useRestApiRunner<Behandling, { behandlingId: number, behandlingVersjon: number }>(keys.RESUME_BEHANDLING);
+  const { startRequest: henleggBehandling } = useRestApiRunner<void,
+    { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>(keys.HENLEGG_BEHANDLING);
+  const { startRequest: opneBehandlingForEndringer } = useRestApiRunner<Behandling,
+    { behandlingId: number, behandlingVersjon: number }>(keys.OPEN_BEHANDLING_FOR_CHANGES);
+  const { startRequest: opprettVerge } = useRestApiRunner<Behandling, any>(keys.VERGE_OPPRETT);
+  const { startRequest: fjernVerge } = useRestApiRunner<Behandling, any>(keys.VERGE_FJERN);
+  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useRestApiRunner<Behandling, any>(keys.SAVE_AKSJONSPUNKT);
 
   useEffect(() => {
     behandlingEventHandler.setHandler({

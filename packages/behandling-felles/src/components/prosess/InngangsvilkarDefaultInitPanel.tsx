@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 
@@ -15,8 +15,8 @@ import useInngangsvilkarRegistrerer from '../../utils/prosess/useInngangsvilkarR
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   behandlingVersjon: number;
   requestApi: AbstractRequestApi;
-  initEndepunkter: string[];
-  panelEndepunkter?: string[];
+  initEndepunkter: RestKey<any, any>[];
+  panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
   renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, erOverstyrt: boolean, toggleOverstyring: () => void) => ReactElement;
@@ -40,7 +40,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA>(formaterteEndepunkter, {
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -61,7 +61,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA>(formatertePanelEndepunkter, {
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,

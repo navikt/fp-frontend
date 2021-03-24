@@ -1,5 +1,46 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import {
+  RestApiConfigBuilder, createRequestApi, RestKey, Link,
+} from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import {
+  Aksjonspunkt, Aktor, Behandling, BehandlingAppKontekst, Dokument, Fagsak, FagsakPersoner, Historikkinnslag,
+  KlageVurdering, KodeverkMedNavn, NavAnsatt, Risikoklassifisering, TotrinnskontrollSkjermlenkeContext,
+} from '@fpsak-frontend/types';
+import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
+import SakRettigheter from '../fagsak/sakRettigheterTsType';
+
+type BehandlendeEnheter = {
+  enhetId: string;
+  enhetNavn: string;
+}[];
+
+type Brevmal = {
+  kode: string;
+  navn: string;
+  tilgjengelig: boolean;
+}
+
+type SubmitMessageParams = {
+  behandlingId?: number;
+  behandlingUuid?: string,
+  mottaker?: string;
+  brevmalkode: string;
+  fritekst: string;
+  arsakskode?: string;
+};
+
+export type AnnenPartBehandling = {
+  saksnr: {
+    verdi: string;
+  };
+  behandlingId: number;
+};
+
+type InitLinks = {
+  links: Link[];
+  toggleLinks: Link[];
+  sakLinks: Link[];
+};
 
 export enum LinkCategory {
   INIT_DATA = 'INIT_DATA',
@@ -8,46 +49,46 @@ export enum LinkCategory {
   BEHANDLING = 'BEHANDLING',
 }
 
-export enum FpsakApiKeys {
-  INIT_FETCH = 'INIT_FETCH',
-  INIT_FETCH_FPTILBAKE = 'INIT_FETCH_FPTILBAKE',
-  KODEVERK = 'KODEVERK',
-  KODEVERK_FPTILBAKE = 'KODEVERK_FPTILBAKE',
-  LANGUAGE_FILE = 'LANGUAGE_FILE',
-  NAV_ANSATT = 'NAV_ANSATT',
-  BEHANDLENDE_ENHETER = 'BEHANDLENDE_ENHETER',
-  FEATURE_TOGGLE = 'FEATURE_TOGGLE',
-  SEARCH_FAGSAK = 'SEARCH_FAGSAK',
-  FETCH_FAGSAK = 'FETCH_FAGSAK',
-  SAK_PERSONER = 'SAK_PERSONER',
-  BEHANDLINGER_FPSAK = 'BEHANDLINGER_FPSAK',
-  BEHANDLINGER_FPTILBAKE = 'BEHANDLINGER_FPTILBAKE',
-  NEW_BEHANDLING_FPSAK = 'NEW_BEHANDLING_FPSAK',
-  NEW_BEHANDLING_FPTILBAKE = 'NEW_BEHANDLING_FPTILBAKE',
-  ANNEN_PART_BEHANDLING = 'ANNEN_PART_BEHANDLING',
-  HISTORY_FPSAK = 'HISTORY_FPSAK',
-  HISTORY_FPTILBAKE = 'HISTORY_FPTILBAKE',
-  KONTROLLRESULTAT = 'KONTROLLRESULTAT',
-  RISIKO_AKSJONSPUNKT = 'RISIKO_AKSJONSPUNKT',
-  TOTRINNS_KLAGE_VURDERING = 'TOTRINNS_KLAGE_VURDERING',
-  TOTRINNSAKSJONSPUNKT_ARSAKER = 'TOTRINNSAKSJONSPUNKT_ARSAKER',
-  TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY = 'TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY',
-  AKTOER_INFO = 'AKTOER_INFO',
-  ALL_DOCUMENTS = 'ALL_DOCUMENTS',
-  HAR_REVURDERING_SAMME_RESULTAT = 'HAR_REVURDERING_SAMME_RESULTAT',
-  SAVE_TOTRINNSAKSJONSPUNKT = 'SAVE_TOTRINNSAKSJONSPUNKT',
-  HAR_APENT_KONTROLLER_REVURDERING_AP = 'HAR_APENT_KONTROLLER_REVURDERING_AP',
-  BREVMALER = 'BREVMALER',
-  SUBMIT_MESSAGE = 'SUBMIT_MESSAGE',
-  SAK_RETTIGHETER = 'SAK_RETTIGHETER',
-  SAK_RETTIGHETER_FPTILBAKE = 'SAK_RETTIGHETER_FPTILBAKE',
-  BEHANDLING_RETTIGHETER = 'BEHANDLING_RETTIGHETER',
-  KAN_TILBAKEKREVING_OPPRETTES = 'KAN_TILBAKEKREVING_OPPRETTES',
-  KAN_TILBAKEKREVING_REVURDERING_OPPRETTES = 'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
-  PREVIEW_MESSAGE_TILBAKEKREVING = 'PREVIEW_MESSAGE_TILBAKEKREVING',
-  PREVIEW_MESSAGE_FORMIDLING = 'PREVIEW_MESSAGE_FORMIDLING',
-  PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE = 'PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE',
-}
+export const FpsakApiKeys = {
+  INIT_FETCH: new RestKey<InitLinks, void>('INIT_FETCH'),
+  INIT_FETCH_FPTILBAKE: new RestKey<InitLinks, void>('INIT_FETCH_FPTILBAKE'),
+  KODEVERK: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('KODEVERK'),
+  KODEVERK_FPTILBAKE: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('KODEVERK_FPTILBAKE'),
+  LANGUAGE_FILE: new RestKey<Record<string, string>, void>('LANGUAGE_FILE'),
+  NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
+  BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
+  FEATURE_TOGGLE: new RestKey<{ featureToggles: {[key: string]: boolean} }, { toggles: { navn: string }[]}>('FEATURE_TOGGLE'),
+  SEARCH_FAGSAK: new RestKey<Fagsak[], { searchString: string }>('SEARCH_FAGSAK'),
+  FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
+  SAK_PERSONER: new RestKey<FagsakPersoner, { saksnummer: string }>('SAK_PERSONER'),
+  BEHANDLINGER_FPSAK: new RestKey<BehandlingAppKontekst[], { saksnummer: string }>('BEHANDLINGER_FPSAK'),
+  BEHANDLINGER_FPTILBAKE: new RestKey<BehandlingAppKontekst[], { saksnummer: string }>('BEHANDLINGER_FPTILBAKE'),
+  NEW_BEHANDLING_FPSAK: new RestKey<boolean, any>('NEW_BEHANDLING_FPSAK'),
+  NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
+  ANNEN_PART_BEHANDLING: new RestKey<AnnenPartBehandling, { saksnummer: string }>('ANNEN_PART_BEHANDLING'),
+  HISTORY_FPSAK: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPSAK'),
+  HISTORY_FPTILBAKE: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPTILBAKE'),
+  KONTROLLRESULTAT: new RestKey<Risikoklassifisering, void>('KONTROLLRESULTAT'),
+  RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, any>('RISIKO_AKSJONSPUNKT'),
+  TOTRINNS_KLAGE_VURDERING: new RestKey<KlageVurdering, void>('TOTRINNS_KLAGE_VURDERING'),
+  TOTRINNSAKSJONSPUNKT_ARSAKER: new RestKey<TotrinnskontrollSkjermlenkeContext[], void>('TOTRINNSAKSJONSPUNKT_ARSAKER'),
+  TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY: new RestKey<TotrinnskontrollSkjermlenkeContext[], void>('TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY'),
+  AKTOER_INFO: new RestKey<Aktor, { aktoerId: string }>('AKTOER_INFO'),
+  ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
+  HAR_REVURDERING_SAMME_RESULTAT: new RestKey<{ harRevurderingSammeResultat: boolean }, void>('HAR_REVURDERING_SAMME_RESULTAT'),
+  SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
+  HAR_APENT_KONTROLLER_REVURDERING_AP: new RestKey<boolean, void>('HAR_APENT_KONTROLLER_REVURDERING_AP'),
+  BREVMALER: new RestKey<Brevmal[], void>('BREVMALER'),
+  SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
+  SAK_RETTIGHETER: new RestKey<SakRettigheter, { saksnummer: string }>('SAK_RETTIGHETER'),
+  SAK_RETTIGHETER_FPTILBAKE: new RestKey<SakRettigheter, { saksnummer: string }>('SAK_RETTIGHETER_FPTILBAKE'),
+  BEHANDLING_RETTIGHETER: new RestKey<BehandlingRettigheter, { uuid: string }>('BEHANDLING_RETTIGHETER'),
+  KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string; }>('KAN_TILBAKEKREVING_OPPRETTES'),
+  KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: new RestKey<boolean, { uuid: string; }>('KAN_TILBAKEKREVING_REVURDERING_OPPRETTES'),
+  PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
+  PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, any>('PREVIEW_MESSAGE_FORMIDLING'),
+  PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withGet('/fpsak/api/init-fetch', FpsakApiKeys.INIT_FETCH)

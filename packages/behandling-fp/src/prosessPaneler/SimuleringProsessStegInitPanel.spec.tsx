@@ -73,7 +73,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestFpApi.mock(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE, {});
+    requestFpApi.mock(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, {});
 
     const wrapper = shallow(<SimuleringProsessStegInitPanel
       valgtProsessSteg="default"
@@ -97,7 +97,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
 
     panel.props().renderPanel({}).props.previewFptilbakeCallback('testMottaker', 'testBrevmalkode', 'testFritekst');
 
-    const response = requestFpApi.getRequestMockData(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+    const response = requestFpApi.getRequestMockData(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',

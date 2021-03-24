@@ -30,7 +30,7 @@ afterEach(() => {
 
 describe('<Dekorator>', () => {
   it('skal vise søkeskjermbildet, men ikke systemstatuser', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
 
     const wrapper = shallowWithIntl(<Dekorator.WrappedComponent
       intl={intlMock}
@@ -42,7 +42,7 @@ describe('<Dekorator>', () => {
   });
 
   it('skal vise feilmeldinger', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
 
     contextStubHistory = sinon.stub(useRestApiError, 'default').returns([{
       type: EventType.REQUEST_ERROR,

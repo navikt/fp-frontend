@@ -156,7 +156,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV, {});
+    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV.name, {});
 
     const wrapper = shallow(<VedtakTilbakekrevingProsessStegInitPanel
       valgtProsessSteg="default"
@@ -179,7 +179,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       perioderMedTekst: [],
     });
 
-    const response = requestTilbakekrevingApi.getRequestMockData(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
+    const response = requestTilbakekrevingApi.getRequestMockData(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       uuid: 'test',

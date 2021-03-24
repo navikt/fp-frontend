@@ -72,13 +72,13 @@ jest.mock('react-router-dom', () => ({
 
 describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', () => {
-    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
-    requestApi.mock(FpsakApiKeys.BEHANDLENDE_ENHETER, []);
-    requestApi.mock(FpsakApiKeys.KODEVERK, {});
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES, false);
-    requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES, false);
+    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, {});
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+    requestApi.mock(FpsakApiKeys.BEHANDLENDE_ENHETER.name, []);
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
+    requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, false);
+    requestApi.mock(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES.name, false);
 
     const sakRettigheter = {
       sakSkalTilInfotrygd: false,

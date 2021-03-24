@@ -13,7 +13,7 @@ const useHentAlleBehandlinger = (saksnummer: string, behandlingId: number, behan
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
-  const { data: behandlingerFpSak, state: behandlingerFpSakState } = restApiHooks.useRestApi<BehandlingAppKontekst[]>(
+  const { data: behandlingerFpSak, state: behandlingerFpSakState } = restApiHooks.useRestApi(
     FpsakApiKeys.BEHANDLINGER_FPSAK, { saksnummer }, {
       updateTriggers: [saksnummer, behandlingId, behandlingVersjon, oppfriskIndikator],
       suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
@@ -21,7 +21,7 @@ const useHentAlleBehandlinger = (saksnummer: string, behandlingId: number, behan
     },
   );
 
-  const { data: behandlingerFpTilbake, state: behandlingerFpTilbakeState } = restApiHooks.useRestApi<BehandlingAppKontekst[]>(
+  const { data: behandlingerFpTilbake, state: behandlingerFpTilbakeState } = restApiHooks.useRestApi(
     FpsakApiKeys.BEHANDLINGER_FPTILBAKE, { saksnummer }, {
       updateTriggers: [saksnummer, behandlingId, behandlingVersjon, oppfriskIndikator],
       suspendRequest: !saksnummer || !skalHenteFraFpTilbake || erBehandlingEndretFraUndefined,

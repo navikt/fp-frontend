@@ -59,7 +59,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestAnkeApi.mock(AnkeBehandlingApiKeys.PREVIEW_MESSAGE, {});
+    requestAnkeApi.mock(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
 
     const wrapper = shallow(<AnkeBehandlingProsessStegInitPanel
       valgtProsessSteg="default"
@@ -81,7 +81,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       mottaker: 'Mottaker',
     });
 
-    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
+    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',
@@ -96,7 +96,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
   });
 
   it('skal lagre anke-vurdering', () => {
-    requestAnkeApi.mock(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING, {});
+    requestAnkeApi.mock(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, {});
 
     const wrapper = shallow(<AnkeBehandlingProsessStegInitPanel
       valgtProsessSteg="default"
@@ -118,7 +118,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       begrunnelse: 'Dette er en begrunnelse',
     });
 
-    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING);
+    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingId: 1,

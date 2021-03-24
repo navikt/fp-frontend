@@ -22,8 +22,8 @@ jest.mock('@fpsak-frontend/behandling-felles', () => {
 
 describe('<BehandlingSvangerskapspengerIndex>', () => {
   it('skal rendre korrekt', () => {
-    requestSvpApi.mock(SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {});
-    requestSvpApi.mock(SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT, {});
+    requestSvpApi.mock(SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, {});
+    requestSvpApi.mock(SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, {});
 
     const wrapper = shallow(<BehandlingSvangerskapspengerIndex
       behandlingEventHandler={{

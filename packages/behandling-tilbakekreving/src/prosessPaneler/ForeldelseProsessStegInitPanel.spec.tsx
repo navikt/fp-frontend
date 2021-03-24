@@ -18,7 +18,7 @@ type INIT_DATA = {
 
 describe('<ForeldelseProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
-    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
+    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP.name);
 
     const wrapper = shallow(<ForeldelseProsessStegInitPanel
       valgtProsessSteg="default"

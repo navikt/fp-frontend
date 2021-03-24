@@ -8,8 +8,8 @@ import { FpsakApiKeys, restApiHooks } from './fpsakApi';
  * Hook som henter kodeverk knyttet til behandlingstype
  */
 export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[key: string]: T[]} {
-  const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK);
-  const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType?.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType?.kode;
   return erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
@@ -20,7 +20,7 @@ export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[ke
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   return alleKodeverk[kodeverkType];
 }
 
@@ -29,7 +29,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: T[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 
@@ -59,8 +59,8 @@ export function useFpSakKodeverkMedNavn<T = KodeverkMedNavn>(kodeverkOjekt: Kode
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useGetKodeverkFn() {
-  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: KodeverkMedNavn[]}>(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   return (kodeverkOjekt: Kodeverk, behandlingType: Kodeverk = { kode: BehandlingType.FORSTEGANGSSOKNAD, kodeverk: 'DUMMY' }) => {
     const kodeverkType = kodeverkTyper[kodeverkOjekt.kodeverk];

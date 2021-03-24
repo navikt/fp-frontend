@@ -2,7 +2,7 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -10,13 +10,11 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Behandling, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
-interface SettPaVentParams {
-  formData: {
-    ventearsak: string;
-    frist?: string;
-  };
+export type SettPaVentParams = {
+  ventearsak: string;
+  frist?: string;
   behandlingId: number;
   behandlingVersjon: number;
 }
@@ -25,8 +23,8 @@ interface BehandlingPaVentProps {
   behandling: Behandling;
   kodeverk: {[key: string]: KodeverkMedNavn[]};
   requestApi: AbstractRequestApi;
-  oppdaterPaVentKey: string;
-  aksjonspunktKey: string;
+  oppdaterPaVentKey: RestKey<void, SettPaVentParams>;
+  aksjonspunktKey: RestKey<Aksjonspunkt[], void>;
   hentBehandling: (keepData: boolean) => Promise<any>;
   erTilbakekreving?: boolean;
 }
@@ -45,18 +43,18 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const [skalViseModal, setVisModal] = useState(behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { data: aksjonspunkter = EMPTY_ARRAY, state: aksjonspunkterState } = restApiHooks.useRestApi<Aksjonspunkt[]>(aksjonspunktKey, {}, {
+  const { data: aksjonspunkter = EMPTY_ARRAY, state: aksjonspunkterState } = restApiHooks.useRestApi(aksjonspunktKey, undefined, {
     updateTriggers: [skalViseModal],
     suspendRequest: !skalViseModal,
   });
 
-  const { startRequest: settPaVent } = restApiHooks.useRestApiRunner<SettPaVentParams>(oppdaterPaVentKey);
+  const { startRequest: settPaVent } = restApiHooks.useRestApiRunner(oppdaterPaVentKey);
 
   useEffect(() => {
     setVisModal(behandling.behandlingPaaVent);
   }, [behandling.versjon]);
 
-  const oppdaterPaVentData = useCallback((formData) => settPaVent({
+  const oppdaterPaVentData = useCallback((formData: { ventearsak: string; frist?: string; }) => settPaVent({
     ...formData, behandlingId: behandling.id, behandlingVersjon: behandling.versjon,
   }).then(() => hentBehandling(false)), [behandling.versjon]);
 

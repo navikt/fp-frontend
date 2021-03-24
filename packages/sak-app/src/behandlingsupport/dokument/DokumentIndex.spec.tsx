@@ -28,7 +28,7 @@ describe('<DokumentIndex>', () => {
   }];
 
   it('skal vise liste med sorterte dokumenter', () => {
-    requestApi.mock(FpsakApiKeys.ALL_DOCUMENTS, documents);
+    requestApi.mock(FpsakApiKeys.ALL_DOCUMENTS.name, documents);
 
     const wrapper = shallow(<DokumentIndex
       behandlingId={1}

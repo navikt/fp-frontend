@@ -66,7 +66,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
   fagsak,
   ...props
 }) => {
-  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE);
 
   const standardPanelProps = useStandardProsessPanelProps();
 

@@ -4,7 +4,7 @@ import React, {
 
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import StandardFaktaPanelProps from '@fpsak-frontend/types/src/standardFaktaPanelPropsTsType';
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import FaktaPanelInitProps from '../../types/faktaPanelInitProps';
 import useStandardFaktaPanelProps from '../../utils/fakta/useStandardFaktaPanelProps';
@@ -13,8 +13,8 @@ import FaktaPanelWrapper from './FaktaPanelWrapper';
 
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: AbstractRequestApi;
-  initEndepunkter: string[];
-  panelEndepunkter?: string[];
+  initEndepunkter: RestKey<any, any>[];
+  panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
   skalPanelVisesIMeny: (data: Partial<INIT_DATA>) => boolean;
@@ -40,7 +40,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA>(formaterteEndepunkter, {
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -58,7 +58,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA>(formatertePanelEndepunkter, {
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,

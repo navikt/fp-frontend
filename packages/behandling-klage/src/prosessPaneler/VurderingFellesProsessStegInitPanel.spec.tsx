@@ -97,7 +97,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestKlageApi.mock(KlageBehandlingApiKeys.PREVIEW_MESSAGE, {});
+    requestKlageApi.mock(KlageBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
 
     const wrapper = shallow(<VurderingFellesProsessStegInitPanel
       valgtProsessSteg="default"
@@ -123,7 +123,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       erOpphevetKlage: false,
     });
 
-    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.PREVIEW_MESSAGE);
+    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.PREVIEW_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',
@@ -138,7 +138,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
   });
 
   it('skal lagre klage', () => {
-    requestKlageApi.mock(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING, {});
+    requestKlageApi.mock(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name, {});
 
     const wrapper = shallow(<VurderingFellesProsessStegInitPanel
       valgtProsessSteg="default"
@@ -168,7 +168,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       },
     });
 
-    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING);
+    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingId: 1,

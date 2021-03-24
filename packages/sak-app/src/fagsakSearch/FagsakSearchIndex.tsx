@@ -4,14 +4,14 @@ import { useHistory } from 'react-router-dom';
 import {
   errorOfType, ErrorTypes, getErrorResponseData,
 } from '@fpsak-frontend/rest-api';
-import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import { pathToFagsak } from '../app/paths';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as Fagsak[];
 
 /**
  * FagsakSearchIndex
@@ -20,7 +20,7 @@ const EMPTY_ARRAY = [];
  * mot server og lagringen av resultatet i klientens state.
  */
 const FagsakSearchIndex: FunctionComponent = () => {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
   const history = useHistory();
   const goToFagsak = (saksnummer) => {
@@ -29,7 +29,7 @@ const FagsakSearchIndex: FunctionComponent = () => {
 
   const {
     startRequest: searchFagsaker, data: fagsaker = EMPTY_ARRAY, state: sokeStatus, error,
-  } = restApiHooks.useRestApiRunner<Fagsak[]>(FpsakApiKeys.SEARCH_FAGSAK);
+  } = restApiHooks.useRestApiRunner(FpsakApiKeys.SEARCH_FAGSAK);
 
   const searchResultAccessDenied = useMemo(() => (errorOfType(error, ErrorTypes.MANGLER_TILGANG_FEIL)
     ? getErrorResponseData(error)

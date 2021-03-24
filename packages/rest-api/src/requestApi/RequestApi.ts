@@ -78,7 +78,7 @@ class RequestApi extends AbstractRequestApi {
 
   private findLinks = (rel: string): Link => Object.values(this.links).flat().find((link) => link.rel === rel);
 
-  public startRequest = async <T>(endpointName: string, params?: any, isCachingOn = false): Promise<{ payload: T }> => {
+  public startRequest = async <T, P>(endpointName: string, params?: P, isCachingOn = false): Promise<{ payload: T }> => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
@@ -102,11 +102,11 @@ class RequestApi extends AbstractRequestApi {
     }
 
     if (!useCaching) {
-      return runner.start<T>(params || link?.requestPayload);
+      return runner.start<T, P>(params || link?.requestPayload);
     }
 
     try {
-      const result = await runner.start<T>(params || link?.requestPayload);
+      const result = await runner.start<T, P>(params || link?.requestPayload);
       this.cache.addData(endpointName, result);
       return result;
     } catch (error) {

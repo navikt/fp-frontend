@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import {
   Behandling, AksessRettigheter, StandardProsessPanelProps, Vilkar, Aksjonspunkt,
 } from '@fpsak-frontend/types';
@@ -46,14 +46,14 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
   });
 
   it('skal ikke vise panel når en ikke har åpne aksjonspunkter', () => {
-    const AKSJONSPUNKTER_KEY = 'AKSJONSPUNKTER_KEY';
+    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY, []);
+    requestMock.mock(AKSJONSPUNKTER_KEY.name, []);
 
     useContextMock.mockReturnValue({
       fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
@@ -96,8 +96,8 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       erAktivt: true,
     }] as Aksjonspunkt[];
 
-    const AKSJONSPUNKTER_KEY = 'AKSJONSPUNKTER';
-    const VILKAR_KEY = 'VILKAR';
+    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER');
+    const VILKAR_KEY = new RestKey<Vilkar[], void>('VILKAR');
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
@@ -105,8 +105,8 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY, aksjonspunkter);
-    requestMock.mock(VILKAR_KEY, vilkar);
+    requestMock.mock(AKSJONSPUNKTER_KEY.name, aksjonspunkter);
+    requestMock.mock(VILKAR_KEY.name, vilkar);
 
     useContextMock.mockReturnValue({
       fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,

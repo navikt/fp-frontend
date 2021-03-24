@@ -8,7 +8,7 @@ import LanguageProvider from './LanguageProvider';
 
 describe('<LanguageProvider>', () => {
   it('skal sette opp react-intl', () => {
-    requestApi.mock(FpsakApiKeys.LANGUAGE_FILE, {
+    requestApi.mock(FpsakApiKeys.LANGUAGE_FILE.name, {
       'Header.Foreldrepenger': 'Foreldrepenger',
     });
 

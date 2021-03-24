@@ -86,7 +86,7 @@ describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestAnkeApi.mock(AnkeBehandlingApiKeys.PREVIEW_MESSAGE, {});
+    requestAnkeApi.mock(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
 
     const wrapper = shallow(<AnkeTrygderettsbehandlingProsessStegInitPanel
       valgtProsessSteg="default"
@@ -110,7 +110,7 @@ describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
       mottaker: 'Mottaker',
     });
 
-    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
+    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',

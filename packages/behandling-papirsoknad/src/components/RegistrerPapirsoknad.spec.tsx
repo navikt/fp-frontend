@@ -60,7 +60,7 @@ const rettigheter = {
 
 describe('<RegistrerPapirsoknad>', () => {
   it('skal rendre komponenter', () => {
-    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER.name, []);
 
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
@@ -79,7 +79,7 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal rendre komponenter som readonly når veileder', () => {
-    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER.name, []);
 
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
@@ -101,7 +101,7 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal rendre komponenter som readonly når behandling er satt på vent', () => {
-    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER.name, []);
 
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
@@ -123,7 +123,7 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal sette nye søknadsdata', () => {
-    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, []);
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER.name, []);
 
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
@@ -146,7 +146,7 @@ describe('<RegistrerPapirsoknad>', () => {
   });
 
   it('skal lagre aksjonspunkt', () => {
-    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER, [{
+    requestPapirsoknadApi.mock(PapirsoknadApiKeys.AKSJONSPUNKTER.name, [{
       definisjon: {
         kode: aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_FORELDREPENGER,
         kodeverk: 'DEF',

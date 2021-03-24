@@ -3,6 +3,7 @@ export { default as OverstyringPanelDef } from './src/components/prosess/Oversty
 export { default as FatterVedtakStatusModal } from './src/components/modaler/vedtak/FatterVedtakStatusModal';
 export { default as IverksetterVedtakStatusModal } from './src/components/modaler/vedtak/IverksetterVedtakStatusModal';
 export { default as BehandlingPaVent } from './src/components/modaler/paVent/BehandlingPaVent';
+export type { SettPaVentParams } from './src/components/modaler/paVent/BehandlingPaVent';
 export { default as ProsessPanelWrapper } from './src/components/prosess/ProsessPanelWrapper';
 export { default as FaktaPanelWrapper } from './src/components/fakta/FaktaPanelWrapper';
 export { default as ReduxFormStateCleaner } from './src/components/ReduxFormStateCleaner';
@@ -32,3 +33,4 @@ export { default as useInngangsvilkarRegistrerer } from './src/utils/prosess/use
 export {
   useInitRequestApi, useBehandling, useLagreAksjonspunkt, useInitBehandlingHandlinger,
 } from './src/utils/indexHooks';
+export type { NyBehandlendeEnhetParams } from './src/utils/indexHooks';

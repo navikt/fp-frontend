@@ -1,19 +1,22 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { Aksjonspunkt, Behandling, Dokument, Innsyn, Kodeverk } from '@fpsak-frontend/types';
+import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum InnsynBehandlingApiKeys {
-  BEHANDLING_INNSYN = 'BEHANDLING_INNSYN',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  INNSYN = 'INNSYN',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
-  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
-  INNSYN_DOKUMENTER = 'INNSYN_DOKUMENTER',
-}
+export const InnsynBehandlingApiKeys = {
+  BEHANDLING_INNSYN: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_INNSYN'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  INNSYN: new RestKey<Innsyn, void>('INNSYN'),
+  INNSYN_DOKUMENTER: new RestKey<Dokument[], void>('INNSYN_DOKUMENTER'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
+    { behandlingId: number, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', InnsynBehandlingApiKeys.BEHANDLING_INNSYN)

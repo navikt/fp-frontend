@@ -100,18 +100,18 @@ describe('<TotrinnskontrollIndex>', () => {
   });
 
   it('skal vise modal når beslutter godkjenner', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, kodeverk);
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
-    requestApi.mock(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, {});
-    requestApi.mock(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+    requestApi.mock(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING.name, {});
+    requestApi.mock(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name);
 
     const totrinnskontrollAksjonspunkter = [
       getTotrinnsaksjonspunkterFoedsel(),
       getTotrinnsaksjonspunkterOmsorg(),
       getTotrinnsaksjonspunkterForeldreansvar(),
     ];
-    requestApi.mock(FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, totrinnskontrollAksjonspunkter);
+    requestApi.mock(FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER.name, totrinnskontrollAksjonspunkter);
 
     const wrapper = shallow(<TotrinnskontrollIndex
       fagsak={fagsak as Fagsak}
@@ -133,7 +133,7 @@ describe('<TotrinnskontrollIndex>', () => {
       },
     });
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
       behandlingId: 1234,

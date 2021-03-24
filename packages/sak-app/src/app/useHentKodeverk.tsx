@@ -4,7 +4,7 @@ import useGetEnabledApplikasjonContext from './useGetEnabledApplikasjonContext';
 import ApplicationContextPath from './ApplicationContextPath';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 
-const NO_PARAMS = {};
+const NO_PARAMS = undefined;
 
 const useHentKodeverk = (skalHenteKodeverk: boolean): boolean => {
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();

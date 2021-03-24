@@ -61,7 +61,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
   const { data: opplysningsdata, state: opplysningsdataState } = restApiEsHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
-  }>(endepunkterSomSkalHentesEnGang, {
+  }, void>(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [!behandling],
     suspendRequest: !behandling,
   });

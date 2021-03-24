@@ -70,30 +70,30 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
   const history = useHistory();
 
-  const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
   const alleKodeverk = useKodeverk(behandling.type);
 
   const erInnsynBehandling = behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
 
-  const { data: totrinnArsaker } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
+  const { data: totrinnArsaker } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
       updateTriggers: [behandlingId, behandling.status.kode],
       suspendRequest: !!erInnsynBehandling || behandling.status.kode !== BehandlingStatus.FATTER_VEDTAK,
     },
   );
-  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi<TotrinnskontrollSkjermlenkeContext[]>(
+  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
       updateTriggers: [behandlingId, behandling.status.kode],
       suspendRequest: !!erInnsynBehandling || behandling.status.kode !== BehandlingStatus.BEHANDLING_UTREDES,
     },
   );
 
-  const { data: totrinnsKlageVurdering } = restApiHooks.useRestApi<KlageVurdering>(
+  const { data: totrinnsKlageVurdering } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
       updateTriggers: [behandlingId, behandlingVersjon],
-      suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING),
+      suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING.name),
     },
   );
 

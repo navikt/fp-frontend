@@ -44,7 +44,7 @@ const lagLagreFunksjon = (
   return lagreAksjonspunkt(params).then(() => setAksjonspunktLagret(true));
 };
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -76,7 +76,7 @@ export const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
   const readOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
 
-  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiPapirsoknadHooks.useRestApi<Aksjonspunkt[]>(PapirsoknadApiKeys.AKSJONSPUNKTER);
+  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiPapirsoknadHooks.useRestApi(PapirsoknadApiKeys.AKSJONSPUNKTER);
 
   const lagre = lagLagreFunksjon(soknadData, behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret);
   const lagreFullstendig = useCallback((_formValues, _dispatch, { valuesForRegisteredFieldsOnly }) => lagre(valuesForRegisteredFieldsOnly), [soknadData]);

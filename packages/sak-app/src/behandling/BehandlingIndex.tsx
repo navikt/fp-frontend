@@ -10,9 +10,7 @@ import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/utils';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import {
-  KodeverkMedNavn, NavAnsatt, Fagsak, BehandlingAppKontekst, FagsakPersoner,
-} from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';
@@ -101,11 +99,11 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
 
-  const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
+  const kodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
-  const fagsakPersoner = restApiHooks.useGlobalStateRestApiData<FagsakPersoner>(FpsakApiKeys.SAK_PERSONER);
+  const fagsakPersoner = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.SAK_PERSONER);
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
 

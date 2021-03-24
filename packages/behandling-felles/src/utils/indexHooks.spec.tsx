@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import { Behandling } from '@fpsak-frontend/types';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
@@ -26,7 +26,7 @@ describe('indexHooks', () => {
   } as Behandling;
 
   it('skal hente behandling fra server og returnere behandling m.m.', () => {
-    const BEHANDLING_KEY = 'BEHANDLING_KEY';
+    const BEHANDLING_KEY = new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_KEY');
 
     useEffect = jest.spyOn(React, 'useEffect');
 
@@ -35,7 +35,7 @@ describe('indexHooks', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(BEHANDLING_KEY, behandlingSomHentes);
+    requestMock.mock(BEHANDLING_KEY.name, behandlingSomHentes);
 
     mockUseEffect();
     mockUseEffect();
@@ -50,8 +50,8 @@ describe('indexHooks', () => {
   });
 
   it('skal lagre aksjonspunkt og så oppdatere behandling', () => {
-    const LAGRE_AKSJONSPUNKT_KEY = 'LAGRE_AKSJONSPUNKT_KEY';
-    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = 'LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY';
+    const LAGRE_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_AKSJONSPUNKT_KEY');
+    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY');
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('test1', LAGRE_AKSJONSPUNKT_KEY)
@@ -60,8 +60,8 @@ describe('indexHooks', () => {
 
     const requestMock = createRequestApi(endpoints);
 
-    requestMock.mock(LAGRE_AKSJONSPUNKT_KEY, behandlingSomHentes);
-    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY);
+    requestMock.mock(LAGRE_AKSJONSPUNKT_KEY.name, behandlingSomHentes);
+    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY.name);
 
     const setBehandling = sinon.spy();
 
@@ -83,8 +83,8 @@ describe('indexHooks', () => {
   });
 
   it('skal lagre overstyrt aksjonspunkt og så oppdatere behandling', () => {
-    const LAGRE_AKSJONSPUNKT_KEY = 'LAGRE_AKSJONSPUNKT_KEY';
-    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = 'LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY';
+    const LAGRE_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_AKSJONSPUNKT_KEY');
+    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY');
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('test2', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
@@ -92,7 +92,7 @@ describe('indexHooks', () => {
 
     const requestMock = createRequestApi(endpoints);
 
-    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY, behandlingSomHentes);
+    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY.name, behandlingSomHentes);
 
     const setBehandling = sinon.spy();
 

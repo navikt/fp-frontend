@@ -14,14 +14,14 @@ const useHentFagsakRettigheter = (saksnummer: string, behandlingId: number, beha
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
   const { data: sakRettigheterFpSak, state: sakRettigheterStateFpSak } = restApiHooks
-    .useRestApi<SakRettigheter>(FpsakApiKeys.SAK_RETTIGHETER, { saksnummer }, {
+    .useRestApi(FpsakApiKeys.SAK_RETTIGHETER, { saksnummer }, {
       updateTriggers: [saksnummer, behandlingId, behandlingVersjon],
       suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     });
 
   const { data: sakRettigheterFpTilbake, state: sakRettigheterStateFpTilbake } = restApiHooks
-    .useRestApi<SakRettigheter>(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE, { saksnummer }, {
+    .useRestApi(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE, { saksnummer }, {
       updateTriggers: [saksnummer, behandlingId, behandlingVersjon],
       suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,

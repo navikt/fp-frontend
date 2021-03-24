@@ -15,7 +15,7 @@ interface OwnProps {
 const LanguageProvider: FunctionComponent<OwnProps> = ({
   children,
 }) => {
-  const nbMessages = restApiHooks.useGlobalStateRestApiData<any>(FpsakApiKeys.LANGUAGE_FILE);
+  const nbMessages = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.LANGUAGE_FILE);
 
   return (
     <IntlProvider locale="nb-NO" messages={nbMessages}>

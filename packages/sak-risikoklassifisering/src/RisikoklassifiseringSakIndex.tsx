@@ -34,7 +34,7 @@ interface OwnProps {
   readOnly: boolean;
   submitAksjonspunkt: (verdier: VuderFaresignalerAp) => Promise<any>;
   toggleRiskPanel: () => void;
-  alleKodeverk: {[key: string]: [KodeverkMedNavn]};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 /**

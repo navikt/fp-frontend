@@ -1,8 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
-import { Behandling, AksessRettigheter, StandardFaktaPanelProps } from '@fpsak-frontend/types';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
+import {
+  Behandling, AksessRettigheter, StandardFaktaPanelProps, Aksjonspunkt,
+} from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -42,14 +44,14 @@ describe('<FaktaDefaultInitPanel>', () => {
   });
 
   it('skal rendre panel korrekt', () => {
-    const AKSJONSPUNKTER_KEY = 'AKSJONSPUNKTER_KEY';
+    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY, []);
+    requestMock.mock(AKSJONSPUNKTER_KEY.name, []);
 
     useContextMock.mockReturnValue({
       fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,

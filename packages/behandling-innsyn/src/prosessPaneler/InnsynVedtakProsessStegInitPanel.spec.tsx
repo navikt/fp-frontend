@@ -91,7 +91,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestInnsynApi.mock(InnsynBehandlingApiKeys.PREVIEW_MESSAGE, {});
+    requestInnsynApi.mock(InnsynBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
 
     const wrapper = shallow(<InnsynVedtakProsessStegInitPanel
       valgtProsessSteg="default"
@@ -114,7 +114,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       gjelderVedtak: true,
     });
 
-    const response = requestInnsynApi.getRequestMockData(InnsynBehandlingApiKeys.PREVIEW_MESSAGE);
+    const response = requestInnsynApi.getRequestMockData(InnsynBehandlingApiKeys.PREVIEW_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',

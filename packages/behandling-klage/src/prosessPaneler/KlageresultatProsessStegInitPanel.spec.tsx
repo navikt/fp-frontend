@@ -170,7 +170,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestKlageApi.mock(KlageBehandlingApiKeys.PREVIEW_MESSAGE, {});
+    requestKlageApi.mock(KlageBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
 
     const wrapper = shallow(<KlageresultatProsessStegInitPanel
       valgtProsessSteg="default"
@@ -189,7 +189,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
 
     klageProsessPanel.props().previewVedtakCallback({ gjelderVedtak: true });
 
-    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.PREVIEW_MESSAGE);
+    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.PREVIEW_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',

@@ -146,7 +146,7 @@ describe('<UttakProsessStegInitPanel>', () => {
   });
 
   it('skal oppdatere stønadskontoer', () => {
-    requestFpApi.mock(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER, {});
+    requestFpApi.mock(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER.name, {});
 
     const wrapper = shallow(<UttakProsessStegInitPanel
       valgtProsessSteg="default"
@@ -171,7 +171,7 @@ describe('<UttakProsessStegInitPanel>', () => {
       perioder: [],
     });
 
-    const response = requestFpApi.getRequestMockData(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
+    const response = requestFpApi.getRequestMockData(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingId: {

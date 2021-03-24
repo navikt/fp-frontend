@@ -23,7 +23,7 @@ jest.mock('@fpsak-frontend/behandling-felles', () => {
 
 describe('<BehandlingTilbakekrevingIndex>', () => {
   it('skal rendre korrekt', () => {
-    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK, {});
+    requestTilbakekrevingApi.mock(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK.name, {});
     const wrapper = shallow(<BehandlingTilbakekrevingIndex
       behandlingEventHandler={{
         setHandler: () => {},

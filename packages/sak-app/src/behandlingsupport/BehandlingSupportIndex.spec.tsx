@@ -58,7 +58,7 @@ describe('<BehandlingSupportIndex>', () => {
   });
 
   it('skal vise godkjennings-panelet', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
 
     const wrapper = shallow(<BehandlingSupportIndex
       fagsak={fagsak as Fagsak}

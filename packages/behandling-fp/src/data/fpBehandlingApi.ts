@@ -1,48 +1,64 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import {
+  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FaktaArbeidsforhold,
+  FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, InntektArbeidYtelse, Kodeverk, Medlemskap, Opptjening, Personoversikt,
+  SimuleringResultat, Soknad, TilbakekrevingValg, UttakKontrollerAktivitetskrav, UttakKontrollerFaktaPerioderWrapper, UttakPeriodeGrense,
+  UttaksresultatPeriode, UttakStonadskontoer, Verge, Vilkar, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum FpBehandlingApiKeys {
-  BEHANDLING_FP = 'BEHANDLING_FP',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
-  SAVE_OVERSTYRT_AKSJONSPUNKT = 'SAVE_OVERSTYRT_AKSJONSPUNKT',
-  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
-  PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
-  STONADSKONTOER_GITT_UTTAKSPERIODER = 'STONADSKONTOER_GITT_UTTAKSPERIODER',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  VILKAR = 'VILKAR',
-  SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
-  TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
-  BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
-  BEREGNINGSGRUNNLAG = 'BEREGNINGSGRUNNLAG',
-  FERIEPENGEGRUNNLAG = 'FERIEPENGEGRUNNLAG',
-  FAMILIEHENDELSE = 'FAMILIEHENDELSE',
-  SOKNAD = 'SOKNAD',
-  SOKNAD_ORIGINAL_BEHANDLING = 'SOKNAD_ORIGINAL_BEHANDLING',
-  FAMILIEHENDELSE_ORIGINAL_BEHANDLING = 'FAMILIEHENDELSE_ORIGINAL_BEHANDLING',
-  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING = 'BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING',
-  MEDLEMSKAP = 'MEDLEMSKAP',
-  UTTAK_PERIODE_GRENSE = 'UTTAK_PERIODE_GRENSE',
-  INNTEKT_ARBEID_YTELSE = 'INNTEKT_ARBEID_YTELSE',
-  VERGE = 'VERGE',
-  YTELSEFORDELING = 'YTELSEFORDELING',
-  OPPTJENING = 'OPPTJENING',
-  FAKTA_ARBEIDSFORHOLD = 'FAKTA_ARBEIDSFORHOLD',
-  UTTAKSRESULTAT_PERIODER = 'UTTAKSRESULTAT_PERIODER',
-  UTTAK_STONADSKONTOER = 'UTTAK_STONADSKONTOER',
-  UTTAK_KONTROLLER_FAKTA_PERIODER = 'UTTAK_KONTROLLER_FAKTA_PERIODER',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  OPEN_BEHANDLING_FOR_CHANGES = 'OPEN_BEHANDLING_FOR_CHANGES',
-  VERGE_OPPRETT = 'VERGE_OPPRETT',
-  VERGE_FJERN = 'VERGE_FJERN',
-  UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
-  ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
-  UTTAK_KONTROLLER_AKTIVITETSKRAV = 'UTTAK_KONTROLLER_AKTIVITETSKRAV',
-  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
+type StonadskontoGittUttaksPerioderParams = {
+  behandlingId: {
+    saksnummer: string;
+    behandlingId: number;
+  };
+  perioder: any;
 }
+
+export const FpBehandlingApiKeys = {
+  BEHANDLING_FP: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_FP'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+  SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
+  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
+  STONADSKONTOER_GITT_UTTAKSPERIODER: new RestKey<void, StonadskontoGittUttaksPerioderParams>('STONADSKONTOER_GITT_UTTAKSPERIODER'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
+  SIMULERING_RESULTAT: new RestKey<SimuleringResultat, void>('SIMULERING_RESULTAT'),
+  TILBAKEKREVINGVALG: new RestKey<TilbakekrevingValg, void>('TILBAKEKREVINGVALG'),
+  BEREGNINGRESULTAT_FORELDREPENGER: new RestKey<{ 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp; }, void>('BEREGNINGRESULTAT_FORELDREPENGER'),
+  BEREGNINGSGRUNNLAG: new RestKey<Beregningsgrunnlag, void>('BEREGNINGSGRUNNLAG'),
+  FERIEPENGEGRUNNLAG: new RestKey<Feriepengegrunnlag, void>('FERIEPENGEGRUNNLAG'),
+  FAMILIEHENDELSE: new RestKey<FamilieHendelseSamling, void>('FAMILIEHENDELSE'),
+  SOKNAD: new RestKey<Soknad, void>('SOKNAD'),
+  SOKNAD_ORIGINAL_BEHANDLING: new RestKey<Soknad, void>('SOKNAD_ORIGINAL_BEHANDLING'),
+  FAMILIEHENDELSE_ORIGINAL_BEHANDLING: new RestKey<FamilieHendelse, void>('FAMILIEHENDELSE_ORIGINAL_BEHANDLING'),
+  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<{ 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp; },
+    void>('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
+  MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
+  UTTAK_PERIODE_GRENSE: new RestKey<UttakPeriodeGrense, void>('UTTAK_PERIODE_GRENSE'),
+  INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
+  YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
+  OPPTJENING: new RestKey<Opptjening, void>('OPPTJENING'),
+  FAKTA_ARBEIDSFORHOLD: new RestKey<FaktaArbeidsforhold[], void>('FAKTA_ARBEIDSFORHOLD'),
+  UTTAKSRESULTAT_PERIODER: new RestKey<UttaksresultatPeriode, void>('UTTAKSRESULTAT_PERIODER'),
+  UTTAK_STONADSKONTOER: new RestKey<UttakStonadskontoer, void>('UTTAK_STONADSKONTOER'),
+  UTTAK_KONTROLLER_FAKTA_PERIODER: new RestKey<UttakKontrollerFaktaPerioderWrapper, void>('UTTAK_KONTROLLER_FAKTA_PERIODER'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhetParams>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
+  UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),
+  ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
+  UTTAK_KONTROLLER_AKTIVITETSKRAV: new RestKey<UttakKontrollerAktivitetskrav[], void>('UTTAK_KONTROLLER_AKTIVITETSKRAV'),
+  BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', FpBehandlingApiKeys.BEHANDLING_FP)

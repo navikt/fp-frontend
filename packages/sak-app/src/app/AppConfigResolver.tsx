@@ -13,7 +13,7 @@ interface OwnProps {
   children: ReactElement,
 }
 
-const NO_PARAMS = {};
+const NO_PARAMS = undefined;
 
 /**
  * Komponent som henter backend-data som skal kunne aksesseres globalt i applikasjonen. Denne dataen blir kun hentet en gang.
@@ -38,7 +38,7 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
 
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
   const { state: featureToggleState } = restApiHooks
-    .useGlobalStateRestApi<{ featureToggles: {[key: string]: boolean} }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams, {
+    .useGlobalStateRestApi(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams, {
       ...options,
       suspendRequest: options.suspendRequest || isObjectEmpty(featureToggle),
     });

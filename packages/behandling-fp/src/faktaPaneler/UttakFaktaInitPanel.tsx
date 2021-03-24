@@ -43,9 +43,9 @@ const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
 ];
 type EndepunktPanelData = {
-  familiehendelse: FamilieHendelseSamling;
   uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
+  familiehendelse: FamilieHendelseSamling;
 }
 
 interface OwnProps {

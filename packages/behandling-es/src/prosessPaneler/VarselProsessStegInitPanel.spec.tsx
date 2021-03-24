@@ -90,7 +90,7 @@ describe('<VarselProsessStegInitPanel>', () => {
   });
 
   it('skal vise forhåndsvisning av melding', () => {
-    requestEsApi.mock(EsBehandlingApiKeys.PREVIEW_MESSAGE, {});
+    requestEsApi.mock(EsBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
 
     const wrapper = shallow(<VarselProsessStegInitPanel
       valgtProsessSteg="default"
@@ -113,7 +113,7 @@ describe('<VarselProsessStegInitPanel>', () => {
       fritekst: 'testFritekst',
     });
 
-    const response = requestEsApi.getRequestMockData(EsBehandlingApiKeys.PREVIEW_MESSAGE);
+    const response = requestEsApi.getRequestMockData(EsBehandlingApiKeys.PREVIEW_MESSAGE.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
       behandlingUuid: 'test-uuid',

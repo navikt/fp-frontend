@@ -11,7 +11,6 @@ import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
 import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-infosider';
 import { parseQueryString } from '@fpsak-frontend/utils';
-import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';
@@ -43,7 +42,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
   useEffect(() => {
     // todo sjekke om dette er beste stedet å sette dette for sentry

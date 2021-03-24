@@ -6,11 +6,11 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Behandling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 
-import BehandlingPaVent from './BehandlingPaVent';
+import BehandlingPaVent, { SettPaVentParams } from './BehandlingPaVent';
 
 describe('<BehandlingPaVent>', () => {
   const behandling = {
@@ -31,8 +31,8 @@ describe('<BehandlingPaVent>', () => {
   const aksjonspunkter = [];
   const kodeverk = {};
 
-  const AKSJONSPUNKT_KEY = 'AP';
-  const PA_VENT_KEY = 'PA_VENT';
+  const AKSJONSPUNKT_KEY = new RestKey<Aksjonspunkt[], void>('AP');
+  const PA_VENT_KEY = new RestKey<void, SettPaVentParams>('PA_VENT');
 
   const endpoints = new RestApiConfigBuilder()
     .withRel('test', AKSJONSPUNKT_KEY)
@@ -45,7 +45,7 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal ikke vise modal når behandling ikke er på vent', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
 
     const wrapper = shallow(<BehandlingPaVent
       behandling={behandling as Behandling}
@@ -60,7 +60,7 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal vise modal når behandling er på vent', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
 
     const wrapper = shallow(<BehandlingPaVent
       behandling={{
@@ -80,7 +80,7 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal vise modal og så skjule den ved trykk på knapp', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
+    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
 
     const wrapper = shallow(<BehandlingPaVent
       behandling={{
@@ -103,7 +103,7 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal markeres som automatisk satt på vent når en har åpent aksjonspunkt for auto-manuelt satt på vent', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY, [{
+    requestMock.mock(AKSJONSPUNKT_KEY.name, [{
       status: {
         kode: aksjonspunktStatus.OPPRETTET,
         kodeverk: 'AKSJONSPUNKT_STATUS',
@@ -134,8 +134,8 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal oppdatere på-vent-informasjon og så hente behandling på nytt', async () => {
-    requestMock.mock(AKSJONSPUNKT_KEY, aksjonspunkter);
-    requestMock.mock(PA_VENT_KEY);
+    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
+    requestMock.mock(PA_VENT_KEY.name);
 
     const hentBehandlingCallback = sinon.spy();
 
@@ -155,7 +155,7 @@ describe('<BehandlingPaVent>', () => {
 
     await modal.prop('submitCallback')({ dato: '10.10.2019' });
 
-    const requestData = requestMock.getRequestMockData(PA_VENT_KEY);
+    const requestData = requestMock.getRequestMockData(PA_VENT_KEY.name);
     expect(requestData).toHaveLength(1);
     expect(requestData[0].params).toEqual({
       behandlingId: 1,
