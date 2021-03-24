@@ -12,7 +12,7 @@ import { RefusjonTilVurderingAndel, Beregningsgrunnlag, ArbeidsgiverOpplysninger
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
 import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
-import VurderRefusjonTransformedValues, {VurderRefusjonValues} from "../../types/VurderRefusjonTsType";
+import VurderRefusjonTransformedValues, { VurderRefusjonValues } from '../../types/VurderRefusjonTsType';
 
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
 const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
