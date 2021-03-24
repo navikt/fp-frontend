@@ -12,6 +12,7 @@ import { RefusjonTilVurderingAndel, Beregningsgrunnlag, ArbeidsgiverOpplysninger
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
 import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
+import VurderRefusjonTransformedValues, {VurderRefusjonValues} from "../../types/VurderRefusjonTsType";
 
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
 const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
@@ -31,8 +32,8 @@ const lagRadNøkkel = (andel: RefusjonTilVurderingAndel): string => {
 };
 
 interface MappedOwnProps {
-  initialValues: any;
-  onSubmit: (formValues: any) => void;
+  initialValues: VurderRefusjonValues;
+  onSubmit: (formValues: VurderRefusjonValues) => void;
 }
 
 type OwnProps = {
@@ -109,7 +110,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
   );
 };
 
-export const buildInitialValues = (bg, aksjonspunkter) => {
+export const buildInitialValues = (bg: Beregningsgrunnlag, aksjonspunkter: Aksjonspunkt[]): VurderRefusjonValues => {
   const { andeler } = bg.refusjonTilVurdering;
   let initialValues = {};
   andeler.forEach((andel) => {
@@ -123,7 +124,7 @@ export const buildInitialValues = (bg, aksjonspunkter) => {
   return initialValues;
 };
 
-export const transformValues = (values, bg) => {
+export const transformValues = (values: VurderRefusjonValues, bg: Beregningsgrunnlag): VurderRefusjonTransformedValues => {
   const { andeler } = bg.refusjonTilVurdering;
   const transformedAndeler = andeler.map((andel) => VurderEndringRefusjonRad.transformValues(values, andel, bg.skjaeringstidspunktBeregning));
   return {
@@ -133,9 +134,9 @@ export const transformValues = (values, bg) => {
   };
 };
 
-const mapStateToProps = (initialState, initialProps) => {
+const mapStateToProps = (initialState: any, initialProps: OwnProps) => {
   const onSubmit = (values) => initialProps.submitCallback([transformValues(values, initialProps.beregningsgrunnlag)]);
-  return (state, ownProps) => {
+  return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValues(ownProps.beregningsgrunnlag, ownProps.aksjonspunkter);
     return ({
       initialValues,
