@@ -7,7 +7,7 @@ import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import RestApiState from '../RestApiState';
 
 const notEqual = (array1, array2) => !(array1.length === array2.length && array1.every((value, index) => value === array2[index]));
-const format = (name) => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
+const format = (name: string): string => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
 
 export interface RestApiData<T> {
   state: RestApiState;
@@ -15,9 +15,9 @@ export interface RestApiData<T> {
   data?: T;
 }
 
-export interface EndpointData<T, P> {
-  key: RestKey<T, P>,
-  params?: P
+export interface EndpointData {
+  key: RestKey<any, any>,
+  params?: any
 }
 
 export interface Options {
@@ -38,11 +38,11 @@ const defaultOptions = {
  * For mocking i unit-test
  */
 export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T, P>(
-  endpoints: EndpointData<T, P>[], options: Options = defaultOptions,
+  endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
   const endpointData = endpoints.reduce((acc, endpoint) => ({
     ...acc,
-    [format(endpoint.key)]: requestApi.startRequest<T, P>(endpoint.key.name, endpoint.params),
+    [format(endpoint.key.name)]: requestApi.startRequest<T, P>(endpoint.key.name, endpoint.params),
   }), {});
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
@@ -63,8 +63,8 @@ const DEFAULT_STATE = {
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
 const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T, P>(
-  endpoints: EndpointData<T, P>[], options: Options = defaultOptions,
-): RestApiData<T> {
+  endpoints: EndpointData[], options: Options = defaultOptions,
+):RestApiData<T> {
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
   const ref = useRef<DependencyList>();
@@ -89,7 +89,7 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
             state: RestApiState.SUCCESS,
             data: dataRes.reduce((acc, result, index) => ({
               ...acc,
-              [format(filteredEndpoints[index].key)]: result.payload,
+              [format(filteredEndpoints[index].key.name)]: result.payload,
             }), {} as T),
             error: undefined,
           });

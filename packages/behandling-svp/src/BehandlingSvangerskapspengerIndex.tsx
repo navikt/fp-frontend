@@ -63,7 +63,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
   const { data: opplysningsdata, state: opplysningsdataState } = restApiSvpHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
-  }>(endepunkterSomSkalHentesEnGang, {
+  }, void>(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [!behandling],
     suspendRequest: !behandling,
   });

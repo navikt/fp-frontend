@@ -71,7 +71,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
-  }>(endepunkterSomSkalHentesEnGang, {
+  }, void>(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [!behandling],
     suspendRequest: !behandling,
   });

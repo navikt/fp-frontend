@@ -12,6 +12,7 @@ export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[ke
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType?.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType?.kode;
+  // @ts-ignore Fiks kodeverk-type
   return erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 }
 
@@ -21,6 +22,7 @@ export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[ke
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  // @ts-ignore Fiks kodeverk-type
   return alleKodeverk[kodeverkType];
 }
 
@@ -30,6 +32,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  // @ts-ignore Fiks kodeverk-type
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 

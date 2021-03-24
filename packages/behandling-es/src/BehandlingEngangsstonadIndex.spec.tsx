@@ -22,8 +22,8 @@ jest.mock('@fpsak-frontend/behandling-felles', () => {
 
 describe('<BehandlingEngangsstonadIndex>', () => {
   it('skal rendre korrekt', () => {
-    requestEsApi.mock(EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT, {});
-    requestEsApi.mock(EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT, {});
+    requestEsApi.mock(EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, {});
+    requestEsApi.mock(EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, {});
 
     const wrapper = shallow(<BehandlingEngangsstonadIndex
       behandlingEventHandler={{

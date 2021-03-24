@@ -76,7 +76,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
     expect(div).toHaveLength(0);
   });
 
-  it('skal vise r', () => {
+  it('skal vise panel', () => {
     const vilkar = [{
       vilkarType: {
         kode: vilkarType.MEDLEMSKAPSVILKARET,

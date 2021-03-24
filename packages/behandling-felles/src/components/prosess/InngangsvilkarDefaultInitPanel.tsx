@@ -40,7 +40,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi(formaterteEndepunkter, {
+  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });
@@ -61,7 +61,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi(formatertePanelEndepunkter, {
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
