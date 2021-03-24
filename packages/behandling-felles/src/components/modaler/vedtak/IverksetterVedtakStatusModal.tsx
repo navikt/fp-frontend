@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -10,7 +9,10 @@ import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { Kodeverk } from '@fpsak-frontend/types';
 
+import getPackageIntl from '../../../../i18n/getPackageIntl';
 import styles from './iverksetterVedtakStatusModal.less';
+
+const intl = getPackageIntl();
 
 interface OwnProps {
   lukkModal: () => void;
@@ -26,8 +28,7 @@ interface OwnProps {
  * Presentasjonskomponent. Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir den NAV-ansatte tatt tilbake til sokesiden.
  */
-const IverksetterVedtakStatusModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
   lukkModal,
   visModal,
   behandlingsresultat,
@@ -55,10 +56,10 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps & WrappedComponen
         </Column>
         <Column xs="9">
           <Normaltekst>
-            <FormattedMessage id={erVedtakAvslatt ? 'IverksetterVedtakStatusModal.VedtakAvslatt' : 'IverksetterVedtakStatusModal.VedtakInnvilet'} />
+            {intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.VedtakAvslatt' : 'IverksetterVedtakStatusModal.VedtakInnvilet' })}
           </Normaltekst>
           <Normaltekst>
-            <FormattedMessage id="IverksetterVedtakStatusModal.GoToSearchPage" />
+            {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
           </Normaltekst>
         </Column>
         <Column xs="2">
@@ -77,4 +78,4 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps & WrappedComponen
   );
 };
 
-export default injectIntl(IverksetterVedtakStatusModal);
+export default IverksetterVedtakStatusModal;

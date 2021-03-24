@@ -1,6 +1,7 @@
 import React, {
   FunctionComponent,
 } from 'react';
+import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import {
   ReduxFormStateCleaner,
@@ -10,6 +11,14 @@ import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
 import { requestPapirsoknadApi, PapirsoknadApiKeys } from './data/papirsoknadApi';
+import messages from '../i18n/nb_NO.json';
+
+const cache = createIntlCache();
+
+const intl = createIntl({
+  locale: 'nb-NO',
+  messages,
+}, cache);
 
 interface OwnProps {
   fagsakPersonnummer: string;
@@ -48,15 +57,17 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
         behandlingId={behandling.id}
         behandlingVersjon={behandling.versjon}
       />
-      <RegistrerPapirsoknad
-        behandling={behandling}
-        fagsak={fagsak}
-        fagsakPersonnummer={fagsakPersonnummer}
-        kodeverk={kodeverk}
-        rettigheter={rettigheter}
-        hentBehandling={hentBehandling}
-        lagreAksjonspunkt={lagreAksjonspunkter}
-      />
+      <RawIntlProvider value={intl}>
+        <RegistrerPapirsoknad
+          behandling={behandling}
+          fagsak={fagsak}
+          fagsakPersonnummer={fagsakPersonnummer}
+          kodeverk={kodeverk}
+          rettigheter={rettigheter}
+          hentBehandling={hentBehandling}
+          lagreAksjonspunkt={lagreAksjonspunkter}
+        />
+      </RawIntlProvider>
     </>
   );
 };

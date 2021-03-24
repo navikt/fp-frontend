@@ -1,9 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import Modal from 'nav-frontend-modal';
 
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';
@@ -11,8 +11,7 @@ import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';
 describe('<IverksetterVedtakStatusModal>', () => {
   it('skal rendre modal', () => {
     const closeEventCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<IverksetterVedtakStatusModal.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<IverksetterVedtakStatusModal
       visModal
       lukkModal={closeEventCallback}
       behandlingsresultat={{

@@ -1,0 +1,13 @@
+{
+  "Registrering.RegistrereSoknad": "Registrere søknad",
+  "Registrering.RegistrerAlleOpplysninger": "Registrer inn alle opplysninger fra papirsøknaden",
+  "Registrering.Omsoknaden.Title": "Om søknaden",
+  "Registrering.Omsoknaden.soknadstype": "Søknadstype",
+  "Registrering.Omsoknaden.Tema": "Tema",
+  "Registrering.Omsoknaden.Soker": "Søker",
+  "Registrering.Omsoknaden.VisSkjema": "Vis skjema",
+  "SoknadRegistrertModal.ContentLabel": "Søknaden er registrert. Du kommer nå til forsiden.",
+  "SoknadRegistrertModal.InfoTextOne": "Søknaden er registrert og vil bli behandlet",
+  "SoknadRegistrertModal.InfoTextTwo": "Du kommer nå til forsiden",
+  "SoknadRegistrertModal.OkButtonText": "OK"
+}
