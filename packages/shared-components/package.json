@@ -29,12 +29,12 @@
     "nav-frontend-spinner-style": "1.0.2",
     "nav-frontend-typografi": "3.0.4",
     "nav-frontend-typografi-style": "1.0.35",
-    "react": "^17.0.1",
-    "react-day-picker": "^7.4.8",
-    "react-intl": "^5.13.4",
+    "react": "^17.0.2",
+    "react-day-picker": "^7.4.10",
+    "react-intl": "^5.13.5",
     "react-modal": "3.12.1",
     "redux-form": "^8.3.7",
-    "react-redux": "^7.2.2"
+    "react-redux": "^7.2.3"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0"
