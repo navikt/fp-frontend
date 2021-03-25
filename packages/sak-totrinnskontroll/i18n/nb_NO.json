@@ -51,6 +51,7 @@
   "ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon": "<b>Søker er i permisjon.</b>",
   "ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon": "<b> Søker er ikke i permisjon.</b>",
   "ToTrinnsForm.FaktaOmArbeidsforhold.Melding": "<b> {melding}.</b>",
+  "ToTrinnsForm.FaktaOmArbeidsforhold.DetErVurdert": "Det er vurdert om andre arbeidsforhold er dokumentert",
   "ToTrinnsForm.Fødsel.VurderSokersRelasjon": "Søkers relasjon til barnet er vurdert.",
   "ToTrinnsForm.Fødsel.VurderVilkarSykdom": "Vilkår for sykdom er vurdert.",
   "ToTrinnsForm.Fødsel.VurderTidligereUtbetaling": "Det er vurdert om tidligere utbetalt ytelse gjelder for samme barn.",
