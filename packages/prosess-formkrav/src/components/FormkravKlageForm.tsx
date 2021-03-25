@@ -13,7 +13,7 @@ import {
   RadioGroupField, RadioOption, SelectField, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { DDMMYYYY_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
@@ -31,11 +31,13 @@ const getKlagBareVedtak = (
   getKodeverknavn: (kodeverk: Kodeverk) => string,
 ): ReactElement[] => {
   const klagBareVedtak = [<option key="formkrav" value={IKKE_PA_KLAGD_VEDTAK}>{intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' })}</option>];
-  return klagBareVedtak.concat(avsluttedeBehandlinger.map((behandling) => (
-    <option key={behandling.id} value={`${behandling.id}`}>
-      {`${getKodeverknavn(behandling.type)} ${moment(behandling.avsluttet).format(DDMMYYYY_DATE_FORMAT)}`}
-    </option>
-  )));
+  return klagBareVedtak.concat(avsluttedeBehandlinger
+    .sort((b1, b2) => moment(b1.avsluttet).diff(moment(b2.avsluttet)))
+    .map((behandling) => (
+      <option key={behandling.id} value={`${behandling.id}`}>
+        {`${getKodeverknavn(behandling.type)} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`}
+      </option>
+    )));
 };
 
 const getLovHjemmeler = (aksjonspunktCode: string): string => (aksjonspunktCode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
