@@ -2,7 +2,7 @@ import React, { useMemo, useState, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { InjectedFormProps, Validator } from 'redux-form';
 import moment from 'moment';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
@@ -97,6 +97,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (values: any) => void;
   uttakArbeidTyper: KodeverkMedNavn[],
+  intl: IntlShape;
 }
 interface MappedOwnProps {
   fødselsdato?: string;
@@ -329,6 +330,7 @@ export const validateForm = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   uttakArbeidTyper: KodeverkMedNavn[],
+  intl: IntlShape,
 ) => {
   let errors = {};
   if (Object.keys(values).length === 0) {
@@ -340,7 +342,7 @@ export const validateForm = (
   if (ingenTilretteleggingSkalBrukes) {
     // @ts-ignore
     // eslint-disable-next-line no-underscore-dangle
-    errors._error = 'FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes';
+    errors._error = intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes' });
   }
 
   const { termindato } = values;
@@ -348,13 +350,14 @@ export const validateForm = (
     .filter((key) => formSectionNames.includes(key))
     .filter((key) => values[key].skalBrukes)
     .forEach((key) => {
-      if (!moment(termindato).isAfter(moment(values[key].tilretteleggingBehovFom))) {
+      const tilretteleggingForm = moment(values[key].tilretteleggingBehovFom);
+      if (tilretteleggingForm.isValid() && !moment(termindato).isAfter(tilretteleggingForm)) {
         errors[key] = {
-          tilretteleggingBehovFom: [{ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }],
+          tilretteleggingBehovFom: intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }),
         };
         errors = {
           ...errors,
-          termindato: [{ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }],
+          termindato: intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }),
         };
       }
     });
@@ -368,7 +371,7 @@ export const validateForm = (
       if (harDuplikat) {
         const tilretteleggingDatoerErrors = td
           .reduce((acc, t) => (antallMappedByDato[t.fom] > 1
-            ? acc.concat({ fom: [{ id: 'FodselOgTilretteleggingFaktaForm.DuplikateDatoer' }] }) : acc.concat({})), []);
+            ? acc.concat({ fom: intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.DuplikateDatoer' }) }) : acc.concat({})), []);
         errors[key] = {
           tilretteleggingDatoer: tilretteleggingDatoerErrors,
         };
@@ -484,9 +487,10 @@ const getValidate = createSelector([
   getArbeidsforhold,
   (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
   (ownProps: PureOwnProps) => ownProps.uttakArbeidTyper,
-], (arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper) => (
+  (ownProps: PureOwnProps) => ownProps.intl,
+], (arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intl) => (
   values,
-) => validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper));
+) => validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intl));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: getInitialValues(ownProps),

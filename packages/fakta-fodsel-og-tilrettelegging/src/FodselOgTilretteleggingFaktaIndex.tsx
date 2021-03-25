@@ -52,6 +52,7 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       uttakArbeidTyper={alleKodeverk[kodeverkTyper.UTTAK_ARBEID_TYPE]}
+      intl={intl}
     />
   </RawIntlProvider>
 );
