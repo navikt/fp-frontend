@@ -170,6 +170,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                         validate={[required, minValue0, maxValue100, hasValidDecimal]}
                         // @ts-ignore TODO Fiks denne!
                         normalizeOnBlur={(value) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
+                        alignRightCenterOnReadOnly={readOnly}
                         onChange={(_elmt, value) => {
                           const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
                           changeField(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
@@ -177,7 +178,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                         }}
                       />
                     </FlexColumn>
-                    <FlexColumn className={styles.buttonMargin}>
+                    <FlexColumn className={readOnly ? styles.buttonMarginReadOnly : styles.buttonMargin}>
                       %
                     </FlexColumn>
                   </>
