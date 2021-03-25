@@ -25,7 +25,7 @@ describe('<FormkravKlageForm>', () => {
       kode: behandlingType.REVURDERING,
       kodeverk: 'BEHANDLING_TYPE',
     },
-    avsluttet: '2018-10-25T14:14:15',
+    avsluttet: '2018-10-25T17:14:15',
   }, {
     id: 3,
     uuid: '3uuid',
@@ -66,8 +66,8 @@ describe('<FormkravKlageForm>', () => {
     expect(vedtakSelect).toHaveLength(1);
     expect(vedtakSelect.prop('selectValues')).toHaveLength(4);
     expect(vedtakSelect.prop('selectValues')[0].props.children).toBe('Ikke påklagd et vedtak');
-    expect(vedtakSelect.prop('selectValues')[1].props.children).toBe('Førstegangssøknad 25.10.2018');
-    expect(vedtakSelect.prop('selectValues')[2].props.children).toBe('Revurdering 25.10.2018');
-    expect(vedtakSelect.prop('selectValues')[3].props.children).toBe('Tilbakekreving 06.02.2020');
+    expect(vedtakSelect.prop('selectValues')[1].props.children).toBe('Førstegangssøknad 25.10.18 14:14');
+    expect(vedtakSelect.prop('selectValues')[2].props.children).toBe('Revurdering 25.10.18 17:14');
+    expect(vedtakSelect.prop('selectValues')[3].props.children).toBe('Tilbakekreving 06.02.20 14:14');
   });
 });
