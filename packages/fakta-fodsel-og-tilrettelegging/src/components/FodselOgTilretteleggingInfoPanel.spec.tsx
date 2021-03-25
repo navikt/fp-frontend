@@ -4,6 +4,7 @@ import sinon from 'sinon';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 import FodselOgTilretteleggingInfoPanel from './FodselOgTilretteleggingInfoPanel';
 import FodselOgTilretteleggingFaktaForm from './FodselOgTilretteleggingFaktaForm';
 import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
@@ -41,6 +42,7 @@ const arbeidsgiverOpplysningerPerId = {
 describe('<FodselOgTilretteleggingInfoPanel>', () => {
   it('skal vise panel', () => {
     const wrapper = shallow(<FodselOgTilretteleggingInfoPanel
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging as FodselOgTilrettelegging}

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
@@ -22,6 +22,7 @@ interface OwnProps {
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakArbeidTyper: KodeverkMedNavn[],
+  intl: IntlShape;
 }
 
 /**
@@ -41,6 +42,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
   uttakArbeidTyper,
+  intl,
 }) => (
   <>
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
@@ -60,6 +62,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       uttakArbeidTyper={uttakArbeidTyper}
+      intl={intl}
     />
   </>
 );
