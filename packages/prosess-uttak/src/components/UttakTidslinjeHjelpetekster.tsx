@@ -49,7 +49,7 @@ const UttakTidslinjeHjelpetekster: FunctionComponent<WrappedComponentProps> = ({
       text: formatMessage({ id: 'Timeline.ManueltAvklart' }),
     },
   ];
-  return <LegendBox legends={legends} />;
+  return <LegendBox legends={legends} alignLeft />;
 };
 
 export default injectIntl(UttakTidslinjeHjelpetekster);
