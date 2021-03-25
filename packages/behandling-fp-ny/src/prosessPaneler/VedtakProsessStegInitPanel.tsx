@@ -91,9 +91,6 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VURDERE_DOKUMENT,
   aksjonspunktCodes.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   aksjonspunktCodes.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-];
-const FATTER_VEDTAK_AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.FORESLA_VEDTAK,
   aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
 ];
 
@@ -106,7 +103,7 @@ const getLagringSideeffekter = (
 
   // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
   return () => {
-    if (FATTER_VEDTAK_AKSJONSPUNKT_KODER.includes(aksjonspunktModels[0].kode)) {
+    if (aksjonspunktModels.some((ap) => ap.kode === aksjonspunktCodes.FORESLA_VEDTAK)) {
       toggleFatterVedtakModal(true);
     } else {
       toggleIverksetterVedtakModal(true);
@@ -116,7 +113,7 @@ const getLagringSideeffekter = (
 
 const AKSJONSPUNKT_KODER = [
   ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-  ...FATTER_VEDTAK_AKSJONSPUNKT_KODER,
+  ...[aksjonspunktCodes.FORESLA_VEDTAK],
 ];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.VILKAR];
