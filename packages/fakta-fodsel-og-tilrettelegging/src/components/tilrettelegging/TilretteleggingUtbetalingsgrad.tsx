@@ -72,10 +72,10 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<PureOwnProps & MappedOwn
           validate={[required, minValue1, maxValue100, hasValidDecimal]}
           // @ts-ignore TODO Fiks denne!
           normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-          alignRightCenterOnReadOnly
+          alignRightCenterOnReadOnly={erReadOnly}
         />
       </FlexColumn>
-      <FlexColumn className={styles.buttonMargin}>
+      <FlexColumn className={erReadOnly ? styles.buttonMarginReadOnly : styles.buttonMargin}>
         %
       </FlexColumn>
       {erOverstyrer && (
