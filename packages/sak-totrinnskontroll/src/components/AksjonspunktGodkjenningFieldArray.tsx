@@ -104,7 +104,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                 <RadioOption label={{ id: 'ApprovalField.Vurder' }} value={false} />
               </RadioGroupField>
               {visArsaker && (
-                <ArrowBox alignOffset={erKlageKA ? 1 : 110}>
+                <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
                   {!visKunBegrunnelse && (
                     <FlexContainer wrap>
                       <FlexRow>
