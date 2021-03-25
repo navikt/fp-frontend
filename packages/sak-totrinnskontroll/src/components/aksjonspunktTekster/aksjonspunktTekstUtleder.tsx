@@ -60,27 +60,33 @@ export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: Totrinnskontr
 const buildArbeidsforholdText = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
-) => aksjonspunkt.arbeidforholdDtos.map((arbeidforholdDto) => {
-  const formattedMessages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-  return (
-    <>
-      <FormattedMessage
-        id="ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold"
-        values={{
-          orgnavn: arbeidforholdDto.navn,
-          orgnummer: arbeidforholdDto.organisasjonsnummer,
-          arbeidsforholdId: arbeidforholdDto.arbeidsforholdId ? `...${arbeidforholdDto.arbeidsforholdId.slice(-4)}` : '',
-          b: (chunks: any) => <b>{chunks}</b>,
-        }}
-      />
-      { formattedMessages.map((formattedMessage) => (
-        <React.Fragment key={formattedMessage.props.id}>
-          {formattedMessage}
-        </React.Fragment>
-      ))}
-    </>
-  );
-});
+) => {
+  if (!aksjonspunkt.arbeidforholdDtos || aksjonspunkt.arbeidforholdDtos.length === 0) {
+    return [<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.DetErVurdert" />];
+  }
+
+  return aksjonspunkt.arbeidforholdDtos.map((arbeidforholdDto) => {
+    const formattedMessages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
+    return (
+      <>
+        <FormattedMessage
+          id="ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold"
+          values={{
+            orgnavn: arbeidforholdDto.navn,
+            orgnummer: arbeidforholdDto.organisasjonsnummer,
+            arbeidsforholdId: arbeidforholdDto.arbeidsforholdId ? `...${arbeidforholdDto.arbeidsforholdId.slice(-4)}` : '',
+            b: (chunks: any) => <b>{chunks}</b>,
+          }}
+        />
+        { formattedMessages.map((formattedMessage) => (
+          <React.Fragment key={formattedMessage.props.id}>
+            {formattedMessage}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  });
+};
 
 const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => aksjonspunkt
   .uttakPerioder.map((uttakperiode): ReactNode => {
