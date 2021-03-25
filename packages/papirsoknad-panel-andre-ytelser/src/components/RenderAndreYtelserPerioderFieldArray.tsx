@@ -74,10 +74,12 @@ export const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> &
 );
 
 RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]): any => {
+  // eslint-disable-next-line react/destructuring-assignment
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
 
+  // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values.map(({
     periodeFom,
     periodeTom,

@@ -236,10 +236,12 @@ export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & 
 };
 
 RenderPermisjonPeriodeFieldArray.validate = (values: FormValues[]) => {
+  // eslint-disable-next-line react/destructuring-assignment
   if ((!values || !values.length)) {
     return { _error: isRequiredMessage() };
   }
 
+  // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values.map(({
     periodeType,
     periodeFom,
@@ -271,6 +273,7 @@ RenderPermisjonPeriodeFieldArray.validate = (values: FormValues[]) => {
   if (isArrayEmpty(values)) {
     return null;
   }
+  // eslint-disable-next-line react/destructuring-assignment
   const overlapError = dateRangesNotOverlapping(values.map(({
     periodeFom,
     periodeTom,

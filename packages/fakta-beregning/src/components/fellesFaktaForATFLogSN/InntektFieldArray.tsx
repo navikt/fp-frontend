@@ -289,6 +289,7 @@ const mapAndelToSortedObject = (value) => {
 };
 
 InntektFieldArrayImpl.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt) => {
+  // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values
     .map((andelFieldValues) => {
       const fieldErrors = {
