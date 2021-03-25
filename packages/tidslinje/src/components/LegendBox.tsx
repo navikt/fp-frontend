@@ -11,16 +11,18 @@ interface LegendBoxProps {
     src: string;
     text: string;
   }[];
+  alignLeft?: boolean;
 }
 
 const LegendBox: React.FunctionComponent<LegendBoxProps> = ({
   legends,
+  alignLeft = false,
 }) => (
   <span className={styles.popUnder}>
     <span>
       <TimeLineButton type="question" text="Question" />
     </span>
-    <div className={styles.popUnderContent}>
+    <div className={alignLeft ? styles.popUnderContentAlignLeft : styles.popUnderContent}>
       <div className={styles.legendBoxContainer}>
         {legends.map((legend) => (
           <div className={styles.legendBoxLegend} key={legend.text}>
