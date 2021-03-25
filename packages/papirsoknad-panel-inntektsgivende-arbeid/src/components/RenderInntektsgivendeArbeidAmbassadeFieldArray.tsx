@@ -103,6 +103,7 @@ RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values: FormValues[])
   if (!values) {
     return null;
   }
+  // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values.map(({
     arbeidsgiver,
     periodeFom,

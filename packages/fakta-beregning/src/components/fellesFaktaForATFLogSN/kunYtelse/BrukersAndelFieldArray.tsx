@@ -205,13 +205,14 @@ BrukersAndelFieldArrayImpl.validate = (values) => {
   if (!values) {
     return null;
   }
-  const arrayErrors = values.map((andelFieldValues) => {
+  // eslint-disable-next-line react/destructuring-assignment
+  const arrayErrors = values.map(({ fastsattBelop, inntektskategori }) => {
     const fieldErrors = {
       fastsattBelop: null,
       inntektskategori: null,
     };
-    fieldErrors.fastsattBelop = required(andelFieldValues.fastsattBelop);
-    fieldErrors.inntektskategori = required(andelFieldValues.inntektskategori);
+    fieldErrors.fastsattBelop = required(fastsattBelop);
+    fieldErrors.inntektskategori = required(inntektskategori);
     return fieldErrors.fastsattBelop || fieldErrors.inntektskategori ? fieldErrors : null;
   });
   if (arrayErrors.some((errors) => errors !== null)) {
