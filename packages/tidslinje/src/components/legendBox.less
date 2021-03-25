@@ -71,3 +71,50 @@
   visibility: visible;
   z-index: 10;
 }
+
+.popUnderContentAlignLeft {
+  background-color: @white;
+  border: 1px solid lightgrey;
+  left: -320px;
+  min-width: 560px;
+  padding: 12px;
+  position: absolute;
+  top: 54px;
+  transform: translate(0, 10px);
+  visibility: hidden;
+  width: auto;
+
+  &:before {
+    border-color: transparent transparent lightgrey;
+    border-style: solid;
+    border-width: 0 19px 9px 19px;
+    content: '';
+    left: 318px;
+    position: absolute;
+    top: -9px;
+    transition-duration: 0.3s;
+    transition-property: transform;
+    z-index: -1;
+  }
+
+  &:after {
+    border-color: transparent transparent @white;
+    border-style: solid;
+    border-width: 0 19px 9px 19px;
+    content: '';
+    left: 318px;
+    position: absolute;
+    top: -8px;
+    transition-duration: 0.3s;
+    transition-property: transform;
+    z-index: -1;
+  }
+}
+
+.popUnder:hover .popUnderContentAlignLeft {
+  opacity: 1;
+  transform: translate(0, -20px);
+  transition: all 0.5s;
+  visibility: visible;
+  z-index: 10;
+}
