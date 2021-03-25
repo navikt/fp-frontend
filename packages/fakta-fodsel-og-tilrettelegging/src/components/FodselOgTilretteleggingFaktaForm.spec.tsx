@@ -8,7 +8,7 @@ import { Arbeidsforhold as IayArbeidsforhold } from '@fpsak-frontend/types';
 
 import { FodselOgTilretteleggingFaktaForm, validateForm } from './FodselOgTilretteleggingFaktaForm';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
+import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
 
@@ -59,6 +59,7 @@ const formProps = {
 describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal vise faktaform med begrunnelsefelt og fodseldato', () => {
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
@@ -92,6 +93,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
 
   it('skal vise faktaform med fødelsedato', () => {
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
@@ -125,6 +127,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
 
   it('skal vise AlertStripe når formprops.error er satt', () => {
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
@@ -175,7 +178,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({});
   });
@@ -197,11 +200,11 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     // @ts-ignore
     // eslint-disable-next-line no-underscore-dangle
-    expect(errors._error).toEqual('FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes');
+    expect(errors._error).toEqual('Minst en tilrettelegging må brukes.');
   });
 
   it('skal finne duplikate datoer innenfor et arbeidsforhold', () => {
@@ -226,18 +229,14 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
         tilretteleggingDatoer: [{
-          fom: [{
-            id: 'FodselOgTilretteleggingFaktaForm.DuplikateDatoer',
-          }],
+          fom: 'Flere like datoer.',
         }, {
-          fom: [{
-            id: 'FodselOgTilretteleggingFaktaForm.DuplikateDatoer',
-          }],
+          fom: 'Flere like datoer.',
         }],
       },
     });
@@ -254,16 +253,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({
-      termindato: [{
-        id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato',
-      }],
+      termindato: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
-        tilretteleggingBehovFom: [{
-          id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato',
-        }],
+        tilretteleggingBehovFom: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
       },
     });
   });
@@ -279,16 +274,12 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({
-      termindato: [{
-        id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato',
-      }],
+      termindato: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
-        tilretteleggingBehovFom: [{
-          id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato',
-        }],
+        tilretteleggingBehovFom: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
       },
     });
   });
@@ -304,7 +295,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
         }],
       },
     };
-    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({});
   });
@@ -334,6 +325,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     }] as IayArbeidsforhold[];
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
@@ -382,6 +374,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     }] as IayArbeidsforhold[];
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
@@ -430,6 +423,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     }] as IayArbeidsforhold[];
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
+      intl={intlMock}
       behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
