@@ -20,7 +20,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues, rettigheter: string, otherFodselsdato: string) => any;
+  validate?: (values: FormValues, otherFodselsdato: string) => any;
 }
 
 const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -41,7 +41,7 @@ const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunc
   </RawIntlProvider>
 );
 
-OmsorgOgAdopsjonPapirsoknadIndex.validate = (values: FormValues, rettigheter: string, otherFodselsdato: string) => OmsorgOgAdopsjonPanel
-  .validate(values, rettigheter, otherFodselsdato);
+OmsorgOgAdopsjonPapirsoknadIndex.validate = (values: FormValues, otherFodselsdato: string) => OmsorgOgAdopsjonPanel
+  .validate(values, otherFodselsdato);
 
 export default OmsorgOgAdopsjonPapirsoknadIndex;

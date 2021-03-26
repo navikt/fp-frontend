@@ -12,14 +12,15 @@ import {
   DatepickerField, InputField, RadioGroupField, RadioOption,
 } from '@fpsak-frontend/form';
 import {
-  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, isRequiredMessage, maxValue, minValue, required,
+  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
-import { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 
 import styles from './omsorgOgAdopsjonPanel.less';
 
 const MIN_ANTALL_BARN = 1;
 const MAX_ANTALL_BARN = 10;
+const minAntallBarnEr1 = minValue(MIN_ANTALL_BARN);
+const maxAntallBarnEr10 = maxValue(MAX_ANTALL_BARN);
 
 interface OwnPropsFieldArray {
   fields: FieldArrayFieldsProps<any>;
@@ -77,6 +78,7 @@ export class FodselsDatoFields extends Component<OwnPropsFieldArray> {
               key={name}
               name={name}
               readOnly={readOnly}
+              validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
               label={{ id: 'Registrering.Adopsjon.FodselsdatoBarnN', args: { n: index + 1 } }}
             />
           ))}
@@ -106,7 +108,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues, rettigheter: string, otherFodselsdato: string) => any;
+  validate?: (values: FormValues, otherFodselsdato: string) => any;
 }
 
 export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
@@ -157,7 +159,7 @@ export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedO
                     ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn' : 'Registrering.Adopsjon.DatoForOvertakelsen',
                 }}
                 readOnly={readOnly}
-                validate={[hasValidDate]}
+                validate={[required, hasValidDate]}
               />
             </Column>
           </Row>
@@ -183,6 +185,7 @@ export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedO
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 bredde="XS"
+                validate={[required, hasValidInteger, minAntallBarnEr1, maxAntallBarnEr10]}
               />
             </Column>
           </Row>
@@ -213,44 +216,6 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 const OmsorgOgAdopsjonPanel = connect(mapStateToProps)(OmsorgOgAdopsjonPanelImpl);
 
-const validateOmsorgsovertakelsesdato = (omsorgsovertakelsesdato: string, rettigheter: string) => (rettigheter === rettighet.ANNEN_FORELDER_DOED
-  || rettigheter === rettighet.OVERTA_FORELDREANSVARET_ALENE
-  ? required(omsorgsovertakelsesdato) || hasValidDate(omsorgsovertakelsesdato)
-  : undefined);
-
-const validateFoedselsdato = (foedselsDato: string[], rettigheter: string) => {
-  if (rettigheter && rettigheter !== rettighet.IKKE_RELEVANT) {
-    if (!foedselsDato || !foedselsDato.length) {
-      return { _errors: isRequiredMessage() };
-    }
-    const foedselsDatoError = foedselsDato.map((dato) => required(dato) || hasValidDate(dato) || dateBeforeOrEqualToToday(dato));
-    if (foedselsDatoError.some((error) => error !== null)) {
-      return foedselsDatoError;
-    }
-    return undefined;
-  }
-  if (foedselsDato) {
-    const foedselsDatoError = foedselsDato.map((dato) => hasValidDate(dato) || dateBeforeOrEqualToToday(dato));
-    if (foedselsDatoError.some((error) => error !== null)) {
-      return foedselsDatoError;
-    }
-  }
-  return undefined;
-};
-
-const validateIncludingRequired = (antallBarn: number) => required(antallBarn)
-|| hasValidInteger(antallBarn) || minValue(MIN_ANTALL_BARN)(antallBarn) || maxValue(MAX_ANTALL_BARN)(antallBarn);
-
-const validateExcludingRequired = (antallBarn: number) => {
-  if (!antallBarn) {
-    return undefined;
-  }
-  return hasValidInteger(antallBarn) || minValue(MIN_ANTALL_BARN)(antallBarn) || maxValue(MAX_ANTALL_BARN)(antallBarn);
-};
-
-const validateAntallBarn = (antallBarn: number, rettigheter: string) => (rettigheter && rettigheter !== rettighet.IKKE_RELEVANT
-  ? validateIncludingRequired(antallBarn) : validateExcludingRequired(antallBarn));
-
 const validateFodselsdatoer = (foedselsDato: string[], otherFodselsdato: string) => {
   const hasFodselsdato1 = foedselsDato && foedselsDato.length > 0 && foedselsDato[0];
   const hasFodseldsato2 = otherFodselsdato && otherFodselsdato.length > 0 && otherFodselsdato[0];
@@ -263,7 +228,7 @@ const validateFodselsdatoer = (foedselsDato: string[], otherFodselsdato: string)
   return undefined;
 };
 
-OmsorgOgAdopsjonPanel.validate = (values: FormValues, rettigheter: string, otherFodselsdato: string) => {
+OmsorgOgAdopsjonPanel.validate = (values: FormValues, otherFodselsdato: string) => {
   const errors = {
     omsorgsovertakelsesdato: undefined,
     antallBarn: undefined,
@@ -272,20 +237,7 @@ OmsorgOgAdopsjonPanel.validate = (values: FormValues, rettigheter: string, other
   if (!values) {
     return errors;
   }
-  const { omsorgsovertakelsesdato, antallBarn, foedselsDato } = values;
-
-  const omsorgsovertakelsesdatoError = validateOmsorgsovertakelsesdato(omsorgsovertakelsesdato, rettigheter);
-  if (omsorgsovertakelsesdatoError) {
-    errors.omsorgsovertakelsesdato = omsorgsovertakelsesdatoError;
-  }
-  const antallBarnError = validateAntallBarn(antallBarn, rettigheter);
-  if (antallBarnError) {
-    errors.antallBarn = antallBarnError;
-  }
-  const foedselsDatoError = validateFoedselsdato(foedselsDato, rettigheter);
-  if (foedselsDatoError) {
-    errors.foedselsDato = foedselsDatoError;
-  }
+  const { foedselsDato } = values;
 
   const fodselsdatoCrossValidationError = validateFodselsdatoer(foedselsDato, otherFodselsdato);
   if (fodselsdatoCrossValidationError) {
