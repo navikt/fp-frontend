@@ -86,7 +86,7 @@ RegistreringFodselGrid.buildInitialValues = (): FormValues => ({
 RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string): any => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
   ...FodselPapirsoknadIndex.validate(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.rettigheter, values.foedselsDato),
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato),
   [annenForelderFormNamePrefix]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[annenForelderFormNamePrefix]),
 });
 
