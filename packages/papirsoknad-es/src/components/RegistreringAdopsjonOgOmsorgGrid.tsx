@@ -78,7 +78,7 @@ RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = (): FormValues => ({
 
 RegistreringAdopsjonOgOmsorgGrid.validate = (values: FormValues, sokerPersonnummer: string): any => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.rettigheter, values.foedselsDato),
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato),
   [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
 });
 
