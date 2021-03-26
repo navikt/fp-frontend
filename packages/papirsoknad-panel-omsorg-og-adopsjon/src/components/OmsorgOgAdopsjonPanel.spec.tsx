@@ -49,6 +49,7 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       const wrapper = shallow(<FodselsDatoFields
         fields={new MockFields('barn', 2)}
         antallBarn={2}
+        familieHendelseType={familieHendelseType.FODSEL}
       />);
 
       const datepicker = wrapper.find('DatepickerField');

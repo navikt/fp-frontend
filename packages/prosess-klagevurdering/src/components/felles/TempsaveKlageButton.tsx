@@ -4,6 +4,15 @@ import { FormattedMessage } from 'react-intl';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { Kodeverk } from '@fpsak-frontend/types';
+import { InjectedFormProps } from 'redux-form';
+
+type FormValues = {
+  klageVurdering?: Kodeverk;
+  fritekstTilBrev?: string;
+  klageMedholdArsak?: Kodeverk;
+  klageVurderingOmgjoer?: Kodeverk;
+  begrunnelse?: string;
+};
 
 export type TransformedValues = {
   kode: string;
@@ -15,66 +24,49 @@ export type TransformedValues = {
 }
 
 const transformValues = (
-  klageVurdering: Kodeverk,
-  klageMedholdArsak: Kodeverk,
-  klageVurderingOmgjoer: Kodeverk,
-  fritekstTilBrev: string,
-  begrunnelse: string,
+  values: FormValues,
   aksjonspunktCode: string,
 ): TransformedValues => ({
   kode: aksjonspunktCode,
-  klageMedholdArsak: (klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
-    || klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? klageMedholdArsak : null,
-  klageVurderingOmgjoer: klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? klageVurderingOmgjoer : null,
-  fritekstTilBrev,
-  begrunnelse,
-  klageVurdering,
+  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
+    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  fritekstTilBrev: values.fritekstTilBrev,
+  begrunnelse: values.begrunnelse,
+  klageVurdering: values.klageVurdering,
 });
 
 interface OwnProps {
   aksjonspunktCode: string;
-  klageVurdering: Kodeverk,
-  klageMedholdArsak: Kodeverk,
-  klageVurderingOmgjoer: Kodeverk,
-  fritekstTilBrev: string,
-  begrunnelse: string,
   saveKlage: (data: TransformedValues) => Promise<any>;
   spinner?: boolean;
   readOnly?: boolean;
+  handleSubmit: InjectedFormProps['handleSubmit'];
 }
 
 const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
-  klageVurdering,
-  klageMedholdArsak,
-  klageVurderingOmgjoer,
-  fritekstTilBrev,
-  begrunnelse,
   saveKlage,
   spinner,
   aksjonspunktCode,
   readOnly,
-}) => {
-  const tempSave = (event: React.MouseEvent): void => {
-    event.preventDefault();
-    saveKlage(transformValues(klageVurdering, klageMedholdArsak, klageVurderingOmgjoer, fritekstTilBrev,
-      begrunnelse, aksjonspunktCode));
-  };
-
-  return (
-    <div>
-      {!readOnly && (
-        <Hovedknapp
-          mini
-          htmlType="button"
-          spinner={spinner}
-          onClick={(event) => tempSave(event)}
-        >
-          <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
-        </Hovedknapp>
-      )}
-    </div>
-  );
-};
+  handleSubmit,
+}) => (
+  <>
+    {!readOnly && (
+      <Hovedknapp
+        mini
+        htmlType="button"
+        spinner={spinner}
+        onClick={handleSubmit((values: FormValues) => saveKlage(transformValues(
+          values,
+          aksjonspunktCode,
+        )))}
+      >
+        <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
+      </Hovedknapp>
+    )}
+  </>
+);
 
 TempsaveKlageButton.defaultProps = {
   spinner: false,

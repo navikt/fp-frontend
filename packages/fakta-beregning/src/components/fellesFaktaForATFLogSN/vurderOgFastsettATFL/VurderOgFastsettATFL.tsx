@@ -24,7 +24,7 @@ import {
   getKanRedigereInntekt, INNTEKT_FIELD_ARRAY_NAME, mapAndelFieldIdentifikator,
 } from '../BgFaktaUtils';
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
-import InntektFieldArray, { InntektFieldArrayImpl } from '../InntektFieldArray';
+import InntektFieldArray, { InntektFieldArray as InntektFieldArrayImpl } from '../InntektFieldArray';
 import VurderEtterlonnSluttpakkeForm from './forms/VurderEtterlonnSluttpakkeForm';
 
 const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller, values) => (

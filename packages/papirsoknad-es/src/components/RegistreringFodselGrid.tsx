@@ -35,7 +35,7 @@ export type FormValues = {
 
 interface StaticFunctions {
   buildInitialValues?: () => FormValues;
-  validate?: (values: FormValues, sokerPersonnummer: string) => any;
+  validate?: (values: FormValues, sokerPersonnummer: string, familieHendelseType: string) => any;
 }
 
 const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -83,10 +83,10 @@ RegistreringFodselGrid.buildInitialValues = (): FormValues => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
 });
 
-RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string): any => ({
+RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string, familieHendelseType: string): any => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
   ...FodselPapirsoknadIndex.validate(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato),
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato, familieHendelseType),
   [annenForelderFormNamePrefix]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[annenForelderFormNamePrefix]),
 });
 

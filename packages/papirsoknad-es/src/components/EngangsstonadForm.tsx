@@ -100,10 +100,10 @@ export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps &
 
 const getValidation = (soknadData: SoknadData, sokerPersonnummer: string): any => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
-    return (values: FormValuesFodsel) => RegistreringFodselGrid.validate(values, sokerPersonnummer);
+    return (values: FormValuesFodsel) => RegistreringFodselGrid.validate(values, sokerPersonnummer, soknadData.familieHendelseType);
   }
   if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
-    return (values: FormValuesAdopsjon) => RegistreringAdopsjonOgOmsorgGrid.validate(values, sokerPersonnummer);
+    return (values: FormValuesAdopsjon) => RegistreringAdopsjonOgOmsorgGrid.validate(values, sokerPersonnummer, soknadData.familieHendelseType);
   }
   return null;
 };
