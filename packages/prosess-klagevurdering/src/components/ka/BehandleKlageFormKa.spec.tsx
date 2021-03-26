@@ -36,7 +36,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       submitCallback={sinon.spy()}
-      onSubmit={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
@@ -59,7 +58,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       submitCallback={sinon.spy()}
-      onSubmit={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);
@@ -86,7 +84,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       submitCallback={sinon.spy()}
-      onSubmit={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
     />);

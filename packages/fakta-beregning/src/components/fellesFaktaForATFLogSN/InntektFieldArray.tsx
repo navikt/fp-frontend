@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { NavFieldGroup } from '@fpsak-frontend/form';
 import {
   isArrayEmpty, removeSpacesFromNumber, required,
@@ -48,8 +47,8 @@ const lagNyMS = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
 
 const isDirty = (meta, isBeregningFormDirty) => (meta.dirty || isBeregningFormDirty);
 
-const getErrorMessage = (meta, intl, isBeregningFormDirty) => (meta.error && isDirty(meta, isBeregningFormDirty)
-&& meta.submitFailed ? intl.formatMessage(...meta.error) : null);
+const getErrorMessage = (meta, isBeregningFormDirty) => (meta.error && isDirty(meta, isBeregningFormDirty)
+&& meta.submitFailed ? meta.error : null);
 
 const skalViseSletteknapp = (index, fields, readOnly) => (fields.get(index).skalKunneEndreAktivitet === true && !readOnly);
 
@@ -208,10 +207,10 @@ interface StaticFunctions {
  * Presentasjonskomponent: Viser fordeling for andeler
  * Komponenten må rendres som komponenten til et FieldArray.
  */
-export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
+export const InntektFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
   fields,
   meta,
-  intl, readOnly,
+  readOnly,
   isBeregningFormDirty,
   skalKunneLeggeTilDagpengerManuelt,
   behandlingId,
@@ -232,7 +231,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
   if (tablerows.length === 0) {
     if (skalKunneLeggeTilDagpengerManuelt) {
       return (
-        <NavFieldGroup errorMessage={getErrorMessage(meta, intl, isBeregningFormDirty)}>
+        <NavFieldGroup errorMessage={getErrorMessage(meta, isBeregningFormDirty)}>
           {!readOnly && !harDagpenger(fields)
       && (
         <AddDagpengerAndelButton
@@ -248,7 +247,7 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
   }
   tablerows.push(createBruttoBGSummaryRow(fields, readOnly, beregningsgrunnlag, behandlingId, behandlingVersjon));
   return (
-    <NavFieldGroup errorMessage={getErrorMessage(meta, intl, isBeregningFormDirty)}>
+    <NavFieldGroup errorMessage={getErrorMessage(meta, isBeregningFormDirty)}>
       <Table headerTextCodes={getHeaderTextCodes(skalVisePeriode(fields), skalViseRefusjon(fields))} noHover classNameTable={styles.inntektTable}>
         {tablerows}
       </Table>
@@ -264,11 +263,11 @@ export const InntektFieldArrayImpl: FunctionComponent<OwnProps & WrappedComponen
   );
 };
 
-InntektFieldArrayImpl.defaultProps = {
+InntektFieldArray.defaultProps = {
   skalKunneLeggeTilDagpengerManuelt: false,
 };
 
-InntektFieldArrayImpl.transformValues = (values): InntektTransformed => (values
+InntektFieldArray.transformValues = (values): InntektTransformed => (values
   ? values.filter(({ kanRedigereInntekt }) => kanRedigereInntekt)
     .filter(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '')
     .map((fieldValue) => ({
@@ -288,7 +287,7 @@ const mapAndelToSortedObject = (value) => {
   return { andelsinfo: andel, inntektskategori };
 };
 
-InntektFieldArrayImpl.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt) => {
+InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt) => {
   // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values
     .map((andelFieldValues) => {
@@ -315,7 +314,7 @@ InntektFieldArrayImpl.validate = (values: AndelFieldValue[], erKunYtelse, skalFa
   return null;
 };
 
-InntektFieldArrayImpl.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
+InntektFieldArray.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
   if (!andeler || andeler.length === 0) {
@@ -340,5 +339,4 @@ export const mapStateToProps = (state, ownProps) => {
     erKunYtelse: tilfeller && tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE),
   };
 };
-const InntektFieldArray = injectIntl(InntektFieldArrayImpl);
 export default connect(mapStateToProps)(InntektFieldArray);

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { Form, InjectedFormProps } from 'redux-form';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Column, Row } from 'nav-frontend-grid';
@@ -22,6 +22,16 @@ import PreviewKlageLink, { BrevData } from '../felles/PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.less';
+
+export const transformValues = (values: FormValues): any => ({
+  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
+    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageVurdering: values.klageVurdering,
+  fritekstTilBrev: values.fritekstTilBrev,
+  begrunnelse: values.begrunnelse,
+  kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+});
 
 type FormValues = {
   klageVurdering?: Kodeverk;
@@ -47,7 +57,6 @@ interface PureOwnProps {
 interface MappedOwnProps {
   initialValues: FormValues;
   formValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -67,9 +76,10 @@ export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
   formValues,
   intl,
   alleKodeverk,
+  submitCallback,
   ...formProps
 }) => (
-  <form onSubmit={handleSubmit}>
+  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback([transformValues(values)]))}>
     <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
     <VerticalSpacer fourPx />
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
@@ -116,19 +126,15 @@ export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
         </Column>
         <Column xs="2">
           <TempsaveKlageButton
-            klageVurdering={formValues.klageVurdering}
-            klageMedholdArsak={formValues.klageMedholdArsak}
-            klageVurderingOmgjoer={formValues.klageVurderingOmgjoer}
-            fritekstTilBrev={formValues.fritekstTilBrev}
-            begrunnelse={formValues.begrunnelse}
             saveKlage={saveKlage}
+            handleSubmit={handleSubmit}
             readOnly={readOnly}
             aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
           />
         </Column>
       </Row>
     </div>
-  </form>
+  </Form>
 );
 
 BehandleKlageFormNfpImpl.defaultProps = {
@@ -145,26 +151,12 @@ export const buildInitialValues = createSelector([
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
 }));
 
-export const transformValues = (values: FormValues): any => ({
-  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
-  klageVurdering: values.klageVurdering,
-  fritekstTilBrev: values.fritekstTilBrev,
-  begrunnelse: values.begrunnelse,
-  kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-});
-
 const formName = 'BehandleKlageNfpForm';
-
-const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
   formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
     'klageVurdering', 'begrunnelse', 'fritekstTilBrev', 'klageMedholdArsak', 'klageVurderingOmgjoer') || {},
-  onSubmit: lagSubmitFn(ownProps),
 });
 
 export default connect(mapStateToProps)(behandlingForm({

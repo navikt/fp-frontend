@@ -1,5 +1,4 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -13,7 +12,7 @@ import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { AndelRow } from './InntektFieldArrayRow';
 import SummaryRow from './SummaryRow';
-import { InntektFieldArrayImpl, leggTilDagpengerOmBesteberegning, mapStateToProps } from './InntektFieldArray';
+import { InntektFieldArray, leggTilDagpengerOmBesteberegning, mapStateToProps } from './InntektFieldArray';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
 
@@ -134,8 +133,7 @@ describe('<InntektFieldArray>', () => {
 
   it('skal vise komponent', () => {
     const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
-    const wrapper = shallowWithIntl(<InntektFieldArrayImpl
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<InntektFieldArray
       fields={fields}
       meta={metaMock}
       readOnly={false}
@@ -161,8 +159,7 @@ describe('<InntektFieldArray>', () => {
       aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
     };
     const fields = new MockFieldsWithContent('fieldArrayName', [andelField, SNandel]);
-    const wrapper = shallowWithIntl(<InntektFieldArrayImpl
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<InntektFieldArray
       fields={fields}
       meta={metaMock}
       readOnly={false}
@@ -188,8 +185,7 @@ describe('<InntektFieldArray>', () => {
       aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
     };
     const fields = new MockFieldsWithContent('fieldArrayName', [andelField, SNandel]);
-    const wrapper = shallowWithIntl(<InntektFieldArrayImpl
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<InntektFieldArray
       fields={fields}
       meta={metaMock}
       readOnly={false}
@@ -214,8 +210,7 @@ describe('<InntektFieldArray>', () => {
     const values = { [besteberegningField]: true };
     const newstate = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, newbg, formNameVurderFaktaBeregning, values);
     const newprops = mapStateToProps(newstate, { ...ownProps, beregningsgrunnlag: newbg, fields });
-    const wrapper = shallowWithIntl(<InntektFieldArrayImpl
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<InntektFieldArray
       fields={fields}
       meta={metaMock}
       readOnly={false}
@@ -253,7 +248,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
     expect(errors).toBe(null);
   });
 
@@ -268,7 +263,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
     expect(errors[0].fastsattBelop).toBe(isRequiredMessage());
   });
 
@@ -283,7 +278,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
     expect(errors).toBe(null);
   });
 
@@ -298,7 +293,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: '',
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
     expect(errors[0].inntektskategori).toBe(isRequiredMessage());
   });
 
@@ -314,12 +309,12 @@ describe('<InntektFieldArray>', () => {
       nyAndel: true,
     };
     values.push(andel2);
-    const errors = InntektFieldArrayImpl.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
     expect(errors[0].andel).toBe(isRequiredMessage());
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {
-    const iv = InntektFieldArrayImpl.buildInitialValues([], {}, {});
+    const iv = InntektFieldArray.buildInitialValues([], {}, {});
     expect(Object.keys(iv)).toHaveLength(0);
   });
 });
