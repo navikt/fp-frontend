@@ -19,8 +19,6 @@ import styles from './omsorgOgAdopsjonPanel.less';
 
 const MIN_ANTALL_BARN = 1;
 const MAX_ANTALL_BARN = 10;
-const minAntallBarnEr1 = minValue(MIN_ANTALL_BARN);
-const maxAntallBarnEr10 = maxValue(MAX_ANTALL_BARN);
 
 interface OwnPropsFieldArray {
   fields: FieldArrayFieldsProps<any>;
