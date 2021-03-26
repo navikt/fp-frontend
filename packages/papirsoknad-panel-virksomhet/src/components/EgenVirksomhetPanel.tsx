@@ -60,7 +60,6 @@ export const EgenVirksomhetPanel: FunctionComponent<PureOwnProps & MappedOwnProp
           component={RegistrerVirksomhetPanel}
           form={form}
           namePrefix={EGEN_VIRKSOMHET_FORM_NAME_PREFIX}
-          formatMessage={intl.formatMessage}
           validate={[arrayMinLength1]}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}

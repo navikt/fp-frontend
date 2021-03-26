@@ -26,6 +26,7 @@ interface OwnPropsFieldArray {
   fields: FieldArrayFieldsProps<any>;
   antallBarn?: number;
   readOnly?: boolean;
+  familieHendelseType: string;
 }
 
 const adjustNumberOfFields = ({
@@ -69,7 +70,7 @@ export class FodselsDatoFields extends Component<OwnPropsFieldArray> {
   }
 
   render() {
-    const { fields, readOnly } = this.props;
+    const { fields, readOnly, familieHendelseType } = this.props;
     return (
       <Row>
         <Column xs="6">
@@ -78,7 +79,7 @@ export class FodselsDatoFields extends Component<OwnPropsFieldArray> {
               key={name}
               name={name}
               readOnly={readOnly}
-              validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+              validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate, dateBeforeOrEqualToToday] : [hasValidDate, dateBeforeOrEqualToToday]}
               label={{ id: 'Registrering.Adopsjon.FodselsdatoBarnN', args: { n: index + 1 } }}
             />
           ))}
@@ -108,7 +109,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues, otherFodselsdato: string) => any;
+  validate?: (values: FormValues, otherFodselsdato: string, familieHendelseType: string) => any;
 }
 
 export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
@@ -159,7 +160,7 @@ export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedO
                     ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn' : 'Registrering.Adopsjon.DatoForOvertakelsen',
                 }}
                 readOnly={readOnly}
-                validate={[required, hasValidDate]}
+                validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
               />
             </Column>
           </Row>
@@ -185,7 +186,6 @@ export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedO
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 bredde="XS"
-                validate={[required, hasValidInteger, minAntallBarnEr1, maxAntallBarnEr10]}
               />
             </Column>
           </Row>
@@ -195,6 +195,7 @@ export const OmsorgOgAdopsjonPanelImpl: FunctionComponent<PureOwnProps & MappedO
             component={FodselsDatoFields}
             readOnly={readOnly}
             antallBarn={antallBarn}
+            familieHendelseType={familieHendelseType}
           />
         </Container>
       </SkjemaGruppe>
@@ -216,6 +217,19 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 
 const OmsorgOgAdopsjonPanel = connect(mapStateToProps)(OmsorgOgAdopsjonPanelImpl);
 
+const validateIncludingRequired = (antallBarn: number) => required(antallBarn)
+|| hasValidInteger(antallBarn) || minValue(MIN_ANTALL_BARN)(antallBarn) || maxValue(MAX_ANTALL_BARN)(antallBarn);
+
+const validateExcludingRequired = (antallBarn: number) => {
+  if (!antallBarn) {
+    return undefined;
+  }
+  return hasValidInteger(antallBarn) || minValue(MIN_ANTALL_BARN)(antallBarn) || maxValue(MAX_ANTALL_BARN)(antallBarn);
+};
+
+const validateAntallBarn = (antallBarn: number, familieHendelseType: string) => (familieHendelseType === fht.ADOPSJON
+  ? validateIncludingRequired(antallBarn) : validateExcludingRequired(antallBarn));
+
 const validateFodselsdatoer = (foedselsDato: string[], otherFodselsdato: string) => {
   const hasFodselsdato1 = foedselsDato && foedselsDato.length > 0 && foedselsDato[0];
   const hasFodseldsato2 = otherFodselsdato && otherFodselsdato.length > 0 && otherFodselsdato[0];
@@ -228,7 +242,7 @@ const validateFodselsdatoer = (foedselsDato: string[], otherFodselsdato: string)
   return undefined;
 };
 
-OmsorgOgAdopsjonPanel.validate = (values: FormValues, otherFodselsdato: string) => {
+OmsorgOgAdopsjonPanel.validate = (values: FormValues, otherFodselsdato: string, familieHendelseType: string) => {
   const errors = {
     omsorgsovertakelsesdato: undefined,
     antallBarn: undefined,
@@ -237,8 +251,12 @@ OmsorgOgAdopsjonPanel.validate = (values: FormValues, otherFodselsdato: string) 
   if (!values) {
     return errors;
   }
-  const { foedselsDato } = values;
+  const { foedselsDato, antallBarn } = values;
 
+  const antallBarnError = validateAntallBarn(antallBarn, familieHendelseType);
+  if (antallBarnError) {
+    errors.antallBarn = antallBarnError;
+  }
   const fodselsdatoCrossValidationError = validateFodselsdatoer(foedselsDato, otherFodselsdato);
   if (fodselsdatoCrossValidationError) {
     errors.foedselsDato = fodselsdatoCrossValidationError;

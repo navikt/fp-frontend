@@ -53,7 +53,6 @@ interface PureOwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta: FieldArrayMetaProps;
   namePrefix: string;
-  formatMessage: (...args: any[]) => any;
   form: string;
   name?: string;
   readOnly?: boolean;
@@ -173,14 +172,13 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
       fields,
       readOnly,
       meta,
-      formatMessage,
       alleKodeverk,
     } = this.props;
     const { editVirksomhet, editIndex } = this.state;
     return (
       <div className={styles.fieldsList}>
         <NavFieldGroup
-          errorMessage={meta.error && (meta.dirty || meta.submitFailed) ? formatMessage(...meta.error) : null}
+          errorMessage={meta.error && (meta.dirty || meta.submitFailed) ? meta.error : null}
         >
           {fields.length > 0
             && (
