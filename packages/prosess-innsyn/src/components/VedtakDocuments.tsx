@@ -2,7 +2,6 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 
 import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -39,10 +38,8 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Lenke href="#" onClick={toggleDocuments}>
-        <Normaltekst>
-          <FormattedMessage id="DocumentListInnsyn.Vedtaksdokumentasjon" values={{ numberOfDocuments: vedtaksdokumenter.length }} />
-          <i className={classNames('nav-frontend-chevron chevronboks ', showDocuments ? 'chevron--ned' : 'chevron--opp')} />
-        </Normaltekst>
+        <FormattedMessage id="DocumentListInnsyn.Vedtaksdokumentasjon" values={{ numberOfDocuments: vedtaksdokumenter.length }} />
+        <i className={classNames('nav-frontend-chevron chevronboks ', showDocuments ? 'chevron--ned' : 'chevron--opp')} />
       </Lenke>
       {showDocuments && (
         <>
