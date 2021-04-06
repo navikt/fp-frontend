@@ -21,7 +21,7 @@
     "lint:fix": "eslint --fix --cache \"packages/**/*.ts*\"",
     "less:lint": "stylelint \"packages/**/*.less\"",
     "dev": "cross-env NODE_ENV=development node webpack/webpack.dev.server.js --config webpack/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --no-progress --colors --config webpack/webpack.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
     "lerna": "lerna",
     "lerna:publish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
     "doc": "react-asciidoc-generator ./packages/ -o ../../docs/generated/react.adoc --handlebar-template src/docs/asciidoc-template.handlebars",
