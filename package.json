@@ -131,6 +131,7 @@
     "webpack-merge": "^5.7.3"
   },
   "resolutions": {
+    "is-svg": "4.3.1",
     "prismjs": "1.23.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
