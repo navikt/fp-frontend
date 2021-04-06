@@ -76,7 +76,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     skalMarkeresSomAktiv,
   );
 
-  const formatertePanelEndepunkter = panelEndepunkter.map((e) => (typeof e === 'string' ? ({ key: e }) : e));
+  const formatertePanelEndepunkter = panelEndepunkter.map((e) => (e instanceof RestKey ? ({ key: e }) : e));
   const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
     updateTriggers: [erPanelValgt, behandlingVersjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,

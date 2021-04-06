@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
 import { Row } from 'nav-frontend-grid';
 
 import { Kjønnkode } from '@fpsak-frontend/types';
@@ -8,7 +7,11 @@ import { Image } from '@fpsak-frontend/shared-components';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 
+import getPackageIntl from '../../i18n/getPackageIntl';
+
 import styles from './timeLineSokerEnsamSoker.less';
+
+const intl = getPackageIntl();
 
 const isKvinne = (kode: string): boolean => kode === navBrukerKjonn.KVINNE;
 
@@ -19,20 +22,17 @@ const isKvinne = (kode: string): boolean => kode === navBrukerKjonn.KVINNE;
  */
 const TimeLineSokerEnsamSoker: FunctionComponent<{ hovedsokerKjonnKode: Kjønnkode }> = ({
   hovedsokerKjonnKode,
-}) => {
-  const intl = useIntl();
-  return (
-    <div className={styles.timelineSokerContatinerEnsamSoker}>
-      <Row>
-        <Image
-          className={styles.iconMedsoker}
-          src={isKvinne(hovedsokerKjonnKode) ? urlKvinne : urlMann}
-          alt={intl.formatMessage({ id: 'Person.ImageText' })}
-          tooltip={intl.formatMessage({ id: isKvinne(hovedsokerKjonnKode) ? 'Person.Woman' : 'Person.Man' })}
-        />
-      </Row>
-    </div>
-  );
-};
+}) => (
+  <div className={styles.timelineSokerContatinerEnsamSoker}>
+    <Row>
+      <Image
+        className={styles.iconMedsoker}
+        src={isKvinne(hovedsokerKjonnKode) ? urlKvinne : urlMann}
+        alt={intl.formatMessage({ id: 'Person.ImageText' })}
+        tooltip={intl.formatMessage({ id: isKvinne(hovedsokerKjonnKode) ? 'Person.Woman' : 'Person.Man' })}
+      />
+    </Row>
+  </div>
+);
 
 export default TimeLineSokerEnsamSoker;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
 import { Row } from 'nav-frontend-grid';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
@@ -9,7 +8,11 @@ import urlUkjent from '@fpsak-frontend/assets/images/ukjent.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 import { Kjønnkode } from '@fpsak-frontend/types';
 
+import getPackageIntl from '../../i18n/getPackageIntl';
+
 import styles from './timeLineSoker.less';
+
+const intl = getPackageIntl();
 
 interface TimeLineSokerProps {
   soker1KjonnKode: Kjønnkode;
@@ -37,29 +40,25 @@ const getKjønn = (kode: string) => {
 const TimeLineSoker: React.FunctionComponent<TimeLineSokerProps> = ({
   soker1KjonnKode,
   soker2KjonnKode,
-}) => {
-  const intl = useIntl();
-  return (
-    <div className={styles.timelineSokerContatiner}>
-      <Row>
-        <Image
-          className={styles.iconHovedsoker}
-          src={getKjønn(soker1KjonnKode).src}
-          alt={intl.formatMessage({ id: 'Person.ImageText' })}
-          tooltip={intl.formatMessage({ id: getKjønn(soker1KjonnKode).title })}
-        />
-      </Row>
-      <Row>
-        <Image
-          className={styles.iconMedsoker}
-          src={getKjønn(soker2KjonnKode).src}
-          alt={intl.formatMessage({ id: 'Person.ImageText' })}
-          tooltip={intl.formatMessage({ id: getKjønn(soker2KjonnKode).title })}
-        />
-      </Row>
-    </div>
-
-  );
-};
+}) => (
+  <div className={styles.timelineSokerContatiner}>
+    <Row>
+      <Image
+        className={styles.iconHovedsoker}
+        src={getKjønn(soker1KjonnKode).src}
+        alt={intl.formatMessage({ id: 'Person.ImageText' })}
+        tooltip={intl.formatMessage({ id: getKjønn(soker1KjonnKode).title })}
+      />
+    </Row>
+    <Row>
+      <Image
+        className={styles.iconMedsoker}
+        src={getKjønn(soker2KjonnKode).src}
+        alt={intl.formatMessage({ id: 'Person.ImageText' })}
+        tooltip={intl.formatMessage({ id: getKjønn(soker2KjonnKode).title })}
+      />
+    </Row>
+  </div>
+);
 
 export default TimeLineSoker;

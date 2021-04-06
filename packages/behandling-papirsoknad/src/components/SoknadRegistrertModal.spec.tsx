@@ -1,13 +1,14 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import Modal from 'nav-frontend-modal';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import { intlMock } from '../../i18n/intl-enzyme-test-helper-behandling-papirsoknad';
 import { SoknadRegistrertModal } from './SoknadRegistrertModal';
 
 describe('<SoknadRegistrertModal>', () => {
   it('skal vise modal for registrert søknad', () => {
-    const wrapper = shallowWithIntl(<SoknadRegistrertModal
+    const wrapper = shallow(<SoknadRegistrertModal
       isOpen
       intl={intlMock}
     />);
