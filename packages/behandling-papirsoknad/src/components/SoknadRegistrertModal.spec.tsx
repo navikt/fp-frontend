@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Modal from 'nav-frontend-modal';
 
-
 import { intlMock } from '../../i18n/intl-enzyme-test-helper-behandling-papirsoknad';
 import { SoknadRegistrertModal } from './SoknadRegistrertModal';
 
