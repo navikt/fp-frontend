@@ -110,18 +110,19 @@ const config = {
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.less?$/
+          or: [/\.less?$/],
         },
         loader: 'file-loader',
         options: {
           esModule: false,
-          name: isDevelopment ? '[name]_[hash].[ext]' : '/[name]_[hash].[ext]',
+          name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
         },
         include: [IMAGE_DIR],
+        type: 'javascript/auto',
       }, {
         test: /\.(svg)$/,
         issuer: {
-          test: /\.(tsx)?$/
+          or: [/\.(tsx)?$/],
         },
         use: [{
           loader: '@svgr/webpack',
@@ -129,18 +130,20 @@ const config = {
           loader: 'file-loader',
           options: {
             esModule: false,
-            name: isDevelopment ? '[name]_[hash].[ext]' : '/[name]_[hash].[ext]',
+            name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
           },
         }],
         include: [IMAGE_DIR],
+        type: 'javascript/auto',
       },{
         test: /\.(svg)$/,
         loader: 'file-loader',
         options: {
           esModule: false,
-          name: isDevelopment ? '[name]_[hash].[ext]' : '/[name]_[hash].[ext]',
+          name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
         },
         include: [CORE_DIR],
+        type: 'javascript/auto',
       }],
   },
 
@@ -160,14 +163,13 @@ const config = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: isDevelopment ? 'style.css' : 'style_[contenthash].css',
+      filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
       ignoreOrder: true,
     }),
     new HtmlWebpackPlugin({
       filename: isDevelopment ? 'index.html' : '../index.html',
       favicon: path.join(ROOT_DIR, 'favicon.ico'),
       template: path.join(ROOT_DIR, 'index.html'),
-      version: VERSION,
     }),
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(VERSION),
@@ -177,11 +179,13 @@ const config = {
         from: LANG_DIR,
         to: PUBLIC_PATH + 'sprak/[name].[ext]',
         force: true,
-        cacheTransform: {
-          keys: {
-            key: '[hash]',
-          }
-        }
+        transform: {
+          cache: {
+            keys: {
+              key: '[contenthash]',
+            }
+          },
+        },
       }]
     }),
     new webpack.ContextReplacementPlugin(
