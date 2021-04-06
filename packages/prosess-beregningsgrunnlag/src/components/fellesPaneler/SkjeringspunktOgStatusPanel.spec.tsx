@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { DateLabel } from '@fpsak-frontend/shared-components';
@@ -35,7 +36,7 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
       alleKodeverk={{}}
     />);
 
-    const messages = wrapper.find('FormattedMessage');
+    const messages = wrapper.find(FormattedMessage);
     expect(messages).toHaveLength(1);
     expect(messages.first().props().id).toBe('Beregningsgrunnlag.Skjeringstidspunkt.SkjeringForBeregning');
     const dato = wrapper.find(DateLabel);

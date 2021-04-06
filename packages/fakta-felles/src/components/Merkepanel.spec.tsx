@@ -1,6 +1,9 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
+
 import MerkePanel from './Merkepanel';
 
 describe('<MerkePanel>', () => {
@@ -11,6 +14,6 @@ describe('<MerkePanel>', () => {
       erVerge
       diskresjonskode={diskresjonskodeType.KODE6}
     />);
-    expect(wrapper.find('FormattedMessage').prop('id')).toBe('MerkePanel.Dod');
+    expect(wrapper.find(FormattedMessage).prop('id')).toBe('MerkePanel.Dod');
   });
 });

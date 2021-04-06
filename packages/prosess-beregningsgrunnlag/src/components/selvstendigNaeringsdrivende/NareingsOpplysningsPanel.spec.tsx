@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -50,7 +51,7 @@ describe('NaeringsopplysningsPanel', () => {
       arbeidsgiverOpplysningerPerId={agOpp}
       intl={intlMock}
     />);
-    const formattedMessages = wrapper.find('FormattedMessage');
+    const formattedMessages = wrapper.find(FormattedMessage);
     expect(formattedMessages).toHaveLength(3);
     expect(formattedMessages.first().props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.Overskrift');
     expect(formattedMessages.at(1).props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.OppgittAar');

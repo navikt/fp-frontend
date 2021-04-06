@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 
 import { PeriodeSokerAktivitet } from '@fpsak-frontend/types';
@@ -49,7 +50,7 @@ describe('<UttakInfo>', () => {
     />);
     const checkboxField = wrapper.find('CheckboxField');
     expect(checkboxField).toHaveLength(2);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(3);
   });
 
@@ -67,7 +68,7 @@ describe('<UttakInfo>', () => {
     expect(wrapper.contains(
       <input type="checkbox" disabled />,
     ));
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(4);
   });
 

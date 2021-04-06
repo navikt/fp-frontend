@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import Panel from 'nav-frontend-paneler';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -53,7 +54,7 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const headerTitle = panel.find('FormattedMessage').first();
+    const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelAT = wrapper.find(AvviksopplysningerAT);
     expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
@@ -69,7 +70,7 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const headerTitle = panel.find('FormattedMessage').first();
+    const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelAT = wrapper.find(AvviksopplysningerAT);
     expect(avvikPanelAT.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
@@ -104,7 +105,7 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const headerTitle = panel.find('FormattedMessage').first();
+    const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelSN = wrapper.find(AvviksopplysningerSN);
     expect(avvikPanelSN.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
@@ -123,7 +124,7 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const headerTitle = panel.find('FormattedMessage').first();
+    const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const avvikPanelFL = wrapper.find(AvviksopplysningerFL);
     expect(avvikPanelFL.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
@@ -142,11 +143,11 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const headerTitle = panel.find('FormattedMessage').first();
+    const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(1);
-    const formatedText = rows.first().find('FormattedMessage');
+    const formatedText = rows.first().find(FormattedMessage);
     expect(formatedText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AAP');
     expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
     expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
@@ -165,11 +166,11 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const headerTitle = panel.find('FormattedMessage').first();
+    const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(1);
-    const formatedText = rows.first().find('FormattedMessage');
+    const formatedText = rows.first().find(FormattedMessage);
     expect(formatedText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.Dagpenger');
     expect(wrapper.find('AvviksopplysningerAT')).toHaveLength(0);
     expect(wrapper.find('AvviksopplysningerSN')).toHaveLength(0);
@@ -188,7 +189,7 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning={false}
     />);
     const panel = wrapper.find(Panel);
-    const formatedText = panel.find('FormattedMessage');
+    const formatedText = panel.find(FormattedMessage);
     const headerTitle = formatedText.first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     expect(formatedText.last().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.Miletar');
@@ -209,7 +210,7 @@ describe('<Avviksopplysninger>', () => {
       gjelderBesteberegning
     />);
     const panel = wrapper.find(Panel);
-    const formatedText = panel.find('FormattedMessage');
+    const formatedText = panel.find(FormattedMessage);
     const headerTitle = formatedText.first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
     expect(formatedText.last().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.Besteberegning');

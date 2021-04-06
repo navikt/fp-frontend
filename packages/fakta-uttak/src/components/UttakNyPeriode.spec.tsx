@@ -1,13 +1,15 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import sinon from 'sinon';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import {
   CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import { FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
-
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import sinon from 'sinon';
+
 import { NyPeriode, UttakNyPeriode } from './UttakNyPeriode';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
@@ -94,7 +96,7 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
 
-    const title = wrapper.find('FormattedMessage').first();
+    const title = wrapper.find(FormattedMessage).first();
     expect(title.prop('id')).toBe('UttakInfoPanel.NyPeriode');
 
     const periodpicker = wrapper.find(PeriodpickerField);
@@ -114,14 +116,14 @@ describe('<UttakNyPeriode>', () => {
     expect(okKnapp.prop('mini')).toBe(true);
     expect(okKnapp.prop('htmlType')).toEqual('button');
     expect(okKnapp.prop('onClick')).toEqual(reduxFormPropsMock.handleSubmit);
-    expect(okKnapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Oppdater');
+    expect(okKnapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Oppdater');
 
     const avbrytKnapp = wrapper.find(Knapp);
     expect(avbrytKnapp).toHaveLength(1);
     expect(avbrytKnapp.prop('mini')).toBe(true);
 
     expect(avbrytKnapp.prop('onClick')).toEqual(newPeriodeResetCallback);
-    expect(avbrytKnapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Avbryt');
+    expect(avbrytKnapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Avbryt');
   });
 
   it('Skal regne ut og vise antall dager i valgt periode', () => {
@@ -147,7 +149,7 @@ describe('<UttakNyPeriode>', () => {
       {...reduxFormPropsMock}
     />);
 
-    const weeksAndDays = wrapper.find('FormattedMessage').at(1);
+    const weeksAndDays = wrapper.find(FormattedMessage).at(1);
     expect(weeksAndDays.prop('id')).toEqual('UttakInfoPanel.AntallFlereDagerOgFlereUker');
     expect(weeksAndDays.prop('values')).toEqual({
       weeks: '4',

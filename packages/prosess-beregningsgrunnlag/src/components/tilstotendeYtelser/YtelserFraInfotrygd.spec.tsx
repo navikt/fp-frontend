@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import YtelserFraInfotrygd from './YtelserFraInfotrygd';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
@@ -10,7 +11,7 @@ describe('<YtelserFraInfotrygd>', () => {
       bruttoPrAar={brutto}
     />);
 
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
 
     expect(formattedMessage).toHaveLength(4);
     expect(formattedMessage.at(0).prop('id')).toBe('Beregningsgrunnlag.YtelserFraInfotrygd.Ytelse2');

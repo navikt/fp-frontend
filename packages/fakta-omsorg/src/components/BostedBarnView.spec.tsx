@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 
 import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
@@ -41,9 +42,9 @@ describe('<BostedBarnView>', () => {
     />);
     const undertekst = wrapper.find('Undertekst');
     const barnNr = undertekst.first();
-    expect(barnNr.find('FormattedMessage').prop('id')).toBe('BostedBarnView.Barn');
+    expect(barnNr.find(FormattedMessage).prop('id')).toBe('BostedBarnView.Barn');
     // @ts-ignore Fiks
-    expect(barnNr.find('FormattedMessage').prop('values').barnNr).toBe(3);
+    expect(barnNr.find(FormattedMessage).prop('values').barnNr).toBe(3);
   });
 
   it('skal vise navn', () => {
@@ -62,9 +63,9 @@ describe('<BostedBarnView>', () => {
     const normalTekst = wrapper.find('Normaltekst');
     expect(normalTekst).toHaveLength(2);
     const fodselsWrapper = normalTekst.first();
-    expect(fodselsWrapper.find('FormattedMessage').prop('id')).toEqual('BostedBarnView.Age');
+    expect(fodselsWrapper.find(FormattedMessage).prop('id')).toEqual('BostedBarnView.Age');
     // @ts-ignore Fiks
-    expect(fodselsWrapper.find('FormattedMessage').prop('values').fodselsdato).toEqual('03.02.2016');
+    expect(fodselsWrapper.find(FormattedMessage).prop('values').fodselsdato).toEqual('03.02.2016');
   });
 
   it('skal vise adresse', () => {

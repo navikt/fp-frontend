@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { UttakStonadskontoer, Stonadskonto } from '@fpsak-frontend/types';
 
@@ -48,7 +49,7 @@ describe('<TimeLineInfo>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
 
-    const messages = wrapper.find('FormattedMessage');
+    const messages = wrapper.find(FormattedMessage);
     expect(messages).toHaveLength(3);
     // @ts-ignore
     expect(messages.at(1).props().values.ukerVerdi).toBe(24);
@@ -84,7 +85,7 @@ describe('<TimeLineInfo>', () => {
     };
 
     wrapper.setState({ aktiv: 1, visKonto: konto });
-    const messages = wrapper.find('FormattedMessage');
+    const messages = wrapper.find(FormattedMessage);
     expect(messages).toHaveLength(3);
     // @ts-ignore
     expect(messages.at(2).prop('values').dato).toBe('01.12.2018');

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { TidsbegrensetArbeidsforholdForm } from './TidsbegrensetArbeidsforholdForm';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
@@ -57,7 +58,7 @@ describe('<TidsbegrensetArbeidsforholdForm>', () => {
       isAksjonspunktClosed={false}
       arbeidsgiverOpplysningerPerId={agOpplysning}
     />);
-    const message = wrapper.find('FormattedMessage');
+    const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(2);
     expect(message.first().prop('id')).toBe('BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold');
     expect(message.first().prop('values')).toEqual({

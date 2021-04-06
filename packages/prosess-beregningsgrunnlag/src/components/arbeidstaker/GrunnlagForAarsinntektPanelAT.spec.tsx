@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -133,7 +134,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     rowNr += 1;
     const mndSum = rows.at(rowNr).find('Normaltekst');
     const aarSum = rows.at(rowNr).find('Element');
-    const ledetextSum = rows.at(rowNr).find('FormattedMessage');
+    const ledetextSum = rows.at(rowNr).find(FormattedMessage);
     const beregnetAarsinntekt = andeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
     const beregnetMaanedsinntekt = beregnetAarsinntekt / 12;
     expect(ledetextSum.get(0).props.id).toBe('Beregningsgrunnlag.AarsinntektPanel.TotaltArbeidsinntekt');
