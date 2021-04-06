@@ -6,7 +6,7 @@ import {
   BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
   useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
 } from '@fpsak-frontend/behandling-felles';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Kodeverk } from '@fpsak-frontend/types';
 
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
 import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';

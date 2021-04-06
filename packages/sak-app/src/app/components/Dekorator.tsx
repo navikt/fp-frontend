@@ -4,7 +4,6 @@ import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import HeaderWithErrorPanel, { Feilmelding } from '@fpsak-frontend/sak-dekorator';
 import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import ErrorFormatter from '../feilhandtering/ErrorFormatter';

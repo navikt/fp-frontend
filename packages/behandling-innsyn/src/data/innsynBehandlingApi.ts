@@ -1,6 +1,8 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import { Aksjonspunkt, Behandling, Dokument, Innsyn, Kodeverk } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, Dokument, Innsyn, Kodeverk,
+} from '@fpsak-frontend/types';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
 export const InnsynBehandlingApiKeys = {

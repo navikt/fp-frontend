@@ -5,9 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import {
-  NavAnsatt, Fagsak, KlageVurdering, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
-} from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
