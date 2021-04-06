@@ -63,6 +63,7 @@
     "@storybook/addon-docs": "^6.2.3",
     "@storybook/addon-knobs": "^6.2.3",
     "@storybook/addons": "^6.2.3",
+    "@storybook/builder-webpack5": "^6.2.3",
     "@storybook/cli": "^6.2.3",
     "@storybook/react": "^6.2.3",
     "@storybook/addon-storyshots": "^6.2.3",
