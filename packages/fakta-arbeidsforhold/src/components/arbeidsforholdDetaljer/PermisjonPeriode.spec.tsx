@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 
@@ -12,7 +13,7 @@ describe('<PermisjonPeriode>', () => {
         permisjoner: undefined,
       } as Arbeidsforhold}
     />);
-    expect(wrapper.find('FormattedMessage')).toHaveLength(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
     expect(wrapper.find('PeriodLabel')).toHaveLength(0);
   });
   it('skal ikke vise permisjon når arbeidsforholdet en tom liste med permisjoner', () => {
@@ -21,7 +22,7 @@ describe('<PermisjonPeriode>', () => {
         permisjoner: [],
       } as Arbeidsforhold}
     />);
-    expect(wrapper.find('FormattedMessage')).toHaveLength(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
     expect(wrapper.find('PeriodLabel')).toHaveLength(0);
   });
   it('skal vise permisjon når arbeidsforholdet har kun en permisjon', () => {
@@ -36,7 +37,7 @@ describe('<PermisjonPeriode>', () => {
         ],
       } as Arbeidsforhold}
     />);
-    const msg = wrapper.find('FormattedMessage');
+    const msg = wrapper.find(FormattedMessage);
     expect(msg).toHaveLength(1);
     expect(msg.props().id).toEqual('PersonArbeidsforholdDetailForm.Permisjon');
     const periode = wrapper.find('PeriodLabel');
@@ -63,7 +64,7 @@ describe('<PermisjonPeriode>', () => {
         ],
       } as Arbeidsforhold}
     />);
-    const msg = wrapper.find('FormattedMessage');
+    const msg = wrapper.find(FormattedMessage);
     expect(msg).toHaveLength(1);
     expect(msg.prop('id')).toEqual('PersonArbeidsforholdDetailForm.Permisjoner');
     const perioder = wrapper.find('PeriodLabel');

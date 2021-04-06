@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
 
 import FagsakSearch from './FagsakSearch';
 import FagsakList from './FagsakList';
@@ -54,7 +55,7 @@ describe('<FagsakSearch>', () => {
     expect(wrapper.find(SearchForm)).toHaveLength(1);
     const labelComp = wrapper.find('Normaltekst');
     expect(labelComp).toHaveLength(1);
-    expect(labelComp.find('FormattedMessage').prop('id')).toEqual('FagsakSearch.ZeroSearchResults');
+    expect(labelComp.find(FormattedMessage).prop('id')).toEqual('FagsakSearch.ZeroSearchResults');
   });
 
   it('skal vise søkefelt og søketreff der to fagsaker blir vist', () => {

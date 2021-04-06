@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -48,7 +49,7 @@ describe('<GrunnlagForAarsinntektPanelSN>', () => {
       alleAndeler={[andel]}
     />);
     const rows = wrapper.find('Row');
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage.first().prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.Pensjonsgivendeinntekt');
     expect(formattedMessage.at(1).prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.SN.sisteTreAar');
     expect(formattedMessage.at(2).prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.AarHeader');
@@ -61,7 +62,7 @@ describe('<GrunnlagForAarsinntektPanelSN>', () => {
       expect(etikettLiten.at(0).childAt(0).text()).toBe(expectedAar);
       expect(etikettLiten.at(1).childAt(0).text()).toBe(expectedBelop);
     });
-    const resultMessage = rows.at(6).find('FormattedMessage');
+    const resultMessage = rows.at(6).find(FormattedMessage);
     expect(resultMessage.first().prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.SnittPensjonsGivende');
     const resultSnitt = rows.at(6).find('Element');
     const expectedSnitt = formatCurrencyNoKr(andel.pgiSnitt);

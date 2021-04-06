@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -24,7 +25,7 @@ describe('<VedtakKlageSubmitPanel>', () => {
     expect(hovedknapp.childAt(0).text()).toEqual('Til godkjenning');
     const a = wrapper.find('a');
     expect(a).toHaveLength(1);
-    expect(wrapper.find('FormattedMessage').first().prop('id')).toEqual('VedtakKlageForm.ForhandvisBrev');
+    expect(wrapper.find(FormattedMessage).first().prop('id')).toEqual('VedtakKlageForm.ForhandvisBrev');
   });
 
   it('skal rendre submit panel med behandling på vent', () => {

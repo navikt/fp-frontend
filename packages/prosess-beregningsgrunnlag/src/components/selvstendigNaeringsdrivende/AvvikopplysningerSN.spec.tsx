@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -43,7 +44,7 @@ describe('<AvviksopplysningerSN>', () => {
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
-    const omregnetAarsinntektText = rows.first().find('FormattedMessage');
+    const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.SN.NyIArbeidslivet');
   });
   it('Skal teste komponenten ved !erVarigEndring && !erNyoppstartet', () => {
@@ -58,7 +59,7 @@ describe('<AvviksopplysningerSN>', () => {
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
-    const omregnetAarsinntektText = rows.first().find('FormattedMessage');
+    const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.SN.IkkeVarigEndring');
   });
   it('Skal teste at komponenten render avvikstabell', () => {

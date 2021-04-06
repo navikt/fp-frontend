@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { FeriepengegrunnlagAndel } from '@fpsak-frontend/types';
 import { shallow } from 'enzyme';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
@@ -45,7 +46,7 @@ describe('<FeriepengerPrAar>', () => {
       alleAndeler={[andelArbeidsgiver, andelSøker, andelArbeidsgiverFeilÅr]}
     />);
 
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
     expect(formattedMessage.prop('id')).toEqual('TilkjentYtelse.Feriepenger.Opptjeningsår');
     const table = wrapper.find(Table);
@@ -71,7 +72,7 @@ describe('<FeriepengerPrAar>', () => {
       alleAndeler={[andelArbeidsgiverPrivat]}
     />);
 
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
     expect(formattedMessage.prop('id')).toEqual('TilkjentYtelse.Feriepenger.Opptjeningsår');
     const table = wrapper.find(Table);

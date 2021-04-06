@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
@@ -35,7 +36,7 @@ describe('<AvviksopplysningerFL>', () => {
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows.length).toBe(1);
-    const text = rows.first().find('FormattedMessage');
+    const text = rows.first().find(FormattedMessage);
     expect(text.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.FL.KobinasjonsStatusFLSN');
   });
 

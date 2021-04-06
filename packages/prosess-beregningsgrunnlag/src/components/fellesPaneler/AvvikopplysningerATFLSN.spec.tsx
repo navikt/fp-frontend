@@ -38,17 +38,17 @@ describe('<AvviksOpplysningerATFLSN>', () => {
 
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(4);
-    const omregnetAarsinntektText = rows.first().find('FormattedMessage');
+    const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Frilans');
     const omregnetAarsinntektVerdi = rows.first().find('Normaltekst');
     expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
 
-    const rapportertAarsinntektText = rows.at(1).find('FormattedMessage');
+    const rapportertAarsinntektText = rows.at(1).find(FormattedMessage);
     expect(rapportertAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt.Frilans');
     const rapportertAarsinntektVerdi = rows.at(1).find('Normaltekst');
     expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(sammenligningsgrunnlagSum));
 
-    const avvikText = rows.at(3).find('FormattedMessage');
+    const avvikText = rows.at(3).find(FormattedMessage);
     expect(avvikText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Frilans');
     const avvikVerdi = rows.at(3).find('Normaltekst');
     expect(avvikVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
@@ -76,17 +76,17 @@ describe('<AvviksOpplysningerATFLSN>', () => {
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(4);
-    const omregnetAarsinntektText = rows.first().find('FormattedMessage');
+    const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Arbeid');
     const omregnetAarsinntektVerdi = rows.first().find('Normaltekst');
     expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
 
-    const rapportertAarsinntektText = rows.at(1).find('FormattedMessage');
+    const rapportertAarsinntektText = rows.at(1).find(FormattedMessage);
     expect(rapportertAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt.Arbeid');
     const rapportertAarsinntektVerdi = rows.at(1).find('Normaltekst');
     expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(sammenligningsgrunnlagSum));
 
-    const avvikText = rows.at(3).find('FormattedMessage');
+    const avvikText = rows.at(3).find(FormattedMessage);
     expect(avvikText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik.Arbeid');
     const avvikVerdi = rows.at(3).find('Normaltekst');
     expect(avvikVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));
@@ -117,17 +117,17 @@ describe('<AvviksOpplysningerATFLSN>', () => {
 
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(4);
-    const omregnetAarsinntektText = rows.first().find('FormattedMessage');
+    const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt');
     const omregnetAarsinntektVerdi = rows.first().find('Normaltekst');
     expect(omregnetAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(beregnetAarsinntekt));
 
-    const rapportertAarsinntektText = rows.at(1).find('FormattedMessage');
+    const rapportertAarsinntektText = rows.at(1).find(FormattedMessage);
     expect(rapportertAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.RapportertAarsinntekt');
     const rapportertAarsinntektVerdi = rows.at(1).find('Normaltekst');
     expect(rapportertAarsinntektVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(sammenligningsgrunnlagSum));
 
-    const avvikText = rows.at(3).find('FormattedMessage');
+    const avvikText = rows.at(3).find(FormattedMessage);
     expect(avvikText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.BeregnetAvvik');
     const avvikVerdi = rows.at(3).find('Normaltekst');
     expect(avvikVerdi.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((sammenligningsgrunnlagPrStatus.differanseBeregnet)));

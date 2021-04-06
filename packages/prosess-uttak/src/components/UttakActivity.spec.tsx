@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -123,7 +124,7 @@ describe('<UttakActivity>', () => {
     expect(row).toHaveLength(2);
     const column = wrapper.find('Column');
     expect(column).toHaveLength(1);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(2);
   });
 

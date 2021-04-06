@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
@@ -28,7 +29,7 @@ describe('<AvviksopplysningerAT>', () => {
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
-    const infoText = rows.first().find('FormattedMessage');
+    const infoText = rows.first().find(FormattedMessage);
     expect(infoText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AT.KobinasjonsStatusATSN');
   });
   it('Skal teste tabellen får korrekte rader med innhold når kombinasjonsstatus=KOMBINERT_AT_FL_SN', () => {
@@ -42,7 +43,7 @@ describe('<AvviksopplysningerAT>', () => {
     />);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
-    const infoText = rows.first().find('FormattedMessage');
+    const infoText = rows.first().find(FormattedMessage);
     expect(infoText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AT.KobinasjonsStatusATFLSN');
   });
   it('Skal teste at avvikoplysningerATFLSN rendres', () => {

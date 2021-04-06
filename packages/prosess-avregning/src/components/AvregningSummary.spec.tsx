@@ -1,5 +1,7 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
+
 import AvregningSummary from './AvregningSummary';
 
 describe('<AvregningSummary>', () => {
@@ -39,7 +41,7 @@ describe('<AvregningSummary>', () => {
       {...props}
     />);
 
-    const message = wrapper.find('FormattedMessage');
+    const message = wrapper.find(FormattedMessage);
     expect(message.at(0).prop('id')).toEqual('Avregning.bruker');
     expect(message.at(1).prop('id')).toEqual('Avregning.ingenPerioder');
   });

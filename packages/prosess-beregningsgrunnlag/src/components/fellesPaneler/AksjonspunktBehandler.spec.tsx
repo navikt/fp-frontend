@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -70,7 +71,7 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
     expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
@@ -104,7 +105,7 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
     expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
@@ -139,7 +140,7 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
     expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
@@ -174,7 +175,7 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
+    expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
     expect(rows.at(1).find('TextAreaField').first().props().readOnly).toBe(readOnly);
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
@@ -226,7 +227,7 @@ describe('<UnwrappedForm>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const rows = wrapper.find('Row');
-    expect(rows.first().find('FormattedMessage').first().props().id).toBe(
+    expect(rows.first().find(FormattedMessage).first().props().id).toBe(
       'Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet',
     );
     const aksjonspunktBehandlerAT = wrapper.find('AksjonspunktBehandlerAT');
