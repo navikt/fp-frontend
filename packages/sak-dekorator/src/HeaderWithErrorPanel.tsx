@@ -8,10 +8,13 @@ import Popover from '@navikt/nap-popover';
 import SystemButton from '@navikt/nap-system-button';
 import UserPanel from '@navikt/nap-user-panel';
 
+import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
 import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg';
 import systemrutineIkonUrl from '@fpsak-frontend/assets/images/rutine.svg';
 
+import ErrorFormatter, { InputErrorMessage } from './feilhandtering/ErrorFormatter';
+import ErrorMessage from './feilhandtering/ErrorMessage';
 import ErrorMessagePanel from './ErrorMessagePanel';
 import Feilmelding from './feilmeldingTsType';
 
@@ -25,6 +28,11 @@ const intl = createIntl({
   locale: 'nb-NO',
   messages,
 }, cache);
+
+export type QueryStrings = {
+  errorcode?: string;
+  errormessage?: string;
+};
 
 const useOutsideClickEvent = (erLenkepanelApent: boolean, setLenkePanelApent: (erApent: boolean) => void): RefObject<HTMLDivElement> => {
   const wrapperRef = useRef(null);
@@ -48,11 +56,40 @@ const useOutsideClickEvent = (erLenkepanelApent: boolean, setLenkePanelApent: (e
   return wrapperRef;
 };
 
+const lagFeilmeldinger = (errorMessages: ErrorMessage[], queryStrings: QueryStrings): Feilmelding[] => {
+  const resolvedErrorMessages: Feilmelding[] = [];
+  if (queryStrings.errorcode) {
+    resolvedErrorMessages.push({ message: intl.formatMessage({ id: queryStrings.errorcode }) });
+  }
+  if (queryStrings.errormessage) {
+    resolvedErrorMessages.push({ message: queryStrings.errormessage });
+  }
+  errorMessages.forEach((message) => {
+    let msg = {
+      message: (message.code ? intl.formatMessage({ id: message.code }, message.params) : message.text),
+      additionalInfo: undefined,
+    };
+    if (message.params && message.params.errorDetails) {
+      msg = {
+        ...msg,
+        additionalInfo: JSON.parse(decodeHtmlEntity(message.params.errorDetails)),
+      };
+    }
+    resolvedErrorMessages.push(msg);
+  });
+  return resolvedErrorMessages;
+};
+
+const EMPTY_ARRAY = [];
+
 interface OwnProps {
   navAnsattName?: string;
   removeErrorMessage: () => void;
-  errorMessages?: Feilmelding[];
+  errorMessages?: InputErrorMessage[];
   setSiteHeight: (height: number) => void;
+  hideErrorMessages: boolean;
+  queryStrings: QueryStrings;
+  crashMessage?: string;
 }
 
 /**
@@ -66,15 +103,24 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
   navAnsattName = '',
   removeErrorMessage,
   errorMessages = [],
+  hideErrorMessages,
   setSiteHeight,
+  queryStrings,
+  crashMessage,
 }) => {
+  const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, crashMessage), [errorMessages]);
+
+  const resolvedErrorMessages = useMemo(() => lagFeilmeldinger(formaterteFeilmeldinger, queryStrings), [formaterteFeilmeldinger, queryStrings]);
+
+  const feilmeldinger = hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages;
+
   const [erLenkepanelApent, setLenkePanelApent] = useState(false);
   const wrapperRef = useOutsideClickEvent(erLenkepanelApent, setLenkePanelApent);
 
   const fixedHeaderRef = useRef<any>();
   useEffect(() => {
     setSiteHeight(fixedHeaderRef.current.clientHeight);
-  }, [errorMessages.length]);
+  }, [feilmeldinger.length]);
 
   const iconLinks = useMemo(() => [{
     url: RETTSKILDE_URL,
@@ -133,7 +179,7 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
         </div>
         <ErrorMessagePanel
           removeErrorMessage={removeErrorMessage}
-          errorMessages={errorMessages}
+          errorMessages={feilmeldinger}
         />
       </RawIntlProvider>
     </header>

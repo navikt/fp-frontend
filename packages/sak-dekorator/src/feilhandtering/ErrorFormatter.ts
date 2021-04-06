@@ -7,7 +7,7 @@ import ErrorMessage from './ErrorMessage';
 const defaultFormatter = new DefaultFormatter();
 const formatters = [new RestTimeoutFormatter(), new RestHaltedOrDelayedFormatter(), new RestGatewayTimeoutOrNotFoundFormatter(), defaultFormatter];
 
-type InputErrorMessage = ErrorDataDefault | ErrorDataRestDefault | ErrorDataHaltedOrDelayed | ErrorDataTimeoutOrNotFound;
+export type InputErrorMessage = ErrorDataDefault | ErrorDataRestDefault | ErrorDataHaltedOrDelayed | ErrorDataTimeoutOrNotFound;
 
 class ErrorFormatter {
   format = (errorMessages: InputErrorMessage[], crashMessage?: string): ErrorMessage[] => {

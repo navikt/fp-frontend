@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
 import * as useRestApiError from '@fpsak-frontend/rest-api-hooks/src/error/useRestApiError';
@@ -32,8 +32,7 @@ describe('<Dekorator>', () => {
   it('skal vise søkeskjermbildet, men ikke systemstatuser', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
 
-    const wrapper = shallowWithIntl(<Dekorator.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<Dekorator
       queryStrings={{}}
       setSiteHeight={sinon.spy()}
     />);
@@ -49,15 +48,14 @@ describe('<Dekorator>', () => {
       feilmelding: 'Dette er en feilmelding',
     }]);
 
-    const wrapper = shallowWithIntl(<Dekorator.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<Dekorator
       queryStrings={{}}
       setSiteHeight={sinon.spy()}
     />);
     const header = wrapper.find(HeaderWithErrorPanel);
     expect(header.prop('errorMessages')).toEqual([{
-      message: 'Dette er en feilmelding',
-      additionalInfo: undefined,
+      type: EventType.REQUEST_ERROR,
+      feilmelding: 'Dette er en feilmelding',
     }]);
   });
 });
