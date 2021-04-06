@@ -1,5 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
+
 import { Image } from '@fpsak-frontend/shared-components';
 import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Kodeverk } from '@fpsak-frontend/types';
@@ -101,6 +103,6 @@ describe('<UttakPeriodeType>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
-    expect(wrapper.find('FormattedMessage').last().prop('id')).toEqual('UttakInfoPanel.Frilans');
+    expect(wrapper.find(FormattedMessage).last().prop('id')).toEqual('UttakInfoPanel.Frilans');
   });
 });

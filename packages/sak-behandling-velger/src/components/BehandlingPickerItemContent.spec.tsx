@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 import Panel from 'nav-frontend-paneler';
 
 import { DateLabel } from '@fpsak-frontend/shared-components';
@@ -61,7 +62,7 @@ describe('<BehandlingPickerItemContent>', () => {
       erGjeldendeVedtak={false}
     />);
 
-    const formattedMessages = wrapper.find('FormattedMessage');
+    const formattedMessages = wrapper.find(FormattedMessage);
     expect(formattedMessages.first().prop('id')).toEqual('Behandlingspunkt.Årsak.Annet');
   });
 });

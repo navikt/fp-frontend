@@ -1,6 +1,8 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
+
 import Faresignaler from './Faresignaler';
 
 const mockRisikoklassifisering = (medlSignaler, iaySignaler) => ({
@@ -21,7 +23,7 @@ describe('<Faresignaler>', () => {
     const wrapper = shallow(<Faresignaler
       risikoklassifisering={mockRisikoklassifisering(['Dette er en grunn', 'Dette er en annen grunn'], undefined)}
     />);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
     expect(formattedMessage.prop('id')).toEqual('Risikopanel.Panel.Medlemskap');
 
@@ -35,7 +37,7 @@ describe('<Faresignaler>', () => {
     const wrapper = shallow(<Faresignaler
       risikoklassifisering={mockRisikoklassifisering(undefined, ['Dette er en grunn', 'Dette er en annen grunn'])}
     />);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
     expect(formattedMessage.prop('id')).toEqual('Risikopanel.Panel.ArbeidsforholdInntekt');
 
@@ -49,7 +51,7 @@ describe('<Faresignaler>', () => {
     const wrapper = shallow(<Faresignaler
       risikoklassifisering={mockRisikoklassifisering(['Grunn 1', 'Grunn 2'], ['Grunn 3', 'Grunn 4'])}
     />);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(2);
 
     const normaltekst = wrapper.find(Normaltekst);

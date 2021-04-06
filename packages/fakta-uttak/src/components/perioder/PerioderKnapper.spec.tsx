@@ -1,6 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
+
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+
 import { PerioderKnapper } from './PerioderKnapper';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
@@ -55,7 +58,7 @@ describe('<PerioderKnapper>', () => {
 
     const knapp = wrapper.find('Knapp');
     expect(knapp).toHaveLength(1);
-    expect(knapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Nullstill');
+    expect(knapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Nullstill');
   });
 
   it('skal vise avbryt knappen når bekreftet er true', () => {
@@ -72,7 +75,7 @@ describe('<PerioderKnapper>', () => {
 
     const knapp = wrapper.find('Knapp');
     expect(knapp).toHaveLength(1);
-    expect(knapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Avbryt');
+    expect(knapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Avbryt');
   });
 
   it('skal vise avbryt knappen når bekreftet er false og updated er true', () => {
@@ -89,6 +92,6 @@ describe('<PerioderKnapper>', () => {
 
     const knapp = wrapper.find('Knapp');
     expect(knapp).toHaveLength(1);
-    expect(knapp.find('FormattedMessage').prop('id')).toBe('UttakInfoPanel.Avbryt');
+    expect(knapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Avbryt');
   });
 });

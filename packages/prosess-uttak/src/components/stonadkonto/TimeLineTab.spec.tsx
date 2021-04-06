@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import { FormattedMessage } from 'react-intl';
 
 import { Stonadskonto } from '@fpsak-frontend/types';
 
@@ -21,13 +22,13 @@ describe('<TimeLineTab>', () => {
       stonadskonto={stonadskonto}
     />);
 
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage.at(0).props().id).toBe('TimeLineTab.Stonadinfo.ForeldrepengerFF');
 
-    const FormattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage2 = wrapper.find(FormattedMessage);
     // @ts-ignore
-    expect(FormattedMessage.at(1).props().values.ukerVerdi).toBe(6);
+    expect(formattedMessage2.at(1).props().values.ukerVerdi).toBe(6);
     // @ts-ignore
-    expect(FormattedMessage.at(1).props().values.dagerVerdi).toBe(0);
+    expect(formattedMessage2.at(1).props().values.dagerVerdi).toBe(0);
   });
 });

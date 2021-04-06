@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -52,7 +53,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         {...reduxFormPropsMock}
       />,
     );
-    const apMsg = wrapper.find('FormattedMessage');
+    const apMsg = wrapper.find(FormattedMessage);
     expect(apMsg).toHaveLength(1);
     expect(apMsg.props().id).toEqual('ArbeidsforholdInfoPanel.AvklarArbeidsforhold');
     expect(wrapper.find(PersonArbeidsforholdPanel)).toHaveLength(1);
@@ -76,7 +77,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         {...reduxFormPropsMock}
       />,
     );
-    const apMsg = wrapper.find('FormattedMessage');
+    const apMsg = wrapper.find(FormattedMessage);
     expect(apMsg).toHaveLength(1);
     expect(apMsg.props().id).toEqual('ArbeidsforholdInfoPanel.IngenArbeidsforholdRegistrert');
     expect(wrapper.find(PersonArbeidsforholdPanel)).toHaveLength(1);

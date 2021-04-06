@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { FormattedMessage } from 'react-intl';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+
 import GrunnlagForAarsinntektPanelFL from './GrunnlagForAarsinntektPanelFL';
 
 const andel = {
@@ -28,7 +30,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
 
     expect(rows).toHaveLength(2);
 
-    const ledeText = rows.at(1).find('FormattedMessage');
+    const ledeText = rows.at(1).find(FormattedMessage);
     const mndAndelFL = rows.at(1).find('Normaltekst');
     const aarAndelFL = rows.at(1).find('Element');
     expect(ledeText.get(0).props.id).toBe('Beregningsgrunnlag.AarsinntektPanel.InnrapportertFrilans');
@@ -41,14 +43,14 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
       alleAndeler={[andel]}
     />);
     const rows = wrapper.find('Row');
-    const ledeTextStart = rows.at(0).find('FormattedMessage');
+    const ledeTextStart = rows.at(0).find(FormattedMessage);
     const ledeTextStartDato = rows.at(0).find('DateLabel');
 
     expect(rows).toHaveLength(3);
     expect(ledeTextStart.get(0).props.id).toBe('Beregningsgrunnlag.AarsinntektPanel.FrilansStartDato2');
     expect(ledeTextStartDato.get(0).props.dateString).toBe('12.12.2011');
 
-    const ledeText = rows.at(2).find('FormattedMessage');
+    const ledeText = rows.at(2).find(FormattedMessage);
     const mndAndelFL = rows.at(2).find('Normaltekst');
     const aarAndelFL = rows.at(2).find('Element');
 

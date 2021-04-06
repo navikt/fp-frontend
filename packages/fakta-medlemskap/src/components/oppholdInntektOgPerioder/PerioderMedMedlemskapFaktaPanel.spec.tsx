@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -88,7 +89,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       alleKodeverk={{}}
     />);
 
-    const message = wrapper.find('FormattedMessage');
+    const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
     expect(message.prop('id')).toEqual('PerioderMedMedlemskapFaktaPanel.Fodselsdato');
     expect(message.prop('values')).toEqual({ dato: '16.10.2016' });
@@ -117,7 +118,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       alleKodeverk={{}}
     />);
 
-    const message = wrapper.find('FormattedMessage');
+    const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
     expect(message.prop('id')).toEqual('PerioderMedMedlemskapFaktaPanel.Termindato');
     expect(message.prop('values')).toEqual({ dato: '16.10.2016' });
@@ -146,7 +147,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       alleKodeverk={{}}
     />);
 
-    const message = wrapper.find('FormattedMessage');
+    const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
     expect(message.prop('id')).toEqual('PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse');
     expect(message.prop('values')).toEqual({ dato: '16.10.2016' });

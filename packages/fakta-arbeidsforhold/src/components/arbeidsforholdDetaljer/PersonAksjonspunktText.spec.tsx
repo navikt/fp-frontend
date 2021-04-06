@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
@@ -33,7 +34,7 @@ describe('<PersonAksjonspunktText>', () => {
       arbeidsforhold={undefined}
       alleKodeverk={alleKodeverk}
     />);
-    expect(wrapper.find('FormattedMessage')).toHaveLength(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
   });
 
   it('skal ikke vise hjelpetekst når arbeidsforholdet ikke skal vurderes', () => {
@@ -44,7 +45,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    expect(wrapper.find('FormattedMessage')).toHaveLength(0);
+    expect(wrapper.find(FormattedMessage)).toHaveLength(0);
   });
 
   it('skal vise hjelpetekst når det ikke er mottatt inntekstmelding for arbeidsforholdet', () => {
@@ -55,7 +56,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarManglendeInntektsmelding');
   });
 
@@ -71,7 +72,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarErstatteTidligere');
   });
 
@@ -85,7 +86,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarErstatteAlle');
   });
 
@@ -101,7 +102,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.AvklarIkkeRegistrertIAa');
   });
 
@@ -117,7 +118,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(Object.keys(component)).toHaveLength(0);
   });
 
@@ -134,7 +135,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.LeggTilArbeidsforhold');
   });
 
@@ -157,7 +158,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.SokerHarPermisjonOgIkkeMottattIM');
     // @ts-ignore
     expect(component.props().values.permisjonFom).toEqual('01.10.2018');
@@ -184,7 +185,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.SokerHarPermisjonOgMottattIM');
     // @ts-ignore
     expect(component.props().values.permisjonFom).toEqual('01.10.2018');
@@ -221,7 +222,7 @@ describe('<PersonAksjonspunktText>', () => {
       } as Arbeidsforhold}
       alleKodeverk={alleKodeverk}
     />);
-    const component = wrapper.find('FormattedMessage');
+    const component = wrapper.find(FormattedMessage);
     expect(component.props().id).toEqual('PersonAksjonspunktText.SokerHarFlerePermisjoner');
     expect(component.props().values).toBeUndefined();
   });

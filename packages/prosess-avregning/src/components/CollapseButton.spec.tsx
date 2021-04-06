@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
+
 import CollapseButton from './CollapseButton';
 
 describe('<CollapseButton>', () => {
@@ -19,7 +21,7 @@ describe('<CollapseButton>', () => {
 
     const button = wrapper.find('button');
     expect(button).toHaveLength(1);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
     expect(formattedMessage.prop('id')).toEqual('Avregning.headerText.VisFærreDetaljer');
     const oppChevron = wrapper.find('OppChevron');
@@ -37,7 +39,7 @@ describe('<CollapseButton>', () => {
 
     const button = wrapper.find('button');
     expect(button).toHaveLength(1);
-    const formattedMessage = wrapper.find('FormattedMessage');
+    const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
     expect(formattedMessage.prop('id')).toEqual('Avregning.headerText.VisFlereDetaljer');
     const nedChevron = wrapper.find('NedChevron');
