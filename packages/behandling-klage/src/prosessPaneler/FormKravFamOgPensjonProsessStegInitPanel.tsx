@@ -11,9 +11,12 @@ import {
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP];
 
@@ -54,7 +57,7 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.FormkravKlageNFP' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageNFP' })}
       skalPanelVisesIMeny={() => true}
       renderPanel={(data) => (
         <FormkravProsessIndex

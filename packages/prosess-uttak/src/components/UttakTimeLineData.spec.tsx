@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
 
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {
   AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto,
@@ -14,7 +14,10 @@ import { kalkulerTrekkdager, UttakTimeLineData } from './UttakTimeLineData';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 import UttakActivity from './UttakActivity';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../i18n/nb_NO.json';
 import { PeriodeMedClassName } from './Uttak';
+
+const intlMock = getIntlMock(messages);
 
 describe('<UttakTimeLineData>', () => {
   const selectedItem = {

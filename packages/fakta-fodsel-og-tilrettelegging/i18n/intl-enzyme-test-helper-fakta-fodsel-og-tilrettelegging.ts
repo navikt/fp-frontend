@@ -1,9 +1,9 @@
-import { shallowWithIntl as globalShallowWithIntl, intlWithMessages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl as globalShallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import messages from './nb_NO.json';
 
-const shallowWithIntl = (node) => globalShallowWithIntl(node, null, messages);
+const shallowWithIntl = (node) => globalShallowWithIntl(node, messages);
 
-export const intlMock = intlWithMessages(messages);
+export const intlMock = getIntlMock(messages);
 
 export default shallowWithIntl;

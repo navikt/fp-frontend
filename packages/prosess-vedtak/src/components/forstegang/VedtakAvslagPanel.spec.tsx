@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -11,6 +11,9 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 import VedtakAvslagPanel from './VedtakAvslagPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VedtakAvslagPanel>', () => {
   const sprakkode = {

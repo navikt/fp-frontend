@@ -4,18 +4,18 @@ import { FieldArrayMetaProps } from 'redux-form';
 
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { SelectField } from '@fpsak-frontend/form';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-svp';
+import messages from '../../../i18n/nb_NO.json';
 import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';
 
 describe('<TilretteleggingForArbeidsgiverFieldArray>', () => {
   it('skal rendre komponent korrekt', () => {
     const getRemoveButton = () => undefined;
     const fields = new MockFieldsWithContent('tilrettelegging', [{ tilretteleggingType: 1 }, { tilretteleggingType: 2 }]);
-    const wrapper = shallowWithIntl(<BehovForTilrettteleggingFieldArray.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<BehovForTilrettteleggingFieldArray.WrappedComponent
+      intl={getIntlMock(messages)}
       fields={fields}
       meta={{} as FieldArrayMetaProps}
       readOnly={false}

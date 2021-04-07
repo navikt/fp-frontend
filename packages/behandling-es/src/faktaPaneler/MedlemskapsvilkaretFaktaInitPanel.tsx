@@ -10,9 +10,12 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
@@ -61,7 +64,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.MEDLEMSKAPSVILKARET}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
     skalPanelVisesIMeny={(initData) => !!initData?.soknad}
     renderPanel={(data) => (
       <MedlemskapFaktaIndex

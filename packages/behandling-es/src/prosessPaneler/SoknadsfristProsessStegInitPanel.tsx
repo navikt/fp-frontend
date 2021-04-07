@@ -12,9 +12,12 @@ import {
 import {
   ProsessDefaultInitPanel, ProsessPanelInitProps, OverstyringPanelDef, skalViseProsessPanel,
 } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.SOKNADSFRISTVILKARET,
@@ -55,7 +58,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       prosessPanelKode={prosessStegCodes.SOEKNADSFRIST}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
       skalPanelVisesIMeny={(data) => skalViseProsessPanel(data?.aksjonspunkter, VILKAR_KODER, data?.vilkar)}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => {

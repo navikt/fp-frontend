@@ -6,10 +6,12 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-modal-pa-vent';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import messages from '../../i18n/nb_NO.json';
 
 import { SettPaVentModal } from './SettPaVentModal';
+
+const intlMock = getIntlMock(messages);
 
 describe('<SettPaVentModal>', () => {
   it('skal rendre åpen modal', () => {
@@ -27,7 +29,7 @@ describe('<SettPaVentModal>', () => {
       erTilbakekreving={false}
       showModal
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -50,7 +52,7 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const button = wrapper.find(Hovedknapp);
     expect(button.prop('disabled')).toBe(false);
@@ -69,7 +71,7 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const button = wrapper.find(Hovedknapp);
     expect(button.prop('disabled')).toBe(true);
@@ -88,7 +90,7 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const button = wrapper.find(Hovedknapp);
     expect(button.prop('disabled')).toBe(true);
@@ -107,7 +109,7 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     const select = wrapper.find(SelectField);
     expect(select.prop('validate')).toHaveLength(1);
   });
@@ -123,7 +125,7 @@ describe('<SettPaVentModal>', () => {
       ventearsaker={[]}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(DatepickerField)).toHaveLength(0);
   });
@@ -138,7 +140,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent={false}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(DatepickerField)).toHaveLength(1);
   });
@@ -153,7 +155,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent={false}
       erTilbakekreving={false}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(SelectField).prop('readOnly')).toBe(true);
   });
@@ -173,7 +175,7 @@ describe('<SettPaVentModal>', () => {
       hasManualPaVent={false}
       erTilbakekreving
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(SelectField).prop('readOnly')).toBe(true);
     const label = wrapper.find(Normaltekst);

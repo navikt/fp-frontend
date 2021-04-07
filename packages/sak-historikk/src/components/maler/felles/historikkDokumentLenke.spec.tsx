@@ -1,8 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import HistorikkDokumentLenke from './HistorikkDokumentLenke';
-import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-sak-historikk';
+import messages from '../../../../i18n/nb_NO.json';
 
 const saksnummer = '123';
 const dokumentLenke = {
@@ -17,7 +19,7 @@ describe('HistorikkDokumentLenke', () => {
     const wrapper = shallowWithIntl(<HistorikkDokumentLenke
       dokumentLenke={dokumentLenke}
       saksnummer={saksnummer}
-    />);
+    />, messages);
 
     expect(wrapper.find(FormattedMessage).at(0).prop('id')).toEqual('Historikk.Utgått');
   });

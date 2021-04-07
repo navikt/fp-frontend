@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { intlMock } from '../../../i18n/intl-enzyme-test-helper-behandling-felles';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<BehandlingHenlagtPanel>', () => {
   const mockUseEffect = (useEffect) => {
@@ -18,11 +18,11 @@ describe('<BehandlingHenlagtPanel>', () => {
 
     const registrerProsessPanel = sinon.spy();
 
-    const wrapper = shallow(<BehandlingHenlagtPanel.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallowWithIntl(<BehandlingHenlagtPanel.WrappedComponent
+      intl={getIntlMock(messages)}
       valgtProsessSteg="default"
       registrerProsessPanel={registrerProsessPanel}
-    />);
+    />, messages);
 
     const prosessPanel = wrapper.find(ProsessPanelWrapper);
     expect(prosessPanel.props().erPanelValgt).toBe(false);

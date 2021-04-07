@@ -10,10 +10,13 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import AnkeBehandlingModal from '../modaler/AnkeBehandlingModal';
 import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
+
+const intl = createIntl(messages);
 
 const forhandsvis = (data) => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -95,7 +98,7 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.ANKE_RESULTAT}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
       skalPanelVisesIMeny={() => true}
       lagringSideEffekter={lagringSideeffekterCallback}
       renderPanel={(data) => (

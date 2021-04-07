@@ -9,9 +9,12 @@ import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -48,7 +51,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.BEREGNING}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'BeregningInfoPanel.Title' })}
     skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag}
     renderPanel={(data) => (
       <BeregningFaktaIndex

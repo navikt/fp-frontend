@@ -10,9 +10,12 @@ import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.TERMINBEKREFTELSE,
@@ -50,7 +53,7 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.FODSELSVILKARET}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
     skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))}
     renderPanel={(data) => <FodselFaktaIndex {...data} />}
   />

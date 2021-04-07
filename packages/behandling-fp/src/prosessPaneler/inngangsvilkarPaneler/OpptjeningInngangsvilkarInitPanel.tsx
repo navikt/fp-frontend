@@ -10,9 +10,12 @@ import {
   AksessRettigheter, Aksjonspunkt, Opptjening, Vilkar,
 } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../../i18n/getPackageIntl';
+import messages from '../../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET];
 
@@ -48,7 +51,7 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+    hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
     renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         {data.aksjonspunkter.length === 0 && (

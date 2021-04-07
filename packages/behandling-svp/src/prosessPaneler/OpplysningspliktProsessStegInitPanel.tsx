@@ -11,9 +11,12 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import { skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -49,7 +52,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={prosessStegCodes.OPPLYSNINGSPLIKT}
-    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
+    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
     skalPanelVisesIMeny={(data) => {
       const defaultSkalVises = skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar);
       const isRevurdering = behandlingType.REVURDERING === data.behandling.type.kode;

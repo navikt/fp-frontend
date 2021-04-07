@@ -5,6 +5,7 @@ import sinon from 'sinon';
 import { dateFormat } from '@fpsak-frontend/utils';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import CalendarOverlay from './CalendarOverlay';
+import messages from '../../i18n/nb_NO.json';
 
 describe('<CalendarOverlay>', () => {
   it('skal ikke vise overlay når disabled', () => {
@@ -16,7 +17,7 @@ describe('<CalendarOverlay>', () => {
       value="21.08.2017"
       numberOfMonths={1}
       disabled
-    />);
+    />, messages);
 
     expect(wrapper.find(DayPicker)).toHaveLength(0);
   });
@@ -29,7 +30,7 @@ describe('<CalendarOverlay>', () => {
       numberOfMonths={1}
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
-    />);
+    />, messages);
 
     const daypicker = wrapper.find(DayPicker);
     expect(daypicker).toHaveLength(1);
@@ -52,7 +53,7 @@ describe('<CalendarOverlay>', () => {
       elementIsCalendarButton={sinon.spy()}
       value={date}
       onClose={sinon.spy()}
-    />);
+    />, messages);
 
     const daypicker = wrapper.find(DayPicker);
     expect(daypicker.prop('selectedDays')).toBeNull();
@@ -71,7 +72,7 @@ describe('<CalendarOverlay>', () => {
       elementIsCalendarButton={elementIsCalendarButton}
       value="21.08.2017"
       onClose={onCloseCallback}
-    />);
+    />, messages);
 
     wrapper.find('div').prop('onBlur')({} as React.FocusEvent);
   });
@@ -86,7 +87,7 @@ describe('<CalendarOverlay>', () => {
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
       onClose={onCloseCallback}
-    />);
+    />, messages);
 
     wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent<any>);
 
@@ -103,7 +104,7 @@ describe('<CalendarOverlay>', () => {
       elementIsCalendarButton={sinon.spy()}
       value="21.08.2017"
       onClose={onCloseCallback}
-    />);
+    />, messages);
 
     wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent<any>);
 

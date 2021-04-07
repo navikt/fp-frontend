@@ -14,9 +14,12 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
+
+const intl = createIntl(messages);
 
 const forhandsvis = (data) => {
   if (window.navigator.msSaveOrOpenBlob) {
@@ -113,7 +116,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.KLAGE_RESULTAT}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)}
       lagringSideEffekter={lagringSideEffekter}
@@ -124,7 +127,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
           <FatterVedtakStatusModal
             visModal={visFatterVedtakModal}
             lukkModal={() => { toggleFatterVedtakModal(false); opneSokeside(); }}
-            tekst={getPackageIntl().formatMessage({
+            tekst={intl.formatMessage({
               id: (data.klageVurdering && data.klageVurdering.klageVurderingResultatNK
                 && data.klageVurdering.klageVurderingResultatNK.godkjentAvMedunderskriver)
                 ? 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' : 'FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver',

@@ -7,12 +7,13 @@ import urlMann from '@fpsak-frontend/assets/images/mann.svg';
 import urlUkjent from '@fpsak-frontend/assets/images/ukjent.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 import { Kjønnkode } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 
 import styles from './timeLineSoker.less';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 interface TimeLineSokerProps {
   soker1KjonnKode: Kjønnkode;

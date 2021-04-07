@@ -12,9 +12,12 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const getStatusFromResultatstruktur = (resultatstruktur: BeregningsresultatFp): string => {
   if (resultatstruktur && resultatstruktur.perioder.length > 0) {
@@ -67,7 +70,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={prosessStegCodes.TILKJENT_YTELSE}
-    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
+    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
     hentOverstyrtStatus={(data) => getStatusFromResultatstruktur(data?.beregningresultatForeldrepenger)}
     renderPanel={(data) => (

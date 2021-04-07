@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField } from '@fpsak-frontend/form';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
   const arbeidsgiverOpplysningerPerId = {

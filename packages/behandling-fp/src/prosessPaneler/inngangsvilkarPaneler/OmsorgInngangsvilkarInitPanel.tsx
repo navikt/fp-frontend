@@ -8,9 +8,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../../i18n/getPackageIntl';
+import messages from '../../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -43,7 +46,7 @@ const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="OMSORG"
-    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
+    hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
     renderPanel={(data) => (
       <>
         <OmsorgVilkarProsessIndex {...data} />

@@ -8,10 +8,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import { requestSvpApi, SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
+import messages from '../../../i18n/nb_NO.json';
 
-import getPackageIntl from '../../../i18n/getPackageIntl';
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.SVANGERSKAPSVILKARET];
 
@@ -39,7 +41,7 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="SVANGERSKAP"
-    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
+    hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
     renderPanel={(data) => (
       <>
         <SvangerskapVilkarProsessIndex {...data} />

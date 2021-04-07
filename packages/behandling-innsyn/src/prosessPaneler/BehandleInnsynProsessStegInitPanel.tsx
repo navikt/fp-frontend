@@ -5,13 +5,16 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { createIntl } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Dokument, Fagsak, Innsyn,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_INNSYN];
 
@@ -43,7 +46,7 @@ const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={prosessStegCodes.BEHANDLE_INNSYN}
-    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
+    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
       <InnsynProsessIndex

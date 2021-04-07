@@ -10,9 +10,12 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -48,7 +51,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={prosessStegCodes.OPPLYSNINGSPLIKT}
-    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
+    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
     skalPanelVisesIMeny={(data) => data.vilkar.length > 0}
     renderPanel={(data) => (
       <SokersOpplysningspliktVilkarProsessIndex

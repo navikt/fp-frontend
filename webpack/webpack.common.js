@@ -2,7 +2,6 @@
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const PACKAGE = require('./../package.json');
@@ -11,12 +10,10 @@ const VERSION = PACKAGE.version;
 const ROOT_DIR = path.resolve(__dirname, '../public/client');
 const CORE_DIR = path.resolve(__dirname, '../node_modules');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
-const LANG_DIR = path.resolve(__dirname, '../public/sprak/');
 const CSS_DIR = path.join(PACKAGES_DIR, 'assets/styles');
 const IMAGE_DIR = path.join(PACKAGES_DIR, 'assets/images');
 
 const isDevelopment = JSON.stringify(process.env.NODE_ENV) === '"development"';
-const PUBLIC_PATH = isDevelopment ? 'fpsak/public/' : '';
 
 const config = {
   module: {
@@ -173,20 +170,6 @@ const config = {
     }),
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(VERSION),
-    }),
-    new CopyPlugin({
-      patterns: [{
-        from: LANG_DIR,
-        to: PUBLIC_PATH + 'sprak/[name].[ext]',
-        force: true,
-        transform: {
-          cache: {
-            keys: {
-              key: '[contenthash]',
-            }
-          },
-        },
-      }]
     }),
     new webpack.ContextReplacementPlugin(
       /moment[\/\\]locale$/,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
@@ -10,6 +10,9 @@ import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 
 import { BostedSokerView } from './BostedSokerView';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<BostedsokerView>', () => {
   const soker = {

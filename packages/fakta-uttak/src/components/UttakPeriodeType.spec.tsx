@@ -3,11 +3,14 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
 import { Image } from '@fpsak-frontend/shared-components';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Kodeverk } from '@fpsak-frontend/types';
 
 import { UttakPeriodeType } from './UttakPeriodeType';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<UttakPeriodeType>', () => {
   const tilDato = '2018-01-10';

@@ -8,6 +8,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { createIntl } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Behandling, Dokument, Fagsak, Innsyn,
 } from '@fpsak-frontend/types';
@@ -15,8 +16,10 @@ import {
   IverksetterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps, ProsessDefaultInitPanel,
 } from '@fpsak-frontend/behandling-felles';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
+
+const intl = createIntl(messages);
 
 const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string => {
   const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
@@ -105,7 +108,7 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.VEDTAK}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData) => (initData?.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}

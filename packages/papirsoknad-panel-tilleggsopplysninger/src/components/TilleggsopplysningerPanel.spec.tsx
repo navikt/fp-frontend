@@ -1,14 +1,15 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-tilleggsopplysninger';
+import messages from '../../i18n/nb_NO.json';
 import { TilleggsopplysningerPanel } from './TilleggsopplysningerPanel';
 
 describe('<TilleggsopplysningerPanel>', () => {
   it('skal vise komponent som default', () => {
-    const wrapper = shallowWithIntl(<TilleggsopplysningerPanel intl={intlMock} readOnly={false} />);
+    const wrapper = shallow(<TilleggsopplysningerPanel intl={getIntlMock(messages)} readOnly={false} />);
     const additionalInfo = wrapper.find(TextAreaField);
     expect(additionalInfo).toHaveLength(1);
   });

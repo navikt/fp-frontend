@@ -3,10 +3,13 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { VedtakKlageSubmitPanelImpl } from './VedtakKlageSubmitPanel';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-vedtak-klage';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VedtakKlageSubmitPanel>', () => {
   const forhandsvisVedtaksbrevFunc = sinon.spy();

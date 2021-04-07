@@ -9,9 +9,12 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
 
@@ -45,7 +48,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.ARBEIDSFORHOLD}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
       <ArbeidsforholdFaktaIndex

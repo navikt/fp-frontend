@@ -2,9 +2,10 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenyApneForEndringerIndex from './MenyApneForEndringerIndex';
+import messages from '../i18n/nb_NO.json';
 
 describe('<MenyApneForEndringerIndex>', () => {
   it('skal vise modal og velge å åpne behandling for endringer', () => {
@@ -16,7 +17,7 @@ describe('<MenyApneForEndringerIndex>', () => {
       behandlingVersjon={1}
       apneBehandlingForEndringer={apneForEndringerCallback}
       lukkModal={lukkModalCallback}
-    />);
+    />, messages);
 
     const modal = wrapper.find(OkAvbrytModal);
     expect(modal).toHaveLength(1);

@@ -43,20 +43,15 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
       suspendRequest: options.suspendRequest || isObjectEmpty(featureToggle),
     });
 
-  const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE, NO_PARAMS);
-
   const harHentetFerdigKodeverk = useHentKodeverk(harHentetFerdigInitLenker);
-
-  const harFeilet = harFpsakInitKallFeilet && sprakFilState === RestApiState.SUCCESS;
 
   const erFerdig = harHentetFerdigInitLenker
     && harHentetFerdigKodeverk
     && navAnsattState === RestApiState.SUCCESS
-    && sprakFilState === RestApiState.SUCCESS
     && behandlendeEnheterState === RestApiState.SUCCESS
     && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS);
 
-  return harFeilet || erFerdig ? children : <LoadingPanel />;
+  return harFpsakInitKallFeilet || erFerdig ? children : <LoadingPanel />;
 };
 
 export default AppConfigResolver;

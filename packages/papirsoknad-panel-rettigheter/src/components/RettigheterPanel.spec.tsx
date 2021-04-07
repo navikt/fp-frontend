@@ -1,23 +1,26 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioOption } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-rettigheter';
+import messages from '../../i18n/nb_NO.json';
 import { RettigheterPanel } from './RettigheterPanel';
+
+const intlMock = getIntlMock(messages);
 
 describe('<RettigheterPanel>', () => {
   it('skal vise komponent som default', () => {
     const soknad = new SoknadData('FORELDREPENGER', 'FØDSEL', 'MOR');
-    const wrapper = shallowWithIntl(<RettigheterPanel intl={intlMock} soknadData={soknad} />);
+    const wrapper = shallow(<RettigheterPanel intl={intlMock} soknadData={soknad} />);
     const radio = wrapper.find(RadioOption);
     expect(radio).toHaveLength(3);
   });
 
   it('skal vise komponent med ekstra valg for adopsjon', () => {
     const soknad = new SoknadData('FORELDREPENGER', 'FØDSEL', 'FAR');
-    const wrapper = shallowWithIntl(<RettigheterPanel intl={intlMock} soknadData={soknad} />);
+    const wrapper = shallow(<RettigheterPanel intl={intlMock} soknadData={soknad} />);
     const radio = wrapper.find(RadioOption);
     expect(radio).toHaveLength(4);
   });

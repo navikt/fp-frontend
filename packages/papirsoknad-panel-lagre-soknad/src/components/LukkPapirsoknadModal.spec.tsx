@@ -1,13 +1,16 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import ModalWrapper from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import Image from '@fpsak-frontend/shared-components/src/Image';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-lagre-soknad';
+import messages from '../../i18n/nb_NO.json';
 import { LukkPapirSoknadModal } from './LukkPapirsoknadModal';
+
+const intlMock = getIntlMock(messages);
 
 describe('<LukkPapirSoknadModal>', () => {
   const submitEventCallback = sinon.spy();
@@ -15,7 +18,7 @@ describe('<LukkPapirSoknadModal>', () => {
   const form = 'TEST';
 
   it('skal rendre komponent korrekt', () => {
-    const wrapper = shallowWithIntl(<LukkPapirSoknadModal
+    const wrapper = shallow(<LukkPapirSoknadModal
       cancelEvent={cancelEventCallback}
       form={form}
       handleSubmit={submitEventCallback}
@@ -45,7 +48,7 @@ describe('<LukkPapirSoknadModal>', () => {
   });
 
   it('skal kalle submit ved klikk på ok-knapp', () => {
-    const wrapper = shallowWithIntl(<LukkPapirSoknadModal
+    const wrapper = shallow(<LukkPapirSoknadModal
       showModal
       handleSubmit={submitEventCallback}
       cancelEvent={cancelEventCallback}
@@ -58,7 +61,7 @@ describe('<LukkPapirSoknadModal>', () => {
   });
 
   it('skal lukke modal ved klikk på avbryt-knapp', () => {
-    const wrapper = shallowWithIntl(<LukkPapirSoknadModal
+    const wrapper = shallow(<LukkPapirSoknadModal
       showModal
       handleSubmit={submitEventCallback}
       cancelEvent={cancelEventCallback}

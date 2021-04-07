@@ -2,14 +2,17 @@ import React from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FamilieHendelseSamling } from '@fpsak-frontend/types';
 
 import UttakPeriode from './UttakPeriode';
 import UttakPeriodeType from './UttakPeriodeType';
 import UttakPeriodeInnhold from './UttakPeriodeInnhold';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
+
+const intlMock = getIntlMock(messages);
 
 const getMockedFields = (fieldNames: any, perioder: any): FieldArrayFieldsProps<any> => {
   const field = {

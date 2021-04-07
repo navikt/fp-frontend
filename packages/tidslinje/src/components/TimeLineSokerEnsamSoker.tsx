@@ -6,12 +6,13 @@ import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { Image } from '@fpsak-frontend/shared-components';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 
 import styles from './timeLineSokerEnsamSoker.less';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 const isKvinne = (kode: string): boolean => kode === navBrukerKjonn.KVINNE;
 

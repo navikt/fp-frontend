@@ -7,6 +7,7 @@ import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
+import messages from '../../../i18n/nb_NO.json';
 import { GrunnlagForAarsinntektPanelATImpl as UnwrappedForm } from './GrunnlagForAarsinntektPanelAT';
 
 const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, erTilkommetAndel) => ({
@@ -55,7 +56,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(7);
     const rowsFlex = wrapper.find('FlexRow');
@@ -71,7 +72,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     const rowsFlex = wrapper.find('FlexRow');
     expect(rows).toHaveLength(3);
@@ -105,7 +106,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const rows = wrapper.find('Row');
     const rowsFlex = wrapper.find('FlexRow');

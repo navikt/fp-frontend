@@ -5,6 +5,7 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AvviksopplysningerAT from './AvvikopplysningerAT';
+import messages from '../../../i18n/nb_NO.json';
 
 const beregnetAarsinntekt = 360000;
 const sammenligningsgrunnlag = (kode) => ({
@@ -26,7 +27,7 @@ describe('<AvviksopplysningerAT>', () => {
       beregnetAarsinntekt={beregnetAarsinntekt}
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: true, isArbeidstaker: true, isSelvstendigNaeringsdrivende: true } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
     const infoText = rows.first().find(FormattedMessage);
@@ -40,7 +41,7 @@ describe('<AvviksopplysningerAT>', () => {
       relevanteStatuser={{
         isKombinasjonsstatus: true, isArbeidstaker: true, isSelvstendigNaeringsdrivende: true, isFrilanser: true,
       } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
     const infoText = rows.first().find(FormattedMessage);
@@ -52,7 +53,7 @@ describe('<AvviksopplysningerAT>', () => {
       beregnetAarsinntekt={beregnetAarsinntekt}
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const panel = wrapper.find('AvvikopplysningerATFLSN');
     expect(panel.length).toBe(1);
     const expectedProps = {
@@ -72,7 +73,7 @@ describe('<AvviksopplysningerAT>', () => {
       beregnetAarsinntekt={beregnetAarsinntekt}
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false, isFrilanser: true } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows.length).toBe(0);
   });

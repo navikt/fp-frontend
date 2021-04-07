@@ -1,9 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
 import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenyTaAvVentIndex from './MenyTaAvVentIndex';
 
 describe('<MenyTaAvVentIndex>', () => {
@@ -11,7 +11,7 @@ describe('<MenyTaAvVentIndex>', () => {
     const resumeBehandlingCallback = sinon.spy();
     const lukkModalCallback = sinon.spy();
 
-    const wrapper = shallowWithIntl(<MenyTaAvVentIndex
+    const wrapper = shallow(<MenyTaAvVentIndex
       behandlingId={3}
       behandlingVersjon={1}
       taBehandlingAvVent={resumeBehandlingCallback}

@@ -5,13 +5,16 @@ import React, {
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { createIntl } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Fagsak, FeilutbetalingAarsak, FeilutbetalingFakta, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING];
 
@@ -46,7 +49,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.FEILUTBETALING}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
     skalPanelVisesIMeny={(initData) => !!initData?.feilutbetalingFakta}
     renderPanel={(data) => (
       <FeilutbetalingFaktaIndex

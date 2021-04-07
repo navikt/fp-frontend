@@ -5,11 +5,14 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import messages from '../i18n/nb_NO.json';
 import Image from './Image';
 
 import styles from './advarselModal.less';
+
+const intl = createIntl(messages);
 
 interface OwnProps {
   headerText?: string;
@@ -28,40 +31,37 @@ const AdvarselModal: FunctionComponent<OwnProps> = ({
   headerText,
   showModal,
   submit,
-}) => {
-  const intl = getPackageIntl();
-  return (
-    <Modal
-      className={styles.modal}
-      isOpen={showModal}
-      closeButton={false}
-      contentLabel={bodyText}
-      onRequestClose={submit}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Row>
-        <Column xs="1">
-          <Image className={styles.image} alt={bodyText} src={advarselImageUrl} />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="8" className={styles.text}>
-          {headerText && <Undertittel>{headerText}</Undertittel>}
-          <Normaltekst>{bodyText}</Normaltekst>
-        </Column>
-        <Column xs="2">
-          <Hovedknapp
-            className={styles.submitButton}
-            mini
-            htmlType="submit"
-            onClick={submit}
-            autoFocus
-          >
-            {intl.formatMessage({ id: 'AdvarselModal.Ok' })}
-          </Hovedknapp>
-        </Column>
-      </Row>
-    </Modal>
-  );
-};
+}) => (
+  <Modal
+    className={styles.modal}
+    isOpen={showModal}
+    closeButton={false}
+    contentLabel={bodyText}
+    onRequestClose={submit}
+    shouldCloseOnOverlayClick={false}
+  >
+    <Row>
+      <Column xs="1">
+        <Image className={styles.image} alt={bodyText} src={advarselImageUrl} />
+        <div className={styles.divider} />
+      </Column>
+      <Column xs="8" className={styles.text}>
+        {headerText && <Undertittel>{headerText}</Undertittel>}
+        <Normaltekst>{bodyText}</Normaltekst>
+      </Column>
+      <Column xs="2">
+        <Hovedknapp
+          className={styles.submitButton}
+          mini
+          htmlType="submit"
+          onClick={submit}
+          autoFocus
+        >
+          {intl.formatMessage({ id: 'AdvarselModal.Ok' })}
+        </Hovedknapp>
+      </Column>
+    </Row>
+  </Modal>
+);
 
 export default AdvarselModal;

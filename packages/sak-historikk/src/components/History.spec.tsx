@@ -3,9 +3,13 @@ import { shallow } from 'enzyme';
 import { Location } from 'history';
 import { Checkbox } from 'nav-frontend-skjema';
 
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import History from './History';
 import Snakkeboble from './maler/felles/snakkeboble';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-sak-historikk';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const historikkFpSak = [{
   behandlingId: 999951,

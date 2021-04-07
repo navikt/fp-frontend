@@ -12,11 +12,12 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 const forhandsvis = (data) => {
   if (window.navigator.msSaveOrOpenBlob) {

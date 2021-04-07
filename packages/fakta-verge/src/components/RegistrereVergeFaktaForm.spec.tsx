@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField, InputField } from '@fpsak-frontend/form';
 
 import RegistrereVergeFaktaForm from './RegistrereVergeFaktaForm';
 import VergeType from '../kodeverk/vergeType';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-verge';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const vergetyper = [{
   kode: VergeType.BARN,

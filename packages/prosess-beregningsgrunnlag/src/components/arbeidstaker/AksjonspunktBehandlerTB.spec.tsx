@@ -11,6 +11,7 @@ import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import {
   AksjonspunktBehandlerTidsbegrensetImpl as UnwrappedForm, createInputFieldKey, createTableData, getIsAksjonspunktClosed,
 } from './AksjonspunktBehandlerTB';
+import messages from '../../../i18n/nb_NO.json';
 
 const firstCol = {
   erTidsbegrenset: true,
@@ -234,7 +235,7 @@ describe('<AksjonspunktBehandlerTB>', () => {
       alleKodeverk={{}}
       allePerioder={[]}
       formName="test"
-    />);
+    />, messages);
     const dataRows = wrapper.findWhere((node) => node.key() === 'arbeidsgiver1');
     const arbeidsgiverNavn = dataRows.first().find('Normaltekst');
     expect(arbeidsgiverNavn.first().childAt(0).text()).toBe(mockTableData.arbeidsgiver1[0].tabellInnhold);

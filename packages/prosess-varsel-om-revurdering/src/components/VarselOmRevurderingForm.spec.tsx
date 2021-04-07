@@ -2,13 +2,16 @@ import React from 'react';
 import sinon from 'sinon';
 
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { FamilieHendelse, Soknad, FamilieHendelseSamling } from '@fpsak-frontend/types';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { VarselOmRevurderingFormImpl as UnwrappedForm } from './VarselOmRevurderingForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-varsel-om-revurdering';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const soknad = {
   fodselsdatoer: { 1: '2019-01-10' } as {[key: number]: string},

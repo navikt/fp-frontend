@@ -1,10 +1,10 @@
 import React from 'react';
 import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import MessagesModal from './MessagesModal';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meldinger';
+import messages from '../../i18n/nb_NO.json';
 
 describe('<MessagesModal>', () => {
   it('skal vise modal', () => {
@@ -12,8 +12,8 @@ describe('<MessagesModal>', () => {
     const wrapper = shallowWithIntl(<MessagesModal.WrappedComponent
       showModal
       closeEvent={closeCallback}
-      intl={intlMock}
-    />);
+      intl={getIntlMock(messages)}
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal.prop('isOpen')).toBe(true);

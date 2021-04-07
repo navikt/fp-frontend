@@ -9,15 +9,18 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistrerer';
 import InngangsvilkarPanelData from '../../types/inngangsvilkarPanelData';
-import getPackageIntl from '../../../i18n/getPackageIntl';
+import messages from '../../../i18n/nb_NO.json';
 import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
 import InngangsvilkarPanelInitProps from '../../types/inngangsvilkarPanelInitProps';
 
 import styles from './inngangsvilkarDefaultInitWrapper.less';
+
+const intl = createIntl(messages);
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
 
@@ -80,8 +83,6 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
   const status = getStatus(panelInfo);
 
   const skalVises = panelInfo.length > 0;
-
-  const intl = getPackageIntl();
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,

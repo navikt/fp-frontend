@@ -3,11 +3,14 @@ import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { DelOppPeriodeModal } from './DelOppPeriodeModal';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../i18n/nb_NO.json';
 import { PeriodeMedClassName } from './Uttak';
+
+const intlMock = getIntlMock(messages);
 
 describe('<DelOppPeriodeModal>', () => {
   const periodeData = {

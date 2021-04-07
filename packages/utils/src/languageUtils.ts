@@ -1,8 +1,9 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import createIntl from './createIntl';
+import messages from '../i18n/nb_NO.json';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 export const replaceNorwegianCharacters = (str: string): string => {
   let result = str.split('æ').join('ae');

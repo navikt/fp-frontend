@@ -2,14 +2,16 @@ import React from 'react';
 import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import { getHenleggArsaker, HenleggBehandlingModalImpl } from './HenleggBehandlingModal';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meny';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<HenleggBehandlingModal>', () => {
   const ytelseType = {
@@ -69,7 +71,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -103,7 +105,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const selectField = wrapper.find('SelectField');
     expect(selectField).toHaveLength(1);
@@ -191,7 +193,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const button = wrapper.find('Hovedknapp');
     expect(button.prop('disabled')).toBe(true);
@@ -213,7 +215,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const button = wrapper.find('Hovedknapp');
     expect(button.prop('disabled')).toBe(true);
@@ -238,7 +240,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });
@@ -264,7 +266,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const avbrytKnapp = wrapper.find('Knapp');
     expect(avbrytKnapp).toHaveLength(1);
@@ -293,7 +295,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const previewLink = wrapper.find('a');
     expect(previewLink).toHaveLength(1);
@@ -324,7 +326,7 @@ describe('<HenleggBehandlingModal>', () => {
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',
       }}
-    />);
+    />, messages);
 
     const previewLink = wrapper.find('a');
     expect(previewLink).toHaveLength(1);

@@ -1,10 +1,10 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import NyBehandlingModal from './components/NyBehandlingModal';
 import MenyNyBehandlingIndex from './MenyNyBehandlingIndex';
 
@@ -27,7 +27,7 @@ describe('<MenyNyBehandlingIndex>', () => {
       kanOppretteBehandling: true,
     }];
 
-    const wrapper = shallowWithIntl(<MenyNyBehandlingIndex
+    const wrapper = shallow(<MenyNyBehandlingIndex
       ytelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: 'FAGSAK_YTELSE_TYPE',

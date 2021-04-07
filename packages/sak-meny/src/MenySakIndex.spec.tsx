@@ -2,16 +2,18 @@ import React from 'react';
 import Popover from '@navikt/nap-popover';
 import { Knapp } from 'nav-frontend-knapper';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import MenySakIndex from './MenySakIndex';
 import MenyData from './MenyData';
+import messages from '../i18n/nb_NO.json';
 
 describe('<MenySakIndex>', () => {
   it('skal toggle menyvisning ved trykk på knapp', () => {
     const wrapper = shallowWithIntl(<MenySakIndex
       data={[new MenyData(true, 'Lag ny behandling')
         .medModal((lukkModal) => <button type="button" onClick={lukkModal} />)]}
-    />);
+    />, messages);
 
     const popover = wrapper.find(Popover);
     expect(popover).toHaveLength(1);
@@ -32,12 +34,12 @@ describe('<MenySakIndex>', () => {
     const wrapper = shallowWithIntl(<MenySakIndex
       data={[new MenyData(true, 'Lag ny behandling')
         .medModal((lukkModal) => <button type="button" onClick={lukkModal} />)]}
-    />);
+    />, messages);
 
     expect(wrapper.find('button')).toHaveLength(0);
 
     const popover = wrapper.find(Popover);
-    const wrapper2 = shallowWithIntl(popover.prop('popperProps').children());
+    const wrapper2 = shallowWithIntl(popover.prop('popperProps').children(), messages);
 
     const button = wrapper2.find('button');
     expect(button).toHaveLength(1);

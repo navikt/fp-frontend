@@ -1,14 +1,14 @@
 import React, {
   FunctionComponent, useState, useMemo, useCallback, useEffect, useRef, RefObject,
 } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 import BoxedListWithLinks from '@navikt/boxed-list-with-links';
 import Header from '@navikt/nap-header';
 import Popover from '@navikt/nap-popover';
 import SystemButton from '@navikt/nap-system-button';
 import UserPanel from '@navikt/nap-user-panel';
 
-import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { decodeHtmlEntity, createIntl } from '@fpsak-frontend/utils';
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
 import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg';
 import systemrutineIkonUrl from '@fpsak-frontend/assets/images/rutine.svg';
@@ -22,12 +22,7 @@ import messages from '../i18n/nb_NO.json';
 
 import styles from './headerWithErrorPanel.less';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 export type QueryStrings = {
   errorcode?: string;

@@ -7,9 +7,12 @@ import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -44,7 +47,7 @@ const SakenFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.SAKEN}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'SakenFaktaPanel.Title' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'SakenFaktaPanel.Title' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => <SakenFaktaIndex {...data} />}
   />

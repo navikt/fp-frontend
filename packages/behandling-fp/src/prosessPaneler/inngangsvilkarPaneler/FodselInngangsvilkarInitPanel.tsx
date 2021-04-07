@@ -11,9 +11,12 @@ import {
 } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../../i18n/getPackageIntl';
+import messages from '../../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -49,7 +52,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="FODSEL"
-    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' })}
+    hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' })}
     renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         {data.aksjonspunkter.length === 0 && (

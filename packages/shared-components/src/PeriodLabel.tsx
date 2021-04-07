@@ -1,7 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedDate } from 'react-intl';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import { createIntl } from '@fpsak-frontend/utils';
+
+import messages from '../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 interface OwnProps {
   dateStringFom: string;
@@ -23,22 +27,19 @@ const PeriodLabel: FunctionComponent<OwnProps> = ({
   dateStringFom,
   dateStringTom,
   showTodayString = false,
-}) => {
-  const intl = getPackageIntl();
-  return (
-    <span>
-      <FormattedDate day="2-digit" month="2-digit" year="numeric" value={new Date(dateStringFom)} />
-      -
-      {dateStringTom
-        && <FormattedDate day="2-digit" month="2-digit" year="numeric" value={new Date(dateStringTom)} />}
-      {showTodayString && !dateStringTom
-        && (
-        <span>
-          {intl.formatMessage({ id: 'PeriodLabel.DateToday' })}
-        </span>
-        )}
-    </span>
-  );
-};
+}) => (
+  <span>
+    <FormattedDate day="2-digit" month="2-digit" year="numeric" value={new Date(dateStringFom)} />
+    -
+    {dateStringTom
+      && <FormattedDate day="2-digit" month="2-digit" year="numeric" value={new Date(dateStringTom)} />}
+    {showTodayString && !dateStringTom
+      && (
+      <span>
+        {intl.formatMessage({ id: 'PeriodLabel.DateToday' })}
+      </span>
+      )}
+  </span>
+);
 
 export default PeriodLabel;

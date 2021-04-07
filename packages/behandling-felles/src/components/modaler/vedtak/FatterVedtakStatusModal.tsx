@@ -5,12 +5,13 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
 import { Image } from '@fpsak-frontend/shared-components';
+import { createIntl } from '@fpsak-frontend/utils';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
-import getPackageIntl from '../../../../i18n/getPackageIntl';
+import messages from '../../../../i18n/nb_NO.json';
 import styles from './fatterVedtakStatusModal.less';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 interface OwnProps {
   visModal?: boolean;

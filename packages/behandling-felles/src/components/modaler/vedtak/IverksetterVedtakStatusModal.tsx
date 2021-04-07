@@ -8,11 +8,12 @@ import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResul
 import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { Kodeverk } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../../../i18n/getPackageIntl';
+import messages from '../../../../i18n/nb_NO.json';
 import styles from './iverksetterVedtakStatusModal.less';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 interface OwnProps {
   lukkModal: () => void;

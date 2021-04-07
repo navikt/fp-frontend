@@ -12,9 +12,12 @@ import {
 import {
   InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps,
 } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../../i18n/getPackageIntl';
+import messages from '../../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../../data/esBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -49,7 +52,7 @@ const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilk
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="ADOPSJON"
-    hentInngangsvilkarPanelTekst={() => getPackageIntl().formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' })}
+    hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' })}
     renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         {data.aksjonspunkter.length === 0 && (

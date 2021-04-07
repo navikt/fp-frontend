@@ -1,10 +1,12 @@
 import React from 'react';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-virksomhet';
+import messages from '../../i18n/nb_NO.json';
 import { VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt ved default props', () => {
@@ -14,7 +16,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
         [kodeverkTyper.LANDKODER]: [],
       }}
       form="test"
-    />);
+    />, messages);
 
     const undertekst = wrapper.find('Undertekst');
     expect(undertekst).toHaveLength(1);
@@ -41,7 +43,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
       }}
       intl={intlMock}
       form="test"
-    />);
+    />, messages);
 
     const inputs = wrapper.find('InputField');
     expect(inputs).toHaveLength(2);
@@ -57,7 +59,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
       }}
       intl={intlMock}
       form="test"
-    />);
+    />, messages);
 
     const select = wrapper.find('SelectField');
     expect(select).toHaveLength(1);

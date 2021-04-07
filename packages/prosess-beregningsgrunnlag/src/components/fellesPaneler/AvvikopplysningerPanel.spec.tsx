@@ -11,6 +11,7 @@ import AvviksopplysningerSN from '../selvstendigNaeringsdrivende/Avvikopplysning
 import AvviksopplysningerFL from '../frilanser/AvvikopplysningerFL';
 import AvviksopplysningerAT from '../arbeidstaker/AvvikopplysningerAT';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import messages from '../../../i18n/nb_NO.json';
 
 const sammenligningsgrunnlag = (kode) => ({
   sammenligningsgrunnlagFom: '2018-09-01',
@@ -52,7 +53,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
@@ -68,7 +69,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
@@ -103,7 +104,7 @@ describe('<Avviksopplysninger>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       allePerioder={perioderMedSNAndel}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
@@ -122,7 +123,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
@@ -141,7 +142,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
@@ -164,7 +165,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
     expect(headerTitle.props().id).toBe('Beregningsgrunnlag.Avviksopplysninger.ApplicationInformation');
@@ -187,7 +188,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const formatedText = panel.find(FormattedMessage);
     const headerTitle = formatedText.first();
@@ -208,7 +209,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const formatedText = panel.find(FormattedMessage);
     const headerTitle = formatedText.first();

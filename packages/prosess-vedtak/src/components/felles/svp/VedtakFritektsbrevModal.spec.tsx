@@ -1,12 +1,15 @@
 import React from 'react';
 import Modal from 'nav-frontend-modal';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 
 import { VedtakFritekstbrevModal } from './VedtakFritekstbrevModal';
 import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
+import messages from '../../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VedtakFritekstbrevModal>', () => {
   it('skal vise modal når behandlingsresultat er AVSLATT', () => {

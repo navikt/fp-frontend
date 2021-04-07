@@ -9,9 +9,12 @@ import {
   Aksjonspunkt, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
@@ -47,7 +50,7 @@ const OmsorgFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = 
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.OMSORG}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'OmsorgInfoPanel.Omsorg' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'OmsorgInfoPanel.Omsorg' })}
     skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => AKSJONSPUNKT_KODER.includes(ap.definisjon.kode))}
     renderPanel={(data) => <OmsorgFaktaIndex personoversikt={personoversikt} {...data} />}
   />

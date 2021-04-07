@@ -1,16 +1,19 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
 import { AksjonspunktBehandlerImpl as UnwrappedForm } from './AksjonspunktBehandler';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+
+const intlMock = getIntlMock(messages);
 
 const relevanteStatuser = {
   isFrilanser: false,

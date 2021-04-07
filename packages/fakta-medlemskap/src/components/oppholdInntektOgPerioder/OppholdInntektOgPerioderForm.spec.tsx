@@ -1,7 +1,7 @@
 import React from 'react';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -11,6 +11,9 @@ import { Medlemskap, Soknad } from '@fpsak-frontend/types';
 import { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
 import { OppholdInntektOgPerioderForm, transformValues, FormValues } from './OppholdInntektOgPerioderForm';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const perioder: any = [];
 

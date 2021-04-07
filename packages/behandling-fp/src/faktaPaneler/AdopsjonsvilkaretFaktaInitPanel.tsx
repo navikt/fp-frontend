@@ -11,9 +11,12 @@ import {
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
@@ -54,7 +57,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.ADOPSJONSVILKARET}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
     skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode))}
     renderPanel={(data) => (
       <AdopsjonFaktaIndex

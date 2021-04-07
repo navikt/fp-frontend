@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
@@ -10,6 +10,9 @@ import { TextAreaField } from '@fpsak-frontend/form';
 
 import { InnsynVedtakFormImpl } from './InnsynVedtakForm';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vedtak-innsyn';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<InnsynVedtakForm>', () => {
   //  Tester for readOnly betingelse på confirm-vilkår knapp

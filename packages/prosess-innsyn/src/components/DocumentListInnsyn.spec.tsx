@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import {
   DateTimeLabel, Image, Table, TableRow,
@@ -8,6 +8,9 @@ import {
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import DocumentListInnsyn from './DocumentListInnsyn';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-innsyn';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<DocumentListInnsyn>', () => {
   it('skal vise tekst ved tom dokumentliste', () => {

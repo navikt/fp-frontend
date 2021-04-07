@@ -6,9 +6,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { Fagsak } from '@fpsak-frontend/types';
 import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.BEHANDLE_KLAGE_NFP];
 
@@ -34,7 +37,7 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={prosessStegCodes.KLAGE_NAV_FAMILIE_OG_PENSJON}
-    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
+    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
   />
 );
 

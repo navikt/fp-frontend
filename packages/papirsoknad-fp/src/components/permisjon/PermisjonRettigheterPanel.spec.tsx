@@ -1,15 +1,18 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import { PermisjonRettigheterPanel } from './PermisjonRettigheterPanel';
 
 const readOnly = false;
 
+const intlMock = getIntlMock(messages);
+
 describe('<PermisjonRettigheterPanel>', () => {
   it('skal kun vise aleneomsrog radioknapper hvis søker velger har aleneomsorg', () => {
-    const wrapper = shallowWithIntl(<PermisjonRettigheterPanel
+    const wrapper = shallow(<PermisjonRettigheterPanel
       readOnly={readOnly}
       intl={intlMock}
       sokerHarAleneomsorg
@@ -19,7 +22,7 @@ describe('<PermisjonRettigheterPanel>', () => {
   });
 
   it('skal vise radioknapper for "andre forelder har rett på foreldrepenger" hvis søker velger har ikke aleneomsorg', () => {
-    const wrapper = shallowWithIntl(<PermisjonRettigheterPanel
+    const wrapper = shallow(<PermisjonRettigheterPanel
       readOnly={readOnly}
       intl={intlMock}
       sokerHarAleneomsorg={false}

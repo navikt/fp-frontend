@@ -2,12 +2,15 @@ import React from 'react';
 import { Element } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat, BeregningsresultatEs } from '@fpsak-frontend/types';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const behandlingsresultat: Partial<Behandlingsresultat> = {
   type: {

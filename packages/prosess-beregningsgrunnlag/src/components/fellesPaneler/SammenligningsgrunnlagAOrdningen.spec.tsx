@@ -1,12 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
 import { SammenligningsgrunnlagAOrdningenImpl } from './SammenligningsgrunnlagAOrdningen';
+
+const intlMock = getIntlMock(messages);
 
 const inntektsgrunnlagAT = {
   måneder: [

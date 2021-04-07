@@ -2,10 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-visittkort';
 import VisittkortBarnInfoFodselPanel from './VisittkortBarnInfoFodselPanel';
+
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VisittkortBarnInfoFodselPanel>', () => {
   const familiehendelse = {
@@ -22,7 +25,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
       intl={intlMock}
       familiehendelse={familiehendelse}
-    />);
+    />, messages);
 
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
@@ -42,12 +45,12 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
           kodeverk: '',
         },
       }}
-    />);
+    />, messages);
 
-    const messages = wrapper.find(FormattedMessage);
-    expect(messages).toHaveLength(2);
-    expect(messages.first().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Fodt');
-    expect(messages.first().prop('values')).toEqual({
+    const message = wrapper.find(FormattedMessage);
+    expect(message).toHaveLength(2);
+    expect(message.first().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Fodt');
+    expect(message.first().prop('values')).toEqual({
       dato: '21.01.2020',
     });
   });
@@ -63,7 +66,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
         },
         dødfødsel: true,
       }}
-    />);
+    />, messages);
 
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(3);
@@ -81,7 +84,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
         antallBarn: 0,
         dødfødsel: false,
       }}
-    />);
+    />, messages);
 
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);

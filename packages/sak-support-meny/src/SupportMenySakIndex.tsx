@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
+import { createIntl } from '@fpsak-frontend/utils';
 import { ReactComponent as FraBeslutterSvg } from '@fpsak-frontend/assets/images/arrow-return.svg';
 import { ReactComponent as SendMeldingSvg } from '@fpsak-frontend/assets/images/email-send-1.svg';
 import { ReactComponent as DokumenterSvg } from '@fpsak-frontend/assets/images/folder-big.svg';
@@ -12,12 +13,7 @@ import SupportTabs from './supportTabs';
 
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const getStyle = (isActive: boolean, isDisabled: boolean) => {
   if (isDisabled) {

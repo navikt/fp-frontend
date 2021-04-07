@@ -3,11 +3,18 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import { Aksjonspunkt, Behandling, Kodeverk } from '@fpsak-frontend/types';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
+type NyBehandlendeEnhet = {
+  behandlingId: number,
+  enhetNavn: string,
+  enhetId: string,
+  begrunnelse: string,
+  behandlingVersjon: string,
+}
+
 export const PapirsoknadApiKeys = {
   BEHANDLING_PAPIRSOKNAD: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_PAPIRSOKNAD'),
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
-  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
-    { behandlingId: number, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhet>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
   HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
   RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
   BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),

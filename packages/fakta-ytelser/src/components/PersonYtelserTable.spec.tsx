@@ -1,10 +1,13 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { PersonYtelserTable } from './PersonYtelserTable';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-ytelser';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PersonYtelserTable>', () => {
   const ytelser = [{

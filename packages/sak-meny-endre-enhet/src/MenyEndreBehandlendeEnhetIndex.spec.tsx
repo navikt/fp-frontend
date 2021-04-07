@@ -1,9 +1,11 @@
 import React from 'react';
 import sinon from 'sinon';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import EndreBehandlendeEnhetModal from './components/EndreBehandlendeEnhetModal';
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenyEndreBehandlendeEnhetIndex from './MenyEndreBehandlendeEnhetIndex';
+import messages from '../i18n/nb_NO.json';
 
 describe('<MenyEndreBehandlendeEnhetIndex>', () => {
   it('skal vise modal og så lagre ny enhet', () => {
@@ -24,7 +26,7 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
         enhetNavn: 'TEST ENHET',
       }]}
       lukkModal={lukkModalCallback}
-    />);
+    />, messages);
 
     const modal = wrapper.find(EndreBehandlendeEnhetModal);
     expect(modal).toHaveLength(1);

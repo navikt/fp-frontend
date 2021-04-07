@@ -54,7 +54,6 @@ export const FpsakApiKeys = {
   INIT_FETCH_FPTILBAKE: new RestKey<InitLinks, void>('INIT_FETCH_FPTILBAKE'),
   KODEVERK: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('KODEVERK'),
   KODEVERK_FPTILBAKE: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('KODEVERK_FPTILBAKE'),
-  LANGUAGE_FILE: new RestKey<Record<string, string>, void>('LANGUAGE_FILE'),
   NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
   BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
   FEATURE_TOGGLE: new RestKey<{ featureToggles: {[key: string]: boolean} }, { toggles: { navn: string }[]}>('FEATURE_TOGGLE'),
@@ -138,9 +137,6 @@ const endpoints = new RestApiConfigBuilder()
 
   // FpFormidling
   .withPost('/fpformidling/api/brev/forhaandsvis', FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
-
-  // Språkfil (ligg på klient - Skal fjernast - Det som ligg i denne skal flyttes til spesifikke pakker)
-  .withGet('/fpsak/public/sprak/nb_NO.json', FpsakApiKeys.LANGUAGE_FILE)
 
   // Kun brukt for søk på localhost
   .withPost('/fpsak/api/fagsak/sok', FpsakApiKeys.SEARCH_FAGSAK)

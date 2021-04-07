@@ -17,9 +17,12 @@ import {
   ProsessDefaultInitPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps,
 } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
@@ -176,7 +179,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.VEDTAK}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
       hentOverstyrtStatus={(initData, standardData) => findStatusForVedtak(
         initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
@@ -195,7 +198,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
           <FatterVedtakStatusModal
             visModal={visFatterVedtakModal && data.behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
             lukkModal={lukkFatterModal}
-            tekst={getPackageIntl().formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
+            tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
           />
           <VedtakProsessIndex
             ytelseTypeKode={fagsakYtelseType.SVANGERSKAPSPENGER}

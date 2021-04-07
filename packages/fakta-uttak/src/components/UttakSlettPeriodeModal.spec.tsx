@@ -1,13 +1,16 @@
 import React from 'react';
 import sinon from 'sinon';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { UttakSlettPeriodeModalImpl } from './UttakSlettPeriodeModal';
 import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
+
+const intlMock = getIntlMock(messages);
 
 const periode = {
   bekreftet: true,

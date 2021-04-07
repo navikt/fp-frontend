@@ -6,12 +6,13 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 
 import styles from './ankeBehandlingModal.less';
 
-const intl = getPackageIntl();
+const intl = createIntl(messages);
 
 const tekstTilMelding = (erFerdigbehandlet: boolean, venterTrygderett: boolean): string => {
   if (erFerdigbehandlet && venterTrygderett) {

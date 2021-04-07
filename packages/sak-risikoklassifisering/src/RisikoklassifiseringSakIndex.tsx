@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import kontrollresultatKode from './kodeverk/kontrollresultatKode';
@@ -11,12 +12,7 @@ import HoyRisikoTittel from './components/HoyRisikoTittel';
 import { VuderFaresignalerAp } from './components/AvklarFaresignalerForm';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const harResultatkode = (resultatkode: string, risikoklassifisering?: Risikoklassifisering): boolean => {
   if (!risikoklassifisering || !risikoklassifisering.kontrollresultat) {

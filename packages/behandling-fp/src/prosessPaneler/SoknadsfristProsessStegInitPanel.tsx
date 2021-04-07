@@ -7,9 +7,12 @@ import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-sokna
 import { prosessStegCodes } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, Soknad, UttakPeriodeGrense } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, skalViseProsessPanel } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER];
 
@@ -32,7 +35,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={prosessStegCodes.SOEKNADSFRIST}
-    prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
+    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
     skalPanelVisesIMeny={(data) => skalViseProsessPanel(data.aksjonspunkter)}
     renderPanel={(data) => (
       <VurderSoknadsfristForeldrepengerIndex

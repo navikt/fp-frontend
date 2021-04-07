@@ -7,9 +7,12 @@ import TilleggsopplysningerFaktaIndex from '@fpsak-frontend/fakta-tilleggsopplys
 import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.TILLEGGSOPPLYSNINGER];
 
@@ -34,7 +37,7 @@ const TilleggsopplysningerFaktaInitPanel: FunctionComponent<FaktaPanelInitProps>
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={faktaPanelCodes.TILLEGGSOPPLYSNINGER}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'TilleggsopplysningerInfoPanel.Tilleggsopplysninger' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'TilleggsopplysningerInfoPanel.Tilleggsopplysninger' })}
     skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon.kode === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => <TilleggsopplysningerFaktaIndex {...data} />}
   />

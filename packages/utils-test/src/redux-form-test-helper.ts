@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FieldArrayFieldsProps } from 'redux-form';
-import { intlMock, mountWithIntl } from './intl-enzyme-test-helper';
+import { getIntlMock, mountWithIntl } from './intl-enzyme-test-helper';
 
 function noop() {
   return undefined;
@@ -40,9 +40,9 @@ export function mountFieldComponent(node, input = {}, meta = {}, label = 'field'
   return mountWithIntl(React.cloneElement(node, {
     input: { ...inputMock, ...input },
     meta: { ...metaMock, ...meta },
-    intl: intlMock,
+    intl: getIntlMock({}),
     label,
-  }));
+  }), {});
 }
 
 /* Lagt til for a hindre warnings i tester */

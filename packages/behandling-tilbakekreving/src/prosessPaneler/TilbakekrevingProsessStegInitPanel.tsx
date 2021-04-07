@@ -9,9 +9,12 @@ import {
   Aksjonspunkt, DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper, Kodeverk, VilkarsVurdertePerioderWrapper,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING];
 
@@ -49,7 +52,7 @@ const TilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={prosessStegCodes.TILBAKEKREVING}
-      prosessPanelMenyTekst={getPackageIntl().formatMessage({ id: 'Behandlingspunkt.Tilbakekreving' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Tilbakekreving' })}
       skalPanelVisesIMeny={() => true}
       renderPanel={(data) => (
         <TilbakekrevingProsessIndex

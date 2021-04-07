@@ -11,9 +11,12 @@ import {
   UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+
+const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_UTTAK,
@@ -71,7 +74,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.UTTAK}
-    faktaPanelMenyTekst={getPackageIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
+    faktaPanelMenyTekst={intl.formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
     skalPanelVisesIMeny={(initData) => initData && initData.ytelsefordeling && initData.ytelsefordeling.endringsdato !== undefined}
     renderPanel={(data) => (
       <UttakFaktaIndex

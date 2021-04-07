@@ -1,20 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import {
-  createIntl, createIntlCache, RawIntlProvider, FormattedMessage,
-} from 'react-intl';
+import { RawIntlProvider, FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Aktor, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import AktoerGrid from './components/AktoerGrid';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   valgtAktorId: string;
