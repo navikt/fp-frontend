@@ -1,11 +1,12 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
+
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
 
 import { UttakPeriodeInnhold } from './UttakPeriodeInnhold';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
 const behandlingStatusKode = behandlingStatus.BEHANDLING_UTREDES;
 
@@ -22,7 +23,7 @@ describe('<UttakPeriodeInnhold>', () => {
   const cancelEditPeriode = sinon.spy();
 
   it('skal vise UttakPeriodeInnhold', () => {
-    const wrapper = shallowWithIntl(<UttakPeriodeInnhold
+    const wrapper = shallow(<UttakPeriodeInnhold
       fieldId={fieldId}
       utsettelseArsak={utsettelseArsak as Kodeverk}
       overforingArsak={{} as Kodeverk}

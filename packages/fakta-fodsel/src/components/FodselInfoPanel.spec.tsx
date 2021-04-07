@@ -6,11 +6,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { FamilieHendelseSamling, Soknad } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { FodselInfoPanelImpl } from './FodselInfoPanel';
 import SjekkFodselDokForm from './SjekkFodselDokForm';
 import TermindatoFaktaForm from './TermindatoFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
+import messages from '../../i18n/nb_NO.json';
 
 const soknad = {
   fodselsdatoer: { 1: '2019-01-01' } as { [key: number]: string },
@@ -55,7 +56,7 @@ describe('<FodselInfoPanel>', () => {
       familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
 
     expect(wrapper.find(SjekkFodselDokForm)).toHaveLength(1);
   });
@@ -91,7 +92,7 @@ describe('<FodselInfoPanel>', () => {
       familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
 
     expect(wrapper.find(TermindatoFaktaForm)).toHaveLength(1);
   });
@@ -111,7 +112,7 @@ describe('<FodselInfoPanel>', () => {
       familiehendelse={familiehendelse as FamilieHendelseSamling}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
 
     expect(wrapper.find(FodselSammenligningIndex)).toHaveLength(1);
     expect(wrapper.find(SjekkFodselDokForm)).toHaveLength(0);

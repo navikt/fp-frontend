@@ -1,6 +1,7 @@
 import React from 'react';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { SelectField } from '@fpsak-frontend/form';
 import { TableRow } from '@fpsak-frontend/shared-components';
@@ -8,7 +9,9 @@ import { Element } from 'nav-frontend-typografi';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding } from '../ValidateAndelerUtils';
 import { lagBelopKolonne, RenderFordelBGFieldArrayImpl } from './RenderFordelBGFieldArray';
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const inntektskategorier = [
   {
@@ -80,7 +83,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-    />);
+    />, messages);
 
     const selectFields = wrapper.find(SelectField);
     expect(selectFields).toHaveLength(2);
@@ -106,7 +109,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-    />);
+    />, messages);
 
     const selectFields = wrapper.find(SelectField);
     expect(selectFields).toHaveLength(2);
@@ -153,7 +156,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-    />);
+    />, messages);
 
     const rows = wrapper.find(TableRow);
     const elements = rows.find(Element);
@@ -197,7 +200,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-    />);
+    />, messages);
 
     const rows = wrapper.find(TableRow);
     const elements = rows.find(Element);
@@ -255,7 +258,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-    />);
+    />, messages);
 
     const rows = wrapper.find(TableRow);
     const elements = rows.find(Element);

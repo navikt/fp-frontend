@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
 
 import { TilretteleggingFieldArray, finnUtbetalingsgradForTilrettelegging } from './TilretteleggingFieldArray';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -32,13 +31,13 @@ describe('<TilretteleggingFieldArray>', () => {
       behandlingVersjon={1}
       formName="FORM_NAME"
       velferdspermisjoner={[]}
-    />);
+    />, messages);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0, getRemoveButton) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     const selectField = innerWrapper.find(SelectField);
     expect(selectField).toHaveLength(1);
@@ -71,13 +70,13 @@ describe('<TilretteleggingFieldArray>', () => {
       behandlingVersjon={1}
       formName="FORM_NAME"
       velferdspermisjoner={[]}
-    />);
+    />, messages);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 1, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 1, getRemoveButton) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     const selectField = innerWrapper.find(SelectField);
     expect(selectField).toHaveLength(1);
@@ -113,13 +112,13 @@ describe('<TilretteleggingFieldArray>', () => {
       behandlingVersjon={1}
       formName="FORM_NAME"
       velferdspermisjoner={[]}
-    />);
+    />, messages);
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 1, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 1, getRemoveButton) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     const selectField = innerWrapper.find(SelectField);
     expect(selectField).toHaveLength(1);

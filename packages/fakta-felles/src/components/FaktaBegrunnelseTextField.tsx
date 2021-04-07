@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 import {
-  decodeHtmlEntity, hasValidText, maxLength, minLength, required,
+  decodeHtmlEntity, hasValidText, maxLength, minLength, required, createIntl,
 } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form';
 
@@ -9,12 +9,7 @@ import { Aksjonspunkt } from '@fpsak-frontend/types';
 import styles from './faktaBegrunnelseTextField.less';
 import messages from '../../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

@@ -4,9 +4,10 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { CheckboxField, DatepickerField } from '@fpsak-frontend/form';
 import { ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { TilretteleggingArbeidsforholdSection } from './TilretteleggingArbeidsforholdSection';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<TilretteleggingArbeidsforholdSection>', () => {
   const arbeidsgiverOpplysningerPerId = {
@@ -51,7 +52,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       uttakArbeidTyper={uttakArbeidTyper}
-    />);
+    />, messages);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).toHaveLength(2);
     expect(normaltekst.at(0).props().children).toBe('ARB_NAVN_1 (111222333)....-001');
@@ -86,7 +87,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       uttakArbeidTyper={uttakArbeidTyper}
-    />);
+    />, messages);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).toHaveLength(1);
     expect(normaltekst.props().children).toBe('FRILANSER (23)');
@@ -120,7 +121,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       formName="FORM_NAME"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       uttakArbeidTyper={uttakArbeidTyper}
-    />);
+    />, messages);
     const normaltekst = wrapper.find(Normaltekst);
     expect(normaltekst).toHaveLength(1);
     expect(normaltekst.props().children).toBe('Frilans');

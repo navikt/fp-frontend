@@ -1,21 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import {
-  createIntl, createIntlCache, RawIntlProvider, FormattedMessage,
-} from 'react-intl';
+import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
+import { createIntl, ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
 import { isBehandlingFormDirty, isBehandlingFormSubmitting, hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
 
 import messages from '../../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const isDisabled = (
   isDirty: boolean,

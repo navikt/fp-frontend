@@ -1,20 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { createIntl, getKodeverknavnFn } from '@fpsak-frontend/utils';
+
 import messages from '../i18n/nb_NO.json';
 import BesteberegningPanel from './components/BesteberegningPanel';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;

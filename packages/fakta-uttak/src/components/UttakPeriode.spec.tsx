@@ -2,13 +2,12 @@ import React from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import sinon from 'sinon';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FamilieHendelseSamling } from '@fpsak-frontend/types';
 
 import UttakPeriode from './UttakPeriode';
 import UttakPeriodeType from './UttakPeriodeType';
 import UttakPeriodeInnhold from './UttakPeriodeInnhold';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 import messages from '../../i18n/nb_NO.json';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
@@ -96,7 +95,7 @@ describe('<UttakPeriode>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const uttakPeriodeType = wrapper.find(UttakPeriodeType);
     expect(uttakPeriodeType).toHaveLength(2);
     const uttakPeriodeInnhold = wrapper.find(UttakPeriodeInnhold);
@@ -128,7 +127,7 @@ describe('<UttakPeriode>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
     expect(periodeContainer.at(0).hasClass('active')).toBe(false);
@@ -159,7 +158,7 @@ describe('<UttakPeriode>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
     expect(periodeContainer.at(1).hasClass('active')).toBe(true);
@@ -195,7 +194,7 @@ describe('<UttakPeriode>', () => {
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
       {...otherProps}
-    />);
+    />, messages);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
     const alertStripe = wrapper.find('AlertStripe');

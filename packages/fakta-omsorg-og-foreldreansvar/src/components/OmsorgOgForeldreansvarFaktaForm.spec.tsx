@@ -6,9 +6,12 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { SelectField } from '@fpsak-frontend/form';
 import { FamilieHendelse, Personoversikt, Soknad } from '@fpsak-frontend/types';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
   const relatertYtelseTypeListe = Object.values(relatertYtelseType).map((type) => ({
@@ -47,7 +50,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       personoversikt={{} as Personoversikt}
-    />);
+    />, messages);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).toHaveLength(1);
@@ -76,7 +79,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       personoversikt={{} as Personoversikt}
-    />);
+    />, messages);
 
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(1);
@@ -105,7 +108,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       personoversikt={{} as Personoversikt}
-    />);
+    />, messages);
 
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(0);
@@ -134,7 +137,7 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       personoversikt={{} as Personoversikt}
-    />);
+    />, messages);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).toHaveLength(1);

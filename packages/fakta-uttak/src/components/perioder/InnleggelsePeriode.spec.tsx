@@ -3,8 +3,9 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { RadioGroupField } from '@fpsak-frontend/form';
 import sinon from 'sinon';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { InnleggelsePeriode } from './InnleggelsePeriode';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../../i18n/nb_NO.json';
 
 const periode = {
   tom: '10-10-2017',
@@ -30,7 +31,7 @@ describe('<InnleggelsePeriode>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const undertekst = wrapper.find('Undertekst');
     const radioGroupField = wrapper.find('RadioGroupField');
@@ -57,7 +58,7 @@ describe('<InnleggelsePeriode>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const textAreaField = wrapper.find('TextAreaField');
     expect(textAreaField).toHaveLength(1);

@@ -7,16 +7,18 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { Aksjonspunkt, PersonopplysningMedlem, Soknad } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import OppholdINorgeOgAdresserFaktaPanel, { PeriodeMedId } from './OppholdINorgeOgAdresserFaktaPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import messages from '../../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-fakta-medlemskap');
+  const meldinger = jest.requireActual('../../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(meldinger),
   };
 });
 
@@ -67,7 +69,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       foreldre={foreldre}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-    />);
+    />, messages);
     const felter = wrapper.find(Normaltekst);
     expect(felter).toHaveLength(5);
     expect(felter.first().childAt(0).find(FormattedMessage).prop('id')).toEqual('OppholdINorgeOgAdresserFaktaPanel.Yes');
@@ -88,7 +90,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       foreldre={foreldre}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-    />);
+    />, messages);
     const foreldreDivs = wrapper.find('div');
     expect(foreldreDivs).toHaveLength(3);
   });
@@ -127,7 +129,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       foreldre={toForeldre}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-    />);
+    />, messages);
 
     const radioFields = wrapper.find('RadioOption');
     expect(radioFields).toHaveLength(2);

@@ -3,9 +3,10 @@ import sinon from 'sinon';
 
 import { RadioGroupField } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { FerieOgArbeidsPeriode } from './FerieOgArbeidsPeriode';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../../i18n/nb_NO.json';
 
 const behandlingStatusKode = '';
 
@@ -37,7 +38,7 @@ describe('<FerieOgArbeidsPeriode>', () => {
       arbeidstidprosent={10}
       onSubmit={sinon.spy()}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const undertekst = wrapper.find('Undertekst');
     const radioGroupField = wrapper.find('RadioGroupField');

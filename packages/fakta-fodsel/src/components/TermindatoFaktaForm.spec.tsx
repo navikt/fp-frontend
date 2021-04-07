@@ -9,9 +9,12 @@ import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import {
   Aksjonspunkt, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
+import messages from '../../i18n/nb_NO.json';
 import { buildInitialValues, TermindatoFaktaForm } from './TermindatoFaktaForm';
+
+const intlMock = getIntlMock(messages);
 
 describe('<TermindatoFaktaForm>', () => {
   it('skal rendre form som lar NAV-ansatt avklare fødselsdato og antall barn', () => {

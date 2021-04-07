@@ -2,14 +2,13 @@ import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { PersonopplysningMedlem } from '@fpsak-frontend/types';
 
 import { MedlemskapBostedSokerView } from './MedlemskapBostedSokerView';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -58,7 +57,7 @@ describe('<MedlemskapBostedSokerView>', () => {
       regionTypes={regionTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
 
     expect(wrapper.find('Element').childAt(0).text()).toEqual('Espen Utvikler');
   });
@@ -70,7 +69,7 @@ describe('<MedlemskapBostedSokerView>', () => {
       regionTypes={regionTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
     const adr = wrapper.find(Normaltekst);
     expect(adr).toHaveLength(2);
     expect(adr.first().childAt(0).text()).toEqual('Vei 1, 1000 Oslo');
@@ -84,7 +83,7 @@ describe('<MedlemskapBostedSokerView>', () => {
       regionTypes={regionTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
 
     const tooltips = wrapper.find(Tooltip);
     expect(tooltips).toHaveLength(2);
@@ -109,7 +108,7 @@ describe('<MedlemskapBostedSokerView>', () => {
       regionTypes={regionTypes}
       personstatusTypes={personstatusTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
 
     const tooltips = wrapper.find(Tooltip);
     expect(tooltips).toHaveLength(2);

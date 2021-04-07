@@ -5,9 +5,12 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { TextAreaField } from '@fpsak-frontend/form';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
+import messages from '../../i18n/nb_NO.json';
 import { SykdomPanel } from './SykdomPanel';
+
+const intlMock = getIntlMock(messages);
 
 describe('<SykdomPanel>', () => {
   it('skal rendre Sykdomspanel', () => {

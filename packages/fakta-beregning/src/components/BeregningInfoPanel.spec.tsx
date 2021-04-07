@@ -4,10 +4,12 @@ import sinon from 'sinon';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import BeregningInfoPanel from './BeregningInfoPanel';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
 import AvklareAktiviteterPanel from './avklareAktiviteter/AvklareAktiviteterPanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../i18n/nb_NO.json';
 
 const {
   AVKLAR_AKTIVITETER,
@@ -58,7 +60,7 @@ describe('<BeregningInfoPanel>', () => {
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const panel = wrapper.find(VurderFaktaBeregningPanel);
     expect(panel).toHaveLength(1);
   });
@@ -91,7 +93,7 @@ describe('<BeregningInfoPanel>', () => {
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const panel = wrapper.find(VurderFaktaBeregningPanel);
     expect(panel).toHaveLength(1);
     expect(panel.prop('readOnly')).toBe(true);
@@ -125,7 +127,7 @@ describe('<BeregningInfoPanel>', () => {
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const panel = wrapper.find(AvklareAktiviteterPanel);
     expect(panel).toHaveLength(1);
     expect(panel.prop('readOnly')).toBe(true);
@@ -159,7 +161,7 @@ describe('<BeregningInfoPanel>', () => {
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const panel = wrapper.find(AvklareAktiviteterPanel);
     expect(panel).toHaveLength(1);
   });

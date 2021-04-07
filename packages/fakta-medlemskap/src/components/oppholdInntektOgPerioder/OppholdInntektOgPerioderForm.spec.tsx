@@ -1,7 +1,7 @@
 import React from 'react';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -10,7 +10,6 @@ import { Medlemskap, Soknad } from '@fpsak-frontend/types';
 
 import { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
 import { OppholdInntektOgPerioderForm, transformValues, FormValues } from './OppholdInntektOgPerioderForm';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -43,7 +42,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).toHaveLength(1);
@@ -90,7 +89,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     const helpText = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helpText).toHaveLength(1);
@@ -140,7 +139,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.GyldigMedlemFolketrygden');
 
@@ -187,7 +186,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.EOSBorgerMedOppholdsrett');
 
@@ -234,7 +233,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold');
 
@@ -281,7 +280,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       }}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     expect(wrapper.find(AksjonspunktHelpTextTemp).childAt(0).prop('id')).toEqual('MedlemskapInfoPanel.HarFortsattMedlemskap');
 

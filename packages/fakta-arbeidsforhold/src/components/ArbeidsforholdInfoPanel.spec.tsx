@@ -6,11 +6,14 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../i18n/nb_NO.json';
 import { ArbeidsforholdInfoPanelImpl, fjernIdFraArbeidsforholdLagtTilAvSaksbehandler } from './ArbeidsforholdInfoPanel';
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
 import BekreftOgForsettKnapp from './BekreftOgForsettKnapp';
+
+const intlMock = getIntlMock(messages);
 
 const ap5080 = {
   id: 0,

@@ -1,8 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import { TidsbegrensetArbeidsforholdForm } from './TidsbegrensetArbeidsforholdForm';
-import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../../../i18n/nb_NO.json';
 
 const andeler = [
   {
@@ -47,7 +49,7 @@ describe('<TidsbegrensetArbeidsforholdForm>', () => {
       faktaOmBeregning={{ kortvarigeArbeidsforhold: andeler, andelerForFaktaOmBeregning: [] }}
       isAksjonspunktClosed={false}
       arbeidsgiverOpplysningerPerId={agOpplysning}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(4);
   });
@@ -57,7 +59,7 @@ describe('<TidsbegrensetArbeidsforholdForm>', () => {
       faktaOmBeregning={{ kortvarigeArbeidsforhold: andeler, andelerForFaktaOmBeregning: [] }}
       isAksjonspunktClosed={false}
       arbeidsgiverOpplysningerPerId={agOpplysning}
-    />);
+    />, messages);
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(2);
     expect(message.first().prop('id')).toBe('BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold');

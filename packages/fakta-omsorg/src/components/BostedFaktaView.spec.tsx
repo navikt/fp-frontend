@@ -2,10 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import messages from '../../i18n/nb_NO.json';
 import BostedFaktaView from './BostedFaktaView';
 import BostedSokerView from './BostedSokerView';
+
+const intlMock = getIntlMock(messages);
 
 describe('<BostedFaktaView>', () => {
   const barn = {

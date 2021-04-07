@@ -4,10 +4,13 @@ import sinon from 'sinon';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import { FodselOgTilrettelegging } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
+import messages from '../../i18n/nb_NO.json';
 import FodselOgTilretteleggingInfoPanel from './FodselOgTilretteleggingInfoPanel';
 import FodselOgTilretteleggingFaktaForm from './FodselOgTilretteleggingFaktaForm';
+
+const intlMock = getIntlMock(messages);
 
 const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
   termindato: '2020-02-27',
