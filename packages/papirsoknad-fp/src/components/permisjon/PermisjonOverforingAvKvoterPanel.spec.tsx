@@ -22,8 +22,8 @@ const readOnly = false;
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const intlTestHelper = jest.requireMock('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
-  const intlMessages = jest.requireMock('../../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlMessages = jest.requireActual('../../../i18n/nb_NO.json');
   return {
     ...reactIntl,
     useIntl: () => intlTestHelper.getIntlMock(intlMessages),

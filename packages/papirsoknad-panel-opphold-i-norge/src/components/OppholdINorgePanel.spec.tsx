@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   dateNotAfterOrEqualMessage,
   dateNotBeforeOrEqualMessage,
@@ -16,13 +15,14 @@ import {
 } from '@fpsak-frontend/utils';
 
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';
-import messages from '../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlMessages = jest.requireActual('../../i18n/nb_NO.json');
   return {
     ...reactIntl,
-    useIntl: () => getIntlMock(messages),
+    useIntl: () => intlTestHelper.getIntlMock(intlMessages),
   };
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
@@ -11,9 +11,11 @@ import messages from '../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlMessages = jest.requireActual('../../i18n/nb_NO.json');
   return {
     ...reactIntl,
-    useIntl: () => getIntlMock(messages),
+    useIntl: () => intlTestHelper.getIntlMock(intlMessages),
   };
 });
 
