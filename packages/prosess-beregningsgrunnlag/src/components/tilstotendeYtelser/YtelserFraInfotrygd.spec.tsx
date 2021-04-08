@@ -1,15 +1,18 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import YtelserFraInfotrygd from './YtelserFraInfotrygd';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<YtelserFraInfotrygd>', () => {
   it('Skal teste at de korrekte verdier for ytelse', () => {
     const brutto = 290000;
     const wrapper = shallowWithIntl(<YtelserFraInfotrygd
       bruttoPrAar={brutto}
-    />);
+    />, messages);
 
     const formattedMessage = wrapper.find(FormattedMessage);
 

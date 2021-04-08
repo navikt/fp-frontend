@@ -3,14 +3,13 @@ import sinon from 'sinon';
 import { Element } from 'nav-frontend-typografi';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 
 import { buildInitialValues, Tilbaketrekkpanel as UnwrappedForm, transformValues } from './Tilbaketrekkpanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-tilkjent-ytelse';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -38,7 +37,7 @@ describe('<Tilbaketrekkpanel>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const radioOption = wrapper.find(RadioOption);
     expect(radioOption).toHaveLength(2);

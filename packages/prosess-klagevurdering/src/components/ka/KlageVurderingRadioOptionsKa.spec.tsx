@@ -1,9 +1,8 @@
 import React from 'react';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { KlageVurderingRadioOptionsKa } from './KlageVurderingRadioOptionsKa';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-klagevurdering';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -22,7 +21,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
       medholdReasons={medholdReasons}
       klageVurdering={{ kode: klageVurdering.STADFESTE_YTELSESVEDTAK, kodeverk: '' }}
       intl={intlMock}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(4);
     // @ts-ignore
@@ -41,7 +40,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
       medholdReasons={medholdReasons}
       klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       intl={intlMock}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(7);
     // @ts-ignore
@@ -66,7 +65,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
       medholdReasons={medholdReasons}
       klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       intl={intlMock}
-    />);
+    />, messages);
     expect(wrapper.find('SelectField').props().name).toBe('klageMedholdArsak.kode');
     expect(wrapper.find('SelectField')).toHaveLength(1);
   });
@@ -77,7 +76,7 @@ describe('<KlageVurderingRadioOptionsKaImpl>', () => {
       medholdReasons={medholdReasons}
       klageVurdering={{ kode: klageVurdering.STADFESTE_YTELSESVEDTAK, kodeverk: '' }}
       intl={intlMock}
-    />);
+    />, messages);
     expect(wrapper.find('SelectField')).toHaveLength(0);
   });
 });

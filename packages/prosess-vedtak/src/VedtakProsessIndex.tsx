@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { isBGAksjonspunktSomGirFritekstfelt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -9,17 +9,13 @@ import {
   SimuleringResultat, Beregningsgrunnlag, Medlemskap, Aksjonspunkt, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const skalSkriveFritekstGrunnetFastsettingAvBeregning = (aksjonspunkter: Aksjonspunkt[], beregningsgrunnlag?: Beregningsgrunnlag): boolean => {
   if (!beregningsgrunnlag || !aksjonspunkter) {

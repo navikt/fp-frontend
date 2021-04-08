@@ -2,13 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { FamilieHendelse, Soknad, FamilieHendelseSamling } from '@fpsak-frontend/types';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { VarselOmRevurderingFormImpl as UnwrappedForm } from './VarselOmRevurderingForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-varsel-om-revurdering';
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -70,7 +69,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
-    />);
+    />, messages);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
     expect(fodselPanel).toHaveLength(1);
   });
@@ -108,7 +107,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
-    />);
+    />, messages);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
     expect(fodselPanel).toHaveLength(0);
 
@@ -151,7 +150,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
-    />);
+    />, messages);
 
     const textarea = wrapper.find('TextAreaField');
     const forhandsvis = wrapper.find('a');
@@ -193,7 +192,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
-    />);
+    />, messages);
 
     expect(wrapper.find('Undertekst')).toHaveLength(1);
     expect(wrapper.find('Normaltekst')).toHaveLength(1);

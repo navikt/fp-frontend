@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-tilkjent-ytelse';
 import messages from '../../i18n/nb_NO.json';
 import { PeriodeMedId, TilkjentYtelse } from './TilkjentYtelse';
 
@@ -45,7 +44,7 @@ describe('<TilkjentYtelse>', () => {
       isSoknadSvangerskapspenger={false}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     expect(wrapper.find(TimeLineSokerEnsamSoker)).toHaveLength(1);
     expect(wrapper.find(TimeLineSokerEnsamSoker).props().hovedsokerKjonnKode).toBe('K');
     expect(wrapper.find(TimeLineControl)).toHaveLength(1);

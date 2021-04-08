@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
+import { createIntl } from '@fpsak-frontend/utils';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import {
   BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelProps, Vedtaksbrev,
@@ -10,12 +11,7 @@ import { ForhandsvisData } from './components/TilbakekrevingVedtakForm';
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_KA,

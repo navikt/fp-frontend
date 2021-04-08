@@ -1,12 +1,10 @@
 import React from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
+import { createIntl } from '@fpsak-frontend/utils';
 import { PeriodLabel } from '@fpsak-frontend/shared-components';
 
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages: {},
-}, createIntlCache());
+const intl = createIntl({});
 
 export default {
   title: 'sharedComponents/PeriodLabel',

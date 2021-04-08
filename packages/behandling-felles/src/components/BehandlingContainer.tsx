@@ -1,9 +1,10 @@
 import React, {
   FunctionComponent, ReactElement, useState,
 } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { Behandling } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import ProsessContainer from './prosess/ProsessContainer';
 import FaktaContainer from './fakta/FaktaContainer';
@@ -12,12 +13,7 @@ import messages from '../../i18n/nb_NO.json';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../types/prosessPanelInitProps';
 import FaktaPanelInitProps from '../types/faktaPanelInitProps';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface FaktaPanelInfo {
   urlCode: string;

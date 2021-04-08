@@ -1,14 +1,13 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { KlageVurdering } from '@fpsak-frontend/types';
 
 import { BehandleKlageFormKaImpl } from './BehandleKlageFormKa';
 import PreviewKlageLink from '../felles/PreviewKlageLink';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-klagevurdering';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -41,7 +40,7 @@ describe('<BehandleKlageFormKaImpl>', () => {
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     expect(wrapper.find('PreviewKlageLink')).toHaveLength(1);
   });
   const formValues2 = {
@@ -63,7 +62,7 @@ describe('<BehandleKlageFormKaImpl>', () => {
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     expect(wrapper.find(PreviewKlageLink)).toHaveLength(0);
   });
 
@@ -89,7 +88,7 @@ describe('<BehandleKlageFormKaImpl>', () => {
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     expect(wrapper.find(PreviewKlageLink)).toHaveLength(0);
   });
 });

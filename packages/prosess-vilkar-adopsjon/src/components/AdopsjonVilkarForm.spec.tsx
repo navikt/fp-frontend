@@ -10,9 +10,12 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-adopsjon';
 import { AdopsjonVilkarFormImpl as UnwrappedForm, buildInitialValues } from './AdopsjonVilkarForm';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<AdopsjonVilkarForm>', () => {
   it('skal vise readonly-form med utgråete knapper når readonly og vilkåret ikke er vurdert', () => {

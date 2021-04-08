@@ -1,11 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import messages from '../../../i18n/nb_NO.json';
 import { SammenligningsgrunnlagAOrdningenImpl } from './SammenligningsgrunnlagAOrdningen';
 
@@ -81,7 +80,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
       sammenligningsGrunnlagInntekter={{}}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(0);
   });
@@ -90,7 +89,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(0);
   });
@@ -99,7 +98,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
       sammenligningsGrunnlagInntekter={inntektsgrunnlagAT}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
-    />);
+    />, messages);
 
     const lesmer = wrapper.find('Lesmerpanel');
     expect(lesmer).toHaveLength(1);
@@ -118,7 +117,7 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
       sammenligningsGrunnlagInntekter={inntektsgrunnlagATFL}
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
-    />);
+    />, messages);
 
     const lesmer = wrapper.find('Lesmerpanel');
     expect(lesmer).toHaveLength(1);

@@ -2,9 +2,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { UttakStonadskontoer, Stonadskonto } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import TimeLineInfo from './TimeLineInfo';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../../i18n/nb_NO.json';
 
 const stonadskonto = {
   FORELDREPENGER_FØR_FØDSEL: {
@@ -47,12 +48,12 @@ describe('<TimeLineInfo>', () => {
       stonadskonto={stonadskonto}
       maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
-    const messages = wrapper.find(FormattedMessage);
-    expect(messages).toHaveLength(3);
+    const fMessages = wrapper.find(FormattedMessage);
+    expect(fMessages).toHaveLength(3);
     // @ts-ignore
-    expect(messages.at(1).props().values.ukerVerdi).toBe(24);
+    expect(fMessages.at(1).props().values.ukerVerdi).toBe(24);
   });
 
   it('skal vise tabell med disponible dager', () => {
@@ -60,7 +61,7 @@ describe('<TimeLineInfo>', () => {
       stonadskonto={stonadskonto}
       maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const konto = {
       kontonavn: 'FELLESPERIODE',
@@ -85,12 +86,12 @@ describe('<TimeLineInfo>', () => {
     };
 
     wrapper.setState({ aktiv: 1, visKonto: konto });
-    const messages = wrapper.find(FormattedMessage);
-    expect(messages).toHaveLength(3);
+    const fMessages = wrapper.find(FormattedMessage);
+    expect(fMessages).toHaveLength(3);
     // @ts-ignore
-    expect(messages.at(2).prop('values').dato).toBe('01.12.2018');
+    expect(fMessages.at(2).prop('values').dato).toBe('01.12.2018');
     // @ts-ignore
-    expect(messages.at(1).prop('values').ukerVerdi).toBe(24);
+    expect(fMessages.at(1).prop('values').ukerVerdi).toBe(24);
   });
 
   it('skal vise tabs', () => {
@@ -98,7 +99,7 @@ describe('<TimeLineInfo>', () => {
       stonadskonto={stonadskonto}
       maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     wrapper.setState({ aktiv: 1 });
     const timelineTab = wrapper.find('TimeLineTab');
     expect(timelineTab).toHaveLength(4);

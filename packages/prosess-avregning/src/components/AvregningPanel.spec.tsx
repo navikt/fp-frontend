@@ -9,11 +9,14 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { Fagsak, SimuleringResultat } from '@fpsak-frontend/types';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 import { AvregningPanelImpl, transformValues } from './AvregningPanel';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-avregning';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const simuleringResultat = {
   simuleringResultat: {
@@ -58,7 +61,7 @@ describe('<AvregningPanelImpl>', () => {
   it('skal rendre AvregningPanel', () => {
     const wrapper = shallowWithIntl(<AvregningPanelImpl
       {...mockProps}
-    />);
+    />, messages);
 
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(2);

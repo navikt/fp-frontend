@@ -1,12 +1,11 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import VedtakHelpTextPanel from './VedtakHelpTextPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -22,7 +21,7 @@ describe('<VedtakHelpTextPanel>', () => {
         },
       }] as Aksjonspunkt[]}
       readOnly={false}
-    />);
+    />, messages);
 
     const helpTexts = wrapper.find('li');
     expect(helpTexts).toHaveLength(1);
@@ -44,7 +43,7 @@ describe('<VedtakHelpTextPanel>', () => {
         },
       }] as Aksjonspunkt[]}
       readOnly={false}
-    />);
+    />, messages);
 
     const helpTexts = wrapper.find('li');
     expect(helpTexts).toHaveLength(2);
@@ -64,7 +63,7 @@ describe('<VedtakHelpTextPanel>', () => {
         },
       }] as Aksjonspunkt[]}
       readOnly={false}
-    />);
+    />, messages);
 
     expect(wrapper.find('HelpText')).toHaveLength(0);
   });

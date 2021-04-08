@@ -2,14 +2,13 @@ import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { TextAreaField } from '@fpsak-frontend/form';
 
 import { InnsynVedtakFormImpl } from './InnsynVedtakForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vedtak-innsyn';
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -40,7 +39,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(ProsessStegSubmitButton)).toHaveLength(1);
   });
 
@@ -68,7 +67,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(ProsessStegSubmitButton)).toHaveLength(0);
   });
 
@@ -97,7 +96,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('InnsynVedtakForm.ForhåndsvisBrev');
   });
 
@@ -125,7 +124,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('InnsynVedtakForm.VisVedtaksbrev');
   });
 
@@ -154,7 +153,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
@@ -182,7 +181,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
 
@@ -210,7 +209,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
 
@@ -239,7 +238,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find('DocumentListVedtakInnsyn')).toHaveLength(1);
   });
 
@@ -267,7 +266,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find('DocumentListVedtakInnsyn')).toHaveLength(1);
   });
 
@@ -295,7 +294,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find('DocumentListVedtakInnsyn')).toHaveLength(0);
   });
 
@@ -324,7 +323,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).toBe('InnsynVedtakForm.Innvilget');
   });
 
@@ -352,7 +351,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).toBe('InnsynVedtakForm.Delvis');
   });
 
@@ -380,7 +379,7 @@ describe('<InnsynVedtakForm>', () => {
       submitCallback={sinon.spy()}
       previewCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).at(2).prop('id')).toBe('InnsynVedtakForm.Avslatt');
   });
 });

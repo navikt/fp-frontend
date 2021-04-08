@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -12,7 +12,6 @@ import {
 } from '@fpsak-frontend/types';
 
 import { buildInitialValues, getSortedManglendeVedlegg, SokersOpplysningspliktFormImpl } from './SokersOpplysningspliktForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-sokers-opplysningsplikt';
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -80,7 +79,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       alleKodeverk={{}}
       originalErVilkarOk
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const table = wrapper.find(Table);
     expect(table).toHaveLength(1);
@@ -123,7 +122,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       alleKodeverk={{}}
       originalErVilkarOk
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(Table)).toHaveLength(0);
   });

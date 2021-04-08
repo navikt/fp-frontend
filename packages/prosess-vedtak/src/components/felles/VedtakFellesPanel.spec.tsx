@@ -4,13 +4,12 @@ import Lenke from 'nav-frontend-lenker';
 import { FormattedMessage } from 'react-intl';
 
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Behandling } from '@fpsak-frontend/types';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
 import messages from '../../../i18n/nb_NO.json';
 import VedtakFellesPanel from './VedtakFellesPanel';
 
@@ -52,7 +51,7 @@ describe('<VedtakFellesPanel>', () => {
       erBehandlingEtterKlage={false}
       handleSubmit={sinon.spy()}
       submitting={false}
-    />);
+    />, messages);
 
     const lenker = wrapper.find(Lenke);
     expect(lenker).toHaveLength(2);
@@ -79,7 +78,7 @@ describe('<VedtakFellesPanel>', () => {
       erBehandlingEtterKlage={false}
       handleSubmit={sinon.spy()}
       submitting={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(ManueltVedtaksbrevPanel)).toHaveLength(0);
 
@@ -104,7 +103,7 @@ describe('<VedtakFellesPanel>', () => {
       erBehandlingEtterKlage={false}
       handleSubmit={sinon.spy()}
       submitting={false}
-    />);
+    />, messages);
 
     expect(wrapper.find('span')).toHaveLength(3);
   });

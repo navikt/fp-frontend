@@ -8,9 +8,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-omsorg';
+import messages from '../../i18n/nb_NO.json';
 import { buildInitialValues, ErOmsorgVilkaarOppfyltFormImpl as UnwrappedForm } from './ErOmsorgVilkaarOppfyltForm';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ErOmsorgVilkaarOppfyltForm>', () => {
   const aksjonspunkterList = [{

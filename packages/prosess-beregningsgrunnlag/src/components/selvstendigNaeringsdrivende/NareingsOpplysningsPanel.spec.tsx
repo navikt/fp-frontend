@@ -3,10 +3,9 @@ import { FormattedMessage } from 'react-intl';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import messages from '../../../i18n/nb_NO.json';
 import NaeringsopplysningsPanel from './NaeringsOpplysningsPanel';
 
@@ -53,7 +52,7 @@ describe('NaeringsopplysningsPanel', () => {
       alleAndelerIForstePeriode={[andelerForstePeriode]}
       arbeidsgiverOpplysningerPerId={agOpp}
       intl={intlMock}
-    />);
+    />, messages);
     const formattedMessages = wrapper.find(FormattedMessage);
     expect(formattedMessages).toHaveLength(3);
     expect(formattedMessages.first().props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.Overskrift');

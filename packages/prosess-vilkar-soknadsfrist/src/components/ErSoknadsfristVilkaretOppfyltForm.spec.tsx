@@ -1,16 +1,15 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { buildInitialValues, ErSoknadsfristVilkaretOppfyltFormImpl as UnwrappedForm } from './ErSoknadsfristVilkaretOppfyltForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-vilkar-soknadsfrist';
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -45,7 +44,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-    />);
+    />, messages);
 
     const dateLabel = wrapper.find('DateLabel');
     expect(dateLabel).toHaveLength(3);
@@ -79,7 +78,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-    />);
+    />, messages);
 
     const dateLabel = wrapper.find('DateLabel');
     expect(dateLabel).toHaveLength(3);
@@ -114,7 +113,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-    />);
+    />, messages);
 
     const dateLabel = wrapper.find('span');
     expect(dateLabel).toHaveLength(5);
@@ -147,7 +146,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-    />);
+    />, messages);
 
     const dateLabel = wrapper.find('span');
     expect(dateLabel).toHaveLength(5);
@@ -180,7 +179,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-    />);
+    />, messages);
 
     const radioButtons = wrapper.find('RadioOption');
     expect(radioButtons).toHaveLength(2);
@@ -215,7 +214,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-    />);
+    />, messages);
 
     const confirm = wrapper.find(ProsessStegBegrunnelseTextField);
     expect(confirm).toHaveLength(1);

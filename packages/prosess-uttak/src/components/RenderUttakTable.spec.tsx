@@ -2,9 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-proses-uttak';
 import RenderUttakTable from './RenderUttakTable';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const uttakFields1 = [
   {

@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KlageVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';
 import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
@@ -10,12 +11,7 @@ import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
 import { BrevData } from './components/felles/PreviewKlageLink';
 import { TransformedValues } from './components/felles/TempsaveKlageButton';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   klageVurdering: KlageVurdering;

@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Image } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form';
 
 import { TilbakekrevingVedtakUtdypendeTekstPanel } from './TilbakekrevingVedtakUtdypendeTekstPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-vedtak-tilbakekreving';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -21,7 +20,7 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       formName="test"
       behandlingId={2}
       behandlingVersjon={3}
-    />);
+    />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(1);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
@@ -37,7 +36,7 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       formName="test"
       behandlingId={2}
       behandlingVersjon={3}
-    />);
+    />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(0);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
@@ -53,7 +52,7 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       formName="test"
       behandlingId={2}
       behandlingVersjon={3}
-    />);
+    />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(0);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
@@ -69,7 +68,7 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       formName="test"
       behandlingId={2}
       behandlingVersjon={3}
-    />);
+    />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(0);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);

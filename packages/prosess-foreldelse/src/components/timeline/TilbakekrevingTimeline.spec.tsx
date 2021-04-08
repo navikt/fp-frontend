@@ -2,12 +2,11 @@ import React from 'react';
 import sinon from 'sinon';
 
 import Timeline from 'react-visjs-timeline';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 
 import { TimeLineControl } from '@fpsak-frontend/tidslinje';
 import TilbakekrevingTimeline from './TilbakekrevingTimeline';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-foreldelse';
 import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -44,7 +43,7 @@ describe('<TilbakekrevingTimeline>', () => {
         selectPeriodCallback={sinon.spy()}
         hjelpetekstKomponent={<div>test</div>}
         kjonn="MANN"
-      />,
+      />, messages,
     );
 
     expect(wrapper.find(TimeLineControl)).toHaveLength(1);
