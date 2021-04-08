@@ -69,20 +69,6 @@ type FormValues = {
 const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
   || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr?.kode === ankeVurdering.ANKE_OMGJOER;
 
-const canSubmit = (formValues: FormValuesUtrekk): boolean => {
-  if (ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode && !formValues.erSubsidiartRealitetsbehandles) {
-    return false;
-  }
-  if (ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode && (!formValues.ankeOmgjoerArsak || !formValues.ankeVurderingOmgjoer)) {
-    return false;
-  }
-  if (!formValues.ankeOmgjoerArsak && (ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering?.kode
-    || ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode)) {
-    return false;
-  }
-  return formValues.ankeVurdering != null && formValues.vedtak != null;
-};
-
 // TODO (TOR) Dette skal ikkje hardkodast!!! Hent fra kodeverk
 const formatBehandlingType = (kode: string): string | null => {
   switch (kode) {
@@ -327,7 +313,7 @@ const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & Wrappe
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
-            isSubmittable={!readOnly && canSubmit(formValues)}
+            isSubmittable={!readOnly && !readOnlySubmitButton}
             isBehandlingFormSubmitting={isBehandlingFormSubmitting}
             isBehandlingFormDirty={isBehandlingFormDirty}
             hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
