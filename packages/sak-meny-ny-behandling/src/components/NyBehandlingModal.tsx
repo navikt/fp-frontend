@@ -216,6 +216,7 @@ const manuelleRevurderingsArsakerSVP = [
   behandlingArsakType.DØD,
   behandlingArsakType.ANNET,
   behandlingArsakType.INNTEKT,
+  behandlingArsakType.REBEREGN_FERIEPENGER,
 ];
 
 const tilbakekrevingRevurderingArsaker = [
