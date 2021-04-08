@@ -11,7 +11,7 @@
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "core-js": "^3.10.0",
+    "core-js": "^3.10.1",
     "moment": "^2.29.1",
     "nav-frontend-alertstriper": "3.0.51",
     "nav-frontend-alertstriper-style": "2.0.38",
@@ -31,6 +31,6 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "enzyme": "^3.11.0",
-    "sinon": "^10.0.0"
+    "sinon": "^10.0.1"
   }
 }
