@@ -277,7 +277,7 @@ const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & Wrappe
       || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering?.kode) && (
       <Row>
         <Column xs="7">
-          <ArrowBox alignOffset={180}>
+          <ArrowBox alignOffset={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode ? 98 : 198}>
             <SelectField
               readOnly={readOnly}
               name="ankeOmgjoerArsak.kode"
