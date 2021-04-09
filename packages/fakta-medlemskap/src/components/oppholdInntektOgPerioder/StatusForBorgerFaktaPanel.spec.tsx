@@ -2,16 +2,18 @@ import React from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import StatusForBorgerFaktaPanel, { PeriodeMedId } from './StatusForBorgerFaktaPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import messages from '../../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-fakta-medlemskap');
+  const meldinger = jest.requireActual('../../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(meldinger),
   };
 });
 
@@ -26,7 +28,7 @@ describe('<StatusForBorgerFaktaPanel>', () => {
       readOnly={false}
       isBorgerAksjonspunktClosed={false}
       alleMerknaderFraBeslutter={{}}
-    />);
+    />, messages);
     const groups = wrapper.find('RadioGroupField');
     expect(groups).toHaveLength(2);
 
@@ -54,7 +56,7 @@ describe('<StatusForBorgerFaktaPanel>', () => {
       readOnly={false}
       isBorgerAksjonspunktClosed={false}
       alleMerknaderFraBeslutter={{}}
-    />);
+    />, messages);
 
     const groups = wrapper.find('RadioGroupField');
     expect(groups).toHaveLength(2);

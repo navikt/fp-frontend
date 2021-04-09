@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
 import {
   FamilieHendelseSamling, Kodeverk, Personoversikt, Ytelsefordeling,
@@ -8,7 +9,6 @@ import {
 import UttakFaktaForm from './UttakFaktaForm';
 import UttakInfoPanel from './UttakInfoPanel';
 import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
 
 const avklarAnnenforelderHarRettAp = [{
   aksjonspunktType: {
@@ -38,7 +38,7 @@ const avklarAnnenforelderHarRettAp = [{
 
 describe('<UttakInfoPanel>', () => {
   it('skal vise UttakInfoPanel', () => {
-    const wrapper = shallowWithIntl(<UttakInfoPanel
+    const wrapper = shallow(<UttakInfoPanel
       submitCallback={sinon.spy()}
       readOnly
       aksjonspunkter={[]}
@@ -63,7 +63,7 @@ describe('<UttakInfoPanel>', () => {
   });
 
   it('skal vise Avklar annen forelder har rett', () => {
-    const wrapper = shallowWithIntl(<UttakInfoPanel
+    const wrapper = shallow(<UttakInfoPanel
       submitCallback={sinon.spy()}
       readOnly
       aksjonspunkter={avklarAnnenforelderHarRettAp}

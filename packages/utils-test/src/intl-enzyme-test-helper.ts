@@ -9,16 +9,12 @@
 import React, { ReactElement } from 'react';
 import { createIntl, createIntlCache, IntlProvider } from 'react-intl';
 import { mount, shallow, ShallowRendererProps } from 'enzyme';
-// You can pass your messages to the IntlProvider. Optional: remove if unneeded.
-import messages from '../../../public/sprak/nb_NO.json';
-
-export { default as messages } from '../../../public/sprak/nb_NO.json';
 
 // Create the IntlProvider to retrieve context for wrapping around.
 const cache = createIntlCache();
 
-const getIntlObject = (moduleMessages?: any) => {
-  const selectedMessages = moduleMessages || messages;
+const getIntlObject = (moduleMessages: Record<string, string>) => {
+  const selectedMessages = moduleMessages;
 
   return createIntl({
     locale: 'nb-NO',
@@ -30,12 +26,12 @@ const getIntlObject = (moduleMessages?: any) => {
 /**
  * When using React-Intl `injectIntl` on components, props.intl is required.
  */
-function nodeWithIntlProp(node: ReactElement, moduleMessages?: any): ReactElement {
+function nodeWithIntlProp(node: ReactElement, moduleMessages: Record<string, string>): ReactElement {
   return React.cloneElement(node, { intl: getIntlObject(moduleMessages) });
 }
 
-const getOptions = (moduleMessages?: any): ShallowRendererProps => {
-  const selectedMessages = moduleMessages || messages;
+const getOptions = (moduleMessages: Record<string, string>): ShallowRendererProps => {
+  const selectedMessages = moduleMessages;
 
   return {
     wrappingComponent: IntlProvider,
@@ -47,15 +43,12 @@ const getOptions = (moduleMessages?: any): ShallowRendererProps => {
   };
 };
 
-export function shallowWithIntl(node: ReactElement, options?: ShallowRendererProps, moduleMessages = undefined) {
-  return shallow(nodeWithIntlProp(node, moduleMessages), { ...getOptions(moduleMessages), ...options });
+export function shallowWithIntl(node: ReactElement, intlMessages: Record<string, string>, options?: ShallowRendererProps) {
+  return shallow(nodeWithIntlProp(node, intlMessages), { ...getOptions(intlMessages), ...options });
 }
 
-export function mountWithIntl(node: ReactElement, options?: ShallowRendererProps, moduleMessages = undefined) {
-  return mount(nodeWithIntlProp(node), { ...getOptions(moduleMessages), ...options });
+export function mountWithIntl(node: ReactElement, intlMessages: Record<string, string>, options?: ShallowRendererProps) {
+  return mount(nodeWithIntlProp(node, intlMessages), { ...getOptions(intlMessages), ...options });
 }
 
-export const intlWithMessages = (customMessages?: any) => getIntlObject(customMessages);
-
-// TODO Denne burde ein vel kunne fjerna? Blir injecta i shallowWithInlt og mountWithIntl
-export const intlMock = getIntlObject(messages);
+export const getIntlMock = (customMessages: Record<string, string>) => getIntlObject(customMessages);

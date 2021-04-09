@@ -6,12 +6,11 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity, removeSpacesFromNumber, required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Kodeverk, KodeverkMedNavn, AktsomhetInfo } from '@fpsak-frontend/types';
 
 import Aktsomhet from '../../../kodeverk/aktsomhet';
 import AktsomhetGradFormPanel from './AktsomhetGradFormPanel';
 import { ANDELER, EGENDEFINERT } from './AktsomhetReduksjonAvBelopFormPanel';
-import { AktsomhetInfo } from '../../../types/vilkarsVurdertePerioderTsType';
 
 const uaktsomhetCodes = [
   Aktsomhet.GROVT_UAKTSOM,

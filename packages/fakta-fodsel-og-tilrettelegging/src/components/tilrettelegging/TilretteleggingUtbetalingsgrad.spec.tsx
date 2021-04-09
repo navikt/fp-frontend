@@ -2,9 +2,10 @@ import React from 'react';
 
 import { DecimalField } from '@fpsak-frontend/form';
 import { Image } from '@fpsak-frontend/shared-components';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import TilretteleggingUtbetalingsgrad from './TilretteleggingUtbetalingsgrad';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<TilretteleggingUtbetalingsgrad>', () => {
   it('skal vise inputfelt som kan editeres når overstyrer velger å overstyre', () => {
@@ -22,7 +23,7 @@ describe('<TilretteleggingUtbetalingsgrad>', () => {
       behandlingId={1}
       behandlingVersjon={2}
       formName="test"
-    />);
+    />, messages);
 
     expect(wrapper.find(DecimalField).prop('readOnly')).toBe(true);
 

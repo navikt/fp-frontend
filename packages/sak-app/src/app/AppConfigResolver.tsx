@@ -13,7 +13,7 @@ interface OwnProps {
   children: ReactElement,
 }
 
-const NO_PARAMS = {};
+const NO_PARAMS = undefined;
 
 /**
  * Komponent som henter backend-data som skal kunne aksesseres globalt i applikasjonen. Denne dataen blir kun hentet en gang.
@@ -38,25 +38,20 @@ const AppConfigResolver: FunctionComponent<OwnProps> = ({
 
   const featureToggleParams = { toggles: Object.values(featureToggle).map((ft) => ({ navn: ft })) };
   const { state: featureToggleState } = restApiHooks
-    .useGlobalStateRestApi<{ featureToggles: {[key: string]: boolean} }>(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams, {
+    .useGlobalStateRestApi(FpsakApiKeys.FEATURE_TOGGLE, featureToggleParams, {
       ...options,
       suspendRequest: options.suspendRequest || isObjectEmpty(featureToggle),
     });
 
-  const { state: sprakFilState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.LANGUAGE_FILE, NO_PARAMS);
-
   const harHentetFerdigKodeverk = useHentKodeverk(harHentetFerdigInitLenker);
-
-  const harFeilet = harFpsakInitKallFeilet && sprakFilState === RestApiState.SUCCESS;
 
   const erFerdig = harHentetFerdigInitLenker
     && harHentetFerdigKodeverk
     && navAnsattState === RestApiState.SUCCESS
-    && sprakFilState === RestApiState.SUCCESS
     && behandlendeEnheterState === RestApiState.SUCCESS
     && (featureToggleState === RestApiState.NOT_STARTED || featureToggleState === RestApiState.SUCCESS);
 
-  return harFeilet || erFerdig ? children : <LoadingPanel />;
+  return harFpsakInitKallFeilet || erFerdig ? children : <LoadingPanel />;
 };
 
 export default AppConfigResolver;

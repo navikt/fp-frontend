@@ -9,14 +9,18 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   DatepickerField, RadioGroupField, RadioOption, SelectField,
 } from '@fpsak-frontend/form';
-import { hasValidDate, isRequiredMessage, required } from '@fpsak-frontend/utils';
+import {
+  hasValidDate, isRequiredMessage, required, createIntl,
+} from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
 
 import styles from './vilkarResultPicker.less';
+
+const intl = createIntl(messages);
 
 type FormValues = {
   erVilkarOk: boolean;
@@ -57,70 +61,67 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   customVilkarOppfyltText,
   readOnly,
   erMedlemskapsPanel = false,
-}) => {
-  const intl = getPackageIntl();
-  return (
-    <div className={styles.container}>
-      <VerticalSpacer sixteenPx />
-      {(readOnly && erVilkarOk !== undefined) && (
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Image className={styles.image} src={erVilkarOk ? innvilgetImage : avslattImage} />
-            </FlexColumn>
-            <FlexColumn>
-              {erVilkarOk && <Normaltekst>{customVilkarOppfyltText}</Normaltekst>}
-              {!erVilkarOk && <Normaltekst>{customVilkarIkkeOppfyltText}</Normaltekst>}
-            </FlexColumn>
-          </FlexRow>
+}) => (
+  <div className={styles.container}>
+    <VerticalSpacer sixteenPx />
+    {(readOnly && erVilkarOk !== undefined) && (
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
+            <Image className={styles.image} src={erVilkarOk ? innvilgetImage : avslattImage} />
+          </FlexColumn>
+          <FlexColumn>
+            {erVilkarOk && <Normaltekst>{customVilkarOppfyltText}</Normaltekst>}
+            {!erVilkarOk && <Normaltekst>{customVilkarIkkeOppfyltText}</Normaltekst>}
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer eightPx />
+      </FlexContainer>
+    )}
+    {(!readOnly || erVilkarOk === undefined) && (
+      <RadioGroupField
+        name="erVilkarOk"
+        validate={[required]}
+        bredde="XXL"
+        direction="vertical"
+        readOnly={readOnly}
+      >
+        <RadioOption
+          label={customVilkarOppfyltText}
+          value
+        />
+        <RadioOption
+          label={customVilkarIkkeOppfyltText}
+          value={false}
+        />
+      </RadioGroupField>
+    )}
+    <>
+      {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
+        <>
           <VerticalSpacer eightPx />
-        </FlexContainer>
-      )}
-      {(!readOnly || erVilkarOk === undefined) && (
-        <RadioGroupField
-          name="erVilkarOk"
-          validate={[required]}
-          bredde="XXL"
-          direction="vertical"
-          readOnly={readOnly}
-        >
-          <RadioOption
-            label={customVilkarOppfyltText}
-            value
+          <SelectField
+            name="avslagCode"
+            label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
+            placeholder={intl.formatMessage({ id: 'VilkarResultPicker.SelectArsak' })}
+            selectValues={avslagsarsaker.map((aa) => <option key={aa.kode} value={aa.kode}>{aa.navn}</option>)}
+            bredde="xl"
+            readOnly={readOnly}
           />
-          <RadioOption
-            label={customVilkarIkkeOppfyltText}
-            value={false}
+          {erMedlemskapsPanel && (
+          <DatepickerField
+            name="avslagDato"
+            label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
+            readOnly={readOnly}
+            validate={[required, hasValidDate]}
           />
-        </RadioGroupField>
+          )}
+        </>
       )}
-      <>
-        {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
-          <>
-            <VerticalSpacer eightPx />
-            <SelectField
-              name="avslagCode"
-              label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-              placeholder={intl.formatMessage({ id: 'VilkarResultPicker.SelectArsak' })}
-              selectValues={avslagsarsaker.map((aa) => <option key={aa.kode} value={aa.kode}>{aa.navn}</option>)}
-              bredde="xl"
-              readOnly={readOnly}
-            />
-            {erMedlemskapsPanel && (
-            <DatepickerField
-              name="avslagDato"
-              label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
-              readOnly={readOnly}
-              validate={[required, hasValidDate]}
-            />
-            )}
-          </>
-        )}
-      </>
-      <VerticalSpacer eightPx />
-    </div>
-  );
-};
+    </>
+    <VerticalSpacer eightPx />
+  </div>
+);
 
 VilkarResultPicker.validate = (erVilkarOk: boolean, avslagCode: string) => {
   if (erVilkarOk === false && !avslagCode) {

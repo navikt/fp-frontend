@@ -4,13 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { FamilieHendelseSamling, Kodeverk, Personoversikt } from '@fpsak-frontend/types';
 
 import { UttakPerioder } from './UttakPerioder';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
 import UttakNyPeriode from './UttakNyPeriode';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
 
 const reduxFormChange = sinon.spy();
 const reduxFormReset = sinon.spy();
@@ -62,7 +63,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     const fieldArray = wrapper.find('FieldArray');
@@ -108,7 +109,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     wrapper.setState({ isNyPeriodeFormOpen: true });
@@ -153,7 +154,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     wrapper.setState({ showModalSlettPeriode: true });
@@ -194,7 +195,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     const hovedknapp = wrapper.find(FaktaSubmitButton);
@@ -230,7 +231,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     const hovedknapp = wrapper.find(FaktaSubmitButton);
@@ -266,7 +267,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     const hovedknapp = wrapper.find(FaktaSubmitButton);
@@ -325,7 +326,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     const aksjonspunktHelpText = wrapper.find(AksjonspunktHelpTextHTML);
@@ -362,7 +363,7 @@ describe('<UttakPerioder>', () => {
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
         submittable
-      />,
+      />, messages,
     );
 
     const knapp = wrapper.find(Knapp);

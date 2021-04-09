@@ -36,8 +36,8 @@ describe('<FagsakSearchIndex>', () => {
   const fagsaker = [fagsak, fagsak2];
 
   it('skal søke opp fagsaker', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK, {});
-    requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK, fagsaker);
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
+    requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK.name, fagsaker);
 
     const wrapper = shallow(<FagsakSearchIndex />);
 
@@ -53,8 +53,8 @@ describe('<FagsakSearchIndex>', () => {
   });
 
   it('skal gå til valgt fagsak', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK, {});
-    requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK, fagsaker);
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
+    requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK.name, fagsaker);
 
     const wrapper = shallow(<FagsakSearchIndex />);
 

@@ -17,7 +17,7 @@ describe('<AppIndex>', () => {
   };
 
   it('skal vise hjem-skjermbilde', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
     const wrapper = shallow(<AppIndex.WrappedComponent
       location={locationMock}
       history={{} as History}
@@ -28,7 +28,7 @@ describe('<AppIndex>', () => {
   });
 
   it('skal vise query-feilmelding', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
     const location = {
       search: '?errormessage=Det+finnes+ingen+sak+med+denne+referansen%3A+266',
     };

@@ -1,13 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import {
   DateTimeLabel, Image, Table, TableRow,
 } from '@fpsak-frontend/shared-components';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import DocumentListInnsyn from './DocumentListInnsyn';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-innsyn';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<DocumentListInnsyn>', () => {
   it('skal vise tekst ved tom dokumentliste', () => {
@@ -16,7 +18,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={[]}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).prop('id')).toBe('DocumentListInnsyn.NoDocuments');
   });
 
@@ -33,7 +35,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={documents}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).prop('id')).toBe('DocumentListInnsyn.VelgInnsynsDok');
     expect(wrapper.find('a').text()).toBe('Dok1');
     expect(wrapper.find(Table)).toHaveLength(1);
@@ -58,7 +60,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={documents}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
     expect(wrapper.find(TableRow)).toHaveLength(2);
   });
 
@@ -75,7 +77,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={documents}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(Image).prop('tooltip')).toEqual('Ut');
   });
@@ -93,7 +95,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={documents}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
     expect(wrapper.find(Image).prop('tooltip')).toEqual('Inn');
   });
 
@@ -110,7 +112,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={documents}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
     expect(wrapper.find(FormattedMessage).last().prop('id')).toBe('DocumentListInnsyn.IProduksjon');
   });
 
@@ -127,7 +129,7 @@ describe('<DocumentListInnsyn>', () => {
       documents={documents}
       saksNr="123"
       readOnly={false}
-    />);
+    />, messages);
     expect(wrapper.find(DateTimeLabel).prop('dateTimeString')).toBe('22.12.2017 - 09:00');
   });
 });

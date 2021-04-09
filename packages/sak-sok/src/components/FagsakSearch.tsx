@@ -12,14 +12,14 @@ import styles from './fagsakSearch.less';
 
 interface OwnProps {
   fagsaker: Fagsak[];
-  searchFagsakCallback: () => void;
+  searchFagsakCallback: (params?: { searchString: string }) => Promise<Fagsak[]>;
   searchResultReceived: boolean;
   selectFagsakCallback: (e: React.SyntheticEvent, saksnummer: string) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding: string;
   };
-  alleKodeverk: {[key: string]: [KodeverkMedNavn]};
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 
 /**

@@ -2,12 +2,12 @@ import {
   useState, useEffect, DependencyList, useRef,
 } from 'react';
 
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
 
 const notEqual = (array1, array2) => !(array1.length === array2.length && array1.every((value, index) => value === array2[index]));
-const format = (name) => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
+const format = (name: string): string => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
 
 export interface RestApiData<T> {
   state: RestApiState;
@@ -16,7 +16,7 @@ export interface RestApiData<T> {
 }
 
 export interface EndpointData {
-  key: string,
+  key: RestKey<any, any>,
   params?: any
 }
 
@@ -37,12 +37,12 @@ const defaultOptions = {
 /**
  * For mocking i unit-test
  */
-export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
+export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T, P>(
   endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
   const endpointData = endpoints.reduce((acc, endpoint) => ({
     ...acc,
-    [format(endpoint.key)]: requestApi.startRequest<T>(endpoint.key, endpoint.params),
+    [format(endpoint.key.name)]: requestApi.startRequest<T, P>(endpoint.key.name, endpoint.params),
   }), {});
   return {
     state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
@@ -62,7 +62,7 @@ const DEFAULT_STATE = {
   * Hook som utfører et restkall ved mount. En kan i tillegg legge ved en dependencies-liste som kan trigge ny henting når data
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
-const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T>(
+const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T, P>(
   endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
@@ -81,15 +81,15 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
         data: options.keepData ? oldState.data : undefined,
       }));
 
-      const filteredEndpoints = endpoints.filter((e) => requestApi.hasPath(e.key));
+      const filteredEndpoints = endpoints.filter((e) => requestApi.hasPath(e.key.name));
 
-      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest<T>(e.key, e.params, options.isCachingOn)))
+      Promise.all(filteredEndpoints.map((e) => requestApi.startRequest<T, P>(e.key.name, e.params, options.isCachingOn)))
         .then((dataRes) => {
           setData({
             state: RestApiState.SUCCESS,
             data: dataRes.reduce((acc, result, index) => ({
               ...acc,
-              [format(filteredEndpoints[index].key)]: result.payload,
+              [format(filteredEndpoints[index].key.name)]: result.payload,
             }), {} as T),
             error: undefined,
           });

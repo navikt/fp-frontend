@@ -1,14 +1,15 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import { DekningsgradPanel } from './DekningsgradPanel';
 
 describe('<DekningsgradPanel>', () => {
   it('skal vise dekningsgradpanel', () => {
-    const wrapper = shallowWithIntl(<DekningsgradPanel
-      intl={intlMock}
+    const wrapper = shallow(<DekningsgradPanel
+      intl={getIntlMock(messages)}
       readOnly={false}
     />);
 

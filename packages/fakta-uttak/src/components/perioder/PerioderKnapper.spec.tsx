@@ -3,9 +3,10 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { PerioderKnapper } from './PerioderKnapper';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<PerioderKnapper>', () => {
   it('skal vise ingenting gitt read only modus', () => {
@@ -18,7 +19,7 @@ describe('<PerioderKnapper>', () => {
       updated
       bekreftet
       readOnly
-    />);
+    />, messages);
 
     const hovedknapp = wrapper.find('Hovedknapp');
     const knapp = wrapper.find('Knapp');
@@ -36,7 +37,7 @@ describe('<PerioderKnapper>', () => {
       updated
       bekreftet
       readOnly={false}
-    />);
+    />, messages);
 
     const hovedknapp = wrapper.find('Hovedknapp');
     const knapp = wrapper.find('Knapp');
@@ -54,7 +55,7 @@ describe('<PerioderKnapper>', () => {
       updated={false}
       bekreftet={false}
       readOnly={false}
-    />);
+    />, messages);
 
     const knapp = wrapper.find('Knapp');
     expect(knapp).toHaveLength(1);
@@ -71,7 +72,7 @@ describe('<PerioderKnapper>', () => {
       updated={false}
       bekreftet
       readOnly={false}
-    />);
+    />, messages);
 
     const knapp = wrapper.find('Knapp');
     expect(knapp).toHaveLength(1);
@@ -88,7 +89,7 @@ describe('<PerioderKnapper>', () => {
       updated
       bekreftet={false}
       readOnly={false}
-    />);
+    />, messages);
 
     const knapp = wrapper.find('Knapp');
     expect(knapp).toHaveLength(1);

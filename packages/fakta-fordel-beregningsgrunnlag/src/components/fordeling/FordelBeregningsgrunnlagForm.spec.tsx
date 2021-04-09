@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import {
   FordelBeregningsgrunnlagForm,
@@ -13,7 +14,9 @@ import {
   transformPerioder,
 } from './FordelBeregningsgrunnlagForm';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
-import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const getKodeverknavn = (kodeverk) => (kodeverk.kode === 'A' ? 'Arbeidstaker' : '');
 

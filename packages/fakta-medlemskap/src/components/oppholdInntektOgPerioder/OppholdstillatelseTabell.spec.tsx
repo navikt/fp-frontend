@@ -5,9 +5,12 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   TableRow, TableColumn, PeriodLabel, DateLabel,
 } from '@fpsak-frontend/shared-components';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import OppholdstillatelseTabell from './OppholdstillatelseTabell';
-import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<OppholdstillatelseTabell>', () => {
   it('skal vise tabeller med oppholdstillatelser', () => {

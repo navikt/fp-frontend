@@ -1,20 +1,25 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import {
+  Aksjonspunkt, AnkeVurdering, Behandling, Kodeverk, Vilkar,
+} from '@fpsak-frontend/types';
+import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum AnkeBehandlingApiKeys {
-  BEHANDLING_ANKE = 'BEHANDLING_ANKE',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  VILKAR = 'VILKAR',
-  ANKE_VURDERING = 'ANKE_VURDERING',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
-  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
-  SAVE_ANKE_VURDERING = 'SAVE_ANKE_VURDERING',
-}
+export const AnkeBehandlingApiKeys = {
+  BEHANDLING_ANKE: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_ANKE'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
+  ANKE_VURDERING: new RestKey<AnkeVurdering, void>('ANKE_VURDERING'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
+    { behandlingId: number, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  SAVE_ANKE_VURDERING: new RestKey<AnkeVurdering, void>('SAVE_ANKE_VURDERING'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', AnkeBehandlingApiKeys.BEHANDLING_ANKE)

@@ -5,10 +5,12 @@ import Modal from 'nav-frontend-modal';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import FatterVedtakApprovalModal from './FatterVedtakApprovalModal';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<FatterVedtakApprovalModal>', () => {
   const closeEventCallback = sinon.spy();
@@ -21,7 +23,7 @@ describe('<FatterVedtakApprovalModal>', () => {
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.KLAGE}
       erKlageWithKA
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -41,7 +43,7 @@ describe('<FatterVedtakApprovalModal>', () => {
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
       erKlageWithKA
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -63,7 +65,7 @@ describe('<FatterVedtakApprovalModal>', () => {
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
       erKlageWithKA
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);

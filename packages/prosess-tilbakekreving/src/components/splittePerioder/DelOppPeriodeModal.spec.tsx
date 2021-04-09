@@ -5,11 +5,13 @@ import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { DatepickerField } from '@fpsak-frontend/form';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import { DelOppPeriodeModalImpl, mapStateToPropsFactory } from './DelOppPeriodeModal';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-tilbakekreving';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<DelOppPeriodeModal>', () => {
   const periodeData = {
@@ -26,7 +28,7 @@ describe('<DelOppPeriodeModal>', () => {
       intl={intlMock}
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -49,7 +51,7 @@ describe('<DelOppPeriodeModal>', () => {
       intl={intlMock}
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
-    />);
+    />, messages);
     wrapper.find(Knapp).simulate('click');
     expect(cancelEvent).toHaveProperty('callCount', 1);
   });

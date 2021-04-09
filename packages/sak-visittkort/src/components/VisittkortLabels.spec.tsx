@@ -4,12 +4,14 @@ import {
 } from 'nav-frontend-etiketter';
 
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import { KjønnkodeEnum } from '@fpsak-frontend/types';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-visittkort';
 import VisittkortLabels from './VisittkortLabels';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VisittkortLabels>', () => {
   const fagsakPerson = {
@@ -24,7 +26,7 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       fagsakPerson={fagsakPerson}
       harVerge={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettInfo)).toHaveLength(0);
   });
@@ -37,7 +39,7 @@ describe('<VisittkortLabels>', () => {
         dodsdato: '2019-01-01',
       }}
       harVerge={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettInfo)).toHaveLength(1);
     const tooltip = wrapper.find(Tooltip);
@@ -56,7 +58,7 @@ describe('<VisittkortLabels>', () => {
         },
       }}
       harVerge={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettAdvarsel)).toHaveLength(1);
     const tooltip = wrapper.find(Tooltip);
@@ -75,7 +77,7 @@ describe('<VisittkortLabels>', () => {
         },
       }}
       harVerge={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettFokus)).toHaveLength(1);
     const tooltip = wrapper.find(Tooltip);
@@ -88,7 +90,7 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       fagsakPerson={fagsakPerson}
       harVerge
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettInfo)).toHaveLength(1);
     const tooltip = wrapper.find(Tooltip);
@@ -104,7 +106,7 @@ describe('<VisittkortLabels>', () => {
         fødselsdato: '2019-01-01',
       }}
       harVerge={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettInfo)).toHaveLength(1);
     const tooltip = wrapper.find(Tooltip);

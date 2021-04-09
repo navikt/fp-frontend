@@ -1,6 +1,8 @@
 import React from 'react';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-svp';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
+import messages from '../../../i18n/nb_NO.json';
 import { BehovForTilretteleggingPanelImpl } from './BehovForTilretteleggingPanel';
 
 describe('<BehovForTilretteleggingPanel>', () => {
@@ -12,7 +14,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
       readOnly={false}
       formName="test"
       namePrefix=""
-    />);
+    />, messages);
 
     expect(wrapper.find('[name="behovsdatoSN"]')).toHaveLength(1);
     expect(wrapper.find('[name="behovsdatoFrilans"]')).toHaveLength(0);
@@ -27,7 +29,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
       readOnly={false}
       formName="test"
       namePrefix=""
-    />);
+    />, messages);
 
     expect(wrapper.find('[name="behovsdatoSN"]')).toHaveLength(0);
     expect(wrapper.find('[name="behovsdatoFrilans"]')).toHaveLength(1);
@@ -42,7 +44,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
       readOnly={false}
       formName="test"
       namePrefix=""
-    />);
+    />, messages);
 
     expect(wrapper.find('[name="behovsdatoSN"]')).toHaveLength(0);
     expect(wrapper.find('[name="behovsdatoFrilans"]')).toHaveLength(0);

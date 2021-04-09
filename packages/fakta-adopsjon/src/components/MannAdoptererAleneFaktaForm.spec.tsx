@@ -1,16 +1,18 @@
 import React from 'react';
 
 import { FamilieHendelse } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import MannAdoptererAleneFaktaForm from './MannAdoptererAleneFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-adopsjon';
+import messages from '../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-adopsjon');
+  const meldinger = jest.requireActual('../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(meldinger),
   };
 });
 
@@ -22,7 +24,7 @@ describe('<MannAdoptererAleneFaktaForm>', () => {
         mannAdoptererAlene
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
-      />,
+      />, messages,
     );
 
     const radioFields = wrapper.find('RadioOption');

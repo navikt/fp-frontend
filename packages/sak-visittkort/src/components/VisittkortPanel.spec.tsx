@@ -1,4 +1,5 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import { PersonCard, Gender, EmptyPersonCard } from '@navikt/nap-person-card';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
@@ -7,11 +8,14 @@ import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import { KjønnkodeEnum } from '@fpsak-frontend/types';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-visittkort';
 import VisittkortBarnInfoPanel from './VisittkortBarnInfoPanel';
 import VisittkortPanel from './VisittkortPanel';
+
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VisittkortPanel>', () => {
   const fagsak = {
@@ -75,7 +79,7 @@ describe('<VisittkortPanel>', () => {
   };
 
   it('skal vise visittkort når en har harTilbakekrevingVerge', () => {
-    const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
+    const wrapper = shallow(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={fagsakPersonerUtenAnnenPart}
@@ -92,7 +96,7 @@ describe('<VisittkortPanel>', () => {
   });
 
   it('skal vise visittkort med brukerinformasjon', () => {
-    const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
+    const wrapper = shallow(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={{
@@ -121,7 +125,7 @@ describe('<VisittkortPanel>', () => {
   });
 
   it('skal vise visittkort for annen part', () => {
-    const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
+    const wrapper = shallow(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={{
@@ -155,7 +159,7 @@ describe('<VisittkortPanel>', () => {
   });
 
   it('skal vise visittkort for ukjent søker når annen part mangler aktør-id', () => {
-    const wrapper = shallowWithIntl(<VisittkortPanel.WrappedComponent
+    const wrapper = shallow(<VisittkortPanel.WrappedComponent
       intl={intlMock}
       fagsak={fagsak}
       fagsakPersoner={{

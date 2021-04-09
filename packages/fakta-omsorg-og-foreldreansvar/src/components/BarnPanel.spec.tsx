@@ -3,9 +3,12 @@ import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { Soknad } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
+import messages from '../../i18n/nb_NO.json';
 import BarnPanel from './BarnPanel';
+
+const intlMock = getIntlMock(messages);
 
 describe('<BarnPanel>', () => {
   it('skal vise alle fødselsdatoer i søknad', () => {

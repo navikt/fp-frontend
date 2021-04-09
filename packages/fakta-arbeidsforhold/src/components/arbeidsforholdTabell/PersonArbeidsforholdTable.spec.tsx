@@ -5,11 +5,12 @@ import {
   DateLabel, Image, PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import PersonArbeidsforholdTable, { utledNøkkel } from './PersonArbeidsforholdTable';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
-import { mountWithIntl } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<PersonArbeidsforholdTable>', () => {
   const arbeidsforhold = {
@@ -64,7 +65,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const table = wrapper.find(Table);
     expect(table).toHaveLength(1);
@@ -91,7 +92,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const cols = wrapper.find(TableColumn);
 
@@ -110,7 +111,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={newArbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const cols = wrapper.find(TableColumn);
     expect(cols).toHaveLength(12);
@@ -123,7 +124,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={arbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const cols = wrapper.find(TableColumn);
     expect(cols).toHaveLength(12);
@@ -141,7 +142,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={newArbeidsforhold.id}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const cols = wrapper.find(TableColumn);
     expect(cols).toHaveLength(12);
@@ -154,7 +155,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const element = wrapper.find(IngenArbeidsforholdRegistrert);
     expect(element).toHaveLength(1);
   });
@@ -169,7 +170,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const tableRow = wrapper.find(TableRow).at(1);
     expect(tableRow.props().model.stillingsprosent).toEqual(0);
   });
@@ -184,7 +185,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const tableRow = wrapper.find(TableRow).at(1);
     const tekst = tableRow.find(Normaltekst).at(0);
     expect(tekst.childAt(0).text()).toEqual('Svendsen Eksos');
@@ -200,7 +201,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const periodeLabel = wrapper.find(PeriodLabel);
     expect(periodeLabel.props().dateStringTom).toEqual('2025-01-01');
   });
@@ -213,7 +214,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       selectedId={undefined}
       selectArbeidsforholdCallback={sinon.spy()}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const periodeLabel = wrapper.find(PeriodLabel);
     expect(periodeLabel.props().dateStringTom).toEqual('2018-10-10');
   });

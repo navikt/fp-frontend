@@ -3,10 +3,12 @@ import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { EndreBehandlendeEnhetModal } from './EndreBehandlendeEnhetModal';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meny';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ChangeBehandlendeEnhetModal>', () => {
   const behandlendeEnheter = [{
@@ -26,7 +28,7 @@ describe('<ChangeBehandlendeEnhetModal>', () => {
       nyEnhet="Test3"
       begrunnelse="Dette er en begrunnelse"
       intl={intlMock}
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -50,7 +52,7 @@ describe('<ChangeBehandlendeEnhetModal>', () => {
       nyEnhet="Test"
       begrunnelse="Dette er en begrunnelse"
       intl={intlMock}
-    />);
+    />, messages);
 
     const selectField = wrapper.find('SelectField');
     expect(selectField).toHaveLength(1);
@@ -68,7 +70,7 @@ describe('<ChangeBehandlendeEnhetModal>', () => {
       gjeldendeBehandlendeEnhetId="002"
       gjeldendeBehandlendeEnhetNavn="Oslo"
       intl={intlMock}
-    />);
+    />, messages);
 
     const button = wrapper.find('Hovedknapp');
     expect(button.prop('disabled')).toBe(true);
@@ -86,7 +88,7 @@ describe('<ChangeBehandlendeEnhetModal>', () => {
       nyEnhet="Test"
       begrunnelse="Dette er en begrunnelse"
       intl={intlMock}
-    />);
+    />, messages);
 
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });
@@ -105,7 +107,7 @@ describe('<ChangeBehandlendeEnhetModal>', () => {
       nyEnhet="Test"
       begrunnelse="Dette er en begrunnelse"
       intl={intlMock}
-    />);
+    />, messages);
 
     const avbrytKnapp = wrapper.find('Knapp');
     expect(avbrytKnapp).toHaveLength(1);

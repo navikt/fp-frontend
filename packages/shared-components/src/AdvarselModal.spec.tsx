@@ -1,16 +1,16 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-shared-components';
 import Image from './Image';
 
 import AdvarselModal from './AdvarselModal';
 
 describe('<AdvarselModal>', () => {
   it('skal rendre modal', () => {
-    const wrapper = shallowWithIntl(
+    const wrapper = shallow(
       <AdvarselModal
         bodyText="Åpne behandling"
         showModal

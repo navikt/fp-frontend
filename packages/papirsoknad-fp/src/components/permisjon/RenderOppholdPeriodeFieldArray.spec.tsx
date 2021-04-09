@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { shallow } from 'enzyme';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import RenderOppholdPeriodeFieldArray from './RenderOppholdPeriodeFieldArray';
 
 const oppholdsReasons = [{ navn: 'Grunn1', kode: 'Grunn1', kodeverk: '' }];
@@ -15,8 +17,8 @@ const getRemoveButton = () => <button id="avslutt" type="button" />;
 
 describe('<RenderOppholdPeriodeFieldArray>', () => {
   it('skal vise 2 inputfelter for dato og 1 nedtrekkslister uten sletteknapp ved periodeliste med en eksisterende periode', () => {
-    const wrapper = shallowWithIntl(<RenderOppholdPeriodeFieldArray.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<RenderOppholdPeriodeFieldArray.WrappedComponent
+      intl={getIntlMock(messages)}
       fields={fields}
       meta={metaMock}
       oppholdsReasons={oppholdsReasons}
@@ -27,8 +29,8 @@ describe('<RenderOppholdPeriodeFieldArray>', () => {
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0, getRemoveButton) as ReactElement;
+    const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);
     expect(dateFields).toHaveLength(2);

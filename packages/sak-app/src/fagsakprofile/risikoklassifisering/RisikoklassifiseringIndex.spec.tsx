@@ -64,8 +64,8 @@ describe('<RisikoklassifiseringIndex>', () => {
   });
 
   it('skal rendere komponent', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, navAnsatt);
-    requestApi.mock(FpsakApiKeys.KODEVERK, {});
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
     const wrapper = shallow(<RisikoklassifiseringIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={[behandling] as Behandling[]}

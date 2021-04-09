@@ -6,14 +6,16 @@ import { Knapp } from 'nav-frontend-knapper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { CheckboxField, SelectField } from '@fpsak-frontend/form';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 
 import {
   NyBehandlingModal, getBehandlingAarsaker, getBehandlingTyper, getEnabledBehandlingstyper,
 } from './NyBehandlingModal';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meny';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<NyBehandlingModal>', () => {
   const submitEventCallback = sinon.spy();
@@ -56,7 +58,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -98,7 +100,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });
@@ -137,7 +139,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     wrapper.find(Knapp).simulate('click');
     expect(cancelEventCallback).toHaveProperty('callCount', 1);
@@ -175,7 +177,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(CheckboxField)).toHaveLength(1);
   });
@@ -212,7 +214,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.DOKUMENTINNSYN}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(CheckboxField)).toHaveLength(0);
   });
@@ -249,7 +251,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.REVURDERING}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(SelectField)).toHaveLength(2);
   });
@@ -286,7 +288,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.DOKUMENTINNSYN}
       erTilbakekreving={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(SelectField)).toHaveLength(1);
   });

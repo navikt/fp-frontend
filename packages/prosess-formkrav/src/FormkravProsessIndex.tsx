@@ -1,20 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KlageVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';
 import FormkravKlageFormNfp from './components/FormkravKlageFormNfp';
 import FormkravKlageFormKa from './components/FormkravKlageFormKa';
 import AvsluttetBehandling from './types/avsluttetBehandlingTsType';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   klageVurdering?: KlageVurdering;

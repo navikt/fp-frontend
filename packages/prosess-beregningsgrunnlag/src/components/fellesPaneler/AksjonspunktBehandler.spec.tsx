@@ -1,16 +1,18 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
 import { AksjonspunktBehandlerImpl as UnwrappedForm } from './AksjonspunktBehandler';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+
+const intlMock = getIntlMock(messages);
 
 const relevanteStatuser = {
   isFrilanser: false,
@@ -69,7 +71,7 @@ describe('<UnwrappedForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       tidsBegrensetInntekt={false}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
@@ -103,7 +105,7 @@ describe('<UnwrappedForm>', () => {
       tidsBegrensetInntekt={false}
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
@@ -138,7 +140,7 @@ describe('<UnwrappedForm>', () => {
       tidsBegrensetInntekt={false}
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
@@ -173,7 +175,7 @@ describe('<UnwrappedForm>', () => {
       tidsBegrensetInntekt
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows.first().find(FormattedMessage).first().props().id).toBe('Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler');
     expect(rows.at(1).find('TextAreaField').first().props().name).toBe('ATFLVurdering');
@@ -225,7 +227,7 @@ describe('<UnwrappedForm>', () => {
       tidsBegrensetInntekt={false}
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows.first().find(FormattedMessage).first().props().id).toBe(
       'Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet',

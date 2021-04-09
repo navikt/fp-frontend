@@ -6,7 +6,9 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+
 import { GrunnlagForAarsinntektPanelSN } from './GrunnlagForAarsinntektPanelSN';
+import messages from '../../../i18n/nb_NO.json';
 
 const andel = {
   aktivitetStatus: {
@@ -39,7 +41,7 @@ describe('<GrunnlagForAarsinntektPanelSN>', () => {
   it('Skal teste tabellen får korrekt antall rader', () => {
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelSN
       alleAndeler={[andel]}
-    />);
+    />, messages);
 
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(7);
@@ -47,7 +49,7 @@ describe('<GrunnlagForAarsinntektPanelSN>', () => {
   it('Skal teste tabellen får korrekt innhold', () => {
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelSN
       alleAndeler={[andel]}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage.first().prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.Pensjonsgivendeinntekt');

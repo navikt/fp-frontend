@@ -1,14 +1,17 @@
 import React from 'react';
 import Panel from 'nav-frontend-paneler';
 
-import { intlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
 import { FormattedMessage } from 'react-intl';
 import BeregningsresutatPanel from './BeregningsResultatPanel';
+import messages from '../../../i18n/nb_NO.json';
 import BeregningsresultatPeriodeTabellType, { AvkortetRadType, BruttoRadType, RedusertRadType } from '../../types/BeregningsresultatPeriodeTabellType';
+
+const intlMock = getIntlMock(messages);
 
 const tableData = {
 
@@ -41,7 +44,7 @@ describe('BeregningsresultatPanel', () => {
       periodeResultatTabeller={[tableData]}
       vilkaarBG={vilkaarBG as Vilkar}
       grunnbeløp={98866}
-    />);
+    />, messages);
     const panel = wrapper.find(Panel);
     const rows = panel.find('Row');
     expect(rows).toHaveLength(3);
@@ -60,7 +63,7 @@ describe('BeregningsresultatPanel', () => {
       periodeResultatTabeller={[tableData]}
       vilkaarBG={vilkaarBG as Vilkar}
       grunnbeløp={98866}
-    />);
+    />, messages);
 
     const panel = wrapper.find(Panel);
     const rows = panel.find('Row');

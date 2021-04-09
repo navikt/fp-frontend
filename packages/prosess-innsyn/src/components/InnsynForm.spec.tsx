@@ -2,9 +2,12 @@ import React from 'react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { InnsynFormImpl } from './InnsynForm';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-innsyn';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<InnsynForm>', () => {
   it('skal vise radioknapper for valg av sett på vent når innvilget', () => {
@@ -35,7 +38,7 @@ describe('<InnsynForm>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');
     expect(settPaVentRadio).toHaveLength(1);
@@ -69,7 +72,7 @@ describe('<InnsynForm>', () => {
       alleKodeverk={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
 
     const settPaVentRadio = wrapper.find('[name="sattPaVent"]');
     expect(settPaVentRadio).toHaveLength(0);

@@ -1,6 +1,8 @@
 import React from 'react';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import LinkTilEksterntSystem from './LinkTilEksterntSystem';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<LinkTilEksterntSystem>', () => {
   it('skal teste at linkhandler ikke rendrer uten en  userIdent', () => {
@@ -8,7 +10,7 @@ describe('<LinkTilEksterntSystem>', () => {
       linkText="IM"
       userIdent={null}
       type="IM"
-    />);
+    />, messages);
     const elements = wrapper.find('Element');
     expect(elements).toHaveLength(0);
   });
@@ -17,7 +19,7 @@ describe('<LinkTilEksterntSystem>', () => {
       linkText="AI"
       userIdent="userident"
       type="AI"
-    />);
+    />, messages);
     const link = wrapper.find('a');
     expect(link).toHaveLength(1);
     expect(link.prop('href')).toBe(

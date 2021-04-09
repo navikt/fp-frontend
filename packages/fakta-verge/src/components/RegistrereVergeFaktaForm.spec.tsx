@@ -1,11 +1,14 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField, InputField } from '@fpsak-frontend/form';
 
 import RegistrereVergeFaktaForm from './RegistrereVergeFaktaForm';
 import VergeType from '../kodeverk/vergeType';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-verge';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const vergetyper = [{
   kode: VergeType.BARN,
@@ -19,7 +22,7 @@ const vergetyper = [{
 
 describe('<RegistrereVergeFaktaForm>', () => {
   it('skal vise kun dropdown for vergetype når dette ikke er satt', () => {
-    const wrapper = shallowWithIntl(<RegistrereVergeFaktaForm
+    const wrapper = shallow(<RegistrereVergeFaktaForm
       intl={intlMock}
       readOnly={false}
       vergetyper={vergetyper}
@@ -31,7 +34,7 @@ describe('<RegistrereVergeFaktaForm>', () => {
   });
 
   it('skal vise alle felter når dette vergetype er valgt', () => {
-    const wrapper = shallowWithIntl(<RegistrereVergeFaktaForm
+    const wrapper = shallow(<RegistrereVergeFaktaForm
       intl={intlMock}
       readOnly={false}
       vergetyper={vergetyper}

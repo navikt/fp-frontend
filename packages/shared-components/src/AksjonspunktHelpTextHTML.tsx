@@ -2,13 +2,15 @@ import React, { ReactNode, FunctionComponent } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import { isObject } from '@fpsak-frontend/utils';
+import { isObject, createIntl } from '@fpsak-frontend/utils';
 
 import { FlexColumn, FlexContainer, FlexRow } from './flexGrid';
 import Image from './Image';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import messages from '../i18n/nb_NO.json';
 import styles from './aksjonspunktHelpTextHTML.less';
+
+const intl = createIntl(messages);
 
 interface OwnProps {
   children: string[] | ReactNode | ReactNode[];
@@ -26,7 +28,7 @@ const AksjonspunktHelpTextHTML: FunctionComponent<OwnProps> = ({
   if (!children || (Array.isArray(children) && children.length === 0)) {
     return null;
   }
-  const intl = getPackageIntl();
+
   const elementStyle = Array.isArray(children) && children.length > 1 ? styles.severalElements : styles.oneElement;
   return (
     <div className={styles.container}>

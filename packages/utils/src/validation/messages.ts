@@ -1,6 +1,8 @@
-import getPackageIntl from '../../i18n/getPackageIntl';
+import createIntl from '../createIntl';
 
-const intl = getPackageIntl();
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 export const isRequiredMessage = (): string => intl.formatMessage({ id: 'ValidationMessage.NotEmpty' });
 export const minLengthMessage = (length: number): string => intl.formatMessage({ id: 'ValidationMessage.MinLength' }, { length });

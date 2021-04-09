@@ -1,10 +1,11 @@
 import React from 'react';
 import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import LesMerToggle from './LesMerToggle';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('LesMerToggle', () => {
   it('skal ikke vise lukketekst når er Aapen', () => {
-    const wrapper = mountWithIntl(<LesMerToggle erApen lukkTekst="lukketekst" apneTekst="aapnetekst" onClick={() => {}} />);
+    const wrapper = mountWithIntl(<LesMerToggle erApen lukkTekst="lukketekst" apneTekst="aapnetekst" onClick={() => {}} />, messages);
     expect(wrapper.children()).toHaveLength(1);
     const divs = wrapper.find('div');
     expect(divs.last().childAt(0).text()).toEqual('lukketekst');
@@ -12,7 +13,7 @@ describe('LesMerToggle', () => {
     expect(chevron.props().type).toEqual('opp');
   });
   it('skal ikke vise lukketekst når er Lukket', () => {
-    const wrapper = mountWithIntl(<LesMerToggle erApen={false} lukkTekst="lukktekst" apneTekst="aapnetekst" onClick={() => {}} />);
+    const wrapper = mountWithIntl(<LesMerToggle erApen={false} lukkTekst="lukktekst" apneTekst="aapnetekst" onClick={() => {}} />, messages);
     expect(wrapper.children()).toHaveLength(1);
     const divs = wrapper.find('div');
     expect(divs.last().childAt(0).text()).toEqual('aapnetekst');

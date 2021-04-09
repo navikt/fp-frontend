@@ -1,19 +1,21 @@
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
-import { IntlShape } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import Image from './Image';
 import VerticalSpacer from './VerticalSpacer';
-import getPackageIntl from '../i18n/getPackageIntl';
 
+import messages from '../i18n/nb_NO.json';
 import styles from './periodFieldArray.less';
 
 // TODO Denne komponenten bør flyttast ut av shared-components da den drar inn avhengighet til redux og redux-form
+
+const intl = createIntl(messages);
 
 const onClick = (fields: FieldArrayFieldsProps<any>, emptyPeriodTemplate?: any) => (): void => {
   fields.push(emptyPeriodTemplate);
@@ -42,7 +44,7 @@ const getRemoveButton = (index: number, fields: FieldArrayFieldsProps<any>) => (
 
 const showErrorMessage = (meta?: FieldArrayMetaProps): boolean => meta && meta.error && (meta.dirty || meta.submitFailed);
 
-const finnFeilmelding = (intl: IntlShape, meta?: FieldArrayMetaProps): string => (Array.isArray(meta.error)
+const finnFeilmelding = (meta?: FieldArrayMetaProps): string => (Array.isArray(meta.error)
   ? intl.formatMessage({ id: meta.error[0].id }, meta.error[0].values)
   : intl.formatMessage({ id: meta.error.id }, meta.error.values));
 
@@ -77,12 +79,11 @@ const PeriodFieldArray: FunctionComponent<OwnProps> = ({
   createAddButtonInsteadOfImageLink = false,
   children,
 }) => {
-  const intl = getPackageIntl();
   const text = bodyText || intl.formatMessage({ id: 'PeriodFieldArray.LeggTilPeriode' });
   return (
     <NavFieldGroup
       title={titleText}
-      errorMessage={showErrorMessage(meta) ? finnFeilmelding(intl, meta) : null}
+      errorMessage={showErrorMessage(meta) ? finnFeilmelding(meta) : null}
     >
       {fields.map((periodeElementFieldId, index) => children(periodeElementFieldId, index, getRemoveButton(index, fields)))}
       {shouldShowAddButton && (

@@ -1,11 +1,13 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import { SearchForm } from './SearchForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-sok';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<Search>', () => {
   it('skal ha et søkefelt og en søkeknapp', () => {
@@ -14,7 +16,7 @@ describe('<Search>', () => {
       searchString=""
       searchStarted
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find('InputField')).toHaveLength(1);
     expect(wrapper.find('Hovedknapp')).toHaveLength(1);
@@ -29,7 +31,7 @@ describe('<Search>', () => {
       searchStarted
       {...reduxFormPropsMock}
       handleSubmit={onButtonClick}
-    />);
+    />, messages);
 
     const form = wrapper.find('form');
     form.simulate('submit', { preventDefault() { return undefined; } });

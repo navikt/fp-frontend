@@ -2,18 +2,20 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon';
 import { FodselsDatoFields, OmsorgOgAdopsjonPanelImpl } from './OmsorgOgAdopsjonPanel';
+import messages from '../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-papirsoknad-omsorg-og-adopsjon');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlMessages = jest.requireActual('../../i18n/nb_NO.json');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(intlMessages),
   };
 });
 
@@ -25,7 +27,7 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       familieHendelseType={familieHendelseType.ADOPSJON}
       isForeldrepengerFagsak
       isForeldrepenger
-    />);
+    />, messages);
     const overtakelseDatepicker = wrapper.find('DatepickerField');
     const fodselsDatepickers = wrapper.find({ component: FodselsDatoFields });
     expect(overtakelseDatepicker).toHaveLength(2);
@@ -39,7 +41,7 @@ describe('<OmsorgOgAdopsjonPanel>', () => {
       familieHendelseType={familieHendelseType.OMSORG}
       isForeldrepengerFagsak
       isForeldrepenger
-    />);
+    />, messages);
     const overtakelseDatepicker = wrapper.find('DatepickerField');
     expect(overtakelseDatepicker).toHaveLength(1);
   });

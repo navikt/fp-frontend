@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import DayPicker, { Modifier } from 'react-day-picker';
 
-import { DDMMYYYY_DATE_FORMAT, getRelatedTargetIE11, isIE11 } from '@fpsak-frontend/utils';
+import {
+  createIntl, DDMMYYYY_DATE_FORMAT, getRelatedTargetIE11, isIE11,
+} from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../../i18n/getPackageIntl';
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 const getRelatedTarget = (e: React.FocusEvent) => {
   if (isIE11()) {
@@ -94,7 +98,7 @@ class CalendarOverlay extends Component<OwnProps> {
       return null;
     }
 
-    const { formatMessage, locale } = getPackageIntl();
+    const { formatMessage, locale } = intl;
     const dayPickerLocalization = {
       locale,
       months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((monthNum) => formatMessage({ id: `Calendar.Month.${monthNum}` })),

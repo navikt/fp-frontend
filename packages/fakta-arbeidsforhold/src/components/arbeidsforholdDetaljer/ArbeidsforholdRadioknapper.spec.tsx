@@ -1,10 +1,13 @@
 import React from 'react';
 
 import { RadioOption } from '@fpsak-frontend/form';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
 import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const arbeidsforhold = {
   id: '1',
@@ -38,7 +41,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     expect(wrapper.find('[name=\'arbeidsforholdHandlingField\']')).toHaveLength(1);
     expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).toHaveLength(0);
   });
@@ -53,7 +56,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     expect(wrapper.find('[name=\'arbeidsforholdHandlingField\']')).toHaveLength(1);
     expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
@@ -83,7 +86,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
     expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
@@ -111,7 +114,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
     expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
@@ -142,7 +145,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
     expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
@@ -171,7 +174,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.OVERSTYR_TOM}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const overstyrtTom = wrapper.find('[name=\'overstyrtTom\']');
     expect(overstyrtTom).toHaveLength(1);
     const radioOptions = wrapper.find('RadioOption');
@@ -196,7 +199,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.OVERSTYR_TOM}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const overstyrtTom = wrapper.find('[name=\'overstyrtTom\']');
     expect(overstyrtTom).toHaveLength(1);
     const radioOptions = wrapper.find('RadioOption');
@@ -222,7 +225,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(2);
     expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');
@@ -245,7 +248,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radiogroup = wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']');
     expect(radiogroup).toHaveLength(1);
     const radioOptions = wrapper.find(RadioOption);
@@ -281,7 +284,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(5);
     expect(radioOptions.get(0).props.label.id).toEqual(
@@ -317,7 +320,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(2);
     expect(radioOptions.get(0).props.disabled).toEqual(false);
@@ -347,7 +350,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(5);
     expect(radioOptions.get(0).props.label.id).toEqual(
@@ -383,7 +386,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(2);
     expect(radioOptions.get(0).props.label.id).toEqual(
@@ -419,7 +422,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(5);
     expect(radioOptions.get(0).props.label.id).toEqual(
@@ -461,7 +464,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(2);
     expect(radioOptions.get(0).props.label.id).toEqual(
@@ -484,7 +487,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
       arbeidsforholdHandlingVerdi={undefined}
       behandlingId={1}
       behandlingVersjon={1}
-    />);
+    />, messages);
     const radioOptions = wrapper.find('RadioOption');
     expect(radioOptions).toHaveLength(2);
     expect(radioOptions.get(0).props.label.id).toEqual('PersonArbeidsforholdDetailForm.ArbeidsforholdErAktivt');

@@ -3,11 +3,10 @@ import { FormattedMessage, IntlShape } from 'react-intl';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn,
+  Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
 
 import FodselOgTilretteleggingFaktaForm from './FodselOgTilretteleggingFaktaForm';
-import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
 
 interface OwnProps {
   behandlingId: number;

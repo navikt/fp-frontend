@@ -1,9 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenySettPaVentIndex from './MenySettPaVentIndex';
 
 describe('<MenySettPaVentIndex>', () => {
@@ -11,7 +11,7 @@ describe('<MenySettPaVentIndex>', () => {
     const setBehandlingOnHoldCallback = sinon.spy();
     const lukkModalCallback = sinon.spy();
 
-    const wrapper = shallowWithIntl(<MenySettPaVentIndex
+    const wrapper = shallow(<MenySettPaVentIndex
       behandlingId={3}
       behandlingVersjon={1}
       settBehandlingPaVent={setBehandlingOnHoldCallback}

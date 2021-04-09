@@ -6,13 +6,15 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import {
   PeriodpickerField, RadioGroupField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
 import CustomOpptjeningAktivitet from '../../CustomOpptjeningAktivitet';
 import { ActivityPanel } from './ActivityPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-opptjening';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ActivityPanel>', () => {
   const opptjeningAktivitetTypes = [{
@@ -54,7 +56,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const periodevelger = wrapper.find(PeriodpickerField);
     expect(periodevelger).toHaveLength(1);
@@ -91,7 +93,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const periodevelger = wrapper.find(PeriodpickerField);
     expect(periodevelger).toHaveLength(1);
@@ -128,7 +130,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const periodevelger = wrapper.find(PeriodpickerField);
     expect(periodevelger).toHaveLength(1);
@@ -165,7 +167,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const periodevelger = wrapper.find(PeriodpickerField);
     expect(periodevelger).toHaveLength(1);
@@ -202,7 +204,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const daysInPeriodLabel = wrapper.find(FormattedMessage);
     expect(daysInPeriodLabel).toHaveLength(2);
@@ -242,7 +244,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(1);
@@ -280,7 +282,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(1);
@@ -317,7 +319,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     expect(wrapper.find(Hovedknapp)).toHaveLength(1);
     expect(wrapper.find(RadioGroupField)).toHaveLength(1);
@@ -353,7 +355,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     expect(wrapper.find(Hovedknapp)).toHaveLength(0);
   });
@@ -388,7 +390,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
 
     expect(wrapper.find(Hovedknapp)).toHaveLength(1);
     expect(wrapper.find(RadioGroupField)).toHaveLength(0);
@@ -425,7 +427,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).toHaveLength(1);
     expect(tekstFelt.props().readOnly).toEqual(true);
@@ -464,7 +466,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).toHaveLength(1);
     expect(tekstFelt.props().readOnly).toEqual(true);
@@ -503,7 +505,7 @@ describe('<ActivityPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       filtrerteOpptjeningAktivitetTypes={opptjeningAktivitetTypes}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     const tekstFelt = wrapper.find(TextAreaField);
     expect(tekstFelt).toHaveLength(1);
     expect(tekstFelt.props().readOnly).toEqual(false);

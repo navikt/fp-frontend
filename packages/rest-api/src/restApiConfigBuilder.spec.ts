@@ -1,10 +1,15 @@
+import { RestKey } from '@fpsak-frontend/rest-api';
+
 import RestApiConfigBuilder from './RestApiConfigBuilder';
 
 describe('RestApiConfigBuilder', () => {
   it('skal lage config med to rest endepunkter', () => {
+    const PJOKKEN = new RestKey('PJOKKEN');
+    const ESPENUTVIKLER = new RestKey('ESPENUTVIKLER');
+
     const endpoints = new RestApiConfigBuilder()
-      .withGet('www.pjokken.com', 'PJOKKEN')
-      .withPost('www.espenutvikler.com', 'ESPENUTVIKLER')
+      .withGet('www.pjokken.com', PJOKKEN)
+      .withPost('www.espenutvikler.com', ESPENUTVIKLER)
       .build();
 
     expect(endpoints).toHaveLength(2);

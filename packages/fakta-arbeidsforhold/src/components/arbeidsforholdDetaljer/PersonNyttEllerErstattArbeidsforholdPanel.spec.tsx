@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SelectField } from '@fpsak-frontend/form';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
   const arbeidsgiverOpplysningerPerId = {
@@ -31,7 +33,7 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(1);
@@ -53,7 +55,7 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     expect(wrapper.find(SelectField)).toHaveLength(0);
   });
 });

@@ -30,7 +30,7 @@ interface OwnProps {
   behandlingVersjon?: number;
 }
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as Dokument[];
 
 /**
  * DokumentIndex
@@ -44,7 +44,7 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
-  const { data: alleDokumenter = EMPTY_ARRAY } = restApiHooks.useRestApi<Dokument[]>(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
+  const { data: alleDokumenter = EMPTY_ARRAY } = restApiHooks.useRestApi(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: forrigeSaksnummer && erBehandlingEndretFraUndefined,
     keepData: true,

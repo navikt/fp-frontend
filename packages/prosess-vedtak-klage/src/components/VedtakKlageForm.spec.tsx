@@ -2,13 +2,15 @@ import React from 'react';
 import sinon from 'sinon';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
 import { getAvvisningsAarsaker, getIsAvvist, VedtakKlageForm } from './VedtakKlageForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-vedtak-klage';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const KLAGE_OMGJORT_TEKST = 'VedtakKlageForm.KlageOmgjortGunst';
 
@@ -50,7 +52,7 @@ describe('<VedtakKlageForm>', () => {
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
-    />);
+    />, messages);
     expect(wrapper.find(Undertekst).at(1).childAt(0).text()).toBe('Årsak til avvisning');
     expect(wrapper.find(Normaltekst).at(1).childAt(0).text()).toBe('Bruker har klaget for sent');
     expect(wrapper.find(Normaltekst).at(2).childAt(0).text()).toBe('Klager er ikke part');

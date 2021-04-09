@@ -1,9 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import LeggTilArbeidsforholdFelter from './LeggTilArbeidsforholdFelter';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
-import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<LeggTilArbeidsforholdFelter>', () => {
   it('Skal sjekke at LeggTilArbeidsforholdFelter rendrer korrekt', () => {

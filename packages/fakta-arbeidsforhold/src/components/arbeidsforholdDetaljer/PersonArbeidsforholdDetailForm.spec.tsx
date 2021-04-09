@@ -5,13 +5,16 @@ import sinon from 'sinon';
 import { TextAreaField } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
 import { PersonArbeidsforholdDetailForm } from './PersonArbeidsforholdDetailForm';
 import LeggTilArbeidsforholdFelter from './LeggTilArbeidsforholdFelter';
 import ArbeidsforholdHandling from '../../kodeverk/arbeidsforholdHandling';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
-import { intlMock } from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PersonArbeidsforholdDetailForm>', () => {
   const arbeidsgiverOpplysningerPerId = {

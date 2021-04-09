@@ -4,9 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import TilstotendeYtelser, { getTekstForAndelBruktIBeregning } from './TilstotendeYtelser';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import messages from '../../../i18n/nb_NO.json';
 
 const dagpengerInntekt = 200000;
 const aapInntekt = 300000;
@@ -46,7 +48,7 @@ describe('<TilstotendeYtelser>', () => {
       alleAndeler={andeler}
       relevanteStatuser={relevanteStatuser(false, false) as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-    />);
+    />, messages);
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(4);
     expect(formattedMessage.at(0).prop('id')).toBe('Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt.Maaned');

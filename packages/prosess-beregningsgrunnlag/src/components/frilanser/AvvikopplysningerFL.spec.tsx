@@ -5,6 +5,7 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvviksopplysningerFL from './AvvikopplysningerFL';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import messages from '../../../i18n/nb_NO.json';
 
 const beregnetAarsinntekt = 360000;
 const sammenligningsgrunnlag = (kode) => ({
@@ -33,7 +34,7 @@ describe('<AvviksopplysningerFL>', () => {
           isSelvstendigNaeringsdrivende: true,
         } as RelevanteStatuserProp
       }
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows.length).toBe(1);
     const text = rows.first().find(FormattedMessage);
@@ -46,7 +47,7 @@ describe('<AvviksopplysningerFL>', () => {
       beregnetAarsinntekt={beregnetAarsinntekt}
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const panel = wrapper.find('AvvikopplysningerATFLSN');
     expect(panel.length).toBe(1);
     const expectedProps = {
@@ -66,7 +67,7 @@ describe('<AvviksopplysningerFL>', () => {
       beregnetAarsinntekt={beregnetAarsinntekt}
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows.length).toBe(0);
   });
@@ -76,7 +77,7 @@ describe('<AvviksopplysningerFL>', () => {
       beregnetAarsinntekt={beregnetAarsinntekt}
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows.length).toBe(0);
   });

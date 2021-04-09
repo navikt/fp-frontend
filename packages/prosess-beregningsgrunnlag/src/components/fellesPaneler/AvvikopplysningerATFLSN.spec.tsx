@@ -4,6 +4,7 @@ import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { FormattedMessage } from 'react-intl';
 import AvvikopplysningerATFLSN from './AvvikopplysningerATFLSN';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import messages from '../../../i18n/nb_NO.json';
 
 const beregnetAarsinntekt = 360000;
 const sammenligningsgrunnlag = (kode) => ({
@@ -34,7 +35,7 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: true, isFrilanser: true } as RelevanteStatuserProp}
       visPanel={visPaneler}
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
-    />);
+    />, messages);
 
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(4);
@@ -73,7 +74,7 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: true, isArbeidstaker: true } as RelevanteStatuserProp}
       visPanel={visPaneler}
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
@@ -113,7 +114,7 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
       visPanel={visPaneler}
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
-    />);
+    />, messages);
 
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(4);

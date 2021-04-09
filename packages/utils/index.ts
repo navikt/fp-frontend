@@ -122,3 +122,4 @@ export {
 } from './src/validation/messages';
 
 export { getKodeverknavnFn } from './src/kodeverkUtils';
+export { default as createIntl } from './src/createIntl';

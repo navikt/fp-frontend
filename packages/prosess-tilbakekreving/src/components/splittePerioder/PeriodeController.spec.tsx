@@ -1,11 +1,13 @@
 import React from 'react';
 import sinon from 'sinon';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 import { PeriodeController } from './PeriodeController';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-tilbakekreving';
+import messages from '../../../i18n/nb_NO.json';
 import DataForPeriode from '../../types/dataForPeriodeTsType';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PeriodeController>', () => {
   it('skal vise knapp for å dele opp perioden og knapper for å velge forrige eller neste periode', () => {
@@ -19,7 +21,7 @@ describe('<PeriodeController>', () => {
       callbackBackward={sinon.spy()}
       periode={{} as DataForPeriode}
       readOnly={false}
-    />);
+    />, messages);
 
     const knapper = wrapper.find(TimeLineButton);
 
@@ -39,7 +41,7 @@ describe('<PeriodeController>', () => {
       callbackBackward={sinon.spy()}
       periode={{} as DataForPeriode}
       readOnly
-    />);
+    />, messages);
 
     expect(wrapper.find(TimeLineButton)).toHaveLength(2);
   });
@@ -67,7 +69,7 @@ describe('<PeriodeController>', () => {
       callbackBackward={sinon.spy()}
       periode={periode as DataForPeriode}
       readOnly
-    />);
+    />, messages);
     wrapper.setState({ showDelPeriodeModal: true });
 
     const formValues = {

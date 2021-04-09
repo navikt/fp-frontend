@@ -9,9 +9,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel';
+import messages from '../../i18n/nb_NO.json';
 import { buildInitialValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
+
+const intlMock = getIntlMock(messages);
 
 const soknad = {
   fodselsdatoer: { 1: '2019-01-01' } as {[key: number]: string},

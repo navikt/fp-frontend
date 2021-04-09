@@ -2,13 +2,15 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 
 import { AktivitetskravFaktaForm } from './AktivitetskravFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-aktivitetskrav';
+import messages from '../../i18n/nb_NO.json';
 import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
 import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
+
+const intlMock = getIntlMock(messages);
 
 describe('<AktivitetskravFaktaForm>', () => {
   const aktivitetskravAvklaringer = [{
@@ -68,7 +70,7 @@ describe('<AktivitetskravFaktaForm>', () => {
       submittable
       behandlingFormPrefix="test"
       formChange={() => undefined}
-    />);
+    />, messages);
 
     const hjelpetekst = wrapper.find(AksjonspunktHelpTextHTML);
     expect(hjelpetekst).toHaveLength(1);
@@ -120,7 +122,7 @@ describe('<AktivitetskravFaktaForm>', () => {
       submittable
       behandlingFormPrefix="test"
       formChange={formChange}
-    />);
+    />, messages);
 
     expect(wrapper.find(AktivitetskravFaktaDetailForm)).toHaveLength(0);
 

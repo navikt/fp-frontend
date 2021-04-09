@@ -2,9 +2,10 @@ import React from 'react';
 import { FieldArray } from 'redux-form';
 
 import { SelectField } from '@fpsak-frontend/form';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import { PermisjonOverforingAvKvoterPanelImpl as PermisjonOverforingAvKvoterPanel } from './PermisjonOverforingAvKvoterPanel';
 
 const overtaKvoteReasons = [{
@@ -21,10 +22,11 @@ const readOnly = false;
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-papirsoknad-fp');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlMessages = jest.requireActual('../../../i18n/nb_NO.json');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(intlMessages),
   };
 });
 
@@ -39,7 +41,7 @@ describe('<PermisjonOverforingAvKvoterPanel>', () => {
       alleKodeverk={{}}
       form="test"
       namePrefix="test"
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(FieldArray);
     expect(fieldArray).toHaveLength(1);
@@ -61,7 +63,7 @@ describe('<PermisjonOverforingAvKvoterPanel>', () => {
       alleKodeverk={{}}
       form="test"
       namePrefix="test"
-    />);
+    />, messages);
 
     const selectField = wrapper.find(SelectField);
     expect(selectField).toHaveLength(0);

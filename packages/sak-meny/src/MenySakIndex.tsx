@@ -2,12 +2,13 @@ import React, {
   useRef, useEffect, useState, useCallback, FunctionComponent,
 } from 'react';
 import {
-  FormattedMessage, createIntl, createIntlCache, RawIntlProvider,
+  FormattedMessage, RawIntlProvider,
 } from 'react-intl';
 import Popover from '@navikt/nap-popover';
 import BoxedListWithSelection from '@navikt/boxed-list-with-selection';
 import { Knapp } from 'nav-frontend-knapper';
 
+import { createIntl } from '@fpsak-frontend/utils';
 import { Image } from '@fpsak-frontend/shared-components';
 import openImage from '@fpsak-frontend/assets/images/pil_opp.svg';
 import closedImage from '@fpsak-frontend/assets/images/pil_ned.svg';
@@ -16,12 +17,7 @@ import MenyData from './MenyData';
 
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   data: MenyData[];

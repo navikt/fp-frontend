@@ -5,6 +5,7 @@ import sinon from 'sinon';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import PeriodCalendarOverlay from './PeriodCalendarOverlay';
+import messenger from '../../i18n/nb_NO.json';
 
 describe('<PeriodCalendarOverlay>', () => {
   it('skal ikke vise overlay når disabled', () => {
@@ -16,7 +17,7 @@ describe('<PeriodCalendarOverlay>', () => {
       startDate={moment().toDate()}
       endDate={moment().toDate()}
       disabled
-    />);
+    />, messenger);
 
     expect(wrapper.find(DayPicker)).toHaveLength(0);
   });
@@ -31,7 +32,7 @@ describe('<PeriodCalendarOverlay>', () => {
       elementIsCalendarButton={sinon.spy()}
       startDate={startDate}
       endDate={endDate}
-    />);
+    />, messenger);
 
     const daypicker = wrapper.find(DayPicker);
     expect(daypicker).toHaveLength(1);
@@ -60,7 +61,7 @@ describe('<PeriodCalendarOverlay>', () => {
       startDate={moment('2017-08-31').toDate()}
       endDate={moment('2018-08-31').toDate()}
       onClose={onCloseCallback}
-    />);
+    />, messenger);
 
     wrapper.find('div').prop('onBlur')({} as React.FocusEvent);
   });
@@ -75,7 +76,7 @@ describe('<PeriodCalendarOverlay>', () => {
       startDate={moment('2017-08-31').toDate()}
       endDate={moment('2018-08-31').toDate()}
       onClose={onCloseCallback}
-    />);
+    />, messenger);
 
     wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent);
 
@@ -92,7 +93,7 @@ describe('<PeriodCalendarOverlay>', () => {
       startDate={moment('2017-08-31').toDate()}
       endDate={moment('2018-08-31').toDate()}
       onClose={onCloseCallback}
-    />);
+    />, messenger);
 
     wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent);
 
@@ -109,7 +110,7 @@ describe('<PeriodCalendarOverlay>', () => {
       startDate={moment('2017-08-31').toDate()}
       endDate={moment('2018-08-31').toDate()}
       onClose={sinon.spy()}
-    />);
+    />, messenger);
 
     const date = '2018-01-10';
     // @ts-ignore
@@ -137,7 +138,7 @@ describe('<PeriodCalendarOverlay>', () => {
       endDate={moment('2018-08-31').toDate()}
       disabledDays={disabledDays}
       onClose={sinon.spy()}
-    />);
+    />, messenger);
 
     const date = '2018-01-10';
     // @ts-ignore
@@ -165,7 +166,7 @@ describe('<PeriodCalendarOverlay>', () => {
       endDate={moment('2018-08-31').toDate()}
       disabledDays={disabledDays}
       onClose={sinon.spy()}
-    />);
+    />, messenger);
 
     const date = '2018-01-01';
     // @ts-ignore
@@ -189,7 +190,7 @@ describe('<PeriodCalendarOverlay>', () => {
       endDate={moment('2018-08-31').toDate()}
       disabledDays={disabledDays}
       onClose={sinon.spy()}
-    />);
+    />, messenger);
 
     const date = '2018-01-11';
     // @ts-ignore

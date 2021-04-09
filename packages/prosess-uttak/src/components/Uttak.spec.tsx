@@ -8,7 +8,7 @@ import { Row } from 'nav-frontend-grid';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { Tidslinje } from '@fpsak-frontend/tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
@@ -18,7 +18,10 @@ import {
 } from '@fpsak-frontend/types';
 
 import UttakTimeLineData from './UttakTimeLineData';
+import messages from '../../i18n/nb_NO.json';
 import { Uttak, UttaksresultatActivity, PeriodeMedClassName } from './Uttak';
+
+const intlMock = getIntlMock(messages);
 
 describe('<Uttak>', () => {
   const uttakActivities = [{

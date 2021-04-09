@@ -3,6 +3,7 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import Image from './Image';
 import PeriodFieldArray from './PeriodFieldArray';
+import messages from '../i18n/nb_NO.json';
 
 const readOnly = false;
 
@@ -16,7 +17,7 @@ describe('<PeriodFieldArray>', () => {
         readOnly={readOnly}
       >
         {() => <span key="1">test</span>}
-      </PeriodFieldArray>,
+      </PeriodFieldArray>, messages,
     );
 
     const span = wrapper.find('span');
@@ -42,7 +43,7 @@ describe('<PeriodFieldArray>', () => {
             {getRemoveButton()}
           </div>
         )}
-      </PeriodFieldArray>,
+      </PeriodFieldArray>, messages,
     );
     const row1 = wrapper.find('#id_0');
     expect(row1).toHaveLength(1);
@@ -65,7 +66,7 @@ describe('<PeriodFieldArray>', () => {
         readOnly={readOnly}
       >
         {() => <span key="1">test</span>}
-      </PeriodFieldArray>,
+      </PeriodFieldArray>, messages,
     );
 
     const addDiv = wrapper.find('div');
@@ -91,7 +92,7 @@ describe('<PeriodFieldArray>', () => {
             {getRemoveButton()}
           </div>
         )}
-      </PeriodFieldArray>,
+      </PeriodFieldArray>, messages,
     );
 
     const btn = wrapper.find('button');
@@ -112,7 +113,7 @@ describe('<PeriodFieldArray>', () => {
         readOnly={readOnly}
       >
         {() => <span key="1">test</span>}
-      </PeriodFieldArray>,
+      </PeriodFieldArray>, messages,
     );
 
     expect(wrapper.find(Image)).toHaveLength(0);
@@ -129,7 +130,7 @@ describe('<PeriodFieldArray>', () => {
         readOnly={readOnly}
       >
         {() => <span key="1">test</span>}
-      </PeriodFieldArray>,
+      </PeriodFieldArray>, messages,
     );
 
     expect(wrapper.find(Image)).toHaveLength(0);

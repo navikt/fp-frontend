@@ -2,11 +2,11 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import moment from 'moment';
 
 import { Table } from '@fpsak-frontend/shared-components';
+import { FeilutbetalingAarsak } from '@fpsak-frontend/types';
 
 import FeilutbetalingPerioderForm from './FeilutbetalingPerioderForm';
 
 import styles from './feilutbetalingPerioderTable.less';
-import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const headerTextCodes = [
   'FeilutbetalingInfoPanel.Period',

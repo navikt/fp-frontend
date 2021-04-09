@@ -1,16 +1,13 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
+
+import { createIntl } from '@fpsak-frontend/utils';
 
 import EndreBehandlendeEnhetModal from './components/EndreBehandlendeEnhetModal';
 
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyEndreBehandlendeEnhetIndex.ByttBehandlendeEnhet' });
 

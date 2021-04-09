@@ -1,6 +1,6 @@
 import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fordel-beregningsgrunnlag';
 import {
   compareAndeler,
   kanIkkjeHaNullBeregningsgrunnlagError,
@@ -12,6 +12,9 @@ import {
   validateTotalRefusjonPrArbeidsforhold,
   validateUlikeAndeler,
 } from './ValidateAndelerUtils';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const getKodeverknavn = (kodeverk) => {
   if (kodeverk.kode === 'AAP') {

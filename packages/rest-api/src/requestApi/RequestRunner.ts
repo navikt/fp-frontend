@@ -108,7 +108,7 @@ class RequestRunner {
     this.isCancelled = true;
   }
 
-  start = async <T>(params: any): Promise<{payload: T}> => {
+  start = async <T, P>(params: P): Promise<{payload: T}> => {
     this.notify(EventType.REQUEST_STARTED);
 
     try {

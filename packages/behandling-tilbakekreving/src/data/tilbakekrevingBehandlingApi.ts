@@ -1,29 +1,35 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import {
+  Aksjonspunkt, Behandling, BeregningsresultatTilbakekreving, DetaljerteFeilutbetalingsperioder, FeilutbetalingAarsak,
+  FeilutbetalingFakta, FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn, Vedtaksbrev, Verge, VilkarsVurdertePerioderWrapper,
+} from '@fpsak-frontend/types';
+import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum TilbakekrevingBehandlingApiKeys {
-  BEHANDLING_TILBAKE = 'BEHANDLING_TILBAKE',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  VEDTAKSBREV = 'VEDTAKSBREV',
-  BEREGNINGSRESULTAT = 'BEREGNINGSRESULTAT',
-  FEILUTBETALING_FAKTA = 'FEILUTBETALING_FAKTA',
-  FEILUTBETALING_AARSAK = 'FEILUTBETALING_AARSAK',
-  PERIODER_FORELDELSE = 'PERIODER_FORELDELSE',
-  VILKARVURDERINGSPERIODER = 'VILKARVURDERINGSPERIODER',
-  VILKARVURDERING = 'VILKARVURDERING',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
-  BEREGNE_BELØP = 'BEREGNE_BELØP',
-  TILBAKE_KODEVERK = 'TILBAKE_KODEVERK',
-  PREVIEW_VEDTAKSBREV = 'PREVIEW_VEDTAKSBREV',
-  VERGE = 'VERGE',
-  VERGE_OPPRETT = 'VERGE_OPPRETT',
-  VERGE_FJERN = 'VERGE_FJERN',
-}
+export const TilbakekrevingBehandlingApiKeys = {
+  BEHANDLING_TILBAKE: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_TILBAKE'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  VEDTAKSBREV: new RestKey<Vedtaksbrev, void>('VEDTAKSBREV'),
+  BEREGNINGSRESULTAT: new RestKey<BeregningsresultatTilbakekreving, void>('BEREGNINGSRESULTAT'),
+  FEILUTBETALING_FAKTA: new RestKey<FeilutbetalingFakta, void>('FEILUTBETALING_FAKTA'),
+  FEILUTBETALING_AARSAK: new RestKey<FeilutbetalingAarsak[], void>('FEILUTBETALING_AARSAK'),
+  PERIODER_FORELDELSE: new RestKey<FeilutbetalingPerioderWrapper, void>('PERIODER_FORELDELSE'),
+  VILKARVURDERINGSPERIODER: new RestKey<DetaljerteFeilutbetalingsperioder, void>('VILKARVURDERINGSPERIODER'),
+  VILKARVURDERING: new RestKey<VilkarsVurdertePerioderWrapper, void>('VILKARVURDERING'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
+    { behandlingId: number, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+  BEREGNE_BELØP: new RestKey<any, any>('BEREGNE_BELØP'),
+  TILBAKE_KODEVERK: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('TILBAKE_KODEVERK'),
+  PREVIEW_VEDTAKSBREV: new RestKey<any, any>('PREVIEW_VEDTAKSBREV'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fptilbake/api/behandlinger', TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE)

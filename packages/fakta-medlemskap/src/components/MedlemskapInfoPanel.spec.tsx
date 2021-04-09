@@ -7,11 +7,14 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
   InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import MedlemskapInfoPanel from './MedlemskapInfoPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
 import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<MedlemskapInfoPanel>', () => {
   const arbeidsgiverOpplysningerPerId = {
@@ -64,7 +67,7 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
     expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(0);
@@ -112,7 +115,7 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
     expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(0);
@@ -160,7 +163,7 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
     expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(1);
@@ -192,7 +195,7 @@ describe('<MedlemskapInfoPanel>', () => {
       behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
     expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(1);

@@ -1,20 +1,15 @@
 import React, { FunctionComponent } from 'react';
-import {
-  createIntl, createIntlCache, FormattedMessage, RawIntlProvider,
-} from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+
+import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';
 
 import styles from './ingenBehandlingValgtPanel.less';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 const getMessage = (numBehandlinger: number): string => (numBehandlinger === 0
   ? 'IngenBehandlingValgtPanel.ZeroBehandlinger' : 'IngenBehandlingValgtPanel.PleaseSelectBehandling');

@@ -8,7 +8,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  BehandlingAppKontekst, Fagsak, Kodeverk, NavAnsatt,
+  BehandlingAppKontekst, Fagsak, Kodeverk,
 } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
@@ -24,7 +24,8 @@ const getSubmitCallback = (
   behandlingTypeKode: string,
   behandlingId: number,
   behandlingUuid: string,
-  submitMessage: (data: any) => Promise<any>,
+  submitMessage: (params?: { behandlingId?: number; behandlingUuid?: string, mottaker?: string; brevmalkode: string; fritekst: string; arsakskode?: string; },
+    keepData?: boolean) => Promise<void>,
   resetMessage: () => void,
   setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
   setSubmitCounter: (fn: (prevValue: number) => number) => void,
@@ -92,12 +93,6 @@ interface OwnProps {
   behandlingVersjon?: number;
 }
 
-interface Brevmal {
-  kode: string;
-  navn: string;
-  tilgjengelig: boolean;
-}
-
 const EMPTY_ARRAY = [];
 const RECIPIENTS = ['Søker'];
 
@@ -120,7 +115,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const history = useHistory();
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
   const ventearsaker = useFpSakKodeverk(kodeverkTyper.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(kodeverkTyper.REVURDERING_VARSLING_ÅRSAK);
@@ -162,14 +157,14 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     return resetMessage();
   }, []);
 
-  const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP);
-  const { data: harApentKontrollerRevAp } = restApiHooks.useRestApi<boolean>(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
+  const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name);
+  const { data: harApentKontrollerRevAp } = restApiHooks.useRestApi(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
     suspendRequest: !skalHenteRevAp,
     keepData: true,
   });
 
-  const { data: brevmaler } = restApiHooks.useRestApi<Brevmal[]>(FpsakApiKeys.BREVMALER, undefined, {
+  const { data: brevmaler } = restApiHooks.useRestApi(FpsakApiKeys.BREVMALER, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
     keepData: true,
   });
