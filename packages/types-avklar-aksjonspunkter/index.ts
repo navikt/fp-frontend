@@ -1,0 +1,13 @@
+export { default as FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
+export { default as AvklarVergeAp } from './src/fakta/AvklarVergeAp';
+export { default as AvklarTilleggsopplysningerAp } from './src/fakta/AvklarTilleggsopplysningerAp';
+export { default as MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';
+export { default as OverstyringUtenlandssakMarkeringAp } from './src/fakta/OverstyringUtenlandssakMarkeringAp';
+export { default as KontrollerAktivitetskravAp } from './src/fakta/KontrollerAktivitetskravAp';
+export { default as BekreftEktefelleAksjonspunktAp } from './src/fakta/BekreftEktefelleAksjonspunktAp';
+export { default as BekreftDokumentertDatoAksjonspunktAp } from './src/fakta/BekreftDokumentertDatoAksjonspunktAp';
+export { default as BekreftSvangerskapspengerAp } from './src/fakta/BekreftSvangerskapspengerAp';
+export { default as BekreftMannAdoptererAksjonspunktAp } from './src/fakta/BekreftMannAdoptererAksjonspunktAp';
+export { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
+export { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
+export { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';

@@ -15,6 +15,20 @@ export const omit = (object: Record<string, any>, ...keysToOmit: string[]) => Ob
   .map((key) => ({ [key]: object[key] }))
   .reduce((a, b) => Object.assign(a, b), {});
 
+export const omitOne = <T, K extends keyof T>(object: T, keyToOmit: K): Omit<T, K> => {
+  const o: Omit<T, K> & Partial<Pick<T, K>> = { ...object };
+  delete o[keyToOmit];
+  return o;
+};
+
+export const omitMany = <T, K extends keyof T>(object: T, keysToOmit: K[]): Omit<T, K> => {
+  let result = object as Omit<T, K>;
+  keysToOmit.forEach((key) => {
+    result = omitOne(result, key as unknown as keyof Omit<T, K>) as Omit<T, K>;
+  });
+  return result;
+};
+
 type DiffInput = Array<any> | Record<string, any> | (() => any) | string | number | boolean;
 
 const isNullOrUndefined = (obj: DiffInput): boolean => obj === null || typeof obj === 'undefined';

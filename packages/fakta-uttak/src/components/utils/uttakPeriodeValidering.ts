@@ -5,14 +5,10 @@ import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFaktaPerioderTsType';
 
-const uttakAksjonspunkter = [
-  aksjonspunktCodes.AVKLAR_UTTAK,
-  aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK,
-  aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
-];
-
 export const sjekkOmfaktaOmUttakAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap: Aksjonspunkt) => uttakAksjonspunkter.includes(ap.definisjon.kode));
+  .some((ap: Aksjonspunkt) => aksjonspunktCodes.AVKLAR_UTTAK === ap.definisjon.kode
+  || aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK === ap.definisjon.kode
+  || aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO === ap.definisjon.kode);
 
 export const sjekkArbeidsprosentOver100 = (periode: CustomUttakKontrollerFaktaPerioder): boolean => periode.arbeidstidsprosent > 100;
 

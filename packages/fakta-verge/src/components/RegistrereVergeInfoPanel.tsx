@@ -10,6 +10,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fa
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AvklarVergeAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import RegistrereVergeFaktaForm, { FormValues as RegistrereFormValues } from './RegistrereVergeFaktaForm';
 
@@ -18,7 +19,7 @@ type FormValues = RegistrereFormValues & {
 }
 
 interface PureOwnProps {
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (aksjonspunktData: AvklarVergeAp) => Promise<void>;
   behandlingId: number;
   behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
@@ -102,7 +103,7 @@ const buildInitialValues = createSelector([
   ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
 }));
 
-const transformValues = (values: FormValues): any => ({
+const transformValues = (values: FormValues): AvklarVergeAp => ({
   ...RegistrereVergeFaktaForm.transformValues(values),
   ...{ begrunnelse: values.begrunnelse },
 });
@@ -111,7 +112,7 @@ const FORM_NAVN = 'RegistrereVergeInfoPanel';
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   valgtVergeType: behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vergeType'),

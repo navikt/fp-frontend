@@ -16,12 +16,13 @@ import {
   VerticalSpacer, AksjonspunktHelpTextTemp,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  BekreftDokumentertDatoAksjonspunktAp, BekreftEktefelleAksjonspunktAp, BekreftMannAdoptererAksjonspunktAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import MannAdoptererAleneFaktaForm, {
-  TransformedValues as MannAdoptererTransformedValues, FormValues as MannAdoptererFormValues,
-} from './MannAdoptererAleneFaktaForm';
-import EktefelleFaktaForm, { TransformedValues as EktefelleTransformedValues, FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
-import DokumentasjonFaktaForm, { FormValues as DokFormValues, TransformedValues as DokTransformedValues } from './DokumentasjonFaktaForm';
+import MannAdoptererAleneFaktaForm, { FormValues as MannAdoptererFormValues } from './MannAdoptererAleneFaktaForm';
+import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
+import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 
 const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = aksjonspunktCodes;
 const adopsjonAksjonspunkter = [OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, ADOPSJONSDOKUMENTAJON, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN];
@@ -42,6 +43,8 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
 
 type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
+type AksjonspunktData = Array<BekreftEktefelleAksjonspunktAp | BekreftDokumentertDatoAksjonspunktAp | BekreftMannAdoptererAksjonspunktAp>;
+
 interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submittable: boolean;
@@ -54,7 +57,7 @@ interface PureOwnProps {
   isForeldrepengerFagsak: boolean;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  submitCallback: (aksjonspunktData: any) => Promise<any>;
+  submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -153,7 +156,7 @@ const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
   soknad, familiehendelse, allAksjonspunkter,
 ): FormValues => {
-  const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.includes(ap.definisjon.kode));
+  const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.some((kode) => kode === ap.definisjon.kode));
 
   let mannAdoptererAleneValues = {};
   if (hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter)) {
@@ -173,8 +176,8 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => {
-  const aksjonspunkterArray = [] as Array<EktefelleTransformedValues | DokTransformedValues | MannAdoptererTransformedValues>;
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
+  const aksjonspunkterArray = [] as AksjonspunktData;
   aksjonspunkterArray.push(DokumentasjonFaktaForm.transformValues(values));
 
   if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter)) {

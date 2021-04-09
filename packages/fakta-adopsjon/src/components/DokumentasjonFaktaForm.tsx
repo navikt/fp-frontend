@@ -12,6 +12,7 @@ import { Image, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-compo
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { BekreftDokumentertDatoAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './dokumentasjonFaktaForm.less';
 
@@ -57,16 +58,9 @@ export type FormValues = {
   fodselsdatoer?: Record<number, string>;
 }
 
-export type TransformedValues = {
-  kode: string;
-  omsorgsovertakelseDato: string;
-  barnetsAnkomstTilNorgeDato: string;
-  fodselsdatoer: Record<number, string>;
-}
-
 interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
-  transformValues?: (values: FormValues) => TransformedValues;
+  transformValues?: (values: FormValues) => BekreftDokumentertDatoAksjonspunktAp;
 }
 
 /**
@@ -170,10 +164,9 @@ DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: Fa
   fodselsdatoer: familiehendelse && familiehendelse.adopsjonFodelsedatoer ? familiehendelse.adopsjonFodelsedatoer : soknad.adopsjonFodelsedatoer,
 });
 
-DokumentasjonFaktaForm.transformValues = (values: FormValues): TransformedValues => ({
+DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
   kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
   omsorgsovertakelseDato: values.omsorgsovertakelseDato,
-  barnetsAnkomstTilNorgeDato: values.barnetsAnkomstTilNorgeDato,
   fodselsdatoer: values.fodselsdatoer,
 });
 

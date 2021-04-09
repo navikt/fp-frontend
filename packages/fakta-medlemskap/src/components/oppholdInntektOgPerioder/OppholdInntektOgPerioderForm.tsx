@@ -262,7 +262,7 @@ const medlemAksjonspunkter = [
 
 export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: Aksjonspunkt[]): any => {
   const aktiveMedlemAksjonspunkter = aksjonspunkter
-    .filter((ap: Aksjonspunkt) => medlemAksjonspunkter.includes(ap.definisjon.kode))
+    .filter((ap: Aksjonspunkt) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon.kode))
     .filter((ap: Aksjonspunkt) => ap.erAktivt)
     .filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
 

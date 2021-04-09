@@ -15,8 +15,6 @@ const {
   AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, OVERSTYR_AVKLAR_STARTDATO,
 } = aksjonspunktCodes;
 
-const avklarStartdatoAp = [AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, OVERSTYR_AVKLAR_STARTDATO];
-
 const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
 
 const skalKunneLoseUtenAksjonpunkter = (
@@ -86,7 +84,8 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   const avklarStartdatoAksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
   const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
-    .filter((ap) => !avklarStartdatoAp.includes(ap.definisjon.kode)), [aksjonspunkter]);
+    .filter((ap) => ap.definisjon.kode !== AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN
+      && ap.definisjon.kode !== OVERSTYR_AVKLAR_STARTDATO), [aksjonspunkter]);
 
   return (
     <>

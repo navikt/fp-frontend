@@ -32,7 +32,7 @@ export type TransformedValues = {
   organisasjonsnummer: string,
   gyldigFom: string,
   gyldigTom: string,
-  kode: string,
+  kode: aksjonspunktCodes.AVKLAR_VERGE,
 }
 
 interface OwnProps {

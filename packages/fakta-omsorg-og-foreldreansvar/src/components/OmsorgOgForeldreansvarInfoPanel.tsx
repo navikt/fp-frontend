@@ -13,6 +13,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Aksjonspunkt, FamilieHendelse, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
+import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
 
@@ -28,7 +29,7 @@ interface PureOwnProps {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp) => Promise<void>;
   behandlingId: number;
   behandlingVersjon: number;
   hasOpenAksjonspunkter: boolean;
@@ -121,14 +122,17 @@ const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): any => ({
+const transformValues = (
+  values: FormValues,
+  aksjonspunkt: Aksjonspunkt,
+): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp => ({
   ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
   ...{ begrunnelse: values.begrunnelse },
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0])]));
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter[0])));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { aksjonspunkter, alleKodeverk } = initialOwnProps;

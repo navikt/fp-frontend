@@ -16,6 +16,7 @@ import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
+import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
 import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
@@ -70,7 +71,10 @@ interface StaticFunctions {
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues,
   validate?: (intl: IntlShape, values: FormValues) => any,
-  transformValues?: (values: FormValues, aksjonspunkt: Aksjonspunkt) => any,
+  transformValues?: (
+    values: FormValues,
+    aksjonspunkt: Aksjonspunkt,
+  ) => AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 }
 
 /**
@@ -194,17 +198,20 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, gjeldendeF
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });
 
-OmsorgOgForeldreansvarFaktaForm.transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): any => (
+OmsorgOgForeldreansvarFaktaForm.transformValues = (
+  values: FormValues,
+  aksjonspunkt: Aksjonspunkt,
+): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp => (
   aksjonspunkt.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR
     ? {
       omsorgsovertakelseDato: values.omsorgsovertakelseDato,
       foreldreansvarDato: values.foreldreansvarDato,
       kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-    }
+    } as AvklarFaktaForForeldreansvarAksjonspunktAp
     : {
       omsorgsovertakelseDato: values.omsorgsovertakelseDato,
       vilkarType: values.vilkarType,
       kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
-    });
+    } as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp);
 
 export default OmsorgOgForeldreansvarFaktaForm;

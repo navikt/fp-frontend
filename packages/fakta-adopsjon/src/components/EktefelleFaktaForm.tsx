@@ -8,6 +8,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
 import { FamilieHendelse } from '@fpsak-frontend/types';
+import { BekreftEktefelleAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './ektefelleFaktaForm.less';
 
@@ -21,14 +22,9 @@ export type FormValues = {
   ektefellesBarn?: boolean;
 }
 
-export type TransformedValues = {
-  kode: string,
-  ektefellesBarn: boolean,
-}
-
 interface StaticFunctions {
   buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
-  transformValues: (ektefellesBarn: boolean) => TransformedValues;
+  transformValues: (ektefellesBarn: boolean) => BekreftEktefelleAksjonspunktAp;
 }
 
 /**
@@ -70,7 +66,7 @@ EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): Form
     : undefined,
 });
 
-EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): TransformedValues => ({
+EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({
   kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
   ektefellesBarn,
 });

@@ -19,6 +19,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { OverstyringUtenlandssakMarkeringAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import UtlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';
@@ -60,7 +61,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  submitCallback: (data: any) => void;
+  submitCallback: (data: OverstyringUtenlandssakMarkeringAp) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -170,11 +171,11 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues): any => submitCallback([{
+(submitCallback) => (values: FormValues) => submitCallback({
   kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
   begrunnelse: values.utlandSakstype,
   gammelVerdi: values.gammelVerdi,
-}]));
+}));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: {

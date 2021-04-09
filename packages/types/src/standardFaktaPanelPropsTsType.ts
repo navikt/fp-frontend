@@ -1,3 +1,5 @@
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+
 import Aksjonspunkt from './aksjonspunktTsType';
 import Behandling from './behandlingTsType';
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
@@ -9,7 +11,7 @@ type StandardFaktaPanelProps = Readonly<{
   submittable: boolean;
   harApneAksjonspunkter: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback?: (aksjonspunktData: any) => Promise<any>;
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }>
 

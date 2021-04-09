@@ -11,9 +11,9 @@ import { behandlingFormValueSelector, getBehandlingFormPrefix, behandlingForm } 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import { KontrollerAktivitetskravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { bindActionCreators, Dispatch } from 'redux';
-import AktivitetskravAksjonspunktData from '../AktivitetskravAksjonspunktData';
 import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
 import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
 
@@ -32,7 +32,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   harApneAksjonspunkter: boolean;
   sorterteAktivitetskrav: UttakKontrollerAktivitetskrav[];
-  submitCallback?: (aksjonspunkter: AktivitetskravAksjonspunktData[]) => Promise<any>;
+  submitCallback: (aksjonspunkter: KontrollerAktivitetskravAp) => Promise<void>;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
   morsAktiviteter: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -150,14 +150,14 @@ const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValuesAllRequired): AktivitetskravAksjonspunktData => ({
+const transformValues = (values: FormValuesAllRequired): KontrollerAktivitetskravAp => ({
   kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
   avklartePerioder: values.aktivitetskrav,
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValuesAllRequired) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValuesAllRequired) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
