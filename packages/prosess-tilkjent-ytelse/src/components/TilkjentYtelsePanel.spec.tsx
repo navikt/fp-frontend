@@ -1,16 +1,19 @@
 import React from 'react';
 import sinon from 'sinon';
-import { Undertittel } from 'nav-frontend-typografi';
+import moment from 'moment';
 
+import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, Personoversikt, Soknad,
+  Aksjonspunkt, BeregningsresultatFp, FamilieHendelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { TilkjentYtelsePanelImpl } from './TilkjentYtelsePanel';
+import TilkjentYtelsePanel from './TilkjentYtelsePanel';
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
+import TilkjentYtelse from './TilkjentYtelse';
 import messages from '../../i18n/nb_NO.json';
 
 const tilbaketrekkAP = {
@@ -31,54 +34,156 @@ const arbeidsgiverOpplysningerPerId = {
   },
 };
 
-describe('<TilkjentYtelsePanelImpl>', () => {
-  it('skall innehålla rätt undertekst', () => {
-    const familieDate = new Date('2018-04-04');
-    const wrapper = shallowWithIntl(<TilkjentYtelsePanelImpl
+const beregningsresultat = {
+  perioder: [],
+} as BeregningsresultatFp;
+
+describe('<TilkjentYtelsePanel>', () => {
+  it('skal bruke fødselsdato når dette finnes og søknadstype er fødsel', () => {
+    const gjeldendeFamiliehendelse = {
+      soknadType: {
+        kode: soknadType.FODSEL,
+        kodeverk: '',
+      },
+      avklartBarn: [{
+        fodselsdato: '2021-01-05',
+      }],
+      termindato: '2021-01-01',
+    } as FamilieHendelse;
+
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
-      beregningresultat={null}
-      hovedsokerKjonn="K"
-      soknadDato="2018-04-04"
-      familiehendelseDato={familieDate}
+      beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      isSoknadSvangerskapspenger={false}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
-    expect(wrapper.find(Undertittel)).toHaveLength(1);
-    // @ts-ignore
-    expect(wrapper.find(Undertittel).props().children.props.id).toBe('TilkjentYtelse.Title');
-    expect(wrapper.find(Tilbaketrekkpanel)).toHaveLength(0);
+
+    const ytelsePanel = wrapper.find(TilkjentYtelse);
+    expect(ytelsePanel).toHaveLength(1);
+    expect(moment(ytelsePanel.props().familiehendelseDate).format(DDMMYYYY_DATE_FORMAT)).toEqual('05.01.2021');
   });
 
-  it('Skal vise tilbaketrekkpanel gitt tilbaketrekkaksjonspunkt', () => {
-    const familieDate = new Date('2018-04-04');
-    const wrapper = shallowWithIntl(<TilkjentYtelsePanelImpl
+  it('skal bruke termindato når ikke fødselsdato finnes og søknadstype er fødsel', () => {
+    const gjeldendeFamiliehendelse = {
+      soknadType: {
+        kode: soknadType.FODSEL,
+        kodeverk: '',
+      },
+      termindato: '2021-01-01',
+    } as FamilieHendelse;
+
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
-      beregningresultat={null}
-      hovedsokerKjonn="K"
-      soknadDato="2018-04-04"
-      familiehendelseDato={familieDate}
+      beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      vurderTilbaketrekkAP={tilbaketrekkAP}
-      isSoknadSvangerskapspenger={false}
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={{} as FamilieHendelse}
+      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    />, messages);
+
+    const ytelsePanel = wrapper.find(TilkjentYtelse);
+    expect(ytelsePanel).toHaveLength(1);
+    expect(moment(ytelsePanel.props().familiehendelseDate).format(DDMMYYYY_DATE_FORMAT)).toEqual('01.01.2021');
+  });
+
+  it('skal bruke omsorgsovertakelsedato når denne finnes og søknadstype er adopsjon', () => {
+    const gjeldendeFamiliehendelse = {
+      soknadType: {
+        kode: soknadType.ADOPSJON,
+        kodeverk: '',
+      },
+      omsorgsovertakelseDato: '2021-01-01',
+    } as FamilieHendelse;
+
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanel
+      readOnly
+      beregningresultat={beregningsresultat}
+      submitCallback={sinon.spy()}
+      readOnlySubmitButton
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={1}
+      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      personoversikt={{} as Personoversikt}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    />, messages);
+
+    const ytelsePanel = wrapper.find(TilkjentYtelse);
+    expect(ytelsePanel).toHaveLength(1);
+    expect(moment(ytelsePanel.props().familiehendelseDate).format(DDMMYYYY_DATE_FORMAT)).toEqual('01.01.2021');
+  });
+
+  it('skal bruke adopsjonsdato når det ikke finnes omsorgsovertakelsedato og søknadstype er adopsjon', () => {
+    const gjeldendeFamiliehendelse = {
+      soknadType: {
+        kode: soknadType.ADOPSJON,
+        kodeverk: '',
+      },
+      adopsjonFodelsedatoer: { 0: '2021-01-01' } as Record<string, string>,
+    } as FamilieHendelse;
+
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanel
+      readOnly
+      beregningresultat={beregningsresultat}
+      submitCallback={sinon.spy()}
+      readOnlySubmitButton
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={1}
+      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      personoversikt={{} as Personoversikt}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    />, messages);
+
+    const ytelsePanel = wrapper.find(TilkjentYtelse);
+    expect(ytelsePanel).toHaveLength(1);
+    expect(moment(ytelsePanel.props().familiehendelseDate).format(DDMMYYYY_DATE_FORMAT)).toEqual('01.01.2021');
+  });
+
+  it('Skal vise tilbaketrekkpanel når en har tilbaketrekkaksjonspunkt', () => {
+    const gjeldendeFamiliehendelse = {
+      soknadType: {
+        kode: soknadType.FODSEL,
+        kodeverk: '',
+      },
+      termindato: '2021-01-01',
+    } as FamilieHendelse;
+
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanel
+      readOnly
+      beregningresultat={beregningsresultat}
+      submitCallback={sinon.spy()}
+      readOnlySubmitButton
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={1}
+      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      personoversikt={{} as Personoversikt}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[tilbaketrekkAP]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     expect(wrapper.find(Tilbaketrekkpanel)).toHaveLength(1);
